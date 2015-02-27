@@ -90,73 +90,83 @@
 <li class="blockList">
 <h2 title="Package">Package&nbsp;io.sphere.sdk.client</h2>
 <ul class="blockList">
-<li class="blockList"><a name="io.sphere.sdk.client.AuthorizationException">
+<li class="blockList"><a name="io.sphere.sdk.client.TestClientException">
 <!--   -->
 </a>
-<h3>Class <a href="io/sphere/sdk/client/AuthorizationException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.AuthorizationException</a> extends <a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">SphereClientException</a> implements Serializable</h3>
+<h3>Class io.sphere.sdk.client.TestClientException extends java.lang.RuntimeException implements Serializable</h3>
+<dl class="nameValue">
+<dt>serialVersionUID:</dt>
+<dd>4954918890077093843L</dd>
+</dl>
+</li>
+</ul>
+</li>
+<li class="blockList">
+<h2 title="Package">Package&nbsp;io.sphere.sdk.customers</h2>
+<ul class="blockList">
+<li class="blockList"><a name="io.sphere.sdk.customers.InvalidCurrentPasswordException">
+<!--   -->
+</a>
+<h3>Class <a href="io/sphere/sdk/customers/InvalidCurrentPasswordException.html" title="class in io.sphere.sdk.customers">io.sphere.sdk.customers.InvalidCurrentPasswordException</a> extends java.lang.RuntimeException implements Serializable</h3>
 <dl class="nameValue">
 <dt>serialVersionUID:</dt>
 <dd>0L</dd>
 </dl>
 </li>
-<li class="blockList"><a name="io.sphere.sdk.client.ConcurrentModificationException">
+</ul>
+</li>
+<li class="blockList">
+<h2 title="Package">Package&nbsp;io.sphere.sdk.errors</h2>
+<ul class="blockList">
+<li class="blockList"><a name="io.sphere.sdk.errors.AuthorizationException">
 <!--   -->
 </a>
-<h3>Class <a href="io/sphere/sdk/client/ConcurrentModificationException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.ConcurrentModificationException</a> extends <a href="io/sphere/sdk/client/SphereBackendException.html" title="class in io.sphere.sdk.client">SphereBackendException</a> implements Serializable</h3>
+<h3>Class <a href="io/sphere/sdk/errors/AuthorizationException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.AuthorizationException</a> extends <a href="io/sphere/sdk/errors/SphereServiceException.html" title="class in io.sphere.sdk.errors">SphereServiceException</a> implements Serializable</h3>
 <dl class="nameValue">
 <dt>serialVersionUID:</dt>
 <dd>0L</dd>
 </dl>
 </li>
-<li class="blockList"><a name="io.sphere.sdk.client.EmptyHttpBodyException">
+<li class="blockList"><a name="io.sphere.sdk.errors.BadGatewayException">
 <!--   -->
 </a>
-<h3>Class <a href="io/sphere/sdk/client/EmptyHttpBodyException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.EmptyHttpBodyException</a> extends <a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">SphereClientException</a> implements Serializable</h3>
+<h3>Class <a href="io/sphere/sdk/errors/BadGatewayException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.BadGatewayException</a> extends <a href="io/sphere/sdk/errors/ServerErrorException.html" title="class in io.sphere.sdk.errors">ServerErrorException</a> implements Serializable</h3>
 <dl class="nameValue">
 <dt>serialVersionUID:</dt>
 <dd>0L</dd>
 </dl>
 </li>
-<li class="blockList"><a name="io.sphere.sdk.client.JsonException">
+<li class="blockList"><a name="io.sphere.sdk.errors.BadRequestException">
 <!--   -->
 </a>
-<h3>Class <a href="io/sphere/sdk/client/JsonException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.JsonException</a> extends java.lang.RuntimeException implements Serializable</h3>
+<h3>Class <a href="io/sphere/sdk/errors/BadRequestException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.BadRequestException</a> extends <a href="io/sphere/sdk/errors/ClientErrorException.html" title="class in io.sphere.sdk.errors">ClientErrorException</a> implements Serializable</h3>
 <dl class="nameValue">
 <dt>serialVersionUID:</dt>
 <dd>0L</dd>
 </dl>
 </li>
-<li class="blockList"><a name="io.sphere.sdk.client.JsonParseException">
+<li class="blockList"><a name="io.sphere.sdk.errors.ClientErrorException">
 <!--   -->
 </a>
-<h3>Class <a href="io/sphere/sdk/client/JsonParseException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.JsonParseException</a> extends <a href="io/sphere/sdk/client/JsonException.html" title="class in io.sphere.sdk.client">JsonException</a> implements Serializable</h3>
-<dl class="nameValue">
-<dt>serialVersionUID:</dt>
-<dd>4954925590077093841L</dd>
-</dl>
-</li>
-<li class="blockList"><a name="io.sphere.sdk.client.NotFoundException">
-<!--   -->
-</a>
-<h3>Class <a href="io/sphere/sdk/client/NotFoundException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.NotFoundException</a> extends <a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">SphereClientException</a> implements Serializable</h3>
-<dl class="nameValue">
-<dt>serialVersionUID:</dt>
-<dd>1L</dd>
-</dl>
-</li>
-<li class="blockList"><a name="io.sphere.sdk.client.ReferenceExistsException">
-<!--   -->
-</a>
-<h3>Class <a href="io/sphere/sdk/client/ReferenceExistsException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.ReferenceExistsException</a> extends <a href="io/sphere/sdk/client/SphereBackendException.html" title="class in io.sphere.sdk.client">SphereBackendException</a> implements Serializable</h3>
+<h3>Class <a href="io/sphere/sdk/errors/ClientErrorException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.ClientErrorException</a> extends <a href="io/sphere/sdk/errors/SphereServiceException.html" title="class in io.sphere.sdk.errors">SphereServiceException</a> implements Serializable</h3>
 <dl class="nameValue">
 <dt>serialVersionUID:</dt>
 <dd>0L</dd>
 </dl>
 </li>
-<li class="blockList"><a name="io.sphere.sdk.client.SphereBackendException">
+<li class="blockList"><a name="io.sphere.sdk.errors.ConcurrentModificationException">
 <!--   -->
 </a>
-<h3>Class <a href="io/sphere/sdk/client/SphereBackendException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereBackendException</a> extends <a href="io/sphere/sdk/client/SphereException.html" title="class in io.sphere.sdk.client">SphereException</a> implements Serializable</h3>
+<h3>Class <a href="io/sphere/sdk/errors/ConcurrentModificationException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.ConcurrentModificationException</a> extends <a href="io/sphere/sdk/errors/ClientErrorException.html" title="class in io.sphere.sdk.errors">ClientErrorException</a> implements Serializable</h3>
+<dl class="nameValue">
+<dt>serialVersionUID:</dt>
+<dd>0L</dd>
+</dl>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.ErrorResponseException">
+<!--   -->
+</a>
+<h3>Class <a href="io/sphere/sdk/errors/ErrorResponseException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.ErrorResponseException</a> extends <a href="io/sphere/sdk/errors/BadRequestException.html" title="class in io.sphere.sdk.errors">BadRequestException</a> implements Serializable</h3>
 <dl class="nameValue">
 <dt>serialVersionUID:</dt>
 <dd>0L</dd>
@@ -166,21 +176,106 @@
 <h3>Serialized Fields</h3>
 <ul class="blockList">
 <li class="blockList">
-<h4>requestUrl</h4>
-<pre>java.lang.String requestUrl</pre>
+<h4>statusCode</h4>
+<pre>int statusCode</pre>
+</li>
+<li class="blockList">
+<h4>message</h4>
+<pre>java.lang.String message</pre>
 </li>
 <li class="blockListLast">
-<h4>errorResponse</h4>
-<pre><a href="io/sphere/sdk/client/SphereErrorResponse.html" title="class in io.sphere.sdk.client">SphereErrorResponse</a> errorResponse</pre>
+<h4>errors</h4>
+<pre>java.util.List&lt;E&gt; errors</pre>
 </li>
 </ul>
 </li>
 </ul>
 </li>
-<li class="blockList"><a name="io.sphere.sdk.client.SphereClientException">
+<li class="blockList"><a name="io.sphere.sdk.errors.GatewayTimeoutException">
 <!--   -->
 </a>
-<h3>Class <a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereClientException</a> extends java.lang.RuntimeException implements Serializable</h3>
+<h3>Class <a href="io/sphere/sdk/errors/GatewayTimeoutException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.GatewayTimeoutException</a> extends <a href="io/sphere/sdk/errors/ServerErrorException.html" title="class in io.sphere.sdk.errors">ServerErrorException</a> implements Serializable</h3>
+<dl class="nameValue">
+<dt>serialVersionUID:</dt>
+<dd>0L</dd>
+</dl>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.InternalServerErrorException">
+<!--   -->
+</a>
+<h3>Class <a href="io/sphere/sdk/errors/InternalServerErrorException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.InternalServerErrorException</a> extends <a href="io/sphere/sdk/errors/ServerErrorException.html" title="class in io.sphere.sdk.errors">ServerErrorException</a> implements Serializable</h3>
+<dl class="nameValue">
+<dt>serialVersionUID:</dt>
+<dd>0L</dd>
+</dl>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.InvalidClientCredentialsException">
+<!--   -->
+</a>
+<h3>Class <a href="io/sphere/sdk/errors/InvalidClientCredentialsException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.InvalidClientCredentialsException</a> extends <a href="io/sphere/sdk/errors/UnauthorizedException.html" title="class in io.sphere.sdk.errors">UnauthorizedException</a> implements Serializable</h3>
+<dl class="nameValue">
+<dt>serialVersionUID:</dt>
+<dd>0L</dd>
+</dl>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.InvalidTokenException">
+<!--   -->
+</a>
+<h3>Class <a href="io/sphere/sdk/errors/InvalidTokenException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.InvalidTokenException</a> extends <a href="io/sphere/sdk/errors/UnauthorizedException.html" title="class in io.sphere.sdk.errors">UnauthorizedException</a> implements Serializable</h3>
+<dl class="nameValue">
+<dt>serialVersionUID:</dt>
+<dd>0L</dd>
+</dl>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.JsonException">
+<!--   -->
+</a>
+<h3>Class <a href="io/sphere/sdk/errors/JsonException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.JsonException</a> extends <a href="io/sphere/sdk/errors/SphereException.html" title="class in io.sphere.sdk.errors">SphereException</a> implements Serializable</h3>
+<dl class="nameValue">
+<dt>serialVersionUID:</dt>
+<dd>0L</dd>
+</dl>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.NotFoundException">
+<!--   -->
+</a>
+<h3>Class <a href="io/sphere/sdk/errors/NotFoundException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.NotFoundException</a> extends <a href="io/sphere/sdk/errors/ClientErrorException.html" title="class in io.sphere.sdk.errors">ClientErrorException</a> implements Serializable</h3>
+<dl class="nameValue">
+<dt>serialVersionUID:</dt>
+<dd>0L</dd>
+</dl>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.ReferenceExistsException">
+<!--   -->
+</a>
+<h3>Class <a href="io/sphere/sdk/errors/ReferenceExistsException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.ReferenceExistsException</a> extends <a href="io/sphere/sdk/errors/BadRequestException.html" title="class in io.sphere.sdk.errors">BadRequestException</a> implements Serializable</h3>
+<dl class="nameValue">
+<dt>serialVersionUID:</dt>
+<dd>0L</dd>
+</dl>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.ServerErrorException">
+<!--   -->
+</a>
+<h3>Class <a href="io/sphere/sdk/errors/ServerErrorException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.ServerErrorException</a> extends <a href="io/sphere/sdk/errors/SphereServiceException.html" title="class in io.sphere.sdk.errors">SphereServiceException</a> implements Serializable</h3>
+<dl class="nameValue">
+<dt>serialVersionUID:</dt>
+<dd>0L</dd>
+</dl>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.ServiceUnavailableException">
+<!--   -->
+</a>
+<h3>Class <a href="io/sphere/sdk/errors/ServiceUnavailableException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.ServiceUnavailableException</a> extends <a href="io/sphere/sdk/errors/ServerErrorException.html" title="class in io.sphere.sdk.errors">ServerErrorException</a> implements Serializable</h3>
+<dl class="nameValue">
+<dt>serialVersionUID:</dt>
+<dd>0L</dd>
+</dl>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.SphereException">
+<!--   -->
+</a>
+<h3>Class <a href="io/sphere/sdk/errors/SphereException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.SphereException</a> extends java.lang.RuntimeException implements Serializable</h3>
 <dl class="nameValue">
 <dt>serialVersionUID:</dt>
 <dd>0L</dd>
@@ -201,59 +296,42 @@
 <h4>underlyingHttpResponse</h4>
 <pre>java.util.Optional&lt;T&gt; underlyingHttpResponse</pre>
 </li>
-<li class="blockListLast">
+<li class="blockList">
 <h4>projectKey</h4>
 <pre>java.util.Optional&lt;T&gt; projectKey</pre>
 </li>
-</ul>
+<li class="blockListLast">
+<h4>httpThing</h4>
+<pre>java.util.Optional&lt;T&gt; httpThing</pre>
 </li>
 </ul>
 </li>
-<li class="blockList"><a name="io.sphere.sdk.client.SphereException">
+</ul>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.SphereServiceException">
 <!--   -->
 </a>
-<h3>Class <a href="io/sphere/sdk/client/SphereException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereException</a> extends <a href="io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">SphereClientException</a> implements Serializable</h3>
+<h3>Class <a href="io/sphere/sdk/errors/SphereServiceException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.SphereServiceException</a> extends <a href="io/sphere/sdk/errors/SphereException.html" title="class in io.sphere.sdk.errors">SphereException</a> implements Serializable</h3>
 <dl class="nameValue">
 <dt>serialVersionUID:</dt>
 <dd>0L</dd>
 </dl>
-</li>
-<li class="blockList"><a name="io.sphere.sdk.client.SphereInputException">
-<!--   -->
-</a>
-<h3>Class <a href="io/sphere/sdk/client/SphereInputException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereInputException</a> extends java.lang.RuntimeException implements Serializable</h3>
-<dl class="nameValue">
-<dt>serialVersionUID:</dt>
-<dd>0L</dd>
-</dl>
-</li>
-<li class="blockList"><a name="io.sphere.sdk.client.SphereServiceUnavailableException">
-<!--   -->
-</a>
-<h3>Class <a href="io/sphere/sdk/client/SphereServiceUnavailableException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereServiceUnavailableException</a> extends java.lang.RuntimeException implements Serializable</h3>
-<dl class="nameValue">
-<dt>serialVersionUID:</dt>
-<dd>0L</dd>
-</dl>
-</li>
-<li class="blockList"><a name="io.sphere.sdk.client.TestClientException">
-<!--   -->
-</a>
-<h3>Class io.sphere.sdk.client.TestClientException extends java.lang.RuntimeException implements Serializable</h3>
-<dl class="nameValue">
-<dt>serialVersionUID:</dt>
-<dd>4954918890077093843L</dd>
-</dl>
-</li>
-</ul>
-</li>
-<li class="blockList">
-<h2 title="Package">Package&nbsp;io.sphere.sdk.customers</h2>
 <ul class="blockList">
-<li class="blockList"><a name="io.sphere.sdk.customers.InvalidCurrentPasswordException">
+<li class="blockList">
+<h3>Serialized Fields</h3>
+<ul class="blockList">
+<li class="blockListLast">
+<h4>statusCode</h4>
+<pre>int statusCode</pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="blockList"><a name="io.sphere.sdk.errors.UnauthorizedException">
 <!--   -->
 </a>
-<h3>Class <a href="io/sphere/sdk/customers/InvalidCurrentPasswordException.html" title="class in io.sphere.sdk.customers">io.sphere.sdk.customers.InvalidCurrentPasswordException</a> extends java.lang.RuntimeException implements Serializable</h3>
+<h3>Class <a href="io/sphere/sdk/errors/UnauthorizedException.html" title="class in io.sphere.sdk.errors">io.sphere.sdk.errors.UnauthorizedException</a> extends <a href="io/sphere/sdk/errors/ClientErrorException.html" title="class in io.sphere.sdk.errors">ClientErrorException</a> implements Serializable</h3>
 <dl class="nameValue">
 <dt>serialVersionUID:</dt>
 <dd>0L</dd>

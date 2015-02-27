@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":17,"i3":17};
+var methods = {"i0":6,"i1":6,"i2":17,"i3":17,"i4":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/client/ReferenceExistsException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/client/SphereAccessTokenSupplier.html" target="_top">Frames</a></li>
@@ -100,12 +100,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd>java.lang.AutoCloseable, java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</dd>
+<dd>java.lang.AutoCloseable, java.util.function.Supplier&lt;java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">SphereAccessTokenSupplier</span>
-extends java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</pre>
+extends java.lang.AutoCloseable, java.util.function.Supplier&lt;java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&gt;</pre>
 <div class="block">Provides an OAuth token for accessing protected Sphere HTTP API endpoints.
 
  There a no guarantees concerning the token providing mechanism.</div>
@@ -132,22 +132,32 @@ extends java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#close--">close</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#get--">get</a></span>()</code>
 <div class="block">Returns the OAuth access token.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#ofAutoRefresh-io.sphere.sdk.client.SphereAuthConfig-">ofAutoRefresh</a></span>(<a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a>&nbsp;config)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#ofAutoRefresh-io.sphere.sdk.client.SphereAuthConfig-io.sphere.sdk.http.HttpClient-boolean-">ofAutoRefresh</a></span>(<a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a>&nbsp;config,
+             <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&nbsp;httpClient,
+             boolean&nbsp;closeHttpClient)</code>
 <div class="block">Provides a token generator which tries to always provide a valid token.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#ofFixedToken-java.lang.String-">ofFixedToken</a></span>(java.lang.String&nbsp;token)</code>
-<div class="block">Provides a token generator which just returns a fixed token, so the client is usable
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#ofConstantToken-java.lang.String-">ofConstantToken</a></span>(java.lang.String&nbsp;token)</code>
+<div class="block">Provides a token generator which just returns a fixed token, so the client is only usable
  for the live time of this token.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#ofOneTimeFetchingToken-io.sphere.sdk.client.SphereAuthConfig-io.sphere.sdk.http.HttpClient-boolean-">ofOneTimeFetchingToken</a></span>(<a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a>&nbsp;config,
+                      <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&nbsp;httpClient,
+                      boolean&nbsp;closeHttpClient)</code>
+<div class="block">Provides a token generator which fetches only one token.</div>
 </td>
 </tr>
 </table>
@@ -171,11 +181,11 @@ extends java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</
 <ul class="blockList">
 <li class="blockList">
 <h4>get</h4>
-<pre>java.lang.String&nbsp;get()</pre>
+<pre>java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&nbsp;get()</pre>
 <div class="block">Returns the OAuth access token.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code>get</code>&nbsp;in interface&nbsp;<code>java.util.function.Supplier&lt;java.lang.String&gt;</code></dd>
+<dd><code>get</code>&nbsp;in interface&nbsp;<code>java.util.function.Supplier&lt;java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -189,19 +199,37 @@ extends java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>close</code>&nbsp;in interface&nbsp;<code>java.lang.AutoCloseable</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code>close</code>&nbsp;in interface&nbsp;<code>java.io.Closeable</code></dd>
 </dl>
 </li>
 </ul>
-<a name="ofFixedToken-java.lang.String-">
+<a name="ofAutoRefresh-io.sphere.sdk.client.SphereAuthConfig-io.sphere.sdk.http.HttpClient-boolean-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>ofFixedToken</h4>
-<pre>static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a>&nbsp;ofFixedToken(java.lang.String&nbsp;token)</pre>
-<div class="block">Provides a token generator which just returns a fixed token, so the client is usable
+<h4>ofAutoRefresh</h4>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a>&nbsp;ofAutoRefresh(<a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a>&nbsp;config,
+                                               <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&nbsp;httpClient,
+                                               boolean&nbsp;closeHttpClient)</pre>
+<div class="block">Provides a token generator which tries to always provide a valid token.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>config</code> - the configuration to fetch a token</dd>
+<dd><code>httpClient</code> - used http client</dd>
+<dd><code>closeHttpClient</code> - set to true, if the httpClient should be closed with the created SphereAccessTokenSupplier</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>token service</dd>
+</dl>
+</li>
+</ul>
+<a name="ofConstantToken-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ofConstantToken</h4>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a>&nbsp;ofConstantToken(java.lang.String&nbsp;token)</pre>
+<div class="block">Provides a token generator which just returns a fixed token, so the client is only usable
  for the live time of this token.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -211,17 +239,21 @@ extends java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</
 </dl>
 </li>
 </ul>
-<a name="ofAutoRefresh-io.sphere.sdk.client.SphereAuthConfig-">
+<a name="ofOneTimeFetchingToken-io.sphere.sdk.client.SphereAuthConfig-io.sphere.sdk.http.HttpClient-boolean-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>ofAutoRefresh</h4>
-<pre>static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a>&nbsp;ofAutoRefresh(<a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a>&nbsp;config)</pre>
-<div class="block">Provides a token generator which tries to always provide a valid token.</div>
+<h4>ofOneTimeFetchingToken</h4>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a>&nbsp;ofOneTimeFetchingToken(<a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a>&nbsp;config,
+                                                        <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a>&nbsp;httpClient,
+                                                        boolean&nbsp;closeHttpClient)</pre>
+<div class="block">Provides a token generator which fetches only one token. This could be useful for integration tests.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>config</code> - the configuration to fetch a token</dd>
+<dd><code>httpClient</code> - used http client, will be closed with this generator on <a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#close--"><code>close()</code></a></dd>
+<dd><code>closeHttpClient</code> - set to true, if the httpClient should be closed with the created SphereAccessTokenSupplier</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>token service</dd>
 </dl>
@@ -254,8 +286,8 @@ extends java.io.Closeable, java.util.function.Supplier&lt;java.lang.String&gt;</
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/client/ReferenceExistsException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/client/SphereAccessTokenSupplier.html" target="_top">Frames</a></li>

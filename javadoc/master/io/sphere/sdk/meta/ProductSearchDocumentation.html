@@ -183,23 +183,8 @@ final Search&lt;ProductProjection&gt; search = ProductProjectionSearch.of(STAGED
  </table>
 <h4 id=facets>Facets</h4>
 
- For faceted search, results can be of <a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><code>TermFacetResult</code></a> or <a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><code>RangeFacetResult</code></a>:
+ For faceted search, results can be of <a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><code>TermFacetResult</code></a> or <a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><code>RangeFacetResult</code></a>.
 
- <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-responseContainsRangeFacetsForAttributes--%s" class=code-example><pre><code class='java'>final String attrKey = PRICE_ATTRIBUTE_KEY;
-final FacetExpression&lt;ProductProjection&gt; rangeFacetExpression = FacetExpression.of(attrKey + ":range(0 to *)");
-final Search&lt;ProductProjection&gt; search = ProductProjectionSearch.of(STAGED)
-        .plusFacet(rangeFacetExpression);
-final PagedSearchResult&lt;ProductProjection&gt; pagedSearchResult = execute(search);
-final RangeFacetResult rangeFacet = (RangeFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
-
- <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-responseContainsTermFacetsForAttributes--%s" class=code-example><pre><code class='java'>final String attrKey = COLOR_ATTRIBUTE_KEY;
-final FacetExpression&lt;ProductProjection&gt; termFacetExpression = FacetExpression.of(attrKey);
-final Search&lt;ProductProjection&gt; search = ProductProjectionSearch.of(STAGED)
-        .plusFacet(termFacetExpression);
-final PagedSearchResult&lt;ProductProjection&gt; pagedSearchResult = execute(search);
-final TermFacetResult facetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>Consult the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">filters</a> and <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">facets</a> for more information.</p></div>
 </li>

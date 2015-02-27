@@ -42,7 +42,7 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/meta/DocumentationGuidelines.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/meta/ExceptionDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -110,7 +110,10 @@
 <pre>public final class <span class="typeNameLabel">GettingStarted</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
 <div class="block"><h3 id=about-clients>About the clients</h3>
- <p>The SPHERE.IO client communicates asynchronously with the SPHERE.IO backend via HTTPS.</p>
+ <p>The SPHERE.IO client communicates asynchronously with the SPHERE.IO API via HTTPS and takes care about authentication.</p>
+ <p>The client uses Java objects to formulate a HTTP request, performs the request and maps the response JSON into a Java object.
+ The resulting Java object is not directly accessible as object, it is embedded in a Future/Promise for asynchronous programming.
+ Since the client is thread-safe you need only one client to perform multiple requests in parallel.</p>
 
  <p>There are different SPHERE.IO client flavors for different future implementations:</p>
 
@@ -132,11 +135,11 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 
  <img src="../../../../documentation-resources/images/merchant-center/project-credentials.png" alt="Merchant Center with project credentials view">
 
-<p>For this example the configuration values are:</p>
+ <p>For this example the configuration values are:</p>
 
  <pre><code>project key: jvm-sdk-dev-1
-client ID: ELqF0rykXD2fyS8s-IhIPKfQ
-client secret: 222222222222222222222222222222226</code></pre>
+ client ID: ELqF0rykXD2fyS8s-IhIPKfQ
+ client secret: 222222222222222222222222222222226</code></pre>
 
  <h3 id=instantiation>Instantiation</h3>
 
@@ -162,142 +165,18 @@ import io.sphere.sdk.client.SphereClientFactory;
  <p>You can create <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> yourself or use the given ones which are listed on <a href="../../../../io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><code>SphereResources</code></a>.</p>
  <p>Example:</p>
 
- <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; promise = client.execute(TaxCategoryQuery.of().byName("de19"));
+ <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; future = client.execute(TaxCategoryQuery.of().byName("de19"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/TaxCategoryQueryExample.java" target="_blank">test code</a>.</pre></div>
 
- <h3 id=add-functionality-to-the-client>Using design patterns to add functionality to the clients</h3>
- <p>The clients are interfaces which have a default implementation (add "Impl" to the interface name).<br>
- This enables you to use the <a href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator pattern</a> to configure the cross concern behaviour of the client:</p>
+ <h3 id=closing>Closing the client</h3>
 
+ The client holds resources like thread pools and IO connections, so call <a href="../../../../io/sphere/sdk/client/SphereClient.html#close--"><code>SphereClient.close()</code></a> to release them.
+
+ <h3 id=further-client-infos>Further client information</h3>
  <ul>
- <li>setup recover mechanisms like returning empty lists or retry the request</li>
- <li>log events</li>
- <li>set timeouts (depending on the future implementation)</li>
- <li>return fake answers for tests</li>
- <li>configure throttling.</li>
- </ul>
-
- <p>The following listing shows a pimped client which updates metrics on responses, retries commands and sets default values:</p>
-
- <div id="io-sphere-sdk-client-WrappedClientDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.commands.Command;
-import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Query;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
-</code></pre><pre><code class='java'>/**
- * This is just a demo how powerful the decorator pattern for the client can be.
- * Don't use this example in production as it is.
- */
-public class WrappedClientDemo implements SphereClient {
-
-    private final SphereClient client;
-    private final MetricComponent metricComponent;
-
-    public WrappedClientDemo(final SphereClient client, final MetricComponent metricComponent) {
-        this.client = client;
-        this.metricComponent = metricComponent;
-    }
-
-    @SuppressWarnings("unchecked")
-    @Override
-    public &lt;T&gt; CompletableFuture&lt;T&gt; execute(SphereRequest&lt;T&gt; sphereRequest) {
-        final CompletableFuture&lt;T&gt; result;
-        final CompletableFuture&lt;T&gt; intermediateResult = filtered(client.execute(sphereRequest));
-        if (sphereRequest instanceof Query) {
-            final Function&lt;Throwable, T&gt; provideEmptyResultOnException = exception -&gt; (T) PagedQueryResult.empty();
-            result = intermediateResult.exceptionally(provideEmptyResultOnException);
-        } else if (sphereRequest instanceof Command) {
-            final Function&lt;Throwable, T&gt; retry = exception -&gt; (T) client.execute(sphereRequest);
-            result = intermediateResult.exceptionally(retry);
-        } else {
-            result = intermediateResult;
-        }
-        return result;
-    }
-
-    //this method will be called for every request
-    private &lt;T&gt; CompletableFuture&lt;T&gt; filtered(final CompletableFuture&lt;T&gt; promise) {
-        promise.whenComplete(Email::writeEmailToDevelopers);
-        promise.whenComplete(metricComponent::incrementFailureRequests);
-        promise.whenComplete(metricComponent::incrementSuccessfulRequests);
-        return promise;
-    }
-
-    @Override
-    public void close() {
-        client.close();
-    }
-}
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/WrappedClientDemo.java" target="_blank">test code</a>.</pre></div>
-
- <h3 id=client-test-doubles>Client test doubles for unit tests</h3>
-
- <p>Since the clients are interfaces you can implement them to provide test doubles.</p>
- <p>Here are some example to provide fake client responses in tests:</p>
-
- <div id="io-sphere-sdk-client-TestsDemo-withInstanceResults--%s" class=code-example><pre><code class='java'>//provide directly a model instance without JSON from SPHERE.IO
-final SphereClientFactory factory = SphereClientFactory.of();
-final SphereClient client = factory.createObjectTestDouble(httpRequest -&gt; {
-    final String expectedPath = CategoryQuery.of().byName(Locale.ENGLISH, "cat name").httpRequestIntent().getPath();
-    final Object res;
-    if(httpRequest.getPath().equals(expectedPath)){
-        final LocalizedStrings name = LocalizedStrings.of(Locale.ENGLISH, "cat name");
-        final LocalizedStrings slug = LocalizedStrings.of(Locale.ENGLISH, "cat-slug");
-        final Category category = CategoryBuilder.of("cat-id", name, slug).build();
-        res = PagedQueryResult.of(category);
-    } else {
-        throw new UnsupportedOperationException("I'm not prepared for this request: " + httpRequest);
-    }
-    return res;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/TestsDemo.java" target="_blank">test code</a>.</pre></div>
-
- <div id="io-sphere-sdk-client-TestsDemo-modelInstanceFromJson--%s" class=code-example><pre><code class='java'>//deserializes an object stored from JSON
-final SphereClientFactory factory = SphereClientFactory.of();
-final SphereClient client = factory.createObjectTestDouble(httpRequest -&gt; {
-    final Object result;
-    if(httpRequest.getPath().contains("/categories")) {
-        //in Play projects the file is in "test/resources/categories.json"
-        final PagedQueryResult&lt;Category&gt; queryResult = JsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
-        result = queryResult;
-    } else {
-        throw new UnsupportedOperationException("I'm not prepared for this request: " + httpRequest);
-    }
-    return result;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/TestsDemo.java" target="_blank">test code</a>.</pre></div>
-
- <div id="io-sphere-sdk-client-TestsDemo-withJson--%s" class=code-example><pre><code class='java'>final SphereClient client = SphereClientFactory.of().createHttpTestDouble(httpRequest -&gt; {
-    final HttpResponse response;
-    if (httpRequest.getPath().contains("/categories")) {
-        //JSON representation is often useful to deal with errors, but this time again a happy path example
-        //alternatively you can provide the String from a file in the classpath
-        response = HttpResponse.of(200, "{\n" +
-                "    \"offset\" : 0,\n" +
-                "    \"count\" : 1,\n" +
-                "    \"total\" : 1,\n" +
-                "    \"results\" : [ {\n" +
-                "        \"id\" : \"5ebe6dc9-ba32-4030-9f3e-eee0137a1274\",\n" +
-                "        \"version\" : 1,\n" +
-                "        \"name\" : {\n" +
-                "            \"en\" : \"TestSnowboard equipment\"\n" +
-                "        },\n" +
-                "        \"slug\" : {\n" +
-                "            \"en\" : \"snowboard-equipment\"\n" +
-                "        },\n" +
-                "        \"ancestors\" : [ ],\n" +
-                "        \"orderHint\" : \"0.000014020459255201865700631\",\n" +
-                "        \"createdAt\" : \"2014-06-06T09:12:05.520Z\",\n" +
-                "        \"lastModifiedAt\" : \"2014-06-06T09:12:05.520Z\"\n" +
-                "    }]\n" +
-                "}");
-    } else {
-        //here you can put if else blocks for further preconfigured responses
-        throw new UnsupportedOperationException("I'm not prepared for this request: " + httpRequest);
-    }
-    return response;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/TestsDemo.java" target="_blank">test code</a>.</pre></div></div>
+ <li><a href="../../../../io/sphere/sdk/meta/SphereClientTuningDocumentation.html" title="class in io.sphere.sdk.meta"><code>Tuning the client</code></a></li>
+ <li><a href="../../../../io/sphere/sdk/meta/TestingDocumentation.html" title="class in io.sphere.sdk.meta"><code>Writing unit tests with the client</code></a></li>
+ </ul></div>
 </li>
 </ul>
 </div>
@@ -351,7 +230,7 @@ final SphereClient client = factory.createObjectTestDouble(httpRequest -&gt; {
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/meta/DocumentationGuidelines.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/meta/ExceptionDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

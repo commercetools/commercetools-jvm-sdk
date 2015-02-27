@@ -70,10 +70,6 @@
 <!-- ========= END OF TOP NAVBAR ========= -->
 <div class="header">
 <h1 title="Package" class="title">Package&nbsp;io.sphere.sdk.client</h1>
-<div class="docSummary">
-<div class="block">Provides types to connect to SPHERE.IO via HTTP.</div>
-</div>
-<p>See:&nbsp;<a href="#package.description">Description</a></p>
 </div>
 <div class="contentContainer">
 <ul class="blockList">
@@ -85,6 +81,14 @@
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tbody>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/ApacheHttpClientAdapter.html" title="interface in io.sphere.sdk.client">ApacheHttpClientAdapter</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/NingHttpClientAdapter.html" title="interface in io.sphere.sdk.client">NingHttpClientAdapter</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a></td>
 <td class="colLast">
@@ -132,38 +136,34 @@
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;T&gt;</td>
-<td class="colLast">
-<div class="block">TODO give a good name</div>
-</td>
+<td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/NingAsyncHttpClientAdapter.html" title="class in io.sphere.sdk.client">NingAsyncHttpClientAdapter</a></td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client">QueueSphereClientDecorator</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client">SphereAccessTokenSupplierFactory</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></td>
 <td class="colLast">
 <div class="block">The full configuration for a SPHERE.IO client.</div>
 </td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client">SphereClientDecorator</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client">SphereClientFactory</a></td>
 <td class="colLast">
 <div class="block">A factory to instantiate SPHERE.IO Java clients which use <code>CompletableFuture</code> as future implementation.</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereError.html" title="class in io.sphere.sdk.client">SphereError</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereErrorResponse.html" title="class in io.sphere.sdk.client">SphereErrorResponse</a></td>
-<td class="colLast">
-<div class="block">Response object returned by the Sphere Projects Web Service in case of an error.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -179,79 +179,7 @@
 </tbody>
 </table>
 </li>
-<li class="blockList">
-<table class="typeSummary" border="0" cellpadding="3" cellspacing="0" summary="Exception Summary table, listing exceptions, and an explanation">
-<caption><span>Exception Summary</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colFirst" scope="col">Exception</th>
-<th class="colLast" scope="col">Description</th>
-</tr>
-<tbody>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/AuthorizationException.html" title="class in io.sphere.sdk.client">AuthorizationException</a></td>
-<td class="colLast">
-<div class="block">Exception thrown when the Sphere authorization service responds with other status code than HTTP 200 OK.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/ConcurrentModificationException.html" title="class in io.sphere.sdk.client">ConcurrentModificationException</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/EmptyHttpBodyException.html" title="class in io.sphere.sdk.client">EmptyHttpBodyException</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/JsonException.html" title="class in io.sphere.sdk.client">JsonException</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/JsonParseException.html" title="class in io.sphere.sdk.client">JsonParseException</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/NotFoundException.html" title="class in io.sphere.sdk.client">NotFoundException</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/ReferenceExistsException.html" title="class in io.sphere.sdk.client">ReferenceExistsException</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereBackendException.html" title="class in io.sphere.sdk.client">SphereBackendException</a></td>
-<td class="colLast">
-<div class="block">Generic exception thrown when a Sphere web service responds with a status code other than HTTP 2xx.</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">SphereClientException</a></td>
-<td class="colLast">
-<div class="block">Exception thrown by the Sphere Java client.</div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereException.html" title="class in io.sphere.sdk.client">SphereException</a></td>
-<td class="colLast">
-<div class="block">Exception thrown when a Sphere web service responds with a status code other than HTTP 2xx.</div>
-</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereInputException.html" title="class in io.sphere.sdk.client">SphereInputException</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/client/SphereServiceUnavailableException.html" title="class in io.sphere.sdk.client">SphereServiceUnavailableException</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-</tbody>
-</table>
-</li>
 </ul>
-<a name="package.description">
-<!--   -->
-</a>
-<h2 title="Package io.sphere.sdk.client Description">Package io.sphere.sdk.client Description</h2>
-<div class="block">Provides types to connect to SPHERE.IO via HTTP.</div>
 </div>
 <!-- ======= START OF BOTTOM NAVBAR ====== -->
 <div class="bottomNav"><a name="navbar.bottom">
