@@ -36,14 +36,19 @@ final class ExceptionFactory {
     public static ExceptionFactory of() {
         final ExceptionFactory exceptionFactory = new ExceptionFactory()
                 .when(r -> isServiceNotAvailable(r), r -> new ServiceUnavailableException(extractBody(r)))
-                .whenStatus(401, r -> new UnauthorizedException(extractBody(r)))
+                .whenStatus(401, r -> {
+                    final String body = extractBody(r);
+                    return body.contains("invalid_token") ? new InvalidTokenException() : new UnauthorizedException(body);
+                })
                 .whenStatus(500, r -> new InternalServerErrorException(extractBody(r)))
                 .whenStatus(502, r -> new BadGatewayException(extractBody(r)))
                 .whenStatus(503, r -> new ServiceUnavailableException(extractBody(r)))
                 .whenStatus(504, r -> new GatewayTimeoutException(extractBody(r)))
                 .whenStatus(409, r -> new ConcurrentModificationException())
-                .whenStatus(400, r ->
-                                JsonUtils.readObject(ErrorResponseException.typeReference(), r.getResponseBody().get())
+                .whenStatus(400, r -> {
+                    final ErrorResponse errorResponse = JsonUtils.readObject(ErrorResponse.typeReference(), r.getResponseBody().get());
+                    return new ErrorResponseException(errorResponse);
+                }
                 )
                 .whenStatus(404, r -> new NotFoundException())
                 //default

@@ -1,20 +1,19 @@
 package io.sphere.sdk.errors;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.Base;
+
 import java.util.Collections;
 import java.util.List;
 
-public class ErrorResponseException extends BadRequestException implements ErrorResponse {
-    private static final long serialVersionUID = 0L;
 
+final class ErrorResponseImpl extends Base implements ErrorResponse {
     private final int statusCode;
     private final String message;
     private final List<SphereError> errors;
 
-    public ErrorResponseException(final ErrorResponse errorResponse) {
-        this(errorResponse.getStatusCode(), errorResponse.getMessage(), errorResponse.getErrors());
-    }
-
-    ErrorResponseException(final int statusCode, final String message, final List<SphereError> errors) {
+    @JsonCreator
+    ErrorResponseImpl(final int statusCode, final String message, final List<SphereError> errors) {
         this.statusCode = statusCode;
         this.message = message;
         this.errors = errors == null ? Collections.<SphereError>emptyList() : errors;

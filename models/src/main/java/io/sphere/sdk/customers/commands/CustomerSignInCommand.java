@@ -62,7 +62,7 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
         return httpResponse -> {
             if (httpResponse.getStatusCode() == 400) {
                 //TODO this code needs reworking
-                final ErrorResponseException errorResponse = resultMapperOf(ErrorResponseException.typeReference()).apply(httpResponse);
+                final ErrorResponse errorResponse = resultMapperOf(ErrorResponse.typeReference()).apply(httpResponse);
                 if (errorResponse.getErrors().stream().anyMatch(error -> error.getCode().equals("InvalidCredentials"))) {
                     throw new InvalidCurrentPasswordException();
                 } else {

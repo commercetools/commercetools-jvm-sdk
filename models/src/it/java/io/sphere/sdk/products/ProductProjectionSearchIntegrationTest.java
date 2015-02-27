@@ -101,20 +101,6 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         assertThat(toIds(pagedSearchResult.getResults())).containsExactly(testProduct1.getId());
     }
 
-    @Test
-    public void responseContainsTermFacetsForAttributes() throws Exception {
-        final String attrKey = COLOR_ATTRIBUTE_KEY;
-        final FacetExpression<ProductProjection> termFacetExpression = FacetExpression.of(attrKey);
-        final Search<ProductProjection> search = ProductProjectionSearch.of(STAGED)
-                .plusFacet(termFacetExpression);
-        final PagedSearchResult<ProductProjection> pagedSearchResult = execute(search);
-        final TermFacetResult facetResult = (TermFacetResult) pagedSearchResult.getFacetsResults().get(attrKey);
-        //end example parsing here
-        assertThat(facetResult.getTerms().stream()
-                .anyMatch(termStat -> termStat.getTerm().equals("blue") && termStat.getCount() > 0))
-                .isTrue();
-    }
-
     protected static <T> T execute(final SphereRequest<T> clientRequest, final Predicate<T> isOk) {
         return execute(clientRequest, 9, isOk);
     }

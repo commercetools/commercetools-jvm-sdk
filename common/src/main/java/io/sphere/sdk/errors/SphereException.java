@@ -1,5 +1,6 @@
 package io.sphere.sdk.errors;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.meta.BuildInfo;
@@ -15,6 +16,7 @@ public class SphereException extends RuntimeException {
     static final long serialVersionUID = 0L;
 
     private Optional<String> sphereRequest = Optional.empty();
+    @JsonIgnore
     private Optional<String> underlyingHttpRequest = Optional.empty();
     private Optional<String> underlyingHttpResponse = Optional.empty();
     private Optional<String> projectKey = Optional.empty();
@@ -73,6 +75,7 @@ public class SphereException extends RuntimeException {
         this.httpThing = Optional.of(intent.getHttpMethod() + " " + intent.getPath());
     }
 
+    @JsonIgnore
     public void setUnderlyingHttpRequest(final String underlyingHttpRequest) {
         this.underlyingHttpRequest = Optional.of(underlyingHttpRequest);
     }

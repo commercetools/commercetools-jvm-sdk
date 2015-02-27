@@ -118,13 +118,12 @@ public class SphereExceptionTest extends IntegrationTest {
 
     }
 
-    @Test
+    @Test(expected = ConcurrentModificationException.class)
     public void concurrentModification() throws Exception {
         withCategory(client(), cat -> {
             final CategoryUpdateCommand cmd = CategoryUpdateCommand.of(cat, asList(ChangeName.of(LocalizedStrings.ofEnglishLocale("new name"))));
             execute(cmd);
             execute(cmd);
-            //TODO check if there are more fields than code and message
         });
     }
 
