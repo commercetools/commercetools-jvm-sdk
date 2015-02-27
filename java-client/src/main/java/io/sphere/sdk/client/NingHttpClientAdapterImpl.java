@@ -15,6 +15,7 @@ import java.util.concurrent.ForkJoinPool;
 final class NingHttpClientAdapterImpl extends AutoCloseableService implements NingHttpClientAdapter {
     private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(NingHttpClientAdapterImpl.class);
     private final AsyncHttpClient asyncHttpClient;
+    private final ForkJoinPool threadPool = new ForkJoinPool();
 
     private NingHttpClientAdapterImpl(final AsyncHttpClient asyncHttpClient) {
         this.asyncHttpClient = asyncHttpClient;
@@ -61,7 +62,6 @@ final class NingHttpClientAdapterImpl extends AutoCloseableService implements Ni
             } else if (body instanceof FileHttpRequestBody) {
                 builder.setBody(((FileHttpRequestBody) body).getFile());
             } else if (body instanceof FormUrlEncodedHttpRequestBody) {
-                //TODO check
                 ((FormUrlEncodedHttpRequestBody) body).getData().forEach((name, value) -> builder.addQueryParameter(name, value));
             }
         });
@@ -71,7 +71,8 @@ final class NingHttpClientAdapterImpl extends AutoCloseableService implements Ni
 
     @Override
     protected void internalClose() {
-        asyncHttpClient.close();
+        closeQuietly(asyncHttpClient);
+        threadPool.shutdown();
     }
 
     public static NingHttpClientAdapterImpl of(final AsyncHttpClient asyncHttpClient) {
@@ -99,8 +100,7 @@ final class NingHttpClientAdapterImpl extends AutoCloseableService implements Ni
         return result;
     }
 
-    private static CompletableFuture<Response> wrap(final ListenableFuture<Response> listenableFuture) {
-        //TODO use custom pool?
-        return wrap(listenableFuture, ForkJoinPool.commonPool());
+    private CompletableFuture<Response> wrap(final ListenableFuture<Response> listenableFuture) {
+        return wrap(listenableFuture, threadPool);
     }
 }
