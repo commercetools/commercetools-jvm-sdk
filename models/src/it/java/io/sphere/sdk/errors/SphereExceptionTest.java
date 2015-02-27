@@ -6,6 +6,7 @@ import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
+import io.sphere.sdk.categories.commands.updateactions.ChangeName;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.commands.UpdateAction;
@@ -27,6 +28,7 @@ import java.util.concurrent.CompletionException;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
+import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.http.HttpMethod.POST;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -114,6 +116,16 @@ public class SphereExceptionTest extends IntegrationTest {
         final Category cat2 = execute(CategoryCreateCommand.of(cat2draft));
         execute(CategoryDeleteByIdCommand.of(cat2));
 
+    }
+
+    @Test
+    public void concurrentModification() throws Exception {
+        withCategory(client(), cat -> {
+            final CategoryUpdateCommand cmd = CategoryUpdateCommand.of(cat, asList(ChangeName.of(LocalizedStrings.ofEnglishLocale("new name"))));
+            execute(cmd);
+            execute(cmd);
+            //TODO check if there are more fields than code and message
+        });
     }
 
     private CategoryDraftBuilder categoryDraftOf(final LocalizedStrings slug) {

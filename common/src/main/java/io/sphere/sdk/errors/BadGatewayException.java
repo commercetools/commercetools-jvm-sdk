@@ -2,8 +2,13 @@ package io.sphere.sdk.errors;
 
 public class BadGatewayException extends ServerErrorException {
     private static final long serialVersionUID = 0L;
+    private static final int STATUS_CODE = 502;
+
+    public BadGatewayException(final String message) {
+        super(message, STATUS_CODE);
+    }
 
     public BadGatewayException() {
-        super(502);
+        super(STATUS_CODE);
     }
 }

@@ -1,20 +1,17 @@
 package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.sphere.sdk.errors.*;
-import io.sphere.sdk.errors.ConcurrentModificationException;
 import io.sphere.sdk.errors.JsonException;
-import io.sphere.sdk.errors.NotFoundException;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.errors.SphereException;
 import io.sphere.sdk.utils.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
-import java.nio.charset.StandardCharsets;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
+import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 
 final class SphereClientImpl extends AutoCloseableService implements SphereClient {
@@ -68,17 +65,13 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     static <T> Function<HttpResponse, T> preProcess(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config) {
-        return new Function<HttpResponse, T>() {
-            @Override
-            public T apply(final HttpResponse httpResponse) {
-                final SphereInternalLogger logger = getLogger(httpResponse);
-                logger.debug(() -> httpResponse);
-                logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> JsonUtils.prettyPrintJsonStringSecure(bytesToString(body))).orElse("No body present.") + "\n");
-                final T result;
-                result = parse(httpResponse, sphereRequest, objectMapper, config);
-                return result;
-            }
-
+        return httpResponse -> {
+            final SphereInternalLogger logger = getLogger(httpResponse);
+            logger.debug(() -> httpResponse);
+            logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> JsonUtils.prettyPrintJsonStringSecure(bytesToString(body))).orElse("No body present.") + "\n");
+            final T result;
+            result = parse(httpResponse, sphereRequest, objectMapper, config);
+            return result;
         };
     }
 
@@ -99,51 +92,9 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     private static <T> SphereException createExceptionFor(final HttpResponse httpResponse, final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config) {
-        final SphereException sphereException = createFlatException(httpResponse, sphereRequest, objectMapper);
+        final SphereException sphereException = ExceptionFactory.of().createException(httpResponse, sphereRequest, objectMapper);
         fillExceptionWithData(sphereRequest, httpResponse, sphereException, config);
         return sphereException;
-    }
-
-    private static <T> SphereException createFlatException(final HttpResponse httpResponse, final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper) {
-        //TODO reorder, most common up, or use map and key value search
-        if (isServiceNotAvailable(httpResponse)) {
-            return new ServiceUnavailableException();
-        } else if(httpResponse.getStatusCode() == 401) {
-            return new InvalidTokenException();
-        } else if(httpResponse.getStatusCode() == 500) {
-            return new InternalServerErrorException();
-        } else if(httpResponse.getStatusCode() == 502) {
-            return new BadGatewayException();
-        } else if(httpResponse.getStatusCode() == 503) {
-            return new ServiceUnavailableException();
-        } else if(httpResponse.getStatusCode() == 504) {
-            return new GatewayTimeoutException();
-        } else if (httpResponse.getStatusCode() == 409) {
-            return new ConcurrentModificationException();
-        } else if (httpResponse.getStatusCode() == 400 && httpResponse.getResponseBody().isPresent()) {
-            final ErrorResponse errorResponse = JsonUtils.readObject(ErrorResponse.typeReference(), httpResponse.getResponseBody().get());
-            final SphereErrorResponseToExceptionMapper exceptionMapper = SphereErrorResponseToExceptionMapper.of();
-            final SphereException exception = exceptionMapper.toException(errorResponse);
-            return exception;
-        } else if (httpResponse.getStatusCode() == 404) {
-            return new NotFoundException();
-        } else {
-            //TODO maybe SphereException or JsonException more appropriate
-            return new SphereException("Can't parse backend response.");
-        }
-    }
-
-    //hack since backend returns in same error conditions responce code 500 but with the message Service unavailable
-    private static boolean isServiceNotAvailable(final HttpResponse httpResponse) {
-        return httpResponse.getStatusCode() == 503 || httpResponse.getResponseBody().map(b -> bytesToString(b)).map(s -> s.contains("<h2>Service Unavailable</h2>")).orElse(false);
-    }
-
-    private static String bytesToString(final byte[] b) {
-        return new String(b, StandardCharsets.UTF_8);
-    }
-
-    private static boolean isErrorResponse(final HttpResponse httpResponse) {
-        return httpResponse.getStatusCode() / 100 != 2;
     }
 
     private static <T> void fillExceptionWithData(final SphereRequest<T> sphereRequest, final HttpResponse httpResponse, final SphereException exception, final SphereApiConfig config) {

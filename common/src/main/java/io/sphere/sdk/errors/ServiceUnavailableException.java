@@ -6,8 +6,13 @@ package io.sphere.sdk.errors;
  */
 public class ServiceUnavailableException extends ServerErrorException {
     private static final long serialVersionUID = 0L;
+    private static final int STATUS_CODE = 503;
+
+    public ServiceUnavailableException(final String message) {
+        super(message, STATUS_CODE);
+    }
 
     public ServiceUnavailableException() {
-        super(503);
+        super(STATUS_CODE);
     }
 }

@@ -5,6 +5,7 @@ import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.InvalidCurrentPasswordException;
 import io.sphere.sdk.errors.ErrorResponse;
+import io.sphere.sdk.errors.ErrorResponseException;
 import io.sphere.sdk.errors.SphereException;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpResponse;
@@ -61,7 +62,7 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
         return httpResponse -> {
             if (httpResponse.getStatusCode() == 400) {
                 //TODO this code needs reworking
-                final ErrorResponse errorResponse = resultMapperOf(ErrorResponse.typeReference()).apply(httpResponse);
+                final ErrorResponseException errorResponse = resultMapperOf(ErrorResponseException.typeReference()).apply(httpResponse);
                 if (errorResponse.getErrors().stream().anyMatch(error -> error.getCode().equals("InvalidCredentials"))) {
                     throw new InvalidCurrentPasswordException();
                 } else {
