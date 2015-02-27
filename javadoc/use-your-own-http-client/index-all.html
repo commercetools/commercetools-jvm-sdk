@@ -835,9 +835,13 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ClientErrorException.html#ClientErrorException-java.lang.String-java.lang.Throwable-int-">ClientErrorException(String, Throwable, int)</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ClientErrorException.html" title="class in io.sphere.sdk.errors">ClientErrorException</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/QueueSphereClientDecorator.html#close--">close()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client">QueueSphereClientDecorator</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html#close--">close()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClient.html#close--">close()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientDecorator.html#close--">close()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client">SphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpClient.html#close--">close()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a></dt>
 <dd>&nbsp;</dd>
@@ -1370,7 +1374,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block"><img src="./documentation-resources/images/uml/exception-hierarchy.svg" alt="visualization of the exception hierarchy"></div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/QueueSphereClientDecorator.html#execute-io.sphere.sdk.client.SphereRequest-">execute(SphereRequest&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client">QueueSphereClientDecorator</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.client.SphereRequest-">execute(SphereRequest&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client">SphereClient</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientDecorator.html#execute-io.sphere.sdk.client.SphereRequest-">execute(SphereRequest&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client">SphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpClient.html#execute-io.sphere.sdk.http.HttpRequest-">execute(HttpRequest)</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http">HttpClient</a></dt>
 <dd>&nbsp;</dd>
@@ -3859,6 +3867,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/NingHttpClientAdapter.html#of-com.ning.http.client.AsyncHttpClient-">of(AsyncHttpClient)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/NingHttpClientAdapter.html" title="interface in io.sphere.sdk.client">NingHttpClientAdapter</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/QueueSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-int-">of(SphereClient, int)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client">QueueSphereClientDecorator</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html#of--">of()</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client">SphereAccessTokenSupplierFactory</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereApiConfig.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></dt>
@@ -5069,6 +5079,8 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryToFetchAdapter.html#QueryToFetchAdapter-com.fasterxml.jackson.core.type.TypeReference-io.sphere.sdk.queries.Query-">QueryToFetchAdapter(TypeReference&lt;PagedQueryResult&lt;T&gt;&gt;, Query&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">QueueSphereClientDecorator</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>&nbsp;</dd>
 </dl>
 <a name="I:R">
 <!--   -->
@@ -5735,6 +5747,10 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>
 <div class="block">The full configuration for a SPHERE.IO client.</div>
 </dd>
+<dt><a href="io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientDecorator</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientDecorator.html#SphereClientDecorator-io.sphere.sdk.client.SphereClient-">SphereClientDecorator(SphereClient)</a></span> - Constructor for class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientDecorator.html" title="class in io.sphere.sdk.client">SphereClientDecorator</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientFactory</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>
 <div class="block">A factory to instantiate SPHERE.IO Java clients which use <code>CompletableFuture</code> as future implementation.</div>
