@@ -1,4 +1,4 @@
-package io.sphere.sdk.errors;
+package io.sphere.sdk.client;
 
 public class UnauthorizedException extends ClientErrorException {
     private static final long serialVersionUID = 0L;

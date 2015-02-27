@@ -2,7 +2,7 @@ package io.sphere.sdk.zones;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.errors.SphereException;
+import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteByIdCommand;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQuery;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQueryModel;

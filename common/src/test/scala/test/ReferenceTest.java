@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import java.util.Optional;
 
-import static io.sphere.sdk.utils.JsonUtils.newObjectMapper;
+import static io.sphere.sdk.json.JsonUtils.newObjectMapper;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class ReferenceTest {

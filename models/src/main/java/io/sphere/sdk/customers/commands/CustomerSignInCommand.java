@@ -3,13 +3,12 @@ package io.sphere.sdk.customers.commands;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.CustomerSignInResult;
-import io.sphere.sdk.customers.InvalidCurrentPasswordException;
-import io.sphere.sdk.errors.ErrorResponse;
-import io.sphere.sdk.errors.ErrorResponseException;
-import io.sphere.sdk.errors.SphereException;
+import io.sphere.sdk.models.ErrorResponse;
+import io.sphere.sdk.client.ErrorResponseException;
+import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -64,7 +63,7 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
                 //TODO this code needs reworking
                 final ErrorResponse errorResponse = resultMapperOf(ErrorResponse.typeReference()).apply(httpResponse);
                 if (errorResponse.getErrors().stream().anyMatch(error -> error.getCode().equals("InvalidCredentials"))) {
-                    throw new InvalidCurrentPasswordException();
+                    throw new ErrorResponseException(errorResponse);
                 } else {
                     throw new SphereException(errorResponse.toString());
                 }

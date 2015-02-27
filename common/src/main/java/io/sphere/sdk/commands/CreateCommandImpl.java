@@ -6,7 +6,7 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.client.JsonEndpoint;
 
-import static io.sphere.sdk.utils.JsonUtils.toJson;
+import static io.sphere.sdk.json.JsonUtils.toJson;
 
 /**
  * Base class to implement commands which create an entity in SPHERE.IO.

@@ -1,4 +1,4 @@
-package io.sphere.sdk.errors;
+package io.sphere.sdk.client;
 
 /**
  * The SPHERE.IO API is currently not available.

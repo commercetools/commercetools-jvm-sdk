@@ -1,0 +1,23 @@
+package io.sphere.sdk.json;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
+
+import javax.money.MonetaryAmount;
+import java.io.IOException;
+import java.math.BigDecimal;
+
+final class MoneySerializer extends StdScalarSerializer<MonetaryAmount> {
+    MoneySerializer() {
+        super(MonetaryAmount.class);
+    }
+
+    @Override
+    public void serialize(final MonetaryAmount monetaryAmount, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
+        final BigDecimal value = monetaryAmount.getNumber().numberValue(BigDecimal.class);
+        final String currencyCode = monetaryAmount.getCurrency().getCurrencyCode();
+        final MoneyRepresentation moneyRepresentation = new MoneyRepresentation(value, currencyCode);
+        jsonGenerator.writeObject(moneyRepresentation);
+    }
+}

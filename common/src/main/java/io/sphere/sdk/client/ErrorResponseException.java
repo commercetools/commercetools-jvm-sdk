@@ -1,4 +1,8 @@
-package io.sphere.sdk.errors;
+package io.sphere.sdk.client;
+
+import io.sphere.sdk.client.BadRequestException;
+import io.sphere.sdk.models.ErrorResponse;
+import io.sphere.sdk.models.SphereError;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +35,7 @@ public class ErrorResponseException extends BadRequestException implements Error
      */
     @Override
     public String getMessage() {
-        return message;
+        return message + " errors: " + errors;
     }
 
     @Override

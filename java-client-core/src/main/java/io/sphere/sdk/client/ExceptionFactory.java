@@ -1,9 +1,10 @@
 package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.sphere.sdk.errors.*;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.models.ErrorResponse;
+import io.sphere.sdk.models.SphereException;
 
 import java.util.ArrayList;
 import java.util.List;

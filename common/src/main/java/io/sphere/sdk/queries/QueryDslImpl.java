@@ -13,6 +13,7 @@ import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.utils.UrlQueryBuilder;
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 
 
@@ -35,7 +36,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
                         final List<ExpansionPath<T>> expansionPaths, final List<QueryParameter> additionalQueryParameters) {
         offset.ifPresent(presentOffset -> {
             if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
-                throw new InvalidQueryOffsetException(presentOffset);
+                throw new IllegalArgumentException(format("The offset parameter must be in the range of [%d..%d], but was %d.", MIN_OFFSET, MAX_OFFSET, presentOffset));
             }
         });
         this.predicate = predicate;

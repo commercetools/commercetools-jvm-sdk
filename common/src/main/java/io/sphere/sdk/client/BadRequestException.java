@@ -1,4 +1,4 @@
-package io.sphere.sdk.errors;
+package io.sphere.sdk.client;
 
 /**
  * HTTP code 400 response from SPHERE.IO.

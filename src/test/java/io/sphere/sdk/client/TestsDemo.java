@@ -6,7 +6,7 @@ import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 
 import java.util.Locale;
 

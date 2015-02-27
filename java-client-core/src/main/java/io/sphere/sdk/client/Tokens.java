@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.errors.AuthorizationException;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.SphereException;
 
 import java.time.Instant;
 import java.util.Optional;
@@ -26,7 +26,7 @@ final class Tokens extends Base {
     @JsonCreator
     private Tokens(String accessToken, String refreshToken, Optional<Long> expiresIn) {
         if (isEmpty(accessToken))
-            throw new AuthorizationException("OAuth response must contain an access_token. Was empty.");
+            throw new SphereException("OAuth response must contain an access_token. Was empty.");
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
         this.expiresIn = expiresIn;

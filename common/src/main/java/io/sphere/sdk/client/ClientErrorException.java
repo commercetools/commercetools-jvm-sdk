@@ -1,4 +1,4 @@
-package io.sphere.sdk.errors;
+package io.sphere.sdk.client;
 
 /**
  * Exceptions for SPHERE.IO http responses with an error code 4xx.

@@ -32,7 +32,7 @@ public interface QueryDsl<T> extends EntityQuery<T> {
      *
      * @param offset the number of items which should be omitted in the query result.
      * @return a new query
-     * @throws InvalidQueryOffsetException if offset is
+     * @throws java.lang.IllegalArgumentException if offset is
      * not between {@value io.sphere.sdk.queries.Query#MIN_OFFSET} and {@value io.sphere.sdk.queries.Query#MAX_OFFSET}.
      */
     QueryDsl<T> withOffset(final long offset);

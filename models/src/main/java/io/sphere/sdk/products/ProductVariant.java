@@ -24,7 +24,7 @@ public interface ProductVariant {
     /**
      * Access one attribute of a specific name and type which is known in the first place, consult {@link io.sphere.sdk.attributes.AttributeGetterSetter} how to implement these.
      *
-     * @throws io.sphere.sdk.attributes.AttributeMappingException if the type of attribute cannot be parsed
+     * @throws io.sphere.sdk.json.JsonException if the type of attribute cannot be parsed
      *
      * @param accessor declaration of the name and type of the attribute
      * @param <T> the underlying type of the attribute

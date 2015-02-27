@@ -1,6 +1,6 @@
 package io.sphere.sdk.models;
 
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 import org.junit.Test;
 
 import java.util.HashSet;

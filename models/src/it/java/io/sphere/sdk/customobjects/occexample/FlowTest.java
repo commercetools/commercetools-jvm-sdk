@@ -7,7 +7,7 @@ import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.commands.CustomObjectDeleteByContainerAndKeyCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
 import io.sphere.sdk.customobjects.queries.CustomObjectFetchByKey;
-import io.sphere.sdk.errors.ConcurrentModificationException;
+import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Before;
 import org.junit.Test;

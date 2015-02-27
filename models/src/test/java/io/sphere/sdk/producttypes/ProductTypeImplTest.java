@@ -3,7 +3,7 @@ package io.sphere.sdk.producttypes;
 import io.sphere.sdk.models.DefaultModelBuilder;
 import io.sphere.sdk.models.DefaultModelSubclassTest;
 import io.sphere.sdk.attributes.AttributeDefinition;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 import org.junit.Test;
 
 import java.util.List;
