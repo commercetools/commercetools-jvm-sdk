@@ -1,8 +1,6 @@
 package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.errors.InvalidClientCredentialsException;
-import io.sphere.sdk.errors.UnauthorizedException;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.json.JsonUtils;
 import io.sphere.sdk.utils.MapUtils;

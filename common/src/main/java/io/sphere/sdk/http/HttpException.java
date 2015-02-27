@@ -1,6 +1,6 @@
 package io.sphere.sdk.http;
 
-import io.sphere.sdk.errors.SphereException;
+import io.sphere.sdk.models.SphereException;
 
 public class HttpException extends SphereException {
     private static final long serialVersionUID = 0L;

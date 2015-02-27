@@ -1,6 +1,6 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.errors.SphereException;
+import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.http.HttpResponse;
 
 import java.util.function.Function;

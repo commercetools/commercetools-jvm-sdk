@@ -1,11 +1,10 @@
-package io.sphere.sdk.errors;
+package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.json.JsonException;
-import io.sphere.sdk.models.Base;
 import io.sphere.sdk.json.JsonUtils;
 
 import java.util.HashMap;

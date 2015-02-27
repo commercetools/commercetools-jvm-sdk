@@ -1,4 +1,4 @@
-package io.sphere.sdk.errors;
+package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.client.HttpRequestIntent;

@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.MetaProductType;
 import io.sphere.sdk.producttypes.ProductType;
@@ -49,7 +50,7 @@ public class ProductAttributeAccessTest {
         assertThat(variant.getAttribute(notPresentAttributeGetterSetter)).isAbsent();
     }
 
-    @Test(expected = AttributeMappingException.class)
+    @Test(expected = JsonException.class)
     public void wrongAttributeType() throws Exception {
         variant.getAttribute(wrongTypeAttributeGetterSetter);
     }

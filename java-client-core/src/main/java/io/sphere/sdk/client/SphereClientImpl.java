@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.meta.BuildInfo;
-import io.sphere.sdk.errors.SphereException;
+import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.json.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 

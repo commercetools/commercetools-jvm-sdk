@@ -1,4 +1,4 @@
-package io.sphere.sdk.errors;
+package io.sphere.sdk.client;
 
 /**
  * This error might occur on long running processes

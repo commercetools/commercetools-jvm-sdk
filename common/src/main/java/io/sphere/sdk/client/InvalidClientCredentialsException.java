@@ -1,6 +1,4 @@
-package io.sphere.sdk.errors;
-
-import io.sphere.sdk.client.SphereAuthConfig;
+package io.sphere.sdk.client;
 
 public class InvalidClientCredentialsException extends UnauthorizedException {
     private static final long serialVersionUID = 0L;

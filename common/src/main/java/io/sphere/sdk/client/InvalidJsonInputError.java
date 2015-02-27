@@ -1,4 +1,6 @@
-package io.sphere.sdk.errors;
+package io.sphere.sdk.client;
+
+import io.sphere.sdk.models.SphereError;
 
 public class InvalidJsonInputError extends SphereError {
     private final String detailedErrorMessage;

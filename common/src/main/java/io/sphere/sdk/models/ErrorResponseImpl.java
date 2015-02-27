@@ -1,7 +1,6 @@
-package io.sphere.sdk.errors;
+package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.Base;
 
 import java.util.Collections;
 import java.util.List;

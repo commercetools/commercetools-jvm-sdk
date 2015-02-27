@@ -22,8 +22,6 @@ class AttributeMapperImpl<T> extends Base implements AttributeMapper<T> {
     public T deserialize(final JsonNode value) {
         try {
             return  mapper.reader(typeReference).readValue(value);
-        } catch (final JsonMappingException e) {
-            throw new AttributeMappingException(e);
         } catch (final IOException e) {
             throw new JsonException(e);
         }
