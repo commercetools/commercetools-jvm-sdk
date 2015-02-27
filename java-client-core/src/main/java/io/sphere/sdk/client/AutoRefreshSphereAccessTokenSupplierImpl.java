@@ -13,8 +13,8 @@ import java.util.concurrent.CompletableFuture;
  *  Refreshes the access token as needed automatically.
  */
 final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableService implements SphereAccessTokenSupplier {
-    private volatile CompletableFuture<String> lastToken = new CompletableFuture<>();
-    private volatile Optional<Tokens> tokensOption = Optional.empty();
+    private volatile CompletableFuture<String> currentAccessTokenFuture = new CompletableFuture<>();
+    private volatile Optional<Tokens> currentTokensOption = Optional.empty();
     private final Actor tokenActor = new TokenActor();
     private final Actor authActor;
 
@@ -26,7 +26,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
 
     @Override
     public CompletableFuture<String> get() {
-        return lastToken;
+        return currentAccessTokenFuture;
     }
 
     @Override
@@ -44,18 +44,18 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
         protected void receive(final Object message) {
             receiveBuilder(message)
                     .when(TokenDeliveredMessage.class, m -> {
-                        if (!tokensOption.isPresent() || currentTokenIsOlder(m.tokens)) {
+                        if (!currentTokensOption.isPresent() || currentTokenIsOlder(m.tokens)) {
                             updateToken(m.tokens);
                         }
                     })
                     .when(TokenDeliveryFailedMessage.class, m -> {
-                        if (!tokensOption.isPresent()) {
-                            lastToken.completeExceptionally(m.cause);
+                        if (!currentTokensOption.isPresent()) {
+                            currentAccessTokenFuture.completeExceptionally(m.cause);
                         } else if(lastTokenIsStillValid()){
                             //keep the old token
                         } else {
-                            tokensOption = Optional.empty();
-                            lastToken = CompletableFutureUtils.failed(m.cause);
+                            currentTokensOption = Optional.empty();
+                            currentAccessTokenFuture = CompletableFutureUtils.failed(m.cause);
                         }
                     });
         }
@@ -66,8 +66,8 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
      * @return
      */
     private boolean lastTokenIsStillValid() {
-        if (tokensOption.isPresent()) {
-            final Tokens oldTokens = tokensOption.get();
+        if (currentTokensOption.isPresent()) {
+            final Tokens oldTokens = currentTokensOption.get();
             return oldTokens.getExpiresInstant().map(expireTime -> expireTime.isAfter(Instant.now())).orElse(true);
         } else {
             return false;
@@ -75,7 +75,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
     }
 
     private boolean currentTokenIsOlder(final Tokens newTokens) {
-        return (tokensOption.isPresent() && oldExpiringInstant().isBefore(newExpiringInstant(newTokens)));
+        return (currentTokensOption.isPresent() && oldExpiringInstant().isBefore(newExpiringInstant(newTokens)));
     }
 
     private Instant newExpiringInstant(final Tokens newTokens) {
@@ -83,15 +83,16 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
     }
 
     private Instant oldExpiringInstant() {
-        return tokensOption.get().getExpiresInstant().orElseGet(() -> Instant.now());
+        return currentTokensOption.get().getExpiresInstant().orElseGet(() -> Instant.now());
     }
 
     private void updateToken(final Tokens tokens) {
-        tokensOption = Optional.of(tokens);
-        if (lastToken.isDone()) {
-            lastToken = CompletableFutureUtils.successful(tokens.getAccessToken());
+        currentTokensOption = Optional.of(tokens);
+        final String accessToken = tokens.getAccessToken();
+        if (currentAccessTokenFuture.isDone()) {
+            currentAccessTokenFuture = CompletableFutureUtils.successful(accessToken);
         } else {
-            lastToken.complete(tokens.getAccessToken());
+            currentAccessTokenFuture.complete(accessToken);
         }
     }
 }
