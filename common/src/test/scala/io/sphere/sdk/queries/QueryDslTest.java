@@ -108,12 +108,12 @@ public class QueryDslTest {
         assertThat(other).isNotSameAs(prototype);
     }
 
-    @Test(expected = InvalidQueryOffsetException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void offsetHasAMaximum() throws Exception {
         prototype.withOffset(100001);
     }
 
-    @Test(expected = InvalidQueryOffsetException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void offsetHasAMinimum() throws Exception {
         prototype.withOffset(-1);
     }

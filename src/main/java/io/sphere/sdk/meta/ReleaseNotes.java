@@ -16,7 +16,7 @@ package io.sphere.sdk.meta;
  <li class=new-in-release>Added Typesafe Activator files, so you can edit the SDK on UNIX with {@code ./activator ui} or on Windows with {@code activator ui}.</li>
  <li class=new-in-release>Added io.sphere.sdk.client.ConcurrentModificationException which is thrown when an {@link io.sphere.sdk.commands.UpdateCommand} fails because of concurrent usage.</li>
  <li class=new-in-release>Added io.sphere.sdk.client.ReferenceExistsException which is thrown when executing a {@link io.sphere.sdk.commands.DeleteCommand} and the resource is referenced by another resource and cannot be deleted before deleting the other resource.</li>
- <li class=new-in-release>Added {@link io.sphere.sdk.queries.InvalidQueryOffsetException} which is thrown if offset is
+ <li class=new-in-release>Added io.sphere.sdk.queries.InvalidQueryOffsetException which is thrown if offset is
  not between {@value io.sphere.sdk.queries.Query#MIN_OFFSET} and {@value io.sphere.sdk.queries.Query#MAX_OFFSET}..</li>
  <li class=new-in-release>Improved on different location the structure of interfaces so important methods are highlighted bold in the IDE.</li>
  <li class=new-in-release>JSON mapping errors are better logged.</li>

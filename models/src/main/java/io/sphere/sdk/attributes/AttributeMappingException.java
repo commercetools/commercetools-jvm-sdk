@@ -1,8 +1,10 @@
 package io.sphere.sdk.attributes;
 
+import io.sphere.sdk.errors.SphereException;
+
 import static java.lang.String.format;
 
-public class AttributeMappingException extends RuntimeException {
+public class AttributeMappingException extends SphereException {
     private static final long serialVersionUID = 4954925590077093840L;
 
     public AttributeMappingException(final Throwable cause) {

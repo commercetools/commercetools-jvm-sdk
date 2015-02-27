@@ -2,7 +2,6 @@ package io.sphere.sdk.customers.commands;
 
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerSignInResult;
-import io.sphere.sdk.customers.InvalidCurrentPasswordException;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -31,7 +30,9 @@ public class CustomerChangePasswordCommandTest extends IntegrationTest {
                 execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword, Optional.empty()));
                 fail();
             } catch (final Exception e) {
-                final boolean causeIsOk = e.getCause() instanceof InvalidCurrentPasswordException || e instanceof InvalidCurrentPasswordException;
+                fail();//todo
+
+                final boolean causeIsOk = false;
                 if (!causeIsOk) {
                     throw e;
                 }
