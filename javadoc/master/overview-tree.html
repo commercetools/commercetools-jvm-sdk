@@ -98,8 +98,8 @@
 <li><a href="io/sphere/sdk/customobjects/package-tree.html">io.sphere.sdk.customobjects</a>, </li>
 <li><a href="io/sphere/sdk/customobjects/commands/package-tree.html">io.sphere.sdk.customobjects.commands</a>, </li>
 <li><a href="io/sphere/sdk/customobjects/queries/package-tree.html">io.sphere.sdk.customobjects.queries</a>, </li>
-<li><a href="io/sphere/sdk/errors/package-tree.html">io.sphere.sdk.errors</a>, </li>
 <li><a href="io/sphere/sdk/http/package-tree.html">io.sphere.sdk.http</a>, </li>
+<li><a href="io/sphere/sdk/json/package-tree.html">io.sphere.sdk.json</a>, </li>
 <li><a href="io/sphere/sdk/meta/package-tree.html">io.sphere.sdk.meta</a>, </li>
 <li><a href="io/sphere/sdk/models/package-tree.html">io.sphere.sdk.models</a>, </li>
 <li><a href="io/sphere/sdk/orders/package-tree.html">io.sphere.sdk.orders</a>, </li>
@@ -337,9 +337,10 @@
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientFactory.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereClientFactory</span></a></li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/SphereError.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">SphereError</span></a>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereError.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">SphereError</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/InvalidJsonInputError.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">InvalidJsonInputError</span></a></li>
+<li type="circle">io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/InvalidCredentials.html" title="class in io.sphere.sdk.customers"><span class="typeNameLink">InvalidCredentials</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/InvalidJsonInputError.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">InvalidJsonInputError</span></a></li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestBase</span></a>
@@ -578,7 +579,7 @@
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/ImmutableMapBuilder.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">ImmutableMapBuilder</span></a>&lt;K,V&gt; (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/IterableUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">IterableUtils</span></a></li>
 <li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">JsonNodeSphereRequest</span></a> (implements io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;)</li>
-<li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/JsonUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">JsonUtils</span></a></li>
+<li type="circle">io.sphere.sdk.json.<a href="io/sphere/sdk/json/JsonUtils.html" title="class in io.sphere.sdk.json"><span class="typeNameLink">JsonUtils</span></a></li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/KnownIssues.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">KnownIssues</span></a></li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/ListUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">ListUtils</span></a></li>
 <li type="circle">io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/LocaleUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">LocaleUtils</span></a></li>
@@ -604,44 +605,40 @@
 <ul>
 <li type="circle">java.lang.RuntimeException
 <ul>
-<li type="circle">io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeMappingException.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeMappingException</span></a></li>
-<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpException.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">HttpException</span></a></li>
 <li type="circle">java.lang.IllegalArgumentException
 <ul>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">InvalidQueryOffsetException</span></a></li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/InvalidCurrentPasswordException.html" title="class in io.sphere.sdk.customers"><span class="typeNameLink">InvalidCurrentPasswordException</span></a></li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/SphereException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">SphereException</span></a>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">SphereException</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/JsonException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">JsonException</span></a></li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/SphereServiceException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">SphereServiceException</span></a>
+<li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpException.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">HttpException</span></a></li>
+<li type="circle">io.sphere.sdk.json.<a href="io/sphere/sdk/json/JsonException.html" title="class in io.sphere.sdk.json"><span class="typeNameLink">JsonException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereServiceException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereServiceException</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/AuthorizationException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">AuthorizationException</span></a></li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ClientErrorException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">ClientErrorException</span></a>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/ClientErrorException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ClientErrorException</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/BadRequestException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">BadRequestException</span></a>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/BadRequestException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">BadRequestException</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ErrorResponseException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">ErrorResponseException</span></a> (implements io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ErrorResponse.html" title="interface in io.sphere.sdk.errors">ErrorResponse</a>)</li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ReferenceExistsException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">ReferenceExistsException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/ErrorResponseException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ErrorResponseException</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/ErrorResponse.html" title="interface in io.sphere.sdk.models">ErrorResponse</a>)</li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ConcurrentModificationException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">ConcurrentModificationException</span></a></li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/NotFoundException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">NotFoundException</span></a></li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/UnauthorizedException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">UnauthorizedException</span></a>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/ConcurrentModificationException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ConcurrentModificationException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/NotFoundException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">NotFoundException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/UnauthorizedException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">UnauthorizedException</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/InvalidClientCredentialsException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">InvalidClientCredentialsException</span></a></li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/InvalidTokenException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">InvalidTokenException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/InvalidClientCredentialsException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">InvalidClientCredentialsException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/InvalidTokenException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">InvalidTokenException</span></a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ServerErrorException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">ServerErrorException</span></a>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/ServerErrorException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ServerErrorException</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/BadGatewayException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">BadGatewayException</span></a></li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/GatewayTimeoutException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">GatewayTimeoutException</span></a></li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/InternalServerErrorException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">InternalServerErrorException</span></a></li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ServiceUnavailableException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">ServiceUnavailableException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/BadGatewayException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">BadGatewayException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/GatewayTimeoutException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">GatewayTimeoutException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/InternalServerErrorException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">InternalServerErrorException</span></a></li>
+<li type="circle">io.sphere.sdk.client.<a href="io/sphere/sdk/client/ServiceUnavailableException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ServiceUnavailableException</span></a></li>
 </ul>
 </li>
 </ul>
@@ -927,7 +924,7 @@
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers"><span class="typeNameLink">CustomerSignInResult</span></a></li>
-<li type="circle">io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ErrorResponse.html" title="interface in io.sphere.sdk.errors"><span class="typeNameLink">ErrorResponse</span></a></li>
+<li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/ErrorResponse.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">ErrorResponse</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ExpansionPath</span></a>&lt;I&gt;</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">FacetExpression</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetResult.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">FacetResult</span></a></li>

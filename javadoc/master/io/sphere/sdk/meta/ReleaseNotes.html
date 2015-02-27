@@ -119,7 +119,7 @@ extends java.lang.Object</pre>
  <li class=new-in-release>Added Typesafe Activator files, so you can edit the SDK on UNIX with <code>./activator ui</code> or on Windows with <code>activator ui</code>.</li>
  <li class=new-in-release>Added io.sphere.sdk.client.ConcurrentModificationException which is thrown when an <a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><code>UpdateCommand</code></a> fails because of concurrent usage.</li>
  <li class=new-in-release>Added io.sphere.sdk.client.ReferenceExistsException which is thrown when executing a <a href="../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands"><code>DeleteCommand</code></a> and the resource is referenced by another resource and cannot be deleted before deleting the other resource.</li>
- <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/queries/InvalidQueryOffsetException.html" title="class in io.sphere.sdk.queries"><code>InvalidQueryOffsetException</code></a> which is thrown if offset is
+ <li class=new-in-release>Added io.sphere.sdk.queries.InvalidQueryOffsetException which is thrown if offset is
  not between <a href="../../../../io/sphere/sdk/queries/Query.html#MIN_OFFSET">0</a> and <a href="../../../../io/sphere/sdk/queries/Query.html#MAX_OFFSET">100000</a>..</li>
  <li class=new-in-release>Improved on different location the structure of interfaces so important methods are highlighted bold in the IDE.</li>
  <li class=new-in-release>JSON mapping errors are better logged.</li>
