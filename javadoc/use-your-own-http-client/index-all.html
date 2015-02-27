@@ -394,6 +394,8 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/errors/BadGatewayException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">BadGatewayException</span></a> - Exception in <a href="io/sphere/sdk/errors/package-summary.html">io.sphere.sdk.errors</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/BadGatewayException.html#BadGatewayException-java.lang.String-">BadGatewayException(String)</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/BadGatewayException.html" title="class in io.sphere.sdk.errors">BadGatewayException</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/BadGatewayException.html#BadGatewayException--">BadGatewayException()</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/BadGatewayException.html" title="class in io.sphere.sdk.errors">BadGatewayException</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/errors/BadRequestException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">BadRequestException</span></a> - Exception in <a href="io/sphere/sdk/errors/package-summary.html">io.sphere.sdk.errors</a></dt>
@@ -1362,8 +1364,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/errors/ErrorResponseException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">ErrorResponseException</span></a> - Exception in <a href="io/sphere/sdk/errors/package-summary.html">io.sphere.sdk.errors</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ErrorResponseException.html#ErrorResponseException-io.sphere.sdk.errors.ErrorResponse-">ErrorResponseException(ErrorResponse)</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ErrorResponseException.html" title="class in io.sphere.sdk.errors">ErrorResponseException</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#escape-java.lang.String-">escape(String)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
 <dd>
 <div class="block">Escapes Strings like that (Scala notation) """query by name " test name"""</div>
@@ -1497,6 +1497,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <div class="block">This error might occur on long running processes
  such as deletion of resources with connections to other resources.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/GatewayTimeoutException.html#GatewayTimeoutException-java.lang.String-">GatewayTimeoutException(String)</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/GatewayTimeoutException.html" title="class in io.sphere.sdk.errors">GatewayTimeoutException</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/GatewayTimeoutException.html#GatewayTimeoutException--">GatewayTimeoutException()</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/GatewayTimeoutException.html" title="class in io.sphere.sdk.errors">GatewayTimeoutException</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html#get--">get()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client">SphereAccessTokenSupplier</a></dt>
@@ -2130,7 +2132,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ErrorResponse.html#getMessage--">getMessage()</a></span> - Method in interface io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ErrorResponse.html" title="interface in io.sphere.sdk.errors">ErrorResponse</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ErrorResponseException.html#getMessage--">getMessage()</a></span> - Method in exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ErrorResponseException.html" title="class in io.sphere.sdk.errors">ErrorResponseException</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">The message of the first error, for convenience.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/SphereError.html#getMessage--">getMessage()</a></span> - Method in class io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/SphereError.html" title="class in io.sphere.sdk.errors">SphereError</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/SphereException.html#getMessage--">getMessage()</a></span> - Method in exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/SphereException.html" title="class in io.sphere.sdk.errors">SphereException</a></dt>
@@ -2558,6 +2562,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Location.html#getState--">getState()</a></span> - Method in class io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Location.html" title="class in io.sphere.sdk.zones">Location</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ErrorResponse.html#getStatusCode--">getStatusCode()</a></span> - Method in interface io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ErrorResponse.html" title="interface in io.sphere.sdk.errors">ErrorResponse</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ErrorResponseException.html#getStatusCode--">getStatusCode()</a></span> - Method in exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ErrorResponseException.html" title="class in io.sphere.sdk.errors">ErrorResponseException</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/SphereServiceException.html#getStatusCode--">getStatusCode()</a></span> - Method in exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/SphereServiceException.html" title="class in io.sphere.sdk.errors">SphereServiceException</a></dt>
 <dd>&nbsp;</dd>
@@ -3033,6 +3039,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/errors/InternalServerErrorException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">InternalServerErrorException</span></a> - Exception in <a href="io/sphere/sdk/errors/package-summary.html">io.sphere.sdk.errors</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/InternalServerErrorException.html#InternalServerErrorException-java.lang.String-">InternalServerErrorException(String)</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/InternalServerErrorException.html" title="class in io.sphere.sdk.errors">InternalServerErrorException</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/InternalServerErrorException.html#InternalServerErrorException--">InternalServerErrorException()</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/InternalServerErrorException.html" title="class in io.sphere.sdk.errors">InternalServerErrorException</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/errors/InvalidClientCredentialsException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">InvalidClientCredentialsException</span></a> - Exception in <a href="io/sphere/sdk/errors/package-summary.html">io.sphere.sdk.errors</a></dt>
@@ -3394,9 +3402,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/ListUtils.html#join-java.util.List-">join(List&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/ListUtils.html" title="class in io.sphere.sdk.utils">ListUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">JsonEndpoint</span></a>&lt;<a href="io/sphere/sdk/client/JsonEndpoint.html" title="type parameter in JsonEndpoint">T</a>&gt; - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>
-<div class="block">TODO give a good name</div>
-</dd>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/errors/JsonException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">JsonException</span></a> - Exception in <a href="io/sphere/sdk/errors/package-summary.html">io.sphere.sdk.errors</a></dt>
 <dd>
 <div class="block">Exception concerning JSON.</div>
@@ -4013,13 +4019,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ErrorResponse.html#of-int-java.lang.String-java.util.List-">of(int, String, List&lt;SphereError&gt;)</a></span> - Static method in interface io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ErrorResponse.html" title="interface in io.sphere.sdk.errors">ErrorResponse</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/InvalidJsonInputError.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in class io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/InvalidJsonInputError.html" title="class in io.sphere.sdk.errors">InvalidJsonInputError</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/SphereError.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in class io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/SphereError.html" title="class in io.sphere.sdk.errors">SphereError</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/SphereErrorResponseToExceptionMapper.html#of--">of()</a></span> - Static method in class io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/SphereErrorResponseToExceptionMapper.html" title="class in io.sphere.sdk.errors">SphereErrorResponseToExceptionMapper</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FileHttpRequestBody.html#of-java.io.File-">of(File)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FileHttpRequestBody.html" title="class in io.sphere.sdk.http">FileHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
@@ -5417,6 +5419,8 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 <dd>
 <div class="block">SPHERE.IO answered with a HTTP response code of &gt;= 500.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ServerErrorException.html#ServerErrorException-java.lang.String-int-">ServerErrorException(String, int)</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ServerErrorException.html" title="class in io.sphere.sdk.errors">ServerErrorException</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ServerErrorException.html#ServerErrorException-int-">ServerErrorException(int)</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ServerErrorException.html" title="class in io.sphere.sdk.errors">ServerErrorException</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpStatusCode.html#Service_Unavailable_503">Service_Unavailable_503</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpStatusCode.html" title="class in io.sphere.sdk.http">HttpStatusCode</a></dt>
@@ -5425,6 +5429,8 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 <dd>
 <div class="block">The SPHERE.IO API is currently not available.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ServiceUnavailableException.html#ServiceUnavailableException-java.lang.String-">ServiceUnavailableException(String)</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ServiceUnavailableException.html" title="class in io.sphere.sdk.errors">ServiceUnavailableException</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ServiceUnavailableException.html#ServiceUnavailableException--">ServiceUnavailableException()</a></span> - Constructor for exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ServiceUnavailableException.html" title="class in io.sphere.sdk.errors">ServiceUnavailableException</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetAttribute</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
@@ -5765,8 +5771,6 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/SphereError.html#SphereError-java.lang.String-java.lang.String-">SphereError(String, String)</a></span> - Constructor for class io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/SphereError.html" title="class in io.sphere.sdk.errors">SphereError</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/errors/SphereErrorResponseToExceptionMapper.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">SphereErrorResponseToExceptionMapper</span></a> - Class in <a href="io/sphere/sdk/errors/package-summary.html">io.sphere.sdk.errors</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/errors/SphereException.html" title="class in io.sphere.sdk.errors"><span class="typeNameLink">SphereException</span></a> - Exception in <a href="io/sphere/sdk/errors/package-summary.html">io.sphere.sdk.errors</a></dt>
 <dd>
 <div class="block"><span id="exception-summary">Base class for all exceptions related to the SDK.</span></div>
@@ -5973,8 +5977,6 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html#to-io.sphere.sdk.models.Referenceable-">to(Referenceable&lt;TaxCategory&gt;)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/SphereErrorResponseToExceptionMapper.html#toException-io.sphere.sdk.errors.ErrorResponse-">toException(ErrorResponse)</a></span> - Method in class io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/SphereErrorResponseToExceptionMapper.html" title="class in io.sphere.sdk.errors">SphereErrorResponseToExceptionMapper</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html#toFalse--">toFalse()</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeIsDefault</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpRequestIntent.html#toHttpRequest-java.lang.String-">toHttpRequest(String)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></dt>
@@ -6177,7 +6179,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ErrorResponse.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ErrorResponse.html" title="interface in io.sphere.sdk.errors">ErrorResponse</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/errors/ErrorResponseException.html#typeReference--">typeReference()</a></span> - Static method in exception io.sphere.sdk.errors.<a href="io/sphere/sdk/errors/ErrorResponseException.html" title="class in io.sphere.sdk.errors">ErrorResponseException</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedEnumValue.html#typeReference--">typeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models">LocalizedEnumValue</a></dt>
 <dd>&nbsp;</dd>
