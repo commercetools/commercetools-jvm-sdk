@@ -8,7 +8,7 @@ import io.sphere.sdk.errors.ErrorResponseException;
 import io.sphere.sdk.errors.SphereException;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 
 import java.util.Optional;
 import java.util.function.Function;

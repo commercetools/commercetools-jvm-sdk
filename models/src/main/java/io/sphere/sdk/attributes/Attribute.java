@@ -2,7 +2,7 @@ package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 
 @JsonDeserialize(as = AttributeImpl.class)
 public interface Attribute {

@@ -6,7 +6,7 @@ import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerToken;
 import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 

@@ -5,7 +5,7 @@ import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.projects.Project;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 
 import java.util.function.Function;
 

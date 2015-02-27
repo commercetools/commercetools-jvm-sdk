@@ -7,7 +7,7 @@ import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeDefinition;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.attributes.AttributeMappingException;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 import org.junit.Test;
 
 import java.util.*;

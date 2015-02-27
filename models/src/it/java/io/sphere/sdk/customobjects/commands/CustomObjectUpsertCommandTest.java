@@ -10,7 +10,7 @@ import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.*;
 import io.sphere.sdk.errors.ConcurrentModificationException;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 

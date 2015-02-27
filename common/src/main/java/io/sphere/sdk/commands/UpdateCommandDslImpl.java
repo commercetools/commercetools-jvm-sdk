@@ -8,7 +8,7 @@ import io.sphere.sdk.http.HttpMethod;
 
 import java.util.List;
 
-import static io.sphere.sdk.utils.JsonUtils.toJson;
+import static io.sphere.sdk.json.JsonUtils.toJson;
 
 /**
  * Base class to implement commands that change one entity in SPHERE.IO.

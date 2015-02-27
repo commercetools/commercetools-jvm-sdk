@@ -1,5 +1,6 @@
-package io.sphere.sdk.errors;
+package io.sphere.sdk.json;
 
+import io.sphere.sdk.errors.SphereException;
 import io.sphere.sdk.http.HttpResponse;
 
 /**
@@ -20,6 +21,6 @@ public class JsonException extends SphereException {
     }
 
     public JsonException(final HttpResponse httpResponse) {
-        //TODO
+        super(httpResponse.toString());
     }
 }
