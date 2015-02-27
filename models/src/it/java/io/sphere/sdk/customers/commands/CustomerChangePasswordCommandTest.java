@@ -1,7 +1,9 @@
 package io.sphere.sdk.customers.commands;
 
+import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerSignInResult;
+import io.sphere.sdk.customers.InvalidCredentials;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -29,13 +31,8 @@ public class CustomerChangePasswordCommandTest extends IntegrationTest {
             try {
                 execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword, Optional.empty()));
                 fail();
-            } catch (final Exception e) {
-                fail();//todo
-
-                final boolean causeIsOk = false;
-                if (!causeIsOk) {
-                    throw e;
-                }
+            } catch (final ErrorResponseException e) {
+                assertThat(e.hasErrorCode(InvalidCredentials.CODE)).isTrue();
             }
         });
     }

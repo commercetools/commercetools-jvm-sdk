@@ -35,7 +35,7 @@ public class ErrorResponseException extends BadRequestException implements Error
      */
     @Override
     public String getMessage() {
-        return message;
+        return message + " errors: " + errors;
     }
 
     @Override
