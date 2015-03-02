@@ -84,8 +84,8 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public void localizedStringsAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofLocalizedStrings(), AttributeAccess.ofLocalizedStringsSet(),
                 asSet(LocalizedStrings.of(ENGLISH, "hello"), LocalizedStrings.of(ENGLISH, "world")),
-                new LocalizedTextType(),
-                AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, new LocalizedTextType()).inputHint(TEXT_INPUT_HINT).build());
+                new LocalizedStringsType(),
+                AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, new LocalizedStringsType()).inputHint(TEXT_INPUT_HINT).build());
     }
 
     @Test
@@ -230,7 +230,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void createLocalizedTextAttribute() throws Exception {
-        executeTest(LocalizedTextType.class, AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, new LocalizedTextType()).
+        executeTest(LocalizedStringsType.class, AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, new LocalizedStringsType()).
                 inputHint(TEXT_INPUT_HINT).
                 attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).

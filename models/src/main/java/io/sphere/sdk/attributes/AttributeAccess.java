@@ -58,7 +58,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<LocalizedStrings> ofLocalizedStrings() {
-        return ofPrimitive(LocalizedStrings.typeReference(), LocalizedTextType.class);
+        return ofPrimitive(LocalizedStrings.typeReference(), LocalizedStringsType.class);
     }
 
     public static AttributeAccess<Set<LocalizedStrings>> ofLocalizedStringsSet() {
