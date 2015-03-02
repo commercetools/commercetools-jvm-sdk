@@ -2,13 +2,41 @@ package io.sphere.sdk.meta;
 
 /**
  <h3>Legend</h3>
- <ul><li class=removed-in-release>removed functionality</li>
+ <ul>
+ <li class=removed-in-release>removed functionality</li>
  <li class=new-in-release>added functionality</li>
  <li class=change-in-release>breaking change</li>
  <li class=fixed-in-release>bugfix, can include a breaking change</li>
  </ul>
 
- <h3 class=released-version>1.0.0-M10</h3>
+ <h3 class=released-version id=v1_0_0_M11>1.0.0-M11</h3>
+ <h4>Overall</h4>
+ <ul>
+    <li class=new-in-release>Code examples contain a link to the GitHub soruce code documents.</li>
+    <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereRequestDecorator} to decorate {@link io.sphere.sdk.client.SphereRequest}s.</li>
+    <li class=new-in-release>Module java-client-apache-async contains an adapter to use the Apache client instead of the current default client ning.</li>
+    <li class=new-in-release>{@link io.sphere.sdk.client.QueueSphereClientDecorator} enables to limit the amount of current requests to SPHERE.IO with a task queue.</li>
+    <li class=new-in-release>{@link io.sphere.sdk.client.NingHttpClientAdapter} enables use a custom underlying ning HTTP client for settings like proxies.</li>
+    <li class=new-in-release>{@link io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a startpoint to create access token suppliers for one toke (either fetched from SPHERE.IO or as String) or auto refreshing for online shops..</li>
+    <li class=change-in-release>{@link io.sphere.sdk.meta.ExceptionDocumentation Exception hierarchy}, relocated some exceptions and deleted some.</li>
+    <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.http.HttpRequest} has changed tasks and structure, now it contains the full information for a HTTP request whereas now {@link io.sphere.sdk.client.HttpRequestIntent} is an element to describe an endpoint of sphere project independent.</li>
+    <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.client.JsonEndpoint} moved to the client package</li>
+    <li class=change-in-release>JsonParseException is now {@link io.sphere.sdk.json.JsonException}.</li>
+    <li class=removed-in-release>Removed ReferenceExistsException (now a {@link io.sphere.sdk.models.SphereError}), SphereBackendException, SphereClientException, JavaConcurrentUtils, Requestable, InvalidQueryOffsetException (now {@link java.lang.IllegalArgumentException}.</li>
+    <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/264">#264</a>.</li>
+ </ul>
+
+ <h4>States</h4>
+ <ul>
+    <li class=new-in-release>{@link io.sphere.sdk.states.State} models, creation and deletion contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
+ </ul>
+
+ <h4>Products</h4>
+ <ul>
+ <li class=new-in-release>Added update actions: {@link io.sphere.sdk.products.commands.updateactions.AddVariant}, {@link io.sphere.sdk.products.commands.updateactions.RemoveFromCategory}, {@link io.sphere.sdk.products.commands.updateactions.RemoveVariant}, {@link io.sphere.sdk.products.commands.updateactions.RevertStagedChanges}, {@link io.sphere.sdk.products.commands.updateactions.SetAttribute}, {@link io.sphere.sdk.products.commands.updateactions.SetAttributeInAllVariants}, {@link io.sphere.sdk.products.commands.updateactions.SetSearchKeywords}</li>
+ </ul>
+
+ <h3 class=released-version id=v1_0_0_M10>1.0.0-M10</h3>
  <ul>
  <li class=new-in-release>Added {@link io.sphere.sdk.customobjects.CustomObject} models and endpoints. There is also a {@link io.sphere.sdk.meta.CustomObjectDocumentation tutorial for custom objects}.</li>
  <li class=new-in-release>Added the {@link io.sphere.sdk.zones.Zone} models and endpoints.</li>
@@ -42,7 +70,7 @@ package io.sphere.sdk.meta;
 
  <li class=change-in-release>Product variants are all of type int, was int and long before.</li>
  <li class=change-in-release>{@link io.sphere.sdk.models.Reference} is not instantiated with new.</li>
- <li class=change-in-release>{@link io.sphere.sdk.utils.UrlQueryBuilder} is not instantiated with new.</li>
+ <li class=change-in-release>{@link io.sphere.sdk.http.UrlQueryBuilder} is not instantiated with new.</li>
  <li class=change-in-release>io.sphere.sdk.client.SphereErrorResponse is not instantiated with new.</li>
  <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@link io.sphere.sdk.client.SphereRequestBase}. </li>
  <li class=change-in-release>{@code ClientRequest} has been renamed to {@link io.sphere.sdk.client.SphereRequest} and therefore {@code ClientRequestBase} to {@link io.sphere.sdk.client.SphereRequestBase}. </li>

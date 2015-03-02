@@ -1,4 +1,4 @@
-package io.sphere.sdk.utils;
+package io.sphere.sdk.http;
 
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;

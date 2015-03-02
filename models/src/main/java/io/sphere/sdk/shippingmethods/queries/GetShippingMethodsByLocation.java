@@ -7,7 +7,7 @@ import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
-import io.sphere.sdk.utils.UrlQueryBuilder;
+import io.sphere.sdk.http.UrlQueryBuilder;
 
 import javax.money.CurrencyUnit;
 import java.util.List;

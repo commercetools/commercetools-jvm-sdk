@@ -3,7 +3,7 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.queries.FetchByIdImpl;
-import io.sphere.sdk.utils.UrlQueryBuilder;
+import io.sphere.sdk.http.UrlQueryBuilder;
 
 public class ProductProjectionFetchById extends FetchByIdImpl<ProductProjection> {
     private final ProductProjectionType projectionType;

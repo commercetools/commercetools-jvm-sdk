@@ -1,9 +1,9 @@
-package io.sphere.sdk.utils;
+package io.sphere.sdk.http;
 
 import java.util.LinkedList;
 import java.util.List;
 
-import static io.sphere.sdk.utils.UrlUtils.urlEncode;
+import static io.sphere.sdk.http.UrlUtils.urlEncode;
 import static java.util.stream.Collectors.joining;
 
 public class UrlQueryBuilder {

@@ -3,7 +3,7 @@ package io.sphere.sdk.customers.queries;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerToken;
 import io.sphere.sdk.queries.FetchImpl;
-import io.sphere.sdk.utils.UrlQueryBuilder;
+import io.sphere.sdk.http.UrlQueryBuilder;
 
 import static io.sphere.sdk.customers.queries.CustomersEndpoint.ENDPOINT;
 

@@ -16,8 +16,7 @@ import static io.sphere.sdk.client.CompletableFutureUtils.*;
  *
  * {@include.example example.JavaClientInstantiationExample}
  */
-public class
-        SphereClientFactory extends Base {
+public class SphereClientFactory extends Base {
     private SphereClientFactory() {
     }
 

@@ -5,7 +5,7 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.*;
-import io.sphere.sdk.utils.UrlQueryBuilder;
+import io.sphere.sdk.http.UrlQueryBuilder;
 
 import java.util.Optional;
 import java.util.function.Function;

@@ -12,7 +12,7 @@ import io.sphere.sdk.json.JsonUtils;
 
 import java.util.Locale;
 
-import static io.sphere.sdk.utils.UrlUtils.urlEncode;
+import static io.sphere.sdk.http.UrlUtils.urlEncode;
 
 /**
  * This is an example of hard coding queries without using helper classes.

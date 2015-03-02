@@ -11,7 +11,7 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.utils.UrlQueryBuilder;
+import io.sphere.sdk.http.UrlQueryBuilder;
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;

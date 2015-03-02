@@ -88,7 +88,7 @@ public abstract class IntegrationTest {
             client.close();
             client = null;
             final int threadsNow = countThreads();
-            final long bufferForGcThreadAndSbt = 1;
+            final long bufferForGcThreadAndSbt = 3;
             final long allowedThreadCount = threadCountAtStart + bufferForGcThreadAndSbt;
             if (threadsNow > allowedThreadCount) {
                 throw new RuntimeException("Thread leak! After client shutdown created threads are still alive. Threads now: " + threadsNow + " Threads before: " + threadCountAtStart);

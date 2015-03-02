@@ -4,7 +4,7 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.queries.FetchImpl;
-import io.sphere.sdk.utils.UrlQueryBuilder;
+import io.sphere.sdk.http.UrlQueryBuilder;
 
 public class CartFetchByCustomerId extends FetchImpl<Cart> {
     private final String customerId;
