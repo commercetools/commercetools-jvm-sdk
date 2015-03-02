@@ -90,7 +90,7 @@
     final Customer updatedCustomer = execute(CustomerChangePasswordCommand.of(customer, oldPassword, newPassword));
     assertThat(customer.getPassword()).isNotEqualTo(updatedCustomer.getPassword());
     final CustomerSignInResult signInResult =
-            execute(CustomerSignInCommand.of(customer.getEmail(), newPassword, Optional.empty()));
+            execute(CustomerSignInCommand.of(customer.getEmail(), newPassword));
     assertThat(signInResult.getCustomer().hasSameIdAs(updatedCustomer))
             .overridingErrorMessage("sign in works with new password")
             .isTrue();
@@ -98,7 +98,7 @@
         execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword, Optional.empty()));
         fail();
     } catch (final ErrorResponseException e) {
-        assertThat(e.hasErrorCode(InvalidCredentials.CODE)).isTrue();
+        assertThat(e.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();
     }
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerChangePasswordCommandTest.java" target="_blank">test code</a>.</pre></div></div>

@@ -416,7 +416,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/BooleanType.html#BooleanType--">BooleanType()</a></span> - Constructor for class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/BooleanType.html" title="class in io.sphere.sdk.attributes">BooleanType</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/TypeReferences.html#booleanTypeReference--">booleanTypeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models">TypeReferences</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#booleanTypeReference--">booleanTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/BooleanAttributeDefinitionBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/BooleanAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">BooleanAttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -859,7 +859,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/InvalidJsonInputError.html#CODE">CODE</a></span> - Static variable in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/InvalidJsonInputError.html" title="class in io.sphere.sdk.client">InvalidJsonInputError</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/InvalidCredentials.html#CODE">CODE</a></span> - Static variable in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/InvalidCredentials.html" title="class in io.sphere.sdk.customers">InvalidCredentials</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerInvalidCredentials.html#CODE">CODE</a></span> - Static variable in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerInvalidCredentials.html" title="class in io.sphere.sdk.customers">CustomerInvalidCredentials</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/Attribute.html#collect-io.sphere.sdk.attributes.AttributeDefinition-">collect(AttributeDefinition)</a></span> - Method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a></dt>
 <dd>&nbsp;</dd>
@@ -1000,7 +1000,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     final Customer updatedCustomer = execute(CustomerChangePasswordCommand.of(customer, oldPassword, newPassword));
     assertThat(customer.getPassword()).isNotEqualTo(updatedCustomer.getPassword());
     final CustomerSignInResult signInResult =
-            execute(CustomerSignInCommand.of(customer.getEmail(), newPassword, Optional.empty()));
+            execute(CustomerSignInCommand.of(customer.getEmail(), newPassword));
     assertThat(signInResult.getCustomer().hasSameIdAs(updatedCustomer))
             .overridingErrorMessage("sign in works with new password")
             .isTrue();
@@ -1008,7 +1008,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
         execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword, Optional.empty()));
         fail();
     } catch (final ErrorResponseException e) {
-        assertThat(e.hasErrorCode(InvalidCredentials.CODE)).isTrue();
+        assertThat(e.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();
     }
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerChangePasswordCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -1078,6 +1078,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#customerId-java.lang.String-">customerId(String)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#customerId--">customerId()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/customers/CustomerInvalidCredentials.html" title="class in io.sphere.sdk.customers"><span class="typeNameLink">CustomerInvalidCredentials</span></a> - Class in <a href="io/sphere/sdk/customers/package-summary.html">io.sphere.sdk.customers</a></dt>
+<dd>
+<div class="block">A customer endpoint specific error, the account with the given credentials have not been found.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerInvalidCredentials.html#CustomerInvalidCredentials-java.lang.String-">CustomerInvalidCredentials(String)</a></span> - Constructor for class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerInvalidCredentials.html" title="class in io.sphere.sdk.customers">CustomerInvalidCredentials</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers"><span class="typeNameLink">CustomerName</span></a> - Class in <a href="io/sphere/sdk/customers/package-summary.html">io.sphere.sdk.customers</a></dt>
 <dd>&nbsp;</dd>
@@ -1301,7 +1307,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">This page describes for developers the necessary steps to document the API.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/TypeReferences.html#doubleTypeReference--">doubleTypeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models">TypeReferences</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#doubleTypeReference--">doubleTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a name="I:E">
@@ -1383,7 +1389,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/meta/ExceptionDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">ExceptionDocumentation</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
-<div class="block"><img src="./documentation-resources/images/uml/exception-hierarchy.svg" alt="visualization of the exception hierarchy"></div>
+<div class="block">The exception hierarchy documentation.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/QueueSphereClientDecorator.html#execute-io.sphere.sdk.client.SphereRequest-">execute(SphereRequest&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client">QueueSphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
@@ -3070,7 +3076,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraftBuilder.html#initial-boolean-">initial(boolean)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/TypeReferences.html#instantTypeReference--">instantTypeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models">TypeReferences</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#instantTypeReference--">instantTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/annotations/Internal.html" title="annotation in io.sphere.sdk.annotations"><span class="typeNameLink">Internal</span></a> - Annotation Type in <a href="io/sphere/sdk/annotations/package-summary.html">io.sphere.sdk.annotations</a></dt>
 <dd>
@@ -3088,12 +3094,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/InvalidClientCredentialsException.html#InvalidClientCredentialsException-io.sphere.sdk.client.SphereAuthConfig-">InvalidClientCredentialsException(SphereAuthConfig)</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/InvalidClientCredentialsException.html" title="class in io.sphere.sdk.client">InvalidClientCredentialsException</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/customers/InvalidCredentials.html" title="class in io.sphere.sdk.customers"><span class="typeNameLink">InvalidCredentials</span></a> - Class in <a href="io/sphere/sdk/customers/package-summary.html">io.sphere.sdk.customers</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/InvalidCredentials.html#InvalidCredentials-java.lang.String-">InvalidCredentials(String)</a></span> - Constructor for class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/InvalidCredentials.html" title="class in io.sphere.sdk.customers">InvalidCredentials</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/InvalidJsonInputError.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">InvalidJsonInputError</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Invalid JSON was sent to SPHERE.IO.</div>
+</dd>
 <dt><a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">InvalidQueryOffsetException</span></a> - Exception in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html#InvalidQueryOffsetException-long-">InvalidQueryOffsetException(long)</a></span> - Constructor for exception io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/InvalidQueryOffsetException.html" title="class in io.sphere.sdk.queries">InvalidQueryOffsetException</a></dt>
@@ -3544,7 +3548,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/utils/ListUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">ListUtils</span></a> - Class in <a href="io/sphere/sdk/utils/package-summary.html">io.sphere.sdk.utils</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/TypeReferences.html#localDateTypeReference--">localDateTypeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models">TypeReferences</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#localDateTypeReference--">localDateTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/utils/LocaleUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">LocaleUtils</span></a> - Class in <a href="io/sphere/sdk/utils/package-summary.html">io.sphere.sdk.utils</a></dt>
 <dd>&nbsp;</dd>
@@ -3582,7 +3586,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/LocalizedStringsType.html#LocalizedStringsType--">LocalizedStringsType()</a></span> - Constructor for class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/LocalizedStringsType.html" title="class in io.sphere.sdk.attributes">LocalizedStringsType</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/TypeReferences.html#localTimeTypeReference--">localTimeTypeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models">TypeReferences</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#localTimeTypeReference--">localTimeTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/Location.html" title="class in io.sphere.sdk.zones"><span class="typeNameLink">Location</span></a> - Class in <a href="io/sphere/sdk/zones/package-summary.html">io.sphere.sdk.zones</a></dt>
 <dd>
@@ -3596,7 +3600,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#LocationsSetQueryModel-java.util.Optional-java.lang.String-">LocationsSetQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, String)</a></span> - Constructor for class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/TypeReferences.html#longTypeReference--">longTypeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models">TypeReferences</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#longTypeReference--">longTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a name="I:M">
@@ -3686,7 +3690,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/TypeReferences.html#monetaryAmountTypeReference--">monetaryAmountTypeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models">TypeReferences</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#monetaryAmountTypeReference--">monetaryAmountTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/MoneyAttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">MoneyAttributeDefinition</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
@@ -4025,6 +4029,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.customers.CustomerToken-java.lang.String-">of(Versioned&lt;Customer&gt;, CustomerToken, String)</a></span> - Static method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html#of-io.sphere.sdk.models.Versioned-java.lang.String-java.lang.String-">of(Versioned&lt;Customer&gt;, String, String)</a></span> - Static method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html#of-java.lang.String-java.lang.String-java.lang.String-">of(String, String, String)</a></span> - Static method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html#of-java.lang.String-java.lang.String-java.util.Optional-">of(String, String, Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></dt>
 <dd>&nbsp;</dd>
@@ -6013,7 +6021,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#StringQuerySortingModel-java.util.Optional-java.lang.String-">StringQuerySortingModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, String)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/TypeReferences.html#stringTypeReference--">stringTypeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models">TypeReferences</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#stringTypeReference--">stringTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#stripTrailingZeros--">stripTrailingZeros()</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -6367,7 +6375,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Zone.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/models/TypeReferences.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">TypeReferences</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
+<dt><a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json"><span class="typeNameLink">TypeReferences</span></a> - Class in <a href="io/sphere/sdk/json/package-summary.html">io.sphere.sdk.json</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/meta/TypicalTrapsDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">TypicalTrapsDocumentation</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
