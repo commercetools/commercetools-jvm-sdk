@@ -32,6 +32,7 @@ package io.sphere.sdk.meta;
     </li>
     <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.http.HttpRequest} has changed tasks and structure, now it contains the full information for a HTTP request whereas now {@link io.sphere.sdk.client.HttpRequestIntent} is an element to describe an endpoint of sphere project independent.</li>
     <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.client.JsonEndpoint} moved to the client package</li>
+    <li class=change-in-release>{@link io.sphere.sdk.queries.Fetch} class names end now with Fetch for consistency, so for example {@code CartFetchById} is now {@link io.sphere.sdk.carts.queries.CartByIdFetch}.</li>
     <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/264">#264</a>.</li>
  </ul>
 
