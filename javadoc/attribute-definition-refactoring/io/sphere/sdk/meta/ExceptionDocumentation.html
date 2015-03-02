@@ -104,9 +104,64 @@
 <br>
 <pre>public final class <span class="typeNameLabel">ExceptionDocumentation</span>
 extends java.lang.Object</pre>
-<div class="block"><img src="../../../../documentation-resources/images/uml/exception-hierarchy.svg" alt="visualization of the exception hierarchy">
+<div class="block">The exception hierarchy documentation.
 
- <p>Open the <a href="../../../../documentation-resources/images/uml/exception-hierarchy.svg" target="_blank">exception hierarchy image in a new tab</a>.</p></div>
+ <h3>Exceptions</h3>
+
+ <img src="../../../../documentation-resources/images/uml/exception-hierarchy.svg" alt="visualization of the exception hierarchy">
+
+ <p>Open the <a href="../../../../documentation-resources/images/uml/exception-hierarchy.svg" target="_blank">exception hierarchy image in a new tab</a>.</p>
+
+ The JVM SDK makes use of exceptions of the Java JDK, such as <code>IllegalArgumentException</code>, and provides own exceptions which all inherit from <a href="../../../../io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models"><code>SphereException</code></a>.
+
+ <p>Problems concerning the <a href="../../../../io/sphere/sdk/http/HttpClient.html" title="interface in io.sphere.sdk.http"><code>HttpClient</code></a> throw a <a href="../../../../io/sphere/sdk/http/HttpException.html" title="class in io.sphere.sdk.http"><code>HttpException</code></a>.</p>
+
+ <p>JSON serializing and deserializing problems throw <a href="../../../../io/sphere/sdk/json/JsonException.html" title="class in io.sphere.sdk.json"><code>JsonException</code></a>.</p>
+
+ <p><a href="../../../../io/sphere/sdk/client/SphereServiceException.html" title="class in io.sphere.sdk.client"><code>SphereServiceException</code></a> is a base exception for all error responses from SPHERE.IO (HTTP status code <code>&gt;= 400</code>).</p>
+
+ <p><a href="../../../../io/sphere/sdk/client/ClientErrorException.html" title="class in io.sphere.sdk.client"><code>ClientErrorException</code></a> expresses errors which may can be recovered by the client side (HTTP status code <code>&gt;= 400 and &lt; 500</code>).
+ <a href="../../../../io/sphere/sdk/client/ServerErrorException.html" title="class in io.sphere.sdk.client"><code>ServerErrorException</code></a> is for server errors.</p>
+
+ <h3>Errors</h3>
+
+ If a command cannot be performed due to unfulfilled preconditions
+ SPHERE.IO can return one error response with multiple errors (<a href="http://dev.sphere.io/http-api-errors.html">listing of error codes</a>).
+ The JVM SDK will then put a <a href="../../../../io/sphere/sdk/client/ErrorResponseException.html" title="class in io.sphere.sdk.client"><code>ErrorResponseException</code></a> into a <code>CompletableFuture</code>.
+
+ The following example shows how to distinguish errors by error code:
+ <div id="io-sphere-sdk-customers-commands-CustomerChangePasswordCommandTest-demo--%s" class=code-example><pre><code class='java'>final String wrongPassword = "wrong password";
+final CustomerSignInCommand signInCommand = CustomerSignInCommand.of(email, wrongPassword);
+final CompletableFuture&lt;CustomerSignInResult&gt; future = client.execute(signInCommand);
+future.whenCompleteAsync((signInResult, exception) -&gt; {
+    if (signInResult != null) {
+        println("Signing worked");
+    } else if (exception instanceof ErrorResponseException) {
+        final ErrorResponseException errorResponseException = (ErrorResponseException) exception;
+        final String code = CustomerInvalidCredentials.CODE;
+        if (errorResponseException.hasErrorCode(code)) {
+            println("customer has invalid credentials");
+        }
+    }
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerChangePasswordCommandTest.java" target="_blank">test code</a>.</pre></div>
+
+ Some errors can contain extra information like <a href="../../../../io/sphere/sdk/client/InvalidJsonInputError.html" title="class in io.sphere.sdk.client"><code>InvalidJsonInputError</code></a> contains the place where the JSON contains errors:
+
+ <div id="io-sphere-sdk-models-SphereErrorTest-castToConcreteError--%s" class=code-example><pre><code class='java'>final String json = "{\n" +
+        "  \"statusCode\" : 400,\n" +
+        "  \"message\" : \"Request body does not contain valid JSON.\",\n" +
+        "  \"errors\" : [ {\n" +
+        "    \"code\" : \"InvalidJsonInput\",\n" +
+        "    \"message\" : \"Request body does not contain valid JSON.\",\n" +
+        "    \"detailedErrorMessage\" : \"detailed error message\"" +
+        "  } ]\n" +
+        "}";
+final ErrorResponse sphereErrorResponse = JsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
+final Optional&lt;InvalidJsonInputError&gt; jsonError = sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class);
+final Optional&lt;String&gt; detailsOption = jsonError.map(concreteError -&gt; concreteError.getDetailedErrorMessage());
+assertThat(detailsOption.get()).isEqualTo("detailed error message");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/common/src/test/java/io/sphere/sdk/models/SphereErrorTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models"><code>SphereException</code></a></dd>
