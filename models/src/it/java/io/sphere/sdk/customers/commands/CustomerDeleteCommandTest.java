@@ -12,12 +12,12 @@ import java.util.Optional;
 import static io.sphere.sdk.customers.CustomerFixtures.*;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 
-public class CustomerDeleteByIdCommandTest extends IntegrationTest {
+public class CustomerDeleteCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         final CustomerSignInResult result = client().execute(CustomerCreateCommand.of(newCustomerDraft()));
         final Customer customer = result.getCustomer();
-        execute(CustomerDeleteByIdCommand.of(customer));
+        execute(CustomerDeleteCommand.of(customer));
         final Optional<Cart> cartOptional = execute(CartByCustomerIdFetch.of(customer));
         assertThat(cartOptional).isAbsent();
     }

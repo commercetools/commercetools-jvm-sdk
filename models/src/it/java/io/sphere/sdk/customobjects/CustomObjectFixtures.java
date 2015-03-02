@@ -2,8 +2,9 @@ package io.sphere.sdk.customobjects;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
-import io.sphere.sdk.customobjects.commands.CustomObjectDeleteByContainerAndKeyCommand;
+import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.demo.Foo;
 import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -20,7 +21,7 @@ public class CustomObjectFixtures {
     public static void withCustomObject(final TestClient client, final Consumer<CustomObject<Foo>> consumer) {
         final CustomObject<Foo> customObject = createCustomObject(client);
         consumer.accept(customObject);
-        final CustomObjectDeleteByContainerAndKeyCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteByContainerAndKeyCommand.of(customObject, Foo.customObjectTypeReference());
+        final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.customObjectTypeReference());
         client.execute(deleteCommand);
     }
 
@@ -44,7 +45,7 @@ public class CustomObjectFixtures {
     public static void withCustomObject(final TestClient client, final String container, final String key, final Consumer<CustomObject<Foo>> consumer) {
         final CustomObject<Foo> customObject = createCustomObjectOfContainerAndKey(client, container, key);
         consumer.accept(customObject);
-        final CustomObjectDeleteByContainerAndKeyCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteByContainerAndKeyCommand.of(customObject, Foo.customObjectTypeReference());
+        final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.customObjectTypeReference());
         client.execute(deleteCommand);
     }
 
@@ -65,7 +66,7 @@ public class CustomObjectFixtures {
                     if (!item.getContainer().contains(" ") && !item.getKey().contains(" ")) {
                         final TypeReference<CustomObject<Object>> typeReference = new TypeReference<CustomObject<Object>>() {
                         };
-                        final CustomObjectDeleteByContainerAndKeyCommand<CustomObject<Object>> command = CustomObjectDeleteByContainerAndKeyCommand.of(item, typeReference);
+                        final DeleteCommand<CustomObject<Object>> command = CustomObjectDeleteCommand.of(item, typeReference);
                         client.execute(command);
                     }
                 });

@@ -2,7 +2,7 @@ package io.sphere.sdk.customergroups;
 
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.customergroups.commands.CustomerGroupCreateCommand;
-import io.sphere.sdk.customergroups.commands.CustomerGroupDeleteByIdCommand;
+import io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommand;
 import io.sphere.sdk.customergroups.queries.CustomerGroupByIdFetch;
 import io.sphere.sdk.customergroups.queries.CustomerGroupQuery;
 
@@ -16,7 +16,7 @@ public class CustomerGroupFixtures {
         final CustomerGroup customerGroup = client.execute(CustomerGroupCreateCommand.of(name));
         consumer.accept(customerGroup);
         final Optional<CustomerGroup> customerGroupOptional = client.execute(CustomerGroupByIdFetch.of(customerGroup.getId()));
-        customerGroupOptional.ifPresent(group -> client.execute(CustomerGroupDeleteByIdCommand.of(group)));
+        customerGroupOptional.ifPresent(group -> client.execute(CustomerGroupDeleteCommand.of(group)));
     }
 
     public static void withB2cCustomerGroup(final TestClient client, final Consumer<CustomerGroup> consumer) {

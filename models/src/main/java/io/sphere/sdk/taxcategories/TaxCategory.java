@@ -14,7 +14,7 @@ import java.util.Optional;
 <ul>
  <li>Create a tax category with {@link io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand}.</li>
  <li>Query a tax category with {@link io.sphere.sdk.taxcategories.queries.TaxCategoryQuery}.</li>
- <li>Delete a tax category with {@link io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteByIdCommand}.</li>
+ <li>Delete a tax category with {@link io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand}.</li>
  </ul>
 
 

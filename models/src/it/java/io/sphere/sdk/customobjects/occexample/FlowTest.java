@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.commands.Command;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
-import io.sphere.sdk.customobjects.commands.CustomObjectDeleteByContainerAndKeyCommand;
+import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
 import io.sphere.sdk.customobjects.queries.CustomObjectByKeyFetch;
 import io.sphere.sdk.client.ConcurrentModificationException;
@@ -22,7 +22,7 @@ public class FlowTest extends IntegrationTest {
     @Before
     public void setUp() throws Exception {
         final CustomObjectByKeyFetch<JsonNode> fetchByKey = CustomObjectByKeyFetch.of(CONTAINER, KEY);
-        execute(fetchByKey).ifPresent(o -> execute(CustomObjectDeleteByContainerAndKeyCommand.of(o)));
+        execute(fetchByKey).ifPresent(o -> execute(CustomObjectDeleteCommand.of(o)));
     }
 
     @Test

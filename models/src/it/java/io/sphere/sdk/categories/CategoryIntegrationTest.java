@@ -3,7 +3,7 @@ package io.sphere.sdk.categories;
 import java.util.Optional;
 
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
-import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
+import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeName;
 import io.sphere.sdk.categories.queries.CategoryQuery;
@@ -33,7 +33,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Override
     protected SphereRequest<Category> deleteCommand(final Category item) {
-        return CategoryDeleteByIdCommand.of(item);
+        return CategoryDeleteCommand.of(item);
     }
 
     @Override

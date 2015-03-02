@@ -1,7 +1,7 @@
 package io.sphere.sdk.channels;
 
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
-import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
+import io.sphere.sdk.channels.commands.ChannelDeleteCommand;
 import io.sphere.sdk.channels.queries.ChannelByKeyFetch;
 import io.sphere.sdk.client.TestClient;
 
@@ -13,7 +13,7 @@ public class ChannelFixtures {
     public static void withChannelOfRole(final TestClient client, final ChannelRoles channelRole, final Consumer<Channel> f) {
         final Channel channel = client.execute(ChannelCreateCommand.of(ChannelDraft.of(randomString()).withRoles(channelRole)));
         f.accept(channel);
-        client.execute(ChannelDeleteByIdCommand.of(channel));
+        client.execute(ChannelDeleteCommand.of(channel));
     }
 
     public static void withOrderExportChannel(final TestClient client, final Consumer<Channel> f) {
@@ -29,6 +29,6 @@ public class ChannelFixtures {
     }
 
     public static void cleanUpChannelByKey(final TestClient client, final String channelKey) {
-        client.execute(ChannelByKeyFetch.of(channelKey)).ifPresent(channel -> client.execute(ChannelDeleteByIdCommand.of(channel)));
+        client.execute(ChannelByKeyFetch.of(channelKey)).ifPresent(channel -> client.execute(ChannelDeleteCommand.of(channel)));
     }
 }

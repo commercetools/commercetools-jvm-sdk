@@ -12,11 +12,11 @@ import io.sphere.sdk.http.HttpMethod;
  * @param <T> the type of the result of the command, most likely the updated entity without expanded references
  *
  */
-public abstract class DeleteByIdCommandImpl<T> extends CommandImpl<T> implements DeleteByIdCommand<T> {
+public abstract class ByIdDeleteCommandImpl<T> extends CommandImpl<T> implements ByIdDeleteCommand<T> {
     private final Versioned<T> versioned;
     private final JsonEndpoint<T> endpoint;
 
-    protected DeleteByIdCommandImpl(final Versioned<T> versioned, final JsonEndpoint<T> endpoint) {
+    protected ByIdDeleteCommandImpl(final Versioned<T> versioned, final JsonEndpoint<T> endpoint) {
         this.versioned = versioned;
         this.endpoint = endpoint;
     }

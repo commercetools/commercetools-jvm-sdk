@@ -4,7 +4,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
-import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
+import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.queries.ProductQuery;
@@ -58,7 +58,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
 
     @Override
     protected SphereRequest<Product> deleteCommand(final Product item) {
-        return ProductDeleteByIdCommand.of(item);
+        return ProductDeleteCommand.of(item);
     }
 
     @Override

@@ -3,7 +3,7 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
-import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
+import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.queries.ProductByIdFetch;
@@ -105,7 +105,7 @@ public class ProductFixtures {
             } else {
                 unPublishedProduct = loadedProduct;
             }
-            client.execute(ProductDeleteByIdCommand.of(unPublishedProduct));
+            client.execute(ProductDeleteCommand.of(unPublishedProduct));
         });
     }
 
@@ -124,7 +124,7 @@ public class ProductFixtures {
             QueryDsl<Product> productsOfProductTypeQuery = ProductQuery.of().withPredicate(ofProductType);
             List<Product> products = client.execute(productsOfProductTypeQuery).getResults();
             products.forEach(
-                    product -> client.execute(ProductDeleteByIdCommand.of(product))
+                    product -> client.execute(ProductDeleteCommand.of(product))
             );
             deleteProductType(client, productType);
         }

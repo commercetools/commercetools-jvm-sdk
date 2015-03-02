@@ -15,7 +15,7 @@ import static java.lang.String.format;
  *
  *
  */
-public final class CustomObjectDeleteByContainerAndKeyCommand<T extends CustomObject<?>> extends CommandImpl<T> implements DeleteCommand<T> {
+public final class CustomObjectDeleteCommand<T extends CustomObject<?>> extends CommandImpl<T> implements DeleteCommand<T> {
     private final String container;
     private final String key;
     private final TypeReference<T> typeReference;
@@ -30,18 +30,18 @@ public final class CustomObjectDeleteByContainerAndKeyCommand<T extends CustomOb
         return HttpRequestIntent.of(HttpMethod.DELETE, CustomObjectsEndpoint.PATH + format("/%s/%s", container, key));
     }
 
-    private CustomObjectDeleteByContainerAndKeyCommand(final String container, final String key, final TypeReference<T> typeReference) {
+    private CustomObjectDeleteCommand(final String container, final String key, final TypeReference<T> typeReference) {
         this.container = CustomObject.validatedContainer(container);
         this.key = CustomObject.validatedKey(key);
         this.typeReference = typeReference;
     }
 
-    public static <T extends CustomObject<?>> CustomObjectDeleteByContainerAndKeyCommand<T> of(final T customObject, final TypeReference<T> typeReference) {
+    public static <T extends CustomObject<?>> DeleteCommand<T> of(final T customObject, final TypeReference<T> typeReference) {
         return of(customObject.getContainer(), customObject.getKey(), typeReference);
     }
 
-    public static <T extends CustomObject<?>> CustomObjectDeleteByContainerAndKeyCommand<T> of(final String container, final String key, final TypeReference<T> typeReference) {
-        return new CustomObjectDeleteByContainerAndKeyCommand<>(container, key, typeReference);
+    public static <T extends CustomObject<?>> DeleteCommand<T> of(final String container, final String key, final TypeReference<T> typeReference) {
+        return new CustomObjectDeleteCommand<>(container, key, typeReference);
     }
 
     /**
@@ -50,12 +50,12 @@ public final class CustomObjectDeleteByContainerAndKeyCommand<T extends CustomOb
      * @param <T> the type of the whole custom object
      * @return custom object only with meta data
      */
-    public static <T extends CustomObject<?>> CustomObjectDeleteByContainerAndKeyCommand<CustomObject<JsonNode>> of(final T customObject) {
+    public static <T extends CustomObject<?>> DeleteCommand<CustomObject<JsonNode>> of(final T customObject) {
         return of(customObject.getContainer(), customObject.getKey());
     }
 
-    public static CustomObjectDeleteByContainerAndKeyCommand<CustomObject<JsonNode>> of(final String container, final String key) {
-        return new CustomObjectDeleteByContainerAndKeyCommand<>(container, key, new TypeReference<CustomObject<JsonNode>>() {
+    public static DeleteCommand<CustomObject<JsonNode>> of(final String container, final String key) {
+        return new CustomObjectDeleteCommand<>(container, key, new TypeReference<CustomObject<JsonNode>>() {
 
         });
     }

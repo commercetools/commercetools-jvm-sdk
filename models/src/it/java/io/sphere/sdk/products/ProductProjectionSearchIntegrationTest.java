@@ -4,13 +4,13 @@ import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
-import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
+import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
-import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
+import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.search.*;
 import io.sphere.sdk.test.IntegrationTest;
@@ -20,7 +20,6 @@ import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -85,8 +84,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         if (!productTypes.isEmpty()) {
             final List<ProductProjection> products = execute(ProductProjectionQuery.of(STAGED)
                     .withPredicate(ProductProjectionQuery.model().productType().isAnyOf(productTypes))).getResults();
-            products.forEach(p -> execute(ProductDeleteByIdCommand.of(p.toProductVersioned())));
-            productTypes.forEach(p -> execute(ProductTypeDeleteByIdCommand.of(p)));
+            products.forEach(p -> execute(ProductDeleteCommand.of(p.toProductVersioned())));
+            productTypes.forEach(p -> execute(ProductTypeDeleteCommand.of(p)));
         }
         testProduct1 = null;
         testProduct2 = null;

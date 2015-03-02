@@ -1,7 +1,7 @@
 package io.sphere.sdk.taxcategories;
 
 import io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand;
-import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteByIdCommand;
+import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class TaxCategoryIntegrationTest extends IntegrationTest {
     @Test
     public void demoForDeletion() throws Exception {
         final TaxCategory taxCategory = createTaxCategory();
-        final TaxCategory deletedTaxCategory = execute(TaxCategoryDeleteByIdCommand.of(taxCategory));
+        final TaxCategory deletedTaxCategory = execute(TaxCategoryDeleteCommand.of(taxCategory));
     }
 
     private TaxCategory createTaxCategory() {

@@ -29,6 +29,6 @@ public class ZoneCreateCommandTest extends IntegrationTest {
         final ZoneCreateCommand createCommand = ZoneCreateCommand.of(draft);
         final Zone zone = execute(createCommand);
         //end example parsing here
-        execute(ZoneDeleteByIdCommand.of(zone));
+        execute(ZoneDeleteCommand.of(zone));
     }
 }

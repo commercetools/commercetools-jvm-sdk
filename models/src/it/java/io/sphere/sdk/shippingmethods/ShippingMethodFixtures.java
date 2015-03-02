@@ -2,7 +2,7 @@ package io.sphere.sdk.shippingmethods;
 
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommand;
-import io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteByIdCommand;
+import io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteCommand;
 import io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommand;
 import io.sphere.sdk.shippingmethods.commands.updateactions.AddZone;
 import io.sphere.sdk.zones.Location;
@@ -43,7 +43,7 @@ public class ShippingMethodFixtures {
             final ShippingMethodDraft draft = ShippingMethodDraft.of(randomString(), "test shipping method", taxCategory, asList());
             final ShippingMethod shippingMethod = client.execute(ShippingMethodCreateCommand.of(draft));
             final ShippingMethod possiblyUpdatedShippingMethod = f.apply(shippingMethod);
-            client.execute(ShippingMethodDeleteByIdCommand.of(possiblyUpdatedShippingMethod));
+            client.execute(ShippingMethodDeleteCommand.of(possiblyUpdatedShippingMethod));
         });
     }
 }

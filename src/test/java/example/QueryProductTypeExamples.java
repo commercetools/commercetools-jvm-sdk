@@ -1,8 +1,9 @@
 package example;
 
 import io.sphere.sdk.client.SphereClient;
+import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.producttypes.*;
-import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
+import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Predicate;
@@ -23,7 +24,7 @@ public class QueryProductTypeExamples {
     }
 
     public void delete() {
-        final ProductTypeDeleteByIdCommand command = ProductTypeDeleteByIdCommand.of(productType);
+        final DeleteCommand<ProductType> command = ProductTypeDeleteCommand.of(productType);
         final CompletableFuture<ProductType> deletedProductType = client.execute(command);
     }
 }
