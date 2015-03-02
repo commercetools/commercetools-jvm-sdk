@@ -2,13 +2,13 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
-import io.sphere.sdk.queries.FetchByIdImpl;
+import io.sphere.sdk.queries.ByIdFetchImpl;
 import io.sphere.sdk.http.UrlQueryBuilder;
 
-public class ProductProjectionFetchById extends FetchByIdImpl<ProductProjection> {
+public class ProductProjectionByIdFetch extends ByIdFetchImpl<ProductProjection> {
     private final ProductProjectionType projectionType;
 
-    private ProductProjectionFetchById(final String id, final ProductProjectionType projectionType) {
+    private ProductProjectionByIdFetch(final String id, final ProductProjectionType projectionType) {
         super(id, ProductProjectionsEndpoint.ENDPOINT);
         this.projectionType = projectionType;
     }
@@ -19,7 +19,7 @@ public class ProductProjectionFetchById extends FetchByIdImpl<ProductProjection>
         return super.additionalQueryParameters().add("staged", value, false);
     }
 
-    public static ProductProjectionFetchById of(final String id, final ProductProjectionType projectionType) {
-        return new ProductProjectionFetchById(id, projectionType);
+    public static ProductProjectionByIdFetch of(final String id, final ProductProjectionType projectionType) {
+        return new ProductProjectionByIdFetch(id, projectionType);
     }
 }

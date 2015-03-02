@@ -1,21 +1,15 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
-import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
-import io.sphere.sdk.channels.queries.ChannelFetchByKey;
-import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
-import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.client.SphereRequest;
@@ -28,12 +22,9 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.Random;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.*;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
@@ -44,7 +35,6 @@ import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
-import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.products.ProductFixtures.*;
 

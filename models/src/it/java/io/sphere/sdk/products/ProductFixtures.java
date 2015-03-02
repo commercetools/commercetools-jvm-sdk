@@ -6,7 +6,7 @@ import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
-import io.sphere.sdk.products.queries.ProductFetchById;
+import io.sphere.sdk.products.queries.ProductByIdFetch;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
@@ -96,7 +96,7 @@ public class ProductFixtures {
     }
 
     public static void delete(final TestClient client, final Product product) {
-        final Optional<Product> freshLoadedProduct = client.execute(ProductFetchById.of(product.getId()));
+        final Optional<Product> freshLoadedProduct = client.execute(ProductByIdFetch.of(product.getId()));
         freshLoadedProduct.ifPresent(loadedProduct -> {
             final boolean isPublished = loadedProduct.getMasterData().isPublished();
             final Product unPublishedProduct;

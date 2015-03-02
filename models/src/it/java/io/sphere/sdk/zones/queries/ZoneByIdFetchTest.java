@@ -11,7 +11,7 @@ import java.util.Optional;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class ZoneFetchByIdTest extends IntegrationTest {
+public class ZoneByIdFetchTest extends IntegrationTest {
     @BeforeClass
     public static void deleteRemainingZone() throws Exception {
         ZoneFixtures.deleteZonesForCountries(client(), CountryCode.BA);
@@ -20,7 +20,7 @@ public class ZoneFetchByIdTest extends IntegrationTest {
     @Test
     public void fetchById() throws Exception {
         ZoneFixtures.withUpdateableZone(client(), zone -> {
-            final Optional<Zone> fetchedZone = execute(ZoneFetchById.of(zone.getId()));
+            final Optional<Zone> fetchedZone = execute(ZoneByIdFetch.of(zone.getId()));
             assertThat(fetchedZone.get().getId()).isEqualTo(zone.getId());
             return zone;
         }, CountryCode.BA);

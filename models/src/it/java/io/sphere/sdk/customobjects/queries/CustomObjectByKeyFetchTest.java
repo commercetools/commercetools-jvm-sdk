@@ -14,14 +14,14 @@ import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static org.fest.assertions.Assertions.assertThat;
 
 
-public class CustomObjectFetchByKeyTest extends IntegrationTest {
+public class CustomObjectByKeyFetchTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomObject(client(), existingCustomObject -> {
             final String container = existingCustomObject.getContainer();
             final String key = existingCustomObject.getKey();
-            final CustomObjectFetchByKey<Foo> fetch =
-                    CustomObjectFetchByKey.of(container, key, Foo.customObjectTypeReference());
+            final CustomObjectByKeyFetch<Foo> fetch =
+                    CustomObjectByKeyFetch.of(container, key, Foo.customObjectTypeReference());
             final Optional<CustomObject<Foo>> customObjectOptional = execute(fetch);
             assertThat(customObjectOptional).isPresent();
             final Reference<CustomObject<JsonNode>> actual = customObjectOptional.get().toReference();
@@ -34,7 +34,7 @@ public class CustomObjectFetchByKeyTest extends IntegrationTest {
         withCustomObject(client(), existingCustomObject -> {
             final String container = existingCustomObject.getContainer();
             final String key = existingCustomObject.getKey();
-            final CustomObjectFetchByKey<JsonNode> fetch = CustomObjectFetchByKey.of(container, key);
+            final CustomObjectByKeyFetch<JsonNode> fetch = CustomObjectByKeyFetch.of(container, key);
             final Optional<CustomObject<JsonNode>> customObjectOptional = execute(fetch);
             assertThat(customObjectOptional).isPresent();
             final JsonNode value = customObjectOptional.get().getValue();

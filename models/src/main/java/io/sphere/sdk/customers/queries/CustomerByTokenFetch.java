@@ -7,19 +7,19 @@ import io.sphere.sdk.http.UrlQueryBuilder;
 
 import static io.sphere.sdk.customers.queries.CustomersEndpoint.ENDPOINT;
 
-public class CustomerFetchByToken extends FetchImpl<Customer> {
+public class CustomerByTokenFetch extends FetchImpl<Customer> {
     private final String token;
 
-    private CustomerFetchByToken(final String token) {
+    private CustomerByTokenFetch(final String token) {
         super(ENDPOINT, "");
         this.token = token;
     }
 
-    public static CustomerFetchByToken of(final String token) {
-        return new CustomerFetchByToken(token);
+    public static CustomerByTokenFetch of(final String token) {
+        return new CustomerByTokenFetch(token);
     }
 
-    public static CustomerFetchByToken of(final CustomerToken token) {
+    public static CustomerByTokenFetch of(final CustomerToken token) {
         return of(token.getValue());
     }
 

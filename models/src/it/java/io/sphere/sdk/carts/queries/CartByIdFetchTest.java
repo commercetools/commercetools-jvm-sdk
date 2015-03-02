@@ -9,11 +9,11 @@ import java.util.Optional;
 import static io.sphere.sdk.carts.CartFixtures.createCartWithCountry;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 
-public class CartFetchByIdTest extends IntegrationTest {
+public class CartByIdFetchTest extends IntegrationTest {
     @Test
     public void fetchById() throws Exception {
         final Cart cart = createCartWithCountry(client());
-        final Optional<Cart> fetchedCartOptional = execute(CartFetchById.of(cart.getId()));
+        final Optional<Cart> fetchedCartOptional = execute(CartByIdFetch.of(cart.getId()));
         assertThat(fetchedCartOptional).isPresentAs(cart);
     }
 }

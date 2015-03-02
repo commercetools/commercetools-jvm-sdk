@@ -17,11 +17,11 @@ import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
  *
  * @param <T> The type of the value of the custom object.
  */
-public abstract class CustomObjectCustomJsonMappingFetchByKey<T> extends SphereRequestBase implements Fetch<CustomObject<T>> {
+public abstract class CustomObjectCustomJsonMappingByKeyFetch<T> extends SphereRequestBase implements Fetch<CustomObject<T>> {
     private final String container;
     private final String key;
 
-    public CustomObjectCustomJsonMappingFetchByKey(final String container, final String key) {
+    public CustomObjectCustomJsonMappingByKeyFetch(final String container, final String key) {
         this.container = container;
         this.key = key;
     }

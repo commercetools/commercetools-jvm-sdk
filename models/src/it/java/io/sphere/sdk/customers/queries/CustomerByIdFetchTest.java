@@ -7,11 +7,11 @@ import org.junit.Test;
 import static io.sphere.sdk.customers.CustomerFixtures.*;
 import static org.fest.assertions.Assertions.assertThat;
 
-public class CustomerFetchByIdTest extends IntegrationTest {
+public class CustomerByIdFetchTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
-            final Customer fetchedCustomer = execute(CustomerFetchById.of(customer.getId())).get();
+            final Customer fetchedCustomer = execute(CustomerByIdFetch.of(customer.getId())).get();
             assertThat(fetchedCustomer.getId()).isEqualTo(customer.getId());
         });
     }

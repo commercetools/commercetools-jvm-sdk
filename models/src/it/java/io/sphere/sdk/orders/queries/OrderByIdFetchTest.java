@@ -8,11 +8,11 @@ import static io.sphere.sdk.orders.OrderFixtures.withOrder;
 import static org.fest.assertions.Assertions.assertThat;
 
 
-public class OrderFetchByIdTest extends IntegrationTest {
+public class OrderByIdFetchTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withOrder(client(), order -> {
-            final Order loadedOrder = execute(OrderFetchById.of(order.getId())).get();
+            final Order loadedOrder = execute(OrderByIdFetch.of(order.getId())).get();
             assertThat(loadedOrder.getId()).isEqualTo(order.getId());
         });
     }

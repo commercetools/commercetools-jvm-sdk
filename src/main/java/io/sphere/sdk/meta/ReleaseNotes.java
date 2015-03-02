@@ -111,7 +111,7 @@ package io.sphere.sdk.meta;
  <li>Query models contain id, createdAt and lastModifiedAt for predicates and sorting.</li>
  <li>Introduced endpoints and models for {@link io.sphere.sdk.carts.Cart}s, {@link io.sphere.sdk.customers.Customer}s, {@link io.sphere.sdk.customergroups.CustomerGroup}s and {@link io.sphere.sdk.orders.Order}s.</li>
  <li>Quantity fields are now of type long.</li>
- <li>Classes like {@link io.sphere.sdk.products.queries.ProductFetchById} take now a string parameter for the ID and not an {@link io.sphere.sdk.models.Identifiable}.</li>
+ <li>Classes like {@link io.sphere.sdk.products.queries.ProductByIdFetch} take now a string parameter for the ID and not an {@link io.sphere.sdk.models.Identifiable}.</li>
  <li>Queries, Fetches, Commands and Searches are only instantiable with an static of method like {@link io.sphere.sdk.categories.commands.CategoryCreateCommand#of(io.sphere.sdk.categories.CategoryDraft)}. The instantiation by constructor is not supported anymore.</li>
  <li>Enum constant names are only in upper case.</li>
  </ul>

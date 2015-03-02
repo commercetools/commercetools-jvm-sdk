@@ -2,7 +2,7 @@ package io.sphere.sdk.channels;
 
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
 import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
-import io.sphere.sdk.channels.queries.ChannelFetchByKey;
+import io.sphere.sdk.channels.queries.ChannelByKeyFetch;
 import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.client.SphereRequest;
@@ -53,7 +53,7 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Test
     public void FetchChannelByKey() throws Exception {
         withChannel(client(), ChannelDraftBuilder.of("foo"), channel -> {
-                    final Optional<Channel> channelOption = execute(ChannelFetchByKey.of(channel.getKey()));
+                    final Optional<Channel> channelOption = execute(ChannelByKeyFetch.of(channel.getKey()));
                     assertThat(channelOption).isPresentAs(channel);
                 }
         );

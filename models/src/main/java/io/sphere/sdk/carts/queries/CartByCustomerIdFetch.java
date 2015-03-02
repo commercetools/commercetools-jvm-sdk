@@ -6,10 +6,10 @@ import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.queries.FetchImpl;
 import io.sphere.sdk.http.UrlQueryBuilder;
 
-public class CartFetchByCustomerId extends FetchImpl<Cart> {
+public class CartByCustomerIdFetch extends FetchImpl<Cart> {
     private final String customerId;
 
-    private CartFetchByCustomerId(final String customerId) {
+    private CartByCustomerIdFetch(final String customerId) {
         super(CartsEndpoint.ENDPOINT, "");
         this.customerId = customerId;
     }
@@ -19,11 +19,11 @@ public class CartFetchByCustomerId extends FetchImpl<Cart> {
         return super.additionalQueryParameters().add("customerId", customerId);
     }
 
-    public static CartFetchByCustomerId of(final Identifiable<Customer> customer) {
+    public static CartByCustomerIdFetch of(final Identifiable<Customer> customer) {
         return of(customer.getId());
     }
 
-    public static CartFetchByCustomerId of(final String customerId) {
-        return new CartFetchByCustomerId(customerId);
+    public static CartByCustomerIdFetch of(final String customerId) {
+        return new CartByCustomerIdFetch(customerId);
     }
 }
