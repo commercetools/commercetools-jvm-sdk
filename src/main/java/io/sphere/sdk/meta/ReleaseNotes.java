@@ -12,17 +12,26 @@ package io.sphere.sdk.meta;
  <h3 class=released-version id=v1_0_0_M11>1.0.0-M11</h3>
  <h4>Overall</h4>
  <ul>
-    <li class=new-in-release>Code examples contain a link to the GitHub soruce code documents.</li>
+    <li class=new-in-release>Code examples contain the links to the GitHub source code.</li>
+    <li class=new-in-release>The {@link io.sphere.sdk.client.SphereClient} architecture has been refactored, so it is now possible to inject access token suppliers and custom HTTP clients.
+        <ul>
+            <li>{@link io.sphere.sdk.client.NingHttpClientAdapter} enables to use a custom underlying Ning HTTP client for settings like proxies or max connections per host.</li>
+            <li>The new module {@code java-client-apache-async} contains an {@link io.sphere.sdk.client.ApacheHttpClientAdapter adapter} to use the Apache HTTP client instead of the current default client Ning.</li>
+            <li>The {@link io.sphere.sdk.client.QueueSphereClientDecorator} enables to limit the amount of concurrent requests to SPHERE.IO with a task queue.</li>
+            <li>{@link io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a starting point to create custom access token suppliers for one token (either fetched from SPHERE.IO or as String) or auto refreshing for online shops.</li>
+        </ul>
+    </li>
     <li class=new-in-release>Added {@link io.sphere.sdk.client.SphereRequestDecorator} to decorate {@link io.sphere.sdk.client.SphereRequest}s.</li>
-    <li class=new-in-release>Module java-client-apache-async contains an adapter to use the Apache client instead of the current default client ning.</li>
-    <li class=new-in-release>{@link io.sphere.sdk.client.QueueSphereClientDecorator} enables to limit the amount of current requests to SPHERE.IO with a task queue.</li>
-    <li class=new-in-release>{@link io.sphere.sdk.client.NingHttpClientAdapter} enables use a custom underlying ning HTTP client for settings like proxies.</li>
-    <li class=new-in-release>{@link io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a startpoint to create access token suppliers for one toke (either fetched from SPHERE.IO or as String) or auto refreshing for online shops..</li>
-    <li class=change-in-release>{@link io.sphere.sdk.meta.ExceptionDocumentation Exception hierarchy}, relocated some exceptions and deleted some.</li>
+    <li class=change-in-release>{@link io.sphere.sdk.meta.ExceptionDocumentation Exception hierarchy}, relocated some exceptions and deleted some.
+        <ul>
+            <li>Removed SphereBackendException, SphereClientException, JavaConcurrentUtils, Requestable</li>
+            <li>Removed ReferenceExistsException, usage as {@link io.sphere.sdk.models.SphereError} from a {@link io.sphere.sdk.client.ErrorResponseException}</li>
+            <li>JsonParseException is now {@link io.sphere.sdk.json.JsonException}.</li>
+            <li>InvalidQueryOffsetException is replaced with {@link java.lang.IllegalArgumentException}.</li>
+        </ul>
+    </li>
     <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.http.HttpRequest} has changed tasks and structure, now it contains the full information for a HTTP request whereas now {@link io.sphere.sdk.client.HttpRequestIntent} is an element to describe an endpoint of sphere project independent.</li>
     <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.client.JsonEndpoint} moved to the client package</li>
-    <li class=change-in-release>JsonParseException is now {@link io.sphere.sdk.json.JsonException}.</li>
-    <li class=removed-in-release>Removed ReferenceExistsException (now a {@link io.sphere.sdk.models.SphereError}), SphereBackendException, SphereClientException, JavaConcurrentUtils, Requestable, InvalidQueryOffsetException (now {@link java.lang.IllegalArgumentException}.</li>
     <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/264">#264</a>.</li>
  </ul>
 
