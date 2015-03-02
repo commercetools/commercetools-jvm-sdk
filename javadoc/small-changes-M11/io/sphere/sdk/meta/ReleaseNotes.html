@@ -137,6 +137,7 @@ extends java.lang.Object</pre>
     <li class=change-in-release>For SDK devs: <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client"><code>JsonEndpoint</code></a> moved to the client package</li>
     <li class=change-in-release><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><code>Fetch</code></a> class names end now with Fetch for consistency, so for example <code>CartFetchById</code> is now <a href="../../../../io/sphere/sdk/carts/queries/CartByIdFetch.html" title="class in io.sphere.sdk.carts.queries"><code>CartByIdFetch</code></a>.</li>
     <li class=change-in-release><a href="../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands"><code>DeleteCommand</code></a> implementations don't have <code>ById</code> or <code>ByKey</code> in the class name and the <code>of</code> factory method returns the interface, not the implementation, example <a href="../../../../io/sphere/sdk/categories/commands/CategoryDeleteCommand.html#of-io.sphere.sdk.models.Versioned-"><code>CategoryDeleteCommand.of(io.sphere.sdk.models.Versioned)</code></a>.</li>
+    <li class=change-in-release>LocalizedText* classes has been renamed to LocalizedStrings.</li>
     <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/264">#264</a>.</li>
  </ul>
 
