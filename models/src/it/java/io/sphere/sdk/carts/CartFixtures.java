@@ -2,7 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
-import io.sphere.sdk.carts.commands.CartDeleteByIdCommand;
+import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingAddress;
@@ -51,7 +51,7 @@ public class CartFixtures {
 
     public static void withCart(final TestClient client, final Cart cart, final Function<Cart, Cart> f) {
         final Cart updatedCart = f.apply(cart);
-        client.execute(CartDeleteByIdCommand.of(updatedCart));
+        client.execute(CartDeleteCommand.of(updatedCart));
     }
 
     public static void withFilledCart(final TestClient client, final Consumer<Cart> f) {

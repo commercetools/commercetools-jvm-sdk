@@ -4,7 +4,7 @@ import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
-import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
+import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.SphereInternalLogger;
@@ -27,7 +27,7 @@ public final class ProductTypeFixtures {
         queryResult.getResults().forEach(productType -> {
             final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().byProductType(productType));
             delete(client, pagedQueryResult.getResults());
-            client.execute(ProductTypeDeleteByIdCommand.of(productType));
+            client.execute(ProductTypeDeleteCommand.of(productType));
 
         });
         final ProductType productType = client.execute(ProductTypeCreateCommand.of(productTypeDraft));
@@ -35,17 +35,17 @@ public final class ProductTypeFixtures {
         user.accept(productType);
         logger.debug(() -> "attempt to delete product type " + productType.getName() + " " + productType.getId());
         try {
-            client.execute(ProductTypeDeleteByIdCommand.of(productType));
+            client.execute(ProductTypeDeleteCommand.of(productType));
         } catch (final Exception e) {
             final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().byProductType(productType));
             delete(client, pagedQueryResult.getResults());
-            client.execute(ProductTypeDeleteByIdCommand.of(productType));
+            client.execute(ProductTypeDeleteCommand.of(productType));
         }
     }
 
     public static void deleteProductType(final TestClient client, final ProductType productType) {
         try {
-            client.execute(ProductTypeDeleteByIdCommand.of(productType));
+            client.execute(ProductTypeDeleteCommand.of(productType));
         } catch (Exception e) {
             getLogger("test.fixtures").debug(() -> "no product type to delete");
         }

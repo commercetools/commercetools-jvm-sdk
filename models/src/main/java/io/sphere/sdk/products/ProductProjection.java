@@ -22,7 +22,7 @@ import java.util.Optional;
 
  <p id=operations>Operations:</p>
  <ul>
-    <li>Fetch by ID with {@link io.sphere.sdk.products.queries.ProductProjectionFetchById}</li>
+    <li>Fetch by ID with {@link io.sphere.sdk.products.queries.ProductProjectionByIdFetch}</li>
  </ul>
 
  If you need {@link io.sphere.sdk.products.ProductProjection} for a method but you have a product,

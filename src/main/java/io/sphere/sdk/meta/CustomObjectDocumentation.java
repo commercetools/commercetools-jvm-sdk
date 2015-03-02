@@ -50,7 +50,7 @@ In this case you use also {@link io.sphere.sdk.customobjects.commands.CustomObje
 
  <h4 id=direct-json-fetch>Fetch custom objects</h4>
 
- {@include.example io.sphere.sdk.customobjects.queries.CustomObjectFetchByKeyTest#executionForPureJson()}
+ {@include.example io.sphere.sdk.customobjects.queries.CustomObjectByKeyFetchTest#executionForPureJson()}
 
  <h4 id=direct-json-query>Query custom objects</h4>
 
@@ -70,8 +70,8 @@ In this case you use also {@link io.sphere.sdk.customobjects.commands.CustomObje
 
  <h4>Fetch by container and key</h4>
 
- {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObjectFetchByKey}
- {@include.example io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingFetchByKeyTest#execution()}
+ {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObjectByKeyFetch}
+ {@include.example io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyFetchTest#execution()}
 
  <h3 id=increment-example>Using Optimistic Concurrency Control</h3>
 

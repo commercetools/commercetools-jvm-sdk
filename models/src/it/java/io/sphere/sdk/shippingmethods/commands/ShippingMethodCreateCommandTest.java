@@ -7,7 +7,6 @@ import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shippingmethods.ZoneRate;
 import io.sphere.sdk.taxcategories.TaxCategoryDraft;
 import io.sphere.sdk.taxcategories.TaxRate;
-import io.sphere.sdk.taxcategories.TaxRateBuilder;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import io.sphere.sdk.zones.ZoneFixtures;
@@ -15,7 +14,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.money.CurrencyUnit;
-import java.util.Optional;
 
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -42,7 +40,7 @@ public class ShippingMethodCreateCommandTest extends IntegrationTest {
                         ShippingMethodDraft.of("standard shipping", "description", taxCategory, asList(zoneRate));
                 final ShippingMethod shippingMethod = execute(ShippingMethodCreateCommand.of(draft));
                 //deletion
-                execute(ShippingMethodDeleteByIdCommand.of(shippingMethod));
+                execute(ShippingMethodDeleteCommand.of(shippingMethod));
             });
         }, COUNTRY_CODE);
     }

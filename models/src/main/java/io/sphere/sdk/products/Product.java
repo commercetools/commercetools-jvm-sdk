@@ -16,7 +16,7 @@ import io.sphere.sdk.models.Reference;
     <li>Create a product test double with {@link io.sphere.sdk.products.ProductBuilder}.</li>
     <li>Query a product with {@link io.sphere.sdk.products.queries.ProductQuery}.</li>
     <li>Update a product with {@link io.sphere.sdk.products.commands.ProductUpdateCommand}.</li>
-    <li>Delete a product with {@link io.sphere.sdk.products.commands.ProductDeleteByIdCommand}.</li>
+    <li>Delete a product with {@link io.sphere.sdk.products.commands.ProductDeleteCommand}.</li>
  </ul>
 
  <p>Consider to use {@link io.sphere.sdk.products.ProductProjection} for queries if you don't need the whole product data so you can safe traffic and memory.</p>

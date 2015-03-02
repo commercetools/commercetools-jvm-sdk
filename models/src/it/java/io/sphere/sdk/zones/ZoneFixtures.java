@@ -3,11 +3,11 @@ package io.sphere.sdk.zones;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.models.SphereException;
-import io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteByIdCommand;
+import io.sphere.sdk.shippingmethods.commands.ShippingMethodDeleteCommand;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQuery;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQueryModel;
 import io.sphere.sdk.zones.commands.ZoneCreateCommand;
-import io.sphere.sdk.zones.commands.ZoneDeleteByIdCommand;
+import io.sphere.sdk.zones.commands.ZoneDeleteCommand;
 import io.sphere.sdk.zones.queries.ZoneQuery;
 
 import java.util.Set;
@@ -38,7 +38,7 @@ public class ZoneFixtures {
         final ZoneCreateCommand createCommand = ZoneCreateCommand.of(draft);
         Zone zone = client.execute(createCommand);
         zone = f.apply(zone);//zone possibly has been updated
-        client.execute(ZoneDeleteByIdCommand.of(zone));
+        client.execute(ZoneDeleteCommand.of(zone));
     }
 
     public static void deleteZonesForCountries(final TestClient client, final CountryCode country, final CountryCode ... moreCountries) {
@@ -46,14 +46,14 @@ public class ZoneFixtures {
         final ZoneQuery query = ZoneQuery.of();
         final Consumer<Zone> action = zone -> {
             try {
-                client.execute(ZoneDeleteByIdCommand.of(zone));
+                client.execute(ZoneDeleteCommand.of(zone));
             } catch (final SphereException e) {
                 final ShippingMethodQueryModel model = ShippingMethodQuery.model();
                 client.execute(ShippingMethodQuery.of().withPredicate(model.zoneRates().zone().is(zone)))
                         .head()
                         .ifPresent(sm -> {
-                            client.execute(ShippingMethodDeleteByIdCommand.of(sm));
-                            client.execute(ZoneDeleteByIdCommand.of(zone));
+                            client.execute(ShippingMethodDeleteCommand.of(sm));
+                            client.execute(ZoneDeleteCommand.of(zone));
                         });
             }
         };

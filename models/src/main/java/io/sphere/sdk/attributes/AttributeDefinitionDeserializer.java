@@ -16,7 +16,7 @@ class AttributeDefinitionDeserializer extends JsonDeserializer<AttributeDefiniti
     private static final Map<String, Class<? extends AttributeDefinition>> nameClassMap =
             ImmutableMapBuilder.<String, Class<? extends AttributeDefinition>>of().
             put("text", TextAttributeDefinition.class).
-            put("ltext", LocalizedTextAttributeDefinition.class).
+            put("ltext", LocalizedStringsAttributeDefinition.class).
             put("enum", EnumAttributeDefinition.class).
             put("lenum", LocalizedEnumAttributeDefinition.class).
             put("number", NumberAttributeDefinition.class).

@@ -1,6 +1,6 @@
 package io.sphere.sdk.states.commands;
 
-import io.sphere.sdk.commands.DeleteByIdCommandImpl;
+import io.sphere.sdk.commands.ByIdDeleteCommandImpl;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.states.State;
@@ -10,7 +10,7 @@ import io.sphere.sdk.states.State;
  <p>Example:</p>
  {@include.example io.sphere.sdk.states.commands.StateDeleteCommandTest#execution()}
  */
-public class StateDeleteCommand extends DeleteByIdCommandImpl<State> {
+public class StateDeleteCommand extends ByIdDeleteCommandImpl<State> {
     private StateDeleteCommand(final Versioned<State> versioned) {
         super(versioned, StateEndpoint.ENDPOINT);
     }

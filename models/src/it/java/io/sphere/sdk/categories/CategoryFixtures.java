@@ -1,7 +1,7 @@
 package io.sphere.sdk.categories;
 
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
-import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
+import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -22,7 +22,7 @@ public class CategoryFixtures {
         final CategoryDraft categoryDraft = creator.get();
         final String slug = englishSlugOf(categoryDraft);
         final PagedQueryResult<Category> pagedQueryResult = client.execute(CategoryQuery.of().bySlug(Locale.ENGLISH, slug));
-        pagedQueryResult.head().ifPresent(category -> client.execute(CategoryDeleteByIdCommand.of(category)));
+        pagedQueryResult.head().ifPresent(category -> client.execute(CategoryDeleteCommand.of(category)));
         final Category category = client.execute(CategoryCreateCommand.of(categoryDraft));
         LOGGER.debug(() -> "created category " + category.getSlug() + " id: " + category.getId());
         try {
@@ -30,7 +30,7 @@ public class CategoryFixtures {
         } finally {
             final PagedQueryResult<Category> res = client.execute(CategoryQuery.of().byId(category.getId()));
             //need to update because category could be changed
-            client.execute(CategoryDeleteByIdCommand.of(res.head().get()));
+            client.execute(CategoryDeleteCommand.of(res.head().get()));
             LOGGER.debug(() -> "deleted category " + category.getId());
         }
     }
