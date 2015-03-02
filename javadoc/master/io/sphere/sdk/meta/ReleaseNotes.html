@@ -105,13 +105,41 @@
 <pre>public final class <span class="typeNameLabel">ReleaseNotes</span>
 extends java.lang.Object</pre>
 <div class="block"><h3>Legend</h3>
- <ul><li class=removed-in-release>removed functionality</li>
+ <ul>
+ <li class=removed-in-release>removed functionality</li>
  <li class=new-in-release>added functionality</li>
  <li class=change-in-release>breaking change</li>
  <li class=fixed-in-release>bugfix, can include a breaking change</li>
  </ul>
 
- <h3 class=released-version>1.0.0-M10</h3>
+ <h3 class=released-version id=v1_0_0_M11>1.0.0-M11</h3>
+ <h4>Overall</h4>
+ <ul>
+    <li class=new-in-release>Code examples contain a link to the GitHub soruce code documents.</li>
+    <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client"><code>SphereRequestDecorator</code></a> to decorate <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>s.</li>
+    <li class=new-in-release>Module java-client-apache-async contains an adapter to use the Apache client instead of the current default client ning.</li>
+    <li class=new-in-release><a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client"><code>QueueSphereClientDecorator</code></a> enables to limit the amount of current requests to SPHERE.IO with a task queue.</li>
+    <li class=new-in-release><a href="../../../../io/sphere/sdk/client/NingHttpClientAdapter.html" title="interface in io.sphere.sdk.client"><code>NingHttpClientAdapter</code></a> enables use a custom underlying ning HTTP client for settings like proxies.</li>
+    <li class=new-in-release><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client"><code>SphereAccessTokenSupplierFactory</code></a> is a startpoint to create access token suppliers for one toke (either fetched from SPHERE.IO or as String) or auto refreshing for online shops..</li>
+    <li class=change-in-release><a href="../../../../io/sphere/sdk/meta/ExceptionDocumentation.html" title="class in io.sphere.sdk.meta"><code>Exception hierarchy</code></a>, relocated some exceptions and deleted some.</li>
+    <li class=change-in-release>For SDK devs: <a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http"><code>HttpRequest</code></a> has changed tasks and structure, now it contains the full information for a HTTP request whereas now <a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client"><code>HttpRequestIntent</code></a> is an element to describe an endpoint of sphere project independent.</li>
+    <li class=change-in-release>For SDK devs: <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client"><code>JsonEndpoint</code></a> moved to the client package</li>
+    <li class=change-in-release>JsonParseException is now <a href="../../../../io/sphere/sdk/json/JsonException.html" title="class in io.sphere.sdk.json"><code>JsonException</code></a>.</li>
+    <li class=removed-in-release>Removed ReferenceExistsException (now a <a href="../../../../io/sphere/sdk/models/SphereError.html" title="class in io.sphere.sdk.models"><code>SphereError</code></a>), SphereBackendException, SphereClientException, JavaConcurrentUtils, Requestable, InvalidQueryOffsetException (now <code>IllegalArgumentException</code>.</li>
+    <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/264">#264</a>.</li>
+ </ul>
+
+ <h4>States</h4>
+ <ul>
+    <li class=new-in-release><a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states"><code>State</code></a> models, creation and deletion contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
+ </ul>
+
+ <h4>Products</h4>
+ <ul>
+ <li class=new-in-release>Added update actions: <a href="../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>AddVariant</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>RemoveFromCategory</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/RemoveVariant.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>RemoveVariant</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/RevertStagedChanges.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>RevertStagedChanges</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>SetAttribute</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>SetAttributeInAllVariants</code></a>, <a href="../../../../io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions"><code>SetSearchKeywords</code></a></li>
+ </ul>
+
+ <h3 class=released-version id=v1_0_0_M10>1.0.0-M10</h3>
  <ul>
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> models and endpoints. There is also a <a href="../../../../io/sphere/sdk/meta/CustomObjectDocumentation.html" title="class in io.sphere.sdk.meta"><code>tutorial for custom objects</code></a>.</li>
  <li class=new-in-release>Added the <a href="../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones"><code>Zone</code></a> models and endpoints.</li>
@@ -145,7 +173,7 @@ extends java.lang.Object</pre>
 
  <li class=change-in-release>Product variants are all of type int, was int and long before.</li>
  <li class=change-in-release><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><code>Reference</code></a> is not instantiated with new.</li>
- <li class=change-in-release><a href="../../../../io/sphere/sdk/utils/UrlQueryBuilder.html" title="class in io.sphere.sdk.utils"><code>UrlQueryBuilder</code></a> is not instantiated with new.</li>
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/http/UrlQueryBuilder.html" title="class in io.sphere.sdk.http"><code>UrlQueryBuilder</code></a> is not instantiated with new.</li>
  <li class=change-in-release>io.sphere.sdk.client.SphereErrorResponse is not instantiated with new.</li>
  <li class=change-in-release><code>ClientRequest</code> has been renamed to <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> and therefore <code>ClientRequestBase</code> to <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client"><code>SphereRequestBase</code></a>. </li>
  <li class=change-in-release><code>ClientRequest</code> has been renamed to <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> and therefore <code>ClientRequestBase</code> to <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client"><code>SphereRequestBase</code></a>. </li>
