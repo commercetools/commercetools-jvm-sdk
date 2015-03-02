@@ -84,8 +84,8 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public void localizedStringsAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofLocalizedStrings(), AttributeAccess.ofLocalizedStringsSet(),
                 asSet(LocalizedStrings.of(ENGLISH, "hello"), LocalizedStrings.of(ENGLISH, "world")),
-                new LocalizedTextType(),
-                LocalizedTextAttributeDefinitionBuilder.of("localized-text-attribute", LABEL, TEXT_INPUT_HINT).build());
+                new LocalizedStringsType(),
+                LocalizedStringsAttributeDefinitionBuilder.of("localized-text-attribute", LABEL, TEXT_INPUT_HINT).build());
     }
 
     @Test
@@ -226,8 +226,8 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     @Test
-    public void createLocalizedTextAttribute() throws Exception {
-        executeTest(LocalizedTextType.class, LocalizedTextAttributeDefinitionBuilder.of("localized-text-attribute", LABEL, TEXT_INPUT_HINT).
+    public void createLocalizedStringsAttribute() throws Exception {
+        executeTest(LocalizedStringsType.class, LocalizedStringsAttributeDefinitionBuilder.of("localized-text-attribute", LABEL, TEXT_INPUT_HINT).
                 attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).
                 required(true).
@@ -235,7 +235,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             assertThat(attributeDefinition.getIsRequired()).isTrue();
             assertThat(attributeDefinition.getAttributeConstraint()).isEqualTo(AttributeConstraint.COMBINATION_UNIQUE);
             assertThat(attributeDefinition.getIsSearchable()).isFalse();
-            assertThat(((LocalizedTextAttributeDefinition) attributeDefinition).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
+            assertThat(((LocalizedStringsAttributeDefinition) attributeDefinition).getTextInputHint()).isEqualTo(TEXT_INPUT_HINT);
         });
     }
 
