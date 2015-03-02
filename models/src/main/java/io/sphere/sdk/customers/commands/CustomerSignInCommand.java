@@ -37,6 +37,14 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
         this.anonymousCartId = anonymousCartId;
     }
 
+    public static CustomerSignInCommand of(final String email, final String password) {
+        return of(email, password, Optional.<String>empty());
+    }
+
+    public static CustomerSignInCommand of(final String email, final String password, final String anonymousCartId) {
+        return of(email, password, Optional.of(anonymousCartId));
+    }
+
     public static CustomerSignInCommand of(final String email, final String password, final Optional<String> anonymousCartId) {
         return new CustomerSignInCommand(email, password, anonymousCartId);
     }

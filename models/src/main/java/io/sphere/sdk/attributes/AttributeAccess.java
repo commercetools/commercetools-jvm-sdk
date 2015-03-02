@@ -14,7 +14,7 @@ import java.time.LocalTime;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import static io.sphere.sdk.models.TypeReferences.*;
+import static io.sphere.sdk.json.TypeReferences.*;
 
 /**
  *

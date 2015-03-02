@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
+import io.sphere.sdk.utils.SphereInternalLogger;
 import org.zapodot.jackson.java8.JavaOptionalModule;
 
 import java.io.IOException;
@@ -21,6 +22,7 @@ import java.util.Map;
 
 final public class JsonUtils {
     private static final ObjectMapper objectMapper = newObjectMapper();
+    private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(JsonUtils.class);
 
     private JsonUtils() {
     }
@@ -57,7 +59,8 @@ final public class JsonUtils {
             ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
             return writer.writeValueAsString(jsonTree);
         } catch (IOException e) {
-           throw new JsonException(e);
+            LOGGER.error(() -> "invalid JSON for pretty printing", e);
+            return json;
         }
     }
 
