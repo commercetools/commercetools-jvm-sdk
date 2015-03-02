@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.commands;
 
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
-import io.sphere.sdk.carts.queries.CartFetchById;
+import io.sphere.sdk.carts.queries.CartByIdFetch;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -230,7 +230,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
                     .containsExactly(newPrice);
 
             final LineItem lineItemOfTheChangedProduct =
-                    execute(CartFetchById.of(cartWithLineItem.getId())).get().getLineItems().get(0);
+                    execute(CartByIdFetch.of(cartWithLineItem.getId())).get().getLineItems().get(0);
             assertThat(lineItemOfTheChangedProduct.getPrice())
                     .overridingErrorMessage("the new product price is not automatically propagated to the line item in the cart")
                     .isEqualTo(oldPrice).isNotEqualTo(newPrice);

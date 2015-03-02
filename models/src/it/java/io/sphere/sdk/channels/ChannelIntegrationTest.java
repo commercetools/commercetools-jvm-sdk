@@ -1,8 +1,8 @@
 package io.sphere.sdk.channels;
 
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
-import io.sphere.sdk.channels.commands.ChannelDeleteByIdCommand;
-import io.sphere.sdk.channels.queries.ChannelFetchByKey;
+import io.sphere.sdk.channels.commands.ChannelDeleteCommand;
+import io.sphere.sdk.channels.queries.ChannelByKeyFetch;
 import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.client.SphereRequest;
@@ -22,7 +22,7 @@ import static java.util.Locale.ENGLISH;
 public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Override
     protected SphereRequest<Channel> deleteCommand(final Channel item) {
-        return ChannelDeleteByIdCommand.of(item);
+        return ChannelDeleteCommand.of(item);
     }
 
     @Override
@@ -53,7 +53,7 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Test
     public void FetchChannelByKey() throws Exception {
         withChannel(client(), ChannelDraftBuilder.of("foo"), channel -> {
-                    final Optional<Channel> channelOption = execute(ChannelFetchByKey.of(channel.getKey()));
+                    final Optional<Channel> channelOption = execute(ChannelByKeyFetch.of(channel.getKey()));
                     assertThat(channelOption).isPresentAs(channel);
                 }
         );
@@ -70,7 +70,7 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Test
     public void deleteChannelById() throws Exception {
         final Channel channel = createChannel();
-        final Channel deletedChannel = execute(ChannelDeleteByIdCommand.of(channel));
+        final Channel deletedChannel = execute(ChannelDeleteCommand.of(channel));
     }
 
     private Channel createChannel() {

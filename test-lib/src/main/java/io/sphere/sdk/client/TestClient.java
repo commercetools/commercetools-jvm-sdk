@@ -20,4 +20,8 @@ public final class TestClient {
     public void close() {
         underlying.close();
     }
+
+    public SphereClient getUnderlying() {
+        return underlying;
+    }
 }

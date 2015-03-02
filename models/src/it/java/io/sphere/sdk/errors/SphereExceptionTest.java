@@ -4,7 +4,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
-import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
+import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeName;
 import io.sphere.sdk.categories.queries.CategoryQuery;
@@ -112,7 +112,7 @@ public class SphereExceptionTest extends IntegrationTest {
         final Category cat1 = execute(CategoryCreateCommand.of(cat1draft));
         final CategoryDraft cat2draft = categoryDraftOf(randomSlug()).parent(cat1).build();
         final Category cat2 = execute(CategoryCreateCommand.of(cat2draft));
-        execute(CategoryDeleteByIdCommand.of(cat2));
+        execute(CategoryDeleteCommand.of(cat2));
 
     }
 

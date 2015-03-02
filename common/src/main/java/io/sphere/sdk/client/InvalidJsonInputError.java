@@ -2,6 +2,9 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.models.SphereError;
 
+/**
+ * Invalid JSON was sent to SPHERE.IO.
+ */
 public class InvalidJsonInputError extends SphereError {
     private final String detailedErrorMessage;
 

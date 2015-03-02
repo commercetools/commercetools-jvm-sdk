@@ -3,11 +3,11 @@ package io.sphere.sdk.producttypes;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
-import io.sphere.sdk.products.commands.ProductDeleteByIdCommand;
+import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
-import io.sphere.sdk.producttypes.commands.ProductTypeDeleteByIdCommand;
+import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.Predicate;
@@ -40,7 +40,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Override
     protected SphereRequest<ProductType> deleteCommand(final ProductType item) {
-        return ProductTypeDeleteByIdCommand.of(item);
+        return ProductTypeDeleteCommand.of(item);
     }
 
     @Override
@@ -330,7 +330,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
                 .getValue().orElse(false);
         assertThat(found).overridingErrorMessage("the attribute type should be recognized").isTrue();
 
-        execute(ProductDeleteByIdCommand.of(product));
+        execute(ProductDeleteCommand.of(product));
         cleanUpByName(productTypeName);
 
     }

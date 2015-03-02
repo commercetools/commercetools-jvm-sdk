@@ -3,12 +3,11 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
-import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
-import io.sphere.sdk.products.queries.ProductProjectionFetchById;
+import io.sphere.sdk.products.queries.ProductProjectionByIdFetch;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Predicate;
@@ -41,7 +40,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     public void getProductProjectionById() throws Exception {
         final Consumer<Product> user = product -> {
             final ProductProjectionType projectionType = STAGED;
-            final ProductProjection productProjection = execute(ProductProjectionFetchById.of(product.getId(), projectionType)).get();
+            final ProductProjection productProjection = execute(ProductProjectionByIdFetch.of(product.getId(), projectionType)).get();
             final String fetchedProjectionId = productProjection.getId();
             assertThat(fetchedProjectionId).isEqualTo(product.getId());
             assertThat(productProjection.getCategories()).isEqualTo(product.getMasterData().get(projectionType).get().getCategories());
