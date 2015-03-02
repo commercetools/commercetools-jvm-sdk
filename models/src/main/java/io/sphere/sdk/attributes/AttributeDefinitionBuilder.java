@@ -1,54 +1,59 @@
 package io.sphere.sdk.attributes;
 
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedStrings;
 
-abstract class AttributeDefinitionBuilder<B extends AttributeDefinitionBuilder<B>> extends Base {
-    private String name;
-    private LocalizedStrings label;
-    boolean isRequired = false;
+public class AttributeDefinitionBuilder extends Base implements Builder<AttributeDefinition> {
+    private final String name;
+    private final LocalizedStrings label;
+    private final AttributeType attributeType;
+
     private AttributeConstraint attributeConstraint = AttributeConstraint.NONE;
+    private TextInputHint inputHint = TextInputHint.SINGLE_LINE;
+    boolean isRequired = false;
     boolean isSearchable = true;
 
-    AttributeDefinitionBuilder(final String name, final LocalizedStrings label) {
+    AttributeDefinitionBuilder(final String name, final LocalizedStrings label, final AttributeType attributeType) {
         this.name = name;
         this.label = label;
+        this.attributeType = attributeType;
     }
 
-    public B attributeConstraint(final AttributeConstraint attributeConstraint) {
+    public AttributeDefinitionBuilder attributeConstraint(final AttributeConstraint attributeConstraint) {
         this.attributeConstraint = attributeConstraint;
-        return getThis();
+        return this;
     }
 
-    public B name(final String name) {
-        this.name = name;
-        return getThis();
+    public AttributeDefinitionBuilder inputHint(final TextInputHint inputHint) {
+        this.inputHint = inputHint;
+        return this;
     }
 
-    public B label(final LocalizedStrings label) {
-        this.label = label;
-        return getThis();
+    public AttributeDefinitionBuilder required(final boolean isRequired) {
+        this.isRequired = isRequired;
+        return this;
     }
 
-    protected abstract B getThis();
-
-    String getName() {
-        return name;
+    public AttributeDefinitionBuilder isRequired(final boolean isRequired) {
+        return required(isRequired);
     }
 
-    LocalizedStrings getLabel() {
-        return label;
+    public AttributeDefinitionBuilder searchable(final boolean isSearchable) {
+        this.isSearchable = isSearchable;
+        return this;
     }
 
-    boolean isRequired() {
-        return isRequired;
+    public AttributeDefinitionBuilder isSearchable(final boolean isSearchable) {
+        return searchable(isSearchable);
     }
 
-    AttributeConstraint getAttributeConstraint() {
-        return attributeConstraint;
+    @Override
+    public AttributeDefinition build() {
+        return new AttributeDefinition(attributeType, name, label, isRequired, attributeConstraint, isSearchable, inputHint);
     }
 
-    boolean isSearchable() {
-        return isSearchable;
+    public static AttributeDefinitionBuilder of(final String name, final LocalizedStrings label, final AttributeType attributeType) {
+        return new AttributeDefinitionBuilder(name, label, attributeType);
     }
 }

@@ -59,20 +59,20 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
 
     private static AttributeDefinition sizeAttribute() {
         LocalizedStrings sizeAttributeLabel = LocalizedStrings.of(ENGLISH, "size").plus(GERMAN, "Größe");
-        return EnumAttributeDefinitionBuilder.of("size", sizeAttributeLabel, Sizes.VALUES).
+        return AttributeDefinitionBuilder.of("size", sizeAttributeLabel, new EnumType(Sizes.VALUES)).
                 required(true).attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).build();
     }
 
     private static AttributeDefinition colorAttribute() {
         LocalizedStrings colorAttributeLabel = LocalizedStrings.of(ENGLISH, "color").plus(GERMAN, "Farbe");
-        return LocalizedEnumAttributeDefinitionBuilder.of("color", colorAttributeLabel, Colors.VALUES).
+        return AttributeDefinitionBuilder.of("color", colorAttributeLabel, new LocalizedEnumType(Colors.VALUES)).
                 required(true).attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).build();
     }
 
     private static AttributeDefinition srpAttribute() {
         LocalizedStrings srpLabel = LocalizedStrings.of(ENGLISH, "recommended retailer price (rrp)").
                 plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
-        return MoneyAttributeDefinitionBuilder.of(MONEY_ATTRIBUTE_NAME, srpLabel).isSearchable(false).build();
+        return AttributeDefinitionBuilder.of(MONEY_ATTRIBUTE_NAME, srpLabel, new MoneyType()).isSearchable(false).build();
     }
 }
 

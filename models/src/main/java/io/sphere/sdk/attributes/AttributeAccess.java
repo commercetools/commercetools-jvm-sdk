@@ -32,7 +32,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<Boolean> ofBoolean() {
-        return ofPrimitive(booleanTypeReference(), BooleanAttributeDefinition.class);
+        return ofPrimitive(booleanTypeReference(), BooleanType.class);
     }
 
     public static AttributeAccess<Set<Boolean>> ofBooleanSet() {
@@ -41,7 +41,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<String> ofString() {
-        return ofPrimitive(stringTypeReference(), TextAttributeDefinition.class);
+        return ofPrimitive(stringTypeReference(), TextType.class);
     }
 
     public static AttributeAccess<Set<String>> ofStringSet() {
@@ -58,7 +58,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<LocalizedStrings> ofLocalizedStrings() {
-        return ofPrimitive(LocalizedStrings.typeReference(), LocalizedTextAttributeDefinition.class);
+        return ofPrimitive(LocalizedStrings.typeReference(), LocalizedTextType.class);
     }
 
     public static AttributeAccess<Set<LocalizedStrings>> ofLocalizedStringsSet() {
@@ -66,7 +66,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<PlainEnumValue> ofPlainEnumValue() {
-        return ofEnumLike(PlainEnumValue.typeReference(), EnumAttributeDefinition.class);
+        return ofEnumLike(PlainEnumValue.typeReference(), EnumType.class);
     }
 
     public static AttributeAccess<Set<PlainEnumValue>> ofPlainEnumValueSet() {
@@ -74,7 +74,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<LocalizedEnumValue> ofLocalizedEnumValue() {
-        return ofEnumLike(LocalizedEnumValue.typeReference(), LocalizedEnumAttributeDefinition.class);
+        return ofEnumLike(LocalizedEnumValue.typeReference(), LocalizedEnumType.class);
     }
 
     public static AttributeAccess<Set<LocalizedEnumValue>> ofLocalizedEnumValueSet() {
@@ -82,7 +82,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<Double> ofDouble() {
-        return ofPrimitive(doubleTypeReference(), NumberAttributeDefinition.class);
+        return ofPrimitive(doubleTypeReference(), NumberType.class);
     }
 
     public static AttributeAccess<Set<Double>> ofDoubleSet() {
@@ -90,7 +90,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<MonetaryAmount> ofMoney() {
-        return ofPrimitive(monetaryAmountTypeReference(), MoneyAttributeDefinition.class);
+        return ofPrimitive(monetaryAmountTypeReference(), MoneyType.class);
     }
 
     public static AttributeAccess<Set<MonetaryAmount>> ofMoneySet() {
@@ -98,7 +98,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<LocalDate> ofDate() {
-        return ofPrimitive(localDateTypeReference(), DateAttributeDefinition.class);
+        return ofPrimitive(localDateTypeReference(), DateType.class);
     }
 
     public static AttributeAccess<Set<LocalDate>> ofDateSet() {
@@ -106,7 +106,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<LocalTime> ofTime() {
-        return ofPrimitive(localTimeTypeReference(), TimeAttributeDefinition.class);
+        return ofPrimitive(localTimeTypeReference(), TimeType.class);
     }
 
     public static AttributeAccess<Set<LocalTime>> ofTimeSet() {
@@ -115,7 +115,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<Instant> ofDateTime() {
-        return ofPrimitive(instantTypeReference(), DateTimeAttributeDefinition.class);
+        return ofPrimitive(instantTypeReference(), DateTimeType.class);
     }
 
     public static AttributeAccess<Set<Instant>> ofDateTimeSet() {
@@ -124,7 +124,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<Reference<Product>> ofProductReference() {
-        return OfReferenceType(ReferenceType.ofProduct());
+        return ofReferenceType(ReferenceType.ofProduct());
     }
 
     public static AttributeAccess<Set<Reference<Product>>> ofProductReferenceSet() {
@@ -133,7 +133,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<Reference<ProductType>> ofProductTypeReference() {
-        return OfReferenceType(ReferenceType.ofProductType());
+        return ofReferenceType(ReferenceType.ofProductType());
     }
 
     public static AttributeAccess<Set<Reference<ProductType>>> ofProductTypeReferenceSet() {
@@ -142,7 +142,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<Reference<Category>> ofCategoryReference() {
-        return OfReferenceType(ReferenceType.ofCategory());
+        return ofReferenceType(ReferenceType.ofCategory());
     }
 
     public static AttributeAccess<Set<Reference<Category>>> ofCategoryReferenceSet() {
@@ -151,7 +151,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<Reference<Channel>> ofChannelReference() {
-        return OfReferenceType(ReferenceType.ofChannel());
+        return ofReferenceType(ReferenceType.ofChannel());
     }
 
     public static AttributeAccess<Set<Reference<Channel>>> ofChannelReferenceSet() {
@@ -183,55 +183,64 @@ public final class AttributeAccess<T> extends Base {
         return canHandle.test(attributeDefinition);
     }
 
-    private static <T extends WithKey> AttributeAccess<T> ofEnumLike(final TypeReference<T> typeReference, final Class<? extends AttributeDefinition> attributeDefinitionClass) {
+    private static <T extends WithKey> AttributeAccess<T> ofEnumLike(final TypeReference<T> typeReference, final Class<? extends AttributeType> attributeTypeClass) {
         final AttributeMapper<T> mapper = new EnumLikeAttributeMapperImpl<>(typeReference);
         return new AttributeAccess<>(mapper, attributeDefinition ->
-                attributeDefinitionClass.isAssignableFrom(attributeDefinition.getClass())
+                attributeTypeClass.isAssignableFrom(attributeDefinition.getAttributeType().getClass())
         );
     }
 
-    private static <T> AttributeAccess<T> ofPrimitive(final TypeReference<T> typeReference, final Class<? extends AttributeDefinition> attributeDefinitionClass) {
-        return new AttributeAccess<>(AttributeMapper.of(typeReference), attributeDefinition -> attributeDefinitionClass.isAssignableFrom(attributeDefinition.getClass()));
+    private static <T> AttributeAccess<T> ofPrimitive(final TypeReference<T> typeReference, final Class<? extends AttributeType> attributeTypeClass) {
+        return new AttributeAccess<>(AttributeMapper.of(typeReference), attributeDefinition -> attributeTypeClass.isAssignableFrom(attributeDefinition.getAttributeType().getClass()));
     }
 
-    private static <T> AttributeAccess<Reference<T>> OfReferenceType(final RichReferenceType<T> referenceType) {
+    private static <T> AttributeAccess<Reference<T>> ofReferenceType(final RichReferenceType<T> referenceType) {
         final AttributeMapper<Reference<T>> mapper = new ReferenceAttributeMapperImpl<>(referenceType.typeReference());
+
         return new AttributeAccess<>(mapper,
                 attributeDefinition -> {
-                    boolean canHandle = false;
-                    if (ReferenceAttributeDefinition.class.isAssignableFrom(attributeDefinition.getClass())) {
-                        ReferenceAttributeDefinition casted = (ReferenceAttributeDefinition) attributeDefinition;
-                        canHandle = casted.getAttributeType().getReferenceTypeId().equals(referenceType.getReferenceTypeId());
+                    if (attributeDefinition.getAttributeType() instanceof ReferenceType) {
+                        final ReferenceType attributeType = (ReferenceType) attributeDefinition.getAttributeType();
+
+                        return attributeType.getReferenceTypeId().equals(referenceType.getReferenceTypeId());
+                    } else {
+                        return false;
                     }
-                    return canHandle;
                 });
     }
 
     private static <T> AttributeAccess<Set<T>> ofSet(final Class<? extends AttributeType> typeClass, final TypeReference<Set<T>> typeReference) {
         final AttributeMapper<Set<T>> mapper = AttributeMapper.of(typeReference);
         return new AttributeAccess<>(mapper, attributeDefinition -> {
-            boolean canHandle = false;
-            if (SetAttributeDefinition.class.isAssignableFrom(attributeDefinition.getClass())) {
-                final SetAttributeDefinition setAttributeDefinition = (SetAttributeDefinition) attributeDefinition;
-                final SetType attributeType = setAttributeDefinition.getAttributeType();
-                canHandle = typeClass.isAssignableFrom(attributeType.getElementType().getClass());
+            if (attributeDefinition.getAttributeType() instanceof SetType) {
+                final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
+
+                return typeClass.isAssignableFrom(attributeType.getElementType().getClass());
+            } else {
+                return false;
             }
-            return canHandle;
         });
     }
 
     private static <T> AttributeAccess<Set<Reference<T>>> ofSet(final ReferenceType requiredReferenceType, final TypeReference<Set<Reference<T>>> typeReference) {
         final AttributeMapper<Set<Reference<T>>> mapper = AttributeMapper.of(typeReference);
         return new AttributeAccess<>(mapper, attributeDefinition -> {
-            boolean canHandle = false;
-            if (SetAttributeDefinition.class.isAssignableFrom(attributeDefinition.getClass())) {
-                final SetAttributeDefinition setAttributeDefinition = (SetAttributeDefinition) attributeDefinition;
-                final SetType attributeType = setAttributeDefinition.getAttributeType();
+            final boolean canHandle;
+
+            if (attributeDefinition.getAttributeType() instanceof SetType) {
+                final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
+
                 if (attributeType.getElementType() instanceof ReferenceType) {
                     final ReferenceType referenceType = (ReferenceType) attributeType.getElementType();
+
                     canHandle = referenceType.getReferenceTypeId().equals(requiredReferenceType.getReferenceTypeId());
+                } else {
+                    canHandle = false;
                 }
+            } else {
+                canHandle = false;
             }
+
             return canHandle;
         });
     }
@@ -240,13 +249,13 @@ public final class AttributeAccess<T> extends Base {
                                                              final TypeReference<Set<T>> typeReference) {
         final AttributeMapper<Set<T>> mapper = new EnumLikeSetAttributeMapperImpl<>(typeReference);
         return new AttributeAccess<>(mapper, attributeDefinition -> {
-            boolean canHandle1 = false;
-            if (SetAttributeDefinition.class.isAssignableFrom(attributeDefinition.getClass())) {
-                final SetAttributeDefinition setAttributeDefinition = (SetAttributeDefinition) attributeDefinition;
-                final SetType attributeType = setAttributeDefinition.getAttributeType();
-                canHandle1 = clazz.isAssignableFrom(attributeType.getElementType().getClass());
+            if (attributeDefinition.getAttributeType() instanceof SetType) {
+                final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
+
+                return clazz.isAssignableFrom(attributeType.getElementType().getClass());
+            } else {
+                return false;
             }
-            return canHandle1;
         });
     }
 }
