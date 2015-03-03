@@ -24,12 +24,12 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 <dependency>
   <groupId>io.sphere.sdk.jvm</groupId>
   <artifactId>models</artifactId>
-  <version>1.0.0-M10</version>
+  <version>1.0.0-M11</version>
 </dependency>
 <dependency>
   <groupId>io.sphere.sdk.jvm</groupId>
   <artifactId>java-client</artifactId>
-  <version>1.0.0-M10</version>
+  <version>1.0.0-M11</version>
 </dependency>
 ````
 
