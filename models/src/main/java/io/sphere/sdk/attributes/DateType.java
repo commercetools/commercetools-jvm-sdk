@@ -1,6 +1,11 @@
 package io.sphere.sdk.attributes;
 
 public class DateType extends AttributeTypeBase {
-    public DateType() {
+    private static final DateType CACHED_INSTANCE = new DateType();
+
+    private DateType() {}
+
+    public static DateType of() {
+        return CACHED_INSTANCE;
     }
 }
