@@ -229,7 +229,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     @Test
-    public void createLocalizedTextAttribute() throws Exception {
+    public void createLocalizedStringsAttribute() throws Exception {
         executeTest(LocalizedStringsType.class, AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringsType.of()).
                 inputHint(TEXT_INPUT_HINT).
                 attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
