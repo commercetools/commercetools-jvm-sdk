@@ -17,13 +17,12 @@ public class ImportLineItemBuilder extends Base implements Builder<ImportLineIte
     private long quantity;
     private Optional<List<ItemState>> state = Optional.empty();
     private Optional<Reference<Channel>> supplyChannel = Optional.empty();
-    private TaxRate taxRate;
+    private Optional<TaxRate> taxRate = Optional.empty();
 
-    private ImportLineItemBuilder(final ImportProductVariant variant, final long quantity, final Price price, final TaxRate taxRate) {
+    private ImportLineItemBuilder(final ImportProductVariant variant, final long quantity, final Price price) {
         this.price = price;
         this.variant = variant;
         this.quantity = quantity;
-        this.taxRate = taxRate;
     }
 
     public ImportLineItemBuilder productId(final Optional<String> productId) {
@@ -77,13 +76,17 @@ public class ImportLineItemBuilder extends Base implements Builder<ImportLineIte
         return supplyChannel(Optional.of(supplyChannel.toReference()));
     }
 
-    public ImportLineItemBuilder taxRate(final TaxRate taxRate) {
+    public ImportLineItemBuilder taxRate(final Optional<TaxRate> taxRate) {
         this.taxRate = taxRate;
         return this;
     }
 
-    public static ImportLineItemBuilder of(final ImportProductVariant variant, final long quantity, final Price price, final TaxRate taxRate) {
-        return new ImportLineItemBuilder(variant, quantity, price, taxRate);
+    public ImportLineItemBuilder taxRate(final TaxRate taxRate) {
+        return taxRate(Optional.of(taxRate));
+    }
+
+    public static ImportLineItemBuilder of(final ImportProductVariant variant, final long quantity, final Price price) {
+        return new ImportLineItemBuilder(variant, quantity, price);
     }
 
     @Override

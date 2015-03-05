@@ -27,7 +27,7 @@ public interface ImportLineItem {
 
     Optional<Reference<Channel>> getSupplyChannel();
 
-    TaxRate getTaxRate();
+    Optional<TaxRate> getTaxRate();
 
     ImportProductVariant getVariant();
 }
