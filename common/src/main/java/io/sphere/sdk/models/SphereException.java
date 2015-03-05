@@ -85,7 +85,7 @@ public class SphereException extends RuntimeException {
     }
 
     @Override
-    public String getMessage() {
+    public final String getMessage() {
         StringBuilder builder = new StringBuilder("\n===== BEGIN EXCEPTION OUTPUT =====").append("\n");
         final String httpRequest = getUnderlyingHttpRequest().orElse("<unknown>");
         return builder
