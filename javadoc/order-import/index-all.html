@@ -344,6 +344,10 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/AttributeMapper.html" title="interface in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeMapper</span></a>&lt;<a href="io/sphere/sdk/attributes/AttributeMapper.html" title="type parameter in AttributeMapper">T</a>&gt; - Interface in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#attributes-java.util.Optional-">attributes(Optional&lt;List&lt;Attribute&gt;&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#attributes-java.util.List-">attributes(List&lt;Attribute&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariantBuilder.html#attributes-java.util.List-">attributes(List&lt;Attribute&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariantBuilder.html#attributes-io.sphere.sdk.attributes.Attribute...-">attributes(Attribute...)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a></dt>
@@ -469,6 +473,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportLineItemBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportLineItemBuilder.html" title="class in io.sphere.sdk.orders">ImportLineItemBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportOrderBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1635,6 +1641,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeDefinition.html#getAttributeConstraint--">getAttributeConstraint()</a></span> - Method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.attributes">AttributeDefinition</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariant.html#getAttributes--">getAttributes()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariant.html" title="interface in io.sphere.sdk.orders">ImportProductVariant</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html#getAttributes--">getAttributes()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">AddVariant</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariant.html#getAttributes--">getAttributes()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></dt>
@@ -2043,6 +2051,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#getId--">getId()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariant.html#getId--">getId()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariant.html" title="interface in io.sphere.sdk.orders">ImportProductVariant</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderFromCartDraft.html#getId--">getId()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderFromCartDraft.html" title="class in io.sphere.sdk.orders">OrderFromCartDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Parcel.html#getId--">getId()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Parcel.html" title="class in io.sphere.sdk.orders">Parcel</a></dt>
@@ -2058,6 +2068,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <div class="block">The id is created by the backend, so will only be present if fetched from the backend.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/AddExternalImage.html#getImage--">getImage()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions">AddExternalImage</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariant.html#getImages--">getImages()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariant.html" title="interface in io.sphere.sdk.orders">ImportProductVariant</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariant.html#getImages--">getImages()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></dt>
 <dd>&nbsp;</dd>
@@ -2461,6 +2473,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingRate.html#getPrice--">getPrice()</a></span> - Method in class io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariant.html#getPrices--">getPrices()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariant.html" title="interface in io.sphere.sdk.orders">ImportProductVariant</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html#getPrices--">getPrices()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">AddVariant</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariant.html#getPrices--">getPrices()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></dt>
@@ -2616,6 +2630,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ZoneRate.html#getShippingRates--">getShippingRates()</a></span> - Method in class io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods">ZoneRate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#getShippingRatesForZone-io.sphere.sdk.models.Referenceable-">getShippingRatesForZone(Referenceable&lt;Zone&gt;)</a></span> - Method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariant.html#getSku--">getSku()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariant.html" title="interface in io.sphere.sdk.orders">ImportProductVariant</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html#getSku--">getSku()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">AddVariant</a></dt>
 <dd>&nbsp;</dd>
@@ -3125,6 +3141,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html#id-java.lang.String-">id(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#id-java.util.Optional-">id(Optional&lt;Integer&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#id-java.lang.Integer-">id(Integer)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#id--">id()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">DefaultModelQueryModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html#id-java.util.Optional-">id(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxRateBuilder</a></dt>
@@ -3144,6 +3164,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><a href="io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">Image</span></a> - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/ImageDimensions.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">ImageDimensions</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#images-java.util.Optional-">images(Optional&lt;List&lt;Image&gt;&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#images-java.util.List-">images(List&lt;Image&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariantBuilder.html#images-java.util.List-">images(List&lt;Image&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -3165,9 +3189,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">ImportOrderBuilder</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/orders/ImportProductVariant.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">ImportProductVariant</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
+<dt><a href="io/sphere/sdk/orders/ImportProductVariant.html" title="interface in io.sphere.sdk.orders"><span class="typeNameLink">ImportProductVariant</span></a> - Interface in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariant.html#ImportProductVariant--">ImportProductVariant()</a></span> - Constructor for class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariant.html" title="class in io.sphere.sdk.orders">ImportProductVariant</a></dt>
+<dt><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">ImportProductVariantBuilder</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraftBuilder.html#initial-java.util.Optional-">initial(Optional&lt;Boolean&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -4796,6 +4820,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofProductTypeReferenceSet--">ofProductTypeReferenceSet()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#ofSku-java.lang.String-">ofSku(String)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeConstraint.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeConstraint.html" title="enum in io.sphere.sdk.attributes">AttributeConstraint</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/TextInputHint.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/TextInputHint.html" title="enum in io.sphere.sdk.attributes">TextInputHint</a></dt>
@@ -4862,6 +4888,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#ofVariantId-int-">ofVariantId(int)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpdate(CustomObject&lt;T&gt;, T, TypeReference&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Creates a draft for updating a custom object.</div>
@@ -5076,6 +5104,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariantDraftBuilder.html#price-io.sphere.sdk.products.Price-">price(Price)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariantDraftBuilder.html" title="class in io.sphere.sdk.products">ProductVariantDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">PriceBuilder</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#prices-java.util.Optional-">prices(Optional&lt;List&lt;Price&gt;&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#prices-java.util.List-">prices(List&lt;Price&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariantBuilder.html#prices-java.util.List-">prices(List&lt;Price&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -5956,6 +5988,10 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>
 <div class="block">The actual number of results returned.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#sku-java.util.Optional-">sku(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html#sku-java.lang.String-">sku(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariantBuilder.html#sku-java.util.Optional-">sku(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariantBuilder.html#sku-java.lang.String-">sku(String)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a></dt>
@@ -6104,7 +6140,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#state-java.lang.String-">state(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportLineItemBuilder.html#state-java.util.List-">state(List&lt;ItemState&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportLineItemBuilder.html" title="class in io.sphere.sdk.orders">ImportLineItemBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportLineItemBuilder.html#state-java.util.Optional-">state(Optional&lt;List&lt;ItemState&gt;&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportLineItemBuilder.html" title="class in io.sphere.sdk.orders">ImportLineItemBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states"><span class="typeNameLink">State</span></a> - Interface in <a href="io/sphere/sdk/states/package-summary.html">io.sphere.sdk.states</a></dt>
 <dd>
@@ -6172,7 +6208,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportLineItemBuilder.html#supplyChannel-java.util.Optional-">supplyChannel(Optional&lt;Reference&lt;Channel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportLineItemBuilder.html" title="class in io.sphere.sdk.orders">ImportLineItemBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportLineItemBuilder.html#supplyChannel-io.sphere.sdk.models.Reference-">supplyChannel(Reference&lt;Channel&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportLineItemBuilder.html" title="class in io.sphere.sdk.orders">ImportLineItemBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportLineItemBuilder.html#supplyChannel-io.sphere.sdk.models.Referenceable-">supplyChannel(Referenceable&lt;Channel&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportLineItemBuilder.html" title="class in io.sphere.sdk.orders">ImportLineItemBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/SyncInfo.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">SyncInfo</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
