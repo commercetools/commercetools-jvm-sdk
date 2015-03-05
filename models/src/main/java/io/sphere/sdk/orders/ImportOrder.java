@@ -21,7 +21,7 @@ import java.util.Optional;
 public interface ImportOrder {
     Optional<Address> getBillingAddress();
 
-    Instant getCompletedAt();
+    Optional<Instant> getCompletedAt();
 
     Optional<CountryCode> getCountry();
 
@@ -37,17 +37,17 @@ public interface ImportOrder {
 
     Optional<String> getOrderNumber();
 
-    OrderState getOrderState();
+    Optional<OrderState> getOrderState();
 
     Optional<PaymentState> getPaymentState();
 
     Optional<ShipmentState> getShipmentState();
 
-    Address getShippingAddress();
+    Optional<Address> getShippingAddress();
 
     Optional<OrderShippingInfo> getShippingInfo();
 
-    TaxedPrice getTaxedPrice();
+    Optional<TaxedPrice> getTaxedPrice();
 
     MonetaryAmount getTotalPrice();
 }

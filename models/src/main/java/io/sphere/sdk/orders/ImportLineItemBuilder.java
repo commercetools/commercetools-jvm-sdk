@@ -64,6 +64,10 @@ public class ImportLineItemBuilder extends Base implements Builder<ImportLineIte
         return this;
     }
 
+    public ImportLineItemBuilder state(final List<ItemState> state) {
+        return state(Optional.of(state));
+    }
+
     public ImportLineItemBuilder supplyChannel(final Optional<Reference<Channel>> supplyChannel) {
         this.supplyChannel = supplyChannel;
         return this;

@@ -19,22 +19,18 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
     private List<ImportLineItem> lineItems = Collections.emptyList();
     private List<CustomLineItem> customLineItems = Collections.emptyList();
     private MonetaryAmount totalPrice;
-    private TaxedPrice taxedPrice;
-    private Address shippingAddress;
+    private Optional<TaxedPrice> taxedPrice = Optional.empty();
+    private Optional<Address> shippingAddress = Optional.empty();
     private Optional<Address> billingAddress = Optional.empty();
     private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
     private Optional<CountryCode> country = Optional.empty();
-    private OrderState orderState;
+    private Optional<OrderState> orderState;
     private Optional<ShipmentState> shipmentState = Optional.empty();
     private Optional<PaymentState> paymentState = Optional.empty();
     private Optional<OrderShippingInfo> shippingInfo = Optional.empty();
-    private Instant completedAt;
+    private Optional<Instant> completedAt = Optional.empty();
 
-    private ImportOrderBuilder(final MonetaryAmount totalPrice, final TaxedPrice taxedPrice, final Instant completedAt, final OrderState orderState, final Address shippingAddress) {
-        this.completedAt = completedAt;
-        this.orderState = orderState;
-        this.shippingAddress = shippingAddress;
-        this.taxedPrice = taxedPrice;
+    private ImportOrderBuilder(final MonetaryAmount totalPrice) {
         this.totalPrice = totalPrice;
     }
 
@@ -81,11 +77,19 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
     }
 
     public ImportOrderBuilder taxedPrice(final TaxedPrice taxedPrice) {
+        return taxedPrice(Optional.of(taxedPrice));
+    }
+
+    public ImportOrderBuilder taxedPrice(final Optional<TaxedPrice> taxedPrice) {
         this.taxedPrice = taxedPrice;
         return this;
     }
 
     public ImportOrderBuilder shippingAddress(final Address shippingAddress) {
+        return shippingAddress(Optional.of(shippingAddress));
+    }
+
+    public ImportOrderBuilder shippingAddress(final Optional<Address> shippingAddress) {
         this.shippingAddress = shippingAddress;
         return this;
     }
@@ -117,9 +121,13 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
         return country(Optional.of(country));
     }
 
-    public ImportOrderBuilder orderState(final OrderState orderState) {
+    public ImportOrderBuilder orderState(final Optional<OrderState> orderState) {
         this.orderState = orderState;
         return this;
+    }
+
+    public ImportOrderBuilder orderState(final OrderState orderState) {
+        return orderState(Optional.of(orderState));
     }
 
     public ImportOrderBuilder shipmentState(final Optional<ShipmentState> shipmentState) {
@@ -149,13 +157,17 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
         return shippingInfo(Optional.of(shippingInfo));
     }
 
-    public ImportOrderBuilder completedAt(final Instant completedAt) {
+    public ImportOrderBuilder completedAt(final Optional<Instant> completedAt) {
         this.completedAt = completedAt;
         return this;
     }
 
-    public static ImportOrderBuilder of(final MonetaryAmount totalPrice, final TaxedPrice taxedPrice, final Instant completedAt, final OrderState orderState, final Address shippingAddress) {
-        return new ImportOrderBuilder(totalPrice, taxedPrice, completedAt, orderState, shippingAddress);
+    public ImportOrderBuilder completedAt(final Instant completedAt) {
+        return completedAt(Optional.of(completedAt));
+    }
+
+    public static ImportOrderBuilder of(final MonetaryAmount totalPrice) {
+        return new ImportOrderBuilder(totalPrice);
     }
 
     @Override

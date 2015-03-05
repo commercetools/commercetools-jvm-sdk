@@ -20,18 +20,18 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     private final List<ImportLineItem> lineItems;
     private final List<CustomLineItem> customLineItems;
     private final MonetaryAmount totalPrice;
-    private final TaxedPrice taxedPrice;
-    private final Address shippingAddress;
+    private final Optional<TaxedPrice> taxedPrice;
+    private final Optional<Address> shippingAddress;
     private final Optional<Address> billingAddress;
     private final Optional<Reference<CustomerGroup>> customerGroup;
     private final Optional<CountryCode> country;
-    private final OrderState orderState;
+    private final Optional<OrderState> orderState;
     private final Optional<ShipmentState> shipmentState;
     private final Optional<PaymentState> paymentState;
     private final Optional<OrderShippingInfo> shippingInfo;
-    private final Instant completedAt;
+    private final Optional<Instant> completedAt;
 
-    public ImportOrderImpl(final Optional<Address> billingAddress, final Optional<String> orderNumber, final Optional<String> customerId, final Optional<String> customerEmail, final List<ImportLineItem> lineItems, final List<CustomLineItem> customLineItems, final MonetaryAmount totalPrice, final TaxedPrice taxedPrice, final Address shippingAddress, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<CountryCode> country, final OrderState orderState, final Optional<ShipmentState> shipmentState, final Optional<PaymentState> paymentState, final Optional<OrderShippingInfo> shippingInfo, final Instant completedAt) {
+    public ImportOrderImpl(final Optional<Address> billingAddress, final Optional<String> orderNumber, final Optional<String> customerId, final Optional<String> customerEmail, final List<ImportLineItem> lineItems, final List<CustomLineItem> customLineItems, final MonetaryAmount totalPrice, final Optional<TaxedPrice> taxedPrice, final Optional<Address> shippingAddress, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<CountryCode> country, final Optional<OrderState> orderState, final Optional<ShipmentState> shipmentState, final Optional<PaymentState> paymentState, final Optional<OrderShippingInfo> shippingInfo, final Optional<Instant> completedAt) {
         this.billingAddress = billingAddress;
         this.orderNumber = orderNumber;
         this.customerId = customerId;
@@ -56,7 +56,7 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     }
 
     @Override
-    public Instant getCompletedAt() {
+    public Optional<Instant> getCompletedAt() {
         return completedAt;
     }
 
@@ -96,7 +96,7 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     }
 
     @Override
-    public OrderState getOrderState() {
+    public Optional<OrderState> getOrderState() {
         return orderState;
     }
 
@@ -111,7 +111,7 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     }
 
     @Override
-    public Address getShippingAddress() {
+    public Optional<Address> getShippingAddress() {
         return shippingAddress;
     }
 
@@ -121,7 +121,7 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     }
 
     @Override
-    public TaxedPrice getTaxedPrice() {
+    public Optional<TaxedPrice> getTaxedPrice() {
         return taxedPrice;
     }
 
