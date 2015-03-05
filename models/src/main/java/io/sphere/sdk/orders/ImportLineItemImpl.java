@@ -13,7 +13,7 @@ import java.util.Optional;
 
 final class ImportLineItemImpl extends Base implements ImportLineItem {
     private final Optional<String> productId;
-    private final Optional<LocalizedStrings> name;
+    private final LocalizedStrings name;
     private final ImportProductVariant variant;
     private final Price price;
     private final long quantity;
@@ -21,7 +21,7 @@ final class ImportLineItemImpl extends Base implements ImportLineItem {
     private final Optional<Reference<Channel>> supplyChannel;
     private final Optional<TaxRate> taxRate;
 
-    public ImportLineItemImpl(final Optional<LocalizedStrings> name, final Optional<String> productId, final ImportProductVariant variant, final Price price, final long quantity, final Optional<List<ItemState>> state, final Optional<Reference<Channel>> supplyChannel, final Optional<TaxRate> taxRate) {
+    public ImportLineItemImpl(final LocalizedStrings name, final Optional<String> productId, final ImportProductVariant variant, final Price price, final long quantity, final Optional<List<ItemState>> state, final Optional<Reference<Channel>> supplyChannel, final Optional<TaxRate> taxRate) {
         this.name = name;
         this.productId = productId;
         this.variant = variant;
@@ -33,7 +33,7 @@ final class ImportLineItemImpl extends Base implements ImportLineItem {
     }
 
     @Override
-    public Optional<LocalizedStrings> getName() {
+    public LocalizedStrings getName() {
         return name;
     }
 

@@ -37,7 +37,7 @@ public interface ImportOrder {
 
     Optional<String> getOrderNumber();
 
-    Optional<OrderState> getOrderState();
+    OrderState getOrderState();
 
     Optional<PaymentState> getPaymentState();
 

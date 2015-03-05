@@ -24,14 +24,15 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
     private Optional<Address> billingAddress = Optional.empty();
     private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
     private Optional<CountryCode> country = Optional.empty();
-    private Optional<OrderState> orderState;
+    private OrderState orderState;
     private Optional<ShipmentState> shipmentState = Optional.empty();
     private Optional<PaymentState> paymentState = Optional.empty();
     private Optional<OrderShippingInfo> shippingInfo = Optional.empty();
     private Optional<Instant> completedAt = Optional.empty();
 
-    private ImportOrderBuilder(final MonetaryAmount totalPrice) {
+    private ImportOrderBuilder(final MonetaryAmount totalPrice, final OrderState orderState) {
         this.totalPrice = totalPrice;
+        this.orderState = orderState;
     }
 
     public ImportOrderBuilder orderNumber(final Optional<String> orderNumber) {
@@ -61,12 +62,12 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
         return customerEmail(Optional.of(customerEmail));
     }
 
-    public ImportOrderBuilder lineItems(final List<ImportLineItem> ancestors) {
+    public ImportOrderBuilder lineItems(final List<ImportLineItem> lineItems) {
         this.lineItems = lineItems;
         return this;
     }
 
-    public ImportOrderBuilder customLineItems(final List<CustomLineItem> ancestors) {
+    public ImportOrderBuilder customLineItems(final List<CustomLineItem> customLineItems) {
         this.customLineItems = customLineItems;
         return this;
     }
@@ -121,13 +122,9 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
         return country(Optional.of(country));
     }
 
-    public ImportOrderBuilder orderState(final Optional<OrderState> orderState) {
+    public ImportOrderBuilder orderState(final OrderState orderState) {
         this.orderState = orderState;
         return this;
-    }
-
-    public ImportOrderBuilder orderState(final OrderState orderState) {
-        return orderState(Optional.of(orderState));
     }
 
     public ImportOrderBuilder shipmentState(final Optional<ShipmentState> shipmentState) {
@@ -166,8 +163,30 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
         return completedAt(Optional.of(completedAt));
     }
 
-    public static ImportOrderBuilder of(final MonetaryAmount totalPrice) {
-        return new ImportOrderBuilder(totalPrice);
+    /**
+     * Creates a builder for {@link io.sphere.sdk.orders.ImportOrder} with at least one line item.
+     * You can add {@link io.sphere.sdk.carts.CustomLineItem}s with {@link #customLineItems(java.util.List)}.
+     *
+     * @param totalPrice the total price of the order
+     * @param orderState the state of the order
+     * @param lineItems a list of line items with at least one element
+     * @return a new builder
+     */
+    public static ImportOrderBuilder ofLineItems(final MonetaryAmount totalPrice, final OrderState orderState, final List<ImportLineItem> lineItems) {
+        return new ImportOrderBuilder(totalPrice, orderState).lineItems(lineItems);
+    }
+
+    /**
+     * Creates a builder for {@link io.sphere.sdk.orders.ImportOrder} with at least one custom line item.
+     * You can add {@link io.sphere.sdk.carts.LineItem}s with {@link #lineItems(java.util.List)}.
+     *
+     * @param totalPrice the total price of the order
+     * @param orderState the state of the order
+     * @param customLineItems a list of custom line items with at least one element
+     * @return
+     */
+    public static ImportOrderBuilder ofCustomLineItems(final MonetaryAmount totalPrice, final OrderState orderState, final List<CustomLineItem> customLineItems) {
+        return new ImportOrderBuilder(totalPrice, orderState).customLineItems(customLineItems);
     }
 
     @Override

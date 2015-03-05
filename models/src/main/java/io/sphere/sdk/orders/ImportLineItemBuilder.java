@@ -10,42 +10,21 @@ import java.util.List;
 import java.util.Optional;
 
 public class ImportLineItemBuilder extends Base implements Builder<ImportLineItem> {
-    private Optional<String> productId = Optional.empty();
-    private Optional<LocalizedStrings> name = Optional.empty();
-    private ImportProductVariant variant;
+    private final Optional<String> productId;
+    private final LocalizedStrings name;
+    private final ImportProductVariant variant;
     private Price price;
     private long quantity;
     private Optional<List<ItemState>> state = Optional.empty();
     private Optional<Reference<Channel>> supplyChannel = Optional.empty();
     private Optional<TaxRate> taxRate = Optional.empty();
 
-    private ImportLineItemBuilder(final ImportProductVariant variant, final long quantity, final Price price) {
+    private ImportLineItemBuilder(final ImportProductVariant variant, final long quantity, final Price price, final Optional<String> productId, final LocalizedStrings name) {
         this.price = price;
         this.variant = variant;
         this.quantity = quantity;
-    }
-
-    public ImportLineItemBuilder productId(final Optional<String> productId) {
         this.productId = productId;
-        return this;
-    }
-
-    public ImportLineItemBuilder productId(final String productId) {
-        return productId(Optional.of(productId));
-    }
-
-    public ImportLineItemBuilder name(final Optional<LocalizedStrings> name) {
         this.name = name;
-        return this;
-    }
-
-    public ImportLineItemBuilder name(final LocalizedStrings name) {
-        return name(Optional.of(name));
-    }
-
-    public ImportLineItemBuilder variant(final ImportProductVariant variant) {
-        this.variant = variant;
-        return this;
     }
 
     public ImportLineItemBuilder price(final Price price) {
@@ -85,8 +64,8 @@ public class ImportLineItemBuilder extends Base implements Builder<ImportLineIte
         return taxRate(Optional.of(taxRate));
     }
 
-    public static ImportLineItemBuilder of(final ImportProductVariant variant, final long quantity, final Price price) {
-        return new ImportLineItemBuilder(variant, quantity, price);
+    public static ImportLineItemBuilder of(final ImportProductVariant variant, final long quantity, final Price price, final LocalizedStrings name) {
+        return new ImportLineItemBuilder(variant, quantity, price, variant.getProductId(), name);
     }
 
     @Override

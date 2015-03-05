@@ -15,7 +15,7 @@ import java.util.Optional;
  * @see io.sphere.sdk.orders.ImportLineItemBuilder
  */
 public interface ImportLineItem {
-    Optional<LocalizedStrings> getName();
+    LocalizedStrings getName();
 
     Price getPrice();
 

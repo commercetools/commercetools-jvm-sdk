@@ -25,13 +25,13 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     private final Optional<Address> billingAddress;
     private final Optional<Reference<CustomerGroup>> customerGroup;
     private final Optional<CountryCode> country;
-    private final Optional<OrderState> orderState;
+    private final OrderState orderState;
     private final Optional<ShipmentState> shipmentState;
     private final Optional<PaymentState> paymentState;
     private final Optional<OrderShippingInfo> shippingInfo;
     private final Optional<Instant> completedAt;
 
-    public ImportOrderImpl(final Optional<Address> billingAddress, final Optional<String> orderNumber, final Optional<String> customerId, final Optional<String> customerEmail, final List<ImportLineItem> lineItems, final List<CustomLineItem> customLineItems, final MonetaryAmount totalPrice, final Optional<TaxedPrice> taxedPrice, final Optional<Address> shippingAddress, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<CountryCode> country, final Optional<OrderState> orderState, final Optional<ShipmentState> shipmentState, final Optional<PaymentState> paymentState, final Optional<OrderShippingInfo> shippingInfo, final Optional<Instant> completedAt) {
+    public ImportOrderImpl(final Optional<Address> billingAddress, final Optional<String> orderNumber, final Optional<String> customerId, final Optional<String> customerEmail, final List<ImportLineItem> lineItems, final List<CustomLineItem> customLineItems, final MonetaryAmount totalPrice, final Optional<TaxedPrice> taxedPrice, final Optional<Address> shippingAddress, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<CountryCode> country, final OrderState orderState, final Optional<ShipmentState> shipmentState, final Optional<PaymentState> paymentState, final Optional<OrderShippingInfo> shippingInfo, final Optional<Instant> completedAt) {
         this.billingAddress = billingAddress;
         this.orderNumber = orderNumber;
         this.customerId = customerId;
@@ -96,7 +96,7 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     }
 
     @Override
-    public Optional<OrderState> getOrderState() {
+    public OrderState getOrderState() {
         return orderState;
     }
 

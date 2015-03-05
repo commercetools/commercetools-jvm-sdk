@@ -7,6 +7,10 @@ import io.sphere.sdk.products.Price;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ *
+ * @see ImportProductVariantBuilder
+ */
 public interface ImportProductVariant {
     Optional<List<Attribute>> getAttributes();
 
@@ -17,4 +21,10 @@ public interface ImportProductVariant {
     Optional<List<Price>> getPrices();
 
     Optional<String> getSku();
+
+    /**
+     * Field is not part of the SPHERE.IO API, it is used to initialize {@link io.sphere.sdk.orders.ImportLineItemBuilder} correctly.
+     * @return the product ID
+     */
+    Optional<String> getProductId();
 }

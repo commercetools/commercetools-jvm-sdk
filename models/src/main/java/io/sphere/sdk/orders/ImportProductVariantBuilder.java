@@ -10,31 +10,17 @@ import java.util.List;
 import java.util.Optional;
 
 public class ImportProductVariantBuilder extends Base implements Builder<ImportProductVariant> {
-    private Optional<Integer> id = Optional.empty();
-    private Optional<String> sku = Optional.empty();
+    private final Optional<Integer> id;
+    private final Optional<String> sku;
+    private final Optional<String> productId;
     private Optional<List<Price>> prices = Optional.empty();
     private Optional<List<Attribute>> attributes = Optional.empty();
     private Optional<List<Image>> images = Optional.empty();
 
-    private ImportProductVariantBuilder() {
-    }
-
-    public ImportProductVariantBuilder id(final Optional<Integer> id) {
-        this.id = id;
-        return this;
-    }
-
-    public ImportProductVariantBuilder id(final Integer id) {
-        return id(Optional.of(id));
-    }
-
-    public ImportProductVariantBuilder sku(final Optional<String> sku) {
+    private ImportProductVariantBuilder(final Optional<String> sku, final Optional<String> productId, final Optional<Integer> id) {
         this.sku = sku;
-        return this;
-    }
-
-    public ImportProductVariantBuilder sku(final String sku) {
-        return sku(Optional.of(sku));
+        this.productId = productId;
+        this.id = id;
     }
 
     public ImportProductVariantBuilder prices(final Optional<List<Price>> prices) {
@@ -64,16 +50,20 @@ public class ImportProductVariantBuilder extends Base implements Builder<ImportP
         return images(Optional.of(images));
     }
 
-    public static ImportProductVariantBuilder ofSku(final String sku) {
-        return new ImportProductVariantBuilder().sku(sku);
+    public static ImportProductVariantBuilder of(final String sku) {
+        return new ImportProductVariantBuilder(Optional.of(sku), Optional.<String>empty(), Optional.<Integer>empty());
     }
 
-    public static ImportProductVariantBuilder ofVariantId(final int variantId) {
-        return new ImportProductVariantBuilder().id(variantId);
+    public static ImportProductVariantBuilder of(final String productId, final int variantId, final String sku) {
+        return new ImportProductVariantBuilder(Optional.<String>empty(), Optional.of(productId), Optional.of(variantId));
+    }
+
+    public static ImportProductVariantBuilder of(final String productId, final int variantId) {
+        return new ImportProductVariantBuilder(Optional.<String>empty(), Optional.of(productId), Optional.of(variantId));
     }
 
     @Override
     public ImportProductVariant build() {
-        return new ImportProductVariantImpl(id, sku, prices, images, attributes);
+        return new ImportProductVariantImpl(id, sku, prices, images, attributes, productId);
     }
 }
