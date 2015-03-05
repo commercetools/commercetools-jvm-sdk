@@ -900,6 +900,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#compareTo-javax.money.MonetaryAmount-">compareTo(MonetaryAmount)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportOrderBuilder.html#completedAt-java.util.Optional-">completedAt(Optional&lt;Instant&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportOrderBuilder.html#completedAt-java.time.Instant-">completedAt(Instant)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/ConcurrentModificationException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ConcurrentModificationException</span></a> - Exception in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
@@ -4379,7 +4381,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportLineItemBuilder.html#of-io.sphere.sdk.orders.ImportProductVariant-long-io.sphere.sdk.products.Price-io.sphere.sdk.taxcategories.TaxRate-">of(ImportProductVariant, long, Price, TaxRate)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportLineItemBuilder.html" title="class in io.sphere.sdk.orders">ImportLineItemBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportOrderBuilder.html#of-javax.money.MonetaryAmount-io.sphere.sdk.carts.TaxedPrice-java.time.Instant-io.sphere.sdk.orders.OrderState-io.sphere.sdk.models.Address-">of(MonetaryAmount, TaxedPrice, Instant, OrderState, Address)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportOrderBuilder.html#of-javax.money.MonetaryAmount-">of(MonetaryAmount)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderFromCartDraft.html#of-io.sphere.sdk.models.Versioned-java.util.Optional-java.util.Optional-">of(Versioned&lt;Cart&gt;, Optional&lt;String&gt;, Optional&lt;PaymentState&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderFromCartDraft.html" title="class in io.sphere.sdk.orders">OrderFromCartDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -4935,6 +4937,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries"><span class="typeNameLink">OrderQueryModel</span></a> - Class in <a href="io/sphere/sdk/orders/queries/package-summary.html">io.sphere.sdk.orders.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/OrderShippingInfo.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">OrderShippingInfo</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportOrderBuilder.html#orderState-java.util.Optional-">orderState(Optional&lt;OrderState&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportOrderBuilder.html#orderState-io.sphere.sdk.orders.OrderState-">orderState(OrderState)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -5950,6 +5954,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportOrderBuilder.html#shippingAddress-io.sphere.sdk.models.Address-">shippingAddress(Address)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportOrderBuilder.html#shippingAddress-java.util.Optional-">shippingAddress(Optional&lt;Address&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartBuilder.html#shippingInfo-java.util.Optional-">shippingInfo(Optional&lt;CartShippingInfo&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartBuilder.html" title="class in io.sphere.sdk.carts">CartBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartBuilder.html#shippingInfo-io.sphere.sdk.carts.CartShippingInfo-">shippingInfo(CartShippingInfo)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartBuilder.html" title="class in io.sphere.sdk.carts">CartBuilder</a></dt>
@@ -6142,6 +6148,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportLineItemBuilder.html#state-java.util.Optional-">state(Optional&lt;List&lt;ItemState&gt;&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportLineItemBuilder.html" title="class in io.sphere.sdk.orders">ImportLineItemBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportLineItemBuilder.html#state-java.util.List-">state(List&lt;ItemState&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportLineItemBuilder.html" title="class in io.sphere.sdk.orders">ImportLineItemBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states"><span class="typeNameLink">State</span></a> - Interface in <a href="io/sphere/sdk/states/package-summary.html">io.sphere.sdk.states</a></dt>
 <dd>
 <div class="block">A State represents a state of a particular entity (defines a finite state machine).</div>
@@ -6257,6 +6265,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><a href="io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">TaxedPrice</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportOrderBuilder.html#taxedPrice-io.sphere.sdk.carts.TaxedPrice-">taxedPrice(TaxedPrice)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ImportOrderBuilder.html#taxedPrice-java.util.Optional-">taxedPrice(Optional&lt;TaxedPrice&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/TaxPortion.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">TaxPortion</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
