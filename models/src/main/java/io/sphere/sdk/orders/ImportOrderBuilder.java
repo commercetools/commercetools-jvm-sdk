@@ -30,6 +30,14 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
     private Optional<OrderShippingInfo> shippingInfo = Optional.empty();
     private Instant completedAt;
 
+    private ImportOrderBuilder(final MonetaryAmount totalPrice, final TaxedPrice taxedPrice, final Instant completedAt, final OrderState orderState, final Address shippingAddress) {
+        this.completedAt = completedAt;
+        this.orderState = orderState;
+        this.shippingAddress = shippingAddress;
+        this.taxedPrice = taxedPrice;
+        this.totalPrice = totalPrice;
+    }
+
     public ImportOrderBuilder orderNumber(final Optional<String> orderNumber) {
         this.orderNumber = orderNumber;
         return this;
@@ -146,6 +154,9 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
         return this;
     }
 
+    public static ImportOrderBuilder of(final MonetaryAmount totalPrice, final TaxedPrice taxedPrice, final Instant completedAt, final OrderState orderState, final Address shippingAddress) {
+        return new ImportOrderBuilder(totalPrice, taxedPrice, completedAt, orderState, shippingAddress);
+    }
 
     @Override
     public ImportOrder build() {
