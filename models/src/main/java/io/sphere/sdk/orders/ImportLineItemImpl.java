@@ -17,11 +17,11 @@ final class ImportLineItemImpl extends Base implements ImportLineItem {
     private final ImportProductVariant variant;
     private final Price price;
     private final long quantity;
-    private final List<ItemState> state;
+    private final Optional<List<ItemState>> state;
     private final Optional<Reference<Channel>> supplyChannel;
     private final TaxRate taxRate;
 
-    public ImportLineItemImpl(final Optional<LocalizedStrings> name, final Optional<String> productId, final ImportProductVariant variant, final Price price, final long quantity, final List<ItemState> state, final Optional<Reference<Channel>> supplyChannel, final TaxRate taxRate) {
+    public ImportLineItemImpl(final Optional<LocalizedStrings> name, final Optional<String> productId, final ImportProductVariant variant, final Price price, final long quantity, final Optional<List<ItemState>> state, final Optional<Reference<Channel>> supplyChannel, final TaxRate taxRate) {
         this.name = name;
         this.productId = productId;
         this.variant = variant;
@@ -53,7 +53,7 @@ final class ImportLineItemImpl extends Base implements ImportLineItem {
     }
 
     @Override
-    public List<ItemState> getState() {
+    public Optional<List<ItemState>> getState() {
         return state;
     }
 

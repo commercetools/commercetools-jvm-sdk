@@ -23,7 +23,7 @@ public interface ImportLineItem {
 
     long getQuantity();
 
-    List<ItemState> getState();
+    Optional<List<ItemState>> getState();
 
     Optional<Reference<Channel>> getSupplyChannel();
 

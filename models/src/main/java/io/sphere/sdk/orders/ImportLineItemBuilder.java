@@ -2,14 +2,10 @@ package io.sphere.sdk.orders;
 
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.taxcategories.TaxRate;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +15,7 @@ public class ImportLineItemBuilder extends Base implements Builder<ImportLineIte
     private ImportProductVariant variant;
     private Price price;
     private long quantity;
-    private List<ItemState> state = Collections.emptyList();
+    private Optional<List<ItemState>> state = Optional.empty();
     private Optional<Reference<Channel>> supplyChannel = Optional.empty();
     private TaxRate taxRate;
 
@@ -63,7 +59,7 @@ public class ImportLineItemBuilder extends Base implements Builder<ImportLineIte
         return this;
     }
 
-    public ImportLineItemBuilder state(final List<ItemState> ancestors) {
+    public ImportLineItemBuilder state(final Optional<List<ItemState>> state) {
         this.state = state;
         return this;
     }
@@ -73,8 +69,8 @@ public class ImportLineItemBuilder extends Base implements Builder<ImportLineIte
         return this;
     }
 
-    public ImportLineItemBuilder supplyChannel(final Reference<Channel> supplyChannel) {
-        return supplyChannel(Optional.of(supplyChannel));
+    public ImportLineItemBuilder supplyChannel(final Referenceable<Channel> supplyChannel) {
+        return supplyChannel(Optional.of(supplyChannel.toReference()));
     }
 
     public ImportLineItemBuilder taxRate(final TaxRate taxRate) {
