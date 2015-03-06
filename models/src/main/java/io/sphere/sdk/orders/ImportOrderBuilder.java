@@ -35,11 +35,21 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
         this.orderState = orderState;
     }
 
+    /**
+     * String that unique identifies an order. It can be used to create more human-readable (in contrast to ID) identifier for the order. It should be unique within a project.
+     * @param orderNumber
+     * @return
+     */
     public ImportOrderBuilder orderNumber(final Optional<String> orderNumber) {
         this.orderNumber = orderNumber;
         return this;
     }
 
+    /**
+     * String that unique identifies an order. It can be used to create more human-readable (in contrast to ID) identifier for the order. It should be unique within a project.
+     * @param orderNumber
+     * @return
+     */
     public ImportOrderBuilder orderNumber(final String orderNumber) {
         return orderNumber(Optional.of(orderNumber));
     }

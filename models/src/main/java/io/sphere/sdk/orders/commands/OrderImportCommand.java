@@ -9,6 +9,9 @@ import io.sphere.sdk.orders.Order;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
+/**
+ * Orders can also be imported via the Import API endpoint so you don't have to create a cart before.
+ */
 public class OrderImportCommand extends CommandImpl<Order> {
     private final ImportOrder importOrder;
 
