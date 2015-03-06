@@ -23,4 +23,10 @@ public interface CustomLineItem extends LineItemLike {
     Reference<TaxCategory> getTaxCategory();
 
     Optional<TaxRate> getTaxRate();
+
+    @Override
+    String getId();
+
+    @Override
+    long getQuantity();
 }

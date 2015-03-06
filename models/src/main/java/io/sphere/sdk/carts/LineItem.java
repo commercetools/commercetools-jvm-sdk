@@ -26,4 +26,10 @@ public interface LineItem extends LineItemLike {
     TaxRate getTaxRate();
 
     Optional<Channel> getSupplyChannel();
+
+    @Override
+    String getId();
+
+    @Override
+    long getQuantity();
 }
