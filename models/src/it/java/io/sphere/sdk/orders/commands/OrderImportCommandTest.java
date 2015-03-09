@@ -37,7 +37,8 @@ public class OrderImportCommandTest extends IntegrationTest {
             final ImportProductVariant variant = ImportProductVariantBuilder.of(productId, variantId).build();
 
             final ImportLineItem importLineItem = ImportLineItemBuilder.of(variant, quantity, price, name).build();
-            final ImportOrder importOrder = ImportOrderBuilder.ofLineItems(amount, orderState, asList(importLineItem)).build();
+            final ImportOrder importOrder = ImportOrderBuilder.ofLineItems(amount, orderState, asList(importLineItem))
+                    .country(DE).build();
             final OrderImportCommand cmd = OrderImportCommand.of(importOrder);
 
             final Order order = execute(cmd);
@@ -45,6 +46,7 @@ public class OrderImportCommandTest extends IntegrationTest {
             assertThat(order.getOrderState()).isEqualTo(orderState);
             assertThat(order.getTotalPrice()).isEqualTo(amount);
             assertThat(order.getLineItems()).hasSize(1);
+            assertThat(order.getCountry()).isPresentAs(DE);
             final LineItem lineItem = order.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(name);
             assertThat(lineItem.getProductId()).isEqualTo(productId);
