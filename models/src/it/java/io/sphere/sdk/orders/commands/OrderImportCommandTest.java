@@ -82,6 +82,15 @@ public class OrderImportCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void shipmentState() throws Exception {
+        final ShipmentState shipmentState = ShipmentState.SHIPPED;
+        testOrderAspect(
+                builder -> builder.shipmentState(shipmentState),
+                order -> assertThat(order.getShipmentState()).isPresentAs(shipmentState)
+        );
+    }
+
+    @Test
     public void shippingAddress() throws Exception {
         final Address address = randomAddress().withApartment(randomKey());
         testOrderAspect(
