@@ -59,7 +59,7 @@ public final class SphereTestUtils {
     }
 
     public static Address randomAddress() {
-        return AddressBuilder.of(CountryCode.DE).build();
+        return AddressBuilder.of(CountryCode.DE).city(randomString()).build();
     }
 
 
