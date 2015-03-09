@@ -14,6 +14,7 @@ import java.time.Instant;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.products.ProductFixtures.PRICE;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
@@ -48,6 +49,30 @@ public class OrderImportCommandTest extends IntegrationTest {
             assertThat(lineItem.getName()).isEqualTo(name);
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             assertThat(lineItem.getPrice()).isEqualTo(price);
+        });
+    }
+
+    @Test
+    public void lineItems() throws Exception {
+        withProduct(client(), product -> {
+            final int variantId = 1;
+            final ImportProductVariant importProductVariant = ImportProductVariantBuilder.of(product.getId(), variantId, product.getMasterData().getStaged().getMasterVariant().getSku().get())
+                    .build();
+            final Price price = PRICE;
+            final LocalizedStrings name = randomSlug();
+            final ImportLineItem importLineItem = ImportLineItemBuilder.of(importProductVariant, 2, price, name).build();
+            testOrderAspect(
+                    builder -> builder.lineItems(asList(importLineItem)),
+                    order -> {
+                        final LineItem lineItem = order.getLineItems().get(0);
+                        assertThat(lineItem.getProductId()).isEqualTo(product.getId());
+                        assertThat(lineItem.getVariant().getId()).isEqualTo(variantId);
+                        assertThat(lineItem.getVariant().getSku()).isPresentAs(product.getMasterData().getStaged().getMasterVariant().getSku().get());
+                        assertThat(lineItem.getQuantity()).isEqualTo(2);
+                        assertThat(lineItem.getPrice()).isEqualTo(price);
+                        assertThat(lineItem.getName()).isEqualTo(name);
+                    }
+            );
         });
     }
 
