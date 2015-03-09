@@ -177,7 +177,9 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ImportProductVariantBuilder.html#prices-java.util.List-">prices</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;&nbsp;prices)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ImportProductVariantBuilder.html#prices-java.util.List-">prices</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;&nbsp;prices)</code>
+<div class="block">The prices of the variant.</div>
+</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a></code></td>
@@ -235,6 +237,12 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <li class="blockList">
 <h4>prices</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/orders/ImportProductVariantBuilder.html" title="class in io.sphere.sdk.orders">ImportProductVariantBuilder</a>&nbsp;prices(java.util.List&lt;<a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;&nbsp;prices)</pre>
+<div class="block">The prices of the variant. The prices should not contain two prices for the same price scope (same currency, country and customer group). If this property is defined, then it will override the prices property from the original product variant, otherwise prices property from the original product variant would be copied in the resulting order.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>prices</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+</dl>
 </li>
 </ul>
 <a name="attributes-java.util.Optional-">
