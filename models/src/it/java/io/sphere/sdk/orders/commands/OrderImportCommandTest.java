@@ -1,6 +1,8 @@
 package io.sphere.sdk.orders.commands;
 
 import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.carts.TaxPortion;
+import io.sphere.sdk.carts.TaxedPrice;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.orders.*;
@@ -74,6 +76,19 @@ public class OrderImportCommandTest extends IntegrationTest {
                     }
             );
         });
+    }
+
+    @Test
+    public void taxedPrice() throws Exception {
+        final MonetaryAmount totalNet = EURO_10;
+        final double v = 0.19;
+        final MonetaryAmount totalGross = totalNet.multiply(v + 1);
+        final MonetaryAmount taxes = totalGross.negate().add(totalNet);
+        final TaxedPrice taxedPrice = TaxedPrice.of(totalNet, totalGross, asList(TaxPortion.of(v, taxes)));
+        testOrderAspect(
+                builder -> builder.taxedPrice(taxedPrice),
+                order -> assertThat(order.getTaxedPrice()).isPresentAs(taxedPrice)
+        );
     }
 
     @Test
