@@ -52,6 +52,16 @@ public class OrderImportCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void customerEmail() throws Exception {
+        withCustomer(client(), customer ->
+                testOrderAspect(
+                        builder -> builder.customerEmail(customer.getEmail()),
+                        order -> assertThat(order.getCustomerEmail()).isPresentAs(customer.getEmail())
+                )
+        );
+    }
+
+    @Test
     public void customerId() throws Exception {
         withCustomer(client(), customer -> {
             final String customerId = customer.getId();
