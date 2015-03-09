@@ -13,6 +13,7 @@ import javax.money.MonetaryAmount;
 import java.time.Instant;
 import java.util.function.Consumer;
 
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
@@ -47,6 +48,17 @@ public class OrderImportCommandTest extends IntegrationTest {
             assertThat(lineItem.getName()).isEqualTo(name);
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             assertThat(lineItem.getPrice()).isEqualTo(price);
+        });
+    }
+
+    @Test
+    public void customerId() throws Exception {
+        withCustomer(client(), customer -> {
+            final String customerId = customer.getId();
+            testOrderAspect(builder -> {
+                        builder.customerId(customerId);
+                    },
+                    order -> assertThat(order.getCustomerId()).isPresentAs(customerId));
         });
     }
 
