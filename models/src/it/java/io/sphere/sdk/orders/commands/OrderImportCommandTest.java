@@ -79,6 +79,15 @@ public class OrderImportCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void shippingAddress() throws Exception {
+        final Address address = randomAddress().withApartment(randomKey());
+        testOrderAspect(
+                builder -> builder.shippingAddress(address),
+                order -> assertThat(order.getShippingAddress()).isPresentAs(address)
+        );
+    }
+
+    @Test
     public void taxedPrice() throws Exception {
         final MonetaryAmount totalNet = EURO_10;
         final double v = 0.19;
