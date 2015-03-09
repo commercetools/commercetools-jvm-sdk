@@ -51,6 +51,13 @@ public class OrderImportCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void orderNumber() throws Exception {
+        final String orderNumber = randomString();
+        testOrderAspect(builder -> builder.orderNumber(orderNumber),
+                order -> assertThat(order.getOrderNumber()).isPresentAs(orderNumber));
+    }
+
+    @Test
     public void billingAddress() throws Exception {
         final Address billingAddress = randomAddress();
         testOrderAspect(builder -> builder.billingAddress(billingAddress),
