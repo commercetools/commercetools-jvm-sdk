@@ -16,6 +16,7 @@ import java.time.Instant;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.products.ProductFixtures.PRICE;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -118,6 +119,15 @@ public class OrderImportCommandTest extends IntegrationTest {
                         builder.customerId(customerId);
                     },
                     order -> assertThat(order.getCustomerId()).isPresentAs(customerId));
+        });
+    }
+
+    @Test
+    public void customerGroup() throws Exception {
+        withCustomerInGroup(client(), (customer, customerGroup) -> {
+            final String customerId = customer.getId();
+            testOrderAspect(builder -> builder.customerId(customerId).customerGroup(customerGroup),
+                    order -> assertThat(order.getCustomerGroup()).isPresentAs(customerGroup.toReference()));
         });
     }
 
