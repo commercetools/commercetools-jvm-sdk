@@ -82,6 +82,15 @@ public class OrderImportCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void paymentState() throws Exception {
+        final PaymentState paymentState = PaymentState.FAILED;
+        testOrderAspect(
+                builder -> builder.paymentState(paymentState),
+                order -> assertThat(order.getPaymentState()).isPresentAs(paymentState)
+        );
+    }
+
+    @Test
     public void shipmentState() throws Exception {
         final ShipmentState shipmentState = ShipmentState.SHIPPED;
         testOrderAspect(
