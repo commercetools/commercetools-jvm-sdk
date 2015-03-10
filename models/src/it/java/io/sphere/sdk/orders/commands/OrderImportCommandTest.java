@@ -1,24 +1,34 @@
 package io.sphere.sdk.orders.commands;
 
 import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.carts.LineItemLike;
 import io.sphere.sdk.carts.TaxPortion;
 import io.sphere.sdk.carts.TaxedPrice;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.shippingmethods.ShippingMethod;
+import io.sphere.sdk.shippingmethods.ShippingRate;
+import io.sphere.sdk.taxcategories.TaxCategory;
+import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 
 import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.products.ProductFixtures.PRICE;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
+import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
+import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
@@ -78,6 +88,45 @@ public class OrderImportCommandTest extends IntegrationTest {
                         assertThat(lineItem.getName()).isEqualTo(name);
                     }
             );
+        });
+    }
+
+    @Test
+    public void shippingInfo() throws Exception {
+        withShippingMethodForGermany(client(), shippingMethod -> {
+            withTransientTaxCategory(client(), taxCategory -> {
+                final MonetaryAmount price = EURO_5;
+                final MonetaryAmount freeAbove = EURO_30;
+                final ShippingRate shippingRate = ShippingRate.of(price, freeAbove);
+                final TaxRate taxRate = taxCategory.getTaxRates().get(0);
+                final Reference<TaxCategory> taxCategoryRef = taxCategory.toReference();
+                final Optional<Reference<ShippingMethod>> shippingMethodRef = Optional.of(shippingMethod.toReference());
+                final Instant createdAt = Instant.now().minusSeconds(4);
+                final ParcelMeasurements parcelMeasurements = ParcelMeasurements.of(2, 3, 1, 3);
+                final DeliveryItem deliveryItem = DeliveryItem.of(new LineItemLike() {
+                    private final String id = randomKey();
+
+                    @Override
+                    public String getId() {
+                        return id;
+                    }
+
+                    @Override
+                    public long getQuantity() {
+                        return 2;
+                    }
+                }, 5);
+                final String deliveryId = randomKey();
+                final TrackingData trackingData = TrackingData.of().withTrackingId("tracking id")
+                        .withCarrier("carrier").withProvider("provider").withProviderTransaction("prov transaction").withIsReturn(true);
+                final Parcel parcel = Parcel.of(randomKey(), createdAt, Optional.of(parcelMeasurements), Optional.of(trackingData));
+                final List<Delivery> deliveries = asList(Delivery.of(deliveryId, createdAt, asList(deliveryItem), asList(parcel)));
+                final OrderShippingInfo shippingInfo = OrderShippingInfo.of(randomString(), price, shippingRate, taxRate, taxCategoryRef, shippingMethodRef, deliveries);
+                testOrderAspect(
+                        builder -> builder.shippingInfo(shippingInfo),
+                        order -> assertThat(order.getShippingInfo()).isPresentAs(shippingInfo)
+                );
+            });
         });
     }
 

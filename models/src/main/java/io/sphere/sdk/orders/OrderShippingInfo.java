@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderShippingInfo extends CartShippingInfo {
-    final List<Delivery> deliveries;
+    private final List<Delivery> deliveries;
 
     private OrderShippingInfo(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Optional<Reference<ShippingMethod>> shippingMethod, final List<Delivery> deliveries) {
         super(shippingMethodName, price, shippingRate, taxRate, taxCategory, shippingMethod);
