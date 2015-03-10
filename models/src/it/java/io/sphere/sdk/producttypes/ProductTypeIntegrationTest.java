@@ -75,6 +75,31 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     @Test
+    public void nestedAttribute() throws Exception {
+        final AttributeGetterSetter<Product, Double> sizeAttr = AttributeAccess.ofDouble().ofName("size-nested");
+        final AttributeGetterSetter<Product, String> brandAttr = AttributeAccess.ofText().ofName("brand-nested");
+
+        final ProductType nestedProductType = execute(ProductTypeCreateCommand.of(ProductTypeDraft.of("test-sub-attribute", "nested attribute test",
+                Arrays.asList(
+                        AttributeDefinitionBuilder.of("size-nested", LocalizedStrings.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
+                        AttributeDefinitionBuilder.of("brand-nested", LocalizedStrings.of(Locale.ENGLISH, "Brand"), TextType.of()).build()))));
+
+        try {
+            final AttributeContainer adidas = AttributeContainer.of(
+                    Arrays.asList(Attribute.of(sizeAttr, 12D), Attribute.of(brandAttr, "Adidas")));
+            final AttributeContainer nike = AttributeContainer.of(
+                    Arrays.asList(Attribute.of(sizeAttr, 11.5D), Attribute.of(brandAttr, "Nike")));
+
+            final AttributeType type = NestedType.of(nestedProductType.toReference());
+
+            testSingleAndSet(AttributeAccess.ofNested(), AttributeAccess.ofNestedSet(), asSet(adidas, nike),
+                    type, AttributeDefinitionBuilder.of("nested-attribute", LABEL, type).searchable(false).build());
+        } finally {
+            execute(ProductTypeDeleteCommand.of(nestedProductType));
+        }
+    }
+
+    @Test
     public void textAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofText(), AttributeAccess.ofTextSet(), asSet("hello", "world"),
                 TextType.of(), AttributeDefinitionBuilder.of("text-attribute", LABEL, TextType.of()).inputHint(TEXT_INPUT_HINT).build());

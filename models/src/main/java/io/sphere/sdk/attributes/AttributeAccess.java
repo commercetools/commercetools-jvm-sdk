@@ -155,8 +155,7 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<Set<Reference<Channel>>> ofChannelReferenceSet() {
-        return ofSet(ReferenceType.ofChannel(), new TypeReference<Set<Reference<Channel>>>() {
-        });
+        return ofSet(ReferenceType.ofChannel(), new TypeReference<Set<Reference<Channel>>>() {});
     }
 
     public <M> AttributeGetterSetter<M, T> getterSetter(final String name) {
@@ -165,6 +164,15 @@ public final class AttributeAccess<T> extends Base {
 
     public <M> AttributeGetterSetter<M, T> ofName(final String name) {
         return AttributeGetterSetter.of(name, attributeMapper);
+    }
+
+    public static AttributeAccess<AttributeContainer> ofNested() {
+        return new AttributeAccess<>(new NestedAttributeMapperImpl(),
+                attributeDefinition -> attributeDefinition.getAttributeType() instanceof NestedType);
+    }
+
+    public static AttributeAccess<Set<AttributeContainer>> ofNestedSet() {
+        return ofSet(NestedType.class, new NestedSetAttributeMapperImpl());
     }
 
     public <M> AttributeGetter<M, T> getter(final String name) {
@@ -210,7 +218,10 @@ public final class AttributeAccess<T> extends Base {
     }
 
     private static <T> AttributeAccess<Set<T>> ofSet(final Class<? extends AttributeType> typeClass, final TypeReference<Set<T>> typeReference) {
-        final AttributeMapper<Set<T>> mapper = AttributeMapper.of(typeReference);
+        return ofSet(typeClass, AttributeMapper.of(typeReference));
+    }
+
+    private static <T> AttributeAccess<Set<T>> ofSet(final Class<? extends AttributeType> typeClass, final AttributeMapper<Set<T>> mapper) {
         return new AttributeAccess<>(mapper, attributeDefinition -> {
             if (attributeDefinition.getAttributeType() instanceof SetType) {
                 final SetType attributeType = (SetType) attributeDefinition.getAttributeType();

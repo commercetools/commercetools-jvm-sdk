@@ -1,6 +1,7 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.attributes.AttributeContainerImpl;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.attributes.Attribute;
@@ -14,11 +15,10 @@ import java.util.Optional;
 
 import static java.lang.String.format;
 
-class ProductVariantImpl extends Base implements ProductVariant {
+class ProductVariantImpl extends AttributeContainerImpl implements ProductVariant {
     private final int id;
     private final Optional<String> sku;
     private final List<Price> prices;
-    private final List<Attribute> attributes;
     private final List<Image> images;
     private final Optional<ProductVariantAvailability> availability;
 
@@ -26,10 +26,11 @@ class ProductVariantImpl extends Base implements ProductVariant {
     ProductVariantImpl(final int id, final Optional<String> sku, final List<Price> prices,
                        final List<Attribute> attributes, final List<Image> images,
                        final Optional<ProductVariantAvailability> availability) {
+        super(attributes);
+
         this.id = id;
         this.sku = sku;
         this.prices = prices;
-        this.attributes = attributes;
         this.images = images;
         this.availability = availability;
     }
@@ -50,31 +51,6 @@ class ProductVariantImpl extends Base implements ProductVariant {
     }
 
     @Override
-    public List<Attribute> getAttributes() {
-        return attributes;
-    }
-
-    @Override
-    public <T> Optional<T> getAttribute(final AttributeGetter<Product, T> accessor) {
-        final String attributeName = accessor.getName();
-        final Optional<Attribute> attributeOption = getAttributes().stream()
-                .filter(a -> Objects.equals(attributeName, a.getName()))
-                .findFirst();
-        return attributeOption.map(attribute -> {
-            final AttributeMapper<T> mapper = accessor.getMapper();
-            try {
-                return attribute.getValue(mapper);
-            } catch (final JsonException e) {
-                throw enrich(format("ProductVariant(id=%s)", id), attributeName, mapper, e.getCause());
-            }
-        });
-    }
-
-    private <T> JsonException enrich(final Object objectWithAttributes, final String attributeName, final AttributeMapper<T> mapper, final Throwable cause) {
-        return new JsonException(format("%s does not contain an attribute '%s' which can be mapped with %s.", objectWithAttributes, attributeName, mapper), cause);
-    }
-
-    @Override
     public List<Image> getImages() {
         return images;
     }
@@ -82,5 +58,14 @@ class ProductVariantImpl extends Base implements ProductVariant {
     @Override
     public Optional<ProductVariantAvailability> getAvailability() {
         return availability;
+    }
+
+    @Override
+    protected JsonException transformError(JsonException e, String attributeName, AttributeMapper<?> mapper) {
+        return enrich(format("ProductVariant(id=%s)", id), attributeName, mapper, e.getCause());
+    }
+
+    private JsonException enrich(final Object objectWithAttributes, final String attributeName, final AttributeMapper<?> mapper, final Throwable cause) {
+        return new JsonException(format("%s does not contain an attribute '%s' which can be mapped with %s.", objectWithAttributes, attributeName, mapper), cause);
     }
 }
