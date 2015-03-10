@@ -30,8 +30,8 @@ public class ProductVariantImportDraftBuilder extends Base implements Builder<Pr
 
     /**
      * The prices of the variant. The prices should not contain two prices for the same price scope (same currency, country and customer group). If this property is defined, then it will override the prices property from the original product variant, otherwise prices property from the original product variant would be copied in the resulting order.
-     * @param prices
-     * @return
+     * @param prices the prices to set
+     * @return this builder
      */
     public ProductVariantImportDraftBuilder prices(final List<Price> prices) {
         return prices(Optional.of(prices));

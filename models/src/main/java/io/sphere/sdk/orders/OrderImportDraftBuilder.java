@@ -36,8 +36,8 @@ public class OrderImportDraftBuilder extends Base implements Builder<OrderImport
 
     /**
      * String that unique identifies an order. It can be used to create more human-readable (in contrast to ID) identifier for the order. It should be unique within a project.
-     * @param orderNumber
-     * @return
+     * @param orderNumber ID to set
+     * @return this builder
      */
     public OrderImportDraftBuilder orderNumber(final Optional<String> orderNumber) {
         this.orderNumber = orderNumber;
@@ -46,8 +46,8 @@ public class OrderImportDraftBuilder extends Base implements Builder<OrderImport
 
     /**
      * String that unique identifies an order. It can be used to create more human-readable (in contrast to ID) identifier for the order. It should be unique within a project.
-     * @param orderNumber
-     * @return
+     * @param orderNumber ID to set
+     * @return this builder
      */
     public OrderImportDraftBuilder orderNumber(final String orderNumber) {
         return orderNumber(Optional.of(orderNumber));
@@ -192,7 +192,7 @@ public class OrderImportDraftBuilder extends Base implements Builder<OrderImport
      * @param totalPrice the total price of the order
      * @param orderState the state of the order
      * @param customLineItems a list of custom line items with at least one element
-     * @return
+     * @return a new builder
      */
     public static OrderImportDraftBuilder ofCustomLineItems(final MonetaryAmount totalPrice, final OrderState orderState, final List<CustomLineItemImportDraft> customLineItems) {
         return new OrderImportDraftBuilder(totalPrice, orderState).customLineItems(customLineItems);
