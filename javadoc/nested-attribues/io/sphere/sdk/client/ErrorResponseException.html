@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10};
+var methods = {"i0":10,"i1":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -194,12 +194,6 @@ implements <a href="../../../../io/sphere/sdk/models/ErrorResponse.html" title="
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/ErrorResponseException.html#getErrors--">getErrors</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/ErrorResponseException.html#getMessage--">getMessage</a></span>()</code>
-<div class="block">The message of the first error, for convenience.</div>
-</td>
-</tr>
-<tr id="i2" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/ErrorResponseException.html#getStatusCode--">getStatusCode</a></span>()</code>&nbsp;</td>
 </tr>
@@ -209,7 +203,7 @@ implements <a href="../../../../io/sphere/sdk/models/ErrorResponse.html" title="
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/SphereException.html#getProjectKey--">getProjectKey</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#getSphereRequest--">getSphereRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#getUnderlyingHttpRequest--">getUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#getUnderlyingHttpResponse--">getUnderlyingHttpResponse</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setProjectKey-java.util.Optional-">setProjectKey</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setProjectKey-java.lang.String-">setProjectKey</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setSphereRequest-io.sphere.sdk.client.SphereRequest-">setSphereRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpRequest-java.util.Optional-">setUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpRequest-java.lang.String-">setUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpResponse-java.util.Optional-">setUnderlyingHttpResponse</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpResponse-java.lang.String-">setUnderlyingHttpResponse</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/SphereException.html#getMessage--">getMessage</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#getProjectKey--">getProjectKey</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#getSphereRequest--">getSphereRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#getUnderlyingHttpRequest--">getUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#getUnderlyingHttpResponse--">getUnderlyingHttpResponse</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setProjectKey-java.util.Optional-">setProjectKey</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setProjectKey-java.lang.String-">setProjectKey</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setSphereRequest-io.sphere.sdk.client.SphereRequest-">setSphereRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpRequest-java.util.Optional-">setUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpRequest-java.lang.String-">setUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpResponse-java.util.Optional-">setUnderlyingHttpResponse</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpResponse-java.lang.String-">setUnderlyingHttpResponse</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Throwable">
@@ -230,7 +224,7 @@ implements <a href="../../../../io/sphere/sdk/models/ErrorResponse.html" title="
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/ErrorResponse.html" title="interface in io.sphere.sdk.models">ErrorResponse</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/ErrorResponse.html#hasErrorCode-java.lang.String-">hasErrorCode</a>, <a href="../../../../io/sphere/sdk/models/ErrorResponse.html#of-int-java.lang.String-java.util.List-">of</a>, <a href="../../../../io/sphere/sdk/models/ErrorResponse.html#typeReference--">typeReference</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/ErrorResponse.html#getMessage--">getMessage</a>, <a href="../../../../io/sphere/sdk/models/ErrorResponse.html#hasErrorCode-java.lang.String-">hasErrorCode</a>, <a href="../../../../io/sphere/sdk/models/ErrorResponse.html#of-int-java.lang.String-java.util.List-">of</a>, <a href="../../../../io/sphere/sdk/models/ErrorResponse.html#typeReference--">typeReference</a></code></li>
 </ul>
 </li>
 </ul>
@@ -275,24 +269,6 @@ implements <a href="../../../../io/sphere/sdk/models/ErrorResponse.html" title="
 <dd><code><a href="../../../../io/sphere/sdk/models/ErrorResponse.html#getStatusCode--">getStatusCode</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/ErrorResponse.html" title="interface in io.sphere.sdk.models">ErrorResponse</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/client/SphereServiceException.html#getStatusCode--">getStatusCode</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereServiceException.html" title="class in io.sphere.sdk.client">SphereServiceException</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="getMessage--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getMessage</h4>
-<pre>public&nbsp;java.lang.String&nbsp;getMessage()</pre>
-<div class="block">The message of the first error, for convenience.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/ErrorResponse.html#getMessage--">getMessage</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/ErrorResponse.html" title="interface in io.sphere.sdk.models">ErrorResponse</a></code></dd>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/SphereException.html#getMessage--">getMessage</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></code></dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the first error message</dd>
 </dl>
 </li>
 </ul>
