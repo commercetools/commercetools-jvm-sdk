@@ -17,6 +17,10 @@ public class ShippingRate extends Base {
         this.freeAbove = freeAbove;
     }
 
+    public static ShippingRate of(final MonetaryAmount price, final MonetaryAmount freeAbove) {
+        return of(price, Optional.of(freeAbove));
+    }
+
     public static ShippingRate of(final MonetaryAmount price, final Optional<MonetaryAmount> freeAbove) {
         return new ShippingRate(price, freeAbove);
     }

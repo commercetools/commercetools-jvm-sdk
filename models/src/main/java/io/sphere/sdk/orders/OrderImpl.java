@@ -37,8 +37,9 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     private final Optional<TaxedPrice> taxedPrice;
     private final MonetaryAmount totalPrice;
     private final Optional<PaymentState> paymentState;
+    private final Optional<Instant> completedAt;
 
-    protected OrderImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final Optional<Address> billingAddress, final Optional<CountryCode> country, final Optional<String> customerEmail, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<String> customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final long lastMessageSequenceNumber, final List<LineItem> lineItems, final Optional<String> orderNumber, final OrderState orderState, final List<ReturnInfo> returnInfo, final Optional<ShipmentState> shipmentState, final Optional<Address> shippingAddress, final Optional<OrderShippingInfo> shippingInfo, final Set<SyncInfo> syncInfo, final Optional<TaxedPrice> taxedPrice, final MonetaryAmount totalPrice, final Optional<PaymentState> paymentState) {
+    protected OrderImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final Optional<Address> billingAddress, final Optional<CountryCode> country, final Optional<String> customerEmail, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<String> customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final long lastMessageSequenceNumber, final List<LineItem> lineItems, final Optional<String> orderNumber, final OrderState orderState, final List<ReturnInfo> returnInfo, final Optional<ShipmentState> shipmentState, final Optional<Address> shippingAddress, final Optional<OrderShippingInfo> shippingInfo, final Set<SyncInfo> syncInfo, final Optional<TaxedPrice> taxedPrice, final MonetaryAmount totalPrice, final Optional<PaymentState> paymentState, final Optional<Instant> completedAt) {
         super(id, version, createdAt, lastModifiedAt);
         this.billingAddress = billingAddress;
         this.country = country;
@@ -59,6 +60,7 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
         this.taxedPrice = taxedPrice;
         this.totalPrice = totalPrice;
         this.paymentState = paymentState;
+        this.completedAt = completedAt;
     }
 
     @Override
@@ -154,5 +156,10 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     @Override
     public Optional<PaymentState> getPaymentState() {
         return paymentState;
+    }
+
+    @Override
+    public Optional<Instant> getCompletedAt() {
+        return completedAt;
     }
 }
