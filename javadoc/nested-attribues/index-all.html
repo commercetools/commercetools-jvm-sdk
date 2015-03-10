@@ -309,6 +309,12 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html#attributeConstraint-io.sphere.sdk.attributes.AttributeConstraint-">attributeConstraint(AttributeConstraint)</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">AttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/attributes/AttributeContainer.html" title="interface in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeContainer</span></a> - Interface in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/attributes/AttributeContainerImpl.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeContainerImpl</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeContainerImpl.html#AttributeContainerImpl-java.util.List-">AttributeContainerImpl(List&lt;Attribute&gt;)</a></span> - Constructor for class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeContainerImpl.html" title="class in io.sphere.sdk.attributes">AttributeContainerImpl</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/AttributeDefinition.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeDefinition</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeDefinitionBuilder</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
@@ -1529,11 +1535,13 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#getAssociatedRequest--">getAssociatedRequest()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariant.html#getAttribute-io.sphere.sdk.attributes.AttributeGetter-">getAttribute(AttributeGetter&lt;Product, T&gt;)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeContainer.html#getAttribute-io.sphere.sdk.attributes.AttributeGetter-">getAttribute(AttributeGetter&lt;Product, T&gt;)</a></span> - Method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeContainer.html" title="interface in io.sphere.sdk.attributes">AttributeContainer</a></dt>
 <dd>
 <div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes"><code>AttributeGetterSetter</code></a> how to implement these.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariant.html#getAttribute-java.lang.String-">getAttribute(String)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeContainer.html#getAttribute-java.lang.String-">getAttribute(String)</a></span> - Method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeContainer.html" title="interface in io.sphere.sdk.attributes">AttributeContainer</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeContainerImpl.html#getAttribute-io.sphere.sdk.attributes.AttributeGetter-">getAttribute(AttributeGetter&lt;Product, T&gt;)</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeContainerImpl.html" title="class in io.sphere.sdk.attributes">AttributeContainerImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/AttributeDefinitionContainer.html#getAttribute-java.lang.String-">getAttribute(String)</a></span> - Method in interface io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/AttributeDefinitionContainer.html" title="interface in io.sphere.sdk.producttypes">AttributeDefinitionContainer</a></dt>
 <dd>&nbsp;</dd>
@@ -1541,9 +1549,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Describes how an attribute or a set of attributes should be validated across all variants of a product.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html#getAttributes--">getAttributes()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">AddVariant</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeContainer.html#getAttributes--">getAttributes()</a></span> - Method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeContainer.html" title="interface in io.sphere.sdk.attributes">AttributeContainer</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariant.html#getAttributes--">getAttributes()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeContainerImpl.html#getAttributes--">getAttributes()</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeContainerImpl.html" title="class in io.sphere.sdk.attributes">AttributeContainerImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html#getAttributes--">getAttributes()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">AddVariant</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariantDraft.html#getAttributes--">getAttributes()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariantDraft.html" title="interface in io.sphere.sdk.products">ProductVariantDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -2845,7 +2855,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </a>
 <h2 class="title">H</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariant.html#hasAttribute-java.lang.String-">hasAttribute(String)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeContainer.html#hasAttribute-java.lang.String-">hasAttribute(String)</a></span> - Method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeContainer.html" title="interface in io.sphere.sdk.attributes">AttributeContainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#hasClientErrorResponseCode--">hasClientErrorResponseCode()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
@@ -3702,6 +3712,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/Attribute.html#of-java.lang.String-java.lang.Object-">of(String, Object)</a></span> - Static method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/Attribute.html#of-io.sphere.sdk.attributes.AttributeSetter-T-">of(AttributeSetter&lt;M, T&gt;, T)</a></span> - Static method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeContainer.html#of-java.util.List-">of(List&lt;Attribute&gt;)</a></span> - Static method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeContainer.html" title="interface in io.sphere.sdk.attributes">AttributeContainer</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeContainerImpl.html#of-java.util.List-">of(List&lt;Attribute&gt;)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeContainerImpl.html" title="class in io.sphere.sdk.attributes">AttributeContainerImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.attributes.AttributeType-">of(String, LocalizedStrings, AttributeType)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">AttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -4579,6 +4593,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofMoneySet--">ofMoneySet()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofName-java.lang.String-">ofName(String)</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofNested--">ofNested()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofNestedSet--">ofNestedSet()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/updateactions/ChangeAddress.html#ofOldAddressToNewAddress-io.sphere.sdk.models.Address-io.sphere.sdk.models.Address-">ofOldAddressToNewAddress(Address, Address)</a></span> - Static method in class io.sphere.sdk.customers.commands.updateactions.<a href="io/sphere/sdk/customers/commands/updateactions/ChangeAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions">ChangeAddress</a></dt>
 <dd>&nbsp;</dd>
@@ -6192,6 +6210,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#trackingId-java.util.Optional-">trackingId(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#trackingId-java.lang.String-">trackingId(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeContainerImpl.html#transformError-io.sphere.sdk.json.JsonException-java.lang.String-io.sphere.sdk.attributes.AttributeMapper-">transformError(JsonException, String, AttributeMapper&lt;?&gt;)</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeContainerImpl.html" title="class in io.sphere.sdk.attributes">AttributeContainerImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">TransitionLineItemState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>&nbsp;</dd>
