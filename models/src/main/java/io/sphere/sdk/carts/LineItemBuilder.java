@@ -1,11 +1,8 @@
 package io.sphere.sdk.carts;
 
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
 
@@ -22,7 +19,7 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
     private final long quantity;
     private List<ItemState> state = Collections.emptyList();
     private final TaxRate taxRate;
-    private Optional<Channel> supplyChannel = Optional.empty();
+    private Optional<Reference<Channel>> supplyChannel = Optional.empty();
 
     private LineItemBuilder(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final TaxRate taxRate) {
         this.id = id;
@@ -39,7 +36,11 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
         return this;
     }
 
-    public LineItemBuilder supplyChannel(final Optional<Channel> supplyChannel) {
+    public LineItemBuilder supplyChannel(final Referenceable<Channel> supplyChannel) {
+        return supplyChannel(supplyChannel);
+    }
+
+    public LineItemBuilder supplyChannel(final Optional<Reference<Channel>> supplyChannel) {
         this.supplyChannel = supplyChannel;
         return this;
     }
