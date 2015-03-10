@@ -55,12 +55,12 @@ public class ImportProductVariantBuilder extends Base implements Builder<ImportP
         return images(Optional.of(images));
     }
 
-    public static ImportProductVariantBuilder of(final String sku) {
+    public static ImportProductVariantBuilder ofSku(final String sku) {
         return new ImportProductVariantBuilder(Optional.of(sku), Optional.<String>empty(), Optional.<Integer>empty());
     }
 
     public static ImportProductVariantBuilder of(final String productId, final int variantId, final String sku) {
-        return new ImportProductVariantBuilder(Optional.<String>empty(), Optional.of(productId), Optional.of(variantId));
+        return new ImportProductVariantBuilder(Optional.of(sku), Optional.of(productId), Optional.of(variantId));
     }
 
     public static ImportProductVariantBuilder of(final String productId, final int variantId) {

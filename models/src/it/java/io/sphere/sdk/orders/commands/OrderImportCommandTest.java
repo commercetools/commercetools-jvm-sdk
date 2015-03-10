@@ -5,11 +5,11 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.LineItemLike;
 import io.sphere.sdk.carts.TaxPortion;
 import io.sphere.sdk.carts.TaxedPrice;
-import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRoles;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
@@ -26,6 +26,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withPersistentChannel;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
@@ -77,7 +78,8 @@ public class OrderImportCommandTest extends IntegrationTest {
         withPersistentChannel(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
                     withProduct(client(), product -> {
                         final int variantId = 1;
-                        final ImportProductVariant importProductVariant = ImportProductVariantBuilder.of(product.getId(), variantId, product.getMasterData().getStaged().getMasterVariant().getSku().get())
+                        final String sku = sku(product);
+                        final ImportProductVariant importProductVariant = ImportProductVariantBuilder.of(product.getId(), variantId, sku)
                                 .build();
                         final Price price = PRICE;
                         final LocalizedStrings name = randomSlug();
@@ -105,6 +107,40 @@ public class OrderImportCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void importBySku() throws Exception {
+        checkImportForVariantIdSkuCombination(product ->
+                ImportProductVariantBuilder.ofSku(sku(product)));
+    }
+
+    private String sku(final Product product) {
+        return product.getMasterData().getStaged().getMasterVariant().getSku().get();
+    }
+
+    @Test
+    public void importByVariantId() throws Exception {
+        checkImportForVariantIdSkuCombination(product -> ImportProductVariantBuilder.of(product.getId(), 1));
+    }
+
+    private void checkImportForVariantIdSkuCombination(final Function<Product, ImportProductVariantBuilder> f) {
+        withProduct(client(), product -> {
+            final ImportProductVariant importProductVariant = f.apply(product)
+                    .build();
+            final Price price = PRICE;
+            final LocalizedStrings name = randomSlug();
+            final ImportLineItem importLineItem = ImportLineItemBuilder.of(importProductVariant, 2, price, name).build();
+            testOrderAspect(
+                    builder -> builder.lineItems(asList(importLineItem)),
+                    order -> {
+                        final LineItem lineItem = order.getLineItems().get(0);
+                        assertThat(lineItem.getProductId()).isEqualTo(product.getId());
+                        assertThat(lineItem.getVariant().getId()).isEqualTo(1);
+                        assertThat(lineItem.getVariant().getSku()).isPresentAs(sku(product));
+                    }
+            );
+        });
+    }
+
+    @Test
     public void orderImportCanOverrideVariantDataInTheOrder() throws Exception {
         final Attribute size = TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Sizes.S);
         final Attribute color = TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Colors.RED);
@@ -114,7 +150,7 @@ public class OrderImportCommandTest extends IntegrationTest {
 
         withProduct(client(), product -> {
             final int variantId = 1;
-            final ImportProductVariant importProductVariant = ImportProductVariantBuilder.of(product.getId(), variantId, product.getMasterData().getStaged().getMasterVariant().getSku().get())
+            final ImportProductVariant importProductVariant = ImportProductVariantBuilder.of(product.getId(), variantId, sku(product))
                     .attributes(attributesOfOrder)
                     .images(images)
                     .prices(prices)
