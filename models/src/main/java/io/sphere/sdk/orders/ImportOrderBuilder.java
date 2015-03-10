@@ -17,7 +17,7 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
     private Optional<String> customerId = Optional.empty();
     private Optional<String> customerEmail = Optional.empty();
     private List<ImportLineItem> lineItems = Collections.emptyList();
-    private List<CustomLineItem> customLineItems = Collections.emptyList();
+    private List<ImportCustomLineItem> customLineItems = Collections.emptyList();
     private MonetaryAmount totalPrice;
     private Optional<TaxedPrice> taxedPrice = Optional.empty();
     private Optional<Address> shippingAddress = Optional.empty();
@@ -77,7 +77,7 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
         return this;
     }
 
-    public ImportOrderBuilder customLineItems(final List<CustomLineItem> customLineItems) {
+    public ImportOrderBuilder customLineItems(final List<ImportCustomLineItem> customLineItems) {
         this.customLineItems = customLineItems;
         return this;
     }
@@ -195,7 +195,7 @@ public class ImportOrderBuilder extends Base implements Builder<ImportOrder> {
      * @param customLineItems a list of custom line items with at least one element
      * @return
      */
-    public static ImportOrderBuilder ofCustomLineItems(final MonetaryAmount totalPrice, final OrderState orderState, final List<CustomLineItem> customLineItems) {
+    public static ImportOrderBuilder ofCustomLineItems(final MonetaryAmount totalPrice, final OrderState orderState, final List<ImportCustomLineItem> customLineItems) {
         return new ImportOrderBuilder(totalPrice, orderState).customLineItems(customLineItems);
     }
 

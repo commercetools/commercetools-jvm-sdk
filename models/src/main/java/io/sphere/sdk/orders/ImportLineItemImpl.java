@@ -8,8 +8,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.taxcategories.TaxRate;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 final class ImportLineItemImpl extends Base implements ImportLineItem {
     private final Optional<String> productId;
@@ -17,11 +17,11 @@ final class ImportLineItemImpl extends Base implements ImportLineItem {
     private final ImportProductVariant variant;
     private final Price price;
     private final long quantity;
-    private final Optional<List<ItemState>> state;
+    private final Optional<Set<ItemState>> state;
     private final Optional<Reference<Channel>> supplyChannel;
     private final Optional<TaxRate> taxRate;
 
-    public ImportLineItemImpl(final LocalizedStrings name, final Optional<String> productId, final ImportProductVariant variant, final Price price, final long quantity, final Optional<List<ItemState>> state, final Optional<Reference<Channel>> supplyChannel, final Optional<TaxRate> taxRate) {
+    public ImportLineItemImpl(final LocalizedStrings name, final Optional<String> productId, final ImportProductVariant variant, final Price price, final long quantity, final Optional<Set<ItemState>> state, final Optional<Reference<Channel>> supplyChannel, final Optional<TaxRate> taxRate) {
         this.name = name;
         this.productId = productId;
         this.variant = variant;
@@ -53,7 +53,7 @@ final class ImportLineItemImpl extends Base implements ImportLineItem {
     }
 
     @Override
-    public Optional<List<ItemState>> getState() {
+    public Optional<Set<ItemState>> getState() {
         return state;
     }
 

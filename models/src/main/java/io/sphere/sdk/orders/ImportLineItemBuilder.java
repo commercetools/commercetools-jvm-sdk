@@ -6,8 +6,8 @@ import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.taxcategories.TaxRate;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public class ImportLineItemBuilder extends Base implements Builder<ImportLineItem> {
     private final Optional<String> productId;
@@ -15,7 +15,7 @@ public class ImportLineItemBuilder extends Base implements Builder<ImportLineIte
     private final ImportProductVariant variant;
     private Price price;
     private long quantity;
-    private Optional<List<ItemState>> state = Optional.empty();
+    private Optional<Set<ItemState>> state = Optional.empty();
     private Optional<Reference<Channel>> supplyChannel = Optional.empty();
     private Optional<TaxRate> taxRate = Optional.empty();
 
@@ -37,12 +37,12 @@ public class ImportLineItemBuilder extends Base implements Builder<ImportLineIte
         return this;
     }
 
-    public ImportLineItemBuilder state(final Optional<List<ItemState>> state) {
+    public ImportLineItemBuilder state(final Optional<Set<ItemState>> state) {
         this.state = state;
         return this;
     }
 
-    public ImportLineItemBuilder state(final List<ItemState> state) {
+    public ImportLineItemBuilder state(final Set<ItemState> state) {
         return state(Optional.of(state));
     }
 

@@ -1,7 +1,6 @@
 package io.sphere.sdk.orders;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.TaxedPrice;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
@@ -18,7 +17,7 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     private final Optional<String> customerId;
     private final Optional<String> customerEmail;
     private final List<ImportLineItem> lineItems;
-    private final List<CustomLineItem> customLineItems;
+    private final List<ImportCustomLineItem> customLineItems;
     private final MonetaryAmount totalPrice;
     private final Optional<TaxedPrice> taxedPrice;
     private final Optional<Address> shippingAddress;
@@ -31,7 +30,7 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     private final Optional<OrderShippingInfo> shippingInfo;
     private final Optional<Instant> completedAt;
 
-    public ImportOrderImpl(final Optional<Address> billingAddress, final Optional<String> orderNumber, final Optional<String> customerId, final Optional<String> customerEmail, final List<ImportLineItem> lineItems, final List<CustomLineItem> customLineItems, final MonetaryAmount totalPrice, final Optional<TaxedPrice> taxedPrice, final Optional<Address> shippingAddress, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<CountryCode> country, final OrderState orderState, final Optional<ShipmentState> shipmentState, final Optional<PaymentState> paymentState, final Optional<OrderShippingInfo> shippingInfo, final Optional<Instant> completedAt) {
+    public ImportOrderImpl(final Optional<Address> billingAddress, final Optional<String> orderNumber, final Optional<String> customerId, final Optional<String> customerEmail, final List<ImportLineItem> lineItems, final List<ImportCustomLineItem> customLineItems, final MonetaryAmount totalPrice, final Optional<TaxedPrice> taxedPrice, final Optional<Address> shippingAddress, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<CountryCode> country, final OrderState orderState, final Optional<ShipmentState> shipmentState, final Optional<PaymentState> paymentState, final Optional<OrderShippingInfo> shippingInfo, final Optional<Instant> completedAt) {
         this.billingAddress = billingAddress;
         this.orderNumber = orderNumber;
         this.customerId = customerId;
@@ -81,7 +80,7 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     }
 
     @Override
-    public List<CustomLineItem> getCustomLineItems() {
+    public List<ImportCustomLineItem> getCustomLineItems() {
         return customLineItems;
     }
 

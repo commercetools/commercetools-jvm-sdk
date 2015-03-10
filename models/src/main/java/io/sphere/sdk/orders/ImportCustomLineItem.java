@@ -1,6 +1,7 @@
-package io.sphere.sdk.carts;
+package io.sphere.sdk.orders;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -10,23 +11,21 @@ import javax.money.MonetaryAmount;
 import java.util.Optional;
 import java.util.Set;
 
-@JsonDeserialize(as=CustomLineItemImpl.class)
-public interface CustomLineItem extends LineItemLike {
+
+public interface ImportCustomLineItem {
+
     LocalizedStrings getName();
 
     MonetaryAmount getMoney();
 
     String getSlug();
 
-    Set<ItemState> getState();
+    long getQuantity();
 
     Reference<TaxCategory> getTaxCategory();
 
     Optional<TaxRate> getTaxRate();
 
-    @Override
-    String getId();
-
-    @Override
-    long getQuantity();
+    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
+    Optional<Set<ItemState>> getState();
 }

@@ -1,10 +1,7 @@
 package io.sphere.sdk.orders.commands;
 
 import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.carts.LineItemLike;
-import io.sphere.sdk.carts.TaxPortion;
-import io.sphere.sdk.carts.TaxedPrice;
+import io.sphere.sdk.carts.*;
 import io.sphere.sdk.channels.ChannelRoles;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.*;
@@ -138,6 +135,38 @@ public class OrderImportCommandTest extends IntegrationTest {
                     }
             );
         });
+    }
+
+    @Test
+    public void customLineItems() throws Exception {
+        withTransientTaxCategory(client(), taxCategory -> withProduct(client(), product -> {
+            final LocalizedStrings name = randomSlug();
+            final int quantity = 16;
+            final MonetaryAmount money = EURO_20;
+            final Reference<TaxCategory> taxCategoryReference = defaultTaxCategory(client()).toReference();
+            final String id = "an id";
+            final String slug = "a-slug";
+            final TaxRate taxRate = taxCategory.getTaxRates().get(0);
+            final ImportCustomLineItem customLineItem = ImportCustomLineItemBuilder.of(name, quantity, money, taxCategoryReference)
+                    .id(id)
+                    .slug(slug)
+                    .taxRate(taxRate)
+                    .build();
+            final List<ImportCustomLineItem> customLineItems = asList(customLineItem);
+            testOrderAspect(
+                    builder -> builder.customLineItems(customLineItems),
+                    order -> {
+                        assertThat(order.getCustomLineItems()).hasSize(1);
+                        final CustomLineItem actual = order.getCustomLineItems().get(0);
+                        assertThat(actual.getMoney()).isEqualTo(money);
+                        assertThat(actual.getQuantity()).isEqualTo(quantity);
+                        assertThat(actual.getName()).isEqualTo(name);
+                        assertThat(actual.getSlug()).isEqualTo(slug);
+                        assertThat(actual.getTaxCategory()).isEqualTo(taxCategoryReference);
+                        assertThat(actual.getTaxRate()).isPresentAs(taxRate);
+                    }
+            );
+        }));
     }
 
     @Test

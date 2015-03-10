@@ -7,8 +7,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.taxcategories.TaxRate;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  *
@@ -23,7 +23,7 @@ public interface ImportLineItem {
 
     long getQuantity();
 
-    Optional<List<ItemState>> getState();
+    Optional<Set<ItemState>> getState();
 
     Optional<Reference<Channel>> getSupplyChannel();
 

@@ -1,7 +1,6 @@
 package io.sphere.sdk.orders;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.TaxedPrice;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
@@ -31,7 +30,7 @@ public interface ImportOrder {
 
     Optional<String> getCustomerId();
 
-    List<CustomLineItem> getCustomLineItems();
+    List<ImportCustomLineItem> getCustomLineItems();
 
     List<ImportLineItem> getLineItems();
 
