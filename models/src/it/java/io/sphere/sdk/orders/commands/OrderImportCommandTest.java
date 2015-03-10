@@ -4,6 +4,8 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.LineItemLike;
 import io.sphere.sdk.carts.TaxPortion;
 import io.sphere.sdk.carts.TaxedPrice;
+import io.sphere.sdk.channels.ChannelFixtures;
+import io.sphere.sdk.channels.ChannelRoles;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
@@ -23,6 +25,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Consumer;
 
+import static io.sphere.sdk.channels.ChannelFixtures.withPersistentChannel;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.products.ProductFixtures.PRICE;
@@ -69,26 +72,30 @@ public class OrderImportCommandTest extends IntegrationTest {
 
     @Test
     public void lineItems() throws Exception {
-        withProduct(client(), product -> {
-            final int variantId = 1;
-            final ImportProductVariant importProductVariant = ImportProductVariantBuilder.of(product.getId(), variantId, product.getMasterData().getStaged().getMasterVariant().getSku().get())
-                    .build();
-            final Price price = PRICE;
-            final LocalizedStrings name = randomSlug();
-            final ImportLineItem importLineItem = ImportLineItemBuilder.of(importProductVariant, 2, price, name).build();
-            testOrderAspect(
-                    builder -> builder.lineItems(asList(importLineItem)),
-                    order -> {
-                        final LineItem lineItem = order.getLineItems().get(0);
-                        assertThat(lineItem.getProductId()).isEqualTo(product.getId());
-                        assertThat(lineItem.getVariant().getId()).isEqualTo(variantId);
-                        assertThat(lineItem.getVariant().getSku()).isPresentAs(product.getMasterData().getStaged().getMasterVariant().getSku().get());
-                        assertThat(lineItem.getQuantity()).isEqualTo(2);
-                        assertThat(lineItem.getPrice()).isEqualTo(price);
-                        assertThat(lineItem.getName()).isEqualTo(name);
-                    }
-            );
-        });
+        withPersistentChannel(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
+                    withProduct(client(), product -> {
+                        final int variantId = 1;
+                        final ImportProductVariant importProductVariant = ImportProductVariantBuilder.of(product.getId(), variantId, product.getMasterData().getStaged().getMasterVariant().getSku().get())
+                                .build();
+                        final Price price = PRICE;
+                        final LocalizedStrings name = randomSlug();
+                        final ImportLineItem importLineItem = ImportLineItemBuilder.of(importProductVariant, 2, price, name).supplyChannel(channel).build();
+                        testOrderAspect(
+                                builder -> builder.lineItems(asList(importLineItem)),
+                                order -> {
+                                    final LineItem lineItem = order.getLineItems().get(0);
+                                    assertThat(lineItem.getProductId()).isEqualTo(product.getId());
+                                    assertThat(lineItem.getVariant().getId()).isEqualTo(variantId);
+                                    assertThat(lineItem.getVariant().getSku()).isPresentAs(product.getMasterData().getStaged().getMasterVariant().getSku().get());
+                                    assertThat(lineItem.getQuantity()).isEqualTo(2);
+                                    assertThat(lineItem.getPrice()).isEqualTo(price);
+                                    assertThat(lineItem.getName()).isEqualTo(name);
+                                }
+                        );
+                    });
+                }
+        );
+
     }
 
     @Test
