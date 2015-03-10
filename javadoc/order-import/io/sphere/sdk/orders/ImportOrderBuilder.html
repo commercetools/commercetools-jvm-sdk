@@ -194,7 +194,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ImportOrderBuilder.html#customLineItems-java.util.List-">customLineItems</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;&nbsp;customLineItems)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ImportOrderBuilder.html#customLineItems-java.util.List-">customLineItems</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/orders/ImportCustomLineItem.html" title="interface in io.sphere.sdk.orders">ImportCustomLineItem</a>&gt;&nbsp;customLineItems)</code>&nbsp;</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></code></td>
@@ -204,7 +204,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/ImportOrderBuilder.html#ofCustomLineItems-javax.money.MonetaryAmount-io.sphere.sdk.orders.OrderState-java.util.List-">ofCustomLineItems</a></span>(javax.money.MonetaryAmount&nbsp;totalPrice,
                  <a href="../../../../io/sphere/sdk/orders/OrderState.html" title="enum in io.sphere.sdk.orders">OrderState</a>&nbsp;orderState,
-                 java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;&nbsp;customLineItems)</code>
+                 java.util.List&lt;<a href="../../../../io/sphere/sdk/orders/ImportCustomLineItem.html" title="interface in io.sphere.sdk.orders">ImportCustomLineItem</a>&gt;&nbsp;customLineItems)</code>
 <div class="block">Creates a builder for <a href="../../../../io/sphere/sdk/orders/ImportOrder.html" title="interface in io.sphere.sdk.orders"><code>ImportOrder</code></a> with at least one custom line item.</div>
 </td>
 </tr>
@@ -393,7 +393,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <ul class="blockList">
 <li class="blockList">
 <h4>customLineItems</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a>&nbsp;customLineItems(java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;&nbsp;customLineItems)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a>&nbsp;customLineItems(java.util.List&lt;<a href="../../../../io/sphere/sdk/orders/ImportCustomLineItem.html" title="interface in io.sphere.sdk.orders">ImportCustomLineItem</a>&gt;&nbsp;customLineItems)</pre>
 </li>
 </ul>
 <a name="totalPrice-javax.money.MonetaryAmount-">
@@ -605,7 +605,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <h4>ofCustomLineItems</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/orders/ImportOrderBuilder.html" title="class in io.sphere.sdk.orders">ImportOrderBuilder</a>&nbsp;ofCustomLineItems(javax.money.MonetaryAmount&nbsp;totalPrice,
                                                    <a href="../../../../io/sphere/sdk/orders/OrderState.html" title="enum in io.sphere.sdk.orders">OrderState</a>&nbsp;orderState,
-                                                   java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;&nbsp;customLineItems)</pre>
+                                                   java.util.List&lt;<a href="../../../../io/sphere/sdk/orders/ImportCustomLineItem.html" title="interface in io.sphere.sdk.orders">ImportCustomLineItem</a>&gt;&nbsp;customLineItems)</pre>
 <div class="block">Creates a builder for <a href="../../../../io/sphere/sdk/orders/ImportOrder.html" title="interface in io.sphere.sdk.orders"><code>ImportOrder</code></a> with at least one custom line item.
  You can add <a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts"><code>LineItem</code></a>s with <a href="../../../../io/sphere/sdk/orders/ImportOrderBuilder.html#lineItems-java.util.List-"><code>lineItems(java.util.List)</code></a>.</div>
 <dl>
