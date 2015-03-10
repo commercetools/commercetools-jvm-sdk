@@ -11,17 +11,17 @@ import io.sphere.sdk.taxcategories.TaxRate;
 import java.util.Optional;
 import java.util.Set;
 
-final class ImportLineItemImpl extends Base implements ImportLineItem {
+final class LineItemImportDraftImpl extends Base implements LineItemImportDraft {
     private final Optional<String> productId;
     private final LocalizedStrings name;
-    private final ImportProductVariant variant;
+    private final ProductVariantImportDraft variant;
     private final Price price;
     private final long quantity;
     private final Optional<Set<ItemState>> state;
     private final Optional<Reference<Channel>> supplyChannel;
     private final Optional<TaxRate> taxRate;
 
-    public ImportLineItemImpl(final LocalizedStrings name, final Optional<String> productId, final ImportProductVariant variant, final Price price, final long quantity, final Optional<Set<ItemState>> state, final Optional<Reference<Channel>> supplyChannel, final Optional<TaxRate> taxRate) {
+    public LineItemImportDraftImpl(final LocalizedStrings name, final Optional<String> productId, final ProductVariantImportDraft variant, final Price price, final long quantity, final Optional<Set<ItemState>> state, final Optional<Reference<Channel>> supplyChannel, final Optional<TaxRate> taxRate) {
         this.name = name;
         this.productId = productId;
         this.variant = variant;
@@ -68,7 +68,7 @@ final class ImportLineItemImpl extends Base implements ImportLineItem {
     }
 
     @Override
-    public ImportProductVariant getVariant() {
+    public ProductVariantImportDraft getVariant() {
         return variant;
     }
 }

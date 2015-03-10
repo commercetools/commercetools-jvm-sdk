@@ -9,9 +9,9 @@ import java.util.Optional;
 
 /**
  *
- * @see ImportProductVariantBuilder
+ * @see ProductVariantImportDraftBuilder
  */
-public interface ImportProductVariant {
+public interface ProductVariantImportDraft {
     Optional<List<Attribute>> getAttributes();
 
     Optional<Integer> getId();
@@ -23,7 +23,7 @@ public interface ImportProductVariant {
     Optional<String> getSku();
 
     /**
-     * Field is not part of the SPHERE.IO API, it is used to initialize {@link io.sphere.sdk.orders.ImportLineItemBuilder} correctly.
+     * Field is not part of the SPHERE.IO API, it is used to initialize {@link LineItemImportDraftBuilder} correctly.
      * @return the product ID
      */
     Optional<String> getProductId();

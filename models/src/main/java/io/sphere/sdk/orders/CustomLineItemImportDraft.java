@@ -11,8 +11,10 @@ import javax.money.MonetaryAmount;
 import java.util.Optional;
 import java.util.Set;
 
-
-public interface ImportCustomLineItem {
+/**
+ * @see CustomLineItemImportDraftBuilder
+ */
+public interface CustomLineItemImportDraft {
 
     LocalizedStrings getName();
 

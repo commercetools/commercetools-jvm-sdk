@@ -47,12 +47,12 @@ public class OrderImportCommandTest extends IntegrationTest {
             final Price price = Price.of(EURO_10);
             final OrderState orderState = OrderState.OPEN;
             final MonetaryAmount amount = EURO_10;
-            final ImportProductVariant variant = ImportProductVariantBuilder.of(productId, variantId).build();
+            final ProductVariantImportDraft variant = ProductVariantImportDraftBuilder.of(productId, variantId).build();
 
-            final ImportLineItem importLineItem = ImportLineItemBuilder.of(variant, quantity, price, name).build();
-            final ImportOrder importOrder = ImportOrderBuilder.ofLineItems(amount, orderState, asList(importLineItem))
+            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(variant, quantity, price, name).build();
+            final OrderImportDraft orderImportDraft = OrderImportDraftBuilder.ofLineItems(amount, orderState, asList(lineItemImportDraft))
                     .country(DE).build();
-            final OrderImportCommand cmd = OrderImportCommand.of(importOrder);
+            final OrderImportCommand cmd = OrderImportCommand.of(orderImportDraft);
 
             final Order order = execute(cmd);
 
@@ -76,13 +76,13 @@ public class OrderImportCommandTest extends IntegrationTest {
                     withProduct(client(), product -> {
                         final int variantId = 1;
                         final String sku = sku(product);
-                        final ImportProductVariant importProductVariant = ImportProductVariantBuilder.of(product.getId(), variantId, sku)
+                        final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), variantId, sku)
                                 .build();
                         final Price price = PRICE;
                         final LocalizedStrings name = randomSlug();
-                        final ImportLineItem importLineItem = ImportLineItemBuilder.of(importProductVariant, 2, price, name).supplyChannel(channel).build();
+                        final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2, price, name).supplyChannel(channel).build();
                         testOrderAspect(
-                                builder -> builder.lineItems(asList(importLineItem)),
+                                builder -> builder.lineItems(asList(lineItemImportDraft)),
                                 order -> {
                                     final LineItem lineItem = order.getLineItems().get(0);
                                     assertThat(lineItem.getProductId()).isEqualTo(product.getId());
@@ -106,7 +106,7 @@ public class OrderImportCommandTest extends IntegrationTest {
     @Test
     public void importBySku() throws Exception {
         checkImportForVariantIdSkuCombination(product ->
-                ImportProductVariantBuilder.ofSku(sku(product)));
+                ProductVariantImportDraftBuilder.ofSku(sku(product)));
     }
 
     private String sku(final Product product) {
@@ -115,18 +115,18 @@ public class OrderImportCommandTest extends IntegrationTest {
 
     @Test
     public void importByVariantId() throws Exception {
-        checkImportForVariantIdSkuCombination(product -> ImportProductVariantBuilder.of(product.getId(), 1));
+        checkImportForVariantIdSkuCombination(product -> ProductVariantImportDraftBuilder.of(product.getId(), 1));
     }
 
-    private void checkImportForVariantIdSkuCombination(final Function<Product, ImportProductVariantBuilder> f) {
+    private void checkImportForVariantIdSkuCombination(final Function<Product, ProductVariantImportDraftBuilder> f) {
         withProduct(client(), product -> {
-            final ImportProductVariant importProductVariant = f.apply(product)
+            final ProductVariantImportDraft productVariantImportDraft = f.apply(product)
                     .build();
             final Price price = PRICE;
             final LocalizedStrings name = randomSlug();
-            final ImportLineItem importLineItem = ImportLineItemBuilder.of(importProductVariant, 2, price, name).build();
+            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2, price, name).build();
             testOrderAspect(
-                    builder -> builder.lineItems(asList(importLineItem)),
+                    builder -> builder.lineItems(asList(lineItemImportDraft)),
                     order -> {
                         final LineItem lineItem = order.getLineItems().get(0);
                         assertThat(lineItem.getProductId()).isEqualTo(product.getId());
@@ -147,12 +147,12 @@ public class OrderImportCommandTest extends IntegrationTest {
             final String id = "an id";
             final String slug = "a-slug";
             final TaxRate taxRate = taxCategory.getTaxRates().get(0);
-            final ImportCustomLineItem customLineItem = ImportCustomLineItemBuilder.of(name, quantity, money, taxCategoryReference)
+            final CustomLineItemImportDraft customLineItem = CustomLineItemImportDraftBuilder.of(name, quantity, money, taxCategoryReference)
                     .id(id)
                     .slug(slug)
                     .taxRate(taxRate)
                     .build();
-            final List<ImportCustomLineItem> customLineItems = asList(customLineItem);
+            final List<CustomLineItemImportDraft> customLineItems = asList(customLineItem);
             testOrderAspect(
                     builder -> builder.customLineItems(customLineItems),
                     order -> {
@@ -179,16 +179,16 @@ public class OrderImportCommandTest extends IntegrationTest {
 
         withProduct(client(), product -> {
             final int variantId = 1;
-            final ImportProductVariant importProductVariant = ImportProductVariantBuilder.of(product.getId(), variantId, sku(product))
+            final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), variantId, sku(product))
                     .attributes(attributesOfOrder)
                     .images(images)
                     .prices(prices)
                     .build();
             final Price price = PRICE;
             final LocalizedStrings name = randomSlug();
-            final ImportLineItem importLineItem = ImportLineItemBuilder.of(importProductVariant, 2, price, name).build();
+            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2, price, name).build();
             testOrderAspect(
-                    builder -> builder.lineItems(asList(importLineItem)),
+                    builder -> builder.lineItems(asList(lineItemImportDraft)),
                     order -> {
                         final LineItem lineItem = order.getLineItems().get(0);
                         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
@@ -332,7 +332,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                 order -> assertThat(order.getCompletedAt()).isPresentAs(completedAt));
     }
 
-    private void testOrderAspect(final Consumer<ImportOrderBuilder> orderBuilderConsumer, final Consumer<Order> orderConsumer) {
+    private void testOrderAspect(final Consumer<OrderImportDraftBuilder> orderBuilderConsumer, final Consumer<Order> orderConsumer) {
         withProduct(client(), product -> {
             final String productId = product.getId();
             final int variantId = 1;
@@ -341,13 +341,13 @@ public class OrderImportCommandTest extends IntegrationTest {
             final Price price = Price.of(EURO_10);
             final OrderState orderState = OrderState.OPEN;
             final MonetaryAmount amount = EURO_10;
-            final ImportProductVariant variant = ImportProductVariantBuilder.of(productId, variantId).build();
+            final ProductVariantImportDraft variant = ProductVariantImportDraftBuilder.of(productId, variantId).build();
 
-            final ImportLineItem importLineItem = ImportLineItemBuilder.of(variant, quantity, price, name).build();
-            final ImportOrderBuilder importOrderBuilder = ImportOrderBuilder.ofLineItems(amount, orderState, asList(importLineItem));
-            orderBuilderConsumer.accept(importOrderBuilder);
-            final ImportOrder importOrder = importOrderBuilder.build();
-            final OrderImportCommand cmd = OrderImportCommand.of(importOrder);
+            final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(variant, quantity, price, name).build();
+            final OrderImportDraftBuilder orderImportDraftBuilder = OrderImportDraftBuilder.ofLineItems(amount, orderState, asList(lineItemImportDraft));
+            orderBuilderConsumer.accept(orderImportDraftBuilder);
+            final OrderImportDraft orderImportDraft = orderImportDraftBuilder.build();
+            final OrderImportCommand cmd = OrderImportCommand.of(orderImportDraft);
 
             final Order order = execute(cmd);
             orderConsumer.accept(order);

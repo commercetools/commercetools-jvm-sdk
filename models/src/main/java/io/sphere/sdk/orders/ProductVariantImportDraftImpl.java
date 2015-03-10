@@ -9,7 +9,7 @@ import io.sphere.sdk.products.Price;
 import java.util.List;
 import java.util.Optional;
 
-final class ImportProductVariantImpl extends Base implements ImportProductVariant {
+final class ProductVariantImportDraftImpl extends Base implements ProductVariantImportDraft {
     private final Optional<Integer> id;
     private final Optional<String> sku;
     private final Optional<String> productId;
@@ -17,7 +17,7 @@ final class ImportProductVariantImpl extends Base implements ImportProductVarian
     private final Optional<List<Attribute>> attributes;
     private final Optional<List<Image>> images;
 
-    ImportProductVariantImpl(final Optional<Integer> id, final Optional<String> sku, final Optional<List<Price>> prices, final Optional<List<Image>> images, final Optional<List<Attribute>> attributes, final Optional<String> productId) {
+    ProductVariantImportDraftImpl(final Optional<Integer> id, final Optional<String> sku, final Optional<List<Price>> prices, final Optional<List<Image>> images, final Optional<List<Attribute>> attributes, final Optional<String> productId) {
         this.attributes = attributes;
         this.id = id;
         this.sku = sku;
@@ -52,7 +52,7 @@ final class ImportProductVariantImpl extends Base implements ImportProductVarian
     }
 
     /**
-     * Hack to initialize {@link io.sphere.sdk.orders.ImportLineItem} correctly with an SKU or product ID/variant ID pair.
+     * Hack to initialize {@link LineItemImportDraft} correctly with an SKU or product ID/variant ID pair.
      * @return
      */
     @JsonIgnore

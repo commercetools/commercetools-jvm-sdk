@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.json.JsonUtils;
-import io.sphere.sdk.orders.ImportOrder;
+import io.sphere.sdk.orders.OrderImportDraft;
 import io.sphere.sdk.orders.Order;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
@@ -13,10 +13,10 @@ import static io.sphere.sdk.http.HttpMethod.POST;
  * Orders can also be imported via the Import API endpoint so you don't have to create a cart before.
  */
 public class OrderImportCommand extends CommandImpl<Order> {
-    private final ImportOrder importOrder;
+    private final OrderImportDraft orderImportDraft;
 
-    private OrderImportCommand(final ImportOrder importOrder) {
-        this.importOrder = importOrder;
+    private OrderImportCommand(final OrderImportDraft orderImportDraft) {
+        this.orderImportDraft = orderImportDraft;
     }
 
     @Override
@@ -26,10 +26,10 @@ public class OrderImportCommand extends CommandImpl<Order> {
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, OrdersEndpoint.ENDPOINT.endpoint() + "/import", JsonUtils.toJson(importOrder));
+        return HttpRequestIntent.of(POST, OrdersEndpoint.ENDPOINT.endpoint() + "/import", JsonUtils.toJson(orderImportDraft));
     }
 
-    public static OrderImportCommand of(final ImportOrder importOrder) {
-        return new OrderImportCommand(importOrder);
+    public static OrderImportCommand of(final OrderImportDraft orderImportDraft) {
+        return new OrderImportCommand(orderImportDraft);
     }
 }

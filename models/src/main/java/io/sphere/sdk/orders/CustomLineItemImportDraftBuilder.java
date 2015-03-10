@@ -10,7 +10,7 @@ import javax.money.MonetaryAmount;
 import java.util.Optional;
 import java.util.Set;
 
-public class ImportCustomLineItemBuilder extends Base implements Builder<ImportCustomLineItem> {
+public class CustomLineItemImportDraftBuilder extends Base implements Builder<CustomLineItemImportDraft> {
     private String id = RandomStringUtils.randomAlphanumeric(20);
     private final LocalizedStrings name;
     private final MonetaryAmount money;
@@ -20,43 +20,43 @@ public class ImportCustomLineItemBuilder extends Base implements Builder<ImportC
     private final Reference<TaxCategory> taxCategory;
     private Optional<TaxRate> taxRate;
 
-    private ImportCustomLineItemBuilder(final LocalizedStrings name, final MonetaryAmount money, final long quantity, final Reference<TaxCategory> taxCategory) {
+    private CustomLineItemImportDraftBuilder(final LocalizedStrings name, final MonetaryAmount money, final long quantity, final Reference<TaxCategory> taxCategory) {
         this.name = name;
         this.money = money;
         this.quantity = quantity;
         this.taxCategory = taxCategory;
     }
 
-    public static ImportCustomLineItemBuilder of(final LocalizedStrings name, final long quantity, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory) {
-        return new ImportCustomLineItemBuilder(name, money, quantity, taxCategory.toReference());
+    public static CustomLineItemImportDraftBuilder of(final LocalizedStrings name, final long quantity, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory) {
+        return new CustomLineItemImportDraftBuilder(name, money, quantity, taxCategory.toReference());
     }
 
-    public ImportCustomLineItemBuilder id(final String id) {
+    public CustomLineItemImportDraftBuilder id(final String id) {
         this.id = id;
         return this;
     }
 
-    public ImportCustomLineItemBuilder slug(final String slug) {
+    public CustomLineItemImportDraftBuilder slug(final String slug) {
         this.slug = slug;
         return this;
     }
 
-    public ImportCustomLineItemBuilder state(final Set<ItemState> state) {
+    public CustomLineItemImportDraftBuilder state(final Set<ItemState> state) {
         this.state = Optional.of(state);
         return this;
     }
 
-    public ImportCustomLineItemBuilder taxRate(final TaxRate taxRate) {
+    public CustomLineItemImportDraftBuilder taxRate(final TaxRate taxRate) {
         return taxRate(Optional.of(taxRate));
     }
 
-    public ImportCustomLineItemBuilder taxRate(final Optional<TaxRate> taxRate) {
+    public CustomLineItemImportDraftBuilder taxRate(final Optional<TaxRate> taxRate) {
         this.taxRate = taxRate;
         return this;
     }
 
     @Override
-    public ImportCustomLineItem build() {
-        return new ImportCustomLineItemImpl(id, name, money, slug, quantity, state, taxCategory, taxRate);
+    public CustomLineItemImportDraft build() {
+        return new CustomLineItemImportDraftImpl(id, name, money, slug, quantity, state, taxCategory, taxRate);
     }
 }

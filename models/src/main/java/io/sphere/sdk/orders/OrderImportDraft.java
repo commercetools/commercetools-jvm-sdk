@@ -15,9 +15,9 @@ import java.util.Optional;
 /**
  * Draft for importing an Order.
  *
- * @see io.sphere.sdk.orders.ImportOrderBuilder
+ * @see OrderImportDraftBuilder
  */
-public interface ImportOrder {
+public interface OrderImportDraft {
     Optional<Address> getBillingAddress();
 
     Optional<Instant> getCompletedAt();
@@ -30,9 +30,9 @@ public interface ImportOrder {
 
     Optional<String> getCustomerId();
 
-    List<ImportCustomLineItem> getCustomLineItems();
+    List<CustomLineItemImportDraft> getCustomLineItems();
 
-    List<ImportLineItem> getLineItems();
+    List<LineItemImportDraft> getLineItems();
 
     Optional<String> getOrderNumber();
 

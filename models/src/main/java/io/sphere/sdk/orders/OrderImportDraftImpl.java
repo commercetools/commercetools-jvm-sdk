@@ -12,12 +12,12 @@ import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
-final class ImportOrderImpl extends Base implements ImportOrder {
+final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     private final Optional<String> orderNumber;
     private final Optional<String> customerId;
     private final Optional<String> customerEmail;
-    private final List<ImportLineItem> lineItems;
-    private final List<ImportCustomLineItem> customLineItems;
+    private final List<LineItemImportDraft> lineItems;
+    private final List<CustomLineItemImportDraft> customLineItems;
     private final MonetaryAmount totalPrice;
     private final Optional<TaxedPrice> taxedPrice;
     private final Optional<Address> shippingAddress;
@@ -30,7 +30,7 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     private final Optional<OrderShippingInfo> shippingInfo;
     private final Optional<Instant> completedAt;
 
-    public ImportOrderImpl(final Optional<Address> billingAddress, final Optional<String> orderNumber, final Optional<String> customerId, final Optional<String> customerEmail, final List<ImportLineItem> lineItems, final List<ImportCustomLineItem> customLineItems, final MonetaryAmount totalPrice, final Optional<TaxedPrice> taxedPrice, final Optional<Address> shippingAddress, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<CountryCode> country, final OrderState orderState, final Optional<ShipmentState> shipmentState, final Optional<PaymentState> paymentState, final Optional<OrderShippingInfo> shippingInfo, final Optional<Instant> completedAt) {
+    public OrderImportDraftImpl(final Optional<Address> billingAddress, final Optional<String> orderNumber, final Optional<String> customerId, final Optional<String> customerEmail, final List<LineItemImportDraft> lineItems, final List<CustomLineItemImportDraft> customLineItems, final MonetaryAmount totalPrice, final Optional<TaxedPrice> taxedPrice, final Optional<Address> shippingAddress, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<CountryCode> country, final OrderState orderState, final Optional<ShipmentState> shipmentState, final Optional<PaymentState> paymentState, final Optional<OrderShippingInfo> shippingInfo, final Optional<Instant> completedAt) {
         this.billingAddress = billingAddress;
         this.orderNumber = orderNumber;
         this.customerId = customerId;
@@ -80,12 +80,12 @@ final class ImportOrderImpl extends Base implements ImportOrder {
     }
 
     @Override
-    public List<ImportCustomLineItem> getCustomLineItems() {
+    public List<CustomLineItemImportDraft> getCustomLineItems() {
         return customLineItems;
     }
 
     @Override
-    public List<ImportLineItem> getLineItems() {
+    public List<LineItemImportDraft> getLineItems() {
         return lineItems;
     }
 

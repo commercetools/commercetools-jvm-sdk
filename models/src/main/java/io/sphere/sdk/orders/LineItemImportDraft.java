@@ -12,9 +12,9 @@ import java.util.Set;
 
 /**
  *
- * @see io.sphere.sdk.orders.ImportLineItemBuilder
+ * @see LineItemImportDraftBuilder
  */
-public interface ImportLineItem {
+public interface LineItemImportDraft {
     LocalizedStrings getName();
 
     Price getPrice();
@@ -29,5 +29,5 @@ public interface ImportLineItem {
 
     Optional<TaxRate> getTaxRate();
 
-    ImportProductVariant getVariant();
+    ProductVariantImportDraft getVariant();
 }

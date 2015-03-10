@@ -10,7 +10,7 @@ import javax.money.MonetaryAmount;
 import java.util.Optional;
 import java.util.Set;
 
-final class ImportCustomLineItemImpl implements ImportCustomLineItem {
+final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     private final String id;
     private final LocalizedStrings name;
     private final MonetaryAmount money;
@@ -20,7 +20,7 @@ final class ImportCustomLineItemImpl implements ImportCustomLineItem {
     private final Reference<TaxCategory> taxCategory;
     private final Optional<TaxRate> taxRate;
 
-    public ImportCustomLineItemImpl(final String id, final LocalizedStrings name, final MonetaryAmount money, final String slug, final long quantity, final Optional<Set<ItemState>> state, final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate) {
+    public CustomLineItemImportDraftImpl(final String id, final LocalizedStrings name, final MonetaryAmount money, final String slug, final long quantity, final Optional<Set<ItemState>> state, final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate) {
         this.id = id;
         this.name = name;
         this.money = money;
