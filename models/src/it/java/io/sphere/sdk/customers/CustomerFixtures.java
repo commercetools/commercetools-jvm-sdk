@@ -4,14 +4,18 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CartDraft;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import io.sphere.sdk.customers.commands.CustomerUpdateCommand;
 import io.sphere.sdk.customers.commands.updateactions.AddAddress;
+import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+
+import static io.sphere.sdk.customergroups.CustomerGroupFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -27,6 +31,15 @@ public class CustomerFixtures {
             customerConsumer.accept(customerWithAddress);
         };
         withCustomer(client, newCustomerDraft(), customerUpdater);
+    }
+
+    public static void withCustomerInGroup(final TestClient client, final BiConsumer<Customer, CustomerGroup> consumer) {
+        withB2cCustomerGroup(client, group -> {
+            withCustomer(client, customer -> {
+                final Customer customerInGroup = client.execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(group)));
+                consumer.accept(customerInGroup, group);
+            });
+        });
     }
 
     public static void withCustomer(final TestClient client, final Consumer<Customer> customerConsumer) {

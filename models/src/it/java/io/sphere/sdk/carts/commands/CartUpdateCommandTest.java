@@ -18,8 +18,10 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
@@ -105,9 +107,9 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(customLineItem.getName()).isEqualTo(name);
             assertThat(customLineItem.getQuantity()).isEqualTo(quantity);
             assertThat(customLineItem.getSlug()).isEqualTo(slug);
-            final List<ItemState> state = customLineItem.getState();
+            final Set<ItemState> state = customLineItem.getState();
             assertThat(state).hasSize(1);
-            assertThat(state.get(0).getQuantity()).isEqualTo(quantity);
+            assertThat(new LinkedList<>(state).get(0).getQuantity()).isEqualTo(quantity);
             assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
         });
     }
