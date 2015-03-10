@@ -81,8 +81,8 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
         final ProductType nestedProductType = execute(ProductTypeCreateCommand.of(ProductTypeDraft.of("test-sub-attribute", "nested attribute test",
                 Arrays.asList(
-                        AttributeDefinitionBuilder.of("size-nested", LocalizedStrings.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
-                        AttributeDefinitionBuilder.of("brand-nested", LocalizedStrings.of(Locale.ENGLISH, "Brand"), TextType.of()).build()))));
+                        AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
+                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Brand"), TextType.of()).build()))));
 
         try {
             final AttributeContainer adidas = AttributeContainer.of(
