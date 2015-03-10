@@ -8,15 +8,15 @@ public class ParcelMeasurements extends Base {
     private final int widthInMillimeter;
     private final int weightInGram;
 
-    private ParcelMeasurements(final int heightInMillimeter, final int lengthInMillimeter, final int widthInMillimeter, final int weightInGram) {
+    private ParcelMeasurements(final int lengthInMillimeter, final int widthInMillimeter, final int heightInMillimeter, final int weightInGram) {
         this.heightInMillimeter = heightInMillimeter;
         this.lengthInMillimeter = lengthInMillimeter;
         this.widthInMillimeter = widthInMillimeter;
         this.weightInGram = weightInGram;
     }
 
-    public static ParcelMeasurements of(final int heightInMillimeter, final int lengthInMillimeter, final int widthInMillimeter, final int weightInGram) {
-        return new ParcelMeasurements(heightInMillimeter, lengthInMillimeter, widthInMillimeter, weightInGram);
+    public static ParcelMeasurements of(final int lengthInMillimeter, final int widthInMillimeter, final int heightInMillimeter, final int weightInGram) {
+        return new ParcelMeasurements(lengthInMillimeter, widthInMillimeter, heightInMillimeter, weightInGram);
     }
 
     public int getHeightInMillimeter() {

@@ -1,5 +1,6 @@
-package io.sphere.sdk.carts;
+package io.sphere.sdk.orders;
 
+import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -9,19 +10,17 @@ import javax.money.MonetaryAmount;
 import java.util.Optional;
 import java.util.Set;
 
-final class CustomLineItemImpl implements CustomLineItem {
+final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     private final String id;
     private final LocalizedStrings name;
     private final MonetaryAmount money;
     private final String slug;
     private final long quantity;
-    private final Set<ItemState> state;
+    private final Optional<Set<ItemState>> state;
     private final Reference<TaxCategory> taxCategory;
     private final Optional<TaxRate> taxRate;
 
-    CustomLineItemImpl(final String id, final LocalizedStrings name, final MonetaryAmount money,
-                       final String slug, final long quantity, final Set<ItemState> state,
-                       final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate) {
+    public CustomLineItemImportDraftImpl(final String id, final LocalizedStrings name, final MonetaryAmount money, final String slug, final long quantity, final Optional<Set<ItemState>> state, final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate) {
         this.id = id;
         this.name = name;
         this.money = money;
@@ -32,14 +31,8 @@ final class CustomLineItemImpl implements CustomLineItem {
         this.taxRate = taxRate;
     }
 
-    @Override
     public String getId() {
         return id;
-    }
-
-    @Override
-    public LocalizedStrings getName() {
-        return name;
     }
 
     @Override
@@ -48,8 +41,8 @@ final class CustomLineItemImpl implements CustomLineItem {
     }
 
     @Override
-    public String getSlug() {
-        return slug;
+    public LocalizedStrings getName() {
+        return name;
     }
 
     @Override
@@ -58,7 +51,12 @@ final class CustomLineItemImpl implements CustomLineItem {
     }
 
     @Override
-    public Set<ItemState> getState() {
+    public String getSlug() {
+        return slug;
+    }
+
+    @Override
+    public Optional<Set<ItemState>> getState() {
         return state;
     }
 

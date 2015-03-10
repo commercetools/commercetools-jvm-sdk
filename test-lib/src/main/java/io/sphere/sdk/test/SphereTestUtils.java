@@ -31,7 +31,10 @@ public final class SphereTestUtils {
 
     public static final CurrencyUnit EUR = DefaultCurrencyUnits.EUR;
     public static final CurrencyUnit USD = DefaultCurrencyUnits.USD;
+    public static final MonetaryAmount EURO_5 = MoneyImpl.of(5, EUR);
     public static final MonetaryAmount EURO_10 = MoneyImpl.of(10, EUR);
+    public static final MonetaryAmount EURO_20 = MoneyImpl.of(20, EUR);
+    public static final MonetaryAmount EURO_30 = MoneyImpl.of(30, EUR);
 
     /**
      * Creates a LocalizedStrings for the {@code Locale.ENGLISH}.
@@ -59,7 +62,7 @@ public final class SphereTestUtils {
     }
 
     public static Address randomAddress() {
-        return AddressBuilder.of(CountryCode.DE).build();
+        return AddressBuilder.of(CountryCode.DE).city(randomString()).build();
     }
 
 

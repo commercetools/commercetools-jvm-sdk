@@ -12,6 +12,7 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 
 import javax.money.MonetaryAmount;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -83,4 +84,6 @@ public interface Order extends OrderLike<Order> {
 
     @Override
     MonetaryAmount getTotalPrice();
+
+    Optional<Instant> getCompletedAt();
 }

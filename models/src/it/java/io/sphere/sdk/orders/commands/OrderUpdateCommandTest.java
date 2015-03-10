@@ -24,7 +24,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             .withCarrier("carrier xyz")
             .withProvider("provider foo")
             .withProviderTransaction("prov trans 56");
-    public static final ParcelMeasurements PARCEL_MEASUREMENTS = ParcelMeasurements.of(1, 2, 3, 4);
+    public static final ParcelMeasurements PARCEL_MEASUREMENTS = ParcelMeasurements.of(2, 3, 1, 4);
     public static final Instant INSTANT_IN_PAST = Instant.now().minusSeconds(500);
 
     @Test
