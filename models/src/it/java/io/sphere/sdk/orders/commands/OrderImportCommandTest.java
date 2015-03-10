@@ -1,18 +1,19 @@
 package io.sphere.sdk.orders.commands;
 
+import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.carts.LineItemLike;
 import io.sphere.sdk.carts.TaxPortion;
 import io.sphere.sdk.carts.TaxedPrice;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRoles;
-import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.test.IntegrationTest;
@@ -20,6 +21,7 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
@@ -86,7 +88,11 @@ public class OrderImportCommandTest extends IntegrationTest {
                                     final LineItem lineItem = order.getLineItems().get(0);
                                     assertThat(lineItem.getProductId()).isEqualTo(product.getId());
                                     assertThat(lineItem.getVariant().getId()).isEqualTo(variantId);
-                                    assertThat(lineItem.getVariant().getSku()).isPresentAs(product.getMasterData().getStaged().getMasterVariant().getSku().get());
+                                    final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                                    assertThat(lineItem.getVariant().getAttributes()).isEqualTo(masterVariant.getAttributes());
+                                    assertThat(lineItem.getVariant().getImages()).isEqualTo(masterVariant.getImages());
+                                    assertThat(lineItem.getVariant().getPrices()).isEqualTo(masterVariant.getPrices());
+                                    assertThat(lineItem.getVariant().getSku()).isPresentAs(masterVariant.getSku().get());
                                     assertThat(lineItem.getQuantity()).isEqualTo(2);
                                     assertThat(lineItem.getPrice()).isEqualTo(price);
                                     assertThat(lineItem.getName()).isEqualTo(name);
@@ -95,6 +101,39 @@ public class OrderImportCommandTest extends IntegrationTest {
                     });
                 }
         );
+
+    }
+
+    @Test
+    public void orderImportCanOverrideVariantDataInTheOrder() throws Exception {
+        final Attribute size = TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Sizes.S);
+        final Attribute color = TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Colors.RED);
+        final List<Attribute> attributesOfOrder = asList(size, color);
+        final List<Image> images = asList(Image.of("url", ImageDimensions.of(1, 2), "label"));
+        final List<Price> prices = asList(Price.of(new BigDecimal("15.23"), DefaultCurrencyUnits.EUR));
+
+        withProduct(client(), product -> {
+            final int variantId = 1;
+            final ImportProductVariant importProductVariant = ImportProductVariantBuilder.of(product.getId(), variantId, product.getMasterData().getStaged().getMasterVariant().getSku().get())
+                    .attributes(attributesOfOrder)
+                    .images(images)
+                    .prices(prices)
+                    .build();
+            final Price price = PRICE;
+            final LocalizedStrings name = randomSlug();
+            final ImportLineItem importLineItem = ImportLineItemBuilder.of(importProductVariant, 2, price, name).build();
+            testOrderAspect(
+                    builder -> builder.lineItems(asList(importLineItem)),
+                    order -> {
+                        final LineItem lineItem = order.getLineItems().get(0);
+                        final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+                        final ProductVariant productVariant = lineItem.getVariant();
+                        assertThat(productVariant.getAttributes()).isEqualTo(attributesOfOrder).isNotEqualTo(masterVariant.getAttributes());
+                        assertThat(productVariant.getImages()).isEqualTo(images).isNotEqualTo(masterVariant.getImages());
+                        assertThat(productVariant.getPrices()).isEqualTo(prices).isNotEqualTo(masterVariant.getPrices());
+                    }
+            );
+        });
 
     }
 
