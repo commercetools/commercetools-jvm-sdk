@@ -1,39 +1,85 @@
 package io.sphere.sdk.attributes;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 
+public class AttributeDefinition extends Base {
+    private final AttributeType attributeType;
+    private final String name;
+    private final LocalizedStrings label;
+    private final boolean isRequired;
+    private final AttributeConstraint attributeConstraint;
+    private final boolean isSearchable;
+    private final TextInputHint inputHint;
 
-/**
- * Builders:
- *
- * <ul>
- *     <li>{@link BooleanAttributeDefinitionBuilder}</li>
- *     <li>{@link DateAttributeDefinitionBuilder}</li>
- *     <li>{@link DateTimeAttributeDefinitionBuilder}</li>
- *     <li>{@link EnumAttributeDefinitionBuilder}</li>
- *     <li>{@link LocalizedEnumAttributeDefinitionBuilder}</li>
- *     <li>{@link LocalizedStringsAttributeDefinitionBuilder}</li>
- *     <li>{@link MoneyAttributeDefinitionBuilder}</li>
- *     <li>{@link NumberAttributeDefinitionBuilder}</li>
- *     <li>{@link SetAttributeDefinitionBuilder}</li>
- *     <li>{@link TextAttributeDefinitionBuilder}</li>
- *     <li>{@link TimeAttributeDefinitionBuilder}</li>
- *     <li>{@link ReferenceAttributeDefinitionBuilder}</li>
- * </ul>
- *
- */
-@JsonDeserialize(using = AttributeDefinitionDeserializer.class)
-public interface AttributeDefinition {
-    AttributeType getAttributeType();
+    @JsonCreator
+    AttributeDefinition(AttributeType attributeType, String name, LocalizedStrings label, boolean isRequired,
+                        AttributeConstraint attributeConstraint, boolean isSearchable, TextInputHint inputHint) {
+        this.attributeType = attributeType;
+        this.name = name;
+        this.label = label;
+        this.isRequired = isRequired;
+        this.attributeConstraint = attributeConstraint;
+        this.isSearchable = isSearchable;
+        this.inputHint = inputHint;
+    }
 
-    String getName();
+    /**
+     * Describes the type of the attribute.
+     * @return the type of the attribute
+     */
+    @JsonProperty("type")
+    public AttributeType getAttributeType() {
+        return attributeType;
+    }
 
-    LocalizedStrings getLabel();
+    /**
+     * The unique name of the attribute used in the API.
+     * @return name of the attribute
+     */
+    public String getName() {
+        return name;
+    }
 
-    boolean getIsRequired();
+    /**
+     * A human-readable label for the attribute.
+     * @return label for the attribute
+     */
+    public LocalizedStrings getLabel() {
+        return label;
+    }
 
-    AttributeConstraint getAttributeConstraint();
+    /**
+     * Whether the attribute is required to have a value.
+     * @return true if required else false
+     */
+    public boolean getIsRequired() {
+        return isRequired;
+    }
 
-    boolean getIsSearchable();
+    /**
+     * Describes how an attribute or a set of attributes should be validated across all variants of a product.
+     * @return definition of validation logic
+     */
+    public AttributeConstraint getAttributeConstraint() {
+        return attributeConstraint;
+    }
+
+    /**
+     * Whether the attribute's values should generally be enabled in product search.
+     * The exact features that are enabled/disabled with this flag depend on the concrete attribute type and are described there.
+     *
+     * @return true if searchable, false if not
+     */
+    public boolean getIsSearchable() {
+        return isSearchable;
+    }
+
+    @JsonProperty("inputHint")
+    public TextInputHint getInputHint() {
+        return inputHint;
+    }
 }

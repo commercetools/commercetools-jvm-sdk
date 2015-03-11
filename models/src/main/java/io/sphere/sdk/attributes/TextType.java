@@ -1,7 +1,14 @@
 package io.sphere.sdk.attributes;
 
-public final class TextType extends AttributeTypeBase {
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-    public TextType() {
+public final class TextType extends AttributeTypeBase {
+    @JsonIgnore
+    private TextType() {}
+
+    @JsonCreator
+    public static TextType of() {
+        return new TextType();
     }
 }
