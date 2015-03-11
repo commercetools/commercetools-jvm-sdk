@@ -88,7 +88,7 @@
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/inventories/commands/InventoryEntryCreateCommand.html" title="class in io.sphere.sdk.inventories.commands">InventoryEntryCreateCommand</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>ChannelFixtures.withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -&gt; {
+<div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -&gt; {
     final String sku = randomKey();
     final int quantityOnStock = 10;
     final Instant expectedDelivery = tomorrowInstant();
