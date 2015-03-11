@@ -14,6 +14,7 @@ import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
+import io.sphere.sdk.utils.TestCleaner;
 import org.junit.Test;
 
 import java.time.Instant;
@@ -76,27 +77,31 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void nestedAttribute() throws Exception {
-        final AttributeGetterSetter<Product, Double> sizeAttr = AttributeAccess.ofDouble().ofName("size-nested");
-        final AttributeGetterSetter<Product, String> brandAttr = AttributeAccess.ofText().ofName("brand-nested");
+        TestCleaner.withCleaner(cleaner -> {
+            final AttributeGetterSetter<Product, Double> sizeAttr = AttributeAccess.ofDouble().ofName("size-nested");
+            final AttributeGetterSetter<Product, String> brandAttr = AttributeAccess.ofText().ofName("brand-nested");
 
-        final ProductType nestedProductType = execute(ProductTypeCreateCommand.of(ProductTypeDraft.of("test-sub-attribute", "nested attribute test",
+            final ProductTypeDraft createProductType = ProductTypeDraft.of("test-sub-attribute", "nested attribute test",
                 Arrays.asList(
-                        AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
-                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Brand"), TextType.of()).build()))));
+                    AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
+                    AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Brand"), TextType.of()).build()));
 
-        try {
+            final ProductType nestedProductType = cleaner.add(execute(ProductTypeCreateCommand.of(createProductType)), this::deleteProductType);
+
             final AttributeContainer adidas = AttributeContainer.of(
-                    Arrays.asList(Attribute.of(sizeAttr, 12D), Attribute.of(brandAttr, "Adidas")));
+                Arrays.asList(Attribute.of(sizeAttr, 12D), Attribute.of(brandAttr, "Adidas")));
             final AttributeContainer nike = AttributeContainer.of(
-                    Arrays.asList(Attribute.of(sizeAttr, 11.5D), Attribute.of(brandAttr, "Nike")));
+                Arrays.asList(Attribute.of(sizeAttr, 11.5D), Attribute.of(brandAttr, "Nike")));
 
             final AttributeType type = NestedType.of(nestedProductType.toReference());
 
             testSingleAndSet(AttributeAccess.ofNested(), AttributeAccess.ofNestedSet(), asSet(adidas, nike),
-                    type, AttributeDefinitionBuilder.of("nested-attribute", LABEL, type).searchable(false).build());
-        } finally {
-            execute(ProductTypeDeleteCommand.of(nestedProductType));
-        }
+                type, AttributeDefinitionBuilder.of("nested-attribute", LABEL, type).searchable(false).build());
+        });
+    }
+
+    private void deleteProductType(ProductType productType) {
+        execute(ProductTypeDeleteCommand.of(productType));
     }
 
     @Test
@@ -312,7 +317,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             assertThat(receivedType.getReferenceTypeId()).isEqualTo(referenceType.getReferenceTypeId());
         });
     }
-
 
     private <X> void test(final AttributeAccess<X> access, final X exampleValue,
                           final Class<? extends AttributeType> attributeTypeClass,
