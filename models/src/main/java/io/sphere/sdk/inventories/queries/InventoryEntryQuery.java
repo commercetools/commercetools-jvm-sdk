@@ -28,4 +28,8 @@ public class InventoryEntryQuery extends DefaultModelQuery<InventoryEntry> {
     public static InventoryEntryQuery of() {
         return new InventoryEntryQuery();
     }
+
+    public static InventoryEntryQueryModel model() {
+        return InventoryEntryQueryModel.get();
+    }
 }

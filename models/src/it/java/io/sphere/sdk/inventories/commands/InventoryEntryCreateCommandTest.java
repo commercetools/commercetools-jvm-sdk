@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import java.time.Instant;
 
+import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
@@ -17,7 +18,7 @@ import static io.sphere.sdk.test.OptionalAssert.assertThat;
 public class InventoryEntryCreateCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        ChannelFixtures.withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
+        withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
             final String sku = randomKey();
             final int quantityOnStock = 10;
             final Instant expectedDelivery = tomorrowInstant();

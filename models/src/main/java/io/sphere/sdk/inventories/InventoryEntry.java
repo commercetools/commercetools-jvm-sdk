@@ -23,6 +23,8 @@ public interface InventoryEntry extends DefaultModel<InventoryEntry> {
 
     Optional<Reference<Channel>> getSupplyChannel();
 
+    //reservations are internal
+
     default Reference<InventoryEntry> toReference() {
         return Reference.of(typeId(), getId());
     }
