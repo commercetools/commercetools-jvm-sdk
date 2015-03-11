@@ -1,7 +1,6 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.meta.BuildInfo;
@@ -18,7 +17,7 @@ public class SphereException extends RuntimeException {
 
     private Optional<SphereRequest<? extends Object>> sphereRequest = Optional.empty();
     @JsonIgnore
-    private Optional<HttpResponse> httpResponse = Optional.empty();
+    protected Optional<HttpResponse> httpResponse = Optional.empty();
     private Optional<String> projectKey = Optional.empty();
 
     public SphereException(final String message, final Throwable cause) {
@@ -36,15 +35,15 @@ public class SphereException extends RuntimeException {
         super(cause);
     }
 
-    public Optional<String> getProjectKey() {
+    public final Optional<String> getProjectKey() {
         return projectKey;
     }
 
-    private Optional<SphereRequest<? extends Object>> getSphereRequest() {
+    public final Optional<SphereRequest<? extends Object>> getSphereRequest() {
         return sphereRequest;
     }
 
-    public Optional<HttpResponse> getHttpResponse() {
+    public final Optional<HttpResponse> getHttpResponse() {
         return httpResponse;
     }
 
@@ -82,6 +81,5 @@ public class SphereException extends RuntimeException {
 
     public void setUnderlyingHttpResponse(final HttpResponse httpResponse) {
         this.httpResponse = Optional.of(httpResponse.withoutRequest());
-
     }
 }

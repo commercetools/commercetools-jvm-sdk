@@ -3,6 +3,7 @@ package io.sphere.sdk.errors;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
@@ -11,6 +12,8 @@ import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.http.HttpStatusCode;
+import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
@@ -28,6 +31,7 @@ import java.util.function.Supplier;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.http.HttpMethod.POST;
+import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.junit.Assert.fail;
@@ -80,12 +84,20 @@ public class SphereExceptionTest extends IntegrationTest {
 
     @Test
     public void exceptionsGatherContext() throws Exception {
-        try {
-            execute(CategoryUpdateCommand.of(Versioned.of("foo", 1), Collections.<UpdateAction<Category>>emptyList()));
-            fail("should throw exception");
-        } catch (final SphereServiceException e) {
-            assertThat(e.getProjectKey()).isPresentAs(projectKey());
-        }
+        CategoryFixtures.withCategory(client(), category -> {
+            final long wrongVersion = category.getVersion() - 1;
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(Versioned.of(category.getId(), wrongVersion), Collections.<UpdateAction<Category>>emptyList());
+            try {
+                execute(command);
+                fail("should throw exception");
+            } catch (final SphereServiceException e) {
+                assertThat(e.getProjectKey()).isPresentAs(projectKey());
+                assertThat(e.getMessage()).contains(BuildInfo.version()).contains(command.toString());
+                assertThat(e.getJsonBody().get().get("statusCode").asInt())
+                        .overridingErrorMessage("exception contains json body of error response")
+                        .isEqualTo(HttpStatusCode.CONFLICT_409);
+            }
+        });
     }
 
     @Test
