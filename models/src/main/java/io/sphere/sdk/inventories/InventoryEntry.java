@@ -1,12 +1,15 @@
 package io.sphere.sdk.inventories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
 import java.time.Instant;
 import java.util.Optional;
 
+@JsonDeserialize(as = InventoryEntryImpl.class)
 public interface InventoryEntry extends DefaultModel<InventoryEntry> {
     long getAvailableQuantity();
 
@@ -18,7 +21,7 @@ public interface InventoryEntry extends DefaultModel<InventoryEntry> {
 
     String getSku();
 
-    Optional<Reference> getSupplyChannel();
+    Optional<Reference<Channel>> getSupplyChannel();
 
     default Reference<InventoryEntry> toReference() {
         return Reference.of(typeId(), getId());
