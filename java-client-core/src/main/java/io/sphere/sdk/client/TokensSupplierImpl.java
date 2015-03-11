@@ -93,7 +93,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                 authorizationException = new UnauthorizedException(response.toString(), e);
             }
             authorizationException.setProjectKey(config.getProjectKey());
-            authorizationException.setUnderlyingHttpResponse(response.withoutRequest().toString());
+            authorizationException.setUnderlyingHttpResponse(response);
             throw authorizationException;
         }
         return JsonUtils.readObject(Tokens.typeReference(), response.getResponseBody().get());
