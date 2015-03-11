@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static java.lang.String.format;
+
 public class AttributeContainerImpl extends Base implements AttributeContainer {
     private final List<Attribute> attributes;
 
@@ -39,9 +41,7 @@ public class AttributeContainerImpl extends Base implements AttributeContainer {
     }
 
     protected JsonException transformError(JsonException e, String attributeName, AttributeMapper<?> mapper) {
-//        throw new JsonException(format("TODO: %s does not contain an attribute '%s' which can be mapped with %s.", objectWithAttributes, attributeName, mapper), cause);
-        // TODO: implement proper error handling
-        return e;
+        return new JsonException(format("AttributeContainer does not contain an attribute '%s' which can be mapped with %s.", attributeName, mapper), e.getCause());
     }
 
     public static AttributeContainerImpl of(List<Attribute> attributes) {
