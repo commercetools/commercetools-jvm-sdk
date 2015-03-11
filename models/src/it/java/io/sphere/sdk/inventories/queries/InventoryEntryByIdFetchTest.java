@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import java.util.Optional;
 
-import static io.sphere.sdk.inventories.InventoryFixtures.withUpdateableInventoryEntry;
+import static io.sphere.sdk.inventories.InventoryEntryFixtures.withUpdateableInventoryEntry;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 
 public class InventoryEntryByIdFetchTest extends IntegrationTest {

@@ -9,7 +9,7 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
-public class InventoryFixtures extends Base {
+public class InventoryEntryFixtures extends Base {
     public static void withUpdateableInventoryEntry(final TestClient client, final Function<InventoryEntry, InventoryEntry> f) {
         final InventoryEntryDraft inventoryEntryDraft = InventoryEntryDraft.of(randomKey(), 5);
         final InventoryEntry inventoryEntry = client.execute(InventoryEntryCreateCommand.of(inventoryEntryDraft));
