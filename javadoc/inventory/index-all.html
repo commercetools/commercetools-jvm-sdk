@@ -168,7 +168,16 @@
 <div class="block">Adds the given price to the product variant's prices set.</div>
 </dd>
 <dt><a href="io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions"><span class="typeNameLink">AddQuantity</span></a> - Class in <a href="io/sphere/sdk/inventories/commands/updateactions/package-summary.html">io.sphere.sdk.inventories.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-addQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
+    final long additionalQuantity = 4;
+    final UpdateAction&lt;InventoryEntry&gt; action = AddQuantity.of(additionalQuantity);
+    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+    assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() + additionalQuantity);
+    return updatedEntry;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Address</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>
 <div class="block">Represents a postal address.</div>
@@ -2506,6 +2515,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">AddQuantity</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">RemoveQuantity</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/CustomLineItemImportDraft.html#getQuantity--">getQuantity()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/CustomLineItemImportDraft.html" title="interface in io.sphere.sdk.orders">CustomLineItemImportDraft</a></dt>
@@ -3259,7 +3270,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommand.html" title="class in io.sphere.sdk.inventories.commands"><span class="typeNameLink">InventoryEntryUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/inventories/commands/package-summary.html">io.sphere.sdk.inventories.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddQuantity.html">AddQuantity</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddQuantity.html">AddQuantity</a></li><li><a href="updateactions/RemoveQuantity.html">RemoveQuantity</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartBuilder.html#inventoryMode-io.sphere.sdk.carts.InventoryMode-">inventoryMode(InventoryMode)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartBuilder.html" title="class in io.sphere.sdk.carts">CartBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -4388,6 +4399,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommand.html#of-io.sphere.sdk.models.Versioned-java.util.List-">of(Versioned&lt;InventoryEntry&gt;, List&lt;? extends UpdateAction&lt;InventoryEntry&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.inventories.commands.<a href="io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommand.html" title="class in io.sphere.sdk.inventories.commands">InventoryEntryUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">AddQuantity</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">RemoveQuantity</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in class io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -5676,6 +5689,17 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
     return updatedProduct;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
+<dt><a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions"><span class="typeNameLink">RemoveQuantity</span></a> - Class in <a href="io/sphere/sdk/inventories/commands/updateactions/package-summary.html">io.sphere.sdk.inventories.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-removeQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
+    final long removingQuantity = 4;
+    final UpdateAction&lt;InventoryEntry&gt; action = RemoveQuantity.of(removingQuantity);
+    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+    assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() - removingQuantity);
+    return updatedEntry;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">RemoveShippingRate</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>

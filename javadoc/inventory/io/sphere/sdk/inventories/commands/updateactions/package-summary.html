@@ -83,7 +83,29 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">AddQuantity</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-addQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
+    final long additionalQuantity = 4;
+    final UpdateAction&lt;InventoryEntry&gt; action = AddQuantity.of(additionalQuantity);
+    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+    assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() + additionalQuantity);
+    return updatedEntry;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">RemoveQuantity</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-removeQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
+    final long removingQuantity = 4;
+    final UpdateAction&lt;InventoryEntry&gt; action = RemoveQuantity.of(removingQuantity);
+    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+    assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() - removingQuantity);
+    return updatedEntry;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
 </tr>
 </tbody>
 </table>
