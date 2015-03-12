@@ -1925,6 +1925,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/ErrorResponse.html#getErrors--">getErrors()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/ErrorResponse.html" title="interface in io.sphere.sdk.models">ErrorResponse</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html#getExpectedDelivery--">getExpectedDelivery()</a></span> - Method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetExpectedDelivery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntry.html#getExpectedDelivery--">getExpectedDelivery()</a></span> - Method in interface io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntry.html" title="interface in io.sphere.sdk.inventories">InventoryEntry</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html#getExpectedDelivery--">getExpectedDelivery()</a></span> - Method in class io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories">InventoryEntryDraft</a></dt>
@@ -2546,6 +2548,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getRegion--">getRegion()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#getResponseBody--">getResponseBody()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html#getRestockableInDays--">getRestockableInDays()</a></span> - Method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetRestockableInDays</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntry.html#getRestockableInDays--">getRestockableInDays()</a></span> - Method in interface io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntry.html" title="interface in io.sphere.sdk.inventories">InventoryEntry</a></dt>
 <dd>&nbsp;</dd>
@@ -3270,7 +3274,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommand.html" title="class in io.sphere.sdk.inventories.commands"><span class="typeNameLink">InventoryEntryUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/inventories/commands/package-summary.html">io.sphere.sdk.inventories.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddQuantity.html">AddQuantity</a></li><li><a href="updateactions/RemoveQuantity.html">RemoveQuantity</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddQuantity.html">AddQuantity</a></li><li><a href="updateactions/RemoveQuantity.html">RemoveQuantity</a></li><li><a href="updateactions/SetExpectedDelivery.html">SetExpectedDelivery</a></li><li><a href="updateactions/SetRestockableInDays.html">SetRestockableInDays</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartBuilder.html#inventoryMode-io.sphere.sdk.carts.InventoryMode-">inventoryMode(InventoryMode)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartBuilder.html" title="class in io.sphere.sdk.carts">CartBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -4401,6 +4405,14 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">AddQuantity</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">RemoveQuantity</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html#of-java.time.Instant-">of(Instant)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetExpectedDelivery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html#of-java.util.Optional-">of(Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetExpectedDelivery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html#of-int-">of(int)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetRestockableInDays</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html#of-java.util.Optional-">of(Optional&lt;Integer&gt;)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetRestockableInDays</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in class io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -6031,6 +6043,19 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>
 <div class="block">Updates the description of a zone.</div>
 </dd>
+<dt><a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions"><span class="typeNameLink">SetExpectedDelivery</span></a> - Class in <a href="io/sphere/sdk/inventories/commands/updateactions/package-summary.html">io.sphere.sdk.inventories.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-setExpectedDelivery--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
+    final Instant expectedDelivery = Instant.now().plus(7, ChronoUnit.DAYS);
+    final UpdateAction&lt;InventoryEntry&gt; action = SetExpectedDelivery.of(expectedDelivery);
+    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+    assertThat(updatedEntry.getExpectedDelivery())
+            .isPresentAs(expectedDelivery)
+            .isNotEqualTo(entry.getExpectedDelivery());
+    return updatedEntry;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetExternalId.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetExternalId</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets a new ID which can be used as additional identifier for external Systems like CRM or ERP.</div>
@@ -6059,6 +6084,17 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereException.html#setProjectKey-java.lang.String-">setProjectKey(String)</a></span> - Method in exception io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventories.commands.updateactions"><span class="typeNameLink">SetRestockableInDays</span></a> - Class in <a href="io/sphere/sdk/inventories/commands/updateactions/package-summary.html">io.sphere.sdk.inventories.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-setRestockableInDays--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
+    final int restockableInDays = entry.getRestockableInDays().map(i -&gt; i + 4).orElse(4);
+    final UpdateAction&lt;InventoryEntry&gt; action = SetRestockableInDays.of(restockableInDays);
+    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+    assertThat(updatedEntry.getRestockableInDays()).isPresentAs(restockableInDays);
+    return updatedEntry;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnPaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">SetReturnPaymentState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnPaymentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {

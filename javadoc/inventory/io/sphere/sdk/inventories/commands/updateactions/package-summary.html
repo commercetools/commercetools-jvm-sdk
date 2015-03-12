@@ -107,6 +107,34 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetExpectedDelivery</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-setExpectedDelivery--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
+    final Instant expectedDelivery = Instant.now().plus(7, ChronoUnit.DAYS);
+    final UpdateAction&lt;InventoryEntry&gt; action = SetExpectedDelivery.of(expectedDelivery);
+    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+    assertThat(updatedEntry.getExpectedDelivery())
+            .isPresentAs(expectedDelivery)
+            .isNotEqualTo(entry.getExpectedDelivery());
+    return updatedEntry;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetRestockableInDays</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-setRestockableInDays--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
+    final int restockableInDays = entry.getRestockableInDays().map(i -&gt; i + 4).orElse(4);
+    final UpdateAction&lt;InventoryEntry&gt; action = SetRestockableInDays.of(restockableInDays);
+    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+    assertThat(updatedEntry.getRestockableInDays()).isPresentAs(restockableInDays);
+    return updatedEntry;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
 </tbody>
 </table>
 </li>
