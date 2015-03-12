@@ -3,6 +3,10 @@ package io.sphere.sdk.inventories.commands.updateactions;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.inventories.InventoryEntry;
 
+/**
+ *
+ * {@include.example io.sphere.sdk.inventories.commands.InventoryEntryUpdateCommandTest#addQuantity()}
+ */
 public class AddQuantity extends UpdateAction<InventoryEntry> {
     private final long quantity;
 

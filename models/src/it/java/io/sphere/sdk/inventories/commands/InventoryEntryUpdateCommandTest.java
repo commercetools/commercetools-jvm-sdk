@@ -3,6 +3,7 @@ package io.sphere.sdk.inventories.commands;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.inventories.InventoryEntry;
 import io.sphere.sdk.inventories.commands.updateactions.AddQuantity;
+import io.sphere.sdk.inventories.commands.updateactions.RemoveQuantity;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -17,6 +18,17 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
             final UpdateAction<InventoryEntry> action = AddQuantity.of(additionalQuantity);
             final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() + additionalQuantity);
+            return updatedEntry;
+        });
+    }
+
+    @Test
+    public void removeQuantity() throws Exception {
+        withUpdateableInventoryEntry(client(), entry -> {
+            final long removingQuantity = 4;
+            final UpdateAction<InventoryEntry> action = RemoveQuantity.of(removingQuantity);
+            final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+            assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() - removingQuantity);
             return updatedEntry;
         });
     }
