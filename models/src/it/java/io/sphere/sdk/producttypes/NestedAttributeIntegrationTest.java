@@ -19,6 +19,8 @@ import java.util.*;
 import static java.util.Arrays.asList;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static org.fest.assertions.Assertions.assertThat;
+import static io.sphere.sdk.test.OptionalAssert.assertThat;
+
 import static java.util.stream.Collectors.toList;
 
 public final class NestedAttributeIntegrationTest extends IntegrationTest {
@@ -97,8 +99,9 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
 
             AttributeContainer attrs = product.get().getMasterData().getStaged().getMasterVariant();
 
-            assertThat(attrs.getAttribute(Banana.bananaColor)).isEqualTo(Optional.of("blue"));
-            assertThat(attrs.getAttribute(Banana.nutrients).map(Set::size)).isEqualTo(Optional.of(2));
+
+            assertThat(attrs.getAttribute(Banana.bananaColor)).isPresentAs("blue");
+            assertThat(attrs.getAttribute(Banana.nutrients).map(Set::size)).isPresentAs(2);
 
             List<AttributeContainer> nutrients = attrs.getAttribute(Banana.nutrients).get().stream()
                 .sorted((c1, c2) -> c1.getAttribute(Nutrient.servingSize).get().compareTo(c2.getAttribute(Nutrient.servingSize).get()))
@@ -106,38 +109,38 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
 
             AttributeContainer firstNutrient = nutrients.get(0);
 
-            assertThat(firstNutrient.getAttribute(Nutrient.servingSize)).isEqualTo(Optional.of(0.05D));
-            assertThat(firstNutrient.getAttribute(Nutrient.servingSizeUOM)).isEqualTo(Optional.of("KM"));
-            assertThat(firstNutrient.getAttribute(Nutrient.nutrientInformation).map(Set::size)).isEqualTo(Optional.of(1));
+            assertThat(firstNutrient.getAttribute(Nutrient.servingSize)).isPresentAs(0.05D);
+            assertThat(firstNutrient.getAttribute(Nutrient.servingSizeUOM)).isPresentAs("KM");
+            assertThat(firstNutrient.getAttribute(Nutrient.nutrientInformation).map(Set::size)).isPresentAs(1);
 
             List<AttributeContainer> firstNutrientInfos = firstNutrient.getAttribute(Nutrient.nutrientInformation).get().stream()
                 .sorted((c1, c2) -> c1.getAttribute(NutrientInfo.nutrientTypeCode).get().compareTo(c2.getAttribute(NutrientInfo.nutrientTypeCode).get()))
                 .collect(toList());
 
-            assertThat(firstNutrientInfos.get(0).getAttribute(NutrientInfo.nutrientTypeCode)).isEqualTo(Optional.of("FIBTG"));
-            assertThat(firstNutrientInfos.get(0).getAttribute(NutrientInfo.measurementPrecision)).isEqualTo(Optional.of("PRECISE"));
-            assertThat(firstNutrientInfos.get(0).getAttribute(NutrientInfo.quantityContained)).isEqualTo(Optional.of(1.3D));
-            assertThat(firstNutrientInfos.get(0).getAttribute(NutrientInfo.quantityContainedUOM)).isEqualTo(Optional.of("GR"));
+            assertThat(firstNutrientInfos.get(0).getAttribute(NutrientInfo.nutrientTypeCode)).isPresentAs("FIBTG");
+            assertThat(firstNutrientInfos.get(0).getAttribute(NutrientInfo.measurementPrecision)).isPresentAs("PRECISE");
+            assertThat(firstNutrientInfos.get(0).getAttribute(NutrientInfo.quantityContained)).isPresentAs(1.3D);
+            assertThat(firstNutrientInfos.get(0).getAttribute(NutrientInfo.quantityContainedUOM)).isPresentAs("GR");
 
             AttributeContainer secondNutrient = nutrients.get(1);
 
-            assertThat(secondNutrient.getAttribute(Nutrient.servingSize)).isEqualTo(Optional.of(1.5D));
-            assertThat(secondNutrient.getAttribute(Nutrient.servingSizeUOM)).isEqualTo(Optional.of("M"));
-            assertThat(secondNutrient.getAttribute(Nutrient.nutrientInformation).map(Set::size)).isEqualTo(Optional.of(2));
+            assertThat(secondNutrient.getAttribute(Nutrient.servingSize)).isPresentAs(1.5D);
+            assertThat(secondNutrient.getAttribute(Nutrient.servingSizeUOM)).isPresentAs("M");
+            assertThat(secondNutrient.getAttribute(Nutrient.nutrientInformation).map(Set::size)).isPresentAs(2);
 
             List<AttributeContainer> secondNutrientInfos = secondNutrient.getAttribute(Nutrient.nutrientInformation).get().stream()
                 .sorted((c1, c2) -> c1.getAttribute(NutrientInfo.nutrientTypeCode).get().compareTo(c2.getAttribute(NutrientInfo.nutrientTypeCode).get()))
                 .collect(toList());
 
-            assertThat(secondNutrientInfos.get(0).getAttribute(NutrientInfo.nutrientTypeCode)).isEqualTo(Optional.of("FAT"));
-            assertThat(secondNutrientInfos.get(0).getAttribute(NutrientInfo.measurementPrecision)).isEqualTo(Optional.of("APPROXIMATELY"));
-            assertThat(secondNutrientInfos.get(0).getAttribute(NutrientInfo.quantityContained)).isEqualTo(Optional.of(0.06D));
-            assertThat(secondNutrientInfos.get(0).getAttribute(NutrientInfo.quantityContainedUOM)).isEqualTo(Optional.of("KG"));
+            assertThat(secondNutrientInfos.get(0).getAttribute(NutrientInfo.nutrientTypeCode)).isPresentAs("FAT");
+            assertThat(secondNutrientInfos.get(0).getAttribute(NutrientInfo.measurementPrecision)).isPresentAs("APPROXIMATELY");
+            assertThat(secondNutrientInfos.get(0).getAttribute(NutrientInfo.quantityContained)).isPresentAs(0.06D);
+            assertThat(secondNutrientInfos.get(0).getAttribute(NutrientInfo.quantityContainedUOM)).isPresentAs("KG");
 
-            assertThat(secondNutrientInfos.get(1).getAttribute(NutrientInfo.nutrientTypeCode)).isEqualTo(Optional.of("FIBTG"));
-            assertThat(secondNutrientInfos.get(1).getAttribute(NutrientInfo.measurementPrecision)).isEqualTo(Optional.of("APPROXIMATELY"));
-            assertThat(secondNutrientInfos.get(1).getAttribute(NutrientInfo.quantityContained)).isEqualTo(Optional.of(3.8D));
-            assertThat(secondNutrientInfos.get(1).getAttribute(NutrientInfo.quantityContainedUOM)).isEqualTo(Optional.of("GR"));
+            assertThat(secondNutrientInfos.get(1).getAttribute(NutrientInfo.nutrientTypeCode)).isPresentAs("FIBTG");
+            assertThat(secondNutrientInfos.get(1).getAttribute(NutrientInfo.measurementPrecision)).isPresentAs("APPROXIMATELY");
+            assertThat(secondNutrientInfos.get(1).getAttribute(NutrientInfo.quantityContained)).isPresentAs(3.8D);
+            assertThat(secondNutrientInfos.get(1).getAttribute(NutrientInfo.quantityContainedUOM)).isPresentAs("GR");
         });
     }
 
@@ -145,22 +148,22 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
         return execute(ProductTypeCreateCommand.of(ProductTypeDraft.of("NutrientInformation", "NutrientInformation",
             asList(
                 AttributeDefinitionBuilder.of(NutrientInfo.quantityContainedUOM.getName(),
-                    en(NutrientInfo.quantityContainedUOM.getName()), TextType.of()).searchable(false).build(),
+                    en(NutrientInfo.quantityContainedUOM.getName()), TextType.of()).build(),
                 AttributeDefinitionBuilder.of(NutrientInfo.quantityContained.getName(),
-                    en(NutrientInfo.quantityContained.getName()), NumberType.of()).searchable(false).build(),
+                    en(NutrientInfo.quantityContained.getName()), NumberType.of()).build(),
                 AttributeDefinitionBuilder.of(NutrientInfo.measurementPrecision.getName(),
-                    en(NutrientInfo.measurementPrecision.getName()), TextType.of()).searchable(false).build(),
+                    en(NutrientInfo.measurementPrecision.getName()), TextType.of()).build(),
                 AttributeDefinitionBuilder.of(NutrientInfo.nutrientTypeCode.getName(),
-                    en(NutrientInfo.nutrientTypeCode.getName()), TextType.of()).searchable(false).build()))));
+                    en(NutrientInfo.nutrientTypeCode.getName()), TextType.of()).build()))));
     }
 
     private ProductType createNutrient(Reference<ProductType> nutrientInformationType) {
         return execute(ProductTypeCreateCommand.of(ProductTypeDraft.of("Nutrient", "Nutrient",
             asList(
                 AttributeDefinitionBuilder.of(Nutrient.servingSizeUOM.getName(),
-                    en(Nutrient.servingSizeUOM.getName()), TextType.of()).searchable(false).build(),
+                    en(Nutrient.servingSizeUOM.getName()), TextType.of()).build(),
                 AttributeDefinitionBuilder.of(Nutrient.servingSize.getName(),
-                    en(Nutrient.servingSize.getName()), NumberType.of()).searchable(false).build(),
+                    en(Nutrient.servingSize.getName()), NumberType.of()).build(),
                 AttributeDefinitionBuilder.of(Nutrient.nutrientInformation.getName(),
                     en(Nutrient.nutrientInformation.getName()), SetType.of(NestedType.of(nutrientInformationType))).searchable(false).build()))));
     }
@@ -169,7 +172,7 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
         return execute(ProductTypeCreateCommand.of(ProductTypeDraft.of("Banana", "Banana",
             asList(
                 AttributeDefinitionBuilder.of(Banana.bananaColor.getName(),
-                    en(Banana.bananaColor.getName()), TextType.of()).searchable(false).build(),
+                    en(Banana.bananaColor.getName()), TextType.of()).build(),
                 AttributeDefinitionBuilder.of(Banana.nutrients.getName(),
                     en(Banana.nutrients.getName()), SetType.of(NestedType.of(nutrientType))).searchable(false).build()))));
     }

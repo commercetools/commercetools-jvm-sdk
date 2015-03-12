@@ -3,6 +3,7 @@ package io.sphere.sdk.utils;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class TestCleaner {
     private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(TestCleaner.class);
@@ -47,11 +48,11 @@ public class TestCleaner {
         return new TestCleaner(cleanupFunctions);
     }
 
-    public static void withCleaner(WithCleanerFunction fn) {
+    public static void withCleaner(Consumer<TestCleaner> fn) {
         TestCleaner cleaner = empty();
 
         try {
-            fn.run(cleaner);
+            fn.accept(cleaner);
         } finally {
             cleaner.cleanup();
         }
