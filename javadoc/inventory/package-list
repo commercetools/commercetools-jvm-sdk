@@ -27,6 +27,7 @@ io.sphere.sdk.customobjects.queries
 io.sphere.sdk.http
 io.sphere.sdk.inventories
 io.sphere.sdk.inventories.commands
+io.sphere.sdk.inventories.commands.updateactions
 io.sphere.sdk.inventories.queries
 io.sphere.sdk.json
 io.sphere.sdk.meta
