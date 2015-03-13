@@ -3,6 +3,7 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.utils.functional.FunctionalUtils;
 import org.apache.commons.io.IOUtils;
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpUriRequest;
@@ -16,9 +17,12 @@ import org.apache.http.message.BasicNameValuePair;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
+
+import static java.util.Arrays.asList;
 
 final class ApacheHttpClientAdapterImpl extends AutoCloseableService implements ApacheHttpClientAdapter {
     private final CloseableHttpAsyncClient apacheHttpClient;
@@ -57,7 +61,16 @@ final class ApacheHttpClientAdapterImpl extends AutoCloseableService implements 
                     }
                 });
         final int statusCode = apacheResponse.getStatusLine().getStatusCode();
-        return HttpResponse.of(statusCode, bodyOption, Optional.of(httpRequest));
+        final Map<String, List<Header>> apacheHeaders = asList(apacheResponse.getAllHeaders()).stream()
+                .collect(Collectors.groupingBy(Header::getName));
+        final Map<String, List<String>> headers = apacheHeaders.entrySet().stream()
+                .collect(Collectors.toMap(
+                        e -> e.getKey(),
+                        e -> e.getValue().stream().map(Header::getValue).collect(Collectors.toList())
+                        )
+                );
+
+        return HttpResponse.of(statusCode, bodyOption, Optional.of(httpRequest), headers);
     }
 
     private HttpUriRequest toApacheRequest(final HttpRequest httpRequest) {
@@ -66,7 +79,7 @@ final class ApacheHttpClientAdapterImpl extends AutoCloseableService implements 
         final RequestBuilder builder = RequestBuilder
                 .create(method)
                 .setUri(uri);
-        httpRequest.getHeaders().getHeadersAsMap().forEach((name, value) -> builder.addHeader(name, value));
+        httpRequest.getHeaders().getHeadersAsMap().forEach((name, values) -> values.forEach(value -> builder.addHeader(name, value)));
 
         if (httpRequest.getBody().isPresent()) {
             final HttpRequestBody body = httpRequest.getBody().get();

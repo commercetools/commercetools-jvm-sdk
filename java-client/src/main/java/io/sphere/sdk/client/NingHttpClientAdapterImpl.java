@@ -6,11 +6,16 @@ import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ForkJoinPool;
+import java.util.stream.Collectors;
+
+import static java.util.Arrays.asList;
 
 final class NingHttpClientAdapterImpl extends AutoCloseableService implements NingHttpClientAdapter {
     private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(NingHttpClientAdapterImpl.class);
@@ -30,7 +35,7 @@ final class NingHttpClientAdapterImpl extends AutoCloseableService implements Ni
             return future.thenApply((Response response) -> {
                 final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
                 Optional<byte[]> body = responseBodyAsBytes.length > 0 ? Optional.of(responseBodyAsBytes) : Optional.empty();
-                final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), body, Optional.of(httpRequest));
+                final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), body, Optional.of(httpRequest), response.getHeaders());
                 LOGGER.debug(() -> "response " + httpResponse);
                 return httpResponse;
             });
@@ -53,7 +58,7 @@ final class NingHttpClientAdapterImpl extends AutoCloseableService implements Ni
                 .setUrl(request.getUrl())
                 .setMethod(request.getHttpMethod().toString());
 
-        request.getHeaders().getHeadersAsMap().forEach((name, value) -> builder.setHeader(name, value));
+        request.getHeaders().getHeadersAsMap().forEach((name, values) -> values.forEach( value -> builder.addHeader(name, value)));
 
         request.getBody().ifPresent(body -> {
             if (body instanceof StringHttpRequestBody) {

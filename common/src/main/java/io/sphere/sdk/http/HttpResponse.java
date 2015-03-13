@@ -1,12 +1,17 @@
 package io.sphere.sdk.http;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static io.sphere.sdk.http.HttpResponseImpl.responseCodeStartsWith;
 
 public interface HttpResponse {
     int getStatusCode();
+
+    HttpHeaders getHeaders();
 
     Optional<byte[]> getResponseBody();
 
@@ -33,26 +38,46 @@ public interface HttpResponse {
     }
 
     public static HttpResponse of(final int status, final String responseBody) {
-        return of(status, responseBody, Optional.empty());
+        return of(status, responseBody, Optional.empty(), Collections.emptyMap());
+    }
+
+    public static HttpResponse of(final int status, final String responseBody, final Map<String, List<String>>  headers) {
+        return of(status, responseBody, Optional.empty(), headers);
     }
 
     public static HttpResponse of(final int status) {
-        return of(status, Optional.empty(), Optional.empty());
+        return of(status, Optional.empty(), Optional.empty(), Collections.emptyMap() );
+    }
+
+    public static HttpResponse of(final int status, final Map<String, List<String>>  headers) {
+        return of(status, Optional.empty(), Optional.empty(), headers);
     }
 
     public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest) {
-        return of(status, responseBody, Optional.of(associatedRequest));
+        return of(status, responseBody, Optional.of(associatedRequest), Collections.emptyMap());
+    }
+
+    public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest, final Map<String, List<String>>  headers) {
+        return of(status, responseBody, Optional.of(associatedRequest), headers);
     }
 
     public static HttpResponse of(final int status, final String responseBody, final Optional<HttpRequest> associatedRequest) {
-        return of(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest);
+        return of(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest, Collections.emptyMap());
+    }
+
+    public static HttpResponse of(final int status, final String responseBody, final Optional<HttpRequest> associatedRequest, final Map<String, List<String>> headers) {
+        return of(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest, headers);
     }
 
     public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest) {
-        return new HttpResponseImpl(status, body, associatedRequest);
+        return new HttpResponseImpl(status, body, associatedRequest, Collections.emptyMap());
+    }
+
+    public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest, final Map<String, List<String>>  headers) {
+        return new HttpResponseImpl(status, body, associatedRequest, headers);
     }
 
     default HttpResponse withoutRequest() {
-        return HttpResponse.of(getStatusCode(), getResponseBody(), Optional.<HttpRequest>empty());
+        return HttpResponse.of(getStatusCode(), getResponseBody(), Optional.<HttpRequest>empty(), getHeaders().getHeadersAsMap());
     }
 }
