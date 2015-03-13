@@ -24,6 +24,10 @@ public class NestedType extends AttributeTypeBase {
 
     @JsonCreator
     public static NestedType of(final Reference<ProductType> typeReference) {
+        return new NestedType(typeReference);
+    }
+
+    public static NestedType of(final Referenceable<ProductType> typeReference) {
         return new NestedType(typeReference.toReference());
     }
 }

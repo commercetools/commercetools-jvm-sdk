@@ -8,6 +8,9 @@ import java.util.Optional;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * A container for attributes. This can be either a product variant or nested attribute.
+ */
 public interface AttributeContainer {
     List<Attribute> getAttributes();
 
