@@ -1,9 +1,6 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeContainer;
-import io.sphere.sdk.attributes.AttributeGetter;
 import io.sphere.sdk.models.Image;
 
 import java.util.List;

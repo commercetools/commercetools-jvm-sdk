@@ -3,6 +3,7 @@ package io.sphere.sdk.attributes;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.json.JsonException;
+import io.sphere.sdk.products.AttributeContainer;
 
 import java.io.IOException;
 import java.util.List;

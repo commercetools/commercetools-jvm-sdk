@@ -1,8 +1,10 @@
-package io.sphere.sdk.attributes;
+package io.sphere.sdk.products;
 
+import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeGetter;
+import io.sphere.sdk.attributes.AttributeMapper;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.products.Product;
 
 import java.util.List;
 import java.util.Objects;
@@ -10,7 +12,7 @@ import java.util.Optional;
 
 import static java.lang.String.format;
 
-public class AttributeContainerImpl extends Base implements AttributeContainer {
+class AttributeContainerImpl extends Base implements AttributeContainer {
     private final List<Attribute> attributes;
 
     protected AttributeContainerImpl(List<Attribute> attributes) {

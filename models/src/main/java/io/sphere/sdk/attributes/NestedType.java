@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 
@@ -23,6 +24,6 @@ public class NestedType extends AttributeTypeBase {
 
     @JsonCreator
     public static NestedType of(final Reference<ProductType> typeReference) {
-        return new NestedType(typeReference);
+        return new NestedType(typeReference.toReference());
     }
 }

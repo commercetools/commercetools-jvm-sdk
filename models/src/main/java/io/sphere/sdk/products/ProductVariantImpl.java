@@ -1,7 +1,6 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.attributes.AttributeContainerImpl;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.attributes.Attribute;

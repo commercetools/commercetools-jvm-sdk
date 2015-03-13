@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.products.AttributeContainer;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 

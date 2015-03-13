@@ -16,8 +16,8 @@ public class TestCleaner {
         this.cleanupFunctions.addAll(cleanupFunctions);
     }
 
-    public <T> T add(T target, CleanupFunction<T> cleanupFunction) {
-        add(() -> cleanupFunction.cleanup(target));
+    public <T> T add(T target, Consumer<T> cleanupFunction) {
+        add(() -> cleanupFunction.accept(target));
 
         return target;
     }
