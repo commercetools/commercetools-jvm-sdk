@@ -1,9 +1,6 @@
 package io.sphere.sdk.http;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import static io.sphere.sdk.http.HttpResponseImpl.responseCodeStartsWith;
@@ -38,46 +35,50 @@ public interface HttpResponse {
     }
 
     public static HttpResponse of(final int status, final String responseBody) {
-        return of(status, responseBody, Optional.empty(), Collections.emptyMap());
+        return of(status, responseBody, Optional.empty(), HttpHeaders.of());
     }
 
-    public static HttpResponse of(final int status, final String responseBody, final Map<String, List<String>>  headers) {
+    public static HttpResponse of(final int status, final String responseBody, final HttpHeaders headers) {
         return of(status, responseBody, Optional.empty(), headers);
     }
 
     public static HttpResponse of(final int status) {
-        return of(status, Optional.empty(), Optional.empty(), Collections.emptyMap() );
+        return of(status, Optional.empty(), Optional.empty(), Optional.empty() );
     }
 
-    public static HttpResponse of(final int status, final Map<String, List<String>>  headers) {
-        return of(status, Optional.empty(), Optional.empty(), headers);
+    public static HttpResponse of(final int status, final HttpHeaders headers) {
+        return of(status, Optional.empty(), Optional.empty(), Optional.of(headers));
     }
 
     public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest) {
-        return of(status, responseBody, Optional.of(associatedRequest), Collections.emptyMap());
+        return of(status, responseBody, Optional.of(associatedRequest), HttpHeaders.of());
     }
 
-    public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest, final Map<String, List<String>>  headers) {
+    public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest, final HttpHeaders headers) {
         return of(status, responseBody, Optional.of(associatedRequest), headers);
     }
 
     public static HttpResponse of(final int status, final String responseBody, final Optional<HttpRequest> associatedRequest) {
-        return of(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest, Collections.emptyMap());
+        return of(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest, Optional.empty());
     }
 
-    public static HttpResponse of(final int status, final String responseBody, final Optional<HttpRequest> associatedRequest, final Map<String, List<String>> headers) {
-        return of(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest, headers);
+    public static HttpResponse of(final int status, final String responseBody, final Optional<HttpRequest> associatedRequest, final HttpHeaders headers) {
+        return of(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest, Optional.of(headers));
     }
 
     public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest) {
-        return new HttpResponseImpl(status, body, associatedRequest, Collections.emptyMap());
+        return of(status, body, associatedRequest, Optional.<HttpHeaders>empty());
     }
 
-    public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest, final Map<String, List<String>>  headers) {
-        return new HttpResponseImpl(status, body, associatedRequest, headers);
+    public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest, final HttpHeaders headers) {
+        return of(status, body, associatedRequest, Optional.of(headers));
+    }
+
+    public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest, final Optional<HttpHeaders> headers) {
+        return new HttpResponseImpl(status, body, associatedRequest, headers.orElseGet(() -> HttpHeaders.of()));
     }
 
     default HttpResponse withoutRequest() {
-        return HttpResponse.of(getStatusCode(), getResponseBody(), Optional.<HttpRequest>empty(), getHeaders().getHeadersAsMap());
+        return HttpResponse.of(getStatusCode(), getResponseBody(), Optional.<HttpRequest>empty(), Optional.of(getHeaders()));
     }
 }

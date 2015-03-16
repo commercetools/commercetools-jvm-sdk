@@ -70,7 +70,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
             final SphereInternalLogger logger = getLogger(httpResponse);
             logger.debug(() -> httpResponse);
             logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> JsonUtils.prettyPrintJsonStringSecure(bytesToString(body))).orElse("No body present.") + "\n");
-            final List<String> notices = httpResponse.getHeaders().getHeadersAsMap().get("X-DEPRECATION-NOTICE");
+            final List<String> notices = httpResponse.getHeaders().getHeadersAsMap().get(SphereHttpHeaders.X_DEPRECATION_NOTICE);
             if (notices != null) {
                 notices.stream().forEach(message -> logger.warn(() -> "Deprecation notice : " + message));
             }

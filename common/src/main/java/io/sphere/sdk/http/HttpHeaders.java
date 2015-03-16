@@ -1,12 +1,12 @@
 package io.sphere.sdk.http;
 
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.MapUtils;
+import io.sphere.sdk.utils.ImmutableMapBuilder;
 
 import java.util.*;
 
-import static io.sphere.sdk.utils.MapUtils.copyOf;
-import static io.sphere.sdk.utils.MapUtils.mapOf;
+import static io.sphere.sdk.utils.ListUtils.*;
+import static io.sphere.sdk.utils.MapUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableMap;
 
@@ -35,8 +35,22 @@ public class HttpHeaders extends Base {
         return new HttpHeaders(Collections.emptyMap());
     }
 
-    public Optional<List<String>> getFlatHeader(final String key) {
-        return Optional.ofNullable(headers.get(key));
+    /**
+     * Gets the header as list since they can occur multiple times. If it does exist, the list is empty.
+     * @param key the key of the header to find
+     * @return empty or filled list of header values
+     */
+    public List<String> getHeader(final String key) {
+        return Optional.ofNullable(headers.get(key)).orElse(Collections.emptyList());
+    }
+
+    /**
+     * Finds the first header value for a certain key.
+     * @param key the key of the header to find
+     * @return the header value as optional
+     */
+    public Optional<String> getFlatHeader(final String key) {
+        return getHeader(key).stream().findFirst();
     }
 
     public Map<String, List<String>> getHeadersAsMap() {
@@ -44,21 +58,18 @@ public class HttpHeaders extends Base {
     }
 
     public HttpHeaders plus(final String key, final String value) {
-        final Map<String, List<String>> copy = copyOf(headers);
-        final List<String> values = copy.get(key);
-        if (values == null){
-            copy.put(key, asList(value));
-        } else {
-            values.add(value);
-            copy.put(key, values);
-        }
-
-        return new HttpHeaders(copy);
+        final List<String> currentValues = headers.getOrDefault(key, Collections.emptyList());
+        final List<String> newValues = listOf(currentValues, value);
+        final Map<String, List<String>> newMap = ImmutableMapBuilder.<String, List<String>>of()
+                .putAll(headers)
+                .put(key, newValues)
+                .build();
+        return HttpHeaders.of(newMap);
     }
 
     @Override
     public final String toString() {
-        final Map<String, List<String>> map = MapUtils.copyOf(headers);
+        final Map<String, List<String>> map = copyOf(headers);
         if (map.containsKey(AUTHORIZATION)) {
             map.put(AUTHORIZATION, asList("**removed from output**"));
         }

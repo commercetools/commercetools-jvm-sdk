@@ -14,11 +14,11 @@ class HttpResponseImpl extends Base implements HttpResponse {
     private final Optional<HttpRequest> associatedRequest;
     private final Optional<String> bodyAsStringForDebugging;
 
-    HttpResponseImpl(final int statusCode, final Optional<byte[]> responseBody, final Optional<HttpRequest> associatedRequest, final Map<String, List<String>> headers) {
+    HttpResponseImpl(final int statusCode, final Optional<byte[]> responseBody, final Optional<HttpRequest> associatedRequest, final HttpHeaders headers) {
         this.statusCode = statusCode;
         this.responseBody = responseBody;
         this.associatedRequest = associatedRequest;
-        this.headers = HttpHeaders.of(headers);
+        this.headers = headers;
         Optional<String> bodyAsString = Optional.empty();
         try {
             bodyAsString = statusCode >= 400 ? responseBody.map(b -> new String(b, StandardCharsets.UTF_8)) : Optional.<String>empty();
@@ -34,7 +34,9 @@ class HttpResponseImpl extends Base implements HttpResponse {
     }
 
     @Override
-    public HttpHeaders getHeaders() { return headers; }
+    public HttpHeaders getHeaders() {
+        return headers;
+    }
 
     @Override
     public synchronized Optional<byte[]> getResponseBody() {

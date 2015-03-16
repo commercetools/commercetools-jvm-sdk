@@ -35,7 +35,7 @@ final class NingHttpClientAdapterImpl extends AutoCloseableService implements Ni
             return future.thenApply((Response response) -> {
                 final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
                 Optional<byte[]> body = responseBodyAsBytes.length > 0 ? Optional.of(responseBodyAsBytes) : Optional.empty();
-                final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), body, Optional.of(httpRequest), response.getHeaders());
+                final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), body, Optional.of(httpRequest), HttpHeaders.of(response.getHeaders()));
                 LOGGER.debug(() -> "response " + httpResponse);
                 return httpResponse;
             });

@@ -11,7 +11,6 @@ import org.apache.http.client.methods.RequestBuilder;
 import org.apache.http.entity.FileEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
-import org.apache.http.impl.nio.client.HttpAsyncClients;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
@@ -70,7 +69,7 @@ final class ApacheHttpClientAdapterImpl extends AutoCloseableService implements 
                         )
                 );
 
-        return HttpResponse.of(statusCode, bodyOption, Optional.of(httpRequest), headers);
+        return HttpResponse.of(statusCode, bodyOption, Optional.of(httpRequest), HttpHeaders.of(headers));
     }
 
     private HttpUriRequest toApacheRequest(final HttpRequest httpRequest) {
