@@ -9,7 +9,7 @@ import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryIntegrationTest;
-import org.junit.Test;
+import org.junit.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -77,5 +77,12 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
         final ChannelDraft channelDraft = ChannelDraft.of("my-store")
                 .withDescription(LocalizedStrings.of(ENGLISH, "description"));
         return execute(ChannelCreateCommand.of(channelDraft));
+    }
+
+    @BeforeClass
+    @AfterClass
+    public static void classCleanPp() throws Exception {
+        execute(ChannelQuery.of().byKey("my-store")).getResults()
+                .forEach(channel -> execute(ChannelDeleteCommand.of(channel)));
     }
 }
