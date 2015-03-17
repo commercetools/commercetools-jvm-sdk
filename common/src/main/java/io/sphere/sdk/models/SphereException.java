@@ -63,15 +63,6 @@ public class SphereException extends RuntimeException {
         this.sphereRequest = Optional.of(sphereRequest);
     }
 
-    @JsonIgnore
-    public void setUnderlyingHttpRequest(final String underlyingHttpRequest) {
-        this.underlyingHttpRequest = Optional.of(underlyingHttpRequest);
-    }
-
-    public void setUnderlyingHttpResponse(final String underlyingHttpResponse) {
-        this.underlyingHttpResponse = Optional.of(underlyingHttpResponse);
-    }
-
     public void addNote(final String note) {
         additionalNotes.add(note);
     }
