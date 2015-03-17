@@ -15,7 +15,7 @@ import java.util.Optional;
 public class SphereException extends RuntimeException {
     static final long serialVersionUID = 0L;
 
-    private Optional<SphereRequest<? extends Object>> sphereRequest = Optional.empty();
+    private Optional<SphereRequest<?>> sphereRequest = Optional.empty();
     @JsonIgnore
     protected Optional<HttpResponse> httpResponse = Optional.empty();
     private Optional<String> projectKey = Optional.empty();
@@ -39,7 +39,7 @@ public class SphereException extends RuntimeException {
         return projectKey;
     }
 
-    public final Optional<SphereRequest<? extends Object>> getSphereRequest() {
+    public final Optional<SphereRequest<?>> getSphereRequest() {
         return sphereRequest;
     }
 
@@ -55,7 +55,7 @@ public class SphereException extends RuntimeException {
         this.projectKey = Optional.of(projectKey);
     }
 
-    public void setSphereRequest(final SphereRequest<? extends Object> sphereRequest) {
+    public void setSphereRequest(final SphereRequest<?> sphereRequest) {
         this.sphereRequest = Optional.of(sphereRequest);
     }
 
