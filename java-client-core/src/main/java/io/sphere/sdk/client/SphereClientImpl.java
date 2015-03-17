@@ -8,6 +8,7 @@ import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.json.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
@@ -69,9 +70,11 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
             final SphereInternalLogger logger = getLogger(httpResponse);
             logger.debug(() -> httpResponse);
             logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> JsonUtils.prettyPrintJsonStringSecure(bytesToString(body))).orElse("No body present.") + "\n");
-            final T result;
-            result = parse(httpResponse, sphereRequest, objectMapper, config);
-            return result;
+            final List<String> notices = httpResponse.getHeaders().getHeadersAsMap().get(SphereHttpHeaders.X_DEPRECATION_NOTICE);
+            if (notices != null) {
+                notices.stream().forEach(message -> logger.warn(() -> "Deprecation notice : " + message));
+            }
+            return parse(httpResponse, sphereRequest, objectMapper, config);
         };
     }
 
