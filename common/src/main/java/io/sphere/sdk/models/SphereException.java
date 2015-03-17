@@ -6,6 +6,8 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.meta.BuildInfo;
 
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,6 +21,8 @@ public class SphereException extends RuntimeException {
     @JsonIgnore
     protected Optional<HttpResponse> httpResponse = Optional.empty();
     private Optional<String> projectKey = Optional.empty();
+    private Optional<String> httpThing = Optional.empty();
+    private List<String> additionalNotes = new LinkedList<>();
 
     public SphereException(final String message, final Throwable cause) {
         super(message, cause);
@@ -59,6 +63,19 @@ public class SphereException extends RuntimeException {
         this.sphereRequest = Optional.of(sphereRequest);
     }
 
+    @JsonIgnore
+    public void setUnderlyingHttpRequest(final String underlyingHttpRequest) {
+        this.underlyingHttpRequest = Optional.of(underlyingHttpRequest);
+    }
+
+    public void setUnderlyingHttpResponse(final String underlyingHttpResponse) {
+        this.underlyingHttpResponse = Optional.of(underlyingHttpResponse);
+    }
+
+    public void addNote(final String note) {
+        additionalNotes.add(note);
+    }
+
     @Override
     public final String getMessage() {
         StringBuilder builder = new StringBuilder("\n===== BEGIN EXCEPTION OUTPUT =====").append("\n");
@@ -75,6 +92,7 @@ public class SphereException extends RuntimeException {
                 .append("http request: ").append(httpRequest).append("\n")
                 .append("http response: ").append(getHttpResponse().map(Object::toString).orElse("<unknown>")).append("\n")
                 .append(Optional.ofNullable(super.getMessage()).map(s -> "detailMessage: " + s + "\n").orElse(""))
+                .append("additional notes: ").append(additionalNotes).append("\n")
                 .append("Javadoc: ").append("http://sphereio.github.io/sphere-jvm-sdk/javadoc/").append(BuildInfo.version()).append("/").append(this.getClass().getCanonicalName().replace('.', '/')).append(".html").append("\n")
                 .append("===== END EXCEPTION OUTPUT =====").toString();
     }
