@@ -19,11 +19,11 @@ public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<
     }
 
     public Predicate<T> is(final V i) {
-        return EqPredicate.ofUnquotet(this, i);
+        return EqPredicate.of(this, i);
     }
 
     public Predicate<T> isNot(final V i) {
-        return NotEqPredicate.ofUnquotet(this, i);
+        return NotEqPredicate.of(this, i);
     }
 
     @SuppressWarnings("unchecked")

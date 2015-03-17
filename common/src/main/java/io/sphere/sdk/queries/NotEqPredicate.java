@@ -5,18 +5,18 @@ class NotEqPredicate<T, V> extends QueryModelPredicate<T> {
     private final String startQuote;
     private final String endQuote;
 
-    public NotEqPredicate(QueryModel<T> queryModel, V value, final String startQuote, final String endQuote) {
+    private NotEqPredicate(QueryModel<T> queryModel, V value, final String startQuote, final String endQuote) {
         super(queryModel);
         this.value = value;
         this.startQuote = startQuote;
         this.endQuote = endQuote;
     }
 
-    NotEqPredicate(QueryModel<T> queryModel, V value) {
-        this(queryModel, value, "\"", "\"");
+    public static <T> NotEqPredicate<T, String> of(final QueryModel<T> queryModel, final String value) {
+        return new NotEqPredicate<>(queryModel, value, "\"", "\"");
     }
 
-    public static <T, V> NotEqPredicate<T, V> ofUnquotet(final QueryModel<T> queryModel, final V value) {
+    public static <T, V> NotEqPredicate<T, V> of(final QueryModel<T> queryModel, final V value) {
         return new NotEqPredicate<>(queryModel, value, "", "");
     }
 
