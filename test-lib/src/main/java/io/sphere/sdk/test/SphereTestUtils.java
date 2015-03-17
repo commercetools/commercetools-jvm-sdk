@@ -7,6 +7,8 @@ import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -35,6 +37,10 @@ public final class SphereTestUtils {
     public static final MonetaryAmount EURO_10 = MoneyImpl.of(10, EUR);
     public static final MonetaryAmount EURO_20 = MoneyImpl.of(20, EUR);
     public static final MonetaryAmount EURO_30 = MoneyImpl.of(30, EUR);
+
+    public static final Instant tomorrowInstant() {
+        return Instant.now().plus(1, ChronoUnit.DAYS);
+    }
 
     /**
      * Creates a LocalizedStrings for the {@code Locale.ENGLISH}.

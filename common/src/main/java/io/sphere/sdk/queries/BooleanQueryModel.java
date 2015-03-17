@@ -9,6 +9,6 @@ public class BooleanQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public Predicate<T> is(final boolean value) {
-        return new EqPredicate<>(this, value);
+        return EqPredicate.of(this, value);
     }
 }
