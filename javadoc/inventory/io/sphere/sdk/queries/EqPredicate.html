@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":10,"i6":10,"i7":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -130,30 +130,6 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EqPredicate.html#EqPredicate-io.sphere.sdk.queries.QueryModel-V-">EqPredicate</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">T</a>&gt;&nbsp;queryModel,
-           <a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">V</a>&nbsp;value)</code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EqPredicate.html#EqPredicate-io.sphere.sdk.queries.QueryModel-V-java.lang.String-java.lang.String-">EqPredicate</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">T</a>&gt;&nbsp;queryModel,
-           <a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">V</a>&nbsp;value,
-           java.lang.String&nbsp;startQuote,
-           java.lang.String&nbsp;endQuote)</code>&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -184,19 +160,24 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EqPredicate.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>static &lt;T,V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a>&lt;T,V&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EqPredicate.html#ofUnquotet-io.sphere.sdk.queries.QueryModel-V-">ofUnquotet</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;&nbsp;queryModel,
-          V&nbsp;value)</code>&nbsp;</td>
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a>&lt;T,java.lang.String&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EqPredicate.html#of-io.sphere.sdk.queries.QueryModel-java.lang.String-">of</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;&nbsp;queryModel,
+  java.lang.String&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
+<td class="colFirst"><code>static &lt;T,V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a>&lt;T,V&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EqPredicate.html#of-io.sphere.sdk.queries.QueryModel-V-">of</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;&nbsp;queryModel,
+  V&nbsp;value)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EqPredicate.html#or-io.sphere.sdk.queries.Predicate-">or</a></span>(<a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&nbsp;other)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EqPredicate.html#render--">render</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EqPredicate.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
@@ -230,56 +211,32 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a name="EqPredicate-io.sphere.sdk.queries.QueryModel-java.lang.Object-java.lang.String-java.lang.String-">
-<!--   -->
-</a><a name="EqPredicate-io.sphere.sdk.queries.QueryModel-V-java.lang.String-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>EqPredicate</h4>
-<pre>public&nbsp;EqPredicate(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">T</a>&gt;&nbsp;queryModel,
-                   <a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">V</a>&nbsp;value,
-                   java.lang.String&nbsp;startQuote,
-                   java.lang.String&nbsp;endQuote)</pre>
-</li>
-</ul>
-<a name="EqPredicate-io.sphere.sdk.queries.QueryModel-java.lang.Object-">
-<!--   -->
-</a><a name="EqPredicate-io.sphere.sdk.queries.QueryModel-V-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>EqPredicate</h4>
-<pre>public&nbsp;EqPredicate(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">T</a>&gt;&nbsp;queryModel,
-                   <a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">V</a>&nbsp;value)</pre>
-</li>
-</ul>
-</li>
-</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="ofUnquotet-io.sphere.sdk.queries.QueryModel-java.lang.Object-">
-<!--   -->
-</a><a name="ofUnquotet-io.sphere.sdk.queries.QueryModel-V-">
+<a name="of-io.sphere.sdk.queries.QueryModel-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>ofUnquotet</h4>
-<pre>public static&nbsp;&lt;T,V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a>&lt;T,V&gt;&nbsp;ofUnquotet(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;&nbsp;queryModel,
-                                                V&nbsp;value)</pre>
+<h4>of</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a>&lt;T,java.lang.String&gt;&nbsp;of(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;&nbsp;queryModel,
+                                                     java.lang.String&nbsp;value)</pre>
+</li>
+</ul>
+<a name="of-io.sphere.sdk.queries.QueryModel-java.lang.Object-">
+<!--   -->
+</a><a name="of-io.sphere.sdk.queries.QueryModel-V-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>public static&nbsp;&lt;T,V&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a>&lt;T,V&gt;&nbsp;of(<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;&nbsp;queryModel,
+                                        V&nbsp;value)</pre>
 </li>
 </ul>
 <a name="render--">
@@ -420,13 +377,13 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -435,7 +392,7 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelPredicate.html" tit
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-(<span id='custom-javascripts'></span>)
+<span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>

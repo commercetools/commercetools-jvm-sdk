@@ -1360,10 +1360,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EqPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">T</a>,<a href="io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">V</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqPredicate.html#EqPredicate-io.sphere.sdk.queries.QueryModel-V-java.lang.String-java.lang.String-">EqPredicate(QueryModel&lt;T&gt;, V, String, String)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqPredicate.html#EqPredicate-io.sphere.sdk.queries.QueryModel-V-">EqPredicate(QueryModel&lt;T&gt;, V)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals(Object)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#equals-java.lang.Object-">equals(Object)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
@@ -4704,6 +4700,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/queries/ProjectGet.html#of--">of()</a></span> - Static method in class io.sphere.sdk.projects.queries.<a href="io/sphere/sdk/projects/queries/ProjectGet.html" title="class in io.sphere.sdk.projects.queries">ProjectGet</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqPredicate.html#of-io.sphere.sdk.queries.QueryModel-java.lang.String-">of(QueryModel&lt;T&gt;, String)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqPredicate.html#of-io.sphere.sdk.queries.QueryModel-V-">of(QueryModel&lt;T&gt;, V)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionPath.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html#of-io.sphere.sdk.queries.QueryModel-java.lang.String-">of(QueryModel&lt;T&gt;, String)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a></dt>
@@ -5020,8 +5020,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#ofTimeSet--">ofTimeSet()</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerName.html#ofTitleFirstAndLastName-java.lang.String-java.lang.String-java.lang.String-">ofTitleFirstAndLastName(String, String, String)</a></span> - Static method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqPredicate.html#ofUnquotet-io.sphere.sdk.queries.QueryModel-V-">ofUnquotet(QueryModel&lt;T&gt;, V)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html#ofUnsetAttribute-int-java.lang.String-io.sphere.sdk.products.ProductUpdateScope-">ofUnsetAttribute(int, String, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttribute</a></dt>
 <dd>
@@ -7485,7 +7483,7 @@ the order they are declared.</div>
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-(<span id='custom-javascripts'></span>)
+<span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>
