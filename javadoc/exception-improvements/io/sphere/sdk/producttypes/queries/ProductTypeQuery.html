@@ -138,10 +138,11 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
 
   Scenario to load a specific product type:
 
-  <div id="example-QueryByProductTypeNameExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.SphereClient;
+  <div id="example-QueryByProductTypeNameExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.attributes.AttributeDefinition;
+import io.sphere.sdk.attributes.AttributeType;
+import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
-import io.sphere.sdk.attributes.EnumAttributeDefinition;
 import io.sphere.sdk.attributes.EnumType;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -159,12 +160,17 @@ import java.util.concurrent.CompletableFuture;
     private static List&lt;PlainEnumValue&gt; extractPossibleEnumValuesForSize(PagedQueryResult&lt;ProductType&gt; pagedQueryResult) {
         ProductType productType = pagedQueryResult.
                 head().
-                orElseThrow(() -&gt; new MissingProductTypeException());
-        EnumAttributeDefinition sizeAttribute = productType.
-                getAttribute("size", EnumAttributeDefinition.class).
-                orElseThrow(() -&gt; new MissingAttributeException());
-        EnumType attributeType = sizeAttribute.getAttributeType();
-        return attributeType.getValues();
+                orElseThrow(MissingProductTypeException::new);
+
+        AttributeDefinition sizeAttribute = productType.
+                getAttribute("size").
+                orElseThrow(MissingAttributeException::new);
+
+        if (sizeAttribute.getAttributeType() instanceof EnumType) {
+            return ((EnumType) sizeAttribute.getAttributeType()).getValues();
+        } else {
+            throw new UnexpectedAttributeTypeException("size", EnumType.class, sizeAttribute.getAttributeType());
+        }
     }
 
     public static class MissingProductTypeException extends RuntimeException {
@@ -173,6 +179,35 @@ import java.util.concurrent.CompletableFuture;
 
     public static class MissingAttributeException extends RuntimeException {
         private static final long serialVersionUID = 4954918890077093841L;
+    }
+
+    public static class UnexpectedAttributeTypeException extends RuntimeException {
+        private static final long serialVersionUID = 4954918890077093842L;
+
+        private final String attributeName;
+        private final Class&lt;? extends AttributeType&gt; expectedType;
+        private final AttributeType actualType;
+
+        public UnexpectedAttributeTypeException(String attributeName, Class&lt;? extends AttributeType&gt; expectedType, AttributeType actualType) {
+            super("Unexpected type of attribute with name '" + attributeName + "'. Expected type is '" +
+                    expectedType.getSimpleName() + "', but actual type was '" + actualType + "'.");
+
+            this.attributeName = attributeName;
+            this.expectedType = expectedType;
+            this.actualType = actualType;
+        }
+
+        public String getAttributeName() {
+            return attributeName;
+        }
+
+        public Class&lt;? extends AttributeType&gt; getExpectedType() {
+            return expectedType;
+        }
+
+        public AttributeType getActualType() {
+            return actualType;
+        }
     }
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryByProductTypeNameExample.java" target="_blank">test code</a>.</pre></div>
@@ -742,7 +777,7 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-(<span id='custom-javascripts'></span>)
+<span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>

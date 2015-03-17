@@ -200,26 +200,26 @@ import static java.util.Locale.GERMAN;
 
     private static AttributeDefinition sizeAttribute() {
         LocalizedStrings sizeAttributeLabel = LocalizedStrings.of(ENGLISH, "size").plus(GERMAN, "Größe");
-        return EnumAttributeDefinitionBuilder.of("size", sizeAttributeLabel, Sizes.VALUES).
+        return AttributeDefinitionBuilder.of("size", sizeAttributeLabel, EnumType.of(Sizes.VALUES)).
                 required(true).attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).build();
     }
 
     private static AttributeDefinition colorAttribute() {
         LocalizedStrings colorAttributeLabel = LocalizedStrings.of(ENGLISH, "color").plus(GERMAN, "Farbe");
-        return LocalizedEnumAttributeDefinitionBuilder.of("color", colorAttributeLabel, Colors.VALUES).
+        return AttributeDefinitionBuilder.of("color", colorAttributeLabel, LocalizedEnumType.of(Colors.VALUES)).
                 required(true).attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).build();
     }
 
     private static AttributeDefinition srpAttribute() {
         LocalizedStrings srpLabel = LocalizedStrings.of(ENGLISH, "recommended retailer price (rrp)").
                 plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
-        return MoneyAttributeDefinitionBuilder.of(MONEY_ATTRIBUTE_NAME, srpLabel).isSearchable(false).build();
+        return AttributeDefinitionBuilder.of(MONEY_ATTRIBUTE_NAME, srpLabel, MoneyType.of()).isSearchable(false).build();
     }
 }
 
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/suppliers/TShirtProductTypeDraftSupplier.java" target="_blank">test code</a>.</pre></div>
 
-  <p>To create attribute definitions refer to <a href="../../../../../io/sphere/sdk/attributes/AttributeDefinition.html" title="interface in io.sphere.sdk.attributes"><code>AttributeDefinition</code></a>.</p></div>
+  <p>To create attribute definitions refer to <a href="../../../../../io/sphere/sdk/attributes/AttributeDefinition.html" title="class in io.sphere.sdk.attributes"><code>AttributeDefinition</code></a>.</p></div>
 </li>
 </ul>
 </div>
@@ -392,7 +392,7 @@ import static java.util.Locale.GERMAN;
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-(<span id='custom-javascripts'></span>)
+<span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>
