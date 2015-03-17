@@ -9,7 +9,6 @@ import java.util.List;
 public class LocalizedEnumType extends AttributeTypeBase {
     private final List<LocalizedEnumValue> values;
 
-    @JsonIgnore
     private LocalizedEnumType(final List<LocalizedEnumValue> values) {
         this.values = values;
     }
@@ -18,7 +17,7 @@ public class LocalizedEnumType extends AttributeTypeBase {
         return values;
     }
 
-    @JsonCreator
+    @JsonIgnore
     public static LocalizedEnumType of(final List<LocalizedEnumValue> values) {
         return new LocalizedEnumType(values);
     }

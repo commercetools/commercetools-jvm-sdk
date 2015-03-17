@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class TimeType extends AttributeTypeBase {
-    @JsonIgnore
     private TimeType() {}
 
-    @JsonCreator
+    @JsonIgnore
     public static TimeType of() {
         return new TimeType();
     }

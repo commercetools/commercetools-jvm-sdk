@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class MoneyType extends AttributeTypeBase {
-    @JsonIgnore
     private MoneyType() {}
 
-    @JsonCreator
+    @JsonIgnore
     public static MoneyType of() {
         return new MoneyType();
     }

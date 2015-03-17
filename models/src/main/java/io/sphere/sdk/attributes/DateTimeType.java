@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class DateTimeType extends AttributeTypeBase {
-    @JsonIgnore
     private DateTimeType() {}
 
-    @JsonCreator
+    @JsonIgnore
     public static DateTimeType of() {
         return new DateTimeType();
     }
