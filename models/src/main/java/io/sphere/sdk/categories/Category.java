@@ -3,10 +3,8 @@ package io.sphere.sdk.categories;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Optional;
-import io.sphere.sdk.models.DefaultModel;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.WithLocalizedSlug;
+
+import io.sphere.sdk.models.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.List;
@@ -17,7 +15,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Categories are used to organize products in a hierarchical structure.
  *
- <p id=operations>Operations:</p>
+ * <p id="operations">Operations:</p>
  * <ul>
  *     <li>Create a category with {@link io.sphere.sdk.categories.commands.CategoryCreateCommand}.</li>
  *     <li>Create a category test double with {@link io.sphere.sdk.categories.CategoryBuilder}.</li>
@@ -71,7 +69,7 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
 
     public static String toString(final Category category) {
         final List<String> pathInTreeIds = category.getPathInTree().stream().map(Category::getId).collect(toList());
-        return new ToStringBuilder(category).
+        return new ToStringBuilder(category, Base.TO_STRING_STYLE).
                 append("id", category.getId()).
                 append("version", category.getVersion()).
                 append("createdAt", category.getCreatedAt()).

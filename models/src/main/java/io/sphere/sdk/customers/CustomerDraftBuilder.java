@@ -115,6 +115,6 @@ public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft>
     @Override
     public final String toString() {
         final CustomerDraftBuilder out = CustomerDraftBuilder.of(build()).password("**removed from output**");
-        return ToStringBuilder.reflectionToString(out);
+        return ToStringBuilder.reflectionToString(out, Base.TO_STRING_STYLE);
     }
 }

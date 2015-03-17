@@ -145,4 +145,12 @@ final public class JsonUtils {
             return node;
         }
     }
+
+    public static JsonNode readTree(final byte[] body) {
+        try {
+            return objectMapper.readTree(body);
+        } catch (final IOException e) {
+            throw new JsonException(e);
+        }
+    }
 }

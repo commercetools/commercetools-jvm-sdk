@@ -58,8 +58,7 @@ public final class DeprecationExceptionSphereClientDecorator extends SphereClien
                 } else {
                     final SphereException sphereException = new SphereDeprecationException(deprecationNoticeHeaderValues);
                     sphereException.setSphereRequest(sphereRequest);
-                    //TODO ADJUST with exceptions improvement branch
-                    sphereException.setUnderlyingHttpResponse(response.withoutRequest().toString());
+                    sphereException.setUnderlyingHttpResponse(response);
                     throw sphereException;
                 }
             };
