@@ -1245,10 +1245,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#department-java.lang.String-">department(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/client/DeprecationHeaderSphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">DeprecationHeaderSphereClientDecorator</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
+<dt><a href="io/sphere/sdk/client/DeprecationExceptionSphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">DeprecationExceptionSphereClientDecorator</span></a> - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>
 <div class="block">If SPHERE.IO returns a <a href="io/sphere/sdk/client/SphereHttpHeaders.html#X_DEPRECATION_NOTICE">"X-DEPRECATION-NOTICE"</a> header field,
- it does not deserialize the response object in <a href="io/sphere/sdk/client/SphereRequest.html#resultMapper--"><code>SphereRequest.resultMapper()</code></a> but throws a <a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models"><code>SphereException</code></a>.</div>
+ it does not deserialize the response object in <a href="io/sphere/sdk/client/SphereRequest.html#resultMapper--"><code>SphereRequest.resultMapper()</code></a> but throws a <a href="io/sphere/sdk/client/SphereDeprecationException.html" title="class in io.sphere.sdk.client"><code>SphereDeprecationException</code></a>.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#description-java.util.Optional-">description(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1386,7 +1386,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">The exception hierarchy documentation.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/DeprecationHeaderSphereClientDecorator.html#execute-io.sphere.sdk.client.SphereRequest-">execute(SphereRequest&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/DeprecationHeaderSphereClientDecorator.html" title="class in io.sphere.sdk.client">DeprecationHeaderSphereClientDecorator</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/DeprecationExceptionSphereClientDecorator.html#execute-io.sphere.sdk.client.SphereRequest-">execute(SphereRequest&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/DeprecationExceptionSphereClientDecorator.html" title="class in io.sphere.sdk.client">DeprecationExceptionSphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/QueueSphereClientDecorator.html#execute-io.sphere.sdk.client.SphereRequest-">execute(SphereRequest&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client">QueueSphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
@@ -4023,7 +4023,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/ApacheHttpClientAdapter.html#of-org.apache.http.impl.nio.client.CloseableHttpAsyncClient-">of(CloseableHttpAsyncClient)</a></span> - Static method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/ApacheHttpClientAdapter.html" title="interface in io.sphere.sdk.client">ApacheHttpClientAdapter</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/DeprecationHeaderSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-">of(SphereClient)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/DeprecationHeaderSphereClientDecorator.html" title="class in io.sphere.sdk.client">DeprecationHeaderSphereClientDecorator</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/DeprecationExceptionSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-">of(SphereClient)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/DeprecationExceptionSphereClientDecorator.html" title="class in io.sphere.sdk.client">DeprecationExceptionSphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpRequestIntent.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-">of(HttpMethod, String)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></dt>
 <dd>&nbsp;</dd>
