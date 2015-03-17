@@ -11,7 +11,6 @@ public class ReferenceQueryModel<T, R> extends QueryModelImpl<T> {
         super(parent, pathSegment);
     }
 
-
     public Predicate<T> is(Referenceable<R> reference) {
         return new EqPredicate<>(idSegment(), reference.toReference().getId());
     }

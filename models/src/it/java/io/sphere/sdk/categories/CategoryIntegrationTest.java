@@ -15,6 +15,7 @@ import org.junit.Test;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
+import static io.sphere.sdk.queries.SortDirection.DESC;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
@@ -123,8 +124,24 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         assertThat(category.getOrderHint().get()).isEqualTo(hint);
         assertThat(category.getParent()).isEqualTo((Optional.of(reference.filled(Optional.empty()))));
         assertThat(parentCategory.getParent()).isEqualTo(Optional.empty());
+
+        assertThat(queryForPredicate(CategoryQuery.model().parent().is(parentCategory)))
+                .overridingErrorMessage("query model contains parent search")
+                .isPresentAs(category.getId());
+        assertThat(queryForPredicate(CategoryQuery.model().parent().isPresent()))
+                .isPresentAs(category.getId());
+        assertThat(queryForPredicate(CategoryQuery.model().parent().isNotPresent()))
+                .isPresentAs(parentCategory.getId());
+
         cleanUpByName(slug);
         cleanUpByName(parentSlug);
+    }
+
+    private Optional<String> queryForPredicate(final Predicate<Category> parentPredicate) {
+        final QueryDsl<Category> query = CategoryQuery.of()
+                .withPredicate(parentPredicate)
+                .withSort(CategoryQuery.model().createdAt().sort(DESC));
+        return execute(query).head().map(Category::getId);
     }
 
     @Test
@@ -251,7 +268,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         withCategory(client(), CategoryDraftBuilder.of(en("1"), en("1")).description(Optional.empty()), c1 -> {
             withCategory(client(), CategoryDraftBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
                 withCategory(client(), CategoryDraftBuilder.of(en("10"), en("10")), c10 -> {
-                    final Query<Category> query = CategoryQuery.of().withPredicate(predicate).withSort(CategoryQuery.model().createdAt().sort(SortDirection.DESC));
+                    final Query<Category> query = CategoryQuery.of().withPredicate(predicate).withSort(CategoryQuery.model().createdAt().sort(DESC));
                     final List<Category> results = execute(query).getResults();
                     assertions.accept(results);
                 });
