@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutionException;
 
 import static org.fest.assertions.Assertions.assertThat;
 
-public class DeprecationHeaderSphereClientDecoratorTest {
+public class DeprecationExceptionSphereClientDecoratorTest {
     private static final String DEPRECATION_MESSAGE = "don't use it anymore";
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -31,7 +31,7 @@ public class DeprecationHeaderSphereClientDecoratorTest {
                 .overridingErrorMessage("normal sphere client ignores deprecation header")
                 .isEqualTo(DummySphereRequest.DEFAULT_RESPONSE_OBJECT);
 
-        final SphereClient decoratedClient = DeprecationHeaderSphereClientDecorator.of(sphereClient);
+        final SphereClient decoratedClient = DeprecationExceptionSphereClientDecorator.of(sphereClient);
         thrown.expect(new CustomTypeSafeMatcher<ExecutionException>("") {
             @Override
             protected boolean matchesSafely(final ExecutionException e) {

@@ -10,21 +10,21 @@ import java.util.function.Function;
 
 /**
  * If SPHERE.IO returns a {@value io.sphere.sdk.client.SphereHttpHeaders#X_DEPRECATION_NOTICE} header field,
- * it does not deserialize the response object in {@link SphereRequest#resultMapper()} but throws a {@link io.sphere.sdk.models.SphereException}.
+ * it does not deserialize the response object in {@link SphereRequest#resultMapper()} but throws a {@link SphereDeprecationException}.
  */
-public final class DeprecationHeaderSphereClientDecorator extends SphereClientDecorator implements SphereClient {
+public final class DeprecationExceptionSphereClientDecorator extends SphereClientDecorator implements SphereClient {
 
     @Override
     public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
         return super.execute(DeprecationHeaderSphereRequest.of(sphereRequest));
     }
 
-    private DeprecationHeaderSphereClientDecorator(final SphereClient delegate) {
+    private DeprecationExceptionSphereClientDecorator(final SphereClient delegate) {
         super(delegate);
     }
 
     public static SphereClient of(final SphereClient delegate) {
-        return new DeprecationHeaderSphereClientDecorator(delegate);
+        return new DeprecationExceptionSphereClientDecorator(delegate);
     }
 
 

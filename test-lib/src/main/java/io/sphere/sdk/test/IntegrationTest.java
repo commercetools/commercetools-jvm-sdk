@@ -5,9 +5,7 @@ import io.sphere.sdk.client.SphereRequest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
-import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 
 public abstract class IntegrationTest {
 
@@ -25,7 +23,8 @@ public abstract class IntegrationTest {
             final SphereClientConfig config = SphereClientConfig.of(projectKey(), clientId(), clientSecret(), authUrl(), apiUrl());
             final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplierFactory.of().createSupplierOfOneTimeFetchingToken(config);
             final SphereClient underlying = factory.createClient(config, tokenSupplier);
-            client = new TestClient(underlying);
+            final SphereClient underlyingWithDeprecationExceptions = DeprecationExceptionSphereClientDecorator.of(underlying);
+            client = new TestClient(underlyingWithDeprecationExceptions);
         }
         return client;
     }
