@@ -1,5 +1,6 @@
 package io.sphere.sdk.customers;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 import java.time.Instant;
@@ -11,6 +12,7 @@ class CustomerTokenImpl extends Base implements CustomerToken {
     private final Instant lastModifiedAt;
     private final String value;
 
+    @JsonCreator
     public CustomerTokenImpl(final String id, final String customerId, final Instant createdAt, final Instant lastModifiedAt, final String value) {
         this.id = id;
         this.customerId = customerId;

@@ -1,5 +1,6 @@
 package io.sphere.sdk.customers;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.SphereError;
 
 /**
@@ -10,6 +11,7 @@ import io.sphere.sdk.models.SphereError;
 public class CustomerInvalidCredentials extends SphereError {
     public static final String CODE = "InvalidCredentials";
 
+    @JsonCreator
     public CustomerInvalidCredentials(final String message) {
         super(CODE, message);
     }

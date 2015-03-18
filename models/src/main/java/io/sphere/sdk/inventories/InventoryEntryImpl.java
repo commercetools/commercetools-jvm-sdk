@@ -1,5 +1,6 @@
 package io.sphere.sdk.inventories;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
@@ -15,6 +16,7 @@ final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implemen
     private final Optional<Integer> restockableInDays;
     private final Optional<Instant> expectedDelivery;
 
+    @JsonCreator
     public InventoryEntryImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final long availableQuantity, final String sku, final Optional<Reference<Channel>> supplyChannel, final long quantityOnStock, final Optional<Integer> restockableInDays, final Optional<Instant> expectedDelivery) {
         super(id, version, createdAt, lastModifiedAt);
         this.availableQuantity = availableQuantity;

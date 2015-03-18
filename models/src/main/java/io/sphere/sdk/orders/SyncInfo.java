@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
@@ -13,6 +14,7 @@ public class SyncInfo extends Base {
     private final Optional<String> externalId;
     private final Instant syncedAt;
 
+    @JsonCreator
     private SyncInfo(final Reference<Channel> channel, final Instant syncedAt, final Optional<String> externalId) {
         this.channel = channel;
         this.externalId = externalId;

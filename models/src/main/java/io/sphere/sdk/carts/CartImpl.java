@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
@@ -26,6 +27,7 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
     private final Optional<CountryCode> country;
     private final Optional<CartShippingInfo> shippingInfo;
 
+    @JsonCreator
     CartImpl(final String id, final long version, final Instant createdAt,
              final Instant lastModifiedAt, final Optional<String> customerId,
              final Optional<String> customerEmail, final List<LineItem> lineItems,

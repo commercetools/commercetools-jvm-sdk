@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.CreationTimestamped;
 
@@ -12,6 +13,7 @@ public class Parcel extends Base implements CreationTimestamped {
     private final Optional<ParcelMeasurements> measurements;
     private final Optional<TrackingData> trackingData;
 
+    @JsonCreator
     private Parcel(final String id, final Instant createdAt, final Optional<ParcelMeasurements> measurements, final Optional<TrackingData> trackingData) {
         this.id = id;
         this.createdAt = createdAt;

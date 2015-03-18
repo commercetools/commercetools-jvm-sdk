@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.CreationTimestamped;
 import io.sphere.sdk.models.Identifiable;
@@ -13,6 +14,7 @@ public class Delivery extends Base implements Identifiable<Delivery>, CreationTi
     private final List<DeliveryItem> items;
     private final List<Parcel> parcels;
 
+    @JsonCreator
     private Delivery(final String id, final Instant createdAt, final List<DeliveryItem> items, final List<Parcel> parcels) {
         this.id = id;
         this.createdAt = createdAt;

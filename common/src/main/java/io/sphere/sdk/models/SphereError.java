@@ -1,11 +1,13 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -21,6 +23,7 @@ public class SphereError extends Base {
     @JsonIgnore
     private final Map<String, JsonNode> furtherFields = new HashMap<>();
 
+    @JsonCreator
     protected SphereError(final String code, final String message) {
         this.code = code;
         this.message = message;
@@ -51,6 +54,7 @@ public class SphereError extends Base {
                 final T object = JsonUtils.readObject(errorClass, jsonNode);
                 result = code.equals(object.getCode()) ? Optional.of(object) : Optional.<T>empty();
             } catch (final JsonException e) {
+                SphereInternalLogger.getLogger(SphereError.class).warn(() -> "cannot cast error: " + e);
                 result = Optional.empty();
             }
         }

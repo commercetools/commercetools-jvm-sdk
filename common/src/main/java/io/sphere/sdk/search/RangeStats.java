@@ -1,5 +1,6 @@
 package io.sphere.sdk.search;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.models.Base;
 
@@ -15,6 +16,7 @@ public class RangeStats extends Base {
     private final BigDecimal max;
     private final BigDecimal mean;
 
+    @JsonCreator
     private RangeStats(final BigDecimal from, final BigDecimal to, final long count, final long totalCount,
                        final BigDecimal total, final BigDecimal min, final BigDecimal max, final BigDecimal mean) {
         this.from = from;

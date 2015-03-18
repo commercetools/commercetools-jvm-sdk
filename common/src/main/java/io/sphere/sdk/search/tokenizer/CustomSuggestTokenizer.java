@@ -1,5 +1,6 @@
 package io.sphere.sdk.search.tokenizer;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.models.Base;
 
@@ -10,6 +11,7 @@ import static java.util.Arrays.asList;
 public class CustomSuggestTokenizer extends Base implements SuggestTokenizer {
     private final List<String> inputs;
 
+    @JsonCreator
     private CustomSuggestTokenizer(final List<String> inputs) {
         this.inputs = inputs;
     }

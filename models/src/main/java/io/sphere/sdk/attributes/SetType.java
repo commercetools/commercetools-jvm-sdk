@@ -1,10 +1,12 @@
 package io.sphere.sdk.attributes;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class SetType extends AttributeTypeBase {
     private final AttributeType elementType;
 
+    @JsonCreator
     private SetType(final AttributeType elementType) {
         this.elementType = elementType;
     }

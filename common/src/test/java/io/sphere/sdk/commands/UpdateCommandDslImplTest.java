@@ -1,5 +1,6 @@
 package io.sphere.sdk.commands;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -19,6 +20,7 @@ public class UpdateCommandDslImplTest {
     }
 
     static class Foo extends UpdateAction<String> {
+        @JsonCreator
         public Foo() {
             super("foo");
         }

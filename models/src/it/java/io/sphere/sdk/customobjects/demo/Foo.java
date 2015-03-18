@@ -1,5 +1,6 @@
 package io.sphere.sdk.customobjects.demo;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
@@ -15,6 +16,7 @@ public class Foo extends Base {
     /** this custom object stores also a String*/
     private final String bar;
 
+    @JsonCreator
     public Foo(final String bar, final long baz) {
         this.bar = bar;
         this.baz = baz;

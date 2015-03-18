@@ -1,5 +1,6 @@
 package io.sphere.sdk.customers;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Base;
@@ -31,6 +32,7 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     private final Optional<String> vatId;
     private final Optional<LocalDate> dateOfBirth;
 
+    @JsonCreator
     public CustomerImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final Optional<String> customerNumber, final String email, final String firstName, final String lastName, final String password, final Optional<String> middleName, final Optional<String> title, final List<Address> addresses, final Optional<String> defaultShippingAddressId, final Optional<String> defaultBillingAddressId, final boolean isEmailVerified, final Optional<String> externalId, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<String> companyName,  final Optional<String> vatId, final Optional<LocalDate> dateOfBirth) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerNumber = customerNumber;
