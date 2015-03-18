@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.products.AttributeContainer;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 
@@ -167,6 +168,15 @@ public final class AttributeAccess<T> extends Base {
         return AttributeGetterSetter.of(name, attributeMapper);
     }
 
+    public static AttributeAccess<AttributeContainer> ofNested() {
+        return new AttributeAccess<>(new NestedAttributeMapperImpl(),
+                attributeDefinition -> attributeDefinition.getAttributeType() instanceof NestedType);
+    }
+
+    public static AttributeAccess<Set<AttributeContainer>> ofNestedSet() {
+        return ofSet(NestedType.class, new NestedSetAttributeMapperImpl());
+    }
+
     public <M> AttributeGetter<M, T> getter(final String name) {
         return this.<M>ofName(name);
     }
@@ -210,7 +220,10 @@ public final class AttributeAccess<T> extends Base {
     }
 
     private static <T> AttributeAccess<Set<T>> ofSet(final Class<? extends AttributeType> typeClass, final TypeReference<Set<T>> typeReference) {
-        final AttributeMapper<Set<T>> mapper = AttributeMapper.of(typeReference);
+        return ofSet(typeClass, AttributeMapper.of(typeReference));
+    }
+
+    private static <T> AttributeAccess<Set<T>> ofSet(final Class<? extends AttributeType> typeClass, final AttributeMapper<Set<T>> mapper) {
         return new AttributeAccess<>(mapper, attributeDefinition -> {
             if (attributeDefinition.getAttributeType() instanceof SetType) {
                 final SetType attributeType = (SetType) attributeDefinition.getAttributeType();

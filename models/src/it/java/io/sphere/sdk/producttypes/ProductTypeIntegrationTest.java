@@ -24,6 +24,7 @@ import java.util.*;
 import java.util.function.*;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
+import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Arrays.asList;
@@ -72,6 +73,29 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     public void booleanAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofBoolean(), AttributeAccess.ofBooleanSet(), asSet(true, false),
                 BooleanType.of(), AttributeDefinitionBuilder.of("boolean-attribute", LABEL, BooleanType.of()).build());
+    }
+
+    @Test
+    public void nestedAttribute() throws Exception {
+        final AttributeGetterSetter<Product, Double> sizeAttr = AttributeAccess.ofDouble().ofName("size-nested");
+        final AttributeGetterSetter<Product, String> brandAttr = AttributeAccess.ofText().ofName("brand-nested");
+
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of("test-sub-attribute", "nested attribute test",
+                asList(
+                        AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
+                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Brand"), TextType.of()).build()));
+
+        withProductType(client(), () -> productTypeDraft, nestedProductType -> {
+            final AttributeContainer adidas = AttributeContainer.of(
+                    asList(Attribute.of(sizeAttr, 12D), Attribute.of(brandAttr, "Adidas")));
+            final AttributeContainer nike = AttributeContainer.of(
+                    asList(Attribute.of(sizeAttr, 11.5D), Attribute.of(brandAttr, "Nike")));
+
+            final AttributeType type = NestedType.of(nestedProductType);
+
+            testSingleAndSet(AttributeAccess.ofNested(), AttributeAccess.ofNestedSet(), asSet(adidas, nike),
+                    type, AttributeDefinitionBuilder.of("nested-attribute", LABEL, type).searchable(false).build());
+        });
     }
 
     @Test
@@ -287,7 +311,6 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             assertThat(receivedType.getReferenceTypeId()).isEqualTo(referenceType.getReferenceTypeId());
         });
     }
-
 
     private <X> void test(final AttributeAccess<X> access, final X exampleValue,
                           final Class<? extends AttributeType> attributeTypeClass,
