@@ -1,6 +1,7 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import java.util.Optional;
@@ -14,7 +15,7 @@ public interface Image {
     public Optional<String> getLabel();
 
     static Image of(final String url, final ImageDimensions dimensions, final Optional<String> label) {
-        return new ImageImpl(url, dimensions, label);
+        return ImageImpl.of(url, dimensions, label);
     }
 
     static Image of(final String url, final ImageDimensions dimensions, final String label) {
@@ -37,5 +38,14 @@ public interface Image {
     @JsonIgnore
     default int getHeight() {
         return getDimensions().getHeight();
+    }
+
+    public static TypeReference<Image> typeReference() {
+        return new TypeReference<Image>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Image>";
+            }
+        };
     }
 }
