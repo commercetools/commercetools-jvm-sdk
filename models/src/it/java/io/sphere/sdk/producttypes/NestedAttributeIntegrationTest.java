@@ -20,25 +20,26 @@ import static java.util.Arrays.asList;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 
 import static java.util.stream.Collectors.toList;
 
 public final class NestedAttributeIntegrationTest extends IntegrationTest {
 
-    interface NutrientInfo {
+    static class NutrientInfo {
         static AttributeGetterSetter<Product, String> quantityContainedUOM = AttributeAccess.ofText().ofName("quantityContainedUOM");
         static AttributeGetterSetter<Product, Double> quantityContained = AttributeAccess.ofDouble().ofName("quantityContained");
         static AttributeGetterSetter<Product, String> measurementPrecision = AttributeAccess.ofText().ofName("measurementPrecision");
         static AttributeGetterSetter<Product, String> nutrientTypeCode = AttributeAccess.ofText().ofName("nutrientTypeCode");
     }
 
-    interface Nutrient {
+    static class Nutrient {
         static AttributeGetterSetter<Product, String> servingSizeUOM = AttributeAccess.ofText().ofName("servingSizeUOM");
         static AttributeGetterSetter<Product, Double> servingSize = AttributeAccess.ofDouble().ofName("servingSize");
         static AttributeGetterSetter<Product, Set<AttributeContainer>> nutrientInformation = AttributeAccess.ofNestedSet().ofName("nutrientInformation");
     }
 
-    interface Banana {
+    static class Banana {
         static AttributeGetterSetter<Product, String> bananaColor = AttributeAccess.ofText().ofName("bananaColor");
         static AttributeGetterSetter<Product, Set<AttributeContainer>> nutrients = AttributeAccess.ofNestedSet().ofName("nutrients");
     }
@@ -136,7 +137,7 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
                     ))
                 ))
             )))
-            .sku(UUID.randomUUID().toString())
+            .sku(randomKey())
             .build();
     }
 
