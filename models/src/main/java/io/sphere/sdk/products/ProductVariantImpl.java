@@ -2,14 +2,11 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.json.JsonException;
-import io.sphere.sdk.models.Base;
 import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeGetter;
 import io.sphere.sdk.attributes.AttributeMapper;
 import io.sphere.sdk.models.Image;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 
 import static java.lang.String.format;

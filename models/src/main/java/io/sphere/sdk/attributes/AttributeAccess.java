@@ -156,7 +156,8 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<Set<Reference<Channel>>> ofChannelReferenceSet() {
-        return ofSet(ReferenceType.ofChannel(), new TypeReference<Set<Reference<Channel>>>() {});
+        return ofSet(ReferenceType.ofChannel(), new TypeReference<Set<Reference<Channel>>>() {
+        });
     }
 
     public <M> AttributeGetterSetter<M, T> getterSetter(final String name) {
