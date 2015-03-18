@@ -124,7 +124,8 @@ extends java.lang.Object</pre>
 
  The following class contains a constructor with all field types and names a parameter for deserialization and getters for serialization.
 
- <div id="io-sphere-sdk-customobjects-demo-Foo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
+ <div id="io-sphere-sdk-customobjects-demo-Foo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -138,6 +139,7 @@ public class Foo extends Base {
     /** this custom object stores also a String*/
     private final String bar;
 
+    @JsonCreator
     public Foo(final String bar, final long baz) {
         this.bar = bar;
         this.baz = baz;
@@ -370,13 +372,15 @@ import java.util.function.Function;
 
  The data model contains the last number and the last SPHERE.IO customer ID (just in there to have more than one field).
 
- <div id="io-sphere-sdk-customobjects-occexample-CustomerNumberCounter%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
+ <div id="io-sphere-sdk-customobjects-occexample-CustomerNumberCounter%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
 </code></pre><pre><code class='java'>public class CustomerNumberCounter extends Base {
     private final long lastUsedNumber;
     private final String customerId;
 
+    @JsonCreator
     public CustomerNumberCounter(final long lastUsedNumber, final String customerId) {
         this.lastUsedNumber = lastUsedNumber;
         this.customerId = customerId;
@@ -453,12 +457,14 @@ try {
  For new fields you can add an <code>Optional</code> so it is obvious to callers that this value can be unset.
  <p>Before adding the field (there are already saved custom objects):</p>
 
- <div id="io-sphere-sdk-customobjects-migrations-version1-Xyz%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
+ <div id="io-sphere-sdk-customobjects-migrations-version1-Xyz%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
 </code></pre><pre><code class='java'>public class Xyz extends Base {
     private final String foo;
 
+    @JsonCreator
     public Xyz(final String foo) {
         this.foo = foo;
     }
@@ -480,7 +486,8 @@ import io.sphere.sdk.models.Base;
 
  <p>After adding the field:</p>
 
- <div id="io-sphere-sdk-customobjects-migrations-version2-Xyz%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
+ <div id="io-sphere-sdk-customobjects-migrations-version2-Xyz%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
 import java.util.Optional;
@@ -488,6 +495,7 @@ import java.util.Optional;
     private final String foo;
     private final Optional&lt;String&gt; bar;
 
+    @JsonCreator
     public Xyz(final String foo, final Optional&lt;String&gt; bar) {
         this.foo = foo;
         this.bar = bar;
@@ -522,7 +530,8 @@ final String bar = xyz.getBar().orElse("default value");
 
  Consider you have a class with a field "foo":
 
- <div id="io-sphere-sdk-customobjects-migrations-version2-Xyz%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
+ <div id="io-sphere-sdk-customobjects-migrations-version2-Xyz%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
 import java.util.Optional;
@@ -530,6 +539,7 @@ import java.util.Optional;
     private final String foo;
     private final Optional&lt;String&gt; bar;
 
+    @JsonCreator
     public Xyz(final String foo, final Optional&lt;String&gt; bar) {
         this.foo = foo;
         this.bar = bar;
@@ -556,13 +566,15 @@ import java.util.Optional;
 
  If you don't want to use it anymore, remove it from the JSON mapping:
 
- <div id="io-sphere-sdk-customobjects-migrations-version3-Xyz%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
+ <div id="io-sphere-sdk-customobjects-migrations-version3-Xyz%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
 import java.util.Optional;
 </code></pre><pre><code class='java'>public class Xyz extends Base {
     private final Optional&lt;String&gt; bar;
 
+    @JsonCreator
     public Xyz(final Optional&lt;String&gt; bar) {
         this.bar = bar;
     }
@@ -588,12 +600,14 @@ import java.util.Optional;
 <h4 id=migrations-moving-data>Moving data</h4>
  Suppose you have this as data model:
 
- <div id="io-sphere-sdk-customobjects-migrations-version1-Uvw%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
+ <div id="io-sphere-sdk-customobjects-migrations-version1-Uvw%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 </code></pre><pre><code class='java'>public class Uvw {
     private final String foo;
     private final String anotherField;
 
+    @JsonCreator
     public Uvw(final String foo, final String anotherField) {
         this.foo = foo;
         this.anotherField = anotherField;
@@ -620,7 +634,8 @@ import io.sphere.sdk.customobjects.CustomObject;
 
  And you want to make foo not a String but an object with members a and b.
 
- <div id="io-sphere-sdk-customobjects-migrations-version2-Uvw%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
+ <div id="io-sphere-sdk-customobjects-migrations-version2-Uvw%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 </code></pre><pre><code class='java'>public class Uvw {
     private final Foo foo;
@@ -652,6 +667,7 @@ import io.sphere.sdk.customobjects.CustomObject;
         private final String a;
         private final String b;
 
+        @JsonCreator
         public Foo(final String a, final String b) {
             this.a = a;
             this.b = b;
