@@ -21,7 +21,10 @@ public class SphereErrorTest {
                 "  } ]\n" +
                 "}";
         final ErrorResponse sphereErrorResponse = JsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
+        System.out.println(sphereErrorResponse);
         final Optional<InvalidJsonInputError> jsonError = sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class);
+
+
         final Optional<String> detailsOption = jsonError.map(concreteError -> concreteError.getDetailedErrorMessage());
         assertThat(detailsOption.get()).isEqualTo("detailed error message");
     }

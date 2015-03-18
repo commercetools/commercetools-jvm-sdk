@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.carts.LineItemLike;
 import io.sphere.sdk.models.Base;
@@ -8,6 +9,7 @@ public class DeliveryItem extends Base {
     private final String id;
     private final long quantity;
 
+    @JsonCreator
     private DeliveryItem(final String id, final long quantity) {
         this.id = id;
         this.quantity = quantity;

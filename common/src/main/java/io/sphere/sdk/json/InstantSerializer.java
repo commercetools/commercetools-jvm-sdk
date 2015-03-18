@@ -9,6 +9,7 @@ import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 
 final class InstantSerializer extends StdScalarSerializer<Instant> {
+    static final long serialVersionUID = 0L;
 
     public InstantSerializer() {
         super(Instant.class);

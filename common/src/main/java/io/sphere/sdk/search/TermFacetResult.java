@@ -1,5 +1,6 @@
 package io.sphere.sdk.search;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 import java.util.List;
@@ -10,6 +11,7 @@ public class TermFacetResult extends Base implements FacetResult {
     private final int other;
     private final List<TermStats> terms;
 
+    @JsonCreator
     private TermFacetResult(final int missing, final int total, final int other, final List<TermStats> terms) {
         this.missing = missing;
         this.total = total;

@@ -1,5 +1,6 @@
 package io.sphere.sdk.client;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.SphereError;
 
 /**
@@ -10,6 +11,7 @@ public class InvalidJsonInputError extends SphereError {
 
     public static final String CODE = "InvalidJsonInput";
 
+    @JsonCreator
     private InvalidJsonInputError(final String message, final String detailedErrorMessage) {
         super(CODE, message);
         this.detailedErrorMessage = detailedErrorMessage;

@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Timestamped;
 
@@ -16,6 +17,7 @@ public class ReturnItem extends Base implements Timestamped {
     private final Instant createdAt;
     private final Instant lastModifiedAt;
 
+    @JsonCreator
     private ReturnItem(final String id, final long quantity, final String lineItemId, final Optional<String> comment, final ReturnShipmentState shipmentState, final ReturnPaymentState paymentState, final Instant createdAt, final Instant lastModifiedAt) {
         this.id = id;
         this.quantity = quantity;

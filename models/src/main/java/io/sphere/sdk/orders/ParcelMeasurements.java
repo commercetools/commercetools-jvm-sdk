@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 public class ParcelMeasurements extends Base {
@@ -8,6 +9,7 @@ public class ParcelMeasurements extends Base {
     private final int widthInMillimeter;
     private final int weightInGram;
 
+    @JsonCreator
     private ParcelMeasurements(final int lengthInMillimeter, final int widthInMillimeter, final int heightInMillimeter, final int weightInGram) {
         this.heightInMillimeter = heightInMillimeter;
         this.lengthInMillimeter = lengthInMillimeter;

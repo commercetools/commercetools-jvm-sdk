@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 import java.time.Instant;
@@ -11,6 +12,7 @@ public class ReturnInfo extends Base {
     private final Optional<String> returnTrackingId;
     private final Optional<Instant> returnDate;
 
+    @JsonCreator
     private ReturnInfo(final List<ReturnItem> items, final Optional<String> returnTrackingId, final Optional<Instant> returnDate) {
         this.items = items;
         this.returnTrackingId = returnTrackingId;

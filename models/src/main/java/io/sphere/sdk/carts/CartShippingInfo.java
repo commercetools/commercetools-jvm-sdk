@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -18,6 +19,7 @@ public class CartShippingInfo extends Base {
     private final Reference<TaxCategory> taxCategory;
     private final Optional<Reference<ShippingMethod>> shippingMethod;
 
+    @JsonCreator
     protected CartShippingInfo(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Optional<Reference<ShippingMethod>> shippingMethod) {
         this.shippingMethodName = shippingMethodName;
         this.price = price;

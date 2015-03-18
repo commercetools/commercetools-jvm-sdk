@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 import java.util.Optional;
@@ -11,6 +12,7 @@ public class TrackingData extends Base {
     private final Optional<String> providerTransaction;
     private final boolean isReturn;
 
+    @JsonCreator
     private TrackingData(final Optional<String> trackingId, final Optional<String> carrier, final Optional<String> provider, final Optional<String> providerTransaction, final boolean isReturn) {
         this.trackingId = trackingId;
         this.carrier = carrier;

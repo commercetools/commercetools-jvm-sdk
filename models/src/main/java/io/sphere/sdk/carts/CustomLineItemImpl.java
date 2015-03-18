@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -19,6 +20,7 @@ final class CustomLineItemImpl implements CustomLineItem {
     private final Reference<TaxCategory> taxCategory;
     private final Optional<TaxRate> taxRate;
 
+    @JsonCreator
     CustomLineItemImpl(final String id, final LocalizedStrings name, final MonetaryAmount money,
                        final String slug, final long quantity, final Set<ItemState> state,
                        final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate) {
