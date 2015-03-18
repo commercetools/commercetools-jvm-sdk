@@ -1,5 +1,6 @@
 package io.sphere.sdk.test;
 
+import com.github.slugify.Slugify;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -104,5 +105,9 @@ public final class SphereTestUtils {
             consumer.accept(x);
             return x;
         };
+    }
+
+    public static String slugify(final String s) {
+        return new Slugify().slugify(s);
     }
 }
