@@ -5,14 +5,15 @@ import io.sphere.sdk.models.Base;
 /** Products can be retrieved using full-text search, filtering, faceting and sorting functionality combined.
 
 
- <p>The {@link io.sphere.sdk.meta.QueryDocumentation Query API} lets you search things for their
- field values but does not provide full-text search for multiple fields.</p>
- <p>The search endpoints provide text analysis, full-text search over multiple fields and faceting.
- They are supposed to be faster than the query endpoints with the price of eventual consistency.
- So for example if you change a product name
- it will take some seconds to propagate this change to the search index.</p>
+ <p>Even though the {@link io.sphere.sdk.meta.QueryDocumentation Query API} lets you query for resources with certain attribute values, its performance is seriously affected when manipulating data (i.e. filtering, sorting) by some attributes, specially by custom attributes. Moreover, some typical operations over a list of resources, such as full-text search, are simply not supported.</p>
 
- <p>The following examples are based on the search for products. The product data defined in the SPHERE.IO platform used for the following code examples are:
+ <p>The Search API is specially designed to support these uses cases where the Query API is not powerful enough, providing not only full-text search, filtering and sorting, but also statistical analysis of the data with facets.</p>
+
+ <p>The search endpoints are supposed to be faster than the query endpoints, but with the price of eventual consistency. In other words, when the name of a product has been changed, it will still take some seconds to propagate this change to the search index.</p>
+
+ <p>Currently only products have a search endpoint and only for {@link io.sphere.sdk.products.ProductProjection}. Therefore, be aware that the class to create a search request for products is called {@link io.sphere.sdk.products.search.ProductProjectionSearch}.</p>
+
+ <p>The following examples in this document are based on the search for products. The product data defined in the SPHERE.IO platform used for the following code examples are:
 
  <table border="1" class="doc-table" summary="table that shows the products used for the code examples">
     <tr>
@@ -49,9 +50,6 @@ import io.sphere.sdk.models.Base;
          <td>42</td>
      </tr>
  </table>
-
- <p>Notice that the result list does NOT contain elements of the type {@link io.sphere.sdk.products.Product}, but elements of the type {@link io.sphere.sdk.products.ProductProjection}. As a result the class to create a search request for products is called {@link io.sphere.sdk.products.search.ProductProjectionSearch} and not {@code ProductSearch}.</p>
-
 
 
 <h3 id=full-text-search>Full Text Search</h3>
