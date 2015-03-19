@@ -99,17 +99,23 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the type of the class where the element should be build</dd>
+</dl>
+<dl>
 <dt>All Superinterfaces:</dt>
 <dd>java.util.function.Supplier&lt;T&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/BooleanAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">BooleanAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/carts/CartBuilder.html" title="class in io.sphere.sdk.carts">CartBuilder</a>, <a href="../../../../io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a>, <a href="../../../../io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a>, <a href="../../../../io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories">CategoryDraftBuilder</a>, <a href="../../../../io/sphere/sdk/channels/ChannelDraftBuilder.html" title="class in io.sphere.sdk.channels">ChannelDraftBuilder</a>, <a href="../../../../io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/DateAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">DateAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/DateTimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">DateTimeAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/EnumAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">EnumAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/utils/ImmutableMapBuilder.html" title="class in io.sphere.sdk.utils">ImmutableMapBuilder</a>, <a href="../../../../io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/LocalizedEnumAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">LocalizedEnumAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/LocalizedStringsAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">LocalizedStringsAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/MoneyAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">MoneyAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/NumberAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">NumberAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductCatalogDataBuilder.html" title="class in io.sphere.sdk.products">ProductCatalogDataBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products">ProductDataBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes">ProductTypeBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductVariantDraftBuilder.html" title="class in io.sphere.sdk.products">ProductVariantDraftBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/ReferenceAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">ReferenceAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/SetAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">SetAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>, <a href="../../../../io/sphere/sdk/taxcategories/TaxCategoryBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxCategoryBuilder</a>, <a href="../../../../io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxRateBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/TextAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">TextAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/TimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">TimeAttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dd>
+<dd><a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a>, <a href="../../../../io/sphere/sdk/attributes/AttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">AttributeDefinitionBuilder</a>, <a href="../../../../io/sphere/sdk/carts/CartBuilder.html" title="class in io.sphere.sdk.carts">CartBuilder</a>, <a href="../../../../io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a>, <a href="../../../../io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a>, <a href="../../../../io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories">CategoryDraftBuilder</a>, <a href="../../../../io/sphere/sdk/channels/ChannelDraftBuilder.html" title="class in io.sphere.sdk.channels">ChannelDraftBuilder</a>, <a href="../../../../io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a>, <a href="../../../../io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a>, <a href="../../../../io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a>, <a href="../../../../io/sphere/sdk/utils/ImmutableMapBuilder.html" title="class in io.sphere.sdk.utils">ImmutableMapBuilder</a>, <a href="../../../../io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a>, <a href="../../../../io/sphere/sdk/orders/LineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">LineItemImportDraftBuilder</a>, <a href="../../../../io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a>, <a href="../../../../io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products">ProductBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductCatalogDataBuilder.html" title="class in io.sphere.sdk.products">ProductCatalogDataBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductDataBuilder.html" title="class in io.sphere.sdk.products">ProductDataBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductDraftBuilder.html" title="class in io.sphere.sdk.products">ProductDraftBuilder</a>, <a href="../../../../io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes">ProductTypeBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a>, <a href="../../../../io/sphere/sdk/products/ProductVariantDraftBuilder.html" title="class in io.sphere.sdk.products">ProductVariantDraftBuilder</a>, <a href="../../../../io/sphere/sdk/orders/ProductVariantImportDraftBuilder.html" title="class in io.sphere.sdk.orders">ProductVariantImportDraftBuilder</a>, <a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>, <a href="../../../../io/sphere/sdk/taxcategories/TaxCategoryBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxCategoryBuilder</a>, <a href="../../../../io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxRateBuilder</a>, <a href="../../../../io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">Builder&lt;T&gt;</span>
 extends java.util.function.Supplier&lt;T&gt;</pre>
+<div class="block">A <a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models"><code>Builder</code></a> is a mutable data container to
+ create an immutable instance of another type.</div>
 </li>
 </ul>
 </div>
@@ -130,11 +136,15 @@ extends java.util.function.Supplier&lt;T&gt;</pre>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Builder.html" title="type parameter in Builder">T</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/Builder.html#build--">build</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/Builder.html#build--">build</a></span>()</code>
+<div class="block">Creates a new instance of T with the values of this builder.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Builder.html" title="type parameter in Builder">T</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/Builder.html#get--">get</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/Builder.html#get--">get</a></span>()</code>
+<div class="block">Alias for <a href="../../../../io/sphere/sdk/models/Builder.html#build--"><code>build()</code></a>.</div>
+</td>
 </tr>
 </table>
 </li>
@@ -158,6 +168,11 @@ extends java.util.function.Supplier&lt;T&gt;</pre>
 <li class="blockList">
 <h4>build</h4>
 <pre><a href="../../../../io/sphere/sdk/models/Builder.html" title="type parameter in Builder">T</a>&nbsp;build()</pre>
+<div class="block">Creates a new instance of T with the values of this builder.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>new instance of T.</dd>
+</dl>
 </li>
 </ul>
 <a name="get--">
@@ -167,9 +182,12 @@ extends java.util.function.Supplier&lt;T&gt;</pre>
 <li class="blockList">
 <h4>get</h4>
 <pre>default&nbsp;<a href="../../../../io/sphere/sdk/models/Builder.html" title="type parameter in Builder">T</a>&nbsp;get()</pre>
+<div class="block">Alias for <a href="../../../../io/sphere/sdk/models/Builder.html#build--"><code>build()</code></a>.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code>get</code>&nbsp;in interface&nbsp;<code>java.util.function.Supplier&lt;<a href="../../../../io/sphere/sdk/models/Builder.html" title="type parameter in Builder">T</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new instance of T.</dd>
 </dl>
 </li>
 </ul>
@@ -242,7 +260,7 @@ extends java.util.function.Supplier&lt;T&gt;</pre>
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-(<span id='custom-javascripts'></span>)
+<span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>

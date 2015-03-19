@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":18,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":18};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -98,9 +98,14 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Superinterfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a></dd>
+</dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">ProductVariant</span></pre>
+<pre>public interface <span class="typeNameLabel">ProductVariant</span>
+extends <a href="../../../../io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a></pre>
 </li>
 </ul>
 </div>
@@ -114,52 +119,41 @@ var activeTableTab = "activeTableTab";
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>&lt;T&gt;&nbsp;java.util.Optional&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getAttribute-io.sphere.sdk.attributes.AttributeGetter-">getAttribute</a></span>(<a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetter</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,T&gt;&nbsp;accessor)</code>
-<div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes"><code>AttributeGetterSetter</code></a> how to implement these.</div>
-</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code>default java.util.Optional&lt;<a href="../../../../io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getAttribute-java.lang.String-">getAttribute</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getAttributes--">getAttributes</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariantAvailability.html" title="interface in io.sphere.sdk.products">ProductVariantAvailability</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getAvailability--">getAvailability</a></span>()</code>
 <div class="block">The availability is set if the variant is tracked by the inventory.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getId--">getId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getImages--">getImages</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getPrices--">getPrices</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getSku--">getSku</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code>default boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#hasAttribute-java.lang.String-">hasAttribute</a></span>(java.lang.String&nbsp;attributeName)</code>&nbsp;</td>
-</tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.products.AttributeContainer">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.products.<a href="../../../../io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a></h3>
+<code><a href="../../../../io/sphere/sdk/products/AttributeContainer.html#getAttribute-io.sphere.sdk.attributes.AttributeGetter-">getAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#getAttribute-java.lang.String-">getAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#getAttributes--">getAttributes</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#hasAttribute-io.sphere.sdk.attributes.AttributeGetter-">hasAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#hasAttribute-java.lang.String-">hasAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#of-java.util.List-">of</a></code></li>
+</ul>
 </li>
 </ul>
 </li>
@@ -201,53 +195,6 @@ var activeTableTab = "activeTableTab";
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;&nbsp;getPrices()</pre>
 </li>
 </ul>
-<a name="getAttributes--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getAttributes</h4>
-<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a>&gt;&nbsp;getAttributes()</pre>
-</li>
-</ul>
-<a name="getAttribute-io.sphere.sdk.attributes.AttributeGetter-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getAttribute</h4>
-<pre>&lt;T&gt;&nbsp;java.util.Optional&lt;T&gt;&nbsp;getAttribute(<a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetter</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>,T&gt;&nbsp;accessor)</pre>
-<div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes"><code>AttributeGetterSetter</code></a> how to implement these.</div>
-<dl>
-<dt><span class="paramLabel">Type Parameters:</span></dt>
-<dd><code>T</code> - the underlying type of the attribute</dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>accessor</code> - declaration of the name and type of the attribute</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the value of the attribute, or Optional.empty if absent</dd>
-<dt><span class="throwsLabel">Throws:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/json/JsonException.html" title="class in io.sphere.sdk.json">JsonException</a></code> - if the type of attribute cannot be parsed</dd>
-</dl>
-</li>
-</ul>
-<a name="hasAttribute-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>hasAttribute</h4>
-<pre>default&nbsp;boolean&nbsp;hasAttribute(java.lang.String&nbsp;attributeName)</pre>
-</li>
-</ul>
-<a name="getAttribute-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getAttribute</h4>
-<pre>default&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a>&gt;&nbsp;getAttribute(java.lang.String&nbsp;attributeName)</pre>
-</li>
-</ul>
 <a name="getImages--">
 <!--   -->
 </a>
@@ -264,7 +211,8 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>getAvailability</h4>
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariantAvailability.html" title="interface in io.sphere.sdk.products">ProductVariantAvailability</a>&gt;&nbsp;getAvailability()</pre>
-<div class="block">The availability is set if the variant is tracked by the inventory. The field might not contain the latest inventory state (it is eventually consistent) and can be used as an optimization to reduce calls to the inventory service.</div>
+<div class="block">The availability is set if the variant is tracked by the inventory. The field might not contain the latest
+ inventory state (it is eventually consistent) and can be used as an optimization to reduce calls to the inventory service.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>availability</dd>
@@ -340,7 +288,7 @@ var activeTableTab = "activeTableTab";
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-(<span id='custom-javascripts'></span>)
+<span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>

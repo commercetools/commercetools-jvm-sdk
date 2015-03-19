@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -125,37 +125,38 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getId--">getId</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>javax.money.MonetaryAmount</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getMoney--">getMoney</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>long</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getQuantity--">getQuantity</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a>&gt;</code></td>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>java.util.Set&lt;<a href="../../../../io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getState--">getState</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getTaxCategory--">getTaxCategory</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getTaxRate--">getTaxRate</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.carts.LineItemLike">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.carts.<a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></h3>
-<code><a href="../../../../io/sphere/sdk/carts/LineItemLike.html#getId--">getId</a>, <a href="../../../../io/sphere/sdk/carts/LineItemLike.html#getQuantity--">getQuantity</a></code></li>
-</ul>
 </li>
 </ul>
 </li>
@@ -203,7 +204,7 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <ul class="blockList">
 <li class="blockList">
 <h4>getState</h4>
-<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a>&gt;&nbsp;getState()</pre>
+<pre>java.util.Set&lt;<a href="../../../../io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a>&gt;&nbsp;getState()</pre>
 </li>
 </ul>
 <a name="getTaxCategory--">
@@ -218,10 +219,36 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <a name="getTaxRate--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getTaxRate</h4>
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&gt;&nbsp;getTaxRate()</pre>
+</li>
+</ul>
+<a name="getId--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getId</h4>
+<pre>java.lang.String&nbsp;getId()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/carts/LineItemLike.html#getId--">getId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getQuantity--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getQuantity</h4>
+<pre>long&nbsp;getQuantity()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/carts/LineItemLike.html#getQuantity--">getQuantity</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></code></dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -293,7 +320,7 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-(<span id='custom-javascripts'></span>)
+<span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>

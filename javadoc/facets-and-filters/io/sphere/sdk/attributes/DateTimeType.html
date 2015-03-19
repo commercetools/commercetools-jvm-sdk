@@ -18,6 +18,12 @@
     catch(err) {
     }
 //-->
+var methods = {"i0":9};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
+var altColor = "altColor";
+var rowColor = "rowColor";
+var tableTab = "tableTab";
+var activeTableTab = "activeTableTab";
 </script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -42,7 +48,7 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/attributes/DateTimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/attributes/BooleanType.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/attributes/DateType.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -68,15 +74,15 @@
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.io.sphere.sdk.models.Base">Method</a></li>
+<li><a href="#fields.inherited.from.class.io.sphere.sdk.models.Base">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.top">
@@ -124,21 +130,19 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<!-- =========== FIELD SUMMARY =========== -->
 <ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
+<li class="blockList"><a name="field.summary">
 <!--   -->
 </a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/DateTimeType.html#DateTimeType--">DateTimeType</a></span>()</code>&nbsp;</td>
-</tr>
-</table>
+<h3>Field Summary</h3>
+<ul class="blockList">
+<li class="blockList"><a name="fields.inherited.from.class.io.sphere.sdk.models.Base">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Base.html#TO_STRING_STYLE">TO_STRING_STYLE</a></code></li>
+</ul>
 </li>
 </ul>
 <!-- ========== METHOD SUMMARY =========== -->
@@ -147,6 +151,17 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <!--   -->
 </a>
 <h3>Method Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/DateTimeType.html" title="class in io.sphere.sdk.attributes">DateTimeType</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/DateTimeType.html#of--">of</a></span>()</code>&nbsp;</td>
+</tr>
+</table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
@@ -169,19 +184,19 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
+<li class="blockList"><a name="method.detail">
 <!--   -->
 </a>
-<h3>Constructor Detail</h3>
-<a name="DateTimeType--">
+<h3>Method Detail</h3>
+<a name="of--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>DateTimeType</h4>
-<pre>public&nbsp;DateTimeType()</pre>
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/attributes/DateTimeType.html" title="class in io.sphere.sdk.attributes">DateTimeType</a>&nbsp;of()</pre>
 </li>
 </ul>
 </li>
@@ -211,7 +226,7 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/attributes/DateTimeAttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/attributes/BooleanType.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/attributes/DateType.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -237,15 +252,15 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.io.sphere.sdk.models.Base">Method</a></li>
+<li><a href="#fields.inherited.from.class.io.sphere.sdk.models.Base">Field</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.bottom">
@@ -253,7 +268,7 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeTypeBase.html" ti
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-(<span id='custom-javascripts'></span>)
+<span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>

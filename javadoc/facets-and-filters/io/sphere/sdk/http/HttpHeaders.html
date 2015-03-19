@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":9,"i3":9,"i4":10,"i5":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":9,"i5":9,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -142,6 +142,13 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpHeaders.html#CONTENT_TYPE">CONTENT_TYPE</a></span></code>&nbsp;</td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="fields.inherited.from.class.io.sphere.sdk.models.Base">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Base.html#TO_STRING_STYLE">TO_STRING_STYLE</a></code></li>
+</ul>
 </li>
 </ul>
 <!-- ========== METHOD SUMMARY =========== -->
@@ -158,27 +165,39 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpHeaders.html#getFlatHeader-java.lang.String-">getFlatHeader</a></span>(java.lang.String&nbsp;key)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpHeaders.html#getFlatHeader-java.lang.String-">getFlatHeader</a></span>(java.lang.String&nbsp;key)</code>
+<div class="block">Finds the first header value for a certain key.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.Map&lt;java.lang.String,java.lang.String&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpHeaders.html#getHeadersAsMap--">getHeadersAsMap</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>java.util.List&lt;java.lang.String&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpHeaders.html#getHeader-java.lang.String-">getHeader</a></span>(java.lang.String&nbsp;key)</code>
+<div class="block">Gets the header as list since they can occur multiple times.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpHeaders.html#getHeadersAsMap--">getHeadersAsMap</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpHeaders.html#of--">of</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpHeaders.html#of-java.util.Map-">of</a></span>(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;headers)</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpHeaders.html#of-java.lang.String-java.lang.String-">of</a></span>(java.lang.String&nbsp;key,
   java.lang.String&nbsp;value)</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpHeaders.html#plus-java.lang.String-java.lang.String-">plus</a></span>(java.lang.String&nbsp;key,
     java.lang.String&nbsp;value)</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/http/HttpHeaders.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
@@ -245,6 +264,15 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="of-java.util.Map-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a>&nbsp;of(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;headers)</pre>
+</li>
+</ul>
 <a name="of-java.lang.String-java.lang.String-">
 <!--   -->
 </a>
@@ -264,6 +292,22 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a>&nbsp;of()</pre>
 </li>
 </ul>
+<a name="getHeader-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getHeader</h4>
+<pre>public&nbsp;java.util.List&lt;java.lang.String&gt;&nbsp;getHeader(java.lang.String&nbsp;key)</pre>
+<div class="block">Gets the header as list since they can occur multiple times. If it does exist, the list is empty.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>key</code> - the key of the header to find</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>empty or filled list of header values</dd>
+</dl>
+</li>
+</ul>
 <a name="getFlatHeader-java.lang.String-">
 <!--   -->
 </a>
@@ -271,6 +315,13 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li class="blockList">
 <h4>getFlatHeader</h4>
 <pre>public&nbsp;java.util.Optional&lt;java.lang.String&gt;&nbsp;getFlatHeader(java.lang.String&nbsp;key)</pre>
+<div class="block">Finds the first header value for a certain key.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>key</code> - the key of the header to find</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the header value as optional</dd>
+</dl>
 </li>
 </ul>
 <a name="getHeadersAsMap--">
@@ -279,7 +330,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>getHeadersAsMap</h4>
-<pre>public&nbsp;java.util.Map&lt;java.lang.String,java.lang.String&gt;&nbsp;getHeadersAsMap()</pre>
+<pre>public&nbsp;java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.String&gt;&gt;&nbsp;getHeadersAsMap()</pre>
 </li>
 </ul>
 <a name="plus-java.lang.String-java.lang.String-">
@@ -374,7 +425,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
 <p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
-(<span id='custom-javascripts'></span>)
+<span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
 </body>
