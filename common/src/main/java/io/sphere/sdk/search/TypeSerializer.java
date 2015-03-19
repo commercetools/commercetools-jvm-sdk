@@ -80,7 +80,7 @@ public class TypeSerializer<T> {
      * Converts the given money currency into the accepted format.
      */
     public static TypeSerializer<CurrencyUnit> ofCurrency() {
-        return new TypeSerializer<>(v -> withQuotes(v.getCurrencyCode().toLowerCase()));
+        return new TypeSerializer<>(v -> withQuotes(v.getCurrencyCode().toUpperCase()));
     }
 
     /**

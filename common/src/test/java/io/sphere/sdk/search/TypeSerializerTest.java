@@ -68,8 +68,8 @@ public class TypeSerializerTest {
     @Test
     public void serializesCurrency() throws Exception {
         Function<CurrencyUnit, String> serializer = ofCurrency().serializer();
-        assertThat(serializer.apply(currency("EUR"))).isEqualTo("\"eur\"");
-        assertThat(serializer.apply(currency("USD"))).isEqualTo("\"usd\"");
+        assertThat(serializer.apply(currency("EUR"))).isEqualTo("\"EUR\"");
+        assertThat(serializer.apply(currency("USD"))).isEqualTo("\"USD\"");
     }
 
     @Test

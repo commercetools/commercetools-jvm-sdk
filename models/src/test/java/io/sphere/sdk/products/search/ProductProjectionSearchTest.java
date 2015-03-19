@@ -63,7 +63,7 @@ public class ProductProjectionSearchTest {
     @Test
     public void canAccessPriceCurrency() throws Exception {
         assertThat(MODEL.variants().price().currency().facet().all().toSphereFacet()).isEqualTo("variants.price.currencyCode");
-        assertThat(MODEL.variants().price().currency().filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.price.currencyCode:\"eur\"");
+        assertThat(MODEL.variants().price().currency().filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.price.currencyCode:\"EUR\"");
         assertThat(MODEL.variants().price().currency().sort(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("variants.price.currencyCode asc");
     }
 
@@ -143,7 +143,7 @@ public class ProductProjectionSearchTest {
     public void canAccessCurrencyCustomAttributes() throws Exception {
         final String attrName = "originalPrice";
         assertThat(attributeModel().ofMoney(attrName).currency().facet().all().toSphereFacet()).isEqualTo("variants.attributes.originalPrice.currencyCode");
-        assertThat(attributeModel().ofMoney(attrName).currency().filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.currencyCode:\"eur\"");
+        assertThat(attributeModel().ofMoney(attrName).currency().filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.currencyCode:\"EUR\"");
         assertThat(attributeModel().ofMoney(attrName).currency().sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.originalPrice.currencyCode asc.max");
     }
 
