@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":9,"i9":9};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/RangeStats.html" target="_top">Frames</a></li>
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.search</div>
-<h2 title="Class RangeStats" class="title">Class RangeStats</h2>
+<h2 title="Class RangeStats" class="title">Class RangeStats&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -102,7 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.search.RangeStats</li>
+<li>io.sphere.sdk.search.RangeStats&lt;T&gt;</li>
 </ul>
 </li>
 </ul>
@@ -113,7 +113,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">RangeStats</span>
+<pre>public class <span class="typeNameLabel">RangeStats&lt;T&gt;</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
 </li>
 </ul>
@@ -155,65 +155,49 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.math.BigDecimal</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#getFrom--">getFrom</a></span>()</code>
+<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#getLowerEndpoint--">getLowerEndpoint</a></span>()</code>
 <div class="block">Lower endpoint of the range.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.math.BigDecimal</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#getMax--">getMax</a></span>()</code>
 <div class="block">Maximum value contained within the range.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.math.BigDecimal</code></td>
+<td class="colFirst"><code>double</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#getMean--">getMean</a></span>()</code>
 <div class="block">Arithmetic mean of the values contained within the range.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>java.math.BigDecimal</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#getMin--">getMin</a></span>()</code>
 <div class="block">Minimum value contained within the range.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.math.BigDecimal</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#getSum--">getSum</a></span>()</code>
 <div class="block">Sum of the values contained within the range.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code>java.math.BigDecimal</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#getTo--">getTo</a></span>()</code>
+<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#getUpperEndpoint--">getUpperEndpoint</a></span>()</code>
 <div class="block">Upper endpoint of the range.</div>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code>long</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#getTotalCount--">getTotalCount</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#of-java.math.BigDecimal-java.math.BigDecimal-long-long-java.math.BigDecimal-java.math.BigDecimal-java.math.BigDecimal-java.math.BigDecimal-">of</a></span>(java.math.BigDecimal&nbsp;from,
-  java.math.BigDecimal&nbsp;to,
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#of-java.util.Optional-java.util.Optional-long-T-T-T-double-">of</a></span>(java.util.Optional&lt;T&gt;&nbsp;from,
+  java.util.Optional&lt;T&gt;&nbsp;to,
   long&nbsp;count,
-  long&nbsp;totalCount,
-  java.math.BigDecimal&nbsp;sum,
-  java.math.BigDecimal&nbsp;min,
-  java.math.BigDecimal&nbsp;max,
-  java.math.BigDecimal&nbsp;mean)</code>&nbsp;</td>
-</tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeStats.html#of-int-int-long-long-int-int-int-double-">of</a></span>(int&nbsp;from,
-  int&nbsp;to,
-  long&nbsp;count,
-  long&nbsp;totalCount,
-  int&nbsp;sum,
-  int&nbsp;min,
-  int&nbsp;max,
+  T&nbsp;min,
+  T&nbsp;max,
+  T&nbsp;sum,
   double&nbsp;mean)</code>&nbsp;</td>
 </tr>
 </table>
@@ -245,31 +229,31 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="getFrom--">
+<a name="getLowerEndpoint--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getFrom</h4>
-<pre>public&nbsp;java.math.BigDecimal&nbsp;getFrom()</pre>
+<h4>getLowerEndpoint</h4>
+<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a>&gt;&nbsp;getLowerEndpoint()</pre>
 <div class="block">Lower endpoint of the range.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the lower endpoint.</dd>
+<dd>the lower endpoint, or absent if no lower bound defined.</dd>
 </dl>
 </li>
 </ul>
-<a name="getTo--">
+<a name="getUpperEndpoint--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getTo</h4>
-<pre>public&nbsp;java.math.BigDecimal&nbsp;getTo()</pre>
+<h4>getUpperEndpoint</h4>
+<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a>&gt;&nbsp;getUpperEndpoint()</pre>
 <div class="block">Upper endpoint of the range.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the upper endpoint.</dd>
+<dd>the upper endpoint, or absent if no upper bound defined.</dd>
 </dl>
 </li>
 </ul>
@@ -287,22 +271,13 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </dl>
 </li>
 </ul>
-<a name="getTotalCount--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getTotalCount</h4>
-<pre>public&nbsp;long&nbsp;getTotalCount()</pre>
-</li>
-</ul>
 <a name="getSum--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getSum</h4>
-<pre>public&nbsp;java.math.BigDecimal&nbsp;getSum()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a>&nbsp;getSum()</pre>
 <div class="block">Sum of the values contained within the range.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -316,7 +291,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>getMin</h4>
-<pre>public&nbsp;java.math.BigDecimal&nbsp;getMin()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a>&nbsp;getMin()</pre>
 <div class="block">Minimum value contained within the range.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -330,7 +305,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>getMax</h4>
-<pre>public&nbsp;java.math.BigDecimal&nbsp;getMax()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a>&nbsp;getMax()</pre>
 <div class="block">Maximum value contained within the range.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -344,7 +319,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>getMean</h4>
-<pre>public&nbsp;java.math.BigDecimal&nbsp;getMean()</pre>
+<pre>public&nbsp;double&nbsp;getMean()</pre>
 <div class="block">Arithmetic mean of the values contained within the range.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -352,36 +327,21 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </dl>
 </li>
 </ul>
-<a name="of-java.math.BigDecimal-java.math.BigDecimal-long-long-java.math.BigDecimal-java.math.BigDecimal-java.math.BigDecimal-java.math.BigDecimal-">
+<a name="of-java.util.Optional-java.util.Optional-long-java.lang.Object-java.lang.Object-java.lang.Object-double-">
 <!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a>&nbsp;of(java.math.BigDecimal&nbsp;from,
-                            java.math.BigDecimal&nbsp;to,
-                            long&nbsp;count,
-                            long&nbsp;totalCount,
-                            java.math.BigDecimal&nbsp;sum,
-                            java.math.BigDecimal&nbsp;min,
-                            java.math.BigDecimal&nbsp;max,
-                            java.math.BigDecimal&nbsp;mean)</pre>
-</li>
-</ul>
-<a name="of-int-int-long-long-int-int-int-double-">
+</a><a name="of-java.util.Optional-java.util.Optional-long-T-T-T-double-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a>&nbsp;of(int&nbsp;from,
-                            int&nbsp;to,
-                            long&nbsp;count,
-                            long&nbsp;totalCount,
-                            int&nbsp;sum,
-                            int&nbsp;min,
-                            int&nbsp;max,
-                            double&nbsp;mean)</pre>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a>&lt;T&gt;&nbsp;of(java.util.Optional&lt;T&gt;&nbsp;from,
+                                   java.util.Optional&lt;T&gt;&nbsp;to,
+                                   long&nbsp;count,
+                                   T&nbsp;min,
+                                   T&nbsp;max,
+                                   T&nbsp;sum,
+                                   double&nbsp;mean)</pre>
 </li>
 </ul>
 </li>
@@ -412,7 +372,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/RangeStats.html" target="_top">Frames</a></li>
