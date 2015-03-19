@@ -15,7 +15,7 @@ public class RangeStats<T> extends Base {
     private final T sum;
     private final T mean;
 
-    @JsonCreator
+    @JsonIgnore
     private RangeStats(final Optional<T> lowerEndpoint, final Optional<T> upperEndpoint, final long count,
                        final T min, final T max, final T sum, final T mean) {
         this.lowerEndpoint = lowerEndpoint;

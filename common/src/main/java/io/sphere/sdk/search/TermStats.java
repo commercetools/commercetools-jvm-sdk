@@ -8,7 +8,7 @@ public class TermStats<T> extends Base {
     private final long count;
 
     @JsonCreator
-    private TermStats(final String term, final long count) {
+    private TermStats(final T term, final long count) {
         this.term = term;
         this.count = count;
     }

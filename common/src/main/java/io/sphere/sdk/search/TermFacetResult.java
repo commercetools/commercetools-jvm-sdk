@@ -12,7 +12,7 @@ public class TermFacetResult<T> extends Base implements FacetResult {
     private final List<TermStats<T>> terms;
 
     @JsonCreator
-    private TermFacetResult(final int missing, final int total, final int other, final List<TermStats<T>> terms) {
+    private TermFacetResult(final long missing, final long total, final long other, final List<TermStats<T>> terms) {
         this.missing = missing;
         this.total = total;
         this.other = other;
