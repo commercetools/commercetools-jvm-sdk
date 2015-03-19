@@ -3,7 +3,7 @@ package io.sphere.sdk.categories;
 import java.util.Optional;
 
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
-import io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand;
+import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeName;
 import io.sphere.sdk.categories.queries.CategoryQuery;
@@ -33,7 +33,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Override
     protected SphereRequest<Category> deleteCommand(final Category item) {
-        return CategoryDeleteByIdCommand.of(item);
+        return CategoryDeleteCommand.of(item);
     }
 
     @Override
@@ -251,7 +251,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         withCategory(client(), CategoryDraftBuilder.of(en("1"), en("1")).description(Optional.empty()), c1 -> {
             withCategory(client(), CategoryDraftBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
                 withCategory(client(), CategoryDraftBuilder.of(en("10"), en("10")), c10 -> {
-                    final Query<Category> query = CategoryQuery.of().withPredicate(predicate);
+                    final Query<Category> query = CategoryQuery.of().withPredicate(predicate).withSort(CategoryQuery.model().createdAt().sort(SortDirection.DESC));
                     final List<Category> results = execute(query).getResults();
                     assertions.accept(results);
                 });

@@ -1,24 +1,19 @@
 package io.sphere.sdk.client;
 
-public class NotFoundException extends SphereClientException {
-    private static final long serialVersionUID = 1L;
+/**
+ *
+ * Known causes:
+ *
+ * <ul>
+ *     <li>Updating a object which does not exist (anymore)</li>
+ * </ul>
+ *
+ *
+ */
+public class NotFoundException extends ClientErrorException {
+    private static final long serialVersionUID = 0L;
 
     public NotFoundException() {
-    }
-
-    public NotFoundException(String message) {
-        super(message);
-    }
-
-    public NotFoundException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
-    public NotFoundException(Throwable cause) {
-        super(cause);
-    }
-
-    public NotFoundException(Object o) {
-        this(o.toString());
+        super(404);
     }
 }

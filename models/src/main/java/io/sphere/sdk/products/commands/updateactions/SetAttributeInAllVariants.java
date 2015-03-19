@@ -61,6 +61,8 @@ public class SetAttributeInAllVariants extends StageableProductUpdateAction {
      *
      * @param attributeSetter object containing the name of the attribute
      * @param productUpdateScope the scope where the attribute should be updated
+     * @param <M> context of the {@link io.sphere.sdk.attributes.AttributeSetter}
+     * @param <T> type of the attribute
      * @return update action
      */
     public static <M, T> SetAttributeInAllVariants ofUnsetAttribute(final AttributeSetter<M, T> attributeSetter, final ProductUpdateScope productUpdateScope) {
@@ -84,6 +86,8 @@ public class SetAttributeInAllVariants extends StageableProductUpdateAction {
      * @param setter the serializer of the attribute
      * @param value the value to set
      * @param productUpdateScope the scope where the attribute should be updated
+     * @param <M> context of the {@link io.sphere.sdk.attributes.AttributeSetter}
+     * @param <T> type of the attribute
      * @return update action
      */
     public static <M, T> SetAttributeInAllVariants of(final AttributeSetter<M, T> setter, final T value, final ProductUpdateScope productUpdateScope) {

@@ -1,13 +1,13 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.MetaProductType;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeDefinition;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
-import io.sphere.sdk.attributes.AttributeMappingException;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 import org.junit.Test;
 
 import java.util.*;
@@ -49,7 +49,7 @@ public class ProductAttributeAccessTest {
         assertThat(variant.getAttribute(notPresentAttributeGetterSetter)).isAbsent();
     }
 
-    @Test(expected = AttributeMappingException.class)
+    @Test(expected = JsonException.class)
     public void wrongAttributeType() throws Exception {
         variant.getAttribute(wrongTypeAttributeGetterSetter);
     }

@@ -2,11 +2,11 @@ package io.sphere.sdk.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.annotations.Internal;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpRequest;
-import io.sphere.sdk.http.JsonEndpoint;
+import io.sphere.sdk.client.JsonEndpoint;
 
-import static io.sphere.sdk.utils.JsonUtils.toJson;
+import static io.sphere.sdk.json.JsonUtils.toJson;
 
 /**
  * Base class to implement commands which create an entity in SPHERE.IO.
@@ -26,8 +26,8 @@ public abstract class CreateCommandImpl<T, C> extends CommandImpl<T> implements 
     }
 
     @Override
-    public HttpRequest httpRequest() {
-        return HttpRequest.of(httpMethod(), endpoint.endpoint(), httpBody());
+    public HttpRequestIntent httpRequestIntent() {
+        return HttpRequestIntent.of(httpMethod(), endpoint.endpoint(), httpBody());
     }
 
     protected HttpMethod httpMethod() {

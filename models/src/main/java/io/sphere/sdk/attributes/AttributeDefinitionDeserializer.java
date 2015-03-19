@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.utils.ImmutableMapBuilder;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 
 import java.io.IOException;
 import java.util.Map;
@@ -16,7 +16,7 @@ class AttributeDefinitionDeserializer extends JsonDeserializer<AttributeDefiniti
     private static final Map<String, Class<? extends AttributeDefinition>> nameClassMap =
             ImmutableMapBuilder.<String, Class<? extends AttributeDefinition>>of().
             put("text", TextAttributeDefinition.class).
-            put("ltext", LocalizedTextAttributeDefinition.class).
+            put("ltext", LocalizedStringsAttributeDefinition.class).
             put("enum", EnumAttributeDefinition.class).
             put("lenum", LocalizedEnumAttributeDefinition.class).
             put("number", NumberAttributeDefinition.class).

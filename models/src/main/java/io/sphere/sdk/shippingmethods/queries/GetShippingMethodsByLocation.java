@@ -2,12 +2,12 @@ package io.sphere.sdk.shippingmethods.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.client.SphereRequestBase;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
-import io.sphere.sdk.utils.UrlQueryBuilder;
+import io.sphere.sdk.http.UrlQueryBuilder;
 
 import javax.money.CurrencyUnit;
 import java.util.List;
@@ -44,8 +44,8 @@ public class GetShippingMethodsByLocation extends SphereRequestBase implements S
     }
 
     @Override
-    public HttpRequest httpRequest() {
-        return HttpRequest.of(GET, "/shipping-methods" + queryParameters());
+    public HttpRequestIntent httpRequestIntent() {
+        return HttpRequestIntent.of(GET, "/shipping-methods" + queryParameters());
     }
 
     public static GetShippingMethodsByLocation of(final CountryCode countryCode) {

@@ -13,7 +13,7 @@ import io.sphere.sdk.models.LocalizedStrings;
  *     <li>{@link DateTimeAttributeDefinitionBuilder}</li>
  *     <li>{@link EnumAttributeDefinitionBuilder}</li>
  *     <li>{@link LocalizedEnumAttributeDefinitionBuilder}</li>
- *     <li>{@link LocalizedTextAttributeDefinitionBuilder}</li>
+ *     <li>{@link LocalizedStringsAttributeDefinitionBuilder}</li>
  *     <li>{@link MoneyAttributeDefinitionBuilder}</li>
  *     <li>{@link NumberAttributeDefinitionBuilder}</li>
  *     <li>{@link SetAttributeDefinitionBuilder}</li>

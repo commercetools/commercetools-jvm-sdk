@@ -3,16 +3,16 @@ package io.sphere.sdk.categories;
 import java.util.function.Function;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 
 import java.util.Locale;
 
-import static io.sphere.sdk.utils.UrlUtils.urlEncode;
+import static io.sphere.sdk.http.UrlUtils.urlEncode;
 
 /**
  * This is an example of hard coding queries without using helper classes.
@@ -28,8 +28,8 @@ public class CategoryByNameQuery extends Base implements Query<Category> {
     }
 
     @Override
-    public HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.GET, "/categories" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQuerySortingModel.escape(name) + "\")"));
+    public HttpRequestIntent httpRequestIntent() {
+        return HttpRequestIntent.of(HttpMethod.GET, "/categories" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQuerySortingModel.escape(name) + "\")"));
     }
 
     @Override

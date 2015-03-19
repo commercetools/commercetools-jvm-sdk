@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.commands;
 
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
-import io.sphere.sdk.carts.queries.CartFetchById;
+import io.sphere.sdk.carts.queries.CartByIdFetch;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -10,9 +10,7 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.ChangePrice;
-import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
-import io.sphere.sdk.shippingmethods.queries.GetShippingMethodsByCart;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.OptionalAssert;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -28,7 +26,7 @@ import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
-import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethod;
+import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.*;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
@@ -107,7 +105,9 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(customLineItem.getName()).isEqualTo(name);
             assertThat(customLineItem.getQuantity()).isEqualTo(quantity);
             assertThat(customLineItem.getSlug()).isEqualTo(slug);
-            assertThat(customLineItem.getState()).isEqualTo(asList(ItemState.of(quantity)));
+            final List<ItemState> state = customLineItem.getState();
+            assertThat(state).hasSize(1);
+            assertThat(state.get(0).getQuantity()).isEqualTo(quantity);
             assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
         });
     }
@@ -191,11 +191,14 @@ public class CartUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void setShippingMethod() throws Exception {
-        final Cart cart = createCartWithShippingAddress(client());
-        assertThat(cart.getShippingInfo()).isAbsent();
-        final ShippingMethod shippingMethod = execute(GetShippingMethodsByCart.of(cart)).get(0);
-        final Cart updatedCart = execute(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
-        assertThat(updatedCart.getShippingInfo().get().getShippingMethod()).isPresentAs(shippingMethod.toReference());
+        withShippingMethodForGermany(client(), shippingMethod -> {
+            withCart(client(), createCartWithShippingAddress(client()), cart -> {
+                assertThat(cart.getShippingInfo()).isAbsent();
+                final Cart updatedCart = execute(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
+                assertThat(updatedCart.getShippingInfo().get().getShippingMethod()).isPresentAs(shippingMethod.toReference());
+                return updatedCart;
+            });
+        });
     }
 
     @Test
@@ -227,7 +230,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
                     .containsExactly(newPrice);
 
             final LineItem lineItemOfTheChangedProduct =
-                    execute(CartFetchById.of(cartWithLineItem.getId())).get().getLineItems().get(0);
+                    execute(CartByIdFetch.of(cartWithLineItem.getId())).get().getLineItems().get(0);
             assertThat(lineItemOfTheChangedProduct.getPrice())
                     .overridingErrorMessage("the new product price is not automatically propagated to the line item in the cart")
                     .isEqualTo(oldPrice).isNotEqualTo(newPrice);

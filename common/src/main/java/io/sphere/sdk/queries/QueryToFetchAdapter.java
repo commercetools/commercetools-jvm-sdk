@@ -1,12 +1,14 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 
 import java.util.Optional;
 import java.util.function.Function;
+
+import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
 
 /**
  * Provides a {@link io.sphere.sdk.queries.Fetch} interface implementation for queries which return 0 to 1 results.
@@ -25,7 +27,7 @@ public abstract class QueryToFetchAdapter<T> extends SphereRequestBase implement
     public Function<HttpResponse, Optional<T>> resultMapper() {
         return httpResponse -> {
             final Optional<T> result;
-            if (httpResponse.getStatusCode() == 404) {
+            if (httpResponse.getStatusCode() == NOT_FOUND_404) {
                 result = Optional.empty();
             } else {
                 final PagedQueryResult<T> queryResult = resultMapperOf(pagedQueryResultTypeReference).apply(httpResponse);
@@ -37,11 +39,11 @@ public abstract class QueryToFetchAdapter<T> extends SphereRequestBase implement
 
     @Override
     public boolean canHandleResponse(final HttpResponse response) {
-        return response.hasSuccessResponseCode() || response.getStatusCode() == 404;
+        return response.hasSuccessResponseCode() || response.getStatusCode() == NOT_FOUND_404;
     }
 
     @Override
-    public HttpRequest httpRequest() {
-        return query.httpRequest();
+    public HttpRequestIntent httpRequestIntent() {
+        return query.httpRequestIntent();
     }
 }

@@ -4,13 +4,13 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.*;
+import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 

@@ -14,7 +14,7 @@ import java.time.LocalTime;
 import java.util.Set;
 import java.util.function.Predicate;
 
-import static io.sphere.sdk.models.TypeReferences.*;
+import static io.sphere.sdk.json.TypeReferences.*;
 
 /**
  *
@@ -58,11 +58,11 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public static AttributeAccess<LocalizedStrings> ofLocalizedStrings() {
-        return ofPrimitive(LocalizedStrings.typeReference(), LocalizedTextAttributeDefinition.class);
+        return ofPrimitive(LocalizedStrings.typeReference(), LocalizedStringsAttributeDefinition.class);
     }
 
     public static AttributeAccess<Set<LocalizedStrings>> ofLocalizedStringsSet() {
-        return ofSet(LocalizedTextType.class, new TypeReference<Set<LocalizedStrings>>() {});
+        return ofSet(LocalizedStringsType.class, new TypeReference<Set<LocalizedStrings>>() {});
     }
 
     public static AttributeAccess<PlainEnumValue> ofPlainEnumValue() {

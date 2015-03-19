@@ -22,7 +22,7 @@ import static java.util.stream.Collectors.toList;
  *     <li>Create a category with {@link io.sphere.sdk.categories.commands.CategoryCreateCommand}.</li>
  *     <li>Create a category test double with {@link io.sphere.sdk.categories.CategoryBuilder}.</li>
  *     <li>Update a category with {@link io.sphere.sdk.categories.commands.CategoryUpdateCommand}.</li>
- *     <li>Delete a category with {@link io.sphere.sdk.categories.commands.CategoryDeleteByIdCommand}.</li>
+ *     <li>Delete a category with {@link io.sphere.sdk.categories.commands.CategoryDeleteCommand}.</li>
  * </ul>
  */
 @JsonDeserialize(as=CategoryImpl.class)

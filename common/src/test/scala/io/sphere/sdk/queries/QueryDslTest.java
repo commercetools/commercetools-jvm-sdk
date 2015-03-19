@@ -22,34 +22,34 @@ public class QueryDslTest {
 
     @Test
     public void pathWithoutAnyParameters() throws Exception {
-        assertThat(prototype.httpRequest().getPath()).isEqualTo("/categories?sort=id+asc");
+        assertThat(prototype.httpRequestIntent().getPath()).isEqualTo("/categories?sort=id+asc");
     }
 
     @Test
     public void pathWithQuery() throws Exception {
-        assertThat(prototype.withPredicate(namePredicate).httpRequest().getPath()).isEqualTo(("/categories?where=name%28en%3D%22myCategory%22%29&sort=id+asc"));
+        assertThat(prototype.withPredicate(namePredicate).httpRequestIntent().getPath()).isEqualTo(("/categories?where=name%28en%3D%22myCategory%22%29&sort=id+asc"));
 
     }
 
     @Test
     public void pathWithExplicitEmptySort() throws Exception {
-        assertThat(prototype.withSort(new LinkedList<>()).httpRequest().getPath()).isEqualTo(("/categories"));
+        assertThat(prototype.withSort(new LinkedList<>()).httpRequestIntent().getPath()).isEqualTo(("/categories"));
     }
 
     @Test
     public void pathWithSort() throws Exception {
-        assertThat(prototype.withSort(asList(Sort.<String>of("name.en desc"))).httpRequest().getPath()).isEqualTo(("/categories?sort=name.en+desc"));
+        assertThat(prototype.withSort(asList(Sort.<String>of("name.en desc"))).httpRequestIntent().getPath()).isEqualTo(("/categories?sort=name.en+desc"));
     }
 
     @Test
     public void pathWith2Sorts() throws Exception {
-        assertThat(prototype.withSort(asList(Sort.<String>of("name.en desc"), Sort.<String>of("id asc"))).httpRequest().getPath()).isEqualTo(("/categories?sort=name.en+desc&sort=id+asc"));
+        assertThat(prototype.withSort(asList(Sort.<String>of("name.en desc"), Sort.<String>of("id asc"))).httpRequestIntent().getPath()).isEqualTo(("/categories?sort=name.en+desc&sort=id+asc"));
     }
 
     @Test
     public void pathWithPredicateSortLimitAndOffset() throws Exception {
         final QueryDsl<String> query = prototype.withSort(asList(Sort.<String>of("name.en desc"))).withPredicate(namePredicate).withOffset(400).withLimit(25);
-        assertThat(query.httpRequest().getPath()).isEqualTo(("/categories?where=name%28en%3D%22myCategory%22%29&sort=name.en+desc&limit=25&offset=400"));
+        assertThat(query.httpRequestIntent().getPath()).isEqualTo(("/categories?where=name%28en%3D%22myCategory%22%29&sort=name.en+desc&limit=25&offset=400"));
     }
 
     @Test
@@ -108,20 +108,14 @@ public class QueryDslTest {
         assertThat(other).isNotSameAs(prototype);
     }
 
-    @Test(expected = InvalidQueryOffsetException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void offsetHasAMaximum() throws Exception {
         prototype.withOffset(100001);
     }
 
-    @Test(expected = InvalidQueryOffsetException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void offsetHasAMinimum() throws Exception {
         prototype.withOffset(-1);
-    }
-
-    @Test
-    public void plusSort() throws Exception {
-        assertThat(prototype.withSort(Collections.emptyList()).plusSort(FOO_SORT).sort()).containsExactly(FOO_SORT);
-        assertThat(prototype.withSort(ID_SORT).plusSort(FOO_SORT).sort()).containsExactly(ID_SORT, FOO_SORT);
     }
 
     @Test

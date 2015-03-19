@@ -1,10 +1,8 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.models.DefaultCurrencyUnits;
-import io.sphere.sdk.models.TypeReferences;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.TypeReferences;
+import io.sphere.sdk.json.JsonUtils;
 import io.sphere.sdk.utils.MoneyImpl;
-import org.javamoney.moneta.Money;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;

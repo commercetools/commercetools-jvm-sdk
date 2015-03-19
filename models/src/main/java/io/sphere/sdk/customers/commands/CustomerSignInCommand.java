@@ -1,14 +1,14 @@
 package io.sphere.sdk.customers.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.client.SphereErrorResponse;
-import io.sphere.sdk.client.SphereException;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.CustomerSignInResult;
-import io.sphere.sdk.customers.InvalidCurrentPasswordException;
-import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.models.ErrorResponse;
+import io.sphere.sdk.client.ErrorResponseException;
+import io.sphere.sdk.models.SphereException;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -37,6 +37,14 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
         this.anonymousCartId = anonymousCartId;
     }
 
+    public static CustomerSignInCommand of(final String email, final String password) {
+        return of(email, password, Optional.<String>empty());
+    }
+
+    public static CustomerSignInCommand of(final String email, final String password, final String anonymousCartId) {
+        return of(email, password, Optional.of(anonymousCartId));
+    }
+
     public static CustomerSignInCommand of(final String email, final String password, final Optional<String> anonymousCartId) {
         return new CustomerSignInCommand(email, password, anonymousCartId);
     }
@@ -47,8 +55,8 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
     }
 
     @Override
-    public HttpRequest httpRequest() {
-        return HttpRequest.of(POST, "/login", JsonUtils.toJson(this));
+    public HttpRequestIntent httpRequestIntent() {
+        return HttpRequestIntent.of(POST, "/login", JsonUtils.toJson(this));
     }
 
     @Override
@@ -61,11 +69,11 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
         return httpResponse -> {
             if (httpResponse.getStatusCode() == 400) {
                 //TODO this code needs reworking
-                final SphereErrorResponse sphereErrorResponse = resultMapperOf(SphereErrorResponse.typeReference()).apply(httpResponse);
-                if (sphereErrorResponse.getErrors().stream().anyMatch(error -> error.getCode().equals("InvalidCredentials"))) {
-                    throw new InvalidCurrentPasswordException();
+                final ErrorResponse errorResponse = resultMapperOf(ErrorResponse.typeReference()).apply(httpResponse);
+                if (errorResponse.getErrors().stream().anyMatch(error -> error.getCode().equals("InvalidCredentials"))) {
+                    throw new ErrorResponseException(errorResponse);
                 } else {
-                    throw new SphereException(sphereErrorResponse.toString());
+                    throw new SphereException(errorResponse.toString());
                 }
             } else {
                 return super.resultMapper().apply(httpResponse);

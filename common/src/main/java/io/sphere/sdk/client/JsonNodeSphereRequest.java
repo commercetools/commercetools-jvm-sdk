@@ -3,9 +3,8 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 
 import java.util.Optional;
 import java.util.function.Function;
@@ -28,10 +27,10 @@ public class JsonNodeSphereRequest implements SphereRequest<Optional<JsonNode>> 
     }
 
     @Override
-    public HttpRequest httpRequest() {
+    public HttpRequestIntent httpRequestIntent() {
         return body
-                .map(b -> HttpRequest.of(httpMethod, path, JsonUtils.toJson(b)).httpRequest())
-                .orElseGet(() -> HttpRequest.of(httpMethod, path));
+                .map(b -> HttpRequestIntent.of(httpMethod, path, JsonUtils.toJson(b)))
+                .orElseGet(() -> HttpRequestIntent.of(httpMethod, path));
     }
 
     public static JsonNodeSphereRequest of(final HttpMethod httpMethod, final String path, final JsonNode body) {

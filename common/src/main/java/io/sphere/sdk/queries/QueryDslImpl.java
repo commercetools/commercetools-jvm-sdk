@@ -7,12 +7,13 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.Optional;
 
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.utils.UrlQueryBuilder;
+import io.sphere.sdk.http.UrlQueryBuilder;
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
+import static java.lang.String.format;
 import static java.util.Arrays.asList;
 
 
@@ -35,7 +36,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
                         final List<ExpansionPath<T>> expansionPaths, final List<QueryParameter> additionalQueryParameters) {
         offset.ifPresent(presentOffset -> {
             if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
-                throw new InvalidQueryOffsetException(presentOffset);
+                throw new IllegalArgumentException(format("The offset parameter must be in the range of [%d..%d], but was %d.", MIN_OFFSET, MAX_OFFSET, presentOffset));
             }
         });
         this.predicate = predicate;
@@ -135,9 +136,9 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     }
 
     @Override
-    public final HttpRequest httpRequest() {
+    public final HttpRequestIntent httpRequestIntent() {
         final String additions = queryParametersToString(true);
-        return HttpRequest.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
+        return HttpRequestIntent.of(HttpMethod.GET, endpoint + (additions.length() > 1 ? additions : ""));
     }
 
     @Override
@@ -158,12 +159,12 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
 
     @Override
     public final boolean equals(Object o) {
-        return o != null && (o instanceof Query) && ((Query)o).httpRequest().getPath().equals(httpRequest().getPath());
+        return o != null && (o instanceof Query) && ((Query)o).httpRequestIntent().getPath().equals(httpRequestIntent().getPath());
     }
 
     @Override
     public final int hashCode() {
-        return httpRequest().getPath().hashCode();
+        return httpRequestIntent().getPath().hashCode();
     }
 
     @Override
@@ -180,7 +181,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
                 ", endpoint='" + endpoint + '\'' +
                 ", resultMapper=" + resultMapper +
                 ", readablePath=" + readablePath +
-                ", request=" + httpRequest() +
+                ", request=" + httpRequestIntent() +
                 '}';
     }
 

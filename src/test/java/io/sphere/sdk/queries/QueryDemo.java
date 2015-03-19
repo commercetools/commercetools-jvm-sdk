@@ -15,7 +15,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class QueryDemo {
     private SphereClient client;
     private Query<Category> query;
-    private CompletableFuture<PagedQueryResult<Category>> promise;
+    private CompletableFuture<PagedQueryResult<Category>> future;
     private final Locale locale = Locale.ENGLISH;
 
 
@@ -25,7 +25,7 @@ public class QueryDemo {
     }
 
     private void executeQuery() {
-        CompletableFuture<PagedQueryResult<Category>> promise = client.execute(query);
+        CompletableFuture<PagedQueryResult<Category>> future = client.execute(query);
     }
 
     private void createQueryWithCompanionClass() {

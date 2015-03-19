@@ -1,13 +1,13 @@
 package io.sphere.sdk.customobjects.occexample;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.commands.Command;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
-import io.sphere.sdk.customobjects.commands.CustomObjectDeleteByContainerAndKeyCommand;
+import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
-import io.sphere.sdk.customobjects.queries.CustomObjectFetchByKey;
+import io.sphere.sdk.customobjects.queries.CustomObjectByKeyFetch;
+import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,8 +21,8 @@ public class FlowTest extends IntegrationTest {
 
     @Before
     public void setUp() throws Exception {
-        final CustomObjectFetchByKey<JsonNode> fetchByKey = CustomObjectFetchByKey.of(CONTAINER, KEY);
-        execute(fetchByKey).ifPresent(o -> execute(CustomObjectDeleteByContainerAndKeyCommand.of(o)));
+        final CustomObjectByKeyFetch<JsonNode> fetchByKey = CustomObjectByKeyFetch.of(CONTAINER, KEY);
+        execute(fetchByKey).ifPresent(o -> execute(CustomObjectDeleteCommand.of(o)));
     }
 
     @Test
@@ -32,8 +32,8 @@ public class FlowTest extends IntegrationTest {
     }
 
     private void doAnUpdate() {
-        final CustomObjectFetchByKey<CustomerNumberCounter> fetch =
-                CustomObjectFetchByKey.of(CONTAINER, KEY, CustomerNumberCounter.customObjectTypeReference());
+        final CustomObjectByKeyFetch<CustomerNumberCounter> fetch =
+                CustomObjectByKeyFetch.of(CONTAINER, KEY, CustomerNumberCounter.customObjectTypeReference());
 
         final CustomObject<CustomerNumberCounter> loadedCustomObject = execute(fetch).get();
         final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;

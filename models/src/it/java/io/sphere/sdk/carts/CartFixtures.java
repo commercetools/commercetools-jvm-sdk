@@ -2,6 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
+import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingAddress;
@@ -12,6 +13,7 @@ import io.sphere.sdk.products.Product;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.test.SphereTestUtils.DE;
@@ -45,6 +47,11 @@ public class CartFixtures {
             final Cart cart = createCartWithCountry(client);
             f.accept(cart, product);
         });
+    }
+
+    public static void withCart(final TestClient client, final Cart cart, final Function<Cart, Cart> f) {
+        final Cart updatedCart = f.apply(cart);
+        client.execute(CartDeleteCommand.of(updatedCart));
     }
 
     public static void withFilledCart(final TestClient client, final Consumer<Cart> f) {

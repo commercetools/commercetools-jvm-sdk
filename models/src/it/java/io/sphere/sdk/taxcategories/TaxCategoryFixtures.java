@@ -5,7 +5,7 @@ import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand;
-import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteByIdCommand;
+import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand;
 import io.sphere.sdk.taxcategories.queries.TaxCategoryQuery;
 
 import java.util.List;
@@ -51,9 +51,9 @@ public final class TaxCategoryFixtures {
 
     public static void withTaxCategory(final TestClient client, final TaxCategoryDraft draft, final Consumer<TaxCategory> user) {
         final PagedQueryResult<TaxCategory> results = client.execute(TaxCategoryQuery.of().byName(draft.getName()));
-        results.getResults().forEach(tc -> client.execute(TaxCategoryDeleteByIdCommand.of(tc)));
+        results.getResults().forEach(tc -> client.execute(TaxCategoryDeleteCommand.of(tc)));
         final TaxCategory taxCategory = client.execute(TaxCategoryCreateCommand.of(draft));
         user.accept(taxCategory);
-        client.execute(TaxCategoryDeleteByIdCommand.of(taxCategory));
+        client.execute(TaxCategoryDeleteCommand.of(taxCategory));
     }
 }

@@ -1,11 +1,11 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeGetter;
 import io.sphere.sdk.attributes.AttributeMapper;
-import io.sphere.sdk.attributes.AttributeMappingException;
 import io.sphere.sdk.models.Image;
 
 import java.util.List;
@@ -64,10 +64,14 @@ class ProductVariantImpl extends Base implements ProductVariant {
             final AttributeMapper<T> mapper = accessor.getMapper();
             try {
                 return attribute.getValue(mapper);
-            } catch (final AttributeMappingException e) {
-                throw new AttributeMappingException(format("ProductVariant(id=%s)", id), attributeName, mapper, e.getCause());
+            } catch (final JsonException e) {
+                throw enrich(format("ProductVariant(id=%s)", id), attributeName, mapper, e.getCause());
             }
         });
+    }
+
+    private <T> JsonException enrich(final Object objectWithAttributes, final String attributeName, final AttributeMapper<T> mapper, final Throwable cause) {
+        return new JsonException(format("%s does not contain an attribute '%s' which can be mapped with %s.", objectWithAttributes, attributeName, mapper), cause);
     }
 
     @Override

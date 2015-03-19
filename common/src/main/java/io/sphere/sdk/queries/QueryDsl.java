@@ -25,21 +25,6 @@ public interface QueryDsl<T> extends EntityQuery<T> {
         return withSort(asList(sort));
     }
 
-    /**
-     * Returns a query with the new sort appended to the sort list.
-     *
-     * Be carefully, since some implementations may have a default sort, like for sort by ID and then
-     * an additional sort has no effect for the sort order.
-     *
-     * @param sort sort expression which should be appended.
-     * @return EntityQuery with sort
-     * @see #withSort(java.util.List)
-     * @see #withSort(Sort)
-     */
-    default QueryDsl<T> plusSort(final Sort<T> sort) {
-        return withSort(listOf(sort(), sort));
-    }
-
     QueryDsl<T> withLimit(final long limit);
 
     /**
@@ -47,7 +32,7 @@ public interface QueryDsl<T> extends EntityQuery<T> {
      *
      * @param offset the number of items which should be omitted in the query result.
      * @return a new query
-     * @throws InvalidQueryOffsetException if offset is
+     * @throws java.lang.IllegalArgumentException if offset is
      * not between {@value io.sphere.sdk.queries.Query#MIN_OFFSET} and {@value io.sphere.sdk.queries.Query#MAX_OFFSET}.
      */
     QueryDsl<T> withOffset(final long offset);

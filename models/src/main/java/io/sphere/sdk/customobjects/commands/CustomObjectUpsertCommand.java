@@ -3,7 +3,7 @@ package io.sphere.sdk.customobjects.commands;
 import io.sphere.sdk.commands.CreateCommandImpl;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
-import io.sphere.sdk.http.JsonEndpoint;
+import io.sphere.sdk.client.JsonEndpoint;
 
 /**
  Command for creating or updating a custom object.
