@@ -5,14 +5,14 @@ import io.sphere.sdk.models.Base;
 
 import java.util.List;
 
-public class TermFacetResult extends Base implements FacetResult {
-    private final int missing;
-    private final int total;
-    private final int other;
-    private final List<TermStats> terms;
+public class TermFacetResult<T> extends Base implements FacetResult {
+    private final long missing;
+    private final long total;
+    private final long other;
+    private final List<TermStats<T>> terms;
 
     @JsonCreator
-    private TermFacetResult(final int missing, final int total, final int other, final List<TermStats> terms) {
+    private TermFacetResult(final long missing, final long total, final long other, final List<TermStats<T>> terms) {
         this.missing = missing;
         this.total = total;
         this.other = other;
@@ -25,7 +25,7 @@ public class TermFacetResult extends Base implements FacetResult {
      * it would represent the amount of variants with no color associated.
      * @return amount of resources missing a value for the faceted field.
      */
-    public int getMissing() {
+    public long getMissing() {
         return missing;
     }
 
@@ -33,7 +33,7 @@ public class TermFacetResult extends Base implements FacetResult {
      * The number of resources matching some term in the facet.
      * @return amount of resources that match at least one term in the facet.
      */
-    public int getTotal() {
+    public long getTotal() {
         return total;
     }
 
@@ -41,7 +41,7 @@ public class TermFacetResult extends Base implements FacetResult {
      * The number of resources not included in the returned list of terms.
      * @return amount of resources matching the terms that could not be included in the facet result.
      */
-    public int getOther() {
+    public long getOther() {
         return other;
     }
 
@@ -49,11 +49,11 @@ public class TermFacetResult extends Base implements FacetResult {
      * List of the different terms and amount of associated resources.
      * @return the list of distinct terms along with the number of matching resources.
      */
-    public List<TermStats> getTerms() {
+    public List<TermStats<T>> getTerms() {
         return terms;
     }
 
-    public static TermFacetResult of(final int missing, final int total, final int other, final List<TermStats> terms) {
-        return new TermFacetResult(missing, total, other, terms);
+    public static <T> TermFacetResult<T> of(final long missing, final long total, final long other, final List<TermStats<T>> terms) {
+        return new TermFacetResult<>(missing, total, other, terms);
     }
 }

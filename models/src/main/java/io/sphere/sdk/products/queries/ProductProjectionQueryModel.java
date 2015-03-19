@@ -9,12 +9,12 @@ import java.util.Optional;
 
 public class ProductProjectionQueryModel extends ProductDataQueryModelBase<ProductProjection> {
 
-    static ProductProjectionQueryModel get() {
-        return new ProductProjectionQueryModel(Optional.<QueryModel<ProductProjection>>empty(), Optional.<String>empty());
-    }
-
     private ProductProjectionQueryModel(final Optional<? extends QueryModel<ProductProjection>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
+    }
+
+    static ProductProjectionQueryModel get() {
+        return new ProductProjectionQueryModel(Optional.<QueryModel<ProductProjection>>empty(), Optional.<String>empty());
     }
 
     public ReferenceQueryModel<ProductProjection, ProductType> productType() {

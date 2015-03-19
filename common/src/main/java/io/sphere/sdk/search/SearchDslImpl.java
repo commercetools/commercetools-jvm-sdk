@@ -73,7 +73,7 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     @Override
-    public SearchDsl<T> withFilterQueries(List<FilterExpression<T>> filterQueries) {
+    public SearchDsl<T> withFilterQuery(List<FilterExpression<T>> filterQueries) {
         return copyBuilder().filterQueries(filterQueries).build();
     }
 

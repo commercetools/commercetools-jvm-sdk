@@ -1,16 +1,11 @@
 package io.sphere.sdk.search;
 
-import io.sphere.sdk.models.Base;
+interface FacetExpressionBase<T> extends FacetExpression<T> {
 
-abstract class FacetExpressionBase<T> extends Base implements FacetExpression<T> {
-
-    @Override
-    public final boolean equals(Object o) {
-        return o != null && o instanceof FacetExpression && toSphereFacet().equals(((FacetExpression) o).toSphereFacet());
-    }
-
-    @Override
-    public final int hashCode() {
-        return toSphereFacet().hashCode();
-    }
+    /**
+     * Gets the path of the facet result, which is either the alias or the search path if no alias defined.
+     * Example: variants.attributes.color
+     * @return the path to access the facet result.
+     */
+    String resultPath();
 }

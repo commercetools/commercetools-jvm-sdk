@@ -14,6 +14,6 @@ public class LocalizedStringsQuerySortingModel<T> extends QueryModelImpl<T> impl
     }
 
     public static <T> LocalizedStringsQuerySortingModel<T> of(final QueryModel<T> queryModel, final String pathSegment) {
-        return new LocalizedStringsQuerySortingModel<T>(Optional.of(queryModel), Optional.of(pathSegment));
+        return new LocalizedStringsQuerySortingModel<>(Optional.of(queryModel), Optional.of(pathSegment));
     }
 }

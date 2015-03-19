@@ -17,7 +17,7 @@ public class ProductQueryModel extends DefaultModelQueryModelImpl<Product> {
     }
 
     public ProductCatalogDataQueryModel<Product> masterData() {
-        return new ProductCatalogDataQueryModel<Product>(Optional.of(this), Optional.of("masterData"));
+        return new ProductCatalogDataQueryModel<>(Optional.of(this), Optional.of("masterData"));
     }
 
     public ReferenceQueryModel<Product, ProductType> productType() {
