@@ -1,5 +1,6 @@
 package io.sphere.sdk.test;
 
+import com.github.slugify.Slugify;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -7,6 +8,8 @@ import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -31,7 +34,14 @@ public final class SphereTestUtils {
 
     public static final CurrencyUnit EUR = DefaultCurrencyUnits.EUR;
     public static final CurrencyUnit USD = DefaultCurrencyUnits.USD;
+    public static final MonetaryAmount EURO_5 = MoneyImpl.of(5, EUR);
     public static final MonetaryAmount EURO_10 = MoneyImpl.of(10, EUR);
+    public static final MonetaryAmount EURO_20 = MoneyImpl.of(20, EUR);
+    public static final MonetaryAmount EURO_30 = MoneyImpl.of(30, EUR);
+
+    public static final Instant tomorrowInstant() {
+        return Instant.now().plus(1, ChronoUnit.DAYS);
+    }
 
     /**
      * Creates a LocalizedStrings for the {@code Locale.ENGLISH}.
@@ -59,7 +69,7 @@ public final class SphereTestUtils {
     }
 
     public static Address randomAddress() {
-        return AddressBuilder.of(CountryCode.DE).build();
+        return AddressBuilder.of(CountryCode.DE).city(randomString()).build();
     }
 
 
@@ -101,5 +111,9 @@ public final class SphereTestUtils {
             consumer.accept(x);
             return x;
         };
+    }
+
+    public static String slugify(final String s) {
+        return new Slugify().slugify(s);
     }
 }

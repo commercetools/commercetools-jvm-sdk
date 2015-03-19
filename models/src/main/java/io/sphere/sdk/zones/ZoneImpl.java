@@ -1,5 +1,6 @@
 package io.sphere.sdk.zones;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.DefaultModelImpl;
 
 import java.time.Instant;
@@ -11,6 +12,7 @@ final class ZoneImpl extends DefaultModelImpl<Zone> implements Zone {
     private final Optional<String> description;
     private final Set<Location> locations;
 
+    @JsonCreator
     ZoneImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final Optional<String> description, final String name, final Set<Location> locations) {
         super(id, version, createdAt, lastModifiedAt);
         this.description = description;

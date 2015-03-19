@@ -1,5 +1,6 @@
 package io.sphere.sdk.search;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 public class RangeFacetResult<T> extends Base implements FacetResult {
     private final List<RangeStats<T>> ranges;
 
+    @JsonCreator
     private RangeFacetResult(final List<RangeStats<T>> ranges) {
         this.ranges = ranges;
     }

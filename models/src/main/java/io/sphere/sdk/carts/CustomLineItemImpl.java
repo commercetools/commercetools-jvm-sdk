@@ -1,13 +1,14 @@
 package io.sphere.sdk.carts;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 
 import javax.money.MonetaryAmount;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 final class CustomLineItemImpl implements CustomLineItem {
     private final String id;
@@ -15,12 +16,13 @@ final class CustomLineItemImpl implements CustomLineItem {
     private final MonetaryAmount money;
     private final String slug;
     private final long quantity;
-    private final List<ItemState> state;
+    private final Set<ItemState> state;
     private final Reference<TaxCategory> taxCategory;
     private final Optional<TaxRate> taxRate;
 
+    @JsonCreator
     CustomLineItemImpl(final String id, final LocalizedStrings name, final MonetaryAmount money,
-                       final String slug, final long quantity, final List<ItemState> state,
+                       final String slug, final long quantity, final Set<ItemState> state,
                        final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate) {
         this.id = id;
         this.name = name;
@@ -58,7 +60,7 @@ final class CustomLineItemImpl implements CustomLineItem {
     }
 
     @Override
-    public List<ItemState> getState() {
+    public Set<ItemState> getState() {
         return state;
     }
 

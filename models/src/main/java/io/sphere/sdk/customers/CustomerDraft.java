@@ -119,6 +119,6 @@ public class CustomerDraft extends Base {
     @Override
     public final String toString() {
         final CustomerDraft outObject = withPassword("**removed from output**");
-        return ToStringBuilder.reflectionToString(outObject);
+        return ToStringBuilder.reflectionToString(outObject, Base.TO_STRING_STYLE);
     }
 }

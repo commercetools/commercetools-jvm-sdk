@@ -13,7 +13,7 @@ public class ReferenceQueryModel<T, R> extends QueryModelImpl<T> {
 
 
     public Predicate<T> is(Referenceable<R> reference) {
-        return new EqPredicate<>(idSegment(), reference.toReference().getId());
+        return EqPredicate.of(idSegment(), reference.toReference().getId());
     }
 
     public Predicate<T> isAnyOf(final List<? extends Referenceable<R>> elements) {

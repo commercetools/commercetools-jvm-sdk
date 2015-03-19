@@ -3,6 +3,7 @@ package io.sphere.sdk.errors;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
@@ -11,6 +12,8 @@ import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.http.HttpStatusCode;
+import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
@@ -28,6 +31,7 @@ import java.util.function.Supplier;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.http.HttpMethod.POST;
+import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.junit.Assert.fail;
@@ -80,12 +84,20 @@ public class SphereExceptionTest extends IntegrationTest {
 
     @Test
     public void exceptionsGatherContext() throws Exception {
-        try {
-            execute(CategoryUpdateCommand.of(Versioned.of("foo", 1), Collections.<UpdateAction<Category>>emptyList()));
-            fail("should throw exception");
-        } catch (final SphereServiceException e) {
-            assertThat(e.getProjectKey()).isPresentAs(projectKey());
-        }
+        CategoryFixtures.withCategory(client(), category -> {
+            final long wrongVersion = category.getVersion() - 1;
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(Versioned.of(category.getId(), wrongVersion), Collections.<UpdateAction<Category>>emptyList());
+            try {
+                execute(command);
+                fail("should throw exception");
+            } catch (final SphereServiceException e) {
+                assertThat(e.getProjectKey()).isPresentAs(projectKey());
+                assertThat(e.getMessage()).contains(BuildInfo.version()).contains(command.toString());
+                assertThat(e.getJsonBody().get().get("statusCode").asInt())
+                        .overridingErrorMessage("exception contains json body of error response")
+                        .isEqualTo(HttpStatusCode.CONFLICT_409);
+            }
+        });
     }
 
     @Test
@@ -153,7 +165,7 @@ public class SphereExceptionTest extends IntegrationTest {
         return new DummyExceptionTestDsl(responseCode);
     }
 
-    private ExceptionTestDsl executing(final Supplier<SphereRequest<? extends Object>> f) {
+    private ExceptionTestDsl executing(final Supplier<SphereRequest<?>> f) {
         return new ExceptionTestDsl(f);
     }
 
@@ -177,22 +189,22 @@ public class SphereExceptionTest extends IntegrationTest {
     }
 
     private class ExceptionTestDsl {
-        private final Supplier<SphereRequest<? extends Object>> f;
+        private final Supplier<SphereRequest<?>> f;
 
-        public ExceptionTestDsl(final Supplier<SphereRequest<? extends Object>> f) {
+        public ExceptionTestDsl(final Supplier<SphereRequest<?>> f) {
             this.f = f;
         }
 
         public void resultsInA(final Class<? extends Throwable> type) {
             thrown.expect(type);
-            final SphereRequest<? extends Object> testSphereRequest = f.get();
+            final SphereRequest<?> testSphereRequest = f.get();
             execute(testSphereRequest);
         }
 
         public void resultsInA(final Class<? extends ErrorResponseException> type, final Class<? extends SphereError> error) {
             thrown.expect(type);
             thrown.expect(ExceptionCodeMatches.of(error));
-            final SphereRequest<? extends Object> testSphereRequest = f.get();
+            final SphereRequest<?> testSphereRequest = f.get();
             execute(testSphereRequest);
         }
     }

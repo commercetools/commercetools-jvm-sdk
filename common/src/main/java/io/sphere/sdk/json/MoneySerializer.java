@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.math.BigDecimal;
 
 final class MoneySerializer extends StdScalarSerializer<MonetaryAmount> {
+    static final long serialVersionUID = 0L;
+
     MoneySerializer() {
         super(MonetaryAmount.class);
     }

@@ -1,6 +1,5 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.client.BadRequestException;
 import io.sphere.sdk.models.ErrorResponse;
 import io.sphere.sdk.models.SphereError;
 
@@ -27,15 +26,6 @@ public class ErrorResponseException extends BadRequestException implements Error
     @Override
     public int getStatusCode() {
         return statusCode;
-    }
-
-    /**
-     * The message of the first error, for convenience.
-     * @return the first error message
-     */
-    @Override
-    public String getMessage() {
-        return message + " errors: " + errors;
     }
 
     @Override

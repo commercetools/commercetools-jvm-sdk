@@ -9,6 +9,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
 
 import java.util.Locale;
+import java.util.UUID;
 import java.util.function.Supplier;
 
 public class SimpleCottonTShirtProductDraftSupplier implements Supplier<ProductDraft> {
@@ -25,6 +26,7 @@ public class SimpleCottonTShirtProductDraftSupplier implements Supplier<ProductD
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .plusAttribute(Sizes.ATTRIBUTE.valueOf(Sizes.S))
                 .plusAttribute(Colors.ATTRIBUTE.valueOf(Colors.GREEN))
+                .sku(UUID.randomUUID().toString())
                 .build();
         final LocalizedStrings slug = en(new Slugify().slugify(name));
         return ProductDraftBuilder.of(productType, en(name), slug, masterVariant)

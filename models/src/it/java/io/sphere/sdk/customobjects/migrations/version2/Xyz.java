@@ -1,5 +1,6 @@
 package io.sphere.sdk.customobjects.migrations.version2;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
@@ -10,6 +11,7 @@ public class Xyz extends Base {
     private final String foo;
     private final Optional<String> bar;
 
+    @JsonCreator
     public Xyz(final String foo, final Optional<String> bar) {
         this.foo = foo;
         this.bar = bar;

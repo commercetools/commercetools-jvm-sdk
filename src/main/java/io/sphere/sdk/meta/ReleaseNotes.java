@@ -9,6 +9,17 @@ package io.sphere.sdk.meta;
  <li class=fixed-in-release>bugfix, can include a breaking change</li>
  </ul>
 
+ <h3 class=released-version id=v1_0_0_M12>1.0.0-M12</h3>
+ <h4>Product Types</h4>
+ <ul>
+    <li class=change-in-release>The {@link io.sphere.sdk.producttypes.ProductType} creation has been simplified (TextAttributeDefinition, LocalizedStringsAttributeDefinition, ... are just AttributeDefinition), see {@link io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand} how to create them.</li>
+ </ul>
+
+ <h4>Orders</h4>
+ <ul>
+    <li class=new-in-release>Added the {@link io.sphere.sdk.orders.commands.OrderImportCommand}.</li>
+ </ul>
+
  <h3 class=released-version id=v1_0_0_M11>1.0.0-M11</h3>
  <h4>Overall</h4>
  <ul>

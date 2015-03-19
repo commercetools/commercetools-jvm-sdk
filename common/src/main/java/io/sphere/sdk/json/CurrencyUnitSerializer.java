@@ -8,6 +8,8 @@ import javax.money.CurrencyUnit;
 import java.io.IOException;
 
 final class CurrencyUnitSerializer extends StdScalarSerializer<CurrencyUnit> {
+    static final long serialVersionUID = 0L;
+
     CurrencyUnitSerializer() {
         super(CurrencyUnit.class);
     }

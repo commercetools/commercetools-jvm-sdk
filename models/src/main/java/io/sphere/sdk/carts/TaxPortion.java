@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 import javax.money.MonetaryAmount;
@@ -8,6 +9,7 @@ public class TaxPortion extends Base {
     private final double rate;
     private final MonetaryAmount amount;
 
+    @JsonCreator
     private TaxPortion(final double rate, final MonetaryAmount amount) {
         this.rate = rate;
         this.amount = amount;

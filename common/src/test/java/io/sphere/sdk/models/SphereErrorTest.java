@@ -21,8 +21,26 @@ public class SphereErrorTest {
                 "  } ]\n" +
                 "}";
         final ErrorResponse sphereErrorResponse = JsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
+        System.out.println(sphereErrorResponse);
         final Optional<InvalidJsonInputError> jsonError = sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class);
+
+
         final Optional<String> detailsOption = jsonError.map(concreteError -> concreteError.getDetailedErrorMessage());
         assertThat(detailsOption.get()).isEqualTo("detailed error message");
+    }
+
+    @Test
+    public void notMatchingError() throws Exception {
+        final String json = "{\n" +
+                "  \"statusCode\" : 400,\n" +
+                "  \"message\" : \"Message.\",\n" +
+                "  \"errors\" : [ {\n" +
+                "    \"code\" : \"OtherCode\",\n" +
+                "    \"message\" : \"Message.\"" +
+                "  } ]\n" +
+                "}";
+        final ErrorResponse sphereErrorResponse = JsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
+        final Optional<InvalidJsonInputError> jsonError = sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class);
+        assertThat(jsonError.isPresent()).isFalse();
     }
 }

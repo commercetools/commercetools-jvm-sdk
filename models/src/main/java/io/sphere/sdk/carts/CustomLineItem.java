@@ -7,8 +7,8 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 
 import javax.money.MonetaryAmount;
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @JsonDeserialize(as=CustomLineItemImpl.class)
 public interface CustomLineItem extends LineItemLike {
@@ -18,9 +18,15 @@ public interface CustomLineItem extends LineItemLike {
 
     String getSlug();
 
-    List<ItemState> getState();
+    Set<ItemState> getState();
 
     Reference<TaxCategory> getTaxCategory();
 
     Optional<TaxRate> getTaxRate();
+
+    @Override
+    String getId();
+
+    @Override
+    long getQuantity();
 }

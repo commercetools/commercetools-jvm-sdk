@@ -10,6 +10,6 @@ public class CountryQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public Predicate<T> is(final CountryCode countryCode) {
-        return new EqPredicate<>(this, countryCode.getAlpha2());
+        return EqPredicate.of(this, countryCode.getAlpha2());
     }
 }

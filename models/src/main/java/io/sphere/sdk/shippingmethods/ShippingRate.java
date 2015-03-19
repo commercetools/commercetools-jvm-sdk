@@ -1,5 +1,6 @@
 package io.sphere.sdk.shippingmethods;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.models.Base;
 
@@ -12,9 +13,14 @@ public class ShippingRate extends Base {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private final Optional<MonetaryAmount> freeAbove;
 
+    @JsonCreator
     private ShippingRate(final MonetaryAmount price, final Optional<MonetaryAmount> freeAbove) {
         this.price = price;
         this.freeAbove = freeAbove;
+    }
+
+    public static ShippingRate of(final MonetaryAmount price, final MonetaryAmount freeAbove) {
+        return of(price, Optional.of(freeAbove));
     }
 
     public static ShippingRate of(final MonetaryAmount price, final Optional<MonetaryAmount> freeAbove) {

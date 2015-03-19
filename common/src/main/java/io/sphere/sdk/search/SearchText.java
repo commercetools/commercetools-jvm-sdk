@@ -1,8 +1,10 @@
 package io.sphere.sdk.search;
 
+import io.sphere.sdk.models.Base;
+
 import java.util.Locale;
 
-public class SearchText {
+public class SearchText extends Base {
     private final Locale locale;
     private final String text;
 

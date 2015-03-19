@@ -53,10 +53,10 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @BeforeClass
     public static void setupProducts() {
         removeProducts();
-        final AttributeDefinition sizeAttributeDefinition = TextAttributeDefinitionBuilder
-                .of(COLOR, LocalizedStrings.ofEnglishLocale(COLOR), TextInputHint.SINGLE_LINE).isSearchable(true).build();
-        final AttributeDefinition colorAttributeDefinition = NumberAttributeDefinitionBuilder
-                .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE)).isSearchable(true).build();
+        final AttributeDefinition colorAttributeDefinition = AttributeDefinitionBuilder
+                .of(COLOR, LocalizedStrings.ofEnglishLocale(COLOR), TextType.of()).isSearchable(true).build();
+        final AttributeDefinition sizeAttributeDefinition = AttributeDefinitionBuilder
+                .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE), TextType.of()).isSearchable(true).build();
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(TEST_CLASS_NAME, "", asList(colorAttributeDefinition, sizeAttributeDefinition));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);

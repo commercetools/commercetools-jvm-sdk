@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.carts.CartShippingInfo;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
@@ -12,8 +13,9 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderShippingInfo extends CartShippingInfo {
-    final List<Delivery> deliveries;
+    private final List<Delivery> deliveries;
 
+    @JsonCreator
     private OrderShippingInfo(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Optional<Reference<ShippingMethod>> shippingMethod, final List<Delivery> deliveries) {
         super(shippingMethodName, price, shippingRate, taxRate, taxCategory, shippingMethod);
         this.deliveries = deliveries;

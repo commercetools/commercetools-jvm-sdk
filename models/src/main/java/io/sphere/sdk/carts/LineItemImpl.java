@@ -1,8 +1,10 @@
 package io.sphere.sdk.carts;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -19,11 +21,12 @@ final class LineItemImpl extends Base implements LineItem {
     private final long quantity;
     private final List<ItemState> state;
     private final TaxRate taxRate;
-    private final Optional<Channel> supplyChannel;
+    private final Optional<Reference<Channel>> supplyChannel;
 
+    @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedStrings name,
                  final ProductVariant variant, final Price price, final long quantity,
-                 final List<ItemState> state, final TaxRate taxRate, final Optional<Channel> supplyChannel) {
+                 final List<ItemState> state, final TaxRate taxRate, final Optional<Reference<Channel>> supplyChannel) {
         this.id = id;
         this.productId = productId;
         this.name = name;
@@ -76,7 +79,7 @@ final class LineItemImpl extends Base implements LineItem {
     }
 
     @Override
-    public Optional<Channel> getSupplyChannel() {
+    public Optional<Reference<Channel>> getSupplyChannel() {
         return supplyChannel;
     }
 }

@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Base;
 import java.util.function.Function;
 
 public class DummySphereRequest extends Base implements SphereRequest<String> {
+    public static final String DEFAULT_RESPONSE_OBJECT = "da";
     private final String marker;
 
     private DummySphereRequest(final String marker) {
@@ -15,7 +16,7 @@ public class DummySphereRequest extends Base implements SphereRequest<String> {
 
     @Override
     public Function<HttpResponse, String> resultMapper() {
-        return r -> "da";
+        return r -> DEFAULT_RESPONSE_OBJECT;
     }
 
     @Override

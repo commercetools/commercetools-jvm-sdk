@@ -1,5 +1,6 @@
 package io.sphere.sdk.customobjects.migrations.version2;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 
@@ -33,6 +34,7 @@ public class Uvw {
         private final String a;
         private final String b;
 
+        @JsonCreator
         public Foo(final String a, final String b) {
             this.a = a;
             this.b = b;

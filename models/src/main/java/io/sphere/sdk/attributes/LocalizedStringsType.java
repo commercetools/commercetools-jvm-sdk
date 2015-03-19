@@ -1,7 +1,12 @@
 package io.sphere.sdk.attributes;
 
-public final class LocalizedStringsType extends AttributeTypeBase {
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-    public LocalizedStringsType() {
+public final class LocalizedStringsType extends AttributeTypeBase {
+    private LocalizedStringsType() {}
+
+    @JsonIgnore
+    public static LocalizedStringsType of() {
+        return new LocalizedStringsType();
     }
 }

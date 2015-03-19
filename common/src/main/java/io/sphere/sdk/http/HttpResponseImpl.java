@@ -3,23 +3,22 @@ package io.sphere.sdk.http;
 import io.sphere.sdk.models.Base;
 
 import java.nio.charset.StandardCharsets;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 
 import static java.lang.String.format;
 
 class HttpResponseImpl extends Base implements HttpResponse {
     private final int statusCode;
+    private final HttpHeaders headers;
     private final Optional<byte[]> responseBody;
     private final Optional<HttpRequest> associatedRequest;
     private final Optional<String> bodyAsStringForDebugging;
 
-    HttpResponseImpl(final int statusCode, final Optional<byte[]> responseBody, final Optional<HttpRequest> associatedRequest) {
+    HttpResponseImpl(final int statusCode, final Optional<byte[]> responseBody, final Optional<HttpRequest> associatedRequest, final HttpHeaders headers) {
         this.statusCode = statusCode;
         this.responseBody = responseBody;
         this.associatedRequest = associatedRequest;
+        this.headers = headers;
         Optional<String> bodyAsString = Optional.empty();
         try {
             bodyAsString = statusCode >= 400 ? responseBody.map(b -> new String(b, StandardCharsets.UTF_8)) : Optional.<String>empty();
@@ -32,6 +31,11 @@ class HttpResponseImpl extends Base implements HttpResponse {
     @Override
     public int getStatusCode() {
         return statusCode;
+    }
+
+    @Override
+    public HttpHeaders getHeaders() {
+        return headers;
     }
 
     @Override

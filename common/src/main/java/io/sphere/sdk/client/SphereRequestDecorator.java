@@ -1,10 +1,11 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.models.Base;
 
 import java.util.function.Function;
 
-public abstract class SphereRequestDecorator<T> implements SphereRequest<T> {
+public abstract class SphereRequestDecorator<T> extends Base implements SphereRequest<T> {
     private final SphereRequest<T> delegate;
 
     protected SphereRequestDecorator(final SphereRequest<T> delegate) {

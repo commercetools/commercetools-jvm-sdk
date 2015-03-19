@@ -1,6 +1,12 @@
 package io.sphere.sdk.attributes;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class NumberType extends AttributeTypeBase {
-    public NumberType() {
+    private NumberType() {}
+
+    @JsonIgnore
+    public static NumberType of() {
+        return new NumberType();
     }
 }
