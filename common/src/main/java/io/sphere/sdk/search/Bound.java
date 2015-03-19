@@ -2,6 +2,10 @@ package io.sphere.sdk.search;
 
 import io.sphere.sdk.models.Base;
 
+/**
+ * Represents one of the two possible bounds of a range or interval.
+ * @param <T> type of the endpoint contained in the bound.
+ */
 public class Bound<T extends Comparable<? super T>> extends Base {
     private final T endpoint;
     private final BoundType type;
@@ -53,6 +57,7 @@ public class Bound<T extends Comparable<? super T>> extends Base {
     /**
      * Creates a bound with the given endpoint, excluded from the range.
      * @param endpoint the endpoint value of the given type T.
+     * @param <T> type of the endpoint.
      * @return the exclusive bound with the endpoint.
      */
     public static <T extends Comparable<? super T>> Bound<T> exclusive(T endpoint) {
@@ -62,6 +67,7 @@ public class Bound<T extends Comparable<? super T>> extends Base {
     /**
      * Creates a bound with the given endpoint, included from the range.
      * @param endpoint the endpoint value of the given type T.
+     * @param <T> type of the endpoint.
      * @return the inclusive bound with the endpoint.
      */
      public static <T extends Comparable<? super T>> Bound<T> inclusive(T endpoint) {
