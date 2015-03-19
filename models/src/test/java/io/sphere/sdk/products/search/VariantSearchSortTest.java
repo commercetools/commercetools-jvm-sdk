@@ -8,7 +8,7 @@ import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class VariantSearchSortTest {
-    private static final ProductProjectionSearchModelExperimental MODEL = ProductProjectionSearch.model();
+    private static final ExperimentalProductProjectionSearchModel MODEL = ProductProjectionSearch.model();
 
     @Test
     public void buildsAscendingSortExpression() throws Exception {

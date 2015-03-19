@@ -10,14 +10,14 @@ import java.util.Optional;
  * EXPERIMENTAL model to easily build product projection search requests.
  * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
  */
-public class ProductProjectionSearchModelExperimental extends ProductDataSearchModelBase {
+public class ExperimentalProductProjectionSearchModel extends ProductDataSearchModelBase {
 
-    private ProductProjectionSearchModelExperimental(final Optional<? extends SearchModel<ProductProjection>> parent, final Optional<String> pathSegment) {
+    private ExperimentalProductProjectionSearchModel(final Optional<? extends SearchModel<ProductProjection>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    static ProductProjectionSearchModelExperimental get() {
-        return new ProductProjectionSearchModelExperimental(Optional.empty(), Optional.empty());
+    static ExperimentalProductProjectionSearchModel get() {
+        return new ExperimentalProductProjectionSearchModel(Optional.empty(), Optional.empty());
     }
 
     @Override

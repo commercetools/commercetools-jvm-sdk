@@ -37,7 +37,7 @@ public class ProductProjectionSearch extends SearchDslImpl<ProductProjection> {
      * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
      * @return the experimental model for product projection search requests.
      */
-    public static ProductProjectionSearchModelExperimental model() {
-        return ProductProjectionSearchModelExperimental.get();
+    public static ExperimentalProductProjectionSearchModel model() {
+        return ExperimentalProductProjectionSearchModel.get();
     }
 }

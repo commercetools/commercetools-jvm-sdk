@@ -24,7 +24,7 @@ import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class ProductProjectionSearchTest {
-    private static final ProductProjectionSearchModelExperimental MODEL = ProductProjectionSearch.model();
+    private static final ExperimentalProductProjectionSearchModel MODEL = ProductProjectionSearch.model();
 
     @Test
     public void canAccessProductName() throws Exception {
