@@ -6,7 +6,6 @@ import io.sphere.sdk.json.JsonUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.fest.assertions.Assertions.assertThat;
@@ -33,9 +32,9 @@ public class FacetResultTest {
 
     @Test
     public void parsesRangeFacetResults() throws Exception {
-        final RangeFacetResult<Double> rangeFacet = rangeFacet();
+        final RangeFacetResult<Integer> rangeFacet = rangeFacet();
         assertThat(rangeFacet.getRanges()).hasSize(2);
-        final RangeStats<Double> stats = RangeStats.of(Optional.of(5001D), Optional.of(0D), 1799, 5100D, 590000D, 92868378D, 51622.222345747636);
+        final RangeStats<Integer> stats = RangeStats.of(Optional.of(5001), Optional.empty(), 1799, 5100, 590000, 92868378, 51622.222345747636);
         assertThat(rangeFacet.getRanges().get(1)).isEqualTo(stats);
     }
 
@@ -45,7 +44,7 @@ public class FacetResultTest {
     }
 
     @SuppressWarnings("unchecked")
-    private RangeFacetResult<Double> rangeFacet() {
+    private RangeFacetResult<Integer> rangeFacet() {
         return (RangeFacetResult) pagedSearchResult.getFacetsResults().get(RANGE_FACET_KEY);
     }
 }

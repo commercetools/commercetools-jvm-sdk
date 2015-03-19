@@ -13,11 +13,11 @@ public class RangeStats<T> extends Base {
     private final T min;
     private final T max;
     private final T sum;
-    private final T mean;
+    private final double mean;
 
     @JsonIgnore
     private RangeStats(final Optional<T> lowerEndpoint, final Optional<T> upperEndpoint, final long count,
-                       final T min, final T max, final T sum, final T mean) {
+                       final T min, final T max, final T sum, final double mean) {
         this.lowerEndpoint = lowerEndpoint;
         this.upperEndpoint = upperEndpoint;
         this.count = count;
@@ -29,7 +29,7 @@ public class RangeStats<T> extends Base {
 
     @JsonCreator
     RangeStats(final T from, final T to, final String fromStr, final String toStr, final long count,
-               final long totalCount, final T min, final T max, final T total, final T mean) {
+               final long totalCount, final T min, final T max, final T total, final double mean) {
         this(parseEndpoint(from, fromStr), parseEndpoint(to, toStr), count, min, max, total, mean);
     }
 
@@ -85,13 +85,13 @@ public class RangeStats<T> extends Base {
      * Arithmetic mean of the values contained within the range.
      * @return the mean of the values.
      */
-    public T getMean() {
+    public double getMean() {
         return mean;
     }
 
     @JsonIgnore
     public static <T> RangeStats<T> of(final Optional<T> from, final Optional<T> to, final long count,
-                                       final T min, final T max, final T sum, final T mean) {
+                                       final T min, final T max, final T sum, final double mean) {
         return new RangeStats<>(from, to, count, min, max, sum, mean);
     }
 
