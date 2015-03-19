@@ -113,14 +113,21 @@ extends java.lang.Object</pre>
  </ul>
 
  <h3 class=released-version id=v1_0_0_M12>1.0.0-M12</h3>
- <h4>Product Types</h4>
  <ul>
-    <li class=change-in-release>The <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> creation has been simplified (TextAttributeDefinition, LocalizedStringsAttributeDefinition, ... are just AttributeDefinition), see <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a> how to create them.</li>
- </ul>
-
- <h4>Orders</h4>
- <ul>
-    <li class=new-in-release>Added the <a href="../../../../io/sphere/sdk/orders/commands/OrderImportCommand.html" title="class in io.sphere.sdk.orders.commands"><code>OrderImportCommand</code></a>.</li>
+ <li class=new-in-release>Added the <a href="../../../../io/sphere/sdk/orders/commands/OrderImportCommand.html" title="class in io.sphere.sdk.orders.commands"><code>OrderImportCommand</code></a>.</li>
+ <li class=new-in-release>The error JSON body from SPHERE.IO responses can be directly extracted as JSON with <a href="../../../../io/sphere/sdk/client/SphereServiceException.html#getJsonBody--"><code>SphereServiceException.getJsonBody()</code></a>.</li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http"><code>HttpResponse</code></a> also contains <a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http"><code>HttpHeaders</code></a>.</li>
+ <li class=new-in-release>Experimental search predicate model <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#model--"><code>ProductProjectionSearch.model()</code></a>. See also <a href="../../../../io/sphere/sdk/meta/ProductSearchDocumentation.html" title="class in io.sphere.sdk.meta"><code>ProductSearchDocumentation</code></a>.</li>
+ <li class=change-in-release>The <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> creation has been simplified (TextAttributeDefinition, LocalizedStringsAttributeDefinition, ... are just AttributeDefinition), see <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a> how to create them.</li>
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><code>TermFacetResult</code></a> and
+ <a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><code>RangeFacetResult</code></a> are using generics.
+ <a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><code>TermFacetResult</code></a> uses long instead of int for some methods like <a href="../../../../io/sphere/sdk/search/TermFacetResult.html#getMissing--"><code>TermFacetResult.getMissing()</code></a>.</li>
+ <li class=change-in-release>Methods in <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><code>SearchDsl</code></a> have been renamed.</li>
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/search/RangeStats.html#getMean--"><code>RangeStats.getMean()</code></a> is now a double.</li>
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http"><code>HttpHeaders</code></a> allows reoccurring headers.</li>
+ <li class=change-in-release>Use of a new toString style, from <pre>io.sphere.sdk.client.HttpRequestIntent@7308a939[httpMethod=POST,path=/categories,headers={},body=Optional[io.sphere.sdk.http.StringHttpRequestBody@216ec9be[body={invalidJson :)]]]</pre> to <pre>HttpRequestIntent[httpMethod=POST,path=/categories,headers={},body=Optional[StringHttpRequestBody[body={invalidJson :)]]]</pre></li>
+ <li class=fixed-in-release><a href="../../../../io/sphere/sdk/models/SphereException.html#getMessage--"><code>SphereException.getMessage()</code></a> now returns also the project debug info.</li>
+ <li class=fixed-in-release><a href="https://github.com/sphereio/sphere-jvm-sdk/issues/312">Incompatibility with Jackson 2.5.1</a> has been fixed. A cause message was "No suitable constructor found for type [simple type, class io.sphere.sdk.models.ImageImpl]: can not instantiate from JSON object (missing default constructor or creator, or perhaps need to add/enable type information?)"</li>
  </ul>
 
  <h3 class=released-version id=v1_0_0_M11>1.0.0-M11</h3>

@@ -158,7 +158,6 @@ future.whenCompleteAsync((signInResult, exception) -&gt; {
         "  } ]\n" +
         "}";
 final ErrorResponse sphereErrorResponse = JsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
-System.out.println(sphereErrorResponse);
 final Optional&lt;InvalidJsonInputError&gt; jsonError = sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class);
 
 
