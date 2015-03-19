@@ -43,7 +43,7 @@
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/queries/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../io/sphere/sdk/shippingmethods/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/search/tokenizer/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/package-summary.html" target="_top">Frames</a></li>
@@ -122,10 +122,14 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;T,V&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -141,7 +145,7 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html" title="class in io.sphere.sdk.search">BooleanSearchModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html" title="class in io.sphere.sdk.search">BooleanSearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -149,39 +153,67 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/DateSearchModel.html" title="class in io.sphere.sdk.search">DateSearchModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/DateSearchModel.html" title="class in io.sphere.sdk.search">DateSearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/EnumSearchModel.html" title="class in io.sphere.sdk.search">EnumSearchModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/EnumSearchModel.html" title="class in io.sphere.sdk.search">EnumSearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/LocalizedEnumSearchModel.html" title="class in io.sphere.sdk.search">LocalizedEnumSearchModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a>&lt;T extends java.lang.Comparable&lt;? super T&gt;&gt;</td>
+<td class="colLast">
+<div class="block">Facet ranges should be of the form [a, b), (-∞, b) or [a, +∞).</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;T,V&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;T,V&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="class in io.sphere.sdk.search">LocalizedStringsSearchModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search">FilteredFacetResult</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyAmountSearchModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/FilterRange.html" title="class in io.sphere.sdk.search">FilterRange</a>&lt;T extends java.lang.Comparable&lt;? super T&gt;&gt;</td>
+<td class="colLast">
+<div class="block">Filter ranges should be of the form [a, b], (-∞, b] or [a, +∞).</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="class in io.sphere.sdk.search">FilterSearchModel</a>&lt;T,V&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/LocalizedEnumSearchModel.html" title="class in io.sphere.sdk.search">LocalizedEnumSearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="class in io.sphere.sdk.search">MoneySearchModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/LocalizedStringsSearchModel.html" title="class in io.sphere.sdk.search">LocalizedStringsSearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="class in io.sphere.sdk.search">NumberSearchModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyAmountSearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="class in io.sphere.sdk.search">MoneySearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="class in io.sphere.sdk.search">NumberSearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -189,23 +221,23 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/Range.html" title="class in io.sphere.sdk.search">Range</a>&lt;T extends java.lang.Comparable&lt;? super T&gt;&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="class in io.sphere.sdk.search">RangedFacetSearchModel</a>&lt;T,V extends java.lang.Comparable&lt;? super V&gt;&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search">RangeFacetResult</a></td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/RangedFilterSearchModel.html" title="class in io.sphere.sdk.search">RangedFilterSearchModel</a>&lt;T,V extends java.lang.Comparable&lt;? super V&gt;&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;T,V extends java.lang.Comparable&lt;? super V&gt;&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/RangeTermFacetSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFacetSearchModel</a>&lt;T,V extends java.lang.Comparable&lt;? super V&gt;&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search">RangeFacetResult</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/RangeTermFilterSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFilterSearchModel</a>&lt;T,V extends java.lang.Comparable&lt;? super V&gt;&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -214,6 +246,14 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a>&lt;T&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/SearchKeyword.html" title="class in io.sphere.sdk.search">SearchKeyword</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -229,30 +269,26 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a>&lt;T&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a></td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="class in io.sphere.sdk.search">TermFacetExpression</a>&lt;T,V&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/TermFacetSearchModel.html" title="class in io.sphere.sdk.search">TermFacetSearchModel</a>&lt;T,V&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/TermFilterSearchModel.html" title="class in io.sphere.sdk.search">TermFilterSearchModel</a>&lt;T,V&gt;</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a></td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="class in io.sphere.sdk.search">TimeSearchModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="class in io.sphere.sdk.search">TimeSearchModel</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -268,10 +304,8 @@
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search">SearchSortDirection</a></td>
-<td class="colLast">
-<div class="block">Since the value of a specific attribute can vary across the variants of a single product one value must be chosen from all its variants.</div>
-</td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/search/SimpleSearchSortDirection.html" title="enum in io.sphere.sdk.search">SimpleSearchSortDirection</a></td>
+<td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
 </table>
@@ -293,10 +327,6 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/search/NotSupportedException.html" title="class in io.sphere.sdk.search">NotSupportedException</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/search/SameExclusiveBoundsException.html" title="class in io.sphere.sdk.search">SameExclusiveBoundsException</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -326,7 +356,7 @@
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/queries/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../io/sphere/sdk/shippingmethods/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../io/sphere/sdk/search/tokenizer/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/package-summary.html" target="_top">Frames</a></li>

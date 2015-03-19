@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":10,"i7":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":9,"i7":9,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -123,7 +123,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>&gt;, <a href="../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
+<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -141,7 +141,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
     final CustomerSignInResult result = execute(CustomerSignInCommand.of(customer.getEmail(), PASSWORD, Optional.empty()));
     assertThat(result.getCustomer()).isEqualTo(customer);
 });
-</code></pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -179,24 +179,35 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html#getPassword--">getPassword</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html#httpRequest--">httpRequest</a></span>()</code>
-<div class="block">Provides an http request, this does not include the execution of it.</div>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html#httpRequestIntent--">httpRequestIntent</a></span>()</code>
+<div class="block">Provides an http request intent, this does not include the execution of it.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html#of-java.lang.String-java.lang.String-">of</a></span>(java.lang.String&nbsp;email,
+  java.lang.String&nbsp;password)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html#of-java.lang.String-java.lang.String-java.util.Optional-">of</a></span>(java.lang.String&nbsp;email,
   java.lang.String&nbsp;password,
   java.util.Optional&lt;java.lang.String&gt;&nbsp;anonymousCartId)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html#of-java.lang.String-java.lang.String-java.lang.String-">of</a></span>(java.lang.String&nbsp;email,
+  java.lang.String&nbsp;password,
+  java.lang.String&nbsp;anonymousCartId)</code>&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html#resultMapper--">resultMapper</a></span>()</code>
 <div class="block">Takes an http response and maps it into a Java object of type T.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
@@ -236,6 +247,27 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="of-java.lang.String-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a>&nbsp;of(java.lang.String&nbsp;email,
+                                       java.lang.String&nbsp;password)</pre>
+</li>
+</ul>
+<a name="of-java.lang.String-java.lang.String-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a>&nbsp;of(java.lang.String&nbsp;email,
+                                       java.lang.String&nbsp;password,
+                                       java.lang.String&nbsp;anonymousCartId)</pre>
+</li>
+</ul>
 <a name="of-java.lang.String-java.lang.String-java.util.Optional-">
 <!--   -->
 </a>
@@ -260,18 +292,18 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 </dl>
 </li>
 </ul>
-<a name="httpRequest--">
+<a name="httpRequestIntent--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>httpRequest</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
-<div class="block">Provides an http request, this does not include the execution of it.</div>
+<h4>httpRequestIntent</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>&nbsp;httpRequestIntent()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">SphereRequest</a></code></span></div>
+<div class="block">Provides an http request intent, this does not include the execution of it.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>http request</dd>
+<dd>http request intent</dd>
 </dl>
 </li>
 </ul>
@@ -304,7 +336,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>&gt;&nbsp;resultMapper()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">SphereRequest</a></code></span></div>
 <div class="block">Takes an http response and maps it into a Java object of type T.
-     Before calling this method, check with <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.canHandleResponse(io.sphere.sdk.http.HttpResponse)</code></a> if the response can be consumed.</div>
+     Before calling this method, check with <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.canHandleResponse(HttpResponse)</code></a> if the response can be consumed.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>&gt;</code></dd>

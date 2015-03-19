@@ -122,14 +122,16 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Adds external image url with meta-information to the product variant.
 
- <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-addExternalImageUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("demo for adding external image");
-assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+ <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-addExternalImage--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
+    assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
 
-final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
-final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
+    final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+    final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
 
-assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
-</code></pre></div></div>
+    assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
+    return updatedProduct;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -153,7 +155,7 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImag
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html#getImage--">getImage</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>long</code></td>
+<td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html#getVariantId--">getVariantId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
@@ -162,8 +164,8 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImag
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions">AddExternalImage</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html#of-io.sphere.sdk.models.Image-long-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a>&nbsp;image,
-  long&nbsp;variantId,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html#of-io.sphere.sdk.models.Image-int-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a>&nbsp;image,
+  int&nbsp;variantId,
   <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>&nbsp;</td>
 </tr>
 </table>
@@ -202,14 +204,14 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImag
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-io.sphere.sdk.models.Image-long-io.sphere.sdk.products.ProductUpdateScope-">
+<a name="of-io.sphere.sdk.models.Image-int-io.sphere.sdk.products.ProductUpdateScope-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions">AddExternalImage</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a>&nbsp;image,
-                                  long&nbsp;variantId,
+                                  int&nbsp;variantId,
                                   <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
 </li>
 </ul>
@@ -228,7 +230,7 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImag
 <ul class="blockList">
 <li class="blockList">
 <h4>getVariantId</h4>
-<pre>public&nbsp;long&nbsp;getVariantId()</pre>
+<pre>public&nbsp;int&nbsp;getVariantId()</pre>
 </li>
 </ul>
 <a name="isStaged--">

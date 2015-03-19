@@ -42,8 +42,8 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/client/JsonParseException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/client/ReferenceExistsException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/NingHttpClientAdapter.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/client/NotFoundException.html" target="_top">Frames</a></li>
@@ -70,7 +70,7 @@
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.io.sphere.sdk.client.SphereClientException">Method</a></li>
+<li><a href="#methods.inherited.from.class.io.sphere.sdk.client.SphereServiceException">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
@@ -102,10 +102,20 @@
 <li>java.lang.RuntimeException</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereClientException</a></li>
+<li><a href="../../../../io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.SphereException</a></li>
+<li>
+<ul class="inheritance">
+<li><a href="../../../../io/sphere/sdk/client/SphereServiceException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.SphereServiceException</a></li>
+<li>
+<ul class="inheritance">
+<li><a href="../../../../io/sphere/sdk/client/ClientErrorException.html" title="class in io.sphere.sdk.client">io.sphere.sdk.client.ClientErrorException</a></li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.client.NotFoundException</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -127,7 +137,12 @@
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">NotFoundException</span>
-extends <a href="../../../../io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">SphereClientException</a></pre>
+extends <a href="../../../../io/sphere/sdk/client/ClientErrorException.html" title="class in io.sphere.sdk.client">ClientErrorException</a></pre>
+<div class="block">Known causes:
+
+ <ul>
+     <li>Updating a object which does not exist (anymore)</li>
+ </ul></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../serialized-form.html#io.sphere.sdk.client.NotFoundException">Serialized Form</a></dd>
@@ -152,19 +167,6 @@ extends <a href="../../../../io/sphere/sdk/client/SphereClientException.html" ti
 <tr class="altColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/NotFoundException.html#NotFoundException--">NotFoundException</a></span>()</code>&nbsp;</td>
 </tr>
-<tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/NotFoundException.html#NotFoundException-java.lang.Object-">NotFoundException</a></span>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/NotFoundException.html#NotFoundException-java.lang.String-">NotFoundException</a></span>(java.lang.String&nbsp;message)</code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/NotFoundException.html#NotFoundException-java.lang.String-java.lang.Throwable-">NotFoundException</a></span>(java.lang.String&nbsp;message,
-                 java.lang.Throwable&nbsp;cause)</code>&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/NotFoundException.html#NotFoundException-java.lang.Throwable-">NotFoundException</a></span>(java.lang.Throwable&nbsp;cause)</code>&nbsp;</td>
-</tr>
 </table>
 </li>
 </ul>
@@ -175,11 +177,18 @@ extends <a href="../../../../io/sphere/sdk/client/SphereClientException.html" ti
 </a>
 <h3>Method Summary</h3>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereClientException">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereServiceException">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereClientException.html" title="class in io.sphere.sdk.client">SphereClientException</a></h3>
-<code><a href="../../../../io/sphere/sdk/client/SphereClientException.html#getMessage--">getMessage</a>, <a href="../../../../io/sphere/sdk/client/SphereClientException.html#getProjectKey--">getProjectKey</a>, <a href="../../../../io/sphere/sdk/client/SphereClientException.html#getSphereRequest--">getSphereRequest</a>, <a href="../../../../io/sphere/sdk/client/SphereClientException.html#getUnderlyingHttpRequest--">getUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/client/SphereClientException.html#getUnderlyingHttpResponse--">getUnderlyingHttpResponse</a>, <a href="../../../../io/sphere/sdk/client/SphereClientException.html#setProjectKey-java.lang.String-">setProjectKey</a>, <a href="../../../../io/sphere/sdk/client/SphereClientException.html#setSphereRequest-java.lang.String-">setSphereRequest</a>, <a href="../../../../io/sphere/sdk/client/SphereClientException.html#setUnderlyingHttpRequest-io.sphere.sdk.http.HttpRequest-">setUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/client/SphereClientException.html#setUnderlyingHttpRequest-java.lang.String-">setUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/client/SphereClientException.html#setUnderlyingHttpResponse-io.sphere.sdk.http.HttpResponse-">setUnderlyingHttpResponse</a>, <a href="../../../../io/sphere/sdk/client/SphereClientException.html#setUnderlyingHttpResponse-java.lang.String-">setUnderlyingHttpResponse</a></code></li>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereServiceException.html" title="class in io.sphere.sdk.client">SphereServiceException</a></h3>
+<code><a href="../../../../io/sphere/sdk/client/SphereServiceException.html#getStatusCode--">getStatusCode</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.SphereException">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/SphereException.html#getMessage--">getMessage</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#getProjectKey--">getProjectKey</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#getSphereRequest--">getSphereRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#getUnderlyingHttpRequest--">getUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#getUnderlyingHttpResponse--">getUnderlyingHttpResponse</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setProjectKey-java.util.Optional-">setProjectKey</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setProjectKey-java.lang.String-">setProjectKey</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setSphereRequest-io.sphere.sdk.client.SphereRequest-">setSphereRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpRequest-java.util.Optional-">setUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpRequest-java.lang.String-">setUnderlyingHttpRequest</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpResponse-java.util.Optional-">setUnderlyingHttpResponse</a>, <a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpResponse-java.lang.String-">setUnderlyingHttpResponse</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Throwable">
@@ -212,47 +221,10 @@ extends <a href="../../../../io/sphere/sdk/client/SphereClientException.html" ti
 <a name="NotFoundException--">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
-<h4>NotFoundException</h4>
-<pre>public&nbsp;NotFoundException()</pre>
-</li>
-</ul>
-<a name="NotFoundException-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>NotFoundException</h4>
-<pre>public&nbsp;NotFoundException(java.lang.String&nbsp;message)</pre>
-</li>
-</ul>
-<a name="NotFoundException-java.lang.String-java.lang.Throwable-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>NotFoundException</h4>
-<pre>public&nbsp;NotFoundException(java.lang.String&nbsp;message,
-                         java.lang.Throwable&nbsp;cause)</pre>
-</li>
-</ul>
-<a name="NotFoundException-java.lang.Throwable-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>NotFoundException</h4>
-<pre>public&nbsp;NotFoundException(java.lang.Throwable&nbsp;cause)</pre>
-</li>
-</ul>
-<a name="NotFoundException-java.lang.Object-">
-<!--   -->
-</a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>NotFoundException</h4>
-<pre>public&nbsp;NotFoundException(java.lang.Object&nbsp;o)</pre>
+<pre>public&nbsp;NotFoundException()</pre>
 </li>
 </ul>
 </li>
@@ -282,8 +254,8 @@ extends <a href="../../../../io/sphere/sdk/client/SphereClientException.html" ti
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/client/JsonParseException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/client/ReferenceExistsException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/NingHttpClientAdapter.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/client/NotFoundException.html" target="_top">Frames</a></li>
@@ -310,7 +282,7 @@ extends <a href="../../../../io/sphere/sdk/client/SphereClientException.html" ti
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.io.sphere.sdk.client.SphereClientException">Method</a></li>
+<li><a href="#methods.inherited.from.class.io.sphere.sdk.client.SphereServiceException">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>

@@ -115,12 +115,12 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
  <p>First, you need to specify a query, example:</p>
 
  <div id="io-sphere-sdk-queries-QueryDemo-formulatingAQuery--%s" class=code-example><pre><code class='java'>Query&lt;Category&gt; query = CategoryQuery.of().byName(Locale.ENGLISH, "demo cat");
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
  <p>Second, you use the sphere client to execute a query request, example:</p>
 
- <div id="io-sphere-sdk-queries-QueryDemo-executeQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;Category&gt;&gt; promise = client.execute(query);
-</code></pre></div>
+ <div id="io-sphere-sdk-queries-QueryDemo-executeQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;Category&gt;&gt; future = client.execute(query);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
  <p>The successful execution of a <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> results in <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> of a SPHERE.IO resource or view.
  While the <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> interface just contains information to execute a query,
@@ -131,7 +131,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
  <p>The following snipped creates a query which selects all products without a specific order.</p>
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryForAllDemo--%s" class=code-example><pre><code class='java'>final ProductQuery query = ProductQuery.of();
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="creating-queries">Creating queries</h3>
 
@@ -150,7 +150,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
  <div id="io-sphere-sdk-queries-QueryDemo-queryFromCompanionHelper--%s" class=code-example><pre><code class='java'>Query&lt;Category&gt; queryById = CategoryQuery.of().byId("the-id");
 Query&lt;Category&gt; queryBySlug = CategoryQuery.of().bySlug(Locale.ENGLISH, "category-slug");
 Query&lt;Category&gt; queryByName = CategoryQuery.of().byName(Locale.ENGLISH, "demo cat");
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
 
  <h4 id="create-query-with-predicates">Create a query with predicate API</h4>
@@ -162,7 +162,7 @@ Query&lt;Category&gt; queryByName = CategoryQuery.of().byName(Locale.ENGLISH, "d
 
  <div id="io-sphere-sdk-queries-QueryDemo-categoryQueryModel--%s" class=code-example><pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
 Query&lt;Category&gt; query = CategoryQuery.of().withPredicate(predicate);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
  <p>The generic code looks verbose, but in the future it enables powerful type-safe queries with IDE discovery even on deep
  nested data structures like products. (coming soon)</p>
@@ -183,7 +183,7 @@ Query&lt;Category&gt; query = CategoryQuery.of().
   withSort(sort).
   withOffset(offset).
   withLimit(limit);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
  <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> is an interface for immutable objects, so if you call <code>withXyz(value)</code>
  it returns a new immutable object:
@@ -192,7 +192,7 @@ Query&lt;Category&gt; query = CategoryQuery.of().
 assertThat(query).isNotEqualTo(query.withLimit(30));
 assertThat(query.limit()).isEqualTo(Optional.empty());
 assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
  <p>As a result you can construct the query for the next page by using the previous query:</p>
 
@@ -201,7 +201,7 @@ Long previousOffset = query.offset().orElse(0L);//on the first page, the offset 
 Query&lt;Category&gt; queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
 //alternatively
 Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
 
  <h4 id="create-hard-coded-query">Create a hard coded query</h4>
@@ -211,14 +211,14 @@ Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
 
  <div id="io-sphere-sdk-categories-CategoryByNameQuery%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import java.util.function.Function;
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.utils.JsonUtils;
+import io.sphere.sdk.json.JsonUtils;
 import java.util.Locale;
-import static io.sphere.sdk.utils.UrlUtils.urlEncode;
+import static io.sphere.sdk.http.UrlUtils.urlEncode;
 </code></pre><pre><code class='java'>/**
  * This is an example of hard coding queries without using helper classes.
  * It is better to use the helpers concerning existing parts and escaping.
@@ -233,8 +233,8 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
     }
 
     @Override
-    public HttpRequest httpRequest() {
-        return HttpRequest.of(HttpMethod.GET, "/categories" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQuerySortingModel.escape(name) + "\")"));
+    public HttpRequestIntent httpRequestIntent() {
+        return HttpRequestIntent.of(HttpMethod.GET, "/categories" + urlEncode("name(" + locale.toLanguageTag() + "=\"" + StringQuerySortingModel.escape(name) + "\")"));
     }
 
     @Override
@@ -243,7 +243,7 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
         }, httpResponse.getResponseBody().get());
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/categories/CategoryByNameQuery.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id=predicates>Predicates</h3>
 
@@ -253,7 +253,7 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryBySlug--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; queryBySlug = ProductQuery.of()
         .bySlug(CURRENT, ENGLISH, "blue-t-shirt");
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  You may have noticed that the type of the query is not <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries"><code>ProductQuery</code></a> anymore but <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> which does not contain the method <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html#bySlug-io.sphere.sdk.products.ProductProjectionType-java.util.Locale-java.lang.String-"><code>ProductQuery.bySlug(io.sphere.sdk.products.ProductProjectionType, java.util.Locale, String)</code></a>.
  That is due to the implementation of the domain specific language but still enables you to configure pagination and sorting.
@@ -267,7 +267,7 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryByNames--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; predicate = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(predicate);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>The Predicate API looks verbose, but it is its goal to prevent typos and make it discoverable via the IDE for which attributes can be queried.</p>
 
@@ -278,7 +278,7 @@ final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(predicate)
 final Predicate&lt;Product&gt; unsafePredicate =
         Predicate.of("masterData(current(name(en in (\"blue t-shirt\", \"blue jeans\"))))");
 assertThat(unsafePredicate).isEqualTo(safePredicate);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>For creating predicates for resource &lt;RESOURCE&gt; there is a method <code>model()</code> in a class &lt;RESOURCE&gt;Query (e.g., Product has ProductQuery).</p>
 
@@ -293,7 +293,7 @@ assertThat(unsafePredicate).isEqualTo(safePredicate);
         .lang(ENGLISH).is("foo");
 final Predicate&lt;Product&gt; idIsBar = ProductQuery.model().id().is("bar");
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFoo.or(idIsBar));
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>To query for two conditions use <strong><code>and</code></strong>. The following example queries for the name foo and the membership in a category with id "cat1".</p>
 
@@ -303,7 +303,7 @@ final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
 final Predicate&lt;Product&gt; isInCat1 = ProductQuery.model().masterData().current()
         .categories().isIn(cat1);
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFoo.and(isInCat1));
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>Since the previous queries have a common path you can formulate a combined query with <strong><code>where</code></strong>, but this is not possible for every entity.</p>
 
@@ -311,7 +311,7 @@ final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFoo.
 final Predicate&lt;Product&gt; nameIsFooAndIsInCat1 = ProductQuery.model().masterData().current()
         .where(cur -&gt; cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(cat1)));
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFooAndIsInCat1);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
  <h4>Negate predicates</h4>
@@ -321,7 +321,7 @@ final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFooA
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateNotExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsNotFoo = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).isNot("foo");
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsNotFoo);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id=sorting>Sorting</h3>
 
@@ -334,7 +334,7 @@ final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsNotF
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByName--%s" class=code-example><pre><code class='java'>final Sort&lt;Product&gt; byNameAsc = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).sort(ASC);
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withSort(asList(byNameAsc));
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  You can sort by multiple values, for example for name ascending and ID descending:
 
@@ -342,7 +342,7 @@ final QueryDsl&lt;Product&gt; query = ProductQuery.of().withSort(asList(byNameAs
         .lang(ENGLISH).sort(ASC);
 final Sort&lt;Product&gt; byIdDesc = ProductQuery.model().id().sort(DESC);
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withSort(asList(byNameAsc, byIdDesc));
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 Like in the case of the predicates, you can traverse the query model tree to specify a tested and type-safe sort expression. But instead of providing values uses the <code>sort()</code> method.
 
@@ -352,7 +352,7 @@ Like in the case of the predicates, you can traverse the query model tree to spe
         .lang(ENGLISH).sort(ASC);
 final Sort&lt;Product&gt; unsafeSort = Sort.of("masterData.current.name.en asc");
 assertThat(safeSort).isEqualTo(unsafeSort);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id=pagination>Pagination</h3>
 
@@ -368,14 +368,14 @@ assertThat(safeSort).isEqualTo(unsafeSort);
  <p>And a query:</p>
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryAllExampleInPaginationContext--%s" class=code-example><pre><code class='java'>final ProductQuery query = ProductQuery.of();
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>If you do not specify a limitation of how many resources should be fetched with one query
  with <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-"><code>QueryDsl.withLimit(long)</code></a>, they all (the 15 products) will be loaded.</p>
 
  <p>If you specify a limit of 4 to a query, this query will only load the first 4 products:</p>
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; query = ProductQuery.of().withLimit(4);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 <pre>|00 01 02 03|</pre>
 
 
@@ -384,7 +384,7 @@ assertThat(safeSort).isEqualTo(unsafeSort);
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4PlusOffset4--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; queryForFirst4 = ProductQuery.of().withLimit(4);
 final QueryDsl&lt;Product&gt; queryForProductId04to07 = queryForFirst4.withOffset(4);
 assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4).withOffset(4));
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
  <pre>|04 05 06 07|</pre>
 
  To fetch the products with the ID 08 to 11 you need an offset parameter of 8.
@@ -432,7 +432,7 @@ assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4).wit
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandProductTypeForProduct--%s" class=code-example><pre><code class='java'>final QueryDsl&lt;Product&gt; query = ProductQuery.of()
         .withExpansionPath(ProductQuery.expansionPath().productType());
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  Expansion paths are not limited to the next element, for example you can expand the
  categories for a product projection and expand the parent category of the category you previously have expanded:
@@ -441,7 +441,7 @@ assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4).wit
         ProductProjectionQuery.expansionPath().categories().parent();
 final QueryDsl&lt;ProductProjection&gt; query = ProductProjectionQuery.of(STAGED)
         .withExpansionPath(expansionPath);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  If the SDK does not provide a type-safe way to construct a reference path, you can create it by string:
 
@@ -449,7 +449,7 @@ final QueryDsl&lt;ProductProjection&gt; query = ProductProjectionQuery.of(STAGED
         ProductProjectionQuery.expansionPath().categories().parent();
 final ExpansionPath&lt;ProductProjection&gt; unsafePath = ExpansionPath.of("categories[*].parent");
 assertThat(safePath).isEqualTo(unsafePath);
-</code></pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

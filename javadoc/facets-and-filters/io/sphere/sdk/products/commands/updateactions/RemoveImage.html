@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/Publish.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -124,14 +124,16 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
  Also deletes it from the Content Delivery Network (it would not be deleted from the CDN in case of external image).
  Deletion from the CDN is not instant, which means the image file itself will stay available for some time after the deletion.
 
- <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-addExternalImageUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("demo for adding external image");
-assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+ <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-removeImage--%s" class=code-example><pre><code class='java'>final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
+withUpdateableProduct(client(), product -&gt; {
+    final Product productWithImage = client().execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
+    assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
 
-final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
-final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
-
-assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
-</code></pre></div></div>
+    final Product updatedProduct = execute(ProductUpdateCommand.of(productWithImage, RemoveImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
+    assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
+    return updatedProduct;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -155,7 +157,7 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImag
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html#getImageUrl--">getImageUrl</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>long</code></td>
+<td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html#getVariantId--">getVariantId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
@@ -164,14 +166,14 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImag
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveImage</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html#of-io.sphere.sdk.models.Image-long-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a>&nbsp;image,
-  long&nbsp;variantId,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html#of-io.sphere.sdk.models.Image-int-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a>&nbsp;image,
+  int&nbsp;variantId,
   <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveImage</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html#of-java.lang.String-long-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(java.lang.String&nbsp;imageUrl,
-  long&nbsp;variantId,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html#of-java.lang.String-int-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(java.lang.String&nbsp;imageUrl,
+  int&nbsp;variantId,
   <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>&nbsp;</td>
 </tr>
 </table>
@@ -225,28 +227,28 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImag
 <ul class="blockList">
 <li class="blockList">
 <h4>getVariantId</h4>
-<pre>public&nbsp;long&nbsp;getVariantId()</pre>
+<pre>public&nbsp;int&nbsp;getVariantId()</pre>
 </li>
 </ul>
-<a name="of-io.sphere.sdk.models.Image-long-io.sphere.sdk.products.ProductUpdateScope-">
+<a name="of-io.sphere.sdk.models.Image-int-io.sphere.sdk.products.ProductUpdateScope-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveImage</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a>&nbsp;image,
-                             long&nbsp;variantId,
+                             int&nbsp;variantId,
                              <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
 </li>
 </ul>
-<a name="of-java.lang.String-long-io.sphere.sdk.products.ProductUpdateScope-">
+<a name="of-java.lang.String-int-io.sphere.sdk.products.ProductUpdateScope-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveImage</a>&nbsp;of(java.lang.String&nbsp;imageUrl,
-                             long&nbsp;variantId,
+                             int&nbsp;variantId,
                              <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
 </li>
 </ul>
@@ -286,7 +288,7 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImag
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/Publish.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveVariant.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/products/commands/updateactions/RemovePrice.html" target="_top">Frames</a></li>
@@ -120,16 +120,18 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">RemovePrice</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-products-ProductCrudIntegrationTest-removePriceUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = preparePricedProduct("demo for removePriceUpdateAction");
+<div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-removePrice--%s" class=code-example><pre><code class='java'>withUpdateablePricedProduct(client(), product -&gt; {
+    final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 
-final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+    final Product updatedProduct = client()
+            .execute(ProductUpdateCommand.of(product, RemovePrice.of(MASTER_VARIANT_ID, oldPrice, STAGED_AND_CURRENT)));
 
-final Product updatedProduct = client()
-        .execute(ProductUpdateCommand.of(product, RemovePrice.of(MASTER_VARIANT_ID, oldPrice, STAGED_AND_CURRENT)));
+    assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
+            .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
 
-assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
-        .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
-</code></pre></div></div>
+    return updatedProduct;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -153,7 +155,7 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemovePrice.html#getPrice--">getPrice</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>long</code></td>
+<td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemovePrice.html#getVariantId--">getVariantId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
@@ -208,7 +210,7 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 <ul class="blockList">
 <li class="blockList">
 <h4>getVariantId</h4>
-<pre>public&nbsp;long&nbsp;getVariantId()</pre>
+<pre>public&nbsp;int&nbsp;getVariantId()</pre>
 </li>
 </ul>
 <a name="getPrice--">
@@ -268,7 +270,7 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveVariant.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/products/commands/updateactions/RemovePrice.html" target="_top">Frames</a></li>

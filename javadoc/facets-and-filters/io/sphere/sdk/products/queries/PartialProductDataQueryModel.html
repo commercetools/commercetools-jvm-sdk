@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -105,10 +105,15 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.QueryModelImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.DefaultModelQueryModelImpl</a>&lt;T&gt;</li>
+<li>
+<ul class="inheritance">
 <li><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">io.sphere.sdk.products.queries.ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.products.queries.PartialProductDataQueryModel</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -166,40 +171,48 @@ extends <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryM
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a>&lt;T,<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>,<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#categories--">categories</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringsQueryModel</a>&lt;T&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringsQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#description--">description</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;T&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#masterVariant--">masterVariant</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#metaDescription--">metaDescription</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#metaKeywords--">metaKeywords</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#metaTitle--">metaTitle</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#name--">name</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#slug--">slug</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;T&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#variants--">variants</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#where-java.util.function.Function-">where</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>,<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&gt;&nbsp;embeddedPredicate)</code>&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where</a></span>(<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;embeddedPredicate)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -207,7 +220,14 @@ extends <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryM
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.products.queries.<a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#get--">get</a>, <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#where-java.util.function.Function-">where</a>, <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#get--">get</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.DefaultModelQueryModelImpl">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">DefaultModelQueryModelImpl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#createdAt--">createdAt</a>, <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#id--">id</a>, <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#lastModifiedAt--">lastModifiedAt</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryModelImpl">
@@ -262,13 +282,17 @@ extends <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryM
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="name--">
+<a name="categories--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>name</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;&nbsp;name()</pre>
+<h4>categories</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>,<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;categories()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#categories--">categories</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="description--">
@@ -277,16 +301,11 @@ extends <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryM
 <ul class="blockList">
 <li class="blockList">
 <h4>description</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringsQueryModel</a>&lt;T&gt;&nbsp;description()</pre>
-</li>
-</ul>
-<a name="slug--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>slug</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;&nbsp;slug()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringsQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;description()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#description--">description</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="masterVariant--">
@@ -295,34 +314,11 @@ extends <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryM
 <ul class="blockList">
 <li class="blockList">
 <h4>masterVariant</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;T&gt;&nbsp;masterVariant()</pre>
-</li>
-</ul>
-<a name="variants--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>variants</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;T&gt;&nbsp;variants()</pre>
-</li>
-</ul>
-<a name="metaTitle--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>metaTitle</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;&nbsp;metaTitle()</pre>
-</li>
-</ul>
-<a name="metaKeywords--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>metaKeywords</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;&nbsp;metaKeywords()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;masterVariant()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#masterVariant--">masterVariant</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="metaDescription--">
@@ -331,16 +327,102 @@ extends <a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryM
 <ul class="blockList">
 <li class="blockList">
 <h4>metaDescription</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;&nbsp;metaDescription()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;metaDescription()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#metaDescription--">metaDescription</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
-<a name="categories--">
+<a name="metaKeywords--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>metaKeywords</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;metaKeywords()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#metaKeywords--">metaKeywords</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="metaTitle--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>metaTitle</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;metaTitle()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#metaTitle--">metaTitle</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="name--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>name</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;name()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#name--">name</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="slug--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>slug</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;slug()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#slug--">slug</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="variants--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>variants</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;variants()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#variants--">variants</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="where-java.util.function.Function-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>where</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;where(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>,<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&gt;&nbsp;embeddedPredicate)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#where-java.util.function.Function-">where</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="where-io.sphere.sdk.queries.Predicate-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>categories</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a>&lt;T,<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;categories()</pre>
+<h4>where</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;where(<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;&nbsp;embeddedPredicate)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 </li>

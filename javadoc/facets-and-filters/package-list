@@ -13,7 +13,6 @@ io.sphere.sdk.channels.commands
 io.sphere.sdk.channels.queries
 io.sphere.sdk.client
 io.sphere.sdk.commands
-io.sphere.sdk.concurrent
 io.sphere.sdk.customergroups
 io.sphere.sdk.customergroups.commands
 io.sphere.sdk.customergroups.commands.updateactions
@@ -26,6 +25,7 @@ io.sphere.sdk.customobjects
 io.sphere.sdk.customobjects.commands
 io.sphere.sdk.customobjects.queries
 io.sphere.sdk.http
+io.sphere.sdk.json
 io.sphere.sdk.meta
 io.sphere.sdk.models
 io.sphere.sdk.orders
@@ -41,12 +41,18 @@ io.sphere.sdk.products.search
 io.sphere.sdk.producttypes
 io.sphere.sdk.producttypes.commands
 io.sphere.sdk.producttypes.queries
+io.sphere.sdk.projects
+io.sphere.sdk.projects.queries
 io.sphere.sdk.queries
 io.sphere.sdk.search
+io.sphere.sdk.search.tokenizer
 io.sphere.sdk.shippingmethods
 io.sphere.sdk.shippingmethods.commands
 io.sphere.sdk.shippingmethods.commands.updateactions
 io.sphere.sdk.shippingmethods.queries
+io.sphere.sdk.states
+io.sphere.sdk.states.commands
+io.sphere.sdk.states.queries
 io.sphere.sdk.taxcategories
 io.sphere.sdk.taxcategories.commands
 io.sphere.sdk.taxcategories.queries

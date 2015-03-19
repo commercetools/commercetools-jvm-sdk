@@ -122,15 +122,16 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Adds the given price to the product variant's prices set. It is rejected if the product already contains a price with the same price scope (same currency, country, customer group and channel).
 
- <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-addPriceUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("demo for addPriceUpdateAction");
+ <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-addPrice--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
+    final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
+    final Product updatedProduct = client()
+            .execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT)));
 
-final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
-final Product updatedProduct = client()
-        .execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT)));
-
-final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-assertThat(actualPrice).isEqualTo(expectedPrice);
-</code></pre></div></div>
+    final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+    assertThat(actualPrice).isEqualTo(expectedPrice);
+    return updatedProduct;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -154,7 +155,7 @@ assertThat(actualPrice).isEqualTo(expectedPrice);
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddPrice.html#getPrice--">getPrice</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>long</code></td>
+<td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddPrice.html#getVariantId--">getVariantId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
@@ -209,7 +210,7 @@ assertThat(actualPrice).isEqualTo(expectedPrice);
 <ul class="blockList">
 <li class="blockList">
 <h4>getVariantId</h4>
-<pre>public&nbsp;long&nbsp;getVariantId()</pre>
+<pre>public&nbsp;int&nbsp;getVariantId()</pre>
 </li>
 </ul>
 <a name="getPrice--">

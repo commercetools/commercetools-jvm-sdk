@@ -137,7 +137,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
             .containsExactly(newPrice);
 
     final LineItem lineItemOfTheChangedProduct =
-            execute(CartFetchById.of(cartWithLineItem.getId())).get().getLineItems().get(0);
+            execute(CartByIdFetch.of(cartWithLineItem.getId())).get().getLineItems().get(0);
     assertThat(lineItemOfTheChangedProduct.getPrice())
             .overridingErrorMessage("the new product price is not automatically propagated to the line item in the cart")
             .isEqualTo(oldPrice).isNotEqualTo(newPrice);
@@ -151,7 +151,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
             .overridingErrorMessage("recalculate also updated the total price of the cart")
             .isEqualTo(newPrice.getValue()).isNotEqualTo(cartWithLineItem.getTotalPrice());
 });
-</code></pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

@@ -122,13 +122,14 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Updates the slug of a product.
 
- <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-changeSlugUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("demo for setting slug");
+ <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-changeSlug--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
+    final LocalizedStrings newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
+    final Product updatedProduct = execute(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug, STAGED_AND_CURRENT)));
 
-final LocalizedStrings newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
-final Product updatedProduct = execute(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug, STAGED_AND_CURRENT)));
-
-assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
-</code></pre></div></div>
+    assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
+    return updatedProduct;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

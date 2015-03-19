@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/NotSupportedException.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/MoneySearchModel.html" target="_top">Frames</a></li>
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.search</div>
-<h2 title="Class MoneySearchModel" class="title">Class MoneySearchModel&lt;T&gt;</h2>
+<h2 title="Class MoneySearchModel" class="title">Class MoneySearchModel&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -105,7 +105,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">io.sphere.sdk.search.SearchModelImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.search.MoneySearchModel&lt;T&gt;</li>
+<li>io.sphere.sdk.search.MoneySearchModel&lt;T,S&gt;</li>
 </ul>
 </li>
 </ul>
@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">MoneySearchModel&lt;T&gt;</span>
+<pre>public class <span class="typeNameLabel">MoneySearchModel&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</span>
 extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a>&lt;T&gt;</pre>
 </li>
 </ul>
@@ -161,11 +161,11 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyAmountSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyAmountSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">S</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneySearchModel.html#amount--">amount</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">S</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MoneySearchModel.html#currency--">currency</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -235,7 +235,7 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <ul class="blockList">
 <li class="blockList">
 <h4>amount</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyAmountSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>&gt;&nbsp;amount()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyAmountSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">S</a>&gt;&nbsp;amount()</pre>
 </li>
 </ul>
 <a name="currency--">
@@ -244,7 +244,7 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <ul class="blockListLast">
 <li class="blockList">
 <h4>currency</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>&gt;&nbsp;currency()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/MoneySearchModel.html" title="type parameter in MoneySearchModel">S</a>&gt;&nbsp;currency()</pre>
 </li>
 </ul>
 </li>
@@ -275,7 +275,7 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/MoneyAmountSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/NotSupportedException.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/MoneySearchModel.html" target="_top">Frames</a></li>

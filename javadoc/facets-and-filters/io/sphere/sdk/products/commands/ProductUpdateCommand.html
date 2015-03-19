@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/commands/ProductDeleteCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
@@ -128,13 +128,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
+<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">ProductUpdateCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddExternalImage.html">AddExternalImage</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/RemoveImage.html">RemoveImage</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddExternalImage.html">AddExternalImage</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/AddVariant.html">AddVariant</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/RemoveFromCategory.html">RemoveFromCategory</a></li><li><a href="updateactions/RemoveImage.html">RemoveImage</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/RemoveVariant.html">RemoveVariant</a></li><li><a href="updateactions/RevertStagedChanges.html">RevertStagedChanges</a></li><li><a href="updateactions/SetAttribute.html">SetAttribute</a></li><li><a href="updateactions/SetAttributeInAllVariants.html">SetAttributeInAllVariants</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/SetSearchKeywords.html">SetSearchKeywords</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li></ul></div>
 </li>
 </ul>
 </div>
@@ -169,7 +169,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#getUpdateActions--">getUpdateActions</a>, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#getVersioned--">getVersioned</a>, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#httpRequest--">httpRequest</a>, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#typeReference--">typeReference</a>, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#getUpdateActions--">getUpdateActions</a>, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#getVersioned--">getVersioned</a>, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#httpRequestIntent--">httpRequestIntent</a>, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#typeReference--">typeReference</a>, <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.CommandImpl">
@@ -267,7 +267,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/commands/ProductDeleteCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">

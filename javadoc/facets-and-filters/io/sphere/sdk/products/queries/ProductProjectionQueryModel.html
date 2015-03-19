@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -105,7 +105,12 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.QueryModelImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.DefaultModelQueryModelImpl</a>&lt;T&gt;</li>
+<li>
+<ul class="inheritance">
 <li>io.sphere.sdk.products.queries.ProductProjectionQueryModel</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -123,7 +128,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">ProductProjectionQueryModel</span>
-extends <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a>&lt;T&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">DefaultModelQueryModelImpl</a>&lt;T&gt;</pre>
 </li>
 </ul>
 </div>
@@ -143,62 +148,57 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a>&lt;T,<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#categories--">categories</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries">TimestampSortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#createdAt--">createdAt</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringsQueryModel</a>&lt;T&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringsQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#description--">description</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/BooleanQueryModel.html" title="class in io.sphere.sdk.queries">BooleanQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#hasStagedChanges--">hasStagedChanges</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#id--">id</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries">TimestampSortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#lastModifiedAt--">lastModifiedAt</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;T&gt;</code></td>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#masterVariant--">masterVariant</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;</code></td>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#metaDescription--">metaDescription</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;</code></td>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#metaKeywords--">metaKeywords</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;</code></td>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#metaTitle--">metaTitle</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;</code></td>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#name--">name</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#productType--">productType</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;</code></td>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#slug--">slug</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;T&gt;</code></td>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#variants--">variants</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.DefaultModelQueryModelImpl">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">DefaultModelQueryModelImpl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#createdAt--">createdAt</a>, <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#id--">id</a>, <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#lastModifiedAt--">lastModifiedAt</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryModelImpl">
 <!--   -->
@@ -252,40 +252,13 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/BooleanQueryModel.html" title="class in io.sphere.sdk.queries">BooleanQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;hasStagedChanges()</pre>
 </li>
 </ul>
-<a name="id--">
+<a name="categories--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>id</h4>
-<pre>public final&nbsp;<a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;id()</pre>
-</li>
-</ul>
-<a name="createdAt--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>createdAt</h4>
-<pre>public final&nbsp;<a href="../../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries">TimestampSortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;createdAt()</pre>
-</li>
-</ul>
-<a name="lastModifiedAt--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>lastModifiedAt</h4>
-<pre>public final&nbsp;<a href="../../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries">TimestampSortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;lastModifiedAt()</pre>
-</li>
-</ul>
-<a name="name--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>name</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;&nbsp;name()</pre>
+<h4>categories</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;categories()</pre>
 </li>
 </ul>
 <a name="description--">
@@ -294,16 +267,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title
 <ul class="blockList">
 <li class="blockList">
 <h4>description</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringsQueryModel</a>&lt;T&gt;&nbsp;description()</pre>
-</li>
-</ul>
-<a name="slug--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>slug</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;&nbsp;slug()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringsQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;description()</pre>
 </li>
 </ul>
 <a name="masterVariant--">
@@ -312,34 +276,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title
 <ul class="blockList">
 <li class="blockList">
 <h4>masterVariant</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;T&gt;&nbsp;masterVariant()</pre>
-</li>
-</ul>
-<a name="variants--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>variants</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;T&gt;&nbsp;variants()</pre>
-</li>
-</ul>
-<a name="metaTitle--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>metaTitle</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;&nbsp;metaTitle()</pre>
-</li>
-</ul>
-<a name="metaKeywords--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>metaKeywords</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;&nbsp;metaKeywords()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;masterVariant()</pre>
 </li>
 </ul>
 <a name="metaDescription--">
@@ -348,16 +285,52 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title
 <ul class="blockList">
 <li class="blockList">
 <h4>metaDescription</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;T&gt;&nbsp;metaDescription()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;metaDescription()</pre>
 </li>
 </ul>
-<a name="categories--">
+<a name="metaKeywords--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>metaKeywords</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;metaKeywords()</pre>
+</li>
+</ul>
+<a name="metaTitle--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>metaTitle</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;metaTitle()</pre>
+</li>
+</ul>
+<a name="name--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>name</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;name()</pre>
+</li>
+</ul>
+<a name="slug--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>slug</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries">LocalizedStringsQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;slug()</pre>
+</li>
+</ul>
+<a name="variants--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>categories</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/ReferenceListQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceListQueryModel</a>&lt;T,<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;categories()</pre>
+<h4>variants</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;variants()</pre>
 </li>
 </ul>
 </li>

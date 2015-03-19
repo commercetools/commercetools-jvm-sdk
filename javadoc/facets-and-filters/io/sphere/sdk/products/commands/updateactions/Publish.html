@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/products/commands/updateactions/Publish.html" target="_top">Frames</a></li>
@@ -122,15 +122,17 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Publishes a product, which causes the staged projection of the product to override the current projection. If the product is published for the first time, the current projection is created.
 
- <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-testPublishAndUnpublish--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("testPublishAndUnPublish");
-assertThat(product.getMasterData().isPublished()).isFalse();
+ <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-publish--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
+    assertThat(product.getMasterData().isPublished()).isFalse();
 
-final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
-assertThat(publishedProduct.getMasterData().isPublished()).isTrue();
+    final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
+    assertThat(publishedProduct.getMasterData().isPublished()).isTrue();
 
-final Product unpublishedProduct = execute(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
-assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
-</code></pre></div></div>
+    final Product unpublishedProduct = execute(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
+    assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
+    return unpublishedProduct;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -226,7 +228,7 @@ assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/products/commands/updateactions/Publish.html" target="_top">Frames</a></li>

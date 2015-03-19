@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/products/commands/ExperimentalProductImageUploadCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/commands/ProductDeleteCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/products/commands/ProductCreateCommand.html" target="_top">Frames</a></li>
@@ -128,7 +128,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></dd>
+<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -143,7 +143,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
  <div id="io-sphere-sdk-products-CreateProductExamples-createWithClient--%s" class=code-example><pre><code class='java'>final ProductDraft productTemplate = new SimpleCottonTShirtProductDraftSupplier(productType, "demo product").get();
 final ProductCreateCommand command = ProductCreateCommand.of(productTemplate);
 final CompletableFuture&lt;Product&gt; result = client.execute(command);
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/CreateProductExamples.java" target="_blank">test code</a>.</pre></div>
 
  Create a <a href="../../../../../io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products"><code>ProductDraft</code></a> instance:
  <div id="io-sphere-sdk-suppliers-SimpleCottonTShirtProductDraftSupplier%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.github.slugify.Slugify;
@@ -183,7 +183,7 @@ import java.util.function.Supplier;
         return LocalizedStrings.of(Locale.ENGLISH, value);
     }
 }
-</code></pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/suppliers/SimpleCottonTShirtProductDraftSupplier.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -212,7 +212,7 @@ import java.util.function.Supplier;
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpBody--">httpBody</a>, <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpMethod--">httpMethod</a>, <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpRequest--">httpRequest</a>, <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html#typeReference--">typeReference</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpBody--">httpBody</a>, <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpMethod--">httpMethod</a>, <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html#httpRequestIntent--">httpRequestIntent</a>, <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html#typeReference--">typeReference</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.CommandImpl">
@@ -300,7 +300,7 @@ import java.util.function.Supplier;
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/products/commands/ExperimentalProductImageUploadCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/products/commands/ProductDeleteByIdCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/commands/ProductDeleteCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/products/commands/ProductCreateCommand.html" target="_top">Frames</a></li>

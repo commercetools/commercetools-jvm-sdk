@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSku.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" target="_top">Frames</a></li>
@@ -127,20 +127,21 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 implements <a href="../../../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></pre>
 <div class="block">Sets the SEO attributes title, description and key words.
 
- <div id="io-sphere-sdk-products-ProductCrudIntegrationTest-setMetaAttributesUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = createInBackendByName("demo for setMetaAttributesUpdateAction");
+ <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setMetaAttributes--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
+    final MetaAttributes metaAttributes = MetaAttributes.metaAttributesOf(ENGLISH,
+            "commercetools SPHERE.IO&amp;#8482; - Next generation eCommerce",
+            "SPHERE.IO&amp;#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
+            "Platform-as-a-Service, e-commerce, http, api, tool");
+    final Product updatedProduct = client()
+            .execute(ProductUpdateCommand.of(product, SetMetaAttributes.of(metaAttributes, STAGED_AND_CURRENT)));
 
-final MetaAttributes metaAttributes = MetaAttributes.metaAttributesOf(ENGLISH,
-        "commercetools SPHERE.IO&amp;#8482; - Next generation eCommerce",
-        "SPHERE.IO&amp;#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
-        "Platform-as-a-Service, e-commerce, http, api, tool");
-final Product updatedProduct = client()
-        .execute(ProductUpdateCommand.of(product, SetMetaAttributes.of(metaAttributes, STAGED_AND_CURRENT)));
-
-final ProductData productData = updatedProduct.getMasterData().getStaged();
-assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
-assertThat(productData.getMetaDescription()).isEqualTo(metaAttributes.getMetaDescription());
-assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywords());
-</code></pre></div></div>
+    final ProductData productData = updatedProduct.getMasterData().getStaged();
+    OptionalAssert.assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
+    OptionalAssert.assertThat(productData.getMetaDescription()).isEqualTo(metaAttributes.getMetaDescription());
+    OptionalAssert.assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywords());
+    return updatedProduct;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -309,7 +310,7 @@ assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywor
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSku.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" target="_top">Frames</a></li>

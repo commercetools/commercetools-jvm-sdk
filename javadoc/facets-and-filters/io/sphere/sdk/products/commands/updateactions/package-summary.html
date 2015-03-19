@@ -104,27 +104,39 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">AddVariant</a></td>
+<td class="colLast">
+<div class="block">Adds a variant to a product.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeName</a></td>
 <td class="colLast">
 <div class="block">Updates the name of a product.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangePrice</a></td>
 <td class="colLast">
 <div class="block">Replaces a price in the product variant's prices set.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeSlug</a></td>
 <td class="colLast">
 <div class="block">Updates the slug of a product.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/Publish.html" title="class in io.sphere.sdk.products.commands.updateactions">Publish</a></td>
 <td class="colLast">
 <div class="block">Publishes a product, which causes the staged projection of the product to override the current projection.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveFromCategory</a></td>
+<td class="colLast">
+<div class="block">Removes a product from a category.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -136,16 +148,42 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">RemovePrice</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-products-ProductCrudIntegrationTest-removePriceUpdateAction--%s" class=code-example><pre><code class='java'>final Product product = preparePricedProduct("demo for removePriceUpdateAction");
+<div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-removePrice--%s" class=code-example><pre><code class='java'>withUpdateablePricedProduct(client(), product -&gt; {
+    final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 
-final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
+    final Product updatedProduct = client()
+            .execute(ProductUpdateCommand.of(product, RemovePrice.of(MASTER_VARIANT_ID, oldPrice, STAGED_AND_CURRENT)));
 
-final Product updatedProduct = client()
-        .execute(ProductUpdateCommand.of(product, RemovePrice.of(MASTER_VARIANT_ID, oldPrice, STAGED_AND_CURRENT)));
+    assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
+            .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
 
-assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
-        .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
-</code></pre></div></div>
+    return updatedProduct;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveVariant</a></td>
+<td class="colLast">
+<div class="block">Removes a variant from a product.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RevertStagedChanges.html" title="class in io.sphere.sdk.products.commands.updateactions">RevertStagedChanges</a></td>
+<td class="colLast">
+<div class="block">Revert all changes, which were made to the staged version of a product and reset to the current version.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttribute</a></td>
+<td class="colLast">
+<div class="block">Adds/Removes/Changes a custom attribute.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></td>
+<td class="colLast">
+<div class="block">Adds / Removes / Changes a custom attribute in all variants at the same time (it can be helpful to set attribute values that are constrained with SameForAll).</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -161,14 +199,33 @@ assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
 </td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSku.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSku</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSearchKeywords</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setSearchKeywords--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
+    final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("foo bar baz", CustomSuggestTokenizer.of(asList("foo, baz")))));
+    final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords, STAGED_AND_CURRENT));
+    final Product updatedProduct = execute(command);
+
+    final SearchKeywords actualKeywords = updatedProduct.getMasterData().getStaged().getSearchKeywords();
+    assertThat(actualKeywords).isEqualTo(searchKeywords);
+    return updatedProduct;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSku.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSku</a></td>
+<td class="colLast">
+<div class="block">Adds, changes or removes an SKU on a product variant.</div>
+</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></td>
+<td class="colLast">
+<div class="block">Adds, changes or removes a product's tax category.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/Unpublish.html" title="class in io.sphere.sdk.products.commands.updateactions">Unpublish</a></td>
 <td class="colLast">
 <div class="block">Unpublishes a product, effectively deleting the current projection of the product, leaving only the staged projection.</div>

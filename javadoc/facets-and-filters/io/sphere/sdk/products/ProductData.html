@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":18,"i10":18,"i11":6};
+var methods = {"i0":18,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":18,"i11":18,"i12":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -157,22 +157,26 @@ var activeTableTab = "activeTableTab";
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getSearchKeywords--">getSearchKeywords</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>default java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getVariant-int-">getVariant</a></span>(int&nbsp;variantId)</code>
 <div class="block">Finds a product variant by id.</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getVariantOrMaster-int-">getVariantOrMaster</a></span>(int&nbsp;variantId)</code>
 <div class="block">Finds a product variant by id and returns the master variant if not variant with the id is present.</div>
 </td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductData.html#getVariants--">getVariants</a></span>()</code>
 <div class="block">Gets the variants which are not identical to the master variant.</div>
@@ -325,6 +329,8 @@ var activeTableTab = "activeTableTab";
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>variantId</code> - the id of the variant to find</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>optional of a variant matching variantId</dd>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../io/sphere/sdk/products/ProductData.html#getVariantOrMaster-int-"><code>getVariantOrMaster(int)</code></a></dd>
 </dl>
@@ -333,7 +339,7 @@ var activeTableTab = "activeTableTab";
 <a name="getVariantOrMaster-int-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getVariantOrMaster</h4>
 <pre>default&nbsp;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&nbsp;getVariantOrMaster(int&nbsp;variantId)</pre>
@@ -346,6 +352,15 @@ var activeTableTab = "activeTableTab";
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../io/sphere/sdk/products/ProductData.html#getVariant-int-"><code>getVariant(int)</code></a></dd>
 </dl>
+</li>
+</ul>
+<a name="getSearchKeywords--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getSearchKeywords</h4>
+<pre><a href="../../../../io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a>&nbsp;getSearchKeywords()</pre>
 </li>
 </ul>
 </li>

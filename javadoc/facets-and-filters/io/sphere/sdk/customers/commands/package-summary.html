@@ -90,21 +90,18 @@
     final Customer updatedCustomer = execute(CustomerChangePasswordCommand.of(customer, oldPassword, newPassword));
     assertThat(customer.getPassword()).isNotEqualTo(updatedCustomer.getPassword());
     final CustomerSignInResult signInResult =
-            execute(CustomerSignInCommand.of(customer.getEmail(), newPassword, Optional.empty()));
+            execute(CustomerSignInCommand.of(customer.getEmail(), newPassword));
     assertThat(signInResult.getCustomer().hasSameIdAs(updatedCustomer))
             .overridingErrorMessage("sign in works with new password")
             .isTrue();
     try {
         execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword, Optional.empty()));
         fail();
-    } catch (final Exception e) {
-        final boolean causeIsOk = e.getCause() instanceof InvalidCurrentPasswordException || e instanceof InvalidCurrentPasswordException;
-        if (!causeIsOk) {
-            throw e;
-        }
+    } catch (final ErrorResponseException e) {
+        assertThat(e.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();
     }
 });
-</code></pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerChangePasswordCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -124,7 +121,7 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerDeleteByIdCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerDeleteByIdCommand</a></td>
+<td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerDeleteCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerDeleteCommand</a></td>
 <td class="colLast">
 <div class="block">Deletes a customer.</div>
 </td>

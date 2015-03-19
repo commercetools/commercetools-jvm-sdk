@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.search</div>
-<h2 title="Class TimeSearchModel" class="title">Class TimeSearchModel&lt;T&gt;</h2>
+<h2 title="Class TimeSearchModel" class="title">Class TimeSearchModel&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -105,7 +105,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">io.sphere.sdk.search.SearchModelImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.search.TimeSearchModel&lt;T&gt;</li>
+<li>io.sphere.sdk.search.TimeSearchModel&lt;T,S&gt;</li>
 </ul>
 </li>
 </ul>
@@ -118,13 +118,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,java.time.LocalTime&gt;, <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,java.time.LocalTime&gt;, <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;T,S&gt;</dd>
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">TimeSearchModel&lt;T&gt;</span>
+<pre>public class <span class="typeNameLabel">TimeSearchModel&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</span>
 extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a>&lt;T&gt;
-implements <a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,java.time.LocalTime&gt;, <a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;T&gt;</pre>
+implements <a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,java.time.LocalTime&gt;, <a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;T,S&gt;</pre>
 </li>
 </ul>
 </div>
@@ -162,16 +162,16 @@ implements <a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title=
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeTermFacetSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>,java.time.LocalTime&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="class in io.sphere.sdk.search">RangedFacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>,java.time.LocalTime&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TimeSearchModel.html#facet--">facet</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeTermFilterSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>,java.time.LocalTime&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangedFilterSearchModel.html" title="class in io.sphere.sdk.search">RangedFilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>,java.time.LocalTime&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TimeSearchModel.html#filter--">filter</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TimeSearchModel.html#sort-io.sphere.sdk.search.SearchSortDirection-">sort</a></span>(<a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search">SearchSortDirection</a>&nbsp;sortDirection)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TimeSearchModel.html#sort-S-">sort</a></span>(<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">S</a>&nbsp;sortDirection)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -240,7 +240,7 @@ implements <a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title=
 <ul class="blockList">
 <li class="blockList">
 <h4>filter</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeTermFilterSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>,java.time.LocalTime&gt;&nbsp;filter()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangedFilterSearchModel.html" title="class in io.sphere.sdk.search">RangedFilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>,java.time.LocalTime&gt;&nbsp;filter()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#filter--">filter</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>,java.time.LocalTime&gt;</code></dd>
@@ -253,7 +253,7 @@ implements <a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title=
 <ul class="blockList">
 <li class="blockList">
 <h4>facet</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeTermFacetSearchModel.html" title="class in io.sphere.sdk.search">RangeTermFacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>,java.time.LocalTime&gt;&nbsp;facet()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="class in io.sphere.sdk.search">RangedFacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>,java.time.LocalTime&gt;&nbsp;facet()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#facet--">facet</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>,java.time.LocalTime&gt;</code></dd>
@@ -262,14 +262,16 @@ implements <a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title=
 </ul>
 <a name="sort-io.sphere.sdk.search.SearchSortDirection-">
 <!--   -->
+</a><a name="sort-S-">
+<!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>sort</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>&gt;&nbsp;sort(<a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search">SearchSortDirection</a>&nbsp;sortDirection)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>&gt;&nbsp;sort(<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">S</a>&nbsp;sortDirection)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html#sort-io.sphere.sdk.search.SearchSortDirection-">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html#sort-S-">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="type parameter in TimeSearchModel">S</a> extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

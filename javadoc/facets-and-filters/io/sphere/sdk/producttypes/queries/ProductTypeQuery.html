@@ -123,7 +123,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -134,7 +134,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQuery.html" ti
   Query all product types:
 
   <div id="example-QueryProductTypeExamples-queryAll--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductTypeQuery.of());
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryProductTypeExamples.java" target="_blank">test code</a>.</pre></div>
 
   Scenario to load a specific product type:
 
@@ -151,8 +151,8 @@ import java.util.concurrent.CompletableFuture;
     private final SphereClient client = null;//TODO
 
     public void queryByNameExample() {
-        CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultPromise = client.execute(ProductTypeQuery.of().byName("t-shirt"));
-        CompletableFuture&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesPromise = queryResultPromise.thenApply(
+        CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultFuture = client.execute(ProductTypeQuery.of().byName("t-shirt"));
+        CompletableFuture&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesFuture = queryResultFuture.thenApply(
                 queryResult -&gt; extractPossibleEnumValuesForSize(queryResult));
     }
 
@@ -175,13 +175,13 @@ import java.util.concurrent.CompletableFuture;
         private static final long serialVersionUID = 4954918890077093841L;
     }
 }
-</code></pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryByProductTypeNameExample.java" target="_blank">test code</a>.</pre></div>
 
   With <a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
   <div id="example-QueryProductTypeExamples-queryByAttributeName--%s" class=code-example><pre><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
 CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductTypeQuery.of().withPredicate(hasSizeAttribute));
-</code></pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryProductTypeExamples.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -240,9 +240,9 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#httpRequest--">httpRequest</a></span>()</code>
-<div class="block">Provides an http request, this does not include the execution of it.</div>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#httpRequestIntent--">httpRequestIntent</a></span>()</code>
+<div class="block">Provides an http request intent, this does not include the execution of it.</div>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
@@ -333,7 +333,7 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a>, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-io.sphere.sdk.queries.Sort-">withSort</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath</a>, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a>, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-io.sphere.sdk.queries.Sort-">withSort</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.Query">
@@ -590,22 +590,20 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 </dl>
 </li>
 </ul>
-<a name="httpRequest--">
+<a name="httpRequestIntent--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>httpRequest</h4>
-<pre>public final&nbsp;<a href="../../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http">HttpRequest</a>&nbsp;httpRequest()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">Requestable</a></code></span></div>
-<div class="block">Provides an http request, this does not include the execution of it.</div>
+<h4>httpRequestIntent</h4>
+<pre>public final&nbsp;<a href="../../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>&nbsp;httpRequestIntent()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">SphereRequest</a></code></span></div>
+<div class="block">Provides an http request intent, this does not include the execution of it.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/http/Requestable.html#httpRequest--">httpRequest</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/http/Requestable.html" title="interface in io.sphere.sdk.http">Requestable</a></code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>http request</dd>
+<dd>http request intent</dd>
 </dl>
 </li>
 </ul>
@@ -618,7 +616,7 @@ CompletableFuture&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.exe
 <pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;&nbsp;resultMapper()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">SphereRequest</a></code></span></div>
 <div class="block">Takes an http response and maps it into a Java object of type T.
-     Before calling this method, check with <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.canHandleResponse(io.sphere.sdk.http.HttpResponse)</code></a> if the response can be consumed.</div>
+     Before calling this method, check with <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canHandleResponse-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.canHandleResponse(HttpResponse)</code></a> if the response can be consumed.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</code></dd>
