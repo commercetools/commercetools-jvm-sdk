@@ -269,7 +269,7 @@ assertThat(resultsToIds(result)).containsExactly(product3.getId(), product2.getI
 
  <h4 id=filter-expressions>Expressions</h4>
 
- <p>You can easily build filter expressions with the <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearchModelExperimental.html" title="class in io.sphere.sdk.products.search"><code>ProductProjectionSearchModelExperimental</code></a> class. For more details, check the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">Filters</a>.</p>
+ <p>You can easily build filter expressions with the <a href="../../../../io/sphere/sdk/products/search/ExperimentalProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search"><code>ExperimentalProductProjectionSearchModel</code></a> class. For more details, check the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">Filters</a>.</p>
 
  <p>In the following example only the products with red color are returned:</p>
 
@@ -302,7 +302,7 @@ assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId()
 
  <h4 id=facet-expressions>Expressions</h4>
 
- <p>Facets calculate statistical counts based on the values associated with a product attribute. Building facet expressions is very easy thanks to the <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearchModelExperimental.html" title="class in io.sphere.sdk.products.search"><code>ProductProjectionSearchModelExperimental</code></a> class. You can consult the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">Facets</a> HTTP API documentation for more information.</p>
+ <p>Facets calculate statistical counts based on the values associated with a product attribute. Building facet expressions is very easy thanks to the <a href="../../../../io/sphere/sdk/products/search/ExperimentalProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search"><code>ExperimentalProductProjectionSearchModel</code></a> class. You can consult the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">Facets</a> HTTP API documentation for more information.</p>
 
  <p>There are three types of faceted search: <a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><code>TermFacetResult</code></a>, <a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><code>RangeFacetResult</code></a> and <a href="../../../../io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search"><code>FilteredFacetResult</code></a>. Next are presented example codes of each type to better illustrate how these facet types work.</p>
 
