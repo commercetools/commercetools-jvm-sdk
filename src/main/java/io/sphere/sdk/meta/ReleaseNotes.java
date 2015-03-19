@@ -12,6 +12,7 @@ package io.sphere.sdk.meta;
  <h3 class=released-version id=v1_0_0_M12>1.0.0-M12</h3>
  <ul>
  <li class=new-in-release>Added the {@link io.sphere.sdk.orders.commands.OrderImportCommand}.</li>
+ <li class=new-in-release>Added the nested attributes: {@link io.sphere.sdk.attributes.AttributeAccess#ofNested()} + {@link io.sphere.sdk.attributes.AttributeAccess#ofNestedSet()}.</li>
  <li class=new-in-release>The error JSON body from SPHERE.IO responses can be directly extracted as JSON with {@link io.sphere.sdk.client.SphereServiceException#getJsonBody()}.</li>
  <li class=new-in-release>{@link io.sphere.sdk.http.HttpResponse} also contains {@link io.sphere.sdk.http.HttpHeaders}.</li>
  <li class=new-in-release>Experimental search predicate model {@link io.sphere.sdk.products.search.ProductProjectionSearch#model()}. See also {@link io.sphere.sdk.meta.ProductSearchDocumentation}.</li>
