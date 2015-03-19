@@ -111,10 +111,15 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - type of the endpoint contained in the bound.</dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">Bound&lt;T extends java.lang.Comparable&lt;? super T&gt;&gt;</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<div class="block">Represents one of the two possible bounds of a range or interval.</div>
 </li>
 </ul>
 </div>
@@ -262,6 +267,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <pre>public static&nbsp;&lt;T extends java.lang.Comparable&lt;? super T&gt;&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/Bound.html" title="class in io.sphere.sdk.search">Bound</a>&lt;T&gt;&nbsp;exclusive(T&nbsp;endpoint)</pre>
 <div class="block">Creates a bound with the given endpoint, excluded from the range.</div>
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - type of the endpoint.</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>endpoint</code> - the endpoint value of the given type T.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -280,6 +287,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <pre>public static&nbsp;&lt;T extends java.lang.Comparable&lt;? super T&gt;&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/Bound.html" title="class in io.sphere.sdk.search">Bound</a>&lt;T&gt;&nbsp;inclusive(T&nbsp;endpoint)</pre>
 <div class="block">Creates a bound with the given endpoint, included from the range.</div>
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - type of the endpoint.</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>endpoint</code> - the endpoint value of the given type T.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>

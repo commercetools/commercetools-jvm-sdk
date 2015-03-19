@@ -106,10 +106,15 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - type of the data to transform.</dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">TypeSerializer&lt;T&gt;</span>
 extends java.lang.Object</pre>
+<div class="block">Serializer to transform certain types into SPHERE format.</div>
 </li>
 </ul>
 </div>
@@ -131,55 +136,55 @@ extends java.lang.Object</pre>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.lang.Boolean&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html#ofBoolean--">ofBoolean</a></span>()</code>
-<div class="block">Converts the given boolean into the true/false string.</div>
+<div class="block">Serializer to convert the given boolean into the true/false string.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;javax.money.CurrencyUnit&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html#ofCurrency--">ofCurrency</a></span>()</code>
-<div class="block">Converts the given money currency into the accepted format.</div>
+<div class="block">Serializer to convert the given money currency into the accepted format.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.time.LocalDate&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html#ofDate--">ofDate</a></span>()</code>
-<div class="block">Converts the given local date into the accepted ISO format.</div>
+<div class="block">Serializer to convert the given local date into the accepted ISO format.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.time.LocalDateTime&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html#ofDateTime--">ofDateTime</a></span>()</code>
-<div class="block">Converts the given local datetime into the accepted ISO format with UTC zone.</div>
+<div class="block">Serializer to convert the given local datetime into the accepted ISO format with UTC zone.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.math.BigDecimal&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html#ofMoneyAmount--">ofMoneyAmount</a></span>()</code>
-<div class="block">Converts the given money amount into cent amount (e.g.</div>
+<div class="block">Serializer to convert the given money amount into cent amount (e.g.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.math.BigDecimal&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html#ofNumber--">ofNumber</a></span>()</code>
-<div class="block">Converts the given numerical value into a suitable string.</div>
+<div class="block">Serializer to convert the given numerical value into a suitable string.</div>
 </td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>static &lt;R&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;R&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html#ofReference--">ofReference</a></span>()</code>
-<div class="block">Converts the given reference into the identifier value.</div>
+<div class="block">Serializer to convert the given reference into the identifier value.</div>
 </td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html#ofText--">ofText</a></span>()</code>
-<div class="block">Converts the given text to a formatted string with escaped characters.</div>
+<div class="block">Serializer to convert the given text to a formatted string with escaped characters.</div>
 </td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.time.LocalTime&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html#ofTime--">ofTime</a></span>()</code>
-<div class="block">Converts the given local time into the accepted standard format.</div>
+<div class="block">Serializer to convert the given local time into the accepted standard format.</div>
 </td>
 </tr>
 <tr id="i9" class="rowColor">
@@ -224,7 +229,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>ofText</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.lang.String&gt;&nbsp;ofText()</pre>
-<div class="block">Converts the given text to a formatted string with escaped characters.</div>
+<div class="block">Serializer to convert the given text to a formatted string with escaped characters.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the serializer for text data.</dd>
+</dl>
 </li>
 </ul>
 <a name="ofBoolean--">
@@ -234,7 +243,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>ofBoolean</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.lang.Boolean&gt;&nbsp;ofBoolean()</pre>
-<div class="block">Converts the given boolean into the true/false string.</div>
+<div class="block">Serializer to convert the given boolean into the true/false string.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the serializer for boolean data.</dd>
+</dl>
 </li>
 </ul>
 <a name="ofNumber--">
@@ -244,7 +257,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>ofNumber</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.math.BigDecimal&gt;&nbsp;ofNumber()</pre>
-<div class="block">Converts the given numerical value into a suitable string.</div>
+<div class="block">Serializer to convert the given numerical value into a suitable string.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the serializer for numerical data.</dd>
+</dl>
 </li>
 </ul>
 <a name="ofDate--">
@@ -254,7 +271,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>ofDate</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.time.LocalDate&gt;&nbsp;ofDate()</pre>
-<div class="block">Converts the given local date into the accepted ISO format.</div>
+<div class="block">Serializer to convert the given local date into the accepted ISO format.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the serializer for date data.</dd>
+</dl>
 </li>
 </ul>
 <a name="ofTime--">
@@ -264,7 +285,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>ofTime</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.time.LocalTime&gt;&nbsp;ofTime()</pre>
-<div class="block">Converts the given local time into the accepted standard format.</div>
+<div class="block">Serializer to convert the given local time into the accepted standard format.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the serializer for time data.</dd>
+</dl>
 </li>
 </ul>
 <a name="ofDateTime--">
@@ -274,7 +299,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>ofDateTime</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.time.LocalDateTime&gt;&nbsp;ofDateTime()</pre>
-<div class="block">Converts the given local datetime into the accepted ISO format with UTC zone.</div>
+<div class="block">Serializer to convert the given local datetime into the accepted ISO format with UTC zone.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the serializer for datetime data.</dd>
+</dl>
 </li>
 </ul>
 <a name="ofMoneyAmount--">
@@ -284,7 +313,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>ofMoneyAmount</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.math.BigDecimal&gt;&nbsp;ofMoneyAmount()</pre>
-<div class="block">Converts the given money amount into cent amount (e.g. from "20,00" to "2000").</div>
+<div class="block">Serializer to convert the given money amount into cent amount (e.g. from "20,00" to "2000").</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the serializer for money amount data.</dd>
+</dl>
 </li>
 </ul>
 <a name="ofCurrency--">
@@ -294,7 +327,11 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>ofCurrency</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;javax.money.CurrencyUnit&gt;&nbsp;ofCurrency()</pre>
-<div class="block">Converts the given money currency into the accepted format.</div>
+<div class="block">Serializer to convert the given money currency into the accepted format.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the serializer for currency data.</dd>
+</dl>
 </li>
 </ul>
 <a name="ofReference--">
@@ -304,7 +341,13 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>ofReference</h4>
 <pre>public static&nbsp;&lt;R&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;R&gt;&gt;&nbsp;ofReference()</pre>
-<div class="block">Converts the given reference into the identifier value.</div>
+<div class="block">Serializer to convert the given reference into the identifier value.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>R</code> - type of the reference.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the serializer for references of the given type.</dd>
+</dl>
 </li>
 </ul>
 </li>
