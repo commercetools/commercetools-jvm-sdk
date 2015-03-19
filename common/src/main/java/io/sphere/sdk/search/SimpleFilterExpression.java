@@ -1,6 +1,8 @@
 package io.sphere.sdk.search;
 
-final class SimpleFilterExpression<T> implements FilterExpression<T> {
+import io.sphere.sdk.models.Base;
+
+final class SimpleFilterExpression<T> extends Base implements FilterExpression<T> {
     private final String sphereFilterExpression;
 
     SimpleFilterExpression(final String sphereFilterExpression) {
