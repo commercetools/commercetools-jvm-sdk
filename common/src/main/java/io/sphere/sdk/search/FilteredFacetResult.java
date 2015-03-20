@@ -1,10 +1,12 @@
 package io.sphere.sdk.search;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 public class FilteredFacetResult extends Base implements FacetResult {
     private final long count;
 
+    @JsonCreator
     private FilteredFacetResult(final long count) {
         this.count = count;
     }
