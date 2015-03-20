@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 
@@ -10,6 +11,7 @@ class ProductVariantAvailabilityImpl extends Base implements ProductVariantAvail
     private final boolean isOnStock;
     private final Optional<Integer> restockableInDays;
 
+    @JsonCreator
     ProductVariantAvailabilityImpl(final boolean isOnStock, final Optional<Integer> restockableInDays) {
         this.isOnStock = isOnStock;
         this.restockableInDays = restockableInDays;
