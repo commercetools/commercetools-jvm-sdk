@@ -5,11 +5,11 @@ import io.sphere.sdk.client.AuthActorProtocol.*;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
 import static io.sphere.sdk.client.SphereAuth.*;
-import static io.sphere.sdk.client.CompletableFutureUtils.*;
+import static io.sphere.sdk.client.AsyncUtils.*;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
@@ -49,7 +49,7 @@ final class AuthActor extends Actor {
     private void process(final FetchTokenFromSphereMessage m) {
         if (!isWaitingForToken) {
             isWaitingForToken = true;
-            final CompletableFuture<Tokens> future = internalTokensSupplier.get();
+            final CompletionStage<Tokens> future = internalTokensSupplier.get();
             onSuccess(future, tokens -> tell(new SuccessfulTokenFetchMessage(tokens)));
             onFailure(future, e -> tell(new FailedTokenFetchMessage(e, m.attempt + 1)));
         }

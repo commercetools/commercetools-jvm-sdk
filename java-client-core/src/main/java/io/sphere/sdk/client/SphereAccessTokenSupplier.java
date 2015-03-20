@@ -2,16 +2,16 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Supplier;
 
 /** Provides an OAuth token for accessing protected Sphere HTTP API endpoints.
  *
  * There a no guarantees concerning the token providing mechanism.
  */
-public interface SphereAccessTokenSupplier extends AutoCloseable, Supplier<CompletableFuture<String>> {
+public interface SphereAccessTokenSupplier extends AutoCloseable, Supplier<CompletionStage<String>> {
     /** Returns the OAuth access token. */
-    public CompletableFuture<String> get();
+    public CompletionStage<String> get();
 
     public void close();
 

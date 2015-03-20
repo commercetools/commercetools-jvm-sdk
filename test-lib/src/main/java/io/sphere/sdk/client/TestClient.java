@@ -11,7 +11,7 @@ public final class TestClient {
 
     public <T> T execute(final SphereRequest<T> sphereRequest) {
         try {
-            return underlying.execute(sphereRequest).get();
+            return underlying.execute(sphereRequest).toCompletableFuture().get();
         } catch (final InterruptedException | ExecutionException e) {
             throw (e.getCause() instanceof RuntimeException) ? ((RuntimeException) e.getCause()) : new TestClientException(e);
         }

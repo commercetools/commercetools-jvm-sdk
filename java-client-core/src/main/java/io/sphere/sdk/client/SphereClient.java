@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.http.HttpClient;
 
 import java.io.Closeable;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 /**
  * A client interface to perform requests to SPHERE.IO.
@@ -20,7 +20,7 @@ import java.util.concurrent.CompletableFuture;
  *
  */
 public interface SphereClient extends Closeable {
-    <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest);
+    <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest);
 
     void close();
 

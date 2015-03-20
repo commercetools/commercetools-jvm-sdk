@@ -2,7 +2,7 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.models.Base;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 public class SphereClientDecorator extends Base implements SphereClient {
     private final SphereClient delegate;
@@ -17,7 +17,7 @@ public class SphereClientDecorator extends Base implements SphereClient {
     }
 
     @Override
-    public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
+    public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
         return delegate.execute(sphereRequest);
     }
 }

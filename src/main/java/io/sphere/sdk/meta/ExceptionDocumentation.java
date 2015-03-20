@@ -24,7 +24,7 @@ package io.sphere.sdk.meta;
  *
  * If a command cannot be performed due to unfulfilled preconditions
  * SPHERE.IO can return one error response with multiple errors (<a href="http://dev.sphere.io/http-api-errors.html">listing of error codes</a>).
- * The JVM SDK will then put a {@link io.sphere.sdk.client.ErrorResponseException} into a {@link java.util.concurrent.CompletableFuture}.
+ * The JVM SDK will then put a {@link io.sphere.sdk.client.ErrorResponseException} into a {@link java.util.concurrent.CompletionStage}.
  *
  * The following example shows how to distinguish errors by error code:
  * {@include.example io.sphere.sdk.customers.commands.CustomerChangePasswordCommandTest#demo()}

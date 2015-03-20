@@ -1,10 +1,10 @@
 package io.sphere.sdk.http;
 
 import java.io.Closeable;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 public interface HttpClient extends Closeable {
-    CompletableFuture<HttpResponse> execute(HttpRequest httpRequest);
+    CompletionStage<HttpResponse> execute(HttpRequest httpRequest);
 
     void close();
 }

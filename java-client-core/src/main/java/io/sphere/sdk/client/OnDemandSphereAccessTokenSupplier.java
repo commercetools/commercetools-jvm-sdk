@@ -2,7 +2,7 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.client.SphereAuth.*;
 
@@ -23,7 +23,7 @@ final class OnDemandSphereAccessTokenSupplier extends AutoCloseableService imple
     }
 
     @Override
-    public CompletableFuture<String> get() {
+    public CompletionStage<String> get() {
         return tokensSupplier.get().thenApply(Tokens::getAccessToken);
     }
 

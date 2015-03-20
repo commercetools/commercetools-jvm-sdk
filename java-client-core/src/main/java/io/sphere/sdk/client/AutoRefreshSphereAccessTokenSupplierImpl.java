@@ -7,6 +7,7 @@ import io.sphere.sdk.http.HttpClient;
 import java.time.Instant;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 /**
  *  Holds OAuth access tokenCache for accessing protected Sphere HTTP API endpoints.
@@ -25,7 +26,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
     }
 
     @Override
-    public CompletableFuture<String> get() {
+    public CompletionStage<String> get() {
         return currentAccessTokenFuture;
     }
 
@@ -55,7 +56,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
                             //keep the old token
                         } else {
                             currentTokensOption = Optional.empty();
-                            currentAccessTokenFuture = CompletableFutureUtils.failed(m.cause);
+                            currentAccessTokenFuture = AsyncUtils.failed(m.cause);
                         }
                     });
         }
@@ -90,7 +91,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
         currentTokensOption = Optional.of(tokens);
         final String accessToken = tokens.getAccessToken();
         if (currentAccessTokenFuture.isDone()) {
-            currentAccessTokenFuture = CompletableFutureUtils.successful(accessToken);
+            currentAccessTokenFuture = AsyncUtils.successful(accessToken);
         } else {
             currentAccessTokenFuture.complete(accessToken);
         }

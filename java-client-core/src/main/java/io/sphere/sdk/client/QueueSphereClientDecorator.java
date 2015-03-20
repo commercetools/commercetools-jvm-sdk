@@ -3,6 +3,7 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.client.QueueSphereClientDecoratorActor.AsyncTask;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 public final class QueueSphereClientDecorator extends SphereClientDecorator implements SphereClient {
     private final Actor actor;
@@ -14,12 +15,11 @@ public final class QueueSphereClientDecorator extends SphereClientDecorator impl
 
 
     @Override
-    public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
+    public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
         final CompletableFuture<T> promiseForTheClient = new CompletableFuture<>();
         final AsyncTask asyncTask = new AsyncTask(() -> {
-            final CompletableFuture<T> realFuture = super.execute(sphereRequest);
-            CompletableFutureUtils.transferResult(realFuture, promiseForTheClient);
-            CompletableFutureUtils.transferResult(realFuture, promiseForTheClient);
+            final CompletionStage<T> realFuture = super.execute(sphereRequest);
+            AsyncUtils.transferResult(realFuture, promiseForTheClient);
             CompletableFuture<String> forHandlerFuture = new CompletableFuture<>();
             realFuture.whenComplete((v, e) -> forHandlerFuture.complete("done"));
             return forHandlerFuture;

@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.client.ClientTestWrapper.execute;
 import static org.fest.assertions.Assertions.assertThat;
@@ -61,18 +62,18 @@ public class QueueSphereClientDecoratorTest {
         private int usageCounter = 0;
 
         private final List<Runnable> releaseOnCommand = Collections.synchronizedList(new LinkedList<>());
-        private final List<CompletableFuture<String>> responseFutures = Collections.synchronizedList(new LinkedList<>());
+        private final List<CompletionStage<String>> responseFutures = Collections.synchronizedList(new LinkedList<>());
 
         @Override
-        public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
+        public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
             usageCounter++;
-            final CompletableFuture<T> result = produceResult(sphereRequest);
+            final CompletionStage<T> result = produceResult(sphereRequest);
             addResult(result);
             return result;
         }
 
-        private <T> CompletableFuture<T> produceResult(final SphereRequest<T> sphereRequest) {
-            final CompletableFuture<T> result;
+        private <T> CompletionStage<T> produceResult(final SphereRequest<T> sphereRequest) {
+            final CompletionStage<T> result;
             if (SPHERE_REQUEST_SUCCESS.equals(sphereRequest)) {
                 result = successful();
             } else if (SPHERE_REQUEST_FINISH_ON_COMMAND.equals(sphereRequest)) {
@@ -87,8 +88,8 @@ public class QueueSphereClientDecoratorTest {
         }
 
         @SuppressWarnings("unchecked")
-        private <T> void addResult(final CompletableFuture<T> result) {
-            responseFutures.add((CompletableFuture<String>) result);
+        private <T> void addResult(final CompletionStage<T> result) {
+            responseFutures.add((CompletionStage<String>) result);
         }
 
         @SuppressWarnings("unchecked")
@@ -110,7 +111,7 @@ public class QueueSphereClientDecoratorTest {
             releaseOnCommand.clear();
         }
 
-        public List<CompletableFuture<String>> getResponseFutures() {
+        public List<CompletionStage<String>> getResponseFutures() {
             return responseFutures;
         }
 
@@ -132,7 +133,7 @@ public class QueueSphereClientDecoratorTest {
     }
 
     @SuppressWarnings("unchecked")
-    private static  <T> CompletableFuture<T> successful() {
-        return (CompletableFuture<T>) CompletableFutureUtils.successful("hello");
+    private static  <T> CompletionStage<T> successful() {
+        return (CompletionStage<T>) AsyncUtils.successful("hello");
     }
 }

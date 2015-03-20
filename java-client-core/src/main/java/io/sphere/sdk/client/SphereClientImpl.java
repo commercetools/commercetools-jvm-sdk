@@ -9,7 +9,7 @@ import io.sphere.sdk.json.JsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 
 import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
@@ -29,12 +29,12 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     }
 
     @Override
-    public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
-        final CompletableFuture<String> tokenFuture = tokenSupplier.get();
+    public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
+        final CompletionStage<String> tokenFuture = tokenSupplier.get();
         return tokenFuture.thenCompose(token -> execute(sphereRequest, token));
     }
 
-    private <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest, final String token) {
+    private <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest, final String token) {
         final HttpRequest httpRequest = createHttpRequest(sphereRequest, token);
 
         final SphereInternalLogger logger = getLogger(httpRequest);

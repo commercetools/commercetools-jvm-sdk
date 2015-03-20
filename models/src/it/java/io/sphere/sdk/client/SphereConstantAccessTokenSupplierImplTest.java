@@ -20,7 +20,7 @@ public class SphereConstantAccessTokenSupplierImplTest extends IntegrationTest {
 
             final SphereAccessTokenSupplier fixedTokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, NingHttpClientAdapter.of(), true);
             final SphereClient oneTokenClient = SphereClientFactory.of().createClient(apiConfig, fixedTokenSupplier);
-            final int actual = oneTokenClient.execute(categoryQuery).join().getTotal();
+            final int actual = oneTokenClient.execute(categoryQuery).toCompletableFuture().join().getTotal();
             assertThat(actual).isEqualTo(expected);
             oneTokenClient.close();
         });

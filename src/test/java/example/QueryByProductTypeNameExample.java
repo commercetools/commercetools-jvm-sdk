@@ -10,14 +10,14 @@ import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 public class QueryByProductTypeNameExample {
     private final SphereClient client = null;//TODO
 
     public void queryByNameExample() {
-        CompletableFuture<PagedQueryResult<ProductType>> queryResultFuture = client.execute(ProductTypeQuery.of().byName("t-shirt"));
-        CompletableFuture<List<PlainEnumValue>> possibleValuesFuture = queryResultFuture.thenApply(
+        CompletionStage<PagedQueryResult<ProductType>> queryResultFuture = client.execute(ProductTypeQuery.of().byName("t-shirt"));
+        CompletionStage<List<PlainEnumValue>> possibleValuesFuture = queryResultFuture.thenApply(
                 queryResult -> extractPossibleEnumValuesForSize(queryResult));
     }
 
