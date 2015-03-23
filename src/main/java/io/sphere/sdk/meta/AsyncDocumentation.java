@@ -41,8 +41,15 @@ link to Wikipedia, give monad laws
  </ul> -->
 
 
- <h3 id="functional-composition">Functional Composition</h3>
+ <h3 id="functional-composition">Functional Composition </h3>
 
+ Functional composition covers to transform one future into another for the happy cases. {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Function)}
+ and {@link java.util.concurrent.CompletionStage#thenCompose(java.util.function.Function)} will only be called if the future finishes successfully.
+
+
+
+
+ <h4>ThenApply (map, composition that returns directly a value)</h4>
 Mostly, it is easier to reason about side-effect free code. A future is monad so you do not work with the value directly,
  but you provide functions to transform the value or the exception into a new future.
 
@@ -58,11 +65,34 @@ With {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Fu
 
  {@include.example io.sphere.sdk.meta.FunctionAsReturnValueDemo}
 
+ It has similar semantics like {@link java.util.stream.Stream#map(java.util.function.Function)}.
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#functionalCompositionMapStreamExample()}
+
+
+
+<h4>ThenCompose (flatMap, composition that returns a CompletionStage)</h4>
+
+ Sometimes you run in situations where you create a new future inside a future.
+ For example if you load a cart and want to fetch the first line item in it.
+
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#shouldUseFlatMap()}
+
+ Instead of creating an unmaintainable {@link java.util.concurrent.CompletionStage} of {@link java.util.concurrent.CompletionStage},
+ you can use {@link java.util.concurrent.CompletionStage#thenCompose(java.util.function.Function)}.
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#flatMapFirstDemo()}
+
+ It has similar semantics like {@link java.util.stream.Stream#flatMap(java.util.function.Function)}.
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#functionalCompositionFlatMapStreamExample()}
+
 
 
  <!--
 
- best for non-side-effects
+
 
  map,flatmap mit future future
  only if no error occurred
@@ -193,6 +223,13 @@ difference Stage,Future
  <h3 id="traps">Traps</h3>
  <!--
  new CompletableFuture() and call future.get() and nether fill it, will block forever
+
+ try catch mit ask pattern
+
+ thenCompine and thenCompose, IDE may suggest the wrong one, sound similar
+
+ toCompletableFuture.join(), especially in flatMap context
+
 
  -->
  <h3 id="advanced-examples">Advanced Examples</h3>

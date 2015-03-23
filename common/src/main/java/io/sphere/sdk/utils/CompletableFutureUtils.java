@@ -106,6 +106,10 @@ public final class CompletableFutureUtils {
         return future.isDone() ? future.get() : other.get();
     }
 
+    public static <T, U> CompletionStage<U> map(final CompletionStage<T> future, final Function<T, U> f) {
+        return future.thenApply(f);
+    }
+
     public static <T, U> CompletionStage<U> flatMap(final CompletionStage<T> future, final Function<T, CompletionStage<U>> f) {
         return future.thenCompose(f);
     }
