@@ -157,8 +157,15 @@ link to Wikipedia, give monad laws
  </ul> -->
 
 
- <h3 id="functional-composition">Functional Composition</h3>
+ <h3 id="functional-composition">Functional Composition </h3>
 
+ Functional composition covers to transform one future into another for the happy cases. <code>CompletionStage.thenApply(java.util.function.Function)</code>
+ and <code>CompletionStage.thenCompose(java.util.function.Function)</code> will only be called if the future finishes successfully.
+
+
+
+
+ <h4>ThenApply (map, composition that returns directly a value)</h4>
 Mostly, it is easier to reason about side-effect free code. A future is monad so you do not work with the value directly,
  but you provide functions to transform the value or the exception into a new future.
 
@@ -197,11 +204,64 @@ import java.util.function.Function;
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FunctionAsReturnValueDemo.java" target="_blank">test code</a>.</pre></div>
 
+ It has similar semantics like <code>Stream.map(java.util.function.Function)</code>.
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-functionalCompositionMapStreamExample--%s" class=code-example><pre><code class='java'>final List&lt;Person&gt; persons = asList(new Person("John", "Smith"), new Person("Michael", "Müller"));
+final List&lt;String&gt; lastNames = persons.stream().map(person -&gt; person.getLastName()).distinct().collect(toList());
+assertThat(lastNames).containsExactly("Smith", "Müller");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+
+
+<h4>ThenCompose (flatMap, composition that returns a CompletionStage)</h4>
+
+ Sometimes you run in situations where you create a new future inside a future.
+ For example if you load a cart and want to fetch the first line item in it.
+
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-shouldUseFlatMap--%s" class=code-example><pre><code class='java'>final String cartIt = "cart-id";
+final CompletionStage&lt;Optional&lt;Cart&gt;&gt; cartStage = execute(CartByIdFetch.of(cartIt));
+final Function&lt;Optional&lt;Cart&gt;, CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt;&gt; f = cartOption -&gt; {
+    final LineItem lineItem = cartOption.get().getLineItems().get(0);
+    final String productId = lineItem.getProductId();
+    final CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt; product = execute(ProductProjectionByIdFetch.of(productId, CURRENT));
+    return product;
+};
+// CompletionStage of CompletionStage, urgs!
+final CompletionStage&lt;CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt;&gt; productStageStage = cartStage.thenApply(f);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ Instead of creating an unmaintainable <code>CompletionStage</code> of <code>CompletionStage</code>,
+ you can use <code>CompletionStage.thenCompose(java.util.function.Function)</code>.
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-flatMapFirstDemo--%s" class=code-example><pre><code class='java'>final String cartIt = "cart-id";
+final CompletionStage&lt;Optional&lt;Cart&gt;&gt; cartStage = execute(CartByIdFetch.of(cartIt));
+final Function&lt;Optional&lt;Cart&gt;, CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt;&gt; f = cartOption -&gt; {
+    final LineItem lineItem = cartOption.get().getLineItems().get(0);
+    final String productId = lineItem.getProductId();
+    final CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt; product = execute(ProductProjectionByIdFetch.of(productId, CURRENT));
+    return product;
+};
+//no nested CompletionStage, by using thenCompose instead of thenApply
+final CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt; productStageStage = cartStage.thenCompose(f);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ It has similar semantics like <code>Stream.flatMap(java.util.function.Function)</code>.
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-functionalCompositionFlatMapStreamExample--%s" class=code-example><pre><code class='java'>final List&lt;Person&gt; persons = asList(new Person("John", "Smith"), new Person("Michael", "Müller"));
+//map causes Stream of Stream
+final Stream&lt;Stream&lt;Integer&gt;&gt; streamStream = persons.stream().map(person -&gt; person.getLastName().chars().boxed());
+//flatMap
+final Stream&lt;Integer&gt; simpleStream = persons.stream().flatMap(person -&gt; person.getLastName().chars().boxed());
+assertThat(simpleStream.collect(toList())).containsExactly(83, 109, 105, 116, 104, 77, 252, 108, 108, 101, 114);
+
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
 
 
  <!--
 
- best for non-side-effects
+
 
  map,flatmap mit future future
  only if no error occurred
@@ -355,6 +415,13 @@ difference Stage,Future
  <h3 id="traps">Traps</h3>
  <!--
  new CompletableFuture() and call future.get() and nether fill it, will block forever
+
+ try catch mit ask pattern
+
+ thenCompine and thenCompose, IDE may suggest the wrong one, sound similar
+
+ toCompletableFuture.join(), especially in flatMap context
+
 
  -->
  <h3 id="advanced-examples">Advanced Examples</h3>
