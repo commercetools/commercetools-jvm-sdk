@@ -1,11 +1,17 @@
 package io.sphere.sdk.utils;
 
+import io.sphere.sdk.utils.functional.TriFunction;
+
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
+import org.apache.commons.lang3.tuple.Pair;
+
+import static java.util.Arrays.asList;
 
 public final class CompletableFutureUtils {
     private CompletableFutureUtils() {
@@ -112,5 +118,10 @@ public final class CompletableFutureUtils {
 
     public static <T, U> CompletionStage<U> flatMap(final CompletionStage<T> future, final Function<T, CompletionStage<U>> f) {
         return future.thenCompose(f);
+    }
+
+    public static <R, A, B, C> CompletionStage<R> thenCombine(final CompletionStage<A> a, final CompletionStage<B> b, final CompletionStage<C> c, final TriFunction<R, A, B, C> f) {
+        final CompletionStage<Pair<A, B>> pairCompletionStage = a.thenCombine(b, (aa, bb) -> Pair.of(aa, bb));
+        return pairCompletionStage.thenCombine(c, (pp, cc) -> f.apply(pp.getLeft(), pp.getRight(), cc));
     }
 }
