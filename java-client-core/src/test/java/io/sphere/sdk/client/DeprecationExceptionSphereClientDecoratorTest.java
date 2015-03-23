@@ -6,6 +6,7 @@ import io.sphere.sdk.http.HttpHeaders;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.SphereException;
+import io.sphere.sdk.utils.CompletableFutureUtils;
 import org.hamcrest.CustomTypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class DeprecationExceptionSphereClientDecoratorTest {
         return SphereClient.of(SphereApiConfig.of("test"), new HttpClient() {
             @Override
             public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
-                return AsyncUtils.successful(response);
+                return CompletableFutureUtils.successful(response);
             }
 
             @Override

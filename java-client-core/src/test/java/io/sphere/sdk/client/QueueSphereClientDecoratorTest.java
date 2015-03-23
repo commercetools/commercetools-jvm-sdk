@@ -1,6 +1,7 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.utils.CompletableFutureUtils;
 import org.junit.Test;
 
 import java.util.Collections;
@@ -134,6 +135,6 @@ public class QueueSphereClientDecoratorTest {
 
     @SuppressWarnings("unchecked")
     private static  <T> CompletionStage<T> successful() {
-        return (CompletionStage<T>) AsyncUtils.successful("hello");
+        return (CompletionStage<T>) CompletableFutureUtils.successful("hello");
     }
 }

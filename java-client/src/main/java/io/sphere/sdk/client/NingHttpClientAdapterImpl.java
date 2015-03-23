@@ -2,6 +2,7 @@ package io.sphere.sdk.client;
 
 import com.ning.http.client.*;
 import io.sphere.sdk.http.*;
+import io.sphere.sdk.utils.CompletableFutureUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.io.IOException;
@@ -32,7 +33,7 @@ final class NingHttpClientAdapterImpl extends AutoCloseableService implements Ni
                 return httpResponse;
             });
         } catch (final IOException e) {
-            return AsyncUtils.failed(new HttpException(e));
+            return CompletableFutureUtils.failed(new HttpException(e));
         }
     }
 

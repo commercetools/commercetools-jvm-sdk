@@ -1,4 +1,4 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.utils;
 
 import org.junit.Test;
 
@@ -6,9 +6,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.client.AsyncUtils.*;
+import static io.sphere.sdk.utils.CompletableFutureUtils.*;
 
-public class AsyncUtilsTest {
+public class CompletableFutureUtilsTest {
 
     @Test
     public void testSuccessful() throws Exception {

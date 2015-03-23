@@ -1,19 +1,21 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.utils;
 
 import java.util.NoSuchElementException;
 import java.util.concurrent.*;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
-final class AsyncUtils {
-    private AsyncUtils() {
+public final class CompletableFutureUtils {
+    private CompletableFutureUtils() {
     }
 
     public static <T> CompletableFuture<T> successful(final T object) {
         return CompletableFuture.completedFuture(object);
     }
 
+    //TODO only for test scope
     public static <T> Throwable blockForFailure(final CompletionStage<T> future) {
         try {
             future.toCompletableFuture().join();
@@ -88,6 +90,20 @@ final class AsyncUtils {
         };
         future.whenComplete(action);
         return result;
+    }
+
+    public static <T, X extends Throwable> T orElseThrow(final CompletionStage<T> stage, Supplier<? extends X> exceptionSupplier) throws X, ExecutionException, InterruptedException {
+        final CompletableFuture<T> future = stage.toCompletableFuture();
+        if (future.isDone()) {
+            return future.get();
+        } else {
+            throw exceptionSupplier.get();
+        }
+    }
+
+    public static <T> T orElseGet(final CompletionStage<T> stage, final Supplier<T> other) throws ExecutionException, InterruptedException {
+        final CompletableFuture<T> future = stage.toCompletableFuture();
+        return future.isDone() ? future.get() : other.get();
     }
 
     public static <T, U> CompletionStage<U> flatMap(final CompletionStage<T> future, final Function<T, CompletionStage<U>> f) {

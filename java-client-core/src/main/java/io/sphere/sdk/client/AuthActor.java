@@ -9,7 +9,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
 import static io.sphere.sdk.client.SphereAuth.*;
-import static io.sphere.sdk.client.AsyncUtils.*;
+import static io.sphere.sdk.utils.CompletableFutureUtils.*;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**

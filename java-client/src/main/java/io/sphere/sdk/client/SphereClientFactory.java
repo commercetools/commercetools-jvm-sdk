@@ -5,11 +5,12 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.utils.CompletableFutureUtils;
 
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 
-import static io.sphere.sdk.client.AsyncUtils.*;
+import static io.sphere.sdk.utils.CompletableFutureUtils.*;
 
 /**
  * A factory to instantiate SPHERE.IO Java clients which use {@link java.util.concurrent.CompletionStage} as future implementation.
@@ -83,9 +84,9 @@ public class SphereClientFactory extends Base {
                 final HttpResponse httpResponse = function.apply(httpRequest);
                 try {
                     final T t = SphereClientImpl.parse(httpResponse, sphereRequest, objectMapper, SphereApiConfig.of("createHttpTestDouble", "https://createHttpTestDouble.tld"));
-                    return AsyncUtils.successful(t);
+                    return CompletableFutureUtils.successful(t);
                 } catch (final Exception e) {
-                    return AsyncUtils.failed(e);
+                    return CompletableFutureUtils.failed(e);
                 }
             }
 

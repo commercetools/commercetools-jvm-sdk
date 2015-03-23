@@ -2,6 +2,7 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.client.AuthActorProtocol.*;
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.utils.CompletableFutureUtils;
 
 
 import java.time.Instant;
@@ -56,7 +57,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
                             //keep the old token
                         } else {
                             currentTokensOption = Optional.empty();
-                            currentAccessTokenFuture = AsyncUtils.failed(m.cause);
+                            currentAccessTokenFuture = CompletableFutureUtils.failed(m.cause);
                         }
                     });
         }
@@ -91,7 +92,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
         currentTokensOption = Optional.of(tokens);
         final String accessToken = tokens.getAccessToken();
         if (currentAccessTokenFuture.isDone()) {
-            currentAccessTokenFuture = AsyncUtils.successful(accessToken);
+            currentAccessTokenFuture = CompletableFutureUtils.successful(accessToken);
         } else {
             currentAccessTokenFuture.complete(accessToken);
         }
