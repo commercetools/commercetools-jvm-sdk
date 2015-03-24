@@ -66,16 +66,7 @@ public final class CompletableFutureUtils {
     }
 
     public static <T> CompletionStage<T> recover(final CompletionStage<T> future, final Function<Throwable, T> f) {
-        final CompletableFuture<T> result = new CompletableFuture<>();
-        future.whenComplete((value, e) -> {
-            if (e == null) {
-                result.complete(value);
-            } else {
-                final T recoveredResult = f.apply(e);
-                result.complete(recoveredResult);
-            }
-        });
-        return result;
+        return future.exceptionally(f);
     }
 
     public static <T> CompletionStage<T> recoverWith(final CompletionStage<T> future, final Function<Throwable, CompletionStage<T>> f) {
