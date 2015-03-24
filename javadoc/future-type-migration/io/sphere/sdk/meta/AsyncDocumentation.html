@@ -168,7 +168,7 @@ link to Wikipedia, give monad laws
 
 
 
- <h4>ThenApply (map, composition that returns directly a value)</h4>
+ <h4>ThenApply (map, function returns directly a value)</h4>
 Mostly, it is easier to reason about side-effect free code. A future is monad so you do not work with the value directly,
  but you provide functions to transform the value or the exception into a new future.
 
@@ -216,7 +216,7 @@ assertThat(lastNames).containsExactly("Smith", "Müller");
 
 
 
-<h4>ThenCompose (flatMap, composition that returns a CompletionStage)</h4>
+<h4>ThenCompose (flatMap, function returns a CompletionStage)</h4>
 
  Sometimes you run in situations where you create a new future inside a future.
  For example if you load a cart and want to fetch the first line item in it.
@@ -436,6 +436,615 @@ difference Stage,Future
 
  -->
 
+ <h3 id="summary">Summary</h3>
+
+ <table class="custom centered">
+ <caption>CompletionStage methods</caption>
+ <tbody>
+ <tr>
+ <td>&nbsp;</td>
+
+ <td> value </td>
+
+ <td>
+effect
+ </td>
+
+ <td>
+ Function param
+ </td>
+
+ <td>
+ Consumer param
+ </td>
+
+ <td>
+ Runnable param
+ </td>
+
+ <td>
+ maps value
+ </td>
+
+ <td>
+ maps error
+ </td>
+
+ <td>
+ or
+ </td>
+
+ <td>
+ and
+ </td>
+
+ <td>
+ Scala Future
+ </td>
+
+ <td>
+ Play F.Promise
+ </td>
+
+ </tr>
+
+ <tr>
+ <td>
+ thenApply
+ </td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ map
+ </td>
+
+ <td>
+ map
+ </td>
+
+ </tr>
+
+ <tr>
+ <td>
+ thenCompose
+ </td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ flatMap
+ </td>
+
+ <td>
+ flatMap
+ </td>
+
+ </tr>
+
+ <tr>
+ <td>
+ thenAccept
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+onSuccess
+ </td>
+
+ <td>
+onSuccess
+ </td>
+
+
+ </tr>
+
+ <tr>
+ <td>
+ thenRun
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+
+ </tr>
+
+ <tr>
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+
+ </tr>
+
+ <tr>
+ <td>
+ exceptionally
+ </td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ recover
+ </td>
+
+ <td>
+ recover
+ </td>
+
+
+ </tr>
+
+ <tr>
+ <td>
+ handle
+ </td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ andThen
+ </td>
+
+ <td>&nbsp;</td>
+
+
+ </tr>
+
+ <tr>
+ <td>
+ whenComplete
+ </td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+
+ </tr>
+
+ <tr>
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ </tr>
+
+ <tr>
+ <td>
+ acceptEither
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+
+ </tr>
+
+ <tr>
+ <td>
+ thenAcceptBoth
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>
+ zip
+ </td>
+
+ <td>
+ zip
+ </td>
+
+ </tr>
+
+ <tr>
+ <td>
+ applyToEither
+ </td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ fallbackTo
+ </td>
+
+ <td>
+ fallbackTo
+ </td>
+
+
+ </tr>
+
+ <tr>
+ <td>
+ thenCombine
+ </td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ </tr>
+
+ <tr>
+ <td>
+ runAfterEither
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+
+ </tr>
+
+ <tr>
+ <td>
+ runAfterBoth
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+ <td>
+ x
+ </td>
+
+ <td>&nbsp;</td>
+
+ <td>&nbsp;</td>
+
+
+ </tr>
+ </tbody>
+ </table>
+
 
  <h3 id="further-topics">Further Topics</h3>
  <!--
@@ -445,6 +1054,14 @@ difference Stage,Future
  CompletableFuture.obtrudeValue, normally value will not be overridden
  -->
 
+
+
+
+
+ <!-- Tabelle mit methoden und eigenschaften
+
+ java.util.function funktionen vorstellen und wie man sie erweitern kann, triconsumer @FunctionalInterface
+ -->
 
  <h3 id="further-sources">Further read and sources</h3>
 
