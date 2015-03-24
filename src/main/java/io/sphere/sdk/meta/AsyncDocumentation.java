@@ -246,9 +246,95 @@ difference Stage,Future
 
  <h3 id="summary">Summary</h3>
 
+ <table class="custom">
+ <caption>Important {@link FunctionalInterface}s</caption>
+ <tbody>
+ <tr>
+ <td>&nbsp;</td>
+ <td>
+ number of arguments
+ </td>
+ <td>
+ creates a value
+ </td>
+ <td>
+ purpose
+ </td>
+ </tr>
+ <tr>
+ <td>
+ Function&lt;T,R&gt;
+ </td>
+ <td>
+ 1
+ </td>
+ <td>
+ x
+ </td>
+ <td>
+ transforms one value into another
+ </td>
+ </tr>
+ <tr>
+ <td>
+ BiFunction&lt;T,U,R&gt;
+ </td>
+ <td>
+ 2
+ </td>
+ <td>
+ x
+ </td>
+ <td>
+ transforms two values into another
+ </td>
+ </tr>
+ <tr>
+ <td>
+ Consumer&lt;T&gt;
+ </td>
+ <td>
+ 1
+ </td>
+ <td>&nbsp;</td>
+ <td>
+ side effect for one value
+ </td>
+ </tr>
+ <tr>
+ <td>
+ BiConsumer&lt;T,U&gt;
+ </td>
+ <td>
+ 2
+ </td>
+ <td>&nbsp;</td>
+ <td>
+ side effect for two values
+ </td>
+ </tr>
+ <tr>
+ <td>
+ Supplier&lt;T&gt;
+ </td>
+ <td>
+ 0
+ </td>
+ <td>
+ x
+ </td>
+ <td>
+ on-demand creation of a value
+ </td>
+ </tr>
+ </tbody>
+ </table>
+
+
+ <br><br>
 
  <table class="custom">
- <caption>CompletionStage vs. CompletableFuture</caption>
+ <caption>{@link java.util.concurrent.CompletionStage} vs. {@link java.util.concurrent.CompletableFuture}</caption>
  <tbody>
  <tr>
  <td>&nbsp;</td>
