@@ -246,6 +246,115 @@ difference Stage,Future
 
  <h3 id="summary">Summary</h3>
 
+
+ <table class="custom">
+ <caption>CompletionStage vs. CompletableFuture</caption>
+ <tbody>
+ <tr>
+ <td>&nbsp;</td>
+ <td>
+ CompletionStage
+ </td>
+ <td>
+ CompletableFuture
+ </td>
+ </tr>
+ <tr>
+ <td>
+ type
+ </td>
+ <td>
+ interface
+ </td>
+ <td>
+ concrete class
+ </td>
+ </tr>
+
+
+ <tr>
+ <td>
+ implements CompletionStage
+ </td>
+ <td>
+ x
+ </td>
+ <td>
+ x
+ </td>
+ </tr>
+
+ <tr>
+ <td>functional composition
+ </td>
+ <td>
+ x
+ </td>
+ <td>
+ x
+ </td>
+ </tr>
+
+
+ <tr>
+ <td>
+ implements Future interface
+ </td>
+ <td>&nbsp;</td>
+ <td>
+ x
+ </td>
+ </tr>
+ <tr>
+ <td>
+ can be filled with value or exception
+ </td>
+ <td>&nbsp;</td>
+ <td>
+ x
+ </td>
+ </tr>
+ <tr>
+ <td>
+ can be cancelled
+ </td>
+ <td>&nbsp;</td>
+ <td>
+ x
+ </td>
+ </tr>
+ <tr>
+ <td>
+ can check if completed
+ </td>
+ <td>&nbsp;</td>
+ <td>
+ x
+ </td>
+ </tr>
+ <tr>
+ <td>
+ blocking usage directly possible
+ </td>
+ <td>&nbsp;</td>
+ <td>
+ x
+ </td>
+ </tr>
+ <tr>
+ <td>
+ provides static methods for creation
+ </td>
+ <td>&nbsp;</td>
+ <td>
+ x
+ </td>
+ </tr>
+ </tbody>
+ </table>
+
+ <br><br>
+
  <table class="custom centered">
  <caption>CompletionStage methods</caption>
  <tbody>
