@@ -82,4 +82,11 @@ public class LocalizedStringsTest {
     public void jsonDeserialize() throws Exception {
         assertThat(JsonUtils.newObjectMapper().readValue(dogFoodJson, LocalizedStrings.class)).isEqualTo(dogFood);
     }
+
+    @Test
+    public void slugify() throws Exception {
+        final LocalizedStrings actual = LocalizedStrings.of(germanLocale, "Aa -Ä_", englishLocale, "dog food").slugified();
+        final LocalizedStrings expected = LocalizedStrings.of(germanLocale, "aa-a_", englishLocale, "dog-food");
+        assertThat(actual).isEqualTo(expected);
+    }
 }
