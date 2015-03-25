@@ -2,10 +2,7 @@ package io.sphere.sdk.customers;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.customergroups.CustomerGroup;
-import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.DefaultModelImpl;
-import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.time.Instant;
@@ -140,6 +137,6 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
                 customerNumber, email, firstName, lastName, "**removed from output**", middleName,
                 title, addresses, defaultShippingAddressId, defaultBillingAddressId,
                 isEmailVerified, externalId, customerGroup, companyName, vatId, dateOfBirth);
-        return ToStringBuilder.reflectionToString(out, Base.TO_STRING_STYLE);
+        return ToStringBuilder.reflectionToString(out, SdkDefaults.TO_STRING_STYLE);
     }
 }
