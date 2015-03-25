@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -41,6 +42,7 @@ import static org.fest.assertions.Fail.fail;
 
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static final ExperimentalProductProjectionSearchModel MODEL = ProductProjectionSearch.model();
+    private static final String EVIL_CHARACTER_WORD = "öón";
 
     private static Product product1;
     private static Product product2;
@@ -62,7 +64,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
         productType = execute(productTypeCreateCommand);
         product1 = createTestProduct(productType, "Schuh", "shoe", "blue", 38, 46);
-        product2 = createTestProduct(productType, "Hemd", "shirt", "red", 36, 44);
+        product2 = createTestProduct(productType, "Hemd " + EVIL_CHARACTER_WORD, "shirt", "red", 36, 44);
         product3 = createTestProduct(productType, "Kleider", "dress", "blue", 40, 42);
         final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(MODEL.createdAt().sort(SimpleSearchSortDirection.DESC));
         execute(search, res -> {
@@ -87,7 +89,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .attributes(Attribute.of(SIZE, size2))
                 .price(Price.of(new BigDecimal("27.45"), EUR))
                 .build();
-        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name, masterVariant).variants(asList(variant)).build();
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugified(), masterVariant).variants(asList(variant)).build();
         return execute(ProductCreateCommand.of(productDraft));
     }
 
@@ -315,6 +317,14 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.of(STAGED).withOffset(50).withLimit(25));
         assertThat(result.getOffset()).isEqualTo(50);
         assertThat(result.getResults().size()).isEqualTo(min(25, max(result.getTotal() - 50, 0)));
+    }
+
+    @Test
+    public void unicodeExample() throws Exception {
+        final SearchDsl<ProductProjection> searchDsl = ProductProjectionSearch.of(STAGED).withText(GERMAN, EVIL_CHARACTER_WORD);
+        final PagedSearchResult<ProductProjection> result =
+                executeSearch(searchDsl);
+        assertThat(result.getTotal()).isEqualTo(1);
     }
 
     private List<String> resultsToIds(final PagedSearchResult<ProductProjection> result) {

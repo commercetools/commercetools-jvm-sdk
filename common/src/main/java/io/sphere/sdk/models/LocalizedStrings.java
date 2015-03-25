@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Optional;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.github.slugify.Slugify;
 import io.sphere.sdk.utils.ImmutableMapBuilder;
 
 import java.util.*;
@@ -16,6 +17,7 @@ import static io.sphere.sdk.utils.MapUtils.*;
 import static java.lang.String.format;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toMap;
 
 /**
  * A wrapper around an attribute which can be translated into a number of locales.
@@ -125,6 +127,13 @@ public class LocalizedStrings extends Base {
     public Optional<String> get(final Iterable<Locale> locales) {
         final Optional<Locale> firstFoundLocale = toStream(locales).filter(locale -> translations.containsKey(locale)).findFirst();
         return firstFoundLocale.flatMap(foundLocale -> get(foundLocale));
+    }
+
+    public LocalizedStrings slugified() {
+        final Map<Locale, String> newTranslations = translations.entrySet().stream()
+                .map(entry -> new AbstractMap.SimpleImmutableEntry<>(entry.getKey(), new Slugify().slugify(entry.getValue())))
+                .collect(toMap(e -> e.getKey(), e -> e.getValue()));
+        return new LocalizedStrings(newTranslations);
     }
 
     @JsonIgnore

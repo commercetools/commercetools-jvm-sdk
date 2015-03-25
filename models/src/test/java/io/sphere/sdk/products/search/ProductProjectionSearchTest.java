@@ -5,6 +5,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductBuilder;
 import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import io.sphere.sdk.search.*;
@@ -21,6 +22,7 @@ import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
+import static java.util.Locale.GERMAN;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class ProductProjectionSearchTest {
@@ -187,6 +189,12 @@ public class ProductProjectionSearchTest {
         assertThat(attributeModel().ofNumber(attrName).facet().withAlias("my-facet").onlyLessThan(valueOf(38)).toSphereFacet()).isEqualTo("variants.attributes.size:range(* to 38) as my-facet");
     }
 
+    @Test
+    public void unicode() throws Exception {
+        final String path = ProductProjectionSearch.of(ProductProjectionType.STAGED).withText(GERMAN, "öón").httpRequestIntent().getPath();
+        final String expected = "/product-projections/search?text.de=%C3%B6%C3%B3n&staged=true";
+        assertThat(path).isEqualTo(expected);
+    }
 
     private ProductAttributeSearchModel attributeModel() {
         return MODEL.variants().attribute();
