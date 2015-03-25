@@ -25,7 +25,7 @@ import java.util.function.Supplier;
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#parallelWayToFetchCustomerAndCart()}
 
- <p>Using futures (We use it here as synonym for {@link java.util.concurrent.CompletableFuture} and {@link java.util.concurrent.CompletionStage}.) can be very handy to execute parallel code.</p>
+ <p>Using futures (We use it here as synonym for {@link java.util.concurrent.CompletableFuture} and {@link java.util.concurrent.CompletionStage}.) can be very handy for executing parallel code.</p>
 
  <p>So you can use future APIs to run code in separate Threads and the result will not be immediately available, but in the future.
  The overhead of creating a future can be lower than <a href="http://stackoverflow.com/a/5483105">overhead of creating new Thread</a>.</p>
