@@ -13,6 +13,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
+import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.search.*;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
@@ -23,7 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Locale;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -36,40 +36,38 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.math.BigDecimal.*;
 import static java.util.Arrays.asList;
-import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 import static org.fest.assertions.Fail.fail;
 
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static final ExperimentalProductProjectionSearchModel MODEL = ProductProjectionSearch.model();
-    private static final String EVIL_CHARACTER_WORD = "öón";
+    private static final String EVIL_CHARACTER_WORD = "öóßàç";
 
     private static Product product1;
     private static Product product2;
     private static Product product3;
     private static ProductType productType;
+
+    private static Product evilProduct1;
+    private static Product evilProduct2;
+    private static ProductType evilProductType;
+
     public static final String TEST_CLASS_NAME = ProductProjectionSearchIntegrationTest.class.getSimpleName();
     public static final String COLOR = ("Color" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
     public static final String SIZE = ("Size" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
+    public static final String EVIL = ("Evil" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
 
     @BeforeClass
     public static void setupProducts() {
         removeProducts();
-        final AttributeDefinition colorAttributeDefinition = AttributeDefinitionBuilder
-                .of(COLOR, LocalizedStrings.ofEnglishLocale(COLOR), TextType.of()).isSearchable(true).build();
-        final AttributeDefinition sizeAttributeDefinition = AttributeDefinitionBuilder
-                .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE), NumberType.of()).isSearchable(true).build();
-
-        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(TEST_CLASS_NAME, "", asList(colorAttributeDefinition, sizeAttributeDefinition));
-        final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
-        productType = execute(productTypeCreateCommand);
-        product1 = createTestProduct(productType, "Schuh", "shoe", "blue", 38, 46);
-        product2 = createTestProduct(productType, "Hemd " + EVIL_CHARACTER_WORD, "shirt", "red", 36, 44);
-        product3 = createTestProduct(productType, "Kleider", "dress", "blue", 40, 42);
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(MODEL.createdAt().sort(SimpleSearchSortDirection.DESC));
+        setupTestProducts();
+        setupEvilTestProducts();
+        final SearchSort<ProductProjection> sortByCreatedAt = MODEL.createdAt().sort(SimpleSearchSortDirection.DESC);
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(sortByCreatedAt);
         execute(search, res -> {
             final List<String> ids = SphereTestUtils.toIds(res.getResults());
-            return ids.contains(product1.getId()) && ids.contains(product2.getId()) && ids.contains(product3.getId());
+            return ids.contains(product1.getId()) && ids.contains(product2.getId()) && ids.contains(product3.getId())
+                    && ids.contains(evilProduct1.getId()) && ids.contains(evilProduct2.getId());
         });
         try {
             Thread.sleep(500); // Wait for elasticsearch synchronization
@@ -78,34 +76,77 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         }
     }
 
+    private static void setupTestProducts() {
+        final AttributeDefinition colorAttrDef = AttributeDefinitionBuilder
+                .of(COLOR, LocalizedStrings.ofEnglishLocale(COLOR), TextType.of()).isSearchable(true).build();
+        final AttributeDefinition sizeAttrDef = AttributeDefinitionBuilder
+                .of(SIZE, LocalizedStrings.ofEnglishLocale(SIZE), NumberType.of()).isSearchable(true).build();
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(TEST_CLASS_NAME, "", asList(colorAttrDef, sizeAttrDef));
+        final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
+        productType = execute(productTypeCreateCommand);
+        product1 = createTestProduct(productType, "Schuh", "shoe", "blue", 38, 46);
+        product2 = createTestProduct(productType, "Hemd", "shirt", "red", 36, 44);
+        product3 = createTestProduct(productType, "Kleider", "dress", "blue", 40, 42);
+
+    }
+
+    private static void setupEvilTestProducts() {
+        final AttributeDefinition evilAttrDef = AttributeDefinitionBuilder
+                .of(EVIL, LocalizedStrings.ofEnglishLocale(EVIL), TextType.of()).isSearchable(true).build();
+        final ProductTypeDraft evilProductTypeDraft = ProductTypeDraft.of("Evil" + TEST_CLASS_NAME, "", asList(evilAttrDef));
+        final ProductTypeCreateCommand evilProductTypeCreateCommand = ProductTypeCreateCommand.of(evilProductTypeDraft);
+        evilProductType = execute(evilProductTypeCreateCommand);
+        evilProduct1 = createEvilTestProduct(evilProductType, EVIL_CHARACTER_WORD, "foo");
+        evilProduct2 = createEvilTestProduct(evilProductType, "bar", EVIL_CHARACTER_WORD);
+
+    }
+
     private static Product createTestProduct(final ProductType productType, final String germanName, final String englishName,
                                              final String color, final int size1, final int size2) {
         final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName, ENGLISH, englishName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .attributes(Attribute.of(SIZE, size1), Attribute.of(COLOR, color))
-                .price(Price.of(new BigDecimal("23.45"), EUR))
-                .build();
+                .price(Price.of(new BigDecimal("23.45"), EUR)).build();
         final ProductVariantDraft variant = ProductVariantDraftBuilder.of()
                 .attributes(Attribute.of(SIZE, size2))
-                .price(Price.of(new BigDecimal("27.45"), EUR))
-                .build();
-        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugified(), masterVariant).variants(asList(variant)).build();
+                .price(Price.of(new BigDecimal("27.45"), EUR)).build();
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugified(), masterVariant)
+                .variants(asList(variant)).build();
+        return execute(ProductCreateCommand.of(productDraft));
+    }
+
+    private static Product createEvilTestProduct(final ProductType productType, final String germanName, final String evilValue) {
+        final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName);
+        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
+                .attributes(Attribute.of(EVIL, evilValue)).build();
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugified(), masterVariant).build();
         return execute(ProductCreateCommand.of(productDraft));
     }
 
     @AfterClass
     public static void removeProducts() {
-        List<ProductType> productTypes = execute(ProductTypeQuery.of().byName(TEST_CLASS_NAME)).getResults();
-        if (!productTypes.isEmpty()) {
-            final List<ProductProjection> products = execute(ProductProjectionQuery.of(STAGED)
-                    .withPredicate(ProductProjectionQuery.model().productType().isAnyOf(productTypes))).getResults();
-            products.forEach(p -> execute(ProductDeleteCommand.of(p.toProductVersioned())));
-            productTypes.forEach(p -> execute(ProductTypeDeleteCommand.of(p)));
-        }
+        removeProductTypeAndItsProducts(productType);
+        removeProductTypeAndItsProducts(evilProductType);
         product1 = null;
         product2 = null;
         product3 = null;
+        evilProduct1 = null;
+        evilProduct2 = null;
         productType = null;
+        evilProductType = null;
+    }
+
+    private static void removeProductTypeAndItsProducts(final ProductType productType) {
+        if (productType != null) {
+            final QueryDsl<ProductType> request = ProductTypeQuery.of().byName(productType.getName());
+            List<ProductType> productTypes = execute(request).getResults();
+            if (!productTypes.isEmpty()) {
+                final List<ProductProjection> products = execute(ProductProjectionQuery.of(STAGED)
+                        .withPredicate(ProductProjectionQuery.model().productType().isAnyOf(productTypes))).getResults();
+                products.forEach(p -> execute(ProductDeleteCommand.of(p.toProductVersioned())));
+                productTypes.forEach(p -> execute(ProductTypeDeleteCommand.of(p)));
+            }
+        }
     }
 
     @Test
@@ -320,10 +361,17 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void unicodeExample() throws Exception {
+    public void unicodeExampleForFullTextSearch() throws Exception {
         final SearchDsl<ProductProjection> searchDsl = ProductProjectionSearch.of(STAGED).withText(GERMAN, EVIL_CHARACTER_WORD);
-        final PagedSearchResult<ProductProjection> result =
-                executeSearch(searchDsl);
+        final PagedSearchResult<ProductProjection> result = executeEvilSearch(searchDsl);
+        assertThat(result.getTotal()).isEqualTo(2);
+    }
+
+    @Test
+    public void unicodeExampleForFilter() throws Exception {
+        final FilterExpression<ProductProjection> filter = MODEL.variants().attribute().ofText(EVIL).filter().is(EVIL_CHARACTER_WORD);
+        final SearchDsl<ProductProjection> searchDsl = ProductProjectionSearch.of(STAGED).plusFilterQuery(filter);
+        final PagedSearchResult<ProductProjection> result = executeEvilSearch(searchDsl);
         assertThat(result.getTotal()).isEqualTo(1);
     }
 
@@ -334,6 +382,12 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     protected static PagedSearchResult<ProductProjection> executeSearch(final SearchDsl<ProductProjection> searchDsl) {
         final FilterExpression<ProductProjection> onlyCreatedProducts = FilterExpression.of(
                 String.format("id:\"%s\",\"%s\",\"%s\"", product1.getId(), product2.getId(), product3.getId()));
+        return execute(searchDsl.plusFilterQuery(onlyCreatedProducts));
+    }
+
+    protected static PagedSearchResult<ProductProjection> executeEvilSearch(final SearchDsl<ProductProjection> searchDsl) {
+        final FilterExpression<ProductProjection> onlyCreatedProducts = FilterExpression.of(
+                String.format("id:\"%s\",\"%s\"", evilProduct1.getId(), evilProduct2.getId()));
         return execute(searchDsl.plusFilterQuery(onlyCreatedProducts));
     }
 
