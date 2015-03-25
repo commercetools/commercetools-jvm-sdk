@@ -2,6 +2,7 @@ package io.sphere.sdk.customers;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.SdkDefaults;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import java.util.Optional;
@@ -119,6 +120,6 @@ public class CustomerDraft extends Base {
     @Override
     public final String toString() {
         final CustomerDraft outObject = withPassword("**removed from output**");
-        return ToStringBuilder.reflectionToString(outObject, Base.TO_STRING_STYLE);
+        return ToStringBuilder.reflectionToString(outObject, SdkDefaults.TO_STRING_STYLE);
     }
 }

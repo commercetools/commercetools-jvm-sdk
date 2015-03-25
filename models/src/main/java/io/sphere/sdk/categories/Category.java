@@ -69,7 +69,7 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
 
     public static String toString(final Category category) {
         final List<String> pathInTreeIds = category.getPathInTree().stream().map(Category::getId).collect(toList());
-        return new ToStringBuilder(category, Base.TO_STRING_STYLE).
+        return new ToStringBuilder(category, SdkDefaults.TO_STRING_STYLE).
                 append("id", category.getId()).
                 append("version", category.getVersion()).
                 append("createdAt", category.getCreatedAt()).
