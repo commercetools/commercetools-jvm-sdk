@@ -114,18 +114,18 @@ extends java.lang.Object</pre>
  Fetching both documents is not related and lets suppose fetching a document from SPHERE.IO takes 100ms.</p>
 
 
- <div id="io-sphere-sdk-meta-AsyncDocumentationTest-serialWayToFetchCustomerAndCart--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";//time t = 0
-final Optional&lt;Customer&gt; customerOption = executeSerial(CustomerByIdFetch.of(customerId));//t = 100ms
-final Optional&lt;Cart&gt; cartOption = executeSerial(CartByCustomerIdFetch.of(customerId));//t = 200ms
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-serialWayToFetchCustomerAndCart--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";//time t=0
+final Optional&lt;Customer&gt; customerOption = executeSerial(CustomerByIdFetch.of(customerId));//t=100ms
+final Optional&lt;Cart&gt; cartOption = executeSerial(CartByCustomerIdFetch.of(customerId));//t=200ms
 println("cart: " + cartOption + " customer: " + customerOption);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>So it takes around 200ms since the requests are done one after another. By fetching them in parallel 100ms of time can be saved.</p>
 
- <div id="io-sphere-sdk-meta-AsyncDocumentationTest-parallelWayToFetchCustomerAndCart--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";//time t = 0
-final CompletionStage&lt;Optional&lt;Customer&gt;&gt; customerStage = execute(CustomerByIdFetch.of(customerId));//t = 1ms
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-parallelWayToFetchCustomerAndCart--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";//time t=0
+final CompletionStage&lt;Optional&lt;Customer&gt;&gt; customerStage = execute(CustomerByIdFetch.of(customerId));//t=1ms
 //after creating the CompletionStage the Thread is freed to start further requests
-final CompletionStage&lt;Optional&lt;Cart&gt;&gt; cartStage = execute(CartByCustomerIdFetch.of(customerId));//t = 2ms
+final CompletionStage&lt;Optional&lt;Cart&gt;&gt; cartStage = execute(CartByCustomerIdFetch.of(customerId));//t=2ms
 //collect the results
 customerStage.thenAcceptBoth(cartStage, (customerOption, cartOption) -&gt; {
     //t=102ms
@@ -175,7 +175,8 @@ Mostly, it is easier to reason about side-effect free code. A future is monad so
 To use a future for further computation you probably need to use <code>CompletionStage.thenApply(java.util.function.Function)</code>.
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-thenApplyFirstDemo--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";
 final CompletionStage&lt;Optional&lt;Customer&gt;&gt; customerStage = execute(CustomerByIdFetch.of(customerId));
-final CompletionStage&lt;String&gt; pageStage = customerStage.thenApply(customerOption -&gt; "customer page " + customerOption);
+final CompletionStage&lt;String&gt; pageStage = customerStage.thenApply(customerOption -&gt;
+        "customer page " + customerOption);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -185,7 +186,8 @@ With <code>CompletionStage.thenApply(java.util.function.Function)</code> you app
 
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-thenApplyFirstDemoVerbose--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";
 final CompletionStage&lt;Optional&lt;Customer&gt;&gt; customerStage = execute(CustomerByIdFetch.of(customerId));
-final Function&lt;Optional&lt;Customer&gt;, String&gt; f = customerOption -&gt; "customer page " + customerOption;//stored in a value
+//stored in a value
+final Function&lt;Optional&lt;Customer&gt;, String&gt; f = customerOption -&gt; "customer page " + customerOption;
 final CompletionStage&lt;String&gt; pageStage = customerStage.thenApply(f);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -201,8 +203,10 @@ import java.util.function.Function;
 
     public static void showUsage() {
         final String customerId = "customer-id";
-        final CompletionStage&lt;Optional&lt;Customer&gt;&gt; customerStage = execute(CustomerByIdFetch.of(customerId));
-        final CompletionStage&lt;String&gt; pageStage = customerStage.thenApply(renderCustomerPage("customer page"));
+        final CompletionStage&lt;Optional&lt;Customer&gt;&gt; customerStage =
+                execute(CustomerByIdFetch.of(customerId));
+        final CompletionStage&lt;String&gt; pageStage =
+                customerStage.thenApply(renderCustomerPage("customer page"));
     }
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FunctionAsReturnValueDemo.java" target="_blank">test code</a>.</pre></div>
@@ -210,7 +214,7 @@ import java.util.function.Function;
  It has similar semantics like <code>Stream.map(java.util.function.Function)</code>.
 
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-functionalCompositionMapStreamExample--%s" class=code-example><pre><code class='java'>final List&lt;Person&gt; persons = asList(new Person("John", "Smith"), new Person("Michael", "Müller"));
-final List&lt;String&gt; lastNames = persons.stream().map(person -&gt; person.getLastName()).distinct().collect(toList());
+final List&lt;String&gt; lastNames = persons.stream().map(Person::getLastName).distinct().collect(toList());
 assertThat(lastNames).containsExactly("Smith", "Müller");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -227,11 +231,13 @@ final CompletionStage&lt;Optional&lt;Cart&gt;&gt; cartStage = execute(CartByIdFe
 final Function&lt;Optional&lt;Cart&gt;, CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt;&gt; f = cartOption -&gt; {
     final LineItem lineItem = cartOption.get().getLineItems().get(0);
     final String productId = lineItem.getProductId();
-    final CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt; product = execute(ProductProjectionByIdFetch.of(productId, CURRENT));
+    final CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt; product =
+            execute(ProductProjectionByIdFetch.of(productId, CURRENT));
     return product;
 };
 // CompletionStage of CompletionStage, urgs!
-final CompletionStage&lt;CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt;&gt; productStageStage = cartStage.thenApply(f);
+final CompletionStage&lt;CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt;&gt; productStageStage =
+        cartStage.thenApply(f);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  Instead of creating an unmaintainable <code>CompletionStage</code> of <code>CompletionStage</code>,
@@ -242,7 +248,8 @@ final CompletionStage&lt;Optional&lt;Cart&gt;&gt; cartStage = execute(CartByIdFe
 final Function&lt;Optional&lt;Cart&gt;, CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt;&gt; f = cartOption -&gt; {
     final LineItem lineItem = cartOption.get().getLineItems().get(0);
     final String productId = lineItem.getProductId();
-    final CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt; product = execute(ProductProjectionByIdFetch.of(productId, CURRENT));
+    final CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt; product =
+            execute(ProductProjectionByIdFetch.of(productId, CURRENT));
     return product;
 };
 //no nested CompletionStage, by using thenCompose instead of thenApply
@@ -253,11 +260,13 @@ final CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt; productStageStage
 
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-functionalCompositionFlatMapStreamExample--%s" class=code-example><pre><code class='java'>final List&lt;Person&gt; persons = asList(new Person("John", "Smith"), new Person("Michael", "Müller"));
 //map causes Stream of Stream
-final Stream&lt;Stream&lt;Integer&gt;&gt; streamStream = persons.stream().map(person -&gt; person.getLastName().chars().boxed());
+final Stream&lt;Stream&lt;Integer&gt;&gt; streamStream = persons.stream()
+        .map(person -&gt; person.getLastName().chars().boxed());
 //flatMap
-final Stream&lt;Integer&gt; simpleStream = persons.stream().flatMap(person -&gt; person.getLastName().chars().boxed());
-assertThat(simpleStream.collect(toList())).containsExactly(83, 109, 105, 116, 104, 77, 252, 108, 108, 101, 114);
-
+final Stream&lt;Integer&gt; simpleStream = persons.stream()
+        .flatMap(person -&gt; person.getLastName().chars().boxed());
+assertThat(simpleStream.collect(toList()))
+        .containsExactly(83, 109, 105, 116, 104, 77, 252, 108, 108, 101, 114);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -344,6 +353,7 @@ assertThat(future.isCompletedExceptionally()).isTrue();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
+ <p>If you complete a future, it is possible that the same Thread is used for functional compositions or executing callbacks. If you don't want this, the calles need to use the methods which end with "Async".</p>
  <!--
 
  fulfilling in another thread
@@ -376,6 +386,115 @@ difference Stage,Future
  orElseGet wie bei Optional
 
  -->
+
+ <h3 id="threads">Threads and the Trinity</h3>
+
+ <p>Which Thread is used for functional composition and callbacks depends on the method.
+ For <code>CompletionStage.thenApply(Function)</code>,
+ <code>CompletionStage.thenAccept(Consumer)</code> ,
+ <code>CompletionStage.handle(BiFunction)</code> etc. exist three variants:</p>
+
+ <ol>
+  <li><code>CompletionStage.thenApply(Function)</code>, no suffix, if the future is not yet completed, the the thread which calls
+ <code>CompletableFuture.complete(Object)</code> is used to apply the function, if the future is completed, the thread which calls <code>CompletionStage.thenApply(Function)</code> is used.
+ So this method is discouraged if you use actors or tend to block threads.</li>
+  <li><code>CompletionStage.thenApplyAsync(Function)</code> with suffix "Async" calls the function inside a Thread of <code>ForkJoinPool.commonPool()</code>. So you are better protected against deadlocks.</li>
+  <li><code>CompletionStage.thenApplyAsync(Function, Executor)</code>  with suffix "Async" and additional <code>Executor</code> parameter calls the function inside a Thread pool you specify as second parameter.</li>
+ </ol>
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationThreadTest%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import org.fest.assertions.GenericAssert;
+import org.junit.Test;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ForkJoinPool;
+import java.util.function.Function;
+import static java.lang.String.format;
+</code></pre><pre><code class='java'>public class AsyncDocumentationThreadTest {
+    private static int currentThreadId() {
+        return Thread.currentThread().hashCode();
+    }
+
+    @Test
+    public void threads() throws Exception {
+        //step 1, the future is not yet completed
+        final CompletableFuture&lt;String&gt; future = new CompletableFuture&lt;&gt;();
+        //it is a function declaration, it is not yet executed
+        final Function&lt;String, Integer&gt; f = s -&gt; currentThreadId();
+        final int mainThreadId = currentThreadId();//actually it is a test thread
+
+        //step 2, thenApply for the future with the 3 different kinds of methods
+        final CompletableFuture&lt;Integer&gt; thenApplyFuture = future.thenApply(f);
+        final CompletableFuture&lt;Integer&gt; thenApplyAsyncFuture = future.thenApplyAsync(f);
+        final ForkJoinPool customExecutor = new ForkJoinPool(1);//for test just one, so we can identify
+        final int threadIdFromCustomPool = customExecutor.submit(() -&gt; currentThreadId()).get();
+        final CompletableFuture&lt;Integer&gt; thenApplyAsyncExecutorFuture =
+                future.thenApplyAsync(f, customExecutor);
+
+        //step 3 we complete the future and then the function will be called
+        //we could call future.complete in this thread, but I want to be able to show the difference
+        //between the thread where you call thenApply and where you complete the future
+        final Thread completionThread = new Thread(() -&gt; future.complete("result"));
+        completionThread.start();
+        final int completionThreadId = completionThread.hashCode();
+
+        //step 4 assertions for where what happened
+        assertThat(thenApplyFuture).completedIn(completionThreadId);
+        assertThat(thenApplyAsyncFuture)
+                .overridingErrorMessage("this is performed in the JVMs common pool," +
+                        "so it blocks not the threads you know")
+                .notCompletedIn(completionThreadId).notCompletedIn(mainThreadId);
+        assertThat(thenApplyAsyncExecutorFuture).completedIn(threadIdFromCustomPool);
+
+        //step 5, we called thenApply before the future completed
+        //now we call it AFTER the future completed
+        assertThat(future.thenApply(f))
+                .overridingErrorMessage("If thenApply was called after completion," +
+                        "the current thread will be used instead of the completion thread.")
+                .notCompletedIn(completionThreadId).completedIn(mainThreadId);
+        assertThat(future.thenApplyAsync(f))
+                .notCompletedIn(completionThreadId)
+                .notCompletedIn(mainThreadId);
+        assertThat(future.thenApplyAsync(f, customExecutor)).completedIn(threadIdFromCustomPool);
+
+        //cleanup
+        customExecutor.shutdown();
+    }
+
+    private static FutureAssert assertThat(final CompletableFuture&lt;Integer&gt; actual) {
+        return new FutureAssert(actual);
+    }
+
+    private static class FutureAssert extends GenericAssert&lt;FutureAssert, CompletableFuture&lt;Integer&gt;&gt; {
+        protected FutureAssert(final CompletableFuture&lt;Integer&gt; actual) {
+            super(FutureAssert.class, actual);
+        }
+
+
+        public FutureAssert completedIn(final int completionThreadId) {
+            final Integer threadId = actual.join();
+            if (threadId != completionThreadId) {
+                failIfCustomMessageIsSet();
+                throw failure(format("%s did not complete in %d, but in %d.",
+                        actual, completionThreadId, threadId));
+            }
+            return this;
+        }
+
+        public FutureAssert notCompletedIn(final int completionThreadId) {
+            final Integer threadId = actual.join();
+            if (threadId == completionThreadId) {
+                failIfCustomMessageIsSet();
+                throw failure(format("%s did complete in %d, but not in %d.",
+                        actual, completionThreadId, threadId));
+            }
+            return this;
+        }
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationThreadTest.java" target="_blank">test code</a>.</pre></div>
+
+
+
+
  <h3 id="error-handling">Error Handling</h3>
 
  <!--
