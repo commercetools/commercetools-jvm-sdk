@@ -364,10 +364,36 @@ difference Stage,Future
 
  <h3 id="error-handling">Error Handling</h3>
 
+<p>If an exception occurs with the computation, it should be propagated to the future with {@link java.util.concurrent.CompletableFuture#completeExceptionally(Throwable)} but only once in the lifetime of the future.
+ As a result the following try catch block does not make sense, since the error is inside the future which is most likely computed in another Thread:</p>
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#wrongWayOfErrorHandling()}
+
+
+<h4>Recover from a failure without a new CompletionStage</h4>
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#simpleRecover()}
+
+<h4>Recover from a failure with producing a new CompletionStage</h4>
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#simpleRecover()}
+
+ <h4>Handle</h4>
+{@link CompletionStage#exceptionally(Function)} is like applying {@link CompletionStage#thenApply(Function)} and then {@link CompletionStage#exceptionally(Function)}:
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#handleLikeExceptionallyAndThenApply()}
+
+<p>You can use the exceptions to give error specific text to the user:</p>
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#exceptionallyWithExceptionTypes()}
+
+ <p>You also need not to cover all problems:</p>
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#exceptionallyWithExceptionTypesButUncoveredPart()}
+
  <!--
 
- try catch macht keinen sinn, exception ist im future
- recover & recoverWith
+
 
  handle for recover, ergebnis kann noch mal angepasst werden im nächsten stage
  handle kann auch optional zuruückgeben
@@ -379,6 +405,8 @@ difference Stage,Future
  timeout with exception
  timeout with defaultvalue
  http://stackoverflow.com/questions/23575067/timeout-with-default-value-in-java-8-completablefuture
+
+ rethrow exception if not matching
 
  -->
 

@@ -246,6 +246,18 @@ public class AsyncDocumentationTest {
         assertThat(e.getCause()).isExactlyInstanceOf(cause);
     }
 
+    private static class PriceChangedException extends RuntimeException {
+        static final long serialVersionUID = 0L;
+
+        public String getCurrentPrice() {
+            return null;
+        }
+    }
+
+    private static class OutOfStockException extends RuntimeException {
+        static final long serialVersionUID = 0L;
+    }
+
     private static class WhatEverException extends RuntimeException {
         static final long serialVersionUID = 0L;
     }
@@ -324,5 +336,102 @@ public class AsyncDocumentationTest {
         final String value = CompletableFutureUtils //SDK utils class
                 .orElseThrow(future, () -> new WhatEverException());
         assertThat(value).isEqualTo("success in time");
+    }
+
+    @Test
+    public void wrongWayOfErrorHandling() throws Exception {
+        final Service service = new Service();
+        try {
+            final CompletionStage<String> result = service.execute();
+        } catch (final WhatEverException e) {
+            //catch block does not make sense
+        }
+    }
+
+    @Test
+    public void simpleRecover() throws Exception {
+        final CompletableFuture<String> future = new CompletableFuture<>();
+        future.completeExceptionally(new WhatEverException());
+        final CompletableFuture<String> hardenedFuture = future.exceptionally(e -> "a default value");
+        assertThat(hardenedFuture.join()).isEqualTo("a default value");
+    }
+
+    @Test
+    public void recoverWith() throws Exception {
+        final Service service = new Service();
+        final OtherService fallbackService = new OtherService();
+        final CompletionStage<String> firstAttempt = service.execute();
+        final CompletionStage<String> hardenedFuture = CompletableFutureUtils
+                .recoverWith(firstAttempt, error -> {
+                    final CompletionStage<String> secondAttempt = fallbackService.execute();
+                    return secondAttempt;
+                });
+    }
+
+    @Test
+    public void handleLikeExceptionallyAndThenApply() throws Exception {
+        final CompletableFuture<String> future = CompletableFuture.completedFuture("hi");
+
+        final CompletableFuture<String> viaHandle = future.handle((nullableValue, nullableError) ->
+                        nullableValue != null ? nullableValue.toUpperCase() : "DEFAULT"
+        );
+
+        final CompletableFuture<String> viaThenApply = future
+                .thenApply(value -> value.toUpperCase()).exceptionally(e -> "DEFAULT");
+
+        assertThat(viaHandle.join()).isEqualTo(viaThenApply.join()).isEqualTo("HI");
+    }
+
+    @Test
+    public void exceptionallyWithExceptionTypes() throws Exception {
+        final CompletionStage<String> stage = new Service().execute();
+        final CompletionStage<String> result = stage.exceptionally(e -> {
+            if (e instanceof PriceChangedException) {
+                return "price changed, is now " + ((PriceChangedException) e).getCurrentPrice();
+            } else if (e instanceof OutOfStockException) {
+                return "out of stock";
+            } else {
+                return "oops";
+            }
+        });
+    }
+
+    @Test
+    public void exceptionallyWithExceptionTypesButUncoveredPart() throws Exception {
+        final CompletableFuture<String> stage = CompletableFutureUtils.failed(new WhatEverException());
+        final Function<Throwable, String> f = e -> {
+            if (e instanceof PriceChangedException) {
+                return "price changed, is now " + ((PriceChangedException) e).getCurrentPrice();
+            } else if (e instanceof OutOfStockException) {
+                return "out of stock";
+            } else if (e instanceof RuntimeException) {
+                throw (RuntimeException) e;
+            } else {
+                //wrap with CompletionException it checked exceptions
+                //it works out with future.get and future.join
+                throw new CompletionException(e);
+            }
+        };
+        final CompletableFuture<String> hardened = stage.exceptionally(f);
+        trying(() -> hardened.join(), e -> assertExceptionAndCause(e, CompletionException.class, WhatEverException.class));
+
+        //now with a checked exception
+        final CompletableFuture<String> withChecked = CompletableFutureUtils.failed(new EvilCheckedException());
+        trying(() -> withChecked.join(), e -> assertExceptionAndCause(e, CompletionException.class, EvilCheckedException.class));
+        trying(() -> withChecked.get(), e -> assertExceptionAndCause(e, ExecutionException.class, EvilCheckedException.class));
+    }
+
+    private static class Service {
+        public CompletionStage<String> execute() {
+            return CompletableFuture.completedFuture("HI");
+        }
+    }
+
+    private static class OtherService extends Service {
+
+    }
+
+    private static class EvilCheckedException extends Exception {
+        static final long serialVersionUID = 0L;
     }
 }
