@@ -14,7 +14,9 @@ public class FunctionAsReturnValueDemo extends AsyncDocumentationTest {
 
     public static void showUsage() {
         final String customerId = "customer-id";
-        final CompletionStage<Optional<Customer>> customerStage = execute(CustomerByIdFetch.of(customerId));
-        final CompletionStage<String> pageStage = customerStage.thenApply(renderCustomerPage("customer page"));
+        final CompletionStage<Optional<Customer>> customerStage =
+                execute(CustomerByIdFetch.of(customerId));
+        final CompletionStage<String> pageStage =
+                customerStage.thenApply(renderCustomerPage("customer page"));
     }
 }

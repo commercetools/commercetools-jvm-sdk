@@ -71,9 +71,9 @@ public class AsyncDocumentationTest {
     }
 
     public void serialWayToFetchCustomerAndCart() throws Exception {
-        final String customerId = "customer-id";//time t = 0
-        final Optional<Customer> customerOption = executeSerial(CustomerByIdFetch.of(customerId));//t = 100ms
-        final Optional<Cart> cartOption = executeSerial(CartByCustomerIdFetch.of(customerId));//t = 200ms
+        final String customerId = "customer-id";//time t=0
+        final Optional<Customer> customerOption = executeSerial(CustomerByIdFetch.of(customerId));//t=100ms
+        final Optional<Cart> cartOption = executeSerial(CartByCustomerIdFetch.of(customerId));//t=200ms
         println("cart: " + cartOption + " customer: " + customerOption);
     }
 
@@ -82,10 +82,10 @@ public class AsyncDocumentationTest {
     }
 
     public void parallelWayToFetchCustomerAndCart() throws Exception {
-        final String customerId = "customer-id";//time t = 0
-        final CompletionStage<Optional<Customer>> customerStage = execute(CustomerByIdFetch.of(customerId));//t = 1ms
+        final String customerId = "customer-id";//time t=0
+        final CompletionStage<Optional<Customer>> customerStage = execute(CustomerByIdFetch.of(customerId));//t=1ms
         //after creating the CompletionStage the Thread is freed to start further requests
-        final CompletionStage<Optional<Cart>> cartStage = execute(CartByCustomerIdFetch.of(customerId));//t = 2ms
+        final CompletionStage<Optional<Cart>> cartStage = execute(CartByCustomerIdFetch.of(customerId));//t=2ms
         //collect the results
         customerStage.thenAcceptBoth(cartStage, (customerOption, cartOption) -> {
             //t=102ms
@@ -104,13 +104,15 @@ public class AsyncDocumentationTest {
     public void thenApplyFirstDemo() throws Exception {
         final String customerId = "customer-id";
         final CompletionStage<Optional<Customer>> customerStage = execute(CustomerByIdFetch.of(customerId));
-        final CompletionStage<String> pageStage = customerStage.thenApply(customerOption -> "customer page " + customerOption);
+        final CompletionStage<String> pageStage = customerStage.thenApply(customerOption ->
+                "customer page " + customerOption);
     }
 
     public void thenApplyFirstDemoVerbose() throws Exception {
         final String customerId = "customer-id";
         final CompletionStage<Optional<Customer>> customerStage = execute(CustomerByIdFetch.of(customerId));
-        final Function<Optional<Customer>, String> f = customerOption -> "customer page " + customerOption;//stored in a value
+        //stored in a value
+        final Function<Optional<Customer>, String> f = customerOption -> "customer page " + customerOption;
         final CompletionStage<String> pageStage = customerStage.thenApply(f);
     }
 
@@ -126,11 +128,13 @@ public class AsyncDocumentationTest {
         final Function<Optional<Cart>, CompletionStage<Optional<ProductProjection>>> f = cartOption -> {
             final LineItem lineItem = cartOption.get().getLineItems().get(0);
             final String productId = lineItem.getProductId();
-            final CompletionStage<Optional<ProductProjection>> product = execute(ProductProjectionByIdFetch.of(productId, CURRENT));
+            final CompletionStage<Optional<ProductProjection>> product =
+                    execute(ProductProjectionByIdFetch.of(productId, CURRENT));
             return product;
         };
         // CompletionStage of CompletionStage, urgs!
-        final CompletionStage<CompletionStage<Optional<ProductProjection>>> productStageStage = cartStage.thenApply(f);
+        final CompletionStage<CompletionStage<Optional<ProductProjection>>> productStageStage =
+                cartStage.thenApply(f);
     }
 
     public void flatMapFirstDemo() throws Exception {
@@ -139,7 +143,8 @@ public class AsyncDocumentationTest {
         final Function<Optional<Cart>, CompletionStage<Optional<ProductProjection>>> f = cartOption -> {
             final LineItem lineItem = cartOption.get().getLineItems().get(0);
             final String productId = lineItem.getProductId();
-            final CompletionStage<Optional<ProductProjection>> product = execute(ProductProjectionByIdFetch.of(productId, CURRENT));
+            final CompletionStage<Optional<ProductProjection>> product =
+                    execute(ProductProjectionByIdFetch.of(productId, CURRENT));
             return product;
         };
         //no nested CompletionStage, by using thenCompose instead of thenApply
@@ -149,7 +154,7 @@ public class AsyncDocumentationTest {
     @Test
     public void functionalCompositionMapStreamExample() throws Exception {
         final List<Person> persons = asList(new Person("John", "Smith"), new Person("Michael", "Müller"));
-        final List<String> lastNames = persons.stream().map(person -> person.getLastName()).distinct().collect(toList());
+        final List<String> lastNames = persons.stream().map(Person::getLastName).distinct().collect(toList());
         assertThat(lastNames).containsExactly("Smith", "Müller");
     }
 
@@ -157,11 +162,13 @@ public class AsyncDocumentationTest {
     public void functionalCompositionFlatMapStreamExample() throws Exception {
         final List<Person> persons = asList(new Person("John", "Smith"), new Person("Michael", "Müller"));
         //map causes Stream of Stream
-        final Stream<Stream<Integer>> streamStream = persons.stream().map(person -> person.getLastName().chars().boxed());
+        final Stream<Stream<Integer>> streamStream = persons.stream()
+                .map(person -> person.getLastName().chars().boxed());
         //flatMap
-        final Stream<Integer> simpleStream = persons.stream().flatMap(person -> person.getLastName().chars().boxed());
-        assertThat(simpleStream.collect(toList())).containsExactly(83, 109, 105, 116, 104, 77, 252, 108, 108, 101, 114);
-
+        final Stream<Integer> simpleStream = persons.stream()
+                .flatMap(person -> person.getLastName().chars().boxed());
+        assertThat(simpleStream.collect(toList()))
+                .containsExactly(83, 109, 105, 116, 104, 77, 252, 108, 108, 101, 114);
     }
 
     private static class Person {
