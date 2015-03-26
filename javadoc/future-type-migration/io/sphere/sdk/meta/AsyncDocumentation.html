@@ -688,10 +688,91 @@ import static java.lang.String.format;
 
  <h3 id="error-handling">Error Handling</h3>
 
+<p>If an exception occurs with the computation, it should be propagated to the future with <code>CompletableFuture.completeExceptionally(Throwable)</code> but only once in the lifetime of the future.
+ As a result the following try catch block does not make sense, since the error is inside the future which is most likely computed in another Thread:</p>
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-wrongWayOfErrorHandling--%s" class=code-example><pre><code class='java'>final Service service = new Service();
+try {
+    final CompletionStage&lt;String&gt; result = service.execute();
+} catch (final WhatEverException e) {
+    //catch block does not make sense
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+
+<h4>Recover from a failure without a new CompletionStage</h4>
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-simpleRecover--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; future = new CompletableFuture&lt;&gt;();
+future.completeExceptionally(new WhatEverException());
+final CompletableFuture&lt;String&gt; hardenedFuture = future.exceptionally(e -&gt; "a default value");
+assertThat(hardenedFuture.join()).isEqualTo("a default value");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+<h4>Recover from a failure with producing a new CompletionStage</h4>
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-simpleRecover--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; future = new CompletableFuture&lt;&gt;();
+future.completeExceptionally(new WhatEverException());
+final CompletableFuture&lt;String&gt; hardenedFuture = future.exceptionally(e -&gt; "a default value");
+assertThat(hardenedFuture.join()).isEqualTo("a default value");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h4>Handle</h4>
+<code>CompletionStage.exceptionally(Function)</code> is like applying <code>CompletionStage.thenApply(Function)</code> and then <code>CompletionStage.exceptionally(Function)</code>:
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-handleLikeExceptionallyAndThenApply--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; future = CompletableFuture.completedFuture("hi");
+
+final CompletableFuture&lt;String&gt; viaHandle = future.handle((nullableValue, nullableError) -&gt;
+                nullableValue != null ? nullableValue.toUpperCase() : "DEFAULT"
+);
+
+final CompletableFuture&lt;String&gt; viaThenApply = future
+        .thenApply(value -&gt; value.toUpperCase()).exceptionally(e -&gt; "DEFAULT");
+
+assertThat(viaHandle.join()).isEqualTo(viaThenApply.join()).isEqualTo("HI");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+<p>You can use the exceptions to give error specific text to the user:</p>
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-exceptionallyWithExceptionTypes--%s" class=code-example><pre><code class='java'>final CompletionStage&lt;String&gt; stage = new Service().execute();
+final CompletionStage&lt;String&gt; result = stage.exceptionally(e -&gt; {
+    if (e instanceof PriceChangedException) {
+        return "price changed, is now " + ((PriceChangedException) e).getCurrentPrice();
+    } else if (e instanceof OutOfStockException) {
+        return "out of stock";
+    } else {
+        return "oops";
+    }
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>You also need not to cover all problems:</p>
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-exceptionallyWithExceptionTypesButUncoveredPart--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; stage = CompletableFutureUtils.failed(new WhatEverException());
+final Function&lt;Throwable, String&gt; f = e -&gt; {
+    if (e instanceof PriceChangedException) {
+        return "price changed, is now " + ((PriceChangedException) e).getCurrentPrice();
+    } else if (e instanceof OutOfStockException) {
+        return "out of stock";
+    } else if (e instanceof RuntimeException) {
+        throw (RuntimeException) e;
+    } else {
+        //wrap with CompletionException it checked exceptions
+        //it works out with future.get and future.join
+        throw new CompletionException(e);
+    }
+};
+final CompletableFuture&lt;String&gt; hardened = stage.exceptionally(f);
+trying(() -&gt; hardened.join(), e -&gt; assertExceptionAndCause(e, CompletionException.class, WhatEverException.class));
+
+//now with a checked exception
+final CompletableFuture&lt;String&gt; withChecked = CompletableFutureUtils.failed(new EvilCheckedException());
+trying(() -&gt; withChecked.join(), e -&gt; assertExceptionAndCause(e, CompletionException.class, EvilCheckedException.class));
+trying(() -&gt; withChecked.get(), e -&gt; assertExceptionAndCause(e, ExecutionException.class, EvilCheckedException.class));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
  <!--
 
- try catch macht keinen sinn, exception ist im future
- recover & recoverWith
+
 
  handle for recover, ergebnis kann noch mal angepasst werden im nächsten stage
  handle kann auch optional zuruückgeben
@@ -703,6 +784,8 @@ import static java.lang.String.format;
  timeout with exception
  timeout with defaultvalue
  http://stackoverflow.com/questions/23575067/timeout-with-default-value-in-java-8-completablefuture
+
+ rethrow exception if not matching
 
  -->
 
