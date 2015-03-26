@@ -1,5 +1,6 @@
 package io.sphere.sdk.meta;
 
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ForkJoinPool;
 import java.util.function.BiFunction;
@@ -173,7 +174,155 @@ difference Stage,Future
 
 
  <h3 id="blocking">Blocking Access and Immediate Access</h3>
+
+<p>{@link java.util.concurrent.CompletionStage} does not provide immediate or blocking access to its value or error,
+ but it is possible, but not encouraged to transform the {@link java.util.concurrent.CompletionStage} with {@link CompletionStage#toCompletableFuture()} to a {@link java.util.concurrent.CompletableFuture}.</p>
+
+
+ <h4>Blocking access</h4>
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#futureJoinDemo()}
+
+ <h4>Access with timeout</h4>
+ <p>Future completes in time:</p>
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#futureGetTimeoutDemo()}
+
+ <p>future does not complete in time:</p>
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#futureGetTimeoutDemoWithActualTimeout()}
+
+ <h4>Access for the impatient</h4>
+ <p>Future completed:</p>
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#demoGetNowCompleted()}
+
+ <p>Future did not yet complete:</p>
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#demoGetNow()}
+
+
+
+ <br>
+
+
+ <table class="custom">
+ <caption>Blocking Access and Immediate Access methods of {@link java.util.concurrent.CompletableFuture}</caption>
+ <tbody>
+ <tr>
+ <td>&nbsp;</td>
+ <td>
+ <p>future.join()</p>
+ </td>
+ <td>
+ <p>future.get()</p>
+ </td>
+ <td>
+ <p>future.get(12, TimeUnit.MILLISECONDS)</p>
+ </td>
+ <td>
+ <p>future.getNow(&quot;default&quot;)</p>
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <p>returns value if present</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <p>blocks potentially forever</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td>
+ <p>uses alternative, if value not present</p>
+ </td>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ <td>
+ <p>x</p>
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <p>throws TimeoutException</p>
+ </td>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td>
+ <p>throws CompletionException</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ <td>
+ <p>x</p>
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <p>throws ExecutionException</p>
+ </td>
+ <td>&nbsp;</td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td>
+ <p>throws only unchecked Exceptions</p>
+ </td>
+ <td>x</td>
+ <td>
+ <p>&nbsp;</p>
+ </td>
+ <td>
+ <p>&nbsp;</p>
+ </td>
+ <td>x</td>
+ </tr>
+ </tbody>
+ </table>
+
+
  <!-- CompletionStage.toCompletableFuture().join()
+
+ T	get()
+ Waits if necessary for this future to complete, and then returns its result.
+ T	get(long timeout, TimeUnit unit)
+ Waits if necessary for at most the given time for this future to complete, and then returns its result, if available.
+ T	getNow(T valueIfAbsent)
+ T	join()
+
 
  occurring exception of join and what they mean
  CompletableFuture.getNow(valueIfAbsent)

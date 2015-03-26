@@ -11,13 +11,16 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.queries.ProductProjectionByIdFetch;
 import io.sphere.sdk.utils.CompletableFutureUtils;
+import org.fest.assertions.Assert;
+import org.fest.assertions.Assertions;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
@@ -27,6 +30,9 @@ import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class AsyncDocumentationTest {
+    @Rule
+    public ExpectedException thrown = ExpectedException.none();
+
     @Test
     public void createFailedFuture() throws Exception {
         final CompletableFuture<String> future = new CompletableFuture<>();
@@ -203,5 +209,97 @@ public class AsyncDocumentationTest {
         public void error(final String s, final Throwable nullableError) {
 
         }
+    }
+
+    @Test
+    public void immediateAccessCompletedFuture() throws Exception {
+        final CompletableFuture<String> future = CompletableFuture.completedFuture("hi");
+        assertThat(future.get()).isEqualTo("hi");
+        assertThat(future.get(12, TimeUnit.MILLISECONDS)).isEqualTo("hi");
+        assertThat(future.getNow("other")).isEqualTo("hi");
+        assertThat(future.join()).isEqualTo("hi");
+    }
+
+    @Test
+    public void immediateAccessUncompletedFuture() throws Exception {
+        final CompletableFuture<String> future = new CompletableFuture<>();
+//        assertThat(future.get())
+        trying(() -> future.get(12, TimeUnit.MILLISECONDS), e -> assertThat(e).isInstanceOf(TimeoutException.class));
+        assertThat(future.getNow("other")).isEqualTo("other");
+//        assertThat(future.join())
+    }
+
+    private static void fail() {
+        assertThat(true).isFalse();
+    }
+
+    @Test
+    public void immediateAccessCompletedFailedFuture() {
+        final CompletableFuture<String> future = CompletableFutureUtils.failed(new WhatEverException());
+        //get has checked exception, join not
+        trying(() -> future.get(), e -> assertExceptionAndCause(e, ExecutionException.class, WhatEverException.class));
+        trying(() -> future.get(12, TimeUnit.MILLISECONDS), e -> assertExceptionAndCause(e, ExecutionException.class, WhatEverException.class));
+        //get now has different exception
+        trying(() -> future.getNow("other"), e -> assertExceptionAndCause(e, CompletionException.class, WhatEverException.class));
+        trying(() -> future.join(), e -> assertExceptionAndCause(e, CompletionException.class, WhatEverException.class));
+    }
+
+    private void assertExceptionAndCause(final Throwable e, final Class<? extends Throwable> type, final Class<? extends Throwable> cause) {
+        assertThat(e).isInstanceOf(type);
+        assertThat(e.getCause()).isExactlyInstanceOf(cause);
+    }
+
+    private static class WhatEverException extends RuntimeException {
+        static final long serialVersionUID = 0L;
+    }
+
+    private static void trying(final ExceptionRunnable runnable, final Consumer<Throwable> consumer) {
+        try {
+            runnable.run();
+            fail();
+        } catch (final Throwable e) {
+            consumer.accept(e);
+        }
+    }
+
+    @FunctionalInterface
+    private static interface ExceptionRunnable {
+        void run() throws Throwable;
+    }
+
+    @Test
+    public void futureJoinDemo() throws Exception {
+        final CompletableFuture<String> future = CompletableFuture.completedFuture("hi");
+        final String actual = future.join();
+        assertThat(actual).isEqualTo("hi");
+    }
+
+    @Test
+    public void futureGetTimeoutDemo() throws Exception {
+        final CompletableFuture<String> future = CompletableFuture.completedFuture("hi");
+        final String actual = future.get(12, TimeUnit.MILLISECONDS);
+        assertThat(actual).isEqualTo("hi");
+    }
+
+    @Test
+    public void futureGetTimeoutDemoWithActualTimeout() throws Exception {
+        final CompletableFuture<String> futureThatTakesTooLong = new CompletableFuture<>();
+        thrown.expect(TimeoutException.class);
+        futureThatTakesTooLong.get(12, TimeUnit.MILLISECONDS);
+    }
+
+    @Test
+    public void demoGetNow() throws Exception {
+        final CompletableFuture<String> incompleteFuture = new CompletableFuture<>();
+        final String value = incompleteFuture.getNow("alternative");
+        assertThat(value).isEqualTo("alternative");
+    }
+
+    @Test
+    public void demoGetNowCompleted() throws Exception {
+        final CompletableFuture<String> future =
+                CompletableFuture.completedFuture("success in time");
+        final String value = future.getNow("alternative");
+        assertThat(value).isEqualTo("success in time");
     }
 }
