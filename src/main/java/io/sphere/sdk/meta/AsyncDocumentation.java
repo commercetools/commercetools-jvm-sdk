@@ -6,6 +6,7 @@ import java.util.concurrent.ForkJoinPool;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  <!-- intro -->
@@ -196,10 +197,19 @@ difference Stage,Future
  <p>Future did not yet complete:</p>
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#demoGetNow()}
 
+<p>Workaround if the value should be lazy computed:</p>
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#testOrElseGet()}
 
+ See {@link io.sphere.sdk.utils.CompletableFutureUtils#orElseGet(CompletionStage, Supplier)}.
 
+ <p>Workaround if exception should be thrown:</p>
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#testOrElseThrow()}
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#testOrElseThrowHappyPath()}
+
+ See {@link io.sphere.sdk.utils.CompletableFutureUtils#orElseThrow(CompletionStage, Supplier)} .
  <br>
-
+ <br>
+<h4>Summary of Blocking Access and Immediate Access methods </h4>
 
  <table class="custom">
  <caption>Blocking Access and Immediate Access methods of {@link java.util.concurrent.CompletableFuture}</caption>

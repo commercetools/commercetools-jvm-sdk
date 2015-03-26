@@ -8,11 +8,8 @@ import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.queries.CustomerByIdFetch;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.queries.ProductProjectionByIdFetch;
 import io.sphere.sdk.utils.CompletableFutureUtils;
-import org.fest.assertions.Assert;
-import org.fest.assertions.Assertions;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -25,7 +22,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static java.util.stream.Collectors.toList;
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -300,6 +297,32 @@ public class AsyncDocumentationTest {
         final CompletableFuture<String> future =
                 CompletableFuture.completedFuture("success in time");
         final String value = future.getNow("alternative");
+        assertThat(value).isEqualTo("success in time");
+    }
+
+    @Test
+    public void testOrElseGet() throws Exception {
+        final CompletableFuture<String> incompleteFuture = new CompletableFuture<>();
+        final String value = CompletableFutureUtils //SDK utils class
+                .orElseGet(incompleteFuture, () -> "ALTERNATIVE".toLowerCase());
+        assertThat(value).isEqualTo("alternative");
+
+    }
+
+    @Test
+    public void testOrElseThrow() throws Exception {
+        final CompletableFuture<String> incompleteFuture = new CompletableFuture<>();
+        thrown.expect(WhatEverException.class);
+        CompletableFutureUtils //SDK utils class
+                .orElseThrow(incompleteFuture, () -> new WhatEverException());
+    }
+
+    @Test
+    public void testOrElseThrowHappyPath() throws Exception {
+        final CompletableFuture<String> future =
+                CompletableFuture.completedFuture("success in time");
+        final String value = CompletableFutureUtils //SDK utils class
+                .orElseThrow(future, () -> new WhatEverException());
         assertThat(value).isEqualTo("success in time");
     }
 }
