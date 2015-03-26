@@ -292,19 +292,23 @@ assertThat(simpleStream.collect(toList()))
  <h3 id="callbacks">Callbacks</h3>
 
 
+ For some occasions you do not want to transform a value but perform a side effect task like logging a value or an error,
+ write sth. into a file or send a response for a request.
 
+ <div id="io-sphere-sdk-meta-AsyncDocumentationCallbackTest-loggingCallbackExample--%s" class=code-example><pre><code class='java'>final CompletionStage&lt;String&gt; stage = getFuture();
 
+//when completed, access only value if present
+stage.thenAcceptAsync(value -&gt; logger.info("Fetched successfully " + value));
 
-
-
- <!--
-
-
- thenAccept/thenRun for side effects, value needed or not
-for side effects
- println
- pseudo send server response
- -->
+//when completed, access value or error, one of them is null
+stage.whenCompleteAsync((nullableValue, nullableError) -&gt; {
+    if (nullableValue != null) {
+        logger.info("Fetched successfully " + nullableValue);
+    } else {
+        logger.error("Did not fetch successfully.", nullableError);
+    }
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationCallbackTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="creation">Creation and filling</h3>
 
@@ -377,7 +381,194 @@ difference Stage,Future
 
 
  <h3 id="blocking">Blocking Access and Immediate Access</h3>
+
+<p><code>CompletionStage</code> does not provide immediate or blocking access to its value or error,
+ but it is possible, but not encouraged to transform the <code>CompletionStage</code> with <code>CompletionStage.toCompletableFuture()</code> to a <code>CompletableFuture</code>.</p>
+
+
+ <h4>Blocking access</h4>
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-futureJoinDemo--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; future = CompletableFuture.completedFuture("hi");
+final String actual = future.join();
+assertThat(actual).isEqualTo("hi");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h4>Access with timeout</h4>
+ <p>Future completes in time:</p>
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-futureGetTimeoutDemo--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; future = CompletableFuture.completedFuture("hi");
+final String actual = future.get(12, TimeUnit.MILLISECONDS);
+assertThat(actual).isEqualTo("hi");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>future does not complete in time:</p>
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-futureGetTimeoutDemoWithActualTimeout--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; futureThatTakesTooLong = new CompletableFuture&lt;&gt;();
+thrown.expect(TimeoutException.class);
+futureThatTakesTooLong.get(12, TimeUnit.MILLISECONDS);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h4>Access for the impatient</h4>
+ <p>Future completed:</p>
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-demoGetNowCompleted--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; future =
+        CompletableFuture.completedFuture("success in time");
+final String value = future.getNow("alternative");
+assertThat(value).isEqualTo("success in time");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>Future did not yet complete:</p>
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-demoGetNow--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; incompleteFuture = new CompletableFuture&lt;&gt;();
+final String value = incompleteFuture.getNow("alternative");
+assertThat(value).isEqualTo("alternative");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+<p>Workaround if the value should be lazy computed:</p>
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-testOrElseGet--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; incompleteFuture = new CompletableFuture&lt;&gt;();
+final String value = CompletableFutureUtils //SDK utils class
+        .orElseGet(incompleteFuture, () -&gt; "ALTERNATIVE".toLowerCase());
+assertThat(value).isEqualTo("alternative");
+
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ See <a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#orElseGet-java.util.concurrent.CompletionStage-java.util.function.Supplier-"><code>CompletableFutureUtils.orElseGet(CompletionStage, Supplier)</code></a>.
+
+ <p>Workaround if exception should be thrown:</p>
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-testOrElseThrow--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; incompleteFuture = new CompletableFuture&lt;&gt;();
+thrown.expect(WhatEverException.class);
+CompletableFutureUtils //SDK utils class
+        .orElseThrow(incompleteFuture, () -&gt; new WhatEverException());
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+ <div id="io-sphere-sdk-meta-AsyncDocumentationTest-testOrElseThrowHappyPath--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; future =
+        CompletableFuture.completedFuture("success in time");
+final String value = CompletableFutureUtils //SDK utils class
+        .orElseThrow(future, () -&gt; new WhatEverException());
+assertThat(value).isEqualTo("success in time");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ See <a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#orElseThrow-java.util.concurrent.CompletionStage-java.util.function.Supplier-"><code>CompletableFutureUtils.orElseThrow(CompletionStage, Supplier)</code></a> .
+ <br>
+ <br>
+<h4>Summary of Blocking Access and Immediate Access methods </h4>
+
+ <table class="custom">
+ <caption>Blocking Access and Immediate Access methods of <code>CompletableFuture</code></caption>
+ <tbody>
+ <tr>
+ <td>&nbsp;</td>
+ <td>
+ <p>future.join()</p>
+ </td>
+ <td>
+ <p>future.get()</p>
+ </td>
+ <td>
+ <p>future.get(12, TimeUnit.MILLISECONDS)</p>
+ </td>
+ <td>
+ <p>future.getNow(&quot;default&quot;)</p>
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <p>returns value if present</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <p>blocks potentially forever</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td>
+ <p>uses alternative, if value not present</p>
+ </td>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ <td>
+ <p>x</p>
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <p>throws TimeoutException</p>
+ </td>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td>
+ <p>throws CompletionException</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>&nbsp;</td>
+ <td>&nbsp;</td>
+ <td>
+ <p>x</p>
+ </td>
+ </tr>
+ <tr>
+ <td>
+ <p>throws ExecutionException</p>
+ </td>
+ <td>&nbsp;</td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>
+ <p>x</p>
+ </td>
+ <td>&nbsp;</td>
+ </tr>
+ <tr>
+ <td>
+ <p>throws only unchecked Exceptions</p>
+ </td>
+ <td>x</td>
+ <td>
+ <p>&nbsp;</p>
+ </td>
+ <td>
+ <p>&nbsp;</p>
+ </td>
+ <td>x</td>
+ </tr>
+ </tbody>
+ </table>
+
+
  <!-- CompletionStage.toCompletableFuture().join()
+
+ T      get()
+ Waits if necessary for this future to complete, and then returns its result.
+ T      get(long timeout, TimeUnit unit)
+ Waits if necessary for at most the given time for this future to complete, and then returns its result, if available.
+ T      getNow(T valueIfAbsent)
+ T      join()
+
 
  occurring exception of join and what they mean
  CompletableFuture.getNow(valueIfAbsent)
@@ -504,6 +695,14 @@ import static java.lang.String.format;
 
  handle for recover, ergebnis kann noch mal angepasst werden im nächsten stage
  handle kann auch optional zuruückgeben
+
+ http://stackoverflow.com/questions/25338376/completablefuture-withfallback-handle-only-some-errors
+
+ side effect, log error
+
+ timeout with exception
+ timeout with defaultvalue
+ http://stackoverflow.com/questions/23575067/timeout-with-default-value-in-java-8-completablefuture
 
  -->
 
