@@ -1,8 +1,6 @@
 package io.sphere.sdk.http;
 
 import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLEncoder;
 
 public final class UrlUtils {
@@ -15,18 +13,11 @@ public final class UrlUtils {
      * @return url encoded s
      */
     public static String urlEncode(final String s) {
+        final String encoding = "UTF-8";
         try {
-            return URLEncoder.encode(s, "US-ASCII");
-        } catch (UnsupportedEncodingException e) {
-            throw new IllegalArgumentException("Could not encode url: " + s);
-        }
-    }
-
-    public static String combine(String baseUrl, String relativeUrl) {
-        try {
-            return new URL(new URL(baseUrl), relativeUrl).toString();
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);//TODO
+            return URLEncoder.encode(s, encoding);
+        } catch (final UnsupportedEncodingException e) {
+            throw new RuntimeException(String.format("Could not encode url %s with encoding ", s, encoding));
         }
     }
 }
