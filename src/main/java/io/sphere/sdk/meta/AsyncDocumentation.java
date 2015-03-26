@@ -1,5 +1,11 @@
 package io.sphere.sdk.meta;
 
+import java.util.concurrent.Executor;
+import java.util.concurrent.ForkJoinPool;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+
 /**
  <!-- intro -->
 
@@ -152,6 +158,7 @@ for side effects
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#createFailedFutureShortcut()}
 
 
+ <p>If you complete a future, it is possible that the same Thread is used for functional compositions or executing callbacks. If you don't want this, the calles need to use the methods which end with "Async".</p>
  <!--
 
  fulfilling in another thread
@@ -184,6 +191,27 @@ difference Stage,Future
  orElseGet wie bei Optional
 
  -->
+
+ <h3 id="threads">Threads and the Trinity</h3>
+
+ <p>Which Thread is used for functional composition and callbacks depends on the method.
+ For {@link java.util.concurrent.CompletionStage#thenApply(Function)},
+ {@link java.util.concurrent.CompletionStage#thenAccept(Consumer)} ,
+ {@link java.util.concurrent.CompletionStage#handle(BiFunction)} etc. exist three variants:</p>
+
+ <ol>
+  <li>{@link java.util.concurrent.CompletionStage#thenApply(Function)}, no suffix, if the future is not yet completed, the the thread which calls
+ {@link java.util.concurrent.CompletableFuture#complete(Object)} is used to apply the function, if the future is completed, the thread which calls {@link java.util.concurrent.CompletionStage#thenApply(Function)} is used.
+ So this method is discouraged if you use actors or tend to block threads.</li>
+  <li>{@link java.util.concurrent.CompletionStage#thenApplyAsync(Function)} with suffix "Async" calls the function inside a Thread of {@link ForkJoinPool#commonPool()}. So you are better protected against deadlocks.</li>
+  <li>{@link java.util.concurrent.CompletionStage#thenApplyAsync(Function, Executor)}  with suffix "Async" and additional {@link Executor} parameter calls the function inside a Thread pool you specify as second parameter.</li>
+ </ol>
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationThreadTest}
+
+
+
+
  <h3 id="error-handling">Error Handling</h3>
 
  <!--

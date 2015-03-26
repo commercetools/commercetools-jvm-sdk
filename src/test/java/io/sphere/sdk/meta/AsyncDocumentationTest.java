@@ -188,36 +188,4 @@ public class AsyncDocumentationTest {
             return lastName;
         }
     }
-
-    @Test
-    public void threadsForSuccess() throws Exception {
-        final Thread threadOfFutureSuccess = Thread.currentThread();
-        final ForkJoinPool defaultJavaForkJoinPool = ForkJoinPool.commonPool();
-        final ForkJoinPool newPool = new ForkJoinPool();
-
-        final CompletableFuture<String> future = new CompletableFuture<>();
-
-        final Function<String, String> f = s -> Thread.currentThread().toString();
-        final CompletableFuture<String> successThreadStage = future.thenApply(f);
-        final CompletableFuture<String> threadDefaultPoolStage = future.thenApplyAsync(f);
-        final CompletableFuture<String> threadCustomPoolStage = future.thenApplyAsync(f, newPool);
-
-
-        CompletableFutureUtils.thenCombine(successThreadStage, threadDefaultPoolStage, threadCustomPoolStage,
-                (successThread, threadDefaultPool, threadDefaultPool) -> {
-
-        });
-
-
-        future.complete("result");
-
-        CompletableFuture.allOf(successThreadStage, threadCustomPoolStage, threadDefaultPoolStage);
-
-        successThreadStage.thenCombine(threadDefaultPoolStage, )
-
-
-
-
-        newPool.shutdown();
-    }
 }
