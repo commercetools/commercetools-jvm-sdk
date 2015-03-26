@@ -120,19 +120,10 @@ With {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Fu
  <h3 id="callbacks">Callbacks</h3>
 
 
+ For some occasions you do not want to transform a value but perform a side effect task like logging a value or an error,
+ write sth. into a file or send a response for a request.
 
-
-
-
-
- <!--
-
-
- thenAccept/thenRun for side effects, value needed or not
-for side effects
- println
- pseudo send server response
- -->
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationCallbackTest#loggingCallbackExample()}
 
  <h3 id="creation">Creation and filling</h3>
 
@@ -221,6 +212,14 @@ difference Stage,Future
 
  handle for recover, ergebnis kann noch mal angepasst werden im nächsten stage
  handle kann auch optional zuruückgeben
+
+ http://stackoverflow.com/questions/25338376/completablefuture-withfallback-handle-only-some-errors
+
+ side effect, log error
+
+ timeout with exception
+ timeout with defaultvalue
+ http://stackoverflow.com/questions/23575067/timeout-with-default-value-in-java-8-completablefuture
 
  -->
 

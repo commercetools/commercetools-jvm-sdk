@@ -188,4 +188,20 @@ public class AsyncDocumentationTest {
             return lastName;
         }
     }
+
+    protected CompletableFuture<String> getFuture() {
+        return CompletableFuture.completedFuture("HI");
+    }
+
+
+
+    protected static class Logger {
+        public void info(final String s) {
+
+        }
+
+        public void error(final String s, final Throwable nullableError) {
+
+        }
+    }
 }
