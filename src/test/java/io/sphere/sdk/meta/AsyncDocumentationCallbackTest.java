@@ -1,5 +1,6 @@
 package io.sphere.sdk.meta;
 
+import com.ning.http.client.Response;
 import org.junit.Test;
 
 import java.util.concurrent.CompletionStage;
@@ -15,7 +16,7 @@ public class AsyncDocumentationCallbackTest extends AsyncDocumentationTest {
         stage.thenAcceptAsync(value -> logger.info("Fetched successfully " + value));
 
         //when completed, access value or error, one of them is null
-        stage.whenCompleteAsync((nullableValue, nullableError) -> {
+        final CompletionStage<String> resultLikeOriginalStage = stage.whenCompleteAsync((nullableValue, nullableError) -> {
             if (nullableValue != null) {
                 logger.info("Fetched successfully " + nullableValue);
             } else {
@@ -24,5 +25,15 @@ public class AsyncDocumentationCallbackTest extends AsyncDocumentationTest {
         });
     }
 
+    @Test
+    public void whenCompleteAsyncDemo() throws Exception {
+        final CompletionStage<Response> stage = getResponse();
+        final CompletionStage<String> contentTypeStage = stage
+                .whenComplete((nullableResponse, e) -> logger.debug("response: " + nullableResponse))
+                .thenApply(response -> response.getContentType());
+    }
 
+    private CompletionStage<Response> getResponse() {
+        return null;
+    }
 }

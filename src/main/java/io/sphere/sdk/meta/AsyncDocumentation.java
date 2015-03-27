@@ -127,6 +127,11 @@ With {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Fu
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationCallbackTest#loggingCallbackExample()}
 
+ {@link java.util.concurrent.CompletionStage#whenComplete(java.util.function.BiConsumer)} keeps the result as it is and performs side-effects,
+ so it is nice to log in between and then map the stage to a new one:
+
+ {@include.example io.sphere.sdk.meta.AsyncDocumentationCallbackTest#whenCompleteAsyncDemo()}
+
  <h3 id="creation">Creation and filling</h3>
 
  <h4>Creation of a successful future</h4>
@@ -971,7 +976,7 @@ onSuccess
  x
  </td>
 
- <td>&nbsp;</td>
+ <td>x</td>
 
  <td>&nbsp;</td>
 

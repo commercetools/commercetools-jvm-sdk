@@ -206,6 +206,10 @@ public class AsyncDocumentationTest {
         public void error(final String s, final Throwable nullableError) {
 
         }
+
+        public void debug(final String s) {
+
+        }
     }
 
     @Test
