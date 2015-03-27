@@ -342,6 +342,87 @@ difference Stage,Future
 
  -->
 
+ <h3 id="java-util-function">Java Functions</h3>
+
+
+Since Java 8, the JDK provides <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html">Lambda Expressions</a>
+ and <a href="https://docs.oracle.com/javase/tutorial/java/javaOO/methodreferences.html">Method References</a>.
+
+
+
+ <br><br>
+
+ <table class="custom">
+ <caption>Important {@link FunctionalInterface}s</caption>
+ <tbody>
+ <tr>
+ <td>&nbsp;</td>
+ <td>number of arguments</td>
+ <td>behavior</td>
+ <td>checked Exception</td>
+ <td>purpose</td>
+ </tr>
+ <tr>
+ <td>{@link java.util.function.Function}&lt;T,R&gt;</td>
+ <td>1</td>
+ <td>create value</td>
+ <td>&nbsp;</td>
+ <td>transforms one value into another</td>
+ </tr>
+ <tr>
+ <td>{@link java.util.function.BiFunction}&lt;T,U,R&gt;</td>
+ <td>2</td>
+ <td>create value</td>
+ <td>&nbsp;</td>
+ <td>transforms two values into another</td>
+ </tr>
+ <tr>
+ <td>{@link java.util.function.Consumer}&lt;T&gt;</td>
+ <td>1</td>
+ <td>side-effects</td>
+ <td>&nbsp;</td>
+ <td>side effect for one value</td>
+ </tr>
+ <tr>
+ <td>{@link java.util.function.BiConsumer}&lt;T,U&gt;</td>
+ <td>2</td>
+ <td>side-effects</td>
+ <td>&nbsp;</td>
+ <td>side effect for two values</td>
+ </tr>
+ <tr>
+ <td>{@link java.util.function.Supplier}&lt;T&gt;</td>
+ <td>0</td>
+ <td>create value</td>
+ <td>&nbsp;</td>
+ <td>on-demand creation of a value</td>
+ </tr>
+ <tr>
+ <td>{@link java.util.concurrent.Callable}&lt;V&gt;</td>
+ <td>0</td>
+ <td>create value</td>
+ <td>x</td>
+ <td>like Supplier but throws Exception</td>
+ </tr>
+ <tr>
+ <td>{@link java.lang.Runnable}</td>
+ <td>0</td>
+ <td>side-effects</td>
+ <td>&nbsp;</td>
+ <td>task which causes side-effects</td>
+ </tr>
+ </tbody>
+ </table>
+
+
+
+ <!--
+
+ function vs. method block, first class member, but method reference
+
+ -->
+
+
  <h3 id="threads">Threads and the Trinity</h3>
 
  <p>Which Thread is used for functional composition and callbacks depends on the method.
@@ -460,92 +541,8 @@ difference Stage,Future
 
  <h3 id="summary">Summary</h3>
 
- <table class="custom">
- <caption>Important {@link FunctionalInterface}s</caption>
- <tbody>
- <tr>
- <td>&nbsp;</td>
- <td>
- number of arguments
- </td>
- <td>
- creates a value
- </td>
- <td>
- purpose
- </td>
- </tr>
- <tr>
- <td>
- Function&lt;T,R&gt;
- </td>
- <td>
- 1
- </td>
- <td>
- x
- </td>
- <td>
- transforms one value into another
- </td>
- </tr>
- <tr>
- <td>
- BiFunction&lt;T,U,R&gt;
- </td>
- <td>
- 2
- </td>
- <td>
- x
- </td>
- <td>
- transforms two values into another
- </td>
- </tr>
- <tr>
- <td>
- Consumer&lt;T&gt;
- </td>
- <td>
- 1
- </td>
- <td>&nbsp;</td>
- <td>
- side effect for one value
- </td>
- </tr>
- <tr>
- <td>
- BiConsumer&lt;T,U&gt;
- </td>
- <td>
- 2
- </td>
- <td>&nbsp;</td>
- <td>
- side effect for two values
- </td>
- </tr>
- <tr>
- <td>
- Supplier&lt;T&gt;
- </td>
- <td>
- 0
- </td>
- <td>
- x
- </td>
- <td>
- on-demand creation of a value
- </td>
- </tr>
- </tbody>
- </table>
 
 
- <br><br>
 
  <table class="custom">
  <caption>{@link java.util.concurrent.CompletionStage} vs. {@link java.util.concurrent.CompletableFuture}</caption>
