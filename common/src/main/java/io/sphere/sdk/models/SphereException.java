@@ -91,4 +91,8 @@ public class SphereException extends RuntimeException {
     public void setUnderlyingHttpResponse(final HttpResponse httpResponse) {
         this.httpResponse = Optional.of(httpResponse.withoutRequest());
     }
+
+    public List<String> getAdditionalNotes() {
+        return additionalNotes;
+    }
 }

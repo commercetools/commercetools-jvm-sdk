@@ -14,6 +14,7 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
+import static java.util.Arrays.asList;
 
 final class SphereClientImpl extends AutoCloseableService implements SphereClient {
     private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
@@ -103,6 +104,15 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         exception.setSphereRequest(sphereRequest);
         exception.setUnderlyingHttpResponse(httpResponse);
         exception.setProjectKey(config.getProjectKey());
+
+        final List<String> errorMessagesDueToMappingError = asList("SearchPhaseExecutionException", "query_fetch", "RemoteTransportException", "SearchParseException", "search/phase/query+fetch");
+        httpResponse.getResponseBody()
+                .map(bytes -> bytesToString(bytes))
+                .map(body -> errorMessagesDueToMappingError.stream().anyMatch(errorWord -> body.contains(errorWord)) && body.toLowerCase().contains("product"))
+                .map(containsTerm -> {
+                    exception.addNote(String.format("Maybe it helps to reindex the products https://admin.sphere.io/%s/developers/danger but this may take a while.", config.getProjectKey()));
+                    return null;
+                });
     }
 
     @Override
