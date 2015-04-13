@@ -7,12 +7,18 @@ import io.sphere.sdk.states.State;
 
 import java.util.List;
 
+import static java.util.Arrays.asList;
+
 /**
  {@doc.gen list actions}
  */
 public class StateUpdateCommand extends UpdateCommandDslImpl<State> {
     private StateUpdateCommand(final Versioned<State> versioned, final List<? extends UpdateAction<State>> updateActions) {
         super(versioned, updateActions, StateEndpoint.ENDPOINT);
+    }
+
+    public static StateUpdateCommand of(final Versioned<State> versioned, final UpdateAction<State> updateAction) {
+        return of(versioned, asList(updateAction));
     }
 
     public static StateUpdateCommand of(final Versioned<State> versioned, final List<? extends UpdateAction<State>> updateActions) {
