@@ -7,7 +7,7 @@ import io.sphere.sdk.states.State;
 public class SetDescription extends UpdateAction<State> {
     private final LocalizedStrings description;
 
-    private SetDescription(LocalizedStrings description) {
+    private SetDescription(final LocalizedStrings description) {
         super("setDescription");
         this.description = description;
     }
