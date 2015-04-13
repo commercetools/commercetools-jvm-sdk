@@ -14,11 +14,11 @@ import java.util.Set;
 public class StateBuilder extends DefaultModelFluentBuilder<StateBuilder, State> {
     private String key;
     private StateType type;
-    private Optional<LocalizedStrings> name;
-    private Optional<LocalizedStrings> description;
+    private Optional<LocalizedStrings> name = Optional.empty();
+    private Optional<LocalizedStrings> description = Optional.empty();
     private boolean initial;
     private boolean builtIn;
-    private Optional<Set<Reference<State>>> transitions;
+    private Optional<Set<Reference<State>>> transitions = Optional.empty();
 
     public StateBuilder(final String id, final String key, final StateType type, final boolean initial, final boolean builtIn) {
         this.id = id;
@@ -55,8 +55,7 @@ public class StateBuilder extends DefaultModelFluentBuilder<StateBuilder, State>
     }
 
     public StateBuilder name(final LocalizedStrings value) {
-        this.name = Optional.ofNullable(value);
-        return this;
+        return name(Optional.of(value));
     }
 
     public StateBuilder description(final Optional<LocalizedStrings> value) {
@@ -65,8 +64,7 @@ public class StateBuilder extends DefaultModelFluentBuilder<StateBuilder, State>
     }
 
     public StateBuilder description(final LocalizedStrings value) {
-        this.description = Optional.ofNullable(value);
-        return this;
+        return description(Optional.of(value));
     }
 
     public StateBuilder initial(final boolean value) {
@@ -85,8 +83,7 @@ public class StateBuilder extends DefaultModelFluentBuilder<StateBuilder, State>
     }
 
     public StateBuilder transitions(final Set<Reference<State>> value) {
-        this.transitions = Optional.ofNullable(value);
-        return this;
+        return transitions(Optional.of(value));
     }
 
     @Override
