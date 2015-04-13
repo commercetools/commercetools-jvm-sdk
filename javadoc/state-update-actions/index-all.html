@@ -731,7 +731,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeInitial</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-changeInitial--%s" class=code-example><pre><code class='java'>StateFixtures.withUpdateableState(client(), state -&gt; {
+<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-changeInitial--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
     final boolean oldIsInitial = state.isInitial();
     final boolean newIsInitial = !oldIsInitial;
 
@@ -763,7 +763,17 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeKey</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-changeKey--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
+    final String newKey = randomKey();
+
+    final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeKey.of(newKey));
+    final State updatedState = execute(command);
+    assertThat(updatedState.getKey()).isEqualTo(newKey);
+    return state;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">ChangeLineItemQuantity</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets the quantity of the given line item.</div>
