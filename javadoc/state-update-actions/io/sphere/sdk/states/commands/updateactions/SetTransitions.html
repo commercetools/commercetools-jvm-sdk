@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9};
+var methods = {"i0":10,"i1":9,"i2":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -120,6 +120,20 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">SetTransitions</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;</pre>
+<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setTransitions--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), stateA -&gt; {
+    withUpdateableState(client(), stateB -&gt; {
+        final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(asSet(stateA.toReference())));
+        final State updatedStateB = execute(command);
+        assertThat(updatedStateB.getTransitions()).isPresentAs(asSet(stateA.toReference()));
+
+        final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));
+        assertThat(updatedStateBWithoutTransitions.getTransitions()).isAbsent();
+
+        return updatedStateBWithoutTransitions;
+    });
+    return stateA;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -139,12 +153,16 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html#getTransistions--">getTransistions</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>java.util.Optional&lt;java.util.Set&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html#getTransitions--">getTransitions</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html#of-java.util.List-">of</a></span>(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;transistions)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html#of-java.util.Optional-">of</a></span>(java.util.Optional&lt;java.util.Set&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&gt;&nbsp;transitions)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html#of-java.util.Set-">of</a></span>(java.util.Set&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;transitions)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -182,22 +200,31 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-java.util.List-">
+<a name="of-java.util.Set-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a>&nbsp;of(java.util.List&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;transistions)</pre>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a>&nbsp;of(java.util.Set&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;transitions)</pre>
 </li>
 </ul>
-<a name="getTransistions--">
+<a name="of-java.util.Optional-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a>&nbsp;of(java.util.Optional&lt;java.util.Set&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&gt;&nbsp;transitions)</pre>
+</li>
+</ul>
+<a name="getTransitions--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>getTransistions</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;getTransistions()</pre>
+<h4>getTransitions</h4>
+<pre>public&nbsp;java.util.Optional&lt;java.util.Set&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&gt;&nbsp;getTransitions()</pre>
 </li>
 </ul>
 </li>

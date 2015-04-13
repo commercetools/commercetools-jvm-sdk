@@ -738,7 +738,7 @@
     final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeInitial.of(newIsInitial));
     final State updatedState = execute(command);
     assertThat(updatedState.isInitial()).isEqualTo(newIsInitial);
-    return state;
+    return updatedState;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -770,7 +770,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeKey.of(newKey));
     final State updatedState = execute(command);
     assertThat(updatedState.getKey()).isEqualTo(newKey);
-    return state;
+    return updatedState;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -3077,7 +3077,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#getTrackingId--">getTrackingId()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html#getTransistions--">getTransistions()</a></span> - Method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html#getTransitions--">getTransitions()</a></span> - Method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/State.html#getTransitions--">getTransitions()</a></span> - Method in interface io.sphere.sdk.states.<a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a></dt>
 <dd>&nbsp;</dd>
@@ -5190,7 +5190,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/SetName.html#of-java.util.Optional-">of(Optional&lt;LocalizedStrings&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/SetName.html" title="class in io.sphere.sdk.states.commands.updateactions">SetName</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html#of-java.util.List-">of(List&lt;Reference&lt;State&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html#of-java.util.Set-">of(Set&lt;Reference&lt;State&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html#of-java.util.Optional-">of(Optional&lt;Set&lt;Reference&lt;State&gt;&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateByKeyFetch.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByKeyFetch.html" title="class in io.sphere.sdk.states.queries">StateByKeyFetch</a></dt>
 <dd>&nbsp;</dd>
@@ -6600,7 +6602,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
     final State updatedState = execute(command);
     assertThat(updatedState.getName()).isPresentAs(newName);
-    return state;
+    return updatedState;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -6691,7 +6693,22 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#setter-java.lang.String-">setter(String)</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">SetTransitions</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setTransitions--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), stateA -&gt; {
+    withUpdateableState(client(), stateB -&gt; {
+        final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(asSet(stateA.toReference())));
+        final State updatedStateB = execute(command);
+        assertThat(updatedStateB.getTransitions()).isPresentAs(asSet(stateA.toReference()));
+
+        final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));
+        assertThat(updatedStateBWithoutTransitions.getTransitions()).isAbsent();
+
+        return updatedStateBWithoutTransitions;
+    });
+    return stateA;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/attributes/SetType.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">SetType</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereException.html#setUnderlyingHttpResponse-io.sphere.sdk.http.HttpResponse-">setUnderlyingHttpResponse(HttpResponse)</a></span> - Method in exception io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></dt>

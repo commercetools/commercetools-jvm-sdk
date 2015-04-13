@@ -95,7 +95,7 @@
     final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeInitial.of(newIsInitial));
     final State updatedState = execute(command);
     assertThat(updatedState.isInitial()).isEqualTo(newIsInitial);
-    return state;
+    return updatedState;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -109,7 +109,7 @@
     final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeKey.of(newKey));
     final State updatedState = execute(command);
     assertThat(updatedState.getKey()).isEqualTo(newKey);
-    return state;
+    return updatedState;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -131,14 +131,29 @@
     final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
     final State updatedState = execute(command);
     assertThat(updatedState.getName()).isPresentAs(newName);
-    return state;
+    return updatedState;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setTransitions--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), stateA -&gt; {
+    withUpdateableState(client(), stateB -&gt; {
+        final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(asSet(stateA.toReference())));
+        final State updatedStateB = execute(command);
+        assertThat(updatedStateB.getTransitions()).isPresentAs(asSet(stateA.toReference()));
+
+        final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));
+        assertThat(updatedStateBWithoutTransitions.getTransitions()).isAbsent();
+
+        return updatedStateBWithoutTransitions;
+    });
+    return stateA;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
 </tr>
 </tbody>
 </table>
