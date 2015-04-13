@@ -730,7 +730,18 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeInitial</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-changeInitial--%s" class=code-example><pre><code class='java'>StateFixtures.withUpdateableState(client(), state -&gt; {
+    final boolean oldIsInitial = state.isInitial();
+    final boolean newIsInitial = !oldIsInitial;
+
+    final StateUpdateCommand command = StateUpdateCommand.of(state, ChangeInitial.of(newIsInitial));
+    final State updatedState = execute(command);
+    assertThat(updatedState.isInitial()).isEqualTo(newIsInitial);
+    return state;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">ChangeIsDefault</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeIsDefault--%s" class=code-example><pre><code class='java'>//only one can be default one, so clean up if there is any
@@ -2225,8 +2236,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariant.html#getImages--">getImages()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/RemoveImage.html#getImageUrl--">getImageUrl()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveImage</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html#getInital--">getInital()</a></span> - Method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html" title="class in io.sphere.sdk.states.commands.updateactions">ChangeInitial</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeDefinition.html#getInputHint--">getInputHint()</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeDefinition.html" title="class in io.sphere.sdk.attributes">AttributeDefinition</a></dt>
 <dd>&nbsp;</dd>
@@ -3829,6 +3838,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Determines whether the endpoint is included from the range or excluded.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html#isInitial--">isInitial()</a></span> - Method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html" title="class in io.sphere.sdk.states.commands.updateactions">ChangeInitial</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/State.html#isInitial--">isInitial()</a></span> - Method in interface io.sphere.sdk.states.<a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#isInitial--">isInitial()</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
@@ -5153,9 +5164,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/StateDeleteCommand.html#of-io.sphere.sdk.models.Versioned-">of(Versioned&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.<a href="io/sphere/sdk/states/commands/StateDeleteCommand.html" title="class in io.sphere.sdk.states.commands">StateDeleteCommand</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/StateUpdateCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">of(Versioned&lt;State&gt;, UpdateAction&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.<a href="io/sphere/sdk/states/commands/StateUpdateCommand.html" title="class in io.sphere.sdk.states.commands">StateUpdateCommand</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/StateUpdateCommand.html#of-io.sphere.sdk.models.Versioned-java.util.List-">of(Versioned&lt;State&gt;, List&lt;? extends UpdateAction&lt;State&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.<a href="io/sphere/sdk/states/commands/StateUpdateCommand.html" title="class in io.sphere.sdk.states.commands">StateUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html#of-java.lang.Boolean-">of(Boolean)</a></span> - Method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html" title="class in io.sphere.sdk.states.commands.updateactions">ChangeInitial</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html#of-boolean-">of(boolean)</a></span> - Static method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html" title="class in io.sphere.sdk.states.commands.updateactions">ChangeInitial</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/ChangeKey.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.states.commands.updateactions">ChangeKey</a></dt>
 <dd>&nbsp;</dd>
