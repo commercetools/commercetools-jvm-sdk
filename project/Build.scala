@@ -42,7 +42,7 @@ object Build extends Build {
         Nil
   ).configs(IntegrationTest)
 
-  lazy val `java-client` = project.configs(IntegrationTest).dependsOn(`java-client-ning-1_8`).settings(commonSettings:_*)
+  lazy val `java-client` = project.configs(IntegrationTest).dependsOn(`java-client-ning-1_9`).settings(commonSettings:_*)
 
   lazy val `java-client-ning-1_8` = project.configs(IntegrationTest).dependsOn(`java-client-core`, `java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies += "com.ning" % "async-http-client" % "1.8.7").configs(IntegrationTest)
