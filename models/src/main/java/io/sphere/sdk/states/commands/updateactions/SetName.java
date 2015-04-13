@@ -4,19 +4,28 @@ import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.states.State;
 
-public class SetName extends UpdateAction<State> {
-    private final LocalizedStrings name;
+import java.util.Optional;
 
-    private SetName(LocalizedStrings name) {
+/**
+ * {@include.example io.sphere.sdk.states.commands.StateUpdateCommandTest#setName()}
+ */
+public class SetName extends UpdateAction<State> {
+    private final Optional<LocalizedStrings> name;
+
+    private SetName(final Optional<LocalizedStrings> name) {
         super("setName");
         this.name = name;
     }
 
     public static SetName of(final LocalizedStrings name) {
+        return of(Optional.of(name));
+    }
+
+    public static SetName of(final Optional<LocalizedStrings> name) {
         return new SetName(name);
     }
 
-    public LocalizedStrings getName() {
+    public Optional<LocalizedStrings> getName() {
         return name;
     }
 }
