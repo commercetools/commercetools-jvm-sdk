@@ -7,7 +7,10 @@ import io.sphere.sdk.states.State;
 
 import java.util.List;
 
-public class StateUpdateCommand  extends UpdateCommandDslImpl<State> {
+/**
+ {@doc.gen list actions}
+ */
+public class StateUpdateCommand extends UpdateCommandDslImpl<State> {
     private StateUpdateCommand(final Versioned<State> versioned, final List<? extends UpdateAction<State>> updateActions) {
         super(versioned, updateActions, StateEndpoint.ENDPOINT);
     }
