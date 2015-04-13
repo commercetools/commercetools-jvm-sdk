@@ -31,6 +31,10 @@ public class HttpHeaders extends Base {
         return new HttpHeaders(key, value);
     }
 
+    public static HttpHeaders empty() {
+        return of();
+    }
+
     public static HttpHeaders of() {
         return new HttpHeaders(Collections.emptyMap());
     }
