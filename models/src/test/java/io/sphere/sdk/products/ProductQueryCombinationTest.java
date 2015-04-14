@@ -9,7 +9,7 @@ import static java.util.Locale.GERMAN;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class ProductQueryCombinationTest {
-    public static final PartialProductDataQueryModel DATA_QUERY_MODEL = ProductDataQueryModel.get();
+    public static final PartialProductDataQueryModel DATA_QUERY_MODEL = ProductDataQueryModel.getPartialProductDataQueryModel();
     public static final PartialProductCatalogDataQueryModel MASTER_DATA_QUERY_MODEL = ProductCatalogDataQueryModel.get();
 
     @Test
