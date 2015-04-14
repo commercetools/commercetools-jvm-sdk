@@ -24,7 +24,7 @@ abstract class PredicateBase<T> extends Base implements Predicate<T> {
 
     @Override
     public String toString() {
-        return toSphereQuery();
+        return "Predicate[" + toSphereQuery() + "]";
     }
 
     @SuppressWarnings("rawtypes")

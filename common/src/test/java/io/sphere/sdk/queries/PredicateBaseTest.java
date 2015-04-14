@@ -23,4 +23,9 @@ public class PredicateBaseTest {
     public void and() throws Exception {
         assertThat((p1.and(p2)).toSphereQuery()).isEqualTo("masterData(current(slug(en=\"xyz-42\") and tags contains all (\"a\", \"b\", \"c\")");
     }
+
+    @Test
+    public void testToString() throws Exception {
+        assertThat(p1.toString()).isEqualTo("Predicate[masterData(current(slug(en=\"xyz-42\")]");
+    }
 }
