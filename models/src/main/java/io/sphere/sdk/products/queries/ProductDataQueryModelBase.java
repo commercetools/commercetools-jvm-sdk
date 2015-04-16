@@ -4,8 +4,21 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
+
+    public static PartialProductDataQueryModel getPartialProductDataQueryModel() {
+        return new PartialProductDataQueryModel(Optional.empty(), Optional.empty());
+    }
+
+    public Predicate<T> where(final Predicate<PartialProductDataQueryModel> embeddedPredicate) {
+        return new EmbeddedPredicate<>(this, embeddedPredicate);
+    }
+
+    public Predicate<T> where(final Function<PartialProductDataQueryModel, Predicate<PartialProductDataQueryModel>> embeddedPredicate) {
+        return where(embeddedPredicate.apply(ProductDataQueryModel.getPartialProductDataQueryModel()));
+    }
 
     ProductDataQueryModelBase(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
@@ -21,6 +34,10 @@ class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
 
     public LocalizedStringsQuerySortingModel<T> slug() {
         return LocalizedStringsQuerySortingModel.of(this, "slug");
+    }
+
+    public ProductAllVariantsQueryModel<T> allVariants() {
+        return new ProductAllVariantsQueryModel<>(Optional.of(this));
     }
 
     public ProductVariantQueryModel<T> masterVariant() {

@@ -3,6 +3,7 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
 
@@ -25,5 +26,9 @@ public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
 
     public Predicate<T> where(final Predicate<PartialProductVariantQueryModel> embeddedPredicate) {
         return new EmbeddedPredicate<>(this, embeddedPredicate);
+    }
+
+    public Predicate<T> where(final Function<PartialProductVariantQueryModel, Predicate<PartialProductVariantQueryModel>> embeddedPredicate) {
+        return where(embeddedPredicate.apply(get()));
     }
 }
