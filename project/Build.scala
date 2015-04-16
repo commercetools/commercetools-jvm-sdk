@@ -25,19 +25,33 @@ object Build extends Build {
   lazy val `jvm-sdk` = (project in file(".")).configs(IntegrationTest)
     .settings(unidocSettings:_*)
     .settings(javaUnidocSettings:_*)
-    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`test-lib`))
+    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`test-lib`, `java-client-ning-1_8`))//need to exclude duplicated classes or "javadoc: error - com.sun.tools.doclets.internal.toolkit.util.DocletAbortException: java.lang.NullPointerException" appears
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
-    .aggregate(common, `java-client`, `java-client-core`, `java-client-apache-async`, models, `test-lib`)
+    .aggregate(common, `java-client`, `java-client-core`, `java-client-apache-async`, models, `test-lib`, `java-client-ning-1_8`, `java-client-ning-1_9`)
     .dependsOn(common, `java-client`, `java-client-core`, `java-client-apache-async`, models, `test-lib`)
 
   lazy val `java-client-core` = project.configs(IntegrationTest).dependsOn(common).settings(commonSettings:_*)
+    .settings(libraryDependencies += junitDep)
 
-  lazy val `java-client` = project.configs(IntegrationTest).dependsOn(`java-client-core`).settings(commonSettings:_*)
-  .settings(libraryDependencies ++= Seq("com.ning" % "async-http-client" % "1.8.7"))
+  lazy val `java-client-internal-test` = project.dependsOn(`java-client-core`).settings(commonSettings:_*).settings(
+    libraryDependencies ++=
+      festAssert ::
+        junitDep ::
+        junitInterface ::
+        Nil
+  ).configs(IntegrationTest)
 
-  lazy val `java-client-apache-async` = project.configs(IntegrationTest).dependsOn(`java-client-core`).settings(commonSettings:_*)
-  .settings(libraryDependencies ++= Seq("org.apache.httpcomponents" % "httpasyncclient" % "4.0.2"))
+  lazy val `java-client` = project.configs(IntegrationTest).dependsOn(`java-client-ning-1_9`).settings(commonSettings:_*)
+
+  lazy val `java-client-ning-1_8` = project.configs(IntegrationTest).dependsOn(`java-client-core`, `java-client-internal-test` % "test,it").settings(commonSettings:_*)
+    .settings(libraryDependencies += "com.ning" % "async-http-client" % "1.8.7").configs(IntegrationTest)
+
+  lazy val `java-client-ning-1_9` = project.configs(IntegrationTest).dependsOn(`java-client-core`, `java-client-internal-test` % "test,it").settings(commonSettings:_*)
+    .settings(libraryDependencies += "com.ning" % "async-http-client" % "1.9.18").configs(IntegrationTest)
+
+  lazy val `java-client-apache-async` = project.configs(IntegrationTest).dependsOn(`java-client-core`, `java-client-internal-test` % "test,it").settings(commonSettings:_*)
+    .settings(libraryDependencies += "org.apache.httpcomponents" % "httpasyncclient" % "4.0.2").configs(IntegrationTest)
 
   lazy val common = project.configs(IntegrationTest).settings(writeVersionSettings: _*).settings(commonSettings:_*)
 
@@ -60,7 +74,6 @@ object Build extends Build {
   val genDoc = taskKey[Seq[File]]("generates the documentation")
 
   val moduleDependencyGraph = taskKey[Unit]("creates an image which shows the dependencies between the SBT modules")
-
   val writeVersion = taskKey[Unit]("Write the version into a file.")
 
   def plantUml(javaUnidocDir: File): Unit = {
@@ -105,7 +118,7 @@ object Build extends Build {
         (id, deps)
       }.toList
       val x = projectToDependencies.map { case (id, deps) =>
-        deps.map(dep => '"' + id + '"' + "->" + '"' + dep + '"').filterNot(s => s == "\"models\"->\"java-client-apache-async\"" || s.startsWith("\"test-lib") || s.startsWith("\"jvm-sdk")).mkString("\n")
+        deps.map(dep => '"' + id + '"' + "->" + '"' + dep + '"').filterNot(s => s == "\"models\"->\"java-client-apache-async\"" || s.startsWith('"' + `java-client-internal-test`.id) || s.startsWith("\"test-lib") || s.startsWith("\"jvm-sdk")).mkString("\n")
       }.mkString("\n")
       val content = s"""digraph TrafficLights {
                           |$x
