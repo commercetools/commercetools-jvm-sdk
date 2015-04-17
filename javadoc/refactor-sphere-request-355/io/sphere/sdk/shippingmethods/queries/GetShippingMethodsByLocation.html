@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":9,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -150,20 +150,20 @@ implements <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" titl
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></span>(<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</code>
+<div class="block">Takes an http response and maps it into a Java object of type T.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html#httpRequestIntent--">httpRequestIntent</a></span>()</code>
 <div class="block">Provides an http request intent, this does not include the execution of it.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html" title="class in io.sphere.sdk.shippingmethods.queries">GetShippingMethodsByLocation</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html#of-com.neovisionaries.i18n.CountryCode-">of</a></span>(com.neovisionaries.i18n.CountryCode&nbsp;countryCode)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html#resultMapper--">resultMapper</a></span>()</code>
-<div class="block">Takes an http response and maps it into a Java object of type T.</div>
-</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocation.html" title="class in io.sphere.sdk.shippingmethods.queries">GetShippingMethodsByLocation</a></code></td>
@@ -216,19 +216,19 @@ implements <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" titl
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="resultMapper--">
+<a name="deserialize-io.sphere.sdk.http.HttpResponse-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>resultMapper</h4>
-<pre>public&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;&nbsp;resultMapper()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">SphereRequest</a></code></span></div>
+<h4>deserialize</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&nbsp;deserialize(<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">SphereRequest</a></code></span></div>
 <div class="block">Takes an http response and maps it into a Java object of type T.
      Before calling this method, check with <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.canDeserialize(HttpResponse)</code></a> if the response can be consumed.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">resultMapper</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>function to map the result of the http request</dd>
 </dl>

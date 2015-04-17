@@ -209,13 +209,12 @@ Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
  <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> is an interface, so you have the opportunity to code
  a query without the domain specific language:
 
- <div id="io-sphere-sdk-categories-CategoryByNameQuery%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import java.util.function.Function;
-import com.fasterxml.jackson.core.type.TypeReference;
+ <div id="io-sphere-sdk-categories-CategoryByNameQuery%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
+import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.JsonUtils;
 import java.util.Locale;
 import static io.sphere.sdk.http.UrlUtils.urlEncode;
@@ -238,8 +237,8 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
     }
 
     @Override
-    public Function&lt;HttpResponse, PagedQueryResult&lt;Category&gt;&gt; resultMapper() {
-        return httpResponse -&gt; JsonUtils.readObject(new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
+    public PagedQueryResult&lt;Category&gt; deserialize(final HttpResponse httpResponse) {
+        return JsonUtils.readObject(new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
         }, httpResponse.getResponseBody().get());
     }
 }

@@ -116,7 +116,7 @@ var activeTableTab = "activeTableTab";
 <div class="block">An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.
 
  <p>Typical workflow: A client executes <a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--"><code>httpRequestIntent()</code></a> and creates a future of an http response. When the future redeems the client uses the http response and passes it as
- argument to <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-"><code>canDeserialize(HttpResponse)</code></a>. If the call results in true, the client applies <a href="../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--"><code>resultMapper()</code></a> to transform the http response into T.</p></div>
+ argument to <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-"><code>canDeserialize(HttpResponse)</code></a>. If the call results in true, the client applies <a href="../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-"><code>deserialize(HttpResponse)</code></a> to transform the http response into T.</p></div>
 </li>
 </ul>
 </div>
@@ -137,20 +137,20 @@ var activeTableTab = "activeTableTab";
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>default boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</code>
-<div class="block">Checks if the response can be handled by <a href="../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--"><code>resultMapper()</code></a>.</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</code>
+<div class="block">Checks if the response can be handled by <a href="../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-"><code>deserialize(HttpResponse)</code></a>.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></span>()</code>
-<div class="block">Provides an http request intent, this does not include the execution of it.</div>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="type parameter in SphereRequest">T</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</code>
+<div class="block">Takes an http response and maps it into a Java object of type T.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="type parameter in SphereRequest">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--">resultMapper</a></span>()</code>
-<div class="block">Takes an http response and maps it into a Java object of type T.</div>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></span>()</code>
+<div class="block">Provides an http request intent, this does not include the execution of it.</div>
 </td>
 </tr>
 </table>
@@ -168,16 +168,18 @@ var activeTableTab = "activeTableTab";
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="resultMapper--">
+<a name="deserialize-io.sphere.sdk.http.HttpResponse-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>resultMapper</h4>
-<pre>java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="type parameter in SphereRequest">T</a>&gt;&nbsp;resultMapper()</pre>
+<h4>deserialize</h4>
+<pre><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="type parameter in SphereRequest">T</a>&nbsp;deserialize(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</pre>
 <div class="block">Takes an http response and maps it into a Java object of type T.
      Before calling this method, check with <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-"><code>canDeserialize(HttpResponse)</code></a> if the response can be consumed.</div>
 <dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>httpResponse</code> - </dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>function to map the result of the http request</dd>
 </dl>
@@ -203,14 +205,14 @@ var activeTableTab = "activeTableTab";
 <ul class="blockListLast">
 <li class="blockList">
 <h4>canDeserialize</h4>
-<pre>default&nbsp;boolean&nbsp;canDeserialize(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;response)</pre>
-<div class="block">Checks if the response can be handled by <a href="../../../../io/sphere/sdk/client/SphereRequest.html#resultMapper--"><code>resultMapper()</code></a>.
+<pre>default&nbsp;boolean&nbsp;canDeserialize(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</pre>
+<div class="block">Checks if the response can be handled by <a href="../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-"><code>deserialize(HttpResponse)</code></a>.
 
      Use case 1: A http response returns 404 and the this <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a>
      can handle this error by returning an empty optional, an empty list or throwing a domain specific exception.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>response</code> - the http response which shall be transformed</dd>
+<dd><code>httpResponse</code> - the http response which shall be transformed</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>true if the http response can be consumed, false otherwise</dd>
 </dl>
