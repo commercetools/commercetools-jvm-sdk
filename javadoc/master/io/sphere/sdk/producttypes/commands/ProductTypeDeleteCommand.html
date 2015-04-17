@@ -138,7 +138,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/ByIdDeleteCommandImpl.htm
 
  <p>Example:</p>
  <div id="example-QueryProductTypeExamples-delete--%s" class=code-example><pre><code class='java'>final DeleteCommand&lt;ProductType&gt; command = ProductTypeDeleteCommand.of(productType);
-final CompletableFuture&lt;ProductType&gt; deletedProductType = client.execute(command);
+final CompletionStage&lt;ProductType&gt; deletedProductType = client.execute(command);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryProductTypeExamples.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>

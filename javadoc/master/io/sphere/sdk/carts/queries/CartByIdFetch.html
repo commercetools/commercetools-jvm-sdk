@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9};
+var methods = {"i0":9,"i1":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -137,7 +137,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/ByIdFetchImpl.html" title=
 <div class="block">Gets a cart by ID.
 
  <div id="io-sphere-sdk-carts-queries-CartByIdFetchTest-fetchById--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-final Optional&lt;Cart&gt; fetchedCartOptional = execute(CartByIdFetch.of(cart.getId()));
+final String id = cart.getId();
+final Optional&lt;Cart&gt; fetchedCartOptional = execute(CartByIdFetch.of(id));
 assertThat(fetchedCartOptional).isPresentAs(cart);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/carts/queries/CartByIdFetchTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
@@ -159,6 +160,10 @@ assertThat(fetchedCartOptional).isPresentAs(cart);
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/carts/queries/CartByIdFetch.html" title="class in io.sphere.sdk.carts.queries">CartByIdFetch</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartByIdFetch.html#of-io.sphere.sdk.carts.Cart-">of</a></span>(<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&nbsp;cart)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/carts/queries/CartByIdFetch.html" title="class in io.sphere.sdk.carts.queries">CartByIdFetch</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/carts/queries/CartByIdFetch.html#of-java.lang.String-">of</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
@@ -205,6 +210,15 @@ assertThat(fetchedCartOptional).isPresentAs(cart);
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="of-io.sphere.sdk.carts.Cart-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/carts/queries/CartByIdFetch.html" title="class in io.sphere.sdk.carts.queries">CartByIdFetch</a>&nbsp;of(<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&nbsp;cart)</pre>
+</li>
+</ul>
 <a name="of-java.lang.String-">
 <!--   -->
 </a>

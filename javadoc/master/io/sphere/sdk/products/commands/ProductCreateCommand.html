@@ -142,7 +142,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
  Example usage executing the command:
  <div id="io-sphere-sdk-products-CreateProductExamples-createWithClient--%s" class=code-example><pre><code class='java'>final ProductDraft productTemplate = new SimpleCottonTShirtProductDraftSupplier(productType, "demo product").get();
 final ProductCreateCommand command = ProductCreateCommand.of(productTemplate);
-final CompletableFuture&lt;Product&gt; result = client.execute(command);
+final CompletionStage&lt;Product&gt; result = client.execute(command);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/CreateProductExamples.java" target="_blank">test code</a>.</pre></div>
 
  Create a <a href="../../../../../io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products"><code>ProductDraft</code></a> instance:

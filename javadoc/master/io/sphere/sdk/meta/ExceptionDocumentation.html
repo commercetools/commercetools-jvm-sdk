@@ -127,12 +127,12 @@ extends java.lang.Object</pre>
 
  If a command cannot be performed due to unfulfilled preconditions
  SPHERE.IO can return one error response with multiple errors (<a href="http://dev.sphere.io/http-api-errors.html">listing of error codes</a>).
- The JVM SDK will then put a <a href="../../../../io/sphere/sdk/client/ErrorResponseException.html" title="class in io.sphere.sdk.client"><code>ErrorResponseException</code></a> into a <code>CompletableFuture</code>.
+ The JVM SDK will then put a <a href="../../../../io/sphere/sdk/client/ErrorResponseException.html" title="class in io.sphere.sdk.client"><code>ErrorResponseException</code></a> into a <code>CompletionStage</code>.
 
  The following example shows how to distinguish errors by error code:
  <div id="io-sphere-sdk-customers-commands-CustomerChangePasswordCommandTest-demo--%s" class=code-example><pre><code class='java'>final String wrongPassword = "wrong password";
 final CustomerSignInCommand signInCommand = CustomerSignInCommand.of(email, wrongPassword);
-final CompletableFuture&lt;CustomerSignInResult&gt; future = client.execute(signInCommand);
+final CompletionStage&lt;CustomerSignInResult&gt; future = client.execute(signInCommand);
 future.whenCompleteAsync((signInResult, exception) -&gt; {
     if (signInResult != null) {
         println("Signing worked");

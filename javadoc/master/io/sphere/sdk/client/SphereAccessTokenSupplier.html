@@ -100,12 +100,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd>java.lang.AutoCloseable, java.util.function.Supplier&lt;java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&gt;</dd>
+<dd>java.lang.AutoCloseable, java.util.function.Supplier&lt;java.util.concurrent.CompletionStage&lt;java.lang.String&gt;&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">SphereAccessTokenSupplier</span>
-extends java.lang.AutoCloseable, java.util.function.Supplier&lt;java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&gt;</pre>
+extends java.lang.AutoCloseable, java.util.function.Supplier&lt;java.util.concurrent.CompletionStage&lt;java.lang.String&gt;&gt;</pre>
 <div class="block">Provides an OAuth token for accessing protected Sphere HTTP API endpoints.
 
  There a no guarantees concerning the token providing mechanism.</div>
@@ -132,7 +132,7 @@ extends java.lang.AutoCloseable, java.util.function.Supplier&lt;java.util.concur
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#close--">close</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.util.concurrent.CompletionStage&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereAccessTokenSupplier.html#get--">get</a></span>()</code>
 <div class="block">Returns the OAuth access token.</div>
 </td>
@@ -181,11 +181,11 @@ extends java.lang.AutoCloseable, java.util.function.Supplier&lt;java.util.concur
 <ul class="blockList">
 <li class="blockList">
 <h4>get</h4>
-<pre>java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&nbsp;get()</pre>
+<pre>java.util.concurrent.CompletionStage&lt;java.lang.String&gt;&nbsp;get()</pre>
 <div class="block">Returns the OAuth access token.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code>get</code>&nbsp;in interface&nbsp;<code>java.util.function.Supplier&lt;java.util.concurrent.CompletableFuture&lt;java.lang.String&gt;&gt;</code></dd>
+<dd><code>get</code>&nbsp;in interface&nbsp;<code>java.util.function.Supplier&lt;java.util.concurrent.CompletionStage&lt;java.lang.String&gt;&gt;</code></dd>
 </dl>
 </li>
 </ul>

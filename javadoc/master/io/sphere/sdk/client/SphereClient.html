@@ -129,7 +129,7 @@ import io.sphere.sdk.client.SphereClientFactory;
 
  <h3 id=example-call>Example call</h3>
 
- <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletableFuture&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; future = client.execute(TaxCategoryQuery.of().byName("de19"));
+ <div id="example-TaxCategoryQueryExample-exampleQuery--%s" class=code-example><pre><code class='java'>CompletionStage&lt;PagedQueryResult&lt;TaxCategory&gt;&gt; future = client.execute(TaxCategoryQuery.of().byName("de19"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/TaxCategoryQueryExample.java" target="_blank">test code</a>.</pre></div>
 
  Refer to <a href="../meta/SphereResources.html">resources</a> for known SPHERE.IO requests.</div>
@@ -156,7 +156,7 @@ import io.sphere.sdk.client.SphereClientFactory;
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClient.html#close--">close</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>&lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;</code></td>
+<td class="colFirst"><code>&lt;T&gt;&nbsp;java.util.concurrent.CompletionStage&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.client.SphereRequest-">execute</a></span>(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
@@ -188,7 +188,7 @@ import io.sphere.sdk.client.SphereClientFactory;
 <ul class="blockList">
 <li class="blockList">
 <h4>execute</h4>
-<pre>&lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</pre>
+<pre>&lt;T&gt;&nbsp;java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;execute(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;sphereRequest)</pre>
 </li>
 </ul>
 <a name="close--">

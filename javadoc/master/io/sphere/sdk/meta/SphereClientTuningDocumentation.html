@@ -121,7 +121,7 @@ extends java.lang.Object</pre>
  <div id="io-sphere-sdk-client-WrappedClientDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.commands.Command;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 </code></pre><pre><code class='java'>/**
  * This is just a demo how powerful the decorator pattern for the client can be.
@@ -139,9 +139,9 @@ public class WrappedClientDemo implements SphereClient {
 
     @SuppressWarnings("unchecked")
     @Override
-    public &lt;T&gt; CompletableFuture&lt;T&gt; execute(SphereRequest&lt;T&gt; sphereRequest) {
-        final CompletableFuture&lt;T&gt; result;
-        final CompletableFuture&lt;T&gt; intermediateResult = filtered(client.execute(sphereRequest));
+    public &lt;T&gt; CompletionStage&lt;T&gt; execute(SphereRequest&lt;T&gt; sphereRequest) {
+        final CompletionStage&lt;T&gt; result;
+        final CompletionStage&lt;T&gt; intermediateResult = filtered(client.execute(sphereRequest));
         if (sphereRequest instanceof Query) {
             final Function&lt;Throwable, T&gt; provideEmptyResultOnException = exception -&gt; (T) PagedQueryResult.empty();
             result = intermediateResult.exceptionally(provideEmptyResultOnException);
@@ -155,7 +155,7 @@ public class WrappedClientDemo implements SphereClient {
     }
 
     //this method will be called for every request
-    private &lt;T&gt; CompletableFuture&lt;T&gt; filtered(final CompletableFuture&lt;T&gt; future) {
+    private &lt;T&gt; CompletionStage&lt;T&gt; filtered(final CompletionStage&lt;T&gt; future) {
         future.whenComplete(Email::writeEmailToDevelopers);
         future.whenComplete(metricComponent::incrementFailureRequests);
         future.whenComplete(metricComponent::incrementSuccessfulRequests);

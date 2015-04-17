@@ -20,3 +20,8 @@ nav.table-of-contents li { padding-top: 6px; list-style: disc inside; }
 
 .fixed-in-release { background-color: #c2d9f8; border-left-color: #3640ff; }
 .fixed-in-release:before { content:"  FIXED: "; }
+
+table.custom, table.custom th, table.custom td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
