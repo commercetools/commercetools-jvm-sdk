@@ -69,7 +69,7 @@ public class SphereException extends RuntimeException {
 
     @Override
     public final String getMessage() {
-        StringBuilder builder = new StringBuilder("\n===== BEGIN EXCEPTION OUTPUT =====").append("\n");
+        StringBuilder builder = new StringBuilder();
         final String httpRequest = getSphereRequest().map(x -> x.httpRequestIntent()).map(Object::toString).orElse("<unknown>");
         return builder
                 .append("SDK: ").append(BuildInfo.version()).append("\n")
@@ -85,7 +85,7 @@ public class SphereException extends RuntimeException {
                 .append(Optional.ofNullable(super.getMessage()).map(s -> "detailMessage: " + s + "\n").orElse(""))
                 .append("additional notes: ").append(additionalNotes).append("\n")
                 .append("Javadoc: ").append("http://sphereio.github.io/sphere-jvm-sdk/javadoc/").append(BuildInfo.version()).append("/").append(this.getClass().getCanonicalName().replace('.', '/')).append(".html").append("\n")
-                .append("===== END EXCEPTION OUTPUT =====").toString();
+                .toString();
     }
 
     public void setUnderlyingHttpResponse(final HttpResponse httpResponse) {
