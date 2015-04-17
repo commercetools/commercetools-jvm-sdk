@@ -111,7 +111,7 @@ extends java.lang.Object</pre>
  If you don't care about threads and asynchronous computation you will probably have a slow and inefficient application.
 
  <p>Suppose you want to show a customer detail page with the cart items and the customer data, so you need to fetch the cart and the customer.
- Fetching both documents is not related and lets suppose fetching a document from SPHERE.IO takes 100ms.</p>
+ Fetching both documents is not related and let's suppose fetching a document from SPHERE.IO takes 100ms.</p>
 
 
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-serialWayToFetchCustomerAndCart--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";//time t=0
@@ -136,7 +136,7 @@ customerStage.thenAcceptBoth(cartStage, (customerOption, cartOption) -&gt; {
  <p>Using futures (We use it here as synonym for <code>CompletableFuture</code> and <code>CompletionStage</code>.) can be very handy for executing parallel code.</p>
 
  <p>So you can use future APIs to run code in separate Threads and the result will not be immediately available, but in the future.
- The overhead of creating a future can be lower than <a href="http://stackoverflow.com/a/5483105">overhead of creating new Thread</a>.</p>
+ The overhead of creating a future can be lower than the <a href="http://stackoverflow.com/a/5483105">overhead of creating new Thread</a>.</p>
  <!--
  <h3 id="what">What</h3>
 
@@ -301,13 +301,22 @@ assertThat(simpleStream.collect(toList()))
 stage.thenAcceptAsync(value -&gt; logger.info("Fetched successfully " + value));
 
 //when completed, access value or error, one of them is null
-stage.whenCompleteAsync((nullableValue, nullableError) -&gt; {
+final CompletionStage&lt;String&gt; resultLikeOriginalStage = stage.whenCompleteAsync((nullableValue, nullableError) -&gt; {
     if (nullableValue != null) {
         logger.info("Fetched successfully " + nullableValue);
     } else {
         logger.error("Did not fetch successfully.", nullableError);
     }
 });
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationCallbackTest.java" target="_blank">test code</a>.</pre></div>
+
+ <code>CompletionStage.whenComplete(java.util.function.BiConsumer)</code> keeps the result as it is and performs side-effects,
+ so it is nice to log in between and then map the stage to a new one:
+
+ <div id="io-sphere-sdk-meta-AsyncDocumentationCallbackTest-whenCompleteAsyncDemo--%s" class=code-example><pre><code class='java'>final CompletionStage&lt;Response&gt; stage = getResponse();
+final CompletionStage&lt;String&gt; contentTypeStage = stage
+        .whenComplete((nullableResponse, e) -&gt; logger.debug("response: " + nullableResponse))
+        .thenApply(response -&gt; response.getContentType());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationCallbackTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="creation">Creation and filling</h3>
@@ -357,7 +366,7 @@ assertThat(future.isCompletedExceptionally()).isTrue();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
- <p>If you complete a future, it is possible that the same Thread is used for functional compositions or executing callbacks. If you don't want this, the calles need to use the methods which end with "Async".</p>
+ <p>If you complete a future, it is possible that the same Thread is used for functional compositions or executing callbacks. If you don't want this, the calls need to use the methods which end with "Async".</p>
  <!--
 
  fulfilling in another thread
@@ -826,7 +835,7 @@ final CompletionStage&lt;String&gt; result = stage.exceptionally(e -&gt; {
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
- <p>You also need not to cover all problems:</p>
+ <p>But you do not need to cover all problems:</p>
 
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-exceptionallyWithExceptionTypesButUncoveredPart--%s" class=code-example><pre><code class='java'>final CompletableFuture&lt;String&gt; stage = CompletableFutureUtils.failed(new WhatEverException());
 final Function&lt;Throwable, String&gt; f = e -&gt; {
@@ -1350,7 +1359,7 @@ onSuccess
  x
  </td>
 
- <td>&nbsp;</td>
+ <td>x</td>
 
  <td>&nbsp;</td>
 
