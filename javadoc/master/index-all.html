@@ -4181,8 +4181,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedStringsEntry</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringsEntry.html#LocalizedStringsEntry-java.util.Locale-java.lang.String-">LocalizedStringsEntry(Locale, String)</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models">LocalizedStringsEntry</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">LocalizedStringsQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/LocalizedStringsQueryModel.html" title="type parameter in LocalizedStringsQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">LocalizedStringsQuerySortingModel</span></a>&lt;<a href="io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="type parameter in LocalizedStringsQuerySortingModel">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
@@ -4227,6 +4225,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/utils/MapUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">MapUtils</span></a> - Class in <a href="io/sphere/sdk/utils/package-summary.html">io.sphere.sdk.utils</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#mapValue-java.util.function.BiFunction-">mapValue(BiFunction&lt;Locale, String, String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
+<dd>
+<div class="block">Creates a new instance where each translation value is transformed with <code>function</code>.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductQueryModel.html#masterData--">masterData()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#masterVariant--">masterVariant()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a></dt>
@@ -4850,6 +4852,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#of-java.util.Locale-java.lang.String-java.util.Locale-java.lang.String-">of(Locale, String, Locale, String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#of-java.util.Map-">of(Map&lt;Locale, String&gt;)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringsEntry.html#of-java.util.Locale-java.lang.String-">of(Locale, String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models">LocalizedStringsEntry</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
 <dd>&nbsp;</dd>
@@ -6829,7 +6833,9 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#slug--">slug()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#slugified--">slugified()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new <a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models"><code>LocalizedStrings</code></a> where all translations are slugified (remove whitespace, etc.).</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQuery.html#sort--">sort()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html#sort-io.sphere.sdk.queries.SortDirection-">sort(SortDirection)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="class in io.sphere.sdk.queries">IntegerLikeQuerySortingModel</a></dt>
@@ -7041,6 +7047,10 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><a href="io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states"><span class="typeNameLink">StateType</span></a> - Enum in <a href="io/sphere/sdk/states/package-summary.html">io.sphere.sdk.states</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/commands/StateUpdateCommand.html" title="class in io.sphere.sdk.states.commands"><span class="typeNameLink">StateUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/states/commands/package-summary.html">io.sphere.sdk.states.commands</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#stream--">stream()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStrings.html#streamCollector--">streamCollector()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#streetName-java.util.Optional-">streetName(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
