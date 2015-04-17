@@ -4,8 +4,6 @@ import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 
-import java.util.function.Function;
-
 public class DummySphereRequest extends Base implements SphereRequest<String> {
     public static final String DEFAULT_RESPONSE_OBJECT = "da";
     private final String marker;
@@ -15,8 +13,8 @@ public class DummySphereRequest extends Base implements SphereRequest<String> {
     }
 
     @Override
-    public Function<HttpResponse, String> resultMapper() {
-        return r -> DEFAULT_RESPONSE_OBJECT;
+    public String deserialize(final HttpResponse httpResponse) {
+        return DEFAULT_RESPONSE_OBJECT;
     }
 
     @Override

@@ -7,7 +7,6 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.JsonUtils;
 
 import java.util.Optional;
-import java.util.function.Function;
 
 public class JsonNodeSphereRequest implements SphereRequest<Optional<JsonNode>> {
     private final HttpMethod httpMethod;
@@ -21,8 +20,8 @@ public class JsonNodeSphereRequest implements SphereRequest<Optional<JsonNode>> 
     }
 
     @Override
-    public Function<HttpResponse, Optional<JsonNode>> resultMapper() {
-        return httpResponse -> httpResponse.getResponseBody().map(body -> JsonUtils.readObject(new TypeReference<JsonNode>() {
+    public Optional<JsonNode> deserialize(final HttpResponse httpResponse) {
+        return httpResponse.getResponseBody().map(body -> JsonUtils.readObject(new TypeReference<JsonNode>() {
         }, body));
     }
 

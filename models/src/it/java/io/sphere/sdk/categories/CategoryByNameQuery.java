@@ -1,13 +1,11 @@
 package io.sphere.sdk.categories;
 
-import java.util.function.Function;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
+import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.JsonUtils;
 
 import java.util.Locale;
@@ -33,8 +31,8 @@ public class CategoryByNameQuery extends Base implements Query<Category> {
     }
 
     @Override
-    public Function<HttpResponse, PagedQueryResult<Category>> resultMapper() {
-        return httpResponse -> JsonUtils.readObject(new TypeReference<PagedQueryResult<Category>>() {
+    public PagedQueryResult<Category> deserialize(final HttpResponse httpResponse) {
+        return JsonUtils.readObject(new TypeReference<PagedQueryResult<Category>>() {
         }, httpResponse.getResponseBody().get());
     }
 }

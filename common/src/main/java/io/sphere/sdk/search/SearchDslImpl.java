@@ -152,8 +152,8 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     @Override
-    public Function<HttpResponse, PagedSearchResult<T>> resultMapper() {
-        return resultMapper;
+    public PagedSearchResult<T> deserialize(final HttpResponse httpResponse) {
+        return resultMapper.apply(httpResponse);
     }
 
     @Override

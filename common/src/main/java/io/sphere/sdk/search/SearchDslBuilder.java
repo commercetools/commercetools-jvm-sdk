@@ -30,7 +30,7 @@ class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
     }
 
     SearchDslBuilder(final SearchDsl<T> template) {
-        this(template.endpoint(), template.resultMapper());
+        this(template.endpoint(), r -> template.deserialize(r));
         text = template.text();
         facets = template.facets();
         filterResults = template.filterResults();

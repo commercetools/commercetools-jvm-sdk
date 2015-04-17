@@ -142,8 +142,8 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     }
 
     @Override
-    public Function<HttpResponse, PagedQueryResult<T>> resultMapper() {
-        return resultMapper;
+    public PagedQueryResult<T> deserialize(final HttpResponse httpResponse) {
+        return resultMapper.apply(httpResponse);
     }
 
     private String queryParametersToString(final boolean urlEncoded) {

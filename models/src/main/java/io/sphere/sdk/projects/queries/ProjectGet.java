@@ -7,8 +7,6 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.json.JsonUtils;
 
-import java.util.function.Function;
-
 import static io.sphere.sdk.http.HttpMethod.GET;
 
 public class ProjectGet extends SphereRequestBase implements SphereRequest<Project> {
@@ -16,8 +14,8 @@ public class ProjectGet extends SphereRequestBase implements SphereRequest<Proje
     }
 
     @Override
-    public Function<HttpResponse, Project> resultMapper() {
-        return httpResponse -> JsonUtils.readObject(Project.typeReference(), httpResponse.getResponseBody().get());
+    public Project deserialize(final HttpResponse httpResponse) {
+        return JsonUtils.readObject(Project.typeReference(), httpResponse.getResponseBody().get());
     }
 
     @Override

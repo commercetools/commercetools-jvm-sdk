@@ -86,7 +86,7 @@ public class LocalizedStringsTest {
 
     @Test
     public void slugify() throws Exception {
-        final LocalizedStrings actual = LocalizedStrings.of(germanLocale, "Aa -Ä_", englishLocale, "dog food").slugified();
+        final LocalizedStrings actual = LocalizedStrings.of(germanLocale, "Aa -A_", englishLocale, "dog food").slugified();
         final LocalizedStrings expected = LocalizedStrings.of(germanLocale, "aa-a_", englishLocale, "dog-food");
         assertThat(actual).isEqualTo(expected);
     }

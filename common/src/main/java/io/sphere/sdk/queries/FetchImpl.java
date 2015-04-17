@@ -8,7 +8,6 @@ import io.sphere.sdk.http.*;
 import io.sphere.sdk.http.UrlQueryBuilder;
 
 import java.util.Optional;
-import java.util.function.Function;
 
 import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
 
@@ -26,16 +25,10 @@ public abstract class FetchImpl<T> extends SphereRequestBase implements Fetch<T>
     }
 
     @Override
-    public Function<HttpResponse, Optional<T>> resultMapper() {
-        return httpResponse -> {
-            final Optional<T> result;
-            if (httpResponse.getStatusCode() == NOT_FOUND_404) {
-                result = Optional.empty();
-            } else {
-                result = Optional.of(resultMapperOf(typeReference()).apply(httpResponse));
-            }
-            return result;
-        };
+    public Optional<T> deserialize(final HttpResponse httpResponse) {
+        return Optional.of(httpResponse)
+                .filter(r -> r.getStatusCode() != NOT_FOUND_404)
+                .map(r -> resultMapperOf(typeReference()).apply(httpResponse));
     }
 
     @Override
@@ -58,7 +51,7 @@ public abstract class FetchImpl<T> extends SphereRequestBase implements Fetch<T>
     }
 
     @Override
-    public boolean canHandleResponse(final HttpResponse response) {
-        return response.hasSuccessResponseCode() || response.getStatusCode() == NOT_FOUND_404;
+    public boolean canDeserialize(final HttpResponse httpResponse) {
+        return httpResponse.hasSuccessResponseCode() || httpResponse.getStatusCode() == NOT_FOUND_404;
     }
 }

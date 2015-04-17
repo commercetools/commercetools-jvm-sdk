@@ -32,24 +32,22 @@ public abstract class CustomObjectCustomJsonMappingByKeyFetch<T> extends SphereR
     }
 
     @Override
-    public final Function<HttpResponse, Optional<CustomObject<T>>> resultMapper() {
-        return httpResponse -> {
-            final Optional<CustomObject<T>> result;
-            if (httpResponse.getStatusCode() == NOT_FOUND_404) {
-                result = Optional.empty();
-            } else {
-                final CustomObject<T> customObject = deserializeCustomObject().apply(httpResponse);
-                result = Optional.of(customObject);
-            }
-            return result;
-        };
+    public final Optional<CustomObject<T>> deserialize(final HttpResponse httpResponse) {
+        final Optional<CustomObject<T>> result;
+        if (httpResponse.getStatusCode() == NOT_FOUND_404) {
+            result = Optional.empty();
+        } else {
+            final CustomObject<T> customObject = deserializeCustomObject().apply(httpResponse);
+            result = Optional.of(customObject);
+        }
+        return result;
     }
 
     protected abstract Function<HttpResponse, CustomObject<T>> deserializeCustomObject();
 
     @Override
-    public boolean canHandleResponse(final HttpResponse response) {
-        return response.hasSuccessResponseCode() || response.getStatusCode() == NOT_FOUND_404;
+    public boolean canDeserialize(final HttpResponse httpResponse) {
+        return httpResponse.hasSuccessResponseCode() || httpResponse.getStatusCode() == NOT_FOUND_404;
     }
 }
 

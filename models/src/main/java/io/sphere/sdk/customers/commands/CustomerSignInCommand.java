@@ -11,7 +11,6 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.JsonUtils;
 
 import java.util.Optional;
-import java.util.function.Function;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
@@ -60,25 +59,23 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
     }
 
     @Override
-    public boolean canHandleResponse(final HttpResponse response) {
-        return super.canHandleResponse(response) || response.getStatusCode() == 400;
+    public boolean canDeserialize(final HttpResponse httpResponse) {
+        return super.canDeserialize(httpResponse) || httpResponse.getStatusCode() == 400;
     }
 
     @Override
-    public Function<HttpResponse, CustomerSignInResult> resultMapper() {
-        return httpResponse -> {
-            if (httpResponse.getStatusCode() == 400) {
-                //TODO this code needs reworking
-                final ErrorResponse errorResponse = resultMapperOf(ErrorResponse.typeReference()).apply(httpResponse);
-                if (errorResponse.getErrors().stream().anyMatch(error -> error.getCode().equals("InvalidCredentials"))) {
-                    throw new ErrorResponseException(errorResponse);
-                } else {
-                    throw new SphereException(errorResponse.toString());
-                }
+    public CustomerSignInResult deserialize(final HttpResponse httpResponse) {
+        if (httpResponse.getStatusCode() == 400) {
+            //TODO this code needs reworking
+            final ErrorResponse errorResponse = resultMapperOf(ErrorResponse.typeReference()).apply(httpResponse);
+            if (errorResponse.getErrors().stream().anyMatch(error -> error.getCode().equals("InvalidCredentials"))) {
+                throw new ErrorResponseException(errorResponse);
             } else {
-                return super.resultMapper().apply(httpResponse);
+                throw new SphereException(errorResponse.toString());
             }
-        };
+        } else {
+            return super.deserialize(httpResponse);
+        }
     }
 
     public String getEmail() {
