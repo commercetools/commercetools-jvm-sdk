@@ -5,11 +5,12 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.utils.CompletableFutureUtils;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Function;
 
-import static io.sphere.sdk.client.CompletableFutureUtils.*;
+import static io.sphere.sdk.utils.CompletableFutureUtils.*;
 
 /**
  * A factory to instantiate SPHERE.IO Java clients which use {@link java.util.concurrent.CompletableFuture} as future implementation.

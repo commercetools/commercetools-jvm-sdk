@@ -15,7 +15,7 @@ public final class AsyncAssertions<T> {
         this.stage = stage;
     }
 
-    public static <T> AsyncAssertions<T> performing(final CompletableFuture<T> stage) {
+    public static <T> AsyncAssertions<T> performing(final CompletionStage<T> stage) {
         return new AsyncAssertions<>(stage);
     }
 

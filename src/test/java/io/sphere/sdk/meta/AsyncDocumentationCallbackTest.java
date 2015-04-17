@@ -3,6 +3,7 @@ package io.sphere.sdk.meta;
 import com.ning.http.client.Response;
 import org.junit.Test;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
 public class AsyncDocumentationCallbackTest extends AsyncDocumentationTest {
@@ -34,6 +35,6 @@ public class AsyncDocumentationCallbackTest extends AsyncDocumentationTest {
     }
 
     private CompletionStage<Response> getResponse() {
-        return null;
+        return new CompletableFuture<>();
     }
 }
