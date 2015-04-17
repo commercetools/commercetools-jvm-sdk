@@ -20,6 +20,7 @@ public class LocalizedStringsTest {
     private final LocalizedStrings localizedStrings = LocalizedStrings.of(germanLocale, defaultString1, englishLocale, defaultString2);
     private final String dogFoodJson = "{\"de\":\"Hundefutter\",\"en\":\"dog food\"}";
     private final LocalizedStrings dogFood = LocalizedStrings.of(germanLocale, "Hundefutter", englishLocale, "dog food");
+    private final LocalizedStrings upperCasedDogFood = LocalizedStrings.of(germanLocale, "HUNDEFUTTER", englishLocale, "DOG FOOD");
 
     @Test
     public void createFromOneValue() throws Exception {
@@ -88,5 +89,19 @@ public class LocalizedStringsTest {
         final LocalizedStrings actual = LocalizedStrings.of(germanLocale, "Aa -Ä_", englishLocale, "dog food").slugified();
         final LocalizedStrings expected = LocalizedStrings.of(germanLocale, "aa-a_", englishLocale, "dog-food");
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    public void stream() throws Exception {
+        final LocalizedStrings upperCased = dogFood.stream()
+                .map(e -> LocalizedStringsEntry.of(e.getLocale(), e.getValue().toUpperCase()))
+                .collect(LocalizedStrings.streamCollector());
+        assertThat(upperCased).isEqualTo(upperCasedDogFood);
+    }
+
+    @Test
+    public void mapValue() throws Exception {
+        final LocalizedStrings upperCased = dogFood.mapValue((locale, value) -> value.toUpperCase());
+        assertThat(upperCased).isEqualTo(upperCasedDogFood);
     }
 }

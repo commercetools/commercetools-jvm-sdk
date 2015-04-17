@@ -11,6 +11,9 @@ import com.github.slugify.Slugify;
 import io.sphere.sdk.utils.ImmutableMapBuilder;
 
 import java.util.*;
+import java.util.function.BiFunction;
+import java.util.stream.Collector;
+import java.util.stream.Stream;
 
 import static io.sphere.sdk.utils.IterableUtils.*;
 import static io.sphere.sdk.utils.MapUtils.*;
@@ -129,11 +132,38 @@ public class LocalizedStrings extends Base {
         return firstFoundLocale.flatMap(foundLocale -> get(foundLocale));
     }
 
+    /**
+     * Creates a new instance where each translation value is transformed with {@code function}.
+     * @param function transforms a value for a locale into a new value
+     * @return a new {@link LocalizedStrings} which consist all elements for this transformed with {@code function}
+     */
+    public LocalizedStrings mapValue(final BiFunction<Locale, String, String> function) {
+        return stream().map(entry -> {
+            final String newValue = function.apply(entry.getLocale(), entry.getValue());
+            return LocalizedStringsEntry.of(entry.getLocale(), newValue);
+        }).collect(streamCollector());
+    }
+
+    public Stream<LocalizedStringsEntry> stream() {
+        return translations.entrySet().stream().map(entry -> LocalizedStringsEntry.of(entry.getKey(), entry.getValue()));
+    }
+
+    public static Collector<LocalizedStringsEntry, ?, LocalizedStrings> streamCollector() {
+        final Collector<LocalizedStringsEntry, Map<Locale, String>, LocalizedStrings> result =
+                Collector.of(HashMap::new, (Map<Locale, String> tmpMap, LocalizedStringsEntry entry) -> tmpMap.put(entry.getLocale(), entry.getValue()), (Map<Locale, String> left, Map<Locale, String> right) -> {
+                    left.putAll(right);
+                    return left;
+                }, (Map<Locale, String> entryMap) -> LocalizedStrings.of(entryMap));
+        return result;
+    }
+
+    /**
+     * Creates a new {@link LocalizedStrings} where all translations are slugified (remove whitespace, etc.).
+     * @return new instance
+     */
     public LocalizedStrings slugified() {
-        final Map<Locale, String> newTranslations = translations.entrySet().stream()
-                .map(entry -> new AbstractMap.SimpleImmutableEntry<>(entry.getKey(), new Slugify().slugify(entry.getValue())))
-                .collect(toMap(e -> e.getKey(), e -> e.getValue()));
-        return new LocalizedStrings(newTranslations);
+        final Slugify slugify = new Slugify();
+        return mapValue((locale, value) -> slugify.slugify(value));
     }
 
     @JsonIgnore
