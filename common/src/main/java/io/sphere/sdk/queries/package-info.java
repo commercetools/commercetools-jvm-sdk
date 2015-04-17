@@ -1,5 +1,4 @@
 /**
- *
- * <p>The query API enables to load objects from the SPHERE.IO backend based on predicates with pagination.</p>
+ * Provides types to prepare and receive queries.
  */
 package io.sphere.sdk.queries;

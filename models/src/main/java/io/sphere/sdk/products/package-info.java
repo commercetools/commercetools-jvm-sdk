@@ -1,4 +1,4 @@
 /**
-  Products are the sellable goods in an e-commerce project on SPHERE.IO.
+ * {@doc.gen summary products}
  */
 package io.sphere.sdk.products;
