@@ -58,7 +58,7 @@ public abstract class FetchImpl<T> extends SphereRequestBase implements Fetch<T>
     }
 
     @Override
-    public boolean canHandleResponse(final HttpResponse response) {
+    public boolean canDeserialize(final HttpResponse response) {
         return response.hasSuccessResponseCode() || response.getStatusCode() == NOT_FOUND_404;
     }
 }

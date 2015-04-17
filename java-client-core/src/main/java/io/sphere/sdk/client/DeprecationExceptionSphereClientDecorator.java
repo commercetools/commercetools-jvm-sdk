@@ -36,8 +36,8 @@ public final class DeprecationExceptionSphereClientDecorator extends SphereClien
         }
 
         @Override
-        public boolean canHandleResponse(final HttpResponse response) {
-            return !getDeprecationNoticeHeaderValues(response).isEmpty() || sphereRequest.canHandleResponse(response);
+        public boolean canDeserialize(final HttpResponse response) {
+            return !getDeprecationNoticeHeaderValues(response).isEmpty() || sphereRequest.canDeserialize(response);
         }
 
         private List<String> getDeprecationNoticeHeaderValues(final HttpResponse response) {

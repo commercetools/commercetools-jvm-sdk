@@ -60,8 +60,8 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
     }
 
     @Override
-    public boolean canHandleResponse(final HttpResponse response) {
-        return super.canHandleResponse(response) || response.getStatusCode() == 400;
+    public boolean canDeserialize(final HttpResponse response) {
+        return super.canDeserialize(response) || response.getStatusCode() == 400;
     }
 
     @Override

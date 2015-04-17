@@ -8,14 +8,14 @@ import java.util.function.Function;
  An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.
 
  <p>Typical workflow: A client executes {@link #httpRequestIntent()} and creates a future of an http response. When the future redeems the client uses the http response and passes it as
- argument to {@link #canHandleResponse(HttpResponse)}. If the call results in true, the client applies {@link #resultMapper()} to transform the http response into T.</p>
+ argument to {@link #canDeserialize(HttpResponse)}. If the call results in true, the client applies {@link #resultMapper()} to transform the http response into T.</p>
 
  @param <T> the type which is returned in a successful http request.
  */
 public interface SphereRequest<T> {
     /**
      Takes an http response and maps it into a Java object of type T.
-     Before calling this method, check with {@link #canHandleResponse(HttpResponse)} if the response can be consumed.
+     Before calling this method, check with {@link #canDeserialize(HttpResponse)} if the response can be consumed.
 
      @return function to map the result of the http request
      */
@@ -36,7 +36,7 @@ public interface SphereRequest<T> {
      @param response the http response which shall be transformed
      @return true if the http response can be consumed, false otherwise
      */
-    default boolean canHandleResponse(final HttpResponse response) {
+    default boolean canDeserialize(final HttpResponse response) {
         return response.hasSuccessResponseCode() && response.getResponseBody().isPresent();
     }
 }

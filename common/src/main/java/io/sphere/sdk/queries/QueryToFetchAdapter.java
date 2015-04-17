@@ -38,7 +38,7 @@ public abstract class QueryToFetchAdapter<T> extends SphereRequestBase implement
     }
 
     @Override
-    public boolean canHandleResponse(final HttpResponse response) {
+    public boolean canDeserialize(final HttpResponse response) {
         return response.hasSuccessResponseCode() || response.getStatusCode() == NOT_FOUND_404;
     }
 

@@ -81,7 +81,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
 
     static <T> T parse(final HttpResponse httpResponse, final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config) {
         final T result;
-        if (!sphereRequest.canHandleResponse(httpResponse)) {
+        if (!sphereRequest.canDeserialize(httpResponse)) {
             final SphereException sphereException = createExceptionFor(httpResponse, sphereRequest, objectMapper, config);
             throw sphereException;
         } else {

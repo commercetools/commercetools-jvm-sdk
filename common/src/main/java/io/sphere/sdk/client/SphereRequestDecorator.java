@@ -13,8 +13,8 @@ public abstract class SphereRequestDecorator<T> extends Base implements SphereRe
     }
 
     @Override
-    public boolean canHandleResponse(final HttpResponse response) {
-        return delegate.canHandleResponse(response);
+    public boolean canDeserialize(final HttpResponse response) {
+        return delegate.canDeserialize(response);
     }
 
     @Override

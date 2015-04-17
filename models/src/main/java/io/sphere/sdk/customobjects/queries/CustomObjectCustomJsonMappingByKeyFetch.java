@@ -48,7 +48,7 @@ public abstract class CustomObjectCustomJsonMappingByKeyFetch<T> extends SphereR
     protected abstract Function<HttpResponse, CustomObject<T>> deserializeCustomObject();
 
     @Override
-    public boolean canHandleResponse(final HttpResponse response) {
+    public boolean canDeserialize(final HttpResponse response) {
         return response.hasSuccessResponseCode() || response.getStatusCode() == NOT_FOUND_404;
     }
 }
