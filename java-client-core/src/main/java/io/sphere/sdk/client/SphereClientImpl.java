@@ -110,7 +110,11 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         httpResponse.getResponseBody()
                 .map(bytes -> bytesToString(bytes))
                 .map(body -> errorMessagesDueToMappingError.stream().anyMatch(errorWord -> body.contains(errorWord)) && body.toLowerCase().contains("product"))
-                .ifPresent(containsTerm -> exception.addNote(format("Maybe it helps to reindex the products https://admin.sphere.io/%s/developers/danger but this may take a while.", config.getProjectKey())));
+                .ifPresent(containsTerm -> {
+                    if (containsTerm) {
+                        exception.addNote(format("Maybe it helps to reindex the products https://admin.sphere.io/%s/developers/danger but this may take a while.", config.getProjectKey()));
+                    }
+                });
     }
 
     @Override
