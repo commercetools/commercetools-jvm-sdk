@@ -16,7 +16,7 @@ import java.util.function.Supplier;
  If you don't care about threads and asynchronous computation you will probably have a slow and inefficient application.
 
  <p>Suppose you want to show a customer detail page with the cart items and the customer data, so you need to fetch the cart and the customer.
- Fetching both documents is not related and lets suppose fetching a document from SPHERE.IO takes 100ms.</p>
+ Fetching both documents is not related and let's suppose fetching a document from SPHERE.IO takes 100ms.</p>
 
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#serialWayToFetchCustomerAndCart()}
@@ -28,7 +28,7 @@ import java.util.function.Supplier;
  <p>Using futures (We use it here as synonym for {@link java.util.concurrent.CompletableFuture} and {@link java.util.concurrent.CompletionStage}.) can be very handy for executing parallel code.</p>
 
  <p>So you can use future APIs to run code in separate Threads and the result will not be immediately available, but in the future.
- The overhead of creating a future can be lower than <a href="http://stackoverflow.com/a/5483105">overhead of creating new Thread</a>.</p>
+ The overhead of creating a future can be lower than the <a href="http://stackoverflow.com/a/5483105">overhead of creating new Thread</a>.</p>
  <!--
  <h3 id="what">What</h3>
 
@@ -156,7 +156,7 @@ With {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Fu
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#createFailedFutureShortcut()}
 
 
- <p>If you complete a future, it is possible that the same Thread is used for functional compositions or executing callbacks. If you don't want this, the calles need to use the methods which end with "Async".</p>
+ <p>If you complete a future, it is possible that the same Thread is used for functional compositions or executing callbacks. If you don't want this, the calls need to use the methods which end with "Async".</p>
  <!--
 
  fulfilling in another thread
@@ -473,7 +473,7 @@ Since Java 8, the JDK provides <a href="https://docs.oracle.com/javase/tutorial/
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#exceptionallyWithExceptionTypes()}
 
- <p>You also need not to cover all problems:</p>
+ <p>But you do not need to cover all problems:</p>
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#exceptionallyWithExceptionTypesButUncoveredPart()}
 
