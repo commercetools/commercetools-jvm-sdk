@@ -116,7 +116,9 @@ var activeTableTab = "activeTableTab";
 <div class="block">An argument for a sphere client to execute an HTTP API call on the level of one SPHERE.IO project.
 
  <p>Typical workflow: A client executes <a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--"><code>httpRequestIntent()</code></a> and creates a future of an http response. When the future redeems the client uses the http response and passes it as
- argument to <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-"><code>canDeserialize(HttpResponse)</code></a>. If the call results in true, the client applies <a href="../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-"><code>deserialize(HttpResponse)</code></a> to transform the http response into T.</p></div>
+ argument to <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-"><code>canDeserialize(HttpResponse)</code></a>. If the call results in true, the client applies <a href="../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-"><code>deserialize(HttpResponse)</code></a> to transform the http response into T.</p>
+
+ It is intented that this class is immutable, so that every method can be used in a pure functional way.</div>
 </li>
 </ul>
 </div>
@@ -181,7 +183,7 @@ var activeTableTab = "activeTableTab";
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>httpResponse</code> - </dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>function to map the result of the http request</dd>
+<dd>the deserialized object, it should not be null</dd>
 </dl>
 </li>
 </ul>
