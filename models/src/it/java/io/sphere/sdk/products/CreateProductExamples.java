@@ -5,7 +5,7 @@ import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 public class CreateProductExamples {
     SphereClient client;
@@ -15,6 +15,6 @@ public class CreateProductExamples {
     public void createWithClient() {
         final ProductDraft productTemplate = new SimpleCottonTShirtProductDraftSupplier(productType, "demo product").get();
         final ProductCreateCommand command = ProductCreateCommand.of(productTemplate);
-        final CompletableFuture<Product> result = client.execute(command);
+        final CompletionStage<Product> result = client.execute(command);
     }
 }

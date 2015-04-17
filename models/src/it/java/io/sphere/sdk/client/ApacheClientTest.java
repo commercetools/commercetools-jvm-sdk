@@ -15,7 +15,7 @@ public class ApacheClientTest extends IntegrationTest {
         final HttpClient httpClient = ApacheHttpClientAdapter.of();
         final SphereAccessTokenSupplier supplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(config, httpClient, false);
         final SphereClient client = SphereClient.of(config, httpClient, supplier);
-        final Project project = client.execute(ProjectGet.of()).join();
+        final Project project = client.execute(ProjectGet.of()).toCompletableFuture().join();
         assertThat(project.getKey()).isEqualTo(getSphereConfig().getProjectKey());
     }
 }

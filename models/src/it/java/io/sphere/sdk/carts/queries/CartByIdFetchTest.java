@@ -13,7 +13,8 @@ public class CartByIdFetchTest extends IntegrationTest {
     @Test
     public void fetchById() throws Exception {
         final Cart cart = createCartWithCountry(client());
-        final Optional<Cart> fetchedCartOptional = execute(CartByIdFetch.of(cart.getId()));
+        final String id = cart.getId();
+        final Optional<Cart> fetchedCartOptional = execute(CartByIdFetch.of(id));
         assertThat(fetchedCartOptional).isPresentAs(cart);
     }
 }

@@ -4,7 +4,7 @@ import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 public class ProductDeleteExample {
     private SphereClient client;
@@ -12,6 +12,6 @@ public class ProductDeleteExample {
 
     public void delete() {
         final DeleteCommand<Product> command = ProductDeleteCommand.of(product);
-        final CompletableFuture<Product> deletedProduct = client.execute(command);
+        final CompletionStage<Product> deletedProduct = client.execute(command);
     }
 }

@@ -1,16 +1,18 @@
 package io.sphere.sdk.client;
 
-import java.util.concurrent.CompletableFuture;
+import io.sphere.sdk.utils.CompletableFutureUtils;
+
+import java.util.concurrent.CompletionStage;
 
 final class SphereConstantAccessTokenSupplierImpl extends AutoCloseableService implements SphereAccessTokenSupplier {
-    private final CompletableFuture<String> token;
+    private final CompletionStage<String> token;
 
     SphereConstantAccessTokenSupplierImpl(final String token) {
         this.token = CompletableFutureUtils.successful(token);
     }
 
     @Override
-    public CompletableFuture<String> get() {
+    public CompletionStage<String> get() {
         return token;
     }
 

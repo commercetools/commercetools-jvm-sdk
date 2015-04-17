@@ -5,14 +5,15 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.utils.CompletableFutureUtils;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 
-import static io.sphere.sdk.client.CompletableFutureUtils.*;
+import static io.sphere.sdk.utils.CompletableFutureUtils.*;
 
 /**
- * A factory to instantiate SPHERE.IO Java clients which use {@link java.util.concurrent.CompletableFuture} as future implementation.
+ * A factory to instantiate SPHERE.IO Java clients which use {@link java.util.concurrent.CompletionStage} as future implementation.
  *
  * {@include.example example.JavaClientInstantiationExample}
  */
@@ -78,7 +79,7 @@ public class SphereClientFactory extends Base {
             private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
 
             @Override
-            public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
+            public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
                 final HttpRequestIntent httpRequest = sphereRequest.httpRequestIntent();
                 final HttpResponse httpResponse = function.apply(httpRequest);
                 try {
@@ -114,7 +115,7 @@ public class SphereClientFactory extends Base {
     public SphereClient createObjectTestDouble(final Function<HttpRequestIntent, Object> function) {
         return new SphereClient() {
             @Override
-            public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
+            public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
                 final T result = (T) function.apply(sphereRequest.httpRequestIntent());
                 return successful(result);
             }

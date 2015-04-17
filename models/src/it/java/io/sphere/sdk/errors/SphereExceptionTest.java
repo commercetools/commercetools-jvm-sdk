@@ -25,7 +25,7 @@ import org.junit.rules.ExpectedException;
 
 import java.util.Collections;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CompletionException;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -107,7 +107,7 @@ public class SphereExceptionTest extends IntegrationTest {
     public void invalidCredentialsToGetToken() throws Throwable {
         final SphereAuthConfig config = SphereAuthConfig.of(projectKey(), clientId(), "wrong-password", authUrl());
         final SphereAccessTokenSupplier supplierOfOneTimeFetchingToken = SphereAccessTokenSupplierFactory.of().createSupplierOfOneTimeFetchingToken(config);
-        final CompletableFuture<String> future = supplierOfOneTimeFetchingToken.get();
+        final CompletionStage<String> future = supplierOfOneTimeFetchingToken.get();
         expectException(InvalidClientCredentialsException.class, future);
         supplierOfOneTimeFetchingToken.close();
     }
@@ -144,10 +144,10 @@ public class SphereExceptionTest extends IntegrationTest {
         return CategoryDraftBuilder.of(LocalizedStrings.ofEnglishLocale("name"), slug);
     }
 
-    private void expectExceptionAndClose(final SphereClient client, final Class<InvalidTokenException> exceptionClass, final CompletableFuture<PagedQueryResult<Category>> future) throws Throwable {
+    private void expectExceptionAndClose(final SphereClient client, final Class<InvalidTokenException> exceptionClass, final CompletionStage<PagedQueryResult<Category>> stage) throws Throwable {
         thrown.expect(exceptionClass);
         try {
-            future.join();
+            stage.toCompletableFuture().join();
         } catch (final CompletionException e) {
             client.close();
             throw e.getCause();
@@ -155,10 +155,10 @@ public class SphereExceptionTest extends IntegrationTest {
 
     }
 
-    private <T> void expectException(final Class<? extends SphereException> exceptionClass, final CompletableFuture<T> future) throws Throwable {
+    private <T> void expectException(final Class<? extends SphereException> exceptionClass, final CompletionStage<T> stage) throws Throwable {
         thrown.expect(exceptionClass);
         try {
-            future.join();
+            stage.toCompletableFuture().join();
         } catch (final CompletionException e) {
             throw e.getCause();
         }
@@ -184,7 +184,7 @@ public class SphereExceptionTest extends IntegrationTest {
             thrown.expect(type);
             try {
                 SphereClientFactory.of()
-                        .createHttpTestDouble(request -> HttpResponse.of(responseCode)).execute(CategoryQuery.of()).join();
+                        .createHttpTestDouble(request -> HttpResponse.of(responseCode)).execute(CategoryQuery.of()).toCompletableFuture().join();
             } catch (final CompletionException e) {
                 throw e.getCause();
             }

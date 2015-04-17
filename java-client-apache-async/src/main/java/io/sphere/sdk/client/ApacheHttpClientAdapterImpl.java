@@ -19,6 +19,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
@@ -43,7 +45,7 @@ final class ApacheHttpClientAdapterImpl extends AutoCloseableService implements 
     }
 
     @Override
-    public CompletableFuture<HttpResponse> execute(final HttpRequest httpRequest) {
+    public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
         final HttpUriRequest realHttpRequest = toApacheRequest(httpRequest);
         final CompletableFuture<org.apache.http.HttpResponse> apacheResponseFuture = new CompletableFuture<>();
         apacheHttpClient.execute(realHttpRequest, new CompletableFutureCallbackAdapter<>(apacheResponseFuture));
@@ -62,9 +64,10 @@ final class ApacheHttpClientAdapterImpl extends AutoCloseableService implements 
         final int statusCode = apacheResponse.getStatusLine().getStatusCode();
         final Map<String, List<Header>> apacheHeaders = asList(apacheResponse.getAllHeaders()).stream()
                 .collect(Collectors.groupingBy(Header::getName));
+        final Function<Map.Entry<String, List<Header>>, String> keyMapper = e -> e.getKey();
         final Map<String, List<String>> headers = apacheHeaders.entrySet().stream()
                 .collect(Collectors.toMap(
-                        e -> e.getKey(),
+                                keyMapper,
                         e -> e.getValue().stream().map(Header::getValue).collect(Collectors.toList())
                         )
                 );

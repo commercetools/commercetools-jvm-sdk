@@ -4,7 +4,7 @@ import io.sphere.sdk.commands.Command;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 
 /**
@@ -23,9 +23,9 @@ public class WrappedClientDemo implements SphereClient {
 
     @SuppressWarnings("unchecked")
     @Override
-    public <T> CompletableFuture<T> execute(SphereRequest<T> sphereRequest) {
-        final CompletableFuture<T> result;
-        final CompletableFuture<T> intermediateResult = filtered(client.execute(sphereRequest));
+    public <T> CompletionStage<T> execute(SphereRequest<T> sphereRequest) {
+        final CompletionStage<T> result;
+        final CompletionStage<T> intermediateResult = filtered(client.execute(sphereRequest));
         if (sphereRequest instanceof Query) {
             final Function<Throwable, T> provideEmptyResultOnException = exception -> (T) PagedQueryResult.empty();
             result = intermediateResult.exceptionally(provideEmptyResultOnException);
@@ -39,7 +39,7 @@ public class WrappedClientDemo implements SphereClient {
     }
 
     //this method will be called for every request
-    private <T> CompletableFuture<T> filtered(final CompletableFuture<T> future) {
+    private <T> CompletionStage<T> filtered(final CompletionStage<T> future) {
         future.whenComplete(Email::writeEmailToDevelopers);
         future.whenComplete(metricComponent::incrementFailureRequests);
         future.whenComplete(metricComponent::incrementSuccessfulRequests);

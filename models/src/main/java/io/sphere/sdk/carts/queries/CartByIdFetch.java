@@ -13,6 +13,10 @@ public class CartByIdFetch extends ByIdFetchImpl<Cart> {
         super(id, CartsEndpoint.ENDPOINT);
     }
 
+    public static CartByIdFetch of(final Cart cart) {
+        return of(cart.getId());
+    }
+
     public static CartByIdFetch of(final String id) {
         return new CartByIdFetch(id);
     }

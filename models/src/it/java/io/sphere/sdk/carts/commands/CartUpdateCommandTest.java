@@ -232,7 +232,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
                     .containsExactly(newPrice);
 
             final LineItem lineItemOfTheChangedProduct =
-                    execute(CartByIdFetch.of(cartWithLineItem.getId())).get().getLineItems().get(0);
+                    execute(CartByIdFetch.of(cartWithLineItem)).get().getLineItems().get(0);
             assertThat(lineItemOfTheChangedProduct.getPrice())
                     .overridingErrorMessage("the new product price is not automatically propagated to the line item in the cart")
                     .isEqualTo(oldPrice).isNotEqualTo(newPrice);

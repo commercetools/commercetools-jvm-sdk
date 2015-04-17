@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.client.SphereAuth.AUTH_LOGGER;
 import static io.sphere.sdk.http.HttpMethod.POST;
@@ -42,14 +42,14 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
      * @return future of a token
      */
     @Override
-    public CompletableFuture<Tokens> get() {
+    public CompletionStage<Tokens> get() {
         AUTH_LOGGER.debug(() -> "Fetching new token.");
-        final CompletableFuture<Tokens> result = httpClient.execute(newRequest()).thenApply(this::parseResponse);
+        final CompletionStage<Tokens> result = httpClient.execute(newRequest()).thenApply(this::parseResponse);
         logTokenResult(result);
         return result;
     }
 
-    private void logTokenResult(final CompletableFuture<Tokens> result) {
+    private void logTokenResult(final CompletionStage<Tokens> result) {
         result.whenComplete((tokens, e) -> {
             if (tokens != null) {
                 AUTH_LOGGER.debug(() -> "Successfully fetched token that expires in " + tokens.getExpiresIn().map(x -> x.toString()).orElse("an unknown time") + ".");

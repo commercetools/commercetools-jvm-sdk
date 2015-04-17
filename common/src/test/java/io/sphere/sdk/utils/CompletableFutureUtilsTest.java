@@ -1,11 +1,12 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.utils;
 
 import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.client.CompletableFutureUtils.*;
+import static io.sphere.sdk.utils.CompletableFutureUtils.*;
 
 public class CompletableFutureUtilsTest {
 
@@ -38,20 +39,20 @@ public class CompletableFutureUtilsTest {
 
     @Test
     public void testFlatMap() throws Exception {
-        final CompletableFuture<String> future = successful("hello");
-        final CompletableFuture<Integer> result = flatMap(future, s -> successful(s.length()));
-        assertThat(result.join()).isEqualTo(5);
+        final CompletionStage<String> future = successful("hello");
+        final CompletionStage<Integer> result = flatMap(future, s -> successful(s.length()));
+        assertThat(result.toCompletableFuture().join()).isEqualTo(5);
     }
 
     @Test
     public void recoverSuccess() throws Exception {
-        final String actual = recover(successful("hello"), e -> "hi").join();
+        final String actual = recover(successful("hello"), e -> "hi").toCompletableFuture().join();
         assertThat(actual).isEqualTo("hello");
     }
 
     @Test
     public void recoverFailure() throws Exception {
-        final String actual = recover(failed(new RuntimeException()), e -> "hi").join();
+        final String actual = recover(failed(new RuntimeException()), e -> "hi").toCompletableFuture().join();
         assertThat(actual).isEqualTo("hi");
     }
 
@@ -68,14 +69,14 @@ public class CompletableFutureUtilsTest {
     }
 
     private String recoverWithTestWithSuccessfulResult(final CompletableFuture<String> source, final CompletableFuture<String> alternative) {
-        return recoverWith(source, e -> alternative).join();
+        return recoverWith(source, e -> alternative).toCompletableFuture().join();
     }
 
     @Test
     public void recoverWithFailure() throws Exception {
         final RuntimeException e1 = new RuntimeException();
         final RuntimeException e2 = new RuntimeException();
-        final CompletableFuture<String> future = recoverWith(failed(e1), e -> failed(e2));
+        final CompletionStage<String> future = recoverWith(failed(e1), e -> failed(e2));
         assertThat(blockForFailure(future)).isEqualTo(e2);
     }
 }

@@ -8,14 +8,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 import static org.fest.assertions.Assertions.assertThat;
 
 public class QueryDemo {
     private SphereClient client;
     private Query<Category> query;
-    private CompletableFuture<PagedQueryResult<Category>> future;
+    private CompletionStage<PagedQueryResult<Category>> future;
     private final Locale locale = Locale.ENGLISH;
 
 
@@ -25,7 +25,7 @@ public class QueryDemo {
     }
 
     private void executeQuery() {
-        CompletableFuture<PagedQueryResult<Category>> future = client.execute(query);
+        CompletionStage<PagedQueryResult<Category>> future = client.execute(query);
     }
 
     private void createQueryWithCompanionClass() {

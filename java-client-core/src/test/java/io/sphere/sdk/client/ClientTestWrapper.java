@@ -18,7 +18,7 @@ public class ClientTestWrapper extends Base {
     }
 
     public <T> T execute(final SphereRequest<T> request) {
-        final T res = sphereClient.execute(request).join();
+        final T res = sphereClient.execute(request).toCompletableFuture().join();
         return res;
     }
 }

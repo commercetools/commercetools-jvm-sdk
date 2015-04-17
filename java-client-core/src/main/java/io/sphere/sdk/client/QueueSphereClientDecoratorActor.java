@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Queue;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Supplier;
 
 final class QueueSphereClientDecoratorActor extends Actor {
@@ -35,18 +35,18 @@ final class QueueSphereClientDecoratorActor extends Actor {
 
     private void executeTask(final AsyncTask task) {
         currentRequests++;
-        CompletableFuture<String> execute = task.execute();
+        CompletionStage<String> execute = task.execute();
         execute.whenCompleteAsync((res, e) -> tell(new Done()));
     }
 
     public static class AsyncTask {
-        private final Supplier<CompletableFuture<String>> task;
+        private final Supplier<CompletionStage<String>> task;
 
-        public AsyncTask(final Supplier<CompletableFuture<String>> task) {
+        public AsyncTask(final Supplier<CompletionStage<String>> task) {
             this.task = task;
         }
 
-        public CompletableFuture<String> execute() {
+        public CompletionStage<String> execute() {
             return task.get();
         }
     }

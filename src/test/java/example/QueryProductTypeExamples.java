@@ -8,23 +8,23 @@ import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Predicate;
 
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 public class QueryProductTypeExamples {
     private SphereClient client;
     private ProductType productType;
 
     public void queryAll() {
-        final CompletableFuture<PagedQueryResult<ProductType>> result = client.execute(ProductTypeQuery.of());
+        final CompletionStage<PagedQueryResult<ProductType>> result = client.execute(ProductTypeQuery.of());
     }
 
     public void queryByAttributeName() {
         Predicate<ProductType> hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
-        CompletableFuture<PagedQueryResult<ProductType>> result = client.execute(ProductTypeQuery.of().withPredicate(hasSizeAttribute));
+        CompletionStage<PagedQueryResult<ProductType>> result = client.execute(ProductTypeQuery.of().withPredicate(hasSizeAttribute));
     }
 
     public void delete() {
         final DeleteCommand<ProductType> command = ProductTypeDeleteCommand.of(productType);
-        final CompletableFuture<ProductType> deletedProductType = client.execute(command);
+        final CompletionStage<ProductType> deletedProductType = client.execute(command);
     }
 }

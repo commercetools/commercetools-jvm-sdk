@@ -9,7 +9,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.customers.CustomerFixtures.PASSWORD;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
@@ -66,7 +66,7 @@ public class CustomerChangePasswordCommandTest extends IntegrationTest {
     private void demo(final SphereClient client, final String email) {
         final String wrongPassword = "wrong password";
         final CustomerSignInCommand signInCommand = CustomerSignInCommand.of(email, wrongPassword);
-        final CompletableFuture<CustomerSignInResult> future = client.execute(signInCommand);
+        final CompletionStage<CustomerSignInResult> future = client.execute(signInCommand);
         future.whenCompleteAsync((signInResult, exception) -> {
             if (signInResult != null) {
                 println("Signing worked");

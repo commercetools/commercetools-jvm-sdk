@@ -2,11 +2,13 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.client.AuthActorProtocol.*;
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.utils.CompletableFutureUtils;
 
 
 import java.time.Instant;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 /**
  *  Holds OAuth access tokenCache for accessing protected Sphere HTTP API endpoints.
@@ -25,7 +27,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
     }
 
     @Override
-    public CompletableFuture<String> get() {
+    public CompletionStage<String> get() {
         return currentAccessTokenFuture;
     }
 

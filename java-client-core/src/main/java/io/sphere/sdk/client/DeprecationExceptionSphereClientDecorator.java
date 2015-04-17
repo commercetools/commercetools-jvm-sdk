@@ -5,7 +5,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.SphereException;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 
 /**
@@ -15,7 +15,7 @@ import java.util.function.Function;
 public final class DeprecationExceptionSphereClientDecorator extends SphereClientDecorator implements SphereClient {
 
     @Override
-    public <T> CompletableFuture<T> execute(final SphereRequest<T> sphereRequest) {
+    public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {
         return super.execute(DeprecationHeaderSphereRequest.of(sphereRequest));
     }
 
