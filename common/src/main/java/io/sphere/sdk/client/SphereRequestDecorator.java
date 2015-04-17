@@ -3,8 +3,6 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 
-import java.util.function.Function;
-
 public abstract class SphereRequestDecorator<T> extends Base implements SphereRequest<T> {
     private final SphereRequest<T> delegate;
 
@@ -13,8 +11,8 @@ public abstract class SphereRequestDecorator<T> extends Base implements SphereRe
     }
 
     @Override
-    public boolean canDeserialize(final HttpResponse response) {
-        return delegate.canDeserialize(response);
+    public boolean canDeserialize(final HttpResponse httpResponse) {
+        return delegate.canDeserialize(httpResponse);
     }
 
     @Override
@@ -23,7 +21,7 @@ public abstract class SphereRequestDecorator<T> extends Base implements SphereRe
     }
 
     @Override
-    public Function<HttpResponse, T> resultMapper() {
-        return delegate.resultMapper();
+    public T deserialize(final HttpResponse httpResponse) {
+        return delegate.deserialize(httpResponse);
     }
 }

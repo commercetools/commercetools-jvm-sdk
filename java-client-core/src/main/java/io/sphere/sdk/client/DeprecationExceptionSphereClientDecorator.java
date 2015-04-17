@@ -6,11 +6,10 @@ import io.sphere.sdk.models.SphereException;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 
 /**
  * If SPHERE.IO returns a {@value io.sphere.sdk.client.SphereHttpHeaders#X_DEPRECATION_NOTICE} header field,
- * it does not deserialize the response object in {@link SphereRequest#resultMapper()} but throws a {@link SphereDeprecationException}.
+ * it does not deserialize the response object in {@link SphereRequest#deserialize(HttpResponse)} but throws a {@link SphereDeprecationException}.
  */
 public final class DeprecationExceptionSphereClientDecorator extends SphereClientDecorator implements SphereClient {
 
@@ -36,8 +35,8 @@ public final class DeprecationExceptionSphereClientDecorator extends SphereClien
         }
 
         @Override
-        public boolean canDeserialize(final HttpResponse response) {
-            return !getDeprecationNoticeHeaderValues(response).isEmpty() || sphereRequest.canDeserialize(response);
+        public boolean canDeserialize(final HttpResponse httpResponse) {
+            return !getDeprecationNoticeHeaderValues(httpResponse).isEmpty() || sphereRequest.canDeserialize(httpResponse);
         }
 
         private List<String> getDeprecationNoticeHeaderValues(final HttpResponse response) {
@@ -50,18 +49,16 @@ public final class DeprecationExceptionSphereClientDecorator extends SphereClien
         }
 
         @Override
-        public Function<HttpResponse, T> resultMapper() {
-            return response -> {
-                final List<String> deprecationNoticeHeaderValues = getDeprecationNoticeHeaderValues(response);
-                if (deprecationNoticeHeaderValues.isEmpty()) {
-                    return sphereRequest.resultMapper().apply(response);
-                } else {
-                    final SphereException sphereException = new SphereDeprecationException(deprecationNoticeHeaderValues);
-                    sphereException.setSphereRequest(sphereRequest);
-                    sphereException.setUnderlyingHttpResponse(response);
-                    throw sphereException;
-                }
-            };
+        public T deserialize(final HttpResponse httpResponse) {
+            final List<String> deprecationNoticeHeaderValues = getDeprecationNoticeHeaderValues(httpResponse);
+            if (deprecationNoticeHeaderValues.isEmpty()) {
+                return sphereRequest.deserialize(httpResponse);
+            } else {
+                final SphereException sphereException = new SphereDeprecationException(deprecationNoticeHeaderValues);
+                sphereException.setSphereRequest(sphereRequest);
+                sphereException.setUnderlyingHttpResponse(httpResponse);
+                throw sphereException;
+            }
         }
 
         public static <T> SphereRequest<T> of(final SphereRequest<T> sphereRequest) {

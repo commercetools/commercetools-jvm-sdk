@@ -10,7 +10,6 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
 import java.util.List;
-import java.util.function.Function;
 
 import static io.sphere.sdk.http.HttpMethod.GET;
 
@@ -28,13 +27,13 @@ public class GetShippingMethodsByCart extends SphereRequestBase implements Spher
     }
 
     @Override
-    public Function<HttpResponse, List<ShippingMethod>> resultMapper() {
+    public List<ShippingMethod> deserialize(final HttpResponse httpResponse) {
         return resultMapperOf(new TypeReference<List<ShippingMethod>>() {
             @Override
             public String toString() {
                 return "TypeReference<List<ShippingMethod>>";
             }
-        });
+        }).apply(httpResponse);
     }
 
     @Override

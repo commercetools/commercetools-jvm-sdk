@@ -2,13 +2,14 @@ package io.sphere.sdk.queries;
 
 import java.util.Collections;
 import java.util.Objects;
-import java.util.function.Function;
 import java.util.Optional;
+
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
 import java.util.List;
+import java.util.function.Function;
 
 import static io.sphere.sdk.queries.QueryDslImpl.*;
 
@@ -30,7 +31,7 @@ class QueryDslBuilder<I> extends Base implements Builder<QueryDsl<I>> {
     }
 
     public QueryDslBuilder(final QueryDsl<I> template) {
-        this(template.endpoint(), template.resultMapper());
+        this(template.endpoint(), r -> template.deserialize(r));
         predicate = template.predicate();
         sort = template.sort();
         limit = template.limit();

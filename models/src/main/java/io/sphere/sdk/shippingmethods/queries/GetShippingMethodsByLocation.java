@@ -12,7 +12,6 @@ import io.sphere.sdk.http.UrlQueryBuilder;
 import javax.money.CurrencyUnit;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 import static io.sphere.sdk.http.HttpMethod.GET;
 
@@ -34,13 +33,13 @@ public class GetShippingMethodsByLocation extends SphereRequestBase implements S
     }
 
     @Override
-    public Function<HttpResponse, List<ShippingMethod>> resultMapper() {
+    public List<ShippingMethod> deserialize(final HttpResponse httpResponse) {
         return resultMapperOf(new TypeReference<List<ShippingMethod>>() {
             @Override
             public String toString() {
                 return "TypeReference<List<ShippingMethod>>";
             }
-        });
+        }).apply(httpResponse);
     }
 
     @Override
