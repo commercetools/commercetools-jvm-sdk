@@ -8,6 +8,8 @@ import io.sphere.sdk.http.HttpResponse;
  <p>Typical workflow: A client executes {@link #httpRequestIntent()} and creates a future of an http response. When the future redeems the client uses the http response and passes it as
  argument to {@link #canDeserialize(HttpResponse)}. If the call results in true, the client applies {@link #deserialize(HttpResponse)} to transform the http response into T.</p>
 
+ It is intented that this class is immutable, so that every method can be used in a pure functional way.
+
  @param <T> the type which is returned in a successful http request.
  */
 public interface SphereRequest<T> {
@@ -15,7 +17,7 @@ public interface SphereRequest<T> {
      Takes an http response and maps it into a Java object of type T.
      Before calling this method, check with {@link #canDeserialize(HttpResponse)} if the response can be consumed.
 
-     @return function to map the result of the http request
+     @return the deserialized object, it should not be null
      @param httpResponse
      */
     T deserialize(final HttpResponse httpResponse);
