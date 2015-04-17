@@ -32,6 +32,7 @@ import java.util.function.Supplier;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.http.HttpMethod.POST;
+import static java.util.stream.Collectors.joining;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -265,5 +266,12 @@ public class SphereExceptionTest extends IntegrationTest {
         final SphereClient client = SphereClientFactory.of().createHttpTestDouble(intent -> HttpResponse.of(400, body));
         final AsyncAssertions<PagedQueryResult<Category>> x = performing(client.execute(CategoryQuery.of()));
         x.completesExceptionally(ErrorResponseException.class, e -> assertThat(e.getAdditionalNotes()).contains("Maybe it helps to reindex the products https://admin.sphere.io/fake-project-key-for-testing/developers/danger but this may take a while."));
+    }
+
+    @Test
+    public void noSearchHintNoteOnNormalException() throws Exception {
+        final SphereClient client = SphereClientFactory.of().createHttpTestDouble(intent -> HttpResponse.of(500));
+        final AsyncAssertions<PagedQueryResult<Category>> x = performing(client.execute(CategoryQuery.of()));
+        x.completesExceptionally(SphereException.class, e -> assertThat(e.getAdditionalNotes().stream().collect(joining(", "))).excludes("reindex"));
     }
 }
