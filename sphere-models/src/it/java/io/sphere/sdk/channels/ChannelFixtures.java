@@ -6,6 +6,7 @@ import io.sphere.sdk.channels.queries.ChannelByKeyFetch;
 import io.sphere.sdk.client.TestClient;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
@@ -19,6 +20,12 @@ public class ChannelFixtures {
         final Channel channel = client.execute(ChannelCreateCommand.of(ChannelDraft.of(randomString()).withRoles(channelRole)));
         f.accept(channel);
         client.execute(ChannelDeleteCommand.of(channel));
+    }
+
+    public static void withUpdatableChannelOfRole(final TestClient client, final ChannelRoles channelRole, final Function<Channel, Channel> f) {
+        final Channel channel = client.execute(ChannelCreateCommand.of(ChannelDraft.of(randomString()).withRoles(channelRole)));
+        final Channel updateChannel = f.apply(channel);
+        client.execute(ChannelDeleteCommand.of(updateChannel));
     }
 
     public static void withOrderExportChannel(final TestClient client, final Consumer<Channel> f) {
