@@ -18,7 +18,7 @@ public interface SphereRequest<T> {
      Before calling this method, check with {@link #canDeserialize(HttpResponse)} if the response can be consumed.
 
      @return the deserialized object, it should not be null
-     @param httpResponse
+     @param httpResponse the http response of SPHERE.IO
      */
     T deserialize(final HttpResponse httpResponse);
 

@@ -36,6 +36,11 @@ public class ProductProjectionQueryModel extends ProductDataQueryModelBase<Produ
     }
 
     @Override
+    public ProductAllVariantsQueryModel<ProductProjection> allVariants() {
+        return super.allVariants();
+    }
+
+    @Override
     public ProductVariantQueryModel<ProductProjection> masterVariant() {
         return super.masterVariant();
     }

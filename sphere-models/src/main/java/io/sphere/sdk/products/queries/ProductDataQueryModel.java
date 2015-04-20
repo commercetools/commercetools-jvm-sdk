@@ -22,6 +22,11 @@ public class ProductDataQueryModel<T> extends ProductDataQueryModelBase<T> {
     }
 
     @Override
+    public ProductAllVariantsQueryModel<T> allVariants() {
+        return super.allVariants();
+    }
+
+    @Override
     public ProductVariantQueryModel<T> masterVariant() {
         return super.masterVariant();
     }

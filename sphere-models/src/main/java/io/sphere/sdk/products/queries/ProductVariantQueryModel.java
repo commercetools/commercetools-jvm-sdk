@@ -23,7 +23,6 @@ public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
         return new StringQuerySortingModel<>(Optional.of(this), "sku");
     }
 
-
     public Predicate<T> where(final Predicate<PartialProductVariantQueryModel> embeddedPredicate) {
         return new EmbeddedPredicate<>(this, embeddedPredicate);
     }

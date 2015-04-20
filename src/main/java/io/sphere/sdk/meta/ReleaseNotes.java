@@ -1,5 +1,12 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.models.LocalizedStrings;
+
+import java.util.concurrent.CompletionStage;
+import java.util.function.BiFunction;
+
 /**
  <h3>Legend</h3>
  <ul>
@@ -7,6 +14,52 @@ package io.sphere.sdk.meta;
  <li class=new-in-release>added functionality</li>
  <li class=change-in-release>breaking change</li>
  <li class=fixed-in-release>bugfix, can include a breaking change</li>
+ </ul>
+
+ <!--
+ <ul>
+ <li class=removed-in-release></li>
+ <li class=new-in-release></li>
+ <li class=change-in-release></li>
+ <li class=fixed-in-release></li>
+ </ul>
+ -->
+
+ <h3 class=released-version id=v1_0_0_M13>1.0.0-M13</h3>
+ <ul>
+     <li class=new-in-release>{@link io.sphere.sdk.models.LocalizedStrings#mapValue(BiFunction)} and {@link LocalizedStrings#stream()}
+     can be used transform {@link LocalizedStrings}, for example for creating slugs or formatting.</li>
+     <li class=new-in-release>Experimental {@link io.sphere.sdk.utils.CompletableFutureUtils} to work with Java 8 Futures.</li>
+     <li class=new-in-release>{@link AsyncDocumentation} documents how to work with {@link java.util.concurrent.CompletableFuture} and {@link java.util.concurrent.CompletionStage}.</li>
+
+     <li class=new-in-release>{@link io.sphere.sdk.models.SphereException}s may give hint to developers how to recover from errors. For example on typical elasticsearch related problems it suggests to reindex the product index.</li>
+     <li class=new-in-release>The JVM SDK is available for Ning Async HTTP Client 1.8 and 1.9 (incompatible to 1.8).</li>
+     <li class=new-in-release>State update actions and {@link io.sphere.sdk.states.StateBuilder} contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
+     <li class=new-in-release>Embedded predicates ("where") now support lambda syntax: {@link io.sphere.sdk.products.queries.ProductVariantQueryModel#where(java.util.function.Function)}.</li>
+     <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO masterVariant and variants together contain all variants.</li>
+     <li class=new-in-release>{@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerId(java.lang.String)} and {@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerEmail(java.lang.String)}</li>
+     <li class=new-in-release>{@link io.sphere.sdk.channels.commands.ChannelUpdateCommand}</li>
+     <li class=new-in-release>{@link io.sphere.sdk.channels.queries.ChannelByIdFetch}</li>
+     <li class=new-in-release>{@link io.sphere.sdk.customers.queries.CustomerQuery#byEmail(java.lang.String)}</li>
+     <li class=change-in-release>{@link io.sphere.sdk.client.SphereRequest} has been refactored:<ul>
+         <li>{@code Function<HttpResponse, T> resultMapper()} is now {@link io.sphere.sdk.client.SphereRequest#deserialize(HttpResponse)}</li>
+         <li>{@code boolean canHandleResponse(final HttpResponse response)} is now {@link io.sphere.sdk.client.SphereRequest#canDeserialize(HttpResponse)}</li>
+       </ul>
+     </li>
+     <li class=change-in-release>Artifact IDs start now with "-sphere".</li>
+     <li class=change-in-release>In APIs {@link java.util.concurrent.CompletableFuture} has been replaced with {@link java.util.concurrent.CompletionStage}.
+
+       You can convert from {@link java.util.concurrent.CompletionStage} to {@link java.util.concurrent.CompletableFuture} with {@link CompletionStage#toCompletableFuture()}.
+
+       The opposite direction can be achieved with assigning {@link java.util.concurrent.CompletableFuture} (implementation) to {@link java.util.concurrent.CompletionStage} (interface).</li>
+     <li class=change-in-release>Refactoring of {@link io.sphere.sdk.client.SphereClient}, {@code <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest)}
+     is now {@link io.sphere.sdk.client.SphereClient#execute(SphereRequest)} which returns {@link java.util.concurrent.CompletionStage} instead of {@link java.util.concurrent.CompletableFuture}.
+     </li>
+     <li class=change-in-release>{@link  io.sphere.sdk.carts.LineItem#getTaxRate()} is optional.</li>
+     <li class=change-in-release>{@link io.sphere.sdk.carts.LineItem#getState()} is now a set instead of a list.</li>
+     <li class=change-in-release>{@link io.sphere.sdk.products.ProductProjection#getCategories()} returns a set instead of a list.</li>
+
+    <li class=fixed-in-release>URL encoding of parameters. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/240">#240</a>.</li>
  </ul>
 
  <h3 class=released-version id=v1_0_0_M12>1.0.0-M12</h3>
