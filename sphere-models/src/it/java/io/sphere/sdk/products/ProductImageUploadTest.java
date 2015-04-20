@@ -28,7 +28,7 @@ public class ProductImageUploadTest extends IntegrationTest {
     }
 
     private File getImage() {
-        return new File(".", "models/src/it/resources/ct_logo_farbe.gif");
+        return new File(".", "sphere-models/src/it/resources/ct_logo_farbe.gif");
     }
 
 }
