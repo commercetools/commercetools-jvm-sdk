@@ -22,19 +22,19 @@ object Build extends Build {
     )
 
   //the project definition have to be in .scala files for the module dependency graph
-  lazy val `jvm-sdk` = (project in file(".")).configs(IntegrationTest)
+  lazy val `sphere-jvm-sdk` = (project in file(".")).configs(IntegrationTest)
     .settings(unidocSettings:_*)
     .settings(javaUnidocSettings:_*)
-    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`test-lib`, `java-client-ning-1_8`))//need to exclude duplicated classes or "javadoc: error - com.sun.tools.doclets.internal.toolkit.util.DocletAbortException: java.lang.NullPointerException" appears
+    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`sphere-test-lib`, `sphere-java-client-ning-1_8`))//need to exclude duplicated classes or "javadoc: error - com.sun.tools.doclets.internal.toolkit.util.DocletAbortException: java.lang.NullPointerException" appears
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
-    .aggregate(common, `java-client`, `java-client-core`, `java-client-apache-async`, models, `test-lib`, `java-client-ning-1_8`, `java-client-ning-1_9`)
-    .dependsOn(common, `java-client`, `java-client-core`, `java-client-apache-async`, models, `test-lib`)
+    .aggregate(`sphere-common`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ning-1_8`, `sphere-java-client-ning-1_9`)
+    .dependsOn(`sphere-common`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`)
 
-  lazy val `java-client-core` = project.configs(IntegrationTest).dependsOn(common).settings(commonSettings:_*)
+  lazy val `sphere-java-client-core` = project.configs(IntegrationTest).dependsOn(`sphere-common`).settings(commonSettings:_*)
     .settings(libraryDependencies += junitDep)
 
-  lazy val `java-client-internal-test` = project.dependsOn(`java-client-core`).settings(commonSettings:_*).settings(
+  lazy val `sphere-java-client-internal-test` = project.dependsOn(`sphere-java-client-core`).settings(commonSettings:_*).settings(
     libraryDependencies ++=
       festAssert ::
         junitDep ::
@@ -42,22 +42,22 @@ object Build extends Build {
         Nil
   ).configs(IntegrationTest)
 
-  lazy val `java-client` = project.configs(IntegrationTest).dependsOn(`java-client-ning-1_9`).settings(commonSettings:_*)
+  lazy val `sphere-java-client` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-ning-1_9`).settings(commonSettings:_*)
 
-  lazy val `java-client-ning-1_8` = project.configs(IntegrationTest).dependsOn(`java-client-core`, `java-client-internal-test` % "test,it").settings(commonSettings:_*)
+  lazy val `sphere-java-client-ning-1_8` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies += "com.ning" % "async-http-client" % "1.8.7").configs(IntegrationTest)
 
-  lazy val `java-client-ning-1_9` = project.configs(IntegrationTest).dependsOn(`java-client-core`, `java-client-internal-test` % "test,it").settings(commonSettings:_*)
+  lazy val `sphere-java-client-ning-1_9` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies += "com.ning" % "async-http-client" % "1.9.18").configs(IntegrationTest)
 
-  lazy val `java-client-apache-async` = project.configs(IntegrationTest).dependsOn(`java-client-core`, `java-client-internal-test` % "test,it").settings(commonSettings:_*)
+  lazy val `sphere-java-client-apache-async` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies += "org.apache.httpcomponents" % "httpasyncclient" % "4.0.2").configs(IntegrationTest)
 
-  lazy val common = project.configs(IntegrationTest).settings(writeVersionSettings: _*).settings(commonSettings:_*)
+  lazy val `sphere-common` = project.configs(IntegrationTest).settings(writeVersionSettings: _*).settings(commonSettings:_*)
 
-  lazy val models = project.configs(IntegrationTest).dependsOn(common, `java-client-apache-async` % "test,it", `test-lib` % "test,it").settings(commonSettings:_*)
+  lazy val `sphere-models` = project.configs(IntegrationTest).dependsOn(`sphere-common`, `sphere-java-client-apache-async` % "test,it", `sphere-test-lib` % "test,it").settings(commonSettings:_*)
 
-  lazy val `test-lib` = project.configs(IntegrationTest).dependsOn(`java-client`, common).settings(commonSettings:_*)
+  lazy val `sphere-test-lib` = project.configs(IntegrationTest).dependsOn(`sphere-java-client`, `sphere-common`).settings(commonSettings:_*)
     .settings(
       libraryDependencies ++=
         festAssert ::
@@ -118,7 +118,7 @@ object Build extends Build {
         (id, deps)
       }.toList
       val x = projectToDependencies.map { case (id, deps) =>
-        deps.map(dep => '"' + id + '"' + "->" + '"' + dep + '"').filterNot(s => s == "\"models\"->\"java-client-apache-async\"" || s.startsWith('"' + `java-client-internal-test`.id) || s.startsWith("\"test-lib") || s.startsWith("\"jvm-sdk")).mkString("\n")
+        deps.map(dep => '"' + id + '"' + "->" + '"' + dep + '"').filterNot(s => s == "\"models\"->\"java-client-apache-async\"" || s.startsWith('"' + `sphere-java-client-internal-test`.id) || s.startsWith("\"test-lib") || s.startsWith("\"jvm-sdk")).mkString("\n")
       }.mkString("\n")
       val content = s"""digraph TrafficLights {
                           |$x
