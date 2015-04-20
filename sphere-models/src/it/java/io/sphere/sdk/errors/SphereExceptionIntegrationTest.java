@@ -38,7 +38,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.junit.Assert.fail;
 import static io.sphere.assertasync.AsyncAssertions.*;
 
-public class SphereExceptionTest extends IntegrationTest {
+public class SphereExceptionIntegrationTest extends IntegrationTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();

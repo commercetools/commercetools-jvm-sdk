@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 /**
  * <span id="exception-summary">Base class for all exceptions related to the SDK.</span>
@@ -84,8 +85,19 @@ public class SphereException extends RuntimeException {
                 .append("http response: ").append(getHttpResponse().map(Object::toString).orElse("<unknown>")).append("\n")
                 .append(Optional.ofNullable(super.getMessage()).map(s -> "detailMessage: " + s + "\n").orElse(""))
                 .append("additional notes: ").append(additionalNotes).append("\n")
-                .append("Javadoc: ").append("http://sphereio.github.io/sphere-jvm-sdk/javadoc/").append(BuildInfo.version()).append("/").append(this.getClass().getCanonicalName().replace('.', '/')).append(".html").append("\n")
+                .append("Javadoc: ").append("http://sphereio.github.io/sphere-jvm-sdk/javadoc/").append(getVersionForJavadoc()).append("/").append(this.getClass().getCanonicalName().replace('.', '/')).append(".html").append("\n")
                 .toString();
+    }
+
+
+    private static String getVersionForJavadoc() {
+        return getVersionForJavadoc(BuildInfo.version());
+    }
+
+    //package scope for testing
+    static String getVersionForJavadoc(final String version) {
+        final boolean releaseVersion = Pattern.compile("^(\\d+\\.\\d+\\.\\d+)(-M\\d+)?$").matcher(version).matches();
+        return releaseVersion ? "v" + version : version;
     }
 
     public void setUnderlyingHttpResponse(final HttpResponse httpResponse) {
