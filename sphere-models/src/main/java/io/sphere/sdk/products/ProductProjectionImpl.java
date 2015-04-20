@@ -13,6 +13,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 
 class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> implements ProductProjection {
@@ -23,7 +24,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     @JsonProperty("hasStagedChanges")
     private final boolean hasStagedChanges;
     private final LocalizedStrings name;
-    private final List<Reference<Category>> categories;
+    private final Set<Reference<Category>> categories;
     private final Optional<LocalizedStrings> description;
     private final LocalizedStrings slug;
     private final Optional<LocalizedStrings> metaTitle;
@@ -37,7 +38,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     ProductProjectionImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt,
                           final Reference<ProductType> productType, final Optional<Reference<TaxCategory>> taxCategory,
                           final boolean hasStagedChanges, final LocalizedStrings name,
-                          final List<Reference<Category>> categories, final Optional<LocalizedStrings> description,
+                          final Set<Reference<Category>> categories, final Optional<LocalizedStrings> description,
                           final LocalizedStrings slug, final Optional<LocalizedStrings> metaTitle,
                           final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords,
                           final ProductVariant masterVariant, final List<ProductVariant> variants,
@@ -69,7 +70,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     }
 
     @Override
-    public List<Reference<Category>> getCategories() {
+    public Set<Reference<Category>> getCategories() {
         return categories;
     }
 

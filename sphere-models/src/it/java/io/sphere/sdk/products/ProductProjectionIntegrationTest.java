@@ -101,7 +101,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
                                                                     .withExpansionPath(expansionPath().categories().parent());
                                                             final PagedQueryResult<ProductProjection> queryResult = execute(query);
                                                             assertThat(ids(queryResult)).containsOnly(productWithCat1.getId());
-                                                            final Reference<Category> cat1Loaded = queryResult.head().get().getCategories().get(0);
+                                                            final Reference<Category> cat1Loaded = queryResult.head().get().getCategories().stream().findAny().get();
                                                             assertThat(cat1Loaded).overridingErrorMessage("cat of product is expanded").isExpanded();
                                                             final Reference<Category> parent = cat1Loaded.getObj().get().getParent().get();
                                                             assertThat(parent).overridingErrorMessage("parent of cat is expanded").isExpanded();

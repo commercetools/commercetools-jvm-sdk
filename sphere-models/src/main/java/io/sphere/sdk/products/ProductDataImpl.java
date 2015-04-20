@@ -9,11 +9,12 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.search.SearchKeywords;
 
 import java.util.List;
+import java.util.Set;
 
 class ProductDataImpl extends Base implements ProductData {
     private final LocalizedStrings name;
 
-    private final List<Reference<Category>> categories;
+    private final Set<Reference<Category>> categories;
 
     private final Optional<LocalizedStrings> description;
 
@@ -32,7 +33,7 @@ class ProductDataImpl extends Base implements ProductData {
     private final SearchKeywords searchKeywords;
 
     @JsonCreator
-    ProductDataImpl(final LocalizedStrings name, final List<Reference<Category>> categories,
+    ProductDataImpl(final LocalizedStrings name, final Set<Reference<Category>> categories,
                     final Optional<LocalizedStrings> description, final LocalizedStrings slug,
                     final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription,
                     final Optional<LocalizedStrings> metaKeywords, final ProductVariant masterVariant,
@@ -53,7 +54,7 @@ class ProductDataImpl extends Base implements ProductData {
         return name;
     }
 
-    public List<Reference<Category>> getCategories() {
+    public Set<Reference<Category>> getCategories() {
         return categories;
     }
 

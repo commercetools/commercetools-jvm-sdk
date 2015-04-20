@@ -8,6 +8,7 @@ import io.sphere.sdk.search.SearchKeywords;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * For construction in unit tests use {@link io.sphere.sdk.products.ProductDataBuilder}.
@@ -15,31 +16,31 @@ import java.util.Optional;
 @JsonDeserialize(as=ProductDataImpl.class)
 public interface ProductData extends ProductDataLike {
     @Override
-    public LocalizedStrings getName();
+    LocalizedStrings getName();
 
     @Override
-    public List<Reference<Category>> getCategories();
+    Set<Reference<Category>> getCategories();
 
     @Override
-    public Optional<LocalizedStrings> getDescription();
+    Optional<LocalizedStrings> getDescription();
 
     @Override
-    public LocalizedStrings getSlug();
+    LocalizedStrings getSlug();
 
     @Override
-    public Optional<LocalizedStrings> getMetaTitle();
+    Optional<LocalizedStrings> getMetaTitle();
 
     @Override
-    public Optional<LocalizedStrings> getMetaDescription();
+    Optional<LocalizedStrings> getMetaDescription();
 
     @Override
-    public Optional<LocalizedStrings> getMetaKeywords();
+    Optional<LocalizedStrings> getMetaKeywords();
 
     @Override
-    public ProductVariant getMasterVariant();
+    ProductVariant getMasterVariant();
 
     @Override
-    public List<ProductVariant> getVariants();
+    List<ProductVariant> getVariants();
 
     @Override
     default List<ProductVariant> getAllVariants() {

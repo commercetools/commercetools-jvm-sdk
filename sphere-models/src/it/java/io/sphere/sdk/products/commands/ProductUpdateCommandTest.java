@@ -13,7 +13,6 @@ import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
-import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -74,7 +73,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final Product productWithCategory = client()
                     .execute(ProductUpdateCommand.of(product, AddToCategory.of(category, STAGED_AND_CURRENT)));
 
-            ReferenceAssert.assertThat(productWithCategory.getMasterData().getStaged().getCategories().get(0)).references(category);
+            ReferenceAssert.assertThat(productWithCategory.getMasterData().getStaged().getCategories().stream().findAny().get()).references(category);
 
             final Product productWithoutCategory = client()
                     .execute(ProductUpdateCommand.of(productWithCategory, RemoveFromCategory.of(category, STAGED_AND_CURRENT)));

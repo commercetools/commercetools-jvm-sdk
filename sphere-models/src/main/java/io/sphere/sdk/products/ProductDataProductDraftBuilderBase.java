@@ -7,6 +7,7 @@ import io.sphere.sdk.search.SearchKeywords;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDraftBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
     private final LocalizedStrings name;
@@ -15,7 +16,7 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     private Optional<LocalizedStrings> metaTitle = Optional.empty();
     private Optional<LocalizedStrings> metaDescription = Optional.empty();
     private Optional<LocalizedStrings> metaKeywords = Optional.empty();
-    private List<Reference<Category>> categories = Collections.emptyList();
+    private Set<Reference<Category>> categories = Collections.emptySet();
     private SearchKeywords searchKeywords = SearchKeywords.of();
 
     protected ProductDataProductDraftBuilderBase(final LocalizedStrings name, final LocalizedStrings slug) {
@@ -59,7 +60,7 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
         return metaKeywords(Optional.of(metaKeywords));
     }
 
-    public T categories(final List<Reference<Category>> categories) {
+    public T categories(final Set<Reference<Category>> categories) {
         this.categories = categories;
         return getThis();
     }
@@ -93,7 +94,7 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
         return metaKeywords;
     }
 
-    public List<Reference<Category>> getCategories() {
+    public Set<Reference<Category>> getCategories() {
         return categories;
     }
 

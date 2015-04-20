@@ -7,24 +7,24 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
 import io.sphere.sdk.search.SearchKeywords;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
-    public LocalizedStrings getName();
+    LocalizedStrings getName();
 
-    public List<Reference<Category>> getCategories();
+    Set<Reference<Category>> getCategories();
 
-    public Optional<LocalizedStrings> getDescription();
+    Optional<LocalizedStrings> getDescription();
 
-    public LocalizedStrings getSlug();
+    LocalizedStrings getSlug();
 
-    public Optional<LocalizedStrings> getMetaTitle();
+    Optional<LocalizedStrings> getMetaTitle();
 
-    public Optional<LocalizedStrings> getMetaDescription();
+    Optional<LocalizedStrings> getMetaDescription();
 
-    public Optional<LocalizedStrings> getMetaKeywords();
+    Optional<LocalizedStrings> getMetaKeywords();
 
     /**
      * Returns the master variant. Every product as 1 to n variants, so this is always present.
@@ -33,7 +33,7 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
      * @see #getVariants()
      * @return the main variant in the product
      */
-    public ProductVariant getMasterVariant();
+    ProductVariant getMasterVariant();
 
     /**
      * Gets the variants which are not identical to the master variant. This list can be empty.
@@ -44,7 +44,7 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
      *
      * @return all variants except the one in {@link #getMasterVariant()}
      */
-    public List<ProductVariant> getVariants();
+    List<ProductVariant> getVariants();
 
     /**
      * Gets all variants in the product including the master variant as first element in the list.

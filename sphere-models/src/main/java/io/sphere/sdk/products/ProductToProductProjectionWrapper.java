@@ -10,6 +10,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 class ProductToProductProjectionWrapper implements ProductProjection {
     private final Product product;
@@ -36,7 +37,7 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     }
 
     @Override
-    public List<Reference<Category>> getCategories() {
+    public Set<Reference<Category>> getCategories() {
         return productData.getCategories();
     }
 

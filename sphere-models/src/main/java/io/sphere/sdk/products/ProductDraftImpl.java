@@ -9,13 +9,14 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 
 import java.util.List;
+import java.util.Set;
 
 class ProductDraftImpl extends Base implements ProductDraft {
     private final Reference<ProductType> productType;
     private final LocalizedStrings name;
     private final LocalizedStrings slug;
     private final Optional<LocalizedStrings> description;
-    private final List<Reference<Category>> categories;
+    private final Set<Reference<Category>> categories;
     private final Optional<LocalizedStrings> metaTitle;
     private final Optional<LocalizedStrings> metaDescription;
     private final Optional<LocalizedStrings> metaKeywords;
@@ -23,7 +24,7 @@ class ProductDraftImpl extends Base implements ProductDraft {
     private final List<ProductVariantDraft> variants;
 
     public ProductDraftImpl(final Reference<ProductType> productType, final LocalizedStrings name, final LocalizedStrings slug,
-                            final Optional<LocalizedStrings> description, final List<Reference<Category>> categories,
+                            final Optional<LocalizedStrings> description, final Set<Reference<Category>> categories,
                             final MetaAttributes metaAttributes, final ProductVariantDraft masterVariant,
                             final List<ProductVariantDraft> variants) {
         this.name = name;
@@ -59,7 +60,7 @@ class ProductDraftImpl extends Base implements ProductDraft {
     }
 
     @Override
-    public List<Reference<Category>> getCategories() {
+    public Set<Reference<Category>> getCategories() {
         return categories;
     }
 

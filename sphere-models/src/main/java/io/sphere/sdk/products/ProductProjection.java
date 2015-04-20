@@ -11,6 +11,7 @@ import io.sphere.sdk.search.SearchKeywords;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 /**
   A projected representation of a product shows the product with its current or staged data.
@@ -59,7 +60,7 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
     }
 
     @Override
-    List<Reference<Category>> getCategories();
+    Set<Reference<Category>> getCategories();
 
     @Override
     Optional<LocalizedStrings> getDescription();

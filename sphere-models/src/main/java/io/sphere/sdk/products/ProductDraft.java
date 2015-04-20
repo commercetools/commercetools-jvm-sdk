@@ -9,6 +9,7 @@ import io.sphere.sdk.models.WithLocalizedSlug;
 import io.sphere.sdk.producttypes.ProductType;
 
 import java.util.List;
+import java.util.Set;
 
 /**
   A template for a new {@link io.sphere.sdk.products.Product}.
@@ -25,7 +26,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
 
     Optional<LocalizedStrings> getDescription();
 
-    List<Reference<Category>> getCategories();
+    Set<Reference<Category>> getCategories();
 
     Optional<LocalizedStrings> getMetaTitle();
 
