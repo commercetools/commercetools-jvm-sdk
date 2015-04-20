@@ -20,13 +20,13 @@ final class LineItemImpl extends Base implements LineItem {
     private final Price price;
     private final long quantity;
     private final List<ItemState> state;
-    private final TaxRate taxRate;
+    private final Optional<TaxRate> taxRate;
     private final Optional<Reference<Channel>> supplyChannel;
 
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedStrings name,
                  final ProductVariant variant, final Price price, final long quantity,
-                 final List<ItemState> state, final TaxRate taxRate, final Optional<Reference<Channel>> supplyChannel) {
+                 final List<ItemState> state, final Optional<TaxRate> taxRate, final Optional<Reference<Channel>> supplyChannel) {
         this.id = id;
         this.productId = productId;
         this.name = name;
@@ -74,7 +74,7 @@ final class LineItemImpl extends Base implements LineItem {
     }
 
     @Override
-    public TaxRate getTaxRate() {
+    public Optional<TaxRate> getTaxRate() {
         return taxRate;
     }
 

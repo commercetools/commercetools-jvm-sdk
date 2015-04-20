@@ -18,17 +18,16 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
     private final Price price;
     private final long quantity;
     private List<ItemState> state = Collections.emptyList();
-    private final TaxRate taxRate;
+    private Optional<TaxRate> taxRate = Optional.empty();
     private Optional<Reference<Channel>> supplyChannel = Optional.empty();
 
-    private LineItemBuilder(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final TaxRate taxRate) {
+    private LineItemBuilder(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity) {
         this.id = id;
         this.productId = productId;
         this.name = name;
         this.variant = variant;
         this.price = price;
         this.quantity = quantity;
-        this.taxRate = taxRate;
     }
 
     public LineItemBuilder state(final List<ItemState> state) {
@@ -37,7 +36,7 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
     }
 
     public LineItemBuilder supplyChannel(final Referenceable<Channel> supplyChannel) {
-        return supplyChannel(supplyChannel);
+        return supplyChannel(Optional.of(supplyChannel.toReference()));
     }
 
     public LineItemBuilder supplyChannel(final Optional<Reference<Channel>> supplyChannel) {
@@ -45,8 +44,25 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
         return this;
     }
 
+    public LineItemBuilder taxRate(final TaxRate taxRate) {
+        return taxRate(Optional.of(taxRate));
+    }
+
+    public LineItemBuilder taxRate(final Optional<TaxRate> taxRate) {
+        this.taxRate = taxRate;
+        return this;
+    }
+
+    @Deprecated
+    /**
+     *  Use {@link #of(String, String, LocalizedStrings, ProductVariant, Price, long)} and {@link #taxRate(TaxRate)} instead.
+     */
     public static LineItemBuilder of(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final TaxRate taxRate) {
-        return new LineItemBuilder(id, productId, name, variant, price, quantity, taxRate);
+        return of(id, productId, name, variant, price, quantity).taxRate(taxRate);
+    }
+
+    public static LineItemBuilder of(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity) {
+        return new LineItemBuilder(id, productId, name, variant, price, quantity);
     }
 
     @Override

@@ -24,7 +24,7 @@ public interface LineItem extends LineItemLike {
 
     List<ItemState> getState();
 
-    TaxRate getTaxRate();
+    Optional<TaxRate> getTaxRate();
 
     Optional<Reference<Channel>> getSupplyChannel();
 
