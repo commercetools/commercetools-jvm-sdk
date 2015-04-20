@@ -1,6 +1,5 @@
 package io.sphere.sdk.customers.queries;
 
-import io.sphere.sdk.customergroups.CustomerGroupFixtures;
 import io.sphere.sdk.customers.*;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
 import io.sphere.sdk.customers.commands.CustomerUpdateCommand;
@@ -8,6 +7,7 @@ import io.sphere.sdk.customers.commands.updateactions.AddAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultBillingAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultShippingAddress;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.SortDirection;
@@ -41,6 +41,12 @@ public class CustomerQueryTest extends IntegrationTest {
 
     @Test
     public void email() throws Exception {
+        final PagedQueryResult<Customer> result = execute(CustomerQuery.of().byEmail(customer.getEmail()));
+        assertThat(result.getResults().get(0).getEmail()).isEqualTo(customer.getEmail());
+    }
+
+    @Test
+    public void emailHelper() throws Exception {
         check((model) -> model.email().is(customer.getEmail()));
     }
 
