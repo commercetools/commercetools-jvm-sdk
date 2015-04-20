@@ -9,8 +9,8 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 final class LineItemImpl extends Base implements LineItem {
     private final String id;
@@ -19,14 +19,14 @@ final class LineItemImpl extends Base implements LineItem {
     private final ProductVariant variant;
     private final Price price;
     private final long quantity;
-    private final List<ItemState> state;
+    private final Set<ItemState> state;
     private final Optional<TaxRate> taxRate;
     private final Optional<Reference<Channel>> supplyChannel;
 
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedStrings name,
                  final ProductVariant variant, final Price price, final long quantity,
-                 final List<ItemState> state, final Optional<TaxRate> taxRate, final Optional<Reference<Channel>> supplyChannel) {
+                 final Set<ItemState> state, final Optional<TaxRate> taxRate, final Optional<Reference<Channel>> supplyChannel) {
         this.id = id;
         this.productId = productId;
         this.name = name;
@@ -69,7 +69,7 @@ final class LineItemImpl extends Base implements LineItem {
     }
 
     @Override
-    public List<ItemState> getState() {
+    public Set<ItemState> getState() {
         return state;
     }
 

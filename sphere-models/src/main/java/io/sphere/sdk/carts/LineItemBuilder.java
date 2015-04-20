@@ -9,6 +9,7 @@ import io.sphere.sdk.taxcategories.TaxRate;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 public final class LineItemBuilder extends Base implements Builder<LineItem> {
     private final String id;
@@ -17,7 +18,7 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
     private final ProductVariant variant;
     private final Price price;
     private final long quantity;
-    private List<ItemState> state = Collections.emptyList();
+    private Set<ItemState> state = Collections.emptySet();
     private Optional<TaxRate> taxRate = Optional.empty();
     private Optional<Reference<Channel>> supplyChannel = Optional.empty();
 
@@ -30,7 +31,7 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
         this.quantity = quantity;
     }
 
-    public LineItemBuilder state(final List<ItemState> state) {
+    public LineItemBuilder state(final Set<ItemState> state) {
         this.state = state;
         return this;
     }

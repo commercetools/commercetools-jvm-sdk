@@ -8,8 +8,8 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
 
-import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @JsonDeserialize(as=LineItemImpl.class)
 public interface LineItem extends LineItemLike {
@@ -22,7 +22,7 @@ public interface LineItem extends LineItemLike {
 
     Price getPrice();
 
-    List<ItemState> getState();
+    Set<ItemState> getState();
 
     Optional<TaxRate> getTaxRate();
 
