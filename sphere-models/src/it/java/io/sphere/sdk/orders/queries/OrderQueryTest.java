@@ -6,6 +6,7 @@ import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.Sort;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -21,13 +22,28 @@ public class OrderQueryTest extends IntegrationTest {
 
     @Test
     public void customerId() throws Exception {
-        assertOrderIsFoundWithPredicate(order -> MODEL.customerId().is(order.getCustomerId().get()));
+        assertOrderIsFound(order -> {
+            final String customerId = order.getCustomerId().get();
+            return OrderQuery.of().byCustomerId(customerId);
+        });
     }
 
     @Test
     public void customerEmail() throws Exception {
-        assertOrderIsFoundWithPredicate(order -> MODEL.customerEmail().is(OrderFixtures.CUSTOMER_EMAIL));
+        assertOrderIsFound(order -> {
+            final String customerEmail = order.getCustomerEmail().get();
+            return OrderQuery.of().byCustomerEmail(customerEmail);
+        });
+    }
 
+    @Test
+    public void customerIdQueryModel() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.customerId().is(order.getCustomerId().get()));
+    }
+
+    @Test
+    public void customerEmailQueryModel() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.customerEmail().is(OrderFixtures.CUSTOMER_EMAIL));
     }
 
     @Test
@@ -35,11 +51,14 @@ public class OrderQueryTest extends IntegrationTest {
         assertOrderIsFoundWithPredicate(order -> MODEL.country().is(CartFixtures.DEFAULT_COUNTRY));
     }
 
-    private void assertOrderIsFoundWithPredicate(final Function<Order, Predicate<Order>> p) {
+    private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p) {
         withOrder(client(), order -> {
-            final Predicate<Order> predicate = p.apply(order);
-            final Query<Order> query = OrderQuery.of().withPredicate(predicate).withSort(Sort.of("createdAt desc"));
+            final QueryDsl<Order> query = p.apply(order).withSort(Sort.of("createdAt desc"));
             assertThat(client().execute(query).head().get().getId()).isEqualTo(order.getId());
         });
+    }
+
+    private void assertOrderIsFoundWithPredicate(final Function<Order, Predicate<Order>> p) {
+        assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)).withSort(Sort.of("createdAt desc")));
     }
 }
