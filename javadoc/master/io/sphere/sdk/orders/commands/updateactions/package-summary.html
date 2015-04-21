@@ -101,7 +101,7 @@
     assertThat(parcel.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
     assertThat(parcel.getTrackingData()).isPresentAs(TRACKING_DATA);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -120,7 +120,7 @@
     assertThat(actual.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
     assertThat(actual.getTrackingData()).isPresentAs(TRACKING_DATA);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="altColor">
@@ -142,7 +142,7 @@
     assertThat(returnInfo.getReturnDate()).isPresentAs(INSTANT_IN_PAST);
     assertThat(returnInfo.getReturnTrackingId()).isPresentAs("trackingId");
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -153,7 +153,7 @@
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.COMPLETE)));
     assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.COMPLETE);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="altColor">
@@ -164,7 +164,7 @@
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.PAID)));
     assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.PAID);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -175,7 +175,7 @@
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.SHIPPED)));
     assertThat(updatedOrder.getShipmentState()).isPresentAs(ShipmentState.SHIPPED);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="altColor">
@@ -191,7 +191,7 @@
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
     assertThat(updatedOrder.getOrderNumber()).isPresentAs(orderNumber);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="altColor">
@@ -206,7 +206,7 @@
     final ReturnPaymentState updatedPaymentState = updatedOrder.getReturnInfo().get(0).getItems().get(0).getPaymentState();
     assertThat(updatedPaymentState).isEqualTo(newPaymentState);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -221,7 +221,7 @@
     final ReturnShipmentState updatedReturnItem = updatedOrder.getReturnInfo().get(0).getItems().get(0).getShipmentState();
     assertThat(updatedReturnItem).isEqualTo(newShipmentState);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="altColor">
@@ -241,7 +241,7 @@
         assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
     })
 );
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 </tbody>

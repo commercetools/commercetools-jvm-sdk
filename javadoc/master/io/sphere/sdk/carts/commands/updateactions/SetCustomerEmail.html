@@ -125,7 +125,7 @@ OptionalAssert.assertThat(cart.getCustomerEmail()).isAbsent();
 final String email = "info@commercetools.de";
 final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
 OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

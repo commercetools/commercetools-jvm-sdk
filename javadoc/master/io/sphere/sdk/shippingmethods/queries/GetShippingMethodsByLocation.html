@@ -130,7 +130,7 @@ implements <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" titl
 
  <div id="io-sphere-sdk-shippingmethods-queries-GetShippingMethodsByLocationTest-execution--%s" class=code-example><pre><code class='java'>final List&lt;ShippingMethod&gt; result =
         execute(GetShippingMethodsByLocation.of(CountryCode.US).withState("Kansas").withCurrency(USD));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocationTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/queries/GetShippingMethodsByLocationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -229,6 +229,8 @@ implements <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" titl
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>httpResponse</code> - the http response of SPHERE.IO</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the deserialized object, it should not be null</dd>
 </dl>

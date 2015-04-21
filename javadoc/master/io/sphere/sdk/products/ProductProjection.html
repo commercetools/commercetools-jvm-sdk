@@ -129,7 +129,7 @@ assertThat(staged.get().getName()).isEqualTo(product.getMasterData().getStaged()
 
 final Optional&lt;ProductProjection&gt; current = product.toProjection(ProductProjectionType.CURRENT);
 assertThat(current).overridingErrorMessage("current can be empty").isAbsent();
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/test/java/io/sphere/sdk/products/ProductProjectionTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/ProductProjectionTest.java" target="_blank">test code</a>.</pre></div>
 
  <a href="../../../../io/sphere/sdk/products/ProductProjection.html#toReference--"><code>toReference()</code></a> returns not are reference to a <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> but to a <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>.</div>
 </li>
@@ -157,7 +157,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isAbsent();
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;</code></td>
+<td class="colFirst"><code>java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getCategories--">getCategories</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
@@ -338,7 +338,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isAbsent();
 <ul class="blockList">
 <li class="blockList">
 <h4>getCategories</h4>
-<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;&nbsp;getCategories()</pre>
+<pre>java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;&nbsp;getCategories()</pre>
 </li>
 </ul>
 <a name="getDescription--">

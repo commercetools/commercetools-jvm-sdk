@@ -168,7 +168,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-searchByTextInACertainLanguage--%s" class=code-example><pre><code class='java'>final SearchDsl&lt;ProductProjection&gt; search = ProductProjectionSearch.of(STAGED).withText(ENGLISH, "shoe");
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(search);
 assertThat(SphereTestUtils.toIds(result.getResults())).containsOnly(product1.getId());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
 
 
@@ -181,7 +181,7 @@ assertThat(SphereTestUtils.toIds(result.getResults())).containsOnly(product1.get
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-paginationExample--%s" class=code-example><pre><code class='java'>final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).withOffset(50).withLimit(25));
 assertThat(result.getOffset()).isEqualTo(50);
 assertThat(result.getResults().size()).isEqualTo(min(25, max(result.getTotal() - 50, 0)));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
 
 
@@ -194,7 +194,7 @@ assertThat(result.getResults().size()).isEqualTo(min(25, max(result.getTotal() -
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-sortByAttributeAscending--%s" class=code-example><pre><code class='java'>final SearchSort&lt;ProductProjection&gt; sort = MODEL.variants().attribute().ofNumber(SIZE).sort(ASC);
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).withSort(sort));
 assertThat(resultsToIds(result)).containsExactly(product2.getId(), product1.getId(), product3.getId());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>When sorting on product custom attributes, you can also choose which should be the selected variant used for sorting. By default the values are sorted internally through variants, selecting the variant that best matches the sorting direction. This behaviour can be easily inverted, as explained in the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting-attribute">Sorting by Attributes</a> documentation page.</p>
 
@@ -203,7 +203,7 @@ assertThat(resultsToIds(result)).containsExactly(product2.getId(), product1.getI
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-sortWithAdditionalParameterByAttributeAscending--%s" class=code-example><pre><code class='java'>final SearchSort&lt;ProductProjection&gt; sort = MODEL.variants().attribute().ofNumber(SIZE).sort(ASC_MAX);
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).withSort(sort));
 assertThat(resultsToIds(result)).containsExactly(product3.getId(), product2.getId(), product1.getId());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>Alternatively, there is the possibility to provide directly the sort request, even though this method is unsafe and therefore not recommended.</p>
 
@@ -212,7 +212,7 @@ assertThat(resultsToIds(result)).containsExactly(product3.getId(), product2.getI
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-sortWithSimpleExpression--%s" class=code-example><pre><code class='java'>final SearchSort&lt;ProductProjection&gt; sort = SearchSort.of("variants.attributes." + SIZE + " asc.max");
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).withSort(sort));
 assertThat(resultsToIds(result)).containsExactly(product3.getId(), product2.getId(), product1.getId());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
 
 
@@ -274,7 +274,7 @@ assertThat(resultsToIds(result)).containsExactly(product3.getId(), product2.getI
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-filtersByTerm--%s" class=code-example><pre><code class='java'>final FilterExpression&lt;ProductProjection&gt; filter = MODEL.variants().attribute().ofText(COLOR).filter().is("red");
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).plusFilterQuery(filter));
 assertThat(resultsToIds(result)).containsOnly(product2.getId());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>Besides filtering by terms, you can also filter by a range of values, like in the following code.</p>
 
@@ -283,7 +283,7 @@ assertThat(resultsToIds(result)).containsOnly(product2.getId());
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-filtersByRange--%s" class=code-example><pre><code class='java'>final FilterExpression&lt;ProductProjection&gt; filter = MODEL.variants().attribute().ofNumber(SIZE).filter().isGreaterThanOrEqualTo(valueOf(44));
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).plusFilterQuery(filter));
 assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>There is also the possibility of providing directly the filter expression, although it is unsafe and thus not recommended.</p>
 
@@ -292,7 +292,7 @@ assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId()
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-simpleFilterByRange--%s" class=code-example><pre><code class='java'>final FilterExpression&lt;ProductProjection&gt; filter = FilterExpression.of("variants.attributes." + SIZE + ":range(44 to *)");
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).plusFilterQuery(filter));
 assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
 
 
@@ -313,14 +313,14 @@ assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
 assertThat(termFacetResult.getTotal()).isEqualTo(3);
 assertThat(termFacetResult.getOther()).isEqualTo(0);
 assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("blue", 2), TermStats.of("red", 1));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>In contrast, the Filtered Facet result contains the statistical count for a single value specified in the request, in this case the amount of variants with blue color:</p>
 
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-filteredFacetsAreParsed--%s" class=code-example><pre><code class='java'>final FilteredFacetExpression&lt;ProductProjection, String&gt; facet = MODEL.variants().attribute().ofText(COLOR).facet().only("blue");
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).plusFacet(facet));
 assertThat(result.getFilteredFacetResult(facet).get().getCount()).isEqualTo(2);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>You can also request statistics (i.e. count, minimum and maximum values, as well as the sum and arithmetic mean) about a range of values, like it is done with size in the following example within the range [0, +∞):</p>
 
@@ -328,7 +328,7 @@ assertThat(result.getFilteredFacetResult(facet).get().getCount()).isEqualTo(2);
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).plusFacet(facet));
 final RangeStats&lt;Double&gt; expectedRange = RangeStats.of(Optional.of(0D), Optional.empty(), 6, 36D, 46D, 246D, 41D);
 assertThat(result.getRangeFacetResult(facet).get().getRanges()).containsExactly(expectedRange);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>There is also the possibility of providing directly the facet expression, although it is unsafe and thus not recommended.</p>
 
@@ -342,7 +342,7 @@ assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
 assertThat(termFacetResult.getTotal()).isEqualTo(3);
 assertThat(termFacetResult.getOther()).isEqualTo(0);
 assertThat(termFacetResult.getTerms()).containsExactly(TermStats.of("blue", 2), TermStats.of("red", 1));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=facet-alias>Alias</h4>
 
@@ -355,7 +355,7 @@ final FilteredFacetExpression&lt;ProductProjection, String&gt; facet = MODEL.var
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).plusFacet(facet));
 assertThat(facet.resultPath()).isEqualTo(alias);
 assertThat(result.getFilteredFacetResult(facet).get().getCount()).isEqualTo(2);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

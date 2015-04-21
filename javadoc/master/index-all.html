@@ -108,7 +108,7 @@
     assertThat(parcel.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
     assertThat(parcel.getTrackingData()).isPresentAs(TRACKING_DATA);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/UrlQueryBuilder.html#addEncoded-java.lang.String-java.lang.String-">addEncoded(String, String)</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/UrlQueryBuilder.html" title="class in io.sphere.sdk.http">UrlQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -163,7 +163,7 @@
     assertThat(actual.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
     assertThat(actual.getTrackingData()).isPresentAs(TRACKING_DATA);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/AddPrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">AddPrice</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -178,7 +178,7 @@
     assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() + additionalQuantity);
     return updatedEntry;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Address</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>
@@ -206,7 +206,17 @@
     assertThat(returnInfo.getReturnDate()).isPresentAs(INSTANT_IN_PAST);
     assertThat(returnInfo.getReturnTrackingId()).isPresentAs("trackingId");
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
+<dt><a href="io/sphere/sdk/channels/commands/updateactions/AddRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">AddRoles</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-addRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -&gt; {
+    final Set&lt;ChannelRoles&gt; roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
+    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, AddRoles.of(roles)));
+    assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY, ORDER_IMPORT);
+    return updatedChannel;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">AddShippingRate</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
@@ -242,7 +252,7 @@
         return shippingMethodWithoutZone;
     });
 }, CountryCode.EA);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/AddToCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">AddToCategory</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -286,13 +296,17 @@
         return shippingMethodWithoutZone;
     });
 }, CountryCode.EA);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FacetSearchModel.html#alias">alias</a></span> - Variable in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FacetSearchModel.html#all--">all()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangedFacetSearchModel.html#all--">all()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangedFacetSearchModel.html" title="class in io.sphere.sdk.search">RangedFacetSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html#allVariants--">allVariants()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#allVariants--">allVariants()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MoneySearchModel.html#amount--">amount()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MoneySearchModel.html" title="class in io.sphere.sdk.search">MoneySearchModel</a></dt>
 <dd>&nbsp;</dd>
@@ -545,6 +559,12 @@
 <dd>
 <div class="block">Predicate which matches the country of a location, does not take the state into the consideration.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerEmail-java.lang.String-">byCustomerEmail(String)</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerId-java.lang.String-">byCustomerId(String)</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQuery.html#byEmail-java.lang.String-">byEmail(String)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQuery.html" title="class in io.sphere.sdk.customers.queries">CustomerQuery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#byExternalId-java.lang.String-">byExternalId(String)</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#byId-java.lang.String-">byId(String)</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="class in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
@@ -727,6 +747,16 @@
 <dd>
 <div class="block">Replaces the address with the given ID, with the new address in the customer's addresses array.</div>
 </dd>
+<dt><a href="io/sphere/sdk/channels/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">ChangeDescription</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
+    final LocalizedStrings newDescription = randomSlug();
+    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
+    assertThat(updatedChannel.getDescription()).isPresentAs(newDescription);
+    return updatedChannel;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/ChangeEmail.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">ChangeEmail</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-changeEmail--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
@@ -735,7 +765,7 @@
     final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, ChangeEmail.of(newEmail)));
     assertThat(updatedCustomer.getEmail()).isEqualTo(newEmail);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeInitial</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
@@ -748,7 +778,7 @@
     assertThat(updatedState.isInitial()).isEqualTo(newIsInitial);
     return updatedState;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">ChangeIsDefault</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
@@ -768,7 +798,17 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 
     return execute(ShippingMethodUpdateCommand.of(updatedShippingMethod, ChangeIsDefault.toFalse()));
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
+<dt><a href="io/sphere/sdk/channels/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">ChangeKey</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeKey--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
+    final String newKey = randomKey();
+    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeKey.of(newKey)));
+    assertThat(updatedChannel.getKey()).isEqualTo(newKey).isNotEqualTo(channel.getKey());
+    return updatedChannel;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeKey</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
@@ -780,7 +820,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     assertThat(updatedState.getKey()).isEqualTo(newKey);
     return updatedState;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">ChangeLineItemQuantity</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -788,6 +828,16 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/categories/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.categories.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/categories/commands/updateactions/package-summary.html">io.sphere.sdk.categories.commands.updateactions</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/channels/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
+    final LocalizedStrings newName = randomSlug();
+    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeName.of(newName)));
+    assertThat(updatedChannel.getName()).isPresentAs(newName);
+    return updatedChannel;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/customergroups/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.customergroups.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/customergroups/commands/updateactions/package-summary.html">io.sphere.sdk.customergroups.commands.updateactions</a></dt>
 <dd>
 <div class="block">Changes the name of the customer group.</div>
@@ -810,7 +860,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     assertThat(updatedShippingMethod.getName()).isEqualTo(newName);
     return updatedShippingMethod;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/zones/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.zones.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/zones/commands/updateactions/package-summary.html">io.sphere.sdk.zones.commands.updateactions</a></dt>
 <dd>
@@ -823,7 +873,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.COMPLETE)));
     assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.COMPLETE);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/categories/commands/updateactions/ChangeParent.html" title="class in io.sphere.sdk.categories.commands.updateactions"><span class="typeNameLink">ChangeParent</span></a> - Class in <a href="io/sphere/sdk/categories/commands/updateactions/package-summary.html">io.sphere.sdk.categories.commands.updateactions</a></dt>
 <dd>&nbsp;</dd>
@@ -834,7 +884,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.PAID)));
     assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.PAID);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">ChangePrice</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -849,7 +899,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.SHIPPED)));
     assertThat(updatedOrder.getShipmentState()).isPresentAs(ShipmentState.SHIPPED);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">ChangeSlug</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -865,7 +915,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     assertThat(updatedShippingMethod.getTaxCategory().getId()).isEqualTo(newTaxCategory.getId());
     return updatedShippingMethod;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeType.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeType</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>&nbsp;</dd>
@@ -876,6 +926,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#channel-java.util.Optional-">channel(Optional&lt;Reference&lt;Channel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#channel-io.sphere.sdk.models.Referenceable-">channel(Referenceable&lt;Channel&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="class in io.sphere.sdk.channels.queries"><span class="typeNameLink">ChannelByIdFetch</span></a> - Class in <a href="io/sphere/sdk/channels/queries/package-summary.html">io.sphere.sdk.channels.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/channels/queries/ChannelByKeyFetch.html" title="class in io.sphere.sdk.channels.queries"><span class="typeNameLink">ChannelByKeyFetch</span></a> - Class in <a href="io/sphere/sdk/channels/queries/package-summary.html">io.sphere.sdk.channels.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -902,6 +954,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><a href="io/sphere/sdk/channels/queries/ChannelQueryModel.html" title="class in io.sphere.sdk.channels.queries"><span class="typeNameLink">ChannelQueryModel</span></a> - Class in <a href="io/sphere/sdk/channels/queries/package-summary.html">io.sphere.sdk.channels.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/channels/ChannelRoles.html" title="enum in io.sphere.sdk.channels"><span class="typeNameLink">ChannelRoles</span></a> - Enum in <a href="io/sphere/sdk/channels/package-summary.html">io.sphere.sdk.channels</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/channels/commands/ChannelUpdateCommand.html" title="class in io.sphere.sdk.channels.commands"><span class="typeNameLink">ChannelUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/channels/commands/package-summary.html">io.sphere.sdk.channels.commands</a></dt>
+<dd>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddRoles.html">AddRoles</a></li><li><a href="updateactions/ChangeDescription.html">ChangeDescription</a></li><li><a href="updateactions/ChangeKey.html">ChangeKey</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/RemoveRoles.html">RemoveRoles</a></li><li><a href="updateactions/SetRoles.html">SetRoles</a></li></ul></div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/ChannelUpdateCommand.html#ChannelUpdateCommand-io.sphere.sdk.models.Versioned-java.util.List-">ChannelUpdateCommand(Versioned&lt;Channel&gt;, List&lt;? extends UpdateAction&lt;Channel&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.channels.commands.<a href="io/sphere/sdk/channels/commands/ChannelUpdateCommand.html" title="class in io.sphere.sdk.channels.commands">ChannelUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#children-java.util.List-">children(List&lt;Category&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1101,7 +1159,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
         assertThat(e.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();
     }
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerChangePasswordCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerChangePasswordCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="class in io.sphere.sdk.customers.commands"><span class="typeNameLink">CustomerCreateCommand</span></a> - Class in <a href="io/sphere/sdk/customers/commands/package-summary.html">io.sphere.sdk.customers.commands</a></dt>
 <dd>
@@ -2085,6 +2143,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelDraft.html#getDescription--">getDescription()</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraft.html" title="class in io.sphere.sdk.channels">ChannelDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/ChangeDescription.html#getDescription--">getDescription()</a></span> - Method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.channels.commands.updateactions">ChangeDescription</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/ProductDiscount.html#getDescription--">getDescription()</a></span> - Method in interface io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscount</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html#getDescription--">getDescription()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetDescription</a></dt>
@@ -2321,6 +2381,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelDraft.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraft.html" title="class in io.sphere.sdk.channels">ChannelDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/ChangeKey.html#getKey--">getKey()</a></span> - Method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.channels.commands.updateactions">ChangeKey</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObject.html#getKey--">getKey()</a></span> - Method in interface io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a></dt>
 <dd>
 <div class="block">The key is part of the custom object namespace to find it</div>
@@ -2540,6 +2602,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/Channel.html#getName--">getName()</a></span> - Method in interface io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelDraft.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraft.html" title="class in io.sphere.sdk.channels">ChannelDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/ChangeName.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.channels.commands.updateactions">ChangeName</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/commands/updateactions/ChangeName.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.customergroups.commands.updateactions.<a href="io/sphere/sdk/customergroups/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.customergroups.commands.updateactions">ChangeName</a></dt>
 <dd>&nbsp;</dd>
@@ -2832,6 +2896,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/Channel.html#getRoles--">getRoles()</a></span> - Method in interface io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelDraft.html#getRoles--">getRoles()</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraft.html" title="class in io.sphere.sdk.channels">ChannelDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/AddRoles.html#getRoles--">getRoles()</a></span> - Method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/AddRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">AddRoles</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/RemoveRoles.html#getRoles--">getRoles()</a></span> - Method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/RemoveRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">RemoveRoles</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/SetRoles.html#getRoles--">getRoles()</a></span> - Method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/SetRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">SetRoles</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryTree.html#getRoots--">getRoots()</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories">CategoryTree</a></dt>
 <dd>
@@ -3538,7 +3608,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     final DeleteCommand&lt;InventoryEntry&gt; deleteCommand = InventoryDeleteCommand.of(inventoryEntry);
     final InventoryEntry deletedEntry = execute(deleteCommand);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories"><span class="typeNameLink">InventoryEntryDraft</span></a> - Class in <a href="io/sphere/sdk/inventories/package-summary.html">io.sphere.sdk.inventories</a></dt>
 <dd>&nbsp;</dd>
@@ -3615,6 +3685,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><a href="io/sphere/sdk/channels/commands/package-summary.html">io.sphere.sdk.channels.commands</a> - package io.sphere.sdk.channels.commands</dt>
 <dd>
 <div class="block">Provides types to change the state of  channels.</div>
+</dd>
+<dt><a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a> - package io.sphere.sdk.channels.commands.updateactions</dt>
+<dd>
+<div class="block">Provides the possible operations which can be performed on update commands for  channels.</div>
 </dd>
 <dt><a href="io/sphere/sdk/channels/queries/package-summary.html">io.sphere.sdk.channels.queries</a> - package io.sphere.sdk.channels.queries</dt>
 <dd>
@@ -4583,6 +4657,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/ItemState.html#of-io.sphere.sdk.models.Reference-long-">of(Reference&lt;State&gt;, long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemBuilder.html#of-java.lang.String-java.lang.String-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductVariant-io.sphere.sdk.products.Price-long-io.sphere.sdk.taxcategories.TaxRate-">of(String, String, LocalizedStrings, ProductVariant, Price, long, TaxRate)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a></dt>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemBuilder.html#of-java.lang.String-java.lang.String-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductVariant-io.sphere.sdk.products.Price-long-">of(String, String, LocalizedStrings, ProductVariant, Price, long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartByCustomerIdFetch.html#of-io.sphere.sdk.models.Identifiable-">of(Identifiable&lt;Customer&gt;)</a></span> - Static method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartByCustomerIdFetch.html" title="class in io.sphere.sdk.carts.queries">CartByCustomerIdFetch</a></dt>
 <dd>&nbsp;</dd>
@@ -4629,6 +4707,24 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/ChannelCreateCommand.html#of-io.sphere.sdk.channels.ChannelDraft-">of(ChannelDraft)</a></span> - Static method in class io.sphere.sdk.channels.commands.<a href="io/sphere/sdk/channels/commands/ChannelCreateCommand.html" title="class in io.sphere.sdk.channels.commands">ChannelCreateCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/ChannelDeleteCommand.html#of-io.sphere.sdk.models.Versioned-">of(Versioned&lt;Channel&gt;)</a></span> - Static method in class io.sphere.sdk.channels.commands.<a href="io/sphere/sdk/channels/commands/ChannelDeleteCommand.html" title="class in io.sphere.sdk.channels.commands">ChannelDeleteCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/ChannelUpdateCommand.html#of-io.sphere.sdk.models.Versioned-java.util.List-">of(Versioned&lt;Channel&gt;, List&lt;? extends UpdateAction&lt;Channel&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.channels.commands.<a href="io/sphere/sdk/channels/commands/ChannelUpdateCommand.html" title="class in io.sphere.sdk.channels.commands">ChannelUpdateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/ChannelUpdateCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">of(Versioned&lt;Channel&gt;, UpdateAction&lt;Channel&gt;)</a></span> - Static method in class io.sphere.sdk.channels.commands.<a href="io/sphere/sdk/channels/commands/ChannelUpdateCommand.html" title="class in io.sphere.sdk.channels.commands">ChannelUpdateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/AddRoles.html#of-java.util.Set-">of(Set&lt;ChannelRoles&gt;)</a></span> - Static method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/AddRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">AddRoles</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/ChangeDescription.html#of-io.sphere.sdk.models.LocalizedStrings-">of(LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.channels.commands.updateactions">ChangeDescription</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/ChangeKey.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.channels.commands.updateactions">ChangeKey</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/ChangeName.html#of-io.sphere.sdk.models.LocalizedStrings-">of(LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.channels.commands.updateactions">ChangeName</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/RemoveRoles.html#of-java.util.Set-">of(Set&lt;ChannelRoles&gt;)</a></span> - Static method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/RemoveRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">RemoveRoles</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/commands/updateactions/SetRoles.html#of-java.util.Set-">of(Set&lt;ChannelRoles&gt;)</a></span> - Static method in class io.sphere.sdk.channels.commands.updateactions.<a href="io/sphere/sdk/channels/commands/updateactions/SetRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">SetRoles</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelByIdFetch.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="class in io.sphere.sdk.channels.queries">ChannelByIdFetch</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelByKeyFetch.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelByKeyFetch.html" title="class in io.sphere.sdk.channels.queries">ChannelByKeyFetch</a></dt>
 <dd>&nbsp;</dd>
@@ -5924,7 +6020,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block"><div id="io-sphere-sdk-products-ProductDeleteExample-delete--%s" class=code-example><pre><code class='java'>final DeleteCommand&lt;Product&gt; command = ProductDeleteCommand.of(product);
 final CompletionStage&lt;Product&gt; deletedProduct = client.execute(command);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/ProductDeleteExample.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductDeleteExample.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts"><span class="typeNameLink">ProductDiscount</span></a> - Interface in <a href="io/sphere/sdk/productdiscounts/package-summary.html">io.sphere.sdk.productdiscounts</a></dt>
 <dd>&nbsp;</dd>
@@ -6316,7 +6412,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 
     return updatedProduct;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions"><span class="typeNameLink">RemoveQuantity</span></a> - Class in <a href="io/sphere/sdk/inventories/commands/updateactions/package-summary.html">io.sphere.sdk.inventories.commands.updateactions</a></dt>
 <dd>
@@ -6327,7 +6423,17 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
     assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() - removingQuantity);
     return updatedEntry;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
+<dt><a href="io/sphere/sdk/channels/commands/updateactions/RemoveRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">RemoveRoles</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-removeRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), asSet(ORDER_IMPORT, PRIMARY), channel -&gt; {
+    final Set&lt;ChannelRoles&gt; roles = asSet(ORDER_IMPORT);
+    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, RemoveRoles.of(roles)));
+    assertThat(updatedChannel.getRoles()).containsOnly(PRIMARY);
+    return updatedChannel;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">RemoveShippingRate</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
@@ -6363,7 +6469,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
         return shippingMethodWithoutZone;
     });
 }, CountryCode.EA);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/RemoveVariant.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">RemoveVariant</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -6403,7 +6509,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
         return shippingMethodWithoutZone;
     });
 }, CountryCode.EA);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a></dt>
 <dd>&nbsp;</dd>
@@ -6566,7 +6672,7 @@ final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddres
 OptionalAssert.assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
 final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(Optional.empty())));
 OptionalAssert.assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetCompanyName.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetCompanyName</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
@@ -6581,7 +6687,7 @@ OptionalAssert.assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
 
     assertThat(updatedCustomer.getCompanyName()).isPresentAs(companyName);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetCountry.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetCountry</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -6596,7 +6702,7 @@ OptionalAssert.assertThat(cart.getCustomerEmail()).isAbsent();
 final String email = "info@commercetools.de";
 final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
 OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetCustomerGroup.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetCustomerGroup</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
@@ -6607,7 +6713,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
         assertThat(updateCustomer.getCustomerGroup()).isPresentAs(customerGroup.toReference());
     });
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomerId.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetCustomerId</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -6647,7 +6753,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     assertThat(updatedShippingMethod.getDescription().get()).isEqualTo(newDescription);
     return updatedShippingMethod;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">SetDescription</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>&nbsp;</dd>
@@ -6666,7 +6772,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
             .isNotEqualTo(entry.getExpectedDelivery());
     return updatedEntry;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetExternalId.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetExternalId</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
@@ -6690,7 +6796,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     assertThat(updatedState.getName()).isPresentAs(newName);
     return updatedState;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SetUtils.html#setOf-T-T:A-">setOf(T, T[])</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SetUtils.html" title="class in io.sphere.sdk.utils">SetUtils</a></dt>
 <dd>&nbsp;</dd>
@@ -6702,7 +6808,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
     assertThat(updatedOrder.getOrderNumber()).isPresentAs(orderNumber);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereException.html#setProjectKey-java.util.Optional-">setProjectKey(Optional&lt;String&gt;)</a></span> - Method in exception io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></dt>
 <dd>&nbsp;</dd>
@@ -6717,7 +6823,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     assertThat(updatedEntry.getRestockableInDays()).isPresentAs(restockableInDays);
     return updatedEntry;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnPaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">SetReturnPaymentState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
@@ -6730,7 +6836,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     final ReturnPaymentState updatedPaymentState = updatedOrder.getReturnInfo().get(0).getItems().get(0).getPaymentState();
     assertThat(updatedPaymentState).isEqualTo(newPaymentState);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">SetReturnShipmentState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
@@ -6743,7 +6849,17 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     final ReturnShipmentState updatedReturnItem = updatedOrder.getReturnInfo().get(0).getItems().get(0).getShipmentState();
     assertThat(updatedReturnItem).isEqualTo(newShipmentState);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
+<dt><a href="io/sphere/sdk/channels/commands/updateactions/SetRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">SetRoles</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-setRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -&gt; {
+    final Set&lt;ChannelRoles&gt; roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
+    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, SetRoles.of(roles)));
+    assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY);
+    return updatedChannel;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetSearchKeywords</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -6756,7 +6872,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     assertThat(actualKeywords).isEqualTo(searchKeywords);
     return updatedProduct;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetShippingAddress</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -6793,7 +6909,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     });
     return stateA;
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/attributes/SetType.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">SetType</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
@@ -6814,7 +6930,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 
     assertThat(updatedCustomer.getVatId()).isPresentAs(vatId);
 });
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#setVersion-long-">setVersion(long)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -7056,7 +7172,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html#staged--">staged()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemBuilder.html#state-java.util.List-">state(List&lt;ItemState&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemBuilder.html#state-java.util.Set-">state(Set&lt;ItemState&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#state--">state()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -7211,6 +7327,10 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#taxedPrice-java.util.Optional-">taxedPrice(Optional&lt;TaxedPrice&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/TaxPortion.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">TaxPortion</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemBuilder.html#taxRate-io.sphere.sdk.taxcategories.TaxRate-">taxRate(TaxRate)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemBuilder.html#taxRate-java.util.Optional-">taxRate(Optional&lt;TaxRate&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html#taxRate-io.sphere.sdk.taxcategories.TaxRate-">taxRate(TaxRate)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -7610,7 +7730,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
         assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
     })
 );
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/UrlUtils.html#urlEncode-java.lang.String-">urlEncode(String)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/UrlUtils.html" title="class in io.sphere.sdk.http">UrlUtils</a></dt>
 <dd>

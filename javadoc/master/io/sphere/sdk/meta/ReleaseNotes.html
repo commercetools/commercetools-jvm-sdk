@@ -112,6 +112,52 @@ extends java.lang.Object</pre>
  <li class=fixed-in-release>bugfix, can include a breaking change</li>
  </ul>
 
+ <!--
+ <ul>
+ <li class=removed-in-release></li>
+ <li class=new-in-release></li>
+ <li class=change-in-release></li>
+ <li class=fixed-in-release></li>
+ </ul>
+ -->
+
+ <h3 class=released-version id=v1_0_0_M13>1.0.0-M13</h3>
+ <ul>
+     <li class=new-in-release><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html#mapValue-java.util.function.BiFunction-"><code>LocalizedStrings.mapValue(BiFunction)</code></a> and <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html#stream--"><code>LocalizedStrings.stream()</code></a>
+     can be used transform <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models"><code>LocalizedStrings</code></a>, for example for creating slugs or formatting.</li>
+     <li class=new-in-release>Experimental <a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html" title="class in io.sphere.sdk.utils"><code>CompletableFutureUtils</code></a> to work with Java 8 Futures.</li>
+     <li class=new-in-release><a href="../../../../io/sphere/sdk/meta/AsyncDocumentation.html" title="class in io.sphere.sdk.meta"><code>AsyncDocumentation</code></a> documents how to work with <code>CompletableFuture</code> and <code>CompletionStage</code>.</li>
+
+     <li class=new-in-release><a href="../../../../io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models"><code>SphereException</code></a>s may give hint to developers how to recover from errors. For example on typical elasticsearch related problems it suggests to reindex the product index.</li>
+     <li class=new-in-release>The JVM SDK is available for Ning Async HTTP Client 1.8 and 1.9 (incompatible to 1.8).</li>
+     <li class=new-in-release>State update actions and <a href="../../../../io/sphere/sdk/states/StateBuilder.html" title="class in io.sphere.sdk.states"><code>StateBuilder</code></a> contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
+     <li class=new-in-release>Embedded predicates ("where") now support lambda syntax: <a href="../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html#where-java.util.function.Function-"><code>ProductVariantQueryModel.where(java.util.function.Function)</code></a>.</li>
+     <li class=new-in-release>Use <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#allVariants--"><code>ProductProjectionQueryModel.allVariants()</code></a> to formulate a predicate for all variants. In SPHERE.IO masterVariant and variants together contain all variants.</li>
+     <li class=new-in-release><a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerId-java.lang.String-"><code>OrderQuery.byCustomerId(java.lang.String)</code></a> and <a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerEmail-java.lang.String-"><code>OrderQuery.byCustomerEmail(java.lang.String)</code></a></li>
+     <li class=new-in-release><a href="../../../../io/sphere/sdk/channels/commands/ChannelUpdateCommand.html" title="class in io.sphere.sdk.channels.commands"><code>ChannelUpdateCommand</code></a></li>
+     <li class=new-in-release><a href="../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="class in io.sphere.sdk.channels.queries"><code>ChannelByIdFetch</code></a></li>
+     <li class=new-in-release><a href="../../../../io/sphere/sdk/customers/queries/CustomerQuery.html#byEmail-java.lang.String-"><code>CustomerQuery.byEmail(java.lang.String)</code></a></li>
+     <li class=change-in-release><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> has been refactored:<ul>
+         <li><code>Function&lt;HttpResponse, T&gt; resultMapper()</code> is now <a href="../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.deserialize(HttpResponse)</code></a></li>
+         <li><code>boolean canHandleResponse(final HttpResponse response)</code> is now <a href="../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.canDeserialize(HttpResponse)</code></a></li>
+       </ul>
+     </li>
+     <li class=change-in-release>Artifact IDs start now with "-sphere".</li>
+     <li class=change-in-release>In APIs <code>CompletableFuture</code> has been replaced with <code>CompletionStage</code>.
+
+       You can convert from <code>CompletionStage</code> to <code>CompletableFuture</code> with <code>CompletionStage.toCompletableFuture()</code>.
+
+       The opposite direction can be achieved with assigning <code>CompletableFuture</code> (implementation) to <code>CompletionStage</code> (interface).</li>
+     <li class=change-in-release>Refactoring of <a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a>, <code>&lt;T&gt; CompletionStage&lt;T&gt; execute(final SphereRequest&lt;T&gt; sphereRequest)</code>
+     is now <a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.client.SphereRequest-"><code>SphereClient.execute(SphereRequest)</code></a> which returns <code>CompletionStage</code> instead of <code>CompletableFuture</code>.
+     </li>
+     <li class=change-in-release><a href="../../../../io/sphere/sdk/carts/LineItem.html#getTaxRate--"><code>LineItem.getTaxRate()</code></a> is optional.</li>
+     <li class=change-in-release><a href="../../../../io/sphere/sdk/carts/LineItem.html#getState--"><code>LineItem.getState()</code></a> is now a set instead of a list.</li>
+     <li class=change-in-release><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getCategories--"><code>ProductProjection.getCategories()</code></a> returns a set instead of a list.</li>
+
+    <li class=fixed-in-release>URL encoding of parameters. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/240">#240</a>.</li>
+ </ul>
+
  <h3 class=released-version id=v1_0_0_M12>1.0.0-M12</h3>
  <ul>
  <li class=new-in-release>Added the <a href="../../../../io/sphere/sdk/orders/commands/OrderImportCommand.html" title="class in io.sphere.sdk.orders.commands"><code>OrderImportCommand</code></a>.</li>
