@@ -21,7 +21,7 @@ public class InventoryEntryQueryTest extends IntegrationTest {
     @Test
     public void pure() throws Exception {
         withUpdateableInventoryEntry(client(), entry -> {
-            final QueryDsl<InventoryEntry> query = InventoryEntryQuery.of().withSort(Sort.of("createdAt desc"));
+            final QueryDsl<InventoryEntry> query = InventoryEntryQuery.of().withSort(QuerySort.of("createdAt desc"));
             final PagedQueryResult<InventoryEntry> result = execute(query);
             assertThat(result.head().get().getId()).isEqualTo(entry.getId());
             return entry;
@@ -47,7 +47,7 @@ public class InventoryEntryQueryTest extends IntegrationTest {
                 final Predicate<InventoryEntry> predicate = skuP.and(channelP).and(availableP).and(stockP);
                 final QueryDsl<InventoryEntry> query = InventoryEntryQuery.of()
                         .withPredicate(predicate)
-                        .withSort(model().id().sort(SortDirection.DESC));
+                        .withSort(model().id().sort(QuerySortDirection.DESC));
                 final PagedQueryResult<InventoryEntry> result = execute(query);
                 assertThat(result.head().map(e -> e.getId())).isPresentAs(entry.getId());
                 return entry;

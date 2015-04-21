@@ -1,9 +1,9 @@
 package io.sphere.sdk.queries;
 
-final class SimpleSort<T> extends SortBase<T> {
+final class SimpleQuerySort<T> extends QuerySortBase<T> {
     private final String sphereSortExpression;
 
-    SimpleSort(final String sphereSortExpression) {
+    SimpleQuerySort(final String sphereSortExpression) {
         this.sphereSortExpression = sphereSortExpression;
     }
 

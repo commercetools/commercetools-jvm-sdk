@@ -9,13 +9,13 @@ import static io.sphere.sdk.utils.ListUtils.listOf;
  * @param <T> context type, like Channel
  * @param <V> argument type, Integer or Long
  */
-public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<T> implements SortingModel<T> {
+public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<T> implements QuerySortingModel<T> {
     protected IntegerLikeQuerySortingModel(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
-    public Sort<T> sort(SortDirection sortDirection) {
-        return new SphereSort<>(this, sortDirection);
+    public QuerySort<T> sort(QuerySortDirection sortDirection) {
+        return new SphereQuerySort<>(this, sortDirection);
     }
 
     public Predicate<T> is(final V i) {

@@ -1,5 +1,5 @@
 package io.sphere.sdk.queries;
 
-public enum SortDirection {
+public enum QuerySortDirection {
     ASC, DESC
 }

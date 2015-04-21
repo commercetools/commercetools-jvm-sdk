@@ -2,10 +2,10 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Base;
 
-abstract class SortBase<T> extends Base implements Sort<T> {
+abstract class QuerySortBase<T> extends Base implements QuerySort<T> {
     @Override
     public final boolean equals(Object o) {
-        return o != null && o instanceof Sort && toSphereSort().equals(((Sort) o).toSphereSort());
+        return o != null && o instanceof QuerySort && toSphereSort().equals(((QuerySort) o).toSphereSort());
     }
 
     @Override

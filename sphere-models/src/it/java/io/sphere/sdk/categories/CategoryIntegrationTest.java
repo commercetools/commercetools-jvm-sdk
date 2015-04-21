@@ -15,7 +15,7 @@ import org.junit.Test;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
-import static io.sphere.sdk.queries.SortDirection.DESC;
+import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;

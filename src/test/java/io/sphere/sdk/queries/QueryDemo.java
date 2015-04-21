@@ -46,9 +46,9 @@ public class QueryDemo {
     private void withPagination() {
         Predicate<Category> predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
 
-        Sort<Category> sortByName = CategoryQuery.model().name().lang(locale).sort(SortDirection.DESC);
-        Sort<Category> sortById = CategoryQuery.model().id().sort(SortDirection.ASC);
-        List<Sort<Category>> sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
+        QuerySort<Category> sortByName = CategoryQuery.model().name().lang(locale).sort(QuerySortDirection.DESC);
+        QuerySort<Category> sortById = CategoryQuery.model().id().sort(QuerySortDirection.ASC);
+        List<QuerySort<Category>> sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
 
         int offset = 1;//skip first page
         int limit = 200;//collect at most 200 entities per request

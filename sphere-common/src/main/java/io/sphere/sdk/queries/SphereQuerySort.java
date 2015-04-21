@@ -1,10 +1,10 @@
 package io.sphere.sdk.queries;
 
-public class SphereSort<T> extends SortBase<T> {
+public class SphereQuerySort<T> extends QuerySortBase<T> {
     private final QueryModel<T> path;
-    private final SortDirection direction;
+    private final QuerySortDirection direction;
 
-    protected SphereSort(QueryModel<T> path, SortDirection direction) {
+    protected SphereQuerySort(QueryModel<T> path, QuerySortDirection direction) {
         this.path = path;
         this.direction = direction;
     }

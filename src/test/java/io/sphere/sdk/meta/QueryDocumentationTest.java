@@ -10,13 +10,13 @@ import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.queries.ExpansionPath;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.QueryDsl;
-import io.sphere.sdk.queries.Sort;
+import io.sphere.sdk.queries.QuerySort;
 import org.junit.Test;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
-import static io.sphere.sdk.queries.SortDirection.ASC;
-import static io.sphere.sdk.queries.SortDirection.DESC;
+import static io.sphere.sdk.queries.QuerySortDirection.ASC;
+import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static org.fest.assertions.Assertions.assertThat;
@@ -83,23 +83,23 @@ public class QueryDocumentationTest {
     }
 
     public void sortByName() {
-        final Sort<Product> byNameAsc = ProductQuery.model().masterData().current().name()
+        final QuerySort<Product> byNameAsc = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).sort(ASC);
         final QueryDsl<Product> query = ProductQuery.of().withSort(asList(byNameAsc));
     }
 
     public void sortByNameAscAndIdDesc() {
-        final Sort<Product> byNameAsc = ProductQuery.model().masterData().current().name()
+        final QuerySort<Product> byNameAsc = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).sort(ASC);
-        final Sort<Product> byIdDesc = ProductQuery.model().id().sort(DESC);
+        final QuerySort<Product> byIdDesc = ProductQuery.model().id().sort(DESC);
         final QueryDsl<Product> query = ProductQuery.of().withSort(asList(byNameAsc, byIdDesc));
     }
 
     @Test
     public void sortCreationByString() {
-        final Sort<Product> safeSort = ProductQuery.model().masterData().current().name()
+        final QuerySort<Product> safeSort = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).sort(ASC);
-        final Sort<Product> unsafeSort = Sort.of("masterData.current.name.en asc");
+        final QuerySort<Product> unsafeSort = QuerySort.of("masterData.current.name.en asc");
         assertThat(safeSort).isEqualTo(unsafeSort);
     }
 
