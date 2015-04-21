@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.queries.SortDirection.*;
+import static io.sphere.sdk.queries.QuerySortDirection.*;
 
 public class StringQuerySortingModelTest {
     private final StringQuerySortingModel<Fixtures.Product> model = new StringQuerySortingModel<>(Optional.empty(), "id");

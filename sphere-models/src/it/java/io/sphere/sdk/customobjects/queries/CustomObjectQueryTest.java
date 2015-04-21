@@ -6,8 +6,7 @@ import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.Foo;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryDsl;
-import io.sphere.sdk.queries.Sort;
-import io.sphere.sdk.queries.SortDirection;
+import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -15,7 +14,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static io.sphere.sdk.customobjects.CustomObjectFixtures.withCustomObject;
-import static io.sphere.sdk.queries.SortDirection.DESC;
+import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.test.SphereTestUtils.toIds;
 import static org.fest.assertions.Assertions.assertThat;
 
@@ -51,7 +50,7 @@ public class CustomObjectQueryTest extends IntegrationTest {
     @Test
     public void queryPureJson() throws Exception {
         withCustomObject(client(), existingCustomObject -> {
-            final Sort<CustomObject<JsonNode>> sort = CustomObjectQuery.<JsonNode>model().createdAt().sort(DESC);
+            final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQuery.<JsonNode>model().createdAt().sort(DESC);
             final QueryDsl<CustomObject<JsonNode>> clientRequest = CustomObjectQuery.of().withSort(sort);
             final PagedQueryResult<CustomObject<JsonNode>> result = execute(clientRequest);
             assertThat(result.getResults().stream().filter(item -> item.hasSameIdAs(existingCustomObject)).count())

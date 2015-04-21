@@ -7,14 +7,14 @@ import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static io.sphere.sdk.utils.ListUtils.*;
 import static java.util.stream.Collectors.toList;
 
-public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements SortingModel<T>, StringQueryModel<T> {
+public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements QuerySortingModel<T>, StringQueryModel<T> {
     public StringQuerySortingModel(Optional<? extends QueryModel<T>> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 
     @Override
-    public Sort<T> sort(SortDirection sortDirection) {
-        return new SphereSort<>(this, sortDirection);
+    public QuerySort<T> sort(QuerySortDirection sortDirection) {
+        return new SphereQuerySort<>(this, sortDirection);
     }
 
     /**

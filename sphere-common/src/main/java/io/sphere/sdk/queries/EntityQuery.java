@@ -18,7 +18,7 @@ public interface EntityQuery<T> extends Query<T> {
     /**
      * @return the used sort expressions for this query
      */
-    List<Sort<T>> sort();
+    List<QuerySort<T>> sort();
 
     Optional<Long> limit();
 

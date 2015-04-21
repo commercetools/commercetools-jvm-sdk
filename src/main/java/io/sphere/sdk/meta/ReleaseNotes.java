@@ -25,6 +25,11 @@ import java.util.function.BiFunction;
  </ul>
  -->
 
+ <h3 class=released-version id=v1_0_0_M14>1.0.0-M14</h3>
+ <ul>
+     <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
+ </ul>
+
  <h3 class=released-version id=v1_0_0_M13>1.0.0-M13</h3>
  <ul>
      <li class=new-in-release>{@link io.sphere.sdk.models.LocalizedStrings#mapValue(BiFunction)} and {@link LocalizedStrings#stream()}

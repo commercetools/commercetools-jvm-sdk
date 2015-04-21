@@ -13,8 +13,8 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class QueryDslTest {
 
-    private static final Sort<String> FOO_SORT = Sort.of("foo ASC");
-    private static final Sort<String> ID_SORT = Sort.of("id asc");
+    private static final QuerySort<String> FOO_SORT = QuerySort.of("foo ASC");
+    private static final QuerySort<String> ID_SORT = QuerySort.of("id asc");
     private final QueryDsl<String> prototype = new QueryDslImpl<>("/categories", new TypeReference<PagedQueryResult<String>>() {
     });
 
@@ -38,23 +38,23 @@ public class QueryDslTest {
 
     @Test
     public void pathWithSort() throws Exception {
-        assertThat(prototype.withSort(asList(Sort.<String>of("name.en desc"))).httpRequestIntent().getPath()).isEqualTo(("/categories?sort=name.en+desc"));
+        assertThat(prototype.withSort(asList(QuerySort.<String>of("name.en desc"))).httpRequestIntent().getPath()).isEqualTo(("/categories?sort=name.en+desc"));
     }
 
     @Test
     public void pathWith2Sorts() throws Exception {
-        assertThat(prototype.withSort(asList(Sort.<String>of("name.en desc"), Sort.<String>of("id asc"))).httpRequestIntent().getPath()).isEqualTo(("/categories?sort=name.en+desc&sort=id+asc"));
+        assertThat(prototype.withSort(asList(QuerySort.<String>of("name.en desc"), QuerySort.<String>of("id asc"))).httpRequestIntent().getPath()).isEqualTo(("/categories?sort=name.en+desc&sort=id+asc"));
     }
 
     @Test
     public void pathWithPredicateSortLimitAndOffset() throws Exception {
-        final QueryDsl<String> query = prototype.withSort(asList(Sort.<String>of("name.en desc"))).withPredicate(namePredicate).withOffset(400).withLimit(25);
+        final QueryDsl<String> query = prototype.withSort(asList(QuerySort.<String>of("name.en desc"))).withPredicate(namePredicate).withOffset(400).withLimit(25);
         assertThat(query.httpRequestIntent().getPath()).isEqualTo(("/categories?where=name%28en%3D%22myCategory%22%29&sort=name.en+desc&limit=25&offset=400"));
     }
 
     @Test
     public void haveAnIdSorterByDefaultToPreventRandomOrderPaging() throws Exception {
-        assertThat(prototype.sort()).containsExactly(Sort.of("id asc"));
+        assertThat(prototype.sort()).containsExactly(QuerySort.of("id asc"));
     }
 
     @Test
@@ -69,7 +69,7 @@ public class QueryDslTest {
     @Test
     public void provideACopyMethodForSort() throws Exception {
         assertThat(prototype.sort().get(0).toSphereSort()).isEqualTo(("id asc"));
-        final List<Sort<String>> sortList = asList(Sort.<String>of("foo desc"));
+        final List<QuerySort<String>> sortList = asList(QuerySort.<String>of("foo desc"));
         final QueryDsl<String> other = prototype.withSort(sortList);
         assertThat(other.sort()).isEqualTo(sortList);
         assertThat(other).isNotSameAs(prototype);
