@@ -31,6 +31,6 @@ public class VariantSearchSortTest {
     }
 
     private StringSearchModel<ProductProjection, VariantSearchSortDirection> attributeModel() {
-        return MODEL.variants().attribute().ofText("size");
+        return MODEL.allVariants().attribute().ofText("size");
     }
 }

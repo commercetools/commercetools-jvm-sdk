@@ -12,7 +12,7 @@ class ProductDataSearchModelBase extends SearchModelImpl<ProductProjection> {
         super(parent, pathSegment);
     }
 
-    public ProductVariantSearchModel variants() {
+    public ProductVariantSearchModel allVariants() {
         return new ProductVariantSearchModel(Optional.of(this), "variants");
     }
 

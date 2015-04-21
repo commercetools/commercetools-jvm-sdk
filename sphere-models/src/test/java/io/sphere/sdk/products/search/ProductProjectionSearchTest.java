@@ -57,16 +57,16 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canAccessPriceAmount() throws Exception {
-        assertThat(MODEL.variants().price().amount().facet().all().toSphereFacet()).isEqualTo("variants.price.centAmount");
-        assertThat(MODEL.variants().price().amount().filter().is(valueOf(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
-        assertThat(MODEL.variants().price().amount().sort(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("price asc");
+        assertThat(MODEL.allVariants().price().amount().facet().all().toSphereFacet()).isEqualTo("variants.price.centAmount");
+        assertThat(MODEL.allVariants().price().amount().filter().is(valueOf(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
+        assertThat(MODEL.allVariants().price().amount().sort(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("price asc");
     }
 
     @Test
     public void canAccessPriceCurrency() throws Exception {
-        assertThat(MODEL.variants().price().currency().facet().all().toSphereFacet()).isEqualTo("variants.price.currencyCode");
-        assertThat(MODEL.variants().price().currency().filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.price.currencyCode:\"EUR\"");
-        assertThat(MODEL.variants().price().currency().sort(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("variants.price.currencyCode asc");
+        assertThat(MODEL.allVariants().price().currency().facet().all().toSphereFacet()).isEqualTo("variants.price.currencyCode");
+        assertThat(MODEL.allVariants().price().currency().filter().is(currency("EUR")).toSphereFilter()).isEqualTo("variants.price.currencyCode:\"EUR\"");
+        assertThat(MODEL.allVariants().price().currency().sort(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("variants.price.currencyCode asc");
     }
 
     @Test
@@ -197,7 +197,7 @@ public class ProductProjectionSearchTest {
     }
 
     private ProductAttributeSearchModel attributeModel() {
-        return MODEL.variants().attribute();
+        return MODEL.allVariants().attribute();
     }
 
     private Product product(String id) {
