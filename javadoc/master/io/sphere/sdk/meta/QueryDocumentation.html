@@ -172,9 +172,9 @@ Query&lt;Category&gt; query = CategoryQuery.of().withPredicate(predicate);
 
  <div id="io-sphere-sdk-queries-QueryDemo-withPagination--%s" class=code-example><pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
 
-Sort&lt;Category&gt; sortByName = CategoryQuery.model().name().lang(locale).sort(SortDirection.DESC);
-Sort&lt;Category&gt; sortById = CategoryQuery.model().id().sort(SortDirection.ASC);
-List&lt;Sort&lt;Category&gt;&gt; sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
+QuerySort&lt;Category&gt; sortByName = CategoryQuery.model().name().lang(locale).sort(QuerySortDirection.DESC);
+QuerySort&lt;Category&gt; sortById = CategoryQuery.model().id().sort(QuerySortDirection.ASC);
+List&lt;QuerySort&lt;Category&gt;&gt; sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
 
 int offset = 1;//skip first page
 int limit = 200;//collect at most 200 entities per request
@@ -330,16 +330,16 @@ final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsNotF
  <p>To specify the sorting use <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-"><code>QueryDsl.withSort(java.util.List)</code></a>.</p>
  The following example sorts by name in the English locale.
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByName--%s" class=code-example><pre><code class='java'>final Sort&lt;Product&gt; byNameAsc = ProductQuery.model().masterData().current().name()
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByName--%s" class=code-example><pre><code class='java'>final QuerySort&lt;Product&gt; byNameAsc = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).sort(ASC);
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withSort(asList(byNameAsc));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  You can sort by multiple values, for example for name ascending and ID descending:
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByNameAscAndIdDesc--%s" class=code-example><pre><code class='java'>final Sort&lt;Product&gt; byNameAsc = ProductQuery.model().masterData().current().name()
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortByNameAscAndIdDesc--%s" class=code-example><pre><code class='java'>final QuerySort&lt;Product&gt; byNameAsc = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).sort(ASC);
-final Sort&lt;Product&gt; byIdDesc = ProductQuery.model().id().sort(DESC);
+final QuerySort&lt;Product&gt; byIdDesc = ProductQuery.model().id().sort(DESC);
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withSort(asList(byNameAsc, byIdDesc));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -347,9 +347,9 @@ Like in the case of the predicates, you can traverse the query model tree to spe
 
  <p>If the SDK lacks of a method to create the sort expression, you can still provide it via a string:</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortCreationByString--%s" class=code-example><pre><code class='java'>final Sort&lt;Product&gt; safeSort = ProductQuery.model().masterData().current().name()
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-sortCreationByString--%s" class=code-example><pre><code class='java'>final QuerySort&lt;Product&gt; safeSort = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).sort(ASC);
-final Sort&lt;Product&gt; unsafeSort = Sort.of("masterData.current.name.en asc");
+final QuerySort&lt;Product&gt; unsafeSort = QuerySort.of("masterData.current.name.en asc");
 assertThat(safeSort).isEqualTo(unsafeSort);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
