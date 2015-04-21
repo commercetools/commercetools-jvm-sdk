@@ -11,12 +11,12 @@ public class ReferenceSearchModel<T, R> extends SearchModelImpl<T> implements Te
     }
 
     @Override
-    public FilterSearchModel<T, Referenceable<R>> filter() {
+    public FilterSearchModel<T, Referenceable<R>> filterBy() {
         return new FilterSearchModel<>(Optional.of(this), Optional.of("id"), TypeSerializer.<R>ofReference());
     }
 
     @Override
-    public FacetSearchModel<T, Referenceable<R>> facet() {
+    public FacetSearchModel<T, Referenceable<R>> facetOf() {
         return new FacetSearchModel<>(Optional.of(this), Optional.of("id"), TypeSerializer.<R>ofReference());
     }
 }

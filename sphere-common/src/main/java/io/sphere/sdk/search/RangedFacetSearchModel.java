@@ -39,38 +39,38 @@ public class RangedFacetSearchModel<T, V extends Comparable<? super V>> extends 
         return super.only(values);
     }
 
-    public RangeFacetExpression<T, V> onlyWithin(final FacetRange<V> range) {
-        return onlyWithin(asList(range));
+    public RangeFacetExpression<T, V> range(final FacetRange<V> range) {
+        return range(asList(range));
     }
 
-    public RangeFacetExpression<T, V> onlyWithin(final Iterable<FacetRange<V>> ranges) {
+    public RangeFacetExpression<T, V> range(final Iterable<FacetRange<V>> ranges) {
         return new RangeFacetExpression<>(this, typeSerializer, ranges, alias);
     }
 
-    public RangeFacetExpression<T, V> onlyWithin(final V lowerEndpoint, final V upperEndpoint) {
-        return onlyWithin(FacetRange.of(lowerEndpoint, upperEndpoint));
+    public RangeFacetExpression<T, V> range(final V lowerEndpoint, final V upperEndpoint) {
+        return range(FacetRange.of(lowerEndpoint, upperEndpoint));
     }
 
-    public RangeFacetExpression<T, V> onlyGreaterThanOrEqualTo(final V value) {
-        return onlyWithin(FacetRange.atLeast(value));
+    public RangeFacetExpression<T, V> greaterThanOrEqualTo(final V value) {
+        return range(FacetRange.atLeast(value));
     }
 
-    public RangeFacetExpression<T, V> onlyLessThan(final V value) {
-        return onlyWithin(FacetRange.lessThan(value));
+    public RangeFacetExpression<T, V> lessThan(final V value) {
+        return range(FacetRange.lessThan(value));
     }
 
     // NOT SUPPORTED YET
 /*
-    public RangeFacetExpression<T, V> onlyGreaterThan(final V value) {
-        return onlyWithin(Range.greaterThan(value));
+    public RangeFacetExpression<T, V> greaterThan(final V value) {
+        return range(Range.greaterThan(value));
     }
 
-    public RangeFacetExpression<T, V> onlyLessThanOrEqualTo(final V value) {
-        return onlyWithin(Range.atMost(value));
+    public RangeFacetExpression<T, V> lessThanOrEqualTo(final V value) {
+        return range(Range.atMost(value));
     }
 
     public RangeFacetExpression<T, V> allRanges() {
-        return onlyWithin(Range.all());
+        return range(Range.all());
     }
 */
 }

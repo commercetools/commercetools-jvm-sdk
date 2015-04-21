@@ -2,7 +2,7 @@ package io.sphere.sdk.search;
 
 public interface TermModel<T, V> {
 
-    public FilterSearchModel<T, V> filter();
+    FilterSearchModel<T, V> filterBy();
 
-    public FacetSearchModel<T, V> facet();
+    FacetSearchModel<T, V> facetOf();
 }

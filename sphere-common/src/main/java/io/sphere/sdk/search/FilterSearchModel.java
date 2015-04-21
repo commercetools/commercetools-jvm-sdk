@@ -12,11 +12,11 @@ public class FilterSearchModel<T, V> extends SearchModelImpl<T> {
         this.typeSerializer = typeSerializer;
     }
 
-    public FilterExpression<T> is(final V value) {
-        return isIn(asList(value));
+    public FilterExpression<T> exactly(final V value) {
+        return exactly(asList(value));
     }
 
-    public FilterExpression<T> isIn(final Iterable<V> values) {
+    public FilterExpression<T> exactly(final Iterable<V> values) {
         return new TermFilterExpression<>(this, typeSerializer, values);
     }
 }
