@@ -21,8 +21,8 @@ public class ExperimentalProductProjectionSearchModel extends ProductDataSearchM
     }
 
     @Override
-    public ProductVariantSearchModel variants() {
-        return super.variants();
+    public ProductVariantSearchModel allVariants() {
+        return super.allVariants();
     }
 
     @Override
