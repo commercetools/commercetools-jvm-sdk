@@ -94,7 +94,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
         withTaxCategory(client(), taxCategory -> {
             final Cart cart = createCartWithCountry(client());
             assertThat(cart.getCustomLineItems()).hasSize(0);
-            final MonetaryAmount money = MoneyImpl.of(new BigDecimal("23.50"), EUR);
+            final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
             final String slug = "thing-slug";
             final LocalizedStrings name = en("thing");
             final long quantity = 5;
