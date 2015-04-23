@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders.commands;
 
+import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.orders.*;
@@ -172,6 +173,20 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 final Instant actualTransitionDate = INSTANT_IN_PAST;
                 final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
                 assertThat(updatedOrder.getLineItems().get(0)).containsItemState(ItemState.of(nextState, quantity));
+            })
+        );
+    }
+
+    @Test
+    public void transitionCustomLineItemState() throws Exception {
+        withStandardStates(client(), (State initialState, State nextState) ->
+            withOrderOfCustomLineItems(client(), order -> {
+                final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
+                assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
+                final int quantity = 1;
+                final Instant actualTransitionDate = INSTANT_IN_PAST;
+                final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
+                assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemState(ItemState.of(nextState, quantity));
             })
         );
     }

@@ -9,6 +9,9 @@ import io.sphere.sdk.states.State;
 import java.time.Instant;
 import java.util.Optional;
 
+/**
+ * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#transitionLineItemState()}
+ */
 public class TransitionLineItemState extends TransitionLineItemLikeState {
 
     private final String lineItemId;
