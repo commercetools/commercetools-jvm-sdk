@@ -2107,6 +2107,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html#getCustomLineItemId--">getCustomLineItemId()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#getCustomLineItemId--">getCustomLineItemId()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
@@ -5064,6 +5066,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html#of-io.sphere.sdk.orders.ReturnItem-io.sphere.sdk.orders.ReturnShipmentState-">of(ReturnItem, ReturnShipmentState)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-java.lang.String-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.util.Optional-">of(String, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.Instant-">of(CustomLineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Instant)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-">of(CustomLineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-java.lang.String-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.util.Optional-">of(String, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-io.sphere.sdk.carts.LineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.Instant-">of(LineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Instant)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
@@ -5803,7 +5811,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="class in io.sphere.sdk.orders.commands"><span class="typeNameLink">OrderUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/orders/commands/package-summary.html">io.sphere.sdk.orders.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddDelivery.html">AddDelivery</a></li><li><a href="updateactions/AddParcelToDelivery.html">AddParcelToDelivery</a></li><li><a href="updateactions/AddReturnInfo.html">AddReturnInfo</a></li><li><a href="updateactions/ChangeOrderState.html">ChangeOrderState</a></li><li><a href="updateactions/ChangePaymentState.html">ChangePaymentState</a></li><li><a href="updateactions/ChangeShipmentState.html">ChangeShipmentState</a></li><li><a href="updateactions/ParcelDraft.html">ParcelDraft</a></li><li><a href="updateactions/SetOrderNumber.html">SetOrderNumber</a></li><li><a href="updateactions/SetReturnPaymentState.html">SetReturnPaymentState</a></li><li><a href="updateactions/SetReturnShipmentState.html">SetReturnShipmentState</a></li><li><a href="updateactions/TransitionLineItemState.html">TransitionLineItemState</a></li><li><a href="updateactions/UpdateSyncInfo.html">UpdateSyncInfo</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddDelivery.html">AddDelivery</a></li><li><a href="updateactions/AddParcelToDelivery.html">AddParcelToDelivery</a></li><li><a href="updateactions/AddReturnInfo.html">AddReturnInfo</a></li><li><a href="updateactions/ChangeOrderState.html">ChangeOrderState</a></li><li><a href="updateactions/ChangePaymentState.html">ChangePaymentState</a></li><li><a href="updateactions/ChangeShipmentState.html">ChangeShipmentState</a></li><li><a href="updateactions/ParcelDraft.html">ParcelDraft</a></li><li><a href="updateactions/SetOrderNumber.html">SetOrderNumber</a></li><li><a href="updateactions/SetReturnPaymentState.html">SetReturnPaymentState</a></li><li><a href="updateactions/SetReturnShipmentState.html">SetReturnShipmentState</a></li><li><a href="updateactions/TransitionCustomLineItemState.html">TransitionCustomLineItemState</a></li><li><a href="updateactions/TransitionLineItemState.html">TransitionLineItemState</a></li><li><a href="updateactions/UpdateSyncInfo.html">UpdateSyncInfo</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/CompletableFutureUtils.html#orElseGet-java.util.concurrent.CompletionStage-java.util.function.Supplier-">orElseGet(CompletionStage&lt;T&gt;, Supplier&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/CompletableFutureUtils.html" title="class in io.sphere.sdk.utils">CompletableFutureUtils</a></dt>
 <dd>&nbsp;</dd>
@@ -7544,8 +7552,34 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/CompletableFutureUtils.html#transferResult-java.util.concurrent.CompletionStage-java.util.concurrent.CompletableFuture-">transferResult(CompletionStage&lt;T&gt;, CompletableFuture&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/CompletableFutureUtils.html" title="class in io.sphere.sdk.utils">CompletableFutureUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">TransitionCustomLineItemState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionCustomLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
+    withOrderOfCustomLineItems(client(), order -&gt; {
+        final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
+        assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
+        final int quantity = 1;
+        final Instant actualTransitionDate = INSTANT_IN_PAST;
+        final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
+        assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemState(ItemState.of(nextState, quantity));
+    })
+);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">TransitionLineItemState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
+    withOrder(client(), order -&gt; {
+        final LineItem lineItem = order.getLineItems().get(0);
+        assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+        final int quantity = 1;
+        final Instant actualTransitionDate = INSTANT_IN_PAST;
+        final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
+        assertThat(updatedOrder.getLineItems().get(0)).containsItemState(ItemState.of(nextState, quantity));
+    })
+);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateBuilder.html#transitions-java.util.Optional-">transitions(Optional&lt;Set&lt;Reference&lt;State&gt;&gt;&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateBuilder.html" title="class in io.sphere.sdk.states">StateBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateBuilder.html#transitions-java.util.Set-">transitions(Set&lt;Reference&lt;State&gt;&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateBuilder.html" title="class in io.sphere.sdk.states">StateBuilder</a></dt>
