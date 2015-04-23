@@ -15,10 +15,14 @@ public final class SetUtils {
         return new HashSet<>(asList(params));
     }
 
-    public static <T> Set<T> setOf(final T element, final T[] array) {
-        final Set<T> result = new HashSet<>(1 + array.length);
+    public static <T> Set<T> setOf(final T element, final Set<T> set) {
+        final Set<T> result = new HashSet<>(1 + set.size());
         result.add(element);
-        result.addAll(asSet(array));
+        result.addAll(set);
         return result;
+    }
+
+    public static <T> Set<T> setOf(final T element, final T[] array) {
+        return setOf(element, asSet(array));
     }
 }

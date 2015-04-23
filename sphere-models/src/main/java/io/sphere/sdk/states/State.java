@@ -25,29 +25,29 @@ import java.util.Set;
 @JsonDeserialize(as = StateImpl.class)
 public interface State extends DefaultModel<State> {
 
-    public String getKey();
+    String getKey();
 
-    public StateType getType();
+    StateType getType();
 
-    public Optional<LocalizedStrings> getName();
+    Optional<LocalizedStrings> getName();
 
-    public Optional<LocalizedStrings> getDescription();
+    Optional<LocalizedStrings> getDescription();
 
-    public boolean isInitial();
+    boolean isInitial();
 
-    public boolean isBuiltIn();
+    boolean isBuiltIn();
 
-    public Optional<Set<Reference<State>>> getTransitions();
+    Optional<Set<Reference<State>>> getTransitions();
 
-    public default Reference<State> toReference() {
+    default Reference<State> toReference() {
         return Reference.of(typeId(), getId());
     }
 
-    public static String typeId(){
+    static String typeId(){
         return "state";
     }
 
-    public static TypeReference<State> typeReference(){
+    static TypeReference<State> typeReference(){
         return new TypeReference<State>() {
             @Override
             public String toString() {

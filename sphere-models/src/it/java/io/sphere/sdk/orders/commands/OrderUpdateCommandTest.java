@@ -1,8 +1,10 @@
 package io.sphere.sdk.orders.commands;
 
+import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.test.IntegrationTest;
 import org.fest.assertions.Assertions;
 import org.junit.Test;
@@ -13,9 +15,11 @@ import java.util.Optional;
 
 import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.orders.OrderFixtures.*;
+import static io.sphere.sdk.states.StateFixtures.withStandardStates;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.carts.LineItemLikeAssert.assertThat;
 
 public class OrderUpdateCommandTest extends IntegrationTest {
 
@@ -156,5 +160,19 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             final ReturnPaymentState updatedPaymentState = updatedOrder.getReturnInfo().get(0).getItems().get(0).getPaymentState();
             assertThat(updatedPaymentState).isEqualTo(newPaymentState);
         });
+    }
+
+    @Test
+    public void transitionLineItemState() throws Exception {
+        withStandardStates(client(), (State initialState, State nextState) ->
+            withOrder(client(), order -> {
+                final LineItem lineItem = order.getLineItems().get(0);
+                assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+                final int quantity = 1;
+                final Instant actualTransitionDate = INSTANT_IN_PAST;
+                final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
+                assertThat(updatedOrder.getLineItems().get(0)).containsItemState(ItemState.of(nextState, quantity));
+            })
+        );
     }
 }
