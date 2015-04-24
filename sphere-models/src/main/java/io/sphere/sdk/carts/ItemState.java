@@ -11,7 +11,7 @@ public class ItemState extends Base {
     private final long quantity;
 
     @JsonCreator
-    private ItemState(Reference<State> state, long quantity) {
+    private ItemState(final Reference<State> state, final long quantity) {
         this.state = state;
         this.quantity = quantity;
     }

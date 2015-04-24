@@ -13,10 +13,12 @@ import org.junit.Test;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.orders.OrderFixtures.*;
 import static io.sphere.sdk.states.StateFixtures.withStandardStates;
+import static io.sphere.sdk.utils.SetUtils.asSet;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -172,7 +174,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 final int quantity = 1;
                 final Instant actualTransitionDate = INSTANT_IN_PAST;
                 final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
-                assertThat(updatedOrder.getLineItems().get(0)).containsItemState(ItemState.of(nextState, quantity));
+                assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
             })
         );
     }
@@ -186,7 +188,20 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 final int quantity = 1;
                 final Instant actualTransitionDate = INSTANT_IN_PAST;
                 final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
-                assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemState(ItemState.of(nextState, quantity));
+                assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+            })
+        );
+    }
+
+    @Test
+    public void importLineItemState() throws Exception {
+        withStandardStates(client(), (State initialState, State nextState) ->
+            withOrder(client(), order -> {
+                final LineItem lineItem = order.getLineItems().get(0);
+                assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+                final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1), ItemState.of(initialState, lineItem.getQuantity() - 1));
+                final Order updatedOrder = execute(OrderUpdateCommand.of(order, ImportLineItemState.of(lineItem, itemStates)));
+                assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
             })
         );
     }
