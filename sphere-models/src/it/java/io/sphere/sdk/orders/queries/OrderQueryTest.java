@@ -1,9 +1,11 @@
 package io.sphere.sdk.orders.queries;
 
 import io.sphere.sdk.carts.CartFixtures;
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
-import io.sphere.sdk.orders.ShipmentState;
+import io.sphere.sdk.orders.commands.OrderUpdateCommand;
+import io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QuerySort;
@@ -12,7 +14,10 @@ import org.junit.Test;
 
 import java.util.function.Function;
 
+import static io.sphere.sdk.channels.ChannelFixtures.persistentChannelOfRole;
+import static io.sphere.sdk.channels.ChannelRoles.ORDER_EXPORT;
 import static io.sphere.sdk.orders.OrderFixtures.withOrder;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class OrderQueryTest extends IntegrationTest {
@@ -63,6 +68,16 @@ public class OrderQueryTest extends IntegrationTest {
     @Test
     public void paymentState() throws Exception {
         assertOrderIsFoundWithPredicate(order -> MODEL.paymentState().is(order.getPaymentState().get()));
+    }
+
+    @Test
+    public void syncInfo() throws Exception {
+        final Channel channel = persistentChannelOfRole(client(), ORDER_EXPORT);
+        assertOrderIsFoundWithPredicate(order -> {
+            final String externalId = randomKey();
+            execute(OrderUpdateCommand.of(order, UpdateSyncInfo.of(channel).withExternalId(externalId)));
+            return MODEL.syncInfo().channel().is(channel).and(MODEL.syncInfo().externalId().is(externalId));
+        });
     }
 
     private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p) {

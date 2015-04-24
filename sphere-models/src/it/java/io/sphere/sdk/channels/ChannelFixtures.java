@@ -14,8 +14,12 @@ import static io.sphere.sdk.utils.SetUtils.asSet;
 
 public class ChannelFixtures {
     public static void withPersistentChannel(final TestClient client, final ChannelRoles channelRole, final Consumer<Channel> f) {
-        final String key = ChannelFixtures.class.getSimpleName() + "-" + channelRole;
+        final String key = getKeyForPersistentChannel(channelRole);
         withPersistent(client, key, channelRole, f);
+    }
+
+    private static String getKeyForPersistentChannel(final ChannelRoles channelRole) {
+        return ChannelFixtures.class.getSimpleName() + "-" + channelRole;
     }
 
     public static void withChannelOfRole(final TestClient client, final ChannelRoles channelRole, final Consumer<Channel> f) {
@@ -39,14 +43,21 @@ public class ChannelFixtures {
     }
 
     private static void withPersistent(final TestClient client, final String key, final ChannelRoles roles, final Consumer<Channel> f) {
-        final ChannelByKeyFetch channelByKeyFetch = ChannelByKeyFetch.of(key);
-        final Channel channel =
-                client.execute(channelByKeyFetch).orElseGet(() -> {
-                    final ChannelCreateCommand channelCreateCommand =
-                            ChannelCreateCommand.of(ChannelDraft.of(key).withRoles(roles));
-                    return client.execute(channelCreateCommand);
-                });
+        final Channel channel = getOrCreateChannel(client, key, roles);
         f.accept(channel);
+    }
+
+    public static Channel persistentChannelOfRole(final TestClient client, final ChannelRoles roles) {
+        return getOrCreateChannel(client, getKeyForPersistentChannel(roles), roles);
+    }
+
+    private static Channel getOrCreateChannel(final TestClient client, final String key, final ChannelRoles roles) {
+        final ChannelByKeyFetch channelByKeyFetch = ChannelByKeyFetch.of(key);
+        return client.execute(channelByKeyFetch).orElseGet(() -> {
+            final ChannelCreateCommand channelCreateCommand =
+                    ChannelCreateCommand.of(ChannelDraft.of(key).withRoles(roles));
+            return client.execute(channelCreateCommand);
+        });
     }
 
     public static void cleanUpChannelByKey(final TestClient client, final String channelKey) {

@@ -37,6 +37,10 @@ public class OrderQueryModel extends DefaultModelQueryModelImpl<Order> {
         return new SphereEnumerationQueryModel<>(Optional.of(this), Optional.of("paymentState"));
     }
 
+    public SyncInfoQueryModel<Order> syncInfo() {
+        return new SyncInfoQueryModel<>(Optional.of(this), Optional.of("syncInfo"));
+    }
+
     public CountryQueryModel<Order> country() {
         return new CountryQueryModel<>(Optional.of(this), Optional.of("country"));
     }
