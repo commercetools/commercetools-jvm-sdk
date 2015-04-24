@@ -16,6 +16,7 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.orders.commands.OrderFromCartCreateCommand;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
 import io.sphere.sdk.orders.commands.updateactions.AddReturnInfo;
+import io.sphere.sdk.orders.commands.updateactions.ChangePaymentState;
 import io.sphere.sdk.orders.commands.updateactions.ChangeShipmentState;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -54,7 +55,10 @@ public class OrderFixtures {
 
                 final Order order = client.execute(OrderFromCartCreateCommand.of(signInResult.getCart().get()));
 
-                final Order updatedOrder = client.execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.READY)));
+                final Order updatedOrder = client.execute(OrderUpdateCommand.of(order, asList(
+                        ChangeShipmentState.of(ShipmentState.READY),
+                        ChangePaymentState.of(PaymentState.PENDING)
+                )));
                 f.accept(updatedOrder);
             })
         );

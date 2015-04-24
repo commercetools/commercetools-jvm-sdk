@@ -2,6 +2,7 @@ package io.sphere.sdk.orders.queries;
 
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderState;
+import io.sphere.sdk.orders.PaymentState;
 import io.sphere.sdk.orders.ShipmentState;
 import io.sphere.sdk.queries.*;
 
@@ -30,6 +31,10 @@ public class OrderQueryModel extends DefaultModelQueryModelImpl<Order> {
 
     public SphereEnumerationQueryModel<Order, ShipmentState> shipmentState() {
         return new SphereEnumerationQueryModel<>(Optional.of(this), Optional.of("shipmentState"));
+    }
+
+    public SphereEnumerationQueryModel<Order, PaymentState> paymentState() {
+        return new SphereEnumerationQueryModel<>(Optional.of(this), Optional.of("paymentState"));
     }
 
     public CountryQueryModel<Order> country() {
