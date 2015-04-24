@@ -40,7 +40,7 @@ public interface State extends DefaultModel<State> {
     Optional<Set<Reference<State>>> getTransitions();
 
     default Reference<State> toReference() {
-        return Reference.of(typeId(), getId());
+        return Reference.of(typeId(), getId(), this);
     }
 
     static String typeId(){

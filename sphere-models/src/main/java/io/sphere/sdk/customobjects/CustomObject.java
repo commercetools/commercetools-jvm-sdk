@@ -39,18 +39,18 @@ public interface CustomObject<T> extends DefaultModelView<CustomObject<T>>, Refe
     @SuppressWarnings("unchecked")
     @Override
     default Reference<CustomObject<JsonNode>> toReference() {
-        return Reference.of(typeId(), getId(), (CustomObject<JsonNode>)this);
+        return Reference.of(typeId(), getId());//not possible to provide filled reference since type can be different
     }
 
-    public static String typeId(){
+    static String typeId(){
         return "key-value-document";
     }
 
-    public static String validatedKey(final String key) {
+    static String validatedKey(final String key) {
         return CustomObjectImpl.validatedKey("key", key);
     }
 
-    public static String validatedContainer(final String container) {
+    static String validatedContainer(final String container) {
         return CustomObjectImpl.validatedKey("container", container);
     }
 }

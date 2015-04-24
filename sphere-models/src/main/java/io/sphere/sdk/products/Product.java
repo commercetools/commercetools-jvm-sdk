@@ -31,7 +31,7 @@ public interface Product extends ProductLike<Product>, DefaultModel<Product> {
 
     ProductCatalogData getMasterData();
 
-    public static TypeReference<Product> typeReference(){
+    static TypeReference<Product> typeReference(){
         return new TypeReference<Product>() {
             @Override
             public String toString() {
@@ -45,19 +45,19 @@ public interface Product extends ProductLike<Product>, DefaultModel<Product> {
         return reference(this);
     }
 
-    public static String typeId(){
+    static String typeId(){
         return "product";
     }
 
-    public static Reference<Product> reference(final Product product) {
+    static Reference<Product> reference(final Product product) {
         return Reference.of(typeId(), product.getId(), product);
     }
 
-    public static Optional<Reference<Product>> reference(final Optional<Product> category) {
+    static Optional<Reference<Product>> reference(final Optional<Product> category) {
         return category.map(Product::reference);
     }
 
-    public static Reference<Product> reference(final String id) {
+    static Reference<Product> reference(final String id) {
         return Reference.of(typeId(), id);
     }
 

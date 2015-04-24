@@ -21,24 +21,24 @@ import java.util.Set;
  */
 @JsonDeserialize(as = ChannelImpl.class)
 public interface Channel extends DefaultModel<Channel> {
-    public String getKey();
+    String getKey();
 
-    public Set<ChannelRoles> getRoles();
+    Set<ChannelRoles> getRoles();
 
-    public Optional<LocalizedStrings> getName();
+    Optional<LocalizedStrings> getName();
 
-    public Optional<LocalizedStrings> getDescription();
+    Optional<LocalizedStrings> getDescription();
 
 
-    public default Reference<Channel> toReference() {
-        return Reference.of(typeId(), getId());
+    default Reference<Channel> toReference() {
+        return Reference.of(typeId(), getId(), this);
     }
 
-    public static String typeId(){
+    static String typeId(){
         return "channel";
     }
 
-    public static TypeReference<Channel> typeReference(){
+    static TypeReference<Channel> typeReference(){
         return new TypeReference<Channel>() {
             @Override
             public String toString() {

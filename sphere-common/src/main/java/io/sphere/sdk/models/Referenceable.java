@@ -7,6 +7,10 @@ package io.sphere.sdk.models;
  * @param <T> the type of the referenced object.
  */
 public interface Referenceable<T> {
+    /**
+     * Creates a reference which is not necessarily filled.
+     * @return reference
+     */
     Reference<T> toReference();
 
     default boolean hasSameIdAs(final Referenceable<T> other) {
