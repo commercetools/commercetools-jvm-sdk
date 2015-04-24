@@ -108,14 +108,14 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     @Test
     public void updateSyncInfo() throws Exception {
         withOrderExportChannel(client(), channel ->
-            withOrder(client(), order -> {
-                assertThat(order.getSyncInfo()).isEmpty();
-                final Instant aDateInThePast = INSTANT_IN_PAST;
-                final String externalId = "foo";
-                final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
-                final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-                assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
-            })
+                        withOrder(client(), order -> {
+                            assertThat(order.getSyncInfo()).isEmpty();
+                            final Instant aDateInThePast = INSTANT_IN_PAST;
+                            final String externalId = "foo";
+                            final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
+                            final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+                            assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
+                        })
         );
     }
 
@@ -168,14 +168,14 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     @Test
     public void transitionLineItemState() throws Exception {
         withStandardStates(client(), (State initialState, State nextState) ->
-            withOrder(client(), order -> {
-                final LineItem lineItem = order.getLineItems().get(0);
-                assertThat(lineItem).containsState(initialState).containsNotState(nextState);
-                final int quantity = 1;
-                final Instant actualTransitionDate = INSTANT_IN_PAST;
-                final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
-                assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
-            })
+                        withOrder(client(), order -> {
+                            final LineItem lineItem = order.getLineItems().get(0);
+                            assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+                            final int quantity = 1;
+                            final Instant actualTransitionDate = INSTANT_IN_PAST;
+                            final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
+                            assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+                        })
         );
     }
 
@@ -202,6 +202,19 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1), ItemState.of(initialState, lineItem.getQuantity() - 1));
                 final Order updatedOrder = execute(OrderUpdateCommand.of(order, ImportLineItemState.of(lineItem, itemStates)));
                 assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
+            })
+        );
+    }
+
+    @Test
+    public void importCustomLineItemState() throws Exception {
+        withStandardStates(client(), (State initialState, State nextState) ->
+            withOrderOfCustomLineItems(client(), order -> {
+                final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
+                assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
+                final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1), ItemState.of(initialState, customLineItem.getQuantity() - 1));
+                final Order updatedOrder = execute(OrderUpdateCommand.of(order, ImportCustomLineItemState.of(customLineItem, itemStates)));
+                assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(itemStates);
             })
         );
     }
