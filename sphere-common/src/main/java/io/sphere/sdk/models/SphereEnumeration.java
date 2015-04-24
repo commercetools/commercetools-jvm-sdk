@@ -15,7 +15,11 @@ public interface SphereEnumeration {
                 .findFirst().get();
     }
 
-    public static String toSphereName(final String uppercaseName) {
+    default String toSphereName() {
+        return toSphereName(name());
+    }
+
+    static String toSphereName(final String uppercaseName) {
         return Arrays.stream(StringUtils.split(uppercaseName, '_'))
                 .map(s -> s.toLowerCase())
                 .map(StringUtils::capitalize)

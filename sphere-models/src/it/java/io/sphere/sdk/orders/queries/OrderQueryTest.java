@@ -49,14 +49,32 @@ public class OrderQueryTest extends IntegrationTest {
         assertOrderIsFoundWithPredicate(order -> MODEL.country().is(CartFixtures.DEFAULT_COUNTRY));
     }
 
+    @Test
+    public void orderState() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.orderState().is(order.getOrderState()));
+    }
+
     private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p) {
+        assertOrderIsFound(p, true);
+    }
+
+    private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p, final boolean shouldFind) {
         withOrder(client(), order -> {
             final QueryDsl<Order> query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
-            assertThat(client().execute(query).head().get().getId()).isEqualTo(order.getId());
+            final String id = client().execute(query).head().get().getId();
+            if (shouldFind) {
+                assertThat(id).isEqualTo(order.getId());
+            } else {
+                assertThat(id).isNotEqualTo(order.getId());
+            }
         });
     }
 
     private void assertOrderIsFoundWithPredicate(final Function<Order, Predicate<Order>> p) {
-        assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)).withSort(QuerySort.of("createdAt desc")));
+        assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)), true);
+    }
+
+    private void assertOrderIsNotFoundWithPredicate(final Function<Order, Predicate<Order>> p) {
+        assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)), false);
     }
 }

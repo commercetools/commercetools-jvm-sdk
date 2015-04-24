@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -220,6 +221,11 @@ public class OrderImportCommandTest extends IntegrationTest {
                     @Override
                     public String getId() {
                         return id;
+                    }
+
+                    @Override
+                    public Set<ItemState> getState() {
+                        throw new UnsupportedOperationException();
                     }
 
                     @Override
