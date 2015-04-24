@@ -1,6 +1,7 @@
 package io.sphere.sdk.products;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -28,16 +29,21 @@ public class Price extends Base {
     private final Optional<Reference<CustomerGroup>> customerGroup;
     private final Optional<Reference<Channel>> channel;
     private final Optional<DiscountedPrice> discounted;
+    private final Optional<Instant> validFrom;
+    private final Optional<Instant> validUntil;
 
     @JsonCreator
     Price(final MonetaryAmount value, final Optional<CountryCode> country,
           final Optional<Reference<CustomerGroup>> customerGroup, final Optional<Reference<Channel>> channel,
-          final Optional<DiscountedPrice> discounted) {
+          final Optional<DiscountedPrice> discounted,
+          final Optional<Instant> validFrom, final Optional<Instant> validUntil) {
         this.value = value;
         this.country = country;
         this.customerGroup = customerGroup;
         this.channel = channel;
         this.discounted = discounted;
+        this.validFrom = validFrom;
+        this.validUntil = validUntil;
     }
 
     public MonetaryAmount getValue() {
@@ -59,6 +65,10 @@ public class Price extends Base {
     public Optional<DiscountedPrice> getDiscounted() {
         return discounted;
     }
+
+    public Optional<Instant> getValidFrom() { return validFrom; }
+
+    public Optional<Instant> getValidUntil() { return validUntil; }
 
     public Price withCustomerGroup(final Optional<Reference<CustomerGroup>> customerGroup) {
         return PriceBuilder.of(this).customerGroup(customerGroup).build();
@@ -96,6 +106,14 @@ public class Price extends Base {
         return PriceBuilder.of(this).value(value).build();
     }
 
+    public Price withValidFrom(final Instant validFrom) {
+        return PriceBuilder.of(this).validFrom(validFrom).build();
+    }
+
+    public Price withValidUntil(final Instant validUntil) {
+        return PriceBuilder.of(this).validUntil(validUntil).build();
+    }
+
     @JsonIgnore
     public static Price of(final MonetaryAmount money) {
         return PriceBuilder.of(money).build();
@@ -112,6 +130,8 @@ public class Price extends Base {
         if (!country.equals(price.country)) return false;
         if (!customerGroup.equals(price.customerGroup)) return false;
         if (!discounted.equals(price.discounted)) return false;
+        if (!validFrom.equals(price.validFrom)) return false;
+        if (!validUntil.equals(price.validUntil)) return false;
         //here money does not work with equals, use isEqualTo
         if (!value.isEqualTo(price.value)) return false;
 
@@ -126,6 +146,8 @@ public class Price extends Base {
         result = 31 * result + customerGroup.hashCode();
         result = 31 * result + channel.hashCode();
         result = 31 * result + discounted.hashCode();
+        result = 31 * result + validFrom.hashCode();
+        result = 31 * result + validUntil.hashCode();
         return result;
     }
 
