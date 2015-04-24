@@ -3,6 +3,7 @@ package io.sphere.sdk.orders.queries;
 import io.sphere.sdk.carts.CartFixtures;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
+import io.sphere.sdk.orders.ShipmentState;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QuerySort;
@@ -54,6 +55,11 @@ public class OrderQueryTest extends IntegrationTest {
         assertOrderIsFoundWithPredicate(order -> MODEL.orderState().is(order.getOrderState()));
     }
 
+    @Test
+    public void shipmentState() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.shipmentState().is(order.getShipmentState().get()));
+    }
+
     private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p) {
         assertOrderIsFound(p, true);
     }
@@ -61,7 +67,7 @@ public class OrderQueryTest extends IntegrationTest {
     private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p, final boolean shouldFind) {
         withOrder(client(), order -> {
             final QueryDsl<Order> query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
-            final String id = client().execute(query).head().get().getId();
+            final String id = client().execute(query).head().orElseThrow(() -> new RuntimeException("nothing found with predicate")).getId();
             if (shouldFind) {
                 assertThat(id).isEqualTo(order.getId());
             } else {
