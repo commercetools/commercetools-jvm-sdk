@@ -27,6 +27,7 @@ import java.util.function.BiFunction;
 
  <h3 class=released-version id=v1_0_0_M14>1.0.0-M14</h3>
  <ul>
+     <li class=new-in-release>{@link io.sphere.sdk.products.Price#validFrom} and {@link io.sphere.sdk.products.Price#validUntil}.</li>
      <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
  </ul>
 
