@@ -5,7 +5,7 @@ import io.sphere.sdk.queries.*;
 import java.util.Optional;
 import java.util.function.Function;
 
-final class ProductAllVariantsQueryModel<T> extends QueryModelImpl<T> {
+public final class ProductAllVariantsQueryModel<T> extends QueryModelImpl<T> {
 
     ProductAllVariantsQueryModel(final Optional<? extends QueryModel<T>> parent) {
         super(parent, Optional.<String>empty());
