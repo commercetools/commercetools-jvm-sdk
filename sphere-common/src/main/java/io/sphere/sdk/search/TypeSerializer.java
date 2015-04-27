@@ -1,20 +1,18 @@
 package io.sphere.sdk.search;
 
 import io.sphere.sdk.models.Referenceable;
-import org.javamoney.moneta.Money;
 
 import javax.money.CurrencyUnit;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Function;
 
-import static java.time.ZoneOffset.UTC;
-import static java.time.format.DateTimeFormatter.ISO_DATE;
-import static java.time.format.DateTimeFormatter.ISO_DATE_TIME;
 import static java.math.RoundingMode.HALF_EVEN;
+import static java.time.format.DateTimeFormatter.*;
 
 /**
  * Serializer to transform certain types into SPHERE format.
@@ -75,8 +73,8 @@ public class TypeSerializer<T> {
      * Serializer to convert the given local datetime into the accepted ISO format with UTC zone.
      * @return the serializer for datetime data.
      */
-    public static TypeSerializer<LocalDateTime> ofDateTime() {
-        return new TypeSerializer<>(v -> withQuotes(v.atZone(UTC).format(ISO_DATE_TIME)));
+    public static TypeSerializer<ZonedDateTime> ofDateTime() {
+        return new TypeSerializer<>(v -> withQuotes(v.withZoneSameInstant(ZoneOffset.UTC).format(ISO_DATE_TIME)));
     }
 
     /**

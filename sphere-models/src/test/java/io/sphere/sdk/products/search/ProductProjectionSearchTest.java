@@ -15,8 +15,8 @@ import org.junit.Test;
 import javax.money.CurrencyContext;
 import javax.money.CurrencyUnit;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 
 import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
 import static java.math.BigDecimal.valueOf;
@@ -40,7 +40,7 @@ public class ProductProjectionSearchTest {
     public void canAccessCreatedAt() throws Exception {
         final DateTimeSearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.createdAt();
         assertThat(path.facetOf().all().toSphereFacet()).isEqualTo("createdAt");
-        assertThat(path.filterBy().exactly(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("createdAt:\"2001-09-11T22:05:09.203Z\"");
+        assertThat(path.filterBy().exactly(dateTime("2001-09-11T22:05:09.203+00:00")).toSphereFilter()).isEqualTo("createdAt:\"2001-09-11T22:05:09.203Z\"");
         assertThat(path.sort(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("createdAt asc");
     }
 
@@ -48,7 +48,7 @@ public class ProductProjectionSearchTest {
     public void canAccessLastModifiedAt() throws Exception {
         final DateTimeSearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.lastModifiedAt();
         assertThat(path.facetOf().all().toSphereFacet()).isEqualTo("lastModifiedAt");
-        assertThat(path.filterBy().exactly(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("lastModifiedAt:\"2001-09-11T22:05:09.203Z\"");
+        assertThat(path.filterBy().exactly(dateTime("2001-09-11T22:05:09.203+00:00")).toSphereFilter()).isEqualTo("lastModifiedAt:\"2001-09-11T22:05:09.203Z\"");
         assertThat(path.sort(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("lastModifiedAt asc");
     }
 
@@ -127,7 +127,7 @@ public class ProductProjectionSearchTest {
     public void canCreateDateTimeAttributeExpressions() throws Exception {
         final DateTimeSearchModel<ProductProjection, VariantSearchSortDirection> path = attributeModel().ofDateTime("createdDate");
         assertThat(path.facetOf().all().toSphereFacet()).isEqualTo("variants.attributes.createdDate");
-        assertThat(path.filterBy().exactly(dateTime("2001-09-11T22:05:09.203")).toSphereFilter()).isEqualTo("variants.attributes.createdDate:\"2001-09-11T22:05:09.203Z\"");
+        assertThat(path.filterBy().exactly(dateTime("2001-09-11T22:05:09.203+00:00")).toSphereFilter()).isEqualTo("variants.attributes.createdDate:\"2001-09-11T22:05:09.203Z\"");
         assertThat(path.sort(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.createdDate asc.max");
     }
 
@@ -210,8 +210,8 @@ public class ProductProjectionSearchTest {
         return ProductBuilder.of(productType, null).id(id).build();
     }
 
-    private LocalDateTime dateTime(final String dateTime) {
-        return LocalDateTime.parse(dateTime);
+    private ZonedDateTime dateTime(final String dateTime) {
+        return ZonedDateTime.parse(dateTime);
     }
 
     private LocalTime time(final String time) {
