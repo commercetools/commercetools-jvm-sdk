@@ -71,7 +71,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
             return productsExist && facetsExist;
         });
         try {
-            Thread.sleep(500); // Wait for elasticsearch synchronization (increase if tests are returning wrong values)
+            Thread.sleep(1000); // Wait for elasticsearch synchronization (increase if tests are returning wrong values)
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
