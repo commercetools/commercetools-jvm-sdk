@@ -3,10 +3,11 @@ package io.sphere.sdk.search;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import org.javamoney.moneta.CurrencyUnitBuilder;
+import org.javamoney.moneta.Money;
 import org.junit.Test;
 
-import javax.money.CurrencyContext;
 import javax.money.CurrencyUnit;
+import javax.money.MonetaryCurrencies;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -99,7 +100,7 @@ public class TypeSerializerTest {
     }
 
     private CurrencyUnit currency(final String currencyCode) {
-        return CurrencyUnitBuilder.of(currencyCode, CurrencyContext.KEY_PROVIDER).build();
+        return MonetaryCurrencies.getCurrency(currencyCode);
     }
 
     private Reference<Object> reference(String id) {
