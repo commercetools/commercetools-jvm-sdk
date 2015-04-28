@@ -19,9 +19,9 @@ public interface QueryDsl<T> extends EntityQuery<T> {
      * @param sort list of sorts how the results of the query should be sorted
      * @return EntityQuery with sort
      */
-    QueryDsl<T> withSort(final List<Sort<T>> sort);
+    QueryDsl<T> withSort(final List<QuerySort<T>> sort);
 
-    default QueryDsl<T> withSort(final Sort<T> sort) {
+    default QueryDsl<T> withSort(final QuerySort<T> sort) {
         return withSort(asList(sort));
     }
 

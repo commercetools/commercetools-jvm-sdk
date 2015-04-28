@@ -25,6 +25,13 @@ import java.util.function.BiFunction;
  </ul>
  -->
 
+ <h3 class=released-version id=v1_0_0_M14>1.0.0-M14</h3>
+ <ul>
+     <li class=new-in-release>{@link io.sphere.sdk.products.Price#validFrom} and {@link io.sphere.sdk.products.Price#validUntil}.</li>
+     <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO masterVariant and variants together contain all variants.</li>
+     <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
+ </ul>
+
  <h3 class=released-version id=v1_0_0_M13>1.0.0-M13</h3>
  <ul>
      <li class=new-in-release>{@link io.sphere.sdk.models.LocalizedStrings#mapValue(BiFunction)} and {@link LocalizedStrings#stream()}
@@ -36,7 +43,6 @@ import java.util.function.BiFunction;
      <li class=new-in-release>The JVM SDK is available for Ning Async HTTP Client 1.8 and 1.9 (incompatible to 1.8).</li>
      <li class=new-in-release>State update actions and {@link io.sphere.sdk.states.StateBuilder} contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
      <li class=new-in-release>Embedded predicates ("where") now support lambda syntax: {@link io.sphere.sdk.products.queries.ProductVariantQueryModel#where(java.util.function.Function)}.</li>
-     <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO masterVariant and variants together contain all variants.</li>
      <li class=new-in-release>{@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerId(java.lang.String)} and {@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerEmail(java.lang.String)}</li>
      <li class=new-in-release>{@link io.sphere.sdk.channels.commands.ChannelUpdateCommand}</li>
      <li class=new-in-release>{@link io.sphere.sdk.channels.queries.ChannelByIdFetch}</li>

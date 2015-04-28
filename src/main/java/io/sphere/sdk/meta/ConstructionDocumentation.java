@@ -18,6 +18,10 @@ package io.sphere.sdk.meta;
  *   to create a translation for different locales:</p>
  *
  *   {@include.example io.sphere.sdk.meta.ConstructionDocumentationTest#ofMethodExample()}
+ *
+ *   <p>The {@code of} method is inspired by {@link java.util.Optional#of(Object)} and the Java date and time classes such as {@link java.time.format.DateTimeFormatter#ofPattern(String)}.</p>
+ *
+ *
  *  <h3 id=builders>Builders</h3>
  *
  *  For objects with a lot of optional parameters the SDK provides builders. The builder is initialized with a
@@ -42,6 +46,8 @@ package io.sphere.sdk.meta;
  *  you can create updated copies with a method starting with "with":
  *
  *  {@include.example io.sphere.sdk.meta.ConstructionDocumentationTest#possibilities1()}
+ *
+ *  The with copy methods are inspired by Scala and the Java date and time API: {@link java.time.OffsetDateTime#withMinute(int)}.
  *
  *  <h3 id=persistent-objects>Persistent objects vs. local test doubles</h3>
  *

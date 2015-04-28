@@ -61,7 +61,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canAccessPriceAmount() throws Exception {
-        final MoneyAmountSearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.variants().price().amount();
+        final MoneyAmountSearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.allVariants().price().amount();
         assertThat(path.facetOf().all().toSphereFacet()).isEqualTo("variants.price.centAmount");
         assertThat(path.filterBy().exactly(valueOf(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
         assertThat(path.sort(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("price asc");
@@ -69,7 +69,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canAccessPriceCurrency() throws Exception {
-        final CurrencySearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.variants().price().currency();
+        final CurrencySearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.allVariants().price().currency();
         assertThat(path.facetOf().all().toSphereFacet()).isEqualTo("variants.price.currencyCode");
         assertThat(path.filterBy().exactly(currency("EUR")).toSphereFilter()).isEqualTo("variants.price.currencyCode:\"EUR\"");
         assertThat(path.sort(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("variants.price.currencyCode asc");
@@ -202,7 +202,7 @@ public class ProductProjectionSearchTest {
     }
 
     private ProductAttributeSearchModel attributeModel() {
-        return MODEL.variants().attribute();
+        return MODEL.allVariants().attribute();
     }
 
     private Product product(String id) {

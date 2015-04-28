@@ -74,7 +74,7 @@ public class LongQuerySortingModel<T> extends IntegerLikeQuerySortingModel<T, Lo
     }
 
     @Override
-    public Sort<T> sort(final SortDirection sortDirection) {
+    public QuerySort<T> sort(final QuerySortDirection sortDirection) {
         return super.sort(sortDirection);
     }
 }

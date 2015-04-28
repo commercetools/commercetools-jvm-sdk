@@ -22,7 +22,7 @@ import java.util.List;
 class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
 
     private final Optional<Predicate<T>> predicate;
-    private final List<Sort<T>> sort;
+    private final List<QuerySort<T>> sort;
     private final Optional<Long> limit;
     private final Optional<Long> offset;
     private final List<ExpansionPath<T>> expansionPaths;
@@ -30,7 +30,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
 
-    public QueryDslImpl(final Optional<Predicate<T>> predicate, final List<Sort<T>> sort, final Optional<Long> limit,
+    public QueryDslImpl(final Optional<Predicate<T>> predicate, final List<QuerySort<T>> sort, final Optional<Long> limit,
                         final Optional<Long> offset, final String endpoint,
                         final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
                         final List<ExpansionPath<T>> expansionPaths, final List<QueryParameter> additionalQueryParameters) {
@@ -76,7 +76,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     }
 
     @Override
-    public QueryDsl<T> withSort(final List<Sort<T>> sort) {
+    public QueryDsl<T> withSort(final List<QuerySort<T>> sort) {
         return copyBuilder().sort(sort).build();
     }
 
@@ -106,7 +106,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     }
 
     @Override
-    public List<Sort<T>> sort() {
+    public List<QuerySort<T>> sort() {
         return sort;
     }
 
@@ -185,8 +185,8 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
                 '}';
     }
 
-    static <T> List<Sort<T>> sortByIdList() {
-        final Sort<T> sortById = Sort.<T>of("id asc");
+    static <T> List<QuerySort<T>> sortByIdList() {
+        final QuerySort<T> sortById = QuerySort.<T>of("id asc");
         return asList(sortById);
     }
 }

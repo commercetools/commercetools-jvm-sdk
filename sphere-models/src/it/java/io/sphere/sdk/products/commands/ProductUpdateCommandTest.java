@@ -23,6 +23,9 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
@@ -53,8 +56,20 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void addPrice() throws Exception {
+        final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
+        testAddPrice(expectedPrice);
+    }
+
+    @Test
+    public void addPriceWithValidityPeriod() throws Exception {
+        final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR))
+                .withValidFrom(Instant.now())
+                .withValidUntil(LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.UTC));
+        testAddPrice(expectedPrice);
+    }
+
+    private void testAddPrice(Price expectedPrice) throws Exception {
         withUpdateableProduct(client(), product -> {
-            final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
             final Product updatedProduct = client()
                     .execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT)));
 

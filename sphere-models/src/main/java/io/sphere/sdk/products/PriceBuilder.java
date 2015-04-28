@@ -10,6 +10,7 @@ import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.MonetaryAmount;
+import java.time.Instant;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -19,6 +20,8 @@ public class PriceBuilder implements Builder<Price> {
     private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
     private Optional<Reference<Channel>> channel = Optional.empty();
     private Optional<DiscountedPrice> discounted = Optional.empty();
+    private Optional<Instant> validFrom = Optional.empty();
+    private Optional<Instant> validUntil = Optional.empty();
 
     private PriceBuilder(final MonetaryAmount value) {
         this.value = value;
@@ -76,6 +79,26 @@ public class PriceBuilder implements Builder<Price> {
         return discounted(Optional.of(discounted));
     }
 
+    public PriceBuilder validFrom(final Optional<Instant> validFrom) {
+        this.validFrom = validFrom;
+        return this;
+    }
+
+    public PriceBuilder validFrom(final Instant validFrom) {
+        Objects.requireNonNull(validFrom);
+        return validFrom(Optional.of(validFrom));
+    }
+
+    public PriceBuilder validUntil(final Optional<Instant> validUntil) {
+        this.validUntil = validUntil;
+        return this;
+    }
+
+    public PriceBuilder validUntil(final Instant validUntil) {
+        Objects.requireNonNull(validUntil);
+        return validUntil(Optional.of(validUntil));
+    }
+
     public PriceBuilder value(final MonetaryAmount value) {
         this.value = value;
         return this;
@@ -83,6 +106,6 @@ public class PriceBuilder implements Builder<Price> {
 
     @Override
     public Price build() {
-        return new Price(value, country, customerGroup, channel, discounted);
+        return new Price(value, country, customerGroup, channel, discounted, validFrom, validUntil);
     }
 }
