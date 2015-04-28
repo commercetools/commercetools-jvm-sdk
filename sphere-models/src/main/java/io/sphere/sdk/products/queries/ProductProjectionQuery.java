@@ -37,6 +37,14 @@ public class ProductProjectionQuery extends DefaultModelQuery<ProductProjection>
         return withPredicate(model().slug().lang(locale).is(slug));
     }
 
+    public static ProductProjectionQuery ofStaged() {
+        return of(ProductProjectionType.STAGED);
+    }
+
+    public static ProductProjectionQuery ofCurrent() {
+        return of(ProductProjectionType.CURRENT);
+    }
+
     public static ProductProjectionQuery of(final ProductProjectionType productProjectionType) {
         return new ProductProjectionQuery(productProjectionType);
     }
