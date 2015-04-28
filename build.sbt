@@ -19,6 +19,7 @@ libraryDependencies in ThisBuild ++=
   festAssert % "test,it" ::
   junitDep % "test,it" ::
   junitInterface % "test,it" ::
+  assertj % "test,it" ::
   "ch.qos.logback" % "logback-classic" % "1.1.2" % "test,it" ::
   "org.slf4j" % "jul-to-slf4j" % "1.7.10" % "test,it" ::
   "com.google.code.gson" % "gson" % "2.3.1" % "test,it" ::

@@ -39,6 +39,7 @@ object Build extends Build {
       festAssert ::
         junitDep ::
         junitInterface ::
+        assertj ::
         Nil
   ).configs(IntegrationTest)
 
@@ -63,11 +64,13 @@ object Build extends Build {
         festAssert ::
         junitDep ::
         junitInterface ::
+        assertj ::
         Nil
     )
 
 
   lazy val junitDep = "junit" % "junit-dep" % "4.11"
+  lazy val assertj =  "org.assertj" % "assertj-core" % "3.0.0"
   lazy val junitInterface = "com.novocode" % "junit-interface" % "0.11"
   lazy val festAssert = "org.easytesting" % "fest-assert" % "1.4"
 
