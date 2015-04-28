@@ -9,8 +9,8 @@ import javax.money.CurrencyContext;
 import javax.money.CurrencyUnit;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.function.Function;
 
 import static io.sphere.sdk.search.TypeSerializer.*;
@@ -54,8 +54,8 @@ public class TypeSerializerTest {
 
     @Test
     public void serializesDateTime() throws Exception {
-        Function<LocalDateTime, String> serializer = ofDateTime().serializer();
-        assertThat(serializer.apply(dateTime("2001-09-11T22:05:09.203"))).isEqualTo("\"2001-09-11T22:05:09.203Z\"");
+        Function<ZonedDateTime, String> serializer = ofDateTime().serializer();
+        assertThat(serializer.apply(dateTime("2001-09-11T22:05:09.203+02:00"))).isEqualTo("\"2001-09-11T20:05:09.203Z\"");
     }
 
     @Test
@@ -90,8 +90,8 @@ public class TypeSerializerTest {
         return LocalTime.parse(time);
     }
 
-    private LocalDateTime dateTime(final String dateTime) {
-        return LocalDateTime.parse(dateTime);
+    private ZonedDateTime dateTime(final String dateTime) {
+        return ZonedDateTime.parse(dateTime);
     }
 
     private BigDecimal money(final double amount) {
