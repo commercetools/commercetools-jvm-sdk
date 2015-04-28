@@ -29,7 +29,7 @@ import java.util.function.BiFunction;
  <ul>
      <li class=new-in-release>{@link io.sphere.sdk.products.Price#validFrom} and {@link io.sphere.sdk.products.Price#validUntil}.</li>
      <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO masterVariant and variants together contain all variants.</li>
-     <li class=change-in-release>Date time attributes in {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} are using a Java 8 ZonedDateTime instead of a LocalDateTime.</li>
+     <li class=change-in-release>Date time attributes in {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} are using <a href="https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html">ZonedDateTime</a> instead of <a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html">LocalDateTime</a>.</li>
      <li class=change-in-release>The {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} has been improved with better naming and better documentation.</li>
      <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
  </ul>
