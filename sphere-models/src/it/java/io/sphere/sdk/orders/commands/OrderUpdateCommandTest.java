@@ -46,18 +46,20 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeShipmentState() throws Exception {
         withOrder(client(), order -> {
-            assertThat(order.getShipmentState()).isEqualTo(Optional.empty());
-            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.SHIPPED)));
-            assertThat(updatedOrder.getShipmentState()).isPresentAs(ShipmentState.SHIPPED);
+            final ShipmentState newState = ShipmentState.SHIPPED;
+            assertThat(order.getShipmentState()).isNotPresentAs(newState);
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
+            assertThat(updatedOrder.getShipmentState()).isPresentAs(newState);
         });
     }
 
     @Test
     public void changePaymentState() throws Exception {
         withOrder(client(), order -> {
-            assertThat(order.getPaymentState()).isEqualTo(Optional.empty());
-            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.PAID)));
-            assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.PAID);
+            final PaymentState newState = PaymentState.PAID;
+            assertThat(order.getPaymentState()).isNotPresentAs(newState);
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(newState)));
+            assertThat(updatedOrder.getPaymentState()).isPresentAs(newState);
         });
     }
 
