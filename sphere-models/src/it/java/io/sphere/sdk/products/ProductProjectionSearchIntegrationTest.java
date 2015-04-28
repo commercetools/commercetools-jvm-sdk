@@ -68,6 +68,12 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
             final boolean productsExist = ids.contains(product1.getId()) && ids.contains(product2.getId())
                     && ids.contains(product3.getId()) && ids.contains(evilProduct1.getId()) && ids.contains(evilProduct2.getId());
             final boolean facetsExist = res.getTermFacetResult(facet).map(term -> term.getMissing() > 1 && term.getTotal() > 1).orElse(false);
+            /**
+             * Having the products in ES is not guarantee enough that ES will be able to include them in its facets calculations (and the same
+             * applies to sort, filters, search related processes). Therefore, now it is additionally checking that the facets are being
+             * calculated before deciding the tests are ready to be executed. Moreover the tests wait some more before starting, as it is
+             * commanded in the next Thread.sleep.
+             */
             return productsExist && facetsExist;
         });
         try {
