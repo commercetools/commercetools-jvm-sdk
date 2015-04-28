@@ -61,14 +61,17 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         setupTestProducts();
         setupEvilTestProducts();
         final SearchSort<ProductProjection> sortByCreatedAt = ProductProjectionSearch.model().createdAt().sort(SimpleSearchSortDirection.DESC);
-        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(sortByCreatedAt);
+        final TermFacetExpression<ProductProjection, String> facet = ProductProjectionSearch.model().allVariants().attribute().ofText(ATTR_NAME_COLOR).facetOf().all();
+        final SearchDsl<ProductProjection> search = ProductProjectionSearch.of(STAGED).withSort(sortByCreatedAt).plusFacet(facet);
         execute(search, res -> {
             final List<String> ids = SphereTestUtils.toIds(res.getResults());
-            return ids.contains(product1.getId()) && ids.contains(product2.getId()) && ids.contains(product3.getId())
+            boolean productsExist = ids.contains(product1.getId()) && ids.contains(product2.getId()) && ids.contains(product3.getId())
                     && ids.contains(evilProduct1.getId()) && ids.contains(evilProduct2.getId());
+            boolean facetsExist = res.getTermFacetResult(facet).map(term -> term.getMissing() > 1 && term.getTotal() > 1).orElse(false);
+            return productsExist && facetsExist;
         });
         try {
-            Thread.sleep(500); // Wait for elasticsearch synchronization
+            Thread.sleep(500); // Wait for elasticsearch synchronization (increase if tests are returning wrong values)
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
