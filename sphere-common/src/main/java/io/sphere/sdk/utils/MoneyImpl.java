@@ -15,8 +15,8 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
     }
 
     @Override
-    public MonetaryContext getMonetaryContext() {
-        return money.getMonetaryContext();
+    public MonetaryContext getContext() {
+        return money.getContext();
     }
 
     @Override
