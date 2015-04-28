@@ -123,6 +123,10 @@ extends java.lang.Object</pre>
    <div id="io-sphere-sdk-meta-ConstructionDocumentationTest-ofMethodExample--%s" class=code-example><pre><code class='java'>final LocalizedStrings dogFood = LocalizedStrings.
         of(Locale.ENGLISH, "dog food", Locale.GERMAN, "Hundefutter");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+   <p>The <code>of</code> method is inspired by <code>Optional.of(Object)</code> and the Java date and time classes such as <code>DateTimeFormatter.ofPattern(String)</code>.</p>
+
+
   <h3 id=builders>Builders</h3>
 
   For objects with a lot of optional parameters the SDK provides builders. The builder is initialized with a
@@ -189,6 +193,8 @@ final Price price3 = PriceBuilder.of(Price.of(eur100)).country(DE).build();
 assertThat(price1).isEqualTo(price2).isEqualTo(price3)
         .isNotEqualTo(price0);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+  The with copy methods are inspired by Scala and the Java date and time API: <code>OffsetDateTime.withMinute(int)</code>.
 
   <h3 id=persistent-objects>Persistent objects vs. local test doubles</h3>
 

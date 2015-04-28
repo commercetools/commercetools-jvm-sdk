@@ -121,6 +121,13 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
+ <h3 class=released-version id=v1_0_0_M14>1.0.0-M14</h3>
+ <ul>
+     <li class=new-in-release><a href="../../../../io/sphere/sdk/products/Price.html#validFrom"><code>Price.validFrom</code></a> and <a href="../../../../io/sphere/sdk/products/Price.html#validUntil"><code>Price.validUntil</code></a>.</li>
+     <li class=new-in-release>Use <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#allVariants--"><code>ProductProjectionQueryModel.allVariants()</code></a> to formulate a predicate for all variants. In SPHERE.IO masterVariant and variants together contain all variants.</li>
+     <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
+ </ul>
+
  <h3 class=released-version id=v1_0_0_M13>1.0.0-M13</h3>
  <ul>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html#mapValue-java.util.function.BiFunction-"><code>LocalizedStrings.mapValue(BiFunction)</code></a> and <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html#stream--"><code>LocalizedStrings.stream()</code></a>
@@ -132,7 +139,6 @@ extends java.lang.Object</pre>
      <li class=new-in-release>The JVM SDK is available for Ning Async HTTP Client 1.8 and 1.9 (incompatible to 1.8).</li>
      <li class=new-in-release>State update actions and <a href="../../../../io/sphere/sdk/states/StateBuilder.html" title="class in io.sphere.sdk.states"><code>StateBuilder</code></a> contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
      <li class=new-in-release>Embedded predicates ("where") now support lambda syntax: <a href="../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html#where-java.util.function.Function-"><code>ProductVariantQueryModel.where(java.util.function.Function)</code></a>.</li>
-     <li class=new-in-release>Use <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#allVariants--"><code>ProductProjectionQueryModel.allVariants()</code></a> to formulate a predicate for all variants. In SPHERE.IO masterVariant and variants together contain all variants.</li>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerId-java.lang.String-"><code>OrderQuery.byCustomerId(java.lang.String)</code></a> and <a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerEmail-java.lang.String-"><code>OrderQuery.byCustomerEmail(java.lang.String)</code></a></li>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/channels/commands/ChannelUpdateCommand.html" title="class in io.sphere.sdk.channels.commands"><code>ChannelUpdateCommand</code></a></li>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="class in io.sphere.sdk.channels.queries"><code>ChannelByIdFetch</code></a></li>

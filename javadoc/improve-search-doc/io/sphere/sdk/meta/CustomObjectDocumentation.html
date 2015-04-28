@@ -254,7 +254,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
  <h4 id=direct-json-query>Query custom objects</h4>
 
  <div id="io-sphere-sdk-customobjects-queries-CustomObjectQueryTest-queryPureJson--%s" class=code-example><pre><code class='java'>withCustomObject(client(), existingCustomObject -&gt; {
-    final Sort&lt;CustomObject&lt;JsonNode&gt;&gt; sort = CustomObjectQuery.&lt;JsonNode&gt;model().createdAt().sort(DESC);
+    final QuerySort&lt;CustomObject&lt;JsonNode&gt;&gt; sort = CustomObjectQuery.&lt;JsonNode&gt;model().createdAt().sort(DESC);
     final QueryDsl&lt;CustomObject&lt;JsonNode&gt;&gt; clientRequest = CustomObjectQuery.of().withSort(sort);
     final PagedQueryResult&lt;CustomObject&lt;JsonNode&gt;&gt; result = execute(clientRequest);
     assertThat(result.getResults().stream().filter(item -&gt; item.hasSameIdAs(existingCustomObject)).count())
