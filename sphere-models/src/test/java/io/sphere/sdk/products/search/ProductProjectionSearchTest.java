@@ -9,11 +9,10 @@ import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import io.sphere.sdk.search.*;
-import org.javamoney.moneta.CurrencyUnitBuilder;
 import org.junit.Test;
 
-import javax.money.CurrencyContext;
 import javax.money.CurrencyUnit;
+import javax.money.MonetaryCurrencies;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -223,7 +222,7 @@ public class ProductProjectionSearchTest {
     }
 
     private CurrencyUnit currency(final String currencyCode) {
-        return CurrencyUnitBuilder.of(currencyCode, CurrencyContext.KEY_PROVIDER).build();
+        return MonetaryCurrencies.getCurrency(currencyCode);
     }
 
     private Reference<Category> category(String id) {
