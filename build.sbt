@@ -19,6 +19,7 @@ libraryDependencies in ThisBuild ++=
   festAssert % "test,it" ::
   junitDep % "test,it" ::
   junitInterface % "test,it" ::
+  assertj % "test,it" ::
   "ch.qos.logback" % "logback-classic" % "1.1.3" % "test,it" ::
   "org.slf4j" % "jul-to-slf4j" % "1.7.12" % "test,it" ::
   "com.google.code.gson" % "gson" % "2.3.1" % "test,it" ::
@@ -27,6 +28,8 @@ libraryDependencies in ThisBuild ++=
 autoScalaLibrary in ThisBuild := false // no dependency to Scala standard library
 
 crossPaths in ThisBuild := false
+
+Release.publishSettings
 
 licenses in ThisBuild := Seq("Apache" -> url("http://www.apache.org/licenses/LICENSE-2.0"))
 
