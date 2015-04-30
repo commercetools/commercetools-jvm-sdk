@@ -54,7 +54,7 @@ import java.util.function.BiFunction;
          <li>{@code boolean canHandleResponse(final HttpResponse response)} is now {@link io.sphere.sdk.client.SphereRequest#canDeserialize(HttpResponse)}</li>
        </ul>
      </li>
-     <li class=change-in-release>Artifact IDs start now with "-sphere".</li>
+     <li class=change-in-release>Artifact IDs start now with "sphere-".</li>
      <li class=change-in-release>In APIs {@link java.util.concurrent.CompletableFuture} has been replaced with {@link java.util.concurrent.CompletionStage}.
 
        You can convert from {@link java.util.concurrent.CompletionStage} to {@link java.util.concurrent.CompletableFuture} with {@link CompletionStage#toCompletableFuture()}.
