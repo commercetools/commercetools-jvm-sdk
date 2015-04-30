@@ -22,9 +22,11 @@ public class RetryIntegrationTest implements TestRule {
                 Throwable lastThrowable = null;
                 for (int attempt = 0; attempt < maxAttempts; attempt++) {
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(200);
                         test.evaluate();
                         return;
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     } catch (Throwable t) {
                         logger.info(String.format("%s failed %d/%d", description.getMethodName(), attempt + 1, maxAttempts));
                         lastThrowable = t;
