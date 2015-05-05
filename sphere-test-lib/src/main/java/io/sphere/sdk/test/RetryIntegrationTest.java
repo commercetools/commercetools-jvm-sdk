@@ -7,10 +7,12 @@ import org.slf4j.Logger;
 
 public class RetryIntegrationTest implements TestRule {
     private final int maxAttempts;
+    private final int millisBetweenAttempts;
     private final Logger logger;
 
-    public RetryIntegrationTest(final int maxAttempts, final Logger logger) {
+    public RetryIntegrationTest(final int maxAttempts, final int millisBetweenAttempts, final Logger logger) {
         this.maxAttempts = maxAttempts;
+        this.millisBetweenAttempts = millisBetweenAttempts;
         this.logger = logger;
     }
 
@@ -22,7 +24,7 @@ public class RetryIntegrationTest implements TestRule {
                 Throwable lastThrowable = null;
                 for (int attempt = 0; attempt < maxAttempts; attempt++) {
                     try {
-                        Thread.sleep(200);
+                        Thread.sleep(millisBetweenAttempts);
                         test.evaluate();
                         return;
                     } catch (InterruptedException e) {
