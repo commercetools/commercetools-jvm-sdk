@@ -36,7 +36,6 @@ public interface CustomObject<T> extends DefaultModelView<CustomObject<T>>, Refe
      */
     T getValue();
 
-    @SuppressWarnings("unchecked")
     @Override
     default Reference<CustomObject<JsonNode>> toReference() {
         return Reference.of(typeId(), getId());//not possible to provide filled reference since type can be different
