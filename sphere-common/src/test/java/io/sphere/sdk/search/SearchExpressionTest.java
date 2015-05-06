@@ -10,7 +10,7 @@ import static io.sphere.sdk.search.TypeSerializer.ofNumber;
 import static io.sphere.sdk.search.TypeSerializer.ofText;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Arrays.asList;
-import static org.fest.assertions.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class SearchExpressionTest {
 

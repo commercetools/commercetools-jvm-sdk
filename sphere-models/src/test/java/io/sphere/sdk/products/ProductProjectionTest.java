@@ -12,8 +12,7 @@ import java.util.Collections;
 import java.util.Optional;
 
 import static java.util.Locale.ENGLISH;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionTest {
     @Test
@@ -25,7 +24,7 @@ public class ProductProjectionTest {
         assertThat(staged.get().getName()).isEqualTo(product.getMasterData().getStaged().getName());
 
         final Optional<ProductProjection> current = product.toProjection(ProductProjectionType.CURRENT);
-        assertThat(current).overridingErrorMessage("current can be empty").isAbsent();
+        assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
     }
 
     private Product getProduct() {

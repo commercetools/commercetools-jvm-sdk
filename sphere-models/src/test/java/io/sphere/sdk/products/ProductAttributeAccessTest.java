@@ -15,9 +15,8 @@ import java.util.*;
 import static io.sphere.sdk.attributes.AttributeAccess.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
 
 public class ProductAttributeAccessTest {
     public static final String LOC_STRING_ATTRIBUTE = "loc-string-attribute";
@@ -46,7 +45,7 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void attributeNotFound() throws Exception {
-        assertThat(variant.getAttribute(notPresentAttributeGetterSetter)).isAbsent();
+        assertThat(variant.getAttribute(notPresentAttributeGetterSetter)).isEmpty();
     }
 
     @Test(expected = JsonException.class)

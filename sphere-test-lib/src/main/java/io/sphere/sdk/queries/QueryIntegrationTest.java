@@ -14,7 +14,7 @@ import java.util.stream.IntStream;
 import com.github.slugify.Slugify;
 
 import static java.util.stream.Collectors.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import static io.sphere.sdk.utils.SphereInternalLogger.*;
 
@@ -119,6 +119,6 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
 
     private void assertModelsNotPresent() {
         cleanUpByName(modelNames());
-        assertThat(getNames(queryAll().getResults())).overridingErrorMessage("the instances with the names " + modelNames() + " should not be present.").excludes(modelNames());
+        assertThat(getNames(queryAll().getResults())).overridingErrorMessage("the instances with the names " + modelNames() + " should not be present.").doesNotContainAnyElementsOf(modelNames());
     }
 }

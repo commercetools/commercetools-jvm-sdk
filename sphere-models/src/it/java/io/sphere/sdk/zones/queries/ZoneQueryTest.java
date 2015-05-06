@@ -13,7 +13,7 @@ import java.util.Set;
 
 import static com.neovisionaries.i18n.CountryCode.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ZoneQueryTest extends IntegrationTest {
     @BeforeClass

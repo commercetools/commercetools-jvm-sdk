@@ -25,7 +25,7 @@ import java.util.Optional;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withUpdateableShippingMethod;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.zones.ZoneFixtures.withZone;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShippingMethodUpdateCommandTest extends IntegrationTest {
     @BeforeClass

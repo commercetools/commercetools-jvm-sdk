@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PriceTest {
 

@@ -3,7 +3,7 @@ package io.sphere.sdk.test;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
-import org.fest.assertions.Assertions;
+import org.assertj.core.api.Assertions;
 import org.fest.assertions.GenericAssert;
 
 public class ReferenceAssert extends GenericAssert<ReferenceAssert, Reference<?>> {

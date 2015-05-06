@@ -14,8 +14,7 @@ import static io.sphere.sdk.inventories.InventoryEntryFixtures.withUpdateableInv
 import static io.sphere.sdk.inventories.queries.InventoryEntryQuery.model;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.test.SphereTestUtils.tomorrowInstant;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class InventoryEntryQueryTest extends IntegrationTest {
     @Test
@@ -49,7 +48,7 @@ public class InventoryEntryQueryTest extends IntegrationTest {
                         .withPredicate(predicate)
                         .withSort(model().id().sort(QuerySortDirection.DESC));
                 final PagedQueryResult<InventoryEntry> result = execute(query);
-                assertThat(result.head().map(e -> e.getId())).isPresentAs(entry.getId());
+                assertThat(result.head().map(e -> e.getId())).contains(entry.getId());
                 return entry;
             });
         });

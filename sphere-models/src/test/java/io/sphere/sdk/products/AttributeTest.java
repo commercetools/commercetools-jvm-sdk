@@ -4,7 +4,7 @@ import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.json.JsonUtils;
 import org.junit.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AttributeTest {
 

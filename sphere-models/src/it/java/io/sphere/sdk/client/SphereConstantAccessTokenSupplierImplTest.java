@@ -6,7 +6,7 @@ import org.junit.Test;
 
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SphereConstantAccessTokenSupplierImplTest extends IntegrationTest {
     @Test

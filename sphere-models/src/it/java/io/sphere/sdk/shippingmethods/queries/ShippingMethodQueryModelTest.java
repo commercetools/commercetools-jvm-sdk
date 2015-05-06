@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethod;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShippingMethodQueryModelTest extends IntegrationTest {
 

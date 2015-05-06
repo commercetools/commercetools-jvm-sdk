@@ -3,7 +3,7 @@ package io.sphere.sdk.customers;
 import org.junit.Test;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerDraftTest {
     @Test

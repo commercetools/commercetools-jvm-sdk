@@ -36,10 +36,11 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.math.BigDecimal.*;
 import static java.util.Arrays.asList;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static final String EVIL_CHARACTER_WORD = "öóßàç";
+    private static final RangeStats<BigDecimal> DEFAULT_RANGE_STATS = RangeStats.of(Optional.of(new BigDecimal("0")), Optional.empty(), 6, new BigDecimal("36"), new BigDecimal("46D"), new BigDecimal("246"), 41D);
 
     private static Product product1;
     private static Product product2;
@@ -242,8 +243,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public void rangeFacetsAreParsed() throws Exception {
         final RangeFacetExpression<ProductProjection, BigDecimal> facet = ProductProjectionSearch.model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).facetOf().greaterThanOrEqualTo(ZERO);
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.of(STAGED).plusFacet(facet));
-        final RangeStats<Double> expectedRange = RangeStats.of(Optional.of(0D), Optional.empty(), 6, 36D, 46D, 246D, 41D);
-        assertThat(result.getRangeFacetResult(facet).get().getRanges()).containsExactly(expectedRange);
+        assertThat(result.getRangeFacetResult(facet).get().getRanges()).containsExactly(DEFAULT_RANGE_STATS);
     }
 
     @Test
@@ -268,9 +268,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final String alias = "my-facet";
         final RangeFacetExpression<ProductProjection, BigDecimal> facet = ProductProjectionSearch.model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).facetOf().withAlias(alias).greaterThanOrEqualTo(ZERO);
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.of(STAGED).plusFacet(facet));
-        final RangeStats<Double> expectedRange = RangeStats.of(Optional.of(0D), Optional.empty(), 6, 36D, 46D, 246D, 41D);
         assertThat(facet.resultPath()).isEqualTo(alias);
-        assertThat(result.getRangeFacetResult(facet).get().getRanges()).containsExactly(expectedRange);
+        assertThat(result.getRangeFacetResult(facet).get().getRanges()).containsExactly(DEFAULT_RANGE_STATS);
     }
 
     @Test

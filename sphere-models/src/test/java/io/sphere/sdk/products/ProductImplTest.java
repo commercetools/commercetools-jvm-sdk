@@ -7,7 +7,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 import static io.sphere.sdk.test.SphereTestUtils.en;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class ProductImplTest extends DefaultModelSubclassTest<Product> {

@@ -5,7 +5,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import static io.sphere.sdk.carts.CartFixtures.withFilledCart;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderFromCartCreateCommandTest extends IntegrationTest {
     @Test

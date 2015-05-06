@@ -12,8 +12,7 @@ import java.time.Instant;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class InventoryEntryCreateCommandTest extends IntegrationTest {
     @Test
@@ -33,9 +32,9 @@ public class InventoryEntryCreateCommandTest extends IntegrationTest {
             assertThat(inventoryEntry.getSku()).isEqualTo(sku);
             assertThat(inventoryEntry.getQuantityOnStock()).isEqualTo(quantityOnStock);
             assertThat(inventoryEntry.getAvailableQuantity()).isEqualTo(quantityOnStock);
-            assertThat(inventoryEntry.getExpectedDelivery()).isPresentAs(expectedDelivery);
-            assertThat(inventoryEntry.getRestockableInDays()).isPresentAs(restockableInDays);
-            assertThat(inventoryEntry.getSupplyChannel()).isPresentAs(channel.toReference());
+            assertThat(inventoryEntry.getExpectedDelivery()).contains(expectedDelivery);
+            assertThat(inventoryEntry.getRestockableInDays()).contains(restockableInDays);
+            assertThat(inventoryEntry.getSupplyChannel()).contains(channel.toReference());
 
             //delete
             final DeleteCommand<InventoryEntry> deleteCommand = InventoryDeleteCommand.of(inventoryEntry);

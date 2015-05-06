@@ -17,7 +17,7 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.test.OptionalAssert;
+
 import io.sphere.sdk.test.ReferenceAssert;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
@@ -34,7 +34,7 @@ import static io.sphere.sdk.products.ProductUpdateScope.ONLY_STAGED;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
 import static java.util.Locale.ENGLISH;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.products.ProductFixtures.*;
 
@@ -185,7 +185,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription, STAGED_AND_CURRENT));
             final Product updatedProduct = execute(cmd);
 
-            OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isPresentAs(newDescription);
+            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).contains(newDescription);
             return updatedProduct;
         });
     }
@@ -201,9 +201,9 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                     .execute(ProductUpdateCommand.of(product, SetMetaAttributes.of(metaAttributes, STAGED_AND_CURRENT)));
 
             final ProductData productData = updatedProduct.getMasterData().getStaged();
-            OptionalAssert.assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
-            OptionalAssert.assertThat(productData.getMetaDescription()).isEqualTo(metaAttributes.getMetaDescription());
-            OptionalAssert.assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywords());
+            assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
+            assertThat(productData.getMetaDescription()).isEqualTo(metaAttributes.getMetaDescription());
+            assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywords());
             return updatedProduct;
         });
     }
@@ -223,20 +223,20 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final LocalizedEnumValue oldValueForColor = Colors.GREEN;
             final LocalizedEnumValue newValueForColor = Colors.RED;
 
-            OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
-            OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).isPresentAs(oldValueForColor);
+            assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isEmpty();
+            assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).contains(oldValueForColor);
 
             final SetAttribute moneyUpdate = SetAttribute.of(MASTER_VARIANT_ID, moneyAttribute, newValueForMoney, STAGED_AND_CURRENT);
             final SetAttribute localizedEnumUpdate = SetAttribute.of(MASTER_VARIANT_ID, colorAttribute, newValueForColor, STAGED_AND_CURRENT);
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
-            OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isPresentAs(newValueForMoney);
-            OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).isPresentAs(newValueForColor);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).contains(newValueForMoney);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).contains(newValueForColor);
 
             final SetAttribute unsetAction = SetAttribute.ofUnsetAttribute(MASTER_VARIANT_ID, moneyAttribute, STAGED_AND_CURRENT);
             final Product productWithoutMoney = client().execute(ProductUpdateCommand.of(updatedProduct, unsetAction));
 
-            OptionalAssert.assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
+            assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isEmpty();
 
             return productWithoutMoney;
         });
@@ -257,20 +257,20 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final LocalizedEnumValue oldValueForColor = Colors.GREEN;
             final LocalizedEnumValue newValueForColor = Colors.RED;
 
-            OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
-            OptionalAssert.assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).isPresentAs(oldValueForColor);
+            assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isEmpty();
+            assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).contains(oldValueForColor);
 
             final SetAttributeInAllVariants moneyUpdate = SetAttributeInAllVariants.of(moneyAttribute, newValueForMoney, STAGED_AND_CURRENT);
             final SetAttributeInAllVariants localizedEnumUpdate = SetAttributeInAllVariants.of(colorAttribute, newValueForColor, STAGED_AND_CURRENT);
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
-            OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isPresentAs(newValueForMoney);
-            OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).isPresentAs(newValueForColor);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).contains(newValueForMoney);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).contains(newValueForColor);
 
             final SetAttributeInAllVariants unsetAction = SetAttributeInAllVariants.ofUnsetAttribute(moneyAttribute, STAGED_AND_CURRENT);
             final Product productWithoutMoney = client().execute(ProductUpdateCommand.of(updatedProduct, unsetAction));
 
-            OptionalAssert.assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isAbsent();
+            assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isEmpty();
 
             return productWithoutMoney;
         });
@@ -285,12 +285,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription, ONLY_STAGED)));
             final Product updatedProduct = execute(cmd);
             assertThat(oldDescriptionOption).isNotEqualTo(Optional.of(newDescription));
-            OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isPresentAs(newDescription);
-            OptionalAssert.assertThat(updatedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
+            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).contains(newDescription);
+            assertThat(updatedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
 
             final Product revertedProduct = execute(ProductUpdateCommand.of(updatedProduct, RevertStagedChanges.of()));
-            OptionalAssert.assertThat(revertedProduct.getMasterData().getStaged().getDescription()).isEqualTo(oldDescriptionOption);
-            OptionalAssert.assertThat(revertedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
+            assertThat(revertedProduct.getMasterData().getStaged().getDescription()).isEqualTo(oldDescriptionOption);
+            assertThat(revertedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
 
             return revertedProduct;
         });
@@ -300,10 +300,10 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     public void setTaxCategory() throws Exception {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
             withUpdateableProduct(client(), product -> {
-                OptionalAssert.assertThat(product.getTaxCategory()).isNotPresentAs(taxCategory);
+                assertThat(product.getTaxCategory()).isNotEqualTo(Optional.of(taxCategory));
                 final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory));
                 final Product updatedProduct = execute(command);
-                OptionalAssert.assertThat(updatedProduct.getTaxCategory()).isPresentAs(taxCategory.toReference());
+                assertThat(updatedProduct.getTaxCategory()).contains(taxCategory.toReference());
                 return updatedProduct;
             })
         );

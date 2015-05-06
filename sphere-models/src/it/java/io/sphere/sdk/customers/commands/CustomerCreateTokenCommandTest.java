@@ -4,7 +4,7 @@ import io.sphere.sdk.customers.CustomerToken;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.customers.CustomerFixtures.*;
 
 public class CustomerCreateTokenCommandTest extends IntegrationTest {

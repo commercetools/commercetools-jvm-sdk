@@ -30,7 +30,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toSet;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 public class ProductProjectionIntegrationTest extends IntegrationTest {

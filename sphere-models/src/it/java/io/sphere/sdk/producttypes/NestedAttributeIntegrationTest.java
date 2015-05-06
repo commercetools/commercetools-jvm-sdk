@@ -12,8 +12,7 @@ import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
 import static java.util.Arrays.asList;
 import static io.sphere.sdk.utils.SetUtils.asSet;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
 import static java.util.stream.Collectors.toList;
@@ -50,8 +49,8 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
                     withProduct(client(), productDraftBuilder, product -> {
                         final AttributeContainer attrs = product.getMasterData().getStaged().getMasterVariant();
 
-                        assertThat(attrs.getAttribute(Banana.bananaColor)).isPresentAs("blue");
-                        assertThat(attrs.getAttribute(Banana.nutrients).map(Set::size)).isPresentAs(2);
+                        assertThat(attrs.getAttribute(Banana.bananaColor)).contains("blue");
+                        assertThat(attrs.getAttribute(Banana.nutrients).map(Set::size)).contains(2);
 
                         final List<AttributeContainer> nutrients = getSortedNutrients(attrs);
 
@@ -81,18 +80,18 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
 
     private void assertNutrient(final AttributeContainer nutrient, final double servingSize,
                                 final String servingSizeUOM, final int nutrientInformationSize) {
-        assertThat(nutrient.getAttribute(Nutrient.servingSize)).isPresentAs(servingSize);
-        assertThat(nutrient.getAttribute(Nutrient.servingSizeUOM)).isPresentAs(servingSizeUOM);
-        assertThat(nutrient.getAttribute(Nutrient.nutrientInformation).map(Set::size)).isPresentAs(nutrientInformationSize);
+        assertThat(nutrient.getAttribute(Nutrient.servingSize)).contains(servingSize);
+        assertThat(nutrient.getAttribute(Nutrient.servingSizeUOM)).contains(servingSizeUOM);
+        assertThat(nutrient.getAttribute(Nutrient.nutrientInformation).map(Set::size)).contains(nutrientInformationSize);
     }
 
     private void assertNutrientInfo(final AttributeContainer nutrientInfo, final String nutrientTypeCode,
                                     final String measurementPrecision, final double quantityContained,
                                     final String quantityContainedUOM) {
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.nutrientTypeCode)).isPresentAs(nutrientTypeCode);
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.measurementPrecision)).isPresentAs(measurementPrecision);
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.quantityContained)).isPresentAs(quantityContained);
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.quantityContainedUOM)).isPresentAs(quantityContainedUOM);
+        assertThat(nutrientInfo.getAttribute(NutrientInfo.nutrientTypeCode)).contains(nutrientTypeCode);
+        assertThat(nutrientInfo.getAttribute(NutrientInfo.measurementPrecision)).contains(measurementPrecision);
+        assertThat(nutrientInfo.getAttribute(NutrientInfo.quantityContained)).contains(quantityContained);
+        assertThat(nutrientInfo.getAttribute(NutrientInfo.quantityContainedUOM)).contains(quantityContainedUOM);
     }
 
     private ProductVariantDraft createBananaVariant() {

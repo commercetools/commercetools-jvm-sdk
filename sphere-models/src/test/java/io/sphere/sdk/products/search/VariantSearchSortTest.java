@@ -5,7 +5,7 @@ import io.sphere.sdk.search.StringSearchModel;
 import org.junit.Test;
 
 import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class VariantSearchSortTest {
     private static final ExperimentalProductProjectionSearchModel MODEL = ProductProjectionSearch.model();

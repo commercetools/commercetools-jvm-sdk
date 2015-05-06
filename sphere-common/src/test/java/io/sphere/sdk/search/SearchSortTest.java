@@ -4,7 +4,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static io.sphere.sdk.search.SimpleSearchSortDirection.*;
-import static org.fest.assertions.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class SearchSortTest {
 

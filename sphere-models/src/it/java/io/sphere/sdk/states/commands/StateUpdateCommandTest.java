@@ -16,8 +16,7 @@ import java.util.Set;
 import static io.sphere.sdk.states.StateFixtures.withUpdateableState;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StateUpdateCommandTest extends IntegrationTest {
     @Test
@@ -52,7 +51,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
 
             final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
             final State updatedState = execute(command);
-            assertThat(updatedState.getName()).isPresentAs(newName);
+            assertThat(updatedState.getName()).contains(newName);
             return updatedState;
         });
     }
@@ -64,10 +63,10 @@ public class StateUpdateCommandTest extends IntegrationTest {
                 final Set<Reference<State>> transitions = asSet(stateA.toReference());
                 final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(transitions));
                 final State updatedStateB = execute(command);
-                assertThat(updatedStateB.getTransitions()).isPresentAs(transitions);
+                assertThat(updatedStateB.getTransitions()).contains(transitions);
 
                 final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));
-                assertThat(updatedStateBWithoutTransitions.getTransitions()).isAbsent();
+                assertThat(updatedStateBWithoutTransitions.getTransitions()).isEmpty();
 
                 return updatedStateBWithoutTransitions;
             });

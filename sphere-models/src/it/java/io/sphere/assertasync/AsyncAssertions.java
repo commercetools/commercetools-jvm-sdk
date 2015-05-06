@@ -1,6 +1,6 @@
 package io.sphere.assertasync;
 
-import org.fest.assertions.Assertions;
+import org.assertj.core.api.Assertions;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;

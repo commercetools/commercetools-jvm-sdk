@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductQueryCombinationTest {
     public static final PartialProductDataQueryModel DATA_QUERY_MODEL = ProductDataQueryModel.getPartialProductDataQueryModel();

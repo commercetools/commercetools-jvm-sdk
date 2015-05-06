@@ -5,7 +5,7 @@ import io.sphere.sdk.models.DefaultModelSubclassTest;
 
 import static com.neovisionaries.i18n.CountryCode.DE;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartImplTest extends DefaultModelSubclassTest<Cart> {
 
@@ -26,6 +26,6 @@ public class CartImplTest extends DefaultModelSubclassTest<Cart> {
 
     @Override
     public void testSubclassGettersOfExample1(final Cart model) {
-        assertThat(model.getCountry()).isPresentAs(DE);
+        assertThat(model.getCountry()).contains(DE);
     }
 }

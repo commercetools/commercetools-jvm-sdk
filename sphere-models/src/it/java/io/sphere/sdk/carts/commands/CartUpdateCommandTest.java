@@ -12,7 +12,6 @@ import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.ChangePrice;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.test.OptionalAssert;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
@@ -31,8 +30,7 @@ import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.*;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartUpdateCommandTest extends IntegrationTest {
     public static final int MASTER_VARIANT_ID = 1;
@@ -133,49 +131,49 @@ public class CartUpdateCommandTest extends IntegrationTest {
     @Test
     public void setCustomerEmail() throws Exception {
         final Cart cart = createCartWithCountry(client());
-        OptionalAssert.assertThat(cart.getCustomerEmail()).isAbsent();
+        assertThat(cart.getCustomerEmail()).isEmpty();
         final String email = "info@commercetools.de";
         final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
-        OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
+        assertThat(cartWithEmail.getCustomerEmail()).contains(email);
     }
 
     @Test
     public void setShippingAddress() throws Exception {
         final Cart cart = createCartWithCountry(client());
-        OptionalAssert.assertThat(cart.getShippingAddress()).isAbsent();
+        assertThat(cart.getShippingAddress()).isEmpty();
         final Address address = AddressBuilder.of(DE).build();
         final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetShippingAddress.of(address)));
-        OptionalAssert.assertThat(cartWithAddress.getShippingAddress()).isPresentAs(address);
+        assertThat(cartWithAddress.getShippingAddress()).contains(address);
         final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetShippingAddress.of(Optional.empty())));
-        OptionalAssert.assertThat(cartWithoutAddress.getShippingAddress()).isAbsent();
+        assertThat(cartWithoutAddress.getShippingAddress()).isEmpty();
     }
 
     @Test
     public void setBillingAddress() throws Exception {
         final Cart cart = createCartWithCountry(client());
-        OptionalAssert.assertThat(cart.getBillingAddress()).isAbsent();
+        assertThat(cart.getBillingAddress()).isEmpty();
         final Address address = AddressBuilder.of(DE).build();
         final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddress.of(address)));
-        OptionalAssert.assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
+        assertThat(cartWithAddress.getBillingAddress()).contains(address);
         final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(Optional.empty())));
-        OptionalAssert.assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
+        assertThat(cartWithoutAddress.getBillingAddress()).isEmpty();
     }
 
     @Test
     public void setCountry() throws Exception {
         final Cart cart = createCartWithoutCountry(client());
-        OptionalAssert.assertThat(cart.getCountry()).isAbsent();
+        assertThat(cart.getCountry()).isEmpty();
         final Cart cartWithCountry = execute(CartUpdateCommand.of(cart, SetCountry.of(DE)));
-        OptionalAssert.assertThat(cartWithCountry.getCountry()).isPresentAs(DE);
+        assertThat(cartWithCountry.getCountry()).contains(DE);
         final Cart cartWithoutCountry = execute(CartUpdateCommand.of(cartWithCountry, SetCountry.of(Optional.empty())));
-        OptionalAssert.assertThat(cartWithoutCountry.getCountry()).isAbsent();
+        assertThat(cartWithoutCountry.getCountry()).isEmpty();
     }
 
     @Test
     public void setCustomShippingMethod() throws Exception {
         withTaxCategory(client(), taxCategory -> {
             final Cart cart = createCartWithShippingAddress(client());
-            OptionalAssert.assertThat(cart.getShippingInfo()).isAbsent();
+            assertThat(cart.getShippingInfo()).isEmpty();
             final MonetaryAmount price = MoneyImpl.of(new BigDecimal("23.50"), EUR);
             final ShippingRate shippingRate = ShippingRate.of(price);
             final String shippingMethodName = "custom-shipping";
@@ -183,7 +181,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final Cart cartWithShippingMethod = execute(CartUpdateCommand.of(cart, action));
             final CartShippingInfo shippingInfo = cartWithShippingMethod.getShippingInfo().get();
             assertThat(shippingInfo.getPrice()).isEqualTo(price);
-            OptionalAssert.assertThat(shippingInfo.getShippingMethod()).isAbsent();
+            assertThat(shippingInfo.getShippingMethod()).isEmpty();
             assertThat(shippingInfo.getShippingMethodName()).isEqualTo(shippingMethodName);
             assertThat(shippingInfo.getShippingRate()).isEqualTo(shippingRate);
             assertThat(shippingInfo.getTaxCategory()).isEqualTo(taxCategory.toReference());
@@ -195,9 +193,9 @@ public class CartUpdateCommandTest extends IntegrationTest {
     public void setShippingMethod() throws Exception {
         withShippingMethodForGermany(client(), shippingMethod -> {
             withCart(client(), createCartWithShippingAddress(client()), cart -> {
-                assertThat(cart.getShippingInfo()).isAbsent();
+                assertThat(cart.getShippingInfo()).isEmpty();
                 final Cart updatedCart = execute(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
-                assertThat(updatedCart.getShippingInfo().get().getShippingMethod()).isPresentAs(shippingMethod.toReference());
+                assertThat(updatedCart.getShippingInfo().get().getShippingMethod()).contains(shippingMethod.toReference());
                 return updatedCart;
             });
         });
@@ -207,11 +205,11 @@ public class CartUpdateCommandTest extends IntegrationTest {
     public void setCustomerId() throws Exception {
         withCustomer(client(), customer -> {
             final Cart cart = createCartWithCountry(client());
-            OptionalAssert.assertThat(cart.getCustomerId()).isAbsent();
+            assertThat(cart.getCustomerId()).isEmpty();
             final Cart cartWithCustomerId = execute(CartUpdateCommand.of(cart, SetCustomerId.of(customer)));
-            OptionalAssert.assertThat(cartWithCustomerId.getCustomerId()).isPresentAs(customer.getId());
+            assertThat(cartWithCustomerId.getCustomerId()).contains(customer.getId());
             final Cart cartWithoutCustomerId = execute(CartUpdateCommand.of(cartWithCustomerId, SetCustomerId.of(Optional.empty())));
-            OptionalAssert.assertThat(cartWithoutCustomerId.getCustomerId()).isAbsent();
+            assertThat(cartWithoutCustomerId.getCustomerId()).isEmpty();
         });
     }
 

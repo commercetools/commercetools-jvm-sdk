@@ -5,7 +5,7 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.queries.Predicate;
 import org.junit.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductDataQueryModelBaseTest {
     private static final String embeddedProductProjectionPredicate = "masterVariant(sku=\"bar\") or variants(sku=\"bar\")";

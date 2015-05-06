@@ -11,8 +11,7 @@ import org.junit.Test;
 
 import static io.sphere.sdk.states.StateFixtures.cleanUpByKey;
 import static java.util.Locale.ENGLISH;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StateCreateCommandTest extends IntegrationTest {
 
@@ -37,7 +36,7 @@ public class StateCreateCommandTest extends IntegrationTest {
 
         assertThat(state.getKey()).isEqualTo(KEY);
         assertThat(state.getType()).isEqualTo(StateType.LINE_ITEM_STATE);
-        assertThat(state.getDescription()).isPresentAs(description);
-        assertThat(state.getName()).isPresentAs(name);
+        assertThat(state.getDescription()).contains(description);
+        assertThat(state.getName()).contains(name);
     }
 }

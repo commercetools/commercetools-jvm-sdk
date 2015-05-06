@@ -5,7 +5,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerAndCart;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartByCustomerIdFetchTest extends IntegrationTest {
     @Test

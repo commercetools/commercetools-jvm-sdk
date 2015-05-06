@@ -8,7 +8,7 @@ import java.util.*;
 
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryTreeTest {
     private static final Comparator<Category> byNameComparator = (Category left, Category right) -> left.getName().get(Locale.ENGLISH).get().compareTo(right.getName().get(Locale.ENGLISH).get());

@@ -8,8 +8,7 @@ import org.junit.Test;
 import java.util.Collections;
 
 import static io.sphere.sdk.test.LocalizedStringsAssert.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static java.util.Locale.ENGLISH;
 
 public class ProductBuilderTest {
@@ -26,7 +25,7 @@ public class ProductBuilderTest {
         assertThat(product.getId()).isEqualTo("foo-id");
         final ProductData productData = product.getMasterData().getStaged();
         assertThat(productData.getName()).isEqualTo(name);
-        assertThat(productData.getMasterVariant().getSku()).isPresentAs("sku-5000");
+        assertThat(productData.getMasterVariant().getSku()).contains("sku-5000");
     }
 
     private ProductType getProductType() {

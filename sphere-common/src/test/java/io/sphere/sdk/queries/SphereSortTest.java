@@ -3,7 +3,7 @@ package io.sphere.sdk.queries;
 import org.junit.Test;
 import static io.sphere.sdk.queries.Fixtures.*;
 import static io.sphere.sdk.queries.QuerySortDirection.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SphereSortTest {
     @Test

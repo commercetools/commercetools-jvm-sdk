@@ -6,7 +6,7 @@ import java.lang.Exception;
 import java.lang.Integer;
 import java.util.Optional;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RangeTest {
 

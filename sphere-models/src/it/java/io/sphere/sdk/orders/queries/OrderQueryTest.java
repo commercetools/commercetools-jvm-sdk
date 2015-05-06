@@ -18,7 +18,7 @@ import static io.sphere.sdk.channels.ChannelFixtures.persistentChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRoles.ORDER_EXPORT;
 import static io.sphere.sdk.orders.OrderFixtures.withOrder;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderQueryTest extends IntegrationTest {
 

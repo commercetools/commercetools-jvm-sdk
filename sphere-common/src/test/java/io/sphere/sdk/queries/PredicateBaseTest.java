@@ -2,7 +2,7 @@ package io.sphere.sdk.queries;
 
 import org.junit.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PredicateBaseTest {
     final Predicate<String> p1 = Predicate.<String>of("masterData(current(slug(en=\"xyz-42\")");
