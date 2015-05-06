@@ -1,6 +1,6 @@
 package io.sphere.sdk.meta;
 
-import org.fest.assertions.GenericAssert;
+import org.assertj.core.api.AbstractAssert;
 import org.junit.Test;
 
 import java.util.concurrent.CompletableFuture;
@@ -64,17 +64,16 @@ public class AsyncDocumentationThreadTest {
         return new FutureAssert(actual);
     }
 
-    private static class FutureAssert extends GenericAssert<FutureAssert, CompletableFuture<Integer>> {
+    private static class FutureAssert extends AbstractAssert<FutureAssert, CompletableFuture<Integer>> {
         protected FutureAssert(final CompletableFuture<Integer> actual) {
-            super(FutureAssert.class, actual);
+            super(actual, FutureAssert.class);
         }
 
 
         public FutureAssert completedIn(final int completionThreadId) {
             final Integer threadId = actual.join();
             if (threadId != completionThreadId) {
-                failIfCustomMessageIsSet();
-                throw failure(format("%s did not complete in %d, but in %d.",
+                failWithMessage(format("%s did not complete in %d, but in %d.",
                         actual, completionThreadId, threadId));
             }
             return this;
@@ -83,8 +82,7 @@ public class AsyncDocumentationThreadTest {
         public FutureAssert notCompletedIn(final int completionThreadId) {
             final Integer threadId = actual.join();
             if (threadId == completionThreadId) {
-                failIfCustomMessageIsSet();
-                throw failure(format("%s did complete in %d, but not in %d.",
+                failWithMessage(format("%s did complete in %d, but not in %d.",
                         actual, completionThreadId, threadId));
             }
             return this;

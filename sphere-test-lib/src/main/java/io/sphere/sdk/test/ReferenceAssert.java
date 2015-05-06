@@ -3,13 +3,15 @@ package io.sphere.sdk.test;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import org.assertj.core.api.AbstractAssert;
 import org.assertj.core.api.Assertions;
-import org.fest.assertions.GenericAssert;
 
-public class ReferenceAssert extends GenericAssert<ReferenceAssert, Reference<?>> {
+import static java.lang.String.format;
+
+public class ReferenceAssert extends AbstractAssert<ReferenceAssert, Reference<?>> {
 
     protected ReferenceAssert(final Reference<?> actual) {
-        super(ReferenceAssert.class, actual);
+        super(actual, ReferenceAssert.class);
     }
 
     public static ReferenceAssert assertThat(final Reference<?> actual) {
@@ -24,16 +26,14 @@ public class ReferenceAssert extends GenericAssert<ReferenceAssert, Reference<?>
     public ReferenceAssert hasAnExpanded(final DefaultModel<?> model) {
         checkIsExpanded();
         if (!actual.getObj().get().equals(model)) {
-            failIfCustomMessageIsSet();
-            throw failure(String.format("%s does not contain an expanded %s.", actual, model));
+            failWithMessage(format("%s does not contain an expanded %s.", actual, model));
         }
         return this;
     }
 
     public void checkIsExpanded() {
         if (!actual.getObj().isPresent()) {
-            failIfCustomMessageIsSet();
-            throw failure(String.format("The reference %s is not expanded.", actual));
+            failWithMessage(format("The reference %s is not expanded.", actual));
         }
     }
 
@@ -45,8 +45,7 @@ public class ReferenceAssert extends GenericAssert<ReferenceAssert, Reference<?>
     @SuppressWarnings({"rawtypes", "unchecked"})
     public ReferenceAssert references(final Referenceable counterpart) {
         if (!actual.referencesSameResource(counterpart)) {
-            failIfCustomMessageIsSet();
-            throw failure(String.format("%s does not reference the same as %s.", actual, counterpart));
+            failWithMessage(format("%s does not reference the same as %s.", actual, counterpart));
         }
         return this;
     }
