@@ -25,6 +25,6 @@ public class SearchModelTest {
     @Test
     public void buildsSegmentPath() throws Exception {
         SearchModelImpl<Object> model = new SearchModelImpl<>(Optional.empty(), "variants").appended("price").appended("centAmount");
-        assertThat(model.buildPath()).containsExactly("variants", "price", "centAmount");
+        assertThat(model.buildPath()).isEqualTo(asList("variants", "price", "centAmount"));
     }
 }

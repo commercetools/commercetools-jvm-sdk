@@ -26,7 +26,7 @@ public class ZoneQueryTest extends IntegrationTest {
         ZoneFixtures.withUpdateableZone(client(), zoneA -> {
             ZoneFixtures.withUpdateableZone(client(), zoneB -> {
                 final PagedQueryResult<Zone> result = execute(ZoneQuery.of().byName(zoneA.getName()));
-                assertThat(result.getResults()).containsExactly(zoneA);
+                assertThat(result.getResults()).isEqualTo(asList(zoneA));
                 return zoneB;
             }, CD);
             return zoneA;
@@ -39,7 +39,7 @@ public class ZoneQueryTest extends IntegrationTest {
             ZoneFixtures.withUpdateableZone(client(), zoneB -> {
                 final Set<Location> locations = zoneA.getLocations();
                 final PagedQueryResult<Zone> result = execute(ZoneQuery.of().byCountry(oneOf(locations).getCountry()));
-                assertThat(result.getResults()).containsExactly(zoneA);
+                assertThat(result.getResults()).isEqualTo(asList(zoneA));
                 return zoneB;
             }, CF);
             return zoneA;

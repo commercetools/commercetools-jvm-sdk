@@ -227,7 +227,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final List<Price> prices = productWithChangedPrice.getMasterData().getCurrent().get().getMasterVariant().getPrices();
             assertThat(prices)
                     .overridingErrorMessage("we updated the price of the product")
-                    .containsExactly(newPrice);
+                    .isEqualTo(asList(newPrice));
 
             final LineItem lineItemOfTheChangedProduct =
                     execute(CartByIdFetch.of(cartWithLineItem)).get().getLineItems().get(0);

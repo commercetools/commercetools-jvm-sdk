@@ -158,7 +158,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
                         final Category loadedLevel4 = queryResult.head().get();
                         final List<Reference<Category>> ancestors = loadedLevel4.getAncestors();
                         final List<String> expectedAncestorIds = ancestors.stream().map(r -> r.getObj().get().getId()).collect(toList());
-                        assertThat(expectedAncestorIds).containsExactly(level1.getId(), level2.getId(), level3.getId());
+                        assertThat(expectedAncestorIds).isEqualTo(asList(level1.getId(), level2.getId(), level3.getId()));
 
                         final Category level3ExpandedAncestor = ancestors.get(2).getObj().get();
                         assertThat(level3ExpandedAncestor).hasSameIdAs(level3);

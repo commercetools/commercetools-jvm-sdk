@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.Optional;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class HttpHeadersTest {
@@ -12,13 +13,13 @@ public class HttpHeadersTest {
     public void testPlusForMissingValue() throws Exception {
         final HttpHeaders headers = HttpHeaders.of().plus("key", "value");
         assertThat(headers.getFlatHeader("key")).isEqualTo(Optional.of("value"));
-        assertThat(headers.getHeader("key")).containsExactly("value");
+        assertThat(headers.getHeader("key")).isEqualTo(asList("value"));
     }
 
     @Test
     public void testPlusForAlreadyPresentValue() throws Exception {
         final HttpHeaders headers = HttpHeaders.of().plus("key", "value").plus("key", "value2");
         assertThat(headers.getFlatHeader("key")).isEqualTo(Optional.of("value"));
-        assertThat(headers.getHeader("key")).containsExactly("value", "value2");
+        assertThat(headers.getHeader("key")).isEqualTo(asList("value", "value2"));
     }
 }

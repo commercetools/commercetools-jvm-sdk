@@ -49,7 +49,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
             final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
 
-            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
             return updatedProduct;
         });
     }
@@ -155,7 +155,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
         withUpdateableProduct(client(), product -> {
             final Product productWithImage = client().execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
-            assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).containsExactly(image);
+            assertThat(productWithImage.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
 
             final Product updatedProduct = execute(ProductUpdateCommand.of(productWithImage, RemoveImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);

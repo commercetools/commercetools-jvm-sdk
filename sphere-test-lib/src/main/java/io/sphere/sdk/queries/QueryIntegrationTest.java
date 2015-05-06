@@ -13,6 +13,7 @@ import java.util.stream.IntStream;
 
 import com.github.slugify.Slugify;
 
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -31,7 +32,7 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
         final String nameToFind = modelNames().get(1);
         final List<T> results = queryByName(nameToFind).getResults();
         assertThat(results).hasSize(1);
-        assertThat(getNames(results)).containsExactly(nameToFind);
+        assertThat(getNames(results)).isEqualTo(asList(nameToFind));
         assertModelsNotPresent();
     }
 
@@ -52,7 +53,7 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
     }
 
     protected void cleanUpByName(final String name) {
-        cleanUpByName(Arrays.asList(name));
+        cleanUpByName(asList(name));
     }
 
     protected void delete(T item) {
@@ -70,7 +71,7 @@ public abstract class QueryIntegrationTest<T extends Versioned<T>> extends Integ
     }
 
     protected T createInBackendByName(final String name) {
-        return createInBackendByName(Arrays.asList(name)).get(0);
+        return createInBackendByName(asList(name)).get(0);
     }
 
     protected abstract SphereRequest<T> newCreateCommandForName(String name);
