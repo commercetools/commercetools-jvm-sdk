@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static io.sphere.sdk.customers.CustomerFixtures.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerDeleteCommandTest extends IntegrationTest {
     @Test

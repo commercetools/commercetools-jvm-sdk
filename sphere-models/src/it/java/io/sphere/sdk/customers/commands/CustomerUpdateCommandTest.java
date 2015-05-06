@@ -60,7 +60,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
         withCustomerWithOneAddress(client(), customer -> {
             final String city = "new city";
             assertThat(customer.getAddresses()).hasSize(1);
-            assertThat(customer.getAddresses().get(0).getCity()).isPresent().butNotAs(city);
+            assertThat(customer.getAddresses().get(0).getCity()).isNotEqualTo(Optional.of(city));
 
             final Address oldAddress = customer.getAddresses().get(0);
             assertThat(oldAddress.getId())

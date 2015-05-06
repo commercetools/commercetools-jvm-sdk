@@ -17,6 +17,7 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static java.util.Locale.ENGLISH;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Override

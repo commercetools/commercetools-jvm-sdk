@@ -34,6 +34,7 @@ import static io.sphere.sdk.http.HttpMethod.POST;
 import static java.util.stream.Collectors.joining;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.fail;
 import static io.sphere.assertasync.AsyncAssertions.*;
 
@@ -269,7 +270,8 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     @Test
     public void noSearchHintNoteOnNormalException() throws Exception {
         final SphereClient client = SphereClientFactory.of().createHttpTestDouble(intent -> HttpResponse.of(500));
-        final AsyncAssertions<PagedQueryResult<Category>> x = performing(client.execute(CategoryQuery.of()));
-        x.completesExceptionally(SphereException.class, e -> assertThat(e.getAdditionalNotes().stream().collect(joining(", "))).excludes("reindex"));
+        assertThatThrownBy(() -> client.execute(CategoryQuery.of()))
+                .isInstanceOf(SphereException.class)
+                .matches(e -> ((SphereException) e).getAdditionalNotes().stream().allMatch(s -> !s.contains("reindex")));
     }
 }

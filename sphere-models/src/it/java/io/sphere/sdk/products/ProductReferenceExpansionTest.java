@@ -15,6 +15,7 @@ import java.util.Locale;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
+import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 

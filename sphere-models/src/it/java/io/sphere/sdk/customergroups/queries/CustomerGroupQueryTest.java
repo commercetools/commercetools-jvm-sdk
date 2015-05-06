@@ -8,6 +8,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerGroupQueryTest extends IntegrationTest {
 

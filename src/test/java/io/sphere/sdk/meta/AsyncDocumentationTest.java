@@ -22,8 +22,7 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
-import static io.sphere.sdk.test.SphereTestUtils.asList;
-import static java.util.Arrays.asList;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
