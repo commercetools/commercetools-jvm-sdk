@@ -19,11 +19,11 @@ import java.util.Set;
 
 @JsonDeserialize(as=OrderImpl.class)
 public interface Order extends OrderLike<Order> {
-    public static String typeId(){
+    static String typeId(){
         return "order";
     }
 
-    public static TypeReference<Order> typeReference() {
+    static TypeReference<Order> typeReference() {
         return new TypeReference<Order>() {
             @Override
             public String toString() {

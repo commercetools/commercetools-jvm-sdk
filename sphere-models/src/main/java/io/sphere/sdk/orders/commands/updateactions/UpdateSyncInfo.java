@@ -26,16 +26,20 @@ public class UpdateSyncInfo extends UpdateAction<Order> {
         this.syncedAt = syncedAt;
     }
 
+    public static UpdateSyncInfo of(final Reference<Channel> channel, final Optional<String> externalId, final Optional<Instant> syncedAt) {
+        return new UpdateSyncInfo(channel, externalId, syncedAt);
+    }
+
     public static UpdateSyncInfo of(final Referenceable<Channel> channel) {
-        return new UpdateSyncInfo(channel.toReference(), Optional.empty(), Optional.empty());
+        return of(channel.toReference(), Optional.empty(), Optional.empty());
     }
 
     public UpdateSyncInfo withExternalId(final String externalId) {
-        return new UpdateSyncInfo(channel, Optional.of(externalId), syncedAt);
+        return of(channel, Optional.of(externalId), syncedAt);
     }
 
     public UpdateSyncInfo withSyncedAt(final Instant syncedAt) {
-        return new UpdateSyncInfo(channel, externalId, Optional.of(syncedAt));
+        return of(channel, externalId, Optional.of(syncedAt));
     }
 
     public Reference<Channel> getChannel() {

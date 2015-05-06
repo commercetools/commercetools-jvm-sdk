@@ -1,8 +1,11 @@
 package io.sphere.sdk.orders.queries;
 
 import io.sphere.sdk.carts.CartFixtures;
+import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
+import io.sphere.sdk.orders.commands.OrderUpdateCommand;
+import io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo;
 import io.sphere.sdk.queries.Predicate;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QuerySort;
@@ -11,7 +14,10 @@ import org.junit.Test;
 
 import java.util.function.Function;
 
+import static io.sphere.sdk.channels.ChannelFixtures.persistentChannelOfRole;
+import static io.sphere.sdk.channels.ChannelRoles.ORDER_EXPORT;
 import static io.sphere.sdk.orders.OrderFixtures.withOrder;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.fest.assertions.Assertions.assertThat;
 
 public class OrderQueryTest extends IntegrationTest {
@@ -49,14 +55,52 @@ public class OrderQueryTest extends IntegrationTest {
         assertOrderIsFoundWithPredicate(order -> MODEL.country().is(CartFixtures.DEFAULT_COUNTRY));
     }
 
+    @Test
+    public void orderState() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.orderState().is(order.getOrderState()));
+    }
+
+    @Test
+    public void shipmentState() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.shipmentState().is(order.getShipmentState().get()));
+    }
+
+    @Test
+    public void paymentState() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.paymentState().is(order.getPaymentState().get()));
+    }
+
+    @Test
+    public void syncInfo() throws Exception {
+        final Channel channel = persistentChannelOfRole(client(), ORDER_EXPORT);
+        assertOrderIsFoundWithPredicate(order -> {
+            final String externalId = randomKey();
+            execute(OrderUpdateCommand.of(order, UpdateSyncInfo.of(channel).withExternalId(externalId)));
+            return MODEL.syncInfo().channel().is(channel).and(MODEL.syncInfo().externalId().is(externalId));
+        });
+    }
+
     private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p) {
+        assertOrderIsFound(p, true);
+    }
+
+    private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p, final boolean shouldFind) {
         withOrder(client(), order -> {
             final QueryDsl<Order> query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
-            assertThat(client().execute(query).head().get().getId()).isEqualTo(order.getId());
+            final String id = client().execute(query).head().orElseThrow(() -> new RuntimeException("nothing found with predicate")).getId();
+            if (shouldFind) {
+                assertThat(id).isEqualTo(order.getId());
+            } else {
+                assertThat(id).isNotEqualTo(order.getId());
+            }
         });
     }
 
     private void assertOrderIsFoundWithPredicate(final Function<Order, Predicate<Order>> p) {
-        assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)).withSort(QuerySort.of("createdAt desc")));
+        assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)), true);
+    }
+
+    private void assertOrderIsNotFoundWithPredicate(final Function<Order, Predicate<Order>> p) {
+        assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)), false);
     }
 }

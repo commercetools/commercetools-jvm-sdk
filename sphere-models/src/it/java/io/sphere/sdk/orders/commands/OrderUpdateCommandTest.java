@@ -1,8 +1,11 @@
 package io.sphere.sdk.orders.commands;
 
+import io.sphere.sdk.carts.CustomLineItem;
+import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.test.IntegrationTest;
 import org.fest.assertions.Assertions;
 import org.junit.Test;
@@ -10,12 +13,16 @@ import org.junit.Test;
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.orders.OrderFixtures.*;
+import static io.sphere.sdk.states.StateFixtures.withStandardStates;
+import static io.sphere.sdk.utils.SetUtils.asSet;
 import static org.fest.assertions.Assertions.assertThat;
 import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.carts.LineItemLikeAssert.assertThat;
 
 public class OrderUpdateCommandTest extends IntegrationTest {
 
@@ -39,18 +46,20 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeShipmentState() throws Exception {
         withOrder(client(), order -> {
-            assertThat(order.getShipmentState()).isEqualTo(Optional.empty());
-            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.SHIPPED)));
-            assertThat(updatedOrder.getShipmentState()).isPresentAs(ShipmentState.SHIPPED);
+            final ShipmentState newState = ShipmentState.SHIPPED;
+            assertThat(order.getShipmentState()).isNotPresentAs(newState);
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
+            assertThat(updatedOrder.getShipmentState()).isPresentAs(newState);
         });
     }
 
     @Test
     public void changePaymentState() throws Exception {
         withOrder(client(), order -> {
-            assertThat(order.getPaymentState()).isEqualTo(Optional.empty());
-            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.PAID)));
-            assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.PAID);
+            final PaymentState newState = PaymentState.PAID;
+            assertThat(order.getPaymentState()).isNotPresentAs(newState);
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(newState)));
+            assertThat(updatedOrder.getPaymentState()).isPresentAs(newState);
         });
     }
 
@@ -101,14 +110,14 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     @Test
     public void updateSyncInfo() throws Exception {
         withOrderExportChannel(client(), channel ->
-            withOrder(client(), order -> {
-                assertThat(order.getSyncInfo()).isEmpty();
-                final Instant aDateInThePast = INSTANT_IN_PAST;
-                final String externalId = "foo";
-                final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
-                final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-                assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
-            })
+                        withOrder(client(), order -> {
+                            assertThat(order.getSyncInfo()).isEmpty();
+                            final Instant aDateInThePast = INSTANT_IN_PAST;
+                            final String externalId = "foo";
+                            final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
+                            final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+                            assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
+                        })
         );
     }
 
@@ -156,5 +165,59 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             final ReturnPaymentState updatedPaymentState = updatedOrder.getReturnInfo().get(0).getItems().get(0).getPaymentState();
             assertThat(updatedPaymentState).isEqualTo(newPaymentState);
         });
+    }
+
+    @Test
+    public void transitionLineItemState() throws Exception {
+        withStandardStates(client(), (State initialState, State nextState) ->
+                        withOrder(client(), order -> {
+                            final LineItem lineItem = order.getLineItems().get(0);
+                            assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+                            final int quantity = 1;
+                            final Instant actualTransitionDate = INSTANT_IN_PAST;
+                            final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
+                            assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+                        })
+        );
+    }
+
+    @Test
+    public void transitionCustomLineItemState() throws Exception {
+        withStandardStates(client(), (State initialState, State nextState) ->
+            withOrderOfCustomLineItems(client(), order -> {
+                final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
+                assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
+                final int quantity = 1;
+                final Instant actualTransitionDate = INSTANT_IN_PAST;
+                final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
+                assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+            })
+        );
+    }
+
+    @Test
+    public void importLineItemState() throws Exception {
+        withStandardStates(client(), (State initialState, State nextState) ->
+            withOrder(client(), order -> {
+                final LineItem lineItem = order.getLineItems().get(0);
+                assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+                final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1), ItemState.of(initialState, lineItem.getQuantity() - 1));
+                final Order updatedOrder = execute(OrderUpdateCommand.of(order, ImportLineItemState.of(lineItem, itemStates)));
+                assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
+            })
+        );
+    }
+
+    @Test
+    public void importCustomLineItemState() throws Exception {
+        withStandardStates(client(), (State initialState, State nextState) ->
+            withOrderOfCustomLineItems(client(), order -> {
+                final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
+                assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
+                final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1), ItemState.of(initialState, customLineItem.getQuantity() - 1));
+                final Order updatedOrder = execute(OrderUpdateCommand.of(order, ImportCustomLineItemState.of(customLineItem, itemStates)));
+                assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(itemStates);
+            })
+        );
     }
 }

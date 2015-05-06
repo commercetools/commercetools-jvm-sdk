@@ -26,7 +26,7 @@ public interface InventoryEntry extends DefaultModel<InventoryEntry> {
     //reservations are internal
 
     default Reference<InventoryEntry> toReference() {
-        return Reference.of(typeId(), getId());
+        return Reference.of(typeId(), getId(), this);
     }
 
     static String typeId(){

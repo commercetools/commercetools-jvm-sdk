@@ -2,6 +2,8 @@ package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.util.Optional;
 
 /**
@@ -92,7 +94,7 @@ public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
 
     @SuppressWarnings("rawtypes")//at runtime generic type is not determinable
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -105,10 +107,11 @@ public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
     }
 
     @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + typeId.hashCode();
-        result = 31 * result + obj.hashCode();
-        return result;
+    public final int hashCode() {
+        //important, ignore obj hash code to match with equals
+        return new HashCodeBuilder(17, 37).
+                append(id).
+                append(typeId).
+                toHashCode();
     }
 }

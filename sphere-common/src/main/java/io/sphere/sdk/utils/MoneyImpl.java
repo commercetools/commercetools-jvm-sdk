@@ -254,4 +254,8 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
         final CurrencyUnit currency = CurrencyUnitBuilder.of(currencyCode, CurrencyContextBuilder.of("default").build()).build();
         return MoneyImpl.of(amount, currency);
     }
+
+    public static MonetaryAmount of(final String amount, final CurrencyUnit currencyUnit) {
+        return of(new BigDecimal(amount), currencyUnit);
+    }
 }
