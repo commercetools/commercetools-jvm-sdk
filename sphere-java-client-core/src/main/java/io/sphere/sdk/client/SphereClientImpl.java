@@ -10,7 +10,6 @@ import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.util.List;
 import java.util.concurrent.CompletionStage;
-import java.util.function.Function;
 
 import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
@@ -52,9 +51,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
             }
             return output;
         });
-        return httpClient.
-                execute(httpRequest).
-                thenApply(preProcess(sphereRequest, objectMapper, config));
+        return httpClient.execute(httpRequest).thenApply(httpResponse -> processHttpResponse(sphereRequest, objectMapper, config, httpResponse));
     }
 
     private <T> HttpRequest createHttpRequest(final SphereRequest<T> sphereRequest, final String token) {
@@ -66,20 +63,18 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
                 .toHttpRequest(config.getApiUrl());
     }
 
-    static <T> Function<HttpResponse, T> preProcess(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config) {
-        return httpResponse -> {
-            final SphereInternalLogger logger = getLogger(httpResponse);
-            logger.debug(() -> httpResponse);
-            logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> JsonUtils.prettyPrintJsonStringSecure(bytesToString(body))).orElse("No body present.") + "\n");
-            final List<String> notices = httpResponse.getHeaders().getHeadersAsMap().get(SphereHttpHeaders.X_DEPRECATION_NOTICE);
-            if (notices != null) {
-                notices.stream().forEach(message -> logger.warn(() -> "Deprecation notice : " + message));
-            }
-            return parse(httpResponse, sphereRequest, objectMapper, config);
-        };
+    private static <T> T processHttpResponse(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config, final HttpResponse httpResponse) {
+        final SphereInternalLogger logger = getLogger(httpResponse);
+        logger.debug(() -> httpResponse);
+        logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> JsonUtils.prettyPrintJsonStringSecure(bytesToString(body))).orElse("No body present.") + "\n");
+        final List<String> notices = httpResponse.getHeaders().getHeadersAsMap().get(SphereHttpHeaders.X_DEPRECATION_NOTICE);
+        if (notices != null) {
+            notices.stream().forEach(message -> logger.warn(() -> "Deprecation notice : " + message));
+        }
+        return parse(sphereRequest, objectMapper, config, httpResponse);
     }
 
-    static <T> T parse(final HttpResponse httpResponse, final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config) {
+    static <T> T parse(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config, final HttpResponse httpResponse) {
         final T result;
         if (!sphereRequest.canDeserialize(httpResponse)) {
             final SphereException sphereException = createExceptionFor(httpResponse, sphereRequest, objectMapper, config);
