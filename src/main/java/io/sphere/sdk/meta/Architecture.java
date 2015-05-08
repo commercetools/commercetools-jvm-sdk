@@ -18,9 +18,9 @@ import io.sphere.sdk.models.Base;
  *
  * <p>A highly modular architecture makes sure that the SDK is easily extensible. The SDK's classes are not unnecessarily coupled to each other.
  * For example, the client modules do not "know" the model modules (containing queries and commands) and vice versa.
- * So it must be possible to create more model packages without changing the client. This was the problem of the old
+ * So it must be possible to create more model packages without changing the client. This was the problem with the old
  * SDK that bound the services directly to the client
- * and made it impossible to extend without touching the original code. In addition removing the service coupling to
+ * and made it therefore impossible to extend without touching the original code. Additionally removing the service coupling to
  * the client makes it possible to create different clients for different future implementations.</p>
  *
  */
