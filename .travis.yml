@@ -2,6 +2,7 @@ language: scala
 scala:
 - 2.10.0
 script:
+- echo $JAVA_HOME
 - ./sbt genDoc test it:test
 - bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null
 before_install:
