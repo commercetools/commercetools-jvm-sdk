@@ -7,7 +7,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
 import java.util.Optional;
 
-interface ProductLike<T> extends DefaultModelView<T> {
+interface ProductLike<T> extends DefaultModelView<T>, ProductIdentifiable {
     Reference<ProductType> getProductType();
 
     Optional<Reference<TaxCategory>> getTaxCategory();
