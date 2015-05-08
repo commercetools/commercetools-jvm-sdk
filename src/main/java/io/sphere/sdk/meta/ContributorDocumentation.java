@@ -5,9 +5,9 @@ package io.sphere.sdk.meta;
 
 
  <ul>
-    <li>Contribution Guidelines: https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md</li>
-    <li>`sbt clean genDoc` create Javadoc for all modules, it is available in target/javaunidoc/index.html</li>
-    <li>open directly the project with IntelliJ IDEA Ultimate might not work due to a bug, but using https://github.com/mpeltonen/sbt-idea works</li>
+    <li>please follow the <a href="https://github.com/sphereio/sphere-sunrise/blob/master/CONTRIBUTING.md">Contribution Guidelines</a></li>
+    <li>`sbt clean genDoc` creates Javadocs for all modules, it is available in target/javaunidoc/index.html</li>
+    <li>opening the project with IntelliJ IDEA Ultimate might not work due to a bug, but using <a href="https://github.com/mpeltonen/sbt-idea">this solution</a> works</li>
  </ul>
 
  <h3 id=construction>Construction</h3>
@@ -19,27 +19,27 @@ package io.sphere.sdk.meta;
         If multiple constructors are present, one constructor should have the role as primary constructor, so every other constructor has to directly or indirectly call the primary constructor.
     </li>
     <li>
-        Prefer to create not public constructors.
+        Prefer to create non-public constructors.
     </li>
     <li>
-        The task of a constructor is to create a usable and consistent object but not firing actions. Prefer public static factory methods to constructors so internals are hidden and it is possible to make the class an interface later.
+        The purpose of a constructor is to create a usable and consistent object, but not to fire actions. Prefer public static factory methods to constructors so that internals are hidden and to make it possible to turn the class into an interface later.
     </li>
     <li>
-        Static factory methods should be called {@code of}, this is the Java 8 style, like {@link java.util.Optional#of(Object)}. It is okay to create additional aliases, like {@code empty()} for {@code of()}. Very specific factory methods can be named like this {@code Xyz.ofSlug(final String slug)} or
-        {@code Xyz.ofName(final String name)} this is more clear without remembering the correct parameter type like for {@code Xyz.of(final String guessWhat)}.
+        Static factory methods should be named {@code of}, to be compliant to the Java 8 style, for instance {@link java.util.Optional#of(Object)}. It is okay to create additional aliases, like {@code empty()} for {@code of()}. Very specific factory methods can be named like this: {@code Xyz.ofSlug(final String slug)} or
+        this: {@code Xyz.ofName(final String name)}. This naming convention makes clear what parameter type is required for the method compared to the more general method name like: {@code Xyz.of(final String guessWhat)}.
     </li>
     <li>
         If several constructors are present use the annotation {@link com.fasterxml.jackson.annotation.JsonCreator} to mark the right one for the JSON deserialization.
         <ul>
             <li>
-                If you don't do it you get an error message like
+                If you don't do it you'll get an error message like
                 {@code Caused by: com.fasterxml.jackson.databind.JsonMappingException: Conflicting property-based creators: already had [constructor for YOUR_CLASS, annotations: [null]], encountered [constructor for YOUR_CLASS, annotations: [null]]}
             </li>
             <li>
-                Another problem cause for the previous error can be a static factory method which jackson by mistake tries to use for mapping, so annotate it with {@link com.fasterxml.jackson.annotation.JsonIgnore}.
+                Another reason for the previous error can be a static factory method which jackson tries to use for mapping by mistake, so you better annotate it with {@link com.fasterxml.jackson.annotation.JsonIgnore}.
             </li>
             <li>
-                The error message {@code java.lang.RuntimeException: com.fasterxml.jackson.databind.JsonMappingException: Could not find creator property with name 'YOUR_PROPERTY_NAME' } is also a sign to annotate a factory method with {@link com.fasterxml.jackson.annotation.JsonIgnore}.
+                Also the error message {@code java.lang.RuntimeException: com.fasterxml.jackson.databind.JsonMappingException: Could not find creator property with name 'YOUR_PROPERTY_NAME' } indicates that you should annotate a factory method with {@link com.fasterxml.jackson.annotation.JsonIgnore}.
             </li>
         </ul>
     </li>
@@ -53,12 +53,12 @@ public Xyz(final String id)</pre>
 
  <h3 id=classes>Classes</h3>
  <ul>
-    <li>Do not extend Object directly, if you can't find a base class use {@link io.sphere.sdk.models.Base} which implements equals, hashCode and toString with reflection.</li>
+    <li>Do not extend Object directly; if you can't find a base class simply use {@link io.sphere.sdk.models.Base} which implements equals, hashCode and toString with reflection.</li>
  </ul>
  <h3 id=abstract-classes>Polymorphism/Abstract Classes/Interfaces</h3>
  <ul>
- <li>If you have to deserialize abstract classes or interfaces you need to specify how Jackson should deserialize. Look into the source code of {@link io.sphere.sdk.productdiscounts.ProductDiscountValue} to find out how this can be done.</li>
- <li>If you use {@link com.fasterxml.jackson.annotation.JsonTypeInfo} with a property and have already declared a property with the same name, it will may be written twice with different values, see also <a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">Stackoverflow</a>.</li>
+ <li>If you have to deserialize abstract classes or interfaces you need to specify the way how Jackson does the deserialization. Have a look into the source code of {@link io.sphere.sdk.productdiscounts.ProductDiscountValue} to find out how this can be done.</li>
+ <li>If you use {@link com.fasterxml.jackson.annotation.JsonTypeInfo} with a property and you have already declared a property with the same name, it will may be written twice with different values, see also <a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">Stackoverflow</a>.</li>
  </ul>
  <h3 id=optional-values>Optional values</h3>
 
@@ -79,11 +79,11 @@ public Xyz(final String id)</pre>
     "message" : "'roles' should not be empty."
   } ]
 }
- </pre><p>To solve this problem you have to not serialize the field at all like in</p> <pre>{
+ </pre><p>To solve this problem you have to prevent the field from serialization like in</p> <pre>{
   "key" : "assignPricesToMasterVariantAccordingToAChannel",
   "name" : null,
   "description" : null
-} </pre><p>This can be achieved by adding annotation {@link com.fasterxml.jackson.annotation.JsonInclude} like this: {@code @JsonInclude(JsonInclude.Include.NON_EMPTY) }</p></li>
+} </pre><p>This can be achieved by adding the annotation {@link com.fasterxml.jackson.annotation.JsonInclude} like this: {@code @JsonInclude(JsonInclude.Include.NON_EMPTY) }</p></li>
  </ul>
 
 
@@ -99,9 +99,9 @@ public Xyz(final String id)</pre>
 
  <li>in <em>RESOURCEImpl</em> add private final fields for all members of the resource (except the members defined in {@link io.sphere.sdk.models.DefaultModelImpl}
  like {@link io.sphere.sdk.models.DefaultModelImpl#id}, {@link io.sphere.sdk.models.DefaultModelImpl#version}, {@link io.sphere.sdk.models.DefaultModelImpl#createdAt} and {@link io.sphere.sdk.models.DefaultModelImpl#lastModifiedAt}</li>
- <li>in <em>RESOURCEImpl</em> create a constructor with your IDE, this will be called primary constructor</li>
+ <li>in <em>RESOURCEImpl</em> create a constructor with your IDE, this will be called the primary constructor</li>
  <li>in <em>RESOURCEImpl</em> create getters for all the fields you have created with your IDE</li>
- <li>in <em>RESOURCEImpl</em> use extract interface of your IDE to get the signatures of the getters,
+ <li>in <em>RESOURCEImpl</em> use 'extract interface' of your IDE to get the signatures of the getters,
  cut and paste them into <em>RESOURCE</em> and remove the extracted interface, as a result the getter will also have the {@link java.lang.Override} annotation</li>
  <li>in <em>RESOURCE</em> annotate the interface <em>RESOURCE</em> with {@code @JsonDeserialize(as=RESOURCEImpl.class)}</li>
  <li>in <em>RESOURCE</em> create a static method which returns the type id as in {@link io.sphere.sdk.categories.Category#typeId()}</li>
