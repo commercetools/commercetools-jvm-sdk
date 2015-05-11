@@ -2,11 +2,13 @@ package io.sphere.sdk.projects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.CreationTimestamped;
 
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 public final class Project extends Base implements CreationTimestamped {
@@ -15,10 +17,10 @@ public final class Project extends Base implements CreationTimestamped {
     private final List<CountryCode> countries;
     private final List<String> languages;
     private final Instant createdAt;
-    private final String trialUntil;
+    private final ZonedDateTime trialUntil;
 
     @JsonCreator
-    private Project(final String key, final String name, final List<CountryCode> countries, final List<String> languages, final Instant createdAt, final String trialUntil) {
+    private Project(final String key, final String name, final List<CountryCode> countries, final List<String> languages, final Instant createdAt,  @JsonDeserialize(using=TrialUntilDeserializer.class) final ZonedDateTime trialUntil) {
         this.key = key;
         this.name = name;
         this.countries = countries;
@@ -43,7 +45,7 @@ public final class Project extends Base implements CreationTimestamped {
         return languages;
     }
 
-    public String getTrialUntil() {
+    public ZonedDateTime getTrialUntil() {
         return trialUntil;
     }
 
