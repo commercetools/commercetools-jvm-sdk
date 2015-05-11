@@ -12,5 +12,6 @@ public class ProjectGetTest extends IntegrationTest {
         final Project project = execute(ProjectGet.of());
         assertThat(project.getKey()).isEqualTo(projectKey());
         assertThat(project.getName()).isNotEmpty();
+        assertThat(project.getCountries()).isNotEmpty();
     }
 }
