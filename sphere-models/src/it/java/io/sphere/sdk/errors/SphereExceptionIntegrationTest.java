@@ -270,8 +270,9 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     @Test
     public void noSearchHintNoteOnNormalException() throws Exception {
         final SphereClient client = SphereClientFactory.of().createHttpTestDouble(intent -> HttpResponse.of(500));
-        assertThatThrownBy(() -> client.execute(CategoryQuery.of()))
-                .isInstanceOf(SphereException.class)
-                .matches(e -> ((SphereException) e).getAdditionalNotes().stream().allMatch(s -> !s.contains("reindex")));
+        assertThatThrownBy(() -> client.execute(CategoryQuery.of()).toCompletableFuture().join())
+                .isInstanceOf(CompletionException.class)
+                .hasCauseInstanceOf(SphereException.class)
+                .matches(e -> ((SphereException) e.getCause()).getAdditionalNotes().stream().allMatch(s -> !s.contains("reindex")));
     }
 }
