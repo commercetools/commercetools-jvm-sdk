@@ -3,11 +3,7 @@ package io.sphere.sdk.customers.commands;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.CustomerSignInResult;
-import io.sphere.sdk.models.ErrorResponse;
-import io.sphere.sdk.client.ErrorResponseException;
-import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.client.HttpRequestIntent;
-import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.JsonUtils;
 
 import java.util.Optional;
@@ -16,7 +12,7 @@ import static io.sphere.sdk.http.HttpMethod.POST;
 
 /**
  * Retrieves the authenticated customer (a customer that matches the given email/password pair).
- * Before signing in, a customer might have created an anoynmous cart.
+ * Before signing in, a customer might have created an anonymous cart.
  * After signing in, the content of the anonymous cart should be in the customer's cart.
  * If the customer did not have a cart associated to him, then the anonymous cart becomes the customer's cart.
  * If a customer already had a cart associated to him, then the content of the anonymous cart will be copied to the customer's cart.
@@ -24,6 +20,9 @@ import static io.sphere.sdk.http.HttpMethod.POST;
  * then the maximum quantity of both line items is used as the new quantity.
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandTest#execution()}
+ *
+ *  <p>Example for invalid credentials:</p>
+ * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandTest#executionWithInvalidEmail()}
  */
 public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
     private final String email;
@@ -56,26 +55,6 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
     @Override
     public HttpRequestIntent httpRequestIntent() {
         return HttpRequestIntent.of(POST, "/login", JsonUtils.toJson(this));
-    }
-
-    @Override
-    public boolean canDeserialize(final HttpResponse httpResponse) {
-        return super.canDeserialize(httpResponse) || httpResponse.getStatusCode() == 400;
-    }
-
-    @Override
-    public CustomerSignInResult deserialize(final HttpResponse httpResponse) {
-        if (httpResponse.getStatusCode() == 400) {
-            //TODO this code needs reworking
-            final ErrorResponse errorResponse = resultMapperOf(ErrorResponse.typeReference()).apply(httpResponse);
-            if (errorResponse.getErrors().stream().anyMatch(error -> error.getCode().equals("InvalidCredentials"))) {
-                throw new ErrorResponseException(errorResponse);
-            } else {
-                throw new SphereException(errorResponse.toString());
-            }
-        } else {
-            return super.deserialize(httpResponse);
-        }
     }
 
     public String getEmail() {
