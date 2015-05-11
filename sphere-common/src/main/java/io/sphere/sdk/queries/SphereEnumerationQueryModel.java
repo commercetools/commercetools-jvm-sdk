@@ -9,7 +9,7 @@ public class SphereEnumerationQueryModel<T, E extends SphereEnumeration> extends
         super(parent, pathSegment);
     }
 
-    public Predicate<T> is(final E enumValue) {
-        return EqPredicate.of(this, enumValue.toSphereName());
+    public QueryPredicate<T> is(final E enumValue) {
+        return EqQueryPredicate.of(this, enumValue.toSphereName());
     }
 }

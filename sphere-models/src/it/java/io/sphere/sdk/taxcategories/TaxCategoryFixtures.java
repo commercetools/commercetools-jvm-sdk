@@ -3,7 +3,7 @@ package io.sphere.sdk.taxcategories;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryCreateCommand;
 import io.sphere.sdk.taxcategories.commands.TaxCategoryDeleteCommand;
 import io.sphere.sdk.taxcategories.queries.TaxCategoryQuery;
@@ -22,7 +22,7 @@ public final class TaxCategoryFixtures {
     }
 
     public static void withTaxCategory(final TestClient client, final Consumer<TaxCategory> user) {
-        final Predicate<TaxCategory> predicate = TaxCategoryQuery.model().name().is(STANDARD_TAX_CATEGORY);
+        final QueryPredicate<TaxCategory> predicate = TaxCategoryQuery.model().name().is(STANDARD_TAX_CATEGORY);
         final List<TaxCategory> results = client.execute(TaxCategoryQuery.of().withPredicate(predicate)).getResults();
         final TaxCategory taxCategory;
         if (results.isEmpty()) {

@@ -6,7 +6,7 @@ import io.sphere.sdk.producttypes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 
 import java.util.concurrent.CompletionStage;
 
@@ -19,7 +19,7 @@ public class QueryProductTypeExamples {
     }
 
     public void queryByAttributeName() {
-        Predicate<ProductType> hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
+        QueryPredicate<ProductType> hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
         CompletionStage<PagedQueryResult<ProductType>> result = client.execute(ProductTypeQuery.of().withPredicate(hasSizeAttribute));
     }
 

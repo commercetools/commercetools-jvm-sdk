@@ -1,9 +1,9 @@
 package io.sphere.sdk.queries;
 
-abstract class ComparisonPredicate<T, V, M> extends QueryModelPredicate<M> {
+abstract class ComparisonQueryPredicate<T, V, M> extends QueryModelQueryPredicate<M> {
     private final V value;
 
-    ComparisonPredicate(final QueryModel<M> queryModel, final V value) {
+    ComparisonQueryPredicate(final QueryModel<M> queryModel, final V value) {
         super(queryModel);
         this.value = value;
     }

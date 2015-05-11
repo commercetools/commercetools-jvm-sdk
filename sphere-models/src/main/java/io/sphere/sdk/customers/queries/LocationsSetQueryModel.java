@@ -22,11 +22,11 @@ public class LocationsSetQueryModel<T> extends QueryModelImpl<T> {
         return new StringQuerySortingModel<>(Optional.of(this), "state");
     }
 
-    public Predicate<T> where(final Predicate<PartialLocationsSetQueryModel> embeddedPredicate) {
-        return new EmbeddedPredicate<>(this, embeddedPredicate);
+    public QueryPredicate<T> where(final QueryPredicate<PartialLocationsSetQueryModel> embeddedPredicate) {
+        return new EmbeddedQueryPredicate<>(this, embeddedPredicate);
     }
 
-    public Predicate<T> where(final Function<PartialLocationsSetQueryModel, Predicate<PartialLocationsSetQueryModel>> embeddedPredicate) {
+    public QueryPredicate<T> where(final Function<PartialLocationsSetQueryModel, QueryPredicate<PartialLocationsSetQueryModel>> embeddedPredicate) {
         return where(embeddedPredicate.apply(PartialLocationsSetQueryModel.get()));
     }
 }

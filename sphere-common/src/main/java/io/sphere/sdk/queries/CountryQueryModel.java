@@ -9,7 +9,7 @@ public class CountryQueryModel<T> extends QueryModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public Predicate<T> is(final CountryCode countryCode) {
-        return EqPredicate.of(this, countryCode.getAlpha2());
+    public QueryPredicate<T> is(final CountryCode countryCode) {
+        return EqQueryPredicate.of(this, countryCode.getAlpha2());
     }
 }

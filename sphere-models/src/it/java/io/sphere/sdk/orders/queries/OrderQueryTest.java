@@ -6,7 +6,7 @@ import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
 import io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
@@ -96,11 +96,11 @@ public class OrderQueryTest extends IntegrationTest {
         });
     }
 
-    private void assertOrderIsFoundWithPredicate(final Function<Order, Predicate<Order>> p) {
+    private void assertOrderIsFoundWithPredicate(final Function<Order, QueryPredicate<Order>> p) {
         assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)), true);
     }
 
-    private void assertOrderIsNotFoundWithPredicate(final Function<Order, Predicate<Order>> p) {
+    private void assertOrderIsNotFoundWithPredicate(final Function<Order, QueryPredicate<Order>> p) {
         assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)), false);
     }
 }

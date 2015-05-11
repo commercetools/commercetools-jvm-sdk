@@ -10,7 +10,7 @@ import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.queries.ProductProjectionByIdFetch;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
@@ -125,7 +125,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
         withProduct(client(), product -> {
             final String sku = "sku-" + randomString();
             final Product productWithSku = execute(ProductUpdateCommand.of(product, SetSku.of(MASTER_VARIANT_ID, sku)));
-            final Predicate<ProductProjection> predicate = model().masterVariant().sku().is(sku);
+            final QueryPredicate<ProductProjection> predicate = model().masterVariant().sku().is(sku);
             checkOneResult(productWithSku, predicate);
         });
     }
@@ -146,7 +146,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
             withProduct(client(), product -> {
                 final Product productWithTaxCategory = execute(ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory)));
-                final Predicate<ProductProjection> predicate = model().id().is(productWithTaxCategory.getId());
+                final QueryPredicate<ProductProjection> predicate = model().id().is(productWithTaxCategory.getId());
                 final PagedQueryResult<ProductProjection> pagedQueryResult =
                         execute(ProductProjectionQuery.of(STAGED)
                                 .withPredicate(predicate)
@@ -156,7 +156,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
         );
     }
 
-    private void checkOneResult(final Product product, final Predicate<ProductProjection> predicate) {
+    private void checkOneResult(final Product product, final QueryPredicate<ProductProjection> predicate) {
         final PagedQueryResult<ProductProjection> queryResult = execute(ProductProjectionQuery.of(STAGED).withPredicate(predicate));
         assertThat(ids(queryResult)).containsOnly(product.getId());
     }

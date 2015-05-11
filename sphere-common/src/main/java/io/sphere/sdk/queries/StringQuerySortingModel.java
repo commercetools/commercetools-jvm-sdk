@@ -27,68 +27,68 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Que
     }
 
     @Override
-    public Predicate<T> is(final String s) {
-        return EqPredicate.of(this, escape(s));
+    public QueryPredicate<T> is(final String s) {
+        return EqQueryPredicate.of(this, escape(s));
     }
 
     @Override
-    public Predicate<T> isNot(final String s) {
-        return NotEqPredicate.of(this, escape(s));
+    public QueryPredicate<T> isNot(final String s) {
+        return NotEqQueryPredicate.of(this, escape(s));
     }
 
     @Override
-    public Predicate<T> isOneOf(final String arg0, final String ... args) {
+    public QueryPredicate<T> isOneOf(final String arg0, final String ... args) {
         return isOneOf(listOf(arg0, args));
     }
 
     @Override
-    public Predicate<T> isOneOf(final Iterable<String> args) {
-        return new IsInPredicate<>(this, escape(args));
+    public QueryPredicate<T> isOneOf(final Iterable<String> args) {
+        return new IsInQueryPredicate<>(this, escape(args));
     }
 
     @Override
-    public Predicate<T> isIn(final Iterable<String> args) {
+    public QueryPredicate<T> isIn(final Iterable<String> args) {
         return isOneOf(args);
     }
 
     @Override
-    public Predicate<T> isGreaterThan(final String value) {
-        return new IsGreaterThanPredicate<>(this, value);
+    public QueryPredicate<T> isGreaterThan(final String value) {
+        return new IsGreaterThanQueryPredicate<>(this, value);
     }
 
     @Override
-    public Predicate<T> isLessThan(final String value) {
-        return new IsLessThanPredicate<>(this, value);
+    public QueryPredicate<T> isLessThan(final String value) {
+        return new IsLessThanQueryPredicate<>(this, value);
     }
 
     @Override
-    public Predicate<T> isLessThanOrEquals(final String value) {
-        return new IsLessThanOrEqualsPredicate<>(this, value);
+    public QueryPredicate<T> isLessThanOrEquals(final String value) {
+        return new IsLessThanOrEqualsQueryPredicate<>(this, value);
     }
 
     @Override
-    public Predicate<T> isGreaterThanOrEquals(final String value) {
-        return new IsGreaterThanOrEqualsPredicate<>(this, value);
+    public QueryPredicate<T> isGreaterThanOrEquals(final String value) {
+        return new IsGreaterThanOrEqualsQueryPredicate<>(this, value);
     }
 
     @Override
-    public Predicate<T> isNotIn(final Iterable<String> args) {
-        return new IsNotInPredicate<>(this, escape(args));
+    public QueryPredicate<T> isNotIn(final Iterable<String> args) {
+        return new IsNotInQueryPredicate<>(this, escape(args));
     }
 
     @Override
-    public Predicate<T> isNotIn(final String arg0, final String ... args) {
+    public QueryPredicate<T> isNotIn(final String arg0, final String ... args) {
         return isNotIn(listOf(arg0, args));
     }
 
     @Override
-    public Predicate<T> isPresent() {
-        return new OptionalPredicate<>(this, true);
+    public QueryPredicate<T> isPresent() {
+        return new OptionalQueryPredicate<>(this, true);
     }
 
     @Override
-    public Predicate<T> isNotPresent() {
-        return new OptionalPredicate<>(this, false);
+    public QueryPredicate<T> isNotPresent() {
+        return new OptionalQueryPredicate<>(this, false);
     }
 
     private static List<String> escape(final Iterable<String> args) {

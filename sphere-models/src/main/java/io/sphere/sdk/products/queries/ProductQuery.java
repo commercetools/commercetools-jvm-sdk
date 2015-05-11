@@ -7,7 +7,7 @@ import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QueryDsl;
 
 import java.util.Locale;
@@ -50,10 +50,10 @@ public class ProductQuery extends DefaultModelQuery<Product> {
     }
 
     public QueryDsl<Product> bySku(final String sku, final ProductProjectionType type) {
-        final Predicate<PartialProductVariantQueryModel> skuPredicate = ProductVariantQueryModel.get().sku().is(sku);
+        final QueryPredicate<PartialProductVariantQueryModel> skuPredicate = ProductVariantQueryModel.get().sku().is(sku);
         final ProductDataQueryModel<Product> projection = model().masterData().forProjection(type);
-        final Predicate<Product> masterVariantSkuPredicate = projection.masterVariant().where(skuPredicate);
-        final Predicate<Product> variantsSkuPredicate = projection.variants().where(skuPredicate);
+        final QueryPredicate<Product> masterVariantSkuPredicate = projection.masterVariant().where(skuPredicate);
+        final QueryPredicate<Product> variantsSkuPredicate = projection.variants().where(skuPredicate);
         return withPredicate(masterVariantSkuPredicate.or(variantsSkuPredicate));
     }
 }

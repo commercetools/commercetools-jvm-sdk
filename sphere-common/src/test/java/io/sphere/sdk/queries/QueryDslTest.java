@@ -18,7 +18,7 @@ public class QueryDslTest {
     private final QueryDsl<String> prototype = new QueryDslImpl<>("/categories", new TypeReference<PagedQueryResult<String>>() {
     });
 
-    private final static Predicate<String> namePredicate = Predicate.of("name(en=\"myCategory\")");
+    private final static QueryPredicate<String> namePredicate = QueryPredicate.of("name(en=\"myCategory\")");
 
     @Test
     public void pathWithoutAnyParameters() throws Exception {
@@ -60,7 +60,7 @@ public class QueryDslTest {
     @Test
     public void provideACopyMethodForPredicate() throws Exception {
         assertThat(prototype.predicate()).isEqualTo(Optional.empty());
-        final Predicate<String> predicate = Predicate.of("id=\"foo\"");
+        final QueryPredicate<String> predicate = QueryPredicate.of("id=\"foo\"");
         final QueryDsl<String> other = prototype.withPredicate(predicate);
         assertThat(other.predicate()).isEqualTo(Optional.of(predicate));
         assertThat(other).isNotSameAs(prototype);

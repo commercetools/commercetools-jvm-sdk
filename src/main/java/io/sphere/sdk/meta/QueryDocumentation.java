@@ -90,7 +90,7 @@ import io.sphere.sdk.models.Base;
 
  <h4>Self constructed predicates for special cases</h4>
 
-<p>For more advanced queries you have to use the {@link io.sphere.sdk.queries.Predicate Predicate API}. For example querying for some names you can use:</p>
+<p>For more advanced queries you have to use the {@code Predicate Predicate API}. For example querying for some names you can use:</p>
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryByNames()}
 
@@ -104,7 +104,7 @@ import io.sphere.sdk.models.Base;
 
  <h4>Connecting predicates</h4>
 
- <p>For connecting predicates use {@link io.sphere.sdk.queries.Predicate#and(io.sphere.sdk.queries.Predicate)} and {@link io.sphere.sdk.queries.Predicate#or(io.sphere.sdk.queries.Predicate)}.</p>
+ <p>For connecting predicates use {@code Predicate#and(Predicate)} and {@code Predicate#or(Predicate)}.</p>
 
 
  <p>The following example shows a query for a product where either the name is "foo" <strong>{@code or}</strong> the id is "bar".</p>

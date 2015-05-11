@@ -12,11 +12,11 @@ class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
         return new PartialProductDataQueryModel(Optional.empty(), Optional.empty());
     }
 
-    public Predicate<T> where(final Predicate<PartialProductDataQueryModel> embeddedPredicate) {
-        return new EmbeddedPredicate<>(this, embeddedPredicate);
+    public QueryPredicate<T> where(final QueryPredicate<PartialProductDataQueryModel> embeddedPredicate) {
+        return new EmbeddedQueryPredicate<>(this, embeddedPredicate);
     }
 
-    public Predicate<T> where(final Function<PartialProductDataQueryModel, Predicate<PartialProductDataQueryModel>> embeddedPredicate) {
+    public QueryPredicate<T> where(final Function<PartialProductDataQueryModel, QueryPredicate<PartialProductDataQueryModel>> embeddedPredicate) {
         return where(embeddedPredicate.apply(ProductDataQueryModel.getPartialProductDataQueryModel()));
     }
 

@@ -12,7 +12,7 @@ public interface QueryDsl<T> extends EntityQuery<T> {
      * @param predicate the new predicate
      * @return an EntityQuery with predicate
      */
-    QueryDsl<T> withPredicate(final Predicate<T> predicate);
+    QueryDsl<T> withPredicate(final QueryPredicate<T> predicate);
 
     /**
      * Returns a query with the new sort as sort.

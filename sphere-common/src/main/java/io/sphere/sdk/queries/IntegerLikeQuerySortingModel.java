@@ -18,57 +18,57 @@ public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<
         return new SphereQuerySort<>(this, sortDirection);
     }
 
-    public Predicate<T> is(final V i) {
-        return EqPredicate.of(this, i);
+    public QueryPredicate<T> is(final V i) {
+        return EqQueryPredicate.of(this, i);
     }
 
-    public Predicate<T> isNot(final V i) {
-        return NotEqPredicate.of(this, i);
+    public QueryPredicate<T> isNot(final V i) {
+        return NotEqQueryPredicate.of(this, i);
     }
 
     @SuppressWarnings("unchecked")
-    public Predicate<T> isOneOf(final V arg0, final V ... args) {
+    public QueryPredicate<T> isOneOf(final V arg0, final V ... args) {
         return isOneOf(listOf(arg0, args));
     }
 
-    public Predicate<T> isOneOf(final Iterable<V> args) {
-        return new IsInPredicate<>(this, args);
+    public QueryPredicate<T> isOneOf(final Iterable<V> args) {
+        return new IsInQueryPredicate<>(this, args);
     }
 
-    public Predicate<T> isIn(final Iterable<V> args) {
+    public QueryPredicate<T> isIn(final Iterable<V> args) {
         return isOneOf(args);
     }
 
-    public Predicate<T> isGreaterThan(final V value) {
-        return new IsGreaterThanPredicate<>(this, value);
+    public QueryPredicate<T> isGreaterThan(final V value) {
+        return new IsGreaterThanQueryPredicate<>(this, value);
     }
 
-    public Predicate<T> isLessThan(final V value) {
-        return new IsLessThanPredicate<>(this, value);
+    public QueryPredicate<T> isLessThan(final V value) {
+        return new IsLessThanQueryPredicate<>(this, value);
     }
 
-    public Predicate<T> isLessThanOrEquals(final V value) {
-        return new IsLessThanOrEqualsPredicate<>(this, value);
+    public QueryPredicate<T> isLessThanOrEquals(final V value) {
+        return new IsLessThanOrEqualsQueryPredicate<>(this, value);
     }
 
-    public Predicate<T> isGreaterThanOrEquals(final V value) {
-        return new IsGreaterThanOrEqualsPredicate<>(this, value);
+    public QueryPredicate<T> isGreaterThanOrEquals(final V value) {
+        return new IsGreaterThanOrEqualsQueryPredicate<>(this, value);
     }
 
-    public Predicate<T> isNotIn(final Iterable<V> args) {
-        return new IsNotInPredicate<>(this, args);
+    public QueryPredicate<T> isNotIn(final Iterable<V> args) {
+        return new IsNotInQueryPredicate<>(this, args);
     }
 
     @SuppressWarnings("unchecked")
-    public Predicate<T> isNotIn(final V arg0, final V ... args) {
+    public QueryPredicate<T> isNotIn(final V arg0, final V ... args) {
         return isNotIn(listOf(arg0, args));
     }
 
-    public Predicate<T> isPresent() {
-        return new OptionalPredicate<>(this, true);
+    public QueryPredicate<T> isPresent() {
+        return new OptionalQueryPredicate<>(this, true);
     }
 
-    public Predicate<T> isNotPresent() {
-        return new OptionalPredicate<>(this, false);
+    public QueryPredicate<T> isNotPresent() {
+        return new OptionalQueryPredicate<>(this, false);
     }
 }

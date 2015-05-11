@@ -11,13 +11,13 @@ public class ReferenceQueryModel<T, R> extends QueryModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public Predicate<T> is(Referenceable<R> reference) {
-        return EqPredicate.of(idSegment(), reference.toReference().getId());
+    public QueryPredicate<T> is(Referenceable<R> reference) {
+        return EqQueryPredicate.of(idSegment(), reference.toReference().getId());
     }
 
-    public Predicate<T> isAnyOf(final List<? extends Referenceable<R>> elements) {
+    public QueryPredicate<T> isAnyOf(final List<? extends Referenceable<R>> elements) {
         final List<String> ids = elements.stream().map(elem -> elem.toReference().getId()).collect(toList());
-        return new IsInPredicate<>(idSegment(), ids);
+        return new IsInQueryPredicate<>(idSegment(), ids);
     }
 
     private QueryModelImpl<T> idSegment() {
