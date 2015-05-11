@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static io.sphere.sdk.carts.CartFixtures.createCartWithCountry;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartByIdFetchTest extends IntegrationTest {
     @Test
@@ -15,6 +15,6 @@ public class CartByIdFetchTest extends IntegrationTest {
         final Cart cart = createCartWithCountry(client());
         final String id = cart.getId();
         final Optional<Cart> fetchedCartOptional = execute(CartByIdFetch.of(id));
-        assertThat(fetchedCartOptional).isPresentAs(cart);
+        assertThat(fetchedCartOptional).contains(cart);
     }
 }

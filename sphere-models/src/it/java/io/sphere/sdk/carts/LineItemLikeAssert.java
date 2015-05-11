@@ -2,15 +2,16 @@ package io.sphere.sdk.carts;
 
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.states.State;
-import org.fest.assertions.GenericAssert;
+import org.assertj.core.api.AbstractAssert;
 
 import java.util.Set;
 
 import static io.sphere.sdk.utils.SetUtils.setOf;
+import static java.lang.String.format;
 
-public class LineItemLikeAssert extends GenericAssert<LineItemLikeAssert, LineItemLike> {
+public class LineItemLikeAssert extends AbstractAssert<LineItemLikeAssert, LineItemLike> {
     public LineItemLikeAssert(final LineItemLike actual) {
-        super(LineItemLikeAssert.class, actual);
+        super(actual, LineItemLikeAssert.class);
     }
 
     public static LineItemLikeAssert assertThat(final LineItemLike actual) {
@@ -19,16 +20,14 @@ public class LineItemLikeAssert extends GenericAssert<LineItemLikeAssert, LineIt
 
     public LineItemLikeAssert containsNotState(final Referenceable<State> state) {
         if (containsStateOf(state)) {
-            failIfCustomMessageIsSet();
-            throw failure(String.format("%S states %s do contain %s", actual, actual.getState(), state));
+            failWithMessage(format("%S states %s do contain %s", actual, actual.getState(), state));
         }
         return this;
     }
 
     public LineItemLikeAssert containsState(final Referenceable<State> state) {
         if (!containsStateOf(state)) {
-            failIfCustomMessageIsSet();
-            throw failure(String.format("%S states %s do not contain %s", actual, actual.getState(), state));
+            failWithMessage(format("%S states %s do not contain %s", actual, actual.getState(), state));
         }
         return this;
     }
@@ -41,8 +40,7 @@ public class LineItemLikeAssert extends GenericAssert<LineItemLikeAssert, LineIt
     public LineItemLikeAssert containsItemStates(final Set<ItemState> itemStates) {
         itemStates.forEach(givenItemState -> {
             if (!actual.getState().stream().anyMatch(iS -> iS.equals(givenItemState))) {
-                failIfCustomMessageIsSet();
-                throw failure(String.format("%S states %s do not contain %s", actual, actual.getState(), givenItemState));
+                failWithMessage(format("%S states %s do not contain %s", actual, actual.getState(), givenItemState));
             }
         });
         return this;

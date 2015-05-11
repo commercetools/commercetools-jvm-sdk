@@ -9,7 +9,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class CustomerByTokenFetchTest extends IntegrationTest {
@@ -18,7 +18,7 @@ public class CustomerByTokenFetchTest extends IntegrationTest {
         withCustomer(client(), customer -> {
             final CustomerToken token = execute(CustomerCreateTokenCommand.of(customer.getEmail()));
             final Optional<Customer> fetchedCustomer = execute(CustomerByTokenFetch.of(token));
-            assertThat(fetchedCustomer.map(c -> c.getId())).isPresentAs(customer.getId());
+            assertThat(fetchedCustomer.map(c -> c.getId())).contains(customer.getId());
         });
     }
 }

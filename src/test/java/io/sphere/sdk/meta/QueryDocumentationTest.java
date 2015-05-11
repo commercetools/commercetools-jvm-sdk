@@ -19,7 +19,7 @@ import static io.sphere.sdk.queries.QuerySortDirection.ASC;
 import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class QueryDocumentationTest {
 

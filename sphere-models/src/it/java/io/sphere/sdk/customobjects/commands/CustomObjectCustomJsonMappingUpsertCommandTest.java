@@ -7,7 +7,7 @@ import io.sphere.sdk.customobjects.demo.GsonFooCustomObjectUpsertCommand;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomObjectCustomJsonMappingUpsertCommandTest extends IntegrationTest {
     @Test

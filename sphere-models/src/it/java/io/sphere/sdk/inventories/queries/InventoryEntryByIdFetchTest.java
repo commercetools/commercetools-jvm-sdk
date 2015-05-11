@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static io.sphere.sdk.inventories.InventoryEntryFixtures.withUpdateableInventoryEntry;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class InventoryEntryByIdFetchTest extends IntegrationTest {
     @Test
@@ -15,7 +15,7 @@ public class InventoryEntryByIdFetchTest extends IntegrationTest {
         withUpdateableInventoryEntry(client(), entry -> {
             final InventoryEntryByIdFetch fetch = InventoryEntryByIdFetch.of(entry.getId());
             final Optional<InventoryEntry> loadedEntry = execute(fetch);
-            assertThat(loadedEntry.map(e -> e.getId())).isPresentAs(entry.getId());
+            assertThat(loadedEntry.map(e -> e.getId())).contains(entry.getId());
             return entry;
         });
     }

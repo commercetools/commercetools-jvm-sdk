@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.b2cCustomerGroup;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
 

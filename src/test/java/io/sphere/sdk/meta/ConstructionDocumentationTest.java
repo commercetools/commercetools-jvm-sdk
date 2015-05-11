@@ -12,8 +12,7 @@ import org.junit.Test;
 import javax.money.MonetaryAmount;
 import java.util.Locale;
 
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class ConstructionDocumentationTest {
@@ -45,7 +44,7 @@ public class ConstructionDocumentationTest {
                 .isTrue();
         assertThat(builder1.build().getFirstName())
                 .overridingErrorMessage("the last setting wins")
-                .isPresentAs("Matt");
+                .contains("Matt");
     }
 
     @Test
@@ -59,10 +58,10 @@ public class ConstructionDocumentationTest {
         final Address address = builder.firstName("Matt").build();
         assertThat(address.getLastName())
                 .overridingErrorMessage("not overwritten values are used from the template")
-                .isPresentAs("Smith");
+                .contains("Smith");
         assertThat(address.getFirstName())
                 .overridingErrorMessage("fields can be overwritten in the builder")
-                .isPresentAs("Matt");
+                .contains("Matt");
     }
 
     @Test

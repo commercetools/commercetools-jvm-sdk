@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static io.sphere.sdk.states.StateFixtures.*;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StateByKeyFetchTest extends IntegrationTest {
     @Test
@@ -15,7 +15,7 @@ public class StateByKeyFetchTest extends IntegrationTest {
         withState(client(), state -> {
             final String key = state.getKey();
             final Optional<State> stateOption = execute(StateByKeyFetch.of(key));
-            assertThat(stateOption).isPresentAs(state);
+            assertThat(stateOption).contains(state);
         });
     }
 }

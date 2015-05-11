@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static java.util.Arrays.asList;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class QueryDslTest {
 
@@ -54,7 +54,7 @@ public class QueryDslTest {
 
     @Test
     public void haveAnIdSorterByDefaultToPreventRandomOrderPaging() throws Exception {
-        assertThat(prototype.sort()).containsExactly(QuerySort.of("id asc"));
+        assertThat(prototype.sort()).isEqualTo(asList(QuerySort.<String>of("id asc")));
     }
 
     @Test
@@ -122,7 +122,7 @@ public class QueryDslTest {
     public void plusExpansionPath() throws Exception {
         final ExpansionPath<String> a = ExpansionPath.of("a");
         final ExpansionPath<String> b = ExpansionPath.of("b");
-        assertThat(prototype.plusExpansionPath(a).expansionPaths()).containsExactly(a);
-        assertThat(prototype.withExpansionPath(a).plusExpansionPath(b).expansionPaths()).containsExactly(a, b);
+        assertThat(prototype.plusExpansionPath(a).expansionPaths()).isEqualTo(asList(a));
+        assertThat(prototype.withExpansionPath(a).plusExpansionPath(b).expansionPaths()).isEqualTo(asList(a, b));
     }
 }

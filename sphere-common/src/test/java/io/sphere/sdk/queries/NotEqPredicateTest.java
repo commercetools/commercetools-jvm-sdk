@@ -2,7 +2,7 @@ package io.sphere.sdk.queries;
 
 import org.junit.Test;
 import static io.sphere.sdk.queries.Fixtures.emptyQueryModel;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class NotEqPredicateTest {
     @Test

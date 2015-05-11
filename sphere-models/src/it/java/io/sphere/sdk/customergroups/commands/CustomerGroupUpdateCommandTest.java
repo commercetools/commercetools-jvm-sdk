@@ -7,7 +7,7 @@ import org.junit.Test;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerGroupUpdateCommandTest extends IntegrationTest {
     @Test

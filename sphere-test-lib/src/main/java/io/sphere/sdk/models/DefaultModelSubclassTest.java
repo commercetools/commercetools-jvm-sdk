@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public abstract class DefaultModelSubclassTest<T extends DefaultModel<?>> {
 

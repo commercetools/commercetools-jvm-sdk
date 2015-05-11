@@ -17,7 +17,7 @@ import java.util.function.Consumer;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerFixtures {
     public static final CustomerName CUSTOMER_NAME = CustomerName.ofFirstAndLastName("John", "Smith");

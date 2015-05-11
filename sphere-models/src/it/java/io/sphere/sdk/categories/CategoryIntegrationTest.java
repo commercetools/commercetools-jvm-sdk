@@ -19,9 +19,7 @@ import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.DefaultModelAssert.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 import java.util.List;
@@ -85,7 +83,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         final Query<Category> query = CategoryQuery.of().byExternalId(externalId);
         final Category createdCategory = execute(query).head().get();
         assertThat(createdCategory.getId()).isEqualTo(category.getId());
-        assertThat(createdCategory.getExternalId()).isPresentAs(externalId);
+        assertThat(createdCategory.getExternalId()).contains(externalId);
         cleanUpByName(slug);
     }
 
@@ -127,11 +125,11 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
         assertThat(queryForPredicate(CategoryQuery.model().parent().is(parentCategory)))
                 .overridingErrorMessage("query model contains parent search")
-                .isPresentAs(category.getId());
+                .contains(category.getId());
         assertThat(queryForPredicate(CategoryQuery.model().parent().isPresent()))
-                .isPresentAs(category.getId());
+                .contains(category.getId());
         assertThat(queryForPredicate(CategoryQuery.model().parent().isNotPresent()))
-                .isPresentAs(parentCategory.getId());
+                .contains(parentCategory.getId());
 
         cleanUpByName(slug);
         cleanUpByName(parentSlug);
@@ -159,12 +157,12 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
                         final Category loadedLevel4 = queryResult.head().get();
                         final List<Reference<Category>> ancestors = loadedLevel4.getAncestors();
                         final List<String> expectedAncestorIds = ancestors.stream().map(r -> r.getObj().get().getId()).collect(toList());
-                        assertThat(expectedAncestorIds).containsExactly(level1.getId(), level2.getId(), level3.getId());
+                        assertThat(expectedAncestorIds).isEqualTo(asList(level1.getId(), level2.getId(), level3.getId()));
 
                         final Category level3ExpandedAncestor = ancestors.get(2).getObj().get();
-                        assertThat(level3ExpandedAncestor).hasSameIdAs(level3);
+                        assertThat(level3ExpandedAncestor.getId()).isEqualTo(level3.getId());
 
-                        assertThat(level3ExpandedAncestor.getAncestors().get(0).getObj().get()).hasSameIdAs(level1);
+                        assertThat(level3ExpandedAncestor.getAncestors().get(0).getObj().get().getId()).isEqualTo(level1.getId());
                     });
                 });
             });

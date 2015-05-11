@@ -36,7 +36,6 @@ object Build extends Build {
 
   lazy val `sphere-java-client-internal-test` = project.dependsOn(`sphere-java-client-core`).settings(commonSettings:_*).settings(
     libraryDependencies ++=
-      festAssert ::
         junitDep ::
         junitInterface ::
         assertj ::
@@ -61,7 +60,6 @@ object Build extends Build {
   lazy val `sphere-test-lib` = project.configs(IntegrationTest).dependsOn(`sphere-java-client`, `sphere-common`).settings(commonSettings:_*)
     .settings(
       libraryDependencies ++=
-        festAssert ::
         junitDep ::
         junitInterface ::
         assertj ::
@@ -72,7 +70,6 @@ object Build extends Build {
   lazy val junitDep = "junit" % "junit-dep" % "4.11"
   lazy val assertj =  "org.assertj" % "assertj-core" % "3.0.0"
   lazy val junitInterface = "com.novocode" % "junit-interface" % "0.11"
-  lazy val festAssert = "org.easytesting" % "fest-assert" % "1.4"
 
   val genDoc = taskKey[Seq[File]]("generates the documentation")
 

@@ -3,7 +3,7 @@ package io.sphere.sdk.orders.queries;
 import org.junit.Test;
 
 import static io.sphere.sdk.queries.QuerySortDirection.ASC;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class SyncInfoQueryModelTest {
     @Test

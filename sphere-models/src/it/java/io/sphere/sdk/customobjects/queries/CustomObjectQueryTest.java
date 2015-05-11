@@ -16,7 +16,7 @@ import java.util.List;
 import static io.sphere.sdk.customobjects.CustomObjectFixtures.withCustomObject;
 import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.test.SphereTestUtils.toIds;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomObjectQueryTest extends IntegrationTest {
 
@@ -42,7 +42,7 @@ public class CustomObjectQueryTest extends IntegrationTest {
             withCustomObject(client(), "containerB", "key", coB -> {
                 final PagedQueryResult<CustomObject<Foo>> result = execute(CUSTOM_OBJECT_QUERY.byContainer(coA.getContainer()));
                 final List<String> resultIds = toIds(result.getResults());
-                assertThat(resultIds).contains(coA.getId()).excludes(coB.getId());
+                assertThat(resultIds).contains(coA.getId()).doesNotContain(coB.getId());
             })
         );
     }

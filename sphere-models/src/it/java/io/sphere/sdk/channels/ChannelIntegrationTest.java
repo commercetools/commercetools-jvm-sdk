@@ -16,8 +16,8 @@ import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
 import static java.util.Locale.ENGLISH;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     @Override
@@ -54,7 +54,7 @@ public class ChannelIntegrationTest extends QueryIntegrationTest<Channel> {
     public void FetchChannelByKey() throws Exception {
         withChannel(client(), ChannelDraftBuilder.of("foo"), channel -> {
                     final Optional<Channel> channelOption = execute(ChannelByKeyFetch.of(channel.getKey()));
-                    assertThat(channelOption).isPresentAs(channel);
+                    assertThat(channelOption).contains(channel);
                 }
         );
     }

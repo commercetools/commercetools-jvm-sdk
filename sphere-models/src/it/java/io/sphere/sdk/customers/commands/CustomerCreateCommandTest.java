@@ -12,8 +12,7 @@ import org.junit.Test;
 
 import java.util.Optional;
 
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.customers.CustomerFixtures.*;
 
@@ -34,8 +33,8 @@ public class CustomerCreateCommandTest extends IntegrationTest {
         assertThat(customer.getPassword())
                 .overridingErrorMessage("password is not stored in clear text")
                 .isNotEqualTo(password);
-        assertThat(customer.getExternalId()).isPresentAs(externalId);
-        assertThat(cart).isAbsent();
+        assertThat(customer.getExternalId()).contains(externalId);
+        assertThat(cart).isEmpty();
     }
 
     @Test

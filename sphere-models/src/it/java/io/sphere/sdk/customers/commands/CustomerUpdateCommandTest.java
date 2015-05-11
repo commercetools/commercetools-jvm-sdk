@@ -15,8 +15,7 @@ import java.time.LocalDate;
 
 import static io.sphere.sdk.customers.CustomerFixtures.*;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.*;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class CustomerUpdateCommandTest extends IntegrationTest {
@@ -61,7 +60,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
         withCustomerWithOneAddress(client(), customer -> {
             final String city = "new city";
             assertThat(customer.getAddresses()).hasSize(1);
-            assertThat(customer.getAddresses().get(0).getCity()).isPresent().butNotAs(city);
+            assertThat(customer.getAddresses().get(0).getCity()).isNotEqualTo(Optional.of(city));
 
             final Address oldAddress = customer.getAddresses().get(0);
             assertThat(oldAddress.getId())
@@ -73,7 +72,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             final Customer customerWithReplacedAddress = execute(CustomerUpdateCommand.of(customer, updateAction));
 
             assertThat(customerWithReplacedAddress.getAddresses()).hasSize(1);
-            assertThat(customerWithReplacedAddress.getAddresses().get(0).getCity()).isPresentAs(city);
+            assertThat(customerWithReplacedAddress.getAddresses().get(0).getCity()).contains(city);
         });
     }
 
@@ -100,14 +99,14 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             assertThat(address.getId())
                     .overridingErrorMessage("only fetched address contains an ID")
                     .isPresent();
-            assertThat(customer.getDefaultShippingAddressId()).isAbsent();
-            assertThat(customer.getDefaultShippingAddress()).isAbsent();
+            assertThat(customer.getDefaultShippingAddressId()).isEmpty();
+            assertThat(customer.getDefaultShippingAddress()).isEmpty();
 
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetDefaultShippingAddress.of(address)));
 
             assertThat(updatedCustomer.getDefaultShippingAddressId()).isEqualTo(address.getId());
-            assertThat(updatedCustomer.getDefaultShippingAddress()).isPresentAs(address);
+            assertThat(updatedCustomer.getDefaultShippingAddress()).contains(address);
         });
     }
 
@@ -118,79 +117,79 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             assertThat(address.getId())
                     .overridingErrorMessage("only fetched address contains an ID")
                     .isPresent();
-            assertThat(customer.getDefaultBillingAddressId()).isAbsent();
-            assertThat(customer.getDefaultBillingAddress()).isAbsent();
+            assertThat(customer.getDefaultBillingAddressId()).isEmpty();
+            assertThat(customer.getDefaultBillingAddress()).isEmpty();
 
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetDefaultBillingAddress.of(address)));
 
             assertThat(updatedCustomer.getDefaultBillingAddressId()).isEqualTo(address.getId());
-            assertThat(updatedCustomer.getDefaultBillingAddress()).isPresentAs(address);
+            assertThat(updatedCustomer.getDefaultBillingAddress()).contains(address);
         });
     }
 
     @Test
     public void setCustomerNumber() throws Exception {
         withCustomer(client(), customer -> {
-            assertThat(customer.getCustomerNumber()).isAbsent();
+            assertThat(customer.getCustomerNumber()).isEmpty();
 
             final String customerNumber = randomString();
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetCustomerNumber.of(customerNumber)));
 
-            assertThat(updatedCustomer.getCustomerNumber()).isPresentAs(customerNumber);
+            assertThat(updatedCustomer.getCustomerNumber()).contains(customerNumber);
         });
     }
 
     @Test
     public void setExternalId() throws Exception {
         withCustomer(client(), customer -> {
-            assertThat(customer.getExternalId()).isAbsent();
+            assertThat(customer.getExternalId()).isEmpty();
 
             final String externalId = randomString();
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetExternalId.of(externalId)));
 
-            assertThat(updatedCustomer.getExternalId()).isPresentAs(externalId);
+            assertThat(updatedCustomer.getExternalId()).contains(externalId);
         });
     }
 
     @Test
     public void setCompanyName() throws Exception {
         withCustomer(client(), customer -> {
-            assertThat(customer.getCompanyName()).isAbsent();
+            assertThat(customer.getCompanyName()).isEmpty();
 
             final String companyName = "Big coorp";
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
 
-            assertThat(updatedCustomer.getCompanyName()).isPresentAs(companyName);
+            assertThat(updatedCustomer.getCompanyName()).contains(companyName);
         });
     }
 
     @Test
     public void setVatId() throws Exception {
         withCustomer(client(), customer -> {
-            assertThat(customer.getVatId()).isAbsent();
+            assertThat(customer.getVatId()).isEmpty();
 
             final String vatId = randomString();
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
 
-            assertThat(updatedCustomer.getVatId()).isPresentAs(vatId);
+            assertThat(updatedCustomer.getVatId()).contains(vatId);
         });
     }
 
     @Test
     public void setDateOfBirth() throws Exception {
         withCustomer(client(), customer -> {
-            assertThat(customer.getDateOfBirth()).isAbsent();
+            assertThat(customer.getDateOfBirth()).isEmpty();
 
             final LocalDate dateOfBirth = LocalDate.now();
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetDateOfBirth.of(dateOfBirth)));
 
-            assertThat(updatedCustomer.getDateOfBirth()).isPresentAs(dateOfBirth);
+            assertThat(updatedCustomer.getDateOfBirth()).contains(dateOfBirth);
         });
     }
 
@@ -198,9 +197,9 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
     public void setCustomerGroup() throws Exception {
         withB2cCustomerGroup(client(), customerGroup -> {
             withCustomer(client(), customer -> {
-                assertThat(customer.getCustomerGroup()).isAbsent();
+                assertThat(customer.getCustomerGroup()).isEmpty();
                 final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
-                assertThat(updateCustomer.getCustomerGroup()).isPresentAs(customerGroup.toReference());
+                assertThat(updateCustomer.getCustomerGroup()).contains(customerGroup.toReference());
             });
         });
     }

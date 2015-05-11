@@ -36,7 +36,7 @@ import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductFixtures {
     public static final Price PRICE = Price.of(Money.of(new BigDecimal("12.34"), EUR)).withCountry(DE);

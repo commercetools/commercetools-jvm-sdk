@@ -10,8 +10,7 @@ import org.junit.Test;
 
 import java.util.Optional;
 
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomObjectsMigrationsTest extends IntegrationTest {
 
@@ -25,12 +24,12 @@ public class CustomObjectsMigrationsTest extends IntegrationTest {
         final CustomObject<io.sphere.sdk.customobjects.migrations.version1.Xyz> customObject = execute(CustomObjectUpsertCommand.of(draft));
 
         final CustomObject<io.sphere.sdk.customobjects.migrations.version2.Xyz> xyz2CustomObject = execute(CustomObjectByKeyFetch.of(CONTAINER, key, io.sphere.sdk.customobjects.migrations.version2.Xyz.customObjectTypeReference())).get();
-        assertThat(xyz2CustomObject.getValue().getBar()).isAbsent();
+        assertThat(xyz2CustomObject.getValue().getBar()).isEmpty();
 
         final CustomObjectUpsertCommand<io.sphere.sdk.customobjects.migrations.version2.Xyz> upsertCommand =
                 CustomObjectUpsertCommand.of(CustomObjectDraft.ofVersionedUpdate(xyz2CustomObject, new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", Optional.of("bar")), io.sphere.sdk.customobjects.migrations.version2.Xyz.customObjectTypeReference()));
 
-        assertThat(execute(upsertCommand).getValue().getBar()).isPresentAs("bar");
+        assertThat(execute(upsertCommand).getValue().getBar()).contains("bar");
     }
 
     @Test
@@ -40,7 +39,7 @@ public class CustomObjectsMigrationsTest extends IntegrationTest {
                 CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", Optional.of("bar")), io.sphere.sdk.customobjects.migrations.version2.Xyz.customObjectTypeReference()));
         execute(upsertCommand);
         final CustomObject<Xyz> xyz3CustomObject = execute(CustomObjectByKeyFetch.of(CONTAINER, key, Xyz.customObjectTypeReference())).get();
-        assertThat(xyz3CustomObject.getValue().getBar()).isPresentAs("bar");
+        assertThat(xyz3CustomObject.getValue().getBar()).contains("bar");
     }
 
     @Test

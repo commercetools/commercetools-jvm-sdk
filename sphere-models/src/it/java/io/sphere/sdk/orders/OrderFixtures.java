@@ -22,7 +22,7 @@ import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.utils.MoneyImpl;
-import org.fest.assertions.Assertions;
+import org.assertj.core.api.Assertions;
 
 import javax.money.MonetaryAmount;
 import java.util.LinkedList;
@@ -36,7 +36,7 @@ import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.customers.CustomerFixtures.*;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderFixtures {
 

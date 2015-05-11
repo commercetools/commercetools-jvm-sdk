@@ -33,8 +33,7 @@ import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 import static java.util.Locale.ENGLISH;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.products.ProductFixtures.*;
 
@@ -94,7 +93,7 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         final Channel channel = execute(ChannelCreateCommand.of(ChannelDraft.of(channelKey)));
         final Price price = Price.of(MoneyImpl.of(523, EUR)).withChannel(channel);
         final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddPrice.of(MASTER_VARIANT_ID, price, STAGED_AND_CURRENT)));
-        assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0).getChannel()).isPresentAs(channel.toReference());
+        assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0).getChannel()).contains(channel.toReference());
         execute(ProductUpdateCommand.of(updatedProduct, RemovePrice.of(MASTER_VARIANT_ID, price, STAGED_AND_CURRENT)));
         cleanUpChannelByKey(client(), channelKey);
     }
@@ -111,8 +110,8 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         execute(ProductCreateCommand.of(productDraft));
         final PagedQueryResult<Product> result = execute(ProductQuery.of().bySku(sku, STAGED));
         assertThat(result.getResults()).hasSize(1);
-        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getSku()).isPresentAs(sku);
-        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Colors.ATTRIBUTE)).isPresentAs(Colors.GREEN);
-        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Sizes.ATTRIBUTE)).isPresentAs(Sizes.S);
+        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getSku()).contains(sku);
+        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Colors.ATTRIBUTE)).contains(Colors.GREEN);
+        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Sizes.ATTRIBUTE)).contains(Sizes.S);
     }
 }

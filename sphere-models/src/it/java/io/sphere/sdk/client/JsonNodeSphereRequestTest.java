@@ -12,7 +12,7 @@ import java.util.Optional;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.http.HttpMethod.*;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class JsonNodeSphereRequestTest extends IntegrationTest {
     @Test

@@ -6,7 +6,7 @@ import io.sphere.sdk.projects.queries.ProjectGet;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ApacheClientTest extends IntegrationTest {
     @Test

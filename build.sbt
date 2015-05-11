@@ -16,7 +16,6 @@ libraryDependencies in ThisBuild ++=
   "org.javamoney" % "moneta" % "1.0-RC3" ::
   "org.slf4j" % "slf4j-api" % "1.7.12" ::
   //test dependencies
-  festAssert % "test,it" ::
   junitDep % "test,it" ::
   junitInterface % "test,it" ::
   assertj % "test,it" ::

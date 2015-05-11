@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.utils.SetUtils.asSet;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MoneyTest {
 

@@ -15,7 +15,7 @@ import org.junit.rules.ExpectedException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.ExecutionException;
 
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class DeprecationExceptionSphereClientDecoratorTest {
     private static final String DEPRECATION_MESSAGE = "don't use it anymore";

@@ -13,8 +13,7 @@ import static io.sphere.sdk.channels.ChannelFixtures.withUpdatableChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRoles.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ChannelUpdateCommandTest extends IntegrationTest {
     @Test
@@ -32,7 +31,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
         withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
             final LocalizedStrings newName = randomSlug();
             final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeName.of(newName)));
-            assertThat(updatedChannel.getName()).isPresentAs(newName);
+            assertThat(updatedChannel.getName()).contains(newName);
             return updatedChannel;
         });
     }
@@ -42,7 +41,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
         withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
             final LocalizedStrings newDescription = randomSlug();
             final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
-            assertThat(updatedChannel.getDescription()).isPresentAs(newDescription);
+            assertThat(updatedChannel.getDescription()).contains(newDescription);
             return updatedChannel;
         });
     }

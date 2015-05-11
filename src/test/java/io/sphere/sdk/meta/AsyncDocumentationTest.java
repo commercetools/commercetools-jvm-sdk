@@ -22,9 +22,9 @@ import java.util.function.Function;
 import java.util.stream.Stream;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
-import static io.sphere.sdk.test.SphereTestUtils.asList;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AsyncDocumentationTest {
     @Rule
@@ -158,7 +158,7 @@ public class AsyncDocumentationTest {
     public void functionalCompositionMapStreamExample() throws Exception {
         final List<Person> persons = asList(new Person("John", "Smith"), new Person("Michael", "Müller"));
         final List<String> lastNames = persons.stream().map(Person::getLastName).distinct().collect(toList());
-        assertThat(lastNames).containsExactly("Smith", "Müller");
+        assertThat(lastNames).isEqualTo(asList("Smith", "Müller"));
     }
 
     @Test
@@ -171,7 +171,7 @@ public class AsyncDocumentationTest {
         final Stream<Integer> simpleStream = persons.stream()
                 .flatMap(person -> person.getLastName().chars().boxed());
         assertThat(simpleStream.collect(toList()))
-                .containsExactly(83, 109, 105, 116, 104, 77, 252, 108, 108, 101, 114);
+                .isEqualTo(asList(83, 109, 105, 116, 104, 77, 252, 108, 108, 101, 114));
     }
 
     private static class Person {

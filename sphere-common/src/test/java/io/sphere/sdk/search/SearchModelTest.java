@@ -5,7 +5,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static java.util.Arrays.asList;
-import static org.fest.assertions.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
 
 public class SearchModelTest {
 
@@ -25,6 +25,6 @@ public class SearchModelTest {
     @Test
     public void buildsSegmentPath() throws Exception {
         SearchModelImpl<Object> model = new SearchModelImpl<>(Optional.empty(), "variants").appended("price").appended("centAmount");
-        assertThat(model.buildPath()).containsExactly("variants", "price", "centAmount");
+        assertThat(model.buildPath()).isEqualTo(asList("variants", "price", "centAmount"));
     }
 }

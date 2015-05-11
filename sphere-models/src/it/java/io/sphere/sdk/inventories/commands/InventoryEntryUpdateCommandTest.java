@@ -13,8 +13,7 @@ import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 
 import static io.sphere.sdk.inventories.InventoryEntryFixtures.withUpdateableInventoryEntry;
-import static org.fest.assertions.Assertions.assertThat;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class InventoryEntryUpdateCommandTest extends IntegrationTest {
     @Test
@@ -45,7 +44,7 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
             final int restockableInDays = entry.getRestockableInDays().map(i -> i + 4).orElse(4);
             final UpdateAction<InventoryEntry> action = SetRestockableInDays.of(restockableInDays);
             final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-            assertThat(updatedEntry.getRestockableInDays()).isPresentAs(restockableInDays);
+            assertThat(updatedEntry.getRestockableInDays()).contains(restockableInDays);
             return updatedEntry;
         });
     }
@@ -57,7 +56,7 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
             final UpdateAction<InventoryEntry> action = SetExpectedDelivery.of(expectedDelivery);
             final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getExpectedDelivery())
-                    .isPresentAs(expectedDelivery)
+                    .contains(expectedDelivery)
                     .isNotEqualTo(entry.getExpectedDelivery());
             return updatedEntry;
         });

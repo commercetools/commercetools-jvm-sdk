@@ -7,7 +7,7 @@ import org.junit.Test;
 
 
 import static io.sphere.sdk.states.StateFixtures.withState;
-import static io.sphere.sdk.test.OptionalAssert.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class StateQueryTest extends IntegrationTest {
 
@@ -16,7 +16,7 @@ public class StateQueryTest extends IntegrationTest {
         withState(client(), state -> {
                 final String key = state.getKey();
                 final PagedQueryResult<State> stateOption = execute(StateQuery.of().byKey(key));
-                assertThat(stateOption.head()).isPresentAs(state);
+                assertThat(stateOption.head()).contains(state);
             }
         );
     }

@@ -25,7 +25,7 @@ import java.util.Optional;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withUpdateableShippingMethod;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.zones.ZoneFixtures.withZone;
-import static org.fest.assertions.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShippingMethodUpdateCommandTest extends IntegrationTest {
     @BeforeClass
@@ -108,7 +108,7 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
                 final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
                 final ShippingMethod shippingMethodWithShippingRate =
                         execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
-                assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).containsExactly(shippingRate);
+                assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
                 //removeShippingRate
                 final ShippingMethod shippingMethodWithoutShippingRate =
