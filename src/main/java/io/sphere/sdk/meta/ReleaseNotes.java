@@ -263,7 +263,7 @@ import java.util.function.BiFunction;
  <li>Introduced new predicates for inequality like {@link io.sphere.sdk.queries.StringQueryModel#isGreaterThanOrEquals(String)},
  {@link io.sphere.sdk.queries.StringQueryModel#isNot(String)},
  {@link io.sphere.sdk.queries.StringQueryModel#isNotIn(String, String...)} or {@link io.sphere.sdk.queries.StringQueryModel#isNotPresent()}.</li>
- <li>Introduced an unsafe way to create predicates from strings with {@link io.sphere.sdk.queries.Predicate#of(String)}.</li>
+ <li>Introduced an unsafe way to create predicates from strings with {@link QueryPredicate#of(String)}.</li>
  </ul>
 
  <h3>1.0.0-M2</h3>

@@ -8,7 +8,7 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.queries.ExpansionPath;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QuerySort;
 import org.junit.Test;
@@ -33,51 +33,51 @@ public class QueryDocumentationTest {
     }
 
     public void queryByNames() {
-        final Predicate<Product> predicate = ProductQuery.model().masterData().current().name()
+        final QueryPredicate<Product> predicate = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
         final QueryDsl<Product> query = ProductQuery.of().withPredicate(predicate);
     }
 
     public void queryByNamesDesugared() {
-        final Predicate<Product> predicate = ProductQuery.model().masterData().current().name()
+        final QueryPredicate<Product> predicate = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
         final QueryDsl<Product> query = ProductQuery.of().withPredicate(predicate);
     }
 
     @Test
     public void testX() throws Exception {
-        final Predicate<Product> safePredicate = ProductQuery.model().masterData().current().name()
+        final QueryPredicate<Product> safePredicate = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
-        final Predicate<Product> unsafePredicate =
-                Predicate.of("masterData(current(name(en in (\"blue t-shirt\", \"blue jeans\"))))");
+        final QueryPredicate<Product> unsafePredicate =
+                QueryPredicate.of("masterData(current(name(en in (\"blue t-shirt\", \"blue jeans\"))))");
         assertThat(unsafePredicate).isEqualTo(safePredicate);
     }
 
     public void predicateOrExample() {
-        final Predicate<Product> nameIsFoo = ProductQuery.model().masterData().current().name()
+        final QueryPredicate<Product> nameIsFoo = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).is("foo");
-        final Predicate<Product> idIsBar = ProductQuery.model().id().is("bar");
+        final QueryPredicate<Product> idIsBar = ProductQuery.model().id().is("bar");
         final QueryDsl<Product> query = ProductQuery.of().withPredicate(nameIsFoo.or(idIsBar));
     }
 
     public void predicateAndExample() {
-        final Predicate<Product> nameIsFoo = ProductQuery.model().masterData().current().name()
+        final QueryPredicate<Product> nameIsFoo = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).is("foo");
         final Reference<Category> cat1 = Category.reference("cat1");
-        final Predicate<Product> isInCat1 = ProductQuery.model().masterData().current()
+        final QueryPredicate<Product> isInCat1 = ProductQuery.model().masterData().current()
                 .categories().isIn(cat1);
         final QueryDsl<Product> query = ProductQuery.of().withPredicate(nameIsFoo.and(isInCat1));
     }
 
     public void predicateAndWithWhereExample() {
         final Reference<Category> cat1 = Category.reference("cat1");
-        final Predicate<Product> nameIsFooAndIsInCat1 = ProductQuery.model().masterData().current()
+        final QueryPredicate<Product> nameIsFooAndIsInCat1 = ProductQuery.model().masterData().current()
                 .where(cur -> cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(cat1)));
         final QueryDsl<Product> query = ProductQuery.of().withPredicate(nameIsFooAndIsInCat1);
     }
 
     public void predicateNotExample() {
-        final Predicate<Product> nameIsNotFoo = ProductQuery.model().masterData().current().name()
+        final QueryPredicate<Product> nameIsNotFoo = ProductQuery.model().masterData().current().name()
                 .lang(ENGLISH).isNot("foo");
         final QueryDsl<Product> query = ProductQuery.of().withPredicate(nameIsNotFoo);
     }

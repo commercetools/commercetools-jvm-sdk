@@ -12,7 +12,7 @@ import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
@@ -120,7 +120,7 @@ public class ProductFixtures {
     public static void deleteProductsAndProductType(final TestClient client, final ProductType productType) {
         if (productType != null) {
             ProductQueryModel productQueryModelProductQueryModel = ProductQuery.model();
-            Predicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
+            QueryPredicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
             QueryDsl<Product> productsOfProductTypeQuery = ProductQuery.of().withPredicate(ofProductType);
             List<Product> products = client.execute(productsOfProductTypeQuery).getResults();
             products.forEach(

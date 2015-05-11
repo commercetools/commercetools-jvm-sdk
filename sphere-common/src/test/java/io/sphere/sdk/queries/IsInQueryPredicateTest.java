@@ -8,12 +8,12 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.queries.Fixtures.emptyQueryModel;
 
-public class IsInPredicateTest {
+public class IsInQueryPredicateTest {
 
-    private final Predicate<String> model = create("foo", "bar\"evil", "baz");
+    private final QueryPredicate<String> model = create("foo", "bar\"evil", "baz");
 
-    private Predicate<String> create(String ... values) {
-        return new IsInPredicate<String, String, String>(emptyQueryModel, Arrays.stream(values).map(v -> StringQuerySortingModel.escape(v)).collect(toList()));
+    private QueryPredicate<String> create(String ... values) {
+        return new IsInQueryPredicate<String, String, String>(emptyQueryModel, Arrays.stream(values).map(v -> StringQuerySortingModel.escape(v)).collect(toList()));
     }
 
     @Test

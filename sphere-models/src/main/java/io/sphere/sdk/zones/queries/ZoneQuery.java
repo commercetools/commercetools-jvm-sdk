@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.zones.Location;
 import io.sphere.sdk.zones.Zone;
@@ -53,7 +53,7 @@ public class ZoneQuery extends DefaultModelQuery<Zone> {
      * @return query with the same values but a predicate searching for a specific location
      */
     public QueryDsl<Zone> byLocation(final Location location) {
-        final Predicate<Zone> predicate =
+        final QueryPredicate<Zone> predicate =
                 location.getState()
                         .map(state -> model().locations().where(l -> l.country().is(location.getCountry()).and(l.state().is(state))))
                         .orElseGet(() -> model().locations().where(l -> l.country().is(location.getCountry()).and(l.state().isNotPresent())));

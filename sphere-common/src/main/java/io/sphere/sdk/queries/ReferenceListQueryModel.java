@@ -14,14 +14,14 @@ public class ReferenceListQueryModel<T, R> extends QueryModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public final Predicate<T> isIn(final Iterable<? extends Referenceable<R>> references) {
+    public final QueryPredicate<T> isIn(final Iterable<? extends Referenceable<R>> references) {
         final List<String> ids = toStream(references).map(r -> r.toReference().getId()).collect(toList());
         return new StringQuerySortingModel<>(Optional.of(this), "id").isOneOf(ids);
     }
 
     @SafeVarargs
     @SuppressWarnings("varargs")
-    public final Predicate<T> isIn(final Referenceable<R> reference, final Referenceable<R> ... moreReferences) {
+    public final QueryPredicate<T> isIn(final Referenceable<R> reference, final Referenceable<R> ... moreReferences) {
         return isIn(listOf(reference, moreReferences));
     }
 }

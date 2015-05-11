@@ -10,7 +10,7 @@ import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -276,7 +276,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         });
     }
 
-    private Predicate<ProductType> hasAttributeType(final String attributeTypeName) {
+    private QueryPredicate<ProductType> hasAttributeType(final String attributeTypeName) {
         return ProductTypeQuery.model().attributes().type().name().is(attributeTypeName);
     }
 

@@ -2,10 +2,10 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.annotations.Unsafe;
 
-public interface Predicate<T> {
-    Predicate<T> or(Predicate<T> other);
+public interface QueryPredicate<T> {
+    QueryPredicate<T> or(QueryPredicate<T> other);
 
-    Predicate<T> and(Predicate<T> other);
+    QueryPredicate<T> and(QueryPredicate<T> other);
 
     /**
      * The predicate for the SPHERE.IO HTTP API, not url encoded.
@@ -16,7 +16,7 @@ public interface Predicate<T> {
     String toSphereQuery();
 
     @Unsafe
-    static <T> Predicate<T> of(final String sphereQuery) {
-        return new SimplePredicate<>(sphereQuery);
+    static <T> QueryPredicate<T> of(final String sphereQuery) {
+        return new SimpleQueryPredicate<>(sphereQuery);
     }
 }

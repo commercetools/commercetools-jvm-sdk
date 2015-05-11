@@ -1,9 +1,9 @@
 package io.sphere.sdk.queries;
 
-public class EmbeddedPredicate<T, V> extends QueryModelPredicate<T> {
-    private final Predicate<V> predicate;
+public class EmbeddedQueryPredicate<T, V> extends QueryModelQueryPredicate<T> {
+    private final QueryPredicate<V> predicate;
 
-    public EmbeddedPredicate(final QueryModel<T> queryModel, final Predicate<V> predicate) {
+    public EmbeddedQueryPredicate(final QueryModel<T> queryModel, final QueryPredicate<V> predicate) {
         super(queryModel);
         this.predicate = predicate;
     }

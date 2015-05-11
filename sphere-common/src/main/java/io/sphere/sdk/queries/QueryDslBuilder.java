@@ -15,7 +15,7 @@ import static io.sphere.sdk.queries.QueryDslImpl.*;
 
 class QueryDslBuilder<I> extends Base implements Builder<QueryDsl<I>> {
 
-    private Optional<Predicate<I>> predicate = Optional.empty();
+    private Optional<QueryPredicate<I>> predicate = Optional.empty();
     private List<QuerySort<I>> sort = sortByIdList();
     private Optional<Long> limit = Optional.empty();
     private Optional<Long> offset = Optional.empty();
@@ -40,12 +40,12 @@ class QueryDslBuilder<I> extends Base implements Builder<QueryDsl<I>> {
         additionalQueryParameters = template.additionalQueryParameters();
     }
 
-    public QueryDslBuilder<I> predicate(final Optional<Predicate<I>> predicate) {
+    public QueryDslBuilder<I> predicate(final Optional<QueryPredicate<I>> predicate) {
         this.predicate = predicate;
         return this;
     }
     
-    public QueryDslBuilder<I> predicate(final Predicate<I> predicate) {
+    public QueryDslBuilder<I> predicate(final QueryPredicate<I> predicate) {
         Objects.requireNonNull(predicate);
         return predicate(Optional.of(predicate));
     }

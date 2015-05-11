@@ -11,20 +11,20 @@ public class OptionalReferenceQueryModel<T, R> extends ReferenceQueryModel<T, R>
     }
 
     @Override
-    public Predicate<T> is(final Referenceable<R> reference) {
+    public QueryPredicate<T> is(final Referenceable<R> reference) {
         return super.is(reference);
     }
 
     @Override
-    public Predicate<T> isAnyOf(final List<? extends Referenceable<R>> elements) {
+    public QueryPredicate<T> isAnyOf(final List<? extends Referenceable<R>> elements) {
         return super.isAnyOf(elements);
     }
 
-    public Predicate<T> isPresent() {
-        return new OptionalPredicate<>(this, true);
+    public QueryPredicate<T> isPresent() {
+        return new OptionalQueryPredicate<>(this, true);
     }
 
-    public Predicate<T> isNotPresent() {
-        return new OptionalPredicate<>(this, false);
+    public QueryPredicate<T> isNotPresent() {
+        return new OptionalQueryPredicate<>(this, false);
     }
 }

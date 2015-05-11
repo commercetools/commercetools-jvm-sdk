@@ -13,7 +13,7 @@ public interface EntityQuery<T> extends Query<T> {
      *
      * @return the predicate used to perform the query
      */
-    Optional<Predicate<T>> predicate();
+    Optional<QueryPredicate<T>> predicate();
 
     /**
      * @return the used sort expressions for this query

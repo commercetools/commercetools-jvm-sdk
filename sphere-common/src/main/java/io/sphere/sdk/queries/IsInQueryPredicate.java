@@ -4,7 +4,7 @@ import java.util.StringJoiner;
 
 import static io.sphere.sdk.utils.IterableUtils.requireNonEmpty;
 
-class IsInPredicate<T, V, M> extends QueryModelPredicate<M> {
+class IsInQueryPredicate<T, V, M> extends QueryModelQueryPredicate<M> {
     private final Iterable<V> values;
 
     /**
@@ -13,7 +13,7 @@ class IsInPredicate<T, V, M> extends QueryModelPredicate<M> {
      * @param values possible values to query for, if it is for Strings, the may need to be escaped concerning double quotes.
      * @throws IllegalArgumentException if values is empty
      */
-    public IsInPredicate(final QueryModel<M> queryModel, final Iterable<V> values) {
+    public IsInQueryPredicate(final QueryModel<M> queryModel, final Iterable<V> values) {
         super(queryModel);
         requireNonEmpty(values);//SPHERE.IO requires values not to be empty
         this.values = values;

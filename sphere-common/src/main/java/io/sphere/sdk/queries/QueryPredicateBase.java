@@ -2,13 +2,13 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Base;
 
-abstract class PredicateBase<T> extends Base implements Predicate<T> {
-    public final Predicate<T> or(final Predicate<T> other) {
-        return new PredicateConnector<>("or", this, other);
+abstract class QueryPredicateBase<T> extends Base implements QueryPredicate<T> {
+    public final QueryPredicate<T> or(final QueryPredicate<T> other) {
+        return new QueryPredicateConnector<>("or", this, other);
     }
 
-    public final Predicate<T> and(final Predicate<T> other) {
-        return new PredicateConnector<>("and", this, other);
+    public final QueryPredicate<T> and(final QueryPredicate<T> other) {
+        return new QueryPredicateConnector<>("and", this, other);
     }
 
     protected String buildQuery(final QueryModel<T> model, final String definition) {
@@ -30,7 +30,7 @@ abstract class PredicateBase<T> extends Base implements Predicate<T> {
     @SuppressWarnings("rawtypes")
     @Override
     public final boolean equals(final Object o) {
-        return o != null && (o instanceof Predicate) && toSphereQuery().equals(((Predicate)o).toSphereQuery());
+        return o != null && (o instanceof QueryPredicate) && toSphereQuery().equals(((QueryPredicate)o).toSphereQuery());
     }
 
     @Override

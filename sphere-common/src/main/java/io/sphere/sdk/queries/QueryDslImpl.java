@@ -21,7 +21,7 @@ import java.util.List;
 
 class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
 
-    private final Optional<Predicate<T>> predicate;
+    private final Optional<QueryPredicate<T>> predicate;
     private final List<QuerySort<T>> sort;
     private final Optional<Long> limit;
     private final Optional<Long> offset;
@@ -30,7 +30,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
 
-    public QueryDslImpl(final Optional<Predicate<T>> predicate, final List<QuerySort<T>> sort, final Optional<Long> limit,
+    public QueryDslImpl(final Optional<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, final Optional<Long> limit,
                         final Optional<Long> offset, final String endpoint,
                         final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
                         final List<ExpansionPath<T>> expansionPaths, final List<QueryParameter> additionalQueryParameters) {
@@ -50,11 +50,11 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     }
 
     public QueryDslImpl(final String endpoint, final List<QueryParameter> additionalQueryParameters, final Function<HttpResponse, PagedQueryResult<T>> resultMapper) {
-        this(Optional.<Predicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<T>>emptyList(), additionalQueryParameters);
+        this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<T>>emptyList(), additionalQueryParameters);
     }
 
     public QueryDslImpl(final String endpoint, final Function<HttpResponse, PagedQueryResult<T>> resultMapper) {
-        this(Optional.<Predicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<T>>emptyList(), Collections.emptyList());
+        this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<T>>emptyList(), Collections.emptyList());
     }
 
     public QueryDslImpl(final String endpoint, final List<QueryParameter> additionalQueryParameters, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference) {
@@ -66,7 +66,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     }
 
     @Override
-    public QueryDsl<T> withPredicate(final Predicate<T> predicate) {
+    public QueryDsl<T> withPredicate(final QueryPredicate<T> predicate) {
         Objects.requireNonNull(predicate);
         return copyBuilder().predicate(predicate).build();
     }
@@ -101,7 +101,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     }
 
     @Override
-    public Optional<Predicate<T>> predicate() {
+    public Optional<QueryPredicate<T>> predicate() {
         return predicate;
     }
 

@@ -135,7 +135,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         cleanUpByName(parentSlug);
     }
 
-    private Optional<String> queryForPredicate(final Predicate<Category> parentPredicate) {
+    private Optional<String> queryForPredicate(final QueryPredicate<Category> parentPredicate) {
         final QueryDsl<Category> query = CategoryQuery.of()
                 .withPredicate(parentPredicate)
                 .withSort(CategoryQuery.model().createdAt().sort(DESC));
@@ -185,7 +185,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isGreaterThanComparisonPredicate() throws Exception {
-        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isGreaterThan("1");
+        final QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isGreaterThan("1");
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("2", "10");
@@ -196,7 +196,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isLessThanComparisonPredicate() throws Exception {
-        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isLessThan("2");
+        final QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isLessThan("2");
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("1", "10");
@@ -207,7 +207,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isLessThanOrEqualsComparisonPredicate() throws Exception {
-        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isLessThanOrEquals("10");
+        final QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isLessThanOrEquals("10");
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("1", "10");
@@ -218,7 +218,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isGreaterThanOrEqualsComparisonPredicate() throws Exception {
-        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isGreaterThanOrEquals("10");
+        final QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isGreaterThanOrEquals("10");
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("2", "10");
@@ -229,7 +229,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isNotInPredicates() throws Exception {
-        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isNotIn("10", "2");
+        final QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isNotIn("10", "2");
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("1");
@@ -241,7 +241,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isDefinedPredicates() throws Exception {
-        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.CHINESE).isPresent();
+        final QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(Locale.CHINESE).isPresent();
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names.contains("1")).isFalse();
@@ -253,7 +253,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
 
     @Test
     public void isNotDefinedPredicates() throws Exception {
-        final Predicate<Category> predicate = CategoryQuery.model().name().lang(Locale.CHINESE).isNotPresent();
+        final QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(Locale.CHINESE).isNotPresent();
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("1", "10");
@@ -262,7 +262,7 @@ public class CategoryIntegrationTest extends QueryIntegrationTest<Category> {
         predicateTestCase(predicate, assertions);
     }
 
-    public void predicateTestCase(final Predicate<Category> predicate, final Consumer<List<Category>> assertions) {
+    public void predicateTestCase(final QueryPredicate<Category> predicate, final Consumer<List<Category>> assertions) {
         withCategory(client(), CategoryDraftBuilder.of(en("1"), en("1")).description(Optional.empty()), c1 -> {
             withCategory(client(), CategoryDraftBuilder.of(en("2").plus(Locale.CHINESE, "x"), en("2")).description(en("desc 2")), c2 -> {
                 withCategory(client(), CategoryDraftBuilder.of(en("10"), en("10")), c10 -> {

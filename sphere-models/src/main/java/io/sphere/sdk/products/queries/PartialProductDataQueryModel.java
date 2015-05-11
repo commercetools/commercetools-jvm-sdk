@@ -57,12 +57,12 @@ public class PartialProductDataQueryModel extends ProductDataQueryModel<PartialP
     }
 
     @Override
-    public Predicate<PartialProductDataQueryModel> where(final Function<PartialProductDataQueryModel, Predicate<PartialProductDataQueryModel>> embeddedPredicate) {
+    public QueryPredicate<PartialProductDataQueryModel> where(final Function<PartialProductDataQueryModel, QueryPredicate<PartialProductDataQueryModel>> embeddedPredicate) {
         return super.where(embeddedPredicate);
     }
 
     @Override
-    public Predicate<PartialProductDataQueryModel> where(final Predicate<PartialProductDataQueryModel> embeddedPredicate) {
+    public QueryPredicate<PartialProductDataQueryModel> where(final QueryPredicate<PartialProductDataQueryModel> embeddedPredicate) {
         return super.where(embeddedPredicate);
     }
 }

@@ -8,7 +8,7 @@ public class BooleanQueryModel<T> extends QueryModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public Predicate<T> is(final boolean value) {
-        return EqPredicate.of(this, value);
+    public QueryPredicate<T> is(final boolean value) {
+        return EqQueryPredicate.of(this, value);
     }
 }

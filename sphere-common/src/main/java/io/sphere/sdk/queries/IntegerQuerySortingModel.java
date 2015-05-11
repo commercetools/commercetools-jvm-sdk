@@ -8,67 +8,67 @@ public class IntegerQuerySortingModel<T> extends IntegerLikeQuerySortingModel<T,
     }
 
     @Override
-    public Predicate<T> is(final Integer i) {
+    public QueryPredicate<T> is(final Integer i) {
         return super.is(i);
     }
 
     @Override
-    public Predicate<T> isGreaterThan(final Integer value) {
+    public QueryPredicate<T> isGreaterThan(final Integer value) {
         return super.isGreaterThan(value);
     }
 
     @Override
-    public Predicate<T> isGreaterThanOrEquals(final Integer value) {
+    public QueryPredicate<T> isGreaterThanOrEquals(final Integer value) {
         return super.isGreaterThanOrEquals(value);
     }
 
     @Override
-    public Predicate<T> isIn(final Iterable<Integer> args) {
+    public QueryPredicate<T> isIn(final Iterable<Integer> args) {
         return super.isIn(args);
     }
 
     @Override
-    public Predicate<T> isLessThan(final Integer value) {
+    public QueryPredicate<T> isLessThan(final Integer value) {
         return super.isLessThan(value);
     }
 
     @Override
-    public Predicate<T> isLessThanOrEquals(final Integer value) {
+    public QueryPredicate<T> isLessThanOrEquals(final Integer value) {
         return super.isLessThanOrEquals(value);
     }
 
     @Override
-    public Predicate<T> isNot(final Integer i) {
+    public QueryPredicate<T> isNot(final Integer i) {
         return super.isNot(i);
     }
 
     @Override
-    public Predicate<T> isNotIn(final Integer arg0, final Integer... args) {
+    public QueryPredicate<T> isNotIn(final Integer arg0, final Integer... args) {
         return super.isNotIn(arg0, args);
     }
 
     @Override
-    public Predicate<T> isNotIn(final Iterable<Integer> args) {
+    public QueryPredicate<T> isNotIn(final Iterable<Integer> args) {
         return super.isNotIn(args);
     }
 
     @Override
-    public Predicate<T> isNotPresent() {
+    public QueryPredicate<T> isNotPresent() {
         return super.isNotPresent();
     }
 
     @Override
-    public Predicate<T> isOneOf(final Integer arg0, final Integer... args) {
+    public QueryPredicate<T> isOneOf(final Integer arg0, final Integer... args) {
         return super.isOneOf(arg0, args);
     }
 
     @Override
-    public Predicate<T> isOneOf(final Iterable<Integer> args) {
+    public QueryPredicate<T> isOneOf(final Iterable<Integer> args) {
         return super.isOneOf(args);
     }
 
     @Override
-    public Predicate<T> isPresent() {
+    public QueryPredicate<T> isPresent() {
         return super.isPresent();
     }
 

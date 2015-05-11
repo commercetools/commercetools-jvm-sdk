@@ -2,7 +2,7 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -22,13 +22,13 @@ public class ProductDataQueryModelBaseTest {
     public void allVariantsInProduct() throws Exception {
         assertThat(ProductQuery.model().masterData().current().allVariants().where(m -> m.sku().is("bar")))
                 .isEqualTo(ProductQuery.model().masterData().current().where(m -> m.masterVariant().sku().is("bar").or(m.variants().sku().is("bar"))))
-                .isEqualTo(Predicate.<Product>of(embeddedProductPredicate));
+                .isEqualTo(QueryPredicate.<Product>of(embeddedProductPredicate));
     }
 
     @Test
     public void allVariantsInProductProjection() throws Exception {
         assertThat(ProductProjectionQuery.model().allVariants().where(m -> m.sku().is("bar")))
                 .isEqualTo(ProductProjectionQuery.model().where(m -> m.masterVariant().sku().is("bar").or(m.variants().sku().is("bar"))))
-                .isEqualTo(Predicate.<ProductProjection>of(embeddedProductProjectionPredicate));
+                .isEqualTo(QueryPredicate.<ProductProjection>of(embeddedProductProjectionPredicate));
     }
 }

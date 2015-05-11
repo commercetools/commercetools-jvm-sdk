@@ -8,7 +8,7 @@ import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultBillingAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultShippingAddress;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QuerySortDirection;
 import io.sphere.sdk.test.IntegrationTest;
@@ -85,13 +85,13 @@ public class CustomerQueryTest extends IntegrationTest {
         check((model) -> model.customerGroup().is(customer.getCustomerGroup().get()), false);
     }
 
-    private void check(final Function<CustomerQueryModel, Predicate<Customer>> f) {
+    private void check(final Function<CustomerQueryModel, QueryPredicate<Customer>> f) {
         check(f, false);
     }
 
-    private void check(final Function<CustomerQueryModel, Predicate<Customer>> f, final boolean checkDistraction) {
+    private void check(final Function<CustomerQueryModel, QueryPredicate<Customer>> f, final boolean checkDistraction) {
         final CustomerQueryModel model = CustomerQuery.model();
-        final Predicate<Customer> predicate = f.apply(model);
+        final QueryPredicate<Customer> predicate = f.apply(model);
         final Query<Customer> query = CustomerQuery.of().withPredicate(predicate).withSort(model.createdAt().sort(QuerySortDirection.DESC));
         final List<Customer> results = execute(query).getResults();
         final List<String> ids = results.stream().map(x -> x.getId()).collect(toList());

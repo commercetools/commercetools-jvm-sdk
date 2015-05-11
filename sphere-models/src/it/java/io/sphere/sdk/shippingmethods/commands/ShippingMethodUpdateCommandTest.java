@@ -1,11 +1,8 @@
 package io.sphere.sdk.shippingmethods.commands;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.models.DefaultCurrencyUnits;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.queries.Predicate;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shippingmethods.ZoneRate;
@@ -15,7 +12,6 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
-import io.sphere.sdk.zones.Zone;
 import io.sphere.sdk.zones.ZoneFixtures;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -72,7 +68,7 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeIsDefault() throws Exception {
         //only one can be default one, so clean up if there is any
-        final Query<ShippingMethod> query = ShippingMethodQuery.of().withPredicate(Predicate.of("isDefault = true"));
+        final Query<ShippingMethod> query = ShippingMethodQuery.of().withPredicate(QueryPredicate.of("isDefault = true"));
         final Optional<ShippingMethod> defaultShippingMethodOption = execute(query).head();
         defaultShippingMethodOption.ifPresent(sm -> execute(ShippingMethodUpdateCommand.of(sm, ChangeIsDefault.toFalse())));
 

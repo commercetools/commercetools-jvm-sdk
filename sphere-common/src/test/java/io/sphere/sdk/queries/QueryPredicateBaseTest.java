@@ -4,14 +4,14 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class PredicateBaseTest {
-    final Predicate<String> p1 = Predicate.<String>of("masterData(current(slug(en=\"xyz-42\")");
-    final Predicate<String> p2 = Predicate.<String>of("tags contains all (\"a\", \"b\", \"c\")");
+public class QueryPredicateBaseTest {
+    final QueryPredicate<String> p1 = QueryPredicate.<String>of("masterData(current(slug(en=\"xyz-42\")");
+    final QueryPredicate<String> p2 = QueryPredicate.<String>of("tags contains all (\"a\", \"b\", \"c\")");
 
     @Test
     public void correctClass() throws Exception {
-        assertThat(p1).isInstanceOf(PredicateBase.class);
-        assertThat(p2).isInstanceOf(PredicateBase.class);
+        assertThat(p1).isInstanceOf(QueryPredicateBase.class);
+        assertThat(p2).isInstanceOf(QueryPredicateBase.class);
     }
 
     @Test

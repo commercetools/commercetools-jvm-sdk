@@ -39,12 +39,12 @@ public class QueryDemo {
     }
 
     private void categoryQueryModel() {
-        Predicate<Category> predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+        QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
         Query<Category> query = CategoryQuery.of().withPredicate(predicate);
     }
 
     private void withPagination() {
-        Predicate<Category> predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+        QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
 
         QuerySort<Category> sortByName = CategoryQuery.model().name().lang(locale).sort(QuerySortDirection.DESC);
         QuerySort<Category> sortById = CategoryQuery.model().id().sort(QuerySortDirection.ASC);
