@@ -2,6 +2,8 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.models.Base;
 
+import static io.sphere.sdk.client.ClientPackage.requireNonBlank;
+
 final class SphereAuthConfigImpl extends Base implements SphereAuthConfig {
     private final String projectKey;
     private final String clientId;
@@ -9,10 +11,10 @@ final class SphereAuthConfigImpl extends Base implements SphereAuthConfig {
     private final String authUrl;
 
     SphereAuthConfigImpl(final String projectKey, final String clientId, final String clientSecret, final String authUrl) {
-        this.projectKey = projectKey;
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
-        this.authUrl = authUrl;
+        this.projectKey = requireNonBlank(projectKey, "projectKey");
+        this.clientId = requireNonBlank(clientId, "clientId");
+        this.clientSecret = requireNonBlank(clientSecret, "clientSecret");
+        this.authUrl = requireNonBlank(authUrl, "authUrl");
     }
 
     @Override
