@@ -13,5 +13,8 @@ public class ProjectGetTest extends IntegrationTest {
         assertThat(project.getKey()).isEqualTo(projectKey());
         assertThat(project.getName()).isNotEmpty();
         assertThat(project.getCountries()).isNotEmpty();
+        assertThat(project.getLanguages()).isNotEmpty();
+        assertThat(project.getCreatedAt()).isNotNull();
+        assertThat(project.getTrialUntil()).isNotNull();
     }
 }
