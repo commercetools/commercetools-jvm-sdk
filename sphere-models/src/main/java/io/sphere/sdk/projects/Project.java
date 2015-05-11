@@ -6,14 +6,20 @@ import io.sphere.sdk.models.Base;
 
 public final class Project extends Base {
     private final String key;
+    private final String name;
 
     @JsonCreator
-    private Project(final String key) {
+    private Project(final String key, final String name) {
         this.key = key;
+        this.name = name;
     }
 
     public String getKey() {
         return key;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public static TypeReference<Project> typeReference() {
