@@ -4,6 +4,7 @@ import io.sphere.sdk.models.Base;
 
 import static io.sphere.sdk.client.ClientPackage.API_URL;
 import static io.sphere.sdk.client.ClientPackage.AUTH_URL;
+import static io.sphere.sdk.client.ClientPackage.requireNonBlank;
 
 /**
  * The full configuration for a SPHERE.IO client.
@@ -17,11 +18,11 @@ public class SphereClientConfig extends Base implements SphereAuthConfig, Sphere
     private final String apiUrl;
 
     private SphereClientConfig(final String projectKey, final String clientId, final String clientSecret, final String authUrl, final String apiUrl) {
-        this.apiUrl = apiUrl;
-        this.projectKey = projectKey;
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
-        this.authUrl = authUrl;
+        this.apiUrl = requireNonBlank(apiUrl, "apiUrl");
+        this.projectKey = requireNonBlank(projectKey, "projectKey");
+        this.clientId = requireNonBlank(clientId, "clientId");
+        this.clientSecret = requireNonBlank(clientSecret, "clientSecret");
+        this.authUrl = requireNonBlank(authUrl, "authUrl");
     }
 
     public static SphereClientConfig of(final String projectKey, final String clientId, final String clientSecret) {
