@@ -1,6 +1,5 @@
 package io.sphere.sdk.errors;
 
-import io.sphere.assertasync.AsyncAssertions;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
@@ -31,12 +30,10 @@ import java.util.function.Supplier;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.http.HttpMethod.POST;
-import static java.util.stream.Collectors.joining;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.Assert.fail;
-import static io.sphere.assertasync.AsyncAssertions.*;
 
 public class SphereExceptionIntegrationTest extends IntegrationTest {
 
@@ -263,8 +260,10 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     public void enrichmentForSearchMappingIssues() throws Exception {
         final String body = "{\"statusCode\":400,\"message\":\"SearchPhaseExecutionException[Failed to execute phase [query_fetch], all shards failed; shardFailures {[13K3EBPTQoWoMNpMexz6tQ][products-0][3]: RemoteTransportException[[search3.sphere.prod.commercetools.de][inet[/192.168.7.35:9300]][search/phase/query+fetch]]; nested: SearchParseException[[products-0][3]: query[ConstantScore(*:*)],from[-1],size[-1]: Parse Failure [Failed to parse source [{\\\"query\\\":{\\\"match_all\\\":{}},\\\"facets\\\":{\\\"variants.attributes.SizeProductProjectio\\\":{\\\"range\\\":{\\\"field\\\":\\\"variants.attributes.SizeProductProjectio\\\",\\\"ranges\\\":[{\\\"from\\\":\\\"0\\\"}]},\\\"nested\\\":\\\"variants\\\"}},\\\"from\\\":0,\\\"size\\\":20}]]]; nested: ClassCastException[java.lang.String cannot be cast to java.lang.Number]; }]\",\"errors\":[{\"code\":\"InvalidInput\",\"message\":\"SearchPhaseExecutionException[Failed to execute phase [query_fetch], all shards failed; shardFailures {[13K3EBPTQoWoMNpMexz6tQ][products-0][3]: RemoteTransportException[[search3.sphere.prod.commercetools.de][inet[/192.168.7.35:9300]][search/phase/query+fetch]]; nested: SearchParseException[[products-0][3]: query[ConstantScore(*:*)],from[-1],size[-1]: Parse Failure [Failed to parse source [{\\\"query\\\":{\\\"match_all\\\":{}},\\\"facets\\\":{\\\"variants.attributes.SizeProductProjectio\\\":{\\\"range\\\":{\\\"field\\\":\\\"variants.attributes.SizeProductProjectio\\\",\\\"ranges\\\":[{\\\"from\\\":\\\"0\\\"}]},\\\"nested\\\":\\\"variants\\\"}},\\\"from\\\":0,\\\"size\\\":20}]]]; nested: ClassCastException[java.lang.String cannot be cast to java.lang.Number]; }]\"}]}";
         final SphereClient client = SphereClientFactory.of().createHttpTestDouble(intent -> HttpResponse.of(400, body));
-        final AsyncAssertions<PagedQueryResult<Category>> x = performing(client.execute(CategoryQuery.of()));
-        x.completesExceptionally(ErrorResponseException.class, e -> assertThat(e.getAdditionalNotes()).contains("Maybe it helps to reindex the products https://admin.sphere.io/fake-project-key-for-testing/developers/danger but this may take a while."));
+        assertThatThrownBy(() -> client.execute(CategoryQuery.of()).toCompletableFuture().join())
+                .hasCauseInstanceOf(ErrorResponseException.class)
+                .matches(e -> ((ErrorResponseException) e.getCause()).getAdditionalNotes().stream()
+                        .anyMatch(note -> note.contains("Maybe it helps to reindex the products https://admin.sphere.io/fake-project-key-for-testing/developers/danger but this may take a while.")));
     }
 
     @Test
