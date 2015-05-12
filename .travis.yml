@@ -1,12 +1,13 @@
 before_install:
 - sudo apt-get install graphviz
-#suggestions from https://github.com/travis-ci/travis-ci/issues/3259
+#suggestions from http://stackoverflow.com/questions/29636754/can-you-specify-minor-jdk-version-for-travis-ci since Java 8u30 is buggy
 - rm -rf ~/.linuxbrew
 - yes | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
 - export PATH="$HOME/.linuxbrew/bin:$PATH"
 - export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
 - export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
 - brew install jdk
+- export JAVA_HOME=/home/travis/.linuxbrew/Cellar/jdk/1.8.0-40
 script:
 - echo $JAVA_HOME
 - ./sbt genDoc test it:test
