@@ -10,6 +10,8 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+import static io.sphere.sdk.client.SphereAuth.AUTH_LOGGER;
+
 /**
  *  Holds OAuth access tokenCache for accessing protected Sphere HTTP API endpoints.
  *  Refreshes the access token as needed automatically.
@@ -51,9 +53,15 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
                         }
                     })
                     .when(TokenDeliveryFailedMessage.class, m -> {
-                        if (!currentTokensOption.isPresent()) {
+                        final boolean hasInvalidCredentials = m.cause.getCause() != null && m.cause.getCause() instanceof InvalidClientCredentialsException;
+                        if (hasInvalidCredentials) {
+                            AUTH_LOGGER.error(() -> "Invalid client credentials shutting down.", m.cause);
+                            currentAccessTokenFuture.completeExceptionally(m.cause);//in case it is still empty
+                            currentAccessTokenFuture = CompletableFutureUtils.failed(m.cause);//in case it was not empty
+                            close();
+                        } else if (!currentTokensOption.isPresent()) {
                             currentAccessTokenFuture.completeExceptionally(m.cause);
-                        } else if(lastTokenIsStillValid()){
+                        } else if (lastTokenIsStillValid()) {
                             //keep the old token
                         } else {
                             currentTokensOption = Optional.empty();
