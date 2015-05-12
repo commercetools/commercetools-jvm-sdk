@@ -1,12 +1,19 @@
 language: scala
 scala:
-- 2.10.0
+- 2.10.4
+before_install:
+- sudo apt-get install graphviz
+#suggestions from https://github.com/travis-ci/travis-ci/issues/3259
+- rm -rf ~/.linuxbrew
+- yes | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
+- export PATH="$HOME/.linuxbrew/bin:$PATH"
+- export MANPATH="$HOME/.linuxbrew/share/man:$MANPATH"
+- export INFOPATH="$HOME/.linuxbrew/share/info:$INFOPATH"
+- brew install jdk
 script:
 - echo $JAVA_HOME
 - ./sbt genDoc test it:test
 - bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null
-before_install:
-- sudo apt-get install graphviz
 after_success:
 - bash scripts/publish-javadoc-version-folder.sh > /dev/null 2> /dev/null
 notifications:
