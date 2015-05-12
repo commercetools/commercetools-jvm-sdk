@@ -134,7 +134,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     public void queryByMetaAttributes() throws Exception {
         withProduct(client(), product -> {
             final MetaAttributes metaAttributes = randomMetaAttributes();
-            final Product productWithMetaAttributes = execute(ProductUpdateCommand.of(product, SetMetaAttributes.of(metaAttributes, STAGED_AND_CURRENT)));
+            final Product productWithMetaAttributes = execute(ProductUpdateCommand.of(product, MetaAttributesUpdateActions.of(metaAttributes, STAGED_AND_CURRENT)));
             checkOneResult(productWithMetaAttributes, model().metaDescription().lang(ENGLISH).is(en(metaAttributes.getMetaDescription())));
             checkOneResult(productWithMetaAttributes, model().metaTitle().lang(ENGLISH).is(en(metaAttributes.getMetaTitle())));
             checkOneResult(productWithMetaAttributes, model().metaKeywords().lang(ENGLISH).is(en(metaAttributes.getMetaKeywords())));

@@ -4,11 +4,9 @@ import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.*;
-import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductData;
-import io.sphere.sdk.products.ProductVariant;
+import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
@@ -191,14 +189,60 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void setMetaKeywords() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            final LocalizedStrings metaKeywords = LocalizedStrings
+                    .of(ENGLISH, "Platform-as-a-Service, e-commerce, http, api, tool");
+            final SetProductMetaKeywords action = SetProductMetaKeywords.of(metaKeywords, STAGED_AND_CURRENT);
+
+            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
+
+            assertThat(updatedProduct.getMasterData().getStaged().getMetaKeywords()).contains(metaKeywords);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setMetaDescription() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            final LocalizedStrings metaDescription = LocalizedStrings
+                    .of(ENGLISH, "SPHERE.IO&#8482; is the first Platform-as-a-Service solution for eCommerce.");
+            final SetProductMetaDescription action = SetProductMetaDescription.of(metaDescription, STAGED_AND_CURRENT);
+
+            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
+
+            assertThat(updatedProduct.getMasterData().getStaged().getMetaDescription()).contains(metaDescription);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void setMetaTitle() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            final LocalizedStrings metaTitle = LocalizedStrings
+                    .of(ENGLISH, "commercetools SPHERE.IO&#8482; - Next generation eCommerce");
+            final SetProductMetaTitle action = SetProductMetaTitle.of(metaTitle, STAGED_AND_CURRENT);
+
+            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
+
+            assertThat(updatedProduct.getMasterData().getStaged().getMetaTitle()).contains(metaTitle);
+
+            return updatedProduct;
+        });
+    }
+
+    @Test
     public void setMetaAttributes() throws Exception {
         withUpdateableProduct(client(), product -> {
             final MetaAttributes metaAttributes = MetaAttributes.metaAttributesOf(ENGLISH,
                     "commercetools SPHERE.IO&#8482; - Next generation eCommerce",
                     "SPHERE.IO&#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
                     "Platform-as-a-Service, e-commerce, http, api, tool");
-            final Product updatedProduct = client()
-                    .execute(ProductUpdateCommand.of(product, SetMetaAttributes.of(metaAttributes, STAGED_AND_CURRENT)));
+            final List<UpdateAction<Product>> updateActions =
+                    MetaAttributesUpdateActions.of(metaAttributes, STAGED_AND_CURRENT);
+            final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, updateActions));
 
             final ProductData productData = updatedProduct.getMasterData().getStaged();
             assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
