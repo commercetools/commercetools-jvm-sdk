@@ -1,0 +1,49 @@
+package io.sphere.sdk.categories.queries;
+
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.models.LocalizedStringsEntry;
+import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.queries.QuerySortDirection;
+import io.sphere.sdk.test.IntegrationTest;
+import org.junit.Test;
+
+import java.util.Locale;
+
+import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
+import static io.sphere.sdk.queries.QuerySortDirection.DESC;
+import static org.assertj.core.api.Assertions.*;
+
+public class CategoryQueryTest extends IntegrationTest {
+    @Test
+    public void queryByName() throws Exception {
+        withCategory(client(), category -> {
+            final LocalizedStringsEntry name = category.getName().stream().findAny().get();
+
+            final Query<Category> query = CategoryQuery.of().byName(name.getLocale(), name.getValue());
+            assertThat(execute(query).head().get().getId()).isEqualTo(category.getId());
+        });
+    }
+
+    @Test
+    public void queryByExternalId() throws Exception {
+        withCategory(client(), category -> {
+            final String externalId = category.getExternalId().get();
+
+            final Query<Category> query = CategoryQuery.of().byExternalId(externalId);
+            assertThat(execute(query).head().get().getId()).isEqualTo(category.getId());
+        });
+    }
+
+    @Test
+    public void queryByNotName() throws Exception {
+        withCategory(client(), category1 ->
+            withCategory(client(), category2 -> {
+                final Query<Category> query = CategoryQuery.of().
+                        withPredicate(CategoryQuery.model().name().lang(Locale.ENGLISH).isNot(category1.getName().get(Locale.ENGLISH).get()))
+                        .withSort(CategoryQuery.model().createdAt().sort(DESC));
+                final boolean category1IsPresent = execute(query).getResults().stream().anyMatch(cat -> cat.getId().equals(category1.getId()));
+                assertThat(category1IsPresent).isFalse();
+            })
+        );
+    }
+}

@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryDsl;
 
 import java.util.Locale;

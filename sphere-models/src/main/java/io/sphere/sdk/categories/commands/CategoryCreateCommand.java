@@ -11,6 +11,8 @@ import io.sphere.sdk.commands.CreateCommandImpl;
  *
  * For construction of a {@link io.sphere.sdk.categories.CategoryDraft} (a draft for a new category) use a {@link io.sphere.sdk.categories.CategoryDraftBuilder}:
  *
+ *
+ * {@include.example io.sphere.sdk.categories.commands.CategoryCreateCommandTest#execution()}
  */
 public final class CategoryCreateCommand extends CreateCommandImpl<Category, CategoryDraft> implements Command<Category> {
 

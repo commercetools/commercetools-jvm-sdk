@@ -8,7 +8,7 @@ import io.sphere.sdk.models.Versioned;
 /**
  * Deletes a category in SPHERE.IO.
  *
- *
+ * {@include.example io.sphere.sdk.categories.commands.CategoryDeleteCommandTest#execution()}
  */
 public final class CategoryDeleteCommand extends ByIdDeleteCommandImpl<Category> {
 
