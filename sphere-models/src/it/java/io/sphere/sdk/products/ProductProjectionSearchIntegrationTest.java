@@ -40,7 +40,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static final String EVIL_CHARACTER_WORD = "öóßàç";
-    private static final RangeStats<BigDecimal> DEFAULT_RANGE_STATS = RangeStats.of(Optional.of(new BigDecimal("0")), Optional.empty(), 6, new BigDecimal("36"), new BigDecimal("46D"), new BigDecimal("246"), 41D);
+    private static final RangeStats<BigDecimal> DEFAULT_RANGE_STATS = RangeStats.of(Optional.of(new BigDecimal("0")), Optional.empty(), 6, new BigDecimal("36"), new BigDecimal("46"), new BigDecimal("246"), 41D);
 
     private static Product product1;
     private static Product product2;

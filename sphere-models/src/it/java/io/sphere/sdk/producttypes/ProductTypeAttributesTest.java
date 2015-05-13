@@ -7,11 +7,10 @@ import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
-import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.QueryPredicate;
-import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
@@ -24,50 +23,20 @@ import java.util.*;
 import java.util.function.*;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
+import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class ProductTypeIntegrationTest extends QueryIntegrationTest<ProductType> {
+public final class ProductTypeAttributesTest extends IntegrationTest {
     public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MULTI_LINE;
     public static final LocalizedStrings LABEL = en("label");
     public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
     public static final ProductTypeDraft tshirt = new TShirtProductTypeDraftSupplier("t-shirt").get();
     public static final String distractorName = "distractor";
-
-    @Override
-    protected SphereRequest<ProductType> deleteCommand(final ProductType item) {
-        return ProductTypeDeleteCommand.of(item);
-    }
-
-    @Override
-    protected SphereRequest<ProductType> newCreateCommandForName(String name) {
-        return ProductTypeCreateCommand.of(ProductTypeDraft.of(name, "desc", Collections.emptyList()));
-    }
-
-    @Override
-    protected String extractName(ProductType instance) {
-        return instance.getName();
-    }
-
-    @Override
-    protected SphereRequest<PagedQueryResult<ProductType>> queryRequestForQueryAll() {
-        return ProductTypeQuery.of();
-    }
-
-    @Override
-    protected SphereRequest<PagedQueryResult<ProductType>> queryObjectForName(String name) {
-        return ProductTypeQuery.of().byName(name);
-    }
-
-    @Override
-    protected SphereRequest<PagedQueryResult<ProductType>> queryObjectForNames(List<String> names) {
-        return ProductTypeQuery.of().withPredicate(ProductTypeQuery.model().name().isOneOf(names));
-    }
 
     @Test
     public void booleanAttribute() throws Exception {
@@ -170,15 +139,15 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
 
     @Test
     public void productReferenceAttribute() throws Exception {
-        final ProductType productType = createInBackendByName("productReferenceAttribute-testcase");
-        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
-        final ProductDraft productDraft = ProductDraftBuilder.of(productType, LABEL, SphereTestUtils.randomSlug(), masterVariant).build();
-        final Product product = execute(ProductCreateCommand.of(productDraft));
-        testSingleAndSet(AttributeAccess.ofProductReference(), AttributeAccess.ofProductReferenceSet(),
-                asSet(product.toReference().filled(Optional.<Product>empty())),
-                ReferenceType.ofProduct(),
-                AttributeDefinitionBuilder.of("productReference", LABEL, ReferenceType.ofProduct()).build());
-        cleanUpByName(productType.getName());
+        withEmptyProductType(client(), "productReferenceAttribute-testcase", productType -> {
+            final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().build();
+            final ProductDraft productDraft = ProductDraftBuilder.of(productType, LABEL, SphereTestUtils.randomSlug(), masterVariant).build();
+            final Product product = execute(ProductCreateCommand.of(productDraft));
+            testSingleAndSet(AttributeAccess.ofProductReference(), AttributeAccess.ofProductReferenceSet(),
+                    asSet(product.toReference().filled(Optional.<Product>empty())),
+                    ReferenceType.ofProduct(),
+                    AttributeDefinitionBuilder.of("productReference", LABEL, ReferenceType.ofProduct()).build());
+        });
     }
 
     @Test
@@ -217,7 +186,7 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
             Optional<AttributeDefinition> sizeAttribute = productType.getAttribute("size");
             final List<PlainEnumValue> possibleSizeValues = sizeAttribute.
                     map(attrib -> ((EnumType) attrib.getAttributeType()).getValues()).
-                            orElse(Collections.<PlainEnumValue>emptyList());
+                    orElse(Collections.<PlainEnumValue>emptyList());
             final List<PlainEnumValue> expected =
                     asList(PlainEnumValue.of("S", "S"), PlainEnumValue.of("M", "M"), PlainEnumValue.of("X", "X"));
             assertThat(possibleSizeValues).isEqualTo(expected);
@@ -281,18 +250,11 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
     }
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {
-        cleanUpByName(distractorName);
-        final ProductType productType = execute(ProductTypeCreateCommand.of(ProductTypeDraft.of(distractorName, "desc", Collections.emptyList())));
-        consumer.accept(productType);
-        cleanUpByName(distractorName);
+        withProductType(client(), () -> ProductTypeDraft.of(distractorName, "desc", Collections.emptyList()), consumer);
     }
 
     private void withTShirtProductType(final Consumer<ProductType> consumer) {
-        cleanUpByName(tshirt.getName());
-        final ProductType productType = execute(ProductTypeCreateCommand.of(tshirt));
-        assertThat(productType.getName()).isEqualTo(tshirt.getName());
-        consumer.accept(productType);
-        cleanUpByName(tshirt.getName());
+        withProductType(client(), () -> tshirt, consumer);
     }
 
     private void testSetAttribute(final String attributeName, final AttributeType attributeType) {
@@ -404,8 +366,11 @@ public final class ProductTypeIntegrationTest extends QueryIntegrationTest<Produ
         testSetAttribute(setAccess, "set-of-" + singleDefinition.getName(), demoSet, attributeType);
     }
 
-    @Override
+    protected void cleanUpByName(final String name) {
+        cleanUpByName(asList(name));
+    }
+
     protected void cleanUpByName(final List<String> names) {
-        queryByName(names).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
+        execute(ProductTypeQuery.of().withPredicate(ProductTypeQuery.model().name().isOneOf(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
     }
 }

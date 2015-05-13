@@ -10,6 +10,8 @@ import io.sphere.sdk.commands.CreateCommandImpl;
 
   <p>{@link io.sphere.sdk.producttypes.ProductType}s can be created in the backend by executing a {@link io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand}:</p>
 
+  {@include.example io.sphere.sdk.producttypes.commands.ProductTypeCreateCommandTest#execution()}
+
   {@include.example io.sphere.sdk.producttypes.Example#createDemo()}
 
   {@include.example io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier}

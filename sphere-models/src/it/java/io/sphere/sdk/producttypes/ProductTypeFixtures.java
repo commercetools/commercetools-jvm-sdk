@@ -7,8 +7,10 @@ import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
+import java.util.Collections;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -17,6 +19,14 @@ import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 
 public final class ProductTypeFixtures {
     private ProductTypeFixtures() {
+    }
+
+    public static void withEmptyProductType(final TestClient client, final String name, final Consumer<ProductType> user) {
+        withProductType(client, () -> ProductTypeDraft.of(name, "desc", Collections.emptyList()), user);
+    }
+
+    public static void withProductType(final TestClient client, final String name, final Consumer<ProductType> user) {
+        withProductType(client, new TShirtProductTypeDraftSupplier(name), user);
     }
 
     public static void withProductType(final TestClient client, final Supplier<ProductTypeDraft> creator, final Consumer<ProductType> user) {

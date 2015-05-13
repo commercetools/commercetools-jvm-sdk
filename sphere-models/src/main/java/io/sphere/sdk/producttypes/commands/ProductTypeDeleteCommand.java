@@ -8,7 +8,7 @@ import io.sphere.sdk.commands.ByIdDeleteCommandImpl;
 /** Deletes a product type.
 
  <p>Example:</p>
- {@include.example example.QueryProductTypeExamples#delete()}
+ {@include.example io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommandTest#execution()}
 
  */
 public final class ProductTypeDeleteCommand extends ByIdDeleteCommandImpl<ProductType> {
