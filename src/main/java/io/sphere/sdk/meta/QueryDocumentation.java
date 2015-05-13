@@ -6,21 +6,21 @@ import io.sphere.sdk.models.Base;
  <p>The Query API is for reading specific resources from SPHERE.IO.
  The resources can be sorted and fetched in batches.</p>
 
- <p>First, you need to specify a query, example:</p>
+ <p>First, you need to specify a query, for example:</p>
 
  {@include.example io.sphere.sdk.queries.QueryDemo#formulatingAQuery()}
 
- <p>Second, you use the sphere client to execute a query request, example:</p>
+ <p>Second, you use the sphere client to execute a query request, for example:</p>
 
  {@include.example io.sphere.sdk.queries.QueryDemo#executeQuery()}
 
  <p>The successful execution of a {@link io.sphere.sdk.queries.Query} results in {@link io.sphere.sdk.queries.PagedQueryResult} of a SPHERE.IO resource or view.
  While the {@link io.sphere.sdk.queries.Query} interface just contains information to execute a query,
- the interface {@link io.sphere.sdk.queries.QueryDsl} provides also a domain specific language to tune a query.</p>
+ the interface {@link io.sphere.sdk.queries.QueryDsl} also provides a domain specific language to tune a query.</p>
 
- <p>For most of the SPHERE.IO resources you can find classes to support you formulating valid queries (in a sub package queries).</p>
+ <p>For most of the SPHERE.IO resources you can find classes to support you in formulating valid queries (in a sub package queries).</p>
 
- <p>The following snipped creates a query which selects all products without a specific order.</p>
+ <p>The following snippet creates a query which selects all products without a specific order.</p>
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryForAllDemo()}
 
@@ -36,7 +36,7 @@ import io.sphere.sdk.models.Base;
 
  <h4 id="create-query-with-model-companion-class">Create a query with helper methods from a model companion class</h4>
 
- <p>For some model interfaces exist companion classes (the name of the interface in plural) which provide some default queries, example for categories:</p>
+ <p>For some model interfaces companion classes exist (the name of the interface in plural) which provide some default queries, for example for categories:</p>
 
  {@include.example io.sphere.sdk.queries.QueryDemo#queryFromCompanionHelper()}
 
