@@ -7,7 +7,7 @@ import io.sphere.sdk.commands.CreateCommandImpl;
 /** Creates a channel.
 
  <p>Example:</p>
- {@include.example io.sphere.sdk.channels.ChannelIntegrationTest#createChannel()}
+ {@include.example io.sphere.sdk.channels.commands.ChannelCreateCommandTest#execution()}
 
 @see io.sphere.sdk.channels.ChannelDraftBuilder
  */

@@ -8,7 +8,7 @@ import io.sphere.sdk.models.Versioned;
 /** Deletes a channel.
 
  <p>Example:</p>
- {@include.example io.sphere.sdk.channels.ChannelIntegrationTest#deleteChannelById()}
+ {@include.example }
  */
 public class ChannelDeleteCommand extends ByIdDeleteCommandImpl<Channel> {
     private ChannelDeleteCommand(final Versioned<Channel> versioned) {
