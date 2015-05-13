@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import com.github.slugify.Slugify;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
@@ -15,30 +16,31 @@ import io.sphere.sdk.queries.*;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
+import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.IterableUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Random;
+import java.util.stream.IntStream;
 
-import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.*;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
+import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.products.ProductFixtures.*;
 
-public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
-    public static final Random RANDOM = new Random();
+public class ProductCrudIntegrationTest extends IntegrationTest {
     private static ProductType productType;
     private final static String productTypeName = "t-shirt-" + ProductCrudIntegrationTest.class.getName();
 
@@ -55,32 +57,26 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         productType = null;
     }
 
-    @Override
     protected SphereRequest<Product> deleteCommand(final Product item) {
         return ProductDeleteCommand.of(item);
     }
 
-    @Override
     protected SphereRequest<Product> newCreateCommandForName(final String name) {
         return ProductCreateCommand.of(new SimpleCottonTShirtProductDraftSupplier(productType, name).get());
     }
 
-    @Override
     protected String extractName(final Product instance) {
         return instance.getMasterData().getStaged().getName().get(ENGLISH).get();
     }
 
-    @Override
     protected SphereRequest<PagedQueryResult<Product>> queryRequestForQueryAll() {
         return ProductQuery.of();
     }
 
-    @Override
     protected SphereRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
         return ProductQuery.of().withPredicate(ProductQuery.model().masterData().current().name().lang(ENGLISH).is(name));
     }
 
-    @Override
     protected SphereRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
         return ProductQuery.of().withPredicate(ProductQuery.model().masterData().current().name().lang(ENGLISH).isOneOf(names));
     }
@@ -113,5 +109,64 @@ public class ProductCrudIntegrationTest extends QueryIntegrationTest<Product> {
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getSku()).contains(sku);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Colors.ATTRIBUTE)).contains(Colors.GREEN);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Sizes.ATTRIBUTE)).contains(Sizes.S);
+    }
+
+    @Test
+    public void queryByNameScenario() {
+        assertModelsNotPresent();
+        final List<Product> instances = createInBackendByName(modelNames());
+        final List<String> actualNames = instances.stream().map(o -> extractName(o)).
+                filter(name -> modelNames().contains(name)).sorted().collect(toList());
+        assertThat(actualNames).
+                overridingErrorMessage(String.format("The test requires instances with the names %s.", IterableUtils.toString(modelNames()))).
+                isEqualTo(modelNames());
+        final String nameToFind = modelNames().get(1);
+        final List<Product> results = execute(queryObjectForName(nameToFind)).getResults();
+        assertThat(results).hasSize(1);
+        assertThat(getNames(results)).isEqualTo(asList(nameToFind));
+        assertModelsNotPresent();
+    }
+
+    /**
+     * Removes all items with the name in {@code names}
+     * Should not throw exceptions if the elements are not existing.
+     * @param names the names of the items to delete
+     */
+    protected void cleanUpByName(final List<String> names){
+        execute(queryObjectForNames(names)).getResults().forEach(item -> delete(item));
+    }
+
+    protected void delete(Product item) {
+        try {
+            execute(deleteCommand(item));
+        } catch (final Exception e) {
+            getLogger("test.fixtures").warn(() -> String.format("tried to delete %s but an Exception occurred: %s", item, e.toString()));
+        }
+    }
+
+    protected List<Product> createInBackendByName(final List<String> names) {
+        return names.stream().map(name -> execute(newCreateCommandForName(name))).collect(toList());
+    }
+
+    protected io.sphere.sdk.products.Product createInBackendByName(final String name) {
+        return createInBackendByName(asList(name)).get(0);
+    }
+
+    private String sluggedClassName() {
+        final String className = this.getClass().toString();
+        return new Slugify().slugify(className);
+    }
+
+    protected List<String> modelNames(){
+        return IntStream.of(1, 2, 3).mapToObj(i -> sluggedClassName() + i).collect(toList());
+    }
+
+    protected List<String> getNames(final List<Product> elements) {
+        return elements.stream().map(o -> extractName(o)).collect(toList());
+    }
+
+    private void assertModelsNotPresent() {
+        cleanUpByName(modelNames());
+        assertThat(getNames(execute(queryRequestForQueryAll()).getResults())).overridingErrorMessage("the instances with the names " + modelNames() + " should not be present.").doesNotContainAnyElementsOf(modelNames());
     }
 }
