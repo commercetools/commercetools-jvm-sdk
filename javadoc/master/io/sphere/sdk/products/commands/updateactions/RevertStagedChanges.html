@@ -129,12 +129,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription, ONLY_STAGED)));
     final Product updatedProduct = execute(cmd);
     assertThat(oldDescriptionOption).isNotEqualTo(Optional.of(newDescription));
-    OptionalAssert.assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isPresentAs(newDescription);
-    OptionalAssert.assertThat(updatedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
+    assertThat(updatedProduct.getMasterData().getStaged().getDescription()).contains(newDescription);
+    assertThat(updatedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
 
     final Product revertedProduct = execute(ProductUpdateCommand.of(updatedProduct, RevertStagedChanges.of()));
-    OptionalAssert.assertThat(revertedProduct.getMasterData().getStaged().getDescription()).isEqualTo(oldDescriptionOption);
-    OptionalAssert.assertThat(revertedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
+    assertThat(revertedProduct.getMasterData().getStaged().getDescription()).isEqualTo(oldDescriptionOption);
+    assertThat(revertedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
 
     return revertedProduct;
 });

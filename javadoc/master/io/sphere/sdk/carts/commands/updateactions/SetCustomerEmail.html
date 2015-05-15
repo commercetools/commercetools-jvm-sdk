@@ -121,10 +121,10 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">SetCustomerEmail</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomerEmail--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-OptionalAssert.assertThat(cart.getCustomerEmail()).isAbsent();
+assertThat(cart.getCustomerEmail()).isEmpty();
 final String email = "info@commercetools.de";
 final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
-OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
+assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>

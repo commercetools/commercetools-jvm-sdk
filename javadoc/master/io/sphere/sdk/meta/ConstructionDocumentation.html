@@ -158,7 +158,7 @@ assertThat(builder1 == builder &amp;&amp; builder2 == builder1)
         .isTrue();
 assertThat(builder1.build().getFirstName())
         .overridingErrorMessage("the last setting wins")
-        .isPresentAs("Matt");
+        .contains("Matt");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>Some builders support a model as prototype:</p>
@@ -171,10 +171,10 @@ final AddressBuilder builder = AddressBuilder.of(template);
 final Address address = builder.firstName("Matt").build();
 assertThat(address.getLastName())
         .overridingErrorMessage("not overwritten values are used from the template")
-        .isPresentAs("Smith");
+        .contains("Smith");
 assertThat(address.getFirstName())
         .overridingErrorMessage("fields can be overwritten in the builder")
-        .isPresentAs("Matt");
+        .contains("Matt");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
   <h3 id=copy-method>Copy methods</h3>

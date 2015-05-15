@@ -127,14 +127,14 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     assertThat(address.getId())
             .overridingErrorMessage("only fetched address contains an ID")
             .isPresent();
-    assertThat(customer.getDefaultShippingAddressId()).isAbsent();
-    assertThat(customer.getDefaultShippingAddress()).isAbsent();
+    assertThat(customer.getDefaultShippingAddressId()).isEmpty();
+    assertThat(customer.getDefaultShippingAddress()).isEmpty();
 
     final Customer updatedCustomer =
             execute(CustomerUpdateCommand.of(customer, SetDefaultShippingAddress.of(address)));
 
     assertThat(updatedCustomer.getDefaultShippingAddressId()).isEqualTo(address.getId());
-    assertThat(updatedCustomer.getDefaultShippingAddress()).isPresentAs(address);
+    assertThat(updatedCustomer.getDefaultShippingAddress()).contains(address);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

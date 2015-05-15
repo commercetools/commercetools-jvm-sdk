@@ -125,12 +125,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
  If the address is not provided, the shipping address is unset, the taxedPrice is unset and the taxRates are unset in all line items.
 
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setShippingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-OptionalAssert.assertThat(cart.getShippingAddress()).isAbsent();
+assertThat(cart.getShippingAddress()).isEmpty();
 final Address address = AddressBuilder.of(DE).build();
 final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetShippingAddress.of(address)));
-OptionalAssert.assertThat(cartWithAddress.getShippingAddress()).isPresentAs(address);
+assertThat(cartWithAddress.getShippingAddress()).contains(address);
 final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetShippingAddress.of(Optional.empty())));
-OptionalAssert.assertThat(cartWithoutAddress.getShippingAddress()).isAbsent();
+assertThat(cartWithoutAddress.getShippingAddress()).isEmpty();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>

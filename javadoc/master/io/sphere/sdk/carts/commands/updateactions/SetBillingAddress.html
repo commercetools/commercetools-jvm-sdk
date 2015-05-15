@@ -121,12 +121,12 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">SetBillingAddress</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setBillingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-OptionalAssert.assertThat(cart.getBillingAddress()).isAbsent();
+assertThat(cart.getBillingAddress()).isEmpty();
 final Address address = AddressBuilder.of(DE).build();
 final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddress.of(address)));
-OptionalAssert.assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
+assertThat(cartWithAddress.getBillingAddress()).contains(address);
 final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(Optional.empty())));
-OptionalAssert.assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
+assertThat(cartWithoutAddress.getBillingAddress()).isEmpty();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>

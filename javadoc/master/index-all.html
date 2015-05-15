@@ -105,8 +105,8 @@
     final Delivery delivery = updatedOrder.getShippingInfo().get().getDeliveries().get(0);
     assertThat(delivery.getItems()).isEqualTo(items);
     final Parcel parcel = delivery.getParcels().get(0);
-    assertThat(parcel.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
-    assertThat(parcel.getTrackingData()).isPresentAs(TRACKING_DATA);
+    assertThat(parcel.getMeasurements()).contains(PARCEL_MEASUREMENTS);
+    assertThat(parcel.getTrackingData()).contains(TRACKING_DATA);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -160,8 +160,8 @@
     final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
     final Order updatedOrder = execute(OrderUpdateCommand.of(orderWithDelivery, action));
     final Parcel actual = updatedOrder.getShippingInfo().get().getDeliveries().get(0).getParcels().get(0);
-    assertThat(actual.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
-    assertThat(actual.getTrackingData()).isPresentAs(TRACKING_DATA);
+    assertThat(actual.getMeasurements()).contains(PARCEL_MEASUREMENTS);
+    assertThat(actual.getTrackingData()).contains(TRACKING_DATA);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -202,9 +202,9 @@
     assertThat(returnItem.getQuantity()).isEqualTo(1);
     assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
     assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
-    assertThat(returnItem.getComment()).isPresentAs("foo bar");
-    assertThat(returnInfo.getReturnDate()).isPresentAs(INSTANT_IN_PAST);
-    assertThat(returnInfo.getReturnTrackingId()).isPresentAs("trackingId");
+    assertThat(returnItem.getComment()).contains("foo bar");
+    assertThat(returnInfo.getReturnDate()).contains(INSTANT_IN_PAST);
+    assertThat(returnInfo.getReturnTrackingId()).contains("trackingId");
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -237,7 +237,7 @@
         final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
         final ShippingMethod shippingMethodWithShippingRate =
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).containsExactly(shippingRate);
+        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
@@ -281,7 +281,7 @@
         final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
         final ShippingMethod shippingMethodWithShippingRate =
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).containsExactly(shippingRate);
+        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
@@ -316,7 +316,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryExpansionModel.html#ancestors--">ancestors()</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.queries">CategoryExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/Predicate.html#and-io.sphere.sdk.queries.Predicate-">and(Predicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryPredicate.html#and-io.sphere.sdk.queries.QueryPredicate-">and(QueryPredicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#anonymousCartId-java.util.Optional-">anonymousCartId(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -415,6 +415,10 @@
 <dt><a href="io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><span class="typeNameLink">AttributeTypeQueryModel</span></a>&lt;<a href="io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html" title="type parameter in AttributeTypeQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/producttypes/queries/package-summary.html">io.sphere.sdk.producttypes.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpHeaders.html#AUTHORIZATION">AUTHORIZATION</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#authorName-java.util.Optional-">authorName(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#authorName-java.lang.String-">authorName(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariantBuilder.html#availability-java.util.Optional-">availability(Optional&lt;ProductVariantAvailability&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariantBuilder.html" title="class in io.sphere.sdk.products">ProductVariantBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -528,6 +532,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductTypeBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeBuilder.html" title="class in io.sphere.sdk.producttypes">ProductTypeBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateBuilder.html" title="class in io.sphere.sdk.states">StateBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraftBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></dt>
@@ -607,6 +613,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byName-java.lang.String-">byName(String)</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#byProductId-java.lang.String-">byProductId(String)</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="class in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#byProductType-io.sphere.sdk.models.Referenceable-">byProductType(Referenceable&lt;ProductType&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductQuery.html#byProductType-io.sphere.sdk.models.Referenceable-">byProductType(Referenceable&lt;ProductType&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="class in io.sphere.sdk.products.queries">ProductQuery</a></dt>
@@ -632,8 +640,6 @@
 <div class="block">Checks if the response can be handled by <a href="io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.deserialize(HttpResponse)</code></a>.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestDecorator.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client">SphereRequestDecorator</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingByKeyFetch</a></dt>
 <dd>&nbsp;</dd>
@@ -754,7 +760,7 @@
 <div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
     final LocalizedStrings newDescription = randomSlug();
     final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
-    assertThat(updatedChannel.getDescription()).isPresentAs(newDescription);
+    assertThat(updatedChannel.getDescription()).contains(newDescription);
     return updatedChannel;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -785,7 +791,7 @@
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">ChangeIsDefault</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeIsDefault--%s" class=code-example><pre><code class='java'>//only one can be default one, so clean up if there is any
-final Query&lt;ShippingMethod&gt; query = ShippingMethodQuery.of().withPredicate(Predicate.of("isDefault = true"));
+final Query&lt;ShippingMethod&gt; query = ShippingMethodQuery.of().withPredicate(QueryPredicate.of("isDefault = true"));
 final Optional&lt;ShippingMethod&gt; defaultShippingMethodOption = execute(query).head();
 defaultShippingMethodOption.ifPresent(sm -&gt; execute(ShippingMethodUpdateCommand.of(sm, ChangeIsDefault.toFalse())));
 
@@ -835,7 +841,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
     final LocalizedStrings newName = randomSlug();
     final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeName.of(newName)));
-    assertThat(updatedChannel.getName()).isPresentAs(newName);
+    assertThat(updatedChannel.getName()).contains(newName);
     return updatedChannel;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -882,9 +888,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">ChangePaymentState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changePaymentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getPaymentState()).isEqualTo(Optional.empty());
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.PAID)));
-    assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.PAID);
+    final PaymentState newState = PaymentState.PAID;
+    assertThat(order.getPaymentState()).isNotEqualTo(Optional.of(newState));
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(newState)));
+    assertThat(updatedOrder.getPaymentState()).contains(newState);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -897,9 +904,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">ChangeShipmentState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getShipmentState()).isEqualTo(Optional.empty());
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.SHIPPED)));
-    assertThat(updatedOrder.getShipmentState()).isPresentAs(ShipmentState.SHIPPED);
+    final ShipmentState newState = ShipmentState.SHIPPED;
+    assertThat(order.getShipmentState()).isNotEqualTo(Optional.of(newState));
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
+    assertThat(updatedOrder.getShipmentState()).contains(newState);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -925,6 +933,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Channels represent a source or destination of different entities.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html#channel--">channel()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="class in io.sphere.sdk.orders.queries">SyncInfoQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#channel-java.util.Optional-">channel(Optional&lt;Reference&lt;Channel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#channel-io.sphere.sdk.models.Referenceable-">channel(Referenceable&lt;Channel&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
@@ -1243,6 +1253,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#customerId--">customerId()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#customerId--">customerId()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customers/CustomerInvalidCredentials.html" title="class in io.sphere.sdk.customers"><span class="typeNameLink">CustomerInvalidCredentials</span></a> - Class in <a href="io/sphere/sdk/customers/package-summary.html">io.sphere.sdk.customers</a></dt>
 <dd>
 <div class="block">A customer endpoint specific error, the account with the given credentials have not been found.</div>
@@ -1462,8 +1474,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CommandImpl.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands">CustomObjectCustomJsonMappingUpsertCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingByKeyFetch</a></dt>
@@ -1514,7 +1524,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/meta/DocumentationGuidelines.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">DocumentationGuidelines</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
-<div class="block">This page describes for developers the necessary steps to document the API.</div>
+<div class="block">This page describes the steps to follow for developers when documenting the API.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#doubleTypeReference--">doubleTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
@@ -1532,9 +1542,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#email-java.lang.String-">email(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EmbeddedPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">T</a>,<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="type parameter in EmbeddedPredicate">V</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/EmbeddedQueryPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EmbeddedQueryPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/EmbeddedQueryPredicate.html" title="type parameter in EmbeddedQueryPredicate">T</a>,<a href="io/sphere/sdk/queries/EmbeddedQueryPredicate.html" title="type parameter in EmbeddedQueryPredicate">V</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedPredicate.html#EmbeddedPredicate-io.sphere.sdk.queries.QueryModel-io.sphere.sdk.queries.Predicate-">EmbeddedPredicate(QueryModel&lt;T&gt;, Predicate&lt;V&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedQueryPredicate.html#EmbeddedQueryPredicate-io.sphere.sdk.queries.QueryModel-io.sphere.sdk.queries.QueryPredicate-">EmbeddedQueryPredicate(QueryModel&lt;T&gt;, QueryPredicate&lt;V&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedQueryPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedQueryPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpHeaders.html#empty--">empty()</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a></dt>
 <dd>&nbsp;</dd>
@@ -1568,7 +1578,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/EnumType.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">EnumType</span></a> - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EqPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">T</a>,<a href="io/sphere/sdk/queries/EqPredicate.html" title="type parameter in EqPredicate">V</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/EqQueryPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EqQueryPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/EqQueryPredicate.html" title="type parameter in EqQueryPredicate">T</a>,<a href="io/sphere/sdk/queries/EqQueryPredicate.html" title="type parameter in EqQueryPredicate">V</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals(Object)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></dt>
 <dd>&nbsp;</dd>
@@ -1667,6 +1677,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#externalId-java.lang.String-">externalId(String)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#externalId--">externalId()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html#externalId--">externalId()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="class in io.sphere.sdk.orders.queries">SyncInfoQueryModel</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a name="I:F">
@@ -1915,6 +1927,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Describes the type of the attribute.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html#getAuthorName--">getAuthorName()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetAuthorName</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getAuthorName--">getAuthorName()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#getAuthorName--">getAuthorName()</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAuthConfig.html#getAuthUrl--">getAuthUrl()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientConfig.html#getAuthUrl--">getAuthUrl()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></dt>
@@ -2019,11 +2037,13 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">The number of resources matching the filter value.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getCount--">getCount()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getCount--">getCount()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="interface in io.sphere.sdk.search">RangeStats</a></dt>
 <dd>
 <div class="block">Number of results that fall into this range.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/TermStats.html#getCount--">getCount()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getCountries--">getCountries()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getCountry--">getCountry()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
@@ -2062,6 +2082,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Parcel.html#getCreatedAt--">getCreatedAt()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Parcel.html" title="class in io.sphere.sdk.orders">Parcel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItem.html#getCreatedAt--">getCreatedAt()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItem.html" title="class in io.sphere.sdk.orders">ReturnItem</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getCreatedAt--">getCreatedAt()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraft.html#getCurrency--">getCurrency()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -2111,6 +2133,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getCustomerId--">getCustomerId()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getCustomerId--">getCustomerId()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#getCustomerId--">getCustomerId()</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/updateactions/SetCustomerNumber.html#getCustomerNumber--">getCustomerNumber()</a></span> - Method in class io.sphere.sdk.customers.commands.updateactions.<a href="io/sphere/sdk/customers/commands/updateactions/SetCustomerNumber.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetCustomerNumber</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/Customer.html#getCustomerNumber--">getCustomerNumber()</a></span> - Method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a></dt>
@@ -2120,6 +2146,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getCustomLineItem-java.lang.String-">getCustomLineItem(String)</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html#getCustomLineItemId--">getCustomLineItemId()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveCustomLineItem</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html#getCustomLineItemId--">getCustomLineItemId()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportCustomLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#getCustomLineItemId--">getCustomLineItemId()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
@@ -2273,8 +2303,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingRate.html#getFreeAbove--">getFreeAbove()</a></span> - Method in class io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingRate.html" title="class in io.sphere.sdk.shippingmethods">ShippingRate</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#getFromState--">getFromState()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/CustomerGroupDraft.html#getGroupName--">getGroupName()</a></span> - Method in class io.sphere.sdk.customergroups.<a href="io/sphere/sdk/customergroups/CustomerGroupDraft.html" title="class in io.sphere.sdk.customergroups">CustomerGroupDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpHeaders.html#getHeader-java.lang.String-">getHeader(String)</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http">HttpHeaders</a></dt>
@@ -2350,6 +2378,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItem.html#getId--">getId()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItem.html" title="class in io.sphere.sdk.orders">ReturnItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/RemoveVariant.html#getId--">getId()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/RemoveVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveVariant</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductIdentifiable.html#getId--">getId()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductIdentifiable.html" title="interface in io.sphere.sdk.products">ProductIdentifiable</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductVariant.html#getId--">getId()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></dt>
 <dd>&nbsp;</dd>
@@ -2431,6 +2461,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/PlainEnumValue.html#getLabel--">getLabel()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/PlainEnumValue.html" title="class in io.sphere.sdk.models">PlainEnumValue</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getLanguages--">getLanguages()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getLastMessageSequenceNumber--">getLastMessageSequenceNumber()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryWrapper.html#getLastModifiedAt--">getLastModifiedAt()</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryWrapper.html" title="class in io.sphere.sdk.categories">CategoryWrapper</a></dt>
@@ -2462,6 +2494,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#getLineItemId--">getLineItemId()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html#getLineItemId--">getLineItemId()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveLineItem</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html#getLineItemId--">getLineItemId()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportLineItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#getLineItemId--">getLineItemId()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
 <dd>&nbsp;</dd>
@@ -2499,7 +2533,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SphereInternalLogger.html#getLogger-java.lang.String-">getLogger(String)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SphereInternalLogger.html" title="class in io.sphere.sdk.utils">SphereInternalLogger</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getLowerEndpoint--">getLowerEndpoint()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getLowerEndpoint--">getLowerEndpoint()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="interface in io.sphere.sdk.search">RangeStats</a></dt>
 <dd>
 <div class="block">Lower endpoint of the range.</div>
 </dd>
@@ -2511,11 +2545,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductProjection.html#getMasterVariant--">getMasterVariant()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getMax--">getMax()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getMax--">getMax()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="interface in io.sphere.sdk.search">RangeStats</a></dt>
 <dd>
 <div class="block">Maximum value contained within the range.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getMean--">getMean()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getMean--">getMean()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="interface in io.sphere.sdk.search">RangeStats</a></dt>
 <dd>
 <div class="block">Arithmetic mean of the values contained within the range.</div>
 </dd>
@@ -2533,7 +2567,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributes.html#getMetaDescription--">getMetaDescription()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html#getMetaDescription--">getMetaDescription()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaAttributes</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaDescription.html#getMetaDescription--">getMetaDescription()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaDescription</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductData.html#getMetaDescription--">getMetaDescription()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products">ProductData</a></dt>
 <dd>&nbsp;</dd>
@@ -2543,7 +2577,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributes.html#getMetaKeywords--">getMetaKeywords()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html#getMetaKeywords--">getMetaKeywords()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaAttributes</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaKeywords.html#getMetaKeywords--">getMetaKeywords()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaKeywords</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductData.html#getMetaKeywords--">getMetaKeywords()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products">ProductData</a></dt>
 <dd>&nbsp;</dd>
@@ -2553,7 +2587,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributes.html#getMetaTitle--">getMetaTitle()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html#getMetaTitle--">getMetaTitle()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaAttributes</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaTitle.html#getMetaTitle--">getMetaTitle()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaTitle.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaTitle</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductData.html#getMetaTitle--">getMetaTitle()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductData.html" title="interface in io.sphere.sdk.products">ProductData</a></dt>
 <dd>&nbsp;</dd>
@@ -2569,7 +2603,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerName.html#getMiddleName--">getMiddleName()</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getMin--">getMin()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getMin--">getMin()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="interface in io.sphere.sdk.search">RangeStats</a></dt>
 <dd>
 <div class="block">Minimum value contained within the range.</div>
 </dd>
@@ -2648,6 +2682,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductType.html#getName--">getName()</a></span> - Method in interface io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductTypeDraft.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductTypeDraft.html" title="class in io.sphere.sdk.producttypes">ProductTypeDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html#getName--">getName()</a></span> - Method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeName</a></dt>
 <dd>&nbsp;</dd>
@@ -2813,6 +2849,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/VariantIdentifier.html#getProductId--">getProductId()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getProductId--">getProductId()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#getProductId--">getProductId()</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductDraft.html#getProductType--">getProductType()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products">ProductDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereApiConfig.html#getProjectKey--">getProjectKey()</a></span> - Method in interface io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></dt>
@@ -2849,8 +2889,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">RemoveQuantity</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/CustomLineItemImportDraft.html#getQuantity--">getQuantity()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/CustomLineItemImportDraft.html" title="interface in io.sphere.sdk.orders">CustomLineItemImportDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
@@ -2865,7 +2903,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html#getQuantityOnStock--">getQuantityOnStock()</a></span> - Method in class io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelPredicate.html#getQueryModel--">getQueryModel()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html#getQueryModel--">getQueryModel()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html" title="class in io.sphere.sdk.queries">QueryModelQueryPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/PagedSearchResult.html#getRangeFacetResult-io.sphere.sdk.search.RangeFacetExpression-">getRangeFacetResult(RangeFacetExpression&lt;T, V&gt;)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a></dt>
 <dd>&nbsp;</dd>
@@ -2922,6 +2960,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <div class="block">Root categories (the ones that have no parent).</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getSalutation--">getSalutation()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetScore.html#getScore--">getScore()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetScore.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetScore</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getScore--">getScore()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#getScore--">getScore()</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html#getSearchKeywords--">getSearchKeywords()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSearchKeywords</a></dt>
 <dd>&nbsp;</dd>
@@ -3033,7 +3077,13 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItem.html#getState--">getState()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemLike.html#getState--">getState()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getState--">getState()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html#getState--">getState()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportCustomLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html#getState--">getState()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportLineItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/CustomLineItemImportDraft.html#getState--">getState()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/CustomLineItemImportDraft.html" title="interface in io.sphere.sdk.orders">CustomLineItemImportDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -3059,7 +3109,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchKeyword.html#getSuggestTokenizer--">getSuggestTokenizer()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchKeyword.html" title="class in io.sphere.sdk.search">SearchKeyword</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getSum--">getSum()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getSum--">getSum()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="interface in io.sphere.sdk.search">RangeStats</a></dt>
 <dd>
 <div class="block">Sum of the values contained within the range.</div>
 </dd>
@@ -3133,6 +3183,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#getterSetter-java.lang.String-">getterSetter(String)</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html#getText--">getText()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetText</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getText--">getText()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#getText--">getText()</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchKeyword.html#getText--">getText()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchKeyword.html" title="class in io.sphere.sdk.search">SearchKeyword</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchText.html#getText--">getText()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a></dt>
@@ -3169,11 +3225,15 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getTitle--">getTitle()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html#getTitle--">getTitle()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetTitle</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getTitle--">getTitle()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#getTitle--">getTitle()</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html#getTokenValue--">getTokenValue()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#getTokenValue--">getTokenValue()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#getToState--">getToState()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedResult.html#getTotal--">getTotal()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a></dt>
 <dd>
@@ -3209,6 +3269,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#getTransitions--">getTransitions()</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getTrialUntil--">getTrialUntil()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html#getTtlMinutes--">getTtlMinutes()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/ChangeType.html#getType--">getType()</a></span> - Method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/ChangeType.html" title="class in io.sphere.sdk.states.commands.updateactions">ChangeType</a></dt>
@@ -3225,7 +3287,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#getUpdateActions--">getUpdateActions()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getUpperEndpoint--">getUpperEndpoint()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getUpperEndpoint--">getUpperEndpoint()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="interface in io.sphere.sdk.search">RangeStats</a></dt>
 <dd>
 <div class="block">Upper endpoint of the range.</div>
 </dd>
@@ -3541,6 +3603,14 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">A builder to create an immutable map.</div>
 </dd>
+<dt><a href="io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">ImportCustomLineItemState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
+<dd>
+<div class="block">These import of states does not follow any predefined rules and should be only used if no transitions are defined.</div>
+</dd>
+<dt><a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">ImportLineItemState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
+<dd>
+<div class="block">These import of states does not follow any predefined rules and should be only used if no transitions are defined.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/Bound.html#inclusive-T-">inclusive(T)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/Bound.html" title="class in io.sphere.sdk.search">Bound</a></dt>
 <dd>
 <div class="block">Creates a bound with the given endpoint, included from the range.</div>
@@ -3622,9 +3692,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     assertThat(inventoryEntry.getSku()).isEqualTo(sku);
     assertThat(inventoryEntry.getQuantityOnStock()).isEqualTo(quantityOnStock);
     assertThat(inventoryEntry.getAvailableQuantity()).isEqualTo(quantityOnStock);
-    assertThat(inventoryEntry.getExpectedDelivery()).isPresentAs(expectedDelivery);
-    assertThat(inventoryEntry.getRestockableInDays()).isPresentAs(restockableInDays);
-    assertThat(inventoryEntry.getSupplyChannel()).isPresentAs(channel.toReference());
+    assertThat(inventoryEntry.getExpectedDelivery()).contains(expectedDelivery);
+    assertThat(inventoryEntry.getRestockableInDays()).contains(restockableInDays);
+    assertThat(inventoryEntry.getSupplyChannel()).contains(channel.toReference());
 
     //delete
     final DeleteCommand&lt;InventoryEntry&gt; deleteCommand = InventoryDeleteCommand.of(inventoryEntry);
@@ -3864,6 +3934,14 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Provides types to prepare and receive queries.</div>
 </dd>
+<dt><a href="io/sphere/sdk/reviews/package-summary.html">io.sphere.sdk.reviews</a> - package io.sphere.sdk.reviews</dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/package-summary.html">io.sphere.sdk.reviews.commands</a> - package io.sphere.sdk.reviews.commands</dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a> - package io.sphere.sdk.reviews.commands.updateactions</dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a> - package io.sphere.sdk.reviews.queries</dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a> - package io.sphere.sdk.search</dt>
 <dd>
 <div class="block">Provides types to perform searches.</div>
@@ -3953,6 +4031,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/OptionalReferenceQueryModel.html#is-io.sphere.sdk.models.Referenceable-">is(Referenceable&lt;R&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/OptionalReferenceQueryModel.html" title="class in io.sphere.sdk.queries">OptionalReferenceQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ReferenceQueryModel.html#is-io.sphere.sdk.models.Referenceable-">is(Referenceable&lt;R&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/SphereEnumerationQueryModel.html#is-E-">is(E)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="class in io.sphere.sdk.queries">SphereEnumerationQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQueryModel.html#is-java.lang.String-">is(String)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -4382,6 +4462,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">metaAttributesOf(Locale, String, String, String)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/commands/updateactions/MetaAttributesUpdateActions.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">MetaAttributesUpdateActions</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
+<dd>
+<div class="block">Create update actions to set the SEO attributes title, description and keywords altogether:</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/MetaAttributesUpdateActions.html#MetaAttributesUpdateActions--">MetaAttributesUpdateActions()</a></span> - Constructor for class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/MetaAttributesUpdateActions.html" title="class in io.sphere.sdk.products.commands.updateactions">MetaAttributesUpdateActions</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#metaDescription--">metaDescription()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html#metaDescription--">metaDescription()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductDataQueryModel</a></dt>
@@ -4437,6 +4523,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <div class="block">Gets the EXPERIMENTAL model to easily build product projection search requests.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="class in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="class in io.sphere.sdk.shippingmethods.queries">ShippingMethodQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -4662,7 +4750,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItemDraft.html#of-io.sphere.sdk.models.LocalizedStrings-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-long-">of(LocalizedStrings, String, MonetaryAmount, Referenceable&lt;TaxCategory&gt;, long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/ItemState.html#of-io.sphere.sdk.models.Reference-long-">of(Reference&lt;State&gt;, long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/ItemState.html#of-io.sphere.sdk.models.Referenceable-long-">of(Referenceable&lt;State&gt;, long)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemBuilder.html#of-java.lang.String-java.lang.String-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductVariant-io.sphere.sdk.products.Price-long-io.sphere.sdk.taxcategories.TaxRate-">of(String, String, LocalizedStrings, ProductVariant, Price, long, TaxRate)</a></span> - Static method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a></dt>
 <dd>
@@ -5058,6 +5146,14 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html#of-io.sphere.sdk.orders.ShipmentState-">of(ShipmentState)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeShipmentState</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-java.util.Set-">of(CustomLineItem, Set&lt;ItemState&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportCustomLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html#of-java.lang.String-java.util.Set-">of(String, Set&lt;ItemState&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportCustomLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html#of-io.sphere.sdk.carts.LineItem-java.util.Set-">of(LineItem, Set&lt;ItemState&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html#of-java.lang.String-java.util.Set-">of(String, Set&lt;ItemState&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportLineItemState</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#of-java.util.Optional-java.util.Optional-">of(Optional&lt;ParcelMeasurements&gt;, Optional&lt;TrackingData&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#of-io.sphere.sdk.orders.ParcelMeasurements-io.sphere.sdk.orders.TrackingData-">of(ParcelMeasurements, TrackingData)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
@@ -5076,9 +5172,19 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html#of-io.sphere.sdk.orders.ReturnItem-io.sphere.sdk.orders.ReturnShipmentState-">of(ReturnItem, ReturnShipmentState)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-java.lang.String-long-io.sphere.sdk.models.Reference-io.sphere.sdk.models.Reference-java.util.Optional-">of(String, long, Reference&lt;State&gt;, Reference&lt;State&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-java.lang.String-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.util.Optional-">of(String, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-io.sphere.sdk.carts.LineItem-long-io.sphere.sdk.models.Reference-io.sphere.sdk.models.Reference-java.util.Optional-">of(LineItem, long, Reference&lt;State&gt;, Reference&lt;State&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.Instant-">of(CustomLineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Instant)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-">of(CustomLineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-java.lang.String-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.util.Optional-">of(String, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-io.sphere.sdk.carts.LineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.Instant-">of(LineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Instant)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-io.sphere.sdk.carts.LineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-">of(LineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html#of-io.sphere.sdk.models.Reference-java.util.Optional-java.util.Optional-">of(Reference&lt;Channel&gt;, Optional&lt;String&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Channel&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></dt>
 <dd>&nbsp;</dd>
@@ -5166,6 +5272,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html#of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductUpdateScope-">of(LocalizedStrings, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeSlug</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/MetaAttributesUpdateActions.html#of-io.sphere.sdk.models.MetaAttributes-io.sphere.sdk.products.ProductUpdateScope-">of(MetaAttributes, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/MetaAttributesUpdateActions.html" title="class in io.sphere.sdk.products.commands.updateactions">MetaAttributesUpdateActions</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/Publish.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/Publish.html" title="class in io.sphere.sdk.products.commands.updateactions">Publish</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html#of-io.sphere.sdk.models.Referenceable-io.sphere.sdk.products.ProductUpdateScope-">of(Referenceable&lt;Category&gt;, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveFromCategory</a></dt>
@@ -5208,7 +5316,17 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html#of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductUpdateScope-">of(LocalizedStrings, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetDescription</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html#of-io.sphere.sdk.models.MetaAttributes-io.sphere.sdk.products.ProductUpdateScope-">of(MetaAttributes, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaAttributes</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaDescription.html#of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductUpdateScope-">of(LocalizedStrings, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaDescription</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaDescription.html#of-java.util.Optional-io.sphere.sdk.products.ProductUpdateScope-">of(Optional&lt;LocalizedStrings&gt;, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaDescription</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaKeywords.html#of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductUpdateScope-">of(LocalizedStrings, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaKeywords</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaKeywords.html#of-java.util.Optional-io.sphere.sdk.products.ProductUpdateScope-">of(Optional&lt;LocalizedStrings&gt;, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaKeywords</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaTitle.html#of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductUpdateScope-">of(LocalizedStrings, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaTitle.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaTitle</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaTitle.html#of-java.util.Optional-io.sphere.sdk.products.ProductUpdateScope-">of(Optional&lt;LocalizedStrings&gt;, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaTitle.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaTitle</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html#of-io.sphere.sdk.search.SearchKeywords-io.sphere.sdk.products.ProductUpdateScope-">of(SearchKeywords, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSearchKeywords</a></dt>
 <dd>&nbsp;</dd>
@@ -5272,9 +5390,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/queries/ProjectGet.html#of--">of()</a></span> - Static method in class io.sphere.sdk.projects.queries.<a href="io/sphere/sdk/projects/queries/ProjectGet.html" title="class in io.sphere.sdk.projects.queries">ProjectGet</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqPredicate.html#of-io.sphere.sdk.queries.QueryModel-java.lang.String-">of(QueryModel&lt;T&gt;, String)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqQueryPredicate.html#of-io.sphere.sdk.queries.QueryModel-java.lang.String-">of(QueryModel&lt;T&gt;, String)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqQueryPredicate.html" title="class in io.sphere.sdk.queries">EqQueryPredicate</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqPredicate.html#of-io.sphere.sdk.queries.QueryModel-V-">of(QueryModel&lt;T&gt;, V)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqQueryPredicate.html#of-io.sphere.sdk.queries.QueryModel-V-">of(QueryModel&lt;T&gt;, V)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqQueryPredicate.html" title="class in io.sphere.sdk.queries">EqQueryPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionPath.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a></dt>
 <dd>&nbsp;</dd>
@@ -5286,11 +5404,45 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#of-T-">of(T)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/Predicate.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryParameter.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryPredicate.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QuerySort.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/ReviewCreateCommand.html#of-io.sphere.sdk.reviews.ReviewDraft-">of(ReviewDraft)</a></span> - Static method in class io.sphere.sdk.reviews.commands.<a href="io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="class in io.sphere.sdk.reviews.commands">ReviewCreateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">of(Versioned&lt;Review&gt;, UpdateAction&lt;Review&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.<a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="class in io.sphere.sdk.reviews.commands">ReviewUpdateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html#of-io.sphere.sdk.models.Versioned-java.util.List-">of(Versioned&lt;Review&gt;, List&lt;? extends UpdateAction&lt;Review&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.<a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="class in io.sphere.sdk.reviews.commands">ReviewUpdateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetAuthorName</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html#of-java.util.Optional-">of(Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetAuthorName</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetScore.html#of-double-">of(double)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetScore.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetScore</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetScore.html#of-java.util.Optional-">of(Optional&lt;Double&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetScore.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetScore</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetText</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html#of-java.util.Optional-">of(Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetText</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetTitle</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html#of-java.util.Optional-">of(Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetTitle</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="class in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#of-io.sphere.sdk.products.ProductIdentifiable-io.sphere.sdk.models.Identifiable-">of(ProductIdentifiable, Identifiable&lt;Customer&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#of-io.sphere.sdk.products.ProductIdentifiable-io.sphere.sdk.models.Identifiable-">of(ProductIdentifiable, Identifiable&lt;Customer&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#of-io.sphere.sdk.reviews.ReviewDraft-">of(ReviewDraft)</a></span> - Static method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FacetExpression.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a></dt>
 <dd>&nbsp;</dd>
@@ -5307,8 +5459,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <div class="block">Creates an interval with the given lower and upper endpoints.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeFacetResult.html#of-java.util.List-">of(List&lt;RangeStats&lt;T&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search">RangeFacetResult</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#of-java.util.Optional-java.util.Optional-long-T-T-T-double-">of(Optional&lt;T&gt;, Optional&lt;T&gt;, long, T, T, T, double)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchKeyword.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchKeyword.html" title="class in io.sphere.sdk.search">SearchKeyword</a></dt>
 <dd>&nbsp;</dd>
@@ -5406,7 +5556,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html#of-java.util.Set-">of(Set&lt;Reference&lt;State&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html#of--">of()</a></span> - Static method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html#of-java.util.Optional-">of(Optional&lt;Set&lt;Reference&lt;State&gt;&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateByKeyFetch.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByKeyFetch.html" title="class in io.sphere.sdk.states.queries">StateByKeyFetch</a></dt>
 <dd>&nbsp;</dd>
@@ -5451,6 +5605,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#of-int-javax.money.CurrencyUnit-">of(int, CurrencyUnit)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#of-java.math.BigDecimal-java.lang.String-">of(BigDecimal, String)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#of-java.lang.String-javax.money.CurrencyUnit-">of(String, CurrencyUnit)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html#of-io.sphere.sdk.zones.Location-">of(Location)</a></span> - Static method in class io.sphere.sdk.zones.commands.updateactions.<a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions">AddLocation</a></dt>
 <dd>&nbsp;</dd>
@@ -5751,7 +5907,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/OptionalReferenceQueryModel.html#OptionalReferenceQueryModel-java.util.Optional-java.lang.String-">OptionalReferenceQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, String)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/OptionalReferenceQueryModel.html" title="class in io.sphere.sdk.queries">OptionalReferenceQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/Predicate.html#or-io.sphere.sdk.queries.Predicate-">or(Predicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryPredicate.html#or-io.sphere.sdk.queries.QueryPredicate-">or(QueryPredicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders"><span class="typeNameLink">Order</span></a> - Interface in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
@@ -5803,9 +5959,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/OrderState.html" title="enum in io.sphere.sdk.orders"><span class="typeNameLink">OrderState</span></a> - Enum in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#orderState--">orderState()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="class in io.sphere.sdk.orders.commands"><span class="typeNameLink">OrderUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/orders/commands/package-summary.html">io.sphere.sdk.orders.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddDelivery.html">AddDelivery</a></li><li><a href="updateactions/AddParcelToDelivery.html">AddParcelToDelivery</a></li><li><a href="updateactions/AddReturnInfo.html">AddReturnInfo</a></li><li><a href="updateactions/ChangeOrderState.html">ChangeOrderState</a></li><li><a href="updateactions/ChangePaymentState.html">ChangePaymentState</a></li><li><a href="updateactions/ChangeShipmentState.html">ChangeShipmentState</a></li><li><a href="updateactions/ParcelDraft.html">ParcelDraft</a></li><li><a href="updateactions/SetOrderNumber.html">SetOrderNumber</a></li><li><a href="updateactions/SetReturnPaymentState.html">SetReturnPaymentState</a></li><li><a href="updateactions/SetReturnShipmentState.html">SetReturnShipmentState</a></li><li><a href="updateactions/TransitionLineItemState.html">TransitionLineItemState</a></li><li><a href="updateactions/UpdateSyncInfo.html">UpdateSyncInfo</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddDelivery.html">AddDelivery</a></li><li><a href="updateactions/AddParcelToDelivery.html">AddParcelToDelivery</a></li><li><a href="updateactions/AddReturnInfo.html">AddReturnInfo</a></li><li><a href="updateactions/ChangeOrderState.html">ChangeOrderState</a></li><li><a href="updateactions/ChangePaymentState.html">ChangePaymentState</a></li><li><a href="updateactions/ChangeShipmentState.html">ChangeShipmentState</a></li><li><a href="updateactions/ImportCustomLineItemState.html">ImportCustomLineItemState</a></li><li><a href="updateactions/ImportLineItemState.html">ImportLineItemState</a></li><li><a href="updateactions/ParcelDraft.html">ParcelDraft</a></li><li><a href="updateactions/SetOrderNumber.html">SetOrderNumber</a></li><li><a href="updateactions/SetReturnPaymentState.html">SetReturnPaymentState</a></li><li><a href="updateactions/SetReturnShipmentState.html">SetReturnShipmentState</a></li><li><a href="updateactions/TransitionCustomLineItemState.html">TransitionCustomLineItemState</a></li><li><a href="updateactions/TransitionLineItemState.html">TransitionLineItemState</a></li><li><a href="updateactions/UpdateSyncInfo.html">UpdateSyncInfo</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/CompletableFutureUtils.html#orElseGet-java.util.concurrent.CompletionStage-java.util.function.Supplier-">orElseGet(CompletionStage&lt;T&gt;, Supplier&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/CompletableFutureUtils.html" title="class in io.sphere.sdk.utils">CompletableFutureUtils</a></dt>
 <dd>&nbsp;</dd>
@@ -5889,6 +6047,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders"><span class="typeNameLink">PaymentState</span></a> - Enum in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#paymentState--">paymentState()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#phone-java.util.Optional-">phone(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#phone-java.lang.String-">phone(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
@@ -5950,8 +6110,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#postalCode-java.lang.String-">postalCode(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EntityQuery.html#predicate--">predicate()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Predicate</span></a>&lt;<a href="io/sphere/sdk/queries/Predicate.html" title="type parameter in Predicate">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpRequestIntent.html#prefixPath-java.lang.String-">prefixPath(String)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></dt>
 <dd>&nbsp;</dd>
@@ -6046,6 +6204,12 @@ final CompletionStage&lt;Product&gt; deletedProduct = client.execute(command);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/queries/ProductExpansionModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductExpansionModel</span></a>&lt;<a href="io/sphere/sdk/products/queries/ProductExpansionModel.html" title="type parameter in ProductExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#productId--">productId()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/ProductIdentifiable.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">ProductIdentifiable</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
+<dd>
+<div class="block">Special role to pass the id of a <a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> or <a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> since <a href="io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models"><code>Identifiable</code></a> can only be implemented for one of them.</div>
+</dd>
 <dt><a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">ProductProjection</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>
 <div class="block">A projected representation of a product shows the product with its current or staged data.</div>
@@ -6191,7 +6355,7 @@ import java.util.concurrent.CompletionStage;
 
   With <a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
-  <div id="example-QueryProductTypeExamples-queryByAttributeName--%s" class=code-example><pre><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
+  <div id="example-QueryProductTypeExamples-queryByAttributeName--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
 CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductTypeQuery.of().withPredicate(hasSizeAttribute));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryProductTypeExamples.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -6199,7 +6363,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/products/commands/package-summary.html">io.sphere.sdk.products.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddExternalImage.html">AddExternalImage</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/AddVariant.html">AddVariant</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/RemoveFromCategory.html">RemoveFromCategory</a></li><li><a href="updateactions/RemoveImage.html">RemoveImage</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/RemoveVariant.html">RemoveVariant</a></li><li><a href="updateactions/RevertStagedChanges.html">RevertStagedChanges</a></li><li><a href="updateactions/SetAttribute.html">SetAttribute</a></li><li><a href="updateactions/SetAttributeInAllVariants.html">SetAttributeInAllVariants</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/SetMetaAttributes.html">SetMetaAttributes</a></li><li><a href="updateactions/SetSearchKeywords.html">SetSearchKeywords</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddExternalImage.html">AddExternalImage</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/AddVariant.html">AddVariant</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/MetaAttributesUpdateActions.html">MetaAttributesUpdateActions</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/RemoveFromCategory.html">RemoveFromCategory</a></li><li><a href="updateactions/RemoveImage.html">RemoveImage</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/RemoveVariant.html">RemoveVariant</a></li><li><a href="updateactions/RevertStagedChanges.html">RevertStagedChanges</a></li><li><a href="updateactions/SetAttribute.html">SetAttribute</a></li><li><a href="updateactions/SetAttributeInAllVariants.html">SetAttributeInAllVariants</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/SetProductMetaDescription.html">SetProductMetaDescription</a></li><li><a href="updateactions/SetProductMetaKeywords.html">SetProductMetaKeywords</a></li><li><a href="updateactions/SetProductMetaTitle.html">SetProductMetaTitle</a></li><li><a href="updateactions/SetSearchKeywords.html">SetSearchKeywords</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li></ul></div>
 </dd>
 <dt><a href="io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products"><span class="typeNameLink">ProductUpdateScope</span></a> - Enum in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>&nbsp;</dd>
@@ -6271,11 +6435,13 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelImpl.html#QueryModelImpl-java.util.Optional-java.util.Optional-">QueryModelImpl(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryModelPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/QueryModelPredicate.html" title="type parameter in QueryModelPredicate">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dt><a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryModelQueryPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html" title="type parameter in QueryModelQueryPredicate">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelPredicate.html#QueryModelPredicate-io.sphere.sdk.queries.QueryModel-">QueryModelPredicate(QueryModel&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html#QueryModelQueryPredicate-io.sphere.sdk.queries.QueryModel-">QueryModelQueryPredicate(QueryModel&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html" title="class in io.sphere.sdk.queries">QueryModelQueryPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryParameter</span></a> - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/QueryPredicate.html" title="type parameter in QueryPredicate">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QuerySort</span></a>&lt;<a href="io/sphere/sdk/queries/QuerySort.html" title="type parameter in QuerySort">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -6317,7 +6483,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">RangeFacetResult</span></a>&lt;<a href="io/sphere/sdk/search/RangeFacetResult.html" title="type parameter in RangeFacetResult">T</a>&gt; - Class in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">RangeStats</span></a>&lt;<a href="io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a>&gt; - Class in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
+<dt><a href="io/sphere/sdk/search/RangeStats.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">RangeStats</span></a>&lt;<a href="io/sphere/sdk/search/RangeStats.html" title="type parameter in RangeStats">T</a>&gt; - Interface in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">RangeTermModel</span></a>&lt;<a href="io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">T</a>,<a href="io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">V</a> extends java.lang.Comparable&lt;? super <a href="io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">V</a>&gt;&gt; - Interface in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
@@ -6482,7 +6648,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
         final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
         final ShippingMethod shippingMethodWithShippingRate =
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).containsExactly(shippingRate);
+        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
@@ -6522,7 +6688,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
         final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
         final ShippingMethod shippingMethodWithShippingRate =
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).containsExactly(shippingRate);
+        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
@@ -6539,11 +6705,11 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 }, CountryCode.EA);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedPredicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EmbeddedQueryPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EmbeddedQueryPredicate.html" title="class in io.sphere.sdk.queries">EmbeddedQueryPredicate</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqQueryPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqQueryPredicate.html" title="class in io.sphere.sdk.queries">EqQueryPredicate</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html" title="class in io.sphere.sdk.queries">QueryModelQueryPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html#required-boolean-">required(boolean)</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">AttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -6579,6 +6745,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="class in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="class in io.sphere.sdk.shippingmethods.queries">ShippingMethodQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="class in io.sphere.sdk.states.queries">StateQuery</a></dt>
@@ -6603,6 +6771,32 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">Revert all changes, which were made to the staged version of a product and reset to the current version.</div>
 </dd>
+<dt><a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews"><span class="typeNameLink">Review</span></a> - Interface in <a href="io/sphere/sdk/reviews/package-summary.html">io.sphere.sdk.reviews</a></dt>
+<dd>
+<div class="block">Review of a product by a customer.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="class in io.sphere.sdk.reviews.commands"><span class="typeNameLink">ReviewCreateCommand</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/package-summary.html">io.sphere.sdk.reviews.commands</a></dt>
+<dd>
+<div class="block">Creates a review.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/ReviewCreateCommand.html#ReviewCreateCommand-io.sphere.sdk.reviews.ReviewDraft-">ReviewCreateCommand(ReviewDraft)</a></span> - Constructor for class io.sphere.sdk.reviews.commands.<a href="io/sphere/sdk/reviews/commands/ReviewCreateCommand.html" title="class in io.sphere.sdk.reviews.commands">ReviewCreateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews"><span class="typeNameLink">ReviewDraft</span></a> - Class in <a href="io/sphere/sdk/reviews/package-summary.html">io.sphere.sdk.reviews</a></dt>
+<dd>
+<div class="block">Template to create a new Review.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews"><span class="typeNameLink">ReviewDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/reviews/package-summary.html">io.sphere.sdk.reviews</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="class in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewQuery</span></a> - Class in <a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a></dt>
+<dd>
+<div class="block">Provides a QueryDsl for  reviews to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewQueryModel</span></a> - Class in <a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="class in io.sphere.sdk.reviews.commands"><span class="typeNameLink">ReviewUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/package-summary.html">io.sphere.sdk.reviews.commands</a></dt>
+<dd>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/SetAuthorName.html">SetAuthorName</a></li><li><a href="updateactions/SetScore.html">SetScore</a></li><li><a href="updateactions/SetText.html">SetText</a></li><li><a href="updateactions/SetTitle.html">SetTitle</a></li></ul></div>
+</dd>
 <dt><a href="io/sphere/sdk/attributes/RichReferenceType.html" title="class in io.sphere.sdk.attributes"><span class="typeNameLink">RichReferenceType</span></a>&lt;<a href="io/sphere/sdk/attributes/RichReferenceType.html" title="type parameter in RichReferenceType">T</a>&gt; - Class in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelDraftBuilder.html#roles-java.util.Set-">roles(Set&lt;ChannelRoles&gt;)</a></span> - Method in class io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelDraftBuilder.html" title="class in io.sphere.sdk.channels">ChannelDraftBuilder</a></dt>
@@ -6624,6 +6818,10 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SameExclusiveBoundsException.html#SameExclusiveBoundsException-io.sphere.sdk.search.Range-">SameExclusiveBoundsException(Range&lt;T&gt;)</a></span> - Constructor for exception io.sphere.sdk.search.<a href="io/sphere/sdk/search/SameExclusiveBoundsException.html" title="class in io.sphere.sdk.search">SameExclusiveBoundsException</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#scaleByPowerOfTen-int-">scaleByPowerOfTen(int)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#score-java.util.Optional-">score(Optional&lt;Double&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#score-java.lang.Double-">score(Double)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/SdkDefaults.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">SdkDefaults</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
@@ -6691,15 +6889,19 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">Adds / Removes / Changes a custom attribute in all variants at the same time (it can be helpful to set attribute values that are constrained with SameForAll).</div>
 </dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetAuthorName</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Updates the author name of a review.</div>
+</dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetBillingAddress</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setBillingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-OptionalAssert.assertThat(cart.getBillingAddress()).isAbsent();
+assertThat(cart.getBillingAddress()).isEmpty();
 final Address address = AddressBuilder.of(DE).build();
 final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddress.of(address)));
-OptionalAssert.assertThat(cartWithAddress.getBillingAddress()).isPresentAs(address);
+assertThat(cartWithAddress.getBillingAddress()).contains(address);
 final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(Optional.empty())));
-OptionalAssert.assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
+assertThat(cartWithoutAddress.getBillingAddress()).isEmpty();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetCompanyName.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetCompanyName</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
@@ -6707,13 +6909,13 @@ OptionalAssert.assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
 <div class="block">Sets a new company name for the customer
 
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCompanyName--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    assertThat(customer.getCompanyName()).isAbsent();
+    assertThat(customer.getCompanyName()).isEmpty();
 
     final String companyName = "Big coorp";
     final Customer updatedCustomer =
             execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
 
-    assertThat(updatedCustomer.getCompanyName()).isPresentAs(companyName);
+    assertThat(updatedCustomer.getCompanyName()).contains(companyName);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -6726,19 +6928,19 @@ OptionalAssert.assertThat(cartWithoutAddress.getBillingAddress()).isAbsent();
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetCustomerEmail</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomerEmail--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-OptionalAssert.assertThat(cart.getCustomerEmail()).isAbsent();
+assertThat(cart.getCustomerEmail()).isEmpty();
 final String email = "info@commercetools.de";
 final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
-OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
+assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetCustomerGroup.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetCustomerGroup</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCustomerGroup--%s" class=code-example><pre><code class='java'>withB2cCustomerGroup(client(), customerGroup -&gt; {
     withCustomer(client(), customer -&gt; {
-        assertThat(customer.getCustomerGroup()).isAbsent();
+        assertThat(customer.getCustomerGroup()).isEmpty();
         final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
-        assertThat(updateCustomer.getCustomerGroup()).isPresentAs(customerGroup.toReference());
+        assertThat(updateCustomer.getCustomerGroup()).contains(customerGroup.toReference());
     });
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -6796,7 +6998,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     final UpdateAction&lt;InventoryEntry&gt; action = SetExpectedDelivery.of(expectedDelivery);
     final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
     assertThat(updatedEntry.getExpectedDelivery())
-            .isPresentAs(expectedDelivery)
+            .contains(expectedDelivery)
             .isNotEqualTo(entry.getExpectedDelivery());
     return updatedEntry;
 });
@@ -6810,10 +7012,6 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#setLastModifiedAt-java.time.Instant-">setLastModifiedAt(Instant)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetMetaAttributes</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
-<dd>
-<div class="block">Sets the SEO attributes title, description and key words.</div>
-</dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/SetName.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">SetName</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setName--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
@@ -6821,22 +7019,36 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 
     final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
     final State updatedState = execute(command);
-    assertThat(updatedState.getName()).isPresentAs(newName);
+    assertThat(updatedState.getName()).contains(newName);
     return updatedState;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SetUtils.html#setOf-T-java.util.Set-">setOf(T, Set&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SetUtils.html" title="class in io.sphere.sdk.utils">SetUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SetUtils.html#setOf-T-T:A-">setOf(T, T[])</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SetUtils.html" title="class in io.sphere.sdk.utils">SetUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">SetOrderNumber</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setOrderNumber--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getOrderNumber()).isAbsent();
+    assertThat(order.getOrderNumber()).isEmpty();
     final String orderNumber = randomString();
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
-    assertThat(updatedOrder.getOrderNumber()).isPresentAs(orderNumber);
+    assertThat(updatedOrder.getOrderNumber()).contains(orderNumber);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
+<dt><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaDescription.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetProductMetaDescription</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets the SEO attribute description.</div>
+</dd>
+<dt><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetProductMetaKeywords</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets the SEO attribute keywords.</div>
+</dd>
+<dt><a href="io/sphere/sdk/products/commands/updateactions/SetProductMetaTitle.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetProductMetaTitle</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
+<dd>
+<div class="block">Sets the SEO attribute title.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereException.html#setProjectKey-java.util.Optional-">setProjectKey(Optional&lt;String&gt;)</a></span> - Method in exception io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></dt>
 <dd>&nbsp;</dd>
@@ -6848,7 +7060,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
     final int restockableInDays = entry.getRestockableInDays().map(i -&gt; i + 4).orElse(4);
     final UpdateAction&lt;InventoryEntry&gt; action = SetRestockableInDays.of(restockableInDays);
     final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getRestockableInDays()).isPresentAs(restockableInDays);
+    assertThat(updatedEntry.getRestockableInDays()).contains(restockableInDays);
     return updatedEntry;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -6889,6 +7101,10 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetScore.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetScore</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Updates the score of a review.</div>
+</dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetSearchKeywords</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setSearchKeywords--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
@@ -6922,16 +7138,25 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeAccess.html#setter-java.lang.String-">setter(String)</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetText</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Updates the text of a review.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetTitle</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
+<dd>
+<div class="block">Updates the title of a review.</div>
+</dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">SetTransitions</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setTransitions--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), stateA -&gt; {
     withUpdateableState(client(), stateB -&gt; {
-        final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(asSet(stateA.toReference())));
+        final Set&lt;Reference&lt;State&gt;&gt; transitions = asSet(stateA.toReference());
+        final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(transitions));
         final State updatedStateB = execute(command);
-        assertThat(updatedStateB.getTransitions()).isPresentAs(asSet(stateA.toReference()));
+        assertThat(updatedStateB.getTransitions()).contains(transitions);
 
         final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));
-        assertThat(updatedStateBWithoutTransitions.getTransitions()).isAbsent();
+        assertThat(updatedStateBWithoutTransitions.getTransitions()).isEmpty();
 
         return updatedStateBWithoutTransitions;
     });
@@ -6950,13 +7175,13 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <div class="block">Sets a new vat ID for the customer
 
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setVatId--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    assertThat(customer.getVatId()).isAbsent();
+    assertThat(customer.getVatId()).isEmpty();
 
     final String vatId = randomString();
     final Customer updatedCustomer =
             execute(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
 
-    assertThat(updatedCustomer.getVatId()).isPresentAs(vatId);
+    assertThat(updatedCustomer.getVatId()).contains(vatId);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -6965,6 +7190,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#shipmentState-java.util.Optional-">shipmentState(Optional&lt;ShipmentState&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#shipmentState-io.sphere.sdk.orders.ShipmentState-">shipmentState(ShipmentState)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#shipmentState--">shipmentState()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders"><span class="typeNameLink">ShipmentState</span></a> - Enum in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
@@ -7121,6 +7348,10 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereDeprecationException.html#SphereDeprecationException-java.util.List-">SphereDeprecationException(List&lt;String&gt;)</a></span> - Constructor for exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereDeprecationException.html" title="class in io.sphere.sdk.client">SphereDeprecationException</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">SphereEnumeration</span></a> - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">SphereEnumerationQueryModel</span></a>&lt;<a href="io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">T</a>,<a href="io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="type parameter in SphereEnumerationQueryModel">E</a> extends <a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/SphereEnumerationQueryModel.html#SphereEnumerationQueryModel-java.util.Optional-java.util.Optional-">SphereEnumerationQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="class in io.sphere.sdk.queries">SphereEnumerationQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/SphereError.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">SphereError</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
@@ -7298,7 +7529,15 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html#supplyChannel-io.sphere.sdk.models.Referenceable-">supplyChannel(Referenceable&lt;Channel&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">LineItemImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html#syncedAt--">syncedAt()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="class in io.sphere.sdk.orders.queries">SyncInfoQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#syncInfo--">syncInfo()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/SyncInfo.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">SyncInfo</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="class in io.sphere.sdk.orders.queries"><span class="typeNameLink">SyncInfoQueryModel</span></a>&lt;<a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="type parameter in SyncInfoQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/orders/queries/package-summary.html">io.sphere.sdk.orders.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html#SyncInfoQueryModel-java.util.Optional-java.util.Optional-">SyncInfoQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="class in io.sphere.sdk.orders.queries">SyncInfoQueryModel</a></dt>
 <dd>&nbsp;</dd>
 </dl>
 <a name="I:T">
@@ -7380,6 +7619,10 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>
 <div class="block"><h3 id=client-test-doubles>Client test doubles for unit tests</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#text-java.util.Optional-">text(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#text-java.lang.String-">text(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/EntitySearch.html#text--">text()</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#text--">text()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
@@ -7413,6 +7656,10 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#title-java.util.Optional-">title(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#title-java.lang.String-">title(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#title-java.util.Optional-">title(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html#title-java.lang.String-">title(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews">ReviewDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html#to-io.sphere.sdk.models.Referenceable-">to(Referenceable&lt;TaxCategory&gt;)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></dt>
 <dd>&nbsp;</dd>
@@ -7455,7 +7702,9 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#toReference--">toReference()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Referenceable.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a reference which is not necessarily filled.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Product.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dt>
@@ -7463,6 +7712,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductProjection.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductType.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#toReference--">toReference()</a></span> - Method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
 <dd>&nbsp;</dd>
@@ -7492,14 +7743,16 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>
 <div class="block">returns a filter expression.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereEnumeration.html#toSphereName--">toSphereName()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereEnumeration.html#toSphereName-java.lang.String-">toSphereName(String)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/Predicate.html#toSphereQuery--">toSphereQuery()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html#toSphereQuery--">toSphereQuery()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html" title="class in io.sphere.sdk.queries">QueryModelQueryPredicate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryPredicate.html#toSphereQuery--">toSphereQuery()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a></dt>
 <dd>
 <div class="block">The predicate for the SPHERE.IO HTTP API, not url encoded.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelPredicate.html#toSphereQuery--">toSphereQuery()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelPredicate.html" title="class in io.sphere.sdk.queries">QueryModelPredicate</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QuerySort.html#toSphereSort--">toSphereSort()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a></dt>
 <dd>
 <div class="block">returns a sort expression.</div>
@@ -7536,7 +7789,7 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductAllVariantsQueryModel.html#toString--">toString()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductAllVariantsQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductAllVariantsQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqPredicate.html#toString--">toString()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqPredicate.html" title="class in io.sphere.sdk.queries">EqPredicate</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/EqQueryPredicate.html#toString--">toString()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EqQueryPredicate.html" title="class in io.sphere.sdk.queries">EqQueryPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDslImpl.html#toString--">toString()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -7564,8 +7817,34 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/CompletableFutureUtils.html#transferResult-java.util.concurrent.CompletionStage-java.util.concurrent.CompletableFuture-">transferResult(CompletionStage&lt;T&gt;, CompletableFuture&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/CompletableFutureUtils.html" title="class in io.sphere.sdk.utils">CompletableFutureUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">TransitionCustomLineItemState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionCustomLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
+    withOrderOfCustomLineItems(client(), order -&gt; {
+        final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
+        assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
+        final int quantity = 1;
+        final Instant actualTransitionDate = INSTANT_IN_PAST;
+        final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
+        assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+    })
+);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">TransitionLineItemState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
+                withOrder(client(), order -&gt; {
+                    final LineItem lineItem = order.getLineItems().get(0);
+                    assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+                    final int quantity = 1;
+                    final Instant actualTransitionDate = INSTANT_IN_PAST;
+                    final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
+                    assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+                })
+);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateBuilder.html#transitions-java.util.Optional-">transitions(Optional&lt;Set&lt;Reference&lt;State&gt;&gt;&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateBuilder.html" title="class in io.sphere.sdk.states">StateBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateBuilder.html#transitions-java.util.Set-">transitions(Set&lt;Reference&lt;State&gt;&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateBuilder.html" title="class in io.sphere.sdk.states">StateBuilder</a></dt>
@@ -7603,6 +7882,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Product.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductType.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
 <dd>&nbsp;</dd>
@@ -7682,6 +7963,8 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/FetchImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/State.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.states.<a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a></dt>
@@ -7749,14 +8032,14 @@ OptionalAssert.assertThat(cartWithEmail.getCustomerEmail()).isPresentAs(email);
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">UpdateSyncInfo</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-updateSyncInfo--%s" class=code-example><pre><code class='java'>withOrderExportChannel(client(), channel -&gt;
-    withOrder(client(), order -&gt; {
-        assertThat(order.getSyncInfo()).isEmpty();
-        final Instant aDateInThePast = INSTANT_IN_PAST;
-        final String externalId = "foo";
-        final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-        assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
-    })
+                withOrder(client(), order -&gt; {
+                    assertThat(order.getSyncInfo()).isEmpty();
+                    final Instant aDateInThePast = INSTANT_IN_PAST;
+                    final String externalId = "foo";
+                    final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
+                    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+                    assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
+                })
 );
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -7985,21 +8268,21 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/functional/PatternMatcher.html#when-java.lang.Class-java.util.function.Function-">when(Class&lt;C&gt;, Function&lt;C, T&gt;)</a></span> - Method in class io.sphere.sdk.utils.functional.<a href="io/sphere/sdk/utils/functional/PatternMatcher.html" title="class in io.sphere.sdk.utils.functional">PatternMatcher</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where(Predicate&lt;PartialLocationsSetQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#where-io.sphere.sdk.queries.QueryPredicate-">where(QueryPredicate&lt;PartialLocationsSetQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialLocationsSetQueryModel, Predicate&lt;PartialLocationsSetQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialLocationsSetQueryModel, QueryPredicate&lt;PartialLocationsSetQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialProductDataQueryModel, Predicate&lt;PartialProductDataQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialProductDataQueryModel, QueryPredicate&lt;PartialProductDataQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where(Predicate&lt;PartialProductDataQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#where-io.sphere.sdk.queries.QueryPredicate-">where(QueryPredicate&lt;PartialProductDataQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductAllVariantsQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialProductVariantQueryModel, Predicate&lt;PartialProductVariantQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductAllVariantsQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductAllVariantsQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductAllVariantsQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialProductVariantQueryModel, QueryPredicate&lt;PartialProductVariantQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductAllVariantsQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductAllVariantsQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where(Predicate&lt;PartialProductCatalogDataQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html#where-io.sphere.sdk.queries.QueryPredicate-">where(QueryPredicate&lt;PartialProductCatalogDataQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html#where-io.sphere.sdk.queries.Predicate-">where(Predicate&lt;PartialProductVariantQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html#where-io.sphere.sdk.queries.QueryPredicate-">where(QueryPredicate&lt;PartialProductVariantQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialProductVariantQueryModel, Predicate&lt;PartialProductVariantQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialProductVariantQueryModel, QueryPredicate&lt;PartialProductVariantQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductVariantQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/tokenizer/WhiteSpaceSuggestTokenizer.html" title="class in io.sphere.sdk.search.tokenizer"><span class="typeNameLink">WhiteSpaceSuggestTokenizer</span></a> - Class in <a href="io/sphere/sdk/search/tokenizer/package-summary.html">io.sphere.sdk.search.tokenizer</a></dt>
 <dd>&nbsp;</dd>
@@ -8032,6 +8315,10 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withApartment-java.util.Optional-">withApartment(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withApartment-java.lang.String-">withApartment(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#withAuthorName-java.util.Optional-">withAuthorName(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#withAuthorName-java.lang.String-">withAuthorName(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withBuilding-java.util.Optional-">withBuilding(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
@@ -8211,7 +8498,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withPostalCode-java.lang.String-">withPostalCode(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withPredicate-io.sphere.sdk.queries.Predicate-">withPredicate(Predicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withPredicate-io.sphere.sdk.queries.QueryPredicate-">withPredicate(QueryPredicate&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
 <dd>
 <div class="block">Returns an EntityQuery with the new predicate as predicate.</div>
 </dd>
@@ -8236,6 +8523,10 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withSalutation-java.util.Optional-">withSalutation(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withSalutation-java.lang.String-">withSalutation(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#withScore-java.util.Optional-">withScore(Optional&lt;Double&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#withScore-double-">withScore(double)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">withSort(List&lt;QuerySort&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
 <dd>
@@ -8267,6 +8558,10 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html#withSyncedAt-java.time.Instant-">withSyncedAt(Instant)</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#withText-java.util.Optional-">withText(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#withText-java.lang.String-">withText(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchDsl.html#withText-java.util.Optional-">withText(Optional&lt;SearchText&gt;)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></dt>
 <dd>
 <div class="block">Returns an EntitySearch with the new text as search text.</div>
@@ -8286,6 +8581,10 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withTitle-java.util.Optional-">withTitle(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#withTitle-io.sphere.sdk.models.LocalizedStrings-">withTitle(LocalizedStrings)</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#withTitle-java.util.Optional-">withTitle(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#withTitle-java.lang.String-">withTitle(String)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResultDsl.html#withTotal-int-">withTotal(int)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries">PagedQueryResultDsl</a></dt>
 <dd>

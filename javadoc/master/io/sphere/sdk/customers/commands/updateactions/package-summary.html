@@ -125,13 +125,13 @@
 <div class="block">Sets a new company name for the customer
 
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCompanyName--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    assertThat(customer.getCompanyName()).isAbsent();
+    assertThat(customer.getCompanyName()).isEmpty();
 
     final String companyName = "Big coorp";
     final Customer updatedCustomer =
             execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
 
-    assertThat(updatedCustomer.getCompanyName()).isPresentAs(companyName);
+    assertThat(updatedCustomer.getCompanyName()).contains(companyName);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -141,9 +141,9 @@
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCustomerGroup--%s" class=code-example><pre><code class='java'>withB2cCustomerGroup(client(), customerGroup -&gt; {
     withCustomer(client(), customer -&gt; {
-        assertThat(customer.getCustomerGroup()).isAbsent();
+        assertThat(customer.getCustomerGroup()).isEmpty();
         final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
-        assertThat(updateCustomer.getCustomerGroup()).isPresentAs(customerGroup.toReference());
+        assertThat(updateCustomer.getCustomerGroup()).contains(customerGroup.toReference());
     });
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -185,13 +185,13 @@
 <div class="block">Sets a new vat ID for the customer
 
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setVatId--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    assertThat(customer.getVatId()).isAbsent();
+    assertThat(customer.getVatId()).isEmpty();
 
     final String vatId = randomString();
     final Customer updatedCustomer =
             execute(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
 
-    assertThat(updatedCustomer.getVatId()).isPresentAs(vatId);
+    assertThat(updatedCustomer.getVatId()).contains(vatId);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>

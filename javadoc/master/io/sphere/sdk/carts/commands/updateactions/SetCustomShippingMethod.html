@@ -124,7 +124,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomShippingMethod--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
     final Cart cart = createCartWithShippingAddress(client());
-    OptionalAssert.assertThat(cart.getShippingInfo()).isAbsent();
+    assertThat(cart.getShippingInfo()).isEmpty();
     final MonetaryAmount price = MoneyImpl.of(new BigDecimal("23.50"), EUR);
     final ShippingRate shippingRate = ShippingRate.of(price);
     final String shippingMethodName = "custom-shipping";
@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final Cart cartWithShippingMethod = execute(CartUpdateCommand.of(cart, action));
     final CartShippingInfo shippingInfo = cartWithShippingMethod.getShippingInfo().get();
     assertThat(shippingInfo.getPrice()).isEqualTo(price);
-    OptionalAssert.assertThat(shippingInfo.getShippingMethod()).isAbsent();
+    assertThat(shippingInfo.getShippingMethod()).isEmpty();
     assertThat(shippingInfo.getShippingMethodName()).isEqualTo(shippingMethodName);
     assertThat(shippingInfo.getShippingRate()).isEqualTo(shippingRate);
     assertThat(shippingInfo.getTaxCategory()).isEqualTo(taxCategory.toReference());

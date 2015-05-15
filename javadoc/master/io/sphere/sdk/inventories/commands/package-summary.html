@@ -107,9 +107,9 @@
     assertThat(inventoryEntry.getSku()).isEqualTo(sku);
     assertThat(inventoryEntry.getQuantityOnStock()).isEqualTo(quantityOnStock);
     assertThat(inventoryEntry.getAvailableQuantity()).isEqualTo(quantityOnStock);
-    assertThat(inventoryEntry.getExpectedDelivery()).isPresentAs(expectedDelivery);
-    assertThat(inventoryEntry.getRestockableInDays()).isPresentAs(restockableInDays);
-    assertThat(inventoryEntry.getSupplyChannel()).isPresentAs(channel.toReference());
+    assertThat(inventoryEntry.getExpectedDelivery()).contains(expectedDelivery);
+    assertThat(inventoryEntry.getRestockableInDays()).contains(restockableInDays);
+    assertThat(inventoryEntry.getSupplyChannel()).contains(channel.toReference());
 
     //delete
     final DeleteCommand&lt;InventoryEntry&gt; deleteCommand = InventoryDeleteCommand.of(inventoryEntry);

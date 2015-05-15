@@ -132,9 +132,9 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     assertThat(returnItem.getQuantity()).isEqualTo(1);
     assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
     assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
-    assertThat(returnItem.getComment()).isPresentAs("foo bar");
-    assertThat(returnInfo.getReturnDate()).isPresentAs(INSTANT_IN_PAST);
-    assertThat(returnInfo.getReturnTrackingId()).isPresentAs("trackingId");
+    assertThat(returnItem.getComment()).contains("foo bar");
+    assertThat(returnInfo.getReturnDate()).contains(INSTANT_IN_PAST);
+    assertThat(returnInfo.getReturnTrackingId()).contains("trackingId");
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

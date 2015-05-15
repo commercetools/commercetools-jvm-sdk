@@ -215,7 +215,7 @@ import java.util.function.Function;
 
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-functionalCompositionMapStreamExample--%s" class=code-example><pre><code class='java'>final List&lt;Person&gt; persons = asList(new Person("John", "Smith"), new Person("Michael", "Müller"));
 final List&lt;String&gt; lastNames = persons.stream().map(Person::getLastName).distinct().collect(toList());
-assertThat(lastNames).containsExactly("Smith", "Müller");
+assertThat(lastNames).isEqualTo(asList("Smith", "Müller"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -266,7 +266,7 @@ final Stream&lt;Stream&lt;Integer&gt;&gt; streamStream = persons.stream()
 final Stream&lt;Integer&gt; simpleStream = persons.stream()
         .flatMap(person -&gt; person.getLastName().chars().boxed());
 assertThat(simpleStream.collect(toList()))
-        .containsExactly(83, 109, 105, 116, 104, 77, 252, 108, 108, 101, 114);
+        .isEqualTo(asList(83, 109, 105, 116, 104, 77, 252, 108, 108, 101, 114));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -683,7 +683,7 @@ Since Java 8, the JDK provides <a href="https://docs.oracle.com/javase/tutorial/
   <li><code>CompletionStage.thenApplyAsync(Function, Executor)</code>  with suffix "Async" and additional <code>Executor</code> parameter calls the function inside a Thread pool you specify as second parameter.</li>
  </ol>
 
- <div id="io-sphere-sdk-meta-AsyncDocumentationThreadTest%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import org.fest.assertions.GenericAssert;
+ <div id="io-sphere-sdk-meta-AsyncDocumentationThreadTest%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import org.assertj.core.api.AbstractAssert;
 import org.junit.Test;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ForkJoinPool;
@@ -744,17 +744,16 @@ import static java.lang.String.format;
         return new FutureAssert(actual);
     }
 
-    private static class FutureAssert extends GenericAssert&lt;FutureAssert, CompletableFuture&lt;Integer&gt;&gt; {
+    private static class FutureAssert extends AbstractAssert&lt;FutureAssert, CompletableFuture&lt;Integer&gt;&gt; {
         protected FutureAssert(final CompletableFuture&lt;Integer&gt; actual) {
-            super(FutureAssert.class, actual);
+            super(actual, FutureAssert.class);
         }
 
 
         public FutureAssert completedIn(final int completionThreadId) {
             final Integer threadId = actual.join();
             if (threadId != completionThreadId) {
-                failIfCustomMessageIsSet();
-                throw failure(format("%s did not complete in %d, but in %d.",
+                failWithMessage(format("%s did not complete in %d, but in %d.",
                         actual, completionThreadId, threadId));
             }
             return this;
@@ -763,8 +762,7 @@ import static java.lang.String.format;
         public FutureAssert notCompletedIn(final int completionThreadId) {
             final Integer threadId = actual.join();
             if (threadId == completionThreadId) {
-                failIfCustomMessageIsSet();
-                throw failure(format("%s did complete in %d, but not in %d.",
+                failWithMessage(format("%s did complete in %d, but not in %d.",
                         actual, completionThreadId, threadId));
             }
             return this;

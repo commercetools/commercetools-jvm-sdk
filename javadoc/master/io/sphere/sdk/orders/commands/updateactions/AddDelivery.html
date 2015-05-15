@@ -130,8 +130,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final Delivery delivery = updatedOrder.getShippingInfo().get().getDeliveries().get(0);
     assertThat(delivery.getItems()).isEqualTo(items);
     final Parcel parcel = delivery.getParcels().get(0);
-    assertThat(parcel.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
-    assertThat(parcel.getTrackingData()).isPresentAs(TRACKING_DATA);
+    assertThat(parcel.getMeasurements()).contains(PARCEL_MEASUREMENTS);
+    assertThat(parcel.getTrackingData()).contains(TRACKING_DATA);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

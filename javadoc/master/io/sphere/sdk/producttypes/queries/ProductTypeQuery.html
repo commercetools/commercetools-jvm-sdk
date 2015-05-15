@@ -214,7 +214,7 @@ import java.util.concurrent.CompletionStage;
 
   With <a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
-  <div id="example-QueryProductTypeExamples-queryByAttributeName--%s" class=code-example><pre><code class='java'>Predicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
+  <div id="example-QueryProductTypeExamples-queryByAttributeName--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
 CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductTypeQuery.of().withPredicate(hasSizeAttribute));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryProductTypeExamples.java" target="_blank">test code</a>.</pre></div></div>
 </li>
@@ -303,7 +303,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#offset--">offset</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i12" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&gt;</code></td>
+<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;T&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#predicate--">predicate</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i13" class="rowColor">
@@ -338,7 +338,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </tr>
 <tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#withPredicate-io.sphere.sdk.queries.Predicate-">withPredicate</a></span>(<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&nbsp;predicate)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#withPredicate-io.sphere.sdk.queries.QueryPredicate-">withPredicate</a></span>(<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;T&gt;&nbsp;predicate)</code>
 <div class="block">Returns an EntityQuery with the new predicate as predicate.</div>
 </td>
 </tr>
@@ -434,18 +434,18 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a>&nbsp;model()</pre>
 </li>
 </ul>
-<a name="withPredicate-io.sphere.sdk.queries.Predicate-">
+<a name="withPredicate-io.sphere.sdk.queries.QueryPredicate-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>withPredicate</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;&nbsp;withPredicate(<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&nbsp;predicate)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicate-io.sphere.sdk.queries.Predicate-">QueryDsl</a></code></span></div>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;&nbsp;withPredicate(<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;T&gt;&nbsp;predicate)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicate-io.sphere.sdk.queries.QueryPredicate-">QueryDsl</a></code></span></div>
 <div class="block">Returns an EntityQuery with the new predicate as predicate.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicate-io.sphere.sdk.queries.Predicate-">withPredicate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicate-io.sphere.sdk.queries.QueryPredicate-">withPredicate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>predicate</code> - the new predicate</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -536,7 +536,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <ul class="blockList">
 <li class="blockList">
 <h4>predicate</h4>
-<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries">Predicate</a>&lt;T&gt;&gt;&nbsp;predicate()</pre>
+<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;T&gt;&gt;&nbsp;predicate()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#predicate--">predicate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;</code></dd>

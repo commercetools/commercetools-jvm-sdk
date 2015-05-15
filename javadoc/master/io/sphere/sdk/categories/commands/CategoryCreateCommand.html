@@ -138,7 +138,18 @@ implements <a href="../../../../../io/sphere/sdk/commands/Command.html" title="i
 <div class="block">Command to create a category.
 
 
- For construction of a <a href="../../../../../io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories"><code>CategoryDraft</code></a> (a draft for a new category) use a <a href="../../../../../io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories"><code>CategoryDraftBuilder</code></a>:</div>
+ For construction of a <a href="../../../../../io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories"><code>CategoryDraft</code></a> (a draft for a new category) use a <a href="../../../../../io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories"><code>CategoryDraftBuilder</code></a>:
+
+
+ <div id="io-sphere-sdk-categories-commands-CategoryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final LocalizedStrings name = LocalizedStrings.of(Locale.ENGLISH, "winter clothing");
+final LocalizedStrings slug = name.mapValue((locale, value) -&gt; new Slugify().slugify(value + "-" + randomKey()));
+final String externalId = randomKey();
+final CategoryDraft categoryDraft = CategoryDraftBuilder.of(name, slug).externalId(externalId).build();
+final Category category = execute(CategoryCreateCommand.of(categoryDraft));
+assertThat(category.getName()).isEqualTo(name);
+assertThat(category.getSlug()).isEqualTo(slug);
+assertThat(category.getExternalId()).contains(externalId);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/commands/CategoryCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

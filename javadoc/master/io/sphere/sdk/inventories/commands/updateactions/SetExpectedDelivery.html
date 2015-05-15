@@ -125,7 +125,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final UpdateAction&lt;InventoryEntry&gt; action = SetExpectedDelivery.of(expectedDelivery);
     final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
     assertThat(updatedEntry.getExpectedDelivery())
-            .isPresentAs(expectedDelivery)
+            .contains(expectedDelivery)
             .isNotEqualTo(entry.getExpectedDelivery());
     return updatedEntry;
 });

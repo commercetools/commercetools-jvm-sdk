@@ -130,8 +130,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
     final Order updatedOrder = execute(OrderUpdateCommand.of(orderWithDelivery, action));
     final Parcel actual = updatedOrder.getShippingInfo().get().getDeliveries().get(0).getParcels().get(0);
-    assertThat(actual.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
-    assertThat(actual.getTrackingData()).isPresentAs(TRACKING_DATA);
+    assertThat(actual.getMeasurements()).contains(PARCEL_MEASUREMENTS);
+    assertThat(actual.getTrackingData()).contains(TRACKING_DATA);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

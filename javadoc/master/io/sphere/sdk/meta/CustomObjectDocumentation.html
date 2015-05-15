@@ -356,7 +356,7 @@ import java.util.function.Function;
  <div id="io-sphere-sdk-customobjects-queries-CustomObjectCustomJsonMappingByKeyFetchTest-execution--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), co -&gt; {
     final Fetch&lt;CustomObject&lt;GsonFoo&gt;&gt; fetch = new GsonFooCustomObjectByKeyFetch(co.getContainer(), co.getKey());
     final Optional&lt;CustomObject&lt;GsonFoo&gt;&gt; customObjectOptional = execute(fetch);
-    OptionalAssert.assertThat(customObjectOptional).isPresent();
+    assertThat(customObjectOptional).isPresent();
     assertThat(customObjectOptional.get().toReference()).isEqualTo(co.toReference());
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetchTest.java" target="_blank">test code</a>.</pre></div>

@@ -134,7 +134,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final List&lt;Price&gt; prices = productWithChangedPrice.getMasterData().getCurrent().get().getMasterVariant().getPrices();
     assertThat(prices)
             .overridingErrorMessage("we updated the price of the product")
-            .containsExactly(newPrice);
+            .isEqualTo(asList(newPrice));
 
     final LineItem lineItemOfTheChangedProduct =
             execute(CartByIdFetch.of(cartWithLineItem)).get().getLineItems().get(0);

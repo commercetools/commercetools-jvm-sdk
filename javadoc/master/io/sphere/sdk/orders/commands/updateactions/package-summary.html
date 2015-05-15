@@ -98,8 +98,8 @@
     final Delivery delivery = updatedOrder.getShippingInfo().get().getDeliveries().get(0);
     assertThat(delivery.getItems()).isEqualTo(items);
     final Parcel parcel = delivery.getParcels().get(0);
-    assertThat(parcel.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
-    assertThat(parcel.getTrackingData()).isPresentAs(TRACKING_DATA);
+    assertThat(parcel.getMeasurements()).contains(PARCEL_MEASUREMENTS);
+    assertThat(parcel.getTrackingData()).contains(TRACKING_DATA);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -117,8 +117,8 @@
     final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
     final Order updatedOrder = execute(OrderUpdateCommand.of(orderWithDelivery, action));
     final Parcel actual = updatedOrder.getShippingInfo().get().getDeliveries().get(0).getParcels().get(0);
-    assertThat(actual.getMeasurements()).isPresentAs(PARCEL_MEASUREMENTS);
-    assertThat(actual.getTrackingData()).isPresentAs(TRACKING_DATA);
+    assertThat(actual.getMeasurements()).contains(PARCEL_MEASUREMENTS);
+    assertThat(actual.getTrackingData()).contains(TRACKING_DATA);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -138,9 +138,9 @@
     assertThat(returnItem.getQuantity()).isEqualTo(1);
     assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
     assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
-    assertThat(returnItem.getComment()).isPresentAs("foo bar");
-    assertThat(returnInfo.getReturnDate()).isPresentAs(INSTANT_IN_PAST);
-    assertThat(returnInfo.getReturnTrackingId()).isPresentAs("trackingId");
+    assertThat(returnItem.getComment()).contains("foo bar");
+    assertThat(returnInfo.getReturnDate()).contains(INSTANT_IN_PAST);
+    assertThat(returnInfo.getReturnTrackingId()).contains("trackingId");
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -160,9 +160,10 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangePaymentState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changePaymentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getPaymentState()).isEqualTo(Optional.empty());
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(PaymentState.PAID)));
-    assertThat(updatedOrder.getPaymentState()).isPresentAs(PaymentState.PAID);
+    final PaymentState newState = PaymentState.PAID;
+    assertThat(order.getPaymentState()).isNotEqualTo(Optional.of(newState));
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(newState)));
+    assertThat(updatedOrder.getPaymentState()).contains(newState);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -171,11 +172,24 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeShipmentState</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getShipmentState()).isEqualTo(Optional.empty());
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(ShipmentState.SHIPPED)));
-    assertThat(updatedOrder.getShipmentState()).isPresentAs(ShipmentState.SHIPPED);
+    final ShipmentState newState = ShipmentState.SHIPPED;
+    assertThat(order.getShipmentState()).isNotEqualTo(Optional.of(newState));
+    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
+    assertThat(updatedOrder.getShipmentState()).contains(newState);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportCustomLineItemState</a></td>
+<td class="colLast">
+<div class="block">These import of states does not follow any predefined rules and should be only used if no transitions are defined.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportLineItemState</a></td>
+<td class="colLast">
+<div class="block">These import of states does not follow any predefined rules and should be only used if no transitions are defined.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -186,10 +200,10 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetOrderNumber</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setOrderNumber--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getOrderNumber()).isAbsent();
+    assertThat(order.getOrderNumber()).isEmpty();
     final String orderNumber = randomString();
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
-    assertThat(updatedOrder.getOrderNumber()).isPresentAs(orderNumber);
+    assertThat(updatedOrder.getOrderNumber()).contains(orderNumber);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -225,21 +239,49 @@
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionCustomLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
+    withOrderOfCustomLineItems(client(), order -&gt; {
+        final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
+        assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
+        final int quantity = 1;
+        final Instant actualTransitionDate = INSTANT_IN_PAST;
+        final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
+        assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+    })
+);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
+                withOrder(client(), order -&gt; {
+                    final LineItem lineItem = order.getLineItems().get(0);
+                    assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+                    final int quantity = 1;
+                    final Instant actualTransitionDate = INSTANT_IN_PAST;
+                    final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
+                    assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+                })
+);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-updateSyncInfo--%s" class=code-example><pre><code class='java'>withOrderExportChannel(client(), channel -&gt;
-    withOrder(client(), order -&gt; {
-        assertThat(order.getSyncInfo()).isEmpty();
-        final Instant aDateInThePast = INSTANT_IN_PAST;
-        final String externalId = "foo";
-        final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-        assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
-    })
+                withOrder(client(), order -&gt; {
+                    assertThat(order.getSyncInfo()).isEmpty();
+                    final Instant aDateInThePast = INSTANT_IN_PAST;
+                    final String externalId = "foo";
+                    final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
+                    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+                    assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
+                })
 );
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>

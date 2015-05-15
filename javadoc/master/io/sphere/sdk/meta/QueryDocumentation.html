@@ -112,23 +112,23 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <div class="block"><p>The Query API is for reading specific resources from SPHERE.IO.
  The resources can be sorted and fetched in batches.</p>
 
- <p>First, you need to specify a query, example:</p>
+ <p>First, you need to specify a query, for example:</p>
 
  <div id="io-sphere-sdk-queries-QueryDemo-formulatingAQuery--%s" class=code-example><pre><code class='java'>Query&lt;Category&gt; query = CategoryQuery.of().byName(Locale.ENGLISH, "demo cat");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
- <p>Second, you use the sphere client to execute a query request, example:</p>
+ <p>Second, you use the sphere client to execute a query request, for example:</p>
 
  <div id="io-sphere-sdk-queries-QueryDemo-executeQuery--%s" class=code-example><pre><code class='java'>CompletionStage&lt;PagedQueryResult&lt;Category&gt;&gt; future = client.execute(query);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
  <p>The successful execution of a <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> results in <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> of a SPHERE.IO resource or view.
  While the <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> interface just contains information to execute a query,
- the interface <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> provides also a domain specific language to tune a query.</p>
+ the interface <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> also provides a domain specific language to tune a query.</p>
 
- <p>For most of the SPHERE.IO resources you can find classes to support you formulating valid queries (in a sub package queries).</p>
+ <p>For most of the SPHERE.IO resources you can find classes to support you in formulating valid queries (in a sub package queries).</p>
 
- <p>The following snipped creates a query which selects all products without a specific order.</p>
+ <p>The following snippet creates a query which selects all products without a specific order.</p>
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryForAllDemo--%s" class=code-example><pre><code class='java'>final ProductQuery query = ProductQuery.of();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
@@ -145,7 +145,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 
  <h4 id="create-query-with-model-companion-class">Create a query with helper methods from a model companion class</h4>
 
- <p>For some model interfaces exist companion classes (the name of the interface in plural) which provide some default queries, example for categories:</p>
+ <p>For some model interfaces companion classes exist (the name of the interface in plural) which provide some default queries, for example for categories:</p>
 
  <div id="io-sphere-sdk-queries-QueryDemo-queryFromCompanionHelper--%s" class=code-example><pre><code class='java'>Query&lt;Category&gt; queryById = CategoryQuery.of().byId("the-id");
 Query&lt;Category&gt; queryBySlug = CategoryQuery.of().bySlug(Locale.ENGLISH, "category-slug");
@@ -160,7 +160,7 @@ Query&lt;Category&gt; queryByName = CategoryQuery.of().byName(Locale.ENGLISH, "d
  the queryable parameters.
  </p>
 
- <div id="io-sphere-sdk-queries-QueryDemo-categoryQueryModel--%s" class=code-example><pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+ <div id="io-sphere-sdk-queries-QueryDemo-categoryQueryModel--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
 Query&lt;Category&gt; query = CategoryQuery.of().withPredicate(predicate);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
@@ -170,7 +170,7 @@ Query&lt;Category&gt; query = CategoryQuery.of().withPredicate(predicate);
  The <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> class, used by the query model classes, sorts by default by ID and has no offset
  or limit specified. The following example shows how to specify sorting, limiting and skipping pages.
 
- <div id="io-sphere-sdk-queries-QueryDemo-withPagination--%s" class=code-example><pre><code class='java'>Predicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+ <div id="io-sphere-sdk-queries-QueryDemo-withPagination--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
 
 QuerySort&lt;Category&gt; sortByName = CategoryQuery.model().name().lang(locale).sort(QuerySortDirection.DESC);
 QuerySort&lt;Category&gt; sortById = CategoryQuery.model().id().sort(QuerySortDirection.ASC);
@@ -261,9 +261,9 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
 
  <h4>Self constructed predicates for special cases</h4>
 
-<p>For more advanced queries you have to use the <a href="../../../../io/sphere/sdk/queries/Predicate.html" title="interface in io.sphere.sdk.queries"><code>Predicate API</code></a>. For example querying for some names you can use:</p>
+<p>For more advanced queries you have to use the <code>Predicate Predicate API</code>. For example querying for some names you can use:</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryByNames--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; predicate = ProductQuery.model().masterData().current().name()
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryByNames--%s" class=code-example><pre><code class='java'>final QueryPredicate&lt;Product&gt; predicate = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(predicate);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
@@ -272,10 +272,10 @@ final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(predicate)
 
  You can still create predicates from strings, but you need to escape characters.
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-testX--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; safePredicate = ProductQuery.model().masterData().current().name()
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-testX--%s" class=code-example><pre><code class='java'>final QueryPredicate&lt;Product&gt; safePredicate = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
-final Predicate&lt;Product&gt; unsafePredicate =
-        Predicate.of("masterData(current(name(en in (\"blue t-shirt\", \"blue jeans\"))))");
+final QueryPredicate&lt;Product&gt; unsafePredicate =
+        QueryPredicate.of("masterData(current(name(en in (\"blue t-shirt\", \"blue jeans\"))))");
 assertThat(unsafePredicate).isEqualTo(safePredicate);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -283,23 +283,23 @@ assertThat(unsafePredicate).isEqualTo(safePredicate);
 
  <h4>Connecting predicates</h4>
 
- <p>For connecting predicates use <a href="../../../../io/sphere/sdk/queries/Predicate.html#and-io.sphere.sdk.queries.Predicate-"><code>Predicate.and(io.sphere.sdk.queries.Predicate)</code></a> and <a href="../../../../io/sphere/sdk/queries/Predicate.html#or-io.sphere.sdk.queries.Predicate-"><code>Predicate.or(io.sphere.sdk.queries.Predicate)</code></a>.</p>
+ <p>For connecting predicates use <code>Predicate#and(Predicate)</code> and <code>Predicate#or(Predicate)</code>.</p>
 
 
  <p>The following example shows a query for a product where either the name is "foo" <strong><code>or</code></strong> the id is "bar".</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateOrExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsFoo = ProductQuery.model().masterData().current().name()
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateOrExample--%s" class=code-example><pre><code class='java'>final QueryPredicate&lt;Product&gt; nameIsFoo = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).is("foo");
-final Predicate&lt;Product&gt; idIsBar = ProductQuery.model().id().is("bar");
+final QueryPredicate&lt;Product&gt; idIsBar = ProductQuery.model().id().is("bar");
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFoo.or(idIsBar));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>To query for two conditions use <strong><code>and</code></strong>. The following example queries for the name foo and the membership in a category with id "cat1".</p>
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateAndExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsFoo = ProductQuery.model().masterData().current().name()
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateAndExample--%s" class=code-example><pre><code class='java'>final QueryPredicate&lt;Product&gt; nameIsFoo = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).is("foo");
 final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
-final Predicate&lt;Product&gt; isInCat1 = ProductQuery.model().masterData().current()
+final QueryPredicate&lt;Product&gt; isInCat1 = ProductQuery.model().masterData().current()
         .categories().isIn(cat1);
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFoo.and(isInCat1));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
@@ -307,7 +307,7 @@ final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFoo.
  <p>Since the previous queries have a common path you can formulate a combined query with <strong><code>where</code></strong>, but this is not possible for every entity.</p>
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateAndWithWhereExample--%s" class=code-example><pre><code class='java'>final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
-final Predicate&lt;Product&gt; nameIsFooAndIsInCat1 = ProductQuery.model().masterData().current()
+final QueryPredicate&lt;Product&gt; nameIsFooAndIsInCat1 = ProductQuery.model().masterData().current()
         .where(cur -&gt; cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(cat1)));
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFooAndIsInCat1);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
@@ -317,7 +317,7 @@ final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsFooA
 
  It is not possible to negate complete predicates, but it is possible on the field level. So for example the next query is for products where the name is not exactly "foo".
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateNotExample--%s" class=code-example><pre><code class='java'>final Predicate&lt;Product&gt; nameIsNotFoo = ProductQuery.model().masterData().current().name()
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateNotExample--%s" class=code-example><pre><code class='java'>final QueryPredicate&lt;Product&gt; nameIsNotFoo = ProductQuery.model().masterData().current().name()
         .lang(ENGLISH).isNot("foo");
 final QueryDsl&lt;Product&gt; query = ProductQuery.of().withPredicate(nameIsNotFoo);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>

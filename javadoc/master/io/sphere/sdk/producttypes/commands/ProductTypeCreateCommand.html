@@ -139,6 +139,27 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
 
   <p><a href="../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s can be created in the backend by executing a <a href="../../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a>:</p>
 
+  <div id="io-sphere-sdk-producttypes-commands-ProductTypeCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>//size attribute stuff
+final PlainEnumValue S = PlainEnumValue.of("S", "S");
+final PlainEnumValue M = PlainEnumValue.of("M", "M");
+final PlainEnumValue X = PlainEnumValue.of("X", "X");
+final List&lt;PlainEnumValue&gt; values = asList(S, M, X);
+final LocalizedStrings sizeAttributeLabel = LocalizedStrings.of(ENGLISH, "size").plus(GERMAN, "Größe");
+final AttributeDefinition sizeAttributeDefinition =
+        AttributeDefinitionBuilder.of("size", sizeAttributeLabel, EnumType.of(values))
+        .required(true)
+        .attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE)
+        .build();
+
+final String name = getName();
+final ProductTypeDraft productTypeDraft =
+        ProductTypeDraft.of(name, "a 'T' shaped cloth", asList(sizeAttributeDefinition));
+final ProductType productType = execute(ProductTypeCreateCommand.of(productTypeDraft));
+assertThat(productType.getName()).isEqualTo(name);
+assertThat(productType.getDescription()).isEqualTo("a 'T' shaped cloth");
+assertThat(productType.getAttributes()).contains(sizeAttributeDefinition);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
+
   <div id="io-sphere-sdk-producttypes-Example-createDemo--%s" class=code-example><pre><code class='java'>final ProductTypeCreateCommand command = ProductTypeCreateCommand.of(new TShirtProductTypeDraftSupplier("product-type-name").get());
 final ProductType productType = execute(command);
 

@@ -128,24 +128,30 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/MetaAttributesUpdateActions.html" title="class in io.sphere.sdk.products.commands.updateactions">MetaAttributesUpdateActions</a></td>
+<td class="colLast">
+<div class="block">Create update actions to set the SEO attributes title, description and keywords altogether:</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/Publish.html" title="class in io.sphere.sdk.products.commands.updateactions">Publish</a></td>
 <td class="colLast">
 <div class="block">Publishes a product, which causes the staged projection of the product to override the current projection.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveFromCategory</a></td>
 <td class="colLast">
 <div class="block">Removes a product from a category.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveImage</a></td>
 <td class="colLast">
 <div class="block">Removes a product image.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">RemovePrice</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-removePrice--%s" class=code-example><pre><code class='java'>withUpdateablePricedProduct(client(), product -&gt; {
@@ -162,43 +168,55 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemoveVariant.html" title="class in io.sphere.sdk.products.commands.updateactions">RemoveVariant</a></td>
 <td class="colLast">
 <div class="block">Removes a variant from a product.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RevertStagedChanges.html" title="class in io.sphere.sdk.products.commands.updateactions">RevertStagedChanges</a></td>
 <td class="colLast">
 <div class="block">Revert all changes, which were made to the staged version of a product and reset to the current version.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttribute</a></td>
 <td class="colLast">
 <div class="block">Adds/Removes/Changes a custom attribute.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></td>
 <td class="colLast">
 <div class="block">Adds / Removes / Changes a custom attribute in all variants at the same time (it can be helpful to set attribute values that are constrained with SameForAll).</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetDescription</a></td>
 <td class="colLast">
 <div class="block">Updates the description of a product.</div>
 </td>
 </tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaAttributes.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaAttributes</a></td>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetProductMetaDescription.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaDescription</a></td>
 <td class="colLast">
-<div class="block">Sets the SEO attributes title, description and key words.</div>
+<div class="block">Sets the SEO attribute description.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetProductMetaKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaKeywords</a></td>
+<td class="colLast">
+<div class="block">Sets the SEO attribute keywords.</div>
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetProductMetaTitle.html" title="class in io.sphere.sdk.products.commands.updateactions">SetProductMetaTitle</a></td>
+<td class="colLast">
+<div class="block">Sets the SEO attribute title.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSearchKeywords</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setSearchKeywords--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
@@ -213,19 +231,19 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSku.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSku</a></td>
 <td class="colLast">
 <div class="block">Adds, changes or removes an SKU on a product variant.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></td>
 <td class="colLast">
 <div class="block">Adds, changes or removes a product's tax category.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/Unpublish.html" title="class in io.sphere.sdk.products.commands.updateactions">Unpublish</a></td>
 <td class="colLast">
 <div class="block">Unpublishes a product, effectively deleting the current projection of the product, leaving only the staged projection.</div>
