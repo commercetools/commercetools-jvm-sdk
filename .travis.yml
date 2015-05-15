@@ -10,7 +10,7 @@ before_install:
 - export JAVA_HOME=/home/travis/.linuxbrew/Cellar/jdk/1.8.0-40
 script:
 - echo $JAVA_HOME
-- ./sbt genDoc test it:sutest
+- ./sbt genDoc test it:test
 - bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null
 after_success:
 - bash scripts/publish-javadoc-version-folder.sh > /dev/null 2> /dev/null
