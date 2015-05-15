@@ -1,9 +1,5 @@
-sudo: false
-cache:
-  directories:
-    - $HOME/.ivy2/cache
 before_install:
-- apt-get install graphviz
+- sudo apt-get install graphviz
 #suggestions from http://stackoverflow.com/questions/29636754/can-you-specify-minor-jdk-version-for-travis-ci since Java 8u30 is buggy
 - rm -rf ~/.linuxbrew
 - yes | ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/linuxbrew/go/install)"
