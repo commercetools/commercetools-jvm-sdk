@@ -304,7 +304,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public void unicodeExampleForFullTextSearch() throws Exception {
         final SearchDsl<ProductProjection> searchDsl = ProductProjectionSearch.of(STAGED).withText(GERMAN, EVIL_CHARACTER_WORD);
         final PagedSearchResult<ProductProjection> result = executeEvilSearch(searchDsl);
-        assertThat(result.getTotal()).isEqualTo(2);
+        assertThat(result.getTotal()).overridingErrorMessage("result: " + result).isEqualTo(2);
     }
 
     @Test
