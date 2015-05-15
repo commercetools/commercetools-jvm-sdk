@@ -43,6 +43,11 @@ import java.util.function.BiFunction;
      <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
      <li class=change-in-release>{@code io.sphere.sdk.queries.Predicate} has been renamed to {@link io.sphere.sdk.queries.QueryPredicate}.</li>
      <li class=change-in-release>The JVM SDK itself uses for tests the <a href="http://joel-costigliola.github.io/assertj/">assertj</a> assertion methods instead of fest assertions.</li>
+     <li class=change-in-release>{@code io.sphere.sdk.products.commands.updateactions.SetMetaAttributes} has been removed since it is deprecated in SPHERE.IO.
+     Use {@link io.sphere.sdk.products.commands.updateactions.SetProductMetaTitle},
+         {@link io.sphere.sdk.products.commands.updateactions.SetProductMetaDescription},
+         {@link io.sphere.sdk.products.commands.updateactions.SetProductMetaKeywords} or {@link io.sphere.sdk.products.commands.updateactions.MetaAttributesUpdateActions} for all together.
+     </li>
      <li class=fixed-in-release>The exception for a failing {@link io.sphere.sdk.customers.commands.CustomerSignInCommand} shows more problem details. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/397">#397</a>.</li>
  </ul>
 
