@@ -4,7 +4,6 @@ import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.ProductProjectionType;
-import io.sphere.sdk.products.queries.ProductDataQueryModel;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.QueryPredicate;
 
@@ -99,7 +98,7 @@ import java.util.function.BiFunction;
  {@link io.sphere.sdk.search.RangeFacetResult} are using generics.
  {@link io.sphere.sdk.search.TermFacetResult} uses long instead of int for some methods like {@link io.sphere.sdk.search.TermFacetResult#getMissing()}.</li>
  <li class=change-in-release>Methods in {@link io.sphere.sdk.search.SearchDsl} have been renamed.</li>
- <li class=change-in-release>{@link io.sphere.sdk.search.RangeStats#getMean()} is now a double.</li>
+ <li class=change-in-release>{@code RangeStats#getMean()} is now a double.</li>
  <li class=change-in-release>{@link io.sphere.sdk.http.HttpHeaders} allows reoccurring headers.</li>
  <li class=change-in-release>Use of a new toString style, from <pre>io.sphere.sdk.client.HttpRequestIntent@7308a939[httpMethod=POST,path=/categories,headers={},body=Optional[io.sphere.sdk.http.StringHttpRequestBody@216ec9be[body={invalidJson :)]]]</pre> to <pre>HttpRequestIntent[httpMethod=POST,path=/categories,headers={},body=Optional[StringHttpRequestBody[body={invalidJson :)]]]</pre></li>
  <li class=fixed-in-release>{@link io.sphere.sdk.client.ErrorResponseException#getMessage()} now returns also the project debug info.</li>

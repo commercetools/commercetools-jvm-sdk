@@ -24,7 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Predicate;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
@@ -40,7 +39,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static final String EVIL_CHARACTER_WORD = "öóßàç";
-    private static final RangeStats<BigDecimal> DEFAULT_RANGE_STATS = RangeStats.of(Optional.of(new BigDecimal("0")), Optional.empty(), 6, new BigDecimal("36"), new BigDecimal("46"), new BigDecimal("246"), 41D);
 
     private static Product product1;
     private static Product product2;
@@ -243,7 +241,14 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public void rangeFacetsAreParsed() throws Exception {
         final RangeFacetExpression<ProductProjection, BigDecimal> facet = ProductProjectionSearch.model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).facetOf().greaterThanOrEqualTo(ZERO);
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.of(STAGED).plusFacet(facet));
-        assertThat(result.getRangeFacetResult(facet).get().getRanges()).isEqualTo(asList(DEFAULT_RANGE_STATS));
+        final RangeStats<BigDecimal> rangeStats = result.getRangeFacetResult(facet).get().getRanges().get(0);
+        assertThat(rangeStats.getLowerEndpoint().get()).isEqualByComparingTo(BigDecimal.ZERO);
+        assertThat(rangeStats.getUpperEndpoint()).isEmpty();
+        assertThat(rangeStats.getCount()).isEqualTo(6L);
+        assertThat(rangeStats.getMin()).isEqualByComparingTo(valueOf(36));
+        assertThat(rangeStats.getMax()).isEqualByComparingTo(valueOf(46));
+        assertThat(rangeStats.getSum()).isEqualByComparingTo(valueOf(246));
+        assertThat(rangeStats.getMean()).isEqualTo(41.0);
     }
 
     @Test
@@ -269,7 +274,14 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final RangeFacetExpression<ProductProjection, BigDecimal> facet = ProductProjectionSearch.model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).facetOf().withAlias(alias).greaterThanOrEqualTo(ZERO);
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.of(STAGED).plusFacet(facet));
         assertThat(facet.resultPath()).isEqualTo(alias);
-        assertThat(result.getRangeFacetResult(facet).get().getRanges()).isEqualTo(asList(DEFAULT_RANGE_STATS));
+        final RangeStats<BigDecimal> rangeStats = result.getRangeFacetResult(facet).get().getRanges().get(0);
+        assertThat(rangeStats.getLowerEndpoint().get()).isEqualByComparingTo(BigDecimal.ZERO);
+        assertThat(rangeStats.getUpperEndpoint()).isEmpty();
+        assertThat(rangeStats.getCount()).isEqualTo(6L);
+        assertThat(rangeStats.getMin()).isEqualByComparingTo(valueOf(36));
+        assertThat(rangeStats.getMax()).isEqualByComparingTo(valueOf(46));
+        assertThat(rangeStats.getSum()).isEqualByComparingTo(valueOf(246));
+        assertThat(rangeStats.getMean()).isEqualTo(41.0);
     }
 
     @Test

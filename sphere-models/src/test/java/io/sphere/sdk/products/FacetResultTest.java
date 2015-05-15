@@ -6,8 +6,9 @@ import io.sphere.sdk.json.JsonUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Optional;
+import java.math.BigDecimal;
 
+import static java.math.BigDecimal.valueOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FacetResultTest {
@@ -32,10 +33,16 @@ public class FacetResultTest {
 
     @Test
     public void parsesRangeFacetResults() throws Exception {
-        final RangeFacetResult<Integer> rangeFacet = rangeFacet();
+        final RangeFacetResult<BigDecimal> rangeFacet = rangeFacet();
         assertThat(rangeFacet.getRanges()).hasSize(2);
-        final RangeStats<Integer> stats = RangeStats.of(Optional.of(5001), Optional.empty(), 1799, 5100, 590000, 92868378, 51622.222345747636);
-        assertThat(rangeFacet.getRanges().get(1)).isEqualTo(stats);
+        final RangeStats<BigDecimal> rangeStats = rangeFacet.getRanges().get(1);
+        assertThat(rangeStats.getLowerEndpoint().get()).isEqualByComparingTo(valueOf(5001));
+        assertThat(rangeStats.getUpperEndpoint()).isEmpty();
+        assertThat(rangeStats.getCount()).isEqualTo(1799L);
+        assertThat(rangeStats.getMin()).isEqualByComparingTo(valueOf(5100));
+        assertThat(rangeStats.getMax()).isEqualByComparingTo(valueOf(590000));
+        assertThat(rangeStats.getSum()).isEqualByComparingTo(valueOf(92868378));
+        assertThat(rangeStats.getMean()).isEqualTo(51622.222345747636);
     }
 
     @SuppressWarnings("unchecked")
@@ -44,7 +51,7 @@ public class FacetResultTest {
     }
 
     @SuppressWarnings("unchecked")
-    private RangeFacetResult<Integer> rangeFacet() {
+    private RangeFacetResult<BigDecimal> rangeFacet() {
         return (RangeFacetResult) pagedSearchResult.getFacetsResults().get(RANGE_FACET_KEY);
     }
 }
