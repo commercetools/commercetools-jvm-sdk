@@ -3,20 +3,17 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
-import io.sphere.sdk.products.commands.ProductDeleteCommand;
-import io.sphere.sdk.products.queries.ProductProjectionQuery;
+import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
-import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
-import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.search.*;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.RetryIntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
@@ -24,13 +21,14 @@ import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
-import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
-import static io.sphere.sdk.test.SphereTestUtils.GERMAN;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.math.BigDecimal.*;
@@ -50,31 +48,40 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static ProductType evilProductType;
 
     public static final String TEST_CLASS_NAME = ProductProjectionSearchIntegrationTest.class.getSimpleName();
+    private static final String EVIL_PRODUCT_TYPE_NAME = "Evil" + TEST_CLASS_NAME;
+    private static final String SKU_A = EVIL_PRODUCT_TYPE_NAME + "-skuA";
+    private static final String SKU_B = EVIL_PRODUCT_TYPE_NAME + "-skuB";
+    private static final String PRODUCT_TYPE_NAME = TEST_CLASS_NAME;
+    private static final String SKU1 = PRODUCT_TYPE_NAME + "-sku1";
+    private static final String SKU2 = PRODUCT_TYPE_NAME + "-sku2";
+    private static final String SKU3 = PRODUCT_TYPE_NAME + "-sku3";
     public static final String ATTR_NAME_COLOR = ("Color" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
     public static final String ATTR_NAME_SIZE = ("Size" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
     public static final String ATTR_NAME_EVIL = ("Evil" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
 
     @Rule
-    public RetryIntegrationTest retry = new RetryIntegrationTest(10, 1000, LoggerFactory.getLogger(this.getClass()));
+    public RetryIntegrationTest retry = new RetryIntegrationTest(10, 0, LoggerFactory.getLogger(this.getClass()));
 
     @BeforeClass
     public static void setupProducts() {
-        removeProducts();
-        setupTestProducts();
-        setupEvilTestProducts();
-    }
+        productType = execute(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head()
+                .orElseGet(() -> createProductType());
 
-    @AfterClass
-    public static void removeProducts() {
-        removeProductTypeAndItsProducts(productType);
-        removeProductTypeAndItsProducts(evilProductType);
-        product1 = null;
-        product2 = null;
-        product3 = null;
-        evilProduct1 = null;
-        evilProduct2 = null;
-        productType = null;
-        evilProductType = null;
+        evilProductType = execute(ProductTypeQuery.of().byName(EVIL_PRODUCT_TYPE_NAME)).head()
+                .orElseGet(() -> createEvilProductType());
+
+        final Query<Product> query = ProductQuery.of()
+                .withPredicate(ProductQuery.model().masterData().staged().masterVariant().sku().isOneOf(SKU1, SKU2, SKU3, SKU_A, SKU_B));
+        final List<Product> products = execute(query).getResults();
+
+        final Function<String, Optional<Product>> findBySku =
+                sku -> products.stream().filter(p -> sku.equals(p.getMasterData().getStaged().getMasterVariant().getSku().orElse("JUSTWRONG"))).findFirst();
+
+        product1 = findBySku.apply(SKU1).orElseGet(() -> createTestProduct(productType, "Schuh", "shoe", "blue", 38, 46, SKU1));
+        product2 = findBySku.apply(SKU2).orElseGet(() -> createTestProduct(productType, "Hemd", "shirt", "red", 36, 44, SKU2));
+        product3 = findBySku.apply(SKU3).orElseGet(() -> createTestProduct(productType, "Kleider", "dress", "blue", 40, 42, SKU3));
+        evilProduct1 = findBySku.apply(SKU_A).orElseGet(() -> createEvilTestProduct(evilProductType, EVIL_CHARACTER_WORD, EVIL_PRODUCT_TYPE_NAME + "foo", SKU_A));
+        evilProduct2 = findBySku.apply(SKU_B).orElseGet(() -> createEvilTestProduct(evilProductType, EVIL_PRODUCT_TYPE_NAME + "bar", EVIL_CHARACTER_WORD, SKU_B));
     }
 
     @Test
@@ -331,63 +338,48 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         return execute(searchDsl.plusFilterQuery(onlyCreatedProducts));
     }
 
-    private static void setupTestProducts() {
+    private static ProductType createProductType() {
         final AttributeDefinition colorAttrDef = AttributeDefinitionBuilder
                 .of(ATTR_NAME_COLOR, LocalizedStrings.ofEnglishLocale(ATTR_NAME_COLOR), TextType.of()).isSearchable(true).build();
         final AttributeDefinition sizeAttrDef = AttributeDefinitionBuilder
                 .of(ATTR_NAME_SIZE, LocalizedStrings.ofEnglishLocale(ATTR_NAME_SIZE), NumberType.of()).isSearchable(true).build();
-        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(TEST_CLASS_NAME, "", asList(colorAttrDef, sizeAttrDef));
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(PRODUCT_TYPE_NAME, "", asList(colorAttrDef, sizeAttrDef));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
-        productType = execute(productTypeCreateCommand);
-        product1 = createTestProduct(productType, "Schuh", "shoe", "blue", 38, 46);
-        product2 = createTestProduct(productType, "Hemd", "shirt", "red", 36, 44);
-        product3 = createTestProduct(productType, "Kleider", "dress", "blue", 40, 42);
-
+        return execute(productTypeCreateCommand);
     }
 
-    private static void setupEvilTestProducts() {
+    private static ProductType createEvilProductType() {
         final AttributeDefinition evilAttrDef = AttributeDefinitionBuilder
                 .of(ATTR_NAME_EVIL, LocalizedStrings.ofEnglishLocale(ATTR_NAME_EVIL), TextType.of()).isSearchable(true).build();
-        final ProductTypeDraft evilProductTypeDraft = ProductTypeDraft.of("Evil" + TEST_CLASS_NAME, "", asList(evilAttrDef));
+        final ProductTypeDraft evilProductTypeDraft = ProductTypeDraft.of(EVIL_PRODUCT_TYPE_NAME, "", asList(evilAttrDef));
         final ProductTypeCreateCommand evilProductTypeCreateCommand = ProductTypeCreateCommand.of(evilProductTypeDraft);
-        evilProductType = execute(evilProductTypeCreateCommand);
-        evilProduct1 = createEvilTestProduct(evilProductType, EVIL_CHARACTER_WORD, "foo");
-        evilProduct2 = createEvilTestProduct(evilProductType, "bar", EVIL_CHARACTER_WORD);
-
+        return execute(evilProductTypeCreateCommand);
     }
 
     private static Product createTestProduct(final ProductType productType, final String germanName, final String englishName,
-                                             final String color, final int size1, final int size2) {
+                                             final String color, final int size1, final int size2, final String sku) {
         final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName, ENGLISH, englishName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .attributes(Attribute.of(ATTR_NAME_SIZE, size1), Attribute.of(ATTR_NAME_COLOR, color))
-                .price(Price.of(new BigDecimal("23.45"), EUR)).build();
+                .price(Price.of(new BigDecimal("23.45"), EUR))
+                .sku(sku)
+                .build();
         final ProductVariantDraft variant = ProductVariantDraftBuilder.of()
                 .attributes(Attribute.of(ATTR_NAME_SIZE, size2))
-                .price(Price.of(new BigDecimal("27.45"), EUR)).build();
+                .price(Price.of(new BigDecimal("27.45"), EUR))
+                .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugified(), masterVariant)
                 .variants(asList(variant)).build();
         return execute(ProductCreateCommand.of(productDraft));
     }
 
-    private static Product createEvilTestProduct(final ProductType productType, final String germanName, final String evilValue) {
+    private static Product createEvilTestProduct(final ProductType productType, final String germanName, final String evilValue, final String sku) {
         final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
-                .attributes(Attribute.of(ATTR_NAME_EVIL, evilValue)).build();
+                .attributes(Attribute.of(ATTR_NAME_EVIL, evilValue))
+                .sku(sku)
+                .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugified(), masterVariant).build();
         return execute(ProductCreateCommand.of(productDraft));
-    }
-
-    private static void removeProductTypeAndItsProducts(final ProductType productType) {
-        if (productType != null) {
-            final QueryDsl<ProductType> request = ProductTypeQuery.of().byName(productType.getName());
-            List<ProductType> productTypes = execute(request).getResults();
-            if (!productTypes.isEmpty()) {
-                final List<ProductProjection> products = execute(ProductProjectionQuery.of(STAGED)
-                        .withPredicate(ProductProjectionQuery.model().productType().isAnyOf(productTypes))).getResults();
-                products.forEach(p -> execute(ProductDeleteCommand.of(p.toProductVersioned())));
-                productTypes.forEach(p -> execute(ProductTypeDeleteCommand.of(p)));
-            }
-        }
     }
 }

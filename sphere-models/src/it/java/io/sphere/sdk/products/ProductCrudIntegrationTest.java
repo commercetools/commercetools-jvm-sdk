@@ -66,7 +66,7 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
     }
 
     protected String extractName(final Product instance) {
-        return instance.getMasterData().getStaged().getName().get(ENGLISH).get();
+        return instance.getMasterData().getStaged().getName().get(ENGLISH).orElse("NOTPRESENTNAME");
     }
 
     protected SphereRequest<PagedQueryResult<Product>> queryRequestForQueryAll() {
