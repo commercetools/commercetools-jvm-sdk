@@ -27,7 +27,7 @@ public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<
     }
 
     @SuppressWarnings("unchecked")
-    public QueryPredicate<T> isOneOf(final V arg0, final V ... args) {
+    public QueryPredicate<T> isIn(final V arg0, final V ... args) {
         return isOneOf(listOf(arg0, args));
     }
 

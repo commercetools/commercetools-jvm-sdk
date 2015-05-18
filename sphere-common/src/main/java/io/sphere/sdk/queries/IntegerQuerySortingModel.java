@@ -58,8 +58,8 @@ public class IntegerQuerySortingModel<T> extends IntegerLikeQuerySortingModel<T,
     }
 
     @Override
-    public QueryPredicate<T> isOneOf(final Integer arg0, final Integer... args) {
-        return super.isOneOf(arg0, args);
+    public QueryPredicate<T> isIn(final Integer arg0, final Integer... args) {
+        return super.isIn(arg0, args);
     }
 
     @Override

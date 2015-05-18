@@ -59,8 +59,8 @@ public class LongQuerySortingModel<T> extends IntegerLikeQuerySortingModel<T, Lo
 
     @SuppressWarnings("unchecked")
     @Override
-    public QueryPredicate<T> isOneOf(final Long arg0, final Long... args) {
-        return super.isOneOf(arg0, args);
+    public QueryPredicate<T> isIn(final Long arg0, final Long... args) {
+        return super.isIn(arg0, args);
     }
 
     @Override
