@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -199,7 +199,7 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html#isLessThanOrEquals-V-">isLessThanOrEquals</a></span>(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html#isLessThanOrEqualTo-V-">isLessThanOrEqualTo</a></span>(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;</code></td>
@@ -220,13 +220,9 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html#isOneOf-java.lang.Iterable-">isOneOf</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;&nbsp;args)</code>&nbsp;</td>
-</tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html#isPresent--">isPresent</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries">QuerySortDirection</a>&nbsp;sortDirection)</code>&nbsp;</td>
 </tr>
@@ -331,15 +327,6 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
                               <a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>...&nbsp;args)</pre>
 </li>
 </ul>
-<a name="isOneOf-java.lang.Iterable-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isOneOf</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isOneOf(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;&nbsp;args)</pre>
-</li>
-</ul>
 <a name="isIn-java.lang.Iterable-">
 <!--   -->
 </a>
@@ -371,15 +358,15 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isLessThan(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;value)</pre>
 </li>
 </ul>
-<a name="isLessThanOrEquals-java.lang.Object-">
+<a name="isLessThanOrEqualTo-java.lang.Object-">
 <!--   -->
-</a><a name="isLessThanOrEquals-V-">
+</a><a name="isLessThanOrEqualTo-V-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>isLessThanOrEquals</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isLessThanOrEquals(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;value)</pre>
+<h4>isLessThanOrEqualTo</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isLessThanOrEqualTo(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;value)</pre>
 </li>
 </ul>
 <a name="isGreaterThanOrEqualTo-java.lang.Object-">
