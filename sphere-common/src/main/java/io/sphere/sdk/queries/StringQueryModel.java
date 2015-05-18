@@ -13,7 +13,7 @@ public interface StringQueryModel<T> {
 
     QueryPredicate<T> isLessThan(final String value);
 
-    QueryPredicate<T> isLessThanOrEquals(final String value);
+    QueryPredicate<T> isLessThanOrEqualTo(final String value);
 
     QueryPredicate<T> isGreaterThanOrEqualTo(final String value);
 

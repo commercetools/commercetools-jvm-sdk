@@ -31,8 +31,8 @@ public class CategoryPredicatesTest extends IntegrationTest {
     }
 
     @Test
-    public void isLessThanOrEqualsComparisonPredicate() throws Exception {
-        final QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isLessThanOrEquals("10");
+    public void isLessThanOrEqualToComparisonPredicate() throws Exception {
+        final QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(Locale.ENGLISH).isLessThanOrEqualTo("10");
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH).get()).collect(toList());
             assertThat(names).contains("1", "10");

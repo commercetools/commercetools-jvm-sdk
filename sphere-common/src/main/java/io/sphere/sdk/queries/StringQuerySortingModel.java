@@ -57,8 +57,8 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Que
     }
 
     @Override
-    public QueryPredicate<T> isLessThanOrEquals(final String value) {
-        return new IsLessThanOrEqualsQueryPredicate<>(this, value);
+    public QueryPredicate<T> isLessThanOrEqualTo(final String value) {
+        return new IsLessThanOrEqualToQueryPredicate<>(this, value);
     }
 
     @Override

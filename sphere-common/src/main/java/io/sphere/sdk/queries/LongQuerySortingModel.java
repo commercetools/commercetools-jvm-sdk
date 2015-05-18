@@ -28,8 +28,8 @@ public class LongQuerySortingModel<T> extends IntegerLikeQuerySortingModel<T, Lo
     }
 
     @Override
-    public QueryPredicate<T> isLessThanOrEquals(final Long value) {
-        return super.isLessThanOrEquals(value);
+    public QueryPredicate<T> isLessThanOrEqualTo(final Long value) {
+        return super.isLessThanOrEqualTo(value);
     }
 
     @Override
