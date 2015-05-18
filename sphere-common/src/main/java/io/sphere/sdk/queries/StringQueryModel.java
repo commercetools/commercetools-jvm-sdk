@@ -17,7 +17,7 @@ public interface StringQueryModel<T> {
 
     QueryPredicate<T> isLessThanOrEquals(final String value);
 
-    QueryPredicate<T> isGreaterThanOrEquals(final String value);
+    QueryPredicate<T> isGreaterThanOrEqualTo(final String value);
 
     QueryPredicate<T> isNotIn(final Iterable<String> args);
 
