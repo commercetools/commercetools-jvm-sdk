@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
+var methods = {"i0":10,"i1":10,"i2":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -92,26 +92,57 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.cartdiscounts</div>
-<h2 title="Interface RelativeCartDiscountValue" class="title">Interface RelativeCartDiscountValue</h2>
+<h2 title="Class RelativeCartDiscountValue" class="title">Class RelativeCartDiscountValue</h2>
 </div>
 <div class="contentContainer">
+<ul class="inheritance">
+<li>java.lang.Object</li>
+<li>
+<ul class="inheritance">
+<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
+<li>
+<ul class="inheritance">
+<li>io.sphere.sdk.cartdiscounts.RelativeCartDiscountValue</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
 <dl>
-<dt>All Superinterfaces:</dt>
+<dt>All Implemented Interfaces:</dt>
 <dd><a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountValue.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscountValue</a></dd>
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">RelativeCartDiscountValue</span>
-extends <a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountValue.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscountValue</a></pre>
+<pre>public class <span class="typeNameLabel">RelativeCartDiscountValue</span>
+extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
+implements <a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountValue.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscountValue</a></pre>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/RelativeCartDiscountValue.html#RelativeCartDiscountValue-int-">RelativeCartDiscountValue</a></span>(int&nbsp;permyriad)</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -119,20 +150,38 @@ extends <a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountValue.html"
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>default int</code></td>
+<td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/RelativeCartDiscountValue.html#getBasisPoint--">getBasisPoint</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/RelativeCartDiscountValue.html#getPermyriad--">getPermyriad</a></span>()</code>&nbsp;</td>
 </tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/cartdiscounts/RelativeCartDiscountValue.html" title="class in io.sphere.sdk.cartdiscounts">RelativeCartDiscountValue</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/cartdiscounts/RelativeCartDiscountValue.html#of-int-">of</a></span>(int&nbsp;permyriad)</code>&nbsp;</td>
+</tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
+<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
+<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
+</ul>
 </li>
 </ul>
 </li>
@@ -141,6 +190,23 @@ extends <a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountValue.html"
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="RelativeCartDiscountValue-int-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>RelativeCartDiscountValue</h4>
+<pre>public&nbsp;RelativeCartDiscountValue(int&nbsp;permyriad)</pre>
+</li>
+</ul>
+</li>
+</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
@@ -153,16 +219,25 @@ extends <a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountValue.html"
 <ul class="blockList">
 <li class="blockList">
 <h4>getPermyriad</h4>
-<pre>int&nbsp;getPermyriad()</pre>
+<pre>public&nbsp;int&nbsp;getPermyriad()</pre>
 </li>
 </ul>
 <a name="getBasisPoint--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getBasisPoint</h4>
-<pre>default&nbsp;int&nbsp;getBasisPoint()</pre>
+<pre>public&nbsp;int&nbsp;getBasisPoint()</pre>
+</li>
+</ul>
+<a name="of-int-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>of</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/cartdiscounts/RelativeCartDiscountValue.html" title="class in io.sphere.sdk.cartdiscounts">RelativeCartDiscountValue</a>&nbsp;of(int&nbsp;permyriad)</pre>
 </li>
 </ul>
 </li>
@@ -219,13 +294,13 @@ extends <a href="../../../../io/sphere/sdk/cartdiscounts/CartDiscountValue.html"
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
