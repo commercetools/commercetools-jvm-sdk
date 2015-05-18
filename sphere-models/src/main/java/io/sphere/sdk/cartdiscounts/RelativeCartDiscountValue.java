@@ -1,9 +1,25 @@
 package io.sphere.sdk.cartdiscounts;
 
-public interface RelativeCartDiscountValue extends CartDiscountValue {
-    int getPermyriad();
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.Base;
 
-    default int getBasisPoint() {
+public class RelativeCartDiscountValue extends Base implements CartDiscountValue {
+    private final int permyriad;
+
+    @JsonCreator
+    public RelativeCartDiscountValue(final int permyriad) {
+        this.permyriad = permyriad;
+    }
+
+    public int getPermyriad() {
+        return permyriad;
+    }
+
+    public int getBasisPoint() {
         return getPermyriad();
+    }
+
+    public RelativeCartDiscountValue of(final int permyriad) {
+        return new RelativeCartDiscountValue(permyriad);
     }
 }
