@@ -34,20 +34,20 @@ public class QueryDocumentationTest {
 
     public void queryByNames() {
         final QueryPredicate<Product> predicate = ProductQuery.model().masterData().current().name()
-                .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
+                .lang(ENGLISH).isIn("blue t-shirt", "blue jeans");
         final QueryDsl<Product> query = ProductQuery.of().withPredicate(predicate);
     }
 
     public void queryByNamesDesugared() {
         final QueryPredicate<Product> predicate = ProductQuery.model().masterData().current().name()
-                .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
+                .lang(ENGLISH).isIn("blue t-shirt", "blue jeans");
         final QueryDsl<Product> query = ProductQuery.of().withPredicate(predicate);
     }
 
     @Test
     public void testX() throws Exception {
         final QueryPredicate<Product> safePredicate = ProductQuery.model().masterData().current().name()
-                .lang(ENGLISH).isOneOf("blue t-shirt", "blue jeans");
+                .lang(ENGLISH).isIn("blue t-shirt", "blue jeans");
         final QueryPredicate<Product> unsafePredicate =
                 QueryPredicate.of("masterData(current(name(en in (\"blue t-shirt\", \"blue jeans\"))))");
         assertThat(unsafePredicate).isEqualTo(safePredicate);

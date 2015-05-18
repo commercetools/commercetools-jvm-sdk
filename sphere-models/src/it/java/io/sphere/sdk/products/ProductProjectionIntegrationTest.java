@@ -64,7 +64,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     @Test
     public void queryById() throws Exception {
         with2products("queryById", (p1, p2) ->{
-            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicate(model().id().isOneOf(p1.getId(), p2.getId()));
+            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicate(model().id().isIn(p1.getId(), p2.getId()));
             assertThat(ids(execute(query1))).containsOnly(p1.getId(), p2.getId());
 
             final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED).withPredicate(model().id().is(p1.getId()));

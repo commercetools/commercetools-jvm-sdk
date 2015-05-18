@@ -5,9 +5,7 @@ public interface StringQueryModel<T> {
 
     QueryPredicate<T> isNot(String s);
 
-    QueryPredicate<T> isOneOf(String arg0, String... args);
-
-    QueryPredicate<T> isOneOf(Iterable<String> args);
+    QueryPredicate<T> isIn(String arg0, String... args);
 
     QueryPredicate<T> isIn(final Iterable<String> args);
 
