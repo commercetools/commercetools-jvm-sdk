@@ -28,15 +28,11 @@ public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<
 
     @SuppressWarnings("unchecked")
     public QueryPredicate<T> isIn(final V arg0, final V ... args) {
-        return isOneOf(listOf(arg0, args));
-    }
-
-    public QueryPredicate<T> isOneOf(final Iterable<V> args) {
-        return new IsInQueryPredicate<>(this, args);
+        return isIn(listOf(arg0, args));
     }
 
     public QueryPredicate<T> isIn(final Iterable<V> args) {
-        return isOneOf(args);
+        return new IsInQueryPredicate<>(this, args);
     }
 
     public QueryPredicate<T> isGreaterThan(final V value) {

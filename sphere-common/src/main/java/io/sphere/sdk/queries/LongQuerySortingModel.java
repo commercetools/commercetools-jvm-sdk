@@ -23,11 +23,6 @@ public class LongQuerySortingModel<T> extends IntegerLikeQuerySortingModel<T, Lo
     }
 
     @Override
-    public QueryPredicate<T> isIn(final Iterable<Long> args) {
-        return super.isIn(args);
-    }
-
-    @Override
     public QueryPredicate<T> isLessThan(final Long value) {
         return super.isLessThan(value);
     }
@@ -64,8 +59,8 @@ public class LongQuerySortingModel<T> extends IntegerLikeQuerySortingModel<T, Lo
     }
 
     @Override
-    public QueryPredicate<T> isOneOf(final Iterable<Long> args) {
-        return super.isOneOf(args);
+    public QueryPredicate<T> isIn(final Iterable<Long> args) {
+        return super.isIn(args);
     }
 
     @Override
