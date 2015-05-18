@@ -15,6 +15,7 @@ libraryDependencies in ThisBuild ++=
   "com.github.slugify" % "slugify" % "2.1.2" ::
   "org.javamoney" % "moneta" % "1.0-RC3" ::
   "org.slf4j" % "slf4j-api" % "1.7.12" ::
+  "com.google.code.findbugs" % "jsr305" % "3.0.0" ::
   //test dependencies
   junitDep % "test,it" ::
   junitInterface % "test,it" ::
