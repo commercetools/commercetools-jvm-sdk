@@ -27,16 +27,12 @@ public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<
     }
 
     @SuppressWarnings("unchecked")
-    public QueryPredicate<T> isOneOf(final V arg0, final V ... args) {
-        return isOneOf(listOf(arg0, args));
-    }
-
-    public QueryPredicate<T> isOneOf(final Iterable<V> args) {
-        return new IsInQueryPredicate<>(this, args);
+    public QueryPredicate<T> isIn(final V arg0, final V ... args) {
+        return isIn(listOf(arg0, args));
     }
 
     public QueryPredicate<T> isIn(final Iterable<V> args) {
-        return isOneOf(args);
+        return new IsInQueryPredicate<>(this, args);
     }
 
     public QueryPredicate<T> isGreaterThan(final V value) {
@@ -47,12 +43,12 @@ public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<
         return new IsLessThanQueryPredicate<>(this, value);
     }
 
-    public QueryPredicate<T> isLessThanOrEquals(final V value) {
-        return new IsLessThanOrEqualsQueryPredicate<>(this, value);
+    public QueryPredicate<T> isLessThanOrEqualTo(final V value) {
+        return new IsLessThanOrEqualToQueryPredicate<>(this, value);
     }
 
-    public QueryPredicate<T> isGreaterThanOrEquals(final V value) {
-        return new IsGreaterThanOrEqualsQueryPredicate<>(this, value);
+    public QueryPredicate<T> isGreaterThanOrEqualTo(final V value) {
+        return new IsGreaterThanOrEqualToQueryPredicate<>(this, value);
     }
 
     public QueryPredicate<T> isNotIn(final Iterable<V> args) {

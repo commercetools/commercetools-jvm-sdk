@@ -37,18 +37,13 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Que
     }
 
     @Override
-    public QueryPredicate<T> isOneOf(final String arg0, final String ... args) {
-        return isOneOf(listOf(arg0, args));
-    }
-
-    @Override
-    public QueryPredicate<T> isOneOf(final Iterable<String> args) {
-        return new IsInQueryPredicate<>(this, escape(args));
+    public QueryPredicate<T> isIn(final String arg0, final String... args) {
+        return isIn(listOf(arg0, args));
     }
 
     @Override
     public QueryPredicate<T> isIn(final Iterable<String> args) {
-        return isOneOf(args);
+        return new IsInQueryPredicate<>(this, escape(args));
     }
 
     @Override
@@ -62,13 +57,13 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Que
     }
 
     @Override
-    public QueryPredicate<T> isLessThanOrEquals(final String value) {
-        return new IsLessThanOrEqualsQueryPredicate<>(this, value);
+    public QueryPredicate<T> isLessThanOrEqualTo(final String value) {
+        return new IsLessThanOrEqualToQueryPredicate<>(this, value);
     }
 
     @Override
-    public QueryPredicate<T> isGreaterThanOrEquals(final String value) {
-        return new IsGreaterThanOrEqualsQueryPredicate<>(this, value);
+    public QueryPredicate<T> isGreaterThanOrEqualTo(final String value) {
+        return new IsGreaterThanOrEqualToQueryPredicate<>(this, value);
     }
 
     @Override

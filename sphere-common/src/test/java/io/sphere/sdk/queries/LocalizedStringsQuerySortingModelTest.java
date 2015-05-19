@@ -16,8 +16,8 @@ public class LocalizedStringsQuerySortingModelTest {
     }
 
     @Test
-    public void isOneOf() throws Exception {
-        assertThat(model.lang(Locale.ENGLISH).isOneOf("foo", "bar").toSphereQuery()).isEqualTo("thepath(en in (\"foo\", \"bar\"))");
+    public void isIn() throws Exception {
+        assertThat(model.lang(Locale.ENGLISH).isIn("foo", "bar").toSphereQuery()).isEqualTo("thepath(en in (\"foo\", \"bar\"))");
     }
 
     @Test

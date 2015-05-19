@@ -5,9 +5,7 @@ public interface StringQueryModel<T> {
 
     QueryPredicate<T> isNot(String s);
 
-    QueryPredicate<T> isOneOf(String arg0, String... args);
-
-    QueryPredicate<T> isOneOf(Iterable<String> args);
+    QueryPredicate<T> isIn(String arg0, String... args);
 
     QueryPredicate<T> isIn(final Iterable<String> args);
 
@@ -15,9 +13,9 @@ public interface StringQueryModel<T> {
 
     QueryPredicate<T> isLessThan(final String value);
 
-    QueryPredicate<T> isLessThanOrEquals(final String value);
+    QueryPredicate<T> isLessThanOrEqualTo(final String value);
 
-    QueryPredicate<T> isGreaterThanOrEquals(final String value);
+    QueryPredicate<T> isGreaterThanOrEqualTo(final String value);
 
     QueryPredicate<T> isNotIn(final Iterable<String> args);
 

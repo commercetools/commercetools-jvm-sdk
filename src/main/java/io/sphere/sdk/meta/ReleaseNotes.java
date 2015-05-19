@@ -276,7 +276,7 @@ import java.util.function.BiFunction;
  <li>Move {@link io.sphere.sdk.models.AddressBuilder} out of the {@link io.sphere.sdk.models.Address} class.</li>
  <li>Performed a lot of renamings like the {@code requests} package to {@code http}</li>
  <li>Moved commands and queries to own packages for easier discovery.</li>
- <li>Introduced new predicates for inequality like {@link io.sphere.sdk.queries.StringQueryModel#isGreaterThanOrEquals(String)},
+ <li>Introduced new predicates for inequality like {@link io.sphere.sdk.queries.StringQueryModel#isGreaterThanOrEqualTo(String)},
  {@link io.sphere.sdk.queries.StringQueryModel#isNot(String)},
  {@link io.sphere.sdk.queries.StringQueryModel#isNotIn(String, String...)} or {@link io.sphere.sdk.queries.StringQueryModel#isNotPresent()}.</li>
  <li>Introduced an unsafe way to create predicates from strings with {@link QueryPredicate#of(String)}.</li>

@@ -71,7 +71,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .orElseGet(() -> createEvilProductType());
 
         final Query<Product> query = ProductQuery.of()
-                .withPredicate(ProductQuery.model().masterData().staged().masterVariant().sku().isOneOf(SKU1, SKU2, SKU3, SKU_A, SKU_B));
+                .withPredicate(ProductQuery.model().masterData().staged().masterVariant().sku().isIn(SKU1, SKU2, SKU3, SKU_A, SKU_B));
         final List<Product> products = execute(query).getResults();
 
         final Function<String, Optional<Product>> findBySku =
