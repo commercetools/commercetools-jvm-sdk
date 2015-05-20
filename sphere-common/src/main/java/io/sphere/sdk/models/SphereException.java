@@ -1,6 +1,7 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.meta.BuildInfo;
@@ -22,7 +23,7 @@ public class SphereException extends RuntimeException {
     @JsonIgnore
     protected Optional<HttpResponse> httpResponse = Optional.empty();
     private Optional<String> projectKey = Optional.empty();
-    private Optional<String> httpThing = Optional.empty();
+    private Optional<String> httpRequest = Optional.empty();
     private List<String> additionalNotes = new LinkedList<>();
 
     public SphereException(final String message, final Throwable cause) {
@@ -62,6 +63,11 @@ public class SphereException extends RuntimeException {
 
     public void setSphereRequest(final SphereRequest<?> sphereRequest) {
         this.sphereRequest = Optional.of(sphereRequest);
+        setHttpRequest(sphereRequest.httpRequestIntent().toString());
+    }
+
+    public void setHttpRequest(final String httpRequest) {
+        this.httpRequest = Optional.of(httpRequest);
     }
 
     public void addNote(final String note) {
@@ -71,7 +77,6 @@ public class SphereException extends RuntimeException {
     @Override
     public final String getMessage() {
         StringBuilder builder = new StringBuilder();
-        final String httpRequest = getSphereRequest().map(x -> x.httpRequestIntent()).map(Object::toString).orElse("<unknown>");
         return builder
                 .append("SDK: ").append(BuildInfo.version()).append("\n")
                 .append("project: ").append(getProjectKey().orElse("<unknown>")).append("\n")
@@ -81,7 +86,7 @@ public class SphereException extends RuntimeException {
                 .append("date: ").append(new Date()).append("\n")
                 .append("sphere request: ").append(getSphereRequest().map(Object::toString).orElse("<unknown>")).append("\n")
                 //duplicated in case SphereRequest does not implement a proper to String
-                .append("http request: ").append(httpRequest).append("\n")
+                .append("http request: ").append(httpRequest.orElse("<unknown>")).append("\n")
                 .append("http response: ").append(getHttpResponse().map(Object::toString).orElse("<unknown>")).append("\n")
                 .append(Optional.ofNullable(super.getMessage()).map(s -> "detailMessage: " + s + "\n").orElse(""))
                 .append("additional notes: ").append(additionalNotes).append("\n")

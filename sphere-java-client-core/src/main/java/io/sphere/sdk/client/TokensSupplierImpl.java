@@ -6,7 +6,6 @@ import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.JsonUtils;
 import io.sphere.sdk.utils.MapUtils;
 
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 import java.util.Optional;
@@ -44,19 +43,19 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
     @Override
     public CompletionStage<Tokens> get() {
         AUTH_LOGGER.debug(() -> "Fetching new token.");
-        final CompletionStage<Tokens> result = httpClient.execute(newRequest()).thenApply(this::parseResponse);
-        logTokenResult(result);
+        final HttpRequest httpRequest = newRequest();
+        final CompletionStage<HttpResponse> httpResponseStage = httpClient.execute(httpRequest);
+        final CompletionStage<Tokens> result = httpResponseStage.thenApply((response) -> parseResponse(response, httpRequest));
+        result.whenCompleteAsync(this::logTokenResult);
         return result;
     }
 
-    private void logTokenResult(final CompletionStage<Tokens> result) {
-        result.whenComplete((tokens, e) -> {
-            if (tokens != null) {
-                AUTH_LOGGER.debug(() -> "Successfully fetched token that expires in " + tokens.getExpiresIn().map(x -> x.toString()).orElse("an unknown time") + ".");
-            } else {
-                AUTH_LOGGER.error(() -> "Failed to fetch token." + tokens.getExpiresIn(), e);
-            }
-        });
+    private void logTokenResult(final Tokens nullableTokens, final Throwable nullableThrowable) {
+        if (nullableTokens != null) {
+            AUTH_LOGGER.debug(() -> "Successfully fetched token that expires in " + nullableTokens.getExpiresIn().map(x -> x.toString()).orElse("an unknown time") + ".");
+        } else {
+            AUTH_LOGGER.error(() -> "Failed to fetch token.", nullableThrowable);
+        }
     }
 
     @Override
@@ -80,23 +79,25 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
     }
 
     /** Parses Tokens from a response from the backend authorization service.
-     *  @param response Response from the authorization service.
+     * @param httpResponse Response from the authorization service.
+     * @param httpRequest the request which belongs to the response
      */
-    private Tokens parseResponse(final HttpResponse response) {
-        if (response.getStatusCode() == 401 && response.getResponseBody().isPresent()) {
-            UnauthorizedException authorizationException = new UnauthorizedException(response.toString());
+    private Tokens parseResponse(final HttpResponse httpResponse, final HttpRequest httpRequest) {
+        if (httpResponse.getStatusCode() == 401 && httpResponse.getResponseBody().isPresent()) {
+            UnauthorizedException authorizationException = new UnauthorizedException(httpResponse.toString());
             try {
-                final JsonNode jsonNode = JsonUtils.readTree(response.getResponseBody().get());
+                final JsonNode jsonNode = JsonUtils.readTree(httpResponse.getResponseBody().get());
                 if (jsonNode.get("error").asText().equals("invalid_client")) {
                     authorizationException = new InvalidClientCredentialsException(config);
                 }
             } catch (final JsonException e) {
-                authorizationException = new UnauthorizedException(response.toString(), e);
+                authorizationException = new UnauthorizedException(httpResponse.toString(), e);
             }
             authorizationException.setProjectKey(config.getProjectKey());
-            authorizationException.setUnderlyingHttpResponse(response);
+            authorizationException.setUnderlyingHttpResponse(httpResponse);
+            authorizationException.setHttpRequest(httpRequest.toString());
             throw authorizationException;
         }
-        return JsonUtils.readObject(Tokens.typeReference(), response.getResponseBody().get());
+        return JsonUtils.readObject(Tokens.typeReference(), httpResponse.getResponseBody().get());
     }
 }

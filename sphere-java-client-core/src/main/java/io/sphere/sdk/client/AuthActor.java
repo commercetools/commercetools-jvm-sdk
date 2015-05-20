@@ -68,11 +68,17 @@ final class AuthActor extends Actor {
 
     private void process(final FailedTokenFetchMessage m) {
         isWaitingForToken = false;
-        AUTH_LOGGER.error(() -> "Can't fetch tokens.", m.cause);
-        final long tryAgainIn = m.attempt * DEFAULT_WAIT_TIME_UNTIL_RETRY_MILLISECONDS;
-        schedule(new FetchTokenFromSphereMessage(m.attempt), tryAgainIn, MILLISECONDS);
-        if (m.attempt > 2) {
+        final boolean failReasonIsInvalidCredentials = m.cause.getCause() != null && m.cause.getCause() instanceof InvalidClientCredentialsException;
+        if (failReasonIsInvalidCredentials) {
+            AUTH_LOGGER.error(() -> "Can't fetch tokens due to invalid credentials.", m.cause);
             subscribers.forEach(subscriber -> subscriber.tell(new TokenDeliveryFailedMessage(m.cause)));
+        } else {
+            AUTH_LOGGER.error(() -> "Can't fetch tokens.", m.cause);
+            final long tryAgainIn = m.attempt * DEFAULT_WAIT_TIME_UNTIL_RETRY_MILLISECONDS;
+            schedule(new FetchTokenFromSphereMessage(m.attempt), tryAgainIn, MILLISECONDS);
+            if (m.attempt > 2) {
+                subscribers.forEach(subscriber -> subscriber.tell(new TokenDeliveryFailedMessage(m.cause)));
+            }
         }
     }
 
