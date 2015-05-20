@@ -26,6 +26,7 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     private final boolean requiresDiscountCode;
     private final List<Reference<Object>> references;
 
+    @JsonCreator
     public CartDiscountImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final String cartPredicate, final LocalizedStrings name, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean isActive, final Instant validFrom, final Instant validUntil, final boolean requiresDiscountCode, final List<Reference<Object>> references) {
         super(id, version, createdAt, lastModifiedAt);
         this.cartPredicate = cartPredicate;

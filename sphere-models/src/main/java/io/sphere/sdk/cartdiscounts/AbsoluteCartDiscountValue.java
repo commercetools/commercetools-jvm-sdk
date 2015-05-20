@@ -6,11 +6,13 @@ import io.sphere.sdk.models.Base;
 import javax.money.MonetaryAmount;
 import java.util.List;
 
+import static java.util.Arrays.asList;
+
 public class AbsoluteCartDiscountValue extends Base implements CartDiscountValue {
     private final List<MonetaryAmount> money;
 
     @JsonCreator
-    public AbsoluteCartDiscountValue(final List<MonetaryAmount> money) {
+    private AbsoluteCartDiscountValue(final List<MonetaryAmount> money) {
         this.money = money;
     }
 
@@ -18,7 +20,11 @@ public class AbsoluteCartDiscountValue extends Base implements CartDiscountValue
         return money;
     }
 
-    public AbsoluteCartDiscountValue of(final List<MonetaryAmount> money) {
+    public static AbsoluteCartDiscountValue of(final MonetaryAmount money) {
+        return of(asList(money));
+    }
+
+    public static AbsoluteCartDiscountValue of(final List<MonetaryAmount> money) {
         return new AbsoluteCartDiscountValue(money);
     }
 }

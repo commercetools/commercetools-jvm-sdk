@@ -7,7 +7,7 @@ public class RelativeCartDiscountValue extends Base implements CartDiscountValue
     private final int permyriad;
 
     @JsonCreator
-    public RelativeCartDiscountValue(final int permyriad) {
+    private RelativeCartDiscountValue(final int permyriad) {
         this.permyriad = permyriad;
     }
 
@@ -19,7 +19,7 @@ public class RelativeCartDiscountValue extends Base implements CartDiscountValue
         return getPermyriad();
     }
 
-    public RelativeCartDiscountValue of(final int permyriad) {
+    public static RelativeCartDiscountValue of(final int permyriad) {
         return new RelativeCartDiscountValue(permyriad);
     }
 }
