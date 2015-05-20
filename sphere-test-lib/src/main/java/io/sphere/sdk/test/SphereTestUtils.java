@@ -85,6 +85,10 @@ public final class SphereTestUtils {
         return "random string " + random.nextInt() + System.currentTimeMillis();
     }
 
+    public static int randomInt() {
+        return Math.abs(random.nextInt());
+    }
+
     public static float randomFloat() {
         return Math.abs(random.nextFloat());
     }
