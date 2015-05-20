@@ -12,9 +12,9 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
     private final LocalizedStrings name;
     @Nullable
     private LocalizedStrings description;
-    private final CartDiscountValue value;
+    private CartDiscountValue value;
     private final CartDiscountPredicate cartPredicate;
-    private final CartDiscountTarget target;
+    private CartDiscountTarget target;
     private final String sortOrder;
     private boolean isActive = true;
     @Nullable
@@ -42,6 +42,16 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
     
     public CartDiscountDraftBuilder description(final Optional<LocalizedStrings> description) {
         this.description = description.orElse(null);
+        return this;
+    }
+
+    public CartDiscountDraftBuilder value(final CartDiscountValue value) {
+        this.value = value;
+        return this;
+    }
+
+    public CartDiscountDraftBuilder target(final CartDiscountTarget target) {
+        this.target = target;
         return this;
     }
 

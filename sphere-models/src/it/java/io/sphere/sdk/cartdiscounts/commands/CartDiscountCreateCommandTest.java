@@ -10,7 +10,10 @@ import org.junit.Test;
 import java.time.Instant;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
+import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.newCartDiscountDraftBuilder;
 import static org.assertj.core.api.Assertions.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
@@ -33,6 +36,7 @@ public class CartDiscountCreateCommandTest extends IntegrationTest {
                 .validFrom(validFrom)
                 .validUntil(validUntil)
                 .description(description)
+                .isActive(false)
                 .build();
 
         cartDiscount = execute(CartDiscountCreateCommand.of(discountDraft));
@@ -52,5 +56,47 @@ public class CartDiscountCreateCommandTest extends IntegrationTest {
     public void tearDown() throws Exception {
         Optional.ofNullable(cartDiscount)
                 .ifPresent(cartDiscount -> execute(CartDiscountDeleteCommand.of(cartDiscount)));
+    }
+
+    @Test
+    public void absoluteCartDiscountValue() throws Exception {
+        checkCartDiscountValueSerialization(CartDiscountValue.ofAbsolute(MoneyImpl.of(10, EUR)));
+    }
+
+    @Test
+    public void relativeCartDiscountValue() throws Exception {
+        checkCartDiscountValueSerialization(CartDiscountValue.ofRelative(1234));
+    }
+
+    @Test
+    public void lineItemTarget() throws Exception {
+        checkTargetSerialization(LineItemsTarget.of("1 = 1"));
+    }
+
+    @Test
+    public void ShippingCostTarget() throws Exception {
+        checkTargetSerialization(ShippingCostTarget.of());
+    }
+
+    @Test
+    public void customLineItemTarget() throws Exception {
+        checkTargetSerialization(CustomLineItemsTarget.of("1 = 1"));
+    }
+
+
+    private void checkCartDiscountValueSerialization(final CartDiscountValue value) throws Exception {
+        checkCreation(builder -> builder.value(value), discount -> assertThat(discount.getValue()).isEqualTo(value));
+    }
+
+    private void checkTargetSerialization(final CartDiscountTarget target) throws Exception {
+        checkCreation(builder -> builder.target(target), discount -> assertThat(discount.getTarget()).isEqualTo(target));
+    }
+
+    private void checkCreation(final Function<CartDiscountDraftBuilder, CartDiscountDraftBuilder> f, final Consumer<CartDiscount> assertions) throws Exception {
+        final CartDiscountDraft draft = f.apply(newCartDiscountDraftBuilder())
+                .build();
+        final CartDiscount discount = execute(CartDiscountCreateCommand.of(draft));
+        execute(CartDiscountDeleteCommand.of(discount));
+        assertions.accept(discount);
     }
 }

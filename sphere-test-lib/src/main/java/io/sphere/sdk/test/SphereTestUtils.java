@@ -85,6 +85,10 @@ public final class SphereTestUtils {
         return "random string " + random.nextInt() + System.currentTimeMillis();
     }
 
+    public static float randomFloat() {
+        return Math.abs(random.nextFloat());
+    }
+
     public static MetaAttributes randomMetaAttributes() {
         final String metaTitle = "meta title" + randomString();
         final String metaDescription = "meta description" + randomString();
