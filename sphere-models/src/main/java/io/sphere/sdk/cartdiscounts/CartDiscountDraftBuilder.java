@@ -9,7 +9,7 @@ import java.time.Instant;
 import java.util.Optional;
 
 public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscountDraft> {
-    private final LocalizedStrings name;
+    private LocalizedStrings name;
     @Nullable
     private LocalizedStrings description;
     private CartDiscountValue value;
@@ -52,6 +52,11 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
 
     public CartDiscountDraftBuilder target(final CartDiscountTarget target) {
         this.target = target;
+        return this;
+    }
+
+    public CartDiscountDraftBuilder name(final LocalizedStrings name) {
+        this.name = name;
         return this;
     }
 
