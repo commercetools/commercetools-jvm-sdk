@@ -13,7 +13,7 @@ libraryDependencies in ThisBuild ++=
   "org.apache.commons" % "commons-lang3" % "3.4" ::
   "org.apache.commons" % "commons-io" % "1.3.2" ::
   "com.github.slugify" % "slugify" % "2.1.2" ::
-  "org.javamoney" % "moneta" % "1.0-RC3" ::
+  "org.javamoney" % "moneta" % "1.0" ::
   "org.slf4j" % "slf4j-api" % "1.7.12" ::
   //test dependencies
   junitDep % "test,it" ::

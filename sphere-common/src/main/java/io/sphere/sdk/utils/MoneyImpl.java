@@ -2,10 +2,11 @@ package io.sphere.sdk.utils;
 
 import io.sphere.sdk.models.Base;
 import org.javamoney.moneta.CurrencyUnitBuilder;
-import org.javamoney.moneta.Money;
+import org.javamoney.moneta.FastMoney;
 
 import javax.money.*;
 import java.math.BigDecimal;
+import java.util.Optional;
 
 final public class MoneyImpl extends Base implements MonetaryAmount {
     private final MonetaryAmount money;
@@ -216,22 +217,17 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
 
     @Override
     public boolean equals(final Object obj) {
-        boolean isEqual = false;
-        if (obj != null && obj instanceof MonetaryAmount) {
-            final MonetaryAmount other = (MonetaryAmount) obj;
-            final Money thisAsMoneyImpl = asMoney();
-            final String currencyCode = thisAsMoneyImpl.getCurrency().getCurrencyCode();
-            final String otherCurrencyCode = other.getCurrency().getCurrencyCode();
-            final BigDecimal numberStripped = thisAsMoneyImpl.getNumberStripped();
-            final BigDecimal otherNumberStripped = Money.of(other.getNumber(), other.getCurrency()).getNumberStripped();
-            isEqual = currencyCode.equals(otherCurrencyCode) && numberStripped.equals(otherNumberStripped);
-        }
-        return isEqual;
+        return Optional.ofNullable(obj)
+                .filter(other -> other != null)
+                .filter(other -> other instanceof MonetaryAmount)
+                .map(o -> (MonetaryAmount) o)
+                .map(o -> o.isEqualTo(money))
+                .orElse(false);
     }
 
     @Override
     public int hashCode() {
-        return asMoney().getNumberStripped().hashCode() + getCurrency().getCurrencyCode().hashCode();
+        return asMoney().hashCode();
     }
 
     public static MonetaryAmount of(final MonetaryAmount money) {
@@ -239,11 +235,11 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
     }
 
     public static MonetaryAmount of(BigDecimal amount, CurrencyUnit currency) {
-        return of(Money.of(amount, currency));
+        return of(FastMoney.of(amount, currency));
     }
 
-    private Money asMoney() {
-        return Money.of(getNumber(), getCurrency());
+    private FastMoney asMoney() {
+        return FastMoney.of(getNumber(), getCurrency());
     }
 
     public static MonetaryAmount of(final int amount, final CurrencyUnit currencyUnit) {

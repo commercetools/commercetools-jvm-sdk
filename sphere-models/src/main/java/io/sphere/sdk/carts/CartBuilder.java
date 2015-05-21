@@ -5,7 +5,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultModelFluentBuilder;
 import io.sphere.sdk.models.Reference;
-import org.javamoney.moneta.Money;
+import io.sphere.sdk.utils.MoneyImpl;
 
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
@@ -31,7 +31,7 @@ public class CartBuilder extends DefaultModelFluentBuilder<CartBuilder, Cart> {
     private Optional<CartShippingInfo> shippingInfo = Optional.empty();
 
     private CartBuilder(final CurrencyUnit currency) {
-        this.totalPrice = Money.of(BigDecimal.ZERO, currency);
+        this.totalPrice = MoneyImpl.of(BigDecimal.ZERO, currency);
     }
 
     public static CartBuilder of(final CurrencyUnit currency) {
