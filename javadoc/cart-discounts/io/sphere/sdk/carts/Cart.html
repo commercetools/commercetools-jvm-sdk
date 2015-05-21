@@ -100,12 +100,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="interface in io.sphere.sdk.models">DefaultModel</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">Cart</span>
-extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
+extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 </li>
 </ul>
 </div>
@@ -192,11 +192,11 @@ extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interfa
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.orders.OrderLike">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.carts.CartLike">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.orders.<a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></h3>
-<code><a href="../../../../io/sphere/sdk/orders/OrderLike.html#getCustomLineItem-java.lang.String-">getCustomLineItem</a>, <a href="../../../../io/sphere/sdk/orders/OrderLike.html#getLineItem-java.lang.String-">getLineItem</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.carts.<a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></h3>
+<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomLineItem-java.lang.String-">getCustomLineItem</a>, <a href="../../../../io/sphere/sdk/carts/CartLike.html#getDiscountCodes--">getDiscountCodes</a>, <a href="../../../../io/sphere/sdk/carts/CartLike.html#getLineItem-java.lang.String-">getLineItem</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.DefaultModel">
@@ -306,7 +306,7 @@ extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interfa
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&gt;&nbsp;getBillingAddress()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/orders/OrderLike.html#getBillingAddress--">getBillingAddress</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getBillingAddress--">getBillingAddress</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -319,7 +319,7 @@ extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interfa
 <pre>java.util.Optional&lt;com.neovisionaries.i18n.CountryCode&gt;&nbsp;getCountry()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/orders/OrderLike.html#getCountry--">getCountry</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCountry--">getCountry</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -332,7 +332,7 @@ extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interfa
 <pre>java.util.Optional&lt;java.lang.String&gt;&nbsp;getCustomerEmail()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/orders/OrderLike.html#getCustomerEmail--">getCustomerEmail</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerEmail--">getCustomerEmail</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -345,7 +345,7 @@ extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interfa
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&gt;&nbsp;getCustomerGroup()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/orders/OrderLike.html#getCustomerGroup--">getCustomerGroup</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerGroup--">getCustomerGroup</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -358,7 +358,7 @@ extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interfa
 <pre>java.util.Optional&lt;java.lang.String&gt;&nbsp;getCustomerId()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/orders/OrderLike.html#getCustomerId--">getCustomerId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerId--">getCustomerId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -371,7 +371,7 @@ extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interfa
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a>&gt;&nbsp;getCustomLineItems()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/orders/OrderLike.html#getCustomLineItems--">getCustomLineItems</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomLineItems--">getCustomLineItems</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -384,7 +384,7 @@ extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interfa
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a>&gt;&nbsp;getLineItems()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/orders/OrderLike.html#getLineItems--">getLineItems</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getLineItems--">getLineItems</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -397,7 +397,7 @@ extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interfa
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&gt;&nbsp;getShippingAddress()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/orders/OrderLike.html#getShippingAddress--">getShippingAddress</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingAddress--">getShippingAddress</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -410,7 +410,7 @@ extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interfa
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a>&gt;&nbsp;getTaxedPrice()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/orders/OrderLike.html#getTaxedPrice--">getTaxedPrice</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getTaxedPrice--">getTaxedPrice</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -423,7 +423,7 @@ extends <a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interfa
 <pre>javax.money.MonetaryAmount&nbsp;getTotalPrice()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/orders/OrderLike.html#getTotalPrice--">getTotalPrice</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getTotalPrice--">getTotalPrice</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

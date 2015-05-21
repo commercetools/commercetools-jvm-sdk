@@ -743,6 +743,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">CartDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">CartLike</span></a>&lt;<a href="io/sphere/sdk/carts/CartLike.html" title="type parameter in CartLike">T</a>&gt; - Interface in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
+<dd>
+<div class="block">Interface to collect the common stuff between carts and orders.</div>
+</dd>
 <dt><a href="io/sphere/sdk/carts/queries/CartQuery.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQuery</span></a> - Class in <a href="io/sphere/sdk/carts/queries/package-summary.html">io.sphere.sdk.carts.queries</a></dt>
 <dd>
 <div class="block">Provides a QueryDsl for  carts to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
@@ -1671,6 +1675,14 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html#deserializeCustomObject--">deserializeCustomObject()</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingByKeyFetch</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCode</span></a> - Interface in <a href="io/sphere/sdk/discountcodes/package-summary.html">io.sphere.sdk.discountcodes</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html" title="class in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCodeReference</span></a> - Class in <a href="io/sphere/sdk/discountcodes/package-summary.html">io.sphere.sdk.discountcodes</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartBuilder.html#discountCodes-java.util.List-">discountCodes(List&lt;DiscountCodeReference&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartBuilder.html" title="class in io.sphere.sdk.carts">CartBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/discountcodes/DiscountCodeState.html" title="enum in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCodeState</span></a> - Enum in <a href="io/sphere/sdk/discountcodes/package-summary.html">io.sphere.sdk.discountcodes</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#discounted-java.util.Optional-">discounted(Optional&lt;DiscountedPrice&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#discounted-io.sphere.sdk.productdiscounts.DiscountedPrice-">discounted(DiscountedPrice)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
@@ -2124,11 +2136,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getBillingAddress--">getBillingAddress()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getBillingAddress--">getBillingAddress()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getBillingAddress--">getBillingAddress()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getBillingAddress--">getBillingAddress()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getBillingAddress--">getBillingAddress()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpRequestIntent.html#getBody--">getBody()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></dt>
 <dd>&nbsp;</dd>
@@ -2230,6 +2242,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraft.html#getCountry--">getCountry()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getCountry--">getCountry()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetCountry.html#getCountry--">getCountry()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetCountry.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCountry</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getCountry--">getCountry()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
@@ -2237,8 +2251,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getCountry--">getCountry()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getCountry--">getCountry()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getCountry--">getCountry()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#getCountry--">getCountry()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
 <dd>&nbsp;</dd>
@@ -2280,13 +2292,15 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getCustomerEmail--">getCustomerEmail()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getCustomerEmail--">getCustomerEmail()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getCustomerEmail--">getCustomerEmail()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getCustomerEmail--">getCustomerEmail()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getCustomerEmail--">getCustomerEmail()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getCustomerGroup--">getCustomerGroup()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getCustomerGroup--">getCustomerGroup()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/updateactions/SetCustomerGroup.html#getCustomerGroup--">getCustomerGroup()</a></span> - Method in class io.sphere.sdk.customers.commands.updateactions.<a href="io/sphere/sdk/customers/commands/updateactions/SetCustomerGroup.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetCustomerGroup</a></dt>
 <dd>&nbsp;</dd>
@@ -2296,13 +2310,13 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getCustomerGroup--">getCustomerGroup()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getCustomerGroup--">getCustomerGroup()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#getCustomerGroup--">getCustomerGroup()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getCustomerId--">getCustomerId()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraft.html#getCustomerId--">getCustomerId()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getCustomerId--">getCustomerId()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomerId.html#getCustomerId--">getCustomerId()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetCustomerId.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomerId</a></dt>
 <dd>&nbsp;</dd>
@@ -2311,8 +2325,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getCustomerId--">getCustomerId()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getCustomerId--">getCustomerId()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getCustomerId--">getCustomerId()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getCustomerId--">getCustomerId()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
 <dd>&nbsp;</dd>
@@ -2324,7 +2336,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraft.html#getCustomerNumber--">getCustomerNumber()</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraft.html" title="class in io.sphere.sdk.customers">CustomerDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getCustomLineItem-java.lang.String-">getCustomLineItem(String)</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getCustomLineItem-java.lang.String-">getCustomLineItem(String)</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html#getCustomLineItemId--">getCustomLineItemId()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
@@ -2334,11 +2346,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#getData--">getData()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http">FormUrlEncodedHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
@@ -2419,6 +2431,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Image.html#getDimensions--">getDimensions()</a></span> - Method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/DiscountedPrice.html#getDiscount--">getDiscount()</a></span> - Method in class io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/DiscountedPrice.html" title="class in io.sphere.sdk.productdiscounts">DiscountedPrice</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html#getDiscountCode--">getDiscountCode()</a></span> - Method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeReference</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getDiscountCodes--">getDiscountCodes()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#getDiscounted--">getDiscounted()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
 <dd>&nbsp;</dd>
@@ -2676,7 +2692,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ParcelMeasurements.html#getLengthInMillimeter--">getLengthInMillimeter()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ParcelMeasurements.html" title="class in io.sphere.sdk.orders">ParcelMeasurements</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getLineItem-java.lang.String-">getLineItem(String)</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getLineItem-java.lang.String-">getLineItem(String)</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#getLineItemId--">getLineItemId()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></dt>
 <dd>&nbsp;</dd>
@@ -2692,11 +2708,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getLineItems--">getLineItems()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getLineItems--">getLineItems()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getLineItems--">getLineItems()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getLineItems--">getLineItems()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getLineItems--">getLineItems()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringsEntry.html#getLocale--">getLocale()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models">LocalizedStringsEntry</a></dt>
 <dd>&nbsp;</dd>
@@ -3190,11 +3206,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getShippingAddress--">getShippingAddress()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getShippingAddress--">getShippingAddress()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getShippingAddress--">getShippingAddress()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getShippingAddress--">getShippingAddress()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getShippingAddress--">getShippingAddress()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getShippingInfo--">getShippingInfo()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
@@ -3288,6 +3304,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemLike.html#getState--">getState()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html#getState--">getState()</a></span> - Method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeReference</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#getState--">getState()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html#getState--">getState()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportCustomLineItemState</a></dt>
@@ -3364,11 +3382,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getTaxedPrice--">getTaxedPrice()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getTaxedPrice--">getTaxedPrice()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getTaxedPrice--">getTaxedPrice()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getTaxedPrice--">getTaxedPrice()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getTaxedPrice--">getTaxedPrice()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/TaxedPrice.html#getTaxPortions--">getTaxPortions()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a></dt>
 <dd>&nbsp;</dd>
@@ -3464,11 +3482,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getTotalPrice--">getTotalPrice()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartLike.html#getTotalPrice--">getTotalPrice()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#getTotalPrice--">getTotalPrice()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getTotalPrice--">getTotalPrice()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderLike.html#getTotalPrice--">getTotalPrice()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders">OrderLike</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html#getTrackingData--">getTrackingData()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddParcelToDelivery</a></dt>
 <dd>&nbsp;</dd>
@@ -4079,6 +4097,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Provides types to retrieve the state of  custom objects.</div>
 </dd>
+<dt><a href="io/sphere/sdk/discountcodes/package-summary.html">io.sphere.sdk.discountcodes</a> - package io.sphere.sdk.discountcodes</dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a> - package io.sphere.sdk.http</dt>
 <dd>
 <div class="block">Provides types to deal with HTTP.</div>
@@ -5327,6 +5347,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html#of-io.sphere.sdk.models.Referenceable-io.sphere.sdk.discountcodes.DiscountCodeState-">of(Referenceable&lt;DiscountCode&gt;, DiscountCodeState)</a></span> - Static method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeReference</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FileHttpRequestBody.html#of-java.io.File-">of(File)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FileHttpRequestBody.html" title="class in io.sphere.sdk.http">FileHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#of-java.util.Map-">of(Map&lt;String, String&gt;)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http">FormUrlEncodedHttpRequestBody</a></dt>
@@ -6134,6 +6156,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelRoles.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelRoles.html" title="enum in io.sphere.sdk.channels">ChannelRoles</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeState.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeState.html" title="enum in io.sphere.sdk.discountcodes">DiscountCodeState</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderState.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderState.html" title="enum in io.sphere.sdk.orders">OrderState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/PaymentState.html#ofSphereValue-java.lang.String-">ofSphereValue(String)</a></span> - Static method in enum io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a></dt>
@@ -6263,8 +6287,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <div class="block">Draft for importing an Order.</div>
 </dd>
 <dt><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">OrderImportDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders"><span class="typeNameLink">OrderLike</span></a>&lt;<a href="io/sphere/sdk/orders/OrderLike.html" title="type parameter in OrderLike">T</a>&gt; - Interface in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#orderNumber-java.util.Optional-">orderNumber(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>
@@ -8493,6 +8515,10 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeState.html#valueOf-java.lang.String-">valueOf(String)</a></span> - Static method in enum io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeState.html" title="enum in io.sphere.sdk.discountcodes">DiscountCodeState</a></dt>
+<dd>
+<div class="block">Returns the enum constant of this type with the specified name.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpMethod.html#valueOf-java.lang.String-">valueOf(String)</a></span> - Static method in enum io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a></dt>
 <dd>
 <div class="block">Returns the enum constant of this type with the specified name.</div>
@@ -8562,6 +8588,11 @@ the order they are declared.</div>
 the order they are declared.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/ChannelRoles.html#values--">values()</a></span> - Static method in enum io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/ChannelRoles.html" title="enum in io.sphere.sdk.channels">ChannelRoles</a></dt>
+<dd>
+<div class="block">Returns an array containing the constants of this enum type, in
+the order they are declared.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeState.html#values--">values()</a></span> - Static method in enum io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeState.html" title="enum in io.sphere.sdk.discountcodes">DiscountCodeState</a></dt>
 <dd>
 <div class="block">Returns an array containing the constants of this enum type, in
 the order they are declared.</div>
