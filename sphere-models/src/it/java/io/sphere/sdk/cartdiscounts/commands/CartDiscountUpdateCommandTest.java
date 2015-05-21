@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
+import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 
@@ -31,7 +32,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeCartPredicate() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
-            final String newPredicate = String.format("totalPrice > \"%d.00 EUR\"", randomInt());
+            final String newPredicate = format("totalPrice > \"%d.00 EUR\"", randomInt());
 
             assertThat(cartDiscount.getCartPredicate()).isNotEqualTo(newPredicate);
 
@@ -96,6 +97,20 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
                     execute(CartDiscountUpdateCommand.of(cartDiscount, SetDescription.of(newDescription)));
 
             assertThat(updatedDiscount.getDescription()).contains(newDescription);
+        });
+    }
+
+    @Test
+    public void changeSortOrder() throws Exception {
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final String newSortOrder = format("0.%d", randomInt());
+
+            assertThat(cartDiscount.getSortOrder()).isNotEqualTo(newSortOrder);
+
+            final CartDiscount updatedDiscount =
+                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeSortOrder.of(newSortOrder)));
+
+            assertThat(updatedDiscount.getSortOrder()).isEqualTo(newSortOrder);
         });
     }
 }
