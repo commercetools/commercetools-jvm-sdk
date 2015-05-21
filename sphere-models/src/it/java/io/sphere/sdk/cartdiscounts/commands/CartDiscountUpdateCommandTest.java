@@ -142,4 +142,23 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             assertThat(updatedDiscount.getValidFrom()).contains(dateTime);
         });
     }
+    @Test
+    public void setValidUntil() throws Exception {
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            //until must be after valid from
+            final Instant dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
+
+            assertThat(cartDiscount.getValidUntil()).isNotEqualTo(Optional.of(dateTime));
+
+            final CartDiscount updatedDiscount =
+                    execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));
+
+            assertThat(updatedDiscount.getValidUntil()).contains(dateTime);
+        });
+    }
+
+    private Instant dateTimeAfterValidFromAndOldValidUntil(final CartDiscount cartDiscount) {
+        return cartDiscount.getValidUntil()
+                .orElse(cartDiscount.getValidFrom().orElse(Instant.now()).plusSeconds(1000)).plusSeconds(1);
+    }
 }
