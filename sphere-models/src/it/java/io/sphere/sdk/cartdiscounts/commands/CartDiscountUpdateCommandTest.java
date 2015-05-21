@@ -7,6 +7,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
+import java.time.Instant;
 import java.util.Optional;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
@@ -125,6 +126,20 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
                     execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
 
             assertThat(updatedDiscount.isRequiringDiscountCode()).isEqualTo(newRequiresDiscountCode);
+        });
+    }
+
+    @Test
+    public void setValidFrom() throws Exception {
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final Instant dateTime = Instant.now();
+
+            assertThat(cartDiscount.getValidFrom()).isNotEqualTo(Optional.of(dateTime));
+
+            final CartDiscount updatedDiscount =
+                    execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidFrom.of(dateTime)));
+
+            assertThat(updatedDiscount.getValidFrom()).contains(dateTime);
         });
     }
 }
