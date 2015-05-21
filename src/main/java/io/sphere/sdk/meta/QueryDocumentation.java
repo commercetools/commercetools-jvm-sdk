@@ -43,18 +43,17 @@ import io.sphere.sdk.models.Base;
 
  <h4 id="create-query-with-predicates">Create a query with predicate API</h4>
 
- <p>For queryable model interface exists a query model class, e.g., for {@code io.sphere.sdk.categories.Category}
- exists {@code io.sphere.sdk.categories.CategoryQueryModel}, which contains a DSL to find and specify
- the queryable parameters.
+ <p>There is a query model class for each queryable model interface, e.g., there is {@code io.sphere.sdk.categories.CategoryQueryModel} for {@code io.sphere.sdk.categories.Category}
+, which contains a DSL to find and specify the queryable parameters.
  </p>
 
  {@include.example io.sphere.sdk.queries.QueryDemo#categoryQueryModel()}
 
- <p>The generic code looks verbose, but in the future it enables powerful type-safe queries with IDE discovery even on deep
+ <p>The generic code looks verbose, but in the future it will enable powerful type-safe queries with IDE discovery even on deep
  nested data structures like products. (coming soon)</p>
 
- The {@link io.sphere.sdk.queries.QueryDsl} class, used by the query model classes, sorts by default by ID and has no offset
- or limit specified. The following example shows how to specify sorting, limiting and skipping pages.
+ The {@link io.sphere.sdk.queries.QueryDsl} class, used by the query model classes, sorts by ID by default and it has no offset
+ or limit specified. The following example shows how to specify sorting, limiting, and skipping pages.
 
  {@include.example io.sphere.sdk.queries.QueryDemo#withPagination()}
 
@@ -63,14 +62,14 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.queries.QueryDemo#immutableQueryDsl()}
 
- <p>As a result you can construct the query for the next page by using the previous query:</p>
+ <p>Based on this you can construct the query for the next page by using the previous query:</p>
 
  {@include.example io.sphere.sdk.queries.QueryDemo#nextPage()}
 
 
  <h4 id="create-hard-coded-query">Create a hard coded query</h4>
 
- {@link io.sphere.sdk.queries.Query} is an interface, so you have the opportunity to code
+ Since {@link io.sphere.sdk.queries.Query} is an interface you have the opportunity to code
  a query without the domain specific language:
 
  {@include.example io.sphere.sdk.categories.CategoryByNameQuery}
@@ -79,22 +78,22 @@ import io.sphere.sdk.models.Base;
 
  <h4>Helper methods for common use cases</h4>
 
- <p>A common use case to query a product is to query it by slug. For this and other most common use cases exist helper methods as shown in the next example.</p>
+ <p>For most common product query use cases, like 'query by slug', helper methods exist as shown in the next example.</p>
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryBySlug()}
 
  You may have noticed that the type of the query is not {@link io.sphere.sdk.products.queries.ProductQuery} anymore but {@link io.sphere.sdk.queries.QueryDsl} which does not contain the method {@link io.sphere.sdk.products.queries.ProductQuery#bySlug(io.sphere.sdk.products.ProductProjectionType, java.util.Locale, String)}.
- That is due to the implementation of the domain specific language but still enables you to configure pagination and sorting.
+ That is due to the implementation of the domain specific language, but it still enables you to configure pagination and sorting.
 
- <p>Important to know is that the {@link io.sphere.sdk.queries.QueryDsl} uses immutable objects, so the call of {@link io.sphere.sdk.products.queries.ProductQuery#bySlug(io.sphere.sdk.products.ProductProjectionType, java.util.Locale, String)} does not change the internal state of the {@link io.sphere.sdk.products.queries.ProductQuery} but creates a new {@link io.sphere.sdk.queries.QueryDsl} object with the selected predicate.</p>
+ <p>Important to know is that the {@link io.sphere.sdk.queries.QueryDsl} uses immutable objects, so the calling {@link io.sphere.sdk.products.queries.ProductQuery#bySlug(io.sphere.sdk.products.ProductProjectionType, java.util.Locale, String)} does not change the internal state of the {@link io.sphere.sdk.products.queries.ProductQuery}, but it creates a new {@link io.sphere.sdk.queries.QueryDsl} object with the selected predicate.</p>
 
  <h4>Self constructed predicates for special cases</h4>
 
-<p>For more advanced queries you have to use the {@code Predicate Predicate API}. For example querying for some names you can use:</p>
+<p>For more advanced queries you have to use the {@code Predicate API}. For example, for querying for names you can use:</p>
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryByNames()}
 
- <p>The Predicate API looks verbose, but it is its goal to prevent typos and make it discoverable via the IDE for which attributes can be queried.</p>
+ <p>The Predicate API looks verbose, but it prevent you from making typos and make it makes the queryable attributes discoverable in your IDE.</p>
 
  You can still create predicates from strings, but you need to escape characters.
 
