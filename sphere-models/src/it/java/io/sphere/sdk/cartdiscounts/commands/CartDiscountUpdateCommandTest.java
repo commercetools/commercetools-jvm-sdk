@@ -1,8 +1,8 @@
 package io.sphere.sdk.cartdiscounts.commands;
 
-import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartDiscountValue;
+import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeCartPredicate;
+import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeTarget;
 import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeValue;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -38,6 +38,21 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
                     execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeCartPredicate.of(newPredicate)));
 
             assertThat(updatedDiscount.getCartPredicate()).isEqualTo(newPredicate);
+        });
+    }
+
+    @Test
+    public void changeTarget() throws Exception {
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final CartDiscountTarget newTarget = cartDiscount.getTarget() instanceof LineItemsTarget ?
+                    CustomLineItemsTarget.of("1 = 1") : LineItemsTarget.of("1 = 1");
+
+            assertThat(cartDiscount.getTarget()).isNotEqualTo(newTarget);
+
+            final CartDiscount updatedDiscount =
+                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeTarget.of(newTarget)));
+
+            assertThat(updatedDiscount.getTarget()).isEqualTo(newTarget);
         });
     }
 }
