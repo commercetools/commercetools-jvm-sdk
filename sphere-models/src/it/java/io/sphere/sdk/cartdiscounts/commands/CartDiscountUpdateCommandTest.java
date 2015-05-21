@@ -2,6 +2,7 @@ package io.sphere.sdk.cartdiscounts.commands;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.CartDiscountValue;
+import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeCartPredicate;
 import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeValue;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -23,6 +24,20 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
                     execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeValue.of(newValue)));
 
             assertThat(updatedDiscount.getValue()).isEqualTo(newValue);
+        });
+    }
+
+    @Test
+    public void changeCartPredicate() throws Exception {
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final String newPredicate = String.format("totalPrice > \"%d.00 EUR\"", randomInt());
+
+            assertThat(cartDiscount.getCartPredicate()).isNotEqualTo(newPredicate);
+
+            final CartDiscount updatedDiscount =
+                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeCartPredicate.of(newPredicate)));
+
+            assertThat(updatedDiscount.getCartPredicate()).isEqualTo(newPredicate);
         });
     }
 }
