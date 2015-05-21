@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders.commands;
 
 import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.channels.ChannelRoles;
 import io.sphere.sdk.models.*;
@@ -230,6 +231,11 @@ public class OrderImportCommandTest extends IntegrationTest {
                     @Override
                     public long getQuantity() {
                         return 2;
+                    }
+
+                    @Override
+                    public Optional<DiscountedLineItemPrice> getDiscountedPrice() {
+                        return Optional.empty();
                     }
                 }, 5);
                 final String deliveryId = randomKey();
