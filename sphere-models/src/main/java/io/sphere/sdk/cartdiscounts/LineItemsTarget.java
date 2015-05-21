@@ -15,6 +15,10 @@ public class LineItemsTarget extends Base implements CartDiscountTarget {
         return predicate;
     }
 
+    public static LineItemsTarget ofAll() {
+        return of("1 = 1");
+    }
+
     public static LineItemsTarget of(final String predicate) {
         return new LineItemsTarget(predicate);
     }

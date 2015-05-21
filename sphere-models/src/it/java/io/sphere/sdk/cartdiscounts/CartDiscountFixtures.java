@@ -21,7 +21,7 @@ public class CartDiscountFixtures {
         final String predicate = "totalPrice > \"800.00 EUR\"";
         final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(MoneyImpl.of(10, EUR));
         final LineItemsTarget target = LineItemsTarget.of("1 = 1");
-        final String sortOrder = "" + randomFloat();
+        final String sortOrder = randomSortOrder();
         final boolean requiresDiscountCode = false;
         return CartDiscountDraftBuilder.of(name, CartDiscountPredicate.of(predicate),
                 value, target, sortOrder, requiresDiscountCode)
