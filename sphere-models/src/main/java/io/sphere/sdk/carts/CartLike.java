@@ -1,10 +1,8 @@
-package io.sphere.sdk.orders;
+package io.sphere.sdk.carts;
 
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.carts.CustomLineItem;
-import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.carts.TaxedPrice;
 import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.discountcodes.DiscountCodeReference;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
@@ -13,7 +11,11 @@ import javax.money.MonetaryAmount;
 import java.util.List;
 import java.util.Optional;
 
-public interface OrderLike<T> extends DefaultModel<T> {
+/**
+ * Interface to collect the common stuff between carts and orders.
+ * @param <T> the type of this {@link CartLike}, order or cart
+ */
+public interface CartLike<T> extends DefaultModel<T> {
 
     Optional<String> getCustomerId();
 
@@ -42,4 +44,6 @@ public interface OrderLike<T> extends DefaultModel<T> {
     Optional<Reference<CustomerGroup>> getCustomerGroup();
 
     Optional<CountryCode> getCountry();
+
+    List<DiscountCodeReference> getDiscountCodes();
 }

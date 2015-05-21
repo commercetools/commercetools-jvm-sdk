@@ -6,14 +6,13 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.orders.OrderLike;
 
 import javax.money.MonetaryAmount;
 import java.util.List;
 import java.util.Optional;
 
 @JsonDeserialize(as=CartImpl.class)
-public interface Cart extends OrderLike<Cart> {
+public interface Cart extends CartLike<Cart> {
 
     public static String typeId(){
         return "cart";
