@@ -735,7 +735,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html" title="class in io.sphere.sdk.cartdiscounts.commands"><span class="typeNameLink">CartDiscountUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/package-summary.html">io.sphere.sdk.cartdiscounts.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeCartPredicate.html">ChangeCartPredicate</a></li><li><a href="updateactions/ChangeValue.html">ChangeValue</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeCartPredicate.html">ChangeCartPredicate</a></li><li><a href="updateactions/ChangeTarget.html">ChangeTarget</a></li><li><a href="updateactions/ChangeValue.html">ChangeValue</a></li></ul></div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/CartDiscountValue.html" title="interface in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">CartDiscountValue</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a></dt>
 <dd>&nbsp;</dd>
@@ -824,7 +824,19 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <div class="block">Replaces the address with the given ID, with the new address in the customer's addresses array.</div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeCartPredicate.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeCartPredicate</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeCartPredicate--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
+    final String newPredicate = String.format("totalPrice &gt; \"%d.00 EUR\"", randomInt());
+
+    assertThat(cartDiscount.getCartPredicate()).isNotEqualTo(newPredicate);
+
+    final CartDiscount updatedDiscount =
+            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeCartPredicate.of(newPredicate)));
+
+    assertThat(updatedDiscount.getCartPredicate()).isEqualTo(newPredicate);
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/channels/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">ChangeDescription</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
@@ -984,6 +996,21 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">ChangeSlug</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
 <div class="block">Updates the slug of a product.</div>
+</dd>
+<dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeTarget.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeTarget</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeTarget--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
+    final CartDiscountTarget newTarget = cartDiscount.getTarget() instanceof LineItemsTarget ?
+            CustomLineItemsTarget.of("1 = 1") : LineItemsTarget.of("1 = 1");
+
+    assertThat(cartDiscount.getTarget()).isNotEqualTo(newTarget);
+
+    final CartDiscount updatedDiscount =
+            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeTarget.of(newTarget)));
+
+    assertThat(updatedDiscount.getTarget()).isEqualTo(newTarget);
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeTaxCategory.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">ChangeTaxCategory</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
@@ -3251,6 +3278,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraft.html#getTarget--">getTarget()</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraft.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeTarget.html#getTarget--">getTarget()</a></span> - Method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeTarget.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeTarget</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartShippingInfo.html#getTaxCategory--">getTaxCategory()</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts">CartShippingInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#getTaxCategory--">getTaxCategory()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
@@ -4863,6 +4892,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeCartPredicate.html#of-io.sphere.sdk.cartdiscounts.CartDiscountPredicate-">of(CartDiscountPredicate)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeCartPredicate.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeCartPredicate</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeCartPredicate.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeCartPredicate.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeCartPredicate</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeTarget.html#of-io.sphere.sdk.cartdiscounts.CartDiscountTarget-">of(CartDiscountTarget)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeTarget.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeTarget</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeValue.html#of-io.sphere.sdk.cartdiscounts.CartDiscountValue-">of(CartDiscountValue)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeValue.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeValue</a></dt>
 <dd>&nbsp;</dd>
