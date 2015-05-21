@@ -19,7 +19,6 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.utils.MoneyImpl;
-import org.javamoney.moneta.Money;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -36,10 +35,9 @@ import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductFixtures {
-    public static final Price PRICE = Price.of(Money.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
+    public static final Price PRICE = Price.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
     private static final int MASTER_VARIANT_ID = 1;
 
     public static void withUpdateableProduct(final TestClient client, final Function<Product, Product> f) {

@@ -12,7 +12,7 @@ import io.sphere.sdk.search.*;
 import org.junit.Test;
 
 import javax.money.CurrencyUnit;
-import javax.money.MonetaryCurrencies;
+import javax.money.Monetary;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
@@ -222,7 +222,7 @@ public class ProductProjectionSearchTest {
     }
 
     private CurrencyUnit currency(final String currencyCode) {
-        return MonetaryCurrencies.getCurrency(currencyCode);
+        return Monetary.getCurrency(currencyCode);
     }
 
     private Reference<Category> category(String id) {
