@@ -121,7 +121,7 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">ChangeCartPredicate</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeCartPredicate--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final String newPredicate = String.format("totalPrice &gt; \"%d.00 EUR\"", randomInt());
+    final String newPredicate = format("totalPrice &gt; \"%d.00 EUR\"", randomInt());
 
     assertThat(cartDiscount.getCartPredicate()).isNotEqualTo(newPredicate);
 
