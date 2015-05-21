@@ -1,10 +1,8 @@
 package io.sphere.sdk.cartdiscounts.commands;
 
 import io.sphere.sdk.cartdiscounts.*;
-import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeCartPredicate;
-import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeIsActive;
-import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeTarget;
-import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeValue;
+import io.sphere.sdk.cartdiscounts.commands.updateactions.*;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
@@ -68,6 +66,20 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
                     execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeIsActive.of(newIsActice)));
 
             assertThat(updatedDiscount.isActive()).isEqualTo(newIsActice);
+        });
+    }
+
+    @Test
+    public void changeName() throws Exception {
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final LocalizedStrings newName = randomSlug();
+
+            assertThat(cartDiscount.getName()).isNotEqualTo(newName);
+
+            final CartDiscount updatedDiscount =
+                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeName.of(newName)));
+
+            assertThat(updatedDiscount.getName()).isEqualTo(newName);
         });
     }
 }
