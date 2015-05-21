@@ -443,10 +443,6 @@ Since Java 8, the JDK provides <a href="https://docs.oracle.com/javase/tutorial/
   <li>{@link java.util.concurrent.CompletionStage#thenApplyAsync(Function, Executor)}  with suffix "Async" and additional {@link Executor} parameter calls the function inside a Thread pool you specify as second parameter.</li>
  </ol>
 
- {@include.example io.sphere.sdk.meta.AsyncDocumentationThreadTest}
-
-
-
 
  <h3 id="error-handling">Error Handling</h3>
 
