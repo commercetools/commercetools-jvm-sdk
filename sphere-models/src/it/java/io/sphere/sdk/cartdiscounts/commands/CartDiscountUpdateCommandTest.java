@@ -2,6 +2,7 @@ package io.sphere.sdk.cartdiscounts.commands;
 
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeCartPredicate;
+import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeIsActive;
 import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeTarget;
 import io.sphere.sdk.cartdiscounts.commands.updateactions.ChangeValue;
 import io.sphere.sdk.test.IntegrationTest;
@@ -53,6 +54,20 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
                     execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeTarget.of(newTarget)));
 
             assertThat(updatedDiscount.getTarget()).isEqualTo(newTarget);
+        });
+    }
+
+    @Test
+    public void changeIsActive() throws Exception {
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final boolean newIsActice = !cartDiscount.isActive();
+
+            assertThat(cartDiscount.isActive()).isNotEqualTo(newIsActice);
+
+            final CartDiscount updatedDiscount =
+                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeIsActive.of(newIsActice)));
+
+            assertThat(updatedDiscount.isActive()).isEqualTo(newIsActice);
         });
     }
 }
