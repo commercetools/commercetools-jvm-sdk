@@ -22,7 +22,7 @@ public interface CartDiscount extends DefaultModel<CartDiscount> {
 
     List<Reference<Object>> getReferences();
 
-    boolean isRequiresDiscountCode();
+    boolean isRequiringDiscountCode();
 
     String getSortOrder();
 

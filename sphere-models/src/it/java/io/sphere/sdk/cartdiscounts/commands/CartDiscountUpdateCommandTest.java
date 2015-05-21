@@ -113,4 +113,18 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             assertThat(updatedDiscount.getSortOrder()).isEqualTo(newSortOrder);
         });
     }
+
+    @Test
+    public void changeRequiresDiscountCode() throws Exception {
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final boolean newRequiresDiscountCode = !cartDiscount.isRequiringDiscountCode();
+
+            assertThat(cartDiscount.isRequiringDiscountCode()).isNotEqualTo(newRequiresDiscountCode);
+
+            final CartDiscount updatedDiscount =
+                    execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
+
+            assertThat(updatedDiscount.isRequiringDiscountCode()).isEqualTo(newRequiresDiscountCode);
+        });
+    }
 }

@@ -68,7 +68,7 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     }
 
     @Override
-    public boolean isRequiresDiscountCode() {
+    public boolean isRequiringDiscountCode() {
         return requiresDiscountCode;
     }
 
