@@ -7,6 +7,8 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
 import static org.assertj.core.api.Assertions.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -80,6 +82,20 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
                     execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeName.of(newName)));
 
             assertThat(updatedDiscount.getName()).isEqualTo(newName);
+        });
+    }
+
+    @Test
+    public void setDescription() throws Exception {
+        withPersistentCartDiscount(client(), cartDiscount -> {
+            final LocalizedStrings newDescription = randomSlug();
+
+            assertThat(cartDiscount.getDescription()).isNotEqualTo(Optional.of(newDescription));
+
+            final CartDiscount updatedDiscount =
+                    execute(CartDiscountUpdateCommand.of(cartDiscount, SetDescription.of(newDescription)));
+
+            assertThat(updatedDiscount.getDescription()).contains(newDescription);
         });
     }
 }
