@@ -1,6 +1,7 @@
 package io.sphere.sdk.discountcodes.commands;
 
 import io.sphere.sdk.discountcodes.DiscountCode;
+import io.sphere.sdk.discountcodes.commands.updateactions.SetDescription;
 import io.sphere.sdk.discountcodes.commands.updateactions.SetName;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.test.IntegrationTest;
@@ -18,6 +19,16 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
             final DiscountCode updatedDiscountCode =
                     execute(DiscountCodeUpdateCommand.of(discountCode, SetName.of(newName)));
             assertThat(updatedDiscountCode.getName()).contains(newName);
+        });
+    }
+    
+    @Test
+    public void setDescription() throws Exception {
+        withPersistentDiscountCode(client(), discountCode -> {
+            final LocalizedStrings newDescription = randomSlug();
+            final DiscountCode updatedDiscountCode =
+                    execute(DiscountCodeUpdateCommand.of(discountCode, SetDescription.of(newDescription)));
+            assertThat(updatedDiscountCode.getDescription()).contains(newDescription);
         });
     }
 }
