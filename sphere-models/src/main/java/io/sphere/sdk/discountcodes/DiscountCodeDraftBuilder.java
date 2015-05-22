@@ -1,11 +1,10 @@
 package io.sphere.sdk.discountcodes;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
+import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.models.*;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +18,7 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
     private String code;
     private List<Reference<CartDiscount>> cartDiscounts;
     @Nullable
-    private CartDiscountPredicate cartPredicate;
+    private CartPredicate cartPredicate;
     private boolean isActive = true;
     @Nullable
     private Long maxApplications;
@@ -35,7 +34,7 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
         return of(template.getCode(), template.getCartDiscounts())
                 .name(template.getName())
                 .description(template.getDescription())
-                .cartPredicate(template.getCartPredicate().map(CartDiscountPredicate::of))
+                .cartPredicate(template.getCartPredicate().map(CartPredicate::of))
                 .isActive(template.isActive())
                 .maxApplications(template.getMaxApplications())
                 .maxApplicationsPerCustomer(template.getMaxApplicationsPerCustomer());
@@ -77,12 +76,12 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
         return this;
     }
 
-    public DiscountCodeDraftBuilder cartPredicate(final Optional<CartDiscountPredicate> cartPredicate) {
+    public DiscountCodeDraftBuilder cartPredicate(final Optional<CartPredicate> cartPredicate) {
         this.cartPredicate = cartPredicate.orElse(null);
         return this;
     }
 
-    public DiscountCodeDraftBuilder cartPredicate(final CartDiscountPredicate cartPredicate) {
+    public DiscountCodeDraftBuilder cartPredicate(final CartPredicate cartPredicate) {
         return cartPredicate(Optional.of(cartPredicate));
     }
 
@@ -111,6 +110,6 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
 
     @Override
     public DiscountCodeDraft build() {
-        return new DiscountCodeDraft(cartDiscounts, name, description, code, Optional.ofNullable(cartPredicate).map(CartDiscountPredicate::toSphereCartDiscountPredicate).orElse(null), isActive, maxApplications, maxApplicationsPerCustomer);
+        return new DiscountCodeDraft(cartDiscounts, name, description, code, Optional.ofNullable(cartPredicate).map(CartPredicate::toSphereCartPredicate).orElse(null), isActive, maxApplications, maxApplicationsPerCustomer);
     }
 }

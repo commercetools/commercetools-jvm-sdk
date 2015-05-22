@@ -13,7 +13,7 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
     @Nullable
     private LocalizedStrings description;
     private CartDiscountValue value;
-    private final CartDiscountPredicate cartPredicate;
+    private final CartPredicate cartPredicate;
     private CartDiscountTarget target;
     private final String sortOrder;
     private boolean isActive = true;
@@ -23,7 +23,7 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
     private Instant validUntil;
     private final boolean requiresDiscountCode;
 
-    private CartDiscountDraftBuilder(final LocalizedStrings name, final CartDiscountPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
+    private CartDiscountDraftBuilder(final LocalizedStrings name, final CartPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
         this.cartPredicate = cartPredicate;
         this.name = name;
         this.value = value;
@@ -32,7 +32,7 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
         this.requiresDiscountCode = requiresDiscountCode;
     }
 
-    public static CartDiscountDraftBuilder of(final LocalizedStrings name, final CartDiscountPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
+    public static CartDiscountDraftBuilder of(final LocalizedStrings name, final CartPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
         return new CartDiscountDraftBuilder(name, cartPredicate, value, target, sortOrder, requiresDiscountCode);
     }
 

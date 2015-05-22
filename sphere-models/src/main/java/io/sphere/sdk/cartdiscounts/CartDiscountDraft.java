@@ -25,8 +25,8 @@ public class CartDiscountDraft extends Base {
     private final Instant validUntil;
     private final boolean requiresDiscountCode;
 
-    CartDiscountDraft(final LocalizedStrings name, final CartDiscountPredicate cartPredicate, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean isActive, final Instant validFrom, final Instant validUntil, final boolean requiresDiscountCode) {
-        this.cartPredicate = cartPredicate.toSphereCartDiscountPredicate();
+    CartDiscountDraft(final LocalizedStrings name, final CartPredicate cartPredicate, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean isActive, final Instant validFrom, final Instant validUntil, final boolean requiresDiscountCode) {
+        this.cartPredicate = cartPredicate.toSphereCartPredicate();
         this.name = name;
         this.description = description;
         this.value = value;
