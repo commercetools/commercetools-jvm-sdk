@@ -21,7 +21,7 @@ public class DiscountCodeFixtures {
         consumer.accept(discountCode);
     }
 
-    private static DiscountCode createDiscountCode(final TestClient client, final String code) {
+    public static DiscountCode createDiscountCode(final TestClient client, final String code) {
         final CartDiscount cartDiscount = defaultCartDiscount(client);
         final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
                 .withName(en("sample discount code"))
