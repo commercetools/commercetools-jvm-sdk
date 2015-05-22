@@ -1,17 +1,26 @@
 package io.sphere.sdk.discountcodes.commands;
 
+import io.sphere.sdk.cartdiscounts.CartDiscount;
+import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.cartdiscounts.CartPredicate;
+import io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommand;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.commands.updateactions.*;
 import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.ListUtils;
 import org.junit.Test;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.List;
 
+import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withCartDiscount;
+import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
 import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.withPersistentDiscountCode;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.utils.ListUtils.listOf;
 import static org.assertj.core.api.Assertions.*;
 
 public class DiscountCodeUpdateCommandTest extends IntegrationTest {
@@ -67,5 +76,26 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
                     execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplicationsPerCustomer.of(maxApplications)));
             assertThat(updatedDiscountCode.getMaxApplicationsPerCustomer()).contains(maxApplications);
         });
+    }
+
+    @SuppressWarnings("unchecked")
+    @Test
+    public void changeCartDiscounts() throws Exception {
+        withPersistentCartDiscount(client(), randomKey(), cartDiscount ->
+            withPersistentDiscountCode(client(), discountCode -> {
+                final List<Reference<CartDiscount>> oldCartDiscounts = discountCode.getCartDiscounts();
+                assertThat(oldCartDiscounts).doesNotContain(cartDiscount.toReference());
+
+                final List<Reference<CartDiscount>> newDiscountsList =
+                        listOf(oldCartDiscounts, cartDiscount.toReference());
+
+                final DiscountCode updatedDiscountCode =
+                        execute(DiscountCodeUpdateCommand.of(discountCode, ChangeCartDiscounts.of(newDiscountsList)));
+                assertThat(updatedDiscountCode.getCartDiscounts()).isEqualTo(newDiscountsList);
+
+                //clean up test
+                execute(DiscountCodeUpdateCommand.of(updatedDiscountCode, ChangeCartDiscounts.of(oldCartDiscounts)));
+            })
+        );
     }
 }

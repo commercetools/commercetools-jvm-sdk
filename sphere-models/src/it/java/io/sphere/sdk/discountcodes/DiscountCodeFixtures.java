@@ -1,7 +1,6 @@
 package io.sphere.sdk.discountcodes;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand;
 import io.sphere.sdk.discountcodes.queries.DiscountCodeQuery;
