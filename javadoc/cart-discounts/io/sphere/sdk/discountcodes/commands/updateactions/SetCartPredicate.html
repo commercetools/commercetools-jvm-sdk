@@ -121,7 +121,11 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">SetCartPredicate</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes">DiscountCode</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setCartPredicate--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
-    final CartPredicate cartPredicate = CartPredicate.of("1 = 1");
+    final String predicateAsString =
+            //you need to change the predicate
+            discountCode.getCartPredicate().map(p -&gt; "1 = 1".equals(p)).orElse(false) ? "true = true" : "1 = 1";
+
+    final CartPredicate cartPredicate = CartPredicate.of(predicateAsString);
     final DiscountCode updatedDiscountCode =
             execute(DiscountCodeUpdateCommand.of(discountCode, SetCartPredicate.of(cartPredicate)));
     assertThat(updatedDiscountCode.getCartPredicate()).contains(cartPredicate.toSphereCartPredicate());
