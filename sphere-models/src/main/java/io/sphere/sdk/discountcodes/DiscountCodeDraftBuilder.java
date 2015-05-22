@@ -2,15 +2,14 @@ package io.sphere.sdk.discountcodes;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.*;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.Arrays.asList;
 
 public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCodeDraft> {
     @Nullable
@@ -18,7 +17,7 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
     @Nullable
     private LocalizedStrings description;
     private String code;
-    private List<Reference<CartDiscount>> cartDiscounts = Collections.emptyList();
+    private List<Reference<CartDiscount>> cartDiscounts;
     @Nullable
     private CartDiscountPredicate cartPredicate;
     private boolean isActive = true;
@@ -27,23 +26,27 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
     @Nullable
     private Long maxApplicationsPerCustomer;
 
-    private DiscountCodeDraftBuilder(final String code) {
+    private DiscountCodeDraftBuilder(final String code, final List<Reference<CartDiscount>> cartDiscounts) {
         this.code = code;
+        this.cartDiscounts = cartDiscounts;
     }
 
     public static DiscountCodeDraftBuilder of(final DiscountCodeDraft template) {
-        return of(template.getCode())
+        return of(template.getCode(), template.getCartDiscounts())
                 .name(template.getName())
                 .description(template.getDescription())
-                .cartDiscounts(template.getCartDiscounts())
                 .cartPredicate(template.getCartPredicate().map(CartDiscountPredicate::of))
                 .isActive(template.isActive())
                 .maxApplications(template.getMaxApplications())
                 .maxApplicationsPerCustomer(template.getMaxApplicationsPerCustomer());
     }
 
-    public static DiscountCodeDraftBuilder of(final String code) {
-        return new DiscountCodeDraftBuilder(code);
+    public static DiscountCodeDraftBuilder of(final String code, final Referenceable<CartDiscount> cartDiscount) {
+        return of(code, asList(cartDiscount.toReference()));
+    }
+
+    public static DiscountCodeDraftBuilder of(final String code, final List<Reference<CartDiscount>> cartDiscounts) {
+        return new DiscountCodeDraftBuilder(code, cartDiscounts);
     }
 
     public DiscountCodeDraftBuilder name(final Optional<LocalizedStrings> name) {

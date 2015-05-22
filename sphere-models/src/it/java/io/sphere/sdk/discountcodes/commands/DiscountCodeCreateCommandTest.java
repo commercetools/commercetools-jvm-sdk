@@ -15,10 +15,9 @@ public class DiscountCodeCreateCommandTest extends IntegrationTest {
     public void execution() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
             final String code = randomKey();
-            final DiscountCodeDraft draft = DiscountCodeDraft.of(code)
+            final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
                     .withName(en("sample discount code"))
                     .withDescription(en("sample discount code descr."))
-                    .withCartDiscounts(cartDiscount)
                     .withCartPredicate(CartDiscountPredicate.of("1 = 1"))
                     .withIsActive(false)
                     .withMaxApplications(5)

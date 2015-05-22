@@ -43,8 +43,12 @@ public class DiscountCodeDraft extends Base {
         this.maxApplicationsPerCustomer = maxApplicationsPerCustomer;
     }
 
-    public static DiscountCodeDraft of(final String code) {
-        return DiscountCodeDraftBuilder.of(code).build();
+    public static DiscountCodeDraft of(final String code, final Referenceable<CartDiscount> cartDiscount) {
+        return of(code, asList(cartDiscount.toReference()));
+    }
+
+    public static DiscountCodeDraft of(final String code, final List<Reference<CartDiscount>> cartDiscounts) {
+        return DiscountCodeDraftBuilder.of(code, cartDiscounts).build();
     }
 
     public DiscountCodeDraft withName(final Optional<LocalizedStrings> name) {
