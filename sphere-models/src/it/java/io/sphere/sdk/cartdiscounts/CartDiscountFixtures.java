@@ -33,7 +33,7 @@ public class CartDiscountFixtures {
     }
 
     public static CartDiscount defaultCartDiscount(final TestClient client) {
-        return getCartDiscount(client, CartDiscountFixtures.class.getSimpleName() + "default");
+        return getCartDiscount(client, CartDiscountFixtures.class.getSimpleName() + "default-2");
     }
 
     private static CartDiscount getCartDiscount(final TestClient client, final String name) {
