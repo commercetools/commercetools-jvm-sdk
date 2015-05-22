@@ -82,6 +82,18 @@
 </tr>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetCartPredicate.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetCartPredicate</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setCartPredicate--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
+    final CartPredicate cartPredicate = CartPredicate.of("1 = 1");
+    final DiscountCode updatedDiscountCode =
+            execute(DiscountCodeUpdateCommand.of(discountCode, SetCartPredicate.of(cartPredicate)));
+    assertThat(updatedDiscountCode.getCartPredicate()).contains(cartPredicate.toSphereCartPredicate());
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetDescription</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
@@ -93,7 +105,7 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetName.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetName</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setName--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {

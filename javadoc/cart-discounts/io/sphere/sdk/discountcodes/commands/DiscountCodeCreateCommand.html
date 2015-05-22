@@ -139,7 +139,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
     final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
             .withName(en("sample discount code"))
             .withDescription(en("sample discount code descr."))
-            .withCartPredicate(CartDiscountPredicate.of("1 = 1"))
+            .withCartPredicate(CartPredicate.of("1 = 1"))
             .withIsActive(false)
             .withMaxApplications(5)
             .withMaxApplicationsPerCustomer(1);
