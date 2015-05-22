@@ -136,10 +136,9 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes">DiscountCode</a>,<a href="../../../../../io/sphere/sdk/discountcodes/DiscountCodeDraft.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraft</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
     final String code = randomKey();
-    final DiscountCodeDraft draft = DiscountCodeDraft.of(code)
+    final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
             .withName(en("sample discount code"))
             .withDescription(en("sample discount code descr."))
-            .withCartDiscounts(cartDiscount)
             .withCartPredicate(CartDiscountPredicate.of("1 = 1"))
             .withIsActive(false)
             .withMaxApplications(5)

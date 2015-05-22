@@ -43,7 +43,7 @@
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/discountcodes/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../../io/sphere/sdk/http/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../../io/sphere/sdk/discountcodes/queries/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/discountcodes/commands/package-summary.html" target="_top">Frames</a></li>
@@ -86,10 +86,9 @@
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
     final String code = randomKey();
-    final DiscountCodeDraft draft = DiscountCodeDraft.of(code)
+    final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
             .withName(en("sample discount code"))
             .withDescription(en("sample discount code descr."))
-            .withCartDiscounts(cartDiscount)
             .withCartPredicate(CartDiscountPredicate.of("1 = 1"))
             .withIsActive(false)
             .withMaxApplications(5)
@@ -133,7 +132,7 @@
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/discountcodes/package-summary.html">Prev&nbsp;Package</a></li>
-<li><a href="../../../../../io/sphere/sdk/http/package-summary.html">Next&nbsp;Package</a></li>
+<li><a href="../../../../../io/sphere/sdk/discountcodes/queries/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/discountcodes/commands/package-summary.html" target="_top">Frames</a></li>

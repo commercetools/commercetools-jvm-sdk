@@ -1186,6 +1186,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html#code-java.lang.String-">code(String)</a></span> - Method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQueryModel.html#code--">code()</a></span> - Method in class io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQueryModel.html" title="class in io.sphere.sdk.discountcodes.queries">DiscountCodeQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/Attribute.html#collect-io.sphere.sdk.attributes.AttributeDefinition-">collect(AttributeDefinition)</a></span> - Method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Command</span></a>&lt;<a href="io/sphere/sdk/commands/Command.html" title="type parameter in Command">T</a>&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
@@ -1695,10 +1697,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
     final String code = randomKey();
-    final DiscountCodeDraft draft = DiscountCodeDraft.of(code)
+    final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
             .withName(en("sample discount code"))
             .withDescription(en("sample discount code descr."))
-            .withCartDiscounts(cartDiscount)
             .withCartPredicate(CartDiscountPredicate.of("1 = 1"))
             .withIsActive(false)
             .withMaxApplications(5)
@@ -1718,6 +1719,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html" title="class in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCodeDraft</span></a> - Class in <a href="io/sphere/sdk/discountcodes/package-summary.html">io.sphere.sdk.discountcodes</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCodeDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/discountcodes/package-summary.html">io.sphere.sdk.discountcodes</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html" title="class in io.sphere.sdk.discountcodes.queries"><span class="typeNameLink">DiscountCodeQuery</span></a> - Class in <a href="io/sphere/sdk/discountcodes/queries/package-summary.html">io.sphere.sdk.discountcodes.queries</a></dt>
+<dd>
+<div class="block">Provides a QueryDsl for  discount codes to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
+</dd>
+<dt><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQueryModel.html" title="class in io.sphere.sdk.discountcodes.queries"><span class="typeNameLink">DiscountCodeQueryModel</span></a> - Class in <a href="io/sphere/sdk/discountcodes/queries/package-summary.html">io.sphere.sdk.discountcodes.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html" title="class in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCodeReference</span></a> - Class in <a href="io/sphere/sdk/discountcodes/package-summary.html">io.sphere.sdk.discountcodes</a></dt>
 <dd>&nbsp;</dd>
@@ -4189,6 +4196,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/package-summary.html">io.sphere.sdk.discountcodes.commands</a> - package io.sphere.sdk.discountcodes.commands</dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/discountcodes/queries/package-summary.html">io.sphere.sdk.discountcodes.queries</a> - package io.sphere.sdk.discountcodes.queries</dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a> - package io.sphere.sdk.http</dt>
 <dd>
 <div class="block">Provides types to deal with HTTP.</div>
@@ -4893,6 +4902,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html" title="class in io.sphere.sdk.discountcodes.queries">DiscountCodeQuery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/queries/InventoryEntryQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.inventories.queries.<a href="io/sphere/sdk/inventories/queries/InventoryEntryQuery.html" title="class in io.sphere.sdk.inventories.queries">InventoryEntryQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
@@ -5461,13 +5472,19 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html#of-io.sphere.sdk.discountcodes.DiscountCodeDraft-">of(DiscountCodeDraft)</a></span> - Static method in class io.sphere.sdk.discountcodes.commands.<a href="io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html" title="class in io.sphere.sdk.discountcodes.commands">DiscountCodeCreateCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html#of-java.lang.String-io.sphere.sdk.models.Referenceable-">of(String, Referenceable&lt;CartDiscount&gt;)</a></span> - Static method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html#of-java.lang.String-java.util.List-">of(String, List&lt;Reference&lt;CartDiscount&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html#of-io.sphere.sdk.discountcodes.DiscountCodeDraft-">of(DiscountCodeDraft)</a></span> - Static method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html#of-java.lang.String-io.sphere.sdk.models.Referenceable-">of(String, Referenceable&lt;CartDiscount&gt;)</a></span> - Static method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html#of-java.lang.String-java.util.List-">of(String, List&lt;Reference&lt;CartDiscount&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html#of-io.sphere.sdk.models.Referenceable-io.sphere.sdk.discountcodes.DiscountCodeState-">of(Referenceable&lt;DiscountCode&gt;, DiscountCodeState)</a></span> - Static method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeReference</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html" title="class in io.sphere.sdk.discountcodes.queries">DiscountCodeQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FileHttpRequestBody.html#of-java.io.File-">of(File)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FileHttpRequestBody.html" title="class in io.sphere.sdk.http">FileHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
@@ -7209,6 +7226,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQuery.html" title="class in io.sphere.sdk.customers.queries">CustomerQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html" title="class in io.sphere.sdk.discountcodes.queries">DiscountCodeQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/queries/InventoryEntryQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.inventories.queries.<a href="io/sphere/sdk/inventories/queries/InventoryEntryQuery.html" title="class in io.sphere.sdk.inventories.queries">InventoryEntryQuery</a></dt>
 <dd>&nbsp;</dd>
