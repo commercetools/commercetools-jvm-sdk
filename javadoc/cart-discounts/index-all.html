@@ -112,6 +112,16 @@
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
+<dt><a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">AddDiscountCode</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addDiscountCode--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
+    final Cart cart = createCartWithCountry(client());
+    final Cart updatedCart = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
+    final DiscountCodeReference discountCodeReference = updatedCart.getDiscountCodes().get(0);
+    assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/UrlQueryBuilder.html#addEncoded-java.lang.String-java.lang.String-">addEncoded(String, String)</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/UrlQueryBuilder.html" title="class in io.sphere.sdk.http">UrlQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">AddExternalImage</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
@@ -769,7 +779,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands"><span class="typeNameLink">CartUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/carts/commands/package-summary.html">io.sphere.sdk.carts.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddCustomLineItem.html">AddCustomLineItem</a></li><li><a href="updateactions/AddLineItem.html">AddLineItem</a></li><li><a href="updateactions/ChangeLineItemQuantity.html">ChangeLineItemQuantity</a></li><li><a href="updateactions/Recalculate.html">Recalculate</a></li><li><a href="updateactions/RemoveCustomLineItem.html">RemoveCustomLineItem</a></li><li><a href="updateactions/RemoveLineItem.html">RemoveLineItem</a></li><li><a href="updateactions/SetBillingAddress.html">SetBillingAddress</a></li><li><a href="updateactions/SetCountry.html">SetCountry</a></li><li><a href="updateactions/SetCustomShippingMethod.html">SetCustomShippingMethod</a></li><li><a href="updateactions/SetCustomerEmail.html">SetCustomerEmail</a></li><li><a href="updateactions/SetCustomerId.html">SetCustomerId</a></li><li><a href="updateactions/SetShippingAddress.html">SetShippingAddress</a></li><li><a href="updateactions/SetShippingMethod.html">SetShippingMethod</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddCustomLineItem.html">AddCustomLineItem</a></li><li><a href="updateactions/AddDiscountCode.html">AddDiscountCode</a></li><li><a href="updateactions/AddLineItem.html">AddLineItem</a></li><li><a href="updateactions/ChangeLineItemQuantity.html">ChangeLineItemQuantity</a></li><li><a href="updateactions/Recalculate.html">Recalculate</a></li><li><a href="updateactions/RemoveCustomLineItem.html">RemoveCustomLineItem</a></li><li><a href="updateactions/RemoveDiscountCode.html">RemoveDiscountCode</a></li><li><a href="updateactions/RemoveLineItem.html">RemoveLineItem</a></li><li><a href="updateactions/SetBillingAddress.html">SetBillingAddress</a></li><li><a href="updateactions/SetCountry.html">SetCountry</a></li><li><a href="updateactions/SetCustomShippingMethod.html">SetCustomShippingMethod</a></li><li><a href="updateactions/SetCustomerEmail.html">SetCustomerEmail</a></li><li><a href="updateactions/SetCustomerId.html">SetCustomerId</a></li><li><a href="updateactions/SetShippingAddress.html">SetShippingAddress</a></li><li><a href="updateactions/SetShippingMethod.html">SetShippingMethod</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#categories--">categories()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -2295,6 +2305,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereClientConfig.html#getClientSecret--">getClientSecret()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html#getCode--">getCode()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddDiscountCode</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCode.html#getCode--">getCode()</a></span> - Method in interface io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes">DiscountCode</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html#getCode--">getCode()</a></span> - Method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraft</a></dt>
@@ -2538,6 +2550,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPortion.html#getDiscount--">getDiscount()</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPortion.html" title="class in io.sphere.sdk.cartdiscounts">DiscountedLineItemPortion</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/DiscountedPrice.html#getDiscount--">getDiscount()</a></span> - Method in class io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/DiscountedPrice.html" title="class in io.sphere.sdk.productdiscounts">DiscountedPrice</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveDiscountCode.html#getDiscountCode--">getDiscountCode()</a></span> - Method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveDiscountCode</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html#getDiscountCode--">getDiscountCode()</a></span> - Method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeReference</a></dt>
 <dd>&nbsp;</dd>
@@ -5206,6 +5220,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html#of-io.sphere.sdk.carts.CustomLineItemDraft-">of(CustomLineItemDraft)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html#of-io.sphere.sdk.discountcodes.DiscountCode-">of(DiscountCode)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddDiscountCode</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddDiscountCode</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#of-java.lang.String-int-long-">of(String, int, long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions">ChangeLineItemQuantity</a></dt>
@@ -5217,6 +5235,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html#of-io.sphere.sdk.carts.CustomLineItem-">of(CustomLineItem)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveCustomLineItem</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveDiscountCode.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;DiscountCode&gt;)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveDiscountCode</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html#of-java.lang.String-java.util.Optional-">of(String, Optional&lt;Integer&gt;)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveLineItem</a></dt>
 <dd>&nbsp;</dd>
@@ -7143,6 +7163,19 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html#RemoveCustomLineItem-java.lang.String-">RemoveCustomLineItem(String)</a></span> - Constructor for class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveCustomLineItem</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/carts/commands/updateactions/RemoveDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">RemoveDiscountCode</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-removeDiscountCode--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
+    final Cart cart = createCartWithCountry(client());
+    final Cart cartWithDiscountCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
+    final DiscountCodeReference discountCodeReference = cartWithDiscountCode.getDiscountCodes().get(0);
+    assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
+
+    final Cart updatedCart = execute(CartUpdateCommand.of(cartWithDiscountCode, RemoveDiscountCode.of(discountCode)));
+    assertThat(updatedCart.getDiscountCodes()).isEmpty();
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">RemoveFromCategory</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
 <div class="block">Removes a product from a category.</div>
