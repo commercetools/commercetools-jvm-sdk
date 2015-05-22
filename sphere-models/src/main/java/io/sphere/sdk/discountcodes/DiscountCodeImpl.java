@@ -1,5 +1,6 @@
 package io.sphere.sdk.discountcodes;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -26,6 +27,7 @@ final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements D
     private final String cartPredicate;
     private final List<Reference<Object>> references;
 
+    @JsonCreator
     public DiscountCodeImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final List<Reference<CartDiscount>> cartDiscounts, final String code, final LocalizedStrings name, final LocalizedStrings description, final boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer, final String cartPredicate, final List<Reference<Object>> references) {
         super(id, version, createdAt, lastModifiedAt);
         this.cartDiscounts = cartDiscounts;
