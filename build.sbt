@@ -2,28 +2,6 @@ import Build._
 
 organization in ThisBuild := "io.sphere.sdk.jvm"
 
-libraryDependencies in ThisBuild ++=
-  "com.fasterxml.jackson.core" % "jackson-annotations" % "2.5.3" ::
-  "com.fasterxml.jackson.core" % "jackson-core" % "2.5.3" ::
-  "com.fasterxml.jackson.core" % "jackson-databind" % "2.5.3" ::
-  "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % "2.5.3" ::
-  "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % "2.5.3" ::
-  "org.zapodot" % "jackson-databind-java-optional" % "2.5.1" ::
-  "com.neovisionaries" % "nv-i18n" % "1.15" ::
-  "org.apache.commons" % "commons-lang3" % "3.4" ::
-  "org.apache.commons" % "commons-io" % "1.3.2" ::
-  "com.github.slugify" % "slugify" % "2.1.2" ::
-  "org.javamoney" % "moneta" % "1.0" ::
-  "org.slf4j" % "slf4j-api" % "1.7.12" ::
-  //test dependencies
-  junitDep % "test,it" ::
-  junitInterface % "test,it" ::
-  assertj % "test,it" ::
-  "ch.qos.logback" % "logback-classic" % "1.1.3" % "test,it" ::
-  "org.slf4j" % "jul-to-slf4j" % "1.7.12" % "test,it" ::
-  "com.google.code.gson" % "gson" % "2.3.1" % "test,it" ::
-  Nil
-
 autoScalaLibrary in ThisBuild := false // no dependency to Scala standard library
 
 crossPaths in ThisBuild := false

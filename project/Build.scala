@@ -1,4 +1,5 @@
 import java.io.ByteArrayOutputStream
+import Libs._
 
 import de.johoop.jacoco4sbt.JacocoPlugin.{itJacoco, jacoco}
 import net.sourceforge.plantuml.{FileFormat, FileFormatOption, SourceStringReader}
@@ -32,44 +33,44 @@ object Build extends Build {
     .dependsOn(`sphere-common`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`)
 
   lazy val `sphere-java-client-core` = project.configs(IntegrationTest).dependsOn(`sphere-common`).settings(commonSettings:_*)
-    .settings(libraryDependencies += junitDep)
+    .settings(libraryDependencies ++= allTestLibs.map(_ % "test,it"))
 
   lazy val `sphere-java-client-internal-test` = project.dependsOn(`sphere-java-client-core`).settings(commonSettings:_*).settings(
-    libraryDependencies ++=
-        junitDep ::
-        junitInterface ::
-        assertj ::
-        Nil
+    libraryDependencies ++= allTestLibs
   ).configs(IntegrationTest)
 
   lazy val `sphere-java-client` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-ning-1_9`).settings(commonSettings:_*)
 
   lazy val `sphere-java-client-ning-1_8` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
-    .settings(libraryDependencies += "com.ning" % "async-http-client" % "1.8.7").configs(IntegrationTest)
+    .settings(libraryDependencies += `async-http-client-1.8`).configs(IntegrationTest)
 
   lazy val `sphere-java-client-ning-1_9` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
-    .settings(libraryDependencies += "com.ning" % "async-http-client" % "1.9.18").configs(IntegrationTest)
+    .settings(libraryDependencies += `async-http-client-1.9`).configs(IntegrationTest)
 
   lazy val `sphere-java-client-apache-async` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
-    .settings(libraryDependencies += "org.apache.httpcomponents" % "httpasyncclient" % "4.0.2").configs(IntegrationTest)
+    .settings(libraryDependencies ++= `apache-httpasyncclient` :: `commons-io` :: Nil).configs(IntegrationTest)
 
-  lazy val `sphere-common` = project.configs(IntegrationTest).settings(writeVersionSettings: _*).settings(commonSettings:_*)
+  lazy val `sphere-common` = project.configs(IntegrationTest)
+    .settings(writeVersionSettings: _*)
+    .settings(commonSettings:_*)
+    .settings(libraryDependencies ++= `jackson` ++ allTestLibs.map(_ % "test,it") ++
+    (`moneta` ::
+    `commons-lang3` ::
+    `slf4j-api` ::
+    `nv-i18n` ::
+    `slugify` ::
+     Nil)
+    )
 
-  lazy val `sphere-models` = project.configs(IntegrationTest).dependsOn(`sphere-common`, `sphere-java-client-apache-async` % "test,it", `sphere-test-lib` % "test,it").settings(commonSettings:_*)
+  lazy val `sphere-models` = project.configs(IntegrationTest)
+    .dependsOn(`sphere-common`, `sphere-java-client-apache-async` % "test,it", `sphere-test-lib` % "test,it")
+    .settings(commonSettings:_*)
+    .settings(libraryDependencies += `gson` % "test,it")
 
   lazy val `sphere-test-lib` = project.configs(IntegrationTest).dependsOn(`sphere-java-client`, `sphere-common`).settings(commonSettings:_*)
     .settings(
-      libraryDependencies ++=
-        junitDep ::
-        junitInterface ::
-        assertj ::
-        Nil
+      libraryDependencies ++= allTestLibs
     )
-
-
-  lazy val junitDep = "junit" % "junit-dep" % "4.11"
-  lazy val assertj =  "org.assertj" % "assertj-core" % "3.0.0"
-  lazy val junitInterface = "com.novocode" % "junit-interface" % "0.11"
 
   val genDoc = taskKey[Seq[File]]("generates the documentation")
 
