@@ -266,4 +266,17 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
         });
     }
+
+    @Test
+    public void removeDiscountCode() throws Exception {
+        withPersistentDiscountCode(client(), discountCode -> {
+            final Cart cart = createCartWithCountry(client());
+            final Cart cartWithDiscountCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
+            final DiscountCodeReference discountCodeReference = cartWithDiscountCode.getDiscountCodes().get(0);
+            assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
+
+            final Cart updatedCart = execute(CartUpdateCommand.of(cartWithDiscountCode, RemoveDiscountCode.of(discountCode)));
+            assertThat(updatedCart.getDiscountCodes()).isEmpty();
+        });
+    }
 }
