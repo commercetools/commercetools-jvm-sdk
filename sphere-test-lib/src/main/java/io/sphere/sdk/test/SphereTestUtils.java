@@ -93,6 +93,10 @@ public final class SphereTestUtils {
         return Math.abs(random.nextInt());
     }
 
+    public static long randomLong() {
+        return Math.abs(random.nextLong());
+    }
+
     public static float randomFloat() {
         return Math.abs(random.nextFloat());
     }
