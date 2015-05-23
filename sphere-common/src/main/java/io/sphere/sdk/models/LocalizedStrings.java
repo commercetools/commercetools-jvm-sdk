@@ -7,8 +7,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Optional;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.github.slugify.Slugify;
 import io.sphere.sdk.utils.ImmutableMapBuilder;
+import io.sphere.sdk.utils.StringUtils;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -162,8 +162,16 @@ public class LocalizedStrings extends Base {
      * @return new instance
      */
     public LocalizedStrings slugified() {
-        final Slugify slugify = new Slugify();
-        return mapValue((locale, value) -> slugify.slugify(value));
+        return mapValue((locale, value) -> StringUtils.slugify(value));
+    }
+
+    /**
+     * Creates a new {@link LocalizedStrings} where all translations are slugified (remove whitespace, etc.).
+     * This slugify methods appends a random string for a little uniqueness.
+     * @return new instance
+     */
+    public LocalizedStrings slugifiedUnique() {
+        return mapValue((locale, value) -> StringUtils.slugifyUnique(value));
     }
 
     @JsonIgnore

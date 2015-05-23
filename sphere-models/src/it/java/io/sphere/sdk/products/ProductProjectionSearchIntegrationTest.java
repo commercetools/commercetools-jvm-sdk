@@ -368,7 +368,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .attributes(Attribute.of(ATTR_NAME_SIZE, size2))
                 .price(Price.of(new BigDecimal("27.45"), EUR))
                 .build();
-        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugified(), masterVariant)
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), masterVariant)
                 .variants(asList(variant)).build();
         return execute(ProductCreateCommand.of(productDraft));
     }
@@ -379,7 +379,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .attributes(Attribute.of(ATTR_NAME_EVIL, evilValue))
                 .sku(sku)
                 .build();
-        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugified(), masterVariant).build();
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), masterVariant).build();
         return execute(ProductCreateCommand.of(productDraft));
     }
 }

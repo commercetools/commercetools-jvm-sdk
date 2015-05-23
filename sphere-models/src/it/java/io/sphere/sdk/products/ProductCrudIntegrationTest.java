@@ -1,6 +1,5 @@
 package io.sphere.sdk.products;
 
-import com.github.slugify.Slugify;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
@@ -19,6 +18,7 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.IterableUtils;
 import io.sphere.sdk.utils.MoneyImpl;
+import io.sphere.sdk.utils.StringUtils;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -154,7 +154,7 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
 
     private String sluggedClassName() {
         final String className = this.getClass().toString();
-        return new Slugify().slugify(className);
+        return StringUtils.slugify(className);
     }
 
     protected List<String> modelNames(){
