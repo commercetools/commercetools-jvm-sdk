@@ -23,6 +23,9 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
     private Optional<String> externalId = Optional.empty();
     private List<Category> children = Collections.emptyList();
     private List<Category> pathInTree = Collections.emptyList();
+    private Optional<LocalizedStrings> metaTitle = Optional.empty();
+    private Optional<LocalizedStrings> metaDescription = Optional.empty();
+    private Optional<LocalizedStrings> metaKeywords = Optional.empty();
 
     public static CategoryBuilder of(final String id, final LocalizedStrings name, final LocalizedStrings slug) {
         return new CategoryBuilder(id, name, slug);
@@ -107,9 +110,36 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
         return this;
     }
 
+    public CategoryBuilder metaTitle(final Optional<LocalizedStrings> metaTitle) {
+        this.metaTitle = metaTitle;
+        return getThis();
+    }
+
+    public CategoryBuilder metaTitle(final LocalizedStrings metaTitle) {
+        return metaTitle(Optional.of(metaTitle));
+    }
+
+    public CategoryBuilder metaDescription(final Optional<LocalizedStrings> metaDescription) {
+        this.metaDescription = metaDescription;
+        return getThis();
+    }
+
+    public CategoryBuilder metaDescription(final LocalizedStrings metaDescription) {
+        return metaDescription(Optional.of(metaDescription));
+    }
+
+    public CategoryBuilder metaKeywords(final Optional<LocalizedStrings> metaKeywords) {
+        this.metaKeywords = metaKeywords;
+        return getThis();
+    }
+
+    public CategoryBuilder metaKeywords(final LocalizedStrings metaKeywords) {
+        return metaKeywords(Optional.of(metaKeywords));
+    }
+
     @Override
     public Category build() {
-        return new CategoryImpl(id, version, createdAt, lastModifiedAt, name, slug, description, ancestors, parent, orderHint, externalId, children, pathInTree);
+        return new CategoryImpl(id, version, createdAt, lastModifiedAt, name, slug, description, ancestors, parent, orderHint, externalId, children, pathInTree, metaTitle, metaDescription, metaKeywords);
     }
 
     @Override

@@ -18,9 +18,9 @@ import static java.util.Arrays.asList;
 public class MetaAttributesUpdateActions extends Base {
     public static List<UpdateAction<Product>> of(final MetaAttributes metaAttributes, final ProductUpdateScope productUpdateScope) {
         return asList(
-                SetProductMetaTitle.of(metaAttributes.getMetaTitle(), productUpdateScope),
-                SetProductMetaDescription.of(metaAttributes.getMetaDescription(), productUpdateScope),
-                SetProductMetaKeywords.of(metaAttributes.getMetaKeywords(), productUpdateScope)
+                SetMetaTitle.of(metaAttributes.getMetaTitle(), productUpdateScope),
+                SetMetaDescription.of(metaAttributes.getMetaDescription(), productUpdateScope),
+                SetMetaKeywords.of(metaAttributes.getMetaKeywords(), productUpdateScope)
         );
     }
 }

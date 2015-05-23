@@ -193,7 +193,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             final LocalizedStrings metaKeywords = LocalizedStrings
                     .of(ENGLISH, "Platform-as-a-Service, e-commerce, http, api, tool");
-            final SetProductMetaKeywords action = SetProductMetaKeywords.of(metaKeywords, STAGED_AND_CURRENT);
+            final SetMetaKeywords action = SetMetaKeywords.of(metaKeywords, STAGED_AND_CURRENT);
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
 
@@ -208,7 +208,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             final LocalizedStrings metaDescription = LocalizedStrings
                     .of(ENGLISH, "SPHERE.IO&#8482; is the first Platform-as-a-Service solution for eCommerce.");
-            final SetProductMetaDescription action = SetProductMetaDescription.of(metaDescription, STAGED_AND_CURRENT);
+            final SetMetaDescription action = SetMetaDescription.of(metaDescription, STAGED_AND_CURRENT);
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
 
@@ -223,7 +223,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             final LocalizedStrings metaTitle = LocalizedStrings
                     .of(ENGLISH, "commercetools SPHERE.IO&#8482; - Next generation eCommerce");
-            final SetProductMetaTitle action = SetProductMetaTitle.of(metaTitle, STAGED_AND_CURRENT);
+            final SetMetaTitle action = SetMetaTitle.of(metaTitle, STAGED_AND_CURRENT);
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
 

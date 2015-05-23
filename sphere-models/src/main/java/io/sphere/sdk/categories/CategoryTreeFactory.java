@@ -1,6 +1,8 @@
 package io.sphere.sdk.categories;
 
 import java.util.Optional;
+
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.utils.SphereInternalLogger;
 import io.sphere.sdk.models.Reference;
 import org.apache.commons.lang3.tuple.Pair;
@@ -106,6 +108,21 @@ final class CategoryTreeFactory {
                 @Override
                 public Optional<Reference<Category>> getParent() {
                     return parentForCategory;
+                }
+
+                @Override
+                public Optional<LocalizedStrings> getMetaDescription() {
+                    return null;
+                }
+
+                @Override
+                public Optional<LocalizedStrings> getMetaTitle() {
+                    return null;
+                }
+
+                @Override
+                public Optional<LocalizedStrings> getMetaKeywords() {
+                    return null;
                 }
             };
             pathInTree.remove(pathInTree.size() - 1);    // c.pathInTree ends with c itself

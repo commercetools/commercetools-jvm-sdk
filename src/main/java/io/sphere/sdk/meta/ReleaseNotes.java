@@ -4,6 +4,9 @@ import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.ProductProjectionType;
+import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
+import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
+import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.QueryPredicate;
 
@@ -43,9 +46,9 @@ import java.util.function.BiFunction;
      <li class=change-in-release>{@code io.sphere.sdk.queries.Predicate} has been renamed to {@link io.sphere.sdk.queries.QueryPredicate}.</li>
      <li class=change-in-release>The JVM SDK itself uses for tests the <a href="http://joel-costigliola.github.io/assertj/">assertj</a> assertion methods instead of fest assertions.</li>
      <li class=change-in-release>{@code io.sphere.sdk.products.commands.updateactions.SetMetaAttributes} has been removed since it is deprecated in SPHERE.IO.
-     Use {@link io.sphere.sdk.products.commands.updateactions.SetProductMetaTitle},
-         {@link io.sphere.sdk.products.commands.updateactions.SetProductMetaDescription},
-         {@link io.sphere.sdk.products.commands.updateactions.SetProductMetaKeywords} or {@link io.sphere.sdk.products.commands.updateactions.MetaAttributesUpdateActions} for all together.
+     Use {@link SetMetaTitle},
+         {@link SetMetaDescription},
+         {@link SetMetaKeywords} or {@link io.sphere.sdk.products.commands.updateactions.MetaAttributesUpdateActions} for all together.
      </li>
      <li class=fixed-in-release>The exception for a failing {@link io.sphere.sdk.customers.commands.CustomerSignInCommand} shows more problem details. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/397">#397</a>.</li>
  </ul>
