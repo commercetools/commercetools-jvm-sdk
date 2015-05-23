@@ -37,7 +37,6 @@ trait other {
   val `nv-i18n` = "com.neovisionaries" % "nv-i18n" % "1.15"
   val `commons-lang3` = "org.apache.commons" % "commons-lang3" % "3.4"
   val `commons-io` = "org.apache.commons" % "commons-io" % "1.3.2"
-  val `slugify` = "com.github.slugify" % "slugify" % "2.1.2"
   val `moneta` = "org.javamoney" % "moneta" % "1.0"
   val `slf4j-api` = "org.slf4j" % "slf4j-api" % "1.7.12"
   val `logback-classic` = "ch.qos.logback" % "logback-classic" % "1.1.3"
