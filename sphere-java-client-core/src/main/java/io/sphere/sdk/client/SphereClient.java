@@ -2,7 +2,6 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
 
-import java.io.Closeable;
 import java.util.concurrent.CompletionStage;
 
 /**
@@ -19,9 +18,10 @@ import java.util.concurrent.CompletionStage;
  * Refer to <a href="../meta/SphereResources.html">resources</a> for known SPHERE.IO requests.
  *
  */
-public interface SphereClient extends Closeable {
+public interface SphereClient extends AutoCloseable {
     <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest);
 
+    @Override
     void close();
 
     /**
@@ -33,7 +33,7 @@ public interface SphereClient extends Closeable {
      * @param tokenSupplier delivery of access tokens
      * @return sphere client
      */
-    public static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier) {
+    static SphereClient of(final SphereApiConfig config, final HttpClient httpClient, final SphereAccessTokenSupplier tokenSupplier) {
         return SphereClientImpl.of(config, httpClient, tokenSupplier);
     }
 }

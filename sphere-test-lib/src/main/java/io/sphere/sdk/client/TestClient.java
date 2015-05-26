@@ -1,8 +1,10 @@
 package io.sphere.sdk.client;
 
+import io.sphere.sdk.models.Base;
+
 import java.util.concurrent.ExecutionException;
 
-public final class TestClient {
+public final class TestClient extends Base implements AutoCloseable {
     private final SphereClient underlying;
 
     public TestClient(final SphereClient underlying) {
@@ -17,6 +19,7 @@ public final class TestClient {
         }
     }
 
+    @Override
     public void close() {
         underlying.close();
     }

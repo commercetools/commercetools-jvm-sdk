@@ -6,5 +6,6 @@ import java.util.concurrent.CompletionStage;
 public interface HttpClient extends Closeable {
     CompletionStage<HttpResponse> execute(HttpRequest httpRequest);
 
+    @Override
     void close();
 }
