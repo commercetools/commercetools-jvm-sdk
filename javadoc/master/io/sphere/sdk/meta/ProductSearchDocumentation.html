@@ -112,13 +112,13 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <div class="block">Products can be retrieved using full-text search, filtering, faceting and sorting functionality combined.
 
 
- <p>Even though the <a href="../../../../io/sphere/sdk/meta/QueryDocumentation.html" title="class in io.sphere.sdk.meta"><code>Query API</code></a> lets you query for resources with certain attribute values, its performance is seriously affected when manipulating data (i.e. filtering, sorting) by some attributes, specially by custom attributes. Moreover, some typical operations over a list of resources, such as full-text search, are simply not supported.</p>
+ <p>Even though the <a href="../../../../io/sphere/sdk/meta/QueryDocumentation.html" title="class in io.sphere.sdk.meta"><code>Query API</code></a> lets you query for resources with certain attribute values, its performance is seriously affected by some attributes, specially by custom attributes, when manipulating data (i.e. filtering, sorting). Moreover, some typical operations over a list of resources, such as full-text search, are simply not supported.</p>
 
- <p>The Search API is specially designed to support these uses cases where the Query API is not powerful enough, providing not only full-text search, filtering and sorting, but also statistical analysis of the data with facets.</p>
+ <p>The Search API is specially designed to support those uses cases where the Query API is not powerful enough, by providing not only full-text search, filtering, and sorting, but also statistical analysis of the data with facets.</p>
 
- <p>The search endpoints are supposed to be faster than the query endpoints, but with the price of eventual consistency. In other words, when the name of a product has been changed, it will still take some seconds to propagate this change to the search index.</p>
+ <p>The search endpoints are supposed to be faster than the query endpoints, but for the price of intermittent inconsistency. In other words, whenever the name of a product was changed, it will still take some seconds to propagate this change to the search index.</p>
 
- <p>Currently only products have a search endpoint and only for <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a>. Therefore, be aware that the class to create a search request for products is called <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search"><code>ProductProjectionSearch</code></a>.</p>
+ <p>Currently only products have a search endpoint for <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> only. Therefore, be aware that the class to create a search request for products is called <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search"><code>ProductProjectionSearch</code></a>.</p>
 
  <p>The following examples in this document are based on the search for products. The product data defined in the SPHERE.IO platform used for the following code examples are:
 
@@ -187,27 +187,27 @@ assertThat(result.getResults().size()).isEqualTo(min(25, max(result.getTotal() -
 
 <h3 id=sort>Sorting</h3>
 
- <p>Any attribute you can sort by, allow an ascending and descending sort direction. On the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting">Sorting</a> documentation page you can explore for which fields you can sort for.</p>
+ <p>Any attribute you can sort by, allows both sort directions, ascending and descending. On the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting">Sorting</a> documentation page you can explore for which fields you can sort for.</p>
 
- <p>As an example, the next code requests all products sorted by size in an ascending direction:</p>
+ <p>The code sample below shows a request for all products which will be sorted by size in an ascending direction:</p>
 
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-sortByAttributeAscending--%s" class=code-example><pre><code class='java'>final SearchSort&lt;ProductProjection&gt; sort = ProductProjectionSearch.model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sort(ASC);
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).withSort(sort));
 assertThat(resultsToIds(result)).isEqualTo(asList(product2.getId(), product1.getId(), product3.getId()));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
- <p>When sorting on product custom attributes, you can also choose which should be the selected variant used for sorting. By default the values are sorted internally through variants, selecting the variant that best matches the sorting direction. This behaviour can be easily inverted, as explained in the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting-attribute">Sorting by Attributes</a> documentation page.</p>
+ <p>When sorting on product custom attributes, you can also choose which variant should be used for sorting. By default, the values are sorted through variants internally, selecting the best-matching variant according to the sorting direction. This behaviour can easily be inverted, as explained in the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting-attribute">Sorting by Attributes</a> documentation page.</p>
 
- <p>In the following example the products are sorted by size in an ascending direction, but sorting on the size with the highest value within each product variants instead:</p>
+ <p>In the following example the products are sorted by size in an ascending direction, but sorted by size with the highest value within each product variants instead:</p>
 
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-sortWithAdditionalParameterByAttributeAscending--%s" class=code-example><pre><code class='java'>final SearchSort&lt;ProductProjection&gt; sort = ProductProjectionSearch.model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sort(ASC_MAX);
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).withSort(sort));
 assertThat(resultsToIds(result)).isEqualTo(asList(product3.getId(), product2.getId(), product1.getId()));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
- <p>Alternatively, there is the possibility to provide directly the sort request, even though this method is unsafe and therefore not recommended.</p>
+ <p>Alternatively, you can provide the sort request directly, even though this method is unsafe and therefore not recommended.</p>
 
- <p>Here is the equivalent code for the previous sorting by size:</p>
+ <p>Here is the alternative code equivalent to the previous sorting by size:</p>
 
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-sortWithSimpleExpression--%s" class=code-example><pre><code class='java'>final SearchSort&lt;ProductProjection&gt; sort = SearchSort.of("variants.attributes." + ATTR_NAME_SIZE + " asc.max");
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).withSort(sort));
@@ -228,8 +228,8 @@ assertThat(resultsToIds(result)).isEqualTo(asList(product3.getId(), product2.get
     <dt>Filter Query: <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFilterQuery-java.util.List-"><code>SearchDsl.withFilterQuery(java.util.List)</code></a>.</dt>
     <dd>This parameter allows to filter products BEFORE facets have been calculated, therefore this scope affects both results and facets.</dd>
 
-    <dt>Filter Results (in HTTP API is called just "filter"): <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFilterResults-java.util.List-"><code>SearchDsl.withFilterResults(java.util.List)</code></a></dt>
-    <dd>This parameter allows to filter products AFTER facets have been calculated, therefore this scope affects only the results. Using this filter makes sense only together with facets, otherwise Filter Query should be preferred.</dd>
+    <dt>Filter Results (in the HTTP API it is called just "filter"): <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFilterResults-java.util.List-"><code>SearchDsl.withFilterResults(java.util.List)</code></a></dt>
+    <dd>This parameter allows to filter products AFTER facets have been calculated, therefore this scope affects the results only. Using this filter only makes sense when used together with facets, otherwise Filter Query should be preferred.</dd>
 
     <dt>Filter Facets: <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFilterFacets-java.util.List-"><code>SearchDsl.withFilterFacets(java.util.List)</code></a></dt>
     <dd>This parameter allows to filter those products used for facets calculation only, without affecting the results whatsoever. All facet calculations are affected except for those facets operating on the same field as the filter, enabling multi-select faceting when combined with Filter Results.</dd>
@@ -276,7 +276,7 @@ final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductP
 assertThat(resultsToIds(result)).containsOnly(product2.getId());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
- <p>Besides filtering by terms, you can also filter by a range of values, like in the following code.</p>
+ <p>Besides filtering by terms, you can also filter by a range of values, as shown in the following code.</p>
 
  <p>Here we are requesting only those products with at least one variant having the size attribute greater than or equals to 44:</p>
 
@@ -285,9 +285,9 @@ final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductP
 assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
- <p>There is also the possibility of providing directly the filter expression, although it is unsafe and thus not recommended.</p>
+ <p>There is also the possibility to provide the filter expression directly, although it is unsafe and thus not recommended.</p>
 
- <p>In the following example the same previous filter by size is requested this way:</p>
+ <p>In the following example the same filter by size is requested as previously, but now in this way:</p>
 
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-simpleFilterByRange--%s" class=code-example><pre><code class='java'>final FilterExpression&lt;ProductProjection&gt; filter = FilterExpression.of("variants.attributes." + ATTR_NAME_SIZE + ":range(44 to *)");
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(ProductProjectionSearch.of(STAGED).plusFilterQuery(filter));
@@ -336,9 +336,9 @@ assertThat(rangeStats.getSum()).isEqualByComparingTo(valueOf(246));
 assertThat(rangeStats.getMean()).isEqualTo(41.0);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/ProductProjectionSearchIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
- <p>There is also the possibility of providing directly the facet expression, although it is unsafe and thus not recommended.</p>
+ <p>There is also the possibility to provide the facet expression directly, although it is unsafe and thus not recommended.</p>
 
- <p>In the following code it is reproduced the same request as in the Term Facet example, providing a facet expression instead:</p>
+ <p>In the following code the same request as in the Term Facet example is reproduced, but providing a facet expression now instead:</p>
 
  <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-simpleFacetsAreParsed--%s" class=code-example><pre><code class='java'>final String path = "variants.attributes." + ATTR_NAME_COLOR;
 final FacetExpression&lt;ProductProjection&gt; facet = FacetExpression.of(path);
@@ -352,7 +352,7 @@ assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2),
 
  <h4 id=facet-alias>Alias</h4>
 
- <p>Additionally facets allow to specify an alias, which will then replace the attribute path in the result. This functionality allows to calculate different types of facets on the same attribute. There is an extended explanation with examples in the API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">Facets</a>.</p>
+ <p>Additionally, facets allow to specify an alias which will then replace the attribute path in the result. This functionality allows to calculate different types of facets on the same attribute. There is an extended explanation with examples in the API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">Facets</a>.</p>
 
  <p>In order to use it, there is a method that allows to define the desired alias:</p>
 
