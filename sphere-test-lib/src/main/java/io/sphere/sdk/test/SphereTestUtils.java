@@ -1,10 +1,10 @@
 package io.sphere.sdk.test;
 
-import com.github.slugify.Slugify;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.MoneyImpl;
+import io.sphere.sdk.utils.StringUtils;
 
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
@@ -114,6 +114,6 @@ public final class SphereTestUtils {
     }
 
     public static String slugify(final String s) {
-        return new Slugify().slugify(s);
+        return StringUtils.slugify(s);
     }
 }
