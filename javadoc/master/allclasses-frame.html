@@ -12,10 +12,12 @@
 <h1 class="bar">All&nbsp;Classes</h1>
 <div class="indexContainer">
 <ul>
+<li><a href="io/sphere/sdk/cartdiscounts/AbsoluteCartDiscountValue.html" title="class in io.sphere.sdk.cartdiscounts" target="classFrame">AbsoluteCartDiscountValue</a></li>
 <li><a href="io/sphere/sdk/productdiscounts/AbsoluteProductDiscount.html" title="class in io.sphere.sdk.productdiscounts" target="classFrame">AbsoluteProductDiscount</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/AddAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">AddAddress</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">AddCustomLineItem</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">AddDelivery</a></li>
+<li><a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">AddDiscountCode</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">AddExternalImage</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">AddLineItem</a></li>
 <li><a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions" target="classFrame">AddLocation</a></li>
@@ -67,8 +69,21 @@
 <li><a href="io/sphere/sdk/carts/queries/CartByIdFetch.html" title="class in io.sphere.sdk.carts.queries" target="classFrame">CartByIdFetch</a></li>
 <li><a href="io/sphere/sdk/carts/commands/CartCreateCommand.html" title="class in io.sphere.sdk.carts.commands" target="classFrame">CartCreateCommand</a></li>
 <li><a href="io/sphere/sdk/carts/commands/CartDeleteCommand.html" title="class in io.sphere.sdk.carts.commands" target="classFrame">CartDeleteCommand</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts" target="classFrame"><span class="interfaceName">CartDiscount</span></a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdFetch.html" title="class in io.sphere.sdk.cartdiscounts.queries" target="classFrame">CartDiscountByIdFetch</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommand.html" title="class in io.sphere.sdk.cartdiscounts.commands" target="classFrame">CartDiscountCreateCommand</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/CartDiscountDeleteCommand.html" title="class in io.sphere.sdk.cartdiscounts.commands" target="classFrame">CartDiscountDeleteCommand</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraft.html" title="class in io.sphere.sdk.cartdiscounts" target="classFrame">CartDiscountDraft</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts" target="classFrame">CartDiscountDraftBuilder</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="class in io.sphere.sdk.cartdiscounts.queries" target="classFrame">CartDiscountQuery</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQueryModel.html" title="class in io.sphere.sdk.cartdiscounts.queries" target="classFrame">CartDiscountQueryModel</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/CartDiscountTarget.html" title="interface in io.sphere.sdk.cartdiscounts" target="classFrame"><span class="interfaceName">CartDiscountTarget</span></a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html" title="class in io.sphere.sdk.cartdiscounts.commands" target="classFrame">CartDiscountUpdateCommand</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/CartDiscountValue.html" title="interface in io.sphere.sdk.cartdiscounts" target="classFrame"><span class="interfaceName">CartDiscountValue</span></a></li>
 <li><a href="io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts" target="classFrame">CartDraft</a></li>
 <li><a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts" target="classFrame">CartDraftBuilder</a></li>
+<li><a href="io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts" target="classFrame"><span class="interfaceName">CartLike</span></a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/CartPredicate.html" title="interface in io.sphere.sdk.cartdiscounts" target="classFrame"><span class="interfaceName">CartPredicate</span></a></li>
 <li><a href="io/sphere/sdk/carts/queries/CartQuery.html" title="class in io.sphere.sdk.carts.queries" target="classFrame">CartQuery</a></li>
 <li><a href="io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts" target="classFrame">CartShippingInfo</a></li>
 <li><a href="io/sphere/sdk/carts/CartState.html" title="enum in io.sphere.sdk.carts" target="classFrame">CartState</a></li>
@@ -86,13 +101,17 @@
 <li><a href="io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands" target="classFrame">CategoryUpdateCommand</a></li>
 <li><a href="io/sphere/sdk/categories/CategoryWrapper.html" title="class in io.sphere.sdk.categories" target="classFrame">CategoryWrapper</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/ChangeAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">ChangeAddress</a></li>
+<li><a href="io/sphere/sdk/discountcodes/commands/updateactions/ChangeCartDiscounts.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions" target="classFrame">ChangeCartDiscounts</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeCartPredicate.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions" target="classFrame">ChangeCartPredicate</a></li>
 <li><a href="io/sphere/sdk/channels/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.channels.commands.updateactions" target="classFrame">ChangeDescription</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/ChangeEmail.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">ChangeEmail</a></li>
 <li><a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html" title="class in io.sphere.sdk.states.commands.updateactions" target="classFrame">ChangeInitial</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeIsActive.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions" target="classFrame">ChangeIsActive</a></li>
 <li><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions" target="classFrame">ChangeIsDefault</a></li>
 <li><a href="io/sphere/sdk/channels/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.channels.commands.updateactions" target="classFrame">ChangeKey</a></li>
 <li><a href="io/sphere/sdk/states/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.states.commands.updateactions" target="classFrame">ChangeKey</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/ChangeLineItemQuantity.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">ChangeLineItemQuantity</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions" target="classFrame">ChangeName</a></li>
 <li><a href="io/sphere/sdk/categories/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.categories.commands.updateactions" target="classFrame">ChangeName</a></li>
 <li><a href="io/sphere/sdk/channels/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.channels.commands.updateactions" target="classFrame">ChangeName</a></li>
 <li><a href="io/sphere/sdk/customergroups/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.customergroups.commands.updateactions" target="classFrame">ChangeName</a></li>
@@ -104,10 +123,14 @@
 <li><a href="io/sphere/sdk/categories/commands/updateactions/ChangeParent.html" title="class in io.sphere.sdk.categories.commands.updateactions" target="classFrame">ChangeParent</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">ChangePaymentState</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">ChangePrice</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeRequiresDiscountCode.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions" target="classFrame">ChangeRequiresDiscountCode</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">ChangeShipmentState</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">ChangeSlug</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeSortOrder.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions" target="classFrame">ChangeSortOrder</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeTarget.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions" target="classFrame">ChangeTarget</a></li>
 <li><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeTaxCategory.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions" target="classFrame">ChangeTaxCategory</a></li>
 <li><a href="io/sphere/sdk/states/commands/updateactions/ChangeType.html" title="class in io.sphere.sdk.states.commands.updateactions" target="classFrame">ChangeType</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeValue.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions" target="classFrame">ChangeValue</a></li>
 <li><a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels" target="classFrame"><span class="interfaceName">Channel</span></a></li>
 <li><a href="io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="class in io.sphere.sdk.channels.queries" target="classFrame">ChannelByIdFetch</a></li>
 <li><a href="io/sphere/sdk/channels/queries/ChannelByKeyFetch.html" title="class in io.sphere.sdk.channels.queries" target="classFrame">ChannelByKeyFetch</a></li>
@@ -163,6 +186,7 @@
 <li><a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts" target="classFrame">CustomLineItemDraft</a></li>
 <li><a href="io/sphere/sdk/orders/CustomLineItemImportDraft.html" title="interface in io.sphere.sdk.orders" target="classFrame"><span class="interfaceName">CustomLineItemImportDraft</span></a></li>
 <li><a href="io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders" target="classFrame">CustomLineItemImportDraftBuilder</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/CustomLineItemsTarget.html" title="class in io.sphere.sdk.cartdiscounts" target="classFrame">CustomLineItemsTarget</a></li>
 <li><a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects" target="classFrame"><span class="interfaceName">CustomObject</span></a></li>
 <li><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyFetch.html" title="class in io.sphere.sdk.customobjects.queries" target="classFrame">CustomObjectByKeyFetch</a></li>
 <li><a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="class in io.sphere.sdk.customobjects.queries" target="classFrame">CustomObjectCustomJsonMappingByKeyFetch</a></li>
@@ -191,6 +215,19 @@
 <li><a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders" target="classFrame">Delivery</a></li>
 <li><a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders" target="classFrame">DeliveryItem</a></li>
 <li><a href="io/sphere/sdk/client/DeprecationExceptionSphereClientDecorator.html" title="class in io.sphere.sdk.client" target="classFrame">DeprecationExceptionSphereClientDecorator</a></li>
+<li><a href="io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes" target="classFrame"><span class="interfaceName">DiscountCode</span></a></li>
+<li><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeByIdFetch.html" title="class in io.sphere.sdk.discountcodes.queries" target="classFrame">DiscountCodeByIdFetch</a></li>
+<li><a href="io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html" title="class in io.sphere.sdk.discountcodes.commands" target="classFrame">DiscountCodeCreateCommand</a></li>
+<li><a href="io/sphere/sdk/discountcodes/commands/DiscountCodeDeleteCommand.html" title="class in io.sphere.sdk.discountcodes.commands" target="classFrame">DiscountCodeDeleteCommand</a></li>
+<li><a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html" title="class in io.sphere.sdk.discountcodes" target="classFrame">DiscountCodeDraft</a></li>
+<li><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes" target="classFrame">DiscountCodeDraftBuilder</a></li>
+<li><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html" title="class in io.sphere.sdk.discountcodes.queries" target="classFrame">DiscountCodeQuery</a></li>
+<li><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQueryModel.html" title="class in io.sphere.sdk.discountcodes.queries" target="classFrame">DiscountCodeQueryModel</a></li>
+<li><a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html" title="class in io.sphere.sdk.discountcodes" target="classFrame">DiscountCodeReference</a></li>
+<li><a href="io/sphere/sdk/discountcodes/DiscountCodeState.html" title="enum in io.sphere.sdk.discountcodes" target="classFrame">DiscountCodeState</a></li>
+<li><a href="io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html" title="class in io.sphere.sdk.discountcodes.commands" target="classFrame">DiscountCodeUpdateCommand</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPortion.html" title="class in io.sphere.sdk.cartdiscounts" target="classFrame">DiscountedLineItemPortion</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPrice.html" title="class in io.sphere.sdk.cartdiscounts" target="classFrame">DiscountedLineItemPrice</a></li>
 <li><a href="io/sphere/sdk/productdiscounts/DiscountedPrice.html" title="class in io.sphere.sdk.productdiscounts" target="classFrame">DiscountedPrice</a></li>
 <li><a href="io/sphere/sdk/meta/DocumentationGuidelines.html" title="class in io.sphere.sdk.meta" target="classFrame">DocumentationGuidelines</a></li>
 <li><a href="io/sphere/sdk/queries/EmbeddedQueryPredicate.html" title="class in io.sphere.sdk.queries" target="classFrame">EmbeddedQueryPredicate</a></li>
@@ -272,6 +309,7 @@
 <li><a href="io/sphere/sdk/orders/LineItemImportDraft.html" title="interface in io.sphere.sdk.orders" target="classFrame"><span class="interfaceName">LineItemImportDraft</span></a></li>
 <li><a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders" target="classFrame">LineItemImportDraftBuilder</a></li>
 <li><a href="io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts" target="classFrame"><span class="interfaceName">LineItemLike</span></a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/LineItemsTarget.html" title="class in io.sphere.sdk.cartdiscounts" target="classFrame">LineItemsTarget</a></li>
 <li><a href="io/sphere/sdk/utils/ListUtils.html" title="class in io.sphere.sdk.utils" target="classFrame">ListUtils</a></li>
 <li><a href="io/sphere/sdk/utils/LocaleUtils.html" title="class in io.sphere.sdk.utils" target="classFrame">LocaleUtils</a></li>
 <li><a href="io/sphere/sdk/search/LocalizedEnumSearchModel.html" title="class in io.sphere.sdk.search" target="classFrame">LocalizedEnumSearchModel</a></li>
@@ -308,7 +346,6 @@
 <li><a href="io/sphere/sdk/orders/commands/OrderImportCommand.html" title="class in io.sphere.sdk.orders.commands" target="classFrame">OrderImportCommand</a></li>
 <li><a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders" target="classFrame"><span class="interfaceName">OrderImportDraft</span></a></li>
 <li><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders" target="classFrame">OrderImportDraftBuilder</a></li>
-<li><a href="io/sphere/sdk/orders/OrderLike.html" title="interface in io.sphere.sdk.orders" target="classFrame"><span class="interfaceName">OrderLike</span></a></li>
 <li><a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries" target="classFrame">OrderQuery</a></li>
 <li><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries" target="classFrame">OrderQueryModel</a></li>
 <li><a href="io/sphere/sdk/orders/OrderShippingInfo.html" title="class in io.sphere.sdk.orders" target="classFrame">OrderShippingInfo</a></li>
@@ -407,10 +444,12 @@
 <li><a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries" target="classFrame">ReferenceQueryModel</a></li>
 <li><a href="io/sphere/sdk/search/ReferenceSearchModel.html" title="class in io.sphere.sdk.search" target="classFrame">ReferenceSearchModel</a></li>
 <li><a href="io/sphere/sdk/attributes/ReferenceType.html" title="class in io.sphere.sdk.attributes" target="classFrame">ReferenceType</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/RelativeCartDiscountValue.html" title="class in io.sphere.sdk.cartdiscounts" target="classFrame">RelativeCartDiscountValue</a></li>
 <li><a href="io/sphere/sdk/productdiscounts/RelativeProductDiscount.html" title="class in io.sphere.sdk.productdiscounts" target="classFrame">RelativeProductDiscount</a></li>
 <li><a href="io/sphere/sdk/meta/ReleaseNotes.html" title="class in io.sphere.sdk.meta" target="classFrame">ReleaseNotes</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/RemoveAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">RemoveAddress</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">RemoveCustomLineItem</a></li>
+<li><a href="io/sphere/sdk/carts/commands/updateactions/RemoveDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">RemoveDiscountCode</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">RemoveFromCategory</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/RemoveImage.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">RemoveImage</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/RemoveLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">RemoveLineItem</a></li>
@@ -454,6 +493,7 @@
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetAttributeInAllVariants</a></li>
 <li><a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions" target="classFrame">SetAuthorName</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetBillingAddress</a></li>
+<li><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetCartPredicate.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions" target="classFrame">SetCartPredicate</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetCompanyName.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetCompanyName</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetCountry.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetCountry</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions" target="classFrame">SetCustomerEmail</a></li>
@@ -464,18 +504,23 @@
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetDateOfBirth.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetDateOfBirth</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetDefaultBillingAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetDefaultBillingAddress</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetDefaultShippingAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetDefaultShippingAddress</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions" target="classFrame">SetDescription</a></li>
+<li><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions" target="classFrame">SetDescription</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetDescription</a></li>
 <li><a href="io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions" target="classFrame">SetDescription</a></li>
 <li><a href="io/sphere/sdk/states/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.states.commands.updateactions" target="classFrame">SetDescription</a></li>
 <li><a href="io/sphere/sdk/zones/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.zones.commands.updateactions" target="classFrame">SetDescription</a></li>
 <li><a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions" target="classFrame">SetExpectedDelivery</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetExternalId.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetExternalId</a></li>
+<li><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplications.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions" target="classFrame">SetMaxApplications</a></li>
+<li><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions" target="classFrame">SetMaxApplicationsPerCustomer</a></li>
 <li><a href="io/sphere/sdk/categories/commands/updateactions/SetMetaDescription.html" title="class in io.sphere.sdk.categories.commands.updateactions" target="classFrame">SetMetaDescription</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetMetaDescription.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetMetaDescription</a></li>
 <li><a href="io/sphere/sdk/categories/commands/updateactions/SetMetaKeywords.html" title="class in io.sphere.sdk.categories.commands.updateactions" target="classFrame">SetMetaKeywords</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetMetaKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetMetaKeywords</a></li>
 <li><a href="io/sphere/sdk/categories/commands/updateactions/SetMetaTitle.html" title="class in io.sphere.sdk.categories.commands.updateactions" target="classFrame">SetMetaTitle</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetMetaTitle.html" title="class in io.sphere.sdk.products.commands.updateactions" target="classFrame">SetMetaTitle</a></li>
+<li><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetName.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions" target="classFrame">SetName</a></li>
 <li><a href="io/sphere/sdk/states/commands/updateactions/SetName.html" title="class in io.sphere.sdk.states.commands.updateactions" target="classFrame">SetName</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions" target="classFrame">SetOrderNumber</a></li>
 <li><a href="io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventories.commands.updateactions" target="classFrame">SetRestockableInDays</a></li>
@@ -493,8 +538,11 @@
 <li><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions" target="classFrame">SetTransitions</a></li>
 <li><a href="io/sphere/sdk/attributes/SetType.html" title="class in io.sphere.sdk.attributes" target="classFrame">SetType</a></li>
 <li><a href="io/sphere/sdk/utils/SetUtils.html" title="class in io.sphere.sdk.utils" target="classFrame">SetUtils</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions" target="classFrame">SetValidFrom</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidUntil.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions" target="classFrame">SetValidUntil</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetVatId.html" title="class in io.sphere.sdk.customers.commands.updateactions" target="classFrame">SetVatId</a></li>
 <li><a href="io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders" target="classFrame">ShipmentState</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/ShippingCostTarget.html" title="class in io.sphere.sdk.cartdiscounts" target="classFrame">ShippingCostTarget</a></li>
 <li><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods" target="classFrame"><span class="interfaceName">ShippingMethod</span></a></li>
 <li><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="class in io.sphere.sdk.shippingmethods.queries" target="classFrame">ShippingMethodByIdFetch</a></li>
 <li><a href="io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands" target="classFrame">ShippingMethodCreateCommand</a></li>
