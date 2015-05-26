@@ -2,6 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.discountcodes.DiscountCodeReference;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultModelFluentBuilder;
 import io.sphere.sdk.models.Reference;
@@ -29,6 +30,7 @@ public class CartBuilder extends DefaultModelFluentBuilder<CartBuilder, Cart> {
     private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
     private Optional<CountryCode> country = Optional.empty();
     private Optional<CartShippingInfo> shippingInfo = Optional.empty();
+    private List<DiscountCodeReference> discountCodes = Collections.emptyList();
 
     private CartBuilder(final CurrencyUnit currency) {
         this.totalPrice = MoneyImpl.of(BigDecimal.ZERO, currency);
@@ -135,6 +137,11 @@ public class CartBuilder extends DefaultModelFluentBuilder<CartBuilder, Cart> {
         return shippingInfo(Optional.of(shippingInfo));
     }
 
+    public CartBuilder discountCodes(final List<DiscountCodeReference> discountCodes) {
+        this.discountCodes = discountCodes;
+        return this;
+    }
+
     @Override
     protected CartBuilder getThis() {
         return this;
@@ -144,6 +151,6 @@ public class CartBuilder extends DefaultModelFluentBuilder<CartBuilder, Cart> {
     public Cart build() {
         return new CartImpl(id, version, createdAt, lastModifiedAt, customerId, customerEmail,
                 lineItems, customLineItems, totalPrice, taxedPrice, cartState, shippingAddress,
-                billingAddress, inventoryMode, customerGroup, country, shippingInfo);
+                billingAddress, inventoryMode, customerGroup, country, shippingInfo, discountCodes);
     }
 }

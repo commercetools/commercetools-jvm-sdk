@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -10,33 +11,24 @@ import javax.money.MonetaryAmount;
 import java.util.Optional;
 import java.util.Set;
 
-final class CustomLineItemImpl implements CustomLineItem {
-    private final String id;
+final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineItem {
     private final LocalizedStrings name;
     private final MonetaryAmount money;
     private final String slug;
-    private final long quantity;
-    private final Set<ItemState> state;
     private final Reference<TaxCategory> taxCategory;
     private final Optional<TaxRate> taxRate;
 
     @JsonCreator
     CustomLineItemImpl(final String id, final LocalizedStrings name, final MonetaryAmount money,
                        final String slug, final long quantity, final Set<ItemState> state,
-                       final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate) {
-        this.id = id;
+                       final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate,
+                       final Optional<DiscountedLineItemPrice> discountedPrice) {
+        super(id, state, quantity, discountedPrice);
         this.name = name;
         this.money = money;
         this.slug = slug;
-        this.quantity = quantity;
-        this.state = state;
         this.taxCategory = taxCategory;
         this.taxRate = taxRate;
-    }
-
-    @Override
-    public String getId() {
-        return id;
     }
 
     @Override
@@ -52,16 +44,6 @@ final class CustomLineItemImpl implements CustomLineItem {
     @Override
     public String getSlug() {
         return slug;
-    }
-
-    @Override
-    public long getQuantity() {
-        return quantity;
-    }
-
-    @Override
-    public Set<ItemState> getState() {
-        return state;
     }
 
     @Override

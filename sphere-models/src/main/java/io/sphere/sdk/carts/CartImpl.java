@@ -3,6 +3,7 @@ package io.sphere.sdk.carts;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.discountcodes.DiscountCodeReference;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
@@ -26,6 +27,7 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
     private final Optional<Reference<CustomerGroup>> customerGroup;
     private final Optional<CountryCode> country;
     private final Optional<CartShippingInfo> shippingInfo;
+    private final List<DiscountCodeReference> discountCodes;
 
     @JsonCreator
     CartImpl(final String id, final long version, final Instant createdAt,
@@ -35,7 +37,7 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
              final Optional<TaxedPrice> taxedPrice, final CartState cartState,
              final Optional<Address> shippingAddress, final Optional<Address> billingAddress,
              final InventoryMode inventoryMode, final Optional<Reference<CustomerGroup>> customerGroup,
-             final Optional<CountryCode> country, final Optional<CartShippingInfo> shippingInfo) {
+             final Optional<CountryCode> country, final Optional<CartShippingInfo> shippingInfo, final List<DiscountCodeReference> discountCodes) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerId = customerId;
         this.customerEmail = customerEmail;
@@ -50,6 +52,7 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
         this.customerGroup = customerGroup;
         this.country = country;
         this.shippingInfo = shippingInfo;
+        this.discountCodes = discountCodes;
     }
 
     @Override
@@ -115,5 +118,10 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
     @Override
     public Optional<CartShippingInfo> getShippingInfo() {
         return shippingInfo;
+    }
+
+    @Override
+    public List<DiscountCodeReference> getDiscountCodes() {
+        return discountCodes;
     }
 }

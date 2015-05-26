@@ -1,5 +1,8 @@
 package io.sphere.sdk.carts;
 
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
+
+import java.util.Optional;
 import java.util.Set;
 
 public interface LineItemLike {
@@ -8,4 +11,6 @@ public interface LineItemLike {
     Set<ItemState> getState();
 
     long getQuantity();
+
+    Optional<DiscountedLineItemPrice> getDiscountedPrice();
 }

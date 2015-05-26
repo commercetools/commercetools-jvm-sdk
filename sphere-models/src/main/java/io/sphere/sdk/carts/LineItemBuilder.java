@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts;
 
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.Price;
@@ -21,6 +22,7 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
     private Set<ItemState> state = Collections.emptySet();
     private Optional<TaxRate> taxRate = Optional.empty();
     private Optional<Reference<Channel>> supplyChannel = Optional.empty();
+    private Optional<DiscountedLineItemPrice> discountedPrice = Optional.empty();
 
     private LineItemBuilder(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity) {
         this.id = id;
@@ -54,6 +56,11 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
         return this;
     }
 
+    public LineItemBuilder discountedPrice(final Optional<DiscountedLineItemPrice> discountedPrice) {
+        this.discountedPrice = discountedPrice;
+        return this;
+    }
+
     @Deprecated
     /**
      *  Use {@link #of(String, String, LocalizedStrings, ProductVariant, Price, long)} and {@link #taxRate(TaxRate)} instead.
@@ -68,6 +75,6 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
 
     @Override
     public LineItem build() {
-        return new LineItemImpl(id, productId, name, variant, price, quantity, state, taxRate, supplyChannel);
+        return new LineItemImpl(id, productId, name, variant, price, quantity, state, taxRate, supplyChannel, discountedPrice);
     }
 }

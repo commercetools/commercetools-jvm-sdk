@@ -1,0 +1,30 @@
+package io.sphere.sdk.cartdiscounts;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import javax.money.MonetaryAmount;
+import java.util.List;
+
+import static java.util.Arrays.asList;
+
+@JsonTypeInfo(
+        use = JsonTypeInfo.Id.NAME,
+        include = JsonTypeInfo.As.PROPERTY,
+        property = "type")
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = RelativeCartDiscountValue.class, name = "relative"),
+        @JsonSubTypes.Type(value = AbsoluteCartDiscountValue.class, name = "absolute") })
+public interface CartDiscountValue {
+        static AbsoluteCartDiscountValue ofAbsolute(final List<MonetaryAmount> money) {
+                return AbsoluteCartDiscountValue.of(money);
+        }
+
+        static AbsoluteCartDiscountValue ofAbsolute(final MonetaryAmount money) {
+                return AbsoluteCartDiscountValue.of(asList(money));
+        }
+
+        static RelativeCartDiscountValue ofRelative(final int permyriad) {
+                return RelativeCartDiscountValue.of(permyriad);
+        }
+}

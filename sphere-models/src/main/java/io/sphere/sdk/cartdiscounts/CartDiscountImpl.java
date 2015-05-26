@@ -1,0 +1,99 @@
+package io.sphere.sdk.cartdiscounts;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.Reference;
+
+import javax.annotation.Nullable;
+import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
+
+final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements CartDiscount {
+    private final LocalizedStrings name;
+    @Nullable
+    private final LocalizedStrings description;
+    private final CartDiscountValue value;
+    private final String cartPredicate;
+    private final CartDiscountTarget target;
+    private final String sortOrder;
+    private final boolean isActive;
+    @Nullable
+    private final Instant validFrom;
+    @Nullable
+    private final Instant validUntil;
+    private final boolean requiresDiscountCode;
+    private final List<Reference<Object>> references;
+
+    @JsonCreator
+    public CartDiscountImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final String cartPredicate, final LocalizedStrings name, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean isActive, final Instant validFrom, final Instant validUntil, final boolean requiresDiscountCode, final List<Reference<Object>> references) {
+        super(id, version, createdAt, lastModifiedAt);
+        this.cartPredicate = cartPredicate;
+        this.name = name;
+        this.description = description;
+        this.value = value;
+        this.target = target;
+        this.sortOrder = sortOrder;
+        this.isActive = isActive;
+        this.validFrom = validFrom;
+        this.validUntil = validUntil;
+        this.requiresDiscountCode = requiresDiscountCode;
+        this.references = references;
+    }
+
+    @Override
+    public String getCartPredicate() {
+        return cartPredicate;
+    }
+
+    @Override
+    public Optional<LocalizedStrings> getDescription() {
+        return Optional.ofNullable(description);
+    }
+
+    @Override
+    public boolean isActive() {
+        return isActive;
+    }
+
+    @Override
+    public LocalizedStrings getName() {
+        return name;
+    }
+
+    @Override
+    public List<Reference<Object>> getReferences() {
+        return references;
+    }
+
+    @Override
+    public boolean isRequiringDiscountCode() {
+        return requiresDiscountCode;
+    }
+
+    @Override
+    public String getSortOrder() {
+        return sortOrder;
+    }
+
+    @Override
+    public CartDiscountTarget getTarget() {
+        return target;
+    }
+
+    @Override
+    public Optional<Instant> getValidFrom() {
+        return Optional.ofNullable(validFrom);
+    }
+
+    @Override
+    public Optional<Instant> getValidUntil() {
+        return Optional.ofNullable(validUntil);
+    }
+
+    @Override
+    public CartDiscountValue getValue() {
+        return value;
+    }
+}

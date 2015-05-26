@@ -3,6 +3,8 @@ package io.sphere.sdk.carts.commands;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.CartByIdFetch;
+import io.sphere.sdk.discountcodes.DiscountCodeFixtures;
+import io.sphere.sdk.discountcodes.DiscountCodeReference;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -26,6 +28,7 @@ import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.withPersistentDiscountCode;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.*;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
@@ -251,6 +254,29 @@ public class CartUpdateCommandTest extends IntegrationTest {
         withFilledCart(client(), cart -> {
             final MonetaryAmount money = cart.getTaxedPrice().get().getTaxPortions().get(0).getAmount();
             assertThat(money).isNotNull();
+        });
+    }
+
+    @Test
+    public void addDiscountCode() throws Exception {
+        withPersistentDiscountCode(client(), discountCode -> {
+            final Cart cart = createCartWithCountry(client());
+            final Cart updatedCart = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
+            final DiscountCodeReference discountCodeReference = updatedCart.getDiscountCodes().get(0);
+            assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
+        });
+    }
+
+    @Test
+    public void removeDiscountCode() throws Exception {
+        withPersistentDiscountCode(client(), discountCode -> {
+            final Cart cart = createCartWithCountry(client());
+            final Cart cartWithDiscountCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
+            final DiscountCodeReference discountCodeReference = cartWithDiscountCode.getDiscountCodes().get(0);
+            assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
+
+            final Cart updatedCart = execute(CartUpdateCommand.of(cartWithDiscountCode, RemoveDiscountCode.of(discountCode)));
+            assertThat(updatedCart.getDiscountCodes()).isEmpty();
         });
     }
 }

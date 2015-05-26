@@ -20,8 +20,8 @@ public abstract class CreateCommandImpl<T, C> extends CommandImpl<T> implements 
     private final C body;
     private final JsonEndpoint<T> endpoint;
 
-    public CreateCommandImpl(final C body, final JsonEndpoint<T> endpoint) {
-        this.body = body;
+    public CreateCommandImpl(final C draft, final JsonEndpoint<T> endpoint) {
+        this.body = draft;
         this.endpoint = endpoint;
     }
 
