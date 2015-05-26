@@ -21,6 +21,9 @@ class ProductImpl extends DefaultModelImpl<Product> implements Product {
         this.productType = productType;
         this.masterData = masterData;
         this.taxCategory = taxCategory;
+        Optional.of(masterData)
+                .filter(d -> d instanceof ProductCatalogDataImpl)
+                .ifPresent(d -> ((ProductCatalogDataImpl)d).setProductId(id));
     }
 
     @Override
