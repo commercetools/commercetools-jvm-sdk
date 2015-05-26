@@ -198,7 +198,7 @@ import java.util.function.BiFunction;
  <h3>1.0.0-M9</h3>
  <ul>
  <li>Added {@link io.sphere.sdk.meta.KnownIssues Known Issues} page.</li>
- <li>Added experimental support for uploading product images in variants. See {@link io.sphere.sdk.products.commands.ExperimentalProductImageUploadCommand}.</li>
+ <li>Added experimental support for uploading product images in variants. See {@code io.sphere.sdk.products.commands.ExperimentalProductImageUploadCommand}.</li>
  <li>Added factory methods for {@link io.sphere.sdk.models.Image}.</li>
  <li>{@link io.sphere.sdk.models.Image} contains directly getters for width {@link io.sphere.sdk.models.Image#getWidth()}
  and height {@link io.sphere.sdk.models.Image#getHeight()}.</li>
