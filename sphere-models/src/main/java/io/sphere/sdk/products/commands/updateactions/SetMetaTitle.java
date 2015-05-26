@@ -13,20 +13,20 @@ import java.util.Optional;
  * <p>Create update actions to set the SEO attributes title, description and keywords altogether:</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setMetaAttributes()}
  */
-public class SetProductMetaTitle extends StageableProductUpdateAction {
+public class SetMetaTitle extends StageableProductUpdateAction {
     private final Optional<LocalizedStrings> metaTitle;
 
-    private SetProductMetaTitle(final Optional<LocalizedStrings> metaTitle, final ProductUpdateScope productUpdateScope) {
+    private SetMetaTitle(final Optional<LocalizedStrings> metaTitle, final ProductUpdateScope productUpdateScope) {
         super("setMetaTitle", productUpdateScope);
         this.metaTitle = metaTitle;
     }
 
-    public static SetProductMetaTitle of(final LocalizedStrings metaTitle, final ProductUpdateScope productUpdateScope) {
+    public static SetMetaTitle of(final LocalizedStrings metaTitle, final ProductUpdateScope productUpdateScope) {
         return of(Optional.of(metaTitle), productUpdateScope);
     }
 
-    public static SetProductMetaTitle of(final Optional<LocalizedStrings> metaTitle, final ProductUpdateScope productUpdateScope) {
-        return new SetProductMetaTitle(metaTitle, productUpdateScope);
+    public static SetMetaTitle of(final Optional<LocalizedStrings> metaTitle, final ProductUpdateScope productUpdateScope) {
+        return new SetMetaTitle(metaTitle, productUpdateScope);
     }
 
     public Optional<LocalizedStrings> getMetaTitle() {

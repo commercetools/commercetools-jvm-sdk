@@ -23,7 +23,9 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     @JsonIgnore
     private final List<Category> children;
     private final List<Category> pathInTree;
-
+    private final Optional<LocalizedStrings> metaTitle;
+    private final Optional<LocalizedStrings> metaDescription;
+    private final Optional<LocalizedStrings> metaKeywords;
 
     @JsonCreator
     CategoryImpl(final String id,
@@ -37,7 +39,7 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
                  final Optional<Reference<Category>> parent,
                  final Optional<String> orderHint, final Optional<String> externalId,
                  final List<Category> children,
-                 final List<Category> pathInTree) {
+                 final List<Category> pathInTree, final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.slug = slug;
@@ -46,7 +48,10 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
         this.parent = parent;
         this.orderHint = orderHint;
         this.externalId = externalId;
-        this.children = children;
+        this.children = Optional.ofNullable(children).orElse(Collections.emptyList());
+        this.metaTitle = metaTitle;
+        this.metaDescription = metaDescription;
+        this.metaKeywords = metaKeywords;
         this.pathInTree = pathInTree != null ? pathInTree : Collections.<Category>emptyList();
     }
 
@@ -98,5 +103,17 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     @Override
     public String toString() {
         return Category.toString(this);
+    }
+
+    public Optional<LocalizedStrings> getMetaDescription() {
+        return metaDescription;
+    }
+
+    public Optional<LocalizedStrings> getMetaKeywords() {
+        return metaKeywords;
+    }
+
+    public Optional<LocalizedStrings> getMetaTitle() {
+        return metaTitle;
     }
 }

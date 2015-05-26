@@ -84,4 +84,19 @@ public abstract class CategoryWrapper implements Category {
     public String toString() {
         return Category.toString(this);
     }
+
+    @Override
+    public Optional<LocalizedStrings> getMetaDescription() {
+        return delegate.getMetaDescription();
+    }
+
+    @Override
+    public Optional<LocalizedStrings> getMetaKeywords() {
+        return delegate.getMetaKeywords();
+    }
+
+    @Override
+    public Optional<LocalizedStrings> getMetaTitle() {
+        return delegate.getMetaTitle();
+    }
 }

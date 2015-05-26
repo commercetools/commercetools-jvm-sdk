@@ -24,7 +24,7 @@ import static java.util.stream.Collectors.toList;
  * </ul>
  */
 @JsonDeserialize(as=CategoryImpl.class)
-public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
+public interface Category extends DefaultModel<Category>, WithLocalizedSlug, MetaAttributes {
 
     LocalizedStrings getName();
 
@@ -43,6 +43,15 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug {
     List<Category> getChildren();
 
     List<Category> getPathInTree();
+
+    @Override
+    Optional<LocalizedStrings> getMetaTitle();
+
+    @Override
+    Optional<LocalizedStrings> getMetaDescription();
+
+    @Override
+    Optional<LocalizedStrings> getMetaKeywords();
 
     @Override
     default Reference<Category> toReference() {
