@@ -25,7 +25,7 @@ class AttributeContainerImpl extends Base implements AttributeContainer {
     }
 
     @Override
-    public <T> Optional<T> getAttribute(final AttributeGetter<Product, T> accessor) {
+    public <T> Optional<T> getAttribute(final AttributeGetter<T> accessor) {
         final String attributeName = accessor.getName();
         final Optional<Attribute> attributeOption = getAttributes().stream()
                 .filter(a -> Objects.equals(attributeName, a.getName()))

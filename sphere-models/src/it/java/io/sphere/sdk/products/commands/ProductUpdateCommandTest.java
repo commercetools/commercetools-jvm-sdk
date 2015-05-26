@@ -258,12 +258,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
             //example for MonetaryAmount attribute
             final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
-            final AttributeGetterSetter<Product, MonetaryAmount> moneyAttribute =
+            final AttributeGetterSetter<MonetaryAmount> moneyAttribute =
                     AttributeAccess.ofMoney().ofName(moneyAttributeName);
             final MonetaryAmount newValueForMoney = EURO_10;
 
             //example for LocalizedEnumValue attribute
-            final AttributeGetterSetter<Product, LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+            final AttributeGetterSetter<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
             final LocalizedEnumValue oldValueForColor = Colors.GREEN;
             final LocalizedEnumValue newValueForColor = Colors.RED;
 
@@ -292,12 +292,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
             //example for MonetaryAmount attribute
             final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
-            final AttributeGetterSetter<Product, MonetaryAmount> moneyAttribute =
+            final AttributeGetterSetter<MonetaryAmount> moneyAttribute =
                     AttributeAccess.ofMoney().ofName(moneyAttributeName);
             final MonetaryAmount newValueForMoney = EURO_10;
 
             //example for LocalizedEnumValue attribute
-            final AttributeGetterSetter<Product, LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+            final AttributeGetterSetter<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
             final LocalizedEnumValue oldValueForColor = Colors.GREEN;
             final LocalizedEnumValue newValueForColor = Colors.RED;
 
@@ -368,15 +368,15 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void addVariant() throws Exception {
-        final AttributeGetterSetter<Product, MonetaryAmount> moneyAttribute =
+        final AttributeGetterSetter<MonetaryAmount> moneyAttribute =
                 AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
         final Attribute moneyAttributeValue = Attribute.of(moneyAttribute, EURO_10);
 
-        final AttributeGetterSetter<Product, LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+        final AttributeGetterSetter<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
         final LocalizedEnumValue color = Colors.RED;
         final Attribute colorAttributeValue = Attribute.of(colorAttribute, color);
 
-        final AttributeGetterSetter<Product, PlainEnumValue> sizeAttribute = Sizes.ATTRIBUTE;
+        final AttributeGetterSetter<PlainEnumValue> sizeAttribute = Sizes.ATTRIBUTE;
         final Attribute sizeValue = Attribute.of(sizeAttribute, Sizes.M);
 
 

@@ -52,8 +52,8 @@ package io.sphere.sdk.attributes;
  * {@include.example io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle.TShirt}
  *
  */
-public interface AttributeGetterSetter<M, T> extends AttributeGetter<M, T>, AttributeSetter<M, T> {
-    public static <M, T> AttributeGetterSetter<M, T> of(final String name, final AttributeMapper<T> mapper) {
+public interface AttributeGetterSetter<T> extends AttributeGetter<T>, AttributeSetter<T> {
+    static <T> AttributeGetterSetter<T> of(final String name, final AttributeMapper<T> mapper) {
         return new AttributeGetterSetterImpl<>(name, mapper);
     }
 }

@@ -2,7 +2,7 @@ package io.sphere.sdk.attributes;
 
 import io.sphere.sdk.models.Base;
 
-class AttributeGetterSetterImpl<M, T> extends Base implements AttributeGetterSetter<M, T> {
+class AttributeGetterSetterImpl<T> extends Base implements AttributeGetterSetter<T> {
 
     private final String name;
     private final AttributeMapper<T> mapper;
