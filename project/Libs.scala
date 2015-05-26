@@ -41,6 +41,7 @@ trait other {
   val `slf4j-api` = "org.slf4j" % "slf4j-api" % "1.7.12"
   val `logback-classic` = "ch.qos.logback" % "logback-classic" % "1.1.3"
   val `jul-to-slf4j` = "org.slf4j" % "jul-to-slf4j" % "1.7.12"
+  val `jsr305` =  "com.google.code.findbugs" % "jsr305" % "3.0.0"
 }
 
 trait test {

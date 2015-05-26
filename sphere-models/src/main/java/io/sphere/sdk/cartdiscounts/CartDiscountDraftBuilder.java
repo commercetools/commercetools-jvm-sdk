@@ -13,7 +13,7 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
     @Nullable
     private LocalizedStrings description;
     private CartDiscountValue value;
-    private final CartPredicate cartPredicate;
+    private CartPredicate cartPredicate;
     private CartDiscountTarget target;
     private final String sortOrder;
     private boolean isActive = true;
@@ -62,6 +62,11 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
 
     public CartDiscountDraftBuilder isActive(final boolean isActive) {
         this.isActive = isActive;
+        return this;
+    }
+
+    public CartDiscountDraftBuilder cartPredicate(final CartPredicate cartPredicate) {
+        this.cartPredicate = cartPredicate;
         return this;
     }
 

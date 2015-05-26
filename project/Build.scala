@@ -58,6 +58,7 @@ object Build extends Build {
     `commons-lang3` ::
     `slf4j-api` ::
     `nv-i18n` ::
+    `jsr305` ::
      Nil)
     )
 

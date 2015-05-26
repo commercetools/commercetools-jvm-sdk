@@ -1,10 +1,15 @@
 package io.sphere.sdk.carts.commands;
 
+import io.sphere.sdk.cartdiscounts.*;
+import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.CartByIdFetch;
-import io.sphere.sdk.discountcodes.DiscountCodeFixtures;
+import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.discountcodes.DiscountCode;
+import io.sphere.sdk.discountcodes.DiscountCodeDraft;
 import io.sphere.sdk.discountcodes.DiscountCodeReference;
+import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -19,20 +24,23 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.BiConsumer;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
-import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.withPersistentDiscountCode;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomerAndCart;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.*;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartUpdateCommandTest extends IntegrationTest {
@@ -259,8 +267,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void addDiscountCode() throws Exception {
-        withPersistentDiscountCode(client(), discountCode -> {
-            final Cart cart = createCartWithCountry(client());
+        withCartAndDiscountCode(client(), (cart, discountCode) -> {
             final Cart updatedCart = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
             final DiscountCodeReference discountCodeReference = updatedCart.getDiscountCodes().get(0);
             assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
@@ -269,14 +276,27 @@ public class CartUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void removeDiscountCode() throws Exception {
-        withPersistentDiscountCode(client(), discountCode -> {
-            final Cart cart = createCartWithCountry(client());
-            final Cart cartWithDiscountCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
-            final DiscountCodeReference discountCodeReference = cartWithDiscountCode.getDiscountCodes().get(0);
+        withCartAndDiscountCode(client(), (cart, discountCode) -> {
+            final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
+            final DiscountCodeReference discountCodeReference = cartWithCode.getDiscountCodes().get(0);
             assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
 
-            final Cart updatedCart = execute(CartUpdateCommand.of(cartWithDiscountCode, RemoveDiscountCode.of(discountCode)));
+            final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
             assertThat(updatedCart.getDiscountCodes()).isEmpty();
+        });
+    }
+
+    private void withCartAndDiscountCode(final TestClient client, final BiConsumer<Cart, DiscountCode> user) {
+        withCustomerAndCart(client(), (customer, cart) -> {
+            final CartDiscountDraft draft = CartDiscountFixtures.newCartDiscountDraftBuilder()
+                    .cartPredicate(CartPredicate.of(format("customer.id = \"%s\"", customer.getId())))
+                    .isActive(true)
+                    .validFrom(Optional.<Instant>empty())
+                    .validUntil(Optional.<Instant>empty())
+                    .build();
+            final CartDiscount cartDiscount = client.execute(CartDiscountCreateCommand.of(draft));
+            final DiscountCode discountCode = client.execute(DiscountCodeCreateCommand.of(DiscountCodeDraft.of(randomKey(), cartDiscount)));
+            user.accept(cart, discountCode);
         });
     }
 }

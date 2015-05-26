@@ -13,7 +13,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class DiscountCodeFixtures {
     public static void withPersistentDiscountCode(final TestClient client, final Consumer<DiscountCode> consumer) {
-        final String code = DiscountCodeFixtures.class.getSimpleName() + "-persistent-2";
+        final String code = DiscountCodeFixtures.class.getSimpleName() + "-persistent-4";
         final Optional<DiscountCode> fetchedDiscountCode = client.execute(DiscountCodeQuery.of()
                 .withPredicate(DiscountCodeQuery.model().code().is(code))).head();
 
