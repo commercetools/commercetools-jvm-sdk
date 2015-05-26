@@ -94,7 +94,7 @@ public class LocalizedStringsTest {
     @Test
     public void slugifyUnique() throws Exception {
         final LocalizedStrings actual = LocalizedStrings.of(germanLocale, "Aa -A_", englishLocale, "dog food").slugifiedUnique();
-        assertThat(actual.stream().allMatch(entry -> entry.getValue().matches("\\w+-\\d{6,14}"))).isTrue();
+        assertThat(actual.stream().allMatch(entry -> entry.getValue().matches("[\\w-]+-\\d{6,14}"))).isTrue();
     }
 
     @Test
