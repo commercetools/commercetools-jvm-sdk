@@ -23,13 +23,13 @@ public interface AttributeContainer {
      * @param <T> the underlying type of the attribute
      * @return the value of the attribute, or Optional.empty if absent
      */
-    <T> Optional<T> getAttribute(final AttributeGetter<Product, T> accessor);
+    <T> Optional<T> getAttribute(final AttributeGetter<T> accessor);
 
     default boolean hasAttribute(String attributeName) {
         return getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeName));
     }
 
-    default boolean hasAttribute(AttributeGetter<Product, ?> getter) {
+    default boolean hasAttribute(AttributeGetter<?> getter) {
         return getAttributes().stream().anyMatch(attr -> attr.getName().equals(getter.getName()));
     }
 

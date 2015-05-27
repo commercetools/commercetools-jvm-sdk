@@ -12,16 +12,16 @@ public interface Attribute {
 
     JsonNode valueAsJson();
 
-    public static Attribute of(final String name, final JsonNode jsonNode) {
+    static Attribute of(final String name, final JsonNode jsonNode) {
         return new AttributeImpl(name, jsonNode);
     }
 
-    public static Attribute of(final String name, final Object value) {
+    static Attribute of(final String name, final Object value) {
         final JsonNode jsonNode = JsonUtils.newObjectMapper().valueToTree(value);
         return of(name, jsonNode);
     }
 
-    public static <M, T> Attribute of(final AttributeSetter<M, T> setter, final T value) {
+    static <T> Attribute of(final AttributeSetter<T> setter, final T value) {
         final JsonNode jsonNode = setter.getMapper().serialize(value);
         return of(setter.getName(), jsonNode);
     }

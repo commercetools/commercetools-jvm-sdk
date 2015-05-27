@@ -4,7 +4,6 @@ import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.PlainEnumValue;
-import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
 
         public static final List<LocalizedEnumValue> VALUES = asImmutableList(GREEN, RED);
 
-        public static final AttributeGetterSetter<Product, LocalizedEnumValue> ATTRIBUTE =
+        public static final AttributeGetterSetter<LocalizedEnumValue> ATTRIBUTE =
                 AttributeAccess.ofLocalizedEnumValue().ofName("color");
     }
 
@@ -38,7 +37,7 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
 
         public static final List<PlainEnumValue> VALUES = asImmutableList(S, M, X);
 
-        public static final AttributeGetterSetter<Product, PlainEnumValue> ATTRIBUTE =
+        public static final AttributeGetterSetter<PlainEnumValue> ATTRIBUTE =
                 AttributeAccess.ofPlainEnumValue().ofName("size");
     }
 
