@@ -62,4 +62,9 @@ public class CustomObjectQueryTest extends IntegrationTest {
             assertThat(actual).isEqualTo(expected);
         });
     }
+
+    public void demoModelTypeParameter() {
+        final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQuery.<JsonNode>model().createdAt().sort(DESC);
+        final QuerySort<CustomObject<Foo>> fooSort = CustomObjectQuery.<Foo>model().createdAt().sort(DESC);
+    }
 }

@@ -1,5 +1,7 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
+
 /**
 <p>Custom objects are a way to store arbitrary JSON-formatted data on the SPHERE.IO platform.
  It allows you to persist data that does not fit our standard data model.</p>
@@ -147,6 +149,13 @@ In this case you use also {@link io.sphere.sdk.customobjects.commands.CustomObje
  As a result you only work with the interface and it is transparent if it is an old or new version:
 
  {@include.example io.sphere.sdk.customobjects.migrations.CustomObjectsMigrationsTest#exampleForMigrationCall()}
+
+
+ <h3 id="traps">Traps</h3>
+
+ <p>Unlike other query models, {@link CustomObjectQuery#model()} takes a type parameter of the result type of the custom object.
+ Notice that it is necessary to explicitly declare the type when requesting the query model, as shown in the following examples:</p>
+ {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryTest#demoModelTypeParameter()}
 
  */
 public final class CustomObjectDocumentation {
