@@ -26,6 +26,7 @@ import static io.sphere.sdk.products.ProductProjectionType.*;
 import static io.sphere.sdk.products.ProductUpdateScope.*;
 import static io.sphere.sdk.products.queries.ProductProjectionQuery.expansionPath;
 import static io.sphere.sdk.products.queries.ProductProjectionQuery.model;
+import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -115,7 +116,9 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     public void queryByHasStagedChanges() throws Exception {
         withProduct(client(), product -> {
             final Product updated = execute(ProductUpdateCommand.of(product, ChangeName.of(randomSlug(), ONLY_STAGED)));
-            final PagedQueryResult<ProductProjection> pagedQueryResult = execute(ProductProjectionQuery.of(STAGED).withPredicate(model().hasStagedChanges().is(true)));
+            final PagedQueryResult<ProductProjection> pagedQueryResult = execute(ProductProjectionQuery.of(STAGED)
+                    .withPredicate(model().hasStagedChanges().is(true))
+                    .withSort(model().createdAt().sort(DESC)));
             assertThat(ids(pagedQueryResult)).contains(updated.getId());
         });
     }
