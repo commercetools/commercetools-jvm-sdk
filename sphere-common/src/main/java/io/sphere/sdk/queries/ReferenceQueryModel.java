@@ -15,7 +15,7 @@ public class ReferenceQueryModel<T, R> extends QueryModelImpl<T> {
         return EqQueryPredicate.of(idSegment(), reference.toReference().getId());
     }
 
-    public QueryPredicate<T> isAnyOf(final List<? extends Referenceable<R>> elements) {
+    public QueryPredicate<T> isIn(final List<? extends Referenceable<R>> elements) {
         final List<String> ids = elements.stream().map(elem -> elem.toReference().getId()).collect(toList());
         return new IsInQueryPredicate<>(idSegment(), ids);
     }
