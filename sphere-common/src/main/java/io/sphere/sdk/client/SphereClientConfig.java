@@ -57,4 +57,12 @@ public class SphereClientConfig extends Base implements SphereAuthConfig, Sphere
     public String getProjectKey() {
         return projectKey;
     }
+
+    public SphereClientConfig withApiUrl(final String apiUrl) {
+        return of(getProjectKey(), getClientId(), getClientSecret(), getAuthUrl(), apiUrl);
+    }
+    
+    public SphereClientConfig withAuthUrl(final String authUrl) {
+        return of(getProjectKey(), getClientId(), getClientSecret(), authUrl, getApiUrl());
+    }
 }

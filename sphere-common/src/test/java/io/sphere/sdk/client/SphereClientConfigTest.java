@@ -54,4 +54,20 @@ public class SphereClientConfigTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("apiUrl");
     }
+
+    @Test
+    public void withApiUrl() throws Exception {
+        final SphereClientConfig initial = SphereClientConfig.of("a", "b", "b");
+        assertThat(initial.getApiUrl()).isEqualTo("https://api.sphere.io");
+        final SphereClientConfig updated = initial.withApiUrl("another");
+        assertThat(updated.getApiUrl()).isEqualTo("another");
+    }
+    
+    @Test
+    public void withAuthUrl() throws Exception {
+        final SphereClientConfig initial = SphereClientConfig.of("a", "b", "b");
+        assertThat(initial.getAuthUrl()).isEqualTo("https://auth.sphere.io");
+        final SphereClientConfig updated = initial.withAuthUrl("another");
+        assertThat(updated.getAuthUrl()).isEqualTo("another");
+    }
 }
