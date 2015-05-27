@@ -11,6 +11,12 @@ import static io.sphere.sdk.client.ClientPackage.requireNonBlank;
  *
  */
 public class SphereClientConfig extends Base implements SphereAuthConfig, SphereApiConfig {
+    public static final String ENVIRONMENT_VARIABLE_API_URL_SUFFIX = "API_URL";
+    public static final String ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX = "AUTH_URL";
+    public static final String ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX = "PROJECT_KEY";
+    public static final String ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX = "CLIENT_ID";
+    public static final String ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX = "CLIENT_SECRET";
+
     private final String projectKey;
     private final String clientId;
     private final String clientSecret;
@@ -64,5 +70,29 @@ public class SphereClientConfig extends Base implements SphereAuthConfig, Sphere
     
     public SphereClientConfig withAuthUrl(final String authUrl) {
         return of(getProjectKey(), getClientId(), getClientSecret(), authUrl, getApiUrl());
+    }
+
+    /**
+    Creates a {@link SphereClientConfig} out of environment variables using {@code prefix} as namespace parameter.
+
+    An example environment variable initialization with "PROJECT_NAME" as {@code prefix}:
+    <pre>{@code
+    export PROJECT_NAME_PROJECT_KEY="YOUR project key"
+    export PROJECT_NAME_CLIENT_ID="YOUR client id"
+    export PROJECT_NAME_CLIENT_SECRET="YOUR client secret"
+    }</pre>
+
+    The possible suffixes are
+    {@value #ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX},
+    {@value #ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX},
+    {@value #ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX},
+    {@value #ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX} and
+    {@value #ENVIRONMENT_VARIABLE_API_URL_SUFFIX}.
+
+    @param prefix prefix of the environment variables
+    @return a new {@link SphereClientConfig} containing the values of the environment variables.
+     */
+    public static SphereClientConfig ofEnvironmentVariables(final String prefix) {
+        return SphereClientConfigUtils.ofEnvironmentVariables(prefix, System::getenv);
     }
 }
