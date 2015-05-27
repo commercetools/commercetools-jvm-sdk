@@ -1,5 +1,6 @@
 package io.sphere.sdk.categories;
 
+import io.sphere.sdk.models.Base;
 
 import java.util.Optional;
 
@@ -10,7 +11,7 @@ import java.util.Map;
 import static io.sphere.sdk.utils.MapUtils.*;
 import static io.sphere.sdk.utils.ListUtils.*;
 
-class CategoryTreeImpl implements CategoryTree {
+class CategoryTreeImpl extends Base implements CategoryTree {
     private final List<Category> roots;
     private final List<Category> allAsFlatList;
     final Map<LocaleSlugPair, Category> categoriesByLocaleAndSlug;
