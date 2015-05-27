@@ -393,9 +393,9 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeExtraction.html#AttributeExtraction-io.sphere.sdk.attributes.AttributeDefinition-io.sphere.sdk.attributes.Attribute-java.util.Optional-">AttributeExtraction(AttributeDefinition, Attribute, Optional&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.attributes">AttributeExtraction</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeGetter</span></a>&lt;<a href="io/sphere/sdk/attributes/AttributeGetter.html" title="type parameter in AttributeGetter">M</a>,<a href="io/sphere/sdk/attributes/AttributeGetter.html" title="type parameter in AttributeGetter">T</a>&gt; - Interface in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
+<dt><a href="io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeGetter</span></a>&lt;<a href="io/sphere/sdk/attributes/AttributeGetter.html" title="type parameter in AttributeGetter">T</a>&gt; - Interface in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeGetterSetter</span></a>&lt;<a href="io/sphere/sdk/attributes/AttributeGetterSetter.html" title="type parameter in AttributeGetterSetter">M</a>,<a href="io/sphere/sdk/attributes/AttributeGetterSetter.html" title="type parameter in AttributeGetterSetter">T</a>&gt; - Interface in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
+<dt><a href="io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeGetterSetter</span></a>&lt;<a href="io/sphere/sdk/attributes/AttributeGetterSetter.html" title="type parameter in AttributeGetterSetter">T</a>&gt; - Interface in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>
 <div class="block">Type-safe attribute access</div>
 </dd>
@@ -417,7 +417,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html#attributes--">attributes()</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeSetter</span></a>&lt;<a href="io/sphere/sdk/attributes/AttributeSetter.html" title="type parameter in AttributeSetter">M</a>,<a href="io/sphere/sdk/attributes/AttributeSetter.html" title="type parameter in AttributeSetter">T</a>&gt; - Interface in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
+<dt><a href="io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeSetter</span></a>&lt;<a href="io/sphere/sdk/attributes/AttributeSetter.html" title="type parameter in AttributeSetter">T</a>&gt; - Interface in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/attributes/AttributeType.html" title="interface in io.sphere.sdk.attributes"><span class="typeNameLink">AttributeType</span></a> - Interface in <a href="io/sphere/sdk/attributes/package-summary.html">io.sphere.sdk.attributes</a></dt>
 <dd>&nbsp;</dd>
@@ -2182,7 +2182,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#getAssociatedRequest--">getAssociatedRequest()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/AttributeContainer.html#getAttribute-io.sphere.sdk.attributes.AttributeGetter-">getAttribute(AttributeGetter&lt;Product, T&gt;)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/AttributeContainer.html#getAttribute-io.sphere.sdk.attributes.AttributeGetter-">getAttribute(AttributeGetter&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a></dt>
 <dd>
 <div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes"><code>AttributeGetterSetter</code></a> how to implement these.</div>
 </dd>
@@ -3852,7 +3852,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dl>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/AttributeContainer.html#hasAttribute-java.lang.String-">hasAttribute(String)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/AttributeContainer.html#hasAttribute-io.sphere.sdk.attributes.AttributeGetter-">hasAttribute(AttributeGetter&lt;Product, ?&gt;)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/AttributeContainer.html#hasAttribute-io.sphere.sdk.attributes.AttributeGetter-">hasAttribute(AttributeGetter&lt;?&gt;)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#hasClientErrorResponseCode--">hasClientErrorResponseCode()</a></span> - Method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
@@ -5123,7 +5123,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/Attribute.html#of-java.lang.String-java.lang.Object-">of(String, Object)</a></span> - Static method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/Attribute.html#of-io.sphere.sdk.attributes.AttributeSetter-T-">of(AttributeSetter&lt;M, T&gt;, T)</a></span> - Static method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/Attribute.html#of-io.sphere.sdk.attributes.AttributeSetter-T-">of(AttributeSetter&lt;T&gt;, T)</a></span> - Static method in interface io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes">Attribute</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.attributes.AttributeType-">of(String, LocalizedStrings, AttributeType)</a></span> - Static method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">AttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -5915,7 +5915,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Action to add/change a custom attribute.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html#of-int-io.sphere.sdk.attributes.AttributeSetter-T-io.sphere.sdk.products.ProductUpdateScope-">of(int, AttributeSetter&lt;M, T&gt;, T, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttribute</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html#of-int-io.sphere.sdk.attributes.AttributeSetter-T-io.sphere.sdk.products.ProductUpdateScope-">of(int, AttributeSetter&lt;T&gt;, T, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttribute</a></dt>
 <dd>
 <div class="block">Action to add/change a custom attribute.</div>
 </dd>
@@ -5927,7 +5927,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Action to add/change a custom attribute.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html#of-io.sphere.sdk.attributes.AttributeSetter-T-io.sphere.sdk.products.ProductUpdateScope-">of(AttributeSetter&lt;M, T&gt;, T, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html#of-io.sphere.sdk.attributes.AttributeSetter-T-io.sphere.sdk.products.ProductUpdateScope-">of(AttributeSetter&lt;T&gt;, T, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></dt>
 <dd>
 <div class="block">Action to add/change a custom attribute.</div>
 </dd>
@@ -6482,7 +6482,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Action to remove a custom attribute.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html#ofUnsetAttribute-int-io.sphere.sdk.attributes.AttributeSetter-io.sphere.sdk.products.ProductUpdateScope-">ofUnsetAttribute(int, AttributeSetter&lt;M, T&gt;, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttribute</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html#ofUnsetAttribute-int-io.sphere.sdk.attributes.AttributeSetter-io.sphere.sdk.products.ProductUpdateScope-">ofUnsetAttribute(int, AttributeSetter&lt;T&gt;, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttribute</a></dt>
 <dd>
 <div class="block">Action to remove a custom attribute.</div>
 </dd>
@@ -6490,7 +6490,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Action to remove a custom attribute.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html#ofUnsetAttribute-io.sphere.sdk.attributes.AttributeSetter-io.sphere.sdk.products.ProductUpdateScope-">ofUnsetAttribute(AttributeSetter&lt;M, T&gt;, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html#ofUnsetAttribute-io.sphere.sdk.attributes.AttributeSetter-io.sphere.sdk.products.ProductUpdateScope-">ofUnsetAttribute(AttributeSetter&lt;T&gt;, ProductUpdateScope)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></dt>
 <dd>
 <div class="block">Action to remove a custom attribute.</div>
 </dd>

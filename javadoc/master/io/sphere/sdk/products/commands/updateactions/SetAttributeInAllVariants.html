@@ -126,12 +126,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
     //example for MonetaryAmount attribute
     final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
-    final AttributeGetterSetter&lt;Product, MonetaryAmount&gt; moneyAttribute =
+    final AttributeGetterSetter&lt;MonetaryAmount&gt; moneyAttribute =
             AttributeAccess.ofMoney().ofName(moneyAttributeName);
     final MonetaryAmount newValueForMoney = EURO_10;
 
     //example for LocalizedEnumValue attribute
-    final AttributeGetterSetter&lt;Product, LocalizedEnumValue&gt; colorAttribute = Colors.ATTRIBUTE;
+    final AttributeGetterSetter&lt;LocalizedEnumValue&gt; colorAttribute = Colors.ATTRIBUTE;
     final LocalizedEnumValue oldValueForColor = Colors.GREEN;
     final LocalizedEnumValue newValueForColor = Colors.RED;
 
@@ -195,8 +195,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>static &lt;M,T&gt;&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html#of-io.sphere.sdk.attributes.AttributeSetter-T-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(<a href="../../../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;M,T&gt;&nbsp;setter,
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html#of-io.sphere.sdk.attributes.AttributeSetter-T-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(<a href="../../../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;T&gt;&nbsp;setter,
   T&nbsp;value,
   <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>
 <div class="block">Action to add/change a custom attribute.</div>
@@ -211,8 +211,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 </td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code>static &lt;M,T&gt;&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html#ofUnsetAttribute-io.sphere.sdk.attributes.AttributeSetter-io.sphere.sdk.products.ProductUpdateScope-">ofUnsetAttribute</a></span>(<a href="../../../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;M,T&gt;&nbsp;attributeSetter,
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html#ofUnsetAttribute-io.sphere.sdk.attributes.AttributeSetter-io.sphere.sdk.products.ProductUpdateScope-">ofUnsetAttribute</a></span>(<a href="../../../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;T&gt;&nbsp;attributeSetter,
                 <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>
 <div class="block">Action to remove a custom attribute.</div>
 </td>
@@ -322,12 +322,11 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <ul class="blockList">
 <li class="blockList">
 <h4>ofUnsetAttribute</h4>
-<pre>public static&nbsp;&lt;M,T&gt;&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a>&nbsp;ofUnsetAttribute(<a href="../../../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;M,T&gt;&nbsp;attributeSetter,
-                                                               <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a>&nbsp;ofUnsetAttribute(<a href="../../../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;T&gt;&nbsp;attributeSetter,
+                                                             <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
 <div class="block">Action to remove a custom attribute.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
-<dd><code>M</code> - context of the <a href="../../../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes"><code>AttributeSetter</code></a></dd>
 <dd><code>T</code> - type of the attribute</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>attributeSetter</code> - object containing the name of the attribute</dd>
@@ -363,13 +362,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;&lt;M,T&gt;&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;M,T&gt;&nbsp;setter,
-                                                 T&nbsp;value,
-                                                 <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;T&gt;&nbsp;setter,
+                                               T&nbsp;value,
+                                               <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
 <div class="block">Action to add/change a custom attribute.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
-<dd><code>M</code> - context of the <a href="../../../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes"><code>AttributeSetter</code></a></dd>
 <dd><code>T</code> - type of the attribute</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>setter</code> - the serializer of the attribute</dd>

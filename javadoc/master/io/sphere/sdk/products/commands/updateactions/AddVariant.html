@@ -122,15 +122,15 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Adds a variant to a product.
 
- <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-addVariant--%s" class=code-example><pre><code class='java'>final AttributeGetterSetter&lt;Product, MonetaryAmount&gt; moneyAttribute =
+ <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-addVariant--%s" class=code-example><pre><code class='java'>final AttributeGetterSetter&lt;MonetaryAmount&gt; moneyAttribute =
         AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
 final Attribute moneyAttributeValue = Attribute.of(moneyAttribute, EURO_10);
 
-final AttributeGetterSetter&lt;Product, LocalizedEnumValue&gt; colorAttribute = Colors.ATTRIBUTE;
+final AttributeGetterSetter&lt;LocalizedEnumValue&gt; colorAttribute = Colors.ATTRIBUTE;
 final LocalizedEnumValue color = Colors.RED;
 final Attribute colorAttributeValue = Attribute.of(colorAttribute, color);
 
-final AttributeGetterSetter&lt;Product, PlainEnumValue&gt; sizeAttribute = Sizes.ATTRIBUTE;
+final AttributeGetterSetter&lt;PlainEnumValue&gt; sizeAttribute = Sizes.ATTRIBUTE;
 final Attribute sizeValue = Attribute.of(sizeAttribute, Sizes.M);
 
 

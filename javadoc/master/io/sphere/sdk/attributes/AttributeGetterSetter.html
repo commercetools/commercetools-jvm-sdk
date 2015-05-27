@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.attributes</div>
-<h2 title="Interface AttributeGetterSetter" class="title">Interface AttributeGetterSetter&lt;M,T&gt;</h2>
+<h2 title="Interface AttributeGetterSetter" class="title">Interface AttributeGetterSetter&lt;T&gt;</h2>
 </div>
 <div class="contentContainer">
 <div class="description">
@@ -100,12 +100,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetter</a>&lt;M,T&gt;, <a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;M,T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetter</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">AttributeGetterSetter&lt;M,T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetter</a>&lt;M,T&gt;, <a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;M,T&gt;</pre>
+<pre>public interface <span class="typeNameLabel">AttributeGetterSetter&lt;T&gt;</span>
+extends <a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetter</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;T&gt;</pre>
 <div class="block"><h2>Type-safe attribute access</h2>
 
  <h3 id="access-with-static-methods">Style A: Declare attribute description by providing a static method</h3>
@@ -122,9 +122,8 @@ Optional&lt;LocalizedStrings&gt; longDescription = variant.getAttribute(TShirt.l
  <div id="io-sphere-sdk-products-attributeaccess-staticmethodstyle-TShirt%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.products.Product;
 </code></pre><pre><code class='java'>public class TShirt {
-    public static AttributeGetterSetter&lt;Product, LocalizedStrings&gt; longDescription() {
+    public static AttributeGetterSetter&lt;LocalizedStrings&gt; longDescription() {
         return AttributeAccess.ofLocalizedStrings().ofName("longDescription");
     }
 }
@@ -149,9 +148,8 @@ Optional&lt;LocalizedStrings&gt; longDescription = variant.getAttribute(TShirt.L
  <div id="io-sphere-sdk-products-attributeaccess-staticattributestyle-TShirt%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.products.Product;
 </code></pre><pre><code class='java'>public class TShirt {
-    public static final AttributeGetterSetter&lt;Product, LocalizedStrings&gt; LONG_DESCRIPTION = AttributeAccess.ofLocalizedStrings().ofName("longDescription");
+    public static final AttributeGetterSetter&lt;LocalizedStrings&gt; LONG_DESCRIPTION = AttributeAccess.ofLocalizedStrings().ofName("longDescription");
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/staticattributestyle/TShirt.java" target="_blank">test code</a>.</pre></div>
 
@@ -174,32 +172,29 @@ Optional&lt;LocalizedStrings&gt; longDescription = variant.getAttribute(TShirt.a
  <div id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-WithLongDescription%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
 import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.products.Product;
 </code></pre><pre><code class='java'>public interface WithLongDescription {
-    default AttributeGetterSetter&lt;Product, LocalizedStrings&gt; longDescription() {
+    default AttributeGetterSetter&lt;LocalizedStrings&gt; longDescription() {
         return AttributeAccess.ofLocalizedStrings().ofName("longDescription");
     }
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/WithLongDescription.java" target="_blank">test code</a>.</pre></div>
  <div id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-WithColor%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
-import io.sphere.sdk.products.Product;
 </code></pre><pre><code class='java'>public interface WithColor {
-    default AttributeGetterSetter&lt;Product, String&gt; hexColor() {
+    default AttributeGetterSetter&lt;String&gt; hexColor() {
         return AttributeAccess.ofString().ofName("hex-color");
     }
 
-    default AttributeGetterSetter&lt;Product, Double&gt; rgb() {
+    default AttributeGetterSetter&lt;Double&gt; rgb() {
         return AttributeAccess.ofDouble().ofName("rgb");
     }
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/WithColor.java" target="_blank">test code</a>.</pre></div>
  <div id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-WithPromoMoney%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetterSetter;
-import io.sphere.sdk.products.Product;
 import javax.money.MonetaryAmount;
 </code></pre><pre><code class='java'>public interface WithPromoMoney {
-    default AttributeGetterSetter&lt;Product, MonetaryAmount&gt; promoMoney() {
+    default AttributeGetterSetter&lt;MonetaryAmount&gt; promoMoney() {
         return AttributeAccess.ofMoney().ofName("promo-money");
     }
 }
@@ -239,7 +234,7 @@ import javax.money.MonetaryAmount;
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>static &lt;M,T&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetterSetter</a>&lt;M,T&gt;</code></td>
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetterSetter</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html#of-java.lang.String-io.sphere.sdk.attributes.AttributeMapper-">of</a></span>(java.lang.String&nbsp;name,
   <a href="../../../../io/sphere/sdk/attributes/AttributeMapper.html" title="interface in io.sphere.sdk.attributes">AttributeMapper</a>&lt;T&gt;&nbsp;mapper)</code>&nbsp;</td>
 </tr>
@@ -271,13 +266,13 @@ import javax.money.MonetaryAmount;
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>static&nbsp;&lt;M,T&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetterSetter</a>&lt;M,T&gt;&nbsp;of(java.lang.String&nbsp;name,
-                                           <a href="../../../../io/sphere/sdk/attributes/AttributeMapper.html" title="interface in io.sphere.sdk.attributes">AttributeMapper</a>&lt;T&gt;&nbsp;mapper)</pre>
+<pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetterSetter</a>&lt;T&gt;&nbsp;of(java.lang.String&nbsp;name,
+                                       <a href="../../../../io/sphere/sdk/attributes/AttributeMapper.html" title="interface in io.sphere.sdk.attributes">AttributeMapper</a>&lt;T&gt;&nbsp;mapper)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html#of-java.lang.String-io.sphere.sdk.attributes.AttributeMapper-">of</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="type parameter in AttributeGetterSetter">M</a>,<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="type parameter in AttributeGetterSetter">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html#of-java.lang.String-io.sphere.sdk.attributes.AttributeMapper-">of</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="type parameter in AttributeGetterSetter">T</a>&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html#of-java.lang.String-io.sphere.sdk.attributes.AttributeMapper-">of</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="type parameter in AttributeGetterSetter">M</a>,<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="type parameter in AttributeGetterSetter">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html#of-java.lang.String-io.sphere.sdk.attributes.AttributeMapper-">of</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="type parameter in AttributeGetterSetter">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

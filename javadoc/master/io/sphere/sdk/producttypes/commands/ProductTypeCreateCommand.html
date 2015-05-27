@@ -169,7 +169,6 @@ final ProductType productType = execute(command);
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.PlainEnumValue;
-import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import java.util.List;
 import java.util.function.Supplier;
@@ -189,7 +188,7 @@ import static java.util.Locale.GERMAN;
 
         public static final List&lt;LocalizedEnumValue&gt; VALUES = asImmutableList(GREEN, RED);
 
-        public static final AttributeGetterSetter&lt;Product, LocalizedEnumValue&gt; ATTRIBUTE =
+        public static final AttributeGetterSetter&lt;LocalizedEnumValue&gt; ATTRIBUTE =
                 AttributeAccess.ofLocalizedEnumValue().ofName("color");
     }
 
@@ -200,7 +199,7 @@ import static java.util.Locale.GERMAN;
 
         public static final List&lt;PlainEnumValue&gt; VALUES = asImmutableList(S, M, X);
 
-        public static final AttributeGetterSetter&lt;Product, PlainEnumValue&gt; ATTRIBUTE =
+        public static final AttributeGetterSetter&lt;PlainEnumValue&gt; ATTRIBUTE =
                 AttributeAccess.ofPlainEnumValue().ofName("size");
     }
 
