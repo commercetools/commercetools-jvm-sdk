@@ -35,7 +35,7 @@ public class SphereClientFactory extends Base {
     public SphereClient createClient(final SphereClientConfig config) {
         final HttpClient httpClient = defaultHttpClient();
         final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
-        return SphereClient.of(config, defaultHttpClient(), tokenSupplier);
+        return SphereClient.of(config, httpClient, tokenSupplier);
     }
 
     public static SphereClientFactory of() {
