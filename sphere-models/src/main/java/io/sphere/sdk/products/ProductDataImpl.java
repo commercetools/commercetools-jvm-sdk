@@ -90,4 +90,10 @@ class ProductDataImpl extends Base implements ProductData {
     public SearchKeywords getSearchKeywords() {
         return searchKeywords;
     }
+
+    void setProductId(final String id) {
+        getAllVariants().stream()
+                .filter(v -> v instanceof ProductVariantImpl)
+                .forEach(variant -> ((ProductVariantImpl)variant).setProductId(id));
+    }
 }

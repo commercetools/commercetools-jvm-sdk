@@ -9,6 +9,7 @@ import java.util.*;
 
 public final class ProductVariantBuilder extends Base implements Builder<ProductVariant> {
     private final int id;
+    private Optional<String> productId = Optional.empty();
     private Optional<String> sku = Optional.empty();
     private List<Price> prices = Collections.emptyList();
     private List<Attribute> attributes = Collections.emptyList();
@@ -50,6 +51,11 @@ public final class ProductVariantBuilder extends Base implements Builder<Product
         return prices(Arrays.asList(price));
     }
 
+    public ProductVariantBuilder productId(final String productId) {
+        this.productId = Optional.of(productId);
+        return this;
+    }
+
     public ProductVariantBuilder attributes(final List<Attribute> attributes) {
         this.attributes = attributes;
         return this;
@@ -76,6 +82,6 @@ public final class ProductVariantBuilder extends Base implements Builder<Product
 
     @Override
     public ProductVariant build() {
-        return new ProductVariantImpl(id, sku, prices, attributes, images, availability);
+        return new ProductVariantImpl(id, sku, prices, attributes, images, availability, productId);
     }
 }

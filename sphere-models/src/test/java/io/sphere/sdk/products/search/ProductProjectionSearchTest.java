@@ -1,11 +1,9 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductBuilder;
-import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.ProductProjectionType;
+import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import io.sphere.sdk.search.*;
@@ -16,6 +14,7 @@ import javax.money.Monetary;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
+import java.util.Collections;
 
 import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
 import static java.math.BigDecimal.valueOf;
@@ -206,7 +205,12 @@ public class ProductProjectionSearchTest {
 
     private Product product(String id) {
         ProductType productType = ProductTypeBuilder.of("some-other-id", "", "", asList()).build();
-        return ProductBuilder.of(productType, null).id(id).build();
+        final ProductVariant emptyProductVariant = ProductVariantBuilder.of(1).sku("sku-5000").get();
+        final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "name");
+        final LocalizedStrings slug = LocalizedStrings.of(ENGLISH, "slug");
+        final ProductData staged = ProductDataBuilder.of(name, slug, emptyProductVariant).build();
+        final ProductCatalogData masterData = ProductCatalogDataBuilder.ofStaged(staged).get();
+        return ProductBuilder.of(productType, masterData).id(id).build();
     }
 
     private ZonedDateTime dateTime(final String dateTime) {

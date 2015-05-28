@@ -91,6 +91,9 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
         return ProductsPackage.getAllVariants(this);
     }
 
+    default Optional<ProductVariant> getVariant(final VariantIdentifier identifier){
+        return getId().equals(identifier.getProductId()) ? getVariant(identifier.getVariantId()) : Optional.empty();
+    }
 
     @Override
     default Optional<ProductVariant> getVariant(final int variantId){

@@ -6,8 +6,6 @@ import io.sphere.sdk.models.Image;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Objects.requireNonNull;
-
 @JsonDeserialize(as = ProductVariantImpl.class)
 public interface ProductVariant extends AttributeContainer {
     int getId();
@@ -25,4 +23,13 @@ public interface ProductVariant extends AttributeContainer {
      * @return availability
      */
     Optional<ProductVariantAvailability> getAvailability();
+
+    /**
+     * Gets the id of the product and the variant. This operation may not be available.
+     * It will be available if this {@link ProductVariant} has been created
+     * by loading a {@link Product} or a {@link ProductProjection} from JSON.
+     * @return identifier for this variant
+     * @throws UnsupportedOperationException if the operation is not available
+     */
+    VariantIdentifier getIdentifier();
 }

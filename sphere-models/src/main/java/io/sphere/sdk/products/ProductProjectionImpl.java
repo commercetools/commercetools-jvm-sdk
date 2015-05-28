@@ -58,6 +58,9 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
         this.variants = variants;
         this.isPublished = isPublished;
         this.searchKeywords = searchKeywords;
+        getAllVariants().stream()
+                .filter(v -> v instanceof ProductVariantImpl)
+                .forEach(variant -> ((ProductVariantImpl)variant).setProductId(getId()));
     }
 
     public boolean hasStagedChanges() {

@@ -7,6 +7,8 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  Builds test doubles1 for products.
 
@@ -26,7 +28,7 @@ public class ProductBuilder extends DefaultModelFluentBuilder<ProductBuilder, Pr
     }
 
     public static ProductBuilder of(final Referenceable<ProductType> productType, final ProductCatalogData masterData) {
-        return new ProductBuilder(productType.toReference(), masterData);
+        return new ProductBuilder(productType.toReference(), requireNonNull(masterData));
     }
 
     public ProductBuilder taxCategory(final Optional<Reference<TaxCategory>> taxCategory) {

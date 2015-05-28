@@ -12,6 +12,7 @@ import java.util.Optional;
 import static java.lang.String.format;
 
 class ProductVariantImpl extends AttributeContainerImpl implements ProductVariant {
+    private Optional<String> productId;//hack for VariantIdentifier getter
     private final int id;
     private final Optional<String> sku;
     private final List<Price> prices;
@@ -21,14 +22,14 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     @JsonCreator
     ProductVariantImpl(final int id, final Optional<String> sku, final List<Price> prices,
                        final List<Attribute> attributes, final List<Image> images,
-                       final Optional<ProductVariantAvailability> availability) {
+                       final Optional<ProductVariantAvailability> availability, final Optional<String> productId) {
         super(attributes);
-
         this.id = id;
         this.sku = sku;
         this.prices = prices;
         this.images = images;
         this.availability = availability;
+        this.productId = productId;
     }
 
     @Override
@@ -57,8 +58,18 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     }
 
     @Override
+    public VariantIdentifier getIdentifier() {
+        return productId.map(pId -> VariantIdentifier.of(pId, getId())).orElseThrow(UnsupportedOperationException::new);
+    }
+
+    @Override
     protected JsonException transformError(JsonException e, String attributeName, AttributeMapper<?> mapper) {
         return enrich(format("ProductVariant(id=%s)", id), attributeName, mapper, e.getCause());
+    }
+
+    //required trick for variant identifier
+    void setProductId(final String productId) {
+        this.productId = Optional.of(productId);
     }
 
     private JsonException enrich(final Object objectWithAttributes, final String attributeName, final AttributeMapper<?> mapper, final Throwable cause) {
