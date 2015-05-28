@@ -25,7 +25,9 @@ public interface ProductVariant extends AttributeContainer {
     Optional<ProductVariantAvailability> getAvailability();
 
     /**
-     * Gets the id of the product and the variant. This operation is may not available.
+     * Gets the id of the product and the variant. This operation may not be available.
+     * It will be available if this {@link ProductVariant} has been created
+     * by loading a {@link Product} or a {@link ProductProjection} from JSON.
      * @return identifier for this variant
      * @throws UnsupportedOperationException if the operation is not available
      */
