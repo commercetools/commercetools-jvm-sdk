@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -135,14 +135,20 @@ extends <a href="../../../../io/sphere/sdk/products/AttributeContainer.html" tit
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getId--">getId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getIdentifier--">getIdentifier</a></span>()</code>
+<div class="block">Gets the id of the product and the variant.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getImages--">getImages</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getPrices--">getPrices</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getSku--">getSku</a></span>()</code>&nbsp;</td>
 </tr>
@@ -207,7 +213,7 @@ extends <a href="../../../../io/sphere/sdk/products/AttributeContainer.html" tit
 <a name="getAvailability--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getAvailability</h4>
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariantAvailability.html" title="interface in io.sphere.sdk.products">ProductVariantAvailability</a>&gt;&nbsp;getAvailability()</pre>
@@ -216,6 +222,24 @@ extends <a href="../../../../io/sphere/sdk/products/AttributeContainer.html" tit
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>availability</dd>
+</dl>
+</li>
+</ul>
+<a name="getIdentifier--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>getIdentifier</h4>
+<pre><a href="../../../../io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a>&nbsp;getIdentifier()</pre>
+<div class="block">Gets the id of the product and the variant. This operation may not be available.
+ It will be available if this <a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products"><code>ProductVariant</code></a> has been created
+ by loading a <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> or a <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> from JSON.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>identifier for this variant</dd>
+<dt><span class="throwsLabel">Throws:</span></dt>
+<dd><code>java.lang.UnsupportedOperationException</code> - if the operation is not available</dd>
 </dl>
 </li>
 </ul>
