@@ -9,7 +9,7 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 
 import javax.money.MonetaryAmount;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Set;
@@ -115,12 +115,12 @@ public final class AttributeAccess<T> extends Base {
         });
     }
 
-    public static AttributeAccess<Instant> ofDateTime() {
-        return ofPrimitive(instantTypeReference(), DateTimeType.class);
+    public static AttributeAccess<ZonedDateTime> ofDateTime() {
+        return ofPrimitive(ZonedDateTimeTypeReference(), DateTimeType.class);
     }
 
-    public static AttributeAccess<Set<Instant>> ofDateTimeSet() {
-        return ofSet(DateTimeType.class, new TypeReference<Set<Instant>>() {
+    public static AttributeAccess<Set<ZonedDateTime>> ofDateTimeSet() {
+        return ofSet(DateTimeType.class, new TypeReference<Set<ZonedDateTime>>() {
         });
     }
 

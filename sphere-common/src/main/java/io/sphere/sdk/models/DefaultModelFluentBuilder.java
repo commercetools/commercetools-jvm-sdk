@@ -1,7 +1,7 @@
 package io.sphere.sdk.models;
 
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 /**
  * A builder base class.
@@ -21,12 +21,12 @@ public abstract class DefaultModelFluentBuilder<B, I> extends DefaultModelBuilde
         return getThis();
     }
 
-    public B createdAt(final Instant createdAt) {
+    public B createdAt(final ZonedDateTime createdAt) {
         setCreatedAt(createdAt);
         return getThis();
     }
 
-    public B lastModifiedAt(final Instant lastModifiedAt) {
+    public B lastModifiedAt(final ZonedDateTime lastModifiedAt) {
        setLastModifiedAt(lastModifiedAt);
        return getThis();
     }

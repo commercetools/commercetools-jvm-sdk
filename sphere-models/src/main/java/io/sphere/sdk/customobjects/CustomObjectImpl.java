@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.models.DefaultModelViewImpl;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 import static java.lang.String.format;
 
@@ -16,7 +16,7 @@ class CustomObjectImpl<T> extends DefaultModelViewImpl<CustomObject<T>> implemen
 
 
     @JsonCreator
-    CustomObjectImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final String container, final String key, final T value) {
+    CustomObjectImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String container, final String key, final T value) {
         super(id, version, createdAt, lastModifiedAt);
         this.container = container;
         this.key = key;

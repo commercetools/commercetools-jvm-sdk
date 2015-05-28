@@ -2,7 +2,7 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
@@ -15,7 +15,7 @@ class ProductImpl extends DefaultModelImpl<Product> implements Product {
     private final Optional<Reference<TaxCategory>> taxCategory;
 
     @JsonCreator
-    ProductImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt,
+    ProductImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                 final Reference<ProductType> productType, final ProductCatalogData masterData, final Optional<Reference<TaxCategory>> taxCategory) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;

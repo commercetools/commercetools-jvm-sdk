@@ -7,13 +7,13 @@ import io.sphere.sdk.queries.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.inventories.InventoryEntryFixtures.withUpdateableInventoryEntry;
 import static io.sphere.sdk.inventories.queries.InventoryEntryQuery.model;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
-import static io.sphere.sdk.test.SphereTestUtils.tomorrowInstant;
+import static io.sphere.sdk.test.SphereTestUtils.tomorrowZonedDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InventoryEntryQueryTest extends IntegrationTest {
@@ -32,7 +32,7 @@ public class InventoryEntryQueryTest extends IntegrationTest {
         withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
             final String sku = randomKey();
             final long quantityOnStock = 10;
-            final Instant expectedDelivery = tomorrowInstant();
+            final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();
             final int restockableInDays = 3;
             final InventoryEntryDraft draft = InventoryEntryDraft.of(sku, quantityOnStock)
                     .withExpectedDelivery(expectedDelivery)

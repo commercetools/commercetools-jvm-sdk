@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.attributes.AttributeDefinition;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 class ProductTypeImpl extends DefaultModelImpl<ProductType> implements ProductType {
@@ -14,7 +14,7 @@ class ProductTypeImpl extends DefaultModelImpl<ProductType> implements ProductTy
     private final List<AttributeDefinition> attributes;
 
     @JsonCreator
-    ProductTypeImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt,
+    ProductTypeImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                     final String name, final String description, final List<AttributeDefinition> attributes) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;

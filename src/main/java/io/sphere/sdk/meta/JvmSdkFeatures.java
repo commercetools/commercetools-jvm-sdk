@@ -9,7 +9,7 @@ import io.sphere.sdk.models.Base;
  <ul>
     <li>{@link java.util.concurrent.CompletionStage}</li>
     <li>{@link java.util.Optional}</li>
-    <li>Java Date API: {@link java.time.Instant}, {@link java.time.LocalDate} and {@link java.time.LocalTime}</li>
+    <li>Java Date API: {@link java.time.ZonedDateTime}, {@link java.time.LocalDate} and {@link java.time.LocalTime}</li>
     <li>{@link java.util.function.Function}</li>
  </ul>
 

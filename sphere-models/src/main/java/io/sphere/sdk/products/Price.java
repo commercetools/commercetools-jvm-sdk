@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -29,14 +29,14 @@ public class Price extends Base {
     private final Optional<Reference<CustomerGroup>> customerGroup;
     private final Optional<Reference<Channel>> channel;
     private final Optional<DiscountedPrice> discounted;
-    private final Optional<Instant> validFrom;
-    private final Optional<Instant> validUntil;
+    private final Optional<ZonedDateTime> validFrom;
+    private final Optional<ZonedDateTime> validUntil;
 
     @JsonCreator
     Price(final MonetaryAmount value, final Optional<CountryCode> country,
           final Optional<Reference<CustomerGroup>> customerGroup, final Optional<Reference<Channel>> channel,
           final Optional<DiscountedPrice> discounted,
-          final Optional<Instant> validFrom, final Optional<Instant> validUntil) {
+          final Optional<ZonedDateTime> validFrom, final Optional<ZonedDateTime> validUntil) {
         this.value = value;
         this.country = country;
         this.customerGroup = customerGroup;
@@ -66,9 +66,9 @@ public class Price extends Base {
         return discounted;
     }
 
-    public Optional<Instant> getValidFrom() { return validFrom; }
+    public Optional<ZonedDateTime> getValidFrom() { return validFrom; }
 
-    public Optional<Instant> getValidUntil() { return validUntil; }
+    public Optional<ZonedDateTime> getValidUntil() { return validUntil; }
 
     public Price withCustomerGroup(final Optional<Reference<CustomerGroup>> customerGroup) {
         return PriceBuilder.of(this).customerGroup(customerGroup).build();
@@ -106,11 +106,11 @@ public class Price extends Base {
         return PriceBuilder.of(this).value(value).build();
     }
 
-    public Price withValidFrom(final Instant validFrom) {
+    public Price withValidFrom(final ZonedDateTime validFrom) {
         return PriceBuilder.of(this).validFrom(validFrom).build();
     }
 
-    public Price withValidUntil(final Instant validUntil) {
+    public Price withValidUntil(final ZonedDateTime validUntil) {
         return PriceBuilder.of(this).validUntil(validUntil).build();
     }
 

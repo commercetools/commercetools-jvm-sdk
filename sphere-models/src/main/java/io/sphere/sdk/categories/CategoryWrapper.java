@@ -1,6 +1,6 @@
 package io.sphere.sdk.categories;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
@@ -25,12 +25,12 @@ public abstract class CategoryWrapper implements Category {
     }
 
     @Override
-    public Instant getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return delegate.getCreatedAt();
     }
 
     @Override
-    public Instant getLastModifiedAt() {
+    public ZonedDateTime getLastModifiedAt() {
         return delegate.getLastModifiedAt();
     }
 

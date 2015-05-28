@@ -6,7 +6,7 @@ import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,9 +28,9 @@ public interface CartDiscount extends DefaultModel<CartDiscount> {
 
     CartDiscountTarget getTarget();
 
-    Optional<Instant> getValidFrom();
+    Optional<ZonedDateTime> getValidFrom();
 
-    Optional<Instant> getValidUntil();
+    Optional<ZonedDateTime> getValidUntil();
 
     CartDiscountValue getValue();
 

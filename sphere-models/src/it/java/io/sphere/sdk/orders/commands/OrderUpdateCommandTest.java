@@ -10,7 +10,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -31,7 +31,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             .withProvider("provider foo")
             .withProviderTransaction("prov trans 56");
     public static final ParcelMeasurements PARCEL_MEASUREMENTS = ParcelMeasurements.of(2, 3, 1, 4);
-    public static final Instant INSTANT_IN_PAST = Instant.now().minusSeconds(500);
+    public static final ZonedDateTime ZonedDateTime_IN_PAST = ZonedDateTime.now().minusSeconds(500);
 
     @Test
     public void changeOrderState() throws Exception {
@@ -111,7 +111,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
         withOrderExportChannel(client(), channel ->
                         withOrder(client(), order -> {
                             assertThat(order.getSyncInfo()).isEmpty();
-                            final Instant aDateInThePast = INSTANT_IN_PAST;
+                            final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
                             final String externalId = "foo";
                             final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
                             final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
@@ -126,7 +126,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             Assertions.assertThat(order.getReturnInfo()).isEmpty();
             final String lineItemId = order.getLineItems().get(0).getId();
             final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
-            final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(INSTANT_IN_PAST).withReturnTrackingId("trackingId");
+            final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(ZonedDateTime_IN_PAST).withReturnTrackingId("trackingId");
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
 
             final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
@@ -135,7 +135,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
             assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
             assertThat(returnItem.getComment()).contains("foo bar");
-            assertThat(returnInfo.getReturnDate()).contains(INSTANT_IN_PAST);
+            assertThat(returnInfo.getReturnDate()).contains(ZonedDateTime_IN_PAST);
             assertThat(returnInfo.getReturnTrackingId()).contains("trackingId");
         });
     }
@@ -173,7 +173,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                             final LineItem lineItem = order.getLineItems().get(0);
                             assertThat(lineItem).containsState(initialState).containsNotState(nextState);
                             final int quantity = 1;
-                            final Instant actualTransitionDate = INSTANT_IN_PAST;
+                            final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
                             final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
                             assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
                         })
@@ -187,7 +187,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
                 assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
                 final int quantity = 1;
-                final Instant actualTransitionDate = INSTANT_IN_PAST;
+                final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
                 final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
                 assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
             })

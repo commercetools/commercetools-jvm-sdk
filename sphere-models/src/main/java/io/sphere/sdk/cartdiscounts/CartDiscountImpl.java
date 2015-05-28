@@ -6,7 +6,7 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,14 +20,14 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     private final String sortOrder;
     private final boolean isActive;
     @Nullable
-    private final Instant validFrom;
+    private final ZonedDateTime validFrom;
     @Nullable
-    private final Instant validUntil;
+    private final ZonedDateTime validUntil;
     private final boolean requiresDiscountCode;
     private final List<Reference<Object>> references;
 
     @JsonCreator
-    public CartDiscountImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final String cartPredicate, final LocalizedStrings name, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean isActive, final Instant validFrom, final Instant validUntil, final boolean requiresDiscountCode, final List<Reference<Object>> references) {
+    public CartDiscountImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String cartPredicate, final LocalizedStrings name, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final boolean requiresDiscountCode, final List<Reference<Object>> references) {
         super(id, version, createdAt, lastModifiedAt);
         this.cartPredicate = cartPredicate;
         this.name = name;
@@ -83,12 +83,12 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     }
 
     @Override
-    public Optional<Instant> getValidFrom() {
+    public Optional<ZonedDateTime> getValidFrom() {
         return Optional.ofNullable(validFrom);
     }
 
     @Override
-    public Optional<Instant> getValidUntil() {
+    public Optional<ZonedDateTime> getValidUntil() {
         return Optional.ofNullable(validUntil);
     }
 

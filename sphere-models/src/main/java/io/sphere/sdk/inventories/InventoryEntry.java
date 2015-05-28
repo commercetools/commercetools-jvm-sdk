@@ -6,14 +6,14 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 @JsonDeserialize(as = InventoryEntryImpl.class)
 public interface InventoryEntry extends DefaultModel<InventoryEntry> {
     long getAvailableQuantity();
 
-    Optional<Instant> getExpectedDelivery();
+    Optional<ZonedDateTime> getExpectedDelivery();
 
     long getQuantityOnStock();
 

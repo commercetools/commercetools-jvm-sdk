@@ -3,17 +3,17 @@ package io.sphere.sdk.customers;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 class CustomerTokenImpl extends Base implements CustomerToken {
     private final String id;
     private final String customerId;
-    private final Instant createdAt;
-    private final Instant lastModifiedAt;
+    private final ZonedDateTime createdAt;
+    private final ZonedDateTime lastModifiedAt;
     private final String value;
 
     @JsonCreator
-    public CustomerTokenImpl(final String id, final String customerId, final Instant createdAt, final Instant lastModifiedAt, final String value) {
+    public CustomerTokenImpl(final String id, final String customerId, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String value) {
         this.id = id;
         this.customerId = customerId;
         this.createdAt = createdAt;
@@ -32,12 +32,12 @@ class CustomerTokenImpl extends Base implements CustomerToken {
     }
 
     @Override
-    public Instant getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
     @Override
-    public Instant getLastModifiedAt() {
+    public ZonedDateTime getLastModifiedAt() {
         return lastModifiedAt;
     }
 

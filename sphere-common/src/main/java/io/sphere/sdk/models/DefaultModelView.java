@@ -1,6 +1,6 @@
 package io.sphere.sdk.models;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 /**
  * A default model view is a view for a resource in SPHERE.IO always consists of the fields
@@ -16,8 +16,8 @@ public interface DefaultModelView<T> extends Timestamped, Versioned<T> {
     long getVersion();
 
     @Override
-    Instant getCreatedAt();
+    ZonedDateTime getCreatedAt();
 
     @Override
-    Instant getLastModifiedAt();
+    ZonedDateTime getLastModifiedAt();
 }

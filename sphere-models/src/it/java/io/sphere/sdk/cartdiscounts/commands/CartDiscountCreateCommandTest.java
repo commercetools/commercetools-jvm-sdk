@@ -7,7 +7,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.After;
 import org.junit.Test;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.function.Consumer;
@@ -22,8 +22,8 @@ public class CartDiscountCreateCommandTest extends IntegrationTest {
 
     @Test
     public void execution() throws Exception {
-        final Instant validFrom = Instant.now();
-        final Instant validUntil = validFrom.plusSeconds(8000);
+        final ZonedDateTime validFrom = ZonedDateTime.now();
+        final ZonedDateTime validUntil = validFrom.plusSeconds(8000);
         final LocalizedStrings name = en("discount name");
         final LocalizedStrings description = en("discount descriptions");
         final String predicate = "totalPrice > \"800.00 EUR\"";

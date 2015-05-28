@@ -3,7 +3,7 @@ package io.sphere.sdk.json;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import javax.money.MonetaryAmount;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -65,11 +65,11 @@ public final class TypeReferences {
         };
     }
 
-    public static TypeReference<Instant> instantTypeReference() {
-        return new TypeReference<Instant>() {
+    public static TypeReference<ZonedDateTime> ZonedDateTimeTypeReference() {
+        return new TypeReference<ZonedDateTime>() {
             @Override
             public String toString() {
-                return "TypeReference<Instant>";
+                return "TypeReference<ZonedDateTime>";
             }
         };
     }

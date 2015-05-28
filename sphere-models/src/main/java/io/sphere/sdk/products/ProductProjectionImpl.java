@@ -10,7 +10,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -35,7 +35,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     private final SearchKeywords searchKeywords;
 
     @JsonCreator
-    ProductProjectionImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt,
+    ProductProjectionImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                           final Reference<ProductType> productType, final Optional<Reference<TaxCategory>> taxCategory,
                           final boolean hasStagedChanges, final LocalizedStrings name,
                           final Set<Reference<Category>> categories, final Optional<LocalizedStrings> description,

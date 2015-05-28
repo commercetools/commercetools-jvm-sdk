@@ -21,7 +21,8 @@ import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
-import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
@@ -61,8 +62,8 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void addPriceWithValidityPeriod() throws Exception {
         final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR))
-                .withValidFrom(Instant.now())
-                .withValidUntil(LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.UTC));
+                .withValidFrom(ZonedDateTime.now())
+                .withValidUntil(ZonedDateTime.now().withZoneSameLocal(ZoneId.of("Z")).plusHours(2));
         testAddPrice(expectedPrice);
     }
 

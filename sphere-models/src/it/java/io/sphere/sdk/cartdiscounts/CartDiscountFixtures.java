@@ -8,7 +8,7 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.utils.MoneyImpl;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
@@ -20,8 +20,8 @@ public class CartDiscountFixtures {
     }
 
     private static CartDiscountDraftBuilder newCartDiscountDraftBuilder(final String predicate) {
-        final Instant validFrom = Instant.now();
-        final Instant validUntil = validFrom.plusSeconds(8000);
+        final ZonedDateTime validFrom = ZonedDateTime.now();
+        final ZonedDateTime validUntil = validFrom.plusSeconds(8000);
         final LocalizedStrings name = en("discount name");
         final LocalizedStrings description = en("discount descriptions");
         final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(MoneyImpl.of(10, EUR));

@@ -7,7 +7,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
@@ -132,7 +132,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
     @Test
     public void setValidFrom() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
-            final Instant dateTime = Instant.now();
+            final ZonedDateTime dateTime = ZonedDateTime.now();
 
             assertThat(cartDiscount.getValidFrom()).isNotEqualTo(Optional.of(dateTime));
 
@@ -146,7 +146,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
     public void setValidUntil() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
             //until must be after valid from
-            final Instant dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
+            final ZonedDateTime dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
 
             assertThat(cartDiscount.getValidUntil()).isNotEqualTo(Optional.of(dateTime));
 
@@ -157,8 +157,8 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
         });
     }
 
-    private Instant dateTimeAfterValidFromAndOldValidUntil(final CartDiscount cartDiscount) {
+    private ZonedDateTime dateTimeAfterValidFromAndOldValidUntil(final CartDiscount cartDiscount) {
         return cartDiscount.getValidUntil()
-                .orElse(cartDiscount.getValidFrom().orElse(Instant.now()).plusSeconds(1000)).plusSeconds(1);
+                .orElse(cartDiscount.getValidFrom().orElse(ZonedDateTime.now()).plusSeconds(1000)).plusSeconds(1);
     }
 }

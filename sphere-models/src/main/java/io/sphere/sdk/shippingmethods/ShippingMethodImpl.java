@@ -5,7 +5,7 @@ import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ final class ShippingMethodImpl extends DefaultModelImpl<ShippingMethod> implemen
     private final boolean isDefault;
 
     @JsonCreator
-    private ShippingMethodImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final String name, final Optional<String> description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
+    private ShippingMethodImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String name, final Optional<String> description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.description = description;

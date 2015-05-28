@@ -15,7 +15,8 @@ import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
-import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -131,8 +132,9 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void dateTimeAttribute() throws Exception {
+        final ZonedDateTime now = ZonedDateTime.now().withZoneSameInstant(ZoneId.of("Z"));
         testSingleAndSet(AttributeAccess.ofDateTime(), AttributeAccess.ofDateTimeSet(),
-                asSet(Instant.now(), Instant.now().plus(3, ChronoUnit.DAYS)),
+                asSet(now, now.plus(3, ChronoUnit.DAYS)),
                 DateTimeType.of(),
                 AttributeDefinitionBuilder.of("datetime-attribute", LABEL, DateTimeType.of()).build());
     }

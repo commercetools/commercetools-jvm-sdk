@@ -24,7 +24,7 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -291,8 +291,8 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final CartDiscountDraft draft = CartDiscountFixtures.newCartDiscountDraftBuilder()
                     .cartPredicate(CartPredicate.of(format("customer.id = \"%s\"", customer.getId())))
                     .isActive(true)
-                    .validFrom(Optional.<Instant>empty())
-                    .validUntil(Optional.<Instant>empty())
+                    .validFrom(Optional.<ZonedDateTime>empty())
+                    .validUntil(Optional.<ZonedDateTime>empty())
                     .build();
             final CartDiscount cartDiscount = client.execute(CartDiscountCreateCommand.of(draft));
             final DiscountCode discountCode = client.execute(DiscountCodeCreateCommand.of(DiscountCodeDraft.of(randomKey(), cartDiscount)));
