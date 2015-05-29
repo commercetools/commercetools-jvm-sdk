@@ -16,7 +16,7 @@ public class DiscountCodeCreateCommandTest extends IntegrationTest {
         withPersistentCartDiscount(client(), cartDiscount -> {
             final String code = randomKey();
             final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
-                    .withName(en("sample discount code"))
+                    .withName(en(DiscountCodeCreateCommandTest.class.getName()))
                     .withDescription(en("sample discount code descr."))
                     .withCartPredicate(CartPredicate.of("1 = 1"))
                     .withIsActive(false)
@@ -24,13 +24,15 @@ public class DiscountCodeCreateCommandTest extends IntegrationTest {
                     .withMaxApplicationsPerCustomer(1);
             final DiscountCode discountCode = execute(DiscountCodeCreateCommand.of(draft));
             assertThat(discountCode.getCode()).isEqualTo(code);
-            assertThat(discountCode.getName()).contains(en("sample discount code"));
+            assertThat(discountCode.getName()).contains(en(DiscountCodeCreateCommandTest.class.getName()));
             assertThat(discountCode.getDescription()).contains(en("sample discount code descr."));
             assertThat(discountCode.getCartDiscounts()).isEqualTo(asList(cartDiscount.toReference()));
             assertThat(discountCode.getCartPredicate()).contains("1 = 1");
             assertThat(discountCode.isActive()).isEqualTo(false);
             assertThat(discountCode.getMaxApplications()).contains(5L);
             assertThat(discountCode.getMaxApplicationsPerCustomer()).contains(1L);
+            //clean up
+            execute(DiscountCodeDeleteCommand.of(discountCode));
         });
     }
 }

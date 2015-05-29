@@ -1,24 +1,18 @@
 package io.sphere.sdk.discountcodes.commands;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
 import io.sphere.sdk.cartdiscounts.CartPredicate;
-import io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommand;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.commands.updateactions.*;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.utils.ListUtils;
 import org.junit.Test;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.List;
 
-import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withCartDiscount;
-import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
-import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.withPersistentDiscountCode;
+import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.*;
+import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.ListUtils.listOf;
 import static org.assertj.core.api.Assertions.*;
@@ -81,7 +75,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
     @SuppressWarnings("unchecked")
     @Test
     public void changeCartDiscounts() throws Exception {
-        withPersistentCartDiscount(client(), randomKey(), cartDiscount ->
+        withCartDiscount(client(), randomKey(), cartDiscount ->
             withPersistentDiscountCode(client(), discountCode -> {
                 final List<Reference<CartDiscount>> oldCartDiscounts = discountCode.getCartDiscounts();
                 assertThat(oldCartDiscounts).doesNotContain(cartDiscount.toReference());
