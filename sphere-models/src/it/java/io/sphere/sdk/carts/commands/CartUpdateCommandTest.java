@@ -2,6 +2,7 @@ package io.sphere.sdk.carts.commands;
 
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
+import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.CartByIdFetch;
@@ -10,6 +11,7 @@ import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeDraft;
 import io.sphere.sdk.discountcodes.DiscountCodeReference;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand;
+import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -30,6 +32,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
@@ -266,27 +269,22 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void addDiscountCode() throws Exception {
-        withCartAndDiscountCode(client(), (cart, discountCode) -> {
-            final Cart updatedCart = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
-            final DiscountCodeReference discountCodeReference = updatedCart.getDiscountCodes().get(0);
-            assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
-        });
-    }
-
-    @Test
     public void removeDiscountCode() throws Exception {
         withCartAndDiscountCode(client(), (cart, discountCode) -> {
+            //addDiscountCode
             final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
             final DiscountCodeReference discountCodeReference = cartWithCode.getDiscountCodes().get(0);
             assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
 
+            //removeDiscountCode
             final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
             assertThat(updatedCart.getDiscountCodes()).isEmpty();
+
+            return updatedCart;
         });
     }
 
-    private void withCartAndDiscountCode(final TestClient client, final BiConsumer<Cart, DiscountCode> user) {
+    private void withCartAndDiscountCode(final TestClient client, final BiFunction<Cart, DiscountCode, Cart> user) {
         withCustomerAndCart(client(), (customer, cart) -> {
             final CartDiscountDraft draft = CartDiscountFixtures.newCartDiscountDraftBuilder()
                     .cartPredicate(CartPredicate.of(format("customer.id = \"%s\"", customer.getId())))
@@ -296,7 +294,10 @@ public class CartUpdateCommandTest extends IntegrationTest {
                     .build();
             final CartDiscount cartDiscount = client.execute(CartDiscountCreateCommand.of(draft));
             final DiscountCode discountCode = client.execute(DiscountCodeCreateCommand.of(DiscountCodeDraft.of(randomKey(), cartDiscount)));
-            user.accept(cart, discountCode);
+            final Cart updatedCart = user.apply(cart, discountCode);
+            client.execute(CartDeleteCommand.of(updatedCart));
+            client.execute(DiscountCodeDeleteCommand.of(discountCode));
+            client.execute(CartDiscountDeleteCommand.of(cartDiscount));
         });
     }
 }
