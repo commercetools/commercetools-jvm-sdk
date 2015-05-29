@@ -84,6 +84,9 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
                     execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeName.of(newName)));
 
             assertThat(updatedDiscount.getName()).isEqualTo(newName);
+
+            //clean up test, cart discount is reused by name
+            execute(CartDiscountUpdateCommand.of(updatedDiscount, ChangeName.of(cartDiscount.getName())));
         });
     }
 
