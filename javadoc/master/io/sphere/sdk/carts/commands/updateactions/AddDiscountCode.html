@@ -120,10 +120,17 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">AddDiscountCode</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addDiscountCode--%s" class=code-example><pre><code class='java'>withCartAndDiscountCode(client(), (cart, discountCode) -&gt; {
-    final Cart updatedCart = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
-    final DiscountCodeReference discountCodeReference = updatedCart.getDiscountCodes().get(0);
+<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-removeDiscountCode--%s" class=code-example><pre><code class='java'>withCartAndDiscountCode(client(), (cart, discountCode) -&gt; {
+    //addDiscountCode
+    final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
+    final DiscountCodeReference discountCodeReference = cartWithCode.getDiscountCodes().get(0);
     assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
+
+    //removeDiscountCode
+    final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
+    assertThat(updatedCart.getDiscountCodes()).isEmpty();
+
+    return updatedCart;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

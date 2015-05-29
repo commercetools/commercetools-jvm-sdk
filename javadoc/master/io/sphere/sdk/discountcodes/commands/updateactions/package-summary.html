@@ -84,7 +84,7 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/ChangeCartDiscounts.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">ChangeCartDiscounts</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-changeCartDiscounts--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), randomKey(), cartDiscount -&gt;
+<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-changeCartDiscounts--%s" class=code-example><pre><code class='java'>withCartDiscount(client(), randomKey(), cartDiscount -&gt;
     withPersistentDiscountCode(client(), discountCode -&gt; {
         final List&lt;Reference&lt;CartDiscount&gt;&gt; oldCartDiscounts = discountCode.getCartDiscounts();
         assertThat(oldCartDiscounts).doesNotContain(cartDiscount.toReference());

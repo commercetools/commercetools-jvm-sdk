@@ -114,10 +114,17 @@
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">AddDiscountCode</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addDiscountCode--%s" class=code-example><pre><code class='java'>withCartAndDiscountCode(client(), (cart, discountCode) -&gt; {
-    final Cart updatedCart = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
-    final DiscountCodeReference discountCodeReference = updatedCart.getDiscountCodes().get(0);
+<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-removeDiscountCode--%s" class=code-example><pre><code class='java'>withCartAndDiscountCode(client(), (cart, discountCode) -&gt; {
+    //addDiscountCode
+    final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
+    final DiscountCodeReference discountCodeReference = cartWithCode.getDiscountCodes().get(0);
     assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
+
+    //removeDiscountCode
+    final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
+    assertThat(updatedCart.getDiscountCodes()).isEmpty();
+
+    return updatedCart;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -848,7 +855,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/updateactions/ChangeCartDiscounts.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><span class="typeNameLink">ChangeCartDiscounts</span></a> - Class in <a href="io/sphere/sdk/discountcodes/commands/updateactions/package-summary.html">io.sphere.sdk.discountcodes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-changeCartDiscounts--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), randomKey(), cartDiscount -&gt;
+<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-changeCartDiscounts--%s" class=code-example><pre><code class='java'>withCartDiscount(client(), randomKey(), cartDiscount -&gt;
     withPersistentDiscountCode(client(), discountCode -&gt; {
         final List&lt;Reference&lt;CartDiscount&gt;&gt; oldCartDiscounts = discountCode.getCartDiscounts();
         assertThat(oldCartDiscounts).doesNotContain(cartDiscount.toReference());
@@ -984,6 +991,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
             execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeName.of(newName)));
 
     assertThat(updatedDiscount.getName()).isEqualTo(newName);
+
+    //clean up test, cart discount is reused by name
+    execute(CartDiscountUpdateCommand.of(updatedDiscount, ChangeName.of(cartDiscount.getName())));
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -1733,7 +1743,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
     final String code = randomKey();
     final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
-            .withName(en("sample discount code"))
+            .withName(en(DiscountCodeCreateCommandTest.class.getName()))
             .withDescription(en("sample discount code descr."))
             .withCartPredicate(CartPredicate.of("1 = 1"))
             .withIsActive(false)
@@ -1741,13 +1751,15 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
             .withMaxApplicationsPerCustomer(1);
     final DiscountCode discountCode = execute(DiscountCodeCreateCommand.of(draft));
     assertThat(discountCode.getCode()).isEqualTo(code);
-    assertThat(discountCode.getName()).contains(en("sample discount code"));
+    assertThat(discountCode.getName()).contains(en(DiscountCodeCreateCommandTest.class.getName()));
     assertThat(discountCode.getDescription()).contains(en("sample discount code descr."));
     assertThat(discountCode.getCartDiscounts()).isEqualTo(asList(cartDiscount.toReference()));
     assertThat(discountCode.getCartPredicate()).contains("1 = 1");
     assertThat(discountCode.isActive()).isEqualTo(false);
     assertThat(discountCode.getMaxApplications()).contains(5L);
     assertThat(discountCode.getMaxApplicationsPerCustomer()).contains(1L);
+    //clean up
+    execute(DiscountCodeDeleteCommand.of(discountCode));
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
@@ -7215,12 +7227,16 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/RemoveDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">RemoveDiscountCode</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-removeDiscountCode--%s" class=code-example><pre><code class='java'>withCartAndDiscountCode(client(), (cart, discountCode) -&gt; {
+    //addDiscountCode
     final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
     final DiscountCodeReference discountCodeReference = cartWithCode.getDiscountCodes().get(0);
     assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
 
+    //removeDiscountCode
     final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
     assertThat(updatedCart.getDiscountCodes()).isEmpty();
+
+    return updatedCart;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
