@@ -5,7 +5,7 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.queries.QueryParameter;
+import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.UrlQueryBuilder;
 
 import java.util.List;
@@ -25,14 +25,14 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     private final List<SearchSort<T>> sort;
     private final Optional<Long> limit;
     private final Optional<Long> offset;
-    private final List<QueryParameter> additionalQueryParameters;
+    private final List<HttpQueryParameter> additionalQueryParameters;
     private final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     private final String endpoint;
 
     public SearchDslImpl(final String endpoint, final Optional<SearchText> text, final List<FacetExpression<T>> facets,
                          final List<FilterExpression<T>> filters, final List<FilterExpression<T>> filterQueries, final List<FilterExpression<T>> filterFacets,
                          final List<SearchSort<T>> sort, final Optional<Long> limit, final Optional<Long> offset,
-                         final List<QueryParameter> additionalQueryParameters, Function<HttpResponse, PagedSearchResult<T>> resultMapper) {
+                         final List<HttpQueryParameter> additionalQueryParameters, Function<HttpResponse, PagedSearchResult<T>> resultMapper) {
         this.text = text;
         this.facets = facets;
         this.filters = filters;
@@ -47,13 +47,13 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     public SearchDslImpl(final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,
-                         final List<QueryParameter> additionalQueryParameters) {
+                         final List<HttpQueryParameter> additionalQueryParameters) {
         this(endpoint, Optional.empty(), emptyList(), emptyList(), emptyList(),
                 emptyList(), emptyList(), Optional.empty(), Optional.empty(), additionalQueryParameters, resultMapper);
     }
 
     public SearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> typeReference,
-                         final List<QueryParameter> additionalQueryParameters) {
+                         final List<HttpQueryParameter> additionalQueryParameters) {
         this(endpoint, resultMapperOf(typeReference), additionalQueryParameters);
     }
 
@@ -102,7 +102,7 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     @Override
-    public SearchDsl<T> withAdditionalQueryParameters(List<QueryParameter> additionalQueryParameters) {
+    public SearchDsl<T> withAdditionalQueryParameters(List<HttpQueryParameter> additionalQueryParameters) {
         return copyBuilder().additionalQueryParameters(additionalQueryParameters).build();
     }
 
@@ -147,7 +147,7 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     @Override
-    public List<QueryParameter> additionalQueryParameters() {
+    public List<HttpQueryParameter> additionalQueryParameters() {
         return additionalQueryParameters;
     }
 

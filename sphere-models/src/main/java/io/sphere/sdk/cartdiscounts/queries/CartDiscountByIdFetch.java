@@ -1,6 +1,7 @@
 package io.sphere.sdk.cartdiscounts.queries;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.queries.ByIdFetchImpl;
 
 /**
@@ -11,7 +12,7 @@ public class CartDiscountByIdFetch extends ByIdFetchImpl<CartDiscount> {
         super(id, CartDiscountEndpoint.ENDPOINT);
     }
 
-    public static CartDiscountByIdFetch of(final CartDiscount cartDiscount) {
+    public static CartDiscountByIdFetch of(final Identifiable<CartDiscount> cartDiscount) {
         return of(cartDiscount.getId());
     }
 

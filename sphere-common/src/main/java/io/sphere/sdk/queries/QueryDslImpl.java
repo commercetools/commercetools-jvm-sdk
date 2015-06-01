@@ -11,6 +11,7 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.UrlQueryBuilder;
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
 import static java.lang.String.format;
@@ -26,14 +27,14 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     private final Optional<Long> limit;
     private final Optional<Long> offset;
     private final List<ExpansionPath<T>> expansionPaths;
-    private final List<QueryParameter> additionalQueryParameters;
+    private final List<HttpQueryParameter> additionalQueryParameters;
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
 
     public QueryDslImpl(final Optional<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, final Optional<Long> limit,
                         final Optional<Long> offset, final String endpoint,
                         final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
-                        final List<ExpansionPath<T>> expansionPaths, final List<QueryParameter> additionalQueryParameters) {
+                        final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters) {
         offset.ifPresent(presentOffset -> {
             if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
                 throw new IllegalArgumentException(format("The offset parameter must be in the range of [%d..%d], but was %d.", MIN_OFFSET, MAX_OFFSET, presentOffset));
@@ -49,7 +50,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
         this.additionalQueryParameters = additionalQueryParameters;
     }
 
-    public QueryDslImpl(final String endpoint, final List<QueryParameter> additionalQueryParameters, final Function<HttpResponse, PagedQueryResult<T>> resultMapper) {
+    public QueryDslImpl(final String endpoint, final List<HttpQueryParameter> additionalQueryParameters, final Function<HttpResponse, PagedQueryResult<T>> resultMapper) {
         this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<T>>emptyList(), additionalQueryParameters);
     }
 
@@ -57,7 +58,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
         this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapper, Collections.<ExpansionPath<T>>emptyList(), Collections.emptyList());
     }
 
-    public QueryDslImpl(final String endpoint, final List<QueryParameter> additionalQueryParameters, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference) {
+    public QueryDslImpl(final String endpoint, final List<HttpQueryParameter> additionalQueryParameters, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference) {
         this(endpoint, additionalQueryParameters, QueryDslImpl.resultMapperOf(pagedQueryResultTypeReference));
     }
 
@@ -96,7 +97,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     }
 
     @Override
-    public QueryDsl<T> withAdditionalQueryParameters(final List<QueryParameter> additionalQueryParameters) {
+    public QueryDsl<T> withAdditionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters) {
         return copyBuilder().additionalQueryParameters(additionalQueryParameters).build();
     }
 
@@ -131,7 +132,7 @@ class QueryDslImpl<T> extends SphereRequestBase implements QueryDsl<T> {
     }
 
     @Override
-    public List<QueryParameter> additionalQueryParameters() {
+    public List<HttpQueryParameter> additionalQueryParameters() {
         return additionalQueryParameters;
     }
 

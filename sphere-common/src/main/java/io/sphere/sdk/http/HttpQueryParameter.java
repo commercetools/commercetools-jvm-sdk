@@ -1,12 +1,12 @@
-package io.sphere.sdk.queries;
+package io.sphere.sdk.http;
 
 import io.sphere.sdk.models.Base;
 
-public class QueryParameter extends Base {
+public class HttpQueryParameter extends Base {
     private final String key;
     private final String value;
 
-    private QueryParameter(final String key, final String value) {
+    private HttpQueryParameter(final String key, final String value) {
         this.key = key;
         this.value = value;
     }
@@ -19,7 +19,7 @@ public class QueryParameter extends Base {
         return value;
     }
 
-    public static QueryParameter of(final String key, final String value) {
-        return new QueryParameter(key, value);
+    public static HttpQueryParameter of(final String key, final String value) {
+        return new HttpQueryParameter(key, value);
     }
 }

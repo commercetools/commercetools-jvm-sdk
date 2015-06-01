@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
@@ -17,7 +18,7 @@ import static java.util.Arrays.asList;
 public class ProductProjectionQuery extends DefaultModelQuery<ProductProjection> {
 
     private ProductProjectionQuery(final ProductProjectionType productProjectionType) {
-        super(ProductProjectionsEndpoint.ENDPOINT.endpoint(), asList(QueryParameter.of("staged", stagedQueryParameterValue(productProjectionType))), resultTypeReference());
+        super(ProductProjectionsEndpoint.ENDPOINT.endpoint(), asList(HttpQueryParameter.of("staged", stagedQueryParameterValue(productProjectionType))), resultTypeReference());
     }
 
     public static TypeReference<PagedQueryResult<ProductProjection>> resultTypeReference() {

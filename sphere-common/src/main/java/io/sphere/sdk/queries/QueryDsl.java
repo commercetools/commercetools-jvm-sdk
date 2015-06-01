@@ -1,12 +1,11 @@
 package io.sphere.sdk.queries;
 
-import java.util.List;
-import java.util.Objects;
+import io.sphere.sdk.http.HttpQueryParameter;
 
-import static io.sphere.sdk.utils.ListUtils.listOf;
+import java.util.List;
 import static java.util.Arrays.asList;
 
-public interface QueryDsl<T> extends EntityQuery<T> {
+public interface QueryDsl<T> extends EntityQuery<T>, ReferenceExpandeableDsl<T, QueryDsl<T>> {
     /**
      * Returns an EntityQuery with the new predicate as predicate.
      * @param predicate the new predicate
@@ -37,16 +36,5 @@ public interface QueryDsl<T> extends EntityQuery<T> {
      */
     QueryDsl<T> withOffset(final long offset);
 
-    QueryDsl<T> withExpansionPaths(final List<ExpansionPath<T>> expansionPaths);
-
-    default QueryDsl<T> plusExpansionPath(final ExpansionPath<T> expansionPath) {
-        return withExpansionPaths(listOf(expansionPaths(), expansionPath));
-    }
-
-    QueryDsl<T> withAdditionalQueryParameters(final List<QueryParameter> additionalQueryParameters);
-
-    default QueryDsl<T> withExpansionPath(final ExpansionPath<T> expansionPath) {
-        Objects.requireNonNull(expansionPath);
-        return withExpansionPaths(asList(expansionPath));
-    }
+    QueryDsl<T> withAdditionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters);
 }

@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
@@ -13,14 +14,14 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.queries.QueryDslImpl.*;
 
-class QueryDslBuilder<I> extends Base implements Builder<QueryDsl<I>> {
+final class QueryDslBuilder<I> extends Base implements Builder<QueryDsl<I>> {
 
     private Optional<QueryPredicate<I>> predicate = Optional.empty();
     private List<QuerySort<I>> sort = sortByIdList();
     private Optional<Long> limit = Optional.empty();
     private Optional<Long> offset = Optional.empty();
     private List<ExpansionPath<I>> expansionPaths = Collections.emptyList();
-    private List<QueryParameter> additionalQueryParameters = Collections.emptyList();
+    private List<HttpQueryParameter> additionalQueryParameters = Collections.emptyList();
     private final String endpoint;
     private final Function<HttpResponse, PagedQueryResult<I>> resultMapper;
 
@@ -78,7 +79,7 @@ class QueryDslBuilder<I> extends Base implements Builder<QueryDsl<I>> {
         return this;
     }
 
-    public QueryDslBuilder<I> additionalQueryParameters(final List<QueryParameter> additionalQueryParameters) {
+    public QueryDslBuilder<I> additionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters) {
         this.additionalQueryParameters = additionalQueryParameters;
         return this;
     }
