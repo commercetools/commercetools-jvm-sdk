@@ -10,7 +10,7 @@ public class ProjectGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         final Project project = execute(ProjectGet.of());
-        assertThat(project.getKey()).isEqualTo(projectKey());
+        assertThat(project.getKey()).isEqualTo(getSphereClientConfig().getProjectKey());
         assertThat(project.getName()).isNotEmpty();
         assertThat(project.getCountries()).isNotEmpty();
         assertThat(project.getLanguages()).isNotEmpty();

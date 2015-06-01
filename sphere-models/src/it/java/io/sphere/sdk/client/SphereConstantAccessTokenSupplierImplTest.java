@@ -14,9 +14,9 @@ public class SphereConstantAccessTokenSupplierImplTest extends IntegrationTest {
         withCategory(client(), category -> {
             final CategoryQuery categoryQuery = CategoryQuery.of();
             final int expected = client().execute(categoryQuery).getTotal();
-            final SphereApiConfig apiConfig = SphereApiConfig.of(projectKey(), apiUrl());
+            final SphereApiConfig apiConfig = SphereApiConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getApiUrl());
 
-            final SphereAuthConfig authConfig = SphereAuthConfig.of(projectKey(), clientId(), clientSecret(), authUrl());
+            final SphereAuthConfig authConfig = SphereAuthConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getClientId(), getSphereClientConfig().getClientSecret(), getSphereClientConfig().getAuthUrl());
 
             final SphereAccessTokenSupplier fixedTokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, NingHttpClientAdapter.of(), true);
             final SphereClient oneTokenClient = SphereClientFactory.of().createClient(apiConfig, fixedTokenSupplier);
