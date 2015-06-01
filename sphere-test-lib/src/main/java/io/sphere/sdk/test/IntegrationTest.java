@@ -5,22 +5,15 @@ import io.sphere.sdk.client.SphereRequest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
-import java.util.Optional;
-
 public abstract class IntegrationTest {
 
-    private static final String JVM_SDK_IT_SERVICE_URL = "JVM_SDK_IT_SERVICE_URL";
-    private static final String JVM_SDK_IT_AUTH_URL = "JVM_SDK_IT_AUTH_URL";
-    private static final String JVM_SDK_IT_CLIENT_SECRET = "JVM_SDK_IT_CLIENT_SECRET";
-    private static final String JVM_SDK_IT_CLIENT_ID = "JVM_SDK_IT_CLIENT_ID";
-    private static final String JVM_SDK_IT_PROJECT_KEY = "JVM_SDK_IT_PROJECT_KEY";
     private static volatile int threadCountAtStart;
     private static TestClient client;
 
     protected synchronized static TestClient client() {
         if (client == null) {
             final SphereClientFactory factory = SphereClientFactory.of();
-            final SphereClientConfig config = SphereClientConfig.of(projectKey(), clientId(), clientSecret(), authUrl(), apiUrl());
+            final SphereClientConfig config = getSphereClientConfig();
             final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplierFactory.of().createSupplierOfOneTimeFetchingToken(config);
             final SphereClient underlying = factory.createClient(config, tokenSupplier);
             final SphereClient underlyingWithDeprecationExceptions = DeprecationExceptionSphereClientDecorator.of(underlying);
@@ -29,39 +22,8 @@ public abstract class IntegrationTest {
         return client;
     }
 
-    protected static SphereClientConfig getSphereConfig() {
-        return SphereClientConfig.of(projectKey(), clientId(), clientSecret(), authUrl(), apiUrl());
-    }
-
-    private static String getValueForEnvVar(final String key) {
-        return Optional.ofNullable(System.getenv(key))
-                .orElseThrow(() -> new RuntimeException(
-                        "Missing environment variable " + key + ", please provide the following environment variables from a NEW TEST PROJECT (you can keep it for further tests):\n" +
-                        "export JVM_SDK_IT_SERVICE_URL=\"https://api.sphere.io\"\n" +
-                        "export JVM_SDK_IT_AUTH_URL=\"https://auth.sphere.io\"\n" +
-                        "export JVM_SDK_IT_PROJECT_KEY=\"YOUR project key\"\n" +
-                        "export JVM_SDK_IT_CLIENT_ID=\"YOUR client id\"\n" +
-                        "export JVM_SDK_IT_CLIENT_SECRET=\"YOUR client secret\""));
-    }
-
-    protected static String apiUrl() {
-        return getValueForEnvVar(JVM_SDK_IT_SERVICE_URL);
-    }
-
-    protected static String authUrl() {
-        return getValueForEnvVar(JVM_SDK_IT_AUTH_URL);
-    }
-
-    protected static String clientSecret() {
-        return getValueForEnvVar(JVM_SDK_IT_CLIENT_SECRET);
-    }
-
-    protected static String clientId() {
-        return getValueForEnvVar(JVM_SDK_IT_CLIENT_ID);
-    }
-
-    protected static String projectKey() {
-        return getValueForEnvVar(JVM_SDK_IT_PROJECT_KEY);
+    public static SphereClientConfig getSphereClientConfig() {
+        return SphereClientConfig.ofEnvironmentVariables("JVM_SDK_IT");
     }
 
     protected static <T> T execute(final SphereRequest<T> sphereRequest) {

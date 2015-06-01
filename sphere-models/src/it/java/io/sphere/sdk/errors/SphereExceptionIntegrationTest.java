@@ -77,7 +77,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
             execute(CategoryUpdateCommand.of(Versioned.of("foo", 1), Collections.<UpdateAction<Category>>emptyList()));
             fail("should throw exception");
         } catch (final SphereServiceException e) {
-            assertThat(e.getProjectKey()).contains(projectKey());
+            assertThat(e.getProjectKey()).contains(getSphereClientConfig().getProjectKey());
         }
     }
 
@@ -90,7 +90,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
                 execute(command);
                 fail("should throw exception");
             } catch (final SphereServiceException e) {
-                assertThat(e.getProjectKey()).contains(projectKey());
+                assertThat(e.getProjectKey()).contains(getSphereClientConfig().getProjectKey());
                 assertThat(e.getMessage()).contains(BuildInfo.version()).contains(command.toString());
                 assertThat(e.getJsonBody().get().get("statusCode").asInt())
                         .overridingErrorMessage("exception contains json body of error response")
@@ -101,7 +101,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
 
     @Test
     public void invalidCredentialsToGetToken() throws Throwable {
-        final SphereAuthConfig config = SphereAuthConfig.of(projectKey(), clientId(), "wrong-password", authUrl());
+        final SphereAuthConfig config = SphereAuthConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getClientId(), "wrong-password", getSphereClientConfig().getAuthUrl());
         final SphereAccessTokenSupplier supplierOfOneTimeFetchingToken = SphereAccessTokenSupplierFactory.of().createSupplierOfOneTimeFetchingToken(config);
         final CompletionStage<String> future = supplierOfOneTimeFetchingToken.get();
         expectException(InvalidClientCredentialsException.class, future);
@@ -112,7 +112,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     public void apiRequestWithWrongToken() throws Throwable {
         client();
 
-        final SphereApiConfig config = SphereApiConfig.of(projectKey(), apiUrl());
+        final SphereApiConfig config = SphereApiConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getApiUrl());
         final SphereClient client = SphereClientFactory.of().createClient(config, SphereAccessTokenSupplier.ofConstantToken("invalid-token"));
         expectExceptionAndClose(client, InvalidTokenException.class, client.execute(CategoryQuery.of()));
     }

@@ -13,7 +13,6 @@ import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
-import java.util.function.Supplier;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -35,13 +34,13 @@ public class SphereAuthExceptionTest extends IntegrationTest {
     public void apiRequestWithWrongToken() throws Throwable {
         client();
 
-        final SphereApiConfig config = SphereApiConfig.of(projectKey(), apiUrl());
+        final SphereApiConfig config = SphereApiConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getApiUrl());
         final SphereClient client = SphereClientFactory.of().createClient(config, SphereAccessTokenSupplier.ofConstantToken("invalid-token"));
         expectExceptionAndClose(client, InvalidTokenException.class, client.execute(CategoryQuery.of()));
     }
 
     private void checkInvalidCredentialForAuthTokenSupplier(final Function<SphereAuthConfig, SphereAccessTokenSupplier> authTokenSupplierSupplier) {
-        final SphereAuthConfig config = SphereAuthConfig.of(projectKey(), clientId(), "wrong-password", authUrl());
+        final SphereAuthConfig config = SphereAuthConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getClientId(), "wrong-password", getSphereClientConfig().getAuthUrl());
         final SphereAccessTokenSupplier authTokenSupplier = authTokenSupplierSupplier.apply(config);
         assertThatThrownBy(() -> authTokenSupplier.get().toCompletableFuture().join())
                 .hasCauseInstanceOf(InvalidClientCredentialsException.class);
