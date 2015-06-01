@@ -17,7 +17,7 @@ package io.sphere.sdk.meta;
  *
  * <p>{@link io.sphere.sdk.client.SphereServiceException} is a base exception for all error responses from SPHERE.IO (HTTP status code {@code >= 400}).</p>
  *
- * <p>{@link io.sphere.sdk.client.ClientErrorException} expresses errors which may can be recovered by the client side (HTTP status code {@code >= 400 and < 500}).
+ * <p>{@link io.sphere.sdk.client.ClientErrorException} expresses errors which can be recovered by the client side (HTTP status code {@code >= 400 and < 500}).
  * {@link io.sphere.sdk.client.ServerErrorException} is for server errors.</p>
  *
  * <h3>Errors</h3>
@@ -29,7 +29,7 @@ package io.sphere.sdk.meta;
  * The following example shows how to distinguish errors by error code:
  * {@include.example io.sphere.sdk.customers.commands.CustomerChangePasswordCommandTest#demo()}
  *
- * Some errors can contain extra information like {@link io.sphere.sdk.client.InvalidJsonInputError} contains the place where the JSON contains errors:
+ * Errors can contain extra information like {@link io.sphere.sdk.client.InvalidJsonInputError} hinting to the problem with the JSON:
  *
  * {@include.example io.sphere.sdk.models.SphereErrorTest#castToConcreteError()}
  *
