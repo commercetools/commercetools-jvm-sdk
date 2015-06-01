@@ -18,6 +18,10 @@ public class ProductProjectionExpansionModel<T> extends ExpansionModel<T> {
         return pathWithRoots("taxCategory");
     }
 
+    public CategoryExpansionModel<ProductProjection> categories(final int index) {
+        return new CategoryExpansionModel<>(pathExpressionOption(), "categories[" + index + "]");
+    }
+
     public CategoryExpansionModel<ProductProjection> categories() {
         return new CategoryExpansionModel<>(pathExpressionOption(), "categories[*]");
     }
