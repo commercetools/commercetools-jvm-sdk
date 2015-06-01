@@ -106,10 +106,10 @@
 extends java.lang.Object</pre>
 <div class="block"><h2><a href=https://github.com/sphereio/sphere-jvm-sdk/issues/183>#183</a> <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models"><code>LocalizedStrings</code></a> currently supports only the language in the <code>Locale</code></h2>
 
- A <code>Locale</code> with also a country can currently produce undesired behaviour while
+ <code>Locale</code> containing a country can currently produce undesired behaviour while
  initializing a <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models"><code>LocalizedStrings</code></a> or a query.
 
- <p>Workaround: pass only locales with a language:</p>
+ <p>Workaround: pass locales with language only, like:</p>
 
  <div id="io-sphere-sdk-meta-KnownIssuesTest-localeWithCountry--%s" class=code-example><pre><code class='java'>final Locale locale = Locale.US;//"en_US", not usable right now
 final Locale usableLocale = new Locale(locale.getLanguage());//"en" ok

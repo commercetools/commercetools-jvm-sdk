@@ -107,15 +107,15 @@ extends java.lang.Object</pre>
 <div class="block">This documentation is about creating objects.
 
  SPHERE.IO saves e-commerce data in the cloud. The JVM SDK is one way to read and write the data.
- There can be other tools like the Merchant Center or product sync tools which also can change data.
+ There can be other tools like the Merchant Center or product sync tools which can also change data.
  As a result the data loaded with the JVM SDK is a record of the present or the
- past since directly after loading the data another tool might changed the data.
- Therefore <strong>data</strong> containers are <strong>immutable</strong> and contain <strong>no setters</strong>.
+ past since another tool might have changed the data just after loading the data .
+ Therefore, <strong>data</strong> containers are <strong>immutable</strong> and contain <strong>no setters</strong>.
 
-  <h3 id=static-of-method>Static of method</h3>
-  For flexibility in the implementation the SDK mostly don't let objects be instantiated with the <code>new</code> operator.
+  <h3 id=static-of-method>Static 'of' method</h3>
+  To achieve flexibility in the implementation the SDK mostly doesn't support object instantiation by the <code>new</code> operator.
 
-  Simple objects with few optional parameters have typically a static method called <code>of</code> to create an object.
+  Simple objects with few optional parameters typically have a static method called <code>of</code> to create an object.
 
   <p> For example use <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html#of-java.util.Locale-java.lang.String-java.util.Locale-java.lang.String-"><code>LocalizedStrings.of(java.util.Locale, String, java.util.Locale, String)</code></a>
    to create a translation for different locales:</p>
@@ -130,8 +130,8 @@ extends java.lang.Object</pre>
   <h3 id=builders>Builders</h3>
 
   For objects with a lot of optional parameters the SDK provides builders. The builder is initialized with a
-  static of method and the mandatory parameters for creating the target object. The builder has methods
-  to fill each optional field of the target object.
+  static <code>of</code> method and the mandatory parameters for creating the target object. The builder provides methods
+  to fill each target object's optional field.
   To create the target object a method called <a href="../../../../io/sphere/sdk/models/Builder.html#build--"><code>Builder.build()</code></a> has to be executed.
 
   <p>The <a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models"><code>Address</code></a> object with the <a href="../../../../io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models"><code>AddressBuilder</code></a>
@@ -179,7 +179,7 @@ assertThat(address.getFirstName())
 
   <h3 id=copy-method>Copy methods</h3>
 
-  Sometimes you need to clone objects and update one field since most objects are immutable,
+  Sometimes you need to clone objects and to update one field since most objects are immutable;
   you can create updated copies with a method starting with "with":
 
   <div id="io-sphere-sdk-meta-ConstructionDocumentationTest-possibilities1--%s" class=code-example><pre><code class='java'>final MonetaryAmount eur100 = MoneyImpl.of(100, EUR);
@@ -194,16 +194,16 @@ assertThat(price1).isEqualTo(price2).isEqualTo(price3)
         .isNotEqualTo(price0);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
-  The with copy methods are inspired by Scala and the Java date and time API: <code>OffsetDateTime.withMinute(int)</code>.
+  The 'with copy'-methods are inspired by Scala and the Java date and time API: <code>OffsetDateTime.withMinute(int)</code>.
 
   <h3 id=persistent-objects>Persistent objects vs. local test doubles</h3>
 
-  You can create local instances of SPHERE.IO resources like
-  <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> for unit testing with a <a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products"><code>ProductBuilder</code></a>.
+  You can create local instances of SPHERE.IO resources, like
+  <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>, for unit testing with a <a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products"><code>ProductBuilder</code></a>.
   But these resources are not persistent.
 
   <p>For persistent changes you need to use a SPHERE.IO
-  client and execute a <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands"><code>Command</code></a>. Available commands for the SPHERE.IO resources
+  client and to execute a <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands"><code>Command</code></a>. Available commands for the SPHERE.IO resources
   are listed in <a href="../../../../io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><code>SphereResources</code></a></p>
 
   Typically there are three kinds of commands:

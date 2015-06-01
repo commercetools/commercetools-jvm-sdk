@@ -120,7 +120,7 @@ extends java.lang.Object</pre>
 
  <p><a href="../../../../io/sphere/sdk/client/SphereServiceException.html" title="class in io.sphere.sdk.client"><code>SphereServiceException</code></a> is a base exception for all error responses from SPHERE.IO (HTTP status code <code>&gt;= 400</code>).</p>
 
- <p><a href="../../../../io/sphere/sdk/client/ClientErrorException.html" title="class in io.sphere.sdk.client"><code>ClientErrorException</code></a> expresses errors which may can be recovered by the client side (HTTP status code <code>&gt;= 400 and &lt; 500</code>).
+ <p><a href="../../../../io/sphere/sdk/client/ClientErrorException.html" title="class in io.sphere.sdk.client"><code>ClientErrorException</code></a> expresses errors which can be recovered by the client side (HTTP status code <code>&gt;= 400 and &lt; 500</code>).
  <a href="../../../../io/sphere/sdk/client/ServerErrorException.html" title="class in io.sphere.sdk.client"><code>ServerErrorException</code></a> is for server errors.</p>
 
  <h3>Errors</h3>
@@ -146,7 +146,7 @@ future.whenCompleteAsync((signInResult, exception) -&gt; {
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerChangePasswordCommandTest.java" target="_blank">test code</a>.</pre></div>
 
- Some errors can contain extra information like <a href="../../../../io/sphere/sdk/client/InvalidJsonInputError.html" title="class in io.sphere.sdk.client"><code>InvalidJsonInputError</code></a> contains the place where the JSON contains errors:
+ Errors can contain extra information like <a href="../../../../io/sphere/sdk/client/InvalidJsonInputError.html" title="class in io.sphere.sdk.client"><code>InvalidJsonInputError</code></a> hinting to the problem with the JSON:
 
  <div id="io-sphere-sdk-models-SphereErrorTest-castToConcreteError--%s" class=code-example><pre><code class='java'>final String json = "{\n" +
         "  \"statusCode\" : 400,\n" +
