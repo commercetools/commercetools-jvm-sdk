@@ -11,12 +11,12 @@ import java.util.function.Supplier;
 /**
  <!-- intro -->
 
- <h3 id="why">Why</h3>
+ <h3 id="why">Why asynchronous</h3>
 
  If you don't care about threads and asynchronous computation you will probably have a slow and inefficient application.
 
- <p>Suppose you want to show a customer detail page with the cart items and the customer data, so you need to fetch the cart and the customer.
- Fetching both documents is not related and let's suppose fetching a document from SPHERE.IO takes 100ms.</p>
+ <p>Suppose you want to show a customer detail page with the cart items and the customer data. For doing this, you need to fetch the cart and the customer.
+ Let's suppose fetching those two unrelated documents from SPHERE.IO takes 100ms for each document.</p>
 
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#serialWayToFetchCustomerAndCart()}
@@ -25,9 +25,9 @@ import java.util.function.Supplier;
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#parallelWayToFetchCustomerAndCart()}
 
- <p>Using futures (We use it here as synonym for {@link java.util.concurrent.CompletableFuture} and {@link java.util.concurrent.CompletionStage}.) can be very handy for executing parallel code.</p>
+ <p>Using futures (We use it here as synonym for {@link java.util.concurrent.CompletableFuture} and {@link java.util.concurrent.CompletionStage}.) can be very handy for executing code in parallel.</p>
 
- <p>So you can use future APIs to run code in separate Threads and the result will not be immediately available, but in the future.
+ <p>You can use future APIs to run code in separate Threads so that the result will not be immediately available, but in the future.
  The overhead of creating a future can be lower than the <a href="http://stackoverflow.com/a/5483105">overhead of creating new Thread</a>.</p>
  <!--
  <h3 id="what">What</h3>
@@ -54,7 +54,7 @@ link to Wikipedia, give monad laws
 
  <h3 id="functional-composition">Functional Composition </h3>
 
- Functional composition covers to transform one future into another for the happy cases. {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Function)}
+ Functional composition covers transforming one future into another for the happy cases. {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Function)}
  and {@link java.util.concurrent.CompletionStage#thenCompose(java.util.function.Function)} will only be called if the future finishes successfully.
 
 
@@ -64,7 +64,7 @@ link to Wikipedia, give monad laws
 Mostly, it is easier to reason about side-effect free code. A future is monad so you do not work with the value directly,
  but you provide functions to transform the value or the exception into a new future.
 
-To use a future for further computation you probably need to use {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Function)}.
+To use a future for further computation, you probably need to use {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Function)}.
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#thenApplyFirstDemo()}
 
 
@@ -122,8 +122,8 @@ With {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Fu
  <h3 id="callbacks">Callbacks</h3>
 
 
- For some occasions you do not want to transform a value but perform a side effect task like logging a value or an error,
- write sth. into a file or send a response for a request.
+ For some occasions you do not want to transform a value, but to perform a side effect task, like logging a value or an error,
+ writing sth. into a file or sending a response for a request.
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationCallbackTest#loggingCallbackExample()}
 
@@ -136,7 +136,7 @@ With {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Fu
 
  <h4>Creation of a successful future</h4>
 
- A future can be created fulfilled immediately:
+ A future can be created as fulfilled immediately:
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#createImmediatelyFulfilledFuture()}
 
@@ -144,7 +144,7 @@ With {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Fu
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#createFulfilledFuture()}
 
- For the immediately fulfilled future also exists an SDK utility method:
+ For the immediately fulfilled future an SDK utility method also exists:
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#createImmediatelyFulfilledFutureShortcut()}
 
@@ -152,7 +152,7 @@ With {@link java.util.concurrent.CompletionStage#thenApply(java.util.function.Fu
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#createFailedFuture()}
 
- <p>Using a SDK shortcut:</p>
+ <p>Using an SDK shortcut:</p>
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#createFailedFutureShortcut()}
 
 
@@ -216,7 +216,7 @@ difference Stage,Future
  <br>
 <h4>Summary of Blocking Access and Immediate Access methods </h4>
 
- <table class="custom">
+ <table class="custom" align="center">
  <caption>Blocking Access and Immediate Access methods of {@link java.util.concurrent.CompletableFuture}</caption>
  <tbody>
  <tr>
@@ -446,7 +446,7 @@ Since Java 8, the JDK provides <a href="https://docs.oracle.com/javase/tutorial/
 
  <h3 id="error-handling">Error Handling</h3>
 
-<p>If an exception occurs with the computation, it should be propagated to the future with {@link java.util.concurrent.CompletableFuture#completeExceptionally(Throwable)} but only once in the lifetime of the future.
+<p>If an exception occurs with the computation, it should be propagated to the future with {@link java.util.concurrent.CompletableFuture#completeExceptionally(Throwable)}, but only once in the lifetime of the future.
  As a result the following try catch block does not make sense, since the error is inside the future which is most likely computed in another Thread:</p>
 
  {@include.example io.sphere.sdk.meta.AsyncDocumentationTest#wrongWayOfErrorHandling()}
