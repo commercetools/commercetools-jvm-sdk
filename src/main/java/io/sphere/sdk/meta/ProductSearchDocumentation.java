@@ -9,7 +9,7 @@ import io.sphere.sdk.models.Base;
 
  <p>The Search API is specially designed to support those uses cases where the Query API is not powerful enough, by providing not only full-text search, filtering, and sorting, but also statistical analysis of the data with facets.</p>
 
- <p>The search endpoints are supposed to be faster than the query endpoints, but for the price of intermittent inconsistency. In other words, whenever the name of a product was changed, it will still take some seconds to propagate this change to the search index.</p>
+ <p>The search endpoints are supposed to be faster than the query endpoints, but for the price of eventual consistency. In other words, whenever the name of a product was changed, it will still take some seconds to propagate this change to the search index.</p>
 
  <p>Currently only products have a search endpoint for {@link io.sphere.sdk.products.ProductProjection} only. Therefore, be aware that the class to create a search request for products is called {@link io.sphere.sdk.products.search.ProductProjectionSearch}.</p>
 
