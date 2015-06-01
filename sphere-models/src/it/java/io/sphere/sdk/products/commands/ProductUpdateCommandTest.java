@@ -62,8 +62,8 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void addPriceWithValidityPeriod() throws Exception {
         final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR))
-                .withValidFrom(ZonedDateTime.now())
-                .withValidUntil(ZonedDateTime.now().withZoneSameLocal(ZoneId.of("Z")).plusHours(2));
+                .withValidFrom(SphereTestUtils.now())
+                .withValidUntil(SphereTestUtils.now().withZoneSameLocal(ZoneId.of("Z")).plusHours(2));
         testAddPrice(expectedPrice);
     }
 

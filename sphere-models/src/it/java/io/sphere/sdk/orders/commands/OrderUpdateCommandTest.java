@@ -7,6 +7,7 @@ import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -31,7 +32,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             .withProvider("provider foo")
             .withProviderTransaction("prov trans 56");
     public static final ParcelMeasurements PARCEL_MEASUREMENTS = ParcelMeasurements.of(2, 3, 1, 4);
-    public static final ZonedDateTime ZonedDateTime_IN_PAST = ZonedDateTime.now().minusSeconds(500);
+    public static final ZonedDateTime ZonedDateTime_IN_PAST = SphereTestUtils.now().minusSeconds(500);
 
     @Test
     public void changeOrderState() throws Exception {

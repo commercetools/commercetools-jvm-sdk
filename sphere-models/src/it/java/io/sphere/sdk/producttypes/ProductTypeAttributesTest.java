@@ -132,7 +132,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void dateTimeAttribute() throws Exception {
-        final ZonedDateTime now = ZonedDateTime.now().withZoneSameInstant(ZoneId.of("Z"));
+        final ZonedDateTime now = SphereTestUtils.now().withZoneSameInstant(ZoneId.of("Z"));
         testSingleAndSet(AttributeAccess.ofDateTime(), AttributeAccess.ofDateTimeSet(),
                 asSet(now, now.plus(3, ChronoUnit.DAYS)),
                 DateTimeType.of(),

@@ -4,6 +4,7 @@ import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.commands.updateactions.*;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
@@ -132,7 +133,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
     @Test
     public void setValidFrom() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
-            final ZonedDateTime dateTime = ZonedDateTime.now();
+            final ZonedDateTime dateTime = SphereTestUtils.now();
 
             assertThat(cartDiscount.getValidFrom()).isNotEqualTo(Optional.of(dateTime));
 
@@ -159,6 +160,6 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
 
     private ZonedDateTime dateTimeAfterValidFromAndOldValidUntil(final CartDiscount cartDiscount) {
         return cartDiscount.getValidUntil()
-                .orElse(cartDiscount.getValidFrom().orElse(ZonedDateTime.now()).plusSeconds(1000)).plusSeconds(1);
+                .orElse(cartDiscount.getValidFrom().orElse(SphereTestUtils.now()).plusSeconds(1000)).plusSeconds(1);
     }
 }

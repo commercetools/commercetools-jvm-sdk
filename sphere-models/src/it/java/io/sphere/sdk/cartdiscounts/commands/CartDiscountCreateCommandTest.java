@@ -3,6 +3,7 @@ package io.sphere.sdk.cartdiscounts.commands;
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.After;
 import org.junit.Test;
@@ -22,7 +23,7 @@ public class CartDiscountCreateCommandTest extends IntegrationTest {
 
     @Test
     public void execution() throws Exception {
-        final ZonedDateTime validFrom = ZonedDateTime.now();
+        final ZonedDateTime validFrom = SphereTestUtils.now();
         final ZonedDateTime validUntil = validFrom.plusSeconds(8000);
         final LocalizedStrings name = en("discount name");
         final LocalizedStrings description = en("discount descriptions");

@@ -15,6 +15,7 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -213,7 +214,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                 final TaxRate taxRate = taxCategory.getTaxRates().get(0);
                 final Reference<TaxCategory> taxCategoryRef = taxCategory.toReference();
                 final Optional<Reference<ShippingMethod>> shippingMethodRef = Optional.of(shippingMethod.toReference());
-                final ZonedDateTime createdAt = ZonedDateTime.now().minusSeconds(4);
+                final ZonedDateTime createdAt = SphereTestUtils.now().minusSeconds(4);
                 final ParcelMeasurements parcelMeasurements = ParcelMeasurements.of(2, 3, 1, 3);
                 final DeliveryItem deliveryItem = DeliveryItem.of(new LineItemLike() {
                     private final String id = randomKey();
@@ -338,7 +339,7 @@ public class OrderImportCommandTest extends IntegrationTest {
 
     @Test
     public void getCompletedAt() throws Exception {
-        final ZonedDateTime completedAt = ZonedDateTime.now().minusSeconds(5555);
+        final ZonedDateTime completedAt = SphereTestUtils.now().minusSeconds(5555);
         testOrderAspect(builder -> builder.completedAt(completedAt),
                 order -> assertThat(order.getCompletedAt()).contains(completedAt));
     }
