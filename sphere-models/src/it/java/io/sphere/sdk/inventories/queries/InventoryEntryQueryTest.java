@@ -29,7 +29,8 @@ public class InventoryEntryQueryTest extends IntegrationTest {
 
     @Test
     public void queryModel() throws Exception {
-        withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
+        final ChannelRoles channelRole = ChannelRoles.INVENTORY_SUPPLY;
+        withChannelOfRole(client(), channelRole, channel -> {
             final String sku = randomKey();
             final long quantityOnStock = 10;
             final Instant expectedDelivery = tomorrowInstant();
@@ -46,9 +47,13 @@ public class InventoryEntryQueryTest extends IntegrationTest {
                 final QueryPredicate<InventoryEntry> predicate = skuP.and(channelP).and(availableP).and(stockP);
                 final QueryDsl<InventoryEntry> query = InventoryEntryQuery.of()
                         .withPredicate(predicate)
-                        .withSort(model().id().sort(QuerySortDirection.DESC));
+                        .withSort(model().id().sort(QuerySortDirection.DESC))
+                        .withExpansionPath(InventoryEntryQuery.expansionPath().supplyChannel());
                 final PagedQueryResult<InventoryEntry> result = execute(query);
                 assertThat(result.head().map(e -> e.getId())).contains(entry.getId());
+                assertThat(result.head().get().getSupplyChannel().get().getObj().get().getRoles())
+                        .overridingErrorMessage("can expand supplyChannel reference")
+                        .contains(channelRole);
                 return entry;
             });
         });

@@ -5,8 +5,6 @@ import io.sphere.sdk.inventories.InventoryEntry;
 import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 
-import java.util.List;
-
 /**
  {@doc.gen summary inventory entries}
  */
@@ -31,5 +29,9 @@ public class InventoryEntryQuery extends DefaultModelQuery<InventoryEntry> {
 
     public static InventoryEntryQueryModel model() {
         return InventoryEntryQueryModel.get();
+    }
+
+    public static InventoryEntryExpansionModel<InventoryEntry> expansionPath() {
+        return new InventoryEntryExpansionModel<>();
     }
 }
