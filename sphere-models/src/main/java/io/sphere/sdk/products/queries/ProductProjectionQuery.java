@@ -33,7 +33,7 @@ public class ProductProjectionQuery extends DefaultModelQuery<ProductProjection>
         return withPredicate(model().productType().is(productType));
     }
 
-    public Query<ProductProjection> bySlug(final Locale locale, final String slug) {
+    public QueryDsl<ProductProjection> bySlug(final Locale locale, final String slug) {
         return withPredicate(model().slug().lang(locale).is(slug));
     }
 
