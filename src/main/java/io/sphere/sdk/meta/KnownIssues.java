@@ -3,10 +3,10 @@ package io.sphere.sdk.meta;
 /**
 <h2><a href=https://github.com/sphereio/sphere-jvm-sdk/issues/183>#183</a> {@link io.sphere.sdk.models.LocalizedStrings} currently supports only the language in the {@link java.util.Locale}</h2>
 
- A {@link java.util.Locale} with also a country can currently produce undesired behaviour while
+ {@link java.util.Locale} containing a country can currently produce undesired behaviour while
  initializing a {@link io.sphere.sdk.models.LocalizedStrings} or a query.
 
- <p>Workaround: pass only locales with a language:</p>
+ <p>Workaround: pass locales with language only, like:</p>
 
  {@include.example io.sphere.sdk.meta.KnownIssuesTest#localeWithCountry()}
 
