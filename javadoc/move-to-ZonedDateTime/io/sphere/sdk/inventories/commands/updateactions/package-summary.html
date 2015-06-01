@@ -115,7 +115,7 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetExpectedDelivery</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-setExpectedDelivery--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final ZonedDateTime expectedDelivery = ZonedDateTime.now().plus(7, ChronoUnit.DAYS);
+    final ZonedDateTime expectedDelivery = SphereTestUtils.now().plus(7, ChronoUnit.DAYS);
     final UpdateAction&lt;InventoryEntry&gt; action = SetExpectedDelivery.of(expectedDelivery);
     final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
     assertThat(updatedEntry.getExpectedDelivery())

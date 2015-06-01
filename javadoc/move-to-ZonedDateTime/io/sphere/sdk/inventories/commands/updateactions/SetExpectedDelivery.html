@@ -121,7 +121,7 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">SetExpectedDelivery</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/inventories/InventoryEntry.html" title="interface in io.sphere.sdk.inventories">InventoryEntry</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-setExpectedDelivery--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final ZonedDateTime expectedDelivery = ZonedDateTime.now().plus(7, ChronoUnit.DAYS);
+    final ZonedDateTime expectedDelivery = SphereTestUtils.now().plus(7, ChronoUnit.DAYS);
     final UpdateAction&lt;InventoryEntry&gt; action = SetExpectedDelivery.of(expectedDelivery);
     final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
     assertThat(updatedEntry.getExpectedDelivery())

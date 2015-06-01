@@ -121,7 +121,7 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">SetValidFrom</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setValidFrom--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final ZonedDateTime dateTime = ZonedDateTime.now();
+    final ZonedDateTime dateTime = SphereTestUtils.now();
 
     assertThat(cartDiscount.getValidFrom()).isNotEqualTo(Optional.of(dateTime));
 

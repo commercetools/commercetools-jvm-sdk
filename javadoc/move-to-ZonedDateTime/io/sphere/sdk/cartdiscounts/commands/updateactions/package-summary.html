@@ -214,7 +214,7 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetValidFrom</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setValidFrom--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final ZonedDateTime dateTime = ZonedDateTime.now();
+    final ZonedDateTime dateTime = SphereTestUtils.now();
 
     assertThat(cartDiscount.getValidFrom()).isNotEqualTo(Optional.of(dateTime));
 

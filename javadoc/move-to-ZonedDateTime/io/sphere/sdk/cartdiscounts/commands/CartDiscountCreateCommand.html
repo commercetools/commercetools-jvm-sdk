@@ -134,7 +134,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">CartDiscountCreateCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a>,<a href="../../../../../io/sphere/sdk/cartdiscounts/CartDiscountDraft.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraft</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final ZonedDateTime validFrom = ZonedDateTime.now();
+<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final ZonedDateTime validFrom = SphereTestUtils.now();
 final ZonedDateTime validUntil = validFrom.plusSeconds(8000);
 final LocalizedStrings name = en("discount name");
 final LocalizedStrings description = en("discount descriptions");
