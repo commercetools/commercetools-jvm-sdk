@@ -104,7 +104,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">EntityQuery&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;</pre>
+extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;T&gt;</pre>
 <div class="block">Queries for entities with getters and copy functions for where, sort, limit and offset</div>
 </li>
 </ul>
@@ -153,7 +153,7 @@ extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface 
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#additionalQueryParameters--">additionalQueryParameters</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -269,6 +269,10 @@ extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface 
 <li class="blockList">
 <h4>expansionPaths</h4>
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">T</a>&gt;&gt;&nbsp;expansionPaths()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html#expansionPaths--">expansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="type parameter in EntityQuery">T</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="additionalQueryParameters--">
@@ -277,7 +281,7 @@ extends <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface 
 <ul class="blockListLast">
 <li class="blockList">
 <h4>additionalQueryParameters</h4>
-<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries">QueryParameter</a>&gt;&nbsp;additionalQueryParameters()</pre>
+<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalQueryParameters()</pre>
 </li>
 </ul>
 </li>
