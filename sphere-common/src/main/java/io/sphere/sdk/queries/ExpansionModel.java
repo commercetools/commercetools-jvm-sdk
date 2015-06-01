@@ -24,6 +24,10 @@ public class ExpansionModel<T> extends ExpansionPathBase<T> {
         this(Optional.empty(), Optional.empty());
     }
 
+    protected static String collection(final String segmentName, final int index) {
+        return String.format("%s[%d]", segmentName, index);
+    }
+
     @Override
     public String toSphereExpand() {
         return buildPathExpression();

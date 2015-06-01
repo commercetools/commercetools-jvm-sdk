@@ -17,6 +17,10 @@ public class CategoryExpansionModel<T> extends ExpansionModel<T> {
         super();
     }
 
+    public CategoryExpansionModel<T> ancestors(final int index) {
+        return new CategoryExpansionModel<>(pathExpressionOption(), collection("ancestors", index));
+    }
+
     public CategoryExpansionModel<T> ancestors() {
         return new CategoryExpansionModel<>(pathExpressionOption(), "ancestors[*]");
     }

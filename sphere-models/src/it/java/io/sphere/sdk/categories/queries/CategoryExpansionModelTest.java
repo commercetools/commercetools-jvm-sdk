@@ -59,4 +59,10 @@ public class CategoryExpansionModelTest extends IntegrationTest {
             });
         });
     }
+
+    @Test
+    public void ancestorsIndex() throws Exception {
+        assertThat(CategoryQuery.expansionPath().ancestors(1).ancestors().toSphereExpand())
+                .isEqualTo("ancestors[1].ancestors[*]");
+    }
 }
