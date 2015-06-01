@@ -2,12 +2,15 @@ package io.sphere.sdk.cartdiscounts.commands;
 
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.commands.updateactions.*;
+import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Optional;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
@@ -139,8 +142,9 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
 
             assertThat(cartDiscount.getValidFrom()).isNotEqualTo(Optional.of(dateTime));
 
-            final CartDiscount updatedDiscount =
-                    execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidFrom.of(dateTime)));
+            final List<UpdateAction<CartDiscount>> updateActions =
+                    asList(SetValidFrom.of(dateTime), SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)));
+            final CartDiscount updatedDiscount = execute(CartDiscountUpdateCommand.of(cartDiscount, updateActions));
 
             assertThat(updatedDiscount.getValidFrom()).contains(dateTime);
         });
