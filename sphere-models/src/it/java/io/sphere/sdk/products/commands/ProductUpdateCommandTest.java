@@ -17,6 +17,7 @@ import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 
 import io.sphere.sdk.test.ReferenceAssert;
+import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
