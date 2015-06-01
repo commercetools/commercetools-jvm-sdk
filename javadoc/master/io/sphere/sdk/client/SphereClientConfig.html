@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":9};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":9,"i7":9,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -74,13 +74,13 @@ var activeTableTab = "activeTableTab";
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
@@ -127,6 +127,41 @@ implements <a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" titl
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field.summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Field Summary table, listing fields, and an explanation">
+<caption><span>Fields</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Field and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ENVIRONMENT_VARIABLE_API_URL_SUFFIX">ENVIRONMENT_VARIABLE_API_URL_SUFFIX</a></span></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX">ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX">ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX</a></span></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX">ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX">ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX</a></span></code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -173,6 +208,20 @@ implements <a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" titl
   java.lang.String&nbsp;authUrl,
   java.lang.String&nbsp;apiUrl)</code>&nbsp;</td>
 </tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ofEnvironmentVariables-java.lang.String-">ofEnvironmentVariables</a></span>(java.lang.String&nbsp;prefix)</code>
+<div class="block">Creates a <a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client"><code>SphereClientConfig</code></a> out of environment variables using <code>prefix</code> as namespace parameter.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#withApiUrl-java.lang.String-">withApiUrl</a></span>(java.lang.String&nbsp;apiUrl)</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#withAuthUrl-java.lang.String-">withAuthUrl</a></span>(java.lang.String&nbsp;authUrl)</code>&nbsp;</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -210,6 +259,79 @@ implements <a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" titl
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
+<!-- ============ FIELD DETAIL =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field.detail">
+<!--   -->
+</a>
+<h3>Field Detail</h3>
+<a name="ENVIRONMENT_VARIABLE_API_URL_SUFFIX">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ENVIRONMENT_VARIABLE_API_URL_SUFFIX</h4>
+<pre>public static final&nbsp;java.lang.String ENVIRONMENT_VARIABLE_API_URL_SUFFIX</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../constant-values.html#io.sphere.sdk.client.SphereClientConfig.ENVIRONMENT_VARIABLE_API_URL_SUFFIX">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
+<a name="ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX</h4>
+<pre>public static final&nbsp;java.lang.String ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../constant-values.html#io.sphere.sdk.client.SphereClientConfig.ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
+<a name="ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX</h4>
+<pre>public static final&nbsp;java.lang.String ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../constant-values.html#io.sphere.sdk.client.SphereClientConfig.ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
+<a name="ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX</h4>
+<pre>public static final&nbsp;java.lang.String ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../constant-values.html#io.sphere.sdk.client.SphereClientConfig.ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
+<a name="ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX</h4>
+<pre>public static final&nbsp;java.lang.String ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX</pre>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../constant-values.html#io.sphere.sdk.client.SphereClientConfig.ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX">Constant Field Values</a></dd>
+</dl>
+</li>
+</ul>
+</li>
+</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
@@ -299,7 +421,7 @@ implements <a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" titl
 <a name="getProjectKey--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getProjectKey</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getProjectKey()</pre>
@@ -308,6 +430,54 @@ implements <a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" titl
 <dd><code><a href="../../../../io/sphere/sdk/client/SphereApiConfig.html#getProjectKey--">getProjectKey</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereApiConfig.html" title="interface in io.sphere.sdk.client">SphereApiConfig</a></code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html#getProjectKey--">getProjectKey</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" title="interface in io.sphere.sdk.client">SphereAuthConfig</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="withApiUrl-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withApiUrl</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a>&nbsp;withApiUrl(java.lang.String&nbsp;apiUrl)</pre>
+</li>
+</ul>
+<a name="withAuthUrl-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withAuthUrl</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a>&nbsp;withAuthUrl(java.lang.String&nbsp;authUrl)</pre>
+</li>
+</ul>
+<a name="ofEnvironmentVariables-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>ofEnvironmentVariables</h4>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client">SphereClientConfig</a>&nbsp;ofEnvironmentVariables(java.lang.String&nbsp;prefix)</pre>
+<div class="block">Creates a <a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client"><code>SphereClientConfig</code></a> out of environment variables using <code>prefix</code> as namespace parameter.
+
+    An example environment variable initialization with "PROJECT_NAME" as <code>prefix</code>:
+    <pre><code>
+    export PROJECT_NAME_PROJECT_KEY="YOUR project key"
+    export PROJECT_NAME_CLIENT_ID="YOUR client id"
+    export PROJECT_NAME_CLIENT_SECRET="YOUR client secret"
+    </code></pre>
+
+    The possible suffixes are
+    <a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ENVIRONMENT_VARIABLE_PROJECT_KEY_SUFFIX">"PROJECT_KEY"</a>,
+    <a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ENVIRONMENT_VARIABLE_CLIENT_ID_SUFFIX">"CLIENT_ID"</a>,
+    <a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ENVIRONMENT_VARIABLE_CLIENT_SECRET_SUFFIX">"CLIENT_SECRET"</a>,
+    <a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ENVIRONMENT_VARIABLE_AUTH_URL_SUFFIX">"AUTH_URL"</a> and
+    <a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ENVIRONMENT_VARIABLE_API_URL_SUFFIX">"API_URL"</a>.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>prefix</code> - prefix of the environment variables</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new <a href="../../../../io/sphere/sdk/client/SphereClientConfig.html" title="class in io.sphere.sdk.client"><code>SphereClientConfig</code></a> containing the values of the environment variables.</dd>
 </dl>
 </li>
 </ul>
@@ -364,13 +534,13 @@ implements <a href="../../../../io/sphere/sdk/client/SphereAuthConfig.html" titl
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>

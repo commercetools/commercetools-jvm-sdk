@@ -125,8 +125,9 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
     assertThat(cartDiscount.getValidFrom()).isNotEqualTo(Optional.of(dateTime));
 
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidFrom.of(dateTime)));
+    final List&lt;UpdateAction&lt;CartDiscount&gt;&gt; updateActions =
+            asList(SetValidFrom.of(dateTime), SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)));
+    final CartDiscount updatedDiscount = execute(CartDiscountUpdateCommand.of(cartDiscount, updateActions));
 
     assertThat(updatedDiscount.getValidFrom()).contains(dateTime);
 });
