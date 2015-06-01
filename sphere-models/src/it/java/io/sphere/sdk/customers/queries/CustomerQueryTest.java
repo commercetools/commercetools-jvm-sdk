@@ -7,10 +7,7 @@ import io.sphere.sdk.customers.commands.updateactions.AddAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultBillingAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultShippingAddress;
-import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryPredicate;
-import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.queries.QuerySortDirection;
+import io.sphere.sdk.queries.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.*;
 
@@ -18,6 +15,7 @@ import java.util.List;
 import java.util.function.Function;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.b2cCustomerGroup;
+import static io.sphere.sdk.customers.CustomerFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
@@ -37,6 +35,18 @@ public class CustomerQueryTest extends IntegrationTest {
     public static void tearDown() throws Exception {
         customer = null;
         distraction = null;
+    }
+
+    @Test
+    public void customerGroupReferenceExpansion() throws Exception {
+        withCustomerInGroup(client(), (customer, customerGroup) -> {
+            final Query<Customer> query = CustomerQuery.of()
+                    .byEmail(customer.getEmail())
+                    .withExpansionPath(CustomerQuery.expansionPath().customerGroup());
+            final String actualCustomerGroupId = execute(query).head().get().getCustomerGroup().get().getObj().get().getId();
+            assertThat(actualCustomerGroupId).isEqualTo(customerGroup.getId());
+        });
+
     }
 
     @Test

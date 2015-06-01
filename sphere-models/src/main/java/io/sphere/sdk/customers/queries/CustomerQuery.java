@@ -31,4 +31,8 @@ public class CustomerQuery extends DefaultModelQuery<Customer> {
     public QueryDsl<Customer> byEmail(final String email) {
         return withPredicate(model().email().is(email));
     }
+
+    public static CustomerExpansionModel<Customer> expansionPath() {
+        return new CustomerExpansionModel<>();
+    }
 }
