@@ -17,5 +17,13 @@ public class ProductDataExpansionModel<T> extends ExpansionModel<T> {
     public CategoryExpansionModel<T> categories() {
         return new CategoryExpansionModel<>(pathExpressionOption(), "categories[*]");
     }
+
+    public ProductVariantExpansionModel<T> masterVariant() {
+        return new ProductVariantExpansionModel<>(pathExpressionOption(), "masterVariant");
+    }
+
+    public ProductVariantExpansionModel<T> variants() {
+        return new ProductVariantExpansionModel<>(pathExpressionOption(), "variants");
+    }
 }
 

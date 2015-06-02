@@ -109,8 +109,11 @@ public class ProductFixtures {
     }
 
     public static void withUpdateablePricedProduct(final TestClient client, final Function<Product, Product> f) {
+        withUpdateablePricedProduct(client, Price.of(MoneyImpl.of(123, EUR)), f);
+    }
+
+    public static void withUpdateablePricedProduct(final TestClient client, final Price expectedPrice, final Function<Product, Product> f) {
         withUpdateableProduct(client, product -> {
-            final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
             final ProductUpdateCommand command = ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT));
             return f.apply(client.execute(command));
         });
