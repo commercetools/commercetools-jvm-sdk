@@ -161,7 +161,7 @@ extends java.lang.Object</pre>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models"><code>SphereException</code></a>s may give hint to developers how to recover from errors. For example on typical elasticsearch related problems it suggests to reindex the product index.</li>
      <li class=new-in-release>The JVM SDK is available for Ning Async HTTP Client 1.8 and 1.9 (incompatible to 1.8).</li>
      <li class=new-in-release>State update actions and <a href="../../../../io/sphere/sdk/states/StateBuilder.html" title="class in io.sphere.sdk.states"><code>StateBuilder</code></a> contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
-     <li class=new-in-release>Embedded predicates ("where") now support lambda syntax: <a href="../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html#where-java.util.function.Function-"><code>ProductVariantQueryModel.where(java.util.function.Function)</code></a>.</li>
+     <li class=new-in-release>Embedded predicates (as used in 'where'-clauses) now support lambda syntax: <a href="../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html#where-java.util.function.Function-"><code>ProductVariantQueryModel.where(java.util.function.Function)</code></a>.</li>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerId-java.lang.String-"><code>OrderQuery.byCustomerId(java.lang.String)</code></a> and <a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerEmail-java.lang.String-"><code>OrderQuery.byCustomerEmail(java.lang.String)</code></a></li>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/channels/commands/ChannelUpdateCommand.html" title="class in io.sphere.sdk.channels.commands"><code>ChannelUpdateCommand</code></a></li>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="class in io.sphere.sdk.channels.queries"><code>ChannelByIdFetch</code></a></li>
@@ -172,7 +172,7 @@ extends java.lang.Object</pre>
        </ul>
      </li>
      <li class=change-in-release>Artifact IDs start now with "sphere-".</li>
-     <li class=change-in-release>In APIs <code>CompletableFuture</code> has been replaced with <code>CompletionStage</code>.
+     <li class=change-in-release> <code>CompletableFuture</code> has been replaced with <code>CompletionStage</code>.
 
        You can convert from <code>CompletionStage</code> to <code>CompletableFuture</code> with <code>CompletionStage.toCompletableFuture()</code>.
 
@@ -181,8 +181,8 @@ extends java.lang.Object</pre>
      is now <a href="../../../../io/sphere/sdk/client/SphereClient.html#execute-io.sphere.sdk.client.SphereRequest-"><code>SphereClient.execute(SphereRequest)</code></a> which returns <code>CompletionStage</code> instead of <code>CompletableFuture</code>.
      </li>
      <li class=change-in-release><a href="../../../../io/sphere/sdk/carts/LineItem.html#getTaxRate--"><code>LineItem.getTaxRate()</code></a> is optional.</li>
-     <li class=change-in-release><a href="../../../../io/sphere/sdk/carts/LineItem.html#getState--"><code>LineItem.getState()</code></a> is now a set instead of a list.</li>
-     <li class=change-in-release><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getCategories--"><code>ProductProjection.getCategories()</code></a> returns a set instead of a list.</li>
+     <li class=change-in-release><a href="../../../../io/sphere/sdk/carts/LineItem.html#getState--"><code>LineItem.getState()</code></a> now returns a set instead of a list.</li>
+     <li class=change-in-release><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getCategories--"><code>ProductProjection.getCategories()</code></a> now returns a set instead of a list.</li>
 
     <li class=fixed-in-release>URL encoding of parameters. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/240">#240</a>.</li>
  </ul>
@@ -199,7 +199,7 @@ extends java.lang.Object</pre>
  <a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><code>RangeFacetResult</code></a> are using generics.
  <a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><code>TermFacetResult</code></a> uses long instead of int for some methods like <a href="../../../../io/sphere/sdk/search/TermFacetResult.html#getMissing--"><code>TermFacetResult.getMissing()</code></a>.</li>
  <li class=change-in-release>Methods in <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><code>SearchDsl</code></a> have been renamed.</li>
- <li class=change-in-release><code>RangeStats#getMean()</code> is now a double.</li>
+ <li class=change-in-release><code>io.sphere.sdk.search.RangeStats#getMean()</code> now returns a double.</li>
  <li class=change-in-release><a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http"><code>HttpHeaders</code></a> allows reoccurring headers.</li>
  <li class=change-in-release>Use of a new toString style, from <pre>io.sphere.sdk.client.HttpRequestIntent@7308a939[httpMethod=POST,path=/categories,headers={},body=Optional[io.sphere.sdk.http.StringHttpRequestBody@216ec9be[body={invalidJson :)]]]</pre> to <pre>HttpRequestIntent[httpMethod=POST,path=/categories,headers={},body=Optional[StringHttpRequestBody[body={invalidJson :)]]]</pre></li>
  <li class=fixed-in-release><a href="../../../../io/sphere/sdk/models/SphereException.html#getMessage--"><code>SphereException.getMessage()</code></a> now returns also the project debug info.</li>
@@ -231,7 +231,7 @@ extends java.lang.Object</pre>
     <li class=change-in-release>For SDK devs: <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client"><code>JsonEndpoint</code></a> moved to the client package</li>
     <li class=change-in-release><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><code>Fetch</code></a> class names end now with Fetch for consistency, so for example <code>CartFetchById</code> is now <a href="../../../../io/sphere/sdk/carts/queries/CartByIdFetch.html" title="class in io.sphere.sdk.carts.queries"><code>CartByIdFetch</code></a>.</li>
     <li class=change-in-release><a href="../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands"><code>DeleteCommand</code></a> implementations don't have <code>ById</code> or <code>ByKey</code> in the class name and the <code>of</code> factory method returns the interface, not the implementation, example <a href="../../../../io/sphere/sdk/categories/commands/CategoryDeleteCommand.html#of-io.sphere.sdk.models.Versioned-"><code>CategoryDeleteCommand.of(io.sphere.sdk.models.Versioned)</code></a>.</li>
-    <li class=change-in-release>LocalizedText* classes has been renamed to LocalizedStrings.</li>
+    <li class=change-in-release>LocalizedText* classes have been renamed to LocalizedStrings.</li>
     <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/264">#264</a>.</li>
  </ul>
 
