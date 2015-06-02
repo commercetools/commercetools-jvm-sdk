@@ -72,7 +72,7 @@ import java.util.function.BiFunction;
      <li class=new-in-release>{@link io.sphere.sdk.models.SphereException}s may give hint to developers how to recover from errors. For example on typical elasticsearch related problems it suggests to reindex the product index.</li>
      <li class=new-in-release>The JVM SDK is available for Ning Async HTTP Client 1.8 and 1.9 (incompatible to 1.8).</li>
      <li class=new-in-release>State update actions and {@link io.sphere.sdk.states.StateBuilder} contributed by <a href="https://github.com/abrauner">Ansgar Brauner</a></li>
-     <li class=new-in-release>Embedded predicates ("where") now support lambda syntax: {@link io.sphere.sdk.products.queries.ProductVariantQueryModel#where(java.util.function.Function)}.</li>
+     <li class=new-in-release>Embedded predicates (as used in 'where'-clauses) now support lambda syntax: {@link io.sphere.sdk.products.queries.ProductVariantQueryModel#where(java.util.function.Function)}.</li>
      <li class=new-in-release>{@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerId(java.lang.String)} and {@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerEmail(java.lang.String)}</li>
      <li class=new-in-release>{@link io.sphere.sdk.channels.commands.ChannelUpdateCommand}</li>
      <li class=new-in-release>{@link io.sphere.sdk.channels.queries.ChannelByIdFetch}</li>
@@ -83,7 +83,7 @@ import java.util.function.BiFunction;
        </ul>
      </li>
      <li class=change-in-release>Artifact IDs start now with "sphere-".</li>
-     <li class=change-in-release>In APIs {@link java.util.concurrent.CompletableFuture} has been replaced with {@link java.util.concurrent.CompletionStage}.
+     <li class=change-in-release> {@link java.util.concurrent.CompletableFuture} has been replaced with {@link java.util.concurrent.CompletionStage}.
 
        You can convert from {@link java.util.concurrent.CompletionStage} to {@link java.util.concurrent.CompletableFuture} with {@link CompletionStage#toCompletableFuture()}.
 
@@ -92,8 +92,8 @@ import java.util.function.BiFunction;
      is now {@link io.sphere.sdk.client.SphereClient#execute(SphereRequest)} which returns {@link java.util.concurrent.CompletionStage} instead of {@link java.util.concurrent.CompletableFuture}.
      </li>
      <li class=change-in-release>{@link  io.sphere.sdk.carts.LineItem#getTaxRate()} is optional.</li>
-     <li class=change-in-release>{@link io.sphere.sdk.carts.LineItem#getState()} is now a set instead of a list.</li>
-     <li class=change-in-release>{@link io.sphere.sdk.products.ProductProjection#getCategories()} returns a set instead of a list.</li>
+     <li class=change-in-release>{@link io.sphere.sdk.carts.LineItem#getState()} now returns a set instead of a list.</li>
+     <li class=change-in-release>{@link io.sphere.sdk.products.ProductProjection#getCategories()} now returns a set instead of a list.</li>
 
     <li class=fixed-in-release>URL encoding of parameters. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/240">#240</a>.</li>
  </ul>
@@ -110,7 +110,7 @@ import java.util.function.BiFunction;
  {@link io.sphere.sdk.search.RangeFacetResult} are using generics.
  {@link io.sphere.sdk.search.TermFacetResult} uses long instead of int for some methods like {@link io.sphere.sdk.search.TermFacetResult#getMissing()}.</li>
  <li class=change-in-release>Methods in {@link io.sphere.sdk.search.SearchDsl} have been renamed.</li>
- <li class=change-in-release>{@code RangeStats#getMean()} is now a double.</li>
+ <li class=change-in-release>{@code io.sphere.sdk.search.RangeStats#getMean()} now returns a double.</li>
  <li class=change-in-release>{@link io.sphere.sdk.http.HttpHeaders} allows reoccurring headers.</li>
  <li class=change-in-release>Use of a new toString style, from <pre>io.sphere.sdk.client.HttpRequestIntent@7308a939[httpMethod=POST,path=/categories,headers={},body=Optional[io.sphere.sdk.http.StringHttpRequestBody@216ec9be[body={invalidJson :)]]]</pre> to <pre>HttpRequestIntent[httpMethod=POST,path=/categories,headers={},body=Optional[StringHttpRequestBody[body={invalidJson :)]]]</pre></li>
  <li class=fixed-in-release>{@link io.sphere.sdk.client.ErrorResponseException#getMessage()} now returns also the project debug info.</li>
@@ -142,7 +142,7 @@ import java.util.function.BiFunction;
     <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.client.JsonEndpoint} moved to the client package</li>
     <li class=change-in-release>{@link io.sphere.sdk.queries.Fetch} class names end now with Fetch for consistency, so for example {@code CartFetchById} is now {@link io.sphere.sdk.carts.queries.CartByIdFetch}.</li>
     <li class=change-in-release>{@link io.sphere.sdk.commands.DeleteCommand} implementations don't have {@code ById} or {@code ByKey} in the class name and the {@code of} factory method returns the interface, not the implementation, example {@link io.sphere.sdk.categories.commands.CategoryDeleteCommand#of(io.sphere.sdk.models.Versioned)}.</li>
-    <li class=change-in-release>LocalizedText* classes has been renamed to LocalizedStrings.</li>
+    <li class=change-in-release>LocalizedText* classes have been renamed to LocalizedStrings.</li>
     <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/264">#264</a>.</li>
  </ul>
 
