@@ -1,74 +1,42 @@
 package io.sphere.sdk.queries;
 
-import java.util.Optional;
-
-public class IntegerQuerySortingModel<T> extends IntegerLikeQuerySortingModel<T, Integer> {
-    public IntegerQuerySortingModel(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
-        super(parent, pathSegment);
-    }
+public interface IntegerQuerySortingModel<T> extends QueryModel<T>, QuerySortingModel<T>,
+        OptionalQueryModel<T>, EqualityQueryModel<T, Integer>,
+        NotEqualQueryModel<T, Integer>, IsInQueryModel<T, Integer>, IsNotInQueryModel<T, Integer>,
+        InequalityQueryModel<T, Integer> {
+    @Override
+    QueryPredicate<T> is(Integer i);
 
     @Override
-    public QueryPredicate<T> is(final Integer i) {
-        return super.is(i);
-    }
+    QueryPredicate<T> isGreaterThan(Integer value);
 
     @Override
-    public QueryPredicate<T> isGreaterThan(final Integer value) {
-        return super.isGreaterThan(value);
-    }
+    QueryPredicate<T> isGreaterThanOrEqualTo(Integer value);
 
     @Override
-    public QueryPredicate<T> isGreaterThanOrEqualTo(final Integer value) {
-        return super.isGreaterThanOrEqualTo(value);
-    }
+    QueryPredicate<T> isLessThan(Integer value);
 
     @Override
-    public QueryPredicate<T> isLessThan(final Integer value) {
-        return super.isLessThan(value);
-    }
+    QueryPredicate<T> isLessThanOrEqualTo(Integer value);
 
     @Override
-    public QueryPredicate<T> isLessThanOrEqualTo(final Integer value) {
-        return super.isLessThanOrEqualTo(value);
-    }
+    QueryPredicate<T> isNot(Integer i);
 
     @Override
-    public QueryPredicate<T> isNot(final Integer i) {
-        return super.isNot(i);
-    }
+    QueryPredicate<T> isNotIn(Integer arg0, Integer... args);
 
     @Override
-    public QueryPredicate<T> isNotIn(final Integer arg0, final Integer... args) {
-        return super.isNotIn(arg0, args);
-    }
+    QueryPredicate<T> isNotIn(Iterable<Integer> args);
 
     @Override
-    public QueryPredicate<T> isNotIn(final Iterable<Integer> args) {
-        return super.isNotIn(args);
-    }
+    QueryPredicate<T> isNotPresent();
 
     @Override
-    public QueryPredicate<T> isNotPresent() {
-        return super.isNotPresent();
-    }
+    QueryPredicate<T> isIn(Integer arg0, Integer... args);
 
     @Override
-    public QueryPredicate<T> isIn(final Integer arg0, final Integer... args) {
-        return super.isIn(arg0, args);
-    }
+    QueryPredicate<T> isIn(Iterable<Integer> args);
 
     @Override
-    public QueryPredicate<T> isIn(final Iterable<Integer> args) {
-        return super.isIn(args);
-    }
-
-    @Override
-    public QueryPredicate<T> isPresent() {
-        return super.isPresent();
-    }
-
-    @Override
-    public QuerySort<T> sort(final QuerySortDirection sortDirection) {
-        return super.sort(sortDirection);
-    }
+    QueryPredicate<T> isPresent();
 }
