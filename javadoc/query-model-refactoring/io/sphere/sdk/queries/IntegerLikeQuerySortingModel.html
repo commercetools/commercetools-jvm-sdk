@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/queries/IntegerQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -123,7 +123,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,V&gt;, <a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;T,V&gt;, <a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,V&gt;, <a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,V&gt;, <a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;T,V&gt;, <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;T&gt;</dd>
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
@@ -133,7 +133,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public abstract class <span class="typeNameLabel">IntegerLikeQuerySortingModel&lt;T,V&gt;</span>
 extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a>&lt;T&gt;
-implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;</pre>
+implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,V&gt;, <a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;T,V&gt;, <a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,V&gt;, <a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,V&gt;, <a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;T,V&gt;</pre>
 </li>
 </ul>
 </div>
@@ -232,7 +232,7 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a></h3>
-<code><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#getParent--">getParent</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringModel-java.lang.String-">stringModel</a></code></li>
+<code><a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#getParent--">getParent</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanOrEqualToPredicate-V-">isGreaterThanOrEqualToPredicate</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanPredicate-V-">isGreaterThanPredicate</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isInPredicate-java.lang.Iterable-">isInPredicate</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanOrEqualToPredicate-V-">isLessThanOrEqualToPredicate</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanPredicate-V-">isLessThanPredicate</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotInPredicate-java.lang.Iterable-">isNotInPredicate</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-V-">isNotPredicate</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPresentPredicate--">isNotPresentPredicate</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPredicate-V-">isPredicate</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPresentPredicate--">isPresentPredicate</a>, <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringModel-java.lang.String-">stringModel</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -302,6 +302,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <li class="blockList">
 <h4>is</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;is(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;i)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html#is-E-">is</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>,<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isNot-java.lang.Object-">
@@ -313,6 +317,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <li class="blockList">
 <h4>isNot</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isNot(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;i)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html#isNot-E-">isNot</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>,<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isIn-java.lang.Object-java.lang.Object:A-">
@@ -325,6 +333,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <h4>isIn</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isIn(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;arg0,
                               <a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>...&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html#isIn-V-V...-">isIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>,<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isIn-java.lang.Iterable-">
@@ -334,6 +346,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <li class="blockList">
 <h4>isIn</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isIn(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html#isIn-java.lang.Iterable-">isIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>,<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isGreaterThan-java.lang.Object-">
@@ -345,6 +361,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <li class="blockList">
 <h4>isGreaterThan</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isGreaterThan(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isGreaterThan-V-">isGreaterThan</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>,<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isLessThan-java.lang.Object-">
@@ -356,6 +376,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <li class="blockList">
 <h4>isLessThan</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isLessThan(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isLessThan-V-">isLessThan</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>,<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isLessThanOrEqualTo-java.lang.Object-">
@@ -367,6 +391,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <li class="blockList">
 <h4>isLessThanOrEqualTo</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isLessThanOrEqualTo(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isLessThanOrEqualTo-V-">isLessThanOrEqualTo</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>,<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isGreaterThanOrEqualTo-java.lang.Object-">
@@ -378,6 +406,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <li class="blockList">
 <h4>isGreaterThanOrEqualTo</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isGreaterThanOrEqualTo(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isGreaterThanOrEqualTo-V-">isGreaterThanOrEqualTo</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>,<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isNotIn-java.lang.Iterable-">
@@ -387,6 +419,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <li class="blockList">
 <h4>isNotIn</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isNotIn(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html#isNotIn-java.lang.Iterable-">isNotIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>,<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isNotIn-java.lang.Object-java.lang.Object:A-">
@@ -399,6 +435,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <h4>isNotIn</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>&gt;&nbsp;isNotIn(<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&nbsp;arg0,
                                  <a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>...&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html#isNotIn-V-V...-">isNotIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">T</a>,<a href="../../../../io/sphere/sdk/queries/IntegerLikeQuerySortingModel.html" title="type parameter in IntegerLikeQuerySortingModel">V</a>&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isPresent--">
@@ -454,7 +494,7 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../io/sphere/sdk/queries/IntegerQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
