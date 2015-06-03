@@ -11,6 +11,6 @@ public class CountryQueryModel<T> extends QueryModelImpl<T> implements EqualityQ
 
     @Override
     public QueryPredicate<T> is(final CountryCode countryCode) {
-        return EqQueryPredicate.of(this, countryCode.getAlpha2());
+        return isPredicate(countryCode.getAlpha2());
     }
 }

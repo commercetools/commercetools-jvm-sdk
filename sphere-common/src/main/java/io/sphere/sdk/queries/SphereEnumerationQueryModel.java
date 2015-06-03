@@ -11,6 +11,6 @@ public class SphereEnumerationQueryModel<T, E extends SphereEnumeration> extends
 
     @Override
     public QueryPredicate<T> is(final E enumValue) {
-        return EqQueryPredicate.of(this, enumValue.toSphereName());
+        return isPredicate(enumValue.toSphereName());
     }
 }

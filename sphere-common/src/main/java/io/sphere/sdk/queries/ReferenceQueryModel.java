@@ -13,7 +13,8 @@ public class ReferenceQueryModel<T, R> extends QueryModelImpl<T> implements Equa
 
     @Override
     public QueryPredicate<T> is(final Referenceable<R> reference) {
-        return EqQueryPredicate.of(idSegment(), reference.toReference().getId());
+        final String id = reference.toReference().getId();
+        return ComparisonQueryPredicate.ofIsEqualTo(idSegment(), id);
     }
 
     public QueryPredicate<T> isIn(final List<? extends Referenceable<R>> elements) {

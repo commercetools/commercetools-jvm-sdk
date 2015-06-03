@@ -37,11 +37,19 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     }
 
     protected <V> QueryPredicate<T> isPredicate(final V value) {
-        return EqQueryPredicate.of(this, value);
+        return ComparisonQueryPredicate.ofIsEqualTo(this, value);
     }
 
     protected <V> QueryPredicate<T> isNotPredicate(final V value) {
-        return NotEqQueryPredicate.of(this, value);
+        return ComparisonQueryPredicate.ofIsNotEqualTo(this, value);
+    }
+
+    protected QueryPredicate<T> isPredicate(final String value) {
+        return ComparisonQueryPredicate.ofIsEqualTo(this, value);
+    }
+
+    protected QueryPredicate<T> isNotPredicate(final String value) {
+        return ComparisonQueryPredicate.ofIsNotEqualTo(this, value);
     }
 
     protected <V> QueryPredicate<T> isInPredicate(final Iterable<V> args) {

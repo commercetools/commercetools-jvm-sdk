@@ -7,6 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class NotEqQueryPredicateTest {
     @Test
     public void render() throws Exception {
-        assertThat(NotEqQueryPredicate.of(emptyQueryModel, "xyz").render()).isEqualTo(" <> \"xyz\"");
+        assertThat(ComparisonQueryPredicate.ofIsNotEqualTo(emptyQueryModel, "xyz").render()).isEqualTo("<>\"xyz\"");
     }
 }

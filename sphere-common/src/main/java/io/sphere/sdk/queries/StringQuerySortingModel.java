@@ -28,12 +28,12 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Que
 
     @Override
     public QueryPredicate<T> is(final String s) {
-        return EqQueryPredicate.of(this, escape(s));
+        return isPredicate(escape(s));
     }
 
     @Override
     public QueryPredicate<T> isNot(final String s) {
-        return NotEqQueryPredicate.of(this, escape(s));
+        return isNotPredicate(escape(s));
     }
 
     @Override
