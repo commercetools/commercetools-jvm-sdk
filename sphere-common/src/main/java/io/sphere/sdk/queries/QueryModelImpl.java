@@ -35,4 +35,44 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     protected StringQuerySortingModel<T> stringModel(final String pathSegment) {
         return new StringQuerySortingModel<>(Optional.of(this), pathSegment);
     }
+
+    protected <V> QueryPredicate<T> isPredicate(final V value) {
+        return EqQueryPredicate.of(this, value);
+    }
+
+    protected <V> QueryPredicate<T> isNotPredicate(final V value) {
+        return NotEqQueryPredicate.of(this, value);
+    }
+
+    protected <V> QueryPredicate<T> isInPredicate(final Iterable<V> args) {
+        return new IsInQueryPredicate<>(this, args);
+    }
+
+    protected <V> QueryPredicate<T> isNotInPredicate(final Iterable<V> args) {
+        return new IsNotInQueryPredicate<>(this, args);
+    }
+
+    protected <V> QueryPredicate<T> isGreaterThanPredicate(final V value) {
+        return ComparisonQueryPredicate.ofIsGreaterThan(this, value);
+    }
+
+    protected <V> QueryPredicate<T> isLessThanPredicate(final V value) {
+        return ComparisonQueryPredicate.ofIsLessThan(this, value);
+    }
+
+    protected <V> QueryPredicate<T> isLessThanOrEqualToPredicate(final V value) {
+        return ComparisonQueryPredicate.ofIsLessThanOrEqualTo(this, value);
+    }
+
+    protected <V> QueryPredicate<T> isGreaterThanOrEqualToPredicate(final V value) {
+        return ComparisonQueryPredicate.ofGreaterThanOrEqualTo(this, value);
+    }
+
+    protected QueryPredicate<T> isPresentPredicate() {
+        return new OptionalQueryPredicate<>(this, true);
+    }
+
+    protected QueryPredicate<T> isNotPresentPredicate() {
+        return new OptionalQueryPredicate<>(this, false);
+    }
 }
