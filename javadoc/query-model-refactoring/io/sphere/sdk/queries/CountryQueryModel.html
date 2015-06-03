@@ -118,12 +118,13 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,com.neovisionaries.i18n.CountryCode&gt;, <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">CountryQueryModel&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a>&lt;T&gt;</pre>
+extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a>&lt;T&gt;
+implements <a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,com.neovisionaries.i18n.CountryCode&gt;</pre>
 </li>
 </ul>
 </div>
@@ -225,6 +226,10 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="c
 <li class="blockList">
 <h4>is</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/CountryQueryModel.html" title="type parameter in CountryQueryModel">T</a>&gt;&nbsp;is(com.neovisionaries.i18n.CountryCode&nbsp;countryCode)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html#is-E-">is</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/CountryQueryModel.html" title="type parameter in CountryQueryModel">T</a>,com.neovisionaries.i18n.CountryCode&gt;</code></dd>
+</dl>
 </li>
 </ul>
 </li>
