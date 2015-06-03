@@ -10,7 +10,7 @@ public final class AttributeDefinitionQueryModel extends QueryModelImpl<ProductT
     private static final AttributeDefinitionQueryModel instance =
             new AttributeDefinitionQueryModel(Optional.empty(), Optional.<String>empty());
 
-    public static AttributeDefinitionQueryModel get() {
+    static AttributeDefinitionQueryModel get() {
         return instance;
     }
 
@@ -19,10 +19,10 @@ public final class AttributeDefinitionQueryModel extends QueryModelImpl<ProductT
     }
 
     public StringQueryModel<ProductType> name() {
-        return new StringQuerySortingModel<>(Optional.of(this), "name");
+        return stringModel("name");
     }
 
     public AttributeTypeQueryModel<ProductType> type() {
-        return new AttributeTypeQueryModel<ProductType>(Optional.of(this), Optional.of("type"));
+        return new AttributeTypeQueryModel<>(Optional.of(this), Optional.of("type"));
     }
 }
