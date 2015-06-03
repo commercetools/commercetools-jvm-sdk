@@ -24,11 +24,11 @@ public class InventoryEntryQueryModel extends DefaultModelQueryModelImpl<Invento
     }
 
     public LongQuerySortingModel<InventoryEntry> quantityOnStock() {
-        return new LongQuerySortingModel<>(Optional.of(this), "quantityOnStock");
+        return new LongQuerySortingModelImp<>(Optional.of(this), "quantityOnStock");
     }
 
     public LongQuerySortingModel<InventoryEntry> availableQuantity() {
-        return new LongQuerySortingModel<>(Optional.of(this), "availableQuantity");
+        return new LongQuerySortingModelImp<>(Optional.of(this), "availableQuantity");
     }
 
 //TODO on March 11, 2015 this does not yet work in the backend
