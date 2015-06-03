@@ -11,9 +11,6 @@ import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static org.assertj.core.api.Assertions.*;
 
-/**
- * Created by cneijenhuis_commercetools on 03/06/15.
- */
 public class ReviewDeleteCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
