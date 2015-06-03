@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,java.lang.String&gt;, <a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;T,java.lang.String&gt;, <a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,java.lang.String&gt;, <a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,java.lang.String&gt;, <a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;T,java.lang.String&gt;, <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
@@ -109,7 +109,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">StringQueryModel&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;</pre>
+extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,java.lang.String&gt;, <a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;T,java.lang.String&gt;, <a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,java.lang.String&gt;, <a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;T,java.lang.String&gt;, <a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,java.lang.String&gt;</pre>
 </li>
 </ul>
 </div>
@@ -200,6 +200,10 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <li class="blockList">
 <h4>is</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;is(java.lang.String&nbsp;s)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html#is-E-">is</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isNot-java.lang.String-">
@@ -209,6 +213,10 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <li class="blockList">
 <h4>isNot</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isNot(java.lang.String&nbsp;s)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html#isNot-E-">isNot</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isIn-java.lang.String-java.lang.String...-">
@@ -219,6 +227,10 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <h4>isIn</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isIn(java.lang.String&nbsp;arg0,
                        java.lang.String...&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html#isIn-V-V...-">isIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isIn-java.lang.Iterable-">
@@ -228,6 +240,10 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <li class="blockList">
 <h4>isIn</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isIn(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html#isIn-java.lang.Iterable-">isIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isGreaterThan-java.lang.String-">
@@ -237,6 +253,10 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <li class="blockList">
 <h4>isGreaterThan</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isGreaterThan(java.lang.String&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isGreaterThan-V-">isGreaterThan</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isLessThan-java.lang.String-">
@@ -246,6 +266,10 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <li class="blockList">
 <h4>isLessThan</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isLessThan(java.lang.String&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isLessThan-V-">isLessThan</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isLessThanOrEqualTo-java.lang.String-">
@@ -255,6 +279,10 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <li class="blockList">
 <h4>isLessThanOrEqualTo</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isLessThanOrEqualTo(java.lang.String&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isLessThanOrEqualTo-V-">isLessThanOrEqualTo</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isGreaterThanOrEqualTo-java.lang.String-">
@@ -264,6 +292,10 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <li class="blockList">
 <h4>isGreaterThanOrEqualTo</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isGreaterThanOrEqualTo(java.lang.String&nbsp;value)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html#isGreaterThanOrEqualTo-V-">isGreaterThanOrEqualTo</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isNotIn-java.lang.Iterable-">
@@ -273,6 +305,10 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <li class="blockList">
 <h4>isNotIn</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isNotIn(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html#isNotIn-java.lang.Iterable-">isNotIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isNotIn-java.lang.String-java.lang.String...-">
@@ -283,6 +319,10 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <h4>isNotIn</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isNotIn(java.lang.String&nbsp;arg0,
                           java.lang.String...&nbsp;args)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html#isNotIn-V-V...-">isNotIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
+</dl>
 </li>
 </ul>
 <a name="isPresent--">
