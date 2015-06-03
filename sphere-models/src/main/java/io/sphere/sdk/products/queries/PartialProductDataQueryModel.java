@@ -12,7 +12,7 @@ public class PartialProductDataQueryModel extends ProductDataQueryModel<PartialP
     }
 
     @Override
-    public ReferenceListQueryModel<PartialProductDataQueryModel, Category> categories() {
+    public ReferenceCollectionQueryModel<PartialProductDataQueryModel, Category> categories() {
         return super.categories();
     }
 

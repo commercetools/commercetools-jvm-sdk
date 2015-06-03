@@ -26,7 +26,7 @@ public class ProductProjectionQueryModel extends ProductDataQueryModelBase<Produ
     }
 
     @Override
-    public ReferenceListQueryModel<ProductProjection, Category> categories() {
+    public ReferenceCollectionQueryModel<ProductProjection, Category> categories() {
         return super.categories();
     }
 

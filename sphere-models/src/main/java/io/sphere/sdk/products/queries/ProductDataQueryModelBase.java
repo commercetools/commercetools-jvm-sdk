@@ -60,8 +60,8 @@ class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
         return LocalizedStringsQuerySortingModel.of(this, "metaDescription");
     }
 
-    public ReferenceListQueryModel<T, Category> categories() {
-        return new ReferenceListQueryModel<>(Optional.of(this), "categories");
+    public ReferenceCollectionQueryModel<T, Category> categories() {
+        return new ReferenceCollectionQueryModel<>(Optional.of(this), "categories");
     }
 }
 

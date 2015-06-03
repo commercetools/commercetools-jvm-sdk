@@ -23,8 +23,8 @@ public class ShippingMethodQueryModel extends DefaultModelQueryModelImpl<Shippin
         return new ReferenceQueryModel<>(Optional.of(this), "taxCategory");
     }
 
-    public ZoneRateListQueryModel <ShippingMethod> zoneRates() {
-        return new ZoneRateListQueryModel<>(Optional.of(this), "zoneRates");
+    public ZoneRateCollectionQueryModel<ShippingMethod> zoneRates() {
+        return new ZoneRateCollectionQueryModel<>(Optional.of(this), "zoneRates");
     }
 
     public BooleanQueryModel<ShippingMethod> isDefault() {
