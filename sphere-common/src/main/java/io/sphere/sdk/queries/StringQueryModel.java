@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public interface StringQueryModel<T> {
+public interface StringQueryModel<T> extends OptionalQueryModel<T> {
     QueryPredicate<T> is(String s);
 
     QueryPredicate<T> isNot(String s);
@@ -21,7 +21,9 @@ public interface StringQueryModel<T> {
 
     QueryPredicate<T> isNotIn(final String arg0, final String... args);
 
+    @Override
     QueryPredicate<T> isPresent();
 
+    @Override
     QueryPredicate<T> isNotPresent();
 }

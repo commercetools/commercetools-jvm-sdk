@@ -9,7 +9,7 @@ import static io.sphere.sdk.utils.ListUtils.listOf;
  * @param <T> context type, like Channel
  * @param <V> argument type, Integer or Long
  */
-public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<T> implements QuerySortingModel<T> {
+public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<T> implements QuerySortingModel<T>, OptionalQueryModel<T> {
     protected IntegerLikeQuerySortingModel(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
@@ -60,10 +60,12 @@ public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<
         return isNotIn(listOf(arg0, args));
     }
 
+    @Override
     public QueryPredicate<T> isPresent() {
         return new OptionalQueryPredicate<>(this, true);
     }
 
+    @Override
     public QueryPredicate<T> isNotPresent() {
         return new OptionalQueryPredicate<>(this, false);
     }

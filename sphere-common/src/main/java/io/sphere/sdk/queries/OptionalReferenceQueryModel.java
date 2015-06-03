@@ -5,7 +5,7 @@ import io.sphere.sdk.models.Referenceable;
 import java.util.List;
 import java.util.Optional;
 
-public class OptionalReferenceQueryModel<T, R> extends ReferenceQueryModel<T, R> {
+public class OptionalReferenceQueryModel<T, R> extends ReferenceQueryModel<T, R> implements OptionalQueryModel<T> {
     public OptionalReferenceQueryModel(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
@@ -20,10 +20,12 @@ public class OptionalReferenceQueryModel<T, R> extends ReferenceQueryModel<T, R>
         return super.isIn(elements);
     }
 
+    @Override
     public QueryPredicate<T> isPresent() {
         return new OptionalQueryPredicate<>(this, true);
     }
 
+    @Override
     public QueryPredicate<T> isNotPresent() {
         return new OptionalQueryPredicate<>(this, false);
     }
