@@ -12,6 +12,7 @@ script:
 - echo $JAVA_HOME
 - ./sbt genDoc test it:test
 - bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null
+- ./sbt "sphere-models/it:test::runMain io.sphere.sdk.client.MainMethodThreadLeakTest"
 after_success:
 - bash scripts/publish-javadoc-version-folder.sh > /dev/null 2> /dev/null
 notifications:
