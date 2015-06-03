@@ -9,8 +9,8 @@ import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static io.sphere.sdk.utils.ListUtils.*;
 import static java.util.stream.Collectors.toList;
 
-public class ReferenceListQueryModel<T, R> extends QueryModelImpl<T> {
-    public ReferenceListQueryModel(Optional<? extends QueryModel<T>> parent, String pathSegment) {
+public class ReferenceCollectionQueryModel<T, R> extends QueryModelImpl<T> {
+    public ReferenceCollectionQueryModel(Optional<? extends QueryModel<T>> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 

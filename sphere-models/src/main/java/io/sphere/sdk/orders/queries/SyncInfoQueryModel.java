@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.*;
 import java.util.Optional;
 
 public class SyncInfoQueryModel<T> extends QueryModelImpl<T> {
-    public SyncInfoQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+    SyncInfoQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 

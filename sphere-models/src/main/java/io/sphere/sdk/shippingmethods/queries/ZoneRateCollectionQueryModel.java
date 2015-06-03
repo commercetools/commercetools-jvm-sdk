@@ -7,8 +7,8 @@ import io.sphere.sdk.zones.Zone;
 
 import java.util.Optional;
 
-public class ZoneRateListQueryModel<T> extends QueryModelImpl<T> {
-    public ZoneRateListQueryModel(Optional<? extends QueryModel<T>> parent, String pathSegment) {
+public class ZoneRateCollectionQueryModel<T> extends QueryModelImpl<T> {
+    ZoneRateCollectionQueryModel(Optional<? extends QueryModel<T>> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 

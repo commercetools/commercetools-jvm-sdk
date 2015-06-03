@@ -12,7 +12,7 @@ public class ProductDataQueryModel<T> extends ProductDataQueryModelBase<T> {
     }
 
     @Override
-    public ReferenceListQueryModel<T, Category> categories() {
+    public ReferenceCollectionQueryModel<T, Category> categories() {
         return super.categories();
     }
 

@@ -9,7 +9,7 @@ public final class AttributeTypeQueryModel<T> extends QueryModelImpl<ProductType
     private static final AttributeTypeQueryModel<ProductType> instance =
             new AttributeTypeQueryModel<>(Optional.empty(), Optional.<String>empty());
 
-    public static AttributeTypeQueryModel<ProductType> get() {
+    static AttributeTypeQueryModel<ProductType> get() {
         return instance;
     }
 

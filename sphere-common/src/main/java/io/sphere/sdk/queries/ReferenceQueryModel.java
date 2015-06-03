@@ -6,13 +6,15 @@ import io.sphere.sdk.models.Referenceable;
 
 import static java.util.stream.Collectors.toList;
 
-public class ReferenceQueryModel<T, R> extends QueryModelImpl<T> {
+public class ReferenceQueryModel<T, R> extends QueryModelImpl<T> implements EqualityQueryModel<T, Referenceable<R>> {
     public ReferenceQueryModel(Optional<? extends QueryModel<T>> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 
-    public QueryPredicate<T> is(Referenceable<R> reference) {
-        return EqQueryPredicate.of(idSegment(), reference.toReference().getId());
+    @Override
+    public QueryPredicate<T> is(final Referenceable<R> reference) {
+        final String id = reference.toReference().getId();
+        return ComparisonQueryPredicate.ofIsEqualTo(idSegment(), id);
     }
 
     public QueryPredicate<T> isIn(final List<? extends Referenceable<R>> elements) {

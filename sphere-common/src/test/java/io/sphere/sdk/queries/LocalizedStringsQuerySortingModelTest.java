@@ -22,6 +22,6 @@ public class LocalizedStringsQuerySortingModelTest {
 
     @Test
     public void isNot() throws Exception {
-        assertThat(model.lang(Locale.ENGLISH).isNot("bar").toSphereQuery()).isEqualTo("thepath(en <> \"bar\")");
+        assertThat(model.lang(Locale.ENGLISH).isNot("bar").toSphereQuery()).isEqualTo("thepath(en<>\"bar\")");
     }
 }
