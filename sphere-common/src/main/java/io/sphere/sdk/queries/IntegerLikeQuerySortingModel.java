@@ -36,19 +36,19 @@ public abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<
     }
 
     public QueryPredicate<T> isGreaterThan(final V value) {
-        return new IsGreaterThanQueryPredicate<>(this, value);
+        return ComparisonQueryPredicate.ofIsGreaterThan(this, value);
     }
 
     public QueryPredicate<T> isLessThan(final V value) {
-        return new IsLessThanQueryPredicate<>(this, value);
+        return ComparisonQueryPredicate.ofIsLessThan(this, value);
     }
 
     public QueryPredicate<T> isLessThanOrEqualTo(final V value) {
-        return new IsLessThanOrEqualToQueryPredicate<>(this, value);
+        return ComparisonQueryPredicate.ofIsLessThanOrEqualTo(this, value);
     }
 
     public QueryPredicate<T> isGreaterThanOrEqualTo(final V value) {
-        return new IsGreaterThanOrEqualToQueryPredicate<>(this, value);
+        return ComparisonQueryPredicate.ofGreaterThanOrEqualTo(this, value);
     }
 
     public QueryPredicate<T> isNotIn(final Iterable<V> args) {

@@ -48,22 +48,22 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Que
 
     @Override
     public QueryPredicate<T> isGreaterThan(final String value) {
-        return new IsGreaterThanQueryPredicate<>(this, value);
+        return ComparisonQueryPredicate.ofIsGreaterThan(this, value);
     }
 
     @Override
     public QueryPredicate<T> isLessThan(final String value) {
-        return new IsLessThanQueryPredicate<>(this, value);
+        return ComparisonQueryPredicate.ofIsLessThan(this, value);
     }
 
     @Override
     public QueryPredicate<T> isLessThanOrEqualTo(final String value) {
-        return new IsLessThanOrEqualToQueryPredicate<>(this, value);
+        return ComparisonQueryPredicate.ofIsLessThanOrEqualTo(this, value);
     }
 
     @Override
     public QueryPredicate<T> isGreaterThanOrEqualTo(final String value) {
-        return new IsGreaterThanOrEqualToQueryPredicate<>(this, value);
+        return ComparisonQueryPredicate.ofGreaterThanOrEqualTo(this, value);
     }
 
     @Override
