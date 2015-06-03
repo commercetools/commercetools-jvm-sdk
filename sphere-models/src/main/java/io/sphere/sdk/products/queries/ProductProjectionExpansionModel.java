@@ -25,4 +25,12 @@ public class ProductProjectionExpansionModel<T> extends ExpansionModel<T> {
     public CategoryExpansionModel<ProductProjection> categories() {
         return new CategoryExpansionModel<>(pathExpressionOption(), "categories[*]");
     }
+
+    public ProductVariantExpansionModel<T> masterVariant() {
+        return new ProductVariantExpansionModel<>(pathExpressionOption(), "masterVariant");
+    }
+
+    public ProductVariantExpansionModel<T> variants() {
+        return new ProductVariantExpansionModel<>(pathExpressionOption(), "variants");
+    }
 }

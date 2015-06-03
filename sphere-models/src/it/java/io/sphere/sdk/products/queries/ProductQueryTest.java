@@ -2,7 +2,6 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRoles;
-import io.sphere.sdk.customergroups.CustomerGroupFixtures;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.VariantIdentifier;
@@ -13,7 +12,6 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
 import static io.sphere.sdk.products.ProductFixtures.*;
