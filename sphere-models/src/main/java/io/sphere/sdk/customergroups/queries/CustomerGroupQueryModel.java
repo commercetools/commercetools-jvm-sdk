@@ -7,16 +7,16 @@ import io.sphere.sdk.queries.StringQuerySortingModel;
 
 import java.util.Optional;
 
-public class CustomerGroupQueryModel extends DefaultModelQueryModelImpl<CustomerGroup> {
-    private CustomerGroupQueryModel(final Optional<? extends QueryModel<CustomerGroup>> parent, final Optional<String> pathSegment) {
+public class CustomerGroupQueryModel<T> extends DefaultModelQueryModelImpl<T> {
+    private CustomerGroupQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    static CustomerGroupQueryModel get() {
-        return new CustomerGroupQueryModel(Optional.<QueryModel<CustomerGroup>>empty(), Optional.<String>empty());
+    static CustomerGroupQueryModel<CustomerGroup> of() {
+        return new CustomerGroupQueryModel<>(Optional.<QueryModel<CustomerGroup>>empty(), Optional.<String>empty());
     }
 
-    public StringQuerySortingModel<CustomerGroup> name() {
+    public StringQuerySortingModel<T> name() {
         return new StringQuerySortingModel<>(Optional.of(this), "name");
     }
 }
