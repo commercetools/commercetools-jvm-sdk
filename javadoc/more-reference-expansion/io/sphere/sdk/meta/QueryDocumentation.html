@@ -414,7 +414,7 @@ assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4).wit
  <code>ProductLike.getProductType()</code>, which has a reference to a <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>.
 
  By default, the field <a href="../../../../io/sphere/sdk/models/Reference.html#getObj--"><code>Reference.getObj()</code></a> will return an absent optional.
- If you specify an expansion path with <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPaths-java.util.List-"><code>ReferenceExpandeableDsl.withExpansionPaths(java.util.List)</code></a>
+ If you specify an expansion path with <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-java.util.List-"><code>ReferenceExpandeableDsl.withExpansionPath(java.util.List)</code></a>
  it is possible that the product type will be filled so that you can work with it.
  </p>
 
@@ -437,7 +437,7 @@ assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4).wit
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandCategoryAndCategoryParentForProduct--%s" class=code-example><pre><code class='java'>final ExpansionPath&lt;ProductProjection&gt; expansionPath =
         ProductProjectionQuery.expansionPath().categories().parent();
-final QueryDsl&lt;ProductProjection&gt; query = ProductProjectionQuery.of(STAGED)
+final ProductProjectionQuery query = ProductProjectionQuery.of(STAGED)
         .withExpansionPath(expansionPath);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
