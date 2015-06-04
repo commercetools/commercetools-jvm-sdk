@@ -2,16 +2,11 @@ package io.sphere.sdk.customers.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.UltraQueryDsl;
 
-public class CustomerQuery extends DefaultModelQuery<Customer> {
-    private CustomerQuery() {
-        super(CustomersEndpoint.ENDPOINT.endpoint(), resultTypeReference());
-    }
-
-    public static TypeReference<PagedQueryResult<Customer>> resultTypeReference() {
+public interface CustomerQuery extends UltraQueryDsl<Customer, CustomerQuery, CustomerQueryModel<Customer>, CustomerExpansionModel<Customer>> {
+   static TypeReference<PagedQueryResult<Customer>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Customer>>(){
             @Override
             public String toString() {
@@ -20,19 +15,12 @@ public class CustomerQuery extends DefaultModelQuery<Customer> {
         };
     }
 
-    public static CustomerQueryModel model() {
-        return CustomerQueryModel.get();
+    static CustomerQuery of() {
+        return new CustomerQueryImpl();
     }
 
-    public static CustomerQuery of() {
-        return new CustomerQuery();
+    default CustomerQuery byEmail(final String email) {
+        return withPredicate(CustomerQueryModel.of().email().is(email));
     }
 
-    public QueryDsl<Customer> byEmail(final String email) {
-        return withPredicate(model().email().is(email));
-    }
-
-    public static CustomerExpansionModel<Customer> expansionPath() {
-        return new CustomerExpansionModel<>();
-    }
 }

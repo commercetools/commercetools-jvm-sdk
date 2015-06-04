@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.ByIdFetchImpl;
 
 public class CustomerByIdFetch extends ByIdFetchImpl<Customer> {
     private CustomerByIdFetch(final String id) {
-        super(id, CustomersEndpoint.ENDPOINT);
+        super(id, CustomerEndpoint.ENDPOINT);
     }
 
     public static CustomerByIdFetch of(final Identifiable<Customer> id) {
@@ -15,9 +15,5 @@ public class CustomerByIdFetch extends ByIdFetchImpl<Customer> {
 
     public static CustomerByIdFetch of(final String id) {
         return new CustomerByIdFetch(id);
-    }
-
-    public static CustomerExpansionModel<Customer> expansionPath() {
-        return new CustomerExpansionModel<>();
     }
 }

@@ -42,7 +42,7 @@ public class CustomerQueryTest extends IntegrationTest {
         withCustomerInGroup(client(), (customer, customerGroup) -> {
             final Query<Customer> query = CustomerQuery.of()
                     .byEmail(customer.getEmail())
-                    .withExpansionPath(CustomerQuery.expansionPath().customerGroup());
+                    .withExpansionPath(CustomerExpansionModel.of().customerGroup());
             final String actualCustomerGroupId = execute(query).head().get().getCustomerGroup().get().getObj().get().getId();
             assertThat(actualCustomerGroupId).isEqualTo(customerGroup.getId());
         });
@@ -95,12 +95,12 @@ public class CustomerQueryTest extends IntegrationTest {
         check((model) -> model.customerGroup().is(customer.getCustomerGroup().get()), false);
     }
 
-    private void check(final Function<CustomerQueryModel, QueryPredicate<Customer>> f) {
+    private void check(final Function<CustomerQueryModel<Customer>, QueryPredicate<Customer>> f) {
         check(f, false);
     }
 
-    private void check(final Function<CustomerQueryModel, QueryPredicate<Customer>> f, final boolean checkDistraction) {
-        final CustomerQueryModel model = CustomerQuery.model();
+    private void check(final Function<CustomerQueryModel<Customer>, QueryPredicate<Customer>> f, final boolean checkDistraction) {
+        final CustomerQueryModel<Customer> model = CustomerQueryModel.of();
         final QueryPredicate<Customer> predicate = f.apply(model);
         final Query<Customer> query = CustomerQuery.of().withPredicate(predicate).withSort(model.createdAt().sort(QuerySortDirection.DESC));
         final List<Customer> results = execute(query).getResults();

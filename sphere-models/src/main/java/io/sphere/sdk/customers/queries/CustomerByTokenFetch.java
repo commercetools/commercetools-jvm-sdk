@@ -5,7 +5,7 @@ import io.sphere.sdk.customers.CustomerToken;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.queries.FetchImpl;
 
-import static io.sphere.sdk.customers.queries.CustomersEndpoint.ENDPOINT;
+import static io.sphere.sdk.customers.queries.CustomerEndpoint.ENDPOINT;
 import static java.util.Arrays.asList;
 
 public class CustomerByTokenFetch extends FetchImpl<Customer> {
