@@ -25,6 +25,7 @@ io.sphere.sdk.commands
 io.sphere.sdk.customergroups
 io.sphere.sdk.customergroups.commands
 io.sphere.sdk.customergroups.commands.updateactions
+io.sphere.sdk.customergroups.expansion
 io.sphere.sdk.customergroups.queries
 io.sphere.sdk.customers
 io.sphere.sdk.customers.commands
