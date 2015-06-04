@@ -29,7 +29,7 @@ public final class CustomerQueryModel<T> extends DefaultModelQueryModelImpl<T> {
     }
 
     public StringQuerySortingModel<T> defaultShippingAddressId() {
-        return new StringQuerySortingModel<>(Optional.of(this), "defaultBillingAddressId");
+        return new StringQuerySortingModel<>(Optional.of(this), "defaultShippingAddressId");
     }
 
     public StringQuerySortingModel<T> defaultBillingAddressId() {
