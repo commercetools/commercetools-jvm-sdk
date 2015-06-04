@@ -22,9 +22,7 @@ public interface UltraQueryDsl<T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> ext
 
     C withSort(final List<QuerySort<T>> sort);
 
-    default C withSort(final QuerySort<T> sort) {
-        return withSort(asList(sort));
-    }
+    C withSort(final QuerySort<T> sort);
 
     C withSort(final Function<Q, QuerySort<T>> m);
 

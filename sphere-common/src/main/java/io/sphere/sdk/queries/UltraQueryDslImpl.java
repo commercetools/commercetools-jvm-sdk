@@ -77,6 +77,11 @@ public abstract class UltraQueryDslImpl<T, C extends UltraQueryDsl<T, C, Q, E>, 
     }
 
     @Override
+    public C withSort(final QuerySort<T> sort) {
+        return withSort(asList(sort));
+    }
+
+    @Override
     public C withSort(final Function<Q, QuerySort<T>> m) {
         return withSort(asList(m.apply(queryModel)));
     }
