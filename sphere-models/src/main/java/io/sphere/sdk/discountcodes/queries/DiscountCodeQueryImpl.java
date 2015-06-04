@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class DiscountCodeQueryImpl extends UltraQueryDslImpl<DiscountCode, DiscountCodeQuery, DiscountCodeQueryModel<DiscountCode>, DiscountCodeExpansionModel<DiscountCode>> implements DiscountCodeQuery {
+final class DiscountCodeQueryImpl extends UltraQueryDslImpl<DiscountCode, DiscountCodeQuery, DiscountCodeQueryModel<DiscountCode>, DiscountCodeExpansionModel<DiscountCode>> implements DiscountCodeQuery {
     DiscountCodeQueryImpl(){
         super(DiscountCodeEndpoint.ENDPOINT.endpoint(), DiscountCodeQuery.resultTypeReference(), DiscountCodeQueryModel.of(), DiscountCodeExpansionModel.of());
     }

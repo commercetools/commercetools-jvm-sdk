@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class CustomerQueryImpl extends UltraQueryDslImpl<Customer, CustomerQuery, CustomerQueryModel<Customer>, CustomerExpansionModel<Customer>> implements CustomerQuery {
+final class CustomerQueryImpl extends UltraQueryDslImpl<Customer, CustomerQuery, CustomerQueryModel<Customer>, CustomerExpansionModel<Customer>> implements CustomerQuery {
     CustomerQueryImpl(){
         super(CustomerEndpoint.ENDPOINT.endpoint(), CustomerQuery.resultTypeReference(), CustomerQueryModel.of(), CustomerExpansionModel.of());
     }
