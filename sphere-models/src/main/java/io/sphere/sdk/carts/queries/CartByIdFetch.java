@@ -10,7 +10,7 @@ import io.sphere.sdk.queries.ByIdFetchImpl;
  */
 public class CartByIdFetch extends ByIdFetchImpl<Cart> {
     private CartByIdFetch(final String id) {
-        super(id, CartsEndpoint.ENDPOINT);
+        super(id, CartEndpoint.ENDPOINT);
     }
 
     public static CartByIdFetch of(final Cart cart) {

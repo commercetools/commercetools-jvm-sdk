@@ -19,8 +19,8 @@ final class CategoryQueryImpl extends UltraQueryDslImpl<Category, CategoryQuery,
         super(CategoriesEndpoint.ENDPOINT.endpoint(), CategoryQuery.resultTypeReference(), CategoryQueryModel.of(), CategoryExpansionModel.of());
     }
 
-    private CategoryQueryImpl(final Optional<QueryPredicate<Category>> productProjectionQueryPredicate, final List<QuerySort<Category>> sort, final Optional<Long> limit, final Optional<Long> offset, final String endpoint, final Function<HttpResponse, PagedQueryResult<Category>> resultMapper, final List<ExpansionPath<Category>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters, final CategoryQueryModel<Category> queryModel, final CategoryExpansionModel<Category> expansionModel) {
-        super(productProjectionQueryPredicate, sort, limit, offset, endpoint, resultMapper, expansionPaths, additionalQueryParameters, queryModel, expansionModel);
+    private CategoryQueryImpl(final Optional<QueryPredicate<Category>> predicate, final List<QuerySort<Category>> sort, final Optional<Long> limit, final Optional<Long> offset, final String endpoint, final Function<HttpResponse, PagedQueryResult<Category>> resultMapper, final List<ExpansionPath<Category>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters, final CategoryQueryModel<Category> queryModel, final CategoryExpansionModel<Category> expansionModel) {
+        super(predicate, sort, limit, offset, endpoint, resultMapper, expansionPaths, additionalQueryParameters, queryModel, expansionModel);
     }
 
     @Override

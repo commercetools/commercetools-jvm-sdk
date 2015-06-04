@@ -11,7 +11,7 @@ import static java.util.Arrays.asList;
 public class CartByCustomerIdFetch extends FetchImpl<Cart> {
 
     private CartByCustomerIdFetch(final String customerId) {
-        super(CartsEndpoint.ENDPOINT, "", asList(HttpQueryParameter.of("customerId", customerId)));
+        super(CartEndpoint.ENDPOINT, "", asList(HttpQueryParameter.of("customerId", customerId)));
     }
 
     public static CartByCustomerIdFetch of(final Identifiable<Customer> customer) {

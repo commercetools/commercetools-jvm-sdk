@@ -2,20 +2,17 @@ package io.sphere.sdk.carts.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.queries.DefaultModelQuery;
+import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.UltraQueryDsl;
 
 /**
 
  {@doc.gen summary carts}
 
  */
-public class CartQuery extends DefaultModelQuery<Cart> {
-    private CartQuery(){
-        super(CartsEndpoint.ENDPOINT.endpoint(), resultTypeReference());
-    }
-
-    public static TypeReference<PagedQueryResult<Cart>> resultTypeReference() {
+public interface CartQuery extends UltraQueryDsl<Cart, CartQuery, CartQueryModel<Cart>, CartExpansionModel<Cart>> {
+    static TypeReference<PagedQueryResult<Cart>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Cart>>(){
             @Override
             public String toString() {
@@ -24,7 +21,7 @@ public class CartQuery extends DefaultModelQuery<Cart> {
         };
     }
 
-    public static CartQuery of() {
-        return new CartQuery();
+    static CartQuery of() {
+        return new CartQueryImpl();
     }
 }
