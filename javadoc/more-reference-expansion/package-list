@@ -8,6 +8,7 @@ io.sphere.sdk.cartdiscounts.queries
 io.sphere.sdk.carts
 io.sphere.sdk.carts.commands
 io.sphere.sdk.carts.commands.updateactions
+io.sphere.sdk.carts.expansion
 io.sphere.sdk.carts.queries
 io.sphere.sdk.categories
 io.sphere.sdk.categories.commands
@@ -17,6 +18,7 @@ io.sphere.sdk.categories.queries
 io.sphere.sdk.channels
 io.sphere.sdk.channels.commands
 io.sphere.sdk.channels.commands.updateactions
+io.sphere.sdk.channels.expansion
 io.sphere.sdk.channels.queries
 io.sphere.sdk.client
 io.sphere.sdk.commands
