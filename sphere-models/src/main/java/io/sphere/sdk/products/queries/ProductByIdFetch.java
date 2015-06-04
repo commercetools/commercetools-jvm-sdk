@@ -11,4 +11,8 @@ public class ProductByIdFetch extends ByIdFetchImpl<Product> {
     public static ProductByIdFetch of(final String id) {
         return new ProductByIdFetch(id);
     }
+
+    public static ProductExpansionModel<Product> expansionPath() {
+        return new ProductExpansionModel<>();
+    }
 }
