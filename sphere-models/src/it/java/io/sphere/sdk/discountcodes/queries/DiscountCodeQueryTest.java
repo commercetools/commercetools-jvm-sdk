@@ -12,7 +12,7 @@ public class DiscountCodeQueryTest extends IntegrationTest {
     public void execution() throws Exception {
         withPersistentDiscountCode(client(), discountCode -> {
             final DiscountCode actual = execute(DiscountCodeQuery.of()
-                    .withPredicate(DiscountCodeQuery.model().code().is(discountCode.getCode()))).head().get();
+                    .withPredicate(DiscountCodeQueryModel.of().code().is(discountCode.getCode()))).head().get();
             assertThat(actual.getId()).isEqualTo(discountCode.getId());
         });
     }
