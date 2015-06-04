@@ -38,18 +38,6 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
     public static final int MASTER_VARIANT_ID = 1;
 
     @Test
-    public void getProductProjectionById() throws Exception {
-        final Consumer<Product> user = product -> {
-            final ProductProjectionType projectionType = STAGED;
-            final ProductProjection productProjection = execute(ProductProjectionByIdFetch.of(product.getId(), projectionType)).get();
-            final String fetchedProjectionId = productProjection.getId();
-            assertThat(fetchedProjectionId).isEqualTo(product.getId());
-            assertThat(productProjection.getCategories()).isEqualTo(product.getMasterData().get(projectionType).get().getCategories());
-        };
-        withProduct(client(), "getProductProjectionById", user);
-    }
-
-    @Test
     public void queryByProductType() throws Exception {
         with2products("queryByProductType", (p1, p2) ->{
             final Query<ProductProjection> query =

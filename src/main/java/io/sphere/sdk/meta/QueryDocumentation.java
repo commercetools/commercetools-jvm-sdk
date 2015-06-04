@@ -202,7 +202,7 @@ Like for predicates, you can traverse the query model tree in the same way to sp
  {@link io.sphere.sdk.products.Product#getProductType()}, which has a reference to a {@link io.sphere.sdk.producttypes.ProductType}.
 
  By default, the field {@link io.sphere.sdk.models.Reference#getObj()} will return an absent optional.
- If you specify an expansion path with {@link io.sphere.sdk.queries.QueryDsl#withExpansionPaths(java.util.List)}
+ If you specify an expansion path with {@link io.sphere.sdk.queries.QueryDsl#withExpansionPath(java.util.List)}
  it is possible that the product type will be filled so that you can work with it.
  </p>
 

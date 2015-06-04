@@ -54,8 +54,7 @@ public class FetchImpl<T> extends SphereRequestBase implements FetchDsl<T> {
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
         additionalQueryParameters().forEach(parameter -> builder.add(parameter.getKey(), parameter.getValue(), urlEncoded));
-
-        final String queryParameters = "?" + builder.toString();
+        final String queryParameters = builder.toStringWithOptionalQuestionMark();
         final String path = endpoint.endpoint() + "/" + identifierToSearchFor + (queryParameters.length() > 1 ? queryParameters : "");
         return HttpRequestIntent.of(HttpMethod.GET, path);
     }
@@ -66,7 +65,7 @@ public class FetchImpl<T> extends SphereRequestBase implements FetchDsl<T> {
 
 
     protected List<HttpQueryParameter> additionalQueryParameters() {
-        return Collections.emptyList();
+        return additionalParameters;
     }
 
     @Override
@@ -80,7 +79,7 @@ public class FetchImpl<T> extends SphereRequestBase implements FetchDsl<T> {
     }
 
     @Override
-    public FetchDsl<T> withExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
+    public FetchDsl<T> withExpansionPath(final List<ExpansionPath<T>> expansionPaths) {
         return new FetchImpl<>(endpoint, identifierToSearchFor, expansionPaths, additionalParameters);
     }
 }

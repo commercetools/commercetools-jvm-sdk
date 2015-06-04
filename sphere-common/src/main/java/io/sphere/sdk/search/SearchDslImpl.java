@@ -173,7 +173,7 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
         limit().ifPresent(l -> builder.add(SearchParameterKeys.LIMIT, l.toString(), urlEncoded));
         offset().ifPresent(o -> builder.add(SearchParameterKeys.OFFSET, o.toString(), urlEncoded));
         additionalQueryParameters().forEach(p -> builder.add(p.getKey(), p.getValue(), urlEncoded));
-        return "?" + builder.toString();
+        return builder.toStringWithOptionalQuestionMark();
     }
 
     @Override

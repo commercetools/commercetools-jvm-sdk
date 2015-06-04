@@ -103,7 +103,7 @@ public class QueryDslTest {
     public void expansionPath() throws Exception {
         assertThat(prototype.expansionPaths()).isEqualTo(Collections.emptyList());
         final List<ExpansionPath<String>> paths = asList(ExpansionPath.<String>of("parent"));
-        final QueryDsl<String> other = prototype.withExpansionPaths(paths);
+        final QueryDsl<String> other = prototype.withExpansionPath(paths);
         assertThat(other.expansionPaths()).isEqualTo(paths);
         assertThat(other).isNotSameAs(prototype);
     }

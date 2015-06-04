@@ -5,7 +5,6 @@ import io.sphere.sdk.channels.ChannelRoles;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.queries.ExpansionPath;
 import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -23,7 +22,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     public void variantIdentifierIsAvailable() throws Exception {
         withProduct(client(), product -> {
             final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
-                    .withPredicate(ProductProjectionQuery.model().id().is(product.getId()));
+                    .withPredicate(m -> m.id().is(product.getId()));
             final ProductProjection productProjection = execute(query).head().get();
             final VariantIdentifier identifier = productProjection.getMasterVariant().getIdentifier();
             assertThat(identifier).isEqualTo(VariantIdentifier.of(product.getId(), 1));
@@ -34,8 +33,9 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     public void expandCustomerGroupInPrice() throws Exception {
         withCustomerGroup(client(), customerGroup ->
             withUpdateablePricedProduct(client(), PRICE.withCustomerGroup(customerGroup), product -> {
-                final ExpansionPath<ProductProjection> expansionPath = ProductProjectionQuery.expansionPath().masterVariant().prices().customerGroup();
-                final Query<ProductProjection> query = query(product).withExpansionPath(expansionPath);
+                final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
+                                .withPredicate(m -> m.id().is(product.getId()))
+                                .withExpansionPath(m -> m.masterVariant().prices().customerGroup());
                 final List<Price> prices = execute(query).head().get().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()
@@ -50,8 +50,9 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     public void expandChannelInPrice() throws Exception {
         ChannelFixtures.withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
             withUpdateablePricedProduct(client(), PRICE.withChannel(channel), product -> {
-                final ExpansionPath<ProductProjection> expansionPath = ProductProjectionQuery.expansionPath().masterVariant().prices().channel();
-                final Query<ProductProjection> query = query(product).withExpansionPath(expansionPath);
+                final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
+                        .withPredicate(m -> m.id().is(product.getId()))
+                        .withExpansionPath(m -> m.masterVariant().prices().channel());
                 final List<Price> prices = execute(query).head().get().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()
@@ -62,7 +63,4 @@ public class ProductProjectionQueryTest extends IntegrationTest {
         });
     }
 
-    private QueryDsl<ProductProjection> query(final Product product) {
-        return ProductProjectionQuery.of(STAGED).withPredicate(ProductProjectionQuery.model().id().is(product.getId()));
-    }
 }

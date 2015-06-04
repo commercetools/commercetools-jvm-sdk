@@ -7,10 +7,7 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.queries.ExpansionPath;
-import io.sphere.sdk.queries.QueryPredicate;
-import io.sphere.sdk.queries.QueryDsl;
-import io.sphere.sdk.queries.QuerySort;
+import io.sphere.sdk.queries.*;
 import org.junit.Test;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
@@ -126,7 +123,7 @@ public class QueryDocumentationTest {
     public void expandCategoryAndCategoryParentForProduct() {
         final ExpansionPath<ProductProjection> expansionPath =
                 ProductProjectionQuery.expansionPath().categories().parent();
-        final QueryDsl<ProductProjection> query = ProductProjectionQuery.of(STAGED)
+        final ProductProjectionQuery query = ProductProjectionQuery.of(STAGED)
                 .withExpansionPath(expansionPath);
     }
 
