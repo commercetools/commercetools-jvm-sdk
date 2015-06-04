@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":18,"i10":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -110,8 +110,12 @@ var activeTableTab = "activeTableTab";
 <dd><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;T&gt;&gt;</dd>
 </dl>
 <dl>
+<dt>All Known Subinterfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dd>
+</dl>
+<dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQuery</a>, <a href="../../../../io/sphere/sdk/queries/UltraQueryDslImpl.html" title="class in io.sphere.sdk.queries">UltraQueryDslImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/queries/UltraQueryDslImpl.html" title="class in io.sphere.sdk.queries">UltraQueryDslImpl</a></dd>
 </dl>
 <hr>
 <br>
@@ -145,7 +149,7 @@ extends <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="inte
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -187,7 +191,7 @@ extends <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="type parameter in UltraQueryDsl">T</a>&gt;&gt;&nbsp;sort)</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
-<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="type parameter in UltraQueryDsl">C</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="type parameter in UltraQueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="type parameter in UltraQueryDsl">T</a>&gt;&nbsp;sort)</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
@@ -270,7 +274,7 @@ extends <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>withSort</h4>
-<pre>default&nbsp;<a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="type parameter in UltraQueryDsl">C</a>&nbsp;withSort(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="type parameter in UltraQueryDsl">T</a>&gt;&nbsp;sort)</pre>
+<pre><a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="type parameter in UltraQueryDsl">C</a>&nbsp;withSort(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="type parameter in UltraQueryDsl">T</a>&gt;&nbsp;sort)</pre>
 </li>
 </ul>
 <a name="withSort-java.util.function.Function-">
