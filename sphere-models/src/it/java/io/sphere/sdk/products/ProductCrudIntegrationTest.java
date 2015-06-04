@@ -8,6 +8,7 @@ import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.queries.ProductQuery;
+import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
@@ -74,11 +75,11 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
     }
 
     protected SphereRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
-        return ProductQuery.of().withPredicate(ProductQuery.model().masterData().current().name().lang(ENGLISH).is(name));
+        return ProductQuery.of().withPredicate(ProductQueryModel.of().masterData().current().name().lang(ENGLISH).is(name));
     }
 
     protected SphereRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
-        return ProductQuery.of().withPredicate(ProductQuery.model().masterData().current().name().lang(ENGLISH).isIn(names));
+        return ProductQuery.of().withPredicate(ProductQueryModel.of().masterData().current().name().lang(ENGLISH).isIn(names));
     }
 
     @Test

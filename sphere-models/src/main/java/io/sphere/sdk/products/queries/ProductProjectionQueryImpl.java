@@ -24,7 +24,7 @@ final class ProductProjectionQueryImpl extends UltraQueryDslImpl<ProductProjecti
 implements ProductProjectionQuery {
 
     ProductProjectionQueryImpl(final ProductProjectionType productProjectionType) {
-        super(ProductProjectionsEndpoint.ENDPOINT.endpoint(), additionalParametersOf(productProjectionType), resultTypeReference(), ProductProjectionQueryModel.of(), ProductProjectionExpansionModel.of());
+        super(ProductProjectionsEndpoint.ENDPOINT.endpoint(), additionalParametersOf(productProjectionType), ProductProjectionQuery.resultTypeReference(), ProductProjectionQueryModel.of(), ProductProjectionExpansionModel.of());
     }
 
     private ProductProjectionQueryImpl(final Optional<QueryPredicate<ProductProjection>> productProjectionQueryPredicate, final List<QuerySort<ProductProjection>> sort, final Optional<Long> limit, final Optional<Long> offset, final String endpoint, final Function<HttpResponse, PagedQueryResult<ProductProjection>> resultMapper, final List<ExpansionPath<ProductProjection>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters, final ProductProjectionQueryModel<ProductProjection> queryModel, final ProductProjectionExpansionModel<ProductProjection> expansionModel) {
@@ -33,15 +33,6 @@ implements ProductProjectionQuery {
 
     private static List<HttpQueryParameter> additionalParametersOf(final ProductProjectionType productProjectionType) {
         return asList(HttpQueryParameter.of("staged", stagedQueryParameterValue(productProjectionType)));
-    }
-
-    public static TypeReference<PagedQueryResult<ProductProjection>> resultTypeReference() {
-        return new TypeReference<PagedQueryResult<ProductProjection>>(){
-            @Override
-            public String toString() {
-                return "TypeReference<PagedQueryResult<ProductProjection>>";
-            }
-        };
     }
 
     public ProductProjectionQuery byProductType(final Referenceable<ProductType> productType) {

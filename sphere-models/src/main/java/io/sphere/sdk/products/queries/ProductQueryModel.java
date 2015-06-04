@@ -6,21 +6,21 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
 
-public class ProductQueryModel extends DefaultModelQueryModelImpl<Product> {
+public class ProductQueryModel<T> extends DefaultModelQueryModelImpl<T> {
 
-    static ProductQueryModel get() {
-        return new ProductQueryModel(Optional.<QueryModel<Product>>empty(), Optional.<String>empty());
+    public static ProductQueryModel<Product> of() {
+        return new ProductQueryModel<>(Optional.<QueryModel<Product>>empty(), Optional.<String>empty());
     }
 
-    private ProductQueryModel(final Optional<? extends QueryModel<Product>> parent, final Optional<String> pathSegment) {
+    private ProductQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public ProductCatalogDataQueryModel<Product> masterData() {
+    public ProductCatalogDataQueryModel<T> masterData() {
         return new ProductCatalogDataQueryModel<>(Optional.of(this), Optional.of("masterData"));
     }
 
-    public ReferenceQueryModel<Product, ProductType> productType() {
+    public ReferenceQueryModel<T, ProductType> productType() {
         return new ReferenceQueryModel<>(Optional.of(this), "productType");
     }
 }

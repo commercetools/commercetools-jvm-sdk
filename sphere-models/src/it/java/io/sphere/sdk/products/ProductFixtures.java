@@ -121,9 +121,8 @@ public class ProductFixtures {
 
     public static void deleteProductsAndProductType(final TestClient client, final ProductType productType) {
         if (productType != null) {
-            ProductQueryModel productQueryModelProductQueryModel = ProductQuery.model();
-            QueryPredicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
-            QueryDsl<Product> productsOfProductTypeQuery = ProductQuery.of().withPredicate(ofProductType);
+            QueryPredicate<Product> ofProductType = ProductQueryModel.of().productType().is(productType);
+            ProductQuery productsOfProductTypeQuery = ProductQuery.of().withPredicate(ofProductType);
             List<Product> products = client.execute(productsOfProductTypeQuery).getResults();
             products.forEach(
                     product -> client.execute(ProductDeleteCommand.of(product))

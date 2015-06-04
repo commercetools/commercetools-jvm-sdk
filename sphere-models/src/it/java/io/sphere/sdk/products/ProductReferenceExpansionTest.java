@@ -3,6 +3,7 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.SetTaxCategory;
+import io.sphere.sdk.products.expansion.ProductExpansionModel;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.*;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -26,7 +27,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
         final Consumer<Product> user = product -> {
             final Query<Product> query = ProductQuery.of().
                     bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
-                    withExpansionPath(ProductQuery.expansionPath().productType()).
+                    withExpansionPath(ProductExpansionModel.of().productType()).
                     toQuery();
             final PagedQueryResult<Product> queryResult = execute(query);
             final Reference<ProductType> productTypeReference = queryResult.head().get().getProductType();
@@ -43,7 +44,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
                 assertThat(productWithTaxCategory.getTaxCategory()).isPresent();
                 final Query<Product> query = ProductQuery.of().
                         bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
-                        withExpansionPath(ProductQuery.expansionPath().taxCategory()).
+                        withExpansionPath(ProductExpansionModel.of().taxCategory()).
                         toQuery();
                 final PagedQueryResult<Product> queryResult = execute(query);
                 final Reference<TaxCategory> productTypeReference = firstOf(queryResult).getTaxCategory().get();

@@ -57,6 +57,10 @@ public abstract class UltraQueryDslImpl<T, C extends UltraQueryDsl<T, C, Q, E>, 
         this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
                 Collections.emptyList(), additionalQueryParameters, queryModel, expansionModel);
     }
+    public UltraQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel) {
+        this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
+                Collections.emptyList(), Collections.emptyList(), queryModel, expansionModel);
+    }
 
     @Override
     public C withPredicate(final QueryPredicate<T> predicate) {
