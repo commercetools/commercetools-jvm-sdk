@@ -3,7 +3,6 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRoles;
 import io.sphere.sdk.products.*;
-import io.sphere.sdk.queries.ExpansionPath;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;

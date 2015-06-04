@@ -1,4 +1,4 @@
-package io.sphere.sdk.products.queries;
+package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.categories.queries.CategoryExpansionModel;
 import io.sphere.sdk.queries.ExpansionModel;

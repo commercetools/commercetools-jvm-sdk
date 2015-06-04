@@ -1,13 +1,13 @@
-package io.sphere.sdk.products.queries;
+package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.categories.queries.CategoryExpansionModel;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.queries.ExpansionModel;
 import io.sphere.sdk.queries.ExpansionPath;
 
-public class ProductProjectionExpansionModel<T> extends ExpansionModel<T> {
+public final class ProductProjectionExpansionModel<T> extends ExpansionModel<T> {
 
-    public ProductProjectionExpansionModel() {
+    private ProductProjectionExpansionModel() {
     }
 
     public ExpansionPath<T> productType() {
@@ -32,5 +32,9 @@ public class ProductProjectionExpansionModel<T> extends ExpansionModel<T> {
 
     public ProductVariantExpansionModel<T> variants() {
         return new ProductVariantExpansionModel<>(pathExpressionOption(), "variants");
+    }
+
+    public static ProductProjectionExpansionModel<ProductProjection> of() {
+        return new ProductProjectionExpansionModel<>();
     }
 }

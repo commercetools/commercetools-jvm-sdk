@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.expansion.ProductExpansionModel;
 import io.sphere.sdk.queries.ByIdFetchImpl;
 
 public class ProductByIdFetch extends ByIdFetchImpl<Product> {
@@ -12,7 +13,12 @@ public class ProductByIdFetch extends ByIdFetchImpl<Product> {
         return new ProductByIdFetch(id);
     }
 
+    /**
+     *
+     * @deprecated Use {@link ProductExpansionModel#of()} instead.
+     */
+    @Deprecated
     public static ProductExpansionModel<Product> expansionPath() {
-        return new ProductExpansionModel<>();
+        return ProductExpansionModel.of();
     }
 }

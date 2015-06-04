@@ -1,5 +1,6 @@
-package io.sphere.sdk.products.queries;
+package io.sphere.sdk.products.expansion;
 
+import io.sphere.sdk.products.Product;
 import io.sphere.sdk.queries.ExpansionModel;
 import io.sphere.sdk.queries.ExpansionPath;
 
@@ -19,5 +20,9 @@ public class ProductExpansionModel<T> extends ExpansionModel<T> {
 
     public ProductCatalogExpansionModel<T> masterData() {
         return new ProductCatalogExpansionModel<>(Optional.empty(), Optional.of("masterData"));
+    }
+
+    public static ProductExpansionModel<Product> of() {
+        return new ProductExpansionModel<>();
     }
 }

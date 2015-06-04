@@ -5,6 +5,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.queries.*;
@@ -121,16 +122,14 @@ public class QueryDocumentationTest {
     }
 
     public void expandCategoryAndCategoryParentForProduct() {
-        final ExpansionPath<ProductProjection> expansionPath =
-                ProductProjectionQuery.expansionPath().categories().parent();
         final ProductProjectionQuery query = ProductProjectionQuery.of(STAGED)
-                .withExpansionPath(expansionPath);
+                .withExpansionPath(m -> m.categories().parent());
     }
 
     @Test
     public void createExpansionPathByString() throws Exception {
         final ExpansionPath<ProductProjection> safePath =
-                ProductProjectionQuery.expansionPath().categories().parent();
+                ProductProjectionExpansionModel.of().categories().parent();
         final ExpansionPath<ProductProjection> unsafePath = ExpansionPath.of("categories[*].parent");
         assertThat(safePath).isEqualTo(unsafePath);
     }

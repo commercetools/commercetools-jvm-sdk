@@ -27,8 +27,8 @@ public class ProductDataQueryModelBaseTest {
 
     @Test
     public void allVariantsInProductProjection() throws Exception {
-        assertThat(ProductProjectionQuery.model().allVariants().where(m -> m.sku().is("bar")))
-                .isEqualTo(ProductProjectionQuery.model().where(m -> m.masterVariant().sku().is("bar").or(m.variants().sku().is("bar"))))
+        assertThat(ProductProjectionQueryModel.of().allVariants().where(m -> m.sku().is("bar")))
+                .isEqualTo(ProductProjectionQueryModel.of().where(m -> m.masterVariant().sku().is("bar").or(m.variants().sku().is("bar"))))
                 .isEqualTo(QueryPredicate.<ProductProjection>of(embeddedProductProjectionPredicate));
     }
 }
