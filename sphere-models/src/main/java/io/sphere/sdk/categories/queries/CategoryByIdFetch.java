@@ -7,7 +7,7 @@ import io.sphere.sdk.queries.ByIdFetchImpl;
 
 public class CategoryByIdFetch extends ByIdFetchImpl<Category> {
     private CategoryByIdFetch(final String id) {
-        super(id, CategoriesEndpoint.ENDPOINT);
+        super(id, CategoryEndpoint.ENDPOINT);
     }
 
     public static CategoryByIdFetch of(final Identifiable<Category> category) {

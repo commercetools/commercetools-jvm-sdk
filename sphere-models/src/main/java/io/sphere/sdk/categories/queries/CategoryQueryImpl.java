@@ -16,7 +16,7 @@ import java.util.function.Function;
  */
 final class CategoryQueryImpl extends UltraQueryDslImpl<Category, CategoryQuery, CategoryQueryModel<Category>, CategoryExpansionModel<Category>> implements CategoryQuery {
     CategoryQueryImpl(){
-        super(CategoriesEndpoint.ENDPOINT.endpoint(), CategoryQuery.resultTypeReference(), CategoryQueryModel.of(), CategoryExpansionModel.of());
+        super(CategoryEndpoint.ENDPOINT.endpoint(), CategoryQuery.resultTypeReference(), CategoryQueryModel.of(), CategoryExpansionModel.of());
     }
 
     private CategoryQueryImpl(final Optional<QueryPredicate<Category>> predicate, final List<QuerySort<Category>> sort, final Optional<Long> limit, final Optional<Long> offset, final String endpoint, final Function<HttpResponse, PagedQueryResult<Category>> resultMapper, final List<ExpansionPath<Category>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters, final CategoryQueryModel<Category> queryModel, final CategoryExpansionModel<Category> expansionModel) {

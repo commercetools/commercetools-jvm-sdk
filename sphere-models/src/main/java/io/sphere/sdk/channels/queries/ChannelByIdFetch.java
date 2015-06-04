@@ -5,7 +5,7 @@ import io.sphere.sdk.queries.ByIdFetchImpl;
 
 public class ChannelByIdFetch extends ByIdFetchImpl<Channel> {
     private ChannelByIdFetch(final String id) {
-        super(id, ChannelsEndpoint.ENDPOINT);
+        super(id, ChannelEndpoint.ENDPOINT);
     }
 
     public static ChannelByIdFetch of(final String id) {
