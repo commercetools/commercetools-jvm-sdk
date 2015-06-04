@@ -747,11 +747,15 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">CartDiscountDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="class in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQuery</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/queries/package-summary.html">io.sphere.sdk.cartdiscounts.queries</a></dt>
+<dt><a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion"><span class="typeNameLink">CartDiscountExpansionModel</span></a>&lt;<a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="type parameter in CartDiscountExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/cartdiscounts/expansion/package-summary.html">io.sphere.sdk.cartdiscounts.expansion</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html#CartDiscountExpansionModel--">CartDiscountExpansionModel()</a></span> - Constructor for class io.sphere.sdk.cartdiscounts.expansion.<a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion">CartDiscountExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQuery</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/queries/package-summary.html">io.sphere.sdk.cartdiscounts.queries</a></dt>
 <dd>
 <div class="block">Provides a QueryDsl for  cart discounts to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
 </dd>
-<dt><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQueryModel.html" title="class in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQueryModel</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/queries/package-summary.html">io.sphere.sdk.cartdiscounts.queries</a></dt>
+<dt><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQueryModel.html" title="class in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQueryModel</span></a>&lt;<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQueryModel.html" title="type parameter in CartDiscountQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/cartdiscounts/queries/package-summary.html">io.sphere.sdk.cartdiscounts.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html#cartDiscounts-java.util.List-">cartDiscounts(List&lt;Reference&lt;CartDiscount&gt;&gt;)</a></span> - Method in class io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes">DiscountCodeDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -4255,6 +4259,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a> - package io.sphere.sdk.cartdiscounts.commands.updateactions</dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/cartdiscounts/expansion/package-summary.html">io.sphere.sdk.cartdiscounts.expansion</a> - package io.sphere.sdk.cartdiscounts.expansion</dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/queries/package-summary.html">io.sphere.sdk.cartdiscounts.queries</a> - package io.sphere.sdk.cartdiscounts.queries</dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a> - package io.sphere.sdk.carts</dt>
@@ -5077,8 +5083,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#mobile-java.lang.String-">mobile(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="class in io.sphere.sdk.cartdiscounts.queries">CartDiscountQuery</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQuery.html" title="class in io.sphere.sdk.channels.queries">ChannelQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupQuery</a></dt>
@@ -5315,13 +5319,17 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPrice.html#of-javax.money.MonetaryAmount-java.util.List-">of(MonetaryAmount, List&lt;DiscountedLineItemPortion&gt;)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPrice.html" title="class in io.sphere.sdk.cartdiscounts">DiscountedLineItemPrice</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.cartdiscounts.expansion.<a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion">CartDiscountExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/LineItemsTarget.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/LineItemsTarget.html" title="class in io.sphere.sdk.cartdiscounts">LineItemsTarget</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdFetch.html#of-io.sphere.sdk.models.Identifiable-">of(Identifiable&lt;CartDiscount&gt;)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdFetch.html" title="class in io.sphere.sdk.cartdiscounts.queries">CartDiscountByIdFetch</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdFetch.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdFetch.html" title="class in io.sphere.sdk.cartdiscounts.queries">CartDiscountByIdFetch</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="class in io.sphere.sdk.cartdiscounts.queries">CartDiscountQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries">CartDiscountQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQueryModel.html" title="class in io.sphere.sdk.cartdiscounts.queries">CartDiscountQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/RelativeCartDiscountValue.html#of-int-">of(int)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/RelativeCartDiscountValue.html" title="class in io.sphere.sdk.cartdiscounts">RelativeCartDiscountValue</a></dt>
 <dd>&nbsp;</dd>
@@ -7530,7 +7538,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedResult.html#results">results</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="class in io.sphere.sdk.cartdiscounts.queries">CartDiscountQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries">CartDiscountQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="class in io.sphere.sdk.carts.queries">CartQuery</a></dt>
 <dd>&nbsp;</dd>
