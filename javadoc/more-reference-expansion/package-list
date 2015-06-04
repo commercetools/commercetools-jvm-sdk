@@ -11,6 +11,7 @@ io.sphere.sdk.carts.queries
 io.sphere.sdk.categories
 io.sphere.sdk.categories.commands
 io.sphere.sdk.categories.commands.updateactions
+io.sphere.sdk.categories.expansion
 io.sphere.sdk.categories.queries
 io.sphere.sdk.channels
 io.sphere.sdk.channels.commands

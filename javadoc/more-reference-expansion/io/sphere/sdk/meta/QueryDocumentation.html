@@ -159,7 +159,7 @@ Query&lt;Category&gt; queryByName = CategoryQuery.of().byName(Locale.ENGLISH, "d
 , which contains a DSL to find and specify the queryable parameters.
  </p>
 
- <div id="io-sphere-sdk-queries-QueryDemo-categoryQueryModel--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+ <div id="io-sphere-sdk-queries-QueryDemo-categoryQueryModel--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;Category&gt; predicate = CategoryQueryModel.of().name().lang(locale).is("demo cat");
 Query&lt;Category&gt; query = CategoryQuery.of().withPredicate(predicate);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
@@ -169,10 +169,10 @@ Query&lt;Category&gt; query = CategoryQuery.of().withPredicate(predicate);
  The <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><code>QueryDsl</code></a> class, used by the query model classes, sorts by ID by default and it has no offset
  or limit specified. The following example shows how to specify sorting, limiting, and skipping pages.
 
- <div id="io-sphere-sdk-queries-QueryDemo-withPagination--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;Category&gt; predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+ <div id="io-sphere-sdk-queries-QueryDemo-withPagination--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;Category&gt; predicate = CategoryQueryModel.of().name().lang(locale).is("demo cat");
 
-QuerySort&lt;Category&gt; sortByName = CategoryQuery.model().name().lang(locale).sort(QuerySortDirection.DESC);
-QuerySort&lt;Category&gt; sortById = CategoryQuery.model().id().sort(QuerySortDirection.ASC);
+QuerySort&lt;Category&gt; sortByName = CategoryQueryModel.of().name().lang(locale).sort(QuerySortDirection.DESC);
+QuerySort&lt;Category&gt; sortById = CategoryQueryModel.of().id().sort(QuerySortDirection.ASC);
 List&lt;QuerySort&lt;Category&gt;&gt; sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
 
 int offset = 1;//skip first page

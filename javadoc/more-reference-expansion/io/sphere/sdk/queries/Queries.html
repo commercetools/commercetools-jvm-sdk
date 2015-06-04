@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9};
+var methods = {"i0":9,"i1":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -132,6 +132,10 @@ extends java.lang.Object</pre>
 <td class="colFirst"><code>static &lt;I&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/Queries.html#nextPage-io.sphere.sdk.queries.QueryDsl-">nextPage</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;&nbsp;current)</code>&nbsp;</td>
 </tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>static &lt;T,C extends <a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;T,C,Q,E&gt;,Q,E&gt;<br><a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;T,C,Q,E&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/Queries.html#nextPage-io.sphere.sdk.queries.UltraQueryDsl-">nextPage</a></span>(<a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;T,C,Q,E&gt;&nbsp;current)</code>&nbsp;</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -157,10 +161,19 @@ extends java.lang.Object</pre>
 <a name="nextPage-io.sphere.sdk.queries.QueryDsl-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>nextPage</h4>
 <pre>public static&nbsp;&lt;I&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;&nbsp;nextPage(<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;I&gt;&nbsp;current)</pre>
+</li>
+</ul>
+<a name="nextPage-io.sphere.sdk.queries.UltraQueryDsl-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>nextPage</h4>
+<pre>public static&nbsp;&lt;T,C extends <a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;T,C,Q,E&gt;,Q,E&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;T,C,Q,E&gt;&nbsp;nextPage(<a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;T,C,Q,E&gt;&nbsp;current)</pre>
 </li>
 </ul>
 </li>
