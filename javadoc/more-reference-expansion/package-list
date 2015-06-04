@@ -49,6 +49,7 @@ io.sphere.sdk.productdiscounts
 io.sphere.sdk.products
 io.sphere.sdk.products.commands
 io.sphere.sdk.products.commands.updateactions
+io.sphere.sdk.products.expansion
 io.sphere.sdk.products.queries
 io.sphere.sdk.products.search
 io.sphere.sdk.producttypes
