@@ -1,5 +1,6 @@
-package io.sphere.sdk.categories.queries;
+package io.sphere.sdk.categories.expansion;
 
+import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.ExpansionModel;
 
 import java.util.Optional;
@@ -27,5 +28,9 @@ public class CategoryExpansionModel<T> extends ExpansionModel<T> {
 
     public CategoryExpansionModel<T> parent() {
         return new CategoryExpansionModel<>(pathExpressionOption(), "parent");
+    }
+
+    public static CategoryExpansionModel<Category> of() {
+        return new CategoryExpansionModel<>();
     }
 }

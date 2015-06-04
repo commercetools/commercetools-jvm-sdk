@@ -10,4 +10,9 @@ public final class Queries {
         final long oldOffset = current.offset().orElse(0L);
         return current.withOffset(oldOffset + 1);
     }
+
+    public static <T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> UltraQueryDsl<T, C, Q, E> nextPage(final UltraQueryDsl<T, C, Q, E> current) {
+        final long oldOffset = current.offset().orElse(0L);
+        return current.withOffset(oldOffset + 1);
+    }
 }

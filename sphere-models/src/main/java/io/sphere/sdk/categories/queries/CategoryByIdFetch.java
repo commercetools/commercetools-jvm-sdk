@@ -1,6 +1,7 @@
 package io.sphere.sdk.categories.queries;
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.queries.ByIdFetchImpl;
 
@@ -18,6 +19,6 @@ public class CategoryByIdFetch extends ByIdFetchImpl<Category> {
     }
 
     public static CategoryExpansionModel<Category> expansionPath() {
-        return new CategoryExpansionModel<>();
+        return CategoryExpansionModel.of();
     }
 }

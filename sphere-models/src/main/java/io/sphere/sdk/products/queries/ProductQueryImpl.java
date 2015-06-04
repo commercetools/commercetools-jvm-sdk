@@ -24,11 +24,11 @@ final class ProductQueryImpl extends UltraQueryDslImpl<Product, ProductQuery, Pr
 
     @Override
     protected UltraQueryDslBuilder<Product, ProductQuery, ProductQueryModel<Product>, ProductExpansionModel<Product>> copyBuilder() {
-        return new ProductProjectionQueryQueryDslBuilder(this);
+        return new ProductQueryQueryDslBuilder(this);
     }
 
-    private static class ProductProjectionQueryQueryDslBuilder extends UltraQueryDslBuilder<Product, ProductQuery, ProductQueryModel<Product>, ProductExpansionModel<Product>> {
-        public ProductProjectionQueryQueryDslBuilder(final UltraQueryDslImpl<Product, ProductQuery, ProductQueryModel<Product>, ProductExpansionModel<Product>> template) {
+    private static class ProductQueryQueryDslBuilder extends UltraQueryDslBuilder<Product, ProductQuery, ProductQueryModel<Product>, ProductExpansionModel<Product>> {
+        public ProductQueryQueryDslBuilder(final UltraQueryDslImpl<Product, ProductQuery, ProductQueryModel<Product>, ProductExpansionModel<Product>> template) {
             super(template);
         }
 

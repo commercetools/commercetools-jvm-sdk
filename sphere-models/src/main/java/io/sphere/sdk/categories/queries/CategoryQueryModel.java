@@ -8,30 +8,29 @@ import io.sphere.sdk.queries.*;
 /**
  * {@doc.gen summary categories}
  */
-public class CategoryQueryModel extends DefaultModelQueryModelImpl<Category> {
-    private static final CategoryQueryModel instance = new CategoryQueryModel(Optional.<QueryModelImpl<Category>>empty(), Optional.<String>empty());
+public final class CategoryQueryModel<T> extends DefaultModelQueryModelImpl<T> {
 
-    static CategoryQueryModel get() {
-        return instance;
+    public static CategoryQueryModel<Category> of() {
+        return new CategoryQueryModel<>(Optional.empty(), Optional.<String>empty());
     }
 
-    private CategoryQueryModel(Optional<? extends QueryModel<Category>> parent, Optional<String> pathSegment) {
+    private CategoryQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public LocalizedStringsQuerySortingModel<Category> slug() {
+    public LocalizedStringsQuerySortingModel<T> slug() {
         return LocalizedStringsQuerySortingModel.of(this, "slug");
     }
 
-    public LocalizedStringsQuerySortingModel<Category> name() {
+    public LocalizedStringsQuerySortingModel<T> name() {
         return LocalizedStringsQuerySortingModel.of(this, "name");
     }
 
-    public StringQuerySortingModel<Category> externalId() {
+    public StringQuerySortingModel<T> externalId() {
         return new StringQuerySortingModel<>(Optional.of(this), "externalId");
     }
 
-    public OptionalReferenceQueryModel<Category, Category> parent() {
+    public OptionalReferenceQueryModel<T, T> parent() {
         return new OptionalReferenceQueryModel<>(Optional.of(this), "parent");
     }
 }

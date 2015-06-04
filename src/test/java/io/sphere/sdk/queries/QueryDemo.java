@@ -2,6 +2,7 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.categories.queries.CategoryQueryModel;
 import io.sphere.sdk.client.SphereClient;
 
 import java.util.Arrays;
@@ -39,15 +40,15 @@ public class QueryDemo {
     }
 
     private void categoryQueryModel() {
-        QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+        QueryPredicate<Category> predicate = CategoryQueryModel.of().name().lang(locale).is("demo cat");
         Query<Category> query = CategoryQuery.of().withPredicate(predicate);
     }
 
     private void withPagination() {
-        QueryPredicate<Category> predicate = CategoryQuery.model().name().lang(locale).is("demo cat");
+        QueryPredicate<Category> predicate = CategoryQueryModel.of().name().lang(locale).is("demo cat");
 
-        QuerySort<Category> sortByName = CategoryQuery.model().name().lang(locale).sort(QuerySortDirection.DESC);
-        QuerySort<Category> sortById = CategoryQuery.model().id().sort(QuerySortDirection.ASC);
+        QuerySort<Category> sortByName = CategoryQueryModel.of().name().lang(locale).sort(QuerySortDirection.DESC);
+        QuerySort<Category> sortById = CategoryQueryModel.of().id().sort(QuerySortDirection.ASC);
         List<QuerySort<Category>> sort = Arrays.asList(sortByName, sortById);//sort by name desc and then by ID if name is the same
 
         int offset = 1;//skip first page

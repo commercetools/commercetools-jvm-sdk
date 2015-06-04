@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.expansion;
 
-import io.sphere.sdk.categories.queries.CategoryExpansionModel;
+import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.queries.ExpansionModel;
 
 import java.util.Optional;
