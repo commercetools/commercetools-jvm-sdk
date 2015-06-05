@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -207,10 +207,18 @@ implements <a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="inte
 </td>
 </tr>
 <tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath</a></span>(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a></span>(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchImpl.html#withExpansionPath-java.util.List-">withExpansionPath</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
 </tr>
@@ -235,13 +243,6 @@ implements <a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="inte
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.ReferenceExpandeableDsl">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a></h3>
-<code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath</a>, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a></code></li>
 </ul>
 </li>
 </ul>
@@ -393,13 +394,39 @@ implements <a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="inte
 <a name="withExpansionPath-java.util.List-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withExpansionPath</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;withExpansionPath(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;&nbsp;expansionPaths)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-java.util.List-">withExpansionPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>plusExpansionPath</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;plusExpansionPath(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;expansionPath)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withExpansionPath</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;withExpansionPath(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&nbsp;expansionPath)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="type parameter in FetchImpl">T</a>&gt;&gt;</code></dd>
 </dl>
 </li>
 </ul>

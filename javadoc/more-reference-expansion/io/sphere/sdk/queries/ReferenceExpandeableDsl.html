@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":18,"i2":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.queries</div>
-<h2 title="Interface ReferenceExpandeableDsl" class="title">Interface ReferenceExpandeableDsl&lt;T,R&gt;</h2>
+<h2 title="Interface ReferenceExpandeableDsl" class="title">Interface ReferenceExpandeableDsl&lt;T,C&gt;</h2>
 </div>
 <div class="contentContainer">
 <div class="description">
@@ -104,7 +104,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries">CartDiscountQuery</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartQuery.html" title="interface in io.sphere.sdk.carts.queries">CartQuery</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html" title="interface in io.sphere.sdk.categories.queries">CategoryQuery</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelQuery.html" title="interface in io.sphere.sdk.channels.queries">ChannelQuery</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="interface in io.sphere.sdk.customergroups.queries">CustomerGroupQuery</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerQuery.html" title="interface in io.sphere.sdk.customers.queries">CustomerQuery</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html" title="interface in io.sphere.sdk.discountcodes.queries">DiscountCodeQuery</a>, <a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/inventories/queries/InventoryEntryQuery.html" title="interface in io.sphere.sdk.inventories.queries">InventoryEntryQuery</a>, <a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html" title="interface in io.sphere.sdk.orders.queries">OrderQuery</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="interface in io.sphere.sdk.products.queries">ProductQuery</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="interface in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a>, <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>, <a href="../../../../io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodQuery</a>, <a href="../../../../io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries">StateQuery</a>, <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="interface in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a>, <a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;T,C,Q,E&gt;, <a href="../../../../io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries">ZoneQuery</a></dd>
+<dd><a href="../../../../io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries">CartDiscountQuery</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartQuery.html" title="interface in io.sphere.sdk.carts.queries">CartQuery</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html" title="interface in io.sphere.sdk.categories.queries">CategoryQuery</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelQuery.html" title="interface in io.sphere.sdk.channels.queries">ChannelQuery</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="interface in io.sphere.sdk.customergroups.queries">CustomerGroupQuery</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerQuery.html" title="interface in io.sphere.sdk.customers.queries">CustomerQuery</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html" title="interface in io.sphere.sdk.discountcodes.queries">DiscountCodeQuery</a>, <a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/inventories/queries/InventoryEntryQuery.html" title="interface in io.sphere.sdk.inventories.queries">InventoryEntryQuery</a>, <a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html" title="interface in io.sphere.sdk.orders.queries">OrderQuery</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductQuery.html" title="interface in io.sphere.sdk.products.queries">ProductQuery</a>, <a href="../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="interface in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a>, <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a>, <a href="../../../../io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodQuery</a>, <a href="../../../../io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries">StateQuery</a>, <a href="../../../../io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="interface in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a>, <a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;T,C,Q,E&gt;, <a href="../../../../io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries">ZoneQuery</a></dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
@@ -112,7 +112,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">ReferenceExpandeableDsl&lt;T,R&gt;</span>
+<pre>public interface <span class="typeNameLabel">ReferenceExpandeableDsl&lt;T,C&gt;</span>
 extends <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;T&gt;</pre>
 </li>
 </ul>
@@ -127,21 +127,21 @@ extends <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" ti
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">R</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath</a></span>(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">R</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a></span>(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">R</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-java.util.List-">withExpansionPath</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
 </tr>
 </table>
@@ -172,7 +172,7 @@ extends <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>withExpansionPath</h4>
-<pre><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">R</a>&nbsp;withExpansionPath(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&gt;&nbsp;expansionPaths)</pre>
+<pre><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a>&nbsp;withExpansionPath(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&gt;&nbsp;expansionPaths)</pre>
 </li>
 </ul>
 <a name="plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">
@@ -181,7 +181,7 @@ extends <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>plusExpansionPath</h4>
-<pre>default&nbsp;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">R</a>&nbsp;plusExpansionPath(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</pre>
+<pre><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a>&nbsp;plusExpansionPath(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</pre>
 </li>
 </ul>
 <a name="withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">
@@ -190,7 +190,7 @@ extends <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" ti
 <ul class="blockListLast">
 <li class="blockList">
 <h4>withExpansionPath</h4>
-<pre>default&nbsp;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">R</a>&nbsp;withExpansionPath(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</pre>
+<pre><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a>&nbsp;withExpansionPath(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</pre>
 </li>
 </ul>
 </li>
