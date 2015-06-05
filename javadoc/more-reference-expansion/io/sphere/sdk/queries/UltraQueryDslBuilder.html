@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/queries/UltraQueryDslImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/UltraQueryDslBuilder.html" target="_top">Frames</a></li>
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.queries</div>
-<h2 title="Class UltraQueryDslBuilder" class="title">Class UltraQueryDslBuilder&lt;T,C extends <a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;T,C,Q,E&gt;,Q,E&gt;</h2>
+<h2 title="Class UltraQueryDslBuilder" class="title">Class UltraQueryDslBuilder&lt;T,C extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;T,C,Q,E&gt;,Q,E&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">UltraQueryDslBuilder&lt;T,C extends <a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;T,C,Q,E&gt;,Q,E&gt;</span>
+<pre>public class <span class="typeNameLabel">UltraQueryDslBuilder&lt;T,C extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;T,C,Q,E&gt;,Q,E&gt;</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
 implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;C&gt;</pre>
 </li>
@@ -197,14 +197,14 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html#UltraQueryDslBuilder-io.sphere.sdk.queries.MetaModelQueryDslImpl-">UltraQueryDslBuilder</a></span>(<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;&nbsp;template)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html#UltraQueryDslBuilder-java.lang.String-java.util.function.Function-Q-E-java.util.function.Function-">UltraQueryDslBuilder</a></span>(java.lang.String&nbsp;endpoint,
                     java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>&gt;&gt;&nbsp;resultMapper,
                     <a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>&nbsp;queryModel,
                     <a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&nbsp;expansionModel,
                     java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="class in io.sphere.sdk.queries">UltraQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>&gt;&nbsp;queryDslBuilderFunction)</code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html#UltraQueryDslBuilder-io.sphere.sdk.queries.UltraQueryDslImpl-">UltraQueryDslBuilder</a></span>(<a href="../../../../io/sphere/sdk/queries/UltraQueryDslImpl.html" title="class in io.sphere.sdk.queries">UltraQueryDslImpl</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;&nbsp;template)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -395,7 +395,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <ul class="blockListLast">
 <li class="blockList">
 <h4>queryDslBuilderFunction</h4>
-<pre>protected final&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="class in io.sphere.sdk.queries">UltraQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;&gt; queryDslBuilderFunction</pre>
+<pre>protected final&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="class in io.sphere.sdk.queries">UltraQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;&gt; queryDslBuilderFunction</pre>
 </li>
 </ul>
 </li>
@@ -421,13 +421,13 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
                             java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="class in io.sphere.sdk.queries">UltraQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>&gt;&nbsp;queryDslBuilderFunction)</pre>
 </li>
 </ul>
-<a name="UltraQueryDslBuilder-io.sphere.sdk.queries.UltraQueryDslImpl-">
+<a name="UltraQueryDslBuilder-io.sphere.sdk.queries.MetaModelQueryDslImpl-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>UltraQueryDslBuilder</h4>
-<pre>public&nbsp;UltraQueryDslBuilder(<a href="../../../../io/sphere/sdk/queries/UltraQueryDslImpl.html" title="class in io.sphere.sdk.queries">UltraQueryDslImpl</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;&nbsp;template)</pre>
+<pre>public&nbsp;UltraQueryDslBuilder(<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;&nbsp;template)</pre>
 </li>
 </ul>
 </li>
@@ -530,7 +530,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <div class="block">Creates a new instance of T with the values of this builder.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/Builder.html#build--">build</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries">UltraQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/models/Builder.html#build--">build</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/UltraQueryDslBuilder.html" title="type parameter in UltraQueryDslBuilder">E</a>&gt;&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>new instance of T.</dd>
 </dl>
@@ -563,8 +563,8 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/queries/UltraQueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/queries/UltraQueryDslImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/UltraQueryDslBuilder.html" target="_top">Frames</a></li>
