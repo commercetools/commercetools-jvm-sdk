@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
  */
 public class CategoryUpdateCommand extends UpdateCommandDslImpl<Category> {
     private CategoryUpdateCommand(final Versioned<Category> versioned, final List<? extends UpdateAction<Category>> updateActions) {
-        super(versioned, updateActions, CategoriesEndpoint.ENDPOINT);
+        super(versioned, updateActions, CategoryEndpoint.ENDPOINT);
     }
 
     public static CategoryUpdateCommand of(final Versioned<Category> versioned, final UpdateAction<Category> updateAction) {

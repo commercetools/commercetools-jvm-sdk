@@ -13,7 +13,7 @@ import io.sphere.sdk.reviews.ReviewDraft;
  */
 public class ReviewCreateCommand extends CreateCommandImpl<Review, ReviewDraft> {
     public ReviewCreateCommand(final ReviewDraft body) {
-        super(body, ReviewsEndpoint.ENDPOINT);
+        super(body, ReviewEndpoint.ENDPOINT);
     }
 
     public static ReviewCreateCommand of(final ReviewDraft draft) {

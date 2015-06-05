@@ -13,7 +13,7 @@ import io.sphere.sdk.models.Versioned;
 public final class CategoryDeleteCommand extends ByIdDeleteCommandImpl<Category> {
 
     private CategoryDeleteCommand(final Versioned<Category> versioned) {
-        super(versioned, CategoriesEndpoint.ENDPOINT);
+        super(versioned, CategoryEndpoint.ENDPOINT);
     }
 
     public static DeleteCommand<Category> of(final Versioned<Category> versioned) {

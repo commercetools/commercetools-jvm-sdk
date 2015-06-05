@@ -18,7 +18,7 @@ public class ReviewQuery extends DefaultModelQuery<Review> {
     };
 
     private ReviewQuery() {
-        super(ReviewsEndpoint.ENDPOINT.endpoint(), resultTypeReference());
+        super(ReviewEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 
     public static TypeReference<PagedQueryResult<Review>> resultTypeReference() {

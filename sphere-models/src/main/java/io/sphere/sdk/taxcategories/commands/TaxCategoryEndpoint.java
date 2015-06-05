@@ -1,8 +1,8 @@
-package io.sphere.sdk.taxcategories.queries;
+package io.sphere.sdk.taxcategories.commands;
 
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
-final class TaxCategoriesEndpoint {
+final class TaxCategoryEndpoint {
     static final JsonEndpoint<TaxCategory> ENDPOINT = JsonEndpoint.of(TaxCategory.typeReference(), "/tax-categories");
 }

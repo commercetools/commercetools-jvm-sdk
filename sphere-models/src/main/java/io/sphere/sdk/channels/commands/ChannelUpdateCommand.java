@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
  */
 public class ChannelUpdateCommand extends UpdateCommandDslImpl<Channel> {
     public ChannelUpdateCommand(final Versioned<Channel> versioned, final List<? extends UpdateAction<Channel>> updateActions) {
-        super(versioned, updateActions, ChannelsEndpoint.ENDPOINT);
+        super(versioned, updateActions, ChannelEndpoint.ENDPOINT);
     }
 
     public static ChannelUpdateCommand of(final Versioned<Channel> versioned, final List<? extends UpdateAction<Channel>> updateActions) {

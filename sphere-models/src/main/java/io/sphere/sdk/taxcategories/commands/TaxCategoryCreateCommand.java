@@ -12,7 +12,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
  */
 public class TaxCategoryCreateCommand extends CreateCommandImpl<TaxCategory, TaxCategoryDraft> {
     private TaxCategoryCreateCommand(final TaxCategoryDraft body) {
-        super(body, TaxCategoriesEndpoint.ENDPOINT);
+        super(body, TaxCategoryEndpoint.ENDPOINT);
     }
 
     public static TaxCategoryCreateCommand of(final TaxCategoryDraft body) {

@@ -7,7 +7,7 @@ import io.sphere.sdk.zones.Zone;
 
 public class ZoneDeleteCommand extends ByIdDeleteCommandImpl<Zone> {
     private ZoneDeleteCommand(final Versioned<Zone> versioned) {
-        super(versioned, ZonesEndpoint.ENDPOINT);
+        super(versioned, ZoneEndpoint.ENDPOINT);
     }
 
     public static DeleteCommand<Zone> of(final Versioned<Zone> versioned) {

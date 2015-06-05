@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
  */
 public class CartUpdateCommand extends UpdateCommandDslImpl<Cart> {
     private CartUpdateCommand(final Versioned<Cart> versioned, final List<? extends UpdateAction<Cart>> updateActions) {
-        super(versioned, updateActions, CartsEndpoint.ENDPOINT);
+        super(versioned, updateActions, CartEndpoint.ENDPOINT);
     }
 
     public static CartUpdateCommand of(final Versioned<Cart> versioned, final List<? extends UpdateAction<Cart>> updateActions) {

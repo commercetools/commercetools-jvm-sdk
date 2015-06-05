@@ -11,7 +11,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
  */
 public class TaxCategoryQuery extends DefaultModelQuery<TaxCategory> {
     private TaxCategoryQuery(){
-        super(TaxCategoriesEndpoint.ENDPOINT.endpoint(), resultTypeReference());
+        super(TaxCategoryEndpoint.ENDPOINT.endpoint(), resultTypeReference());
     }
 
     public static TypeReference<PagedQueryResult<TaxCategory>> resultTypeReference() {

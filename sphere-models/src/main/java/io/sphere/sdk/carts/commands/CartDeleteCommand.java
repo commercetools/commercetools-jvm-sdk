@@ -12,7 +12,7 @@ import io.sphere.sdk.models.Versioned;
 public final class CartDeleteCommand extends ByIdDeleteCommandImpl<Cart> {
 
     private CartDeleteCommand(final Versioned<Cart> versioned) {
-        super(versioned, CartsEndpoint.ENDPOINT);
+        super(versioned, CartEndpoint.ENDPOINT);
     }
 
     public static DeleteCommand<Cart> of(final Versioned<Cart> versioned) {

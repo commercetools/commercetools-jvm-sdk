@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
  */
 public class ZoneUpdateCommand extends UpdateCommandDslImpl<Zone> {
     private ZoneUpdateCommand(final Versioned<Zone> versioned, final List<? extends UpdateAction<Zone>> updateActions) {
-        super(versioned, updateActions, ZonesEndpoint.ENDPOINT);
+        super(versioned, updateActions, ZoneEndpoint.ENDPOINT);
     }
 
     public static ZoneUpdateCommand of(final Versioned<Zone> versioned, final UpdateAction<Zone> updateAction) {
