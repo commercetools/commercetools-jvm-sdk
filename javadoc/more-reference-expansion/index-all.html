@@ -593,9 +593,9 @@
 <dd>
 <div class="block">Predicate which matches the country of a location, does not take the state into the consideration.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerEmail-java.lang.String-">byCustomerEmail(String)</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerEmail-java.lang.String-">byCustomerEmail(String)</a></span> - Method in interface io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="interface in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerId-java.lang.String-">byCustomerId(String)</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerId-java.lang.String-">byCustomerId(String)</a></span> - Method in interface io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="interface in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQuery.html#byEmail-java.lang.String-">byEmail(String)</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQuery.html" title="interface in io.sphere.sdk.customers.queries">CustomerQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -4447,6 +4447,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Provides the possible operations which can be performed on update commands for  orders.</div>
 </dd>
+<dt><a href="io/sphere/sdk/orders/expansion/package-summary.html">io.sphere.sdk.orders.expansion</a> - package io.sphere.sdk.orders.expansion</dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/queries/package-summary.html">io.sphere.sdk.orders.queries</a> - package io.sphere.sdk.orders.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  orders.</div>
@@ -5114,8 +5116,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#mobile-java.lang.String-">mobile(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html#model--">model()</a></span> - Static method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearch</a></dt>
 <dd>
@@ -5983,6 +5983,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-io.sphere.sdk.carts.LineItemLike-">of(LineItemLike)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html#of-io.sphere.sdk.orders.ProductVariantImportDraft-long-io.sphere.sdk.products.Price-io.sphere.sdk.models.LocalizedStrings-">of(ProductVariantImportDraft, long, Price, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">LineItemImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderFromCartDraft.html#of-io.sphere.sdk.models.Versioned-java.util.Optional-java.util.Optional-">of(Versioned&lt;Cart&gt;, Optional&lt;String&gt;, Optional&lt;PaymentState&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderFromCartDraft.html" title="class in io.sphere.sdk.orders">OrderFromCartDraft</a></dt>
@@ -6001,7 +6003,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderByIdFetch.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderByIdFetch.html" title="class in io.sphere.sdk.orders.queries">OrderByIdFetch</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="interface in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnInfo.html#of-java.util.List-java.util.Optional-java.util.Optional-">of(List&lt;ReturnItem&gt;, Optional&lt;String&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnInfo.html" title="class in io.sphere.sdk.orders">ReturnInfo</a></dt>
 <dd>&nbsp;</dd>
@@ -6724,6 +6728,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Gets an order by ID.</div>
 </dd>
+<dt><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion"><span class="typeNameLink">OrderExpansionModel</span></a>&lt;<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="type parameter in OrderExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/orders/expansion/package-summary.html">io.sphere.sdk.orders.expansion</a></dt>
+<dd>
+<div class="block">DSL class to create expansion path expressions.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#OrderExpansionModel-java.util.Optional-java.lang.String-">OrderExpansionModel(Optional&lt;String&gt;, String)</a></span> - Constructor for class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html" title="class in io.sphere.sdk.orders.commands"><span class="typeNameLink">OrderFromCartCreateCommand</span></a> - Class in <a href="io/sphere/sdk/orders/commands/package-summary.html">io.sphere.sdk.orders.commands</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/OrderFromCartDraft.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">OrderFromCartDraft</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
@@ -6754,11 +6764,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">String that unique identifies an order.</div>
 </dd>
-<dt><a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries"><span class="typeNameLink">OrderQuery</span></a> - Class in <a href="io/sphere/sdk/orders/queries/package-summary.html">io.sphere.sdk.orders.queries</a></dt>
+<dt><a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="interface in io.sphere.sdk.orders.queries"><span class="typeNameLink">OrderQuery</span></a> - Interface in <a href="io/sphere/sdk/orders/queries/package-summary.html">io.sphere.sdk.orders.queries</a></dt>
 <dd>
 <div class="block">Provides a QueryDsl for  orders to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
 </dd>
-<dt><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries"><span class="typeNameLink">OrderQueryModel</span></a> - Class in <a href="io/sphere/sdk/orders/queries/package-summary.html">io.sphere.sdk.orders.queries</a></dt>
+<dt><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries"><span class="typeNameLink">OrderQueryModel</span></a>&lt;<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="type parameter in OrderQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/orders/queries/package-summary.html">io.sphere.sdk.orders.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/OrderShippingInfo.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">OrderShippingInfo</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
@@ -7598,7 +7608,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/queries/InventoryEntryQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.inventories.queries.<a href="io/sphere/sdk/inventories/queries/InventoryEntryQuery.html" title="interface in io.sphere.sdk.inventories.queries">InventoryEntryQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="interface in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
 <dd>&nbsp;</dd>

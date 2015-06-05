@@ -51,6 +51,7 @@ io.sphere.sdk.models
 io.sphere.sdk.orders
 io.sphere.sdk.orders.commands
 io.sphere.sdk.orders.commands.updateactions
+io.sphere.sdk.orders.expansion
 io.sphere.sdk.orders.queries
 io.sphere.sdk.productdiscounts
 io.sphere.sdk.products
