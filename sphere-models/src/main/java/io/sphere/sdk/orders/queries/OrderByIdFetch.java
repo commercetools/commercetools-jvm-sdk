@@ -10,7 +10,7 @@ import io.sphere.sdk.queries.ByIdFetchImpl;
  */
 public class OrderByIdFetch extends ByIdFetchImpl<Order> {
     private OrderByIdFetch(final String id) {
-        super(id, OrdersEndpoint.ENDPOINT);
+        super(id, OrderEndpoint.ENDPOINT);
     }
 
     public static OrderByIdFetch of(final String id) {

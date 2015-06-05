@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderQueryTest extends IntegrationTest {
 
-    public static final OrderQueryModel MODEL = OrderQuery.model();
+    public static final OrderQueryModel<Order> MODEL = OrderQueryModel.of();
 
     @Test
     public void customerId() throws Exception {
@@ -80,13 +80,13 @@ public class OrderQueryTest extends IntegrationTest {
         });
     }
 
-    private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p) {
+    private void assertOrderIsFound(final Function<Order, OrderQuery> p) {
         assertOrderIsFound(p, true);
     }
 
-    private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p, final boolean shouldFind) {
+    private void assertOrderIsFound(final Function<Order, OrderQuery> p, final boolean shouldFind) {
         withOrder(client(), order -> {
-            final QueryDsl<Order> query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
+            final OrderQuery query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
             final String id = client().execute(query).head().orElseThrow(() -> new RuntimeException("nothing found with predicate")).getId();
             if (shouldFind) {
                 assertThat(id).isEqualTo(order.getId());

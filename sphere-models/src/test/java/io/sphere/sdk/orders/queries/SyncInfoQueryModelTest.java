@@ -8,7 +8,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SyncInfoQueryModelTest {
     @Test
     public void sortBySyncedAt() throws Exception {
-        assertThat(OrderQuery.model().syncInfo().syncedAt().sort(ASC).toSphereSort())
+        assertThat(OrderQueryModel.of().syncInfo().syncedAt().sort(ASC).toSphereSort())
         .isEqualTo("syncInfo.syncedAt asc");
     }
 }
