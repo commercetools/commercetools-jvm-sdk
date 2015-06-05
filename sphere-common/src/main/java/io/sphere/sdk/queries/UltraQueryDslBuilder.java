@@ -13,7 +13,7 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.queries.QueryDslImpl.sortByIdList;
 
-public abstract class UltraQueryDslBuilder<T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> extends Base implements Builder<C> {
+public class UltraQueryDslBuilder<T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> extends Base implements Builder<C> {
 
     protected Optional<QueryPredicate<T>> predicate = Optional.empty();
     protected List<QuerySort<T>> sort = sortByIdList();
@@ -25,17 +25,19 @@ public abstract class UltraQueryDslBuilder<T, C extends UltraQueryDsl<T, C, Q, E
     protected final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
     protected final Q queryModel;
     protected final E expansionModel;
+    protected final Function<UltraQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction;
 
 
-    public UltraQueryDslBuilder(final String endpoint, final Function<HttpResponse, PagedQueryResult<T>> resultMapper, final Q queryModel, final E expansionModel) {
+    public UltraQueryDslBuilder(final String endpoint, final Function<HttpResponse, PagedQueryResult<T>> resultMapper, final Q queryModel, final E expansionModel, final Function<UltraQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
         this.endpoint = endpoint;
         this.resultMapper = resultMapper;
         this.queryModel = queryModel;
         this.expansionModel = expansionModel;
+        this.queryDslBuilderFunction = queryDslBuilderFunction;
     }
 
     public UltraQueryDslBuilder(final UltraQueryDslImpl<T, C, Q, E> template) {
-        this(template.endpoint(), r -> template.deserialize(r), template.getQueryModel(), template.getExpansionModel());
+        this(template.endpoint(), r -> template.deserialize(r), template.getQueryModel(), template.getExpansionModel(), template.queryDslBuilderFunction);
         predicate = template.predicate();
         sort = template.sort();
         limit = template.limit();
@@ -85,5 +87,10 @@ public abstract class UltraQueryDslBuilder<T, C extends UltraQueryDsl<T, C, Q, E
     public UltraQueryDslBuilder<T, C, Q, E> additionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters) {
         this.additionalQueryParameters = additionalQueryParameters;
         return this;
+    }
+
+    @Override
+    public C build() {
+        return queryDslBuilderFunction.apply(this);
     }
 }

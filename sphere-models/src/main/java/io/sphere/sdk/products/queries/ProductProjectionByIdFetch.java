@@ -9,7 +9,7 @@ import static java.util.Arrays.asList;
 
 public class ProductProjectionByIdFetch extends ByIdFetchImpl<ProductProjection> {
     private ProductProjectionByIdFetch(final String id, final ProductProjectionType projectionType) {
-        super(ProductProjectionsEndpoint.ENDPOINT, id, asList(HttpQueryParameter.of("staged", projectionType.isStaged().toString())));
+        super(ProductProjectionEndpoint.ENDPOINT, id, asList(HttpQueryParameter.of("staged", projectionType.isStaged().toString())));
     }
 
     public static ProductProjectionByIdFetch of(final String id, final ProductProjectionType projectionType) {

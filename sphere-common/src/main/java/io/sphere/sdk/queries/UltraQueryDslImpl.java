@@ -30,17 +30,19 @@ public abstract class UltraQueryDslImpl<T, C extends UltraQueryDsl<T, C, Q, E>, 
     final List<HttpQueryParameter> additionalQueryParameters;
     final String endpoint;
     final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
+    final Function<UltraQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction;
 
     public UltraQueryDslImpl(final Optional<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, final Optional<Long> limit,
                              final Optional<Long> offset, final String endpoint,
                              final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
                              final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters,
-                             final Q queryModel, final E expansionModel) {
+                             final Q queryModel, final E expansionModel, final Function<UltraQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
         offset.ifPresent(presentOffset -> {
             if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
                 throw new IllegalArgumentException(format("The offset parameter must be in the range of [%d..%d], but was %d.", MIN_OFFSET, MAX_OFFSET, presentOffset));
             }
         });
+        this.queryDslBuilderFunction = queryDslBuilderFunction;
         this.predicate = predicate;
         this.sort = sort;
         this.limit = limit;
@@ -52,18 +54,18 @@ public abstract class UltraQueryDslImpl<T, C extends UltraQueryDsl<T, C, Q, E>, 
         this.expansionModel = expansionModel;
         this.queryModel = queryModel;
     }
-
-    public UltraQueryDslImpl(final String endpoint, final List<HttpQueryParameter> additionalQueryParameters, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel) {
+    
+    public UltraQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<UltraQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction, final List<HttpQueryParameter> additionalQueryParameters) {
         this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
-                Collections.emptyList(), additionalQueryParameters, queryModel, expansionModel);
+                Collections.emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
-    public UltraQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel) {
-        this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
-                Collections.emptyList(), Collections.emptyList(), queryModel, expansionModel);
+
+    public UltraQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<UltraQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
+        this(endpoint, pagedQueryResultTypeReference, queryModel, expansionModel, queryDslBuilderFunction, Collections.emptyList());
     }
 
     public UltraQueryDslImpl(final UltraQueryDslBuilder<T, C, Q, E> builder) {
-        this(builder.predicate, builder.sort, builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters, builder.queryModel, builder.expansionModel);
+        this(builder.predicate, builder.sort, builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters, builder.queryModel, builder.expansionModel, builder.queryDslBuilderFunction);
     }
 
     @Override
@@ -77,7 +79,9 @@ public abstract class UltraQueryDslImpl<T, C extends UltraQueryDsl<T, C, Q, E>, 
         return withPredicate(m.apply(queryModel));
     }
 
-    protected abstract UltraQueryDslBuilder<T, C, Q, E> copyBuilder();
+    protected UltraQueryDslBuilder<T, C, Q, E> copyBuilder() {
+        return new UltraQueryDslBuilder<>(this);
+    };
 
     @Override
     public C withSort(final List<QuerySort<T>> sort) {
