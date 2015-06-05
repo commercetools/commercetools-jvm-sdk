@@ -62,6 +62,7 @@ io.sphere.sdk.products.queries
 io.sphere.sdk.products.search
 io.sphere.sdk.producttypes
 io.sphere.sdk.producttypes.commands
+io.sphere.sdk.producttypes.expansion
 io.sphere.sdk.producttypes.queries
 io.sphere.sdk.projects
 io.sphere.sdk.projects.queries

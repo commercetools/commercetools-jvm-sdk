@@ -42,7 +42,7 @@
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/producttypes/commands/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../../io/sphere/sdk/producttypes/expansion/package-summary.html">Prev&nbsp;Package</a></li>
 <li><a href="../../../../../io/sphere/sdk/projects/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
@@ -78,23 +78,15 @@
 <div class="contentContainer">
 <ul class="blockList">
 <li class="blockList">
-<table class="typeSummary" border="0" cellpadding="3" cellspacing="0" summary="Class Summary table, listing classes, and an explanation">
-<caption><span>Class Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<table class="typeSummary" border="0" cellpadding="3" cellspacing="0" summary="Interface Summary table, listing interfaces, and an explanation">
+<caption><span>Interface Summary</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colFirst" scope="col">Class</th>
+<th class="colFirst" scope="col">Interface</th>
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tbody>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../../io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeDefinitionQueryModel</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../../io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeTypeQueryModel</a>&lt;T&gt;</td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a></td>
+<td class="colFirst"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="interface in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a></td>
 <td class="colLast">
 <div class="block">Provides a QueryDsl for  product types to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p>
 
@@ -181,13 +173,32 @@ import java.util.concurrent.CompletionStage;
 
   With <a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><code>ProductTypeQueryModel</code></a> you can query for product types containing specific attributes:
 
-  <div id="example-QueryProductTypeExamples-queryByAttributeName--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQuery.model().attributes().name().is("size");
+  <div id="example-QueryProductTypeExamples-queryByAttributeName--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;ProductType&gt; hasSizeAttribute = ProductTypeQueryModel.of().attributes().name().is("size");
 CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execute(ProductTypeQuery.of().withPredicate(hasSizeAttribute));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryProductTypeExamples.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
+</tbody>
+</table>
+</li>
+<li class="blockList">
+<table class="typeSummary" border="0" cellpadding="3" cellspacing="0" summary="Class Summary table, listing classes, and an explanation">
+<caption><span>Class Summary</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colFirst" scope="col">Class</th>
+<th class="colLast" scope="col">Description</th>
+</tr>
+<tbody>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeDefinitionQueryModel</a>&lt;T&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a></td>
+<td class="colFirst"><a href="../../../../../io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeTypeQueryModel</a>&lt;T&gt;</td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">ProductTypeQueryModel</a>&lt;T&gt;</td>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -220,7 +231,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/producttypes/commands/package-summary.html">Prev&nbsp;Package</a></li>
+<li><a href="../../../../../io/sphere/sdk/producttypes/expansion/package-summary.html">Prev&nbsp;Package</a></li>
 <li><a href="../../../../../io/sphere/sdk/projects/package-summary.html">Next&nbsp;Package</a></li>
 </ul>
 <ul class="navList">
