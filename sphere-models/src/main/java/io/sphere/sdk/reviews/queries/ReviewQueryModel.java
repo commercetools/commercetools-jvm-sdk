@@ -8,20 +8,20 @@ import io.sphere.sdk.reviews.Review;
 
 import java.util.Optional;
 
-public class ReviewQueryModel extends DefaultModelQueryModelImpl<Review> {
-    private ReviewQueryModel(final Optional<? extends QueryModel<Review>> parent, final Optional<String> pathSegment) {
+public class ReviewQueryModel<T> extends DefaultModelQueryModelImpl<T> {
+    private ReviewQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    static ReviewQueryModel get() {
-        return new ReviewQueryModel(Optional.<QueryModel<Review>>empty(), Optional.<String>empty());
+    public static ReviewQueryModel<Review> of() {
+        return new ReviewQueryModel<>(Optional.<QueryModel<Review>>empty(), Optional.<String>empty());
     }
 
-    public StringQueryModel<Review> productId() {
+    public StringQueryModel<T> productId() {
         return new StringQuerySortingModel<>(Optional.of(this), "productId");
     }
 
-    public StringQueryModel<Review> customerId() {
+    public StringQueryModel<T> customerId() {
         return new StringQuerySortingModel<>(Optional.of(this), "customerId");
     }
 
