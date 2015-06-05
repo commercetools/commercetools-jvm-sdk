@@ -6,28 +6,28 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
 import java.util.Optional;
 
-public class ShippingMethodQueryModel extends DefaultModelQueryModelImpl<ShippingMethod> {
-    static ShippingMethodQueryModel get() {
-        return new ShippingMethodQueryModel(Optional.<QueryModel<ShippingMethod>>empty(), Optional.<String>empty());
+public class ShippingMethodQueryModel<T> extends DefaultModelQueryModelImpl<T> {
+    public static ShippingMethodQueryModel<ShippingMethod> of() {
+        return new ShippingMethodQueryModel<>(Optional.<QueryModel<ShippingMethod>>empty(), Optional.<String>empty());
     }
 
-    private ShippingMethodQueryModel(final Optional<? extends QueryModel<ShippingMethod>> parent, final Optional<String> pathSegment) {
+    private ShippingMethodQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public StringQuerySortingModel<ShippingMethod> name() {
+    public StringQuerySortingModel<T> name() {
         return new StringQuerySortingModel<>(Optional.of(this), "name");
     }
 
-    public ReferenceQueryModel<ShippingMethod, TaxCategory> taxCategory() {
+    public ReferenceQueryModel<T, TaxCategory> taxCategory() {
         return new ReferenceQueryModel<>(Optional.of(this), "taxCategory");
     }
 
-    public ZoneRateListQueryModel <ShippingMethod> zoneRates() {
+    public ZoneRateListQueryModel <T> zoneRates() {
         return new ZoneRateListQueryModel<>(Optional.of(this), "zoneRates");
     }
 
-    public BooleanQueryModel<ShippingMethod> isDefault() {
+    public BooleanQueryModel<T> isDefault() {
         return new BooleanQueryModel<>(Optional.of(this), "isDefault");
     }
 }
