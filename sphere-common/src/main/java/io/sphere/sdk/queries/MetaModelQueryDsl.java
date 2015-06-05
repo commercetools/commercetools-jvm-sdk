@@ -5,8 +5,6 @@ import io.sphere.sdk.http.HttpQueryParameter;
 import java.util.List;
 import java.util.function.Function;
 
-import static java.util.Arrays.asList;
-
 /**
  *
  * @param <T> type of the query result
@@ -14,7 +12,7 @@ import static java.util.Arrays.asList;
  * @param <Q> type of the query model
  * @param <E> type of the expansion model
  */
-public interface UltraQueryDsl<T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> extends EntityQuery<T>, QueryDsl<T, C> {
+public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends EntityQuery<T>, QueryDsl<T, C> {
 
     C withPredicate(final QueryPredicate<T> predicate);
 

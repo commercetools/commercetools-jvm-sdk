@@ -4,12 +4,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.UltraQueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 
 /**
  {@doc.gen summary channels}
  */
-public interface ChannelQuery extends UltraQueryDsl<Channel, ChannelQuery, ChannelQueryModel<Channel>, ChannelExpansionModel<Channel>> {
+public interface ChannelQuery extends MetaModelQueryDsl<Channel, ChannelQuery, ChannelQueryModel<Channel>, ChannelExpansionModel<Channel>> {
     static TypeReference<PagedQueryResult<Channel>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Channel>>(){
             @Override

@@ -16,7 +16,7 @@ import java.util.function.Function;
 /**
  {@doc.gen summary product projections}
  */
-public interface ProductProjectionQuery extends UltraQueryDsl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel<ProductProjection>, ProductProjectionExpansionModel<ProductProjection>> {
+public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel<ProductProjection>, ProductProjectionExpansionModel<ProductProjection>> {
 
     static TypeReference<PagedQueryResult<ProductProjection>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<ProductProjection>>(){

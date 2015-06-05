@@ -3,9 +3,9 @@ package io.sphere.sdk.orders.queries;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.queries.UltraQueryDslBuilder;
-import io.sphere.sdk.queries.UltraQueryDslImpl;
+import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
-final class OrderQueryImpl extends UltraQueryDslImpl<Order, OrderQuery, OrderQueryModel<Order>, OrderExpansionModel<Order>> implements OrderQuery {
+final class OrderQueryImpl extends MetaModelQueryDslImpl<Order, OrderQuery, OrderQueryModel<Order>, OrderExpansionModel<Order>> implements OrderQuery {
     OrderQueryImpl(){
         super(OrderEndpoint.ENDPOINT.endpoint(), OrderQuery.resultTypeReference(), OrderQueryModel.of(), OrderExpansionModel.of(), OrderQueryImpl::new);
     }

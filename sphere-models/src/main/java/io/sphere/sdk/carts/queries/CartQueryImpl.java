@@ -3,14 +3,14 @@ package io.sphere.sdk.carts.queries;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
 import io.sphere.sdk.queries.UltraQueryDslBuilder;
-import io.sphere.sdk.queries.UltraQueryDslImpl;
+import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
 /**
 
  {@doc.gen summary carts}
 
  */
-final class CartQueryImpl extends UltraQueryDslImpl<Cart, CartQuery, CartQueryModel<Cart>, CartExpansionModel<Cart>> implements CartQuery {
+final class CartQueryImpl extends MetaModelQueryDslImpl<Cart, CartQuery, CartQueryModel<Cart>, CartExpansionModel<Cart>> implements CartQuery {
     CartQueryImpl(){
         super(CartEndpoint.ENDPOINT.endpoint(), CartQuery.resultTypeReference(), CartQueryModel.of(), CartExpansionModel.of(), CartQueryImpl::new);
     }

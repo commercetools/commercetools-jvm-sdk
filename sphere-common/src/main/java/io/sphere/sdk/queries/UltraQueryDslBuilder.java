@@ -13,7 +13,7 @@ import java.util.function.Function;
 
 import static java.util.Arrays.asList;
 
-public class UltraQueryDslBuilder<T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> extends Base implements Builder<C> {
+public class UltraQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends Base implements Builder<C> {
 
     protected Optional<QueryPredicate<T>> predicate = Optional.empty();
     protected List<QuerySort<T>> sort = sortByIdList();
@@ -36,7 +36,7 @@ public class UltraQueryDslBuilder<T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> 
         this.queryDslBuilderFunction = queryDslBuilderFunction;
     }
 
-    public UltraQueryDslBuilder(final UltraQueryDslImpl<T, C, Q, E> template) {
+    public UltraQueryDslBuilder(final MetaModelQueryDslImpl<T, C, Q, E> template) {
         this(template.endpoint(), r -> template.deserialize(r), template.getQueryModel(), template.getExpansionModel(), template.queryDslBuilderFunction);
         predicate = template.predicate();
         sort = template.sort();

@@ -8,7 +8,7 @@ import io.sphere.sdk.queries.*;
 /**
  {@doc.gen summary channels}
  */
-final class ChannelQueryImpl extends UltraQueryDslImpl<Channel, ChannelQuery, ChannelQueryModel<Channel>, ChannelExpansionModel<Channel>> implements ChannelQuery {
+final class ChannelQueryImpl extends MetaModelQueryDslImpl<Channel, ChannelQuery, ChannelQueryModel<Channel>, ChannelExpansionModel<Channel>> implements ChannelQuery {
     ChannelQueryImpl(){
         super(ChannelEndpoint.ENDPOINT.endpoint(), ChannelQuery.resultTypeReference(), ChannelQueryModel.of(), ChannelExpansionModel.of(), ChannelQueryImpl::new);
     }

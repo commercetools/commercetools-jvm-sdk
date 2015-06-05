@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.UltraQueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 
 import java.util.Locale;
 
@@ -12,7 +12,7 @@ import java.util.Locale;
  * {@doc.gen summary categories}
  *
  */
-public interface CategoryQuery extends UltraQueryDsl<Category, CategoryQuery, CategoryQueryModel<Category>, CategoryExpansionModel<Category>> {
+public interface CategoryQuery extends MetaModelQueryDsl<Category, CategoryQuery, CategoryQueryModel<Category>, CategoryExpansionModel<Category>> {
 
     static TypeReference<PagedQueryResult<Category>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Category>>() {

@@ -4,12 +4,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.UltraQueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 
 /**
  {@doc.gen summary customer groups}
  */
-public interface CustomerGroupQuery extends UltraQueryDsl<CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel<CustomerGroup>, CustomerGroupExpansionModel<CustomerGroup>> {
+public interface CustomerGroupQuery extends MetaModelQueryDsl<CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel<CustomerGroup>, CustomerGroupExpansionModel<CustomerGroup>> {
     static TypeReference<PagedQueryResult<CustomerGroup>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<CustomerGroup>>(){
             @Override

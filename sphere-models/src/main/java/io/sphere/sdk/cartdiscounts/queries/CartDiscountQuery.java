@@ -4,14 +4,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.expansion.CartDiscountExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.UltraQueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 
 /**
 
  {@doc.gen summary cart discounts}
 
  */
-public interface CartDiscountQuery extends UltraQueryDsl<CartDiscount, CartDiscountQuery, CartDiscountQueryModel<CartDiscount>, CartDiscountExpansionModel<CartDiscount>> {
+public interface CartDiscountQuery extends MetaModelQueryDsl<CartDiscount, CartDiscountQuery, CartDiscountQueryModel<CartDiscount>, CartDiscountExpansionModel<CartDiscount>> {
 
     static TypeReference<PagedQueryResult<CartDiscount>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<CartDiscount>>(){

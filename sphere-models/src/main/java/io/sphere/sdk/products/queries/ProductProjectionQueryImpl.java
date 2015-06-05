@@ -5,7 +5,7 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.queries.UltraQueryDslBuilder;
-import io.sphere.sdk.queries.UltraQueryDslImpl;
+import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
 import java.util.List;
 
@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
 /**
  {@doc.gen summary product projections}
  */
-final class ProductProjectionQueryImpl extends UltraQueryDslImpl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel<ProductProjection>, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionQuery {
+final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel<ProductProjection>, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionQuery {
     ProductProjectionQueryImpl(final ProductProjectionType productProjectionType){
         super(ProductProjectionEndpoint.ENDPOINT.endpoint(), ProductProjectionQuery.resultTypeReference(), ProductProjectionQueryModel.of(), ProductProjectionExpansionModel.of(), ProductProjectionQueryImpl::new, additionalParametersOf(productProjectionType));
     }

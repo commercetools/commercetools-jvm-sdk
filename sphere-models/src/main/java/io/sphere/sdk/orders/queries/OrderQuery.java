@@ -4,12 +4,12 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.UltraQueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 
 /**
  {@doc.gen summary orders}
  */
-public interface OrderQuery extends UltraQueryDsl<Order, OrderQuery, OrderQueryModel<Order>, OrderExpansionModel<Order>> {
+public interface OrderQuery extends MetaModelQueryDsl<Order, OrderQuery, OrderQueryModel<Order>, OrderExpansionModel<Order>> {
     static OrderQuery of() {
         return new OrderQueryImpl();
     }

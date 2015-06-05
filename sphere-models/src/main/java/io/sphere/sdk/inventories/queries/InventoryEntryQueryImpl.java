@@ -2,10 +2,10 @@ package io.sphere.sdk.inventories.queries;
 
 import io.sphere.sdk.inventories.InventoryEntry;
 import io.sphere.sdk.queries.UltraQueryDslBuilder;
-import io.sphere.sdk.queries.UltraQueryDslImpl;
+import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
 
-final class InventoryEntryQueryImpl extends UltraQueryDslImpl<InventoryEntry, InventoryEntryQuery, InventoryEntryQueryModel<InventoryEntry>, InventoryEntryExpansionModel<InventoryEntry>> implements InventoryEntryQuery {
+final class InventoryEntryQueryImpl extends MetaModelQueryDslImpl<InventoryEntry, InventoryEntryQuery, InventoryEntryQueryModel<InventoryEntry>, InventoryEntryExpansionModel<InventoryEntry>> implements InventoryEntryQuery {
     InventoryEntryQueryImpl(){
         super(InventoryEntryEndpoint.ENDPOINT.endpoint(), InventoryEntryQuery.resultTypeReference(), InventoryEntryQueryModel.of(), InventoryEntryExpansionModel.of(), InventoryEntryQueryImpl::new);
     }

@@ -2,14 +2,14 @@ package io.sphere.sdk.taxcategories.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.UltraQueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.expansion.TaxCategoryExpansionModel;
 
 /**
  {@doc.gen summary tax categories}
  */
-public interface TaxCategoryQuery extends UltraQueryDsl<TaxCategory, TaxCategoryQuery, TaxCategoryQueryModel<TaxCategory>, TaxCategoryExpansionModel<TaxCategory>> {
+public interface TaxCategoryQuery extends MetaModelQueryDsl<TaxCategory, TaxCategoryQuery, TaxCategoryQueryModel<TaxCategory>, TaxCategoryExpansionModel<TaxCategory>> {
     static TypeReference<PagedQueryResult<TaxCategory>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<TaxCategory>>(){
             @Override
