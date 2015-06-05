@@ -254,8 +254,8 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
  <h4 id=direct-json-query>Query custom objects</h4>
 
  <div id="io-sphere-sdk-customobjects-queries-CustomObjectQueryTest-queryPureJson--%s" class=code-example><pre><code class='java'>withCustomObject(client(), existingCustomObject -&gt; {
-    final QuerySort&lt;CustomObject&lt;JsonNode&gt;&gt; sort = CustomObjectQuery.&lt;JsonNode&gt;model().createdAt().sort(DESC);
-    final QueryDsl&lt;CustomObject&lt;JsonNode&gt;&gt; clientRequest = CustomObjectQuery.of().withSort(sort);
+    final QuerySort&lt;CustomObject&lt;JsonNode&gt;&gt; sort = CustomObjectQueryModel.&lt;JsonNode&gt;of().createdAt().sort(DESC);
+    final CustomObjectQuery&lt;JsonNode&gt; clientRequest = CustomObjectQuery.of().withSort(sort);
     final PagedQueryResult&lt;CustomObject&lt;JsonNode&gt;&gt; result = execute(clientRequest);
     assertThat(result.getResults().stream().filter(item -&gt; item.hasSameIdAs(existingCustomObject)).count())
             .isGreaterThanOrEqualTo(1);
@@ -775,10 +775,10 @@ public interface Uvw {
 
  <h3 id="traps">Traps</h3>
 
- <p>Unlike other query models, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#model--"><code>CustomObjectQuery.model()</code></a> takes a type parameter of the result type of the custom object.
+ <p>Unlike other query models, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html#of--"><code>CustomObjectQueryModel.of()</code></a> takes a type parameter of the result type of the custom object.
  Notice that it is necessary to explicitly declare the type when requesting the query model, as shown in the following examples:</p>
- <div id="io-sphere-sdk-customobjects-queries-CustomObjectQueryTest-demoModelTypeParameter--%s" class=code-example><pre><code class='java'>final QuerySort&lt;CustomObject&lt;JsonNode&gt;&gt; sort = CustomObjectQuery.&lt;JsonNode&gt;model().createdAt().sort(DESC);
-final QuerySort&lt;CustomObject&lt;Foo&gt;&gt; fooSort = CustomObjectQuery.&lt;Foo&gt;model().createdAt().sort(DESC);
+ <div id="io-sphere-sdk-customobjects-queries-CustomObjectQueryTest-demoModelTypeParameter--%s" class=code-example><pre><code class='java'>final QuerySort&lt;CustomObject&lt;JsonNode&gt;&gt; sort = CustomObjectQueryModel.&lt;JsonNode&gt;of().createdAt().sort(DESC);
+final QuerySort&lt;CustomObject&lt;Foo&gt;&gt; fooSort = CustomObjectQueryModel.&lt;Foo&gt;of().createdAt().sort(DESC);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectQueryTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
