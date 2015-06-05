@@ -86,6 +86,7 @@ io.sphere.sdk.states.queries
 io.sphere.sdk.states.queries.expansion
 io.sphere.sdk.taxcategories
 io.sphere.sdk.taxcategories.commands
+io.sphere.sdk.taxcategories.expansion
 io.sphere.sdk.taxcategories.queries
 io.sphere.sdk.utils
 io.sphere.sdk.utils.functional
