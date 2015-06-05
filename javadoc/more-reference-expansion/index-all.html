@@ -591,7 +591,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#byContainer-java.lang.String-">byContainer(String)</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byCountry-com.neovisionaries.i18n.CountryCode-">byCountry(CountryCode)</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byCountry-com.neovisionaries.i18n.CountryCode-">byCountry(CountryCode)</a></span> - Method in interface io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>
 <div class="block">Predicate which matches the country of a location, does not take the state into the consideration.</div>
 </dd>
@@ -627,7 +627,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#byKey-java.lang.String-">byKey(String)</a></span> - Method in interface io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries">StateQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byLocation-io.sphere.sdk.zones.Location-">byLocation(Location)</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byLocation-io.sphere.sdk.zones.Location-">byLocation(Location)</a></span> - Method in interface io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>
 <div class="block">Predicate which matches the country and state of a location.</div>
 </dd>
@@ -641,7 +641,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#byName-java.lang.String-">byName(String)</a></span> - Method in class io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byName-java.lang.String-">byName(String)</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byName-java.lang.String-">byName(String)</a></span> - Method in interface io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#byProductId-java.lang.String-">byProductId(String)</a></span> - Method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -1325,7 +1325,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#country-com.neovisionaries.i18n.CountryCode-">country(CountryCode)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#country--">country()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html#country--">country()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#country-com.neovisionaries.i18n.CountryCode-">country(CountryCode)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -4591,6 +4591,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Provides the possible operations which can be performed on update commands for  zones.</div>
 </dd>
+<dt><a href="io/sphere/sdk/zones/expansion/package-summary.html">io.sphere.sdk.zones.expansion</a> - package io.sphere.sdk.zones.expansion</dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a> - package io.sphere.sdk.zones.queries</dt>
 <dd>
 <div class="block">Provides types to retrieve the state of  zones.</div>
@@ -5011,11 +5013,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html#locations--">locations()</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html" title="class in io.sphere.sdk.zones.queries">ZoneQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">LocationsSetQueryModel</span></a>&lt;<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="type parameter in LocationsSetQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a></dt>
+<dt><a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">LocationsCollectionQueryModel</span></a>&lt;<a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html" title="type parameter in LocationsCollectionQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#LocationsSetQueryModel-java.util.Optional-java.util.Optional-">LocationsSetQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html#LocationsCollectionQueryModel-java.util.Optional-java.util.Optional-">LocationsCollectionQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#LocationsSetQueryModel-java.util.Optional-java.lang.String-">LocationsSetQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, String)</a></span> - Constructor for class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html#LocationsCollectionQueryModel-java.util.Optional-java.lang.String-">LocationsCollectionQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, String)</a></span> - Constructor for class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/LongQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">LongQuerySortingModel</span></a>&lt;<a href="io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -5130,8 +5132,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <div class="block">Gets the EXPERIMENTAL model to easily build product projection search requests.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#monetaryAmountTypeReference--">monetaryAmountTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
@@ -6437,6 +6437,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/ZoneUpdateCommand.html#of-io.sphere.sdk.models.Versioned-java.util.List-">of(Versioned&lt;Zone&gt;, List&lt;? extends UpdateAction&lt;Zone&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.zones.commands.<a href="io/sphere/sdk/zones/commands/ZoneUpdateCommand.html" title="class in io.sphere.sdk.zones.commands">ZoneUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.zones.expansion.<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="class in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Location.html#of-com.neovisionaries.i18n.CountryCode-java.util.Optional-">of(CountryCode, Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Location.html" title="class in io.sphere.sdk.zones">Location</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Location.html#of-com.neovisionaries.i18n.CountryCode-java.lang.String-">of(CountryCode, String)</a></span> - Static method in class io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Location.html" title="class in io.sphere.sdk.zones">Location</a></dt>
@@ -6445,7 +6447,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="class in io.sphere.sdk.zones.queries">ZoneByIdFetch</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html" title="class in io.sphere.sdk.zones.queries">ZoneQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/ZoneDraft.html#of-java.lang.String-java.util.Set-">of(String, Set&lt;Location&gt;)</a></span> - Static method in class io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/ZoneDraft.html" title="class in io.sphere.sdk.zones">ZoneDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -6842,7 +6846,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpStatusCode.html#PARTIAL_CONTENT_206">PARTIAL_CONTENT_206</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpStatusCode.html" title="class in io.sphere.sdk.http">HttpStatusCode</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/customers/queries/PartialLocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">PartialLocationsSetQueryModel</span></a> - Class in <a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a></dt>
+<dt><a href="io/sphere/sdk/customers/queries/PartialLocationsCollectionQueryModel.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">PartialLocationsCollectionQueryModel</span></a> - Class in <a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/queries/PartialProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">PartialProductCatalogDataQueryModel</span></a> - Class in <a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -7650,7 +7654,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/ReturnInfo.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">ReturnInfo</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
@@ -8463,7 +8467,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItemBuilder.html#state-java.util.Set-">state(Set&lt;ItemState&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItemBuilder.html" title="class in io.sphere.sdk.carts">LineItemBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#state--">state()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html#state--">state()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#state-java.util.Optional-">state(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -9371,9 +9375,9 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/functional/PatternMatcher.html#when-java.lang.Class-java.util.function.Function-">when(Class&lt;C&gt;, Function&lt;C, T&gt;)</a></span> - Method in class io.sphere.sdk.utils.functional.<a href="io/sphere/sdk/utils/functional/PatternMatcher.html" title="class in io.sphere.sdk.utils.functional">PatternMatcher</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#where-io.sphere.sdk.queries.QueryPredicate-">where(QueryPredicate&lt;PartialLocationsSetQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html#where-io.sphere.sdk.queries.QueryPredicate-">where(QueryPredicate&lt;PartialLocationsCollectionQueryModel&gt;)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialLocationsSetQueryModel, QueryPredicate&lt;PartialLocationsSetQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsSetQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsSetQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialLocationsCollectionQueryModel, QueryPredicate&lt;PartialLocationsCollectionQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html#where-java.util.function.Function-">where(Function&lt;PartialProductDataQueryModel, QueryPredicate&lt;PartialProductDataQueryModel&gt;&gt;)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/PartialProductDataQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -9837,9 +9841,15 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/ZoneDraft.html" title="class in io.sphere.sdk.zones"><span class="typeNameLink">ZoneDraft</span></a> - Class in <a href="io/sphere/sdk/zones/package-summary.html">io.sphere.sdk.zones</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQuery</span></a> - Class in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>
+<dt><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="class in io.sphere.sdk.zones.expansion"><span class="typeNameLink">ZoneExpansionModel</span></a>&lt;<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="type parameter in ZoneExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/zones/expansion/package-summary.html">io.sphere.sdk.zones.expansion</a></dt>
+<dd>
+<div class="block">DSL class to create expansion path expressions.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html#ZoneExpansionModel-java.util.Optional-java.lang.String-">ZoneExpansionModel(Optional&lt;String&gt;, String)</a></span> - Constructor for class io.sphere.sdk.zones.expansion.<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="class in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQueryModel</span></a> - Class in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>
+<dt><a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQuery</span></a> - Interface in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html" title="class in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQueryModel</span></a>&lt;<a href="io/sphere/sdk/zones/queries/ZoneQueryModel.html" title="type parameter in ZoneQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/zones/queries/package-summary.html">io.sphere.sdk.zones.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods"><span class="typeNameLink">ZoneRate</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/package-summary.html">io.sphere.sdk.shippingmethods</a></dt>
 <dd>&nbsp;</dd>

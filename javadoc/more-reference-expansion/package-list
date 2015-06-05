@@ -92,4 +92,5 @@ io.sphere.sdk.utils.functional
 io.sphere.sdk.zones
 io.sphere.sdk.zones.commands
 io.sphere.sdk.zones.commands.updateactions
+io.sphere.sdk.zones.expansion
 io.sphere.sdk.zones.queries
