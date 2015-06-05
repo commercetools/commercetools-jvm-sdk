@@ -8,17 +8,17 @@ import io.sphere.sdk.states.State;
 
 import java.util.Optional;
 
-public class StateQueryModel extends DefaultModelQueryModelImpl<State> {
+public class StateQueryModel<T> extends DefaultModelQueryModelImpl<T> {
 
-    private StateQueryModel(final Optional<? extends QueryModel<State>> parent, final Optional<String> pathSegment) {
+    private StateQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    static StateQueryModel get() {
-        return new StateQueryModel(Optional.<QueryModel<State>>empty(), Optional.<String>empty());
+    public static StateQueryModel<State> of() {
+        return new StateQueryModel<>(Optional.<QueryModel<State>>empty(), Optional.<String>empty());
     }
 
-    public StringQuerySortingModel<State> key() {
+    public StringQuerySortingModel<T> key() {
         return new StringQuerySortingModel<>(Optional.of(this), "key");
     }
 
