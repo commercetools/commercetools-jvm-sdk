@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.ByIdFetchImpl;
 
 public class InventoryEntryByIdFetch extends ByIdFetchImpl<InventoryEntry> {
     private InventoryEntryByIdFetch(final String id) {
-        super(id, Endpoint.ENDPOINT);
+        super(id, InventoryEntryEndpoint.ENDPOINT);
     }
 
     public static InventoryEntryByIdFetch of(final Identifiable<InventoryEntry> inventoryEntry) {

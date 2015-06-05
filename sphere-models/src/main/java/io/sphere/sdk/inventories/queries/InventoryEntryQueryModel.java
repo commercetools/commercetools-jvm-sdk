@@ -6,28 +6,28 @@ import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
 
-public class InventoryEntryQueryModel extends DefaultModelQueryModelImpl<InventoryEntry> {
-    public InventoryEntryQueryModel(final Optional<? extends QueryModel<InventoryEntry>> parent, final Optional<String> pathSegment) {
+public class InventoryEntryQueryModel<T> extends DefaultModelQueryModelImpl<T> {
+    public InventoryEntryQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    static InventoryEntryQueryModel get() {
-        return new InventoryEntryQueryModel(Optional.empty(), Optional.empty());
+    public static InventoryEntryQueryModel<InventoryEntry> of() {
+        return new InventoryEntryQueryModel<>(Optional.empty(), Optional.empty());
     }
 
-    public StringQuerySortingModel<InventoryEntry> sku() {
+    public StringQuerySortingModel<T> sku() {
         return new StringQuerySortingModel<>(Optional.of(this), "sku");
     }
 
-    public ReferenceQueryModel<InventoryEntry, Channel> supplyChannel() {
+    public ReferenceQueryModel<T, Channel> supplyChannel() {
         return new ReferenceQueryModel<>(Optional.of(this), "supplyChannel");
     }
 
-    public LongQuerySortingModel<InventoryEntry> quantityOnStock() {
+    public LongQuerySortingModel<T> quantityOnStock() {
         return new LongQuerySortingModel<>(Optional.of(this), "quantityOnStock");
     }
 
-    public LongQuerySortingModel<InventoryEntry> availableQuantity() {
+    public LongQuerySortingModel<T> availableQuantity() {
         return new LongQuerySortingModel<>(Optional.of(this), "availableQuantity");
     }
 
