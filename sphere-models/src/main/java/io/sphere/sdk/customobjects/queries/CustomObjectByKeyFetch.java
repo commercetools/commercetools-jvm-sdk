@@ -20,7 +20,7 @@ public class CustomObjectByKeyFetch<T> extends FetchImpl<CustomObject<T>> {
     };
 
     private CustomObjectByKeyFetch(final TypeReference<CustomObject<T>> typeReference, final String container, final String key) {
-        super(JsonEndpoint.of(typeReference, CustomObjectsEndpoint.PATH), "" + container + "/" + key);
+        super(JsonEndpoint.of(typeReference, CustomObjectEndpoint.PATH), "" + container + "/" + key);
     }
 
     public static <T> CustomObjectByKeyFetch<T> of(final String container, final String key, final TypeReference<CustomObject<T>> typeReference) {

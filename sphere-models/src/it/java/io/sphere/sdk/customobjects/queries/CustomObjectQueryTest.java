@@ -50,8 +50,8 @@ public class CustomObjectQueryTest extends IntegrationTest {
     @Test
     public void queryPureJson() throws Exception {
         withCustomObject(client(), existingCustomObject -> {
-            final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQuery.<JsonNode>model().createdAt().sort(DESC);
-            final QueryDsl<CustomObject<JsonNode>> clientRequest = CustomObjectQuery.of().withSort(sort);
+            final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQueryModel.<JsonNode>of().createdAt().sort(DESC);
+            final CustomObjectQuery<JsonNode> clientRequest = CustomObjectQuery.of().withSort(sort);
             final PagedQueryResult<CustomObject<JsonNode>> result = execute(clientRequest);
             assertThat(result.getResults().stream().filter(item -> item.hasSameIdAs(existingCustomObject)).count())
                     .isGreaterThanOrEqualTo(1);
@@ -64,7 +64,7 @@ public class CustomObjectQueryTest extends IntegrationTest {
     }
 
     public void demoModelTypeParameter() {
-        final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQuery.<JsonNode>model().createdAt().sort(DESC);
-        final QuerySort<CustomObject<Foo>> fooSort = CustomObjectQuery.<Foo>model().createdAt().sort(DESC);
+        final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQueryModel.<JsonNode>of().createdAt().sort(DESC);
+        final QuerySort<CustomObject<Foo>> fooSort = CustomObjectQueryModel.<Foo>of().createdAt().sort(DESC);
     }
 }

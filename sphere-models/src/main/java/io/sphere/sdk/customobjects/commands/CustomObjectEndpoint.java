@@ -1,5 +1,5 @@
 package io.sphere.sdk.customobjects.commands;
 
-final class CustomObjectsEndpoint {
+final class CustomObjectEndpoint {
     static final String PATH = "/custom-objects";
 }

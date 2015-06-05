@@ -1,6 +1,7 @@
 package io.sphere.sdk.meta;
 
 import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
+import io.sphere.sdk.customobjects.queries.CustomObjectQueryModel;
 
 /**
 <p>Custom objects are a way to store arbitrary JSON-formatted data on the SPHERE.IO platform.
@@ -153,7 +154,7 @@ In this case you use also {@link io.sphere.sdk.customobjects.commands.CustomObje
 
  <h3 id="traps">Traps</h3>
 
- <p>Unlike other query models, {@link CustomObjectQuery#model()} takes a type parameter of the result type of the custom object.
+ <p>Unlike other query models, {@link CustomObjectQueryModel#of()} takes a type parameter of the result type of the custom object.
  Notice that it is necessary to explicitly declare the type when requesting the query model, as shown in the following examples:</p>
  {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryTest#demoModelTypeParameter()}
 
