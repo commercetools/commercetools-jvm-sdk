@@ -643,7 +643,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byName-java.lang.String-">byName(String)</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#byProductId-java.lang.String-">byProductId(String)</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="class in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#byProductId-java.lang.String-">byProductId(String)</a></span> - Method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#byProductType-io.sphere.sdk.models.Referenceable-">byProductType(Referenceable&lt;ProductType&gt;)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -4511,6 +4511,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a> - package io.sphere.sdk.reviews.commands.updateactions</dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/reviews/expansion/package-summary.html">io.sphere.sdk.reviews.expansion</a> - package io.sphere.sdk.reviews.expansion</dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a> - package io.sphere.sdk.reviews.queries</dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a> - package io.sphere.sdk.search</dt>
@@ -5123,8 +5125,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Gets the EXPERIMENTAL model to easily build product projection search requests.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="class in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="class in io.sphere.sdk.shippingmethods.queries">ShippingMethodQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="class in io.sphere.sdk.states.queries">StateQuery</a></dt>
@@ -6231,7 +6231,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html#of-java.util.Optional-">of(Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetTitle</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="class in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.reviews.expansion.<a href="io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#of-io.sphere.sdk.products.ProductIdentifiable-io.sphere.sdk.models.Identifiable-">of(ProductIdentifiable, Identifiable&lt;Customer&gt;)</a></span> - Static method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -7630,7 +7634,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="interface in io.sphere.sdk.producttypes.queries">ProductTypeQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="class in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries">ReviewQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="class in io.sphere.sdk.shippingmethods.queries">ShippingMethodQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -7672,11 +7676,15 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><a href="io/sphere/sdk/reviews/ReviewDraftBuilder.html" title="class in io.sphere.sdk.reviews"><span class="typeNameLink">ReviewDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/reviews/package-summary.html">io.sphere.sdk.reviews</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="class in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewQuery</span></a> - Class in <a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a></dt>
+<dt><a href="io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion"><span class="typeNameLink">ReviewExpansionModel</span></a>&lt;<a href="io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="type parameter in ReviewExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/reviews/expansion/package-summary.html">io.sphere.sdk.reviews.expansion</a></dt>
+<dd>
+<div class="block">DSL class to create expansion path expressions.</div>
+</dd>
+<dt><a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewQuery</span></a> - Interface in <a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a></dt>
 <dd>
 <div class="block">Provides a QueryDsl for  reviews to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
 </dd>
-<dt><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewQueryModel</span></a> - Class in <a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a></dt>
+<dt><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewQueryModel</span></a>&lt;<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="type parameter in ReviewQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/reviews/queries/package-summary.html">io.sphere.sdk.reviews.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="class in io.sphere.sdk.reviews.commands"><span class="typeNameLink">ReviewUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/package-summary.html">io.sphere.sdk.reviews.commands</a></dt>
 <dd>
