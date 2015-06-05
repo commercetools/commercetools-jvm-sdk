@@ -7,7 +7,6 @@ import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
 import io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo;
 import io.sphere.sdk.queries.QueryPredicate;
-import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;

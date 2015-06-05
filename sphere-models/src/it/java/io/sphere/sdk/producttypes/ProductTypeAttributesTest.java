@@ -4,6 +4,7 @@ import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
+import io.sphere.sdk.producttypes.queries.ProductTypeQueryModel;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
@@ -246,7 +247,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     private QueryPredicate<ProductType> hasAttributeType(final String attributeTypeName) {
-        return ProductTypeQuery.model().attributes().type().name().is(attributeTypeName);
+        return ProductTypeQueryModel.of().attributes().type().name().is(attributeTypeName);
     }
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {
@@ -371,6 +372,6 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     protected void cleanUpByName(final List<String> names) {
-        execute(ProductTypeQuery.of().withPredicate(ProductTypeQuery.model().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
+        execute(ProductTypeQuery.of().withPredicate(ProductTypeQueryModel.of().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
     }
 }
