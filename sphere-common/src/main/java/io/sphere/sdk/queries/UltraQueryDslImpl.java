@@ -20,16 +20,16 @@ import static java.util.Arrays.asList;
 
 public abstract class UltraQueryDslImpl<T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> extends SphereRequestBase implements UltraQueryDsl<T, C, Q, E> {
 
-    private final Q queryModel;
-    private final E expansionModel;
-    private final Optional<QueryPredicate<T>> predicate;
-    private final List<QuerySort<T>> sort;
-    private final Optional<Long> limit;
-    private final Optional<Long> offset;
-    private final List<ExpansionPath<T>> expansionPaths;
-    private final List<HttpQueryParameter> additionalQueryParameters;
-    private final String endpoint;
-    private final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
+    final Q queryModel;
+    final E expansionModel;
+    final Optional<QueryPredicate<T>> predicate;
+    final List<QuerySort<T>> sort;
+    final Optional<Long> limit;
+    final Optional<Long> offset;
+    final List<ExpansionPath<T>> expansionPaths;
+    final List<HttpQueryParameter> additionalQueryParameters;
+    final String endpoint;
+    final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
 
     public UltraQueryDslImpl(final Optional<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, final Optional<Long> limit,
                              final Optional<Long> offset, final String endpoint,
@@ -60,6 +60,10 @@ public abstract class UltraQueryDslImpl<T, C extends UltraQueryDsl<T, C, Q, E>, 
     public UltraQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel) {
         this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
                 Collections.emptyList(), Collections.emptyList(), queryModel, expansionModel);
+    }
+
+    public UltraQueryDslImpl(final UltraQueryDslBuilder<T, C, Q, E> builder) {
+        this(builder.predicate, builder.sort, builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters, builder.queryModel, builder.expansionModel);
     }
 
     @Override

@@ -31,8 +31,8 @@ final class ProductTypeQueryImpl extends UltraQueryDslImpl<ProductType, ProductT
         super(ProductTypeEndpoint.ENDPOINT.endpoint(), ProductTypeQuery.resultTypeReference(), ProductTypeQueryModel.of(), ProductTypeExpansionModel.of());
     }
 
-    private ProductTypeQueryImpl(final Optional<QueryPredicate<ProductType>> predicate, final List<QuerySort<ProductType>> sort, final Optional<Long> limit, final Optional<Long> offset, final String endpoint, final Function<HttpResponse, PagedQueryResult<ProductType>> resultMapper, final List<ExpansionPath<ProductType>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters, final ProductTypeQueryModel<ProductType> queryModel, final ProductTypeExpansionModel<ProductType> expansionModel) {
-        super(predicate, sort, limit, offset, endpoint, resultMapper, expansionPaths, additionalQueryParameters, queryModel, expansionModel);
+    private ProductTypeQueryImpl(final UltraQueryDslBuilder<ProductType, ProductTypeQuery, ProductTypeQueryModel<ProductType>, ProductTypeExpansionModel<ProductType>> builder) {
+        super(builder);
     }
 
     @Override
@@ -47,7 +47,7 @@ final class ProductTypeQueryImpl extends UltraQueryDslImpl<ProductType, ProductT
 
         @Override
         public ProductTypeQueryImpl build() {
-            return new ProductTypeQueryImpl(predicate, sort, limit, offset, endpoint, resultMapper, expansionPaths, additionalQueryParameters, queryModel, expansionModel);
+            return new ProductTypeQueryImpl(this);
         }
     }
 }
