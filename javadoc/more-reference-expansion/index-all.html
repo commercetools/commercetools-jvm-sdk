@@ -625,7 +625,7 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQuery.html#byKey-java.lang.String-">byKey(String)</a></span> - Method in interface io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQuery.html" title="interface in io.sphere.sdk.channels.queries">ChannelQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#byKey-java.lang.String-">byKey(String)</a></span> - Method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="class in io.sphere.sdk.states.queries">StateQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#byKey-java.lang.String-">byKey(String)</a></span> - Method in interface io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries">StateQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#byLocation-io.sphere.sdk.zones.Location-">byLocation(Location)</a></span> - Method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
 <dd>
@@ -4557,6 +4557,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Provides types to retrieve the state of  states.</div>
 </dd>
+<dt><a href="io/sphere/sdk/states/queries/expansion/package-summary.html">io.sphere.sdk.states.queries.expansion</a> - package io.sphere.sdk.states.queries.expansion</dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/taxcategories/package-summary.html">io.sphere.sdk.taxcategories</a> - package io.sphere.sdk.taxcategories</dt>
 <dd>
 <div class="block">Provides model classes and builders for  tax categories.</div>
@@ -5127,8 +5129,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Gets the EXPERIMENTAL model to easily build product projection search requests.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="class in io.sphere.sdk.states.queries">StateQuery</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/queries/ZoneQuery.html#model--">model()</a></span> - Static method in class io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="class in io.sphere.sdk.zones.queries">ZoneQuery</a></dt>
@@ -6369,9 +6369,13 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.states.commands.updateactions.<a href="io/sphere/sdk/states/commands/updateactions/SetTransitions.html" title="class in io.sphere.sdk.states.commands.updateactions">SetTransitions</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/expansion/StateExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.states.queries.expansion.<a href="io/sphere/sdk/states/queries/expansion/StateExpansionModel.html" title="class in io.sphere.sdk.states.queries.expansion">StateExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateByKeyFetch.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByKeyFetch.html" title="class in io.sphere.sdk.states.queries">StateByKeyFetch</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="class in io.sphere.sdk.states.queries">StateQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries">StateQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQueryModel.html" title="class in io.sphere.sdk.states.queries">StateQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateBuilder.html#of-java.lang.String-java.lang.String-io.sphere.sdk.states.StateType-boolean-boolean-">of(String, String, StateType, boolean, boolean)</a></span> - Static method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateBuilder.html" title="class in io.sphere.sdk.states">StateBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -7642,7 +7646,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="class in io.sphere.sdk.states.queries">StateQuery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries">StateQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in class io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="class in io.sphere.sdk.taxcategories.queries">TaxCategoryQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -8505,9 +8509,15 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraftBuilder.html#StateDraftBuilder-java.lang.String-io.sphere.sdk.states.StateType-">StateDraftBuilder(String, StateType)</a></span> - Constructor for class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/states/queries/StateQuery.html" title="class in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQuery</span></a> - Class in <a href="io/sphere/sdk/states/queries/package-summary.html">io.sphere.sdk.states.queries</a></dt>
+<dt><a href="io/sphere/sdk/states/queries/expansion/StateExpansionModel.html" title="class in io.sphere.sdk.states.queries.expansion"><span class="typeNameLink">StateExpansionModel</span></a>&lt;<a href="io/sphere/sdk/states/queries/expansion/StateExpansionModel.html" title="type parameter in StateExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/states/queries/expansion/package-summary.html">io.sphere.sdk.states.queries.expansion</a></dt>
+<dd>
+<div class="block">DSL class to create expansion path expressions.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/expansion/StateExpansionModel.html#StateExpansionModel-java.util.Optional-java.lang.String-">StateExpansionModel(Optional&lt;String&gt;, String)</a></span> - Constructor for class io.sphere.sdk.states.queries.expansion.<a href="io/sphere/sdk/states/queries/expansion/StateExpansionModel.html" title="class in io.sphere.sdk.states.queries.expansion">StateExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/states/queries/StateQueryModel.html" title="class in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQueryModel</span></a> - Class in <a href="io/sphere/sdk/states/queries/package-summary.html">io.sphere.sdk.states.queries</a></dt>
+<dt><a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQuery</span></a> - Interface in <a href="io/sphere/sdk/states/queries/package-summary.html">io.sphere.sdk.states.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/states/queries/StateQueryModel.html" title="class in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQueryModel</span></a>&lt;<a href="io/sphere/sdk/states/queries/StateQueryModel.html" title="type parameter in StateQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/states/queries/package-summary.html">io.sphere.sdk.states.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states"><span class="typeNameLink">StateType</span></a> - Enum in <a href="io/sphere/sdk/states/package-summary.html">io.sphere.sdk.states</a></dt>
 <dd>&nbsp;</dd>
