@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
  * @param <Q> type of the query model
  * @param <E> type of the expansion model
  */
-public interface UltraQueryDsl<T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> extends EntityQuery<T>, ReferenceExpandeableDsl<T, C> {
+public interface UltraQueryDsl<T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> extends EntityQuery<T>, QueryDsl<T, C> {
 
     C withPredicate(final QueryPredicate<T> predicate);
 

@@ -11,7 +11,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
-import static io.sphere.sdk.queries.QueryDslImpl.sortByIdList;
+import static java.util.Arrays.asList;
 
 public class UltraQueryDslBuilder<T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> extends Base implements Builder<C> {
 
@@ -92,5 +92,10 @@ public class UltraQueryDslBuilder<T, C extends UltraQueryDsl<T, C, Q, E>, Q, E> 
     @Override
     public C build() {
         return queryDslBuilderFunction.apply(this);
+    }
+
+    static <T> List<QuerySort<T>> sortByIdList() {
+        final QuerySort<T> sortById = QuerySort.<T>of("id asc");
+        return asList(sortById);
     }
 }

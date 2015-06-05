@@ -15,6 +15,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
+import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 
@@ -54,7 +55,7 @@ public abstract class UltraQueryDslImpl<T, C extends UltraQueryDsl<T, C, Q, E>, 
         this.expansionModel = expansionModel;
         this.queryModel = queryModel;
     }
-    
+
     public UltraQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<UltraQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction, final List<HttpQueryParameter> additionalQueryParameters) {
         this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
                 Collections.emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
@@ -233,5 +234,16 @@ public abstract class UltraQueryDslImpl<T, C extends UltraQueryDsl<T, C, Q, E>, 
 
     Function<HttpResponse, PagedQueryResult<T>> getResultMapper() {
         return resultMapper;
+    }
+
+    @Override
+    public C plusExpansionPath(final ExpansionPath<T> expansionPath) {
+        return withExpansionPath(listOf(expansionPaths(), expansionPath));
+    }
+
+    @Override
+    public C withExpansionPath(final ExpansionPath<T> expansionPath) {
+        Objects.requireNonNull(expansionPath);
+        return withExpansionPath(asList(expansionPath));
     }
 }

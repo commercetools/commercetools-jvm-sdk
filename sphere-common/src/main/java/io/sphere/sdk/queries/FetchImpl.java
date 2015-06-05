@@ -8,10 +8,13 @@ import io.sphere.sdk.http.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
 import static io.sphere.sdk.queries.QueryParameterKeys.EXPAND;
+import static io.sphere.sdk.utils.ListUtils.listOf;
+import static java.util.Arrays.asList;
 
 public class FetchImpl<T> extends SphereRequestBase implements FetchDsl<T> {
 
@@ -81,5 +84,16 @@ public class FetchImpl<T> extends SphereRequestBase implements FetchDsl<T> {
     @Override
     public FetchDsl<T> withExpansionPath(final List<ExpansionPath<T>> expansionPaths) {
         return new FetchImpl<>(endpoint, identifierToSearchFor, expansionPaths, additionalParameters);
+    }
+
+    @Override
+    public FetchDsl<T> plusExpansionPath(final ExpansionPath<T> expansionPath) {
+        return withExpansionPath(listOf(expansionPaths(), expansionPath));
+    }
+
+    @Override
+    public FetchDsl<T> withExpansionPath(final ExpansionPath<T> expansionPath) {
+        Objects.requireNonNull(expansionPath);
+        return withExpansionPath(asList(expansionPath));
     }
 }

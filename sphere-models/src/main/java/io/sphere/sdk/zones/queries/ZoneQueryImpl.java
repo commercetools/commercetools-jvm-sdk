@@ -5,7 +5,7 @@ import io.sphere.sdk.queries.UltraQueryDslImpl;
 import io.sphere.sdk.zones.Zone;
 import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
-final class ZoneQueryImpl  extends UltraQueryDslImpl<Zone, ZoneQuery, ZoneQueryModel<Zone>, ZoneExpansionModel<Zone>> implements ZoneQuery {
+final class ZoneQueryImpl extends UltraQueryDslImpl<Zone, ZoneQuery, ZoneQueryModel<Zone>, ZoneExpansionModel<Zone>> implements ZoneQuery {
     ZoneQueryImpl(){
         super(ZoneEndpoint.ENDPOINT.endpoint(), ZoneQuery.resultTypeReference(), ZoneQueryModel.of(), ZoneExpansionModel.of(), ZoneQueryImpl::new);
     }
