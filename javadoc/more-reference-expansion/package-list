@@ -77,6 +77,7 @@ io.sphere.sdk.search.tokenizer
 io.sphere.sdk.shippingmethods
 io.sphere.sdk.shippingmethods.commands
 io.sphere.sdk.shippingmethods.commands.updateactions
+io.sphere.sdk.shippingmethods.expansion
 io.sphere.sdk.shippingmethods.queries
 io.sphere.sdk.states
 io.sphere.sdk.states.commands
