@@ -414,7 +414,7 @@ assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4).wit
  <code>ProductLike.getProductType()</code>, which has a reference to a <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>.
 
  By default, the field <a href="../../../../io/sphere/sdk/models/Reference.html#getObj--"><code>Reference.getObj()</code></a> will return an absent optional.
- If you specify an expansion path with <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-java.util.List-"><code>ReferenceExpandeableDsl.withExpansionPath(java.util.List)</code></a>
+ If you specify an expansion path with <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPaths-java.util.List-"><code>ReferenceExpandeableDsl.withExpansionPaths(java.util.List)</code></a>
  it is possible that the product type will be filled so that you can work with it.
  </p>
 
@@ -423,20 +423,19 @@ assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4).wit
  expansion path is correct, it is possible that it will not be expanded. This can happen, for example,
  if too many resources are expanded at the same time.
 
- <p>To prevent you from constructing invalid paths, some resources provide methods to generate valid paths.
- You will find them in &lt;RESOURCE&gt;Query.expansionPath().</p>
+ <p>To prevent you from constructing invalid paths, some resources provide methods to generate valid paths.</p>
 
  If you want to expand the product type of a product you can query like this:
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandProductTypeForProduct--%s" class=code-example><pre><code class='java'>final ProductQuery query = ProductQuery.of()
-        .withExpansionPath(ProductExpansionModel.of().productType());
+        .withExpansionPaths(ProductExpansionModel.of().productType());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  Expansion paths are not limited to the next element; for example, you can expand the
  categories for a product projection plus you can expand the parent category of the category you have expanded before:
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-expandCategoryAndCategoryParentForProduct--%s" class=code-example><pre><code class='java'>final ProductProjectionQuery query = ProductProjectionQuery.of(STAGED)
-        .withExpansionPath(m -&gt; m.categories().parent());
+        .withExpansionPaths(m -&gt; m.categories().parent());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  If the SDK does not provide a type-safe way to construct a reference path, you can create it by string:
