@@ -75,11 +75,11 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
     }
 
     protected SphereRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
-        return ProductQuery.of().withPredicate(ProductQueryModel.of().masterData().current().name().lang(ENGLISH).is(name));
+        return ProductQuery.of().withPredicate(m -> m.masterData().current().name().lang(ENGLISH).is(name));
     }
 
     protected SphereRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
-        return ProductQuery.of().withPredicate(ProductQueryModel.of().masterData().current().name().lang(ENGLISH).isIn(names));
+        return ProductQuery.of().withPredicate(m -> m.masterData().current().name().lang(ENGLISH).isIn(names));
     }
 
     @Test

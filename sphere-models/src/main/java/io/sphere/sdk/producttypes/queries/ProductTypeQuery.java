@@ -33,7 +33,7 @@ public interface ProductTypeQuery extends MetaModelQueryDsl<ProductType, Product
     }
 
     default ProductTypeQuery byName(String name) {
-        return withPredicate(ProductTypeQueryModel.of().name().is(name));
+        return withPredicate(m -> m.name().is(name));
     }
 
     static ProductTypeQuery of() {

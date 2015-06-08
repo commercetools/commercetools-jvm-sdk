@@ -38,8 +38,8 @@ public class CategoryQueryTest extends IntegrationTest {
         withCategory(client(), category1 ->
             withCategory(client(), category2 -> {
                 final Query<Category> query = CategoryQuery.of().
-                        withPredicate(CategoryQueryModel.of().name().lang(Locale.ENGLISH).isNot(category1.getName().get(Locale.ENGLISH).get()))
-                        .withSort(CategoryQueryModel.of().createdAt().sort(DESC));
+                        withPredicate(m -> m.name().lang(Locale.ENGLISH).isNot(category1.getName().get(Locale.ENGLISH).get()))
+                        .withSort(m -> m.createdAt().sort(DESC));
                 final boolean category1IsPresent = execute(query).getResults().stream().anyMatch(cat -> cat.getId().equals(category1.getId()));
                 assertThat(category1IsPresent).isFalse();
             })

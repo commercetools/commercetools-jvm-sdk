@@ -19,7 +19,7 @@ public class ProductTypeDeleteCommandTest extends IntegrationTest {
         execute(ProductTypeDeleteCommand.of(productType));
 
         final Query<ProductType> query = ProductTypeQuery.of()
-                .withPredicate(ProductTypeQueryModel.of().id().is(productType.getId()));
+                .withPredicate(m -> m.id().is(productType.getId()));
         assertThat(execute(query).head()).isEmpty();
     }
 

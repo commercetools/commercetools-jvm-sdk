@@ -41,7 +41,7 @@ public class CartDiscountFixtures {
     }
 
     private static CartDiscount getCartDiscount(final TestClient client, final String name) {
-        final Query<CartDiscount> query = CartDiscountQuery.of().withPredicate(CartDiscountQueryModel.of().name().lang(ENGLISH).is(name));
+        final Query<CartDiscount> query = CartDiscountQuery.of().withPredicate(m -> m.name().lang(ENGLISH).is(name));
         return client.execute(query).head().orElseGet(() -> {
             final CartDiscountDraft draft = newCartDiscountDraftBuilder()
                     .name(LocalizedStrings.ofEnglishLocale(name))

@@ -20,7 +20,7 @@ public interface CustomerQuery extends MetaModelQueryDsl<Customer, CustomerQuery
     }
 
     default CustomerQuery byEmail(final String email) {
-        return withPredicate(CustomerQueryModel.of().email().is(email));
+        return withPredicate(m -> m.email().is(email));
     }
 
 }

@@ -372,6 +372,6 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     protected void cleanUpByName(final List<String> names) {
-        execute(ProductTypeQuery.of().withPredicate(ProductTypeQueryModel.of().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
+        execute(ProductTypeQuery.of().withPredicate(m -> m.name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
     }
 }

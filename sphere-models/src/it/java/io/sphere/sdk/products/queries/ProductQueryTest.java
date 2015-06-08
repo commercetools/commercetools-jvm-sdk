@@ -70,6 +70,6 @@ public class ProductQueryTest extends IntegrationTest {
     }
 
     private ProductQuery query(final Product product) {
-        return ProductQuery.of().withPredicate(ProductQueryModel.of().id().is(product.getId()));
+        return ProductQuery.of().withPredicate(m -> m.id().is(product.getId()));
     }
 }
