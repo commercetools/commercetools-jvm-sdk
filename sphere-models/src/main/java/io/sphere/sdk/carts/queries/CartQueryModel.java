@@ -6,13 +6,13 @@ import io.sphere.sdk.queries.QueryModel;
 
 import java.util.Optional;
 
-public class CartQueryModel<T> extends DefaultModelQueryModelImpl<T> {
+public class CartQueryModel extends DefaultModelQueryModelImpl<Cart> {
 
-    public static CartQueryModel<Cart> of() {
-        return new CartQueryModel<>(Optional.empty(), Optional.<String>empty());
+    public static CartQueryModel of() {
+        return new CartQueryModel(Optional.empty(), Optional.<String>empty());
     }
 
-    private CartQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    private CartQueryModel(Optional<? extends QueryModel<Cart>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 

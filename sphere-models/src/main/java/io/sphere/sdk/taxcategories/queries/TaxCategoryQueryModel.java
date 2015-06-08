@@ -7,17 +7,17 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
 import java.util.Optional;
 
-public class TaxCategoryQueryModel<T> extends DefaultModelQueryModelImpl<T> {
+public class TaxCategoryQueryModel extends DefaultModelQueryModelImpl<TaxCategory> {
 
-    public static TaxCategoryQueryModel<TaxCategory> of() {
-        return new TaxCategoryQueryModel<>(Optional.empty(), Optional.empty());
+    public static TaxCategoryQueryModel of() {
+        return new TaxCategoryQueryModel(Optional.empty(), Optional.empty());
     }
 
-    private TaxCategoryQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+    private TaxCategoryQueryModel(final Optional<? extends QueryModel<TaxCategory>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public StringQuerySortingModel<T> name() {
+    public StringQuerySortingModel<TaxCategory> name() {
         return new StringQuerySortingModel<>(Optional.of(this), "name");
     }
 }

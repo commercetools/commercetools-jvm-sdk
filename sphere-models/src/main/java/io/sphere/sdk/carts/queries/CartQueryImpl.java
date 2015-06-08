@@ -10,12 +10,12 @@ import io.sphere.sdk.queries.MetaModelQueryDslImpl;
  {@doc.gen summary carts}
 
  */
-final class CartQueryImpl extends MetaModelQueryDslImpl<Cart, CartQuery, CartQueryModel<Cart>, CartExpansionModel<Cart>> implements CartQuery {
+final class CartQueryImpl extends MetaModelQueryDslImpl<Cart, CartQuery, CartQueryModel, CartExpansionModel<Cart>> implements CartQuery {
     CartQueryImpl(){
         super(CartEndpoint.ENDPOINT.endpoint(), CartQuery.resultTypeReference(), CartQueryModel.of(), CartExpansionModel.of(), CartQueryImpl::new);
     }
 
-    private CartQueryImpl(final MetaModelQueryDslBuilder<Cart, CartQuery, CartQueryModel<Cart>, CartExpansionModel<Cart>> builder) {
+    private CartQueryImpl(final MetaModelQueryDslBuilder<Cart, CartQuery, CartQueryModel, CartExpansionModel<Cart>> builder) {
         super(builder);
     }
 }

@@ -8,20 +8,20 @@ import io.sphere.sdk.zones.Zone;
 
 import java.util.Optional;
 
-public class ZoneQueryModel<T> extends DefaultModelQueryModelImpl<T> {
-    public static ZoneQueryModel<Zone> of() {
-        return new ZoneQueryModel<>(Optional.<QueryModel<Zone>>empty(), Optional.<String>empty());
+public class ZoneQueryModel extends DefaultModelQueryModelImpl<Zone> {
+    public static ZoneQueryModel of() {
+        return new ZoneQueryModel(Optional.<QueryModel<Zone>>empty(), Optional.<String>empty());
     }
 
-    private ZoneQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+    private ZoneQueryModel(final Optional<? extends QueryModel<Zone>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public StringQuerySortingModel<T> name() {
+    public StringQuerySortingModel<Zone> name() {
         return new StringQuerySortingModel<>(Optional.of(this), "name");
     }
 
-    public LocationsCollectionQueryModel<T> locations() {
+    public LocationsCollectionQueryModel<Zone> locations() {
         return new LocationsCollectionQueryModel<>(Optional.of(this), "locations");
     }
 }

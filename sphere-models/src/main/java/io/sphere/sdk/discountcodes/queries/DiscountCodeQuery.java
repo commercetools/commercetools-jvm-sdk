@@ -11,7 +11,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
  {@doc.gen summary discount codes}
 
  */
-public interface DiscountCodeQuery extends MetaModelQueryDsl<DiscountCode, DiscountCodeQuery, DiscountCodeQueryModel<DiscountCode>, DiscountCodeExpansionModel<DiscountCode>> {
+public interface DiscountCodeQuery extends MetaModelQueryDsl<DiscountCode, DiscountCodeQuery, DiscountCodeQueryModel, DiscountCodeExpansionModel<DiscountCode>> {
     static TypeReference<PagedQueryResult<DiscountCode>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<DiscountCode>>(){
             @Override

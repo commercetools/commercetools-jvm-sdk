@@ -14,12 +14,12 @@ import static java.util.Arrays.asList;
 /**
  {@doc.gen summary product projections}
  */
-final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel<ProductProjection>, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionQuery {
+final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionQuery {
     ProductProjectionQueryImpl(final ProductProjectionType productProjectionType){
         super(ProductProjectionEndpoint.ENDPOINT.endpoint(), ProductProjectionQuery.resultTypeReference(), ProductProjectionQueryModel.of(), ProductProjectionExpansionModel.of(), ProductProjectionQueryImpl::new, additionalParametersOf(productProjectionType));
     }
 
-    private ProductProjectionQueryImpl(final MetaModelQueryDslBuilder<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel<ProductProjection>, ProductProjectionExpansionModel<ProductProjection>> builder) {
+    private ProductProjectionQueryImpl(final MetaModelQueryDslBuilder<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>> builder) {
         super(builder);
     }
 

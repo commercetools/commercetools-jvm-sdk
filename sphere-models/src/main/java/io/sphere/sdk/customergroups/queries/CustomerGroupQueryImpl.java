@@ -8,12 +8,12 @@ import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 /**
  {@doc.gen summary customer groups}
  */
-final class CustomerGroupQueryImpl extends MetaModelQueryDslImpl<CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel<CustomerGroup>, CustomerGroupExpansionModel<CustomerGroup>> implements CustomerGroupQuery {
+final class CustomerGroupQueryImpl extends MetaModelQueryDslImpl<CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel, CustomerGroupExpansionModel<CustomerGroup>> implements CustomerGroupQuery {
     CustomerGroupQueryImpl(){
         super(CustomerGroupEndpoint.ENDPOINT.endpoint(), CustomerGroupQuery.resultTypeReference(), CustomerGroupQueryModel.of(), CustomerGroupExpansionModel.of(), CustomerGroupQueryImpl::new);
     }
 
-    private CustomerGroupQueryImpl(final MetaModelQueryDslBuilder<CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel<CustomerGroup>, CustomerGroupExpansionModel<CustomerGroup>> builder) {
+    private CustomerGroupQueryImpl(final MetaModelQueryDslBuilder<CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel, CustomerGroupExpansionModel<CustomerGroup>> builder) {
         super(builder);
     }
 }

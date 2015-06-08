@@ -13,7 +13,7 @@ import java.util.Locale;
 /**
  {@doc.gen summary products}
  */
-public interface ProductQuery extends MetaModelQueryDsl<Product, ProductQuery, ProductQueryModel<Product>, ProductExpansionModel<Product>> {
+public interface ProductQuery extends MetaModelQueryDsl<Product, ProductQuery, ProductQueryModel, ProductExpansionModel<Product>> {
 
     static TypeReference<PagedQueryResult<Product>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Product>>(){

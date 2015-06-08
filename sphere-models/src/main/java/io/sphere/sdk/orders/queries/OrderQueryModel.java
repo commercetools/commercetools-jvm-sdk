@@ -8,40 +8,40 @@ import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
 
-public class OrderQueryModel<T> extends DefaultModelQueryModelImpl<T> {
-    private OrderQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+public class OrderQueryModel extends DefaultModelQueryModelImpl<Order> {
+    private OrderQueryModel(final Optional<? extends QueryModel<Order>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public static OrderQueryModel<Order> of() {
-        return new OrderQueryModel<>(Optional.<QueryModel<Order>>empty(), Optional.<String>empty());
+    public static OrderQueryModel of() {
+        return new OrderQueryModel(Optional.<QueryModel<Order>>empty(), Optional.<String>empty());
     }
 
-    public StringQuerySortingModel<T> customerId() {
+    public StringQuerySortingModel<Order> customerId() {
         return stringModel("customerId");
     }
 
-    public StringQuerySortingModel<T> customerEmail() {
+    public StringQuerySortingModel<Order> customerEmail() {
         return stringModel("customerEmail");
     }
 
-    public SphereEnumerationQueryModel<T, OrderState> orderState() {
+    public SphereEnumerationQueryModel<Order, OrderState> orderState() {
         return new SphereEnumerationQueryModel<>(Optional.of(this), Optional.of("orderState"));
     }
 
-    public SphereEnumerationQueryModel<T, ShipmentState> shipmentState() {
+    public SphereEnumerationQueryModel<Order, ShipmentState> shipmentState() {
         return new SphereEnumerationQueryModel<>(Optional.of(this), Optional.of("shipmentState"));
     }
 
-    public SphereEnumerationQueryModel<T, PaymentState> paymentState() {
+    public SphereEnumerationQueryModel<Order, PaymentState> paymentState() {
         return new SphereEnumerationQueryModel<>(Optional.of(this), Optional.of("paymentState"));
     }
 
-    public SyncInfoQueryModel<T> syncInfo() {
+    public SyncInfoQueryModel<Order> syncInfo() {
         return new SyncInfoQueryModel<>(Optional.of(this), Optional.of("syncInfo"));
     }
 
-    public CountryQueryModel<T> country() {
+    public CountryQueryModel<Order> country() {
         return new CountryQueryModel<>(Optional.of(this), Optional.of("country"));
     }
 }

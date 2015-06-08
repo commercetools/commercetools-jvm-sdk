@@ -6,46 +6,46 @@ import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
 
-public final class CustomerQueryModel<T> extends DefaultModelQueryModelImpl<T> {
+public final class CustomerQueryModel extends DefaultModelQueryModelImpl<Customer> {
 
-    public static CustomerQueryModel<Customer> of() {
-        return new CustomerQueryModel<>(Optional.<QueryModel<Customer>>empty(), Optional.<String>empty());
+    public static CustomerQueryModel of() {
+        return new CustomerQueryModel(Optional.<QueryModel<Customer>>empty(), Optional.<String>empty());
     }
 
-    private CustomerQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+    private CustomerQueryModel(final Optional<? extends QueryModel<Customer>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public StringQuerySortingModel<T> firstName() {
+    public StringQuerySortingModel<Customer> firstName() {
         return new StringQuerySortingModel<>(Optional.of(this), "firstName");
     }
 
-    public StringQuerySortingModel<T> lastName() {
+    public StringQuerySortingModel<Customer> lastName() {
         return new StringQuerySortingModel<>(Optional.of(this), "lastName");
     }
 
-    public StringQuerySortingModel<T> email() {
+    public StringQuerySortingModel<Customer> email() {
         return new StringQuerySortingModel<>(Optional.of(this), "email");
     }
 
-    public StringQuerySortingModel<T> defaultShippingAddressId() {
+    public StringQuerySortingModel<Customer> defaultShippingAddressId() {
         return new StringQuerySortingModel<>(Optional.of(this), "defaultShippingAddressId");
     }
 
-    public StringQuerySortingModel<T> defaultBillingAddressId() {
+    public StringQuerySortingModel<Customer> defaultBillingAddressId() {
         return new StringQuerySortingModel<>(Optional.of(this), "defaultBillingAddressId");
     }
 
-    public BooleanQueryModel<T> isEmailVerified() {
+    public BooleanQueryModel<Customer> isEmailVerified() {
         return new BooleanQueryModel<>(Optional.of(this), "isEmailVerified");
     }
 
 
-    public StringQuerySortingModel<T> externalId() {
+    public StringQuerySortingModel<Customer> externalId() {
         return new StringQuerySortingModel<>(Optional.of(this), "externalId");
     }
 
-    public ReferenceQueryModel<T, CustomerGroup> customerGroup() {
+    public ReferenceQueryModel<Customer, CustomerGroup> customerGroup() {
         return new ReferenceQueryModel<>(Optional.of(this), "customerGroup");
     }
 }

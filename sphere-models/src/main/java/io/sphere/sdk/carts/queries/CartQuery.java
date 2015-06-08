@@ -11,7 +11,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
  {@doc.gen summary carts}
 
  */
-public interface CartQuery extends MetaModelQueryDsl<Cart, CartQuery, CartQueryModel<Cart>, CartExpansionModel<Cart>> {
+public interface CartQuery extends MetaModelQueryDsl<Cart, CartQuery, CartQueryModel, CartExpansionModel<Cart>> {
     static TypeReference<PagedQueryResult<Cart>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Cart>>(){
             @Override

@@ -11,7 +11,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
  {@doc.gen summary cart discounts}
 
  */
-public interface CartDiscountQuery extends MetaModelQueryDsl<CartDiscount, CartDiscountQuery, CartDiscountQueryModel<CartDiscount>, CartDiscountExpansionModel<CartDiscount>> {
+public interface CartDiscountQuery extends MetaModelQueryDsl<CartDiscount, CartDiscountQuery, CartDiscountQueryModel, CartDiscountExpansionModel<CartDiscount>> {
 
     static TypeReference<PagedQueryResult<CartDiscount>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<CartDiscount>>(){

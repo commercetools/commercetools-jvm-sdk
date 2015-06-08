@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
 /**
  {@doc.gen summary orders}
  */
-public interface OrderQuery extends MetaModelQueryDsl<Order, OrderQuery, OrderQueryModel<Order>, OrderExpansionModel<Order>> {
+public interface OrderQuery extends MetaModelQueryDsl<Order, OrderQuery, OrderQueryModel, OrderExpansionModel<Order>> {
     static OrderQuery of() {
         return new OrderQueryImpl();
     }

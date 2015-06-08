@@ -95,12 +95,12 @@ public class CustomerQueryTest extends IntegrationTest {
         check((model) -> model.customerGroup().is(customer.getCustomerGroup().get()), false);
     }
 
-    private void check(final Function<CustomerQueryModel<Customer>, QueryPredicate<Customer>> f) {
+    private void check(final Function<CustomerQueryModel, QueryPredicate<Customer>> f) {
         check(f, false);
     }
 
-    private void check(final Function<CustomerQueryModel<Customer>, QueryPredicate<Customer>> f, final boolean checkDistraction) {
-        final CustomerQueryModel<Customer> model = CustomerQueryModel.of();
+    private void check(final Function<CustomerQueryModel, QueryPredicate<Customer>> f, final boolean checkDistraction) {
+        final CustomerQueryModel model = CustomerQueryModel.of();
         final QueryPredicate<Customer> predicate = f.apply(model);
         final Query<Customer> query = CustomerQuery.of().withPredicate(predicate).withSort(model.createdAt().sort(QuerySortDirection.DESC));
         final List<Customer> results = execute(query).getResults();

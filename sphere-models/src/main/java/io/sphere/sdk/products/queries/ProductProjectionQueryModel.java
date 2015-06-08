@@ -7,71 +7,71 @@ import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
 
-public final class ProductProjectionQueryModel<T> extends ProductDataQueryModelBase<T> {
+public final class ProductProjectionQueryModel extends ProductDataQueryModelBase<ProductProjection> {
 
-    private ProductProjectionQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+    private ProductProjectionQueryModel(final Optional<? extends QueryModel<ProductProjection>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public static ProductProjectionQueryModel<ProductProjection> of() {
-        return new ProductProjectionQueryModel<>(Optional.<QueryModel<ProductProjection>>empty(), Optional.<String>empty());
+    public static ProductProjectionQueryModel of() {
+        return new ProductProjectionQueryModel(Optional.<QueryModel<ProductProjection>>empty(), Optional.<String>empty());
     }
 
-    public ReferenceQueryModel<T, ProductType> productType() {
+    public ReferenceQueryModel<ProductProjection, ProductType> productType() {
         return new ReferenceQueryModel<>(Optional.of(this), "productType");
     }
 
-    public BooleanQueryModel<T> hasStagedChanges() {
+    public BooleanQueryModel<ProductProjection> hasStagedChanges() {
         return new BooleanQueryModel<>(Optional.of(this), "hasStagedChanges");
     }
 
     @Override
-    public ReferenceListQueryModel<T, Category> categories() {
+    public ReferenceListQueryModel<ProductProjection, Category> categories() {
         return super.categories();
     }
 
     @Override
-    public LocalizedStringsQueryModel<T> description() {
+    public LocalizedStringsQueryModel<ProductProjection> description() {
         return super.description();
     }
 
     @Override
-    public ProductAllVariantsQueryModel<T> allVariants() {
+    public ProductAllVariantsQueryModel<ProductProjection> allVariants() {
         return super.allVariants();
     }
 
     @Override
-    public ProductVariantQueryModel<T> masterVariant() {
+    public ProductVariantQueryModel<ProductProjection> masterVariant() {
         return super.masterVariant();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<T> metaDescription() {
+    public LocalizedStringsQuerySortingModel<ProductProjection> metaDescription() {
         return super.metaDescription();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<T> metaKeywords() {
+    public LocalizedStringsQuerySortingModel<ProductProjection> metaKeywords() {
         return super.metaKeywords();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<T> metaTitle() {
+    public LocalizedStringsQuerySortingModel<ProductProjection> metaTitle() {
         return super.metaTitle();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<T> name() {
+    public LocalizedStringsQuerySortingModel<ProductProjection> name() {
         return super.name();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<T> slug() {
+    public LocalizedStringsQuerySortingModel<ProductProjection> slug() {
         return super.slug();
     }
 
     @Override
-    public ProductVariantQueryModel<T> variants() {
+    public ProductVariantQueryModel<ProductProjection> variants() {
         return super.variants();
     }
 }

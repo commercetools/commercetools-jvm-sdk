@@ -109,7 +109,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
         });
     }
 
-    private ProductProjectionQueryModel<ProductProjection> model() {
+    private ProductProjectionQueryModel model() {
         return ProductProjectionQueryModel.of();
     }
 

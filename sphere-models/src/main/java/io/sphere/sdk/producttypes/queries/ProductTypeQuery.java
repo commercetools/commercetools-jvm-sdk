@@ -22,7 +22,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
   {@include.example example.QueryProductTypeExamples#queryByAttributeName()}
 
  */
-public interface ProductTypeQuery extends MetaModelQueryDsl<ProductType, ProductTypeQuery, ProductTypeQueryModel<ProductType>, ProductTypeExpansionModel<ProductType>> {
+public interface ProductTypeQuery extends MetaModelQueryDsl<ProductType, ProductTypeQuery, ProductTypeQueryModel, ProductTypeExpansionModel<ProductType>> {
     static TypeReference<PagedQueryResult<ProductType>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<ProductType>>(){
             @Override

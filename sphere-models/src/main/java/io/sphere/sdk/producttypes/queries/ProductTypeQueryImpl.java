@@ -20,12 +20,12 @@ import io.sphere.sdk.queries.*;
   {@include.example example.QueryProductTypeExamples#queryByAttributeName()}
 
  */
-final class ProductTypeQueryImpl extends MetaModelQueryDslImpl<ProductType, ProductTypeQuery, ProductTypeQueryModel<ProductType>, ProductTypeExpansionModel<ProductType>> implements ProductTypeQuery {
+final class ProductTypeQueryImpl extends MetaModelQueryDslImpl<ProductType, ProductTypeQuery, ProductTypeQueryModel, ProductTypeExpansionModel<ProductType>> implements ProductTypeQuery {
     ProductTypeQueryImpl(){
         super(ProductTypeEndpoint.ENDPOINT.endpoint(), ProductTypeQuery.resultTypeReference(), ProductTypeQueryModel.of(), ProductTypeExpansionModel.of(), ProductTypeQueryImpl::new);
     }
 
-    private ProductTypeQueryImpl(final MetaModelQueryDslBuilder<ProductType, ProductTypeQuery, ProductTypeQueryModel<ProductType>, ProductTypeExpansionModel<ProductType>> builder) {
+    private ProductTypeQueryImpl(final MetaModelQueryDslBuilder<ProductType, ProductTypeQuery, ProductTypeQueryModel, ProductTypeExpansionModel<ProductType>> builder) {
         super(builder);
     }
 }

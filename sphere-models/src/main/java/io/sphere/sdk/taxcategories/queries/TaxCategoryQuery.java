@@ -9,7 +9,7 @@ import io.sphere.sdk.taxcategories.expansion.TaxCategoryExpansionModel;
 /**
  {@doc.gen summary tax categories}
  */
-public interface TaxCategoryQuery extends MetaModelQueryDsl<TaxCategory, TaxCategoryQuery, TaxCategoryQueryModel<TaxCategory>, TaxCategoryExpansionModel<TaxCategory>> {
+public interface TaxCategoryQuery extends MetaModelQueryDsl<TaxCategory, TaxCategoryQuery, TaxCategoryQueryModel, TaxCategoryExpansionModel<TaxCategory>> {
     static TypeReference<PagedQueryResult<TaxCategory>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<TaxCategory>>(){
             @Override

@@ -5,12 +5,12 @@ import io.sphere.sdk.discountcodes.expansion.DiscountCodeExpansionModel;
 import io.sphere.sdk.queries.MetaModelQueryDslBuilder;
 import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
-final class DiscountCodeQueryImpl extends MetaModelQueryDslImpl<DiscountCode, DiscountCodeQuery, DiscountCodeQueryModel<DiscountCode>, DiscountCodeExpansionModel<DiscountCode>> implements DiscountCodeQuery {
+final class DiscountCodeQueryImpl extends MetaModelQueryDslImpl<DiscountCode, DiscountCodeQuery, DiscountCodeQueryModel, DiscountCodeExpansionModel<DiscountCode>> implements DiscountCodeQuery {
     DiscountCodeQueryImpl(){
         super(DiscountCodeEndpoint.ENDPOINT.endpoint(), DiscountCodeQuery.resultTypeReference(), DiscountCodeQueryModel.of(), DiscountCodeExpansionModel.of(), DiscountCodeQueryImpl::new);
     }
 
-    private DiscountCodeQueryImpl(final MetaModelQueryDslBuilder<DiscountCode, DiscountCodeQuery, DiscountCodeQueryModel<DiscountCode>, DiscountCodeExpansionModel<DiscountCode>> builder) {
+    private DiscountCodeQueryImpl(final MetaModelQueryDslBuilder<DiscountCode, DiscountCodeQuery, DiscountCodeQueryModel, DiscountCodeExpansionModel<DiscountCode>> builder) {
         super(builder);
     }
 }

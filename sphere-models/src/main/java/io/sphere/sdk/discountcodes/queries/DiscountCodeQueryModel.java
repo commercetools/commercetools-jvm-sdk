@@ -8,18 +8,18 @@ import io.sphere.sdk.queries.StringQuerySortingModel;
 
 import java.util.Optional;
 
-public class DiscountCodeQueryModel<T> extends DefaultModelQueryModelImpl<T> {
+public class DiscountCodeQueryModel extends DefaultModelQueryModelImpl<DiscountCode> {
 
-    public static DiscountCodeQueryModel<DiscountCode> of() {
-        return new DiscountCodeQueryModel<>(Optional.<QueryModelImpl<DiscountCode>>empty(), Optional.<String>empty());
+    public static DiscountCodeQueryModel of() {
+        return new DiscountCodeQueryModel(Optional.<QueryModelImpl<DiscountCode>>empty(), Optional.<String>empty());
     }
 
-    private DiscountCodeQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    private DiscountCodeQueryModel(Optional<? extends QueryModel<DiscountCode>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
 
-    public StringQuerySortingModel<T> code() {
+    public StringQuerySortingModel<DiscountCode> code() {
         return new StringQuerySortingModel<>(Optional.of(this), "code");
     }
 }

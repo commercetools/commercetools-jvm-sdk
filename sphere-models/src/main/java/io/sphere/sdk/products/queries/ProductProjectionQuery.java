@@ -16,7 +16,7 @@ import java.util.function.Function;
 /**
  {@doc.gen summary product projections}
  */
-public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel<ProductProjection>, ProductProjectionExpansionModel<ProductProjection>> {
+public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>> {
 
     static TypeReference<PagedQueryResult<ProductProjection>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<ProductProjection>>(){
@@ -63,13 +63,13 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     ProductProjectionQuery withOffset(final long offset);
 
     @Override
-    ProductProjectionQuery withPredicate(final Function<ProductProjectionQueryModel<ProductProjection>, QueryPredicate<ProductProjection>> m);
+    ProductProjectionQuery withPredicate(final Function<ProductProjectionQueryModel, QueryPredicate<ProductProjection>> m);
 
     @Override
     ProductProjectionQuery withPredicate(final QueryPredicate<ProductProjection> predicate);
 
     @Override
-    ProductProjectionQuery withSort(final Function<ProductProjectionQueryModel<ProductProjection>, QuerySort<ProductProjection>> m);
+    ProductProjectionQuery withSort(final Function<ProductProjectionQueryModel, QuerySort<ProductProjection>> m);
 
     @Override
     ProductProjectionQuery withSort(final List<QuerySort<ProductProjection>> sort);
@@ -78,5 +78,5 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     ProductProjectionQuery withSort(final QuerySort<ProductProjection> sort);
 
     @Override
-    ProductProjectionQuery withSortMulti(final Function<ProductProjectionQueryModel<ProductProjection>, List<QuerySort<ProductProjection>>> m);
+    ProductProjectionQuery withSortMulti(final Function<ProductProjectionQueryModel, List<QuerySort<ProductProjection>>> m);
 }

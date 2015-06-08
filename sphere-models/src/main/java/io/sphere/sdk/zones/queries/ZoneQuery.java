@@ -9,7 +9,7 @@ import io.sphere.sdk.zones.Location;
 import io.sphere.sdk.zones.Zone;
 import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
-public interface ZoneQuery extends MetaModelQueryDsl<Zone, ZoneQuery, ZoneQueryModel<Zone>, ZoneExpansionModel<Zone>> {
+public interface ZoneQuery extends MetaModelQueryDsl<Zone, ZoneQuery, ZoneQueryModel, ZoneExpansionModel<Zone>> {
     static TypeReference<PagedQueryResult<Zone>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Zone>>(){
             @Override

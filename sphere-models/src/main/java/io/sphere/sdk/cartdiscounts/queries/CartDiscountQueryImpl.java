@@ -10,12 +10,12 @@ import io.sphere.sdk.queries.MetaModelQueryDslImpl;
  {@doc.gen summary cart discounts}
 
  */
-final class CartDiscountQueryImpl extends MetaModelQueryDslImpl<CartDiscount, CartDiscountQuery, CartDiscountQueryModel<CartDiscount>, CartDiscountExpansionModel<CartDiscount>> implements CartDiscountQuery {
+final class CartDiscountQueryImpl extends MetaModelQueryDslImpl<CartDiscount, CartDiscountQuery, CartDiscountQueryModel, CartDiscountExpansionModel<CartDiscount>> implements CartDiscountQuery {
     CartDiscountQueryImpl(){
         super(CartDiscountEndpoint.ENDPOINT.endpoint(), CartDiscountQuery.resultTypeReference(), CartDiscountQueryModel.of(), CartDiscountExpansionModel.of(), CartDiscountQueryImpl::new);
     }
 
-    private CartDiscountQueryImpl(final MetaModelQueryDslBuilder<CartDiscount, CartDiscountQuery, CartDiscountQueryModel<CartDiscount>, CartDiscountExpansionModel<CartDiscount>> builder) {
+    private CartDiscountQueryImpl(final MetaModelQueryDslBuilder<CartDiscount, CartDiscountQuery, CartDiscountQueryModel, CartDiscountExpansionModel<CartDiscount>> builder) {
         super(builder);
     }
 }

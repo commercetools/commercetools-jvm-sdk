@@ -12,7 +12,7 @@ import java.util.Locale;
  * {@doc.gen summary categories}
  *
  */
-public interface CategoryQuery extends MetaModelQueryDsl<Category, CategoryQuery, CategoryQueryModel<Category>, CategoryExpansionModel<Category>> {
+public interface CategoryQuery extends MetaModelQueryDsl<Category, CategoryQuery, CategoryQueryModel, CategoryExpansionModel<Category>> {
 
     static TypeReference<PagedQueryResult<Category>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Category>>() {

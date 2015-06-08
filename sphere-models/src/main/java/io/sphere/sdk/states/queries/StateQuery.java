@@ -7,7 +7,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.queries.expansion.StateExpansionModel;
 
-public interface StateQuery extends MetaModelQueryDsl<State, StateQuery, StateQueryModel<State>, StateExpansionModel<State>> {
+public interface StateQuery extends MetaModelQueryDsl<State, StateQuery, StateQueryModel, StateExpansionModel<State>> {
     static StateQuery of() {
         return new StateQueryImpl();
     }

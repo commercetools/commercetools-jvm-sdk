@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
 /**
  {@doc.gen summary customer groups}
  */
-public interface CustomerGroupQuery extends MetaModelQueryDsl<CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel<CustomerGroup>, CustomerGroupExpansionModel<CustomerGroup>> {
+public interface CustomerGroupQuery extends MetaModelQueryDsl<CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel, CustomerGroupExpansionModel<CustomerGroup>> {
     static TypeReference<PagedQueryResult<CustomerGroup>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<CustomerGroup>>(){
             @Override

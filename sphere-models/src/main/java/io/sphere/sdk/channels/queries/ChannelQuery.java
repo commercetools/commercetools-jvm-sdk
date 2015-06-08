@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.MetaModelQueryDsl;
 /**
  {@doc.gen summary channels}
  */
-public interface ChannelQuery extends MetaModelQueryDsl<Channel, ChannelQuery, ChannelQueryModel<Channel>, ChannelExpansionModel<Channel>> {
+public interface ChannelQuery extends MetaModelQueryDsl<Channel, ChannelQuery, ChannelQueryModel, ChannelExpansionModel<Channel>> {
     static TypeReference<PagedQueryResult<Channel>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Channel>>(){
             @Override

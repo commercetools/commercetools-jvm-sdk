@@ -21,7 +21,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderQueryTest extends IntegrationTest {
 
-    public static final OrderQueryModel<Order> MODEL = OrderQueryModel.of();
+    public static final OrderQueryModel MODEL = OrderQueryModel.of();
 
     @Test
     public void customerId() throws Exception {

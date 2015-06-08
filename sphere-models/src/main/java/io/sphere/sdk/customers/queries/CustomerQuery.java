@@ -5,7 +5,7 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 
-public interface CustomerQuery extends MetaModelQueryDsl<Customer, CustomerQuery, CustomerQueryModel<Customer>, CustomerExpansionModel<Customer>> {
+public interface CustomerQuery extends MetaModelQueryDsl<Customer, CustomerQuery, CustomerQueryModel, CustomerExpansionModel<Customer>> {
    static TypeReference<PagedQueryResult<Customer>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Customer>>(){
             @Override

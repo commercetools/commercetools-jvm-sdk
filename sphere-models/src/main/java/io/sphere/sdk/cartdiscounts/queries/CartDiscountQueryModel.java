@@ -8,17 +8,17 @@ import io.sphere.sdk.queries.QueryModelImpl;
 
 import java.util.Optional;
 
-public class CartDiscountQueryModel<T> extends DefaultModelQueryModelImpl<T> {
+public class CartDiscountQueryModel extends DefaultModelQueryModelImpl<CartDiscount> {
 
-    private CartDiscountQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    private CartDiscountQueryModel(Optional<? extends QueryModel<CartDiscount>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public static CartDiscountQueryModel<CartDiscount> of() {
-        return new CartDiscountQueryModel<>(Optional.<QueryModelImpl<CartDiscount>>empty(), Optional.<String>empty());
+    public static CartDiscountQueryModel of() {
+        return new CartDiscountQueryModel(Optional.<QueryModelImpl<CartDiscount>>empty(), Optional.<String>empty());
     }
 
-    public LocalizedStringsQuerySortingModel<T> name() {
+    public LocalizedStringsQuerySortingModel<CartDiscount> name() {
         return LocalizedStringsQuerySortingModel.of(this, "name");
     }
 }

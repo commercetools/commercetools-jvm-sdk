@@ -7,16 +7,16 @@ import io.sphere.sdk.queries.StringQuerySortingModel;
 
 import java.util.Optional;
 
-public class ChannelQueryModel<T> extends DefaultModelQueryModelImpl<T> {
-    private ChannelQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+public class ChannelQueryModel extends DefaultModelQueryModelImpl<Channel> {
+    private ChannelQueryModel(final Optional<? extends QueryModel<Channel>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public static ChannelQueryModel<Channel> of() {
-        return new ChannelQueryModel<>(Optional.empty(), Optional.<String>empty());
+    public static ChannelQueryModel of() {
+        return new ChannelQueryModel(Optional.empty(), Optional.<String>empty());
     }
 
-    public StringQuerySortingModel<T> key() {
+    public StringQuerySortingModel<Channel> key() {
         return new StringQuerySortingModel<>(Optional.of(this), "key");
     }
 }
