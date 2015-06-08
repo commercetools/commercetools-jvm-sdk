@@ -108,7 +108,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/ByIdFetchImpl.html" title="class in io.sphere.sdk.queries">ByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartByCustomerIdFetchImpl.html" title="class in io.sphere.sdk.carts.queries">CartByCustomerIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartByIdFetchImpl.html" title="class in io.sphere.sdk.carts.queries">CartByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdFetchImpl.html" title="class in io.sphere.sdk.cartdiscounts.queries">CartDiscountByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryByIdFetchImpl.html" title="class in io.sphere.sdk.categories.queries">CategoryByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelByIdFetchImpl.html" title="class in io.sphere.sdk.channels.queries">ChannelByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerByIdFetchImpl.html" title="class in io.sphere.sdk.customers.queries">CustomerByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerByTokenFetchImpl.html" title="class in io.sphere.sdk.customers.queries">CustomerByTokenFetchImpl</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupByIdFetchImpl.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyFetchImpl.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectByKeyFetchImpl</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectQueryImpl.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQueryImpl</a>, <a href="../../../../io/sphere/sdk/discountcodes/queries/DiscountCodeByIdFetchImpl.html" title="class in io.sphere.sdk.discountcodes.queries">DiscountCodeByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/inventories/queries/InventoryEntryByIdFetchImpl.html" title="class in io.sphere.sdk.inventories.queries">InventoryEntryByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a>, <a href="../../../../io/sphere/sdk/orders/queries/OrderByIdFetchImpl.html" title="class in io.sphere.sdk.orders.queries">OrderByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductByIdFetchImpl.html" title="class in io.sphere.sdk.products.queries">ProductByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionByIdFetchImpl.html" title="class in io.sphere.sdk.products.queries">ProductProjectionByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetchImpl.html" title="class in io.sphere.sdk.shippingmethods.queries">ShippingMethodByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/zones/queries/ZoneByIdFetchImpl.html" title="class in io.sphere.sdk.zones.queries">ZoneByIdFetchImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/queries/ByIdFetchImpl.html" title="class in io.sphere.sdk.queries">ByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectQueryImpl.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQueryImpl</a>, <a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dd>
 </dl>
 <hr>
 <br>
@@ -134,15 +134,21 @@ extends <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" ti
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath</a></span>(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath</a></span>(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</code>
+<div class="block">Creates a new object with the properties of the old object but adds <code>expansionPath</code> to the expansion paths.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a></span>(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a></span>(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</code>
+<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-java.util.List-">withExpansionPath</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-java.util.List-">withExpansionPath</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&gt;&nbsp;expansionPaths)</code>
+<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with <code>expansionPaths</code>.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -173,6 +179,13 @@ extends <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" ti
 <li class="blockList">
 <h4>withExpansionPath</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a>&nbsp;withExpansionPath(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&gt;&nbsp;expansionPaths)</pre>
+<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with <code>expansionPaths</code>.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>expansionPaths</code> - the new expansion paths</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>new object</dd>
+</dl>
 </li>
 </ul>
 <a name="plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">
@@ -182,6 +195,13 @@ extends <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" ti
 <li class="blockList">
 <h4>plusExpansionPath</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a>&nbsp;plusExpansionPath(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</pre>
+<div class="block">Creates a new object with the properties of the old object but adds <code>expansionPath</code> to the expansion paths.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>expansionPath</code> - the new expansion path to add to the existing ones</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>new object</dd>
+</dl>
 </li>
 </ul>
 <a name="withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">
@@ -191,6 +211,13 @@ extends <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" ti
 <li class="blockList">
 <h4>withExpansionPath</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a>&nbsp;withExpansionPath(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</pre>
+<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>expansionPath</code> - the new expansion paths</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>new object</dd>
+</dl>
 </li>
 </ul>
 </li>
