@@ -38,9 +38,4 @@ public abstract class QueryToFetchAdapter<T> extends SphereRequestBase implement
     public HttpRequestIntent httpRequestIntent() {
         return query.httpRequestIntent();
     }
-
-    @Override
-    public Fetch<T> toFetch() {
-        return this;
-    }
 }

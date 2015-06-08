@@ -8,6 +8,4 @@ import java.util.Optional;
 public interface Fetch<T> extends SphereRequest<Optional<T>> {
     @Override
     Optional<T> deserialize(final HttpResponse httpResponse);
-
-    Fetch<T> toFetch();
 }
