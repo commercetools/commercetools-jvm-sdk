@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6};
+var methods = {"i0":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -108,7 +108,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/ByIdFetchImpl.html" title="class in io.sphere.sdk.queries">ByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelByKeyFetch.html" title="class in io.sphere.sdk.channels.queries">ChannelByKeyFetch</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingByKeyFetch</a>, <a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a>, <a href="../../../../io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a>, <a href="../../../../io/sphere/sdk/states/queries/StateByKeyFetch.html" title="class in io.sphere.sdk.states.queries">StateByKeyFetch</a></dd>
+<dd><a href="../../../../io/sphere/sdk/channels/queries/ChannelByKeyFetch.html" title="class in io.sphere.sdk.channels.queries">ChannelByKeyFetch</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingByKeyFetch</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a>, <a href="../../../../io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a>, <a href="../../../../io/sphere/sdk/states/queries/StateByKeyFetch.html" title="class in io.sphere.sdk.states.queries">StateByKeyFetch</a></dd>
 </dl>
 <hr>
 <br>
@@ -138,10 +138,6 @@ extends <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="int
 <div class="block">Takes an http response and maps it into a Java object of type T.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="type parameter in Fetch">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/Fetch.html#toFetch--">toFetch</a></span>()</code>&nbsp;</td>
-</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequest">
@@ -167,7 +163,7 @@ extends <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="int
 <a name="deserialize-io.sphere.sdk.http.HttpResponse-">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>deserialize</h4>
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="type parameter in Fetch">T</a>&gt;&nbsp;deserialize(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</pre>
@@ -182,15 +178,6 @@ extends <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="int
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the deserialized object, it should not be null</dd>
 </dl>
-</li>
-</ul>
-<a name="toFetch--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>toFetch</h4>
-<pre><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="type parameter in Fetch">T</a>&gt;&nbsp;toFetch()</pre>
 </li>
 </ul>
 </li>
