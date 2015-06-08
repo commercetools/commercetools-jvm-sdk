@@ -31,13 +31,13 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     final List<HttpQueryParameter> additionalQueryParameters;
     final String endpoint;
     final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
-    final Function<UltraQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction;
+    final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction;
 
     public MetaModelQueryDslImpl(final Optional<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, final Optional<Long> limit,
                                  final Optional<Long> offset, final String endpoint,
                                  final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
                                  final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters,
-                                 final Q queryModel, final E expansionModel, final Function<UltraQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
+                                 final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
         offset.ifPresent(presentOffset -> {
             if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
                 throw new IllegalArgumentException(format("The offset parameter must be in the range of [%d..%d], but was %d.", MIN_OFFSET, MAX_OFFSET, presentOffset));
@@ -56,16 +56,16 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         this.queryModel = queryModel;
     }
 
-    public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<UltraQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction, final List<HttpQueryParameter> additionalQueryParameters) {
+    public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction, final List<HttpQueryParameter> additionalQueryParameters) {
         this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
                 Collections.emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
-    public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<UltraQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
+    public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
         this(endpoint, pagedQueryResultTypeReference, queryModel, expansionModel, queryDslBuilderFunction, Collections.emptyList());
     }
 
-    public MetaModelQueryDslImpl(final UltraQueryDslBuilder<T, C, Q, E> builder) {
+    public MetaModelQueryDslImpl(final MetaModelQueryDslBuilder<T, C, Q, E> builder) {
         this(builder.predicate, builder.sort, builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters, builder.queryModel, builder.expansionModel, builder.queryDslBuilderFunction);
     }
 
@@ -80,9 +80,9 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         return withPredicate(m.apply(queryModel));
     }
 
-    protected UltraQueryDslBuilder<T, C, Q, E> copyBuilder() {
-        return new UltraQueryDslBuilder<>(this);
-    };
+    protected MetaModelQueryDslBuilder<T, C, Q, E> copyBuilder() {
+        return new MetaModelQueryDslBuilder<>(this);
+    }
 
     @Override
     public C withSort(final List<QuerySort<T>> sort) {
@@ -205,7 +205,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     public String toString() {
         final String readablePath = endpoint + queryParametersToString(false);
 
-        return "QueryDslImpl{" +
+        return this.getClass().getSimpleName() +"{" +
                 "predicate=" + predicate +
                 ", sort=" + sort +
                 ", expand=" + expansionPaths +

@@ -13,7 +13,7 @@ final class ChannelQueryImpl extends MetaModelQueryDslImpl<Channel, ChannelQuery
         super(ChannelEndpoint.ENDPOINT.endpoint(), ChannelQuery.resultTypeReference(), ChannelQueryModel.of(), ChannelExpansionModel.of(), ChannelQueryImpl::new);
     }
 
-    private ChannelQueryImpl(final UltraQueryDslBuilder<Channel, ChannelQuery, ChannelQueryModel<Channel>, ChannelExpansionModel<Channel>> builder) {
+    private ChannelQueryImpl(final MetaModelQueryDslBuilder<Channel, ChannelQuery, ChannelQueryModel<Channel>, ChannelExpansionModel<Channel>> builder) {
         super(builder);
     }
 }

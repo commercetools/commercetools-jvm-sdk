@@ -25,7 +25,7 @@ final class ProductTypeQueryImpl extends MetaModelQueryDslImpl<ProductType, Prod
         super(ProductTypeEndpoint.ENDPOINT.endpoint(), ProductTypeQuery.resultTypeReference(), ProductTypeQueryModel.of(), ProductTypeExpansionModel.of(), ProductTypeQueryImpl::new);
     }
 
-    private ProductTypeQueryImpl(final UltraQueryDslBuilder<ProductType, ProductTypeQuery, ProductTypeQueryModel<ProductType>, ProductTypeExpansionModel<ProductType>> builder) {
+    private ProductTypeQueryImpl(final MetaModelQueryDslBuilder<ProductType, ProductTypeQuery, ProductTypeQueryModel<ProductType>, ProductTypeExpansionModel<ProductType>> builder) {
         super(builder);
     }
 }

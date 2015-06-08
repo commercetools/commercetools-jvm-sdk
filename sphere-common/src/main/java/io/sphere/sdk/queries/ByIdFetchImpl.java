@@ -5,7 +5,7 @@ import io.sphere.sdk.http.HttpQueryParameter;
 
 import java.util.List;
 
-public abstract class ByIdFetchImpl<T> extends FetchImpl<T> {
+public abstract class ByIdFetchImpl<T, C> extends FetchImpl<T, C> {
 
     protected ByIdFetchImpl(final String id, final JsonEndpoint<T> endpoint) {
         super(endpoint, id);

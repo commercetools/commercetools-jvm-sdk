@@ -2,23 +2,14 @@ package io.sphere.sdk.customers.queries;
 
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerToken;
-import io.sphere.sdk.http.HttpQueryParameter;
-import io.sphere.sdk.queries.FetchImpl;
+import io.sphere.sdk.queries.MetaModelFetchDsl;
 
-import static io.sphere.sdk.customers.queries.CustomerEndpoint.ENDPOINT;
-import static java.util.Arrays.asList;
-
-public class CustomerByTokenFetch extends FetchImpl<Customer> {
-
-    private CustomerByTokenFetch(final String token) {
-        super(ENDPOINT, "", asList(HttpQueryParameter.of("token", token)));
+public interface CustomerByTokenFetch extends MetaModelFetchDsl<Customer, CustomerByTokenFetch, CustomerExpansionModel<Customer>> {
+    static CustomerByTokenFetch of(final String token) {
+        return new CustomerByTokenFetchImpl(token);
     }
 
-    public static CustomerByTokenFetch of(final String token) {
-        return new CustomerByTokenFetch(token);
-    }
-
-    public static CustomerByTokenFetch of(final CustomerToken token) {
+    static CustomerByTokenFetch of(final CustomerToken token) {
         return of(token.getValue());
     }
 }

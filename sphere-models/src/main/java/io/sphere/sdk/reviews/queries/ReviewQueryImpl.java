@@ -9,7 +9,7 @@ final class ReviewQueryImpl extends MetaModelQueryDslImpl<Review, ReviewQuery, R
         super(ReviewEndpoint.ENDPOINT.endpoint(), ReviewQuery.resultTypeReference(), ReviewQueryModel.of(), ReviewExpansionModel.of(), ReviewQueryImpl::new);
     }
 
-    private ReviewQueryImpl(final UltraQueryDslBuilder<Review, ReviewQuery, ReviewQueryModel<Review>, ReviewExpansionModel<Review>> builder) {
+    private ReviewQueryImpl(final MetaModelQueryDslBuilder<Review, ReviewQuery, ReviewQueryModel<Review>, ReviewExpansionModel<Review>> builder) {
         super(builder);
     }
 }

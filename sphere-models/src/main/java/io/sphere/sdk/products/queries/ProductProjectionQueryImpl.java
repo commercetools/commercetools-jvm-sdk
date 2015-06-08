@@ -4,7 +4,7 @@ import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
-import io.sphere.sdk.queries.UltraQueryDslBuilder;
+import io.sphere.sdk.queries.MetaModelQueryDslBuilder;
 import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
 import java.util.List;
@@ -19,7 +19,7 @@ final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProj
         super(ProductProjectionEndpoint.ENDPOINT.endpoint(), ProductProjectionQuery.resultTypeReference(), ProductProjectionQueryModel.of(), ProductProjectionExpansionModel.of(), ProductProjectionQueryImpl::new, additionalParametersOf(productProjectionType));
     }
 
-    private ProductProjectionQueryImpl(final UltraQueryDslBuilder<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel<ProductProjection>, ProductProjectionExpansionModel<ProductProjection>> builder) {
+    private ProductProjectionQueryImpl(final MetaModelQueryDslBuilder<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel<ProductProjection>, ProductProjectionExpansionModel<ProductProjection>> builder) {
         super(builder);
     }
 

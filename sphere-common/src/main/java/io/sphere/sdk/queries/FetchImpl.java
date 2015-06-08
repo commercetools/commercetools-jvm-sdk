@@ -16,7 +16,7 @@ import static io.sphere.sdk.queries.QueryParameterKeys.EXPAND;
 import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.Arrays.asList;
 
-public class FetchImpl<T> extends SphereRequestBase implements FetchDsl<T> {
+public class FetchImpl<T, C> extends SphereRequestBase implements FetchDsl<T, C> {
 
     private final JsonEndpoint<T> endpoint;
     /**
@@ -82,17 +82,17 @@ public class FetchImpl<T> extends SphereRequestBase implements FetchDsl<T> {
     }
 
     @Override
-    public FetchDsl<T> withExpansionPath(final List<ExpansionPath<T>> expansionPaths) {
-        return new FetchImpl<>(endpoint, identifierToSearchFor, expansionPaths, additionalParameters);
+    public C withExpansionPath(final List<ExpansionPath<T>> expansionPaths) {
+        return null;
     }
 
     @Override
-    public FetchDsl<T> plusExpansionPath(final ExpansionPath<T> expansionPath) {
+    public C plusExpansionPath(final ExpansionPath<T> expansionPath) {
         return withExpansionPath(listOf(expansionPaths(), expansionPath));
     }
 
     @Override
-    public FetchDsl<T> withExpansionPath(final ExpansionPath<T> expansionPath) {
+    public C withExpansionPath(final ExpansionPath<T> expansionPath) {
         Objects.requireNonNull(expansionPath);
         return withExpansionPath(asList(expansionPath));
     }

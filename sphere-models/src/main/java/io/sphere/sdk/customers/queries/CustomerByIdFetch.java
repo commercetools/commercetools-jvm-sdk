@@ -2,18 +2,14 @@ package io.sphere.sdk.customers.queries;
 
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.queries.ByIdFetchImpl;
+import io.sphere.sdk.queries.MetaModelFetchDsl;
 
-public class CustomerByIdFetch extends ByIdFetchImpl<Customer> {
-    private CustomerByIdFetch(final String id) {
-        super(id, CustomerEndpoint.ENDPOINT);
+public interface CustomerByIdFetch extends MetaModelFetchDsl<Customer, CustomerByIdFetch, CustomerExpansionModel<Customer>> {
+    static CustomerByIdFetch of(final Identifiable<Customer> cartDiscount) {
+        return of(cartDiscount.getId());
     }
 
-    public static CustomerByIdFetch of(final Identifiable<Customer> id) {
-        return of(id.getId());
-    }
-
-    public static CustomerByIdFetch of(final String id) {
-        return new CustomerByIdFetch(id);
+    static CustomerByIdFetch of(final String id) {
+        return new CustomerByIdFetchImpl(id);
     }
 }

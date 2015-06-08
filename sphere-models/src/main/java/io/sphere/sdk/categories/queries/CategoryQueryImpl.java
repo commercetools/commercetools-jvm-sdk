@@ -9,7 +9,7 @@ final class CategoryQueryImpl extends MetaModelQueryDslImpl<Category, CategoryQu
         super(CategoryEndpoint.ENDPOINT.endpoint(), CategoryQuery.resultTypeReference(), CategoryQueryModel.of(), CategoryExpansionModel.of(), CategoryQueryImpl::new);
     }
 
-    private CategoryQueryImpl(final UltraQueryDslBuilder<Category, CategoryQuery, CategoryQueryModel<Category>, CategoryExpansionModel<Category>> builder) {
+    private CategoryQueryImpl(final MetaModelQueryDslBuilder<Category, CategoryQuery, CategoryQueryModel<Category>, CategoryExpansionModel<Category>> builder) {
         super(builder);
     }
 }

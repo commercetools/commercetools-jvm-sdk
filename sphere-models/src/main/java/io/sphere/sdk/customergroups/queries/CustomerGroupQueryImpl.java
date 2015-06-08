@@ -2,7 +2,7 @@ package io.sphere.sdk.customergroups.queries;
 
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
-import io.sphere.sdk.queries.UltraQueryDslBuilder;
+import io.sphere.sdk.queries.MetaModelQueryDslBuilder;
 import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
 /**
@@ -13,7 +13,7 @@ final class CustomerGroupQueryImpl extends MetaModelQueryDslImpl<CustomerGroup, 
         super(CustomerGroupEndpoint.ENDPOINT.endpoint(), CustomerGroupQuery.resultTypeReference(), CustomerGroupQueryModel.of(), CustomerGroupExpansionModel.of(), CustomerGroupQueryImpl::new);
     }
 
-    private CustomerGroupQueryImpl(final UltraQueryDslBuilder<CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel<CustomerGroup>, CustomerGroupExpansionModel<CustomerGroup>> builder) {
+    private CustomerGroupQueryImpl(final MetaModelQueryDslBuilder<CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel<CustomerGroup>, CustomerGroupExpansionModel<CustomerGroup>> builder) {
         super(builder);
     }
 }

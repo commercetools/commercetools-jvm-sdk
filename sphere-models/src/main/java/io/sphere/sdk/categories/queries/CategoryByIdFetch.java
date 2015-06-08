@@ -3,22 +3,14 @@ package io.sphere.sdk.categories.queries;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.queries.ByIdFetchImpl;
+import io.sphere.sdk.queries.MetaModelFetchDsl;
 
-public class CategoryByIdFetch extends ByIdFetchImpl<Category> {
-    private CategoryByIdFetch(final String id) {
-        super(id, CategoryEndpoint.ENDPOINT);
+public interface CategoryByIdFetch extends MetaModelFetchDsl<Category, CategoryByIdFetch, CategoryExpansionModel<Category>> {
+    static CategoryByIdFetch of(final Identifiable<Category> cartDiscount) {
+        return of(cartDiscount.getId());
     }
 
-    public static CategoryByIdFetch of(final Identifiable<Category> category) {
-        return of(category.getId());
-    }
-
-    public static CategoryByIdFetch of(final String id) {
-        return new CategoryByIdFetch(id);
-    }
-
-    public static CategoryExpansionModel<Category> expansionPath() {
-        return CategoryExpansionModel.of();
+    static CategoryByIdFetch of(final String id) {
+        return new CategoryByIdFetchImpl(id);
     }
 }

@@ -14,7 +14,7 @@ public class InventoryEntryByIdFetchTest extends IntegrationTest {
         withInventoryEntryAndSupplyChannel(client(), INVENTORY_SUPPLY, (entry, channel) -> {
             final InventoryEntry actual = execute(
                     InventoryEntryByIdFetch.of(entry)
-                            .withExpansionPath(InventoryEntryByIdFetch.expansionPath().supplyChannel())
+                            .withExpansionPath(new InventoryEntryExpansionModel<InventoryEntry>().supplyChannel())
             ).get();
             assertThat(actual.getId()).contains(entry.getId());
             assertThat(actual.getSupplyChannel().get().getObj().get().getId()).isEqualTo(channel.getId());

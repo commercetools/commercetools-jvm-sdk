@@ -1,14 +1,17 @@
 package io.sphere.sdk.channels.queries;
 
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.queries.ByIdFetchImpl;
+import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
+import io.sphere.sdk.models.Identifiable;
+import io.sphere.sdk.queries.MetaModelFetchDsl;
 
-public class ChannelByIdFetch extends ByIdFetchImpl<Channel> {
-    private ChannelByIdFetch(final String id) {
-        super(id, ChannelEndpoint.ENDPOINT);
+public interface ChannelByIdFetch extends MetaModelFetchDsl<Channel, ChannelByIdFetch, ChannelExpansionModel<Channel>> {
+    static ChannelByIdFetch of(final Identifiable<Channel> cartDiscount) {
+        return of(cartDiscount.getId());
     }
 
-    public static ChannelByIdFetch of(final String id) {
-        return new ChannelByIdFetch(id);
+    static ChannelByIdFetch of(final String id) {
+        return new ChannelByIdFetchImpl(id);
     }
 }
+

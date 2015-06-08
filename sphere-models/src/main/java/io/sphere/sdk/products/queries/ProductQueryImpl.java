@@ -2,7 +2,7 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
-import io.sphere.sdk.queries.UltraQueryDslBuilder;
+import io.sphere.sdk.queries.MetaModelQueryDslBuilder;
 import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
 /**
@@ -13,7 +13,7 @@ final class ProductQueryImpl extends MetaModelQueryDslImpl<Product, ProductQuery
         super(ProductEndpoint.ENDPOINT.endpoint(), ProductQuery.resultTypeReference(), ProductQueryModel.of(), ProductExpansionModel.of(), ProductQueryImpl::new);
     }
 
-    private ProductQueryImpl(final UltraQueryDslBuilder<Product, ProductQuery, ProductQueryModel<Product>, ProductExpansionModel<Product>> builder) {
+    private ProductQueryImpl(final MetaModelQueryDslBuilder<Product, ProductQuery, ProductQueryModel<Product>, ProductExpansionModel<Product>> builder) {
         super(builder);
     }
 }

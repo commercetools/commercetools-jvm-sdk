@@ -1,24 +1,17 @@
 package io.sphere.sdk.products.queries;
 
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
-import io.sphere.sdk.queries.ByIdFetchImpl;
+import io.sphere.sdk.queries.MetaModelFetchDsl;
 
-public class ProductByIdFetch extends ByIdFetchImpl<Product> {
-    private ProductByIdFetch(final String id) {
-        super(id, ProductEndpoint.ENDPOINT);
+public interface ProductByIdFetch extends MetaModelFetchDsl<Product, ProductByIdFetch, ProductExpansionModel<Product>> {
+    static ProductByIdFetch of(final Identifiable<Product> cartDiscount) {
+        return of(cartDiscount.getId());
     }
 
-    public static ProductByIdFetch of(final String id) {
-        return new ProductByIdFetch(id);
-    }
-
-    /**
-     *
-     * @deprecated Use {@link ProductExpansionModel#of()} instead.
-     */
-    @Deprecated
-    public static ProductExpansionModel<Product> expansionPath() {
-        return ProductExpansionModel.of();
+    static ProductByIdFetch of(final String id) {
+        return new ProductByIdFetchImpl(id);
     }
 }
+

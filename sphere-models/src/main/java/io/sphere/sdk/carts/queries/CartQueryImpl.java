@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.queries;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.expansion.CartExpansionModel;
-import io.sphere.sdk.queries.UltraQueryDslBuilder;
+import io.sphere.sdk.queries.MetaModelQueryDslBuilder;
 import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
 /**
@@ -15,7 +15,7 @@ final class CartQueryImpl extends MetaModelQueryDslImpl<Cart, CartQuery, CartQue
         super(CartEndpoint.ENDPOINT.endpoint(), CartQuery.resultTypeReference(), CartQueryModel.of(), CartExpansionModel.of(), CartQueryImpl::new);
     }
 
-    private CartQueryImpl(final UltraQueryDslBuilder<Cart, CartQuery, CartQueryModel<Cart>, CartExpansionModel<Cart>> builder) {
+    private CartQueryImpl(final MetaModelQueryDslBuilder<Cart, CartQuery, CartQueryModel<Cart>, CartExpansionModel<Cart>> builder) {
         super(builder);
     }
 }

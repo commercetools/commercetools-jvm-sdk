@@ -1,0 +1,16 @@
+package io.sphere.sdk.carts.queries;
+
+import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.expansion.CartExpansionModel;
+import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
+import io.sphere.sdk.queries.MetaModelFetchDslImpl;
+
+public class CartByIdFetchImpl extends MetaModelFetchDslImpl<Cart, CartByIdFetch, CartExpansionModel<Cart>> implements CartByIdFetch {
+    CartByIdFetchImpl(final String id) {
+        super(id, CartEndpoint.ENDPOINT, CartExpansionModel.of(), CartByIdFetchImpl::new);
+    }
+
+    public CartByIdFetchImpl(MetaModelFetchDslBuilder<Cart, CartByIdFetch, CartExpansionModel<Cart>> builder) {
+        super(builder);
+    }
+}
