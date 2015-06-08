@@ -5,7 +5,7 @@ import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
 import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
 import io.sphere.sdk.queries.MetaModelFetchDslImpl;
 
-public class ChannelByIdFetchImpl extends MetaModelFetchDslImpl<Channel, ChannelByIdFetch, ChannelExpansionModel<Channel>> implements ChannelByIdFetch {
+final class ChannelByIdFetchImpl extends MetaModelFetchDslImpl<Channel, ChannelByIdFetch, ChannelExpansionModel<Channel>> implements ChannelByIdFetch {
     ChannelByIdFetchImpl(final String id) {
         super(id, ChannelEndpoint.ENDPOINT, ChannelExpansionModel.of(), ChannelByIdFetchImpl::new);
     }

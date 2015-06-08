@@ -5,7 +5,7 @@ import io.sphere.sdk.products.expansion.ProductExpansionModel;
 import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
 import io.sphere.sdk.queries.MetaModelFetchDslImpl;
 
-public class ProductByIdFetchImpl extends MetaModelFetchDslImpl<Product, ProductByIdFetch, ProductExpansionModel<Product>> implements ProductByIdFetch {
+final class ProductByIdFetchImpl extends MetaModelFetchDslImpl<Product, ProductByIdFetch, ProductExpansionModel<Product>> implements ProductByIdFetch {
     ProductByIdFetchImpl(final String id) {
         super(id, ProductEndpoint.ENDPOINT, ProductExpansionModel.of(), ProductByIdFetchImpl::new);
     }

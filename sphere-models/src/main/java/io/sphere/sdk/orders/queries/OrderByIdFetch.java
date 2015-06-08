@@ -3,7 +3,11 @@ package io.sphere.sdk.orders.queries;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
+import io.sphere.sdk.queries.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelFetchDsl;
+
+import java.util.List;
+import java.util.function.Function;
 
 /**
  Gets an order by ID.
@@ -18,5 +22,23 @@ public interface OrderByIdFetch extends MetaModelFetchDsl<Order, OrderByIdFetch,
     static OrderByIdFetch of(final String id) {
         return new OrderByIdFetchImpl(id);
     }
+
+    @Override
+    OrderByIdFetch plusExpansionPath(final Function<OrderExpansionModel<Order>, ExpansionPath<Order>> m);
+
+    @Override
+    OrderByIdFetch withExpansionPath(final Function<OrderExpansionModel<Order>, ExpansionPath<Order>> m);
+
+    @Override
+    OrderByIdFetch plusExpansionPath(final ExpansionPath<Order> expansionPath);
+
+    @Override
+    List<ExpansionPath<Order>> expansionPaths();
+
+    @Override
+    OrderByIdFetch withExpansionPath(final ExpansionPath<Order> expansionPath);
+
+    @Override
+    OrderByIdFetch withExpansionPath(final List<ExpansionPath<Order>> expansionPaths);
 }
 

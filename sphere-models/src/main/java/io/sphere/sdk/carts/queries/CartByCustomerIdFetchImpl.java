@@ -8,7 +8,7 @@ import io.sphere.sdk.queries.MetaModelFetchDslImpl;
 
 import static java.util.Arrays.asList;
 
-public class CartByCustomerIdFetchImpl extends MetaModelFetchDslImpl<Cart, CartByCustomerIdFetch, CartExpansionModel<Cart>> implements CartByCustomerIdFetch {
+final class CartByCustomerIdFetchImpl extends MetaModelFetchDslImpl<Cart, CartByCustomerIdFetch, CartExpansionModel<Cart>> implements CartByCustomerIdFetch {
 
     CartByCustomerIdFetchImpl(final String customerId) {
         super(CartEndpoint.ENDPOINT, "", CartExpansionModel.of(), CartByCustomerIdFetchImpl::new, asList(HttpQueryParameter.of("customerId", customerId)));

@@ -4,7 +4,7 @@ import io.sphere.sdk.inventories.InventoryEntry;
 import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
 import io.sphere.sdk.queries.MetaModelFetchDslImpl;
 
-public class InventoryEntryByIdFetchImpl extends MetaModelFetchDslImpl<InventoryEntry, InventoryEntryByIdFetch, InventoryEntryExpansionModel<InventoryEntry>> implements InventoryEntryByIdFetch {
+final class InventoryEntryByIdFetchImpl extends MetaModelFetchDslImpl<InventoryEntry, InventoryEntryByIdFetch, InventoryEntryExpansionModel<InventoryEntry>> implements InventoryEntryByIdFetch {
     InventoryEntryByIdFetchImpl(final String id) {
         super(id, InventoryEntryEndpoint.ENDPOINT, InventoryEntryExpansionModel.of(), InventoryEntryByIdFetchImpl::new);
     }

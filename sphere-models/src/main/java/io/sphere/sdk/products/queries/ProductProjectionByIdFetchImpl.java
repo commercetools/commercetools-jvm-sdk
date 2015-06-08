@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.MetaModelFetchDslImpl;
 
 import static java.util.Arrays.asList;
 
-public class ProductProjectionByIdFetchImpl extends MetaModelFetchDslImpl<ProductProjection, ProductProjectionByIdFetch, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionByIdFetch {
+final class ProductProjectionByIdFetchImpl extends MetaModelFetchDslImpl<ProductProjection, ProductProjectionByIdFetch, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionByIdFetch {
     ProductProjectionByIdFetchImpl(final String id, final ProductProjectionType projectionType) {
         super(ProductProjectionEndpoint.ENDPOINT, id, ProductProjectionExpansionModel.of(), ProductProjectionByIdFetchImpl::new, asList(HttpQueryParameter.of("staged", projectionType.isStaged().toString())));
     }

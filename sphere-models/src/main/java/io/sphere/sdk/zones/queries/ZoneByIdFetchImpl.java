@@ -10,7 +10,7 @@ import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
  {@include.example io.sphere.sdk.zones.queries.ZoneByIdFetchTest#fetchById()}
  */
-public class ZoneByIdFetchImpl extends MetaModelFetchDslImpl<Zone, ZoneByIdFetch, ZoneExpansionModel<Zone>> implements ZoneByIdFetch {
+final class ZoneByIdFetchImpl extends MetaModelFetchDslImpl<Zone, ZoneByIdFetch, ZoneExpansionModel<Zone>> implements ZoneByIdFetch {
     ZoneByIdFetchImpl(final String id) {
         super(id, ZoneEndpoint.ENDPOINT, ZoneExpansionModel.of(), ZoneByIdFetchImpl::new);
     }
