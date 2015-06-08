@@ -96,4 +96,9 @@ public class FetchImpl<T, C> extends SphereRequestBase implements FetchDsl<T, C>
         Objects.requireNonNull(expansionPath);
         return withExpansionPath(asList(expansionPath));
     }
+
+    @Override
+    public Fetch<T> toFetch() {
+        return this;
+    }
 }

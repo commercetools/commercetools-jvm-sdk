@@ -121,6 +121,11 @@ public class MetaModelFetchDslImpl<T, C extends MetaModelFetchDsl<T, C, E>, E> e
         return withExpansionPath(asList(expansionPath));
     }
 
+    @Override
+    public Fetch<T> toFetch() {
+        return this;
+    }
+
     protected MetaModelFetchDslBuilder<T, C, E> copyBuilder() {
         return new MetaModelFetchDslBuilder<>(this);
     }
