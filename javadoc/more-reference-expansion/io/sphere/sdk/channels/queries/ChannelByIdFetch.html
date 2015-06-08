@@ -174,7 +174,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" ti
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/Fetch.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/Fetch.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a>, <a href="../../../../../io/sphere/sdk/queries/Fetch.html#toFetch--">toFetch</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequest">
@@ -223,7 +223,28 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" ti
 <h4>plusExpansionPath</h4>
 <pre><a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>&nbsp;plusExpansionPath(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/channels/expansion/ChannelExpansionModel.html" title="class in io.sphere.sdk.channels.expansion">ChannelExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;,<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;&nbsp;m)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#plusExpansionPath-java.util.function.Function-">MetaModelFetchDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.</div>
+<div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.
+
+ <p>An example in the product projection context:</p>
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-expandCategoriesDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch1 = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
+        .plusExpansionPath(m -&gt; m.categories());
+assertThat(fetch1.expansionPaths())
+        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
+
+final ProductProjectionByIdFetch fetch2 = fetch1.plusExpansionPath(m -&gt; m.productType());
+assertThat(fetch2.expansionPaths())
+        .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")))
+        .isEqualTo(listOf(fetch1.expansionPaths(), ExpansionPath.of("productType")));
+
+//this is equivalent to
+
+final ExpansionPath&lt;ProductProjection&gt; categoryExpand = ProductProjectionExpansionModel.of().categories();
+final ExpansionPath&lt;ProductProjection&gt; productTypeExpand = ProductProjectionExpansionModel.of().productType();
+final ProductProjectionByIdFetch fetchB = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
+                .withExpansionPath(asList(categoryExpand, productTypeExpand));
+assertThat(fetchB.expansionPaths())
+        .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#plusExpansionPath-java.util.function.Function-">plusExpansionPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>,<a href="../../../../../io/sphere/sdk/channels/expansion/ChannelExpansionModel.html" title="class in io.sphere.sdk.channels.expansion">ChannelExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;</code></dd>
@@ -242,7 +263,23 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" ti
 <h4>withExpansionPath</h4>
 <pre><a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>&nbsp;withExpansionPath(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/channels/expansion/ChannelExpansionModel.html" title="class in io.sphere.sdk.channels.expansion">ChannelExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;,<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;&nbsp;m)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#withExpansionPath-java.util.function.Function-">MetaModelFetchDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.</div>
+<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.
+
+ <p>An example in the product projection context:</p>
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDslDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
+                .plusExpansionPath(ProductProjectionExpansionModel.of().categories());
+
+assertThat(fetch.expansionPaths())
+        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
+
+final ProductProjectionByIdFetch fetch2 =
+        fetch.withExpansionPath(m -&gt; m.productType());
+
+assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged")
+        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
+assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
+assertThat(fetch2).isNotSameAs(fetch);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#withExpansionPath-java.util.function.Function-">withExpansionPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>,<a href="../../../../../io/sphere/sdk/channels/expansion/ChannelExpansionModel.html" title="class in io.sphere.sdk.channels.expansion">ChannelExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;</code></dd>
@@ -266,6 +303,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" ti
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/FetchDsl.html#expansionPaths--">expansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#expansionPaths--">expansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>,<a href="../../../../../io/sphere/sdk/channels/expansion/ChannelExpansionModel.html" title="class in io.sphere.sdk.channels.expansion">ChannelExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/ReferenceExpandeable.html#expansionPaths--">expansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>list if expansion paths or an empty list</dd>
@@ -280,8 +319,23 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" ti
 <h4>plusExpansionPath</h4>
 <pre><a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>&nbsp;plusExpansionPath(<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;expansionPath)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">ReferenceExpandeableDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but adds <code>expansionPath</code> to the expansion paths.</div>
+<div class="block">Creates a new object with the properties of the old object but adds <code>expansionPath</code> to the expansion paths.
+
+ <p>An example in the product projection context:</p>
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-plusExpansionPathDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT);
+
+assertThat(fetch.expansionPaths()).isEmpty();
+
+final ProductProjectionByIdFetch fetch2 =
+        fetch.plusExpansionPath(ProductProjectionExpansionModel.of().categories());
+
+assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged").isEmpty();
+assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("categories[*]")));
+assertThat(fetch2).isNotSameAs(fetch);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>,<a href="../../../../../io/sphere/sdk/channels/expansion/ChannelExpansionModel.html" title="class in io.sphere.sdk.channels.expansion">ChannelExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -299,8 +353,26 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" ti
 <h4>withExpansionPath</h4>
 <pre><a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>&nbsp;withExpansionPath(<a href="../../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;expansionPath)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">ReferenceExpandeableDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.</div>
+<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.
+
+ <p>An example in the product projection context:</p>
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
+                .withExpansionPath(asList(ProductProjectionExpansionModel.of().categories()));
+
+assertThat(fetch.expansionPaths())
+        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
+
+final ProductProjectionByIdFetch fetch2 =
+        fetch.withExpansionPath(ProductProjectionExpansionModel.of().productType());
+
+assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged")
+        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
+assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
+assertThat(fetch2).isNotSameAs(fetch);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>,<a href="../../../../../io/sphere/sdk/channels/expansion/ChannelExpansionModel.html" title="class in io.sphere.sdk.channels.expansion">ChannelExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -320,6 +392,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" ti
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-java.util.List-">ReferenceExpandeableDsl</a></code></span></div>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with <code>expansionPaths</code>.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#withExpansionPath-java.util.List-">withExpansionPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>,<a href="../../../../../io/sphere/sdk/channels/expansion/ChannelExpansionModel.html" title="class in io.sphere.sdk.channels.expansion">ChannelExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-java.util.List-">withExpansionPath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>

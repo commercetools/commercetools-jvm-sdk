@@ -2043,6 +2043,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/FetchImpl.html#expansionPaths--">expansionPaths()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelFetchDsl.html#expansionPaths--">expansionPaths()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelFetchDslBuilder.html#expansionPaths-java.util.List-">expansionPaths(List&lt;ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelFetchDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html#expansionPaths--">expansionPaths()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a></dt>
@@ -7054,6 +7056,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelFetchDsl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath(ExpansionPath&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath(ExpansionPath&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html#plusExpansionPath-java.util.function.Function-">plusExpansionPath(Function&lt;E, ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a></dt>
@@ -8887,6 +8891,14 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html#toFalse--">toFalse()</a></span> - Static method in class io.sphere.sdk.shippingmethods.commands.updateactions.<a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeIsDefault</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/Fetch.html#toFetch--">toFetch()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/FetchImpl.html#toFetch--">toFetch()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html#toFetch--">toFetch()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryToFetchAdapter.html#toFetch--">toFetch()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries">QueryToFetchAdapter</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/HttpRequestIntent.html#toHttpRequest-java.lang.String-">toHttpRequest(String)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/JsonUtils.html#toJson-java.lang.Object-">toJson(Object)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/JsonUtils.html" title="class in io.sphere.sdk.json">JsonUtils</a></dt>
@@ -9765,6 +9777,10 @@ the order they are declared.</div>
 <dd>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelFetchDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath(ExpansionPath&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelFetchDsl.html#withExpansionPath-java.util.List-">withExpansionPath(List&lt;ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html#withExpansionPath-java.util.List-">withExpansionPath(List&lt;ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html#withExpansionPath-java.util.function.Function-">withExpansionPath(Function&lt;E, ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a></dt>

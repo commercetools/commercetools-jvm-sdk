@@ -195,7 +195,20 @@ extends <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" ti
 <li class="blockList">
 <h4>plusExpansionPath</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a>&nbsp;plusExpansionPath(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</pre>
-<div class="block">Creates a new object with the properties of the old object but adds <code>expansionPath</code> to the expansion paths.</div>
+<div class="block">Creates a new object with the properties of the old object but adds <code>expansionPath</code> to the expansion paths.
+
+ <p>An example in the product projection context:</p>
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-plusExpansionPathDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT);
+
+assertThat(fetch.expansionPaths()).isEmpty();
+
+final ProductProjectionByIdFetch fetch2 =
+        fetch.plusExpansionPath(ProductProjectionExpansionModel.of().categories());
+
+assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged").isEmpty();
+assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("categories[*]")));
+assertThat(fetch2).isNotSameAs(fetch);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>expansionPath</code> - the new expansion path to add to the existing ones</dd>
@@ -211,7 +224,23 @@ extends <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" ti
 <li class="blockList">
 <h4>withExpansionPath</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">C</a>&nbsp;withExpansionPath(<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="type parameter in ReferenceExpandeableDsl">T</a>&gt;&nbsp;expansionPath)</pre>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.</div>
+<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.
+
+ <p>An example in the product projection context:</p>
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
+                .withExpansionPath(asList(ProductProjectionExpansionModel.of().categories()));
+
+assertThat(fetch.expansionPaths())
+        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
+
+final ProductProjectionByIdFetch fetch2 =
+        fetch.withExpansionPath(ProductProjectionExpansionModel.of().productType());
+
+assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged")
+        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
+assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
+assertThat(fetch2).isNotSameAs(fetch);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>expansionPath</code> - the new expansion paths</dd>
