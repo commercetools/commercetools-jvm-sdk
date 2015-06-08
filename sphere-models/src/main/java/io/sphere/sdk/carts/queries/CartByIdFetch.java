@@ -24,20 +24,20 @@ public interface CartByIdFetch extends MetaModelFetchDsl<Cart, CartByIdFetch, Ca
     }
 
     @Override
-    CartByIdFetch plusExpansionPath(final Function<CartExpansionModel<Cart>, ExpansionPath<Cart>> m);
+    CartByIdFetch plusExpansionPaths(final Function<CartExpansionModel<Cart>, ExpansionPath<Cart>> m);
 
     @Override
-    CartByIdFetch withExpansionPath(final Function<CartExpansionModel<Cart>, ExpansionPath<Cart>> m);
+    CartByIdFetch withExpansionPaths(final Function<CartExpansionModel<Cart>, ExpansionPath<Cart>> m);
 
     @Override
     List<ExpansionPath<Cart>> expansionPaths();
 
     @Override
-    CartByIdFetch plusExpansionPath(final ExpansionPath<Cart> expansionPath);
+    CartByIdFetch plusExpansionPaths(final ExpansionPath<Cart> expansionPath);
 
     @Override
-    CartByIdFetch withExpansionPath(final ExpansionPath<Cart> expansionPath);
+    CartByIdFetch withExpansionPaths(final ExpansionPath<Cart> expansionPath);
 
     @Override
-    CartByIdFetch withExpansionPath(final List<ExpansionPath<Cart>> expansionPaths);
+    CartByIdFetch withExpansionPaths(final List<ExpansionPath<Cart>> expansionPaths);
 }

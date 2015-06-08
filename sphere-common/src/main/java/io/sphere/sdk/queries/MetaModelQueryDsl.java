@@ -12,7 +12,7 @@ import java.util.function.Function;
  * @param <Q> type of the query model
  * @param <E> type of the expansion model
  */
-public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends EntityQuery<T>, QueryDsl<T, C> {
+public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends EntityQuery<T>, QueryDsl<T, C>,  MetaModelExpansionDsl<T, C, E> {
 
     C withPredicate(final QueryPredicate<T> predicate);
 
@@ -32,7 +32,9 @@ public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q
 
     C withAdditionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters);
 
-    C plusExpansionPath(final Function<E, ExpansionPath<T>> m);
+    @Override
+    C plusExpansionPaths(final Function<E, ExpansionPath<T>> m);
 
-    C withExpansionPath(final Function<E, ExpansionPath<T>> m);
+    @Override
+    C withExpansionPaths(final Function<E, ExpansionPath<T>> m);
 }

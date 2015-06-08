@@ -27,7 +27,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
         final Consumer<Product> user = product -> {
             final Query<Product> query = ProductQuery.of().
                     bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
-                    withExpansionPath(ProductExpansionModel.of().productType()).
+                    withExpansionPaths(ProductExpansionModel.of().productType()).
                     toQuery();
             final PagedQueryResult<Product> queryResult = execute(query);
             final Reference<ProductType> productTypeReference = queryResult.head().get().getProductType();
@@ -44,7 +44,7 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
                 assertThat(productWithTaxCategory.getTaxCategory()).isPresent();
                 final Query<Product> query = ProductQuery.of().
                         bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
-                        withExpansionPath(ProductExpansionModel.of().taxCategory()).
+                        withExpansionPaths(ProductExpansionModel.of().taxCategory()).
                         toQuery();
                 final PagedQueryResult<Product> queryResult = execute(query);
                 final Reference<TaxCategory> productTypeReference = firstOf(queryResult).getTaxCategory().get();

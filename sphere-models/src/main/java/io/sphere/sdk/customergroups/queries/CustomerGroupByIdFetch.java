@@ -19,20 +19,20 @@ public interface CustomerGroupByIdFetch extends MetaModelFetchDsl<CustomerGroup,
     }
 
     @Override
-    CustomerGroupByIdFetch plusExpansionPath(final Function<CustomerGroupExpansionModel<CustomerGroup>, ExpansionPath<CustomerGroup>> m);
+    CustomerGroupByIdFetch plusExpansionPaths(final Function<CustomerGroupExpansionModel<CustomerGroup>, ExpansionPath<CustomerGroup>> m);
 
     @Override
-    CustomerGroupByIdFetch withExpansionPath(final Function<CustomerGroupExpansionModel<CustomerGroup>, ExpansionPath<CustomerGroup>> m);
+    CustomerGroupByIdFetch withExpansionPaths(final Function<CustomerGroupExpansionModel<CustomerGroup>, ExpansionPath<CustomerGroup>> m);
 
     @Override
     List<ExpansionPath<CustomerGroup>> expansionPaths();
 
     @Override
-    CustomerGroupByIdFetch plusExpansionPath(final ExpansionPath<CustomerGroup> expansionPath);
+    CustomerGroupByIdFetch plusExpansionPaths(final ExpansionPath<CustomerGroup> expansionPath);
 
     @Override
-    CustomerGroupByIdFetch withExpansionPath(final ExpansionPath<CustomerGroup> expansionPath);
+    CustomerGroupByIdFetch withExpansionPaths(final ExpansionPath<CustomerGroup> expansionPath);
 
     @Override
-    CustomerGroupByIdFetch withExpansionPath(final List<ExpansionPath<CustomerGroup>> expansionPaths);
+    CustomerGroupByIdFetch withExpansionPaths(final List<ExpansionPath<CustomerGroup>> expansionPaths);
 }

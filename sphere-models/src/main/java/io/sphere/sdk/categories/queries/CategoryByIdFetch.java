@@ -19,20 +19,20 @@ public interface CategoryByIdFetch extends MetaModelFetchDsl<Category, CategoryB
     }
 
     @Override
-    CategoryByIdFetch plusExpansionPath(final Function<CategoryExpansionModel<Category>, ExpansionPath<Category>> m);
+    CategoryByIdFetch plusExpansionPaths(final Function<CategoryExpansionModel<Category>, ExpansionPath<Category>> m);
 
     @Override
-    CategoryByIdFetch withExpansionPath(final Function<CategoryExpansionModel<Category>, ExpansionPath<Category>> m);
+    CategoryByIdFetch withExpansionPaths(final Function<CategoryExpansionModel<Category>, ExpansionPath<Category>> m);
 
     @Override
     List<ExpansionPath<Category>> expansionPaths();
 
     @Override
-    CategoryByIdFetch plusExpansionPath(final ExpansionPath<Category> expansionPath);
+    CategoryByIdFetch plusExpansionPaths(final ExpansionPath<Category> expansionPath);
 
     @Override
-    CategoryByIdFetch withExpansionPath(final ExpansionPath<Category> expansionPath);
+    CategoryByIdFetch withExpansionPaths(final ExpansionPath<Category> expansionPath);
 
     @Override
-    CategoryByIdFetch withExpansionPath(final List<ExpansionPath<Category>> expansionPaths);
+    CategoryByIdFetch withExpansionPaths(final List<ExpansionPath<Category>> expansionPaths);
 }

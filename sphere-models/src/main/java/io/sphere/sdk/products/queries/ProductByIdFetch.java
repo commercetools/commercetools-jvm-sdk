@@ -19,21 +19,21 @@ public interface ProductByIdFetch extends MetaModelFetchDsl<Product, ProductById
     }
 
     @Override
-    ProductByIdFetch plusExpansionPath(final Function<ProductExpansionModel<Product>, ExpansionPath<Product>> m);
+    ProductByIdFetch plusExpansionPaths(final Function<ProductExpansionModel<Product>, ExpansionPath<Product>> m);
 
     @Override
-    ProductByIdFetch withExpansionPath(final Function<ProductExpansionModel<Product>, ExpansionPath<Product>> m);
+    ProductByIdFetch withExpansionPaths(final Function<ProductExpansionModel<Product>, ExpansionPath<Product>> m);
 
     @Override
     List<ExpansionPath<Product>> expansionPaths();
 
     @Override
-    ProductByIdFetch plusExpansionPath(final ExpansionPath<Product> expansionPath);
+    ProductByIdFetch plusExpansionPaths(final ExpansionPath<Product> expansionPath);
 
     @Override
-    ProductByIdFetch withExpansionPath(final ExpansionPath<Product> expansionPath);
+    ProductByIdFetch withExpansionPaths(final ExpansionPath<Product> expansionPath);
 
     @Override
-    ProductByIdFetch withExpansionPath(final List<ExpansionPath<Product>> expansionPaths);
+    ProductByIdFetch withExpansionPaths(final List<ExpansionPath<Product>> expansionPaths);
 }
 

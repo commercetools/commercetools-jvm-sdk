@@ -29,7 +29,7 @@ public class CategoryExpansionModelTest extends IntegrationTest {
                         final ExpansionPath<Category> expansionPath =
                                 CategoryExpansionModel.of().ancestors().ancestors();
                         final Query<Category> query = CategoryQuery.of().byId(level4.getId())
-                                .withExpansionPath(expansionPath)
+                                .withExpansionPaths(expansionPath)
                                 .toQuery();
                         final PagedQueryResult<Category> queryResult = execute(query);
                         final Category loadedLevel4 = queryResult.head().get();
@@ -52,7 +52,7 @@ public class CategoryExpansionModelTest extends IntegrationTest {
         withCategory(client(), CategoryDraftBuilder.of(en("1"), en("level1")), level1 -> {
             withCategory(client(), CategoryDraftBuilder.of(en("2"), en("level2")).parent(level1), level2 -> {
                 final Query<Category> query = CategoryQuery.of().byId(level2.getId())
-                        .withExpansionPath(CategoryExpansionModel.of().parent())
+                        .withExpansionPaths(CategoryExpansionModel.of().parent())
                         .toQuery();
                 final PagedQueryResult<Category> queryResult = execute(query);
                 final Category loadedLevel2 = queryResult.head().get();

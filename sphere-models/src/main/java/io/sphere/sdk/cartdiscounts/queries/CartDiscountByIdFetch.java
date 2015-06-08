@@ -22,20 +22,20 @@ public interface CartDiscountByIdFetch extends MetaModelFetchDsl<CartDiscount, C
     }
 
     @Override
-    CartDiscountByIdFetch plusExpansionPath(final Function<CartDiscountExpansionModel<CartDiscount>, ExpansionPath<CartDiscount>> m);
+    CartDiscountByIdFetch plusExpansionPaths(final Function<CartDiscountExpansionModel<CartDiscount>, ExpansionPath<CartDiscount>> m);
 
     @Override
-    CartDiscountByIdFetch withExpansionPath(final Function<CartDiscountExpansionModel<CartDiscount>, ExpansionPath<CartDiscount>> m);
+    CartDiscountByIdFetch withExpansionPaths(final Function<CartDiscountExpansionModel<CartDiscount>, ExpansionPath<CartDiscount>> m);
 
     @Override
     List<ExpansionPath<CartDiscount>> expansionPaths();
 
     @Override
-    CartDiscountByIdFetch plusExpansionPath(final ExpansionPath<CartDiscount> expansionPath);
+    CartDiscountByIdFetch plusExpansionPaths(final ExpansionPath<CartDiscount> expansionPath);
 
     @Override
-    CartDiscountByIdFetch withExpansionPath(final ExpansionPath<CartDiscount> expansionPath);
+    CartDiscountByIdFetch withExpansionPaths(final ExpansionPath<CartDiscount> expansionPath);
 
     @Override
-    CartDiscountByIdFetch withExpansionPath(final List<ExpansionPath<CartDiscount>> expansionPaths);
+    CartDiscountByIdFetch withExpansionPaths(final List<ExpansionPath<CartDiscount>> expansionPaths);
 }

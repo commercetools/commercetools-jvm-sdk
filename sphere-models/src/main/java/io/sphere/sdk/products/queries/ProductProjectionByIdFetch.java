@@ -21,20 +21,20 @@ public interface ProductProjectionByIdFetch extends MetaModelFetchDsl<ProductPro
     }
 
     @Override
-    ProductProjectionByIdFetch plusExpansionPath(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
+    ProductProjectionByIdFetch plusExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
 
     @Override
-    ProductProjectionByIdFetch withExpansionPath(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
+    ProductProjectionByIdFetch withExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
 
     @Override
     List<ExpansionPath<ProductProjection>> expansionPaths();
 
     @Override
-    ProductProjectionByIdFetch plusExpansionPath(final ExpansionPath<ProductProjection> expansionPath);
+    ProductProjectionByIdFetch plusExpansionPaths(final ExpansionPath<ProductProjection> expansionPath);
 
     @Override
-    ProductProjectionByIdFetch withExpansionPath(final ExpansionPath<ProductProjection> expansionPath);
+    ProductProjectionByIdFetch withExpansionPaths(final ExpansionPath<ProductProjection> expansionPath);
 
     @Override
-    ProductProjectionByIdFetch withExpansionPath(final List<ExpansionPath<ProductProjection>> expansionPaths);
+    ProductProjectionByIdFetch withExpansionPaths(final List<ExpansionPath<ProductProjection>> expansionPaths);
 }

@@ -34,7 +34,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
             withUpdateablePricedProduct(client(), PRICE.withCustomerGroup(customerGroup), product -> {
                 final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                                 .withPredicate(m -> m.id().is(product.getId()))
-                                .withExpansionPath(m -> m.masterVariant().prices().customerGroup());
+                                .withExpansionPaths(m -> m.masterVariant().prices().customerGroup());
                 final List<Price> prices = execute(query).head().get().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()
@@ -51,7 +51,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
             withUpdateablePricedProduct(client(), PRICE.withChannel(channel), product -> {
                 final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                         .withPredicate(m -> m.id().is(product.getId()))
-                        .withExpansionPath(m -> m.masterVariant().prices().channel());
+                        .withExpansionPaths(m -> m.masterVariant().prices().channel());
                 final List<Price> prices = execute(query).head().get().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()

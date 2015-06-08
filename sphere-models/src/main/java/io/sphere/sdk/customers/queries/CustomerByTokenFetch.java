@@ -18,20 +18,20 @@ public interface CustomerByTokenFetch extends MetaModelFetchDsl<Customer, Custom
     }
 
     @Override
-    CustomerByTokenFetch plusExpansionPath(final Function<CustomerExpansionModel<Customer>, ExpansionPath<Customer>> m);
+    CustomerByTokenFetch plusExpansionPaths(final Function<CustomerExpansionModel<Customer>, ExpansionPath<Customer>> m);
 
     @Override
-    CustomerByTokenFetch withExpansionPath(final Function<CustomerExpansionModel<Customer>, ExpansionPath<Customer>> m);
+    CustomerByTokenFetch withExpansionPaths(final Function<CustomerExpansionModel<Customer>, ExpansionPath<Customer>> m);
 
     @Override
     List<ExpansionPath<Customer>> expansionPaths();
 
     @Override
-    CustomerByTokenFetch plusExpansionPath(final ExpansionPath<Customer> expansionPath);
+    CustomerByTokenFetch plusExpansionPaths(final ExpansionPath<Customer> expansionPath);
 
     @Override
-    CustomerByTokenFetch withExpansionPath(final ExpansionPath<Customer> expansionPath);
+    CustomerByTokenFetch withExpansionPaths(final ExpansionPath<Customer> expansionPath);
 
     @Override
-    CustomerByTokenFetch withExpansionPath(final List<ExpansionPath<Customer>> expansionPaths);
+    CustomerByTokenFetch withExpansionPaths(final List<ExpansionPath<Customer>> expansionPaths);
 }

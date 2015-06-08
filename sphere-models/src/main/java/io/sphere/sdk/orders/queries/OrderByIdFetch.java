@@ -24,21 +24,21 @@ public interface OrderByIdFetch extends MetaModelFetchDsl<Order, OrderByIdFetch,
     }
 
     @Override
-    OrderByIdFetch plusExpansionPath(final Function<OrderExpansionModel<Order>, ExpansionPath<Order>> m);
+    OrderByIdFetch plusExpansionPaths(final Function<OrderExpansionModel<Order>, ExpansionPath<Order>> m);
 
     @Override
-    OrderByIdFetch withExpansionPath(final Function<OrderExpansionModel<Order>, ExpansionPath<Order>> m);
+    OrderByIdFetch withExpansionPaths(final Function<OrderExpansionModel<Order>, ExpansionPath<Order>> m);
 
     @Override
-    OrderByIdFetch plusExpansionPath(final ExpansionPath<Order> expansionPath);
+    OrderByIdFetch plusExpansionPaths(final ExpansionPath<Order> expansionPath);
 
     @Override
     List<ExpansionPath<Order>> expansionPaths();
 
     @Override
-    OrderByIdFetch withExpansionPath(final ExpansionPath<Order> expansionPath);
+    OrderByIdFetch withExpansionPaths(final ExpansionPath<Order> expansionPath);
 
     @Override
-    OrderByIdFetch withExpansionPath(final List<ExpansionPath<Order>> expansionPaths);
+    OrderByIdFetch withExpansionPaths(final List<ExpansionPath<Order>> expansionPaths);
 }
 

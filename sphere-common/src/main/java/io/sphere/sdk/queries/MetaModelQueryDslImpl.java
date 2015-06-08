@@ -115,7 +115,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
-    public C withExpansionPath(final List<ExpansionPath<T>> expansionPaths) {
+    public C withExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
         return copyBuilder().expansionPaths(expansionPaths).build();
     }
 
@@ -125,13 +125,13 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
-    public C plusExpansionPath(final Function<E, ExpansionPath<T>> m) {
-        return plusExpansionPath(m.apply(expansionModel));
+    public C plusExpansionPaths(final Function<E, ExpansionPath<T>> m) {
+        return plusExpansionPaths(m.apply(expansionModel));
     }
 
     @Override
-    public C withExpansionPath(final Function<E, ExpansionPath<T>> m) {
-        return withExpansionPath(asList(m.apply(expansionModel)));
+    public C withExpansionPaths(final Function<E, ExpansionPath<T>> m) {
+        return withExpansionPaths(asList(m.apply(expansionModel)));
     }
 
     @Override
@@ -237,13 +237,13 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
-    public C plusExpansionPath(final ExpansionPath<T> expansionPath) {
-        return withExpansionPath(listOf(expansionPaths(), expansionPath));
+    public C plusExpansionPaths(final ExpansionPath<T> expansionPath) {
+        return withExpansionPaths(listOf(expansionPaths(), expansionPath));
     }
 
     @Override
-    public C withExpansionPath(final ExpansionPath<T> expansionPath) {
+    public C withExpansionPaths(final ExpansionPath<T> expansionPath) {
         Objects.requireNonNull(expansionPath);
-        return withExpansionPath(asList(expansionPath));
+        return withExpansionPaths(asList(expansionPath));
     }
 }

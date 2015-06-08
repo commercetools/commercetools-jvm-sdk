@@ -19,21 +19,21 @@ public interface ChannelByIdFetch extends MetaModelFetchDsl<Channel, ChannelById
     }
 
     @Override
-    ChannelByIdFetch plusExpansionPath(final Function<ChannelExpansionModel<Channel>, ExpansionPath<Channel>> m);
+    ChannelByIdFetch plusExpansionPaths(final Function<ChannelExpansionModel<Channel>, ExpansionPath<Channel>> m);
 
     @Override
-    ChannelByIdFetch withExpansionPath(final Function<ChannelExpansionModel<Channel>, ExpansionPath<Channel>> m);
+    ChannelByIdFetch withExpansionPaths(final Function<ChannelExpansionModel<Channel>, ExpansionPath<Channel>> m);
 
     @Override
     List<ExpansionPath<Channel>> expansionPaths();
 
     @Override
-    ChannelByIdFetch plusExpansionPath(final ExpansionPath<Channel> expansionPath);
+    ChannelByIdFetch plusExpansionPaths(final ExpansionPath<Channel> expansionPath);
 
     @Override
-    ChannelByIdFetch withExpansionPath(final ExpansionPath<Channel> expansionPath);
+    ChannelByIdFetch withExpansionPaths(final ExpansionPath<Channel> expansionPath);
 
     @Override
-    ChannelByIdFetch withExpansionPath(final List<ExpansionPath<Channel>> expansionPaths);
+    ChannelByIdFetch withExpansionPaths(final List<ExpansionPath<Channel>> expansionPaths);
 }
 

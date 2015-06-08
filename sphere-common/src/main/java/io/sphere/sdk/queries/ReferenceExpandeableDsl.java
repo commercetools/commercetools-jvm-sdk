@@ -8,7 +8,7 @@ public interface ReferenceExpandeableDsl<T, C> extends ReferenceExpandeable<T> {
      * @param expansionPaths the new expansion paths
      * @return new object
      */
-    C withExpansionPath(final List<ExpansionPath<T>> expansionPaths);
+    C withExpansionPaths(final List<ExpansionPath<T>> expansionPaths);
 
     /**
      * Creates a new object with the properties of the old object but adds {@code expansionPath} to the expansion paths.
@@ -19,7 +19,7 @@ public interface ReferenceExpandeableDsl<T, C> extends ReferenceExpandeable<T> {
      * @param expansionPath the new expansion path to add to the existing ones
      * @return new object
      */
-    C plusExpansionPath(final ExpansionPath<T> expansionPath);
+    C plusExpansionPaths(final ExpansionPath<T> expansionPath);
 
     /**
      * Creates a new object with the properties of the old object but replaces all expansion paths with a single {@code expansionPath}.
@@ -30,5 +30,5 @@ public interface ReferenceExpandeableDsl<T, C> extends ReferenceExpandeable<T> {
      * @param expansionPath the new expansion paths
      * @return new object
      */
-    C withExpansionPath(final ExpansionPath<T> expansionPath);
+    C withExpansionPaths(final ExpansionPath<T> expansionPath);
 }

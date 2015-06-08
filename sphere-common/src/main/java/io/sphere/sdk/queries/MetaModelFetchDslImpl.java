@@ -97,28 +97,28 @@ public class MetaModelFetchDslImpl<T, C extends MetaModelFetchDsl<T, C, E>, E> e
     }
 
     @Override
-    public final C plusExpansionPath(final ExpansionPath<T> expansionPath) {
-        return withExpansionPath(listOf(expansionPaths(), expansionPath));
+    public final C plusExpansionPaths(final ExpansionPath<T> expansionPath) {
+        return withExpansionPaths(listOf(expansionPaths(), expansionPath));
     }
 
     @Override
-    public final C plusExpansionPath(final Function<E, ExpansionPath<T>> m) {
-        return plusExpansionPath(m.apply(expansionModel));
+    public final C plusExpansionPaths(final Function<E, ExpansionPath<T>> m) {
+        return plusExpansionPaths(m.apply(expansionModel));
     }
 
     @Override
-    public final C withExpansionPath(final List<ExpansionPath<T>> expansionPaths) {
+    public final C withExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
         return copyBuilder().expansionPaths(expansionPaths).build();
     }
 
     @Override
-    public final C withExpansionPath(final Function<E, ExpansionPath<T>> m) {
-        return withExpansionPath(asList(m.apply(expansionModel)));
+    public final C withExpansionPaths(final Function<E, ExpansionPath<T>> m) {
+        return withExpansionPaths(asList(m.apply(expansionModel)));
     }
 
     @Override
-    public final C withExpansionPath(final ExpansionPath<T> expansionPath) {
-        return withExpansionPath(asList(expansionPath));
+    public final C withExpansionPaths(final ExpansionPath<T> expansionPath) {
+        return withExpansionPaths(asList(expansionPath));
     }
 
     @Override

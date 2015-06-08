@@ -19,21 +19,21 @@ public interface DiscountCodeByIdFetch extends MetaModelFetchDsl<DiscountCode, D
     }
 
     @Override
-    DiscountCodeByIdFetch plusExpansionPath(final Function<DiscountCodeExpansionModel<DiscountCode>, ExpansionPath<DiscountCode>> m);
+    DiscountCodeByIdFetch plusExpansionPaths(final Function<DiscountCodeExpansionModel<DiscountCode>, ExpansionPath<DiscountCode>> m);
 
     @Override
-    DiscountCodeByIdFetch withExpansionPath(final Function<DiscountCodeExpansionModel<DiscountCode>, ExpansionPath<DiscountCode>> m);
+    DiscountCodeByIdFetch withExpansionPaths(final Function<DiscountCodeExpansionModel<DiscountCode>, ExpansionPath<DiscountCode>> m);
 
     @Override
     List<ExpansionPath<DiscountCode>> expansionPaths();
 
     @Override
-    DiscountCodeByIdFetch plusExpansionPath(final ExpansionPath<DiscountCode> expansionPath);
+    DiscountCodeByIdFetch plusExpansionPaths(final ExpansionPath<DiscountCode> expansionPath);
 
     @Override
-    DiscountCodeByIdFetch withExpansionPath(final ExpansionPath<DiscountCode> expansionPath);
+    DiscountCodeByIdFetch withExpansionPaths(final ExpansionPath<DiscountCode> expansionPath);
 
     @Override
-    DiscountCodeByIdFetch withExpansionPath(final List<ExpansionPath<DiscountCode>> expansionPaths);
+    DiscountCodeByIdFetch withExpansionPaths(final List<ExpansionPath<DiscountCode>> expansionPaths);
 }
 

@@ -47,7 +47,7 @@ public class InventoryEntryQueryTest extends IntegrationTest {
                 final Query<InventoryEntry> query = InventoryEntryQuery.of()
                         .withPredicate(predicate)
                         .withSort(m -> m.id().sort(QuerySortDirection.DESC))
-                        .withExpansionPath(m -> m.supplyChannel());
+                        .withExpansionPaths(m -> m.supplyChannel());
                 final PagedQueryResult<InventoryEntry> result = execute(query);
                 assertThat(result.head().map(e -> e.getId())).contains(entry.getId());
                 assertThat(result.head().get().getSupplyChannel().get().getObj().get().getRoles())

@@ -13,7 +13,7 @@ public class CustomerByIdFetchTest extends IntegrationTest {
     public void execution() throws Exception {
         withCustomerInGroup(client(), (customer, customerGroup) -> {
             final Fetch<Customer> fetch = CustomerByIdFetch.of(customer)
-                    .withExpansionPath(CustomerExpansionModel.of().customerGroup());
+                    .withExpansionPaths(CustomerExpansionModel.of().customerGroup());
             final Customer fetchedCustomer = execute(fetch).get();
             assertThat(fetchedCustomer.getId()).isEqualTo(customer.getId());
             assertThat(fetchedCustomer.getCustomerGroup().get().getObj().get().getId()).isEqualTo(customerGroup.getId());

@@ -24,21 +24,21 @@ public interface ZoneByIdFetch extends MetaModelFetchDsl<Zone, ZoneByIdFetch, Zo
     }
 
     @Override
-    ZoneByIdFetch withExpansionPath(final Function<ZoneExpansionModel<Zone>, ExpansionPath<Zone>> m);
+    ZoneByIdFetch withExpansionPaths(final Function<ZoneExpansionModel<Zone>, ExpansionPath<Zone>> m);
 
     @Override
-    ZoneByIdFetch plusExpansionPath(final Function<ZoneExpansionModel<Zone>, ExpansionPath<Zone>> m);
+    ZoneByIdFetch plusExpansionPaths(final Function<ZoneExpansionModel<Zone>, ExpansionPath<Zone>> m);
 
     @Override
     List<ExpansionPath<Zone>> expansionPaths();
 
     @Override
-    ZoneByIdFetch plusExpansionPath(final ExpansionPath<Zone> expansionPath);
+    ZoneByIdFetch plusExpansionPaths(final ExpansionPath<Zone> expansionPath);
 
     @Override
-    ZoneByIdFetch withExpansionPath(final ExpansionPath<Zone> expansionPath);
+    ZoneByIdFetch withExpansionPaths(final ExpansionPath<Zone> expansionPath);
 
     @Override
-    ZoneByIdFetch withExpansionPath(final List<ExpansionPath<Zone>> expansionPaths);
+    ZoneByIdFetch withExpansionPaths(final List<ExpansionPath<Zone>> expansionPaths);
 }
 

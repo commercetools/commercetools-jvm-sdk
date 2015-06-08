@@ -29,17 +29,17 @@ public interface CustomObjectByKeyFetch<T> extends MetaModelFetchDsl<CustomObjec
     }
 
     @Override
-    CustomObjectByKeyFetch<T> plusExpansionPath(final Function<Void, ExpansionPath<CustomObject<T>>> m);
+    CustomObjectByKeyFetch<T> plusExpansionPaths(final Function<Void, ExpansionPath<CustomObject<T>>> m);
 
     @Override
-    CustomObjectByKeyFetch<T> withExpansionPath(final Function<Void, ExpansionPath<CustomObject<T>>> m);
+    CustomObjectByKeyFetch<T> withExpansionPaths(final Function<Void, ExpansionPath<CustomObject<T>>> m);
 
     @Override
-    CustomObjectByKeyFetch<T> plusExpansionPath(final ExpansionPath<CustomObject<T>> expansionPath);
+    CustomObjectByKeyFetch<T> plusExpansionPaths(final ExpansionPath<CustomObject<T>> expansionPath);
 
     @Override
-    CustomObjectByKeyFetch<T> withExpansionPath(final ExpansionPath<CustomObject<T>> expansionPath);
+    CustomObjectByKeyFetch<T> withExpansionPaths(final ExpansionPath<CustomObject<T>> expansionPath);
 
     @Override
-    CustomObjectByKeyFetch<T> withExpansionPath(final List<ExpansionPath<CustomObject<T>>> expansionPaths);
+    CustomObjectByKeyFetch<T> withExpansionPaths(final List<ExpansionPath<CustomObject<T>>> expansionPaths);
 }

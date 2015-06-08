@@ -41,7 +41,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
             final Query<ProductProjection> query =
                     ProductProjectionQuery.of(STAGED)
                             .byProductType(p1.getProductType())
-                            .withExpansionPath(m -> m.productType());
+                            .withExpansionPaths(m -> m.productType());
             final PagedQueryResult<ProductProjection> queryResult = execute(query);
             assertThat(queryResult.head().get().getProductType()).isExpanded();
             assertThat(ids(queryResult)).containsOnly(p1.getId());
@@ -85,7 +85,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
                                                             final Product productWithCat1 = execute(ProductUpdateCommand.of(p1, AddToCategory.of(cat1WithParent, STAGED_AND_CURRENT)));
                                                             final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                                                                     .withPredicate(m -> m.categories().isIn(asList(cat1, cat2)))
-                                                                    .withExpansionPath(m -> m.categories().parent());
+                                                                    .withExpansionPaths(m -> m.categories().parent());
                                                             final PagedQueryResult<ProductProjection> queryResult = execute(query);
                                                             assertThat(ids(queryResult)).containsOnly(productWithCat1.getId());
                                                             final Reference<Category> cat1Loaded = queryResult.head().get().getCategories().stream().findAny().get();
@@ -142,7 +142,7 @@ public class ProductProjectionIntegrationTest extends IntegrationTest {
                 final PagedQueryResult<ProductProjection> pagedQueryResult =
                         execute(ProductProjectionQuery.of(STAGED)
                                 .withPredicate(m -> m.id().is(productWithTaxCategory.getId()))
-                                .withExpansionPath(m -> m.taxCategory()));
+                                .withExpansionPaths(m -> m.taxCategory()));
                 assertThat(pagedQueryResult.head().get().getTaxCategory().get()).isExpanded();
             })
         );

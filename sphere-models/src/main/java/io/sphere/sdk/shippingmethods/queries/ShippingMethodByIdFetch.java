@@ -24,21 +24,21 @@ public interface ShippingMethodByIdFetch extends MetaModelFetchDsl<ShippingMetho
     }
 
     @Override
-    ShippingMethodByIdFetch plusExpansionPath(final Function<ShippingMethodExpansionModel<ShippingMethod>, ExpansionPath<ShippingMethod>> m);
+    ShippingMethodByIdFetch plusExpansionPaths(final Function<ShippingMethodExpansionModel<ShippingMethod>, ExpansionPath<ShippingMethod>> m);
 
     @Override
-    ShippingMethodByIdFetch withExpansionPath(final Function<ShippingMethodExpansionModel<ShippingMethod>, ExpansionPath<ShippingMethod>> m);
+    ShippingMethodByIdFetch withExpansionPaths(final Function<ShippingMethodExpansionModel<ShippingMethod>, ExpansionPath<ShippingMethod>> m);
 
     @Override
     List<ExpansionPath<ShippingMethod>> expansionPaths();
 
     @Override
-    ShippingMethodByIdFetch plusExpansionPath(final ExpansionPath<ShippingMethod> expansionPath);
+    ShippingMethodByIdFetch plusExpansionPaths(final ExpansionPath<ShippingMethod> expansionPath);
 
     @Override
-    ShippingMethodByIdFetch withExpansionPath(final ExpansionPath<ShippingMethod> expansionPath);
+    ShippingMethodByIdFetch withExpansionPaths(final ExpansionPath<ShippingMethod> expansionPath);
 
     @Override
-    ShippingMethodByIdFetch withExpansionPath(final List<ExpansionPath<ShippingMethod>> expansionPaths);
+    ShippingMethodByIdFetch withExpansionPaths(final List<ExpansionPath<ShippingMethod>> expansionPaths);
 }
 

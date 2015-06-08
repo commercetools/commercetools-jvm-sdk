@@ -14,7 +14,7 @@ public class CategoryByIdFetchTest extends IntegrationTest {
     public void execution() throws Exception {
         CategoryFixtures.withCategoryAndParentCategory(client(), (category, parent) -> {
             final Fetch<Category> fetch = CategoryByIdFetch.of(category)
-                    .withExpansionPath(CategoryExpansionModel.of().parent());
+                    .withExpansionPaths(CategoryExpansionModel.of().parent());
             final Category loadedCategory = execute(fetch).get();
             assertThat(loadedCategory.getId()).isEqualTo(category.getId());
             assertThat(loadedCategory.getParent().get().getObj().get().getId()).isEqualTo(parent.getId());

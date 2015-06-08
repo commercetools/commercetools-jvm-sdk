@@ -18,21 +18,21 @@ public interface InventoryEntryByIdFetch extends MetaModelFetchDsl<InventoryEntr
     }
 
     @Override
-    InventoryEntryByIdFetch plusExpansionPath(final Function<InventoryEntryExpansionModel<InventoryEntry>, ExpansionPath<InventoryEntry>> m);
+    InventoryEntryByIdFetch plusExpansionPaths(final Function<InventoryEntryExpansionModel<InventoryEntry>, ExpansionPath<InventoryEntry>> m);
 
     @Override
-    InventoryEntryByIdFetch withExpansionPath(final Function<InventoryEntryExpansionModel<InventoryEntry>, ExpansionPath<InventoryEntry>> m);
+    InventoryEntryByIdFetch withExpansionPaths(final Function<InventoryEntryExpansionModel<InventoryEntry>, ExpansionPath<InventoryEntry>> m);
 
     @Override
     List<ExpansionPath<InventoryEntry>> expansionPaths();
 
     @Override
-    InventoryEntryByIdFetch plusExpansionPath(final ExpansionPath<InventoryEntry> expansionPath);
+    InventoryEntryByIdFetch plusExpansionPaths(final ExpansionPath<InventoryEntry> expansionPath);
 
     @Override
-    InventoryEntryByIdFetch withExpansionPath(final ExpansionPath<InventoryEntry> expansionPath);
+    InventoryEntryByIdFetch withExpansionPaths(final ExpansionPath<InventoryEntry> expansionPath);
 
     @Override
-    InventoryEntryByIdFetch withExpansionPath(final List<ExpansionPath<InventoryEntry>> expansionPaths);
+    InventoryEntryByIdFetch withExpansionPaths(final List<ExpansionPath<InventoryEntry>> expansionPaths);
 }
 

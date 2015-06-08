@@ -8,7 +8,6 @@ import io.sphere.sdk.products.VariantIdentifier;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
 import io.sphere.sdk.queries.ExpansionPath;
 import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -31,7 +30,7 @@ public class ProductQueryTest extends IntegrationTest {
     public void canExpandItsCategories() throws Exception {
         withProductInCategory(client(), (product, category) -> {
             final Query<Product> query = query(product)
-                    .withExpansionPath(ProductExpansionModel.of().masterData().staged().categories());
+                    .withExpansionPaths(ProductExpansionModel.of().masterData().staged().categories());
             assertThat(execute(query).head().get().getMasterData().getStaged().getCategories().stream().anyMatch(reference -> reference.getObj().isPresent()))
                     .isTrue();
         });
@@ -43,7 +42,7 @@ public class ProductQueryTest extends IntegrationTest {
         withCustomerGroup(client(), customerGroup ->
             withUpdateablePricedProduct(client(), PRICE.withCustomerGroup(customerGroup), product -> {
                 final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().customerGroup();
-                final Query<Product> query = query(product).withExpansionPath(expansionPath);
+                final Query<Product> query = query(product).withExpansionPaths(expansionPath);
                 final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()
@@ -59,7 +58,7 @@ public class ProductQueryTest extends IntegrationTest {
         ChannelFixtures.withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
             withUpdateablePricedProduct(client(), PRICE.withChannel(channel), product -> {
                 final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().channel();
-                final Query<Product> query = query(product).withExpansionPath(expansionPath);
+                final Query<Product> query = query(product).withExpansionPaths(expansionPath);
                 final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()

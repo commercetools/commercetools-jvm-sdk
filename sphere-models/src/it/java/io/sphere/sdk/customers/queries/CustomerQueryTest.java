@@ -42,7 +42,7 @@ public class CustomerQueryTest extends IntegrationTest {
         withCustomerInGroup(client(), (customer, customerGroup) -> {
             final Query<Customer> query = CustomerQuery.of()
                     .byEmail(customer.getEmail())
-                    .withExpansionPath(CustomerExpansionModel.of().customerGroup());
+                    .withExpansionPaths(CustomerExpansionModel.of().customerGroup());
             final String actualCustomerGroupId = execute(query).head().get().getCustomerGroup().get().getObj().get().getId();
             assertThat(actualCustomerGroupId).isEqualTo(customerGroup.getId());
         });
