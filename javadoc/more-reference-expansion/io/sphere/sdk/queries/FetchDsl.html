@@ -18,6 +18,12 @@
     catch(err) {
     }
 //-->
+var methods = {"i0":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var altColor = "altColor";
+var rowColor = "rowColor";
+var tableTab = "tableTab";
+var activeTableTab = "activeTableTab";
 </script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -70,13 +76,13 @@
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.top">
@@ -86,7 +92,7 @@
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.queries</div>
-<h2 title="Interface FetchDsl" class="title">Interface FetchDsl&lt;T&gt;</h2>
+<h2 title="Interface FetchDsl" class="title">Interface FetchDsl&lt;T,C&gt;</h2>
 </div>
 <div class="contentContainer">
 <div class="description">
@@ -94,16 +100,20 @@
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;T&gt;&gt;, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.Optional&lt;T&gt;&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.Optional&lt;T&gt;&gt;</dd>
+</dl>
+<dl>
+<dt>All Known Subinterfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/carts/queries/CartByCustomerIdFetch.html" title="interface in io.sphere.sdk.carts.queries">CartByCustomerIdFetch</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartByIdFetch.html" title="interface in io.sphere.sdk.carts.queries">CartByIdFetch</a>, <a href="../../../../io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdFetch.html" title="interface in io.sphere.sdk.cartdiscounts.queries">CartDiscountByIdFetch</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryByIdFetch.html" title="interface in io.sphere.sdk.categories.queries">CategoryByIdFetch</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerByIdFetch.html" title="interface in io.sphere.sdk.customers.queries">CustomerByIdFetch</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerByTokenFetch.html" title="interface in io.sphere.sdk.customers.queries">CustomerByTokenFetch</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupByIdFetch.html" title="interface in io.sphere.sdk.customergroups.queries">CustomerGroupByIdFetch</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyFetch.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyFetch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/discountcodes/queries/DiscountCodeByIdFetch.html" title="interface in io.sphere.sdk.discountcodes.queries">DiscountCodeByIdFetch</a>, <a href="../../../../io/sphere/sdk/inventories/queries/InventoryEntryByIdFetch.html" title="interface in io.sphere.sdk.inventories.queries">InventoryEntryByIdFetch</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a>&lt;T,C,E&gt;, <a href="../../../../io/sphere/sdk/orders/queries/OrderByIdFetch.html" title="interface in io.sphere.sdk.orders.queries">OrderByIdFetch</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries">ProductByIdFetch</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionByIdFetch</a>, <a href="../../../../io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodByIdFetch</a>, <a href="../../../../io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries">ZoneByIdFetch</a></dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/ByIdFetchImpl.html" title="class in io.sphere.sdk.queries">ByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartByCustomerIdFetch.html" title="class in io.sphere.sdk.carts.queries">CartByCustomerIdFetch</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartByIdFetch.html" title="class in io.sphere.sdk.carts.queries">CartByIdFetch</a>, <a href="../../../../io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdFetch.html" title="class in io.sphere.sdk.cartdiscounts.queries">CartDiscountByIdFetch</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryByIdFetch.html" title="class in io.sphere.sdk.categories.queries">CategoryByIdFetch</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="class in io.sphere.sdk.channels.queries">ChannelByIdFetch</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerByIdFetch.html" title="class in io.sphere.sdk.customers.queries">CustomerByIdFetch</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerByTokenFetch.html" title="class in io.sphere.sdk.customers.queries">CustomerByTokenFetch</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupByIdFetch.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupByIdFetch</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyFetch.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectByKeyFetch</a>, <a href="../../../../io/sphere/sdk/discountcodes/queries/DiscountCodeByIdFetch.html" title="class in io.sphere.sdk.discountcodes.queries">DiscountCodeByIdFetch</a>, <a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/inventories/queries/InventoryEntryByIdFetch.html" title="class in io.sphere.sdk.inventories.queries">InventoryEntryByIdFetch</a>, <a href="../../../../io/sphere/sdk/orders/queries/OrderByIdFetch.html" title="class in io.sphere.sdk.orders.queries">OrderByIdFetch</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductByIdFetch.html" title="class in io.sphere.sdk.products.queries">ProductByIdFetch</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="class in io.sphere.sdk.products.queries">ProductProjectionByIdFetch</a>, <a href="../../../../io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="class in io.sphere.sdk.shippingmethods.queries">ShippingMethodByIdFetch</a>, <a href="../../../../io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="class in io.sphere.sdk.zones.queries">ZoneByIdFetch</a></dd>
+<dd><a href="../../../../io/sphere/sdk/queries/ByIdFetchImpl.html" title="class in io.sphere.sdk.queries">ByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartByCustomerIdFetchImpl.html" title="class in io.sphere.sdk.carts.queries">CartByCustomerIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/carts/queries/CartByIdFetchImpl.html" title="class in io.sphere.sdk.carts.queries">CartByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdFetchImpl.html" title="class in io.sphere.sdk.cartdiscounts.queries">CartDiscountByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/categories/queries/CategoryByIdFetchImpl.html" title="class in io.sphere.sdk.categories.queries">CategoryByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/channels/queries/ChannelByIdFetchImpl.html" title="class in io.sphere.sdk.channels.queries">ChannelByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerByIdFetchImpl.html" title="class in io.sphere.sdk.customers.queries">CustomerByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerByTokenFetchImpl.html" title="class in io.sphere.sdk.customers.queries">CustomerByTokenFetchImpl</a>, <a href="../../../../io/sphere/sdk/customergroups/queries/CustomerGroupByIdFetchImpl.html" title="class in io.sphere.sdk.customergroups.queries">CustomerGroupByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyFetchImpl.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectByKeyFetchImpl</a>, <a href="../../../../io/sphere/sdk/discountcodes/queries/DiscountCodeByIdFetchImpl.html" title="class in io.sphere.sdk.discountcodes.queries">DiscountCodeByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries">FetchImpl</a>, <a href="../../../../io/sphere/sdk/inventories/queries/InventoryEntryByIdFetchImpl.html" title="class in io.sphere.sdk.inventories.queries">InventoryEntryByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a>, <a href="../../../../io/sphere/sdk/orders/queries/OrderByIdFetchImpl.html" title="class in io.sphere.sdk.orders.queries">OrderByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductByIdFetchImpl.html" title="class in io.sphere.sdk.products.queries">ProductByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionByIdFetchImpl.html" title="class in io.sphere.sdk.products.queries">ProductProjectionByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetchImpl.html" title="class in io.sphere.sdk.shippingmethods.queries">ShippingMethodByIdFetchImpl</a>, <a href="../../../../io/sphere/sdk/zones/queries/ZoneByIdFetchImpl.html" title="class in io.sphere.sdk.zones.queries">ZoneByIdFetchImpl</a></dd>
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">FetchDsl&lt;T&gt;</span>
-extends <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;T&gt;&gt;</pre>
+<pre>public interface <span class="typeNameLabel">FetchDsl&lt;T,C&gt;</span>
+extends <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;</pre>
 </li>
 </ul>
 </div>
@@ -116,6 +126,17 @@ extends <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface 
 <!--   -->
 </a>
 <h3>Method Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="type parameter in FetchDsl">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/FetchDsl.html#expansionPaths--">expansionPaths</a></span>()</code>&nbsp;</td>
+</tr>
+</table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.Fetch">
 <!--   -->
@@ -137,12 +158,32 @@ extends <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface 
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a></h3>
 <code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#plusExpansionPath-io.sphere.sdk.queries.ExpansionPath-">plusExpansionPath</a>, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-io.sphere.sdk.queries.ExpansionPath-">withExpansionPath</a>, <a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html#withExpansionPath-java.util.List-">withExpansionPath</a></code></li>
 </ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="details">
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.ReferenceExpandeable">
+<li class="blockList">
+<!-- ============ METHOD DETAIL ========== -->
+<ul class="blockList">
+<li class="blockList"><a name="method.detail">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a></h3>
-<code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html#expansionPaths--">expansionPaths</a></code></li>
+<h3>Method Detail</h3>
+<a name="expansionPaths--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>expansionPaths</h4>
+<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="type parameter in FetchDsl">T</a>&gt;&gt;&nbsp;expansionPaths()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html#expansionPaths--">expansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="type parameter in FetchDsl">T</a>&gt;</code></dd>
+</dl>
+</li>
 </ul>
 </li>
 </ul>
@@ -199,13 +240,13 @@ extends <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface 
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.bottom">
