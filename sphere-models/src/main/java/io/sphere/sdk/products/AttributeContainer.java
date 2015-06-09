@@ -30,11 +30,11 @@ public interface AttributeContainer {
         return getAttribute(accessor.ofName(name));
     }
 
-    default boolean hasAttribute(String attributeName) {
+    default boolean hasAttribute(final String attributeName) {
         return getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeName));
     }
 
-    default boolean hasAttribute(NamedAttributeAccess<?> namedAccess) {
+    default boolean hasAttribute(final NamedAttributeAccess<?> namedAccess) {
         return getAttributes().stream().anyMatch(attr -> attr.getName().equals(namedAccess.getName()));
     }
 
@@ -43,7 +43,7 @@ public interface AttributeContainer {
         return getAttributes().stream().filter(attr -> attr.getName().equals(attributeName)).findAny();
     }
 
-    static AttributeContainer of(List<Attribute> attributes) {
+    static AttributeContainer of(final List<Attribute> attributes) {
         return AttributeContainerImpl.of(attributes);
     }
 }

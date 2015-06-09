@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductUpdateScope;
 
@@ -17,16 +17,16 @@ import java.util.Optional;
 public class AddVariant extends StageableProductUpdateAction {
     private final Optional<String> sku;
     private final List<Price> prices;
-    private final List<Attribute> attributes;
+    private final List<AttributeDraft> attributes;
 
-    private AddVariant(final List<Attribute> attributes, final List<Price> prices, final Optional<String> sku, final ProductUpdateScope productUpdateScope) {
+    private AddVariant(final List<AttributeDraft> attributes, final List<Price> prices, final Optional<String> sku, final ProductUpdateScope productUpdateScope) {
         super("addVariant", productUpdateScope);
         this.attributes = attributes;
         this.prices = prices;
         this.sku = sku;
     }
 
-    public List<Attribute> getAttributes() {
+    public List<AttributeDraft> getAttributes() {
         return attributes;
     }
 
@@ -38,7 +38,7 @@ public class AddVariant extends StageableProductUpdateAction {
         return sku;
     }
 
-    public static AddVariant of(final List<Attribute> attributes, final List<Price> prices, final Optional<String> sku, final ProductUpdateScope productUpdateScope) {
+    public static AddVariant of(final List<AttributeDraft> attributes, final List<Price> prices, final Optional<String> sku, final ProductUpdateScope productUpdateScope) {
         return new AddVariant(attributes, prices, sku, productUpdateScope);
     }
 }

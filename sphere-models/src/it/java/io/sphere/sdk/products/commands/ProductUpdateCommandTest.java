@@ -2,6 +2,7 @@ package io.sphere.sdk.products.commands;
 
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeAccess;
+import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateAction;
@@ -369,14 +370,14 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     public void addVariant() throws Exception {
         final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
                 AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
-        final Attribute moneyAttributeValue = Attribute.of(moneyAttribute, EURO_10);
+        final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
 
         final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
         final LocalizedEnumValue color = Colors.RED;
-        final Attribute colorAttributeValue = Attribute.of(colorAttribute, color);
+        final AttributeDraft colorAttributeValue = AttributeDraft.of(colorAttribute, color);
 
         final NamedAttributeAccess<PlainEnumValue> sizeAttribute = Sizes.ATTRIBUTE;
-        final Attribute sizeValue = Attribute.of(sizeAttribute, Sizes.M);
+        final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
 
 
         withUpdateableProduct(client(), product -> {
@@ -384,7 +385,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             final Price price = PRICE;
             final List<Price> prices = asList(price);
-            final List<Attribute> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
+            final List<AttributeDraft> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
             final Optional<String> sku = Optional.of(randomKey());
             final ProductUpdateCommand addVariantCommand =
                     ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, sku, STAGED_AND_CURRENT));

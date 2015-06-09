@@ -1,5 +1,7 @@
 package io.sphere.sdk.attributes;
 
+import io.sphere.sdk.models.PlainEnumValue;
+
 /**
  * <h2>Type-safe attribute access</h2>
  *
@@ -62,4 +64,6 @@ public interface NamedAttributeAccess<T> {
     AttributeMapper<T> getMapper();
 
     Attribute valueOf(final T input);
+
+    AttributeDraft draftOf(T value);
 }

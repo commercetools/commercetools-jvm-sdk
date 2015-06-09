@@ -307,7 +307,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         furtherAttributeDefinitionAssertions.accept(fetchedAttributeDefinition);
 
         final NamedAttributeAccess<X> namedAttributeAccess = access.ofName(attributeName);
-        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(namedAttributeAccess.valueOf(exampleValue)).build();
+        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(namedAttributeAccess.draftOf(exampleValue)).build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = execute(ProductCreateCommand.of(productDraft));
         final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().getAttribute(namedAttributeAccess).get();

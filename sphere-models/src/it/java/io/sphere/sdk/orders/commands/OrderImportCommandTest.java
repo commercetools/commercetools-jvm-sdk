@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders.commands;
 
 import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.channels.ChannelRoles;
@@ -173,16 +174,18 @@ public class OrderImportCommandTest extends IntegrationTest {
 
     @Test
     public void orderImportCanOverrideVariantDataInTheOrder() throws Exception {
-        final Attribute size = TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Sizes.S);
-        final Attribute color = TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Colors.RED);
-        final List<Attribute> attributesOfOrder = asList(size, color);
+        final AttributeDraft size = TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE.draftOf(TShirtProductTypeDraftSupplier.Sizes.S);
+        final AttributeDraft color = TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE.draftOf(TShirtProductTypeDraftSupplier.Colors.RED);
+        final List<AttributeDraft> attributeDraftsOfOrder = asList(size, color);
+        final List<Attribute> attributeOfOrder = asList(TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Sizes.S),
+                TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Colors.RED));
         final List<Image> images = asList(Image.of("url", ImageDimensions.of(1, 2), "label"));
         final List<Price> prices = asList(Price.of(new BigDecimal("15.23"), DefaultCurrencyUnits.EUR));
 
         withProduct(client(), product -> {
             final int variantId = 1;
             final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), variantId, sku(product))
-                    .attributes(attributesOfOrder)
+                    .attributes(attributeDraftsOfOrder)
                     .images(images)
                     .prices(prices)
                     .build();
@@ -195,7 +198,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                         final LineItem lineItem = order.getLineItems().get(0);
                         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
                         final ProductVariant productVariant = lineItem.getVariant();
-                        assertThat(productVariant.getAttributes()).isEqualTo(attributesOfOrder).isNotEqualTo(masterVariant.getAttributes());
+                        assertThat(productVariant.getAttributes()).isEqualTo(attributeOfOrder).isNotEqualTo(masterVariant.getAttributes());
                         assertThat(productVariant.getImages()).isEqualTo(images).isNotEqualTo(masterVariant.getImages());
                         assertThat(productVariant.getPrices()).isEqualTo(prices).isNotEqualTo(masterVariant.getPrices());
                     }

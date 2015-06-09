@@ -2,6 +2,7 @@ package io.sphere.sdk.products.commands.updateactions;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.ProductUpdateScope;
 
@@ -84,8 +85,8 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @param productUpdateScope the scope where the attribute should be updated
      * @return update action
      */
-    public static SetAttribute of(final int variantId, final Attribute attribute, final ProductUpdateScope productUpdateScope) {
-        return of(variantId, attribute.getName(), Optional.of(attribute.valueAsJson()), productUpdateScope);
+    public static SetAttribute of(final int variantId, final AttributeDraft attribute, final ProductUpdateScope productUpdateScope) {
+        return of(variantId, attribute.getName(), Optional.of(attribute.getValue()), productUpdateScope);
     }
 
     /**
@@ -99,6 +100,6 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @return update action
      */
     public static <T> SetAttribute of(final int variantId, final NamedAttributeAccess<T> setter, final T value, final ProductUpdateScope productUpdateScope) {
-        return of(variantId, Attribute.of(setter, value), productUpdateScope);
+        return of(variantId, AttributeDraft.of(setter, value), productUpdateScope);
     }
 }

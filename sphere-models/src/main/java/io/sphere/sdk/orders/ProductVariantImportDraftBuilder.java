@@ -1,6 +1,6 @@
 package io.sphere.sdk.orders;
 
-import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Image;
@@ -14,7 +14,7 @@ public class ProductVariantImportDraftBuilder extends Base implements Builder<Pr
     private final Optional<String> sku;
     private final Optional<String> productId;
     private Optional<List<Price>> prices = Optional.empty();
-    private Optional<List<Attribute>> attributes = Optional.empty();
+    private Optional<List<AttributeDraft>> attributes = Optional.empty();
     private Optional<List<Image>> images = Optional.empty();
 
     private ProductVariantImportDraftBuilder(final Optional<String> sku, final Optional<String> productId, final Optional<Integer> id) {
@@ -37,12 +37,12 @@ public class ProductVariantImportDraftBuilder extends Base implements Builder<Pr
         return prices(Optional.of(prices));
     }
 
-    public ProductVariantImportDraftBuilder attributes(final Optional<List<Attribute>> attributes) {
+    public ProductVariantImportDraftBuilder attributes(final Optional<List<AttributeDraft>> attributes) {
         this.attributes = attributes;
         return this;
     }
 
-    public ProductVariantImportDraftBuilder attributes(final List<Attribute> attributes) {
+    public ProductVariantImportDraftBuilder attributes(final List<AttributeDraft> attributes) {
         return attributes(Optional.of(attributes));
     }
 

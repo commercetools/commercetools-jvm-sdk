@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeDraft;
 
 import java.util.Optional;
 
@@ -13,5 +13,5 @@ public interface ProductVariantDraft {
 
     List<Price> getPrices();
 
-    List<Attribute> getAttributes();
+    List<AttributeDraft> getAttributes();
 }

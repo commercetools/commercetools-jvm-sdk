@@ -25,4 +25,9 @@ class NamedAttributeAccessImpl<T> extends Base implements NamedAttributeAccess<T
     public Attribute valueOf(T input) {
         return Attribute.of(this, input);
     }
+
+    @Override
+    public AttributeDraft draftOf(T input) {
+        return AttributeDraft.of(this, input);
+    }
 }

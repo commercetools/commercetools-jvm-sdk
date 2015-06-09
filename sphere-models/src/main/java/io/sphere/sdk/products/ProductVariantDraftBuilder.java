@@ -1,9 +1,10 @@
 package io.sphere.sdk.products;
 
 import java.util.Optional;
+
+import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.utils.ListUtils;
 
 import java.util.Arrays;
@@ -15,7 +16,7 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
 
     private List<Price> prices = Collections.emptyList();
 
-    private List<Attribute> attributes = Collections.emptyList();
+    private List<AttributeDraft> attributes = Collections.emptyList();
 
     private ProductVariantDraftBuilder() {
     }
@@ -46,16 +47,16 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
         return prices(Arrays.asList(price));
     }
 
-    public ProductVariantDraftBuilder attributes(final List<Attribute> attributes) {
+    public ProductVariantDraftBuilder attributes(final List<AttributeDraft> attributes) {
         this.attributes = attributes;
         return this;
     }
 
-    public ProductVariantDraftBuilder attributes(final Attribute ... attributes) {
+    public ProductVariantDraftBuilder attributes(final AttributeDraft ... attributes) {
         return attributes(Arrays.asList(attributes));
     }
 
-    public ProductVariantDraftBuilder plusAttribute(final Attribute attribute) {
+    public ProductVariantDraftBuilder plusAttribute(final AttributeDraft attribute) {
         return attributes(ListUtils.listOf(attributes, attribute));
     }
 
