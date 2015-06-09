@@ -38,6 +38,12 @@ public class ProductAttributeAccessTest {
     }
 
     @Test
+    public void getterWithJsonAttributeAccess() throws Exception {
+        assertThat(variant.getAttribute(LOC_STRING_ATTRIBUTE, ofJsonNode()).get()).
+                isEqualTo(JsonUtils.readTree("{\"de\":\"val-loc-string-de\",\"en\":\"val-loc-string-en\"}".getBytes()));
+    }
+
+    @Test
     public void getterWithAttributeAccess() throws Exception {
         assertThat(variant.getAttribute(LOC_STRING_ATTRIBUTE, ofLocalizedStrings()).get()).
                 isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));

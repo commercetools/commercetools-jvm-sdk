@@ -1,6 +1,7 @@
 package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.*;
@@ -26,10 +27,24 @@ public final class AttributeAccess<T> extends Base {
     private final AttributeMapper<T> attributeMapper;
     private final java.util.function.Predicate<AttributeDefinition> canHandle;
 
-
     private AttributeAccess(final AttributeMapper<T> attributeMapper, final Predicate<AttributeDefinition> canHandle) {
         this.attributeMapper = attributeMapper;
         this.canHandle = canHandle;
+    }
+
+    public static AttributeAccess<JsonNode> ofJsonNode() {
+        final AttributeMapper<JsonNode> attributeMapper = new AttributeMapper<JsonNode>() {
+            @Override
+            public JsonNode deserialize(final JsonNode value) {
+                return value;
+            }
+
+            @Override
+            public JsonNode serialize(final JsonNode value) {
+                return value;
+            }
+        };
+        return new AttributeAccess<>(attributeMapper, ad -> true);
     }
 
     public static AttributeAccess<Boolean> ofBoolean() {
