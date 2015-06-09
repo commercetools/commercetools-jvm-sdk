@@ -174,10 +174,7 @@ public class OrderImportCommandTest extends IntegrationTest {
 
     @Test
     public void orderImportCanOverrideVariantDataInTheOrder() throws Exception {
-        final AttributeDraft size = TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE.draftOf(TShirtProductTypeDraftSupplier.Sizes.S);
-        final AttributeDraft color = TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE.draftOf(TShirtProductTypeDraftSupplier.Colors.RED);
-        final List<AttributeDraft> attributeDraftsOfOrder = asList(size, color);
-        final List<Attribute> attributeOfOrder = asList(TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Sizes.S),
+        final List<Attribute> attributesOfOrder = asList(TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Sizes.S),
                 TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Colors.RED));
         final List<Image> images = asList(Image.of("url", ImageDimensions.of(1, 2), "label"));
         final List<Price> prices = asList(Price.of(new BigDecimal("15.23"), DefaultCurrencyUnits.EUR));
@@ -185,7 +182,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         withProduct(client(), product -> {
             final int variantId = 1;
             final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), variantId, sku(product))
-                    .attributes(attributeDraftsOfOrder)
+                    .attributes(attributesOfOrder)
                     .images(images)
                     .prices(prices)
                     .build();
@@ -198,7 +195,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                         final LineItem lineItem = order.getLineItems().get(0);
                         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
                         final ProductVariant productVariant = lineItem.getVariant();
-                        assertThat(productVariant.getAttributes()).isEqualTo(attributeOfOrder).isNotEqualTo(masterVariant.getAttributes());
+                        assertThat(productVariant.getAttributes()).isEqualTo(attributesOfOrder).isNotEqualTo(masterVariant.getAttributes());
                         assertThat(productVariant.getImages()).isEqualTo(images).isNotEqualTo(masterVariant.getImages());
                         assertThat(productVariant.getPrices()).isEqualTo(prices).isNotEqualTo(masterVariant.getPrices());
                     }

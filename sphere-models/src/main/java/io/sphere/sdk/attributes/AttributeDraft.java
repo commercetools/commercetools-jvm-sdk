@@ -3,8 +3,9 @@ package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.models.Base;
 
-public class AttributeDraft {
+public class AttributeDraft extends Base {
     private final String name;
     private final JsonNode value;
 
