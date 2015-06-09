@@ -84,8 +84,8 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommand.html" title="class in io.sphere.sdk.cartdiscounts.commands">CartDiscountCreateCommand</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final Instant validFrom = Instant.now();
-final Instant validUntil = validFrom.plusSeconds(8000);
+<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final ZonedDateTime validFrom = SphereTestUtils.now();
+final ZonedDateTime validUntil = validFrom.plusSeconds(8000);
 final LocalizedStrings name = en("discount name");
 final LocalizedStrings description = en("discount descriptions");
 final String predicate = "totalPrice &gt; \"800.00 EUR\"";

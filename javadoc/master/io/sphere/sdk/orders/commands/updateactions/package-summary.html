@@ -130,7 +130,7 @@
     Assertions.assertThat(order.getReturnInfo()).isEmpty();
     final String lineItemId = order.getLineItems().get(0).getId();
     final List&lt;ReturnItemDraft&gt; items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
-    final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(INSTANT_IN_PAST).withReturnTrackingId("trackingId");
+    final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(ZonedDateTime_IN_PAST).withReturnTrackingId("trackingId");
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
 
     final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
@@ -139,7 +139,7 @@
     assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
     assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
     assertThat(returnItem.getComment()).contains("foo bar");
-    assertThat(returnInfo.getReturnDate()).contains(INSTANT_IN_PAST);
+    assertThat(returnInfo.getReturnDate()).contains(ZonedDateTime_IN_PAST);
     assertThat(returnInfo.getReturnTrackingId()).contains("trackingId");
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -246,7 +246,7 @@
         final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
         assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
         final int quantity = 1;
-        final Instant actualTransitionDate = INSTANT_IN_PAST;
+        final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
         final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
         assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
     })
@@ -262,7 +262,7 @@
                     final LineItem lineItem = order.getLineItems().get(0);
                     assertThat(lineItem).containsState(initialState).containsNotState(nextState);
                     final int quantity = 1;
-                    final Instant actualTransitionDate = INSTANT_IN_PAST;
+                    final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
                     final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
                     assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
                 })
@@ -276,7 +276,7 @@
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-updateSyncInfo--%s" class=code-example><pre><code class='java'>withOrderExportChannel(client(), channel -&gt;
                 withOrder(client(), order -&gt; {
                     assertThat(order.getSyncInfo()).isEmpty();
-                    final Instant aDateInThePast = INSTANT_IN_PAST;
+                    final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
                     final String externalId = "foo";
                     final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
                     final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));

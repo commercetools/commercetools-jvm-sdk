@@ -137,7 +137,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" t
 <div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -&gt; {
     final String sku = randomKey();
     final int quantityOnStock = 10;
-    final Instant expectedDelivery = tomorrowInstant();
+    final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();
     final int restockableInDays = 3;
     final InventoryEntryDraft inventoryEntryDraft = InventoryEntryDraft.of(sku, quantityOnStock)
             .withExpectedDelivery(expectedDelivery)

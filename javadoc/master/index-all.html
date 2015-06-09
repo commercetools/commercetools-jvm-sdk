@@ -212,7 +212,7 @@
     Assertions.assertThat(order.getReturnInfo()).isEmpty();
     final String lineItemId = order.getLineItems().get(0).getId();
     final List&lt;ReturnItemDraft&gt; items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
-    final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(INSTANT_IN_PAST).withReturnTrackingId("trackingId");
+    final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(ZonedDateTime_IN_PAST).withReturnTrackingId("trackingId");
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
 
     final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
@@ -221,7 +221,7 @@
     assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
     assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
     assertThat(returnItem.getComment()).contains("foo bar");
-    assertThat(returnInfo.getReturnDate()).contains(INSTANT_IN_PAST);
+    assertThat(returnInfo.getReturnDate()).contains(ZonedDateTime_IN_PAST);
     assertThat(returnInfo.getReturnTrackingId()).contains("trackingId");
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -705,8 +705,8 @@
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommand.html" title="class in io.sphere.sdk.cartdiscounts.commands"><span class="typeNameLink">CartDiscountCreateCommand</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/package-summary.html">io.sphere.sdk.cartdiscounts.commands</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final Instant validFrom = Instant.now();
-final Instant validUntil = validFrom.plusSeconds(8000);
+<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final ZonedDateTime validFrom = SphereTestUtils.now();
+final ZonedDateTime validUntil = validFrom.plusSeconds(8000);
 final LocalizedStrings name = en("discount name");
 final LocalizedStrings description = en("discount descriptions");
 final String predicate = "totalPrice &gt; \"800.00 EUR\"";
@@ -1251,9 +1251,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/utils/CompletableFutureUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">CompletableFutureUtils</span></a> - Class in <a href="io/sphere/sdk/utils/package-summary.html">io.sphere.sdk.utils</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#completedAt-java.util.Optional-">completedAt(Optional&lt;Instant&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#completedAt-java.util.Optional-">completedAt(Optional&lt;ZonedDateTime&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#completedAt-java.time.Instant-">completedAt(Instant)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#completedAt-java.time.ZonedDateTime-">completedAt(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/ConcurrentModificationException.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">ConcurrentModificationException</span></a> - Exception in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
 <dd>
@@ -1335,7 +1335,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#createdAt">createdAt</a></span> - Variable in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html#createdAt-java.time.Instant-">createdAt(Instant)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html#createdAt-java.time.ZonedDateTime-">createdAt(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ExperimentalProductProjectionSearchModel.html#createdAt--">createdAt()</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ExperimentalProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ExperimentalProductProjectionSearchModel</a></dt>
 <dd>&nbsp;</dd>
@@ -1616,7 +1616,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/DefaultModelImpl.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelImpl</span></a>&lt;<a href="io/sphere/sdk/models/DefaultModelImpl.html" title="type parameter in DefaultModelImpl">T</a> extends <a href="io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="io/sphere/sdk/models/DefaultModelImpl.html" title="type parameter in DefaultModelImpl">T</a>&gt;&gt; - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelImpl.html#DefaultModelImpl-java.lang.String-long-java.time.Instant-java.time.Instant-">DefaultModelImpl(String, long, Instant, Instant)</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelImpl.html" title="class in io.sphere.sdk.models">DefaultModelImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelImpl.html#DefaultModelImpl-java.lang.String-long-java.time.ZonedDateTime-java.time.ZonedDateTime-">DefaultModelImpl(String, long, ZonedDateTime, ZonedDateTime)</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelImpl.html" title="class in io.sphere.sdk.models">DefaultModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">DefaultModelQuery</span></a>&lt;<a href="io/sphere/sdk/queries/DefaultModelQuery.html" title="type parameter in DefaultModelQuery">I</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -1635,7 +1635,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/models/DefaultModelViewImpl.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">DefaultModelViewImpl</span></a>&lt;<a href="io/sphere/sdk/models/DefaultModelViewImpl.html" title="type parameter in DefaultModelViewImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelViewImpl.html#DefaultModelViewImpl-java.lang.String-long-java.time.Instant-java.time.Instant-">DefaultModelViewImpl(String, long, Instant, Instant)</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelViewImpl.html" title="class in io.sphere.sdk.models">DefaultModelViewImpl</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelViewImpl.html#DefaultModelViewImpl-java.lang.String-long-java.time.ZonedDateTime-java.time.ZonedDateTime-">DefaultModelViewImpl(String, long, ZonedDateTime, ZonedDateTime)</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelViewImpl.html" title="class in io.sphere.sdk.models">DefaultModelViewImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#defaultShippingAddressId--">defaultShippingAddressId()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -4072,8 +4072,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html#inputHint-io.sphere.sdk.attributes.TextInputHint-">inputHint(TextInputHint)</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">AttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#instantTypeReference--">instantTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/annotations/Internal.html" title="annotation in io.sphere.sdk.annotations"><span class="typeNameLink">Internal</span></a> - Annotation Type in <a href="io/sphere/sdk/annotations/package-summary.html">io.sphere.sdk.annotations</a></dt>
 <dd>
 <div class="block">Marks a type that can change or vanish at any time without notification.</div>
@@ -4121,7 +4119,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -&gt; {
     final String sku = randomKey();
     final int quantityOnStock = 10;
-    final Instant expectedDelivery = tomorrowInstant();
+    final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();
     final int restockableInDays = 3;
     final InventoryEntryDraft inventoryEntryDraft = InventoryEntryDraft.of(sku, quantityOnStock)
             .withExpectedDelivery(expectedDelivery)
@@ -4795,7 +4793,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#lastModifiedAt">lastModifiedAt</a></span> - Variable in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html#lastModifiedAt-java.time.Instant-">lastModifiedAt(Instant)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html#lastModifiedAt-java.time.ZonedDateTime-">lastModifiedAt(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelFluentBuilder.html" title="class in io.sphere.sdk.models">DefaultModelFluentBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ExperimentalProductProjectionSearchModel.html#lastModifiedAt--">lastModifiedAt()</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ExperimentalProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ExperimentalProductProjectionSearchModel</a></dt>
 <dd>&nbsp;</dd>
@@ -5225,13 +5223,13 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetDescription.html#of-io.sphere.sdk.models.LocalizedStrings-">of(LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetDescription</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html#of-java.util.Optional-">of(Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetValidFrom</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html#of-java.util.Optional-">of(Optional&lt;ZonedDateTime&gt;)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetValidFrom</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html#of-java.time.Instant-">of(Instant)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetValidFrom</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html#of-java.time.ZonedDateTime-">of(ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetValidFrom</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidUntil.html#of-java.util.Optional-">of(Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidUntil.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetValidUntil</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidUntil.html#of-java.util.Optional-">of(Optional&lt;ZonedDateTime&gt;)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidUntil.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetValidUntil</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidUntil.html#of-java.time.Instant-">of(Instant)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidUntil.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetValidUntil</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidUntil.html#of-java.time.ZonedDateTime-">of(ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.commands.updateactions.<a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidUntil.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetValidUntil</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CustomLineItemsTarget.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CustomLineItemsTarget.html" title="class in io.sphere.sdk.cartdiscounts">CustomLineItemsTarget</a></dt>
 <dd>&nbsp;</dd>
@@ -5701,9 +5699,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">RemoveQuantity</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html#of-java.time.Instant-">of(Instant)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetExpectedDelivery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html#of-java.time.ZonedDateTime-">of(ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetExpectedDelivery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html#of-java.util.Optional-">of(Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetExpectedDelivery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html#of-java.util.Optional-">of(Optional&lt;ZonedDateTime&gt;)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetExpectedDelivery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html#of-int-">of(int)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetRestockableInDays</a></dt>
 <dd>&nbsp;</dd>
@@ -5711,7 +5709,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in class io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html#of-java.lang.String-long-java.util.Optional-java.util.Optional-java.util.Optional-">of(String, long, Optional&lt;Instant&gt;, Optional&lt;Integer&gt;, Optional&lt;Reference&lt;Channel&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories">InventoryEntryDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html#of-java.lang.String-long-java.util.Optional-java.util.Optional-java.util.Optional-">of(String, long, Optional&lt;ZonedDateTime&gt;, Optional&lt;Integer&gt;, Optional&lt;Reference&lt;Channel&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/queries/InventoryEntryByIdFetch.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.inventories.queries.<a href="io/sphere/sdk/inventories/queries/InventoryEntryByIdFetch.html" title="class in io.sphere.sdk.inventories.queries">InventoryEntryByIdFetch</a></dt>
 <dd>&nbsp;</dd>
@@ -5779,7 +5777,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html#of-io.sphere.sdk.orders.Delivery-io.sphere.sdk.orders.commands.updateactions.ParcelDraft-">of(Delivery, ParcelDraft)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddParcelToDelivery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html#of-java.util.List-java.util.Optional-java.util.Optional-">of(List&lt;ReturnItemDraft&gt;, Optional&lt;Instant&gt;, Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddReturnInfo</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html#of-java.util.List-java.util.Optional-java.util.Optional-">of(List&lt;ReturnItemDraft&gt;, Optional&lt;ZonedDateTime&gt;, Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddReturnInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html#of-java.util.List-">of(List&lt;ReturnItemDraft&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddReturnInfo</a></dt>
 <dd>&nbsp;</dd>
@@ -5815,25 +5813,25 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html#of-io.sphere.sdk.orders.ReturnItem-io.sphere.sdk.orders.ReturnShipmentState-">of(ReturnItem, ReturnShipmentState)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-java.lang.String-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.util.Optional-">of(String, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-java.lang.String-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.util.Optional-">of(String, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Optional&lt;ZonedDateTime&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.Instant-">of(CustomLineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Instant)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-">of(CustomLineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html#of-io.sphere.sdk.carts.CustomLineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-">of(CustomLineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-java.lang.String-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.util.Optional-">of(String, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-java.lang.String-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.util.Optional-">of(String, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Optional&lt;ZonedDateTime&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-io.sphere.sdk.carts.LineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.Instant-">of(LineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, Instant)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-io.sphere.sdk.carts.LineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-">of(LineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html#of-io.sphere.sdk.carts.LineItem-long-io.sphere.sdk.models.Referenceable-io.sphere.sdk.models.Referenceable-">of(LineItem, long, Referenceable&lt;State&gt;, Referenceable&lt;State&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html#of-io.sphere.sdk.models.Reference-java.util.Optional-java.util.Optional-">of(Reference&lt;Channel&gt;, Optional&lt;String&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html#of-io.sphere.sdk.models.Reference-java.util.Optional-java.util.Optional-">of(Reference&lt;Channel&gt;, Optional&lt;String&gt;, Optional&lt;ZonedDateTime&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html#of-io.sphere.sdk.models.Referenceable-">of(Referenceable&lt;Channel&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html#of-io.sphere.sdk.models.LocalizedStrings-long-javax.money.MonetaryAmount-io.sphere.sdk.models.Referenceable-">of(LocalizedStrings, long, MonetaryAmount, Referenceable&lt;TaxCategory&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Delivery.html#of-java.lang.String-java.time.Instant-java.util.List-java.util.List-">of(String, Instant, List&lt;DeliveryItem&gt;, List&lt;Parcel&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Delivery.html#of-java.lang.String-java.time.ZonedDateTime-java.util.List-java.util.List-">of(String, ZonedDateTime, List&lt;DeliveryItem&gt;, List&lt;Parcel&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/DeliveryItem.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders">DeliveryItem</a></dt>
 <dd>&nbsp;</dd>
@@ -5849,7 +5847,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderShippingInfo.html#of-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.shippingmethods.ShippingRate-io.sphere.sdk.taxcategories.TaxRate-io.sphere.sdk.models.Reference-java.util.Optional-java.util.List-">of(String, MonetaryAmount, ShippingRate, TaxRate, Reference&lt;TaxCategory&gt;, Optional&lt;Reference&lt;ShippingMethod&gt;&gt;, List&lt;Delivery&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderShippingInfo.html" title="class in io.sphere.sdk.orders">OrderShippingInfo</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Parcel.html#of-java.lang.String-java.time.Instant-java.util.Optional-java.util.Optional-">of(String, Instant, Optional&lt;ParcelMeasurements&gt;, Optional&lt;TrackingData&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Parcel.html" title="class in io.sphere.sdk.orders">Parcel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Parcel.html#of-java.lang.String-java.time.ZonedDateTime-java.util.Optional-java.util.Optional-">of(String, ZonedDateTime, Optional&lt;ParcelMeasurements&gt;, Optional&lt;TrackingData&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Parcel.html" title="class in io.sphere.sdk.orders">Parcel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ParcelMeasurements.html#of-int-int-int-int-">of(int, int, int, int)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ParcelMeasurements.html" title="class in io.sphere.sdk.orders">ParcelMeasurements</a></dt>
 <dd>&nbsp;</dd>
@@ -5861,15 +5859,15 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQuery.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQuery.html" title="class in io.sphere.sdk.orders.queries">OrderQuery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnInfo.html#of-java.util.List-java.util.Optional-java.util.Optional-">of(List&lt;ReturnItem&gt;, Optional&lt;String&gt;, Optional&lt;Instant&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnInfo.html" title="class in io.sphere.sdk.orders">ReturnInfo</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnInfo.html#of-java.util.List-java.util.Optional-java.util.Optional-">of(List&lt;ReturnItem&gt;, Optional&lt;String&gt;, Optional&lt;ZonedDateTime&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnInfo.html" title="class in io.sphere.sdk.orders">ReturnInfo</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItem.html#of-java.lang.String-long-java.lang.String-java.util.Optional-io.sphere.sdk.orders.ReturnShipmentState-io.sphere.sdk.orders.ReturnPaymentState-java.time.Instant-java.time.Instant-">of(String, long, String, Optional&lt;String&gt;, ReturnShipmentState, ReturnPaymentState, Instant, Instant)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItem.html" title="class in io.sphere.sdk.orders">ReturnItem</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItem.html#of-java.lang.String-long-java.lang.String-java.util.Optional-io.sphere.sdk.orders.ReturnShipmentState-io.sphere.sdk.orders.ReturnPaymentState-java.time.ZonedDateTime-java.time.ZonedDateTime-">of(String, long, String, Optional&lt;String&gt;, ReturnShipmentState, ReturnPaymentState, ZonedDateTime, ZonedDateTime)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItem.html" title="class in io.sphere.sdk.orders">ReturnItem</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItemDraft.html#of-long-java.lang.String-io.sphere.sdk.orders.ReturnShipmentState-java.util.Optional-">of(long, String, ReturnShipmentState, Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItemDraft.html" title="class in io.sphere.sdk.orders">ReturnItemDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnItemDraft.html#of-long-java.lang.String-io.sphere.sdk.orders.ReturnShipmentState-java.lang.String-">of(long, String, ReturnShipmentState, String)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnItemDraft.html" title="class in io.sphere.sdk.orders">ReturnItemDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/SyncInfo.html#of-io.sphere.sdk.models.Referenceable-java.time.Instant-java.util.Optional-">of(Referenceable&lt;Channel&gt;, Instant, Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/SyncInfo.html" title="class in io.sphere.sdk.orders">SyncInfo</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/SyncInfo.html#of-io.sphere.sdk.models.Referenceable-java.time.ZonedDateTime-java.util.Optional-">of(Referenceable&lt;Channel&gt;, ZonedDateTime, Optional&lt;String&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/SyncInfo.html" title="class in io.sphere.sdk.orders">SyncInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
 <dd>&nbsp;</dd>
@@ -7618,7 +7616,7 @@ assertThat(cartWithoutAddress.getBillingAddress()).isEmpty();
 <dd>
 <div class="block">Sets the country of the cart.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#setCreatedAt-java.time.Instant-">setCreatedAt(Instant)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#setCreatedAt-java.time.ZonedDateTime-">setCreatedAt(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetCustomerEmail</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -7713,7 +7711,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dt><a href="io/sphere/sdk/inventories/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventories.commands.updateactions"><span class="typeNameLink">SetExpectedDelivery</span></a> - Class in <a href="io/sphere/sdk/inventories/commands/updateactions/package-summary.html">io.sphere.sdk.inventories.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-setExpectedDelivery--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final Instant expectedDelivery = Instant.now().plus(7, ChronoUnit.DAYS);
+    final ZonedDateTime expectedDelivery = SphereTestUtils.now().plus(7, ChronoUnit.DAYS);
     final UpdateAction&lt;InventoryEntry&gt; action = SetExpectedDelivery.of(expectedDelivery);
     final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
     assertThat(updatedEntry.getExpectedDelivery())
@@ -7731,7 +7729,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#setId-java.lang.String-">setId(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#setLastModifiedAt-java.time.Instant-">setLastModifiedAt(Instant)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/DefaultModelBuilder.html#setLastModifiedAt-java.time.ZonedDateTime-">setLastModifiedAt(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/DefaultModelBuilder.html" title="class in io.sphere.sdk.models">DefaultModelBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplications.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><span class="typeNameLink">SetMaxApplications</span></a> - Class in <a href="io/sphere/sdk/discountcodes/commands/updateactions/package-summary.html">io.sphere.sdk.discountcodes.commands.updateactions</a></dt>
 <dd>
@@ -7936,7 +7934,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">SetValidFrom</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setValidFrom--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final Instant dateTime = Instant.now();
+    final ZonedDateTime dateTime = SphereTestUtils.now();
 
     assertThat(cartDiscount.getValidFrom()).isNotEqualTo(Optional.of(dateTime));
 
@@ -7952,7 +7950,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>
 <div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setValidUntil--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
     //until must be after valid from
-    final Instant dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
+    final ZonedDateTime dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
 
     assertThat(cartDiscount.getValidUntil()).isNotEqualTo(Optional.of(dateTime));
 
@@ -8631,7 +8629,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
         final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
         assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
         final int quantity = 1;
-        final Instant actualTransitionDate = INSTANT_IN_PAST;
+        final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
         final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
         assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
     })
@@ -8645,7 +8643,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
                     final LineItem lineItem = order.getLineItems().get(0);
                     assertThat(lineItem).containsState(initialState).containsNotState(nextState);
                     final int quantity = 1;
-                    final Instant actualTransitionDate = INSTANT_IN_PAST;
+                    final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
                     final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
                     assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
                 })
@@ -8849,7 +8847,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-updateSyncInfo--%s" class=code-example><pre><code class='java'>withOrderExportChannel(client(), channel -&gt;
                 withOrder(client(), order -&gt; {
                     assertThat(order.getSyncInfo()).isEmpty();
-                    final Instant aDateInThePast = INSTANT_IN_PAST;
+                    final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
                     final String externalId = "foo";
                     final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
                     final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
@@ -8878,21 +8876,21 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObject.html#validatedKey-java.lang.String-">validatedKey(String)</a></span> - Static method in interface io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validFrom-java.time.Instant-">validFrom(Instant)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validFrom-java.time.ZonedDateTime-">validFrom(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validFrom-java.util.Optional-">validFrom(Optional&lt;Instant&gt;)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validFrom-java.util.Optional-">validFrom(Optional&lt;ZonedDateTime&gt;)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#validFrom-java.util.Optional-">validFrom(Optional&lt;Instant&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#validFrom-java.util.Optional-">validFrom(Optional&lt;ZonedDateTime&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#validFrom-java.time.Instant-">validFrom(Instant)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#validFrom-java.time.ZonedDateTime-">validFrom(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validUntil-java.util.Optional-">validUntil(Optional&lt;Instant&gt;)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validUntil-java.util.Optional-">validUntil(Optional&lt;ZonedDateTime&gt;)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validUntil-java.time.Instant-">validUntil(Instant)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#validUntil-java.time.ZonedDateTime-">validUntil(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#validUntil-java.util.Optional-">validUntil(Optional&lt;Instant&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#validUntil-java.util.Optional-">validUntil(Optional&lt;ZonedDateTime&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#validUntil-java.time.Instant-">validUntil(Instant)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#validUntil-java.time.ZonedDateTime-">validUntil(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#value-io.sphere.sdk.cartdiscounts.CartDiscountValue-">value(CartDiscountValue)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -9246,7 +9244,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths(List&lt;ExpansionPath&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html#withExpectedDelivery-java.time.Instant-">withExpectedDelivery(Instant)</a></span> - Method in class io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories">InventoryEntryDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html#withExpectedDelivery-java.time.ZonedDateTime-">withExpectedDelivery(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraft.html#withExternalId-java.util.Optional-">withExternalId(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraft.html" title="class in io.sphere.sdk.customers">CustomerDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -9378,7 +9376,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html#withRestockableInDays-int-">withRestockableInDays(int)</a></span> - Method in class io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html#withReturnDate-java.time.Instant-">withReturnDate(Instant)</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddReturnInfo</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html#withReturnDate-java.time.ZonedDateTime-">withReturnDate(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddReturnInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html#withReturnTrackingId-java.lang.String-">withReturnTrackingId(String)</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddReturnInfo</a></dt>
 <dd>&nbsp;</dd>
@@ -9422,7 +9420,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/InventoryEntryDraft.html#withSupplyChannel-io.sphere.sdk.models.Referenceable-">withSupplyChannel(Referenceable&lt;Channel&gt;)</a></span> - Method in class io.sphere.sdk.inventories.<a href="io/sphere/sdk/inventories/InventoryEntryDraft.html" title="class in io.sphere.sdk.inventories">InventoryEntryDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html#withSyncedAt-java.time.Instant-">withSyncedAt(Instant)</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html#withSyncedAt-java.time.ZonedDateTime-">withSyncedAt(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/ReviewDraft.html#withText-java.util.Optional-">withText(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/ReviewDraft.html" title="class in io.sphere.sdk.reviews">ReviewDraft</a></dt>
 <dd>&nbsp;</dd>
@@ -9462,9 +9460,9 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#withTransitions-java.util.Set-">withTransitions(Set&lt;Reference&lt;State&gt;&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#withValidFrom-java.time.Instant-">withValidFrom(Instant)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#withValidFrom-java.time.ZonedDateTime-">withValidFrom(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#withValidUntil-java.time.Instant-">withValidUntil(Instant)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#withValidUntil-java.time.ZonedDateTime-">withValidUntil(ZonedDateTime)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#withValue-javax.money.MonetaryAmount-">withValue(MonetaryAmount)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
 <dd>&nbsp;</dd>
@@ -9504,6 +9502,8 @@ the order they are declared.</div>
 <dd>
 <div class="block">Creates a zone in SPHERE.IO.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#ZonedDateTimeTypeReference--">ZonedDateTimeTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/commands/ZoneDeleteCommand.html" title="class in io.sphere.sdk.zones.commands"><span class="typeNameLink">ZoneDeleteCommand</span></a> - Class in <a href="io/sphere/sdk/zones/commands/package-summary.html">io.sphere.sdk.zones.commands</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/ZoneDraft.html" title="class in io.sphere.sdk.zones"><span class="typeNameLink">ZoneDraft</span></a> - Class in <a href="io/sphere/sdk/zones/package-summary.html">io.sphere.sdk.zones</a></dt>
