@@ -10,11 +10,14 @@ public class ProjectGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         final Project project = execute(ProjectGet.of());
+
+        System.err.println(project);
+
         assertThat(project.getKey()).isEqualTo(projectKey());
-        assertThat(project.getName()).isNotEmpty();
-        assertThat(project.getCountries()).isNotEmpty();
-        assertThat(project.getLanguages()).isNotEmpty();
-        assertThat(project.getCreatedAt()).isNotNull();
-        assertThat(project.getTrialUntil()).isNotNull();
+        assertThat(project.getName()).overridingErrorMessage("name").isNotEmpty();
+        assertThat(project.getCountries()).overridingErrorMessage("countries").isNotEmpty();
+        assertThat(project.getLanguages()).overridingErrorMessage("languages").isNotEmpty();
+        assertThat(project.getCreatedAt()).overridingErrorMessage("createdAt").isNotNull();
+        assertThat(project.getTrialUntil()).overridingErrorMessage("trialUntil").isNotNull();
     }
 }
