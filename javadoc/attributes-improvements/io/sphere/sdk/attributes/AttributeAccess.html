@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9,"i14":9,"i15":9,"i16":9,"i17":9,"i18":9,"i19":9,"i20":9,"i21":9,"i22":9,"i23":10,"i24":9,"i25":9,"i26":9,"i27":9,"i28":9,"i29":9,"i30":9,"i31":9,"i32":9,"i33":9,"i34":9,"i35":9,"i36":9,"i37":9,"i38":10};
+var methods = {"i0":10,"i1":10,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9,"i14":9,"i15":9,"i16":9,"i17":9,"i18":9,"i19":9,"i20":9,"i21":10,"i22":9,"i23":9,"i24":9,"i25":9,"i26":9,"i27":9,"i28":9,"i29":9,"i30":9,"i31":9,"i32":9,"i33":9,"i34":9,"i35":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -121,7 +121,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes"><code>AttributeGetterSetter</code></a></dd>
+<dd><a href="../../../../io/sphere/sdk/attributes/NamedAttributeAccess.html" title="interface in io.sphere.sdk.attributes"><code>NamedAttributeAccess</code></a></dd>
 </dl>
 </li>
 </ul>
@@ -150,152 +150,140 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#canHandle-io.sphere.sdk.attributes.AttributeDefinition-">canHandle</a></span>(<a href="../../../../io/sphere/sdk/attributes/AttributeDefinition.html" title="class in io.sphere.sdk.attributes">AttributeDefinition</a>&nbsp;attributeDefinition)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="type parameter in AttributeAccess">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#getter-java.lang.String-">getter</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetterSetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="type parameter in AttributeAccess">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#getterSetter-java.lang.String-">getterSetter</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.lang.Boolean&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofBoolean--">ofBoolean</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;java.lang.Boolean&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofBooleanSet--">ofBooleanSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofCategoryReference--">ofCategoryReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofCategoryReferenceSet--">ofCategoryReferenceSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofChannelReference--">ofChannelReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofChannelReferenceSet--">ofChannelReferenceSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.time.LocalDate&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofDate--">ofDate</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;java.time.LocalDate&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofDateSet--">ofDateSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.time.ZonedDateTime&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofDateTime--">ofDateTime</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;java.time.ZonedDateTime&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofDateTimeSet--">ofDateTimeSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.lang.Double&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofDouble--">ofDouble</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;java.lang.Double&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofDoubleSet--">ofDoubleSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofJsonNode--">ofJsonNode</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;<a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models">LocalizedEnumValue</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofLocalizedEnumValue--">ofLocalizedEnumValue</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models">LocalizedEnumValue</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofLocalizedEnumValueSet--">ofLocalizedEnumValueSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofLocalizedStrings--">ofLocalizedStrings</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofLocalizedStringsSet--">ofLocalizedStringsSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;javax.money.MonetaryAmount&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofMoney--">ofMoney</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;javax.money.MonetaryAmount&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofMoneySet--">ofMoneySet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i23" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetterSetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="type parameter in AttributeAccess">T</a>&gt;</code></td>
+<tr id="i21" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/attributes/NamedAttributeAccess.html" title="interface in io.sphere.sdk.attributes">NamedAttributeAccess</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="type parameter in AttributeAccess">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofName-java.lang.String-">ofName</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;<a href="../../../../io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofNested--">ofNested</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofNestedSet--">ofNestedSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;<a href="../../../../io/sphere/sdk/models/PlainEnumValue.html" title="class in io.sphere.sdk.models">PlainEnumValue</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofPlainEnumValue--">ofPlainEnumValue</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i27" class="rowColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/PlainEnumValue.html" title="class in io.sphere.sdk.models">PlainEnumValue</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofPlainEnumValueSet--">ofPlainEnumValueSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i28" class="altColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofProductReference--">ofProductReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofProductReferenceSet--">ofProductReferenceSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i30" class="altColor">
+<tr id="i28" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofProductTypeReference--">ofProductTypeReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i31" class="rowColor">
+<tr id="i29" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofProductTypeReferenceSet--">ofProductTypeReferenceSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i32" class="altColor">
+<tr id="i30" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofString--">ofString</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i33" class="rowColor">
+<tr id="i31" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;java.lang.String&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofStringSet--">ofStringSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i34" class="altColor">
+<tr id="i32" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofText--">ofText</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i35" class="rowColor">
+<tr id="i33" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;java.lang.String&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofTextSet--">ofTextSet</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i36" class="altColor">
+<tr id="i34" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.time.LocalTime&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofTime--">ofTime</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i37" class="rowColor">
+<tr id="i35" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;java.time.LocalTime&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofTimeSet--">ofTimeSet</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i38" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="type parameter in AttributeAccess">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#setter-java.lang.String-">setter</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -605,22 +593,13 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;&gt;&nbsp;ofChannelReferenceSet()</pre>
 </li>
 </ul>
-<a name="getterSetter-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getterSetter</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetterSetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="type parameter in AttributeAccess">T</a>&gt;&nbsp;getterSetter(java.lang.String&nbsp;name)</pre>
-</li>
-</ul>
 <a name="ofName-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>ofName</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeGetterSetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetterSetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="type parameter in AttributeAccess">T</a>&gt;&nbsp;ofName(java.lang.String&nbsp;name)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/attributes/NamedAttributeAccess.html" title="interface in io.sphere.sdk.attributes">NamedAttributeAccess</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="type parameter in AttributeAccess">T</a>&gt;&nbsp;ofName(java.lang.String&nbsp;name)</pre>
 </li>
 </ul>
 <a name="ofNested--">
@@ -639,24 +618,6 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li class="blockList">
 <h4>ofNestedSet</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="class in io.sphere.sdk.attributes">AttributeAccess</a>&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a>&gt;&gt;&nbsp;ofNestedSet()</pre>
-</li>
-</ul>
-<a name="getter-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getter</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeGetter.html" title="interface in io.sphere.sdk.attributes">AttributeGetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="type parameter in AttributeAccess">T</a>&gt;&nbsp;getter(java.lang.String&nbsp;name)</pre>
-</li>
-</ul>
-<a name="setter-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setter</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/attributes/AttributeSetter.html" title="interface in io.sphere.sdk.attributes">AttributeSetter</a>&lt;<a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" title="type parameter in AttributeAccess">T</a>&gt;&nbsp;setter(java.lang.String&nbsp;name)</pre>
 </li>
 </ul>
 <a name="attributeMapper--">
