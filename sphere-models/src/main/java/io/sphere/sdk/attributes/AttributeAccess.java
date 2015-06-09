@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.AttributeContainer;
 import io.sphere.sdk.products.Product;
@@ -25,10 +26,12 @@ import static io.sphere.sdk.json.TypeReferences.*;
  */
 public final class AttributeAccess<T> extends Base {
     private final AttributeMapper<T> attributeMapper;
+    private final TypeReference<T> typeReference;
     private final java.util.function.Predicate<AttributeDefinition> canHandle;
 
-    private AttributeAccess(final AttributeMapper<T> attributeMapper, final Predicate<AttributeDefinition> canHandle) {
+    private AttributeAccess(final AttributeMapper<T> attributeMapper, final TypeReference<T> typeReference, final Predicate<AttributeDefinition> canHandle) {
         this.attributeMapper = attributeMapper;
+        this.typeReference = typeReference;
         this.canHandle = canHandle;
     }
 
@@ -44,7 +47,7 @@ public final class AttributeAccess<T> extends Base {
                 return value;
             }
         };
-        return new AttributeAccess<>(attributeMapper, ad -> true);
+        return new AttributeAccess<>(attributeMapper, TypeReferences.jsonNodeTypeReference(), ad -> true);
     }
 
     public static AttributeAccess<Boolean> ofBoolean() {
@@ -176,16 +179,25 @@ public final class AttributeAccess<T> extends Base {
     }
 
     public NamedAttributeAccess<T> ofName(final String name) {
-        return NamedAttributeAccess.of(name, attributeMapper);
+        return new NamedAttributeAccessImpl<>(name, this);
     }
 
     public static AttributeAccess<AttributeContainer> ofNested() {
-        return new AttributeAccess<>(new NestedAttributeMapperImpl(),
-                attributeDefinition -> attributeDefinition.getAttributeType() instanceof NestedType);
+        return new AttributeAccess<>(new NestedAttributeMapperImpl(), new TypeReference<AttributeContainer>() {
+            @Override
+            public String toString() {
+                return "TypeReference<AttributeContainer>";
+            }
+        }, attributeDefinition -> attributeDefinition.getAttributeType() instanceof NestedType);
     }
 
     public static AttributeAccess<Set<AttributeContainer>> ofNestedSet() {
-        return ofSet(NestedType.class, new NestedSetAttributeMapperImpl());
+        return ofSet(NestedType.class, new TypeReference<Set<AttributeContainer>>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Set<AttributeContainer>>";
+            }
+        }, new NestedSetAttributeMapperImpl());
     }
 
     public AttributeMapper<T> attributeMapper() {
@@ -198,19 +210,19 @@ public final class AttributeAccess<T> extends Base {
 
     private static <T extends WithKey> AttributeAccess<T> ofEnumLike(final TypeReference<T> typeReference, final Class<? extends AttributeType> attributeTypeClass) {
         final AttributeMapper<T> mapper = new EnumLikeAttributeMapperImpl<>(typeReference);
-        return new AttributeAccess<>(mapper, attributeDefinition ->
+        return new AttributeAccess<>(mapper, typeReference, attributeDefinition ->
                 attributeTypeClass.isAssignableFrom(attributeDefinition.getAttributeType().getClass())
         );
     }
 
     private static <T> AttributeAccess<T> ofPrimitive(final TypeReference<T> typeReference, final Class<? extends AttributeType> attributeTypeClass) {
-        return new AttributeAccess<>(AttributeMapper.of(typeReference), attributeDefinition -> attributeTypeClass.isAssignableFrom(attributeDefinition.getAttributeType().getClass()));
+        return new AttributeAccess<>(AttributeMapper.of(typeReference), typeReference, attributeDefinition -> attributeTypeClass.isAssignableFrom(attributeDefinition.getAttributeType().getClass()));
     }
 
     private static <T> AttributeAccess<Reference<T>> ofReferenceType(final RichReferenceType<T> referenceType) {
         final AttributeMapper<Reference<T>> mapper = new ReferenceAttributeMapperImpl<>(referenceType.typeReference());
 
-        return new AttributeAccess<>(mapper,
+        return new AttributeAccess<>(mapper, referenceType.typeReference(),
                 attributeDefinition -> {
                     if (attributeDefinition.getAttributeType() instanceof ReferenceType) {
                         final ReferenceType attributeType = (ReferenceType) attributeDefinition.getAttributeType();
@@ -223,11 +235,11 @@ public final class AttributeAccess<T> extends Base {
     }
 
     private static <T> AttributeAccess<Set<T>> ofSet(final Class<? extends AttributeType> typeClass, final TypeReference<Set<T>> typeReference) {
-        return ofSet(typeClass, AttributeMapper.of(typeReference));
+        return ofSet(typeClass, typeReference, AttributeMapper.of(typeReference));
     }
 
-    private static <T> AttributeAccess<Set<T>> ofSet(final Class<? extends AttributeType> typeClass, final AttributeMapper<Set<T>> mapper) {
-        return new AttributeAccess<>(mapper, attributeDefinition -> {
+    private static <T> AttributeAccess<Set<T>> ofSet(final Class<? extends AttributeType> typeClass, final TypeReference<Set<T>> typeReference, final AttributeMapper<Set<T>> mapper) {
+        return new AttributeAccess<>(mapper, typeReference, attributeDefinition -> {
             if (attributeDefinition.getAttributeType() instanceof SetType) {
                 final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
 
@@ -240,7 +252,7 @@ public final class AttributeAccess<T> extends Base {
 
     private static <T> AttributeAccess<Set<Reference<T>>> ofSet(final ReferenceType requiredReferenceType, final TypeReference<Set<Reference<T>>> typeReference) {
         final AttributeMapper<Set<Reference<T>>> mapper = AttributeMapper.of(typeReference);
-        return new AttributeAccess<>(mapper, attributeDefinition -> {
+        return new AttributeAccess<>(mapper, typeReference, attributeDefinition -> {
             final boolean canHandle;
 
             if (attributeDefinition.getAttributeType() instanceof SetType) {
@@ -264,7 +276,7 @@ public final class AttributeAccess<T> extends Base {
     private static <T extends WithKey> AttributeAccess<Set<T>> ofEnumLikeSet(final Class<? extends AttributeType> clazz,
                                                              final TypeReference<Set<T>> typeReference) {
         final AttributeMapper<Set<T>> mapper = new EnumLikeSetAttributeMapperImpl<>(typeReference);
-        return new AttributeAccess<>(mapper, attributeDefinition -> {
+        return new AttributeAccess<>(mapper, typeReference, attributeDefinition -> {
             if (attributeDefinition.getAttributeType() instanceof SetType) {
                 final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
 
@@ -273,5 +285,9 @@ public final class AttributeAccess<T> extends Base {
                 return false;
             }
         });
+    }
+
+    public TypeReference<T> attributeTypeReference() {
+        return typeReference;
     }
 }

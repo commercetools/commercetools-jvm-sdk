@@ -2,10 +2,12 @@ package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 
+/**
+ * @see AttributeDefinitionBuilder
+ */
 public class AttributeDefinition extends Base {
     private final AttributeType attributeType;
     private final String name;

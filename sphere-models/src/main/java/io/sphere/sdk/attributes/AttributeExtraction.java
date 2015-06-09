@@ -42,9 +42,7 @@ public final class AttributeExtraction<T> extends Base {
     private <I> Optional<I> calculateValue(final AttributeAccess<I> extraction) {
         Optional<I> valueOption = Optional.empty();
         if (extraction.canHandle(attributeDefinition)) {
-            final AttributeMapper<I> mapper = extraction.attributeMapper();
-            final I attributeValue = attribute.getValue(mapper);
-            valueOption = Optional.of(attributeValue);
+            valueOption = Optional.of(attribute.getValue(extraction));
         }
         return valueOption;
     }

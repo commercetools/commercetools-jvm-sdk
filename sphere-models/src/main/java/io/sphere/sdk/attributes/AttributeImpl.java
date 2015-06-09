@@ -8,7 +8,7 @@ import io.sphere.sdk.models.Base;
 
 import static java.lang.String.format;
 
-class AttributeImpl extends Base implements Attribute {
+final class AttributeImpl extends Base implements Attribute {
     private final String name;
 
     @JsonSerialize
@@ -25,16 +25,11 @@ class AttributeImpl extends Base implements Attribute {
     }
 
     @Override
-    public <T> T getValue(final AttributeMapper<T> mapper) {
+    public <T> T getValue(final AttributeAccess<T> access) {
         try {
-            return mapper.deserialize(value);
+            return access.attributeMapper().deserialize(value);
         } catch (final JsonException e) {
-            throw new JsonException(format("Cannot parse attribute %s with mapper %s.", getName(), mapper), e.getCause());
+            throw new JsonException(format("Cannot parse attribute %s with mapper %s.", getName(), access.attributeMapper()), e.getCause());
         }
-    }
-
-    @Override
-    public JsonNode valueAsJson() {
-        return value;
     }
 }

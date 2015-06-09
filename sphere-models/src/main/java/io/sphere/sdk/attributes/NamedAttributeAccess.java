@@ -55,11 +55,9 @@ import io.sphere.sdk.models.PlainEnumValue;
  *
  */
 public interface NamedAttributeAccess<T> {
-    static <T> NamedAttributeAccess<T> of(final String name, final AttributeMapper<T> mapper) {
-        return new NamedAttributeAccessImpl<>(name, mapper);
-    }
-
     String getName();
+
+    AttributeAccess<T> getAttributeAccess();
 
     AttributeMapper<T> getMapper();
 

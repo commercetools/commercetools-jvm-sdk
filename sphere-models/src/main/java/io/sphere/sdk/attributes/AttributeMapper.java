@@ -14,7 +14,7 @@ public interface AttributeMapper<T> {
 
     JsonNode serialize(final T value);
 
-    public static <T> AttributeMapper<T> of(final TypeReference<T> typeReference) {
+    static <T> AttributeMapper<T> of(final TypeReference<T> typeReference) {
         return new AttributeMapperImpl<>(typeReference);
     }
 }

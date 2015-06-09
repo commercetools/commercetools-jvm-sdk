@@ -1,6 +1,7 @@
 package io.sphere.sdk.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
@@ -79,6 +80,15 @@ public final class TypeReferences {
             @Override
             public String toString() {
                 return "TypeReference<MonetaryAmount>";
+            }
+        };
+    }
+    
+    public static TypeReference<JsonNode> jsonNodeTypeReference() {
+        return new TypeReference<JsonNode>() {
+            @Override
+            public String toString() {
+                return "TypeReference<JsonNode>";
             }
         };
     }

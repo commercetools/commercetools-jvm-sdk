@@ -2,28 +2,25 @@ package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.json.JsonUtils;
 
 @JsonDeserialize(as = AttributeImpl.class)
 public interface Attribute {
     String getName();
 
-    <T> T getValue(AttributeMapper<T> mapper);
-
-    JsonNode valueAsJson();
+    <T> T getValue(final AttributeAccess<T> access);
 
     static Attribute of(final String name, final JsonNode jsonNode) {
         return new AttributeImpl(name, jsonNode);
     }
 
-    static Attribute of(final String name, final Object value) {
-        final JsonNode jsonNode = JsonUtils.newObjectMapper().valueToTree(value);
-        return of(name, jsonNode);
+    static <T> Attribute of(final String name, final AttributeAccess<T> access, final T value) {
+        return of(access.ofName(name), value);
     }
 
-    static <T> Attribute of(final NamedAttributeAccess<T> namesAccess, final T value) {
-        final JsonNode jsonNode = namesAccess.getMapper().serialize(value);
-        return of(namesAccess.getName(), jsonNode);
+    static <T> Attribute of(final NamedAttributeAccess<T> namedAttributeAccess, final T value) {
+        final String name = namedAttributeAccess.getName();
+        final JsonNode jsonNode = namedAttributeAccess.getMapper().serialize(value);
+        return of(name, jsonNode);
     }
 
     //todo add example with optional as result to not separate result and guard
