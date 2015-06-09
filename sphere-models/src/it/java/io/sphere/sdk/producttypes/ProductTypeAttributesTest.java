@@ -1,31 +1,34 @@
 package io.sphere.sdk.producttypes;
 
-import io.sphere.sdk.models.*;
+import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.models.LocalizedEnumValue;
+import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
-import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
-import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.function.*;
+import java.util.function.Consumer;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.producttypes.ProductTypeFixtures.withEmptyProductType;
+import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
+import static io.sphere.sdk.test.SphereTestUtils.en;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -132,7 +135,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void dateTimeAttribute() throws Exception {
-        final ZonedDateTime now = SphereTestUtils.now().withZoneSameInstant(ZoneId.of("Z"));
+        final ZonedDateTime now = SphereTestUtils.now().withZoneSameInstant(ZoneOffset.UTC);
         testSingleAndSet(AttributeAccess.ofDateTime(), AttributeAccess.ofDateTimeSet(),
                 asSet(now, now.plus(3, ChronoUnit.DAYS)),
                 DateTimeType.of(),

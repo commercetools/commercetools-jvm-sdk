@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdScalarSerializer;
 
 import java.io.IOException;
-import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -18,7 +18,7 @@ final class ZonedDateTimeSerializer extends StdScalarSerializer<ZonedDateTime> {
 
     @Override
     public void serialize(ZonedDateTime value, JsonGenerator gen, SerializerProvider arg2) throws IOException {
-        final String res = DateTimeFormatter.ISO_INSTANT.format(value.withZoneSameInstant(ZoneId.of("Z")));
+        final String res = DateTimeFormatter.ISO_INSTANT.format(value.withZoneSameInstant(ZoneOffset.UTC));
         gen.writeString(res);
     }
 }

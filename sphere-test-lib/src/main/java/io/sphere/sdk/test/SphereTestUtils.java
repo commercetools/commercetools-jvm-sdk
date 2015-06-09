@@ -8,7 +8,7 @@ import io.sphere.sdk.utils.StringUtils;
 
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
-import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
@@ -42,7 +42,7 @@ public final class SphereTestUtils {
     public static final MonetaryAmount EURO_30 = MoneyImpl.of(30, EUR);
 
     public static final ZonedDateTime now() {
-        return ZonedDateTime. now().withZoneSameInstant(ZoneId.of("Z"));
+        return ZonedDateTime. now().withZoneSameInstant(ZoneOffset.UTC);
     }
 
     public static final ZonedDateTime tomorrowZonedDateTime() {
