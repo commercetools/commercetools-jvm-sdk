@@ -1,8 +1,8 @@
 package io.sphere.sdk.models;
 
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 public interface CreationTimestamped {
-    Instant getCreatedAt();
+    ZonedDateTime getCreatedAt();
 }

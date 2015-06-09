@@ -7,7 +7,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.SphereException;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
@@ -21,7 +21,7 @@ final class Tokens extends Base {
     @JsonProperty("expires_in")
     private final Optional<Long> expiresIn;
     @JsonIgnore
-    private final Optional<Instant> expiresInInstant;
+    private final Optional<ZonedDateTime> expiresInZonedDateTime;
 
     @JsonCreator
     private Tokens(String accessToken, String refreshToken, Optional<Long> expiresIn) {
@@ -30,7 +30,7 @@ final class Tokens extends Base {
         this.accessToken = accessToken;
         this.refreshToken = refreshToken;
         this.expiresIn = expiresIn;
-        expiresInInstant = expiresIn.map(seconds -> Instant.now().plusSeconds(seconds));
+        expiresInZonedDateTime = expiresIn.map(seconds -> ZonedDateTime.now().plusSeconds(seconds));
     }
 
     public String getAccessToken() {
@@ -45,8 +45,8 @@ final class Tokens extends Base {
         return expiresIn;
     }
 
-    Optional<Instant> getExpiresInstant() {
-        return expiresInInstant;
+    Optional<ZonedDateTime> getExpiresZonedDateTime() {
+        return expiresInZonedDateTime;
     }
 
     public static TypeReference<Tokens> typeReference() {

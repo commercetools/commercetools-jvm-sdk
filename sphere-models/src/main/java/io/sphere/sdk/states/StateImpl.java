@@ -6,7 +6,7 @@ import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,7 +20,7 @@ final class StateImpl extends DefaultModelImpl<State> implements State {
     private final Optional<Set<Reference<State>>> transitions;
 
     @JsonCreator
-    public StateImpl(String id, long version, Instant createdAt, Instant lastModifiedAt, String key, StateType type,
+    public StateImpl(String id, long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, String key, StateType type,
                      Optional<LocalizedStrings> name, Optional<LocalizedStrings> description, boolean initial,
                      boolean builtIn, Optional<Set<Reference<State>>> transitions) {
         super(id, version, createdAt, lastModifiedAt);

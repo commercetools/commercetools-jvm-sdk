@@ -8,7 +8,7 @@ import io.sphere.sdk.inventories.InventoryEntryDraft;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -20,7 +20,7 @@ public class InventoryEntryCreateCommandTest extends IntegrationTest {
         withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
             final String sku = randomKey();
             final int quantityOnStock = 10;
-            final Instant expectedDelivery = tomorrowInstant();
+            final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();
             final int restockableInDays = 3;
             final InventoryEntryDraft inventoryEntryDraft = InventoryEntryDraft.of(sku, quantityOnStock)
                     .withExpectedDelivery(expectedDelivery)

@@ -2,7 +2,7 @@ package io.sphere.sdk.customobjects.demo;
 
 import io.sphere.sdk.customobjects.CustomObject;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 public class GsonFooCustomObject implements CustomObject<GsonFoo> {
     private final String container;
@@ -25,7 +25,7 @@ public class GsonFooCustomObject implements CustomObject<GsonFoo> {
     }
 
     @Override
-    public Instant getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         throw new UnsupportedOperationException("TODO");
     }
 
@@ -40,7 +40,7 @@ public class GsonFooCustomObject implements CustomObject<GsonFoo> {
     }
 
     @Override
-    public Instant getLastModifiedAt() {
+    public ZonedDateTime getLastModifiedAt() {
         throw new UnsupportedOperationException("TODO");
     }
 

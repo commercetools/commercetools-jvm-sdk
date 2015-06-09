@@ -7,9 +7,10 @@ import io.sphere.sdk.inventories.commands.updateactions.RemoveQuantity;
 import io.sphere.sdk.inventories.commands.updateactions.SetExpectedDelivery;
 import io.sphere.sdk.inventories.commands.updateactions.SetRestockableInDays;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
 import org.junit.Test;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
 import static io.sphere.sdk.inventories.InventoryEntryFixtures.withUpdateableInventoryEntry;
@@ -52,7 +53,7 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
     @Test
     public void setExpectedDelivery() throws Exception {
         withUpdateableInventoryEntry(client(), entry -> {
-            final Instant expectedDelivery = Instant.now().plus(7, ChronoUnit.DAYS);
+            final ZonedDateTime expectedDelivery = SphereTestUtils.now().plus(7, ChronoUnit.DAYS);
             final UpdateAction<InventoryEntry> action = SetExpectedDelivery.of(expectedDelivery);
             final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getExpectedDelivery())

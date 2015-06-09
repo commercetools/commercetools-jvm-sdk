@@ -1,6 +1,6 @@
 package io.sphere.sdk.models;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 /**
  * A default model is a real resource in SPHERE.IO which can be referenced and always consists of the fields
@@ -16,10 +16,10 @@ public interface DefaultModel<T> extends DefaultModelView<T>, Referenceable<T> {
     long getVersion();
 
     @Override
-    Instant getCreatedAt();
+    ZonedDateTime getCreatedAt();
 
     @Override
-    Instant getLastModifiedAt();
+    ZonedDateTime getLastModifiedAt();
 
     @Override
     Reference<T> toReference();

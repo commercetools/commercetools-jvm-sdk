@@ -3,7 +3,7 @@ package io.sphere.sdk.categories;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelImpl;
@@ -30,8 +30,8 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     @JsonCreator
     CategoryImpl(final String id,
                  final long version,
-                 final Instant createdAt,
-                 final Instant lastModifiedAt,
+                 final ZonedDateTime createdAt,
+                 final ZonedDateTime lastModifiedAt,
                  final LocalizedStrings name,
                  final LocalizedStrings slug,
                  final Optional<LocalizedStrings> description,

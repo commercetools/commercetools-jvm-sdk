@@ -5,7 +5,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implements InventoryEntry {
@@ -14,10 +14,10 @@ final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implemen
     private final long quantityOnStock;
     private final long availableQuantity;
     private final Optional<Integer> restockableInDays;
-    private final Optional<Instant> expectedDelivery;
+    private final Optional<ZonedDateTime> expectedDelivery;
 
     @JsonCreator
-    public InventoryEntryImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final long availableQuantity, final String sku, final Optional<Reference<Channel>> supplyChannel, final long quantityOnStock, final Optional<Integer> restockableInDays, final Optional<Instant> expectedDelivery) {
+    public InventoryEntryImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final long availableQuantity, final String sku, final Optional<Reference<Channel>> supplyChannel, final long quantityOnStock, final Optional<Integer> restockableInDays, final Optional<ZonedDateTime> expectedDelivery) {
         super(id, version, createdAt, lastModifiedAt);
         this.availableQuantity = availableQuantity;
         this.sku = sku;
@@ -33,7 +33,7 @@ final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implemen
     }
 
     @Override
-    public Optional<Instant> getExpectedDelivery() {
+    public Optional<ZonedDateTime> getExpectedDelivery() {
         return expectedDelivery;
     }
 

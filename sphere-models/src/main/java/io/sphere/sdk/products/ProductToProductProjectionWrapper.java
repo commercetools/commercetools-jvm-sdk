@@ -7,7 +7,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -87,12 +87,12 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     }
 
     @Override
-    public Instant getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return product.getCreatedAt();
     }
 
     @Override
-    public Instant getLastModifiedAt() {
+    public ZonedDateTime getLastModifiedAt() {
         return product.getLastModifiedAt();
     }
 

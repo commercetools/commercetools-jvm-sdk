@@ -1,14 +1,14 @@
 package io.sphere.sdk.models;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 public class DefaultModelViewImpl<T> extends Base implements DefaultModelView<T> {
     private final String id;
     private final long version;
-    private final Instant createdAt;
-    private final Instant lastModifiedAt;
+    private final ZonedDateTime createdAt;
+    private final ZonedDateTime lastModifiedAt;
 
-    public DefaultModelViewImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt) {
+    public DefaultModelViewImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt) {
         this.id = id;
         this.version = version;
         this.createdAt = createdAt;
@@ -26,12 +26,12 @@ public class DefaultModelViewImpl<T> extends Base implements DefaultModelView<T>
     }
 
     @Override
-    public Instant getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 
     @Override
-    public Instant getLastModifiedAt() {
+    public ZonedDateTime getLastModifiedAt() {
         return lastModifiedAt;
     }
 }

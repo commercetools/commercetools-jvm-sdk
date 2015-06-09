@@ -17,12 +17,11 @@ import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 
 import io.sphere.sdk.test.ReferenceAssert;
+import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
-import java.time.Instant;
-import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.*;
 
@@ -61,8 +60,8 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void addPriceWithValidityPeriod() throws Exception {
         final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR))
-                .withValidFrom(Instant.now())
-                .withValidUntil(LocalDateTime.now().plusHours(2).toInstant(ZoneOffset.UTC));
+                .withValidFrom(SphereTestUtils.now())
+                .withValidUntil(SphereTestUtils.now().withZoneSameLocal(ZoneOffset.UTC).plusHours(2));
         testAddPrice(expectedPrice);
     }
 

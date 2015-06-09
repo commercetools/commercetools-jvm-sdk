@@ -9,7 +9,7 @@ import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
 
 import javax.money.MonetaryAmount;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,8 +30,8 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
     private final List<DiscountCodeReference> discountCodes;
 
     @JsonCreator
-    CartImpl(final String id, final long version, final Instant createdAt,
-             final Instant lastModifiedAt, final Optional<String> customerId,
+    CartImpl(final String id, final long version, final ZonedDateTime createdAt,
+             final ZonedDateTime lastModifiedAt, final Optional<String> customerId,
              final Optional<String> customerEmail, final List<LineItem> lineItems,
              final List<CustomLineItem> customLineItems, final MonetaryAmount totalPrice,
              final Optional<TaxedPrice> taxedPrice, final CartState cartState,

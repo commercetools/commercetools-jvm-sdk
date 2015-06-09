@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 
 import javax.annotation.Nullable;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 /**
  *
@@ -20,12 +20,12 @@ public class CartDiscountDraft extends Base {
     private final String sortOrder;
     private final boolean isActive;
     @Nullable
-    private final Instant validFrom;
+    private final ZonedDateTime validFrom;
     @Nullable
-    private final Instant validUntil;
+    private final ZonedDateTime validUntil;
     private final boolean requiresDiscountCode;
 
-    CartDiscountDraft(final LocalizedStrings name, final CartPredicate cartPredicate, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean isActive, final Instant validFrom, final Instant validUntil, final boolean requiresDiscountCode) {
+    CartDiscountDraft(final LocalizedStrings name, final CartPredicate cartPredicate, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final boolean requiresDiscountCode) {
         this.cartPredicate = cartPredicate.toSphereCartPredicate();
         this.name = name;
         this.description = description;
@@ -68,12 +68,12 @@ public class CartDiscountDraft extends Base {
     }
 
     @Nullable
-    public Instant getValidFrom() {
+    public ZonedDateTime getValidFrom() {
         return validFrom;
     }
 
     @Nullable
-    public Instant getValidUntil() {
+    public ZonedDateTime getValidUntil() {
         return validUntil;
     }
 

@@ -11,10 +11,10 @@ public class ProjectGetTest extends IntegrationTest {
     public void execution() throws Exception {
         final Project project = execute(ProjectGet.of());
         assertThat(project.getKey()).isEqualTo(getSphereClientConfig().getProjectKey());
-        assertThat(project.getName()).isNotEmpty();
-        assertThat(project.getCountries()).isNotEmpty();
-        assertThat(project.getLanguages()).isNotEmpty();
-        assertThat(project.getCreatedAt()).isNotNull();
-        assertThat(project.getTrialUntil()).isNotNull();
+        assertThat(project.getName()).overridingErrorMessage("name").isNotEmpty();
+        assertThat(project.getCountries()).overridingErrorMessage("countries").isNotEmpty();
+        assertThat(project.getLanguages()).overridingErrorMessage("languages").isNotEmpty();
+        assertThat(project.getCreatedAt()).overridingErrorMessage("createdAt").isNotNull();
+        assertThat(project.getTrialUntil()).overridingErrorMessage("trialUntil").isNotNull();
     }
 }

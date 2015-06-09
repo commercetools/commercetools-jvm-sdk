@@ -1,7 +1,7 @@
 package io.sphere.sdk.models;
 
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Random;
 
 /**
@@ -15,8 +15,8 @@ public abstract class DefaultModelBuilder<T> implements Builder<T> {
 
     protected String id = "id" + RANDOM.nextInt();
     protected long version = 1;
-    protected Instant createdAt = Instant.now();
-    protected Instant lastModifiedAt = Instant.now();
+    protected ZonedDateTime createdAt = ZonedDateTime.now();
+    protected ZonedDateTime lastModifiedAt = ZonedDateTime.now();
 
     public void setId(final String id) {
         this.id = id;
@@ -26,11 +26,11 @@ public abstract class DefaultModelBuilder<T> implements Builder<T> {
         this.version = version;
     }
 
-    public void setCreatedAt(final Instant createdAt) {
+    public void setCreatedAt(final ZonedDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setLastModifiedAt(final Instant lastModifiedAt) {
+    public void setLastModifiedAt(final ZonedDateTime lastModifiedAt) {
         this.lastModifiedAt = lastModifiedAt;
     }
 }

@@ -5,7 +5,7 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -78,22 +78,22 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
     private boolean lastTokenIsStillValid() {
         if (currentTokensOption.isPresent()) {
             final Tokens oldTokens = currentTokensOption.get();
-            return oldTokens.getExpiresInstant().map(expireTime -> expireTime.isAfter(Instant.now())).orElse(true);
+            return oldTokens.getExpiresZonedDateTime().map(expireTime -> expireTime.isAfter(ZonedDateTime.now())).orElse(true);
         } else {
             return false;
         }
     }
 
     private boolean currentTokenIsOlder(final Tokens newTokens) {
-        return (currentTokensOption.isPresent() && oldExpiringInstant().isBefore(newExpiringInstant(newTokens)));
+        return (currentTokensOption.isPresent() && oldExpiringZonedDateTime().isBefore(newExpiringZonedDateTime(newTokens)));
     }
 
-    private Instant newExpiringInstant(final Tokens newTokens) {
-        return newTokens.getExpiresInstant().orElseGet(() -> Instant.now().plusSeconds(30 * 60));
+    private ZonedDateTime newExpiringZonedDateTime(final Tokens newTokens) {
+        return newTokens.getExpiresZonedDateTime().orElseGet(() -> ZonedDateTime.now().plusSeconds(30 * 60));
     }
 
-    private Instant oldExpiringInstant() {
-        return currentTokensOption.get().getExpiresInstant().orElseGet(() -> Instant.now());
+    private ZonedDateTime oldExpiringZonedDateTime() {
+        return currentTokensOption.get().getExpiresZonedDateTime().orElseGet(() -> ZonedDateTime.now());
     }
 
     private void updateToken(final Tokens tokens) {

@@ -7,7 +7,6 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.CreationTimestamped;
 
-import java.time.Instant;
 import java.time.ZonedDateTime;
 import java.util.List;
 
@@ -16,11 +15,11 @@ public final class Project extends Base implements CreationTimestamped {
     private final String name;
     private final List<CountryCode> countries;
     private final List<String> languages;
-    private final Instant createdAt;
+    private final ZonedDateTime createdAt;
     private final ZonedDateTime trialUntil;
 
     @JsonCreator
-    private Project(final String key, final String name, final List<CountryCode> countries, final List<String> languages, final Instant createdAt,  @JsonDeserialize(using=TrialUntilDeserializer.class) final ZonedDateTime trialUntil) {
+    private Project(final String key, final String name, final List<CountryCode> countries, final List<String> languages, final ZonedDateTime createdAt,  @JsonDeserialize(using=TrialUntilDeserializer.class) final ZonedDateTime trialUntil) {
         this.key = key;
         this.name = name;
         this.countries = countries;
@@ -50,7 +49,7 @@ public final class Project extends Base implements CreationTimestamped {
     }
 
     @Override
-    public Instant getCreatedAt() {
+    public ZonedDateTime getCreatedAt() {
         return createdAt;
     }
 

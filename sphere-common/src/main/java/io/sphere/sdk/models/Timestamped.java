@@ -1,11 +1,11 @@
 package io.sphere.sdk.models;
 
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 
 public interface Timestamped extends CreationTimestamped {
     @Override
-    Instant getCreatedAt();
+    ZonedDateTime getCreatedAt();
 
-    Instant getLastModifiedAt();
+    ZonedDateTime getLastModifiedAt();
 }

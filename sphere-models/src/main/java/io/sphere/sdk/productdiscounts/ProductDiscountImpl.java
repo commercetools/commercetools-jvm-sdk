@@ -4,7 +4,7 @@ import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +17,7 @@ class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements P
     private final boolean isActive;
     private final List<Reference<Object>> references;
 
-    ProductDiscountImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt,
+    ProductDiscountImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                         final LocalizedStrings name, final Optional<LocalizedStrings> description,
                         final ProductDiscountValue value, final String predicate, final String sortOrder,
                         final boolean isActive, final List<Reference<Object>> references) {

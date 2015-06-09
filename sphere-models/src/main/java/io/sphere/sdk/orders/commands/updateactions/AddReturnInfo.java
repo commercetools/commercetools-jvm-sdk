@@ -4,7 +4,7 @@ import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.ReturnItemDraft;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,18 +13,18 @@ import java.util.Optional;
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addReturnInfo()}
  */
 public class AddReturnInfo extends UpdateAction<Order> {
-    private final Optional<Instant> returnDate;
+    private final Optional<ZonedDateTime> returnDate;
     private final Optional<String> returnTrackingId;
     private final List<ReturnItemDraft> items;
 
-    private AddReturnInfo(final List<ReturnItemDraft> items, final Optional<Instant> returnDate, final Optional<String> returnTrackingId) {
+    private AddReturnInfo(final List<ReturnItemDraft> items, final Optional<ZonedDateTime> returnDate, final Optional<String> returnTrackingId) {
         super("addReturnInfo");
         this.returnDate = returnDate;
         this.returnTrackingId = returnTrackingId;
         this.items = items;
     }
 
-    public static AddReturnInfo of(final List<ReturnItemDraft> items, final Optional<Instant> returnDate, final Optional<String> returnTrackingId) {
+    public static AddReturnInfo of(final List<ReturnItemDraft> items, final Optional<ZonedDateTime> returnDate, final Optional<String> returnTrackingId) {
         return new AddReturnInfo(items, returnDate, returnTrackingId);
     }
 
@@ -32,7 +32,7 @@ public class AddReturnInfo extends UpdateAction<Order> {
         return of(items, Optional.empty(), Optional.empty());
     }
 
-    public AddReturnInfo withReturnDate(final Instant returnDate) {
+    public AddReturnInfo withReturnDate(final ZonedDateTime returnDate) {
         return of(items, Optional.of(returnDate), returnTrackingId);
     }
 
@@ -40,7 +40,7 @@ public class AddReturnInfo extends UpdateAction<Order> {
         return of(items, returnDate, Optional.of(returnTrackingId));
     }
 
-    public Optional<Instant> getReturnDate() {
+    public Optional<ZonedDateTime> getReturnDate() {
         return returnDate;
     }
 

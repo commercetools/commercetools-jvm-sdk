@@ -6,7 +6,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
 
 import javax.money.MonetaryAmount;
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -27,7 +27,7 @@ public class OrderImportDraftBuilder extends Base implements Builder<OrderImport
     private Optional<ShipmentState> shipmentState = Optional.empty();
     private Optional<PaymentState> paymentState = Optional.empty();
     private Optional<OrderShippingInfo> shippingInfo = Optional.empty();
-    private Optional<Instant> completedAt = Optional.empty();
+    private Optional<ZonedDateTime> completedAt = Optional.empty();
 
     private OrderImportDraftBuilder(final MonetaryAmount totalPrice, final OrderState orderState) {
         this.totalPrice = totalPrice;
@@ -163,12 +163,12 @@ public class OrderImportDraftBuilder extends Base implements Builder<OrderImport
         return shippingInfo(Optional.of(shippingInfo));
     }
 
-    public OrderImportDraftBuilder completedAt(final Optional<Instant> completedAt) {
+    public OrderImportDraftBuilder completedAt(final Optional<ZonedDateTime> completedAt) {
         this.completedAt = completedAt;
         return this;
     }
 
-    public OrderImportDraftBuilder completedAt(final Instant completedAt) {
+    public OrderImportDraftBuilder completedAt(final ZonedDateTime completedAt) {
         return completedAt(Optional.of(completedAt));
     }
 

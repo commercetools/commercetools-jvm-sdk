@@ -4,7 +4,7 @@ package io.sphere.sdk.models;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,8 +17,8 @@ public abstract class DefaultModelSubclassTest<T extends DefaultModel<?>> {
     public static class ExampleData {
         public final String id = "id-ExampleDataBase";
         public long version = 12;
-        public final Instant createdAt = Instant.parse("2001-09-11T14:00:00.000Z");
-        public final Instant lastModifiedAt = createdAt.plus(3, ChronoUnit.DAYS);
+        public final ZonedDateTime createdAt = ZonedDateTime.parse("2001-09-11T14:00:00.000Z");
+        public final ZonedDateTime lastModifiedAt = createdAt.plus(3, ChronoUnit.DAYS);
 
         public ExampleData version(final long version) {
             this.version = version;

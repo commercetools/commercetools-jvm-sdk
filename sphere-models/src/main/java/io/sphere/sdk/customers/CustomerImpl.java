@@ -5,7 +5,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.time.LocalDate;
@@ -30,7 +30,7 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     private final Optional<LocalDate> dateOfBirth;
 
     @JsonCreator
-    public CustomerImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt, final Optional<String> customerNumber, final String email, final String firstName, final String lastName, final String password, final Optional<String> middleName, final Optional<String> title, final List<Address> addresses, final Optional<String> defaultShippingAddressId, final Optional<String> defaultBillingAddressId, final boolean isEmailVerified, final Optional<String> externalId, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<String> companyName,  final Optional<String> vatId, final Optional<LocalDate> dateOfBirth) {
+    public CustomerImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final Optional<String> customerNumber, final String email, final String firstName, final String lastName, final String password, final Optional<String> middleName, final Optional<String> title, final List<Address> addresses, final Optional<String> defaultShippingAddressId, final Optional<String> defaultBillingAddressId, final boolean isEmailVerified, final Optional<String> externalId, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<String> companyName,  final Optional<String> vatId, final Optional<LocalDate> dateOfBirth) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerNumber = customerNumber;
         this.email = email;

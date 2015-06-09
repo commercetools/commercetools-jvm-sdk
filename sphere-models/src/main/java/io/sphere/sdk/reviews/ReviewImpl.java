@@ -3,7 +3,7 @@ package io.sphere.sdk.reviews;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.DefaultModelImpl;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 
 final class ReviewImpl extends DefaultModelImpl<Review> implements Review {
@@ -15,7 +15,7 @@ final class ReviewImpl extends DefaultModelImpl<Review> implements Review {
     private final Double score;
 
     @JsonCreator
-    ReviewImpl(final String id, final long version, final Instant createdAt, final Instant lastModifiedAt,
+    ReviewImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                final String productId, final String customerId, final Optional<String> authorName, final Optional<String> title,
                final Optional<String> text, final Optional<Double> score) {
         super(id, version, createdAt, lastModifiedAt);
