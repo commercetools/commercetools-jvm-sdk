@@ -6,7 +6,7 @@ import io.sphere.sdk.producttypes.MetaProductType;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeDefinition;
-import io.sphere.sdk.attributes.AttributeGetterSetter;
+import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.json.JsonUtils;
 import org.junit.Test;
 
@@ -28,9 +28,9 @@ public class ProductAttributeAccessTest {
     private final ProductVariant variant = product.getMasterData().getCurrent().get().getMasterVariant();
     private final ProductType productType = productProjection.getProductType().getObj().get();
 
-    private final AttributeGetterSetter<LocalizedStrings> localizedStringsAttributeGetterSetter = ofLocalizedStrings().ofName(LOC_STRING_ATTRIBUTE);
-    private final AttributeGetterSetter<LocalizedStrings> wrongTypeAttributeGetterSetter = ofLocalizedStrings().ofName("boolean-attribute");
-    private final AttributeGetterSetter<LocalizedStrings> notPresentAttributeGetterSetter = ofLocalizedStrings().ofName(NOT_PRESENT);
+    private final NamedAttributeAccess<LocalizedStrings> localizedStringsNamedAttributeAccess = ofLocalizedStrings().ofName(LOC_STRING_ATTRIBUTE);
+    private final NamedAttributeAccess<LocalizedStrings> wrongTypeNamedAttributeAccess = ofLocalizedStrings().ofName("boolean-attribute");
+    private final NamedAttributeAccess<LocalizedStrings> notPresentNamedAttributeAccess = ofLocalizedStrings().ofName(NOT_PRESENT);
 
     @Test
     public void size() throws Exception {
@@ -51,23 +51,23 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void localizedStrings() throws Exception {
-        assertThat(variant.getAttribute(localizedStringsAttributeGetterSetter).get()).
+        assertThat(variant.getAttribute(localizedStringsNamedAttributeAccess).get()).
                 isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
     }
 
     @Test
     public void attributeNotFound() throws Exception {
-        assertThat(variant.getAttribute(notPresentAttributeGetterSetter)).isEmpty();
+        assertThat(variant.getAttribute(notPresentNamedAttributeAccess)).isEmpty();
     }
 
     @Test(expected = JsonException.class)
     public void wrongAttributeType() throws Exception {
-        variant.getAttribute(wrongTypeAttributeGetterSetter);
+        variant.getAttribute(wrongTypeNamedAttributeAccess);
     }
 
     @Test
     public void productProjection() throws Exception {
-        assertThat(productProjection.getMasterVariant().getAttribute(localizedStringsAttributeGetterSetter).get()).
+        assertThat(productProjection.getMasterVariant().getAttribute(localizedStringsNamedAttributeAccess).get()).
                 isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
 
     }

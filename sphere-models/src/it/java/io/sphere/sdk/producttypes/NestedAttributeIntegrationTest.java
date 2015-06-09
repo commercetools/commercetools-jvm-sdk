@@ -20,21 +20,21 @@ import static java.util.stream.Collectors.toList;
 public final class NestedAttributeIntegrationTest extends IntegrationTest {
 
     static class NutrientInfo {
-        static AttributeGetterSetter<String> quantityContainedUOM = AttributeAccess.ofText().ofName("quantityContainedUOM");
-        static AttributeGetterSetter<Double> quantityContained = AttributeAccess.ofDouble().ofName("quantityContained");
-        static AttributeGetterSetter<String> measurementPrecision = AttributeAccess.ofText().ofName("measurementPrecision");
-        static AttributeGetterSetter<String> nutrientTypeCode = AttributeAccess.ofText().ofName("nutrientTypeCode");
+        static NamedAttributeAccess<String> quantityContainedUOM = AttributeAccess.ofText().ofName("quantityContainedUOM");
+        static NamedAttributeAccess<Double> quantityContained = AttributeAccess.ofDouble().ofName("quantityContained");
+        static NamedAttributeAccess<String> measurementPrecision = AttributeAccess.ofText().ofName("measurementPrecision");
+        static NamedAttributeAccess<String> nutrientTypeCode = AttributeAccess.ofText().ofName("nutrientTypeCode");
     }
 
     static class Nutrient {
-        static AttributeGetterSetter<String> servingSizeUOM = AttributeAccess.ofText().ofName("servingSizeUOM");
-        static AttributeGetterSetter<Double> servingSize = AttributeAccess.ofDouble().ofName("servingSize");
-        static AttributeGetterSetter<Set<AttributeContainer>> nutrientInformation = AttributeAccess.ofNestedSet().ofName("nutrientInformation");
+        static NamedAttributeAccess<String> servingSizeUOM = AttributeAccess.ofText().ofName("servingSizeUOM");
+        static NamedAttributeAccess<Double> servingSize = AttributeAccess.ofDouble().ofName("servingSize");
+        static NamedAttributeAccess<Set<AttributeContainer>> nutrientInformation = AttributeAccess.ofNestedSet().ofName("nutrientInformation");
     }
 
     static class Banana {
-        static AttributeGetterSetter<String> bananaColor = AttributeAccess.ofText().ofName("bananaColor");
-        static AttributeGetterSetter<Set<AttributeContainer>> nutrients = AttributeAccess.ofNestedSet().ofName("nutrients");
+        static NamedAttributeAccess<String> bananaColor = AttributeAccess.ofText().ofName("bananaColor");
+        static NamedAttributeAccess<Set<AttributeContainer>> nutrients = AttributeAccess.ofNestedSet().ofName("nutrients");
     }
 
     @Test

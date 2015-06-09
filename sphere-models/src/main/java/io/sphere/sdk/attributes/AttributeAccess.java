@@ -21,7 +21,7 @@ import static io.sphere.sdk.json.TypeReferences.*;
 /**
  *
  * @param <T> the type of the attribute
- * @see io.sphere.sdk.attributes.AttributeGetterSetter
+ * @see NamedAttributeAccess
  */
 public final class AttributeAccess<T> extends Base {
     private final AttributeMapper<T> attributeMapper;
@@ -175,12 +175,8 @@ public final class AttributeAccess<T> extends Base {
         });
     }
 
-    public AttributeGetterSetter<T> getterSetter(final String name) {
-        return ofName(name);
-    }
-
-    public AttributeGetterSetter<T> ofName(final String name) {
-        return AttributeGetterSetter.of(name, attributeMapper);
+    public NamedAttributeAccess<T> ofName(final String name) {
+        return NamedAttributeAccess.of(name, attributeMapper);
     }
 
     public static AttributeAccess<AttributeContainer> ofNested() {
@@ -190,14 +186,6 @@ public final class AttributeAccess<T> extends Base {
 
     public static AttributeAccess<Set<AttributeContainer>> ofNestedSet() {
         return ofSet(NestedType.class, new NestedSetAttributeMapperImpl());
-    }
-
-    public AttributeGetter<T> getter(final String name) {
-        return ofName(name);
-    }
-
-    public AttributeSetter<T> setter(final String name) {
-        return ofName(name);
     }
 
     public AttributeMapper<T> attributeMapper() {

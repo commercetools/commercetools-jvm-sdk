@@ -1,14 +1,14 @@
 package io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle;
 
 import io.sphere.sdk.attributes.AttributeAccess;
-import io.sphere.sdk.attributes.AttributeGetterSetter;
+import io.sphere.sdk.attributes.NamedAttributeAccess;
 
 public interface WithColor {
-    default AttributeGetterSetter<String> hexColor() {
+    default NamedAttributeAccess<String> hexColor() {
         return AttributeAccess.ofString().ofName("hex-color");
     }
 
-    default AttributeGetterSetter<Double> rgb() {
+    default NamedAttributeAccess<Double> rgb() {
         return AttributeAccess.ofDouble().ofName("rgb");
     }
 }

@@ -2,7 +2,7 @@ package io.sphere.sdk.products.commands.updateactions;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeSetter;
+import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.ProductUpdateScope;
 
 import java.util.Optional;
@@ -67,13 +67,13 @@ public class SetAttribute extends StageableProductUpdateAction {
      * Action to remove a custom attribute.
      *
      * @param variantId the variant the attribute value should be unset
-     * @param attributeSetter object containing the name of the attribute
+     * @param NamedAttributeAccess object containing the name of the attribute
      * @param productUpdateScope the scope where the attribute should be updated
      * @param <T> type of the attribute
      * @return update action
      */
-    public static <T> SetAttribute ofUnsetAttribute(final int variantId, final AttributeSetter<T> attributeSetter, final ProductUpdateScope productUpdateScope) {
-        return of(variantId, attributeSetter.getName(), Optional.<JsonNode>empty(), productUpdateScope);
+    public static <T> SetAttribute ofUnsetAttribute(final int variantId, final NamedAttributeAccess<T> NamedAttributeAccess, final ProductUpdateScope productUpdateScope) {
+        return of(variantId, NamedAttributeAccess.getName(), Optional.<JsonNode>empty(), productUpdateScope);
     }
 
     /**
@@ -98,7 +98,7 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @param <T> type of the attribute
      * @return update action
      */
-    public static <T> SetAttribute of(final int variantId, final AttributeSetter<T> setter, final T value, final ProductUpdateScope productUpdateScope) {
+    public static <T> SetAttribute of(final int variantId, final NamedAttributeAccess<T> setter, final T value, final ProductUpdateScope productUpdateScope) {
         return of(variantId, Attribute.of(setter, value), productUpdateScope);
     }
 }

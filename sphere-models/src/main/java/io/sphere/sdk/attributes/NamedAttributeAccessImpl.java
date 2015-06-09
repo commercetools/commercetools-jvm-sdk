@@ -2,12 +2,12 @@ package io.sphere.sdk.attributes;
 
 import io.sphere.sdk.models.Base;
 
-class AttributeGetterSetterImpl<T> extends Base implements AttributeGetterSetter<T> {
+class NamedAttributeAccessImpl<T> extends Base implements NamedAttributeAccess<T> {
 
     private final String name;
     private final AttributeMapper<T> mapper;
 
-    AttributeGetterSetterImpl(final String name, final AttributeMapper<T> mapper) {
+    NamedAttributeAccessImpl(final String name, final AttributeMapper<T> mapper) {
 
         this.name = name;
         this.mapper = mapper;

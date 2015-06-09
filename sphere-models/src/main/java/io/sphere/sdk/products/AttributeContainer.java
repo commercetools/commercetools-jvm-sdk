@@ -2,7 +2,7 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeAccess;
-import io.sphere.sdk.attributes.AttributeGetter;
+import io.sphere.sdk.attributes.NamedAttributeAccess;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +16,7 @@ public interface AttributeContainer {
     List<Attribute> getAttributes();
 
     /**
-     * Access one attribute of a specific name and type which is known in the first place, consult {@link io.sphere.sdk.attributes.AttributeGetterSetter} how to implement these.
+     * Access one attribute of a specific name and type which is known in the first place, consult {@link NamedAttributeAccess} how to implement these.
      *
      * @throws io.sphere.sdk.json.JsonException if the type of attribute cannot be parsed
      *
@@ -24,18 +24,18 @@ public interface AttributeContainer {
      * @param <T> the underlying type of the attribute
      * @return the value of the attribute, or Optional.empty if absent
      */
-    <T> Optional<T> getAttribute(final AttributeGetter<T> accessor);
+    <T> Optional<T> getAttribute(final NamedAttributeAccess<T> accessor);
 
     default <T> Optional<T> getAttribute(final String name, final AttributeAccess<T> accessor) {
-        return getAttribute(accessor.getter(name));
+        return getAttribute(accessor.ofName(name));
     }
 
     default boolean hasAttribute(String attributeName) {
         return getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeName));
     }
 
-    default boolean hasAttribute(AttributeGetter<?> getter) {
-        return getAttributes().stream().anyMatch(attr -> attr.getName().equals(getter.getName()));
+    default boolean hasAttribute(NamedAttributeAccess<?> namedAccess) {
+        return getAttributes().stream().anyMatch(attr -> attr.getName().equals(namedAccess.getName()));
     }
 
     default Optional<Attribute> getAttribute(final String attributeName) {

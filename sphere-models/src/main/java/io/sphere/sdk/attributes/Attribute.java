@@ -21,9 +21,9 @@ public interface Attribute {
         return of(name, jsonNode);
     }
 
-    static <T> Attribute of(final AttributeSetter<T> setter, final T value) {
-        final JsonNode jsonNode = setter.getMapper().serialize(value);
-        return of(setter.getName(), jsonNode);
+    static <T> Attribute of(final NamedAttributeAccess<T> namesAccess, final T value) {
+        final JsonNode jsonNode = namesAccess.getMapper().serialize(value);
+        return of(namesAccess.getName(), jsonNode);
     }
 
     //todo add example with optional as result to not separate result and guard

@@ -50,8 +50,8 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void nestedAttribute() throws Exception {
-        final AttributeGetterSetter<Double> sizeAttr = AttributeAccess.ofDouble().ofName("size-nested");
-        final AttributeGetterSetter<String> brandAttr = AttributeAccess.ofText().ofName("brand-nested");
+        final NamedAttributeAccess<Double> sizeAttr = AttributeAccess.ofDouble().ofName("size-nested");
+        final NamedAttributeAccess<String> brandAttr = AttributeAccess.ofText().ofName("brand-nested");
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of("test-sub-attribute", "nested attribute test",
                 asList(
@@ -306,11 +306,11 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
         furtherAttributeDefinitionAssertions.accept(fetchedAttributeDefinition);
 
-        final AttributeGetterSetter<X> attributeGetterSetter = access.ofName(attributeName);
-        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(attributeGetterSetter.valueOf(exampleValue)).build();
+        final NamedAttributeAccess<X> namedAttributeAccess = access.ofName(attributeName);
+        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(namedAttributeAccess.valueOf(exampleValue)).build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = execute(ProductCreateCommand.of(productDraft));
-        final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeGetterSetter).get();
+        final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().getAttribute(namedAttributeAccess).get();
 
         assertThat(exampleValue).isEqualTo(actualAttributeValue);
 
