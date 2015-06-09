@@ -41,6 +41,11 @@ public interface CartLike<T> extends DefaultModel<T> {
 
     Optional<Address> getBillingAddress();
 
+    /**
+     * In the order context the customer group can only be expanded if the customer was in a group before creating the order.
+     *
+     * @return optional reference of a customer group
+     */
     Optional<Reference<CustomerGroup>> getCustomerGroup();
 
     Optional<CountryCode> getCountry();
