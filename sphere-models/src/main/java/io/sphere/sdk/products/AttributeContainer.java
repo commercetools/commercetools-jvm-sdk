@@ -1,6 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.AttributeGetter;
 
 import java.util.List;
@@ -24,6 +25,10 @@ public interface AttributeContainer {
      * @return the value of the attribute, or Optional.empty if absent
      */
     <T> Optional<T> getAttribute(final AttributeGetter<T> accessor);
+
+    default <T> Optional<T> getAttribute(final String name, final AttributeAccess<T> accessor) {
+        return getAttribute(accessor.getter(name));
+    }
 
     default boolean hasAttribute(String attributeName) {
         return getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeName));

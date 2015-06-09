@@ -38,6 +38,12 @@ public class ProductAttributeAccessTest {
     }
 
     @Test
+    public void getterWithAttributeAccess() throws Exception {
+        assertThat(variant.getAttribute(LOC_STRING_ATTRIBUTE, ofLocalizedStrings()).get()).
+                isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
+    }
+
+    @Test
     public void localizedStrings() throws Exception {
         assertThat(variant.getAttribute(localizedStringsAttributeGetterSetter).get()).
                 isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
