@@ -2,6 +2,7 @@ package io.sphere.sdk.orders.queries;
 
 import io.sphere.sdk.carts.CartFixtures;
 import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
@@ -16,12 +17,27 @@ import java.util.function.Function;
 import static io.sphere.sdk.channels.ChannelFixtures.persistentChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRoles.ORDER_EXPORT;
 import static io.sphere.sdk.orders.OrderFixtures.withOrder;
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderQueryTest extends IntegrationTest {
 
     public static final OrderQueryModel MODEL = OrderQueryModel.of();
+
+    @Test
+    public void customerGroupIsExpandeable() throws Exception {
+        CustomerFixtures.withCustomerInGroup(client(), (customer, customerGroup) -> {
+            withOrder(client(), customer, order -> {
+                final Order queriedOrder = execute(OrderQuery.of()
+                                .withPredicate(m -> m.id().is(order.getId()))
+                                .withExpansionPaths(m -> m.customerGroup())
+                ).head().get();
+                assertThat(queriedOrder.getCustomerGroup().get().getObj().get().getName())
+                        .overridingErrorMessage("customerGroupIsExpandeable")
+                        .isEqualTo(customerGroup.getName());
+            });
+        });
+    }
 
     @Test
     public void customerId() throws Exception {

@@ -2,6 +2,7 @@ package io.sphere.sdk.orders.expansion;
 
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.queries.ExpansionModel;
+import io.sphere.sdk.queries.ExpansionPath;
 
 import java.util.Optional;
 
@@ -21,5 +22,9 @@ public class OrderExpansionModel<T> extends ExpansionModel<T> {
 
     public static OrderExpansionModel<Order> of() {
         return new OrderExpansionModel<>();
+    }
+
+    public ExpansionPath<T> customerGroup() {
+        return pathWithRoots("customerGroup");
     }
 }
