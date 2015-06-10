@@ -2,7 +2,9 @@ package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.models.Reference;
 
 @JsonDeserialize(as = AttributeImpl.class)
 public interface Attribute {
@@ -23,6 +25,12 @@ public interface Attribute {
         //here is not the attributeMapper used to keep LocalizedEnum values which
         //are transformed to just the key so the attribute could not be read anymore
         final JsonNode jsonNode = JsonUtils.toJsonNode(value);
+        if (value instanceof Reference && jsonNode instanceof ObjectNode) {
+            final Reference<?> reference = (Reference<?>) value;
+            if (reference.getObj().isPresent()) {
+                ((ObjectNode) jsonNode).replace("obj", JsonUtils.toJsonNode(reference.getObj().get()));
+            }
+        }
         return of(name, jsonNode);
     }
 
