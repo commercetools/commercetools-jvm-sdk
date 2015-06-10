@@ -16,7 +16,7 @@ import io.sphere.sdk.client.JsonEndpoint;
 public class CustomObjectUpsertCommand<T> extends CreateCommandImpl<CustomObject<T>, CustomObjectDraft<T>> {
 
     private CustomObjectUpsertCommand(final CustomObjectDraft<T> draft) {
-        super(draft, JsonEndpoint.of(draft.typeReference(), CustomObjectsEndpoint.PATH));
+        super(draft, JsonEndpoint.of(draft.typeReference(), CustomObjectEndpoint.PATH));
     }
 
     public static <T> CustomObjectUpsertCommand<T> of(final CustomObjectDraft<T> draft) {

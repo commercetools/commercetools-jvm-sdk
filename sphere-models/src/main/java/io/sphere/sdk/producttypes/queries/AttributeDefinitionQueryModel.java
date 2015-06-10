@@ -5,24 +5,21 @@ import java.util.Optional;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
 
-public final class AttributeDefinitionQueryModel extends QueryModelImpl<ProductType> {
+public final class AttributeDefinitionQueryModel<T> extends QueryModelImpl<T> {
 
-    private static final AttributeDefinitionQueryModel instance =
-            new AttributeDefinitionQueryModel(Optional.empty(), Optional.<String>empty());
-
-    static AttributeDefinitionQueryModel get() {
-        return instance;
+    static AttributeDefinitionQueryModel<ProductType> get() {
+        return new AttributeDefinitionQueryModel<>(Optional.empty(), Optional.<String>empty());
     }
 
-    AttributeDefinitionQueryModel(Optional<? extends QueryModel<ProductType>> parent, Optional<String> pathSegment) {
+    AttributeDefinitionQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public StringQueryModel<ProductType> name() {
+    public StringQueryModel<T> name() {
         return stringModel("name");
     }
 
-    public AttributeTypeQueryModel<ProductType> type() {
+    public AttributeTypeQueryModel<T> type() {
         return new AttributeTypeQueryModel<>(Optional.of(this), Optional.of("type"));
     }
 }

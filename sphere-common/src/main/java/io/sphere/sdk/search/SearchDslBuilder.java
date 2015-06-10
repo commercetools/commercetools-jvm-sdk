@@ -3,7 +3,7 @@ package io.sphere.sdk.search;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.queries.QueryParameter;
+import io.sphere.sdk.http.HttpQueryParameter;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +20,7 @@ class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
     private List<SearchSort<T>> sort;
     private Optional<Long> limit;
     private Optional<Long> offset;
-    private List<QueryParameter> additionalQueryParameters;
+    private List<HttpQueryParameter> additionalQueryParameters;
     private final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     private final String endpoint;
 
@@ -92,7 +92,7 @@ class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
              return this;
     }
 
-    public Builder<SearchDsl<T>> additionalQueryParameters(final List<QueryParameter> additionalQueryParameters) {
+    public Builder<SearchDsl<T>> additionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters) {
         this.additionalQueryParameters = additionalQueryParameters;
         return this;
     }

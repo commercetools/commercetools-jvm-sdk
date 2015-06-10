@@ -11,7 +11,7 @@ public interface ExpansionPath<I> {
      */
     String toSphereExpand();
 
-    public static <T> ExpansionPath<T> of(final String sphereExpansionPathExpression) {
+    static <T> ExpansionPath<T> of(final String sphereExpansionPathExpression) {
         return new SimpleExpansionPath<>(sphereExpansionPathExpression);
     }
 }

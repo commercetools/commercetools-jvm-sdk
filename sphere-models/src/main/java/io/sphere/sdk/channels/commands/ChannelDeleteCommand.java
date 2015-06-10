@@ -12,7 +12,7 @@ import io.sphere.sdk.models.Versioned;
  */
 public class ChannelDeleteCommand extends ByIdDeleteCommandImpl<Channel> {
     private ChannelDeleteCommand(final Versioned<Channel> versioned) {
-        super(versioned, ChannelsEndpoint.ENDPOINT);
+        super(versioned, ChannelEndpoint.ENDPOINT);
     }
 
     public static DeleteCommand<Channel> of(final Versioned<Channel> versioned) {

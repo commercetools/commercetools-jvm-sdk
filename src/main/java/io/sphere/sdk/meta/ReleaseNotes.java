@@ -277,7 +277,7 @@ import java.util.function.BiFunction;
 
  <h3>1.0.0-M3</h3>
  <ul>
- <li>The query model can now be accessed by it's Query class, e.g., {@link io.sphere.sdk.categories.queries.CategoryQuery#model()}.</li>
+ <li>The query model can now be accessed by it's Query class, e.g., {@code io.sphere.sdk.categories.queries.CategoryQuery#model()}.</li>
  <li>Added a {@link io.sphere.sdk.meta.GettingStarted Getting Started} page.</li>
  <li>Added a {@link io.sphere.sdk.meta.JvmSdkFeatures Features of the SDK} page.</li>
  <li>Addad a legacy Play Java client for Play Framework 2.2.x.</li>

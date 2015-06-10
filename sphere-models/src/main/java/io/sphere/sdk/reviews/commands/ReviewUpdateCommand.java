@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
  */
 public class ReviewUpdateCommand extends UpdateCommandDslImpl<Review> {
     private ReviewUpdateCommand(final Versioned<Review> versioned, final List<? extends UpdateAction<Review>> updateActions) {
-        super(versioned, updateActions, ReviewsEndpoint.ENDPOINT);
+        super(versioned, updateActions, ReviewEndpoint.ENDPOINT);
     }
 
     public static ReviewUpdateCommand of(final Versioned<Review> versioned, final UpdateAction<Review> updateAction) {

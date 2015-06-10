@@ -26,7 +26,7 @@ public class OrderImportCommand extends CommandImpl<Order> {
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, OrdersEndpoint.ENDPOINT.endpoint() + "/import", JsonUtils.toJson(orderImportDraft));
+        return HttpRequestIntent.of(POST, OrderEndpoint.ENDPOINT.endpoint() + "/import", JsonUtils.toJson(orderImportDraft));
     }
 
     public static OrderImportCommand of(final OrderImportDraft orderImportDraft) {

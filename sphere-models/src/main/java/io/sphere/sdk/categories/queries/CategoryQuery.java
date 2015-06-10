@@ -2,9 +2,9 @@ package io.sphere.sdk.categories.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.queries.DefaultModelQuery;
+import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 
 import java.util.Locale;
 
@@ -12,13 +12,9 @@ import java.util.Locale;
  * {@doc.gen summary categories}
  *
  */
-public class CategoryQuery extends DefaultModelQuery<Category> {
+public interface CategoryQuery extends MetaModelQueryDsl<Category, CategoryQuery, CategoryQueryModel, CategoryExpansionModel<Category>> {
 
-    private CategoryQuery() {
-        super(CategoriesEndpoint.ENDPOINT.endpoint(), resultTypeReference());
-    }
-
-    public static TypeReference<PagedQueryResult<Category>> resultTypeReference() {
+    static TypeReference<PagedQueryResult<Category>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Category>>() {
             @Override
             public String toString() {
@@ -27,31 +23,23 @@ public class CategoryQuery extends DefaultModelQuery<Category> {
         };
     }
 
-    public QueryDsl<Category> bySlug(final Locale locale, final String slug) {
-        return withPredicate(model().slug().lang(locale).is(slug));
+    default CategoryQuery bySlug(final Locale locale, final String slug) {
+        return withPredicate(m -> m.slug().lang(locale).is(slug));
     }
 
-    public QueryDsl<Category> byName(final Locale locale, final String name) {
-        return withPredicate(model().name().lang(locale).is(name));
+    default CategoryQuery byName(final Locale locale, final String name) {
+        return withPredicate(m -> m.name().lang(locale).is(name));
     }
 
-    public QueryDsl<Category> byId(final String id) {
-        return withPredicate(model().id().is(id));
+    default CategoryQuery byId(final String id) {
+        return withPredicate(m -> m.id().is(id));
     }
 
-    public static CategoryExpansionModel<Category> expansionPath() {
-        return new CategoryExpansionModel<>();
+    static CategoryQuery of() {
+        return new CategoryQueryImpl();
     }
 
-    public static CategoryQuery of() {
-        return new CategoryQuery();
-    }
-
-    public static CategoryQueryModel model() {
-        return CategoryQueryModel.get();
-    }
-
-    public QueryDsl<Category> byExternalId(final String externalId) {
-        return withPredicate(model().externalId().is(externalId));
+    default CategoryQuery byExternalId(final String externalId) {
+        return withPredicate(m -> m.externalId().is(externalId));
     }
 }

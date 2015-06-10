@@ -11,7 +11,7 @@ public class InventoryEntryQueryModel extends DefaultModelQueryModelImpl<Invento
         super(parent, pathSegment);
     }
 
-    static InventoryEntryQueryModel get() {
+    public static InventoryEntryQueryModel of() {
         return new InventoryEntryQueryModel(Optional.empty(), Optional.empty());
     }
 

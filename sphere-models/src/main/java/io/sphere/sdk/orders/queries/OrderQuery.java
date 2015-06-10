@@ -2,23 +2,19 @@ package io.sphere.sdk.orders.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.orders.Order;
-import io.sphere.sdk.queries.DefaultModelQuery;
+import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 
 /**
  {@doc.gen summary orders}
  */
-public class OrderQuery extends DefaultModelQuery<Order> {
-    private OrderQuery() {
-        super(OrdersEndpoint.ENDPOINT.endpoint(), resultTypeReference());
+public interface OrderQuery extends MetaModelQueryDsl<Order, OrderQuery, OrderQueryModel, OrderExpansionModel<Order>> {
+    static OrderQuery of() {
+        return new OrderQueryImpl();
     }
 
-    public static OrderQuery of() {
-        return new OrderQuery();
-    }
-
-    public static TypeReference<PagedQueryResult<Order>> resultTypeReference() {
+    static TypeReference<PagedQueryResult<Order>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Order>>(){
             @Override
             public String toString() {
@@ -27,15 +23,11 @@ public class OrderQuery extends DefaultModelQuery<Order> {
         };
     }
 
-    public static OrderQueryModel model() {
-        return OrderQueryModel.get();
+    default OrderQuery byCustomerId(final String customerId) {
+        return withPredicate(m -> m.customerId().is(customerId));
     }
 
-    public QueryDsl<Order> byCustomerId(final String customerId) {
-        return withPredicate(model().customerId().is(customerId));
-    }
-
-    public QueryDsl<Order> byCustomerEmail(final String customerEmail) {
-        return withPredicate(model().customerEmail().is(customerEmail));
+    default OrderQuery byCustomerEmail(final String customerEmail) {
+        return withPredicate(m -> m.customerEmail().is(customerEmail));
     }
 }

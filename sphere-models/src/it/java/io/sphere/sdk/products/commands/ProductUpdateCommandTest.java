@@ -79,7 +79,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     //and remove from category
     @Test
     public void addToCategory() throws Exception {
-        withProductAndCategory(client(), (final Product product, final Category category) -> {
+        withProductAndUnconnectedCategory(client(), (final Product product, final Category category) -> {
             assertThat(product.getMasterData().getStaged().getCategories()).isEmpty();
 
             final Product productWithCategory = client()

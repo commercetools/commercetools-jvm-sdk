@@ -14,21 +14,21 @@ public class ProductDataQueryModelBaseTest {
 
     @Test
     public void variants() throws Exception {
-        assertThat(ProductQuery.model().masterData().current().variants().sku().is("bar").toSphereQuery())
+        assertThat(ProductQueryModel.of().masterData().current().variants().sku().is("bar").toSphereQuery())
                 .isEqualTo("masterData(current(variants(sku=\"bar\")))");
     }
 
     @Test
     public void allVariantsInProduct() throws Exception {
-        assertThat(ProductQuery.model().masterData().current().allVariants().where(m -> m.sku().is("bar")))
-                .isEqualTo(ProductQuery.model().masterData().current().where(m -> m.masterVariant().sku().is("bar").or(m.variants().sku().is("bar"))))
+        assertThat(ProductQueryModel.of().masterData().current().allVariants().where(m -> m.sku().is("bar")))
+                .isEqualTo(ProductQueryModel.of().masterData().current().where(m -> m.masterVariant().sku().is("bar").or(m.variants().sku().is("bar"))))
                 .isEqualTo(QueryPredicate.<Product>of(embeddedProductPredicate));
     }
 
     @Test
     public void allVariantsInProductProjection() throws Exception {
-        assertThat(ProductProjectionQuery.model().allVariants().where(m -> m.sku().is("bar")))
-                .isEqualTo(ProductProjectionQuery.model().where(m -> m.masterVariant().sku().is("bar").or(m.variants().sku().is("bar"))))
+        assertThat(ProductProjectionQueryModel.of().allVariants().where(m -> m.sku().is("bar")))
+                .isEqualTo(ProductProjectionQueryModel.of().where(m -> m.masterVariant().sku().is("bar").or(m.variants().sku().is("bar"))))
                 .isEqualTo(QueryPredicate.<ProductProjection>of(embeddedProductProjectionPredicate));
     }
 }

@@ -9,10 +9,8 @@ import java.util.Optional;
 
 public class TaxCategoryQueryModel extends DefaultModelQueryModelImpl<TaxCategory> {
 
-    private static final TaxCategoryQueryModel instance = new TaxCategoryQueryModel(Optional.<QueryModel<TaxCategory>>empty(), Optional.<String>empty());
-
-    static TaxCategoryQueryModel get() {
-        return instance;
+    public static TaxCategoryQueryModel of() {
+        return new TaxCategoryQueryModel(Optional.empty(), Optional.empty());
     }
 
     private TaxCategoryQueryModel(final Optional<? extends QueryModel<TaxCategory>> parent, final Optional<String> pathSegment) {

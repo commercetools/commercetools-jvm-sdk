@@ -2,26 +2,21 @@ package io.sphere.sdk.states.queries;
 
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.states.queries.expansion.StateExpansionModel;
 
-public class StateQuery extends DefaultModelQuery<State> {
-
-    private StateQuery() {
-        super(StateEndpoint.ENDPOINT.endpoint(), resultTypeReference());
+public interface StateQuery extends MetaModelQueryDsl<State, StateQuery, StateQueryModel, StateExpansionModel<State>> {
+    static StateQuery of() {
+        return new StateQueryImpl();
     }
 
-    public static StateQuery of() {
-        return new StateQuery();
+    default StateQuery byKey(final String key) {
+        return withPredicate(StateQueryModel.of().key().is(key));
     }
 
-    public QueryDsl<State> byKey(final String key) {
-        return withPredicate(model().key().is(key));
-    }
-
-    public static TypeReference<PagedQueryResult<State>> resultTypeReference() {
+    static TypeReference<PagedQueryResult<State>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<State>>(){
             @Override
             public String toString() {
@@ -29,10 +24,5 @@ public class StateQuery extends DefaultModelQuery<State> {
             }
         };
     }
-
-    public static StateQueryModel model() {
-        return StateQueryModel.get();
-    }
-
 }
 

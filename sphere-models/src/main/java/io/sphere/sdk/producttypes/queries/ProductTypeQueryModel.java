@@ -8,10 +8,9 @@ import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 
 public final class ProductTypeQueryModel extends DefaultModelQueryModelImpl<ProductType> {
-    private static final ProductTypeQueryModel instance = new ProductTypeQueryModel(Optional.<QueryModel<ProductType>>empty(), Optional.<String>empty());
 
-    static ProductTypeQueryModel get() {
-        return instance;
+    public static ProductTypeQueryModel of() {
+        return new ProductTypeQueryModel(Optional.<QueryModel<ProductType>>empty(), Optional.<String>empty());
     }
 
     private ProductTypeQueryModel(Optional<? extends QueryModel<ProductType>> parent, Optional<String> pathSegment) {
@@ -22,7 +21,7 @@ public final class ProductTypeQueryModel extends DefaultModelQueryModelImpl<Prod
         return new StringQuerySortingModel<>(Optional.of(this), "name");
     }
 
-    public AttributeDefinitionQueryModel attributes() {
-        return new AttributeDefinitionQueryModel(Optional.of(this), Optional.of("attributes"));
+    public AttributeDefinitionQueryModel<ProductType> attributes() {
+        return new AttributeDefinitionQueryModel<>(Optional.of(this), Optional.of("attributes"));
     }
 }

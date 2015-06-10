@@ -2,19 +2,15 @@ package io.sphere.sdk.zones.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
-import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.zones.Location;
 import io.sphere.sdk.zones.Zone;
+import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
-public class ZoneQuery extends DefaultModelQuery<Zone> {
-    private ZoneQuery() {
-        super(ZoneEndpoint.ENDPOINT.endpoint(), resultTypeReference());
-    }
-
-    public static TypeReference<PagedQueryResult<Zone>> resultTypeReference() {
+public interface ZoneQuery extends MetaModelQueryDsl<Zone, ZoneQuery, ZoneQueryModel, ZoneExpansionModel<Zone>> {
+    static TypeReference<PagedQueryResult<Zone>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Zone>>(){
             @Override
             public String toString() {
@@ -23,16 +19,12 @@ public class ZoneQuery extends DefaultModelQuery<Zone> {
         };
     }
 
-    public static ZoneQueryModel model() {
-        return ZoneQueryModel.get();
+    static ZoneQuery of() {
+        return new ZoneQueryImpl();
     }
 
-    public static ZoneQuery of() {
-        return new ZoneQuery();
-    }
-
-    public QueryDsl<Zone> byName(final String name) {
-        return withPredicate(model().name().is(name));
+    default ZoneQuery byName(final String name) {
+        return withPredicate(m -> m.name().is(name));
     }
 
     /**
@@ -41,8 +33,8 @@ public class ZoneQuery extends DefaultModelQuery<Zone> {
      * @param countryCode the country to query for
      * @return query with the same values but a predicate searching for a specific country
      */
-    public QueryDsl<Zone> byCountry(final CountryCode countryCode) {
-        return withPredicate(model().locations().country().is(countryCode));
+    default ZoneQuery byCountry(final CountryCode countryCode) {
+        return withPredicate(m -> m.locations().country().is(countryCode));
     }
 
     /**
@@ -52,11 +44,11 @@ public class ZoneQuery extends DefaultModelQuery<Zone> {
      * @param location the location to query for
      * @return query with the same values but a predicate searching for a specific location
      */
-    public QueryDsl<Zone> byLocation(final Location location) {
+    default ZoneQuery byLocation(final Location location) {
         final QueryPredicate<Zone> predicate =
                 location.getState()
-                        .map(state -> model().locations().where(l -> l.country().is(location.getCountry()).and(l.state().is(state))))
-                        .orElseGet(() -> model().locations().where(l -> l.country().is(location.getCountry()).and(l.state().isNotPresent())));
+                        .map(state -> ZoneQueryModel.of().locations().where(l -> l.country().is(location.getCountry()).and(l.state().is(state))))
+                        .orElseGet(() -> ZoneQueryModel.of().locations().where(l -> l.country().is(location.getCountry()).and(l.state().isNotPresent())));
         return withPredicate(predicate);
     }
 }

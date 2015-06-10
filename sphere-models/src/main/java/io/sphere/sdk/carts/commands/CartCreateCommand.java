@@ -14,7 +14,7 @@ import io.sphere.sdk.commands.CreateCommandImpl;
  */
 public class CartCreateCommand extends CreateCommandImpl<Cart, CartDraft> {
     private CartCreateCommand(final CartDraft body) {
-        super(body, CartsEndpoint.ENDPOINT);
+        super(body, CartEndpoint.ENDPOINT);
     }
 
     public static CartCreateCommand of(final CartDraft draft) {

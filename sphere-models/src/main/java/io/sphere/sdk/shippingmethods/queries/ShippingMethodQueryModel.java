@@ -7,7 +7,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import java.util.Optional;
 
 public class ShippingMethodQueryModel extends DefaultModelQueryModelImpl<ShippingMethod> {
-    static ShippingMethodQueryModel get() {
+    public static ShippingMethodQueryModel of() {
         return new ShippingMethodQueryModel(Optional.<QueryModel<ShippingMethod>>empty(), Optional.<String>empty());
     }
 

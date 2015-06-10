@@ -13,7 +13,7 @@ public class OrderQueryModel extends DefaultModelQueryModelImpl<Order> {
         super(parent, pathSegment);
     }
 
-    static OrderQueryModel get() {
+    public static OrderQueryModel of() {
         return new OrderQueryModel(Optional.<QueryModel<Order>>empty(), Optional.<String>empty());
     }
 

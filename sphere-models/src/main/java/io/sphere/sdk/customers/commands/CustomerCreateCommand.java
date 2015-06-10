@@ -13,7 +13,7 @@ import io.sphere.sdk.customers.CustomerSignInResult;
  */
 public class CustomerCreateCommand extends CreateCommandImpl<CustomerSignInResult, CustomerDraft> {
     private CustomerCreateCommand(final CustomerDraft body) {
-        super(body, CustomersEndpoint.ENDPOINT_SIGNIN_RESULT);
+        super(body, CustomerEndpoint.ENDPOINT_SIGNIN_RESULT);
     }
 
     public static CustomerCreateCommand of(final CustomerDraft draft) {

@@ -27,7 +27,7 @@ public final class CustomObjectDeleteCommand<T extends CustomObject<?>> extends 
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(HttpMethod.DELETE, CustomObjectsEndpoint.PATH + format("/%s/%s", container, key));
+        return HttpRequestIntent.of(HttpMethod.DELETE, CustomObjectEndpoint.PATH + format("/%s/%s", container, key));
     }
 
     private CustomObjectDeleteCommand(final String container, final String key, final TypeReference<T> typeReference) {

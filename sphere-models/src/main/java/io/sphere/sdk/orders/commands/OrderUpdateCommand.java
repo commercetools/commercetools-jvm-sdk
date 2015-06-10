@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
  */
 public class OrderUpdateCommand extends UpdateCommandDslImpl<Order> {
     private OrderUpdateCommand(final Versioned<Order> order, final List<? extends UpdateAction<Order>> updateActions) {
-        super(order, updateActions, OrdersEndpoint.ENDPOINT);
+        super(order, updateActions, OrderEndpoint.ENDPOINT);
     }
 
     public static OrderUpdateCommand of(final Versioned<Order> order, final List<? extends UpdateAction<Order>> updateActions) {

@@ -1,12 +1,14 @@
 package io.sphere.sdk.http;
 
+import io.sphere.sdk.models.Base;
+
 import java.util.LinkedList;
 import java.util.List;
 
 import static io.sphere.sdk.http.UrlUtils.urlEncode;
 import static java.util.stream.Collectors.joining;
 
-public class UrlQueryBuilder {
+public class UrlQueryBuilder extends Base {
     final List<String> elements = new LinkedList<>();
 
     private UrlQueryBuilder() {
@@ -25,13 +27,16 @@ public class UrlQueryBuilder {
         return add(key, urlEncode(value));
     }
 
-    @Override
-    public String toString() {
+    private String buildPath() {
         return elements.stream().collect(joining("&"));
     }
 
+    public String build() {
+        return buildPath();
+    }
+
     public String toStringWithOptionalQuestionMark() {
-        final String withoutQuestionMark = toString();
+        final String withoutQuestionMark = buildPath();
         final boolean isEmpty = "".equals(withoutQuestionMark);
         return isEmpty ? "" : "?" + withoutQuestionMark;
     }

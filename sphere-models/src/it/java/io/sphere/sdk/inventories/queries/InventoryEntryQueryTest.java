@@ -11,7 +11,6 @@ import java.time.ZonedDateTime;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
 import static io.sphere.sdk.inventories.InventoryEntryFixtures.withUpdateableInventoryEntry;
-import static io.sphere.sdk.inventories.queries.InventoryEntryQuery.model;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static io.sphere.sdk.test.SphereTestUtils.tomorrowZonedDateTime;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +19,7 @@ public class InventoryEntryQueryTest extends IntegrationTest {
     @Test
     public void pure() throws Exception {
         withUpdateableInventoryEntry(client(), entry -> {
-            final QueryDsl<InventoryEntry> query = InventoryEntryQuery.of().withSort(QuerySort.of("createdAt desc"));
+            final Query<InventoryEntry> query = InventoryEntryQuery.of().withSort(QuerySort.of("createdAt desc"));
             final PagedQueryResult<InventoryEntry> result = execute(query);
             assertThat(result.head().get().getId()).isEqualTo(entry.getId());
             return entry;
@@ -29,7 +28,8 @@ public class InventoryEntryQueryTest extends IntegrationTest {
 
     @Test
     public void queryModel() throws Exception {
-        withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
+        final ChannelRoles channelRole = ChannelRoles.INVENTORY_SUPPLY;
+        withChannelOfRole(client(), channelRole, channel -> {
             final String sku = randomKey();
             final long quantityOnStock = 10;
             final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();
@@ -39,16 +39,20 @@ public class InventoryEntryQueryTest extends IntegrationTest {
                     .withRestockableInDays(restockableInDays)
                     .withSupplyChannel(channel);
             withUpdateableInventoryEntry(client(), draft, entry -> {
-                final QueryPredicate<InventoryEntry> skuP = model().sku().is(sku);
-                final QueryPredicate<InventoryEntry> channelP = model().supplyChannel().is(channel);
-                final QueryPredicate<InventoryEntry> stockP = model().quantityOnStock().is(quantityOnStock);
-                final QueryPredicate<InventoryEntry> availableP = model().availableQuantity().is(quantityOnStock);
+                final QueryPredicate<InventoryEntry> skuP = InventoryEntryQueryModel.of().sku().is(sku);
+                final QueryPredicate<InventoryEntry> channelP = InventoryEntryQueryModel.of().supplyChannel().is(channel);
+                final QueryPredicate<InventoryEntry> stockP = InventoryEntryQueryModel.of().quantityOnStock().is(quantityOnStock);
+                final QueryPredicate<InventoryEntry> availableP = InventoryEntryQueryModel.of().availableQuantity().is(quantityOnStock);
                 final QueryPredicate<InventoryEntry> predicate = skuP.and(channelP).and(availableP).and(stockP);
-                final QueryDsl<InventoryEntry> query = InventoryEntryQuery.of()
+                final Query<InventoryEntry> query = InventoryEntryQuery.of()
                         .withPredicate(predicate)
-                        .withSort(model().id().sort(QuerySortDirection.DESC));
+                        .withSort(m -> m.id().sort(QuerySortDirection.DESC))
+                        .withExpansionPaths(m -> m.supplyChannel());
                 final PagedQueryResult<InventoryEntry> result = execute(query);
                 assertThat(result.head().map(e -> e.getId())).contains(entry.getId());
+                assertThat(result.head().get().getSupplyChannel().get().getObj().get().getRoles())
+                        .overridingErrorMessage("can expand supplyChannel reference")
+                        .contains(channelRole);
                 return entry;
             });
         });

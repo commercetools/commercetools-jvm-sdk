@@ -8,11 +8,10 @@ import io.sphere.sdk.queries.*;
 /**
  * {@doc.gen summary categories}
  */
-public class CategoryQueryModel extends DefaultModelQueryModelImpl<Category> {
-    private static final CategoryQueryModel instance = new CategoryQueryModel(Optional.<QueryModelImpl<Category>>empty(), Optional.<String>empty());
+public final class CategoryQueryModel extends DefaultModelQueryModelImpl<Category> {
 
-    static CategoryQueryModel get() {
-        return instance;
+    public static CategoryQueryModel of() {
+        return new CategoryQueryModel(Optional.empty(), Optional.<String>empty());
     }
 
     private CategoryQueryModel(Optional<? extends QueryModel<Category>> parent, Optional<String> pathSegment) {

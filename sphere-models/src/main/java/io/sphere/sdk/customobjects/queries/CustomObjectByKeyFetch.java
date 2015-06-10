@@ -3,31 +3,43 @@ package io.sphere.sdk.customobjects.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.customobjects.CustomObject;
-import io.sphere.sdk.client.JsonEndpoint;
-import io.sphere.sdk.queries.FetchImpl;
+import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.queries.MetaModelFetchDsl;
+
+import java.util.List;
+import java.util.function.Function;
 
 /**
  * {@link io.sphere.sdk.client.SphereRequest} to fetch one {@link io.sphere.sdk.customobjects.CustomObject} by container and key.
  * @param <T> The type of the value of the custom object.
  */
-public class CustomObjectByKeyFetch<T> extends FetchImpl<CustomObject<T>> {
-
-    private static final TypeReference<CustomObject<JsonNode>> JSON_NODE_TYPE_REFERENCE = new TypeReference<CustomObject<JsonNode>>() {
-        @Override
-        public String toString() {
-            return "TypeReference<CustomObject<JsonNode>>";
-        }
-    };
-
-    private CustomObjectByKeyFetch(final TypeReference<CustomObject<T>> typeReference, final String container, final String key) {
-        super(JsonEndpoint.of(typeReference, CustomObjectsEndpoint.PATH), "" + container + "/" + key);
+public interface CustomObjectByKeyFetch<T> extends MetaModelFetchDsl<CustomObject<T>, CustomObjectByKeyFetch<T>, Void> {
+    static <T> CustomObjectByKeyFetch<T> of(final String container, final String key, final TypeReference<CustomObject<T>> typeReference) {
+        return new CustomObjectByKeyFetchImpl<>(typeReference, container, key);
     }
 
-    public static <T> CustomObjectByKeyFetch<T> of(final String container, final String key, final TypeReference<CustomObject<T>> typeReference) {
-        return new CustomObjectByKeyFetch<>(typeReference, container, key);
+    static CustomObjectByKeyFetch<JsonNode> of(final String container, final String key) {
+        final TypeReference<CustomObject<JsonNode>> typeReference = new TypeReference<CustomObject<JsonNode>>() {
+            @Override
+            public String toString() {
+                return "TypeReference<CustomObject<JsonNode>>";
+            }
+        };
+        return of(container, key, typeReference);
     }
 
-    public static CustomObjectByKeyFetch<JsonNode> of(final String container, final String key) {
-        return of(container, key, JSON_NODE_TYPE_REFERENCE);
-    }
+    @Override
+    CustomObjectByKeyFetch<T> plusExpansionPaths(final Function<Void, ExpansionPath<CustomObject<T>>> m);
+
+    @Override
+    CustomObjectByKeyFetch<T> withExpansionPaths(final Function<Void, ExpansionPath<CustomObject<T>>> m);
+
+    @Override
+    CustomObjectByKeyFetch<T> plusExpansionPaths(final ExpansionPath<CustomObject<T>> expansionPath);
+
+    @Override
+    CustomObjectByKeyFetch<T> withExpansionPaths(final ExpansionPath<CustomObject<T>> expansionPath);
+
+    @Override
+    CustomObjectByKeyFetch<T> withExpansionPaths(final List<ExpansionPath<CustomObject<T>>> expansionPaths);
 }

@@ -13,7 +13,7 @@ import io.sphere.sdk.zones.ZoneDraft;
 public class ZoneCreateCommand extends CreateCommandImpl<Zone, ZoneDraft> {
 
     private ZoneCreateCommand(final ZoneDraft draft) {
-        super(draft, ZonesEndpoint.ENDPOINT);
+        super(draft, ZoneEndpoint.ENDPOINT);
     }
 
     public static ZoneCreateCommand of(final ZoneDraft draft) {

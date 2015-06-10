@@ -13,7 +13,7 @@ import io.sphere.sdk.commands.ByIdDeleteCommandImpl;
  */
 public final class ProductTypeDeleteCommand extends ByIdDeleteCommandImpl<ProductType> {
     private ProductTypeDeleteCommand(final Versioned<ProductType> versioned) {
-        super(versioned, ProductTypesEndpoint.ENDPOINT);
+        super(versioned, ProductTypeEndpoint.ENDPOINT);
     }
 
     public static DeleteCommand<ProductType> of(final Versioned<ProductType> versioned) {

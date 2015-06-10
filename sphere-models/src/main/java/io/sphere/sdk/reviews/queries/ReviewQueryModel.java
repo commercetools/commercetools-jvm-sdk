@@ -13,7 +13,7 @@ public class ReviewQueryModel extends DefaultModelQueryModelImpl<Review> {
         super(parent, pathSegment);
     }
 
-    static ReviewQueryModel get() {
+    public static ReviewQueryModel of() {
         return new ReviewQueryModel(Optional.<QueryModel<Review>>empty(), Optional.<String>empty());
     }
 

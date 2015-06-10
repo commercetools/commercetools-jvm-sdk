@@ -5,7 +5,7 @@ import java.util.Optional;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
 
-public final class AttributeTypeQueryModel<T> extends QueryModelImpl<ProductType> {
+public final class AttributeTypeQueryModel<T> extends QueryModelImpl<T> {
     private static final AttributeTypeQueryModel<ProductType> instance =
             new AttributeTypeQueryModel<>(Optional.empty(), Optional.<String>empty());
 
@@ -13,15 +13,15 @@ public final class AttributeTypeQueryModel<T> extends QueryModelImpl<ProductType
         return instance;
     }
 
-    AttributeTypeQueryModel(Optional<? extends QueryModel<ProductType>> parent, Optional<String> pathSegment) {
+    AttributeTypeQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    public StringQueryModel<ProductType> name() {
+    public StringQueryModel<T> name() {
         return new StringQuerySortingModel<>(Optional.of(this), "name");
     }
 
-    public AttributeTypeQueryModel<ProductType> type() {
-        return new AttributeTypeQueryModel<ProductType>(Optional.of(this), Optional.of("elementType"));
+    public AttributeTypeQueryModel<T> type() {
+        return new AttributeTypeQueryModel<>(Optional.of(this), Optional.of("elementType"));
     }
 }

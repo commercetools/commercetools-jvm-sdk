@@ -7,13 +7,13 @@ import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
 
-public class ProductProjectionQueryModel extends ProductDataQueryModelBase<ProductProjection> {
+public final class ProductProjectionQueryModel extends ProductDataQueryModelBase<ProductProjection> {
 
     private ProductProjectionQueryModel(final Optional<? extends QueryModel<ProductProjection>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    static ProductProjectionQueryModel get() {
+    public static ProductProjectionQueryModel of() {
         return new ProductProjectionQueryModel(Optional.<QueryModel<ProductProjection>>empty(), Optional.<String>empty());
     }
 
