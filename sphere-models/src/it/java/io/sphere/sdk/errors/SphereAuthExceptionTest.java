@@ -3,12 +3,17 @@ package io.sphere.sdk.errors;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.*;
+import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.HttpRequest;
+import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
@@ -31,12 +36,25 @@ public class SphereAuthExceptionTest extends IntegrationTest {
     }
 
     @Test
-    public void apiRequestWithWrongToken() throws Throwable {
-        client();
+    public void invalidJson() throws Throwable {
+        final String response = "{invalid}";
+        final SphereAuthConfig config = SphereClientConfig.of(getSphereClientConfig().getProjectKey(), "foo", "bar");
+        final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(config, new HttpClient() {
+            @Override
+            public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
+                return CompletableFuture.completedFuture(HttpResponse.of(400, response));
+            }
 
-        final SphereApiConfig config = SphereApiConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getApiUrl());
-        final SphereClient client = SphereClientFactory.of().createClient(config, SphereAccessTokenSupplier.ofConstantToken("invalid-token"));
-        expectExceptionAndClose(client, InvalidTokenException.class, client.execute(CategoryQuery.of()));
+            @Override
+            public void close() {
+
+            }
+        }, true);
+        assertThatThrownBy(() -> tokenSupplier.get().toCompletableFuture().join())
+                .isInstanceOf(CompletionException.class)
+                .hasCauseInstanceOf(JsonException.class)
+                .hasMessageContaining("{invalid}")
+                .hasMessageContaining("http request: HttpRequestImpl[httpMethod=POST,url=https://auth.sphere.io/oauth/token");
     }
 
     private void checkInvalidCredentialForAuthTokenSupplier(final Function<SphereAuthConfig, SphereAccessTokenSupplier> authTokenSupplierSupplier) {
