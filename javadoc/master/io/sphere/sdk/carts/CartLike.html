@@ -147,7 +147,9 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerGroup--">getCustomerGroup</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerGroup--">getCustomerGroup</a></span>()</code>
+<div class="block">In the order context the customer group can only be expanded if the customer was in a group before creating the order.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
@@ -318,6 +320,11 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <li class="blockList">
 <h4>getCustomerGroup</h4>
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&gt;&nbsp;getCustomerGroup()</pre>
+<div class="block">In the order context the customer group can only be expanded if the customer was in a group before creating the order.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>optional reference of a customer group</dd>
+</dl>
 </li>
 </ul>
 <a name="getCountry--">

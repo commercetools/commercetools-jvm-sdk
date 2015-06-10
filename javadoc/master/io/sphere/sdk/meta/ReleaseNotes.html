@@ -164,7 +164,7 @@ extends java.lang.Object</pre>
      <li class=new-in-release>Embedded predicates (as used in 'where'-clauses) now support lambda syntax: <a href="../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html#where-java.util.function.Function-"><code>ProductVariantQueryModel.where(java.util.function.Function)</code></a>.</li>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerId-java.lang.String-"><code>OrderQuery.byCustomerId(java.lang.String)</code></a> and <a href="../../../../io/sphere/sdk/orders/queries/OrderQuery.html#byCustomerEmail-java.lang.String-"><code>OrderQuery.byCustomerEmail(java.lang.String)</code></a></li>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/channels/commands/ChannelUpdateCommand.html" title="class in io.sphere.sdk.channels.commands"><code>ChannelUpdateCommand</code></a></li>
-     <li class=new-in-release><a href="../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="class in io.sphere.sdk.channels.queries"><code>ChannelByIdFetch</code></a></li>
+     <li class=new-in-release><a href="../../../../io/sphere/sdk/channels/queries/ChannelByIdFetch.html" title="interface in io.sphere.sdk.channels.queries"><code>ChannelByIdFetch</code></a></li>
      <li class=new-in-release><a href="../../../../io/sphere/sdk/customers/queries/CustomerQuery.html#byEmail-java.lang.String-"><code>CustomerQuery.byEmail(java.lang.String)</code></a></li>
      <li class=change-in-release><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> has been refactored:<ul>
          <li><code>Function&lt;HttpResponse, T&gt; resultMapper()</code> is now <a href="../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.deserialize(HttpResponse)</code></a></li>
@@ -229,7 +229,7 @@ extends java.lang.Object</pre>
     </li>
     <li class=change-in-release>For SDK devs: <a href="../../../../io/sphere/sdk/http/HttpRequest.html" title="interface in io.sphere.sdk.http"><code>HttpRequest</code></a> has changed tasks and structure, now it contains the full information for a HTTP request whereas now <a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client"><code>HttpRequestIntent</code></a> is an element to describe an endpoint of sphere project independent.</li>
     <li class=change-in-release>For SDK devs: <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client"><code>JsonEndpoint</code></a> moved to the client package</li>
-    <li class=change-in-release><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><code>Fetch</code></a> class names end now with Fetch for consistency, so for example <code>CartFetchById</code> is now <a href="../../../../io/sphere/sdk/carts/queries/CartByIdFetch.html" title="class in io.sphere.sdk.carts.queries"><code>CartByIdFetch</code></a>.</li>
+    <li class=change-in-release><a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><code>Fetch</code></a> class names end now with Fetch for consistency, so for example <code>CartFetchById</code> is now <a href="../../../../io/sphere/sdk/carts/queries/CartByIdFetch.html" title="interface in io.sphere.sdk.carts.queries"><code>CartByIdFetch</code></a>.</li>
     <li class=change-in-release><a href="../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands"><code>DeleteCommand</code></a> implementations don't have <code>ById</code> or <code>ByKey</code> in the class name and the <code>of</code> factory method returns the interface, not the implementation, example <a href="../../../../io/sphere/sdk/categories/commands/CategoryDeleteCommand.html#of-io.sphere.sdk.models.Versioned-"><code>CategoryDeleteCommand.of(io.sphere.sdk.models.Versioned)</code></a>.</li>
     <li class=change-in-release>LocalizedText* classes have been renamed to LocalizedStrings.</li>
     <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/264">#264</a>.</li>
@@ -311,7 +311,7 @@ extends java.lang.Object</pre>
  <li>Query models contain id, createdAt and lastModifiedAt for predicates and sorting.</li>
  <li>Introduced endpoints and models for <a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><code>Cart</code></a>s, <a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a>s, <a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups"><code>CustomerGroup</code></a>s and <a href="../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders"><code>Order</code></a>s.</li>
  <li>Quantity fields are now of type long.</li>
- <li>Classes like <a href="../../../../io/sphere/sdk/products/queries/ProductByIdFetch.html" title="class in io.sphere.sdk.products.queries"><code>ProductByIdFetch</code></a> take now a string parameter for the ID and not an <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models"><code>Identifiable</code></a>.</li>
+ <li>Classes like <a href="../../../../io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><code>ProductByIdFetch</code></a> take now a string parameter for the ID and not an <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models"><code>Identifiable</code></a>.</li>
  <li>Queries, Fetches, Commands and Searches are only instantiable with an static of method like <a href="../../../../io/sphere/sdk/categories/commands/CategoryCreateCommand.html#of-io.sphere.sdk.categories.CategoryDraft-"><code>CategoryCreateCommand.of(io.sphere.sdk.categories.CategoryDraft)</code></a>. The instantiation by constructor is not supported anymore.</li>
  <li>Enum constant names are only in upper case.</li>
  </ul>
@@ -336,7 +336,7 @@ extends java.lang.Object</pre>
 
  <ul>
  <li>Usage of <a href="http://javamoney.java.net/">Java money</a> instead of custom implementation.</li>
- <li>Introduce <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="class in io.sphere.sdk.products.queries"><code>ProductProjectionQuery</code></a>.</li>
+ <li>Introduce <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries"><code>ProductProjectionQuery</code></a>.</li>
  <li>Introduce <a href="../../../../io/sphere/sdk/meta/QueryDocumentation.html" title="class in io.sphere.sdk.meta"><code>QueryDocumentation</code></a> to document the query API.</li>
  </ul>
 
@@ -366,7 +366,7 @@ extends java.lang.Object</pre>
 
  <h3>1.0.0-M3</h3>
  <ul>
- <li>The query model can now be accessed by it's Query class, e.g., <a href="../../../../io/sphere/sdk/categories/queries/CategoryQuery.html#model--"><code>CategoryQuery.model()</code></a>.</li>
+ <li>The query model can now be accessed by it's Query class, e.g., <code>io.sphere.sdk.categories.queries.CategoryQuery#model()</code>.</li>
  <li>Added a <a href="../../../../io/sphere/sdk/meta/GettingStarted.html" title="class in io.sphere.sdk.meta"><code>Getting Started</code></a> page.</li>
  <li>Added a <a href="../../../../io/sphere/sdk/meta/JvmSdkFeatures.html" title="class in io.sphere.sdk.meta"><code>Features of the SDK</code></a> page.</li>
  <li>Addad a legacy Play Java client for Play Framework 2.2.x.</li>

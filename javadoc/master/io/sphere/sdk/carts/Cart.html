@@ -142,7 +142,9 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getCustomerGroup--">getCustomerGroup</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getCustomerGroup--">getCustomerGroup</a></span>()</code>
+<div class="block">In the order context the customer group can only be expanded if the customer was in a group before creating the order.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
@@ -343,9 +345,13 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <li class="blockList">
 <h4>getCustomerGroup</h4>
 <pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&gt;&nbsp;getCustomerGroup()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerGroup--">CartLike</a></code></span></div>
+<div class="block">In the order context the customer group can only be expanded if the customer was in a group before creating the order.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerGroup--">getCustomerGroup</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>optional reference of a customer group</dd>
 </dl>
 </li>
 </ul>
