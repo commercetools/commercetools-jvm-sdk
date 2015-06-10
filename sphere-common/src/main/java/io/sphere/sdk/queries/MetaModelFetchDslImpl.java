@@ -19,6 +19,12 @@ import static io.sphere.sdk.queries.QueryParameterKeys.EXPAND;
 import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.Arrays.asList;
 
+/**
+ *
+ * @param <T> type of the query result
+ * @param <C> type of the class implementing this class
+ * @param <E> type of the expansion model
+ */
 public class MetaModelFetchDslImpl<T, C extends MetaModelFetchDsl<T, C, E>, E> extends SphereRequestBase implements MetaModelFetchDsl<T, C, E> {
 
     final JsonEndpoint<T> endpoint;

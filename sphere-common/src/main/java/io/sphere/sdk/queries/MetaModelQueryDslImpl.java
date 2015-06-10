@@ -19,6 +19,13 @@ import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
 
+/**
+ *
+ * @param <T> type of the query result
+ * @param <C> type of the class implementing this class
+ * @param <Q> type of the query model
+ * @param <E> type of the expansion model
+ */
 public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends SphereRequestBase implements MetaModelQueryDsl<T, C, Q, E> {
 
     final Q queryModel;

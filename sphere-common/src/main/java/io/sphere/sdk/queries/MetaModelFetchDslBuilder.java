@@ -8,6 +8,12 @@ import io.sphere.sdk.models.Builder;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ *
+ * @param <T> type of the query result
+ * @param <C> type of the class implementing this class
+ * @param <E> type of the expansion model
+ */
 public class MetaModelFetchDslBuilder<T, C extends MetaModelFetchDsl<T, C, E>, E> extends Base implements Builder<C> {
 
     JsonEndpoint<T> endpoint;

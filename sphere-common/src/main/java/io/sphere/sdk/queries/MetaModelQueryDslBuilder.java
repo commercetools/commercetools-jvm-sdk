@@ -13,6 +13,13 @@ import java.util.function.Function;
 
 import static java.util.Arrays.asList;
 
+/**
+ *
+ * @param <T> type of the query result
+ * @param <C> type of the class implementing this class
+ * @param <Q> type of the query model
+ * @param <E> type of the expansion model
+ */
 public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends Base implements Builder<C> {
 
     protected Optional<QueryPredicate<T>> predicate = Optional.empty();
