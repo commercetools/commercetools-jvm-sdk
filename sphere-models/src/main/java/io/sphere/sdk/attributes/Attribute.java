@@ -22,7 +22,7 @@ public interface Attribute {
         final String name = namedAttributeAccess.getName();
         //here is not the attributeMapper used to keep LocalizedEnum values which
         //are transformed to just the key so the attribute could not be read anymore
-        final JsonNode jsonNode = JsonUtils.newObjectMapper().valueToTree(value);
+        final JsonNode jsonNode = JsonUtils.toJsonNode(value);
         return of(name, jsonNode);
     }
 

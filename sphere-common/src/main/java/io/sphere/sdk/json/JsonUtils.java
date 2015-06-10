@@ -154,4 +154,8 @@ final public class JsonUtils {
             throw new JsonException(e);
         }
     }
+
+    public static <T> JsonNode toJsonNode(final T value) {
+        return objectMapper.valueToTree(value);
+    }
 }

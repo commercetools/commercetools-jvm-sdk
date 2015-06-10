@@ -1,7 +1,7 @@
 package io.sphere.sdk.orders.commands;
 
 import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeDraft;
+import io.sphere.sdk.attributes.AttributeImportDraft;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.channels.ChannelRoles;
@@ -174,6 +174,10 @@ public class OrderImportCommandTest extends IntegrationTest {
 
     @Test
     public void orderImportCanOverrideVariantDataInTheOrder() throws Exception {
+        final List<AttributeImportDraft> attributeImportDrafts = asList(
+                AttributeImportDraft.of(TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE.getName(), TShirtProductTypeDraftSupplier.Sizes.S),
+                AttributeImportDraft.of(TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE.getName(), TShirtProductTypeDraftSupplier.Colors.RED)
+        );
         final List<Attribute> attributesOfOrder = asList(TShirtProductTypeDraftSupplier.Sizes.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Sizes.S),
                 TShirtProductTypeDraftSupplier.Colors.ATTRIBUTE.valueOf(TShirtProductTypeDraftSupplier.Colors.RED));
         final List<Image> images = asList(Image.of("url", ImageDimensions.of(1, 2), "label"));
@@ -182,7 +186,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         withProduct(client(), product -> {
             final int variantId = 1;
             final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), variantId, sku(product))
-                    .attributes(attributesOfOrder)
+                    .attributes(attributeImportDrafts)
                     .images(images)
                     .prices(prices)
                     .build();

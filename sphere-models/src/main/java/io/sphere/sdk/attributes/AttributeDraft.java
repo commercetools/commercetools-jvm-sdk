@@ -15,7 +15,7 @@ public class AttributeDraft extends Base {
     }
 
     public static <T> AttributeDraft of(final String name, final T value) {
-        final JsonNode jsonNode = JsonUtils.newObjectMapper().valueToTree(value);
+        final JsonNode jsonNode = JsonUtils.toJsonNode(value);
         return new AttributeDraft(name, jsonNode);
     }
 

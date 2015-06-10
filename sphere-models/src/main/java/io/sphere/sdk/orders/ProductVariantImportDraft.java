@@ -1,7 +1,6 @@
 package io.sphere.sdk.orders;
 
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeDraft;
+import io.sphere.sdk.attributes.AttributeImportDraft;
 import io.sphere.sdk.models.Image;
 import io.sphere.sdk.products.Price;
 
@@ -13,7 +12,7 @@ import java.util.Optional;
  * @see ProductVariantImportDraftBuilder
  */
 public interface ProductVariantImportDraft {
-    Optional<List<Attribute>> getAttributes();
+    Optional<List<AttributeImportDraft>> getAttributes();
 
     Optional<Integer> getId();
 
