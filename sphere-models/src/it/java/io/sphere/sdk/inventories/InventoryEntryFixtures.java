@@ -7,7 +7,7 @@ import io.sphere.sdk.inventories.commands.InventoryDeleteCommand;
 import io.sphere.sdk.inventories.commands.InventoryEntryCreateCommand;
 import io.sphere.sdk.models.Base;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
@@ -29,7 +29,7 @@ public class InventoryEntryFixtures extends Base {
         withChannelOfRole(client, channelRole, channel -> {
             final String sku = randomKey();
             final long quantityOnStock = 10;
-            final Instant expectedDelivery = tomorrowInstant();
+            final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();
             final int restockableInDays = 3;
             final InventoryEntryDraft draft = InventoryEntryDraft.of(sku, quantityOnStock)
                     .withExpectedDelivery(expectedDelivery)

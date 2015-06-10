@@ -253,7 +253,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     private QueryPredicate<ProductType> hasAttributeType(final String attributeTypeName) {
-        return ProductTypeQuery.model().attributes().type().name().is(attributeTypeName);
+        return ProductTypeQueryModel.of().attributes().type().name().is(attributeTypeName);
     }
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {
@@ -378,6 +378,6 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     protected void cleanUpByName(final List<String> names) {
-        execute(ProductTypeQuery.of().withPredicate(ProductTypeQuery.model().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
+        execute(ProductTypeQuery.of().withPredicate(ProductTypeQueryModel.of().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
     }
 }
