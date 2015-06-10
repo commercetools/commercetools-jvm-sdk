@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.utils.MapUtils;
 
@@ -74,6 +75,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
         final String encodedString = Base64.getEncoder().encodeToString(usernamePassword.getBytes(StandardCharsets.UTF_8));
         final HttpHeaders httpHeaders = HttpHeaders
                 .of(HttpHeaders.AUTHORIZATION, "Basic " + encodedString)
+                .plus(HttpHeaders.USER_AGENT, BuildInfo.userAgent())
                 .plus(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
         final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.of(MapUtils.mapOf("grant_type", "client_credentials", "scope", format("manage_project:%s", config.getProjectKey())));
         return HttpRequest.of(POST, config.getAuthUrl() + "/oauth/token", httpHeaders, Optional.of(body));

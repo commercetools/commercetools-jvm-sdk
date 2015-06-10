@@ -159,6 +159,10 @@ public final class BuildInfo {
       //utility class
     }
 
+    public static String userAgent() {
+         return "SPHERE.IO JVM SDK " + version();
+    }
+
     public static String version() {
       return """" + v + """";
     }
