@@ -28,6 +28,8 @@ public interface LineItem extends LineItemLike {
 
     Optional<Reference<Channel>> getSupplyChannel();
 
+    LocalizedStrings getProductSlug();
+
     @Override
     String getId();
 
