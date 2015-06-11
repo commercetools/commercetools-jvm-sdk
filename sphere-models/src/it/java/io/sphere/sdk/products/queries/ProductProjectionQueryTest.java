@@ -1,52 +1,43 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.channels.ChannelFixtures;
-import io.sphere.sdk.channels.ChannelRoles;
-import io.sphere.sdk.products.*;
-import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.test.IntegrationTest;
-import org.junit.Test;
-
-import java.util.List;
-
-import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
-import static io.sphere.sdk.products.ProductFixtures.PRICE;
-import static io.sphere.sdk.products.ProductFixtures.withProduct;
-import static io.sphere.sdk.products.ProductFixtures.withUpdateablePricedProduct;
-import static io.sphere.sdk.products.ProductProjectionType.STAGED;
-import static org.assertj.core.api.Assertions.*;
-
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
+import io.sphere.sdk.channels.ChannelFixtures;
+import io.sphere.sdk.channels.ChannelRoles;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.products.VariantIdentifier;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
-import io.sphere.sdk.products.queries.ProductProjectionQuery;
-import io.sphere.sdk.products.queries.ProductProjectionQueryModel;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
-import static io.sphere.sdk.products.ProductFixtures.withProduct;
-import static io.sphere.sdk.products.ProductProjectionType.*;
-import static io.sphere.sdk.products.ProductUpdateScope.*;
+import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
+import static io.sphere.sdk.products.ProductFixtures.*;
+import static io.sphere.sdk.products.ProductProjectionType.STAGED;
+import static io.sphere.sdk.products.ProductUpdateScope.ONLY_STAGED;
+import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.queries.QuerySortDirection.DESC;
+import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 
 public class ProductProjectionQueryTest extends IntegrationTest {
     public static final int MASTER_VARIANT_ID = 1;
@@ -131,7 +122,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     @Test
     public void queryByName() throws Exception {
         with2products("queryByName", (p1, p2) ->{
-            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicate(model().name().lang(ENGLISH).is(en(p1.getMasterData().getStaged().getDescription())));
+            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicate(m -> m.name().lang(ENGLISH).is(en(p1.getMasterData().getStaged().getDescription())));
             assertThat(ids(execute(query1))).containsOnly(p1.getId());
         });
     }
@@ -164,8 +155,8 @@ public class ProductProjectionQueryTest extends IntegrationTest {
         withProduct(client(), product -> {
             final Product updated = execute(ProductUpdateCommand.of(product, ChangeName.of(randomSlug(), ONLY_STAGED)));
             final PagedQueryResult<ProductProjection> pagedQueryResult = execute(ProductProjectionQuery.of(STAGED)
-                    .withPredicate(model().hasStagedChanges().is(true))
-                    .withSort(model().createdAt().sort(DESC)));
+                    .withPredicate(m -> m.hasStagedChanges().is(true))
+                    .withSort(m -> m.createdAt().sort(DESC)));
             assertThat(ids(pagedQueryResult)).contains(updated.getId());
         });
     }
