@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/categories/queries/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.queries">CategoryExpansionModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductExpansionModel.html" title="class in io.sphere.sdk.products.queries">ProductExpansionModel</a>, <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionExpansionModel</a></dd>
+<dd><a href="../../../../io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion">CartDiscountExpansionModel</a>, <a href="../../../../io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a>, <a href="../../../../io/sphere/sdk/categories/expansion/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.expansion">CategoryExpansionModel</a>, <a href="../../../../io/sphere/sdk/channels/expansion/ChannelExpansionModel.html" title="class in io.sphere.sdk.channels.expansion">ChannelExpansionModel</a>, <a href="../../../../io/sphere/sdk/customers/queries/CustomerExpansionModel.html" title="class in io.sphere.sdk.customers.queries">CustomerExpansionModel</a>, <a href="../../../../io/sphere/sdk/customergroups/expansion/CustomerGroupExpansionModel.html" title="class in io.sphere.sdk.customergroups.expansion">CustomerGroupExpansionModel</a>, <a href="../../../../io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html" title="class in io.sphere.sdk.discountcodes.expansion">DiscountCodeExpansionModel</a>, <a href="../../../../io/sphere/sdk/inventories/queries/InventoryEntryExpansionModel.html" title="class in io.sphere.sdk.inventories.queries">InventoryEntryExpansionModel</a>, <a href="../../../../io/sphere/sdk/inventories/expansion/InventoryExpansionModel.html" title="class in io.sphere.sdk.inventories.expansion">InventoryExpansionModel</a>, <a href="../../../../io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a>, <a href="../../../../io/sphere/sdk/products/expansion/PriceExpansionModel.html" title="class in io.sphere.sdk.products.expansion">PriceExpansionModel</a>, <a href="../../../../io/sphere/sdk/products/expansion/ProductCatalogExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductCatalogExpansionModel</a>, <a href="../../../../io/sphere/sdk/products/expansion/ProductDataExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductDataExpansionModel</a>, <a href="../../../../io/sphere/sdk/products/expansion/ProductExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductExpansionModel</a>, <a href="../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>, <a href="../../../../io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html" title="class in io.sphere.sdk.producttypes.expansion">ProductTypeExpansionModel</a>, <a href="../../../../io/sphere/sdk/products/expansion/ProductVariantExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductVariantExpansionModel</a>, <a href="../../../../io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion">ReviewExpansionModel</a>, <a href="../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ShippingMethodExpansionModel</a>, <a href="../../../../io/sphere/sdk/states/queries/expansion/StateExpansionModel.html" title="class in io.sphere.sdk.states.queries.expansion">StateExpansionModel</a>, <a href="../../../../io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html" title="class in io.sphere.sdk.taxcategories.expansion">TaxCategoryExpansionModel</a>, <a href="../../../../io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="class in io.sphere.sdk.zones.expansion">ZoneExpansionModel</a></dd>
 </dl>
 <hr>
 <br>
@@ -188,7 +188,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -198,22 +198,27 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ExpansionModel.html#buildPathExpression--">buildPathExpression</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>protected static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ExpansionModel.html#collection-java.lang.String-int-">collection</a></span>(java.lang.String&nbsp;segmentName,
+          int&nbsp;index)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ExpansionModel.html#equals-java.lang.Object-">equals</a></span>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ExpansionModel.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>protected java.util.Optional&lt;java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ExpansionModel.html#pathExpressionOption--">pathExpressionOption</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/ExpansionModel.html" title="type parameter in ExpansionModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ExpansionModel.html#pathWithRoots-java.lang.String-">pathWithRoots</a></span>(java.lang.String&nbsp;path)</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/ExpansionModel.html#toSphereExpand--">toSphereExpand</a></span>()</code>
 <div class="block">Returns a SPHERE.IO reference expansion path expression.</div>
@@ -318,6 +323,16 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <!--   -->
 </a>
 <h3>Method Detail</h3>
+<a name="collection-java.lang.String-int-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>collection</h4>
+<pre>protected static&nbsp;java.lang.String&nbsp;collection(java.lang.String&nbsp;segmentName,
+                                             int&nbsp;index)</pre>
+</li>
+</ul>
 <a name="toSphereExpand--">
 <!--   -->
 </a>

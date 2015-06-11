@@ -83,6 +83,8 @@
 <li type="circle">io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Base</span></a>
 <ul>
 <li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ExpansionModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelFetchDslBuilder.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelFetchDslBuilder</span></a>&lt;T,C,E&gt; (implements io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDslBuilder</span></a>&lt;T,C,Q,E&gt; (implements io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">PagedResult</span></a>&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">PagedQueryResult</span></a>&lt;T&gt;
@@ -115,16 +117,11 @@
 <li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EmbeddedQueryPredicate.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">EmbeddedQueryPredicate</span></a>&lt;T,V&gt;</li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryParameter.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryParameter</span></a></li>
 <li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/SphereQuerySort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">SphereQuerySort</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">SphereRequestBase</span></a>
 <ul>
-<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/DefaultModelQuery.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">DefaultModelQuery</span></a>&lt;I&gt;</li>
-<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/FetchImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">FetchImpl</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;)
-<ul>
-<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/ByIdFetchImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ByIdFetchImpl</span></a>&lt;T&gt;</li>
-</ul>
-</li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelFetchDslImpl</span></a>&lt;T,C,E&gt; (implements io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a>&lt;T,C,E&gt;)</li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDslImpl</span></a>&lt;T,C,Q,E&gt; (implements io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;T,C,Q,E&gt;)</li>
 <li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryToFetchAdapter.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">QueryToFetchAdapter</span></a>&lt;T&gt; (implements io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;)</li>
 </ul>
 </li>
@@ -178,6 +175,12 @@
 <li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">StringQueryModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,E&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;T,V&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,V&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;T,E&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;)</li>
 </ul>
 </li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelExpansionDsl</span></a>&lt;T,C,E&gt;
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelFetchDsl</span></a>&lt;T,C,E&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;T,C&gt;)</li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDsl</span></a>&lt;T,C,Q,E&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;)</li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">NotEqualQueryModel</span></a>&lt;T,E&gt;
 <ul>
 <li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">LongQuerySortingModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,E&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;T,V&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,V&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,V&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;T&gt;)</li>
@@ -203,14 +206,55 @@
 <li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">LongQuerySortingModel</span></a>&lt;T&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,E&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;T,V&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,V&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,V&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;T,E&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;)</li>
 </ul>
 </li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ReferenceExpandeable</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;T&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDsl</span></a>&lt;T,C,Q,E&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.queries">MetaModelExpansionDsl</a>&lt;T,C,E&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;)</li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDsl</span></a>&lt;T,C,Q,E&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.queries">MetaModelExpansionDsl</a>&lt;T,C,E&gt;)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ReferenceExpandeableDsl</span></a>&lt;T,C&gt;
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">FetchDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelFetchDsl</span></a>&lt;T,C,E&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.queries">MetaModelExpansionDsl</a>&lt;T,C,E&gt;)</li>
+</ul>
+</li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDsl</span></a>&lt;T,C,Q,E&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.queries">MetaModelExpansionDsl</a>&lt;T,C,E&gt;)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereRequest</span></a>&lt;T&gt;
 <ul>
-<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Fetch</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Fetch</span></a>&lt;T&gt;
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">FetchDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelFetchDsl</span></a>&lt;T,C,E&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.queries">MetaModelExpansionDsl</a>&lt;T,C,E&gt;)</li>
+</ul>
+</li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Query</span></a>&lt;T&gt;
 <ul>
-<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;T&gt;
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;T&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;T&gt;)
 <ul>
-<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDsl</span></a>&lt;T,C,Q,E&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.queries">MetaModelExpansionDsl</a>&lt;T,C,E&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;T,C&gt;)</li>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<ul>
+<li type="circle">io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">MetaModelQueryDsl</span></a>&lt;T,C,Q,E&gt; (also extends io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.queries">MetaModelExpansionDsl</a>&lt;T,C,E&gt;)</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>

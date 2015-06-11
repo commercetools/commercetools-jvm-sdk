@@ -106,6 +106,26 @@
 extends java.lang.Object</pre>
 <div class="block"><h3 id="intro">Introduction</h3>
  <h3 id="product-type-creation">ProductType Creation</h3>
+ <p>A <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> is like a schema how the product attributes are structured.</p>
+ <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s contain a list of the attribute name and the corresponding type of the attribute.
+ In one SPHERE.IO project the name type pair is global, so if you create an attribute "foo" of type String, you cannot create
+ another <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> where "foo" has another type like <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models"><code>LocalizedStrings</code></a>. If you do it anyway you get an error message like:</p>
+
+<pre>"The attribute with name 'foo' has a different type on product type 'exampleproducttype'."</pre>
+
+ <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s have a name (String)
+ which can be used as key to logically identify <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s. Beware that the name has no unique constraint,
+ so it is possible to create multiple product types with the same name which will cause confusion.
+ Before creating a product type it's better to check if it already exists:</p>
+
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-demoCheckingIfProductTypeExist--%s" class=code-example><pre><code class='java'>final ProductTypeQuery query = ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME);
+final boolean productTypeAlreadyExists = client().execute(query).head().isPresent();
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+
+<!--
+
+ -->
+
  <h3 id="product-creation">Product Creation</h3>
  <h3 id="attribute-access-without-product-type">Reading Attributes</h3>
  <h3 id="attribute-table-creation">Creating a table of attributes</h3>
