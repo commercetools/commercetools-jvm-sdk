@@ -12,8 +12,8 @@ public class ChannelQueryModel extends DefaultModelQueryModelImpl<Channel> {
         super(parent, pathSegment);
     }
 
-    static ChannelQueryModel get() {
-        return new ChannelQueryModel(Optional.<QueryModel<Channel>>empty(), Optional.<String>empty());
+    public static ChannelQueryModel of() {
+        return new ChannelQueryModel(Optional.empty(), Optional.<String>empty());
     }
 
     public StringQuerySortingModel<Channel> key() {

@@ -2,29 +2,36 @@ package io.sphere.sdk.customers.queries;
 
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerToken;
-import io.sphere.sdk.queries.FetchImpl;
-import io.sphere.sdk.http.UrlQueryBuilder;
+import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.queries.MetaModelFetchDsl;
 
-import static io.sphere.sdk.customers.queries.CustomersEndpoint.ENDPOINT;
+import java.util.List;
+import java.util.function.Function;
 
-public class CustomerByTokenFetch extends FetchImpl<Customer> {
-    private final String token;
-
-    private CustomerByTokenFetch(final String token) {
-        super(ENDPOINT, "");
-        this.token = token;
+public interface CustomerByTokenFetch extends MetaModelFetchDsl<Customer, CustomerByTokenFetch, CustomerExpansionModel<Customer>> {
+    static CustomerByTokenFetch of(final String token) {
+        return new CustomerByTokenFetchImpl(token);
     }
 
-    public static CustomerByTokenFetch of(final String token) {
-        return new CustomerByTokenFetch(token);
-    }
-
-    public static CustomerByTokenFetch of(final CustomerToken token) {
+    static CustomerByTokenFetch of(final CustomerToken token) {
         return of(token.getValue());
     }
 
     @Override
-    protected UrlQueryBuilder additionalQueryParameters() {
-        return super.additionalQueryParameters().add("token", token);
-    }
+    CustomerByTokenFetch plusExpansionPaths(final Function<CustomerExpansionModel<Customer>, ExpansionPath<Customer>> m);
+
+    @Override
+    CustomerByTokenFetch withExpansionPaths(final Function<CustomerExpansionModel<Customer>, ExpansionPath<Customer>> m);
+
+    @Override
+    List<ExpansionPath<Customer>> expansionPaths();
+
+    @Override
+    CustomerByTokenFetch plusExpansionPaths(final ExpansionPath<Customer> expansionPath);
+
+    @Override
+    CustomerByTokenFetch withExpansionPaths(final ExpansionPath<Customer> expansionPath);
+
+    @Override
+    CustomerByTokenFetch withExpansionPaths(final List<ExpansionPath<Customer>> expansionPaths);
 }

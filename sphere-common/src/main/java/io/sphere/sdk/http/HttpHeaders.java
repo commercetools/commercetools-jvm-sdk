@@ -12,6 +12,7 @@ import static java.util.Collections.unmodifiableMap;
 
 public class HttpHeaders extends Base {
     public static final String AUTHORIZATION = "Authorization";
+    public static final String USER_AGENT = "User-Agent";
     public static final String CONTENT_TYPE = "Content-Type";
     private final Map<String, List<String>> headers;
 

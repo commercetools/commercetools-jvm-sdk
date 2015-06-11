@@ -2,19 +2,15 @@ package io.sphere.sdk.channels.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.queries.DefaultModelQuery;
+import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 
 /**
  {@doc.gen summary channels}
  */
-public class ChannelQuery extends DefaultModelQuery<Channel> {
-    private ChannelQuery() {
-        super(ChannelsEndpoint.ENDPOINT.endpoint(), resultTypeReference());
-    }
-
-    public static TypeReference<PagedQueryResult<Channel>> resultTypeReference() {
+public interface ChannelQuery extends MetaModelQueryDsl<Channel, ChannelQuery, ChannelQueryModel, ChannelExpansionModel<Channel>> {
+    static TypeReference<PagedQueryResult<Channel>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Channel>>(){
             @Override
             public String toString() {
@@ -23,15 +19,11 @@ public class ChannelQuery extends DefaultModelQuery<Channel> {
         };
     }
 
-    public QueryDsl<Channel> byKey(final String key) {
-        return withPredicate(model().key().is(key));
+    default ChannelQuery byKey(final String key) {
+        return withPredicate(m -> m.key().is(key));
     }
 
-    public static ChannelQueryModel model() {
-        return ChannelQueryModel.get();
-    }
-
-    public static ChannelQuery of() {
-        return new ChannelQuery();
+    static ChannelQuery of() {
+        return new ChannelQueryImpl();
     }
 }

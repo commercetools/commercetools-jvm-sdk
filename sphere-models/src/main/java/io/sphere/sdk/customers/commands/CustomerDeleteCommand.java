@@ -12,7 +12,7 @@ import io.sphere.sdk.models.Versioned;
  */
 public class CustomerDeleteCommand extends ByIdDeleteCommandImpl<Customer> {
     private CustomerDeleteCommand(final Versioned<Customer> versioned) {
-        super(versioned, CustomersEndpoint.ENDPOINT);
+        super(versioned, CustomerEndpoint.ENDPOINT);
     }
 
     public static DeleteCommand<Customer> of(final Versioned<Customer> versioned) {

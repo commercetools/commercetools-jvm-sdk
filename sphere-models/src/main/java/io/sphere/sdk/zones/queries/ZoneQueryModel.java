@@ -9,7 +9,7 @@ import io.sphere.sdk.zones.Zone;
 import java.util.Optional;
 
 public class ZoneQueryModel extends DefaultModelQueryModelImpl<Zone> {
-    static ZoneQueryModel get() {
+    public static ZoneQueryModel of() {
         return new ZoneQueryModel(Optional.<QueryModel<Zone>>empty(), Optional.<String>empty());
     }
 

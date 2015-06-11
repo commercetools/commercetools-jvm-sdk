@@ -5,7 +5,6 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.Foo;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.BeforeClass;
@@ -50,8 +49,8 @@ public class CustomObjectQueryTest extends IntegrationTest {
     @Test
     public void queryPureJson() throws Exception {
         withCustomObject(client(), existingCustomObject -> {
-            final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQuery.<JsonNode>model().createdAt().sort(DESC);
-            final QueryDsl<CustomObject<JsonNode>> clientRequest = CustomObjectQuery.of().withSort(sort);
+            final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQueryModel.<JsonNode>of().createdAt().sort(DESC);
+            final CustomObjectQuery<JsonNode> clientRequest = CustomObjectQuery.of().withSort(sort);
             final PagedQueryResult<CustomObject<JsonNode>> result = execute(clientRequest);
             assertThat(result.getResults().stream().filter(item -> item.hasSameIdAs(existingCustomObject)).count())
                     .isGreaterThanOrEqualTo(1);
@@ -64,7 +63,7 @@ public class CustomObjectQueryTest extends IntegrationTest {
     }
 
     public void demoModelTypeParameter() {
-        final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQuery.<JsonNode>model().createdAt().sort(DESC);
-        final QuerySort<CustomObject<Foo>> fooSort = CustomObjectQuery.<Foo>model().createdAt().sort(DESC);
+        final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQueryModel.<JsonNode>of().createdAt().sort(DESC);
+        final QuerySort<CustomObject<Foo>> fooSort = CustomObjectQueryModel.<Foo>of().createdAt().sort(DESC);
     }
 }

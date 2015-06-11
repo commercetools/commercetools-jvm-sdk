@@ -10,6 +10,7 @@ import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.util.Locale;
 import java.util.Optional;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -45,6 +46,14 @@ public class CategoryFixtures {
             client.execute(CategoryDeleteCommand.of(res.head().get()));
             LOGGER.debug(() -> "deleted category " + category.getId());
         }
+    }
+
+    public static void withCategoryAndParentCategory(final TestClient client, final BiConsumer<Category, Category> consumer) {
+        withCategory(client, parent ->
+            withCategory(client, CategoryDraftBuilder.of(randomSlug(), randomSlug()).parent(parent), category -> {
+                consumer.accept(category, parent);
+            })
+        );
     }
 
     public static void withCategory(final TestClient client, final Consumer<Category> consumer) {

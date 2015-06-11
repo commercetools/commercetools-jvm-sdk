@@ -8,7 +8,7 @@ import io.sphere.sdk.orders.OrderFromCartDraft;
 
 public class OrderFromCartCreateCommand extends CreateCommandImpl<Order, OrderFromCartDraft> {
     private OrderFromCartCreateCommand(final OrderFromCartDraft draft) {
-        super(draft, OrdersEndpoint.ENDPOINT);
+        super(draft, OrderEndpoint.ENDPOINT);
     }
 
     public static OrderFromCartCreateCommand of(final OrderFromCartDraft draft) {

@@ -1,39 +1,30 @@
 package io.sphere.sdk.reviews.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.reviews.Review;
+import io.sphere.sdk.reviews.expansion.ReviewExpansionModel;
 
 /**
  {@doc.gen summary reviews}
  */
-public class ReviewQuery extends DefaultModelQuery<Review> {
-    private static final TypeReference<PagedQueryResult<Review>> RESULT_TYPE_REFERENCE = new TypeReference<PagedQueryResult<Review>>(){
-        @Override
-        public String toString() {
-            return "TypeReference<PagedQueryResult<Review>>";
-        }
-    };
+public interface ReviewQuery extends MetaModelQueryDsl<Review, ReviewQuery, ReviewQueryModel, ReviewExpansionModel<Review>> {
 
-    private ReviewQuery() {
-        super(ReviewsEndpoint.ENDPOINT.endpoint(), resultTypeReference());
+    static TypeReference<PagedQueryResult<Review>> resultTypeReference() {
+        return new TypeReference<PagedQueryResult<Review>>(){
+            @Override
+            public String toString() {
+                return "TypeReference<PagedQueryResult<Review>>";
+            }
+        };
     }
 
-    public static TypeReference<PagedQueryResult<Review>> resultTypeReference() {
-        return RESULT_TYPE_REFERENCE;
+    default ReviewQuery byProductId(final String productId) {
+        return withPredicate(m -> m.productId().is(productId));
     }
 
-    public QueryDsl<Review> byProductId(final String productId) {
-        return withPredicate(model().productId().is(productId));
-    }
-
-    public static ReviewQueryModel model() {
-        return ReviewQueryModel.get();
-    }
-
-    public static ReviewQuery of() {
-        return new ReviewQuery();
+    static ReviewQuery of() {
+        return new ReviewQueryImpl();
     }
 }

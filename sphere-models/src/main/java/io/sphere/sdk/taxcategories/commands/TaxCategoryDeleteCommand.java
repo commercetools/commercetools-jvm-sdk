@@ -13,7 +13,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
  */
 public class TaxCategoryDeleteCommand extends ByIdDeleteCommandImpl<TaxCategory> {
     private TaxCategoryDeleteCommand(final Versioned<TaxCategory> versioned) {
-        super(versioned, TaxCategoriesEndpoint.ENDPOINT);
+        super(versioned, TaxCategoryEndpoint.ENDPOINT);
     }
 
     public static DeleteCommand<TaxCategory> of(final Versioned<TaxCategory> versioned) {

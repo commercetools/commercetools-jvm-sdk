@@ -4,19 +4,20 @@ import io.sphere.sdk.inventories.InventoryEntry;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.Optional;
-
-import static io.sphere.sdk.inventories.InventoryEntryFixtures.withUpdateableInventoryEntry;
+import static io.sphere.sdk.channels.ChannelRoles.INVENTORY_SUPPLY;
+import static io.sphere.sdk.inventories.InventoryEntryFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class InventoryEntryByIdFetchTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        withUpdateableInventoryEntry(client(), entry -> {
-            final InventoryEntryByIdFetch fetch = InventoryEntryByIdFetch.of(entry.getId());
-            final Optional<InventoryEntry> loadedEntry = execute(fetch);
-            assertThat(loadedEntry.map(e -> e.getId())).contains(entry.getId());
-            return entry;
+        withInventoryEntryAndSupplyChannel(client(), INVENTORY_SUPPLY, (entry, channel) -> {
+            final InventoryEntry actual = execute(
+                    InventoryEntryByIdFetch.of(entry)
+                            .withExpansionPaths(new InventoryEntryExpansionModel<InventoryEntry>().supplyChannel())
+            ).get();
+            assertThat(actual.getId()).contains(entry.getId());
+            assertThat(actual.getSupplyChannel().get().getObj().get().getId()).isEqualTo(channel.getId());
         });
     }
 }

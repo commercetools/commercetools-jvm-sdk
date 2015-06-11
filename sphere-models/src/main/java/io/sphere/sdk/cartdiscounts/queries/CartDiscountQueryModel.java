@@ -9,14 +9,13 @@ import io.sphere.sdk.queries.QueryModelImpl;
 import java.util.Optional;
 
 public class CartDiscountQueryModel extends DefaultModelQueryModelImpl<CartDiscount> {
-    private static final CartDiscountQueryModel instance = new CartDiscountQueryModel(Optional.<QueryModelImpl<CartDiscount>>empty(), Optional.<String>empty());
 
     private CartDiscountQueryModel(Optional<? extends QueryModel<CartDiscount>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
 
-    static CartDiscountQueryModel get() {
-        return instance;
+    public static CartDiscountQueryModel of() {
+        return new CartDiscountQueryModel(Optional.<QueryModelImpl<CartDiscount>>empty(), Optional.<String>empty());
     }
 
     public LocalizedStringsQuerySortingModel<CartDiscount> name() {

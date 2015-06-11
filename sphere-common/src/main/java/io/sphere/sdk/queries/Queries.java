@@ -6,7 +6,7 @@ public final class Queries {
     }
 
     //TODO this might be a default method in QueryDsl
-    public static <I> QueryDsl<I> nextPage(final QueryDsl<I> current) {
+    public static <I, C> C nextPage(final QueryDsl<I, C> current) {
         final long oldOffset = current.offset().orElse(0L);
         return current.withOffset(oldOffset + 1);
     }

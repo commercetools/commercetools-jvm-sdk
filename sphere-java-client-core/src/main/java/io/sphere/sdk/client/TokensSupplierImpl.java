@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.meta.BuildInfo;
+import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.utils.MapUtils;
 
 import java.nio.charset.StandardCharsets;
@@ -73,6 +75,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
         final String encodedString = Base64.getEncoder().encodeToString(usernamePassword.getBytes(StandardCharsets.UTF_8));
         final HttpHeaders httpHeaders = HttpHeaders
                 .of(HttpHeaders.AUTHORIZATION, "Basic " + encodedString)
+                .plus(HttpHeaders.USER_AGENT, BuildInfo.userAgent())
                 .plus(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
         final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.of(MapUtils.mapOf("grant_type", "client_credentials", "scope", format("manage_project:%s", config.getProjectKey())));
         return HttpRequest.of(POST, config.getAuthUrl() + "/oauth/token", httpHeaders, Optional.of(body));
@@ -83,21 +86,26 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
      * @param httpRequest the request which belongs to the response
      */
     private Tokens parseResponse(final HttpResponse httpResponse, final HttpRequest httpRequest) {
-        if (httpResponse.getStatusCode() == 401 && httpResponse.getResponseBody().isPresent()) {
-            UnauthorizedException authorizationException = new UnauthorizedException(httpResponse.toString());
-            try {
-                final JsonNode jsonNode = JsonUtils.readTree(httpResponse.getResponseBody().get());
-                if (jsonNode.get("error").asText().equals("invalid_client")) {
-                    authorizationException = new InvalidClientCredentialsException(config);
+        try {
+            if (httpResponse.getStatusCode() == 401 && httpResponse.getResponseBody().isPresent()) {
+                ClientErrorException exception = new UnauthorizedException(httpResponse.toString());
+                try {
+                    final JsonNode jsonNode = JsonUtils.readTree(httpResponse.getResponseBody().get());
+                    final String error = jsonNode.get("error").asText();
+                    if (error.equals("invalid_client")) {
+                        exception = new InvalidClientCredentialsException(config);
+                    }
+                } catch (final JsonException e) {
+                    exception = new UnauthorizedException(httpResponse.toString(), e);
                 }
-            } catch (final JsonException e) {
-                authorizationException = new UnauthorizedException(httpResponse.toString(), e);
+                throw exception;
             }
-            authorizationException.setProjectKey(config.getProjectKey());
-            authorizationException.setUnderlyingHttpResponse(httpResponse);
-            authorizationException.setHttpRequest(httpRequest.toString());
-            throw authorizationException;
+            return JsonUtils.readObject(Tokens.typeReference(), httpResponse.getResponseBody().get());
+        } catch (final SphereException exception) {
+            exception.setProjectKey(config.getProjectKey());
+            exception.setUnderlyingHttpResponse(httpResponse);
+            exception.setHttpRequest(httpRequest.toString());
+            throw exception;
         }
-        return JsonUtils.readObject(Tokens.typeReference(), httpResponse.getResponseBody().get());
     }
 }

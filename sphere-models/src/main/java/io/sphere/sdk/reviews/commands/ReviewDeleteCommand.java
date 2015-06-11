@@ -13,7 +13,7 @@ import io.sphere.sdk.reviews.Review;
 public class ReviewDeleteCommand extends ByIdDeleteCommandImpl<Review> {
 
     private ReviewDeleteCommand(final Versioned<Review> versioned) {
-        super(versioned, ReviewsEndpoint.ENDPOINT);
+        super(versioned, ReviewEndpoint.ENDPOINT);
     }
 
     public static DeleteCommand<Review> of(final Versioned<Review> versioned) {

@@ -3,6 +3,7 @@ package io.sphere.sdk.cartdiscounts;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
+import io.sphere.sdk.cartdiscounts.queries.CartDiscountQueryModel;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.queries.Query;
@@ -40,7 +41,7 @@ public class CartDiscountFixtures {
     }
 
     private static CartDiscount getCartDiscount(final TestClient client, final String name) {
-        final Query<CartDiscount> query = CartDiscountQuery.of().withPredicate(CartDiscountQuery.model().name().lang(ENGLISH).is(name));
+        final Query<CartDiscount> query = CartDiscountQuery.of().withPredicate(m -> m.name().lang(ENGLISH).is(name));
         return client.execute(query).head().orElseGet(() -> {
             final CartDiscountDraft draft = newCartDiscountDraftBuilder()
                     .name(LocalizedStrings.ofEnglishLocale(name))

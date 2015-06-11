@@ -12,7 +12,7 @@ public class CustomerGroupQueryModel extends DefaultModelQueryModelImpl<Customer
         super(parent, pathSegment);
     }
 
-    static CustomerGroupQueryModel get() {
+    static CustomerGroupQueryModel of() {
         return new CustomerGroupQueryModel(Optional.<QueryModel<CustomerGroup>>empty(), Optional.<String>empty());
     }
 

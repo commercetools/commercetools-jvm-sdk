@@ -7,9 +7,12 @@ import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
+import io.sphere.sdk.producttypes.queries.ProductTypeQueryModel;
+import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
+import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
-import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
@@ -23,12 +26,11 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
-import java.util.function.Consumer;
+import java.util.function.*;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.producttypes.ProductTypeFixtures.withEmptyProductType;
-import static io.sphere.sdk.producttypes.ProductTypeFixtures.withProductType;
-import static io.sphere.sdk.test.SphereTestUtils.en;
+import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
@@ -251,7 +253,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     private QueryPredicate<ProductType> hasAttributeType(final String attributeTypeName) {
-        return ProductTypeQuery.model().attributes().type().name().is(attributeTypeName);
+        return ProductTypeQueryModel.of().attributes().type().name().is(attributeTypeName);
     }
 
     private void withDistractorProductType(final Consumer<ProductType> consumer) {
@@ -376,6 +378,6 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     protected void cleanUpByName(final List<String> names) {
-        execute(ProductTypeQuery.of().withPredicate(ProductTypeQuery.model().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
+        execute(ProductTypeQuery.of().withPredicate(ProductTypeQueryModel.of().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
     }
 }

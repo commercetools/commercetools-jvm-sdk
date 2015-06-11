@@ -1,5 +1,7 @@
 package io.sphere.sdk.queries;
 
+import io.sphere.sdk.http.HttpQueryParameter;
+
 import java.util.Optional;
 
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.List;
  * Queries for entities with getters and copy functions for where, sort, limit and offset
  * @param <T> Interface of the entity, i.e., Category interface
  */
-public interface EntityQuery<T> extends Query<T> {
+public interface EntityQuery<T> extends Query<T>, ReferenceExpandeable<T> {
     /**
      *
      * @return the predicate used to perform the query
@@ -26,7 +28,8 @@ public interface EntityQuery<T> extends Query<T> {
 
     String endpoint();
 
+    @Override
     List<ExpansionPath<T>> expansionPaths();
 
-    List<QueryParameter> additionalQueryParameters();
+    List<HttpQueryParameter> additionalQueryParameters();
 }

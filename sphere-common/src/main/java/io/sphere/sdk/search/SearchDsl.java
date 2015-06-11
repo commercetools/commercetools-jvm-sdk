@@ -1,6 +1,6 @@
 package io.sphere.sdk.search;
 
-import io.sphere.sdk.queries.QueryParameter;
+import io.sphere.sdk.http.HttpQueryParameter;
 
 import java.util.List;
 import java.util.Locale;
@@ -58,7 +58,7 @@ public interface SearchDsl<T> extends EntitySearch<T> {
 
     SearchDsl<T> withOffset(final long offset);
 
-    SearchDsl<T> withAdditionalQueryParameters(final List<QueryParameter> additionalQueryParameters);
+    SearchDsl<T> withAdditionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters);
 
     /**
      * Returns an EntitySearch with the new text as search text.

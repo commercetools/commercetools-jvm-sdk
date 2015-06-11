@@ -8,7 +8,7 @@ import io.sphere.sdk.queries.*;
 
 public class ProductQueryModel extends DefaultModelQueryModelImpl<Product> {
 
-    static ProductQueryModel get() {
+    public static ProductQueryModel of() {
         return new ProductQueryModel(Optional.<QueryModel<Product>>empty(), Optional.<String>empty());
     }
 

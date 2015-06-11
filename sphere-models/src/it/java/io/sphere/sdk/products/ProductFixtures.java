@@ -31,6 +31,7 @@ import java.util.function.Supplier;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
+import static io.sphere.sdk.products.ProductUpdateScope.ONLY_STAGED;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
@@ -50,10 +51,10 @@ public class ProductFixtures {
 
     public static void withTaxedProduct(final TestClient client, final Consumer<Product> user) {
         TaxCategoryFixtures.withTransientTaxCategory(client, taxCategory ->
-            withProduct(client, randomString(), product -> {
-                final Product productWithTaxes = client.execute(createSetTaxesCommand(taxCategory, product));
-                user.accept(productWithTaxes);
-            })
+                        withProduct(client, randomString(), product -> {
+                            final Product productWithTaxes = client.execute(createSetTaxesCommand(taxCategory, product));
+                            user.accept(productWithTaxes);
+                        })
         );
     }
 
@@ -108,8 +109,11 @@ public class ProductFixtures {
     }
 
     public static void withUpdateablePricedProduct(final TestClient client, final Function<Product, Product> f) {
+        withUpdateablePricedProduct(client, Price.of(MoneyImpl.of(123, EUR)), f);
+    }
+
+    public static void withUpdateablePricedProduct(final TestClient client, final Price expectedPrice, final Function<Product, Product> f) {
         withUpdateableProduct(client, product -> {
-            final Price expectedPrice = Price.of(MoneyImpl.of(123, EUR));
             final ProductUpdateCommand command = ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT));
             return f.apply(client.execute(command));
         });
@@ -117,9 +121,8 @@ public class ProductFixtures {
 
     public static void deleteProductsAndProductType(final TestClient client, final ProductType productType) {
         if (productType != null) {
-            ProductQueryModel productQueryModelProductQueryModel = ProductQuery.model();
-            QueryPredicate<Product> ofProductType = productQueryModelProductQueryModel.productType().is(productType);
-            QueryDsl<Product> productsOfProductTypeQuery = ProductQuery.of().withPredicate(ofProductType);
+            QueryPredicate<Product> ofProductType = ProductQueryModel.of().productType().is(productType);
+            ProductQuery productsOfProductTypeQuery = ProductQuery.of().withPredicate(ofProductType);
             List<Product> products = client.execute(productsOfProductTypeQuery).getResults();
             products.forEach(
                     product -> client.execute(ProductDeleteCommand.of(product))
@@ -128,11 +131,21 @@ public class ProductFixtures {
         }
     }
 
-    public static void withProductAndCategory(final TestClient client, final BiConsumer<Product, Category> consumer) {
+    public static void withProductAndUnconnectedCategory(final TestClient client, final BiConsumer<Product, Category> consumer) {
         final Consumer<Category> consumer1 = category -> {
             final Consumer<Product> user = product -> consumer.accept(product, category);
             withProduct(client, "withProductAndCategory", user);
         };
         withCategory(client, consumer1);
+    }
+
+    public static void withProductInCategory(final TestClient client, final BiConsumer<Product, Category> consumer) {
+        withCategory(client, category -> {
+            final Consumer<Product> user = product -> consumer.accept(product, category);
+            withProduct(client, "withProductAndCategory", product -> {
+                final Product productWithCategory = client.execute(ProductUpdateCommand.of(product, AddToCategory.of(category, ONLY_STAGED)));
+                consumer.accept(productWithCategory, category);
+            });
+        });
     }
 }

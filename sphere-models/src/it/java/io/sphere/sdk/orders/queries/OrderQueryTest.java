@@ -2,12 +2,12 @@ package io.sphere.sdk.orders.queries;
 
 import io.sphere.sdk.carts.CartFixtures;
 import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFixtures;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
 import io.sphere.sdk.orders.commands.updateactions.UpdateSyncInfo;
 import io.sphere.sdk.queries.QueryPredicate;
-import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -17,12 +17,27 @@ import java.util.function.Function;
 import static io.sphere.sdk.channels.ChannelFixtures.persistentChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRoles.ORDER_EXPORT;
 import static io.sphere.sdk.orders.OrderFixtures.withOrder;
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderQueryTest extends IntegrationTest {
 
-    public static final OrderQueryModel MODEL = OrderQuery.model();
+    public static final OrderQueryModel MODEL = OrderQueryModel.of();
+
+    @Test
+    public void customerGroupIsExpandeable() throws Exception {
+        CustomerFixtures.withCustomerInGroup(client(), (customer, customerGroup) -> {
+            withOrder(client(), customer, order -> {
+                final Order queriedOrder = execute(OrderQuery.of()
+                                .withPredicate(m -> m.id().is(order.getId()))
+                                .withExpansionPaths(m -> m.customerGroup())
+                ).head().get();
+                assertThat(queriedOrder.getCustomerGroup().get().getObj().get().getName())
+                        .overridingErrorMessage("customerGroupIsExpandeable")
+                        .isEqualTo(customerGroup.getName());
+            });
+        });
+    }
 
     @Test
     public void customerId() throws Exception {
@@ -80,13 +95,13 @@ public class OrderQueryTest extends IntegrationTest {
         });
     }
 
-    private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p) {
+    private void assertOrderIsFound(final Function<Order, OrderQuery> p) {
         assertOrderIsFound(p, true);
     }
 
-    private void assertOrderIsFound(final Function<Order, QueryDsl<Order>> p, final boolean shouldFind) {
+    private void assertOrderIsFound(final Function<Order, OrderQuery> p, final boolean shouldFind) {
         withOrder(client(), order -> {
-            final QueryDsl<Order> query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
+            final OrderQuery query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
             final String id = client().execute(query).head().orElseThrow(() -> new RuntimeException("nothing found with predicate")).getId();
             if (shouldFind) {
                 assertThat(id).isEqualTo(order.getId());

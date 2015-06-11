@@ -14,7 +14,7 @@ public class StateQueryModel extends DefaultModelQueryModelImpl<State> {
         super(parent, pathSegment);
     }
 
-    static StateQueryModel get() {
+    public static StateQueryModel of() {
         return new StateQueryModel(Optional.<QueryModel<State>>empty(), Optional.<String>empty());
     }
 

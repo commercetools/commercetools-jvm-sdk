@@ -13,7 +13,7 @@ import java.util.Optional;
  */
 public class CustomObjectQueryModel<T> extends DefaultModelQueryModelImpl<CustomObject<T>> {
 
-    static <T> CustomObjectQueryModel<T> get() {
+    public static <T> CustomObjectQueryModel<T> of() {
         return new CustomObjectQueryModel<>(Optional.<QueryModel<CustomObject<T>>>empty(), Optional.<String>empty());
     }
 

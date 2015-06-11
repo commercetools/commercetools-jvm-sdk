@@ -5,7 +5,7 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SearchDslImpl;
-import io.sphere.sdk.queries.QueryParameter;
+import io.sphere.sdk.http.HttpQueryParameter;
 
 import static java.util.Arrays.asList;
 
@@ -25,7 +25,7 @@ public class ProductProjectionSearch extends SearchDslImpl<ProductProjection> {
     };
 
     private ProductProjectionSearch(final ProductProjectionType type) {
-        super("/product-projections/search", TYPE_REFERENCE, asList(QueryParameter.of("staged", type.isStaged().toString())));
+        super("/product-projections/search", TYPE_REFERENCE, asList(HttpQueryParameter.of("staged", type.isStaged().toString())));
     }
 
     public static ProductProjectionSearch ofStaged() {

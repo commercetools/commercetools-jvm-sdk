@@ -21,7 +21,7 @@ public class ReviewDeleteCommandTest extends IntegrationTest {
 
                     execute(ReviewDeleteCommand.of(review));
 
-                    PagedQueryResult<Review> result = execute(ReviewQuery.of().withPredicate(ReviewQuery.model().id().is(review.getId())));
+                    PagedQueryResult<Review> result = execute(ReviewQuery.of().withPredicate(m -> m.id().is(review.getId())));
                     assertThat(result.getTotal()).isEqualTo(0);
                 })
         );

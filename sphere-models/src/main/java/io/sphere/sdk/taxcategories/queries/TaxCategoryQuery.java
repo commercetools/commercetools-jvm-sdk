@@ -1,20 +1,16 @@
 package io.sphere.sdk.taxcategories.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.taxcategories.TaxCategory;
+import io.sphere.sdk.taxcategories.expansion.TaxCategoryExpansionModel;
 
 /**
  {@doc.gen summary tax categories}
  */
-public class TaxCategoryQuery extends DefaultModelQuery<TaxCategory> {
-    private TaxCategoryQuery(){
-        super(TaxCategoriesEndpoint.ENDPOINT.endpoint(), resultTypeReference());
-    }
-
-    public static TypeReference<PagedQueryResult<TaxCategory>> resultTypeReference() {
+public interface TaxCategoryQuery extends MetaModelQueryDsl<TaxCategory, TaxCategoryQuery, TaxCategoryQueryModel, TaxCategoryExpansionModel<TaxCategory>> {
+    static TypeReference<PagedQueryResult<TaxCategory>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<TaxCategory>>(){
             @Override
             public String toString() {
@@ -23,15 +19,11 @@ public class TaxCategoryQuery extends DefaultModelQuery<TaxCategory> {
         };
     }
 
-    public QueryDsl<TaxCategory> byName(final String name) {
-        return withPredicate(model().name().is(name));
+    default TaxCategoryQuery byName(final String name) {
+        return withPredicate(TaxCategoryQueryModel.of().name().is(name));
     }
 
-    public static TaxCategoryQuery of() {
-        return new TaxCategoryQuery();
-    }
-
-    public static TaxCategoryQueryModel model() {
-        return TaxCategoryQueryModel.get();
+    static TaxCategoryQuery of() {
+        return new TaxCategoryQueryImpl();
     }
 }

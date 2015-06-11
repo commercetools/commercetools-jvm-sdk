@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ShippingMethodQueryModelTest extends IntegrationTest {
 
-    public static final QuerySort<ShippingMethod> BY_CREATED_AT_DESC = ShippingMethodQuery.model().createdAt().sort(DESC);
+    public static final QuerySort<ShippingMethod> BY_CREATED_AT_DESC = ShippingMethodQueryModel.of().createdAt().sort(DESC);
 
     @Test
     public void queryByName() throws Exception {

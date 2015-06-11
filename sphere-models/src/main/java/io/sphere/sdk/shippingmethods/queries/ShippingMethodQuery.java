@@ -2,18 +2,14 @@ package io.sphere.sdk.shippingmethods.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.models.Referenceable;
-import io.sphere.sdk.queries.DefaultModelQuery;
 import io.sphere.sdk.queries.PagedQueryResult;
-import io.sphere.sdk.queries.QueryDsl;
+import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
+import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
-public class ShippingMethodQuery extends DefaultModelQuery<ShippingMethod> {
-    private ShippingMethodQuery() {
-        super(ShippingMethodEndpoint.ENDPOINT.endpoint(), resultTypeReference());
-    }
-
-    public static TypeReference<PagedQueryResult<ShippingMethod>> resultTypeReference() {
+public interface ShippingMethodQuery extends MetaModelQueryDsl<ShippingMethod, ShippingMethodQuery, ShippingMethodQueryModel, ShippingMethodExpansionModel<ShippingMethod>> {
+    static TypeReference<PagedQueryResult<ShippingMethod>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<ShippingMethod>>(){
             @Override
             public String toString() {
@@ -22,23 +18,19 @@ public class ShippingMethodQuery extends DefaultModelQuery<ShippingMethod> {
         };
     }
 
-    public static ShippingMethodQuery of() {
-        return new ShippingMethodQuery();
+    static ShippingMethodQuery of() {
+        return new ShippingMethodQueryImpl();
     }
 
-    public static ShippingMethodQueryModel model() {
-        return ShippingMethodQueryModel.get();
+    default ShippingMethodQuery byName(final String name) {
+        return withPredicate(ShippingMethodQueryModel.of().name().is(name));
     }
 
-    public QueryDsl<ShippingMethod> byName(final String name) {
-        return withPredicate(model().name().is(name));
+    default ShippingMethodQuery byTaxCategory(final Referenceable<TaxCategory> taxCategory) {
+        return withPredicate(m -> m.taxCategory().is(taxCategory));
     }
 
-    public QueryDsl<ShippingMethod> byTaxCategory(final Referenceable<TaxCategory> taxCategory) {
-        return withPredicate(model().taxCategory().is(taxCategory));
-    }
-
-    public QueryDsl<ShippingMethod> byIsDefault() {
-        return withPredicate(model().isDefault().is(true));
+    default ShippingMethodQuery byIsDefault() {
+        return withPredicate(m -> m.isDefault().is(true));
     }
 }

@@ -1,6 +1,6 @@
 package io.sphere.sdk.search;
 
-import io.sphere.sdk.queries.QueryParameter;
+import io.sphere.sdk.http.HttpQueryParameter;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,5 +23,5 @@ public interface EntitySearch<T> extends Search<T> {
 
     Optional<Long> offset();
 
-    List<QueryParameter> additionalQueryParameters();
+    List<HttpQueryParameter> additionalQueryParameters();
 }

@@ -19,7 +19,8 @@ object Build extends Build {
     Defaults.itSettings ++ jacoco.settings ++ itJacoco.settings ++ Release.publishSettings ++ Seq(
       parallelExecution in IntegrationTest := false,
       parallelExecution in itJacoco.Config:= false,
-      testOptions += Tests.Argument(TestFrameworks.JUnit, "-v")
+      testOptions += Tests.Argument(TestFrameworks.JUnit, "-v"),
+      libraryDependencies += `logback-classic` % "test,it"
     )
 
   //the project definition have to be in .scala files for the module dependency graph
@@ -157,6 +158,10 @@ package io.sphere.sdk.meta;
 public final class BuildInfo {
     private BuildInfo() {
       //utility class
+    }
+
+    public static String userAgent() {
+         return "SPHERE.IO JVM SDK " + version();
     }
 
     public static String version() {

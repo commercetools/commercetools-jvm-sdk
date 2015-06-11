@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public final class CustomerQueryModel extends DefaultModelQueryModelImpl<Customer> {
 
-    static CustomerQueryModel get() {
+    public static CustomerQueryModel of() {
         return new CustomerQueryModel(Optional.<QueryModel<Customer>>empty(), Optional.<String>empty());
     }
 
@@ -29,7 +29,7 @@ public final class CustomerQueryModel extends DefaultModelQueryModelImpl<Custome
     }
 
     public StringQuerySortingModel<Customer> defaultShippingAddressId() {
-        return new StringQuerySortingModel<>(Optional.of(this), "defaultBillingAddressId");
+        return new StringQuerySortingModel<>(Optional.of(this), "defaultShippingAddressId");
     }
 
     public StringQuerySortingModel<Customer> defaultBillingAddressId() {
