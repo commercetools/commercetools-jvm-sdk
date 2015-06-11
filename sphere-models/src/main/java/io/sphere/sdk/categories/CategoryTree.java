@@ -19,26 +19,21 @@ public interface CategoryTree {
      * @param id the ID of the category to search for
      * @return category
      */
-    Optional<Category> getById(String id);
+    Optional<Category> findById(String id);
 
     /**
      * Finds a category by the slug and a specific locale.
-     * @param slug the slug
      * @param locale the locale
+     * @param slug the slug
      * @return a category matching the criteria
      */
-    Optional<Category> getBySlug(String slug, Locale locale);
+    Optional<Category> findBySlug(Locale locale, String slug);
 
     /**
      * All categories as a flat list.
      * @return all categories
      */
     List<Category> getAllAsFlatList();
-
-    /**
-     * Rebuilds the category cache for category tree implementations, if possible.
-     */
-    void rebuildAsync();
 
     /**
      * Creates a category tree from a flat list of categories.

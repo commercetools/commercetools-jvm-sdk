@@ -57,16 +57,16 @@ public class CategoryTreeTest {
     @Test
     public void searchById() throws Exception {
         final CategoryTree tree = CategoryTree.of(createCategoryHierarchyAsFlatList());
-        assertThat(tree.getById("0bu").get().getId()).isEqualTo("0bu");
-        assertThat(tree.getById("not-present")).isEqualTo(Optional.empty());
+        assertThat(tree.findById("0bu").get().getId()).isEqualTo("0bu");
+        assertThat(tree.findById("not-present")).isEqualTo(Optional.empty());
     }
 
     @Test
     public void searchBySlug() throws Exception {
         final CategoryTree tree = CategoryTree.of(createCategoryHierarchyAsFlatList());
-        assertThat(tree.getBySlug("slug-0bu", locale).get().getId()).isEqualTo("0bu");
+        assertThat(tree.findBySlug(locale, "slug-0bu").get().getId()).isEqualTo("0bu");
         final Locale absentLocale = Locale.GERMAN;
-        assertThat(tree.getBySlug("slug-0bu", absentLocale)).isEqualTo(Optional.empty());
+        assertThat(tree.findBySlug(absentLocale, "slug-0bu")).isEqualTo(Optional.empty());
     }
 
     public List<Category> createCategoryHierarchyAsFlatList() {
