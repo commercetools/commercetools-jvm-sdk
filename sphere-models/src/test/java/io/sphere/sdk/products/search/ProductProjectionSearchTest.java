@@ -58,6 +58,13 @@ public class ProductProjectionSearchTest {
     }
 
     @Test
+    public void canAccessProductType() throws Exception {
+        final ReferenceSearchModel<ProductProjection, ProductType> path = MODEL.productType();
+        assertThat(path.facetOf().all().toSphereFacet()).isEqualTo("productType.id");
+        assertThat(path.filterBy().exactly(productType("some-id")).toSphereFilter()).isEqualTo("productType.id:\"some-id\"");
+    }
+
+    @Test
     public void canAccessPriceAmount() throws Exception {
         final MoneyAmountSearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.allVariants().price().amount();
         assertThat(path.facetOf().all().toSphereFacet()).isEqualTo("variants.price.centAmount");
@@ -231,5 +238,9 @@ public class ProductProjectionSearchTest {
 
     private Reference<Category> category(String id) {
         return Reference.of("category", id);
+    }
+
+    private Reference<ProductType> productType(String id) {
+        return Reference.of("productType", id);
     }
 }

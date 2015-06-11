@@ -2,6 +2,7 @@ package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.*;
 
 import java.util.Optional;
@@ -16,12 +17,16 @@ class ProductDataSearchModelBase extends SearchModelImpl<ProductProjection> {
         return new ProductVariantSearchModel(Optional.of(this), "variants");
     }
 
+    public LocalizedStringsSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
+        return new LocalizedStringsSearchModel<>(Optional.of(this), "name");
+    }
+
     public ReferenceSearchModel<ProductProjection, Category> categories() {
         return new ReferenceSearchModel<>(Optional.of(this), "categories");
     }
 
-    public LocalizedStringsSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
-        return new LocalizedStringsSearchModel<>(Optional.of(this), "name");
+    public ReferenceSearchModel<ProductProjection, ProductType> productType() {
+        return new ReferenceSearchModel<>(Optional.of(this), "productType");
     }
 
     public DateTimeSearchModel<ProductProjection, SimpleSearchSortDirection> createdAt() {
