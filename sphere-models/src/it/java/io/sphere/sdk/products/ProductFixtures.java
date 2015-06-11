@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
@@ -146,6 +147,18 @@ public class ProductFixtures {
                 final Product productWithCategory = client.execute(ProductUpdateCommand.of(product, AddToCategory.of(category, ONLY_STAGED)));
                 consumer.accept(productWithCategory, category);
             });
+        });
+    }
+
+    public static void withProductWithProductReference(final TestClient client, final BiConsumer<Product, Product> consumer) {
+        withProduct(client, referencedProduct -> {
+            final ProductType productType = productReferenceProductType(client);
+            final ProductVariantDraft productVariantDraft =
+                    ProductVariantDraftBuilder.of().attributes(Attribute.of("productreference", referencedProduct.toReference())).build();
+            final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("product reference name 1"), randomSlug(), productVariantDraft).build();
+            final Product product = client.execute(ProductCreateCommand.of(productDraft));
+            consumer.accept(product, referencedProduct);
+            client.execute(ProductDeleteCommand.of(product));
         });
     }
 }

@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.queries;
 
+import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
@@ -41,6 +42,22 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionQueryTest extends IntegrationTest {
     public static final int MASTER_VARIANT_ID = 1;
+
+    @Test
+    public void expandProductReferencesInProductAttributes() throws Exception {
+        withProductWithProductReference(client(), (product, referencedProduct) -> {
+            final Query<ProductProjection> query = ProductProjectionQuery.ofStaged()
+                    .withPredicate(m -> m.id().is(product.getId()))
+                    .withExpansionPaths(m -> m.masterVariant().attributes().value())
+                    .toQuery();
+            final ProductProjection productProjection = execute(query).head().get();
+            final AttributeGetterSetter<Reference<Product>> getterSetter =
+                    AttributeAccess.ofProductReference().ofName("productreference");
+            final Reference<Product> productReference = productProjection.getMasterVariant().getAttribute(getterSetter).get();
+            final Product expandedReferencedProduct = productReference.getObj().get();
+            assertThat(expandedReferencedProduct.getId()).isEqualTo(referencedProduct.getId());
+        });
+    }
 
     @Test
     public void variantIdentifierIsAvailable() throws Exception {
