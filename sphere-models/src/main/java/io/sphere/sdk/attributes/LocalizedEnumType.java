@@ -6,6 +6,8 @@ import io.sphere.sdk.models.LocalizedEnumValue;
 
 import java.util.List;
 
+import static io.sphere.sdk.utils.ListUtils.listOf;
+
 public class LocalizedEnumType extends AttributeTypeBase {
     private final List<LocalizedEnumValue> values;
 
@@ -16,6 +18,12 @@ public class LocalizedEnumType extends AttributeTypeBase {
 
     public List<LocalizedEnumValue> getValues() {
         return values;
+    }
+
+    @JsonIgnore
+    public static LocalizedEnumType of(final LocalizedEnumValue mandatoryValue, final LocalizedEnumValue ... moreValues) {
+        final List<LocalizedEnumValue> localizedEnumValues = listOf(mandatoryValue, moreValues);
+        return of(localizedEnumValues);
     }
 
     @JsonIgnore
