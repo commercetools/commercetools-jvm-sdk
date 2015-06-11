@@ -35,7 +35,7 @@ public class ProductAttributeFlowTest extends IntegrationTest {
         final String productTypeName = ProductAttributeFlowTest.class.getSimpleName() + "lenum";
         final List<LocalizedEnumValue> localizedEnumValues = asList(A, B, C);
         final ProductTypeDraft draft = ProductTypeDraft.of(productTypeName, "", asList(AttributeDefinitionBuilder.of(LOCALIZED_ENUM_ATTR, randomSlug(), LocalizedEnumType.of(localizedEnumValues)).build()));
-        final QueryDsl<ProductType> query = ProductTypeQuery.of().byName(productTypeName);
+        final ProductTypeQuery query = ProductTypeQuery.of().byName(productTypeName);
         final ProductTypeCreateCommand createCommand = ProductTypeCreateCommand.of(draft);
         final ProductType productType = getOrCreate(createCommand, query);
         final NamedAttributeAccess<LocalizedEnumValue> namesAccess = AttributeAccess.ofLocalizedEnumValue().ofName(LOCALIZED_ENUM_ATTR);
