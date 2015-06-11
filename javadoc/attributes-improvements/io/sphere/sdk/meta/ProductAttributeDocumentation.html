@@ -113,6 +113,73 @@ extends java.lang.Object</pre>
 
 <pre>"The attribute with name 'foo' has a different type on product type 'exampleproducttype'."</pre>
 
+ <p>In this scenario we provide a <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> tshirt with the following attributes:</p>
+
+ <ul>
+    <li>color: <a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a></li>
+    <li>size: <a href="../../../../io/sphere/sdk/models/PlainEnumValue.html" title="class in io.sphere.sdk.models"><code>PlainEnumValue</code></a></li>
+    <li>laundrySymbols: set of <a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a></li>
+    <li>matchingProducts: set of product <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><code>Reference</code></a>s</li>
+    <li>rrp: <code>MonetaryAmount</code></li>
+    <li>availableSince: <code>LocalDateTime</code></li>
+ </ul>
+
+ <!--
+
+ -->
+
+ <p>The possible attribute types you can find here: <a href="../../../../io/sphere/sdk/attributes/AttributeType.html" title="interface in io.sphere.sdk.attributes"><code>AttributeType</code></a>.</p>
+
+<p>The code for creation the <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>:</p>
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createProductType--%s" class=code-example><pre><code class='java'>final LocalizedEnumValue green = LocalizedEnumValue.of("green",
+        LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün"));
+final LocalizedEnumValue red = LocalizedEnumValue.of("red",
+        LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot"));
+final AttributeDefinition color = AttributeDefinitionBuilder
+        .of("AttributeTutorialColor", en("color"), LocalizedEnumType.of(red, green))
+        .required(true)
+        .build();
+
+final PlainEnumValue s = PlainEnumValue.of("S", "S");
+final PlainEnumValue m = PlainEnumValue.of("M", "M");
+final PlainEnumValue x = PlainEnumValue.of("X", "X");
+final AttributeDefinition size = AttributeDefinitionBuilder
+        .of("AttributeTutorialSize", en("size"), EnumType.of(s, m, x))
+        .required(true)
+        .build();
+
+final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
+        LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
+final LocalizedEnumValue hot = LocalizedEnumValue.of("hot",
+        LocalizedStrings.of(ENGLISH, "Wash at or below 60°C ").plus(GERMAN, "60°C"));
+final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
+        LocalizedStrings.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
+final LocalizedEnumValue noTumbleDrying = LocalizedEnumValue.of("noTumbleDrying",
+        LocalizedStrings.of(ENGLISH, "no tumble drying").plus(GERMAN, "Nicht im Trommeltrockner trocknen"));
+final SetType laundryLabelType = SetType.of(LocalizedEnumType.of(cold, hot, tumbleDrying, noTumbleDrying));
+final AttributeDefinition laundrySymbols = AttributeDefinitionBuilder
+        .of("AttributeTutorialLaundrySymbols", en("washing labels"), laundryLabelType)
+        .build();
+
+final AttributeDefinition matchingProducts = AttributeDefinitionBuilder
+        .of("AttributeTutorialMatchingProducts", en("matching products"), SetType.of(ReferenceType.ofProduct()))
+        .build();
+
+final AttributeDefinition rrp = AttributeDefinitionBuilder
+        .of("AttributeTutorialRrp", en("recommended retail price"), MoneyType.of())
+        .build();
+
+final AttributeDefinition availableSince = AttributeDefinitionBuilder
+        .of("AttributeTutorialAvailableSince", en("available since"), DateType.of())
+        .build();
+
+
+final List&lt;AttributeDefinition&gt; attributes = asList(color, size, laundrySymbols,
+        matchingProducts, rrp, availableSince);
+final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(PRODUCT_TYPE_NAME, "a 'T' shaped cloth", attributes);
+final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+
  <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s have a name (String)
  which can be used as key to logically identify <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s. Beware that the name has no unique constraint,
  so it is possible to create multiple product types with the same name which will cause confusion.
@@ -122,9 +189,9 @@ extends java.lang.Object</pre>
 final boolean productTypeAlreadyExists = client().execute(query).head().isPresent();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
-<!--
 
- -->
+
+
 
  <h3 id="product-creation">Product Creation</h3>
  <h3 id="attribute-access-without-product-type">Reading Attributes</h3>
