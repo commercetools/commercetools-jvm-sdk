@@ -11,7 +11,7 @@ import java.util.Optional;
  * if there is no inventory entry associated with that SKU.
  * This change can never be staged and is thus immediately visible in published products.
  *
- * {@include.example io.sphere.sdk.products.ProductProjectionIntegrationTest#queryBySku()}
+ * {@include.example io.sphere.sdk.products.queries.ProductProjectionQueryTest#queryBySku()}
  */
 public class SetSku extends UpdateAction<Product> {
     private final int variantId;

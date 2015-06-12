@@ -17,6 +17,10 @@ public class ProductVariantExpansionModel<T> extends ExpansionModel<T> {
         return prices("" + index);
     }
 
+    public ProductAttributeExpansionModel<T> attributes() {
+        return new ProductAttributeExpansionModel<>(pathExpressionOption(), "attributes[*]");
+    }
+
     private PriceExpansionModel<T> prices(final String index) {
         return new PriceExpansionModel<>(pathExpressionOption(), "prices[" + index + "]");
     }
