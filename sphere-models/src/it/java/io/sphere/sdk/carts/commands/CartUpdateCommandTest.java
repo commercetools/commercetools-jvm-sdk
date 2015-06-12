@@ -62,6 +62,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final LineItem lineItem = updatedCart.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
+            assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
         });
     }
 
