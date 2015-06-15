@@ -1,5 +1,7 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.models.errors.InvalidJsonInputError;
+
 /**
  * The exception hierarchy documentation.
  *
@@ -29,7 +31,7 @@ package io.sphere.sdk.meta;
  * The following example shows how to distinguish errors by error code:
  * {@include.example io.sphere.sdk.customers.commands.CustomerChangePasswordCommandTest#demo()}
  *
- * Errors can contain extra information like {@link io.sphere.sdk.client.InvalidJsonInputError} hinting to the problem with the JSON:
+ * Errors can contain extra information like {@link InvalidJsonInputError} hinting to the problem with the JSON:
  *
  * {@include.example io.sphere.sdk.models.SphereErrorTest#castToConcreteError()}
  *

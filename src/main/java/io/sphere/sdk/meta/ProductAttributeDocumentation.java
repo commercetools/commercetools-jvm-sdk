@@ -1,5 +1,7 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.products.ProductVariantDraftBuilder;
+
 /**
  <h3 id="intro">Introduction</h3>
  <h3 id="product-type-creation">ProductType Creation</h3>
@@ -21,9 +23,7 @@ package io.sphere.sdk.meta;
     <li>availableSince: {@link java.time.LocalDateTime}</li>
  </ul>
 
- <!--
 
- -->
 
  <p>The possible attribute types you can find here: {@link io.sphere.sdk.attributes.AttributeType}.</p>
 
@@ -48,7 +48,21 @@ package io.sphere.sdk.meta;
 
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#fetchProductTypeByName()}
 
+ The simplest way of adding attributes to a {@link io.sphere.sdk.products.ProductVariant} is to use
+ {@link ProductVariantDraftBuilder#plusAttribute(java.lang.String, java.lang.Object)} which enables you to directly
+ put the value of the attribute to the draft. But it cannot check if you put the right objects and types in it.
+
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#productCreation()}
+
+ A wrong value for a field or an invalid type will cause an {@link io.sphere.sdk.client.ErrorResponseException}
+ with an error code of {@value io.sphere.sdk.models.errors.InvalidField#CODE}.
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#invalidTypeCausesException()}
+
+ As Alternative you could declare the types of your attributes at one place and use these to read and write
+ attribute values:
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#productCreationWithGetterSetter()}
 
 
  <h3 id="attribute-access-without-product-type">Reading Attributes</h3>
