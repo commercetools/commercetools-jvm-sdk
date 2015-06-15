@@ -52,7 +52,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  {@link ProductVariantDraftBuilder#plusAttribute(java.lang.String, java.lang.Object)} which enables you to directly
  put the value of the attribute to the draft. But it cannot check if you put the right objects and types in it.
 
- {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#productCreation()}
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createProduct()}
 
  A wrong value for a field or an invalid type will cause an {@link io.sphere.sdk.client.ErrorResponseException}
  with an error code of {@value io.sphere.sdk.models.errors.InvalidField#CODE}.
@@ -66,6 +66,33 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 
  <h3 id="attribute-access-without-product-type">Reading Attributes</h3>
+
+ <p>To get a value out of an attribute you need an instance of {@link io.sphere.sdk.attributes.AttributeAccess}
+ which keeps the type info to deserialize the attribute.</p>
+
+ <p>You can reuse the {@link io.sphere.sdk.attributes.NamedAttributeAccess} declaration if you want to:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#readAttributeWithoutProductTypeWithNamedAccess()}
+
+ <p>Or you can access it on the fly:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#readAttributeWithoutProductTypeWithName()}
+
+ <p>Or you can access it as {@link com.fasterxml.jackson.databind.JsonNode}, for example if you don't know the type or the SDK does not support it yet:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#readAttributeWithoutProductTypeWithJson()}
+
+
+ <p>If the attribute is not present then the {@link java.util.Optional} will be empty:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#notPresentAttributeRead()}
+
+ <p>If you provide a wrong type, the code will throw a {@link io.sphere.sdk.json.JsonException}:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#readAttributeWithoutProductTypeWithNamedAccessWithWrongType()}
+
+
+
  <h3 id="attribute-table-creation">Creating a table of attributes</h3>
  <h3 id="attribute-update">Update attributes in a product</h3>
  <h3 id="attribute-stubs-for-tests">Create attribute stubs for unit tests</h3>

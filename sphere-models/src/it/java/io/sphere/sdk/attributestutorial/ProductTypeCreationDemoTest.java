@@ -1,7 +1,10 @@
 package io.sphere.sdk.attributestutorial;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.client.ErrorResponseException;
+import io.sphere.sdk.json.JsonException;
+import io.sphere.sdk.json.JsonUtils;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.PlainEnumValue;
@@ -126,6 +129,10 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
     @Test
     public void productCreation() throws Exception {
+        createProduct();
+    }
+
+    public Product createProduct() throws Exception {
         final Reference<Product> productReference = ProductFixtures.referenceableProduct(client()).toReference();
         final ProductType productType = fetchProductTypeByName();
         final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
@@ -160,6 +167,8 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 .contains(MoneyImpl.of(300, EUR));
         assertThat(masterVariant.getAttribute(AVAILABLE_SINCE_ATTR_NAME, AttributeAccess.ofDate()))
                 .contains(LocalDate.of(2015, 2, 2));
+
+        return product;
     }
 
     @Test
@@ -224,5 +233,49 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         assertThatThrownBy(() -> execute(ProductCreateCommand.of(draft)))
             .isInstanceOf(ErrorResponseException.class)
         .matches(e -> ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
+    }
+
+    @Test
+    public void readAttributeWithoutProductTypeWithName() throws Exception {
+        final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
+
+        final Optional<PlainEnumValue> attributeOption =
+                masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue());
+        assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
+    }
+
+    @Test
+    public void readAttributeWithoutProductTypeWithNamedAccess() throws Exception {
+        final NamedAttributeAccess<PlainEnumValue> size = AttributeAccess.ofPlainEnumValue().ofName(SIZE_ATTR_NAME);
+
+        final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
+
+        final Optional<PlainEnumValue> attributeOption = masterVariant.getAttribute(size);
+        assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
+    }
+
+    @Test
+    public void readAttributeWithoutProductTypeWithNamedAccessWithWrongType() throws Exception {
+        final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
+
+        assertThatThrownBy(() -> masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofBoolean()))
+                .isInstanceOf(JsonException.class);
+    }
+
+    @Test
+    public void notPresentAttributeRead() throws Exception {
+        final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
+
+        final Optional<Boolean> attributeOption = masterVariant.getAttribute("notpresent", AttributeAccess.ofBoolean());
+        assertThat(attributeOption).isEmpty();
+    }
+
+    @Test
+    public void readAttributeWithoutProductTypeWithJson() throws Exception {
+        final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
+
+        final Optional<Attribute> attributeOption = masterVariant.getAttribute(SIZE_ATTR_NAME);
+        final JsonNode expectedJsonNode = JsonUtils.toJsonNode(PlainEnumValue.of("S", "S"));
+        assertThat(attributeOption.get().getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
     }
 }
