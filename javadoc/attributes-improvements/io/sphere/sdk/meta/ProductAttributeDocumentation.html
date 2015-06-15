@@ -124,9 +124,7 @@ extends java.lang.Object</pre>
     <li>availableSince: <code>LocalDateTime</code></li>
  </ul>
 
- <!--
 
- -->
 
  <p>The possible attribute types you can find here: <a href="../../../../io/sphere/sdk/attributes/AttributeType.html" title="interface in io.sphere.sdk.attributes"><code>AttributeType</code></a>.</p>
 
@@ -204,12 +202,17 @@ final ProductType productType = productTypeOptional
         .orElseThrow(() -&gt; new RuntimeException("product type " + PRODUCT_TYPE_NAME + " is not present."));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
+ The simplest way of adding attributes to a <a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products"><code>ProductVariant</code></a> is to use
+ <a href="../../../../io/sphere/sdk/products/ProductVariantDraftBuilder.html#plusAttribute-java.lang.String-T-"><code>ProductVariantDraftBuilder.plusAttribute(java.lang.String, java.lang.Object)</code></a> which enables you to directly
+ put the value of the attribute to the draft. But it cannot check if you put the right objects and types in it.
+
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-productCreation--%s" class=code-example><pre><code class='java'>final Reference&lt;Product&gt; productReference = ProductFixtures.referenceableProduct(client()).toReference();
 final ProductType productType = fetchProductTypeByName();
 final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
-        .plusAttribute(COLOR_ATTR_NAME, "green")//special case: enums are set with key (String)
-        .plusAttribute(SIZE_ATTR_NAME, "S")
-        .plusAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, asSet("cold", "tumbleDrying"))//special case: localized enums set Set of keys (String)
+        .plusAttribute(COLOR_ATTR_NAME, "green")//special case: any enums are set with key (String)
+        .plusAttribute(SIZE_ATTR_NAME, "S")//special case: any enums are set with key (String)
+        .plusAttribute(LAUNDRY_SYMBOLS_ATTR_NAME,
+                asSet("cold", "tumbleDrying"))//special case: localized enums set Set of keys (String)
         .plusAttribute(MATCHING_PRODUCTS_ATTR_NAME, asSet(productReference))
         .plusAttribute(RRP_ATTR_NAME, MoneyImpl.of(300, EUR))
         .plusAttribute(AVAILABLE_SINCE_ATTR_NAME, LocalDate.of(2015, 2, 2))
@@ -225,7 +228,6 @@ assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocaliz
         .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
 assertThat(masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
         .contains(PlainEnumValue.of("S", "S"));
-
 final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
         LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
 final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
@@ -238,6 +240,72 @@ assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
         .contains(MoneyImpl.of(300, EUR));
 assertThat(masterVariant.getAttribute(AVAILABLE_SINCE_ATTR_NAME, AttributeAccess.ofDate()))
         .contains(LocalDate.of(2015, 2, 2));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+
+ A wrong value for a field or an invalid type will cause an <a href="../../../../io/sphere/sdk/client/ErrorResponseException.html" title="class in io.sphere.sdk.client"><code>ErrorResponseException</code></a>
+ with an error code of <a href="../../../../io/sphere/sdk/models/errors/InvalidField.html#CODE">"InvalidField"</a>.
+
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-invalidTypeCausesException--%s" class=code-example><pre><code class='java'>final ProductType productType = fetchProductTypeByName();
+final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
+        .plusAttribute(COLOR_ATTR_NAME, 1)//1 is illegal type and illegal key
+        .build();
+final ProductDraft draft = ProductDraftBuilder
+        .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
+        .build();
+assertThatThrownBy(() -&gt; execute(ProductCreateCommand.of(draft)))
+    .isInstanceOf(ErrorResponseException.class)
+.matches(e -&gt; ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+
+ As Alternative you could declare the types of your attributes at one place and use these to read and write
+ attribute values:
+
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-productCreationWithGetterSetter--%s" class=code-example><pre><code class='java'>/* the declarations you could put into a separate class */
+final NamedAttributeAccess&lt;LocalizedEnumValue&gt; color = AttributeAccess.ofLocalizedEnumValue().ofName(COLOR_ATTR_NAME);
+final NamedAttributeAccess&lt;PlainEnumValue&gt; size = AttributeAccess.ofPlainEnumValue().ofName(SIZE_ATTR_NAME);
+final NamedAttributeAccess&lt;Set&lt;LocalizedEnumValue&gt;&gt; laundrySymbols =
+        AttributeAccess.ofLocalizedEnumValueSet().ofName(LAUNDRY_SYMBOLS_ATTR_NAME);
+final NamedAttributeAccess&lt;Set&lt;Reference&lt;Product&gt;&gt;&gt; matchingProducts =
+        AttributeAccess.ofProductReferenceSet().ofName(MATCHING_PRODUCTS_ATTR_NAME);
+final NamedAttributeAccess&lt;MonetaryAmount&gt; rrp = AttributeAccess.ofMoney().ofName(RRP_ATTR_NAME);
+final NamedAttributeAccess&lt;LocalDate&gt; availableSince = AttributeAccess.ofDate().ofName(AVAILABLE_SINCE_ATTR_NAME);
+
+/* the rest of the example */
+final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
+        LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
+final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
+        LocalizedStrings.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
+final Reference&lt;Product&gt; productReference = ProductFixtures.referenceableProduct(client()).toReference();
+final ProductType productType = fetchProductTypeByName();
+final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
+       /*
+           other stuff using the NamedAttributeAccess
+           type-safe
+        */
+        .plusAttribute(color, LocalizedEnumValue.of("green",
+                LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")))//will extract the key
+        .plusAttribute(size, PlainEnumValue.of("S", "S"))
+        .plusAttribute(laundrySymbols, asSet(cold, tumbleDrying))//will extract the keys, so you do not need to
+        //remember the special cases, there is also no problem mixing the styles
+        .plusAttribute(matchingProducts, asSet(productReference))
+//        .plusAttribute(matchingProducts, "foobar") won't compile!
+        .plusAttribute(rrp, MoneyImpl.of(300, EUR))
+        .plusAttribute(availableSince, LocalDate.of(2015, 2, 2))
+        .build();
+final ProductDraft draft = ProductDraftBuilder
+        .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
+        .build();
+
+final Product product = client().execute(ProductCreateCommand.of(draft));
+
+final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+assertThat(masterVariant.getAttribute(color))
+        .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
+assertThat(masterVariant.getAttribute(size)).contains(PlainEnumValue.of("S", "S"));
+assertThat(masterVariant.getAttribute(laundrySymbols)).contains(asSet(cold, tumbleDrying));
+assertThat(masterVariant.getAttribute(matchingProducts)).contains(asSet(productReference));
+assertThat(masterVariant.getAttribute(rrp)).contains(MoneyImpl.of(300, EUR));
+assertThat(masterVariant.getAttribute(availableSince)).contains(LocalDate.of(2015, 2, 2));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
 
