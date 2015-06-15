@@ -130,13 +130,13 @@ extends java.lang.Object</pre>
 
  <p>The possible attribute types you can find here: <a href="../../../../io/sphere/sdk/attributes/AttributeType.html" title="interface in io.sphere.sdk.attributes"><code>AttributeType</code></a>.</p>
 
-<p>The code for creation the <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>:</p>
+<p>The code for the creation of the <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>:</p>
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createProductType--%s" class=code-example><pre><code class='java'>final LocalizedEnumValue green = LocalizedEnumValue.of("green",
         LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün"));
 final LocalizedEnumValue red = LocalizedEnumValue.of("red",
         LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot"));
 final AttributeDefinition color = AttributeDefinitionBuilder
-        .of("AttributeTutorialColor", en("color"), LocalizedEnumType.of(red, green))
+        .of(COLOR_ATTR_NAME, en("color"), LocalizedEnumType.of(red, green))
         .required(true)
         .build();
 
@@ -144,7 +144,7 @@ final PlainEnumValue s = PlainEnumValue.of("S", "S");
 final PlainEnumValue m = PlainEnumValue.of("M", "M");
 final PlainEnumValue x = PlainEnumValue.of("X", "X");
 final AttributeDefinition size = AttributeDefinitionBuilder
-        .of("AttributeTutorialSize", en("size"), EnumType.of(s, m, x))
+        .of(SIZE_ATTR_NAME, en("size"), EnumType.of(s, m, x))
         .required(true)
         .build();
 
@@ -158,19 +158,19 @@ final LocalizedEnumValue noTumbleDrying = LocalizedEnumValue.of("noTumbleDrying"
         LocalizedStrings.of(ENGLISH, "no tumble drying").plus(GERMAN, "Nicht im Trommeltrockner trocknen"));
 final SetType laundryLabelType = SetType.of(LocalizedEnumType.of(cold, hot, tumbleDrying, noTumbleDrying));
 final AttributeDefinition laundrySymbols = AttributeDefinitionBuilder
-        .of("AttributeTutorialLaundrySymbols", en("washing labels"), laundryLabelType)
+        .of(LAUNDRY_SYMBOLS_ATTR_NAME, en("washing labels"), laundryLabelType)
         .build();
 
 final AttributeDefinition matchingProducts = AttributeDefinitionBuilder
-        .of("AttributeTutorialMatchingProducts", en("matching products"), SetType.of(ReferenceType.ofProduct()))
+        .of(MATCHING_PRODUCTS_ATTR_NAME, en("matching products"), SetType.of(ReferenceType.ofProduct()))
         .build();
 
 final AttributeDefinition rrp = AttributeDefinitionBuilder
-        .of("AttributeTutorialRrp", en("recommended retail price"), MoneyType.of())
+        .of(RRP_ATTR_NAME, en("recommended retail price"), MoneyType.of())
         .build();
 
 final AttributeDefinition availableSince = AttributeDefinitionBuilder
-        .of("AttributeTutorialAvailableSince", en("available since"), DateType.of())
+        .of(AVAILABLE_SINCE_ATTR_NAME, en("available since"), DateType.of())
         .build();
 
 
@@ -194,6 +194,53 @@ final boolean productTypeAlreadyExists = client().execute(query).head().isPresen
 
 
  <h3 id="product-creation">Product Creation</h3>
+
+ <p>To create a product you need the product type. Since the <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>
+ ID of the development system will not be the ID of the production system it is necessary to find the product type by name:</p>
+
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-fetchProductTypeByName--%s" class=code-example><pre><code class='java'>final Optional&lt;ProductType&gt; productTypeOptional =
+        client().execute(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).head();
+final ProductType productType = productTypeOptional
+        .orElseThrow(() -&gt; new RuntimeException("product type " + PRODUCT_TYPE_NAME + " is not present."));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-productCreation--%s" class=code-example><pre><code class='java'>final Reference&lt;Product&gt; productReference = ProductFixtures.referenceableProduct(client()).toReference();
+final ProductType productType = fetchProductTypeByName();
+final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
+        .plusAttribute(COLOR_ATTR_NAME, "green")//special case: enums are set with key (String)
+        .plusAttribute(SIZE_ATTR_NAME, "S")
+        .plusAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, asSet("cold", "tumbleDrying"))//special case: localized enums set Set of keys (String)
+        .plusAttribute(MATCHING_PRODUCTS_ATTR_NAME, asSet(productReference))
+        .plusAttribute(RRP_ATTR_NAME, MoneyImpl.of(300, EUR))
+        .plusAttribute(AVAILABLE_SINCE_ATTR_NAME, LocalDate.of(2015, 2, 2))
+        .build();
+final ProductDraft draft = ProductDraftBuilder
+        .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
+        .build();
+
+final Product product = client().execute(ProductCreateCommand.of(draft));
+
+final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
+        .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
+assertThat(masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
+        .contains(PlainEnumValue.of("S", "S"));
+
+final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
+        LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
+final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
+        LocalizedStrings.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
+assertThat(masterVariant.getAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
+        .contains(asSet(cold, tumbleDrying));
+assertThat(masterVariant.getAttribute(MATCHING_PRODUCTS_ATTR_NAME, AttributeAccess.ofProductReferenceSet()))
+        .contains(asSet(productReference));
+assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
+        .contains(MoneyImpl.of(300, EUR));
+assertThat(masterVariant.getAttribute(AVAILABLE_SINCE_ATTR_NAME, AttributeAccess.ofDate()))
+        .contains(LocalDate.of(2015, 2, 2));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+
+
  <h3 id="attribute-access-without-product-type">Reading Attributes</h3>
  <h3 id="attribute-table-creation">Creating a table of attributes</h3>
  <h3 id="attribute-update">Update attributes in a product</h3>
