@@ -13,7 +13,6 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
-import io.sphere.sdk.queries.QueryDsl;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -56,6 +55,15 @@ public class ProductFixtures {
                             user.accept(productWithTaxes);
                         })
         );
+    }
+
+    public static Product referenceableProduct(final TestClient client) {
+        final ProductType productType = ProductTypeFixtures.defaultProductType(client);
+        final ProductVariantDraft variantDraft = ProductVariantDraftBuilder.of().build();
+        final String slugEn = "referenceable-product-1";
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("referenceable product"), en(slugEn), variantDraft).build();
+        return client.execute(ProductQuery.of().bySlug(ProductProjectionType.STAGED, ENGLISH, slugEn)).head()
+                .orElseGet(() -> client.execute(ProductCreateCommand.of(productDraft)));
     }
 
     private static ProductUpdateCommand createSetTaxesCommand(final TaxCategory taxCategory, final Product product) {

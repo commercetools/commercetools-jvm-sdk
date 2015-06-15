@@ -27,7 +27,7 @@ package io.sphere.sdk.meta;
 
  <p>The possible attribute types you can find here: {@link io.sphere.sdk.attributes.AttributeType}.</p>
 
-<p>The code for creation the {@link io.sphere.sdk.producttypes.ProductType}:</p>
+<p>The code for the creation of the {@link io.sphere.sdk.producttypes.ProductType}:</p>
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createProductType()}
 
  <p>{@link io.sphere.sdk.producttypes.ProductType}s have a name (String)
@@ -42,6 +42,15 @@ package io.sphere.sdk.meta;
 
 
  <h3 id="product-creation">Product Creation</h3>
+
+ <p>To create a product you need the product type. Since the {@link io.sphere.sdk.producttypes.ProductType}
+ ID of the development system will not be the ID of the production system it is necessary to find the product type by name:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#fetchProductTypeByName()}
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#productCreation()}
+
+
  <h3 id="attribute-access-without-product-type">Reading Attributes</h3>
  <h3 id="attribute-table-creation">Creating a table of attributes</h3>
  <h3 id="attribute-update">Update attributes in a product</h3>

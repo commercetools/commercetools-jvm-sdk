@@ -3,6 +3,7 @@ package io.sphere.sdk.products;
 import java.util.Optional;
 
 import io.sphere.sdk.attributes.AttributeDraft;
+import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.utils.ListUtils;
@@ -54,6 +55,14 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
 
     public ProductVariantDraftBuilder attributes(final AttributeDraft ... attributes) {
         return attributes(Arrays.asList(attributes));
+    }
+
+    public <T> ProductVariantDraftBuilder plusAttribute(final NamedAttributeAccess<T> namedAccess, final T value) {
+        return plusAttribute(AttributeDraft.of(namedAccess, value));
+    }
+
+    public <T> ProductVariantDraftBuilder plusAttribute(final String name, final T value) {
+        return plusAttribute(AttributeDraft.of(name, value));
     }
 
     public ProductVariantDraftBuilder plusAttribute(final AttributeDraft attribute) {
