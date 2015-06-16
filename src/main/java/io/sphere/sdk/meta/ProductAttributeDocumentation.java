@@ -150,7 +150,19 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 
 
+<h3 id="attribute-class-semantics">Semantics of the Attribute classes</h3>
 
+ <table>
+    <caption>attribute properties</caption>
+    <tr>
+        <th></th><th>{@link io.sphere.sdk.attributes.Attribute}</th><th>{@link io.sphere.sdk.attributes.AttributeDraft}</th><th>{@link io.sphere.sdk.attributes.AttributeImportDraft}</th>
+    </tr>
+ <tr> <td>purpose</td>    <td>read access</td>    <td>write product, create product</td>    <td>order import</td></tr>
+ <tr> <td>keeps expanded references</td>    <td>x</td>    <td></td>    <td></td></tr>
+ <tr> <td>enum like as key</td>    <td></td>    <td>x</td>    <td></td></tr>
+ <tr> <td>enum values only as declared in product type</td>    <td>x</td>    <td>x</td>    <td></td></tr>
+ <tr> <td></td>    <td></td>    <td></td>    <td></td></tr>
+ </table>
 
  <h3 id="nested-attributes">Nested attributes (experimental)</h3>
  */
