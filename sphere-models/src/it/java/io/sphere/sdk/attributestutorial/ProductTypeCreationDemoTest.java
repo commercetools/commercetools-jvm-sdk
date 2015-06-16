@@ -37,10 +37,7 @@ import javax.money.format.MonetaryAmountFormat;
 import javax.money.format.MonetaryFormats;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -371,5 +368,18 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 "available since          | 2015-02-02                           \n" +
                 "----------------------------------------------------------------\n";
         assertThat(table).isEqualTo(expected);
+    }
+
+    @Test
+    public void attributesForUnitTests() throws Exception {
+        final Product referencedProduct = JsonUtils.readObjectFromResource("product1.json", Product.typeReference());
+        final Reference<Product> productReference = referencedProduct.toReference();
+        assertThat(productReference.getObj())
+                .overridingErrorMessage("product reference is expanded")
+                .isPresent();
+        final AttributeAccess<Reference<Product>> access = AttributeAccess.ofProductReference();
+        final Attribute attribute = Attribute.of("attrname", access, productReference);
+        assertThat(attribute.getValue(access)).isEqualTo(productReference);
+        assertThat(attribute.getValue(access).getObj()).isPresent();
     }
 }

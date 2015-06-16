@@ -1,5 +1,6 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 /**
@@ -95,7 +96,23 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
  <h3 id="attribute-table-creation">Creating a table of attributes</h3>
 
-<p>With the help of the product type, you can display a table with attributes. In this example the left column is the label of
+<p>With the help of the product type, you can display a table with attributes. Such as:</p>
+
+ <pre><code>
+ color                    | green
+ ----------------------------------------------------------------
+ size                     | S
+ ----------------------------------------------------------------
+ matching products        | referenceable product
+ ----------------------------------------------------------------
+ washing labels           | tumble drying, Wash at or below 30°C
+ ----------------------------------------------------------------
+ recommended retail price | EUR300.00
+ ----------------------------------------------------------------
+ available since          | 2015-02-02
+ ----------------------------------------------------------------</code></pre>
+
+ <p>In this example the left column is the label of
  the attribute from the product type and the right column is the formatted value from the product:</p>
 
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#showProductAttributeTable()}
@@ -105,6 +122,12 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
  <h3 id="attribute-update">Update attributes in a product</h3>
  <h3 id="attribute-stubs-for-tests">Create attribute stubs for unit tests</h3>
+
+ <p>For unit tests you can create an {@link io.sphere.sdk.attributes.Attribute} with a
+ static factory method such as {@link io.sphere.sdk.attributes.Attribute#of(String, AttributeAccess, Object)}:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#attributesForUnitTests()}
+
  <h3 id="attributes-in-order-import">Create attributes for importing orders</h3>
  <h3 id="nested-attributes">Nested attributes (experimental)</h3>
  */
