@@ -1,9 +1,10 @@
 package io.sphere.sdk.http;
 
-import io.sphere.sdk.models.Base;
-
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 import static java.lang.String.format;
 

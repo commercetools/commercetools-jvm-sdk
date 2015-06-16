@@ -30,8 +30,8 @@ object Build extends Build {
     .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`sphere-test-lib`, `sphere-java-client-ning-1_8`))//need to exclude duplicated classes or "javadoc: error - com.sun.tools.doclets.internal.toolkit.util.DocletAbortException: java.lang.NullPointerException" appears
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
-    .aggregate(`sphere-common`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ning-1_8`, `sphere-java-client-ning-1_9`)
-    .dependsOn(`sphere-common`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`)
+    .aggregate(`sdk-http`, `sphere-common`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ning-1_8`, `sphere-java-client-ning-1_9`)
+    .dependsOn(`sdk-http`, `sphere-common`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`)
 
   lazy val `sphere-java-client-core` = project.configs(IntegrationTest).dependsOn(`sphere-common`).settings(commonSettings:_*)
     .settings(libraryDependencies ++= allTestLibs.map(_ % "test,it"))
@@ -51,7 +51,7 @@ object Build extends Build {
   lazy val `sphere-java-client-apache-async` = project.configs(IntegrationTest).dependsOn(`sphere-java-client-core`, `sphere-java-client-internal-test` % "test,it").settings(commonSettings:_*)
     .settings(libraryDependencies ++= `apache-httpasyncclient` :: `commons-io` :: Nil).configs(IntegrationTest)
 
-  lazy val `sphere-common` = project.configs(IntegrationTest)
+  lazy val `sphere-common` = project.configs(IntegrationTest).dependsOn(`sdk-http`)
     .settings(writeVersionSettings: _*)
     .settings(commonSettings:_*)
     .settings(libraryDependencies ++= `jackson` ++ allTestLibs.map(_ % "test,it") ++
@@ -60,6 +60,16 @@ object Build extends Build {
     `slf4j-api` ::
     `nv-i18n` ::
     `jsr305` ::
+     Nil)
+    )
+
+  lazy val `sdk-http` = project.configs(IntegrationTest)
+    .settings(writeVersionSettings: _*)
+    .settings(commonSettings:_*)
+    .settings(libraryDependencies ++= allTestLibs.map(_ % "test,it") ++
+    (
+    `slf4j-api` ::
+    `commons-lang3` ::
      Nil)
     )
 

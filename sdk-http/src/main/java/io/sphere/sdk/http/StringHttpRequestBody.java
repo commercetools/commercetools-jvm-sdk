@@ -1,7 +1,5 @@
 package io.sphere.sdk.http;
 
-import io.sphere.sdk.models.Base;
-
 public class StringHttpRequestBody extends Base implements HttpRequestBody {
     private final String body;
 

@@ -1,7 +1,5 @@
 package io.sphere.sdk.http;
 
-import io.sphere.sdk.models.Base;
-
 import java.util.Map;
 
 public class FormUrlEncodedHttpRequestBody extends Base implements HttpRequestBody {

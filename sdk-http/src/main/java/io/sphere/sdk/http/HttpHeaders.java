@@ -1,12 +1,7 @@
 package io.sphere.sdk.http;
 
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.ImmutableMapBuilder;
-
 import java.util.*;
 
-import static io.sphere.sdk.utils.ListUtils.*;
-import static io.sphere.sdk.utils.MapUtils.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableMap;
 
@@ -20,16 +15,14 @@ public class HttpHeaders extends Base {
         this.headers = unmodifiableMap(headers);
     }
 
-    private HttpHeaders(final String key, final String value) {
-        this(mapOf(key, asList(value)));
-    }
-
     public static HttpHeaders of(final Map<String, List<String>> headers) {
         return new HttpHeaders(headers);
     }
 
     public static HttpHeaders of(final String key, final String value) {
-        return new HttpHeaders(key, value);
+        final Map<String, List<String>> headers = new HashMap<>();
+        headers.put(key, asList(value));
+        return new HttpHeaders(headers);
     }
 
     public static HttpHeaders empty() {
@@ -64,20 +57,23 @@ public class HttpHeaders extends Base {
 
     public HttpHeaders plus(final String key, final String value) {
         final List<String> currentValues = headers.getOrDefault(key, Collections.emptyList());
-        final List<String> newValues = listOf(currentValues, value);
-        final Map<String, List<String>> newMap = ImmutableMapBuilder.<String, List<String>>of()
-                .putAll(headers)
-                .put(key, newValues)
-                .build();
+        final List<String> newValues = new ArrayList<>(currentValues.size() + 1);
+        newValues.addAll(currentValues);
+        newValues.add(value);
+
+        final Map<String, List<String>> newMap = new HashMap<>();
+        newMap.putAll(headers);
+        newMap.put(key, newValues);
         return HttpHeaders.of(newMap);
     }
 
     @Override
     public final String toString() {
-        final Map<String, List<String>> map = copyOf(headers);
-        if (map.containsKey(AUTHORIZATION)) {
-            map.put(AUTHORIZATION, asList("**removed from output**"));
+        final Map<String, List<String>> newMap = new HashMap<>();
+        newMap.putAll(headers);
+        if (newMap.containsKey(AUTHORIZATION)) {
+            newMap.put(AUTHORIZATION, asList("**removed from output**"));
         }
-        return map.toString();
+        return newMap.toString();
     }
 }

@@ -1,7 +1,5 @@
 package io.sphere.sdk.http;
 
-import io.sphere.sdk.models.Base;
-
 import java.io.File;
 
 public class FileHttpRequestBody extends Base implements HttpRequestBody {

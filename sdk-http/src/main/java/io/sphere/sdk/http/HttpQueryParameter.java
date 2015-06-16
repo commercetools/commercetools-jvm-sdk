@@ -1,7 +1,5 @@
 package io.sphere.sdk.http;
 
-import io.sphere.sdk.models.Base;
-
 public class HttpQueryParameter extends Base {
     private final String key;
     private final String value;
