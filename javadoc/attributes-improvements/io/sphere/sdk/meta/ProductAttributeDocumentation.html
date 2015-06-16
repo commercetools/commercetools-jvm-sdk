@@ -528,6 +528,45 @@ assertThat(attribute.getValue(access).getObj()).isPresent();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="attributes-in-order-import">Create attributes for importing orders</h3>
+
+ <p>Importing attribute values for orders works different from updating products.
+ In orders you provide for enum like types the full value instead of just the key.
+ This makes it possible to create a new enum value on the fly. The other attributes behave as expected.</p>
+
+ <p>Example:</p>
+
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-orderImportExample--%s" class=code-example><pre><code class='java'>final Product product = createProduct();
+//yellow is not defined in the product type, but for imports this works to add use it on the fly
+final LocalizedEnumValue yellow = LocalizedEnumValue.of("yellow", LocalizedStrings.of(ENGLISH, "yellow").plus(GERMAN, "gelb"));
+final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), 1)
+        .attributes(asList(
+                AttributeImportDraft.of(COLOR_ATTR_NAME, yellow),
+                AttributeImportDraft.of(RRP_ATTR_NAME, EURO_30)
+        )).build();
+final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 1, Price.of(EURO_30), en("product name")).build();
+final OrderImportDraft orderImportDraft = OrderImportDraftBuilder
+        .ofLineItems(EURO_20, OrderState.COMPLETE, asList(
+                lineItemImportDraft)).build();
+
+final Order order = execute(OrderImportCommand.of(orderImportDraft));
+
+final ProductVariant productVariant = order.getLineItems().get(0).getVariant();
+final Optional&lt;LocalizedEnumValue&gt; colorAttribute =
+        productVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue());
+assertThat(colorAttribute).contains(yellow);
+final Optional&lt;MonetaryAmount&gt; rrpAttribute =
+        productVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney());
+assertThat(rrpAttribute).contains(EURO_30);
+final Set&lt;String&gt; presentAttributes = productVariant.getAttributes().stream()
+        .map(attr -&gt; attr.getName())
+        .collect(toSet());
+assertThat(presentAttributes).containsOnly(COLOR_ATTR_NAME, RRP_ATTR_NAME);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+
+
+
+
+
  <h3 id="nested-attributes">Nested attributes (experimental)</h3></div>
 </li>
 </ul>
