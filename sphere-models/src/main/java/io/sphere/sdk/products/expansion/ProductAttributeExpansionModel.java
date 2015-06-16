@@ -10,7 +10,19 @@ public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
         super(parentPath, Optional.of(path));
     }
 
+    /**
+     * {@link ExpansionPath} for flat attribute values like {@link String} and {@link io.sphere.sdk.models.LocalizedStrings}.
+     * @return expansion path
+     */
     public ExpansionPath<T> value() {
         return pathWithRoots("value");
+    }
+
+    /**
+     * {@link ExpansionPath} for set (collection) attribute values.
+     * @return expansion path
+     */
+    public ExpansionPath<T> valueSet() {
+        return pathWithRoots("value[*]");
     }
 }
