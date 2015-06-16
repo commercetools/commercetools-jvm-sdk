@@ -474,6 +474,43 @@ assertThat(table).isEqualTo(expected);
 
 
  <h3 id="attribute-update">Update attributes in a product</h3>
+
+<p>Setting attribute values is like a a product creation:</p>
+
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-updateAttributes--%s" class=code-example><pre><code class='java'>final Product product = createProduct();
+final int masterVariantId = 1;
+final Function&lt;AttributeDraft, SetAttribute&gt; draft = attrDraft -&gt;
+        SetAttribute.of(masterVariantId, attrDraft, STAGED_AND_CURRENT);
+final List&lt;SetAttribute&gt; updateActions = asList(
+        draft.apply(AttributeDraft.of(COLOR_ATTR_NAME, "red")),//don't forget: enum like =&gt; use only keys
+        draft.apply(AttributeDraft.of(SIZE_ATTR_NAME, "M")),
+        draft.apply(AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, asSet("cold"))),
+        draft.apply(AttributeDraft.of(RRP_ATTR_NAME, MoneyImpl.of(20, EUR)))
+);
+final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateActions));
+final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
+assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
+        .contains(LocalizedEnumValue.of("red", LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot")));
+assertThat(masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
+        .contains(PlainEnumValue.of("M", "M"));
+final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
+        LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
+assertThat(masterVariant.getAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
+        .contains(asSet(cold));
+assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
+        .contains(MoneyImpl.of(20, EUR));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+
+ A wrong value for a field or an invalid type (like flat value instead of set) will cause an <a href="../../../../io/sphere/sdk/client/ErrorResponseException.html" title="class in io.sphere.sdk.client"><code>ErrorResponseException</code></a>
+ with an error code of <a href="../../../../io/sphere/sdk/models/errors/InvalidField.html#CODE">"InvalidField"</a>.
+
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-updateWithWrongType--%s" class=code-example><pre><code class='java'>final Product product = createProduct();
+assertThatThrownBy(() -&gt; execute(ProductUpdateCommand.of(product,
+        SetAttribute.of(1, AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, "cold"), STAGED_AND_CURRENT))))
+.isInstanceOf(ErrorResponseException.class)
+.matches(e -&gt; ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+
  <h3 id="attribute-stubs-for-tests">Create attribute stubs for unit tests</h3>
 
  <p>For unit tests you can create an <a href="../../../../io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes"><code>Attribute</code></a> with a
