@@ -13,6 +13,8 @@ import io.sphere.sdk.models.errors.InvalidField;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
+import io.sphere.sdk.products.commands.ProductUpdateCommand;
+import io.sphere.sdk.products.commands.updateactions.SetAttribute;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.ProductType;
@@ -38,8 +40,10 @@ import javax.money.format.MonetaryFormats;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.TimeoutException;
 import java.util.function.Function;
 
+import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.ListUtils.listOf;
 import static io.sphere.sdk.utils.SetUtils.asSet;
@@ -381,5 +385,40 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Attribute attribute = Attribute.of("attrname", access, productReference);
         assertThat(attribute.getValue(access)).isEqualTo(productReference);
         assertThat(attribute.getValue(access).getObj()).isPresent();
+    }
+
+    @Test
+    public void updateAttributes() throws Exception {
+        final Product product = createProduct();
+        final int masterVariantId = 1;
+        final Function<AttributeDraft, SetAttribute> draft = attrDraft ->
+                SetAttribute.of(masterVariantId, attrDraft, STAGED_AND_CURRENT);
+        final List<SetAttribute> updateActions = asList(
+                draft.apply(AttributeDraft.of(COLOR_ATTR_NAME, "red")),//don't forget: enum like => use only keys
+                draft.apply(AttributeDraft.of(SIZE_ATTR_NAME, "M")),
+                draft.apply(AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, asSet("cold"))),
+                draft.apply(AttributeDraft.of(RRP_ATTR_NAME, MoneyImpl.of(20, EUR)))
+        );
+        final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateActions));
+        final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
+        assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
+                .contains(LocalizedEnumValue.of("red", LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot")));
+        assertThat(masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
+                .contains(PlainEnumValue.of("M", "M"));
+        final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
+                LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
+        assertThat(masterVariant.getAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
+                .contains(asSet(cold));
+        assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
+                .contains(MoneyImpl.of(20, EUR));
+    }
+
+    @Test
+    public void updateWithWrongType() throws Exception {
+        final Product product = createProduct();
+        assertThatThrownBy(() -> execute(ProductUpdateCommand.of(product,
+                SetAttribute.of(1, AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, "cold"), STAGED_AND_CURRENT))))
+        .isInstanceOf(ErrorResponseException.class)
+        .matches(e -> ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
     }
 }

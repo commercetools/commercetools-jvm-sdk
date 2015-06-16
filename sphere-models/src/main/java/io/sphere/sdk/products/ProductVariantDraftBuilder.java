@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import java.util.Optional;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.models.Base;

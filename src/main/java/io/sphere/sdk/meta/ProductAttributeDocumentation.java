@@ -121,6 +121,16 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 
  <h3 id="attribute-update">Update attributes in a product</h3>
+
+<p>Setting attribute values is like a a product creation:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#updateAttributes()}
+
+ A wrong value for a field or an invalid type (like flat value instead of set) will cause an {@link io.sphere.sdk.client.ErrorResponseException}
+ with an error code of {@value io.sphere.sdk.models.errors.InvalidField#CODE}.
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#updateWithWrongType()}
+
  <h3 id="attribute-stubs-for-tests">Create attribute stubs for unit tests</h3>
 
  <p>For unit tests you can create an {@link io.sphere.sdk.attributes.Attribute} with a
