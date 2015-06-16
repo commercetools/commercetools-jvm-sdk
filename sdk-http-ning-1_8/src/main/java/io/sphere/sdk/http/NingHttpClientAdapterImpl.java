@@ -9,7 +9,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.concurrent.*;
 
-final class NingHttpClientAdapterImpl implements NingHttpClientAdapter {
+final class NingHttpClientAdapterImpl extends Base implements NingHttpClientAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(NingHttpClientAdapterImpl.class);
     private final AsyncHttpClient asyncHttpClient;
     private final ForkJoinPool threadPool = new ForkJoinPool();

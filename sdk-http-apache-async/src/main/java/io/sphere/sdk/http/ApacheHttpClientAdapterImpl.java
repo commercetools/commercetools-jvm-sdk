@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
-final class ApacheHttpClientAdapterImpl implements ApacheHttpClientAdapter {
+final class ApacheHttpClientAdapterImpl extends Base implements ApacheHttpClientAdapter {
     private final CloseableHttpAsyncClient apacheHttpClient;
 
     private ApacheHttpClientAdapterImpl(final CloseableHttpAsyncClient apacheHttpClient) {

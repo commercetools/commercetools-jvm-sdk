@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ForkJoinPool;
 
-final class NingHttpClientAdapterImpl implements NingHttpClientAdapter {
+final class NingHttpClientAdapterImpl extends Base implements NingHttpClientAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(NingHttpClientAdapterImpl.class);
     private final AsyncHttpClient asyncHttpClient;
     private final ForkJoinPool threadPool = new ForkJoinPool();
