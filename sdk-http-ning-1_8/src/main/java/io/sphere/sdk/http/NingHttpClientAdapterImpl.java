@@ -1,17 +1,13 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.http;
 
 import com.ning.http.client.*;
-import io.sphere.sdk.http.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
-import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ForkJoinPool;
+import java.util.concurrent.*;
 
 final class NingHttpClientAdapterImpl implements NingHttpClientAdapter {
     private static final Logger LOGGER = LoggerFactory.getLogger(NingHttpClientAdapterImpl.class);
@@ -23,21 +19,27 @@ final class NingHttpClientAdapterImpl implements NingHttpClientAdapter {
     }
 
     @Override
-    public CompletableFuture<HttpResponse> execute(final HttpRequest httpRequest) {
+    public CompletionStage<HttpResponse> execute(final HttpRequest httpRequest) {
         if (LOGGER.isDebugEnabled()) {
             LOGGER.debug("executing " + httpRequest);
         }
         final Request request = asNingRequest(httpRequest);
-        final CompletableFuture<Response> future = wrap(asyncHttpClient.executeRequest(request));
-        return future.thenApply((Response response) -> {
-            final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
-            Optional<byte[]> body = responseBodyAsBytes.length > 0 ? Optional.of(responseBodyAsBytes) : Optional.empty();
-            final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), body, Optional.of(httpRequest), HttpHeaders.of(response.getHeaders()));
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("response " + httpResponse);
-            }
-            return httpResponse;
-        });
+        try {
+            final CompletionStage<Response> future = wrap(asyncHttpClient.executeRequest(request));
+            return future.thenApply((Response response) -> {
+                final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
+                Optional<byte[]> body = responseBodyAsBytes.length > 0 ? Optional.of(responseBodyAsBytes) : Optional.empty();
+                final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), body, Optional.of(httpRequest), HttpHeaders.of(response.getHeaders()));
+                if (LOGGER.isDebugEnabled()) {
+                    LOGGER.debug("response " + httpResponse);
+                }
+                return httpResponse;
+            });
+        } catch (final IOException e) {
+            final CompletableFuture<HttpResponse> future = new CompletableFuture<>();
+            future.completeExceptionally(new HttpException(e));
+            return future;
+        }
     }
 
     private byte[] getResponseBodyAsBytes(final Response response) {
@@ -63,7 +65,7 @@ final class NingHttpClientAdapterImpl implements NingHttpClientAdapter {
             } else if (body instanceof FileHttpRequestBody) {
                 builder.setBody(((FileHttpRequestBody) body).getFile());
             } else if (body instanceof FormUrlEncodedHttpRequestBody) {
-                ((FormUrlEncodedHttpRequestBody) body).getData().forEach((name, value) -> builder.addQueryParam(name, value));
+                ((FormUrlEncodedHttpRequestBody) body).getData().forEach((name, value) -> builder.addQueryParameter(name, value));
             }
         });
         final Request build = builder.build();
@@ -81,13 +83,13 @@ final class NingHttpClientAdapterImpl implements NingHttpClientAdapter {
     }
 
     /**
-     * Creates a {@link CompletableFuture} from a {@link ListenableFuture}.
+     * Creates a {@link CompletionStage} from a {@link ListenableFuture}.
      * @param listenableFuture the future of the ning library
      * @param executor the executor to run the future in
      * @param <T> Type of the value that will be returned.
      * @return the Java 8 future implementation
      */
-    private static <T> CompletableFuture<T> wrap(final ListenableFuture<T> listenableFuture, final Executor executor) {
+    private static <T> CompletionStage<T> wrap(final ListenableFuture<T> listenableFuture, final Executor executor) {
         final CompletableFuture<T> result = new CompletableFuture<>();
         final Runnable listener = () -> {
             try {
@@ -101,7 +103,7 @@ final class NingHttpClientAdapterImpl implements NingHttpClientAdapter {
         return result;
     }
 
-    private CompletableFuture<Response> wrap(final ListenableFuture<Response> listenableFuture) {
+    private CompletionStage<Response> wrap(final ListenableFuture<Response> listenableFuture) {
         return wrap(listenableFuture, threadPool);
     }
 }

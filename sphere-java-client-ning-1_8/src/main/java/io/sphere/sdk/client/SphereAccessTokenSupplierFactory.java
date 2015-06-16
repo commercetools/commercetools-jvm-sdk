@@ -1,6 +1,7 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.http.NingHttpClientAdapter;
 
 public final class SphereAccessTokenSupplierFactory {
     private SphereAccessTokenSupplierFactory() {

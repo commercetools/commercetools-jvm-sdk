@@ -1,12 +1,11 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.http;
 
-import com.ning.http.client.*;
-import io.sphere.sdk.http.*;
+import com.ning.http.client.AsyncHttpClient;
 
 public interface NingHttpClientAdapter extends HttpClient {
 
     static HttpClient of() {
-        return of(new AsyncHttpClient(new AsyncHttpClientConfig.Builder().setAcceptAnyCertificate(true).build()));
+        return of(new AsyncHttpClient());
     }
 
     static HttpClient of(final AsyncHttpClient asyncHttpClient) {

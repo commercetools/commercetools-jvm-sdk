@@ -1,5 +1,6 @@
 package io.sphere.sdk.client;
 
+import io.sphere.sdk.http.ApacheHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.projects.Project;
 import io.sphere.sdk.projects.queries.ProjectGet;

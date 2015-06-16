@@ -1,6 +1,5 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.http;
 
-import io.sphere.sdk.http.*;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;

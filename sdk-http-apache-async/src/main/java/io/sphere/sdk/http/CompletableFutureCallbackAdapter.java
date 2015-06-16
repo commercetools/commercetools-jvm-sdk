@@ -1,4 +1,4 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.http;
 
 import org.apache.http.concurrent.FutureCallback;
 

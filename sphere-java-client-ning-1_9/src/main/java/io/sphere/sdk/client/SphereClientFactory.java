@@ -3,6 +3,7 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.http.NingHttpClientAdapter;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.json.JsonUtils;
 import io.sphere.sdk.utils.CompletableFutureUtils;

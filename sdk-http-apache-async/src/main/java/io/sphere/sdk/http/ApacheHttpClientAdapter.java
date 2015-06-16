@@ -1,6 +1,5 @@
-package io.sphere.sdk.client;
+package io.sphere.sdk.http;
 
-import io.sphere.sdk.http.HttpClient;
 import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.impl.nio.client.HttpAsyncClients;
 
