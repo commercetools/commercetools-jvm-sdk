@@ -116,12 +116,28 @@ public final class AttributeAccess<T> extends Base {
         return ofSet(MoneyType.class, new TypeReference<Set<MonetaryAmount>>() {});
     }
 
+    public static AttributeAccess<LocalDate> ofLocalDate() {
+        return ofDate();
+    }
+
+    public static AttributeAccess<Set<LocalDate>> ofLocalDateSet() {
+        return ofDateSet();
+    }
+
     public static AttributeAccess<LocalDate> ofDate() {
         return ofPrimitive(localDateTypeReference(), DateType.class);
     }
 
     public static AttributeAccess<Set<LocalDate>> ofDateSet() {
         return ofSet(DateType.class, new TypeReference<Set<LocalDate>>() {});
+    }
+
+    public static AttributeAccess<LocalTime> ofLocalTime() {
+        return ofTime();
+    }
+
+    public static AttributeAccess<Set<LocalTime>> ofLocalTimeSet() {
+        return ofTimeSet();
     }
 
     public static AttributeAccess<LocalTime> ofTime() {
@@ -140,6 +156,14 @@ public final class AttributeAccess<T> extends Base {
     public static AttributeAccess<Set<ZonedDateTime>> ofDateTimeSet() {
         return ofSet(DateTimeType.class, new TypeReference<Set<ZonedDateTime>>() {
         });
+    }
+
+    public static AttributeAccess<ZonedDateTime> ofZonedDateTime() {
+        return ofDateTime();
+    }
+
+    public static AttributeAccess<Set<ZonedDateTime>> ofZonedDateTimeSet() {
+        return ofDateTimeSet();
     }
 
     public static AttributeAccess<Reference<Product>> ofProductReference() {
