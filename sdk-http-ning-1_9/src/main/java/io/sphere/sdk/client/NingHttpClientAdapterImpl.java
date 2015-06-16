@@ -2,23 +2,19 @@ package io.sphere.sdk.client;
 
 import com.ning.http.client.*;
 import io.sphere.sdk.http.*;
-import io.sphere.sdk.utils.SphereInternalLogger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ForkJoinPool;
-import java.util.stream.Collectors;
 
-import static java.util.Arrays.asList;
-
-final class NingHttpClientAdapterImpl extends AutoCloseableService implements NingHttpClientAdapter {
-    private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(NingHttpClientAdapterImpl.class);
+final class NingHttpClientAdapterImpl implements NingHttpClientAdapter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(NingHttpClientAdapterImpl.class);
     private final AsyncHttpClient asyncHttpClient;
     private final ForkJoinPool threadPool = new ForkJoinPool();
 
@@ -28,14 +24,18 @@ final class NingHttpClientAdapterImpl extends AutoCloseableService implements Ni
 
     @Override
     public CompletableFuture<HttpResponse> execute(final HttpRequest httpRequest) {
-        LOGGER.debug(() -> "executing " + httpRequest);
+        if (LOGGER.isDebugEnabled()) {
+            LOGGER.debug("executing " + httpRequest);
+        }
         final Request request = asNingRequest(httpRequest);
         final CompletableFuture<Response> future = wrap(asyncHttpClient.executeRequest(request));
         return future.thenApply((Response response) -> {
             final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
             Optional<byte[]> body = responseBodyAsBytes.length > 0 ? Optional.of(responseBodyAsBytes) : Optional.empty();
             final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), body, Optional.of(httpRequest), HttpHeaders.of(response.getHeaders()));
-            LOGGER.debug(() -> "response " + httpResponse);
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("response " + httpResponse);
+            }
             return httpResponse;
         });
     }
@@ -71,8 +71,8 @@ final class NingHttpClientAdapterImpl extends AutoCloseableService implements Ni
     }
 
     @Override
-    protected void internalClose() {
-        closeQuietly(asyncHttpClient);
+    public void close() {
+        asyncHttpClient.close();
         threadPool.shutdown();
     }
 
@@ -81,7 +81,7 @@ final class NingHttpClientAdapterImpl extends AutoCloseableService implements Ni
     }
 
     /**
-     * Creates a {@link java.util.concurrent.CompletableFuture} from a {@link com.ning.http.client.ListenableFuture}.
+     * Creates a {@link CompletableFuture} from a {@link ListenableFuture}.
      * @param listenableFuture the future of the ning library
      * @param executor the executor to run the future in
      * @param <T> Type of the value that will be returned.
