@@ -1,15 +1,15 @@
 package io.sphere.sdk.client;
 
-import com.ning.http.client.*;
-import io.sphere.sdk.http.*;
+import com.ning.http.client.AsyncHttpClient;
+import io.sphere.sdk.http.HttpClient;
 
 public interface NingHttpClientAdapter extends HttpClient {
 
-    public static HttpClient of() {
+    static HttpClient of() {
         return of(new AsyncHttpClient());
     }
 
-    public static HttpClient of(final AsyncHttpClient asyncHttpClient) {
+    static HttpClient of(final AsyncHttpClient asyncHttpClient) {
         return NingHttpClientAdapterImpl.of(asyncHttpClient);
     }
 }
