@@ -10,6 +10,8 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.errors.InvalidField;
+import io.sphere.sdk.orders.*;
+import io.sphere.sdk.orders.commands.OrderImportCommand;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
@@ -53,6 +55,7 @@ import static java.util.Locale.GERMAN;
 import static java.util.Locale.US;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
+import static java.util.stream.Collectors.toSet;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -420,5 +423,35 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 SetAttribute.of(1, AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, "cold"), STAGED_AND_CURRENT))))
         .isInstanceOf(ErrorResponseException.class)
         .matches(e -> ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
+    }
+
+    @Test
+    public void orderImportExample() throws Exception {
+        final Product product = createProduct();
+        //yellow is not defined in the product type, but for imports this works to add use it on the fly
+        final LocalizedEnumValue yellow = LocalizedEnumValue.of("yellow", LocalizedStrings.of(ENGLISH, "yellow").plus(GERMAN, "gelb"));
+        final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), 1)
+                .attributes(asList(
+                        AttributeImportDraft.of(COLOR_ATTR_NAME, yellow),
+                        AttributeImportDraft.of(RRP_ATTR_NAME, EURO_30)
+                )).build();
+        final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 1, Price.of(EURO_30), en("product name")).build();
+        final OrderImportDraft orderImportDraft = OrderImportDraftBuilder
+                .ofLineItems(EURO_20, OrderState.COMPLETE, asList(
+                        lineItemImportDraft)).build();
+
+        final Order order = execute(OrderImportCommand.of(orderImportDraft));
+
+        final ProductVariant productVariant = order.getLineItems().get(0).getVariant();
+        final Optional<LocalizedEnumValue> colorAttribute =
+                productVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue());
+        assertThat(colorAttribute).contains(yellow);
+        final Optional<MonetaryAmount> rrpAttribute =
+                productVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney());
+        assertThat(rrpAttribute).contains(EURO_30);
+        final Set<String> presentAttributes = productVariant.getAttributes().stream()
+                .map(attr -> attr.getName())
+                .collect(toSet());
+        assertThat(presentAttributes).containsOnly(COLOR_ATTR_NAME, RRP_ATTR_NAME);
     }
 }

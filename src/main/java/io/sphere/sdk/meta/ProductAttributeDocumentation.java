@@ -139,6 +139,19 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#attributesForUnitTests()}
 
  <h3 id="attributes-in-order-import">Create attributes for importing orders</h3>
+
+ <p>Importing attribute values for orders works different from updating products.
+ In orders you provide for enum like types the full value instead of just the key.
+ This makes it possible to create a new enum value on the fly. The other attributes behave as expected.</p>
+
+ <p>Example:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#orderImportExample()}
+
+
+
+
+
  <h3 id="nested-attributes">Nested attributes (experimental)</h3>
  */
 public class ProductAttributeDocumentation {
