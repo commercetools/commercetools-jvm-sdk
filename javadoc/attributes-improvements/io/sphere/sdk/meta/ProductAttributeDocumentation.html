@@ -565,7 +565,19 @@ assertThat(presentAttributes).containsOnly(COLOR_ATTR_NAME, RRP_ATTR_NAME);
 
 
 
+<h3 id="attribute-class-semantics">Semantics of the Attribute classes</h3>
 
+ <table>
+    <caption>attribute properties</caption>
+    <tr>
+        <th></th><th><a href="../../../../io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes"><code>Attribute</code></a></th><th><a href="../../../../io/sphere/sdk/attributes/AttributeDraft.html" title="class in io.sphere.sdk.attributes"><code>AttributeDraft</code></a></th><th><a href="../../../../io/sphere/sdk/attributes/AttributeImportDraft.html" title="class in io.sphere.sdk.attributes"><code>AttributeImportDraft</code></a></th>
+    </tr>
+ <tr> <td>purpose</td>    <td>read access</td>    <td>write product, create product</td>    <td>order import</td></tr>
+ <tr> <td>keeps expanded references</td>    <td>x</td>    <td></td>    <td></td></tr>
+ <tr> <td>enum like as key</td>    <td></td>    <td>x</td>    <td></td></tr>
+ <tr> <td>enum values only as declared in product type</td>    <td>x</td>    <td>x</td>    <td></td></tr>
+ <tr> <td></td>    <td></td>    <td></td>    <td></td></tr>
+ </table>
 
  <h3 id="nested-attributes">Nested attributes (experimental)</h3></div>
 </li>
