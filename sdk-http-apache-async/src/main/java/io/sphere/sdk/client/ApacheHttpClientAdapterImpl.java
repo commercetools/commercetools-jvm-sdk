@@ -1,7 +1,6 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.*;
-import io.sphere.sdk.utils.functional.FunctionalUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -14,6 +13,7 @@ import org.apache.http.impl.nio.client.CloseableHttpAsyncClient;
 import org.apache.http.message.BasicNameValuePair;
 
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 import static java.util.Arrays.asList;
 
-final class ApacheHttpClientAdapterImpl extends AutoCloseableService implements ApacheHttpClientAdapter {
+final class ApacheHttpClientAdapterImpl implements ApacheHttpClientAdapter {
     private final CloseableHttpAsyncClient apacheHttpClient;
 
     private ApacheHttpClientAdapterImpl(final CloseableHttpAsyncClient apacheHttpClient) {
@@ -40,8 +40,12 @@ final class ApacheHttpClientAdapterImpl extends AutoCloseableService implements 
     }
 
     @Override
-    protected void internalClose() {
-        closeQuietly(apacheHttpClient);
+    public void close() {
+        try {
+            apacheHttpClient.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
     }
 
     @Override
@@ -85,11 +89,16 @@ final class ApacheHttpClientAdapterImpl extends AutoCloseableService implements 
 
         if (httpRequest.getBody().isPresent()) {
             final HttpRequestBody body = httpRequest.getBody().get();
-            final HttpEntity httpEntity = FunctionalUtils.<HttpEntity>patternMatching(body)
-                    .when(StringHttpRequestBody.class, b -> stringEntityOf(b.getString()))
-                    .when(FileHttpRequestBody.class, b -> new FileEntity(b.getFile()))
-                    .when(FormUrlEncodedHttpRequestBody.class, b -> urlEncodedOf(b))
-                    .toOption().orElseThrow(() -> new HttpException("Cannot interpret request " + httpRequest));
+            final HttpEntity httpEntity;
+            if (body instanceof StringHttpRequestBody) {
+                httpEntity = stringEntityOf(((StringHttpRequestBody) body).getString());
+            } else if (body instanceof FileHttpRequestBody) {
+                httpEntity = new FileEntity(((FileHttpRequestBody)body).getFile());
+            } else if (body instanceof FormUrlEncodedHttpRequestBody) {
+                httpEntity = urlEncodedOf((FormUrlEncodedHttpRequestBody) body);
+            } else {
+                throw new HttpException("Cannot interpret request " + httpRequest);
+            }
             builder.setEntity(httpEntity);
         }
         return builder.build();

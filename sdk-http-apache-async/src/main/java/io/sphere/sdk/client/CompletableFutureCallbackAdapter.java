@@ -1,11 +1,10 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.models.Base;
 import org.apache.http.concurrent.FutureCallback;
 
 import java.util.concurrent.CompletableFuture;
 
-final class CompletableFutureCallbackAdapter<T> extends Base implements FutureCallback<T> {
+final class CompletableFutureCallbackAdapter<T> implements FutureCallback<T> {
     private final CompletableFuture<T> future;
 
     public CompletableFutureCallbackAdapter(final CompletableFuture<T> future) {
