@@ -394,10 +394,10 @@ assertThat(queryForProductId04to07).isEqualTo(ProductQuery.of().withLimit(4).wit
  <p>The fetched result of a query will be a <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</p>
 
  <ul>
- <li><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getResults--"><code>PagedResult.getResults()</code></a> contains all fetched elements.</li>
- <li>The number of fetched elements can be obtained with <a href="../../../../io/sphere/sdk/queries/PagedResult.html#size--"><code>PagedResult.size()</code></a>.</li>
- <li><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getOffset--"><code>PagedResult.getOffset()</code></a> corresponds to the offset of the query.</li>
- <li><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getTotal--"><code>PagedResult.getTotal()</code></a> is the amount of resources matching the query but do not necessarily need to be included in the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</li>
+ <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getResults--"><code>PagedQueryResult.getResults()</code></a> contains all fetched elements.</li>
+ <li>The number of fetched elements can be obtained with <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#size--"><code>PagedQueryResult.size()</code></a>.</li>
+ <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getOffset--"><code>PagedQueryResult.getOffset()</code></a> corresponds to the offset of the query.</li>
+ <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html#getTotal--"><code>PagedQueryResult.getTotal()</code></a> is the amount of resources matching the query but do not necessarily need to be included in the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a>.</li>
  </ul>
 
  <p>So, for this example query with offset 2 and limit 4, the <a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> will have offset 2, size 4 and total 15. But be careful, count can be smaller than limit in some cases; for example, if total is smaller than the limit (limit 500 but only 15 products). It can also be the case when total is not dividable by limit and the last elements are fetched (.e.g. |12 13 14| with offset 12 and limit 4).</p>

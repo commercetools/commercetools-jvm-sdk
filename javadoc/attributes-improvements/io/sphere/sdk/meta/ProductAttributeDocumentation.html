@@ -375,6 +375,88 @@ assertThatThrownBy(() -&gt; masterVariant.getAttribute(SIZE_ATTR_NAME, Attribute
 
 
  <h3 id="attribute-table-creation">Creating a table of attributes</h3>
+
+<p>With the help of the product type, you can display a table with attributes. In this example the left column is the label of
+ the attribute from the product type and the right column is the formatted value from the product:</p>
+
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-showProductAttributeTable--%s" class=code-example><pre><code class='java'>final List&lt;String&gt; attrNamesToShow = asList(COLOR_ATTR_NAME, SIZE_ATTR_NAME,
+        MATCHING_PRODUCTS_ATTR_NAME, LAUNDRY_SYMBOLS_ATTR_NAME, RRP_ATTR_NAME, AVAILABLE_SINCE_ATTR_NAME);
+final Product product = createProduct();
+final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
+        .withPredicate(m -&gt; m.id().is(product.getId()))
+        .plusExpansionPaths(EXPANSION_PATH_ATTRIBUTES)
+        .plusExpansionPaths(m -&gt; m.productType());
+
+final ProductProjection productProjection = execute(query).head().get();
+
+final ProductType productType = productProjection.getProductType().getObj().get();
+final ProductVariant masterVariant = productProjection.getMasterVariant();
+final List&lt;Attribute&gt; attributes = masterVariant.getAttributes();
+final MonetaryAmountFormat moneyFormat = MonetaryFormats.getAmountFormat(US);
+//TODO put this example into a class, static import types, mention import
+final Function&lt;Attribute, Optional&lt;Pair&lt;String, String&gt;&gt;&gt; attributeValueExtractor = a -&gt;
+        AttributeExtraction.&lt;String&gt;of(productType, a)
+                .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -&gt; v.getLabel().get(ENGLISH).orElse(""))
+                .ifIs(AttributeAccess.ofPlainEnumValue(), v -&gt; v.getLabel())
+                .ifIs(AttributeAccess.ofLocalizedEnumValueSet(), v -&gt;
+                        v.stream()
+                                .map(x -&gt; x.getLabel().get(ENGLISH))
+                                .filter(x -&gt; x.isPresent())
+                                .map(x -&gt; x.get())
+                                .collect(joining(", ")))
+                .ifIs(AttributeAccess.ofProductReferenceSet(), set -&gt; set.stream()
+                        .map(p -&gt; p.getObj().map(prod -&gt; prod.getMasterData().getStaged().getName().get(ENGLISH).orElse("")).orElse("not expanded"))
+                        .collect(joining(", ")))
+                .ifIs(AttributeAccess.ofMoney(), money -&gt; moneyFormat.format(money))
+                .ifIs(AttributeAccess.ofDate(), date -&gt; date.toString())
+                        //new SimpleDateFormat("yyyy-MM-dd").format(date)
+                .getValue().map(value -&gt; {
+            final String label = productType.getAttribute(a.getName()).get().getLabel().get(ENGLISH).get();
+            return ImmutablePair.of(label, value);
+        });
+final List&lt;Pair&lt;String, String&gt;&gt; tableData = attributes.stream()
+        .filter(a -&gt; attrNamesToShow.contains(a.getName()))
+                //sort so that the order is like in attrNamesToShow
+        .sorted(Comparator.comparingInt(a -&gt; attrNamesToShow.indexOf(a.getName())))
+        .map(attributeValueExtractor)
+        .filter(x -&gt; x.isPresent())
+        .map(x -&gt; x.get())
+        .collect(toList());
+
+
+final List&lt;ImmutablePair&lt;Integer, Integer&gt;&gt; entryLengths = tableData.stream()
+        .map(entry -&gt; ImmutablePair.of(entry.getLeft().length(), entry.getRight().length())).collect(toList());
+final StringBuilder stringBuilder = new StringBuilder("\n");
+final int keyColumnWidth = entryLengths.stream().mapToInt(entry -&gt; entry.getLeft()).max().orElse(1);
+final int valueColumnWidth = entryLengths.stream().mapToInt(entry -&gt; entry.getRight()).max().orElse(1);
+for (final Pair&lt;String, String&gt; entry : tableData) {
+    stringBuilder.append(String.format("%-" + keyColumnWidth + "s", entry.getLeft()))
+            .append(" | ")
+            .append(String.format("%-" + valueColumnWidth + "s", entry.getRight()))
+            .append("\n")
+            .append(org.apache.commons.lang3.StringUtils.repeat('-', keyColumnWidth + valueColumnWidth + 3))
+            .append("\n");
+}
+final String table = stringBuilder.toString();
+final String expected = "\n" +
+        "color                    | green                                \n" +
+        "----------------------------------------------------------------\n" +
+        "size                     | S                                    \n" +
+        "----------------------------------------------------------------\n" +
+        "matching products        | referenceable product                \n" +
+        "----------------------------------------------------------------\n" +
+        "washing labels           | tumble drying, Wash at or below 30°C \n" +
+        "----------------------------------------------------------------\n" +
+        "recommended retail price | EUR300.00                            \n" +
+        "----------------------------------------------------------------\n" +
+        "available since          | 2015-02-02                           \n" +
+        "----------------------------------------------------------------\n";
+assertThat(table).isEqualTo(expected);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
+
+ <!-- it is easy to mix uo product and product type with autocomplete and using the non set variant where set is expected -->
+
+
  <h3 id="attribute-update">Update attributes in a product</h3>
  <h3 id="attribute-stubs-for-tests">Create attribute stubs for unit tests</h3>
  <h3 id="attributes-in-order-import">Create attributes for importing orders</h3>
