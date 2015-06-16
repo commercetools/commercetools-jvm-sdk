@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.attributes.AttributeExtraction;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.MetaProductType;
@@ -101,7 +102,7 @@ public class ProductAttributeAccessTest {
         final MetaProductType metaProductType = MetaProductType.of(asList(productType));
         final Locale locale = Locale.GERMAN;
         final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName()).get();
-        return attr.<String>collect(attrDefinition)
+        return AttributeExtraction.<String>of(attrDefinition, attr)
                 .ifIs(ofLocalizedStrings(), lString -> lString.get(locale).orElse("<no translation found>"))
                 .ifGuarded(ofString(), s -> s.length() > 2000 ? Optional.empty() : Optional.of(s))
                 .getValue().orElse("<no mapping found>");

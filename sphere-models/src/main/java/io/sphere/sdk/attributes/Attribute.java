@@ -33,9 +33,4 @@ public interface Attribute {
         }
         return of(name, jsonNode);
     }
-
-    //todo add example with optional as result to not separate result and guard
-    default <R> AttributeExtraction<R> collect(AttributeDefinition attrDefinition) {
-        return AttributeExtraction.<R>of(attrDefinition, this);
-    }
 }

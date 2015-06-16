@@ -94,6 +94,15 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 
  <h3 id="attribute-table-creation">Creating a table of attributes</h3>
+
+<p>With the help of the product type, you can display a table with attributes. In this example the left column is the label of
+ the attribute from the product type and the right column is the formatted value from the product:</p>
+
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#showProductAttributeTable()}
+
+ <!-- it is easy to mix uo product and product type with autocomplete and using the non set variant where set is expected -->
+
+
  <h3 id="attribute-update">Update attributes in a product</h3>
  <h3 id="attribute-stubs-for-tests">Create attribute stubs for unit tests</h3>
  <h3 id="attributes-in-order-import">Create attributes for importing orders</h3>

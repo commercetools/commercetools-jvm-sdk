@@ -252,25 +252,7 @@ public final class AttributeAccess<T> extends Base {
 
     private static <T> AttributeAccess<Set<Reference<T>>> ofSet(final ReferenceType requiredReferenceType, final TypeReference<Set<Reference<T>>> typeReference) {
         final AttributeMapper<Set<Reference<T>>> mapper = AttributeMapper.of(typeReference);
-        return new AttributeAccess<>(mapper, typeReference, attributeDefinition -> {
-            final boolean canHandle;
-
-            if (attributeDefinition.getAttributeType() instanceof SetType) {
-                final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
-
-                if (attributeType.getElementType() instanceof ReferenceType) {
-                    final ReferenceType referenceType = (ReferenceType) attributeType.getElementType();
-
-                    canHandle = referenceType.getReferenceTypeId().equals(requiredReferenceType.getReferenceTypeId());
-                } else {
-                    canHandle = false;
-                }
-            } else {
-                canHandle = false;
-            }
-
-            return canHandle;
-        });
+        return new AttributeAccess<>(mapper, typeReference, new ReferenceSetAttributeDefinitionPredicate(requiredReferenceType));
     }
 
     private static <T extends WithKey> AttributeAccess<Set<T>> ofEnumLikeSet(final Class<? extends AttributeType> clazz,
@@ -289,5 +271,34 @@ public final class AttributeAccess<T> extends Base {
 
     public TypeReference<T> attributeTypeReference() {
         return typeReference;
+    }
+
+    private static class ReferenceSetAttributeDefinitionPredicate implements Predicate<AttributeDefinition> {
+        private final ReferenceType requiredReferenceType;
+
+        public ReferenceSetAttributeDefinitionPredicate(final ReferenceType requiredReferenceType) {
+            this.requiredReferenceType = requiredReferenceType;
+        }
+
+        @Override
+        public boolean test(final AttributeDefinition attributeDefinition) {
+            final boolean canHandle;
+
+            if (attributeDefinition.getAttributeType() instanceof SetType) {
+                final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
+
+                if (attributeType.getElementType() instanceof ReferenceType) {
+                    final ReferenceType referenceType = (ReferenceType) attributeType.getElementType();
+
+                    canHandle = referenceType.getReferenceTypeId().equals(requiredReferenceType.getReferenceTypeId());
+                } else {
+                    canHandle = false;
+                }
+            } else {
+                canHandle = false;
+            }
+
+            return canHandle;
+        }
     }
 }

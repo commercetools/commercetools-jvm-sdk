@@ -13,29 +13,45 @@ import io.sphere.sdk.models.errors.InvalidField;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
+import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
+import io.sphere.sdk.queries.ExpansionPath;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.test.SphereTestUtils;
+import io.sphere.sdk.utils.ListUtils;
 import io.sphere.sdk.utils.MoneyImpl;
+import io.sphere.sdk.utils.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.Pair;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
+import javax.money.format.MonetaryAmountFormat;
+import javax.money.format.MonetaryFormats;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Function;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.utils.ListUtils.listOf;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
+import static java.util.Locale.US;
+import static java.util.stream.Collectors.joining;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -48,6 +64,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     private static final String LAUNDRY_SYMBOLS_ATTR_NAME = "AttributeTutorialLaundrySymbols";
     private static final String RRP_ATTR_NAME = "AttributeTutorialRrp";
     private static final String AVAILABLE_SINCE_ATTR_NAME = "AttributeTutorialAvailableSince";
+    private static final ExpansionPath<ProductProjection> EXPANSION_PATH_ATTRIBUTES = ExpansionPath.of("masterVariant.attributes[*].value[*]");
 
     public void demoCheckingIfProductTypeExist() {
         final ProductTypeQuery query = ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME);
@@ -277,5 +294,82 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Optional<Attribute> attributeOption = masterVariant.getAttribute(SIZE_ATTR_NAME);
         final JsonNode expectedJsonNode = JsonUtils.toJsonNode(PlainEnumValue.of("S", "S"));
         assertThat(attributeOption.get().getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
+    }
+
+    @Test
+    public void showProductAttributeTable() throws Exception {
+        final List<String> attrNamesToShow = asList(COLOR_ATTR_NAME, SIZE_ATTR_NAME,
+                MATCHING_PRODUCTS_ATTR_NAME, LAUNDRY_SYMBOLS_ATTR_NAME, RRP_ATTR_NAME, AVAILABLE_SINCE_ATTR_NAME);
+        final Product product = createProduct();
+        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
+                .withPredicate(m -> m.id().is(product.getId()))
+                .plusExpansionPaths(EXPANSION_PATH_ATTRIBUTES)
+                .plusExpansionPaths(m -> m.productType());
+
+        final ProductProjection productProjection = execute(query).head().get();
+
+        final ProductType productType = productProjection.getProductType().getObj().get();
+        final ProductVariant masterVariant = productProjection.getMasterVariant();
+        final List<Attribute> attributes = masterVariant.getAttributes();
+        final MonetaryAmountFormat moneyFormat = MonetaryFormats.getAmountFormat(US);
+        //TODO put this example into a class, static import types, mention import
+        final Function<Attribute, Optional<Pair<String, String>>> attributeValueExtractor = a ->
+                AttributeExtraction.<String>of(productType, a)
+                        .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -> v.getLabel().get(ENGLISH).orElse(""))
+                        .ifIs(AttributeAccess.ofPlainEnumValue(), v -> v.getLabel())
+                        .ifIs(AttributeAccess.ofLocalizedEnumValueSet(), v ->
+                                v.stream()
+                                        .map(x -> x.getLabel().get(ENGLISH))
+                                        .filter(x -> x.isPresent())
+                                        .map(x -> x.get())
+                                        .collect(joining(", ")))
+                        .ifIs(AttributeAccess.ofProductReferenceSet(), set -> set.stream()
+                                .map(p -> p.getObj().map(prod -> prod.getMasterData().getStaged().getName().get(ENGLISH).orElse("")).orElse("not expanded"))
+                                .collect(joining(", ")))
+                        .ifIs(AttributeAccess.ofMoney(), money -> moneyFormat.format(money))
+                        .ifIs(AttributeAccess.ofDate(), date -> date.toString())
+                                //new SimpleDateFormat("yyyy-MM-dd").format(date)
+                        .getValue().map(value -> {
+                    final String label = productType.getAttribute(a.getName()).get().getLabel().get(ENGLISH).get();
+                    return ImmutablePair.of(label, value);
+                });
+        final List<Pair<String, String>> tableData = attributes.stream()
+                .filter(a -> attrNamesToShow.contains(a.getName()))
+                        //sort so that the order is like in attrNamesToShow
+                .sorted(Comparator.comparingInt(a -> attrNamesToShow.indexOf(a.getName())))
+                .map(attributeValueExtractor)
+                .filter(x -> x.isPresent())
+                .map(x -> x.get())
+                .collect(toList());
+
+
+        final List<ImmutablePair<Integer, Integer>> entryLengths = tableData.stream()
+                .map(entry -> ImmutablePair.of(entry.getLeft().length(), entry.getRight().length())).collect(toList());
+        final StringBuilder stringBuilder = new StringBuilder("\n");
+        final int keyColumnWidth = entryLengths.stream().mapToInt(entry -> entry.getLeft()).max().orElse(1);
+        final int valueColumnWidth = entryLengths.stream().mapToInt(entry -> entry.getRight()).max().orElse(1);
+        for (final Pair<String, String> entry : tableData) {
+            stringBuilder.append(String.format("%-" + keyColumnWidth + "s", entry.getLeft()))
+                    .append(" | ")
+                    .append(String.format("%-" + valueColumnWidth + "s", entry.getRight()))
+                    .append("\n")
+                    .append(org.apache.commons.lang3.StringUtils.repeat('-', keyColumnWidth + valueColumnWidth + 3))
+                    .append("\n");
+        }
+        final String table = stringBuilder.toString();
+        final String expected = "\n" +
+                "color                    | green                                \n" +
+                "----------------------------------------------------------------\n" +
+                "size                     | S                                    \n" +
+                "----------------------------------------------------------------\n" +
+                "matching products        | referenceable product                \n" +
+                "----------------------------------------------------------------\n" +
+                "washing labels           | tumble drying, Wash at or below 30°C \n" +
+                "----------------------------------------------------------------\n" +
+                "recommended retail price | EUR300.00                            \n" +
+                "----------------------------------------------------------------\n" +
+                "available since          | 2015-02-02                           \n" +
+                "----------------------------------------------------------------\n";
+        assertThat(table).isEqualTo(expected);
     }
 }

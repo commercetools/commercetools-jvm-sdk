@@ -9,12 +9,10 @@ import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQueryModel;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
-import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.queries.QueryPredicate;
-import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -316,8 +314,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
         assertThat(exampleValue).isEqualTo(actualAttributeValue);
 
-        final Boolean found = product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeName).get()
-                .<Boolean>collect(fetchedAttributeDefinition)
+        final Boolean found = AttributeExtraction.<Boolean>of(fetchedAttributeDefinition, product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeName).get())
                 .ifIs(access, x -> true)
                 .getValue().orElse(false);
         assertThat(found).overridingErrorMessage("the attribute type should be recognized").isTrue();
