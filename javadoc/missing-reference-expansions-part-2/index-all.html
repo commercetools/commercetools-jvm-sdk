@@ -372,6 +372,8 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereError.html#as-java.lang.Class-">as(Class&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereError.html" title="class in io.sphere.sdk.models">SphereError</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IntermediateQuerySort.html#asc--">asc()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IntermediateQuerySort.html" title="class in io.sphere.sdk.queries">IntermediateQuerySort</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/ListUtils.html#asImmutableList-T...-">asImmutableList(T...)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/ListUtils.html" title="class in io.sphere.sdk.utils">ListUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/SetUtils.html#asSet-T...-">asSet(T...)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/SetUtils.html" title="class in io.sphere.sdk.utils">SetUtils</a></dt>
@@ -1730,6 +1732,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <div class="block">If SPHERE.IO returns a <a href="io/sphere/sdk/client/SphereHttpHeaders.html#X_DEPRECATION_NOTICE">"X-DEPRECATION-NOTICE"</a> header field,
  it does not deserialize the response object in <a href="io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.deserialize(HttpResponse)</code></a> but throws a <a href="io/sphere/sdk/client/SphereDeprecationException.html" title="class in io.sphere.sdk.client"><code>SphereDeprecationException</code></a>.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/IntermediateQuerySort.html#desc--">desc()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/IntermediateQuerySort.html" title="class in io.sphere.sdk.queries">IntermediateQuerySort</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#description-io.sphere.sdk.models.LocalizedStrings-">description(LocalizedStrings)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#description-java.util.Optional-">description(Optional&lt;LocalizedStrings&gt;)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
@@ -4210,6 +4214,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html#inputHint-io.sphere.sdk.attributes.TextInputHint-">inputHint(TextInputHint)</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/AttributeDefinitionBuilder.html" title="class in io.sphere.sdk.attributes">AttributeDefinitionBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/queries/IntermediateQuerySort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">IntermediateQuerySort</span></a>&lt;<a href="io/sphere/sdk/queries/IntermediateQuerySort.html" title="type parameter in IntermediateQuerySort">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>
+<div class="block">A sort model to decide the direction.</div>
+</dd>
 <dt><a href="io/sphere/sdk/annotations/Internal.html" title="annotation in io.sphere.sdk.annotations"><span class="typeNameLink">Internal</span></a> - Annotation Type in <a href="io/sphere/sdk/annotations/package-summary.html">io.sphere.sdk.annotations</a></dt>
 <dd>
 <div class="block">Marks a type that can change or vanish at any time without notification.</div>
@@ -8545,9 +8553,15 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QuerySortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort(QuerySortDirection)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QuerySortingModel.html#sort--">sort()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort(QuerySortDirection)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/StringQuerySortingModel.html#sort--">sort()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/TimestampSortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort(QuerySortDirection)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries">TimestampSortingModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/TimestampSortingModel.html#sort--">sort()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries">TimestampSortingModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/BooleanSearchModel.html#sort-S-">sort(S)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/BooleanSearchModel.html" title="class in io.sphere.sdk.search">BooleanSearchModel</a></dt>
 <dd>
