@@ -1181,6 +1181,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Channels represent a source or destination of different entities.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html#channel--">channel()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">SyncInfoExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html#channel--">channel()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="class in io.sphere.sdk.orders.queries">SyncInfoQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/expansion/PriceExpansionModel.html#channel--">channel()</a></span> - Method in class io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/PriceExpansionModel.html" title="class in io.sphere.sdk.products.expansion">PriceExpansionModel</a></dt>
@@ -2016,6 +2018,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionModel.html#ExpansionModel--">ExpansionModel()</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#expansionModel">expansionModel</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionModel.html#expansionPath-java.lang.String-">expansionPath(String)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ExpansionPath</span></a>&lt;<a href="io/sphere/sdk/queries/ExpansionPath.html" title="type parameter in ExpansionPath">I</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>
@@ -6061,6 +6065,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">SyncInfoExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html#of-io.sphere.sdk.orders.ProductVariantImportDraft-long-io.sphere.sdk.products.Price-io.sphere.sdk.models.LocalizedStrings-">of(ProductVariantImportDraft, long, Price, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">LineItemImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderFromCartDraft.html#of-io.sphere.sdk.models.Versioned-java.util.Optional-java.util.Optional-">of(Versioned&lt;Cart&gt;, Optional&lt;String&gt;, Optional&lt;PaymentState&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderFromCartDraft.html" title="class in io.sphere.sdk.orders">OrderFromCartDraft</a></dt>
@@ -6965,8 +6971,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionModel.html#pathExpressionOption--">pathExpressionOption()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryBuilder.html#pathInTree-java.util.List-">pathInTree(List&lt;Category&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryBuilder.html" title="class in io.sphere.sdk.categories">CategoryBuilder</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExpansionModel.html#pathWithRoots-java.lang.String-">pathWithRoots(String)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries">ExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/utils/functional/PatternMatcher.html" title="class in io.sphere.sdk.utils.functional"><span class="typeNameLink">PatternMatcher</span></a>&lt;<a href="io/sphere/sdk/utils/functional/PatternMatcher.html" title="type parameter in PatternMatcher">T</a>&gt; - Class in <a href="io/sphere/sdk/utils/functional/package-summary.html">io.sphere.sdk.utils.functional</a></dt>
 <dd>&nbsp;</dd>
@@ -8748,10 +8752,16 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html#syncedAt--">syncedAt()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="class in io.sphere.sdk.orders.queries">SyncInfoQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html#syncInfo--">syncInfo()</a></span> - Method in class io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">OrderExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#syncInfo--">syncInfo()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/SyncInfo.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">SyncInfo</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html" title="class in io.sphere.sdk.orders.expansion"><span class="typeNameLink">SyncInfoExpansionModel</span></a>&lt;<a href="io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html" title="type parameter in SyncInfoExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/orders/expansion/package-summary.html">io.sphere.sdk.orders.expansion</a></dt>
+<dd>
+<div class="block">DSL class to create expansion path expressions.</div>
+</dd>
 <dt><a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="class in io.sphere.sdk.orders.queries"><span class="typeNameLink">SyncInfoQueryModel</span></a>&lt;<a href="io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="type parameter in SyncInfoQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/orders/queries/package-summary.html">io.sphere.sdk.orders.queries</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -9273,14 +9283,18 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">UpdateSyncInfo</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-updateSyncInfo--%s" class=code-example><pre><code class='java'>withOrderExportChannel(client(), channel -&gt;
-                withOrder(client(), order -&gt; {
-                    assertThat(order.getSyncInfo()).isEmpty();
-                    final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
-                    final String externalId = "foo";
-                    final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
-                    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-                    assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
-                })
+    withOrder(client(), order -&gt; {
+        assertThat(order.getSyncInfo()).isEmpty();
+        final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
+        final String externalId = "foo";
+        final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
+        final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+        assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
+
+        //check channel expansion
+        final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -&gt; m.syncInfo().channel())).get();
+        assertThat(new ArrayList&lt;&gt;(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isPresent();
+    })
 );
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
