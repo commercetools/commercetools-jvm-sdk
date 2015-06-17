@@ -2,13 +2,14 @@ package io.sphere.sdk.shippingmethods;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.zones.Zone;
 
 import java.util.List;
 
-public class ZoneRate {
+public class ZoneRate extends Base {
     private final Reference<Zone> zone;
     private final List<ShippingRate> shippingRates;
 

@@ -24,6 +24,26 @@ public class ShippingMethodExpansionModel<T> extends ExpansionModel<T> {
         return expansionPath("taxCategory");
     }
 
+    public ZoneRateExpansionModel<T> zoneRates() {
+        return zoneRates("*");
+    }
+
+    public ZoneRateExpansionModel<T> zoneRates(final int index) {
+        return zoneRates("" + index);
+    }
+
+    public ExpansionPath<T> zones() {
+        return zoneRates().zone();
+    }
+
+    public ExpansionPath<T> zones(final int index) {
+        return zoneRates(index).zone();
+    }
+
+    private ZoneRateExpansionModel<T> zoneRates(final String s) {
+        return new ZoneRateExpansionModel<>(pathExpressionOption(), "zoneRates[" + s + "]");
+    }
+
     public static ShippingMethodExpansionModel<ShippingMethod> of() {
         return new ShippingMethodExpansionModel<>();
     }
