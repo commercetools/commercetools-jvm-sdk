@@ -82,8 +82,8 @@ io.sphere.sdk.shippingmethods.queries
 io.sphere.sdk.states
 io.sphere.sdk.states.commands
 io.sphere.sdk.states.commands.updateactions
+io.sphere.sdk.states.expansion
 io.sphere.sdk.states.queries
-io.sphere.sdk.states.queries.expansion
 io.sphere.sdk.taxcategories
 io.sphere.sdk.taxcategories.commands
 io.sphere.sdk.taxcategories.expansion

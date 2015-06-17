@@ -109,9 +109,12 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" ti
 <div class="block">Fetches a shipping method by ID.
 
  <div id="io-sphere-sdk-shippingmethods-queries-ShippingMethodByIdFetchTest-execution--%s" class=code-example><pre><code class='java'>withShippingMethod(client(), shippingMethod -&gt; {
-    final ShippingMethodByIdFetch fetch = ShippingMethodByIdFetch.of(shippingMethod.getId());
-    final String actualFetchedId = execute(fetch).get().getId();
+    final ShippingMethodByIdFetch fetch = ShippingMethodByIdFetch.of(shippingMethod)
+            .withExpansionPaths(m -&gt; m.taxCategory());
+    final ShippingMethod loadedShippingMethod = execute(fetch).get();
+    final String actualFetchedId = loadedShippingMethod.getId();
     assertThat(actualFetchedId).isEqualTo(shippingMethod.getId());
+    assertThat(loadedShippingMethod.getTaxCategory().getObj()).isPresent();
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetchTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
