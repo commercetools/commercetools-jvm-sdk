@@ -1,6 +1,7 @@
 package io.sphere.sdk.states.expansion;
 
 import io.sphere.sdk.queries.ExpansionModel;
+import io.sphere.sdk.queries.ExpansionPath;
 import io.sphere.sdk.states.State;
 
 import java.util.Optional;
@@ -21,5 +22,9 @@ public class StateExpansionModel<T> extends ExpansionModel<T> {
 
     public static StateExpansionModel<State> of() {
         return new StateExpansionModel<>();
+    }
+
+    public ExpansionPath<T> transitions() {
+        return expansionPath("transitions[*]");
     }
 }
