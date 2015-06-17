@@ -11,4 +11,9 @@ public class TimestampSortingModel<T> extends QueryModelImpl<T> implements Query
     public QuerySort<T> sort(final QuerySortDirection sortDirection) {
         return new SphereQuerySort<>(this, sortDirection);
     }
+
+    @Override
+    public IntermediateQuerySort<T> sort() {
+        return new IntermediateQuerySort<>(this);
+    }
 }

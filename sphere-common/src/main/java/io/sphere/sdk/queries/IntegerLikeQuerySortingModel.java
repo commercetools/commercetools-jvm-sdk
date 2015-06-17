@@ -16,8 +16,14 @@ abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<T>
         super(parent, pathSegment);
     }
 
-    public QuerySort<T> sort(QuerySortDirection sortDirection) {
+    @Override
+    public QuerySort<T> sort(final QuerySortDirection sortDirection) {
         return new SphereQuerySort<>(this, sortDirection);
+    }
+
+    @Override
+    public IntermediateQuerySort<T> sort() {
+        return new IntermediateQuerySort<>(this);
     }
 
     @Override

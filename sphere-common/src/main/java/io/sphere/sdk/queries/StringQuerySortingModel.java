@@ -13,8 +13,13 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Que
     }
 
     @Override
-    public QuerySort<T> sort(QuerySortDirection sortDirection) {
+    public QuerySort<T> sort(final QuerySortDirection sortDirection) {
         return new SphereQuerySort<>(this, sortDirection);
+    }
+
+    @Override
+    public IntermediateQuerySort<T> sort() {
+        return new IntermediateQuerySort<>(this);
     }
 
     /**
