@@ -11,11 +11,11 @@ public class ProductExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public ExpansionPath<T> productType() {
-        return pathWithRoots("productType");
+        return expansionPath("productType");
     }
 
     public ExpansionPath<T> taxCategory() {
-        return pathWithRoots("taxCategory");
+        return expansionPath("taxCategory");
     }
 
     public ProductCatalogExpansionModel<T> masterData() {

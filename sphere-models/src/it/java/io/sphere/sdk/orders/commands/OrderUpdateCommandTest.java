@@ -5,6 +5,7 @@ import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
+import io.sphere.sdk.orders.queries.OrderByIdFetch;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
@@ -12,6 +13,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -110,14 +112,18 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     @Test
     public void updateSyncInfo() throws Exception {
         withOrderExportChannel(client(), channel ->
-                        withOrder(client(), order -> {
-                            assertThat(order.getSyncInfo()).isEmpty();
-                            final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
-                            final String externalId = "foo";
-                            final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
-                            final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-                            assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
-                        })
+            withOrder(client(), order -> {
+                assertThat(order.getSyncInfo()).isEmpty();
+                final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
+                final String externalId = "foo";
+                final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
+                final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+                assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
+
+                //check channel expansion
+                final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.syncInfo().channel())).get();
+                assertThat(new ArrayList<>(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isPresent();
+            })
         );
     }
 

@@ -11,11 +11,11 @@ public class PriceExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public ExpansionPath<T> customerGroup() {
-        return pathWithRoots("customerGroup");
+        return expansionPath("customerGroup");
     }
 
     public ExpansionPath<T> channel() {
-        return pathWithRoots("channel");
+        return expansionPath("channel");
     }
 }
 

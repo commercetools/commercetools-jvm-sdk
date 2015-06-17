@@ -15,7 +15,7 @@ public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
      * @return expansion path
      */
     public ExpansionPath<T> value() {
-        return pathWithRoots("value");
+        return expansionPath("value");
     }
 
     /**
@@ -23,6 +23,6 @@ public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
      * @return expansion path
      */
     public ExpansionPath<T> valueSet() {
-        return pathWithRoots("value[*]");
+        return expansionPath("value[*]");
     }
 }

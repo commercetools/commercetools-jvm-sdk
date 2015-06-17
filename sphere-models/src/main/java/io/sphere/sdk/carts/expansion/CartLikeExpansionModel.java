@@ -15,7 +15,7 @@ public abstract class CartLikeExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public ExpansionPath<T> customerGroup() {
-        return pathWithRoots("customerGroup");
+        return expansionPath("customerGroup");
     }
 
     public ExpansionPath<T> discountCodes() {
@@ -27,6 +27,6 @@ public abstract class CartLikeExpansionModel<T> extends ExpansionModel<T> {
     }
 
     private ExpansionPath<T> discountCodes(final String s) {
-        return pathWithRoots("discountCodes[" + s + "].discountCode");
+        return expansionPath("discountCodes[" + s + "].discountCode");
     }
 }
