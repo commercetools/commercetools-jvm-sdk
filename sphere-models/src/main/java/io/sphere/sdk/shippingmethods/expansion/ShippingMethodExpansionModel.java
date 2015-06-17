@@ -1,6 +1,7 @@
 package io.sphere.sdk.shippingmethods.expansion;
 
 import io.sphere.sdk.queries.ExpansionModel;
+import io.sphere.sdk.queries.ExpansionPath;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
 import java.util.Optional;
@@ -17,6 +18,10 @@ public class ShippingMethodExpansionModel<T> extends ExpansionModel<T> {
 
     ShippingMethodExpansionModel() {
         super();
+    }
+
+    public ExpansionPath<T> taxCategory() {
+        return expansionPath("taxCategory");
     }
 
     public static ShippingMethodExpansionModel<ShippingMethod> of() {
