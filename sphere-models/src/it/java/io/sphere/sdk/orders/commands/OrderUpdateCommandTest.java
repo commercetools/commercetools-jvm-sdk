@@ -3,6 +3,7 @@ package io.sphere.sdk.orders.commands;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
 import io.sphere.sdk.orders.queries.OrderByIdFetch;
@@ -13,10 +14,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.orders.OrderFixtures.*;
@@ -210,6 +208,11 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 final Set<ItemState> itemStates = asSet(ItemState.of(nextState, 1), ItemState.of(initialState, lineItem.getQuantity() - 1));
                 final Order updatedOrder = execute(OrderUpdateCommand.of(order, ImportLineItemState.of(lineItem, itemStates)));
                 assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
+
+                //reference expansion
+                final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.lineItems().state())).get();
+                final Reference<State> state = new LinkedList<>(loadedOrder.getLineItems().get(0).getState()).getFirst().getState();
+                assertThat(state.getObj()).isPresent();
             })
         );
     }
