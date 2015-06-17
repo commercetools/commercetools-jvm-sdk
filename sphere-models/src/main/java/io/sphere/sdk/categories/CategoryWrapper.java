@@ -76,11 +76,6 @@ public abstract class CategoryWrapper implements Category {
     }
 
     @Override
-    public List<Category> getPathInTree() {
-        return delegate.getPathInTree();
-    }
-
-    @Override
     public String toString() {
         return Category.toString(this);
     }

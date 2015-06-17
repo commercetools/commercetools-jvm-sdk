@@ -101,11 +101,6 @@ final class CategoryTreeFactory {
                 }
 
                 @Override
-                public List<Category> getPathInTree() {
-                    return pathInTreeForCategory;
-                }
-
-                @Override
                 public Optional<Reference<Category>> getParent() {
                     return parentForCategory;
                 }

@@ -22,7 +22,6 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
     private Optional<String> orderHint = Optional.empty();
     private Optional<String> externalId = Optional.empty();
     private List<Category> children = Collections.emptyList();
-    private List<Category> pathInTree = Collections.emptyList();
     private Optional<LocalizedStrings> metaTitle = Optional.empty();
     private Optional<LocalizedStrings> metaDescription = Optional.empty();
     private Optional<LocalizedStrings> metaKeywords = Optional.empty();
@@ -37,8 +36,7 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
                 lastModifiedAt(category.getLastModifiedAt()).
                 name(category.getName()).slug(category.getSlug()).description(category.getDescription()).
                 ancestors(category.getAncestors()).parent(category.getParent()).
-                orderHint(category.getOrderHint()).externalId(category.getExternalId()).children(category.getChildren()).
-                pathInTree(category.getPathInTree());
+                orderHint(category.getOrderHint()).externalId(category.getExternalId()).children(category.getChildren());
     }
 
     private CategoryBuilder(final String id, final LocalizedStrings name, final LocalizedStrings slug) {
@@ -105,11 +103,6 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
         return this;
     }
 
-    public CategoryBuilder pathInTree(final List<Category> pathInTree) {
-        this.pathInTree = pathInTree;
-        return this;
-    }
-
     public CategoryBuilder metaTitle(final Optional<LocalizedStrings> metaTitle) {
         this.metaTitle = metaTitle;
         return getThis();
@@ -139,7 +132,7 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
 
     @Override
     public Category build() {
-        return new CategoryImpl(id, version, createdAt, lastModifiedAt, name, slug, description, ancestors, parent, orderHint, externalId, children, pathInTree, metaTitle, metaDescription, metaKeywords);
+        return new CategoryImpl(id, version, createdAt, lastModifiedAt, name, slug, description, ancestors, parent, orderHint, externalId, children, metaTitle, metaDescription, metaKeywords);
     }
 
     @Override

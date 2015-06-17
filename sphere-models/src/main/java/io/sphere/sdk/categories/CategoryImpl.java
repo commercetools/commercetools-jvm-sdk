@@ -22,7 +22,6 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     private final Optional<String> externalId;
     @JsonIgnore
     private final List<Category> children;
-    private final List<Category> pathInTree;
     private final Optional<LocalizedStrings> metaTitle;
     private final Optional<LocalizedStrings> metaDescription;
     private final Optional<LocalizedStrings> metaKeywords;
@@ -39,7 +38,7 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
                  final Optional<Reference<Category>> parent,
                  final Optional<String> orderHint, final Optional<String> externalId,
                  final List<Category> children,
-                 final List<Category> pathInTree, final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords) {
+                 final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.slug = slug;
@@ -52,7 +51,6 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
         this.metaTitle = metaTitle;
         this.metaDescription = metaDescription;
         this.metaKeywords = metaKeywords;
-        this.pathInTree = pathInTree != null ? pathInTree : Collections.<Category>emptyList();
     }
 
     @Override
@@ -88,11 +86,6 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     @Override
     public List<Category> getChildren() {
         return children;
-    }
-
-    @Override
-    public List<Category> getPathInTree() {
-        return pathInTree;
     }
 
     @Override
