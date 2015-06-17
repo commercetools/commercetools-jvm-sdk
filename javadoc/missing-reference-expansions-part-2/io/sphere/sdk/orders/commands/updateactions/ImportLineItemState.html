@@ -129,6 +129,11 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
         final Set&lt;ItemState&gt; itemStates = asSet(ItemState.of(nextState, 1), ItemState.of(initialState, lineItem.getQuantity() - 1));
         final Order updatedOrder = execute(OrderUpdateCommand.of(order, ImportLineItemState.of(lineItem, itemStates)));
         assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
+
+        //reference expansion
+        final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -&gt; m.lineItems().state())).get();
+        final Reference&lt;State&gt; state = new LinkedList&lt;&gt;(loadedOrder.getLineItems().get(0).getState()).getFirst().getState();
+        assertThat(state.getObj()).isPresent();
     })
 );
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
