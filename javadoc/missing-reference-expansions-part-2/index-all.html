@@ -8366,6 +8366,11 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
         final State updatedStateB = execute(command);
         assertThat(updatedStateB.getTransitions()).contains(transitions);
 
+        //check reference expansion
+        final State loadedStateB = execute(StateByIdFetch.of(stateB).withExpansionPaths(m -&gt; m.transitions())).get();
+        final Reference&lt;State&gt; stateReference = new LinkedList&lt;&gt;(loadedStateB.getTransitions().get()).getFirst();
+        assertThat(stateReference.getObj()).isPresent();
+
         final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));
         assertThat(updatedStateBWithoutTransitions.getTransitions()).isEmpty();
 
@@ -9144,6 +9149,8 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 );
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/expansion/StateExpansionModel.html#transitions--">transitions()</a></span> - Method in class io.sphere.sdk.states.expansion.<a href="io/sphere/sdk/states/expansion/StateExpansionModel.html" title="class in io.sphere.sdk.states.expansion">StateExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateBuilder.html#transitions-java.util.Optional-">transitions(Optional&lt;Set&lt;Reference&lt;State&gt;&gt;&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateBuilder.html" title="class in io.sphere.sdk.states">StateBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateBuilder.html#transitions-java.util.Set-">transitions(Set&lt;Reference&lt;State&gt;&gt;)</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateBuilder.html" title="class in io.sphere.sdk.states">StateBuilder</a></dt>

@@ -127,6 +127,11 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
         final State updatedStateB = execute(command);
         assertThat(updatedStateB.getTransitions()).contains(transitions);
 
+        //check reference expansion
+        final State loadedStateB = execute(StateByIdFetch.of(stateB).withExpansionPaths(m -&gt; m.transitions())).get();
+        final Reference&lt;State&gt; stateReference = new LinkedList&lt;&gt;(loadedStateB.getTransitions().get()).getFirst();
+        assertThat(stateReference.getObj()).isPresent();
+
         final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));
         assertThat(updatedStateBWithoutTransitions.getTransitions()).isEmpty();
 
