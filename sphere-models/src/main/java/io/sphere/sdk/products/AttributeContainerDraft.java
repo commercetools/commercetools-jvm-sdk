@@ -8,7 +8,10 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
-public class AttributeContainerDraft {
+public final class AttributeContainerDraft {
+    private AttributeContainerDraft() {
+    }
+
     public static AttributeContainer of(final AttributeDraft ... attributeDrafts) {
         return of(asList(attributeDrafts));
     }
