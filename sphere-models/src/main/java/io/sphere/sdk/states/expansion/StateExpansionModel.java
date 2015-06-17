@@ -1,4 +1,4 @@
-package io.sphere.sdk.states.queries.expansion;
+package io.sphere.sdk.states.expansion;
 
 import io.sphere.sdk.queries.ExpansionModel;
 import io.sphere.sdk.states.State;
