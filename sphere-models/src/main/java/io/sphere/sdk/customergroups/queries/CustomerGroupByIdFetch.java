@@ -3,7 +3,7 @@ package io.sphere.sdk.customergroups.queries;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelFetchDsl;
 
 import java.util.List;

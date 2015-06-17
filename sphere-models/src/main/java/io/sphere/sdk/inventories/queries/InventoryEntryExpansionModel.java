@@ -1,8 +1,8 @@
 package io.sphere.sdk.inventories.queries;
 
 import io.sphere.sdk.inventories.InventoryEntry;
-import io.sphere.sdk.queries.ExpansionModel;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPath;
 
 public class InventoryEntryExpansionModel<T> extends ExpansionModel<T> {
 

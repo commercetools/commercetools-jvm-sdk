@@ -1,6 +1,6 @@
 package io.sphere.sdk.reviews.expansion;
 
-import io.sphere.sdk.queries.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.reviews.Review;
 
 import java.util.Optional;

@@ -2,6 +2,7 @@ package io.sphere.sdk.meta;
 
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;

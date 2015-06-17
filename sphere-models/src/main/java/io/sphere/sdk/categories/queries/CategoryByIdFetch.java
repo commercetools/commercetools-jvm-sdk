@@ -3,7 +3,7 @@ package io.sphere.sdk.categories.queries;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelFetchDsl;
 
 import java.util.List;

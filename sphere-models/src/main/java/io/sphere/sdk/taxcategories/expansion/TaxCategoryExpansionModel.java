@@ -1,6 +1,6 @@
 package io.sphere.sdk.taxcategories.expansion;
 
-import io.sphere.sdk.queries.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import java.util.Optional;

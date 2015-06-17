@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
-import io.sphere.sdk.queries.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModel;
 
 import java.util.Optional;
 

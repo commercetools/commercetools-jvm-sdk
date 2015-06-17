@@ -1,6 +1,6 @@
 package io.sphere.sdk.zones.expansion;
 
-import io.sphere.sdk.queries.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.zones.Zone;
 
 import java.util.Optional;

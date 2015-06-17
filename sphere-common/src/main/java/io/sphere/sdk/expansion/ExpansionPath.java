@@ -1,7 +1,9 @@
-package io.sphere.sdk.queries;
+package io.sphere.sdk.expansion;
 
 /**
  * An entry for reference expansion.
+ *
+ * Equality for instances should only depend on the complete generates expansion path as String.
  */
 public interface ExpansionPath<I> {
 

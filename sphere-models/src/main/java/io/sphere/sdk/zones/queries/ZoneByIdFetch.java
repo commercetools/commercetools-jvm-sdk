@@ -1,7 +1,7 @@
 package io.sphere.sdk.zones.queries;
 
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelFetchDsl;
 import io.sphere.sdk.zones.Zone;
 import io.sphere.sdk.zones.expansion.ZoneExpansionModel;

@@ -1,4 +1,4 @@
-package io.sphere.sdk.queries;
+package io.sphere.sdk.expansion;
 
 import io.sphere.sdk.annotations.Internal;
 

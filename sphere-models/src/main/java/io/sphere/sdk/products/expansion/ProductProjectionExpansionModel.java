@@ -2,8 +2,8 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.queries.ExpansionModel;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPath;
 
 public final class ProductProjectionExpansionModel<T> extends ExpansionModel<T> {
 

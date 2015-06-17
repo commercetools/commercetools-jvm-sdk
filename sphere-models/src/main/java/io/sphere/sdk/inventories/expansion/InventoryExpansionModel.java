@@ -1,7 +1,7 @@
 package io.sphere.sdk.inventories.expansion;
 
 import io.sphere.sdk.inventories.InventoryEntry;
-import io.sphere.sdk.queries.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModel;
 
 import java.util.Optional;
 

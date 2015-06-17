@@ -1,7 +1,7 @@
 package io.sphere.sdk.orders.expansion;
 
-import io.sphere.sdk.queries.ExpansionModel;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPath;
 
 import java.util.Optional;
 
