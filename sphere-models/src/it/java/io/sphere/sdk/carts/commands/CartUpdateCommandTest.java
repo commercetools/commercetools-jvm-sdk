@@ -1,17 +1,10 @@
 package io.sphere.sdk.carts.commands;
 
-import io.sphere.sdk.cartdiscounts.*;
-import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
-import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.CartByIdFetch;
-import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.discountcodes.DiscountCode;
-import io.sphere.sdk.discountcodes.DiscountCodeDraft;
 import io.sphere.sdk.discountcodes.DiscountCodeReference;
-import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand;
-import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -26,19 +19,16 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
-import java.time.ZonedDateTime;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
-import static io.sphere.sdk.customers.CustomerFixtures.withCustomerAndCart;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.*;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
@@ -282,23 +272,6 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(updatedCart.getDiscountCodes()).isEmpty();
 
             return updatedCart;
-        });
-    }
-
-    private void withCartAndDiscountCode(final TestClient client, final BiFunction<Cart, DiscountCode, Cart> user) {
-        withCustomerAndCart(client(), (customer, cart) -> {
-            final CartDiscountDraft draft = CartDiscountFixtures.newCartDiscountDraftBuilder()
-                    .cartPredicate(CartPredicate.of(format("customer.id = \"%s\"", customer.getId())))
-                    .isActive(true)
-                    .validFrom(Optional.<ZonedDateTime>empty())
-                    .validUntil(Optional.<ZonedDateTime>empty())
-                    .build();
-            final CartDiscount cartDiscount = client.execute(CartDiscountCreateCommand.of(draft));
-            final DiscountCode discountCode = client.execute(DiscountCodeCreateCommand.of(DiscountCodeDraft.of(randomKey(), cartDiscount)));
-            final Cart updatedCart = user.apply(cart, discountCode);
-            client.execute(CartDeleteCommand.of(updatedCart));
-            client.execute(DiscountCodeDeleteCommand.of(discountCode));
-            client.execute(CartDiscountDeleteCommand.of(cartDiscount));
         });
     }
 }

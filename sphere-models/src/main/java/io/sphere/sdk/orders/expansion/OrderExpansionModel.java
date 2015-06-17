@@ -1,8 +1,7 @@
 package io.sphere.sdk.orders.expansion;
 
+import io.sphere.sdk.carts.expansion.CartLikeExpansionModel;
 import io.sphere.sdk.orders.Order;
-import io.sphere.sdk.queries.ExpansionModel;
-import io.sphere.sdk.queries.ExpansionPath;
 
 import java.util.Optional;
 
@@ -11,9 +10,9 @@ import java.util.Optional;
 
  @param <T> the type for which the expansion path is
  */
-public class OrderExpansionModel<T> extends ExpansionModel<T> {
+public class OrderExpansionModel<T> extends CartLikeExpansionModel<T> {
     public OrderExpansionModel(final Optional<String> parentPath, final String path) {
-        super(parentPath, Optional.of(path));
+        super(parentPath, path);
     }
 
     OrderExpansionModel() {
@@ -22,9 +21,5 @@ public class OrderExpansionModel<T> extends ExpansionModel<T> {
 
     public static OrderExpansionModel<Order> of() {
         return new OrderExpansionModel<>();
-    }
-
-    public ExpansionPath<T> customerGroup() {
-        return pathWithRoots("customerGroup");
     }
 }
