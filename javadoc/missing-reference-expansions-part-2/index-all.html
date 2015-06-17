@@ -257,6 +257,14 @@
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
         assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
+        //check reference expansion
+        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+                        .plusExpansionPaths(m -&gt; m.zoneRates().zone())
+        ).get();
+        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+        assertThat(loadedShippingMethod.getZones().get(0).getObj())
+                .overridingErrorMessage("the convenience method also has expanded references").isPresent();
+
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
@@ -300,6 +308,14 @@
         final ShippingMethod shippingMethodWithShippingRate =
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
         assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
+
+        //check reference expansion
+        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+                        .plusExpansionPaths(m -&gt; m.zoneRates().zone())
+        ).get();
+        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+        assertThat(loadedShippingMethod.getZones().get(0).getObj())
+                .overridingErrorMessage("the convenience method also has expanded references").isPresent();
 
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
@@ -7733,6 +7749,14 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
         assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
+        //check reference expansion
+        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+                        .plusExpansionPaths(m -&gt; m.zoneRates().zone())
+        ).get();
+        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+        assertThat(loadedShippingMethod.getZones().get(0).getObj())
+                .overridingErrorMessage("the convenience method also has expanded references").isPresent();
+
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
@@ -7772,6 +7796,14 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
         final ShippingMethod shippingMethodWithShippingRate =
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
         assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
+
+        //check reference expansion
+        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+                        .plusExpansionPaths(m -&gt; m.zoneRates().zone())
+        ).get();
+        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+        assertThat(loadedShippingMethod.getZones().get(0).getObj())
+                .overridingErrorMessage("the convenience method also has expanded references").isPresent();
 
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
@@ -10156,6 +10188,8 @@ the order they are declared.</div>
 </a>
 <h2 class="title">Z</h2>
 <dl>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html#zone--">zone()</a></span> - Method in class io.sphere.sdk.shippingmethods.expansion.<a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ZoneRateExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ZoneRateCollectionQueryModel.html#zone--">zone()</a></span> - Method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ZoneRateCollectionQueryModel.html" title="class in io.sphere.sdk.shippingmethods.queries">ZoneRateCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones"><span class="typeNameLink">Zone</span></a> - Interface in <a href="io/sphere/sdk/zones/package-summary.html">io.sphere.sdk.zones</a></dt>
@@ -10190,7 +10224,17 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/shippingmethods/queries/ZoneRateCollectionQueryModel.html" title="class in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ZoneRateCollectionQueryModel</span></a>&lt;<a href="io/sphere/sdk/shippingmethods/queries/ZoneRateCollectionQueryModel.html" title="type parameter in ZoneRateCollectionQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/shippingmethods/queries/package-summary.html">io.sphere.sdk.shippingmethods.queries</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion"><span class="typeNameLink">ZoneRateExpansionModel</span></a>&lt;<a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="type parameter in ZoneRateExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/shippingmethods/expansion/package-summary.html">io.sphere.sdk.shippingmethods.expansion</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html#zoneRates--">zoneRates()</a></span> - Method in class io.sphere.sdk.shippingmethods.expansion.<a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ShippingMethodExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html#zoneRates-int-">zoneRates(int)</a></span> - Method in class io.sphere.sdk.shippingmethods.expansion.<a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ShippingMethodExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQueryModel.html#zoneRates--">zoneRates()</a></span> - Method in class io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQueryModel.html" title="class in io.sphere.sdk.shippingmethods.queries">ShippingMethodQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html#zones--">zones()</a></span> - Method in class io.sphere.sdk.shippingmethods.expansion.<a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ShippingMethodExpansionModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html#zones-int-">zones(int)</a></span> - Method in class io.sphere.sdk.shippingmethods.expansion.<a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ShippingMethodExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/zones/commands/ZoneUpdateCommand.html" title="class in io.sphere.sdk.zones.commands"><span class="typeNameLink">ZoneUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/zones/commands/package-summary.html">io.sphere.sdk.zones.commands</a></dt>
 <dd>

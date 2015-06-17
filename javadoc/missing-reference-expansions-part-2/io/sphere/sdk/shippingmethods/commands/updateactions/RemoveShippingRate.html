@@ -139,6 +139,14 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
         assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
+        //check reference expansion
+        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+                        .plusExpansionPaths(m -&gt; m.zoneRates().zone())
+        ).get();
+        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+        assertThat(loadedShippingMethod.getZones().get(0).getObj())
+                .overridingErrorMessage("the convenience method also has expanded references").isPresent();
+
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
                 execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
