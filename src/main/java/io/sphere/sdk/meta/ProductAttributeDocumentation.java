@@ -165,6 +165,11 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  </table>
 
  <h3 id="nested-attributes">Nested attributes (experimental)</h3>
+
+ <p>This feature is experimental.</p>
+ <p>An example:</p>
+
+ {@include.example io.sphere.sdk.producttypes.NestedAttributeIntegrationTest}
  */
 public class ProductAttributeDocumentation {
     private ProductAttributeDocumentation() {
