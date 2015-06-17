@@ -39,8 +39,6 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug, Met
 
     Optional<String> getExternalId();
 
-    List<Category> getChildren();
-
     @Override
     Optional<LocalizedStrings> getMetaTitle();
 
@@ -85,7 +83,6 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug, Met
                 .append("ancestors", join(category.getAncestors()))
                 .append("parent", category.getParent())
                 .append("orderHint", category.getOrderHint())
-                .append("children", category.getChildren())
                 .toString();
     }
 }

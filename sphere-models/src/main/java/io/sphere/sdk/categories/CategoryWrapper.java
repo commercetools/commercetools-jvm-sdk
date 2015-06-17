@@ -2,12 +2,14 @@ package io.sphere.sdk.categories;
 
 import java.time.ZonedDateTime;
 import java.util.Optional;
+
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
 import java.util.List;
 
-public abstract class CategoryWrapper implements Category {
+abstract class CategoryWrapper extends Base implements Category {
     final Category delegate;
 
     public CategoryWrapper(Category delegate) {
@@ -68,11 +70,6 @@ public abstract class CategoryWrapper implements Category {
     @Override
     public Optional<String> getExternalId() {
         return delegate.getExternalId();
-    }
-
-    @Override
-    public List<Category> getChildren() {
-        return delegate.getChildren();
     }
 
     @Override

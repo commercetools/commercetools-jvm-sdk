@@ -1,5 +1,7 @@
 package io.sphere.sdk.categories;
 
+import io.sphere.sdk.models.Identifiable;
+
 import java.util.*;
 
 import static java.util.Objects.requireNonNull;
@@ -36,14 +38,21 @@ public interface CategoryTree {
     List<Category> getAllAsFlatList();
 
     /**
+     * return the children for category. If there are no children or category is not in this {@link CategoryTree} then the list is empty.
+     * @param category
+     * @return list of children or empty list
+     */
+    List<Category> findByParent(final Identifiable<Category> category);
+
+    /**
      * Creates a category tree from a flat list of categories.
      *
-     * @param allCategoriesAsFlatListWithoutChildrenSettings all categories as flat list, {@code element.getChildren()} must result in an empty list.
+     * @param allCategoriesAsFlatList all categories as flat list.
      * @return the created category tree.
      */
-    static CategoryTree of(final List<Category> allCategoriesAsFlatListWithoutChildrenSettings) {
-        requireNonNull(allCategoriesAsFlatListWithoutChildrenSettings);
-        return CategoryTreeFactory.create(allCategoriesAsFlatListWithoutChildrenSettings);
+    static CategoryTree of(final List<Category> allCategoriesAsFlatList) {
+        requireNonNull(allCategoriesAsFlatList);
+        return CategoryTreeFactory.of().create(allCategoriesAsFlatList);
     }
 }
 

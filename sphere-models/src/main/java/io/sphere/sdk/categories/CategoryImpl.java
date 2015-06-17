@@ -20,8 +20,6 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     private final Optional<Reference<Category>> parent;
     private final Optional<String> orderHint;
     private final Optional<String> externalId;
-    @JsonIgnore
-    private final List<Category> children;
     private final Optional<LocalizedStrings> metaTitle;
     private final Optional<LocalizedStrings> metaDescription;
     private final Optional<LocalizedStrings> metaKeywords;
@@ -37,7 +35,6 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
                  final List<Reference<Category>> ancestors,
                  final Optional<Reference<Category>> parent,
                  final Optional<String> orderHint, final Optional<String> externalId,
-                 final List<Category> children,
                  final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
@@ -47,7 +44,6 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
         this.parent = parent;
         this.orderHint = orderHint;
         this.externalId = externalId;
-        this.children = Optional.ofNullable(children).orElse(Collections.emptyList());
         this.metaTitle = metaTitle;
         this.metaDescription = metaDescription;
         this.metaKeywords = metaKeywords;
@@ -81,11 +77,6 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     @Override
     public Optional<String> getOrderHint() {
         return orderHint;
-    }
-
-    @Override
-    public List<Category> getChildren() {
-        return children;
     }
 
     @Override
