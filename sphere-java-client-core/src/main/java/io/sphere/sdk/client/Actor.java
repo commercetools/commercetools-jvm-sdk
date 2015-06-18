@@ -18,7 +18,7 @@ abstract class Actor extends AutoCloseableService {
     @Override
     protected void internalClose() {
         closeThisActor();
-        executor.shutdown();
+        executor.shutdownNow();
     }
 
     protected final ReceiveBuilder receiveBuilder(final Object message) {
