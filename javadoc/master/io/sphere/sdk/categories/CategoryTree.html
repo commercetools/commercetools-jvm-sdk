@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":17};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/categories/CategoryWrapper.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/categories/CategoryTree.html" target="_top">Frames</a></li>
@@ -127,27 +127,33 @@ var activeTableTab = "activeTableTab";
 </td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#findByParent-io.sphere.sdk.models.Identifiable-">findByParent</a></span>(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;category)</code>
+<div class="block">return the children for category.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#findBySlug-java.util.Locale-java.lang.String-">findBySlug</a></span>(java.util.Locale&nbsp;locale,
           java.lang.String&nbsp;slug)</code>
 <div class="block">Finds a category by the slug and a specific locale.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#getAllAsFlatList--">getAllAsFlatList</a></span>()</code>
 <div class="block">All categories as a flat list.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#getRoots--">getRoots</a></span>()</code>
 <div class="block">Root categories (the ones that have no parent).</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories">CategoryTree</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#of-java.util.List-">of</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;allCategoriesAsFlatListWithoutChildrenSettings)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#of-java.util.List-">of</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;allCategoriesAsFlatList)</code>
 <div class="block">Creates a category tree from a flat list of categories.</div>
 </td>
 </tr>
@@ -228,17 +234,33 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
+<a name="findByParent-io.sphere.sdk.models.Identifiable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>findByParent</h4>
+<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;findByParent(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;category)</pre>
+<div class="block">return the children for category. If there are no children or category is not in this <a href="../../../../io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories"><code>CategoryTree</code></a> then the list is empty.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>category</code> - </dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>list of children or empty list</dd>
+</dl>
+</li>
+</ul>
 <a name="of-java.util.List-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
-<pre>static&nbsp;<a href="../../../../io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories">CategoryTree</a>&nbsp;of(java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;allCategoriesAsFlatListWithoutChildrenSettings)</pre>
+<pre>static&nbsp;<a href="../../../../io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories">CategoryTree</a>&nbsp;of(java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;allCategoriesAsFlatList)</pre>
 <div class="block">Creates a category tree from a flat list of categories.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>allCategoriesAsFlatListWithoutChildrenSettings</code> - all categories as flat list, <code>element.getChildren()</code> must result in an empty list.</dd>
+<dd><code>allCategoriesAsFlatList</code> - all categories as flat list.</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the created category tree.</dd>
 </dl>
@@ -272,7 +294,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/categories/CategoryWrapper.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/categories/CategoryTree.html" target="_top">Frames</a></li>
