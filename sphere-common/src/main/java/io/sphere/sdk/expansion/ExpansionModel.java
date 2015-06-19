@@ -1,4 +1,4 @@
-package io.sphere.sdk.queries;
+package io.sphere.sdk.expansion;
 
 import io.sphere.sdk.annotations.Internal;
 
@@ -33,7 +33,7 @@ public class ExpansionModel<T> extends ExpansionPathBase<T> {
         return buildPathExpression();
     }
 
-    protected ExpansionPath<T> pathWithRoots(final String path) {
+    protected ExpansionPath<T> expansionPath(final String path) {
         return new ExpansionModel<>(buildPathExpression(), path);
     }
 

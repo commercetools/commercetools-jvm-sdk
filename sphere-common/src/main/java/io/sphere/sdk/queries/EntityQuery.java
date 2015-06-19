@@ -1,5 +1,7 @@
 package io.sphere.sdk.queries;
 
+import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.ReferenceExpandeable;
 import io.sphere.sdk.http.HttpQueryParameter;
 
 import java.util.Optional;

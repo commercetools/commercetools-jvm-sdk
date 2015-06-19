@@ -2,8 +2,8 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.queries.ExpansionModel;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPath;
 
 public final class ProductProjectionExpansionModel<T> extends ExpansionModel<T> {
 
@@ -11,11 +11,11 @@ public final class ProductProjectionExpansionModel<T> extends ExpansionModel<T> 
     }
 
     public ExpansionPath<T> productType() {
-        return pathWithRoots("productType");
+        return expansionPath("productType");
     }
 
     public ExpansionPath<T> taxCategory() {
-        return pathWithRoots("taxCategory");
+        return expansionPath("taxCategory");
     }
 
     public CategoryExpansionModel<ProductProjection> categories(final int index) {

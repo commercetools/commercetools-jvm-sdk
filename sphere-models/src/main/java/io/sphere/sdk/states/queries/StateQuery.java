@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.states.State;
-import io.sphere.sdk.states.queries.expansion.StateExpansionModel;
+import io.sphere.sdk.states.expansion.StateExpansionModel;
 
 public interface StateQuery extends MetaModelQueryDsl<State, StateQuery, StateQueryModel, StateExpansionModel<State>> {
     static StateQuery of() {

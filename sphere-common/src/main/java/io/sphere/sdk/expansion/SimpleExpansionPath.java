@@ -1,4 +1,4 @@
-package io.sphere.sdk.queries;
+package io.sphere.sdk.expansion;
 
 final class SimpleExpansionPath<T> extends ExpansionPathBase<T> {
 

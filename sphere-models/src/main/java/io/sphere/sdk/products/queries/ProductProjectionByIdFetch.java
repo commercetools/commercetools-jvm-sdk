@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelFetchDsl;
 
 import java.util.List;

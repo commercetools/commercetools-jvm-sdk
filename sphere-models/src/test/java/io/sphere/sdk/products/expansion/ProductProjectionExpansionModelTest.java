@@ -3,7 +3,7 @@ package io.sphere.sdk.products.expansion;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.queries.ProductProjectionByIdFetch;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPath;
 import org.junit.Test;
 
 import static io.sphere.sdk.utils.ListUtils.listOf;

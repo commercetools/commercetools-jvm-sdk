@@ -4,7 +4,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;

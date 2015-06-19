@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.client.SphereRequestBase;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;

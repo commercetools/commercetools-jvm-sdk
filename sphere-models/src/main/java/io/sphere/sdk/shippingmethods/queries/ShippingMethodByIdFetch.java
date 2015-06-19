@@ -1,7 +1,7 @@
 package io.sphere.sdk.shippingmethods.queries;
 
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelFetchDsl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;

@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.expansion;
 
-import io.sphere.sdk.queries.ExpansionModel;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPath;
 
 import java.util.Optional;
 
@@ -15,7 +15,7 @@ public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
      * @return expansion path
      */
     public ExpansionPath<T> value() {
-        return pathWithRoots("value");
+        return expansionPath("value");
     }
 
     /**
@@ -23,6 +23,6 @@ public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
      * @return expansion path
      */
     public ExpansionPath<T> valueSet() {
-        return pathWithRoots("value[*]");
+        return expansionPath("value[*]");
     }
 }

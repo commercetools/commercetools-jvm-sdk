@@ -1,5 +1,7 @@
 package io.sphere.sdk.queries;
 
+import io.sphere.sdk.expansion.ExpansionPath;
+
 import java.util.function.Function;
 
 public interface MetaModelExpansionDsl<T, C, E> {

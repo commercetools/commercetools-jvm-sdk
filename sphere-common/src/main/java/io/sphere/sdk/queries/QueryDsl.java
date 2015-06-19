@@ -1,5 +1,6 @@
 package io.sphere.sdk.queries;
 
+import io.sphere.sdk.expansion.ReferenceExpandeableDsl;
 import io.sphere.sdk.http.HttpQueryParameter;
 
 import java.util.List;

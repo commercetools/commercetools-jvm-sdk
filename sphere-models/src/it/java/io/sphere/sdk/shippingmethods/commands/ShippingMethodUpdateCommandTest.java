@@ -7,6 +7,7 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shippingmethods.ZoneRate;
 import io.sphere.sdk.shippingmethods.commands.updateactions.*;
+import io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdFetch;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQuery;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -105,6 +106,14 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
                 final ShippingMethod shippingMethodWithShippingRate =
                         execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
                 assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
+
+                //check reference expansion
+                final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+                                .plusExpansionPaths(m -> m.zoneRates().zone())
+                ).get();
+                assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+                assertThat(loadedShippingMethod.getZones().get(0).getObj())
+                        .overridingErrorMessage("the convenience method also has expanded references").isPresent();
 
                 //removeShippingRate
                 final ShippingMethod shippingMethodWithoutShippingRate =

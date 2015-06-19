@@ -1,7 +1,7 @@
 package io.sphere.sdk.discountcodes.expansion;
 
 import io.sphere.sdk.discountcodes.DiscountCode;
-import io.sphere.sdk.queries.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionModel;
 
 import java.util.Optional;
 

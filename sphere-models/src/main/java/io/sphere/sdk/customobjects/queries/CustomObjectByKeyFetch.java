@@ -3,7 +3,7 @@ package io.sphere.sdk.customobjects.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.customobjects.CustomObject;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelFetchDsl;
 
 import java.util.List;

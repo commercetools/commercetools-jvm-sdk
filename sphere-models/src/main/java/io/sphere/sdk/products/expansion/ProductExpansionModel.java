@@ -1,8 +1,8 @@
 package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.queries.ExpansionModel;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPath;
 
 import java.util.Optional;
 
@@ -11,11 +11,11 @@ public class ProductExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public ExpansionPath<T> productType() {
-        return pathWithRoots("productType");
+        return expansionPath("productType");
     }
 
     public ExpansionPath<T> taxCategory() {
-        return pathWithRoots("taxCategory");
+        return expansionPath("taxCategory");
     }
 
     public ProductCatalogExpansionModel<T> masterData() {

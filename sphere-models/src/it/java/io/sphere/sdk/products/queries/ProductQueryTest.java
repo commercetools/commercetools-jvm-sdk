@@ -6,7 +6,7 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.VariantIdentifier;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;

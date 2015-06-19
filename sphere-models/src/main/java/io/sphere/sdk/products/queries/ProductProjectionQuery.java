@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductProjection;

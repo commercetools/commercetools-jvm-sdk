@@ -7,9 +7,11 @@ import io.sphere.sdk.states.commands.updateactions.ChangeInitial;
 import io.sphere.sdk.states.commands.updateactions.ChangeKey;
 import io.sphere.sdk.states.commands.updateactions.SetName;
 import io.sphere.sdk.states.commands.updateactions.SetTransitions;
+import io.sphere.sdk.states.queries.StateByIdFetch;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.Set;
 
@@ -64,6 +66,11 @@ public class StateUpdateCommandTest extends IntegrationTest {
                 final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(transitions));
                 final State updatedStateB = execute(command);
                 assertThat(updatedStateB.getTransitions()).contains(transitions);
+
+                //check reference expansion
+                final State loadedStateB = execute(StateByIdFetch.of(stateB).withExpansionPaths(m -> m.transitions())).get();
+                final Reference<State> stateReference = new LinkedList<>(loadedStateB.getTransitions().get()).getFirst();
+                assertThat(stateReference.getObj()).isPresent();
 
                 final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));
                 assertThat(updatedStateBWithoutTransitions.getTransitions()).isEmpty();

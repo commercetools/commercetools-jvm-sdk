@@ -3,7 +3,7 @@ package io.sphere.sdk.cartdiscounts.queries;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.expansion.CartDiscountExpansionModel;
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.queries.ExpansionPath;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelFetchDsl;
 
 import java.util.List;
