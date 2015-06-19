@@ -42,15 +42,18 @@ public class CategoryTreeTest {
     public void createHierarchy() throws Exception {
         final List<Category> allCategories = createCategoryHierarchyAsFlatList();
         final CategoryTree tree = CategoryTree.of(allCategories);
-        assertThat(extractIdSet(tree.getAllAsFlatList())).isEqualTo(extractIdSet(allCategories));
-        assertThat(extractIdSet(tree.getRoots())).isEqualTo(new HashSet<>(rootIds));
+        assertThat(extractIdSet(tree.getAllAsFlatList()))
+                .overridingErrorMessage("all categories are present").isEqualTo(extractIdSet(allCategories));
+        assertThat(extractIdSet(tree.getRoots()))
+                .isEqualTo(new HashSet<>(rootIds));
         final List<Category> nameSortedRoots = byNameSorted(tree);
         final Category category0 = nameSortedRoots.get(0);
         assertThat(category0.getId()).isEqualTo(rootIds.get(0));
-        assertThat(category0.getChildren()).hasSize(childIds.size());
-        final List<Category> sortedChildren = category0.getChildren().stream().sorted(byNameComparator).collect(toList());
+        final List<Category> childrenOf0 = tree.findByParent(category0);
+        assertThat(childrenOf0).hasSize(childIds.size());
+        final List<Category> sortedChildren = childrenOf0.stream().sorted(byNameComparator).collect(toList());
         assertThat(sortedChildren.get(1).getId()).isEqualTo("0b");
-        final List<Category> sortedGrandChildren = sortedChildren.get(1).getChildren().stream().sorted(byNameComparator).collect(toList());
+        final List<Category> sortedGrandChildren = tree.findByParent(sortedChildren.get(1)).stream().sorted(byNameComparator).collect(toList());
         assertThat(extractIdList(sortedGrandChildren)).isEqualTo(asList("0bu", "0bv", "0bw", "0bx"));
     }
 

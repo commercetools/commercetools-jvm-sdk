@@ -10,7 +10,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.List;
 
 import static io.sphere.sdk.utils.ListUtils.join;
-import static java.util.stream.Collectors.toList;
 
 /**
  * Categories are used to organize products in a hierarchical structure.
@@ -40,10 +39,6 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug, Met
 
     Optional<String> getExternalId();
 
-    List<Category> getChildren();
-
-    List<Category> getPathInTree();
-
     @Override
     Optional<LocalizedStrings> getMetaTitle();
 
@@ -58,16 +53,16 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug, Met
         return Reference.of(typeId(), getId(), this);
     }
 
-    public static String typeId(){
+    static String typeId(){
         return "category";
     }
 
-    public static Reference<Category> reference(final String id) {
+    static Reference<Category> reference(final String id) {
         return Reference.of(typeId(), id);
     }
 
 
-    public static TypeReference<Category> typeReference() {
+    static TypeReference<Category> typeReference() {
         return new TypeReference<Category>() {
             @Override
             public String toString() {
@@ -76,20 +71,18 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug, Met
         };
     }
 
-    public static String toString(final Category category) {
-        final List<String> pathInTreeIds = category.getPathInTree().stream().map(Category::getId).collect(toList());
-        return new ToStringBuilder(category, SdkDefaults.TO_STRING_STYLE).
-                append("id", category.getId()).
-                append("version", category.getVersion()).
-                append("createdAt", category.getCreatedAt()).
-                append("lastModifiedAt", category.getLastModifiedAt()).
-                append("name", category.getName()).
-                append("slug", category.getSlug()).
-                append("description", category.getDescription()).
-                append("ancestors", join(category.getAncestors())).
-                append("parent", category.getParent()).
-                append("orderHint", category.getOrderHint()).
-                append("children", category.getChildren()).
-                append("pathInTree", join(pathInTreeIds)).toString();
+    static String toString(final Category category) {
+        return new ToStringBuilder(category, SdkDefaults.TO_STRING_STYLE)
+                .append("id", category.getId())
+                .append("version", category.getVersion())
+                .append("createdAt", category.getCreatedAt())
+                .append("lastModifiedAt", category.getLastModifiedAt())
+                .append("name", category.getName())
+                .append("slug", category.getSlug())
+                .append("description", category.getDescription())
+                .append("ancestors", join(category.getAncestors()))
+                .append("parent", category.getParent())
+                .append("orderHint", category.getOrderHint())
+                .toString();
     }
 }
