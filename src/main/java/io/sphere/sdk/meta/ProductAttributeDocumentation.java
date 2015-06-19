@@ -70,7 +70,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
  <h3 id="attribute-access-without-product-type">Reading Attributes</h3>
 
- <p>To get a value out of an attribute you need an instance of {@link AttributeAccessImpl}
+ <p>To get a value out of an attribute you need an instance of {@link AttributeAccess}
  which keeps the type info to deserialize the attribute.</p>
 
  <p>You can reuse the {@link io.sphere.sdk.attributes.NamedAttributeAccess} declaration if you want to:</p>
