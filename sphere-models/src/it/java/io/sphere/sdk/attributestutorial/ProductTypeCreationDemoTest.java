@@ -302,8 +302,11 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
     @Test
     public void showProductAttributeTable() throws Exception {
+        //this serves as whitelist which product attributes should be displayed
+        //and also in this example it provides a constant order for the attributes to be displayed
         final List<String> attrNamesToShow = asList(COLOR_ATTR_NAME, SIZE_ATTR_NAME,
                 MATCHING_PRODUCTS_ATTR_NAME, LAUNDRY_SYMBOLS_ATTR_NAME, RRP_ATTR_NAME, AVAILABLE_SINCE_ATTR_NAME);
+
         final Product product = createProduct();
         final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
                 .withPredicate(m -> m.id().is(product.getId()))
