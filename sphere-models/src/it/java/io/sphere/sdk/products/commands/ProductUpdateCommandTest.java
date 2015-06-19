@@ -1,9 +1,6 @@
 package io.sphere.sdk.products.commands;
 
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeAccess;
-import io.sphere.sdk.attributes.AttributeDraft;
-import io.sphere.sdk.attributes.NamedAttributeAccess;
+import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.*;
