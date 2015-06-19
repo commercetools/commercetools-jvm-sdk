@@ -206,53 +206,42 @@ final ProductType productType = productTypeOptional
  <a href="../../../../io/sphere/sdk/products/ProductVariantDraftBuilder.html#plusAttribute-java.lang.String-T-"><code>ProductVariantDraftBuilder.plusAttribute(java.lang.String, java.lang.Object)</code></a> which enables you to directly
  put the value of the attribute to the draft. But it cannot check if you put the right objects and types in it.
 
- <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createProduct--%s" class=code-example><pre><code class='java'>final LocalizedEnumValue green = LocalizedEnumValue.of("green",
-        LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün"));
-final LocalizedEnumValue red = LocalizedEnumValue.of("red",
-        LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot"));
-final AttributeDefinition color = AttributeDefinitionBuilder
-        .of(COLOR_ATTR_NAME, en("color"), LocalizedEnumType.of(red, green))
-        .required(true)
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createProduct--%s" class=code-example><pre><code class='java'>final Reference&lt;Product&gt; productReference = ProductFixtures.referenceableProduct(client()).toReference();
+final ProductType productType = fetchProductTypeByName();
+final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
+        .plusAttribute(COLOR_ATTR_NAME, "green")//special case: any enums are set with key (String)
+        .plusAttribute(SIZE_ATTR_NAME, "S")//special case: any enums are set with key (String)
+        .plusAttribute(LAUNDRY_SYMBOLS_ATTR_NAME,
+                asSet("cold", "tumbleDrying"))//special case: localized enums set Set of keys (String)
+        .plusAttribute(MATCHING_PRODUCTS_ATTR_NAME, asSet(productReference))
+        .plusAttribute(RRP_ATTR_NAME, MoneyImpl.of(300, EUR))
+        .plusAttribute(AVAILABLE_SINCE_ATTR_NAME, LocalDate.of(2015, 2, 2))
+        .build();
+final ProductDraft draft = ProductDraftBuilder
+        .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
         .build();
 
-final PlainEnumValue s = PlainEnumValue.of("S", "S");
-final PlainEnumValue m = PlainEnumValue.of("M", "M");
-final PlainEnumValue x = PlainEnumValue.of("X", "X");
-final AttributeDefinition size = AttributeDefinitionBuilder
-        .of(SIZE_ATTR_NAME, en("size"), EnumType.of(s, m, x))
-        .required(true)
-        .build();
+final Product product = client().execute(ProductCreateCommand.of(draft));
 
+final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
+        .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
+assertThat(masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
+        .contains(PlainEnumValue.of("S", "S"));
 final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
         LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
-final LocalizedEnumValue hot = LocalizedEnumValue.of("hot",
-        LocalizedStrings.of(ENGLISH, "Wash at or below 60°C ").plus(GERMAN, "60°C"));
 final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
         LocalizedStrings.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
-final LocalizedEnumValue noTumbleDrying = LocalizedEnumValue.of("noTumbleDrying",
-        LocalizedStrings.of(ENGLISH, "no tumble drying").plus(GERMAN, "Nicht im Trommeltrockner trocknen"));
-final SetType laundryLabelType = SetType.of(LocalizedEnumType.of(cold, hot, tumbleDrying, noTumbleDrying));
-final AttributeDefinition laundrySymbols = AttributeDefinitionBuilder
-        .of(LAUNDRY_SYMBOLS_ATTR_NAME, en("washing labels"), laundryLabelType)
-        .build();
+assertThat(masterVariant.getAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
+        .contains(asSet(cold, tumbleDrying));
+assertThat(masterVariant.getAttribute(MATCHING_PRODUCTS_ATTR_NAME, AttributeAccess.ofProductReferenceSet()))
+        .contains(asSet(productReference));
+assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
+        .contains(MoneyImpl.of(300, EUR));
+assertThat(masterVariant.getAttribute(AVAILABLE_SINCE_ATTR_NAME, AttributeAccess.ofDate()))
+        .contains(LocalDate.of(2015, 2, 2));
 
-final AttributeDefinition matchingProducts = AttributeDefinitionBuilder
-        .of(MATCHING_PRODUCTS_ATTR_NAME, en("matching products"), SetType.of(ReferenceType.ofProduct()))
-        .build();
-
-final AttributeDefinition rrp = AttributeDefinitionBuilder
-        .of(RRP_ATTR_NAME, en("recommended retail price"), MoneyType.of())
-        .build();
-
-final AttributeDefinition availableSince = AttributeDefinitionBuilder
-        .of(AVAILABLE_SINCE_ATTR_NAME, en("available since"), DateType.of())
-        .build();
-
-
-final List&lt;AttributeDefinition&gt; attributes = asList(color, size, laundrySymbols,
-        matchingProducts, rrp, availableSince);
-final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(PRODUCT_TYPE_NAME, "a 'T' shaped cloth", attributes);
-final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
+return product;
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
  A wrong value for a field or an invalid type will cause an <a href="../../../../io/sphere/sdk/client/ErrorResponseException.html" title="class in io.sphere.sdk.client"><code>ErrorResponseException</code></a>
