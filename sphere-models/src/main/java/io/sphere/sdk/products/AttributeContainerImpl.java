@@ -35,7 +35,7 @@ class AttributeContainerImpl extends Base implements AttributeContainer {
             final AttributeMapper<T> mapper = accessor.attributeMapper();
 
             try {
-                return attribute.getValue(accessor.getAttributeAccess());
+                return attribute.getValue(accessor);
             } catch (final JsonException e) {
                 throw transformError(e, attributeName, mapper);
             }

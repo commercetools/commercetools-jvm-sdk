@@ -54,12 +54,8 @@ import io.sphere.sdk.models.PlainEnumValue;
  * {@include.example io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle.TShirt}
  *
  */
-public interface NamedAttributeAccess<T> {
+public interface NamedAttributeAccess<T> extends AttributeAccess<T> {
     String getName();
-
-    AttributeAccess<T> getAttributeAccess();
-
-    AttributeMapper<T> attributeMapper();
 
     Attribute valueOf(final T input);
 

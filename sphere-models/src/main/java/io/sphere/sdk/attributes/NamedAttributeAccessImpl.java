@@ -31,7 +31,12 @@ final class NamedAttributeAccessImpl<T> extends Base implements NamedAttributeAc
     }
 
     @Override
-    public AttributeAccess<T> getAttributeAccess() {
-        return attributeAccess;
+    public boolean canHandle(final AttributeDefinition attributeDefinition) {
+        return attributeAccess.canHandle(attributeDefinition);
+    }
+
+    @Override
+    public NamedAttributeAccess<T> ofName(final String name) {
+        return attributeAccess.ofName(name);
     }
 }
