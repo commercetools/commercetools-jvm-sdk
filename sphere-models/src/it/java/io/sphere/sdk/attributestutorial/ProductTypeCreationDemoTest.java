@@ -154,14 +154,14 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     }
 
     public Product createProduct() throws Exception {
-        final Reference<Product> productReference = ProductFixtures.referenceableProduct(client()).toReference();
         final ProductType productType = fetchProductTypeByName();
+        final Reference<Product> similarProductReference = ProductFixtures.referenceableProduct(client()).toReference();
         final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
                 .plusAttribute(COLOR_ATTR_NAME, "green")//special case: any enums are set with key (String)
                 .plusAttribute(SIZE_ATTR_NAME, "S")//special case: any enums are set with key (String)
                 .plusAttribute(LAUNDRY_SYMBOLS_ATTR_NAME,
-                        asSet("cold", "tumbleDrying"))//special case: localized enums set Set of keys (String)
-                .plusAttribute(MATCHING_PRODUCTS_ATTR_NAME, asSet(productReference))
+                        asSet("cold", "tumbleDrying"))//special case: java.util.Set of any enums is set with java.util.Set of keys (String)
+                .plusAttribute(MATCHING_PRODUCTS_ATTR_NAME, asSet(similarProductReference))
                 .plusAttribute(RRP_ATTR_NAME, MoneyImpl.of(300, EUR))
                 .plusAttribute(AVAILABLE_SINCE_ATTR_NAME, LocalDate.of(2015, 2, 2))
                 .build();
@@ -173,6 +173,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
         assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
+                .overridingErrorMessage("on the get side, the while enum is delivered")
                 .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
         assertThat(masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
                 .contains(PlainEnumValue.of("S", "S"));
@@ -183,7 +184,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         assertThat(masterVariant.getAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
                 .contains(asSet(cold, tumbleDrying));
         assertThat(masterVariant.getAttribute(MATCHING_PRODUCTS_ATTR_NAME, AttributeAccess.ofProductReferenceSet()))
-                .contains(asSet(productReference));
+                .contains(asSet(similarProductReference));
         assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
                 .contains(MoneyImpl.of(300, EUR));
         assertThat(masterVariant.getAttribute(AVAILABLE_SINCE_ATTR_NAME, AttributeAccess.ofDate()))
@@ -204,7 +205,6 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final NamedAttributeAccess<MonetaryAmount> rrp = AttributeAccess.ofMoney().ofName(RRP_ATTR_NAME);
         final NamedAttributeAccess<LocalDate> availableSince = AttributeAccess.ofDate().ofName(AVAILABLE_SINCE_ATTR_NAME);
 
-        /* the rest of the example */
         final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
                 LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
         final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
@@ -220,7 +220,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                         LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")))//will extract the key
                 .plusAttribute(size, PlainEnumValue.of("S", "S"))
                 .plusAttribute(laundrySymbols, asSet(cold, tumbleDrying))//will extract the keys, so you do not need to
-                //remember the special cases, there is also no problem mixing the styles
+                        //remember the special cases, there is also no problem mixing the styles
                 .plusAttribute(matchingProducts, asSet(productReference))
 //                .plusAttribute(matchingProducts, "foobar") won't compile!
                 .plusAttribute(rrp, MoneyImpl.of(300, EUR))
@@ -246,14 +246,14 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     public void invalidTypeCausesException() throws Exception {
         final ProductType productType = fetchProductTypeByName();
         final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
-                .plusAttribute(COLOR_ATTR_NAME, 1)//1 is illegal type and illegal key
+                .plusAttribute(COLOR_ATTR_NAME, 1)//1 is of illegal type and of illegal key
                 .build();
         final ProductDraft draft = ProductDraftBuilder
                 .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
                 .build();
         assertThatThrownBy(() -> execute(ProductCreateCommand.of(draft)))
-            .isInstanceOf(ErrorResponseException.class)
-        .matches(e -> ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
+                .isInstanceOf(ErrorResponseException.class)
+                .matches(e -> ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
     }
 
     @Test
@@ -421,8 +421,8 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Product product = createProduct();
         assertThatThrownBy(() -> execute(ProductUpdateCommand.of(product,
                 SetAttribute.of(1, AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, "cold"), STAGED_AND_CURRENT))))
-        .isInstanceOf(ErrorResponseException.class)
-        .matches(e -> ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
+                .isInstanceOf(ErrorResponseException.class)
+                .matches(e -> ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
     }
 
     @Test

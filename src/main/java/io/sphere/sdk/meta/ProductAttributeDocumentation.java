@@ -7,7 +7,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  <h3 id="intro">Introduction</h3>
  <h3 id="product-type-creation">ProductType Creation</h3>
  <p>A {@link io.sphere.sdk.producttypes.ProductType} is like a schema how the product attributes are structured.</p>
- <p>{@link io.sphere.sdk.producttypes.ProductType}s contain a list of the attribute name and the corresponding type of the attribute.
+ <p>{@link io.sphere.sdk.producttypes.ProductType}s contain a list of {@link io.sphere.sdk.attributes.AttributeDefinition}s, which can be seen as the attribute name and the corresponding type of the attribute.
  In one SPHERE.IO project the name type pair is global, so if you create an attribute "foo" of type String, you cannot create
  another {@link io.sphere.sdk.producttypes.ProductType} where "foo" has another type like {@link io.sphere.sdk.models.LocalizedStrings}. If you do it anyway you get an error message like:</p>
 
@@ -16,24 +16,26 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  <p>In this scenario we provide a {@link io.sphere.sdk.producttypes.ProductType} tshirt with the following attributes:</p>
 
  <ul>
-    <li>color: {@link io.sphere.sdk.models.LocalizedEnumValue}</li>
-    <li>size: {@link io.sphere.sdk.models.PlainEnumValue}</li>
-    <li>laundrySymbols: set of {@link io.sphere.sdk.models.LocalizedEnumValue}</li>
-    <li>matchingProducts: set of product {@link io.sphere.sdk.models.Reference}s</li>
-    <li>rrp: {@link javax.money.MonetaryAmount}</li>
-    <li>availableSince: {@link java.time.LocalDateTime}</li>
+    <li>color as {@link io.sphere.sdk.models.LocalizedEnumValue} with the colors green and red and their translations in German and Englisch</li>
+    <li>size as {@link io.sphere.sdk.models.PlainEnumValue} with S, M and X</li>
+    <li>laundrySymbols as set of {@link io.sphere.sdk.models.LocalizedEnumValue} with temperature and tumble drying</li>
+    <li>matchingProducts as set of product {@link io.sphere.sdk.models.Reference}s, which can point to products which are similar to the current product</li>
+    <li>rrp as {@link javax.money.MonetaryAmount} containing the recommended retail price</li>
+    <li>availableSince as {@link java.time.LocalDateTime} which contains the date since when the product is available for the customer in the shop</li>
  </ul>
 
 
 
- <p>The possible attribute types you can find here: {@link io.sphere.sdk.attributes.AttributeType}.</p>
+ <p>The possible attribute types you can find here: {@link io.sphere.sdk.attributes.AttributeType} in "All Known Implementing Classes".</p>
 
 <p>The code for the creation of the {@link io.sphere.sdk.producttypes.ProductType}:</p>
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createProductType()}
 
+
+
  <p>{@link io.sphere.sdk.producttypes.ProductType}s have a name (String)
  which can be used as key to logically identify {@link io.sphere.sdk.producttypes.ProductType}s. Beware that the name has no unique constraint,
- so it is possible to create multiple product types with the same name which will cause confusion.
+ so it is possible to create multiple {@link io.sphere.sdk.producttypes.ProductType}s with the same name which will cause confusion.
  Before creating a product type it's better to check if it already exists:</p>
 
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#demoCheckingIfProductTypeExist()}
@@ -44,7 +46,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
  <h3 id="product-creation">Product Creation</h3>
 
- <p>To create a product you need the product type. Since the {@link io.sphere.sdk.producttypes.ProductType}
+ <p>To create a product you need to reference the product type. Since the {@link io.sphere.sdk.producttypes.ProductType}
  ID of the development system will not be the ID of the production system it is necessary to find the product type by name:</p>
 
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#fetchProductTypeByName()}
@@ -84,7 +86,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#readAttributeWithoutProductTypeWithJson()}
 
 
- <p>If the attribute is not present then the {@link java.util.Optional} will be empty:</p>
+ <p>If the attribute is not present in the {@link io.sphere.sdk.products.AttributeContainer} then the {@link java.util.Optional} will be empty:</p>
 
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#notPresentAttributeRead()}
 
