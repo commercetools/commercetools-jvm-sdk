@@ -59,7 +59,7 @@ public interface NamedAttributeAccess<T> {
 
     AttributeAccess<T> getAttributeAccess();
 
-    AttributeMapper<T> getMapper();
+    AttributeMapper<T> attributeMapper();
 
     Attribute valueOf(final T input);
 

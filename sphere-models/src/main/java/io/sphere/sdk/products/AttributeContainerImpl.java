@@ -32,7 +32,7 @@ class AttributeContainerImpl extends Base implements AttributeContainer {
                 .findFirst();
 
         return attributeOption.map(attribute -> {
-            final AttributeMapper<T> mapper = accessor.getMapper();
+            final AttributeMapper<T> mapper = accessor.attributeMapper();
 
             try {
                 return attribute.getValue(accessor.getAttributeAccess());

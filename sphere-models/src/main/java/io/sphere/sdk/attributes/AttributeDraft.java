@@ -56,7 +56,7 @@ public class AttributeDraft extends Base {
     }
 
     public static <T> AttributeDraft of(final NamedAttributeAccess<T> namedAccess, final T value) {
-        final JsonNode jsonNode = namedAccess.getMapper().serialize(value);
+        final JsonNode jsonNode = namedAccess.attributeMapper().serialize(value);
         return of(namedAccess.getName(), jsonNode);
     }
 

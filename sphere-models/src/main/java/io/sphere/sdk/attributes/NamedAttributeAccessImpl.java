@@ -16,7 +16,7 @@ final class NamedAttributeAccessImpl<T> extends Base implements NamedAttributeAc
         return name;
     }
 
-    public AttributeMapper<T> getMapper() {
+    public AttributeMapper<T> attributeMapper() {
         return attributeAccess.attributeMapper();
     }
 
