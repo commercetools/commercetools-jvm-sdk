@@ -160,10 +160,9 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
         <th></th><th>{@link io.sphere.sdk.attributes.Attribute}</th><th>{@link io.sphere.sdk.attributes.AttributeDraft}</th><th>{@link io.sphere.sdk.attributes.AttributeImportDraft}</th>
     </tr>
  <tr> <td>purpose</td>    <td>read access</td>    <td>write product, create product</td>    <td>order import</td></tr>
- <tr> <td>keeps expanded references</td>    <td>x</td>    <td></td>    <td></td></tr>
- <tr> <td>enum like as key</td>    <td></td>    <td>x</td>    <td></td></tr>
- <tr> <td>enum values only as declared in product type</td>    <td>x</td>    <td>x</td>    <td></td></tr>
- <tr> <td></td>    <td></td>    <td></td>    <td></td></tr>
+ <tr> <td>reference expansion</td>    <td>keeps expanded references</td>    <td>no expansion</td>    <td>no expansion</td></tr>
+ <tr> <td>enum shape</td>    <td>full enum</td>    <td>enum key (String)</td>    <td>full enum</td></tr>
+ <tr> <td>value constraints</td>    <td>value in product type</td>    <td>value in product type</td>    <td>free, create on the fly</td></tr>
  </table>
 
  <h3 id="nested-attributes">Nested attributes (experimental)</h3>

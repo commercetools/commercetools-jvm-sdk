@@ -1,6 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
@@ -162,7 +163,7 @@ public class ProductFixtures {
         withProduct(client, referencedProduct -> {
             final ProductType productType = productReferenceProductType(client);
             final ProductVariantDraft productVariantDraft =
-                    ProductVariantDraftBuilder.of().attributes(Attribute.of("productreference", referencedProduct.toReference())).build();
+                    ProductVariantDraftBuilder.of().attributes(AttributeDraft.of("productreference", referencedProduct.toReference())).build();
             final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("product reference name 1"), randomSlug(), productVariantDraft).build();
             final Product product = client.execute(ProductCreateCommand.of(productDraft));
             consumer.accept(product, referencedProduct);

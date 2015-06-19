@@ -9,6 +9,8 @@ import io.sphere.sdk.products.Price;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Arrays.asList;
+
 public class ProductVariantImportDraftBuilder extends Base implements Builder<ProductVariantImportDraft> {
     private final Optional<Integer> id;
     private final Optional<String> sku;
@@ -44,6 +46,10 @@ public class ProductVariantImportDraftBuilder extends Base implements Builder<Pr
 
     public ProductVariantImportDraftBuilder attributes(final List<AttributeImportDraft> attributes) {
         return attributes(Optional.of(attributes));
+    }
+
+    public ProductVariantImportDraftBuilder attributes(final AttributeImportDraft ... attributes) {
+        return attributes(asList(attributes));
     }
 
     public ProductVariantImportDraftBuilder images(final Optional<List<Image>> images) {
