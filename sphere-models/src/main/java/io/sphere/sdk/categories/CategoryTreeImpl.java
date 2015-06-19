@@ -33,22 +33,17 @@ class CategoryTreeImpl extends Base implements CategoryTree {
     }
 
     @Override
-    public Optional<Category> getById(final String id) {
+    public Optional<Category> findById(final String id) {
         return getOptional(categoriesById, id);
     }
 
     @Override
-    public Optional<Category> getBySlug(final String slug, final Locale locale) {
+    public Optional<Category> findBySlug(final Locale locale, final String slug) {
         return getOptional(categoriesByLocaleAndSlug, new LocaleSlugPair(locale, slug));
     }
 
     @Override
     public List<Category> getAllAsFlatList() {
         return allAsFlatList;
-    }
-
-    @Override
-    public void rebuildAsync() {
-
     }
 }

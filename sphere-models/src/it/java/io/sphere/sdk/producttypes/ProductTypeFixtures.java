@@ -1,5 +1,8 @@
 package io.sphere.sdk.producttypes;
 
+import io.sphere.sdk.attributes.AttributeDefinition;
+import io.sphere.sdk.attributes.AttributeDefinitionBuilder;
+import io.sphere.sdk.attributes.ReferenceType;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.queries.ProductQuery;
@@ -11,6 +14,7 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.util.Collections;
+import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
@@ -19,6 +23,8 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
 
 public final class ProductTypeFixtures {
+    private static final String productReferenceProductTypeName = "productreference";
+
     private ProductTypeFixtures() {
     }
 
@@ -60,6 +66,16 @@ public final class ProductTypeFixtures {
         } catch (Exception e) {
             getLogger("test.fixtures").debug(() -> "no product type to delete");
         }
+    }
+
+    public static ProductType productReferenceProductType(final TestClient client) {
+        final AttributeDefinition productReferenceDefinition = AttributeDefinitionBuilder
+                .of("productreference", en("suggested product"), ReferenceType.ofProduct())
+                .required(true)
+                .build();
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(productReferenceProductTypeName, "has an attribute which is reference to a product", asList(productReferenceDefinition));
+        final Optional<ProductType> productTypeOptional = client.execute(ProductTypeQuery.of().byName(productReferenceProductTypeName)).head();
+        return productTypeOptional.orElseGet(() -> client.execute(ProductTypeCreateCommand.of(productTypeDraft)));
     }
 
     public static ProductType defaultProductType(final TestClient client) {

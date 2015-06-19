@@ -2,6 +2,7 @@ package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.*;
 
 import java.util.Optional;
@@ -26,13 +27,18 @@ public class ExperimentalProductProjectionSearchModel extends ProductDataSearchM
     }
 
     @Override
+    public LocalizedStringsSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
+        return super.name();
+    }
+
+    @Override
     public ReferenceSearchModel<ProductProjection, Category> categories() {
         return super.categories();
     }
 
     @Override
-    public LocalizedStringsSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
-        return super.name();
+    public ReferenceSearchModel<ProductProjection, ProductType> productType() {
+        return super.productType();
     }
 
     @Override

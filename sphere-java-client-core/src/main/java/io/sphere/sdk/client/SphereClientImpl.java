@@ -51,7 +51,14 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
             }
             return output;
         });
-        return httpClient.execute(httpRequest).thenApply(httpResponse -> processHttpResponse(sphereRequest, objectMapper, config, httpResponse));
+        return httpClient.execute(httpRequest).thenApply(httpResponse -> {
+            try {
+                return processHttpResponse(sphereRequest, objectMapper, config, httpResponse);
+            } catch (final SphereException e) {
+                fillExceptionWithData(sphereRequest, httpResponse, e, config);
+                throw e;
+            }
+        });
     }
 
     private <T> HttpRequest createHttpRequest(final SphereRequest<T> sphereRequest, final String token) {
@@ -84,7 +91,8 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
                 result = sphereRequest.deserialize(httpResponse);
             } catch (final JsonException e) {
                 final byte[] bytes = httpResponse.getResponseBody().get();
-                throw new JsonException("Cannot parse " + bytesToString(bytes), e);
+                e.addNote("Cannot parse " + bytesToString(bytes));
+                throw e;
             }
         }
         return result;
