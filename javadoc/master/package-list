@@ -39,6 +39,7 @@ io.sphere.sdk.discountcodes.commands
 io.sphere.sdk.discountcodes.commands.updateactions
 io.sphere.sdk.discountcodes.expansion
 io.sphere.sdk.discountcodes.queries
+io.sphere.sdk.expansion
 io.sphere.sdk.http
 io.sphere.sdk.inventories
 io.sphere.sdk.inventories.commands
@@ -82,8 +83,8 @@ io.sphere.sdk.shippingmethods.queries
 io.sphere.sdk.states
 io.sphere.sdk.states.commands
 io.sphere.sdk.states.commands.updateactions
+io.sphere.sdk.states.expansion
 io.sphere.sdk.states.queries
-io.sphere.sdk.states.queries.expansion
 io.sphere.sdk.taxcategories
 io.sphere.sdk.taxcategories.commands
 io.sphere.sdk.taxcategories.expansion

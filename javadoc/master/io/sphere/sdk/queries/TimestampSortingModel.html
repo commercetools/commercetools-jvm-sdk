@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10};
+var methods = {"i0":10,"i1":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -162,6 +162,10 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/DirectionlessQuerySort.html" title="class in io.sphere.sdk.queries">DirectionlessQuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#sort--">sort</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries">QuerySortDirection</a>&nbsp;sortDirection)</code>&nbsp;</td>
 </tr>
@@ -222,13 +226,26 @@ implements <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" ti
 <a name="sort-io.sphere.sdk.queries.QuerySortDirection-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>sort</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;&nbsp;sort(<a href="../../../../io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries">QuerySortDirection</a>&nbsp;sortDirection)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="sort--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>sort</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/DirectionlessQuerySort.html" title="class in io.sphere.sdk.queries">DirectionlessQuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;&nbsp;sort()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html#sort--">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="type parameter in TimestampSortingModel">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

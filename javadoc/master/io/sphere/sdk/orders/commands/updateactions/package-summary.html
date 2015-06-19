@@ -274,14 +274,18 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-updateSyncInfo--%s" class=code-example><pre><code class='java'>withOrderExportChannel(client(), channel -&gt;
-                withOrder(client(), order -&gt; {
-                    assertThat(order.getSyncInfo()).isEmpty();
-                    final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
-                    final String externalId = "foo";
-                    final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
-                    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-                    assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
-                })
+    withOrder(client(), order -&gt; {
+        assertThat(order.getSyncInfo()).isEmpty();
+        final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
+        final String externalId = "foo";
+        final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
+        final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
+        assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
+
+        //check channel expansion
+        final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -&gt; m.syncInfo().channel())).get();
+        assertThat(new ArrayList&lt;&gt;(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isPresent();
+    })
 );
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>

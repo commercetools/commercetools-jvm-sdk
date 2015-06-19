@@ -113,6 +113,7 @@
 <li><a href="io/sphere/sdk/discountcodes/commands/updateactions/package-tree.html">io.sphere.sdk.discountcodes.commands.updateactions</a>, </li>
 <li><a href="io/sphere/sdk/discountcodes/expansion/package-tree.html">io.sphere.sdk.discountcodes.expansion</a>, </li>
 <li><a href="io/sphere/sdk/discountcodes/queries/package-tree.html">io.sphere.sdk.discountcodes.queries</a>, </li>
+<li><a href="io/sphere/sdk/expansion/package-tree.html">io.sphere.sdk.expansion</a>, </li>
 <li><a href="io/sphere/sdk/http/package-tree.html">io.sphere.sdk.http</a>, </li>
 <li><a href="io/sphere/sdk/inventories/package-tree.html">io.sphere.sdk.inventories</a>, </li>
 <li><a href="io/sphere/sdk/inventories/commands/package-tree.html">io.sphere.sdk.inventories.commands</a>, </li>
@@ -156,8 +157,8 @@
 <li><a href="io/sphere/sdk/states/package-tree.html">io.sphere.sdk.states</a>, </li>
 <li><a href="io/sphere/sdk/states/commands/package-tree.html">io.sphere.sdk.states.commands</a>, </li>
 <li><a href="io/sphere/sdk/states/commands/updateactions/package-tree.html">io.sphere.sdk.states.commands.updateactions</a>, </li>
+<li><a href="io/sphere/sdk/states/expansion/package-tree.html">io.sphere.sdk.states.expansion</a>, </li>
 <li><a href="io/sphere/sdk/states/queries/package-tree.html">io.sphere.sdk.states.queries</a>, </li>
-<li><a href="io/sphere/sdk/states/queries/expansion/package-tree.html">io.sphere.sdk.states.queries.expansion</a>, </li>
 <li><a href="io/sphere/sdk/taxcategories/package-tree.html">io.sphere.sdk.taxcategories</a>, </li>
 <li><a href="io/sphere/sdk/taxcategories/commands/package-tree.html">io.sphere.sdk.taxcategories.commands</a>, </li>
 <li><a href="io/sphere/sdk/taxcategories/expansion/package-tree.html">io.sphere.sdk.taxcategories.expansion</a>, </li>
@@ -236,6 +237,7 @@
 </li>
 <li type="circle">io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">Delivery</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, io.sphere.sdk.models.<a href="io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/DeliveryItem.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">DeliveryItem</span></a></li>
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/DirectionlessQuerySort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">DirectionlessQuerySort</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraft.html" title="class in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCodeDraft</span></a></li>
 <li type="circle">io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeDraftBuilder.html" title="class in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCodeDraftBuilder</span></a> (implements io.sphere.sdk.models.<a href="io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;T&gt;)</li>
 <li type="circle">io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCodeReference.html" title="class in io.sphere.sdk.discountcodes"><span class="typeNameLink">DiscountCodeReference</span></a></li>
@@ -243,10 +245,15 @@
 <li type="circle">io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPrice.html" title="class in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">DiscountedLineItemPrice</span></a></li>
 <li type="circle">io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/DiscountedPrice.html" title="class in io.sphere.sdk.productdiscounts"><span class="typeNameLink">DiscountedPrice</span></a></li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/DocumentationGuidelines.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">DocumentationGuidelines</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ExpansionModel</span></a>&lt;T&gt;
+<li type="circle">io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ExpansionModel.html" title="class in io.sphere.sdk.expansion"><span class="typeNameLink">ExpansionModel</span></a>&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.cartdiscounts.expansion.<a href="io/sphere/sdk/cartdiscounts/expansion/CartDiscountExpansionModel.html" title="class in io.sphere.sdk.cartdiscounts.expansion"><span class="typeNameLink">CartDiscountExpansionModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion"><span class="typeNameLink">CartLikeExpansionModel</span></a>&lt;T&gt;
+<ul>
 <li type="circle">io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion"><span class="typeNameLink">CartExpansionModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion"><span class="typeNameLink">OrderExpansionModel</span></a>&lt;T&gt;</li>
+</ul>
+</li>
 <li type="circle">io.sphere.sdk.categories.expansion.<a href="io/sphere/sdk/categories/expansion/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.expansion"><span class="typeNameLink">CategoryExpansionModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.channels.expansion.<a href="io/sphere/sdk/channels/expansion/ChannelExpansionModel.html" title="class in io.sphere.sdk.channels.expansion"><span class="typeNameLink">ChannelExpansionModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerExpansionModel.html" title="class in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerExpansionModel</span></a>&lt;T&gt;</li>
@@ -254,7 +261,7 @@
 <li type="circle">io.sphere.sdk.discountcodes.expansion.<a href="io/sphere/sdk/discountcodes/expansion/DiscountCodeExpansionModel.html" title="class in io.sphere.sdk.discountcodes.expansion"><span class="typeNameLink">DiscountCodeExpansionModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.inventories.queries.<a href="io/sphere/sdk/inventories/queries/InventoryEntryExpansionModel.html" title="class in io.sphere.sdk.inventories.queries"><span class="typeNameLink">InventoryEntryExpansionModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.inventories.expansion.<a href="io/sphere/sdk/inventories/expansion/InventoryExpansionModel.html" title="class in io.sphere.sdk.inventories.expansion"><span class="typeNameLink">InventoryExpansionModel</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/OrderExpansionModel.html" title="class in io.sphere.sdk.orders.expansion"><span class="typeNameLink">OrderExpansionModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/LineItemExpansionModel.html" title="class in io.sphere.sdk.carts.expansion"><span class="typeNameLink">LineItemExpansionModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/PriceExpansionModel.html" title="class in io.sphere.sdk.products.expansion"><span class="typeNameLink">PriceExpansionModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductAttributeExpansionModel.html" title="class in io.sphere.sdk.products.expansion"><span class="typeNameLink">ProductAttributeExpansionModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductCatalogExpansionModel.html" title="class in io.sphere.sdk.products.expansion"><span class="typeNameLink">ProductCatalogExpansionModel</span></a>&lt;T&gt;</li>
@@ -265,9 +272,11 @@
 <li type="circle">io.sphere.sdk.products.expansion.<a href="io/sphere/sdk/products/expansion/ProductVariantExpansionModel.html" title="class in io.sphere.sdk.products.expansion"><span class="typeNameLink">ProductVariantExpansionModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.reviews.expansion.<a href="io/sphere/sdk/reviews/expansion/ReviewExpansionModel.html" title="class in io.sphere.sdk.reviews.expansion"><span class="typeNameLink">ReviewExpansionModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.shippingmethods.expansion.<a href="io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion"><span class="typeNameLink">ShippingMethodExpansionModel</span></a>&lt;T&gt;</li>
-<li type="circle">io.sphere.sdk.states.queries.expansion.<a href="io/sphere/sdk/states/queries/expansion/StateExpansionModel.html" title="class in io.sphere.sdk.states.queries.expansion"><span class="typeNameLink">StateExpansionModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.states.expansion.<a href="io/sphere/sdk/states/expansion/StateExpansionModel.html" title="class in io.sphere.sdk.states.expansion"><span class="typeNameLink">StateExpansionModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.orders.expansion.<a href="io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html" title="class in io.sphere.sdk.orders.expansion"><span class="typeNameLink">SyncInfoExpansionModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.taxcategories.expansion.<a href="io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html" title="class in io.sphere.sdk.taxcategories.expansion"><span class="typeNameLink">TaxCategoryExpansionModel</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.zones.expansion.<a href="io/sphere/sdk/zones/expansion/ZoneExpansionModel.html" title="class in io.sphere.sdk.zones.expansion"><span class="typeNameLink">ZoneExpansionModel</span></a>&lt;T&gt;</li>
+<li type="circle">io.sphere.sdk.shippingmethods.expansion.<a href="io/sphere/sdk/shippingmethods/expansion/ZoneRateExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion"><span class="typeNameLink">ZoneRateExpansionModel</span></a>&lt;T&gt;</li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">FacetRange</span></a>&lt;T&gt;</li>
@@ -691,6 +700,7 @@
 <li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/UrlQueryBuilder.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">UrlQueryBuilder</span></a></li>
 <li type="circle">io.sphere.sdk.products.<a href="io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">VariantIdentifier</span></a></li>
 <li type="circle">io.sphere.sdk.search.tokenizer.<a href="io/sphere/sdk/search/tokenizer/WhiteSpaceSuggestTokenizer.html" title="class in io.sphere.sdk.search.tokenizer"><span class="typeNameLink">WhiteSpaceSuggestTokenizer</span></a> (implements io.sphere.sdk.search.tokenizer.<a href="io/sphere/sdk/search/tokenizer/SuggestTokenizer.html" title="interface in io.sphere.sdk.search.tokenizer">SuggestTokenizer</a>)</li>
+<li type="circle">io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods"><span class="typeNameLink">ZoneRate</span></a></li>
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/BuildInfo.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">BuildInfo</span></a></li>
@@ -806,7 +816,6 @@
 <li type="circle">io.sphere.sdk.meta.<a href="io/sphere/sdk/meta/TypicalTrapsDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">TypicalTrapsDocumentation</span></a></li>
 <li type="circle">io.sphere.sdk.http.<a href="io/sphere/sdk/http/UrlUtils.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">UrlUtils</span></a></li>
 <li type="circle">io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/ZoneDraft.html" title="class in io.sphere.sdk.zones"><span class="typeNameLink">ZoneDraft</span></a></li>
-<li type="circle">io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ZoneRate.html" title="class in io.sphere.sdk.shippingmethods"><span class="typeNameLink">ZoneRate</span></a></li>
 </ul>
 </li>
 </ul>
@@ -1120,7 +1129,7 @@
 </ul>
 </li>
 <li type="circle">io.sphere.sdk.models.<a href="io/sphere/sdk/models/ErrorResponse.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">ErrorResponse</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExpansionPath.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ExpansionPath</span></a>&lt;I&gt;</li>
+<li type="circle">io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">ExpansionPath</span></a>&lt;I&gt;</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">FacetExpression</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetResult.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">FacetResult</span></a></li>
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">FilterExpression</span></a>&lt;T&gt;</li>
@@ -1455,6 +1464,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -1490,6 +1500,7 @@
 <li type="circle">io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewQuery</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodQuery</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQuery</span></a></li>
 <li type="circle">io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="interface in io.sphere.sdk.taxcategories.queries"><span class="typeNameLink">TaxCategoryQuery</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
@@ -1597,7 +1608,7 @@
 <li type="circle">io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones"><span class="typeNameLink">Zone</span></a></li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ReferenceExpandeable</span></a>&lt;T&gt;
+<li type="circle">io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeable.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">ReferenceExpandeable</span></a>&lt;T&gt;
 <ul>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartByCustomerIdFetch.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartByCustomerIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartByIdFetch.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartByIdFetch</span></a></li>
@@ -1654,7 +1665,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionQuery</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductQuery</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="interface in io.sphere.sdk.producttypes.queries"><span class="typeNameLink">ProductTypeQuery</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQuery</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQuery</span></a></li>
@@ -1705,7 +1716,7 @@
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQuery</span></a></li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">FetchDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">FetchDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;, io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartByCustomerIdFetch.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartByCustomerIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartByIdFetch.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartByIdFetch</span></a></li>
@@ -1735,6 +1746,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -1742,6 +1754,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -1764,6 +1777,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -1796,7 +1810,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionQuery</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductQuery</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="interface in io.sphere.sdk.producttypes.queries"><span class="typeNameLink">ProductTypeQuery</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQuery</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQuery</span></a></li>
@@ -1840,7 +1854,7 @@
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQuery</span></a></li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">ReferenceExpandeableDsl</span></a>&lt;T,C&gt;
+<li type="circle">io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">ReferenceExpandeableDsl</span></a>&lt;T,C&gt;
 <ul>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartByCustomerIdFetch.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartByCustomerIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartByIdFetch.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartByIdFetch</span></a></li>
@@ -1890,6 +1904,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -1897,6 +1912,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -1919,6 +1935,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -1998,6 +2015,7 @@
 <li type="circle">io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewQuery</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodQuery</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQuery</span></a></li>
 <li type="circle">io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="interface in io.sphere.sdk.taxcategories.queries"><span class="typeNameLink">TaxCategoryQuery</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
@@ -2007,6 +2025,7 @@
 <li type="circle">io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQuery.html" title="interface in io.sphere.sdk.reviews.queries"><span class="typeNameLink">ReviewQuery</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodQuery</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQuery</span></a></li>
 <li type="circle">io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="interface in io.sphere.sdk.taxcategories.queries"><span class="typeNameLink">TaxCategoryQuery</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
@@ -2064,7 +2083,7 @@
 </li>
 <li type="circle">io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeByIdFetch.html" title="interface in io.sphere.sdk.discountcodes.queries"><span class="typeNameLink">DiscountCodeByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html" title="interface in io.sphere.sdk.discountcodes.queries"><span class="typeNameLink">DiscountCodeQuery</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;T&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;T&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;T&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;, io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeable.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeable</a>&lt;T&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQuery</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQuery</span></a></li>
@@ -2101,7 +2120,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionQuery</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductQuery</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="interface in io.sphere.sdk.producttypes.queries"><span class="typeNameLink">ProductTypeQuery</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQuery</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQuery</span></a></li>
@@ -2169,7 +2188,7 @@
 <li type="circle">io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupByIdFetch.html" title="interface in io.sphere.sdk.customergroups.queries"><span class="typeNameLink">CustomerGroupByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyFetch.html" title="interface in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectByKeyFetch</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeByIdFetch.html" title="interface in io.sphere.sdk.discountcodes.queries"><span class="typeNameLink">DiscountCodeByIdFetch</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">FetchDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">FetchDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartByCustomerIdFetch.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartByCustomerIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartByIdFetch.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartByIdFetch</span></a></li>
@@ -2199,6 +2218,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -2206,6 +2226,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -2227,6 +2248,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -2234,10 +2256,11 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">FetchDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">FetchDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;T&gt;, io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartByCustomerIdFetch.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartByCustomerIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartByIdFetch.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartByIdFetch</span></a></li>
@@ -2267,6 +2290,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -2274,6 +2298,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -2296,6 +2321,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneByIdFetch.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneByIdFetch</span></a></li>
 </ul>
 </li>
@@ -2338,7 +2364,7 @@
 <li type="circle">io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQuery.html" title="interface in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerQuery</span></a></li>
 <li type="circle">io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectQuery</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html" title="interface in io.sphere.sdk.discountcodes.queries"><span class="typeNameLink">DiscountCodeQuery</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;T&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeable.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeable</a>&lt;T&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">EntityQuery</span></a>&lt;T&gt; (also extends io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeable.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeable</a>&lt;T&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQuery</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQuery</span></a></li>
@@ -2375,7 +2401,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionQuery</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductQuery</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="interface in io.sphere.sdk.producttypes.queries"><span class="typeNameLink">ProductTypeQuery</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQuery</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQuery</span></a></li>
@@ -2453,7 +2479,7 @@
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductProjectionQuery</span></a></li>
 <li type="circle">io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">ProductQuery</span></a></li>
 <li type="circle">io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/ProductTypeQuery.html" title="interface in io.sphere.sdk.producttypes.queries"><span class="typeNameLink">ProductTypeQuery</span></a></li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQuery</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQuery</span></a></li>
@@ -2504,7 +2530,7 @@
 <li type="circle">io.sphere.sdk.zones.queries.<a href="io/sphere/sdk/zones/queries/ZoneQuery.html" title="interface in io.sphere.sdk.zones.queries"><span class="typeNameLink">ZoneQuery</span></a></li>
 </ul>
 </li>
-<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.queries">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
+<li type="circle">io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryDsl</span></a>&lt;T,C&gt; (also extends io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;T,C&gt;)
 <ul>
 <li type="circle">io.sphere.sdk.cartdiscounts.queries.<a href="io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html" title="interface in io.sphere.sdk.cartdiscounts.queries"><span class="typeNameLink">CartDiscountQuery</span></a></li>
 <li type="circle">io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartQuery.html" title="interface in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartQuery</span></a></li>
@@ -2562,6 +2588,7 @@
 <li type="circle">io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SearchDsl</span></a>&lt;T&gt;</li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdFetch.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="interface in io.sphere.sdk.shippingmethods.queries"><span class="typeNameLink">ShippingMethodQuery</span></a></li>
+<li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateByIdFetch.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateByIdFetch</span></a></li>
 <li type="circle">io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries"><span class="typeNameLink">StateQuery</span></a></li>
 <li type="circle">io.sphere.sdk.taxcategories.queries.<a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html" title="interface in io.sphere.sdk.taxcategories.queries"><span class="typeNameLink">TaxCategoryQuery</span></a></li>
 <li type="circle">io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommand</span></a>&lt;T&gt;
