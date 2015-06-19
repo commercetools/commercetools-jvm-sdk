@@ -107,7 +107,7 @@ extends java.lang.Object</pre>
 <div class="block"><h3 id="intro">Introduction</h3>
  <h3 id="product-type-creation">ProductType Creation</h3>
  <p>A <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> is like a schema how the product attributes are structured.</p>
- <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s contain a list of the attribute name and the corresponding type of the attribute.
+ <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s contain a list of <a href="../../../../io/sphere/sdk/attributes/AttributeDefinition.html" title="class in io.sphere.sdk.attributes"><code>AttributeDefinition</code></a>s, which can be seen as the attribute name and the corresponding type of the attribute.
  In one SPHERE.IO project the name type pair is global, so if you create an attribute "foo" of type String, you cannot create
  another <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> where "foo" has another type like <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models"><code>LocalizedStrings</code></a>. If you do it anyway you get an error message like:</p>
 
@@ -116,17 +116,17 @@ extends java.lang.Object</pre>
  <p>In this scenario we provide a <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> tshirt with the following attributes:</p>
 
  <ul>
-    <li>color: <a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a></li>
-    <li>size: <a href="../../../../io/sphere/sdk/models/PlainEnumValue.html" title="class in io.sphere.sdk.models"><code>PlainEnumValue</code></a></li>
-    <li>laundrySymbols: set of <a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a></li>
-    <li>matchingProducts: set of product <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><code>Reference</code></a>s</li>
-    <li>rrp: <code>MonetaryAmount</code></li>
-    <li>availableSince: <code>LocalDateTime</code></li>
+    <li>color as <a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a> with the colors green and red and their translations in German and Englisch</li>
+    <li>size as <a href="../../../../io/sphere/sdk/models/PlainEnumValue.html" title="class in io.sphere.sdk.models"><code>PlainEnumValue</code></a> with S, M and X</li>
+    <li>laundrySymbols as set of <a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a> with temperature and tumble drying</li>
+    <li>matchingProducts as set of product <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><code>Reference</code></a>s, which can point to products which are similar to the current product</li>
+    <li>rrp as <code>MonetaryAmount</code> containing the recommended retail price</li>
+    <li>availableSince as <code>LocalDateTime</code> which contains the date since when the product is available for the customer in the shop</li>
  </ul>
 
 
 
- <p>The possible attribute types you can find here: <a href="../../../../io/sphere/sdk/attributes/AttributeType.html" title="interface in io.sphere.sdk.attributes"><code>AttributeType</code></a>.</p>
+ <p>The possible attribute types you can find here: <a href="../../../../io/sphere/sdk/attributes/AttributeType.html" title="interface in io.sphere.sdk.attributes"><code>AttributeType</code></a> in "All Known Implementing Classes".</p>
 
 <p>The code for the creation of the <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>:</p>
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createProductType--%s" class=code-example><pre><code class='java'>final LocalizedEnumValue green = LocalizedEnumValue.of("green",
@@ -178,9 +178,11 @@ final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(PRODUCT_TYPE_NAME,
 final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
+
+
  <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s have a name (String)
  which can be used as key to logically identify <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s. Beware that the name has no unique constraint,
- so it is possible to create multiple product types with the same name which will cause confusion.
+ so it is possible to create multiple <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s with the same name which will cause confusion.
  Before creating a product type it's better to check if it already exists:</p>
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-demoCheckingIfProductTypeExist--%s" class=code-example><pre><code class='java'>final ProductTypeQuery query = ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME);
@@ -193,7 +195,7 @@ final boolean productTypeAlreadyExists = client().execute(query).head().isPresen
 
  <h3 id="product-creation">Product Creation</h3>
 
- <p>To create a product you need the product type. Since the <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>
+ <p>To create a product you need to reference the product type. Since the <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>
  ID of the development system will not be the ID of the production system it is necessary to find the product type by name:</p>
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-fetchProductTypeByName--%s" class=code-example><pre><code class='java'>final Optional&lt;ProductType&gt; productTypeOptional =
@@ -206,14 +208,14 @@ final ProductType productType = productTypeOptional
  <a href="../../../../io/sphere/sdk/products/ProductVariantDraftBuilder.html#plusAttribute-java.lang.String-T-"><code>ProductVariantDraftBuilder.plusAttribute(java.lang.String, java.lang.Object)</code></a> which enables you to directly
  put the value of the attribute to the draft. But it cannot check if you put the right objects and types in it.
 
- <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createProduct--%s" class=code-example><pre><code class='java'>final Reference&lt;Product&gt; productReference = ProductFixtures.referenceableProduct(client()).toReference();
-final ProductType productType = fetchProductTypeByName();
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createProduct--%s" class=code-example><pre><code class='java'>final ProductType productType = fetchProductTypeByName();
+final Reference&lt;Product&gt; similarProductReference = ProductFixtures.referenceableProduct(client()).toReference();
 final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
         .plusAttribute(COLOR_ATTR_NAME, "green")//special case: any enums are set with key (String)
         .plusAttribute(SIZE_ATTR_NAME, "S")//special case: any enums are set with key (String)
         .plusAttribute(LAUNDRY_SYMBOLS_ATTR_NAME,
-                asSet("cold", "tumbleDrying"))//special case: localized enums set Set of keys (String)
-        .plusAttribute(MATCHING_PRODUCTS_ATTR_NAME, asSet(productReference))
+                asSet("cold", "tumbleDrying"))//special case: java.util.Set of any enums is set with java.util.Set of keys (String)
+        .plusAttribute(MATCHING_PRODUCTS_ATTR_NAME, asSet(similarProductReference))
         .plusAttribute(RRP_ATTR_NAME, MoneyImpl.of(300, EUR))
         .plusAttribute(AVAILABLE_SINCE_ATTR_NAME, LocalDate.of(2015, 2, 2))
         .build();
@@ -225,6 +227,7 @@ final Product product = client().execute(ProductCreateCommand.of(draft));
 
 final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
 assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
+        .overridingErrorMessage("on the get side, the while enum is delivered")
         .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
 assertThat(masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
         .contains(PlainEnumValue.of("S", "S"));
@@ -235,7 +238,7 @@ final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
 assertThat(masterVariant.getAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
         .contains(asSet(cold, tumbleDrying));
 assertThat(masterVariant.getAttribute(MATCHING_PRODUCTS_ATTR_NAME, AttributeAccess.ofProductReferenceSet()))
-        .contains(asSet(productReference));
+        .contains(asSet(similarProductReference));
 assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
         .contains(MoneyImpl.of(300, EUR));
 assertThat(masterVariant.getAttribute(AVAILABLE_SINCE_ATTR_NAME, AttributeAccess.ofDate()))
@@ -249,14 +252,14 @@ return product;
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-invalidTypeCausesException--%s" class=code-example><pre><code class='java'>final ProductType productType = fetchProductTypeByName();
 final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
-        .plusAttribute(COLOR_ATTR_NAME, 1)//1 is illegal type and illegal key
+        .plusAttribute(COLOR_ATTR_NAME, 1)//1 is of illegal type and of illegal key
         .build();
 final ProductDraft draft = ProductDraftBuilder
         .of(productType, en("basic shirt"), randomSlug(), masterVariantDraft)
         .build();
 assertThatThrownBy(() -&gt; execute(ProductCreateCommand.of(draft)))
-    .isInstanceOf(ErrorResponseException.class)
-.matches(e -&gt; ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
+        .isInstanceOf(ErrorResponseException.class)
+        .matches(e -&gt; ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
  As Alternative you could declare the types of your attributes at one place and use these to read and write
@@ -272,7 +275,6 @@ final NamedAttributeAccess&lt;Set&lt;Reference&lt;Product&gt;&gt;&gt; matchingPr
 final NamedAttributeAccess&lt;MonetaryAmount&gt; rrp = AttributeAccess.ofMoney().ofName(RRP_ATTR_NAME);
 final NamedAttributeAccess&lt;LocalDate&gt; availableSince = AttributeAccess.ofDate().ofName(AVAILABLE_SINCE_ATTR_NAME);
 
-/* the rest of the example */
 final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
         LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
 final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
@@ -288,7 +290,7 @@ final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
                 LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")))//will extract the key
         .plusAttribute(size, PlainEnumValue.of("S", "S"))
         .plusAttribute(laundrySymbols, asSet(cold, tumbleDrying))//will extract the keys, so you do not need to
-        //remember the special cases, there is also no problem mixing the styles
+                //remember the special cases, there is also no problem mixing the styles
         .plusAttribute(matchingProducts, asSet(productReference))
 //        .plusAttribute(matchingProducts, "foobar") won't compile!
         .plusAttribute(rrp, MoneyImpl.of(300, EUR))
@@ -345,7 +347,7 @@ assertThat(attributeOption.get().getValue(AttributeAccess.ofJsonNode())).isEqual
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
 
- <p>If the attribute is not present then the <code>Optional</code> will be empty:</p>
+ <p>If the attribute is not present in the <a href="../../../../io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products"><code>AttributeContainer</code></a> then the <code>Optional</code> will be empty:</p>
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-notPresentAttributeRead--%s" class=code-example><pre><code class='java'>final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
@@ -384,12 +386,15 @@ assertThatThrownBy(() -&gt; masterVariant.getAttribute(SIZE_ATTR_NAME, Attribute
  <p>In this example the left column is the label of
  the attribute from the product type and the right column is the formatted value from the product:</p>
 
- <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-showProductAttributeTable--%s" class=code-example><pre><code class='java'>final List&lt;String&gt; attrNamesToShow = asList(COLOR_ATTR_NAME, SIZE_ATTR_NAME,
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-showProductAttributeTable--%s" class=code-example><pre><code class='java'>//this serves as whitelist which product attributes should be displayed
+//and also in this example it provides a constant order for the attributes to be displayed
+final List&lt;String&gt; attrNamesToShow = asList(COLOR_ATTR_NAME, SIZE_ATTR_NAME,
         MATCHING_PRODUCTS_ATTR_NAME, LAUNDRY_SYMBOLS_ATTR_NAME, RRP_ATTR_NAME, AVAILABLE_SINCE_ATTR_NAME);
+
 final Product product = createProduct();
 final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
         .withPredicate(m -&gt; m.id().is(product.getId()))
-        .plusExpansionPaths(EXPANSION_PATH_ATTRIBUTES)
+        .plusExpansionPaths(m -&gt; m.masterVariant().attributes().valueSet())
         .plusExpansionPaths(m -&gt; m.productType());
 
 final ProductProjection productProjection = execute(query).head().get();
@@ -398,30 +403,36 @@ final ProductType productType = productProjection.getProductType().getObj().get(
 final ProductVariant masterVariant = productProjection.getMasterVariant();
 final List&lt;Attribute&gt; attributes = masterVariant.getAttributes();
 final MonetaryAmountFormat moneyFormat = MonetaryFormats.getAmountFormat(US);
-//TODO put this example into a class, static import types, mention import
-final Function&lt;Attribute, Optional&lt;Pair&lt;String, String&gt;&gt;&gt; attributeValueExtractor = a -&gt;
-        AttributeExtraction.&lt;String&gt;of(productType, a)
-                .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -&gt; v.getLabel().get(ENGLISH).orElse(""))
-                .ifIs(AttributeAccess.ofPlainEnumValue(), v -&gt; v.getLabel())
-                .ifIs(AttributeAccess.ofLocalizedEnumValueSet(), v -&gt;
-                        v.stream()
-                                .map(x -&gt; x.getLabel().get(ENGLISH))
-                                .filter(x -&gt; x.isPresent())
-                                .map(x -&gt; x.get())
-                                .collect(joining(", ")))
-                .ifIs(AttributeAccess.ofProductReferenceSet(), set -&gt; set.stream()
-                        .map(p -&gt; p.getObj().map(prod -&gt; prod.getMasterData().getStaged().getName().get(ENGLISH).orElse("")).orElse("not expanded"))
-                        .collect(joining(", ")))
-                .ifIs(AttributeAccess.ofMoney(), money -&gt; moneyFormat.format(money))
-                .ifIs(AttributeAccess.ofDate(), date -&gt; date.toString())
-                        //new SimpleDateFormat("yyyy-MM-dd").format(date)
-                .getValue().map(value -&gt; {
-            final String label = productType.getAttribute(a.getName()).get().getLabel().get(ENGLISH).get();
-            return ImmutablePair.of(label, value);
-        });
+
+final Function&lt;Attribute, Optional&lt;Pair&lt;String, String&gt;&gt;&gt; attributeValueExtractor = attribute -&gt; {
+    final Optional&lt;String&gt; extractedResult = AttributeExtraction.&lt;String&gt;of(productType, attribute)
+            .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -&gt; v.getLabel().get(ENGLISH).orElse(""))
+            .ifIs(AttributeAccess.ofPlainEnumValue(), v -&gt; v.getLabel())
+            .ifIs(AttributeAccess.ofLocalizedEnumValueSet(), v -&gt;
+                    v.stream()
+                            .map(x -&gt; x.getLabel().get(ENGLISH))
+                            .filter(x -&gt; x.isPresent())
+                            .map(x -&gt; x.get())
+                            .collect(joining(", ")))
+            .ifIs(AttributeAccess.ofProductReferenceSet(), set -&gt; set.stream()
+                    .map(productReference -&gt; productReference.getObj()
+                            .map(prod -&gt; prod.getMasterData().getStaged().getName().get(ENGLISH).orElse(""))
+                            .orElse(productReference.getId()))
+                    .collect(joining(", ")))
+            .ifIs(AttributeAccess.ofMoney(), money -&gt; moneyFormat.format(money))
+            .ifIs(AttributeAccess.ofDate(), date -&gt; date.toString())
+            .getValue();
+    final Optional&lt;Pair&lt;String, String&gt;&gt; tableRowData = extractedResult.map(value -&gt; {
+        final String label = productType.getAttribute(attribute.getName()).get().getLabel().get(ENGLISH).get();
+        return ImmutablePair.of(label, value);
+    });
+    return tableRowData;
+};
+
 final List&lt;Pair&lt;String, String&gt;&gt; tableData = attributes.stream()
-        .filter(a -&gt; attrNamesToShow.contains(a.getName()))
-                //sort so that the order is like in attrNamesToShow
+
+        .filter(a -&gt; attrNamesToShow.contains(a.getName()))//remove attributes not in whitelist
+            //sort so that the order is like in attrNamesToShow
         .sorted(Comparator.comparingInt(a -&gt; attrNamesToShow.indexOf(a.getName())))
         .map(attributeValueExtractor)
         .filter(x -&gt; x.isPresent())
@@ -429,11 +440,13 @@ final List&lt;Pair&lt;String, String&gt;&gt; tableData = attributes.stream()
         .collect(toList());
 
 
+//table column length logic
 final List&lt;ImmutablePair&lt;Integer, Integer&gt;&gt; entryLengths = tableData.stream()
         .map(entry -&gt; ImmutablePair.of(entry.getLeft().length(), entry.getRight().length())).collect(toList());
 final StringBuilder stringBuilder = new StringBuilder("\n");
 final int keyColumnWidth = entryLengths.stream().mapToInt(entry -&gt; entry.getLeft()).max().orElse(1);
 final int valueColumnWidth = entryLengths.stream().mapToInt(entry -&gt; entry.getRight()).max().orElse(1);
+
 for (final Pair&lt;String, String&gt; entry : tableData) {
     stringBuilder.append(String.format("%-" + keyColumnWidth + "s", entry.getLeft()))
             .append(" | ")
@@ -476,7 +489,9 @@ final List&lt;SetAttribute&gt; updateActions = asList(
         draft.apply(AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, asSet("cold"))),
         draft.apply(AttributeDraft.of(RRP_ATTR_NAME, MoneyImpl.of(20, EUR)))
 );
+
 final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateActions));
+
 final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
 assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
         .contains(LocalizedEnumValue.of("red", LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot")));
@@ -496,8 +511,8 @@ assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-updateWithWrongType--%s" class=code-example><pre><code class='java'>final Product product = createProduct();
 assertThatThrownBy(() -&gt; execute(ProductUpdateCommand.of(product,
         SetAttribute.of(1, AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, "cold"), STAGED_AND_CURRENT))))
-.isInstanceOf(ErrorResponseException.class)
-.matches(e -&gt; ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
+        .isInstanceOf(ErrorResponseException.class)
+        .matches(e -&gt; ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="attribute-stubs-for-tests">Create attribute stubs for unit tests</h3>
@@ -525,17 +540,20 @@ assertThat(attribute.getValue(access).getObj()).isPresent();
  <p>Example:</p>
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-orderImportExample--%s" class=code-example><pre><code class='java'>final Product product = createProduct();
-//yellow is not defined in the product type, but for imports this works to add use it on the fly
-final LocalizedEnumValue yellow = LocalizedEnumValue.of("yellow", LocalizedStrings.of(ENGLISH, "yellow").plus(GERMAN, "gelb"));
+//yellow is not defined in the product type, but for order imports this works to add use it on the fly
+final LocalizedEnumValue yellow =
+        LocalizedEnumValue.of("yellow", LocalizedStrings.of(ENGLISH, "yellow").plus(GERMAN, "gelb"));
 final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), 1)
-        .attributes(asList(
+        .attributes(
                 AttributeImportDraft.of(COLOR_ATTR_NAME, yellow),
                 AttributeImportDraft.of(RRP_ATTR_NAME, EURO_30)
-        )).build();
-final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 1, Price.of(EURO_30), en("product name")).build();
+        ).build();
+final LineItemImportDraft lineItemImportDraft =
+        LineItemImportDraftBuilder.of(productVariantImportDraft, 1, Price.of(EURO_30), en("product name"))
+        .build();
 final OrderImportDraft orderImportDraft = OrderImportDraftBuilder
-        .ofLineItems(EURO_20, OrderState.COMPLETE, asList(
-                lineItemImportDraft)).build();
+        .ofLineItems(EURO_20, OrderState.COMPLETE, asList(lineItemImportDraft))
+        .build();
 
 final Order order = execute(OrderImportCommand.of(orderImportDraft));
 
@@ -562,10 +580,9 @@ assertThat(presentAttributes).containsOnly(COLOR_ATTR_NAME, RRP_ATTR_NAME);
         <th></th><th><a href="../../../../io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes"><code>Attribute</code></a></th><th><a href="../../../../io/sphere/sdk/attributes/AttributeDraft.html" title="class in io.sphere.sdk.attributes"><code>AttributeDraft</code></a></th><th><a href="../../../../io/sphere/sdk/attributes/AttributeImportDraft.html" title="class in io.sphere.sdk.attributes"><code>AttributeImportDraft</code></a></th>
     </tr>
  <tr> <td>purpose</td>    <td>read access</td>    <td>write product, create product</td>    <td>order import</td></tr>
- <tr> <td>keeps expanded references</td>    <td>x</td>    <td></td>    <td></td></tr>
- <tr> <td>enum like as key</td>    <td></td>    <td>x</td>    <td></td></tr>
- <tr> <td>enum values only as declared in product type</td>    <td>x</td>    <td>x</td>    <td></td></tr>
- <tr> <td></td>    <td></td>    <td></td>    <td></td></tr>
+ <tr> <td>reference expansion</td>    <td>keeps expanded references</td>    <td>no expansion</td>    <td>no expansion</td></tr>
+ <tr> <td>enum shape</td>    <td>full enum</td>    <td>enum key (String)</td>    <td>full enum</td></tr>
+ <tr> <td>value constraints</td>    <td>value in product type</td>    <td>value in product type</td>    <td>free, create on the fly</td></tr>
  </table>
 
  <h3 id="nested-attributes">Nested attributes (experimental)</h3>
