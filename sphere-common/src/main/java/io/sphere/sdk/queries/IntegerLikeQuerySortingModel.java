@@ -22,8 +22,8 @@ abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<T>
     }
 
     @Override
-    public IntermediateQuerySort<T> sort() {
-        return new IntermediateQuerySort<>(this);
+    public DirectionlessQuerySort<T> sort() {
+        return new DirectionlessQuerySort<>(this);
     }
 
     @Override

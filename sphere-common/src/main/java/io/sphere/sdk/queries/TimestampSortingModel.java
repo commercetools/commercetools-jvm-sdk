@@ -13,7 +13,7 @@ public class TimestampSortingModel<T> extends QueryModelImpl<T> implements Query
     }
 
     @Override
-    public IntermediateQuerySort<T> sort() {
-        return new IntermediateQuerySort<>(this);
+    public DirectionlessQuerySort<T> sort() {
+        return new DirectionlessQuerySort<>(this);
     }
 }

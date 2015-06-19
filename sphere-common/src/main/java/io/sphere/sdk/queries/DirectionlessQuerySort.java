@@ -5,10 +5,10 @@ import io.sphere.sdk.models.Base;
 import static io.sphere.sdk.queries.QuerySortDirection.*;
 
 /** A sort model to decide the direction. */
-public class IntermediateQuerySort<T> extends Base {
+public class DirectionlessQuerySort<T> extends Base {
     private final QueryModel<T> path;
 
-    IntermediateQuerySort(final QueryModel<T> path) {
+    DirectionlessQuerySort(final QueryModel<T> path) {
         this.path = path;
     }
 

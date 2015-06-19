@@ -18,8 +18,8 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Que
     }
 
     @Override
-    public IntermediateQuerySort<T> sort() {
-        return new IntermediateQuerySort<>(this);
+    public DirectionlessQuerySort<T> sort() {
+        return new DirectionlessQuerySort<>(this);
     }
 
     /**
