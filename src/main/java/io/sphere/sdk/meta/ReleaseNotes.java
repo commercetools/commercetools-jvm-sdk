@@ -48,11 +48,9 @@ import java.util.function.BiFunction;
      <li class=new-in-release>New fields in {@link io.sphere.sdk.products.Price}: {@link io.sphere.sdk.products.Price#validFrom} and {@link io.sphere.sdk.products.Price#validUntil}.</li>
      <li class=new-in-release>
         Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO the json fields masterVariant (object) and variants (array of objects) together contain all variants.
-        <div class="rn-hidden">This is the hidden div for injecting more and more and more information</div>
      </li>
      <li class=new-in-release>Using {@link ProductProjectionQuery#ofCurrent()} and {@link ProductProjectionQuery#ofStaged()} saves you the import of {@link ProductProjectionType}.
 
-         <div class="rn-hidden">2 This is the hidden div for injecting more and more and more information</div>
     </li>
      <li class=new-in-release>{@link CompletionStage} does not support by default timeouts which are quite important in a reactive application so you can decorate the {@link io.sphere.sdk.client.SphereClient} with {@link io.sphere.sdk.client.TimeoutSphereClientDecorator} to get a {@link java.util.concurrent.TimeoutException} after a certain amount of time. But this does NOT cancel the request to SPHERE.IO.</li>
      <li class=new-in-release>The {@link io.sphere.sdk.reviews.Review} endpoints and models are implemented, but we suggest to not use it, since {@link io.sphere.sdk.reviews.Review}s cannot be deleted or marked as hidden.</li>
