@@ -121,7 +121,8 @@ public class DocumentationTaglet implements Taglet {
             final ClientRequestListFileVisitor visitor = new ClientRequestListFileVisitor();
             Files.walkFileTree(currentRelativePath, visitor);
             final StringBuilder builder = new StringBuilder("<table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr>");
-            visitor.getResources().entrySet().forEach(entry -> {
+            final Comparator<? super Map.Entry<String, ResourcesRequests>> comparator = Comparator.comparing(entry -> entry.getKey());
+            visitor.getResources().entrySet().stream().sorted(comparator).forEach(entry -> {
 
                 final Function<String, String> mapper = m -> {
                     final String fullClassName = m.substring(m.indexOf("/io/sphere/sdk")).replace(".java", "").replace("/", ".");
