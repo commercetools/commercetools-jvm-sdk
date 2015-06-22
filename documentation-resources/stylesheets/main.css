@@ -37,12 +37,6 @@ table.custom, table.custom th, table.custom td {
     color: #7E7E7E;
 }
 
-/* ReleaseNotes */
-
-.hidden {
-    display: none;
-}
-
 .expand-all {
     border: none;
     background: #4D7A97;
@@ -65,7 +59,7 @@ table.custom, table.custom th, table.custom td {
     -ms-transform: rotate(90deg);
 }
 
-.release-notes-legend ul li {
+.release-notes ul li {
     list-style: none;
     margin-bottom: 0.2em;
 }
