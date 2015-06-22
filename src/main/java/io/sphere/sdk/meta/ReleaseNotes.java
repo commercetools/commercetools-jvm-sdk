@@ -47,7 +47,7 @@ import java.util.function.BiFunction;
  <br>
 
  <ul>
- <li class=new-in-release>{@link ExperimentalProductProjectionSearchModel#productType()} enables you to build search expressions with the Product Type reference of products</li>
+ <li class=new-in-release>{@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel#productType()} enables you to build search expressions with the Product Type reference of products</li>
  <li class=new-in-release>{@link ProductVariant#getIdentifier()} enables to get the product id and the variant id from the variant. This is nice, since this data is often needed and on the product variant level the product ID is not available.</li>
  <li class=new-in-release>Error reporting has been improved. Especially if JSON mappings do not fit.</li>
  <li class=new-in-release>{@link LineItem#getProductSlug()}</li>
