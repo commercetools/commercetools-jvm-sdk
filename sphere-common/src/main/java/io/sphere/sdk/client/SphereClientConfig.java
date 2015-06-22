@@ -75,11 +75,11 @@ public class SphereClientConfig extends Base implements SphereAuthConfig, Sphere
     /**
     Creates a {@link SphereClientConfig} out of environment variables using {@code prefix} as namespace parameter.
 
-    An example environment variable initialization with "PROJECT_NAME" as {@code prefix}:
+    An example environment variable initialization with "EXAMPLE" as {@code prefix}:
     <pre>{@code
-    export PROJECT_NAME_PROJECT_KEY="YOUR project key"
-    export PROJECT_NAME_CLIENT_ID="YOUR client id"
-    export PROJECT_NAME_CLIENT_SECRET="YOUR client secret"
+    export EXAMPLE_PROJECT_KEY="YOUR project key"
+    export EXAMPLE_CLIENT_ID="YOUR client id"
+    export EXAMPLE_CLIENT_SECRET="YOUR client secret"
     }</pre>
 
     The possible suffixes are
