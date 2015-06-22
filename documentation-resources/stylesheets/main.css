@@ -92,13 +92,17 @@ table.custom, table.custom th, table.custom td {
     background: #DEE3E9;
 }
 
-.reveal-imports {
+.theme-btn, .reveal-imports, a.theme-btn {
     border-radius: 0;
     background: #4D7A97;
     color: #FFF;
     border: none;
     padding: 0.5em;
     cursor: pointer;
+}
+
+a.theme-btn:hover, a.theme-btn:hover, .reveal-imports:hover, .reveal-imports:focus {
+    color: #F8981D;
 }
 
 .test-code-hidden {

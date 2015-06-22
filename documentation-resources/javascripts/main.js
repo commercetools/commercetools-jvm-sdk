@@ -15,7 +15,7 @@
 
     if(toc.length > 0) {
         $(".contentContainer", 0).prepend(
-            "<nav role='navigation' class='table-of-contents'><strong>Table of Contents</strong><ul>" +
+            "<nav role='navigation' id='page-toc' class='table-of-contents'><strong>Table of Contents</strong><ul>" +
             toc + "</ul></nav>");
     }
 

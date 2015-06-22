@@ -158,6 +158,8 @@ In this case you use also {@link io.sphere.sdk.customobjects.commands.CustomObje
  Notice that it is necessary to explicitly declare the type when requesting the query model, as shown in the following examples:</p>
  {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryTest#demoModelTypeParameter()}
 
+ <a href="#page-toc" class="theme-btn">back to top</a>
+
  */
 public final class CustomObjectDocumentation {
     private CustomObjectDocumentation() {
