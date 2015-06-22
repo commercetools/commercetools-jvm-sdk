@@ -26,27 +26,11 @@ table.custom, table.custom th, table.custom td {
     border-collapse: collapse;
 }
 
-/* CustomObjectDocumentation */
-
-.to-top {
-    text-align: right;
-}
-
-.to-top-btn {
-    background: #F8981D;
-    border: none;
-    padding: 1em;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-}
-
-/* ProductSearchDocumentation */
-
-.search-phases-img {
+.theme-img {
     padding: 2em;
     border: 2px solid #4A6782;
     margin-bottom: 0.5em;
+    display: block;
 }
 
 .image-caption {
