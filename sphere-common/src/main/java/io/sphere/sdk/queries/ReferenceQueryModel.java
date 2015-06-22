@@ -22,6 +22,10 @@ public class ReferenceQueryModel<T, R> extends QueryModelImpl<T> implements Equa
         return new IsInQueryPredicate<>(idSegment(), ids);
     }
 
+    public StringQueryModel<T> id() {
+        return new StringQuerySortingModel<>(Optional.of(this), "id");
+    }
+
     private QueryModelImpl<T> idSegment() {
         return new QueryModelImpl<>(Optional.of(this), "id");
     }

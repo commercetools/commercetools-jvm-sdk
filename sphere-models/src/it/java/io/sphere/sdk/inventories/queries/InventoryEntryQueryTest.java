@@ -41,9 +41,10 @@ public class InventoryEntryQueryTest extends IntegrationTest {
             withUpdateableInventoryEntry(client(), draft, entry -> {
                 final QueryPredicate<InventoryEntry> skuP = InventoryEntryQueryModel.of().sku().is(sku);
                 final QueryPredicate<InventoryEntry> channelP = InventoryEntryQueryModel.of().supplyChannel().is(channel);
+                final QueryPredicate<InventoryEntry> channelPById = InventoryEntryQueryModel.of().supplyChannel().id().is(channel.getId());
                 final QueryPredicate<InventoryEntry> stockP = InventoryEntryQueryModel.of().quantityOnStock().is(quantityOnStock);
                 final QueryPredicate<InventoryEntry> availableP = InventoryEntryQueryModel.of().availableQuantity().is(quantityOnStock);
-                final QueryPredicate<InventoryEntry> predicate = skuP.and(channelP).and(availableP).and(stockP);
+                final QueryPredicate<InventoryEntry> predicate = skuP.and(channelP).and(channelPById).and(availableP).and(stockP);
                 final Query<InventoryEntry> query = InventoryEntryQuery.of()
                         .withPredicate(predicate)
                         .withSort(m -> m.id().sort(QuerySortDirection.DESC))

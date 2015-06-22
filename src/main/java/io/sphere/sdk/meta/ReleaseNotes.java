@@ -1,12 +1,16 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.ApacheHttpClientAdapter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.NingHttpClientAdapter;
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.ProductProjectionType;
+import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
@@ -34,6 +38,58 @@ import java.util.function.BiFunction;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_M15">1.0.0-M15</h3>
+
+ <a class="theme-btn expand-all">Expand all</a>
+
+ <br>
+ <br>
+
+ <ul>
+ <li class=new-in-release>{@link ProductVariant#getIdentifier()} enables to get the product id and the variant id from the variant. This is nice, since this data is often needed and on the product variant level the product ID is not available.</li>
+ <li class=new-in-release>Error reporting has been improved. Especially if JSON mappings do not fit.</li>
+ <li class=new-in-release>{@link LineItem#getProductSlug()}</li>
+ <li class=new-in-release>Send User-Agent head for oauth requests.</li>
+ <li class=new-in-release>A lot of more reference expansions.</li>
+ <li class=new-in-release>Reference expansion for single elements of a list, example: {@link io.sphere.sdk.categories.expansion.CategoryExpansionModel#ancestors(int)}.</li>
+ <li class=new-in-release>Reference expansion for fetch endpoints, e.g., {@link io.sphere.sdk.products.queries.ProductProjectionByIdFetch#withExpansionPaths(ExpansionPath)}.</li>
+ <li class=new-in-release>Set the reference expansion, query predicate and sort expression more convenient (less imports, less class search) with lambdas.
+    <div class="rn-hidden">
+ {@include.example example.QueryMetaDslDemo#demo1()}
+
+ instead of
+
+ {@include.example example.QueryMetaDslDemo#demo2()}
+
+ In Scala (with add-ons) it will look like <pre><code>val query = ProductProjectionQuery.ofCurrent()
+ .withPredicateScala(_.productType.id.is("product-type-id-1"))
+ .withSortScala(_.name.lang(ENGLISH).sort.asc)
+ .withExpansionPathsScala(_.productType)</code></pre>
+ </div>
+ </li>
+ <li class=new-in-release>
+ DSL for expansion of references in a product attribute.
+ <div class="rn-hidden">{@include.example io.sphere.sdk.products.expansion.ProductVariantExpansionModelTest#productAttributeReferenceExpansion()}</div>
+ </li>
+ <li class=new-in-release>{@link io.sphere.sdk.reviews.commands.ReviewDeleteCommand}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.client.SphereClientConfig#ofEnvironmentVariables(String)} to get the </li>
+ <li class=change-in-release>{@link io.sphere.sdk.client.SphereClient} implements {@link AutoCloseable} instead of {@link java.io.Closeable}.</li>
+ <li class=change-in-release>For timestamps we moved from {@link java.time.Instant} to {@link java.time.ZonedDateTime} since the latter also contains a timezone which better reflects SPHERE.IOs date time data.</li>
+ <li class=change-in-release>Getting the child categories of a category is not in category anymore but in {@link io.sphere.sdk.categories.CategoryTree#findByParent(Identifiable)}.</li>
+ <li class=fixed-in-release>Sphere client does not shutdown actors properly.  See <a target="_blank" href="https://github.com/sphereio/sphere-jvm-sdk/issues/491">#491</a>.</li>
+ <li class=removed-in-release>{@code Category#getPathInTree()}</li>
+ </ul>
+
+
+
+
+
+
+
+
+
+
 
 
 
