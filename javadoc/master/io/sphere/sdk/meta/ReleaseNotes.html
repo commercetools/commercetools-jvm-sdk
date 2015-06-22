@@ -122,6 +122,74 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
+ <h3 class=released-version id="v1_0_0_M15">1.0.0-M15</h3>
+
+ <a class="theme-btn expand-all">Expand all</a>
+
+ <br>
+ <br>
+
+ <ul>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getIdentifier--"><code>ProductVariant.getIdentifier()</code></a> enables to get the product id and the variant id from the variant. This is nice, since this data is often needed and on the product variant level the product ID is not available.</li>
+ <li class=new-in-release>Error reporting has been improved. Especially if JSON mappings do not fit.</li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/carts/LineItem.html#getProductSlug--"><code>LineItem.getProductSlug()</code></a></li>
+ <li class=new-in-release>Send User-Agent head for oauth requests.</li>
+ <li class=new-in-release>A lot of more reference expansions.</li>
+ <li class=new-in-release>Reference expansion for single elements of a list, example: <a href="../../../../io/sphere/sdk/categories/expansion/CategoryExpansionModel.html#ancestors-int-"><code>CategoryExpansionModel.ancestors(int)</code></a>.</li>
+ <li class=new-in-release>Reference expansion for fetch endpoints, e.g., <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-"><code>ProductProjectionByIdFetch.withExpansionPaths(ExpansionPath)</code></a>.</li>
+ <li class=new-in-release>Set the reference expansion, query predicate and sort expression more convenient (less imports, less class search) with lambdas.
+    <div class="rn-hidden">
+ <div id="example-QueryMetaDslDemo-demo1--%s" class=code-example><pre><code class='java'>final ProductProjectionQuery query = ProductProjectionQuery.ofCurrent()
+        .withPredicate(m -&gt; m.productType().id().is("product-type-id-1"))
+        .withSort(m -&gt; m.name().lang(Locale.ENGLISH).sort().asc())
+        .withExpansionPaths(m -&gt; m.productType());
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryMetaDslDemo.java" target="_blank">test code</a>.</pre></div>
+
+ instead of
+
+ <div id="example-QueryMetaDslDemo-demo2--%s" class=code-example><pre><code class='java'>//you need to know and import this classes
+final ProductProjectionQueryModel queryModel = ProductProjectionQueryModel.of();
+final ProductProjectionExpansionModel&lt;ProductProjection&gt; expansionModel = ProductProjectionExpansionModel.of();
+
+final ProductProjectionQuery query = ProductProjectionQuery.ofCurrent()
+        .withPredicate(queryModel.productType().id().is("product-type-id-1"))
+        .withSort(queryModel.name().lang(Locale.ENGLISH).sort().asc())
+        .withExpansionPaths(expansionModel.productType());
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryMetaDslDemo.java" target="_blank">test code</a>.</pre></div>
+
+ In Scala (with add-ons) it will look like <pre><code>val query = ProductProjectionQuery.ofCurrent()
+ .withPredicateScala(_.productType.id.is("product-type-id-1"))
+ .withSortScala(_.name.lang(ENGLISH).sort.asc)
+ .withExpansionPathsScala(_.productType)</code></pre>
+ </div>
+ </li>
+ <li class=new-in-release>
+ DSL for expansion of references in a product attribute.
+ <div class="rn-hidden"><div id="io-sphere-sdk-products-expansion-ProductVariantExpansionModelTest-productAttributeReferenceExpansion--%s" class=code-example><pre><code class='java'>final ProductProjectionQuery query = ProductProjectionQuery.ofCurrent()
+        .withExpansionPaths(m -&gt; m.masterVariant().attributes().value());
+assertThat(query.expansionPaths().get(0).toSphereExpand())
+        .isEqualTo("masterVariant.attributes[*].value");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductVariantExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
+ </li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html" title="class in io.sphere.sdk.reviews.commands"><code>ReviewDeleteCommand</code></a></li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/client/SphereClientConfig.html#ofEnvironmentVariables-java.lang.String-"><code>SphereClientConfig.ofEnvironmentVariables(String)</code></a> to get the </li>
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/client/SphereClient.html" title="interface in io.sphere.sdk.client"><code>SphereClient</code></a> implements <code>AutoCloseable</code> instead of <code>Closeable</code>.</li>
+ <li class=change-in-release>For timestamps we moved from <code>Instant</code> to <code>ZonedDateTime</code> since the latter also contains a timezone which better reflects SPHERE.IOs date time data.</li>
+ <li class=change-in-release>Getting the child categories of a category is not in category anymore but in <a href="../../../../io/sphere/sdk/categories/CategoryTree.html#findByParent-io.sphere.sdk.models.Identifiable-"><code>CategoryTree.findByParent(Identifiable)</code></a>.</li>
+ <li class=fixed-in-release>Sphere client does not shutdown actors properly.  See <a target="_blank" href="https://github.com/sphereio/sphere-jvm-sdk/issues/491">#491</a>.</li>
+ <li class=removed-in-release><code>Category#getPathInTree()</code></li>
+ </ul>
+
+
+
+
+
+
+
+
+
+
+
 
 
  <h3 class=released-version id="v1_0_0_M14">1.0.0-M14</h3>
