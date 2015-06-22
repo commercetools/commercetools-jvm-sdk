@@ -17,6 +17,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.function.BiFunction;
 
 /**
+ <div class=release-notes>
  <h3>Legend</h3>
  <ul>
  <li class=removed-in-release>removed functionality</li>
@@ -34,11 +35,23 @@ import java.util.function.BiFunction;
  </ul>
  -->
 
- <h3 class=released-version id=v1_0_0_M14>1.0.0-M14</h3>
+
+
+ <h3 class=released-version id="v1_0_0_M14">1.0.0-M14</h3>
+
+<a class="theme-btn expand-all">Expand all</a>
+
+ <br>
+ <br>
+
  <ul>
      <li class=new-in-release>New fields in {@link io.sphere.sdk.products.Price}: {@link io.sphere.sdk.products.Price#validFrom} and {@link io.sphere.sdk.products.Price#validUntil}.</li>
-     <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO the json fields masterVariant (object) and variants (array of objects) together contain all variants.</li>
-     <li class=new-in-release>Using {@link ProductProjectionQuery#ofCurrent()} and {@link ProductProjectionQuery#ofStaged()} saves you the import of {@link ProductProjectionType}.</li>
+     <li class=new-in-release>
+        Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO the json fields masterVariant (object) and variants (array of objects) together contain all variants.
+     </li>
+     <li class=new-in-release>Using {@link ProductProjectionQuery#ofCurrent()} and {@link ProductProjectionQuery#ofStaged()} saves you the import of {@link ProductProjectionType}.
+
+    </li>
      <li class=new-in-release>{@link CompletionStage} does not support by default timeouts which are quite important in a reactive application so you can decorate the {@link io.sphere.sdk.client.SphereClient} with {@link io.sphere.sdk.client.TimeoutSphereClientDecorator} to get a {@link java.util.concurrent.TimeoutException} after a certain amount of time. But this does NOT cancel the request to SPHERE.IO.</li>
      <li class=new-in-release>The {@link io.sphere.sdk.reviews.Review} endpoints and models are implemented, but we suggest to not use it, since {@link io.sphere.sdk.reviews.Review}s cannot be deleted or marked as hidden.</li>
      <li class=new-in-release>New endpoint: Use {@link io.sphere.sdk.projects.queries.ProjectGet} to get the currencies, countries and languages of the SPHERE.IO project.</li>
@@ -310,6 +323,11 @@ import java.util.function.BiFunction;
  <li>Queries and commands for models are in there own package now and less coupled to the model.</li>
  <li>The query classes have been refactored.</li>
  </ul>
+
+
+
+
+ </div>
  */
 public final class ReleaseNotes {
     private ReleaseNotes() {

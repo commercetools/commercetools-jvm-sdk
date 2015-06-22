@@ -32,8 +32,8 @@ import io.sphere.sdk.models.Base;
  <p>For this example the configuration values are:</p>
 
  <pre><code>project key: jvm-sdk-dev-1
- client ID: ELqF0rykXD2fyS8s-IhIPKfQ
- client secret: 222222222222222222222222222222226</code></pre>
+client ID: ELqF0rykXD2fyS8s-IhIPKfQ
+client secret: 222222222222222222222222222222226</code></pre>
 
  <h3 id=instantiation>Instantiation</h3>
 
