@@ -15,13 +15,9 @@
 
     if(toc.length > 0) {
         $(".contentContainer", 0).prepend(
-                "<nav role='navigation' class='table-of-contents'><strong>Table of Contents</strong><ul>" +
-                toc + "</ul></nav>");
+            "<nav role='navigation' class='table-of-contents'><strong>Table of Contents</strong><ul>" +
+            toc + "</ul></nav>");
     }
-
-
-
-
 
     //moves this blocks up before the package listings
     var pullUpClass = "pull-up";
@@ -35,3 +31,18 @@
         $(this).siblings(".code-example-imports").toggle();
     });
 })();
+
+// ReleaseNotes - toggling hidden div
+
+$( ".show-more" ).click(function() {
+    $( this ).nextAll(".hidden").first().slideToggle( "fast", function() {
+    });
+    $( this ).toggleClass("show-more-rotate");
+});
+
+// Expand all hidden divs
+
+$( ".expand-all" ).click(function () {
+    $(".hidden").slideToggle(".hidden");
+    $(".show-more").toggleClass("show-more-rotate");
+});
