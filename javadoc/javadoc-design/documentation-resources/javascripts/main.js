@@ -30,19 +30,25 @@
     importShowButton.click(function(eventObject) {
         $(this).siblings(".code-example-imports").toggle();
     });
+
+    $(".rn-hidden").css("display", "none");
 })();
 
 // ReleaseNotes - toggling hidden div
 
-$( ".show-more" ).click(function() {
-    $( this ).nextAll(".hidden").first().slideToggle( "fast", function() {
-    });
-    $( this ).toggleClass("show-more-rotate");
+$(".rn-hidden").before('<div class="more-thing"><a class="show-more" href="#">more ...</a></div>')
+
+$(".more-thing").click(function(event) {
+    event.preventDefault();
+    $(this).nextAll(".rn-hidden").first().slideToggle("fast", function() { });
+    //$(this).hide();
 });
 
 // Expand all hidden divs
 
-$( ".expand-all" ).click(function () {
-    $(".hidden").slideToggle(".hidden");
-    $(".show-more").toggleClass("show-more-rotate");
+$(".expand-all").click(function () {
+    var attr = $(this).attr("data-for");
+    $("#" + attr).nextAll("ul .rn-hidden").first()
+    $(".rn-hidden").css("display", "block");
 });
+
