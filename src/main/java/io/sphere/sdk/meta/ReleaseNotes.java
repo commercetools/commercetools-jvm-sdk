@@ -58,6 +58,10 @@ import java.util.function.BiFunction;
  <li class=new-in-release>Reference expansion for fetch endpoints, e.g., {@link io.sphere.sdk.products.queries.ProductProjectionByIdFetch#withExpansionPaths(ExpansionPath)}.</li>
  <li class=new-in-release>Set the reference expansion, query predicate and sort expression more convenient (less imports, less class search) with lambdas.
  <div class="rn-hidden">
+ Migration pains: {@code QueryDsl<Category>} will be {@code CategoryQuery}
+
+ <p>Benefits of the new API:</p>
+
  {@include.example example.QueryMetaDslDemo#demo1()}
 
  instead of
@@ -76,11 +80,13 @@ import java.util.function.BiFunction;
  </li>
  <li class=new-in-release>{@link io.sphere.sdk.reviews.commands.ReviewDeleteCommand}</li>
  <li class=new-in-release>{@link io.sphere.sdk.client.SphereClientConfig#ofEnvironmentVariables(String)} to get the </li>
+ <li class=change-in-release>The product attributes have been refactored, look at the {@link ProductAttributeDocumentation} how it works now.</li>
  <li class=change-in-release>{@link io.sphere.sdk.client.SphereClient} implements {@link AutoCloseable} instead of {@link java.io.Closeable}.</li>
  <li class=change-in-release>For timestamps we moved from {@link java.time.Instant} to {@link java.time.ZonedDateTime} since the latter also contains a timezone which better reflects SPHERE.IOs date time data.</li>
  <li class=change-in-release>Getting the child categories of a category is not in category anymore but in {@link io.sphere.sdk.categories.CategoryTree#findByParent(Identifiable)}.</li>
  <li class=fixed-in-release>Sphere client does not shutdown actors properly.  See <a target="_blank" href="https://github.com/sphereio/sphere-jvm-sdk/issues/491">#491</a>.</li>
  <li class=removed-in-release>{@code Category#getPathInTree()}</li>
+ <li class=removed-in-release>{@code ExperimentalProductImageUploadCommand}</li>
  </ul>
 
 
