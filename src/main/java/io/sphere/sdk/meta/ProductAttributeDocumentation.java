@@ -6,10 +6,10 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 /**
  <h3 id="intro">Introduction</h3>
  <h3 id="product-type-creation">ProductType Creation</h3>
- <p>A {@link io.sphere.sdk.producttypes.ProductType} is like a schema how the product attributes are structured.</p>
- <p>{@link io.sphere.sdk.producttypes.ProductType}s contain a list of {@link io.sphere.sdk.attributes.AttributeDefinition}s, which can be seen as the attribute name and the corresponding type of the attribute.
- In one SPHERE.IO project the name type pair is global, so if you create an attribute "foo" of type String, you cannot create
- another {@link io.sphere.sdk.producttypes.ProductType} where "foo" has another type like {@link io.sphere.sdk.models.LocalizedStrings}. If you do it anyway you get an error message like:</p>
+ <p>A {@link io.sphere.sdk.producttypes.ProductType} is like a schema that defines how the product attributes are structured.</p>
+ <p>{@link io.sphere.sdk.producttypes.ProductType}s contain a list of {@link io.sphere.sdk.attributes.AttributeDefinition}s which corresponds to the name and type of each attribute, along with some additional information".
+ In one SPHERE.IO project the name/type pair is global, so if you create an attribute "foo" of type String, you cannot create
+ another {@link io.sphere.sdk.producttypes.ProductType} where "foo" has another type (e.g. {@link io.sphere.sdk.models.LocalizedStrings}). If you do it anyway you get an error message like:</p>
 
 <pre>"The attribute with name 'foo' has a different type on product type 'exampleproducttype'."</pre>
 
@@ -24,7 +24,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  <p>The tshirt product type contains the following attributes:</p>
 
  <ul>
-    <li>color as {@link io.sphere.sdk.models.LocalizedEnumValue} with the colors green and red and their translations in German and Englisch</li>
+    <li>color as {@link io.sphere.sdk.models.LocalizedEnumValue} with the colors green and red and their translations in German and English</li>
     <li>size as {@link io.sphere.sdk.models.PlainEnumValue} with S, M and X</li>
     <li>laundrySymbols as set of {@link io.sphere.sdk.models.LocalizedEnumValue} with temperature and tumble drying</li>
     <li>matchingProducts as set of product {@link io.sphere.sdk.models.Reference}s, which can point to products which are similar to the current product</li>
