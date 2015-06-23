@@ -15,6 +15,7 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpStatusCode;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.models.errors.InvalidJsonInputError;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.hamcrest.CustomTypeSafeMatcher;

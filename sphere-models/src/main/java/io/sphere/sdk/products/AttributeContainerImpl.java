@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeGetter;
+import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.attributes.AttributeMapper;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.Base;
@@ -25,17 +25,17 @@ class AttributeContainerImpl extends Base implements AttributeContainer {
     }
 
     @Override
-    public <T> Optional<T> getAttribute(final AttributeGetter<T> accessor) {
+    public <T> Optional<T> getAttribute(final NamedAttributeAccess<T> accessor) {
         final String attributeName = accessor.getName();
         final Optional<Attribute> attributeOption = getAttributes().stream()
                 .filter(a -> Objects.equals(attributeName, a.getName()))
                 .findFirst();
 
         return attributeOption.map(attribute -> {
-            final AttributeMapper<T> mapper = accessor.getMapper();
+            final AttributeMapper<T> mapper = accessor.attributeMapper();
 
             try {
-                return attribute.getValue(mapper);
+                return attribute.getValue(accessor);
             } catch (final JsonException e) {
                 throw transformError(e, attributeName, mapper);
             }

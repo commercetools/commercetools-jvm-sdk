@@ -1,6 +1,6 @@
 package io.sphere.sdk.orders;
 
-import io.sphere.sdk.attributes.Attribute;
+import io.sphere.sdk.attributes.AttributeImportDraft;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Image;
@@ -9,12 +9,14 @@ import io.sphere.sdk.products.Price;
 import java.util.List;
 import java.util.Optional;
 
+import static java.util.Arrays.asList;
+
 public class ProductVariantImportDraftBuilder extends Base implements Builder<ProductVariantImportDraft> {
     private final Optional<Integer> id;
     private final Optional<String> sku;
     private final Optional<String> productId;
     private Optional<List<Price>> prices = Optional.empty();
-    private Optional<List<Attribute>> attributes = Optional.empty();
+    private Optional<List<AttributeImportDraft>> attributes = Optional.empty();
     private Optional<List<Image>> images = Optional.empty();
 
     private ProductVariantImportDraftBuilder(final Optional<String> sku, final Optional<String> productId, final Optional<Integer> id) {
@@ -37,13 +39,17 @@ public class ProductVariantImportDraftBuilder extends Base implements Builder<Pr
         return prices(Optional.of(prices));
     }
 
-    public ProductVariantImportDraftBuilder attributes(final Optional<List<Attribute>> attributes) {
+    public ProductVariantImportDraftBuilder attributes(final Optional<List<AttributeImportDraft>> attributes) {
         this.attributes = attributes;
         return this;
     }
 
-    public ProductVariantImportDraftBuilder attributes(final List<Attribute> attributes) {
+    public ProductVariantImportDraftBuilder attributes(final List<AttributeImportDraft> attributes) {
         return attributes(Optional.of(attributes));
+    }
+
+    public ProductVariantImportDraftBuilder attributes(final AttributeImportDraft ... attributes) {
+        return attributes(asList(attributes));
     }
 
     public ProductVariantImportDraftBuilder images(final Optional<List<Image>> images) {

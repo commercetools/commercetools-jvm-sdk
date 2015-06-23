@@ -1,12 +1,13 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.attributes.AttributeExtraction;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.MetaProductType;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeDefinition;
-import io.sphere.sdk.attributes.AttributeGetterSetter;
+import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.json.JsonUtils;
 import org.junit.Test;
 
@@ -28,9 +29,9 @@ public class ProductAttributeAccessTest {
     private final ProductVariant variant = product.getMasterData().getCurrent().get().getMasterVariant();
     private final ProductType productType = productProjection.getProductType().getObj().get();
 
-    private final AttributeGetterSetter<LocalizedStrings> localizedStringsAttributeGetterSetter = ofLocalizedStrings().ofName(LOC_STRING_ATTRIBUTE);
-    private final AttributeGetterSetter<LocalizedStrings> wrongTypeAttributeGetterSetter = ofLocalizedStrings().ofName("boolean-attribute");
-    private final AttributeGetterSetter<LocalizedStrings> notPresentAttributeGetterSetter = ofLocalizedStrings().ofName(NOT_PRESENT);
+    private final NamedAttributeAccess<LocalizedStrings> localizedStringsNamedAttributeAccess = ofLocalizedStrings().ofName(LOC_STRING_ATTRIBUTE);
+    private final NamedAttributeAccess<LocalizedStrings> wrongTypeNamedAttributeAccess = ofLocalizedStrings().ofName("boolean-attribute");
+    private final NamedAttributeAccess<LocalizedStrings> notPresentNamedAttributeAccess = ofLocalizedStrings().ofName(NOT_PRESENT);
 
     @Test
     public void size() throws Exception {
@@ -38,24 +39,36 @@ public class ProductAttributeAccessTest {
     }
 
     @Test
+    public void getterWithJsonAttributeAccess() throws Exception {
+        assertThat(variant.getAttribute(LOC_STRING_ATTRIBUTE, ofJsonNode()).get()).
+                isEqualTo(JsonUtils.readTree("{\"de\":\"val-loc-string-de\",\"en\":\"val-loc-string-en\"}".getBytes()));
+    }
+
+    @Test
+    public void getterWithAttributeAccess() throws Exception {
+        assertThat(variant.getAttribute(LOC_STRING_ATTRIBUTE, ofLocalizedStrings()).get()).
+                isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
+    }
+
+    @Test
     public void localizedStrings() throws Exception {
-        assertThat(variant.getAttribute(localizedStringsAttributeGetterSetter).get()).
+        assertThat(variant.getAttribute(localizedStringsNamedAttributeAccess).get()).
                 isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
     }
 
     @Test
     public void attributeNotFound() throws Exception {
-        assertThat(variant.getAttribute(notPresentAttributeGetterSetter)).isEmpty();
+        assertThat(variant.getAttribute(notPresentNamedAttributeAccess)).isEmpty();
     }
 
     @Test(expected = JsonException.class)
     public void wrongAttributeType() throws Exception {
-        variant.getAttribute(wrongTypeAttributeGetterSetter);
+        variant.getAttribute(wrongTypeNamedAttributeAccess);
     }
 
     @Test
     public void productProjection() throws Exception {
-        assertThat(productProjection.getMasterVariant().getAttribute(localizedStringsAttributeGetterSetter).get()).
+        assertThat(productProjection.getMasterVariant().getAttribute(localizedStringsNamedAttributeAccess).get()).
                 isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
 
     }
@@ -89,7 +102,7 @@ public class ProductAttributeAccessTest {
         final MetaProductType metaProductType = MetaProductType.of(asList(productType));
         final Locale locale = Locale.GERMAN;
         final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName()).get();
-        return attr.<String>collect(attrDefinition)
+        return AttributeExtraction.<String>of(attrDefinition, attr)
                 .ifIs(ofLocalizedStrings(), lString -> lString.get(locale).orElse("<no translation found>"))
                 .ifGuarded(ofString(), s -> s.length() > 2000 ? Optional.empty() : Optional.of(s))
                 .getValue().orElse("<no mapping found>");

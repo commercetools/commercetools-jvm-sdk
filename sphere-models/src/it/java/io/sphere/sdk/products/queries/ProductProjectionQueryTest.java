@@ -51,9 +51,8 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                     .withExpansionPaths(m -> m.masterVariant().attributes().value())
                     .toQuery();
             final ProductProjection productProjection = execute(query).head().get();
-            final AttributeGetterSetter<Reference<Product>> getterSetter =
-                    AttributeAccess.ofProductReference().ofName("productreference");
-            final Reference<Product> productReference = productProjection.getMasterVariant().getAttribute(getterSetter).get();
+            final NamedAttributeAccess<Reference<Product>> namedAttributeAccess = AttributeAccess.ofProductReference().ofName("productreference");
+            final Reference<Product> productReference = productProjection.getMasterVariant().getAttribute(namedAttributeAccess).get();
             final Product expandedReferencedProduct = productReference.getObj().get();
             assertThat(expandedReferencedProduct.getId()).isEqualTo(referencedProduct.getId());
         });

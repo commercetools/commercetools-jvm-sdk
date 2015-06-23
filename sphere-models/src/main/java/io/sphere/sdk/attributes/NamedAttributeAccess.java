@@ -1,5 +1,7 @@
 package io.sphere.sdk.attributes;
 
+import io.sphere.sdk.models.PlainEnumValue;
+
 /**
  * <h2>Type-safe attribute access</h2>
  *
@@ -52,8 +54,10 @@ package io.sphere.sdk.attributes;
  * {@include.example io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle.TShirt}
  *
  */
-public interface AttributeGetterSetter<T> extends AttributeGetter<T>, AttributeSetter<T> {
-    static <T> AttributeGetterSetter<T> of(final String name, final AttributeMapper<T> mapper) {
-        return new AttributeGetterSetterImpl<>(name, mapper);
-    }
+public interface NamedAttributeAccess<T> extends AttributeAccess<T> {
+    String getName();
+
+    Attribute valueOf(final T input);
+
+    AttributeDraft draftOf(T value);
 }

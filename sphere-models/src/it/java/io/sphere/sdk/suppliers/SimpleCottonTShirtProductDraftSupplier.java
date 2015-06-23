@@ -23,8 +23,8 @@ public class SimpleCottonTShirtProductDraftSupplier implements Supplier<ProductD
     @Override
     public ProductDraft get() {
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
-                .plusAttribute(Sizes.ATTRIBUTE.valueOf(Sizes.S))
-                .plusAttribute(Colors.ATTRIBUTE.valueOf(Colors.GREEN))
+                .plusAttribute(Sizes.ATTRIBUTE.draftOf(Sizes.S))
+                .plusAttribute(Colors.ATTRIBUTE.draftOf(Colors.GREEN))
                 .sku(UUID.randomUUID().toString())
                 .build();
         final LocalizedStrings slug = en(name).slugifiedUnique();

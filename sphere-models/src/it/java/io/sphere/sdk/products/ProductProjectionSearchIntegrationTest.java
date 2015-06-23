@@ -361,12 +361,12 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                                              final String color, final int size1, final int size2, final String sku) {
         final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName, ENGLISH, englishName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
-                .attributes(Attribute.of(ATTR_NAME_SIZE, size1), Attribute.of(ATTR_NAME_COLOR, color))
+                .attributes(AttributeDraft.of(ATTR_NAME_SIZE, size1), AttributeDraft.of(ATTR_NAME_COLOR, color))
                 .price(Price.of(new BigDecimal("23.45"), EUR))
                 .sku(sku)
                 .build();
         final ProductVariantDraft variant = ProductVariantDraftBuilder.of()
-                .attributes(Attribute.of(ATTR_NAME_SIZE, size2))
+                .attributes(AttributeDraft.of(ATTR_NAME_SIZE, size2))
                 .price(Price.of(new BigDecimal("27.45"), EUR))
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), masterVariant)
@@ -377,7 +377,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static Product createEvilTestProduct(final ProductType productType, final String germanName, final String evilValue, final String sku) {
         final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
-                .attributes(Attribute.of(ATTR_NAME_EVIL, evilValue))
+                .attributes(AttributeDraft.of(ATTR_NAME_EVIL, evilValue))
                 .sku(sku)
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), masterVariant).build();

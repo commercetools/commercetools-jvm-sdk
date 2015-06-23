@@ -19,9 +19,8 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 import static io.sphere.sdk.products.ProductFixtures.delete;
-import static io.sphere.sdk.test.SphereTestUtils.en;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SphereInternalLogger.getLogger;
-import static java.util.Arrays.asList;
 
 public final class ProductTypeFixtures {
     private static final String productReferenceProductTypeName = "productreference";
@@ -77,5 +76,12 @@ public final class ProductTypeFixtures {
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(productReferenceProductTypeName, "has an attribute which is reference to a product", asList(productReferenceDefinition));
         final Optional<ProductType> productTypeOptional = client.execute(ProductTypeQuery.of().byName(productReferenceProductTypeName)).head();
         return productTypeOptional.orElseGet(() -> client.execute(ProductTypeCreateCommand.of(productTypeDraft)));
+    }
+
+    public static ProductType defaultProductType(final TestClient client) {
+        final String name = "referenceable-product-1";
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(name, "", asList());
+        return client.execute(ProductTypeQuery.of().byName(name)).head()
+                .orElseGet(() -> client.execute(ProductTypeCreateCommand.of(productTypeDraft)));
     }
 }

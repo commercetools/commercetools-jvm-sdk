@@ -2,8 +2,11 @@ package io.sphere.sdk.test;
 
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.queries.Query;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+
+import java.util.Optional;
 
 public abstract class IntegrationTest {
 
@@ -55,6 +58,11 @@ public abstract class IntegrationTest {
                 throw new RuntimeException("Thread leak! After client shutdown created threads are still alive. Threads now: " + threadsNow + " Threads before: " + threadCountAtStart);
             }
         }
+    }
+
+    protected static <T> T getOrCreate(final SphereRequest<T> createCommand, final Query<T> query) {
+        final Optional<T> resultOption = execute(query).head();
+        return resultOption.orElseGet(() -> execute(createCommand));
     }
 
     protected static int countThreads() {

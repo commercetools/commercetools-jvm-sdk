@@ -26,7 +26,7 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
 
         public static final List<LocalizedEnumValue> VALUES = asImmutableList(GREEN, RED);
 
-        public static final AttributeGetterSetter<LocalizedEnumValue> ATTRIBUTE =
+        public static final NamedAttributeAccess<LocalizedEnumValue> ATTRIBUTE =
                 AttributeAccess.ofLocalizedEnumValue().ofName("color");
     }
 
@@ -37,7 +37,7 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
 
         public static final List<PlainEnumValue> VALUES = asImmutableList(S, M, X);
 
-        public static final AttributeGetterSetter<PlainEnumValue> ATTRIBUTE =
+        public static final NamedAttributeAccess<PlainEnumValue> ATTRIBUTE =
                 AttributeAccess.ofPlainEnumValue().ofName("size");
     }
 

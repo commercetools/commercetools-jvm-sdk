@@ -1,8 +1,6 @@
 package io.sphere.sdk.products.commands;
 
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeAccess;
-import io.sphere.sdk.attributes.AttributeGetterSetter;
+import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.*;
@@ -257,12 +255,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
             //example for MonetaryAmount attribute
             final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
-            final AttributeGetterSetter<MonetaryAmount> moneyAttribute =
+            final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
                     AttributeAccess.ofMoney().ofName(moneyAttributeName);
             final MonetaryAmount newValueForMoney = EURO_10;
 
             //example for LocalizedEnumValue attribute
-            final AttributeGetterSetter<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+            final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
             final LocalizedEnumValue oldValueForColor = Colors.GREEN;
             final LocalizedEnumValue newValueForColor = Colors.RED;
 
@@ -291,12 +289,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             //the setter contains the name and a JSON mapper, declare it only one time in your project per attribute
             //example for MonetaryAmount attribute
             final String moneyAttributeName = MONEY_ATTRIBUTE_NAME;
-            final AttributeGetterSetter<MonetaryAmount> moneyAttribute =
+            final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
                     AttributeAccess.ofMoney().ofName(moneyAttributeName);
             final MonetaryAmount newValueForMoney = EURO_10;
 
             //example for LocalizedEnumValue attribute
-            final AttributeGetterSetter<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+            final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
             final LocalizedEnumValue oldValueForColor = Colors.GREEN;
             final LocalizedEnumValue newValueForColor = Colors.RED;
 
@@ -367,16 +365,16 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void addVariant() throws Exception {
-        final AttributeGetterSetter<MonetaryAmount> moneyAttribute =
+        final NamedAttributeAccess<MonetaryAmount> moneyAttribute =
                 AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
-        final Attribute moneyAttributeValue = Attribute.of(moneyAttribute, EURO_10);
+        final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
 
-        final AttributeGetterSetter<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
+        final NamedAttributeAccess<LocalizedEnumValue> colorAttribute = Colors.ATTRIBUTE;
         final LocalizedEnumValue color = Colors.RED;
-        final Attribute colorAttributeValue = Attribute.of(colorAttribute, color);
+        final AttributeDraft colorAttributeValue = AttributeDraft.of(colorAttribute, color);
 
-        final AttributeGetterSetter<PlainEnumValue> sizeAttribute = Sizes.ATTRIBUTE;
-        final Attribute sizeValue = Attribute.of(sizeAttribute, Sizes.M);
+        final NamedAttributeAccess<PlainEnumValue> sizeAttribute = Sizes.ATTRIBUTE;
+        final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
 
 
         withUpdateableProduct(client(), product -> {
@@ -384,7 +382,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             final Price price = PRICE;
             final List<Price> prices = asList(price);
-            final List<Attribute> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
+            final List<AttributeDraft> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
             final Optional<String> sku = Optional.of(randomKey());
             final ProductUpdateCommand addVariantCommand =
                     ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, sku, STAGED_AND_CURRENT));

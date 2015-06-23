@@ -1,8 +1,8 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeSetter;
+import io.sphere.sdk.attributes.AttributeDraft;
+import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.ProductUpdateScope;
 
 import java.util.Optional;
@@ -59,13 +59,13 @@ public class SetAttributeInAllVariants extends StageableProductUpdateAction {
     /**
      * Action to remove a custom attribute.
      *
-     * @param attributeSetter object containing the name of the attribute
+     * @param NamedAttributeAccess object containing the name of the attribute
      * @param productUpdateScope the scope where the attribute should be updated
      * @param <T> type of the attribute
      * @return update action
      */
-    public static <T> SetAttributeInAllVariants ofUnsetAttribute(final AttributeSetter<T> attributeSetter, final ProductUpdateScope productUpdateScope) {
-        return of(attributeSetter.getName(), Optional.<JsonNode>empty(), productUpdateScope);
+    public static <T> SetAttributeInAllVariants ofUnsetAttribute(final NamedAttributeAccess<T> NamedAttributeAccess, final ProductUpdateScope productUpdateScope) {
+        return of(NamedAttributeAccess.getName(), Optional.<JsonNode>empty(), productUpdateScope);
     }
 
     /**
@@ -75,8 +75,8 @@ public class SetAttributeInAllVariants extends StageableProductUpdateAction {
      * @param productUpdateScope the scope where the attribute should be updated
      * @return update action
      */
-    public static SetAttributeInAllVariants of(final Attribute attribute, final ProductUpdateScope productUpdateScope) {
-        return of(attribute.getName(), Optional.of(attribute.valueAsJson()), productUpdateScope);
+    public static SetAttributeInAllVariants of(final AttributeDraft attribute, final ProductUpdateScope productUpdateScope) {
+        return of(attribute.getName(), Optional.of(attribute.getValue()), productUpdateScope);
     }
 
     /**
@@ -88,7 +88,7 @@ public class SetAttributeInAllVariants extends StageableProductUpdateAction {
      * @param <T> type of the attribute
      * @return update action
      */
-    public static <T> SetAttributeInAllVariants of(final AttributeSetter<T> setter, final T value, final ProductUpdateScope productUpdateScope) {
-        return of(Attribute.of(setter, value), productUpdateScope);
+    public static <T> SetAttributeInAllVariants of(final NamedAttributeAccess<T> setter, final T value, final ProductUpdateScope productUpdateScope) {
+        return of(AttributeDraft.of(setter, value), productUpdateScope);
     }
 }

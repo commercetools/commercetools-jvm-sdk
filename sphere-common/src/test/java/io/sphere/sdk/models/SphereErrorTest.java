@@ -1,6 +1,6 @@
 package io.sphere.sdk.models;
 
-import io.sphere.sdk.client.InvalidJsonInputError;
+import io.sphere.sdk.models.errors.InvalidJsonInputError;
 import io.sphere.sdk.json.JsonUtils;
 import org.junit.Test;
 

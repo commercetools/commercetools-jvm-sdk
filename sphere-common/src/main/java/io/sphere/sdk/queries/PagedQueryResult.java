@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * A container for query responses which contains a subset of the matching values.
@@ -41,5 +42,40 @@ public class PagedQueryResult<T> extends PagedResult<T> {
     @JsonIgnore
     public static <T> PagedQueryResultDsl<T> of(final T singleResult) {
         return of(Arrays.asList(singleResult));
+    }
+
+    @Override
+    public int getOffset() {
+        return super.getOffset();
+    }
+
+    @Override
+    public List<T> getResults() {
+        return super.getResults();
+    }
+
+    @Override
+    public int getTotal() {
+        return super.getTotal();
+    }
+
+    @Override
+    public Optional<T> head() {
+        return super.head();
+    }
+
+    @Override
+    public boolean isFirst() {
+        return super.isFirst();
+    }
+
+    @Override
+    public boolean isLast() {
+        return super.isLast();
+    }
+
+    @Override
+    public int size() {
+        return super.size();
     }
 }

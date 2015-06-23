@@ -17,9 +17,13 @@ public class ReferenceQueryModel<T, R> extends QueryModelImpl<T> implements Equa
         return ComparisonQueryPredicate.ofIsEqualTo(idSegment(), id);
     }
 
+    public QueryPredicate<T> isInIds(final List<String> ids) {
+        return new IsInQueryPredicate<>(idSegment(), ids);
+    }
+
     public QueryPredicate<T> isIn(final List<? extends Referenceable<R>> elements) {
         final List<String> ids = elements.stream().map(elem -> elem.toReference().getId()).collect(toList());
-        return new IsInQueryPredicate<>(idSegment(), ids);
+        return isInIds(ids);
     }
 
     public StringQueryModel<T> id() {

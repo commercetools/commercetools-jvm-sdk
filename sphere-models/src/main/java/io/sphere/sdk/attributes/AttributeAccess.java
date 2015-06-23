@@ -1,274 +1,226 @@
 package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.*;
+import io.sphere.sdk.json.TypeReferences;
+import io.sphere.sdk.models.LocalizedEnumValue;
+import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.AttributeContainer;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
 
 import javax.money.MonetaryAmount;
-import java.time.ZonedDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.Set;
-import java.util.function.Predicate;
 
 import static io.sphere.sdk.json.TypeReferences.*;
 
 /**
  *
  * @param <T> the type of the attribute
- * @see io.sphere.sdk.attributes.AttributeGetterSetter
+ * @see NamedAttributeAccess
  */
-public final class AttributeAccess<T> extends Base {
-    private final AttributeMapper<T> attributeMapper;
-    private final java.util.function.Predicate<AttributeDefinition> canHandle;
+public interface AttributeAccess<T> {
+    NamedAttributeAccess<T> ofName(String name);
 
+    AttributeMapper<T> attributeMapper();
 
-    private AttributeAccess(final AttributeMapper<T> attributeMapper, final Predicate<AttributeDefinition> canHandle) {
-        this.attributeMapper = attributeMapper;
-        this.canHandle = canHandle;
+    boolean canHandle(AttributeDefinition attributeDefinition);
+
+    static AttributeAccess<Boolean> ofBoolean() {
+        return AttributeAccessImpl.ofPrimitive(booleanTypeReference(), BooleanType.class);
     }
 
-    public static AttributeAccess<Boolean> ofBoolean() {
-        return ofPrimitive(booleanTypeReference(), BooleanType.class);
-    }
-
-    public static AttributeAccess<Set<Boolean>> ofBooleanSet() {
-        return ofSet(BooleanType.class, new TypeReference<Set<Boolean>>() {
+    static AttributeAccess<Set<Boolean>> ofBooleanSet() {
+        return AttributeAccessImpl.ofSet(BooleanType.class, new TypeReference<Set<Boolean>>() {
         });
     }
 
-    public static AttributeAccess<String> ofString() {
-        return ofPrimitive(stringTypeReference(), TextType.class);
+    static AttributeAccess<String> ofString() {
+        return AttributeAccessImpl.ofPrimitive(stringTypeReference(), TextType.class);
     }
 
-    public static AttributeAccess<Set<String>> ofStringSet() {
-        return ofSet(TextType.class, new TypeReference<Set<String>>() {
+    static AttributeAccess<Set<String>> ofStringSet() {
+        return AttributeAccessImpl.ofSet(TextType.class, new TypeReference<Set<String>>() {
         });
     }
 
-    public static AttributeAccess<String> ofText() {
+    static AttributeAccess<String> ofText() {
         return ofString();
     }
 
-    public static AttributeAccess<Set<String>> ofTextSet() {
+    static AttributeAccess<Set<String>> ofTextSet() {
         return ofStringSet();
     }
 
-    public static AttributeAccess<LocalizedStrings> ofLocalizedStrings() {
-        return ofPrimitive(LocalizedStrings.typeReference(), LocalizedStringsType.class);
+    static AttributeAccess<LocalizedStrings> ofLocalizedStrings() {
+        return AttributeAccessImpl.ofPrimitive(LocalizedStrings.typeReference(), LocalizedStringsType.class);
     }
 
-    public static AttributeAccess<Set<LocalizedStrings>> ofLocalizedStringsSet() {
-        return ofSet(LocalizedStringsType.class, new TypeReference<Set<LocalizedStrings>>() {});
-    }
-
-    public static AttributeAccess<PlainEnumValue> ofPlainEnumValue() {
-        return ofEnumLike(PlainEnumValue.typeReference(), EnumType.class);
-    }
-
-    public static AttributeAccess<Set<PlainEnumValue>> ofPlainEnumValueSet() {
-        return ofEnumLikeSet(EnumType.class, new TypeReference<Set<PlainEnumValue>>() {});
-    }
-
-    public static AttributeAccess<LocalizedEnumValue> ofLocalizedEnumValue() {
-        return ofEnumLike(LocalizedEnumValue.typeReference(), LocalizedEnumType.class);
-    }
-
-    public static AttributeAccess<Set<LocalizedEnumValue>> ofLocalizedEnumValueSet() {
-        return ofEnumLikeSet(LocalizedEnumType.class, new TypeReference<Set<LocalizedEnumValue>>() {});
-    }
-
-    public static AttributeAccess<Double> ofDouble() {
-        return ofPrimitive(doubleTypeReference(), NumberType.class);
-    }
-
-    public static AttributeAccess<Set<Double>> ofDoubleSet() {
-        return ofSet(NumberType.class, new TypeReference<Set<Double>>() {});
-    }
-
-    public static AttributeAccess<MonetaryAmount> ofMoney() {
-        return ofPrimitive(monetaryAmountTypeReference(), MoneyType.class);
-    }
-
-    public static AttributeAccess<Set<MonetaryAmount>> ofMoneySet() {
-        return ofSet(MoneyType.class, new TypeReference<Set<MonetaryAmount>>() {});
-    }
-
-    public static AttributeAccess<LocalDate> ofDate() {
-        return ofPrimitive(localDateTypeReference(), DateType.class);
-    }
-
-    public static AttributeAccess<Set<LocalDate>> ofDateSet() {
-        return ofSet(DateType.class, new TypeReference<Set<LocalDate>>() {});
-    }
-
-    public static AttributeAccess<LocalTime> ofTime() {
-        return ofPrimitive(localTimeTypeReference(), TimeType.class);
-    }
-
-    public static AttributeAccess<Set<LocalTime>> ofTimeSet() {
-        return ofSet(TimeType.class, new TypeReference<Set<LocalTime>>() {
+    static AttributeAccess<Set<LocalizedStrings>> ofLocalizedStringsSet() {
+        return AttributeAccessImpl.ofSet(LocalizedStringsType.class, new TypeReference<Set<LocalizedStrings>>() {
         });
     }
 
-    public static AttributeAccess<ZonedDateTime> ofDateTime() {
-        return ofPrimitive(ZonedDateTimeTypeReference(), DateTimeType.class);
+    static AttributeAccess<PlainEnumValue> ofPlainEnumValue() {
+        return AttributeAccessImpl.ofEnumLike(PlainEnumValue.typeReference(), EnumType.class);
     }
 
-    public static AttributeAccess<Set<ZonedDateTime>> ofDateTimeSet() {
-        return ofSet(DateTimeType.class, new TypeReference<Set<ZonedDateTime>>() {
+    static AttributeAccess<Set<PlainEnumValue>> ofPlainEnumValueSet() {
+        return AttributeAccessImpl.ofEnumLikeSet(EnumType.class, new TypeReference<Set<PlainEnumValue>>() {
         });
     }
 
-    public static AttributeAccess<Reference<Product>> ofProductReference() {
-        return ofReferenceType(ReferenceType.ofProduct());
+    static AttributeAccess<LocalizedEnumValue> ofLocalizedEnumValue() {
+        return AttributeAccessImpl.ofEnumLike(LocalizedEnumValue.typeReference(), LocalizedEnumType.class);
     }
 
-    public static AttributeAccess<Set<Reference<Product>>> ofProductReferenceSet() {
-        return ofSet(ReferenceType.ofProduct(), new TypeReference<Set<Reference<Product>>>() {
+    static AttributeAccess<Set<LocalizedEnumValue>> ofLocalizedEnumValueSet() {
+        return AttributeAccessImpl.ofEnumLikeSet(LocalizedEnumType.class, new TypeReference<Set<LocalizedEnumValue>>() {
         });
     }
 
-    public static AttributeAccess<Reference<ProductType>> ofProductTypeReference() {
-        return ofReferenceType(ReferenceType.ofProductType());
+    static AttributeAccess<Double> ofDouble() {
+        return AttributeAccessImpl.ofPrimitive(doubleTypeReference(), NumberType.class);
     }
 
-    public static AttributeAccess<Set<Reference<ProductType>>> ofProductTypeReferenceSet() {
-        return ofSet(ReferenceType.ofProductType(), new TypeReference<Set<Reference<ProductType>>>() {
+    static AttributeAccess<Set<Double>> ofDoubleSet() {
+        return AttributeAccessImpl.ofSet(NumberType.class, new TypeReference<Set<Double>>() {
         });
     }
 
-    public static AttributeAccess<Reference<Category>> ofCategoryReference() {
-        return ofReferenceType(ReferenceType.ofCategory());
+    static AttributeAccess<MonetaryAmount> ofMoney() {
+        return AttributeAccessImpl.ofPrimitive(monetaryAmountTypeReference(), MoneyType.class);
     }
 
-    public static AttributeAccess<Set<Reference<Category>>> ofCategoryReferenceSet() {
-        return ofSet(ReferenceType.ofCategory(), new TypeReference<Set<Reference<Category>>>() {
+    static AttributeAccess<Set<MonetaryAmount>> ofMoneySet() {
+        return AttributeAccessImpl.ofSet(MoneyType.class, new TypeReference<Set<MonetaryAmount>>() {
         });
     }
 
-    public static AttributeAccess<Reference<Channel>> ofChannelReference() {
-        return ofReferenceType(ReferenceType.ofChannel());
+    static AttributeAccess<LocalDate> ofLocalDate() {
+        return ofDate();
     }
 
-    public static AttributeAccess<Set<Reference<Channel>>> ofChannelReferenceSet() {
-        return ofSet(ReferenceType.ofChannel(), new TypeReference<Set<Reference<Channel>>>() {
+    static AttributeAccess<Set<LocalDate>> ofLocalDateSet() {
+        return ofDateSet();
+    }
+
+    static AttributeAccess<LocalDate> ofDate() {
+        return AttributeAccessImpl.ofPrimitive(localDateTypeReference(), DateType.class);
+    }
+
+    static AttributeAccess<Set<LocalDate>> ofDateSet() {
+        return AttributeAccessImpl.ofSet(DateType.class, new TypeReference<Set<LocalDate>>() {
         });
     }
 
-    public AttributeGetterSetter<T> getterSetter(final String name) {
-        return ofName(name);
+    static AttributeAccess<LocalTime> ofLocalTime() {
+        return ofTime();
     }
 
-    public AttributeGetterSetter<T> ofName(final String name) {
-        return AttributeGetterSetter.of(name, attributeMapper);
+    static AttributeAccess<Set<LocalTime>> ofLocalTimeSet() {
+        return ofTimeSet();
     }
 
-    public static AttributeAccess<AttributeContainer> ofNested() {
-        return new AttributeAccess<>(new NestedAttributeMapperImpl(),
-                attributeDefinition -> attributeDefinition.getAttributeType() instanceof NestedType);
+    static AttributeAccess<LocalTime> ofTime() {
+        return AttributeAccessImpl.ofPrimitive(localTimeTypeReference(), TimeType.class);
     }
 
-    public static AttributeAccess<Set<AttributeContainer>> ofNestedSet() {
-        return ofSet(NestedType.class, new NestedSetAttributeMapperImpl());
-    }
-
-    public AttributeGetter<T> getter(final String name) {
-        return ofName(name);
-    }
-
-    public AttributeSetter<T> setter(final String name) {
-        return ofName(name);
-    }
-
-    public AttributeMapper<T> attributeMapper() {
-        return attributeMapper;
-    }
-
-    public boolean canHandle(final AttributeDefinition attributeDefinition) {
-        return canHandle.test(attributeDefinition);
-    }
-
-    private static <T extends WithKey> AttributeAccess<T> ofEnumLike(final TypeReference<T> typeReference, final Class<? extends AttributeType> attributeTypeClass) {
-        final AttributeMapper<T> mapper = new EnumLikeAttributeMapperImpl<>(typeReference);
-        return new AttributeAccess<>(mapper, attributeDefinition ->
-                attributeTypeClass.isAssignableFrom(attributeDefinition.getAttributeType().getClass())
-        );
-    }
-
-    private static <T> AttributeAccess<T> ofPrimitive(final TypeReference<T> typeReference, final Class<? extends AttributeType> attributeTypeClass) {
-        return new AttributeAccess<>(AttributeMapper.of(typeReference), attributeDefinition -> attributeTypeClass.isAssignableFrom(attributeDefinition.getAttributeType().getClass()));
-    }
-
-    private static <T> AttributeAccess<Reference<T>> ofReferenceType(final RichReferenceType<T> referenceType) {
-        final AttributeMapper<Reference<T>> mapper = new ReferenceAttributeMapperImpl<>(referenceType.typeReference());
-
-        return new AttributeAccess<>(mapper,
-                attributeDefinition -> {
-                    if (attributeDefinition.getAttributeType() instanceof ReferenceType) {
-                        final ReferenceType attributeType = (ReferenceType) attributeDefinition.getAttributeType();
-
-                        return attributeType.getReferenceTypeId().equals(referenceType.getReferenceTypeId());
-                    } else {
-                        return false;
-                    }
-                });
-    }
-
-    private static <T> AttributeAccess<Set<T>> ofSet(final Class<? extends AttributeType> typeClass, final TypeReference<Set<T>> typeReference) {
-        return ofSet(typeClass, AttributeMapper.of(typeReference));
-    }
-
-    private static <T> AttributeAccess<Set<T>> ofSet(final Class<? extends AttributeType> typeClass, final AttributeMapper<Set<T>> mapper) {
-        return new AttributeAccess<>(mapper, attributeDefinition -> {
-            if (attributeDefinition.getAttributeType() instanceof SetType) {
-                final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
-
-                return typeClass.isAssignableFrom(attributeType.getElementType().getClass());
-            } else {
-                return false;
-            }
+    static AttributeAccess<Set<LocalTime>> ofTimeSet() {
+        return AttributeAccessImpl.ofSet(TimeType.class, new TypeReference<Set<LocalTime>>() {
         });
     }
 
-    private static <T> AttributeAccess<Set<Reference<T>>> ofSet(final ReferenceType requiredReferenceType, final TypeReference<Set<Reference<T>>> typeReference) {
-        final AttributeMapper<Set<Reference<T>>> mapper = AttributeMapper.of(typeReference);
-        return new AttributeAccess<>(mapper, attributeDefinition -> {
-            final boolean canHandle;
+    static AttributeAccess<ZonedDateTime> ofDateTime() {
+        return AttributeAccessImpl.ofPrimitive(ZonedDateTimeTypeReference(), DateTimeType.class);
+    }
 
-            if (attributeDefinition.getAttributeType() instanceof SetType) {
-                final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
+    static AttributeAccess<Set<ZonedDateTime>> ofDateTimeSet() {
+        return AttributeAccessImpl.ofSet(DateTimeType.class, new TypeReference<Set<ZonedDateTime>>() {
+        });
+    }
 
-                if (attributeType.getElementType() instanceof ReferenceType) {
-                    final ReferenceType referenceType = (ReferenceType) attributeType.getElementType();
+    static AttributeAccess<ZonedDateTime> ofZonedDateTime() {
+        return ofDateTime();
+    }
 
-                    canHandle = referenceType.getReferenceTypeId().equals(requiredReferenceType.getReferenceTypeId());
-                } else {
-                    canHandle = false;
-                }
-            } else {
-                canHandle = false;
+    static AttributeAccess<Set<ZonedDateTime>> ofZonedDateTimeSet() {
+        return ofDateTimeSet();
+    }
+
+    static AttributeAccess<Reference<Product>> ofProductReference() {
+        return AttributeAccessImpl.ofReferenceType(ReferenceType.ofProduct());
+    }
+
+    static AttributeAccess<Set<Reference<Product>>> ofProductReferenceSet() {
+        return AttributeAccessImpl.ofSet(ReferenceType.ofProduct(), new TypeReference<Set<Reference<Product>>>() {
+        });
+    }
+
+    static AttributeAccess<Reference<ProductType>> ofProductTypeReference() {
+        return AttributeAccessImpl.ofReferenceType(ReferenceType.ofProductType());
+    }
+
+    static AttributeAccess<Set<Reference<ProductType>>> ofProductTypeReferenceSet() {
+        return AttributeAccessImpl.ofSet(ReferenceType.ofProductType(), new TypeReference<Set<Reference<ProductType>>>() {
+        });
+    }
+
+    static AttributeAccess<Reference<Category>> ofCategoryReference() {
+        return AttributeAccessImpl.ofReferenceType(ReferenceType.ofCategory());
+    }
+
+    static AttributeAccess<Set<Reference<Category>>> ofCategoryReferenceSet() {
+        return AttributeAccessImpl.ofSet(ReferenceType.ofCategory(), new TypeReference<Set<Reference<Category>>>() {
+        });
+    }
+
+    static AttributeAccess<Reference<Channel>> ofChannelReference() {
+        return AttributeAccessImpl.ofReferenceType(ReferenceType.ofChannel());
+    }
+
+    static AttributeAccess<Set<Reference<Channel>>> ofChannelReferenceSet() {
+        return AttributeAccessImpl.ofSet(ReferenceType.ofChannel(), new TypeReference<Set<Reference<Channel>>>() {
+        });
+    }
+
+    static AttributeAccess<JsonNode> ofJsonNode() {
+        final AttributeMapper<JsonNode> attributeMapper = new AttributeMapper<JsonNode>() {
+            @Override
+            public JsonNode deserialize(final JsonNode value) {
+                return value;
             }
 
-            return canHandle;
-        });
+            @Override
+            public JsonNode serialize(final JsonNode value) {
+                return value;
+            }
+        };
+        return new AttributeAccessImpl<>(attributeMapper, TypeReferences.jsonNodeTypeReference(), ad -> true);
     }
 
-    private static <T extends WithKey> AttributeAccess<Set<T>> ofEnumLikeSet(final Class<? extends AttributeType> clazz,
-                                                             final TypeReference<Set<T>> typeReference) {
-        final AttributeMapper<Set<T>> mapper = new EnumLikeSetAttributeMapperImpl<>(typeReference);
-        return new AttributeAccess<>(mapper, attributeDefinition -> {
-            if (attributeDefinition.getAttributeType() instanceof SetType) {
-                final SetType attributeType = (SetType) attributeDefinition.getAttributeType();
-
-                return clazz.isAssignableFrom(attributeType.getElementType().getClass());
-            } else {
-                return false;
+    static AttributeAccess<AttributeContainer> ofNested() {
+        return new AttributeAccessImpl<>(new NestedAttributeMapperImpl(), new TypeReference<AttributeContainer>() {
+            @Override
+            public String toString() {
+                return "TypeReference<AttributeContainer>";
             }
-        });
+        }, attributeDefinition -> attributeDefinition.getAttributeType() instanceof NestedType);
+    }
+
+    static AttributeAccess<Set<AttributeContainer>> ofNestedSet() {
+        return AttributeAccessImpl.ofSet(NestedType.class, new TypeReference<Set<AttributeContainer>>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Set<AttributeContainer>>";
+            }
+        }, new NestedSetAttributeMapperImpl());
     }
 }

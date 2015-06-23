@@ -1,6 +1,7 @@
 package io.sphere.sdk.meta;
 
 import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.expansion.ExpansionPath;
@@ -56,7 +57,7 @@ import java.util.function.BiFunction;
  <li class=new-in-release>Reference expansion for single elements of a list, example: {@link io.sphere.sdk.categories.expansion.CategoryExpansionModel#ancestors(int)}.</li>
  <li class=new-in-release>Reference expansion for fetch endpoints, e.g., {@link io.sphere.sdk.products.queries.ProductProjectionByIdFetch#withExpansionPaths(ExpansionPath)}.</li>
  <li class=new-in-release>Set the reference expansion, query predicate and sort expression more convenient (less imports, less class search) with lambdas.
-    <div class="rn-hidden">
+ <div class="rn-hidden">
  {@include.example example.QueryMetaDslDemo#demo1()}
 
  instead of
@@ -85,53 +86,34 @@ import java.util.function.BiFunction;
 
 
 
-
-
-
-
-
-
-
-
-
- <h3 class=released-version id="v1_0_0_M14">1.0.0-M14</h3>
-
-<a class="theme-btn expand-all">Expand all</a>
-
- <br>
- <br>
-
+ <h3 class=released-version id=v1_0_0_M14>1.0.0-M14</h3>
  <ul>
-     <li class=new-in-release>New fields in {@link io.sphere.sdk.products.Price}: {@link io.sphere.sdk.products.Price#validFrom} and {@link io.sphere.sdk.products.Price#validUntil}.</li>
-     <li class=new-in-release>
-        Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO the json fields masterVariant (object) and variants (array of objects) together contain all variants.
-     </li>
-     <li class=new-in-release>Using {@link ProductProjectionQuery#ofCurrent()} and {@link ProductProjectionQuery#ofStaged()} saves you the import of {@link ProductProjectionType}.
-
-    </li>
-     <li class=new-in-release>{@link CompletionStage} does not support by default timeouts which are quite important in a reactive application so you can decorate the {@link io.sphere.sdk.client.SphereClient} with {@link io.sphere.sdk.client.TimeoutSphereClientDecorator} to get a {@link java.util.concurrent.TimeoutException} after a certain amount of time. But this does NOT cancel the request to SPHERE.IO.</li>
-     <li class=new-in-release>The {@link io.sphere.sdk.reviews.Review} endpoints and models are implemented, but we suggest to not use it, since {@link io.sphere.sdk.reviews.Review}s cannot be deleted or marked as hidden.</li>
-     <li class=new-in-release>New endpoint: Use {@link io.sphere.sdk.projects.queries.ProjectGet} to get the currencies, countries and languages of the SPHERE.IO project.</li>
-     <li class=new-in-release>Categories with SEO meta attributes {@link Category#getMetaTitle()}, {@link Category#getMetaDescription()} and {@link Category#getMetaKeywords()} and
-     update actions {@link io.sphere.sdk.categories.commands.updateactions.SetMetaTitle}, {@link io.sphere.sdk.categories.commands.updateactions.SetMetaDescription} and {@link io.sphere.sdk.categories.commands.updateactions.SetMetaKeywords}.</li>
-     <li class=new-in-release>Cart discounts: {@link io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand}.</li>
-     <li class=new-in-release>Discount codes: {@link io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand}.</li>
-     <li class=change-in-release>{@link io.sphere.sdk.client.SphereApiConfig}, {@link io.sphere.sdk.client.SphereAuthConfig}, {@link io.sphere.sdk.client.SphereClientConfig} validates the input, so for example you cannot enter null or whitespace for the project key.</li>
-     <li class=change-in-release>Date time attributes in {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} are using <a href="https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html">ZonedDateTime</a> instead of <a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html">LocalDateTime</a>.</li>
-     <li class=change-in-release>The {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} has been improved with better naming and better documentation.</li>
-     <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
-     <li class=change-in-release>{@code io.sphere.sdk.queries.Predicate} has been renamed to {@link io.sphere.sdk.queries.QueryPredicate}.</li>
-     <li class=change-in-release>The JVM SDK itself uses for tests the <a href="http://joel-costigliola.github.io/assertj/">assertj</a> assertion methods instead of fest assertions.</li>
-     <li class=change-in-release>{@code io.sphere.sdk.products.commands.updateactions.SetMetaAttributes} has been removed since it is deprecated in SPHERE.IO.
-     Use {@link SetMetaTitle},
-         {@link SetMetaDescription},
-         {@link SetMetaKeywords} or {@link io.sphere.sdk.products.commands.updateactions.MetaAttributesUpdateActions} for all together.
-     </li>
-     <li class=change-in-release>Update of the Java Money library to version 1.0 which has some breaking changes in comparison to the release candidates.</li>
-     <li class=change-in-release>Some predicate methods have been renamed: "isOneOf" to "isIn", "isAnyOf" to "isIn", "isLessThanOrEquals" to "isLessThanOrEqualTo" (analog for greaterThan).</li>
-     <li class=fixed-in-release>The exception for a failing {@link io.sphere.sdk.customers.commands.CustomerSignInCommand} shows more problem details. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/397">#397</a>.</li>
-     <li class=fixed-in-release>There has been a thread leak if {@code io.sphere.sdk.client.SphereClientFactory#createClient(io.sphere.sdk.client.SphereClientConfig)} was used.
-     It created twice a http client instance and closed just one.</li>
+ <li class=new-in-release>New fields in {@link io.sphere.sdk.products.Price}: {@link io.sphere.sdk.products.Price#validFrom} and {@link io.sphere.sdk.products.Price#validUntil}.</li>
+ <li class=new-in-release>Use {@link io.sphere.sdk.products.queries.ProductProjectionQueryModel#allVariants()} to formulate a predicate for all variants. In SPHERE.IO the json fields masterVariant (object) and variants (array of objects) together contain all variants.</li>
+ <li class=new-in-release>Using {@link ProductProjectionQuery#ofCurrent()} and {@link ProductProjectionQuery#ofStaged()} saves you the import of {@link ProductProjectionType}.</li>
+ <li class=new-in-release>{@link CompletionStage} does not support by default timeouts which are quite important in a reactive application so you can decorate the {@link io.sphere.sdk.client.SphereClient} with {@link io.sphere.sdk.client.TimeoutSphereClientDecorator} to get a {@link java.util.concurrent.TimeoutException} after a certain amount of time. But this does NOT cancel the request to SPHERE.IO.</li>
+ <li class=new-in-release>The {@link io.sphere.sdk.reviews.Review} endpoints and models are implemented, but we suggest to not use it, since {@link io.sphere.sdk.reviews.Review}s cannot be deleted or marked as hidden.</li>
+ <li class=new-in-release>New endpoint: Use {@link io.sphere.sdk.projects.queries.ProjectGet} to get the currencies, countries and languages of the SPHERE.IO project.</li>
+ <li class=new-in-release>Categories with SEO meta attributes {@link Category#getMetaTitle()}, {@link Category#getMetaDescription()} and {@link Category#getMetaKeywords()} and
+ update actions {@link io.sphere.sdk.categories.commands.updateactions.SetMetaTitle}, {@link io.sphere.sdk.categories.commands.updateactions.SetMetaDescription} and {@link io.sphere.sdk.categories.commands.updateactions.SetMetaKeywords}.</li>
+ <li class=new-in-release>Cart discounts: {@link io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand}.</li>
+ <li class=new-in-release>Discount codes: {@link io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand}.</li>
+ <li class=change-in-release>{@link io.sphere.sdk.client.SphereApiConfig}, {@link io.sphere.sdk.client.SphereAuthConfig}, {@link io.sphere.sdk.client.SphereClientConfig} validates the input, so for example you cannot enter null or whitespace for the project key.</li>
+ <li class=change-in-release>Date time attributes in {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} are using <a href="https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html">ZonedDateTime</a> instead of <a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html">LocalDateTime</a>.</li>
+ <li class=change-in-release>The {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} has been improved with better naming and better documentation.</li>
+ <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
+ <li class=change-in-release>{@code io.sphere.sdk.queries.Predicate} has been renamed to {@link io.sphere.sdk.queries.QueryPredicate}.</li>
+ <li class=change-in-release>The JVM SDK itself uses for tests the <a href="http://joel-costigliola.github.io/assertj/">assertj</a> assertion methods instead of fest assertions.</li>
+ <li class=change-in-release>{@code io.sphere.sdk.products.commands.updateactions.SetMetaAttributes} has been removed since it is deprecated in SPHERE.IO.
+ Use {@link SetMetaTitle},
+ {@link SetMetaDescription},
+ {@link SetMetaKeywords} or {@link io.sphere.sdk.products.commands.updateactions.MetaAttributesUpdateActions} for all together.
+ </li>
+ <li class=change-in-release>Update of the Java Money library to version 1.0 which has some breaking changes in comparison to the release candidates.</li>
+ <li class=change-in-release>Some predicate methods have been renamed: "isOneOf" to "isIn", "isAnyOf" to "isIn", "isLessThanOrEquals" to "isLessThanOrEqualTo" (analog for greaterThan).</li>
+ <li class=fixed-in-release>The exception for a failing {@link io.sphere.sdk.customers.commands.CustomerSignInCommand} shows more problem details. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/397">#397</a>.</li>
+ <li class=fixed-in-release>There has been a thread leak if {@code io.sphere.sdk.client.SphereClientFactory#createClient(io.sphere.sdk.client.SphereClientConfig)} was used.
+ It created twice a http client instance and closed just one.</li>
  </ul>
 
  <h3 class=released-version id=v1_0_0_M13>1.0.0-M13</h3>
@@ -243,7 +225,7 @@ import java.util.function.BiFunction;
  <li class=new-in-release>Added update actions for cart: {@link io.sphere.sdk.carts.commands.updateactions.SetShippingMethod} and {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerId}.</li>
  <li class=new-in-release>Added update actions for customer: {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerId}.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.models.Referenceable#hasSameIdAs(io.sphere.sdk.models.Referenceable)} to check if a similar object has the same ID.</li>
- <li class=new-in-release>Added {@link io.sphere.sdk.attributes.AttributeAccess#ofName(String)} as alias to {@link io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)}.</li>
+ <li class=new-in-release>Added {@link AttributeAccess#ofName(String)} as alias to {@code io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)}.</li>
 
  <li class=new-in-release>Update action list in update commands do not have the type {@literal List<UpdateAction<T>>} {@literal  List<? extends UpdateAction<T>>}, so you can pass a list of a subclass of {@link io.sphere.sdk.commands.UpdateAction}.
  Example: {@literal List<ChangeName>} can be assigned where {@literal ChangeName} extends {@link io.sphere.sdk.commands.UpdateAction}.</li>
@@ -380,11 +362,6 @@ import java.util.function.BiFunction;
  <li>Queries and commands for models are in there own package now and less coupled to the model.</li>
  <li>The query classes have been refactored.</li>
  </ul>
-
-
-
-
- </div>
  */
 public final class ReleaseNotes {
     private ReleaseNotes() {

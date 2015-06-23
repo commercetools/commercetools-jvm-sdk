@@ -20,21 +20,21 @@ import static java.util.stream.Collectors.toList;
 public final class NestedAttributeIntegrationTest extends IntegrationTest {
 
     static class NutrientInfo {
-        static AttributeGetterSetter<String> quantityContainedUOM = AttributeAccess.ofText().ofName("quantityContainedUOM");
-        static AttributeGetterSetter<Double> quantityContained = AttributeAccess.ofDouble().ofName("quantityContained");
-        static AttributeGetterSetter<String> measurementPrecision = AttributeAccess.ofText().ofName("measurementPrecision");
-        static AttributeGetterSetter<String> nutrientTypeCode = AttributeAccess.ofText().ofName("nutrientTypeCode");
+        static NamedAttributeAccess<String> quantityContainedUOM = AttributeAccess.ofText().ofName("quantityContainedUOM");
+        static NamedAttributeAccess<Double> quantityContained = AttributeAccess.ofDouble().ofName("quantityContained");
+        static NamedAttributeAccess<String> measurementPrecision = AttributeAccess.ofText().ofName("measurementPrecision");
+        static NamedAttributeAccess<String> nutrientTypeCode = AttributeAccess.ofText().ofName("nutrientTypeCode");
     }
 
     static class Nutrient {
-        static AttributeGetterSetter<String> servingSizeUOM = AttributeAccess.ofText().ofName("servingSizeUOM");
-        static AttributeGetterSetter<Double> servingSize = AttributeAccess.ofDouble().ofName("servingSize");
-        static AttributeGetterSetter<Set<AttributeContainer>> nutrientInformation = AttributeAccess.ofNestedSet().ofName("nutrientInformation");
+        static NamedAttributeAccess<String> servingSizeUOM = AttributeAccess.ofText().ofName("servingSizeUOM");
+        static NamedAttributeAccess<Double> servingSize = AttributeAccess.ofDouble().ofName("servingSize");
+        static NamedAttributeAccess<Set<AttributeContainer>> nutrientInformation = AttributeAccess.ofNestedSet().ofName("nutrientInformation");
     }
 
     static class Banana {
-        static AttributeGetterSetter<String> bananaColor = AttributeAccess.ofText().ofName("bananaColor");
-        static AttributeGetterSetter<Set<AttributeContainer>> nutrients = AttributeAccess.ofNestedSet().ofName("nutrients");
+        static NamedAttributeAccess<String> bananaColor = AttributeAccess.ofText().ofName("bananaColor");
+        static NamedAttributeAccess<Set<AttributeContainer>> nutrients = AttributeAccess.ofNestedSet().ofName("nutrients");
     }
 
     @Test
@@ -68,14 +68,14 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
 
     private List<AttributeContainer> getSortedNutrients(final AttributeContainer banana) {
         return banana.getAttribute(Banana.nutrients).get().stream()
-            .sorted((c1, c2) -> c1.getAttribute(Nutrient.servingSize).get().compareTo(c2.getAttribute(Nutrient.servingSize).get()))
-            .collect(toList());
+                .sorted((c1, c2) -> c1.getAttribute(Nutrient.servingSize).get().compareTo(c2.getAttribute(Nutrient.servingSize).get()))
+                .collect(toList());
     }
 
     private List<AttributeContainer> getNutrientInfos(final AttributeContainer nutrient) {
         return nutrient.getAttribute(Nutrient.nutrientInformation).get().stream()
-            .sorted((c1, c2) -> c1.getAttribute(NutrientInfo.nutrientTypeCode).get().compareTo(c2.getAttribute(NutrientInfo.nutrientTypeCode).get()))
-            .collect(toList());
+                .sorted((c1, c2) -> c1.getAttribute(NutrientInfo.nutrientTypeCode).get().compareTo(c2.getAttribute(NutrientInfo.nutrientTypeCode).get()))
+                .collect(toList());
     }
 
     private void assertNutrient(final AttributeContainer nutrient, final double servingSize,
@@ -96,41 +96,41 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
 
     private ProductVariantDraft createBananaVariant() {
         return ProductVariantDraftBuilder.of()
-            .plusAttribute(Banana.bananaColor.valueOf("blue"))
-            .plusAttribute(Banana.nutrients.valueOf(asSet(
-                AttributeContainer.of(asList(
-                    Nutrient.servingSize.valueOf(1.5D),
-                    Nutrient.servingSizeUOM.valueOf("M"),
-                    Nutrient.nutrientInformation.valueOf(asSet(
-                        AttributeContainer.of(asList(
-                            NutrientInfo.nutrientTypeCode.valueOf("FIBTG"),
-                            NutrientInfo.measurementPrecision.valueOf("APPROXIMATELY"),
-                            NutrientInfo.quantityContained.valueOf(3.8D),
-                            NutrientInfo.quantityContainedUOM.valueOf("GR")
+                .plusAttribute(Banana.bananaColor.draftOf("blue"))
+                .plusAttribute(Banana.nutrients.draftOf(asSet(
+                        AttributeContainerDraft.of(asList(
+                                Nutrient.servingSize.draftOf(1.5D),
+                                Nutrient.servingSizeUOM.draftOf("M"),
+                                Nutrient.nutrientInformation.draftOf(asSet(
+                                        AttributeContainerDraft.of(
+                                                NutrientInfo.nutrientTypeCode.draftOf("FIBTG"),
+                                                NutrientInfo.measurementPrecision.draftOf("APPROXIMATELY"),
+                                                NutrientInfo.quantityContained.draftOf(3.8D),
+                                                NutrientInfo.quantityContainedUOM.draftOf("GR")
+                                        ),
+                                        AttributeContainerDraft.of(
+                                                NutrientInfo.nutrientTypeCode.draftOf("FAT"),
+                                                NutrientInfo.measurementPrecision.draftOf("APPROXIMATELY"),
+                                                NutrientInfo.quantityContained.draftOf(0.06D),
+                                                NutrientInfo.quantityContainedUOM.draftOf("KG")
+                                        )
+                                ))
                         )),
-                        AttributeContainer.of(asList(
-                            NutrientInfo.nutrientTypeCode.valueOf("FAT"),
-                            NutrientInfo.measurementPrecision.valueOf("APPROXIMATELY"),
-                            NutrientInfo.quantityContained.valueOf(0.06D),
-                            NutrientInfo.quantityContainedUOM.valueOf("KG")
+                        AttributeContainerDraft.of(asList(
+                                Nutrient.servingSize.draftOf(0.05D),
+                                Nutrient.servingSizeUOM.draftOf("KM"),
+                                Nutrient.nutrientInformation.draftOf(asSet(
+                                        AttributeContainerDraft.of(asList(
+                                                NutrientInfo.nutrientTypeCode.draftOf("FIBTG"),
+                                                NutrientInfo.measurementPrecision.draftOf("PRECISE"),
+                                                NutrientInfo.quantityContained.draftOf(1.3D),
+                                                NutrientInfo.quantityContainedUOM.draftOf("GR")
+                                        ))
+                                ))
                         ))
-                    ))
-                )),
-                AttributeContainer.of(asList(
-                    Nutrient.servingSize.valueOf(0.05D),
-                    Nutrient.servingSizeUOM.valueOf("KM"),
-                    Nutrient.nutrientInformation.valueOf(asSet(
-                        AttributeContainer.of(asList(
-                            NutrientInfo.nutrientTypeCode.valueOf("FIBTG"),
-                            NutrientInfo.measurementPrecision.valueOf("PRECISE"),
-                            NutrientInfo.quantityContained.valueOf(1.3D),
-                            NutrientInfo.quantityContainedUOM.valueOf("GR")
-                        ))
-                    ))
-                ))
-            )))
-            .sku(randomKey())
-            .build();
+                )))
+                .sku(randomKey())
+                .build();
     }
 
     private ProductTypeDraft createNutrientInformation() {

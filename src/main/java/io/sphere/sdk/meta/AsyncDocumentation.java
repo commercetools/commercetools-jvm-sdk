@@ -216,7 +216,7 @@ difference Stage,Future
  <br>
 <h4>Summary of Blocking Access and Immediate Access methods </h4>
 
- <table class="custom" align="center">
+ <table class="custom">
  <caption>Blocking Access and Immediate Access methods of {@link java.util.concurrent.CompletableFuture}</caption>
  <tbody>
  <tr>
