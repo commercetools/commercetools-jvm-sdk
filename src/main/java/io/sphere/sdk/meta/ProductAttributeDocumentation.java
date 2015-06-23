@@ -13,7 +13,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 <pre>"The attribute with name 'foo' has a different type on product type 'exampleproducttype'."</pre>
 
- <p>In this scenario we provide two {@link io.sphere.sdk.producttypes.ProductType}s. tshirt with the following attributes:</p>
+ <p>In this scenario we provide two {@link io.sphere.sdk.producttypes.ProductType}s book and tshirt.</p>
 
 
  <p>The book product type contains the following attributes:</p>
