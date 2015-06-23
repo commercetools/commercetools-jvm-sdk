@@ -13,7 +13,15 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 <pre>"The attribute with name 'foo' has a different type on product type 'exampleproducttype'."</pre>
 
- <p>In this scenario we provide a {@link io.sphere.sdk.producttypes.ProductType} tshirt with the following attributes:</p>
+ <p>In this scenario we provide two {@link io.sphere.sdk.producttypes.ProductType}s. tshirt with the following attributes:</p>
+
+
+ <p>The book product type contains the following attributes:</p>
+ <ul>
+    <li>isbn as {@link String}, International Standard Book Number</li>
+ </ul>
+
+ <p>The tshirt product type contains the following attributes:</p>
 
  <ul>
     <li>color as {@link io.sphere.sdk.models.LocalizedEnumValue} with the colors green and red and their translations in German and Englisch</li>
@@ -28,7 +36,10 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
  <p>The possible attribute types you can find here: {@link io.sphere.sdk.attributes.AttributeType} in "All Known Implementing Classes".</p>
 
-<p>The code for the creation of the {@link io.sphere.sdk.producttypes.ProductType}:</p>
+<p>The code for the creation of the book {@link io.sphere.sdk.producttypes.ProductType}:</p>
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createBookProductType()}
+
+<p>The code for the creation of the tshirt {@link io.sphere.sdk.producttypes.ProductType}:</p>
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createProductType()}
 
 
@@ -55,6 +66,10 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  {@link ProductVariantDraftBuilder#plusAttribute(java.lang.String, java.lang.Object)} which enables you to directly
  put the value of the attribute to the draft. But it cannot check if you put the right objects and types in it.
 
+ <p>A book example:</p>
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createBookProduct()}
+
+ <p>A tshirt example:</p>
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createProduct()}
 
  A wrong value for a field or an invalid type will cause an {@link io.sphere.sdk.client.ErrorResponseException}
@@ -126,6 +141,11 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 <p>Setting attribute values is like a a product creation:</p>
 
+
+<p>Example for books:</p>
+ {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#updateAttributesBooks()}
+
+ <p>Example for tshirts:</p>
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#updateAttributes()}
 
  A wrong value for a field or an invalid type (like flat value instead of set) will cause an {@link io.sphere.sdk.client.ErrorResponseException}

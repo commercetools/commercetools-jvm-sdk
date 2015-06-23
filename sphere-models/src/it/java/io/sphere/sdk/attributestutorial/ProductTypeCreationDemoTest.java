@@ -56,12 +56,14 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 public class ProductTypeCreationDemoTest extends IntegrationTest {
 
     private static final String PRODUCT_TYPE_NAME = "tshirt-product-attribute-tutorial";
+    private static final String BOOK_PRODUCT_TYPE_NAME = "book-product-attribute-tutorial";
     private static final String COLOR_ATTR_NAME = "AttributeTutorialColor";
     private static final String SIZE_ATTR_NAME = "AttributeTutorialSize";
     private static final String MATCHING_PRODUCTS_ATTR_NAME = "AttributeTutorialMatchingProducts";
     private static final String LAUNDRY_SYMBOLS_ATTR_NAME = "AttributeTutorialLaundrySymbols";
     private static final String RRP_ATTR_NAME = "AttributeTutorialRrp";
     private static final String AVAILABLE_SINCE_ATTR_NAME = "AttributeTutorialAvailableSince";
+    private static final String ISBN_ATTR_NAME = "AttributeTutorialIsbn";
 
     public void demoCheckingIfProductTypeExist() {
         final ProductTypeQuery query = ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME);
@@ -88,6 +90,16 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
             execute(productQuery).getResults().forEach(p -> execute(ProductDeleteCommand.of(p)));
             productTypes.forEach(p -> execute(ProductTypeDeleteCommand.of(p)));
         }
+    }
+
+    @BeforeClass
+    public static void createBookProductType() throws Exception {
+        final AttributeDefinition isbn = AttributeDefinitionBuilder
+                .of(ISBN_ATTR_NAME, en("ISBN"), TextType.of())
+                .build();
+
+        final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));
+        final ProductType productType = client().execute(ProductTypeCreateCommand.of(productTypeDraft));
     }
 
     @BeforeClass
@@ -183,6 +195,23 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         assertThat(masterVariant.getAttribute(AVAILABLE_SINCE_ATTR_NAME, AttributeAccess.ofDate()))
                 .contains(LocalDate.of(2015, 2, 2));
 
+        return product;
+    }
+
+    public Product createBookProduct() throws Exception {
+        final ProductType productType = execute(ProductTypeQuery.of().byName(BOOK_PRODUCT_TYPE_NAME)).head().get();
+        final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
+                .plusAttribute(ISBN_ATTR_NAME, "978-3-86680-192-9")
+                .build();
+        final ProductDraft draft = ProductDraftBuilder
+                .of(productType, en("a book"), randomSlug(), masterVariantDraft)
+                .build();
+
+        final Product product = client().execute(ProductCreateCommand.of(draft));
+
+        final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
+        assertThat(masterVariant.getAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
+                .contains("978-3-86680-192-9");
         return product;
     }
 
@@ -392,6 +421,21 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Attribute attribute = Attribute.of("attrname", access, productReference);
         assertThat(attribute.getValue(access)).isEqualTo(productReference);
         assertThat(attribute.getValue(access).getObj()).isPresent();
+    }
+
+    @Test
+    public void updateAttributesBooks() throws Exception {
+        final Product product = createBookProduct();
+        final int masterVariantId = 1;
+
+        final AttributeDraft attributeDraft = AttributeDraft.of(ISBN_ATTR_NAME, "978-3-86680-192-8");
+        final SetAttribute updateAction = SetAttribute.of(masterVariantId, attributeDraft, STAGED_AND_CURRENT);
+
+        final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateAction));
+
+        final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
+        assertThat(masterVariant.getAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
+                .contains("978-3-86680-192-8");
     }
 
     @Test
