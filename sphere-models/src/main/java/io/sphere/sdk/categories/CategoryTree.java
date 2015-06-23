@@ -39,7 +39,7 @@ public interface CategoryTree {
 
     /**
      * return the children for category. If there are no children or category is not in this {@link CategoryTree} then the list is empty.
-     * @param category
+     * @param category the category which should be the parent category to the result list
      * @return list of children or empty list
      */
     List<Category> findByParent(final Identifiable<Category> category);

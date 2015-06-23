@@ -362,6 +362,11 @@ import java.util.function.BiFunction;
  <li>Queries and commands for models are in there own package now and less coupled to the model.</li>
  <li>The query classes have been refactored.</li>
  </ul>
+
+
+
+
+ </div>
  */
 public final class ReleaseNotes {
     private ReleaseNotes() {
