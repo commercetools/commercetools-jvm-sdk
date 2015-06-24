@@ -44,6 +44,11 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 
 see https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons
 
+### Experimental Add-Ons
+* ProductImageUploadCommand from http://dev.sphere.io/http-api-projects-products.html#upload-product-image
+
+see https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons
+
 ### Snapshots
 
 * experimental, risk of breaking changes, no support, snapshots can vanish
