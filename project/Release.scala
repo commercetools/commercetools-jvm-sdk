@@ -69,8 +69,8 @@ object Release {
     publishArtifact in Test := false,
     pomExtra := (
       <scm>
-        <url>git@github.com:commercetools/sphere-play-sdk.git</url>
-        <connection>scm:git:git@github.com:commercetools/sphere-play-sdk.git</connection>
+        <url>git@github.com:sphereio/sphere-jvm-sdk.git</url>
+        <connection>scm:git:git@github.com:sphereio/sphere-jvm-sdk.git</connection>
       </scm>
         <developers>
           <developer>
