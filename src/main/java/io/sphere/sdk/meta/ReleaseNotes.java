@@ -86,7 +86,7 @@ import java.util.function.BiFunction;
  <li class=change-in-release>Getting the child categories of a category is not in category anymore but in {@link io.sphere.sdk.categories.CategoryTree#findByParent(Identifiable)}.</li>
  <li class=fixed-in-release>Sphere client does not shutdown actors properly.  See <a target="_blank" href="https://github.com/sphereio/sphere-jvm-sdk/issues/491">#491</a>.</li>
  <li class=removed-in-release>{@code Category#getPathInTree()}</li>
- <li class=removed-in-release>{@code ExperimentalProductImageUploadCommand}</li>
+ <li class=removed-in-release>{@code ExperimentalProductImageUploadCommand}, but you can find a similar command here: <a href="https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons">https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons</a></li>
  </ul>
 
 
