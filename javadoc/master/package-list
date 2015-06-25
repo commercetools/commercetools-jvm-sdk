@@ -49,6 +49,7 @@ io.sphere.sdk.inventories.queries
 io.sphere.sdk.json
 io.sphere.sdk.meta
 io.sphere.sdk.models
+io.sphere.sdk.models.errors
 io.sphere.sdk.orders
 io.sphere.sdk.orders.commands
 io.sphere.sdk.orders.commands.updateactions

@@ -150,6 +150,11 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">ErrorResponseException</span>
 extends <a href="../../../../io/sphere/sdk/client/BadRequestException.html" title="class in io.sphere.sdk.client">BadRequestException</a>
 implements <a href="../../../../io/sphere/sdk/models/ErrorResponse.html" title="interface in io.sphere.sdk.models">ErrorResponse</a></pre>
+<div class="block"><h3 id="error-codes">Error Codes</h3>
+
+ <h4 id="InvalidField">InvalidField</h4>
+ <p>One possible cause could be, that you try to set the value of a product attribute and the type is not matching or you have an enum field and the key is wrong.</p>
+Example: <code>{"statusCode":400,"message":"The value '2' is not valid for field 'fieldNameExample'. Allowed values are: \"red\",\"green\". ","errors":[{"code":"InvalidField","message":"The value '2' is not valid for field 'fieldNameExample'. Allowed values are: \"red\",\"green\". ","invalidValue":2,"allowedValues":["red","green"],"field":"fieldNameExample"}]}</code></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../serialized-form.html#io.sphere.sdk.client.ErrorResponseException">Serialized Form</a></dd>

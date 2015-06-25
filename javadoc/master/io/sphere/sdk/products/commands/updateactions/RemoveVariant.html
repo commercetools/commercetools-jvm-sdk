@@ -122,16 +122,16 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Removes a variant from a product.
 
- <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-addVariant--%s" class=code-example><pre><code class='java'>final AttributeGetterSetter&lt;MonetaryAmount&gt; moneyAttribute =
+ <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-addVariant--%s" class=code-example><pre><code class='java'>final NamedAttributeAccess&lt;MonetaryAmount&gt; moneyAttribute =
         AttributeAccess.ofMoney().ofName(MONEY_ATTRIBUTE_NAME);
-final Attribute moneyAttributeValue = Attribute.of(moneyAttribute, EURO_10);
+final AttributeDraft moneyAttributeValue = AttributeDraft.of(moneyAttribute, EURO_10);
 
-final AttributeGetterSetter&lt;LocalizedEnumValue&gt; colorAttribute = Colors.ATTRIBUTE;
+final NamedAttributeAccess&lt;LocalizedEnumValue&gt; colorAttribute = Colors.ATTRIBUTE;
 final LocalizedEnumValue color = Colors.RED;
-final Attribute colorAttributeValue = Attribute.of(colorAttribute, color);
+final AttributeDraft colorAttributeValue = AttributeDraft.of(colorAttribute, color);
 
-final AttributeGetterSetter&lt;PlainEnumValue&gt; sizeAttribute = Sizes.ATTRIBUTE;
-final Attribute sizeValue = Attribute.of(sizeAttribute, Sizes.M);
+final NamedAttributeAccess&lt;PlainEnumValue&gt; sizeAttribute = Sizes.ATTRIBUTE;
+final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
 
 
 withUpdateableProduct(client(), product -&gt; {
@@ -139,7 +139,7 @@ withUpdateableProduct(client(), product -&gt; {
 
     final Price price = PRICE;
     final List&lt;Price&gt; prices = asList(price);
-    final List&lt;Attribute&gt; attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
+    final List&lt;AttributeDraft&gt; attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
     final Optional&lt;String&gt; sku = Optional.of(randomKey());
     final ProductUpdateCommand addVariantCommand =
             ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, sku, STAGED_AND_CURRENT));

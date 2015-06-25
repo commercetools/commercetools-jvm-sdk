@@ -146,7 +146,7 @@ future.whenCompleteAsync((signInResult, exception) -&gt; {
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerChangePasswordCommandTest.java" target="_blank">test code</a>.</pre></div>
 
- Errors can contain extra information like <a href="../../../../io/sphere/sdk/client/InvalidJsonInputError.html" title="class in io.sphere.sdk.client"><code>InvalidJsonInputError</code></a> hinting to the problem with the JSON:
+ Errors can contain extra information like <a href="../../../../io/sphere/sdk/models/errors/InvalidJsonInputError.html" title="class in io.sphere.sdk.models.errors"><code>InvalidJsonInputError</code></a> hinting to the problem with the JSON:
 
  <div id="io-sphere-sdk-models-SphereErrorTest-castToConcreteError--%s" class=code-example><pre><code class='java'>final String json = "{\n" +
         "  \"statusCode\" : 400,\n" +
