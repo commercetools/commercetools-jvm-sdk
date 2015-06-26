@@ -1,5 +1,6 @@
 package io.sphere.sdk.productdiscounts;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -27,5 +28,14 @@ public interface ProductDiscount extends DefaultModel<ProductDiscount> {
 
     static String typeId(){
         return "product-discount";
+    }
+
+    static TypeReference<ProductDiscount> typeReference(){
+        return new TypeReference<ProductDiscount>() {
+            @Override
+            public String toString() {
+                return "TypeReference<ProductDiscount>";
+            }
+        };
     }
 }

@@ -1,5 +1,6 @@
 package io.sphere.sdk.productdiscounts;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 import javax.money.MonetaryAmount;
@@ -14,10 +15,11 @@ import static java.util.Arrays.asList;
  *
  * @see io.sphere.sdk.productdiscounts.ProductDiscount
  */
-public class AbsoluteProductDiscount extends Base implements ProductDiscountValue {
+public class AbsoluteProductDiscountValue extends Base implements ProductDiscountValue {
     private final List<MonetaryAmount> money;
 
-    private AbsoluteProductDiscount(final List<MonetaryAmount> money) {
+    @JsonCreator
+    private AbsoluteProductDiscountValue(final List<MonetaryAmount> money) {
         this.money = money;
     }
 
@@ -29,12 +31,12 @@ public class AbsoluteProductDiscount extends Base implements ProductDiscountValu
         return money;
     }
 
-    public static AbsoluteProductDiscount of(final List<MonetaryAmount> money) {
-        return new AbsoluteProductDiscount(money);
+    public static AbsoluteProductDiscountValue of(final List<MonetaryAmount> money) {
+        return new AbsoluteProductDiscountValue(money);
     }
 
-    public static AbsoluteProductDiscount of(final MonetaryAmount money) {
-        return new AbsoluteProductDiscount(asList(money));
+    public static AbsoluteProductDiscountValue of(final MonetaryAmount money) {
+        return new AbsoluteProductDiscountValue(asList(money));
     }
 }
 
