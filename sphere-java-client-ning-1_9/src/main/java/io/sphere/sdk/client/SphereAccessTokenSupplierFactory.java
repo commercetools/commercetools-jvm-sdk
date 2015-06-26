@@ -37,6 +37,6 @@ public final class SphereAccessTokenSupplierFactory {
     }
 
     private HttpClient defaultHttpClient() {
-        return NingHttpClientAdapter.of();
+        return NingHttpClientAdapterFactory.create();
     }
 }

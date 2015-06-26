@@ -1,7 +1,6 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.http.NingHttpClientAdapter;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -19,7 +18,7 @@ public class SphereConstantAccessTokenSupplierImplTest extends IntegrationTest {
 
             final SphereAuthConfig authConfig = SphereAuthConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getClientId(), getSphereClientConfig().getClientSecret(), getSphereClientConfig().getAuthUrl());
 
-            final SphereAccessTokenSupplier fixedTokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, NingHttpClientAdapter.of(), true);
+            final SphereAccessTokenSupplier fixedTokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, NingHttpClientAdapterFactory.create(), true);
             final SphereClient oneTokenClient = SphereClientFactory.of().createClient(apiConfig, fixedTokenSupplier);
             final int actual = oneTokenClient.execute(categoryQuery).toCompletableFuture().join().getTotal();
             assertThat(actual).isEqualTo(expected);

@@ -23,7 +23,7 @@ public class SphereClientFactory extends Base {
     }
 
     private HttpClient defaultHttpClient() {
-        return NingHttpClientAdapter.of();
+        return NingHttpClientAdapterFactory.create();
     }
 
     /**
