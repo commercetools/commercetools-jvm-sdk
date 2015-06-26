@@ -36,6 +36,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new StringQuerySortingModel<>(Optional.of(this), pathSegment);
     }
 
+    protected BooleanQueryModel<T> booleanModel(final String pathSegment) {
+        return new BooleanQueryModel<>(Optional.of(this), pathSegment);
+    }
+
     protected <V> QueryPredicate<T> isPredicate(final V value) {
         return ComparisonQueryPredicate.ofIsEqualTo(this, value);
     }
