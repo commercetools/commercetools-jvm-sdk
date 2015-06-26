@@ -5,7 +5,7 @@ import com.ning.http.client.*;
 public interface NingHttpClientAdapter extends HttpClient {
 
     static HttpClient of() {
-        return of(new AsyncHttpClient(new AsyncHttpClientConfig.Builder().setAcceptAnyCertificate(true).build()));
+        return of(new AsyncHttpClient());
     }
 
     static HttpClient of(final AsyncHttpClient asyncHttpClient) {
