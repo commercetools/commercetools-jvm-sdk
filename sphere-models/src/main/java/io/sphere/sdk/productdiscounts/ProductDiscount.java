@@ -11,21 +11,21 @@ import java.util.Optional;
 @JsonDeserialize(as=ProductDiscountImpl.class)
 public interface ProductDiscount extends DefaultModel<ProductDiscount> {
 
-    public LocalizedStrings getName();
+    LocalizedStrings getName();
 
-    public Optional<LocalizedStrings> getDescription();
+    Optional<LocalizedStrings> getDescription();
 
-    public ProductDiscountValue getValue();
+    ProductDiscountValue getValue();
 
-    public String getPredicate();
+    String getPredicate();
 
-    public String getSortOrder();
+    String getSortOrder();
 
-    public boolean isActive();
+    boolean isActive();
 
-    public List<Reference<Object>> getReferences();
+    List<Reference<Object>> getReferences();
 
-    public static String typeId(){
+    static String typeId(){
         return "product-discount";
     }
 }

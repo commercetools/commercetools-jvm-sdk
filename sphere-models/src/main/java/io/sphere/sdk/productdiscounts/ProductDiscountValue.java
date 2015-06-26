@@ -2,7 +2,6 @@ package io.sphere.sdk.productdiscounts;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import io.sphere.sdk.models.Base;
 
 /**
  * Defines discount type with the corresponding value. The type can be relative or absolute.
