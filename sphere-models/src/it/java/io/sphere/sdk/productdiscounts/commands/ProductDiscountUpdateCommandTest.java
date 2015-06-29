@@ -1,5 +1,6 @@
 package io.sphere.sdk.productdiscounts.commands;
 
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.productdiscounts.*;
 import io.sphere.sdk.productdiscounts.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
@@ -46,6 +47,18 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
             final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeIsActive.of(newIsActive)));
 
             assertThat(updatedDiscount.isActive()).isEqualTo(newIsActive);
+            return updatedDiscount;
+        });
+    }
+
+    @Test
+    public void changeName() throws Exception {
+        withUpdateableProductDiscount(client(), discount -> {
+            final LocalizedStrings newName = randomSlug();
+
+            final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeName.of(newName)));
+
+            assertThat(updatedDiscount.getName()).isEqualTo(newName);
             return updatedDiscount;
         });
     }
