@@ -2,6 +2,7 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.http.HttpHeaders;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.JsonUtils;
@@ -9,14 +10,10 @@ import io.sphere.sdk.json.JsonUtils;
 import java.util.Optional;
 
 public class JsonNodeSphereRequest implements SphereRequest<Optional<JsonNode>> {
-    private final HttpMethod httpMethod;
-    private final String path;
-    private final Optional<JsonNode> body;
+    private final HttpRequestIntent httpRequestIntent;
 
-    protected JsonNodeSphereRequest(final HttpMethod httpMethod, final String path, final Optional<JsonNode> body) {
-        this.body = body;
-        this.httpMethod = httpMethod;
-        this.path = path;
+    protected JsonNodeSphereRequest(final HttpRequestIntent httpRequestIntent) {
+        this.httpRequestIntent = httpRequestIntent;
     }
 
     @Override
@@ -27,9 +24,11 @@ public class JsonNodeSphereRequest implements SphereRequest<Optional<JsonNode>> 
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return body
-                .map(b -> HttpRequestIntent.of(httpMethod, path, JsonUtils.toJson(b)))
-                .orElseGet(() -> HttpRequestIntent.of(httpMethod, path));
+        return httpRequestIntent;
+    }
+
+    public static JsonNodeSphereRequest of(final HttpRequestIntent httpRequestIntent) {
+        return new JsonNodeSphereRequest(httpRequestIntent);
     }
 
     public static JsonNodeSphereRequest of(final HttpMethod httpMethod, final String path, final JsonNode body) {
@@ -40,7 +39,14 @@ public class JsonNodeSphereRequest implements SphereRequest<Optional<JsonNode>> 
         return of(httpMethod, path, Optional.empty());
     }
 
+    public static <T> JsonNodeSphereRequest of(final SphereRequest<T> other) {
+        return of(other.httpRequestIntent());
+    }
+
     public static JsonNodeSphereRequest of(final HttpMethod httpMethod, final String path, final Optional<JsonNode> body) {
-        return new JsonNodeSphereRequest(httpMethod, path, body);
+        final HttpRequestIntent httpRequestIntent = body
+                .map(b -> HttpRequestIntent.of(httpMethod, path, JsonUtils.toJson(b)))
+                .orElseGet(() -> HttpRequestIntent.of(httpMethod, path));
+        return of(httpRequestIntent);
     }
 }
