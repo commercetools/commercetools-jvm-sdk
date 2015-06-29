@@ -19,6 +19,7 @@ import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
 import static io.sphere.sdk.queries.QueryParameterKeys.EXPAND;
 import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.Arrays.asList;
+import static java.util.Objects.requireNonNull;
 
 /**
  *
@@ -55,12 +56,12 @@ public class MetaModelFetchDslImpl<T, C extends MetaModelFetchDsl<T, C, E>, E> e
     }
 
     protected MetaModelFetchDslImpl(final JsonEndpoint<T> endpoint, final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelFetchDslBuilder<T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
-        this.endpoint = endpoint;
-        this.identifierToSearchFor = identifierToSearchFor;
-        this.expansionPaths = expansionPaths;
-        this.expansionModel = expansionModel;
-        this.builderFunction = builderFunction;
-        this.additionalParameters = additionalParameters;
+        this.endpoint = requireNonNull(endpoint);
+        this.identifierToSearchFor = requireNonNull(identifierToSearchFor);
+        this.expansionPaths = requireNonNull(expansionPaths);
+        this.expansionModel = requireNonNull(expansionModel);
+        this.builderFunction = requireNonNull(builderFunction);
+        this.additionalParameters = requireNonNull(additionalParameters);
     }
 
     @Override

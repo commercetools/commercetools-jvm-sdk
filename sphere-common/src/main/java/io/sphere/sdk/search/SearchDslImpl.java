@@ -14,6 +14,7 @@ import java.util.function.Function;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
+import static java.util.Objects.requireNonNull;
 
 public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> {
 
@@ -33,17 +34,17 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
                          final List<FilterExpression<T>> filters, final List<FilterExpression<T>> filterQueries, final List<FilterExpression<T>> filterFacets,
                          final List<SearchSort<T>> sort, final Optional<Long> limit, final Optional<Long> offset,
                          final List<HttpQueryParameter> additionalQueryParameters, Function<HttpResponse, PagedSearchResult<T>> resultMapper) {
-        this.text = text;
-        this.facets = facets;
-        this.filters = filters;
-        this.filterQueries = filterQueries;
-        this.filterFacets = filterFacets;
-        this.sort = sort;
-        this.limit = limit;
-        this.offset = offset;
-        this.additionalQueryParameters = additionalQueryParameters;
-        this.resultMapper = resultMapper;
-        this.endpoint = endpoint;
+        this.text = requireNonNull(text);
+        this.facets = requireNonNull(facets);
+        this.filters = requireNonNull(filters);
+        this.filterQueries = requireNonNull(filterQueries);
+        this.filterFacets = requireNonNull(filterFacets);
+        this.sort = requireNonNull(sort);
+        this.limit = requireNonNull(limit);
+        this.offset = requireNonNull(offset);
+        this.additionalQueryParameters = requireNonNull(additionalQueryParameters);
+        this.resultMapper = requireNonNull(resultMapper);
+        this.endpoint = requireNonNull(endpoint);
     }
 
     public SearchDslImpl(final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,

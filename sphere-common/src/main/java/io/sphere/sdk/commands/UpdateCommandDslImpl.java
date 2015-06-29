@@ -9,6 +9,7 @@ import io.sphere.sdk.http.HttpMethod;
 import java.util.List;
 
 import static io.sphere.sdk.json.JsonUtils.toJson;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Base class to implement commands that change one entity in SPHERE.IO.
@@ -23,10 +24,10 @@ public class UpdateCommandDslImpl<T> extends CommandImpl<T> implements UpdateCom
 
     private UpdateCommandDslImpl(final Versioned<T> versioned, final List<? extends UpdateAction<T>> updateActions,
                                 final TypeReference<T> typeReference, final String baseEndpointWithoutId) {
-        this.versioned = versioned;
-        this.updateActions = updateActions;
-        this.typeReference = typeReference;
-        this.baseEndpointWithoutId = baseEndpointWithoutId;
+        this.versioned = requireNonNull(versioned);
+        this.updateActions = requireNonNull(updateActions);
+        this.typeReference = requireNonNull(typeReference);
+        this.baseEndpointWithoutId = requireNonNull(baseEndpointWithoutId);
     }
 
     protected UpdateCommandDslImpl(final Versioned<T> versioned, final List<? extends UpdateAction<T>> updateActions,
