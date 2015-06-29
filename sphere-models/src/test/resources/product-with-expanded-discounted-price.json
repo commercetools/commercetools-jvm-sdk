@@ -1,0 +1,146 @@
+{
+  "id":"e94b4d0e-0aa7-4bbd-a925-9ebccb3d1a10",
+  "version":4,
+  "productType":{
+    "typeId":"product-type",
+    "id":"1310af80-4aec-46cc-8798-93bad6093c68"
+  },
+  "catalogs":[
+
+  ],
+  "masterData":{
+    "current":{
+      "name":{
+        "en":"referenceable product"
+      },
+      "categories":[
+
+      ],
+      "slug":{
+        "en":"referenceable-product-2"
+      },
+      "masterVariant":{
+        "id":1,
+        "prices":[
+          {
+            "value":{
+              "currencyCode":"EUR",
+              "centAmount":1234
+            },
+            "id":"742a7a03-7ad4-4ccd-83bf-d1aa73029954",
+            "country":"DE",
+            "discounted":{
+              "value":{
+                "currencyCode":"EUR",
+                "centAmount":1134
+              },
+              "discount":{
+                "typeId":"product-discount",
+                "id":"f0c959ed-5bf0-435e-a08f-4c9b69e61e1a"
+              }
+            }
+          }
+        ],
+        "images":[
+
+        ],
+        "attributes":[
+
+        ]
+      },
+      "variants":[
+
+      ],
+      "searchKeywords":{
+
+      }
+    },
+    "staged":{
+      "name":{
+        "en":"referenceable product"
+      },
+      "categories":[
+
+      ],
+      "slug":{
+        "en":"referenceable-product-2"
+      },
+      "masterVariant":{
+        "id":1,
+        "prices":[
+          {
+            "value":{
+              "currencyCode":"EUR",
+              "centAmount":1234
+            },
+            "id":"742a7a03-7ad4-4ccd-83bf-d1aa73029954",
+            "country":"DE",
+            "discounted":{
+              "value":{
+                "currencyCode":"EUR",
+                "centAmount":1134
+              },
+              "discount":{
+                "typeId":"product-discount",
+                "id":"f0c959ed-5bf0-435e-a08f-4c9b69e61e1a",
+                "obj":{
+                  "id":"f0c959ed-5bf0-435e-a08f-4c9b69e61e1a",
+                  "version":1,
+                  "value":{
+                    "type":"absolute",
+                    "money":[
+                      {
+                        "currencyCode":"EUR",
+                        "centAmount":100
+                      }
+                    ]
+                  },
+                  "predicate":"product.id = \"e94b4d0e-0aa7-4bbd-a925-9ebccb3d1a10\"",
+                  "name":{
+                    "en":"demo product discount"
+                  },
+                  "description":{
+                    "en":"description"
+                  },
+                  "isActive":true,
+                  "sortOrder":"0.2120115623",
+                  "references":[
+                    {
+                      "typeId":"product",
+                      "id":"e94b4d0e-0aa7-4bbd-a925-9ebccb3d1a10"
+                    }
+                  ],
+                  "attributeTypes":{
+
+                  },
+                  "createdAt":"2015-06-29T08:08:54.242Z",
+                  "lastModifiedAt":"2015-06-29T08:08:54.242Z"
+                }
+              }
+            }
+          }
+        ],
+        "images":[
+
+        ],
+        "attributes":[
+
+        ]
+      },
+      "variants":[
+
+      ],
+      "searchKeywords":{
+
+      }
+    },
+    "published":false,
+    "hasStagedChanges":false
+  },
+  "catalogData":{
+
+  },
+  "lastVariantId":1,
+  "createdAt":"2015-06-29T08:06:16.121Z",
+  "lastModifiedAt":"2015-06-29T08:08:56.180Z"
+}

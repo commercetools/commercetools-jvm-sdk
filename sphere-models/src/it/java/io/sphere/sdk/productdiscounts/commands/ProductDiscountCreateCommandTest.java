@@ -1,14 +1,19 @@
 package io.sphere.sdk.productdiscounts.commands;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.client.JsonNodeSphereRequest;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.productdiscounts.AbsoluteProductDiscountValue;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.productdiscounts.ProductDiscountDraft;
 import io.sphere.sdk.productdiscounts.ProductDiscountPredicate;
+import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.queries.ProductByIdFetch;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static io.sphere.sdk.products.ProductFixtures.referenceableProduct;
@@ -38,7 +43,15 @@ public class ProductDiscountCreateCommandTest extends IntegrationTest {
         assertThat(productDiscount.getSortOrder()).isEqualTo(sortOrder);
         assertThat(productDiscount.isActive()).isEqualTo(active);
 
-        //clean up test
+        final ProductByIdFetch sphereRequest = ProductByIdFetch.of(product).plusExpansionPaths(m -> m.masterData().staged().masterVariant().prices().discounted().discount());
+
+        final Product discountedProduct = execute(sphereRequest).get();
+        final List<Price> productPrices = discountedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+
+        assertThat(productPrices.get(0).getDiscounted().get().getDiscount().getObj())
+                .overridingErrorMessage("discount object in price is expanded")
+                .isPresent();
+//        clean up test
         execute(ProductDiscountDeleteCommand.of(productDiscount));
     }
 }

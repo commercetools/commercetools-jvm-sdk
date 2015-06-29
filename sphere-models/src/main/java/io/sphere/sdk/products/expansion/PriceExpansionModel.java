@@ -17,5 +17,9 @@ public class PriceExpansionModel<T> extends ExpansionModel<T> {
     public ExpansionPath<T> channel() {
         return expansionPath("channel");
     }
+
+    public DiscountedPriceExpansionModel<T> discounted() {
+        return new DiscountedPriceExpansionModel<>(pathExpressionOption(), "discounted");
+    }
 }
 

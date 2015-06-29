@@ -61,8 +61,8 @@ public class ProductFixtures {
 
     public static Product referenceableProduct(final TestClient client) {
         final ProductType productType = ProductTypeFixtures.defaultProductType(client);
-        final ProductVariantDraft variantDraft = ProductVariantDraftBuilder.of().build();
-        final String slugEn = "referenceable-product-1";
+        final ProductVariantDraft variantDraft = ProductVariantDraftBuilder.of().price(PRICE).build();
+        final String slugEn = "referenceable-product-2";
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, en("referenceable product"), en(slugEn), variantDraft).build();
         return client.execute(ProductQuery.of().bySlug(ProductProjectionType.STAGED, ENGLISH, slugEn)).head()
                 .orElseGet(() -> client.execute(ProductCreateCommand.of(productDraft)));
