@@ -32,4 +32,5 @@ public class ProductDiscountFixtures {
         final ProductDiscount updatedDiscount = function.apply(productDiscount);
         client.execute(ProductDiscountDeleteCommand.of(updatedDiscount));
     }
+
 }
