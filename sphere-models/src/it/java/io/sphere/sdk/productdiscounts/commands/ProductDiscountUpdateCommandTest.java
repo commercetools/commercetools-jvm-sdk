@@ -62,4 +62,16 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
             return updatedDiscount;
         });
     }
+
+    @Test
+    public void setDescription() throws Exception {
+        withUpdateableProductDiscount(client(), discount -> {
+            final LocalizedStrings newDesdcription = randomSlug();
+
+            final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, SetDescription.of(newDesdcription)));
+
+            assertThat(updatedDiscount.getDescription()).contains(newDesdcription);
+            return updatedDiscount;
+        });
+    }
 }

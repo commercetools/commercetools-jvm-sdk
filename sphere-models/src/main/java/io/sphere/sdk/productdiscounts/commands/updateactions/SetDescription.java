@@ -1,15 +1,15 @@
-package io.sphere.sdk.cartdiscounts.commands.updateactions;
+package io.sphere.sdk.productdiscounts.commands.updateactions;
 
-import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.productdiscounts.ProductDiscount;
 
 import java.util.Optional;
 
 /**
- * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#setDescription()}
+ * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#setDescription()}
  */
-public class SetDescription extends UpdateAction<CartDiscount> {
+public class SetDescription extends UpdateAction<ProductDiscount> {
     private final Optional<LocalizedStrings> description;
 
     private SetDescription(final Optional<LocalizedStrings> description) {
