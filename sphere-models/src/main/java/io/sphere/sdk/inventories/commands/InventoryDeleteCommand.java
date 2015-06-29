@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Versioned;
 
 public class InventoryDeleteCommand extends ByIdDeleteCommandImpl<InventoryEntry> {
     private InventoryDeleteCommand(final Versioned<InventoryEntry> versioned) {
-        super(versioned, Endpoint.ENDPOINT);
+        super(versioned, InventoryEntryEndpoint.ENDPOINT);
     }
 
     public static DeleteCommand<InventoryEntry> of(final Versioned<InventoryEntry> versioned) {

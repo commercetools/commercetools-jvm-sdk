@@ -9,7 +9,7 @@ import io.sphere.sdk.inventories.InventoryEntryDraft;
  */
 public class InventoryEntryCreateCommand extends CreateCommandImpl<InventoryEntry, InventoryEntryDraft> {
     private InventoryEntryCreateCommand(final InventoryEntryDraft body) {
-        super(body, Endpoint.ENDPOINT);
+        super(body, InventoryEntryEndpoint.ENDPOINT);
     }
 
     public static InventoryEntryCreateCommand of(final InventoryEntryDraft body) {
