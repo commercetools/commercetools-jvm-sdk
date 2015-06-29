@@ -130,7 +130,15 @@
 extends <a href="../../../../io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></pre>
 <div class="block">Exception concerning JSON.
 
- This may occur by parsing JSON from SPHERE.IO and the POJO mapping does not work correctly.</div>
+ This may occur by parsing JSON from SPHERE.IO and the POJO mapping does not work correctly.
+
+ <h3>No suitable constructor</h3>
+ <code>detailMessage: com.fasterxml.jackson.databind.JsonMappingException:
+ No suitable constructor found for type [simple type, class a.full.ClassName]:
+ can not instantiate from JSON object (missing default constructor or creator,
+ or perhaps need to add/enable type information?)</code>
+
+ Solution, add <code>JsonCreator</code> to the constructor of the class a.full.ClassName.</div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../serialized-form.html#io.sphere.sdk.json.JsonException">Serialized Form</a></dd>

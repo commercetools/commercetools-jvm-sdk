@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":9,"i3":9,"i4":9};
+var methods = {"i0":10,"i1":10,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -135,9 +135,7 @@ implements <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/JsonNodeSphereRequest.html#JsonNodeSphereRequest-io.sphere.sdk.http.HttpMethod-java.lang.String-java.util.Optional-">JsonNodeSphereRequest</a></span>(<a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;httpMethod,
-                     java.lang.String&nbsp;path,
-                     java.util.Optional&lt;com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;body)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/JsonNodeSphereRequest.html#JsonNodeSphereRequest-io.sphere.sdk.client.HttpRequestIntent-">JsonNodeSphereRequest</a></span>(<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>&nbsp;httpRequestIntent)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -183,6 +181,14 @@ implements <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="
   java.lang.String&nbsp;path,
   java.util.Optional&lt;com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;body)</code>&nbsp;</td>
 </tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/JsonNodeSphereRequest.html#of-io.sphere.sdk.client.HttpRequestIntent-">of</a></span>(<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>&nbsp;httpRequestIntent)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/JsonNodeSphereRequest.html#of-io.sphere.sdk.client.SphereRequest-">of</a></span>(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;other)</code>&nbsp;</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -212,15 +218,13 @@ implements <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="JsonNodeSphereRequest-io.sphere.sdk.http.HttpMethod-java.lang.String-java.util.Optional-">
+<a name="JsonNodeSphereRequest-io.sphere.sdk.client.HttpRequestIntent-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>JsonNodeSphereRequest</h4>
-<pre>protected&nbsp;JsonNodeSphereRequest(<a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;httpMethod,
-                                java.lang.String&nbsp;path,
-                                java.util.Optional&lt;com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;body)</pre>
+<pre>protected&nbsp;JsonNodeSphereRequest(<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>&nbsp;httpRequestIntent)</pre>
 </li>
 </ul>
 </li>
@@ -268,6 +272,15 @@ implements <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="
 </dl>
 </li>
 </ul>
+<a name="of-io.sphere.sdk.client.HttpRequestIntent-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a>&nbsp;of(<a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a>&nbsp;httpRequestIntent)</pre>
+</li>
+</ul>
 <a name="of-io.sphere.sdk.http.HttpMethod-java.lang.String-com.fasterxml.jackson.databind.JsonNode-">
 <!--   -->
 </a>
@@ -287,6 +300,15 @@ implements <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a>&nbsp;of(<a href="../../../../io/sphere/sdk/http/HttpMethod.html" title="enum in io.sphere.sdk.http">HttpMethod</a>&nbsp;httpMethod,
                                        java.lang.String&nbsp;path)</pre>
+</li>
+</ul>
+<a name="of-io.sphere.sdk.client.SphereRequest-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a>&nbsp;of(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;&nbsp;other)</pre>
 </li>
 </ul>
 <a name="of-io.sphere.sdk.http.HttpMethod-java.lang.String-java.util.Optional-">

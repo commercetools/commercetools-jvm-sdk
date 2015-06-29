@@ -154,7 +154,9 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/productdiscounts/DiscountedPrice.html" title="class in io.sphere.sdk.productdiscounts">DiscountedPrice</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#getDiscounted--">getDiscounted</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/Price.html#getDiscounted--">getDiscounted</a></span>()</code>
+<div class="block">Supplies a discount if there is any.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.util.Optional&lt;java.time.ZonedDateTime&gt;</code></td>
@@ -297,6 +299,12 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li class="blockList">
 <h4>getDiscounted</h4>
 <pre>public&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/productdiscounts/DiscountedPrice.html" title="class in io.sphere.sdk.productdiscounts">DiscountedPrice</a>&gt;&nbsp;getDiscounted()</pre>
+<div class="block">Supplies a discount if there is any.
+ Beware that another discount can win and in here is another discount than you expect.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>discount data</dd>
+</dl>
 </li>
 </ul>
 <a name="getValidFrom--">
