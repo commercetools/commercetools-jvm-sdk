@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":10,"i2":10,"i3":10};
+var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -151,14 +151,18 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html#get--">get</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="class in io.sphere.sdk.products.queries">PriceCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="type parameter in ProductVariantQueryModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html#prices--">prices</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="type parameter in ProductVariantQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html#sku--">sku</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="type parameter in ProductVariantQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html#where-java.util.function.Function-">where</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductVariantQueryModel</a>,<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductVariantQueryModel</a>&gt;&gt;&nbsp;embeddedPredicate)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="type parameter in ProductVariantQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html#where-io.sphere.sdk.queries.QueryPredicate-">where</a></span>(<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductVariantQueryModel</a>&gt;&nbsp;embeddedPredicate)</code>&nbsp;</td>
 </tr>
@@ -168,7 +172,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#booleanModel-java.lang.String-">booleanModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanOrEqualToPredicate-V-">isGreaterThanOrEqualToPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanPredicate-V-">isGreaterThanPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isInPredicate-java.lang.Iterable-">isInPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanOrEqualToPredicate-V-">isLessThanOrEqualToPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanPredicate-V-">isLessThanPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotInPredicate-java.lang.Iterable-">isNotInPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-java.lang.String-">isNotPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-V-">isNotPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPresentPredicate--">isNotPresentPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPredicate-java.lang.String-">isPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPredicate-V-">isPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPresentPredicate--">isPresentPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringModel-java.lang.String-">stringModel</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#booleanModel-java.lang.String-">booleanModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isEmptyCollectionQueryPredicate--">isEmptyCollectionQueryPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanOrEqualToPredicate-V-">isGreaterThanOrEqualToPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanPredicate-V-">isGreaterThanPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isInPredicate-java.lang.Iterable-">isInPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanOrEqualToPredicate-V-">isLessThanOrEqualToPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanPredicate-V-">isLessThanPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotEmptyCollectionQueryPredicate--">isNotEmptyCollectionQueryPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotInPredicate-java.lang.Iterable-">isNotInPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-java.lang.String-">isNotPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-V-">isNotPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPresentPredicate--">isNotPresentPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPredicate-java.lang.String-">isPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPredicate-V-">isPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPresentPredicate--">isPresentPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringModel-java.lang.String-">stringModel</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -228,10 +232,19 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title
 <a name="where-java.util.function.Function-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>where</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="type parameter in ProductVariantQueryModel">T</a>&gt;&nbsp;where(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductVariantQueryModel</a>,<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/PartialProductVariantQueryModel.html" title="class in io.sphere.sdk.products.queries">PartialProductVariantQueryModel</a>&gt;&gt;&nbsp;embeddedPredicate)</pre>
+</li>
+</ul>
+<a name="prices--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>prices</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="class in io.sphere.sdk.products.queries">PriceCollectionQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductVariantQueryModel.html" title="type parameter in ProductVariantQueryModel">T</a>&gt;&nbsp;prices()</pre>
 </li>
 </ul>
 </li>
