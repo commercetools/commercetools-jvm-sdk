@@ -1,8 +1,7 @@
 package io.sphere.sdk.productdiscounts.commands;
 
 import io.sphere.sdk.productdiscounts.*;
-import io.sphere.sdk.productdiscounts.commands.updateactions.ChangePredicate;
-import io.sphere.sdk.productdiscounts.commands.updateactions.ChangeValue;
+import io.sphere.sdk.productdiscounts.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.*;
 
@@ -35,6 +34,18 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
 
             final String updatedPredicate = updatedDiscount.getPredicate();
             assertThat(updatedPredicate).isEqualTo(predicateAsString);
+            return updatedDiscount;
+        });
+    }
+
+    @Test
+    public void changeIsActive() throws Exception {
+        withUpdateableProductDiscount(client(), discount -> {
+            final boolean newIsActive = !discount.isActive();
+
+            final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeIsActive.of(newIsActive)));
+
+            assertThat(updatedDiscount.isActive()).isEqualTo(newIsActive);
             return updatedDiscount;
         });
     }
