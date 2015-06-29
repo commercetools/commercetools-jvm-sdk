@@ -104,6 +104,14 @@ assertThat(productDiscount.getValue()).isEqualTo(discountValue);
 assertThat(productDiscount.getSortOrder()).isEqualTo(sortOrder);
 assertThat(productDiscount.isActive()).isEqualTo(active);
 
+final ProductByIdFetch sphereRequest = ProductByIdFetch.of(product).plusExpansionPaths(m -&gt; m.masterData().staged().masterVariant().prices().discounted().discount());
+
+final Product discountedProduct = execute(sphereRequest).get();
+final List&lt;Price&gt; productPrices = discountedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+
+assertThat(productPrices.get(0).getDiscounted().get().getDiscount().getObj())
+        .overridingErrorMessage("discount object in price is expanded")
+        .isPresent();
 //clean up test
 execute(ProductDiscountDeleteCommand.of(productDiscount));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
