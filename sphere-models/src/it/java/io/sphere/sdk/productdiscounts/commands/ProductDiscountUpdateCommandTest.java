@@ -66,11 +66,23 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
     @Test
     public void setDescription() throws Exception {
         withUpdateableProductDiscount(client(), discount -> {
-            final LocalizedStrings newDesdcription = randomSlug();
+            final LocalizedStrings newDescription = randomSlug();
 
-            final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, SetDescription.of(newDesdcription)));
+            final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, SetDescription.of(newDescription)));
 
-            assertThat(updatedDiscount.getDescription()).contains(newDesdcription);
+            assertThat(updatedDiscount.getDescription()).contains(newDescription);
+            return updatedDiscount;
+        });
+    }
+
+    @Test
+    public void changeSortOrder() throws Exception {
+        withUpdateableProductDiscount(client(), discount -> {
+            final String newSortOrder = randomSortOrder();
+
+            final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeSortOrder.of(newSortOrder)));
+
+            assertThat(updatedDiscount.getSortOrder()).isEqualTo(newSortOrder);
             return updatedDiscount;
         });
     }
