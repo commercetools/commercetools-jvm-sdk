@@ -43,14 +43,16 @@ public class ProductDiscountCreateCommandTest extends IntegrationTest {
         assertThat(productDiscount.getSortOrder()).isEqualTo(sortOrder);
         assertThat(productDiscount.isActive()).isEqualTo(active);
 
-        final ProductByIdFetch sphereRequest = ProductByIdFetch.of(product).plusExpansionPaths(m -> m.masterData().staged().masterVariant().prices().discounted().discount());
+        final ProductByIdFetch sphereRequest =
+                ProductByIdFetch.of(product)
+                        .plusExpansionPaths(m -> m.masterData().staged().masterVariant().prices().discounted().discount());
 
         final Product discountedProduct = execute(sphereRequest).get();
         final List<Price> productPrices = discountedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
 
-        assertThat(productPrices.get(0).getDiscounted().get().getDiscount().getObj())
+        assertThat(productPrices)
                 .overridingErrorMessage("discount object in price is expanded")
-                .isPresent();
+                .matches(prices -> prices.stream().anyMatch(price -> price.getDiscounted().get().getDiscount().getObj().isPresent()));
 //        clean up test
         execute(ProductDiscountDeleteCommand.of(productDiscount));
     }
