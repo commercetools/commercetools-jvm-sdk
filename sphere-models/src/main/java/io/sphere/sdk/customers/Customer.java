@@ -66,11 +66,11 @@ public interface Customer extends DefaultModel<Customer> {
         return Reference.of(typeId(), getId(), this);
     }
 
-    public static String typeId(){
+    static String typeId(){
         return "customer";
     }
 
-    public static TypeReference<Customer> typeReference(){
+    static TypeReference<Customer> typeReference(){
         return new TypeReference<Customer>() {
             @Override
             public String toString() {
