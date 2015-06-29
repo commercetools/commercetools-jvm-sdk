@@ -1,6 +1,7 @@
 package io.sphere.sdk.productdiscounts.commands;
 
 import io.sphere.sdk.productdiscounts.*;
+import io.sphere.sdk.productdiscounts.commands.updateactions.ChangePredicate;
 import io.sphere.sdk.productdiscounts.commands.updateactions.ChangeValue;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.*;
@@ -18,6 +19,22 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
             final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeValue.of(productDiscountValue)));
 
             assertThat(updatedDiscount.getValue()).isEqualTo(productDiscountValue);
+            return updatedDiscount;
+        });
+    }
+
+    @Test
+    public void changePredicate() throws Exception {
+        withUpdateableProductDiscount(client(), discount -> {
+            final String predicateAsString = "sku = \"AB-12\"";
+            final ProductDiscountPredicate predicate = ProductDiscountPredicate
+                    .of(predicateAsString);
+
+            final ProductDiscount updatedDiscount = execute(
+                    ProductDiscountUpdateCommand.of(discount, ChangePredicate.of(predicate)));
+
+            final String updatedPredicate = updatedDiscount.getPredicate();
+            assertThat(updatedPredicate).isEqualTo(predicateAsString);
             return updatedDiscount;
         });
     }
