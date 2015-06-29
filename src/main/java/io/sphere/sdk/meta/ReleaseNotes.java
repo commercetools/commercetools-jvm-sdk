@@ -40,6 +40,19 @@ import java.util.function.BiFunction;
  </ul>
  -->
 
+ <h3 class=released-version id="v1_0_0_M16">1.0.0-M16</h3>
+ <p>This release is intended to be the last release before 1.0.0-RC1.</p>
+
+ <ul>
+    <li class=new-in-release>{@link io.sphere.sdk.productdiscounts.commands.ProductDiscountCreateCommand},
+ {@link io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommand},
+ {@link io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand},
+ {@link io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdFetch},
+ {@link io.sphere.sdk.productdiscounts.queries.ProductDiscountQuery}
+ </li>
+ </ul>
+
+
  <h3 class=released-version id="v1_0_0_M15">1.0.0-M15</h3>
 
  <a class="theme-btn expand-all">Expand all</a>
