@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
  */
 public class InventoryEntryUpdateCommand extends UpdateCommandDslImpl<InventoryEntry> {
     private InventoryEntryUpdateCommand(final Versioned<InventoryEntry> versioned, final List<? extends UpdateAction<InventoryEntry>> updateActions) {
-        super(versioned, updateActions, Endpoint.ENDPOINT);
+        super(versioned, updateActions, InventoryEntryEndpoint.ENDPOINT);
     }
 
     public static InventoryEntryUpdateCommand of(final Versioned<InventoryEntry> versioned, final UpdateAction<InventoryEntry> updateAction) {

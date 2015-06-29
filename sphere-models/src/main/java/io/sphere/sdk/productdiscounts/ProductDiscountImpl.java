@@ -1,5 +1,6 @@
 package io.sphere.sdk.productdiscounts;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
@@ -17,6 +18,7 @@ class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements P
     private final boolean isActive;
     private final List<Reference<Object>> references;
 
+    @JsonCreator
     ProductDiscountImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                         final LocalizedStrings name, final Optional<LocalizedStrings> description,
                         final ProductDiscountValue value, final String predicate, final String sortOrder,

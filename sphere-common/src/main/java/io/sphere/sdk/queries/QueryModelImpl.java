@@ -36,6 +36,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new StringQuerySortingModel<>(Optional.of(this), pathSegment);
     }
 
+    protected BooleanQueryModel<T> booleanModel(final String pathSegment) {
+        return new BooleanQueryModel<>(Optional.of(this), pathSegment);
+    }
+
     protected <V> QueryPredicate<T> isPredicate(final V value) {
         return ComparisonQueryPredicate.ofIsEqualTo(this, value);
     }
@@ -82,5 +86,23 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
 
     protected QueryPredicate<T> isNotPresentPredicate() {
         return new OptionalQueryPredicate<>(this, false);
+    }
+
+    protected QueryPredicate<T> isEmptyCollectionQueryPredicate() {
+        return new QueryModelQueryPredicate<T>(this){
+            @Override
+            protected String render() {
+                return " is empty";
+            }
+        };
+    }
+
+    protected QueryPredicate<T> isNotEmptyCollectionQueryPredicate() {
+        return new QueryModelQueryPredicate<T>(this){
+            @Override
+            protected String render() {
+                return " is not empty";
+            }
+        };
     }
 }
