@@ -62,6 +62,11 @@ public class Price extends Base {
         return channel;
     }
 
+    /**
+     * Supplies a discount if there is any.
+     * Beware that another discount can win and in here is another discount than you expect.
+     * @return discount data
+     */
     public Optional<DiscountedPrice> getDiscounted() {
         return discounted;
     }

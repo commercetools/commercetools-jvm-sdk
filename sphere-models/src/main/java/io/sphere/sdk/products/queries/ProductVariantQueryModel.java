@@ -30,4 +30,8 @@ public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
     public QueryPredicate<T> where(final Function<PartialProductVariantQueryModel, QueryPredicate<PartialProductVariantQueryModel>> embeddedPredicate) {
         return where(embeddedPredicate.apply(get()));
     }
+
+    public PriceCollectionQueryModel<T> prices() {
+        return new PriceCollectionQueryModel<>(Optional.of(this), Optional.of("prices"));
+    }
 }

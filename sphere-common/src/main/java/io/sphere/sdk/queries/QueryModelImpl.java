@@ -87,4 +87,22 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     protected QueryPredicate<T> isNotPresentPredicate() {
         return new OptionalQueryPredicate<>(this, false);
     }
+
+    protected QueryPredicate<T> isEmptyCollectionQueryPredicate() {
+        return new QueryModelQueryPredicate<T>(this){
+            @Override
+            protected String render() {
+                return " is empty";
+            }
+        };
+    }
+
+    protected QueryPredicate<T> isNotEmptyCollectionQueryPredicate() {
+        return new QueryModelQueryPredicate<T>(this){
+            @Override
+            protected String render() {
+                return " is not empty";
+            }
+        };
+    }
 }

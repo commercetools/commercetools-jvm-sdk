@@ -2,6 +2,7 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRoles;
+import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.VariantIdentifier;
@@ -14,6 +15,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
+import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withUpdateableProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
 import static org.assertj.core.api.Assertions.*;
 
@@ -66,6 +68,19 @@ public class ProductQueryTest extends IntegrationTest {
                         .isTrue();
                 return product;
             });
+        });
+    }
+
+
+    @Test
+    public void queryProductsWithAnyDiscount() throws Exception {
+        withUpdateableProductDiscount(client(), (ProductDiscount productDiscount, Product product) -> {
+            final ProductQuery query = ProductQuery.of()
+                    .withPredicate(m -> m.id().is(product.getId())
+                            .and(m.masterData().staged().masterVariant().prices().discounted().isPresent()));
+            final Product loadedProduct = execute(query).head().get();
+            assertThat(loadedProduct.getId()).isEqualTo(product.getId());
+            return productDiscount;
         });
     }
 

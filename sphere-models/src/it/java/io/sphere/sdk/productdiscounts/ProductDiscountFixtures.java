@@ -7,6 +7,8 @@ import io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand;
 import io.sphere.sdk.products.Product;
 
 import java.util.Optional;
+import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import static io.sphere.sdk.products.ProductFixtures.referenceableProduct;
@@ -16,6 +18,10 @@ import static io.sphere.sdk.test.SphereTestUtils.randomSortOrder;
 
 public class ProductDiscountFixtures {
     public static void withUpdateableProductDiscount(final TestClient client, final Function<ProductDiscount, ProductDiscount> function) {
+        withUpdateableProductDiscount(client, (discount, product) -> function.apply(discount));
+    }
+
+    public static void withUpdateableProductDiscount(final TestClient client, final BiFunction<ProductDiscount, Product, ProductDiscount> function) {
         final Product product = referenceableProduct(client);
         final ProductDiscountPredicate predicate =
                 ProductDiscountPredicate.of("product.id = \"" + product.getId() + "\"");
@@ -29,7 +35,7 @@ public class ProductDiscountFixtures {
 
         final ProductDiscount productDiscount = client.execute(ProductDiscountCreateCommand.of(discountDraft));
 
-        final ProductDiscount updatedDiscount = function.apply(productDiscount);
+        final ProductDiscount updatedDiscount = function.apply(productDiscount, product);
         client.execute(ProductDiscountDeleteCommand.of(updatedDiscount));
     }
 
