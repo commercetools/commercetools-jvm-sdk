@@ -1,6 +1,7 @@
 package io.sphere.sdk.inventories.queries;
 
 import io.sphere.sdk.inventories.InventoryEntry;
+import io.sphere.sdk.inventories.expansion.InventoryEntryExpansionModel;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelFetchDsl;

@@ -1,6 +1,7 @@
 package io.sphere.sdk.customers.queries;
 
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
 import io.sphere.sdk.queries.Fetch;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;

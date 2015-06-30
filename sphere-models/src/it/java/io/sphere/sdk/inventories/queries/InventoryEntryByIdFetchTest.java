@@ -1,6 +1,7 @@
 package io.sphere.sdk.inventories.queries;
 
 import io.sphere.sdk.inventories.InventoryEntry;
+import io.sphere.sdk.inventories.expansion.InventoryEntryExpansionModel;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -14,7 +15,7 @@ public class InventoryEntryByIdFetchTest extends IntegrationTest {
         withInventoryEntryAndSupplyChannel(client(), INVENTORY_SUPPLY, (entry, channel) -> {
             final InventoryEntry actual = execute(
                     InventoryEntryByIdFetch.of(entry)
-                            .withExpansionPaths(new InventoryEntryExpansionModel<InventoryEntry>().supplyChannel())
+                            .withExpansionPaths(m -> m.supplyChannel())
             ).get();
             assertThat(actual.getId()).contains(entry.getId());
             assertThat(actual.getSupplyChannel().get().getObj().get().getId()).isEqualTo(channel.getId());
