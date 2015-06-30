@@ -1,7 +1,6 @@
 package io.sphere.sdk.inventories.queries;
 
 import io.sphere.sdk.inventories.InventoryEntry;
-import io.sphere.sdk.inventories.expansion.InventoryEntryExpansionModel;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
