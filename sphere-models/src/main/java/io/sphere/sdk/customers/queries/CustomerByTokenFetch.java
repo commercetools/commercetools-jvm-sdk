@@ -2,6 +2,7 @@ package io.sphere.sdk.customers.queries;
 
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerToken;
+import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.MetaModelFetchDsl;
 

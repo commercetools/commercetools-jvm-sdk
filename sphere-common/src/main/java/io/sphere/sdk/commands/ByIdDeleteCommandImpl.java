@@ -6,6 +6,8 @@ import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.http.HttpMethod;
 
+import static java.util.Objects.requireNonNull;
+
 /**
  * Base class to implement commands which deletes an entity by ID in SPHERE.IO.
  *
@@ -17,8 +19,8 @@ public abstract class ByIdDeleteCommandImpl<T> extends CommandImpl<T> implements
     private final JsonEndpoint<T> endpoint;
 
     protected ByIdDeleteCommandImpl(final Versioned<T> versioned, final JsonEndpoint<T> endpoint) {
-        this.versioned = versioned;
-        this.endpoint = endpoint;
+        this.versioned = requireNonNull(versioned);
+        this.endpoint = requireNonNull(endpoint);
     }
 
     @Override

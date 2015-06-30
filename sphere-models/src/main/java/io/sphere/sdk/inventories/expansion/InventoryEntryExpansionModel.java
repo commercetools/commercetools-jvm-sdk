@@ -1,4 +1,4 @@
-package io.sphere.sdk.inventories.queries;
+package io.sphere.sdk.inventories.expansion;
 
 import io.sphere.sdk.inventories.InventoryEntry;
 import io.sphere.sdk.expansion.ExpansionModel;
@@ -9,7 +9,7 @@ public class InventoryEntryExpansionModel<T> extends ExpansionModel<T> {
     InventoryEntryExpansionModel() {
     }
 
-    ExpansionPath<T> supplyChannel() {
+    public ExpansionPath<T> supplyChannel() {
         return ExpansionPath.of("supplyChannel");
     }
 

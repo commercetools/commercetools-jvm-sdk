@@ -2,6 +2,7 @@ package io.sphere.sdk.inventories.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.inventories.InventoryEntry;
+import io.sphere.sdk.inventories.expansion.InventoryEntryExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 

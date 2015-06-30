@@ -7,6 +7,7 @@ import io.sphere.sdk.customers.commands.updateactions.AddAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultBillingAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetDefaultShippingAddress;
+import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.*;

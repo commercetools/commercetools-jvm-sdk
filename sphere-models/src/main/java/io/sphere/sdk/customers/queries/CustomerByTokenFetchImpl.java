@@ -1,6 +1,7 @@
 package io.sphere.sdk.customers.queries;
 
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
 import io.sphere.sdk.queries.MetaModelFetchDslImpl;

@@ -1,4 +1,4 @@
-package io.sphere.sdk.customers.queries;
+package io.sphere.sdk.customers.expansion;
 
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.expansion.ExpansionModel;
@@ -13,7 +13,7 @@ public class CustomerExpansionModel<T> extends ExpansionModel<T> {
         return new CustomerExpansionModel<>();
     }
 
-    ExpansionPath<T> customerGroup() {
+    public ExpansionPath<T> customerGroup() {
         return ExpansionPath.of("customerGroup");
     }
 }

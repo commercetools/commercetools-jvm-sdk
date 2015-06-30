@@ -3,10 +3,11 @@ package io.sphere.sdk.customobjects.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.customobjects.expansion.CustomObjectExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 
-public interface CustomObjectQuery<T> extends MetaModelQueryDsl<CustomObject<T>, CustomObjectQuery<T>, CustomObjectQueryModel<CustomObject<T>>, Void> {
+public interface CustomObjectQuery<T> extends MetaModelQueryDsl<CustomObject<T>, CustomObjectQuery<T>, CustomObjectQueryModel<CustomObject<T>>, CustomObjectExpansionModel<CustomObject<T>>> {
     static TypeReference<PagedQueryResult<CustomObject<JsonNode>>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<CustomObject<JsonNode>>>(){
             @Override

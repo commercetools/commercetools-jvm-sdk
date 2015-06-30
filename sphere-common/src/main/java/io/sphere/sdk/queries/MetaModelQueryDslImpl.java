@@ -19,6 +19,7 @@ import static io.sphere.sdk.queries.QueryParameterKeys.*;
 import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
+import static java.util.Objects.requireNonNull;
 
 /**
  *
@@ -51,17 +52,17 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
                 throw new IllegalArgumentException(format("The offset parameter must be in the range of [%d..%d], but was %d.", MIN_OFFSET, MAX_OFFSET, presentOffset));
             }
         });
-        this.queryDslBuilderFunction = queryDslBuilderFunction;
-        this.predicate = predicate;
-        this.sort = sort;
-        this.limit = limit;
-        this.offset = offset;
-        this.endpoint = endpoint;
-        this.resultMapper = resultMapper;
-        this.expansionPaths = expansionPaths;
-        this.additionalQueryParameters = additionalQueryParameters;
-        this.expansionModel = expansionModel;
-        this.queryModel = queryModel;
+        this.queryDslBuilderFunction = requireNonNull(queryDslBuilderFunction);
+        this.predicate = requireNonNull(predicate);
+        this.sort = requireNonNull(sort);
+        this.limit = requireNonNull(limit);
+        this.offset = requireNonNull(offset);
+        this.endpoint = requireNonNull(endpoint);
+        this.resultMapper = requireNonNull(resultMapper);
+        this.expansionPaths = requireNonNull(expansionPaths);
+        this.additionalQueryParameters = requireNonNull(additionalQueryParameters);
+        this.expansionModel = requireNonNull(expansionModel);
+        this.queryModel = requireNonNull(queryModel);
     }
 
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction, final List<HttpQueryParameter> additionalQueryParameters) {

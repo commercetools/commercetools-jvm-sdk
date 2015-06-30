@@ -8,6 +8,7 @@ import io.sphere.sdk.http.HttpResponse;
 import java.util.Optional;
 
 import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
+import static java.util.Objects.requireNonNull;
 
 /**
  * Provides a {@link io.sphere.sdk.queries.Fetch} interface implementation for queries which return 0 to 1 results.
@@ -18,8 +19,8 @@ public abstract class QueryToFetchAdapter<T> extends SphereRequestBase implement
     private final Query<T> query;
 
     protected QueryToFetchAdapter(final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Query<T> query) {
-        this.pagedQueryResultTypeReference = pagedQueryResultTypeReference;
-        this.query = query;
+        this.pagedQueryResultTypeReference = requireNonNull(pagedQueryResultTypeReference);
+        this.query = requireNonNull(query);
     }
 
     @Override
