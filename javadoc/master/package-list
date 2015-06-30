@@ -30,9 +30,11 @@ io.sphere.sdk.customergroups.queries
 io.sphere.sdk.customers
 io.sphere.sdk.customers.commands
 io.sphere.sdk.customers.commands.updateactions
+io.sphere.sdk.customers.expansion
 io.sphere.sdk.customers.queries
 io.sphere.sdk.customobjects
 io.sphere.sdk.customobjects.commands
+io.sphere.sdk.customobjects.expansion
 io.sphere.sdk.customobjects.queries
 io.sphere.sdk.discountcodes
 io.sphere.sdk.discountcodes.commands
