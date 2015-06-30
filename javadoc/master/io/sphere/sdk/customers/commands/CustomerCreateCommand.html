@@ -136,11 +136,26 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>,<a href="../../../../../io/sphere/sdk/customers/CustomerDraft.html" title="class in io.sphere.sdk.customers">CustomerDraft</a>&gt;</pre>
 <div class="block">Creates/signs up a customer.
 
- <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomer--%s" class=code-example><pre><code class='java'>final CustomerName name = CustomerName.ofFirstAndLastName("John", "Smith");
+ <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomer--%s" class=code-example><pre><code class='java'>final CustomerGroup customerGroup = CustomerGroupFixtures.b2cCustomerGroup(client());
+final CustomerName name = CustomerName.ofFirstAndLastName("John", "Smith");
 final String email = randomEmail(CustomerCreateCommandTest.class);
 final String externalId = randomString();
 final String password = "secret";
-final CustomerDraft draft = CustomerDraft.of(name, email, password).withExternalId(externalId);
+final LocalDate dateOfBirth = LocalDate.of(1985, 5, 7);
+final String companyName = "ct";
+final String vatId = "123456";
+final boolean emailVerified = true;
+final List&lt;Address&gt; addresses = asList(Address.of(DE), Address.of(GB));
+final CustomerDraft draft = CustomerDraft.of(name, email, password)
+        .withExternalId(externalId)
+        .withDateOfBirth(dateOfBirth)
+        .withCompanyName(companyName)
+        .withVatId(vatId)
+        .withEmailVerified(emailVerified)
+        .withCustomerGroup(customerGroup)
+        .withAddresses(addresses)
+        .withDefaultBillingAddress(0)
+        .withDefaultShippingAddress(1);
 final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
 final Customer customer = result.getCustomer();
 final Optional&lt;Cart&gt; cart = result.getCart();
@@ -151,6 +166,14 @@ assertThat(customer.getPassword())
         .isNotEqualTo(password);
 assertThat(customer.getExternalId()).contains(externalId);
 assertThat(cart).isEmpty();
+assertThat(customer.getDateOfBirth()).contains(dateOfBirth);
+assertThat(customer.getCompanyName()).contains(companyName);
+assertThat(customer.getVatId()).contains(vatId);
+assertThat(customer.isEmailVerified()).isEqualTo(emailVerified);
+assertThat(customer.getCustomerGroup()).contains(customerGroup.toReference());
+assertThat(customer.getAddresses().stream().map(a -&gt; a.withId(Optional.empty())).collect(toList())).isEqualTo(addresses);
+assertThat(customer.getDefaultBillingAddress().get().withId(Optional.empty())).isEqualTo(addresses.get(0));
+assertThat(customer.getDefaultShippingAddress().get().withId(Optional.empty())).isEqualTo(addresses.get(1));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
 
  <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomerWithCart--%s" class=code-example><pre><code class='java'>final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));
