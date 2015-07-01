@@ -115,7 +115,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
                     .withSort(m -&gt; m.createdAt().sort().desc())
                     .withExpansionPaths(m -&gt; m.resource())
                     .withLimit(1)
-                    .forMessageType(ReturnInfoAddedMessage.MESSAGE_TYPE);
+                    .forMessageType(ReturnInfoAddedMessage.MESSAGE_HINT);
     final ReturnInfoAddedMessage message = execute(query).head().get();
     assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
     assertThat(message.getResource().getObj()).isPresent();
@@ -126,7 +126,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
  <p>Query for specific messages:</p>
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForAllMessages--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final MessageQuery query = MessageQuery.of()
-            .withPredicate(m -&gt; m.type().is(ReturnInfoAddedMessage.MESSAGE_TYPE.type()))
+            .withPredicate(m -&gt; m.type().is(ReturnInfoAddedMessage.MESSAGE_TYPE))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource())
             .withLimit(1);

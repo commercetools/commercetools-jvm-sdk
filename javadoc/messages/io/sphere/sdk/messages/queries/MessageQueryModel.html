@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":10};
+var methods = {"i0":9,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../../io/sphere/sdk/messages/queries/MessageTypeQueryModel.html" title="interface in io.sphere.sdk.messages.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/messages/queries/MessageQueryModel.html" target="_top">Frames</a></li>
@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -135,6 +135,24 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- ======== CONSTRUCTOR SUMMARY ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.summary">
+<!--   -->
+</a>
+<h3>Constructor Summary</h3>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
+<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
+<tr>
+<th class="colOne" scope="col">Constructor and Description</th>
+</tr>
+<tr class="altColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/messages/queries/MessageQueryModel.html#MessageQueryModel-java.util.Optional-java.util.Optional-">MessageQueryModel</a></span>(java.util.Optional&lt;? extends <a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&gt;&nbsp;parent,
+                 java.util.Optional&lt;java.lang.String&gt;&nbsp;pathSegment)</code>&nbsp;</td>
+</tr>
+</table>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -152,7 +170,11 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/messages/queries/MessageQueryModel.html#of--">of</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>,java.lang.Object&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/messages/queries/MessageQueryModel.html#resource--">resource</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/messages/queries/MessageTypeQueryModel.html" title="interface in io.sphere.sdk.messages.queries">MessageTypeQueryModel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/messages/queries/MessageQueryModel.html#type--">type</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -192,6 +214,24 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
+<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<ul class="blockList">
+<li class="blockList"><a name="constructor.detail">
+<!--   -->
+</a>
+<h3>Constructor Detail</h3>
+<a name="MessageQueryModel-java.util.Optional-java.util.Optional-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>MessageQueryModel</h4>
+<pre>public&nbsp;MessageQueryModel(java.util.Optional&lt;? extends <a href="../../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&gt;&nbsp;parent,
+                         java.util.Optional&lt;java.lang.String&gt;&nbsp;pathSegment)</pre>
+</li>
+</ul>
+</li>
+</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
@@ -210,10 +250,19 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <a name="type--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>type</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/StringQueryModel.html" title="interface in io.sphere.sdk.queries">StringQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&nbsp;type()</pre>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/messages/queries/MessageTypeQueryModel.html" title="interface in io.sphere.sdk.messages.queries">MessageTypeQueryModel</a>&nbsp;type()</pre>
+</li>
+</ul>
+<a name="resource--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>resource</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="class in io.sphere.sdk.queries">ReferenceQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>,java.lang.Object&gt;&nbsp;resource()</pre>
 </li>
 </ul>
 </li>
@@ -244,7 +293,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../../io/sphere/sdk/messages/queries/MessageTypeQueryModel.html" title="interface in io.sphere.sdk.messages.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/messages/queries/MessageQueryModel.html" target="_top">Frames</a></li>
@@ -270,13 +319,13 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -157,23 +157,28 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/JsonUtils.html#readObject-com.fasterxml.jackson.core.type.TypeReference-com.fasterxml.jackson.databind.JsonNode-">readObject</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;clazz,
+          com.fasterxml.jackson.databind.JsonNode&nbsp;jsonNode)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/JsonUtils.html#readObjectFromJsonString-com.fasterxml.jackson.core.type.TypeReference-java.lang.String-">readObjectFromJsonString</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference,
                         java.lang.String&nbsp;jsonAsString)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/JsonUtils.html#readObjectFromResource-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">readObjectFromResource</a></span>(java.lang.String&nbsp;resourcePath,
                       com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.databind.JsonNode</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/JsonUtils.html#readTree-byte:A-">readTree</a></span>(byte[]&nbsp;body)</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/JsonUtils.html#toJson-java.lang.Object-">toJson</a></span>(java.lang.Object&nbsp;object)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;com.fasterxml.jackson.databind.JsonNode</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/JsonUtils.html#toJsonNode-T-">toJsonNode</a></span>(T&nbsp;value)</code>&nbsp;</td>
 </tr>
@@ -268,6 +273,16 @@ extends java.lang.Object</pre>
 <h4>readObjectFromJsonString</h4>
 <pre>public static&nbsp;&lt;T&gt;&nbsp;T&nbsp;readObjectFromJsonString(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference,
                                              java.lang.String&nbsp;jsonAsString)</pre>
+</li>
+</ul>
+<a name="readObject-com.fasterxml.jackson.core.type.TypeReference-com.fasterxml.jackson.databind.JsonNode-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>readObject</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;T&nbsp;readObject(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;clazz,
+                               com.fasterxml.jackson.databind.JsonNode&nbsp;jsonNode)</pre>
 </li>
 </ul>
 <a name="readObject-java.lang.Class-com.fasterxml.jackson.databind.JsonNode-">
