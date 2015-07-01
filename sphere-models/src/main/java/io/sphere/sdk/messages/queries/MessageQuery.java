@@ -7,7 +7,6 @@ import io.sphere.sdk.messages.expansion.MessageExpansionModel;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
-import io.sphere.sdk.queries.QueryPredicate;
 
 /**
 
@@ -34,9 +33,8 @@ public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, M
     }
 
     default <T> Query<T> forMessageType(final MessageDerivatHint<T> hint) {
-        final QueryPredicate<Message> additionalPredicate = MessageQueryModel.of().type().is(hint.type());
         final MessageQuery queryWithPredicateForType =
-                withPredicate(predicate().map(p -> p.and(additionalPredicate)).orElse(additionalPredicate));
+                withPredicate(hint.filterPredicate(predicate()));
         return new TypedMessageQuery<>(queryWithPredicateForType.httpRequestIntent(), hint.queryResultTypeReference());
     }
 }

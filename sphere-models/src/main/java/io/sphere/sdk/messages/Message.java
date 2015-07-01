@@ -32,4 +32,6 @@ public interface Message extends DefaultModel<Message> {
     default Reference<Message> toReference() {
         return Reference.of(Message.typeId(), getId());
     }
+
+    <T extends Message> T as(final Class<T> messageClass);
 }

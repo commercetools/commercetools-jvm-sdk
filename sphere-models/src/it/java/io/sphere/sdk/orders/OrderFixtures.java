@@ -14,6 +14,7 @@ import io.sphere.sdk.customers.commands.CustomerSignInCommand;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.orders.commands.OrderFromCartCreateCommand;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
+import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
 import io.sphere.sdk.orders.commands.updateactions.AddReturnInfo;
 import io.sphere.sdk.orders.commands.updateactions.ChangePaymentState;
 import io.sphere.sdk.orders.commands.updateactions.ChangeShipmentState;
@@ -84,7 +85,8 @@ public class OrderFixtures {
             final String lineItemId = order.getLineItems().get(0).getId();
             final List<ReturnItemDraft> items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
             final AddReturnInfo action = AddReturnInfo.of(items);
-            final Order updatedOrder = client.execute(OrderUpdateCommand.of(order, action));
+            final AddDelivery addDelivery = AddDelivery.of(asList(DeliveryItem.of(lineItemId, 1)));
+            final Order updatedOrder = client.execute(OrderUpdateCommand.of(order, asList(action, addDelivery)));
 
             final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
             f.accept(updatedOrder, returnInfo);

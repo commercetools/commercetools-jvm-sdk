@@ -30,6 +30,10 @@ public class ReferenceQueryModel<T, R> extends QueryModelImpl<T> implements Equa
         return new StringQuerySortingModel<>(Optional.of(this), "id");
     }
 
+    public StringQueryModel<T> typeId() {
+        return new StringQuerySortingModel<>(Optional.of(this), "typeId");
+    }
+
     private QueryModelImpl<T> idSegment() {
         return new QueryModelImpl<>(Optional.of(this), "id");
     }
