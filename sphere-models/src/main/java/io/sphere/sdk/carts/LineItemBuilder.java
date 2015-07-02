@@ -8,7 +8,6 @@ import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -77,6 +76,6 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
 
     @Override
     public LineItem build() {
-        return new LineItemImpl(id, productId, name, variant, price, quantity, state, taxRate, supplyChannel, discountedPrice, productSlug);
+        return new LineItemImpl(id, productId, name, variant, price, quantity, state, taxRate, supplyChannel, discountedPrice, productSlug, Optional.empty());
     }
 }
