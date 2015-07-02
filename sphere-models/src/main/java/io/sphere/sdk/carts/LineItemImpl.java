@@ -16,7 +16,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
 
     private final String productId;
     private final LocalizedStrings name;
-    private final LocalizedStrings productSlug;
+    private final Optional<LocalizedStrings> productSlug;
     private final ProductVariant variant;
     private final Price price;
     private final Optional<TaxRate> taxRate;
@@ -28,7 +28,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
                  final ProductVariant variant, final Price price, final long quantity,
                  final Set<ItemState> state, final Optional<TaxRate> taxRate,
                  final Optional<Reference<Channel>> supplyChannel, final Optional<DiscountedLineItemPrice> discountedPrice,
-                 final LocalizedStrings productSlug, final Optional<Reference<Channel>> distributionChannel) {
+                 final Optional<LocalizedStrings> productSlug, final Optional<Reference<Channel>> distributionChannel) {
         super(id, state, quantity, discountedPrice);
         this.productId = productId;
         this.name = name;
@@ -76,7 +76,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     }
 
     @Override
-    public LocalizedStrings getProductSlug() {
+    public Optional<LocalizedStrings> getProductSlug() {
         return productSlug;
     }
 }

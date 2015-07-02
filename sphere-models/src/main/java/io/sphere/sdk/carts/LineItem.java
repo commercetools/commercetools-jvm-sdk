@@ -30,7 +30,7 @@ public interface LineItem extends LineItemLike {
 
     Optional<Reference<Channel>> getDistributionChannel();
 
-    LocalizedStrings getProductSlug();
+    Optional<LocalizedStrings> getProductSlug();
 
     @Override
     String getId();

@@ -6,7 +6,6 @@ import io.sphere.sdk.carts.queries.CartByIdFetch;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRoles;
-import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeReference;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
@@ -26,7 +25,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.function.BiFunction;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
@@ -55,7 +53,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final LineItem lineItem = updatedCart.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
-            assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
+            assertThat(lineItem.getProductSlug()).contains(product.getMasterData().getStaged().getSlug());
         });
     }
 
