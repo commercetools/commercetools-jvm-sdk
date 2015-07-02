@@ -2,6 +2,7 @@ package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.products.ProductIdentifiable;
 
 /**
  Adds a product variant in the given quantity to the cart.
@@ -22,8 +23,11 @@ public class AddLineItem extends UpdateAction<Cart> {
         this.quantity = quantity;
     }
 
-    public static AddLineItem of(final String productId, final int variantId,
-                              final long quantity) {
+    public static AddLineItem of(final ProductIdentifiable product, final int variantId, final long quantity) {
+        return of(product.getId(), variantId, quantity);
+    }
+
+    public static AddLineItem of(final String productId, final int variantId, final long quantity) {
         return new AddLineItem(productId, variantId, quantity);
     }
 
