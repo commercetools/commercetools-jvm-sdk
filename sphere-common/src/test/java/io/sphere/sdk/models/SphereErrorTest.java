@@ -21,11 +21,10 @@ public class SphereErrorTest {
                 "  } ]\n" +
                 "}";
         final ErrorResponse sphereErrorResponse = JsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
-        final Optional<InvalidJsonInputError> jsonError = sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class);
+        final InvalidJsonInputError jsonError = sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class);
 
 
-        final Optional<String> detailsOption = jsonError.map(concreteError -> concreteError.getDetailedErrorMessage());
-        assertThat(detailsOption.get()).isEqualTo("detailed error message");
+        assertThat(jsonError.getDetailedErrorMessage()).isEqualTo("detailed error message");
     }
 
     @Test
@@ -39,7 +38,7 @@ public class SphereErrorTest {
                 "  } ]\n" +
                 "}";
         final ErrorResponse sphereErrorResponse = JsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
-        final Optional<InvalidJsonInputError> jsonError = sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class);
-        assertThat(jsonError.isPresent()).isFalse();
+        assertThatThrownBy(() -> sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
