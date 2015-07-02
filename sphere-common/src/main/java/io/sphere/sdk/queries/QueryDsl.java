@@ -11,7 +11,7 @@ import static java.util.Arrays.asList;
  * @param <T> type of the query result
  * @param <C> type of the class implementing this class
  */
-public interface QueryDsl<T, C> extends EntityQuery<T>, ReferenceExpandeableDsl<T, C> {
+public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, ReferenceExpandeableDsl<T, C> {
     /**
      * Returns an EntityQuery with the new predicate as predicate.
      * @param predicate the new predicate
