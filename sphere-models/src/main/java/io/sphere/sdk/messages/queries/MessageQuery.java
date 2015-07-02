@@ -27,7 +27,6 @@ import io.sphere.sdk.queries.Query;
 <p>If you convert a message to the wrong class the behaviour is undefined, but then still null pointer exceptions can occur:</p>
  {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#convertAfterQueryToSpecificMessageClassesButToTheWrongOne()}
 
-
  */
 public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, MessageQueryModel, MessageExpansionModel<Message>> {
     static TypeReference<PagedQueryResult<Message>> resultTypeReference() {
