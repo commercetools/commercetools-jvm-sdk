@@ -82,12 +82,32 @@
 </tr>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../io/sphere/sdk/messages/queries/MessageByIdFetch.html" title="interface in io.sphere.sdk.messages.queries">MessageByIdFetch</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-messages-queries-MessageByIdFetchTest-execution--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
+    //query one message since message creation is not directly possible
+    final MessageQuery query = MessageQuery.of()
+            .withPredicate(m -&gt; m.type().is("ReturnInfoAdded"))
+            .withSort(m -&gt; m.createdAt().sort().desc())
+            .withLimit(1);
+    final Message messageFromQueryEndpoint = execute(query).head().get();
+
+    final Message message = execute(MessageByIdFetch.of(messageFromQueryEndpoint)).get();
+    assertThat(message).isEqualTo(messageFromQueryEndpoint);
+}));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageByIdFetchTest.java" target="_blank">test code</a>.</pre></div>
+
+ If you need to receive one specific message class, like <a href="../../../../../io/sphere/sdk/orders/messages/DeliveryAddedMessage.html" title="class in io.sphere.sdk.orders.messages"><code>DeliveryAddedMessage</code></a>,
+ use <a href="../../../../../io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries"><code>MessageQuery</code></a> with a predicate by id.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries">MessageQuery</a></td>
 <td class="colLast">
 <div class="block">Provides a QueryDsl for  messages to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/messages/queries/MessageTypeQueryModel.html" title="interface in io.sphere.sdk.messages.queries">MessageTypeQueryModel</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
