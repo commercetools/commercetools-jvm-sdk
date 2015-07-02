@@ -142,7 +142,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <p>Query for any message and then convert into specific messages:</p>
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-convertAfterQueryToSpecificMessageClasses--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final MessageQuery query = MessageQuery.of()
-            .withPredicate(m -&gt; m.resource().id().is(order.getId()))
+            .withPredicate(m -&gt; m.resource().is(order))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource());
     final List&lt;Message&gt; results = execute(query).getResults();
