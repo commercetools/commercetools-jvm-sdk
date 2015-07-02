@@ -13,6 +13,6 @@ public class ZoneRateCollectionQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public ReferenceQueryModel<T, Zone> zone() {
-        return new ReferenceQueryModel<>(Optional.of(this), "zone");
+        return referenceModel("zone");
     }
 }

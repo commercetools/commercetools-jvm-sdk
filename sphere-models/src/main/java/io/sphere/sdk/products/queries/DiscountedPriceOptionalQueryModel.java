@@ -22,7 +22,7 @@ public final class DiscountedPriceOptionalQueryModel<T> extends QueryModelImpl<T
     }
 
     public ReferenceQueryModel<T, ProductDiscount> discount() {
-        return new ReferenceQueryModel<>(Optional.of(this), "discount");
+        return referenceModel("discount");
     }
 }
 

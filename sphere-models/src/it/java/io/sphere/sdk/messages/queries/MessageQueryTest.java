@@ -21,7 +21,7 @@ public class MessageQueryTest extends IntegrationTest {
     public void convertAfterQueryToSpecificMessageClasses() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final MessageQuery query = MessageQuery.of()
-                    .withPredicate(m -> m.resource().id().is(order.getId()))
+                    .withPredicate(m -> m.resource().is(order))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource());
             final List<Message> results = execute(query).getResults();

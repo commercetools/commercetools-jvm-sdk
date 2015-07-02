@@ -46,6 +46,6 @@ public final class CustomerQueryModel extends DefaultModelQueryModelImpl<Custome
     }
 
     public ReferenceQueryModel<Customer, CustomerGroup> customerGroup() {
-        return new ReferenceQueryModel<>(Optional.of(this), "customerGroup");
+        return referenceModel("customerGroup");
     }
 }

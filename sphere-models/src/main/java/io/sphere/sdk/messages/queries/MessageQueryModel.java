@@ -1,10 +1,7 @@
 package io.sphere.sdk.messages.queries;
 
 import io.sphere.sdk.messages.Message;
-import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.QueryModelImpl;
-import io.sphere.sdk.queries.ReferenceQueryModel;
+import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
 
@@ -22,7 +19,7 @@ public class MessageQueryModel extends DefaultModelQueryModelImpl<Message> {
         return new MessageTypeQueryModelImpl(Optional.of(this), "type");
     }
 
-    public ReferenceQueryModel<Message, Object> resource() {
-        return new ReferenceQueryModel<>(Optional.of(this), "resource");
+    public AnyReferenceQueryModel<Message> resource() {
+        return anyReferenceModel("resource");
     }
 }

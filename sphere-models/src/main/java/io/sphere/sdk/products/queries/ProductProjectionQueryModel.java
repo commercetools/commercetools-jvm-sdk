@@ -18,7 +18,7 @@ public final class ProductProjectionQueryModel extends ProductDataQueryModelBase
     }
 
     public ReferenceQueryModel<ProductProjection, ProductType> productType() {
-        return new ReferenceQueryModel<>(Optional.of(this), "productType");
+        return referenceModel("productType");
     }
 
     public BooleanQueryModel<ProductProjection> hasStagedChanges() {
