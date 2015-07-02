@@ -109,24 +109,10 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <div class="block">Provides a QueryDsl for  messages to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p>
 
  <p>Query for any message:</p>
- <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForASpecificMessage--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
-    final Query&lt;ReturnInfoAddedMessage&gt; query =
-            MessageQuery.of()
-                    .withSort(m -&gt; m.createdAt().sort().desc())
-                    .withExpansionPaths(m -&gt; m.resource())
-                    .withLimit(1)
-                    .forMessageType(ReturnInfoAddedMessage.MESSAGE_HINT);
-    final ReturnInfoAddedMessage message = execute(query).head().get();
-    assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
-    assertThat(message.getResource().getObj()).isPresent();
-    assertThat(message.getResource().getId()).isEqualTo(order.getId());
-}));
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
-
- <p>Query for specific messages:</p>
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForAllMessages--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final MessageQuery query = MessageQuery.of()
-            .withPredicate(m -&gt; m.type().is(ReturnInfoAddedMessage.MESSAGE_TYPE))
+            //example predicate to fetch for a specific message type
+            .withPredicate(m -&gt; m.type().is("ReturnInfoAdded"))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource())
             .withLimit(1);
@@ -134,6 +120,85 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
     assertThat(message.getResource().getObj()).isPresent();
     assertThat(message.getResource()).isEqualTo(order.toReference());
     assertThat(message.getResource().getId()).isEqualTo(order.getId());
+}));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>Query for a specific message class:</p>
+ <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForASpecificMessage--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
+    final Query&lt;ReturnInfoAddedMessage&gt; query =
+            MessageQuery.of()
+                    .withSort(m -&gt; m.createdAt().sort().desc())
+                    .withExpansionPaths(m -&gt; m.resource())
+                    .withLimit(1)
+                    .forMessageType(ReturnInfoAddedMessage.MESSAGE_HINT);
+    final PagedQueryResult&lt;ReturnInfoAddedMessage&gt; pagedQueryResult = execute(query);
+    final ReturnInfoAddedMessage message = pagedQueryResult.head().get();
+    assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
+    assertThat(message.getResource().getObj()).isPresent();
+    assertThat(message.getResource().getId()).isEqualTo(order.getId());
+}));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
+
+<p>Query for any message and then convert into specific messages:</p>
+ <div id="io-sphere-sdk-messages-queries-MessageQueryTest-convertAfterQueryToSpecificMessageClasses--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
+    final MessageQuery query = MessageQuery.of()
+            .withPredicate(m -&gt; m.resource().id().is(order.getId()))
+            .withSort(m -&gt; m.createdAt().sort().desc())
+            .withExpansionPaths(m -&gt; m.resource());
+    final List&lt;Message&gt; results = execute(query).getResults();
+
+    final Message returnInfoAddedUntypedMessage = results.stream()
+            .filter(m -&gt; {
+                final String messageType = ReturnInfoAddedMessage.MESSAGE_TYPE;
+                return m.getType().equals(messageType);
+            })
+            .findFirst().get();
+
+    final ReturnInfoAddedMessage returnInfoAddedMessage =
+            returnInfoAddedUntypedMessage.as(ReturnInfoAddedMessage.class);
+
+    assertThat(order.getReturnInfo()).contains(returnInfoAddedMessage.getReturnInfo());
+    final Order expandedOrder = returnInfoAddedMessage.getResource().getObj().get();
+    assertThat(expandedOrder.getCreatedAt()).isEqualTo(order.getCreatedAt());
+}));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
+
+<p>Query for any message for a specific resource like orders:</p>
+ <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForASpecificResource--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
+    final Query&lt;SimpleOrderMessage&gt; query = MessageQuery.of()
+            .withPredicate(m -&gt; m.resource().id().is(order.getId()))
+            .withSort(m -&gt; m.createdAt().sort().desc())
+            .withExpansionPaths(m -&gt; m.resource())
+            .forMessageType(SimpleOrderMessage.MESSAGE_HINT);
+    final List&lt;SimpleOrderMessage&gt; results = execute(query).getResults();
+
+    final Optional&lt;Order&gt; orderOptional = results.get(0).getResource().getObj();
+    assertThat(orderOptional.map(o -&gt; o.getCreatedAt())).contains(order.getCreatedAt());
+}));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
+
+<p>If you convert a message to the wrong class the behaviour is undefined, but then still null pointer exceptions can occur:</p>
+ <div id="io-sphere-sdk-messages-queries-MessageQueryTest-convertAfterQueryToSpecificMessageClassesButToTheWrongOne--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
+    final MessageQuery query = MessageQuery.of()
+            .withPredicate(m -&gt; m.resource().id().is(order.getId()))
+            .withSort(m -&gt; m.createdAt().sort().desc())
+            .withExpansionPaths(m -&gt; m.resource());
+    final List&lt;Message&gt; results = execute(query).getResults();
+
+    final Message returnInfoAddedUntypedMessage = results.stream()
+            .filter(m -&gt; {
+                final String messageType = ReturnInfoAddedMessage.MESSAGE_TYPE;
+                return m.getType().equals(messageType);
+            })
+            .findFirst().get();
+
+
+    final DeliveryAddedMessage deliveryAddedMessage
+            //wrong cast, but may not explodes
+            = returnInfoAddedUntypedMessage.as(DeliveryAddedMessage.class);
+    assertThat(deliveryAddedMessage.getDelivery())
+            .overridingErrorMessage("with wrong cast, fields can be null")
+            .isNull();
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
