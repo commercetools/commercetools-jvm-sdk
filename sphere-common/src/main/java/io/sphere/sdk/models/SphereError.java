@@ -41,24 +41,20 @@ public class SphereError extends Base {
         return new SphereError(code, message);
     }
 
-    public <T extends SphereError> Optional<T> as(final Class<T> errorClass) {
+    public <T extends SphereError> T as(final Class<T> errorClass) {
         final Optional<String> classErrorCodeOption = codeValueOf(errorClass);
-        Optional<T> result = Optional.empty();
         if (classErrorCodeOption.map(classErrCode -> classErrCode.equals(code)).orElse(true)) {
             final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
             final JsonNode jsonNode = objectMapper.createObjectNode()
                     .put("code", code)
                     .put("message", message)
                     .setAll(furtherFields);
-            try {
-                final T object = JsonUtils.readObject(errorClass, jsonNode);
-                result = code.equals(object.getCode()) ? Optional.of(object) : Optional.<T>empty();
-            } catch (final JsonException e) {
-                SphereInternalLogger.getLogger(SphereError.class).warn(() -> "cannot cast error: " + e);
-                result = Optional.empty();
-            }
+            return JsonUtils.readObject(errorClass, jsonNode);
+        } else {
+            throw new IllegalArgumentException(classErrorCodeOption.map(
+                    code -> "Codes not matching: " + code + " is not " + getCode())
+                    .orElse("error class not mathing code " + getCode()));
         }
-        return result;
     }
 
     private Optional<String> codeValueOf(final Class<?> errorClass) {

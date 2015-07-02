@@ -246,8 +246,12 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
             boolean matches = false;
             if (!e.getErrors().isEmpty()) {
                 final SphereError firstError = e.getErrors().get(0);
-                final Optional<T> concreteErrorOption = firstError.as(error);
-                matches = concreteErrorOption.isPresent();
+                try {
+                    firstError.as(error);
+                    matches = true;
+                } catch (final IllegalArgumentException e1) {
+                    matches = false;
+                }
             }
             return matches;
         }
