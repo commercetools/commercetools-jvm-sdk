@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.queries</div>
-<h2 title="Interface QueryDsl" class="title">Interface QueryDsl&lt;T,C&gt;</h2>
+<h2 title="Interface QueryDsl" class="title">Interface QueryDsl&lt;T,C extends QueryDsl&lt;T,C&gt;&gt;</h2>
 </div>
 <div class="contentContainer">
 <div class="description">
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">QueryDsl&lt;T,C&gt;</span>
+<pre>public interface <span class="typeNameLabel">QueryDsl&lt;T,C extends QueryDsl&lt;T,C&gt;&gt;</span>
 extends <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;T,C&gt;</pre>
 </li>
 </ul>
