@@ -2,8 +2,10 @@ package io.sphere.sdk.messages.queries;
 
 import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.messages.DeliveryAddedMessage;
 import io.sphere.sdk.orders.messages.ReturnInfoAddedMessage;
 import io.sphere.sdk.orders.messages.SimpleOrderMessage;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -25,7 +27,10 @@ public class MessageQueryTest extends IntegrationTest {
             final List<Message> results = execute(query).getResults();
 
             final Message returnInfoAddedUntypedMessage = results.stream()
-                    .filter(m -> m.getType().equals(ReturnInfoAddedMessage.MESSAGE_TYPE))
+                    .filter(m -> {
+                        final String messageType = ReturnInfoAddedMessage.MESSAGE_TYPE;
+                        return m.getType().equals(messageType);
+                    })
                     .findFirst().get();
 
             final ReturnInfoAddedMessage returnInfoAddedMessage =
@@ -34,6 +39,32 @@ public class MessageQueryTest extends IntegrationTest {
             assertThat(order.getReturnInfo()).contains(returnInfoAddedMessage.getReturnInfo());
             final Order expandedOrder = returnInfoAddedMessage.getResource().getObj().get();
             assertThat(expandedOrder.getCreatedAt()).isEqualTo(order.getCreatedAt());
+        }));
+    }
+
+    @Test
+    public void convertAfterQueryToSpecificMessageClassesButToTheWrongOne() throws Exception {
+        withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
+            final MessageQuery query = MessageQuery.of()
+                    .withPredicate(m -> m.resource().id().is(order.getId()))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withExpansionPaths(m -> m.resource());
+            final List<Message> results = execute(query).getResults();
+
+            final Message returnInfoAddedUntypedMessage = results.stream()
+                    .filter(m -> {
+                        final String messageType = ReturnInfoAddedMessage.MESSAGE_TYPE;
+                        return m.getType().equals(messageType);
+                    })
+                    .findFirst().get();
+
+
+            final DeliveryAddedMessage deliveryAddedMessage
+                    //wrong cast, but may not explodes
+                    = returnInfoAddedUntypedMessage.as(DeliveryAddedMessage.class);
+            assertThat(deliveryAddedMessage.getDelivery())
+                    .overridingErrorMessage("with wrong cast, fields can be null")
+                    .isNull();
         }));
     }
 
@@ -61,7 +92,8 @@ public class MessageQueryTest extends IntegrationTest {
                             .withExpansionPaths(m -> m.resource())
                             .withLimit(1)
                             .forMessageType(ReturnInfoAddedMessage.MESSAGE_HINT);
-            final ReturnInfoAddedMessage message = execute(query).head().get();
+            final PagedQueryResult<ReturnInfoAddedMessage> pagedQueryResult = execute(query);
+            final ReturnInfoAddedMessage message = pagedQueryResult.head().get();
             assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
             assertThat(message.getResource().getObj()).isPresent();
             assertThat(message.getResource().getId()).isEqualTo(order.getId());
@@ -72,7 +104,8 @@ public class MessageQueryTest extends IntegrationTest {
     public void queryForAllMessages() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final MessageQuery query = MessageQuery.of()
-                    .withPredicate(m -> m.type().is(ReturnInfoAddedMessage.MESSAGE_TYPE))
+                    //example predicate to fetch for a specific message type
+                    .withPredicate(m -> m.type().is("ReturnInfoAdded"))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource())
                     .withLimit(1);

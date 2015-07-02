@@ -13,10 +13,21 @@ import io.sphere.sdk.queries.Query;
  {@doc.gen summary messages}
 
  <p>Query for any message:</p>
+ {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForAllMessages()}
+
+ <p>Query for a specific message class:</p>
  {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForASpecificMessage()}
 
- <p>Query for specific messages:</p>
- {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForAllMessages()}
+<p>Query for any message and then convert into specific messages:</p>
+ {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#convertAfterQueryToSpecificMessageClasses()}
+
+<p>Query for any message for a specific resource like orders:</p>
+ {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForASpecificResource()}
+
+<p>If you convert a message to the wrong class the behaviour is undefined, but then still null pointer exceptions can occur:</p>
+ {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#convertAfterQueryToSpecificMessageClassesButToTheWrongOne()}
+
+
  */
 public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, MessageQueryModel, MessageExpansionModel<Message>> {
     static TypeReference<PagedQueryResult<Message>> resultTypeReference() {
