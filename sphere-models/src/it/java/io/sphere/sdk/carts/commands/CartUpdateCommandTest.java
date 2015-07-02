@@ -3,6 +3,9 @@ package io.sphere.sdk.carts.commands;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.CartByIdFetch;
+import io.sphere.sdk.channels.Channel;
+import io.sphere.sdk.channels.ChannelFixtures;
+import io.sphere.sdk.channels.ChannelRoles;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeReference;
 import io.sphere.sdk.models.Address;
@@ -53,6 +56,27 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             assertThat(lineItem.getProductSlug()).isEqualTo(product.getMasterData().getStaged().getSlug());
+        });
+    }
+
+    @Test
+    public void addLineItemWithChannels() throws Exception {
+        final Channel inventorySupplyChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY);
+        final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRoles.PRODUCT_DISTRIBUTION);
+
+        withEmptyCartAndProduct(client(), (cart, product) -> {
+            assertThat(cart.getLineItems()).hasSize(0);
+            final long quantity = 3;
+            final String productId = product.getId();
+            final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity)
+                    .withSupplyChannel(inventorySupplyChannel)
+                    .withDistributionChannel(distributionChannel);
+
+            final Cart updatedCart = execute(CartUpdateCommand.of(cart, action));
+            assertThat(updatedCart.getLineItems()).hasSize(1);
+            final LineItem lineItem = updatedCart.getLineItems().get(0);
+            assertThat(lineItem.getDistributionChannel()).contains(distributionChannel.toReference());
+            assertThat(lineItem.getSupplyChannel()).contains(inventorySupplyChannel.toReference());
         });
     }
 

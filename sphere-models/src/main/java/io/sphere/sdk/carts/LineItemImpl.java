@@ -21,13 +21,14 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     private final Price price;
     private final Optional<TaxRate> taxRate;
     private final Optional<Reference<Channel>> supplyChannel;
+    private final Optional<Reference<Channel>> distributionChannel;
 
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedStrings name,
                  final ProductVariant variant, final Price price, final long quantity,
                  final Set<ItemState> state, final Optional<TaxRate> taxRate,
                  final Optional<Reference<Channel>> supplyChannel, final Optional<DiscountedLineItemPrice> discountedPrice,
-                 final LocalizedStrings productSlug) {
+                 final LocalizedStrings productSlug, final Optional<Reference<Channel>> distributionChannel) {
         super(id, state, quantity, discountedPrice);
         this.productId = productId;
         this.name = name;
@@ -36,6 +37,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
         this.taxRate = taxRate;
         this.supplyChannel = supplyChannel;
         this.productSlug = productSlug;
+        this.distributionChannel = distributionChannel;
     }
 
     @Override
@@ -66,6 +68,11 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     @Override
     public Optional<Reference<Channel>> getSupplyChannel() {
         return supplyChannel;
+    }
+
+    @Override
+    public Optional<Reference<Channel>> getDistributionChannel() {
+        return distributionChannel;
     }
 
     @Override
