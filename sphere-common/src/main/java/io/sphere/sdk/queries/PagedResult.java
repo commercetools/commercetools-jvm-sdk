@@ -74,6 +74,8 @@ public abstract class PagedResult<T> extends Base {
       * @return true if doing a request with an incremented offset parameter would cause an empty result otherwise false.
       */
      public boolean isLast() {
-         return getOffset() + size() == getTotal();
+         //currently counting the total amount is performed in a second database call, so it is possible
+         //that the left side can be greater than total
+         return getOffset() + size() >= getTotal();
      }
 }
