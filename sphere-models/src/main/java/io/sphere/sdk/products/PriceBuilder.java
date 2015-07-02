@@ -22,6 +22,7 @@ public class PriceBuilder implements Builder<Price> {
     private Optional<DiscountedPrice> discounted = Optional.empty();
     private Optional<ZonedDateTime> validFrom = Optional.empty();
     private Optional<ZonedDateTime> validUntil = Optional.empty();
+    private Optional<String> id = Optional.empty();
 
     private PriceBuilder(final MonetaryAmount value) {
         this.value = value;
@@ -36,7 +37,10 @@ public class PriceBuilder implements Builder<Price> {
                 .country(template.getCountry())
                 .customerGroup(template.getCustomerGroup())
                 .channel(template.getChannel())
-                .discounted(template.getDiscounted());
+                .discounted(template.getDiscounted())
+                .validFrom(template.getValidFrom())
+                .validUntil(template.getValidUntil())
+                .id(template.getId());
     }
 
     public PriceBuilder country(final Optional<CountryCode> country) {
@@ -99,6 +103,15 @@ public class PriceBuilder implements Builder<Price> {
         return validUntil(Optional.of(validUntil));
     }
 
+    public PriceBuilder id(final Optional<String> id) {
+        this.id = id;
+        return this;
+    }
+
+    public PriceBuilder id(final String id) {
+        return id(Optional.of(id));
+    }
+
     public PriceBuilder value(final MonetaryAmount value) {
         this.value = value;
         return this;
@@ -106,6 +119,6 @@ public class PriceBuilder implements Builder<Price> {
 
     @Override
     public Price build() {
-        return new Price(value, country, customerGroup, channel, discounted, validFrom, validUntil);
+        return new Price(value, country, customerGroup, channel, discounted, validFrom, validUntil, id);
     }
 }

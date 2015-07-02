@@ -8,24 +8,28 @@ import io.sphere.sdk.products.ProductUpdateScope;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removePrice()}
  */
 public class RemovePrice extends StageableProductUpdateAction {
-    private final int variantId;
-    private final Price price;
+    private final String priceId;
 
-    private RemovePrice(final int variantId, final Price price, final ProductUpdateScope productUpdateScope) {
+    private RemovePrice(final String priceId, final ProductUpdateScope productUpdateScope) {
         super("removePrice", productUpdateScope);
-        this.variantId = variantId;
-        this.price = price;
+        this.priceId = priceId;
     }
 
-    public int getVariantId() {
-        return variantId;
+    public String getPriceId() {
+        return priceId;
     }
 
-    public Price getPrice() {
-        return price;
+    /**
+     * Action to remove a price
+     * @param price the price to remove including an ID
+     * @param productUpdateScope scope for the product update
+     * @return action
+     */
+    public static RemovePrice of(final Price price, final ProductUpdateScope productUpdateScope) {
+        return of(price.getId().orElseThrow(() -> new IllegalArgumentException("Expected price with ID.")), productUpdateScope);
     }
 
-    public static RemovePrice of(final int variantId, final Price price, final ProductUpdateScope productUpdateScope) {
-        return new RemovePrice(variantId, price, productUpdateScope);
+    public static RemovePrice of(final String priceId, final ProductUpdateScope productUpdateScope) {
+        return new RemovePrice(priceId, productUpdateScope);
     }
 }

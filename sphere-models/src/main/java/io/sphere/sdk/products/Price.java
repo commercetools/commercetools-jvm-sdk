@@ -31,12 +31,13 @@ public class Price extends Base {
     private final Optional<DiscountedPrice> discounted;
     private final Optional<ZonedDateTime> validFrom;
     private final Optional<ZonedDateTime> validUntil;
+    private final Optional<String> id;
 
     @JsonCreator
     Price(final MonetaryAmount value, final Optional<CountryCode> country,
           final Optional<Reference<CustomerGroup>> customerGroup, final Optional<Reference<Channel>> channel,
           final Optional<DiscountedPrice> discounted,
-          final Optional<ZonedDateTime> validFrom, final Optional<ZonedDateTime> validUntil) {
+          final Optional<ZonedDateTime> validFrom, final Optional<ZonedDateTime> validUntil, final Optional<String> id) {
         this.value = value;
         this.country = country;
         this.customerGroup = customerGroup;
@@ -44,6 +45,7 @@ public class Price extends Base {
         this.discounted = discounted;
         this.validFrom = validFrom;
         this.validUntil = validUntil;
+        this.id = id;
     }
 
     public MonetaryAmount getValue() {
@@ -71,9 +73,21 @@ public class Price extends Base {
         return discounted;
     }
 
-    public Optional<ZonedDateTime> getValidFrom() { return validFrom; }
+    public Optional<ZonedDateTime> getValidFrom() {
+        return validFrom;
+    }
 
-    public Optional<ZonedDateTime> getValidUntil() { return validUntil; }
+    public Optional<ZonedDateTime> getValidUntil() {
+        return validUntil;
+    }
+
+    /**
+     * The unique ID of this price. Only read only.
+     * @return price id
+     */
+    public Optional<String> getId() {
+        return id;
+    }
 
     public Price withCustomerGroup(final Optional<Reference<CustomerGroup>> customerGroup) {
         return PriceBuilder.of(this).customerGroup(customerGroup).build();
@@ -119,11 +133,24 @@ public class Price extends Base {
         return PriceBuilder.of(this).validUntil(validUntil).build();
     }
 
+    public Price withId(final String id) {
+        return withId(Optional.of(id));
+    }
+
+    public Price withId(final Optional<String> id) {
+        return PriceBuilder.of(this).id(id).build();
+    }
+
     @JsonIgnore
     public static Price of(final MonetaryAmount money) {
         return PriceBuilder.of(money).build();
     }
 
+    /**
+     * Compares two objects with each other. Ignores the price id.
+     * @param o other
+     * @return true if they have the same value
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
