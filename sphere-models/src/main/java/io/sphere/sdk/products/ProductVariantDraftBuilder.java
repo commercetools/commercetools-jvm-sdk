@@ -2,11 +2,11 @@ package io.sphere.sdk.products;
 
 import java.util.Optional;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.models.Image;
 import io.sphere.sdk.utils.ListUtils;
 
 import java.util.Arrays;
@@ -19,6 +19,8 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
     private List<Price> prices = Collections.emptyList();
 
     private List<AttributeDraft> attributes = Collections.emptyList();
+
+    private List<Image> images = Collections.emptyList();
 
     private ProductVariantDraftBuilder() {
     }
@@ -34,6 +36,11 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
 
     public ProductVariantDraftBuilder sku(final String sku) {
         return sku(Optional.ofNullable(sku));
+    }
+
+    public ProductVariantDraftBuilder images(final List<Image> images) {
+        this.images = images;
+        return this;
     }
 
     public ProductVariantDraftBuilder prices(final List<Price> prices) {
@@ -72,6 +79,6 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
 
     @Override
     public ProductVariantDraft build() {
-        return new ProductVariantDraftImpl(sku, prices, attributes);
+        return new ProductVariantDraftImpl(sku, prices, attributes, images);
     }
 }

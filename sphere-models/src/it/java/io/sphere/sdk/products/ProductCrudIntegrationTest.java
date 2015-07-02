@@ -3,6 +3,7 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
+import io.sphere.sdk.models.Image;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -126,6 +127,14 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
         assertThat(results).hasSize(1);
         assertThat(getNames(results)).isEqualTo(asList(nameToFind));
         assertModelsNotPresent();
+    }
+
+    @Test
+    public void createProductWithExternalImage() throws Exception {
+        withProduct(client(), product -> {
+            assertThat(product.getMasterData().getStaged().getMasterVariant().getImages().get(0))
+            .isEqualTo(Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102));
+        });
     }
 
     /**
