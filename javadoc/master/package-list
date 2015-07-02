@@ -49,6 +49,9 @@ io.sphere.sdk.inventories.commands.updateactions
 io.sphere.sdk.inventories.expansion
 io.sphere.sdk.inventories.queries
 io.sphere.sdk.json
+io.sphere.sdk.messages
+io.sphere.sdk.messages.expansion
+io.sphere.sdk.messages.queries
 io.sphere.sdk.meta
 io.sphere.sdk.models
 io.sphere.sdk.models.errors
@@ -56,6 +59,7 @@ io.sphere.sdk.orders
 io.sphere.sdk.orders.commands
 io.sphere.sdk.orders.commands.updateactions
 io.sphere.sdk.orders.expansion
+io.sphere.sdk.orders.messages
 io.sphere.sdk.orders.queries
 io.sphere.sdk.productdiscounts
 io.sphere.sdk.productdiscounts.commands
