@@ -17,8 +17,8 @@ public final class HttpStatusCode {
     public static final int CONFLICT_409 = 409;
     public static final int TOO_MANY_REQUESTS_429 = 429;
 
-    public static final int Internal_Server_Error_500 = 500;
-    public static final int Bad_Gateway_502 = 502;
-    public static final int Service_Unavailable_503 = 503;
-    public static final int Gateway_Timeout_504 = 504;
+    public static final int INTERNAL_SERVER_ERROR_500 = 500;
+    public static final int BAD_GATEWAY_502 = 502;
+    public static final int SERVICE_UNAVAILABLE_503 = 503;
+    public static final int GATEWAY_TIMEOUT_504 = 504;
 }
