@@ -21,6 +21,6 @@ public class ProductQueryModel extends DefaultModelQueryModelImpl<Product> {
     }
 
     public ReferenceQueryModel<Product, ProductType> productType() {
-        return new ReferenceQueryModel<>(Optional.of(this), "productType");
+        return referenceModel("productType");
     }
 }

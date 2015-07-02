@@ -11,7 +11,7 @@ import java.util.Optional;
  @param <T> the type for which the expansion path is
  */
 public class OrderExpansionModel<T> extends CartLikeExpansionModel<T> {
-    public OrderExpansionModel(final Optional<String> parentPath, final String path) {
+    private OrderExpansionModel(final Optional<String> parentPath, final String path) {
         super(parentPath, path);
     }
 

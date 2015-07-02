@@ -20,7 +20,7 @@ public class ShippingMethodQueryModel extends DefaultModelQueryModelImpl<Shippin
     }
 
     public ReferenceQueryModel<ShippingMethod, TaxCategory> taxCategory() {
-        return new ReferenceQueryModel<>(Optional.of(this), "taxCategory");
+        return referenceModel("taxCategory");
     }
 
     public ZoneRateCollectionQueryModel<ShippingMethod> zoneRates() {

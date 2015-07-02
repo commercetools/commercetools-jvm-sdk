@@ -11,7 +11,7 @@ public class SyncInfoQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public ReferenceQueryModel<T, Channel> channel() {
-        return new ReferenceQueryModel<>(Optional.of(this), "channel");
+        return referenceModel("channel");
     }
 
     public StringQuerySortingModel<T> externalId() {

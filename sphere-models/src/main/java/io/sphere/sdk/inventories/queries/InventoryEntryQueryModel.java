@@ -20,7 +20,7 @@ public class InventoryEntryQueryModel extends DefaultModelQueryModelImpl<Invento
     }
 
     public ReferenceQueryModel<InventoryEntry, Channel> supplyChannel() {
-        return new ReferenceQueryModel<>(Optional.of(this), "supplyChannel");
+        return referenceModel("supplyChannel");
     }
 
     public LongQuerySortingModel<InventoryEntry> quantityOnStock() {

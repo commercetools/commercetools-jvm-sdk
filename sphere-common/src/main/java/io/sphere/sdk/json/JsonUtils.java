@@ -1,5 +1,7 @@
 package io.sphere.sdk.json;
 
+import com.fasterxml.jackson.core.JsonFactory;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -16,6 +18,7 @@ import org.zapodot.jackson.java8.JavaOptionalModule;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Map;
@@ -95,9 +98,17 @@ final public class JsonUtils {
         }
     }
 
-    public static <T> T readObjectFromJsonString(TypeReference<T> typeReference, String jsonAsString) {
+    public static <T> T readObjectFromJsonString(final TypeReference<T> typeReference, final String jsonAsString) {
         try {
             return objectMapper.readValue(jsonAsString, typeReference);
+        } catch (IOException e) {
+            throw new JsonException(e);//TODO improve exception
+        }
+    }
+
+    public static <T> T readObject(final TypeReference<T> clazz, final JsonNode jsonNode) {
+        try {
+            return objectMapper.reader(clazz).readValue(jsonNode);
         } catch (IOException e) {
             throw new JsonException(e);//TODO improve exception
         }
