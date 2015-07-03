@@ -8,4 +8,8 @@ public class PartialProductCatalogDataQueryModel extends ProductCatalogDataQuery
     public PartialProductCatalogDataQueryModel(final Optional<? extends QueryModel<PartialProductCatalogDataQueryModel>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
+
+    public static PartialProductCatalogDataQueryModel of() {
+        return new PartialProductCatalogDataQueryModel(Optional.empty(), Optional.<String>empty());
+    }
 }
