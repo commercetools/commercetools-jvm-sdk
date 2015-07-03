@@ -129,14 +129,6 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
         assertModelsNotPresent();
     }
 
-    @Test
-    public void createProductWithExternalImage() throws Exception {
-        withProduct(client(), product -> {
-            assertThat(product.getMasterData().getStaged().getMasterVariant().getImages().get(0))
-            .isEqualTo(Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102));
-        });
-    }
-
     /**
      * Removes all items with the name in {@code names}
      * Should not throw exceptions if the elements are not existing.

@@ -1,6 +1,5 @@
 package io.sphere.sdk.suppliers;
 
-import io.sphere.sdk.models.Image;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -29,9 +28,6 @@ public class SimpleCottonTShirtProductDraftSupplier implements Supplier<ProductD
                 .plusAttribute(Sizes.ATTRIBUTE.draftOf(Sizes.S))
                 .plusAttribute(Colors.ATTRIBUTE.draftOf(Colors.GREEN))
                 .sku(UUID.randomUUID().toString())
-                .images(asList(
-                    Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102)
-                ))
                 .build();
         final LocalizedStrings slug = en(name).slugifiedUnique();
         return ProductDraftBuilder.of(productType, en(name), slug, masterVariant)

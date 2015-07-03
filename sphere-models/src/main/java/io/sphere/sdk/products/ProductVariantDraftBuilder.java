@@ -13,6 +13,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import static java.util.Arrays.asList;
+
 public final class ProductVariantDraftBuilder extends Base implements Builder<ProductVariantDraft> {
     private Optional<String> sku = Optional.empty();
 
@@ -43,17 +45,21 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
         return this;
     }
 
+    public ProductVariantDraftBuilder images(final Image image) {
+        return images(asList(image));
+    }
+
     public ProductVariantDraftBuilder prices(final List<Price> prices) {
         this.prices = prices;
         return this;
     }
 
     public ProductVariantDraftBuilder prices(final Price ... prices) {
-        return prices(Arrays.asList(prices));
+        return prices(asList(prices));
     }
 
     public ProductVariantDraftBuilder price(final Price price) {
-        return prices(Arrays.asList(price));
+        return prices(asList(price));
     }
 
     public ProductVariantDraftBuilder attributes(final List<AttributeDraft> attributes) {
@@ -62,7 +68,7 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
     }
 
     public ProductVariantDraftBuilder attributes(final AttributeDraft ... attributes) {
-        return attributes(Arrays.asList(attributes));
+        return attributes(asList(attributes));
     }
 
     public <T> ProductVariantDraftBuilder plusAttribute(final NamedAttributeAccess<T> namedAccess, final T value) {
