@@ -11,6 +11,8 @@ import java.util.Locale;
 import java.util.UUID;
 import java.util.function.Supplier;
 
+import static io.sphere.sdk.test.SphereTestUtils.asList;
+
 public class SimpleCottonTShirtProductDraftSupplier implements Supplier<ProductDraft> {
     private final Reference<ProductType> productType;
     private final String name;

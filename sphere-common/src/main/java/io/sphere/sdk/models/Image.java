@@ -26,6 +26,10 @@ public interface Image {
         return of(url, ImageDimensions.of(width, height), Optional.of(label));
     }
 
+    static Image ofWidthAndHeight(final String url, final int width, final int height) {
+        return of(url, ImageDimensions.of(width, height), Optional.empty());
+    }
+
     static Image of(final String url, final ImageDimensions dimensions) {
         return of(url, dimensions, Optional.empty());
     }

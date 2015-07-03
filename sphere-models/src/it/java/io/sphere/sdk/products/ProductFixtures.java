@@ -74,7 +74,7 @@ public class ProductFixtures {
 
     public static void withUpdateableProduct(final TestClient client, final String testName, final Function<Product, Product> f) {
         withProductType(client, randomString(), productType -> {
-            withUpdateableProduct(client, new SimpleCottonTShirtProductDraftSupplier(productType, "foo" + testName), f);
+            withUpdateableProduct(client, new SimpleCottonTShirtProductDraftSupplier(productType, "foo" + testName + "-2"), f);
         });
     }
 
