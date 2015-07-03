@@ -146,8 +146,7 @@ final CompletionStage&lt;Product&gt; result = client.execute(command);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/CreateProductExamples.java" target="_blank">test code</a>.</pre></div>
 
  Create a <a href="../../../../../io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products"><code>ProductDraft</code></a> instance:
- <div id="io-sphere-sdk-suppliers-SimpleCottonTShirtProductDraftSupplier%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.Image;
-import io.sphere.sdk.models.LocalizedStrings;
+ <div id="io-sphere-sdk-suppliers-SimpleCottonTShirtProductDraftSupplier%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
@@ -172,9 +171,6 @@ import static io.sphere.sdk.test.SphereTestUtils.asList;
                 .plusAttribute(Sizes.ATTRIBUTE.draftOf(Sizes.S))
                 .plusAttribute(Colors.ATTRIBUTE.draftOf(Colors.GREEN))
                 .sku(UUID.randomUUID().toString())
-                .images(asList(
-                    Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102)
-                ))
                 .build();
         final LocalizedStrings slug = en(name).slugifiedUnique();
         return ProductDraftBuilder.of(productType, en(name), slug, masterVariant)
