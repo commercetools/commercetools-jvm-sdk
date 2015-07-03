@@ -247,11 +247,23 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
     }
 
     public static MonetaryAmount of(final BigDecimal amount, final String currencyCode) {
-        final CurrencyUnit currency = CurrencyUnitBuilder.of(currencyCode, CurrencyContextBuilder.of("default").build()).build();
+        final CurrencyUnit currency = createCurrencyByCode(currencyCode);
         return MoneyImpl.of(amount, currency);
+    }
+
+    private static CurrencyUnit createCurrencyByCode(final String currencyCode) {
+        return CurrencyUnitBuilder.of(currencyCode, CurrencyContextBuilder.of("default").build()).build();
     }
 
     public static MonetaryAmount of(final String amount, final CurrencyUnit currencyUnit) {
         return of(new BigDecimal(amount), currencyUnit);
+    }
+
+    public static MonetaryAmount ofCents(final long centAmount, final String currencyCode) {
+        return ofCents(centAmount, createCurrencyByCode(currencyCode));
+    }
+
+    public static MonetaryAmount ofCents(final long centAmount, final CurrencyUnit currencyUnit) {
+        return of(new BigDecimal(centAmount).divide(new BigDecimal("100")), currencyUnit);
     }
 }
