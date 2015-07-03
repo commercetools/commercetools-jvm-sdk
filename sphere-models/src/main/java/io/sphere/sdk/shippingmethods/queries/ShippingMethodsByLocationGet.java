@@ -21,12 +21,12 @@ import static io.sphere.sdk.http.HttpMethod.GET;
  *
  * {@include.example io.sphere.sdk.shippingmethods.queries.GetShippingMethodsByLocationTest#execution()}
  */
-public class GetShippingMethodsByLocation extends SphereRequestBase implements SphereRequest<List<ShippingMethod>> {
+public class ShippingMethodsByLocationGet extends SphereRequestBase implements SphereRequest<List<ShippingMethod>> {
     private final CountryCode country;
     private final Optional<String> state;
     private final Optional<CurrencyUnit> currency;
 
-    private GetShippingMethodsByLocation(final CountryCode country, final Optional<String> state, final Optional<CurrencyUnit> currency) {
+    private ShippingMethodsByLocationGet(final CountryCode country, final Optional<String> state, final Optional<CurrencyUnit> currency) {
         this.country = country;
         this.state = state;
         this.currency = currency;
@@ -47,16 +47,16 @@ public class GetShippingMethodsByLocation extends SphereRequestBase implements S
         return HttpRequestIntent.of(GET, "/shipping-methods" + queryParameters());
     }
 
-    public static GetShippingMethodsByLocation of(final CountryCode countryCode) {
-        return new GetShippingMethodsByLocation(countryCode, Optional.<String>empty(), Optional.<CurrencyUnit>empty());
+    public static ShippingMethodsByLocationGet of(final CountryCode countryCode) {
+        return new ShippingMethodsByLocationGet(countryCode, Optional.<String>empty(), Optional.<CurrencyUnit>empty());
     }
 
-    public GetShippingMethodsByLocation withState(final String state) {
-        return new GetShippingMethodsByLocation(country, Optional.of(state), currency);
+    public ShippingMethodsByLocationGet withState(final String state) {
+        return new ShippingMethodsByLocationGet(country, Optional.of(state), currency);
     }
 
-    public GetShippingMethodsByLocation withCurrency(final CurrencyUnit currency) {
-        return new GetShippingMethodsByLocation(country, state, Optional.of(currency));
+    public ShippingMethodsByLocationGet withCurrency(final CurrencyUnit currency) {
+        return new ShippingMethodsByLocationGet(country, state, Optional.of(currency));
     }
 
     private String queryParameters() {

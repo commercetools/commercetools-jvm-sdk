@@ -13,16 +13,15 @@ import java.util.List;
 
 import static io.sphere.sdk.http.HttpMethod.GET;
 
-//TODO rename class
 /**
  * Retrieves all the shipping methods that can ship to the shipping address of the given cart.
  *
  * {@include.example io.sphere.sdk.shippingmethods.queries.GetShippingMethodsByCartTest#execution()}
  */
-public class GetShippingMethodsByCart extends SphereRequestBase implements SphereRequest<List<ShippingMethod>> {
+public class ShippingMethodsByCartGet extends SphereRequestBase implements SphereRequest<List<ShippingMethod>> {
     private final String cartId;
 
-    private GetShippingMethodsByCart(final String cartId) {
+    private ShippingMethodsByCartGet(final String cartId) {
         this.cartId = cartId;
     }
 
@@ -41,11 +40,11 @@ public class GetShippingMethodsByCart extends SphereRequestBase implements Spher
         return HttpRequestIntent.of(GET, "/shipping-methods?cartId=" + cartId);
     }
 
-    public static GetShippingMethodsByCart of(final Referenceable<Cart> cart) {
+    public static ShippingMethodsByCartGet of(final Referenceable<Cart> cart) {
         return of(cart.toReference().getId());
     }
 
-    public static GetShippingMethodsByCart of(final String cartId) {
-        return new GetShippingMethodsByCart(cartId);
+    public static ShippingMethodsByCartGet of(final String cartId) {
+        return new ShippingMethodsByCartGet(cartId);
     }
 }

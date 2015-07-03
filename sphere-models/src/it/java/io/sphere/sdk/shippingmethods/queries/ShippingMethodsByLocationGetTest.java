@@ -1,21 +1,18 @@
 package io.sphere.sdk.shippingmethods.queries;
 
-import io.sphere.sdk.carts.Cart;
+import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.List;
 
-import static io.sphere.sdk.carts.CartFixtures.*;
+import static io.sphere.sdk.models.DefaultCurrencyUnits.USD;
 
-
-public class GetShippingMethodsByCartTest extends IntegrationTest {
+public class ShippingMethodsByLocationGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        final Cart cart = createCartWithShippingAddress(client());
-
         final List<ShippingMethod> result =
-                execute(GetShippingMethodsByCart.of(cart));
+                execute(ShippingMethodsByLocationGet.of(CountryCode.US).withState("Kansas").withCurrency(USD));
     }
 }
