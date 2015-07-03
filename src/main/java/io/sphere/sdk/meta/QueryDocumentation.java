@@ -161,7 +161,7 @@ Like for predicates, you can traverse the query model tree in the same way to sp
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#queryAllExampleInPaginationContext()}
 
  <p>As long as you do not specify a limitation of how many resources should be fetched with one query
- by {@link io.sphere.sdk.queries.QueryDsl#withLimit(long)}, all (15 products) will be loaded.</p>
+ by {@link io.sphere.sdk.queries.QueryDsl#withLimit(long)}, the SPHERE.IO backend will deliver up to 20 items so that as a result all (15 products) will be loaded.</p>
 
  <p>If you specify a limit of 4 to a query as shown below, this query will only load the first 4 products:</p>
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#limitProductQueryTo4()}
