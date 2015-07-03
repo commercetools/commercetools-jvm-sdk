@@ -193,16 +193,6 @@ assertThat(query.limit()).isEqualTo(Optional.empty());
 assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
- <p>Based on this you can construct the query for the next page by using the previous query:</p>
-
- <div id="io-sphere-sdk-queries-QueryDemo-nextPage--%s" class=code-example><pre><code class='java'>CategoryQuery query = CategoryQuery.of();
-Long previousOffset = query.offset().orElse(0L);//on the first page, the offset is unset for 0
-Query&lt;Category&gt; queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
-//alternatively
-Query&lt;Category&gt; queryForNextPageVariant2 = Queries.nextPage(query);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
-
-
  <h4 id="create-hard-coded-query">Create a hard coded query</h4>
 
  Since <a href="../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries"><code>Query</code></a> is an interface you have the opportunity to code
