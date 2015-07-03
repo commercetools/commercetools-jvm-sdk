@@ -63,13 +63,18 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         testAddPrice(expectedPrice);
     }
 
-    private void testAddPrice(Price expectedPrice) throws Exception {
+    private void testAddPrice(final Price expectedPrice) throws Exception {
         withUpdateableProduct(client(), product -> {
             final Product updatedProduct = client()
                     .execute(ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT)));
 
-            final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-            assertThat(actualPrice).isEqualTo(expectedPrice);
+            final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices()
+                    .stream()
+                    .filter(p -> p.equals(expectedPrice))
+                    .findFirst()
+                    .get();
+
+            assertThat(actualPrice.withId(Optional.empty())).isEqualTo(expectedPrice);
             return updatedProduct;
         });
     }
@@ -107,11 +112,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     public void changePrice() throws Exception {
         withUpdateablePricedProduct(client(), product -> {
             final Price newPrice = Price.of(MoneyImpl.of(234, EUR));
-            assertThat(product.getMasterData().getStaged().getMasterVariant()
-                    .getPrices().stream().anyMatch(p -> p.equals(newPrice))).isFalse();
+            final List<Price> prices = product.getMasterData().getStaged().getMasterVariant()
+                    .getPrices();
+            assertThat(prices.stream().anyMatch(p -> p.equals(newPrice))).isFalse();
 
             final Product updatedProduct = client()
-                    .execute(ProductUpdateCommand.of(product, ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT)));
+                    .execute(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newPrice, STAGED_AND_CURRENT)));
 
             final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
             assertThat(actualPrice).isEqualTo(newPrice);
@@ -164,7 +170,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 
             final Product updatedProduct = client()
-                    .execute(ProductUpdateCommand.of(product, RemovePrice.of(MASTER_VARIANT_ID, oldPrice, STAGED_AND_CURRENT)));
+                    .execute(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice, STAGED_AND_CURRENT)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
                     .getPrices().stream().anyMatch(p -> p.equals(oldPrice))).isFalse();

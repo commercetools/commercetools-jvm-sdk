@@ -9,24 +9,30 @@ import io.sphere.sdk.products.ProductUpdateScope;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changePrice()}
  */
 public class ChangePrice extends StageableProductUpdateAction {
-    private final int variantId;
     private final Price price;
+    private final String priceId;
 
-    public ChangePrice(final int variantId, final Price price, final ProductUpdateScope productUpdateScope) {
+    private ChangePrice(final String priceId, final Price price, final ProductUpdateScope productUpdateScope) {
         super("changePrice", productUpdateScope);
-        this.variantId = variantId;
+        this.priceId = priceId;
         this.price = price;
     }
 
-    public int getVariantId() {
-        return variantId;
+    public String getPriceId() {
+        return priceId;
     }
 
     public Price getPrice() {
         return price;
     }
 
-    public static ChangePrice of(final int variantId, final Price price, final ProductUpdateScope productUpdateScope) {
-        return new ChangePrice(variantId, price, productUpdateScope);
+    public static ChangePrice of(final Price oldPrice, final Price price, final ProductUpdateScope productUpdateScope) {
+        final String priceId = oldPrice.getId()
+                .orElseThrow(() -> new IllegalArgumentException("The old price should have an ID: " + oldPrice));
+        return of(priceId, price, productUpdateScope);
+    }
+
+    public static ChangePrice of(final String priceId, final Price price, final ProductUpdateScope productUpdateScope) {
+        return new ChangePrice(priceId, price, productUpdateScope);
     }
 }

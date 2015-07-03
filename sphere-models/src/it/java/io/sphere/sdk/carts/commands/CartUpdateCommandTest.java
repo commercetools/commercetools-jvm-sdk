@@ -249,7 +249,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final Price oldPrice = cartWithLineItem.getLineItems().get(0).getPrice();
             final Price newPrice = oldPrice.withValue(oldPrice.getValue().multiply(2));
             final Product productWithChangedPrice =
-                    execute(ProductUpdateCommand.of(product, asList(ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT))));
+                    execute(ProductUpdateCommand.of(product, asList(ChangePrice.of(oldPrice, newPrice, STAGED_AND_CURRENT))));
 
             final List<Price> prices = productWithChangedPrice.getMasterData().getCurrent().get().getMasterVariant().getPrices();
             assertThat(prices)
