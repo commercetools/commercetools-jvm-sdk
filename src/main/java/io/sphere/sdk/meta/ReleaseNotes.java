@@ -7,7 +7,7 @@ import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.ApacheHttpClientAdapter;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.http.NingHttpClientAdapter;
+import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.ProductProjectionType;
@@ -196,7 +196,7 @@ import java.util.function.BiFunction;
     <li class=new-in-release>Code examples contain the links to the GitHub source code.</li>
     <li class=new-in-release>The {@link io.sphere.sdk.client.SphereClient} architecture has been refactored, so it is now possible to inject access token suppliers and custom HTTP clients.
         <ul>
-            <li>{@link NingHttpClientAdapter} enables to use a custom underlying Ning HTTP client for settings like proxies or max connections per host.</li>
+            <li>{@link AsyncHttpClientAdapter} enables to use a custom underlying Ning HTTP client for settings like proxies or max connections per host.</li>
             <li>The new module {@code java-client-apache-async} contains an {@link ApacheHttpClientAdapter adapter} to use the Apache HTTP client instead of the current default client Ning.</li>
             <li>The {@link io.sphere.sdk.client.QueueSphereClientDecorator} enables to limit the amount of concurrent requests to SPHERE.IO with a task queue.</li>
             <li>{@link io.sphere.sdk.client.SphereAccessTokenSupplierFactory} is a starting point to create custom access token suppliers for one token (either fetched from SPHERE.IO or as String) or auto refreshing for online shops.</li>

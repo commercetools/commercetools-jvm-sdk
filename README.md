@@ -34,10 +34,10 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 ````
 
 ### Modules
-* `sphere-java-client`: alias for sphere-java-client-ning-1_9
+* `sphere-java-client`: alias for sphere-java-client-ahc-1_9
 * `sphere-java-client-apache-async`: uses Apache HTTP client
-* `sphere-java-client-ning-1_8`: uses Ning async HTTP client 1.8
-* `sphere-java-client-ning-1_9`: uses Ning async HTTP client 1.9 (Ning 1.9 is incompatible to Ning 1.8)
+* `sphere-java-client-ahc-1_8`: uses Ning async HTTP client 1.8
+* `sphere-java-client-ahc-1_9`: uses Ning async HTTP client 1.9 (AHC 1.9 is incompatible to AHC 1.8)
 * `sphere-models`: models which do not depend to a client implementation
 
 ### Play/Scala SDK with SBT
