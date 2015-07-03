@@ -7,7 +7,6 @@ import java.util.List;
 
 /** Builds product types for unit tests.
 
- {@include.example io.sphere.sdk.producttypes.Example#builderDemo()}
  */
 public final class ProductTypeBuilder extends DefaultModelFluentBuilder<ProductTypeBuilder, ProductType> {
 

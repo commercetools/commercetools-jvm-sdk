@@ -10,11 +10,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import static java.util.Objects.requireNonNull;
 
 /**
- Builds test doubles1 for products.
-
- <p>Example:</p>
-
- {@include.example io.sphere.sdk.products.ProductBuilderTest#demoUsage()}
+ Builds test doubles for products.
 
  */
 public class ProductBuilder extends DefaultModelFluentBuilder<ProductBuilder, Product> {

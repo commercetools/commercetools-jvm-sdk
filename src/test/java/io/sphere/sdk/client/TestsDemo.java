@@ -1,33 +1,12 @@
 package io.sphere.sdk.client;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryBuilder;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.json.JsonUtils;
-
-import java.util.Locale;
+import io.sphere.sdk.queries.PagedQueryResult;
 
 public class TestsDemo {
-    private void withInstanceResults() {
-        //provide directly a model instance without JSON from SPHERE.IO
-        final SphereClientFactory factory = SphereClientFactory.of();
-        final SphereClient client = factory.createObjectTestDouble(httpRequest -> {
-            final String expectedPath = CategoryQuery.of().byName(Locale.ENGLISH, "cat name").httpRequestIntent().getPath();
-            final Object res;
-            if(httpRequest.getPath().equals(expectedPath)){
-                final LocalizedStrings name = LocalizedStrings.of(Locale.ENGLISH, "cat name");
-                final LocalizedStrings slug = LocalizedStrings.of(Locale.ENGLISH, "cat-slug");
-                final Category category = CategoryBuilder.of("cat-id", name, slug).build();
-                res = PagedQueryResult.of(category);
-            } else {
-                throw new UnsupportedOperationException("I'm not prepared for this request: " + httpRequest);
-            }
-            return res;
-        });
-    }
 
     private void modelInstanceFromJson() {
         //deserializes an object stored from JSON

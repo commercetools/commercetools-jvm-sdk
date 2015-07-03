@@ -14,14 +14,4 @@ public class Example extends IntegrationTest {
         final ProductType productType = execute(command);
 
     }
-
-    public void builderDemo() {
-        final ZonedDateTime createdAt = ZonedDateTime.parse("2001-09-11T14:00:00.000Z");
-        final ZonedDateTime lastModifiedAt = createdAt.plus(2, ChronoUnit.HOURS);
-        //set createdAt/lastModifiedAt/version is optional
-        final ProductTypeDraft productTypeDraft = new TShirtProductTypeDraftSupplier("product-type-name").get();
-        final ProductType productType = ProductTypeBuilder.of("product-type-id", productTypeDraft).
-                createdAt(createdAt).lastModifiedAt(lastModifiedAt).version(4).build();
-
-    }
 }

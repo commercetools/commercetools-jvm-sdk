@@ -11,7 +11,6 @@ import io.sphere.sdk.models.Reference;
  <p id=operations>Operations:</p>
  <ul>
     <li>Create a product type with {@link io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand}.</li>
-    <li>Create a product type test double with {@link io.sphere.sdk.producttypes.ProductTypeBuilder}.</li>
     <li>Query a product type with {@link io.sphere.sdk.producttypes.queries.ProductTypeQuery}.</li>
     <li>Delete a product type with {@link io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand}.</li>
  </ul>
