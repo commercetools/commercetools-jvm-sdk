@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.CompletionStage;
 
 public class QueryByProductTypeNameExample {
-    private final SphereClient client = null;//TODO
+    private final SphereClient client = null;
 
     public void queryByNameExample() {
         CompletionStage<PagedQueryResult<ProductType>> queryResultFuture = client.execute(ProductTypeQuery.of().byName("t-shirt"));

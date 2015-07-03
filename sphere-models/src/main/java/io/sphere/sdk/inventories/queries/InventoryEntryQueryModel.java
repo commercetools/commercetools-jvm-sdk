@@ -16,7 +16,7 @@ public class InventoryEntryQueryModel extends DefaultModelQueryModelImpl<Invento
     }
 
     public StringQuerySortingModel<InventoryEntry> sku() {
-        return new StringQuerySortingModel<>(Optional.of(this), "sku");
+        return stringModel("sku");
     }
 
     public ReferenceQueryModel<InventoryEntry, Channel> supplyChannel() {
@@ -24,15 +24,14 @@ public class InventoryEntryQueryModel extends DefaultModelQueryModelImpl<Invento
     }
 
     public LongQuerySortingModel<InventoryEntry> quantityOnStock() {
-        return new LongQuerySortingModelImpl<>(Optional.of(this), "quantityOnStock");
+        return longModel("quantityOnStock");
     }
 
     public LongQuerySortingModel<InventoryEntry> availableQuantity() {
-        return new LongQuerySortingModelImpl<>(Optional.of(this), "availableQuantity");
+        return longModel("availableQuantity");
     }
 
-//TODO on March 11, 2015 this does not yet work in the backend
-//    public IntegerQuerySortingModel<InventoryEntry> restockableInDays() {
-//        return new IntegerQuerySortingModel<>(Optional.of(this), "restockableInDays");
-//    }
+    public IntegerQuerySortingModel<InventoryEntry> restockableInDays() {
+        return integerModel("restockableInDays");
+    }
 }
