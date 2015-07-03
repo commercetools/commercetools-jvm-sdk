@@ -369,7 +369,7 @@ assertThat(safeSort).isEqualTo(unsafeSort);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>As long as you do not specify a limitation of how many resources should be fetched with one query
- by <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-"><code>QueryDsl.withLimit(long)</code></a>, all (15 products) will be loaded.</p>
+ by <a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-"><code>QueryDsl.withLimit(long)</code></a>, the SPHERE.IO backend will deliver up to 20 items so that as a result all (15 products) will be loaded.</p>
 
  <p>If you specify a limit of 4 to a query as shown below, this query will only load the first 4 products:</p>
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-limitProductQueryTo4--%s" class=code-example><pre><code class='java'>final ProductQuery query = ProductQuery.of().withLimit(4);
