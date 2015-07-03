@@ -158,7 +158,7 @@
     final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 
     final Product updatedProduct = client()
-            .execute(ProductUpdateCommand.of(product, RemovePrice.of(MASTER_VARIANT_ID, oldPrice, STAGED_AND_CURRENT)));
+            .execute(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice, STAGED_AND_CURRENT)));
 
     assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
             .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();

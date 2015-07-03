@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":9};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -124,11 +124,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-changePrice--%s" class=code-example><pre><code class='java'>withUpdateablePricedProduct(client(), product -&gt; {
     final Price newPrice = Price.of(MoneyImpl.of(234, EUR));
-    assertThat(product.getMasterData().getStaged().getMasterVariant()
-            .getPrices().stream().anyMatch(p -&gt; p.equals(newPrice))).isFalse();
+    final List&lt;Price&gt; prices = product.getMasterData().getStaged().getMasterVariant()
+            .getPrices();
+    assertThat(prices.stream().anyMatch(p -&gt; p.equals(newPrice))).isFalse();
 
     final Product updatedProduct = client()
-            .execute(ProductUpdateCommand.of(product, ChangePrice.of(MASTER_VARIANT_ID, newPrice, STAGED_AND_CURRENT)));
+            .execute(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newPrice, STAGED_AND_CURRENT)));
 
     final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
     assertThat(actualPrice).isEqualTo(newPrice);
@@ -142,25 +143,6 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#ChangePrice-int-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">ChangePrice</a></span>(int&nbsp;variantId,
-           <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
-           <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -178,8 +160,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#getPrice--">getPrice</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#getVariantId--">getVariantId</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#getPriceId--">getPriceId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
@@ -187,7 +169,13 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangePrice</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#of-int-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(int&nbsp;variantId,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#of-io.sphere.sdk.products.Price-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(<a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;oldPrice,
+  <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
+  <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangePrice</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html#of-java.lang.String-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(java.lang.String&nbsp;priceId,
   <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
   <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>&nbsp;</td>
 </tr>
@@ -221,38 +209,19 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a name="ChangePrice-int-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>ChangePrice</h4>
-<pre>public&nbsp;ChangePrice(int&nbsp;variantId,
-                   <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
-                   <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
-</li>
-</ul>
-</li>
-</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="getVariantId--">
+<a name="getPriceId--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getVariantId</h4>
-<pre>public&nbsp;int&nbsp;getVariantId()</pre>
+<h4>getPriceId</h4>
+<pre>public&nbsp;java.lang.String&nbsp;getPriceId()</pre>
 </li>
 </ul>
 <a name="getPrice--">
@@ -264,13 +233,24 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;getPrice()</pre>
 </li>
 </ul>
-<a name="of-int-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">
+<a name="of-io.sphere.sdk.products.Price-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangePrice</a>&nbsp;of(int&nbsp;variantId,
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangePrice</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;oldPrice,
+                             <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
+                             <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
+</li>
+</ul>
+<a name="of-java.lang.String-io.sphere.sdk.products.Price-io.sphere.sdk.products.ProductUpdateScope-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangePrice</a>&nbsp;of(java.lang.String&nbsp;priceId,
                              <a href="../../../../../../io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a>&nbsp;price,
                              <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
 </li>
@@ -338,13 +318,13 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
