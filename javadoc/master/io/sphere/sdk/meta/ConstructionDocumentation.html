@@ -198,9 +198,6 @@ assertThat(price1).isEqualTo(price2).isEqualTo(price3)
 
   <h3 id=persistent-objects>Persistent objects vs. local test doubles</h3>
 
-  You can create local instances of SPHERE.IO resources, like
-  <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>, for unit testing with a <a href="../../../../io/sphere/sdk/products/ProductBuilder.html" title="class in io.sphere.sdk.products"><code>ProductBuilder</code></a>.
-  But these resources are not persistent.
 
   <p>For persistent changes you need to use a SPHERE.IO
   client and to execute a <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands"><code>Command</code></a>. Available commands for the SPHERE.IO resources
