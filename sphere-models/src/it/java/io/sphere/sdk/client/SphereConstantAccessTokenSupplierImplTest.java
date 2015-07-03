@@ -18,7 +18,7 @@ public class SphereConstantAccessTokenSupplierImplTest extends IntegrationTest {
 
             final SphereAuthConfig authConfig = SphereAuthConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getClientId(), getSphereClientConfig().getClientSecret(), getSphereClientConfig().getAuthUrl());
 
-            final SphereAccessTokenSupplier fixedTokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, NingHttpClientAdapterFactory.create(), true);
+            final SphereAccessTokenSupplier fixedTokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, AsyncHttpClientAdapterFactory.create(), true);
             final SphereClient oneTokenClient = SphereClientFactory.of().createClient(apiConfig, fixedTokenSupplier);
             final int actual = oneTokenClient.execute(categoryQuery).toCompletableFuture().join().getTotal();
             assertThat(actual).isEqualTo(expected);
