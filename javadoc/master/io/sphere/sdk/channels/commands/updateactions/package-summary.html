@@ -89,7 +89,7 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/channels/commands/updateactions/AddRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">AddRoles</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-addRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -&gt; {
-    final Set&lt;ChannelRoles&gt; roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
+    final Set&lt;ChannelRole&gt; roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
     final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, AddRoles.of(roles)));
     assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY, ORDER_IMPORT);
     return updatedChannel;
@@ -137,7 +137,7 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/channels/commands/updateactions/RemoveRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">RemoveRoles</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-removeRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), asSet(ORDER_IMPORT, PRIMARY), channel -&gt; {
-    final Set&lt;ChannelRoles&gt; roles = asSet(ORDER_IMPORT);
+    final Set&lt;ChannelRole&gt; roles = asSet(ORDER_IMPORT);
     final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, RemoveRoles.of(roles)));
     assertThat(updatedChannel.getRoles()).containsOnly(PRIMARY);
     return updatedChannel;
@@ -149,7 +149,7 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/channels/commands/updateactions/SetRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">SetRoles</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-setRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -&gt; {
-    final Set&lt;ChannelRoles&gt; roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
+    final Set&lt;ChannelRole&gt; roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
     final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, SetRoles.of(roles)));
     assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY);
     return updatedChannel;
