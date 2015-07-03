@@ -102,8 +102,8 @@ public class DocumentationTaglet implements Taglet {
         } else if (isQueryModelClass(tag)) {
             result = format("Provides a domain specific language to formulate predicates and search expressions for querying %s.", furtherArgs(tag));
         } else if (isUpdateCommandClass(tag) && tag.text().contains("list actions")) {
-            //TODO here can occure a NPE if the directory does not exist
-            final File commandsDirectory = tag.position().file().getParentFile();
+            final File file = Objects.requireNonNull(tag.position().file(), "command dir not found");
+            final File commandsDirectory = file.getParentFile();
             final File updateactionsDirectory = new File(commandsDirectory, "updateactions");
             final List<String> updateActionNames =
                     asList(updateactionsDirectory.listFiles((file, name) -> name.endsWith(".java") && !name.contains("-")))
