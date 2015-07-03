@@ -25,3 +25,5 @@ genjavadocSettings
 releaseSettings
 
 Release.publishSettings
+
+net.virtualvoid.sbt.graph.Plugin.graphSettings
