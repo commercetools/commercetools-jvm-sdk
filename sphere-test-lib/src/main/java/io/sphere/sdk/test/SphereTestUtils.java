@@ -14,6 +14,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import org.apache.commons.io.IOUtils;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.stream.Collectors.toList;
@@ -136,5 +137,9 @@ public final class SphereTestUtils {
 
     public static String slugify(final String s) {
         return StringUtils.slugify(s);
+    }
+
+    public static String stringFromResource(final String resourcePath) throws Exception {
+        return IOUtils.toString(Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath), "UTF-8");
     }
 }

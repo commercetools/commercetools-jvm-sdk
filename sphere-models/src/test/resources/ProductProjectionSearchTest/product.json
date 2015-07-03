@@ -1,0 +1,59 @@
+{
+  "id": "eb85ee2d-a5e5-4e15-a8ba-91281e599d68",
+  "version": 1,
+  "productType": {
+    "typeId": "product-type",
+    "id": "64840663-b628-4368-9d92-67240b6a1c63"
+  },
+  "catalogs": [],
+  "masterData": {
+    "current": {
+      "name": {
+        "de": "name"
+      },
+      "description": {
+        "de": "<p>desc</p>"
+      },
+      "categories": [],
+      "slug": {
+        "de": "name-1435909314549"
+      },
+      "masterVariant": {
+        "id": 1,
+        "sku": "sku-5000",
+        "prices": [],
+        "images": [],
+        "attributes": []
+      },
+      "variants": [],
+      "searchKeywords": {}
+    },
+    "staged": {
+      "name": {
+        "de": "name"
+      },
+      "description": {
+        "de": "<p>desc</p>"
+      },
+      "categories": [],
+      "slug": {
+        "de": "slug"
+      },
+      "masterVariant": {
+        "id": 1,
+        "sku": "sku-5000",
+        "prices": [],
+        "images": [],
+        "attributes": []
+      },
+      "variants": [],
+      "searchKeywords": {}
+    },
+    "published": false,
+    "hasStagedChanges": false
+  },
+  "catalogData": {},
+  "lastVariantId": 1,
+  "createdAt": "2015-07-03T07:42:10.035Z",
+  "lastModifiedAt": "2015-07-03T07:42:10.035Z"
+}

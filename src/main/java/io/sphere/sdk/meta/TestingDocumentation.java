@@ -8,8 +8,6 @@ package io.sphere.sdk.meta;
 
  {@include.example io.sphere.sdk.client.TestsDemo#withJson()}
 
- {@include.example io.sphere.sdk.client.TestsDemo#withInstanceResults()}
-
  {@include.example io.sphere.sdk.client.TestsDemo#modelInstanceFromJson()}
 
 

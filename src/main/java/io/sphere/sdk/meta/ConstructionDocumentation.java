@@ -51,9 +51,6 @@ package io.sphere.sdk.meta;
  *
  *  <h3 id=persistent-objects>Persistent objects vs. local test doubles</h3>
  *
- *  You can create local instances of SPHERE.IO resources, like
- *  {@link io.sphere.sdk.products.Product}, for unit testing with a {@link io.sphere.sdk.products.ProductBuilder}.
- *  But these resources are not persistent.
  *
  *  <p>For persistent changes you need to use a SPHERE.IO
  *  client and to execute a {@link io.sphere.sdk.commands.Command}. Available commands for the SPHERE.IO resources

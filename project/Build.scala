@@ -89,7 +89,7 @@ object Build extends Build {
 
   lazy val `sphere-test-lib` = project.configs(IntegrationTest).dependsOn(`sphere-java-client`, `sphere-common`).settings(commonSettings:_*)
     .settings(
-      libraryDependencies ++= allTestLibs
+      libraryDependencies ++= allTestLibs ++ (`commons-io` :: Nil)
     )
 
   val genDoc = taskKey[Seq[File]]("generates the documentation")

@@ -106,7 +106,6 @@ public class SphereClientFactory extends Base {
      * Creates a test double for a SPHERE.IO client which enables to fake the results of the client as Java object.
      * The client does not need an internet connection.
      *
-     * {@include.example io.sphere.sdk.client.TestsDemo#withInstanceResults()}
      * {@include.example io.sphere.sdk.client.TestsDemo#modelInstanceFromJson()}
      *
      * @param function a function which returns a matching http request for a SPHERE.IO request.
