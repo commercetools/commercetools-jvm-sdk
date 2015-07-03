@@ -102,7 +102,7 @@ final public class JsonUtils {
         try {
             return objectMapper.readValue(jsonAsString, typeReference);
         } catch (IOException e) {
-            throw new JsonException(e);//TODO improve exception
+            throw new JsonException(e);
         }
     }
 
@@ -110,7 +110,7 @@ final public class JsonUtils {
         try {
             return objectMapper.reader(clazz).readValue(jsonNode);
         } catch (IOException e) {
-            throw new JsonException(e);//TODO improve exception
+            throw new JsonException(e);
         }
     }
 
@@ -118,7 +118,7 @@ final public class JsonUtils {
         try {
             return objectMapper.reader(clazz).readValue(jsonNode);
         } catch (IOException e) {
-            throw new JsonException(e);//TODO improve exception
+            throw new JsonException(e);
         }
     }
 
