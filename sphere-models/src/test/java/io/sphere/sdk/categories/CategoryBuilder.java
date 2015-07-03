@@ -1,19 +1,24 @@
 package io.sphere.sdk.categories;
 
+import java.time.ZonedDateTime;
 import java.util.Optional;
-import io.sphere.sdk.models.DefaultModelFluentBuilder;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
+
+import io.sphere.sdk.models.*;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Creates a category for unit tests.
  *
  */
-public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBuilder, Category> {
+public final class CategoryBuilder extends Base implements Builder<Category> {
+    private static final Random RANDOM = new Random();
+    protected String id = "id" + CategoryBuilder.RANDOM.nextInt();
+    protected long version = 1;
+    protected ZonedDateTime createdAt = ZonedDateTime.now();
+    protected ZonedDateTime lastModifiedAt = ZonedDateTime.now();
     private LocalizedStrings name;
     private LocalizedStrings slug;
     private Optional<LocalizedStrings> description = Optional.empty();
@@ -129,8 +134,43 @@ public final class CategoryBuilder extends DefaultModelFluentBuilder<CategoryBui
         return new CategoryImpl(id, version, createdAt, lastModifiedAt, name, slug, description, ancestors, parent, orderHint, externalId, metaTitle, metaDescription, metaKeywords);
     }
 
-    @Override
     protected CategoryBuilder getThis() {
         return this;
+    }
+
+    public CategoryBuilder id(final String id) {
+        setId(id);
+        return getThis();
+    }
+
+    public CategoryBuilder version(final long version) {
+        setVersion(version);
+        return getThis();
+    }
+
+    public CategoryBuilder createdAt(final ZonedDateTime createdAt) {
+        setCreatedAt(createdAt);
+        return getThis();
+    }
+
+    public CategoryBuilder lastModifiedAt(final ZonedDateTime lastModifiedAt) {
+       setLastModifiedAt(lastModifiedAt);
+       return getThis();
+    }
+
+    public void setId(final String id) {
+        this.id = id;
+    }
+
+    public void setVersion(final long version) {
+        this.version = version;
+    }
+
+    public void setCreatedAt(final ZonedDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setLastModifiedAt(final ZonedDateTime lastModifiedAt) {
+        this.lastModifiedAt = lastModifiedAt;
     }
 }

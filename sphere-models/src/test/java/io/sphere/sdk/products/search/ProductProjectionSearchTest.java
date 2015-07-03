@@ -1,11 +1,12 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.json.JsonUtils;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import io.sphere.sdk.search.*;
 import org.junit.Test;
 
@@ -14,11 +15,11 @@ import javax.money.Monetary;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
-import java.util.Collections;
 
-import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
+import static io.sphere.sdk.products.search.VariantSearchSortDirection.ASC;
+import static io.sphere.sdk.products.search.VariantSearchSortDirection.ASC_MAX;
+import static io.sphere.sdk.test.SphereTestUtils.stringFromResource;
 import static java.math.BigDecimal.valueOf;
-import static java.util.Arrays.asList;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -210,14 +211,10 @@ public class ProductProjectionSearchTest {
         return MODEL.allVariants().attribute();
     }
 
-    private Product product(String id) {
-        ProductType productType = ProductTypeBuilder.of("some-other-id", "", "", asList()).build();
-        final ProductVariant emptyProductVariant = ProductVariantBuilder.of(1).sku("sku-5000").get();
-        final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "name");
-        final LocalizedStrings slug = LocalizedStrings.of(ENGLISH, "slug");
-        final ProductData staged = ProductDataBuilder.of(name, slug, emptyProductVariant).build();
-        final ProductCatalogData masterData = ProductCatalogDataBuilder.ofStaged(staged).get();
-        return ProductBuilder.of(productType, masterData).id(id).build();
+    private Product product(final String id) throws Exception {
+        final String productJson = stringFromResource("ProductProjectionSearchTest/product.json")
+                .replace("eb85ee2d-a5e5-4e15-a8ba-91281e599d68", id);
+        return JsonUtils.readObjectFromJsonString(Product.typeReference(), productJson);
     }
 
     private ZonedDateTime dateTime(final String dateTime) {

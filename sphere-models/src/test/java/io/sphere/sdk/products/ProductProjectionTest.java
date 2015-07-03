@@ -2,16 +2,12 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.json.JsonUtils;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.producttypes.ProductTypeBuilder;
 import io.sphere.sdk.search.PagedSearchResult;
 import org.junit.Test;
 
-import java.util.Collections;
+import java.io.IOException;
 import java.util.Optional;
 
-import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionTest {
@@ -27,15 +23,8 @@ public class ProductProjectionTest {
         assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
     }
 
-    private Product getProduct() {
-        final ProductType productType = ProductTypeBuilder.of("product-type-id", "product-type-name", "", Collections.emptyList()).get();
-        final ProductVariant emptyProductVariant = ProductVariantBuilder.of(1).sku("sku-5000").get();
-        final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "name");
-        final LocalizedStrings slug = LocalizedStrings.of(ENGLISH, "slug");
-        final ProductData staged = ProductDataBuilder.of(name, slug, emptyProductVariant).build();
-        final ProductCatalogData masterData = ProductCatalogDataBuilder.ofStaged(staged).get();
-
-        return ProductBuilder.of(productType, masterData).id("foo-id").build();
+    private Product getProduct() throws IOException {
+        return JsonUtils.readObjectFromResource("ProductProjectionTest/product.json", Product.typeReference());
     }
 
     @Test

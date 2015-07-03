@@ -13,7 +13,6 @@ import io.sphere.sdk.models.Reference;
  <p> id=operationsOperations:</p>
  <ul>
     <li>Create a product in SPHERE.IO with {@link io.sphere.sdk.products.commands.ProductCreateCommand}.</li>
-    <li>Create a product test double with {@link io.sphere.sdk.products.ProductBuilder}.</li>
     <li>Query a product with {@link io.sphere.sdk.products.queries.ProductQuery}.</li>
     <li>Update a product with {@link io.sphere.sdk.products.commands.ProductUpdateCommand}.</li>
     <li>Delete a product with {@link io.sphere.sdk.products.commands.ProductDeleteCommand}.</li>
