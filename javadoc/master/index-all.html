@@ -396,6 +396,12 @@
 <dd>
 <div class="block"><h3 id="why">Why asynchronous</div>
 </dd>
+<dt><a href="io/sphere/sdk/http/AsyncHttpClientAdapter.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">AsyncHttpClientAdapter</span></a> - Interface in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/http/AsyncHttpClientAdapter.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">AsyncHttpClientAdapter</span></a> - Class in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/http/AsyncHttpClientAdapterImpl.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">AsyncHttpClientAdapterImpl</span></a> - Class in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FacetRange.html#atLeast-T-">atLeast(T)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a></dt>
 <dd>
 <div class="block">Creates an interval with all values that are greater than or equal to the given endpoint.</div>
@@ -1131,6 +1137,16 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><a href="io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">ChangePrice</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
 <div class="block">Replaces a price in the product variant's prices set.</div>
+</dd>
+<dt><a href="io/sphere/sdk/inventories/commands/updateactions/ChangeQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions"><span class="typeNameLink">ChangeQuantity</span></a> - Class in <a href="io/sphere/sdk/inventories/commands/updateactions/package-summary.html">io.sphere.sdk.inventories.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-changeQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
+    final UpdateAction&lt;InventoryEntry&gt; action = ChangeQuantity.of(5000);
+    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
+    assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(5000);
+    return updatedEntry;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeRequiresDiscountCode.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeRequiresDiscountCode</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
@@ -3514,6 +3530,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">AddQuantity</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/ChangeQuantity.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/ChangeQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">ChangeQuantity</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html#getQuantity--">getQuantity()</a></span> - Method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">RemoveQuantity</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/CustomLineItemImportDraft.html#getQuantity--">getQuantity()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/CustomLineItemImportDraft.html" title="interface in io.sphere.sdk.orders">CustomLineItemImportDraft</a></dt>
@@ -4403,7 +4421,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommand.html" title="class in io.sphere.sdk.inventories.commands"><span class="typeNameLink">InventoryEntryUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/inventories/commands/package-summary.html">io.sphere.sdk.inventories.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddQuantity.html">AddQuantity</a></li><li><a href="updateactions/RemoveQuantity.html">RemoveQuantity</a></li><li><a href="updateactions/SetExpectedDelivery.html">SetExpectedDelivery</a></li><li><a href="updateactions/SetRestockableInDays.html">SetRestockableInDays</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddQuantity.html">AddQuantity</a></li><li><a href="updateactions/ChangeQuantity.html">ChangeQuantity</a></li><li><a href="updateactions/RemoveQuantity.html">RemoveQuantity</a></li><li><a href="updateactions/SetExpectedDelivery.html">SetExpectedDelivery</a></li><li><a href="updateactions/SetRestockableInDays.html">SetRestockableInDays</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#inventoryMode-java.util.Optional-">inventoryMode(Optional&lt;InventoryMode&gt;)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -5525,12 +5543,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/Queries.html#nextPage-io.sphere.sdk.queries.QueryDsl-">nextPage(QueryDsl&lt;I, C&gt;)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/Queries.html" title="class in io.sphere.sdk.queries">Queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/http/NingHttpClientAdapter.html" title="interface in io.sphere.sdk.http"><span class="typeNameLink">NingHttpClientAdapter</span></a> - Interface in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/http/NingHttpClientAdapter.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">NingHttpClientAdapter</span></a> - Class in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/http/NingHttpClientAdapterImpl.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">NingHttpClientAdapterImpl</span></a> - Class in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpStatusCode.html#NO_CONTENT_204">NO_CONTENT_204</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpStatusCode.html" title="class in io.sphere.sdk.http">HttpStatusCode</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpStatusCode.html#NOT_FOUND_404">NOT_FOUND_404</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpStatusCode.html" title="class in io.sphere.sdk.http">HttpStatusCode</a></dt>
@@ -6111,6 +6123,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/ApacheHttpClientAdapter.html#of-org.apache.http.impl.nio.client.CloseableHttpAsyncClient-">of(CloseableHttpAsyncClient)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/ApacheHttpClientAdapter.html" title="interface in io.sphere.sdk.http">ApacheHttpClientAdapter</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/AsyncHttpClientAdapter.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/AsyncHttpClientAdapter.html" title="interface in io.sphere.sdk.http">AsyncHttpClientAdapter</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/AsyncHttpClientAdapter.html#of-com.ning.http.client.AsyncHttpClient-">of(AsyncHttpClient)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/AsyncHttpClientAdapter.html" title="interface in io.sphere.sdk.http">AsyncHttpClientAdapter</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FileHttpRequestBody.html#of-java.io.File-">of(File)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FileHttpRequestBody.html" title="class in io.sphere.sdk.http">FileHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#of-java.util.Map-">of(Map&lt;String, String&gt;)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http">FormUrlEncodedHttpRequestBody</a></dt>
@@ -6149,10 +6165,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpResponse.html#of-int-java.util.Optional-java.util.Optional-java.util.Optional-">of(int, Optional&lt;byte[]&gt;, Optional&lt;HttpRequest&gt;, Optional&lt;HttpHeaders&gt;)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/NingHttpClientAdapter.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/NingHttpClientAdapter.html" title="interface in io.sphere.sdk.http">NingHttpClientAdapter</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/http/NingHttpClientAdapter.html#of-com.ning.http.client.AsyncHttpClient-">of(AsyncHttpClient)</a></span> - Static method in interface io.sphere.sdk.http.<a href="io/sphere/sdk/http/NingHttpClientAdapter.html" title="interface in io.sphere.sdk.http">NingHttpClientAdapter</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/StringHttpRequestBody.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/StringHttpRequestBody.html" title="class in io.sphere.sdk.http">StringHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/UrlQueryBuilder.html#of--">of()</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/UrlQueryBuilder.html" title="class in io.sphere.sdk.http">UrlQueryBuilder</a></dt>
@@ -6166,6 +6178,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommand.html#of-io.sphere.sdk.models.Versioned-java.util.List-">of(Versioned&lt;InventoryEntry&gt;, List&lt;? extends UpdateAction&lt;InventoryEntry&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.inventories.commands.<a href="io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommand.html" title="class in io.sphere.sdk.inventories.commands">InventoryEntryUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">AddQuantity</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/ChangeQuantity.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/ChangeQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">ChangeQuantity</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html#of-long-">of(long)</a></span> - Static method in class io.sphere.sdk.inventories.commands.updateactions.<a href="io/sphere/sdk/inventories/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventories.commands.updateactions">RemoveQuantity</a></dt>
 <dd>&nbsp;</dd>
