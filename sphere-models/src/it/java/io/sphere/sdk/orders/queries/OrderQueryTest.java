@@ -15,7 +15,7 @@ import org.junit.Test;
 import java.util.function.Function;
 
 import static io.sphere.sdk.channels.ChannelFixtures.persistentChannelOfRole;
-import static io.sphere.sdk.channels.ChannelRoles.ORDER_EXPORT;
+import static io.sphere.sdk.channels.ChannelRole.ORDER_EXPORT;
 import static io.sphere.sdk.orders.OrderFixtures.withOrder;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;

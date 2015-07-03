@@ -1,7 +1,7 @@
 package io.sphere.sdk.inventories;
 
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.channels.ChannelRoles;
+import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.inventories.commands.InventoryDeleteCommand;
 import io.sphere.sdk.inventories.commands.InventoryEntryCreateCommand;
@@ -25,7 +25,7 @@ public class InventoryEntryFixtures extends Base {
         client.execute(InventoryDeleteCommand.of(updatedEntry));
     }
 
-    public static void withInventoryEntryAndSupplyChannel(final TestClient client, final ChannelRoles channelRole, final BiConsumer<InventoryEntry, Channel> consumer) {
+    public static void withInventoryEntryAndSupplyChannel(final TestClient client, final ChannelRole channelRole, final BiConsumer<InventoryEntry, Channel> consumer) {
         withChannelOfRole(client, channelRole, channel -> {
             final String sku = randomKey();
             final long quantityOnStock = 10;

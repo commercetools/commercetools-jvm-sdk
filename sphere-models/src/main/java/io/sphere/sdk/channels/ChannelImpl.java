@@ -10,12 +10,12 @@ import java.util.Set;
 
 class ChannelImpl extends DefaultModelImpl<Channel> implements Channel {
     private final String key;
-    private final Set<ChannelRoles> roles;
+    private final Set<ChannelRole> roles;
     private final Optional<LocalizedStrings> name;
     private final Optional<LocalizedStrings> description;
 
     @JsonCreator
-    ChannelImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String key, final Set<ChannelRoles> roles, final Optional<LocalizedStrings> name, final Optional<LocalizedStrings> description) {
+    ChannelImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String key, final Set<ChannelRole> roles, final Optional<LocalizedStrings> name, final Optional<LocalizedStrings> description) {
         super(id, version, createdAt, lastModifiedAt);
         this.key = key;
         this.roles = roles;
@@ -27,7 +27,7 @@ class ChannelImpl extends DefaultModelImpl<Channel> implements Channel {
         return key;
     }
 
-    public Set<ChannelRoles> getRoles() {
+    public Set<ChannelRole> getRoles() {
         return roles;
     }
 

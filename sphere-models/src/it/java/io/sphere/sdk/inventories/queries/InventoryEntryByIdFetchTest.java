@@ -4,7 +4,7 @@ import io.sphere.sdk.inventories.InventoryEntry;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import static io.sphere.sdk.channels.ChannelRoles.INVENTORY_SUPPLY;
+import static io.sphere.sdk.channels.ChannelRole.INVENTORY_SUPPLY;
 import static io.sphere.sdk.inventories.InventoryEntryFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 

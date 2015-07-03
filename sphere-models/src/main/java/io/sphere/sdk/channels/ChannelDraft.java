@@ -18,11 +18,11 @@ import static io.sphere.sdk.utils.SetUtils.asSet;
 public class ChannelDraft extends Base {
     private final String key;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private final Set<ChannelRoles> roles;
+    private final Set<ChannelRole> roles;
     private final Optional<LocalizedStrings> name;
     private final Optional<LocalizedStrings> description;
 
-    ChannelDraft(final String key, final Set<ChannelRoles> roles, final Optional<LocalizedStrings> name, final Optional<LocalizedStrings> description) {
+    ChannelDraft(final String key, final Set<ChannelRole> roles, final Optional<LocalizedStrings> name, final Optional<LocalizedStrings> description) {
         this.key = key;
         this.roles = roles;
         this.name = name;
@@ -37,7 +37,7 @@ public class ChannelDraft extends Base {
         return key;
     }
 
-    public Set<ChannelRoles> getRoles() {
+    public Set<ChannelRole> getRoles() {
         return roles;
     }
 
@@ -49,11 +49,11 @@ public class ChannelDraft extends Base {
         return description;
     }
     
-    public ChannelDraft withRoles(final Set<ChannelRoles> roles) {
+    public ChannelDraft withRoles(final Set<ChannelRole> roles) {
         return ChannelDraftBuilder.of(this).roles(roles).build();
     }
 
-    public ChannelDraft withRoles(final ChannelRoles ... roles) {
+    public ChannelDraft withRoles(final ChannelRole... roles) {
         return ChannelDraftBuilder.of(this).roles(asSet(roles)).build();
     }
     

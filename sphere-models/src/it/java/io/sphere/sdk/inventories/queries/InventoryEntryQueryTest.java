@@ -1,6 +1,6 @@
 package io.sphere.sdk.inventories.queries;
 
-import io.sphere.sdk.channels.ChannelRoles;
+import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.inventories.InventoryEntry;
 import io.sphere.sdk.inventories.InventoryEntryDraft;
 import io.sphere.sdk.queries.*;
@@ -28,7 +28,7 @@ public class InventoryEntryQueryTest extends IntegrationTest {
 
     @Test
     public void queryModel() throws Exception {
-        final ChannelRoles channelRole = ChannelRoles.INVENTORY_SUPPLY;
+        final ChannelRole channelRole = ChannelRole.INVENTORY_SUPPLY;
         withChannelOfRole(client(), channelRole, channel -> {
             final String sku = randomKey();
             final long quantityOnStock = 10;

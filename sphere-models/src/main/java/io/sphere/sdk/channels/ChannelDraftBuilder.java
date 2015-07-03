@@ -10,7 +10,7 @@ import java.util.Set;
 
 public class ChannelDraftBuilder extends Base implements Builder<ChannelDraft> {
     private final String key;
-    private Set<ChannelRoles> roles = Collections.emptySet();
+    private Set<ChannelRole> roles = Collections.emptySet();
     private Optional<LocalizedStrings> name = Optional.empty();
     private Optional<LocalizedStrings> description = Optional.empty();
 
@@ -47,7 +47,7 @@ public class ChannelDraftBuilder extends Base implements Builder<ChannelDraft> {
         return name(Optional.ofNullable(name));
     }
 
-    public ChannelDraftBuilder roles(final Set<ChannelRoles> roles) {
+    public ChannelDraftBuilder roles(final Set<ChannelRole> roles) {
         this.roles = roles;
         return this;
     }

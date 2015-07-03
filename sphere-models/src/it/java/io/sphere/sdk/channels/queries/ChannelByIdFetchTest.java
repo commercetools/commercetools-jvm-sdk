@@ -7,7 +7,7 @@ import org.junit.Test;
 import java.util.Optional;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withChannelOfRole;
-import static io.sphere.sdk.channels.ChannelRoles.INVENTORY_SUPPLY;
+import static io.sphere.sdk.channels.ChannelRole.INVENTORY_SUPPLY;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ChannelByIdFetchTest extends IntegrationTest {

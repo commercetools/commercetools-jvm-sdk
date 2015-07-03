@@ -1,7 +1,7 @@
 package io.sphere.sdk.channels.commands;
 
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.channels.ChannelRoles;
+import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.channels.commands.updateactions.*;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.test.IntegrationTest;
@@ -10,7 +10,7 @@ import org.junit.Test;
 import java.util.Set;
 
 import static io.sphere.sdk.channels.ChannelFixtures.withUpdatableChannelOfRole;
-import static io.sphere.sdk.channels.ChannelRoles.*;
+import static io.sphere.sdk.channels.ChannelRole.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -49,7 +49,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
     @Test
     public void setRoles() throws Exception {
         withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -> {
-            final Set<ChannelRoles> roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
+            final Set<ChannelRole> roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
             final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, SetRoles.of(roles)));
             assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY);
             return updatedChannel;
@@ -59,7 +59,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
     @Test
     public void addRoles() throws Exception {
         withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -> {
-            final Set<ChannelRoles> roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
+            final Set<ChannelRole> roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
             final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, AddRoles.of(roles)));
             assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY, ORDER_IMPORT);
             return updatedChannel;
@@ -69,7 +69,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
     @Test
     public void removeRoles() throws Exception {
         withUpdatableChannelOfRole(client(), asSet(ORDER_IMPORT, PRIMARY), channel -> {
-            final Set<ChannelRoles> roles = asSet(ORDER_IMPORT);
+            final Set<ChannelRole> roles = asSet(ORDER_IMPORT);
             final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, RemoveRoles.of(roles)));
             assertThat(updatedChannel.getRoles()).containsOnly(PRIMARY);
             return updatedChannel;

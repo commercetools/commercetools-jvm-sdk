@@ -4,7 +4,7 @@ import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeImportDraft;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.carts.*;
-import io.sphere.sdk.channels.ChannelRoles;
+import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.products.Price;
@@ -75,7 +75,7 @@ public class OrderImportCommandTest extends IntegrationTest {
 
     @Test
     public void lineItems() throws Exception {
-        withPersistentChannel(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
+        withPersistentChannel(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
                     withProduct(client(), product -> {
                         final int variantId = 1;
                         final String sku = sku(product);

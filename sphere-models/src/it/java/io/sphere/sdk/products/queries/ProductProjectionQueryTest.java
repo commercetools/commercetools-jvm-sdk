@@ -5,7 +5,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.channels.ChannelFixtures;
-import io.sphere.sdk.channels.ChannelRoles;
+import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
@@ -88,7 +88,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
 
     @Test
     public void expandChannelInPrice() throws Exception {
-        ChannelFixtures.withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
+        ChannelFixtures.withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
             withUpdateablePricedProduct(client(), PRICE.withChannel(channel), product -> {
                 final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                         .withPredicate(m -> m.id().is(product.getId()))

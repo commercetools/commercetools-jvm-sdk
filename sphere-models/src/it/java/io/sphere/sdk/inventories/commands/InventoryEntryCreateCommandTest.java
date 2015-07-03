@@ -1,7 +1,6 @@
 package io.sphere.sdk.inventories.commands;
 
-import io.sphere.sdk.channels.ChannelFixtures;
-import io.sphere.sdk.channels.ChannelRoles;
+import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.inventories.InventoryEntry;
 import io.sphere.sdk.inventories.InventoryEntryDraft;
@@ -17,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class InventoryEntryCreateCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
+        withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
             final String sku = randomKey();
             final int quantityOnStock = 10;
             final ZonedDateTime expectedDelivery = tomorrowZonedDateTime();

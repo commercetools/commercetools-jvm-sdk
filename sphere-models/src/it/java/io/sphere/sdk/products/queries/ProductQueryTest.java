@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.channels.ChannelFixtures;
-import io.sphere.sdk.channels.ChannelRoles;
+import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
@@ -57,7 +57,7 @@ public class ProductQueryTest extends IntegrationTest {
 
     @Test
     public void canExpandChannelOfPrices() throws Exception {
-        ChannelFixtures.withChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY, channel -> {
+        ChannelFixtures.withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
             withUpdateablePricedProduct(client(), PRICE.withChannel(channel), product -> {
                 final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().channel();
                 final Query<Product> query = query(product).withExpansionPaths(expansionPath);

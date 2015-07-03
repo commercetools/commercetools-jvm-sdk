@@ -13,45 +13,45 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 
 public class ChannelFixtures {
-    public static void withPersistentChannel(final TestClient client, final ChannelRoles channelRole, final Consumer<Channel> f) {
+    public static void withPersistentChannel(final TestClient client, final ChannelRole channelRole, final Consumer<Channel> f) {
         final String key = getKeyForPersistentChannel(channelRole);
         withPersistent(client, key, channelRole, f);
     }
 
-    private static String getKeyForPersistentChannel(final ChannelRoles channelRole) {
+    private static String getKeyForPersistentChannel(final ChannelRole channelRole) {
         return ChannelFixtures.class.getSimpleName() + "-" + channelRole;
     }
 
-    public static void withChannelOfRole(final TestClient client, final ChannelRoles channelRole, final Consumer<Channel> f) {
+    public static void withChannelOfRole(final TestClient client, final ChannelRole channelRole, final Consumer<Channel> f) {
         final Channel channel = client.execute(ChannelCreateCommand.of(ChannelDraft.of(randomString()).withRoles(channelRole)));
         f.accept(channel);
         client.execute(ChannelDeleteCommand.of(channel));
     }
 
-    public static void withUpdatableChannelOfRole(final TestClient client, final ChannelRoles channelRole, final Function<Channel, Channel> f) {
+    public static void withUpdatableChannelOfRole(final TestClient client, final ChannelRole channelRole, final Function<Channel, Channel> f) {
         withUpdatableChannelOfRole(client, asSet(channelRole), f);
     }
 
-    public static void withUpdatableChannelOfRole(final TestClient client, final Set<ChannelRoles> roles, final Function<Channel, Channel> f) {
+    public static void withUpdatableChannelOfRole(final TestClient client, final Set<ChannelRole> roles, final Function<Channel, Channel> f) {
         final Channel channel = client.execute(ChannelCreateCommand.of(ChannelDraft.of(randomString()).withRoles(roles)));
         final Channel updateChannel = f.apply(channel);
         client.execute(ChannelDeleteCommand.of(updateChannel));
     }
 
     public static void withOrderExportChannel(final TestClient client, final Consumer<Channel> f) {
-        withPersistent(client, "jvm sdk export channel", ChannelRoles.ORDER_IMPORT, f);
+        withPersistent(client, "jvm sdk export channel", ChannelRole.ORDER_IMPORT, f);
     }
 
-    private static void withPersistent(final TestClient client, final String key, final ChannelRoles roles, final Consumer<Channel> f) {
+    private static void withPersistent(final TestClient client, final String key, final ChannelRole roles, final Consumer<Channel> f) {
         final Channel channel = getOrCreateChannel(client, key, roles);
         f.accept(channel);
     }
 
-    public static Channel persistentChannelOfRole(final TestClient client, final ChannelRoles roles) {
+    public static Channel persistentChannelOfRole(final TestClient client, final ChannelRole roles) {
         return getOrCreateChannel(client, getKeyForPersistentChannel(roles), roles);
     }
 
-    private static Channel getOrCreateChannel(final TestClient client, final String key, final ChannelRoles roles) {
+    private static Channel getOrCreateChannel(final TestClient client, final String key, final ChannelRole roles) {
         final ChannelByKeyFetch channelByKeyFetch = ChannelByKeyFetch.of(key);
         return client.execute(channelByKeyFetch).orElseGet(() -> {
             final ChannelCreateCommand channelCreateCommand =

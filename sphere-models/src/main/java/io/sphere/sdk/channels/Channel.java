@@ -23,7 +23,7 @@ import java.util.Set;
 public interface Channel extends DefaultModel<Channel> {
     String getKey();
 
-    Set<ChannelRoles> getRoles();
+    Set<ChannelRole> getRoles();
 
     Optional<LocalizedStrings> getName();
 

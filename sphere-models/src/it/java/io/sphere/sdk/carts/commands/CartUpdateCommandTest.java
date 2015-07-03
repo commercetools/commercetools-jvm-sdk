@@ -5,7 +5,7 @@ import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.CartByIdFetch;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelFixtures;
-import io.sphere.sdk.channels.ChannelRoles;
+import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.discountcodes.DiscountCodeReference;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
@@ -59,8 +59,8 @@ public class CartUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void addLineItemWithChannels() throws Exception {
-        final Channel inventorySupplyChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRoles.INVENTORY_SUPPLY);
-        final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRoles.PRODUCT_DISTRIBUTION);
+        final Channel inventorySupplyChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY);
+        final Channel distributionChannel = ChannelFixtures.persistentChannelOfRole(client(), ChannelRole.PRODUCT_DISTRIBUTION);
 
         withEmptyCartAndProduct(client(), (cart, product) -> {
             assertThat(cart.getLineItems()).hasSize(0);
