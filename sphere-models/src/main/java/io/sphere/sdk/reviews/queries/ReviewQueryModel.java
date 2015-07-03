@@ -24,6 +24,4 @@ public class ReviewQueryModel extends DefaultModelQueryModelImpl<Review> {
     public StringQueryModel<Review> customerId() {
         return new StringQuerySortingModel<>(Optional.of(this), "customerId");
     }
-
-    //TODO more fields
 }
