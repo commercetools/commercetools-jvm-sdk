@@ -16,7 +16,7 @@ import static io.sphere.sdk.http.HttpMethod.GET;
 /**
  * Retrieves all the shipping methods that can ship to the shipping address of the given cart.
  *
- * {@include.example io.sphere.sdk.shippingmethods.queries.GetShippingMethodsByCartTest#execution()}
+ * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodsByCartGetTest#execution()}
  */
 public class ShippingMethodsByCartGet extends SphereRequestBase implements SphereRequest<List<ShippingMethod>> {
     private final String cartId;

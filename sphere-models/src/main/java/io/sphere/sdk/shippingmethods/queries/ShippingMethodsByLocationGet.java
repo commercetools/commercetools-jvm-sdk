@@ -19,7 +19,7 @@ import static io.sphere.sdk.http.HttpMethod.GET;
  * Retrieves all the shipping methods that can ship to the given location.
  * If the currency parameter is given, then the shipping methods must also have a rate defined in the specified currency.
  *
- * {@include.example io.sphere.sdk.shippingmethods.queries.GetShippingMethodsByLocationTest#execution()}
+ * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodsByLocationGetTest#execution()}
  */
 public class ShippingMethodsByLocationGet extends SphereRequestBase implements SphereRequest<List<ShippingMethod>> {
     private final CountryCode country;
