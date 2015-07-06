@@ -27,7 +27,7 @@ object Build extends Build {
   lazy val `sphere-jvm-sdk` = (project in file(".")).configs(IntegrationTest)
     .settings(unidocSettings:_*)
     .settings(javaUnidocSettings:_*)
-    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`sphere-test-lib`, `sphere-java-client-ahc-1_8`))//need to exclude duplicated classes or "javadoc: error - com.sun.tools.doclets.internal.toolkit.util.DocletAbortException: java.lang.NullPointerException" appears
+    .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-internal-test`))//need to exclude duplicated classes or "javadoc: error - com.sun.tools.doclets.internal.toolkit.util.DocletAbortException: java.lang.NullPointerException" appears
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
     .aggregate(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-ahc-1_9`)
@@ -128,7 +128,7 @@ object Build extends Build {
     IO.write(outFile, os.toByteArray())
   }
 
-  val documentationSettings = Seq(
+  val documentationSettings: Seq[Def.Setting[_]] = Seq(
     writeVersion := {
       IO.write(target.value / "version.txt", version.value)
     },
@@ -139,7 +139,11 @@ object Build extends Build {
         (id, deps)
       }.toList
       val x = projectToDependencies.map { case (id, deps) =>
-        deps.map(dep => '"' + id + '"' + "->" + '"' + dep + '"').filterNot(s => s == "\"models\"->\"java-client-apache-async\"" || s.startsWith('"' + `sphere-java-client-internal-test`.id) || s.startsWith("\"test-lib") || s.startsWith("\"jvm-sdk")).mkString("\n")
+        deps.map(dep => '"' + id + '"' + "->" + '"' + dep + '"').filterNot(s =>
+          s == "\"" + `sphere-models`.id +  "\"->\"" + `sphere-java-client-apache-async`.id + "\""
+            || s.startsWith('"' + `sphere-java-client-internal-test`.id)
+            || s.startsWith("\"" + `sphere-test-lib`.id)
+            || s.startsWith("\"" + `sphere-jvm-sdk`.id)).mkString("\n")
       }.mkString("\n")
       val content = s"""digraph TrafficLights {
                           |$x
