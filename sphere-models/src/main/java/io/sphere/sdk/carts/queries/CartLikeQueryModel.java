@@ -1,13 +1,10 @@
 package io.sphere.sdk.carts.queries;
 
-import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
-import io.sphere.sdk.queries.MoneyQueryModel;
-import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.StringQuerySortingModel;
+import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
 
-abstract class CartLikeQueryModel<T> extends DefaultModelQueryModelImpl<T> {
+public abstract class CartLikeQueryModel<T> extends DefaultModelQueryModelImpl<T> {
     protected CartLikeQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
@@ -26,5 +23,9 @@ abstract class CartLikeQueryModel<T> extends DefaultModelQueryModelImpl<T> {
 
     public TaxedPriceOptionalQueryModel<T> taxedPrice() {
         return new TaxedPriceOptionalQueryModelImpl<>(Optional.of(this), "taxedPrice");
+    }
+
+    public CountryQueryModel<T> country() {
+        return new CountryQueryModel<>(Optional.of(this), Optional.of("country"));
     }
 }
