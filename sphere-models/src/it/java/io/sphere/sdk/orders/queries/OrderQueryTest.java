@@ -29,7 +29,7 @@ public class OrderQueryTest extends IntegrationTest {
         CustomerFixtures.withCustomerInGroup(client(), (customer, customerGroup) -> {
             withOrder(client(), customer, order -> {
                 final Order queriedOrder = execute(OrderQuery.of()
-                                .withPredicate(m -> m.id().is(order.getId()))
+                                .withPredicate(m -> m.id().is(order.getId()).and(m.customerGroup().is(customerGroup)))
                                 .withExpansionPaths(m -> m.customerGroup())
                 ).head().get();
                 assertThat(queriedOrder.getCustomerGroup().get().getObj().get().getName())

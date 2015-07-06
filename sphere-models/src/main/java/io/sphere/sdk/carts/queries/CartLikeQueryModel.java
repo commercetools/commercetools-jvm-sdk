@@ -1,5 +1,6 @@
 package io.sphere.sdk.carts.queries;
 
+import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
 
 import java.util.Optional;
@@ -27,5 +28,9 @@ public abstract class CartLikeQueryModel<T> extends DefaultModelQueryModelImpl<T
 
     public CountryQueryModel<T> country() {
         return new CountryQueryModel<>(Optional.of(this), Optional.of("country"));
+    }
+
+    public OptionalReferenceQueryModel<T, CustomerGroup> customerGroup() {
+        return referenceOptionalModel("customerGroup");
     }
 }
