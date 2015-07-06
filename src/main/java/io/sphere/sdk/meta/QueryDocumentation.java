@@ -62,11 +62,6 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.queries.QueryDemo#immutableQueryDsl()}
 
- <p>Based on this you can construct the query for the next page by using the previous query:</p>
-
- {@include.example io.sphere.sdk.queries.QueryDemo#nextPage()}
-
-
  <h4 id="create-hard-coded-query">Create a hard coded query</h4>
 
  Since {@link io.sphere.sdk.queries.Query} is an interface you have the opportunity to code

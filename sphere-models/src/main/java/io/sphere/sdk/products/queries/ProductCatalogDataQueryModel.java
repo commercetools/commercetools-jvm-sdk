@@ -9,11 +9,6 @@ import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 
 public class ProductCatalogDataQueryModel<M> extends QueryModelImpl<M> {
 
-    //TODO is this kind of method really required?
-    public static PartialProductCatalogDataQueryModel get() {
-        return new PartialProductCatalogDataQueryModel(Optional.empty(), Optional.<String>empty());
-    }
-
     ProductCatalogDataQueryModel(Optional<? extends QueryModel<M>> parent, Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
@@ -31,7 +26,7 @@ public class ProductCatalogDataQueryModel<M> extends QueryModelImpl<M> {
     }
 
     private ProductDataQueryModel<M> newProductDataQueryModel(String pathSegment) {
-        return new ProductDataQueryModel<M>(Optional.of(this), Optional.of(pathSegment));
+        return new ProductDataQueryModel<>(Optional.of(this), Optional.of(pathSegment));
     }
 
     public QueryPredicate<M> where(final QueryPredicate<PartialProductCatalogDataQueryModel> embeddedPredicate) {

@@ -35,8 +35,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
             if (facetResult instanceof TermFacetResult) {
                 return (TermFacetResult) facetResult;
             } else {
-                // TODO Use another type of exception once exception task is finished
-                throw new RuntimeException("Facet result is not of type TermFacetResult: " + facetResult);
+                throw new ClassCastException("Facet result is not of type TermFacetResult: " + facetResult);
             }
         });
     }
@@ -47,8 +46,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
             if (facetResult instanceof RangeFacetResult) {
                 return (RangeFacetResult) facetResult;
             } else {
-                // TODO Use another type of exception once exception task is finished
-                throw new RuntimeException("Facet result is not of type RangeFacetResult: " + facetResult);
+                throw new ClassCastException("Facet result is not of type RangeFacetResult: " + facetResult);
             }
         });
     }
@@ -58,8 +56,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
             if (facetResult instanceof FilteredFacetResult) {
                 return (FilteredFacetResult) facetResult;
             } else {
-                // TODO Use another type of exception once exception task is finished
-                throw new RuntimeException("Facet result is not of type FilterFacetResult: " + facetResult);
+                throw new ClassCastException("Facet result is not of type FilterFacetResult: " + facetResult);
             }
         });
     }

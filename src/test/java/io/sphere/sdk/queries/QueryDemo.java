@@ -66,12 +66,4 @@ public class QueryDemo {
         assertThat(query.limit()).isEqualTo(Optional.empty());
         assertThat(query.withLimit(30).limit()).isEqualTo(Optional.of(30));
     }
-
-    private void nextPage() {
-        CategoryQuery query = CategoryQuery.of();
-        Long previousOffset = query.offset().orElse(0L);//on the first page, the offset is unset for 0
-        Query<Category> queryForNextPageVariant1 = query.withOffset(previousOffset + 1);
-        //alternatively
-        Query<Category> queryForNextPageVariant2 = Queries.nextPage(query);
-    }
 }

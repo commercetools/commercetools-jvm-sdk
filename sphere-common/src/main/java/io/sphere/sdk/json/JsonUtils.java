@@ -51,11 +51,11 @@ final public class JsonUtils {
         }
     }
 
-    /** Pretty prints given JSON string, replacing passwords by {@code 'xxxxx'}.
+    /** Pretty prints given JSON string.
      * @param json JSON code as String which should be formatted
      * @return <code>json</code> formatted
      */
-    public static String prettyPrintJsonStringSecure(String json) {
+    public static String prettyPrintJson(final String json) {
         try {
             ObjectMapper jsonParser = new ObjectMapper();
             JsonNode jsonTree = jsonParser.readValue(json, JsonNode.class);
@@ -66,27 +66,6 @@ final public class JsonUtils {
             LOGGER.error(() -> "invalid JSON for pretty printing", e);
             return json;
         }
-    }
-
-    /**
-     * Works like {@link JsonUtils#prettyPrintJsonStringSecure(java.lang.String)} but returns the unparsed JSON string if the
-     * formatting fails.
-     * @param json the input json to format
-     * @return the formatted json or in error cases the unformatted json
-     */
-    //TODO rename
-    public static String prettyPrintJsonStringSecureWithFallback(String json) {
-        String result = json;
-        try {
-            ObjectMapper jsonParser = new ObjectMapper();
-            JsonNode jsonTree = jsonParser.readValue(json, JsonNode.class);
-            secure(jsonTree);
-            ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
-            result = writer.writeValueAsString(jsonTree);
-        } catch (IOException e) {
-            result = json;
-        }
-        return result;
     }
 
     public static <T> T readObjectFromResource(final String resourcePath, final TypeReference<T> typeReference) {
@@ -102,7 +81,7 @@ final public class JsonUtils {
         try {
             return objectMapper.readValue(jsonAsString, typeReference);
         } catch (IOException e) {
-            throw new JsonException(e);//TODO improve exception
+            throw new JsonException(e);
         }
     }
 
@@ -110,7 +89,7 @@ final public class JsonUtils {
         try {
             return objectMapper.reader(clazz).readValue(jsonNode);
         } catch (IOException e) {
-            throw new JsonException(e);//TODO improve exception
+            throw new JsonException(e);
         }
     }
 
@@ -118,7 +97,7 @@ final public class JsonUtils {
         try {
             return objectMapper.reader(clazz).readValue(jsonNode);
         } catch (IOException e) {
-            throw new JsonException(e);//TODO improve exception
+            throw new JsonException(e);
         }
     }
 

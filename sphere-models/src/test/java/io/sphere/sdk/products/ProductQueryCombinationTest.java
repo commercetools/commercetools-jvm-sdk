@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductQueryCombinationTest {
     public static final PartialProductDataQueryModel DATA_QUERY_MODEL = ProductDataQueryModel.getPartialProductDataQueryModel();
-    public static final PartialProductCatalogDataQueryModel MASTER_DATA_QUERY_MODEL = ProductCatalogDataQueryModel.get();
+    public static final PartialProductCatalogDataQueryModel MASTER_DATA_QUERY_MODEL = PartialProductCatalogDataQueryModel.of();
 
     @Test
     public void pure() throws Exception {

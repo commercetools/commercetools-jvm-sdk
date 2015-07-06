@@ -21,8 +21,7 @@ public final class CompletableFutureUtils {
         return CompletableFuture.completedFuture(object);
     }
 
-    //TODO only for test scope
-    public static <T> Throwable blockForFailure(final CompletionStage<T> future) {
+    static <T> Throwable blockForFailure(final CompletionStage<T> future) {
         try {
             future.toCompletableFuture().join();
             throw new NoSuchElementException(future + " did not complete exceptionally.");
