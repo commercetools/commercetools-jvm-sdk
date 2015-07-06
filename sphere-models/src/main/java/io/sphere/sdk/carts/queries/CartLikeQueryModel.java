@@ -30,7 +30,11 @@ public abstract class CartLikeQueryModel<T> extends DefaultModelQueryModelImpl<T
         return new CountryQueryModel<>(Optional.of(this), Optional.of("country"));
     }
 
-    public OptionalReferenceQueryModel<T, CustomerGroup> customerGroup() {
+    public ReferenceOptionalQueryModel<T, CustomerGroup> customerGroup() {
         return referenceOptionalModel("customerGroup");
+    }
+
+    public LineItemCollectionQueryModel<T> lineItems() {
+        return new LineItemCollectionQueryModelImpl<>(Optional.of(this), "lineItems");
     }
 }

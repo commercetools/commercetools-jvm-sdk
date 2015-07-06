@@ -48,8 +48,8 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new ReferenceQueryModelImpl<>(Optional.of(this), pathSegment);
     }
 
-    protected  <R> OptionalReferenceQueryModel<T, R> referenceOptionalModel(final String pathSegment) {
-        return new OptionalReferenceQueryModel<>(Optional.of(this), pathSegment);
+    protected  <R> ReferenceOptionalQueryModel<T, R> referenceOptionalModel(final String pathSegment) {
+        return new ReferenceOptionalQueryModel<>(Optional.of(this), pathSegment);
     }
 
     protected StringQuerySortingModel<T> stringModel(final String pathSegment) {
