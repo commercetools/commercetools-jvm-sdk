@@ -11,4 +11,9 @@ final class MoneyQueryModelImpl<T> extends QueryModelImpl<T>  implements MoneyQu
     public LongQuerySortingModel<T> centAmount() {
         return longModel("centAmount");
     }
+
+    @Override
+    public CurrencyCodeQueryModel<T> currencyCode() {
+        return currencyCodeModel("currencyCode");
+    }
 }

@@ -66,6 +66,7 @@ public class CartQueryTest extends IntegrationTest {
                     .withPredicate(
                             m -> m.totalPrice().centAmount().isGreaterThan(centAmount - 1)
                                     .and(m.totalPrice().centAmount().isLessThan(centAmount + 1)
+                                            .and(m.totalPrice().currencyCode().is(EUR))
                                     ))).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
         });
