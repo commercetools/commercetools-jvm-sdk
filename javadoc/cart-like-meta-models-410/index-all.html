@@ -799,6 +799,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html#CartLikeExpansionModel--">CartLikeExpansionModel()</a></span> - Constructor for class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/CartLikeExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartLikeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries"><span class="typeNameLink">CartLikeQueryModel</span></a>&lt;<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="type parameter in CartLikeQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/carts/queries/package-summary.html">io.sphere.sdk.carts.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#CartLikeQueryModel-java.util.Optional-java.util.Optional-">CartLikeQueryModel(Optional&lt;? extends QueryModel&lt;T&gt;&gt;, Optional&lt;String&gt;)</a></span> - Constructor for class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html#cartPredicate-io.sphere.sdk.cartdiscounts.CartPredicate-">cartPredicate(CartPredicate)</a></span> - Method in class io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountDraftBuilder.html" title="class in io.sphere.sdk.cartdiscounts">CartDiscountDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/CartPredicate.html" title="interface in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">CartPredicate</span></a> - Interface in <a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a></dt>
@@ -1413,6 +1417,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#country-com.neovisionaries.i18n.CountryCode-">country(CountryCode)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#country--">country()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html#country--">country()</a></span> - Method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/LocationsCollectionQueryModel.html" title="class in io.sphere.sdk.customers.queries">LocationsCollectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#country-com.neovisionaries.i18n.CountryCode-">country(CountryCode)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
@@ -1420,8 +1426,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#country-java.util.Optional-">country(Optional&lt;CountryCode&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#country-com.neovisionaries.i18n.CountryCode-">country(CountryCode)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#country--">country()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/PriceBuilder.html#country-java.util.Optional-">country(Optional&lt;CountryCode&gt;)</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1549,11 +1553,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers"><span class="typeNameLink">CustomerDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/customers/package-summary.html">io.sphere.sdk.customers</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerEmail--">customerEmail()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#customerEmail-java.util.Optional-">customerEmail(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#customerEmail-java.lang.String-">customerEmail(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#customerEmail--">customerEmail()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customers/expansion/CustomerExpansionModel.html" title="class in io.sphere.sdk.customers.expansion"><span class="typeNameLink">CustomerExpansionModel</span></a>&lt;<a href="io/sphere/sdk/customers/expansion/CustomerExpansionModel.html" title="type parameter in CustomerExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/customers/expansion/package-summary.html">io.sphere.sdk.customers.expansion</a></dt>
 <dd>&nbsp;</dd>
@@ -1607,11 +1611,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CartDraftBuilder.html#customerId-java.lang.String-">customerId(String)</a></span> - Method in class io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerId--">customerId()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#customerId-java.util.Optional-">customerId(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#customerId-java.lang.String-">customerId(String)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/queries/OrderQueryModel.html#customerId--">customerId()</a></span> - Method in class io.sphere.sdk.orders.queries.<a href="io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html#customerId--">customerId()</a></span> - Method in class io.sphere.sdk.reviews.queries.<a href="io/sphere/sdk/reviews/queries/ReviewQueryModel.html" title="class in io.sphere.sdk.reviews.queries">ReviewQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -9359,6 +9363,8 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 </dd>
 <dt><a href="io/sphere/sdk/taxcategories/queries/TaxCategoryQueryModel.html" title="class in io.sphere.sdk.taxcategories.queries"><span class="typeNameLink">TaxCategoryQueryModel</span></a> - Class in <a href="io/sphere/sdk/taxcategories/queries/package-summary.html">io.sphere.sdk.taxcategories.queries</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#taxedPrice--">taxedPrice()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">TaxedPrice</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#taxedPrice-io.sphere.sdk.carts.TaxedPrice-">taxedPrice(TaxedPrice)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
@@ -9606,6 +9612,8 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModel.html#totalNet--">totalNet()</a></span> - Method in interface io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModel.html" title="interface in io.sphere.sdk.carts.queries">TaxedPriceOptionalQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModelImpl.html#totalNet--">totalNet()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/TaxedPriceOptionalQueryModelImpl.html" title="class in io.sphere.sdk.carts.queries">TaxedPriceOptionalQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html#totalPrice--">totalPrice()</a></span> - Method in class io.sphere.sdk.carts.queries.<a href="io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#totalPrice-javax.money.MonetaryAmount-">totalPrice(MonetaryAmount)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>

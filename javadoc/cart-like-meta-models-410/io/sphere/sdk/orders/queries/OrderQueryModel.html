@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":9,"i4":10,"i5":10,"i6":10,"i7":10};
+var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -105,10 +105,15 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.QueryModelImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.DefaultModelQueryModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</li>
+<li><a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">io.sphere.sdk.queries.DefaultModelQueryModelImpl</a>&lt;T&gt;</li>
+<li>
+<ul class="inheritance">
+<li><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">io.sphere.sdk.carts.queries.CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.orders.queries.OrderQueryModel</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -128,7 +133,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">OrderQueryModel</span>
-extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="class in io.sphere.sdk.queries">DefaultModelQueryModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</pre>
 </li>
 </ul>
 </div>
@@ -148,38 +153,33 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/CountryQueryModel.html" title="class in io.sphere.sdk.queries">CountryQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/queries/OrderQueryModel.html#country--">country</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/queries/OrderQueryModel.html#customerEmail--">customerEmail</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/queries/OrderQueryModel.html#customerId--">customerId</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/queries/OrderQueryModel.html#of--">of</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="class in io.sphere.sdk.queries">SphereEnumerationQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>,<a href="../../../../../io/sphere/sdk/orders/OrderState.html" title="enum in io.sphere.sdk.orders">OrderState</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/queries/OrderQueryModel.html#orderState--">orderState</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="class in io.sphere.sdk.queries">SphereEnumerationQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>,<a href="../../../../../io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/queries/OrderQueryModel.html#paymentState--">paymentState</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/SphereEnumerationQueryModel.html" title="class in io.sphere.sdk.queries">SphereEnumerationQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>,<a href="../../../../../io/sphere/sdk/orders/ShipmentState.html" title="enum in io.sphere.sdk.orders">ShipmentState</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/queries/OrderQueryModel.html#shipmentState--">shipmentState</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="class in io.sphere.sdk.orders.queries">SyncInfoQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/queries/OrderQueryModel.html#syncInfo--">syncInfo</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.carts.queries.CartLikeQueryModel">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.carts.queries.<a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartLikeQueryModel</a></h3>
+<code><a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#country--">country</a>, <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerEmail--">customerEmail</a>, <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#customerId--">customerId</a>, <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#taxedPrice--">taxedPrice</a>, <a href="../../../../../io/sphere/sdk/carts/queries/CartLikeQueryModel.html#totalPrice--">totalPrice</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.DefaultModelQueryModelImpl">
 <!--   -->
@@ -231,24 +231,6 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/orders/queries/OrderQueryModel.html" title="class in io.sphere.sdk.orders.queries">OrderQueryModel</a>&nbsp;of()</pre>
 </li>
 </ul>
-<a name="customerId--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>customerId</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;&nbsp;customerId()</pre>
-</li>
-</ul>
-<a name="customerEmail--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>customerEmail</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;&nbsp;customerEmail()</pre>
-</li>
-</ul>
 <a name="orderState--">
 <!--   -->
 </a>
@@ -279,19 +261,10 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <a name="syncInfo--">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>syncInfo</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/orders/queries/SyncInfoQueryModel.html" title="class in io.sphere.sdk.orders.queries">SyncInfoQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;&nbsp;syncInfo()</pre>
-</li>
-</ul>
-<a name="country--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>country</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/CountryQueryModel.html" title="class in io.sphere.sdk.queries">CountryQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;&nbsp;country()</pre>
 </li>
 </ul>
 </li>
