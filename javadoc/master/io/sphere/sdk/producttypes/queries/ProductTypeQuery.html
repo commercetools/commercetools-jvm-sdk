@@ -126,7 +126,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
 </code></pre><pre><code class='java'>public class QueryByProductTypeNameExample {
-    private final SphereClient client = null;//TODO
+    private final SphereClient client = null;
 
     public void queryByNameExample() {
         CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultFuture = client.execute(ProductTypeQuery.of().byName("t-shirt"));

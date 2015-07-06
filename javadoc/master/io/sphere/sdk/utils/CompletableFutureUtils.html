@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -129,65 +129,61 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;java.lang.Throwable</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#blockForFailure-java.util.concurrent.CompletionStage-">blockForFailure</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;future)</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#failed-java.lang.Throwable-">failed</a></span>(java.lang.Throwable&nbsp;e)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>static &lt;T,U&gt;&nbsp;java.util.concurrent.CompletionStage&lt;U&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#flatMap-java.util.concurrent.CompletionStage-java.util.function.Function-">flatMap</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;future,
        java.util.function.Function&lt;T,java.util.concurrent.CompletionStage&lt;U&gt;&gt;&nbsp;f)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static &lt;T,U&gt;&nbsp;java.util.concurrent.CompletionStage&lt;U&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#map-java.util.concurrent.CompletionStage-java.util.function.Function-">map</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;future,
    java.util.function.Function&lt;T,U&gt;&nbsp;f)</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;java.util.concurrent.CompletionStage&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#onFailure-java.util.concurrent.CompletionStage-java.util.function.Consumer-">onFailure</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;future,
          java.util.function.Consumer&lt;java.lang.Throwable&gt;&nbsp;consumer)</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;java.util.concurrent.CompletionStage&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#onSuccess-java.util.concurrent.CompletionStage-java.util.function.Consumer-">onSuccess</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;future,
          java.util.function.Consumer&lt;T&gt;&nbsp;consumer)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#orElseGet-java.util.concurrent.CompletionStage-java.util.function.Supplier-">orElseGet</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;stage,
          java.util.function.Supplier&lt;T&gt;&nbsp;other)</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static &lt;T,X extends java.lang.Throwable&gt;<br>T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#orElseThrow-java.util.concurrent.CompletionStage-java.util.function.Supplier-">orElseThrow</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;stage,
            java.util.function.Supplier&lt;? extends X&gt;&nbsp;exceptionSupplier)</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;java.util.concurrent.CompletionStage&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#recover-java.util.concurrent.CompletionStage-java.util.function.Function-">recover</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;future,
        java.util.function.Function&lt;java.lang.Throwable,T&gt;&nbsp;f)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;java.util.concurrent.CompletionStage&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#recoverWith-java.util.concurrent.CompletionStage-java.util.function.Function-">recoverWith</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;future,
            java.util.function.Function&lt;java.lang.Throwable,java.util.concurrent.CompletionStage&lt;T&gt;&gt;&nbsp;f)</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#successful-T-">successful</a></span>(T&nbsp;object)</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>static &lt;R,A,B,C&gt;&nbsp;java.util.concurrent.CompletionStage&lt;R&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#thenCombine-java.util.concurrent.CompletionStage-java.util.concurrent.CompletionStage-java.util.concurrent.CompletionStage-io.sphere.sdk.utils.functional.TriFunction-">thenCombine</a></span>(java.util.concurrent.CompletionStage&lt;A&gt;&nbsp;a,
            java.util.concurrent.CompletionStage&lt;B&gt;&nbsp;b,
            java.util.concurrent.CompletionStage&lt;C&gt;&nbsp;c,
            <a href="../../../../io/sphere/sdk/utils/functional/TriFunction.html" title="interface in io.sphere.sdk.utils.functional">TriFunction</a>&lt;R,A,B,C&gt;&nbsp;f)</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/utils/CompletableFutureUtils.html#transferResult-java.util.concurrent.CompletionStage-java.util.concurrent.CompletableFuture-">transferResult</a></span>(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;source,
               java.util.concurrent.CompletableFuture&lt;T&gt;&nbsp;target)</code>&nbsp;</td>
@@ -223,15 +219,6 @@ extends java.lang.Object</pre>
 <li class="blockList">
 <h4>successful</h4>
 <pre>public static&nbsp;&lt;T&gt;&nbsp;java.util.concurrent.CompletableFuture&lt;T&gt;&nbsp;successful(T&nbsp;object)</pre>
-</li>
-</ul>
-<a name="blockForFailure-java.util.concurrent.CompletionStage-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>blockForFailure</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;java.lang.Throwable&nbsp;blockForFailure(java.util.concurrent.CompletionStage&lt;T&gt;&nbsp;future)</pre>
 </li>
 </ul>
 <a name="failed-java.lang.Throwable-">

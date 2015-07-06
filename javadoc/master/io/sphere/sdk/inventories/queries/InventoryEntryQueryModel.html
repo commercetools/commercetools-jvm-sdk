@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":9,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -178,10 +178,14 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/inventories/queries/InventoryEntryQueryModel.html#quantityOnStock--">quantityOnStock</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/IntegerQuerySortingModel.html" title="interface in io.sphere.sdk.queries">IntegerQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/inventories/InventoryEntry.html" title="interface in io.sphere.sdk.inventories">InventoryEntry</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/inventories/queries/InventoryEntryQueryModel.html#restockableInDays--">restockableInDays</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/inventories/InventoryEntry.html" title="interface in io.sphere.sdk.inventories">InventoryEntry</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/inventories/queries/InventoryEntryQueryModel.html#sku--">sku</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/queries/ReferenceQueryModel.html" title="interface in io.sphere.sdk.queries">ReferenceQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/inventories/InventoryEntry.html" title="interface in io.sphere.sdk.inventories">InventoryEntry</a>,<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/inventories/queries/InventoryEntryQueryModel.html#supplyChannel--">supplyChannel</a></span>()</code>&nbsp;</td>
 </tr>
@@ -198,7 +202,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="class in io.sphere.sdk.queries">QueryModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#anyReferenceModel-java.lang.String-">anyReferenceModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#booleanModel-java.lang.String-">booleanModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isEmptyCollectionQueryPredicate--">isEmptyCollectionQueryPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanOrEqualToPredicate-V-">isGreaterThanOrEqualToPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanPredicate-V-">isGreaterThanPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isInPredicate-java.lang.Iterable-">isInPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanOrEqualToPredicate-V-">isLessThanOrEqualToPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanPredicate-V-">isLessThanPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotEmptyCollectionQueryPredicate--">isNotEmptyCollectionQueryPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotInPredicate-java.lang.Iterable-">isNotInPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-java.lang.String-">isNotPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-V-">isNotPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPresentPredicate--">isNotPresentPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPredicate-java.lang.String-">isPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPredicate-V-">isPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPresentPredicate--">isPresentPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#referenceModel-java.lang.String-">referenceModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringModel-java.lang.String-">stringModel</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#anyReferenceModel-java.lang.String-">anyReferenceModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#booleanModel-java.lang.String-">booleanModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#integerModel-java.lang.String-">integerModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isEmptyCollectionQueryPredicate--">isEmptyCollectionQueryPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanOrEqualToPredicate-V-">isGreaterThanOrEqualToPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isGreaterThanPredicate-V-">isGreaterThanPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isInPredicate-java.lang.Iterable-">isInPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanOrEqualToPredicate-V-">isLessThanOrEqualToPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isLessThanPredicate-V-">isLessThanPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotEmptyCollectionQueryPredicate--">isNotEmptyCollectionQueryPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotInPredicate-java.lang.Iterable-">isNotInPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-java.lang.String-">isNotPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPredicate-V-">isNotPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isNotPresentPredicate--">isNotPresentPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPredicate-java.lang.String-">isPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPredicate-V-">isPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#isPresentPredicate--">isPresentPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#longModel-java.lang.String-">longModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#referenceModel-java.lang.String-">referenceModel</a>, <a href="../../../../../io/sphere/sdk/queries/QueryModelImpl.html#stringModel-java.lang.String-">stringModel</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -285,10 +289,19 @@ extends <a href="../../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl
 <a name="availableQuantity--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>availableQuantity</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="interface in io.sphere.sdk.queries">LongQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/inventories/InventoryEntry.html" title="interface in io.sphere.sdk.inventories">InventoryEntry</a>&gt;&nbsp;availableQuantity()</pre>
+</li>
+</ul>
+<a name="restockableInDays--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>restockableInDays</h4>
+<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/queries/IntegerQuerySortingModel.html" title="interface in io.sphere.sdk.queries">IntegerQuerySortingModel</a>&lt;<a href="../../../../../io/sphere/sdk/inventories/InventoryEntry.html" title="interface in io.sphere.sdk.inventories">InventoryEntry</a>&gt;&nbsp;restockableInDays()</pre>
 </li>
 </ul>
 </li>
