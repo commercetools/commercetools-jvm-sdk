@@ -3,6 +3,8 @@ package io.sphere.sdk.customers;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CartDraft;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
+import io.sphere.sdk.carts.commands.CartUpdateCommand;
+import io.sphere.sdk.carts.commands.updateactions.SetCustomerEmail;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
@@ -57,7 +59,7 @@ public class CustomerFixtures {
         withCustomer(client, customer -> {
             final CartDraft cartDraft = CartDraft.of(EUR).withCustomerId(customer.getId());
             final Cart cart = client.execute(CartCreateCommand.of(cartDraft));
-            consumer.accept(customer, cart);
+            consumer.accept(customer, client.execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(customer.getEmail()))));
         });
     }
 

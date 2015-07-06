@@ -8,6 +8,7 @@ import io.sphere.sdk.utils.StringUtils;
 
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
+import java.math.BigDecimal;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
@@ -36,6 +37,7 @@ public final class SphereTestUtils {
 
     public static final CurrencyUnit EUR = DefaultCurrencyUnits.EUR;
     public static final CurrencyUnit USD = DefaultCurrencyUnits.USD;
+    public static final MonetaryAmount EURO_CT_1 = MoneyImpl.of(new BigDecimal("0.01"), EUR);
     public static final MonetaryAmount EURO_1 = MoneyImpl.of(1, EUR);
     public static final MonetaryAmount EURO_5 = MoneyImpl.of(5, EUR);
     public static final MonetaryAmount EURO_10 = MoneyImpl.of(10, EUR);
