@@ -30,7 +30,7 @@ public final class CategoryQueryModel extends DefaultModelQueryModelImpl<Categor
         return new StringQuerySortingModel<>(Optional.of(this), "externalId");
     }
 
-    public OptionalReferenceQueryModel<Category, Category> parent() {
-        return new OptionalReferenceQueryModel<>(Optional.of(this), "parent");
+    public ReferenceOptionalQueryModel<Category, Category> parent() {
+        return new ReferenceOptionalQueryModel<>(Optional.of(this), "parent");
     }
 }

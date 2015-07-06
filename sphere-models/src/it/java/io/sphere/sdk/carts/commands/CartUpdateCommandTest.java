@@ -3,6 +3,7 @@ package io.sphere.sdk.carts.commands;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.carts.queries.CartByIdFetch;
+import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
@@ -75,6 +76,19 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final LineItem lineItem = updatedCart.getLineItems().get(0);
             assertThat(lineItem.getDistributionChannel()).contains(distributionChannel.toReference());
             assertThat(lineItem.getSupplyChannel()).contains(inventorySupplyChannel.toReference());
+
+            //check expansion and query
+            final Cart loadedCart = execute(CartQuery.of()
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1)
+                    .withPredicate(
+                            m -> m.lineItems().supplyChannel().is(inventorySupplyChannel)
+                            .and(m.lineItems().distributionChannel().is(distributionChannel)))
+                    .plusExpansionPaths(m -> m.lineItems(0).supplyChannel())
+                    .plusExpansionPaths(m -> m.lineItems(0).distributionChannel())).head().get();
+            final LineItem loadedLineItem = loadedCart.getLineItems().get(0);
+            assertThat(loadedLineItem.getDistributionChannel().get().getObj()).isPresent();
+            assertThat(loadedLineItem.getSupplyChannel().get().getObj()).isPresent();
         });
     }
 

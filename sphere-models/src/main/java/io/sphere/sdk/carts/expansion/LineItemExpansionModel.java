@@ -14,6 +14,14 @@ public class LineItemExpansionModel<T> extends ExpansionModel<T> {
         super();
     }
 
+    public ExpansionPath<T> supplyChannel() {
+        return expansionPath("supplyChannel");
+    }
+
+    public ExpansionPath<T> distributionChannel() {
+        return expansionPath("distributionChannel");
+    }
+
     public ExpansionPath<T> state() {
         return state("*");
     }

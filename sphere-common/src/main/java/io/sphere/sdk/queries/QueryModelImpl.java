@@ -32,12 +32,24 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return parent;
     }
 
+    protected CurrencyCodeQueryModel<T> currencyCodeModel(final String pathSegment) {
+        return new CurrencyCodeQueryModelImpl<>(Optional.of(this), pathSegment);
+    }
+
+    protected MoneyQueryModel<T> moneyModel(final String pathSegment) {
+        return new MoneyQueryModelImpl<>(Optional.of(this), pathSegment);
+    }
+
     protected AnyReferenceQueryModel<T> anyReferenceModel(final String pathSegment) {
         return new AnyReferenceQueryModelImpl <>(Optional.of(this), pathSegment);
     }
 
     protected <R> ReferenceQueryModel<T, R> referenceModel(final String pathSegment) {
         return new ReferenceQueryModelImpl<>(Optional.of(this), pathSegment);
+    }
+
+    protected  <R> ReferenceOptionalQueryModel<T, R> referenceOptionalModel(final String pathSegment) {
+        return new ReferenceOptionalQueryModel<>(Optional.of(this), pathSegment);
     }
 
     protected StringQuerySortingModel<T> stringModel(final String pathSegment) {
