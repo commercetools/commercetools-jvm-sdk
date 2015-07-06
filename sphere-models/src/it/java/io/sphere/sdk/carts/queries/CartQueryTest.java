@@ -59,7 +59,7 @@ public class CartQueryTest extends IntegrationTest {
     @Test
     public void queryTotalPrice() throws Exception {
         withFilledCart(client(), cart -> {
-            final long centAmount = cart.getTotalPrice().multiply(100).getNumber().longValueExact();
+            final long centAmount = centAmountOf(cart.getTotalPrice());
             final Cart loadedCart = execute(CartQuery.of()
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1)
@@ -68,6 +68,24 @@ public class CartQueryTest extends IntegrationTest {
                                     .and(m.totalPrice().centAmount().isLessThan(centAmount + 1)
                                             .and(m.totalPrice().currencyCode().is(EUR))
                                     ))).head().get();
+            assertThat(loadedCart.getId()).isEqualTo(cart.getId());
+        });
+    }
+
+    private long centAmountOf(final MonetaryAmount totalPrice) {
+        return totalPrice.multiply(100).getNumber().longValueExact();
+    }
+
+    @Test
+    public void queryTaxedPrice() throws Exception {
+        withFilledCart(client(), cart -> {
+            final Cart loadedCart = execute(CartQuery.of()
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1)
+                    .withPredicate(m -> m.taxedPrice().isPresent()
+                            .and(m.taxedPrice().totalNet().centAmount().is(centAmountOf(cart.getTaxedPrice().get().getTotalNet())))
+                            .and(m.taxedPrice().totalGross().centAmount().is(centAmountOf(cart.getTaxedPrice().get().getTotalGross())))
+                    )).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
         });
     }

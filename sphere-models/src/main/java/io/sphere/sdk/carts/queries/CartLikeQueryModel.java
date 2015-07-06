@@ -23,4 +23,8 @@ abstract class CartLikeQueryModel<T> extends DefaultModelQueryModelImpl<T> {
     public MoneyQueryModel<T> totalPrice() {
         return moneyModel("totalPrice");
     }
+
+    public TaxedPriceOptionalQueryModel<T> taxedPrice() {
+        return new TaxedPriceOptionalQueryModelImpl<>(Optional.of(this), "taxedPrice");
+    }
 }
