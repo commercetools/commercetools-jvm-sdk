@@ -19,7 +19,9 @@ public class ReferenceQueryModelImpl<T, R> extends QueryModelImpl<T> implements 
 
     @Override
     public QueryPredicate<T> isInIds(final List<String> ids) {
-        return new IsInQueryPredicate<>(idSegment(), ids);
+        return new IsInQueryPredicate<>(idSegment(),
+                ids.stream()
+                .map(StringQuerySortingModel::normalize).collect(toList()));
     }
 
     @Override
