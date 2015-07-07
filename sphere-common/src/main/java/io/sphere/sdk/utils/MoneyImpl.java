@@ -1,7 +1,6 @@
 package io.sphere.sdk.utils;
 
 import io.sphere.sdk.models.Base;
-import org.javamoney.moneta.CurrencyUnitBuilder;
 import org.javamoney.moneta.FastMoney;
 
 import javax.money.*;
@@ -252,7 +251,7 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
     }
 
     private static CurrencyUnit createCurrencyByCode(final String currencyCode) {
-        return CurrencyUnitBuilder.of(currencyCode, CurrencyContextBuilder.of("default").build()).build();
+        return Monetary.getCurrency(currencyCode);
     }
 
     public static MonetaryAmount of(final String amount, final CurrencyUnit currencyUnit) {
@@ -265,5 +264,9 @@ final public class MoneyImpl extends Base implements MonetaryAmount {
 
     public static MonetaryAmount ofCents(final long centAmount, final CurrencyUnit currencyUnit) {
         return of(new BigDecimal(centAmount).divide(new BigDecimal("100")), currencyUnit);
+    }
+
+    public static MonetaryAmount of(final String value, final String currencyCode) {
+        return of(new BigDecimal(value), createCurrencyByCode(currencyCode));
     }
 }
