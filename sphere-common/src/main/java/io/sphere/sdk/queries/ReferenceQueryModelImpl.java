@@ -14,7 +14,7 @@ public class ReferenceQueryModelImpl<T, R> extends QueryModelImpl<T> implements 
     @Override
     public QueryPredicate<T> is(final Referenceable<R> reference) {
         final String id = reference.toReference().getId();
-        return ComparisonQueryPredicate.ofIsEqualTo(idSegment(), id);
+        return id().is(id);
     }
 
     @Override

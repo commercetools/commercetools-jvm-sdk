@@ -2,22 +2,32 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
-import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.VariantIdentifier;
+import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.commands.ProductCreateCommand;
+import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.ProductTypeFixtures;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.CompletionStage;
+import java.util.stream.Stream;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withUpdateableProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
+import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.*;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class ProductQueryTest extends IntegrationTest {
     @Test
@@ -42,16 +52,16 @@ public class ProductQueryTest extends IntegrationTest {
     @Test
     public void canExpandCustomerGroupOfPrices() throws Exception {
         withCustomerGroup(client(), customerGroup ->
-            withUpdateablePricedProduct(client(), PRICE.withCustomerGroup(customerGroup), product -> {
-                final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().customerGroup();
-                final Query<Product> query = query(product).withExpansionPaths(expansionPath);
-                final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
-                assertThat(prices
-                        .stream()
-                        .anyMatch(price -> price.getCustomerGroup().map(customerGroupReference -> customerGroupReference.getObj().isPresent()).orElse(false)))
-                        .isTrue();
-                return product;
-            })
+                        withUpdateablePricedProduct(client(), PRICE.withCustomerGroup(customerGroup), product -> {
+                            final ExpansionPath<Product> expansionPath = ProductExpansionModel.of().masterData().staged().masterVariant().prices().customerGroup();
+                            final Query<Product> query = query(product).withExpansionPaths(expansionPath);
+                            final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
+                            assertThat(prices
+                                    .stream()
+                                    .anyMatch(price -> price.getCustomerGroup().map(customerGroupReference -> customerGroupReference.getObj().isPresent()).orElse(false)))
+                                    .isTrue();
+                            return product;
+                        })
         );
     }
 

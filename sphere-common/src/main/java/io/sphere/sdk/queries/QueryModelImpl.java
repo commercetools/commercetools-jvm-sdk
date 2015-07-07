@@ -4,6 +4,8 @@ import io.sphere.sdk.models.Base;
 
 import java.util.Optional;
 
+import static io.sphere.sdk.queries.StringQuerySortingModel.normalize;
+
 public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     private final Optional<? extends QueryModel<T>> parent;
     private final Optional<String> pathSegment;
@@ -77,11 +79,11 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     }
 
     protected QueryPredicate<T> isPredicate(final String value) {
-        return ComparisonQueryPredicate.ofIsEqualTo(this, value);
+        return ComparisonQueryPredicate.ofIsEqualTo(this, normalize(value));
     }
 
     protected QueryPredicate<T> isNotPredicate(final String value) {
-        return ComparisonQueryPredicate.ofIsNotEqualTo(this, value);
+        return ComparisonQueryPredicate.ofIsNotEqualTo(this, normalize(value));
     }
 
     protected <V> QueryPredicate<T> isInPredicate(final Iterable<V> args) {

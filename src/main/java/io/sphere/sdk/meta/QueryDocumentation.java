@@ -185,6 +185,15 @@ Like for predicates, you can traverse the query model tree in the same way to sp
 
  <p>So, for this example query with offset 2 and limit 4, the {@link io.sphere.sdk.queries.PagedQueryResult} will have offset 2, size 4 and total 15. But be careful, count can be smaller than limit in some cases; for example, if total is smaller than the limit (limit 500 but only 15 products). It can also be the case when total is not dividable by limit and the last elements are fetched (.e.g. |12 13 14| with offset 12 and limit 4).</p>
 
+ <h3 id=pagination-for-large-offsets>Pagination for large offsets</h3>
+
+ Using big offsets can slow down the query and has an impact on other requests since the DB is busy with that expensive query.
+ See <a href="http://stackoverflow.com/a/7228190">http://stackoverflow.com/a/7228190 for more information.</a>
+
+ <p>For some cases, like iterating through a whole collection for imports/exports the offset parameter can be avoided by using a predicate id &gt; $lastId.</p>
+
+ {@include.example io.sphere.sdk.products.queries.QueryAllTest}
+
  <h3 id=reference-expansion>Reference expansion</h3>
 
  Reference expansion is a feature of certain query endpoints that enables clients to request

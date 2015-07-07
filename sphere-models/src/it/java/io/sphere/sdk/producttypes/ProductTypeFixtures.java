@@ -80,6 +80,10 @@ public final class ProductTypeFixtures {
 
     public static ProductType defaultProductType(final TestClient client) {
         final String name = "referenceable-product-1";
+        return createProductType(client, name);
+    }
+
+    public static ProductType createProductType(final TestClient client, final String name) {
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(name, "", asList());
         return client.execute(ProductTypeQuery.of().byName(name)).head()
                 .orElseGet(() -> client.execute(ProductTypeCreateCommand.of(productTypeDraft)));
