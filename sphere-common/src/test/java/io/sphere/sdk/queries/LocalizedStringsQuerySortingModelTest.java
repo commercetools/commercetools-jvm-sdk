@@ -12,16 +12,19 @@ public class LocalizedStringsQuerySortingModelTest {
 
     @Test
     public void lang() throws Exception {
-        assertThat(model.lang(Locale.ENGLISH).is("bar").toSphereQuery()).isEqualTo("thepath(en=\"bar\")");
+        assertThat(model.lang(Locale.ENGLISH).is("bar").toSphereQuery())
+                .isEqualTo("thepath(en=\"bar\")");
     }
 
     @Test
     public void isIn() throws Exception {
-        assertThat(model.lang(Locale.ENGLISH).isIn("foo", "bar").toSphereQuery()).isEqualTo("thepath(en in (\"foo\", \"bar\"))");
+        assertThat(model.lang(Locale.ENGLISH).isIn("foo", "bar").toSphereQuery())
+                .isEqualTo("thepath(en in (\"foo\", \"bar\"))");
     }
 
     @Test
     public void isNot() throws Exception {
-        assertThat(model.lang(Locale.ENGLISH).isNot("bar").toSphereQuery()).isEqualTo("thepath(en<>\"bar\")");
+        assertThat(model.lang(Locale.ENGLISH).isNot("bar").toSphereQuery())
+                .isEqualTo("thepath(en<>\"bar\")");
     }
 }

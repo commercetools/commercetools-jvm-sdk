@@ -13,7 +13,9 @@ public class IsInQueryPredicateTest {
     private final QueryPredicate<String> model = create("foo", "bar\"evil", "baz");
 
     private QueryPredicate<String> create(String ... values) {
-        return new IsInQueryPredicate<String, String, String>(emptyQueryModel, Arrays.stream(values).map(v -> StringQuerySortingModel.escape(v)).collect(toList()));
+        return new IsInQueryPredicate<String, String, String>(emptyQueryModel, Arrays.stream(values)
+                .map(StringQuerySortingModel::normalize)
+                .collect(toList()));
     }
 
     @Test

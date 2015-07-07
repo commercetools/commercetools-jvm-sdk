@@ -21,8 +21,8 @@ class IsInQueryPredicate<T, V, M> extends QueryModelQueryPredicate<M> {
 
     @Override
     protected String render() {
-        final StringJoiner joiner = new StringJoiner("\", \"");
+        final StringJoiner joiner = new StringJoiner(", ");
         values.forEach(x -> joiner.add(x.toString()));
-        return " in (\"" + joiner.toString() + "\")";
+        return " in (" + joiner.toString() + ")";
     }
 }

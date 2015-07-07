@@ -31,14 +31,18 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Que
         return s.replace("\"", "\\\"");
     }
 
+    public static String normalize(final String s) {
+        return '"' + escape(s) + '"';
+    }
+
     @Override
     public QueryPredicate<T> is(final String s) {
-        return isPredicate(escape(s));
+        return isPredicate(s);
     }
 
     @Override
     public QueryPredicate<T> isNot(final String s) {
-        return isNotPredicate(escape(s));
+        return isNotPredicate(s);
     }
 
     @Override
@@ -48,32 +52,32 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Que
 
     @Override
     public QueryPredicate<T> isIn(final Iterable<String> args) {
-        return new IsInQueryPredicate<>(this, escape(args));
+        return new IsInQueryPredicate<>(this, normalize(args));
     }
 
     @Override
-    public QueryPredicate<T> isGreaterThan(final String value) {
-        return ComparisonQueryPredicate.ofIsGreaterThan(this, value);
+    public QueryPredicate<T> isGreaterThan(final String s) {
+        return ComparisonQueryPredicate.ofIsGreaterThan(this, normalize(s));
     }
 
     @Override
-    public QueryPredicate<T> isLessThan(final String value) {
-        return ComparisonQueryPredicate.ofIsLessThan(this, value);
+    public QueryPredicate<T> isLessThan(final String s) {
+        return ComparisonQueryPredicate.ofIsLessThan(this, normalize(s));
     }
 
     @Override
-    public QueryPredicate<T> isLessThanOrEqualTo(final String value) {
-        return ComparisonQueryPredicate.ofIsLessThanOrEqualTo(this, value);
+    public QueryPredicate<T> isLessThanOrEqualTo(final String s) {
+        return ComparisonQueryPredicate.ofIsLessThanOrEqualTo(this, normalize(s));
     }
 
     @Override
-    public QueryPredicate<T> isGreaterThanOrEqualTo(final String value) {
-        return ComparisonQueryPredicate.ofGreaterThanOrEqualTo(this, value);
+    public QueryPredicate<T> isGreaterThanOrEqualTo(final String s) {
+        return ComparisonQueryPredicate.ofGreaterThanOrEqualTo(this, normalize(s));
     }
 
     @Override
     public QueryPredicate<T> isNotIn(final Iterable<String> args) {
-        return new IsNotInQueryPredicate<>(this, escape(args));
+        return new IsNotInQueryPredicate<>(this, normalize(args));
     }
 
     @Override
@@ -83,12 +87,16 @@ public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements Que
 
     @Override
     public QueryPredicate<T> isPresent() {
-        return new OptionalQueryPredicate<>(this, true);
+        return isPresentPredicate();
     }
 
     @Override
     public QueryPredicate<T> isNotPresent() {
-        return new OptionalQueryPredicate<>(this, false);
+        return isNotPresentPredicate();
+    }
+
+    private static List<String> normalize(final Iterable<String> args) {
+        return toStream(args).map(x -> normalize(x)).collect(toList());
     }
 
     private static List<String> escape(final Iterable<String> args) {
