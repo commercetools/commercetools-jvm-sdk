@@ -108,15 +108,18 @@ extends java.lang.Object</pre>
  <h3 id="money">Monetary Data</h3>
 
  The SDK has a dependency to Moneta, the reference implementation for <a href="https://java.net/projects/javamoney" target="_blank">JSR 354 - Currency and Money</a>.
- We suggest to read <a href="https://github.com/JavaMoney/jsr354-ri/blob/master/src/main/asciidoc/userguide.adoc" target="_blank">Moneta Userguide</a>.
+ We suggest to read the <a href="https://github.com/JavaMoney/jsr354-ri/blob/master/src/main/asciidoc/userguide.adoc" target="_blank">Moneta Userguide</a>.
 
- <h4>Creating MonetaryAmount values</h4>
+ <h4 id="creating-money-values">Creating MonetaryAmount values</h4>
+
+ The following example shows different ways to create the same money representation:
 
  <div id="io-sphere-sdk-meta-FormattingDocumentationTest-createMoney--%s" class=code-example><pre><code class='java'>final List&lt;MonetaryAmount&gt; monetaryAmounts = asList(
         MoneyImpl.of(new BigDecimal("1234.56"), Monetary.getCurrency("EUR")),
         MoneyImpl.of(new BigDecimal("1234.56"), DefaultCurrencyUnits.EUR),
         MoneyImpl.of("1234.56", "EUR"),
         MoneyImpl.ofCents(123456, Monetary.getCurrency("EUR")),
+        MoneyImpl.ofCents(123456, Monetary.getCurrency(Locale.GERMANY)),//auto select per county
         MoneyImpl.ofCents(123456, DefaultCurrencyUnits.EUR),
         MoneyImpl.ofCents(123456, "EUR")
 );
@@ -127,11 +130,70 @@ monetaryAmounts.forEach(monetaryAmount -&gt; {
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
+ <h4 id="formatting-money-values">Formatting MonetaryAmount values</h4>
 
- <!--
+ <p>For formatting you can just get a formatter per locale.</p>
+ <p>Example for Germany:</p>
 
- https://github.com/JavaMoney/jsr354-ri/blob/8a9f7b266cc79afc15ff4812e4cb1ec457f3b383/src/test/java/org/javamoney/moneta/internal/format/MonetaryAmountFormatTest.java
- --></div>
+ <div id="io-sphere-sdk-meta-FormattingDocumentationTest-formatMoneyByGermanLocale--%s" class=code-example><pre><code class='java'>final MonetaryAmountFormat format = MonetaryFormats.getAmountFormat(Locale.GERMANY);
+assertThat(format.format(MoneyImpl.ofCents(123456, "EUR"))).isEqualTo("1.234,56 EUR");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>Example for the USA:</p>
+
+ <div id="io-sphere-sdk-meta-FormattingDocumentationTest-formatMoneyByUsLocale--%s" class=code-example><pre><code class='java'>final MonetaryAmountFormat format = MonetaryFormats.getAmountFormat(Locale.US);
+assertThat(format.format(MoneyImpl.ofCents(123456, "USD"))).isEqualTo("USD1,234.56");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>You can also use the locale and force to use the currency symbol instead of the currency code:</p>
+ <div id="io-sphere-sdk-meta-FormattingDocumentationTest-formatMoneyCustom--%s" class=code-example><pre><code class='java'>final MonetaryAmountFormat format = MonetaryFormats.getAmountFormat(
+        AmountFormatQueryBuilder.of(Locale.US)
+                .set(CurrencyStyle.SYMBOL)
+                .build()
+);
+final String formatted = format.format(MoneyImpl.ofCents(123456, "USD"));
+assertThat(formatted).isEqualTo("$1,234.56");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>If that is not flexible enough you can specify a pattern:</p>
+
+ <div id="io-sphere-sdk-meta-FormattingDocumentationTest-formatMoneyCustom3--%s" class=code-example><pre><code class='java'>final MonetaryAmountFormat format = MonetaryFormats.getAmountFormat(
+        AmountFormatQueryBuilder.of(Locale.US)
+                .set(CurrencyStyle.SYMBOL)
+                .set("pattern", "###0.00### ¤")
+                .build()
+);
+final String formatted = format.format(MoneyImpl.ofCents(123456, "USD"));
+assertThat(formatted).isEqualTo("1234.56 $");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>&#x00A4; is the currency sign which can be formatted with the styles <code>CurrencyStyle.CODE</code>, <code>CurrencyStyle.NAME</code>, <code>CurrencyStyle.NUMERIC_CODE</code> and <code>CurrencyStyle.SYMBOL</code>.</p>
+
+ <h4 id="sorting-money-values">Sorting MonetaryAmount values</h4>
+
+ <p>By the amount:</p>
+ <div id="io-sphere-sdk-meta-FormattingDocumentationTest-moneySortByAmount--%s" class=code-example><pre><code class='java'>final MonetaryAmount a = MoneyImpl.ofCents(-200, "EUR");
+final MonetaryAmount b = MoneyImpl.ofCents(100, "EUR");
+final MonetaryAmount c = MoneyImpl.ofCents(5000, "EUR");
+final List&lt;MonetaryAmount&gt; monetaryAmounts = asList(c, a, b);
+final Comparator&lt;MonetaryAmount&gt; comparator = MonetaryFunctions.sortNumber();//useful for all the same currency
+final List&lt;MonetaryAmount&gt; sorted = monetaryAmounts.stream().sorted(comparator).collect(toList());
+assertThat(sorted).containsExactly(a, b, c);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>By the currency and the amount:</p>
+
+ <div id="io-sphere-sdk-meta-FormattingDocumentationTest-moneySortByCurrencyAndAmount--%s" class=code-example><pre><code class='java'>final MonetaryAmount a = MoneyImpl.ofCents(-200, "EUR");
+final MonetaryAmount b = MoneyImpl.ofCents(100, "EUR");
+final MonetaryAmount c = MoneyImpl.ofCents(5000, "EUR");
+final MonetaryAmount d = MoneyImpl.ofCents(100, "USD");
+final MonetaryAmount e = MoneyImpl.ofCents(5000, "USD");
+final List&lt;MonetaryAmount&gt; monetaryAmounts = asList(c, d, a, e, b);
+final Comparator&lt;MonetaryAmount&gt; comparator =
+        MonetaryFunctions.sortCurrencyUnit().thenComparing(MonetaryFunctions.sortNumber());
+final List&lt;MonetaryAmount&gt; sorted = monetaryAmounts.stream().sorted(comparator).collect(toList());
+assertThat(sorted).isEqualTo(asList(a, b, c, d, e));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/FormattingDocumentationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
