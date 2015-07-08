@@ -19,7 +19,7 @@ public class SphereConstantAccessTokenSupplierImplTest extends IntegrationTest {
             final SphereAuthConfig authConfig = SphereAuthConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getClientId(), getSphereClientConfig().getClientSecret(), getSphereClientConfig().getAuthUrl());
 
             final SphereAccessTokenSupplier fixedTokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, newHttpClient(), true);
-            final SphereClient oneTokenClient = SphereClientFactory.of().createClient(apiConfig, fixedTokenSupplier);
+            final SphereClient oneTokenClient = SphereClient.of(apiConfig, newHttpClient(), fixedTokenSupplier);
             final int actual = oneTokenClient.execute(categoryQuery).toCompletableFuture().join().getTotal();
             assertThat(actual).isEqualTo(expected);
             oneTokenClient.close();
