@@ -1,7 +1,6 @@
 package io.sphere.sdk.errors;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpRequest;
@@ -27,12 +26,12 @@ public class SphereAuthExceptionTest extends IntegrationTest {
 
     @Test
     public void invalidCredentialsToGetToken() throws Throwable {
-        checkInvalidCredentialForAuthTokenSupplier(config -> SphereAccessTokenSupplierFactory.of().createSupplierOfOneTimeFetchingToken(config));
+        checkInvalidCredentialForAuthTokenSupplier(config -> SphereAccessTokenSupplier.ofOneTimeFetchingToken(config, newHttpClient(), true));
     }
 
     @Test
     public void invalidCredentialsToGetTokenForAutoRefresh() throws Throwable {
-        checkInvalidCredentialForAuthTokenSupplier(config -> SphereAccessTokenSupplierFactory.of().createSupplierOfAutoRefresh(config));
+        checkInvalidCredentialForAuthTokenSupplier(config -> SphereAccessTokenSupplier.ofAutoRefresh(config, newHttpClient(), true));
     }
 
     @Test

@@ -20,14 +20,18 @@ public abstract class IntegrationTest {
     protected synchronized static TestClient client() {
         if (client == null) {
             final SphereClientConfig config = getSphereClientConfig();
-            final AsyncHttpClient asyncHttpClient = new AsyncHttpClient(new AsyncHttpClientConfig.Builder().setAcceptAnyCertificate(true).build());
-            final HttpClient httpClient = AsyncHttpClientAdapter.of(asyncHttpClient);
+            final HttpClient httpClient = newHttpClient();
             final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
             final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
             final SphereClient underlyingWithDeprecationExceptions = DeprecationExceptionSphereClientDecorator.of(underlying);
             client = new TestClient(underlyingWithDeprecationExceptions);
         }
         return client;
+    }
+
+    protected static HttpClient newHttpClient() {
+        final AsyncHttpClient asyncHttpClient = new AsyncHttpClient(new AsyncHttpClientConfig.Builder().setAcceptAnyCertificate(true).build());
+        return AsyncHttpClientAdapter.of(asyncHttpClient);
     }
 
     public static SphereClientConfig getSphereClientConfig() {
