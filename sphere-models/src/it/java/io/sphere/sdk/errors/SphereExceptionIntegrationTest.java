@@ -114,7 +114,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
         client();
 
         final SphereApiConfig config = SphereApiConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getApiUrl());
-        final SphereClient client = SphereClientFactory.of().createClient(config, SphereAccessTokenSupplier.ofConstantToken("invalid-token"));
+        final SphereClient client = SphereClient.of(config, newHttpClient(),SphereAccessTokenSupplier.ofConstantToken("invalid-token"));
         expectExceptionAndClose(client, InvalidTokenException.class, client.execute(CategoryQuery.of()));
     }
 
