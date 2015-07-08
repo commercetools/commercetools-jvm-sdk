@@ -103,7 +103,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     @Test
     public void invalidCredentialsToGetToken() throws Throwable {
         final SphereAuthConfig config = SphereAuthConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getClientId(), "wrong-password", getSphereClientConfig().getAuthUrl());
-        final SphereAccessTokenSupplier supplierOfOneTimeFetchingToken = SphereAccessTokenSupplierFactory.of().createSupplierOfOneTimeFetchingToken(config);
+        final SphereAccessTokenSupplier supplierOfOneTimeFetchingToken = SphereAccessTokenSupplier.ofOneTimeFetchingToken(config, newHttpClient(), true);
         final CompletionStage<String> future = supplierOfOneTimeFetchingToken.get();
         expectException(InvalidClientCredentialsException.class, future);
         supplierOfOneTimeFetchingToken.close();
