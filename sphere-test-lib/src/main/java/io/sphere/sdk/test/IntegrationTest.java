@@ -1,7 +1,11 @@
 package io.sphere.sdk.test;
 
+import com.ning.http.client.AsyncHttpClient;
+import com.ning.http.client.AsyncHttpClientConfig;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.http.AsyncHttpClientAdapter;
+import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.queries.Query;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -15,10 +19,11 @@ public abstract class IntegrationTest {
 
     protected synchronized static TestClient client() {
         if (client == null) {
-            final SphereClientFactory factory = SphereClientFactory.of();
             final SphereClientConfig config = getSphereClientConfig();
-            final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplierFactory.of().createSupplierOfOneTimeFetchingToken(config);
-            final SphereClient underlying = factory.createClient(config, tokenSupplier);
+            final AsyncHttpClient asyncHttpClient = new AsyncHttpClient(new AsyncHttpClientConfig.Builder().setAcceptAnyCertificate(true).build());
+            final HttpClient httpClient = AsyncHttpClientAdapter.of(asyncHttpClient);
+            final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
+            final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
             final SphereClient underlyingWithDeprecationExceptions = DeprecationExceptionSphereClientDecorator.of(underlying);
             client = new TestClient(underlyingWithDeprecationExceptions);
         }
