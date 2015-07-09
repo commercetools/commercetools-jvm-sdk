@@ -1,6 +1,7 @@
 package io.sphere.sdk.producttypes.commands;
 
 import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.producttypes.ProductType;
@@ -8,9 +9,12 @@ import io.sphere.sdk.producttypes.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.Locale;
+
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductTypeUpdateCommandTest extends IntegrationTest {
@@ -73,14 +77,34 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
     public void addPlainEnumValue() throws Exception {
         withUpdateableProductType(client(), productType -> {
             final String attributeName = "size";
-            final PlainEnumValue value = PlainEnumValue.of("XXXL", "XXXL");
             assertThat(productType.getAttribute(attributeName)).isPresent();
+            final PlainEnumValue value = PlainEnumValue.of("XXXL", "XXXL");
 
-            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, AddPlainEnumValue.of(attributeName, value)));
+            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+                    AddPlainEnumValue.of(attributeName, value)));
 
             assertThat(updatedProductType.getAttribute(attributeName).get().getAttributeType())
                     .isInstanceOf(EnumType.class)
                     .matches(type -> ((EnumType)type).getValues().contains(value));
+
+            return updatedProductType;
+        });
+    }
+    @Test
+    public void addLocalizedEnumValue() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = "color";
+            assertThat(productType.getAttribute(attributeName)).isPresent();
+            final LocalizedEnumValue value =
+                    LocalizedEnumValue.of("brown", LocalizedStrings.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
+
+
+            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+                    AddLocalizedEnumValue.of(attributeName, value)));
+
+            assertThat(updatedProductType.getAttribute(attributeName).get().getAttributeType())
+                    .isInstanceOf(LocalizedEnumType.class)
+                    .matches(type -> ((LocalizedEnumType)type).getValues().contains(value));
 
             return updatedProductType;
         });
