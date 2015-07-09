@@ -17,6 +17,7 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.products.ProductFixtures.delete;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -32,11 +33,26 @@ public final class ProductTypeFixtures {
         withProductType(client, () -> ProductTypeDraft.of(name, "desc", Collections.emptyList()), user);
     }
 
+    public static void withProductType(final TestClient client, final Consumer<ProductType> user) {
+        withProductType(client, randomKey(), user);
+    }
+
     public static void withProductType(final TestClient client, final String name, final Consumer<ProductType> user) {
         withProductType(client, new TShirtProductTypeDraftSupplier(name), user);
     }
 
     public static void withProductType(final TestClient client, final Supplier<ProductTypeDraft> creator, final Consumer<ProductType> user) {
+        withUpdateableProductType(client, creator, productType -> {
+            user.accept(productType);
+            return productType;
+        });
+    }
+
+    public static void withUpdateableProductType(final TestClient client, final UnaryOperator<ProductType> user) {
+        withUpdateableProductType(client, new TShirtProductTypeDraftSupplier(randomKey()), user);
+    }
+
+    public static void withUpdateableProductType(final TestClient client, final Supplier<ProductTypeDraft> creator, final UnaryOperator<ProductType> user) {
         final SphereInternalLogger logger = SphereInternalLogger.getLogger("product-types.fixtures");
         final ProductTypeDraft productTypeDraft = creator.get();
         final String name = productTypeDraft.getName();
@@ -49,10 +65,10 @@ public final class ProductTypeFixtures {
         });
         final ProductType productType = client.execute(ProductTypeCreateCommand.of(productTypeDraft));
         logger.debug(() -> "created product type " + productType.getName() + " " + productType.getId());
-        user.accept(productType);
+        final ProductType updated = user.apply(productType);
         logger.debug(() -> "attempt to delete product type " + productType.getName() + " " + productType.getId());
         try {
-            client.execute(ProductTypeDeleteCommand.of(productType));
+            client.execute(ProductTypeDeleteCommand.of(updated));
         } catch (final Exception e) {
             final PagedQueryResult<Product> pagedQueryResult = client.execute(ProductQuery.of().byProductType(productType));
             delete(client, pagedQueryResult.getResults());
