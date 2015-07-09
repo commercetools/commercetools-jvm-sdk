@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -189,6 +189,10 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <td class="colFirst"><code>protected java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#sort">sort</a></span></code>&nbsp;</td>
 </tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected java.util.Optional&lt;java.lang.Boolean&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#withTotal">withTotal</a></span></code>&nbsp;</td>
+</tr>
 </table>
 </li>
 </ul>
@@ -244,29 +248,33 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#limit-long-">limit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#fetchTotal-boolean-">fetchTotal</a></span>(boolean&nbsp;fetchTotal)</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#limit-java.util.Optional-">limit</a></span>(java.util.Optional&lt;java.lang.Long&gt;&nbsp;limit)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#limit-long-">limit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#offset-long-">offset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#limit-java.util.Optional-">limit</a></span>(java.util.Optional&lt;java.lang.Long&gt;&nbsp;limit)</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#offset-java.util.Optional-">offset</a></span>(java.util.Optional&lt;java.lang.Long&gt;&nbsp;offset)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#offset-long-">offset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#predicate-java.util.Optional-">predicate</a></span>(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>&gt;&gt;&nbsp;predicate)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#offset-java.util.Optional-">offset</a></span>(java.util.Optional&lt;java.lang.Long&gt;&nbsp;offset)</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#predicate-io.sphere.sdk.queries.QueryPredicate-">predicate</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>&gt;&nbsp;predicate)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#predicate-java.util.Optional-">predicate</a></span>(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>&gt;&gt;&nbsp;predicate)</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#predicate-io.sphere.sdk.queries.QueryPredicate-">predicate</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>&gt;&nbsp;predicate)</code>&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#sort-java.util.List-">sort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>&gt;&gt;&nbsp;sort)</code>&nbsp;</td>
 </tr>
@@ -322,6 +330,15 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <li class="blockList">
 <h4>sort</h4>
 <pre>protected&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>&gt;&gt; sort</pre>
+</li>
+</ul>
+<a name="withTotal">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withTotal</h4>
+<pre>protected&nbsp;java.util.Optional&lt;java.lang.Boolean&gt; withTotal</pre>
 </li>
 </ul>
 <a name="limit">
@@ -488,6 +505,15 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <li class="blockList">
 <h4>limit</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;&nbsp;limit(long&nbsp;limit)</pre>
+</li>
+</ul>
+<a name="fetchTotal-boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>fetchTotal</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;&nbsp;fetchTotal(boolean&nbsp;fetchTotal)</pre>
 </li>
 </ul>
 <a name="offset-java.util.Optional-">

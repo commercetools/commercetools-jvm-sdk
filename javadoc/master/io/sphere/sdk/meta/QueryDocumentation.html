@@ -406,15 +406,12 @@ import io.sphere.sdk.queries.PagedResult;
 import org.junit.Test;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 </code></pre><pre><code class='java'>public class QueryAllTest extends QueryAllBase {
-    //yes, this is a small page size, but since this is tested,
-    //we create not million products for test execution speed reasons
-    //in production code it would higher
+    //in production code it would higher #smalltestset
     private static final int PAGE_SIZE = 5;
 
     @Test
@@ -425,9 +422,9 @@ import static org.assertj.core.api.Assertions.assertThat;
                 .withPredicate(m -&gt; m.productType().is(productType))
                 //important, we sort by id, otherwise id &gt; $lastId would not make sense
                 .withSort(m -&gt; m.id().sort().asc())
-                .withLimit(PAGE_SIZE);
-        final CompletionStage&lt;List&lt;Product&gt;&gt; resultStage = sphereClient().execute(seedQuery)
-                .thenCompose(r -&gt; queryStep(seedQuery, new LinkedList&lt;&gt;(), r));
+                .withLimit(PAGE_SIZE)
+                .withFetchTotal(false);//saves also resources and time
+        final CompletionStage&lt;List&lt;Product&gt;&gt; resultStage = findNext(seedQuery, seedQuery, new LinkedList&lt;&gt;());
         final List&lt;Product&gt; actualProducts = resultStage.toCompletableFuture().join();
         assertThat(actualProducts).hasSize(createdProducts.size());
         //!!! the underlying database has a different algorithm to sort by ID, it is a UUID, which differs from String sorting
@@ -435,21 +432,20 @@ import static org.assertj.core.api.Assertions.assertThat;
         assertThat(javaSortedActual).isEqualTo(createdProducts);
     }
 
-    public CompletionStage&lt;List&lt;Product&gt;&gt; queryStep(final ProductQuery seedQuery, final List&lt;Product&gt; accumulator,
-                                                    final PagedQueryResult&lt;Product&gt; pagedQueryResult) {
-        accumulator.addAll(pagedQueryResult.getResults());
-
-        final Optional&lt;String&gt; lastProductIdOptional = getIdForNextQuery(pagedQueryResult);
-        return lastProductIdOptional.map(lastId -&gt; {
-            //here is the important part, we don't use offset, but query id &gt; $lastId
-            //since we have a predicate for a product type, we connect them via and
-            //if no predicate is given, use {@code withPredicate(m -&gt; m.id().isGreaterThan(lastId))};
-            final ProductQuery sphereRequest = seedQuery
-                    .withPredicate(m -&gt; seedQuery.predicate().get().and(m.id().isGreaterThan(lastId)));
-            final CompletionStage&lt;PagedQueryResult&lt;Product&gt;&gt; execute = sphereClient().execute(sphereRequest);
-            return execute.thenCompose(r -&gt; queryStep(seedQuery, accumulator, r));
-        })
-        .orElseGet(() -&gt; CompletableFuture.completedFuture(accumulator));
+    private CompletionStage&lt;List&lt;Product&gt;&gt; findNext(final ProductQuery seedQuery, final ProductQuery query, final List&lt;Product&gt; products) {
+        final CompletionStage&lt;PagedQueryResult&lt;Product&gt;&gt; pageResult = sphereClient().execute(query);
+        return pageResult.thenCompose(page -&gt; {
+            final List&lt;Product&gt; results = page.getResults();
+            products.addAll(results);
+            final boolean isLastQueryPage = results.size() &lt; PAGE_SIZE;
+            if (isLastQueryPage) {
+                return CompletableFuture.completedFuture(products);
+            } else {
+                final String lastId = getIdForNextQuery(page);
+                return findNext(seedQuery, seedQuery
+                        .withPredicate(m -&gt; seedQuery.predicate().get().and(m.id().isGreaterThan(lastId))), products);
+            }
+        });
     }
 
     /**
@@ -458,12 +454,10 @@ import static org.assertj.core.api.Assertions.assertThat;
      * @param pagedResult the result to extract the id
      * @return the last ID, if present
      */
-    private &lt;T extends Identifiable&lt;T&gt;&gt; Optional&lt;String&gt; getIdForNextQuery(final PagedResult&lt;T&gt; pagedResult) {
+    private &lt;T extends Identifiable&lt;T&gt;&gt; String getIdForNextQuery(final PagedResult&lt;T&gt; pagedResult) {
         final List&lt;T&gt; results = pagedResult.getResults();
-        return Optional.of(results.size() - 1)
-                .filter(index -&gt; index &gt;= 0 &amp;&amp; !pagedResult.isLast())
-                .map(index -&gt; results.get(index))
-                .map(p -&gt; p.getId());
+        final int indexLastElement = results.size() - 1;
+        return results.get(indexLastElement).getId();
     }
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/queries/QueryAllTest.java" target="_blank">test code</a>.</pre></div>
