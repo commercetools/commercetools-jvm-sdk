@@ -34,6 +34,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     final E expansionModel;
     final Optional<QueryPredicate<T>> predicate;
     final List<QuerySort<T>> sort;
+    final Optional<Boolean> withTotal;
     final Optional<Long> limit;
     final Optional<Long> offset;
     final List<ExpansionPath<T>> expansionPaths;
@@ -42,7 +43,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
     final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction;
 
-    public MetaModelQueryDslImpl(final Optional<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, final Optional<Long> limit,
+    public MetaModelQueryDslImpl(final Optional<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, final Optional<Boolean> fetchTotal, final Optional<Long> limit,
                                  final Optional<Long> offset, final String endpoint,
                                  final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
                                  final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters,
@@ -55,6 +56,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         this.queryDslBuilderFunction = requireNonNull(queryDslBuilderFunction);
         this.predicate = requireNonNull(predicate);
         this.sort = requireNonNull(sort);
+        this.withTotal = requireNonNull(fetchTotal);
         this.limit = requireNonNull(limit);
         this.offset = requireNonNull(offset);
         this.endpoint = requireNonNull(endpoint);
@@ -66,7 +68,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction, final List<HttpQueryParameter> additionalQueryParameters) {
-        this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
+        this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Boolean>empty(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
                 Collections.emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
@@ -75,7 +77,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     public MetaModelQueryDslImpl(final MetaModelQueryDslBuilder<T, C, Q, E> builder) {
-        this(builder.predicate, builder.sort, builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters, builder.queryModel, builder.expansionModel, builder.queryDslBuilderFunction);
+        this(builder.predicate, builder.sort, builder.withTotal, builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters, builder.queryModel, builder.expansionModel, builder.queryDslBuilderFunction);
     }
 
     @Override
@@ -111,6 +113,11 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     @Override
     public C withSortMulti(final Function<Q, List<QuerySort<T>>> m) {
         return withSort(m.apply(queryModel));
+    }
+
+    @Override
+    public C withFetchTotal(final boolean fetchTotal) {
+        return copyBuilder().fetchTotal(fetchTotal).build();
     }
 
     @Override
@@ -151,6 +158,11 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     @Override
     public List<QuerySort<T>> sort() {
         return sort;
+    }
+
+    @Override
+    public Optional<Boolean> fetchTotal() {
+        return withTotal;
     }
 
     @Override

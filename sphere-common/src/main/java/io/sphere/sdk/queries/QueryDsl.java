@@ -30,6 +30,8 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, R
         return withSort(asList(sort));
     }
 
+    C withFetchTotal(final boolean fetchTotal);
+
     C withLimit(final long limit);
 
     /**

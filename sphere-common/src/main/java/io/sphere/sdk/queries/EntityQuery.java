@@ -24,6 +24,8 @@ public interface EntityQuery<T> extends Query<T>, ReferenceExpandeable<T> {
      */
     List<QuerySort<T>> sort();
 
+    Optional<Boolean> fetchTotal();
+
     Optional<Long> limit();
 
     Optional<Long> offset();
