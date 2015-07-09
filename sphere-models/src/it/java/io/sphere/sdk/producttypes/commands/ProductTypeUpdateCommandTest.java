@@ -1,10 +1,8 @@
 package io.sphere.sdk.producttypes.commands;
 
-import io.sphere.sdk.attributes.AttributeDefinition;
-import io.sphere.sdk.attributes.AttributeDefinitionBuilder;
-import io.sphere.sdk.attributes.AttributeType;
-import io.sphere.sdk.attributes.TextType;
+import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
@@ -66,6 +64,23 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeDefinitionLabel.of(attributeName, label)));
 
             assertThat(updatedProductType.getAttribute(attributeName).get().getLabel()).isEqualTo(label);
+
+            return updatedProductType;
+        });
+    }
+
+    @Test
+    public void addPlainEnumValue() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = "size";
+            final PlainEnumValue value = PlainEnumValue.of("XXXL", "XXXL");
+            assertThat(productType.getAttribute(attributeName)).isPresent();
+
+            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, AddPlainEnumValue.of(attributeName, value)));
+
+            assertThat(updatedProductType.getAttribute(attributeName).get().getAttributeType())
+                    .isInstanceOf(EnumType.class)
+                    .matches(type -> ((EnumType)type).getValues().contains(value));
 
             return updatedProductType;
         });
