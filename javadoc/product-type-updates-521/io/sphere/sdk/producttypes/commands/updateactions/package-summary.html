@@ -189,6 +189,27 @@
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeLocalizedEnumValueOrder.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeLocalizedEnumValueOrder</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeLocalizedEnumValueOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
+    final String attributeName = "color";
+    final LocalizedEnumType attributeType = (LocalizedEnumType) productType.getAttribute(attributeName).get()
+            .getAttributeType();
+    final List&lt;LocalizedEnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
+
+    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+            ChangeLocalizedEnumValueOrder.of(attributeName, values)));
+
+    final LocalizedEnumType updatedType = (LocalizedEnumType) updatedProductType.getAttribute(attributeName)
+            .get().getAttributeType();
+    assertThat(updatedType.getValues()).isEqualTo(values);
+
+    return updatedProductType;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeName</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
@@ -201,17 +222,20 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangePlainEnumValueOrder.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangePlainEnumValueOrder</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changePlainEnumValueOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
     final String attributeName = "size";
-    final EnumType attributeType = (EnumType) productType.getAttribute(attributeName).get().getAttributeType();
+    final EnumType attributeType = (EnumType) productType.getAttribute(attributeName)
+            .get().getAttributeType();
     final List&lt;PlainEnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
 
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangePlainEnumValueOrder.of(attributeName, values)));
+    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+            ChangePlainEnumValueOrder.of(attributeName, values)));
 
-    final EnumType updatedType = (EnumType) updatedProductType.getAttribute(attributeName).get().getAttributeType();
+    final EnumType updatedType = (EnumType) updatedProductType
+            .getAttribute(attributeName).get().getAttributeType();
     assertThat(updatedType.getValues()).isEqualTo(values);
 
     return updatedProductType;
@@ -219,7 +243,7 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/RemoveAttributeDefinition.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">RemoveAttributeDefinition</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addAttributeDefinition--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {

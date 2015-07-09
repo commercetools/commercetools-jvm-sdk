@@ -122,12 +122,15 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changePlainEnumValueOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
     final String attributeName = "size";
-    final EnumType attributeType = (EnumType) productType.getAttribute(attributeName).get().getAttributeType();
+    final EnumType attributeType = (EnumType) productType.getAttribute(attributeName)
+            .get().getAttributeType();
     final List&lt;PlainEnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
 
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangePlainEnumValueOrder.of(attributeName, values)));
+    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+            ChangePlainEnumValueOrder.of(attributeName, values)));
 
-    final EnumType updatedType = (EnumType) updatedProductType.getAttribute(attributeName).get().getAttributeType();
+    final EnumType updatedType = (EnumType) updatedProductType
+            .getAttribute(attributeName).get().getAttributeType();
     assertThat(updatedType.getValues()).isEqualTo(values);
 
     return updatedProductType;
