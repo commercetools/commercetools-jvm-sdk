@@ -1,7 +1,7 @@
 package io.sphere.sdk.producttypes.commands;
 
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.producttypes.commands.updateactions.ChangeName;
+import io.sphere.sdk.producttypes.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -17,6 +17,17 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             final ProductType updatedProductType =
                     execute(ProductTypeUpdateCommand.of(productType, ChangeName.of(name)));
             assertThat(updatedProductType.getName()).isEqualTo(name);
+            return updatedProductType;
+        });
+    }
+
+    @Test
+    public void changeDescription() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String description = randomKey();
+            final ProductType updatedProductType =
+                    execute(ProductTypeUpdateCommand.of(productType, ChangeDescription.of(description)));
+            assertThat(updatedProductType.getDescription()).isEqualTo(description);
             return updatedProductType;
         });
     }
