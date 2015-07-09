@@ -943,6 +943,17 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
+<dt><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">ChangeDescription</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
+    final String description = randomKey();
+    final ProductType updatedProductType =
+            execute(ProductTypeUpdateCommand.of(productType, ChangeDescription.of(description)));
+    assertThat(updatedProductType.getDescription()).isEqualTo(description);
+    return updatedProductType;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/ChangeEmail.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">ChangeEmail</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
 <div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-changeEmail--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
@@ -2808,6 +2819,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductDraft.html#getDescription--">getDescription()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductDraft.html" title="interface in io.sphere.sdk.products">ProductDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductProjection.html#getDescription--">getDescription()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeDescription.html#getDescription--">getDescription()</a></span> - Method in class io.sphere.sdk.producttypes.commands.updateactions.<a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeDescription</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductType.html#getDescription--">getDescription()</a></span> - Method in interface io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a></dt>
 <dd>&nbsp;</dd>
@@ -6550,6 +6563,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.commands.UpdateAction-">of(Versioned&lt;ProductType&gt;, UpdateAction&lt;ProductType&gt;)</a></span> - Static method in class io.sphere.sdk.producttypes.commands.<a href="io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeDescription.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.producttypes.commands.updateactions.<a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeDescription</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeName.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.producttypes.commands.updateactions.<a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeName</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.producttypes.expansion.<a href="io/sphere/sdk/producttypes/expansion/ProductTypeExpansionModel.html" title="class in io.sphere.sdk.producttypes.expansion">ProductTypeExpansionModel</a></dt>
@@ -7792,7 +7807,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><a href="io/sphere/sdk/producttypes/queries/ProductTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries"><span class="typeNameLink">ProductTypeQueryModel</span></a> - Class in <a href="io/sphere/sdk/producttypes/queries/package-summary.html">io.sphere.sdk.producttypes.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><span class="typeNameLink">ProductTypeUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/package-summary.html">io.sphere.sdk.producttypes.commands</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeDescription.html">ChangeDescription</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li></ul></div>
+</dd>
 <dt><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/products/commands/package-summary.html">io.sphere.sdk.products.commands</a></dt>
 <dd>
 <div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddExternalImage.html">AddExternalImage</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/AddVariant.html">AddVariant</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/MetaAttributesUpdateActions.html">MetaAttributesUpdateActions</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/RemoveFromCategory.html">RemoveFromCategory</a></li><li><a href="updateactions/RemoveImage.html">RemoveImage</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/RemoveVariant.html">RemoveVariant</a></li><li><a href="updateactions/RevertStagedChanges.html">RevertStagedChanges</a></li><li><a href="updateactions/SetAttribute.html">SetAttribute</a></li><li><a href="updateactions/SetAttributeInAllVariants.html">SetAttributeInAllVariants</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/SetMetaDescription.html">SetMetaDescription</a></li><li><a href="updateactions/SetMetaKeywords.html">SetMetaKeywords</a></li><li><a href="updateactions/SetMetaTitle.html">SetMetaTitle</a></li><li><a href="updateactions/SetSearchKeywords.html">SetSearchKeywords</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li></ul></div>

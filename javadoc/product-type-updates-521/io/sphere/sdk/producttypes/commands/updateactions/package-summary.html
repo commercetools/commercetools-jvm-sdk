@@ -82,6 +82,19 @@
 </tr>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeDescription</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
+    final String description = randomKey();
+    final ProductType updatedProductType =
+            execute(ProductTypeUpdateCommand.of(productType, ChangeDescription.of(description)));
+    assertThat(updatedProductType.getDescription()).isEqualTo(description);
+    return updatedProductType;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeName</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
