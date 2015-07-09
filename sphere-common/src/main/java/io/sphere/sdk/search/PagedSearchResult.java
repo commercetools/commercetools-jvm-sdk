@@ -12,7 +12,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
     private final Map<String, FacetResult> facets;
 
     @JsonCreator
-    PagedSearchResult(final int offset, final int total, final List<T> results, final Map<String, FacetResult> facets) {
+    PagedSearchResult(final Integer offset, final Integer total, final List<T> results, final Map<String, FacetResult> facets) {
         super(offset, total, results);
         this.facets = facets;
     }

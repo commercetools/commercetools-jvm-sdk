@@ -45,7 +45,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
     }
 
     @Override
-    public int getOffset() {
+    public Integer getOffset() {
         return super.getOffset();
     }
 
@@ -55,7 +55,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
     }
 
     @Override
-    public int getTotal() {
+    public Integer getTotal() {
         return super.getTotal();
     }
 
