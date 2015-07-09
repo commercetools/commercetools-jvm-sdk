@@ -203,6 +203,23 @@
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </dd>
+<dt><a href="io/sphere/sdk/producttypes/commands/updateactions/AddPlainEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">AddPlainEnumValue</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addPlainEnumValue--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
+    final String attributeName = "size";
+    final PlainEnumValue value = PlainEnumValue.of("XXXL", "XXXL");
+    assertThat(productType.getAttribute(attributeName)).isPresent();
+
+    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, AddPlainEnumValue.of(attributeName, value)));
+
+    assertThat(updatedProductType.getAttribute(attributeName).get().getAttributeType())
+            .isInstanceOf(EnumType.class)
+            .matches(type -&gt; ((EnumType)type).getValues().contains(value));
+
+    return updatedProductType;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/AddPrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">AddPrice</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
 <div class="block">Adds the given price to the product variant's prices set.</div>
@@ -2527,6 +2544,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Describes how an attribute or a set of attributes should be validated across all variants of a product.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/updateactions/AddPlainEnumValue.html#getAttributeName--">getAttributeName()</a></span> - Method in class io.sphere.sdk.producttypes.commands.updateactions.<a href="io/sphere/sdk/producttypes/commands/updateactions/AddPlainEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">AddPlainEnumValue</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeAttributeDefinitionLabel.html#getAttributeName--">getAttributeName()</a></span> - Method in class io.sphere.sdk.producttypes.commands.updateactions.<a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeAttributeDefinitionLabel.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeAttributeDefinitionLabel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ProductVariantImportDraft.html#getAttributes--">getAttributes()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ProductVariantImportDraft.html" title="interface in io.sphere.sdk.orders">ProductVariantImportDraft</a></dt>
@@ -4100,6 +4119,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Price.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/updateactions/AddPlainEnumValue.html#getValue--">getValue()</a></span> - Method in class io.sphere.sdk.producttypes.commands.updateactions.<a href="io/sphere/sdk/producttypes/commands/updateactions/AddPlainEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">AddPlainEnumValue</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/attributes/EnumType.html#getValues--">getValues()</a></span> - Method in class io.sphere.sdk.attributes.<a href="io/sphere/sdk/attributes/EnumType.html" title="class in io.sphere.sdk.attributes">EnumType</a></dt>
 <dd>&nbsp;</dd>
@@ -6606,6 +6627,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/updateactions/AddAttributeDefinition.html#of-io.sphere.sdk.attributes.AttributeDefinition-">of(AttributeDefinition)</a></span> - Static method in class io.sphere.sdk.producttypes.commands.updateactions.<a href="io/sphere/sdk/producttypes/commands/updateactions/AddAttributeDefinition.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">AddAttributeDefinition</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/updateactions/AddPlainEnumValue.html#of-java.lang.String-io.sphere.sdk.models.PlainEnumValue-">of(String, PlainEnumValue)</a></span> - Static method in class io.sphere.sdk.producttypes.commands.updateactions.<a href="io/sphere/sdk/producttypes/commands/updateactions/AddPlainEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">AddPlainEnumValue</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeAttributeDefinitionLabel.html#of-java.lang.String-io.sphere.sdk.models.LocalizedStrings-">of(String, LocalizedStrings)</a></span> - Static method in class io.sphere.sdk.producttypes.commands.updateactions.<a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeAttributeDefinitionLabel.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeAttributeDefinitionLabel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeDescription.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.producttypes.commands.updateactions.<a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeDescription</a></dt>
@@ -7855,7 +7878,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="class in io.sphere.sdk.producttypes.commands"><span class="typeNameLink">ProductTypeUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/package-summary.html">io.sphere.sdk.producttypes.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddAttributeDefinition.html">AddAttributeDefinition</a></li><li><a href="updateactions/ChangeAttributeDefinitionLabel.html">ChangeAttributeDefinitionLabel</a></li><li><a href="updateactions/ChangeDescription.html">ChangeDescription</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/RemoveAttributeDefinition.html">RemoveAttributeDefinition</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddAttributeDefinition.html">AddAttributeDefinition</a></li><li><a href="updateactions/AddPlainEnumValue.html">AddPlainEnumValue</a></li><li><a href="updateactions/ChangeAttributeDefinitionLabel.html">ChangeAttributeDefinitionLabel</a></li><li><a href="updateactions/ChangeDescription.html">ChangeDescription</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/RemoveAttributeDefinition.html">RemoveAttributeDefinition</a></li></ul></div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductUpdateCommand</span></a> - Class in <a href="io/sphere/sdk/products/commands/package-summary.html">io.sphere.sdk.products.commands</a></dt>
 <dd>
