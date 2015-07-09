@@ -425,7 +425,8 @@ import static org.assertj.core.api.Assertions.assertThat;
                 .withPredicate(m -&gt; m.productType().is(productType))
                 //important, we sort by id, otherwise id &gt; $lastId would not make sense
                 .withSort(m -&gt; m.id().sort().asc())
-                .withLimit(PAGE_SIZE);
+                .withLimit(PAGE_SIZE)
+                .withFetchTotal(false);
         final CompletionStage&lt;List&lt;Product&gt;&gt; resultStage = sphereClient().execute(seedQuery)
                 .thenCompose(r -&gt; queryStep(seedQuery, new LinkedList&lt;&gt;(), r));
         final List&lt;Product&gt; actualProducts = resultStage.toCompletableFuture().join();
