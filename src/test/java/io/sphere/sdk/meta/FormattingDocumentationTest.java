@@ -12,6 +12,10 @@ import javax.money.format.AmountFormatQueryBuilder;
 import javax.money.format.MonetaryAmountFormat;
 import javax.money.format.MonetaryFormats;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.*;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
@@ -109,5 +113,48 @@ public class FormattingDocumentationTest {
                 MonetaryFunctions.sortCurrencyUnit().thenComparing(MonetaryFunctions.sortNumber());
         final List<MonetaryAmount> sorted = monetaryAmounts.stream().sorted(comparator).collect(toList());
         assertThat(sorted).isEqualTo(asList(a, b, c, d, e));
+    }
+
+    @Test
+    public void doNotUseSimpleDateFormat() throws Exception {
+        final LocalDate localDate = LocalDate.now();
+        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd.MM.yy");
+        assertThatThrownBy(() -> simpleDateFormat.format(localDate))
+        .isInstanceOf(IllegalArgumentException.class)
+        .hasMessageContaining("Cannot format given Object as a Date");
+    }
+
+    @Test
+    public void formatLocalDate() throws Exception {
+        final LocalDate localDate = LocalDate.of(2015, 7, 25);
+        assertThat(localDate.format(DateTimeFormatter.ofPattern("dd.MM.yy"))).isEqualTo("25.07.15");
+        assertThat(localDate.format(DateTimeFormatter.ISO_LOCAL_DATE)).isEqualTo("2015-07-25");
+    }
+
+    @Test
+    public void formatLocalTime() throws Exception {
+        final LocalTime localTime = LocalTime.of(16, 35);
+        assertThat(localTime.format(DateTimeFormatter.ofPattern("HH:mm"))).isEqualTo("16:35");
+        assertThat(localTime.format(DateTimeFormatter.ISO_LOCAL_TIME)).isEqualTo("16:35:00");
+    }
+
+    @Test
+    public void formatZonedDateTime() throws Exception {
+        final String timeAsString = "2015-07-09T07:46:40.230Z";//typical date format from SPHERE.IO
+        final ZonedDateTime dateTime = ZonedDateTime.parse(timeAsString);
+        final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+        assertThat(dateTime.format(formatter)).isEqualTo("09.07.2015 07:46");
+        assertThat(dateTime.withZoneSameInstant(ZoneOffset.UTC).format(formatter))
+                .overridingErrorMessage("Timezone is UTC, so without transforming the value into the right timezone, " +
+                        "the displayed date is not accurate")
+                .isEqualTo("09.07.2015 07:46");
+        assertThat(dateTime.withZoneSameInstant(ZoneId.of("Europe/Berlin")).format(formatter))
+                .isEqualTo("09.07.2015 09:46");
+        assertThat(dateTime.withZoneSameInstant(ZoneId.of("Europe/London")).format(formatter))
+                .isEqualTo("09.07.2015 08:46");
+        assertThat(dateTime.withZoneSameInstant(ZoneId.of("America/New_York")).format(formatter))
+                .isEqualTo("09.07.2015 03:46");
+        assertThat(dateTime.withZoneSameInstant(ZoneId.of("America/Los_Angeles")).format(formatter))
+                .isEqualTo("09.07.2015 00:46");
     }
 }

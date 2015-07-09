@@ -2,9 +2,25 @@ package io.sphere.sdk.meta;
 
 import org.javamoney.moneta.format.CurrencyStyle;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  *
  * <h3 id="temporal-data">Temporal Data</h3>
+ *
+ * <h4 id="formatting-temporal-data"></h4>
+ *
+ * <p>Do not use {@link java.text.SimpleDateFormat}, it does not work with all temporal data types of the SDK:</p>
+ *
+ * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#doNotUseSimpleDateFormat()}
+ *
+ * Use {@link java.time.LocalDate#format(DateTimeFormatter)} with {@link DateTimeFormatter} instead:
+ *
+ * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#formatLocalDate()}
+ * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#formatLocalTime()}
+ * {@include.example io.sphere.sdk.meta.FormattingDocumentationTest#formatZonedDateTime()}
+ *
+ *
  * <h3 id="money">Monetary Data</h3>
  *
  * The SDK has a dependency to Moneta, the reference implementation for <a href="https://java.net/projects/javamoney" target="_blank">JSR 354 - Currency and Money</a>.
