@@ -7,8 +7,10 @@ import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.ListUtils;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Locale;
 
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
@@ -90,6 +92,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             return updatedProductType;
         });
     }
+
     @Test
     public void addLocalizedEnumValue() throws Exception {
         withUpdateableProductType(client(), productType -> {
@@ -105,6 +108,19 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             assertThat(updatedProductType.getAttribute(attributeName).get().getAttributeType())
                     .isInstanceOf(LocalizedEnumType.class)
                     .matches(type -> ((LocalizedEnumType)type).getValues().contains(value));
+
+            return updatedProductType;
+        });
+    }
+
+    @Test
+    public void changeAttributeOrder() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+
+            final List<AttributeDefinition> attributeDefinitions = ListUtils.reverse(productType.getAttributes());
+            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeOrder.of(attributeDefinitions)));
+
+            assertThat(updatedProductType.getAttributes()).isEqualTo(attributeDefinitions);
 
             return updatedProductType;
         });
