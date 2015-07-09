@@ -161,6 +161,21 @@
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeAttributeOrder.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeAttributeOrder</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeAttributeOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
+
+    final List&lt;AttributeDefinition&gt; attributeDefinitions = ListUtils.reverse(productType.getAttributes());
+    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeOrder.of(attributeDefinitions)));
+
+    assertThat(updatedProductType.getAttributes()).isEqualTo(attributeDefinitions);
+
+    return updatedProductType;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeDescription</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
@@ -173,7 +188,7 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeName</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
@@ -186,7 +201,7 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/RemoveAttributeDefinition.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">RemoveAttributeDefinition</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addAttributeDefinition--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
