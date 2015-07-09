@@ -10,13 +10,13 @@ import io.sphere.sdk.producttypes.ProductType;
 public class RemoveAttributeDefinition extends UpdateAction<ProductType> {
     private final String name;
 
-    private RemoveAttributeDefinition(final String name) {
+    private RemoveAttributeDefinition(final String attributeName) {
         super("removeAttributeDefinition");
-        this.name = name;
+        this.name = attributeName;
     }
 
-    public static RemoveAttributeDefinition of(final String name) {
-        return new RemoveAttributeDefinition(name);
+    public static RemoveAttributeDefinition of(final String attributeName) {
+        return new RemoveAttributeDefinition(attributeName);
     }
 
     public String getName() {

@@ -55,4 +55,19 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             return withoutFoostring;
         });
     }
+
+    @Test
+    public void changeLabel() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = "color";
+            assertThat(productType.getAttribute(attributeName)).isPresent();
+            final LocalizedStrings label = LocalizedStrings.of(ENGLISH, "the color label");
+
+            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeDefinitionLabel.of(attributeName, label)));
+
+            assertThat(updatedProductType.getAttribute(attributeName).get().getLabel()).isEqualTo(label);
+
+            return updatedProductType;
+        });
+    }
 }
