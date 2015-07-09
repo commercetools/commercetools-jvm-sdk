@@ -4,9 +4,11 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.LocalizedStringsEntry;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
+import org.assertj.core.api.AbstractIntegerAssert;
 import org.junit.Test;
 
 import java.util.Locale;
+import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.queries.QuerySortDirection.DESC;
@@ -44,5 +46,20 @@ public class CategoryQueryTest extends IntegrationTest {
                 assertThat(category1IsPresent).isFalse();
             })
         );
+    }
+
+    @Test
+    public void withFetchTotalFalseRemovesTotalFromOutput() throws Exception {
+        withCategory(client(), category -> {
+            final CategoryQuery baseQuery = CategoryQuery.of().byId(category.getId()).withLimit(1);
+            checkTotalInQueryResultOf(baseQuery, total -> total.isNotNull().isEqualTo(1));
+            checkTotalInQueryResultOf(baseQuery.withFetchTotal(true), total -> total.isNotNull().isEqualTo(1));
+            checkTotalInQueryResultOf(baseQuery.withFetchTotal(false), total -> total.isNull());
+        });
+
+    }
+
+    private static void checkTotalInQueryResultOf(final Query<Category> query, final Consumer<AbstractIntegerAssert<?>> check) {
+        check.accept(assertThat(execute(query).getTotal()));
     }
 }

@@ -6,4 +6,5 @@ final class QueryParameterKeys {
     static final String LIMIT = "limit";
     static final String OFFSET = "offset";
     static final String EXPAND = "expand";
+    static final String WITH_TOTAL = "withTotal";
 }

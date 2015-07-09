@@ -25,6 +25,7 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
 
     protected Optional<QueryPredicate<T>> predicate = Optional.empty();
     protected List<QuerySort<T>> sort = sortByIdList();
+    protected Optional<Boolean> withTotal = Optional.empty();
     protected Optional<Long> limit = Optional.empty();
     protected Optional<Long> offset = Optional.empty();
     protected List<ExpansionPath<T>> expansionPaths = Collections.emptyList();
@@ -52,6 +53,7 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
         offset = template.offset();
         expansionPaths = template.expansionPaths();
         additionalQueryParameters = template.additionalQueryParameters();
+        withTotal = template.fetchTotal();
     }
 
     public MetaModelQueryDslBuilder<T, C, Q, E> predicate(final Optional<QueryPredicate<T>> predicate) {
@@ -76,6 +78,11 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
 
     public MetaModelQueryDslBuilder<T, C, Q, E> limit(final long limit) {
         return limit(Optional.of(limit));
+    }
+
+    public MetaModelQueryDslBuilder<T, C, Q, E> fetchTotal(final boolean fetchTotal) {
+        this.withTotal = Optional.of(fetchTotal);
+        return this;
     }
 
     public MetaModelQueryDslBuilder<T, C, Q, E> offset(final Optional<Long> offset) {

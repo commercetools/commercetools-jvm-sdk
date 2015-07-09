@@ -7,11 +7,11 @@ import java.util.List;
 import java.util.Optional;
 
 public abstract class PagedResult<T> extends Base {
-    protected final int offset;
-    protected final int total;
+    protected final Integer offset;
+    protected final Integer total;
     protected final List<T> results;
 
-    public PagedResult(final int offset, final int total, final List<T> results) {
+    public PagedResult(final Integer offset, final Integer total, final List<T> results) {
         this.offset = offset;
         this.total = total;
         this.results = results;
@@ -21,7 +21,7 @@ public abstract class PagedResult<T> extends Base {
       * The offset supplied by the client or the server default.
       * @return the amount of items (not pages) skipped
       */
-     public int getOffset() {
+     public Integer getOffset() {
          return offset;
      }
 
@@ -38,7 +38,7 @@ public abstract class PagedResult<T> extends Base {
       * Total is greater or equal to count.
       * @return the number of elements that can be fetched matching the criteria
       */
-     public int getTotal() {
+     public Integer getTotal() {
          return total;
      }
 
@@ -66,6 +66,9 @@ public abstract class PagedResult<T> extends Base {
       * @return true if offset is 0 otherwise false
       */
      public boolean isFirst() {
+         if (getOffset() == null) {
+             throw new UnsupportedOperationException("Can only be used if the offset is known.");
+         }
          return getOffset() == 0;
      }
 
@@ -74,6 +77,9 @@ public abstract class PagedResult<T> extends Base {
       * @return true if doing a request with an incremented offset parameter would cause an empty result otherwise false.
       */
      public boolean isLast() {
+         if (getOffset() == null || getTotal() == null) {
+             throw new UnsupportedOperationException("Can only be used if the offset & total is known.");
+         }
          //currently counting the total amount is performed in a second database call, so it is possible
          //that the left side can be greater than total
          return getOffset() + size() >= getTotal();
