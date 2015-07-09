@@ -125,4 +125,20 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             return updatedProductType;
         });
     }
+
+    @Test
+    public void changePlainEnumValueOrder() throws Exception {
+        withUpdateableProductType(client(), productType -> {
+            final String attributeName = "size";
+            final EnumType attributeType = (EnumType) productType.getAttribute(attributeName).get().getAttributeType();
+            final List<PlainEnumValue> values = ListUtils.reverse(attributeType.getValues());
+
+            final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangePlainEnumValueOrder.of(attributeName, values)));
+
+            final EnumType updatedType = (EnumType) updatedProductType.getAttribute(attributeName).get().getAttributeType();
+            assertThat(updatedType.getValues()).isEqualTo(values);
+
+            return updatedProductType;
+        });
+    }
 }
