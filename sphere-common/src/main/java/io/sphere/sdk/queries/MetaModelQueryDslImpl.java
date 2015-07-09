@@ -207,6 +207,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         sort().forEach(sort -> builder.add(SORT, sort.toSphereSort(), urlEncoded));
         limit().ifPresent(limit -> builder.add(LIMIT, limit.toString(), urlEncoded));
         offset().ifPresent(offset -> builder.add(OFFSET, offset.toString(), urlEncoded));
+        fetchTotal().ifPresent(withTotal -> builder.add(WITH_TOTAL, withTotal.toString(), urlEncoded));
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
         additionalQueryParameters().forEach(parameter -> builder.add(parameter.getKey(), parameter.getValue(), urlEncoded));
         return builder.toStringWithOptionalQuestionMark();
@@ -237,6 +238,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
                 ", resultMapper=" + resultMapper +
                 ", readablePath=" + readablePath +
                 ", request=" + httpRequestIntent() +
+                ", withTotal=" + withTotal +
                 '}';
     }
 

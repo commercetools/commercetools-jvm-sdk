@@ -29,7 +29,8 @@ public class QueryAllTest extends QueryAllBase {
                 .withPredicate(m -> m.productType().is(productType))
                 //important, we sort by id, otherwise id > $lastId would not make sense
                 .withSort(m -> m.id().sort().asc())
-                .withLimit(PAGE_SIZE);
+                .withLimit(PAGE_SIZE)
+                .withFetchTotal(false);
         final CompletionStage<List<Product>> resultStage = sphereClient().execute(seedQuery)
                 .thenCompose(r -> queryStep(seedQuery, new LinkedList<>(), r));
         final List<Product> actualProducts = resultStage.toCompletableFuture().join();
