@@ -30,8 +30,8 @@ object Build extends Build {
     .settings(unidocProjectFilter in (JavaUnidoc, unidoc) := inAnyProject -- inProjects(`sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-internal-test`))//need to exclude duplicated classes or "javadoc: error - com.sun.tools.doclets.internal.toolkit.util.DocletAbortException: java.lang.NullPointerException" appears
     .settings(documentationSettings:_*)
     .settings(commonSettings:_*)
-    .aggregate(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-ahc-1_9`)
-    .dependsOn(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`)
+    .aggregate(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-convenience`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-ahc-1_9`)
+    .dependsOn(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-convenience`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`)
 
   lazy val `sphere-java-client-core` = project.configs(IntegrationTest).dependsOn(`sphere-common`).settings(commonSettings:_*)
     .settings(libraryDependencies ++= allTestLibs.map(_ % "test,it"))
@@ -86,6 +86,11 @@ object Build extends Build {
     .dependsOn(`sphere-common`, `sphere-java-client-apache-async` % "test,it", `sphere-test-lib` % "test,it")
     .settings(commonSettings:_*)
     .settings(libraryDependencies += `gson` % "test,it")
+
+  lazy val `sphere-convenience` = project.configs(IntegrationTest)
+    .dependsOn(`sphere-common`, `sphere-java-client-core`, `sphere-test-lib` % "test,it", `sphere-models` % "test,it")
+    .settings(commonSettings:_*)
+    .settings(libraryDependencies += `reactive-streams`)
 
   lazy val `sphere-test-lib` = project.configs(IntegrationTest).dependsOn(`sphere-java-client`, `sphere-common`).settings(commonSettings:_*)
     .settings(
