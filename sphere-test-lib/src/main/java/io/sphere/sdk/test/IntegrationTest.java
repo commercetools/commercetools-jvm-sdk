@@ -3,12 +3,12 @@ package io.sphere.sdk.test;
 import com.ning.http.client.AsyncHttpClient;
 import com.ning.http.client.AsyncHttpClientConfig;
 import io.sphere.sdk.client.*;
-import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.queries.Query;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 
@@ -23,10 +23,18 @@ public abstract class IntegrationTest {
             final HttpClient httpClient = newHttpClient();
             final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
             final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
-            final SphereClient underlyingWithDeprecationExceptions = DeprecationExceptionSphereClientDecorator.of(underlying);
-            client = new TestClient(underlyingWithDeprecationExceptions);
+            client = new TestClient(withMaybeDeprecationWarnTool(underlying));
         }
         return client;
+    }
+
+    private static SphereClient withMaybeDeprecationWarnTool(final SphereClient underlying) {
+        if ("false".equals(System.getenv("JVM_SDK_IT_DEPRECATION"))) {
+            LoggerFactory.getLogger(IntegrationTest.class).info("Deprecation client deactivated.");
+            return underlying;
+        } else {
+            return DeprecationExceptionSphereClientDecorator.of(underlying);
+        }
     }
 
     protected static HttpClient newHttpClient() {
