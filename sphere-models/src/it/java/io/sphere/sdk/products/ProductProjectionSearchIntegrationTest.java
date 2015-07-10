@@ -309,13 +309,6 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     @Test
-    public void unicodeExampleForFullTextSearch() throws Exception {
-        final SearchDsl<ProductProjection> searchDsl = ProductProjectionSearch.of(STAGED).withText(GERMAN, EVIL_CHARACTER_WORD);
-        final PagedSearchResult<ProductProjection> result = executeEvilSearch(searchDsl);
-        assertThat(result.getTotal()).overridingErrorMessage("result: " + result).isEqualTo(2);
-    }
-
-    @Test
     public void unicodeExampleForFilter() throws Exception {
         final FilterExpression<ProductProjection> filter = ProductProjectionSearch.model().allVariants().attribute().ofText(ATTR_NAME_EVIL).filterBy().exactly(EVIL_CHARACTER_WORD);
         final SearchDsl<ProductProjection> searchDsl = ProductProjectionSearch.of(STAGED).plusFilterQuery(filter);
