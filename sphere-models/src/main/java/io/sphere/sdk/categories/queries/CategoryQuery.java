@@ -35,6 +35,10 @@ public interface CategoryQuery extends MetaModelQueryDsl<Category, CategoryQuery
         return withPredicate(m -> m.id().is(id));
     }
 
+    default CategoryQuery byIsRoot() {
+        return withPredicate(m -> m.parent().isNotPresent());
+    }
+
     static CategoryQuery of() {
         return new CategoryQueryImpl();
     }
