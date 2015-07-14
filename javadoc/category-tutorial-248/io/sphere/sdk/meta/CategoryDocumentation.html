@@ -127,22 +127,22 @@ extends java.lang.Object</pre>
  <pre><code>externalId,externalParentId,name.de,slug.de,name.en,slug.en
 0,,top,top,top,top
 
-1,0,Herren, herren, men, men
-2,0,Damen, damen, women, women
+1,0,Herren,herren,men,men
+2,0,Damen,damen,women,women
 
-3,1,Bekleidung, herrenbekleidung, clothing, mens-clothing
-4,1,Schuhe, herrenschuhe, shoes, men-shoes
-5,2,Bekleidung, damenbekleidung, clothing, womens-clothing
-6,2,Schuhe, damenschuhe, shoes, women-shoes
+3,1,Bekleidung,herrenbekleidung,clothing,mens-clothing
+4,1,Schuhe,herrenschuhe,shoes,men-shoes
+5,2,Bekleidung,damenbekleidung,clothing,womens-clothing
+6,2,Schuhe,damenschuhe,shoes,women-shoes
 
-7,3,T-Shirts,herrenbekleidung-tshirts, t-shirts, tshirts-men
-8,3,Jeans, herrenbekleidung-jeans, jeans, jeans-men
-9,4,Sandalen, herrenschuhe-sandalen, sandals, sandals-men
-10,4,Stiefel, herrenschuhe-stiefel, boots, boots-men
-11,5,T-Shirts,damenbekleidung-tshirts, t-shirts, tshirts-women
-12,5,Jeans, damenbekleidung-jeans, jeans, jeans-women
-13,6,Sandalen, damenschuhe-sandalen, sandals, sandals-women
-14,6,Stiefel, damenschuhe-stiefel, boots, boots-women</code></pre>
+7,3,T-Shirts,herrenbekleidung-tshirts,t-shirts,tshirts-men
+8,3,Jeans,herrenbekleidung-jeans,jeans,jeans-men
+9,4,Sandalen,herrenschuhe-sandalen,sandals,sandals-men
+10,4,Stiefel,herrenschuhe-stiefel,boots,boots-men
+11,5,T-Shirts,damenbekleidung-tshirts,t-shirts,tshirts-women
+12,5,Jeans,damenbekleidung-jeans,jeans,jeans-women
+13,6,Sandalen,damenschuhe-sandalen,sandals,sandals-women
+14,6,Stiefel,damenschuhe-stiefel,boots,boots-women</code></pre>
 
 Then we can write some script to parse the csv and create them in sphere:
 
@@ -154,7 +154,10 @@ try (final InputStream resourceAsStream = Thread.currentThread().getContextClass
                     .skip(1)//first line is headers
                     .map(line -&gt; line.trim())
                     .filter(line -&gt; !"".equals(line))//remove empty lines
-                    .map(line -&gt; line.split(","))
+                    .map(line -&gt; {
+                        final String[] split = line.split(",");
+                        return split;
+                    })
                     .map(columns -&gt; {
                         final LocalizedStrings name = LocalizedStrings.of(GERMAN, columns[2]).plus(ENGLISH, columns[4]);
                         final LocalizedStrings slug = LocalizedStrings.of(GERMAN, columns[3]).plus(ENGLISH, columns[5]);
@@ -181,10 +184,38 @@ try (final InputStream resourceAsStream = Thread.currentThread().getContextClass
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="read-all-categories">Fetch all categories</h3>
- <h3 id="category-tree-creation">Create a tree of categories</h3>
+<h4>Fetch all</h4>
+ If categories don't change often it is a good idea to just cache them.
+ You can use <a href="../../../../io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries"><code>ExperimentalReactiveStreamUtils</code></a> to do this:
+
+ <div id="io-sphere-sdk-meta-CategoryDocumentationTest-fetchAll--%s" class=code-example><pre><code class='java'>final Publisher&lt;Category&gt; categoryPublisher =
+        ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
+final CompletionStage&lt;List&lt;Category&gt;&gt; categoriesStage =
+        ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+final List&lt;Category&gt; categories = categoriesStage.toCompletableFuture().join();
+assertThat(categories).matches(cats -&gt; cats.parallelStream().anyMatch(cat -&gt; cat.getSlug().get(ENGLISH).get().equals("boots-women")));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+ <h4>Fetch all with predicate</h4>
+ Sometimes you want to fetch just the root categories to delete them all:
+ <div id="io-sphere-sdk-meta-CategoryDocumentationTest-fetchRoots--%s" class=code-example><pre><code class='java'>final CategoryQuery seedQuery = CategoryQuery.of().withPredicate(m -&gt; m.parent().isNotPresent());
+final Publisher&lt;Category&gt; categoryPublisher =
+        ExperimentalReactiveStreamUtils.publisherOf(seedQuery, sphereClient());
+final CompletionStage&lt;List&lt;Category&gt;&gt; categoriesStage =
+        ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+final List&lt;Category&gt; rootCategories = categoriesStage.toCompletableFuture().join();
+assertThat(rootCategories.stream().allMatch(cat -&gt; !cat.getParent().isPresent()))
+        .overridingErrorMessage("fetched categories have no parent")
+        .isTrue();
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <!-- tip, fetch of criteria, like all root categories, or just any child of one category -->
+
+
+ <h3 id="category-tree-creation">Work with a cached tree of categories</h3>
  <h3 id="category-tree">Use a tree of categories</h3>
 
 <!-- get by slug -->
+
 
 
  <h3 id="category-deletion">Delete categories and trees</h3>
