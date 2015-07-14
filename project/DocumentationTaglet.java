@@ -138,6 +138,11 @@ public class DocumentationTaglet implements Taglet {
             });
             builder.append("</table>");
             result = builder.toString();
+        } else if (isFileInclude(tag)) {
+            final String[] columns = tag.text().split(" ", 3);
+            final String relativePathFile = columns[2];
+            final String content = new String(Files.readAllBytes(Paths.get(relativePathFile)));
+            result = content;
         }
 
         //final String s = String.format("firstSentenceTags() %s\n<br>holder() %s\n<br>inlineTags() %s\n<br>kind() %s\n<br>position() %s\n<br>text()\n<br> %s\n<br>toS %s", Arrays.toString(tag.firstSentenceTags()), tag.holder(), Arrays.toString(tag.inlineTags()), tag.kind(), tag.position(), tag.text(), tag.toString());
@@ -145,6 +150,10 @@ public class DocumentationTaglet implements Taglet {
             throw new RuntimeException(tag.name() + " is not prepared to be used here: " + tag.position());
         }
         return result;
+    }
+
+    private boolean isFileInclude(final Tag tag) {
+        return tag.text().startsWith("include file ");
     }
 
     private String fullClassNameToSimple(final String fullClassName) {
