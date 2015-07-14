@@ -28,7 +28,7 @@ public abstract class IntegrationTest {
         return client;
     }
 
-    protected static  SphereClient sphereClient() {
+    protected static SphereClient sphereClient() {
         return client().getUnderlying();
     }
 

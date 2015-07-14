@@ -77,6 +77,7 @@ final class ForAllSubscription<T extends Identifiable<T>, C extends QueryDsl<T, 
                     if (results.size() == 0) {
                         executor.execute(() -> {
                             subscriber.onComplete();
+                            cancel();
                         });
                     } else {
                         executor.execute(() -> {
