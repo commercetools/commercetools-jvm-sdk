@@ -28,6 +28,10 @@ public abstract class IntegrationTest {
         return client;
     }
 
+    protected static  SphereClient sphereClient() {
+        return client().getUnderlying();
+    }
+
     private static SphereClient withMaybeDeprecationWarnTool(final SphereClient underlying) {
         if ("false".equals(System.getenv("JVM_SDK_IT_DEPRECATION"))) {
             LoggerFactory.getLogger(IntegrationTest.class).info("Deprecation client deactivated.");

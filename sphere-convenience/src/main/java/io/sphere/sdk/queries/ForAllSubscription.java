@@ -67,7 +67,8 @@ final class ForAllSubscription<T extends Identifiable<T>, C extends QueryDsl<T, 
     }
 
     private void fetchNewElements() {
-        final Query<T> query = lastId == null ? seedQuery : seedQuery.withPredicate(QueryPredicate.of(format("id > \"%s\"", lastId)));
+        final QueryPredicate<T> idIsGreaterThanLastIdPredicate = QueryPredicate.of(format("id > \"%s\"", lastId));
+        final Query<T> query = lastId == null ? seedQuery : seedQuery.withPredicate(seedQuery.predicate().map(p -> p.and(idIsGreaterThanLastIdPredicate)).orElse(idIsGreaterThanLastIdPredicate));
         sphereClient.execute(query).whenComplete((r, e) -> {
             executor.execute(() -> {
                 final boolean success = e == null;

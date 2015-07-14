@@ -8,11 +8,11 @@ import org.reactivestreams.Subscriber;
 
 import static java.util.Objects.requireNonNull;
 
-final class ForAllPublisher<T extends Identifiable<T>, C extends QueryDsl<T, C>> extends Base implements Publisher<T> {
+final class QueryEndpointElementsPublisher<T extends Identifiable<T>, C extends QueryDsl<T, C>> extends Base implements Publisher<T> {
     private final QueryDsl<T, C> seedQuery;
     private final SphereClient sphereClient;
 
-    ForAllPublisher(final QueryDsl<T, C> seedQuery, final SphereClient sphereClient) {
+    QueryEndpointElementsPublisher(final QueryDsl<T, C> seedQuery, final SphereClient sphereClient) {
         this.seedQuery = seedQuery;
         this.sphereClient = sphereClient;
     }

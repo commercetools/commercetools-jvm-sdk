@@ -7,9 +7,11 @@ import io.sphere.sdk.categories.CategoryTree;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.queries.ExperimentalReactiveStream;
+import io.sphere.sdk.queries.ExperimentalReactiveStreamUtils;
 import io.sphere.sdk.test.IntegrationTest;
+import org.assertj.core.api.Condition;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.reactivestreams.Publisher;
@@ -25,32 +27,46 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 
 import static java.util.Locale.*;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.toList;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryDocumentationTest extends IntegrationTest {
-
-    private static CategoryTree categoryTree;
 
     @BeforeClass
     public static void beforeClass() throws IOException {
         deleteAllCategories();
         setUpData();
-        categoryTree = fetchCategoryTree();
     }
 
-    private static CategoryTree fetchCategoryTree() {
-        final Publisher<Category> publisher = ExperimentalReactiveStream.of(CategoryQuery.of()).publisher(client().getUnderlying());
-        final CategorySubscriber subscriber = new CategorySubscriber();
-        publisher.subscribe(subscriber);
-        final List<Category> categories = subscriber.getFuture().join();
-        return CategoryTree.of(categories);
+    @Test
+    public void fetchAll() throws Exception {
+        final Publisher<Category> categoryPublisher =
+                ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
+        final CompletionStage<List<Category>> categoriesStage =
+                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+        final List<Category> categories = categoriesStage.toCompletableFuture().join();
+        assertThat(categories).matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).get().equals("boots-women")));
+    }
+
+    @Test
+    public void fetchRoots() throws Exception {
+        final CategoryQuery seedQuery = CategoryQuery.of().withPredicate(m -> m.parent().isNotPresent());
+        final Publisher<Category> categoryPublisher =
+                ExperimentalReactiveStreamUtils.publisherOf(seedQuery, sphereClient());
+        final CompletionStage<List<Category>> categoriesStage =
+                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+        final List<Category> rootCategories = categoriesStage.toCompletableFuture().join();
+        assertThat(rootCategories.stream().allMatch(cat -> !cat.getParent().isPresent()))
+                .overridingErrorMessage("fetched categories have no parent")
+                .isTrue();
     }
 
     private static void deleteAllCategories() {
-        final Publisher<Category> publisher = ExperimentalReactiveStream.of(CategoryQuery.of().byIsRoot()).publisher(client().getUnderlying());
+        final Publisher<Category> publisher = ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of().byIsRoot(), sphereClient());
         final CategoryDeleteSubscriber subscriber = new CategoryDeleteSubscriber();
         publisher.subscribe(subscriber);
         subscriber.getFuture().join();
@@ -65,7 +81,10 @@ public class CategoryDocumentationTest extends IntegrationTest {
                             .skip(1)//first line is headers
                             .map(line -> line.trim())
                             .filter(line -> !"".equals(line))//remove empty lines
-                            .map(line -> line.split(","))
+                            .map(line -> {
+                                final String[] split = line.split(",");
+                                return split;
+                            })
                             .map(columns -> {
                                 final LocalizedStrings name = LocalizedStrings.of(GERMAN, columns[2]).plus(ENGLISH, columns[4]);
                                 final LocalizedStrings slug = LocalizedStrings.of(GERMAN, columns[3]).plus(ENGLISH, columns[5]);
@@ -123,38 +142,6 @@ public class CategoryDocumentationTest extends IntegrationTest {
         }
 
         public CompletableFuture<Void> getFuture() {
-            return future;
-        }
-    }
-
-    private static class CategorySubscriber implements Subscriber<Category> {
-        private final CompletableFuture<List<Category>> future = new CompletableFuture<>();
-        private final List<Category> categories = new LinkedList<>();
-        private Subscription subscription;
-
-        @Override
-        public void onSubscribe(final Subscription subscription) {
-            this.subscription = subscription;
-            subscription.request(1);
-        }
-
-        @Override
-        public void onNext(final Category category) {
-            categories.add(category);
-            subscription.request(1);
-        }
-
-        @Override
-        public void onError(final Throwable throwable) {
-            future.completeExceptionally(throwable);
-        }
-
-        @Override
-        public void onComplete() {
-            future.complete(categories);
-        }
-
-        public CompletableFuture<List<Category>> getFuture() {
             return future;
         }
     }
