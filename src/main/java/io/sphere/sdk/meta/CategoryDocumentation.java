@@ -14,7 +14,7 @@ Then we can write some script to parse the csv and create them in sphere:
 
  {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#setUpData()}
 
- <h3 id="read-all-categories">Fetch all categories</h3>
+ <h3 id="read-categories">Fetch all categories</h3>
 <h4>Fetch all</h4>
  If categories don't change often it is a good idea to just cache them.
  You can use {@link io.sphere.sdk.queries.ExperimentalReactiveStreamUtils} to do this:
@@ -24,10 +24,15 @@ Then we can write some script to parse the csv and create them in sphere:
  Sometimes you want to fetch just the root categories to delete them all:
  {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#fetchRoots()}
 
- <!-- tip, fetch of criteria, like all root categories, or just any child of one category -->
-
 
  <h3 id="category-tree-creation">Work with a cached tree of categories</h3>
+
+ In <a href="#read-categories">Fetch all categories</a> you read how to obtain all categories or categories matching a predicate.
+ The list of all categories is required to form a category tree:
+
+ {@include.example }
+
+
  <h3 id="category-tree">Use a tree of categories</h3>
 
 <!-- get by slug -->

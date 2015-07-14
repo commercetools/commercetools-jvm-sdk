@@ -9,6 +9,7 @@ import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.ExperimentalReactiveStreamUtils;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Condition;
@@ -22,10 +23,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -63,6 +61,36 @@ public class CategoryDocumentationTest extends IntegrationTest {
         assertThat(rootCategories.stream().allMatch(cat -> !cat.getParent().isPresent()))
                 .overridingErrorMessage("fetched categories have no parent")
                 .isTrue();
+    }
+
+    @Test
+    public void createCategoryTree() throws Exception {
+        final Publisher<Category> categoryPublisher =
+                ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
+        final CompletionStage<List<Category>> categoriesStage =
+                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+        final List<Category> categories = categoriesStage.toCompletableFuture().join();
+        final CategoryTree categoryTree = CategoryTree.of(categories);
+
+        //find by slug
+        final Optional<Category> jeansWomenOptional = categoryTree.findBySlug(ENGLISH, "jeans-women");
+        assertThat(jeansWomenOptional).isPresent();
+        assertThat(categoryTree.findBySlug(ENGLISH, "not-existing-slug")).isEmpty();
+
+        //find by ID
+        final Reference<Category> clothingWomenReference = jeansWomenOptional.get().getParent().get();
+        final Optional<Category> clothingWomenOptional = categoryTree.findById(clothingWomenReference.getId());
+        assertThat(clothingWomenOptional).isPresent();
+        assertThat(clothingWomenOptional.get().getSlug().get(ENGLISH)).contains("womens-clothing");
+
+        //find all children of one category
+        final Category clothingWomen = clothingWomenOptional.get();
+        final List<Category> clothingWomenSubcategories = categoryTree.findByParent(clothingWomen);
+        final List<String> names = clothingWomenSubcategories.stream()
+                .map(cat -> cat.getName().get(ENGLISH).get())
+                .sorted()
+                .collect(toList());
+        assertThat(names).contains("jeans", "t-shirts");
     }
 
     private static void deleteAllCategories() {
