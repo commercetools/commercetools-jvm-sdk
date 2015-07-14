@@ -64,13 +64,8 @@ public class CategoryDocumentationTest extends IntegrationTest {
     }
 
     @Test
-    public void createCategoryTree() throws Exception {
-        final Publisher<Category> categoryPublisher =
-                ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
-        final CompletionStage<List<Category>> categoriesStage =
-                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
-        final List<Category> categories = categoriesStage.toCompletableFuture().join();
-        final CategoryTree categoryTree = CategoryTree.of(categories);
+    public void simpleCategoryTreeOperations() throws Exception {
+        final CategoryTree categoryTree = createCategoryTree();
 
         //find by slug
         final Optional<Category> jeansWomenOptional = categoryTree.findBySlug(ENGLISH, "jeans-women");
@@ -83,7 +78,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
         assertThat(clothingWomenOptional).isPresent();
         assertThat(clothingWomenOptional.get().getSlug().get(ENGLISH)).contains("womens-clothing");
 
-        //find all children of one category
+        //find all direct children of one category
         final Category clothingWomen = clothingWomenOptional.get();
         final List<Category> clothingWomenSubcategories = categoryTree.findByParent(clothingWomen);
         final List<String> names = clothingWomenSubcategories.stream()
@@ -91,6 +86,22 @@ public class CategoryDocumentationTest extends IntegrationTest {
                 .sorted()
                 .collect(toList());
         assertThat(names).contains("jeans", "t-shirts");
+    }
+
+    @Test
+    public void createAViewForACategoryTree() throws Exception {
+        final CategoryTree categoryTree = createCategoryTree();
+        final StringBuilder stringBuilder = new StringBuilder();
+    }
+
+    private CategoryTree createCategoryTree() {
+        final Publisher<Category> categoryPublisher =
+                ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
+        final CompletionStage<List<Category>> categoriesStage =
+                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+        final List<Category> categories = categoriesStage.toCompletableFuture().join();
+        final CategoryTree categoryTree = CategoryTree.of(categories);
+        return categoryTree;
     }
 
     private static void deleteAllCategories() {

@@ -25,17 +25,18 @@ Then we can write some script to parse the csv and create them in sphere:
  {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#fetchRoots()}
 
 
- <h3 id="category-tree-creation">Work with a cached tree of categories</h3>
+ <h3 id="category-tree">Work with a cached tree of categories</h3>
 
  In <a href="#read-categories">Fetch all categories</a> you read how to obtain all categories or categories matching a predicate.
  The list of all categories is required to form a category tree:
 
- {@include.example }
+ {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#createCategoryTree()}
+
+ With a {@link io.sphere.sdk.categories.CategoryTree} you can find categories by slug, by ID and search categories by their parent.
+
+ {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#simpleCategoryTreeOperations()}
 
 
- <h3 id="category-tree">Use a tree of categories</h3>
-
-<!-- get by slug -->
 
 
 
