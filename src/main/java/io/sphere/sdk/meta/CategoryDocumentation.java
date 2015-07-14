@@ -36,6 +36,18 @@ Then we can write some script to parse the csv and create them in sphere:
 
  {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#simpleCategoryTreeOperations()}
 
+  Here is some example to display a whole categoryTree:
+
+ First the helper function for the recursive algorithm:
+ {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#appendToBuilderFullCategoryTree()}
+
+ And then the call:
+
+ {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#createAViewForACategoryTree()}
+
+Another example is to create a breadcumb:
+
+ {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#createAViewForACategoryBreadCrumb()}
 
 
 

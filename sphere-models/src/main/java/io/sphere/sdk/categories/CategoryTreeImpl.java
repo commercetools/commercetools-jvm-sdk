@@ -49,7 +49,7 @@ class CategoryTreeImpl extends Base implements CategoryTree {
     }
 
     @Override
-    public List<Category> findByParent(final Identifiable<Category> category) {
+    public List<Category> findChildren(final Identifiable<Category> category) {
         final String categoryId = category.getId();
         return childrenByParentId.getOrDefault(categoryId, Collections.emptyList());
     }

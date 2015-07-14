@@ -42,7 +42,7 @@ public interface CategoryTree {
      * @param category the category which should be the parent category to the result list
      * @return list of children or empty list
      */
-    List<Category> findByParent(final Identifiable<Category> category);
+    List<Category> findChildren(final Identifiable<Category> category);
 
     /**
      * Creates a category tree from a flat list of categories.
