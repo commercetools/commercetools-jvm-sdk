@@ -104,6 +104,92 @@
 <br>
 <pre>public class <span class="typeNameLabel">CategoryDocumentation</span>
 extends java.lang.Object</pre>
+<div class="block"><h3 id="category-creation">Create a tree of categories</h3>
+ Lets suppose we want to create this category tree (the number before the name is the externalId):
+ <pre><code>0 top
+    1 men
+        3 clothing
+            7 t-shirts
+            8 jeans
+        4 shoes
+            9 sandals
+            10 boots
+    2 women
+        5 clothing
+            11 t-shirts
+            12 jeans
+        6 shoes
+            13 sandals
+            14 boots</code></pre>
+
+ We define the category data as CSV, we start with the top level so the parent category is before its child categories:
+
+ <pre><code>externalId,externalParentId,name.de,slug.de,name.en,slug.en
+0,,top,top,top,top
+
+1,0,Herren, herren, men, men
+2,0,Damen, damen, women, women
+
+3,1,Bekleidung, herrenbekleidung, clothing, mens-clothing
+4,1,Schuhe, herrenschuhe, shoes, men-shoes
+5,2,Bekleidung, damenbekleidung, clothing, womens-clothing
+6,2,Schuhe, damenschuhe, shoes, women-shoes
+
+7,3,T-Shirts,herrenbekleidung-tshirts, t-shirts, tshirts-men
+8,3,Jeans, herrenbekleidung-jeans, jeans, jeans-men
+9,4,Sandalen, herrenschuhe-sandalen, sandals, sandals-men
+10,4,Stiefel, herrenschuhe-stiefel, boots, boots-men
+11,5,T-Shirts,damenbekleidung-tshirts, t-shirts, tshirts-women
+12,5,Jeans, damenbekleidung-jeans, jeans, jeans-women
+13,6,Sandalen, damenschuhe-sandalen, sandals, sandals-women
+14,6,Stiefel, damenschuhe-stiefel, boots, boots-women</code></pre>
+
+Then we can write some script to parse the csv and create them in sphere:
+
+ <div id="io-sphere-sdk-meta-CategoryDocumentationTest-setUpData--%s" class=code-example><pre><code class='java'>final Map&lt;String, Category&gt; externalIdToCategoryMap = new HashMap&lt;&gt;();//contains all the created categories
+try (final InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("category-import-1.csv")) {
+    try (final InputStreamReader inputStreamReader = new InputStreamReader(resourceAsStream)) {
+        try (final BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
+            bufferedReader.lines()
+                    .skip(1)//first line is headers
+                    .map(line -&gt; line.trim())
+                    .filter(line -&gt; !"".equals(line))//remove empty lines
+                    .map(line -&gt; line.split(","))
+                    .map(columns -&gt; {
+                        final LocalizedStrings name = LocalizedStrings.of(GERMAN, columns[2]).plus(ENGLISH, columns[4]);
+                        final LocalizedStrings slug = LocalizedStrings.of(GERMAN, columns[3]).plus(ENGLISH, columns[5]);
+                        final String externalId = columns[0];
+                        final CategoryDraftBuilder categoryDraftBuilder = CategoryDraftBuilder.of(name, slug).externalId(externalId);
+                        final String externalIdParent = columns[1];
+                        if (!"".equals(externalIdParent)) {
+                            final Category parent = externalIdToCategoryMap.get(externalIdParent);
+                            requireNonNull(parent, externalIdParent + " ");
+                            categoryDraftBuilder.parent(parent);
+                        }
+                        final CategoryDraft draft = categoryDraftBuilder.build();
+
+                        //here is the call to SPHERE.IO
+                        final Category category = client().execute(CategoryCreateCommand.of(draft));
+
+                        externalIdToCategoryMap.put(externalId, category);
+                        return category;
+                    })
+            .collect(toList());
+        }
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h3 id="read-all-categories">Fetch all categories</h3>
+ <h3 id="category-tree-creation">Create a tree of categories</h3>
+ <h3 id="category-tree">Use a tree of categories</h3>
+
+<!-- get by slug -->
+
+
+ <h3 id="category-deletion">Delete categories and trees</h3>
+ <!-- deleting category with children deletes the children -->
+ <h3 id="category-tree-changes">Change the category tree</h3></div>
 </li>
 </ul>
 </div>
