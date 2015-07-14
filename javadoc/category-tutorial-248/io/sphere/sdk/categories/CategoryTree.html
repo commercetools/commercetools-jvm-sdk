@@ -127,16 +127,16 @@ var activeTableTab = "activeTableTab";
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#findByParent-io.sphere.sdk.models.Identifiable-">findByParent</a></span>(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;category)</code>
-<div class="block">return the children for category.</div>
-</td>
-</tr>
-<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#findBySlug-java.util.Locale-java.lang.String-">findBySlug</a></span>(java.util.Locale&nbsp;locale,
           java.lang.String&nbsp;slug)</code>
 <div class="block">Finds a category by the slug and a specific locale.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/CategoryTree.html#findChildren-io.sphere.sdk.models.Identifiable-">findChildren</a></span>(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;category)</code>
+<div class="block">return the children for category.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
@@ -234,13 +234,13 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="findByParent-io.sphere.sdk.models.Identifiable-">
+<a name="findChildren-io.sphere.sdk.models.Identifiable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>findByParent</h4>
-<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;findByParent(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;category)</pre>
+<h4>findChildren</h4>
+<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;findChildren(<a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;category)</pre>
 <div class="block">return the children for category. If there are no children or category is not in this <a href="../../../../io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories"><code>CategoryTree</code></a> then the list is empty.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>

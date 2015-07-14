@@ -240,7 +240,7 @@ assertThat(clothingWomenOptional.get().getSlug().get(ENGLISH)).contains("womens-
 
 //find all direct children of one category
 final Category clothingWomen = clothingWomenOptional.get();
-final List&lt;Category&gt; clothingWomenSubcategories = categoryTree.findByParent(clothingWomen);
+final List&lt;Category&gt; clothingWomenSubcategories = categoryTree.findChildren(clothingWomen);
 final List&lt;String&gt; names = clothingWomenSubcategories.stream()
         .map(cat -&gt; cat.getName().get(ENGLISH).get())
         .sorted()
@@ -248,6 +248,61 @@ final List&lt;String&gt; names = clothingWomenSubcategories.stream()
 assertThat(names).contains("jeans", "t-shirts");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
+  Here is some example to display a whole categoryTree:
+
+ First the helper function for the recursive algorithm:
+ <div id="io-sphere-sdk-meta-CategoryDocumentationTest-appendToBuilderFullCategoryTree--%s" class=code-example><pre><code class='java'>final String name = category.getName().get(ENGLISH).get();
+final String externalId = category.getExternalId().get();
+final String offset = StringUtils.repeat(' ', level * 4);
+stringBuilder.append(offset).append(externalId).append(" ").append(name).append("\n");
+final List&lt;Category&gt; children = categoryTree.findChildren(category);
+children.stream()
+        .sorted(EXTERNALID_COMPARATOR)
+        .forEach(child -&gt; appendToBuilderFullCategoryTree(child, stringBuilder, categoryTree, level + 1));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ And then the call:
+
+ <div id="io-sphere-sdk-meta-CategoryDocumentationTest-createAViewForACategoryTree--%s" class=code-example><pre><code class='java'>final CategoryTree categoryTree = createCategoryTree();
+final StringBuilder stringBuilder = new StringBuilder();
+categoryTree.getRoots()
+        .forEach(category -&gt; appendToBuilderFullCategoryTree(category, stringBuilder, categoryTree, 0));
+final String actual = stringBuilder.toString();
+assertThat(actual).isEqualTo(
+        "0 top\n" +
+                "    1 men\n" +
+                "        3 clothing\n" +
+                "            7 t-shirts\n" +
+                "            8 jeans\n" +
+                "        4 shoes\n" +
+                "            9 sandals\n" +
+                "            10 boots\n" +
+                "    2 women\n" +
+                "        5 clothing\n" +
+                "            11 t-shirts\n" +
+                "            12 jeans\n" +
+                "        6 shoes\n" +
+                "            13 sandals\n" +
+                "            14 boots\n");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+Another example is to create a breadcumb:
+
+ <div id="io-sphere-sdk-meta-CategoryDocumentationTest-createAViewForACategoryBreadCrumb--%s" class=code-example><pre><code class='java'>final CategoryTree categoryTree = createCategoryTree();
+final Category currentCategory = categoryTree.findBySlug(ENGLISH, "tshirts-men").get();
+final List&lt;Reference&lt;Category&gt;&gt; ancestorReferences = currentCategory.getAncestors().stream()
+        .skip(1)//remove top level category
+        .collect(toList());
+
+final Function&lt;Category, String&gt; formatCategory = cat -&gt; cat.getExternalId().orElse("")
+        + " " + cat.getName().get(ENGLISH).orElse("");
+final String ancestorCategoriesString = ancestorReferences.stream()
+        .map(ref -&gt; categoryTree.findById(ref.getId()).get())
+        .map(formatCategory)
+        .collect(joining(" &gt; "));
+final String actual = ancestorCategoriesString + " &gt; " + formatCategory.apply(currentCategory);
+assertThat(actual).isEqualTo("1 men &gt; 3 clothing &gt; 7 t-shirts");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
 
