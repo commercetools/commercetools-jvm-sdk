@@ -21,7 +21,7 @@ import static java.util.Objects.requireNonNull;
  *
  * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodsByLocationGetTest#execution()}
  */
-public class ShippingMethodsByLocationGetImpl extends MetaModelFetchDslImpl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGetImpl, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodsByLocationGet {
+final class ShippingMethodsByLocationGetImpl extends MetaModelFetchDslImpl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGetImpl, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodsByLocationGet {
     ShippingMethodsByLocationGetImpl(final CountryCode country, @Nullable final String state, @Nullable final CurrencyUnit currency) {
         super(identifierToSearchFor(requireNonNull(country), state, currency), ShippingMethodEndpoint.ENDPOINT.withTypeReference(new TypeReference<List<ShippingMethod>>() {
             @Override
