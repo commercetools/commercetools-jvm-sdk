@@ -481,9 +481,56 @@ assertThat(actual).isEqualTo(
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
- <h3 id="">Find products in a category tree</h3>
+ <h3 id="find-product-by-category">Find products in a category tree</h3>
 
-<!-- and connection of cats in tree --></div>
+ Fetching products for a category or a category tree requires to add the category IDs to the predicate:
+
+ <div id="io-sphere-sdk-meta-CategoryDocumentationTest-demoForFindProducts--%s" class=code-example><pre><code class='java'>final CategoryTree categoryTree = fetchCurrentTree();
+final String startingSituation = CategoryTreeTextRepresentation.visualizeTree(categoryTree);
+assertThat(startingSituation).isEqualTo(
+                "0 top\n" +
+                "    1 men\n" +
+                "        3 clothing\n" +
+                "            7 t-shirts\n" +
+                "            8 jeans\n" +
+                "        4 shoes\n" +
+                "            9 sandals\n" +
+                "            10 boots\n" +
+                "    2 women\n" +
+                "        5 clothing\n" +
+                "            11 t-shirts\n" +
+                "            12 jeans\n" +
+                "        6 shoes\n" +
+                "            13 sandals\n" +
+                "            14 boots\n");
+final Category mensClothingCategory = categoryTree.findByExternalId("3").get();
+final Category tshirtCategory = categoryTree.findByExternalId("7").get();
+final Category jeansCategory = categoryTree.findByExternalId("8").get();
+withProductInCategory(client(), jeansCategory, jeansProduct -&gt; {
+    withProductInCategory(client(), tshirtCategory, tshirtProduct -&gt; {
+        final PagedQueryResult&lt;ProductProjection&gt; resultForParentCategory =
+                //query for the parent category
+                execute(ProductProjectionQuery.ofStaged().withPredicate(m -&gt; m.categories().isIn(mensClothingCategory)));
+        assertThat(resultForParentCategory.getResults())
+                .overridingErrorMessage(
+                        "if a product is in a category," +
+                                "but not in the parent category of this category" +
+                                "the query will not find the product")
+                .isEmpty();
+
+        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicate(m -&gt; m.categories().isIn(tshirtCategory, jeansCategory));
+        assertThat(query.predicate())
+                .contains(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
+        final PagedQueryResult&lt;ProductProjection&gt; resultForDirectCategories =
+                execute(query);
+        assertThat(resultForDirectCategories.getResults())
+                .hasSize(2)
+                .overridingErrorMessage("if a product is in a category, you can directy query for it")
+                .matches(elements -&gt; elements.stream()
+                        .anyMatch(product -&gt; product.getCategories().contains(tshirtCategory.toReference())));
+    });
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
