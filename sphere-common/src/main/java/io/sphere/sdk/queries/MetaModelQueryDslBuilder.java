@@ -24,7 +24,7 @@ import static java.util.Arrays.asList;
 public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends Base implements Builder<C> {
 
     protected Optional<QueryPredicate<T>> predicate = Optional.empty();
-    protected List<QuerySort<T>> sort = sortByIdList();
+    protected List<QuerySort<T>> sort = Collections.emptyList();
     protected Optional<Boolean> withTotal = Optional.empty();
     protected Optional<Long> limit = Optional.empty();
     protected Optional<Long> offset = Optional.empty();
@@ -107,10 +107,5 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
     @Override
     public C build() {
         return queryDslBuilderFunction.apply(this);
-    }
-
-    static <T> List<QuerySort<T>> sortByIdList() {
-        final QuerySort<T> sortById = QuerySort.<T>of("id asc");
-        return asList(sortById);
     }
 }

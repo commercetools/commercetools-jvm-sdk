@@ -68,7 +68,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction, final List<HttpQueryParameter> additionalQueryParameters) {
-        this(Optional.<QueryPredicate<T>>empty(), sortByIdList(), Optional.<Boolean>empty(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
+        this(Optional.<QueryPredicate<T>>empty(), Collections.emptyList(), Optional.<Boolean>empty(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
                 Collections.emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
@@ -240,11 +240,6 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
                 ", request=" + httpRequestIntent() +
                 ", withTotal=" + withTotal +
                 '}';
-    }
-
-    static <T> List<QuerySort<T>> sortByIdList() {
-        final QuerySort<T> sortById = QuerySort.<T>of("id asc");
-        return asList(sortById);
     }
 
     Q getQueryModel() {
