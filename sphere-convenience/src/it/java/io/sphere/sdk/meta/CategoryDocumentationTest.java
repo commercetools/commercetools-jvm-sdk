@@ -9,10 +9,26 @@ import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductDraftBuilder;
+import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.products.ProductVariantDraftBuilder;
+import io.sphere.sdk.products.commands.ProductCreateCommand;
+import io.sphere.sdk.products.commands.ProductDeleteCommand;
+import io.sphere.sdk.products.queries.ProductProjectionQuery;
+import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.producttypes.ProductTypeDraft;
+import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
+import io.sphere.sdk.producttypes.commands.ProductTypeDeleteCommand;
 import io.sphere.sdk.queries.ExperimentalReactiveStreamUtils;
+import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.SetUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.reactivestreams.Publisher;
@@ -26,9 +42,13 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
+import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static java.util.Locale.*;
+import static java.lang.String.format;
+import static java.util.Arrays.asList;
+import static java.util.Locale.ENGLISH;
+import static java.util.Locale.GERMAN;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -210,6 +230,65 @@ public class CategoryDocumentationTest extends IntegrationTest {
                         "        8 jeans\n");
         //end example parsing here
         beforeClass();
+    }
+
+    @Test
+    public void demoForFindProducts() throws Exception {
+        final CategoryTree categoryTree = fetchCurrentTree();
+        final String startingSituation = CategoryTreeTextRepresentation.visualizeTree(categoryTree);
+        assertThat(startingSituation).isEqualTo(
+                        "0 top\n" +
+                        "    1 men\n" +
+                        "        3 clothing\n" +
+                        "            7 t-shirts\n" +
+                        "            8 jeans\n" +
+                        "        4 shoes\n" +
+                        "            9 sandals\n" +
+                        "            10 boots\n" +
+                        "    2 women\n" +
+                        "        5 clothing\n" +
+                        "            11 t-shirts\n" +
+                        "            12 jeans\n" +
+                        "        6 shoes\n" +
+                        "            13 sandals\n" +
+                        "            14 boots\n");
+        final Category mensClothingCategory = categoryTree.findByExternalId("3").get();
+        final Category tshirtCategory = categoryTree.findByExternalId("7").get();
+        final Category jeansCategory = categoryTree.findByExternalId("8").get();
+        withProductInCategory(client(), jeansCategory, jeansProduct -> {
+            withProductInCategory(client(), tshirtCategory, tshirtProduct -> {
+                final PagedQueryResult<ProductProjection> resultForParentCategory =
+                        //query for the parent category
+                        execute(ProductProjectionQuery.ofStaged().withPredicate(m -> m.categories().isIn(mensClothingCategory)));
+                assertThat(resultForParentCategory.getResults())
+                        .overridingErrorMessage(
+                                "if a product is in a category," +
+                                        "but not in the parent category of this category" +
+                                        "the query will not find the product")
+                        .isEmpty();
+
+                final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicate(m -> m.categories().isIn(tshirtCategory, jeansCategory));
+                assertThat(query.predicate())
+                        .contains(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
+                final PagedQueryResult<ProductProjection> resultForDirectCategories =
+                        execute(query);
+                assertThat(resultForDirectCategories.getResults())
+                        .hasSize(2)
+                        .overridingErrorMessage("if a product is in a category, you can directy query for it")
+                        .matches(elements -> elements.stream()
+                                .anyMatch(product -> product.getCategories().contains(tshirtCategory.toReference())));
+            });
+        });
+    }
+
+
+    private static void withProductInCategory(final TestClient client, final Referenceable<Category> category, final Consumer<Product> user) {
+        final ProductType productType = client.execute(ProductTypeCreateCommand.of(ProductTypeDraft.of(CategoryDocumentationTest.class.getSimpleName(), "", asList())));
+        final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "foo");
+        final Product product = client.execute(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(SetUtils.asSet(category.toReference())).build()));
+        user.accept(product);
+        client.execute(ProductDeleteCommand.of(product));
+        client.execute(ProductTypeDeleteCommand.of(productType));
     }
 
     private static CategoryTree fetchCurrentTree() {

@@ -64,9 +64,11 @@ Then we can write some script to parse the csv and create them in sphere:
  {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#moveCategoryTree()}
 
 
- <h3 id="">Find products in a category tree</h3>
+ <h3 id="find-product-by-category">Find products in a category tree</h3>
 
-<!-- and connection of cats in tree -->
+ Fetching products for a category or a category tree requires to add the category IDs to the predicate:
+
+ {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#demoForFindProducts()}
 
 
  */
