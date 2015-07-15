@@ -23,6 +23,8 @@ public interface CategoryTree {
      */
     Optional<Category> findById(String id);
 
+    Optional<Category> findByExternalId(String externalId);
+
     /**
      * Finds a category by the slug and a specific locale.
      * @param locale the locale

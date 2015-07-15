@@ -7,12 +7,10 @@ import io.sphere.sdk.categories.CategoryTree;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
-import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.ExperimentalReactiveStreamUtils;
 import io.sphere.sdk.test.IntegrationTest;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.reactivestreams.Publisher;
@@ -27,7 +25,6 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 import static java.util.Locale.*;
 import static java.util.Objects.requireNonNull;
@@ -100,12 +97,12 @@ public class CategoryDocumentationTest extends IntegrationTest {
 
     @Test
     public void createAViewForACategoryTree() throws Exception {
-        RenderAWholeCategoryTreeExample.demoForRendering(tree);
+        CategoryTreeTextRepresentation.demoForRendering(tree);
     }
 
     @Test
     public void createAViewForACategoryTreePart() throws Exception {
-        RenderAPartialTree.demoForRendering(tree);
+        RenderAPartialTree.demoForRendering(fetchCurrentTree());
     }
 
     @Test
@@ -126,6 +123,52 @@ public class CategoryDocumentationTest extends IntegrationTest {
         assertThat(actual).isEqualTo("1 men > 3 clothing > 7 t-shirts");
     }
 
+    @Test
+    public void categoryDeletionIsRecursive() throws Exception {
+        final CategoryTree categoryTree = fetchCurrentTree();
+        final String startingSituation = CategoryTreeTextRepresentation.visualizeTree(categoryTree);
+        assertThat(startingSituation).isEqualTo(
+                        "0 top\n" +
+                        "    1 men\n" +
+                        "        3 clothing\n" +
+                        "            7 t-shirts\n" +
+                        "            8 jeans\n" +
+                        "        4 shoes\n" +
+                        "            9 sandals\n" +
+                        "            10 boots\n" +
+                        "    2 women\n" +
+                        "        5 clothing\n" +
+                        "            11 t-shirts\n" +
+                        "            12 jeans\n" +
+                        "        6 shoes\n" +
+                        "            13 sandals\n" +
+                        "            14 boots\n");
+
+        final Category men = categoryTree.findByExternalId("1").get();
+        execute(CategoryDeleteCommand.of(men));
+        final CategoryTree categoryTreeAfterDeletion = fetchCurrentTree();
+        final String actual = CategoryTreeTextRepresentation.visualizeTree(categoryTreeAfterDeletion);
+        assertThat(actual).isEqualTo(
+                        "0 top\n" +
+                        "    2 women\n" +
+                        "        5 clothing\n" +
+                        "            11 t-shirts\n" +
+                        "            12 jeans\n" +
+                        "        6 shoes\n" +
+                        "            13 sandals\n" +
+                        "            14 boots\n");
+        //end example parsing here
+        beforeClass();
+    }
+
+    private static CategoryTree fetchCurrentTree() {
+        final Publisher<Category> categoryPublisher =
+                ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
+        final CompletionStage<List<Category>> categoriesStage =
+                ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
+        final List<Category> categories = categoriesStage.toCompletableFuture().join();
+        return CategoryTree.of(categories);
+    }
 
     private CategoryTree createCategoryTree() {
         //stuff from previous example

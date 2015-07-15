@@ -10,17 +10,14 @@ import java.util.List;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public final class RenderAWholeCategoryTreeExample {
+public final class CategoryTreeTextRepresentation {
     private static final Comparator<Category> EXTERNALID_COMPARATOR = Comparator.comparing(c -> Integer.parseInt(c.getExternalId().get()));
 
-    private RenderAWholeCategoryTreeExample() {
+    private CategoryTreeTextRepresentation() {
     }
 
     public static void demoForRendering(final CategoryTree categoryTree) {
-        final StringBuilder stringBuilder = new StringBuilder();
-        categoryTree.getRoots()
-                .forEach(category -> appendToBuilder(category, stringBuilder, categoryTree, 0));
-        final String actual = stringBuilder.toString();
+        final String actual = visualizeTree(categoryTree);
         assertThat(actual).isEqualTo(
                         "0 top\n" +
                         "    1 men\n" +
@@ -37,6 +34,13 @@ public final class RenderAWholeCategoryTreeExample {
                         "        6 shoes\n" +
                         "            13 sandals\n" +
                         "            14 boots\n");
+    }
+
+    public static String visualizeTree(final CategoryTree categoryTree) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        categoryTree.getRoots()
+                .forEach(category -> appendToBuilder(category, stringBuilder, categoryTree, 0));
+        return stringBuilder.toString();
     }
 
 

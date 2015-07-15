@@ -37,7 +37,7 @@ Then we can write some script to parse the csv and create them in sphere:
  {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#simpleCategoryTreeOperations()}
 
  <h4>Render a whole tree</h4>
- {@include.example io.sphere.sdk.meta.RenderAWholeCategoryTreeExample}
+ {@include.example io.sphere.sdk.meta.CategoryTreeTextRepresentation}
 
  <h4>Render a breadcrumb</h4>
 
@@ -49,7 +49,11 @@ Then we can write some script to parse the csv and create them in sphere:
 
 
  <h3 id="category-deletion">Delete categories and trees</h3>
- <!-- deleting category with children deletes the children -->
+
+ Removing a category also means to delete the whole tree of the children:
+
+ {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#categoryDeletionIsRecursive()}
+
  <h3 id="category-tree-changes">Change the category tree</h3>
 
 
