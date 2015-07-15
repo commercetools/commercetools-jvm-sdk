@@ -242,7 +242,7 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
     final String container = existingCustomObject.getContainer();
     final String key = existingCustomObject.getKey();
     final CustomObjectByKeyFetch&lt;JsonNode&gt; fetch = CustomObjectByKeyFetch.of(container, key);
-    final Optional&lt;CustomObject&lt;JsonNode&gt;&gt; customObjectOptional = execute(fetch);
+    final Optional&lt;CustomObject&lt;JsonNode&gt;&gt; customObjectOptional = Optional.ofNullable(execute(fetch));
     assertThat(customObjectOptional).isPresent();
     final JsonNode value = customObjectOptional.get().getValue();
     final String expected = existingCustomObject.getValue().getBar();
@@ -355,9 +355,9 @@ import java.util.function.Function;
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectByKeyFetch.java" target="_blank">test code</a>.</pre></div>
  <div id="io-sphere-sdk-customobjects-queries-CustomObjectCustomJsonMappingByKeyFetchTest-execution--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), co -&gt; {
     final Fetch&lt;CustomObject&lt;GsonFoo&gt;&gt; fetch = new GsonFooCustomObjectByKeyFetch(co.getContainer(), co.getKey());
-    final Optional&lt;CustomObject&lt;GsonFoo&gt;&gt; customObjectOptional = execute(fetch);
-    assertThat(customObjectOptional).isPresent();
-    assertThat(customObjectOptional.get().toReference()).isEqualTo(co.toReference());
+    final CustomObject&lt;GsonFoo&gt; customObject = execute(fetch);
+    assertThat(customObject).isNotNull();
+    assertThat(customObject.toReference()).isEqualTo(co.toReference());
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetchTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -427,7 +427,7 @@ try {
  <div id="io-sphere-sdk-customobjects-occexample-FlowTest-doAnUpdate--%s" class=code-example><pre><code class='java'>final CustomObjectByKeyFetch&lt;CustomerNumberCounter&gt; fetch =
         CustomObjectByKeyFetch.of(CONTAINER, KEY, CustomerNumberCounter.customObjectTypeReference());
 
-final CustomObject&lt;CustomerNumberCounter&gt; loadedCustomObject = execute(fetch).get();
+final CustomObject&lt;CustomerNumberCounter&gt; loadedCustomObject = execute(fetch);
 final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;
 final CustomerNumberCounter value = new CustomerNumberCounter(newCustomerNumber, "whateverid");
 final long version = loadedCustomObject.getVersion();

@@ -123,7 +123,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;<a href="../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;<a href="../../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -133,8 +133,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/QueryToFetchAdapter.html" 
 
  <div id="io-sphere-sdk-states-queries-StateByKeyFetchTest-execution--%s" class=code-example><pre><code class='java'>withState(client(), state -&gt; {
     final String key = state.getKey();
-    final Optional&lt;State&gt; stateOption = execute(StateByKeyFetch.of(key));
-    assertThat(stateOption).contains(state);
+    final State fetchedState = execute(StateByKeyFetch.of(key));
+    assertThat(fetchedState).isEqualTo(state);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/queries/StateByKeyFetchTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

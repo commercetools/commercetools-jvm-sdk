@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9,"i2":10};
+var methods = {"i0":10,"i1":9,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -146,6 +146,10 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colFirst"><code>com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="type parameter in JsonEndpoint">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/JsonEndpoint.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>&lt;V&gt;&nbsp;<a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;V&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/JsonEndpoint.html#withTypeReference-com.fasterxml.jackson.core.type.TypeReference-">withTypeReference</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;V&gt;&nbsp;newTypeReference)</code>&nbsp;</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -196,11 +200,20 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <a name="of-com.fasterxml.jackson.core.type.TypeReference-java.lang.String-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;T&gt;&nbsp;of(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference,
                                      java.lang.String&nbsp;endpoint)</pre>
+</li>
+</ul>
+<a name="withTypeReference-com.fasterxml.jackson.core.type.TypeReference-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withTypeReference</h4>
+<pre>public&nbsp;&lt;V&gt;&nbsp;<a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;V&gt;&nbsp;withTypeReference(com.fasterxml.jackson.core.type.TypeReference&lt;V&gt;&nbsp;newTypeReference)</pre>
 </li>
 </ul>
 </li>

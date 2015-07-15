@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -173,7 +173,7 @@ implements <a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="inte
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="type parameter in CustomObjectCustomJsonMappingByKeyFetch">T</a>&gt;&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="type parameter in CustomObjectCustomJsonMappingByKeyFetch">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></span>(<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</code>
 <div class="block">Takes an http response and maps it into a Java object of type T.</div>
 </td>
@@ -253,7 +253,7 @@ implements <a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="inte
 <div class="block">Provides an http request intent, this does not include the execution of it.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="type parameter in CustomObjectCustomJsonMappingByKeyFetch">T</a>&gt;&gt;&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="type parameter in CustomObjectCustomJsonMappingByKeyFetch">T</a>&gt;&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>http request intent</dd>
 </dl>
@@ -265,13 +265,14 @@ implements <a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>deserialize</h4>
-<pre>public final&nbsp;java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="type parameter in CustomObjectCustomJsonMappingByKeyFetch">T</a>&gt;&gt;&nbsp;deserialize(<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</pre>
+<pre>@Nullable
+public final&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="type parameter in CustomObjectCustomJsonMappingByKeyFetch">T</a>&gt;&nbsp;deserialize(<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">SphereRequest</a></code></span></div>
 <div class="block">Takes an http response and maps it into a Java object of type T.
      Before calling this method, check with <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-"><code>SphereRequest.canDeserialize(HttpResponse)</code></a> if the response can be consumed.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="type parameter in CustomObjectCustomJsonMappingByKeyFetch">T</a>&gt;&gt;&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="type parameter in CustomObjectCustomJsonMappingByKeyFetch">T</a>&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/queries/Fetch.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="type parameter in CustomObjectCustomJsonMappingByKeyFetch">T</a>&gt;&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -304,7 +305,7 @@ implements <a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="inte
      can handle this error by returning an empty optional, an empty list or throwing a domain specific exception.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.Optional&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="type parameter in CustomObjectCustomJsonMappingByKeyFetch">T</a>&gt;&gt;&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="type parameter in CustomObjectCustomJsonMappingByKeyFetch">T</a>&gt;&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>httpResponse</code> - the http response which shall be transformed</dd>
 <dt><span class="returnLabel">Returns:</span></dt>

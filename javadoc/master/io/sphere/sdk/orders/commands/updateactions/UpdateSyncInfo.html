@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
         assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
 
         //check channel expansion
-        final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -&gt; m.syncInfo().channel())).get();
+        final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -&gt; m.syncInfo().channel()));
         assertThat(new ArrayList&lt;&gt;(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isPresent();
     })
 );

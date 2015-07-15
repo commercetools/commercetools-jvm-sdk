@@ -131,7 +131,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
         assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
 
         //reference expansion
-        final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -&gt; m.lineItems().state())).get();
+        final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -&gt; m.lineItems().state()));
         final Reference&lt;State&gt; state = new LinkedList&lt;&gt;(loadedOrder.getLineItems().get(0).getState()).getFirst().getState();
         assertThat(state.getObj()).isPresent();
     })

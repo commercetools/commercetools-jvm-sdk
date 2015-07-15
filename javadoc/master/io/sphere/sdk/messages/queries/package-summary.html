@@ -92,7 +92,7 @@
             .withLimit(1);
     final Message messageFromQueryEndpoint = execute(query).head().get();
 
-    final Message message = execute(MessageByIdFetch.of(messageFromQueryEndpoint)).get();
+    final Message message = execute(MessageByIdFetch.of(messageFromQueryEndpoint));
     assertThat(message).isEqualTo(messageFromQueryEndpoint);
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageByIdFetchTest.java" target="_blank">test code</a>.</pre></div>

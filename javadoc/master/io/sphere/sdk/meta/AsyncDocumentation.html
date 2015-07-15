@@ -115,17 +115,17 @@ extends java.lang.Object</pre>
 
 
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-serialWayToFetchCustomerAndCart--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";//time t=0
-final Optional&lt;Customer&gt; customerOption = executeSerial(CustomerByIdFetch.of(customerId));//t=100ms
-final Optional&lt;Cart&gt; cartOption = executeSerial(CartByCustomerIdFetch.of(customerId));//t=200ms
-println("cart: " + cartOption + " customer: " + customerOption);
+final Customer customer = executeSerial(CustomerByIdFetch.of(customerId));//t=100ms
+final Cart cart = executeSerial(CartByCustomerIdFetch.of(customerId));//t=200ms
+println("cart: " + cart + " customer: " + customer);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>So it takes around 200ms since the requests are done one after another. By fetching them in parallel 100ms of time can be saved.</p>
 
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-parallelWayToFetchCustomerAndCart--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";//time t=0
-final CompletionStage&lt;Optional&lt;Customer&gt;&gt; customerStage = execute(CustomerByIdFetch.of(customerId));//t=1ms
+final CompletionStage&lt;Customer&gt; customerStage = execute(CustomerByIdFetch.of(customerId));//t=1ms
 //after creating the CompletionStage the Thread is freed to start further requests
-final CompletionStage&lt;Optional&lt;Cart&gt;&gt; cartStage = execute(CartByCustomerIdFetch.of(customerId));//t=2ms
+final CompletionStage&lt;Cart&gt; cartStage = execute(CartByCustomerIdFetch.of(customerId));//t=2ms
 //collect the results
 customerStage.thenAcceptBoth(cartStage, (customerOption, cartOption) -&gt; {
     //t=102ms
@@ -174,7 +174,7 @@ Mostly, it is easier to reason about side-effect free code. A future is monad so
 
 To use a future for further computation, you probably need to use <code>CompletionStage.thenApply(java.util.function.Function)</code>.
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-thenApplyFirstDemo--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";
-final CompletionStage&lt;Optional&lt;Customer&gt;&gt; customerStage = execute(CustomerByIdFetch.of(customerId));
+final CompletionStage&lt;Customer&gt; customerStage = execute(CustomerByIdFetch.of(customerId));
 final CompletionStage&lt;String&gt; pageStage = customerStage.thenApply(customerOption -&gt;
         "customer page " + customerOption);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
@@ -185,25 +185,24 @@ With <code>CompletionStage.thenApply(java.util.function.Function)</code> you app
  a method.
 
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-thenApplyFirstDemoVerbose--%s" class=code-example><pre><code class='java'>final String customerId = "customer-id";
-final CompletionStage&lt;Optional&lt;Customer&gt;&gt; customerStage = execute(CustomerByIdFetch.of(customerId));
+final CompletionStage&lt;Customer&gt; customerStage = execute(CustomerByIdFetch.of(customerId));
 //stored in a value
-final Function&lt;Optional&lt;Customer&gt;, String&gt; f = customerOption -&gt; "customer page " + customerOption;
+final Function&lt;Customer, String&gt; f = customer -&gt; "customer page " + customer;
 final CompletionStage&lt;String&gt; pageStage = customerStage.thenApply(f);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <div id="io-sphere-sdk-meta-FunctionAsReturnValueDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.queries.CustomerByIdFetch;
-import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 </code></pre><pre><code class='java'>public class FunctionAsReturnValueDemo extends AsyncDocumentationTest {
-    public static final Function&lt;Optional&lt;Customer&gt;, String&gt; renderCustomerPage(final String title) {
+    public static final Function&lt;Customer, String&gt; renderCustomerPage(final String title) {
         return customerOption -&gt; title + " " + customerOption;
     }
 
     public static void showUsage() {
         final String customerId = "customer-id";
-        final CompletionStage&lt;Optional&lt;Customer&gt;&gt; customerStage =
+        final CompletionStage&lt;Customer&gt; customerStage =
                 execute(CustomerByIdFetch.of(customerId));
         final CompletionStage&lt;String&gt; pageStage =
                 customerStage.thenApply(renderCustomerPage("customer page"));
@@ -227,16 +226,16 @@ assertThat(lastNames).isEqualTo(asList("Smith", "Müller"));
 
 
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-shouldUseFlatMap--%s" class=code-example><pre><code class='java'>final String cartIt = "cart-id";
-final CompletionStage&lt;Optional&lt;Cart&gt;&gt; cartStage = execute(CartByIdFetch.of(cartIt));
-final Function&lt;Optional&lt;Cart&gt;, CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt;&gt; f = cartOption -&gt; {
-    final LineItem lineItem = cartOption.get().getLineItems().get(0);
+final CompletionStage&lt;Cart&gt; cartStage = execute(CartByIdFetch.of(cartIt));
+final Function&lt;Cart, CompletionStage&lt;ProductProjection&gt;&gt; f = cart -&gt; {
+    final LineItem lineItem = cart.getLineItems().get(0);
     final String productId = lineItem.getProductId();
-    final CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt; product =
+    final CompletionStage&lt;ProductProjection&gt; product =
             execute(ProductProjectionByIdFetch.of(productId, CURRENT));
     return product;
 };
 // CompletionStage of CompletionStage, urgs!
-final CompletionStage&lt;CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt;&gt; productStageStage =
+final CompletionStage&lt;CompletionStage&lt;ProductProjection&gt;&gt; productStageStage =
         cartStage.thenApply(f);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -244,16 +243,16 @@ final CompletionStage&lt;CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt
  you can use <code>CompletionStage.thenCompose(java.util.function.Function)</code>.
 
  <div id="io-sphere-sdk-meta-AsyncDocumentationTest-flatMapFirstDemo--%s" class=code-example><pre><code class='java'>final String cartIt = "cart-id";
-final CompletionStage&lt;Optional&lt;Cart&gt;&gt; cartStage = execute(CartByIdFetch.of(cartIt));
-final Function&lt;Optional&lt;Cart&gt;, CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt;&gt; f = cartOption -&gt; {
-    final LineItem lineItem = cartOption.get().getLineItems().get(0);
+final CompletionStage&lt;Cart&gt; cartStage = execute(CartByIdFetch.of(cartIt));
+final Function&lt;Cart, CompletionStage&lt;ProductProjection&gt;&gt; f = cart -&gt; {
+    final LineItem lineItem = cart.getLineItems().get(0);
     final String productId = lineItem.getProductId();
-    final CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt; product =
+    final CompletionStage&lt;ProductProjection&gt; product =
             execute(ProductProjectionByIdFetch.of(productId, CURRENT));
     return product;
 };
 //no nested CompletionStage, by using thenCompose instead of thenApply
-final CompletionStage&lt;Optional&lt;ProductProjection&gt;&gt; productStageStage = cartStage.thenCompose(f);
+final CompletionStage&lt;ProductProjection&gt; productStageStage = cartStage.thenCompose(f);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/AsyncDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  It has similar semantics like <code>Stream.flatMap(java.util.function.Function)</code>.
