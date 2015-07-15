@@ -59,6 +59,11 @@ public class CategoryQueryTest extends IntegrationTest {
 
     }
 
+    @Test
+    public void thereIsNoDefaultSortInQueries() throws Exception {
+        assertThat(CategoryQuery.of().sort()).isEmpty();
+    }
+
     private static void checkTotalInQueryResultOf(final Query<Category> query, final Consumer<AbstractIntegerAssert<?>> check) {
         check.accept(assertThat(execute(query).getTotal()));
     }
