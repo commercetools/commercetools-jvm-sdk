@@ -6,7 +6,7 @@ package io.sphere.sdk.meta;
  Lets suppose we want to create this category tree (the number before the name is the externalId):
  <pre><code>{@doc.gen include file sphere-convenience/src/it/resources/category-tree-1.txt}</code></pre>
 
- We define the category data as CSV, we start with the top level so the parent category is before its child categories:
+ We define the category data as CSV, we start with the top level so a parent category appears before its child categories:
 
  <pre><code>{@doc.gen include file sphere-convenience/src/it/resources/category-import-1.csv}</code></pre>
 
@@ -36,23 +36,15 @@ Then we can write some script to parse the csv and create them in sphere:
 
  {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#simpleCategoryTreeOperations()}
 
-  Here is some example to display a whole categoryTree:
+ <h4>Render a whole tree</h4>
+ {@include.example io.sphere.sdk.meta.RenderAWholeCategoryTreeExample}
 
- First the helper function for the recursive algorithm:
- {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#appendToBuilderFullCategoryTree()}
-
- And then the call:
-
- {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#createAViewForACategoryTree()}
-
-Another example is to create a breadcumb:
+ <h4>Render a breadcrumb</h4>
 
  {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#createAViewForACategoryBreadCrumb()}
 
- An example for a partial tree:
-
- {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#createAViewForACategoryTreePart()}
- {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#appendToBuilderCategoryTreePart(io.sphere.sdk.models.Identifiable, java.lang.StringBuilder, io.sphere.sdk.categories.CategoryTree, int, io.sphere.sdk.categories.Category)}
+ <h4>Render a partial tree</h4>
+ {@include.example io.sphere.sdk.meta.RenderAPartialTree}
 
 
 

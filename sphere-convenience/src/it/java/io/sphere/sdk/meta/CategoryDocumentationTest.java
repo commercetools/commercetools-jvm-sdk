@@ -38,11 +38,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CategoryDocumentationTest extends IntegrationTest {
 
     private static final Comparator<Category> EXTERNALID_COMPARATOR = Comparator.comparing(c -> Integer.parseInt(c.getExternalId().get()));
+    private static List<Category> categories;
+    private static CategoryTree tree;
 
     @BeforeClass
     public static void beforeClass() throws IOException {
         deleteAllCategories();
-        setUpData();
+        categories = setUpData();
+        tree = CategoryTree.of(categories);
     }
 
     @Test
@@ -52,7 +55,9 @@ public class CategoryDocumentationTest extends IntegrationTest {
         final CompletionStage<List<Category>> categoriesStage =
                 ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
         final List<Category> categories = categoriesStage.toCompletableFuture().join();
-        assertThat(categories).matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).get().equals("boots-women")));
+        assertThat(categories)
+                .hasSize(15)
+                .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).get().equals("boots-women")));
     }
 
     @Test
@@ -64,7 +69,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
                 ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
         final List<Category> rootCategories = categoriesStage.toCompletableFuture().join();
         assertThat(rootCategories.stream().allMatch(cat -> !cat.getParent().isPresent()))
-                .overridingErrorMessage("fetched categories have no parent")
+                .overridingErrorMessage("fetched only root categories")
                 .isTrue();
     }
 
@@ -95,73 +100,12 @@ public class CategoryDocumentationTest extends IntegrationTest {
 
     @Test
     public void createAViewForACategoryTree() throws Exception {
-        final CategoryTree categoryTree = createCategoryTree();
-        final StringBuilder stringBuilder = new StringBuilder();
-        categoryTree.getRoots()
-                .forEach(category -> appendToBuilderFullCategoryTree(category, stringBuilder, categoryTree, 0));
-        final String actual = stringBuilder.toString();
-        assertThat(actual).isEqualTo(
-                "0 top\n" +
-                        "    1 men\n" +
-                        "        3 clothing\n" +
-                        "            7 t-shirts\n" +
-                        "            8 jeans\n" +
-                        "        4 shoes\n" +
-                        "            9 sandals\n" +
-                        "            10 boots\n" +
-                        "    2 women\n" +
-                        "        5 clothing\n" +
-                        "            11 t-shirts\n" +
-                        "            12 jeans\n" +
-                        "        6 shoes\n" +
-                        "            13 sandals\n" +
-                        "            14 boots\n");
+        RenderAWholeCategoryTreeExample.demoForRendering(tree);
     }
 
     @Test
     public void createAViewForACategoryTreePart() throws Exception {
-        final CategoryTree categoryTree = createCategoryTree();
-        final Category currentCategory = categoryTree.findBySlug(ENGLISH, "tshirts-men").get();
-        final List<Reference<Category>> ancestorReferences = currentCategory.getAncestors().stream()
-                .skip(1)//remove top level category
-                .collect(toList());
-        final StringBuilder stringBuilder = new StringBuilder();
-        appendToBuilderCategoryTreePart(ancestorReferences.get(0), stringBuilder, categoryTree, 0, currentCategory);
-        final String actual = stringBuilder.toString();
-        assertThat(actual).isEqualTo(
-                        "1 men\n" +
-                        "    3 clothing\n" +
-                        "        ***7 t-shirts***\n" +
-                        "        8 jeans\n" +
-                        "    4 shoes\n");
-    }
-
-
-    private void appendToBuilderCategoryTreePart(final Identifiable<Category> categoryReference, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level, final Category selectedCategory) {
-        final Category category = categoryTree.findById(categoryReference.getId()).get();
-        final String name = category.getName().get(ENGLISH).get();
-        final String externalId = category.getExternalId().get();
-        final String offset = StringUtils.repeat(' ', level * 4);
-
-        stringBuilder.append(offset);
-        if (categoryReference.getId().equals(selectedCategory.getId())) {
-            stringBuilder.append("***");
-        }
-        stringBuilder.append(externalId).append(" ").append(name);
-        if (categoryReference.getId().equals(selectedCategory.getId())) {
-            stringBuilder.append("***");
-        }
-        stringBuilder.append("\n");
-
-        final Predicate<Category> isAncestor = cat -> selectedCategory.getAncestors().stream().anyMatch(anc -> anc.getId().equals(cat.getId()));
-        final Predicate<Category> isOnHigherLevelThanCurrent = cat -> cat.getAncestors().size() < selectedCategory.getAncestors().size();
-        final Predicate<Category> isSibling = cat -> cat.getAncestors().equals(selectedCategory.getAncestors());
-
-        final List<Category> children = categoryTree.findChildren(category);
-        children.stream()
-                .filter(isAncestor.or(isOnHigherLevelThanCurrent).or(isSibling))
-                .sorted(EXTERNALID_COMPARATOR)
-                .forEach(child -> appendToBuilderCategoryTreePart(child, stringBuilder, categoryTree, level + 1, selectedCategory));
+        RenderAPartialTree.demoForRendering(tree);
     }
 
     @Test
@@ -182,23 +126,16 @@ public class CategoryDocumentationTest extends IntegrationTest {
         assertThat(actual).isEqualTo("1 men > 3 clothing > 7 t-shirts");
     }
 
-    private void appendToBuilderFullCategoryTree(final Category category, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level) {
-        final String name = category.getName().get(ENGLISH).get();
-        final String externalId = category.getExternalId().get();
-        final String offset = StringUtils.repeat(' ', level * 4);
-        stringBuilder.append(offset).append(externalId).append(" ").append(name).append("\n");
-        final List<Category> children = categoryTree.findChildren(category);
-        children.stream()
-                .sorted(EXTERNALID_COMPARATOR)
-                .forEach(child -> appendToBuilderFullCategoryTree(child, stringBuilder, categoryTree, level + 1));
-    }
 
     private CategoryTree createCategoryTree() {
+        //stuff from previous example
         final Publisher<Category> categoryPublisher =
                 ExperimentalReactiveStreamUtils.publisherOf(CategoryQuery.of(), sphereClient());
         final CompletionStage<List<Category>> categoriesStage =
                 ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
         final List<Category> categories = categoriesStage.toCompletableFuture().join();
+
+        //creation of a category tree
         final CategoryTree categoryTree = CategoryTree.of(categories);
         return categoryTree;
     }
@@ -210,19 +147,16 @@ public class CategoryDocumentationTest extends IntegrationTest {
         subscriber.getFuture().join();
     }
 
-    private static void setUpData() throws IOException {
+    private static List<Category> setUpData() throws IOException {
         final Map<String, Category> externalIdToCategoryMap = new HashMap<>();//contains all the created categories
         try (final InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("category-import-1.csv")) {
             try (final InputStreamReader inputStreamReader = new InputStreamReader(resourceAsStream)) {
                 try (final BufferedReader bufferedReader = new BufferedReader(inputStreamReader)) {
-                    bufferedReader.lines()
+                    final List<Category> categories = bufferedReader.lines()
                             .skip(1)//first line is headers
                             .map(line -> line.trim())
                             .filter(line -> !"".equals(line))//remove empty lines
-                            .map(line -> {
-                                final String[] split = line.split(",");
-                                return split;
-                            })
+                            .map(line -> line.split(","))
                             .map(columns -> {
                                 final LocalizedStrings name = LocalizedStrings.of(GERMAN, columns[2]).plus(ENGLISH, columns[4]);
                                 final LocalizedStrings slug = LocalizedStrings.of(GERMAN, columns[3]).plus(ENGLISH, columns[5]);
@@ -242,7 +176,8 @@ public class CategoryDocumentationTest extends IntegrationTest {
                                 externalIdToCategoryMap.put(externalId, category);
                                 return category;
                             })
-                    .collect(toList());
+                            .collect(toList());
+                    return categories;
                 }
             }
         }
