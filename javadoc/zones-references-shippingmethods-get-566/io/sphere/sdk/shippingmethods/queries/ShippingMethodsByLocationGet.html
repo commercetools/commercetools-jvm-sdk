@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a>&lt;java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a>&lt;java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;,<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>,<a href="../../../../../io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodsByLocationGet</a>&gt;, <a href="../../../../../io/sphere/sdk/queries/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.queries">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>,<a href="../../../../../io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodsByLocationGet</a>,<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ShippingMethodExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a>&lt;java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;,<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>,<a href="../../../../../io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodsByLocationGet</a>,<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ShippingMethodExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpandeable.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeable</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>,<a href="../../../../../io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodsByLocationGet</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
@@ -109,12 +109,12 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">ShippingMethodsByLocationGet</span>
-extends <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a>&lt;java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;,<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>,<a href="../../../../../io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodsByLocationGet</a>,<a href="../../../../../io/sphere/sdk/shippingmethods/expansion/ShippingMethodExpansionModel.html" title="class in io.sphere.sdk.shippingmethods.expansion">ShippingMethodExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;java.util.List&lt;<a href="../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;&gt;</pre>
 <div class="block">Retrieves all the shipping methods that can ship to the given location.
  If the currency parameter is given, then the shipping methods must also have a rate defined in the specified currency.
 
  <div id="io-sphere-sdk-shippingmethods-queries-ShippingMethodsByLocationGetTest-execution--%s" class=code-example><pre><code class='java'>final List&lt;ShippingMethod&gt; result =
-        execute(ShippingMethodsByLocationGet.of(CountryCode.US, "Kansas", USD).withExpansionPaths(m -&gt; m.zones()));
+        execute(ShippingMethodsByLocationGet.of(CountryCode.US, "Kansas", USD));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGetTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
@@ -156,32 +156,11 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" ti
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.MetaModelFetchDsl">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries">MetaModelFetchDsl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#expansionPaths--">expansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.FetchDsl">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/FetchDsl.html" title="interface in io.sphere.sdk.queries">FetchDsl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/FetchDsl.html#toFetch--">toFetch</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.Fetch">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries">Fetch</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/Fetch.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></code></li>
-</ul>
-<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequest">
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.client.<a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a></h3>
-<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code></li>
 </ul>
 </li>
 </ul>
