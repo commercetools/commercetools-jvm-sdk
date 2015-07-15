@@ -6,6 +6,8 @@ import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.categories.CategoryTree;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
+import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
+import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
@@ -157,6 +159,55 @@ public class CategoryDocumentationTest extends IntegrationTest {
                         "        6 shoes\n" +
                         "            13 sandals\n" +
                         "            14 boots\n");
+        //end example parsing here
+        beforeClass();
+    }
+
+    @Test
+    public void moveCategoryTree() throws Exception {
+        final CategoryTree categoryTree = fetchCurrentTree();
+        final String startingSituation = CategoryTreeTextRepresentation.visualizeTree(categoryTree);
+        assertThat(startingSituation).isEqualTo(
+                        "0 top\n" +
+                        "    1 men\n" +
+                        "        3 clothing\n" +
+                        "            7 t-shirts\n" +
+                        "            8 jeans\n" +
+                        "        4 shoes\n" +
+                        "            9 sandals\n" +
+                        "            10 boots\n" +
+                        "    2 women\n" +
+                        "        5 clothing\n" +
+                        "            11 t-shirts\n" +
+                        "            12 jeans\n" +
+                        "        6 shoes\n" +
+                        "            13 sandals\n" +
+                        "            14 boots\n");
+
+        final Category mensClothing = categoryTree.findByExternalId("3").get();
+        final Category top = categoryTree.findByExternalId("0").get();
+
+        //make mensClothing a child of top
+        execute(CategoryUpdateCommand.of(mensClothing, ChangeParent.of(top)));
+
+        final CategoryTree categoryTreeAfterMovement = fetchCurrentTree();
+        final String actual = CategoryTreeTextRepresentation.visualizeTree(categoryTreeAfterMovement);
+        assertThat(actual).isEqualTo(
+                        "0 top\n" +
+                        "    1 men\n" +
+                        "        4 shoes\n" +
+                        "            9 sandals\n" +
+                        "            10 boots\n" +
+                        "    2 women\n" +
+                        "        5 clothing\n" +
+                        "            11 t-shirts\n" +
+                        "            12 jeans\n" +
+                        "        6 shoes\n" +
+                        "            13 sandals\n" +
+                        "            14 boots\n" +
+                        "    3 clothing\n" +
+                        "        7 t-shirts\n" +
+                        "        8 jeans\n");
         //end example parsing here
         beforeClass();
     }

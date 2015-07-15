@@ -56,9 +56,17 @@ Then we can write some script to parse the csv and create them in sphere:
 
  <h3 id="category-tree-changes">Change the category tree</h3>
 
+ It is possible to reorganize category trees by changing the parent reference of a category.
+ But it is not possible to transform a category with a parent to a root category. If you need this, you need to create a new category and move the subcategories there.
+
+ <p>In the following example we move the mens-clothing category to the top category:</p>
+
+ {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#moveCategoryTree()}
 
 
+ <h3 id="">Find products in a category tree</h3>
 
+<!-- and connection of cats in tree -->
 
 
  */
