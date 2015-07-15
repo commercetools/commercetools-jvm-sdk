@@ -252,24 +252,21 @@ assertThat(names).contains("jeans", "t-shirts");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4>Render a whole tree</h4>
- <div id="io-sphere-sdk-meta-RenderAWholeCategoryTreeExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.categories.Category;
+ <div id="io-sphere-sdk-meta-CategoryTreeTextRepresentation%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryTree;
 import org.apache.commons.lang3.StringUtils;
 import java.util.Comparator;
 import java.util.List;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
-</code></pre><pre><code class='java'>public final class RenderAWholeCategoryTreeExample {
+</code></pre><pre><code class='java'>public final class CategoryTreeTextRepresentation {
     private static final Comparator&lt;Category&gt; EXTERNALID_COMPARATOR = Comparator.comparing(c -&gt; Integer.parseInt(c.getExternalId().get()));
 
-    private RenderAWholeCategoryTreeExample() {
+    private CategoryTreeTextRepresentation() {
     }
 
     public static void demoForRendering(final CategoryTree categoryTree) {
-        final StringBuilder stringBuilder = new StringBuilder();
-        categoryTree.getRoots()
-                .forEach(category -&gt; appendToBuilder(category, stringBuilder, categoryTree, 0));
-        final String actual = stringBuilder.toString();
+        final String actual = visualizeTree(categoryTree);
         assertThat(actual).isEqualTo(
                         "0 top\n" +
                         "    1 men\n" +
@@ -288,6 +285,13 @@ import static org.assertj.core.api.Assertions.assertThat;
                         "            14 boots\n");
     }
 
+    public static String visualizeTree(final CategoryTree categoryTree) {
+        final StringBuilder stringBuilder = new StringBuilder();
+        categoryTree.getRoots()
+                .forEach(category -&gt; appendToBuilder(category, stringBuilder, categoryTree, 0));
+        return stringBuilder.toString();
+    }
+
 
     private static void appendToBuilder(final Category category, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level) {
         final String name = category.getName().get(ENGLISH).get();
@@ -300,7 +304,7 @@ import static org.assertj.core.api.Assertions.assertThat;
                 .forEach(child -&gt; appendToBuilder(child, stringBuilder, categoryTree, level + 1));
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/RenderAWholeCategoryTreeExample.java" target="_blank">test code</a>.</pre></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryTreeTextRepresentation.java" target="_blank">test code</a>.</pre></div>
 
  <h4>Render a breadcrumb</h4>
 
@@ -387,7 +391,43 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
  <h3 id="category-deletion">Delete categories and trees</h3>
- <!-- deleting category with children deletes the children -->
+
+ Removing a category also means to delete the whole tree of the children:
+
+ <div id="io-sphere-sdk-meta-CategoryDocumentationTest-categoryDeletionIsRecursive--%s" class=code-example><pre><code class='java'>final CategoryTree categoryTree = fetchCurrentTree();
+final String startingSituation = CategoryTreeTextRepresentation.visualizeTree(categoryTree);
+assertThat(startingSituation).isEqualTo(
+                "0 top\n" +
+                "    1 men\n" +
+                "        3 clothing\n" +
+                "            7 t-shirts\n" +
+                "            8 jeans\n" +
+                "        4 shoes\n" +
+                "            9 sandals\n" +
+                "            10 boots\n" +
+                "    2 women\n" +
+                "        5 clothing\n" +
+                "            11 t-shirts\n" +
+                "            12 jeans\n" +
+                "        6 shoes\n" +
+                "            13 sandals\n" +
+                "            14 boots\n");
+
+final Category men = categoryTree.findByExternalId("1").get();
+execute(CategoryDeleteCommand.of(men));
+final CategoryTree categoryTreeAfterDeletion = fetchCurrentTree();
+final String actual = CategoryTreeTextRepresentation.visualizeTree(categoryTreeAfterDeletion);
+assertThat(actual).isEqualTo(
+                "0 top\n" +
+                "    2 women\n" +
+                "        5 clothing\n" +
+                "            11 t-shirts\n" +
+                "            12 jeans\n" +
+                "        6 shoes\n" +
+                "            13 sandals\n" +
+                "            14 boots\n");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
  <h3 id="category-tree-changes">Change the category tree</h3></div>
 </li>
 </ul>
