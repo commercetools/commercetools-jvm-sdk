@@ -10,12 +10,12 @@ import io.sphere.sdk.queries.MetaModelFetchDslImpl;
 
  {@include.example io.sphere.sdk.orders.commands.OrderFromCartCreateCommandTest#execution()}
  */
-final class OrderByIdFetchImpl extends MetaModelFetchDslImpl<Order, OrderByIdFetch, OrderExpansionModel<Order>> implements OrderByIdFetch {
+final class OrderByIdFetchImpl extends MetaModelFetchDslImpl<Order, Order, OrderByIdFetch, OrderExpansionModel<Order>> implements OrderByIdFetch {
     OrderByIdFetchImpl(final String id) {
         super(id, OrderEndpoint.ENDPOINT, OrderExpansionModel.of(), OrderByIdFetchImpl::new);
     }
 
-    public OrderByIdFetchImpl(MetaModelFetchDslBuilder<Order, OrderByIdFetch, OrderExpansionModel<Order>> builder) {
+    public OrderByIdFetchImpl(MetaModelFetchDslBuilder<Order, Order, OrderByIdFetch, OrderExpansionModel<Order>> builder) {
         super(builder);
     }
 }

@@ -16,6 +16,6 @@ public class ChannelDeleteCommandTest extends IntegrationTest {
 
         execute(ChannelDeleteCommand.of(channel));
 
-        assertThat(execute(ChannelByIdFetch.of(channel.getId()))).isEmpty();
+        assertThat(execute(ChannelByIdFetch.of(channel.getId()))).isNull();
     }
 }

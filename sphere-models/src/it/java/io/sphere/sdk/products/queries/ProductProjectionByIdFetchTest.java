@@ -5,12 +5,9 @@ import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-
-import java.util.Optional;
-
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionByIdFetchTest extends IntegrationTest {
     @Test
@@ -19,8 +16,7 @@ public class ProductProjectionByIdFetchTest extends IntegrationTest {
             final ProductProjectionType projectionType = STAGED;
             final String productId = product.getId();
             final ProductProjectionByIdFetch sphereRequest = ProductProjectionByIdFetch.of(productId, projectionType);
-            final Optional<ProductProjection> loadedProductProjection = execute(sphereRequest);
-            final ProductProjection productProjection = loadedProductProjection.get();
+            final ProductProjection productProjection = execute(sphereRequest);
             final String fetchedProjectionId = productProjection.getId();
             assertThat(fetchedProjectionId).isEqualTo(productId);
             assertThat(productProjection.getCategories()).isEqualTo(product.getMasterData().get(projectionType).get().getCategories());

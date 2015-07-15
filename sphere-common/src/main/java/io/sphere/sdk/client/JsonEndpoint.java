@@ -23,4 +23,8 @@ public class JsonEndpoint<T> extends Base {
     public static <T> JsonEndpoint<T> of(final TypeReference<T> typeReference, final String endpoint) {
         return new JsonEndpoint<>(typeReference, endpoint);
     }
+
+    public <V> JsonEndpoint<V> withTypeReference(final TypeReference<V> newTypeReference) {
+        return of(newTypeReference, endpoint);
+    }
 }

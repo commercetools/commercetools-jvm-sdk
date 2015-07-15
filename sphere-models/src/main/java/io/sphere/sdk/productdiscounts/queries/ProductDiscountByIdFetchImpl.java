@@ -5,12 +5,12 @@ import io.sphere.sdk.productdiscounts.expansion.ProductDiscountExpansionModel;
 import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
 import io.sphere.sdk.queries.MetaModelFetchDslImpl;
 
-final class ProductDiscountByIdFetchImpl extends MetaModelFetchDslImpl<ProductDiscount, ProductDiscountByIdFetch, ProductDiscountExpansionModel<ProductDiscount>> implements ProductDiscountByIdFetch {
+final class ProductDiscountByIdFetchImpl extends MetaModelFetchDslImpl<ProductDiscount, ProductDiscount, ProductDiscountByIdFetch, ProductDiscountExpansionModel<ProductDiscount>> implements ProductDiscountByIdFetch {
     ProductDiscountByIdFetchImpl(final String id) {
         super(id, ProductDiscountEndpoint.ENDPOINT, ProductDiscountExpansionModel.of(), ProductDiscountByIdFetchImpl::new);
     }
 
-    public ProductDiscountByIdFetchImpl(MetaModelFetchDslBuilder<ProductDiscount, ProductDiscountByIdFetch, ProductDiscountExpansionModel<ProductDiscount>> builder) {
+    public ProductDiscountByIdFetchImpl(MetaModelFetchDslBuilder<ProductDiscount, ProductDiscount, ProductDiscountByIdFetch, ProductDiscountExpansionModel<ProductDiscount>> builder) {
         super(builder);
     }
 }

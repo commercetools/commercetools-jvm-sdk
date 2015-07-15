@@ -11,20 +11,21 @@ import java.util.function.Function;
 
 /**
  *
- * @param <T> type of the query result
+ * @param <R> result type, maybe directly {@code T} or sth. like {@code List<T>}
+ * @param <T> type a single result item
  * @param <C> type of the class implementing this class
  * @param <E> type of the expansion model
  */
-public class MetaModelFetchDslBuilder<T, C extends MetaModelFetchDsl<T, C, E>, E> extends Base implements Builder<C> {
+public class MetaModelFetchDslBuilder<R, T, C extends MetaModelFetchDsl<R, T, C, E>, E> extends Base implements Builder<C> {
 
-    JsonEndpoint<T> endpoint;
+    JsonEndpoint<R> endpoint;
     String identifierToSearchFor;
     List<ExpansionPath<T>> expansionPaths;
     List<HttpQueryParameter> additionalParameters;
     E expansionModel;
-    Function<MetaModelFetchDslBuilder<T, C, E>, C> builderFunction;
+    Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction;
 
-    public MetaModelFetchDslBuilder(final MetaModelFetchDslImpl<T, C, E> template) {
+    public MetaModelFetchDslBuilder(final MetaModelFetchDslImpl<R, T, C, E> template) {
         endpoint = template.endpoint;
         identifierToSearchFor = template.identifierToSearchFor;
         expansionPaths = template.expansionPaths;
@@ -38,7 +39,7 @@ public class MetaModelFetchDslBuilder<T, C extends MetaModelFetchDsl<T, C, E>, E
         return builderFunction.apply(this);
     }
 
-    public MetaModelFetchDslBuilder<T, C, E> expansionPaths(final List<ExpansionPath<T>> expansionPaths) {
+    public MetaModelFetchDslBuilder<R, T, C, E> expansionPaths(final List<ExpansionPath<T>> expansionPaths) {
         this.expansionPaths = expansionPaths;
         return this;
     }

@@ -18,16 +18,16 @@ public class CustomObjectCustomJsonMappingByKeyFetchTest extends IntegrationTest
     public void execution() throws Exception {
         CustomObjectFixtures.withCustomObject(client(), co -> {
             final Fetch<CustomObject<GsonFoo>> fetch = new GsonFooCustomObjectByKeyFetch(co.getContainer(), co.getKey());
-            final Optional<CustomObject<GsonFoo>> customObjectOptional = execute(fetch);
-            assertThat(customObjectOptional).isPresent();
-            assertThat(customObjectOptional.get().toReference()).isEqualTo(co.toReference());
+            final CustomObject<GsonFoo> customObject = execute(fetch);
+            assertThat(customObject).isNotNull();
+            assertThat(customObject.toReference()).isEqualTo(co.toReference());
         });
     }
 
     @Test
     public void executionWithAbsent() throws Exception {
         final Fetch<CustomObject<GsonFoo>> fetch = new GsonFooCustomObjectByKeyFetch("NOTPRESENT", "NOTPRESENT");
-        final Optional<CustomObject<GsonFoo>> customObjectOptional = execute(fetch);
-        assertThat(customObjectOptional).isEmpty();
+        final CustomObject<GsonFoo> customObject = execute(fetch);
+        assertThat(customObject).isNull();
     }
 }

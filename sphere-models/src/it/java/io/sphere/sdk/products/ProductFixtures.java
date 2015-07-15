@@ -105,7 +105,7 @@ public class ProductFixtures {
     }
 
     public static void delete(final TestClient client, final Product product) {
-        final Optional<Product> freshLoadedProduct = client.execute(ProductByIdFetch.of(product.getId()));
+        final Optional<Product> freshLoadedProduct = Optional.ofNullable(client.execute(ProductByIdFetch.of(product.getId())));
         freshLoadedProduct.ifPresent(loadedProduct -> {
             final boolean isPublished = loadedProduct.getMasterData().isPublished();
             final Product unPublishedProduct;

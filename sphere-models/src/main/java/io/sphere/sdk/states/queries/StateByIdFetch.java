@@ -9,7 +9,7 @@ import io.sphere.sdk.states.expansion.StateExpansionModel;
 import java.util.List;
 import java.util.function.Function;
 
-public interface StateByIdFetch extends MetaModelFetchDsl<State, StateByIdFetch, StateExpansionModel<State>> {
+public interface StateByIdFetch extends MetaModelFetchDsl<State, State, StateByIdFetch, StateExpansionModel<State>> {
     static StateByIdFetch of(final Identifiable<State> cartDiscount) {
         return of(cartDiscount.getId());
     }

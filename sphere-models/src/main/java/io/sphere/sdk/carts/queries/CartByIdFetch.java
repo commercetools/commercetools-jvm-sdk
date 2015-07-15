@@ -14,7 +14,7 @@ import java.util.function.Function;
 
  {@include.example io.sphere.sdk.carts.queries.CartByIdFetchTest#fetchById()}
  */
-public interface CartByIdFetch extends MetaModelFetchDsl<Cart, CartByIdFetch, CartExpansionModel<Cart>> {
+public interface CartByIdFetch extends MetaModelFetchDsl<Cart, Cart, CartByIdFetch, CartExpansionModel<Cart>> {
     static CartByIdFetch of(final Identifiable<Cart> cartDiscount) {
         return of(cartDiscount.getId());
     }

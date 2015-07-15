@@ -21,7 +21,7 @@ public class CustomObjectByKeyFetchTest extends IntegrationTest {
             final String key = existingCustomObject.getKey();
             final CustomObjectByKeyFetch<Foo> fetch =
                     CustomObjectByKeyFetch.of(container, key, Foo.customObjectTypeReference());
-            final Optional<CustomObject<Foo>> customObjectOptional = execute(fetch);
+            final Optional<CustomObject<Foo>> customObjectOptional = Optional.ofNullable(execute(fetch));
             assertThat(customObjectOptional).isPresent();
             final Reference<CustomObject<JsonNode>> actual = customObjectOptional.get().toReference();
             assertThat(actual).isEqualTo(existingCustomObject.toReference());
@@ -34,7 +34,7 @@ public class CustomObjectByKeyFetchTest extends IntegrationTest {
             final String container = existingCustomObject.getContainer();
             final String key = existingCustomObject.getKey();
             final CustomObjectByKeyFetch<JsonNode> fetch = CustomObjectByKeyFetch.of(container, key);
-            final Optional<CustomObject<JsonNode>> customObjectOptional = execute(fetch);
+            final Optional<CustomObject<JsonNode>> customObjectOptional = Optional.ofNullable(execute(fetch));
             assertThat(customObjectOptional).isPresent();
             final JsonNode value = customObjectOptional.get().getValue();
             final String expected = existingCustomObject.getValue().getBar();

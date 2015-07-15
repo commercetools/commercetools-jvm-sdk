@@ -4,9 +4,7 @@ import io.sphere.sdk.states.State;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.Optional;
-
-import static io.sphere.sdk.states.StateFixtures.*;
+import static io.sphere.sdk.states.StateFixtures.withState;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StateByKeyFetchTest extends IntegrationTest {
@@ -14,8 +12,8 @@ public class StateByKeyFetchTest extends IntegrationTest {
     public void execution() throws Exception {
         withState(client(), state -> {
             final String key = state.getKey();
-            final Optional<State> stateOption = execute(StateByKeyFetch.of(key));
-            assertThat(stateOption).contains(state);
+            final State fetchedState = execute(StateByKeyFetch.of(key));
+            assertThat(fetchedState).isEqualTo(state);
         });
     }
 }

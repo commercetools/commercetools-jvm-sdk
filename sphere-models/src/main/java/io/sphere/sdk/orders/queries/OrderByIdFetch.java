@@ -14,7 +14,7 @@ import java.util.function.Function;
 
  {@include.example io.sphere.sdk.orders.commands.OrderFromCartCreateCommandTest#execution()}
  */
-public interface OrderByIdFetch extends MetaModelFetchDsl<Order, OrderByIdFetch, OrderExpansionModel<Order>> {
+public interface OrderByIdFetch extends MetaModelFetchDsl<Order, Order, OrderByIdFetch, OrderExpansionModel<Order>> {
     static OrderByIdFetch of(final Identifiable<Order> cartDiscount) {
         return of(cartDiscount.getId());
     }

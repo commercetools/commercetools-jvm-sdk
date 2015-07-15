@@ -3,9 +3,7 @@ package io.sphere.sdk.queries;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.http.HttpResponse;
 
-import java.util.Optional;
-
-public interface Fetch<T> extends SphereRequest<Optional<T>> {
+public interface Fetch<T> extends SphereRequest<T> {
     @Override
-    Optional<T> deserialize(final HttpResponse httpResponse);
+    T deserialize(final HttpResponse httpResponse);
 }

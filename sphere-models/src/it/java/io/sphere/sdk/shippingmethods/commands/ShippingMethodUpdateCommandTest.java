@@ -110,7 +110,7 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
                 //check reference expansion
                 final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
                                 .plusExpansionPaths(m -> m.zoneRates().zone())
-                ).get();
+                );
                 assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
                 assertThat(loadedShippingMethod.getZones().get(0).getObj())
                         .overridingErrorMessage("the convenience method also has expanded references").isPresent();

@@ -5,12 +5,12 @@ import io.sphere.sdk.queries.MetaModelFetchDslImpl;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.expansion.StateExpansionModel;
 
-final class StateByIdFetchImpl extends MetaModelFetchDslImpl<State, StateByIdFetch, StateExpansionModel<State>> implements StateByIdFetch {
+final class StateByIdFetchImpl extends MetaModelFetchDslImpl<State, State, StateByIdFetch, StateExpansionModel<State>> implements StateByIdFetch {
     StateByIdFetchImpl(final String id) {
         super(id, StateEndpoint.ENDPOINT, StateExpansionModel.of(), StateByIdFetchImpl::new);
     }
 
-    public StateByIdFetchImpl(MetaModelFetchDslBuilder<State, StateByIdFetch, StateExpansionModel<State>> builder) {
+    public StateByIdFetchImpl(MetaModelFetchDslBuilder<State, State, StateByIdFetch, StateExpansionModel<State>> builder) {
         super(builder);
     }
 }

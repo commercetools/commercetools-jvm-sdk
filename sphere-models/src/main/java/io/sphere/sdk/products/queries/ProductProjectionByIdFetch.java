@@ -10,7 +10,7 @@ import io.sphere.sdk.queries.MetaModelFetchDsl;
 import java.util.List;
 import java.util.function.Function;
 
-public interface ProductProjectionByIdFetch extends MetaModelFetchDsl<ProductProjection, ProductProjectionByIdFetch, ProductProjectionExpansionModel<ProductProjection>> {
+public interface ProductProjectionByIdFetch extends MetaModelFetchDsl<ProductProjection, ProductProjection, ProductProjectionByIdFetch, ProductProjectionExpansionModel<ProductProjection>> {
 
     static ProductProjectionByIdFetch of(final Identifiable<ProductProjection> product, final ProductProjectionType projectionType) {
         return of(product.getId(), projectionType);

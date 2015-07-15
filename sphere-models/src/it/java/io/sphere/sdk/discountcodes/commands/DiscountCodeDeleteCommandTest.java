@@ -14,6 +14,6 @@ public class DiscountCodeDeleteCommandTest extends IntegrationTest {
         final String code = DiscountCodeDeleteCommandTest.class.getSimpleName();
         final DiscountCode discountCode = createDiscountCode(client(), code);
         execute(DiscountCodeDeleteCommand.of(discountCode));
-        assertThat(execute(DiscountCodeByIdFetch.of(discountCode))).isEmpty();
+        assertThat(execute(DiscountCodeByIdFetch.of(discountCode))).isNull();
     }
 }

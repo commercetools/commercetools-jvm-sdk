@@ -18,7 +18,7 @@ public class MessageByIdFetchTest extends IntegrationTest {
                     .withLimit(1);
             final Message messageFromQueryEndpoint = execute(query).head().get();
 
-            final Message message = execute(MessageByIdFetch.of(messageFromQueryEndpoint)).get();
+            final Message message = execute(MessageByIdFetch.of(messageFromQueryEndpoint));
             assertThat(message).isEqualTo(messageFromQueryEndpoint);
         }));
     }

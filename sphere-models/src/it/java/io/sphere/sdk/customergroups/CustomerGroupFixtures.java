@@ -15,7 +15,7 @@ public class CustomerGroupFixtures {
         final String name = randomString();
         final CustomerGroup customerGroup = client.execute(CustomerGroupCreateCommand.of(name));
         consumer.accept(customerGroup);
-        final Optional<CustomerGroup> customerGroupOptional = client.execute(CustomerGroupByIdFetch.of(customerGroup.getId()));
+        final Optional<CustomerGroup> customerGroupOptional = Optional.ofNullable(client.execute(CustomerGroupByIdFetch.of(customerGroup.getId())));
         customerGroupOptional.ifPresent(group -> client.execute(CustomerGroupDeleteCommand.of(group)));
     }
 

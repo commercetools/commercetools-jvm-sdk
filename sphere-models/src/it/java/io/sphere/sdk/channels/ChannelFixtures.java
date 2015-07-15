@@ -5,6 +5,7 @@ import io.sphere.sdk.channels.commands.ChannelDeleteCommand;
 import io.sphere.sdk.channels.queries.ChannelByKeyFetch;
 import io.sphere.sdk.client.TestClient;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -53,7 +54,7 @@ public class ChannelFixtures {
 
     private static Channel getOrCreateChannel(final TestClient client, final String key, final ChannelRole roles) {
         final ChannelByKeyFetch channelByKeyFetch = ChannelByKeyFetch.of(key);
-        return client.execute(channelByKeyFetch).orElseGet(() -> {
+        return Optional.ofNullable(client.execute(channelByKeyFetch)).orElseGet(() -> {
             final ChannelCreateCommand channelCreateCommand =
                     ChannelCreateCommand.of(ChannelDraft.of(key).withRoles(roles));
             return client.execute(channelCreateCommand);
@@ -61,6 +62,7 @@ public class ChannelFixtures {
     }
 
     public static void cleanUpChannelByKey(final TestClient client, final String channelKey) {
-        client.execute(ChannelByKeyFetch.of(channelKey)).ifPresent(channel -> client.execute(ChannelDeleteCommand.of(channel)));
+        Optional.ofNullable(client.execute(ChannelByKeyFetch.of(channelKey)))
+                .ifPresent(channel -> client.execute(ChannelDeleteCommand.of(channel)));
     }
 }

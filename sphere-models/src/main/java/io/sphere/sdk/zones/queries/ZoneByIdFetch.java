@@ -14,7 +14,7 @@ import java.util.function.Function;
 
  {@include.example io.sphere.sdk.zones.queries.ZoneByIdFetchTest#fetchById()}
  */
-public interface ZoneByIdFetch extends MetaModelFetchDsl<Zone, ZoneByIdFetch, ZoneExpansionModel<Zone>> {
+public interface ZoneByIdFetch extends MetaModelFetchDsl<Zone, Zone, ZoneByIdFetch, ZoneExpansionModel<Zone>> {
     static ZoneByIdFetch of(final Identifiable<Zone> cartDiscount) {
         return of(cartDiscount.getId());
     }
