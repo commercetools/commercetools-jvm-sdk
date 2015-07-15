@@ -428,7 +428,62 @@ assertThat(actual).isEqualTo(
                 "            14 boots\n");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
- <h3 id="category-tree-changes">Change the category tree</h3></div>
+ <h3 id="category-tree-changes">Change the category tree</h3>
+
+ It is possible to reorganize category trees by changing the parent reference of a category.
+ But it is not possible to transform a category with a parent to a root category. If you need this, you need to create a new category and move the subcategories there.
+
+ <p>In the following example we move the mens-clothing category to the top category:</p>
+
+ <div id="io-sphere-sdk-meta-CategoryDocumentationTest-moveCategoryTree--%s" class=code-example><pre><code class='java'>final CategoryTree categoryTree = fetchCurrentTree();
+final String startingSituation = CategoryTreeTextRepresentation.visualizeTree(categoryTree);
+assertThat(startingSituation).isEqualTo(
+                "0 top\n" +
+                "    1 men\n" +
+                "        3 clothing\n" +
+                "            7 t-shirts\n" +
+                "            8 jeans\n" +
+                "        4 shoes\n" +
+                "            9 sandals\n" +
+                "            10 boots\n" +
+                "    2 women\n" +
+                "        5 clothing\n" +
+                "            11 t-shirts\n" +
+                "            12 jeans\n" +
+                "        6 shoes\n" +
+                "            13 sandals\n" +
+                "            14 boots\n");
+
+final Category mensClothing = categoryTree.findByExternalId("3").get();
+final Category top = categoryTree.findByExternalId("0").get();
+
+//make mensClothing a child of top
+execute(CategoryUpdateCommand.of(mensClothing, ChangeParent.of(top)));
+
+final CategoryTree categoryTreeAfterMovement = fetchCurrentTree();
+final String actual = CategoryTreeTextRepresentation.visualizeTree(categoryTreeAfterMovement);
+assertThat(actual).isEqualTo(
+                "0 top\n" +
+                "    1 men\n" +
+                "        4 shoes\n" +
+                "            9 sandals\n" +
+                "            10 boots\n" +
+                "    2 women\n" +
+                "        5 clothing\n" +
+                "            11 t-shirts\n" +
+                "            12 jeans\n" +
+                "        6 shoes\n" +
+                "            13 sandals\n" +
+                "            14 boots\n" +
+                "    3 clothing\n" +
+                "        7 t-shirts\n" +
+                "        8 jeans\n");
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+
+ <h3 id="">Find products in a category tree</h3>
+
+<!-- and connection of cats in tree --></div>
 </li>
 </ul>
 </div>
