@@ -11,7 +11,7 @@ public class CartDiscountByIdFetchTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
-            final CartDiscount fetchedDiscount = execute(CartDiscountByIdFetch.of(cartDiscount)).get();
+            final CartDiscount fetchedDiscount = execute(CartDiscountByIdFetch.of(cartDiscount));
             assertThat(fetchedDiscount.getId()).isEqualTo(cartDiscount.getId());
         });
     }

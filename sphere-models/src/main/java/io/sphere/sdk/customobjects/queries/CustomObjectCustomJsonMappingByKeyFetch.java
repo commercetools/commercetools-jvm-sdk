@@ -6,6 +6,7 @@ import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.queries.Fetch;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -31,14 +32,14 @@ public abstract class CustomObjectCustomJsonMappingByKeyFetch<T> extends SphereR
         return HttpRequestIntent.of(GET, CustomObjectEndpoint.PATH + "/" + container + "/" + key);
     }
 
+    @Nullable
     @Override
-    public final Optional<CustomObject<T>> deserialize(final HttpResponse httpResponse) {
-        final Optional<CustomObject<T>> result;
+    public final CustomObject<T> deserialize(final HttpResponse httpResponse) {
+        final CustomObject<T> result;
         if (httpResponse.getStatusCode() == NOT_FOUND_404) {
-            result = Optional.empty();
+            result = null;
         } else {
-            final CustomObject<T> customObject = deserializeCustomObject().apply(httpResponse);
-            result = Optional.of(customObject);
+            result = deserializeCustomObject().apply(httpResponse);
         }
         return result;
     }

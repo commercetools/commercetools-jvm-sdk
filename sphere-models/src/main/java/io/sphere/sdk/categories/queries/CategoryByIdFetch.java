@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.MetaModelFetchDsl;
 import java.util.List;
 import java.util.function.Function;
 
-public interface CategoryByIdFetch extends MetaModelFetchDsl<Category, CategoryByIdFetch, CategoryExpansionModel<Category>> {
+public interface CategoryByIdFetch extends MetaModelFetchDsl<Category, Category, CategoryByIdFetch, CategoryExpansionModel<Category>> {
     static CategoryByIdFetch of(final Identifiable<Category> cartDiscount) {
         return of(cartDiscount.getId());
     }

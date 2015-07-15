@@ -10,6 +10,7 @@ import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -22,14 +23,14 @@ import static java.util.Arrays.asList;
 import static java.util.Objects.requireNonNull;
 
 /**
- *
+ * @param <R> result type, maybe directly {@code T} or sth. like {@code List<T>}
  * @param <T> type of the query result
  * @param <C> type of the class implementing this class
  * @param <E> type of the expansion model
  */
-public class MetaModelFetchDslImpl<T, C extends MetaModelFetchDsl<T, C, E>, E> extends SphereRequestBase implements MetaModelFetchDsl<T, C, E> {
+public class MetaModelFetchDslImpl<R, T, C extends MetaModelFetchDsl<R, T, C, E>, E> extends SphereRequestBase implements MetaModelFetchDsl<R, T, C, E> {
 
-    final JsonEndpoint<T> endpoint;
+    final JsonEndpoint<R> endpoint;
     /**
      for example an ID, a key, slug, token
      */
@@ -37,25 +38,25 @@ public class MetaModelFetchDslImpl<T, C extends MetaModelFetchDsl<T, C, E>, E> e
     final List<ExpansionPath<T>> expansionPaths;
     final List<HttpQueryParameter> additionalParameters;
     final E expansionModel;
-    final Function<MetaModelFetchDslBuilder<T, C, E>, C> builderFunction;
+    final Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction;
 
-    protected MetaModelFetchDslImpl(final JsonEndpoint<T> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelFetchDslBuilder<T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
+    protected MetaModelFetchDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
         this(endpoint, identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, additionalParameters);
     }
 
-    protected MetaModelFetchDslImpl(final String identifierToSearchFor, final JsonEndpoint<T> endpoint, final E expansionModel, final Function<MetaModelFetchDslBuilder<T, C, E>, C> builderFunction) {
+    protected MetaModelFetchDslImpl(final String identifierToSearchFor, final JsonEndpoint<R> endpoint, final E expansionModel, final Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction) {
         this(endpoint, identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, Collections.emptyList());
     }
 
-    protected MetaModelFetchDslImpl(final JsonEndpoint<T> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelFetchDslBuilder<T, C, E>, C> builderFunction) {
+    protected MetaModelFetchDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction) {
         this(endpoint, identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, Collections.emptyList());
     }
 
-    public MetaModelFetchDslImpl(final MetaModelFetchDslBuilder<T, C, E> builder) {
+    public MetaModelFetchDslImpl(final MetaModelFetchDslBuilder<R, T, C, E> builder) {
         this(builder.endpoint, builder.identifierToSearchFor, builder.expansionPaths, builder.expansionModel, builder.builderFunction, builder.additionalParameters);
     }
 
-    protected MetaModelFetchDslImpl(final JsonEndpoint<T> endpoint, final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelFetchDslBuilder<T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
+    protected MetaModelFetchDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
         this.endpoint = requireNonNull(endpoint);
         this.identifierToSearchFor = requireNonNull(identifierToSearchFor);
         this.expansionPaths = requireNonNull(expansionPaths);
@@ -64,11 +65,13 @@ public class MetaModelFetchDslImpl<T, C extends MetaModelFetchDsl<T, C, E>, E> e
         this.additionalParameters = requireNonNull(additionalParameters);
     }
 
+    @Nullable
     @Override
-    public Optional<T> deserialize(final HttpResponse httpResponse) {
+    public R deserialize(final HttpResponse httpResponse) {
         return Optional.of(httpResponse)
                 .filter(r -> r.getStatusCode() != NOT_FOUND_404)
-                .map(r -> resultMapperOf(typeReference()).apply(httpResponse));
+                .map(r -> resultMapperOf(typeReference()).apply(httpResponse))
+                .orElse(null);
     }
 
     @Override
@@ -85,7 +88,7 @@ public class MetaModelFetchDslImpl<T, C extends MetaModelFetchDsl<T, C, E>, E> e
         return HttpRequestIntent.of(HttpMethod.GET, path);
     }
 
-    protected TypeReference<T> typeReference() {
+    protected TypeReference<R> typeReference() {
         return endpoint.typeReference();
     }
 
@@ -130,11 +133,11 @@ public class MetaModelFetchDslImpl<T, C extends MetaModelFetchDsl<T, C, E>, E> e
     }
 
     @Override
-    public Fetch<T> toFetch() {
+    public Fetch<R> toFetch() {
         return this;
     }
 
-    protected MetaModelFetchDslBuilder<T, C, E> copyBuilder() {
+    protected MetaModelFetchDslBuilder<R, T, C, E> copyBuilder() {
         return new MetaModelFetchDslBuilder<>(this);
     }
 }

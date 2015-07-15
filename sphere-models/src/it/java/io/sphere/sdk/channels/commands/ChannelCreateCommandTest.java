@@ -10,6 +10,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.*;
@@ -19,7 +21,8 @@ public class ChannelCreateCommandTest extends IntegrationTest {
     @Before
     @After
     public void setUp() throws Exception {
-        execute(ChannelByKeyFetch.of(channelKey())).ifPresent(c -> execute(ChannelDeleteCommand.of(c)));
+        Optional.ofNullable(execute(ChannelByKeyFetch.of(channelKey())))
+                .ifPresent(c -> execute(ChannelDeleteCommand.of(c)));
     }
 
     @Test

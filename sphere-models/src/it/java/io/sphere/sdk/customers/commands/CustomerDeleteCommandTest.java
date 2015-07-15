@@ -7,9 +7,7 @@ import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.Optional;
-
-import static io.sphere.sdk.customers.CustomerFixtures.*;
+import static io.sphere.sdk.customers.CustomerFixtures.newCustomerDraft;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerDeleteCommandTest extends IntegrationTest {
@@ -18,7 +16,7 @@ public class CustomerDeleteCommandTest extends IntegrationTest {
         final CustomerSignInResult result = client().execute(CustomerCreateCommand.of(newCustomerDraft()));
         final Customer customer = result.getCustomer();
         execute(CustomerDeleteCommand.of(customer));
-        final Optional<Cart> cartOptional = execute(CartByCustomerIdFetch.of(customer));
-        assertThat(cartOptional).isEmpty();
+        final Cart cart = execute(CartByCustomerIdFetch.of(customer));
+        assertThat(cart).isNull();
     }
 }

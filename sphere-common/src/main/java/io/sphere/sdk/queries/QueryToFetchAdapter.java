@@ -5,6 +5,7 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpResponse;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
@@ -23,11 +24,13 @@ public abstract class QueryToFetchAdapter<T> extends SphereRequestBase implement
         this.query = requireNonNull(query);
     }
 
+    @Nullable
     @Override
-    public Optional<T> deserialize(final HttpResponse httpResponse) {
+    public T deserialize(final HttpResponse httpResponse) {
         return Optional.of(httpResponse)
                 .filter(r -> r.getStatusCode() != NOT_FOUND_404)
-                .flatMap(r -> resultMapperOf(pagedQueryResultTypeReference).apply(httpResponse).head());
+                .flatMap(r -> resultMapperOf(pagedQueryResultTypeReference).apply(httpResponse).head())
+                .orElse(null);
     }
 
     @Override

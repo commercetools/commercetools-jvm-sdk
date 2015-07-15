@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.MetaModelFetchDsl;
 import java.util.List;
 import java.util.function.Function;
 
-public interface CustomerByIdFetch extends MetaModelFetchDsl<Customer, CustomerByIdFetch, CustomerExpansionModel<Customer>> {
+public interface CustomerByIdFetch extends MetaModelFetchDsl<Customer, Customer, CustomerByIdFetch, CustomerExpansionModel<Customer>> {
     static CustomerByIdFetch of(final Identifiable<Customer> cartDiscount) {
         return of(cartDiscount.getId());
     }

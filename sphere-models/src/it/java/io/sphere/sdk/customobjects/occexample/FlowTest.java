@@ -12,6 +12,8 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FlowTest extends IntegrationTest {
@@ -22,7 +24,7 @@ public class FlowTest extends IntegrationTest {
     @Before
     public void setUp() throws Exception {
         final CustomObjectByKeyFetch<JsonNode> fetchByKey = CustomObjectByKeyFetch.of(CONTAINER, KEY);
-        execute(fetchByKey).ifPresent(o -> execute(CustomObjectDeleteCommand.of(o)));
+        Optional.ofNullable(execute(fetchByKey)).ifPresent(o -> execute(CustomObjectDeleteCommand.of(o)));
     }
 
     @Test
@@ -35,7 +37,7 @@ public class FlowTest extends IntegrationTest {
         final CustomObjectByKeyFetch<CustomerNumberCounter> fetch =
                 CustomObjectByKeyFetch.of(CONTAINER, KEY, CustomerNumberCounter.customObjectTypeReference());
 
-        final CustomObject<CustomerNumberCounter> loadedCustomObject = execute(fetch).get();
+        final CustomObject<CustomerNumberCounter> loadedCustomObject = execute(fetch);
         final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;
         final CustomerNumberCounter value = new CustomerNumberCounter(newCustomerNumber, "whateverid");
         final long version = loadedCustomObject.getVersion();

@@ -15,7 +15,7 @@ import java.util.function.Function;
  * If you need to receive one specific message class, like {@link io.sphere.sdk.orders.messages.DeliveryAddedMessage},
  * use {@link MessageQuery} with a predicate by id.
  */
-public interface MessageByIdFetch extends MetaModelFetchDsl<Message, MessageByIdFetch, MessageExpansionModel<Message>> {
+public interface MessageByIdFetch extends MetaModelFetchDsl<Message, Message, MessageByIdFetch, MessageExpansionModel<Message>> {
     static MessageByIdFetch of(final Identifiable<Message> message) {
         return of(message.getId());
     }

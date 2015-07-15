@@ -12,7 +12,7 @@ public class OrderByIdFetchTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withOrder(client(), order -> {
-            final Order loadedOrder = execute(OrderByIdFetch.of(order.getId())).get();
+            final Order loadedOrder = execute(OrderByIdFetch.of(order.getId()));
             assertThat(loadedOrder.getId()).isEqualTo(order.getId());
         });
     }

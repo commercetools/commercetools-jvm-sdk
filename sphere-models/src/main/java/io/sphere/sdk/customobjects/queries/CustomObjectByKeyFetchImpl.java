@@ -11,13 +11,13 @@ import io.sphere.sdk.queries.MetaModelFetchDslImpl;
  * {@link io.sphere.sdk.client.SphereRequest} to fetch one {@link CustomObject} by container and key.
  * @param <T> The type of the value of the custom object.
  */
-final class CustomObjectByKeyFetchImpl<T> extends MetaModelFetchDslImpl<CustomObject<T>, CustomObjectByKeyFetch<T>, CustomObjectExpansionModel<CustomObject<T>>> implements CustomObjectByKeyFetch<T> {
+final class CustomObjectByKeyFetchImpl<T> extends MetaModelFetchDslImpl<CustomObject<T>, CustomObject<T>, CustomObjectByKeyFetch<T>, CustomObjectExpansionModel<CustomObject<T>>> implements CustomObjectByKeyFetch<T> {
 
     CustomObjectByKeyFetchImpl(final TypeReference<CustomObject<T>> typeReference, final String container, final String key) {
         super("" + container + "/" + key, JsonEndpoint.of(typeReference, CustomObjectEndpoint.PATH), CustomObjectExpansionModel.<T>of(), builder -> new CustomObjectByKeyFetchImpl<>(builder));
     }
 
-    public CustomObjectByKeyFetchImpl(final MetaModelFetchDslBuilder<CustomObject<T>, CustomObjectByKeyFetch<T>, CustomObjectExpansionModel<CustomObject<T>>> builder) {
+    public CustomObjectByKeyFetchImpl(final MetaModelFetchDslBuilder<CustomObject<T>, CustomObject<T>, CustomObjectByKeyFetch<T>, CustomObjectExpansionModel<CustomObject<T>>> builder) {
         super(builder);
     }
 }

@@ -14,8 +14,8 @@ public class ChannelByKeyFetchTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         ChannelFixtures.withPersistentChannel(client(), INVENTORY_SUPPLY, channel -> {
-            final Optional<Channel> channelOptional = execute(ChannelByKeyFetch.of(channel.getKey()));
-            assertThat(channelOptional.map(Channel::getId)).contains(channel.getId());
+            final Channel fetchedChannel = execute(ChannelByKeyFetch.of(channel.getKey()));
+            assertThat(fetchedChannel.getId()).contains(channel.getId());
         });
     }
 }

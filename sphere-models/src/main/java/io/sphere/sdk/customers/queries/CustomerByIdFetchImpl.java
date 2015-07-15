@@ -5,12 +5,12 @@ import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
 import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
 import io.sphere.sdk.queries.MetaModelFetchDslImpl;
 
-final class CustomerByIdFetchImpl extends MetaModelFetchDslImpl<Customer, CustomerByIdFetch, CustomerExpansionModel<Customer>> implements CustomerByIdFetch {
+final class CustomerByIdFetchImpl extends MetaModelFetchDslImpl<Customer, Customer, CustomerByIdFetch, CustomerExpansionModel<Customer>> implements CustomerByIdFetch {
     CustomerByIdFetchImpl(final String id) {
         super(id, CustomerEndpoint.ENDPOINT, CustomerExpansionModel.of(), CustomerByIdFetchImpl::new);
     }
 
-    public CustomerByIdFetchImpl(MetaModelFetchDslBuilder<Customer, CustomerByIdFetch, CustomerExpansionModel<Customer>> builder) {
+    public CustomerByIdFetchImpl(MetaModelFetchDslBuilder<Customer, Customer, CustomerByIdFetch, CustomerExpansionModel<Customer>> builder) {
         super(builder);
     }
 }

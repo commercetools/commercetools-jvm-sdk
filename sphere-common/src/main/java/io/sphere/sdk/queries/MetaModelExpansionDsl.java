@@ -1,10 +1,11 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.ReferenceExpandeableDsl;
 
 import java.util.function.Function;
 
-public interface MetaModelExpansionDsl<T, C, E> {
+public interface MetaModelExpansionDsl<T, C, E> extends ReferenceExpandeableDsl<T, C> {
     /**
      * Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.
      *

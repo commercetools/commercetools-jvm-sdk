@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.MetaModelFetchDsl;
 import java.util.List;
 import java.util.function.Function;
 
-public interface InventoryEntryByIdFetch extends MetaModelFetchDsl<InventoryEntry, InventoryEntryByIdFetch, InventoryEntryExpansionModel<InventoryEntry>> {
+public interface InventoryEntryByIdFetch extends MetaModelFetchDsl<InventoryEntry, InventoryEntry, InventoryEntryByIdFetch, InventoryEntryExpansionModel<InventoryEntry>> {
     static InventoryEntryByIdFetch of(final Identifiable<InventoryEntry> cartDiscount) {
         return of(cartDiscount.getId());
     }

@@ -11,7 +11,7 @@ public class ProductDiscountByIdFetchTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withUpdateableProductDiscount(client(), productDiscount -> {
-            final ProductDiscount discount = execute(ProductDiscountByIdFetch.of(productDiscount)).get();
+            final ProductDiscount discount = execute(ProductDiscountByIdFetch.of(productDiscount));
             assertThat(discount.getId()).isEqualTo(productDiscount.getId());
             return productDiscount;
         });

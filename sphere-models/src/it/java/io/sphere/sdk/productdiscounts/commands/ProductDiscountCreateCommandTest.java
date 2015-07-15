@@ -47,7 +47,7 @@ public class ProductDiscountCreateCommandTest extends IntegrationTest {
                 ProductByIdFetch.of(product)
                         .plusExpansionPaths(m -> m.masterData().staged().masterVariant().prices().discounted().discount());
 
-        final Product discountedProduct = execute(sphereRequest).get();
+        final Product discountedProduct = execute(sphereRequest);
         final List<Price> productPrices = discountedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
 
         assertThat(productPrices)

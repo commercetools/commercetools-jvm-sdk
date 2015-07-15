@@ -11,6 +11,7 @@ import io.sphere.sdk.states.commands.updateactions.SetTransitions;
 import io.sphere.sdk.states.queries.StateByKeyFetch;
 import io.sphere.sdk.utils.SetUtils;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -37,7 +38,7 @@ public class StateFixtures {
     }
 
     public static void cleanUpByKey(final TestClient client, final String key) {
-        client.execute(StateByKeyFetch.of(key)).ifPresent(state -> client.execute(StateDeleteCommand.of(state)));
+        Optional.ofNullable(client.execute(StateByKeyFetch.of(key))).ifPresent(state -> client.execute(StateDeleteCommand.of(state)));
     }
 
     public static void withState(final TestClient client, final Consumer<State> consumer) {
@@ -53,8 +54,8 @@ public class StateFixtures {
     public static void withStandardStates(final TestClient client, final BiConsumer<State, State> consumer) {
         final String keyA = "Initial";//given from SPHERE.IO backend
         final String keyB = StateFixtures.class + "_B";
-        final State stateB = client.execute(StateByKeyFetch.of(keyB)).orElseGet(() -> createStateByKey(client, keyB));
-        final State stateA = client.execute(StateByKeyFetch.of(keyA))
+        final State stateB = Optional.ofNullable(client.execute(StateByKeyFetch.of(keyB))).orElseGet(() -> createStateByKey(client, keyB));
+        final State stateA = Optional.ofNullable(client.execute(StateByKeyFetch.of(keyA)))
                 .map(initialState -> {
                     final Boolean initialCanTransistToStateB = initialState.getTransitions().map(transitions -> transitions.contains(stateB.toReference())).orElse(false);
                     final Set<Reference<State>> transitions = initialState.getTransitions().map(trans -> SetUtils.setOf(stateB.toReference(), trans)).orElse(asSet(stateB.toReference()));

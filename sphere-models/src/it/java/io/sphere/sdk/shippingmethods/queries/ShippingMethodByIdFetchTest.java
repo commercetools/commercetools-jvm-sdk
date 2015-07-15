@@ -13,7 +13,7 @@ public class ShippingMethodByIdFetchTest extends IntegrationTest {
         withShippingMethod(client(), shippingMethod -> {
             final ShippingMethodByIdFetch fetch = ShippingMethodByIdFetch.of(shippingMethod)
                     .withExpansionPaths(m -> m.taxCategory());
-            final ShippingMethod loadedShippingMethod = execute(fetch).get();
+            final ShippingMethod loadedShippingMethod = execute(fetch);
             final String actualFetchedId = loadedShippingMethod.getId();
             assertThat(actualFetchedId).isEqualTo(shippingMethod.getId());
             assertThat(loadedShippingMethod.getTaxCategory().getObj()).isPresent();

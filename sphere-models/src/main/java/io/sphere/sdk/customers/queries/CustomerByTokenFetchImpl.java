@@ -8,13 +8,13 @@ import io.sphere.sdk.queries.MetaModelFetchDslImpl;
 
 import static java.util.Arrays.asList;
 
-final class CustomerByTokenFetchImpl extends MetaModelFetchDslImpl<Customer, CustomerByTokenFetch, CustomerExpansionModel<Customer>> implements CustomerByTokenFetch {
+final class CustomerByTokenFetchImpl extends MetaModelFetchDslImpl<Customer, Customer, CustomerByTokenFetch, CustomerExpansionModel<Customer>> implements CustomerByTokenFetch {
 
     CustomerByTokenFetchImpl(final String token) {
         super(CustomerEndpoint.ENDPOINT, "", CustomerExpansionModel.of(), CustomerByTokenFetchImpl::new, asList(HttpQueryParameter.of("token", token)));
     }
 
-    public CustomerByTokenFetchImpl(MetaModelFetchDslBuilder<Customer, CustomerByTokenFetch, CustomerExpansionModel<Customer>> builder) {
+    public CustomerByTokenFetchImpl(MetaModelFetchDslBuilder<Customer, Customer, CustomerByTokenFetch, CustomerExpansionModel<Customer>> builder) {
         super(builder);
     }
 }

@@ -12,7 +12,7 @@ import java.util.function.Function;
 /**
  * {@include.example io.sphere.sdk.cartdiscounts.queries.CartDiscountByIdFetchTest#execution()}
  */
-public interface CartDiscountByIdFetch extends MetaModelFetchDsl<CartDiscount, CartDiscountByIdFetch, CartDiscountExpansionModel<CartDiscount>> {
+public interface CartDiscountByIdFetch extends MetaModelFetchDsl<CartDiscount, CartDiscount, CartDiscountByIdFetch, CartDiscountExpansionModel<CartDiscount>> {
     static CartDiscountByIdFetch of(final Identifiable<CartDiscount> cartDiscount) {
         return of(cartDiscount.getId());
     }

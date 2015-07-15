@@ -119,7 +119,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
 
                 //check channel expansion
-                final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.syncInfo().channel())).get();
+                final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.syncInfo().channel()));
                 assertThat(new ArrayList<>(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isPresent();
             })
         );
@@ -210,7 +210,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
 
                 //reference expansion
-                final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.lineItems().state())).get();
+                final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.lineItems().state()));
                 final Reference<State> state = new LinkedList<>(loadedOrder.getLineItems().get(0).getState()).getFirst().getState();
                 assertThat(state.getObj()).isPresent();
             })

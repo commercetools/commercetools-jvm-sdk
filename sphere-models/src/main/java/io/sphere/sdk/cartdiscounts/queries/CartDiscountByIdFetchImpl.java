@@ -8,12 +8,12 @@ import io.sphere.sdk.queries.MetaModelFetchDslImpl;
 /**
  * {@include.example io.sphere.sdk.cartdiscounts.queries.CartDiscountByIdFetchTest#execution()}
  */
-final class CartDiscountByIdFetchImpl extends MetaModelFetchDslImpl<CartDiscount, CartDiscountByIdFetch, CartDiscountExpansionModel<CartDiscount>> implements CartDiscountByIdFetch {
+final class CartDiscountByIdFetchImpl extends MetaModelFetchDslImpl<CartDiscount, CartDiscount, CartDiscountByIdFetch, CartDiscountExpansionModel<CartDiscount>> implements CartDiscountByIdFetch {
     CartDiscountByIdFetchImpl(final String id) {
         super(id, CartDiscountEndpoint.ENDPOINT, CartDiscountExpansionModel.of(), CartDiscountByIdFetchImpl::new);
     }
 
-    public CartDiscountByIdFetchImpl(MetaModelFetchDslBuilder<CartDiscount, CartDiscountByIdFetch, CartDiscountExpansionModel<CartDiscount>> builder) {
+    public CartDiscountByIdFetchImpl(MetaModelFetchDslBuilder<CartDiscount, CartDiscount, CartDiscountByIdFetch, CartDiscountExpansionModel<CartDiscount>> builder) {
         super(builder);
     }
 }
