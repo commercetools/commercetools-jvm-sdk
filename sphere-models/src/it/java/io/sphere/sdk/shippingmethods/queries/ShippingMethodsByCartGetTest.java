@@ -16,6 +16,6 @@ public class ShippingMethodsByCartGetTest extends IntegrationTest {
         final Cart cart = createCartWithShippingAddress(client());
 
         final List<ShippingMethod> result =
-                execute(ShippingMethodsByCartGet.of(cart).withExpansionPaths(m -> m.zoneRates().zone()));
+                execute(ShippingMethodsByCartGet.of(cart));
     }
 }

@@ -8,7 +8,7 @@ import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 
 import java.util.List;
 
-final class ShippingMethodsByCartGetImpl extends MetaModelFetchDslImpl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByCartGet, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodsByCartGet {
+final class ShippingMethodsByCartGetImpl extends MetaModelFetchDslImpl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByCartGetImpl, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodsByCartGet {
     ShippingMethodsByCartGetImpl(final String cartId) {
         super("?cartId=" + cartId, ShippingMethodEndpoint.ENDPOINT.withTypeReference(new TypeReference<List<ShippingMethod>>() {
             @Override
@@ -18,7 +18,7 @@ final class ShippingMethodsByCartGetImpl extends MetaModelFetchDslImpl<List<Ship
         }), ShippingMethodExpansionModel.of(), ShippingMethodsByCartGetImpl::new);
     }
 
-    public ShippingMethodsByCartGetImpl(MetaModelFetchDslBuilder<List<ShippingMethod>, ShippingMethod, ShippingMethodsByCartGet, ShippingMethodExpansionModel<ShippingMethod>> builder) {
+    public ShippingMethodsByCartGetImpl(MetaModelFetchDslBuilder<List<ShippingMethod>, ShippingMethod, ShippingMethodsByCartGetImpl, ShippingMethodExpansionModel<ShippingMethod>> builder) {
         super(builder);
     }
 }

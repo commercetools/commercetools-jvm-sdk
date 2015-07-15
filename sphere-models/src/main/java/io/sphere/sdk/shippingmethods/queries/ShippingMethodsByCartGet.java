@@ -1,10 +1,9 @@
 package io.sphere.sdk.shippingmethods.queries;
 
 import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.models.Referenceable;
-import io.sphere.sdk.queries.MetaModelFetchDsl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
-import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 
 import java.util.List;
 
@@ -13,7 +12,7 @@ import java.util.List;
  *
  * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodsByCartGetTest#execution()}
  */
-public interface ShippingMethodsByCartGet extends MetaModelFetchDsl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByCartGet, ShippingMethodExpansionModel<ShippingMethod>> {
+public interface ShippingMethodsByCartGet extends SphereRequest<List<ShippingMethod>> {
     static ShippingMethodsByCartGet of(final Referenceable<Cart> cart) {
         return of(cart.toReference().getId());
     }

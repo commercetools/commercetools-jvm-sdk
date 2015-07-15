@@ -21,7 +21,7 @@ import static java.util.Objects.requireNonNull;
  *
  * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodsByLocationGetTest#execution()}
  */
-public class ShippingMethodsByLocationGetImpl extends MetaModelFetchDslImpl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGet, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodsByLocationGet {
+public class ShippingMethodsByLocationGetImpl extends MetaModelFetchDslImpl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGetImpl, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodsByLocationGet {
     ShippingMethodsByLocationGetImpl(final CountryCode country, @Nullable final String state, @Nullable final CurrencyUnit currency) {
         super(identifierToSearchFor(requireNonNull(country), state, currency), ShippingMethodEndpoint.ENDPOINT.withTypeReference(new TypeReference<List<ShippingMethod>>() {
             @Override
@@ -31,7 +31,7 @@ public class ShippingMethodsByLocationGetImpl extends MetaModelFetchDslImpl<List
         }), ShippingMethodExpansionModel.of(), ShippingMethodsByLocationGetImpl::new);
     }
 
-    public ShippingMethodsByLocationGetImpl(final MetaModelFetchDslBuilder<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGet, ShippingMethodExpansionModel<ShippingMethod>> builder) {
+    public ShippingMethodsByLocationGetImpl(final MetaModelFetchDslBuilder<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGetImpl, ShippingMethodExpansionModel<ShippingMethod>> builder) {
         super(builder);
     }
 
