@@ -7,6 +7,7 @@ import io.sphere.sdk.categories.CategoryTree;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.ExperimentalReactiveStreamUtils;
@@ -26,6 +27,7 @@ import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
+import java.util.function.Predicate;
 
 import static java.util.Locale.*;
 import static java.util.Objects.requireNonNull;
@@ -115,36 +117,52 @@ public class CategoryDocumentationTest extends IntegrationTest {
                         "            13 sandals\n" +
                         "            14 boots\n");
     }
-//
-//    @Test
-//    public void createAViewForACategoryTreePart() throws Exception {
-//        final CategoryTree categoryTree = createCategoryTree();
-//        final Category currentCategory = categoryTree.findBySlug(ENGLISH, "tshirts-men").get();
-//
-//
-//        assertThat(actual).isEqualTo(
-//                        "1 men\n" +
-//                        "    3 clothing\n" +
-//                        "        ***7 t-shirts***\n" +
-//                        "        8 jeans\n" +
-//                        "    4 shoes\n");
-//    }
-//
-//
-//    private void appendToBuilderCategoryTreePart(final Category category, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level) {
-//
-//
-//
-//
-//        final String name = category.getName().get(ENGLISH).get();
-//        final String externalId = category.getExternalId().get();
-//        final String offset = StringUtils.repeat(' ', level * 4);
-//        stringBuilder.append(offset).append(externalId).append(" ").append(name).append("\n");
-//        final List<Category> children = categoryTree.findChildren(category);
-//        children.stream()
-//                .sorted(EXTERNALID_COMPARATOR)
-//                .forEach(child -> appendToBuilderFullCategoryTree(child, stringBuilder, categoryTree, level + 1));
-//    }
+
+    @Test
+    public void createAViewForACategoryTreePart() throws Exception {
+        final CategoryTree categoryTree = createCategoryTree();
+        final Category currentCategory = categoryTree.findBySlug(ENGLISH, "tshirts-men").get();
+        final List<Reference<Category>> ancestorReferences = currentCategory.getAncestors().stream()
+                .skip(1)//remove top level category
+                .collect(toList());
+        final StringBuilder stringBuilder = new StringBuilder();
+        appendToBuilderCategoryTreePart(ancestorReferences.get(0), stringBuilder, categoryTree, 0, currentCategory);
+        final String actual = stringBuilder.toString();
+        assertThat(actual).isEqualTo(
+                        "1 men\n" +
+                        "    3 clothing\n" +
+                        "        ***7 t-shirts***\n" +
+                        "        8 jeans\n" +
+                        "    4 shoes\n");
+    }
+
+
+    private void appendToBuilderCategoryTreePart(final Identifiable<Category> categoryReference, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level, final Category selectedCategory) {
+        final Category category = categoryTree.findById(categoryReference.getId()).get();
+        final String name = category.getName().get(ENGLISH).get();
+        final String externalId = category.getExternalId().get();
+        final String offset = StringUtils.repeat(' ', level * 4);
+
+        stringBuilder.append(offset);
+        if (categoryReference.getId().equals(selectedCategory.getId())) {
+            stringBuilder.append("***");
+        }
+        stringBuilder.append(externalId).append(" ").append(name);
+        if (categoryReference.getId().equals(selectedCategory.getId())) {
+            stringBuilder.append("***");
+        }
+        stringBuilder.append("\n");
+
+        final Predicate<Category> isAncestor = cat -> selectedCategory.getAncestors().stream().anyMatch(anc -> anc.getId().equals(cat.getId()));
+        final Predicate<Category> isOnHigherLevelThanCurrent = cat -> cat.getAncestors().size() < selectedCategory.getAncestors().size();
+        final Predicate<Category> isSibling = cat -> cat.getAncestors().equals(selectedCategory.getAncestors());
+
+        final List<Category> children = categoryTree.findChildren(category);
+        children.stream()
+                .filter(isAncestor.or(isOnHigherLevelThanCurrent).or(isSibling))
+                .sorted(EXTERNALID_COMPARATOR)
+                .forEach(child -> appendToBuilderCategoryTreePart(child, stringBuilder, categoryTree, level + 1, selectedCategory));
+    }
 
     @Test
     public void createAViewForACategoryBreadCrumb() throws Exception {

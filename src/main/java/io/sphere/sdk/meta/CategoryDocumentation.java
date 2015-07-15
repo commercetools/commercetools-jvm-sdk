@@ -49,6 +49,10 @@ Another example is to create a breadcumb:
 
  {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#createAViewForACategoryBreadCrumb()}
 
+ An example for a partial tree:
+
+ {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#createAViewForACategoryTreePart()}
+ {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#appendToBuilderCategoryTreePart(io.sphere.sdk.models.Identifiable, java.lang.StringBuilder, io.sphere.sdk.categories.CategoryTree, int, io.sphere.sdk.categories.Category)}
 
 
 
