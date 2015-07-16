@@ -16,6 +16,26 @@ public class StringQuerySortingModelTest {
     }
 
     @Test
+    public void isGreaterThan() throws Exception {
+        assertThat(model.isGreaterThan("x").toSphereQuery()).isEqualTo("id>\"x\"");
+    }
+
+    @Test
+    public void isGreaterThanOrEqualTo() throws Exception {
+        assertThat(model.isGreaterThanOrEqualTo("x").toSphereQuery()).isEqualTo("id>=\"x\"");
+    }
+
+    @Test
+    public void isLessThan() throws Exception {
+        assertThat(model.isLessThan("x").toSphereQuery()).isEqualTo("id<\"x\"");
+    }
+
+    @Test
+    public void isLessThanOrEqualTo() throws Exception {
+        assertThat(model.isLessThanOrEqualTo("x").toSphereQuery()).isEqualTo("id<=\"x\"");
+    }
+
+    @Test
     public void generateHierarchicalQueries() throws Exception {
         final QueryModel<Fixtures.Product> parents = new QueryModelImpl<Fixtures.Product>(Optional.empty(), "x1").
                 appended("x2").appended("x3").appended("x4");
