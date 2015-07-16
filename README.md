@@ -32,6 +32,8 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
   <version>1.0.0-M15</version>
 </dependency>
 ````
+* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-models%7C1.0.0-M15%7Cjar
+* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-java-client%7C1.0.0-M15%7Cjar
 
 ### Modules
 * `sphere-java-client`: alias for sphere-java-client-ahc-1_9
