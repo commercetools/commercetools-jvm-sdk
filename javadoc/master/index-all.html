@@ -695,6 +695,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html#byIsDefault--">byIsDefault()</a></span> - Method in interface io.sphere.sdk.shippingmethods.queries.<a href="io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html" title="interface in io.sphere.sdk.shippingmethods.queries">ShippingMethodQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQuery.html#byIsRoot--">byIsRoot()</a></span> - Method in interface io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="interface in io.sphere.sdk.categories.queries">CategoryQuery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/queries/ChannelQuery.html#byKey-java.lang.String-">byKey(String)</a></span> - Method in interface io.sphere.sdk.channels.queries.<a href="io/sphere/sdk/channels/queries/ChannelQuery.html" title="interface in io.sphere.sdk.channels.queries">ChannelQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQuery.html#byKey-java.lang.String-">byKey(String)</a></span> - Method in interface io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQuery.html" title="interface in io.sphere.sdk.states.queries">StateQuery</a></dt>
@@ -912,6 +914,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><a href="io/sphere/sdk/categories/commands/CategoryDeleteCommand.html" title="class in io.sphere.sdk.categories.commands"><span class="typeNameLink">CategoryDeleteCommand</span></a> - Class in <a href="io/sphere/sdk/categories/commands/package-summary.html">io.sphere.sdk.categories.commands</a></dt>
 <dd>
 <div class="block">Deletes a category in SPHERE.IO.</div>
+</dd>
+<dt><a href="io/sphere/sdk/meta/CategoryDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">CategoryDocumentation</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
+<dd>
+<div class="block"><h3 id="category-creation">Create a tree of categories</div>
 </dd>
 <dt><a href="io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories"><span class="typeNameLink">CategoryDraft</span></a> - Class in <a href="io/sphere/sdk/categories/package-summary.html">io.sphere.sdk.categories</a></dt>
 <dd>
@@ -1496,6 +1502,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/errors/InvalidField.html#CODE">CODE</a></span> - Static variable in class io.sphere.sdk.models.errors.<a href="io/sphere/sdk/models/errors/InvalidField.html" title="class in io.sphere.sdk.models.errors">InvalidField</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/errors/InvalidJsonInputError.html#CODE">CODE</a></span> - Static variable in class io.sphere.sdk.models.errors.<a href="io/sphere/sdk/models/errors/InvalidJsonInputError.html" title="class in io.sphere.sdk.models.errors">InvalidJsonInputError</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html#collectAll-org.reactivestreams.Publisher-">collectAll(Publisher&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries">ExperimentalReactiveStreamUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/expansion/ExpansionModel.html#collection-java.lang.String-int-">collection(String, int)</a></span> - Static method in class io.sphere.sdk.expansion.<a href="io/sphere/sdk/expansion/ExpansionModel.html" title="class in io.sphere.sdk.expansion">ExpansionModel</a></dt>
 <dd>&nbsp;</dd>
@@ -2323,6 +2331,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">EXPERIMENTAL model to easily build product projection search requests.</div>
 </dd>
+<dt><a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ExperimentalReactiveStreamUtils</span></a> - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html#ExperimentalReactiveStreamUtils--">ExperimentalReactiveStreamUtils()</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries">ExperimentalReactiveStreamUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryDraftBuilder.html#externalId-java.util.Optional-">externalId(Optional&lt;String&gt;)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories">CategoryDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryDraftBuilder.html#externalId-java.lang.String-">externalId(String)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories">CategoryDraftBuilder</a></dt>
@@ -2451,17 +2463,19 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereEnumeration.html#find-T:A-java.lang.String-">find(T[], String)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereEnumeration.html" title="interface in io.sphere.sdk.models">SphereEnumeration</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryTree.html#findByExternalId-java.lang.String-">findByExternalId(String)</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories">CategoryTree</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryTree.html#findById-java.lang.String-">findById(String)</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories">CategoryTree</a></dt>
 <dd>
 <div class="block">Finds a category by id.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryTree.html#findByParent-io.sphere.sdk.models.Identifiable-">findByParent(Identifiable&lt;Category&gt;)</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories">CategoryTree</a></dt>
-<dd>
-<div class="block">return the children for category.</div>
-</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryTree.html#findBySlug-java.util.Locale-java.lang.String-">findBySlug(Locale, String)</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories">CategoryTree</a></dt>
 <dd>
 <div class="block">Finds a category by the slug and a specific locale.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryTree.html#findChildren-io.sphere.sdk.models.Identifiable-">findChildren(Identifiable&lt;Category&gt;)</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories">CategoryTree</a></dt>
+<dd>
+<div class="block">return the children for category.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#firstName-java.lang.String-">firstName(String)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -6131,6 +6145,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonNodeSphereRequest.html#of-io.sphere.sdk.http.HttpMethod-java.lang.String-java.util.Optional-">of(HttpMethod, String, Optional&lt;JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonNodeSphereRequest.html" title="class in io.sphere.sdk.client">JsonNodeSphereRequest</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/QueueSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-int-boolean-">of(SphereClient, int, boolean)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client">QueueSphereClientDecorator</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/QueueSphereClientDecorator.html#of-io.sphere.sdk.client.SphereClient-int-">of(SphereClient, int)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/QueueSphereClientDecorator.html" title="class in io.sphere.sdk.client">QueueSphereClientDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html#of--">of()</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereAccessTokenSupplierFactory.html" title="class in io.sphere.sdk.client">SphereAccessTokenSupplierFactory</a></dt>
@@ -6497,6 +6513,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereError.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereError.html" title="class in io.sphere.sdk.models">SphereError</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Versioned.html#of-io.sphere.sdk.models.Versioned-">of(Versioned&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></dt>
+<dd>
+<div class="block">Creates a versioned that only contains the id and the version.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Versioned.html#of-java.lang.String-long-">of(String, long)</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html#of-io.sphere.sdk.orders.OrderFromCartDraft-">of(OrderFromCartDraft)</a></span> - Static method in class io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html" title="class in io.sphere.sdk.orders.commands">OrderFromCartCreateCommand</a></dt>
@@ -8111,6 +8131,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">Publishes a product, which causes the staged projection of the product to override the current projection.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html#publisherOf-io.sphere.sdk.queries.QueryDsl-io.sphere.sdk.client.SphereClient-">publisherOf(QueryDsl&lt;T, C&gt;, SphereClient)</a></span> - Static method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ExperimentalReactiveStreamUtils.html" title="class in io.sphere.sdk.queries">ExperimentalReactiveStreamUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/ImmutableMapBuilder.html#put-K-V-">put(K, V)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/ImmutableMapBuilder.html" title="class in io.sphere.sdk.utils">ImmutableMapBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/ImmutableMapBuilder.html#putAll-java.util.Map-">putAll(Map&lt;K, V&gt;)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/ImmutableMapBuilder.html" title="class in io.sphere.sdk.utils">ImmutableMapBuilder</a></dt>
