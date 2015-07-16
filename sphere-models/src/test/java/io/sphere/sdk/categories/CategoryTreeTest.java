@@ -49,11 +49,11 @@ public class CategoryTreeTest {
         final List<Category> nameSortedRoots = byNameSorted(tree);
         final Category category0 = nameSortedRoots.get(0);
         assertThat(category0.getId()).isEqualTo(rootIds.get(0));
-        final List<Category> childrenOf0 = tree.findByParent(category0);
+        final List<Category> childrenOf0 = tree.findChildren(category0);
         assertThat(childrenOf0).hasSize(childIds.size());
         final List<Category> sortedChildren = childrenOf0.stream().sorted(byNameComparator).collect(toList());
         assertThat(sortedChildren.get(1).getId()).isEqualTo("0b");
-        final List<Category> sortedGrandChildren = tree.findByParent(sortedChildren.get(1)).stream().sorted(byNameComparator).collect(toList());
+        final List<Category> sortedGrandChildren = tree.findChildren(sortedChildren.get(1)).stream().sorted(byNameComparator).collect(toList());
         assertThat(extractIdList(sortedGrandChildren)).isEqualTo(asList("0bu", "0bv", "0bw", "0bx"));
     }
 

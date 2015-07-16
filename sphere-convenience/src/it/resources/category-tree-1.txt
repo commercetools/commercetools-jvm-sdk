@@ -1,0 +1,15 @@
+0 top
+    1 men
+        3 clothing
+            7 t-shirts
+            8 jeans
+        4 shoes
+            9 sandals
+            10 boots
+    2 women
+        5 clothing
+            11 t-shirts
+            12 jeans
+        6 shoes
+            13 sandals
+            14 boots
