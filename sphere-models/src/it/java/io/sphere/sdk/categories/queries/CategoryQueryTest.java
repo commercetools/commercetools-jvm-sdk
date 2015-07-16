@@ -3,6 +3,7 @@ package io.sphere.sdk.categories.queries;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.LocalizedStringsEntry;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.AbstractIntegerAssert;
 import org.junit.Test;
@@ -41,6 +42,41 @@ public class CategoryQueryTest extends IntegrationTest {
             withCategory(client(), category2 -> {
                 final Query<Category> query = CategoryQuery.of().
                         withPredicate(m -> m.name().lang(Locale.ENGLISH).isNot(category1.getName().get(Locale.ENGLISH).get()))
+                        .withSort(m -> m.createdAt().sort(DESC));
+                final boolean category1IsPresent = execute(query).getResults().stream().anyMatch(cat -> cat.getId().equals(category1.getId()));
+                assertThat(category1IsPresent).isFalse();
+            })
+        );
+    }
+
+    @Test
+    public void queryByNegatedPredicateName() throws Exception {
+        withCategory(client(), category1 ->
+            withCategory(client(), category2 -> {
+                final Query<Category> query = CategoryQuery.of().
+                        withPredicate(m -> {
+                            final QueryPredicate<Category> predicate =
+                                    m.name().lang(Locale.ENGLISH).is(category1.getName().get(Locale.ENGLISH).get()).negate();
+                            return predicate;
+                        })
+                        .withSort(m -> m.createdAt().sort(DESC));
+                final boolean category1IsPresent = execute(query).getResults().stream().anyMatch(cat -> cat.getId().equals(category1.getId()));
+                assertThat(category1IsPresent).isFalse();
+            })
+        );
+    }
+
+    @Test
+    public void queryByNegatedPredicateNameValidWithAnd() throws Exception {
+        withCategory(client(), category1 ->
+            withCategory(client(), category2 -> {
+                final Query<Category> query = CategoryQuery.of().
+                        withPredicate(m -> {
+                            final QueryPredicate<Category> predicate =
+                                    m.name().lang(Locale.ENGLISH).is(category1.getName().get(Locale.ENGLISH).get()).negate()
+                                    .and(m.id().is(category1.getId()));
+                            return predicate;
+                        })
                         .withSort(m -> m.createdAt().sort(DESC));
                 final boolean category1IsPresent = execute(query).getResults().stream().anyMatch(cat -> cat.getId().equals(category1.getId()));
                 assertThat(category1IsPresent).isFalse();

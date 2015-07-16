@@ -11,6 +11,11 @@ abstract class QueryPredicateBase<T> extends Base implements QueryPredicate<T> {
         return new QueryPredicateConnector<>("and", this, other);
     }
 
+    @Override
+    public QueryPredicate<T> negate() {
+        return new NegatedQueryPredicate<>(this);
+    }
+
     protected String buildQuery(final QueryModel<T> model, final String definition) {
         final String current = (model.getPathSegment().isPresent() ? model.getPathSegment().get() : "") + definition;
 

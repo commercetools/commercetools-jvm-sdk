@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class QueryPredicateBaseTest {
+public class QueryPredicateTest {
     final QueryPredicate<String> p1 = QueryPredicate.<String>of("masterData(current(slug(en=\"xyz-42\")");
     final QueryPredicate<String> p2 = QueryPredicate.<String>of("tags contains all (\"a\", \"b\", \"c\")");
 
@@ -27,5 +27,12 @@ public class QueryPredicateBaseTest {
     @Test
     public void testToString() throws Exception {
         assertThat(p1.toString()).isEqualTo("Predicate[masterData(current(slug(en=\"xyz-42\")]");
+    }
+
+    @Test
+    public void negated() throws Exception {
+        final QueryPredicate<String> negated = p1.negate();
+        assertThat(negated.toSphereQuery()).isEqualTo("not(masterData(current(slug(en=\"xyz-42\"))");
+        assertThat(negated.toString()).isEqualTo("Predicate[not(masterData(current(slug(en=\"xyz-42\"))]");
     }
 }
