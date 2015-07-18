@@ -1,6 +1,7 @@
 package io.sphere.sdk.meta;
 
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.queries.QueryPredicate;
 
 /**
  <p>The Query API is for reading specific resources from SPHERE.IO.
@@ -116,9 +117,12 @@ import io.sphere.sdk.models.Base;
 
  <h4>Negate predicates</h4>
 
- It is not possible to negate entire predicates, but it is possible on field level. The next query, for example, is for products with a name that is not exactly "foo".
+Predicates can be negated by using {@link QueryPredicate#negate()}:
 
  {@include.example io.sphere.sdk.meta.QueryDocumentationTest#predicateNotExample()}
+
+ For resources there is also the {@code m.not()} method which puts the negation at the beginning of the predicate:
+ {@include.example io.sphere.sdk.meta.QueryDocumentationTest#notSyntax()}
 
  <h3 id=sorting>Sorting</h3>
 

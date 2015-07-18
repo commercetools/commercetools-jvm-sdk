@@ -2,6 +2,7 @@ package io.sphere.sdk.meta;
 
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
@@ -77,10 +78,19 @@ public class QueryDocumentationTest {
         final ProductQuery query = ProductQuery.of().withPredicate(nameIsFooAndIsInCat1);
     }
 
+    @Test
     public void predicateNotExample() {
-        final QueryPredicate<Product> nameIsNotFoo = ProductQueryModel.of().masterData().current().name()
-                .lang(ENGLISH).isNot("foo");
-        final ProductQuery query = ProductQuery.of().withPredicate(nameIsNotFoo);
+        final QueryPredicate<Product> nameIsFoo = ProductQueryModel.of()
+                .masterData().current().name().lang(ENGLISH).is("foo");
+        final QueryPredicate<Product> nameIsNotFoo = nameIsFoo.negate();
+        assertThat(nameIsNotFoo).isEqualTo(QueryPredicate.of("not(masterData(current(name(en=\"foo\"))))"));
+    }
+
+    @Test
+    public void notSyntax() throws Exception {
+        final ProductQuery query = ProductQuery.of()
+                .withPredicate(m -> m.not(m.masterData().current().name().lang(ENGLISH).is("foo")));
+        assertThat(query.predicate().get()).isEqualTo(QueryPredicate.of("not(masterData(current(name(en=\"foo\"))))"));
     }
 
     public void sortByName() {

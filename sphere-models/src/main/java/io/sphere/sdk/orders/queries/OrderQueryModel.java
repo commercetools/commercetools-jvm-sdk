@@ -31,6 +31,6 @@ public class OrderQueryModel extends CartLikeQueryModel<Order> {
     }
 
     public SyncInfoQueryModel<Order> syncInfo() {
-        return new SyncInfoQueryModel<>(Optional.of(this), Optional.of("syncInfo"));
+        return new SyncInfoQueryModelImpl<>(Optional.of(this), Optional.of("syncInfo"));
     }
 }
