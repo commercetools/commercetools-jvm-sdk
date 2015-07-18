@@ -18,11 +18,11 @@ public abstract class CartLikeExpansionModel<T> extends ExpansionModel<T> {
         return expansionPath("customerGroup");
     }
 
-    public ExpansionPath<T> discountCodes() {
+    public DiscountCodeInfoExpansionModel<T> discountCodes() {
         return discountCodes("*");
     }
 
-    public ExpansionPath<T> discountCodes(final int index) {
+    public DiscountCodeInfoExpansionModel<T> discountCodes(final int index) {
         return discountCodes("" + index);
     }
 
@@ -34,7 +34,7 @@ public abstract class CartLikeExpansionModel<T> extends ExpansionModel<T> {
         return new LineItemExpansionModel<>(pathExpressionOption(), "lineItems[" + index + "]");
     }
 
-    private ExpansionPath<T> discountCodes(final String s) {
-        return expansionPath("discountCodes[" + s + "].discountCode");
+    private DiscountCodeInfoExpansionModel<T> discountCodes(final String s) {
+        return new DiscountCodeInfoExpansionModel<>(pathExpressionOption(), "discountCodes[" + s + "]");
     }
 }

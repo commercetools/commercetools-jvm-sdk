@@ -5,12 +5,12 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
-public class DiscountCodeReference extends Base {
+public class DiscountCodeInfo extends Base {
     private final Reference<DiscountCode> discountCode;
     private final DiscountCodeState state;
 
     @JsonCreator
-    private DiscountCodeReference(final Reference<DiscountCode> discountCode, final DiscountCodeState state) {
+    private DiscountCodeInfo(final Reference<DiscountCode> discountCode, final DiscountCodeState state) {
         this.discountCode = discountCode;
         this.state = state;
     }
@@ -23,7 +23,7 @@ public class DiscountCodeReference extends Base {
         return state;
     }
 
-    public static DiscountCodeReference of(final Referenceable<DiscountCode> discountCode, final DiscountCodeState state) {
-        return new DiscountCodeReference(discountCode.toReference(), state);
+    public static DiscountCodeInfo of(final Referenceable<DiscountCode> discountCode, final DiscountCodeState state) {
+        return new DiscountCodeInfo(discountCode.toReference(), state);
     }
 }

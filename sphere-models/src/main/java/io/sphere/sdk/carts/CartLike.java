@@ -2,7 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customergroups.CustomerGroup;
-import io.sphere.sdk.discountcodes.DiscountCodeReference;
+import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
@@ -50,5 +50,5 @@ public interface CartLike<T> extends DefaultModel<T> {
 
     Optional<CountryCode> getCountry();
 
-    List<DiscountCodeReference> getDiscountCodes();
+    List<DiscountCodeInfo> getDiscountCodes();
 }

@@ -22,15 +22,15 @@ public class LineItemExpansionModel<T> extends ExpansionModel<T> {
         return expansionPath("distributionChannel");
     }
 
-    public ExpansionPath<T> state() {
+    public ItemStateExpansionModel<T> state() {
         return state("*");
     }
 
-    public ExpansionPath<T> state(final int index) {
+    public ItemStateExpansionModel<T> state(final int index) {
         return state("" + index);
     }
 
-    private ExpansionPath<T> state(final String s) {
-        return expansionPath("state[" + s + "].state");
+    private ItemStateExpansionModel<T> state(final String s) {
+        return new ItemStateExpansionModel<>(pathExpressionOption(), "state[" + s + "]");
     }
 }
