@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":9};
+var methods = {"i0":10,"i1":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -120,10 +120,6 @@ var activeTableTab = "activeTableTab";
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - the type for which the expansion path is</dd>
 </dl>
-<dl>
-<dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;T&gt;</dd>
-</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">SyncInfoExpansionModel&lt;T&gt;</span>
@@ -167,14 +163,6 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" tit
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html#channel--">channel</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html#equals-java.lang.Object-">equals</a></span>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>int</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html" title="class in io.sphere.sdk.orders.expansion">SyncInfoExpansionModel</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html#of--">of</a></span>()</code>&nbsp;</td>
 </tr>
@@ -184,14 +172,14 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" tit
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" title="class in io.sphere.sdk.expansion">ExpansionModel</a></h3>
-<code><a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#buildPathExpression--">buildPathExpression</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#collection-java.lang.String-int-">collection</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#expansionPath-java.lang.String-">expansionPath</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#pathExpressionOption--">pathExpressionOption</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#toSphereExpand--">toSphereExpand</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#buildPathExpression--">buildPathExpression</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#expansionPath-java.lang.String-">expansionPath</a>, <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html#pathExpressionOption--">pathExpressionOption</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -199,13 +187,6 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" tit
 </a>
 <h3>Methods inherited from class&nbsp;java.lang.Object</h3>
 <code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ExpansionPath">
-<!--   -->
-</a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a></h3>
-<code><a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html#of-java.lang.String-">of</a></code></li>
 </ul>
 </li>
 </ul>
@@ -233,36 +214,10 @@ extends <a href="../../../../../io/sphere/sdk/expansion/ExpansionModel.html" tit
 <a name="channel--">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>channel</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../../io/sphere/sdk/orders/expansion/SyncInfoExpansionModel.html" title="type parameter in SyncInfoExpansionModel">T</a>&gt;&nbsp;channel()</pre>
-</li>
-</ul>
-<a name="equals-java.lang.Object-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>equals</h4>
-<pre>public final&nbsp;boolean&nbsp;equals(java.lang.Object&nbsp;o)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></code></dd>
-</dl>
-</li>
-</ul>
-<a name="hashCode--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>hashCode</h4>
-<pre>public final&nbsp;int&nbsp;hashCode()</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></code></dd>
-</dl>
 </li>
 </ul>
 </li>
