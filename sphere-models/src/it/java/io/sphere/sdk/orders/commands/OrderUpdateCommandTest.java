@@ -210,7 +210,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
 
                 //reference expansion
-                final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.lineItems().state()));
+                final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.lineItems().state().state()));
                 final Reference<State> state = new LinkedList<>(loadedOrder.getLineItems().get(0).getState()).getFirst().getState();
                 assertThat(state.getObj()).isPresent();
             })

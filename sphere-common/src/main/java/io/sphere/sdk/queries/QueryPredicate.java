@@ -1,7 +1,5 @@
 package io.sphere.sdk.queries;
 
-import io.sphere.sdk.annotations.Unsafe;
-
 public interface QueryPredicate<T> {
     QueryPredicate<T> or(QueryPredicate<T> other);
 
@@ -17,7 +15,6 @@ public interface QueryPredicate<T> {
      */
     String toSphereQuery();
 
-    @Unsafe
     static <T> QueryPredicate<T> of(final String sphereQuery) {
         return new SimpleQueryPredicate<>(sphereQuery);
     }

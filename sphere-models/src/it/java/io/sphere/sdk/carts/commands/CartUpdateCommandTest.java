@@ -7,7 +7,7 @@ import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
-import io.sphere.sdk.discountcodes.DiscountCodeReference;
+import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -300,8 +300,8 @@ public class CartUpdateCommandTest extends IntegrationTest {
         withCartAndDiscountCode(client(), (cart, discountCode) -> {
             //addDiscountCode
             final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
-            final DiscountCodeReference discountCodeReference = cartWithCode.getDiscountCodes().get(0);
-            assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
+            final DiscountCodeInfo discountCodeInfo = cartWithCode.getDiscountCodes().get(0);
+            assertThat(discountCodeInfo.getDiscountCode()).isEqualTo(discountCode.toReference());
 
             //removeDiscountCode
             final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));

@@ -1,7 +1,7 @@
 package io.sphere.sdk.categories.expansion;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.expansion.ExpansionModel;
+import io.sphere.sdk.expansion.ExpandedModel;
 
 import java.util.Optional;
 /**
@@ -9,7 +9,7 @@ import java.util.Optional;
 
  @param <T> the type for which the expansion path is
  */
-public class CategoryExpansionModel<T> extends ExpansionModel<T> {
+public class CategoryExpansionModel<T> extends ExpandedModel<T> {
     public CategoryExpansionModel(final Optional<String> parentPath, final String path) {
         super(parentPath, Optional.of(path));
     }

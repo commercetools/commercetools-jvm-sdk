@@ -4,9 +4,8 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddDiscountCode;
 import io.sphere.sdk.carts.commands.updateactions.RemoveDiscountCode;
-import io.sphere.sdk.discountcodes.DiscountCodeReference;
+import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.test.IntegrationTest;
-import org.javamoney.moneta.function.MonetaryUtil;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -25,13 +24,13 @@ public class CartQueryTest extends IntegrationTest {
 
             final CartQuery query = CartQuery.of()
                     .withPredicate(m -> m.id().is(cart.getId()))
-                    .withExpansionPaths(m -> m.discountCodes());
+                    .withExpansionPaths(m -> m.discountCodes().discountCode());
             final Cart loadedCart = execute(query).head().get();
 
 
-            final DiscountCodeReference discountCodeReference = loadedCart.getDiscountCodes().get(0);
-            assertThat(discountCodeReference.getDiscountCode()).isEqualTo(discountCode.toReference());
-            assertThat(discountCodeReference.getDiscountCode().getObj()).isPresent();
+            final DiscountCodeInfo discountCodeInfo = loadedCart.getDiscountCodes().get(0);
+            assertThat(discountCodeInfo.getDiscountCode()).isEqualTo(discountCode.toReference());
+            assertThat(discountCodeInfo.getDiscountCode().getObj()).isPresent();
 
             //clean up
             final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
