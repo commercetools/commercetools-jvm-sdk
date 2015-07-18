@@ -1,12 +1,9 @@
 package io.sphere.sdk.expansion;
 
-import io.sphere.sdk.annotations.Internal;
-
 import java.util.Optional;
 
 import static org.apache.commons.lang3.StringUtils.isEmpty;
 
-@Internal
 public class ExpansionModel<T> extends ExpansionPathBase<T> {
     protected final Optional<String> parentPath;
     protected final Optional<String> path;
