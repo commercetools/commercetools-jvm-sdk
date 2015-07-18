@@ -23,10 +23,6 @@ public class ExpansionModel<T> extends Base {
         this(Optional.empty(), Optional.empty());
     }
 
-    protected static String collection(final String segmentName, final int index) {
-        return String.format("%s[%d]", segmentName, index);
-    }
-
     protected final String buildPathExpression() {
         return parentPath.filter(p -> !isEmpty(p)).map(p -> p + ".").orElse("") + path.orElse("");
     }
@@ -36,7 +32,7 @@ public class ExpansionModel<T> extends Base {
         return isEmpty(expression) ? Optional.empty() : Optional.of(expression);
     }
 
-    protected ExpansionPath<T> expansionPath(final String path) {
+    protected final ExpansionPath<T> expansionPath(final String path) {
         return new ExpandedModel<>(buildPathExpression(), path);
     }
 }

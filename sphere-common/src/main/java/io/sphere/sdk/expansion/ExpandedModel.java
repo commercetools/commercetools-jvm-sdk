@@ -2,15 +2,10 @@ package io.sphere.sdk.expansion;
 
 import java.util.Optional;
 
-import static org.apache.commons.lang3.StringUtils.isEmpty;
-
-public class ExpandedModel<T> extends ExpansionPathBase<T> {
-    protected final Optional<String> parentPath;
-    protected final Optional<String> path;
+public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPath<T> {
 
     protected ExpandedModel(final Optional<String> parentPath, final Optional<String> path) {
-        this.parentPath = parentPath;
-        this.path = path;
+        super(parentPath, path);
     }
 
     protected ExpandedModel(final String parentPath, final String path) {
@@ -30,16 +25,13 @@ public class ExpandedModel<T> extends ExpansionPathBase<T> {
         return buildPathExpression();
     }
 
-    protected ExpansionPath<T> expansionPath(final String path) {
-        return new ExpandedModel<>(buildPathExpression(), path);
+    @Override
+    public final int hashCode() {
+        return toSphereExpand().hashCode();
     }
 
-    protected final String buildPathExpression() {
-        return parentPath.filter(p -> !isEmpty(p)).map(p -> p + ".").orElse("") + path.orElse("");
-    }
-
-    protected final Optional<String> pathExpressionOption() {
-        final String expression = buildPathExpression();
-        return isEmpty(expression) ? Optional.empty() : Optional.of(expression);
+    @Override
+    public final boolean equals(final Object o) {
+        return ExpansionPathBase.equals(this, o);
     }
 }
