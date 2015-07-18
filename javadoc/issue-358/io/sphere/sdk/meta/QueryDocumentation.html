@@ -304,11 +304,18 @@ final ProductQuery query = ProductQuery.of().withPredicate(nameIsFooAndIsInCat1)
 
  <h4>Negate predicates</h4>
 
- It is not possible to negate entire predicates, but it is possible on field level. The next query, for example, is for products with a name that is not exactly "foo".
+Predicates can be negated by using <a href="../../../../io/sphere/sdk/queries/QueryPredicate.html#negate--"><code>QueryPredicate.negate()</code></a>:
 
- <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateNotExample--%s" class=code-example><pre><code class='java'>final QueryPredicate&lt;Product&gt; nameIsNotFoo = ProductQueryModel.of().masterData().current().name()
-        .lang(ENGLISH).isNot("foo");
-final ProductQuery query = ProductQuery.of().withPredicate(nameIsNotFoo);
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateNotExample--%s" class=code-example><pre><code class='java'>final QueryPredicate&lt;Product&gt; nameIsFoo = ProductQueryModel.of()
+        .masterData().current().name().lang(ENGLISH).is("foo");
+final QueryPredicate&lt;Product&gt; nameIsNotFoo = nameIsFoo.negate();
+assertThat(nameIsNotFoo).isEqualTo(QueryPredicate.of("not(masterData(current(name(en=\"foo\"))))"));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
+
+ For resources there is also the <code>m.not()</code> method which puts the negation at the beginning of the predicate:
+ <div id="io-sphere-sdk-meta-QueryDocumentationTest-notSyntax--%s" class=code-example><pre><code class='java'>final ProductQuery query = ProductQuery.of()
+        .withPredicate(m -&gt; m.not(m.masterData().current().name().lang(ENGLISH).is("foo")));
+assertThat(query.predicate().get()).isEqualTo(QueryPredicate.of("not(masterData(current(name(en=\"foo\"))))"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id=sorting>Sorting</h3>
