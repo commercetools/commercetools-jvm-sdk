@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -178,6 +178,10 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="c
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries">TimestampSortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="type parameter in DefaultModelQueryModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#lastModifiedAt--">lastModifiedAt</a></span>()</code>&nbsp;</td>
 </tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="type parameter in DefaultModelQueryModelImpl">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html#not-io.sphere.sdk.queries.QueryPredicate-">not</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="type parameter in DefaultModelQueryModelImpl">T</a>&gt;&nbsp;queryPredicateToNegate)</code>&nbsp;</td>
+</tr>
 </table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryModelImpl">
@@ -253,10 +257,19 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModelImpl.html" title="c
 <a name="lastModifiedAt--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>lastModifiedAt</h4>
 <pre>public final&nbsp;<a href="../../../../io/sphere/sdk/queries/TimestampSortingModel.html" title="class in io.sphere.sdk.queries">TimestampSortingModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="type parameter in DefaultModelQueryModelImpl">T</a>&gt;&nbsp;lastModifiedAt()</pre>
+</li>
+</ul>
+<a name="not-io.sphere.sdk.queries.QueryPredicate-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>not</h4>
+<pre>public final&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="type parameter in DefaultModelQueryModelImpl">T</a>&gt;&nbsp;not(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/DefaultModelQueryModelImpl.html" title="type parameter in DefaultModelQueryModelImpl">T</a>&gt;&nbsp;queryPredicateToNegate)</pre>
 </li>
 </ul>
 </li>

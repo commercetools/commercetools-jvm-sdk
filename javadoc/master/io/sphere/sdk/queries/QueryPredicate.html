@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":17,"i2":6,"i3":6};
+var methods = {"i0":6,"i1":6,"i2":17,"i3":6,"i4":6};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -128,14 +128,18 @@ var activeTableTab = "activeTableTab";
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html#and-io.sphere.sdk.queries.QueryPredicate-">and</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="type parameter in QueryPredicate">T</a>&gt;&nbsp;other)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="type parameter in QueryPredicate">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html#negate--">negate</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html#of-java.lang.String-">of</a></span>(java.lang.String&nbsp;sphereQuery)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="type parameter in QueryPredicate">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html#or-io.sphere.sdk.queries.QueryPredicate-">or</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="type parameter in QueryPredicate">T</a>&gt;&nbsp;other)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html#toSphereQuery--">toSphereQuery</a></span>()</code>
 <div class="block">The predicate for the SPHERE.IO HTTP API, not url encoded.</div>
@@ -172,6 +176,15 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>and</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="type parameter in QueryPredicate">T</a>&gt;&nbsp;and(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="type parameter in QueryPredicate">T</a>&gt;&nbsp;other)</pre>
+</li>
+</ul>
+<a name="negate--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>negate</h4>
+<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="type parameter in QueryPredicate">T</a>&gt;&nbsp;negate()</pre>
 </li>
 </ul>
 <a name="toSphereQuery--">
