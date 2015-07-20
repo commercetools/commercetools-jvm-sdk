@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -212,22 +212,28 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#as-java.lang.Class-">as</a></span>(java.lang.Class&lt;T&gt;&nbsp;messageClass)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>com.fasterxml.jackson.databind.JsonNode</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getPayload--">getPayload</a></span>()</code>
+<div class="block">Gets the top level fields not mapped by the current message class.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html" title="type parameter in GenericMessageImpl">R</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getResource--">getResource</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getResourceVersion--">getResourceVersion</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getSequenceNumber--">getSequenceNumber</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getType--">getType</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#toReference--">toReference</a></span>()</code>
 <div class="block">Creates a reference which is not necessarily filled.</div>
@@ -437,6 +443,23 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <dd><code><a href="../../../../io/sphere/sdk/messages/GenericMessage.html#getResource--">getResource</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/messages/GenericMessage.html" title="interface in io.sphere.sdk.messages">GenericMessage</a>&lt;<a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html" title="type parameter in GenericMessageImpl">R</a>&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/messages/Message.html#getResource--">getResource</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="getPayload--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getPayload</h4>
+<pre>public&nbsp;com.fasterxml.jackson.databind.JsonNode&nbsp;getPayload()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/messages/Message.html#getPayload--">Message</a></code></span></div>
+<div class="block">Gets the top level fields not mapped by the current message class.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/messages/Message.html#getPayload--">getPayload</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a></code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>json</dd>
 </dl>
 </li>
 </ul>
