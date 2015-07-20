@@ -22,6 +22,4 @@ public interface EntitySearch<T> extends Search<T> {
     Optional<Long> limit();
 
     Optional<Long> offset();
-
-    List<HttpQueryParameter> additionalQueryParameters();
 }

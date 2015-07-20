@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 import static java.util.Arrays.asList;
 
-class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
+final class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
     private Optional<SearchText> text;
     private List<FacetExpression<T>> facets;
     private List<FilterExpression<T>> filterResults;
@@ -29,7 +29,7 @@ class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
         this.resultMapper = resultMapper;
     }
 
-    SearchDslBuilder(final SearchDsl<T> template) {
+    SearchDslBuilder(final SearchDslImpl<T> template) {
         this(template.endpoint(), r -> template.deserialize(r));
         text = template.text();
         facets = template.facets();
@@ -39,7 +39,7 @@ class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
         sort = template.sort();
         limit = template.limit();
         offset = template.offset();
-        additionalQueryParameters= template.additionalQueryParameters();
+        additionalQueryParameters = template.additionalQueryParameters();
     }
 
     @Override

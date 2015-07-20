@@ -136,11 +136,6 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
-    public C withAdditionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters) {
-        return copyBuilder().additionalQueryParameters(additionalQueryParameters).build();
-    }
-
-    @Override
     public C plusExpansionPaths(final Function<E, ExpansionPath<T>> m) {
         return plusExpansionPaths(m.apply(expansionModel));
     }
@@ -185,8 +180,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         return expansionPaths;
     }
 
-    @Override
-    public List<HttpQueryParameter> additionalQueryParameters() {
+    protected List<HttpQueryParameter> additionalQueryParameters() {
         return additionalQueryParameters;
     }
 

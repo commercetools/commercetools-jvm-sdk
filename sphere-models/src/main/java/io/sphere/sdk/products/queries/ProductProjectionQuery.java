@@ -52,9 +52,6 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     ProductProjectionQuery plusExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
 
     @Override
-    ProductProjectionQuery withAdditionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters);
-
-    @Override
     ProductProjectionQuery withExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
 
     @Override

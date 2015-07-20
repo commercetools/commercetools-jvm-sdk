@@ -43,6 +43,4 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, R
      * not between {@value io.sphere.sdk.queries.Query#MIN_OFFSET} and {@value io.sphere.sdk.queries.Query#MAX_OFFSET}.
      */
     C withOffset(final long offset);
-
-    C withAdditionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters);
 }

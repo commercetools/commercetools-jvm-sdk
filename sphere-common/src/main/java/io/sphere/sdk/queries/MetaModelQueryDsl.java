@@ -31,8 +31,6 @@ public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q
 
     C withOffset(final long offset);
 
-    C withAdditionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters);
-
     @Override
     C plusExpansionPaths(final Function<E, ExpansionPath<T>> m);
 
