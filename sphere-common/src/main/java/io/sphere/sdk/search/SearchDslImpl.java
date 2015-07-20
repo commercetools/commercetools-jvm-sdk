@@ -103,11 +103,6 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     @Override
-    public SearchDsl<T> withAdditionalQueryParameters(List<HttpQueryParameter> additionalQueryParameters) {
-        return copyBuilder().additionalQueryParameters(additionalQueryParameters).build();
-    }
-
-    @Override
     public Optional<SearchText> text() {
         return text;
     }
