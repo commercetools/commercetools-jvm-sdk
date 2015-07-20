@@ -34,6 +34,4 @@ public interface EntityQuery<T> extends Query<T>, ReferenceExpandeable<T> {
 
     @Override
     List<ExpansionPath<T>> expansionPaths();
-
-    List<HttpQueryParameter> additionalQueryParameters();
 }

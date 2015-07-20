@@ -142,8 +142,7 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
         return offset;
     }
 
-    @Override
-    public List<HttpQueryParameter> additionalQueryParameters() {
+    List<HttpQueryParameter> additionalQueryParameters() {
         return additionalQueryParameters;
     }
 

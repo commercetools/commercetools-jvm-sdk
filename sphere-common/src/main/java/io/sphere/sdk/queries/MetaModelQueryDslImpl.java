@@ -180,8 +180,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         return expansionPaths;
     }
 
-    @Override
-    public List<HttpQueryParameter> additionalQueryParameters() {
+    protected List<HttpQueryParameter> additionalQueryParameters() {
         return additionalQueryParameters;
     }
 
