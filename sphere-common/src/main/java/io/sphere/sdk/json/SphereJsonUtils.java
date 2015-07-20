@@ -62,15 +62,38 @@ final public class SphereJsonUtils {
 
     /**
      * Converts a SPHERE.IO Java object to JSON as {@link JsonNode}.
+     * <p>If {@code value} is of type String and contains JSON data, that will be ignored, {@code value} will be treated as just any String.
+     * If you want to parse a JSON String to a JsonNode use {@link SphereJsonUtils#parse(java.lang.String)} instead.</p>
      *
      * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toJsonNode()}
      *
      * @param value the object to convert
-     * @param <T> the type of the value to convert
      * @return new json
      */
-    public static <T> JsonNode toJsonNode(final T value) {
+    public static JsonNode toJsonNode(final Object value) {
         return objectMapper.valueToTree(value);
+    }
+
+    /**
+     * Parses a String containing JSON data and produces a {@link JsonNode}.
+     *
+     * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#parse()}
+     *
+     * @param jsonAsString json data
+     * @return new JsonNode
+     */
+    public static JsonNode parse(final String jsonAsString) {
+        return executing(() -> objectMapper.readTree(jsonAsString));
+    }
+
+    /**
+     * Parses a byte array containing JSON data and produces a {@link JsonNode}.
+     *
+     * @param jsonAsBytes json data
+     * @return new JsonNode
+     */
+    public static JsonNode parse(final byte[] jsonAsBytes) {
+        return executing(() -> objectMapper.readTree(jsonAsBytes));
     }
 
     /** Pretty prints a given JSON string.

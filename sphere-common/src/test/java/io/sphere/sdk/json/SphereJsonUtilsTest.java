@@ -1,6 +1,5 @@
 package io.sphere.sdk.json;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.sphere.sdk.models.LocalizedStrings;
@@ -62,6 +61,16 @@ public class SphereJsonUtilsTest {
         final LocalizedStrings actual =
                 SphereJsonUtils.readObject(jsonNode, LocalizedStrings.typeReference());
         assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
+    }
+
+    @Test
+    public void parse() throws Exception {
+        final JsonNode actual =
+                SphereJsonUtils.parse("{\"de\":\"Hundefutter\",\"en\":\"dog food\"}");
+        final ObjectNode expected = SphereJsonUtils.newObjectNode();
+        expected.put("de", "Hundefutter");
+        expected.put("en", "dog food");
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test

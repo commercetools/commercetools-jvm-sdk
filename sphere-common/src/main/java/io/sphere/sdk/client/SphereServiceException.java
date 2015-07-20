@@ -41,7 +41,7 @@ public abstract class SphereServiceException extends SphereException {
     }
 
     public final Optional<JsonNode> getJsonBody() {
-        final Function<byte[], JsonNode> f = body -> SphereJsonUtils.toJsonNode(body);
+        final Function<byte[], JsonNode> f = body -> SphereJsonUtils.parse(body);
         try {
             return httpResponse.flatMap(r -> r.getResponseBody().map(f));
         } catch (final Exception e) {

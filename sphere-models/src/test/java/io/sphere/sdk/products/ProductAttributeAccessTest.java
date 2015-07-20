@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.attributes.AttributeExtraction;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.*;
@@ -40,8 +41,9 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void getterWithJsonAttributeAccess() throws Exception {
-        assertThat(variant.getAttribute(LOC_STRING_ATTRIBUTE, ofJsonNode()).get()).
-                isEqualTo(SphereJsonUtils.toJsonNode("{\"de\":\"val-loc-string-de\",\"en\":\"val-loc-string-en\"}".getBytes()));
+        final JsonNode actual = variant.getAttribute(LOC_STRING_ATTRIBUTE, ofJsonNode()).get();
+        final JsonNode expected = SphereJsonUtils.parse("{\"de\":\"val-loc-string-de\",\"en\":\"val-loc-string-en\"}");
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test
