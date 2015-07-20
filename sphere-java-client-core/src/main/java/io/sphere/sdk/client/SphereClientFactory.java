@@ -3,26 +3,30 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.models.Base;
 import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
+import java.util.function.Supplier;
 
-import static io.sphere.sdk.utils.CompletableFutureUtils.*;
+import static io.sphere.sdk.utils.CompletableFutureUtils.successful;
 
 /**
- * A factory to instantiate SPHERE.IO Java clients which use {@link java.util.concurrent.CompletionStage} as future implementation.
+ * A factory to instantiate SPHERE.IO Java clients which use {@link CompletionStage} as future implementation.
  *
  * {@include.example example.JavaClientInstantiationExample}
  */
 public class SphereClientFactory extends Base {
-    private SphereClientFactory() {
+    private final Supplier<HttpClient> httpClientSupplier;
+
+    private SphereClientFactory(final Supplier<HttpClient> httpClientSupplier) {
+        this.httpClientSupplier = httpClientSupplier;
     }
 
     private HttpClient defaultHttpClient() {
-        return AsyncHttpClientAdapterFactory.create();
+        return httpClientSupplier.get();
     }
 
     /**
@@ -38,8 +42,8 @@ public class SphereClientFactory extends Base {
         return SphereClient.of(config, httpClient, tokenSupplier);
     }
 
-    public static SphereClientFactory of() {
-        return new SphereClientFactory();
+    public static SphereClientFactory of(final Supplier<HttpClient> httpClientSupplier) {
+        return new SphereClientFactory(httpClientSupplier);
     }
 
     /**
@@ -74,7 +78,7 @@ public class SphereClientFactory extends Base {
      * @param function a function which returns a matching object for a SPHERE.IO request.
      * @return sphere client test double
      */
-    public SphereClient createHttpTestDouble(final Function<HttpRequestIntent, HttpResponse> function) {
+    public static SphereClient createHttpTestDouble(final Function<HttpRequestIntent, HttpResponse> function) {
         return new SphereClient() {
             private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
 
@@ -111,7 +115,7 @@ public class SphereClientFactory extends Base {
      * @return sphere client test double
      */
     @SuppressWarnings("unchecked")
-    public SphereClient createObjectTestDouble(final Function<HttpRequestIntent, Object> function) {
+    public static SphereClient createObjectTestDouble(final Function<HttpRequestIntent, Object> function) {
         return new SphereClient() {
             @Override
             public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {

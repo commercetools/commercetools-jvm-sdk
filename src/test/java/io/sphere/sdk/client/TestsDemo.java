@@ -10,10 +10,9 @@ public class TestsDemo {
 
     private void modelInstanceFromJson() {
         //deserializes an object stored from JSON
-        final SphereClientFactory factory = SphereClientFactory.of();
-        final SphereClient client = factory.createObjectTestDouble(httpRequest -> {
+        final SphereClient client = SphereClientFactory.createObjectTestDouble(httpRequest -> {
             final Object result;
-            if(httpRequest.getPath().contains("/categories")) {
+            if (httpRequest.getPath().contains("/categories")) {
                 //in Play projects the file is in "test/resources/categories.json"
                 final PagedQueryResult<Category> queryResult = JsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
                 result = queryResult;
@@ -25,7 +24,7 @@ public class TestsDemo {
     }
 
     private void withJson() {
-        final SphereClient client = SphereClientFactory.of().createHttpTestDouble(httpRequest -> {
+        final SphereClient client = SphereClientFactory.createHttpTestDouble(httpRequest -> {
             final HttpResponse response;
             if (httpRequest.getPath().contains("/categories")) {
                 //JSON representation is often useful to deal with errors, but this time again a happy path example

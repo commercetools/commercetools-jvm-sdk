@@ -2,12 +2,17 @@ package io.sphere.sdk.client;
 
 import io.sphere.sdk.http.HttpClient;
 
+import java.util.function.Supplier;
+
 public final class SphereAccessTokenSupplierFactory {
-    private SphereAccessTokenSupplierFactory() {
+    private final Supplier<HttpClient> httpClientSupplier;
+
+    private SphereAccessTokenSupplierFactory(final Supplier<HttpClient> httpClientSupplier) {
+        this.httpClientSupplier = httpClientSupplier;
     }
 
-    public static SphereAccessTokenSupplierFactory of() {
-        return new SphereAccessTokenSupplierFactory();
+    public static SphereAccessTokenSupplierFactory of(final Supplier<HttpClient> httpClientSupplier) {
+        return new SphereAccessTokenSupplierFactory(httpClientSupplier);
     }
 
     /**
@@ -17,7 +22,7 @@ public final class SphereAccessTokenSupplierFactory {
      * @param token the token which will be passed to the client
      * @return token service
      */
-    public SphereAccessTokenSupplier createSupplierOfFixedToken(final String token) {
+    public static SphereAccessTokenSupplier createSupplierOfFixedToken(final String token) {
         return SphereAccessTokenSupplier.ofConstantToken(token);
     }
 
@@ -28,14 +33,14 @@ public final class SphereAccessTokenSupplierFactory {
      * @return token service
      */
     public SphereAccessTokenSupplier createSupplierOfAutoRefresh(final SphereAuthConfig config) {
-        return SphereAccessTokenSupplier.ofAutoRefresh(config, defaultHttpClient(), true);
+        return SphereAccessTokenSupplier.ofAutoRefresh(config, createHttpClient(), true);
     }
 
     public SphereAccessTokenSupplier createSupplierOfOneTimeFetchingToken(final SphereAuthConfig config) {
-        return SphereAccessTokenSupplier.ofOneTimeFetchingToken(config, defaultHttpClient(), true);
+        return SphereAccessTokenSupplier.ofOneTimeFetchingToken(config, createHttpClient(), true);
     }
 
-    private HttpClient defaultHttpClient() {
-        return AsyncHttpClientAdapterFactory.create();
+    private HttpClient createHttpClient() {
+        return httpClientSupplier.get();
     }
 }
