@@ -101,6 +101,24 @@ public class MessageQueryTest extends IntegrationTest {
     }
 
     @Test
+    public void messageGetPayload() throws Exception {
+        withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
+            final Query<Message> query =
+                    MessageQuery.of()
+                            .withPredicate(m -> m.type().is(ReturnInfoAddedMessage.MESSAGE_HINT))
+                            .withSort(m -> m.createdAt().sort().desc())
+                            .withExpansionPaths(m -> m.resource())
+                            .withLimit(1);
+            final PagedQueryResult<Message> pagedQueryResult = execute(query);
+            final Message message = pagedQueryResult.head().get();
+
+            final String fetchedItemId = message.getPayload().get("returnInfo").get("items").get(0).get("id").asText();
+            final String actualItemId = returnInfo.getItems().get(0).getId();
+            assertThat(fetchedItemId).isEqualTo(actualItemId).isNotNull();
+        }));
+    }
+
+    @Test
     public void queryForAllMessages() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final MessageQuery query = MessageQuery.of()
