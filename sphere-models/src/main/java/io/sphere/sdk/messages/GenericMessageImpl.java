@@ -61,6 +61,14 @@ public abstract class GenericMessageImpl<R> extends DefaultModelImpl<Message> im
     }
 
     @Override
+    public JsonNode getPayload() {
+        final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
+        final ObjectNode jsonNode = objectMapper.createObjectNode();
+        furtherFields.entrySet().forEach(entry -> jsonNode.replace(entry.getKey(), entry.getValue()));
+        return jsonNode;
+    }
+
+    @Override
     public <T extends Message> T as(final Class<T> messageClass) {
         final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
         final ObjectNode jsonNode = objectMapper.createObjectNode()

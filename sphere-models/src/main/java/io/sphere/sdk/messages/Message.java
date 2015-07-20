@@ -1,6 +1,7 @@
 package io.sphere.sdk.messages;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
@@ -27,6 +28,12 @@ public interface Message extends DefaultModel<Message> {
     long getSequenceNumber();
 
     String getType();
+
+    /**
+     * Gets the top level fields not mapped by the current message class.
+     * @return json
+     */
+    JsonNode getPayload();
 
     @Override
     default Reference<Message> toReference() {
