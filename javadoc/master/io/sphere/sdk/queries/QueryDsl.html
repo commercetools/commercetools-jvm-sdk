@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":18};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":18};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -154,35 +154,31 @@ extends <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="inte
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withAdditionalQueryParameters-java.util.List-">withAdditionalQueryParameters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalQueryParameters)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withFetchTotal-boolean-">withFetchTotal</a></span>(boolean&nbsp;fetchTotal)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withFetchTotal-boolean-">withFetchTotal</a></span>(boolean&nbsp;fetchTotal)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>
 <div class="block">Returns a new query with the new offset as offset.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicate-io.sphere.sdk.queries.QueryPredicate-">withPredicate</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;predicate)</code>
 <div class="block">Returns an EntityQuery with the new predicate as predicate.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&gt;&nbsp;sort)</code>
 <div class="block">Returns a query with the new sort as sort.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/QueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">T</a>&gt;&nbsp;sort)</code>&nbsp;</td>
 </tr>
@@ -192,7 +188,7 @@ extends <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="inte
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></h3>
-<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#additionalQueryParameters--">additionalQueryParameters</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#endpoint--">endpoint</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#expansionPaths--">expansionPaths</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#fetchTotal--">fetchTotal</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#limit--">limit</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#offset--">offset</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#predicate--">predicate</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#sort--">sort</a></code></li>
+<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#endpoint--">endpoint</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#expansionPaths--">expansionPaths</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#fetchTotal--">fetchTotal</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#limit--">limit</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#offset--">offset</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#predicate--">predicate</a>, <a href="../../../../io/sphere/sdk/queries/EntityQuery.html#sort--">sort</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.Query">
@@ -291,7 +287,7 @@ extends <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="inte
 <a name="withOffset-long-">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>withOffset</h4>
 <pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withOffset(long&nbsp;offset)</pre>
@@ -305,15 +301,6 @@ extends <a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="inte
 <dd><code>java.lang.IllegalArgumentException</code> - if offset is
  not between <a href="../../../../io/sphere/sdk/queries/Query.html#MIN_OFFSET">0</a> and <a href="../../../../io/sphere/sdk/queries/Query.html#MAX_OFFSET">100000</a>.</dd>
 </dl>
-</li>
-</ul>
-<a name="withAdditionalQueryParameters-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>withAdditionalQueryParameters</h4>
-<pre><a href="../../../../io/sphere/sdk/queries/QueryDsl.html" title="type parameter in QueryDsl">C</a>&nbsp;withAdditionalQueryParameters(java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalQueryParameters)</pre>
 </li>
 </ul>
 </li>
