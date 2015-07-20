@@ -12,7 +12,7 @@ public class StateByKeyFetchTest extends IntegrationTest {
     public void execution() throws Exception {
         withState(client(), state -> {
             final String key = state.getKey();
-            final State fetchedState = execute(StateByKeyFetch.of(key));
+            final State fetchedState = execute(StateQuery.of().byKey(key)).head().orElse(null);
             assertThat(fetchedState).isEqualTo(state);
         });
     }

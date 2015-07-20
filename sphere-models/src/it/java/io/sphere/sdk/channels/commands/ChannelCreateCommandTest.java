@@ -3,26 +3,25 @@ package io.sphere.sdk.channels.commands;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.ChannelRole;
-import io.sphere.sdk.channels.queries.ChannelByKeyFetch;
+import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Locale.ENGLISH;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ChannelCreateCommandTest extends IntegrationTest {
 
     @Before
     @After
     public void setUp() throws Exception {
-        Optional.ofNullable(execute(ChannelByKeyFetch.of(channelKey())))
-                .ifPresent(c -> execute(ChannelDeleteCommand.of(c)));
+        final PagedQueryResult<Channel> queryResult = execute(ChannelQuery.of().byKey(channelKey()));
+        queryResult.head().ifPresent(c -> execute(ChannelDeleteCommand.of(c)));
     }
 
     @Test

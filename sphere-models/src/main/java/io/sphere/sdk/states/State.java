@@ -17,7 +17,6 @@ import java.util.Set;
  <p id=operations>Operations:</p>
  <ul>
  <li>Create a state with {@link io.sphere.sdk.states.commands.StateCreateCommand}.</li>
- <li>Fetch a state by key with {@link io.sphere.sdk.states.queries.StateByKeyFetch}.</li>
  <li>Query a state with {@link io.sphere.sdk.states.queries.StateQuery}.</li>
  <li>Delete a channel with {@link io.sphere.sdk.states.commands.StateDeleteCommand}.</li>
  </ul>

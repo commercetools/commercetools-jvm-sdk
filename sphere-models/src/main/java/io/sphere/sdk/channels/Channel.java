@@ -14,7 +14,6 @@ import java.util.Set;
     <p id=operations>Operations:</p>
     <ul>
         <li>Create a channel with {@link io.sphere.sdk.channels.commands.ChannelCreateCommand}.</li>
-        <li>Fetch a channel by key with {@link io.sphere.sdk.channels.queries.ChannelByKeyFetch}.</li>
         <li>Query a channel with {@link io.sphere.sdk.channels.queries.ChannelQuery}.</li>
         <li>Delete a channel with {@link io.sphere.sdk.channels.commands.ChannelDeleteCommand}.</li>
     </ul>
