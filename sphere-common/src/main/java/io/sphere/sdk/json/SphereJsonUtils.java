@@ -1,7 +1,5 @@
 package io.sphere.sdk.json;
 
-import com.fasterxml.jackson.core.JsonFactory;
-import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -18,16 +16,15 @@ import org.zapodot.jackson.java8.JavaOptionalModule;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.StringWriter;
 import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Map;
 
-final public class JsonUtils {
+final public class SphereJsonUtils {
     private static final ObjectMapper objectMapper = newObjectMapper();
-    private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(JsonUtils.class);
+    private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(SphereJsonUtils.class);
 
-    private JsonUtils() {
+    private SphereJsonUtils() {
     }
 
     public static ObjectMapper newObjectMapper() {

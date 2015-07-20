@@ -1,7 +1,7 @@
 package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
@@ -41,7 +41,7 @@ public abstract class SphereServiceException extends SphereException {
     }
 
     public final Optional<JsonNode> getJsonBody() {
-        final Function<byte[], JsonNode> f = body -> JsonUtils.readTree(body);
+        final Function<byte[], JsonNode> f = body -> SphereJsonUtils.readTree(body);
         try {
             return httpResponse.flatMap(r -> r.getResponseBody().map(f));
         } catch (final Exception e) {

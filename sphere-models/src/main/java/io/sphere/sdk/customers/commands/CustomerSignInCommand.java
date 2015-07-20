@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.client.HttpRequestIntent;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 
 import java.util.Optional;
 
@@ -54,7 +54,7 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/login", JsonUtils.toJson(this));
+        return HttpRequestIntent.of(POST, "/login", SphereJsonUtils.toJson(this));
     }
 
     public String getEmail() {

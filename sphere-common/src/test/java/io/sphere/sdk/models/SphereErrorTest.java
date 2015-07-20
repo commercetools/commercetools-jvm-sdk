@@ -1,10 +1,8 @@
 package io.sphere.sdk.models;
 
 import io.sphere.sdk.models.errors.InvalidJsonInputError;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import org.junit.Test;
-
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -20,7 +18,7 @@ public class SphereErrorTest {
                 "    \"detailedErrorMessage\" : \"detailed error message\"" +
                 "  } ]\n" +
                 "}";
-        final ErrorResponse sphereErrorResponse = JsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
+        final ErrorResponse sphereErrorResponse = SphereJsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
         final InvalidJsonInputError jsonError = sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class);
 
 
@@ -37,7 +35,7 @@ public class SphereErrorTest {
                 "    \"message\" : \"Message.\"" +
                 "  } ]\n" +
                 "}";
-        final ErrorResponse sphereErrorResponse = JsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
+        final ErrorResponse sphereErrorResponse = SphereJsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
         assertThatThrownBy(() -> sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class))
                 .isInstanceOf(IllegalArgumentException.class);
     }

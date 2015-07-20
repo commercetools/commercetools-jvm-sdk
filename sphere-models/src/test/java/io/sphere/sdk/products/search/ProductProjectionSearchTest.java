@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
@@ -214,7 +214,7 @@ public class ProductProjectionSearchTest {
     private Product product(final String id) throws Exception {
         final String productJson = stringFromResource("ProductProjectionSearchTest/product.json")
                 .replace("eb85ee2d-a5e5-4e15-a8ba-91281e599d68", id);
-        return JsonUtils.readObjectFromJsonString(Product.typeReference(), productJson);
+        return SphereJsonUtils.readObjectFromJsonString(Product.typeReference(), productJson);
     }
 
     private ZonedDateTime dateTime(final String dateTime) {

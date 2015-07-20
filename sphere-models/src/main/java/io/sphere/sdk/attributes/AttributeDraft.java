@@ -2,7 +2,7 @@ package io.sphere.sdk.attributes;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.PlainEnumValue;
@@ -36,13 +36,13 @@ public class AttributeDraft extends Base {
                     final Set<String> newValues = set.stream().map(x -> ((WithKey) x).getKey()).collect(toSet());
                     result = of(name, newValues);
                 } else {
-                    result = of(name, JsonUtils.toJsonNode(value));
+                    result = of(name, SphereJsonUtils.toJsonNode(value));
                 }
             } else {
-                result = of(name, JsonUtils.toJsonNode(value));
+                result = of(name, SphereJsonUtils.toJsonNode(value));
             }
         } else {
-            result = of(name, JsonUtils.toJsonNode(value));
+            result = of(name, SphereJsonUtils.toJsonNode(value));
         }
         return result;
     }

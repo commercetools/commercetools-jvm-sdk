@@ -2,7 +2,7 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.search.*;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +18,8 @@ public class FacetResultTest {
 
     @Before
     public void setUp() throws Exception {
-        pagedSearchResult = JsonUtils.readObjectFromResource("facetResult.json", new TypeReference<PagedSearchResult<ProductProjection>>() { });
+        pagedSearchResult = SphereJsonUtils.readObjectFromResource("facetResult.json", new TypeReference<PagedSearchResult<ProductProjection>>() {
+        });
     }
 
     @Test

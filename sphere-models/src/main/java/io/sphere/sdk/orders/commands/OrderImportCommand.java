@@ -3,7 +3,7 @@ package io.sphere.sdk.orders.commands;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.orders.OrderImportDraft;
 import io.sphere.sdk.orders.Order;
 
@@ -26,7 +26,7 @@ public class OrderImportCommand extends CommandImpl<Order> {
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, OrderEndpoint.ENDPOINT.endpoint() + "/import", JsonUtils.toJson(orderImportDraft));
+        return HttpRequestIntent.of(POST, OrderEndpoint.ENDPOINT.endpoint() + "/import", SphereJsonUtils.toJson(orderImportDraft));
     }
 
     public static OrderImportCommand of(final OrderImportDraft orderImportDraft) {

@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.json.JsonException;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.utils.MapUtils;
@@ -90,7 +90,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
             if (httpResponse.getStatusCode() == 401 && httpResponse.getResponseBody().isPresent()) {
                 ClientErrorException exception = new UnauthorizedException(httpResponse.toString());
                 try {
-                    final JsonNode jsonNode = JsonUtils.readTree(httpResponse.getResponseBody().get());
+                    final JsonNode jsonNode = SphereJsonUtils.readTree(httpResponse.getResponseBody().get());
                     final String error = jsonNode.get("error").asText();
                     if (error.equals("invalid_client")) {
                         exception = new InvalidClientCredentialsException(config);
@@ -100,7 +100,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                 }
                 throw exception;
             }
-            return JsonUtils.readObject(Tokens.typeReference(), httpResponse.getResponseBody().get());
+            return SphereJsonUtils.readObject(Tokens.typeReference(), httpResponse.getResponseBody().get());
         } catch (final SphereException exception) {
             exception.setProjectKey(config.getProjectKey());
             exception.setUnderlyingHttpResponse(httpResponse);

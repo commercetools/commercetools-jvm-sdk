@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.json.TypeReferences;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
@@ -41,7 +41,7 @@ public class MoneyTest {
 
     @Test
     public void deserializeFromJson() throws Exception {
-        final MonetaryAmount money = JsonUtils.readObjectFromJsonString(TypeReferences.monetaryAmountTypeReference(), JSON);
+        final MonetaryAmount money = SphereJsonUtils.readObjectFromJsonString(TypeReferences.monetaryAmountTypeReference(), JSON);
         assertThat(money.isEqualTo(MONEY)).isTrue();
     }
 
@@ -58,7 +58,7 @@ public class MoneyTest {
     }
 
     private void checkSerialization(final MonetaryAmount money, final String json) {
-        final String jsonString = JsonUtils.toJson(money);
+        final String jsonString = SphereJsonUtils.toJson(money);
         assertThat(jsonString).isEqualTo(json);
     }
 }

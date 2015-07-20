@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.attributes.*;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
@@ -27,7 +27,7 @@ public class ProductAttributeFlowTest extends IntegrationTest {
     public static final LocalizedEnumValue A = LocalizedEnumValue.of("a", en("value a"));
     public static final LocalizedEnumValue B = LocalizedEnumValue.of("b", en("value b"));
     public static final LocalizedEnumValue C = LocalizedEnumValue.of("c", en("value c"));
-    private static final Reference<Product> EXPANDED_PRODUCT_REFERENCE = JsonUtils.readObjectFromResource("product1.json", Product.typeReference()).toReference();
+    private static final Reference<Product> EXPANDED_PRODUCT_REFERENCE = SphereJsonUtils.readObjectFromResource("product1.json", Product.typeReference()).toReference();
 
     @Test
     public void localizedEnumValue() throws Exception {
@@ -62,8 +62,8 @@ public class ProductAttributeFlowTest extends IntegrationTest {
         final Attribute attribute = Attribute.of(namedAccess, EXPANDED_PRODUCT_REFERENCE);
         assertThat(attribute.getValue(access).getObj()).isPresent();
 
-        final String jsonFilledRef = JsonUtils.toJson(EXPANDED_PRODUCT_REFERENCE);
-        final String jsonEmptyRef = JsonUtils.toJson(EXPANDED_PRODUCT_REFERENCE.filled(Optional.<Product>empty()));
+        final String jsonFilledRef = SphereJsonUtils.toJson(EXPANDED_PRODUCT_REFERENCE);
+        final String jsonEmptyRef = SphereJsonUtils.toJson(EXPANDED_PRODUCT_REFERENCE.filled(Optional.<Product>empty()));
         assertThat(jsonFilledRef)
                 .overridingErrorMessage("references are not expanded if serialized")
                 .doesNotContain(EXPANDED_PRODUCT_REFERENCE.getObj().get().getMasterData().getStaged().getName().get(Locale.ENGLISH).get())

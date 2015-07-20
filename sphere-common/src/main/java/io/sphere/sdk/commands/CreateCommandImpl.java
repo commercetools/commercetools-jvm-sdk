@@ -5,7 +5,7 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.client.JsonEndpoint;
 
-import static io.sphere.sdk.json.JsonUtils.toJson;
+import static io.sphere.sdk.json.SphereJsonUtils.toJson;
 import static java.util.Objects.requireNonNull;
 
 /**

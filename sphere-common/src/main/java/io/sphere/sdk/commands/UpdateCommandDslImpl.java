@@ -8,7 +8,7 @@ import io.sphere.sdk.http.HttpMethod;
 
 import java.util.List;
 
-import static io.sphere.sdk.json.JsonUtils.toJson;
+import static io.sphere.sdk.json.SphereJsonUtils.toJson;
 import static java.util.Objects.requireNonNull;
 
 /**
