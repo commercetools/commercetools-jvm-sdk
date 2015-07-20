@@ -37,7 +37,7 @@ public class CustomerChangePasswordCommand extends CommandImpl<Customer> {
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/customers/password/", SphereJsonUtils.toJson(this));
+        return HttpRequestIntent.of(POST, "/customers/password/", SphereJsonUtils.toJsonString(this));
     }
 
     public String getId() {

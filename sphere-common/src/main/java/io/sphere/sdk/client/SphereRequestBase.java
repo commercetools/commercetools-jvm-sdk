@@ -19,7 +19,7 @@ public abstract class SphereRequestBase extends Base {
     }
 
     protected static <T> Function<HttpResponse, T> resultMapperOf(TypeReference<T> typeReference) {
-        return httpResponse -> SphereJsonUtils.readObject(typeReference, httpResponse.getResponseBody().orElseThrow(() -> new JsonException(httpResponse)));
+        return httpResponse -> SphereJsonUtils.readObject(httpResponse.getResponseBody().orElseThrow(() -> new JsonException(httpResponse)), typeReference);
     }
 
     protected static String getBodyAsString(final HttpResponse httpResponse) {

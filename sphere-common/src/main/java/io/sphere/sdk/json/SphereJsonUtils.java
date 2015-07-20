@@ -1,6 +1,5 @@
 package io.sphere.sdk.json;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -10,7 +9,6 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import io.sphere.sdk.utils.SphereInternalLogger;
 import org.zapodot.jackson.java8.JavaOptionalModule;
 
 import java.io.IOException;
@@ -20,13 +18,24 @@ import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * Internal utility class to work with JSON from SPHERE.IO.
+ *
+ * <p>If an error occurs, the {@link JsonException} (a {@link RuntimeException}) will be thrown:</p>
+ *
+ * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#exceptionHandling()}
+ *
+ */
 final public class SphereJsonUtils {
     private static final ObjectMapper objectMapper = newObjectMapper();
-    private static final SphereInternalLogger LOGGER = SphereInternalLogger.getLogger(SphereJsonUtils.class);
 
     private SphereJsonUtils() {
     }
 
+    /**
+     * Creates a new {@link ObjectMapper} which is configured for sphere projects.
+     * @return new object mapper
+     */
     public static ObjectMapper newObjectMapper() {
         return new ObjectMapper()
                 .registerModule(new JavaOptionalModule())
@@ -39,73 +48,130 @@ final public class SphereJsonUtils {
                 .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
-    public static String toJson(final Object object) {
-        try {
-            return objectMapper.writeValueAsString(object);
-        } catch (final JsonProcessingException e) {
-            //to extend RuntimeException to be able to catch specific classes
-            throw new JsonException(e);
-        }
+    /**
+     * Converts a SPHERE.IO Java object to JSON as String.
+     *
+     * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toJsonString()}
+     *
+     * @param value the object to convert
+     * @return JSON string representation of the value
+     */
+    public static String toJsonString(final Object value) {
+        return executing(() -> objectMapper.writeValueAsString(value));
     }
 
-    /** Pretty prints given JSON string.
+    /**
+     * Converts a SPHERE.IO Java object to JSON as {@link JsonNode}.
+     *
+     * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#toJsonNode()}
+     *
+     * @param value the object to convert
+     * @param <T> the type of the value to convert
+     * @return new json
+     */
+    public static <T> JsonNode toJsonNode(final T value) {
+        return objectMapper.valueToTree(value);
+    }
+
+    /** Pretty prints a given JSON string.
+     *
+     * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#prettyPrint()}
+     *
      * @param json JSON code as String which should be formatted
      * @return <code>json</code> formatted
      */
-    public static String prettyPrintJson(final String json) {
-        try {
-            ObjectMapper jsonParser = new ObjectMapper();
-            JsonNode jsonTree = jsonParser.readValue(json, JsonNode.class);
+    public static String prettyPrint(final String json) {
+        return executing(() -> {
+            final ObjectMapper jsonParser = new ObjectMapper();
+            final JsonNode jsonTree = jsonParser.readValue(json, JsonNode.class);
             secure(jsonTree);
-            ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
+            final ObjectWriter writer = jsonParser.writerWithDefaultPrettyPrinter();
             return writer.writeValueAsString(jsonTree);
-        } catch (IOException e) {
-            LOGGER.error(() -> "invalid JSON for pretty printing", e);
-            return json;
-        }
+        });
     }
 
+    /**
+     *
+     * Reads a UTF-8 JSON text file from the classpath of the current thread and transforms it into a Java object.
+     *
+     * @param resourcePath the path to the resource. Example: If the file is located in "src/test/resources/foo/bar/product.json" then the path should be "foo/bar/product.json"
+     * @param typeReference the full generic type information about the object to create
+     * @param <T> the type of the result
+     * @return the created objected
+     */
     public static <T> T readObjectFromResource(final String resourcePath, final TypeReference<T> typeReference) {
-        try {
+        return executing(() -> {
             final InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
             return objectMapper.readValue(new InputStreamReader(resourceAsStream, StandardCharsets.UTF_8.name()), typeReference);
-        } catch (IOException e) {
-            throw new JsonException(e);
-        }
+        });
     }
 
-    public static <T> T readObjectFromJsonString(final TypeReference<T> typeReference, final String jsonAsString) {
-        try {
-            return objectMapper.readValue(jsonAsString, typeReference);
-        } catch (IOException e) {
-            throw new JsonException(e);
-        }
+    /**
+     * Reads a Java object from JSON data (String).
+     *
+     * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonString()}
+     *
+     * @param jsonAsString the JSON data which represents sth. of type {@code <T>}
+     * @param typeReference the full generic type information about the object to create
+     * @param <T> the type of the result
+     * @return the created objected
+     */
+    public static <T> T readObject(final String jsonAsString, final TypeReference<T> typeReference) {
+        return executing(() -> objectMapper.readValue(jsonAsString, typeReference));
     }
 
-    public static <T> T readObject(final TypeReference<T> clazz, final JsonNode jsonNode) {
-        try {
-            return objectMapper.reader(clazz).readValue(jsonNode);
-        } catch (IOException e) {
-            throw new JsonException(e);
-        }
+    /**
+     * Reads a Java object from JsonNode data.
+     *
+     * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonNode()}
+     *
+     * @param jsonNode the JSON data which represents sth. of type {@code <T>}
+     * @param typeReference the full generic type information about the object to create
+     * @param <T> the type of the result
+     * @return the created objected
+     */
+    public static <T> T readObject(final JsonNode jsonNode, final TypeReference<T> typeReference) {
+        return executing(() -> objectMapper.reader(typeReference).readValue(jsonNode));
     }
 
-    public static <T> T readObject(final Class<T> clazz, final JsonNode jsonNode) {
-        try {
-            return objectMapper.reader(clazz).readValue(jsonNode);
-        } catch (IOException e) {
-            throw new JsonException(e);
-        }
+    /**
+     * Reads a Java object from JsonNode data.
+     *
+     * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonNodeWithClass()}
+     *
+     * @param jsonNode the JSON data which represents sth. of type {@code <T>}
+     * @param clazz the class of the type to create
+     * @param <T> the type of the result
+     * @return the created objected
+     */
+    public static <T> T readObject(final JsonNode jsonNode, final Class<T> clazz) {
+        return executing(() -> objectMapper.reader(clazz).readValue(jsonNode));
     }
 
-    public static <T> T readObject(final TypeReference<T> typeReference, final byte[] input) {
-        try {
-            return objectMapper.readValue(input, typeReference);
-        } catch (IOException e) {
-            throw new JsonException(e);
-        }
+    /**
+     * Reads a Java object from JSON string data encoded as UTF-8.
+     *
+     * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonNodeWithClass()}
+     *
+     * @param jsonAsBytes the JSON data which represents sth. of type {@code <T>}
+     * @param typeReference the full generic type information about the object to create
+     * @param <T> the type of the result
+     * @return the created objected
+     */
+    public static <T> T readObject(final byte[] jsonAsBytes, final TypeReference<T> typeReference) {
+        return executing(() -> objectMapper.readValue(jsonAsBytes, typeReference));
     }
 
+    /**
+     * Creates a new {@link ObjectNode} created by the SPHERE.IO object mapper.
+     *
+     * {@include.example io.sphere.sdk.json.SphereJsonUtilsTest#readObjectFromJsonNodeWithClass()}
+     *
+     * @return new node
+     */
+    public static ObjectNode newObjectNode() {
+        return objectMapper.createObjectNode();
+    }
 
     /** Very simple way to "erase" passwords -
      *  replaces all field values whose names contains {@code 'pass'} by {@code 'xxxxx'}. */
@@ -134,15 +200,16 @@ final public class SphereJsonUtils {
         }
     }
 
-    public static JsonNode readTree(final byte[] body) {
+    @FunctionalInterface
+    private interface SupplierThrowingIOException<T> {
+        T get() throws IOException;
+    }
+
+    private static <T> T executing(final SupplierThrowingIOException<T> supplier) {
         try {
-            return objectMapper.readTree(body);
+            return supplier.get();
         } catch (final IOException e) {
             throw new JsonException(e);
         }
-    }
-
-    public static <T> JsonNode toJsonNode(final T value) {
-        return objectMapper.valueToTree(value);
     }
 }

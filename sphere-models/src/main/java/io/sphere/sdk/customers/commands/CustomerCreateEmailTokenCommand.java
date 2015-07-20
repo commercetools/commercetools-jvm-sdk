@@ -49,6 +49,6 @@ public class CustomerCreateEmailTokenCommand extends CommandImpl<CustomerToken> 
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/customers/email-token", SphereJsonUtils.toJson(this));
+        return HttpRequestIntent.of(POST, "/customers/email-token", SphereJsonUtils.toJsonString(this));
     }
 }

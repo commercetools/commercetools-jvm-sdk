@@ -26,7 +26,7 @@ public class CustomerCreateTokenCommand extends CommandImpl<CustomerToken> {
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/customers/password-token", SphereJsonUtils.toJson(this));
+        return HttpRequestIntent.of(POST, "/customers/password-token", SphereJsonUtils.toJsonString(this));
     }
 
     public String getEmail() {

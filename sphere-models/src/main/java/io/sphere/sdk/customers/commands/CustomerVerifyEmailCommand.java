@@ -35,7 +35,7 @@ public class CustomerVerifyEmailCommand extends CommandImpl<Customer> {
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/customers/email/confirm", SphereJsonUtils.toJson(this));
+        return HttpRequestIntent.of(POST, "/customers/email/confirm", SphereJsonUtils.toJsonString(this));
     }
 
     public static CustomerVerifyEmailCommand of(final Versioned<Customer> customer, final String tokenValue) {

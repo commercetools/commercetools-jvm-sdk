@@ -214,7 +214,7 @@ public class ProductProjectionSearchTest {
     private Product product(final String id) throws Exception {
         final String productJson = stringFromResource("ProductProjectionSearchTest/product.json")
                 .replace("eb85ee2d-a5e5-4e15-a8ba-91281e599d68", id);
-        return SphereJsonUtils.readObjectFromJsonString(Product.typeReference(), productJson);
+        return SphereJsonUtils.readObject(productJson, Product.typeReference());
     }
 
     private ZonedDateTime dateTime(final String dateTime) {

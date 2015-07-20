@@ -41,7 +41,7 @@ public class ProductAttributeAccessTest {
     @Test
     public void getterWithJsonAttributeAccess() throws Exception {
         assertThat(variant.getAttribute(LOC_STRING_ATTRIBUTE, ofJsonNode()).get()).
-                isEqualTo(SphereJsonUtils.readTree("{\"de\":\"val-loc-string-de\",\"en\":\"val-loc-string-en\"}".getBytes()));
+                isEqualTo(SphereJsonUtils.toJsonNode("{\"de\":\"val-loc-string-de\",\"en\":\"val-loc-string-en\"}".getBytes()));
     }
 
     @Test

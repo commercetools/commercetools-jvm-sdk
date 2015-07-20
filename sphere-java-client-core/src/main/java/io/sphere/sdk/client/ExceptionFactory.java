@@ -47,7 +47,7 @@ final class ExceptionFactory {
                 .whenStatus(504, r -> new GatewayTimeoutException(extractBody(r)))
                 .whenStatus(409, r -> new ConcurrentModificationException())
                 .whenStatus(400, r -> {
-                    final ErrorResponse errorResponse = SphereJsonUtils.readObject(ErrorResponse.typeReference(), r.getResponseBody().get());
+                    final ErrorResponse errorResponse = SphereJsonUtils.readObject(r.getResponseBody().get(), ErrorResponse.typeReference());
                     return new ErrorResponseException(errorResponse);
                 }
                 )

@@ -47,7 +47,7 @@ public class SphereError extends Base {
                     .put("code", code)
                     .put("message", message)
                     .setAll(furtherFields);
-            return SphereJsonUtils.readObject(errorClass, jsonNode);
+            return SphereJsonUtils.readObject(jsonNode, errorClass);
         } else {
             throw new IllegalArgumentException(classErrorCodeOption.map(
                     code -> "Codes not matching: " + code + " is not " + getCode())

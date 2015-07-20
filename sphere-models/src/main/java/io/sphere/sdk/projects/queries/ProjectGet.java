@@ -15,7 +15,7 @@ public class ProjectGet extends SphereRequestBase implements SphereRequest<Proje
 
     @Override
     public Project deserialize(final HttpResponse httpResponse) {
-        return SphereJsonUtils.readObject(Project.typeReference(), httpResponse.getResponseBody().get());
+        return SphereJsonUtils.readObject(httpResponse.getResponseBody().get(), Project.typeReference());
     }
 
     @Override

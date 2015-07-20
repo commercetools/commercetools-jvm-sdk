@@ -62,8 +62,8 @@ public class ProductAttributeFlowTest extends IntegrationTest {
         final Attribute attribute = Attribute.of(namedAccess, EXPANDED_PRODUCT_REFERENCE);
         assertThat(attribute.getValue(access).getObj()).isPresent();
 
-        final String jsonFilledRef = SphereJsonUtils.toJson(EXPANDED_PRODUCT_REFERENCE);
-        final String jsonEmptyRef = SphereJsonUtils.toJson(EXPANDED_PRODUCT_REFERENCE.filled(Optional.<Product>empty()));
+        final String jsonFilledRef = SphereJsonUtils.toJsonString(EXPANDED_PRODUCT_REFERENCE);
+        final String jsonEmptyRef = SphereJsonUtils.toJsonString(EXPANDED_PRODUCT_REFERENCE.filled(Optional.<Product>empty()));
         assertThat(jsonFilledRef)
                 .overridingErrorMessage("references are not expanded if serialized")
                 .doesNotContain(EXPANDED_PRODUCT_REFERENCE.getObj().get().getMasterData().getStaged().getName().get(Locale.ENGLISH).get())

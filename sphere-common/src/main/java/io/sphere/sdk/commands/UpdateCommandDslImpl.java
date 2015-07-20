@@ -8,7 +8,7 @@ import io.sphere.sdk.http.HttpMethod;
 
 import java.util.List;
 
-import static io.sphere.sdk.json.SphereJsonUtils.toJson;
+import static io.sphere.sdk.json.SphereJsonUtils.toJsonString;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -46,7 +46,7 @@ public class UpdateCommandDslImpl<T> extends CommandImpl<T> implements UpdateCom
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }
         final String path = baseEndpointWithoutId + "/" + getVersioned().getId();
-        return HttpRequestIntent.of(HttpMethod.POST, path, toJson(new UpdateCommandBody<>(getVersioned().getVersion(), getUpdateActions())));
+        return HttpRequestIntent.of(HttpMethod.POST, path, toJsonString(new UpdateCommandBody<>(getVersioned().getVersion(), getUpdateActions())));
     }
 
     @Override

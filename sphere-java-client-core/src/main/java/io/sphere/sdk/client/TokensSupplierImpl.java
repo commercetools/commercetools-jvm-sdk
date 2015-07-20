@@ -90,7 +90,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
             if (httpResponse.getStatusCode() == 401 && httpResponse.getResponseBody().isPresent()) {
                 ClientErrorException exception = new UnauthorizedException(httpResponse.toString());
                 try {
-                    final JsonNode jsonNode = SphereJsonUtils.readTree(httpResponse.getResponseBody().get());
+                    final JsonNode jsonNode = SphereJsonUtils.toJsonNode(httpResponse.getResponseBody().get());
                     final String error = jsonNode.get("error").asText();
                     if (error.equals("invalid_client")) {
                         exception = new InvalidClientCredentialsException(config);
@@ -100,7 +100,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                 }
                 throw exception;
             }
-            return SphereJsonUtils.readObject(Tokens.typeReference(), httpResponse.getResponseBody().get());
+            return SphereJsonUtils.readObject(httpResponse.getResponseBody().get(), Tokens.typeReference());
         } catch (final SphereException exception) {
             exception.setProjectKey(config.getProjectKey());
             exception.setUnderlyingHttpResponse(httpResponse);

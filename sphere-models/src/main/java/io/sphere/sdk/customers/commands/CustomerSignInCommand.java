@@ -54,7 +54,7 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/login", SphereJsonUtils.toJson(this));
+        return HttpRequestIntent.of(POST, "/login", SphereJsonUtils.toJsonString(this));
     }
 
     public String getEmail() {

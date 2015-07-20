@@ -38,7 +38,7 @@ public class CustomerPasswordResetCommand extends CommandImpl<Customer> {
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/customers/password/reset", SphereJsonUtils.toJson(this));
+        return HttpRequestIntent.of(POST, "/customers/password/reset", SphereJsonUtils.toJsonString(this));
     }
 
     public String getId() {

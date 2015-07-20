@@ -57,8 +57,8 @@ public abstract class GenericMessageImpl<R> extends DefaultModelImpl<Message> im
     @SuppressWarnings("unchecked")
     @Override
     public Reference<R> getResource() {
-        return (Reference<R>) SphereJsonUtils.readObject(new TypeReference<Reference<Order>>() {
-        }, resource);
+        return (Reference<R>) SphereJsonUtils.readObject(resource, new TypeReference<Reference<Order>>() {
+        });
     }
 
     @Override
@@ -82,7 +82,7 @@ public abstract class GenericMessageImpl<R> extends DefaultModelImpl<Message> im
                 .put("type", type);
         furtherFields.entrySet().forEach(entry -> jsonNode.replace(entry.getKey(), entry.getValue()));
         jsonNode.replace("resource", resource);
-        return SphereJsonUtils.readObject(messageClass, jsonNode);
+        return SphereJsonUtils.readObject(jsonNode, messageClass);
     }
 
     @JsonAnySetter

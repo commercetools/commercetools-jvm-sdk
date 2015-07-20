@@ -18,7 +18,7 @@ public class SphereErrorTest {
                 "    \"detailedErrorMessage\" : \"detailed error message\"" +
                 "  } ]\n" +
                 "}";
-        final ErrorResponse sphereErrorResponse = SphereJsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
+        final ErrorResponse sphereErrorResponse = SphereJsonUtils.readObject(json, ErrorResponse.typeReference());
         final InvalidJsonInputError jsonError = sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class);
 
 
@@ -35,7 +35,7 @@ public class SphereErrorTest {
                 "    \"message\" : \"Message.\"" +
                 "  } ]\n" +
                 "}";
-        final ErrorResponse sphereErrorResponse = SphereJsonUtils.readObjectFromJsonString(ErrorResponse.typeReference(), json);
+        final ErrorResponse sphereErrorResponse = SphereJsonUtils.readObject(json, ErrorResponse.typeReference());
         assertThatThrownBy(() -> sphereErrorResponse.getErrors().get(0).as(InvalidJsonInputError.class))
                 .isInstanceOf(IllegalArgumentException.class);
     }

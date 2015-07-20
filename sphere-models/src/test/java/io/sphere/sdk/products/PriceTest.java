@@ -17,14 +17,14 @@ public class PriceTest {
 
     @Test
     public void testJsonDeserialized() {
-        final Price actual = SphereJsonUtils.readObjectFromJsonString(new TypeReference<Price>() {
-
-        }, "{\n" +
+        final Price actual = SphereJsonUtils.readObject("{\n" +
                 "            \"value\": {\n" +
                 "              \"currencyCode\": \"EUR\",\n" +
                 "              \"centAmount\": 2800\n" +
                 "            }\n" +
-                "          }");
+                "          }", new TypeReference<Price>() {
+
+        });
 
         final Price expected = Price.of(new BigDecimal("28.00"), EUR);
         assertThat(actual.getValue().isEqualTo(expected.getValue())).isTrue();

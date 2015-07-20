@@ -45,7 +45,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
             if (httpRequest.getBody().isPresent() && httpRequest.getBody().get() instanceof StringHttpRequestBody) {
                 final StringHttpRequestBody body = (StringHttpRequestBody) httpRequest.getBody().get();
                 final String unformattedJson = body.getString();
-                output = "send: " + unformattedJson + "\nformatted: " + SphereJsonUtils.prettyPrintJson(unformattedJson);
+                output = "send: " + unformattedJson + "\nformatted: " + SphereJsonUtils.prettyPrint(unformattedJson);
             } else {
                 output = "no request body present";
             }
@@ -73,7 +73,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private static <T> T processHttpResponse(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config, final HttpResponse httpResponse) {
         final SphereInternalLogger logger = getLogger(httpResponse);
         logger.debug(() -> httpResponse);
-        logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> SphereJsonUtils.prettyPrintJson(bytesToString(body))).orElse("No body present.") + "\n");
+        logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> SphereJsonUtils.prettyPrint(bytesToString(body))).orElse("No body present.") + "\n");
         final List<String> notices = httpResponse.getHeaders().getHeadersAsMap().get(SphereHttpHeaders.X_DEPRECATION_NOTICE);
         if (notices != null) {
             notices.stream().forEach(message -> logger.warn(() -> "Deprecation notice : " + message));
