@@ -2,15 +2,14 @@ package io.sphere.sdk.channels;
 
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
 import io.sphere.sdk.channels.commands.ChannelDeleteCommand;
-import io.sphere.sdk.channels.queries.ChannelByKeyFetch;
+import io.sphere.sdk.channels.queries.ChannelQuery;
 import io.sphere.sdk.client.TestClient;
 
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.randomString;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 
 public class ChannelFixtures {
@@ -53,8 +52,7 @@ public class ChannelFixtures {
     }
 
     private static Channel getOrCreateChannel(final TestClient client, final String key, final ChannelRole roles) {
-        final ChannelByKeyFetch channelByKeyFetch = ChannelByKeyFetch.of(key);
-        return Optional.ofNullable(client.execute(channelByKeyFetch)).orElseGet(() -> {
+        return client.execute(ChannelQuery.of().byKey(key)).head().orElseGet(() -> {
             final ChannelCreateCommand channelCreateCommand =
                     ChannelCreateCommand.of(ChannelDraft.of(key).withRoles(roles));
             return client.execute(channelCreateCommand);
@@ -62,7 +60,7 @@ public class ChannelFixtures {
     }
 
     public static void cleanUpChannelByKey(final TestClient client, final String channelKey) {
-        Optional.ofNullable(client.execute(ChannelByKeyFetch.of(channelKey)))
+        client.execute(ChannelQuery.of().byKey(channelKey)).head()
                 .ifPresent(channel -> client.execute(ChannelDeleteCommand.of(channel)));
     }
 }
