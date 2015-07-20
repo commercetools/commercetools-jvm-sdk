@@ -7,10 +7,6 @@ import java.util.function.Function;
 
 public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
 
-    public static PartialProductVariantQueryModel get() {
-        return new PartialProductVariantQueryModel(Optional.empty(), Optional.empty());
-    }
-
     ProductVariantQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
     }
@@ -28,7 +24,7 @@ public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public QueryPredicate<T> where(final Function<PartialProductVariantQueryModel, QueryPredicate<PartialProductVariantQueryModel>> embeddedPredicate) {
-        return where(embeddedPredicate.apply(get()));
+        return where(embeddedPredicate.apply(PartialProductVariantQueryModel.of()));
     }
 
     public PriceCollectionQueryModel<T> prices() {

@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.queries;
 
 import java.util.Optional;
+import java.util.function.Function;
 
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.queries.*;
@@ -31,5 +32,9 @@ public class ProductCatalogDataQueryModel<M> extends QueryModelImpl<M> {
 
     public QueryPredicate<M> where(final QueryPredicate<PartialProductCatalogDataQueryModel> embeddedPredicate) {
         return new EmbeddedQueryPredicate<>(this, embeddedPredicate);
+    }
+
+    public QueryPredicate<M> where(final Function<PartialProductCatalogDataQueryModel, QueryPredicate<PartialProductCatalogDataQueryModel>> embeddedPredicate) {
+        return where(embeddedPredicate.apply(PartialProductCatalogDataQueryModel.of()));
     }
 }

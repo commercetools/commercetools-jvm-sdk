@@ -8,16 +8,12 @@ import java.util.function.Function;
 
 class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
 
-    public static PartialProductDataQueryModel getPartialProductDataQueryModel() {
-        return new PartialProductDataQueryModel(Optional.empty(), Optional.empty());
-    }
-
     public QueryPredicate<T> where(final QueryPredicate<PartialProductDataQueryModel> embeddedPredicate) {
         return new EmbeddedQueryPredicate<>(this, embeddedPredicate);
     }
 
     public QueryPredicate<T> where(final Function<PartialProductDataQueryModel, QueryPredicate<PartialProductDataQueryModel>> embeddedPredicate) {
-        return where(embeddedPredicate.apply(ProductDataQueryModel.getPartialProductDataQueryModel()));
+        return where(embeddedPredicate.apply(PartialProductDataQueryModel.of()));
     }
 
     ProductDataQueryModelBase(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {

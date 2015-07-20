@@ -9,7 +9,7 @@ public class PartialLocationsCollectionQueryModel extends LocationsCollectionQue
         super(parent, pathSegment);
     }
 
-    static PartialLocationsCollectionQueryModel get() {
+    static PartialLocationsCollectionQueryModel of() {
         return new PartialLocationsCollectionQueryModel(Optional.empty(), Optional.empty());
     }
 }

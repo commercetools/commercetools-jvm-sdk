@@ -13,7 +13,7 @@ public class ProductVariantQueryModelTest {
     @Test
     public void whereClosure() throws Exception {
         final ProductVariantQueryModel<String> model = new ProductVariantQueryModel<>(Optional.<QueryModel<String>>empty(), "foo");
-        final QueryPredicate<String> normalWay = model.where(ProductVariantQueryModel.get().sku().is("x"));
+        final QueryPredicate<String> normalWay = model.where(PartialProductVariantQueryModel.of().sku().is("x"));
         final QueryPredicate<String> closureWay = model.where(m -> m.sku().is("x"));
         assertThat(normalWay.toSphereQuery()).isEqualTo(closureWay.toSphereQuery()).isEqualTo("foo(sku=\"x\")");
     }

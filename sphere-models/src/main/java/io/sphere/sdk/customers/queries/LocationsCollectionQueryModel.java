@@ -27,6 +27,6 @@ public class LocationsCollectionQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public QueryPredicate<T> where(final Function<PartialLocationsCollectionQueryModel, QueryPredicate<PartialLocationsCollectionQueryModel>> embeddedPredicate) {
-        return where(embeddedPredicate.apply(PartialLocationsCollectionQueryModel.get()));
+        return where(embeddedPredicate.apply(PartialLocationsCollectionQueryModel.of()));
     }
 }
