@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.queries.PagedQueryResult;
 
 public class TestsDemo {
@@ -14,7 +14,7 @@ public class TestsDemo {
             final Object result;
             if (httpRequest.getPath().contains("/categories")) {
                 //in Play projects the file is in "test/resources/categories.json"
-                final PagedQueryResult<Category> queryResult = JsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
+                final PagedQueryResult<Category> queryResult = SphereJsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
                 result = queryResult;
             } else {
                 throw new UnsupportedOperationException("I'm not prepared for this request: " + httpRequest);

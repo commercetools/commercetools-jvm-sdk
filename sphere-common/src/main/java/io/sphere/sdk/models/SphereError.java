@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.sphere.sdk.json.JsonException;
-import io.sphere.sdk.json.JsonUtils;
-import io.sphere.sdk.utils.SphereInternalLogger;
+import io.sphere.sdk.json.SphereJsonUtils;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
@@ -44,12 +42,12 @@ public class SphereError extends Base {
     public <T extends SphereError> T as(final Class<T> errorClass) {
         final Optional<String> classErrorCodeOption = codeValueOf(errorClass);
         if (classErrorCodeOption.map(classErrCode -> classErrCode.equals(code)).orElse(true)) {
-            final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
+            final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();
             final JsonNode jsonNode = objectMapper.createObjectNode()
                     .put("code", code)
                     .put("message", message)
                     .setAll(furtherFields);
-            return JsonUtils.readObject(errorClass, jsonNode);
+            return SphereJsonUtils.readObject(jsonNode, errorClass);
         } else {
             throw new IllegalArgumentException(classErrorCodeOption.map(
                     code -> "Codes not matching: " + code + " is not " + getCode())

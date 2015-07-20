@@ -6,7 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
@@ -57,12 +57,13 @@ public abstract class GenericMessageImpl<R> extends DefaultModelImpl<Message> im
     @SuppressWarnings("unchecked")
     @Override
     public Reference<R> getResource() {
-        return (Reference<R>)JsonUtils.readObject(new TypeReference<Reference<Order>>() { }, resource);
+        return (Reference<R>) SphereJsonUtils.readObject(resource, new TypeReference<Reference<Order>>() {
+        });
     }
 
     @Override
     public JsonNode getPayload() {
-        final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
+        final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();
         final ObjectNode jsonNode = objectMapper.createObjectNode();
         furtherFields.entrySet().forEach(entry -> jsonNode.replace(entry.getKey(), entry.getValue()));
         return jsonNode;
@@ -70,7 +71,7 @@ public abstract class GenericMessageImpl<R> extends DefaultModelImpl<Message> im
 
     @Override
     public <T extends Message> T as(final Class<T> messageClass) {
-        final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
+        final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();
         final ObjectNode jsonNode = objectMapper.createObjectNode()
                 .put("id", getId())
                 .put("version", getVersion())
@@ -81,7 +82,7 @@ public abstract class GenericMessageImpl<R> extends DefaultModelImpl<Message> im
                 .put("type", type);
         furtherFields.entrySet().forEach(entry -> jsonNode.replace(entry.getKey(), entry.getValue()));
         jsonNode.replace("resource", resource);
-        return JsonUtils.readObject(messageClass, jsonNode);
+        return SphereJsonUtils.readObject(jsonNode, messageClass);
     }
 
     @JsonAnySetter

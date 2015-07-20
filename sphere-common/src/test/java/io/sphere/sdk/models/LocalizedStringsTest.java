@@ -1,6 +1,6 @@
 package io.sphere.sdk.models;
 
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -76,12 +76,12 @@ public class LocalizedStringsTest {
 
     @Test
     public void jsonSerialize() throws Exception {
-        assertThat(JsonUtils.newObjectMapper().writeValueAsString(dogFood)).isEqualTo(dogFoodJson);
+        assertThat(SphereJsonUtils.newObjectMapper().writeValueAsString(dogFood)).isEqualTo(dogFoodJson);
     }
 
     @Test
     public void jsonDeserialize() throws Exception {
-        assertThat(JsonUtils.newObjectMapper().readValue(dogFoodJson, LocalizedStrings.class)).isEqualTo(dogFood);
+        assertThat(SphereJsonUtils.newObjectMapper().readValue(dogFoodJson, LocalizedStrings.class)).isEqualTo(dogFood);
     }
 
     @Test

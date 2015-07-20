@@ -6,7 +6,7 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 
 import java.util.Locale;
 
@@ -32,7 +32,7 @@ public class CategoryByNameQuery extends Base implements Query<Category> {
 
     @Override
     public PagedQueryResult<Category> deserialize(final HttpResponse httpResponse) {
-        return JsonUtils.readObject(new TypeReference<PagedQueryResult<Category>>() {
-        }, httpResponse.getResponseBody().get());
+        return SphereJsonUtils.readObject(httpResponse.getResponseBody().get(), new TypeReference<PagedQueryResult<Category>>() {
+        });
     }
 }

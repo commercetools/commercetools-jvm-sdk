@@ -5,7 +5,7 @@ import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.client.JsonEndpoint;
 
-import static io.sphere.sdk.json.JsonUtils.toJson;
+import static io.sphere.sdk.json.SphereJsonUtils.toJsonString;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -34,7 +34,7 @@ public abstract class CreateCommandImpl<T, C> extends CommandImpl<T> implements 
     }
 
     protected String httpBody() {
-        return toJson(body);
+        return toJsonString(body);
     }
 
     @Override

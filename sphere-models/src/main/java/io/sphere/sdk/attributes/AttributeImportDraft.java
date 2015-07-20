@@ -2,7 +2,7 @@ package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Base;
 
 public class AttributeImportDraft extends Base {
@@ -16,7 +16,7 @@ public class AttributeImportDraft extends Base {
     }
 
     public static <T> AttributeImportDraft of(final String name, final T value) {
-        final JsonNode jsonNode = JsonUtils.toJsonNode(value);
+        final JsonNode jsonNode = SphereJsonUtils.toJsonNode(value);
         return of(name, jsonNode);
     }
 

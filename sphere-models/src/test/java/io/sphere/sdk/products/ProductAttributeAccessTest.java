@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.attributes.AttributeExtraction;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.*;
@@ -8,7 +9,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeDefinition;
 import io.sphere.sdk.attributes.NamedAttributeAccess;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import org.junit.Test;
 
 import java.util.*;
@@ -24,8 +25,8 @@ public class ProductAttributeAccessTest {
     public static final String NOT_PRESENT = "not-present";
     public static final String STRING_ATTRIBUTE = "string-attribute";
     public static final String BOOLEAN_ATTRIBUTE = "boolean-attribute";
-    private final Product product = JsonUtils.readObjectFromResource("product1.json", Product.typeReference());
-    private final ProductProjection productProjection = JsonUtils.readObjectFromResource("product-projection1.json", ProductProjection.typeReference());
+    private final Product product = SphereJsonUtils.readObjectFromResource("product1.json", Product.typeReference());
+    private final ProductProjection productProjection = SphereJsonUtils.readObjectFromResource("product-projection1.json", ProductProjection.typeReference());
     private final ProductVariant variant = product.getMasterData().getCurrent().get().getMasterVariant();
     private final ProductType productType = productProjection.getProductType().getObj().get();
 
@@ -40,8 +41,9 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void getterWithJsonAttributeAccess() throws Exception {
-        assertThat(variant.getAttribute(LOC_STRING_ATTRIBUTE, ofJsonNode()).get()).
-                isEqualTo(JsonUtils.readTree("{\"de\":\"val-loc-string-de\",\"en\":\"val-loc-string-en\"}".getBytes()));
+        final JsonNode actual = variant.getAttribute(LOC_STRING_ATTRIBUTE, ofJsonNode()).get();
+        final JsonNode expected = SphereJsonUtils.parse("{\"de\":\"val-loc-string-de\",\"en\":\"val-loc-string-en\"}");
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test

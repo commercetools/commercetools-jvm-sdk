@@ -10,7 +10,7 @@ import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.*;
 import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
@@ -32,7 +32,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
 
     @Test
     public void pureJson() throws Exception {
-        final ObjectMapper objectMapper = JsonUtils.newObjectMapper();//you should cache this one
+        final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();//you should cache this one
         final ObjectNode objectNode = objectMapper.createObjectNode()
                 .put("bar", " a string")
                 .put("baz", 5L);

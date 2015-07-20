@@ -2,7 +2,7 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.ErrorResponse;
 import io.sphere.sdk.models.SphereException;
 
@@ -47,7 +47,7 @@ final class ExceptionFactory {
                 .whenStatus(504, r -> new GatewayTimeoutException(extractBody(r)))
                 .whenStatus(409, r -> new ConcurrentModificationException())
                 .whenStatus(400, r -> {
-                    final ErrorResponse errorResponse = JsonUtils.readObject(ErrorResponse.typeReference(), r.getResponseBody().get());
+                    final ErrorResponse errorResponse = SphereJsonUtils.readObject(r.getResponseBody().get(), ErrorResponse.typeReference());
                     return new ErrorResponseException(errorResponse);
                 }
                 )

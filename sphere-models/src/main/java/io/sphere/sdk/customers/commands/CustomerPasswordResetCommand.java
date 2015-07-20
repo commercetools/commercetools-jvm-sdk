@@ -6,7 +6,7 @@ import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerToken;
 import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
@@ -38,7 +38,7 @@ public class CustomerPasswordResetCommand extends CommandImpl<Customer> {
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(POST, "/customers/password/reset", JsonUtils.toJson(this));
+        return HttpRequestIntent.of(POST, "/customers/password/reset", SphereJsonUtils.toJsonString(this));
     }
 
     public String getId() {

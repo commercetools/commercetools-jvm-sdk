@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.json.JsonException;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.PlainEnumValue;
@@ -318,7 +318,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
         final Optional<Attribute> attributeOption = masterVariant.getAttribute(SIZE_ATTR_NAME);
-        final JsonNode expectedJsonNode = JsonUtils.toJsonNode(PlainEnumValue.of("S", "S"));
+        final JsonNode expectedJsonNode = SphereJsonUtils.toJsonNode(PlainEnumValue.of("S", "S"));
         assertThat(attributeOption.get().getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
     }
 
@@ -412,7 +412,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
     @Test
     public void attributesForUnitTests() throws Exception {
-        final Product referencedProduct = JsonUtils.readObjectFromResource("product1.json", Product.typeReference());
+        final Product referencedProduct = SphereJsonUtils.readObjectFromResource("product1.json", Product.typeReference());
         final Reference<Product> productReference = referencedProduct.toReference();
         assertThat(productReference.getObj())
                 .overridingErrorMessage("product reference is expanded")

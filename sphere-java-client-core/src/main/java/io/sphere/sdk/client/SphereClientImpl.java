@@ -5,7 +5,7 @@ import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.http.*;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.SphereException;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 
 final class SphereClientImpl extends AutoCloseableService implements SphereClient {
-    private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
+    private final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();
     private final HttpClient httpClient;
     private final SphereApiConfig config;
     private final SphereAccessTokenSupplier tokenSupplier;
@@ -45,7 +45,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
             if (httpRequest.getBody().isPresent() && httpRequest.getBody().get() instanceof StringHttpRequestBody) {
                 final StringHttpRequestBody body = (StringHttpRequestBody) httpRequest.getBody().get();
                 final String unformattedJson = body.getString();
-                output = "send: " + unformattedJson + "\nformatted: " + JsonUtils.prettyPrintJson(unformattedJson);
+                output = "send: " + unformattedJson + "\nformatted: " + SphereJsonUtils.prettyPrint(unformattedJson);
             } else {
                 output = "no request body present";
             }
@@ -73,7 +73,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private static <T> T processHttpResponse(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config, final HttpResponse httpResponse) {
         final SphereInternalLogger logger = getLogger(httpResponse);
         logger.debug(() -> httpResponse);
-        logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> JsonUtils.prettyPrintJson(bytesToString(body))).orElse("No body present.") + "\n");
+        logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> SphereJsonUtils.prettyPrint(bytesToString(body))).orElse("No body present.") + "\n");
         final List<String> notices = httpResponse.getHeaders().getHeadersAsMap().get(SphereHttpHeaders.X_DEPRECATION_NOTICE);
         if (notices != null) {
             notices.stream().forEach(message -> logger.warn(() -> "Deprecation notice : " + message));

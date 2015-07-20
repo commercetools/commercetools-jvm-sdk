@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.productdiscounts.AbsoluteProductDiscountValue;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
@@ -17,14 +17,14 @@ public class PriceTest {
 
     @Test
     public void testJsonDeserialized() {
-        final Price actual = JsonUtils.readObjectFromJsonString(new TypeReference<Price>() {
-
-        }, "{\n" +
+        final Price actual = SphereJsonUtils.readObject("{\n" +
                 "            \"value\": {\n" +
                 "              \"currencyCode\": \"EUR\",\n" +
                 "              \"centAmount\": 2800\n" +
                 "            }\n" +
-                "          }");
+                "          }", new TypeReference<Price>() {
+
+        });
 
         final Price expected = Price.of(new BigDecimal("28.00"), EUR);
         assertThat(actual.getValue().isEqualTo(expected.getValue())).isTrue();
@@ -37,7 +37,7 @@ public class PriceTest {
 
     @Test
     public void expandedDiscountedPrice() throws Exception {
-        final Product product = JsonUtils.readObjectFromResource("product-with-expanded-discounted-price.json", Product.typeReference());
+        final Product product = SphereJsonUtils.readObjectFromResource("product-with-expanded-discounted-price.json", Product.typeReference());
         final Price price = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
         final DiscountedPrice discountedPrice = price.getDiscounted().get();
         final ProductDiscount productDiscount = discountedPrice.getDiscount().getObj().get();

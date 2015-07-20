@@ -2,10 +2,9 @@ package io.sphere.sdk.client;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.http.HttpHeaders;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 
 import java.util.Optional;
 
@@ -18,8 +17,8 @@ public class JsonNodeSphereRequest implements SphereRequest<Optional<JsonNode>> 
 
     @Override
     public Optional<JsonNode> deserialize(final HttpResponse httpResponse) {
-        return httpResponse.getResponseBody().map(body -> JsonUtils.readObject(new TypeReference<JsonNode>() {
-        }, body));
+        return httpResponse.getResponseBody().map(body -> SphereJsonUtils.readObject(body, new TypeReference<JsonNode>() {
+        }));
     }
 
     @Override
@@ -45,7 +44,7 @@ public class JsonNodeSphereRequest implements SphereRequest<Optional<JsonNode>> 
 
     public static JsonNodeSphereRequest of(final HttpMethod httpMethod, final String path, final Optional<JsonNode> body) {
         final HttpRequestIntent httpRequestIntent = body
-                .map(b -> HttpRequestIntent.of(httpMethod, path, JsonUtils.toJson(b)))
+                .map(b -> HttpRequestIntent.of(httpMethod, path, SphereJsonUtils.toJsonString(b)))
                 .orElseGet(() -> HttpRequestIntent.of(httpMethod, path));
         return of(httpRequestIntent);
     }

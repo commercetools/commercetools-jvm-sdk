@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpResponse;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 
@@ -80,7 +80,7 @@ public class SphereClientFactory extends Base {
      */
     public static SphereClient createHttpTestDouble(final Function<HttpRequestIntent, HttpResponse> function) {
         return new SphereClient() {
-            private final ObjectMapper objectMapper = JsonUtils.newObjectMapper();
+            private final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();
 
             @Override
             public <T> CompletionStage<T> execute(final SphereRequest<T> sphereRequest) {

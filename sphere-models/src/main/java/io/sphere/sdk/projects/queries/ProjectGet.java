@@ -5,7 +5,7 @@ import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.projects.Project;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 
 import static io.sphere.sdk.http.HttpMethod.GET;
 
@@ -15,7 +15,7 @@ public class ProjectGet extends SphereRequestBase implements SphereRequest<Proje
 
     @Override
     public Project deserialize(final HttpResponse httpResponse) {
-        return JsonUtils.readObject(Project.typeReference(), httpResponse.getResponseBody().get());
+        return SphereJsonUtils.readObject(httpResponse.getResponseBody().get(), Project.typeReference());
     }
 
     @Override

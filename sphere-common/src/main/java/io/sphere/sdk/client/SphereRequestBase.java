@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 
 import java.nio.charset.StandardCharsets;
 import java.util.function.Function;
@@ -19,7 +19,7 @@ public abstract class SphereRequestBase extends Base {
     }
 
     protected static <T> Function<HttpResponse, T> resultMapperOf(TypeReference<T> typeReference) {
-        return httpResponse -> JsonUtils.readObject(typeReference, httpResponse.getResponseBody().orElseThrow(() -> new JsonException(httpResponse)));
+        return httpResponse -> SphereJsonUtils.readObject(httpResponse.getResponseBody().orElseThrow(() -> new JsonException(httpResponse)), typeReference);
     }
 
     protected static String getBodyAsString(final HttpResponse httpResponse) {
