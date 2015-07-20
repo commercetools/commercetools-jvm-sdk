@@ -109,7 +109,7 @@ extends java.lang.Object</pre>
  <p>Since the clients are interfaces you can implement them to provide test doubles.</p>
  <p>Here are some example to provide fake client responses in tests:</p>
 
- <div id="io-sphere-sdk-client-TestsDemo-withJson--%s" class=code-example><pre><code class='java'>final SphereClient client = SphereClientFactory.of().createHttpTestDouble(httpRequest -&gt; {
+ <div id="io-sphere-sdk-client-TestsDemo-withJson--%s" class=code-example><pre><code class='java'>final SphereClient client = SphereClientFactory.createHttpTestDouble(httpRequest -&gt; {
     final HttpResponse response;
     if (httpRequest.getPath().contains("/categories")) {
         //JSON representation is often useful to deal with errors, but this time again a happy path example
@@ -142,10 +142,9 @@ extends java.lang.Object</pre>
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/TestsDemo.java" target="_blank">test code</a>.</pre></div>
 
  <div id="io-sphere-sdk-client-TestsDemo-modelInstanceFromJson--%s" class=code-example><pre><code class='java'>//deserializes an object stored from JSON
-final SphereClientFactory factory = SphereClientFactory.of();
-final SphereClient client = factory.createObjectTestDouble(httpRequest -&gt; {
+final SphereClient client = SphereClientFactory.createObjectTestDouble(httpRequest -&gt; {
     final Object result;
-    if(httpRequest.getPath().contains("/categories")) {
+    if (httpRequest.getPath().contains("/categories")) {
         //in Play projects the file is in "test/resources/categories.json"
         final PagedQueryResult&lt;Category&gt; queryResult = JsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
         result = queryResult;
