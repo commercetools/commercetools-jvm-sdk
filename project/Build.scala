@@ -73,7 +73,6 @@ object Build extends Build {
     )
 
   lazy val `sdk-http` = project.configs(IntegrationTest)
-    .settings(writeVersionSettings: _*)
     .settings(commonSettings:_*)
     .settings(libraryDependencies ++= allTestLibs.map(_ % "test,it") ++
     (
