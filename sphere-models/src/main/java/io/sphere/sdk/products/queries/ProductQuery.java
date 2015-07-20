@@ -37,7 +37,7 @@ public interface ProductQuery extends MetaModelQueryDsl<Product, ProductQuery, P
     }
 
     default ProductQuery bySku(final String sku, final ProductProjectionType type) {
-        final QueryPredicate<PartialProductVariantQueryModel> skuPredicate = ProductVariantQueryModel.get().sku().is(sku);
+        final QueryPredicate<PartialProductVariantQueryModel> skuPredicate = PartialProductVariantQueryModel.of().sku().is(sku);
         final ProductDataQueryModel<Product> projection = ProductQueryModel.of().masterData().forProjection(type);
         final QueryPredicate<Product> masterVariantSkuPredicate = projection.masterVariant().where(skuPredicate);
         final QueryPredicate<Product> variantsSkuPredicate = projection.variants().where(skuPredicate);

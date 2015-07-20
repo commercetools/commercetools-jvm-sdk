@@ -18,7 +18,7 @@ public final class ProductAllVariantsQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public QueryPredicate<T> where(final Function<PartialProductVariantQueryModel, QueryPredicate<PartialProductVariantQueryModel>> embeddedPredicate) {
-        final PartialProductVariantQueryModel m = ProductVariantQueryModel.get();
+        final PartialProductVariantQueryModel m = PartialProductVariantQueryModel.of();
         return where(embeddedPredicate.apply(m));
     }
 

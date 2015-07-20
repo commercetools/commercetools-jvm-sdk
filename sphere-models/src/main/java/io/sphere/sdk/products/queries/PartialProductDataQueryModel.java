@@ -6,9 +6,13 @@ import io.sphere.sdk.queries.*;
 import java.util.Optional;
 import java.util.function.Function;
 
-public class PartialProductDataQueryModel extends ProductDataQueryModel<PartialProductDataQueryModel> {
-    public PartialProductDataQueryModel(final Optional<? extends QueryModel<PartialProductDataQueryModel>> parent, final Optional<String> pathSegment) {
+public final class PartialProductDataQueryModel extends ProductDataQueryModel<PartialProductDataQueryModel> {
+    private PartialProductDataQueryModel(final Optional<? extends QueryModel<PartialProductDataQueryModel>> parent, final Optional<String> pathSegment) {
         super(parent, pathSegment);
+    }
+
+    public static PartialProductDataQueryModel of() {
+        return new PartialProductDataQueryModel(Optional.empty(), Optional.empty());
     }
 
     @Override

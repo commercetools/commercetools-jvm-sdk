@@ -9,8 +9,7 @@ import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductQueryCombinationTest {
-    public static final PartialProductDataQueryModel DATA_QUERY_MODEL = ProductDataQueryModel.getPartialProductDataQueryModel();
-    public static final PartialProductCatalogDataQueryModel MASTER_DATA_QUERY_MODEL = PartialProductCatalogDataQueryModel.of();
+    public static final PartialProductDataQueryModel DATA_QUERY_MODEL = PartialProductDataQueryModel.of();
 
     @Test
     public void pure() throws Exception {
@@ -22,8 +21,7 @@ public class ProductQueryCombinationTest {
     public void combinedEmbeddedQueries() throws Exception {
         final QueryPredicate<PartialProductDataQueryModel> predicate =
                 DATA_QUERY_MODEL.name().lang(ENGLISH).is("Yes").or(DATA_QUERY_MODEL.name().lang(GERMAN).is("Ja"));
-        final QueryPredicate<PartialProductCatalogDataQueryModel> x1 = MASTER_DATA_QUERY_MODEL.current().where(predicate).and(MASTER_DATA_QUERY_MODEL.staged().where(predicate));
-        final QueryPredicate<Product> resultPredicate = ProductQueryModel.of().masterData().where(x1);
+        final QueryPredicate<Product> resultPredicate = ProductQueryModel.of().masterData().where(m -> m.current().where(predicate).and(m.staged().where(predicate)));
         assertThat(resultPredicate.toSphereQuery()).isEqualTo("masterData(current(name(en=\"Yes\") or name(de=\"Ja\")) and staged(name(en=\"Yes\") or name(de=\"Ja\")))");
     }
 }
