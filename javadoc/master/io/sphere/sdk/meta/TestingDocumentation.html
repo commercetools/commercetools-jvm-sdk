@@ -146,7 +146,7 @@ final SphereClient client = SphereClientFactory.createObjectTestDouble(httpReque
     final Object result;
     if (httpRequest.getPath().contains("/categories")) {
         //in Play projects the file is in "test/resources/categories.json"
-        final PagedQueryResult&lt;Category&gt; queryResult = JsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
+        final PagedQueryResult&lt;Category&gt; queryResult = SphereJsonUtils.readObjectFromResource("categories.json", CategoryQuery.resultTypeReference());
         result = queryResult;
     } else {
         throw new UnsupportedOperationException("I'm not prepared for this request: " + httpRequest);

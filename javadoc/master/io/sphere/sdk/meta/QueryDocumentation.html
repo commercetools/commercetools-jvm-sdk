@@ -204,7 +204,7 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.queries.*;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.json.JsonUtils;
+import io.sphere.sdk.json.SphereJsonUtils;
 import java.util.Locale;
 import static io.sphere.sdk.http.UrlUtils.urlEncode;
 </code></pre><pre><code class='java'>/**
@@ -227,8 +227,8 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
 
     @Override
     public PagedQueryResult&lt;Category&gt; deserialize(final HttpResponse httpResponse) {
-        return JsonUtils.readObject(new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
-        }, httpResponse.getResponseBody().get());
+        return SphereJsonUtils.readObject(httpResponse.getResponseBody().get(), new TypeReference&lt;PagedQueryResult&lt;Category&gt;&gt;() {
+        });
     }
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/CategoryByNameQuery.java" target="_blank">test code</a>.</pre></div>

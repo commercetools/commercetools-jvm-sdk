@@ -224,7 +224,7 @@ In this case you use also <a href="../../../../io/sphere/sdk/customobjects/comma
 
  <h4 id=direct-json-creation>Create and update custom objects</h4>
 
- <div id="io-sphere-sdk-customobjects-commands-CustomObjectUpsertCommandTest-pureJson--%s" class=code-example><pre><code class='java'>final ObjectMapper objectMapper = JsonUtils.newObjectMapper();//you should cache this one
+ <div id="io-sphere-sdk-customobjects-commands-CustomObjectUpsertCommandTest-pureJson--%s" class=code-example><pre><code class='java'>final ObjectMapper objectMapper = SphereJsonUtils.newObjectMapper();//you should cache this one
 final ObjectNode objectNode = objectMapper.createObjectNode()
         .put("bar", " a string")
         .put("baz", 5L);

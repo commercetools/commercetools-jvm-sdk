@@ -377,7 +377,7 @@ assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-readAttributeWithoutProductTypeWithJson--%s" class=code-example><pre><code class='java'>final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
 final Optional&lt;Attribute&gt; attributeOption = masterVariant.getAttribute(SIZE_ATTR_NAME);
-final JsonNode expectedJsonNode = JsonUtils.toJsonNode(PlainEnumValue.of("S", "S"));
+final JsonNode expectedJsonNode = SphereJsonUtils.toJsonNode(PlainEnumValue.of("S", "S"));
 assertThat(attributeOption.get().getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -571,7 +571,7 @@ assertThatThrownBy(() -&gt; execute(ProductUpdateCommand.of(product,
  <p>For unit tests you can create an <a href="../../../../io/sphere/sdk/attributes/Attribute.html" title="interface in io.sphere.sdk.attributes"><code>Attribute</code></a> with a
  static factory method such as <a href="../../../../io/sphere/sdk/attributes/Attribute.html#of-java.lang.String-io.sphere.sdk.attributes.AttributeAccess-T-"><code>Attribute.of(String, AttributeAccess, Object)</code></a>:</p>
 
- <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-attributesForUnitTests--%s" class=code-example><pre><code class='java'>final Product referencedProduct = JsonUtils.readObjectFromResource("product1.json", Product.typeReference());
+ <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-attributesForUnitTests--%s" class=code-example><pre><code class='java'>final Product referencedProduct = SphereJsonUtils.readObjectFromResource("product1.json", Product.typeReference());
 final Reference&lt;Product&gt; productReference = referencedProduct.toReference();
 assertThat(productReference.getObj())
         .overridingErrorMessage("product reference is expanded")
