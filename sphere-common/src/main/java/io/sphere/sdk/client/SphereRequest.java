@@ -38,6 +38,6 @@ public interface SphereRequest<T> {
      @return true if the http response can be consumed, false otherwise
      */
     default boolean canDeserialize(final HttpResponse httpResponse) {
-        return httpResponse.hasSuccessResponseCode() && httpResponse.getResponseBody().isPresent();
+        return httpResponse.hasSuccessResponseCode() && httpResponse.getResponseBody() != null;
     }
 }

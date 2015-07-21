@@ -8,6 +8,7 @@ import io.sphere.sdk.models.SphereException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -31,7 +32,7 @@ final class ExceptionFactory {
     }
 
     private static String extractBody(final HttpResponse httpResponse) {
-        return httpResponse.getResponseBody().<String>map(b -> bytesToString(b)).orElse("");
+        return Optional.ofNullable(httpResponse.getResponseBody()).map(b -> bytesToString(b)).orElse("");
     }
 
     public static ExceptionFactory of() {
@@ -47,7 +48,7 @@ final class ExceptionFactory {
                 .whenStatus(504, r -> new GatewayTimeoutException(extractBody(r)))
                 .whenStatus(409, r -> new ConcurrentModificationException())
                 .whenStatus(400, r -> {
-                    final ErrorResponse errorResponse = SphereJsonUtils.readObject(r.getResponseBody().get(), ErrorResponse.typeReference());
+                    final ErrorResponse errorResponse = SphereJsonUtils.readObject(r.getResponseBody(), ErrorResponse.typeReference());
                     return new ErrorResponseException(errorResponse);
                 }
                 )
@@ -59,7 +60,7 @@ final class ExceptionFactory {
 
     //hack since backend returns in same error conditions responce code 500 but with the message Service unavailable
     private static boolean isServiceNotAvailable(final HttpResponse httpResponse) {
-        return httpResponse.getStatusCode() == 503 || httpResponse.getResponseBody().map(b -> bytesToString(b)).map(s -> s.contains("<h2>Service Unavailable</h2>")).orElse(false);
+        return httpResponse.getStatusCode() == 503 || Optional.ofNullable(httpResponse.getResponseBody()).map(b -> bytesToString(b)).map(s -> s.contains("<h2>Service Unavailable</h2>")).orElse(false);
     }
 
     public <T> SphereException createException(final HttpResponse httpResponse, final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper) {

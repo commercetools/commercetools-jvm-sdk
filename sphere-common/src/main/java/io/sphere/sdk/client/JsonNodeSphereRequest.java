@@ -17,7 +17,7 @@ public class JsonNodeSphereRequest implements SphereRequest<Optional<JsonNode>> 
 
     @Override
     public Optional<JsonNode> deserialize(final HttpResponse httpResponse) {
-        return httpResponse.getResponseBody().map(body -> SphereJsonUtils.readObject(body, new TypeReference<JsonNode>() {
+        return Optional.ofNullable(httpResponse.getResponseBody()).map(body -> SphereJsonUtils.readObject(body, new TypeReference<JsonNode>() {
         }));
     }
 

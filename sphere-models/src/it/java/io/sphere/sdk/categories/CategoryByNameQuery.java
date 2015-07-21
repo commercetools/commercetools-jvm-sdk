@@ -32,7 +32,7 @@ public class CategoryByNameQuery extends Base implements Query<Category> {
 
     @Override
     public PagedQueryResult<Category> deserialize(final HttpResponse httpResponse) {
-        return SphereJsonUtils.readObject(httpResponse.getResponseBody().get(), new TypeReference<PagedQueryResult<Category>>() {
+        return SphereJsonUtils.readObject(httpResponse.getResponseBody(), new TypeReference<PagedQueryResult<Category>>() {
         });
     }
 }
