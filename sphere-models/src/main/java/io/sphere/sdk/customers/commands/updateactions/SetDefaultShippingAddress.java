@@ -4,7 +4,7 @@ import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Address;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 import static java.lang.String.format;
 
@@ -14,29 +14,27 @@ import static java.lang.String.format;
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDefaultShippingAddress()}
  */
 public class SetDefaultShippingAddress extends UpdateAction<Customer> {
-    private final Optional<String> addressId;
+    @Nullable
+    private final String addressId;
 
-    private SetDefaultShippingAddress(final Optional<String> addressId) {
+    private SetDefaultShippingAddress(final String addressId) {
         super("setDefaultShippingAddress");
         this.addressId = addressId;
     }
 
-    public static SetDefaultShippingAddress of(final Optional<String> addressId) {
+    public static SetDefaultShippingAddress of(final String addressId) {
         return new SetDefaultShippingAddress(addressId);
     }
 
-    public static SetDefaultShippingAddress of(final String addressId) {
-        return of(Optional.of(addressId));
-    }
-
-    public static SetDefaultShippingAddress of(final Address address) {
-        if (!address.getId().isPresent()) {
+    public static SetDefaultShippingAddress of(@Nullable final Address address) {
+        if (address.getId() == null) {
             throw new IllegalArgumentException(format("The address %s should have an id.", address));
         }
         return of(address.getId());
     }
 
-    public Optional<String> getAddressId() {
+    @Nullable
+    public String getAddressId() {
         return addressId;
     }
 }

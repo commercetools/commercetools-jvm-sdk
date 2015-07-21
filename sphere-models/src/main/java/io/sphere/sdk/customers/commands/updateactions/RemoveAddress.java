@@ -24,10 +24,10 @@ public class RemoveAddress extends UpdateAction<Customer> {
     }
 
     public static RemoveAddress of(final Address address) {
-        if (!address.getId().isPresent()) {
+        if (address.getId() == null) {
             throw new IllegalArgumentException(format("The address %s should have an id.", address));
         }
-        return of(address.getId().get());
+        return of(address.getId());
     }
 
     public String getAddressId() {

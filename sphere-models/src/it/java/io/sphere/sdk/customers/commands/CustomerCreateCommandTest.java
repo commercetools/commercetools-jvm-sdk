@@ -61,9 +61,9 @@ public class CustomerCreateCommandTest extends IntegrationTest {
         assertThat(customer.getVatId()).contains(vatId);
         assertThat(customer.isEmailVerified()).isEqualTo(emailVerified);
         assertThat(customer.getCustomerGroup()).contains(customerGroup.toReference());
-        assertThat(customer.getAddresses().stream().map(a -> a.withId(Optional.empty())).collect(toList())).isEqualTo(addresses);
-        assertThat(customer.getDefaultBillingAddress().get().withId(Optional.empty())).isEqualTo(addresses.get(0));
-        assertThat(customer.getDefaultShippingAddress().get().withId(Optional.empty())).isEqualTo(addresses.get(1));
+        assertThat(customer.getAddresses().stream().map(a -> a.withId(null)).collect(toList())).isEqualTo(addresses);
+        assertThat(customer.getDefaultBillingAddress().get().withId(null)).isEqualTo(addresses.get(0));
+        assertThat(customer.getDefaultShippingAddress().get().withId(null)).isEqualTo(addresses.get(1));
     }
 
     @Test

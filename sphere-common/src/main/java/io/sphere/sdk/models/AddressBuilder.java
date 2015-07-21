@@ -2,7 +2,8 @@ package io.sphere.sdk.models;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
+import java.util.Objects;
 
 /**
  * Builds Address instances using the Builder pattern (a stateful object).
@@ -17,27 +18,48 @@ import java.util.Optional;
  */
 public class AddressBuilder extends Base implements Builder<Address> {
     CountryCode country;
-    Optional<String> id = Optional.empty();
-    Optional<String> title = Optional.empty();
-    Optional<String> salutation = Optional.empty();
-    Optional<String> firstName = Optional.empty();
-    Optional<String> lastName = Optional.empty();
-    Optional<String> streetName = Optional.empty();
-    Optional<String> streetNumber = Optional.empty();
-    Optional<String> additionalStreetInfo = Optional.empty();
-    Optional<String> postalCode = Optional.empty();
-    Optional<String> city = Optional.empty();
-    Optional<String> region = Optional.empty();
-    Optional<String> state = Optional.empty();
-    Optional<String> company = Optional.empty();
-    Optional<String> department = Optional.empty();
-    Optional<String> building = Optional.empty();
-    Optional<String> apartment = Optional.empty();
-    Optional<String> poBox = Optional.empty();
-    Optional<String> phone = Optional.empty();
-    Optional<String> mobile = Optional.empty();
-    Optional<String> email = Optional.empty();
-    Optional<String> additionalAddressInfo = Optional.empty();
+    @Nullable
+    String id;
+    @Nullable
+    String title;
+    @Nullable
+    String salutation;
+    @Nullable
+    String firstName;
+    @Nullable
+    String lastName;
+    @Nullable
+    String streetName;
+    @Nullable
+    String streetNumber;
+    @Nullable
+    String additionalStreetInfo;
+    @Nullable
+    String postalCode;
+    @Nullable
+    String city;
+    @Nullable
+    String region;
+    @Nullable
+    String state;
+    @Nullable
+    String company;
+    @Nullable
+    String department;
+    @Nullable
+    String building;
+    @Nullable
+    String apartment;
+    @Nullable
+    String poBox;
+    @Nullable
+    String phone;
+    @Nullable
+    String mobile;
+    @Nullable
+    String email;
+    @Nullable
+    String additionalAddressInfo;
 
 
     AddressBuilder(final CountryCode country) {
@@ -71,6 +93,7 @@ public class AddressBuilder extends Base implements Builder<Address> {
     }
 
     public static AddressBuilder of(final CountryCode country) {
+        Objects.requireNonNull(country);
         return new AddressBuilder(country);
     }
 
@@ -79,196 +102,113 @@ public class AddressBuilder extends Base implements Builder<Address> {
     }
 
     public AddressBuilder country(final CountryCode country) {
+        Objects.requireNonNull(country);
         this.country = country;
         return this;
     }
 
-    public AddressBuilder id(final Optional<String> id) {
+    public AddressBuilder id(final String id) {
         this.id = id;
         return this;
     }
 
-    public AddressBuilder id(final String id) {
-        return id(Optional.ofNullable(id));
-    }
-
-    public AddressBuilder title(final Optional<String> title) {
+    public AddressBuilder title(final String title) {
         this.title = title;
         return this;
     }
 
-    public AddressBuilder title(final String title) {
-        return title(Optional.ofNullable(title));
-    }
-
-    public AddressBuilder salutation(final Optional<String> salutation) {
+    public AddressBuilder salutation(final String salutation) {
         this.salutation = salutation;
         return this;
     }
 
-    public AddressBuilder salutation(final String salutation) {
-        return salutation(Optional.ofNullable(salutation));
-    }
-
-    public AddressBuilder firstName(final Optional<String> firstName) {
+    public AddressBuilder firstName(final String firstName) {
         this.firstName = firstName;
         return this;
     }
 
-    public AddressBuilder firstName(final String firstName) {
-        return firstName(Optional.ofNullable(firstName));
-    }
-
-    public AddressBuilder lastName(final Optional<String> lastName) {
+    public AddressBuilder lastName(final String lastName) {
         this.lastName = lastName;
         return this;
     }
 
-    public AddressBuilder lastName(final String lastName) {
-        return lastName(Optional.ofNullable(lastName));
-    }
-
-    public AddressBuilder streetName(final Optional<String> streetName) {
+    public AddressBuilder streetName(final String streetName) {
         this.streetName = streetName;
         return this;
     }
 
-    public AddressBuilder streetName(final String streetName) {
-        return streetName(Optional.ofNullable(streetName));
-    }
-
-    public AddressBuilder streetNumber(final Optional<String> streetNumber) {
+    public AddressBuilder streetNumber(final String streetNumber) {
         this.streetNumber = streetNumber;
         return this;
     }
 
-    public AddressBuilder streetNumber(final String streetNumber) {
-        return streetNumber(Optional.ofNullable(streetNumber));
-    }
-
-    public AddressBuilder additionalStreetInfo(final Optional<String> additionalStreetInfo) {
+    public AddressBuilder additionalStreetInfo(final String additionalStreetInfo) {
         this.additionalStreetInfo = additionalStreetInfo;
         return this;
     }
 
-    public AddressBuilder additionalStreetInfo(final String additionalStreetInfo) {
-        return additionalStreetInfo(Optional.ofNullable(additionalStreetInfo));
-    }
-
-    public AddressBuilder postalCode(final Optional<String> postalCode) {
+    public AddressBuilder postalCode(final String postalCode) {
         this.postalCode = postalCode;
         return this;
     }
 
-    public AddressBuilder postalCode(final String postalCode) {
-        return postalCode(Optional.ofNullable(postalCode));
-    }
-
-    public AddressBuilder city(final Optional<String> city) {
+    public AddressBuilder city(final String city) {
         this.city = city;
         return this;
     }
 
-    public AddressBuilder city(final String city) {
-        return city(Optional.ofNullable(city));
-    }
-
-    public AddressBuilder region(final Optional<String> region) {
+    public AddressBuilder region(final String region) {
         this.region = region;
         return this;
     }
 
-    public AddressBuilder region(final String region) {
-        return region(Optional.ofNullable(region));
-    }
-
-    public AddressBuilder state(final Optional<String> state) {
+    public AddressBuilder state(final String state) {
         this.state = state;
         return this;
     }
 
-    public AddressBuilder state(final String state) {
-        return state(Optional.ofNullable(state));
-    }
-
-    public AddressBuilder company(final Optional<String> company) {
+    public AddressBuilder company(final String company) {
         this.company = company;
         return this;
     }
 
-    public AddressBuilder company(final String company) {
-        return company(Optional.ofNullable(company));
-    }
-
-    public AddressBuilder department(final Optional<String> department) {
+    public AddressBuilder department(final String department) {
         this.department = department;
         return this;
     }
 
-    public AddressBuilder department(final String department) {
-        return department(Optional.ofNullable(department));
-    }
-
-    public AddressBuilder building(final Optional<String> building) {
+    public AddressBuilder building(final String building) {
         this.building = building;
         return this;
     }
 
-    public AddressBuilder building(final String building) {
-        return building(Optional.ofNullable(building));
-    }
-
-    public AddressBuilder apartment(final Optional<String> apartment) {
+    public AddressBuilder apartment(final String apartment) {
         this.apartment = apartment;
         return this;
     }
 
-    public AddressBuilder apartment(final String apartment) {
-        return apartment(Optional.ofNullable(apartment));
-    }
-
-    public AddressBuilder poBox(final Optional<String> poBox) {
+    public AddressBuilder poBox(final String poBox) {
         this.poBox = poBox;
         return this;
     }
 
-    public AddressBuilder poBox(final String poBox) {
-        return poBox(Optional.ofNullable(poBox));
-    }
-
-    public AddressBuilder phone(final Optional<String> phone) {
+    public AddressBuilder phone(final String phone) {
         this.phone = phone;
         return this;
     }
 
-    public AddressBuilder phone(final String phone) {
-        return phone(Optional.ofNullable(phone));
-    }
-
-    public AddressBuilder mobile(final Optional<String> mobile) {
+    public AddressBuilder mobile(final String mobile) {
         this.mobile = mobile;
         return this;
     }
 
-    public AddressBuilder mobile(final String mobile) {
-        return mobile(Optional.ofNullable(mobile));
-    }
-
-    public AddressBuilder email(final Optional<String> email) {
+    public AddressBuilder email(final String email) {
         this.email = email;
         return this;
     }
-
-    public AddressBuilder email(final String email) {
-        return email(Optional.ofNullable(email));
-    }
-
-    public AddressBuilder additionalAddressInfo(final Optional<String> additionalAddressInfo) {
+    
+    public AddressBuilder additionalAddressInfo(final String additionalAddressInfo) {
         this.additionalAddressInfo = additionalAddressInfo;
         return this;
-    }
-
-    public AddressBuilder additionalAddressInfo(final String additionalAddressInfo) {
-        return additionalAddressInfo(Optional.ofNullable(additionalAddressInfo));
     }
 }

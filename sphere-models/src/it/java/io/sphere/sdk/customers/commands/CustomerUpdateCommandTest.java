@@ -65,7 +65,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             final Address oldAddress = customer.getAddresses().get(0);
             assertThat(oldAddress.getId())
                     .overridingErrorMessage("only fetched address contains an ID")
-                    .isPresent();
+                    .isNotNull();
 
             final Address newAddress = oldAddress.withCity(city);
             final ChangeAddress updateAction = ChangeAddress.ofOldAddressToNewAddress(oldAddress, newAddress);
@@ -82,7 +82,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             final Address oldAddress = customer.getAddresses().get(0);
             assertThat(oldAddress.getId())
                     .overridingErrorMessage("only fetched address contains an ID")
-                    .isPresent();
+                    .isNotNull();
 
             final RemoveAddress action = RemoveAddress.of(oldAddress);
             final Customer customerWithoutAddresses =
@@ -98,7 +98,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             final Address address = customer.getAddresses().get(0);
             assertThat(address.getId())
                     .overridingErrorMessage("only fetched address contains an ID")
-                    .isPresent();
+                    .isNotNull();
             assertThat(customer.getDefaultShippingAddressId()).isEmpty();
             assertThat(customer.getDefaultShippingAddress()).isEmpty();
 
@@ -116,7 +116,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             final Address address = customer.getAddresses().get(0);
             assertThat(address.getId())
                     .overridingErrorMessage("only fetched address contains an ID")
-                    .isPresent();
+                    .isNotNull();
             assertThat(customer.getDefaultBillingAddressId()).isEmpty();
             assertThat(customer.getDefaultBillingAddress()).isEmpty();
 
