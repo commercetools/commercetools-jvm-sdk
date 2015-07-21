@@ -26,8 +26,8 @@ public class JsonNodeSphereRequestTest extends IntegrationTest {
             final String newName = "New Name";
             changeNameUpdateAction.put("action", "changeName").set("name", objectMapper.createObjectNode().put("en", newName));
             actions.add(changeNameUpdateAction);
-            final Optional<JsonNode> jsonNode = execute(JsonNodeSphereRequest.of(POST, "/categories/" + category.getId(), body));
-            assertThat(jsonNode.get().get("name").get("en").asText()).isEqualTo(newName);
+            final JsonNode jsonNode = execute(JsonNodeSphereRequest.of(POST, "/categories/" + category.getId(), body));
+            assertThat(jsonNode.get("name").get("en").asText()).isEqualTo(newName);
         });
     }
 }

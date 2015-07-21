@@ -3,8 +3,8 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.SphereException;
-import io.sphere.sdk.utils.SphereInternalLogger;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -40,13 +40,9 @@ public abstract class SphereServiceException extends SphereException {
         return statusCode;
     }
 
-    public final Optional<JsonNode> getJsonBody() {
+    @Nullable
+    public final JsonNode getJsonBody() {
         final Function<byte[], JsonNode> f = body -> SphereJsonUtils.parse(body);
-        try {
-            return httpResponse.flatMap(r -> Optional.ofNullable(r.getResponseBody()).map(f));
-        } catch (final Exception e) {
-            SphereInternalLogger.getLogger(SphereServiceException.class).error(() -> "Cannot provide JSON body.", e);
-            return Optional.empty();
-        }
+        return httpResponse.flatMap(r -> Optional.ofNullable(r.getResponseBody()).map(f)).orElse(null);
     }
 }
