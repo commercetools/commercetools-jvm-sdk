@@ -2,9 +2,7 @@ package io.sphere.sdk.expansion;
 
 import org.junit.Test;
 
-import java.util.Optional;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ExpansionPathBaseTest {
     @Test
@@ -70,37 +68,37 @@ public class ExpansionPathBaseTest {
 
     private static class CategoryDummyExpansionModelDsl<T> extends CategoryDummyExpansionModel<T> implements ExpansionPath<T> {
 
-        public CategoryDummyExpansionModelDsl(final Optional<String> parentPath, final String path) {
+        public CategoryDummyExpansionModelDsl(final String parentPath, final String path) {
             super(parentPath, path);
         }
     }
 
     private static class CategoryDummyExpansionModel<T> extends ExpandedModel<T> {
 
-        public CategoryDummyExpansionModel(final Optional<String> parentPath, final String path) {
-            super(parentPath, Optional.of(path));
+        public CategoryDummyExpansionModel(final String parentPath, final String path) {
+            super(parentPath, path);
         }
 
         public CategoryDummyExpansionModelDsl<T> parent() {
-            return new CategoryDummyExpansionModelDsl<>(pathExpressionOption(), "parent");
+            return new CategoryDummyExpansionModelDsl<>(pathExpression(), "parent");
         }
 
         public CategoryDummyExpansionModelDsl<T> ancestors(final int index) {
-            return new CategoryDummyExpansionModelDsl<>(pathExpressionOption(), "ancestors[" + index + "]");
+            return new CategoryDummyExpansionModelDsl<>(pathExpression(), "ancestors[" + index + "]");
         }
 
         public CategoryDummyExpansionModelDsl<T> ancestors() {
-            return new CategoryDummyExpansionModelDsl<>(pathExpressionOption(), "ancestors[*]");
+            return new CategoryDummyExpansionModelDsl<>(pathExpression(), "ancestors[*]");
         }
     }
 
     private static class ProductProjectionDummyExpansionModel<T> extends ExpandedModel<T> {
         public CategoryDummyExpansionModelDsl<T> categories() {
-            return new CategoryDummyExpansionModelDsl<>(pathExpressionOption(), "categories[*]");
+            return new CategoryDummyExpansionModelDsl<>(pathExpression(), "categories[*]");
         }
 
         public CategoryDummyExpansionModelDsl<T> categories(final int index) {
-            return new CategoryDummyExpansionModelDsl<>(pathExpressionOption(), "categories[" + index + "]");
+            return new CategoryDummyExpansionModelDsl<>(pathExpression(), "categories[" + index + "]");
         }
     }
 }

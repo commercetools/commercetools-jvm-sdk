@@ -4,16 +4,14 @@ import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
-import java.util.Optional;
-
 /**
   DSL class to create expansion path expressions.
 
  @param <T> the type for which the expansion path is
  */
 public class ShippingMethodExpansionModel<T> extends ExpansionModel<T> {
-    public ShippingMethodExpansionModel(final Optional<String> parentPath, final String path) {
-        super(parentPath, Optional.of(path));
+    public ShippingMethodExpansionModel(final String parentPath, final String path) {
+        super(parentPath, path);
     }
 
     ShippingMethodExpansionModel() {
@@ -41,7 +39,7 @@ public class ShippingMethodExpansionModel<T> extends ExpansionModel<T> {
     }
 
     private ZoneRateExpansionModel<T> zoneRates(final String s) {
-        return new ZoneRateExpansionModel<>(pathExpressionOption(), "zoneRates[" + s + "]");
+        return new ZoneRateExpansionModel<>(pathExpression(), "zoneRates[" + s + "]");
     }
 
     public static ShippingMethodExpansionModel<ShippingMethod> of() {

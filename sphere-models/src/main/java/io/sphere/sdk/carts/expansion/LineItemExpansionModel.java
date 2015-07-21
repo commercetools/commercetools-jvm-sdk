@@ -3,11 +3,9 @@ package io.sphere.sdk.carts.expansion;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 
-import java.util.Optional;
-
 public class LineItemExpansionModel<T> extends ExpansionModel<T> {
-    LineItemExpansionModel(final Optional<String> parentPath, final String path) {
-        super(parentPath, Optional.of(path));
+    LineItemExpansionModel(final String parentPath, final String path) {
+        super(parentPath, path);
     }
 
     LineItemExpansionModel() {
@@ -31,6 +29,6 @@ public class LineItemExpansionModel<T> extends ExpansionModel<T> {
     }
 
     private ItemStateExpansionModel<T> state(final String s) {
-        return new ItemStateExpansionModel<>(pathExpressionOption(), "state[" + s + "]");
+        return new ItemStateExpansionModel<>(pathExpression(), "state[" + s + "]");
     }
 }

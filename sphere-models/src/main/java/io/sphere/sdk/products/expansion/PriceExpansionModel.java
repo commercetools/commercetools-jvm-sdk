@@ -3,11 +3,9 @@ package io.sphere.sdk.products.expansion;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 
-import java.util.Optional;
-
 public class PriceExpansionModel<T> extends ExpansionModel<T> {
-    PriceExpansionModel(final Optional<String> parentPath, final String path) {
-        super(parentPath, Optional.of(path));
+    PriceExpansionModel(final String parentPath, final String path) {
+        super(parentPath, path);
     }
 
     public ExpansionPath<T> customerGroup() {
@@ -19,7 +17,7 @@ public class PriceExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public DiscountedPriceExpansionModel<T> discounted() {
-        return new DiscountedPriceExpansionModel<>(pathExpressionOption(), "discounted");
+        return new DiscountedPriceExpansionModel<>(pathExpression(), "discounted");
     }
 }
 
