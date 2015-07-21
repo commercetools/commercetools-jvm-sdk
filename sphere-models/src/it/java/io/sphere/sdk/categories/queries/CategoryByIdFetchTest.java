@@ -17,7 +17,7 @@ public class CategoryByIdFetchTest extends IntegrationTest {
                     .withExpansionPaths(CategoryExpansionModel.of().parent());
             final Category loadedCategory = execute(fetch);
             assertThat(loadedCategory.getId()).isEqualTo(category.getId());
-            assertThat(loadedCategory.getParent().get().getObj().get().getId()).isEqualTo(parent.getId());
+            assertThat(loadedCategory.getParent().get().getObj().getId()).isEqualTo(parent.getId());
         });
     }
 }

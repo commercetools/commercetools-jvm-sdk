@@ -25,14 +25,14 @@ public class ReferenceAssert extends AbstractAssert<ReferenceAssert, Reference<?
 
     public ReferenceAssert hasAnExpanded(final DefaultModel<?> model) {
         checkIsExpanded();
-        if (!actual.getObj().get().equals(model)) {
+        if (!actual.getObj().equals(model)) {
             failWithMessage(format("%s does not contain an expanded %s.", actual, model));
         }
         return this;
     }
 
     public void checkIsExpanded() {
-        if (!actual.getObj().isPresent()) {
+        if (actual.getObj() != null) {
             failWithMessage(format("The reference %s is not expanded.", actual));
         }
     }

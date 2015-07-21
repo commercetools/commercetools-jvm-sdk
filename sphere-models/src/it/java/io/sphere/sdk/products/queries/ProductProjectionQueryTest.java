@@ -53,7 +53,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
             final ProductProjection productProjection = execute(query).head().get();
             final NamedAttributeAccess<Reference<Product>> namedAttributeAccess = AttributeAccess.ofProductReference().ofName("productreference");
             final Reference<Product> productReference = productProjection.getMasterVariant().getAttribute(namedAttributeAccess).get();
-            final Product expandedReferencedProduct = productReference.getObj().get();
+            final Product expandedReferencedProduct = productReference.getObj();
             assertThat(expandedReferencedProduct.getId()).isEqualTo(referencedProduct.getId());
         });
     }
@@ -79,7 +79,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                 final List<Price> prices = execute(query).head().get().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()
-                        .anyMatch(price -> price.getCustomerGroup().map(customerGroupReference -> customerGroupReference.getObj().isPresent()).orElse(false)))
+                        .anyMatch(price -> price.getCustomerGroup().map(customerGroupReference -> customerGroupReference.getObj() != null).orElse(false)))
                         .isTrue();
                 return product;
             })
@@ -96,7 +96,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                 final List<Price> prices = execute(query).head().get().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()
-                        .anyMatch(price -> price.getChannel().map(channelRef -> channelRef.getObj().isPresent()).orElse(false)))
+                        .anyMatch(price -> price.getChannel().map(channelRef -> channelRef.getObj() != null).orElse(false)))
                         .isTrue();
                 return product;
             });
@@ -158,7 +158,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                                                             assertThat(ids(queryResult)).containsOnly(productWithCat1.getId());
                                                             final Reference<Category> cat1Loaded = queryResult.head().get().getCategories().stream().findAny().get();
                                                             assertThat(cat1Loaded).overridingErrorMessage("cat of product is expanded").isExpanded();
-                                                            final Reference<Category> parent = cat1Loaded.getObj().get().getParent().get();
+                                                            final Reference<Category> parent = cat1Loaded.getObj().getParent().get();
                                                             assertThat(parent).overridingErrorMessage("parent of cat is expanded").isExpanded();
                                                         })
                                         )

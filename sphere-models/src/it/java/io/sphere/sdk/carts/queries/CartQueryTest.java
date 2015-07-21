@@ -30,7 +30,7 @@ public class CartQueryTest extends IntegrationTest {
 
             final DiscountCodeInfo discountCodeInfo = loadedCart.getDiscountCodes().get(0);
             assertThat(discountCodeInfo.getDiscountCode()).isEqualTo(discountCode.toReference());
-            assertThat(discountCodeInfo.getDiscountCode().getObj()).isPresent();
+            assertThat(discountCodeInfo.getDiscountCode().getObj()).isNotNull();
 
             //clean up
             final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));

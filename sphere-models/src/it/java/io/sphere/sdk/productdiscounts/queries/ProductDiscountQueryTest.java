@@ -25,7 +25,7 @@ public class ProductDiscountQueryTest extends IntegrationTest {
                             .get()
             )
             .overridingErrorMessage("one product is expanded")
-            .matches(ref -> ref.getObj().isPresent());
+            .matches(ref -> ref.getObj() != null);
 
             return productDiscount;
         });

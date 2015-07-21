@@ -34,13 +34,13 @@ public class CategoryExpansionModelTest extends IntegrationTest {
                         final PagedQueryResult<Category> queryResult = execute(query);
                         final Category loadedLevel4 = queryResult.head().get();
                         final List<Reference<Category>> ancestors = loadedLevel4.getAncestors();
-                        final List<String> expectedAncestorIds = ancestors.stream().map(r -> r.getObj().get().getId()).collect(toList());
+                        final List<String> expectedAncestorIds = ancestors.stream().map(r -> r.getObj().getId()).collect(toList());
                         assertThat(expectedAncestorIds).isEqualTo(asList(level1.getId(), level2.getId(), level3.getId()));
 
-                        final Category level3ExpandedAncestor = ancestors.get(2).getObj().get();
+                        final Category level3ExpandedAncestor = ancestors.get(2).getObj();
                         assertThat(level3ExpandedAncestor.getId()).isEqualTo(level3.getId());
 
-                        assertThat(level3ExpandedAncestor.getAncestors().get(0).getObj().get().getId()).isEqualTo(level1.getId());
+                        assertThat(level3ExpandedAncestor.getAncestors().get(0).getObj().getId()).isEqualTo(level1.getId());
                     });
                 });
             });
@@ -56,7 +56,7 @@ public class CategoryExpansionModelTest extends IntegrationTest {
                         .toQuery();
                 final PagedQueryResult<Category> queryResult = execute(query);
                 final Category loadedLevel2 = queryResult.head().get();
-                assertThat(loadedLevel2.getParent().get().getObj().isPresent()).isTrue();
+                assertThat(loadedLevel2.getParent().get().getObj()).isNotNull();
             });
         });
     }

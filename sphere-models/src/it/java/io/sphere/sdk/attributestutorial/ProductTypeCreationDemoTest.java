@@ -337,7 +337,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
         final ProductProjection productProjection = execute(query).head().get();
 
-        final ProductType productType = productProjection.getProductType().getObj().get();
+        final ProductType productType = productProjection.getProductType().getObj();
         final ProductVariant masterVariant = productProjection.getMasterVariant();
         final List<Attribute> attributes = masterVariant.getAttributes();
         final MonetaryAmountFormat moneyFormat = MonetaryFormats.getAmountFormat(US);
@@ -352,7 +352,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                                     .filter(x -> x != null)
                                     .collect(joining(", ")))
                     .ifIs(AttributeAccess.ofProductReferenceSet(), set -> set.stream()
-                            .map(productReference -> productReference.getObj()
+                            .map(productReference -> Optional.ofNullable(productReference.getObj())
                                     .map(prod -> prod.getMasterData().getStaged().getName().find(ENGLISH).orElse(""))
                                     .orElse(productReference.getId()))
                             .collect(joining(", ")))
@@ -415,11 +415,11 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Reference<Product> productReference = referencedProduct.toReference();
         assertThat(productReference.getObj())
                 .overridingErrorMessage("product reference is expanded")
-                .isPresent();
+                .isNotNull();
         final AttributeAccess<Reference<Product>> access = AttributeAccess.ofProductReference();
         final Attribute attribute = Attribute.of("attrname", access, productReference);
         assertThat(attribute.getValue(access)).isEqualTo(productReference);
-        assertThat(attribute.getValue(access).getObj()).isPresent();
+        assertThat(attribute.getValue(access).getObj()).isNotNull();
     }
 
     @Test

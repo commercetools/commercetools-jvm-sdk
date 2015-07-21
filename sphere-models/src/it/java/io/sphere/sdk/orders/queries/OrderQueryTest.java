@@ -32,7 +32,7 @@ public class OrderQueryTest extends IntegrationTest {
                                 .withPredicate(m -> m.id().is(order.getId()).and(m.customerGroup().is(customerGroup)))
                                 .withExpansionPaths(m -> m.customerGroup())
                 ).head().get();
-                assertThat(queriedOrder.getCustomerGroup().get().getObj().get().getName())
+                assertThat(queriedOrder.getCustomerGroup().get().getObj().getName())
                         .overridingErrorMessage("customerGroupIsExpandeable")
                         .isEqualTo(customerGroup.getName());
             });

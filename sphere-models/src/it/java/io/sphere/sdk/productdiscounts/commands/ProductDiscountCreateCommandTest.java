@@ -52,7 +52,7 @@ public class ProductDiscountCreateCommandTest extends IntegrationTest {
 
         assertThat(productPrices)
                 .overridingErrorMessage("discount object in price is expanded")
-                .matches(prices -> prices.stream().anyMatch(price -> price.getDiscounted().get().getDiscount().getObj().isPresent()));
+                .matches(prices -> prices.stream().anyMatch(price -> price.getDiscounted().get().getDiscount().getObj() != null));
 //        clean up test
         execute(ProductDiscountDeleteCommand.of(productDiscount));
     }

@@ -28,7 +28,7 @@ public class ProductAttributeAccessTest {
     private final Product product = SphereJsonUtils.readObjectFromResource("product1.json", Product.typeReference());
     private final ProductProjection productProjection = SphereJsonUtils.readObjectFromResource("product-projection1.json", ProductProjection.typeReference());
     private final ProductVariant variant = product.getMasterData().getCurrent().get().getMasterVariant();
-    private final ProductType productType = productProjection.getProductType().getObj().get();
+    private final ProductType productType = productProjection.getProductType().getObj();
 
     private final NamedAttributeAccess<LocalizedStrings> localizedStringsNamedAttributeAccess = ofLocalizedStrings().ofName(LOC_STRING_ATTRIBUTE);
     private final NamedAttributeAccess<LocalizedStrings> wrongTypeNamedAttributeAccess = ofLocalizedStrings().ofName("boolean-attribute");

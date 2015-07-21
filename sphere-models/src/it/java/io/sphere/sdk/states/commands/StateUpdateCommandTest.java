@@ -70,7 +70,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
                 //check reference expansion
                 final State loadedStateB = execute(StateByIdFetch.of(stateB).withExpansionPaths(m -> m.transitions()));
                 final Reference<State> stateReference = new LinkedList<>(loadedStateB.getTransitions().get()).getFirst();
-                assertThat(stateReference.getObj()).isPresent();
+                assertThat(stateReference.getObj()).isNotNull();
 
                 final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));
                 assertThat(updatedStateBWithoutTransitions.getTransitions()).isEmpty();

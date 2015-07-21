@@ -58,15 +58,15 @@ public class ProductAttributeFlowTest extends IntegrationTest {
     public void attributeShouldKeepExpansions() throws Exception {
         final AttributeAccess<Reference<Product>> access = AttributeAccess.ofProductReference();
         final NamedAttributeAccess<Reference<Product>> namedAccess = access.ofName("foo");
-        assertThat(EXPANDED_PRODUCT_REFERENCE.getObj()).overridingErrorMessage("product reference is expanded").isPresent();
+        assertThat(EXPANDED_PRODUCT_REFERENCE.getObj()).overridingErrorMessage("product reference is expanded").isNotNull();
         final Attribute attribute = Attribute.of(namedAccess, EXPANDED_PRODUCT_REFERENCE);
-        assertThat(attribute.getValue(access).getObj()).isPresent();
+        assertThat(attribute.getValue(access).getObj()).isNotNull();
 
         final String jsonFilledRef = SphereJsonUtils.toJsonString(EXPANDED_PRODUCT_REFERENCE);
-        final String jsonEmptyRef = SphereJsonUtils.toJsonString(EXPANDED_PRODUCT_REFERENCE.filled(Optional.<Product>empty()));
+        final String jsonEmptyRef = SphereJsonUtils.toJsonString(EXPANDED_PRODUCT_REFERENCE.filled(null));
         assertThat(jsonFilledRef)
                 .overridingErrorMessage("references are not expanded if serialized")
-                .doesNotContain(EXPANDED_PRODUCT_REFERENCE.getObj().get().getMasterData().getStaged().getName().get(Locale.ENGLISH))
+                .doesNotContain(EXPANDED_PRODUCT_REFERENCE.getObj().getMasterData().getStaged().getName().get(Locale.ENGLISH))
                 .isEqualTo(jsonEmptyRef);
     }
 

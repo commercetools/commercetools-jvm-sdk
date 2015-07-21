@@ -87,8 +87,8 @@ public class CartUpdateCommandTest extends IntegrationTest {
                     .plusExpansionPaths(m -> m.lineItems(0).supplyChannel())
                     .plusExpansionPaths(m -> m.lineItems(0).distributionChannel())).head().get();
             final LineItem loadedLineItem = loadedCart.getLineItems().get(0);
-            assertThat(loadedLineItem.getDistributionChannel().get().getObj()).isPresent();
-            assertThat(loadedLineItem.getSupplyChannel().get().getObj()).isPresent();
+            assertThat(loadedLineItem.getDistributionChannel().get().getObj()).isNotNull();
+            assertThat(loadedLineItem.getSupplyChannel().get().getObj()).isNotNull();
         });
     }
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  * A {@link io.sphere.sdk.models.Reference} is a loose reference to another resource on the SPHERE.IO platform.
@@ -18,10 +18,10 @@ import java.util.Optional;
 public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
     private final String typeId;
     private final String id;
-    private final Optional<T> obj;
+    private final T obj;
 
     @JsonCreator
-    private Reference(final String typeId, final String id, final Optional<T> obj) {
+    private Reference(final String typeId, final String id, final T obj) {
         this.id = id;
         this.typeId = typeId;
         this.obj = obj;
@@ -45,24 +45,20 @@ public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
 
     /**
      * The optional value of the referenced object.
-     * @return The optional value of the referenced object.
+     * @return The value of the referenced object or null.
      */
     @JsonIgnore
-    public Optional<T> getObj() {
+    @Nullable
+    public T getObj() {
         return obj;
     }
 
-    public Reference<T> filled(final T obj) {
-        return filled(Optional.ofNullable(obj));
-    }
-
-    public Reference<T> filled(final Optional<T> obj) {
+    public Reference<T> filled(@Nullable final T obj) {
         return new Reference<>(getTypeId(), getId(), obj);
     }
 
-
     public static <T> Reference<T> of(final String typeId, final String id) {
-        return new Reference<>(typeId, id, Optional.empty());
+        return new Reference<>(typeId, id, null);
     }
 
     public static <T> Reference<T> of(final String typeId, final String id, T obj) {

@@ -120,7 +120,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
 
                 //check channel expansion
                 final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.syncInfo().channel()));
-                assertThat(new ArrayList<>(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isPresent();
+                assertThat(new ArrayList<>(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isNotNull();
             })
         );
     }
@@ -212,7 +212,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 //reference expansion
                 final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.lineItems().state().state()));
                 final Reference<State> state = new LinkedList<>(loadedOrder.getLineItems().get(0).getState()).getFirst().getState();
-                assertThat(state.getObj()).isPresent();
+                assertThat(state.getObj()).isNotNull();
             })
         );
     }

@@ -149,7 +149,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
             final ProductDraft productDraft = ProductDraftBuilder.of(productType, LABEL, SphereTestUtils.randomSlug(), masterVariant).build();
             final Product product = execute(ProductCreateCommand.of(productDraft));
             testSingleAndSet(AttributeAccess.ofProductReference(), AttributeAccess.ofProductReferenceSet(),
-                    asSet(product.toReference().filled(Optional.<Product>empty())),
+                    asSet(product.toReference().filled(null)),
                     ReferenceType.ofProduct(),
                     AttributeDefinitionBuilder.of("productReference", LABEL, ReferenceType.ofProduct()).build());
         });

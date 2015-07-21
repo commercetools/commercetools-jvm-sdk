@@ -43,7 +43,7 @@ public class ProductQueryTest extends IntegrationTest {
         withProductInCategory(client(), (product, category) -> {
             final Query<Product> query = query(product)
                     .withExpansionPaths(ProductExpansionModel.of().masterData().staged().categories());
-            assertThat(execute(query).head().get().getMasterData().getStaged().getCategories().stream().anyMatch(reference -> reference.getObj().isPresent()))
+            assertThat(execute(query).head().get().getMasterData().getStaged().getCategories().stream().anyMatch(reference -> reference.getObj() != null))
                     .isTrue();
         });
     }
@@ -58,7 +58,7 @@ public class ProductQueryTest extends IntegrationTest {
                             final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
                             assertThat(prices
                                     .stream()
-                                    .anyMatch(price -> price.getCustomerGroup().map(customerGroupReference -> customerGroupReference.getObj().isPresent()).orElse(false)))
+                                    .anyMatch(price -> price.getCustomerGroup().map(customerGroupReference -> customerGroupReference.getObj() != null).orElse(false)))
                                     .isTrue();
                             return product;
                         })
@@ -74,7 +74,7 @@ public class ProductQueryTest extends IntegrationTest {
                 final List<Price> prices = execute(query).head().get().getMasterData().getStaged().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()
-                        .anyMatch(price -> price.getChannel().map(channelRef -> channelRef.getObj().isPresent()).orElse(false)))
+                        .anyMatch(price -> price.getChannel().map(channelRef -> channelRef.getObj() != null).orElse(false)))
                         .isTrue();
                 return product;
             });

@@ -111,9 +111,9 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
                 final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
                                 .plusExpansionPaths(m -> m.zoneRates().zone())
                 );
-                assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+                assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
                 assertThat(loadedShippingMethod.getZones().get(0).getObj())
-                        .overridingErrorMessage("the convenience method also has expanded references").isPresent();
+                        .overridingErrorMessage("the convenience method also has expanded references").isNotNull();
 
                 //removeShippingRate
                 final ShippingMethod shippingMethodWithoutShippingRate =

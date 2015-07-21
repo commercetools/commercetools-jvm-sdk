@@ -16,7 +16,7 @@ public class ShippingMethodByIdFetchTest extends IntegrationTest {
             final ShippingMethod loadedShippingMethod = execute(fetch);
             final String actualFetchedId = loadedShippingMethod.getId();
             assertThat(actualFetchedId).isEqualTo(shippingMethod.getId());
-            assertThat(loadedShippingMethod.getTaxCategory().getObj()).isPresent();
+            assertThat(loadedShippingMethod.getTaxCategory().getObj()).isNotNull();
         });
     }
 }

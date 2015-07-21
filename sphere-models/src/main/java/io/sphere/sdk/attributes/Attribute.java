@@ -27,8 +27,8 @@ public interface Attribute {
         final JsonNode jsonNode = SphereJsonUtils.toJsonNode(value);
         if (value instanceof Reference && jsonNode instanceof ObjectNode) {
             final Reference<?> reference = (Reference<?>) value;
-            if (reference.getObj().isPresent()) {
-                ((ObjectNode) jsonNode).replace("obj", SphereJsonUtils.toJsonNode(reference.getObj().get()));
+            if (reference.getObj() != null) {
+                ((ObjectNode) jsonNode).replace("obj", SphereJsonUtils.toJsonNode(reference.getObj()));
             }
         }
         return of(name, jsonNode);
