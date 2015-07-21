@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import io.sphere.sdk.models.*;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
@@ -26,9 +27,9 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
     private Optional<Reference<Category>> parent = Optional.empty();
     private Optional<String> orderHint = Optional.empty();
     private Optional<String> externalId = Optional.empty();
-    private Optional<LocalizedStrings> metaTitle = Optional.empty();
-    private Optional<LocalizedStrings> metaDescription = Optional.empty();
-    private Optional<LocalizedStrings> metaKeywords = Optional.empty();
+    private LocalizedStrings metaTitle;
+    private LocalizedStrings metaDescription;
+    private LocalizedStrings metaKeywords;
 
     public static CategoryBuilder of(final String id, final LocalizedStrings name, final LocalizedStrings slug) {
         return new CategoryBuilder(id, name, slug);
@@ -102,31 +103,22 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
         return this;
     }
 
-    public CategoryBuilder metaTitle(final Optional<LocalizedStrings> metaTitle) {
+
+
+    public CategoryBuilder metaTitle(@Nullable final LocalizedStrings metaTitle) {
         this.metaTitle = metaTitle;
         return getThis();
     }
 
-    public CategoryBuilder metaTitle(final LocalizedStrings metaTitle) {
-        return metaTitle(Optional.of(metaTitle));
-    }
-
-    public CategoryBuilder metaDescription(final Optional<LocalizedStrings> metaDescription) {
+    public CategoryBuilder metaDescription(@Nullable final LocalizedStrings metaDescription) {
         this.metaDescription = metaDescription;
         return getThis();
     }
 
-    public CategoryBuilder metaDescription(final LocalizedStrings metaDescription) {
-        return metaDescription(Optional.of(metaDescription));
-    }
 
-    public CategoryBuilder metaKeywords(final Optional<LocalizedStrings> metaKeywords) {
+    public CategoryBuilder metaKeywords(@Nullable final LocalizedStrings metaKeywords) {
         this.metaKeywords = metaKeywords;
         return getThis();
-    }
-
-    public CategoryBuilder metaKeywords(final LocalizedStrings metaKeywords) {
-        return metaKeywords(Optional.of(metaKeywords));
     }
 
     @Override

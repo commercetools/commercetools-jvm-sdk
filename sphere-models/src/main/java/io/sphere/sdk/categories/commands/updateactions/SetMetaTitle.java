@@ -4,6 +4,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.LocalizedStrings;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -12,22 +13,20 @@ import java.util.Optional;
  * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#setMetaTitle()}
  */
 public class SetMetaTitle extends UpdateAction<Category> {
-    private final Optional<LocalizedStrings> metaTitle;
+    @Nullable
+    private final LocalizedStrings metaTitle;
 
-    private SetMetaTitle(final Optional<LocalizedStrings> metaTitle) {
+    private SetMetaTitle(final LocalizedStrings metaTitle) {
         super("setMetaTitle");
         this.metaTitle = metaTitle;
     }
 
-    public static SetMetaTitle of(final LocalizedStrings metaTitle) {
-        return of(Optional.of(metaTitle));
-    }
-
-    public static SetMetaTitle of(final Optional<LocalizedStrings> metaTitle) {
+    public static SetMetaTitle of(@Nullable final LocalizedStrings metaTitle) {
         return new SetMetaTitle(metaTitle);
     }
 
-    public Optional<LocalizedStrings> getMetaTitle() {
+    @Nullable
+    public LocalizedStrings getMetaTitle() {
         return metaTitle;
     }
 }

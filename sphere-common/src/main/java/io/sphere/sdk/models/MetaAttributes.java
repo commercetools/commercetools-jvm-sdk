@@ -1,16 +1,19 @@
 package io.sphere.sdk.models;
 
+import javax.annotation.Nullable;
 import java.util.Locale;
-import java.util.Optional;
 
 public interface MetaAttributes {
-    Optional<LocalizedStrings> getMetaTitle();
+    @Nullable
+    LocalizedStrings getMetaTitle();
 
-    Optional<LocalizedStrings> getMetaDescription();
+    @Nullable
+    LocalizedStrings getMetaDescription();
 
-    Optional<LocalizedStrings> getMetaKeywords();
+    @Nullable
+    LocalizedStrings getMetaKeywords();
 
-    static MetaAttributes metaAttributesOf(final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords) {
+    static MetaAttributes metaAttributesOf(@Nullable final LocalizedStrings metaTitle, @Nullable final LocalizedStrings metaDescription, @Nullable final LocalizedStrings metaKeywords) {
         return new MetaAttributesDslImpl(metaTitle, metaDescription, metaKeywords);
     }
 

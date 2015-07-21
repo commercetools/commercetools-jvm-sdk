@@ -200,7 +200,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
 
-            assertThat(updatedProduct.getMasterData().getStaged().getMetaKeywords()).contains(metaKeywords);
+            assertThat(updatedProduct.getMasterData().getStaged().getMetaKeywords()).isEqualTo(metaKeywords);
 
             return updatedProduct;
         });
@@ -215,7 +215,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
 
-            assertThat(updatedProduct.getMasterData().getStaged().getMetaDescription()).contains(metaDescription);
+            assertThat(updatedProduct.getMasterData().getStaged().getMetaDescription()).isEqualTo(metaDescription);
 
             return updatedProduct;
         });
@@ -230,7 +230,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
 
-            assertThat(updatedProduct.getMasterData().getStaged().getMetaTitle()).contains(metaTitle);
+            assertThat(updatedProduct.getMasterData().getStaged().getMetaTitle()).isEqualTo(metaTitle);
 
             return updatedProduct;
         });

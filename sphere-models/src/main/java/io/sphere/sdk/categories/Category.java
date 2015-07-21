@@ -7,6 +7,7 @@ import java.util.Optional;
 import io.sphere.sdk.models.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static io.sphere.sdk.utils.ListUtils.join;
@@ -38,14 +39,17 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug, Met
 
     Optional<String> getExternalId();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaTitle();
+    LocalizedStrings getMetaTitle();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaDescription();
+    LocalizedStrings getMetaDescription();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaKeywords();
+    LocalizedStrings getMetaKeywords();
 
     @Override
     default Reference<Category> toReference() {

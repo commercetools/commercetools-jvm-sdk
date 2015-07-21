@@ -38,7 +38,7 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
         withPersistentCategory(client(), category -> {
             final LocalizedStrings newValue = randomSlug();
             final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetMetaDescription.of(newValue)));
-            assertThat(updatedCategory.getMetaDescription()).contains(newValue);
+            assertThat(updatedCategory.getMetaDescription()).isEqualTo(newValue);
         });
     }
 
@@ -47,7 +47,7 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
         withPersistentCategory(client(), category -> {
             final LocalizedStrings newValue = randomSlug();
             final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetMetaTitle.of(newValue)));
-            assertThat(updatedCategory.getMetaTitle()).contains(newValue);
+            assertThat(updatedCategory.getMetaTitle()).isEqualTo(newValue);
         });
     }
 
@@ -56,7 +56,7 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
         withPersistentCategory(client(), category -> {
             final LocalizedStrings newValue = randomSlug();
             final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetMetaKeywords.of(newValue)));
-            assertThat(updatedCategory.getMetaKeywords()).contains(newValue);
+            assertThat(updatedCategory.getMetaKeywords()).isEqualTo(newValue);
         });
     }
 }

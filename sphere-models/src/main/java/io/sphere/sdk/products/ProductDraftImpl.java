@@ -8,6 +8,7 @@ import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 
@@ -17,9 +18,12 @@ class ProductDraftImpl extends Base implements ProductDraft {
     private final LocalizedStrings slug;
     private final Optional<LocalizedStrings> description;
     private final Set<Reference<Category>> categories;
-    private final Optional<LocalizedStrings> metaTitle;
-    private final Optional<LocalizedStrings> metaDescription;
-    private final Optional<LocalizedStrings> metaKeywords;
+    @Nullable
+    private final LocalizedStrings metaTitle;
+    @Nullable
+    private final LocalizedStrings metaDescription;
+    @Nullable
+    private final LocalizedStrings metaKeywords;
     private final ProductVariantDraft masterVariant;
     private final List<ProductVariantDraft> variants;
 
@@ -64,18 +68,21 @@ class ProductDraftImpl extends Base implements ProductDraft {
         return categories;
     }
 
+    @Nullable
     @Override
-    public Optional<LocalizedStrings> getMetaTitle() {
+    public LocalizedStrings getMetaTitle() {
         return metaTitle;
     }
 
+    @Nullable
     @Override
-    public Optional<LocalizedStrings> getMetaDescription() {
+    public LocalizedStrings getMetaDescription() {
         return metaDescription;
     }
 
+    @Nullable
     @Override
-    public Optional<LocalizedStrings> getMetaKeywords() {
+    public LocalizedStrings getMetaKeywords() {
         return metaKeywords;
     }
 

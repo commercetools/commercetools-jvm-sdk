@@ -1,16 +1,14 @@
 package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import java.time.ZonedDateTime;
-import java.util.Collections;
-import java.util.Optional;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
+import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 
 class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     private final LocalizedStrings name;
@@ -20,9 +18,12 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     private final Optional<Reference<Category>> parent;
     private final Optional<String> orderHint;
     private final Optional<String> externalId;
-    private final Optional<LocalizedStrings> metaTitle;
-    private final Optional<LocalizedStrings> metaDescription;
-    private final Optional<LocalizedStrings> metaKeywords;
+    @Nullable
+    private final LocalizedStrings metaTitle;
+    @Nullable
+    private final LocalizedStrings metaDescription;
+    @Nullable
+    private final LocalizedStrings metaKeywords;
 
     @JsonCreator
     CategoryImpl(final String id,
@@ -35,7 +36,7 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
                  final List<Reference<Category>> ancestors,
                  final Optional<Reference<Category>> parent,
                  final Optional<String> orderHint, final Optional<String> externalId,
-                 final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords) {
+                 final LocalizedStrings metaTitle, final LocalizedStrings metaDescription, final LocalizedStrings metaKeywords) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.slug = slug;
@@ -89,15 +90,15 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
         return Category.toString(this);
     }
 
-    public Optional<LocalizedStrings> getMetaDescription() {
+    public LocalizedStrings getMetaDescription() {
         return metaDescription;
     }
 
-    public Optional<LocalizedStrings> getMetaKeywords() {
+    public LocalizedStrings getMetaKeywords() {
         return metaKeywords;
     }
 
-    public Optional<LocalizedStrings> getMetaTitle() {
+    public LocalizedStrings getMetaTitle() {
         return metaTitle;
     }
 }

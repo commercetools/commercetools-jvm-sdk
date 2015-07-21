@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 abstract class CategoryWrapper extends Base implements Category {
@@ -77,18 +78,21 @@ abstract class CategoryWrapper extends Base implements Category {
         return Category.toString(this);
     }
 
+    @Nullable
     @Override
-    public Optional<LocalizedStrings> getMetaDescription() {
+    public LocalizedStrings getMetaDescription() {
         return delegate.getMetaDescription();
     }
 
+    @Nullable
     @Override
-    public Optional<LocalizedStrings> getMetaKeywords() {
+    public LocalizedStrings getMetaKeywords() {
         return delegate.getMetaKeywords();
     }
 
+    @Nullable
     @Override
-    public Optional<LocalizedStrings> getMetaTitle() {
+    public LocalizedStrings getMetaTitle() {
         return delegate.getMetaTitle();
     }
 }

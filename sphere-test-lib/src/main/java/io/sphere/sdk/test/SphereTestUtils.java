@@ -61,6 +61,10 @@ public final class SphereTestUtils {
         return LocalizedStrings.of(Locale.ENGLISH, value);
     }
 
+    public static String en(final LocalizedStrings localizedStrings) {
+        return localizedStrings.get(ENGLISH);
+    }
+
     public static String en(final Optional<LocalizedStrings> localizedStringsOption) {
         return localizedStringsOption.get().get(ENGLISH);
     }

@@ -10,6 +10,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -27,9 +28,12 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     private final Set<Reference<Category>> categories;
     private final Optional<LocalizedStrings> description;
     private final LocalizedStrings slug;
-    private final Optional<LocalizedStrings> metaTitle;
-    private final Optional<LocalizedStrings> metaDescription;
-    private final Optional<LocalizedStrings> metaKeywords;
+    @Nullable
+    private final LocalizedStrings metaTitle;
+    @Nullable
+    private final LocalizedStrings metaDescription;
+    @Nullable
+    private final LocalizedStrings metaKeywords;
     private final ProductVariant masterVariant;
     private final List<ProductVariant> variants;
     private final SearchKeywords searchKeywords;
@@ -39,8 +43,8 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
                           final Reference<ProductType> productType, final Optional<Reference<TaxCategory>> taxCategory,
                           final boolean hasStagedChanges, final LocalizedStrings name,
                           final Set<Reference<Category>> categories, final Optional<LocalizedStrings> description,
-                          final LocalizedStrings slug, final Optional<LocalizedStrings> metaTitle,
-                          final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords,
+                          final LocalizedStrings slug, final LocalizedStrings metaTitle,
+                          final LocalizedStrings metaDescription, final LocalizedStrings metaKeywords,
                           final ProductVariant masterVariant, final List<ProductVariant> variants,
                           final boolean isPublished, final SearchKeywords searchKeywords) {
         super(id, version, createdAt, lastModifiedAt);
@@ -88,17 +92,17 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     }
 
     @Override
-    public Optional<LocalizedStrings> getMetaTitle() {
+    public LocalizedStrings getMetaTitle() {
         return metaTitle;
     }
 
     @Override
-    public Optional<LocalizedStrings> getMetaDescription() {
+    public LocalizedStrings getMetaDescription() {
         return metaDescription;
     }
 
     @Override
-    public Optional<LocalizedStrings> getMetaKeywords() {
+    public LocalizedStrings getMetaKeywords() {
         return metaKeywords;
     }
 

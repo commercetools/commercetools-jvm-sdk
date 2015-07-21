@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.search.SearchKeywords;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -68,14 +69,17 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
     @Override
     ProductVariant getMasterVariant();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaDescription();
+    LocalizedStrings getMetaDescription();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaKeywords();
+    LocalizedStrings getMetaKeywords();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaTitle();
+    LocalizedStrings getMetaTitle();
 
     @Override
     LocalizedStrings getName();

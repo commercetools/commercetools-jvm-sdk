@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
 import io.sphere.sdk.search.SearchKeywords;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -20,11 +21,14 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
 
     LocalizedStrings getSlug();
 
-    Optional<LocalizedStrings> getMetaTitle();
+    @Nullable
+    LocalizedStrings getMetaTitle();
 
-    Optional<LocalizedStrings> getMetaDescription();
+    @Nullable
+    LocalizedStrings getMetaDescription();
 
-    Optional<LocalizedStrings> getMetaKeywords();
+    @Nullable
+    LocalizedStrings getMetaKeywords();
 
     /**
      * Returns the master variant. Every product as 1 to n variants, so this is always present.
