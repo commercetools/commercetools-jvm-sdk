@@ -130,7 +130,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     @Test
     public void queryBySlug() throws Exception {
         with2products("queryBySlug", (p1, p2) ->{
-            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).bySlug(ENGLISH, p1.getMasterData().getStaged().getSlug().get(ENGLISH).get());
+            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).bySlug(ENGLISH, p1.getMasterData().getStaged().getSlug().get(ENGLISH));
             assertThat(ids(execute(query1))).containsOnly(p1.getId());
         });
     }

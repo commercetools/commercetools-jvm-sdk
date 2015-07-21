@@ -344,24 +344,23 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
         final Function<Attribute, Optional<Pair<String, String>>> attributeValueExtractor = attribute -> {
             final Optional<String> extractedResult = AttributeExtraction.<String>of(productType, attribute)
-                    .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -> v.getLabel().get(ENGLISH).orElse(""))
+                    .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -> v.getLabel().find(ENGLISH).orElse(""))
                     .ifIs(AttributeAccess.ofPlainEnumValue(), v -> v.getLabel())
                     .ifIs(AttributeAccess.ofLocalizedEnumValueSet(), v ->
                             v.stream()
                                     .map(x -> x.getLabel().get(ENGLISH))
-                                    .filter(x -> x.isPresent())
-                                    .map(x -> x.get())
+                                    .filter(x -> x != null)
                                     .collect(joining(", ")))
                     .ifIs(AttributeAccess.ofProductReferenceSet(), set -> set.stream()
                             .map(productReference -> productReference.getObj()
-                                    .map(prod -> prod.getMasterData().getStaged().getName().get(ENGLISH).orElse(""))
+                                    .map(prod -> prod.getMasterData().getStaged().getName().find(ENGLISH).orElse(""))
                                     .orElse(productReference.getId()))
                             .collect(joining(", ")))
                     .ifIs(AttributeAccess.ofMoney(), money -> moneyFormat.format(money))
                     .ifIs(AttributeAccess.ofDate(), date -> date.toString())
                     .getValue();
             final Optional<Pair<String, String>> tableRowData = extractedResult.map(value -> {
-                final String label = productType.getAttribute(attribute.getName()).get().getLabel().get(ENGLISH).get();
+                final String label = productType.getAttribute(attribute.getName()).get().getLabel().get(ENGLISH);
                 return ImmutablePair.of(label, value);
             });
             return tableRowData;

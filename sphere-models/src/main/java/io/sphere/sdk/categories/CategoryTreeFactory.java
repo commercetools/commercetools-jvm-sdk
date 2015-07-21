@@ -26,7 +26,7 @@ final class CategoryTreeFactory {
         allCategoriesAsFlatList.forEach(category -> {
             final Set<Locale> localesForTheCategory = category.getSlug().getLocales();
             localesForTheCategory.forEach(locale -> {
-                final LocalizedStringsEntry stringsEntry = LocalizedStringsEntry.of(locale, category.getSlug().get(locale).get());
+                final LocalizedStringsEntry stringsEntry = LocalizedStringsEntry.of(locale, category.getSlug().get(locale));
                 categoriesByLocaleAndSlug.put(stringsEntry, category);
             });
         });

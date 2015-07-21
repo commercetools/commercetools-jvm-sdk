@@ -45,7 +45,7 @@ public final class CategoryTreeTextRepresentation {
 
 
     private static void appendToBuilder(final Category category, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level) {
-        final String name = category.getName().get(ENGLISH).get();
+        final String name = category.getName().get(ENGLISH);
         final String externalId = category.getExternalId().get();
         final String offset = StringUtils.repeat(' ', level * 4);
         stringBuilder.append(offset).append(externalId).append(" ").append(name).append("\n");

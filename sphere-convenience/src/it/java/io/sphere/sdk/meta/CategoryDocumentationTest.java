@@ -76,7 +76,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
         final List<Category> categories = categoriesStage.toCompletableFuture().join();
         assertThat(categories)
                 .hasSize(15)
-                .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).get().equals("boots-women")));
+                .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).equals("boots-women")));
     }
 
     @Test
@@ -111,7 +111,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
         final Category clothingWomen = clothingWomenOptional.get();
         final List<Category> clothingWomenSubcategories = categoryTree.findChildren(clothingWomen);
         final List<String> names = clothingWomenSubcategories.stream()
-                .map(cat -> cat.getName().get(ENGLISH).get())
+                .map(cat -> cat.getName().get(ENGLISH))
                 .sorted()
                 .collect(toList());
         assertThat(names).contains("jeans", "t-shirts");
@@ -136,7 +136,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
                 .collect(toList());
 
         final Function<Category, String> formatCategory = cat -> cat.getExternalId().orElse("")
-                + " " + cat.getName().get(ENGLISH).orElse("");
+                + " " + cat.getName().find(ENGLISH).orElse("");
         final String ancestorCategoriesString = ancestorReferences.stream()
                 .map(ref -> categoryTree.findById(ref.getId()).get())
                 .map(formatCategory)

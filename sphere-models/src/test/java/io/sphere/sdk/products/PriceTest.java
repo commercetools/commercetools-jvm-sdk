@@ -41,7 +41,7 @@ public class PriceTest {
         final Price price = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
         final DiscountedPrice discountedPrice = price.getDiscounted().get();
         final ProductDiscount productDiscount = discountedPrice.getDiscount().getObj().get();
-        assertThat(productDiscount.getName().get(Locale.ENGLISH).get()).isEqualTo("demo product discount");
+        assertThat(productDiscount.getName().get(Locale.ENGLISH)).isEqualTo("demo product discount");
         assertThat(productDiscount.getValue()).isInstanceOf(AbsoluteProductDiscountValue.class);
     }
 }

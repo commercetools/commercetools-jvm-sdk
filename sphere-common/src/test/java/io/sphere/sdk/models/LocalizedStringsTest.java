@@ -5,7 +5,6 @@ import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Locale;
-import java.util.Optional;
 
 import static java.lang.String.format;
 import static java.util.Arrays.asList;
@@ -25,26 +24,26 @@ public class LocalizedStringsTest {
     @Test
     public void createFromOneValue() throws Exception {
         final LocalizedStrings ls = LocalizedStrings.of(germanLocale, defaultString1);
-        assertThat(ls.get(germanLocale).get()).isEqualTo(defaultString1);
-        assertThat(ls.get(englishLocale)).isEqualTo(Optional.empty());
+        assertThat(ls.get(germanLocale)).isEqualTo(defaultString1);
+        assertThat(ls.get(englishLocale)).isNull();
     }
 
     @Test
     public void createFromTwoValues() throws Exception {
-        assertThat(localizedStrings.get(germanLocale).get()).isEqualTo(defaultString1);
-        assertThat(localizedStrings.get(englishLocale).get()).isEqualTo(defaultString2);
+        assertThat(localizedStrings.get(germanLocale)).isEqualTo(defaultString1);
+        assertThat(localizedStrings.get(englishLocale)).isEqualTo(defaultString2);
     }
 
     @Test
     public void createANewLocalizedStringsByAddingALocale() throws Exception {
         final LocalizedStrings ls = LocalizedStrings.of(germanLocale, defaultString1).plus(englishLocale, defaultString2);
-        assertThat(ls.get(germanLocale).get()).isEqualTo(defaultString1);
-        assertThat(ls.get(englishLocale).get()).isEqualTo(defaultString2);
+        assertThat(ls.get(germanLocale)).isEqualTo(defaultString1);
+        assertThat(ls.get(englishLocale)).isEqualTo(defaultString2);
     }
 
     @Test
     public void findTheFirstBestTranslation() throws Exception {
-        final String actual = localizedStrings.get(asList(frenchLocale, englishLocale, germanLocale)).get();
+        final String actual = localizedStrings.get(asList(frenchLocale, englishLocale, germanLocale));
         assertThat(actual).isEqualTo(defaultString2);
     }
 

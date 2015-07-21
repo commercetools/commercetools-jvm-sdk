@@ -4,23 +4,21 @@ import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.Optional;
-
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.utils.ImmutableMapBuilder;
 import io.sphere.sdk.utils.StringUtils;
 
+import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
 
-import static io.sphere.sdk.utils.IterableUtils.*;
+import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static io.sphere.sdk.utils.MapUtils.*;
 import static java.lang.String.format;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
-import static java.util.stream.Collectors.toMap;
 
 /**
  * A wrapper around an attribute which can be translated into a number of locales.
@@ -123,13 +121,23 @@ public class LocalizedStrings extends Base {
         return new LocalizedStrings(newMap);
     }
 
-    public Optional<String> get(final Locale locale) {
-        return Optional.ofNullable(translations.get(locale));
+    public Optional<String> find(final Locale locale) {
+        return Optional.ofNullable(get(locale));
     }
 
-    public Optional<String> get(final Iterable<Locale> locales) {
+    @Nullable
+    public String get(final Locale locale) {
+        return translations.get(locale);
+    }
+
+    public Optional<String> find(final Iterable<Locale> locales) {
         final Optional<Locale> firstFoundLocale = toStream(locales).filter(locale -> translations.containsKey(locale)).findFirst();
-        return firstFoundLocale.flatMap(foundLocale -> get(foundLocale));
+        return firstFoundLocale.map(foundLocale -> get(foundLocale));
+    }
+
+    @Nullable
+    public String get(final Iterable<Locale> locales) {
+        return find(locales).orElse(null);
     }
 
     /**

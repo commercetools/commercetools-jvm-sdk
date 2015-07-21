@@ -16,14 +16,14 @@ public class LocalizedStringsAssert extends AbstractAssert<LocalizedStringsAsser
     }
 
     public LocalizedStringsAssert contains(final Locale locale, final String value) {
-        if (!value.equals(actual.get(locale).orElse(null))) {
+        if (!value.equals(actual.get(locale))) {
             failWithMessage(String.format("%s does not contain an entry %s -> %s", actual, locale, value));
         }
         return this;
     }
 
     public LocalizedStringsAssert doesNotContain(final Locale locale, final String value) {
-        if (value.equals(actual.get(locale).orElse(null))) {
+        if (value.equals(actual.get(locale))) {
             failWithMessage(String.format("%s does contain an entry %s -> %s", actual, locale, value));
         }
         return this;

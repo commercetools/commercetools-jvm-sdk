@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
-import static io.sphere.sdk.utils.ListUtils.*;
+import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.stream.Collectors.toList;
 
 public class StringQuerySortingModel<T> extends QueryModelImpl<T> implements QuerySortingModel<T>, StringQueryModel<T> {

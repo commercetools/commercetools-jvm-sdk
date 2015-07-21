@@ -3,22 +3,23 @@ package io.sphere.sdk.models;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 final class ImageImpl extends Base implements Image {
     private final String url;
     private final ImageDimensions dimensions;
-    private final Optional<String> label;
+    @Nullable
+    private final String label;
 
     @JsonCreator
-    private ImageImpl(final String url, final ImageDimensions dimensions, final Optional<String> label) {
+    private ImageImpl(final String url, final ImageDimensions dimensions, final String label) {
         this.url = url;
         this.dimensions = dimensions;
         this.label = label;
     }
 
     @JsonIgnore
-    public static Image of(final String url, final ImageDimensions dimensions, final Optional<String> label) {
+    public static Image of(final String url, final ImageDimensions dimensions, final String label) {
         return new ImageImpl(url, dimensions, label);
     }
 
@@ -32,8 +33,9 @@ final class ImageImpl extends Base implements Image {
         return dimensions;
     }
 
+    @Nullable
     @Override
-    public Optional<String> getLabel() {
+    public String getLabel() {
         return label;
     }
 }

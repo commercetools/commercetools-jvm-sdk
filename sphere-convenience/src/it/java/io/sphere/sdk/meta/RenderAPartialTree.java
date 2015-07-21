@@ -39,7 +39,7 @@ public final class RenderAPartialTree {
 
     private static void appendToBuilder(final Identifiable<Category> categoryReference, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level, final Category selectedCategory) {
         final Category category = categoryTree.findById(categoryReference.getId()).get();
-        final String name = category.getName().get(ENGLISH).get();
+        final String name = category.getName().get(ENGLISH);
         final String externalId = category.getExternalId().get();
         final String offset = StringUtils.repeat(' ', level * 4);
 
