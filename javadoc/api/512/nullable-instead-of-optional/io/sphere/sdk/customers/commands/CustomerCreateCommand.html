@@ -171,9 +171,9 @@ assertThat(customer.getCompanyName()).contains(companyName);
 assertThat(customer.getVatId()).contains(vatId);
 assertThat(customer.isEmailVerified()).isEqualTo(emailVerified);
 assertThat(customer.getCustomerGroup()).contains(customerGroup.toReference());
-assertThat(customer.getAddresses().stream().map(a -&gt; a.withId(Optional.empty())).collect(toList())).isEqualTo(addresses);
-assertThat(customer.getDefaultBillingAddress().get().withId(Optional.empty())).isEqualTo(addresses.get(0));
-assertThat(customer.getDefaultShippingAddress().get().withId(Optional.empty())).isEqualTo(addresses.get(1));
+assertThat(customer.getAddresses().stream().map(a -&gt; a.withId(null)).collect(toList())).isEqualTo(addresses);
+assertThat(customer.getDefaultBillingAddress().get().withId(null)).isEqualTo(addresses.get(0));
+assertThat(customer.getDefaultShippingAddress().get().withId(null)).isEqualTo(addresses.get(1));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
 
  <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomerWithCart--%s" class=code-example><pre><code class='java'>final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));
