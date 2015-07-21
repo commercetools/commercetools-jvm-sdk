@@ -193,7 +193,7 @@ final CompletionStage&lt;List&lt;Category&gt;&gt; categoriesStage =
 final List&lt;Category&gt; categories = categoriesStage.toCompletableFuture().join();
 assertThat(categories)
         .hasSize(15)
-        .matches(cats -&gt; cats.parallelStream().anyMatch(cat -&gt; cat.getSlug().get(ENGLISH).get().equals("boots-women")));
+        .matches(cats -&gt; cats.parallelStream().anyMatch(cat -&gt; cat.getSlug().get(ENGLISH).equals("boots-women")));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
  <h4>Fetch all with predicate</h4>
  Sometimes you want to fetch just the root categories to delete them all:
@@ -245,7 +245,7 @@ assertThat(clothingWomenOptional.get().getSlug().get(ENGLISH)).contains("womens-
 final Category clothingWomen = clothingWomenOptional.get();
 final List&lt;Category&gt; clothingWomenSubcategories = categoryTree.findChildren(clothingWomen);
 final List&lt;String&gt; names = clothingWomenSubcategories.stream()
-        .map(cat -&gt; cat.getName().get(ENGLISH).get())
+        .map(cat -&gt; cat.getName().get(ENGLISH))
         .sorted()
         .collect(toList());
 assertThat(names).contains("jeans", "t-shirts");
@@ -294,7 +294,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
     private static void appendToBuilder(final Category category, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level) {
-        final String name = category.getName().get(ENGLISH).get();
+        final String name = category.getName().get(ENGLISH);
         final String externalId = category.getExternalId().get();
         final String offset = StringUtils.repeat(' ', level * 4);
         stringBuilder.append(offset).append(externalId).append(" ").append(name).append("\n");
@@ -315,7 +315,7 @@ final List&lt;Reference&lt;Category&gt;&gt; ancestorReferences = currentCategory
         .collect(toList());
 
 final Function&lt;Category, String&gt; formatCategory = cat -&gt; cat.getExternalId().orElse("")
-        + " " + cat.getName().get(ENGLISH).orElse("");
+        + " " + cat.getName().find(ENGLISH).orElse("");
 final String ancestorCategoriesString = ancestorReferences.stream()
         .map(ref -&gt; categoryTree.findById(ref.getId()).get())
         .map(formatCategory)
@@ -361,7 +361,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
     private static void appendToBuilder(final Identifiable&lt;Category&gt; categoryReference, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level, final Category selectedCategory) {
         final Category category = categoryTree.findById(categoryReference.getId()).get();
-        final String name = category.getName().get(ENGLISH).get();
+        final String name = category.getName().get(ENGLISH);
         final String externalId = category.getExternalId().get();
         final String offset = StringUtils.repeat(' ', level * 4);
 

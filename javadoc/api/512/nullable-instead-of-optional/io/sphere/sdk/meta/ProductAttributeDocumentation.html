@@ -441,24 +441,23 @@ final MonetaryAmountFormat moneyFormat = MonetaryFormats.getAmountFormat(US);
 
 final Function&lt;Attribute, Optional&lt;Pair&lt;String, String&gt;&gt;&gt; attributeValueExtractor = attribute -&gt; {
     final Optional&lt;String&gt; extractedResult = AttributeExtraction.&lt;String&gt;of(productType, attribute)
-            .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -&gt; v.getLabel().get(ENGLISH).orElse(""))
+            .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -&gt; v.getLabel().find(ENGLISH).orElse(""))
             .ifIs(AttributeAccess.ofPlainEnumValue(), v -&gt; v.getLabel())
             .ifIs(AttributeAccess.ofLocalizedEnumValueSet(), v -&gt;
                     v.stream()
                             .map(x -&gt; x.getLabel().get(ENGLISH))
-                            .filter(x -&gt; x.isPresent())
-                            .map(x -&gt; x.get())
+                            .filter(x -&gt; x != null)
                             .collect(joining(", ")))
             .ifIs(AttributeAccess.ofProductReferenceSet(), set -&gt; set.stream()
                     .map(productReference -&gt; productReference.getObj()
-                            .map(prod -&gt; prod.getMasterData().getStaged().getName().get(ENGLISH).orElse(""))
+                            .map(prod -&gt; prod.getMasterData().getStaged().getName().find(ENGLISH).orElse(""))
                             .orElse(productReference.getId()))
                     .collect(joining(", ")))
             .ifIs(AttributeAccess.ofMoney(), money -&gt; moneyFormat.format(money))
             .ifIs(AttributeAccess.ofDate(), date -&gt; date.toString())
             .getValue();
     final Optional&lt;Pair&lt;String, String&gt;&gt; tableRowData = extractedResult.map(value -&gt; {
-        final String label = productType.getAttribute(attribute.getName()).get().getLabel().get(ENGLISH).get();
+        final String label = productType.getAttribute(attribute.getName()).get().getLabel().get(ENGLISH);
         return ImmutablePair.of(label, value);
     });
     return tableRowData;
