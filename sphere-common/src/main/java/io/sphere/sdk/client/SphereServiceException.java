@@ -6,7 +6,6 @@ import io.sphere.sdk.models.SphereException;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
-import java.util.function.Function;
 
 /**
  *
@@ -42,7 +41,9 @@ public abstract class SphereServiceException extends SphereException {
 
     @Nullable
     public final JsonNode getJsonBody() {
-        final Function<byte[], JsonNode> f = body -> SphereJsonUtils.parse(body);
-        return httpResponse.flatMap(r -> Optional.ofNullable(r.getResponseBody()).map(f)).orElse(null);
+        return Optional.ofNullable(httpResponse)
+                .map(r -> r.getResponseBody())
+                .map(body -> SphereJsonUtils.parse(body))
+                .orElse(null);
     }
 }
