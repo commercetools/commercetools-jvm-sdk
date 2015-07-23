@@ -360,7 +360,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                     .ifIs(AttributeAccess.ofDate(), date -> date.toString())
                     .findValue();
             final Optional<Pair<String, String>> tableRowData = extractedResult.map(value -> {
-                final String label = productType.getAttribute(attribute.getName()).get().getLabel().get(ENGLISH);
+                final String label = productType.getAttribute(attribute.getName()).getLabel().get(ENGLISH);
                 return ImmutablePair.of(label, value);
             });
             return tableRowData;

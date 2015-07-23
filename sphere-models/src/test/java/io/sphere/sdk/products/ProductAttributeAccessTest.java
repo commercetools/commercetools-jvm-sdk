@@ -103,7 +103,7 @@ public class ProductAttributeAccessTest {
     private String map(final Attribute attr) {
         final MetaProductType metaProductType = MetaProductType.of(asList(productType));
         final Locale locale = Locale.GERMAN;
-        final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName()).get();
+        final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName());
         return AttributeExtraction.<String>of(attrDefinition, attr)
                 .ifIs(ofLocalizedStrings(), lString -> lString.find(locale).orElse("<no translation found>"))
                 .ifGuarded(ofString(), s -> s.length() > 2000 ? Optional.empty() : Optional.of(s))

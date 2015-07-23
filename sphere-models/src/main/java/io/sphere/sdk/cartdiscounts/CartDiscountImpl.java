@@ -48,8 +48,8 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     }
 
     @Override
-    public Optional<LocalizedStrings> getDescription() {
-        return Optional.ofNullable(description);
+    public LocalizedStrings getDescription() {
+        return description;
     }
 
     @Override
@@ -83,13 +83,13 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     }
 
     @Override
-    public Optional<ZonedDateTime> getValidFrom() {
-        return Optional.ofNullable(validFrom);
+    public ZonedDateTime getValidFrom() {
+        return validFrom;
     }
 
     @Override
-    public Optional<ZonedDateTime> getValidUntil() {
-        return Optional.ofNullable(validUntil);
+    public ZonedDateTime getValidUntil() {
+        return validUntil;
     }
 
     @Override
