@@ -1,18 +1,18 @@
 package io.sphere.sdk.search;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class LocalizedEnumSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> {
 
-    public LocalizedEnumSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
+    public LocalizedEnumSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public StringSearchModel<T, S> key() {
-        return new StringSearchModel<>(Optional.of(this), "key");
+        return new StringSearchModel<>(this, "key");
     }
 
     public LocalizedStringsSearchModel<T, S> label() {
-        return new LocalizedStringsSearchModel<>(Optional.of(this), "label");
+        return new LocalizedStringsSearchModel<>(this, "label");
     }
 }

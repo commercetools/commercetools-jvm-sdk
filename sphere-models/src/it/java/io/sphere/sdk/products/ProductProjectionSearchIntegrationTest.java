@@ -203,8 +203,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.of(STAGED)
                 .plusFilterQuery(filter)
                 .withSort(sort)
-                .withOffset(1)
-                .withLimit(1));
+                .withOffset(1L)
+                .withLimit(1L));
         assertThat(resultsToIds(result)).containsOnly(product2.getId());
     }
 
@@ -302,7 +302,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void paginationExample() {
-        final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.of(STAGED).withOffset(50).withLimit(25));
+        final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.of(STAGED).withOffset(50L).withLimit(25L));
         assertThat(result.getOffset()).isEqualTo(50);
         assertThat(result.getResults().size()).isEqualTo(min(25, max(result.getTotal() - 50, 0)));
     }

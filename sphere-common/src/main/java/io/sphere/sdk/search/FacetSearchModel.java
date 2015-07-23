@@ -1,5 +1,6 @@
 package io.sphere.sdk.search;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 import static java.util.Arrays.asList;
@@ -8,20 +9,20 @@ public class FacetSearchModel<T, V> extends SearchModelImpl<T> {
     protected final Optional<String> alias;
     protected final TypeSerializer<V> typeSerializer;
 
-    FacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer, final Optional<String> alias) {
+    FacetSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment, final TypeSerializer<V> typeSerializer, final Optional<String> alias) {
         super(parent, pathSegment);
         this.alias = alias;
         this.typeSerializer = typeSerializer;
     }
 
-    FacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
+    FacetSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment, final TypeSerializer<V> typeSerializer) {
         super(parent, pathSegment);
         this.alias = Optional.empty();
         this.typeSerializer = typeSerializer;
     }
 
     public FacetSearchModel<T, V> withAlias(final Optional<String> alias) {
-        return new FacetSearchModel<>(Optional.of(this), Optional.empty(), typeSerializer, alias);
+        return new FacetSearchModel<>(this, null, typeSerializer, alias);
     }
 
     public FacetSearchModel<T, V> withAlias(final String alias) {

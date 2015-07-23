@@ -76,6 +76,6 @@ public class SearchExpressionTest {
 
 
     private SearchModel<Object> model() {
-        return new SearchModelImpl<>(Optional.empty(), "variants").appended("attributes").appended("size");
+        return new SearchModelImpl<>(null, "variants").appended("attributes").appended("size");
     }
 }

@@ -1,22 +1,23 @@
 package io.sphere.sdk.search;
 
+import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 import java.util.Optional;
 
 public class CurrencySearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements TermModel<T, CurrencyUnit>, SearchSortingModel<T, S> {
 
-    public CurrencySearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
+    public CurrencySearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     @Override
     public FilterSearchModel<T, CurrencyUnit> filterBy() {
-        return new FilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofCurrency());
+        return new FilterSearchModel<>(this, null, TypeSerializer.ofCurrency());
     }
 
     @Override
     public FacetSearchModel<T, CurrencyUnit> facetOf() {
-        return new FacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofCurrency());
+        return new FacetSearchModel<>(this, null, TypeSerializer.ofCurrency());
     }
 
     @Override

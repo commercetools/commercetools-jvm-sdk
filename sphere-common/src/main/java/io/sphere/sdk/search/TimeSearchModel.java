@@ -1,22 +1,23 @@
 package io.sphere.sdk.search;
 
+import javax.annotation.Nullable;
 import java.time.LocalTime;
 import java.util.Optional;
 
 public class TimeSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements RangeTermModel<T, LocalTime>, SearchSortingModel<T, S> {
 
-    public TimeSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
+    public TimeSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     @Override
     public RangedFilterSearchModel<T, LocalTime> filterBy() {
-        return new RangedFilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofTime());
+        return new RangedFilterSearchModel<>(this, null, TypeSerializer.ofTime());
     }
 
     @Override
     public RangedFacetSearchModel<T, LocalTime> facetOf() {
-        return new RangedFacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofTime());
+        return new RangedFacetSearchModel<>(this, null, TypeSerializer.ofTime());
     }
 
     @Override
