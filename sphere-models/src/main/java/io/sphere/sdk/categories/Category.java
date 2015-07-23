@@ -2,7 +2,6 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.Optional;
 
 import io.sphere.sdk.models.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -29,15 +28,19 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug, Met
 
     LocalizedStrings getSlug();
 
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     List<Reference<Category>> getAncestors();
 
-    Optional<Reference<Category>> getParent();
+    @Nullable
+    Reference<Category> getParent();
 
-    Optional<String> getOrderHint();
+    @Nullable
+    String getOrderHint();
 
-    Optional<String> getExternalId();
+    @Nullable
+    String getExternalId();
 
     @Nullable
     @Override

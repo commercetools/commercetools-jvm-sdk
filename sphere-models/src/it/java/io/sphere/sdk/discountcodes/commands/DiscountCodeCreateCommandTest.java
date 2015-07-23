@@ -24,8 +24,8 @@ public class DiscountCodeCreateCommandTest extends IntegrationTest {
                     .withMaxApplicationsPerCustomer(1);
             final DiscountCode discountCode = execute(DiscountCodeCreateCommand.of(draft));
             assertThat(discountCode.getCode()).isEqualTo(code);
-            assertThat(discountCode.getName()).contains(en(DiscountCodeCreateCommandTest.class.getName()));
-            assertThat(discountCode.getDescription()).contains(en("sample discount code descr."));
+            assertThat(discountCode.getName()).isEqualTo(en(DiscountCodeCreateCommandTest.class.getName()));
+            assertThat(discountCode.getDescription()).isEqualTo(en("sample discount code descr."));
             assertThat(discountCode.getCartDiscounts()).isEqualTo(asList(cartDiscount.toReference()));
             assertThat(discountCode.getCartPredicate()).contains("1 = 1");
             assertThat(discountCode.isActive()).isEqualTo(false);

@@ -4,17 +4,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class ProductDiscountDraft extends Base {
     private final ProductDiscountPredicate predicate;
     private final LocalizedStrings name;
     private final String sortOrder;
     private final ProductDiscountValue value;
-    private final Optional<LocalizedStrings> description;
+    private final LocalizedStrings description;
     private final boolean active;
 
-    private ProductDiscountDraft(final LocalizedStrings name, final Optional<LocalizedStrings> description, final ProductDiscountPredicate predicate, final ProductDiscountValue value, final String sortOrder, final boolean active) {
+    private ProductDiscountDraft(final LocalizedStrings name, final LocalizedStrings description, final ProductDiscountPredicate predicate, final ProductDiscountValue value, final String sortOrder, final boolean active) {
         this.active = active;
         this.predicate = predicate;
         this.name = name;
@@ -28,7 +28,8 @@ public class ProductDiscountDraft extends Base {
         return active;
     }
 
-    public Optional<LocalizedStrings> getDescription() {
+    @Nullable
+    public LocalizedStrings getDescription() {
         return description;
     }
 
@@ -48,7 +49,7 @@ public class ProductDiscountDraft extends Base {
         return value;
     }
 
-    public static ProductDiscountDraft of(final LocalizedStrings name, final Optional<LocalizedStrings> description, final ProductDiscountPredicate predicate, final ProductDiscountValue value, final String sortOrder, final boolean active) {
+    public static ProductDiscountDraft of(final LocalizedStrings name, final LocalizedStrings description, final ProductDiscountPredicate predicate, final ProductDiscountValue value, final String sortOrder, final boolean active) {
         return new ProductDiscountDraft(name, description, predicate, value, sortOrder, active);
     }
 }

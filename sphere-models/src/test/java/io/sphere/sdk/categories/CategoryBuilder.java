@@ -22,13 +22,20 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
     protected ZonedDateTime lastModifiedAt = ZonedDateTime.now();
     private LocalizedStrings name;
     private LocalizedStrings slug;
-    private Optional<LocalizedStrings> description = Optional.empty();
+    @Nullable
+    private LocalizedStrings description;
     private List<Reference<Category>> ancestors = Collections.emptyList();
-    private Optional<Reference<Category>> parent = Optional.empty();
-    private Optional<String> orderHint = Optional.empty();
-    private Optional<String> externalId = Optional.empty();
+    @Nullable
+    private Reference<Category> parent;
+    @Nullable
+    private String orderHint;
+    @Nullable
+    private String externalId;
+    @Nullable
     private LocalizedStrings metaTitle;
+    @Nullable
     private LocalizedStrings metaDescription;
+    @Nullable
     private LocalizedStrings metaKeywords;
 
     public static CategoryBuilder of(final String id, final LocalizedStrings name, final LocalizedStrings slug) {
@@ -60,13 +67,8 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
         return this;
     }
 
-    public CategoryBuilder description(final Optional<LocalizedStrings> description) {
+    public CategoryBuilder description(@Nullable final LocalizedStrings description) {
         this.description = description;
-        return this;
-    }
-
-    public CategoryBuilder description(final LocalizedStrings description) {
-        this.description = Optional.ofNullable(description);
         return this;
     }
 
@@ -75,30 +77,17 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
         return this;
     }
 
-    public CategoryBuilder parent(final Optional<Reference<Category>> parent) {
-        this.parent = parent;
+    public CategoryBuilder parent(@Nullable final Referenceable<Category> parent) {
+        this.parent = Optional.ofNullable(parent).map(x -> x.toReference()).orElse(null);
         return this;
     }
 
-    public CategoryBuilder parent(final Referenceable<Category> parent) {
-        this.parent = Optional.ofNullable(parent.toReference());
-        return this;
-    }
-
-    public CategoryBuilder orderHint(final String orderHint) {
-        return orderHint(Optional.ofNullable(orderHint));
-    }
-
-    public CategoryBuilder orderHint(final Optional<String> orderHint) {
+    public CategoryBuilder orderHint(@Nullable final String orderHint) {
         this.orderHint = orderHint;
         return this;
     }
-    
-    public CategoryBuilder externalId(final String externalId) {
-        return externalId(Optional.ofNullable(externalId));
-    }
 
-    public CategoryBuilder externalId(final Optional<String> externalId) {
+    public CategoryBuilder externalId(@Nullable final String externalId) {
         this.externalId = externalId;
         return this;
     }

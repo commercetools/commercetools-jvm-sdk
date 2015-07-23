@@ -4,7 +4,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.Set;
 
 /**
@@ -15,13 +15,17 @@ import java.util.Set;
 public class StateDraft extends Base {
     private final String key;
     private final StateType type;
-    private final Optional<LocalizedStrings> name;
-    private final Optional<LocalizedStrings> description;
-    private final Optional<Boolean> initial;
-    private final Optional<Set<Reference<State>>> transitions;
+    @Nullable
+    private final LocalizedStrings name;
+    @Nullable
+    private final LocalizedStrings description;
+    @Nullable
+    private final Boolean initial;
+    @Nullable
+    private final Set<Reference<State>> transitions;
 
-    StateDraft(String key, StateType type, Optional<LocalizedStrings> name, Optional<LocalizedStrings> description,
-               Optional<Boolean> initial, Optional<Set<Reference<State>>> transitions) {
+    StateDraft(String key, StateType type, LocalizedStrings name, LocalizedStrings description,
+               Boolean initial, Set<Reference<State>> transitions) {
         this.key = key;
         this.type = type;
         this.name = name;
@@ -31,7 +35,7 @@ public class StateDraft extends Base {
     }
 
     public static StateDraft of(final String key, final StateType type) {
-        return new StateDraft(key, type, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        return new StateDraft(key, type, null, null, null, null);
     }
 
     public String getKey() {
@@ -42,19 +46,19 @@ public class StateDraft extends Base {
         return type;
     }
 
-    public Optional<LocalizedStrings> getName() {
+    public LocalizedStrings getName() {
         return name;
     }
 
-    public Optional<LocalizedStrings> getDescription() {
+    public LocalizedStrings getDescription() {
         return description;
     }
 
-    public Optional<Boolean> isInitial() {
+    public Boolean isInitial() {
         return initial;
     }
 
-    public Optional<Set<Reference<State>>> getTransitions() {
+    public Set<Reference<State>> getTransitions() {
         return transitions;
     }
 
@@ -66,12 +70,8 @@ public class StateDraft extends Base {
         return StateDraftBuilder.of(this).description(description).build();
     }
 
-    public StateDraft withTransitions(final Optional<Set<Reference<State>>> transitions) {
+    public StateDraft withTransitions(@Nullable final Set<Reference<State>> transitions) {
         return StateDraftBuilder.of(this).transitions(transitions).build();
-    }
-
-    public StateDraft withTransitions(final Set<Reference<State>> transitions) {
-        return withTransitions(Optional.of(transitions));
     }
 
     public StateDraft withInitial(final boolean initial) {

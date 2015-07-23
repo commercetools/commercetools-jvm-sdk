@@ -8,6 +8,7 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Set;
 
@@ -30,7 +31,8 @@ public interface LineItem extends LineItemLike {
 
     Optional<Reference<Channel>> getDistributionChannel();
 
-    Optional<LocalizedStrings> getProductSlug();
+    @Nullable
+    LocalizedStrings getProductSlug();
 
     @Override
     String getId();

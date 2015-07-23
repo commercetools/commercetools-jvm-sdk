@@ -7,7 +7,7 @@ import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.Set;
 
 /** A State represents a state of a particular entity (defines a finite state machine). States can be combined together
@@ -28,15 +28,18 @@ public interface State extends DefaultModel<State> {
 
     StateType getType();
 
-    Optional<LocalizedStrings> getName();
+    @Nullable
+    LocalizedStrings getName();
 
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     boolean isInitial();
 
     boolean isBuiltIn();
 
-    Optional<Set<Reference<State>>> getTransitions();
+    @Nullable
+    Set<Reference<State>> getTransitions();
 
     default Reference<State> toReference() {
         return Reference.of(typeId(), getId(), this);

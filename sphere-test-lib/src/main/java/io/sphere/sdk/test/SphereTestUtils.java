@@ -65,10 +65,6 @@ public final class SphereTestUtils {
         return localizedStrings.get(ENGLISH);
     }
 
-    public static String en(final Optional<LocalizedStrings> localizedStringsOption) {
-        return localizedStringsOption.get().get(ENGLISH);
-    }
-
     public static String englishSlugOf(final WithLocalizedSlug model) {
         return model.getSlug().get(ENGLISH);
     }

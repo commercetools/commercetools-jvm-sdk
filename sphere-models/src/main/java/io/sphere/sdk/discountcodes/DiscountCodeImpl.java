@@ -57,8 +57,9 @@ final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements D
     }
 
     @Override
-    public Optional<LocalizedStrings> getDescription() {
-        return Optional.ofNullable(description);
+    @Nullable
+    public LocalizedStrings getDescription() {
+        return description;
     }
 
     @Override
@@ -77,8 +78,9 @@ final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements D
     }
 
     @Override
-    public Optional<LocalizedStrings> getName() {
-        return Optional.ofNullable(name);
+    @Nullable
+    public LocalizedStrings getName() {
+        return name;
     }
 
     @Override

@@ -7,6 +7,7 @@ import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,7 +19,8 @@ public interface DiscountCode extends DefaultModel<DiscountCode> {
 
     String getCode();
 
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     boolean isActive();
 
@@ -26,7 +28,8 @@ public interface DiscountCode extends DefaultModel<DiscountCode> {
 
     Optional<Long> getMaxApplicationsPerCustomer();
 
-    Optional<LocalizedStrings> getName();
+    @Nullable
+    LocalizedStrings getName();
 
     List<Reference<Object>> getReferences();
 

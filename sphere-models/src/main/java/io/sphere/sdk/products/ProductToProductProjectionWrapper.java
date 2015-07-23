@@ -7,6 +7,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -42,7 +43,8 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     }
 
     @Override
-    public Optional<LocalizedStrings> getDescription() {
+    @Nullable
+    public LocalizedStrings getDescription() {
         return productData.getDescription();
     }
 

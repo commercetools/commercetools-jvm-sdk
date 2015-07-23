@@ -1,6 +1,5 @@
 package io.sphere.sdk.products;
 
-import java.util.Optional;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.MetaAttributes;
@@ -25,7 +24,8 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
 
     LocalizedStrings getSlug();
 
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     Set<Reference<Category>> getCategories();
 

@@ -29,7 +29,7 @@ public class CategoryQueryTest extends IntegrationTest {
     @Test
     public void queryByExternalId() throws Exception {
         withCategory(client(), category -> {
-            final String externalId = category.getExternalId().get();
+            final String externalId = category.getExternalId();
 
             final Query<Category> query = CategoryQuery.of().byExternalId(externalId);
             assertThat(execute(query).head().get().getId()).isEqualTo(category.getId());

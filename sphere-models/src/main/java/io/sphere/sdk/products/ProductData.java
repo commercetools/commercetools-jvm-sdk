@@ -23,7 +23,8 @@ public interface ProductData extends ProductDataLike {
     Set<Reference<Category>> getCategories();
 
     @Override
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     @Override
     LocalizedStrings getSlug();

@@ -51,28 +51,22 @@ public class DiscountCodeDraft extends Base {
         return DiscountCodeDraftBuilder.of(code, cartDiscounts).build();
     }
 
-    public DiscountCodeDraft withName(final Optional<LocalizedStrings> name) {
+    public DiscountCodeDraft withName(@Nullable final LocalizedStrings name) {
         return builder(this).name(name).build();
     }
 
-    public DiscountCodeDraft withName(final LocalizedStrings name) {
-        return withName(Optional.of(name));
+    @Nullable
+    public LocalizedStrings getName() {
+        return name;
     }
 
-    public Optional<LocalizedStrings> getName() {
-        return Optional.ofNullable(name);
-    }
-
-    public DiscountCodeDraft withDescription(final Optional<LocalizedStrings> description) {
+    public DiscountCodeDraft withDescription(@Nullable final LocalizedStrings description) {
         return builder(this).description(description).build();
     }
 
-    public DiscountCodeDraft withDescription(final LocalizedStrings description) {
-        return withDescription(Optional.of(description));
-    }
-
-    public Optional<LocalizedStrings> getDescription() {
-        return Optional.ofNullable(description);
+    @Nullable
+    public LocalizedStrings getDescription() {
+        return description;
     }
 
     public DiscountCodeDraft withCode(final String code) {

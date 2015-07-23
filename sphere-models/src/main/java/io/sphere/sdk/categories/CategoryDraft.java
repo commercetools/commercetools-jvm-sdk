@@ -1,11 +1,11 @@
 package io.sphere.sdk.categories;
 
-import java.util.Optional;
-
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
+
+import javax.annotation.Nullable;
 
 /**
  * Template for a new category.
@@ -15,14 +15,18 @@ import io.sphere.sdk.models.WithLocalizedSlug;
 public class CategoryDraft extends Base implements WithLocalizedSlug {
     private final LocalizedStrings name;
     private final LocalizedStrings slug;
-    private final Optional<LocalizedStrings> description;
-    private final Optional<Reference<Category>> parent;
-    private final Optional<String> orderHint;
-    private final Optional<String> externalId;
+    @Nullable
+    private final LocalizedStrings description;
+    @Nullable
+    private final Reference<Category> parent;
+    @Nullable
+    private final String orderHint;
+    @Nullable
+    private final String externalId;
 
     CategoryDraft(final LocalizedStrings name, final LocalizedStrings slug,
-                final Optional<LocalizedStrings> description, final Optional<Reference<Category>> parent,
-                final Optional<String> orderHint, final Optional<String> externalId) {
+                  @Nullable final LocalizedStrings description, @Nullable final Reference<Category> parent,
+                  @Nullable final String orderHint, @Nullable final String externalId) {
         this.name = name;
         this.slug = slug;
         this.description = description;
@@ -40,19 +44,23 @@ public class CategoryDraft extends Base implements WithLocalizedSlug {
         return slug;
     }
 
-    public Optional<LocalizedStrings> getDescription() {
+    @Nullable
+    public LocalizedStrings getDescription() {
         return description;
     }
 
-    public Optional<Reference<Category>> getParent() {
+    @Nullable
+    public Reference<Category> getParent() {
         return parent;
     }
 
-    public Optional<String> getOrderHint() {
+    @Nullable
+    public String getOrderHint() {
         return orderHint;
     }
 
-    public Optional<String> getExternalId() {
+    @Nullable
+    public String getExternalId() {
         return externalId;
     }
 }

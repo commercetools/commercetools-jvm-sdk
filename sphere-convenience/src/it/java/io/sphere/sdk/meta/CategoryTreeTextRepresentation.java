@@ -11,7 +11,7 @@ import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public final class CategoryTreeTextRepresentation {
-    private static final Comparator<Category> EXTERNALID_COMPARATOR = Comparator.comparing(c -> Integer.parseInt(c.getExternalId().get()));
+    private static final Comparator<Category> EXTERNALID_COMPARATOR = Comparator.comparing(c -> Integer.parseInt(c.getExternalId()));
 
     private CategoryTreeTextRepresentation() {
     }
@@ -46,7 +46,7 @@ public final class CategoryTreeTextRepresentation {
 
     private static void appendToBuilder(final Category category, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level) {
         final String name = category.getName().get(ENGLISH);
-        final String externalId = category.getExternalId().get();
+        final String externalId = category.getExternalId();
         final String offset = StringUtils.repeat(' ', level * 4);
         stringBuilder.append(offset).append(externalId).append(" ").append(name).append("\n");
         final List<Category> children = categoryTree.findChildren(category);

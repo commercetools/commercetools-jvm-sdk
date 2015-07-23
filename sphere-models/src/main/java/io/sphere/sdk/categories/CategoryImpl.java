@@ -8,16 +8,19 @@ import io.sphere.sdk.models.Reference;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 class CategoryImpl extends DefaultModelImpl<Category> implements Category {
     private final LocalizedStrings name;
     private final LocalizedStrings slug;
-    private final Optional<LocalizedStrings> description;
+    @Nullable
+    private final LocalizedStrings description;
     private final List<Reference<Category>> ancestors;
-    private final Optional<Reference<Category>> parent;
-    private final Optional<String> orderHint;
-    private final Optional<String> externalId;
+    @Nullable
+    private final Reference<Category> parent;
+    @Nullable
+    private final String orderHint;
+    @Nullable
+    private final String externalId;
     @Nullable
     private final LocalizedStrings metaTitle;
     @Nullable
@@ -32,10 +35,10 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
                  final ZonedDateTime lastModifiedAt,
                  final LocalizedStrings name,
                  final LocalizedStrings slug,
-                 final Optional<LocalizedStrings> description,
+                 @Nullable final LocalizedStrings description,
                  final List<Reference<Category>> ancestors,
-                 final Optional<Reference<Category>> parent,
-                 final Optional<String> orderHint, final Optional<String> externalId,
+                 @Nullable final Reference<Category> parent,
+                 @Nullable final String orderHint, @Nullable final String externalId,
                  final LocalizedStrings metaTitle, final LocalizedStrings metaDescription, final LocalizedStrings metaKeywords) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
@@ -60,28 +63,33 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
         return slug;
     }
 
+    @Nullable
     @Override
-    public Optional<LocalizedStrings> getDescription() {
+    public LocalizedStrings getDescription() {
         return description;
     }
 
+    @Nullable
     @Override
     public List<Reference<Category>> getAncestors() {
         return ancestors;
     }
 
+    @Nullable
     @Override
-    public Optional<Reference<Category>> getParent() {
+    public Reference<Category> getParent() {
         return parent;
     }
 
+    @Nullable
     @Override
-    public Optional<String> getOrderHint() {
+    public String getOrderHint() {
         return orderHint;
     }
 
+    @Nullable
     @Override
-    public Optional<String> getExternalId() {
+    public String getExternalId() {
         return externalId;
     }
 

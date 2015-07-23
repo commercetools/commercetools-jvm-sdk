@@ -98,8 +98,8 @@ public class CategoryTreeTest {
             childIds.stream().forEach(childId -> {
                     final Category child = new CategoryWrapper(newOrphanCategory(parent.getId() + childId)) {
                         @Override
-                        public Optional<Reference<Category>> getParent() {
-                            return Optional.<Reference<Category>>of(parent.toReference());
+                        public Reference<Category> getParent() {
+                            return parent.toReference();
                         }
                     };
                     children.add(child);

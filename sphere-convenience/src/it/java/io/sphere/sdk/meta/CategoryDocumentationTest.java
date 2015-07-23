@@ -52,11 +52,12 @@ import static java.util.Locale.GERMAN;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.StringUtils.defaultString;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryDocumentationTest extends IntegrationTest {
 
-    private static final Comparator<Category> EXTERNALID_COMPARATOR = Comparator.comparing(c -> Integer.parseInt(c.getExternalId().get()));
+    private static final Comparator<Category> EXTERNALID_COMPARATOR = Comparator.comparing(c -> Integer.parseInt(c.getExternalId()));
     private static List<Category> categories;
     private static CategoryTree tree;
 
@@ -87,7 +88,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
         final CompletionStage<List<Category>> categoriesStage =
                 ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
         final List<Category> rootCategories = categoriesStage.toCompletableFuture().join();
-        assertThat(rootCategories.stream().allMatch(cat -> !cat.getParent().isPresent()))
+        assertThat(rootCategories.stream().allMatch(cat -> cat.getParent() == null))
                 .overridingErrorMessage("fetched only root categories")
                 .isTrue();
     }
@@ -102,7 +103,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
         assertThat(categoryTree.findBySlug(ENGLISH, "not-existing-slug")).isEmpty();
 
         //find by ID
-        final Reference<Category> clothingWomenReference = jeansWomenOptional.get().getParent().get();
+        final Reference<Category> clothingWomenReference = jeansWomenOptional.get().getParent();
         final Optional<Category> clothingWomenOptional = categoryTree.findById(clothingWomenReference.getId());
         assertThat(clothingWomenOptional).isPresent();
         assertThat(clothingWomenOptional.get().getSlug().get(ENGLISH)).contains("womens-clothing");
@@ -135,7 +136,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
                 .skip(1)//remove top level category
                 .collect(toList());
 
-        final Function<Category, String> formatCategory = cat -> cat.getExternalId().orElse("")
+        final Function<Category, String> formatCategory = cat -> defaultString(cat.getExternalId())
                 + " " + cat.getName().find(ENGLISH).orElse("");
         final String ancestorCategoriesString = ancestorReferences.stream()
                 .map(ref -> categoryTree.findById(ref.getId()).get())

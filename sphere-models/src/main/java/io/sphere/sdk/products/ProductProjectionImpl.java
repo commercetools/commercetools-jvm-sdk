@@ -26,7 +26,8 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     private final boolean hasStagedChanges;
     private final LocalizedStrings name;
     private final Set<Reference<Category>> categories;
-    private final Optional<LocalizedStrings> description;
+    @Nullable
+    private final LocalizedStrings description;
     private final LocalizedStrings slug;
     @Nullable
     private final LocalizedStrings metaTitle;
@@ -42,7 +43,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     ProductProjectionImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                           final Reference<ProductType> productType, final Optional<Reference<TaxCategory>> taxCategory,
                           final boolean hasStagedChanges, final LocalizedStrings name,
-                          final Set<Reference<Category>> categories, final Optional<LocalizedStrings> description,
+                          final Set<Reference<Category>> categories, final LocalizedStrings description,
                           final LocalizedStrings slug, final LocalizedStrings metaTitle,
                           final LocalizedStrings metaDescription, final LocalizedStrings metaKeywords,
                           final ProductVariant masterVariant, final List<ProductVariant> variants,
@@ -82,7 +83,8 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     }
 
     @Override
-    public Optional<LocalizedStrings> getDescription() {
+    @Nullable
+    public LocalizedStrings getDescription() {
         return description;
     }
 

@@ -53,7 +53,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
 
             final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
             final State updatedState = execute(command);
-            assertThat(updatedState.getName()).contains(newName);
+            assertThat(updatedState.getName()).isEqualTo(newName);
             return updatedState;
         });
     }
@@ -65,11 +65,11 @@ public class StateUpdateCommandTest extends IntegrationTest {
                 final Set<Reference<State>> transitions = asSet(stateA.toReference());
                 final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(transitions));
                 final State updatedStateB = execute(command);
-                assertThat(updatedStateB.getTransitions()).contains(transitions);
+                assertThat(updatedStateB.getTransitions()).isEqualTo(transitions);
 
                 //check reference expansion
                 final State loadedStateB = execute(StateByIdFetch.of(stateB).withExpansionPaths(m -> m.transitions()));
-                final Reference<State> stateReference = new LinkedList<>(loadedStateB.getTransitions().get()).getFirst();
+                final Reference<State> stateReference = new LinkedList<>(loadedStateB.getTransitions()).getFirst();
                 assertThat(stateReference.getObj()).isNotNull();
 
                 final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));

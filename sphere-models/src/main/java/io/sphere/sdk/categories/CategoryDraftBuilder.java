@@ -1,12 +1,12 @@
 package io.sphere.sdk.categories;
 
-import java.util.Objects;
-import java.util.Optional;
-
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+
+import javax.annotation.Nullable;
+import java.util.Optional;
 
 /**
  * Creates templates for new categories.
@@ -15,10 +15,14 @@ import io.sphere.sdk.models.Referenceable;
 public class CategoryDraftBuilder implements Builder<CategoryDraft> {
     private final LocalizedStrings name;
     private final LocalizedStrings slug;
-    private Optional<LocalizedStrings> description = Optional.empty();
-    private Optional<Reference<Category>> parent = Optional.empty();
-    private Optional<String> orderHint = Optional.empty();
-    private Optional<String> externalId = Optional.empty();
+    @Nullable
+    private LocalizedStrings description;
+    @Nullable
+    private Reference<Category> parent;
+    @Nullable
+    private String orderHint;
+    @Nullable
+    private String externalId;
 
     private CategoryDraftBuilder(final LocalizedStrings name, final LocalizedStrings slug) {
         this.name = name;
@@ -29,42 +33,24 @@ public class CategoryDraftBuilder implements Builder<CategoryDraft> {
         return new CategoryDraftBuilder(name, slug);
     }
 
-    public CategoryDraftBuilder description(final Optional<LocalizedStrings> description) {
+    public CategoryDraftBuilder description(@Nullable final LocalizedStrings description) {
         this.description = description;
         return this;
     }
 
-    public CategoryDraftBuilder description(final LocalizedStrings description) {
-        return description(Optional.ofNullable(description));
-    }
-
-    public CategoryDraftBuilder parent(final Optional<Reference<Category>> parent) {
-        this.parent = parent;
+    public CategoryDraftBuilder parent(@Nullable final Referenceable<Category> parent) {
+        this.parent = Optional.ofNullable(parent).map(Referenceable::toReference).orElse(null);
         return this;
     }
 
-    public CategoryDraftBuilder parent(final Referenceable<Category> parent) {
-        return parent(Optional.ofNullable(parent.toReference()));
-    }
-
-    public CategoryDraftBuilder orderHint(final Optional<String> orderHint) {
+    public CategoryDraftBuilder orderHint(@Nullable final String orderHint) {
         this.orderHint = orderHint;
         return this;
     }
-
-    public CategoryDraftBuilder orderHint(final String orderHint) {
-        Objects.requireNonNull(orderHint);
-        return orderHint(Optional.of(orderHint));
-    }
     
-    public CategoryDraftBuilder externalId(final Optional<String> externalId) {
+    public CategoryDraftBuilder externalId(@Nullable final String externalId) {
         this.externalId = externalId;
         return this;
-    }
-
-    public CategoryDraftBuilder externalId(final String externalId) {
-        Objects.requireNonNull(externalId);
-        return externalId(Optional.of(externalId));
     }
 
     public CategoryDraft build() {

@@ -56,7 +56,7 @@ public class CategoryExpansionModelTest extends IntegrationTest {
                         .toQuery();
                 final PagedQueryResult<Category> queryResult = execute(query);
                 final Category loadedLevel2 = queryResult.head().get();
-                assertThat(loadedLevel2.getParent().get().getObj()).isNotNull();
+                assertThat(loadedLevel2.getParent().getObj()).isNotNull();
             });
         });
     }

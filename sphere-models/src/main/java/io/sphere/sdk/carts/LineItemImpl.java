@@ -9,6 +9,7 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.Set;
 
@@ -16,7 +17,8 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
 
     private final String productId;
     private final LocalizedStrings name;
-    private final Optional<LocalizedStrings> productSlug;
+    @Nullable
+    private final LocalizedStrings productSlug;
     private final ProductVariant variant;
     private final Price price;
     private final Optional<TaxRate> taxRate;
@@ -28,7 +30,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
                  final ProductVariant variant, final Price price, final long quantity,
                  final Set<ItemState> state, final Optional<TaxRate> taxRate,
                  final Optional<Reference<Channel>> supplyChannel, final Optional<DiscountedLineItemPrice> discountedPrice,
-                 final Optional<LocalizedStrings> productSlug, final Optional<Reference<Channel>> distributionChannel) {
+                 final LocalizedStrings productSlug, final Optional<Reference<Channel>> distributionChannel) {
         super(id, state, quantity, discountedPrice);
         this.productId = productId;
         this.name = name;
@@ -76,7 +78,8 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     }
 
     @Override
-    public Optional<LocalizedStrings> getProductSlug() {
+    @Nullable
+    public LocalizedStrings getProductSlug() {
         return productSlug;
     }
 }

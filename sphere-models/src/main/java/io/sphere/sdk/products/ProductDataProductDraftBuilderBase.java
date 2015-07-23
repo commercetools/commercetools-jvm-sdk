@@ -6,13 +6,12 @@ import io.sphere.sdk.search.SearchKeywords;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
-import java.util.Optional;
 import java.util.Set;
 
 abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDraftBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
     private final LocalizedStrings name;
     private final LocalizedStrings slug;
-    private Optional<LocalizedStrings> description = Optional.empty();
+    private LocalizedStrings description;
     private LocalizedStrings metaTitle;
     private LocalizedStrings metaDescription;
     private LocalizedStrings metaKeywords;
@@ -24,13 +23,9 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
         this.slug = slug;
     }
 
-    public T description(final Optional<LocalizedStrings> description) {
+    public T description(@Nullable final LocalizedStrings description) {
         this.description = description;
         return getThis();
-    }
-
-    public T description(final LocalizedStrings description) {
-        return description(Optional.of(description));
     }
 
     public T metaTitle(@Nullable final LocalizedStrings metaTitle) {
@@ -68,7 +63,8 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
         return slug;
     }
 
-    public Optional<LocalizedStrings> getDescription() {
+    @Nullable
+    public LocalizedStrings getDescription() {
         return description;
     }
 

@@ -7,6 +7,7 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
@@ -15,7 +16,8 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
     private final String id;
     private final String productId;
     private final LocalizedStrings name;
-    private final Optional<LocalizedStrings> productSlug;
+    @Nullable
+    private final LocalizedStrings productSlug;
     private final ProductVariant variant;
     private final Price price;
     private final long quantity;
@@ -24,7 +26,7 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
     private Optional<Reference<Channel>> supplyChannel = Optional.empty();
     private Optional<DiscountedLineItemPrice> discountedPrice = Optional.empty();
 
-    private LineItemBuilder(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final Optional<LocalizedStrings> productSlug) {
+    private LineItemBuilder(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final LocalizedStrings productSlug) {
         this.id = id;
         this.productId = productId;
         this.name = name;
@@ -66,11 +68,11 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
     /**
      *  Use {@link #of(String, String, LocalizedStrings, ProductVariant, Price, long)} and {@link #taxRate(TaxRate)} instead.
      */
-    public static LineItemBuilder of(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final Optional<LocalizedStrings> productSlug, final TaxRate taxRate) {
+    public static LineItemBuilder of(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final LocalizedStrings productSlug, final TaxRate taxRate) {
         return of(id, productId, name, variant, price, quantity, productSlug).taxRate(taxRate);
     }
 
-    public static LineItemBuilder of(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final Optional<LocalizedStrings> productSlug) {
+    public static LineItemBuilder of(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final LocalizedStrings productSlug) {
         return new LineItemBuilder(id, productId, name, variant, price, quantity, productSlug);
     }
 

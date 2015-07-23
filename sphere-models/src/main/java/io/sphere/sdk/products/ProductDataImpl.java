@@ -17,7 +17,8 @@ class ProductDataImpl extends Base implements ProductData {
 
     private final Set<Reference<Category>> categories;
 
-    private final Optional<LocalizedStrings> description;
+    @Nullable
+    private final LocalizedStrings description;
 
     private final LocalizedStrings slug;
     @Nullable
@@ -35,7 +36,7 @@ class ProductDataImpl extends Base implements ProductData {
 
     @JsonCreator
     ProductDataImpl(final LocalizedStrings name, final Set<Reference<Category>> categories,
-                    final Optional<LocalizedStrings> description, final LocalizedStrings slug,
+                    final LocalizedStrings description, final LocalizedStrings slug,
                     final LocalizedStrings metaTitle, final LocalizedStrings metaDescription,
                     final LocalizedStrings metaKeywords, final ProductVariant masterVariant,
                     final List<ProductVariant> variants, final SearchKeywords searchKeywords) {
@@ -59,7 +60,8 @@ class ProductDataImpl extends Base implements ProductData {
         return categories;
     }
 
-    public Optional<LocalizedStrings> getDescription() {
+    @Nullable
+    public LocalizedStrings getDescription() {
         return description;
     }
 

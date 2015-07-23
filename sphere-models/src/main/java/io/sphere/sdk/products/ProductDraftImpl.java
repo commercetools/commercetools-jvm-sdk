@@ -16,7 +16,8 @@ class ProductDraftImpl extends Base implements ProductDraft {
     private final Reference<ProductType> productType;
     private final LocalizedStrings name;
     private final LocalizedStrings slug;
-    private final Optional<LocalizedStrings> description;
+    @Nullable
+    private final LocalizedStrings description;
     private final Set<Reference<Category>> categories;
     @Nullable
     private final LocalizedStrings metaTitle;
@@ -28,7 +29,7 @@ class ProductDraftImpl extends Base implements ProductDraft {
     private final List<ProductVariantDraft> variants;
 
     public ProductDraftImpl(final Reference<ProductType> productType, final LocalizedStrings name, final LocalizedStrings slug,
-                            final Optional<LocalizedStrings> description, final Set<Reference<Category>> categories,
+                            final LocalizedStrings description, final Set<Reference<Category>> categories,
                             final MetaAttributes metaAttributes, final ProductVariantDraft masterVariant,
                             final List<ProductVariantDraft> variants) {
         this.name = name;
@@ -59,7 +60,8 @@ class ProductDraftImpl extends Base implements ProductDraft {
     }
 
     @Override
-    public Optional<LocalizedStrings> getDescription() {
+    @Nullable
+    public LocalizedStrings getDescription() {
         return description;
     }
 

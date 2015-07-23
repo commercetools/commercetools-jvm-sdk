@@ -17,7 +17,8 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
 
     Set<Reference<Category>> getCategories();
 
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     LocalizedStrings getSlug();
 

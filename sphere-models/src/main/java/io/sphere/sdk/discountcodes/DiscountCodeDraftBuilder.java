@@ -48,22 +48,14 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
         return new DiscountCodeDraftBuilder(code, cartDiscounts);
     }
 
-    public DiscountCodeDraftBuilder name(final Optional<LocalizedStrings> name) {
-        this.name = name.orElse(null);
+    public DiscountCodeDraftBuilder name(@Nullable final LocalizedStrings name) {
+        this.name = name;
         return this;
     }
 
-    public DiscountCodeDraftBuilder name(final LocalizedStrings name) {
-        return name(Optional.of(name));
-    }
-
-    public DiscountCodeDraftBuilder description(final Optional<LocalizedStrings> description) {
-        this.description = description.orElse(null);
+    public DiscountCodeDraftBuilder description(@Nullable final LocalizedStrings description) {
+        this.description = description;
         return this;
-    }
-
-    public DiscountCodeDraftBuilder description(final LocalizedStrings description) {
-        return description(Optional.of(description));
     }
 
     public DiscountCodeDraftBuilder code(final String code) {

@@ -186,7 +186,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription, STAGED_AND_CURRENT));
             final Product updatedProduct = execute(cmd);
 
-            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).contains(newDescription);
+            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
             return updatedProduct;
         });
     }
@@ -327,12 +327,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     public void revertStagedChanges() throws Exception {
         withUpdateableProduct(client(), product -> {
             //changing only staged and not current
-            final Optional<LocalizedStrings> oldDescriptionOption = product.getMasterData().getStaged().getDescription();
+            final LocalizedStrings oldDescriptionOption = product.getMasterData().getStaged().getDescription();
             final LocalizedStrings newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription, ONLY_STAGED)));
             final Product updatedProduct = execute(cmd);
             assertThat(oldDescriptionOption).isNotEqualTo(Optional.of(newDescription));
-            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).contains(newDescription);
+            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
             assertThat(updatedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
 
             final Product revertedProduct = execute(ProductUpdateCommand.of(updatedProduct, RevertStagedChanges.of()));

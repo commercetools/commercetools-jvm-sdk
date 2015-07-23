@@ -6,7 +6,7 @@ import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.Set;
 
 /** Channels represent a source or destination of different entities.
@@ -24,9 +24,11 @@ public interface Channel extends DefaultModel<Channel> {
 
     Set<ChannelRole> getRoles();
 
-    Optional<LocalizedStrings> getName();
+    @Nullable
+    LocalizedStrings getName();
 
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
 
     default Reference<Channel> toReference() {

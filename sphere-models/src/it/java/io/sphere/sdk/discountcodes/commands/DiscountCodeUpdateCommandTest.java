@@ -24,7 +24,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
             final LocalizedStrings newName = randomSlug();
             final DiscountCode updatedDiscountCode =
                     execute(DiscountCodeUpdateCommand.of(discountCode, SetName.of(newName)));
-            assertThat(updatedDiscountCode.getName()).contains(newName);
+            assertThat(updatedDiscountCode.getName()).isEqualTo(newName);
         });
     }
     
@@ -34,7 +34,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
             final LocalizedStrings newDescription = randomSlug();
             final DiscountCode updatedDiscountCode =
                     execute(DiscountCodeUpdateCommand.of(discountCode, SetDescription.of(newDescription)));
-            assertThat(updatedDiscountCode.getDescription()).contains(newDescription);
+            assertThat(updatedDiscountCode.getDescription()).isEqualTo(newDescription);
         });
     }
 

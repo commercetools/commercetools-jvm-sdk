@@ -64,7 +64,8 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
     Set<Reference<Category>> getCategories();
 
     @Override
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     @Override
     ProductVariant getMasterVariant();
