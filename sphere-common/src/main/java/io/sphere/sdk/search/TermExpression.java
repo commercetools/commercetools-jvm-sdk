@@ -1,5 +1,6 @@
 package io.sphere.sdk.search;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
@@ -8,7 +9,7 @@ import static java.util.stream.Collectors.joining;
 abstract class TermExpression<T, V> extends SearchModelExpression<T, V> {
     private final Iterable<V> terms;
 
-    TermExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, final Iterable<V> terms, final Optional<String> alias) {
+    TermExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, final Iterable<V> terms, @Nullable final String alias) {
         super(searchModel, typeSerializer, alias);
         this.terms = terms;
     }

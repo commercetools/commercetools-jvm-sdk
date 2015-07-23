@@ -1,12 +1,12 @@
 package io.sphere.sdk.search;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 import static java.util.Arrays.asList;
 
 public class TermFacetExpression<T, V> extends TermExpression<T, V> implements FacetExpressionBase<T> {
 
-    TermFacetExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, final Optional<String> alias) {
+    TermFacetExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, @Nullable final String alias) {
         super(searchModel, typeSerializer, asList(), alias);
     }
 

@@ -30,14 +30,14 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsTermFacetExpression() throws Exception {
-        final TermFacetExpression<Object, String> expression = new TermFacetExpression<>(model(), ofText(), Optional.empty());
+        final TermFacetExpression<Object, String> expression = new TermFacetExpression<>(model(), ofText(), null);
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size");
         assertThat(expression.resultPath()).isEqualTo("variants.attributes.size");
     }
 
     @Test
     public void buildsTermFacetExpressionWithAlias() throws Exception {
-        final TermFacetExpression<Object, String> expression = new TermFacetExpression<>(model(), ofText(), Optional.of("my-facet"));
+        final TermFacetExpression<Object, String> expression = new TermFacetExpression<>(model(), ofText(), "my-facet");
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size as my-facet");
         assertThat(expression.resultPath()).isEqualTo("my-facet");
     }
@@ -45,7 +45,7 @@ public class SearchExpressionTest {
     @Test
     public void buildsFilteredFacetExpression() throws Exception {
         List<String> terms = asList("foo", "bar");
-        final FilteredFacetExpression<Object, String> expression = new FilteredFacetExpression<>(model(), ofText(), terms, Optional.empty());
+        final FilteredFacetExpression<Object, String> expression = new FilteredFacetExpression<>(model(), ofText(), terms, null);
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size:\"foo\",\"bar\"");
         assertThat(expression.resultPath()).isEqualTo("variants.attributes.size");
     }
@@ -53,7 +53,7 @@ public class SearchExpressionTest {
     @Test
     public void buildsFilteredFacetExpressionWithAlias() throws Exception {
         List<String> terms = asList("foo", "bar");
-        final FilteredFacetExpression<Object, String> expression = new FilteredFacetExpression<>(model(), ofText(), terms, Optional.of("my-facet"));
+        final FilteredFacetExpression<Object, String> expression = new FilteredFacetExpression<>(model(), ofText(), terms, "my-facet");
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size:\"foo\",\"bar\" as my-facet");
         assertThat(expression.resultPath()).isEqualTo("my-facet");
     }
@@ -61,7 +61,7 @@ public class SearchExpressionTest {
     @Test
     public void buildsRangeFacetExpression() throws Exception {
         List<FacetRange<BigDecimal>> ranges = asList(FacetRange.lessThan(valueOf(5)), FacetRange.atLeast(valueOf(3)), FacetRange.of(valueOf(5), valueOf(10)));
-        final RangeFacetExpression<Object, BigDecimal> expression = new RangeFacetExpression<>(model(), ofNumber(), ranges, Optional.empty());
+        final RangeFacetExpression<Object, BigDecimal> expression = new RangeFacetExpression<>(model(), ofNumber(), ranges, null);
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size:range(* to 5),(3 to *),(5 to 10)");
         assertThat(expression.resultPath()).isEqualTo("variants.attributes.size");
     }
@@ -69,7 +69,7 @@ public class SearchExpressionTest {
     @Test
     public void buildsRangeFacetExpressionWithAlias() throws Exception {
         List<FacetRange<BigDecimal>> ranges = asList(FacetRange.lessThan(valueOf(5)), FacetRange.atLeast(valueOf(3)), FacetRange.of(valueOf(5), valueOf(10)));
-        final RangeFacetExpression<Object, BigDecimal> expression = new RangeFacetExpression<>(model(), ofNumber(), ranges, Optional.of("my-facet"));
+        final RangeFacetExpression<Object, BigDecimal> expression = new RangeFacetExpression<>(model(), ofNumber(), ranges, "my-facet");
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size:range(* to 5),(3 to *),(5 to 10) as my-facet");
         assertThat(expression.resultPath()).isEqualTo("my-facet");
     }
