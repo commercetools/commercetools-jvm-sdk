@@ -3,10 +3,9 @@ package io.sphere.sdk.queries;
 import io.sphere.sdk.models.Referenceable;
 
 import java.util.List;
-import java.util.Optional;
 
 public class ReferenceOptionalQueryModel<T, R> extends ReferenceQueryModelImpl<T, R> implements OptionalQueryModel<T> {
-    public ReferenceOptionalQueryModel(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
+    public ReferenceOptionalQueryModel(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 

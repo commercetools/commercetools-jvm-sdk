@@ -1,5 +1,7 @@
 package io.sphere.sdk.queries;
 
+import java.util.Optional;
+
 public class SphereQuerySort<T> extends QuerySortBase<T> {
     private final QueryModel<T> path;
     private final QuerySortDirection direction;
@@ -14,14 +16,14 @@ public class SphereQuerySort<T> extends QuerySortBase<T> {
     }
 
     private String renderPath(final QueryModel<T> model) {
-        if (model.getParent().isPresent()) {
-            final String beginning = renderPath(model.getParent().get());
+        if (model.getParent() != null) {
+            final String beginning = renderPath(model.getParent());
 
             return beginning +
-                    (model.getPathSegment().isPresent() ?
-                            (beginning.isEmpty() ? "" : ".") + model.getPathSegment().get() : "");
+                    (model.getPathSegment() != null ?
+                            (beginning.isEmpty() ? "" : ".") + model.getPathSegment() : "");
         } else {
-            return model.getPathSegment().orElse("");
+            return Optional.ofNullable(model.getPathSegment()).orElse("");
         }
     }
 }

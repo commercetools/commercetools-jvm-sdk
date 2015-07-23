@@ -1,9 +1,11 @@
 package io.sphere.sdk.queries;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public interface QueryModel<T> {
-    Optional<String> getPathSegment();
+    @Nullable
+    String getPathSegment();
 
-    Optional<? extends QueryModel<T>> getParent();
+    @Nullable
+    QueryModel<T> getParent();
 }

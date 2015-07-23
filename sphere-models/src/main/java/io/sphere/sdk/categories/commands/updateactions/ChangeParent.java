@@ -5,14 +5,12 @@ import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
-import java.util.Optional;
-
 public class ChangeParent extends UpdateAction<Category> {
     private final Reference<Category> parent;
 
     private ChangeParent(final Referenceable<Category> parent) {
         super("changeParent");
-        this.parent = parent.toReference().filled(Optional.empty());
+        this.parent = parent.toReference().filled(null);
     }
 
     public static ChangeParent of(final Referenceable<Category> parent) {

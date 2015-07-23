@@ -4,11 +4,9 @@ import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.StringQueryModel;
 
-import java.util.Optional;
-
 public final class AttributeDefinitionQueryModel<T> extends QueryModelImpl<T> {
 
-    AttributeDefinitionQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    AttributeDefinitionQueryModel(QueryModel<T> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 
@@ -17,6 +15,6 @@ public final class AttributeDefinitionQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public AttributeTypeQueryModel<T> type() {
-        return new AttributeTypeQueryModel<>(Optional.of(this), Optional.of("type"));
+        return new AttributeTypeQueryModel<>(this, "type");
     }
 }

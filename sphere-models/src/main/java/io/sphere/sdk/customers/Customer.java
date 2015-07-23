@@ -33,7 +33,7 @@ public interface Customer extends DefaultModel<Customer> {
 
     default Optional<Address> getDefaultShippingAddress() {
         return getAddresses().stream()
-                .filter(address -> address.getId() != null && address.getId().equals(getDefaultShippingAddressId()))
+                .filter(address -> address.getId() != null && Optional.of(address.getId()).equals(getDefaultShippingAddressId()))
                 .findFirst();
     }
 
@@ -41,7 +41,10 @@ public interface Customer extends DefaultModel<Customer> {
 
     default Optional<Address> getDefaultBillingAddress() {
         return getAddresses().stream()
-                .filter(address -> address.getId() != null && address.getId().equals(getDefaultBillingAddressId()))
+                .filter(address -> {
+                    final Optional<String> defaultBillingAddressId = getDefaultBillingAddressId();
+                    return address.getId() != null && Optional.of(address.getId()).equals(defaultBillingAddressId);
+                })
                 .findFirst();
     }
 

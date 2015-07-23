@@ -5,16 +5,14 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.queries.*;
 
-import java.util.Optional;
-
 public final class ProductProjectionQueryModel extends ProductDataQueryModelBase<ProductProjection> {
 
-    private ProductProjectionQueryModel(final Optional<? extends QueryModel<ProductProjection>> parent, final Optional<String> pathSegment) {
+    private ProductProjectionQueryModel(final QueryModel<ProductProjection> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public static ProductProjectionQueryModel of() {
-        return new ProductProjectionQueryModel(Optional.<QueryModel<ProductProjection>>empty(), Optional.<String>empty());
+        return new ProductProjectionQueryModel(null, null);
     }
 
     public ReferenceQueryModel<ProductProjection, ProductType> productType() {
@@ -22,7 +20,7 @@ public final class ProductProjectionQueryModel extends ProductDataQueryModelBase
     }
 
     public BooleanQueryModel<ProductProjection> hasStagedChanges() {
-        return new BooleanQueryModel<>(Optional.of(this), "hasStagedChanges");
+        return new BooleanQueryModel<>(this, "hasStagedChanges");
     }
 
     @Override

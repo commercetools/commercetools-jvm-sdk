@@ -2,21 +2,16 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.queries.*;
 
-import java.util.Optional;
 import java.util.function.Function;
 
 public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
 
-    ProductVariantQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+    ProductVariantQueryModel(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
-    ProductVariantQueryModel(Optional<? extends QueryModel<T>> parent, final String pathSegment) {
-        this(parent, Optional.of(pathSegment));
-    }
-
     public StringQueryModel<T> sku() {
-        return new StringQuerySortingModel<>(Optional.of(this), "sku");
+        return stringModel("sku");
     }
 
     public QueryPredicate<T> where(final QueryPredicate<PartialProductVariantQueryModel> embeddedPredicate) {
@@ -28,6 +23,6 @@ public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public PriceCollectionQueryModel<T> prices() {
-        return new PriceCollectionQueryModel<>(Optional.of(this), Optional.of("prices"));
+        return new PriceCollectionQueryModel<>(this, "prices");
     }
 }

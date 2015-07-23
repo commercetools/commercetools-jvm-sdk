@@ -3,10 +3,8 @@ package io.sphere.sdk.orders.queries;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.queries.*;
 
-import java.util.Optional;
-
 final class SyncInfoQueryModelImpl<T> extends QueryModelImpl<T> implements SyncInfoQueryModel<T> {
-    SyncInfoQueryModelImpl(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+    SyncInfoQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
@@ -22,6 +20,6 @@ final class SyncInfoQueryModelImpl<T> extends QueryModelImpl<T> implements SyncI
 
     @Override
     public final TimestampSortingModel<T> syncedAt() {
-        return new TimestampSortingModel<>(Optional.of(this), "syncedAt");
+        return new TimestampSortingModel<>(this, "syncedAt");
     }
 }

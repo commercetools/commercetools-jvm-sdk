@@ -3,11 +3,9 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.queries.*;
 
-import java.util.Optional;
-
 public final class DiscountedPriceOptionalQueryModel<T> extends QueryModelImpl<T> implements OptionalQueryModel<T> {
 
-    DiscountedPriceOptionalQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    DiscountedPriceOptionalQueryModel(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 

@@ -32,7 +32,7 @@ public class ReferenceAssert extends AbstractAssert<ReferenceAssert, Reference<?
     }
 
     public void checkIsExpanded() {
-        if (actual.getObj() != null) {
+        if (actual.getObj() == null) {
             failWithMessage(format("The reference %s is not expanded.", actual));
         }
     }

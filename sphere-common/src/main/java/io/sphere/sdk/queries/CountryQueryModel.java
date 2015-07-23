@@ -2,10 +2,8 @@ package io.sphere.sdk.queries;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import java.util.Optional;
-
 public class CountryQueryModel<T> extends QueryModelImpl<T> implements EqualityQueryModel<T, CountryCode> {
-    public CountryQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+    public CountryQueryModel(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 

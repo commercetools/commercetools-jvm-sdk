@@ -8,15 +8,14 @@ import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.Optional;
+import java.time.LocalDate;
 import java.util.function.Predicate;
 
-import java.time.LocalDate;
-
-import static io.sphere.sdk.customers.CustomerFixtures.*;
-import static io.sphere.sdk.customergroups.CustomerGroupFixtures.*;
-import static org.assertj.core.api.Assertions.assertThat;
+import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withB2cCustomerGroup;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomerWithOneAddress;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomerUpdateCommandTest extends IntegrationTest {
     @Test
@@ -44,7 +43,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
         withCustomer(client(), customer -> {
             final String city = "addAddress";
             final Address newAddress = AddressBuilder.of(DE).city(city).build();
-            final Predicate<Address> containsNewAddressPredicate = a -> a.getCity().equals(Optional.of(city));
+            final Predicate<Address> containsNewAddressPredicate = a -> a.getCity().equals(city);
             assertThat(customer.getAddresses().stream()
                     .anyMatch(containsNewAddressPredicate))
                     .overridingErrorMessage("address is not present, yet")
@@ -60,7 +59,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
         withCustomerWithOneAddress(client(), customer -> {
             final String city = "new city";
             assertThat(customer.getAddresses()).hasSize(1);
-            assertThat(customer.getAddresses().get(0).getCity()).isNotEqualTo(Optional.of(city));
+            assertThat(customer.getAddresses().get(0).getCity()).isNotEqualTo(city);
 
             final Address oldAddress = customer.getAddresses().get(0);
             assertThat(oldAddress.getId())
@@ -105,7 +104,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetDefaultShippingAddress.of(address)));
 
-            assertThat(updatedCustomer.getDefaultShippingAddressId()).isEqualTo(address.getId());
+            assertThat(updatedCustomer.getDefaultShippingAddressId()).contains(address.getId());
             assertThat(updatedCustomer.getDefaultShippingAddress()).contains(address);
         });
     }
@@ -123,7 +122,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetDefaultBillingAddress.of(address)));
 
-            assertThat(updatedCustomer.getDefaultBillingAddressId()).isEqualTo(address.getId());
+            assertThat(updatedCustomer.getDefaultBillingAddressId()).contains(address.getId());
             assertThat(updatedCustomer.getDefaultBillingAddress()).contains(address);
         });
     }

@@ -5,32 +5,31 @@ import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderState;
 import io.sphere.sdk.orders.PaymentState;
 import io.sphere.sdk.orders.ShipmentState;
-import io.sphere.sdk.queries.*;
-
-import java.util.Optional;
+import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.SphereEnumerationQueryModel;
 
 public class OrderQueryModel extends CartLikeQueryModel<Order> {
-    private OrderQueryModel(final Optional<? extends QueryModel<Order>> parent, final Optional<String> pathSegment) {
+    private OrderQueryModel(final QueryModel<Order> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public static OrderQueryModel of() {
-        return new OrderQueryModel(Optional.<QueryModel<Order>>empty(), Optional.<String>empty());
+        return new OrderQueryModel(null, null);
     }
 
     public SphereEnumerationQueryModel<Order, OrderState> orderState() {
-        return new SphereEnumerationQueryModel<>(Optional.of(this), Optional.of("orderState"));
+        return enumerationQueryModel("orderState");
     }
 
     public SphereEnumerationQueryModel<Order, ShipmentState> shipmentState() {
-        return new SphereEnumerationQueryModel<>(Optional.of(this), Optional.of("shipmentState"));
+        return enumerationQueryModel("shipmentState");
     }
 
     public SphereEnumerationQueryModel<Order, PaymentState> paymentState() {
-        return new SphereEnumerationQueryModel<>(Optional.of(this), Optional.of("paymentState"));
+        return enumerationQueryModel("paymentState");
     }
 
     public SyncInfoQueryModel<Order> syncInfo() {
-        return new SyncInfoQueryModelImpl<>(Optional.of(this), Optional.of("syncInfo"));
+        return new SyncInfoQueryModelImpl<>(this, "syncInfo");
     }
 }

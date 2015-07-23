@@ -1,73 +1,73 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.SphereEnumeration;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 import static io.sphere.sdk.queries.StringQuerySortingModel.normalize;
 
 public class QueryModelImpl<T> extends Base implements QueryModel<T> {
-    private final Optional<? extends QueryModel<T>> parent;
-    private final Optional<String> pathSegment;
+    @Nullable
+    private final QueryModel<T> parent;
+    @Nullable
+    private final String pathSegment;
 
-    protected QueryModelImpl(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
-        this(parent, Optional.ofNullable(pathSegment));
-    }
-
-    protected QueryModelImpl(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+    protected QueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
         this.parent = parent;
         this.pathSegment = pathSegment;
     }
 
-    //for testing
-    QueryModelImpl<T> appended(final String pathSegment) {
-        return new QueryModelImpl<>(Optional.of(this), pathSegment) ;
-    }
-
     @Override
-    public Optional<String> getPathSegment() {
+    @Nullable
+    public String getPathSegment() {
         return pathSegment;
     }
 
+    @Nullable
     @Override
-    public Optional<? extends QueryModel<T>> getParent() {
+    public QueryModel<T> getParent() {
         return parent;
     }
 
     protected CurrencyCodeQueryModel<T> currencyCodeModel(final String pathSegment) {
-        return new CurrencyCodeQueryModelImpl<>(Optional.of(this), pathSegment);
+        return new CurrencyCodeQueryModelImpl<>(this, pathSegment);
     }
 
     protected MoneyQueryModel<T> moneyModel(final String pathSegment) {
-        return new MoneyQueryModelImpl<>(Optional.of(this), pathSegment);
+        return new MoneyQueryModelImpl<>(this, pathSegment);
     }
 
     protected AnyReferenceQueryModel<T> anyReferenceModel(final String pathSegment) {
-        return new AnyReferenceQueryModelImpl <>(Optional.of(this), pathSegment);
+        return new AnyReferenceQueryModelImpl <>(this, pathSegment);
     }
 
     protected <R> ReferenceQueryModel<T, R> referenceModel(final String pathSegment) {
-        return new ReferenceQueryModelImpl<>(Optional.of(this), pathSegment);
+        return new ReferenceQueryModelImpl<>(this, pathSegment);
     }
 
-    protected  <R> ReferenceOptionalQueryModel<T, R> referenceOptionalModel(final String pathSegment) {
-        return new ReferenceOptionalQueryModel<>(Optional.of(this), pathSegment);
+    protected <R> ReferenceOptionalQueryModel<T, R> referenceOptionalModel(final String pathSegment) {
+        return new ReferenceOptionalQueryModel<>(this, pathSegment);
+    }
+
+    protected <E extends SphereEnumeration> SphereEnumerationQueryModel<T, E> enumerationQueryModel(final String pathSegment) {
+        return new SphereEnumerationQueryModel<>(this, pathSegment);
     }
 
     protected StringQuerySortingModel<T> stringModel(final String pathSegment) {
-        return new StringQuerySortingModel<>(Optional.of(this), pathSegment);
+        return new StringQuerySortingModel<>(this, pathSegment);
     }
 
     protected BooleanQueryModel<T> booleanModel(final String pathSegment) {
-        return new BooleanQueryModel<>(Optional.of(this), pathSegment);
+        return new BooleanQueryModel<>(this, pathSegment);
     }
 
     protected LongQuerySortingModel<T> longModel(final String pathSegment) {
-        return new LongQuerySortingModelImpl<>(Optional.of(this), pathSegment);
+        return new LongQuerySortingModelImpl<>(this, pathSegment);
     }
 
     protected IntegerQuerySortingModel<T> integerModel(final String pathSegment) {
-        return new IntegerQuerySortingModelImpl<>(Optional.of(this), pathSegment);
+        return new IntegerQuerySortingModelImpl<>(this, pathSegment);
     }
 
     protected <V> QueryPredicate<T> isPredicate(final V value) {

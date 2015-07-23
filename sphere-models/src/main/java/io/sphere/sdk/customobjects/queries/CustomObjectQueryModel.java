@@ -5,8 +5,6 @@ import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 
-import java.util.Optional;
-
 /**
  * Metamodel to explore for which fields can be queried in a {@link io.sphere.sdk.customobjects.CustomObject}.
  * @param <T> The type of the value of the custom object.
@@ -14,14 +12,14 @@ import java.util.Optional;
 public class CustomObjectQueryModel<T> extends DefaultModelQueryModelImpl<CustomObject<T>> {
 
     public static <T> CustomObjectQueryModel<T> of() {
-        return new CustomObjectQueryModel<>(Optional.<QueryModel<CustomObject<T>>>empty(), Optional.<String>empty());
+        return new CustomObjectQueryModel<>(null, null);
     }
 
-    private CustomObjectQueryModel(final Optional<? extends QueryModel<CustomObject<T>>> parent, final Optional<String> pathSegment) {
+    private CustomObjectQueryModel(final QueryModel<CustomObject<T>> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public StringQuerySortingModel<CustomObject<T>> container() {
-        return new StringQuerySortingModel<>(Optional.of(this), "container");
+        return stringModel("container");
     }
 }

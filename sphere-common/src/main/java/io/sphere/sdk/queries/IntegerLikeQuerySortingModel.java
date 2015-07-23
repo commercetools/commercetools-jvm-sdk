@@ -1,7 +1,5 @@
 package io.sphere.sdk.queries;
 
-import java.util.Optional;
-
 import static io.sphere.sdk.utils.ListUtils.listOf;
 
 /**
@@ -12,7 +10,7 @@ import static io.sphere.sdk.utils.ListUtils.listOf;
 abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<T>
         implements QuerySortingModel<T>, OptionalQueryModel<T>, EqualityQueryModel<T, V>,
         NotEqualQueryModel<T, V>, IsInQueryModel<T, V>, IsNotInQueryModel<T, V>, InequalityQueryModel<T, V> {
-    protected IntegerLikeQuerySortingModel(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
+    protected IntegerLikeQuerySortingModel(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 

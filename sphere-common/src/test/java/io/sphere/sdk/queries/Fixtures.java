@@ -1,7 +1,5 @@
 package io.sphere.sdk.queries;
 
-import java.util.Optional;
-
 public final class Fixtures {
     private Fixtures() {
     }
@@ -12,26 +10,26 @@ public final class Fixtures {
 
     public static final QueryModel<String> emptyQueryModel = new QueryModel<String>() {
         @Override
-        public Optional<String> getPathSegment() {
-            return Optional.empty();
+        public String getPathSegment() {
+            return null;
         }
 
         @Override
-        public Optional<? extends QueryModel<String>> getParent() {
-            return Optional.empty();
+        public QueryModel<String> getParent() {
+            return null;
         }
     };
 
     public static QueryModel<Product> fooQueryModel() {
-        return new QueryModelImpl<Product>(Optional.<QueryModel<Product>>empty(), "foo") {};
+        return new QueryModelImpl<Product>(null, "foo") {};
     }
 
     public static  QueryModel<Product> barQueryModel() {
-        return new QueryModelImpl<Product>(Optional.of(fooQueryModel()), "bar") {
+        return new QueryModelImpl<Product>(fooQueryModel(), "bar") {
         };
     }
 
     public static QueryModel<Product> bazQueryModel() {
-        return new QueryModelImpl<Product>(Optional.of(barQueryModel()), "baz") {};
+        return new QueryModelImpl<Product>(barQueryModel(), "baz") {};
     }
 }

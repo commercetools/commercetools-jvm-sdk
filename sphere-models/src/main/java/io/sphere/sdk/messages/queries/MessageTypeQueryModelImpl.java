@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 final class MessageTypeQueryModelImpl extends StringQuerySortingModel<Message> implements MessageTypeQueryModel {
-    public MessageTypeQueryModelImpl(final Optional<? extends QueryModel<Message>> parent, final String pathSegment) {
+    public MessageTypeQueryModelImpl(final QueryModel<Message> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 

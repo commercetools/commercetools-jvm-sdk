@@ -5,8 +5,6 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.TestEntity;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static io.sphere.sdk.json.SphereJsonUtils.newObjectMapper;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,7 +17,7 @@ public class ReferenceTest {
         final Reference<TestEntity> reference = newEmptyReference();
         assertThat(reference.getId()).isEqualTo(id);
         assertThat(reference.getTypeId()).isEqualTo(typeId);
-        assertThat(reference.getObj()).isEqualTo(Optional.empty());
+        assertThat(reference.getObj()).isNull();
     }
 
     @Test
@@ -27,13 +25,13 @@ public class ReferenceTest {
         final Reference<TestEntity> reference = newFilledReference();
         assertThat(reference.getId()).isEqualTo(id);
         assertThat(reference.getTypeId()).isEqualTo(typeId);
-        assertThat(reference.getObj()).isEqualTo(Optional.of(new TestEntity("value")));
+        assertThat(reference.getObj()).isEqualTo(new TestEntity("value"));
     }
 
     @Test
     public void toStringContainsTheImportantFields() throws Exception {
-        assertThat(newEmptyReference().toString()).isEqualTo("Reference{typeId='typeId', id='123', obj=Optional.empty}");
-        assertThat(newFilledReference().toString()).isEqualTo("Reference{typeId='typeId', id='123', obj=Optional[TestEntity{foo='value'}]}");
+        assertThat(newEmptyReference().toString()).isEqualTo("Reference{typeId='typeId', id='123', obj=null}");
+        assertThat(newFilledReference().toString()).isEqualTo("Reference{typeId='typeId', id='123', obj=TestEntity{foo='value'}}");
     }
 
     @Test

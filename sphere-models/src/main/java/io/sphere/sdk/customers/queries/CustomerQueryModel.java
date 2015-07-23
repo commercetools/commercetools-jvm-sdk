@@ -4,45 +4,42 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.queries.*;
 
-import java.util.Optional;
-
 public final class CustomerQueryModel extends DefaultModelQueryModelImpl<Customer> {
 
     public static CustomerQueryModel of() {
-        return new CustomerQueryModel(Optional.<QueryModel<Customer>>empty(), Optional.<String>empty());
+        return new CustomerQueryModel(null, null);
     }
 
-    private CustomerQueryModel(final Optional<? extends QueryModel<Customer>> parent, final Optional<String> pathSegment) {
+    private CustomerQueryModel(final QueryModel<Customer> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public StringQuerySortingModel<Customer> firstName() {
-        return new StringQuerySortingModel<>(Optional.of(this), "firstName");
+        return stringModel("firstName");
     }
 
     public StringQuerySortingModel<Customer> lastName() {
-        return new StringQuerySortingModel<>(Optional.of(this), "lastName");
+        return stringModel("lastName");
     }
 
     public StringQuerySortingModel<Customer> email() {
-        return new StringQuerySortingModel<>(Optional.of(this), "email");
+        return stringModel("email");
     }
 
     public StringQuerySortingModel<Customer> defaultShippingAddressId() {
-        return new StringQuerySortingModel<>(Optional.of(this), "defaultShippingAddressId");
+        return stringModel("defaultShippingAddressId");
     }
 
     public StringQuerySortingModel<Customer> defaultBillingAddressId() {
-        return new StringQuerySortingModel<>(Optional.of(this), "defaultBillingAddressId");
+        return stringModel("defaultBillingAddressId");
     }
 
     public BooleanQueryModel<Customer> isEmailVerified() {
-        return new BooleanQueryModel<>(Optional.of(this), "isEmailVerified");
+        return booleanModel("isEmailVerified");
     }
 
-
     public StringQuerySortingModel<Customer> externalId() {
-        return new StringQuerySortingModel<>(Optional.of(this), "externalId");
+        return stringModel("externalId");
     }
 
     public ReferenceQueryModel<Customer, CustomerGroup> customerGroup() {

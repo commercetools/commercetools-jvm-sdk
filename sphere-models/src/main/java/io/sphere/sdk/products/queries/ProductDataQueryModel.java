@@ -1,13 +1,14 @@
 package io.sphere.sdk.products.queries;
 
-import java.util.Optional;
-
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.LocalizedStringsQueryModel;
+import io.sphere.sdk.queries.LocalizedStringsQuerySortingModel;
+import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.ReferenceCollectionQueryModel;
 
 public class ProductDataQueryModel<T> extends ProductDataQueryModelBase<T> {
 
-    ProductDataQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    ProductDataQueryModel(QueryModel<T> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 

@@ -2,14 +2,12 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.queries.QueryModel;
 
-import java.util.Optional;
-
 public class PartialProductCatalogDataQueryModel extends ProductCatalogDataQueryModel<PartialProductCatalogDataQueryModel> {
-    private PartialProductCatalogDataQueryModel(final Optional<? extends QueryModel<PartialProductCatalogDataQueryModel>> parent, final Optional<String> pathSegment) {
+    private PartialProductCatalogDataQueryModel(final QueryModel<PartialProductCatalogDataQueryModel> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public static PartialProductCatalogDataQueryModel of() {
-        return new PartialProductCatalogDataQueryModel(Optional.empty(), Optional.<String>empty());
+        return new PartialProductCatalogDataQueryModel(null, null);
     }
 }

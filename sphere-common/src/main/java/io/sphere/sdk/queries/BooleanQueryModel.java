@@ -1,11 +1,10 @@
 package io.sphere.sdk.queries;
 
 import java.util.Objects;
-import java.util.Optional;
 
 public class BooleanQueryModel<T> extends QueryModelImpl<T> implements EqualityQueryModel<T, Boolean> {
 
-    public BooleanQueryModel(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
+    public BooleanQueryModel(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 

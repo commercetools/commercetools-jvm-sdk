@@ -11,6 +11,6 @@ public class EmbeddedQueryPredicate<T, V> extends QueryModelQueryPredicate<T> {
     @Override
     protected String render() {
         final String sphereQuery = predicate.toSphereQuery();
-        return getQueryModel().getParent().isPresent() || getQueryModel().getPathSegment().isPresent() ? "(" + sphereQuery + ")" : sphereQuery;
+        return getQueryModel().getParent() != null || getQueryModel().getPathSegment() != null ? "(" + sphereQuery + ")" : sphereQuery;
     }
 }

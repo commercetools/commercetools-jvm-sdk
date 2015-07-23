@@ -1,17 +1,18 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.queries.*;
-
-import java.util.Optional;
+import io.sphere.sdk.queries.CollectionQueryModel;
+import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.QueryModelImpl;
+import io.sphere.sdk.queries.QueryPredicate;
 
 public final class PriceCollectionQueryModel<T> extends QueryModelImpl<T> implements CollectionQueryModel<T> {
 
-    PriceCollectionQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    PriceCollectionQueryModel(QueryModel<T> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 
     public DiscountedPriceOptionalQueryModel<T> discounted() {
-        return new DiscountedPriceOptionalQueryModel<>(Optional.of(this), Optional.of("discounted"));
+        return new DiscountedPriceOptionalQueryModel<>(this, "discounted");
     }
 
     @Override

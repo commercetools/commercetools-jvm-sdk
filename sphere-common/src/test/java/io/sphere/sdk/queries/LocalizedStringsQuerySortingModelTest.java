@@ -3,12 +3,11 @@ package io.sphere.sdk.queries;
 import org.junit.Test;
 
 import java.util.Locale;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LocalizedStringsQuerySortingModelTest {
-    private final LocalizedStringsQuerySortingModel<String> model = new LocalizedStringsQuerySortingModel<>(Optional.<QueryModel<String>>empty(), Optional.of("thepath"));
+    private final LocalizedStringsQuerySortingModel<String> model = new LocalizedStringsQuerySortingModel<>(null, "thepath");
 
     @Test
     public void lang() throws Exception {

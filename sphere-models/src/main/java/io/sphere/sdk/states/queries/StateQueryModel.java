@@ -6,20 +6,18 @@ import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 import io.sphere.sdk.states.State;
 
-import java.util.Optional;
-
 public class StateQueryModel extends DefaultModelQueryModelImpl<State> {
 
-    private StateQueryModel(final Optional<? extends QueryModel<State>> parent, final Optional<String> pathSegment) {
+    private StateQueryModel(final QueryModel<State> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public static StateQueryModel of() {
-        return new StateQueryModel(Optional.<QueryModel<State>>empty(), Optional.<String>empty());
+        return new StateQueryModel(null, null);
     }
 
     public StringQuerySortingModel<State> key() {
-        return new StringQuerySortingModel<>(Optional.of(this), "key");
+        return stringModel("key");
     }
 
 }

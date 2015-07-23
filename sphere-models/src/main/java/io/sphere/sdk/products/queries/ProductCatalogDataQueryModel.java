@@ -1,16 +1,18 @@
 package io.sphere.sdk.products.queries;
 
-import java.util.Optional;
-import java.util.function.Function;
-
 import io.sphere.sdk.products.ProductProjectionType;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.EmbeddedQueryPredicate;
+import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.QueryModelImpl;
+import io.sphere.sdk.queries.QueryPredicate;
+
+import java.util.function.Function;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 
 public class ProductCatalogDataQueryModel<M> extends QueryModelImpl<M> {
 
-    ProductCatalogDataQueryModel(Optional<? extends QueryModel<M>> parent, Optional<String> pathSegment) {
+    ProductCatalogDataQueryModel(QueryModel<M> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 
@@ -27,7 +29,7 @@ public class ProductCatalogDataQueryModel<M> extends QueryModelImpl<M> {
     }
 
     private ProductDataQueryModel<M> newProductDataQueryModel(String pathSegment) {
-        return new ProductDataQueryModel<>(Optional.of(this), Optional.of(pathSegment));
+        return new ProductDataQueryModel<>(this, pathSegment);
     }
 
     public QueryPredicate<M> where(final QueryPredicate<PartialProductCatalogDataQueryModel> embeddedPredicate) {

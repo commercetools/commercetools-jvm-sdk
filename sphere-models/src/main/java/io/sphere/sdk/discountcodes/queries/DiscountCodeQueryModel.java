@@ -3,23 +3,20 @@ package io.sphere.sdk.discountcodes.queries;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
-import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.StringQuerySortingModel;
-
-import java.util.Optional;
 
 public class DiscountCodeQueryModel extends DefaultModelQueryModelImpl<DiscountCode> {
 
     public static DiscountCodeQueryModel of() {
-        return new DiscountCodeQueryModel(Optional.<QueryModelImpl<DiscountCode>>empty(), Optional.<String>empty());
+        return new DiscountCodeQueryModel(null, null);
     }
 
-    private DiscountCodeQueryModel(Optional<? extends QueryModel<DiscountCode>> parent, Optional<String> pathSegment) {
+    private DiscountCodeQueryModel(QueryModel<DiscountCode> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 
 
     public StringQuerySortingModel<DiscountCode> code() {
-        return new StringQuerySortingModel<>(Optional.of(this), "code");
+        return stringModel("code");
     }
 }
