@@ -24,7 +24,7 @@ public interface ZoneQuery extends MetaModelQueryDsl<Zone, ZoneQuery, ZoneQueryM
     }
 
     default ZoneQuery byName(final String name) {
-        return withPredicate(m -> m.name().is(name));
+        return withPredicates(m -> m.name().is(name));
     }
 
     /**
@@ -34,7 +34,7 @@ public interface ZoneQuery extends MetaModelQueryDsl<Zone, ZoneQuery, ZoneQueryM
      * @return query with the same values but a predicate searching for a specific country
      */
     default ZoneQuery byCountry(final CountryCode countryCode) {
-        return withPredicate(m -> m.locations().country().is(countryCode));
+        return withPredicates(m -> m.locations().country().is(countryCode));
     }
 
     /**
@@ -49,6 +49,6 @@ public interface ZoneQuery extends MetaModelQueryDsl<Zone, ZoneQuery, ZoneQueryM
                 location.getState()
                         .map(state -> ZoneQueryModel.of().locations().where(l -> l.country().is(location.getCountry()).and(l.state().is(state))))
                         .orElseGet(() -> ZoneQueryModel.of().locations().where(l -> l.country().is(location.getCountry()).and(l.state().isNotPresent())));
-        return withPredicate(predicate);
+        return withPredicates(predicate);
     }
 }

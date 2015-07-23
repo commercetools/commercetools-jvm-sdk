@@ -85,7 +85,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final List<ProductType> productTypes = execute(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).getResults();
         if (!productTypes.isEmpty()) {
             final ProductQuery productQuery = ProductQuery.of()
-                    .withPredicate(m -> m.productType().isIn(productTypes))
+                    .withPredicates(m -> m.productType().isIn(productTypes))
                     .withLimit(500);
             execute(productQuery).getResults().forEach(p -> execute(ProductDeleteCommand.of(p)));
             productTypes.forEach(p -> execute(ProductTypeDeleteCommand.of(p)));
@@ -331,7 +331,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
         final Product product = createProduct();
         final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
-                .withPredicate(m -> m.id().is(product.getId()))
+                .withPredicates(m -> m.id().is(product.getId()))
                 .plusExpansionPaths(m -> m.masterVariant().attributes().valueSet())
                 .plusExpansionPaths(m -> m.productType());
 

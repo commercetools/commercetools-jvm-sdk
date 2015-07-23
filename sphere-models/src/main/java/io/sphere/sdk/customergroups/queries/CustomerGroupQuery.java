@@ -20,7 +20,7 @@ public interface CustomerGroupQuery extends MetaModelQueryDsl<CustomerGroup, Cus
     }
 
     default CustomerGroupQuery byName(final String name) {
-        return withPredicate(m -> m.name().is(name));
+        return withPredicates(m -> m.name().is(name));
     }
 
     static CustomerGroupQuery of() {

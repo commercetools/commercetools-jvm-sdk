@@ -13,7 +13,7 @@ public interface StateQuery extends MetaModelQueryDsl<State, StateQuery, StateQu
     }
 
     default StateQuery byKey(final String key) {
-        return withPredicate(StateQueryModel.of().key().is(key));
+        return withPredicates(StateQueryModel.of().key().is(key));
     }
 
     static TypeReference<PagedQueryResult<State>> resultTypeReference() {

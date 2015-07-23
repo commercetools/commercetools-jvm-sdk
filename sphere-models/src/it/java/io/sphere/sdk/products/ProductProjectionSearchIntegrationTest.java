@@ -4,7 +4,6 @@ import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
@@ -72,7 +71,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .orElseGet(() -> createEvilProductType());
 
         final Query<Product> query = ProductQuery.of()
-                .withPredicate(m -> m.masterData().staged().masterVariant().sku().isIn(SKU1, SKU2, SKU3, SKU_A, SKU_B));
+                .withPredicates(m -> m.masterData().staged().masterVariant().sku().isIn(SKU1, SKU2, SKU3, SKU_A, SKU_B));
         final List<Product> products = execute(query).getResults();
 
         final Function<String, Optional<Product>> findBySku =

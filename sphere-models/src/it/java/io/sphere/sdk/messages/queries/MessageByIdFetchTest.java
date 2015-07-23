@@ -13,7 +13,7 @@ public class MessageByIdFetchTest extends IntegrationTest {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             //query one message since message creation is not directly possible
             final MessageQuery query = MessageQuery.of()
-                    .withPredicate(m -> m.type().is("ReturnInfoAdded"))
+                    .withPredicates(m -> m.type().is("ReturnInfoAdded"))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1);
             final Message messageFromQueryEndpoint = execute(query).head().get();

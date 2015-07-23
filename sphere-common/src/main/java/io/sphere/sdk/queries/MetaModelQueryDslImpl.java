@@ -8,7 +8,9 @@ import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
+import io.sphere.sdk.utils.ListUtils;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -32,23 +34,26 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     final Q queryModel;
     final E expansionModel;
-    final Optional<QueryPredicate<T>> predicate;
+    final List<QueryPredicate<T>> predicate;
     final List<QuerySort<T>> sort;
-    final Optional<Boolean> withTotal;
-    final Optional<Long> limit;
-    final Optional<Long> offset;
+    @Nullable
+    final Boolean withTotal;
+    @Nullable
+    final Long limit;
+    @Nullable
+    final Long offset;
     final List<ExpansionPath<T>> expansionPaths;
     final List<HttpQueryParameter> additionalQueryParameters;
     final String endpoint;
     final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
     final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction;
 
-    public MetaModelQueryDslImpl(final Optional<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, final Optional<Boolean> fetchTotal, final Optional<Long> limit,
-                                 final Optional<Long> offset, final String endpoint,
+    public MetaModelQueryDslImpl(final List<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, final Boolean fetchTotal, final Long limit,
+                                 final Long offset, final String endpoint,
                                  final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
                                  final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
-        offset.ifPresent(presentOffset -> {
+        Optional.ofNullable(offset).ifPresent(presentOffset -> {
             if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
                 throw new IllegalArgumentException(format("The offset parameter must be in the range of [%d..%d], but was %d.", MIN_OFFSET, MAX_OFFSET, presentOffset));
             }
@@ -56,9 +61,9 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         this.queryDslBuilderFunction = requireNonNull(queryDslBuilderFunction);
         this.predicate = requireNonNull(predicate);
         this.sort = requireNonNull(sort);
-        this.withTotal = requireNonNull(fetchTotal);
-        this.limit = requireNonNull(limit);
-        this.offset = requireNonNull(offset);
+        this.withTotal = fetchTotal;
+        this.limit = limit;
+        this.offset = offset;
         this.endpoint = requireNonNull(endpoint);
         this.resultMapper = requireNonNull(resultMapper);
         this.expansionPaths = requireNonNull(expansionPaths);
@@ -68,7 +73,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction, final List<HttpQueryParameter> additionalQueryParameters) {
-        this(Optional.<QueryPredicate<T>>empty(), Collections.emptyList(), Optional.<Boolean>empty(), Optional.<Long>empty(), Optional.<Long>empty(), endpoint, resultMapperOf(pagedQueryResultTypeReference),
+        this(Collections.emptyList(), Collections.emptyList(), null, null, null, endpoint, resultMapperOf(pagedQueryResultTypeReference),
                 Collections.emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
@@ -81,14 +86,29 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
-    public C withPredicate(final QueryPredicate<T> predicate) {
-        Objects.requireNonNull(predicate);
-        return copyBuilder().predicate(predicate).build();
+    public C withPredicates(final QueryPredicate<T> queryPredicates) {
+        Objects.requireNonNull(queryPredicates);
+        return withPredicates(asList(queryPredicates));
     }
 
     @Override
-    public C withPredicate(final Function<Q, QueryPredicate<T>> m) {
-        return withPredicate(m.apply(queryModel));
+    public C withPredicates(final List<QueryPredicate<T>> queryPredicates) {
+        return copyBuilder().predicates(queryPredicates).build();
+    }
+
+    @Override
+    public C withPredicates(final Function<Q, QueryPredicate<T>> m) {
+        return withPredicates(m.apply(queryModel));
+    }
+
+    @Override
+    public C plusPredicates(final Function<Q, QueryPredicate<T>> m) {
+        return plusPredicates(m.apply(queryModel));
+    }
+
+    @Override
+    public C plusPredicates(final QueryPredicate<T> queryPredicates) {
+        return withPredicates(listOf(predicates(), queryPredicates));
     }
 
     protected MetaModelQueryDslBuilder<T, C, Q, E> copyBuilder() {
@@ -146,7 +166,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
-    public Optional<QueryPredicate<T>> predicate() {
+    public List<QueryPredicate<T>> predicates() {
         return predicate;
     }
 
@@ -156,17 +176,17 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
-    public Optional<Boolean> fetchTotal() {
+    public Boolean fetchTotal() {
         return withTotal;
     }
 
     @Override
-    public Optional<Long> limit() {
+    public Long limit() {
         return limit;
     }
 
     @Override
-    public Optional<Long> offset() {
+    public Long offset() {
         return offset;
     }
 
@@ -197,11 +217,11 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     private String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
-        predicate().ifPresent(predicate -> builder.add(WHERE, predicate.toSphereQuery(), urlEncoded));
+        predicates().forEach(predicate -> builder.add(WHERE, predicate.toSphereQuery(), urlEncoded));
         sort().forEach(sort -> builder.add(SORT, sort.toSphereSort(), urlEncoded));
-        limit().ifPresent(limit -> builder.add(LIMIT, limit.toString(), urlEncoded));
-        offset().ifPresent(offset -> builder.add(OFFSET, offset.toString(), urlEncoded));
-        fetchTotal().ifPresent(withTotal -> builder.add(WITH_TOTAL, withTotal.toString(), urlEncoded));
+        Optional.ofNullable(limit()).ifPresent(limit -> builder.add(LIMIT, limit.toString(), urlEncoded));
+        Optional.ofNullable(offset()).ifPresent(offset -> builder.add(OFFSET, offset.toString(), urlEncoded));
+        Optional.ofNullable(fetchTotal()).ifPresent(withTotal -> builder.add(WITH_TOTAL, withTotal.toString(), urlEncoded));
         expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
         additionalQueryParameters().forEach(parameter -> builder.add(parameter.getKey(), parameter.getValue(), urlEncoded));
         return builder.toStringWithOptionalQuestionMark();

@@ -23,7 +23,7 @@ public class CartQueryTest extends IntegrationTest {
             final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
 
             final CartQuery query = CartQuery.of()
-                    .withPredicate(m -> m.id().is(cart.getId()))
+                    .withPredicates(m -> m.id().is(cart.getId()))
                     .withExpansionPaths(m -> m.discountCodes().discountCode());
             final Cart loadedCart = execute(query).head().get();
 
@@ -46,7 +46,7 @@ public class CartQueryTest extends IntegrationTest {
             final CartQuery cartQuery = CartQuery.of()
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1)
-                    .withPredicate(
+                    .withPredicates(
                             m -> m.customerId().is(customer.getId())
                                     .and(m.customerEmail().is(customer.getEmail())));
             final Cart loadedCart = execute(cartQuery
@@ -62,10 +62,10 @@ public class CartQueryTest extends IntegrationTest {
             final Cart loadedCart = execute(CartQuery.of()
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1)
-                    .withPredicate(
+                    .withPredicates(
                             m -> m.totalPrice().centAmount().isGreaterThan(centAmount - 1)
                                     .and(m.totalPrice().centAmount().isLessThan(centAmount + 1)
-                                            .and(m.totalPrice().currencyCode().is(EUR))
+                                                    .and(m.totalPrice().currencyCode().is(EUR))
                                     ))).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
         });
@@ -81,9 +81,9 @@ public class CartQueryTest extends IntegrationTest {
             final Cart loadedCart = execute(CartQuery.of()
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1)
-                    .withPredicate(m -> m.taxedPrice().isPresent()
-                            .and(m.taxedPrice().totalNet().centAmount().is(centAmountOf(cart.getTaxedPrice().get().getTotalNet())))
-                            .and(m.taxedPrice().totalGross().centAmount().is(centAmountOf(cart.getTaxedPrice().get().getTotalGross())))
+                    .withPredicates(m -> m.taxedPrice().isPresent()
+                                    .and(m.taxedPrice().totalNet().centAmount().is(centAmountOf(cart.getTaxedPrice().get().getTotalNet())))
+                                    .and(m.taxedPrice().totalGross().centAmount().is(centAmountOf(cart.getTaxedPrice().get().getTotalGross())))
                     )).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
         });

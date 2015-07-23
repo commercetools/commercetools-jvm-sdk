@@ -41,7 +41,7 @@ public class QueryDemo {
 
     private void categoryQueryModel() {
         QueryPredicate<Category> predicate = CategoryQueryModel.of().name().lang(locale).is("demo cat");
-        Query<Category> query = CategoryQuery.of().withPredicate(predicate);
+        Query<Category> query = CategoryQuery.of().withPredicates(predicate);
     }
 
     private void withPagination() {
@@ -54,7 +54,7 @@ public class QueryDemo {
         int offset = 1;//skip first page
         int limit = 200;//collect at most 200 entities per request
         Query<Category> query = CategoryQuery.of().
-          withPredicate(predicate).
+                withPredicates(predicate).
           withSort(sort).
           withOffset(offset).
           withLimit(limit);

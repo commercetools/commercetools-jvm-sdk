@@ -103,7 +103,7 @@ public class CustomerQueryTest extends IntegrationTest {
     private void check(final Function<CustomerQueryModel, QueryPredicate<Customer>> f, final boolean checkDistraction) {
         final CustomerQueryModel model = CustomerQueryModel.of();
         final QueryPredicate<Customer> predicate = f.apply(model);
-        final Query<Customer> query = CustomerQuery.of().withPredicate(predicate).withSort(model.createdAt().sort().desc());
+        final Query<Customer> query = CustomerQuery.of().withPredicates(predicate).withSort(model.createdAt().sort().desc());
         final List<Customer> results = execute(query).getResults();
         final List<String> ids = results.stream().map(x -> x.getId()).collect(toList());
         assertThat(ids).contains(customer.getId());

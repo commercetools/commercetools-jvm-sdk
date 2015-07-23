@@ -69,7 +69,7 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeIsDefault() throws Exception {
         //only one can be default one, so clean up if there is any
-        final Query<ShippingMethod> query = ShippingMethodQuery.of().withPredicate(QueryPredicate.of("isDefault = true"));
+        final Query<ShippingMethod> query = ShippingMethodQuery.of().withPredicates(QueryPredicate.of("isDefault = true"));
         final Optional<ShippingMethod> defaultShippingMethodOption = execute(query).head();
         defaultShippingMethodOption.ifPresent(sm -> execute(ShippingMethodUpdateCommand.of(sm, ChangeIsDefault.toFalse())));
 

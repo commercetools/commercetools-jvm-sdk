@@ -29,7 +29,7 @@ public class OrderQueryTest extends IntegrationTest {
         CustomerFixtures.withCustomerInGroup(client(), (customer, customerGroup) -> {
             withOrder(client(), customer, order -> {
                 final Order queriedOrder = execute(OrderQuery.of()
-                                .withPredicate(m -> m.id().is(order.getId()).and(m.customerGroup().is(customerGroup)))
+                                .withPredicates(m -> m.id().is(order.getId()).and(m.customerGroup().is(customerGroup)))
                                 .withExpansionPaths(m -> m.customerGroup())
                 ).head().get();
                 assertThat(queriedOrder.getCustomerGroup().get().getObj().getName())
@@ -112,10 +112,10 @@ public class OrderQueryTest extends IntegrationTest {
     }
 
     private void assertOrderIsFoundWithPredicate(final Function<Order, QueryPredicate<Order>> p) {
-        assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)), true);
+        assertOrderIsFound(order -> OrderQuery.of().withPredicates(p.apply(order)), true);
     }
 
     private void assertOrderIsNotFoundWithPredicate(final Function<Order, QueryPredicate<Order>> p) {
-        assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)), false);
+        assertOrderIsFound(order -> OrderQuery.of().withPredicates(p.apply(order)), false);
     }
 }

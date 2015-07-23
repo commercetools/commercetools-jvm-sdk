@@ -3,13 +3,11 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
-import io.sphere.sdk.models.Image;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
@@ -76,11 +74,11 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
     }
 
     protected SphereRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
-        return ProductQuery.of().withPredicate(m -> m.masterData().current().name().lang(ENGLISH).is(name));
+        return ProductQuery.of().withPredicates(m -> m.masterData().current().name().lang(ENGLISH).is(name));
     }
 
     protected SphereRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
-        return ProductQuery.of().withPredicate(m -> m.masterData().current().name().lang(ENGLISH).isIn(names));
+        return ProductQuery.of().withPredicates(m -> m.masterData().current().name().lang(ENGLISH).isIn(names));
     }
 
     @Test

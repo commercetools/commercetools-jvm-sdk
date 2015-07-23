@@ -24,19 +24,19 @@ public interface CategoryQuery extends MetaModelQueryDsl<Category, CategoryQuery
     }
 
     default CategoryQuery bySlug(final Locale locale, final String slug) {
-        return withPredicate(m -> m.slug().lang(locale).is(slug));
+        return withPredicates(m -> m.slug().lang(locale).is(slug));
     }
 
     default CategoryQuery byName(final Locale locale, final String name) {
-        return withPredicate(m -> m.name().lang(locale).is(name));
+        return withPredicates(m -> m.name().lang(locale).is(name));
     }
 
     default CategoryQuery byId(final String id) {
-        return withPredicate(m -> m.id().is(id));
+        return withPredicates(m -> m.id().is(id));
     }
 
     default CategoryQuery byIsRoot() {
-        return withPredicate(m -> m.parent().isNotPresent());
+        return withPredicates(m -> m.parent().isNotPresent());
     }
 
     static CategoryQuery of() {
@@ -44,6 +44,6 @@ public interface CategoryQuery extends MetaModelQueryDsl<Category, CategoryQuery
     }
 
     default CategoryQuery byExternalId(final String externalId) {
-        return withPredicate(m -> m.externalId().is(externalId));
+        return withPredicates(m -> m.externalId().is(externalId));
     }
 }

@@ -29,11 +29,11 @@ public interface ProductQuery extends MetaModelQueryDsl<Product, ProductQuery, P
     }
 
     default ProductQuery bySlug(final ProductProjectionType type, final Locale locale, final String slug) {
-        return withPredicate(m -> m.masterData().forProjection(type).slug().lang(locale).is(slug));
+        return withPredicates(m -> m.masterData().forProjection(type).slug().lang(locale).is(slug));
     }
 
     default ProductQuery byProductType(final Referenceable<ProductType> productType) {
-        return withPredicate(m -> m.productType().is(productType));
+        return withPredicates(m -> m.productType().is(productType));
     }
 
     default ProductQuery bySku(final String sku, final ProductProjectionType type) {
@@ -41,6 +41,6 @@ public interface ProductQuery extends MetaModelQueryDsl<Product, ProductQuery, P
         final ProductDataQueryModel<Product> projection = ProductQueryModel.of().masterData().forProjection(type);
         final QueryPredicate<Product> masterVariantSkuPredicate = projection.masterVariant().where(skuPredicate);
         final QueryPredicate<Product> variantsSkuPredicate = projection.variants().where(skuPredicate);
-        return withPredicate(masterVariantSkuPredicate.or(variantsSkuPredicate));
+        return withPredicates(masterVariantSkuPredicate.or(variantsSkuPredicate));
     }
 }

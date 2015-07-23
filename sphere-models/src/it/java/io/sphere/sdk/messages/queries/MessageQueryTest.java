@@ -21,7 +21,7 @@ public class MessageQueryTest extends IntegrationTest {
     public void convertAfterQueryToSpecificMessageClasses() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final MessageQuery query = MessageQuery.of()
-                    .withPredicate(m -> m.resource().is(order))
+                    .withPredicates(m -> m.resource().is(order))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource());
             final List<Message> results = execute(query).getResults();
@@ -46,7 +46,7 @@ public class MessageQueryTest extends IntegrationTest {
     public void convertAfterQueryToSpecificMessageClassesButToTheWrongOne() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final MessageQuery query = MessageQuery.of()
-                    .withPredicate(m -> m.resource().id().is(order.getId()))
+                    .withPredicates(m -> m.resource().id().is(order.getId()))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource());
             final List<Message> results = execute(query).getResults();
@@ -72,7 +72,7 @@ public class MessageQueryTest extends IntegrationTest {
     public void queryForASpecificResource() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final Query<SimpleOrderMessage> query = MessageQuery.of()
-                    .withPredicate(m -> m.resource().id().is(order.getId()))
+                    .withPredicates(m -> m.resource().id().is(order.getId()))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource())
                     .forMessageType(SimpleOrderMessage.MESSAGE_HINT);
@@ -105,7 +105,7 @@ public class MessageQueryTest extends IntegrationTest {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final Query<Message> query =
                     MessageQuery.of()
-                            .withPredicate(m -> m.type().is(ReturnInfoAddedMessage.MESSAGE_HINT))
+                            .withPredicates(m -> m.type().is(ReturnInfoAddedMessage.MESSAGE_HINT))
                             .withSort(m -> m.createdAt().sort().desc())
                             .withExpansionPaths(m -> m.resource())
                             .withLimit(1);
@@ -123,7 +123,7 @@ public class MessageQueryTest extends IntegrationTest {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final MessageQuery query = MessageQuery.of()
                     //example predicate to fetch for a specific message type
-                    .withPredicate(m -> m.type().is("ReturnInfoAdded"))
+                    .withPredicates(m -> m.type().is("ReturnInfoAdded"))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource())
                     .withLimit(1);

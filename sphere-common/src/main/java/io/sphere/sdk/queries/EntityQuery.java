@@ -2,9 +2,8 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.ReferenceExpandeable;
-import io.sphere.sdk.http.HttpQueryParameter;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 import java.util.List;
 
@@ -17,18 +16,21 @@ public interface EntityQuery<T> extends Query<T>, ReferenceExpandeable<T> {
      *
      * @return the predicate used to perform the query
      */
-    Optional<QueryPredicate<T>> predicate();
+    List<QueryPredicate<T>> predicates();
 
     /**
      * @return the used sort expressions for this query
      */
     List<QuerySort<T>> sort();
 
-    Optional<Boolean> fetchTotal();
+    @Nullable
+    Boolean fetchTotal();
 
-    Optional<Long> limit();
+    @Nullable
+    Long limit();
 
-    Optional<Long> offset();
+    @Nullable
+    Long offset();
 
     String endpoint();
 

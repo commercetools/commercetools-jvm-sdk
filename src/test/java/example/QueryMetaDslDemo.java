@@ -12,7 +12,7 @@ public class QueryMetaDslDemo {
     @Test
     public void demo1() throws Exception {
         final ProductProjectionQuery query = ProductProjectionQuery.ofCurrent()
-                .withPredicate(m -> m.productType().id().is("product-type-id-1"))
+                .withPredicates(m -> m.productType().id().is("product-type-id-1"))
                 .withSort(m -> m.name().lang(Locale.ENGLISH).sort().asc())
                 .withExpansionPaths(m -> m.productType());
     }
@@ -24,7 +24,7 @@ public class QueryMetaDslDemo {
         final ProductProjectionExpansionModel<ProductProjection> expansionModel = ProductProjectionExpansionModel.of();
 
         final ProductProjectionQuery query = ProductProjectionQuery.ofCurrent()
-                .withPredicate(queryModel.productType().id().is("product-type-id-1"))
+                .withPredicates(queryModel.productType().id().is("product-type-id-1"))
                 .withSort(queryModel.name().lang(Locale.ENGLISH).sort().asc())
                 .withExpansionPaths(expansionModel.productType());
     }

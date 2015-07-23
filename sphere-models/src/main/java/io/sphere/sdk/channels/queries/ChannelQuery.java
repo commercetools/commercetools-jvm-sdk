@@ -20,7 +20,7 @@ public interface ChannelQuery extends MetaModelQueryDsl<Channel, ChannelQuery, C
     }
 
     default ChannelQuery byKey(final String key) {
-        return withPredicate(m -> m.key().is(key));
+        return withPredicates(m -> m.key().is(key));
     }
 
     static ChannelQuery of() {

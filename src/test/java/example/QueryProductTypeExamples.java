@@ -21,7 +21,7 @@ public class QueryProductTypeExamples {
 
     public void queryByAttributeName() {
         QueryPredicate<ProductType> hasSizeAttribute = ProductTypeQueryModel.of().attributes().name().is("size");
-        CompletionStage<PagedQueryResult<ProductType>> result = client.execute(ProductTypeQuery.of().withPredicate(hasSizeAttribute));
+        CompletionStage<PagedQueryResult<ProductType>> result = client.execute(ProductTypeQuery.of().withPredicates(hasSizeAttribute));
     }
 
     public void delete() {

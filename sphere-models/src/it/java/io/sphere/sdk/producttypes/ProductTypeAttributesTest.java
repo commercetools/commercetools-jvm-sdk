@@ -201,7 +201,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     @Test
     public void queryByAttributeType() throws Exception {
         final String attributeTypeName = "enum";
-        final Query<ProductType> queryForEnum = ProductTypeQuery.of().withPredicate(hasAttributeType(attributeTypeName));
+        final Query<ProductType> queryForEnum = ProductTypeQuery.of().withPredicates(hasAttributeType(attributeTypeName));
         withDistractorProductType(x -> {//contains no enum attribute, so it should not be included in the result
             withTShirtProductType(y -> {
                 final java.util.function.Predicate<ProductType> containsEnumAttr = productType -> productType.getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeTypeName));
@@ -375,6 +375,6 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     protected void cleanUpByName(final List<String> names) {
-        execute(ProductTypeQuery.of().withPredicate(ProductTypeQueryModel.of().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
+        execute(ProductTypeQuery.of().withPredicates(ProductTypeQueryModel.of().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
     }
 }

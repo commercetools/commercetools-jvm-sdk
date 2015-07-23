@@ -81,7 +81,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
 
     @Test
     public void fetchRoots() throws Exception {
-        final CategoryQuery seedQuery = CategoryQuery.of().withPredicate(m -> m.parent().isNotPresent());
+        final CategoryQuery seedQuery = CategoryQuery.of().withPredicates(m -> m.parent().isNotPresent());
         final Publisher<Category> categoryPublisher =
                 ExperimentalReactiveStreamUtils.publisherOf(seedQuery, sphereClient());
         final CompletionStage<List<Category>> categoriesStage =
@@ -259,7 +259,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
             withProductInCategory(client(), tshirtCategory, tshirtProduct -> {
                 final PagedQueryResult<ProductProjection> resultForParentCategory =
                         //query for the parent category
-                        execute(ProductProjectionQuery.ofStaged().withPredicate(m -> m.categories().isIn(mensClothingCategory)));
+                        execute(ProductProjectionQuery.ofStaged().withPredicates(m -> m.categories().isIn(mensClothingCategory)));
                 assertThat(resultForParentCategory.getResults())
                         .overridingErrorMessage(
                                 "if a product is in a category," +
@@ -267,9 +267,9 @@ public class CategoryDocumentationTest extends IntegrationTest {
                                         "the query will not find the product")
                         .isEmpty();
 
-                final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicate(m -> m.categories().isIn(tshirtCategory, jeansCategory));
-                assertThat(query.predicate())
-                        .contains(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
+                final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicates(m -> m.categories().isIn(tshirtCategory, jeansCategory));
+                assertThat(query.predicates().get(0))
+                        .isEqualTo(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
                 final PagedQueryResult<ProductProjection> resultForDirectCategories =
                         execute(query);
                 assertThat(resultForDirectCategories.getResults())

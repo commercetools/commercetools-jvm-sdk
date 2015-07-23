@@ -81,9 +81,9 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final Cart loadedCart = execute(CartQuery.of()
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1)
-                    .withPredicate(
+                    .withPredicates(
                             m -> m.lineItems().supplyChannel().is(inventorySupplyChannel)
-                            .and(m.lineItems().distributionChannel().is(distributionChannel)))
+                                    .and(m.lineItems().distributionChannel().is(distributionChannel)))
                     .plusExpansionPaths(m -> m.lineItems(0).supplyChannel())
                     .plusExpansionPaths(m -> m.lineItems(0).distributionChannel())).head().get();
             final LineItem loadedLineItem = loadedCart.getLineItems().get(0);

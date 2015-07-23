@@ -2,7 +2,6 @@ package io.sphere.sdk.products.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
@@ -29,11 +28,11 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     }
 
     default ProductProjectionQuery byProductType(final Referenceable<ProductType> productType) {
-        return withPredicate(m -> m.productType().is(productType));
+        return withPredicates(m -> m.productType().is(productType));
     }
 
     default ProductProjectionQuery bySlug(final Locale locale, final String slug) {
-        return withPredicate(m -> m.slug().lang(locale).is(slug));
+        return withPredicates(m -> m.slug().lang(locale).is(slug));
     }
 
     static ProductProjectionQuery ofStaged() {
@@ -61,10 +60,10 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     ProductProjectionQuery withOffset(final long offset);
 
     @Override
-    ProductProjectionQuery withPredicate(final Function<ProductProjectionQueryModel, QueryPredicate<ProductProjection>> m);
+    ProductProjectionQuery withPredicates(final Function<ProductProjectionQueryModel, QueryPredicate<ProductProjection>> m);
 
     @Override
-    ProductProjectionQuery withPredicate(final QueryPredicate<ProductProjection> predicate);
+    ProductProjectionQuery withPredicates(final QueryPredicate<ProductProjection> queryPredicates);
 
     @Override
     ProductProjectionQuery withSort(final Function<ProductProjectionQueryModel, QuerySort<ProductProjection>> m);

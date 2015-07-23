@@ -24,7 +24,7 @@ public final class TaxCategoryFixtures {
 
     public static void withTaxCategory(final TestClient client, final Consumer<TaxCategory> user) {
         final QueryPredicate<TaxCategory> predicate = TaxCategoryQueryModel.of().name().is(STANDARD_TAX_CATEGORY);
-        final List<TaxCategory> results = client.execute(TaxCategoryQuery.of().withPredicate(predicate)).getResults();
+        final List<TaxCategory> results = client.execute(TaxCategoryQuery.of().withPredicates(predicate)).getResults();
         final TaxCategory taxCategory;
         if (results.isEmpty()) {
             final List<TaxRate> taxRates = asList(TaxRate.of("5% US", 0.05, false, US), TaxRate.of("19% MwSt", 0.19, true, DE));

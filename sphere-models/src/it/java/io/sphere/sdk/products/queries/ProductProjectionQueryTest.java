@@ -47,7 +47,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     public void expandProductReferencesInProductAttributes() throws Exception {
         withProductWithProductReference(client(), (product, referencedProduct) -> {
             final Query<ProductProjection> query = ProductProjectionQuery.ofStaged()
-                    .withPredicate(m -> m.id().is(product.getId()))
+                    .withPredicates(m -> m.id().is(product.getId()))
                     .withExpansionPaths(m -> m.masterVariant().attributes().value())
                     .toQuery();
             final ProductProjection productProjection = execute(query).head().get();
@@ -62,7 +62,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     public void variantIdentifierIsAvailable() throws Exception {
         withProduct(client(), product -> {
             final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
-                    .withPredicate(m -> m.id().is(product.getId()));
+                    .withPredicates(m -> m.id().is(product.getId()));
             final ProductProjection productProjection = execute(query).head().get();
             final VariantIdentifier identifier = productProjection.getMasterVariant().getIdentifier();
             assertThat(identifier).isEqualTo(VariantIdentifier.of(product.getId(), 1));
@@ -74,7 +74,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
         withCustomerGroup(client(), customerGroup ->
             withUpdateablePricedProduct(client(), PRICE.withCustomerGroup(customerGroup), product -> {
                 final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
-                                .withPredicate(m -> m.id().is(product.getId()))
+                                .withPredicates(m -> m.id().is(product.getId()))
                                 .withExpansionPaths(m -> m.masterVariant().prices().customerGroup());
                 final List<Price> prices = execute(query).head().get().getMasterVariant().getPrices();
                 assertThat(prices
@@ -91,7 +91,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
         ChannelFixtures.withChannelOfRole(client(), ChannelRole.INVENTORY_SUPPLY, channel -> {
             withUpdateablePricedProduct(client(), PRICE.withChannel(channel), product -> {
                 final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
-                        .withPredicate(m -> m.id().is(product.getId()))
+                        .withPredicates(m -> m.id().is(product.getId()))
                         .withExpansionPaths(m -> m.masterVariant().prices().channel());
                 final List<Price> prices = execute(query).head().get().getMasterVariant().getPrices();
                 assertThat(prices
@@ -119,10 +119,10 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     @Test
     public void queryById() throws Exception {
         with2products("queryById", (p1, p2) ->{
-            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicate(m -> m.id().isIn(p1.getId(), p2.getId()));
+            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicates(m -> m.id().isIn(p1.getId(), p2.getId()));
             assertThat(ids(execute(query1))).containsOnly(p1.getId(), p2.getId());
 
-            final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED).withPredicate(m -> m.id().is(p1.getId()));
+            final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED).withPredicates(m -> m.id().is(p1.getId()));
             assertThat(ids(execute(query))).containsOnly(p1.getId());
         });
     }
@@ -138,7 +138,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     @Test
     public void queryByName() throws Exception {
         with2products("queryByName", (p1, p2) ->{
-            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicate(m -> m.name().lang(ENGLISH).is(en(p1.getMasterData().getStaged().getDescription())));
+            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicates(m -> m.name().lang(ENGLISH).is(en(p1.getMasterData().getStaged().getDescription())));
             assertThat(ids(execute(query1))).containsOnly(p1.getId());
         });
     }
@@ -152,7 +152,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                                                             final Category cat1WithParent = execute(CategoryUpdateCommand.of(cat1, asList(ChangeParent.of(cat3))));
                                                             final Product productWithCat1 = execute(ProductUpdateCommand.of(p1, AddToCategory.of(cat1WithParent, STAGED_AND_CURRENT)));
                                                             final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
-                                                                    .withPredicate(m -> m.categories().isIn(asList(cat1, cat2)))
+                                                                    .withPredicates(m -> m.categories().isIn(asList(cat1, cat2)))
                                                                     .withExpansionPaths(m -> m.categories().parent());
                                                             final PagedQueryResult<ProductProjection> queryResult = execute(query);
                                                             assertThat(ids(queryResult)).containsOnly(productWithCat1.getId());
@@ -171,7 +171,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
         withProduct(client(), product -> {
             final Product updated = execute(ProductUpdateCommand.of(product, ChangeName.of(randomSlug(), ONLY_STAGED)));
             final PagedQueryResult<ProductProjection> pagedQueryResult = execute(ProductProjectionQuery.of(STAGED)
-                    .withPredicate(m -> m.hasStagedChanges().is(true))
+                    .withPredicates(m -> m.hasStagedChanges().is(true))
                     .withSort(m -> m.createdAt().sort(DESC)));
             assertThat(ids(pagedQueryResult)).contains(updated.getId());
         });
@@ -209,7 +209,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                             final Product productWithTaxCategory = execute(ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory)));
                             final PagedQueryResult<ProductProjection> pagedQueryResult =
                                     execute(ProductProjectionQuery.of(STAGED)
-                                            .withPredicate(m -> m.id().is(productWithTaxCategory.getId()))
+                                            .withPredicates(m -> m.id().is(productWithTaxCategory.getId()))
                                             .withExpansionPaths(m -> m.taxCategory()));
                             assertThat(pagedQueryResult.head().get().getTaxCategory().get()).isExpanded();
                         })
@@ -217,7 +217,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     }
 
     private void checkOneResult(final Product product, final QueryPredicate<ProductProjection> predicate) {
-        final PagedQueryResult<ProductProjection> queryResult = execute(ProductProjectionQuery.of(STAGED).withPredicate(predicate));
+        final PagedQueryResult<ProductProjection> queryResult = execute(ProductProjectionQuery.of(STAGED).withPredicates(predicate));
         assertThat(ids(queryResult)).containsOnly(product.getId());
     }
 

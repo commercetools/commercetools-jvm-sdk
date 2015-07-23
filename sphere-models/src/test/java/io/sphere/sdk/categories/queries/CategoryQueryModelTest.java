@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CategoryQueryModelTest {
     @Test
     public void not() throws Exception {
-        final QueryPredicate<Category> predicate = CategoryQuery.of().withPredicate(m -> m.not(m.id().is("foo"))).predicate().get();
+        final QueryPredicate<Category> predicate = CategoryQuery.of().withPredicates(m -> m.not(m.id().is("foo"))).predicates().get(0);
         assertThat(predicate.toSphereQuery()).isEqualTo("not(id=\"foo\")");
     }
 }
