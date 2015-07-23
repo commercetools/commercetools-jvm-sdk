@@ -1,7 +1,5 @@
 package io.sphere.sdk.search;
 
-import java.util.Optional;
-
 /**
  * Filter ranges should be of the form [a, b], (-∞, b] or [a, +∞).
  * @param <T> type of the range domain.

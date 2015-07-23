@@ -1,7 +1,6 @@
 package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 import static java.util.Arrays.asList;
 
