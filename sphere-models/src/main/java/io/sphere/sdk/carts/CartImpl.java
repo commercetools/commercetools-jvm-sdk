@@ -8,36 +8,44 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 class CartImpl extends DefaultModelImpl<Cart> implements Cart {
-    private final Optional<String> customerId;
-    private final Optional<String> customerEmail;
+    @Nullable
+    private final String customerId;
+    @Nullable
+    private final String customerEmail;
     private final List<LineItem> lineItems;
     private final List<CustomLineItem> customLineItems;
     private final MonetaryAmount totalPrice;
-    private final Optional<TaxedPrice> taxedPrice;
+    @Nullable
+    private final TaxedPrice taxedPrice;
     private final CartState cartState;
-    private final Optional<Address> shippingAddress;
-    private final Optional<Address>  billingAddress;
+    @Nullable
+    private final Address shippingAddress;
+    @Nullable
+    private final Address billingAddress;
     private final InventoryMode inventoryMode;
-    private final Optional<Reference<CustomerGroup>> customerGroup;
-    private final Optional<CountryCode> country;
-    private final Optional<CartShippingInfo> shippingInfo;
+    @Nullable
+    private final Reference<CustomerGroup> customerGroup;
+    @Nullable
+    private final CountryCode country;
+    @Nullable
+    private final CartShippingInfo shippingInfo;
     private final List<DiscountCodeInfo> discountCodes;
 
     @JsonCreator
     CartImpl(final String id, final long version, final ZonedDateTime createdAt,
-             final ZonedDateTime lastModifiedAt, final Optional<String> customerId,
-             final Optional<String> customerEmail, final List<LineItem> lineItems,
+             final ZonedDateTime lastModifiedAt, final String customerId,
+             final String customerEmail, final List<LineItem> lineItems,
              final List<CustomLineItem> customLineItems, final MonetaryAmount totalPrice,
-             final Optional<TaxedPrice> taxedPrice, final CartState cartState,
-             final Optional<Address> shippingAddress, final Optional<Address> billingAddress,
-             final InventoryMode inventoryMode, final Optional<Reference<CustomerGroup>> customerGroup,
-             final Optional<CountryCode> country, final Optional<CartShippingInfo> shippingInfo, final List<DiscountCodeInfo> discountCodes) {
+             final TaxedPrice taxedPrice, final CartState cartState,
+             final Address shippingAddress, final Address billingAddress,
+             final InventoryMode inventoryMode, final Reference<CustomerGroup> customerGroup,
+             final CountryCode country, final CartShippingInfo shippingInfo, final List<DiscountCodeInfo> discountCodes) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerId = customerId;
         this.customerEmail = customerEmail;
@@ -56,12 +64,14 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
     }
 
     @Override
-    public Optional<String> getCustomerId() {
+    @Nullable
+    public String getCustomerId() {
         return customerId;
     }
 
     @Override
-    public Optional<String> getCustomerEmail() {
+    @Nullable
+    public String getCustomerEmail() {
         return customerEmail;
     }
 
@@ -81,7 +91,8 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
     }
 
     @Override
-    public Optional<TaxedPrice> getTaxedPrice() {
+    @Nullable
+    public TaxedPrice getTaxedPrice() {
         return taxedPrice;
     }
 
@@ -91,12 +102,14 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
     }
 
     @Override
-    public Optional<Address> getShippingAddress() {
+    @Nullable
+    public Address getShippingAddress() {
         return shippingAddress;
     }
 
     @Override
-    public Optional<Address> getBillingAddress() {
+    @Nullable
+    public Address getBillingAddress() {
         return billingAddress;
     }
 
@@ -106,17 +119,20 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
     }
 
     @Override
-    public Optional<Reference<CustomerGroup>> getCustomerGroup() {
+    @Nullable
+    public Reference<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 
     @Override
-    public Optional<CountryCode> getCountry() {
+    @Nullable
+    public CountryCode getCountry() {
         return country;
     }
 
     @Override
-    public Optional<CartShippingInfo> getShippingInfo() {
+    @Nullable
+    public CartShippingInfo getShippingInfo() {
         return shippingInfo;
     }
 

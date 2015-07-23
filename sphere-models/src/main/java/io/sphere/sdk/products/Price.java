@@ -26,19 +26,26 @@ import javax.money.MonetaryAmount;
  */
 public class Price extends Base {
     private final MonetaryAmount value;
-    private final Optional<CountryCode> country;
-    private final Optional<Reference<CustomerGroup>> customerGroup;
-    private final Optional<Reference<Channel>> channel;
-    private final Optional<DiscountedPrice> discounted;
-    private @Nullable final ZonedDateTime validFrom;
-    private @Nullable final ZonedDateTime validUntil;
-    private final Optional<String> id;
+    @Nullable
+    private final CountryCode country;
+    @Nullable
+    private final Reference<CustomerGroup> customerGroup;
+    @Nullable
+    private final Reference<Channel> channel;
+    @Nullable
+    private final DiscountedPrice discounted;
+    @Nullable
+    private final ZonedDateTime validFrom;
+    @Nullable
+    private final ZonedDateTime validUntil;
+    @Nullable
+    private final String id;
 
     @JsonCreator
-    Price(final MonetaryAmount value, final Optional<CountryCode> country,
-          final Optional<Reference<CustomerGroup>> customerGroup, final Optional<Reference<Channel>> channel,
-          final Optional<DiscountedPrice> discounted,
-          @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final Optional<String> id) {
+    Price(final MonetaryAmount value, final CountryCode country,
+          final Reference<CustomerGroup> customerGroup, final Reference<Channel> channel,
+          final DiscountedPrice discounted,
+          @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final String id) {
         this.value = value;
         this.country = country;
         this.customerGroup = customerGroup;
@@ -53,15 +60,18 @@ public class Price extends Base {
         return value;
     }
 
-    public Optional<CountryCode> getCountry() {
+    @Nullable
+    public CountryCode getCountry() {
         return country;
     }
 
-    public Optional<Reference<CustomerGroup>> getCustomerGroup() {
+    @Nullable
+    public Reference<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 
-    public Optional<Reference<Channel>> getChannel() {
+    @Nullable
+    public Reference<Channel> getChannel() {
         return channel;
     }
 
@@ -70,7 +80,8 @@ public class Price extends Base {
      * Beware that another discount can win and in here is another discount than you expect.
      * @return discount data
      */
-    public Optional<DiscountedPrice> getDiscounted() {
+    @Nullable
+    public DiscountedPrice getDiscounted() {
         return discounted;
     }
 
@@ -88,40 +99,26 @@ public class Price extends Base {
      * The unique ID of this price. Only read only.
      * @return price id
      */
-    public Optional<String> getId() {
+    @Nullable
+    public String getId() {
         return id;
     }
 
-    public Price withCustomerGroup(final Optional<Reference<CustomerGroup>> customerGroup) {
-        return PriceBuilder.of(this).customerGroup(customerGroup).build();
-    }
-    
-    public Price withCustomerGroup(final Referenceable<CustomerGroup> customerGroup) {
-        return withCustomerGroup(Optional.of(customerGroup.toReference()));
+    public Price withCustomerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
+        return PriceBuilder.of(this).customerGroup(Optional.ofNullable(customerGroup).map(c -> c.toReference()).orElse(null)).build();
     }
 
-    public Price withCountry(final Optional<CountryCode> country) {
+    public Price withCountry(@Nullable final CountryCode country) {
         return PriceBuilder.of(this).country(country).build();
     }
 
-    public Price withCountry(final CountryCode country) {
-        return withCountry(Optional.of(country));
-    }
-
-    public Price withChannel(final Optional<Reference<Channel>> channel) {
-        return PriceBuilder.of(this).channel(channel).build();
-    }
-
-    public Price withChannel(final Referenceable<Channel> channel) {
-        return withChannel(Optional.of(channel.toReference()));
+    public Price withChannel(@Nullable final Referenceable<Channel> channel) {
+        final Reference<Channel> channelReference = Optional.ofNullable(channel).map(Referenceable::toReference).orElse(null);
+        return PriceBuilder.of(this).channel(channelReference).build();
     }
     
-    public Price withDiscounted(final Optional<DiscountedPrice> discounted) {
+    public Price withDiscounted(@Nullable final DiscountedPrice discounted) {
         return PriceBuilder.of(this).discounted(discounted).build();
-    }
-
-    public Price withDiscounted(final DiscountedPrice discounted) {
-        return withDiscounted(Optional.of(discounted));
     }
 
     public Price withValue(final MonetaryAmount value) {
@@ -136,11 +133,7 @@ public class Price extends Base {
         return PriceBuilder.of(this).validUntil(validUntil).build();
     }
 
-    public Price withId(final String id) {
-        return withId(Optional.of(id));
-    }
-
-    public Price withId(final Optional<String> id) {
+    public Price withId(@Nullable final String id) {
         return PriceBuilder.of(this).id(id).build();
     }
 

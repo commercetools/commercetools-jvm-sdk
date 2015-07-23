@@ -4,27 +4,33 @@ import io.sphere.sdk.attributes.AttributeImportDraft;
 import io.sphere.sdk.models.Image;
 import io.sphere.sdk.products.Price;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 /**
  *
  * @see ProductVariantImportDraftBuilder
  */
 public interface ProductVariantImportDraft {
-    Optional<List<AttributeImportDraft>> getAttributes();
+    @Nullable
+    List<AttributeImportDraft> getAttributes();
 
-    Optional<Integer> getId();
+    @Nullable
+    Integer getId();
 
-    Optional<List<Image>> getImages();
+    @Nullable
+    List<Image> getImages();
 
-    Optional<List<Price>> getPrices();
+    @Nullable
+    List<Price> getPrices();
 
-    Optional<String> getSku();
+    @Nullable
+    String getSku();
 
     /**
      * Field is not part of the SPHERE.IO API, it is used to initialize {@link LineItemImportDraftBuilder} correctly.
      * @return the product ID
      */
-    Optional<String> getProductId();
+    @Nullable
+    String getProductId();
 }

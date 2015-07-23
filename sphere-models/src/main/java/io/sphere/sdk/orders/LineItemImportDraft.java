@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.taxcategories.TaxRate;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.Set;
 
 /**
@@ -19,15 +19,19 @@ public interface LineItemImportDraft {
 
     Price getPrice();
 
-    Optional<String> getProductId();
+    @Nullable
+    String getProductId();
 
-    long getQuantity();
+    Long getQuantity();
 
-    Optional<Set<ItemState>> getState();
+    @Nullable
+    Set<ItemState> getState();
 
-    Optional<Reference<Channel>> getSupplyChannel();
+    @Nullable
+    Reference<Channel> getSupplyChannel();
 
-    Optional<TaxRate> getTaxRate();
+    @Nullable
+    TaxRate getTaxRate();
 
     ProductVariantImportDraft getVariant();
 }

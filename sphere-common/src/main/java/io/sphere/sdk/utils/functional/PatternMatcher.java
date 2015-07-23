@@ -7,7 +7,8 @@ import java.util.function.Function;
 
 public class PatternMatcher<T> extends Base {
     private final Object thing;
-    private @Nullable final T result;
+    @Nullable
+    private final T result;
 
     PatternMatcher(final Object thing, @Nullable final T result) {
         this.thing = thing;

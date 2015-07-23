@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.util.List;
 import java.util.Optional;
@@ -17,38 +18,45 @@ import java.util.Optional;
  */
 public interface CartLike<T> extends DefaultModel<T> {
 
-    Optional<String> getCustomerId();
+    @Nullable
+    String getCustomerId();
 
-    Optional<String> getCustomerEmail();
+    @Nullable
+    String getCustomerEmail();
 
     List<LineItem> getLineItems();
 
     List<CustomLineItem> getCustomLineItems();
 
-    default Optional<CustomLineItem> getCustomLineItem(final String customLineItemId) {
+    default Optional<CustomLineItem> findCustomLineItem(final String customLineItemId) {
         return getCustomLineItems().stream().filter(item -> item.getId().equals(customLineItemId)).findAny();
     }
 
-    default Optional<LineItem> getLineItem(final String lineItemId) {
+    default Optional<LineItem> findLineItem(final String lineItemId) {
         return getLineItems().stream().filter(item -> item.getId().equals(lineItemId)).findAny();
     }
 
     MonetaryAmount getTotalPrice();
 
-    Optional<TaxedPrice> getTaxedPrice();
+    @Nullable
+    TaxedPrice getTaxedPrice();
 
-    Optional<Address> getShippingAddress();
+    @Nullable
+    Address getShippingAddress();
 
-    Optional<Address> getBillingAddress();
+    @Nullable
+    Address getBillingAddress();
 
     /**
      * In the order context the customer group can only be expanded if the customer was in a group before creating the order.
      *
      * @return optional reference of a customer group
      */
-    Optional<Reference<CustomerGroup>> getCustomerGroup();
+    @Nullable
+    Reference<CustomerGroup> getCustomerGroup();
 
-    Optional<CountryCode> getCountry();
+    @Nullable
+    CountryCode getCountry();
 
     List<DiscountCodeInfo> getDiscountCodes();
 }

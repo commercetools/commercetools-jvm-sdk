@@ -74,7 +74,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                     .findFirst()
                     .get();
 
-            assertThat(actualPrice.withId(Optional.empty())).isEqualTo(expectedPrice);
+            assertThat(actualPrice.withId(null)).isEqualTo(expectedPrice);
             return updatedProduct;
         });
     }

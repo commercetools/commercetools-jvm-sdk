@@ -11,28 +11,38 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 final class OrderImportDraftImpl extends Base implements OrderImportDraft {
-    private final Optional<String> orderNumber;
-    private final Optional<String> customerId;
-    private final Optional<String> customerEmail;
+    @Nullable
+    private final String orderNumber;
+    @Nullable
+    private final String customerId;
+    @Nullable
+    private final String customerEmail;
     private final List<LineItemImportDraft> lineItems;
     private final List<CustomLineItemImportDraft> customLineItems;
     private final MonetaryAmount totalPrice;
-    private final Optional<TaxedPrice> taxedPrice;
-    private final Optional<Address> shippingAddress;
-    private final Optional<Address> billingAddress;
-    private final Optional<Reference<CustomerGroup>> customerGroup;
-    private final Optional<CountryCode> country;
+    @Nullable
+    private final TaxedPrice taxedPrice;
+    @Nullable
+    private final Address shippingAddress;
+    @Nullable
+    private final Address billingAddress;
+    @Nullable
+    private final Reference<CustomerGroup> customerGroup;
+    @Nullable
+    private final CountryCode country;
     private final OrderState orderState;
-    private final Optional<ShipmentState> shipmentState;
-    private final Optional<PaymentState> paymentState;
-    private final Optional<OrderShippingInfo> shippingInfo;
+    @Nullable
+    private final ShipmentState shipmentState;
+    @Nullable
+    private final PaymentState paymentState;
+    @Nullable
+    private final OrderShippingInfo shippingInfo;
     @Nullable
     private final ZonedDateTime completedAt;
 
-    public OrderImportDraftImpl(final Optional<Address> billingAddress, final Optional<String> orderNumber, final Optional<String> customerId, final Optional<String> customerEmail, final List<LineItemImportDraft> lineItems, final List<CustomLineItemImportDraft> customLineItems, final MonetaryAmount totalPrice, final Optional<TaxedPrice> taxedPrice, final Optional<Address> shippingAddress, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<CountryCode> country, final OrderState orderState, final Optional<ShipmentState> shipmentState, final Optional<PaymentState> paymentState, final Optional<OrderShippingInfo> shippingInfo, final ZonedDateTime completedAt) {
+    public OrderImportDraftImpl(final Address billingAddress, final String orderNumber, final String customerId, final String customerEmail, final List<LineItemImportDraft> lineItems, final List<CustomLineItemImportDraft> customLineItems, final MonetaryAmount totalPrice, final TaxedPrice taxedPrice, final Address shippingAddress, final Reference<CustomerGroup> customerGroup, final CountryCode country, final OrderState orderState, final ShipmentState shipmentState, final PaymentState paymentState, final OrderShippingInfo shippingInfo, final ZonedDateTime completedAt) {
         this.billingAddress = billingAddress;
         this.orderNumber = orderNumber;
         this.customerId = customerId;
@@ -52,7 +62,8 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     }
 
     @Override
-    public Optional<Address> getBillingAddress() {
+    @Nullable
+    public Address getBillingAddress() {
         return billingAddress;
     }
 
@@ -62,22 +73,26 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     }
 
     @Override
-    public Optional<CountryCode> getCountry() {
+    @Nullable
+    public CountryCode getCountry() {
         return country;
     }
 
     @Override
-    public Optional<String> getCustomerEmail() {
+    @Nullable
+    public String getCustomerEmail() {
         return customerEmail;
     }
 
     @Override
-    public Optional<Reference<CustomerGroup>> getCustomerGroup() {
+    @Nullable
+    public Reference<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 
     @Override
-    public Optional<String> getCustomerId() {
+    @Nullable
+    public String getCustomerId() {
         return customerId;
     }
 
@@ -92,7 +107,8 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     }
 
     @Override
-    public Optional<String> getOrderNumber() {
+    @Nullable
+    public String getOrderNumber() {
         return orderNumber;
     }
 
@@ -102,27 +118,32 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     }
 
     @Override
-    public Optional<PaymentState> getPaymentState() {
+    @Nullable
+    public PaymentState getPaymentState() {
         return paymentState;
     }
 
     @Override
-    public Optional<ShipmentState> getShipmentState() {
+    @Nullable
+    public ShipmentState getShipmentState() {
         return shipmentState;
     }
 
     @Override
-    public Optional<Address> getShippingAddress() {
+    @Nullable
+    public Address getShippingAddress() {
         return shippingAddress;
     }
 
     @Override
-    public Optional<OrderShippingInfo> getShippingInfo() {
+    @Nullable
+    public OrderShippingInfo getShippingInfo() {
         return shippingInfo;
     }
 
     @Override
-    public Optional<TaxedPrice> getTaxedPrice() {
+    @Nullable
+    public TaxedPrice getTaxedPrice() {
         return taxedPrice;
     }
 

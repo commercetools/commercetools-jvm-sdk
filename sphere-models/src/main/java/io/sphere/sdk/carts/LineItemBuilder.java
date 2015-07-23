@@ -22,9 +22,12 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
     private final Price price;
     private final long quantity;
     private Set<ItemState> state = Collections.emptySet();
-    private Optional<TaxRate> taxRate = Optional.empty();
-    private Optional<Reference<Channel>> supplyChannel = Optional.empty();
-    private Optional<DiscountedLineItemPrice> discountedPrice = Optional.empty();
+    @Nullable
+    private TaxRate taxRate;
+    @Nullable
+    private Reference<Channel> supplyChannel;
+    @Nullable
+    private DiscountedLineItemPrice discountedPrice;
 
     private LineItemBuilder(final String id, final String productId, final LocalizedStrings name, final ProductVariant variant, final Price price, final long quantity, final LocalizedStrings productSlug) {
         this.id = id;
@@ -41,25 +44,17 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
         return this;
     }
 
-    public LineItemBuilder supplyChannel(final Referenceable<Channel> supplyChannel) {
-        return supplyChannel(Optional.of(supplyChannel.toReference()));
-    }
-
-    public LineItemBuilder supplyChannel(final Optional<Reference<Channel>> supplyChannel) {
-        this.supplyChannel = supplyChannel;
+    public LineItemBuilder supplyChannel(@Nullable final Referenceable<Channel> supplyChannel) {
+        this.supplyChannel = Optional.ofNullable(supplyChannel).map(x -> x.toReference()).orElse(null);
         return this;
     }
 
-    public LineItemBuilder taxRate(final TaxRate taxRate) {
-        return taxRate(Optional.of(taxRate));
-    }
-
-    public LineItemBuilder taxRate(final Optional<TaxRate> taxRate) {
+    public LineItemBuilder taxRate(@Nullable final TaxRate taxRate) {
         this.taxRate = taxRate;
         return this;
     }
 
-    public LineItemBuilder discountedPrice(final Optional<DiscountedLineItemPrice> discountedPrice) {
+    public LineItemBuilder discountedPrice(@Nullable final DiscountedLineItemPrice discountedPrice) {
         this.discountedPrice = discountedPrice;
         return this;
     }
@@ -78,6 +73,6 @@ public final class LineItemBuilder extends Base implements Builder<LineItem> {
 
     @Override
     public LineItem build() {
-        return new LineItemImpl(id, productId, name, variant, price, quantity, state, taxRate, supplyChannel, discountedPrice, productSlug, Optional.empty());
+        return new LineItemImpl(id, productId, name, variant, price, quantity, state, taxRate, supplyChannel, discountedPrice, productSlug, null);
     }
 }

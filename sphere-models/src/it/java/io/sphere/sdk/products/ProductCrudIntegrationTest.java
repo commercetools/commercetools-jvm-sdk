@@ -90,7 +90,7 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
         final Price price = Price.of(MoneyImpl.of(523, EUR)).withChannel(channel);
         final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddPrice.of(MASTER_VARIANT_ID, price, STAGED_AND_CURRENT)));
         final Price readPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-        assertThat(readPrice.getChannel()).contains(channel.toReference());
+        assertThat(readPrice.getChannel()).isEqualTo(channel.toReference());
         execute(ProductUpdateCommand.of(updatedProduct, RemovePrice.of(readPrice, STAGED_AND_CURRENT)));
         cleanUpChannelByKey(client(), channelKey);
     }

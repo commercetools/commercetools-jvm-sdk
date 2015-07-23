@@ -32,7 +32,7 @@ public class OrderQueryTest extends IntegrationTest {
                                 .withPredicates(m -> m.id().is(order.getId()).and(m.customerGroup().is(customerGroup)))
                                 .withExpansionPaths(m -> m.customerGroup())
                 ).head().get();
-                assertThat(queriedOrder.getCustomerGroup().get().getObj().getName())
+                assertThat(queriedOrder.getCustomerGroup().getObj().getName())
                         .overridingErrorMessage("customerGroupIsExpandeable")
                         .isEqualTo(customerGroup.getName());
             });
@@ -42,7 +42,7 @@ public class OrderQueryTest extends IntegrationTest {
     @Test
     public void customerId() throws Exception {
         assertOrderIsFound(order -> {
-            final String customerId = order.getCustomerId().get();
+            final String customerId = order.getCustomerId();
             return OrderQuery.of().byCustomerId(customerId);
         });
     }
@@ -50,14 +50,14 @@ public class OrderQueryTest extends IntegrationTest {
     @Test
     public void customerEmail() throws Exception {
         assertOrderIsFound(order -> {
-            final String customerEmail = order.getCustomerEmail().get();
+            final String customerEmail = order.getCustomerEmail();
             return OrderQuery.of().byCustomerEmail(customerEmail);
         });
     }
 
     @Test
     public void customerIdQueryModel() throws Exception {
-        assertOrderIsFoundWithPredicate(order -> MODEL.customerId().is(order.getCustomerId().get()));
+        assertOrderIsFoundWithPredicate(order -> MODEL.customerId().is(order.getCustomerId()));
     }
 
     @Test

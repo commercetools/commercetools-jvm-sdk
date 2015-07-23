@@ -62,7 +62,7 @@ public class OrderImportCommandTest extends IntegrationTest {
             assertThat(order.getOrderState()).isEqualTo(orderState);
             assertThat(order.getTotalPrice()).isEqualTo(amount);
             assertThat(order.getLineItems()).hasSize(1);
-            assertThat(order.getCountry()).contains(DE);
+            assertThat(order.getCountry()).isEqualTo(DE);
             final LineItem lineItem = order.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(name);
             assertThat(lineItem.getProductId()).isEqualTo(productId);
@@ -166,7 +166,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                         assertThat(actual.getName()).isEqualTo(name);
                         assertThat(actual.getSlug()).isEqualTo(slug);
                         assertThat(actual.getTaxCategory()).isEqualTo(taxCategoryReference);
-                        assertThat(actual.getTaxRate()).contains(taxRate);
+                        assertThat(actual.getTaxRate()).isEqualTo(taxRate);
                     }
             );
         }));
@@ -217,7 +217,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                 final ShippingRate shippingRate = ShippingRate.of(price, freeAbove);
                 final TaxRate taxRate = taxCategory.getTaxRates().get(0);
                 final Reference<TaxCategory> taxCategoryRef = taxCategory.toReference();
-                final Optional<Reference<ShippingMethod>> shippingMethodRef = Optional.of(shippingMethod.toReference());
+                final Reference<ShippingMethod> shippingMethodRef = shippingMethod.toReference();
                 final ZonedDateTime createdAt = SphereTestUtils.now().minusSeconds(4);
                 final ParcelMeasurements parcelMeasurements = ParcelMeasurements.of(2, 3, 1, 3);
                 final DeliveryItem deliveryItem = DeliveryItem.of(new LineItemLike() {
@@ -239,8 +239,8 @@ public class OrderImportCommandTest extends IntegrationTest {
                     }
 
                     @Override
-                    public Optional<DiscountedLineItemPrice> getDiscountedPrice() {
-                        return Optional.empty();
+                    public DiscountedLineItemPrice getDiscountedPrice() {
+                        return null;
                     }
                 }, 5);
                 final String deliveryId = randomKey();
@@ -280,7 +280,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         final Address address = randomAddress().withApartment(randomKey());
         testOrderAspect(
                 builder -> builder.shippingAddress(address),
-                order -> assertThat(order.getShippingAddress()).contains(address)
+                order -> assertThat(order.getShippingAddress()).isEqualTo(address)
         );
     }
 
@@ -293,7 +293,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         final TaxedPrice taxedPrice = TaxedPrice.of(totalNet, totalGross, asList(TaxPortion.of(v, taxes)));
         testOrderAspect(
                 builder -> builder.taxedPrice(taxedPrice),
-                order -> assertThat(order.getTaxedPrice()).contains(taxedPrice)
+                order -> assertThat(order.getTaxedPrice()).isEqualTo(taxedPrice)
         );
     }
 
@@ -323,7 +323,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         withCustomerInGroup(client(), (customer, customerGroup) -> {
             final String customerId = customer.getId();
             testOrderAspect(builder -> builder.customerId(customerId).customerGroup(customerGroup),
-                    order -> assertThat(order.getCustomerGroup()).contains(customerGroup.toReference()));
+                    order -> assertThat(order.getCustomerGroup()).isEqualTo(customerGroup.toReference()));
         });
     }
 
@@ -338,7 +338,7 @@ public class OrderImportCommandTest extends IntegrationTest {
     public void billingAddress() throws Exception {
         final Address billingAddress = randomAddress();
         testOrderAspect(builder -> builder.billingAddress(billingAddress),
-                order -> assertThat(order.getBillingAddress()).contains(billingAddress));
+                order -> assertThat(order.getBillingAddress()).isEqualTo(billingAddress));
     }
 
     @Test

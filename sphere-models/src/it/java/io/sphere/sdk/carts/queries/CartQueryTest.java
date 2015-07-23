@@ -82,8 +82,8 @@ public class CartQueryTest extends IntegrationTest {
                     .withSort(m -> m.createdAt().sort().desc())
                     .withLimit(1)
                     .withPredicates(m -> m.taxedPrice().isPresent()
-                                    .and(m.taxedPrice().totalNet().centAmount().is(centAmountOf(cart.getTaxedPrice().get().getTotalNet())))
-                                    .and(m.taxedPrice().totalGross().centAmount().is(centAmountOf(cart.getTaxedPrice().get().getTotalGross())))
+                                    .and(m.taxedPrice().totalNet().centAmount().is(centAmountOf(cart.getTaxedPrice().getTotalNet())))
+                                    .and(m.taxedPrice().totalGross().centAmount().is(centAmountOf(cart.getTaxedPrice().getTotalGross())))
                     )).head().get();
             assertThat(loadedCart.getId()).isEqualTo(cart.getId());
         });

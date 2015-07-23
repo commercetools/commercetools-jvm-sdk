@@ -22,6 +22,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -79,7 +80,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                 final List<Price> prices = execute(query).head().get().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()
-                        .anyMatch(price -> price.getCustomerGroup().map(customerGroupReference -> customerGroupReference.getObj() != null).orElse(false)))
+                        .anyMatch(price ->  Optional.ofNullable(price.getCustomerGroup()).map(customerGroupReference -> customerGroupReference.getObj() != null).orElse(false)))
                         .isTrue();
                 return product;
             })
@@ -96,7 +97,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                 final List<Price> prices = execute(query).head().get().getMasterVariant().getPrices();
                 assertThat(prices
                         .stream()
-                        .anyMatch(price -> price.getChannel().map(channelRef -> channelRef.getObj() != null).orElse(false)))
+                        .anyMatch(price -> Optional.ofNullable(price.getChannel()).map(channelRef -> channelRef.getObj() != null).orElse(false)))
                         .isTrue();
                 return product;
             });

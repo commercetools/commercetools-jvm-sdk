@@ -52,7 +52,7 @@ public class InventoryEntryQueryTest extends IntegrationTest {
                         .withExpansionPaths(m -> m.supplyChannel());
                 final PagedQueryResult<InventoryEntry> result = execute(query);
                 assertThat(result.head().map(e -> e.getId())).contains(entry.getId());
-                assertThat(result.head().get().getSupplyChannel().get().getObj().getRoles())
+                assertThat(result.head().get().getSupplyChannel().getObj().getRoles())
                         .overridingErrorMessage("can expand supplyChannel reference")
                         .contains(channelRole);
                 return entry;

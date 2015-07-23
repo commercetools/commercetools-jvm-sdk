@@ -3,6 +3,8 @@ package io.sphere.sdk.products.commands.updateactions;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductUpdateScope;
 
+import java.util.Optional;
+
 /**
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removePrice()}
@@ -26,7 +28,7 @@ public class RemovePrice extends StageableProductUpdateAction {
      * @return action
      */
     public static RemovePrice of(final Price price, final ProductUpdateScope productUpdateScope) {
-        return of(price.getId().orElseThrow(() -> new IllegalArgumentException("Expected price with ID.")), productUpdateScope);
+        return of(Optional.ofNullable(price.getId()).orElseThrow(() -> new IllegalArgumentException("Expected price with ID.")), productUpdateScope);
     }
 
     public static RemovePrice of(final String priceId, final ProductUpdateScope productUpdateScope) {

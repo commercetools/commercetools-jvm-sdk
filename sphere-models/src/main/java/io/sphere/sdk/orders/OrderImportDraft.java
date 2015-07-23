@@ -6,10 +6,10 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 
 /**
@@ -18,35 +18,46 @@ import java.util.Optional;
  * @see OrderImportDraftBuilder
  */
 public interface OrderImportDraft {
-    Optional<Address> getBillingAddress();
+    @Nullable
+    Address getBillingAddress();
 
     ZonedDateTime getCompletedAt();
 
-    Optional<CountryCode> getCountry();
+    @Nullable
+    CountryCode getCountry();
 
-    Optional<String> getCustomerEmail();
+    @Nullable
+    String getCustomerEmail();
 
-    Optional<Reference<CustomerGroup>> getCustomerGroup();
+    @Nullable
+    Reference<CustomerGroup> getCustomerGroup();
 
-    Optional<String> getCustomerId();
+    @Nullable
+    String getCustomerId();
 
     List<CustomLineItemImportDraft> getCustomLineItems();
 
     List<LineItemImportDraft> getLineItems();
 
-    Optional<String> getOrderNumber();
+    @Nullable
+    String getOrderNumber();
 
     OrderState getOrderState();
 
-    Optional<PaymentState> getPaymentState();
+    @Nullable
+    PaymentState getPaymentState();
 
-    Optional<ShipmentState> getShipmentState();
+    @Nullable
+    ShipmentState getShipmentState();
 
-    Optional<Address> getShippingAddress();
+    @Nullable
+    Address getShippingAddress();
 
-    Optional<OrderShippingInfo> getShippingInfo();
+    @Nullable
+    OrderShippingInfo getShippingInfo();
 
-    Optional<TaxedPrice> getTaxedPrice();
+    @Nullable
+    TaxedPrice getTaxedPrice();
 
     MonetaryAmount getTotalPrice();
 }

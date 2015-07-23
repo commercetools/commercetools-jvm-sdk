@@ -3,6 +3,8 @@ package io.sphere.sdk.products.commands.updateactions;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductUpdateScope;
 
+import java.util.Optional;
+
 /**
  * Replaces a price in the product variant's prices set. The price with the same price scope (same currency, country, customer group and channel) as the given price is replaced.
  *
@@ -27,7 +29,7 @@ public class ChangePrice extends StageableProductUpdateAction {
     }
 
     public static ChangePrice of(final Price oldPrice, final Price price, final ProductUpdateScope productUpdateScope) {
-        final String priceId = oldPrice.getId()
+        final String priceId = Optional.ofNullable(oldPrice.getId())
                 .orElseThrow(() -> new IllegalArgumentException("The old price should have an ID: " + oldPrice));
         return of(priceId, price, productUpdateScope);
     }

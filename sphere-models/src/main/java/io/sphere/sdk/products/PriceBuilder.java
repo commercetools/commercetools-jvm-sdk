@@ -17,15 +17,20 @@ import java.util.Optional;
 
 public class PriceBuilder implements Builder<Price> {
     private MonetaryAmount value;
-    private Optional<CountryCode> country = Optional.empty();
-    private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
-    private Optional<Reference<Channel>> channel = Optional.empty();
-    private Optional<DiscountedPrice> discounted = Optional.empty();
+    @Nullable
+    private CountryCode country;
+    @Nullable
+    private Reference<CustomerGroup> customerGroup;
+    @Nullable
+    private Reference<Channel> channel;
+    @Nullable
+    private DiscountedPrice discounted;
     @Nullable
     private ZonedDateTime validFrom;
     @Nullable
     private ZonedDateTime validUntil;
-    private Optional<String> id = Optional.empty();
+    @Nullable
+    private String id;
 
     private PriceBuilder(final MonetaryAmount value) {
         this.value = value;
@@ -46,44 +51,24 @@ public class PriceBuilder implements Builder<Price> {
                 .id(template.getId());
     }
 
-    public PriceBuilder country(final Optional<CountryCode> country) {
+    public PriceBuilder country(@Nullable final CountryCode country) {
         this.country = country;
         return this;
     }
     
-    public PriceBuilder country(final CountryCode country) {
-        Objects.requireNonNull(country);
-        return country(Optional.of(country));
-    }
-    
-    public PriceBuilder customerGroup(final Optional<Reference<CustomerGroup>> customerGroup) {
-        this.customerGroup = customerGroup;
+    public PriceBuilder customerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
+        this.customerGroup = Optional.ofNullable(customerGroup).map(Referenceable::toReference).orElse(null);
         return this;
     }
     
-    public PriceBuilder customerGroup(final Referenceable<CustomerGroup> customerGroup) {
-        Objects.requireNonNull(customerGroup);
-        return customerGroup(Optional.of(customerGroup.toReference()));
-    } 
-    
-    public PriceBuilder channel(final Optional<Reference<Channel>> channel) {
-        this.channel = channel;
+    public PriceBuilder channel(@Nullable final Referenceable<Channel> channel) {
+        this.channel =  Optional.ofNullable(channel).map(Referenceable::toReference).orElse(null);
         return this;
-    }
-    
-    public PriceBuilder channel(final Referenceable<Channel> channel) {
-        Objects.requireNonNull(channel);
-        return channel(Optional.of(channel.toReference()));
     }
 
-    public PriceBuilder discounted(final Optional<DiscountedPrice> discounted) {
+    public PriceBuilder discounted(@Nullable final DiscountedPrice discounted) {
         this.discounted = discounted;
         return this;
-    }
-
-    public PriceBuilder discounted(final DiscountedPrice discounted) {
-        Objects.requireNonNull(discounted);
-        return discounted(Optional.of(discounted));
     }
 
     public PriceBuilder validFrom(@Nullable final ZonedDateTime validFrom) {
@@ -96,13 +81,9 @@ public class PriceBuilder implements Builder<Price> {
         return this;
     }
 
-    public PriceBuilder id(final Optional<String> id) {
+    public PriceBuilder id(@Nullable final String id) {
         this.id = id;
         return this;
-    }
-
-    public PriceBuilder id(final String id) {
-        return id(Optional.of(id));
     }
 
     public PriceBuilder value(final MonetaryAmount value) {

@@ -8,20 +8,24 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.taxcategories.TaxRate;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.Set;
 
 final class LineItemImportDraftImpl extends Base implements LineItemImportDraft {
-    private final Optional<String> productId;
+    @Nullable
+    private final String productId;
     private final LocalizedStrings name;
     private final ProductVariantImportDraft variant;
     private final Price price;
     private final long quantity;
-    private final Optional<Set<ItemState>> state;
-    private final Optional<Reference<Channel>> supplyChannel;
-    private final Optional<TaxRate> taxRate;
+    @Nullable
+    private final Set<ItemState> state;
+    @Nullable
+    private final Reference<Channel> supplyChannel;
+    @Nullable
+    private final TaxRate taxRate;
 
-    public LineItemImportDraftImpl(final LocalizedStrings name, final Optional<String> productId, final ProductVariantImportDraft variant, final Price price, final long quantity, final Optional<Set<ItemState>> state, final Optional<Reference<Channel>> supplyChannel, final Optional<TaxRate> taxRate) {
+    public LineItemImportDraftImpl(final LocalizedStrings name, final String productId, final ProductVariantImportDraft variant, final Price price, final long quantity, final Set<ItemState> state, final Reference<Channel> supplyChannel, final TaxRate taxRate) {
         this.name = name;
         this.productId = productId;
         this.variant = variant;
@@ -42,28 +46,32 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
         return price;
     }
 
+    @Nullable
     @Override
-    public Optional<String> getProductId() {
+    public String getProductId() {
         return productId;
     }
 
     @Override
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
     @Override
-    public Optional<Set<ItemState>> getState() {
+    @Nullable
+    public Set<ItemState> getState() {
         return state;
     }
 
     @Override
-    public Optional<Reference<Channel>> getSupplyChannel() {
+    @Nullable
+    public Reference<Channel> getSupplyChannel() {
         return supplyChannel;
     }
 
     @Override
-    public Optional<TaxRate> getTaxRate() {
+    @Nullable
+    public TaxRate getTaxRate() {
         return taxRate;
     }
 

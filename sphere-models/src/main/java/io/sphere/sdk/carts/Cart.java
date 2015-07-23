@@ -7,18 +7,18 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.util.List;
-import java.util.Optional;
 
 @JsonDeserialize(as=CartImpl.class)
 public interface Cart extends CartLike<Cart> {
 
-    public static String typeId(){
+    static String typeId(){
         return "cart";
     }
 
-    public static TypeReference<Cart> typeReference() {
+    static TypeReference<Cart> typeReference() {
         return new TypeReference<Cart>() {
             @Override
             public String toString() {
@@ -36,22 +36,28 @@ public interface Cart extends CartLike<Cart> {
 
     InventoryMode getInventoryMode();
 
-    Optional<CartShippingInfo> getShippingInfo();
+    @Nullable
+    CartShippingInfo getShippingInfo();
+
+    @Nullable
+    @Override
+    Address getBillingAddress();
 
     @Override
-    Optional<Address> getBillingAddress();
+    @Nullable
+    CountryCode getCountry();
 
     @Override
-    Optional<CountryCode> getCountry();
+    @Nullable
+    String getCustomerEmail();
 
     @Override
-    Optional<String> getCustomerEmail();
+    @Nullable
+    Reference<CustomerGroup> getCustomerGroup();
 
     @Override
-    Optional<Reference<CustomerGroup>> getCustomerGroup();
-
-    @Override
-    Optional<String> getCustomerId();
+    @Nullable
+    String getCustomerId();
 
     @Override
     List<CustomLineItem> getCustomLineItems();
@@ -60,10 +66,12 @@ public interface Cart extends CartLike<Cart> {
     List<LineItem> getLineItems();
 
     @Override
-    Optional<Address> getShippingAddress();
+    @Nullable
+    Address getShippingAddress();
 
     @Override
-    Optional<TaxedPrice> getTaxedPrice();
+    @Nullable
+    TaxedPrice getTaxedPrice();
 
     @Override
     MonetaryAmount getTotalPrice();
