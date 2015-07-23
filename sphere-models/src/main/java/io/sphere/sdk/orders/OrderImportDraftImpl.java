@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
@@ -28,9 +29,10 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     private final Optional<ShipmentState> shipmentState;
     private final Optional<PaymentState> paymentState;
     private final Optional<OrderShippingInfo> shippingInfo;
-    private final Optional<ZonedDateTime> completedAt;
+    @Nullable
+    private final ZonedDateTime completedAt;
 
-    public OrderImportDraftImpl(final Optional<Address> billingAddress, final Optional<String> orderNumber, final Optional<String> customerId, final Optional<String> customerEmail, final List<LineItemImportDraft> lineItems, final List<CustomLineItemImportDraft> customLineItems, final MonetaryAmount totalPrice, final Optional<TaxedPrice> taxedPrice, final Optional<Address> shippingAddress, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<CountryCode> country, final OrderState orderState, final Optional<ShipmentState> shipmentState, final Optional<PaymentState> paymentState, final Optional<OrderShippingInfo> shippingInfo, final Optional<ZonedDateTime> completedAt) {
+    public OrderImportDraftImpl(final Optional<Address> billingAddress, final Optional<String> orderNumber, final Optional<String> customerId, final Optional<String> customerEmail, final List<LineItemImportDraft> lineItems, final List<CustomLineItemImportDraft> customLineItems, final MonetaryAmount totalPrice, final Optional<TaxedPrice> taxedPrice, final Optional<Address> shippingAddress, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<CountryCode> country, final OrderState orderState, final Optional<ShipmentState> shipmentState, final Optional<PaymentState> paymentState, final Optional<OrderShippingInfo> shippingInfo, final ZonedDateTime completedAt) {
         this.billingAddress = billingAddress;
         this.orderNumber = orderNumber;
         this.customerId = customerId;
@@ -55,7 +57,7 @@ final class OrderImportDraftImpl extends Base implements OrderImportDraft {
     }
 
     @Override
-    public Optional<ZonedDateTime> getCompletedAt() {
+    public ZonedDateTime getCompletedAt() {
         return completedAt;
     }
 

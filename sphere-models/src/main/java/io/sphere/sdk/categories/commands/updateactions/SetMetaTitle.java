@@ -5,7 +5,6 @@ import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.LocalizedStrings;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 /**
  * Sets the SEO attribute title.

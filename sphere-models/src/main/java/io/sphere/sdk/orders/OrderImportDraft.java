@@ -20,7 +20,7 @@ import java.util.Optional;
 public interface OrderImportDraft {
     Optional<Address> getBillingAddress();
 
-    Optional<ZonedDateTime> getCompletedAt();
+    ZonedDateTime getCompletedAt();
 
     Optional<CountryCode> getCountry();
 

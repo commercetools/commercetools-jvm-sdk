@@ -6,7 +6,6 @@ import io.sphere.sdk.models.LocalizedStrings;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscountDraft> {
     private LocalizedStrings name;

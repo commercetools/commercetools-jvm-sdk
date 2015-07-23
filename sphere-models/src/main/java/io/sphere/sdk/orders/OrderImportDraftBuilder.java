@@ -5,6 +5,7 @@ import io.sphere.sdk.carts.TaxedPrice;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.Collections;
@@ -27,7 +28,8 @@ public class OrderImportDraftBuilder extends Base implements Builder<OrderImport
     private Optional<ShipmentState> shipmentState = Optional.empty();
     private Optional<PaymentState> paymentState = Optional.empty();
     private Optional<OrderShippingInfo> shippingInfo = Optional.empty();
-    private Optional<ZonedDateTime> completedAt = Optional.empty();
+    @Nullable
+    private ZonedDateTime completedAt;
 
     private OrderImportDraftBuilder(final MonetaryAmount totalPrice, final OrderState orderState) {
         this.totalPrice = totalPrice;
@@ -163,13 +165,9 @@ public class OrderImportDraftBuilder extends Base implements Builder<OrderImport
         return shippingInfo(Optional.of(shippingInfo));
     }
 
-    public OrderImportDraftBuilder completedAt(final Optional<ZonedDateTime> completedAt) {
+    public OrderImportDraftBuilder completedAt(@Nullable final ZonedDateTime completedAt) {
         this.completedAt = completedAt;
         return this;
-    }
-
-    public OrderImportDraftBuilder completedAt(final ZonedDateTime completedAt) {
-        return completedAt(Optional.of(completedAt));
     }
 
     /**

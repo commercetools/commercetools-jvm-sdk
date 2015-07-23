@@ -15,6 +15,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.utils.MoneyImpl;
 
+import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 
@@ -29,15 +30,15 @@ public class Price extends Base {
     private final Optional<Reference<CustomerGroup>> customerGroup;
     private final Optional<Reference<Channel>> channel;
     private final Optional<DiscountedPrice> discounted;
-    private final Optional<ZonedDateTime> validFrom;
-    private final Optional<ZonedDateTime> validUntil;
+    private @Nullable final ZonedDateTime validFrom;
+    private @Nullable final ZonedDateTime validUntil;
     private final Optional<String> id;
 
     @JsonCreator
     Price(final MonetaryAmount value, final Optional<CountryCode> country,
           final Optional<Reference<CustomerGroup>> customerGroup, final Optional<Reference<Channel>> channel,
           final Optional<DiscountedPrice> discounted,
-          final Optional<ZonedDateTime> validFrom, final Optional<ZonedDateTime> validUntil, final Optional<String> id) {
+          @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final Optional<String> id) {
         this.value = value;
         this.country = country;
         this.customerGroup = customerGroup;
@@ -73,11 +74,13 @@ public class Price extends Base {
         return discounted;
     }
 
-    public Optional<ZonedDateTime> getValidFrom() {
+    @Nullable
+    public ZonedDateTime getValidFrom() {
         return validFrom;
     }
 
-    public Optional<ZonedDateTime> getValidUntil() {
+    @Nullable
+    public ZonedDateTime getValidUntil() {
         return validUntil;
     }
 

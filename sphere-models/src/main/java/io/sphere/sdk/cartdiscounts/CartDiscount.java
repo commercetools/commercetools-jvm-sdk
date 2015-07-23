@@ -46,7 +46,6 @@ public interface CartDiscount extends DefaultModel<CartDiscount> {
         return Reference.of(typeId(), getId(), this);
     }
 
-
     static TypeReference<CartDiscount> typeReference() {
         return new TypeReference<CartDiscount>() {
             @Override

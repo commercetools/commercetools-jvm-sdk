@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.utils.MoneyImpl;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -20,8 +21,10 @@ public class PriceBuilder implements Builder<Price> {
     private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
     private Optional<Reference<Channel>> channel = Optional.empty();
     private Optional<DiscountedPrice> discounted = Optional.empty();
-    private Optional<ZonedDateTime> validFrom = Optional.empty();
-    private Optional<ZonedDateTime> validUntil = Optional.empty();
+    @Nullable
+    private ZonedDateTime validFrom;
+    @Nullable
+    private ZonedDateTime validUntil;
     private Optional<String> id = Optional.empty();
 
     private PriceBuilder(final MonetaryAmount value) {
@@ -83,24 +86,14 @@ public class PriceBuilder implements Builder<Price> {
         return discounted(Optional.of(discounted));
     }
 
-    public PriceBuilder validFrom(final Optional<ZonedDateTime> validFrom) {
+    public PriceBuilder validFrom(@Nullable final ZonedDateTime validFrom) {
         this.validFrom = validFrom;
         return this;
     }
 
-    public PriceBuilder validFrom(final ZonedDateTime validFrom) {
-        Objects.requireNonNull(validFrom);
-        return validFrom(Optional.of(validFrom));
-    }
-
-    public PriceBuilder validUntil(final Optional<ZonedDateTime> validUntil) {
+    public PriceBuilder validUntil(@Nullable final ZonedDateTime validUntil) {
         this.validUntil = validUntil;
         return this;
-    }
-
-    public PriceBuilder validUntil(final ZonedDateTime validUntil) {
-        Objects.requireNonNull(validUntil);
-        return validUntil(Optional.of(validUntil));
     }
 
     public PriceBuilder id(final Optional<String> id) {
