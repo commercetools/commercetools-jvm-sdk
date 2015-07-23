@@ -1,8 +1,10 @@
 package io.sphere.sdk.search;
 
 import io.sphere.sdk.models.Base;
+import org.apache.commons.lang3.ObjectUtils;
 
 import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
@@ -36,16 +38,18 @@ class Range<T extends Comparable<? super T>> extends Base {
      * Gets the endpoint of the lower bound, if defined.
      * @return the lower endpoint, or absent if the range has no lower bound.
      */
-    public Optional<T> lowerEndpoint() {
-        return Optional.ofNullable(lowerBound).map(bound -> bound.endpoint());
+    @Nullable
+    public T lowerEndpoint() {
+        return Optional.ofNullable(lowerBound).map(Bound::endpoint).orElse(null);
     }
 
     /**
      * Gets the endpoint of the upper bound, if defined.
      * @return the upper endpoint, or absent if the range has no upper bound.
      */
-    public Optional<T> upperEndpoint() {
-        return Optional.ofNullable(upperBound).map(bound -> bound.endpoint());
+    @Nullable
+    public T upperEndpoint() {
+        return Optional.ofNullable(upperBound).map(Bound::endpoint).orElse(null);
     }
 
     /**
@@ -67,8 +71,8 @@ class Range<T extends Comparable<? super T>> extends Base {
 
     public String serialize(final Function<T, String> serializer) {
         return String.format("(%s to %s)",
-                lowerEndpoint().map(e -> serializer.apply(e)).orElse(UNBOUND),
-                upperEndpoint().map(e -> serializer.apply(e)).orElse(UNBOUND));
+                Optional.ofNullable(lowerEndpoint()).map(serializer::apply).orElse(UNBOUND),
+                Optional.ofNullable(upperEndpoint()).map(serializer::apply).orElse(UNBOUND));
     }
 
     @Override
@@ -83,7 +87,7 @@ class Range<T extends Comparable<? super T>> extends Base {
      * @return true if the bounds are inverted, false otherwise.
      */
     private boolean hasInvertedBounds() {
-        return isBounded() && lowerEndpoint().get().compareTo(upperEndpoint().get()) > 0;
+        return isBounded() && ObjectUtils.compare(lowerEndpoint(), upperEndpoint()) > 0;
     }
 
     /**

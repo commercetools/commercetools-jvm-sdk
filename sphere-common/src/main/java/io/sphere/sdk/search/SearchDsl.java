@@ -2,7 +2,6 @@ package io.sphere.sdk.search;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 import static io.sphere.sdk.utils.ListUtils.listOf;
 

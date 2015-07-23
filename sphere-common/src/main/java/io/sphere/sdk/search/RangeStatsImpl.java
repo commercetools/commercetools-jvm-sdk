@@ -3,11 +3,9 @@ package io.sphere.sdk.search;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.models.Base;
 
-import java.util.Optional;
-
 class RangeStatsImpl<T> extends Base implements RangeStats<T> {
-    private final Optional<T> lowerEndpoint;
-    private final Optional<T> upperEndpoint;
+    private final T lowerEndpoint;
+    private final T upperEndpoint;
     private final long count;
     private final T min;
     private final T max;
@@ -15,7 +13,7 @@ class RangeStatsImpl<T> extends Base implements RangeStats<T> {
     private final double mean;
 
     @JsonIgnore
-    private RangeStatsImpl(final Optional<T> lowerEndpoint, final Optional<T> upperEndpoint, final long count,
+    private RangeStatsImpl(final T lowerEndpoint, final T upperEndpoint, final long count,
                            final T min, final T max, final T sum, final double mean) {
         this.lowerEndpoint = lowerEndpoint;
         this.upperEndpoint = upperEndpoint;
@@ -33,13 +31,13 @@ class RangeStatsImpl<T> extends Base implements RangeStats<T> {
 
 
     @Override
-    public Optional<T> getLowerEndpoint() {
+    public T getLowerEndpoint() {
         return lowerEndpoint;
     }
 
 
     @Override
-    public Optional<T> getUpperEndpoint() {
+    public T getUpperEndpoint() {
         return upperEndpoint;
     }
 
@@ -74,7 +72,7 @@ class RangeStatsImpl<T> extends Base implements RangeStats<T> {
     }
 
     @JsonIgnore
-    private static <T> Optional<T> parseEndpoint(final T from, final String fromStr) {
-        return fromStr.isEmpty() ? Optional.empty() : Optional.of(from);
+    private static <T> T parseEndpoint(final T from, final String fromStr) {
+        return fromStr == null ? null : from;
     }
 }

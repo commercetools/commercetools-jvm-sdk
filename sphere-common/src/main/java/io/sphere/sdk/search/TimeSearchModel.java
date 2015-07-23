@@ -2,7 +2,6 @@ package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
 import java.time.LocalTime;
-import java.util.Optional;
 
 public class TimeSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements RangeTermModel<T, LocalTime>, SearchSortingModel<T, S> {
 

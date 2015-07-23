@@ -1,7 +1,6 @@
 package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class StringSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements TermModel<T, String>, SearchSortingModel<T, S> {
 
