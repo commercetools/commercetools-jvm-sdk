@@ -9,15 +9,15 @@ public class RangeStatsTest {
     @Test
     public void unboundRangeIsParsed() throws Exception {
         final RangeStats<Double> stats = stats(0.0, 0, "", "");
-        assertThat(stats.getLowerEndpoint().isPresent()).isFalse();
-        assertThat(stats.getUpperEndpoint().isPresent()).isFalse();
+        assertThat(stats.getLowerEndpoint()).isNull();
+        assertThat(stats.getUpperEndpoint()).isNull();
     }
 
     @Test
     public void boundRangeIsParsed() throws Exception {
         final RangeStats<Double> stats = stats(3.0, 5, "3.0", "5.0");
-        assertThat(stats.getLowerEndpoint().get()).isEqualTo(3.0);
-        assertThat(stats.getUpperEndpoint().get()).isEqualTo(5.0);
+        assertThat(stats.getLowerEndpoint()).isEqualTo(3.0);
+        assertThat(stats.getUpperEndpoint()).isEqualTo(5.0);
     }
 
     private RangeStats<Double> stats(final double from, final double to, final String fromStr, final String toStr) {

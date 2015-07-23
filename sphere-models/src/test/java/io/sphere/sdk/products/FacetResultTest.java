@@ -37,8 +37,8 @@ public class FacetResultTest {
         final RangeFacetResult<BigDecimal> rangeFacet = rangeFacet();
         assertThat(rangeFacet.getRanges()).hasSize(2);
         final RangeStats<BigDecimal> rangeStats = rangeFacet.getRanges().get(1);
-        assertThat(rangeStats.getLowerEndpoint().get()).isEqualByComparingTo(valueOf(5001));
-        assertThat(rangeStats.getUpperEndpoint()).isEmpty();
+        assertThat(rangeStats.getLowerEndpoint()).isEqualByComparingTo(valueOf(5001));
+        assertThat(rangeStats.getUpperEndpoint()).isNull();
         assertThat(rangeStats.getCount()).isEqualTo(1799L);
         assertThat(rangeStats.getMin()).isEqualByComparingTo(valueOf(5100));
         assertThat(rangeStats.getMax()).isEqualByComparingTo(valueOf(590000));

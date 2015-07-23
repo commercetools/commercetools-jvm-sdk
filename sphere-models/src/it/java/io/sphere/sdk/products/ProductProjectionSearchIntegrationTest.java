@@ -249,8 +249,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final RangeFacetExpression<ProductProjection, BigDecimal> facet = ProductProjectionSearch.model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).facetOf().greaterThanOrEqualTo(ZERO);
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.of(STAGED).plusFacet(facet));
         final RangeStats<BigDecimal> rangeStats = result.getRangeFacetResult(facet).getRanges().get(0);
-        assertThat(rangeStats.getLowerEndpoint().get()).isEqualByComparingTo(BigDecimal.ZERO);
-        assertThat(rangeStats.getUpperEndpoint()).isEmpty();
+        assertThat(rangeStats.getLowerEndpoint()).isEqualByComparingTo(BigDecimal.ZERO);
+        assertThat(rangeStats.getUpperEndpoint()).isNull();
         assertThat(rangeStats.getCount()).isEqualTo(6L);
         assertThat(rangeStats.getMin()).isEqualByComparingTo(valueOf(36));
         assertThat(rangeStats.getMax()).isEqualByComparingTo(valueOf(46));
@@ -282,8 +282,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.of(STAGED).plusFacet(facet));
         assertThat(facet.resultPath()).isEqualTo(alias);
         final RangeStats<BigDecimal> rangeStats = result.getRangeFacetResult(facet).getRanges().get(0);
-        assertThat(rangeStats.getLowerEndpoint().get()).isEqualByComparingTo(BigDecimal.ZERO);
-        assertThat(rangeStats.getUpperEndpoint()).isEmpty();
+        assertThat(rangeStats.getLowerEndpoint()).isEqualByComparingTo(BigDecimal.ZERO);
+        assertThat(rangeStats.getUpperEndpoint()).isNull();
         assertThat(rangeStats.getCount()).isEqualTo(6L);
         assertThat(rangeStats.getMin()).isEqualByComparingTo(valueOf(36));
         assertThat(rangeStats.getMax()).isEqualByComparingTo(valueOf(46));

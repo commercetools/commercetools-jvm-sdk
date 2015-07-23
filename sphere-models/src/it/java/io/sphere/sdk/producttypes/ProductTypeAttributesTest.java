@@ -316,7 +316,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
         final Boolean found = AttributeExtraction.<Boolean>of(fetchedAttributeDefinition, product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeName).get())
                 .ifIs(access, x -> true)
-                .getValue().orElse(false);
+                .findValue().orElse(false);
         assertThat(found).overridingErrorMessage("the attribute type should be recognized").isTrue();
 
         execute(ProductDeleteCommand.of(product));

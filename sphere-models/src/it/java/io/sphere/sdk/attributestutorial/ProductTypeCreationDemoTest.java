@@ -358,7 +358,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                             .collect(joining(", ")))
                     .ifIs(AttributeAccess.ofMoney(), money -> moneyFormat.format(money))
                     .ifIs(AttributeAccess.ofDate(), date -> date.toString())
-                    .getValue();
+                    .findValue();
             final Optional<Pair<String, String>> tableRowData = extractedResult.map(value -> {
                 final String label = productType.getAttribute(attribute.getName()).get().getLabel().get(ENGLISH);
                 return ImmutablePair.of(label, value);
