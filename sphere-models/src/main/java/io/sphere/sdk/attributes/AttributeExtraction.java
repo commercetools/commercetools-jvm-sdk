@@ -8,31 +8,33 @@ import java.util.Optional;
 import java.util.function.Function;
 
 public final class AttributeExtraction<T> extends Base {
-    private final Optional<AttributeDefinition> attributeDefinitionOption;
+    @Nullable
+    private final AttributeDefinition attributeDefinition;
     private final Attribute attribute;
-    private @Nullable final T value;
+    @Nullable
+    private final T value;
 
-    private AttributeExtraction(final Optional<AttributeDefinition> attributeDefinitionOption, final Attribute attribute, @Nullable final T value) {
-        this.attributeDefinitionOption = attributeDefinitionOption;
+    private AttributeExtraction(@Nullable final AttributeDefinition attributeDefinition, final Attribute attribute, @Nullable final T value) {
+        this.attributeDefinition = attributeDefinition;
         this.attribute = attribute;
         this.value = value;
     }
 
     public static <T> AttributeExtraction<T> of(final AttributeDefinitionContainer productType, final Attribute attribute) {
-        final Optional<AttributeDefinition> attributeDefinition = productType.getAttribute(attribute.getName());
+        final AttributeDefinition attributeDefinition = productType.getAttribute(attribute.getName());
         return of(attributeDefinition, attribute, null);
     }
 
     public static <T> AttributeExtraction<T> of(final AttributeDefinition attributeDefinition, final Attribute attribute) {
-        return of(Optional.of(attributeDefinition), attribute, null);
+        return of(attributeDefinition, attribute, null);
     }
 
-    private static <T> AttributeExtraction<T> of(final Optional<AttributeDefinition> attributeDefinition, final Attribute attribute, @Nullable final T value) {
+    private static <T> AttributeExtraction<T> of(final AttributeDefinition attributeDefinition, final Attribute attribute, @Nullable final T value) {
         return new AttributeExtraction<>(attributeDefinition, attribute, value);
     }
 
     private AttributeExtraction<T> withValue(@Nullable final T value) {
-        return of(attributeDefinitionOption, attribute, value);
+        return of(attributeDefinition, attribute, value);
     }
 
     public <I> AttributeExtraction<T> ifGuarded(final AttributeAccess<I> extraction, final Function<I, Optional<T>> function) {
@@ -48,7 +50,7 @@ public final class AttributeExtraction<T> extends Base {
 
     @SuppressWarnings("unchecked")
     private <A> Optional<A> calculateValue(final AttributeAccess<A> extraction) {
-        return attributeDefinitionOption.flatMap(attributeDefinition -> calculateValue(extraction, attributeDefinition));
+        return Optional.ofNullable(attributeDefinition).flatMap(attributeDefinition -> calculateValue(extraction, attributeDefinition));
     }
 
     private <A> Optional<A> calculateValue(final AttributeAccess<A> extraction, final AttributeDefinition attributeDefinition) {

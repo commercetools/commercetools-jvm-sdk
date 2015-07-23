@@ -188,7 +188,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     public void queryByName() throws Exception {
         withTShirtProductType(type -> {
             ProductType productType = execute(ProductTypeQuery.of().byName("t-shirt")).head().get();
-            Optional<AttributeDefinition> sizeAttribute = productType.getAttribute("size");
+            AttributeDefinition sizeAttribute = productType.getAttribute("size");
             final List<PlainEnumValue> possibleSizeValues = sizeAttribute.
                     map(attrib -> ((EnumType) attrib.getAttributeType()).getValues()).
                     orElse(Collections.<PlainEnumValue>emptyList());
