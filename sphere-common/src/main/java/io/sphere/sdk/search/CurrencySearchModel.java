@@ -2,7 +2,6 @@ package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
-import java.util.Optional;
 
 public class CurrencySearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements TermModel<T, CurrencyUnit>, SearchSortingModel<T, S> {
 
