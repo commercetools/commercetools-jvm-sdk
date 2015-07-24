@@ -3,7 +3,7 @@ package io.sphere.sdk.customers.commands.updateactions;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.customers.Customer;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  * Sets a new company name for the customer
@@ -11,22 +11,20 @@ import java.util.Optional;
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setCompanyName()}
  */
 public class SetCompanyName extends UpdateAction<Customer> {
-    private final Optional<String> companyName;
+    @Nullable
+    private final String companyName;
 
-    private SetCompanyName(final Optional<String> companyName) {
+    private SetCompanyName(@Nullable final String companyName) {
         super("setCompanyName");
         this.companyName = companyName;
     }
 
-    public static SetCompanyName of(final Optional<String> companyName) {
+    public static SetCompanyName of(@Nullable final String companyName) {
         return new SetCompanyName(companyName);
     }
 
-    public static SetCompanyName of(final String companyName) {
-        return of(Optional.of(companyName));
-    }
-
-    public Optional<String> getCompanyName() {
+    @Nullable
+    public String getCompanyName() {
         return companyName;
     }
 }

@@ -99,13 +99,13 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
                     .overridingErrorMessage("only fetched address contains an ID")
                     .isNotNull();
             assertThat(customer.getDefaultShippingAddressId()).isEmpty();
-            assertThat(customer.getDefaultShippingAddress()).isEmpty();
+            assertThat(customer.findDefaultShippingAddress()).isEmpty();
 
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetDefaultShippingAddress.of(address)));
 
             assertThat(updatedCustomer.getDefaultShippingAddressId()).contains(address.getId());
-            assertThat(updatedCustomer.getDefaultShippingAddress()).contains(address);
+            assertThat(updatedCustomer.findDefaultShippingAddress()).contains(address);
         });
     }
 
@@ -116,14 +116,14 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             assertThat(address.getId())
                     .overridingErrorMessage("only fetched address contains an ID")
                     .isNotNull();
-            assertThat(customer.getDefaultBillingAddressId()).isEmpty();
-            assertThat(customer.getDefaultBillingAddress()).isEmpty();
+            assertThat(customer.getDefaultBillingAddressId()).isNull();
+            assertThat(customer.getDefaultBillingAddress()).isNull();
 
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetDefaultBillingAddress.of(address)));
 
             assertThat(updatedCustomer.getDefaultBillingAddressId()).contains(address.getId());
-            assertThat(updatedCustomer.getDefaultBillingAddress()).contains(address);
+            assertThat(updatedCustomer.getDefaultBillingAddress()).isEqualTo(address);
         });
     }
 
@@ -182,13 +182,13 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
     @Test
     public void setDateOfBirth() throws Exception {
         withCustomer(client(), customer -> {
-            assertThat(customer.getDateOfBirth()).isEmpty();
+            assertThat(customer.getDateOfBirth()).isNull();
 
             final LocalDate dateOfBirth = LocalDate.now();
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetDateOfBirth.of(dateOfBirth)));
 
-            assertThat(updatedCustomer.getDateOfBirth()).contains(dateOfBirth);
+            assertThat(updatedCustomer.getDateOfBirth()).isEqualTo(dateOfBirth);
         });
     }
 
@@ -196,9 +196,9 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
     public void setCustomerGroup() throws Exception {
         withB2cCustomerGroup(client(), customerGroup -> {
             withCustomer(client(), customer -> {
-                assertThat(customer.getCustomerGroup()).isEmpty();
+                assertThat(customer.getCustomerGroup()).isNull();
                 final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
-                assertThat(updateCustomer.getCustomerGroup()).contains(customerGroup.toReference());
+                assertThat(updateCustomer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
             });
         });
     }

@@ -3,7 +3,7 @@ package io.sphere.sdk.customers.commands.updateactions;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.customers.Customer;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.time.LocalDate;
 
 /**
@@ -12,22 +12,20 @@ import java.time.LocalDate;
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDateOfBirth()}
  */
 public class SetDateOfBirth extends UpdateAction<Customer> {
-    private final Optional<LocalDate> dateOfBirth;
+    @Nullable
+    private final LocalDate dateOfBirth;
 
-    private SetDateOfBirth(final Optional<LocalDate> dateOfBirth) {
+    private SetDateOfBirth(@Nullable final LocalDate dateOfBirth) {
         super("setDateOfBirth");
         this.dateOfBirth = dateOfBirth;
     }
 
-    public static SetDateOfBirth of(final Optional<LocalDate> dateOfBirth) {
+    public static SetDateOfBirth of(@Nullable final LocalDate dateOfBirth) {
         return new SetDateOfBirth(dateOfBirth);
     }
 
-    public static SetDateOfBirth of(final LocalDate dateOfBirth) {
-        return of(Optional.of(dateOfBirth));
-    }
-
-    public Optional<LocalDate> getDateOfBirth() {
+    @Nullable
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 }

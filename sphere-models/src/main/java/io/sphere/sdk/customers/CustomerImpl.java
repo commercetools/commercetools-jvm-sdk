@@ -2,35 +2,39 @@ package io.sphere.sdk.customers;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.customergroups.CustomerGroup;
-import io.sphere.sdk.models.*;
+import io.sphere.sdk.models.Address;
+import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.SdkDefaults;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.annotation.Nullable;
+import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.time.LocalDate;
 
 class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
 
-    private final Optional<String> customerNumber;
+    private final String customerNumber;
     private final String email;
     private final String firstName;
     private final String lastName;
     private final String password;
-    private final Optional<String> middleName;
-    private final Optional<String> title;
+    private final String middleName;
+    private final String title;
     private final List<Address> addresses;
-    private final Optional<String> defaultShippingAddressId;
-    private final Optional<String> defaultBillingAddressId;
+    @Nullable
+    private final String defaultShippingAddressId;
+    private final String defaultBillingAddressId;
     private final boolean isEmailVerified;
-    private final Optional<String> externalId;
-    private final Optional<Reference<CustomerGroup>> customerGroup;
-    private final Optional<String> companyName;
-    private final Optional<String> vatId;
-    private final Optional<LocalDate> dateOfBirth;
+    private final String externalId;
+    private final Reference<CustomerGroup> customerGroup;
+    private final String companyName;
+    private final String vatId;
+    private final LocalDate dateOfBirth;
 
     @JsonCreator
-    public CustomerImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final Optional<String> customerNumber, final String email, final String firstName, final String lastName, final String password, final Optional<String> middleName, final Optional<String> title, final List<Address> addresses, final Optional<String> defaultShippingAddressId, final Optional<String> defaultBillingAddressId, final boolean isEmailVerified, final Optional<String> externalId, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<String> companyName,  final Optional<String> vatId, final Optional<LocalDate> dateOfBirth) {
+    public CustomerImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String customerNumber, final String email, final String firstName, final String lastName, final String password, final String middleName, final String title, final List<Address> addresses, final String defaultShippingAddressId, final String defaultBillingAddressId, final boolean isEmailVerified, final String externalId, final Reference<CustomerGroup> customerGroup, final String companyName,  final String vatId, final LocalDate dateOfBirth) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerNumber = customerNumber;
         this.email = email;
@@ -51,7 +55,7 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     }
 
     @Override
-    public Optional<String> getCustomerNumber() {
+    public String getCustomerNumber() {
         return customerNumber;
     }
 
@@ -76,12 +80,12 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     }
 
     @Override
-    public Optional<String> getMiddleName() {
+    public String getMiddleName() {
         return middleName;
     }
 
     @Override
-    public Optional<String> getTitle() {
+    public String getTitle() {
         return title;
     }
 
@@ -91,12 +95,12 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     }
 
     @Override
-    public Optional<String> getDefaultShippingAddressId() {
+    public String getDefaultShippingAddressId() {
         return defaultShippingAddressId;
     }
 
     @Override
-    public Optional<String> getDefaultBillingAddressId() {
+    public String getDefaultBillingAddressId() {
         return defaultBillingAddressId;
     }
 
@@ -106,27 +110,27 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     }
 
     @Override
-    public Optional<String> getExternalId() {
+    public String getExternalId() {
         return externalId;
     }
 
     @Override
-    public Optional<Reference<CustomerGroup>> getCustomerGroup() {
+    public Reference<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 
     @Override
-    public Optional<String> getCompanyName() {
+    public String getCompanyName() {
         return companyName;
     }
 
     @Override
-    public Optional<String> getVatId() {
+    public String getVatId() {
         return vatId;
     }
 
     @Override
-    public Optional<LocalDate> getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 

@@ -7,13 +7,15 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-import java.time.LocalDate;
 
 @JsonDeserialize(as = CustomerImpl.class)
 public interface Customer extends DefaultModel<Customer> {
-    Optional<String> getCustomerNumber();
+    @Nullable
+    String getCustomerNumber();
 
     String getEmail();
 
@@ -23,46 +25,62 @@ public interface Customer extends DefaultModel<Customer> {
 
     String getPassword();
 
-    Optional<String> getMiddleName();
+    String getMiddleName();
 
-    Optional<String> getTitle();
+    String getTitle();
 
     List<Address> getAddresses();
 
-    Optional<String> getDefaultShippingAddressId();
+    @Nullable
+    String getDefaultShippingAddressId();
 
-    default Optional<Address> getDefaultShippingAddress() {
+    default Optional<Address> findDefaultShippingAddress() {
         return getAddresses().stream()
-                .filter(address -> address.getId() != null && Optional.of(address.getId()).equals(getDefaultShippingAddressId()))
+                .filter(address -> address.getId() != null && address.getId().equals(getDefaultShippingAddressId()))
                 .findFirst();
     }
 
-    Optional<String> getDefaultBillingAddressId();
+    @Nullable
+    default Address getDefaultShippingAddress() {
+        return findDefaultShippingAddress().orElse(null);
+    }
 
-    default Optional<Address> getDefaultBillingAddress() {
+    @Nullable
+    String getDefaultBillingAddressId();
+
+    @Nullable
+    default Address getDefaultBillingAddress() {
+        return findDefaultBillingAddress().orElse(null);
+    }
+
+    default Optional<Address> findDefaultBillingAddress() {
+        final String defaultBillingAddressId = getDefaultBillingAddressId();
+
         return getAddresses().stream()
-                .filter(address -> {
-                    final Optional<String> defaultBillingAddressId = getDefaultBillingAddressId();
-                    return address.getId() != null && Optional.of(address.getId()).equals(defaultBillingAddressId);
-                })
+                .filter(address -> defaultBillingAddressId != null && address.getId() != null && address.getId().equals(defaultBillingAddressId))
                 .findFirst();
     }
 
     boolean isEmailVerified();
 
-    Optional<String> getExternalId();
+    @Nullable
+    String getExternalId();
 
-    Optional<Reference<CustomerGroup>> getCustomerGroup();
+    @Nullable
+    Reference<CustomerGroup> getCustomerGroup();
 
     default CustomerName getName() {
         return CustomerName.of(getTitle(), getFirstName(), getMiddleName(), getLastName());
     }
 
-    Optional<String> getCompanyName();
+    @Nullable
+    String getCompanyName();
 
-    Optional<String> getVatId();
+    @Nullable
+    String getVatId();
 
-    Optional<LocalDate> getDateOfBirth();
+    @Nullable
+    LocalDate getDateOfBirth();
 
     @Override
     default Reference<Customer> toReference() {

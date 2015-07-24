@@ -52,10 +52,10 @@ public class OrderFixtures {
             final SetCustomerEmail emailAction = SetCustomerEmail.of(CUSTOMER_EMAIL);
             final Cart updatedCart = client.execute(CartUpdateCommand.of(cart, asList(shippingMethodAction, emailAction)));
 
-            final CustomerSignInCommand signInCommand = CustomerSignInCommand.of(customer.getEmail(), CustomerFixtures.PASSWORD, Optional.of(cart.getId()));
+            final CustomerSignInCommand signInCommand = CustomerSignInCommand.of(customer.getEmail(), CustomerFixtures.PASSWORD, cart.getId());
             final CustomerSignInResult signInResult = client.execute(signInCommand);
 
-            final Order order = client.execute(OrderFromCartCreateCommand.of(signInResult.getCart().get()));
+            final Order order = client.execute(OrderFromCartCreateCommand.of(signInResult.getCart()));
 
             final Order updatedOrder = client.execute(OrderUpdateCommand.of(order, asList(
                     ChangeShipmentState.of(ShipmentState.READY),
