@@ -2,27 +2,28 @@ package io.sphere.sdk.orders;
 
 import io.sphere.sdk.models.Base;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class ReturnItemDraft extends Base {
     private final long quantity;
     private final String lineItemId;
     private final ReturnShipmentState shipmentState;
-    private final Optional<String> comment;
+    @Nullable
+    private final String comment;
 
-    private ReturnItemDraft(final long quantity, final String lineItemId, final ReturnShipmentState shipmentState, final Optional<String> comment) {
+    private ReturnItemDraft(final long quantity, final String lineItemId, final ReturnShipmentState shipmentState, @Nullable final String comment) {
         this.quantity = quantity;
         this.lineItemId = lineItemId;
         this.shipmentState = shipmentState;
         this.comment = comment;
     }
 
-    public static ReturnItemDraft of(final long quantity, final String lineItemId, final ReturnShipmentState shipmentState, final Optional<String> comment) {
+    public static ReturnItemDraft of(final long quantity, final String lineItemId, final ReturnShipmentState shipmentState, @Nullable final String comment) {
         return new ReturnItemDraft(quantity, lineItemId, shipmentState, comment);
     }
 
-    public static ReturnItemDraft of(final long quantity, final String lineItemId, final ReturnShipmentState shipmentState, final String comment) {
-        return of(quantity, lineItemId, shipmentState, Optional.of(comment));
+    public static ReturnItemDraft of(final long quantity, final String lineItemId, final ReturnShipmentState shipmentState) {
+        return of(quantity, lineItemId, shipmentState, null);
     }
 
     public long getQuantity() {
@@ -37,7 +38,8 @@ public class ReturnItemDraft extends Base {
         return shipmentState;
     }
 
-    public Optional<String> getComment() {
+    @Nullable
+    public String getComment() {
         return comment;
     }
 }

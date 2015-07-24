@@ -20,11 +20,9 @@ import io.sphere.sdk.test.SphereTestUtils;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
-
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -35,7 +33,8 @@ import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.products.ProductFixtures.PRICE;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
-import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.*;
+import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.defaultTaxCategory;
+import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTransientTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -246,12 +245,12 @@ public class OrderImportCommandTest extends IntegrationTest {
                 final String deliveryId = randomKey();
                 final TrackingData trackingData = TrackingData.of().withTrackingId("tracking id")
                         .withCarrier("carrier").withProvider("provider").withProviderTransaction("prov transaction").withIsReturn(true);
-                final Parcel parcel = Parcel.of(randomKey(), createdAt, Optional.of(parcelMeasurements), Optional.of(trackingData));
+                final Parcel parcel = Parcel.of(randomKey(), createdAt, parcelMeasurements, trackingData);
                 final List<Delivery> deliveries = asList(Delivery.of(deliveryId, createdAt, asList(deliveryItem), asList(parcel)));
                 final OrderShippingInfo shippingInfo = OrderShippingInfo.of(randomString(), price, shippingRate, taxRate, taxCategoryRef, shippingMethodRef, deliveries);
                 testOrderAspect(
                         builder -> builder.shippingInfo(shippingInfo),
-                        order -> assertThat(order.getShippingInfo()).contains(shippingInfo)
+                        order -> assertThat(order.getShippingInfo()).isEqualTo(shippingInfo)
                 );
             });
         });
@@ -262,7 +261,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         final PaymentState paymentState = PaymentState.FAILED;
         testOrderAspect(
                 builder -> builder.paymentState(paymentState),
-                order -> assertThat(order.getPaymentState()).contains(paymentState)
+                order -> assertThat(order.getPaymentState()).isEqualTo(paymentState)
         );
     }
 
@@ -271,7 +270,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         final ShipmentState shipmentState = ShipmentState.SHIPPED;
         testOrderAspect(
                 builder -> builder.shipmentState(shipmentState),
-                order -> assertThat(order.getShipmentState()).contains(shipmentState)
+                order -> assertThat(order.getShipmentState()).isEqualTo(shipmentState)
         );
     }
 
@@ -345,7 +344,7 @@ public class OrderImportCommandTest extends IntegrationTest {
     public void getCompletedAt() throws Exception {
         final ZonedDateTime completedAt = SphereTestUtils.now().minusSeconds(5555);
         testOrderAspect(builder -> builder.completedAt(completedAt),
-                order -> assertThat(order.getCompletedAt()).contains(completedAt));
+                order -> assertThat(order.getCompletedAt()).isEqualTo(completedAt));
     }
 
     private void testOrderAspect(final Consumer<OrderImportDraftBuilder> orderBuilderConsumer, final Consumer<Order> orderConsumer) {

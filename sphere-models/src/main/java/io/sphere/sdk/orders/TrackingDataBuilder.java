@@ -1,14 +1,21 @@
 package io.sphere.sdk.orders;
 
 import io.sphere.sdk.models.Builder;
+import io.sphere.sdk.products.ProductProjection;
+import io.sphere.sdk.products.queries.ProductProjectionQuery;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 public class TrackingDataBuilder implements Builder<TrackingData> {
-    private Optional<String> trackingId = Optional.empty();
-    private Optional<String> carrier = Optional.empty();
-    private Optional<String> provider = Optional.empty();
-    private Optional<String> providerTransaction = Optional.empty();
+    @Nullable
+    private String trackingId;
+    @Nullable
+    private String carrier;
+    @Nullable
+    private String provider;
+    @Nullable
+    private String providerTransaction;
     private boolean isReturn = false;
 
     private TrackingDataBuilder() {
@@ -18,40 +25,25 @@ public class TrackingDataBuilder implements Builder<TrackingData> {
         return new TrackingDataBuilder();
     }
 
-    public TrackingDataBuilder trackingId(final Optional<String> trackingId) {
+    public TrackingDataBuilder trackingId(@Nullable final String trackingId) {
         this.trackingId = trackingId;
         return this;
     }
 
-    public TrackingDataBuilder trackingId(final String trackingId) {
-        return trackingId(Optional.of(trackingId));
-    }
-
-    public TrackingDataBuilder carrier(final Optional<String> carrier) {
+    public TrackingDataBuilder carrier(@Nullable final String carrier) {
         this.carrier = carrier;
         return this;
     }
 
-    public TrackingDataBuilder carrier(final String carrier) {
-        return carrier(Optional.of(carrier));
-    }
 
-    public TrackingDataBuilder provider(final Optional<String> provider) {
+    public TrackingDataBuilder provider(@Nullable final String provider) {
         this.provider = provider;
         return this;
     }
 
-    public TrackingDataBuilder provider(final String provider) {
-        return provider(Optional.of(provider));
-    }
-
-    public TrackingDataBuilder providerTransaction(final Optional<String> providerTransaction) {
+    public TrackingDataBuilder providerTransaction(@Nullable final String providerTransaction) {
         this.providerTransaction = providerTransaction;
         return this;
-    }
-
-    public TrackingDataBuilder providerTransaction(final String providerTransaction) {
-        return providerTransaction(Optional.of(providerTransaction));
     }
 
     public TrackingDataBuilder isReturn(final boolean isReturn) {

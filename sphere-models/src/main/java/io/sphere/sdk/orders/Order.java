@@ -35,17 +35,21 @@ public interface Order extends CartLike<Order> {
         return Reference.of(typeId(), getId(), this);
     }
 
-    Optional<String> getOrderNumber();
+    @Nullable
+    String getOrderNumber();
 
     InventoryMode getInventoryMode();
 
     OrderState getOrderState();
 
-    Optional<ShipmentState> getShipmentState();
+    @Nullable
+    ShipmentState getShipmentState();
 
-    Optional<PaymentState> getPaymentState();
+    @Nullable
+    PaymentState getPaymentState();
 
-    Optional<OrderShippingInfo> getShippingInfo();
+    @Nullable
+    OrderShippingInfo getShippingInfo();
 
     Set<SyncInfo> getSyncInfo();
 
@@ -90,5 +94,5 @@ public interface Order extends CartLike<Order> {
     @Override
     MonetaryAmount getTotalPrice();
 
-    Optional<ZonedDateTime> getCompletedAt();
+    ZonedDateTime getCompletedAt();
 }

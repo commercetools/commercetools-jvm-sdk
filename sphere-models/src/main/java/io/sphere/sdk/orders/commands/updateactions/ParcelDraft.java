@@ -4,38 +4,38 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.orders.ParcelMeasurements;
 import io.sphere.sdk.orders.TrackingData;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class ParcelDraft extends Base {
-    private final Optional<ParcelMeasurements> measurements;
-    private final Optional<TrackingData> trackingData;
+    @Nullable
+    private final ParcelMeasurements measurements;
+    @Nullable
+    private final TrackingData trackingData;
 
-    private ParcelDraft(final Optional<ParcelMeasurements> measurements, final Optional<TrackingData> trackingData) {
+    private ParcelDraft(final ParcelMeasurements measurements, final TrackingData trackingData) {
         this.measurements = measurements;
         this.trackingData = trackingData;
     }
 
-    public static ParcelDraft of(final Optional<ParcelMeasurements> measurements, final Optional<TrackingData> trackingData) {
+    public static ParcelDraft of(final ParcelMeasurements measurements, final TrackingData trackingData) {
         return new ParcelDraft(measurements, trackingData);
     }
 
-    public static ParcelDraft of(final ParcelMeasurements measurements, final TrackingData trackingData) {
-        return new ParcelDraft(Optional.of(measurements), Optional.of(trackingData));
-    }
-
     public static ParcelDraft of(final ParcelMeasurements measurements) {
-        return new ParcelDraft(Optional.of(measurements), Optional.empty());
+        return new ParcelDraft(measurements, null);
     }
 
     public static ParcelDraft of(final TrackingData trackingData) {
-        return new ParcelDraft(Optional.empty(), Optional.of(trackingData));
+        return new ParcelDraft(null, trackingData);
     }
 
-    public Optional<ParcelMeasurements> getMeasurements() {
+    @Nullable
+    public ParcelMeasurements getMeasurements() {
         return measurements;
     }
 
-    public Optional<TrackingData> getTrackingData() {
+    @Nullable
+    public TrackingData getTrackingData() {
         return trackingData;
     }
 }

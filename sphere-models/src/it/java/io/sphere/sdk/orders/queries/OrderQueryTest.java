@@ -77,12 +77,12 @@ public class OrderQueryTest extends IntegrationTest {
 
     @Test
     public void shipmentState() throws Exception {
-        assertOrderIsFoundWithPredicate(order -> MODEL.shipmentState().is(order.getShipmentState().get()));
+        assertOrderIsFoundWithPredicate(order -> MODEL.shipmentState().is(order.getShipmentState()));
     }
 
     @Test
     public void paymentState() throws Exception {
-        assertOrderIsFoundWithPredicate(order -> MODEL.paymentState().is(order.getPaymentState().get()));
+        assertOrderIsFoundWithPredicate(order -> MODEL.paymentState().is(order.getPaymentState()));
     }
 
     @Test
