@@ -3,29 +3,27 @@ package io.sphere.sdk.inventories.commands.updateactions;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.inventories.InventoryEntry;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  *
  * {@include.example io.sphere.sdk.inventories.commands.InventoryEntryUpdateCommandTest#setRestockableInDays()}
  */
 public class SetRestockableInDays extends UpdateAction<InventoryEntry> {
-    private final Optional<Integer> restockableInDays;
+    @Nullable
+    private final Integer restockableInDays;
 
-    private SetRestockableInDays(final Optional<Integer> restockableInDays) {
+    private SetRestockableInDays(@Nullable final Integer restockableInDays) {
         super("setRestockableInDays");
         this.restockableInDays = restockableInDays;
     }
 
-    public Optional<Integer> getRestockableInDays() {
+    @Nullable
+    public Integer getRestockableInDays() {
         return restockableInDays;
     }
 
-    public static SetRestockableInDays of(final int restockableInDays) {
-        return of(Optional.of(restockableInDays));
-    }
-
-    public static SetRestockableInDays of(final Optional<Integer> restockableInDays) {
+    public static SetRestockableInDays of(@Nullable final Integer restockableInDays) {
         return new SetRestockableInDays(restockableInDays);
     }
 }

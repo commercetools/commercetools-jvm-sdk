@@ -7,7 +7,6 @@ import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implements InventoryEntry {
     private final String sku;
