@@ -9,13 +9,13 @@ import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 @JsonDeserialize(as = DiscountCodeImpl.class)
 public interface DiscountCode extends DefaultModel<DiscountCode> {
     List<Reference<CartDiscount>> getCartDiscounts();
 
-    Optional<String> getCartPredicate();
+    @Nullable
+    String getCartPredicate();
 
     String getCode();
 
@@ -24,9 +24,11 @@ public interface DiscountCode extends DefaultModel<DiscountCode> {
 
     boolean isActive();
 
-    Optional<Long> getMaxApplications();
+    @Nullable
+    Long getMaxApplications();
 
-    Optional<Long> getMaxApplicationsPerCustomer();
+    @Nullable
+    Long getMaxApplicationsPerCustomer();
 
     @Nullable
     LocalizedStrings getName();

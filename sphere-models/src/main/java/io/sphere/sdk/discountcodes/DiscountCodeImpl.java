@@ -9,7 +9,6 @@ import io.sphere.sdk.models.Reference;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements DiscountCode {
     private final String code;
@@ -47,8 +46,9 @@ final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements D
     }
 
     @Override
-    public Optional<String> getCartPredicate() {
-        return Optional.ofNullable(cartPredicate);
+    @Nullable
+    public String getCartPredicate() {
+        return cartPredicate;
     }
 
     @Override
@@ -67,14 +67,16 @@ final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements D
         return isActive;
     }
 
+    @Nullable
     @Override
-    public Optional<Long> getMaxApplications() {
-        return Optional.ofNullable(maxApplications);
+    public Long getMaxApplications() {
+        return maxApplications;
     }
 
+    @Nullable
     @Override
-    public Optional<Long> getMaxApplicationsPerCustomer() {
-        return Optional.ofNullable(maxApplicationsPerCustomer);
+    public Long getMaxApplicationsPerCustomer() {
+        return maxApplicationsPerCustomer;
     }
 
     @Override

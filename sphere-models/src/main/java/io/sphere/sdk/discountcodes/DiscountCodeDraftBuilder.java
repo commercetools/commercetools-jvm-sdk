@@ -34,7 +34,7 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
         return of(template.getCode(), template.getCartDiscounts())
                 .name(template.getName())
                 .description(template.getDescription())
-                .cartPredicate(template.getCartPredicate().map(CartPredicate::of))
+                .cartPredicate(Optional.ofNullable(template.getCartPredicate()).map(CartPredicate::of).orElse(null))
                 .isActive(template.isActive())
                 .maxApplications(template.getMaxApplications())
                 .maxApplicationsPerCustomer(template.getMaxApplicationsPerCustomer());
@@ -68,13 +68,9 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
         return this;
     }
 
-    public DiscountCodeDraftBuilder cartPredicate(final Optional<CartPredicate> cartPredicate) {
-        this.cartPredicate = cartPredicate.orElse(null);
+    public DiscountCodeDraftBuilder cartPredicate(@Nullable final CartPredicate cartPredicate) {
+        this.cartPredicate = cartPredicate;
         return this;
-    }
-
-    public DiscountCodeDraftBuilder cartPredicate(final CartPredicate cartPredicate) {
-        return cartPredicate(Optional.of(cartPredicate));
     }
 
     public DiscountCodeDraftBuilder isActive(final boolean isActive) {
@@ -82,22 +78,14 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
         return this;
     }
 
-    public DiscountCodeDraftBuilder maxApplications(final Optional<Long> maxApplications) {
-        this.maxApplications = maxApplications.orElse(null);
+    public DiscountCodeDraftBuilder maxApplications(@Nullable final Long maxApplications) {
+        this.maxApplications = maxApplications;
         return this;
     }
 
-    public DiscountCodeDraftBuilder maxApplications(final long maxApplications) {
-        return maxApplications(Optional.of(maxApplications));
-    }
-
-    public DiscountCodeDraftBuilder maxApplicationsPerCustomer(final Optional<Long> maxApplicationsPerCustomer) {
-        this.maxApplicationsPerCustomer = maxApplicationsPerCustomer.orElse(null);
+    public DiscountCodeDraftBuilder maxApplicationsPerCustomer(@Nullable final Long maxApplicationsPerCustomer) {
+        this.maxApplicationsPerCustomer = maxApplicationsPerCustomer;
         return this;
-    }
-
-    public DiscountCodeDraftBuilder maxApplicationsPerCustomer(final long maxApplicationsPerCustomer) {
-        return maxApplicationsPerCustomer(Optional.of(maxApplicationsPerCustomer));
     }
 
     @Override

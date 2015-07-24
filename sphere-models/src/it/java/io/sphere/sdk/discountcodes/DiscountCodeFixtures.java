@@ -28,8 +28,8 @@ public class DiscountCodeFixtures {
                 .withName(en("sample discount code"))
                 .withDescription(en("sample discount code descr."))
                 .withIsActive(true)
-                .withMaxApplications(5)
-                .withMaxApplicationsPerCustomer(1);
+                .withMaxApplications(5L)
+                .withMaxApplicationsPerCustomer(1L);
         return client.execute(DiscountCodeCreateCommand.of(draft));
     }
 

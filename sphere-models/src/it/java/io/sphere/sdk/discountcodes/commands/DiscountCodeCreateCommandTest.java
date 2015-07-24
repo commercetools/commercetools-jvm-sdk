@@ -20,8 +20,8 @@ public class DiscountCodeCreateCommandTest extends IntegrationTest {
                     .withDescription(en("sample discount code descr."))
                     .withCartPredicate(CartPredicate.of("1 = 1"))
                     .withIsActive(false)
-                    .withMaxApplications(5)
-                    .withMaxApplicationsPerCustomer(1);
+                    .withMaxApplications(5L)
+                    .withMaxApplicationsPerCustomer(1L);
             final DiscountCode discountCode = execute(DiscountCodeCreateCommand.of(draft));
             assertThat(discountCode.getCode()).isEqualTo(code);
             assertThat(discountCode.getName()).isEqualTo(en(DiscountCodeCreateCommandTest.class.getName()));
@@ -29,8 +29,8 @@ public class DiscountCodeCreateCommandTest extends IntegrationTest {
             assertThat(discountCode.getCartDiscounts()).isEqualTo(asList(cartDiscount.toReference()));
             assertThat(discountCode.getCartPredicate()).contains("1 = 1");
             assertThat(discountCode.isActive()).isEqualTo(false);
-            assertThat(discountCode.getMaxApplications()).contains(5L);
-            assertThat(discountCode.getMaxApplicationsPerCustomer()).contains(1L);
+            assertThat(discountCode.getMaxApplications()).isEqualTo(5L);
+            assertThat(discountCode.getMaxApplicationsPerCustomer()).isEqualTo(1L);
             //clean up
             execute(DiscountCodeDeleteCommand.of(discountCode));
         });
