@@ -69,12 +69,13 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
      * @return optional of a variant matching variantId
      * @see #getVariantOrMaster(int)
      */
-    default Optional<ProductVariant> getVariant(final int variantId) {
-        final Optional<ProductVariant> result;
+    @Nullable
+    default ProductVariant getVariant(final int variantId) {
+        final ProductVariant result;
         if (variantId == getMasterVariant().getId()) {
-            result = Optional.of(getMasterVariant());
+            result = getMasterVariant();
         } else {
-            result = getVariants().stream().filter(v -> v.getId() == variantId).findFirst();
+            result = getVariants().stream().filter(v -> v.getId() == variantId).findFirst().orElse(null);
         }
         return result;
     }

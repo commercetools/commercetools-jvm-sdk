@@ -38,9 +38,9 @@ import java.util.Set;
 @JsonDeserialize(as=ProductProjectionImpl.class)
 public interface ProductProjection extends ProductLike<ProductProjection>, ProductDataLike, Referenceable<Product> {
 
-    public boolean hasStagedChanges();
+    boolean hasStagedChanges();
 
-    public boolean isPublished();
+    boolean isPublished();
 
     @Override
     default Reference<Product> toReference() {
@@ -96,13 +96,13 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
         return ProductsPackage.getAllVariants(this);
     }
 
-    default Optional<ProductVariant> getVariant(final VariantIdentifier identifier){
-        return getId().equals(identifier.getProductId()) ? getVariant(identifier.getVariantId()) : Optional.empty();
+    default Optional<ProductVariant> findVariant(final VariantIdentifier identifier){
+        return getId().equals(identifier.getProductId()) ? Optional.ofNullable(getVariant(identifier.getVariantId())) : Optional.empty();
     }
 
     @Override
-    default Optional<ProductVariant> getVariant(final int variantId){
-        return ProductsPackage.getVariant(variantId, this);
+    default ProductVariant getVariant(final int variantId){
+        return ProductsPackage.getVariant(variantId, this).orElse(null);
     }
 
     @Override

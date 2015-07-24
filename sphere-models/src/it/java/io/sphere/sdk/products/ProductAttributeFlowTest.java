@@ -77,6 +77,6 @@ public class ProductAttributeFlowTest extends IntegrationTest {
     }
 
     private Optional<LocalizedEnumValue> extractAttribute(final Product product, final NamedAttributeAccess<LocalizedEnumValue> namesAccess) {
-        return product.getMasterData().getStaged().getMasterVariant().getAttribute(namesAccess);
+        return product.getMasterData().getStaged().getMasterVariant().findAttribute(namesAccess);
     }
 }

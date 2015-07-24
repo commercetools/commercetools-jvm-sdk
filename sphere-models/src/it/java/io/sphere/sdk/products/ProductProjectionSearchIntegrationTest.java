@@ -75,7 +75,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final List<Product> products = execute(query).getResults();
 
         final Function<String, Optional<Product>> findBySku =
-                sku -> products.stream().filter(p -> sku.equals(p.getMasterData().getStaged().getMasterVariant().getSku().orElse("JUSTWRONG"))).findFirst();
+                sku -> products.stream().filter(p -> sku.equals(p.getMasterData().getStaged().getMasterVariant().getSku())).findFirst();
 
         product1 = findBySku.apply(SKU1).orElseGet(() -> createTestProduct(productType, "Schuh", "shoe", "blue", 38, 46, SKU1));
         product2 = findBySku.apply(SKU2).orElseGet(() -> createTestProduct(productType, "Hemd", "shirt", "red", 36, 44, SKU2));

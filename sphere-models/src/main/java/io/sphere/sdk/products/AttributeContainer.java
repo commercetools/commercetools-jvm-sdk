@@ -4,6 +4,7 @@ import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.attributes.NamedAttributeAccess;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,10 +25,10 @@ public interface AttributeContainer {
      * @param <T> the underlying type of the attribute
      * @return the value of the attribute, or Optional.empty if absent
      */
-    <T> Optional<T> getAttribute(final NamedAttributeAccess<T> accessor);
+    <T> Optional<T> findAttribute(final NamedAttributeAccess<T> accessor);
 
-    default <T> Optional<T> getAttribute(final String name, final AttributeAccess<T> accessor) {
-        return getAttribute(accessor.ofName(name));
+    default <T> Optional<T> findAttribute(final String name, final AttributeAccess<T> accessor) {
+        return findAttribute(accessor.ofName(name));
     }
 
     default boolean hasAttribute(final String attributeName) {
@@ -38,9 +39,10 @@ public interface AttributeContainer {
         return getAttributes().stream().anyMatch(attr -> attr.getName().equals(namedAccess.getName()));
     }
 
-    default Optional<Attribute> getAttribute(final String attributeName) {
+    @Nullable
+    default Attribute getAttribute(final String attributeName) {
         requireNonNull(attributeName);
-        return getAttributes().stream().filter(attr -> attr.getName().equals(attributeName)).findAny();
+        return getAttributes().stream().filter(attr -> attr.getName().equals(attributeName)).findAny().orElse(null);
     }
 
     static AttributeContainer of(final List<Attribute> attributes) {

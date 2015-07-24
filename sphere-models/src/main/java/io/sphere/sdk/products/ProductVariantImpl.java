@@ -6,23 +6,27 @@ import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeMapper;
 import io.sphere.sdk.models.Image;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 
 import static java.lang.String.format;
 
 class ProductVariantImpl extends AttributeContainerImpl implements ProductVariant {
-    private Optional<String> productId;//hack for VariantIdentifier getter
+    @Nullable
+    private String productId;//hack for VariantIdentifier getter
     private final int id;
-    private final Optional<String> sku;
+    @Nullable
+    private final String sku;
     private final List<Price> prices;
     private final List<Image> images;
-    private final Optional<ProductVariantAvailability> availability;
+    @Nullable
+    private final ProductVariantAvailability availability;
 
     @JsonCreator
-    ProductVariantImpl(final int id, final Optional<String> sku, final List<Price> prices,
+    ProductVariantImpl(final int id, final String sku, final List<Price> prices,
                        final List<Attribute> attributes, final List<Image> images,
-                       final Optional<ProductVariantAvailability> availability, final Optional<String> productId) {
+                       final ProductVariantAvailability availability, final String productId) {
         super(attributes);
         this.id = id;
         this.sku = sku;
@@ -38,7 +42,8 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     }
 
     @Override
-    public Optional<String> getSku() {
+    @Nullable
+    public String getSku() {
         return sku;
     }
 
@@ -53,13 +58,14 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     }
 
     @Override
-    public Optional<ProductVariantAvailability> getAvailability() {
+    @Nullable
+    public ProductVariantAvailability getAvailability() {
         return availability;
     }
 
     @Override
     public VariantIdentifier getIdentifier() {
-        return productId.map(pId -> VariantIdentifier.of(pId, getId())).orElseThrow(UnsupportedOperationException::new);
+        return Optional.ofNullable(productId).map(pId -> VariantIdentifier.of(pId, getId())).orElseThrow(UnsupportedOperationException::new);
     }
 
     @Override
@@ -68,8 +74,8 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     }
 
     //required trick for variant identifier
-    void setProductId(final String productId) {
-        this.productId = Optional.of(productId);
+    void setProductId(@Nullable final String productId) {
+        this.productId = productId;
     }
 
     private JsonException enrich(final Object objectWithAttributes, final String attributeName, final AttributeMapper<?> mapper, final Throwable cause) {

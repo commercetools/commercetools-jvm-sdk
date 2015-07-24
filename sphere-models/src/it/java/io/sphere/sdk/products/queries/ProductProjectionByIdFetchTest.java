@@ -19,7 +19,7 @@ public class ProductProjectionByIdFetchTest extends IntegrationTest {
             final ProductProjection productProjection = execute(sphereRequest);
             final String fetchedProjectionId = productProjection.getId();
             assertThat(fetchedProjectionId).isEqualTo(productId);
-            assertThat(productProjection.getCategories()).isEqualTo(product.getMasterData().get(projectionType).get().getCategories());
+            assertThat(productProjection.getCategories()).isEqualTo(product.getMasterData().get(projectionType).getCategories());
         });
     }
 }

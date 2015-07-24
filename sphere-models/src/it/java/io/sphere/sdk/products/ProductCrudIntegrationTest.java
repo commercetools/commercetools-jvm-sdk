@@ -108,8 +108,8 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
         final PagedQueryResult<Product> result = execute(ProductQuery.of().bySku(sku, STAGED));
         assertThat(result.getResults()).hasSize(1);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getSku()).contains(sku);
-        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Colors.ATTRIBUTE)).contains(Colors.GREEN);
-        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Sizes.ATTRIBUTE)).contains(Sizes.S);
+        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().findAttribute(Colors.ATTRIBUTE)).contains(Colors.GREEN);
+        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().findAttribute(Sizes.ATTRIBUTE)).contains(Sizes.S);
     }
 
     @Test

@@ -5,6 +5,7 @@ import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.ProductUpdateScope;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -16,9 +17,10 @@ import java.util.Optional;
  */
 public class SetAttributeInAllVariants extends StageableProductUpdateAction {
     private final String name;
-    private final Optional<JsonNode> value;
+    @Nullable
+    private final JsonNode value;
 
-    SetAttributeInAllVariants(final String name, final Optional<JsonNode> value, final ProductUpdateScope productUpdateScope) {
+    SetAttributeInAllVariants(final String name, final @Nullable JsonNode value, final ProductUpdateScope productUpdateScope) {
         super("setAttributeInAllVariants", productUpdateScope);
         this.name = name;
         this.value = value;
@@ -28,7 +30,7 @@ public class SetAttributeInAllVariants extends StageableProductUpdateAction {
         return name;
     }
 
-    public Optional<JsonNode> getValue() {
+    public JsonNode getValue() {
         return value;
     }
 
@@ -40,7 +42,7 @@ public class SetAttributeInAllVariants extends StageableProductUpdateAction {
      * @param productUpdateScope the scope where the attribute should be updated
      * @return update action
      */
-    public static SetAttributeInAllVariants of(final String name, final Optional<JsonNode> value, final ProductUpdateScope productUpdateScope) {
+    public static SetAttributeInAllVariants of(final String name, final JsonNode value, final ProductUpdateScope productUpdateScope) {
         return new SetAttributeInAllVariants(name, value, productUpdateScope);
     }
 
@@ -52,7 +54,7 @@ public class SetAttributeInAllVariants extends StageableProductUpdateAction {
      * @return update action
      */
     public static SetAttributeInAllVariants ofUnsetAttribute(final String name, final ProductUpdateScope productUpdateScope) {
-        return of(name, Optional.<JsonNode>empty(), productUpdateScope);
+        return of(name, null, productUpdateScope);
     }
 
 
@@ -65,7 +67,7 @@ public class SetAttributeInAllVariants extends StageableProductUpdateAction {
      * @return update action
      */
     public static <T> SetAttributeInAllVariants ofUnsetAttribute(final NamedAttributeAccess<T> NamedAttributeAccess, final ProductUpdateScope productUpdateScope) {
-        return of(NamedAttributeAccess.getName(), Optional.<JsonNode>empty(), productUpdateScope);
+        return of(NamedAttributeAccess.getName(), null, productUpdateScope);
     }
 
     /**
@@ -76,7 +78,7 @@ public class SetAttributeInAllVariants extends StageableProductUpdateAction {
      * @return update action
      */
     public static SetAttributeInAllVariants of(final AttributeDraft attribute, final ProductUpdateScope productUpdateScope) {
-        return of(attribute.getName(), Optional.of(attribute.getValue()), productUpdateScope);
+        return of(attribute.getName(), attribute.getValue(), productUpdateScope);
     }
 
     /**

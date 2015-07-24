@@ -8,7 +8,6 @@ import io.sphere.sdk.search.SearchKeywords;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -53,8 +52,9 @@ public interface ProductData extends ProductDataLike {
     }
 
     @Override
-    default Optional<ProductVariant> getVariant(final int variantId){
-        return ProductsPackage.getVariant(variantId, this);
+    @Nullable
+    default ProductVariant getVariant(final int variantId){
+        return ProductsPackage.getVariant(variantId, this).orElse(null);
     }
 
     @Override

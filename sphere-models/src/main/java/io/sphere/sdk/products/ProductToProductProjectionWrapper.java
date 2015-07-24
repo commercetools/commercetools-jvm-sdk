@@ -10,7 +10,6 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 class ProductToProductProjectionWrapper implements ProductProjection {
@@ -19,7 +18,7 @@ class ProductToProductProjectionWrapper implements ProductProjection {
 
     ProductToProductProjectionWrapper(final Product product, final ProductProjectionType productProjectionType) {
         this.product = product;
-        this.productData = product.getMasterData().get(productProjectionType).get();
+        this.productData = product.getMasterData().get(productProjectionType);
     }
 
     @Override
@@ -84,7 +83,8 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     }
 
     @Override
-    public Optional<Reference<TaxCategory>> getTaxCategory() {
+    @Nullable
+    public Reference<TaxCategory> getTaxCategory() {
         return product.getTaxCategory();
     }
 

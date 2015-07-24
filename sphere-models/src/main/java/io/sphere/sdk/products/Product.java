@@ -61,7 +61,7 @@ public interface Product extends ProductLike<Product>, DefaultModel<Product> {
     }
 
     default Optional<ProductProjection> toProjection(final ProductProjectionType productProjectionType) {
-        return getMasterData().get(productProjectionType)
+        return Optional.ofNullable(getMasterData().get(productProjectionType))
                 .map(productData -> new ProductToProductProjectionWrapper(this, productProjectionType));
     }
 }

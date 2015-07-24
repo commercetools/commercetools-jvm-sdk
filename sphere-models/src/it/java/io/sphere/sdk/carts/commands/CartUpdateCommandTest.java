@@ -265,7 +265,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final Product productWithChangedPrice =
                     execute(ProductUpdateCommand.of(product, asList(ChangePrice.of(oldPrice, newPrice, STAGED_AND_CURRENT))));
 
-            final List<Price> prices = productWithChangedPrice.getMasterData().getCurrent().get().getMasterVariant().getPrices();
+            final List<Price> prices = productWithChangedPrice.getMasterData().getCurrent().getMasterVariant().getPrices();
             assertThat(prices)
                     .overridingErrorMessage("we updated the price of the product")
                     .isEqualTo(asList(newPrice));

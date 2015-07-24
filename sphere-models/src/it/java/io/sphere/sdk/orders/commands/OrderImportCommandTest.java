@@ -93,7 +93,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                                     assertThat(lineItem.getVariant().getAttributes()).isEqualTo(masterVariant.getAttributes());
                                     assertThat(lineItem.getVariant().getImages()).isEqualTo(masterVariant.getImages());
                                     assertThat(lineItem.getVariant().getPrices()).isEqualTo(masterVariant.getPrices());
-                                    assertThat(lineItem.getVariant().getSku()).contains(masterVariant.getSku().get());
+                                    assertThat(lineItem.getVariant().getSku()).contains(masterVariant.getSku());
                                     assertThat(lineItem.getQuantity()).isEqualTo(2);
                                     assertThat(lineItem.getPrice()).isEqualTo(price);
                                     assertThat(lineItem.getName()).isEqualTo(name);
@@ -112,7 +112,7 @@ public class OrderImportCommandTest extends IntegrationTest {
     }
 
     private String sku(final Product product) {
-        return product.getMasterData().getStaged().getMasterVariant().getSku().get();
+        return product.getMasterData().getStaged().getMasterVariant().getSku();
     }
 
     @Test

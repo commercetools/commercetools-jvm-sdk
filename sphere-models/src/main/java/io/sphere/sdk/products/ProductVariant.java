@@ -1,19 +1,17 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeAccess;
-import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.models.Image;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 @JsonDeserialize(as = ProductVariantImpl.class)
 public interface ProductVariant extends AttributeContainer {
     int getId();
 
-    Optional<String> getSku();
+    @Nullable
+    String getSku();
 
     List<Price> getPrices();
 
@@ -25,7 +23,8 @@ public interface ProductVariant extends AttributeContainer {
      *
      * @return availability
      */
-    Optional<ProductVariantAvailability> getAvailability();
+    @Nullable
+    ProductVariantAvailability getAvailability();
 
     /**
      * Gets the id of the product and the variant. This operation may not be available.

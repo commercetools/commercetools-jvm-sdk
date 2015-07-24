@@ -13,13 +13,13 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 
 class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> implements ProductProjection {
     private final Reference<ProductType> productType;
-    private final Optional<Reference<TaxCategory>> taxCategory;
+    @Nullable
+    private final Reference<TaxCategory> taxCategory;
     @JsonProperty("published")
     private final boolean isPublished;
     @JsonProperty("hasStagedChanges")
@@ -41,7 +41,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
 
     @JsonCreator
     ProductProjectionImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                          final Reference<ProductType> productType, final Optional<Reference<TaxCategory>> taxCategory,
+                          final Reference<ProductType> productType, @Nullable final Reference<TaxCategory> taxCategory,
                           final boolean hasStagedChanges, final LocalizedStrings name,
                           final Set<Reference<Category>> categories, final LocalizedStrings description,
                           final LocalizedStrings slug, final LocalizedStrings metaTitle,
@@ -124,7 +124,8 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     }
 
     @Override
-    public Optional<Reference<TaxCategory>> getTaxCategory() {
+    @Nullable
+    public Reference<TaxCategory> getTaxCategory() {
         return taxCategory;
     }
 

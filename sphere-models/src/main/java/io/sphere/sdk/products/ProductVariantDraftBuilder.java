@@ -1,7 +1,5 @@
 package io.sphere.sdk.products;
 
-import java.util.Optional;
-
 import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.models.Base;
@@ -9,14 +7,14 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Image;
 import io.sphere.sdk.utils.ListUtils;
 
-import java.util.Arrays;
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 
 public final class ProductVariantDraftBuilder extends Base implements Builder<ProductVariantDraft> {
-    private Optional<String> sku = Optional.empty();
+    private String sku;
 
     private List<Price> prices = Collections.emptyList();
 
@@ -31,13 +29,9 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
         return new ProductVariantDraftBuilder();
     }
 
-    public ProductVariantDraftBuilder sku(final Optional<String> sku) {
+    public ProductVariantDraftBuilder sku(@Nullable final String sku) {
         this.sku = sku;
         return this;
-    }
-
-    public ProductVariantDraftBuilder sku(final String sku) {
-        return sku(Optional.ofNullable(sku));
     }
 
     public ProductVariantDraftBuilder images(final List<Image> images) {

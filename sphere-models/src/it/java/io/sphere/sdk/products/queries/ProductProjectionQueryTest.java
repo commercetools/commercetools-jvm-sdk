@@ -53,7 +53,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                     .toQuery();
             final ProductProjection productProjection = execute(query).head().get();
             final NamedAttributeAccess<Reference<Product>> namedAttributeAccess = AttributeAccess.ofProductReference().ofName("productreference");
-            final Reference<Product> productReference = productProjection.getMasterVariant().getAttribute(namedAttributeAccess).get();
+            final Reference<Product> productReference = productProjection.getMasterVariant().findAttribute(namedAttributeAccess).get();
             final Product expandedReferencedProduct = productReference.getObj();
             assertThat(expandedReferencedProduct.getId()).isEqualTo(referencedProduct.getId());
         });
@@ -212,7 +212,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                                     execute(ProductProjectionQuery.of(STAGED)
                                             .withPredicates(m -> m.id().is(productWithTaxCategory.getId()))
                                             .withExpansionPaths(m -> m.taxCategory()));
-                            assertThat(pagedQueryResult.head().get().getTaxCategory().get()).isExpanded();
+                            assertThat(pagedQueryResult.head().get().getTaxCategory()).isExpanded();
                         })
         );
     }

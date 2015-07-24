@@ -310,11 +310,11 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(namedAttributeAccess.draftOf(exampleValue)).build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = execute(ProductCreateCommand.of(productDraft));
-        final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().getAttribute(namedAttributeAccess).get();
+        final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().findAttribute(namedAttributeAccess).get();
 
         assertThat(exampleValue).isEqualTo(actualAttributeValue);
 
-        final Boolean found = AttributeExtraction.<Boolean>of(fetchedAttributeDefinition, product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeName).get())
+        final Boolean found = AttributeExtraction.<Boolean>of(fetchedAttributeDefinition, product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeName))
                 .ifIs(access, x -> true)
                 .findValue().orElse(false);
         assertThat(found).overridingErrorMessage("the attribute type should be recognized").isTrue();
