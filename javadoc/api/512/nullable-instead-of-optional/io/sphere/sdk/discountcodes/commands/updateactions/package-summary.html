@@ -109,7 +109,7 @@
 <div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setCartPredicate--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
     final String predicateAsString =
             //you need to change the predicate
-            discountCode.getCartPredicate().map(p -&gt; "1 = 1".equals(p)).orElse(false) ? "true = true" : "1 = 1";
+            Optional.ofNullable(discountCode.getCartPredicate()).map(p -&gt; "1 = 1".equals(p)).orElse(false) ? "true = true" : "1 = 1";
 
     final CartPredicate cartPredicate = CartPredicate.of(predicateAsString);
     final DiscountCode updatedDiscountCode =
@@ -126,7 +126,7 @@
     final LocalizedStrings newDescription = randomSlug();
     final DiscountCode updatedDiscountCode =
             execute(DiscountCodeUpdateCommand.of(discountCode, SetDescription.of(newDescription)));
-    assertThat(updatedDiscountCode.getDescription()).contains(newDescription);
+    assertThat(updatedDiscountCode.getDescription()).isEqualTo(newDescription);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -138,7 +138,7 @@
     final long maxApplications = randomLong();
     final DiscountCode updatedDiscountCode =
             execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplications.of(maxApplications)));
-    assertThat(updatedDiscountCode.getMaxApplications()).contains(maxApplications);
+    assertThat(updatedDiscountCode.getMaxApplications()).isEqualTo(maxApplications);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -150,7 +150,7 @@
     final long maxApplications = randomLong();
     final DiscountCode updatedDiscountCode =
             execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplicationsPerCustomer.of(maxApplications)));
-    assertThat(updatedDiscountCode.getMaxApplicationsPerCustomer()).contains(maxApplications);
+    assertThat(updatedDiscountCode.getMaxApplicationsPerCustomer()).isEqualTo(maxApplications);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -162,7 +162,7 @@
     final LocalizedStrings newName = randomSlug();
     final DiscountCode updatedDiscountCode =
             execute(DiscountCodeUpdateCommand.of(discountCode, SetName.of(newName)));
-    assertThat(updatedDiscountCode.getName()).contains(newName);
+    assertThat(updatedDiscountCode.getName()).isEqualTo(newName);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>

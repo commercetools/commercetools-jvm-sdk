@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9,"i2":9};
+var methods = {"i0":10,"i1":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -121,12 +121,12 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">SetBillingAddress</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setBillingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-assertThat(cart.getBillingAddress()).isEmpty();
+assertThat(cart.getBillingAddress()).isNull();
 final Address address = AddressBuilder.of(DE).build();
 final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddress.of(address)));
-assertThat(cartWithAddress.getBillingAddress()).contains(address);
-final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(Optional.empty())));
-assertThat(cartWithoutAddress.getBillingAddress()).isEmpty();
+assertThat(cartWithAddress.getBillingAddress()).isEqualTo(address);
+final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(null)));
+assertThat(cartWithoutAddress.getBillingAddress()).isNull();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
@@ -151,16 +151,12 @@ assertThat(cartWithoutAddress.getBillingAddress()).isEmpty();
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html#getAddress--">getAddress</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetBillingAddress</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html#of-io.sphere.sdk.models.Address-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;address)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetBillingAddress</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html#of-java.util.Optional-">of</a></span>(java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&gt;&nbsp;address)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -198,15 +194,6 @@ assertThat(cartWithoutAddress.getBillingAddress()).isEmpty();
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetBillingAddress</a>&nbsp;of(java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&gt;&nbsp;address)</pre>
-</li>
-</ul>
 <a name="of-io.sphere.sdk.models.Address-">
 <!--   -->
 </a>
@@ -222,7 +209,8 @@ assertThat(cartWithoutAddress.getBillingAddress()).isEmpty();
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getAddress</h4>
-<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&gt;&nbsp;getAddress()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;getAddress()</pre>
 </li>
 </ul>
 </li>

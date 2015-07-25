@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":18,"i2":18,"i3":18,"i4":18,"i5":18,"i6":18,"i7":18,"i8":18,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":18,"i17":6,"i18":18};
+var methods = {"i0":6,"i1":18,"i2":18,"i3":18,"i4":18,"i5":18,"i6":18,"i7":18,"i8":18,"i9":6,"i10":6,"i11":6,"i12":6,"i13":6,"i14":6,"i15":6,"i16":18,"i17":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -206,11 +206,11 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-java.lang.Long-">withLimit</a></span>(java.lang.Long&nbsp;limit)</code>&nbsp;</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-java.lang.Long-">withOffset</a></span>(java.lang.Long&nbsp;offset)</code>&nbsp;</td>
 </tr>
 <tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
@@ -225,12 +225,6 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Optional-">withText</a></span>(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&gt;&nbsp;text)</code>
-<div class="block">Returns an EntitySearch with the new text as search text.</div>
-</td>
-</tr>
-<tr id="i18" class="altColor">
-<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.search.SearchText-">withText</a></span>(<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&nbsp;text)</code>
 <div class="block">Returns an EntitySearch with the new text as search text.</div>
 </td>
@@ -271,13 +265,13 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="withText-java.util.Optional-">
+<a name="withText-io.sphere.sdk.search.SearchText-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>withText</h4>
-<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;withText(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&gt;&nbsp;text)</pre>
+<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;withText(<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&nbsp;text)</pre>
 <div class="block">Returns an EntitySearch with the new text as search text.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -351,38 +345,22 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 </dl>
 </li>
 </ul>
-<a name="withLimit-long-">
+<a name="withLimit-java.lang.Long-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>withLimit</h4>
-<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;withLimit(long&nbsp;limit)</pre>
+<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;withLimit(java.lang.Long&nbsp;limit)</pre>
 </li>
 </ul>
-<a name="withOffset-long-">
+<a name="withOffset-java.lang.Long-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>withOffset</h4>
-<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;withOffset(long&nbsp;offset)</pre>
-</li>
-</ul>
-<a name="withText-io.sphere.sdk.search.SearchText-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withText</h4>
-<pre>default&nbsp;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;withText(<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&nbsp;text)</pre>
-<div class="block">Returns an EntitySearch with the new text as search text.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>text</code> - the new search text</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with text</dd>
-</dl>
+<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;withOffset(java.lang.Long&nbsp;offset)</pre>
 </li>
 </ul>
 <a name="withText-java.util.Locale-java.lang.String-">

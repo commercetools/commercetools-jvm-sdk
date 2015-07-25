@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":10,"i6":10,"i7":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -129,7 +129,7 @@ extends java.lang.Object</pre>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;com.neovisionaries.i18n.CountryCode&gt;</code></td>
+<td class="colFirst"><code>com.neovisionaries.i18n.CountryCode</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getCountry--">getCountry</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -137,11 +137,11 @@ extends java.lang.Object</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getCurrency--">getCurrency</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getCustomerId--">getCustomerId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#getInventoryMode--">getInventoryMode</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
@@ -154,23 +154,11 @@ extends java.lang.Object</pre>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withCountry-java.util.Optional-">withCountry</a></span>(java.util.Optional&lt;com.neovisionaries.i18n.CountryCode&gt;&nbsp;country)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withCustomerId-java.lang.String-">withCustomerId</a></span>(java.lang.String&nbsp;customerId)</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withCustomerId-java.util.Optional-">withCustomerId</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;customerId)</code>&nbsp;</td>
-</tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withCustomerId-java.lang.String-">withCustomerId</a></span>(java.lang.String&nbsp;customerId)</code>&nbsp;</td>
-</tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withInventoryMode-io.sphere.sdk.carts.InventoryMode-">withInventoryMode</a></span>(<a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a>&nbsp;inventoryMode)</code>&nbsp;</td>
-</tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CartDraft.html#withInventoryMode-java.util.Optional-">withInventoryMode</a></span>(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a>&gt;&nbsp;inventoryMode)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -218,7 +206,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getCustomerId</h4>
-<pre>public&nbsp;java.util.Optional&lt;java.lang.String&gt;&nbsp;getCustomerId()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getCustomerId()</pre>
 </li>
 </ul>
 <a name="getCountry--">
@@ -227,7 +216,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getCountry</h4>
-<pre>public&nbsp;java.util.Optional&lt;com.neovisionaries.i18n.CountryCode&gt;&nbsp;getCountry()</pre>
+<pre>@Nullable
+public&nbsp;com.neovisionaries.i18n.CountryCode&nbsp;getCountry()</pre>
 </li>
 </ul>
 <a name="getInventoryMode--">
@@ -236,16 +226,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getInventoryMode</h4>
-<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a>&gt;&nbsp;getInventoryMode()</pre>
-</li>
-</ul>
-<a name="withCustomerId-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withCustomerId</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withCustomerId(java.util.Optional&lt;java.lang.String&gt;&nbsp;customerId)</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a>&nbsp;getInventoryMode()</pre>
 </li>
 </ul>
 <a name="withCustomerId-java.lang.String-">
@@ -254,16 +236,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>withCustomerId</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withCustomerId(java.lang.String&nbsp;customerId)</pre>
-</li>
-</ul>
-<a name="withCountry-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withCountry</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withCountry(java.util.Optional&lt;com.neovisionaries.i18n.CountryCode&gt;&nbsp;country)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withCustomerId(@Nullable
+                                java.lang.String&nbsp;customerId)</pre>
 </li>
 </ul>
 <a name="withCountry-com.neovisionaries.i18n.CountryCode-">
@@ -272,16 +246,8 @@ extends java.lang.Object</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>withCountry</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withCountry(com.neovisionaries.i18n.CountryCode&nbsp;country)</pre>
-</li>
-</ul>
-<a name="withInventoryMode-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withInventoryMode</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withInventoryMode(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a>&gt;&nbsp;inventoryMode)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withCountry(@Nullable
+                             com.neovisionaries.i18n.CountryCode&nbsp;country)</pre>
 </li>
 </ul>
 <a name="withInventoryMode-io.sphere.sdk.carts.InventoryMode-">
@@ -290,7 +256,8 @@ extends java.lang.Object</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>withInventoryMode</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withInventoryMode(<a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a>&nbsp;inventoryMode)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a>&nbsp;withInventoryMode(@Nullable
+                                   <a href="../../../../io/sphere/sdk/carts/InventoryMode.html" title="enum in io.sphere.sdk.carts">InventoryMode</a>&nbsp;inventoryMode)</pre>
 </li>
 </ul>
 </li>

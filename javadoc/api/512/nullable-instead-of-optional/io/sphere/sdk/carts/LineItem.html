@@ -125,7 +125,7 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/LineItem.html#getDistributionChannel--">getDistributionChannel</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -145,7 +145,7 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/LineItem.html#getProductId--">getProductId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/LineItem.html#getProductSlug--">getProductSlug</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
@@ -157,11 +157,11 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/LineItem.html#getState--">getState</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/LineItem.html#getSupplyChannel--">getSupplyChannel</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/LineItem.html#getTaxRate--">getTaxRate</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
@@ -245,7 +245,8 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <ul class="blockList">
 <li class="blockList">
 <h4>getTaxRate</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&gt;&nbsp;getTaxRate()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&nbsp;getTaxRate()</pre>
 </li>
 </ul>
 <a name="getSupplyChannel--">
@@ -254,7 +255,8 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <ul class="blockList">
 <li class="blockList">
 <h4>getSupplyChannel</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;&nbsp;getSupplyChannel()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;getSupplyChannel()</pre>
 </li>
 </ul>
 <a name="getDistributionChannel--">
@@ -263,7 +265,8 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <ul class="blockList">
 <li class="blockList">
 <h4>getDistributionChannel</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;&nbsp;getDistributionChannel()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;getDistributionChannel()</pre>
 </li>
 </ul>
 <a name="getProductSlug--">
@@ -272,7 +275,8 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <ul class="blockList">
 <li class="blockList">
 <h4>getProductSlug</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getProductSlug()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getProductSlug()</pre>
 </li>
 </ul>
 <a name="getId--">

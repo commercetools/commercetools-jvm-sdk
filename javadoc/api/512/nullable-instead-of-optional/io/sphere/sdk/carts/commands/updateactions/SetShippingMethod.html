@@ -124,9 +124,9 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setShippingMethod--%s" class=code-example><pre><code class='java'>withShippingMethodForGermany(client(), shippingMethod -&gt; {
     withCart(client(), createCartWithShippingAddress(client()), cart -&gt; {
-        assertThat(cart.getShippingInfo()).isEmpty();
+        assertThat(cart.getShippingInfo()).isNull();
         final Cart updatedCart = execute(CartUpdateCommand.of(cart, SetShippingMethod.of(shippingMethod)));
-        assertThat(updatedCart.getShippingInfo().get().getShippingMethod()).contains(shippingMethod.toReference());
+        assertThat(updatedCart.getShippingInfo().getShippingMethod()).isEqualTo(shippingMethod.toReference());
         return updatedCart;
     });
 });

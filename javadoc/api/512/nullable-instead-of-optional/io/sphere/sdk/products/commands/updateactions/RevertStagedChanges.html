@@ -124,17 +124,17 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-revertStagedChanges--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
     //changing only staged and not current
-    final Optional&lt;LocalizedStrings&gt; oldDescriptionOption = product.getMasterData().getStaged().getDescription();
+    final LocalizedStrings oldDescriptionOption = product.getMasterData().getStaged().getDescription();
     final LocalizedStrings newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
     final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription, ONLY_STAGED)));
     final Product updatedProduct = execute(cmd);
     assertThat(oldDescriptionOption).isNotEqualTo(Optional.of(newDescription));
-    assertThat(updatedProduct.getMasterData().getStaged().getDescription()).contains(newDescription);
-    assertThat(updatedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
+    assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
+    assertThat(updatedProduct.getMasterData().getCurrent().getDescription()).isEqualTo(oldDescriptionOption);
 
     final Product revertedProduct = execute(ProductUpdateCommand.of(updatedProduct, RevertStagedChanges.of()));
     assertThat(revertedProduct.getMasterData().getStaged().getDescription()).isEqualTo(oldDescriptionOption);
-    assertThat(revertedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
+    assertThat(revertedProduct.getMasterData().getCurrent().getDescription()).isEqualTo(oldDescriptionOption);
 
     return revertedProduct;
 });

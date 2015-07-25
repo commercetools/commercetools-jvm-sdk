@@ -141,9 +141,9 @@
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCustomerGroup--%s" class=code-example><pre><code class='java'>withB2cCustomerGroup(client(), customerGroup -&gt; {
     withCustomer(client(), customer -&gt; {
-        assertThat(customer.getCustomerGroup()).isEmpty();
+        assertThat(customer.getCustomerGroup()).isNull();
         final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
-        assertThat(updateCustomer.getCustomerGroup()).contains(customerGroup.toReference());
+        assertThat(updateCustomer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
     });
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

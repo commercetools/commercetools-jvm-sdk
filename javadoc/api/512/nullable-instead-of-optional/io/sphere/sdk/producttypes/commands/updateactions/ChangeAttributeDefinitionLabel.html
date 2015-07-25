@@ -122,12 +122,12 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeLabel--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
     final String attributeName = "color";
-    assertThat(productType.getAttribute(attributeName)).isPresent();
+    assertThat(productType.findAttribute(attributeName)).isPresent();
     final LocalizedStrings label = LocalizedStrings.of(ENGLISH, "the color label");
 
     final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeDefinitionLabel.of(attributeName, label)));
 
-    assertThat(updatedProductType.getAttribute(attributeName).get().getLabel()).isEqualTo(label);
+    assertThat(updatedProductType.getAttribute(attributeName).getLabel()).isEqualTo(label);
 
     return updatedProductType;
 });

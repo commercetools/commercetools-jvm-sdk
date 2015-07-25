@@ -138,11 +138,11 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderFromCartDraft.html#getId--">getId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderFromCartDraft.html#getOrderNumber--">getOrderNumber</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderFromCartDraft.html#getPaymentState--">getPaymentState</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
@@ -155,9 +155,9 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/orders/OrderFromCartDraft.html" title="class in io.sphere.sdk.orders">OrderFromCartDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderFromCartDraft.html#of-io.sphere.sdk.models.Versioned-java.util.Optional-java.util.Optional-">of</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;cart,
-  java.util.Optional&lt;java.lang.String&gt;&nbsp;orderNumber,
-  java.util.Optional&lt;<a href="../../../../io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a>&gt;&nbsp;paymentState)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/OrderFromCartDraft.html#of-io.sphere.sdk.models.Versioned-java.lang.String-io.sphere.sdk.orders.PaymentState-">of</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;cart,
+  java.lang.String&nbsp;orderNumber,
+  <a href="../../../../io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a>&nbsp;paymentState)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -188,15 +188,17 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-io.sphere.sdk.models.Versioned-java.util.Optional-java.util.Optional-">
+<a name="of-io.sphere.sdk.models.Versioned-java.lang.String-io.sphere.sdk.orders.PaymentState-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/orders/OrderFromCartDraft.html" title="class in io.sphere.sdk.orders">OrderFromCartDraft</a>&nbsp;of(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&nbsp;cart,
-                                    java.util.Optional&lt;java.lang.String&gt;&nbsp;orderNumber,
-                                    java.util.Optional&lt;<a href="../../../../io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a>&gt;&nbsp;paymentState)</pre>
+                                    @Nullable
+                                    java.lang.String&nbsp;orderNumber,
+                                    @Nullable
+                                    <a href="../../../../io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a>&nbsp;paymentState)</pre>
 </li>
 </ul>
 <a name="of-io.sphere.sdk.models.Versioned-">
@@ -232,7 +234,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>getOrderNumber</h4>
-<pre>public&nbsp;java.util.Optional&lt;java.lang.String&gt;&nbsp;getOrderNumber()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getOrderNumber()</pre>
 </li>
 </ul>
 <a name="getPaymentState--">
@@ -241,7 +244,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getPaymentState</h4>
-<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a>&gt;&nbsp;getPaymentState()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a>&nbsp;getPaymentState()</pre>
 </li>
 </ul>
 </li>

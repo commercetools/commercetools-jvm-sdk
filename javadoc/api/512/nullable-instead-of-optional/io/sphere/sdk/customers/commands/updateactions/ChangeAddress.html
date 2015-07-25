@@ -125,7 +125,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-changeAddress--%s" class=code-example><pre><code class='java'>withCustomerWithOneAddress(client(), customer -&gt; {
     final String city = "new city";
     assertThat(customer.getAddresses()).hasSize(1);
-    assertThat(customer.getAddresses().get(0).getCity()).isNotEqualTo(Optional.of(city));
+    assertThat(customer.getAddresses().get(0).getCity()).isNotEqualTo(city);
 
     final Address oldAddress = customer.getAddresses().get(0);
     assertThat(oldAddress.getId())

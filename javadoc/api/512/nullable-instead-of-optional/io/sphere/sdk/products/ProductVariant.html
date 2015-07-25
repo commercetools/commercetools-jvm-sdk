@@ -125,7 +125,7 @@ extends <a href="../../../../io/sphere/sdk/products/AttributeContainer.html" tit
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariantAvailability.html" title="interface in io.sphere.sdk.products">ProductVariantAvailability</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/ProductVariantAvailability.html" title="interface in io.sphere.sdk.products">ProductVariantAvailability</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getAvailability--">getAvailability</a></span>()</code>
 <div class="block">The availability is set if the variant is tracked by the inventory.</div>
 </td>
@@ -149,7 +149,7 @@ extends <a href="../../../../io/sphere/sdk/products/AttributeContainer.html" tit
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getPrices--">getPrices</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductVariant.html#getSku--">getSku</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -158,7 +158,7 @@ extends <a href="../../../../io/sphere/sdk/products/AttributeContainer.html" tit
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.products.<a href="../../../../io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a></h3>
-<code><a href="../../../../io/sphere/sdk/products/AttributeContainer.html#getAttribute-io.sphere.sdk.attributes.NamedAttributeAccess-">getAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#getAttribute-java.lang.String-">getAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#getAttribute-java.lang.String-io.sphere.sdk.attributes.AttributeAccess-">getAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#getAttributes--">getAttributes</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#hasAttribute-io.sphere.sdk.attributes.NamedAttributeAccess-">hasAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#hasAttribute-java.lang.String-">hasAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#of-java.util.List-">of</a></code></li>
+<code><a href="../../../../io/sphere/sdk/products/AttributeContainer.html#findAttribute-io.sphere.sdk.attributes.NamedAttributeAccess-">findAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#findAttribute-java.lang.String-io.sphere.sdk.attributes.AttributeAccess-">findAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#getAttribute-java.lang.String-">getAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#getAttributes--">getAttributes</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#hasAttribute-io.sphere.sdk.attributes.NamedAttributeAccess-">hasAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#hasAttribute-java.lang.String-">hasAttribute</a>, <a href="../../../../io/sphere/sdk/products/AttributeContainer.html#of-java.util.List-">of</a></code></li>
 </ul>
 </li>
 </ul>
@@ -189,7 +189,8 @@ extends <a href="../../../../io/sphere/sdk/products/AttributeContainer.html" tit
 <ul class="blockList">
 <li class="blockList">
 <h4>getSku</h4>
-<pre>java.util.Optional&lt;java.lang.String&gt;&nbsp;getSku()</pre>
+<pre>@Nullable
+java.lang.String&nbsp;getSku()</pre>
 </li>
 </ul>
 <a name="getPrices--">
@@ -216,7 +217,8 @@ extends <a href="../../../../io/sphere/sdk/products/AttributeContainer.html" tit
 <ul class="blockList">
 <li class="blockList">
 <h4>getAvailability</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariantAvailability.html" title="interface in io.sphere.sdk.products">ProductVariantAvailability</a>&gt;&nbsp;getAvailability()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/products/ProductVariantAvailability.html" title="interface in io.sphere.sdk.products">ProductVariantAvailability</a>&nbsp;getAvailability()</pre>
 <div class="block">The availability is set if the variant is tracked by the inventory. The field might not contain the latest
  inventory state (it is eventually consistent) and can be used as an optimization to reduce calls to the inventory service.</div>
 <dl>

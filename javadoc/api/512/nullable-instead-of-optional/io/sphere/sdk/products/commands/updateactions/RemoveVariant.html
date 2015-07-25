@@ -140,16 +140,15 @@ withUpdateableProduct(client(), product -&gt; {
     final Price price = PRICE;
     final List&lt;Price&gt; prices = asList(price);
     final List&lt;AttributeDraft&gt; attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
-    final Optional&lt;String&gt; sku = Optional.of(randomKey());
     final ProductUpdateCommand addVariantCommand =
-            ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, sku, STAGED_AND_CURRENT));
+            ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey(), STAGED_AND_CURRENT));
 
     final Product productWithVariant = client().execute(addVariantCommand);
     final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
     assertThat(variant.getId()).isEqualTo(2);
-    assertThat(variant.getAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
-    assertThat(variant.getAttribute(colorAttribute).get()).isEqualTo(color);
-    assertThat(variant.getAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
+    assertThat(variant.findAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
+    assertThat(variant.findAttribute(colorAttribute).get()).isEqualTo(color);
+    assertThat(variant.findAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
 
     final Product productWithoutVariant = client().execute(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant, STAGED_AND_CURRENT)));
     assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();

@@ -103,7 +103,7 @@
 <div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
     final LocalizedStrings newDescription = randomSlug();
     final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
-    assertThat(updatedChannel.getDescription()).contains(newDescription);
+    assertThat(updatedChannel.getDescription()).isEqualTo(newDescription);
     return updatedChannel;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -127,7 +127,7 @@
 <div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
     final LocalizedStrings newName = randomSlug();
     final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeName.of(newName)));
-    assertThat(updatedChannel.getName()).contains(newName);
+    assertThat(updatedChannel.getName()).isEqualTo(newName);
     return updatedChannel;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

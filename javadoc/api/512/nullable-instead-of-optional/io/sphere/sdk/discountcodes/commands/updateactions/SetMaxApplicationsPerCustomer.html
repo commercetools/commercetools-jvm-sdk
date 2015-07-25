@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9,"i2":9};
+var methods = {"i0":10,"i1":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -124,7 +124,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final long maxApplications = randomLong();
     final DiscountCode updatedDiscountCode =
             execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplicationsPerCustomer.of(maxApplications)));
-    assertThat(updatedDiscountCode.getMaxApplicationsPerCustomer()).contains(maxApplications);
+    assertThat(updatedDiscountCode.getMaxApplicationsPerCustomer()).isEqualTo(maxApplications);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
@@ -146,16 +146,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.Long&gt;</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html#getMaxApplicationsPerCustomer--">getMaxApplicationsPerCustomer</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetMaxApplicationsPerCustomer</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html#of-long-">of</a></span>(long&nbsp;maxApplicationsPerCustomer)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetMaxApplicationsPerCustomer</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html#of-java.util.Optional-">of</a></span>(java.util.Optional&lt;java.lang.Long&gt;&nbsp;maxApplications)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html#of-java.lang.Long-">of</a></span>(java.lang.Long&nbsp;maxApplications)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -193,22 +189,14 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-long-">
+<a name="of-java.lang.Long-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetMaxApplicationsPerCustomer</a>&nbsp;of(long&nbsp;maxApplicationsPerCustomer)</pre>
-</li>
-</ul>
-<a name="of-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetMaxApplicationsPerCustomer</a>&nbsp;of(java.util.Optional&lt;java.lang.Long&gt;&nbsp;maxApplications)</pre>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetMaxApplicationsPerCustomer</a>&nbsp;of(@Nullable
+                                               java.lang.Long&nbsp;maxApplications)</pre>
 </li>
 </ul>
 <a name="getMaxApplicationsPerCustomer--">
@@ -217,7 +205,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getMaxApplicationsPerCustomer</h4>
-<pre>public&nbsp;java.util.Optional&lt;java.lang.Long&gt;&nbsp;getMaxApplicationsPerCustomer()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.Long&nbsp;getMaxApplicationsPerCustomer()</pre>
 </li>
 </ul>
 </li>

@@ -208,7 +208,7 @@
     final CartDiscount updatedDiscount =
             execute(CartDiscountUpdateCommand.of(cartDiscount, SetDescription.of(newDescription)));
 
-    assertThat(updatedDiscount.getDescription()).contains(newDescription);
+    assertThat(updatedDiscount.getDescription()).isEqualTo(newDescription);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -225,7 +225,7 @@
             asList(SetValidFrom.of(dateTime), SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)));
     final CartDiscount updatedDiscount = execute(CartDiscountUpdateCommand.of(cartDiscount, updateActions));
 
-    assertThat(updatedDiscount.getValidFrom()).contains(dateTime);
+    assertThat(updatedDiscount.getValidFrom()).isEqualTo(dateTime);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -242,7 +242,7 @@
     final CartDiscount updatedDiscount =
             execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));
 
-    assertThat(updatedDiscount.getValidUntil()).contains(dateTime);
+    assertThat(updatedDiscount.getValidUntil()).isEqualTo(dateTime);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>

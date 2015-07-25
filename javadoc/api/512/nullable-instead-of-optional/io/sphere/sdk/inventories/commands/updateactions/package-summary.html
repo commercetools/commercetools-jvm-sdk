@@ -131,7 +131,7 @@
     final UpdateAction&lt;InventoryEntry&gt; action = SetExpectedDelivery.of(expectedDelivery);
     final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
     assertThat(updatedEntry.getExpectedDelivery())
-            .contains(expectedDelivery)
+            .isEqualTo(expectedDelivery)
             .isNotEqualTo(entry.getExpectedDelivery());
     return updatedEntry;
 });
@@ -142,10 +142,10 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/inventories/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventories.commands.updateactions">SetRestockableInDays</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-inventories-commands-InventoryEntryUpdateCommandTest-setRestockableInDays--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final int restockableInDays = entry.getRestockableInDays().map(i -&gt; i + 4).orElse(4);
+    final int restockableInDays = Optional.ofNullable(entry.getRestockableInDays()).map(i -&gt; i + 4).orElse(4);
     final UpdateAction&lt;InventoryEntry&gt; action = SetRestockableInDays.of(restockableInDays);
     final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getRestockableInDays()).contains(restockableInDays);
+    assertThat(updatedEntry.getRestockableInDays()).isEqualTo(restockableInDays);
     return updatedEntry;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

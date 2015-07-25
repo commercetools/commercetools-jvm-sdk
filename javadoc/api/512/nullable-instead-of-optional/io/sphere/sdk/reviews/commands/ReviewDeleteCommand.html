@@ -143,7 +143,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/ByIdDeleteCommandImpl.htm
 
             execute(ReviewDeleteCommand.of(review));
 
-            PagedQueryResult&lt;Review&gt; result = execute(ReviewQuery.of().withPredicate(m -&gt; m.id().is(review.getId())));
+            PagedQueryResult&lt;Review&gt; result = execute(ReviewQuery.of().withPredicates(m -&gt; m.id().is(review.getId())));
             assertThat(result.getTotal()).isEqualTo(0);
         })
 );

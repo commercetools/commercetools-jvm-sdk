@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9,"i2":9,"i3":9,"i4":9};
+var methods = {"i0":10,"i1":9,"i2":9,"i3":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -127,7 +127,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
         assertThat(product.getTaxCategory()).isNotEqualTo(Optional.of(taxCategory));
         final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory));
         final Product updatedProduct = execute(command);
-        assertThat(updatedProduct.getTaxCategory()).contains(taxCategory.toReference());
+        assertThat(updatedProduct.getTaxCategory()).isEqualTo(taxCategory.toReference());
         return updatedProduct;
     })
 );
@@ -151,22 +151,18 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html#getTaxCategory--">getTaxCategory</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html#of-java.util.Optional-">of</a></span>(java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&gt;&nbsp;taxCategory)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html#of-io.sphere.sdk.models.Referenceable-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html#of-io.sphere.sdk.models.Referenceable-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory)</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html#to-io.sphere.sdk.models.Referenceable-">to</a></span>(<a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory)</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html#unset--">unset</a></span>()</code>&nbsp;</td>
 </tr>
@@ -206,22 +202,14 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a>&nbsp;of(java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&gt;&nbsp;taxCategory)</pre>
-</li>
-</ul>
 <a name="of-io.sphere.sdk.models.Referenceable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory)</pre>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a>&nbsp;of(@Nullable
+                                <a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;taxCategory)</pre>
 </li>
 </ul>
 <a name="unset--">
@@ -239,7 +227,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <ul class="blockList">
 <li class="blockList">
 <h4>getTaxCategory</h4>
-<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&gt;&nbsp;getTaxCategory()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;getTaxCategory()</pre>
 </li>
 </ul>
 <a name="to-io.sphere.sdk.models.Referenceable-">

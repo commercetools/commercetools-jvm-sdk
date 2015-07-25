@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":9,"i3":10,"i4":10,"i5":10,"i6":10};
+var methods = {"i0":10,"i1":10,"i2":9,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -165,10 +165,6 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html#taxRate-java.util.Optional-">taxRate</a></span>(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&gt;&nbsp;taxRate)</code>&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html#taxRate-io.sphere.sdk.taxcategories.TaxRate-">taxRate</a></span>(<a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&nbsp;taxRate)</code>&nbsp;</td>
 </tr>
 </table>
@@ -243,7 +239,8 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <ul class="blockList">
 <li class="blockList">
 <h4>state</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a>&nbsp;state(java.util.Set&lt;<a href="../../../../io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a>&gt;&nbsp;state)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a>&nbsp;state(@Nullable
+                                              java.util.Set&lt;<a href="../../../../io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a>&gt;&nbsp;state)</pre>
 </li>
 </ul>
 <a name="taxRate-io.sphere.sdk.taxcategories.TaxRate-">
@@ -252,16 +249,8 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <ul class="blockList">
 <li class="blockList">
 <h4>taxRate</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a>&nbsp;taxRate(<a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&nbsp;taxRate)</pre>
-</li>
-</ul>
-<a name="taxRate-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>taxRate</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a>&nbsp;taxRate(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&gt;&nbsp;taxRate)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/orders/CustomLineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">CustomLineItemImportDraftBuilder</a>&nbsp;taxRate(@Nullable
+                                                <a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a>&nbsp;taxRate)</pre>
 </li>
 </ul>
 <a name="build--">

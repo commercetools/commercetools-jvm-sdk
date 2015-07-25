@@ -160,7 +160,7 @@ Query&lt;Category&gt; queryByName = CategoryQuery.of().byName(Locale.ENGLISH, "d
  </p>
 
  <div id="io-sphere-sdk-queries-QueryDemo-categoryQueryModel--%s" class=code-example><pre><code class='java'>QueryPredicate&lt;Category&gt; predicate = CategoryQueryModel.of().name().lang(locale).is("demo cat");
-Query&lt;Category&gt; query = CategoryQuery.of().withPredicate(predicate);
+Query&lt;Category&gt; query = CategoryQuery.of().withPredicates(predicate);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/queries/QueryDemo.java" target="_blank">test code</a>.</pre></div>
 
  <p>The generic code looks verbose, but in the future it will enable powerful type-safe queries with IDE discovery even on deep
@@ -178,7 +178,7 @@ List&lt;QuerySort&lt;Category&gt;&gt; sort = Arrays.asList(sortByName, sortById)
 int offset = 1;//skip first page
 int limit = 200;//collect at most 200 entities per request
 Query&lt;Category&gt; query = CategoryQuery.of().
-  withPredicate(predicate).
+        withPredicates(predicate).
   withSort(sort).
   withOffset(offset).
   withLimit(limit);
@@ -254,7 +254,7 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryByNames--%s" class=code-example><pre><code class='java'>final QueryPredicate&lt;Product&gt; predicate = ProductQueryModel.of().masterData().current().name()
         .lang(ENGLISH).isIn("blue t-shirt", "blue jeans");
-final ProductQuery query = ProductQuery.of().withPredicate(predicate);
+final ProductQuery query = ProductQuery.of().withPredicates(predicate);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>The Predicate API looks verbose, but it prevents you from making typos and it makes the queryable attributes discoverable in your IDE.</p>
@@ -280,7 +280,7 @@ assertThat(unsafePredicate).isEqualTo(safePredicate);
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateOrExample--%s" class=code-example><pre><code class='java'>final QueryPredicate&lt;Product&gt; nameIsFoo = ProductQueryModel.of().masterData().current().name()
         .lang(ENGLISH).is("foo");
 final QueryPredicate&lt;Product&gt; idIsBar = ProductQueryModel.of().id().is("bar");
-final ProductQuery query = ProductQuery.of().withPredicate(nameIsFoo.or(idIsBar));
+final ProductQuery query = ProductQuery.of().withPredicates(nameIsFoo.or(idIsBar));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>To query for two conditions use the <strong><code>and</code></strong> operator. The following example queries for the name "foo" and the membership in a category with id "cat1".</p>
@@ -290,7 +290,7 @@ final ProductQuery query = ProductQuery.of().withPredicate(nameIsFoo.or(idIsBar)
 final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
 final QueryPredicate&lt;Product&gt; isInCat1 = ProductQueryModel.of().masterData().current()
         .categories().isIn(cat1);
-final ProductQuery query = ProductQuery.of().withPredicate(nameIsFoo.and(isInCat1));
+final ProductQuery query = ProductQuery.of().withPredicates(nameIsFoo.and(isInCat1));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <p>Since the previous queries have a common path you can combine the two queries in a <strong><code>where</code></strong> clause, like below. This is not supported for every entity, though.</p>
@@ -298,7 +298,7 @@ final ProductQuery query = ProductQuery.of().withPredicate(nameIsFoo.and(isInCat
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateAndWithWhereExample--%s" class=code-example><pre><code class='java'>final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
 final QueryPredicate&lt;Product&gt; nameIsFooAndIsInCat1 = ProductQueryModel.of().masterData().current()
         .where(cur -&gt; cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(cat1)));
-final ProductQuery query = ProductQuery.of().withPredicate(nameIsFooAndIsInCat1);
+final ProductQuery query = ProductQuery.of().withPredicates(nameIsFooAndIsInCat1);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -314,8 +314,8 @@ assertThat(nameIsNotFoo).isEqualTo(QueryPredicate.of("not(masterData(current(nam
 
  For resources there is also the <code>m.not()</code> method which puts the negation at the beginning of the predicate:
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-notSyntax--%s" class=code-example><pre><code class='java'>final ProductQuery query = ProductQuery.of()
-        .withPredicate(m -&gt; m.not(m.masterData().current().name().lang(ENGLISH).is("foo")));
-assertThat(query.predicate().get()).isEqualTo(QueryPredicate.of("not(masterData(current(name(en=\"foo\"))))"));
+        .withPredicates(m -&gt; m.not(m.masterData().current().name().lang(ENGLISH).is("foo")));
+assertThat(query.predicates()).isEqualTo(asList(QueryPredicate.of("not(masterData(current(name(en=\"foo\"))))")));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id=sorting>Sorting</h3>
@@ -426,7 +426,7 @@ import static org.assertj.core.api.Assertions.assertThat;
         final ProductQuery seedQuery = ProductQuery.of()
                 //the original predicate, which queries products for a certain product type
                 //the idea works also for no predicate to get all products
-                .withPredicate(m -&gt; m.productType().is(productType))
+                .withPredicates(m -&gt; m.productType().is(productType))
                 //important, we sort by id, otherwise id &gt; $lastId would not make sense
                 .withSort(m -&gt; m.id().sort().asc())
                 .withLimit(PAGE_SIZE)
@@ -450,7 +450,7 @@ import static org.assertj.core.api.Assertions.assertThat;
             } else {
                 final String lastId = getIdForNextQuery(page);
                 return findNext(seedQuery, seedQuery
-                        .withPredicate(m -&gt; seedQuery.predicate().get().and(m.id().isGreaterThan(lastId))), products);
+                        .plusPredicates(m -&gt; m.id().isGreaterThan(lastId)), products);
             }
         });
     }

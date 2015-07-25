@@ -126,12 +126,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final AttributeDefinition foostring =
             AttributeDefinitionBuilder.of(attributeName, LocalizedStrings.of(ENGLISH, "foo string"), TextType.of()).build();
     final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
-    final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName).get();
+    final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
     assertThat(loadedDefinition.getAttributeType()).isEqualTo(TextType.of());
 
     //remove
     final ProductType withoutFoostring = execute(ProductTypeUpdateCommand.of(withFoostring, RemoveAttributeDefinition.of(attributeName)));
-    assertThat(withoutFoostring.getAttribute(attributeName)).isEmpty();
+    assertThat(withoutFoostring.findAttribute(attributeName)).isEmpty();
     return withoutFoostring;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

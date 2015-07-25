@@ -189,11 +189,11 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#withPredicate-java.util.function.Function-">withPredicate</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a>,<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#withPredicates-java.util.function.Function-">withPredicates</a></span>(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a>,<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#withPredicate-io.sphere.sdk.queries.QueryPredicate-">withPredicate</a></span>(<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;predicate)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates</a></span>(<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;queryPredicates)</code>
 <div class="block">Returns an EntityQuery with the new predicate as predicate.</div>
 </td>
 </tr>
@@ -217,6 +217,13 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </tr>
 </table>
 <ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.MetaModelQueryDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-java.util.function.Function-">plusPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-">plusPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-java.util.List-">withPredicates</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryDsl">
 <!--   -->
 </a>
@@ -228,7 +235,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#endpoint--">endpoint</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#expansionPaths--">expansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#fetchTotal--">fetchTotal</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#limit--">limit</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#offset--">offset</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#predicate--">predicate</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#sort--">sort</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#endpoint--">endpoint</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#expansionPaths--">expansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#fetchTotal--">fetchTotal</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#limit--">limit</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#offset--">offset</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#predicates--">predicates</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#sort--">sort</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.Query">
@@ -435,35 +442,35 @@ assertThat(fetch2).isNotSameAs(fetch);
 </dl>
 </li>
 </ul>
-<a name="withPredicate-java.util.function.Function-">
+<a name="withPredicates-java.util.function.Function-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>withPredicate</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>&nbsp;withPredicate(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a>,<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
+<h4>withPredicates</h4>
+<pre><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>&nbsp;withPredicates(java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a>,<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;&nbsp;m)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicate-java.util.function.Function-">withPredicate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>,<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-java.util.function.Function-">withPredicates</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>,<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
 </dl>
 </li>
 </ul>
-<a name="withPredicate-io.sphere.sdk.queries.QueryPredicate-">
+<a name="withPredicates-io.sphere.sdk.queries.QueryPredicate-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>withPredicate</h4>
-<pre><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>&nbsp;withPredicate(<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;predicate)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicate-io.sphere.sdk.queries.QueryPredicate-">QueryDsl</a></code></span></div>
+<h4>withPredicates</h4>
+<pre><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>&nbsp;withPredicates(<a href="../../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&nbsp;queryPredicates)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">QueryDsl</a></code></span></div>
 <div class="block">Returns an EntityQuery with the new predicate as predicate.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicate-io.sphere.sdk.queries.QueryPredicate-">withPredicate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>,<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>,<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a>,<a href="../../../../../io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicate-io.sphere.sdk.queries.QueryPredicate-">withPredicate</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>predicate</code> - the new predicate</dd>
+<dd><code>queryPredicates</code> - the new predicate</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>an EntityQuery with predicate</dd>
 </dl>

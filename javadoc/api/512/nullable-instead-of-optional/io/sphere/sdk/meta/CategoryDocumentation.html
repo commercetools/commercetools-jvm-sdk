@@ -197,13 +197,13 @@ assertThat(categories)
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
  <h4>Fetch all with predicate</h4>
  Sometimes you want to fetch just the root categories to delete them all:
- <div id="io-sphere-sdk-meta-CategoryDocumentationTest-fetchRoots--%s" class=code-example><pre><code class='java'>final CategoryQuery seedQuery = CategoryQuery.of().withPredicate(m -&gt; m.parent().isNotPresent());
+ <div id="io-sphere-sdk-meta-CategoryDocumentationTest-fetchRoots--%s" class=code-example><pre><code class='java'>final CategoryQuery seedQuery = CategoryQuery.of().withPredicates(m -&gt; m.parent().isNotPresent());
 final Publisher&lt;Category&gt; categoryPublisher =
         ExperimentalReactiveStreamUtils.publisherOf(seedQuery, sphereClient());
 final CompletionStage&lt;List&lt;Category&gt;&gt; categoriesStage =
         ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
 final List&lt;Category&gt; rootCategories = categoriesStage.toCompletableFuture().join();
-assertThat(rootCategories.stream().allMatch(cat -&gt; !cat.getParent().isPresent()))
+assertThat(rootCategories.stream().allMatch(cat -&gt; cat.getParent() == null))
         .overridingErrorMessage("fetched only root categories")
         .isTrue();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-convenience/src/it/java/io/sphere/sdk/meta/CategoryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
@@ -236,7 +236,7 @@ assertThat(jeansWomenOptional).isPresent();
 assertThat(categoryTree.findBySlug(ENGLISH, "not-existing-slug")).isEmpty();
 
 //find by ID
-final Reference&lt;Category&gt; clothingWomenReference = jeansWomenOptional.get().getParent().get();
+final Reference&lt;Category&gt; clothingWomenReference = jeansWomenOptional.get().getParent();
 final Optional&lt;Category&gt; clothingWomenOptional = categoryTree.findById(clothingWomenReference.getId());
 assertThat(clothingWomenOptional).isPresent();
 assertThat(clothingWomenOptional.get().getSlug().get(ENGLISH)).contains("womens-clothing");
@@ -260,7 +260,7 @@ import java.util.List;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
 </code></pre><pre><code class='java'>public final class CategoryTreeTextRepresentation {
-    private static final Comparator&lt;Category&gt; EXTERNALID_COMPARATOR = Comparator.comparing(c -&gt; Integer.parseInt(c.getExternalId().get()));
+    private static final Comparator&lt;Category&gt; EXTERNALID_COMPARATOR = Comparator.comparing(c -&gt; Integer.parseInt(c.getExternalId()));
 
     private CategoryTreeTextRepresentation() {
     }
@@ -295,7 +295,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
     private static void appendToBuilder(final Category category, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level) {
         final String name = category.getName().get(ENGLISH);
-        final String externalId = category.getExternalId().get();
+        final String externalId = category.getExternalId();
         final String offset = StringUtils.repeat(' ', level * 4);
         stringBuilder.append(offset).append(externalId).append(" ").append(name).append("\n");
         final List&lt;Category&gt; children = categoryTree.findChildren(category);
@@ -314,7 +314,7 @@ final List&lt;Reference&lt;Category&gt;&gt; ancestorReferences = currentCategory
         .skip(1)//remove top level category
         .collect(toList());
 
-final Function&lt;Category, String&gt; formatCategory = cat -&gt; cat.getExternalId().orElse("")
+final Function&lt;Category, String&gt; formatCategory = cat -&gt; defaultString(cat.getExternalId())
         + " " + cat.getName().find(ENGLISH).orElse("");
 final String ancestorCategoriesString = ancestorReferences.stream()
         .map(ref -&gt; categoryTree.findById(ref.getId()).get())
@@ -337,7 +337,7 @@ import static java.util.Locale.ENGLISH;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 </code></pre><pre><code class='java'>public final class RenderAPartialTree {
-    private static final Comparator&lt;Category&gt; EXTERNALID_COMPARATOR = Comparator.comparing(c -&gt; Integer.parseInt(c.getExternalId().get()));
+    private static final Comparator&lt;Category&gt; EXTERNALID_COMPARATOR = Comparator.comparing(c -&gt; Integer.parseInt(c.getExternalId()));
 
     private RenderAPartialTree() {
     }
@@ -362,7 +362,7 @@ import static org.assertj.core.api.Assertions.assertThat;
     private static void appendToBuilder(final Identifiable&lt;Category&gt; categoryReference, final StringBuilder stringBuilder, final CategoryTree categoryTree, final int level, final Category selectedCategory) {
         final Category category = categoryTree.findById(categoryReference.getId()).get();
         final String name = category.getName().get(ENGLISH);
-        final String externalId = category.getExternalId().get();
+        final String externalId = category.getExternalId();
         final String offset = StringUtils.repeat(' ', level * 4);
 
         stringBuilder.append(offset);
@@ -510,7 +510,7 @@ withProductInCategory(client(), jeansCategory, jeansProduct -&gt; {
     withProductInCategory(client(), tshirtCategory, tshirtProduct -&gt; {
         final PagedQueryResult&lt;ProductProjection&gt; resultForParentCategory =
                 //query for the parent category
-                execute(ProductProjectionQuery.ofStaged().withPredicate(m -&gt; m.categories().isIn(mensClothingCategory)));
+                execute(ProductProjectionQuery.ofStaged().withPredicates(m -&gt; m.categories().isIn(mensClothingCategory)));
         assertThat(resultForParentCategory.getResults())
                 .overridingErrorMessage(
                         "if a product is in a category," +
@@ -518,9 +518,9 @@ withProductInCategory(client(), jeansCategory, jeansProduct -&gt; {
                                 "the query will not find the product")
                 .isEmpty();
 
-        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicate(m -&gt; m.categories().isIn(tshirtCategory, jeansCategory));
-        assertThat(query.predicate())
-                .contains(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
+        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicates(m -&gt; m.categories().isIn(tshirtCategory, jeansCategory));
+        assertThat(query.predicates().get(0))
+                .isEqualTo(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
         final PagedQueryResult&lt;ProductProjection&gt; resultForDirectCategories =
                 execute(query);
         assertThat(resultForDirectCategories.getResults())
