@@ -9,16 +9,15 @@ import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.lang.String.format;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartDiscountUpdateCommandTest extends IntegrationTest {
     @Test
@@ -142,10 +141,10 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
         withPersistentCartDiscount(client(), cartDiscount -> {
             final ZonedDateTime dateTime = SphereTestUtils.now();
 
-            assertThat(cartDiscount.getValidFrom()).isNotEqualTo(Optional.of(dateTime));
+            assertThat(cartDiscount.getValidFrom()).isNotEqualTo(dateTime);
 
             final List<UpdateAction<CartDiscount>> updateActions =
-                    asList(SetValidFrom.of(dateTime), SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)));
+                    asList(SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)), SetValidFrom.of(dateTime));
             final CartDiscount updatedDiscount = execute(CartDiscountUpdateCommand.of(cartDiscount, updateActions));
 
             assertThat(updatedDiscount.getValidFrom()).isEqualTo(dateTime);
