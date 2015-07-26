@@ -35,7 +35,7 @@ class CategoryTreeImpl extends Base implements CategoryTree {
 
     @Override
     public Optional<Category> findById(final String id) {
-        return getOptional(categoriesById, id);
+        return Optional.ofNullable(categoriesById.get(id));
     }
 
     @Override
@@ -47,7 +47,7 @@ class CategoryTreeImpl extends Base implements CategoryTree {
 
     @Override
     public Optional<Category> findBySlug(final Locale locale, final String slug) {
-        return getOptional(categoriesByLocaleAndSlug, LocalizedStringsEntry.of(locale, slug));
+        return Optional.ofNullable(categoriesByLocaleAndSlug.get(LocalizedStringsEntry.of(locale, slug)));
     }
 
     @Override

@@ -6,7 +6,6 @@ import io.sphere.sdk.search.PagedSearchResult;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,12 +14,12 @@ public class ProductProjectionTest {
     public void transformProductIntoProductProjection() throws Exception {
         final Product product = getProduct();
 
-        final Optional<ProductProjection> staged = product.toProjection(ProductProjectionType.STAGED);
-        assertThat(staged).overridingErrorMessage("staged is always present").isPresent();
-        assertThat(staged.get().getName()).isEqualTo(product.getMasterData().getStaged().getName());
+        final ProductProjection staged = product.toProjection(ProductProjectionType.STAGED);
+        assertThat(staged).overridingErrorMessage("staged is always present").isNotNull();
+        assertThat(staged.getName()).isEqualTo(product.getMasterData().getStaged().getName());
 
-        final Optional<ProductProjection> current = product.toProjection(ProductProjectionType.CURRENT);
-        assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
+        final ProductProjection current = product.toProjection(ProductProjectionType.CURRENT);
+        assertThat(current).overridingErrorMessage("current can be empty").isNull();
     }
 
     private Product getProduct() throws IOException {

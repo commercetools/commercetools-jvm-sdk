@@ -28,7 +28,7 @@ public class OptionalInspection {
             }
         })
         .filter(i -> {
-            final Predicate<MethodInfo> containsIllegalOptional = m -> !m.getMethod().getName().startsWith("find") && !isPrivate(m.getMethod()) && (m.containsOptionalParameter() || m.containsOptionalReturnType());
+            final Predicate<MethodInfo> containsIllegalOptional = m -> !m.getMethod().getName().startsWith("find") && !m.getMethod().getName().equals("head") && !isPrivate(m.getMethod()) && (m.containsOptionalParameter() || m.containsOptionalReturnType());
             return i.getMethods().stream().anyMatch(containsIllegalOptional) || i.containsOptionalField();
         })
         .collect(toList());

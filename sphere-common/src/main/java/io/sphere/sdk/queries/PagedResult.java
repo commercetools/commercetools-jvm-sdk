@@ -58,7 +58,7 @@ public abstract class PagedResult<T> extends Base {
       * @return the first value or absent
       */
      public Optional<T> head() {
-         return ListUtils.headOption(getResults());
+         return results.isEmpty() ? Optional.<T>empty() : Optional.of(results.get(0));
      }
 
     /**

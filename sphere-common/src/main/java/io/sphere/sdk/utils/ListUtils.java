@@ -35,10 +35,6 @@ public final class ListUtils {
         return Pair.of(matchingPredicate, notMatchingPredicate);
     }
 
-    public static <T> Optional<T> headOption(final List<T> list) {
-        return IterableUtils.headOption(list);
-    }
-
     public static <T> String join(final List<T> list) {
         return list.stream().map(i -> i.toString()).collect(joining(", "));
     }
