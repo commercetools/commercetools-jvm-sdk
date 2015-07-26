@@ -154,7 +154,7 @@ public class Price extends Base {
         if (o == null || getClass() != o.getClass()) return false;
 
         Price price = (Price) o;
-        return EqualsBuilder.reflectionEquals(this, o, "value") && value.isEqualTo(price.value);
+        return EqualsBuilder.reflectionEquals(this, o, "value", "id") && value.isEqualTo(price.value);
     }
 
     @JsonIgnore
