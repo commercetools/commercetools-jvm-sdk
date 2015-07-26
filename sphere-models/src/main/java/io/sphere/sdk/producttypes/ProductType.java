@@ -2,7 +2,6 @@ package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import java.util.Optional;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
@@ -28,23 +27,19 @@ public interface ProductType extends DefaultModel<ProductType>, AttributeDefinit
         return reference(this);
     }
 
-    public static String typeId(){
+    static String typeId(){
         return "product-type";
     }
 
-    public static Reference<ProductType> reference(final ProductType productType) {
+    static Reference<ProductType> reference(final ProductType productType) {
         return Reference.of(typeId(), productType.getId(), productType);
     }
 
-    public static Optional<Reference<ProductType>> reference(final Optional<ProductType> category) {
-        return category.map(ProductType::reference);
-    }
-
-    public static Reference<ProductType> reference(final String id) {
+    static Reference<ProductType> reference(final String id) {
         return Reference.of(typeId(), id);
     }
 
-    public static TypeReference<ProductType> typeReference() {
+    static TypeReference<ProductType> typeReference() {
         return new TypeReference<ProductType>(){
             @Override
             public String toString() {
