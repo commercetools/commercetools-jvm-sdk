@@ -123,12 +123,12 @@ extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="int
 
  <div id="io-sphere-sdk-products-ProductProjectionTest-transformProductIntoProductProjection--%s" class=code-example><pre><code class='java'>final Product product = getProduct();
 
-final Optional&lt;ProductProjection&gt; staged = product.toProjection(ProductProjectionType.STAGED);
-assertThat(staged).overridingErrorMessage("staged is always present").isPresent();
-assertThat(staged.get().getName()).isEqualTo(product.getMasterData().getStaged().getName());
+final ProductProjection staged = product.toProjection(ProductProjectionType.STAGED);
+assertThat(staged).overridingErrorMessage("staged is always present").isNotNull();
+assertThat(staged.getName()).isEqualTo(product.getMasterData().getStaged().getName());
 
-final Optional&lt;ProductProjection&gt; current = product.toProjection(ProductProjectionType.CURRENT);
-assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
+final ProductProjection current = product.toProjection(ProductProjectionType.CURRENT);
+assertThat(current).overridingErrorMessage("current can be empty").isNull();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/ProductProjectionTest.java" target="_blank">test code</a>.</pre></div>
 
  <a href="../../../../io/sphere/sdk/products/ProductProjection.html#toReference--"><code>toReference()</code></a> returns not are reference to a <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> but to a <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>.</div>
