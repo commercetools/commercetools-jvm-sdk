@@ -7,17 +7,16 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 final class ShippingMethodImpl extends DefaultModelImpl<ShippingMethod> implements ShippingMethod {
     private final String name;
-    private final Optional<String> description;
+    private final String description;
     private final Reference<io.sphere.sdk.taxcategories.TaxCategory> taxCategory;
     private final List<ZoneRate> zoneRates;
     private final boolean isDefault;
 
     @JsonCreator
-    private ShippingMethodImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String name, final Optional<String> description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
+    private ShippingMethodImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String name, final String description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.description = description;
@@ -32,7 +31,7 @@ final class ShippingMethodImpl extends DefaultModelImpl<ShippingMethod> implemen
     }
 
     @Override
-    public Optional<String> getDescription() {
+    public String getDescription() {
         return description;
     }
 

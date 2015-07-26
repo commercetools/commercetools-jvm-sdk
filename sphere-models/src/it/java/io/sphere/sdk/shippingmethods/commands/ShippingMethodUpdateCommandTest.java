@@ -37,7 +37,7 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
             assertThat(shippingMethod.getDescription()).isNotEqualTo(Optional.of(newDescription));
             final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
             final ShippingMethod updatedShippingMethod = execute(cmd);
-            assertThat(updatedShippingMethod.getDescription().get()).isEqualTo(newDescription);
+            assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);
             return updatedShippingMethod;
         });
     }

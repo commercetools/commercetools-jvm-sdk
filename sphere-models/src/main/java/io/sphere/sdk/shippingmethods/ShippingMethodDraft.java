@@ -4,17 +4,18 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 public class ShippingMethodDraft {
     private final String name;
-    private final Optional<String> description;
+    @Nullable
+    private final String description;
     private final Reference<TaxCategory> taxCategory;
     private final List<ZoneRate> zoneRates;
     private final boolean isDefault;
 
-    private ShippingMethodDraft(final String name, final Optional<String> description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
+    private ShippingMethodDraft(final String name, final String description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
         this.name = name;
         this.description = description;
         this.taxCategory = taxCategory;
@@ -22,11 +23,11 @@ public class ShippingMethodDraft {
         this.isDefault = isDefault;
     }
 
-    public static ShippingMethodDraft of(final String name, final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates) {
-        return of(name, Optional.of(description), taxCategory, zoneRates, false);
+    public static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates) {
+        return of(name, description, taxCategory, zoneRates, false);
     }
 
-    public static ShippingMethodDraft of(final String name, final Optional<String> description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
+    public static ShippingMethodDraft of(final String name, @Nullable final String description, final Referenceable<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
         return new ShippingMethodDraft(name, description, taxCategory.toReference(), zoneRates, isDefault);
     }
 
@@ -34,7 +35,8 @@ public class ShippingMethodDraft {
         return name;
     }
 
-    public Optional<String> getDescription() {
+    @Nullable
+    public String getDescription() {
         return description;
     }
 

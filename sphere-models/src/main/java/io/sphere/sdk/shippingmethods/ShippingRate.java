@@ -4,38 +4,36 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.models.Base;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
-import java.util.Optional;
 
 public class ShippingRate extends Base {
     private final MonetaryAmount price;
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private final Optional<MonetaryAmount> freeAbove;
+    @Nullable
+    private final MonetaryAmount freeAbove;
 
     @JsonCreator
-    private ShippingRate(final MonetaryAmount price, final Optional<MonetaryAmount> freeAbove) {
+    private ShippingRate(final MonetaryAmount price, final MonetaryAmount freeAbove) {
         this.price = price;
         this.freeAbove = freeAbove;
     }
 
-    public static ShippingRate of(final MonetaryAmount price, final MonetaryAmount freeAbove) {
-        return of(price, Optional.of(freeAbove));
-    }
-
-    public static ShippingRate of(final MonetaryAmount price, final Optional<MonetaryAmount> freeAbove) {
+    public static ShippingRate of(final MonetaryAmount price, @Nullable final MonetaryAmount freeAbove) {
         return new ShippingRate(price, freeAbove);
     }
 
     public static ShippingRate of(final MonetaryAmount price) {
-        return of(price, Optional.empty());
+        return of(price, null);
     }
 
     public MonetaryAmount getPrice() {
         return price;
     }
 
-    public Optional<MonetaryAmount> getFreeAbove() {
+    @Nullable
+    public MonetaryAmount getFreeAbove() {
         return freeAbove;
     }
 }
