@@ -47,7 +47,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     public void changeShipmentState() throws Exception {
         withOrder(client(), order -> {
             final ShipmentState newState = ShipmentState.SHIPPED;
-            assertThat(order.getShipmentState()).isNotEqualTo(Optional.of(newState));
+            assertThat(order.getShipmentState()).isNotEqualTo(newState);
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
             assertThat(updatedOrder.getShipmentState()).isEqualTo(newState);
         });
@@ -57,7 +57,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     public void changePaymentState() throws Exception {
         withOrder(client(), order -> {
             final PaymentState newState = PaymentState.PAID;
-            assertThat(order.getPaymentState()).isNotEqualTo(Optional.of(newState));
+            assertThat(order.getPaymentState()).isNotEqualTo(newState);
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(newState)));
             assertThat(updatedOrder.getPaymentState()).isEqualTo(newState);
         });

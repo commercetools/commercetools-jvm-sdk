@@ -34,7 +34,7 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
     public void setDescription() throws Exception {
         withUpdateableShippingMethod(client(), shippingMethod -> {
             final String newDescription = randomString();
-            assertThat(shippingMethod.getDescription()).isNotEqualTo(Optional.of(newDescription));
+            assertThat(shippingMethod.getDescription()).isNotEqualTo(newDescription);
             final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
             final ShippingMethod updatedShippingMethod = execute(cmd);
             assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);

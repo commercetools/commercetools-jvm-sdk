@@ -331,7 +331,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final LocalizedStrings newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription, ONLY_STAGED)));
             final Product updatedProduct = execute(cmd);
-            assertThat(oldDescriptionOption).isNotEqualTo(Optional.of(newDescription));
+            assertThat(oldDescriptionOption).isNotEqualTo(newDescription);
             assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
             assertThat(updatedProduct.getMasterData().getCurrent().getDescription()).isEqualTo(oldDescriptionOption);
 
@@ -347,7 +347,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     public void setTaxCategory() throws Exception {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
             withUpdateableProduct(client(), product -> {
-                assertThat(product.getTaxCategory()).isNotEqualTo(Optional.of(taxCategory));
+                assertThat(product.getTaxCategory()).isNotEqualTo(taxCategory);
                 final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory));
                 final Product updatedProduct = execute(command);
                 assertThat(updatedProduct.getTaxCategory()).isEqualTo(taxCategory.toReference());

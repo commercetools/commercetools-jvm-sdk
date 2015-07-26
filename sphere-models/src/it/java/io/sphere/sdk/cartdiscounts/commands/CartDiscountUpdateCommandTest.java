@@ -99,7 +99,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
         withPersistentCartDiscount(client(), cartDiscount -> {
             final LocalizedStrings newDescription = randomSlug();
 
-            assertThat(cartDiscount.getDescription()).isNotEqualTo(Optional.of(newDescription));
+            assertThat(cartDiscount.getDescription()).isNotEqualTo(newDescription);
 
             final CartDiscount updatedDiscount =
                     execute(CartDiscountUpdateCommand.of(cartDiscount, SetDescription.of(newDescription)));
@@ -156,7 +156,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             //until must be after valid from
             final ZonedDateTime dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
 
-            assertThat(cartDiscount.getValidUntil()).isNotEqualTo(Optional.of(dateTime));
+            assertThat(cartDiscount.getValidUntil()).isNotEqualTo(dateTime);
 
             final CartDiscount updatedDiscount =
                     execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));
