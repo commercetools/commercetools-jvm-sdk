@@ -1,6 +1,6 @@
 package io.sphere.sdk.search;
 
-import io.sphere.sdk.utils.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -25,8 +25,9 @@ abstract class TermExpression<T, V> extends SearchModelExpression<T, V> {
      * Turns a group of terms into an expression of the form "term1,term2,..."
      * @return the generated term expression.
      */
+    @Nullable
     private String toTermExpression() {
-        return toStream(terms).map(t -> serializer().apply(t))
-                .filter(t -> !t.isEmpty()).collect(joining(","));
+        return StringUtils.trimToNull(toStream(terms).map(t -> serializer().apply(t))
+                .filter(t -> !t.isEmpty()).collect(joining(",")));
     }
 }
