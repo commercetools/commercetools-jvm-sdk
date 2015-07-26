@@ -1,5 +1,6 @@
 package introspection;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
@@ -31,5 +32,13 @@ public class ClassInfo {
         return "ClassInfo{" +
                 "clazz=" + clazz +
                 '}';
+    }
+
+    public boolean containsOptionalField() {
+        return fieldsWithOptionalTypeStream().count() > 0;
+    }
+
+    public Stream<Field> fieldsWithOptionalTypeStream() {
+        return Arrays.stream(clazz.getDeclaredFields()).filter(field -> field.getType().getSimpleName().equals("Optional"));
     }
 }
