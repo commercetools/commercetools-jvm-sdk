@@ -14,7 +14,6 @@ import javax.annotation.Nullable;
  */
 public class RemoveLineItem extends UpdateAction<Cart> {
     private final String lineItemId;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     @Nullable
     private final Integer quantity;
 

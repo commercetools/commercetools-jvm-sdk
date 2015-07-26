@@ -20,7 +20,6 @@ public class CustomObjectDraft<T> extends Base {
     };
 
     private final T value;
-    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
     @Nullable
     private final Long version;
     private final TypeReference<CustomObject<T>> typeReference;
@@ -111,6 +110,7 @@ public class CustomObjectDraft<T> extends Base {
         return ofUnversionedUpsert(container, key, value, JSON_NODE_TYPE_REFERENCE);
     }
 
+    @Nullable
     public Long getVersion() {
         return version;
     }
