@@ -2,23 +2,25 @@ package io.sphere.sdk.zones;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.Set;
 
 import static java.util.stream.Collectors.toSet;
 
 public class ZoneDraft {
     private final String name;
-    private final Optional<String> description;
+    @Nullable
+    private final String description;
     private final Set<Location> locations;
 
-    private ZoneDraft(final String name, final Set<Location> locations, final Optional<String> description) {
+    private ZoneDraft(final String name, final Set<Location> locations, @Nullable final String description) {
         this.description = description;
         this.name = name;
         this.locations = locations;
     }
 
-    public Optional<String> getDescription() {
+    @Nullable
+    public String getDescription() {
         return description;
     }
 
@@ -31,23 +33,15 @@ public class ZoneDraft {
     }
 
     public static ZoneDraft of(final String name, final Set<Location> locations) {
-        return of(name, locations, Optional.empty());
+        return of(name, locations, null);
     }
 
-    public static ZoneDraft of(final String name, final Set<Location> locations, final String description) {
-        return of(name, locations, Optional.of(description));
-    }
-
-    public static ZoneDraft ofCountries(final String name, final Set<CountryCode> countries, final String description) {
-        return ofCountries(name, countries, Optional.of(description));
-    }
-
-    public static ZoneDraft ofCountries(final String name, final Set<CountryCode> countries, final Optional<String> description) {
+    public static ZoneDraft ofCountries(final String name, final Set<CountryCode> countries, @Nullable final String description) {
         final Set<Location> locations = countries.stream().map(country -> Location.of(country)).collect(toSet());
         return new ZoneDraft(name, locations, description);
     }
 
-    public static ZoneDraft of(final String name, final Set<Location> locations, final Optional<String> description) {
+    public static ZoneDraft of(final String name, final Set<Location> locations, @Nullable final String description) {
         return new ZoneDraft(name, locations, description);
     }
 }

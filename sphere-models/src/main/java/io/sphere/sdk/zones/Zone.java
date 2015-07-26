@@ -6,7 +6,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.Set;
 
 /**
@@ -17,7 +17,8 @@ public interface Zone extends DefaultModel<Zone> {
 
     String getName();
 
-    Optional<String> getDescription();
+    @Nullable
+    String getDescription();
 
     Set<Location> getLocations();
 
@@ -26,11 +27,11 @@ public interface Zone extends DefaultModel<Zone> {
         return Reference.of(typeId(), getId(), this);
     }
 
-    public static String typeId(){
+    static String typeId(){
         return "zone";
     }
 
-    public static TypeReference<Zone> typeReference(){
+    static TypeReference<Zone> typeReference(){
         return new TypeReference<Zone>() {
             @Override
             public String toString() {

@@ -9,6 +9,8 @@ import io.sphere.sdk.zones.Location;
 import io.sphere.sdk.zones.Zone;
 import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
+import java.util.Optional;
+
 public interface ZoneQuery extends MetaModelQueryDsl<Zone, ZoneQuery, ZoneQueryModel, ZoneExpansionModel<Zone>> {
     static TypeReference<PagedQueryResult<Zone>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Zone>>(){
@@ -46,7 +48,7 @@ public interface ZoneQuery extends MetaModelQueryDsl<Zone, ZoneQuery, ZoneQueryM
      */
     default ZoneQuery byLocation(final Location location) {
         final QueryPredicate<Zone> predicate =
-                location.getState()
+                Optional.ofNullable(location.getState())
                         .map(state -> ZoneQueryModel.of().locations().where(l -> l.country().is(location.getCountry()).and(l.state().is(state))))
                         .orElseGet(() -> ZoneQueryModel.of().locations().where(l -> l.country().is(location.getCountry()).and(l.state().isNotPresent())));
         return withPredicates(predicate);

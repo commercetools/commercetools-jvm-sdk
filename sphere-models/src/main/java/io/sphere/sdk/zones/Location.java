@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Base;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  * A geographical location representing a country with an optional state.
@@ -14,10 +14,11 @@ import java.util.Optional;
 public class Location extends Base {
     private final CountryCode country;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private final Optional<String> state;
+    @Nullable
+    private final String state;
 
     @JsonCreator
-    private Location(final CountryCode country, final Optional<String> state) {
+    private Location(final CountryCode country, @Nullable final String state) {
         this.country = country;
         this.state = state;
     }
@@ -26,22 +27,17 @@ public class Location extends Base {
         return country;
     }
 
-    public Optional<String> getState() {
+    public String getState() {
         return state;
     }
 
     @JsonIgnore
-    public static Location of(final CountryCode countryCode, final Optional<String> state) {
+    public static Location of(final CountryCode countryCode, @Nullable final String state) {
         return new Location(countryCode, state);
     }
 
     @JsonIgnore
-    public static Location of(final CountryCode countryCode, final String state) {
-        return new Location(countryCode, Optional.of(state));
-    }
-
-    @JsonIgnore
     public static Location of(final CountryCode countryCode) {
-        return of(countryCode, Optional.empty());
+        return of(countryCode, null);
     }
 }
