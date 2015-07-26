@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.states.State;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.Set;
 
 import static io.sphere.sdk.utils.SetUtils.asSet;
@@ -16,22 +16,19 @@ import static io.sphere.sdk.utils.SetUtils.asSet;
  */
 public class SetTransitions extends UpdateAction<State> {
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private final Optional<Set<Reference<State>>> transitions;
+    @Nullable
+    private final Set<Reference<State>> transitions;
 
-    private SetTransitions(final Optional<Set<Reference<State>>> transitions) {
+    private SetTransitions(final Set<Reference<State>> transitions) {
         super("setTransitions");
         this.transitions = transitions;
     }
 
-    public static SetTransitions of(final Set<Reference<State>> transitions) {
-        return of(Optional.of(transitions));
-    }
-    
     public static SetTransitions of() {
-        return of(Optional.<Set<Reference<State>>>empty());
+        return of((Set<Reference<State>>)null);
     }
 
-    public static SetTransitions of(final Optional<Set<Reference<State>>> transitions) {
+    public static SetTransitions of(@Nullable final Set<Reference<State>> transitions) {
         return new SetTransitions(transitions);
     }
 
@@ -39,7 +36,8 @@ public class SetTransitions extends UpdateAction<State> {
         return of(asSet(state.toReference()));
     }
 
-    public Optional<Set<Reference<State>>> getTransitions() {
+    @Nullable
+    public Set<Reference<State>> getTransitions() {
         return transitions;
     }
 }
