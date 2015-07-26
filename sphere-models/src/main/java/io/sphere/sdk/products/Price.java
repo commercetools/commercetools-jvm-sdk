@@ -14,6 +14,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.utils.MoneyImpl;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
@@ -153,30 +154,7 @@ public class Price extends Base {
         if (o == null || getClass() != o.getClass()) return false;
 
         Price price = (Price) o;
-
-        if (!channel.equals(price.channel)) return false;
-        if (!country.equals(price.country)) return false;
-        if (!customerGroup.equals(price.customerGroup)) return false;
-        if (!discounted.equals(price.discounted)) return false;
-        if (!validFrom.equals(price.validFrom)) return false;
-        if (!validUntil.equals(price.validUntil)) return false;
-        //here money does not work with equals, use isEqualTo
-        if (!value.isEqualTo(price.value)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + value.hashCode();
-        result = 31 * result + country.hashCode();
-        result = 31 * result + customerGroup.hashCode();
-        result = 31 * result + channel.hashCode();
-        result = 31 * result + discounted.hashCode();
-        result = 31 * result + validFrom.hashCode();
-        result = 31 * result + validUntil.hashCode();
-        return result;
+        return EqualsBuilder.reflectionEquals(this, o, "value") && value.isEqualTo(price.value);
     }
 
     @JsonIgnore
