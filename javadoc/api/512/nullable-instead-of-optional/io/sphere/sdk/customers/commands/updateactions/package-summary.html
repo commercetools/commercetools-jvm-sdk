@@ -125,13 +125,13 @@
 <div class="block">Sets a new company name for the customer
 
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCompanyName--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    assertThat(customer.getCompanyName()).isEmpty();
+    assertThat(customer.getCompanyName()).isNull();
 
     final String companyName = "Big coorp";
     final Customer updatedCustomer =
             execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
 
-    assertThat(updatedCustomer.getCompanyName()).contains(companyName);
+    assertThat(updatedCustomer.getCompanyName()).isEqualTo(companyName);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
@@ -185,13 +185,13 @@
 <div class="block">Sets a new vat ID for the customer
 
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setVatId--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    assertThat(customer.getVatId()).isEmpty();
+    assertThat(customer.getVatId()).isNull();
 
     final String vatId = randomString();
     final Customer updatedCustomer =
             execute(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
 
-    assertThat(updatedCustomer.getVatId()).contains(vatId);
+    assertThat(updatedCustomer.getVatId()).isEqualTo(vatId);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>

@@ -133,7 +133,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
         assertThat(stateReference.getObj()).isNotNull();
 
         final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of()));
-        assertThat(updatedStateBWithoutTransitions.getTransitions()).isEmpty();
+        assertThat(updatedStateBWithoutTransitions.getTransitions()).isNull();
 
         return updatedStateBWithoutTransitions;
     });

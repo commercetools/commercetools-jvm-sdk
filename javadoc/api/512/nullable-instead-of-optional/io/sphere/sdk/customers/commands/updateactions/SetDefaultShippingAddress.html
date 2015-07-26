@@ -127,7 +127,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     assertThat(address.getId())
             .overridingErrorMessage("only fetched address contains an ID")
             .isNotNull();
-    assertThat(customer.getDefaultShippingAddressId()).isEmpty();
+    assertThat(customer.getDefaultShippingAddressId()).isNull();
     assertThat(customer.findDefaultShippingAddress()).isEmpty();
 
     final Customer updatedCustomer =

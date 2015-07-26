@@ -219,10 +219,10 @@
 <div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setValidFrom--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
     final ZonedDateTime dateTime = SphereTestUtils.now();
 
-    assertThat(cartDiscount.getValidFrom()).isNotEqualTo(Optional.of(dateTime));
+    assertThat(cartDiscount.getValidFrom()).isNotEqualTo(dateTime);
 
     final List&lt;UpdateAction&lt;CartDiscount&gt;&gt; updateActions =
-            asList(SetValidFrom.of(dateTime), SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)));
+            asList(SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)), SetValidFrom.of(dateTime));
     final CartDiscount updatedDiscount = execute(CartDiscountUpdateCommand.of(cartDiscount, updateActions));
 
     assertThat(updatedDiscount.getValidFrom()).isEqualTo(dateTime);
