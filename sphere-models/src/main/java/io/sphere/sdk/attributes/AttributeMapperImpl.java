@@ -20,7 +20,7 @@ class AttributeMapperImpl<T> extends Base implements AttributeMapper<T> {
     @Override
     public T deserialize(final JsonNode value) {
         try {
-            return  mapper.reader(typeReference).readValue(value);
+            return  mapper.readerFor(typeReference).readValue(value);
         } catch (final IOException e) {
             throw new JsonException(e);
         }

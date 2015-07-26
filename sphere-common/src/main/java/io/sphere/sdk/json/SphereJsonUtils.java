@@ -7,9 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.fasterxml.jackson.datatype.jsr310.JSR310Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
-import org.zapodot.jackson.java8.JavaOptionalModule;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -38,9 +37,8 @@ final public class SphereJsonUtils {
      */
     public static ObjectMapper newObjectMapper() {
         return new ObjectMapper()
-                .registerModule(new JavaOptionalModule())
                 .registerModule(new ParameterNamesModule())
-                .registerModule(new JSR310Module())//Java 8 DateTime
+                .registerModule(new JavaTimeModule())
                 .registerModule(new DateTimeDeserializationModule())
                 .registerModule(new DateTimeSerializationModule())
                 .registerModule(new JavaMoneyModule())
@@ -154,7 +152,7 @@ final public class SphereJsonUtils {
      * @return the created objected
      */
     public static <T> T readObject(final JsonNode jsonNode, final TypeReference<T> typeReference) {
-        return executing(() -> objectMapper.reader(typeReference).readValue(jsonNode));
+        return executing(() -> objectMapper.readerFor(typeReference).readValue(jsonNode));
     }
 
     /**
@@ -168,7 +166,7 @@ final public class SphereJsonUtils {
      * @return the created objected
      */
     public static <T> T readObject(final JsonNode jsonNode, final Class<T> clazz) {
-        return executing(() -> objectMapper.reader(clazz).readValue(jsonNode));
+        return executing(() -> objectMapper.readerFor(clazz).readValue(jsonNode));
     }
 
     /**

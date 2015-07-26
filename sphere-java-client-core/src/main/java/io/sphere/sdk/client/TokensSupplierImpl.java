@@ -54,7 +54,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
 
     private void logTokenResult(final Tokens nullableTokens, final Throwable nullableThrowable) {
         if (nullableTokens != null) {
-            AUTH_LOGGER.debug(() -> "Successfully fetched token that expires in " + nullableTokens.getExpiresIn().map(x -> x.toString()).orElse("an unknown time") + ".");
+            AUTH_LOGGER.debug(() -> "Successfully fetched token that expires in " + Optional.ofNullable(nullableTokens.getExpiresIn()).map(x -> x.toString()).orElse("an unknown time") + ".");
         } else {
             AUTH_LOGGER.error(() -> "Failed to fetch token.", nullableThrowable);
         }

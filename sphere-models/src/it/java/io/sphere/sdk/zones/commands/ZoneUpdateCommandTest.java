@@ -12,8 +12,6 @@ import io.sphere.sdk.zones.commands.updateactions.SetDescription;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
 import static org.assertj.core.api.Assertions.assertThat;
 

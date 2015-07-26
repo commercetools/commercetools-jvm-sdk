@@ -5,17 +5,19 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class Xyz extends Base {
-    private final Optional<String> bar;
+    @Nullable
+    private final String bar;
 
     @JsonCreator
-    public Xyz(final Optional<String> bar) {
+    public Xyz(@Nullable final String bar) {
         this.bar = bar;
     }
 
-    public Optional<String> getBar() {
+    @Nullable
+    public String getBar() {
         return bar;
     }
 

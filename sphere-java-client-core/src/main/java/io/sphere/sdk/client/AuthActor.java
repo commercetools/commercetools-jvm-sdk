@@ -8,8 +8,9 @@ import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 
-import static io.sphere.sdk.client.SphereAuth.*;
-import static io.sphere.sdk.utils.CompletableFutureUtils.*;
+import static io.sphere.sdk.client.SphereAuth.AUTH_LOGGER;
+import static io.sphere.sdk.utils.CompletableFutureUtils.onFailure;
+import static io.sphere.sdk.utils.CompletableFutureUtils.onSuccess;
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
 
 /**
@@ -83,7 +84,7 @@ final class AuthActor extends Actor {
     }
 
     private void scheduleNextTokenFetchFromSphere(final Tokens tokens) {
-        final Long delayInSecondsToFetchNewToken = tokens.getExpiresIn().map(ttlInSeconds -> ttlInSeconds - 60 * 60).orElse(60 * 30L);
+        final Long delayInSecondsToFetchNewToken = Optional.ofNullable(tokens.getExpiresIn()).map(ttlInSeconds -> ttlInSeconds - 60 * 60).orElse(60 * 30L);
         schedule(new FetchTokenFromSphereMessage(), delayInSecondsToFetchNewToken, TimeUnit.SECONDS);
     }
 
