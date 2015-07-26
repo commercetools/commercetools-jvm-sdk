@@ -180,7 +180,7 @@ assertThat(cartWithoutAddress.getBillingAddress()).isNull();
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomerEmail</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomerEmail--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-assertThat(cart.getCustomerEmail()).isEmpty();
+assertThat(cart.getCustomerEmail()).isNull();
 final String email = "info@commercetools.de";
 final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
 assertThat(cartWithEmail.getCustomerEmail()).contains(email);
