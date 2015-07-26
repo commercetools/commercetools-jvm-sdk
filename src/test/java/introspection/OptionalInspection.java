@@ -1,16 +1,11 @@
 package introspection;
 
-import java.lang.reflect.Method;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.List;
 import java.util.function.Predicate;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
+
+import static introspection.IntrospectionUtils.readClassNames;
 
 //test:runMain introspection.OptionalInspection
 public class OptionalInspection {
@@ -19,8 +14,7 @@ public class OptionalInspection {
 
 
     public static void main(String[] args) throws Exception {
-        final String javadocAllClassesFrameHtmlContent = new String(Files.readAllBytes(Paths.get("target/javaunidoc/allclasses-frame.html")));
-        final Stream<String> classNameStream = streamClassNames(Pattern.compile("title=\"class in ([^\"]+)\" target=\"classFrame\">([^<]+)</a>").matcher(javadocAllClassesFrameHtmlContent));
+        final Stream<String> classNameStream = readClassNames();
         final List<ClassInfo> classesWithAnyOptional = classNameStream.map(className -> {
             try {
                 final Class<?> clazz = Class.forName(className);
@@ -53,104 +47,5 @@ public class OptionalInspection {
         }).sum());
     }
 
-    private static class MethodInfo {
-        private final Method method;
 
-        public MethodInfo(final Method method) {
-            this.method = method;
-        }
-
-        public boolean containsOptionalParameter() {
-            return Arrays.stream(method.getParameterTypes()).anyMatch(isOptionalClass);
-        }
-
-        public boolean containsOptionalReturnType() {
-            return isOptionalClass.test(method.getReturnType());
-        }
-
-        @Override
-        public String toString() {
-            return method.toString();
-        }
-    }
-
-
-    private static class ClassInfo {
-
-        private final Class<?> clazz;
-
-        public ClassInfo(final Class<?> clazz) {
-            this.clazz = clazz;
-        }
-
-        public List<MethodInfo> getMethods() {
-            return getMethodStream().map(MethodInfo::new).collect(Collectors.toList());
-        }
-
-        public Stream<Method> getMethodStream() {
-            return Arrays.asList(clazz.getDeclaredMethods()).stream();
-        }
-
-        public Stream<MethodInfo> getMethodInfoStream() {
-            return  getMethodStream().map(MethodInfo::new);
-        }
-
-        @Override
-        public String toString() {
-            return "ClassInfo{" +
-                    "clazz=" + clazz +
-                    '}';
-        }
-    }
-
-    private static Stream<String> streamClassNames(final Matcher matcher) {
-        final MatcherFindSplitIterator matcherFindSplitIterator = new MatcherFindSplitIterator(matcher);
-        return StreamSupport.stream(matcherFindSplitIterator, false).map(m -> m.group(1) + "." + m.group(2));
-    }
-
-    private static class MatcherGroupView {
-        private final Matcher matcher;
-
-        public MatcherGroupView(final Matcher matcher) {
-            this.matcher = matcher;
-        }
-
-        public String group(int group) {
-            return matcher.group(group);
-        }
-    }
-
-    private static class MatcherFindSplitIterator implements Spliterator<MatcherGroupView> {
-
-        private final Matcher matcher;
-
-        public MatcherFindSplitIterator(final Matcher matcher) {
-            this.matcher = matcher;
-        }
-
-        @Override
-        public boolean tryAdvance(final Consumer<? super MatcherGroupView> action) {
-            Objects.requireNonNull(action);
-            if(matcher.find()) {
-                action.accept(new MatcherGroupView(matcher));
-                return true;
-            }
-            return false;
-        }
-
-        @Override
-        public Spliterator<MatcherGroupView> trySplit() {
-            return null;
-        }
-
-        @Override
-        public long estimateSize() {
-            return 1000;
-        }
-
-        @Override
-        public int characteristics() {
-            return IMMUTABLE | NONNULL | ORDERED | SIZED;
-        }
-    }
 }

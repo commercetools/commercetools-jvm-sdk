@@ -32,6 +32,7 @@ object Build extends Build {
     .settings(commonSettings:_*)
     .aggregate(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-convenience`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`, `sphere-java-client-ahc-1_8`, `sphere-java-client-ahc-1_9`)
     .dependsOn(`sdk-http-ahc-1_8`, `sdk-http-ahc-1_9`, `sdk-http-apache-async`, `sdk-http`, `sphere-common`, `sphere-convenience`, `sphere-java-client`, `sphere-java-client-core`, `sphere-java-client-apache-async`, `sphere-models`, `sphere-test-lib`)
+    .settings(libraryDependencies += "net.sourceforge.plantuml" % "plantuml" % "8019" % "test")
 
   lazy val `sphere-java-client-core` = project.configs(IntegrationTest).dependsOn(`sphere-common`).settings(commonSettings:_*)
     .settings(libraryDependencies ++= allTestLibs.map(_ % "test,it"))
