@@ -3,7 +3,7 @@ package io.sphere.sdk.taxcategories;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 @JsonDeserialize(as=TaxRateImpl.class)
 public interface TaxRate {
@@ -11,7 +11,8 @@ public interface TaxRate {
      * The id is created by the backend, so will only be present if fetched from the backend.
      * @return the id or absent
      */
-    Optional<String> getId();
+    @Nullable
+    String getId();
 
     String getName();
 
@@ -21,9 +22,10 @@ public interface TaxRate {
 
     CountryCode getCountry();
 
-    Optional<String> getState();
+    @Nullable
+    String getState();
 
-    public static TaxRate of(final String name, final double amount, final boolean includedInPrice, final CountryCode country) {
+    static TaxRate of(final String name, final double amount, final boolean includedInPrice, final CountryCode country) {
         return TaxRateBuilder.of(name, amount, includedInPrice, country).build();
     }
 }

@@ -5,8 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 /** Tax Categories define how products are to be taxed in different countries.
 
@@ -23,11 +23,12 @@ import java.util.Optional;
 public interface TaxCategory extends DefaultModel<TaxCategory> {
     String getName();
 
-    Optional<String> getDescription();
+    @Nullable
+    String getDescription();
 
     List<TaxRate> getTaxRates();
 
-    public static TypeReference<TaxCategory> typeReference(){
+    static TypeReference<TaxCategory> typeReference(){
         return new TypeReference<TaxCategory>() {
             @Override
             public String toString() {
@@ -41,7 +42,7 @@ public interface TaxCategory extends DefaultModel<TaxCategory> {
         return Reference.of(typeId(), getId(), this);
     }
 
-    public static String typeId(){
+    static String typeId(){
         return "tax-category";
     }
 }
