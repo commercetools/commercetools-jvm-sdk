@@ -3,17 +3,22 @@ package io.sphere.sdk.orders;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class TrackingData extends Base {
-    private final Optional<String> trackingId;
-    private final Optional<String> carrier;
-    private final Optional<String> provider;
-    private final Optional<String> providerTransaction;
+    @Nullable
+    private final String trackingId;
+    @Nullable
+    private final String carrier;
+    @Nullable
+    private final String provider;
+    @Nullable
+    private final String providerTransaction;
+    @Nullable
     private final boolean isReturn;
 
     @JsonCreator
-    private TrackingData(final Optional<String> trackingId, final Optional<String> carrier, final Optional<String> provider, final Optional<String> providerTransaction, final boolean isReturn) {
+    private TrackingData(@Nullable final String trackingId, @Nullable final String carrier, @Nullable final String provider, @Nullable final String providerTransaction, final boolean isReturn) {
         this.trackingId = trackingId;
         this.carrier = carrier;
         this.provider = provider;
@@ -22,26 +27,30 @@ public class TrackingData extends Base {
     }
 
     public static TrackingData of() {
-        return of(Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty(), false);
+        return of(null, null, null, null, false);
     }
 
-    public static TrackingData of(final Optional<String> trackingId, final Optional<String> carrier, final Optional<String> provider, final Optional<String> providerTransaction, final boolean isReturn) {
+    public static TrackingData of(final String trackingId, final String carrier, final String provider, final String providerTransaction, final boolean isReturn) {
         return new TrackingData(trackingId, carrier, provider, providerTransaction, isReturn);
     }
 
-    public Optional<String> getTrackingId() {
+    @Nullable
+    public String getTrackingId() {
         return trackingId;
     }
 
-    public Optional<String> getCarrier() {
+    @Nullable
+    public String getCarrier() {
         return carrier;
     }
 
-    public Optional<String> getProvider() {
+    @Nullable
+    public String getProvider() {
         return provider;
     }
 
-    public Optional<String> getProviderTransaction() {
+    @Nullable
+    public String getProviderTransaction() {
         return providerTransaction;
     }
 
@@ -49,19 +58,19 @@ public class TrackingData extends Base {
         return isReturn;
     }
 
-    public TrackingData withTrackingId(final String trackingId) {
+    public TrackingData withTrackingId(@Nullable final String trackingId) {
         return newBuilder().trackingId(trackingId).build();
     }
 
-    public TrackingData withCarrier(final String carrier) {
+    public TrackingData withCarrier(@Nullable final String carrier) {
         return newBuilder().carrier(carrier).build();
     }
 
-    public TrackingData withProvider(final String provider) {
+    public TrackingData withProvider(@Nullable final String provider) {
         return newBuilder().provider(provider).build();
     }
 
-    public TrackingData withProviderTransaction(final String providerTransaction) {
+    public TrackingData withProviderTransaction(@Nullable final String providerTransaction) {
         return newBuilder().providerTransaction(providerTransaction).build();
     }
 

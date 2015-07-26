@@ -20,11 +20,9 @@ import io.sphere.sdk.test.SphereTestUtils;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
-
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -35,7 +33,8 @@ import static io.sphere.sdk.customers.CustomerFixtures.withCustomerInGroup;
 import static io.sphere.sdk.products.ProductFixtures.PRICE;
 import static io.sphere.sdk.products.ProductFixtures.withProduct;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
-import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.*;
+import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.defaultTaxCategory;
+import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTransientTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -62,7 +61,7 @@ public class OrderImportCommandTest extends IntegrationTest {
             assertThat(order.getOrderState()).isEqualTo(orderState);
             assertThat(order.getTotalPrice()).isEqualTo(amount);
             assertThat(order.getLineItems()).hasSize(1);
-            assertThat(order.getCountry()).contains(DE);
+            assertThat(order.getCountry()).isEqualTo(DE);
             final LineItem lineItem = order.getLineItems().get(0);
             assertThat(lineItem.getName()).isEqualTo(name);
             assertThat(lineItem.getProductId()).isEqualTo(productId);
@@ -94,7 +93,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                                     assertThat(lineItem.getVariant().getAttributes()).isEqualTo(masterVariant.getAttributes());
                                     assertThat(lineItem.getVariant().getImages()).isEqualTo(masterVariant.getImages());
                                     assertThat(lineItem.getVariant().getPrices()).isEqualTo(masterVariant.getPrices());
-                                    assertThat(lineItem.getVariant().getSku()).contains(masterVariant.getSku().get());
+                                    assertThat(lineItem.getVariant().getSku()).contains(masterVariant.getSku());
                                     assertThat(lineItem.getQuantity()).isEqualTo(2);
                                     assertThat(lineItem.getPrice()).isEqualTo(price);
                                     assertThat(lineItem.getName()).isEqualTo(name);
@@ -113,7 +112,7 @@ public class OrderImportCommandTest extends IntegrationTest {
     }
 
     private String sku(final Product product) {
-        return product.getMasterData().getStaged().getMasterVariant().getSku().get();
+        return product.getMasterData().getStaged().getMasterVariant().getSku();
     }
 
     @Test
@@ -166,7 +165,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                         assertThat(actual.getName()).isEqualTo(name);
                         assertThat(actual.getSlug()).isEqualTo(slug);
                         assertThat(actual.getTaxCategory()).isEqualTo(taxCategoryReference);
-                        assertThat(actual.getTaxRate()).contains(taxRate);
+                        assertThat(actual.getTaxRate()).isEqualTo(taxRate);
                     }
             );
         }));
@@ -217,7 +216,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                 final ShippingRate shippingRate = ShippingRate.of(price, freeAbove);
                 final TaxRate taxRate = taxCategory.getTaxRates().get(0);
                 final Reference<TaxCategory> taxCategoryRef = taxCategory.toReference();
-                final Optional<Reference<ShippingMethod>> shippingMethodRef = Optional.of(shippingMethod.toReference());
+                final Reference<ShippingMethod> shippingMethodRef = shippingMethod.toReference();
                 final ZonedDateTime createdAt = SphereTestUtils.now().minusSeconds(4);
                 final ParcelMeasurements parcelMeasurements = ParcelMeasurements.of(2, 3, 1, 3);
                 final DeliveryItem deliveryItem = DeliveryItem.of(new LineItemLike() {
@@ -239,19 +238,19 @@ public class OrderImportCommandTest extends IntegrationTest {
                     }
 
                     @Override
-                    public Optional<DiscountedLineItemPrice> getDiscountedPrice() {
-                        return Optional.empty();
+                    public DiscountedLineItemPrice getDiscountedPrice() {
+                        return null;
                     }
                 }, 5);
                 final String deliveryId = randomKey();
                 final TrackingData trackingData = TrackingData.of().withTrackingId("tracking id")
                         .withCarrier("carrier").withProvider("provider").withProviderTransaction("prov transaction").withIsReturn(true);
-                final Parcel parcel = Parcel.of(randomKey(), createdAt, Optional.of(parcelMeasurements), Optional.of(trackingData));
+                final Parcel parcel = Parcel.of(randomKey(), createdAt, parcelMeasurements, trackingData);
                 final List<Delivery> deliveries = asList(Delivery.of(deliveryId, createdAt, asList(deliveryItem), asList(parcel)));
                 final OrderShippingInfo shippingInfo = OrderShippingInfo.of(randomString(), price, shippingRate, taxRate, taxCategoryRef, shippingMethodRef, deliveries);
                 testOrderAspect(
                         builder -> builder.shippingInfo(shippingInfo),
-                        order -> assertThat(order.getShippingInfo()).contains(shippingInfo)
+                        order -> assertThat(order.getShippingInfo()).isEqualTo(shippingInfo)
                 );
             });
         });
@@ -262,7 +261,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         final PaymentState paymentState = PaymentState.FAILED;
         testOrderAspect(
                 builder -> builder.paymentState(paymentState),
-                order -> assertThat(order.getPaymentState()).contains(paymentState)
+                order -> assertThat(order.getPaymentState()).isEqualTo(paymentState)
         );
     }
 
@@ -271,7 +270,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         final ShipmentState shipmentState = ShipmentState.SHIPPED;
         testOrderAspect(
                 builder -> builder.shipmentState(shipmentState),
-                order -> assertThat(order.getShipmentState()).contains(shipmentState)
+                order -> assertThat(order.getShipmentState()).isEqualTo(shipmentState)
         );
     }
 
@@ -280,7 +279,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         final Address address = randomAddress().withApartment(randomKey());
         testOrderAspect(
                 builder -> builder.shippingAddress(address),
-                order -> assertThat(order.getShippingAddress()).contains(address)
+                order -> assertThat(order.getShippingAddress()).isEqualTo(address)
         );
     }
 
@@ -293,7 +292,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         final TaxedPrice taxedPrice = TaxedPrice.of(totalNet, totalGross, asList(TaxPortion.of(v, taxes)));
         testOrderAspect(
                 builder -> builder.taxedPrice(taxedPrice),
-                order -> assertThat(order.getTaxedPrice()).contains(taxedPrice)
+                order -> assertThat(order.getTaxedPrice()).isEqualTo(taxedPrice)
         );
     }
 
@@ -323,7 +322,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         withCustomerInGroup(client(), (customer, customerGroup) -> {
             final String customerId = customer.getId();
             testOrderAspect(builder -> builder.customerId(customerId).customerGroup(customerGroup),
-                    order -> assertThat(order.getCustomerGroup()).contains(customerGroup.toReference()));
+                    order -> assertThat(order.getCustomerGroup()).isEqualTo(customerGroup.toReference()));
         });
     }
 
@@ -338,14 +337,14 @@ public class OrderImportCommandTest extends IntegrationTest {
     public void billingAddress() throws Exception {
         final Address billingAddress = randomAddress();
         testOrderAspect(builder -> builder.billingAddress(billingAddress),
-                order -> assertThat(order.getBillingAddress()).contains(billingAddress));
+                order -> assertThat(order.getBillingAddress()).isEqualTo(billingAddress));
     }
 
     @Test
     public void getCompletedAt() throws Exception {
         final ZonedDateTime completedAt = SphereTestUtils.now().minusSeconds(5555);
         testOrderAspect(builder -> builder.completedAt(completedAt),
-                order -> assertThat(order.getCompletedAt()).contains(completedAt));
+                order -> assertThat(order.getCompletedAt()).isEqualTo(completedAt));
     }
 
     private void testOrderAspect(final Consumer<OrderImportDraftBuilder> orderBuilderConsumer, final Consumer<Order> orderConsumer) {

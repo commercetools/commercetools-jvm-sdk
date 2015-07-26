@@ -9,16 +9,15 @@ import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
-import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.time.ZonedDateTime;
 import java.util.Optional;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.withPersistentCartDiscount;
-import static java.lang.String.format;
-import static org.assertj.core.api.Assertions.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.lang.String.format;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartDiscountUpdateCommandTest extends IntegrationTest {
     @Test
@@ -100,12 +99,12 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
         withPersistentCartDiscount(client(), cartDiscount -> {
             final LocalizedStrings newDescription = randomSlug();
 
-            assertThat(cartDiscount.getDescription()).isNotEqualTo(Optional.of(newDescription));
+            assertThat(cartDiscount.getDescription()).isNotEqualTo(newDescription);
 
             final CartDiscount updatedDiscount =
                     execute(CartDiscountUpdateCommand.of(cartDiscount, SetDescription.of(newDescription)));
 
-            assertThat(updatedDiscount.getDescription()).contains(newDescription);
+            assertThat(updatedDiscount.getDescription()).isEqualTo(newDescription);
         });
     }
 
@@ -142,13 +141,13 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
         withPersistentCartDiscount(client(), cartDiscount -> {
             final ZonedDateTime dateTime = SphereTestUtils.now();
 
-            assertThat(cartDiscount.getValidFrom()).isNotEqualTo(Optional.of(dateTime));
+            assertThat(cartDiscount.getValidFrom()).isNotEqualTo(dateTime);
 
             final List<UpdateAction<CartDiscount>> updateActions =
-                    asList(SetValidFrom.of(dateTime), SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)));
+                    asList(SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)), SetValidFrom.of(dateTime));
             final CartDiscount updatedDiscount = execute(CartDiscountUpdateCommand.of(cartDiscount, updateActions));
 
-            assertThat(updatedDiscount.getValidFrom()).contains(dateTime);
+            assertThat(updatedDiscount.getValidFrom()).isEqualTo(dateTime);
         });
     }
     @Test
@@ -157,17 +156,17 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
             //until must be after valid from
             final ZonedDateTime dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
 
-            assertThat(cartDiscount.getValidUntil()).isNotEqualTo(Optional.of(dateTime));
+            assertThat(cartDiscount.getValidUntil()).isNotEqualTo(dateTime);
 
             final CartDiscount updatedDiscount =
                     execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));
 
-            assertThat(updatedDiscount.getValidUntil()).contains(dateTime);
+            assertThat(updatedDiscount.getValidUntil()).isEqualTo(dateTime);
         });
     }
 
     private ZonedDateTime dateTimeAfterValidFromAndOldValidUntil(final CartDiscount cartDiscount) {
-        return cartDiscount.getValidUntil()
-                .orElse(cartDiscount.getValidFrom().orElse(SphereTestUtils.now()).plusSeconds(1000)).plusSeconds(1);
+        return Optional.ofNullable(cartDiscount.getValidUntil())
+                .orElse(Optional.ofNullable(cartDiscount.getValidFrom()).orElse(SphereTestUtils.now()).plusSeconds(1000)).plusSeconds(1);
     }
 }

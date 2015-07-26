@@ -5,6 +5,7 @@ import io.sphere.sdk.models.*;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.MoneyImpl;
 import io.sphere.sdk.utils.StringUtils;
+import org.apache.commons.io.IOUtils;
 
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
@@ -15,7 +16,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
-import org.apache.commons.io.IOUtils;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.stream.Collectors.toList;
@@ -61,12 +61,12 @@ public final class SphereTestUtils {
         return LocalizedStrings.of(Locale.ENGLISH, value);
     }
 
-    public static String en(final Optional<LocalizedStrings> localizedStringsOption) {
-        return localizedStringsOption.get().get(ENGLISH).get();
+    public static String en(final LocalizedStrings localizedStrings) {
+        return localizedStrings.get(ENGLISH);
     }
 
     public static String englishSlugOf(final WithLocalizedSlug model) {
-        return model.getSlug().get(ENGLISH).get();
+        return model.getSlug().get(ENGLISH);
     }
 
     public static <T> T firstOf(final PagedQueryResult<T> result) {

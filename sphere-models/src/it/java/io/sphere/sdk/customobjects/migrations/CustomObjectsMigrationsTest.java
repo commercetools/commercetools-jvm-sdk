@@ -24,28 +24,28 @@ public class CustomObjectsMigrationsTest extends IntegrationTest {
         final CustomObject<io.sphere.sdk.customobjects.migrations.version1.Xyz> customObject = execute(CustomObjectUpsertCommand.of(draft));
 
         final CustomObject<io.sphere.sdk.customobjects.migrations.version2.Xyz> xyz2CustomObject = execute(CustomObjectByKeyFetch.of(CONTAINER, key, io.sphere.sdk.customobjects.migrations.version2.Xyz.customObjectTypeReference()));
-        assertThat(xyz2CustomObject.getValue().getBar()).isEmpty();
+        assertThat(xyz2CustomObject.getValue().getBar()).isNull();
 
         final CustomObjectUpsertCommand<io.sphere.sdk.customobjects.migrations.version2.Xyz> upsertCommand =
-                CustomObjectUpsertCommand.of(CustomObjectDraft.ofVersionedUpdate(xyz2CustomObject, new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", Optional.of("bar")), io.sphere.sdk.customobjects.migrations.version2.Xyz.customObjectTypeReference()));
+                CustomObjectUpsertCommand.of(CustomObjectDraft.ofVersionedUpdate(xyz2CustomObject, new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", "bar"), io.sphere.sdk.customobjects.migrations.version2.Xyz.customObjectTypeReference()));
 
-        assertThat(execute(upsertCommand).getValue().getBar()).contains("bar");
+        assertThat(execute(upsertCommand).getValue().getBar()).isEqualTo("bar");
     }
 
     @Test
     public void removingAField() throws Exception {
         final String key = "removingAField";
         final CustomObjectUpsertCommand<io.sphere.sdk.customobjects.migrations.version2.Xyz> upsertCommand =
-                CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", Optional.of("bar")), io.sphere.sdk.customobjects.migrations.version2.Xyz.customObjectTypeReference()));
+                CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", "bar"), io.sphere.sdk.customobjects.migrations.version2.Xyz.customObjectTypeReference()));
         execute(upsertCommand);
         final CustomObject<Xyz> xyz3CustomObject = execute(CustomObjectByKeyFetch.of(CONTAINER, key, Xyz.customObjectTypeReference()));
-        assertThat(xyz3CustomObject.getValue().getBar()).contains("bar");
+        assertThat(xyz3CustomObject.getValue().getBar()).isEqualTo("bar");
     }
 
     @Test
     public void optionalExample() throws Exception {
-        final io.sphere.sdk.customobjects.migrations.version2.Xyz xyz = new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", Optional.of("bar"));
-        final String bar = xyz.getBar().orElse("default value");
+        final io.sphere.sdk.customobjects.migrations.version2.Xyz xyz = new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", "bar");
+        final String bar = Optional.ofNullable(xyz.getBar()).orElse("default value");
     }
 
     @Test

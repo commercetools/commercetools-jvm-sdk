@@ -1,12 +1,12 @@
 package io.sphere.sdk.search;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 import static java.util.Arrays.asList;
 
 public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends FilterSearchModel<T, V> {
 
-    RangedFilterSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
+    RangedFilterSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment, final TypeSerializer<V> typeSerializer) {
         super(parent, pathSegment, typeSerializer);
     }
 

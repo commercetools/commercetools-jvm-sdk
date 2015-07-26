@@ -78,7 +78,7 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
     private boolean lastTokenIsStillValid() {
         if (currentTokensOption.isPresent()) {
             final Tokens oldTokens = currentTokensOption.get();
-            return oldTokens.getExpiresZonedDateTime().map(expireTime -> expireTime.isAfter(ZonedDateTime.now())).orElse(true);
+            return Optional.ofNullable(oldTokens.getExpiresZonedDateTime()).map(expireTime -> expireTime.isAfter(ZonedDateTime.now())).orElse(true);
         } else {
             return false;
         }
@@ -89,11 +89,11 @@ final class AutoRefreshSphereAccessTokenSupplierImpl extends AutoCloseableServic
     }
 
     private ZonedDateTime newExpiringZonedDateTime(final Tokens newTokens) {
-        return newTokens.getExpiresZonedDateTime().orElseGet(() -> ZonedDateTime.now().plusSeconds(30 * 60));
+        return Optional.ofNullable(newTokens.getExpiresZonedDateTime()).orElseGet(() -> ZonedDateTime.now().plusSeconds(30 * 60));
     }
 
     private ZonedDateTime oldExpiringZonedDateTime() {
-        return currentTokensOption.get().getExpiresZonedDateTime().orElseGet(() -> ZonedDateTime.now());
+        return Optional.ofNullable(currentTokensOption.get().getExpiresZonedDateTime()).orElseGet(() -> ZonedDateTime.now());
     }
 
     private void updateToken(final Tokens tokens) {

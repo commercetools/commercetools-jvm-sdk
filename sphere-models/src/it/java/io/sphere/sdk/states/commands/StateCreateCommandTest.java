@@ -36,7 +36,7 @@ public class StateCreateCommandTest extends IntegrationTest {
 
         assertThat(state.getKey()).isEqualTo(KEY);
         assertThat(state.getType()).isEqualTo(StateType.LINE_ITEM_STATE);
-        assertThat(state.getDescription()).contains(description);
-        assertThat(state.getName()).contains(name);
+        assertThat(state.getDescription()).isEqualTo(description);
+        assertThat(state.getName()).isEqualTo(name);
     }
 }

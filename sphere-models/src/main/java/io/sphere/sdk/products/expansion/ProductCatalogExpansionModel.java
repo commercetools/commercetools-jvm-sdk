@@ -2,10 +2,8 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
 
-import java.util.Optional;
-
 public class ProductCatalogExpansionModel<T> extends ExpansionModel<T> {
-    ProductCatalogExpansionModel(final Optional<String> parentPath, final Optional<String> path) {
+    ProductCatalogExpansionModel(final String parentPath, final String path) {
         super(parentPath, path);
     }
 
@@ -18,6 +16,6 @@ public class ProductCatalogExpansionModel<T> extends ExpansionModel<T> {
     }
 
     private ProductDataExpansionModel<T> productDataExpansion(final String segment) {
-        return new ProductDataExpansionModel<>(pathExpressionOption(), segment);
+        return new ProductDataExpansionModel<>(pathExpression(), segment);
     }
 }

@@ -6,10 +6,8 @@ import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.QueryPredicate;
 
-import java.util.Optional;
-
 final class LineItemCollectionQueryModelImpl<T> extends QueryModelImpl<T> implements LineItemCollectionQueryModel<T> {
-    public LineItemCollectionQueryModelImpl(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
+    public LineItemCollectionQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 

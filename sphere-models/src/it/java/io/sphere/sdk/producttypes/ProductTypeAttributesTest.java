@@ -149,7 +149,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
             final ProductDraft productDraft = ProductDraftBuilder.of(productType, LABEL, SphereTestUtils.randomSlug(), masterVariant).build();
             final Product product = execute(ProductCreateCommand.of(productDraft));
             testSingleAndSet(AttributeAccess.ofProductReference(), AttributeAccess.ofProductReferenceSet(),
-                    asSet(product.toReference().filled(Optional.<Product>empty())),
+                    asSet(product.toReference().filled(null)),
                     ReferenceType.ofProduct(),
                     AttributeDefinitionBuilder.of("productReference", LABEL, ReferenceType.ofProduct()).build());
         });
@@ -187,8 +187,8 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     @Test
     public void queryByName() throws Exception {
         withTShirtProductType(type -> {
-            ProductType productType = execute(ProductTypeQuery.of().byName("t-shirt")).head().get();
-            Optional<AttributeDefinition> sizeAttribute = productType.getAttribute("size");
+            final ProductType productType = execute(ProductTypeQuery.of().byName("t-shirt")).head().get();
+            final Optional<AttributeDefinition> sizeAttribute = productType.findAttribute("size");
             final List<PlainEnumValue> possibleSizeValues = sizeAttribute.
                     map(attrib -> ((EnumType) attrib.getAttributeType()).getValues()).
                     orElse(Collections.<PlainEnumValue>emptyList());
@@ -201,7 +201,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     @Test
     public void queryByAttributeType() throws Exception {
         final String attributeTypeName = "enum";
-        final Query<ProductType> queryForEnum = ProductTypeQuery.of().withPredicate(hasAttributeType(attributeTypeName));
+        final Query<ProductType> queryForEnum = ProductTypeQuery.of().withPredicates(hasAttributeType(attributeTypeName));
         withDistractorProductType(x -> {//contains no enum attribute, so it should not be included in the result
             withTShirtProductType(y -> {
                 final java.util.function.Predicate<ProductType> containsEnumAttr = productType -> productType.getAttributes().stream().anyMatch(attr -> attr.getName().equals(attributeTypeName));
@@ -310,13 +310,13 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(namedAttributeAccess.draftOf(exampleValue)).build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = execute(ProductCreateCommand.of(productDraft));
-        final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().getAttribute(namedAttributeAccess).get();
+        final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().findAttribute(namedAttributeAccess).get();
 
         assertThat(exampleValue).isEqualTo(actualAttributeValue);
 
-        final Boolean found = AttributeExtraction.<Boolean>of(fetchedAttributeDefinition, product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeName).get())
+        final Boolean found = AttributeExtraction.<Boolean>of(fetchedAttributeDefinition, product.getMasterData().getStaged().getMasterVariant().getAttribute(attributeName))
                 .ifIs(access, x -> true)
-                .getValue().orElse(false);
+                .findValue().orElse(false);
         assertThat(found).overridingErrorMessage("the attribute type should be recognized").isTrue();
 
         execute(ProductDeleteCommand.of(product));
@@ -375,6 +375,6 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     protected void cleanUpByName(final List<String> names) {
-        execute(ProductTypeQuery.of().withPredicate(ProductTypeQueryModel.of().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
+        execute(ProductTypeQuery.of().withPredicates(ProductTypeQueryModel.of().name().isIn(names))).getResults().forEach(item -> ProductFixtures.deleteProductsAndProductType(client(), item));
     }
 }

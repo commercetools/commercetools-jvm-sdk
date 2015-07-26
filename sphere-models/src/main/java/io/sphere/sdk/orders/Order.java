@@ -8,10 +8,10 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @JsonDeserialize(as=OrderImpl.class)
@@ -34,17 +34,21 @@ public interface Order extends CartLike<Order> {
         return Reference.of(typeId(), getId(), this);
     }
 
-    Optional<String> getOrderNumber();
+    @Nullable
+    String getOrderNumber();
 
     InventoryMode getInventoryMode();
 
     OrderState getOrderState();
 
-    Optional<ShipmentState> getShipmentState();
+    @Nullable
+    ShipmentState getShipmentState();
 
-    Optional<PaymentState> getPaymentState();
+    @Nullable
+    PaymentState getPaymentState();
 
-    Optional<OrderShippingInfo> getShippingInfo();
+    @Nullable
+    OrderShippingInfo getShippingInfo();
 
     Set<SyncInfo> getSyncInfo();
 
@@ -53,19 +57,24 @@ public interface Order extends CartLike<Order> {
     long getLastMessageSequenceNumber();
 
     @Override
-    Optional<Address> getBillingAddress();
+    @Nullable
+    Address getBillingAddress();
 
     @Override
-    Optional<CountryCode> getCountry();
+    @Nullable
+    CountryCode getCountry();
 
     @Override
-    Optional<String> getCustomerEmail();
+    @Nullable
+    String getCustomerEmail();
 
     @Override
-    Optional<Reference<CustomerGroup>> getCustomerGroup();
+    @Nullable
+    Reference<CustomerGroup> getCustomerGroup();
 
     @Override
-    Optional<String> getCustomerId();
+    @Nullable
+    String getCustomerId();
 
     @Override
     List<CustomLineItem> getCustomLineItems();
@@ -74,13 +83,15 @@ public interface Order extends CartLike<Order> {
     List<LineItem> getLineItems();
 
     @Override
-    Optional<Address> getShippingAddress();
+    @Nullable
+    Address getShippingAddress();
 
     @Override
-    Optional<TaxedPrice> getTaxedPrice();
+    @Nullable
+    TaxedPrice getTaxedPrice();
 
     @Override
     MonetaryAmount getTotalPrice();
 
-    Optional<ZonedDateTime> getCompletedAt();
+    ZonedDateTime getCompletedAt();
 }

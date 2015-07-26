@@ -74,7 +74,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                     .findFirst()
                     .get();
 
-            assertThat(actualPrice.withId(Optional.empty())).isEqualTo(expectedPrice);
+            assertThat(actualPrice.withId(null)).isEqualTo(expectedPrice);
             return updatedProduct;
         });
     }
@@ -186,7 +186,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription, STAGED_AND_CURRENT));
             final Product updatedProduct = execute(cmd);
 
-            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).contains(newDescription);
+            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
             return updatedProduct;
         });
     }
@@ -200,7 +200,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
 
-            assertThat(updatedProduct.getMasterData().getStaged().getMetaKeywords()).contains(metaKeywords);
+            assertThat(updatedProduct.getMasterData().getStaged().getMetaKeywords()).isEqualTo(metaKeywords);
 
             return updatedProduct;
         });
@@ -215,7 +215,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
 
-            assertThat(updatedProduct.getMasterData().getStaged().getMetaDescription()).contains(metaDescription);
+            assertThat(updatedProduct.getMasterData().getStaged().getMetaDescription()).isEqualTo(metaDescription);
 
             return updatedProduct;
         });
@@ -230,7 +230,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
 
-            assertThat(updatedProduct.getMasterData().getStaged().getMetaTitle()).contains(metaTitle);
+            assertThat(updatedProduct.getMasterData().getStaged().getMetaTitle()).isEqualTo(metaTitle);
 
             return updatedProduct;
         });
@@ -270,20 +270,20 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final LocalizedEnumValue oldValueForColor = Colors.GREEN;
             final LocalizedEnumValue newValueForColor = Colors.RED;
 
-            assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isEmpty();
-            assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).contains(oldValueForColor);
+            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
+            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(oldValueForColor);
 
             final SetAttribute moneyUpdate = SetAttribute.of(MASTER_VARIANT_ID, moneyAttribute, newValueForMoney, STAGED_AND_CURRENT);
             final SetAttribute localizedEnumUpdate = SetAttribute.of(MASTER_VARIANT_ID, colorAttribute, newValueForColor, STAGED_AND_CURRENT);
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
-            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).contains(newValueForMoney);
-            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).contains(newValueForColor);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
 
             final SetAttribute unsetAction = SetAttribute.ofUnsetAttribute(MASTER_VARIANT_ID, moneyAttribute, STAGED_AND_CURRENT);
             final Product productWithoutMoney = client().execute(ProductUpdateCommand.of(updatedProduct, unsetAction));
 
-            assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isEmpty();
+            assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
 
             return productWithoutMoney;
         });
@@ -304,20 +304,20 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final LocalizedEnumValue oldValueForColor = Colors.GREEN;
             final LocalizedEnumValue newValueForColor = Colors.RED;
 
-            assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isEmpty();
-            assertThat(product.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).contains(oldValueForColor);
+            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
+            assertThat(product.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(oldValueForColor);
 
             final SetAttributeInAllVariants moneyUpdate = SetAttributeInAllVariants.of(moneyAttribute, newValueForMoney, STAGED_AND_CURRENT);
             final SetAttributeInAllVariants localizedEnumUpdate = SetAttributeInAllVariants.of(colorAttribute, newValueForColor, STAGED_AND_CURRENT);
 
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, asList(moneyUpdate, localizedEnumUpdate)));
-            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).contains(newValueForMoney);
-            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getAttribute(colorAttribute)).contains(newValueForColor);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).contains(newValueForMoney);
+            assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().findAttribute(colorAttribute)).contains(newValueForColor);
 
             final SetAttributeInAllVariants unsetAction = SetAttributeInAllVariants.ofUnsetAttribute(moneyAttribute, STAGED_AND_CURRENT);
             final Product productWithoutMoney = client().execute(ProductUpdateCommand.of(updatedProduct, unsetAction));
 
-            assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().getAttribute(moneyAttribute)).isEmpty();
+            assertThat(productWithoutMoney.getMasterData().getStaged().getMasterVariant().findAttribute(moneyAttribute)).isEmpty();
 
             return productWithoutMoney;
         });
@@ -327,17 +327,17 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     public void revertStagedChanges() throws Exception {
         withUpdateableProduct(client(), product -> {
             //changing only staged and not current
-            final Optional<LocalizedStrings> oldDescriptionOption = product.getMasterData().getStaged().getDescription();
+            final LocalizedStrings oldDescriptionOption = product.getMasterData().getStaged().getDescription();
             final LocalizedStrings newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription, ONLY_STAGED)));
             final Product updatedProduct = execute(cmd);
-            assertThat(oldDescriptionOption).isNotEqualTo(Optional.of(newDescription));
-            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).contains(newDescription);
-            assertThat(updatedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
+            assertThat(oldDescriptionOption).isNotEqualTo(newDescription);
+            assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
+            assertThat(updatedProduct.getMasterData().getCurrent().getDescription()).isEqualTo(oldDescriptionOption);
 
             final Product revertedProduct = execute(ProductUpdateCommand.of(updatedProduct, RevertStagedChanges.of()));
             assertThat(revertedProduct.getMasterData().getStaged().getDescription()).isEqualTo(oldDescriptionOption);
-            assertThat(revertedProduct.getMasterData().getCurrent().get().getDescription()).isEqualTo(oldDescriptionOption);
+            assertThat(revertedProduct.getMasterData().getCurrent().getDescription()).isEqualTo(oldDescriptionOption);
 
             return revertedProduct;
         });
@@ -347,10 +347,10 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     public void setTaxCategory() throws Exception {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
             withUpdateableProduct(client(), product -> {
-                assertThat(product.getTaxCategory()).isNotEqualTo(Optional.of(taxCategory));
+                assertThat(product.getTaxCategory()).isNotEqualTo(taxCategory);
                 final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory));
                 final Product updatedProduct = execute(command);
-                assertThat(updatedProduct.getTaxCategory()).contains(taxCategory.toReference());
+                assertThat(updatedProduct.getTaxCategory()).isEqualTo(taxCategory.toReference());
                 return updatedProduct;
             })
         );
@@ -389,16 +389,15 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final Price price = PRICE;
             final List<Price> prices = asList(price);
             final List<AttributeDraft> attributeValues = asList(moneyAttributeValue, colorAttributeValue, sizeValue);
-            final Optional<String> sku = Optional.of(randomKey());
             final ProductUpdateCommand addVariantCommand =
-                    ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, sku, STAGED_AND_CURRENT));
+                    ProductUpdateCommand.of(product, AddVariant.of(attributeValues, prices, randomKey(), STAGED_AND_CURRENT));
 
             final Product productWithVariant = client().execute(addVariantCommand);
             final ProductVariant variant = productWithVariant.getMasterData().getStaged().getVariants().get(0);
             assertThat(variant.getId()).isEqualTo(2);
-            assertThat(variant.getAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
-            assertThat(variant.getAttribute(colorAttribute).get()).isEqualTo(color);
-            assertThat(variant.getAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
+            assertThat(variant.findAttribute(moneyAttribute).get()).isEqualTo(EURO_10);
+            assertThat(variant.findAttribute(colorAttribute).get()).isEqualTo(color);
+            assertThat(variant.findAttribute(sizeAttribute).get()).isEqualTo(Sizes.M);
 
             final Product productWithoutVariant = client().execute(ProductUpdateCommand.of(productWithVariant, RemoveVariant.of(variant, STAGED_AND_CURRENT)));
             assertThat(productWithoutVariant.getMasterData().getStaged().getVariants()).isEmpty();

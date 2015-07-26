@@ -19,7 +19,7 @@ class NestedSetAttributeMapperImpl extends AttributeMapperImpl<Set<AttributeCont
     @Override
     public Set<AttributeContainer> deserialize(JsonNode value) {
         try {
-            final Set<List<Attribute>> raw = mapper().reader(new TypeReference<Set<List<Attribute>>>() {}).readValue(value);
+            final Set<List<Attribute>> raw = mapper().readerFor(new TypeReference<Set<List<Attribute>>>() {}).readValue(value);
 
             return raw.stream().map(AttributeContainer::of).collect(toSet());
         } catch (final IOException e) {

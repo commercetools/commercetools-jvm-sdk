@@ -1,12 +1,12 @@
 package io.sphere.sdk.categories;
 
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 abstract class CategoryWrapper extends Base implements Category {
@@ -46,8 +46,9 @@ abstract class CategoryWrapper extends Base implements Category {
         return delegate.getSlug();
     }
 
+    @Nullable
     @Override
-    public Optional<LocalizedStrings> getDescription() {
+    public LocalizedStrings getDescription() {
         return delegate.getDescription();
     }
 
@@ -56,19 +57,21 @@ abstract class CategoryWrapper extends Base implements Category {
         return delegate.getAncestors();
     }
 
+    @Nullable
     @Override
-    public Optional<Reference<Category>> getParent() {
+    public Reference<Category> getParent() {
         return delegate.getParent();
     }
 
+    @Nullable
     @Override
-    public Optional<String> getOrderHint() {
+    public String getOrderHint() {
         return delegate.getOrderHint();
     }
 
-
+    @Nullable
     @Override
-    public Optional<String> getExternalId() {
+    public String getExternalId() {
         return delegate.getExternalId();
     }
 
@@ -77,18 +80,21 @@ abstract class CategoryWrapper extends Base implements Category {
         return Category.toString(this);
     }
 
+    @Nullable
     @Override
-    public Optional<LocalizedStrings> getMetaDescription() {
+    public LocalizedStrings getMetaDescription() {
         return delegate.getMetaDescription();
     }
 
+    @Nullable
     @Override
-    public Optional<LocalizedStrings> getMetaKeywords() {
+    public LocalizedStrings getMetaKeywords() {
         return delegate.getMetaKeywords();
     }
 
+    @Nullable
     @Override
-    public Optional<LocalizedStrings> getMetaTitle() {
+    public LocalizedStrings getMetaTitle() {
         return delegate.getMetaTitle();
     }
 }

@@ -44,7 +44,7 @@ public class CustomerQueryTest extends IntegrationTest {
             final Query<Customer> query = CustomerQuery.of()
                     .byEmail(customer.getEmail())
                     .withExpansionPaths(CustomerExpansionModel.of().customerGroup());
-            final String actualCustomerGroupId = execute(query).head().get().getCustomerGroup().get().getObj().get().getId();
+            final String actualCustomerGroupId = execute(query).head().get().getCustomerGroup().getObj().getId();
             assertThat(actualCustomerGroupId).isEqualTo(customerGroup.getId());
         });
 
@@ -73,12 +73,12 @@ public class CustomerQueryTest extends IntegrationTest {
 
     @Test
     public void defaultShippingAddressId() throws Exception {
-        check((model) -> model.defaultShippingAddressId().is(customer.getDefaultShippingAddressId().get()));
+        check((model) -> model.defaultShippingAddressId().is(customer.getDefaultShippingAddressId()));
     }
 
     @Test
     public void defaultBillingAddressId() throws Exception {
-        check((model) -> model.defaultBillingAddressId().is(customer.getDefaultBillingAddressId().get()));
+        check((model) -> model.defaultBillingAddressId().is(customer.getDefaultBillingAddressId()));
     }
 
     @Ignore("see https://github.com/sphereio/sphere-jvm-sdk/issues/273")
@@ -88,12 +88,12 @@ public class CustomerQueryTest extends IntegrationTest {
 
     @Test
     public void externalId() throws Exception {
-        check((model) -> model.externalId().is(customer.getExternalId().get()));
+        check((model) -> model.externalId().is(customer.getExternalId()));
     }
 
     @Test
     public void customerGroup() throws Exception {
-        check((model) -> model.customerGroup().is(customer.getCustomerGroup().get()), false);
+        check((model) -> model.customerGroup().is(customer.getCustomerGroup()), false);
     }
 
     private void check(final Function<CustomerQueryModel, QueryPredicate<Customer>> f) {
@@ -103,7 +103,7 @@ public class CustomerQueryTest extends IntegrationTest {
     private void check(final Function<CustomerQueryModel, QueryPredicate<Customer>> f, final boolean checkDistraction) {
         final CustomerQueryModel model = CustomerQueryModel.of();
         final QueryPredicate<Customer> predicate = f.apply(model);
-        final Query<Customer> query = CustomerQuery.of().withPredicate(predicate).withSort(model.createdAt().sort().desc());
+        final Query<Customer> query = CustomerQuery.of().withPredicates(predicate).withSort(model.createdAt().sort().desc());
         final List<Customer> results = execute(query).getResults();
         final List<String> ids = results.stream().map(x -> x.getId()).collect(toList());
         assertThat(ids).contains(customer.getId());

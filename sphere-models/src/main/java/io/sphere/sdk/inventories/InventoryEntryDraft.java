@@ -5,17 +5,21 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
 public class InventoryEntryDraft extends Base {
     private final String sku;
     private final long quantityOnStock;
-    private final Optional<Integer> restockableInDays;
-    private final Optional<ZonedDateTime> expectedDelivery;
-    private final Optional<Reference<Channel>> supplyChannel;
+    @Nullable
+    private final Integer restockableInDays;
+    @Nullable
+    private final ZonedDateTime expectedDelivery;
+    @Nullable 
+    private final Reference<Channel> supplyChannel;
 
-    private InventoryEntryDraft(final String sku, final long quantityOnStock, final Optional<ZonedDateTime> expectedDelivery, final Optional<Integer> restockableInDays, final Optional<Reference<Channel>> supplyChannel) {
+    private InventoryEntryDraft(final String sku, final long quantityOnStock, final ZonedDateTime expectedDelivery, final Integer restockableInDays, final Reference<Channel> supplyChannel) {
         this.expectedDelivery = expectedDelivery;
         this.sku = sku;
         this.quantityOnStock = quantityOnStock;
@@ -23,35 +27,39 @@ public class InventoryEntryDraft extends Base {
         this.supplyChannel = supplyChannel;
     }
 
-    public InventoryEntryDraft withExpectedDelivery(final ZonedDateTime expectedDelivery) {
-        return of(sku, quantityOnStock, Optional.of(expectedDelivery), restockableInDays, supplyChannel);
+    public InventoryEntryDraft withExpectedDelivery(@Nullable final ZonedDateTime expectedDelivery) {
+        return of(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel);
     }
 
-    public InventoryEntryDraft withSupplyChannel(final Referenceable<Channel> supplyChannel) {
-        return of(sku, quantityOnStock, expectedDelivery, restockableInDays, Optional.of(supplyChannel.toReference()));
+    public InventoryEntryDraft withSupplyChannel(@Nullable final Referenceable<Channel> supplyChannel) {
+        final Reference<Channel> channelReference = Optional.ofNullable(supplyChannel).map(x -> x.toReference()).orElse(null);
+        return of(sku, quantityOnStock, expectedDelivery, restockableInDays, channelReference);
     }
 
-    public InventoryEntryDraft withRestockableInDays(final int restockableInDays) {
-        return of(sku, quantityOnStock, expectedDelivery, Optional.of(restockableInDays), supplyChannel);
+    public InventoryEntryDraft withRestockableInDays(@Nullable final Integer restockableInDays) {
+        return of(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel);
     }
 
     public static InventoryEntryDraft of(final String sku, final long quantityOnStock) {
-        return of(sku, quantityOnStock, Optional.empty(), Optional.empty(), Optional.empty());
+        return of(sku, quantityOnStock, null, null, null);
     }
 
-    public static InventoryEntryDraft of(final String sku, final long quantityOnStock, final Optional<ZonedDateTime> expectedDelivery, final Optional<Integer> restockableInDays, final Optional<Reference<Channel>> supplyChannel) {
+    public static InventoryEntryDraft of(final String sku, final long quantityOnStock, final ZonedDateTime expectedDelivery, final Integer restockableInDays, final Reference<Channel> supplyChannel) {
         return new InventoryEntryDraft(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel);
     }
 
-    public Optional<ZonedDateTime> getExpectedDelivery() {
+    @Nullable
+    public ZonedDateTime getExpectedDelivery() {
         return expectedDelivery;
     }
 
-    public long getQuantityOnStock() {
+    @Nullable
+    public Long getQuantityOnStock() {
         return quantityOnStock;
     }
 
-    public Optional<Integer> getRestockableInDays() {
+    @Nullable
+    public Integer getRestockableInDays() {
         return restockableInDays;
     }
 
@@ -59,7 +67,8 @@ public class InventoryEntryDraft extends Base {
         return sku;
     }
 
-    public Optional<Reference<Channel>> getSupplyChannel() {
+    @Nullable
+    public Reference<Channel> getSupplyChannel() {
         return supplyChannel;
     }
 }

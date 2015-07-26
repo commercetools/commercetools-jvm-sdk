@@ -3,11 +3,9 @@ package io.sphere.sdk.carts.expansion;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 
-import java.util.Optional;
-
 public abstract class CartLikeExpansionModel<T> extends ExpansionModel<T> {
-    protected CartLikeExpansionModel(final Optional<String> parentPath, final String path) {
-        super(parentPath, Optional.of(path));
+    protected CartLikeExpansionModel(final String parentPath, final String path) {
+        super(parentPath, path);
     }
 
     protected CartLikeExpansionModel() {
@@ -27,14 +25,14 @@ public abstract class CartLikeExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public LineItemExpansionModel<T> lineItems() {
-        return new LineItemExpansionModel<>(pathExpressionOption(), "lineItems[*]");
+        return new LineItemExpansionModel<>(pathExpression(), "lineItems[*]");
     }
 
     public LineItemExpansionModel<T> lineItems(final int index) {
-        return new LineItemExpansionModel<>(pathExpressionOption(), "lineItems[" + index + "]");
+        return new LineItemExpansionModel<>(pathExpression(), "lineItems[" + index + "]");
     }
 
     private DiscountCodeInfoExpansionModel<T> discountCodes(final String s) {
-        return new DiscountCodeInfoExpansionModel<>(pathExpressionOption(), "discountCodes[" + s + "]");
+        return new DiscountCodeInfoExpansionModel<>(pathExpression(), "discountCodes[" + s + "]");
     }
 }

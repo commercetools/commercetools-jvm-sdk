@@ -16,7 +16,7 @@ class NestedAttributeMapperImpl extends AttributeMapperImpl<AttributeContainer> 
     @Override
     public AttributeContainer deserialize(JsonNode value) {
         try {
-            return  AttributeContainer.of(mapper().reader(new TypeReference<List<Attribute>>() {}).readValue(value));
+            return  AttributeContainer.of(mapper().readerFor(new TypeReference<List<Attribute>>() {}).readValue(value));
         } catch (final IOException e) {
             throw new JsonException(e);
         }

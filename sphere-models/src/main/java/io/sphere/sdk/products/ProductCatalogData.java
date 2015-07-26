@@ -2,7 +2,7 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 
@@ -23,11 +23,13 @@ public interface ProductCatalogData {
      *
      * @return The current product data if present.
      */
-    Optional<ProductData> getCurrent();
+    @Nullable
+    ProductData getCurrent();
 
     ProductData getStaged();
 
-    default Optional<ProductData> get(final ProductProjectionType productProjectionType) {
-        return productProjectionType == CURRENT ? getCurrent() : Optional.of(getStaged());
+    @Nullable
+    default ProductData get(final ProductProjectionType productProjectionType) {
+        return productProjectionType == CURRENT ? getCurrent() : getStaged();
     }
 }

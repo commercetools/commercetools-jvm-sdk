@@ -5,21 +5,24 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.http.HttpQueryParameter;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.Function;
 
 import static java.util.Arrays.asList;
 
 final class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
-    private Optional<SearchText> text;
+    @Nullable
+    private SearchText text;
     private List<FacetExpression<T>> facets;
     private List<FilterExpression<T>> filterResults;
     private List<FilterExpression<T>> filterQueries;
     private List<FilterExpression<T>> filterFacets;
     private List<SearchSort<T>> sort;
-    private Optional<Long> limit;
-    private Optional<Long> offset;
+    @Nullable
+    private Long limit;
+    @Nullable
+    private Long offset;
     private List<HttpQueryParameter> additionalQueryParameters;
     private final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     private final String endpoint;
@@ -48,7 +51,7 @@ final class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
                 sort, limit, offset, additionalQueryParameters, resultMapper);
     }
 
-    public Builder<SearchDsl<T>> text(final Optional<SearchText> text) {
+    public Builder<SearchDsl<T>> text(final SearchText text) {
         this.text = text;
         return this;
     }
@@ -82,12 +85,12 @@ final class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
         return this;
     }
 
-    public Builder<SearchDsl<T>> limit(final Optional<Long> limit) {
+    public Builder<SearchDsl<T>> limit(final Long limit) {
         this.limit = limit;
         return this;
     }
 
-    public Builder<SearchDsl<T>> offset(final Optional<Long> offset) {
+    public Builder<SearchDsl<T>> offset(final Long offset) {
              this.offset = offset;
              return this;
     }

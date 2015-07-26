@@ -92,8 +92,8 @@ public class CartFixtures {
             final CartDiscountDraft draft = CartDiscountFixtures.newCartDiscountDraftBuilder()
                     .cartPredicate(CartPredicate.of(format("customer.id = \"%s\"", customer.getId())))
                     .isActive(true)
-                    .validFrom(Optional.<ZonedDateTime>empty())
-                    .validUntil(Optional.<ZonedDateTime>empty())
+                    .validFrom(null)
+                    .validUntil(null)
                     .build();
             final CartDiscount cartDiscount = client.execute(CartDiscountCreateCommand.of(draft));
             final DiscountCode discountCode = client.execute(DiscountCodeCreateCommand.of(DiscountCodeDraft.of(randomKey(), cartDiscount)));

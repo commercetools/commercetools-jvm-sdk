@@ -1,7 +1,6 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.http.HttpQueryParameter;
 
 import java.util.List;
 import java.util.function.Function;
@@ -15,20 +14,33 @@ import java.util.function.Function;
  */
 public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends EntityQuery<T>, QueryDsl<T, C>,  MetaModelExpansionDsl<T, C, E> {
 
-    C withPredicate(final QueryPredicate<T> predicate);
+    @Override
+    C withPredicates(final QueryPredicate<T> queryPredicates);
 
-    C withPredicate(final Function<Q, QueryPredicate<T>> m);
+    @Override
+    C plusPredicates(final QueryPredicate<T> queryPredicates);
 
+    @Override
+    C withPredicates(final List<QueryPredicate<T>> queryPredicates);
+
+    C withPredicates(final Function<Q, QueryPredicate<T>> m);
+
+    C plusPredicates(final Function<Q, QueryPredicate<T>> m);
+
+    @Override
     C withSort(final List<QuerySort<T>> sort);
 
+    @Override
     C withSort(final QuerySort<T> sort);
 
     C withSort(final Function<Q, QuerySort<T>> m);
 
     C withSortMulti(final Function<Q, List<QuerySort<T>>> m);
 
+    @Override
     C withLimit(final long limit);
 
+    @Override
     C withOffset(final long offset);
 
     @Override

@@ -1,21 +1,21 @@
 package io.sphere.sdk.search;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class BooleanSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements TermModel<T, Boolean>, SearchSortingModel<T, S> {
 
-    public BooleanSearchModel(final Optional<? extends SearchModel<T>> parent, final String pathSegment) {
+    public BooleanSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     @Override
     public FilterSearchModel<T, Boolean> filterBy() {
-        return new FilterSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofBoolean());
+        return new FilterSearchModel<>(this, null, TypeSerializer.ofBoolean());
     }
 
     @Override
     public FacetSearchModel<T, Boolean> facetOf() {
-        return new FacetSearchModel<>(Optional.of(this), Optional.empty(), TypeSerializer.ofBoolean());
+        return new FacetSearchModel<>(this, null, TypeSerializer.ofBoolean());
     }
 
     /**
@@ -24,7 +24,7 @@ public class BooleanSearchModel<T, S extends SearchSortDirection> extends Search
      * DESC: True, False
      */
     @Override
-    public SearchSort<T> sort(S sortDirection) {
+    public SearchSort<T> sort(final S sortDirection) {
         return new SphereSearchSort<>(this, sortDirection);
     }
 }

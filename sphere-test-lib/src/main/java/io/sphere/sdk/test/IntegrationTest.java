@@ -85,8 +85,7 @@ public abstract class IntegrationTest {
     }
 
     protected static <T> T getOrCreate(final SphereRequest<T> createCommand, final Query<T> query) {
-        final Optional<T> resultOption = execute(query).head();
-        return resultOption.orElseGet(() -> execute(createCommand));
+        return execute(query).head().orElseGet(() -> execute(createCommand));
     }
 
     protected static int countThreads() {

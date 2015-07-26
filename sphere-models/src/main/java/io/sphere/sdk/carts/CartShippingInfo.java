@@ -8,8 +8,8 @@ import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
-import java.util.Optional;
 
 public class CartShippingInfo extends Base {
     private final String shippingMethodName;
@@ -17,10 +17,11 @@ public class CartShippingInfo extends Base {
     private final ShippingRate shippingRate;
     private final TaxRate taxRate;
     private final Reference<TaxCategory> taxCategory;
-    private final Optional<Reference<ShippingMethod>> shippingMethod;
+    @Nullable
+    private final Reference<ShippingMethod> shippingMethod;
 
     @JsonCreator
-    protected CartShippingInfo(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Optional<Reference<ShippingMethod>> shippingMethod) {
+    protected CartShippingInfo(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Reference<ShippingMethod> shippingMethod) {
         this.shippingMethodName = shippingMethodName;
         this.price = price;
         this.shippingRate = shippingRate;
@@ -29,7 +30,7 @@ public class CartShippingInfo extends Base {
         this.shippingMethod = shippingMethod;
     }
 
-    public static CartShippingInfo of(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Optional<Reference<ShippingMethod>> shippingMethod) {
+    public static CartShippingInfo of(final String shippingMethodName, final MonetaryAmount price, final ShippingRate shippingRate, final TaxRate taxRate, final Reference<TaxCategory> taxCategory, final Reference<ShippingMethod> shippingMethod) {
         return new CartShippingInfo(shippingMethodName, price, shippingRate, taxRate, taxCategory, shippingMethod);
     }
 
@@ -53,7 +54,8 @@ public class CartShippingInfo extends Base {
         return taxCategory;
     }
 
-    public Optional<Reference<ShippingMethod>> getShippingMethod() {
+    @Nullable
+    public Reference<ShippingMethod> getShippingMethod() {
         return shippingMethod;
     }
 }

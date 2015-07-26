@@ -4,7 +4,7 @@ import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerName;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  * Changes customer's firstName, lastName, middleName and title fields.
@@ -14,10 +14,12 @@ import java.util.Optional;
 public class ChangeName extends UpdateAction<Customer> {
     private final String firstName;
     private final String lastName;
-    private final Optional<String> middleName;
-    private final Optional<String> title;
+    @Nullable
+    private final String middleName;
+    @Nullable
+    private final String title;
 
-    private ChangeName(final String firstName, final String lastName, final Optional<String> middleName, final Optional<String> title) {
+    private ChangeName(final String firstName, final String lastName, final String middleName, final String title) {
         super("changeName");
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,11 +39,13 @@ public class ChangeName extends UpdateAction<Customer> {
         return lastName;
     }
 
-    public Optional<String> getMiddleName() {
+    @Nullable
+    public String getMiddleName() {
         return middleName;
     }
 
-    public Optional<String> getTitle() {
+    @Nullable
+    public String getTitle() {
         return title;
     }
 }

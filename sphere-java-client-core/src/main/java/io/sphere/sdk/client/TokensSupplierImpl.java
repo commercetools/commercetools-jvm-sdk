@@ -54,7 +54,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
 
     private void logTokenResult(final Tokens nullableTokens, final Throwable nullableThrowable) {
         if (nullableTokens != null) {
-            AUTH_LOGGER.debug(() -> "Successfully fetched token that expires in " + nullableTokens.getExpiresIn().map(x -> x.toString()).orElse("an unknown time") + ".");
+            AUTH_LOGGER.debug(() -> "Successfully fetched token that expires in " + Optional.ofNullable(nullableTokens.getExpiresIn()).map(x -> x.toString()).orElse("an unknown time") + ".");
         } else {
             AUTH_LOGGER.error(() -> "Failed to fetch token.", nullableThrowable);
         }
@@ -78,7 +78,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                 .plus(HttpHeaders.USER_AGENT, BuildInfo.userAgent())
                 .plus(HttpHeaders.CONTENT_TYPE, "application/x-www-form-urlencoded");
         final FormUrlEncodedHttpRequestBody body = FormUrlEncodedHttpRequestBody.of(MapUtils.mapOf("grant_type", "client_credentials", "scope", format("manage_project:%s", config.getProjectKey())));
-        return HttpRequest.of(POST, config.getAuthUrl() + "/oauth/token", httpHeaders, Optional.of(body));
+        return HttpRequest.of(POST, config.getAuthUrl() + "/oauth/token", httpHeaders, body);
     }
 
     /** Parses Tokens from a response from the backend authorization service.
@@ -87,10 +87,10 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
      */
     private Tokens parseResponse(final HttpResponse httpResponse, final HttpRequest httpRequest) {
         try {
-            if (httpResponse.getStatusCode() == 401 && httpResponse.getResponseBody().isPresent()) {
+            if (httpResponse.getStatusCode() == 401 && httpResponse.getResponseBody() != null) {
                 ClientErrorException exception = new UnauthorizedException(httpResponse.toString());
                 try {
-                    final JsonNode jsonNode = SphereJsonUtils.parse(httpResponse.getResponseBody().get());
+                    final JsonNode jsonNode = SphereJsonUtils.parse(httpResponse.getResponseBody());
                     final String error = jsonNode.get("error").asText();
                     if (error.equals("invalid_client")) {
                         exception = new InvalidClientCredentialsException(config);
@@ -100,7 +100,7 @@ final class TokensSupplierImpl extends AutoCloseableService implements TokensSup
                 }
                 throw exception;
             }
-            return SphereJsonUtils.readObject(httpResponse.getResponseBody().get(), Tokens.typeReference());
+            return SphereJsonUtils.readObject(httpResponse.getResponseBody(), Tokens.typeReference());
         } catch (final SphereException exception) {
             exception.setProjectKey(config.getProjectKey());
             exception.setUnderlyingHttpResponse(httpResponse);

@@ -8,6 +8,7 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.search.SearchKeywords;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 
@@ -16,15 +17,16 @@ class ProductDataImpl extends Base implements ProductData {
 
     private final Set<Reference<Category>> categories;
 
-    private final Optional<LocalizedStrings> description;
+    @Nullable
+    private final LocalizedStrings description;
 
     private final LocalizedStrings slug;
-
-    private final Optional<LocalizedStrings> metaTitle;
-
-    private final Optional<LocalizedStrings> metaDescription;
-
-    private final Optional<LocalizedStrings> metaKeywords;
+    @Nullable
+    private final LocalizedStrings metaTitle;
+    @Nullable
+    private final LocalizedStrings metaDescription;
+    @Nullable
+    private final LocalizedStrings metaKeywords;
 
     private final ProductVariant masterVariant;
 
@@ -34,9 +36,9 @@ class ProductDataImpl extends Base implements ProductData {
 
     @JsonCreator
     ProductDataImpl(final LocalizedStrings name, final Set<Reference<Category>> categories,
-                    final Optional<LocalizedStrings> description, final LocalizedStrings slug,
-                    final Optional<LocalizedStrings> metaTitle, final Optional<LocalizedStrings> metaDescription,
-                    final Optional<LocalizedStrings> metaKeywords, final ProductVariant masterVariant,
+                    final LocalizedStrings description, final LocalizedStrings slug,
+                    final LocalizedStrings metaTitle, final LocalizedStrings metaDescription,
+                    final LocalizedStrings metaKeywords, final ProductVariant masterVariant,
                     final List<ProductVariant> variants, final SearchKeywords searchKeywords) {
         this.name = name;
         this.categories = categories;
@@ -58,7 +60,8 @@ class ProductDataImpl extends Base implements ProductData {
         return categories;
     }
 
-    public Optional<LocalizedStrings> getDescription() {
+    @Nullable
+    public LocalizedStrings getDescription() {
         return description;
     }
 
@@ -66,15 +69,18 @@ class ProductDataImpl extends Base implements ProductData {
         return slug;
     }
 
-    public Optional<LocalizedStrings> getMetaTitle() {
+    @Nullable
+    public LocalizedStrings getMetaTitle() {
         return metaTitle;
     }
 
-    public Optional<LocalizedStrings> getMetaDescription() {
+    @Nullable
+    public LocalizedStrings getMetaDescription() {
         return metaDescription;
     }
 
-    public Optional<LocalizedStrings> getMetaKeywords() {
+    @Nullable
+    public LocalizedStrings getMetaKeywords() {
         return metaKeywords;
     }
 

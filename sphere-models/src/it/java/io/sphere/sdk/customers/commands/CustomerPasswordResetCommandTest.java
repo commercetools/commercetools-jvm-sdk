@@ -19,7 +19,7 @@ public class CustomerPasswordResetCommandTest extends IntegrationTest {
             final String newPassword = "newPassword";
             final Customer updatedCustomer = execute(CustomerPasswordResetCommand.of(customer, token, newPassword));
 
-            final CustomerSignInResult signInResult = execute(CustomerSignInCommand.of(updatedCustomer.getEmail(), newPassword, Optional.empty()));
+            final CustomerSignInResult signInResult = execute(CustomerSignInCommand.of(updatedCustomer.getEmail(), newPassword, null));
             assertThat(signInResult.getCustomer().getId())
                     .overridingErrorMessage("customer can sign in with the new password")
                     .isEqualTo(customer.getId());

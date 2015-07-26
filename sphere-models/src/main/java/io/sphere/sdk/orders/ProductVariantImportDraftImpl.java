@@ -6,18 +6,24 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Image;
 import io.sphere.sdk.products.Price;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 final class ProductVariantImportDraftImpl extends Base implements ProductVariantImportDraft {
-    private final Optional<Integer> id;
-    private final Optional<String> sku;
-    private final Optional<String> productId;
-    private final Optional<List<Price>> prices;
-    private final Optional<List<AttributeImportDraft>> attributes;
-    private final Optional<List<Image>> images;
+    @Nullable
+    private final Integer id;
+    @Nullable
+    private final String sku;
+    @Nullable
+    private final String productId;
+    @Nullable
+    private final List<Price> prices;
+    @Nullable
+    private final List<AttributeImportDraft> attributes;
+    @Nullable
+    private final List<Image> images;
 
-    ProductVariantImportDraftImpl(final Optional<Integer> id, final Optional<String> sku, final Optional<List<Price>> prices, final Optional<List<Image>> images, final Optional<List<AttributeImportDraft>> attributes, final Optional<String> productId) {
+    ProductVariantImportDraftImpl(final Integer id, final String sku, final List<Price> prices, final List<Image> images, final List<AttributeImportDraft> attributes, final String productId) {
         this.attributes = attributes;
         this.id = id;
         this.sku = sku;
@@ -26,28 +32,33 @@ final class ProductVariantImportDraftImpl extends Base implements ProductVariant
         this.productId = productId;
     }
 
+    @Nullable
     @Override
-    public Optional<List<AttributeImportDraft>> getAttributes() {
+    public List<AttributeImportDraft> getAttributes() {
         return attributes;
     }
 
+    @Nullable
     @Override
-    public Optional<Integer> getId() {
+    public Integer getId() {
         return id;
     }
 
+    @Nullable
     @Override
-    public Optional<List<Image>> getImages() {
+    public List<Image> getImages() {
         return images;
     }
 
+    @Nullable
     @Override
-    public Optional<List<Price>> getPrices() {
+    public List<Price> getPrices() {
         return prices;
     }
 
+    @Nullable
     @Override
-    public Optional<String> getSku() {
+    public String getSku() {
         return sku;
     }
 
@@ -57,7 +68,8 @@ final class ProductVariantImportDraftImpl extends Base implements ProductVariant
      */
     @JsonIgnore
     @Override
-    public Optional<String> getProductId() {
+    @Nullable
+    public String getProductId() {
         return productId;
     }
 }

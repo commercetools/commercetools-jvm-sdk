@@ -5,16 +5,17 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.states.State;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 abstract class TransitionLineItemLikeState extends UpdateAction<Order> {
     protected final long quantity;
     protected final Reference<State> fromState;
     protected final Reference<State> toState;
-    protected final Optional<ZonedDateTime> actualTransitionDate;
+    @Nullable
+    protected final ZonedDateTime actualTransitionDate;
 
-    protected TransitionLineItemLikeState(final String action, final long quantity, final Optional<ZonedDateTime> actualTransitionDate, final Reference<State> toState, final Reference<State> fromState) {
+    protected TransitionLineItemLikeState(final String action, final long quantity, @Nullable final ZonedDateTime actualTransitionDate, final Reference<State> toState, final Reference<State> fromState) {
         super(action);
         this.quantity = quantity;
         this.actualTransitionDate = actualTransitionDate;
@@ -34,7 +35,8 @@ abstract class TransitionLineItemLikeState extends UpdateAction<Order> {
         return toState;
     }
 
-    public Optional<ZonedDateTime> getActualTransitionDate() {
+    @Nullable
+    public ZonedDateTime getActualTransitionDate() {
         return actualTransitionDate;
     }
 }

@@ -6,7 +6,6 @@ import io.sphere.sdk.models.LocalizedStrings;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscountDraft> {
     private LocalizedStrings name;
@@ -36,12 +35,8 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
         return new CartDiscountDraftBuilder(name, cartPredicate, value, target, sortOrder, requiresDiscountCode);
     }
 
-    public CartDiscountDraftBuilder description(final LocalizedStrings description) {
-        return description(Optional.of(description));
-    }
-    
-    public CartDiscountDraftBuilder description(final Optional<LocalizedStrings> description) {
-        this.description = description.orElse(null);
+    public CartDiscountDraftBuilder description(@Nullable final LocalizedStrings description) {
+        this.description = description;
         return this;
     }
 
@@ -70,22 +65,14 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
         return this;
     }
 
-    public CartDiscountDraftBuilder validFrom(final ZonedDateTime validFrom) {
-        return validFrom(Optional.of(validFrom));
-    }
-    
-    public CartDiscountDraftBuilder validFrom(final Optional<ZonedDateTime> validFrom) {
-        this.validFrom = validFrom.orElse(null);
+    public CartDiscountDraftBuilder validFrom(@Nullable final ZonedDateTime validFrom) {
+        this.validFrom = validFrom;
         return this;
     }
     
-    public CartDiscountDraftBuilder validUntil(final Optional<ZonedDateTime> validUntil) {
-        this.validUntil = validUntil.orElse(null);
+    public CartDiscountDraftBuilder validUntil(@Nullable final ZonedDateTime validUntil) {
+        this.validUntil = validUntil;
         return this;
-    }
-
-    public CartDiscountDraftBuilder validUntil(final ZonedDateTime validUntil) {
-        return validUntil(Optional.of(validUntil));
     }
 
     @Override

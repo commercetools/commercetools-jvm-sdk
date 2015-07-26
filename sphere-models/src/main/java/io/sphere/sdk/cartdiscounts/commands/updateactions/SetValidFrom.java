@@ -5,7 +5,6 @@ import io.sphere.sdk.commands.UpdateAction;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 /**
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#setValidFrom()}
@@ -14,20 +13,17 @@ public class SetValidFrom extends UpdateAction<CartDiscount> {
     @Nullable
     private final ZonedDateTime validFrom;
 
-    private SetValidFrom(final Optional<ZonedDateTime> validFrom) {
+    private SetValidFrom(@Nullable final ZonedDateTime validFrom) {
         super("setValidFrom");
-        this.validFrom = validFrom.orElse(null);
+        this.validFrom = validFrom;
     }
 
-    public static SetValidFrom of(final Optional<ZonedDateTime> validFrom) {
+    public static SetValidFrom of(@Nullable final ZonedDateTime validFrom) {
         return new SetValidFrom(validFrom);
     }
 
-    public static SetValidFrom of(final ZonedDateTime validFrom) {
-        return of(Optional.of(validFrom));
-    }
-
-    public Optional<ZonedDateTime> getValidFrom() {
-        return Optional.ofNullable(validFrom);
+    @Nullable
+    public ZonedDateTime getValidFrom() {
+        return validFrom;
     }
 }

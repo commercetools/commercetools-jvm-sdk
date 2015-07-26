@@ -31,7 +31,7 @@ public class CustomerChangePasswordCommandTest extends IntegrationTest {
                     .overridingErrorMessage("sign in works with new password")
                     .isTrue();
             try {
-                execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword, Optional.empty()));
+                execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword));
                 fail();
             } catch (final ErrorResponseException e) {
                 assertThat(e.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();
@@ -55,7 +55,7 @@ public class CustomerChangePasswordCommandTest extends IntegrationTest {
                     .overridingErrorMessage("sign in works with new password")
                     .isTrue();
             try {
-                execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword, Optional.empty()));
+                execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword));
                 fail();
             } catch (final ErrorResponseException e) {
                 assertThat(e.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();

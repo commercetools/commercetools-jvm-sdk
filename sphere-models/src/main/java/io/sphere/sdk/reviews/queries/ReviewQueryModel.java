@@ -5,15 +5,13 @@ import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQueryModel;
 import io.sphere.sdk.reviews.Review;
 
-import java.util.Optional;
-
 public class ReviewQueryModel extends DefaultModelQueryModelImpl<Review> {
-    private ReviewQueryModel(final Optional<? extends QueryModel<Review>> parent, final Optional<String> pathSegment) {
+    private ReviewQueryModel(final QueryModel<Review> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public static ReviewQueryModel of() {
-        return new ReviewQueryModel(Optional.<QueryModel<Review>>empty(), Optional.<String>empty());
+        return new ReviewQueryModel(null, null);
     }
 
     public StringQueryModel<Review> productId() {

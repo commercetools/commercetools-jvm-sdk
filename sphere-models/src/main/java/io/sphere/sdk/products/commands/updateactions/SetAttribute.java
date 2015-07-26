@@ -1,11 +1,11 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.ProductUpdateScope;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -17,9 +17,10 @@ import java.util.Optional;
 public class SetAttribute extends StageableProductUpdateAction {
     private final int variantId;
     private final String name;
-    private final Optional<JsonNode> value;
+    @Nullable
+    private final JsonNode value;
 
-    SetAttribute(final int variantId, final String name, final Optional<JsonNode> value, final ProductUpdateScope productUpdateScope) {
+    SetAttribute(final int variantId, final String name, final JsonNode value, final ProductUpdateScope productUpdateScope) {
         super("setAttribute", productUpdateScope);
         this.variantId = variantId;
         this.name = name;
@@ -34,7 +35,8 @@ public class SetAttribute extends StageableProductUpdateAction {
         return name;
     }
 
-    public Optional<JsonNode> getValue() {
+    @Nullable
+    public JsonNode getValue() {
         return value;
     }
 
@@ -47,7 +49,7 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @param productUpdateScope the scope where the attribute should be updated
      * @return update action
      */
-    public static SetAttribute of(final int variantId, final String name, final Optional<JsonNode> value, final ProductUpdateScope productUpdateScope) {
+    public static SetAttribute of(final int variantId, final String name, @Nullable final JsonNode value, final ProductUpdateScope productUpdateScope) {
         return new SetAttribute(variantId, name, value, productUpdateScope);
     }
 
@@ -60,7 +62,7 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @return update action
      */
     public static SetAttribute ofUnsetAttribute(final int variantId, final String name, final ProductUpdateScope productUpdateScope) {
-        return of(variantId, name, Optional.<JsonNode>empty(), productUpdateScope);
+        return of(variantId, name, null, productUpdateScope);
     }
 
 
@@ -74,7 +76,7 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @return update action
      */
     public static <T> SetAttribute ofUnsetAttribute(final int variantId, final NamedAttributeAccess<T> NamedAttributeAccess, final ProductUpdateScope productUpdateScope) {
-        return of(variantId, NamedAttributeAccess.getName(), Optional.<JsonNode>empty(), productUpdateScope);
+        return of(variantId, NamedAttributeAccess.getName(), null, productUpdateScope);
     }
 
     /**
@@ -86,7 +88,7 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @return update action
      */
     public static SetAttribute of(final int variantId, final AttributeDraft attribute, final ProductUpdateScope productUpdateScope) {
-        return of(variantId, attribute.getName(), Optional.of(attribute.getValue()), productUpdateScope);
+        return of(variantId, attribute.getName(), attribute.getValue(), productUpdateScope);
     }
 
     /**

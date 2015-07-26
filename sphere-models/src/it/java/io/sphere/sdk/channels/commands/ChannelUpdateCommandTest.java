@@ -31,7 +31,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
         withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
             final LocalizedStrings newName = randomSlug();
             final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeName.of(newName)));
-            assertThat(updatedChannel.getName()).contains(newName);
+            assertThat(updatedChannel.getName()).isEqualTo(newName);
             return updatedChannel;
         });
     }
@@ -41,7 +41,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
         withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
             final LocalizedStrings newDescription = randomSlug();
             final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
-            assertThat(updatedChannel.getDescription()).contains(newDescription);
+            assertThat(updatedChannel.getDescription()).isEqualTo(newDescription);
             return updatedChannel;
         });
     }

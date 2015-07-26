@@ -9,14 +9,17 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+import javax.annotation.Nullable;
+
 class ProductImpl extends DefaultModelImpl<Product> implements Product {
     private final Reference<ProductType> productType;
     private final ProductCatalogData masterData;
-    private final Optional<Reference<TaxCategory>> taxCategory;
+    @Nullable
+    private final Reference<TaxCategory> taxCategory;
 
     @JsonCreator
     ProductImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                final Reference<ProductType> productType, final ProductCatalogData masterData, final Optional<Reference<TaxCategory>> taxCategory) {
+                @Nullable final Reference<ProductType> productType, final ProductCatalogData masterData, final Reference<TaxCategory> taxCategory) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;
         this.masterData = masterData;
@@ -36,8 +39,9 @@ class ProductImpl extends DefaultModelImpl<Product> implements Product {
         return masterData;
     }
 
+    @Nullable
     @Override
-    public Optional<Reference<TaxCategory>> getTaxCategory() {
+    public Reference<TaxCategory> getTaxCategory() {
         return taxCategory;
     }
 }

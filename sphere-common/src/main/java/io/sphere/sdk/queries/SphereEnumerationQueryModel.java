@@ -2,10 +2,10 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.SphereEnumeration;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class SphereEnumerationQueryModel<T, E extends SphereEnumeration> extends QueryModelImpl<T> implements EqualityQueryModel<T, E> {
-    public SphereEnumerationQueryModel(final Optional<? extends QueryModel<T>> parent, final Optional<String> pathSegment) {
+    public SphereEnumerationQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

@@ -1,9 +1,9 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.expansion.ReferenceExpandeableDsl;
-import io.sphere.sdk.http.HttpQueryParameter;
 
 import java.util.List;
+
 import static java.util.Arrays.asList;
 
 /**
@@ -17,7 +17,11 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, R
      * @param predicate the new predicate
      * @return an EntityQuery with predicate
      */
-    C withPredicate(final QueryPredicate<T> predicate);
+    C withPredicates(final QueryPredicate<T> predicate);
+
+    C plusPredicates(final QueryPredicate<T> predicate);
+
+    C withPredicates(final List<QueryPredicate<T>> predicates);
 
     /**
      * Returns a query with the new sort as sort.

@@ -1,10 +1,7 @@
 package io.sphere.sdk.search;
 
-import io.sphere.sdk.http.HttpQueryParameter;
-
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 
 import static io.sphere.sdk.utils.ListUtils.listOf;
 
@@ -15,7 +12,7 @@ public interface SearchDsl<T> extends EntitySearch<T> {
      * @param text the new search text
      * @return an EntitySearch with text
      */
-    SearchDsl<T> withText(final Optional<SearchText> text);
+    SearchDsl<T> withText(final SearchText text);
 
     /**
      * Returns an EntitySearch with the new facet list as facets.
@@ -54,18 +51,9 @@ public interface SearchDsl<T> extends EntitySearch<T> {
 //     */
 //    SearchDsl<T> withSort(final List<SearchSort<T>> sort);
 
-    SearchDsl<T> withLimit(final long limit);
+    SearchDsl<T> withLimit(final Long limit);
 
-    SearchDsl<T> withOffset(final long offset);
-
-    /**
-     * Returns an EntitySearch with the new text as search text.
-     * @param text the new search text
-     * @return an EntitySearch with text
-     */
-    default SearchDsl<T> withText(final SearchText text) {
-        return withText(Optional.of(text));
-    }
+    SearchDsl<T> withOffset(final Long offset);
 
     default SearchDsl<T> withText(final Locale locale, final String text) {
         return withText(SearchText.of(locale, text));

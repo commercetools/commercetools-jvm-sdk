@@ -29,10 +29,10 @@ public class OrderQueryTest extends IntegrationTest {
         CustomerFixtures.withCustomerInGroup(client(), (customer, customerGroup) -> {
             withOrder(client(), customer, order -> {
                 final Order queriedOrder = execute(OrderQuery.of()
-                                .withPredicate(m -> m.id().is(order.getId()).and(m.customerGroup().is(customerGroup)))
+                                .withPredicates(m -> m.id().is(order.getId()).and(m.customerGroup().is(customerGroup)))
                                 .withExpansionPaths(m -> m.customerGroup())
                 ).head().get();
-                assertThat(queriedOrder.getCustomerGroup().get().getObj().get().getName())
+                assertThat(queriedOrder.getCustomerGroup().getObj().getName())
                         .overridingErrorMessage("customerGroupIsExpandeable")
                         .isEqualTo(customerGroup.getName());
             });
@@ -42,7 +42,7 @@ public class OrderQueryTest extends IntegrationTest {
     @Test
     public void customerId() throws Exception {
         assertOrderIsFound(order -> {
-            final String customerId = order.getCustomerId().get();
+            final String customerId = order.getCustomerId();
             return OrderQuery.of().byCustomerId(customerId);
         });
     }
@@ -50,14 +50,14 @@ public class OrderQueryTest extends IntegrationTest {
     @Test
     public void customerEmail() throws Exception {
         assertOrderIsFound(order -> {
-            final String customerEmail = order.getCustomerEmail().get();
+            final String customerEmail = order.getCustomerEmail();
             return OrderQuery.of().byCustomerEmail(customerEmail);
         });
     }
 
     @Test
     public void customerIdQueryModel() throws Exception {
-        assertOrderIsFoundWithPredicate(order -> MODEL.customerId().is(order.getCustomerId().get()));
+        assertOrderIsFoundWithPredicate(order -> MODEL.customerId().is(order.getCustomerId()));
     }
 
     @Test
@@ -77,12 +77,12 @@ public class OrderQueryTest extends IntegrationTest {
 
     @Test
     public void shipmentState() throws Exception {
-        assertOrderIsFoundWithPredicate(order -> MODEL.shipmentState().is(order.getShipmentState().get()));
+        assertOrderIsFoundWithPredicate(order -> MODEL.shipmentState().is(order.getShipmentState()));
     }
 
     @Test
     public void paymentState() throws Exception {
-        assertOrderIsFoundWithPredicate(order -> MODEL.paymentState().is(order.getPaymentState().get()));
+        assertOrderIsFoundWithPredicate(order -> MODEL.paymentState().is(order.getPaymentState()));
     }
 
     @Test
@@ -112,10 +112,10 @@ public class OrderQueryTest extends IntegrationTest {
     }
 
     private void assertOrderIsFoundWithPredicate(final Function<Order, QueryPredicate<Order>> p) {
-        assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)), true);
+        assertOrderIsFound(order -> OrderQuery.of().withPredicates(p.apply(order)), true);
     }
 
     private void assertOrderIsNotFoundWithPredicate(final Function<Order, QueryPredicate<Order>> p) {
-        assertOrderIsFound(order -> OrderQuery.of().withPredicate(p.apply(order)), false);
+        assertOrderIsFound(order -> OrderQuery.of().withPredicates(p.apply(order)), false);
     }
 }

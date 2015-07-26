@@ -10,7 +10,6 @@ import io.sphere.sdk.models.Referenceable;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.Arrays.asList;
 
@@ -51,32 +50,26 @@ public class DiscountCodeDraft extends Base {
         return DiscountCodeDraftBuilder.of(code, cartDiscounts).build();
     }
 
-    public DiscountCodeDraft withName(final Optional<LocalizedStrings> name) {
-        return builder(this).name(name).build();
+    public DiscountCodeDraft withName(@Nullable final LocalizedStrings name) {
+        return newBuilder().name(name).build();
     }
 
-    public DiscountCodeDraft withName(final LocalizedStrings name) {
-        return withName(Optional.of(name));
+    @Nullable
+    public LocalizedStrings getName() {
+        return name;
     }
 
-    public Optional<LocalizedStrings> getName() {
-        return Optional.ofNullable(name);
+    public DiscountCodeDraft withDescription(@Nullable final LocalizedStrings description) {
+        return newBuilder().description(description).build();
     }
 
-    public DiscountCodeDraft withDescription(final Optional<LocalizedStrings> description) {
-        return builder(this).description(description).build();
-    }
-
-    public DiscountCodeDraft withDescription(final LocalizedStrings description) {
-        return withDescription(Optional.of(description));
-    }
-
-    public Optional<LocalizedStrings> getDescription() {
-        return Optional.ofNullable(description);
+    @Nullable
+    public LocalizedStrings getDescription() {
+        return description;
     }
 
     public DiscountCodeDraft withCode(final String code) {
-        return builder(this).code(code).build();
+        return newBuilder().code(code).build();
     }
 
     public String getCode() {
@@ -88,7 +81,7 @@ public class DiscountCodeDraft extends Base {
     }
 
     public DiscountCodeDraft withCartDiscounts(final List<Reference<CartDiscount>> cartDiscounts) {
-        return builder(this).cartDiscounts(cartDiscounts).build();
+        return newBuilder().cartDiscounts(cartDiscounts).build();
     }
 
     public List<Reference<CartDiscount>> getCartDiscounts() {
@@ -96,20 +89,17 @@ public class DiscountCodeDraft extends Base {
     }
 
 
-    public DiscountCodeDraft withCartPredicate(final Optional<CartPredicate> cartPredicate) {
-        return builder(this).cartPredicate(cartPredicate).build();
+    public DiscountCodeDraft withCartPredicate(@Nullable final CartPredicate cartPredicate) {
+        return newBuilder().cartPredicate(cartPredicate).build();
     }
 
-    public DiscountCodeDraft withCartPredicate(final CartPredicate cartPredicate) {
-        return withCartPredicate(Optional.of(cartPredicate));
-    }
-
-    public Optional<String> getCartPredicate() {
-        return Optional.ofNullable(cartPredicate);
+    @Nullable
+    public String getCartPredicate() {
+        return cartPredicate;
     }
 
     public DiscountCodeDraft withIsActive(final boolean isActive) {
-        return builder(this).isActive(isActive).build();
+        return newBuilder().isActive(isActive).build();
     }
 
     @JsonProperty("isActive")
@@ -117,31 +107,29 @@ public class DiscountCodeDraft extends Base {
         return isActive;
     }
 
-    public DiscountCodeDraft withMaxApplications(final Optional<Long> maxApplications) {
-        return builder(this).maxApplications(maxApplications).build();
+    public DiscountCodeDraft withMaxApplications(@Nullable final Long maxApplications) {
+        return newBuilder().maxApplications(maxApplications).build();
     }
 
-    public DiscountCodeDraft withMaxApplications(final long maxApplications) {
-        return withMaxApplications(Optional.of(maxApplications));
+    @Nullable
+    public Long getMaxApplications() {
+        return maxApplications;
     }
 
-    public Optional<Long> getMaxApplications() {
-        return Optional.ofNullable(maxApplications);
+    public DiscountCodeDraft withMaxApplicationsPerCustomer(@Nullable final Long maxApplicationsPerCustomer) {
+        return newBuilder().maxApplicationsPerCustomer(maxApplicationsPerCustomer).build();
     }
 
-    public DiscountCodeDraft withMaxApplicationsPerCustomer(final Optional<Long> maxApplicationsPerCustomer) {
-        return builder(this).maxApplicationsPerCustomer(maxApplicationsPerCustomer).build();
-    }
-
-    public DiscountCodeDraft withMaxApplicationsPerCustomer(final long maxApplicationsPerCustomer) {
-        return withMaxApplicationsPerCustomer(Optional.of(maxApplicationsPerCustomer));
-    }
-
-    public Optional<Long> getMaxApplicationsPerCustomer() {
-        return Optional.ofNullable(maxApplicationsPerCustomer);
+    @Nullable
+    public Long getMaxApplicationsPerCustomer() {
+        return maxApplicationsPerCustomer;
     }
 
     private DiscountCodeDraftBuilder builder(final DiscountCodeDraft draft) {
         return DiscountCodeDraftBuilder.of(this);
+    }
+
+    private DiscountCodeDraftBuilder newBuilder() {
+        return builder(this);
     }
 }

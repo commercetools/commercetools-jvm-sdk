@@ -7,26 +7,31 @@ import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 @JsonDeserialize(as = DiscountCodeImpl.class)
 public interface DiscountCode extends DefaultModel<DiscountCode> {
     List<Reference<CartDiscount>> getCartDiscounts();
 
-    Optional<String> getCartPredicate();
+    @Nullable
+    String getCartPredicate();
 
     String getCode();
 
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     boolean isActive();
 
-    Optional<Long> getMaxApplications();
+    @Nullable
+    Long getMaxApplications();
 
-    Optional<Long> getMaxApplicationsPerCustomer();
+    @Nullable
+    Long getMaxApplicationsPerCustomer();
 
-    Optional<LocalizedStrings> getName();
+    @Nullable
+    LocalizedStrings getName();
 
     List<Reference<Object>> getReferences();
 

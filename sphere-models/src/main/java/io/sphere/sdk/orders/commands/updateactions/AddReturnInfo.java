@@ -4,47 +4,51 @@ import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.ReturnItemDraft;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 /**
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addReturnInfo()}
  */
 public class AddReturnInfo extends UpdateAction<Order> {
-    private final Optional<ZonedDateTime> returnDate;
-    private final Optional<String> returnTrackingId;
+    @Nullable
+    private final ZonedDateTime returnDate;
+    @Nullable
+    private final String returnTrackingId;
     private final List<ReturnItemDraft> items;
 
-    private AddReturnInfo(final List<ReturnItemDraft> items, final Optional<ZonedDateTime> returnDate, final Optional<String> returnTrackingId) {
+    private AddReturnInfo(final List<ReturnItemDraft> items, @Nullable final ZonedDateTime returnDate, @Nullable final String returnTrackingId) {
         super("addReturnInfo");
         this.returnDate = returnDate;
         this.returnTrackingId = returnTrackingId;
         this.items = items;
     }
 
-    public static AddReturnInfo of(final List<ReturnItemDraft> items, final Optional<ZonedDateTime> returnDate, final Optional<String> returnTrackingId) {
+    public static AddReturnInfo of(final List<ReturnItemDraft> items, @Nullable final ZonedDateTime returnDate, @Nullable final String returnTrackingId) {
         return new AddReturnInfo(items, returnDate, returnTrackingId);
     }
 
     public static AddReturnInfo of(final List<ReturnItemDraft> items) {
-        return of(items, Optional.empty(), Optional.empty());
+        return of(items, null, null);
     }
 
     public AddReturnInfo withReturnDate(final ZonedDateTime returnDate) {
-        return of(items, Optional.of(returnDate), returnTrackingId);
+        return of(items, returnDate, returnTrackingId);
     }
 
     public AddReturnInfo withReturnTrackingId(final String returnTrackingId) {
-        return of(items, returnDate, Optional.of(returnTrackingId));
+        return of(items, returnDate, returnTrackingId);
     }
 
-    public Optional<ZonedDateTime> getReturnDate() {
+    @Nullable
+    public ZonedDateTime getReturnDate() {
         return returnDate;
     }
 
-    public Optional<String> getReturnTrackingId() {
+    @Nullable
+    public String getReturnTrackingId() {
         return returnTrackingId;
     }
 

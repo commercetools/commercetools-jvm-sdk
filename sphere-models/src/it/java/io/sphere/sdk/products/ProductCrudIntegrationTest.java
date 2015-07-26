@@ -3,13 +3,11 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.commands.ChannelCreateCommand;
-import io.sphere.sdk.models.Image;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.products.queries.ProductQueryModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
@@ -68,7 +66,7 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
     }
 
     protected String extractName(final Product instance) {
-        return instance.getMasterData().getStaged().getName().get(ENGLISH).orElse("NOTPRESENTNAME");
+        return instance.getMasterData().getStaged().getName().find(ENGLISH).orElse("NOTPRESENTNAME");
     }
 
     protected SphereRequest<PagedQueryResult<Product>> queryRequestForQueryAll() {
@@ -76,11 +74,11 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
     }
 
     protected SphereRequest<PagedQueryResult<Product>> queryObjectForName(final String name) {
-        return ProductQuery.of().withPredicate(m -> m.masterData().current().name().lang(ENGLISH).is(name));
+        return ProductQuery.of().withPredicates(m -> m.masterData().current().name().lang(ENGLISH).is(name));
     }
 
     protected SphereRequest<PagedQueryResult<Product>> queryObjectForNames(final List<String> names) {
-        return ProductQuery.of().withPredicate(m -> m.masterData().current().name().lang(ENGLISH).isIn(names));
+        return ProductQuery.of().withPredicates(m -> m.masterData().current().name().lang(ENGLISH).isIn(names));
     }
 
     @Test
@@ -92,7 +90,7 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
         final Price price = Price.of(MoneyImpl.of(523, EUR)).withChannel(channel);
         final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddPrice.of(MASTER_VARIANT_ID, price, STAGED_AND_CURRENT)));
         final Price readPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-        assertThat(readPrice.getChannel()).contains(channel.toReference());
+        assertThat(readPrice.getChannel()).isEqualTo(channel.toReference());
         execute(ProductUpdateCommand.of(updatedProduct, RemovePrice.of(readPrice, STAGED_AND_CURRENT)));
         cleanUpChannelByKey(client(), channelKey);
     }
@@ -110,8 +108,8 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
         final PagedQueryResult<Product> result = execute(ProductQuery.of().bySku(sku, STAGED));
         assertThat(result.getResults()).hasSize(1);
         assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getSku()).contains(sku);
-        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Colors.ATTRIBUTE)).contains(Colors.GREEN);
-        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().getAttribute(Sizes.ATTRIBUTE)).contains(Sizes.S);
+        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().findAttribute(Colors.ATTRIBUTE)).contains(Colors.GREEN);
+        assertThat(result.getResults().get(0).getMasterData().getStaged().getMasterVariant().findAttribute(Sizes.ATTRIBUTE)).contains(Sizes.S);
     }
 
     @Test

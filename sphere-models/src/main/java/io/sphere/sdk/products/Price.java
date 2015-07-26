@@ -14,7 +14,9 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.utils.MoneyImpl;
+import org.apache.commons.lang3.builder.EqualsBuilder;
 
+import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 
@@ -25,19 +27,26 @@ import javax.money.MonetaryAmount;
  */
 public class Price extends Base {
     private final MonetaryAmount value;
-    private final Optional<CountryCode> country;
-    private final Optional<Reference<CustomerGroup>> customerGroup;
-    private final Optional<Reference<Channel>> channel;
-    private final Optional<DiscountedPrice> discounted;
-    private final Optional<ZonedDateTime> validFrom;
-    private final Optional<ZonedDateTime> validUntil;
-    private final Optional<String> id;
+    @Nullable
+    private final CountryCode country;
+    @Nullable
+    private final Reference<CustomerGroup> customerGroup;
+    @Nullable
+    private final Reference<Channel> channel;
+    @Nullable
+    private final DiscountedPrice discounted;
+    @Nullable
+    private final ZonedDateTime validFrom;
+    @Nullable
+    private final ZonedDateTime validUntil;
+    @Nullable
+    private final String id;
 
     @JsonCreator
-    Price(final MonetaryAmount value, final Optional<CountryCode> country,
-          final Optional<Reference<CustomerGroup>> customerGroup, final Optional<Reference<Channel>> channel,
-          final Optional<DiscountedPrice> discounted,
-          final Optional<ZonedDateTime> validFrom, final Optional<ZonedDateTime> validUntil, final Optional<String> id) {
+    Price(final MonetaryAmount value, final CountryCode country,
+          final Reference<CustomerGroup> customerGroup, final Reference<Channel> channel,
+          final DiscountedPrice discounted,
+          @Nullable final ZonedDateTime validFrom, @Nullable final ZonedDateTime validUntil, final String id) {
         this.value = value;
         this.country = country;
         this.customerGroup = customerGroup;
@@ -52,15 +61,18 @@ public class Price extends Base {
         return value;
     }
 
-    public Optional<CountryCode> getCountry() {
+    @Nullable
+    public CountryCode getCountry() {
         return country;
     }
 
-    public Optional<Reference<CustomerGroup>> getCustomerGroup() {
+    @Nullable
+    public Reference<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 
-    public Optional<Reference<Channel>> getChannel() {
+    @Nullable
+    public Reference<Channel> getChannel() {
         return channel;
     }
 
@@ -69,15 +81,18 @@ public class Price extends Base {
      * Beware that another discount can win and in here is another discount than you expect.
      * @return discount data
      */
-    public Optional<DiscountedPrice> getDiscounted() {
+    @Nullable
+    public DiscountedPrice getDiscounted() {
         return discounted;
     }
 
-    public Optional<ZonedDateTime> getValidFrom() {
+    @Nullable
+    public ZonedDateTime getValidFrom() {
         return validFrom;
     }
 
-    public Optional<ZonedDateTime> getValidUntil() {
+    @Nullable
+    public ZonedDateTime getValidUntil() {
         return validUntil;
     }
 
@@ -85,40 +100,26 @@ public class Price extends Base {
      * The unique ID of this price. Only read only.
      * @return price id
      */
-    public Optional<String> getId() {
+    @Nullable
+    public String getId() {
         return id;
     }
 
-    public Price withCustomerGroup(final Optional<Reference<CustomerGroup>> customerGroup) {
-        return PriceBuilder.of(this).customerGroup(customerGroup).build();
-    }
-    
-    public Price withCustomerGroup(final Referenceable<CustomerGroup> customerGroup) {
-        return withCustomerGroup(Optional.of(customerGroup.toReference()));
+    public Price withCustomerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
+        return PriceBuilder.of(this).customerGroup(Optional.ofNullable(customerGroup).map(c -> c.toReference()).orElse(null)).build();
     }
 
-    public Price withCountry(final Optional<CountryCode> country) {
+    public Price withCountry(@Nullable final CountryCode country) {
         return PriceBuilder.of(this).country(country).build();
     }
 
-    public Price withCountry(final CountryCode country) {
-        return withCountry(Optional.of(country));
-    }
-
-    public Price withChannel(final Optional<Reference<Channel>> channel) {
-        return PriceBuilder.of(this).channel(channel).build();
-    }
-
-    public Price withChannel(final Referenceable<Channel> channel) {
-        return withChannel(Optional.of(channel.toReference()));
+    public Price withChannel(@Nullable final Referenceable<Channel> channel) {
+        final Reference<Channel> channelReference = Optional.ofNullable(channel).map(Referenceable::toReference).orElse(null);
+        return PriceBuilder.of(this).channel(channelReference).build();
     }
     
-    public Price withDiscounted(final Optional<DiscountedPrice> discounted) {
+    public Price withDiscounted(@Nullable final DiscountedPrice discounted) {
         return PriceBuilder.of(this).discounted(discounted).build();
-    }
-
-    public Price withDiscounted(final DiscountedPrice discounted) {
-        return withDiscounted(Optional.of(discounted));
     }
 
     public Price withValue(final MonetaryAmount value) {
@@ -133,11 +134,7 @@ public class Price extends Base {
         return PriceBuilder.of(this).validUntil(validUntil).build();
     }
 
-    public Price withId(final String id) {
-        return withId(Optional.of(id));
-    }
-
-    public Price withId(final Optional<String> id) {
+    public Price withId(@Nullable final String id) {
         return PriceBuilder.of(this).id(id).build();
     }
 
@@ -157,30 +154,7 @@ public class Price extends Base {
         if (o == null || getClass() != o.getClass()) return false;
 
         Price price = (Price) o;
-
-        if (!channel.equals(price.channel)) return false;
-        if (!country.equals(price.country)) return false;
-        if (!customerGroup.equals(price.customerGroup)) return false;
-        if (!discounted.equals(price.discounted)) return false;
-        if (!validFrom.equals(price.validFrom)) return false;
-        if (!validUntil.equals(price.validUntil)) return false;
-        //here money does not work with equals, use isEqualTo
-        if (!value.isEqualTo(price.value)) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = super.hashCode();
-        result = 31 * result + value.hashCode();
-        result = 31 * result + country.hashCode();
-        result = 31 * result + customerGroup.hashCode();
-        result = 31 * result + channel.hashCode();
-        result = 31 * result + discounted.hashCode();
-        result = 31 * result + validFrom.hashCode();
-        result = 31 * result + validUntil.hashCode();
-        return result;
+        return EqualsBuilder.reflectionEquals(this, o, "value", "id") && value.isEqualTo(price.value);
     }
 
     @JsonIgnore

@@ -28,8 +28,7 @@ final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAd
             final CompletionStage<Response> future = wrap(asyncHttpClient.executeRequest(request));
             return future.thenApply((Response response) -> {
                 final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
-                Optional<byte[]> body = responseBodyAsBytes.length > 0 ? Optional.of(responseBodyAsBytes) : Optional.empty();
-                final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), body, Optional.of(httpRequest), HttpHeaders.of(response.getHeaders()));
+                final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), responseBodyAsBytes, httpRequest, HttpHeaders.of(response.getHeaders()));
                 if (LOGGER.isDebugEnabled()) {
                     LOGGER.debug("response " + httpResponse);
                 }
@@ -58,7 +57,7 @@ final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAd
 
         request.getHeaders().getHeadersAsMap().forEach((name, values) -> values.forEach( value -> builder.addHeader(name, value)));
 
-        request.getBody().ifPresent(body -> {
+        Optional.ofNullable(request.getBody()).ifPresent(body -> {
             if (body instanceof StringHttpRequestBody) {
                 final String bodyAsString = ((StringHttpRequestBody) body).getString();
                 builder.setBodyEncoding(StandardCharsets.UTF_8.name()).setBody(bodyAsString);

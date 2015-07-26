@@ -3,29 +3,27 @@ package io.sphere.sdk.shippingmethods.commands.updateactions;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#setDescription()}
  */
 public class SetDescription extends UpdateAction<ShippingMethod> {
-    private final Optional<String> description;
+    @Nullable
+    private final String description;
 
-    private SetDescription(final Optional<String> description) {
+    private SetDescription(@Nullable final String description) {
         super("setDescription");
         this.description = description;
     }
 
-    public static SetDescription of(final String description) {
-        return of(Optional.of(description));
-    }
-
-    public static SetDescription of(final Optional<String> description) {
+    public static SetDescription of(@Nullable final String description) {
         return new SetDescription(description);
     }
 
-    public Optional<String> getDescription() {
+    @Nullable
+    public String getDescription() {
         return description;
     }
 }

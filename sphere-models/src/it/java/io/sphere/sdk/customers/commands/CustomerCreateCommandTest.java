@@ -15,7 +15,6 @@ import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -48,22 +47,22 @@ public class CustomerCreateCommandTest extends IntegrationTest {
                 .withDefaultShippingAddress(1);
         final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
         final Customer customer = result.getCustomer();
-        final Optional<Cart> cart = result.getCart();
+        final Cart cart = result.getCart();
         assertThat(customer.getName()).isEqualTo(name);
         assertThat(customer.getEmail()).isEqualTo(email);
         assertThat(customer.getPassword())
                 .overridingErrorMessage("password is not stored in clear text")
                 .isNotEqualTo(password);
         assertThat(customer.getExternalId()).contains(externalId);
-        assertThat(cart).isEmpty();
-        assertThat(customer.getDateOfBirth()).contains(dateOfBirth);
+        assertThat(cart).isNull();
+        assertThat(customer.getDateOfBirth()).isEqualTo(dateOfBirth);
         assertThat(customer.getCompanyName()).contains(companyName);
         assertThat(customer.getVatId()).contains(vatId);
         assertThat(customer.isEmailVerified()).isEqualTo(emailVerified);
-        assertThat(customer.getCustomerGroup()).contains(customerGroup.toReference());
-        assertThat(customer.getAddresses().stream().map(a -> a.withId(Optional.empty())).collect(toList())).isEqualTo(addresses);
-        assertThat(customer.getDefaultBillingAddress().get().withId(Optional.empty())).isEqualTo(addresses.get(0));
-        assertThat(customer.getDefaultShippingAddress().get().withId(Optional.empty())).isEqualTo(addresses.get(1));
+        assertThat(customer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
+        assertThat(customer.getAddresses().stream().map(a -> a.withId(null)).collect(toList())).isEqualTo(addresses);
+        assertThat(customer.getDefaultBillingAddress().withId(null)).isEqualTo(addresses.get(0));
+        assertThat(customer.findDefaultShippingAddress().get().withId(null)).isEqualTo(addresses.get(1));
     }
 
     @Test
@@ -72,6 +71,6 @@ public class CustomerCreateCommandTest extends IntegrationTest {
         final String email = randomEmail(CustomerCreateCommandTest.class);
         final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
         final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
-        assertThat(result.getCart()).isPresent();
+        assertThat(result.getCart()).isNotNull();
     }
 }

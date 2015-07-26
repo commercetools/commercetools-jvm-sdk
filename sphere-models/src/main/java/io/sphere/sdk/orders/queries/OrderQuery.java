@@ -24,10 +24,10 @@ public interface OrderQuery extends MetaModelQueryDsl<Order, OrderQuery, OrderQu
     }
 
     default OrderQuery byCustomerId(final String customerId) {
-        return withPredicate(m -> m.customerId().is(customerId));
+        return withPredicates(m -> m.customerId().is(customerId));
     }
 
     default OrderQuery byCustomerEmail(final String customerEmail) {
-        return withPredicate(m -> m.customerEmail().is(customerEmail));
+        return withPredicates(m -> m.customerEmail().is(customerEmail));
     }
 }

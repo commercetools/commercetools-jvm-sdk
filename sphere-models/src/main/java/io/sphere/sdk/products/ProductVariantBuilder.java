@@ -5,16 +5,20 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.models.Image;
 
+import javax.annotation.Nullable;
 import java.util.*;
 
 public final class ProductVariantBuilder extends Base implements Builder<ProductVariant> {
     private final int id;
-    private Optional<String> productId = Optional.empty();
-    private Optional<String> sku = Optional.empty();
+    @Nullable
+    private String productId;
+    @Nullable
+    private String sku;
     private List<Price> prices = Collections.emptyList();
     private List<Attribute> attributes = Collections.emptyList();
     private List<Image> images = Collections.emptyList();
-    private Optional<ProductVariantAvailability> availability = Optional.empty();
+    @Nullable
+    private ProductVariantAvailability availability;
 
     private ProductVariantBuilder(final int id) {
         this.id = id;
@@ -28,14 +32,9 @@ public final class ProductVariantBuilder extends Base implements Builder<Product
         return of(1);
     }
 
-    public ProductVariantBuilder sku(final Optional<String> sku) {
+    public ProductVariantBuilder sku(@Nullable final String sku) {
         this.sku = sku;
         return this;
-    }
-
-    public ProductVariantBuilder sku(final String sku) {
-        Objects.requireNonNull(sku);
-        return sku(Optional.of(sku));
     }
 
     public ProductVariantBuilder prices(final List<Price> prices) {
@@ -51,8 +50,8 @@ public final class ProductVariantBuilder extends Base implements Builder<Product
         return prices(Arrays.asList(price));
     }
 
-    public ProductVariantBuilder productId(final String productId) {
-        this.productId = Optional.of(productId);
+    public ProductVariantBuilder productId(@Nullable final String productId) {
+        this.productId = productId;
         return this;
     }
 
@@ -70,14 +69,9 @@ public final class ProductVariantBuilder extends Base implements Builder<Product
         return this;
     }
 
-    public ProductVariantBuilder availability(final Optional<ProductVariantAvailability> availability) {
+    public ProductVariantBuilder availability(@Nullable final ProductVariantAvailability availability) {
         this.availability = availability;
         return this;
-    }
-
-    public ProductVariantBuilder availability(final ProductVariantAvailability availability) {
-        Objects.requireNonNull(availability);
-        return availability(Optional.of(availability));
     }
 
     @Override

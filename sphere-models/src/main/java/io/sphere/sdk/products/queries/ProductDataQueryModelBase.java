@@ -3,7 +3,7 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.*;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.function.Function;
 
 class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
@@ -16,7 +16,7 @@ class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
         return where(embeddedPredicate.apply(PartialProductDataQueryModel.of()));
     }
 
-    ProductDataQueryModelBase(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    ProductDataQueryModelBase(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
@@ -33,15 +33,15 @@ class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
     }
 
     public ProductAllVariantsQueryModel<T> allVariants() {
-        return new ProductAllVariantsQueryModel<>(Optional.of(this));
+        return new ProductAllVariantsQueryModel<>(this);
     }
 
     public ProductVariantQueryModel<T> masterVariant() {
-        return new ProductVariantQueryModel<>(Optional.of(this), "masterVariant");
+        return new ProductVariantQueryModel<>(this, "masterVariant");
     }
 
     public ProductVariantQueryModel<T> variants() {
-        return new ProductVariantQueryModel<>(Optional.of(this), "variants");
+        return new ProductVariantQueryModel<>(this, "variants");
     }
 
     public LocalizedStringsQuerySortingModel<T> metaTitle() {
@@ -57,7 +57,7 @@ class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
     }
 
     public ReferenceCollectionQueryModel<T, Category> categories() {
-        return new ReferenceCollectionQueryModel<>(Optional.of(this), "categories");
+        return new ReferenceCollectionQueryModel<>(this, "categories");
     }
 }
 

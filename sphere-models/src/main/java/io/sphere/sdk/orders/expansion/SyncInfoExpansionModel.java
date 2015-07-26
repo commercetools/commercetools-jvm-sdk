@@ -3,7 +3,7 @@ package io.sphere.sdk.orders.expansion;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
   DSL class to create expansion path expressions.
@@ -11,8 +11,8 @@ import java.util.Optional;
  @param <T> the type for which the expansion path is
  */
 public class SyncInfoExpansionModel<T> extends ExpansionModel<T> {
-    SyncInfoExpansionModel(final Optional<String> parentPath, final String path) {
-        super(parentPath, Optional.of(path));
+    SyncInfoExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
+        super(parentPath, path);
     }
 
     SyncInfoExpansionModel() {

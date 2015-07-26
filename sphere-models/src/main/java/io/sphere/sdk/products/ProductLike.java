@@ -5,10 +5,11 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 interface ProductLike<T> extends DefaultModelView<T>, ProductIdentifiable {
     Reference<ProductType> getProductType();
 
-    Optional<Reference<TaxCategory>> getTaxCategory();
+    @Nullable
+    Reference<TaxCategory> getTaxCategory();
 }

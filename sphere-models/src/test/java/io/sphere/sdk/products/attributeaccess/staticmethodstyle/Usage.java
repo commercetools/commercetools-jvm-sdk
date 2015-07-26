@@ -9,6 +9,6 @@ import java.util.Optional;
 public class Usage extends UsageBase {
     public void demo() {
         ProductVariant variant = getProductVariantSomeHow();
-        Optional<LocalizedStrings> longDescription = variant.getAttribute(TShirt.longDescription());
+        Optional<LocalizedStrings> longDescription = variant.findAttribute(TShirt.longDescription());
     }
 }

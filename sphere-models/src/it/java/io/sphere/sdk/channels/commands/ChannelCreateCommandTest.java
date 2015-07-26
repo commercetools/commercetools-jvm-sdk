@@ -33,8 +33,8 @@ public class ChannelCreateCommandTest extends IntegrationTest {
                 .withRoles(ChannelRole.INVENTORY_SUPPLY);
         final Channel channel = execute(ChannelCreateCommand.of(channelDraft));
         assertThat(channel.getKey()).isEqualTo(key);
-        assertThat(channel.getName()).contains(LocalizedStrings.of(ENGLISH, "name"));
-        assertThat(channel.getDescription()).contains(LocalizedStrings.of(ENGLISH, "description"));
+        assertThat(channel.getName()).isEqualTo(LocalizedStrings.of(ENGLISH, "name"));
+        assertThat(channel.getDescription()).isEqualTo(LocalizedStrings.of(ENGLISH, "description"));
         assertThat(channel.getRoles()).isEqualTo(asSet(ChannelRole.INVENTORY_SUPPLY));
     }
 

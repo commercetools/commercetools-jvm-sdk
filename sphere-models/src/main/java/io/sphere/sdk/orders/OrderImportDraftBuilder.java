@@ -5,6 +5,7 @@ import io.sphere.sdk.carts.TaxedPrice;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.Collections;
@@ -12,22 +13,35 @@ import java.util.List;
 import java.util.Optional;
 
 public class OrderImportDraftBuilder extends Base implements Builder<OrderImportDraft> {
-    private Optional<String> orderNumber = Optional.empty();
-    private Optional<String> customerId = Optional.empty();
-    private Optional<String> customerEmail = Optional.empty();
+    @Nullable
+    private String orderNumber;
+    @Nullable
+    private String customerId;
+    @Nullable
+    private String customerEmail;
+    @Nullable
     private List<LineItemImportDraft> lineItems = Collections.emptyList();
     private List<CustomLineItemImportDraft> customLineItems = Collections.emptyList();
     private MonetaryAmount totalPrice;
-    private Optional<TaxedPrice> taxedPrice = Optional.empty();
-    private Optional<Address> shippingAddress = Optional.empty();
-    private Optional<Address> billingAddress = Optional.empty();
-    private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
-    private Optional<CountryCode> country = Optional.empty();
+    @Nullable
+    private TaxedPrice taxedPrice;
+    @Nullable
+    private Address shippingAddress;
+    @Nullable
+    private Address billingAddress;
+    @Nullable
+    private Reference<CustomerGroup> customerGroup;
+    @Nullable
+    private CountryCode country;
     private OrderState orderState;
-    private Optional<ShipmentState> shipmentState = Optional.empty();
-    private Optional<PaymentState> paymentState = Optional.empty();
-    private Optional<OrderShippingInfo> shippingInfo = Optional.empty();
-    private Optional<ZonedDateTime> completedAt = Optional.empty();
+    @Nullable
+    private ShipmentState shipmentState;
+    @Nullable
+    private PaymentState paymentState;
+    @Nullable
+    private OrderShippingInfo shippingInfo;
+    @Nullable
+    private ZonedDateTime completedAt;
 
     private OrderImportDraftBuilder(final MonetaryAmount totalPrice, final OrderState orderState) {
         this.totalPrice = totalPrice;
@@ -39,36 +53,19 @@ public class OrderImportDraftBuilder extends Base implements Builder<OrderImport
      * @param orderNumber ID to set
      * @return this builder
      */
-    public OrderImportDraftBuilder orderNumber(final Optional<String> orderNumber) {
+    public OrderImportDraftBuilder orderNumber(@Nullable final String orderNumber) {
         this.orderNumber = orderNumber;
         return this;
     }
 
-    /**
-     * String that unique identifies an order. It can be used to create more human-readable (in contrast to ID) identifier for the order. It should be unique within a project.
-     * @param orderNumber ID to set
-     * @return this builder
-     */
-    public OrderImportDraftBuilder orderNumber(final String orderNumber) {
-        return orderNumber(Optional.of(orderNumber));
-    }
-
-    public OrderImportDraftBuilder customerId(final Optional<String> customerId) {
+    public OrderImportDraftBuilder customerId(@Nullable final String customerId) {
         this.customerId = customerId;
         return this;
     }
 
-    public OrderImportDraftBuilder customerId(final String customerId) {
-        return customerId(Optional.of(customerId));
-    }
-
-    public OrderImportDraftBuilder customerEmail(final Optional<String> customerEmail) {
+    public OrderImportDraftBuilder customerEmail(@Nullable final String customerEmail) {
         this.customerEmail = customerEmail;
         return this;
-    }
-
-    public OrderImportDraftBuilder customerEmail(final String customerEmail) {
-        return customerEmail(Optional.of(customerEmail));
     }
 
     public OrderImportDraftBuilder lineItems(final List<LineItemImportDraft> lineItems) {
@@ -86,49 +83,29 @@ public class OrderImportDraftBuilder extends Base implements Builder<OrderImport
         return this;
     }
 
-    public OrderImportDraftBuilder taxedPrice(final TaxedPrice taxedPrice) {
-        return taxedPrice(Optional.of(taxedPrice));
-    }
-
-    public OrderImportDraftBuilder taxedPrice(final Optional<TaxedPrice> taxedPrice) {
+    public OrderImportDraftBuilder taxedPrice(@Nullable  final TaxedPrice taxedPrice) {
         this.taxedPrice = taxedPrice;
         return this;
     }
 
-    public OrderImportDraftBuilder shippingAddress(final Address shippingAddress) {
-        return shippingAddress(Optional.of(shippingAddress));
-    }
-
-    public OrderImportDraftBuilder shippingAddress(final Optional<Address> shippingAddress) {
+    public OrderImportDraftBuilder shippingAddress(@Nullable final Address shippingAddress) {
         this.shippingAddress = shippingAddress;
         return this;
     }
 
-    public OrderImportDraftBuilder billingAddress(final Optional<Address> billingAddress) {
+    public OrderImportDraftBuilder billingAddress(@Nullable final Address billingAddress) {
         this.billingAddress = billingAddress;
         return this;
     }
 
-    public OrderImportDraftBuilder billingAddress(final Address billingAddress) {
-        return billingAddress(Optional.of(billingAddress));
-    }
-
-    public OrderImportDraftBuilder customerGroup(final Optional<Reference<CustomerGroup>> customerGroup) {
-        this.customerGroup = customerGroup;
+    public OrderImportDraftBuilder customerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
+        this.customerGroup =  Optional.ofNullable(customerGroup).map(Referenceable::toReference).orElse(null);
         return this;
     }
 
-    public OrderImportDraftBuilder customerGroup(final Referenceable<CustomerGroup> customerGroup) {
-        return customerGroup(Optional.of(customerGroup.toReference()));
-    }
-
-    public OrderImportDraftBuilder country(final Optional<CountryCode> country) {
+    public OrderImportDraftBuilder country(@Nullable final CountryCode country) {
         this.country = country;
         return this;
-    }
-
-    public OrderImportDraftBuilder country(final CountryCode country) {
-        return country(Optional.of(country));
     }
 
     public OrderImportDraftBuilder orderState(final OrderState orderState) {
@@ -136,40 +113,24 @@ public class OrderImportDraftBuilder extends Base implements Builder<OrderImport
         return this;
     }
 
-    public OrderImportDraftBuilder shipmentState(final Optional<ShipmentState> shipmentState) {
+    public OrderImportDraftBuilder shipmentState(@Nullable final ShipmentState shipmentState) {
         this.shipmentState = shipmentState;
         return this;
     }
 
-    public OrderImportDraftBuilder shipmentState(final ShipmentState shipmentState) {
-        return shipmentState(Optional.of(shipmentState));
-    }
-
-    public OrderImportDraftBuilder paymentState(final Optional<PaymentState> paymentState) {
+    public OrderImportDraftBuilder paymentState(@Nullable final PaymentState paymentState) {
         this.paymentState = paymentState;
         return this;
     }
 
-    public OrderImportDraftBuilder paymentState(final PaymentState paymentState) {
-        return paymentState(Optional.of(paymentState));
-    }
-
-    public OrderImportDraftBuilder shippingInfo(final Optional<OrderShippingInfo> shippingInfo) {
+    public OrderImportDraftBuilder shippingInfo(@Nullable final OrderShippingInfo shippingInfo) {
         this.shippingInfo = shippingInfo;
         return this;
     }
 
-    public OrderImportDraftBuilder shippingInfo(final OrderShippingInfo shippingInfo) {
-        return shippingInfo(Optional.of(shippingInfo));
-    }
-
-    public OrderImportDraftBuilder completedAt(final Optional<ZonedDateTime> completedAt) {
+    public OrderImportDraftBuilder completedAt(@Nullable final ZonedDateTime completedAt) {
         this.completedAt = completedAt;
         return this;
-    }
-
-    public OrderImportDraftBuilder completedAt(final ZonedDateTime completedAt) {
-        return completedAt(Optional.of(completedAt));
     }
 
     /**

@@ -27,7 +27,7 @@ public class QueryByProductTypeNameExample {
                 orElseThrow(MissingProductTypeException::new);
 
         AttributeDefinition sizeAttribute = productType.
-                getAttribute("size").
+                findAttribute("size").
                 orElseThrow(MissingAttributeException::new);
 
         if (sizeAttribute.getAttributeType() instanceof EnumType) {

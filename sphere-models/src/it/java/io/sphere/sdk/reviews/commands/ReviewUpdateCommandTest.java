@@ -19,7 +19,7 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
     public void setAuthorName() throws Exception {
         ReviewFixtures.withUpdateableReview(client(), review -> {
             final String newAuthorName = randomString();
-            assertThat(review.getTitle()).isNotEqualTo(Optional.of(newAuthorName));
+            assertThat(review.getTitle()).isNotEqualTo(newAuthorName);
 
             final Review updatedReview = execute(ReviewUpdateCommand.of(review, SetAuthorName.of(newAuthorName)));
             assertThat(updatedReview.getAuthorName()).contains(newAuthorName);
@@ -32,10 +32,10 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
     public void setScore() throws Exception {
         ReviewFixtures.withUpdateableReview(client(), review -> {
             final double newScore = 0.5;
-            assertThat(review.getScore().orElse(1.0)).isNotEqualTo(0.5);
+            assertThat(Optional.ofNullable(review.getScore()).orElse(1.0)).isNotEqualTo(0.5);
 
             final Review updatedReview = execute(ReviewUpdateCommand.of(review, SetScore.of(newScore)));
-            assertThat(updatedReview.getScore()).contains(newScore);
+            assertThat(updatedReview.getScore()).isEqualTo(newScore);
 
             return updatedReview;
         });
@@ -45,7 +45,7 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
     public void setText() throws Exception {
         ReviewFixtures.withUpdateableReview(client(), review -> {
             final String newText = randomString();
-            assertThat(review.getTitle()).isNotEqualTo(Optional.of(newText));
+            assertThat(review.getTitle()).isNotEqualTo(newText);
 
             final Review updatedReview = execute(ReviewUpdateCommand.of(review, SetText.of(newText)));
             assertThat(updatedReview.getText()).contains(newText);
@@ -58,7 +58,7 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
     public void setTitle() throws Exception {
         ReviewFixtures.withUpdateableReview(client(), review -> {
             final String newTitle = randomString();
-            assertThat(review.getTitle()).isNotEqualTo(Optional.of(newTitle));
+            assertThat(review.getTitle()).isNotEqualTo(newTitle);
 
             final Review updatedReview = execute(ReviewUpdateCommand.of(review, SetTitle.of(newTitle)));
             assertThat(updatedReview.getTitle()).contains(newTitle);

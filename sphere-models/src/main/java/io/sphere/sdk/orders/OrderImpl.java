@@ -12,38 +12,48 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 final class OrderImpl extends DefaultModelImpl<Order> implements Order {
-
-    private final Optional<Address>  billingAddress;
-    private final Optional<CountryCode> country;
-    private final Optional<String> customerEmail;
-    private final Optional<Reference<CustomerGroup>> customerGroup;
-    private final Optional<String> customerId;
+    @Nullable
+    private final Address billingAddress;
+    @Nullable
+    private final CountryCode country;
+    @Nullable
+    private final String customerEmail;
+    @Nullable
+    private final Reference<CustomerGroup> customerGroup;
+    @Nullable
+    private final String customerId;
     private final List<CustomLineItem> customLineItems;
     private final InventoryMode inventoryMode;
     private final long lastMessageSequenceNumber;
     private final List<LineItem> lineItems;
-    private final Optional<String> orderNumber;
+    @Nullable
+    private final String orderNumber;
     private final OrderState orderState;
     private final List<ReturnInfo> returnInfo;
-    private final Optional<ShipmentState> shipmentState;
-    private final Optional<Address> shippingAddress;
-    private final Optional<OrderShippingInfo> shippingInfo;
+    @Nullable
+    private final ShipmentState shipmentState;
+    @Nullable
+    private final Address shippingAddress;
+    private final OrderShippingInfo shippingInfo;
     private final Set<SyncInfo> syncInfo;
-    private final Optional<TaxedPrice> taxedPrice;
+    @Nullable
+    private final TaxedPrice taxedPrice;
     private final MonetaryAmount totalPrice;
-    private final Optional<PaymentState> paymentState;
-    private final Optional<ZonedDateTime> completedAt;
+    @Nullable
+    private final PaymentState paymentState;
+    @Nullable
+    private final ZonedDateTime completedAt;
     private final List<DiscountCodeInfo> discountCodes;
 
     @JsonCreator
-    protected OrderImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final Optional<Address> billingAddress, final Optional<CountryCode> country, final Optional<String> customerEmail, final Optional<Reference<CustomerGroup>> customerGroup, final Optional<String> customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final long lastMessageSequenceNumber, final List<LineItem> lineItems, final Optional<String> orderNumber, final OrderState orderState, final List<ReturnInfo> returnInfo, final Optional<ShipmentState> shipmentState, final Optional<Address> shippingAddress, final Optional<OrderShippingInfo> shippingInfo, final Set<SyncInfo> syncInfo, final Optional<TaxedPrice> taxedPrice, final MonetaryAmount totalPrice, final Optional<PaymentState> paymentState, final Optional<ZonedDateTime> completedAt, final List<DiscountCodeInfo> discountCodes) {
+    protected OrderImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final Address billingAddress, final CountryCode country, final String customerEmail, final Reference<CustomerGroup> customerGroup, final String customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final long lastMessageSequenceNumber, final List<LineItem> lineItems, @Nullable final String orderNumber, final OrderState orderState, final List<ReturnInfo> returnInfo, @Nullable final ShipmentState shipmentState, final Address shippingAddress, @Nullable final OrderShippingInfo shippingInfo, final Set<SyncInfo> syncInfo, final TaxedPrice taxedPrice, final MonetaryAmount totalPrice, @Nullable final PaymentState paymentState, @Nullable final ZonedDateTime completedAt, final List<DiscountCodeInfo> discountCodes) {
         super(id, version, createdAt, lastModifiedAt);
         this.billingAddress = billingAddress;
         this.country = country;
@@ -69,27 +79,32 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     }
 
     @Override
-    public Optional<Address> getBillingAddress() {
+    @Nullable
+    public Address getBillingAddress() {
         return billingAddress;
     }
 
     @Override
-    public Optional<CountryCode> getCountry() {
+    @Nullable
+    public CountryCode getCountry() {
         return country;
     }
 
     @Override
-    public Optional<String> getCustomerEmail() {
+    @Nullable
+    public String getCustomerEmail() {
         return customerEmail;
     }
 
     @Override
-    public Optional<Reference<CustomerGroup>> getCustomerGroup() {
+    @Nullable
+    public Reference<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 
     @Override
-    public Optional<String> getCustomerId() {
+    @Nullable
+    public String getCustomerId() {
         return customerId;
     }
 
@@ -114,7 +129,8 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     }
 
     @Override
-    public Optional<String> getOrderNumber() {
+    @Nullable
+    public String getOrderNumber() {
         return orderNumber;
     }
 
@@ -129,17 +145,19 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     }
 
     @Override
-    public Optional<ShipmentState> getShipmentState() {
+    @Nullable
+    public ShipmentState getShipmentState() {
         return shipmentState;
     }
 
     @Override
-    public Optional<Address> getShippingAddress() {
+    @Nullable
+    public Address getShippingAddress() {
         return shippingAddress;
     }
 
     @Override
-    public Optional<OrderShippingInfo> getShippingInfo() {
+    public OrderShippingInfo getShippingInfo() {
         return shippingInfo;
     }
 
@@ -149,7 +167,8 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     }
 
     @Override
-    public Optional<TaxedPrice> getTaxedPrice() {
+    @Nullable
+    public TaxedPrice getTaxedPrice() {
         return taxedPrice;
     }
 
@@ -159,12 +178,14 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     }
 
     @Override
-    public Optional<PaymentState> getPaymentState() {
+    @Nullable
+    public PaymentState getPaymentState() {
         return paymentState;
     }
 
     @Override
-    public Optional<ZonedDateTime> getCompletedAt() {
+    @Nullable
+    public ZonedDateTime getCompletedAt() {
         return completedAt;
     }
 

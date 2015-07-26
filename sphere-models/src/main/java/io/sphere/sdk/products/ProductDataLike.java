@@ -7,8 +7,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
 import io.sphere.sdk.search.SearchKeywords;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
@@ -16,15 +16,19 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
 
     Set<Reference<Category>> getCategories();
 
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     LocalizedStrings getSlug();
 
-    Optional<LocalizedStrings> getMetaTitle();
+    @Nullable
+    LocalizedStrings getMetaTitle();
 
-    Optional<LocalizedStrings> getMetaDescription();
+    @Nullable
+    LocalizedStrings getMetaDescription();
 
-    Optional<LocalizedStrings> getMetaKeywords();
+    @Nullable
+    LocalizedStrings getMetaKeywords();
 
     /**
      * Returns the master variant. Every product as 1 to n variants, so this is always present.
@@ -64,12 +68,13 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
      * @return optional of a variant matching variantId
      * @see #getVariantOrMaster(int)
      */
-    default Optional<ProductVariant> getVariant(final int variantId) {
-        final Optional<ProductVariant> result;
+    @Nullable
+    default ProductVariant getVariant(final int variantId) {
+        final ProductVariant result;
         if (variantId == getMasterVariant().getId()) {
-            result = Optional.of(getMasterVariant());
+            result = getMasterVariant();
         } else {
-            result = getVariants().stream().filter(v -> v.getId() == variantId).findFirst();
+            result = getVariants().stream().filter(v -> v.getId() == variantId).findFirst().orElse(null);
         }
         return result;
     }

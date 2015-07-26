@@ -21,7 +21,7 @@ public interface ReviewQuery extends MetaModelQueryDsl<Review, ReviewQuery, Revi
     }
 
     default ReviewQuery byProductId(final String productId) {
-        return withPredicate(m -> m.productId().is(productId));
+        return withPredicates(m -> m.productId().is(productId));
     }
 
     static ReviewQuery of() {

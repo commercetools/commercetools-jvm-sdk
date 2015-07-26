@@ -3,7 +3,7 @@ package io.sphere.sdk.reviews.commands.updateactions;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.reviews.Review;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  * Updates the title of a review.
@@ -11,22 +11,20 @@ import java.util.Optional;
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setTitle()}
  */
 public class SetTitle extends UpdateAction<Review> {
+    @Nullable
     private final String title;
 
-    private SetTitle(final Optional<String> title) {
+    private SetTitle(@Nullable final String title) {
         super("setTitle");
-        this.title = title.orElse(null);
+        this.title = title;
     }
 
-    public static SetTitle of(final String title) {
-        return of(Optional.of(title));
-    }
-
-    public static SetTitle of(final Optional<String> title) {
+    public static SetTitle of(@Nullable final String title) {
         return new SetTitle(title);
     }
 
-    public Optional<String> getTitle() {
-        return Optional.ofNullable(title);
+    @Nullable
+    public String getTitle() {
+        return title;
     }
 }

@@ -3,16 +3,16 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.*;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.function.Function;
 
 public final class PartialProductDataQueryModel extends ProductDataQueryModel<PartialProductDataQueryModel> {
-    private PartialProductDataQueryModel(final Optional<? extends QueryModel<PartialProductDataQueryModel>> parent, final Optional<String> pathSegment) {
+    private PartialProductDataQueryModel(@Nullable final QueryModel<PartialProductDataQueryModel> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public static PartialProductDataQueryModel of() {
-        return new PartialProductDataQueryModel(Optional.empty(), Optional.empty());
+        return new PartialProductDataQueryModel(null, null);
     }
 
     @Override

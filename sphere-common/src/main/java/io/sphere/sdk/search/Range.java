@@ -1,16 +1,21 @@
 package io.sphere.sdk.search;
 
 import io.sphere.sdk.models.Base;
+import org.apache.commons.lang3.ObjectUtils;
 
+import javax.annotation.Nullable;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
 class Range<T extends Comparable<? super T>> extends Base {
     private static final String UNBOUND = "*";
-    protected final Optional<Bound<T>> lowerBound;
-    protected final Optional<Bound<T>> upperBound;
+    @Nullable
+    protected final Bound<T> lowerBound;
+    @Nullable
+    protected final Bound<T> upperBound;
 
-    Range(final Optional<Bound<T>> lowerBound, final Optional<Bound<T>> upperBound) {
+    Range(@Nullable final Bound<T> lowerBound, @Nullable final Bound<T> upperBound) {
         this.lowerBound = lowerBound;
         this.upperBound = upperBound;
         if (hasInvertedBounds()) {
@@ -21,11 +26,13 @@ class Range<T extends Comparable<? super T>> extends Base {
         }
     }
 
-    public Optional<Bound<T>> lowerBound() {
+    @Nullable
+    public Bound<T> lowerBound() {
         return lowerBound;
     }
 
-    public Optional<Bound<T>> upperBound() {
+    @Nullable
+    public Bound<T> upperBound() {
         return upperBound;
     }
 
@@ -33,16 +40,18 @@ class Range<T extends Comparable<? super T>> extends Base {
      * Gets the endpoint of the lower bound, if defined.
      * @return the lower endpoint, or absent if the range has no lower bound.
      */
-    public Optional<T> lowerEndpoint() {
-        return lowerBound.map(bound -> bound.endpoint());
+    @Nullable
+    public T lowerEndpoint() {
+        return Optional.ofNullable(lowerBound).map(Bound::endpoint).orElse(null);
     }
 
     /**
      * Gets the endpoint of the upper bound, if defined.
      * @return the upper endpoint, or absent if the range has no upper bound.
      */
-    public Optional<T> upperEndpoint() {
-        return upperBound.map(bound -> bound.endpoint());
+    @Nullable
+    public T upperEndpoint() {
+        return Optional.ofNullable(upperBound).map(Bound::endpoint).orElse(null);
     }
 
     /**
@@ -51,7 +60,7 @@ class Range<T extends Comparable<? super T>> extends Base {
      */
     public boolean isEmpty() {
         return isBounded() && lowerEndpoint().equals(upperEndpoint())
-                && lowerBound.get().isExclusive() != upperBound.get().isExclusive();
+                && lowerBound.isExclusive() != upperBound.isExclusive();
     }
 
     /**
@@ -59,19 +68,19 @@ class Range<T extends Comparable<? super T>> extends Base {
      * @return true if the range has both lower and upper bounds, false otherwise.
      */
     public boolean isBounded() {
-        return lowerBound.isPresent() && upperBound.isPresent();
+        return lowerBound != null && upperBound != null;
     }
 
     public String serialize(final Function<T, String> serializer) {
         return String.format("(%s to %s)",
-                lowerEndpoint().map(e -> serializer.apply(e)).orElse(UNBOUND),
-                upperEndpoint().map(e -> serializer.apply(e)).orElse(UNBOUND));
+                Optional.ofNullable(lowerEndpoint()).map(serializer::apply).orElse(UNBOUND),
+                Optional.ofNullable(upperEndpoint()).map(serializer::apply).orElse(UNBOUND));
     }
 
     @Override
     public String toString() {
-        final String lower = lowerBound().map(b -> (b.isExclusive() ? "(" : "[") + b.endpoint()).orElse("(*");
-        final String upper = upperBound().map(b -> b.endpoint() + (b.isExclusive() ? ")" : "]")).orElse("*)");
+        final String lower = Optional.ofNullable(lowerBound()).map(b -> (b.isExclusive() ? "(" : "[") + b.endpoint()).orElse("(*");
+        final String upper = Optional.ofNullable(upperBound()).map(b -> b.endpoint() + (b.isExclusive() ? ")" : "]")).orElse("*)");
         return lower + " to " + upper;
     }
 
@@ -80,7 +89,7 @@ class Range<T extends Comparable<? super T>> extends Base {
      * @return true if the bounds are inverted, false otherwise.
      */
     private boolean hasInvertedBounds() {
-        return isBounded() && lowerEndpoint().get().compareTo(upperEndpoint().get()) > 0;
+        return isBounded() && ObjectUtils.compare(lowerEndpoint(), upperEndpoint()) > 0;
     }
 
     /**
@@ -88,6 +97,6 @@ class Range<T extends Comparable<? super T>> extends Base {
      * @return true if the range is of the form (a, a), false otherwise.
      */
     private boolean hasSameExclusiveBounds() {
-        return isBounded() && lowerBound.equals(upperBound) && lowerBound.get().isExclusive();
+        return isBounded() && lowerBound.equals(upperBound) && lowerBound.isExclusive();
     }
 }

@@ -6,28 +6,31 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Image;
 import io.sphere.sdk.products.Price;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
+import java.util.Objects;
 
 import static java.util.Arrays.asList;
 
 public class ProductVariantImportDraftBuilder extends Base implements Builder<ProductVariantImportDraft> {
-    private final Optional<Integer> id;
-    private final Optional<String> sku;
-    private final Optional<String> productId;
-    private Optional<List<Price>> prices = Optional.empty();
-    private Optional<List<AttributeImportDraft>> attributes = Optional.empty();
-    private Optional<List<Image>> images = Optional.empty();
 
-    private ProductVariantImportDraftBuilder(final Optional<String> sku, final Optional<String> productId, final Optional<Integer> id) {
+    @Nullable
+    private final Integer id;
+    @Nullable
+    private final String sku;
+    @Nullable
+    private final String productId;
+    @Nullable
+    private List<Price> prices;
+    @Nullable
+    private List<AttributeImportDraft> attributes;
+    @Nullable
+    private List<Image> images;
+
+    private ProductVariantImportDraftBuilder(final String sku, final String productId, final Integer id) {
         this.sku = sku;
         this.productId = productId;
         this.id = id;
-    }
-
-    public ProductVariantImportDraftBuilder prices(final Optional<List<Price>> prices) {
-        this.prices = prices;
-        return this;
     }
 
     /**
@@ -35,42 +38,41 @@ public class ProductVariantImportDraftBuilder extends Base implements Builder<Pr
      * @param prices the prices to set
      * @return this builder
      */
-    public ProductVariantImportDraftBuilder prices(final List<Price> prices) {
-        return prices(Optional.of(prices));
-    }
-
-    public ProductVariantImportDraftBuilder attributes(final Optional<List<AttributeImportDraft>> attributes) {
-        this.attributes = attributes;
+    public ProductVariantImportDraftBuilder prices(@Nullable final List<Price> prices) {
+        this.prices = prices;
         return this;
     }
 
-    public ProductVariantImportDraftBuilder attributes(final List<AttributeImportDraft> attributes) {
-        return attributes(Optional.of(attributes));
+    public ProductVariantImportDraftBuilder attributes(@Nullable final List<AttributeImportDraft> attributes) {
+        this.attributes = attributes;
+        return this;
     }
 
     public ProductVariantImportDraftBuilder attributes(final AttributeImportDraft ... attributes) {
         return attributes(asList(attributes));
     }
 
-    public ProductVariantImportDraftBuilder images(final Optional<List<Image>> images) {
+    public ProductVariantImportDraftBuilder images(@Nullable final List<Image> images) {
         this.images = images;
         return this;
     }
 
-    public ProductVariantImportDraftBuilder images(final List<Image> images) {
-        return images(Optional.of(images));
-    }
-
     public static ProductVariantImportDraftBuilder ofSku(final String sku) {
-        return new ProductVariantImportDraftBuilder(Optional.of(sku), Optional.<String>empty(), Optional.<Integer>empty());
+        Objects.requireNonNull(sku);
+        return new ProductVariantImportDraftBuilder(sku, null, null);
     }
 
     public static ProductVariantImportDraftBuilder of(final String productId, final int variantId, final String sku) {
-        return new ProductVariantImportDraftBuilder(Optional.of(sku), Optional.of(productId), Optional.of(variantId));
+        Objects.requireNonNull(productId);
+        Objects.requireNonNull(variantId);
+        Objects.requireNonNull(sku);
+        return new ProductVariantImportDraftBuilder(sku, productId, variantId);
     }
 
     public static ProductVariantImportDraftBuilder of(final String productId, final int variantId) {
-        return new ProductVariantImportDraftBuilder(Optional.<String>empty(), Optional.of(productId), Optional.of(variantId));
+        Objects.requireNonNull(productId);
+        Objects.requireNonNull(variantId);
+        return new ProductVariantImportDraftBuilder(null, productId, variantId);
     }
 
     @Override

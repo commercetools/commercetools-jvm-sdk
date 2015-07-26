@@ -6,6 +6,8 @@ import java.util.Optional;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
+
 /**
 
  <p>A sellable good.</p>
@@ -52,16 +54,14 @@ public interface Product extends ProductLike<Product>, DefaultModel<Product> {
         return Reference.of(typeId(), product.getId(), product);
     }
 
-    static Optional<Reference<Product>> reference(final Optional<Product> category) {
-        return category.map(Product::reference);
-    }
-
     static Reference<Product> reference(final String id) {
         return Reference.of(typeId(), id);
     }
 
-    default Optional<ProductProjection> toProjection(final ProductProjectionType productProjectionType) {
-        return getMasterData().get(productProjectionType)
-                .map(productData -> new ProductToProductProjectionWrapper(this, productProjectionType));
+    @Nullable
+    default ProductProjection toProjection(final ProductProjectionType productProjectionType) {
+        return Optional.ofNullable(getMasterData().get(productProjectionType))
+                .map(productData -> new ProductToProductProjectionWrapper(this, productProjectionType))
+                .orElse(null);
     }
 }

@@ -6,6 +6,7 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -13,22 +14,22 @@ import java.util.Optional;
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setCustomerGroup()}
  */
 public class SetCustomerGroup extends UpdateAction<Customer> {
-    private final Optional<Reference<CustomerGroup>> customerGroup;
+    @Nullable
+    private final Reference<CustomerGroup> customerGroup;
 
-    private SetCustomerGroup(final Optional<Reference<CustomerGroup>> customerGroup) {
+    private SetCustomerGroup(final Referenceable<CustomerGroup> customerGroup) {
         super("setCustomerGroup");
-        this.customerGroup = customerGroup.map(e -> e.filled(Optional.empty()));
+        this.customerGroup = Optional.ofNullable(customerGroup)
+                .map(x -> x.toReference().filled(null))
+                .orElse(null);
     }
 
-    public static SetCustomerGroup of(final Optional<Reference<CustomerGroup>> customerGroup) {
+    public static SetCustomerGroup of(@Nullable final Referenceable<CustomerGroup> customerGroup) {
         return new SetCustomerGroup(customerGroup);
     }
 
-    public static SetCustomerGroup of(final Referenceable<CustomerGroup> customerGroup) {
-        return of(Optional.of(customerGroup.toReference()));
-    }
-
-    public Optional<Reference<CustomerGroup>> getCustomerGroup() {
+    @Nullable
+    public Reference<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 }

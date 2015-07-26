@@ -4,7 +4,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.LocalizedStrings;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  * Sets the SEO attribute description.
@@ -12,22 +12,20 @@ import java.util.Optional;
  * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#setMetaDescription()}
  */
 public class SetMetaDescription extends UpdateAction<Category> {
-    private final Optional<LocalizedStrings> metaDescription;
+    @Nullable
+    private final LocalizedStrings metaDescription;
 
-    private SetMetaDescription(final Optional<LocalizedStrings> metaDescription) {
+    private SetMetaDescription(final LocalizedStrings metaDescription) {
         super("setMetaDescription");
         this.metaDescription = metaDescription;
     }
 
-    public static SetMetaDescription of(final LocalizedStrings metaDescription) {
-        return of(Optional.of(metaDescription));
-    }
-
-    public static SetMetaDescription of(final Optional<LocalizedStrings> metaDescription) {
+    public static SetMetaDescription of(@Nullable final LocalizedStrings metaDescription) {
         return new SetMetaDescription(metaDescription);
     }
 
-    public Optional<LocalizedStrings> getMetaDescription() {
+    @Nullable
+    public LocalizedStrings getMetaDescription() {
         return metaDescription;
     }
 }

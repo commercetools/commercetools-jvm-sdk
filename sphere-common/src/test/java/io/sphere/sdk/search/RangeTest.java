@@ -2,10 +2,6 @@ package io.sphere.sdk.search;
 
 import org.junit.Test;
 
-import java.lang.Exception;
-import java.lang.Integer;
-import java.util.Optional;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class RangeTest {
@@ -13,8 +9,8 @@ public class RangeTest {
     @Test
     public void createsBoundedRange() throws Exception {
         final Range<Integer> range = range(Bound.exclusive(4), Bound.inclusive(10));
-        final Bound<Integer> lowerBound = range.lowerBound().get();
-        final Bound<Integer> upperBound = range.upperBound().get();
+        final Bound<Integer> lowerBound = range.lowerBound();
+        final Bound<Integer> upperBound = range.upperBound();
         assertThat(lowerBound.endpoint()).isEqualTo(4);
         assertThat(lowerBound.isExclusive()).isTrue();
         assertThat(upperBound.endpoint()).isEqualTo(10);
@@ -23,9 +19,9 @@ public class RangeTest {
 
     @Test
     public void createsUnboundedRange() throws Exception {
-        final Range<Integer> range = new Range<>(Optional.empty(), Optional.empty());
-        assertThat(range.lowerBound().isPresent()).isFalse();
-        assertThat(range.upperBound().isPresent()).isFalse();
+        final Range<Integer> range = new Range<>(null, null);
+        assertThat(range.lowerBound()).isNull();
+        assertThat(range.upperBound()).isNull();
     }
 
     @Test
@@ -35,21 +31,21 @@ public class RangeTest {
         Bound<Integer> changedBound = bound.withEndpoint(6);
         assertThat(changedBound.endpoint()).isEqualTo(6);
         assertThat(bound.endpoint()).isEqualTo(4);
-        assertThat(range.lowerEndpoint().get()).isEqualTo(4);
+        assertThat(range.lowerEndpoint()).isEqualTo(4);
     }
 
     @Test
     public void getsEndpointsOfBoundsAsOptionals() throws Exception {
-        final Range<Integer> range = new Range<>(Optional.empty(), Optional.of(Bound.exclusive(4)));
-        assertThat(range.lowerEndpoint().isPresent()).isFalse();
-        assertThat(range.upperEndpoint().get()).isEqualTo(4);
+        final Range<Integer> range = new Range<>(null, Bound.exclusive(4));
+        assertThat(range.lowerEndpoint()).isNull();
+        assertThat(range.upperEndpoint()).isEqualTo(4);
     }
 
     @Test
     public void isClosedWhenBothBoundsAreDefined() throws Exception {
         assertThat(range(Bound.exclusive(4), Bound.inclusive(10)).isBounded()).isTrue();
-        assertThat(new Range<>(Optional.empty(), Optional.of(Bound.exclusive(4))).isBounded()).isFalse();
-        assertThat(new Range<>(Optional.empty(), Optional.empty()).isBounded()).isFalse();
+        assertThat(new Range<>(null, Bound.exclusive(4)).isBounded()).isFalse();
+        assertThat(new Range<>(null, null).isBounded()).isFalse();
     }
 
     @Test
@@ -81,11 +77,11 @@ public class RangeTest {
     public void printsRange() throws Exception {
         final Range<Integer> range = range(Bound.exclusive(4), Bound.inclusive(10));
         assertThat(range.toString()).isEqualTo("(4 to 10]");
-        assertThat(new Range<>(Optional.of(Bound.inclusive(4)), Optional.empty()).toString()).isEqualTo("[4 to *)");
-        assertThat(new Range<>(Optional.empty(), Optional.empty()).toString()).isEqualTo("(* to *)");
+        assertThat(new Range<>(Bound.inclusive(4), null).toString()).isEqualTo("[4 to *)");
+        assertThat(new Range<>(null, null).toString()).isEqualTo("(* to *)");
     }
 
     private <T extends Comparable<? super T>> Range<T> range(Bound<T> lowerBound, Bound<T> upperBound) {
-        return new Range<>(Optional.of(lowerBound), Optional.of(upperBound));
+        return new Range<>(lowerBound, upperBound);
     }
 }

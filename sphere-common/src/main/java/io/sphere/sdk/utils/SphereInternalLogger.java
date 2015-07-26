@@ -7,6 +7,7 @@ import io.sphere.sdk.http.HttpResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Optional;
 import java.util.function.Supplier;
 
 import static org.apache.commons.lang3.StringUtils.substringBefore;
@@ -111,9 +112,9 @@ public final class SphereInternalLogger {
     }
 
     public static SphereInternalLogger getLogger(final HttpResponse response) {
-        final String firstPathElement = response.getAssociatedRequest()
+        final String firstPathElement = Optional.ofNullable(response.getAssociatedRequest())
                 .map(r -> getPathElement(r)).orElse("endpoint-unknown");
-        final String lastPathElement = response.getAssociatedRequest()
+        final String lastPathElement = Optional.ofNullable(response.getAssociatedRequest())
                 .map(r -> requestOrCommandScopeSegment(r.getHttpMethod())).orElse("execution-type-unknown");
         return getLogger(firstPathElement + ".responses." + lastPathElement);
     }

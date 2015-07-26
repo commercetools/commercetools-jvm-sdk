@@ -6,8 +6,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
-import java.util.Optional;
 import java.util.Set;
 
 final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
@@ -16,11 +16,13 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     private final MonetaryAmount money;
     private final String slug;
     private final long quantity;
-    private final Optional<Set<ItemState>> state;
+    @Nullable
+    private final Set<ItemState> state;
     private final Reference<TaxCategory> taxCategory;
-    private final Optional<TaxRate> taxRate;
+    @Nullable
+    private final TaxRate taxRate;
 
-    public CustomLineItemImportDraftImpl(final String id, final LocalizedStrings name, final MonetaryAmount money, final String slug, final long quantity, final Optional<Set<ItemState>> state, final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate) {
+    public CustomLineItemImportDraftImpl(final String id, final LocalizedStrings name, final MonetaryAmount money, final String slug, final long quantity, final Set<ItemState> state, final Reference<TaxCategory> taxCategory, final TaxRate taxRate) {
         this.id = id;
         this.name = name;
         this.money = money;
@@ -56,7 +58,8 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     }
 
     @Override
-    public Optional<Set<ItemState>> getState() {
+    @Nullable
+    public Set<ItemState> getState() {
         return state;
     }
 
@@ -66,7 +69,8 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     }
 
     @Override
-    public Optional<TaxRate> getTaxRate() {
+    @Nullable
+    public TaxRate getTaxRate() {
         return taxRate;
     }
 }

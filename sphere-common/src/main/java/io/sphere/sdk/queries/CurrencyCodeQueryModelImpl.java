@@ -1,9 +1,9 @@
 package io.sphere.sdk.queries;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 final class CurrencyCodeQueryModelImpl<T> extends QueryModelImpl<T> implements CurrencyCodeQueryModel<T> {
-    public CurrencyCodeQueryModelImpl(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
+    public CurrencyCodeQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

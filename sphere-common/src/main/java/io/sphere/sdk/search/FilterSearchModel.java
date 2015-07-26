@@ -1,13 +1,13 @@
 package io.sphere.sdk.search;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 import static java.util.Arrays.asList;
 
 public class FilterSearchModel<T, V> extends SearchModelImpl<T> {
     protected TypeSerializer<V> typeSerializer;
 
-    FilterSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
+    FilterSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment, final TypeSerializer<V> typeSerializer) {
         super(parent, pathSegment);
         this.typeSerializer = typeSerializer;
     }

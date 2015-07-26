@@ -6,7 +6,7 @@ import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.ParcelMeasurements;
 import io.sphere.sdk.orders.TrackingData;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
 
@@ -14,10 +14,12 @@ import java.util.Optional;
  */
 public class AddParcelToDelivery extends UpdateAction<Order> {
     private final String deliveryId;
-    private final Optional<ParcelMeasurements> measurements;
-    private final Optional<TrackingData> trackingData;
+    @Nullable
+    private final ParcelMeasurements measurements;
+    @Nullable
+    private final TrackingData trackingData;
 
-    private AddParcelToDelivery(final String deliveryId, final Optional<ParcelMeasurements> measurements, final Optional<TrackingData> trackingData) {
+    private AddParcelToDelivery(final String deliveryId, @Nullable final ParcelMeasurements measurements, @Nullable final TrackingData trackingData) {
         super("addParcelToDelivery");
         this.deliveryId = deliveryId;
         this.measurements = measurements;
@@ -36,11 +38,13 @@ public class AddParcelToDelivery extends UpdateAction<Order> {
         return deliveryId;
     }
 
-    public Optional<ParcelMeasurements> getMeasurements() {
+    @Nullable
+    public ParcelMeasurements getMeasurements() {
         return measurements;
     }
 
-    public Optional<TrackingData> getTrackingData() {
+    @Nullable
+    public TrackingData getTrackingData() {
         return trackingData;
     }
 }

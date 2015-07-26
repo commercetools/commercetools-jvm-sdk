@@ -3,10 +3,8 @@ package io.sphere.sdk.carts.queries;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
 
-import java.util.Optional;
-
 public abstract class CartLikeQueryModel<T> extends DefaultModelQueryModelImpl<T> {
-    protected CartLikeQueryModel(Optional<? extends QueryModel<T>> parent, Optional<String> pathSegment) {
+    protected CartLikeQueryModel(QueryModel<T> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 
@@ -23,11 +21,11 @@ public abstract class CartLikeQueryModel<T> extends DefaultModelQueryModelImpl<T
     }
 
     public TaxedPriceOptionalQueryModel<T> taxedPrice() {
-        return new TaxedPriceOptionalQueryModelImpl<>(Optional.of(this), "taxedPrice");
+        return new TaxedPriceOptionalQueryModelImpl<>(this, "taxedPrice");
     }
 
     public CountryQueryModel<T> country() {
-        return new CountryQueryModel<>(Optional.of(this), Optional.of("country"));
+        return new CountryQueryModel<>(this, "country");
     }
 
     public ReferenceOptionalQueryModel<T, CustomerGroup> customerGroup() {
@@ -35,6 +33,6 @@ public abstract class CartLikeQueryModel<T> extends DefaultModelQueryModelImpl<T
     }
 
     public LineItemCollectionQueryModel<T> lineItems() {
-        return new LineItemCollectionQueryModelImpl<>(Optional.of(this), "lineItems");
+        return new LineItemCollectionQueryModelImpl<>(this, "lineItems");
     }
 }

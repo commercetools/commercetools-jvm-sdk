@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.utils.MoneyImpl;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -16,13 +17,20 @@ import java.util.Optional;
 
 public class PriceBuilder implements Builder<Price> {
     private MonetaryAmount value;
-    private Optional<CountryCode> country = Optional.empty();
-    private Optional<Reference<CustomerGroup>> customerGroup = Optional.empty();
-    private Optional<Reference<Channel>> channel = Optional.empty();
-    private Optional<DiscountedPrice> discounted = Optional.empty();
-    private Optional<ZonedDateTime> validFrom = Optional.empty();
-    private Optional<ZonedDateTime> validUntil = Optional.empty();
-    private Optional<String> id = Optional.empty();
+    @Nullable
+    private CountryCode country;
+    @Nullable
+    private Reference<CustomerGroup> customerGroup;
+    @Nullable
+    private Reference<Channel> channel;
+    @Nullable
+    private DiscountedPrice discounted;
+    @Nullable
+    private ZonedDateTime validFrom;
+    @Nullable
+    private ZonedDateTime validUntil;
+    @Nullable
+    private String id;
 
     private PriceBuilder(final MonetaryAmount value) {
         this.value = value;
@@ -43,73 +51,39 @@ public class PriceBuilder implements Builder<Price> {
                 .id(template.getId());
     }
 
-    public PriceBuilder country(final Optional<CountryCode> country) {
+    public PriceBuilder country(@Nullable final CountryCode country) {
         this.country = country;
         return this;
     }
     
-    public PriceBuilder country(final CountryCode country) {
-        Objects.requireNonNull(country);
-        return country(Optional.of(country));
-    }
-    
-    public PriceBuilder customerGroup(final Optional<Reference<CustomerGroup>> customerGroup) {
-        this.customerGroup = customerGroup;
+    public PriceBuilder customerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
+        this.customerGroup = Optional.ofNullable(customerGroup).map(Referenceable::toReference).orElse(null);
         return this;
     }
     
-    public PriceBuilder customerGroup(final Referenceable<CustomerGroup> customerGroup) {
-        Objects.requireNonNull(customerGroup);
-        return customerGroup(Optional.of(customerGroup.toReference()));
-    } 
-    
-    public PriceBuilder channel(final Optional<Reference<Channel>> channel) {
-        this.channel = channel;
+    public PriceBuilder channel(@Nullable final Referenceable<Channel> channel) {
+        this.channel =  Optional.ofNullable(channel).map(Referenceable::toReference).orElse(null);
         return this;
-    }
-    
-    public PriceBuilder channel(final Referenceable<Channel> channel) {
-        Objects.requireNonNull(channel);
-        return channel(Optional.of(channel.toReference()));
     }
 
-    public PriceBuilder discounted(final Optional<DiscountedPrice> discounted) {
+    public PriceBuilder discounted(@Nullable final DiscountedPrice discounted) {
         this.discounted = discounted;
         return this;
     }
 
-    public PriceBuilder discounted(final DiscountedPrice discounted) {
-        Objects.requireNonNull(discounted);
-        return discounted(Optional.of(discounted));
-    }
-
-    public PriceBuilder validFrom(final Optional<ZonedDateTime> validFrom) {
+    public PriceBuilder validFrom(@Nullable final ZonedDateTime validFrom) {
         this.validFrom = validFrom;
         return this;
     }
 
-    public PriceBuilder validFrom(final ZonedDateTime validFrom) {
-        Objects.requireNonNull(validFrom);
-        return validFrom(Optional.of(validFrom));
-    }
-
-    public PriceBuilder validUntil(final Optional<ZonedDateTime> validUntil) {
+    public PriceBuilder validUntil(@Nullable final ZonedDateTime validUntil) {
         this.validUntil = validUntil;
         return this;
     }
 
-    public PriceBuilder validUntil(final ZonedDateTime validUntil) {
-        Objects.requireNonNull(validUntil);
-        return validUntil(Optional.of(validUntil));
-    }
-
-    public PriceBuilder id(final Optional<String> id) {
+    public PriceBuilder id(@Nullable final String id) {
         this.id = id;
         return this;
-    }
-
-    public PriceBuilder id(final String id) {
-        return id(Optional.of(id));
     }
 
     public PriceBuilder value(final MonetaryAmount value) {

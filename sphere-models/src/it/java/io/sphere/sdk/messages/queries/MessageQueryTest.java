@@ -21,7 +21,7 @@ public class MessageQueryTest extends IntegrationTest {
     public void convertAfterQueryToSpecificMessageClasses() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final MessageQuery query = MessageQuery.of()
-                    .withPredicate(m -> m.resource().is(order))
+                    .withPredicates(m -> m.resource().is(order))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource());
             final List<Message> results = execute(query).getResults();
@@ -37,7 +37,7 @@ public class MessageQueryTest extends IntegrationTest {
                     returnInfoAddedUntypedMessage.as(ReturnInfoAddedMessage.class);
 
             assertThat(order.getReturnInfo()).contains(returnInfoAddedMessage.getReturnInfo());
-            final Order expandedOrder = returnInfoAddedMessage.getResource().getObj().get();
+            final Order expandedOrder = returnInfoAddedMessage.getResource().getObj();
             assertThat(expandedOrder.getCreatedAt()).isEqualTo(order.getCreatedAt());
         }));
     }
@@ -46,7 +46,7 @@ public class MessageQueryTest extends IntegrationTest {
     public void convertAfterQueryToSpecificMessageClassesButToTheWrongOne() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final MessageQuery query = MessageQuery.of()
-                    .withPredicate(m -> m.resource().id().is(order.getId()))
+                    .withPredicates(m -> m.resource().id().is(order.getId()))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource());
             final List<Message> results = execute(query).getResults();
@@ -72,13 +72,13 @@ public class MessageQueryTest extends IntegrationTest {
     public void queryForASpecificResource() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final Query<SimpleOrderMessage> query = MessageQuery.of()
-                    .withPredicate(m -> m.resource().id().is(order.getId()))
+                    .withPredicates(m -> m.resource().id().is(order.getId()))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource())
                     .forMessageType(SimpleOrderMessage.MESSAGE_HINT);
             final List<SimpleOrderMessage> results = execute(query).getResults();
 
-            final Optional<Order> orderOptional = results.get(0).getResource().getObj();
+            final Optional<Order> orderOptional = Optional.ofNullable(results.get(0).getResource().getObj());
             assertThat(orderOptional.map(o -> o.getCreatedAt())).contains(order.getCreatedAt());
         }));
     }
@@ -95,7 +95,7 @@ public class MessageQueryTest extends IntegrationTest {
             final PagedQueryResult<ReturnInfoAddedMessage> pagedQueryResult = execute(query);
             final ReturnInfoAddedMessage message = pagedQueryResult.head().get();
             assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
-            assertThat(message.getResource().getObj()).isPresent();
+            assertThat(message.getResource().getObj()).isNotNull();
             assertThat(message.getResource().getId()).isEqualTo(order.getId());
         }));
     }
@@ -105,7 +105,7 @@ public class MessageQueryTest extends IntegrationTest {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final Query<Message> query =
                     MessageQuery.of()
-                            .withPredicate(m -> m.type().is(ReturnInfoAddedMessage.MESSAGE_HINT))
+                            .withPredicates(m -> m.type().is(ReturnInfoAddedMessage.MESSAGE_HINT))
                             .withSort(m -> m.createdAt().sort().desc())
                             .withExpansionPaths(m -> m.resource())
                             .withLimit(1);
@@ -123,12 +123,12 @@ public class MessageQueryTest extends IntegrationTest {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
             final MessageQuery query = MessageQuery.of()
                     //example predicate to fetch for a specific message type
-                    .withPredicate(m -> m.type().is("ReturnInfoAdded"))
+                    .withPredicates(m -> m.type().is("ReturnInfoAdded"))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource())
                     .withLimit(1);
             final Message message = execute(query).head().get();
-            assertThat(message.getResource().getObj()).isPresent();
+            assertThat(message.getResource().getObj()).isNotNull();
             assertThat(message.getResource()).isEqualTo(order.toReference());
             assertThat(message.getResource().getId()).isEqualTo(order.getId());
         }));

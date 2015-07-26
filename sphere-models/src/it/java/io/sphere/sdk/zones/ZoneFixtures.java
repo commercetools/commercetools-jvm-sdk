@@ -48,7 +48,7 @@ public class ZoneFixtures {
             try {
                 client.execute(ZoneDeleteCommand.of(zone));
             } catch (final SphereException e) {
-                client.execute(ShippingMethodQuery.of().withPredicate(ShippingMethodQueryModel.of().zoneRates().zone().is(zone)))
+                client.execute(ShippingMethodQuery.of().withPredicates(ShippingMethodQueryModel.of().zoneRates().zone().is(zone)))
                         .head()
                         .ifPresent(sm -> {
                             client.execute(ShippingMethodDeleteCommand.of(sm));

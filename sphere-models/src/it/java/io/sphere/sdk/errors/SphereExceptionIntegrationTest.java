@@ -93,7 +93,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
             } catch (final SphereServiceException e) {
                 assertThat(e.getProjectKey()).contains(getSphereClientConfig().getProjectKey());
                 assertThat(e.getMessage()).contains(BuildInfo.version()).contains(command.toString());
-                assertThat(e.getJsonBody().get().get("statusCode").asInt())
+                assertThat(e.getJsonBody().get("statusCode").asInt())
                         .overridingErrorMessage("exception contains json body of error response")
                         .isEqualTo(HttpStatusCode.CONFLICT_409);
             }

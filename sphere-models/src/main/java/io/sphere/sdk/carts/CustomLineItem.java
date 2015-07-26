@@ -6,8 +6,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
-import java.util.Optional;
 import java.util.Set;
 
 @JsonDeserialize(as=CustomLineItemImpl.class)
@@ -22,7 +22,8 @@ public interface CustomLineItem extends LineItemLike {
 
     Reference<TaxCategory> getTaxCategory();
 
-    Optional<TaxRate> getTaxRate();
+    @Nullable
+    TaxRate getTaxRate();
 
     @Override
     String getId();

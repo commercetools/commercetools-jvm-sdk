@@ -5,16 +5,20 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.Set;
 
 public class StateDraftBuilder extends Base implements Builder<StateDraft> {
     private final String key;
     private final StateType type;
-    private Optional<LocalizedStrings> name;
-    private Optional<LocalizedStrings> description;
-    private Optional<Boolean> initial;
-    private Optional<Set<Reference<State>>> transitions;
+    @Nullable
+    private LocalizedStrings name;
+    @Nullable
+    private LocalizedStrings description;
+    @Nullable
+    private Boolean initial;
+    @Nullable
+    private Set<Reference<State>> transitions;
 
     public StateDraftBuilder(final String key, final StateType type) {
         this.key = key;
@@ -33,40 +37,24 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
                 .initial(template.isInitial());
     }
 
-    public StateDraftBuilder name(final Optional<LocalizedStrings> name) {
+    public StateDraftBuilder name(@Nullable final LocalizedStrings name) {
         this.name = name;
         return this;
     }
 
-    public StateDraftBuilder name(final LocalizedStrings name) {
-        return name(Optional.of(name));
-    }
-
-    public StateDraftBuilder description(final Optional<LocalizedStrings> description) {
+    public StateDraftBuilder description(@Nullable final LocalizedStrings description) {
         this.description = description;
         return this;
     }
 
-    public StateDraftBuilder description(final LocalizedStrings description) {
-        return description(Optional.of(description));
-    }
-
-    public StateDraftBuilder initial(final Optional<Boolean> initial) {
+    public StateDraftBuilder initial(@Nullable final Boolean initial) {
         this.initial = initial;
         return this;
     }
 
-    public StateDraftBuilder initial(final boolean initial) {
-        return initial(Optional.of(initial));
-    }
-
-    public StateDraftBuilder transitions(final Optional<Set<Reference<State>>> transitions) {
+    public StateDraftBuilder transitions(@Nullable final Set<Reference<State>> transitions) {
         this.transitions = transitions;
         return this;
-    }
-
-    public StateDraftBuilder transitions(final Set<Reference<State>> transitions) {
-        return transitions(Optional.of(transitions));
     }
 
     @Override

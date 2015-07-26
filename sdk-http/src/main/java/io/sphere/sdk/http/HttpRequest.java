@@ -1,6 +1,6 @@
 package io.sphere.sdk.http;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public interface HttpRequest {
     HttpMethod getHttpMethod();
@@ -9,13 +9,14 @@ public interface HttpRequest {
 
     HttpHeaders getHeaders();
 
-    Optional<HttpRequestBody> getBody();
+    @Nullable
+    HttpRequestBody getBody();
 
     static HttpRequest of(final HttpMethod httpMethod, final String url) {
-        return of(httpMethod, url, HttpHeaders.empty(), Optional.<HttpRequestBody>empty());
+        return of(httpMethod, url, HttpHeaders.empty(), null);
     }
 
-    static HttpRequest of(final HttpMethod httpMethod, final String url, final HttpHeaders headers, final Optional<HttpRequestBody> body) {
+    static HttpRequest of(final HttpMethod httpMethod, final String url, final HttpHeaders headers, @Nullable final HttpRequestBody body) {
         return new HttpRequestImpl(httpMethod, url, headers, body);
     }
 }

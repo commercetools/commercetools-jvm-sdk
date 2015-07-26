@@ -19,7 +19,7 @@ public class TokensSupplierImplTest {
         final RecordHttpClient httpClient = new RecordHttpClient();
         SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, httpClient, true).get();
         final String expectedValue = BuildInfo.userAgent();
-        assertThat(httpClient.request.getHeaders().getFlatHeader(HttpHeaders.USER_AGENT))
+        assertThat(httpClient.request.getHeaders().findFlatHeader(HttpHeaders.USER_AGENT))
                 .contains(expectedValue);
         assertThat(expectedValue)
                 .contains("JVM")

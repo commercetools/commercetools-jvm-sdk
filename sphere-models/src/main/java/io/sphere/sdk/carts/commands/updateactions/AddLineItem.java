@@ -7,7 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductIdentifiable;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  Adds a product variant in the given quantity to the cart.
@@ -19,10 +19,11 @@ public class AddLineItem extends UpdateAction<Cart> {
     private final String productId;
     private final int variantId;
     private final long quantity;
-    private final Optional<Reference<Channel>> supplyChannel;
-    private final Optional<Reference<Channel>> distributionChannel;
+    @Nullable
+    private final Reference<Channel> supplyChannel;
+    @Nullable private final Reference<Channel> distributionChannel;
 
-    private AddLineItem(final String productId, final int variantId, final long quantity, final Optional<Reference<Channel>> supplyChannel, final Optional<Reference<Channel>> distributionChannel) {
+    private AddLineItem(final String productId, final int variantId, final long quantity, final Reference<Channel> supplyChannel, final Reference<Channel> distributionChannel) {
         super("addLineItem");
         this.productId = productId;
         this.variantId = variantId;
@@ -36,7 +37,7 @@ public class AddLineItem extends UpdateAction<Cart> {
     }
 
     public static AddLineItem of(final String productId, final int variantId, final long quantity) {
-        return new AddLineItem(productId, variantId, quantity, Optional.empty(), Optional.empty());
+        return new AddLineItem(productId, variantId, quantity, null, null);
     }
 
     public String getProductId() {
@@ -51,19 +52,21 @@ public class AddLineItem extends UpdateAction<Cart> {
         return quantity;
     }
 
-    public Optional<Reference<Channel>> getDistributionChannel() {
+    @Nullable
+    public Reference<Channel> getDistributionChannel() {
         return distributionChannel;
     }
 
-    public Optional<Reference<Channel>> getSupplyChannel() {
+    @Nullable
+    public Reference<Channel> getSupplyChannel() {
         return supplyChannel;
     }
 
     public AddLineItem withSupplyChannel(final Referenceable<Channel> supplyChannel) {
-        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), Optional.of(supplyChannel.toReference()), getDistributionChannel());
+        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), supplyChannel.toReference(), getDistributionChannel());
     }
 
     public AddLineItem withDistributionChannel(final Referenceable<Channel> distributionChannel) {
-        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), Optional.of(distributionChannel.toReference()));
+        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), distributionChannel.toReference());
     }
 }

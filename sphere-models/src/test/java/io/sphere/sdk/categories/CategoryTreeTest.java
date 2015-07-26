@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryTreeTest {
-    private static final Comparator<Category> byNameComparator = (Category left, Category right) -> left.getName().get(Locale.ENGLISH).get().compareTo(right.getName().get(Locale.ENGLISH).get());
+    private static final Comparator<Category> byNameComparator = (Category left, Category right) -> left.getName().get(Locale.ENGLISH).compareTo(right.getName().get(Locale.ENGLISH));
     private final Locale locale = Locale.ENGLISH;
     private final List<String> rootIds = asList("0", "1", "2", "3");
     private final List<String> childIds = asList("a", "b", "c", "d", "e");
@@ -98,8 +98,8 @@ public class CategoryTreeTest {
             childIds.stream().forEach(childId -> {
                     final Category child = new CategoryWrapper(newOrphanCategory(parent.getId() + childId)) {
                         @Override
-                        public Optional<Reference<Category>> getParent() {
-                            return Optional.<Reference<Category>>of(parent.toReference());
+                        public Reference<Category> getParent() {
+                            return parent.toReference();
                         }
                     };
                     children.add(child);

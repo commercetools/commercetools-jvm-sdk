@@ -7,8 +7,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
-import java.util.Optional;
 import java.util.Set;
 
 final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineItem {
@@ -16,13 +16,14 @@ final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineIte
     private final MonetaryAmount money;
     private final String slug;
     private final Reference<TaxCategory> taxCategory;
-    private final Optional<TaxRate> taxRate;
+    @Nullable
+    private final TaxRate taxRate;
 
     @JsonCreator
     CustomLineItemImpl(final String id, final LocalizedStrings name, final MonetaryAmount money,
                        final String slug, final long quantity, final Set<ItemState> state,
-                       final Reference<TaxCategory> taxCategory, final Optional<TaxRate> taxRate,
-                       final Optional<DiscountedLineItemPrice> discountedPrice) {
+                       final Reference<TaxCategory> taxCategory, final TaxRate taxRate,
+                       @Nullable final DiscountedLineItemPrice discountedPrice) {
         super(id, state, quantity, discountedPrice);
         this.name = name;
         this.money = money;
@@ -52,7 +53,8 @@ final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineIte
     }
 
     @Override
-    public Optional<TaxRate> getTaxRate() {
+    @Nullable
+    public TaxRate getTaxRate() {
         return taxRate;
     }
 }

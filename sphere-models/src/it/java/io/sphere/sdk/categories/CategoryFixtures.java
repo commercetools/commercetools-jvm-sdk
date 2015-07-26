@@ -58,7 +58,7 @@ public class CategoryFixtures {
 
     public static void withCategory(final TestClient client, final Consumer<Category> consumer) {
         final LocalizedStrings slug = randomSlug();
-        final CategoryDraftBuilder catSupplier = CategoryDraftBuilder.of(en(slug.get(ENGLISH).get() + " name"), slug).externalId(randomKey());
+        final CategoryDraftBuilder catSupplier = CategoryDraftBuilder.of(en(slug.get(ENGLISH) + " name"), slug).externalId(randomKey());
         CategoryFixtures.withCategory(client, catSupplier, consumer);
     }
 }

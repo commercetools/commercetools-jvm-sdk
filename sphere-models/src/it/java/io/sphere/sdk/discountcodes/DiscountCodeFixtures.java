@@ -16,7 +16,7 @@ public class DiscountCodeFixtures {
     public static void withPersistentDiscountCode(final TestClient client, final Consumer<DiscountCode> consumer) {
         final String code = DiscountCodeFixtures.class.getSimpleName() + "-persistent-4";
         final Optional<DiscountCode> fetchedDiscountCode = client.execute(DiscountCodeQuery.of()
-                .withPredicate(DiscountCodeQueryModel.of().code().is(code))).head();
+                .withPredicates(DiscountCodeQueryModel.of().code().is(code))).head();
 
         final DiscountCode discountCode = fetchedDiscountCode.orElseGet(() -> createDiscountCode(client, code));
         consumer.accept(discountCode);
@@ -28,8 +28,8 @@ public class DiscountCodeFixtures {
                 .withName(en("sample discount code"))
                 .withDescription(en("sample discount code descr."))
                 .withIsActive(true)
-                .withMaxApplications(5)
-                .withMaxApplicationsPerCustomer(1);
+                .withMaxApplications(5L)
+                .withMaxApplicationsPerCustomer(1L);
         return client.execute(DiscountCodeCreateCommand.of(draft));
     }
 

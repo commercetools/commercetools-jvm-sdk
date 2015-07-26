@@ -23,7 +23,7 @@ public class QueryAllTest extends QueryAllBase {
         final ProductQuery seedQuery = ProductQuery.of()
                 //the original predicate, which queries products for a certain product type
                 //the idea works also for no predicate to get all products
-                .withPredicate(m -> m.productType().is(productType))
+                .withPredicates(m -> m.productType().is(productType))
                 //important, we sort by id, otherwise id > $lastId would not make sense
                 .withSort(m -> m.id().sort().asc())
                 .withLimit(PAGE_SIZE)
@@ -47,7 +47,7 @@ public class QueryAllTest extends QueryAllBase {
             } else {
                 final String lastId = getIdForNextQuery(page);
                 return findNext(seedQuery, seedQuery
-                        .withPredicate(m -> seedQuery.predicate().get().and(m.id().isGreaterThan(lastId))), products);
+                        .plusPredicates(m -> m.id().isGreaterThan(lastId)), products);
             }
         });
     }

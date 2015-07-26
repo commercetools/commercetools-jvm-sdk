@@ -13,7 +13,7 @@ public class ProductDiscountQueryTest extends IntegrationTest {
     public void execution() throws Exception {
         withUpdateableProductDiscount(client(), productDiscount -> {
             final ProductDiscountQuery discountQuery = ProductDiscountQuery.of()
-                    .withPredicate(m -> m.active().is(false).and(m.id().is(productDiscount.getId())))
+                    .withPredicates(m -> m.active().is(false).and(m.id().is(productDiscount.getId())))
                     .withExpansionPaths(m -> m.references());
             final ProductDiscount loadedDiscount = execute(discountQuery).head().get();
 
@@ -25,7 +25,7 @@ public class ProductDiscountQueryTest extends IntegrationTest {
                             .get()
             )
             .overridingErrorMessage("one product is expanded")
-            .matches(ref -> ref.getObj().isPresent());
+            .matches(ref -> ref.getObj() != null);
 
             return productDiscount;
         });

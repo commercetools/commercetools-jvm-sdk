@@ -47,9 +47,9 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     public void changeShipmentState() throws Exception {
         withOrder(client(), order -> {
             final ShipmentState newState = ShipmentState.SHIPPED;
-            assertThat(order.getShipmentState()).isNotEqualTo(Optional.of(newState));
+            assertThat(order.getShipmentState()).isNotEqualTo(newState);
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
-            assertThat(updatedOrder.getShipmentState()).contains(newState);
+            assertThat(updatedOrder.getShipmentState()).isEqualTo(newState);
         });
     }
 
@@ -57,26 +57,26 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     public void changePaymentState() throws Exception {
         withOrder(client(), order -> {
             final PaymentState newState = PaymentState.PAID;
-            assertThat(order.getPaymentState()).isNotEqualTo(Optional.of(newState));
+            assertThat(order.getPaymentState()).isNotEqualTo(newState);
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(newState)));
-            assertThat(updatedOrder.getPaymentState()).contains(newState);
+            assertThat(updatedOrder.getPaymentState()).isEqualTo(newState);
         });
     }
 
     @Test
     public void addDelivery() throws Exception {
         withOrder(client(), order -> {
-            assertThat(order.getShippingInfo().get().getDeliveries()).isEmpty();
+            assertThat(order.getShippingInfo().getDeliveries()).isEmpty();
             final List<ParcelDraft> parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
             final LineItem lineItem = order.getLineItems().get(0);
             final int availableItemsToShip = 1;
             final List<DeliveryItem> items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
-            final Delivery delivery = updatedOrder.getShippingInfo().get().getDeliveries().get(0);
+            final Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
             assertThat(delivery.getItems()).isEqualTo(items);
             final Parcel parcel = delivery.getParcels().get(0);
-            assertThat(parcel.getMeasurements()).contains(PARCEL_MEASUREMENTS);
-            assertThat(parcel.getTrackingData()).contains(TRACKING_DATA);
+            assertThat(parcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+            assertThat(parcel.getTrackingData()).isEqualTo(TRACKING_DATA);
         });
     }
 
@@ -86,24 +86,24 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             final LineItem lineItem = order.getLineItems().get(0);
             final List<DeliveryItem> items = asList(DeliveryItem.of(lineItem));
             final Order orderWithDelivery = execute(OrderUpdateCommand.of(order, AddDelivery.of(items)));
-            final Delivery delivery = orderWithDelivery.getShippingInfo().get().getDeliveries().get(0);
+            final Delivery delivery = orderWithDelivery.getShippingInfo().getDeliveries().get(0);
             assertThat(delivery.getParcels()).isEmpty();
             final ParcelDraft parcelDraft = ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA);
             final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
             final Order updatedOrder = execute(OrderUpdateCommand.of(orderWithDelivery, action));
-            final Parcel actual = updatedOrder.getShippingInfo().get().getDeliveries().get(0).getParcels().get(0);
-            assertThat(actual.getMeasurements()).contains(PARCEL_MEASUREMENTS);
-            assertThat(actual.getTrackingData()).contains(TRACKING_DATA);
+            final Parcel actual = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
+            assertThat(actual.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
+            assertThat(actual.getTrackingData()).isEqualTo(TRACKING_DATA);
         });
     }
 
     @Test
     public void setOrderNumber() throws Exception {
         withOrder(client(), order -> {
-            assertThat(order.getOrderNumber()).isEmpty();
+            assertThat(order.getOrderNumber()).isNull();
             final String orderNumber = randomString();
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
-            assertThat(updatedOrder.getOrderNumber()).contains(orderNumber);
+            assertThat(updatedOrder.getOrderNumber()).isEqualTo(orderNumber);
         });
     }
 
@@ -116,11 +116,11 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 final String externalId = "foo";
                 final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
                 final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-                assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, Optional.of(externalId)));
+                assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, externalId));
 
                 //check channel expansion
                 final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.syncInfo().channel()));
-                assertThat(new ArrayList<>(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isPresent();
+                assertThat(new ArrayList<>(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isNotNull();
             })
         );
     }
@@ -140,7 +140,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
             assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
             assertThat(returnItem.getComment()).contains("foo bar");
-            assertThat(returnInfo.getReturnDate()).contains(ZonedDateTime_IN_PAST);
+            assertThat(returnInfo.getReturnDate()).isEqualTo(ZonedDateTime_IN_PAST);
             assertThat(returnInfo.getReturnTrackingId()).contains("trackingId");
         });
     }
@@ -212,7 +212,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 //reference expansion
                 final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.lineItems().state().state()));
                 final Reference<State> state = new LinkedList<>(loadedOrder.getLineItems().get(0).getState()).getFirst().getState();
-                assertThat(state.getObj()).isPresent();
+                assertThat(state.getObj()).isNotNull();
             })
         );
     }

@@ -1,31 +1,28 @@
 package io.sphere.sdk.search;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 import static java.util.Arrays.asList;
 
 public class FacetSearchModel<T, V> extends SearchModelImpl<T> {
-    protected final Optional<String> alias;
+    @Nullable
+    protected final String alias;
     protected final TypeSerializer<V> typeSerializer;
 
-    FacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer, final Optional<String> alias) {
+    FacetSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment, final TypeSerializer<V> typeSerializer, final String alias) {
         super(parent, pathSegment);
         this.alias = alias;
         this.typeSerializer = typeSerializer;
     }
 
-    FacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
+    FacetSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment, final TypeSerializer<V> typeSerializer) {
         super(parent, pathSegment);
-        this.alias = Optional.empty();
+        this.alias = null;
         this.typeSerializer = typeSerializer;
     }
 
-    public FacetSearchModel<T, V> withAlias(final Optional<String> alias) {
-        return new FacetSearchModel<>(Optional.of(this), Optional.empty(), typeSerializer, alias);
-    }
-
     public FacetSearchModel<T, V> withAlias(final String alias) {
-        return withAlias(Optional.of(alias));
+        return new FacetSearchModel<>(this, null, typeSerializer, alias);
     }
 
     public TermFacetExpression<T, V> all() {

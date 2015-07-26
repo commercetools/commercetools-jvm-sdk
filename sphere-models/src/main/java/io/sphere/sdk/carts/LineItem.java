@@ -8,7 +8,7 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.Set;
 
 @JsonDeserialize(as=LineItemImpl.class)
@@ -24,13 +24,17 @@ public interface LineItem extends LineItemLike {
 
     Set<ItemState> getState();
 
-    Optional<TaxRate> getTaxRate();
+    @Nullable
+    TaxRate getTaxRate();
 
-    Optional<Reference<Channel>> getSupplyChannel();
+    @Nullable
+    Reference<Channel> getSupplyChannel();
 
-    Optional<Reference<Channel>> getDistributionChannel();
+    @Nullable
+    Reference<Channel> getDistributionChannel();
 
-    Optional<LocalizedStrings> getProductSlug();
+    @Nullable
+    LocalizedStrings getProductSlug();
 
     @Override
     String getId();

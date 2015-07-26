@@ -11,20 +11,20 @@ public class SearchModelTest {
 
     @Test
     public void hasMatchingPath() throws Exception {
-        SearchModelImpl<Object> model = new SearchModelImpl<>(Optional.empty(), "variants").appended("price").appended("centAmount");
+        SearchModelImpl<Object> model = new SearchModelImpl<>(null, "variants").appended("price").appended("centAmount");
         assertThat(model.hasPath(asList("variants", "price", "centAmount"))).isTrue();
         assertThat(model.hasPath(asList("hello", "world"))).isFalse();
     }
 
     @Test
     public void parentWithEmptyPath() throws Exception {
-        SearchModelImpl<Object> model = new SearchModelImpl<>(Optional.empty(), "price").appended(Optional.<String>empty()).appended("centAmount");
+        SearchModelImpl<Object> model = new SearchModelImpl<>(null, "price").appended(null).appended("centAmount");
         assertThat(model.hasPath(asList("price", "centAmount"))).isTrue();
     }
 
     @Test
     public void buildsSegmentPath() throws Exception {
-        SearchModelImpl<Object> model = new SearchModelImpl<>(Optional.empty(), "variants").appended("price").appended("centAmount");
+        SearchModelImpl<Object> model = new SearchModelImpl<>(null, "variants").appended("price").appended("centAmount");
         assertThat(model.buildPath()).isEqualTo(asList("variants", "price", "centAmount"));
     }
 }

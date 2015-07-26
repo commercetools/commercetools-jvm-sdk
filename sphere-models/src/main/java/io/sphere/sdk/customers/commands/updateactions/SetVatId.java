@@ -3,7 +3,7 @@ package io.sphere.sdk.customers.commands.updateactions;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.customers.Customer;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  * Sets a new vat ID for the customer
@@ -11,22 +11,20 @@ import java.util.Optional;
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setVatId()}
  */
 public class SetVatId extends UpdateAction<Customer> {
-    private final Optional<String> vatId;
+    @Nullable
+    private final String vatId;
 
-    private SetVatId(final Optional<String> vatId) {
+    private SetVatId(final String vatId) {
         super("setVatId");
         this.vatId = vatId;
     }
 
-    public static SetVatId of(final Optional<String> vatId) {
+    public static SetVatId of(@Nullable final String vatId) {
         return new SetVatId(vatId);
     }
 
-    public static SetVatId of(final String vatId) {
-        return of(Optional.of(vatId));
-    }
-
-    public Optional<String> getVatId() {
+    @Nullable
+    public String getVatId() {
         return vatId;
     }
 }

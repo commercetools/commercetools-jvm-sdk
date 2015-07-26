@@ -19,19 +19,19 @@ public final class ProductProjectionExpansionModel<T> extends ExpansionModel<T> 
     }
 
     public CategoryExpansionModel<ProductProjection> categories(final int index) {
-        return new CategoryExpansionModel<>(pathExpressionOption(), "categories[" + index + "]");
+        return new CategoryExpansionModel<>(pathExpression(), "categories[" + index + "]");
     }
 
     public CategoryExpansionModel<ProductProjection> categories() {
-        return new CategoryExpansionModel<>(pathExpressionOption(), "categories[*]");
+        return new CategoryExpansionModel<>(pathExpression(), "categories[*]");
     }
 
     public ProductVariantExpansionModel<T> masterVariant() {
-        return new ProductVariantExpansionModel<>(pathExpressionOption(), "masterVariant");
+        return new ProductVariantExpansionModel<>(pathExpression(), "masterVariant");
     }
 
     public ProductVariantExpansionModel<T> variants() {
-        return new ProductVariantExpansionModel<>(pathExpressionOption(), "variants");
+        return new ProductVariantExpansionModel<>(pathExpression(), "variants");
     }
 
     public static ProductProjectionExpansionModel<ProductProjection> of() {

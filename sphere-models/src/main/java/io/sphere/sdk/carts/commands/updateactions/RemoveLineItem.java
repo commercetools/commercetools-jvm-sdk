@@ -5,7 +5,7 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.commands.UpdateAction;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  Decreases the quantity of the given line item. If after the update the quantity of the line item is not greater than 0 or the quantity is not specified, the line item is removed from the cart.
@@ -14,44 +14,37 @@ import java.util.Optional;
  */
 public class RemoveLineItem extends UpdateAction<Cart> {
     private final String lineItemId;
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private final Optional<Integer> quantity;
+    @Nullable
+    private final Integer quantity;
 
-    private RemoveLineItem(final String lineItemId, final Optional<Integer> quantity) {
+    private RemoveLineItem(final String lineItemId, @Nullable final Integer quantity) {
         super("removeLineItem");
         this.lineItemId = lineItemId;
         this.quantity = quantity;
     }
 
-    public static RemoveLineItem of(final String lineItemId, final Optional<Integer> quantity) {
+    public static RemoveLineItem of(final String lineItemId, @Nullable final Integer quantity) {
         return new RemoveLineItem(lineItemId, quantity);
     }
 
-    public static RemoveLineItem of(final String lineItemId, final Integer quantity) {
-        return of(lineItemId, Optional.of(quantity));
-    }
-
     public static RemoveLineItem of(final String lineItemId) {
-        return of(lineItemId, Optional.empty());
+        return of(lineItemId, null);
     }
 
-    public static RemoveLineItem of(final LineItem lineItem, final Optional<Integer> quantity) {
+    public static RemoveLineItem of(final LineItem lineItem, @Nullable final Integer quantity) {
         return of(lineItem.getId(), quantity);
     }
 
-    public static RemoveLineItem of(final LineItem lineItem, final Integer quantity) {
-        return of(lineItem.getId(), Optional.of(quantity));
-    }
-
     public static RemoveLineItem of(final LineItem lineItem) {
-        return of(lineItem.getId(), Optional.empty());
+        return of(lineItem.getId());
     }
 
     public String getLineItemId() {
         return lineItemId;
     }
 
-    public Optional<Integer> getQuantity() {
+    @Nullable
+    public Integer getQuantity() {
         return quantity;
     }
 }

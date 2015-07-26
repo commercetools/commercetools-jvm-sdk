@@ -2,11 +2,12 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 @JsonDeserialize(as = ProductVariantAvailabilityImpl.class)
 public interface ProductVariantAvailability {
-    public boolean isOnStock();
+    boolean isOnStock();
 
-    public Optional<Integer> getRestockableInDays();
+    @Nullable
+    Integer getRestockableInDays();
 }

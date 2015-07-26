@@ -34,10 +34,10 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
     public void setDescription() throws Exception {
         withUpdateableShippingMethod(client(), shippingMethod -> {
             final String newDescription = randomString();
-            assertThat(shippingMethod.getDescription()).isNotEqualTo(Optional.of(newDescription));
+            assertThat(shippingMethod.getDescription()).isNotEqualTo(newDescription);
             final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
             final ShippingMethod updatedShippingMethod = execute(cmd);
-            assertThat(updatedShippingMethod.getDescription().get()).isEqualTo(newDescription);
+            assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);
             return updatedShippingMethod;
         });
     }
@@ -69,7 +69,7 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeIsDefault() throws Exception {
         //only one can be default one, so clean up if there is any
-        final Query<ShippingMethod> query = ShippingMethodQuery.of().withPredicate(QueryPredicate.of("isDefault = true"));
+        final Query<ShippingMethod> query = ShippingMethodQuery.of().withPredicates(QueryPredicate.of("isDefault = true"));
         final Optional<ShippingMethod> defaultShippingMethodOption = execute(query).head();
         defaultShippingMethodOption.ifPresent(sm -> execute(ShippingMethodUpdateCommand.of(sm, ChangeIsDefault.toFalse())));
 
@@ -111,9 +111,9 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
                 final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
                                 .plusExpansionPaths(m -> m.zoneRates().zone())
                 );
-                assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+                assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
                 assertThat(loadedShippingMethod.getZones().get(0).getObj())
-                        .overridingErrorMessage("the convenience method also has expanded references").isPresent();
+                        .overridingErrorMessage("the convenience method also has expanded references").isNotNull();
 
                 //removeShippingRate
                 final ShippingMethod shippingMethodWithoutShippingRate =

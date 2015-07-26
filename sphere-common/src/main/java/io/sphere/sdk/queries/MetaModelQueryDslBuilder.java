@@ -6,13 +6,10 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
 import java.util.function.Function;
-
-import static java.util.Arrays.asList;
 
 /**
  *
@@ -23,11 +20,14 @@ import static java.util.Arrays.asList;
  */
 public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends Base implements Builder<C> {
 
-    protected Optional<QueryPredicate<T>> predicate = Optional.empty();
+    protected List<QueryPredicate<T>> predicate = Collections.emptyList();
     protected List<QuerySort<T>> sort = Collections.emptyList();
-    protected Optional<Boolean> withTotal = Optional.empty();
-    protected Optional<Long> limit = Optional.empty();
-    protected Optional<Long> offset = Optional.empty();
+    @Nullable
+    protected Boolean withTotal;
+    @Nullable
+    protected Long limit;
+    @Nullable
+    protected Long offset;
     protected List<ExpansionPath<T>> expansionPaths = Collections.emptyList();
     protected List<HttpQueryParameter> additionalQueryParameters = Collections.emptyList();
     protected final String endpoint;
@@ -47,7 +47,7 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
 
     public MetaModelQueryDslBuilder(final MetaModelQueryDslImpl<T, C, Q, E> template) {
         this(template.endpoint(), r -> template.deserialize(r), template.getQueryModel(), template.getExpansionModel(), template.queryDslBuilderFunction);
-        predicate = template.predicate();
+        predicate = template.predicates();
         sort = template.sort();
         limit = template.limit();
         offset = template.offset();
@@ -56,14 +56,9 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
         withTotal = template.fetchTotal();
     }
 
-    public MetaModelQueryDslBuilder<T, C, Q, E> predicate(final Optional<QueryPredicate<T>> predicate) {
+    public MetaModelQueryDslBuilder<T, C, Q, E> predicates(final List<QueryPredicate<T>> predicate) {
         this.predicate = predicate;
         return this;
-    }
-    
-    public MetaModelQueryDslBuilder<T, C, Q, E> predicate(final QueryPredicate<T> predicate) {
-        Objects.requireNonNull(predicate);
-        return predicate(Optional.of(predicate));
     }
     
     public MetaModelQueryDslBuilder<T, C, Q, E> sort(final List<QuerySort<T>> sort) {
@@ -71,27 +66,19 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
         return this;
     }
 
-    public MetaModelQueryDslBuilder<T, C, Q, E> limit(final Optional<Long> limit) {
+    public MetaModelQueryDslBuilder<T, C, Q, E> limit(@Nullable final Long limit) {
         this.limit = limit;
         return this;
     }
 
-    public MetaModelQueryDslBuilder<T, C, Q, E> limit(final long limit) {
-        return limit(Optional.of(limit));
-    }
-
-    public MetaModelQueryDslBuilder<T, C, Q, E> fetchTotal(final boolean fetchTotal) {
-        this.withTotal = Optional.of(fetchTotal);
+    public MetaModelQueryDslBuilder<T, C, Q, E> fetchTotal(@Nullable final Boolean fetchTotal) {
+        this.withTotal = fetchTotal;
         return this;
     }
 
-    public MetaModelQueryDslBuilder<T, C, Q, E> offset(final Optional<Long> offset) {
+    public MetaModelQueryDslBuilder<T, C, Q, E> offset(@Nullable final Long offset) {
         this.offset = offset;
         return this;
-    }
-
-    public MetaModelQueryDslBuilder<T, C, Q, E> offset(final long offset) {
-        return offset(Optional.of(offset));
     }
 
     public MetaModelQueryDslBuilder<T, C, Q, E> expansionPaths(final List<ExpansionPath<T>> expansionPaths) {

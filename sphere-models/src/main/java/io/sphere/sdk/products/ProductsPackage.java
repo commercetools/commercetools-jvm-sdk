@@ -24,7 +24,7 @@ final class ProductsPackage {
     }
 
     static ProductVariant getVariantOrMaster(final int variantId, final ProductDataLike product) {
-        return product.getVariant(variantId).orElseGet(() -> product.getMasterVariant());
+        return Optional.ofNullable(product.getVariant(variantId)).orElseGet(() -> product.getMasterVariant());
     }
 
     static List<ProductVariant> getAllVariants(final ProductDataLike product) {

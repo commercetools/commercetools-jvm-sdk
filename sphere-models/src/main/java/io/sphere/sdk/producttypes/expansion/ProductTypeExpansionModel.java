@@ -1,9 +1,7 @@
 package io.sphere.sdk.producttypes.expansion;
 
-import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.expansion.ExpansionModel;
-
-import java.util.Optional;
+import io.sphere.sdk.producttypes.ProductType;
 
 /**
   DSL class to create expansion path expressions.
@@ -11,12 +9,7 @@ import java.util.Optional;
  @param <T> the type for which the expansion path is
  */
 public class ProductTypeExpansionModel<T> extends ExpansionModel<T> {
-    private ProductTypeExpansionModel(final Optional<String> parentPath, final String path) {
-        super(parentPath, Optional.of(path));
-    }
-
-    ProductTypeExpansionModel() {
-        super();
+    private ProductTypeExpansionModel() {
     }
 
     public static ProductTypeExpansionModel<ProductType> of() {

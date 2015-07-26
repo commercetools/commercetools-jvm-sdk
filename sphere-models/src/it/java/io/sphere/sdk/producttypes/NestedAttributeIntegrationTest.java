@@ -49,8 +49,8 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
                     withProduct(client(), productDraftBuilder, product -> {
                         final AttributeContainer attrs = product.getMasterData().getStaged().getMasterVariant();
 
-                        assertThat(attrs.getAttribute(Banana.bananaColor)).contains("blue");
-                        assertThat(attrs.getAttribute(Banana.nutrients).map(Set::size)).contains(2);
+                        assertThat(attrs.findAttribute(Banana.bananaColor)).contains("blue");
+                        assertThat(attrs.findAttribute(Banana.nutrients).map(Set::size)).contains(2);
 
                         final List<AttributeContainer> nutrients = getSortedNutrients(attrs);
 
@@ -67,31 +67,31 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
     }
 
     private List<AttributeContainer> getSortedNutrients(final AttributeContainer banana) {
-        return banana.getAttribute(Banana.nutrients).get().stream()
-                .sorted((c1, c2) -> c1.getAttribute(Nutrient.servingSize).get().compareTo(c2.getAttribute(Nutrient.servingSize).get()))
+        return banana.findAttribute(Banana.nutrients).get().stream()
+                .sorted((c1, c2) -> c1.findAttribute(Nutrient.servingSize).get().compareTo(c2.findAttribute(Nutrient.servingSize).get()))
                 .collect(toList());
     }
 
     private List<AttributeContainer> getNutrientInfos(final AttributeContainer nutrient) {
-        return nutrient.getAttribute(Nutrient.nutrientInformation).get().stream()
-                .sorted((c1, c2) -> c1.getAttribute(NutrientInfo.nutrientTypeCode).get().compareTo(c2.getAttribute(NutrientInfo.nutrientTypeCode).get()))
+        return nutrient.findAttribute(Nutrient.nutrientInformation).get().stream()
+                .sorted((c1, c2) -> c1.findAttribute(NutrientInfo.nutrientTypeCode).get().compareTo(c2.findAttribute(NutrientInfo.nutrientTypeCode).get()))
                 .collect(toList());
     }
 
     private void assertNutrient(final AttributeContainer nutrient, final double servingSize,
                                 final String servingSizeUOM, final int nutrientInformationSize) {
-        assertThat(nutrient.getAttribute(Nutrient.servingSize)).contains(servingSize);
-        assertThat(nutrient.getAttribute(Nutrient.servingSizeUOM)).contains(servingSizeUOM);
-        assertThat(nutrient.getAttribute(Nutrient.nutrientInformation).map(Set::size)).contains(nutrientInformationSize);
+        assertThat(nutrient.findAttribute(Nutrient.servingSize)).contains(servingSize);
+        assertThat(nutrient.findAttribute(Nutrient.servingSizeUOM)).contains(servingSizeUOM);
+        assertThat(nutrient.findAttribute(Nutrient.nutrientInformation).map(Set::size)).contains(nutrientInformationSize);
     }
 
     private void assertNutrientInfo(final AttributeContainer nutrientInfo, final String nutrientTypeCode,
                                     final String measurementPrecision, final double quantityContained,
                                     final String quantityContainedUOM) {
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.nutrientTypeCode)).contains(nutrientTypeCode);
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.measurementPrecision)).contains(measurementPrecision);
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.quantityContained)).contains(quantityContained);
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.quantityContainedUOM)).contains(quantityContainedUOM);
+        assertThat(nutrientInfo.findAttribute(NutrientInfo.nutrientTypeCode)).contains(nutrientTypeCode);
+        assertThat(nutrientInfo.findAttribute(NutrientInfo.measurementPrecision)).contains(measurementPrecision);
+        assertThat(nutrientInfo.findAttribute(NutrientInfo.quantityContained)).contains(quantityContained);
+        assertThat(nutrientInfo.findAttribute(NutrientInfo.quantityContainedUOM)).contains(quantityContainedUOM);
     }
 
     private ProductVariantDraft createBananaVariant() {

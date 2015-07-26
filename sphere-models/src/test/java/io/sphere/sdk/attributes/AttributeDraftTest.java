@@ -35,7 +35,7 @@ public class AttributeDraftTest {
     public void usesForSetOfLocalizedEnumJustKey() throws Exception {
         final AttributeDraft draft = AttributeDraft.of("foo", asSet(green, red));
         final Set<String> expected = asSet("green", "red");
-        final Set<String> actual = objectMapper.reader(new TypeReference<Set<String>>() {
+        final Set<String> actual = objectMapper.readerFor(new TypeReference<Set<String>>() {
         }).readValue(draft.getValue());
         assertThat(actual).isEqualTo(expected);
     }
@@ -50,7 +50,7 @@ public class AttributeDraftTest {
     public void usesForSetOfPlainEnumJustKey() throws Exception {
         final AttributeDraft draft = AttributeDraft.of("foo", asSet(s, m));
         final Set<String> expected = asSet("S", "M");
-        final Set<String> actual = objectMapper.reader(new TypeReference<Set<String>>() {
+        final Set<String> actual = objectMapper.readerFor(new TypeReference<Set<String>>() {
         }).readValue(draft.getValue());
         assertThat(actual).isEqualTo(expected);
     }

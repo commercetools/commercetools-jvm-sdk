@@ -4,7 +4,7 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.Address;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  Sets the shipping address of the cart.
@@ -14,22 +14,20 @@ import java.util.Optional;
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setShippingAddress()}
  */
 public class SetShippingAddress extends UpdateAction<Cart> {
-    private final Optional<Address> address;
+    @Nullable
+    private final Address address;
 
-    private SetShippingAddress(final Optional<Address> address) {
+    private SetShippingAddress(@Nullable final Address address) {
         super("setShippingAddress");
         this.address = address;
     }
 
-    public static SetShippingAddress of(final Optional<Address> address) {
+    public static SetShippingAddress of(@Nullable final Address address) {
         return new SetShippingAddress(address);
     }
 
-    public static SetShippingAddress of(final Address address) {
-        return of(Optional.of(address));
-    }
-
-    public Optional<Address> getAddress() {
+    @Nullable
+    public Address getAddress() {
         return address;
     }
 }

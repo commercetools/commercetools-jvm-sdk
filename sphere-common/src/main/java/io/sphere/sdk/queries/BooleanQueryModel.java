@@ -1,11 +1,11 @@
 package io.sphere.sdk.queries;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
-import java.util.Optional;
 
 public class BooleanQueryModel<T> extends QueryModelImpl<T> implements EqualityQueryModel<T, Boolean> {
 
-    public BooleanQueryModel(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
+    public BooleanQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

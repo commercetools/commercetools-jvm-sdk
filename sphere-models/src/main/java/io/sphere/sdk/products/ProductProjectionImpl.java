@@ -10,37 +10,42 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 
 class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> implements ProductProjection {
     private final Reference<ProductType> productType;
-    private final Optional<Reference<TaxCategory>> taxCategory;
+    @Nullable
+    private final Reference<TaxCategory> taxCategory;
     @JsonProperty("published")
     private final boolean isPublished;
     @JsonProperty("hasStagedChanges")
     private final boolean hasStagedChanges;
     private final LocalizedStrings name;
     private final Set<Reference<Category>> categories;
-    private final Optional<LocalizedStrings> description;
+    @Nullable
+    private final LocalizedStrings description;
     private final LocalizedStrings slug;
-    private final Optional<LocalizedStrings> metaTitle;
-    private final Optional<LocalizedStrings> metaDescription;
-    private final Optional<LocalizedStrings> metaKeywords;
+    @Nullable
+    private final LocalizedStrings metaTitle;
+    @Nullable
+    private final LocalizedStrings metaDescription;
+    @Nullable
+    private final LocalizedStrings metaKeywords;
     private final ProductVariant masterVariant;
     private final List<ProductVariant> variants;
     private final SearchKeywords searchKeywords;
 
     @JsonCreator
     ProductProjectionImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                          final Reference<ProductType> productType, final Optional<Reference<TaxCategory>> taxCategory,
+                          final Reference<ProductType> productType, @Nullable final Reference<TaxCategory> taxCategory,
                           final boolean hasStagedChanges, final LocalizedStrings name,
-                          final Set<Reference<Category>> categories, final Optional<LocalizedStrings> description,
-                          final LocalizedStrings slug, final Optional<LocalizedStrings> metaTitle,
-                          final Optional<LocalizedStrings> metaDescription, final Optional<LocalizedStrings> metaKeywords,
+                          final Set<Reference<Category>> categories, final LocalizedStrings description,
+                          final LocalizedStrings slug, final LocalizedStrings metaTitle,
+                          final LocalizedStrings metaDescription, final LocalizedStrings metaKeywords,
                           final ProductVariant masterVariant, final List<ProductVariant> variants,
                           final boolean isPublished, final SearchKeywords searchKeywords) {
         super(id, version, createdAt, lastModifiedAt);
@@ -78,7 +83,8 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     }
 
     @Override
-    public Optional<LocalizedStrings> getDescription() {
+    @Nullable
+    public LocalizedStrings getDescription() {
         return description;
     }
 
@@ -88,17 +94,20 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     }
 
     @Override
-    public Optional<LocalizedStrings> getMetaTitle() {
+    @Nullable
+    public LocalizedStrings getMetaTitle() {
         return metaTitle;
     }
 
     @Override
-    public Optional<LocalizedStrings> getMetaDescription() {
+    @Nullable
+    public LocalizedStrings getMetaDescription() {
         return metaDescription;
     }
 
     @Override
-    public Optional<LocalizedStrings> getMetaKeywords() {
+    @Nullable
+    public LocalizedStrings getMetaKeywords() {
         return metaKeywords;
     }
 
@@ -118,7 +127,8 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     }
 
     @Override
-    public Optional<Reference<TaxCategory>> getTaxCategory() {
+    @Nullable
+    public Reference<TaxCategory> getTaxCategory() {
         return taxCategory;
     }
 

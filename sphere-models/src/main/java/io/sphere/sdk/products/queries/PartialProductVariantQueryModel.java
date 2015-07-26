@@ -2,14 +2,14 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.queries.QueryModel;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class PartialProductVariantQueryModel extends ProductVariantQueryModel<PartialProductVariantQueryModel> {
-    private PartialProductVariantQueryModel(final Optional<? extends QueryModel<PartialProductVariantQueryModel>> parent, final Optional<String> pathSegment) {
+    private PartialProductVariantQueryModel(@Nullable final QueryModel<PartialProductVariantQueryModel> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public static PartialProductVariantQueryModel of() {
-        return new PartialProductVariantQueryModel(Optional.empty(), Optional.empty());
+        return new PartialProductVariantQueryModel(null, null);
     }
 }

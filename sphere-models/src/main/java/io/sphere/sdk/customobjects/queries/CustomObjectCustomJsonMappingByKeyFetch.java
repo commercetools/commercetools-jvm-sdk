@@ -1,13 +1,12 @@
 package io.sphere.sdk.customobjects.queries;
 
 import io.sphere.sdk.client.HttpRequestIntent;
-import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.client.SphereRequestBase;
+import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.queries.Fetch;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 import java.util.function.Function;
 
 import static io.sphere.sdk.http.HttpMethod.GET;

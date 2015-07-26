@@ -1,5 +1,6 @@
 package io.sphere.sdk.http;
 
+import javax.annotation.Nullable;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
@@ -11,22 +12,25 @@ import static java.lang.String.format;
 class HttpResponseImpl extends Base implements HttpResponse {
     private final int statusCode;
     private final HttpHeaders headers;
-    private final Optional<byte[]> responseBody;
-    private final Optional<HttpRequest> associatedRequest;
-    private final Optional<String> bodyAsStringForDebugging;
+    @Nullable
+    private final byte[] responseBody;
+    @Nullable
+    private final HttpRequest associatedRequest;
+    @Nullable
+    private final String bodyAsStringForDebugging;
 
-    HttpResponseImpl(final int statusCode, final Optional<byte[]> responseBody, final Optional<HttpRequest> associatedRequest, final HttpHeaders headers) {
+    HttpResponseImpl(final int statusCode, @Nullable final byte[] responseBody, @Nullable final HttpRequest associatedRequest, final HttpHeaders headers) {
         this.statusCode = statusCode;
         this.responseBody = responseBody;
         this.associatedRequest = associatedRequest;
         this.headers = headers;
         Optional<String> bodyAsString = Optional.empty();
         try {
-            bodyAsString = statusCode >= 400 ? responseBody.map(b -> new String(b, StandardCharsets.UTF_8)) : Optional.<String>empty();
+            bodyAsString = statusCode >= 400 ? Optional.ofNullable(responseBody).map(b -> new String(b, StandardCharsets.UTF_8)) : Optional.<String>empty();
         } catch (final Exception e) {
             bodyAsString = Optional.empty();
         }
-        this.bodyAsStringForDebugging = bodyAsString;
+        this.bodyAsStringForDebugging = bodyAsString.orElse(null);
     }
 
     @Override
@@ -39,13 +43,15 @@ class HttpResponseImpl extends Base implements HttpResponse {
         return headers;
     }
 
+    @Nullable
     @Override
-    public synchronized Optional<byte[]> getResponseBody() {
+    public synchronized byte[] getResponseBody() {
         return responseBody;
     }
 
+    @Nullable
     @Override
-    public Optional<HttpRequest> getAssociatedRequest() {
+    public HttpRequest getAssociatedRequest() {
         return associatedRequest;
     }
 

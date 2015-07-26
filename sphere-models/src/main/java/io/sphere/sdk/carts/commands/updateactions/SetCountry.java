@@ -4,7 +4,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.UpdateAction;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  Sets the country of the cart. When the country is set, the line item prices are updated.
@@ -13,22 +13,20 @@ import java.util.Optional;
 
  */
 public class SetCountry extends UpdateAction<Cart> {
-    private final Optional<CountryCode> country;
+    @Nullable
+    private final CountryCode country;
 
-    private SetCountry(final Optional<CountryCode> country) {
+    private SetCountry(@Nullable final CountryCode country) {
         super("setCountry");
         this.country = country;
     }
 
-    public static SetCountry of(final Optional<CountryCode> country) {
+    public static SetCountry of(@Nullable final CountryCode country) {
         return new SetCountry(country);
     }
 
-    public static SetCountry of(final CountryCode country) {
-        return of(Optional.of(country));
-    }
-
-    public Optional<CountryCode> getCountry() {
+    @Nullable
+    public CountryCode getCountry() {
         return country;
     }
 }

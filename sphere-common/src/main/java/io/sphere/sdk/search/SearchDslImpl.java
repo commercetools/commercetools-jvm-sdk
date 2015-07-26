@@ -8,6 +8,7 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.UrlQueryBuilder;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
@@ -18,30 +19,33 @@ import static java.util.Objects.requireNonNull;
 
 public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> {
 
-    private final Optional<SearchText> text;
+    @Nullable
+    private final SearchText text;
     private final List<FacetExpression<T>> facets;
     private final List<FilterExpression<T>> filters;
     private final List<FilterExpression<T>> filterQueries;
     private final List<FilterExpression<T>> filterFacets;
     private final List<SearchSort<T>> sort;
-    private final Optional<Long> limit;
-    private final Optional<Long> offset;
+    @Nullable
+    private final Long limit;
+    @Nullable
+    private final Long offset;
     private final List<HttpQueryParameter> additionalQueryParameters;
     private final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     private final String endpoint;
 
-    public SearchDslImpl(final String endpoint, final Optional<SearchText> text, final List<FacetExpression<T>> facets,
+    public SearchDslImpl(final String endpoint, final SearchText text, final List<FacetExpression<T>> facets,
                          final List<FilterExpression<T>> filters, final List<FilterExpression<T>> filterQueries, final List<FilterExpression<T>> filterFacets,
-                         final List<SearchSort<T>> sort, final Optional<Long> limit, final Optional<Long> offset,
+                         final List<SearchSort<T>> sort, final Long limit, final Long offset,
                          final List<HttpQueryParameter> additionalQueryParameters, Function<HttpResponse, PagedSearchResult<T>> resultMapper) {
-        this.text = requireNonNull(text);
+        this.text = text;
         this.facets = requireNonNull(facets);
         this.filters = requireNonNull(filters);
         this.filterQueries = requireNonNull(filterQueries);
         this.filterFacets = requireNonNull(filterFacets);
         this.sort = requireNonNull(sort);
-        this.limit = requireNonNull(limit);
-        this.offset = requireNonNull(offset);
+        this.limit = limit;
+        this.offset = offset;
         this.additionalQueryParameters = requireNonNull(additionalQueryParameters);
         this.resultMapper = requireNonNull(resultMapper);
         this.endpoint = requireNonNull(endpoint);
@@ -49,8 +53,8 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
 
     public SearchDslImpl(final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,
                          final List<HttpQueryParameter> additionalQueryParameters) {
-        this(endpoint, Optional.empty(), emptyList(), emptyList(), emptyList(),
-                emptyList(), emptyList(), Optional.empty(), Optional.empty(), additionalQueryParameters, resultMapper);
+        this(endpoint, null, emptyList(), emptyList(), emptyList(),
+                emptyList(), emptyList(), null, null, additionalQueryParameters, resultMapper);
     }
 
     public SearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> typeReference,
@@ -59,7 +63,7 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     @Override
-    public SearchDsl<T> withText(Optional<SearchText> text) {
+    public SearchDsl<T> withText(SearchText text) {
         return copyBuilder().text(text).build();
     }
 
@@ -93,17 +97,18 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     @Override
-    public SearchDsl<T> withLimit(final long limit) {
-        return copyBuilder().limit(Optional.of(limit)).build();
+    public SearchDsl<T> withLimit(final Long limit) {
+        return copyBuilder().limit(limit).build();
     }
 
     @Override
-    public SearchDsl<T> withOffset(long offset) {
-        return copyBuilder().offset(Optional.of(offset)).build();
+    public SearchDsl<T> withOffset(final Long offset) {
+        return copyBuilder().offset(offset).build();
     }
 
     @Override
-    public Optional<SearchText> text() {
+    @Nullable
+    public SearchText text() {
         return text;
     }
 
@@ -133,12 +138,14 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     @Override
-    public Optional<Long> limit() {
+    @Nullable
+    public Long limit() {
         return limit;
     }
 
     @Override
-    public Optional<Long> offset() {
+    @Nullable
+    public Long offset() {
         return offset;
     }
 
@@ -159,14 +166,14 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
 
     String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
-        text().ifPresent(t -> builder.add(SearchParameterKeys.TEXT + "." + t.getLocale().getLanguage(), t.getText(), urlEncoded));
+        Optional.ofNullable(text()).ifPresent(t -> builder.add(SearchParameterKeys.TEXT + "." + t.getLocale().getLanguage(), t.getText(), urlEncoded));
         facets().forEach(f -> builder.add(SearchParameterKeys.FACET, f.toSphereFacet(), urlEncoded));
         filterResults().forEach(f -> builder.add(SearchParameterKeys.FILTER, f.toSphereFilter(), urlEncoded));
         filterQueries().forEach(f -> builder.add(SearchParameterKeys.FILTER_QUERY, f.toSphereFilter(), urlEncoded));
         filterFacets().forEach(f -> builder.add(SearchParameterKeys.FILTER_FACETS, f.toSphereFilter(), urlEncoded));
         sort().forEach(s -> builder.add(SearchParameterKeys.SORT, s.toSphereSort(), urlEncoded));
-        limit().ifPresent(l -> builder.add(SearchParameterKeys.LIMIT, l.toString(), urlEncoded));
-        offset().ifPresent(o -> builder.add(SearchParameterKeys.OFFSET, o.toString(), urlEncoded));
+        Optional.ofNullable(limit()).ifPresent(l -> builder.add(SearchParameterKeys.LIMIT, l.toString(), urlEncoded));
+        Optional.ofNullable(offset()).ifPresent(o -> builder.add(SearchParameterKeys.OFFSET, o.toString(), urlEncoded));
         additionalQueryParameters().forEach(p -> builder.add(p.getKey(), p.getValue(), urlEncoded));
         return builder.toStringWithOptionalQuestionMark();
     }

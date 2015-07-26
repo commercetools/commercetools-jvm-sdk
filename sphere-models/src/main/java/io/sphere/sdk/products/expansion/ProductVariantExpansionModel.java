@@ -2,11 +2,11 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class ProductVariantExpansionModel<T> extends ExpansionModel<T> {
-    ProductVariantExpansionModel(final Optional<String> parentPath, final String path) {
-        super(parentPath, Optional.of(path));
+    ProductVariantExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
+        super(parentPath, path);
     }
 
     public PriceExpansionModel<T> prices() {
@@ -18,11 +18,11 @@ public class ProductVariantExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public ProductAttributeExpansionModel<T> attributes() {
-        return new ProductAttributeExpansionModel<>(pathExpressionOption(), "attributes[*]");
+        return new ProductAttributeExpansionModel<>(pathExpression(), "attributes[*]");
     }
 
     private PriceExpansionModel<T> prices(final String index) {
-        return new PriceExpansionModel<>(pathExpressionOption(), "prices[" + index + "]");
+        return new PriceExpansionModel<>(pathExpression(), "prices[" + index + "]");
     }
 }
 

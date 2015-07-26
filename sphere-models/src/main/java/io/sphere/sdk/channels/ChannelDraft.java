@@ -4,8 +4,8 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedStrings;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
-import java.util.Optional;
 import java.util.Set;
 
 import static io.sphere.sdk.utils.SetUtils.asSet;
@@ -18,11 +18,14 @@ import static io.sphere.sdk.utils.SetUtils.asSet;
 public class ChannelDraft extends Base {
     private final String key;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @Nullable
     private final Set<ChannelRole> roles;
-    private final Optional<LocalizedStrings> name;
-    private final Optional<LocalizedStrings> description;
+    @Nullable
+    private final LocalizedStrings name;
+    @Nullable
+    private final LocalizedStrings description;
 
-    ChannelDraft(final String key, final Set<ChannelRole> roles, final Optional<LocalizedStrings> name, final Optional<LocalizedStrings> description) {
+    ChannelDraft(final String key, final Set<ChannelRole> roles, @Nullable final LocalizedStrings name, @Nullable final LocalizedStrings description) {
         this.key = key;
         this.roles = roles;
         this.name = name;
@@ -30,7 +33,7 @@ public class ChannelDraft extends Base {
     }
 
     public static ChannelDraft of(final String key) {
-        return new ChannelDraft(key, Collections.emptySet(), Optional.empty(), Optional.empty());
+        return new ChannelDraft(key, Collections.emptySet(), null, null);
     }
 
     public String getKey() {
@@ -41,35 +44,33 @@ public class ChannelDraft extends Base {
         return roles;
     }
 
-    public Optional<LocalizedStrings> getName() {
+    @Nullable
+    public LocalizedStrings getName() {
         return name;
     }
 
-    public Optional<LocalizedStrings> getDescription() {
+    @Nullable
+    public LocalizedStrings getDescription() {
         return description;
     }
     
-    public ChannelDraft withRoles(final Set<ChannelRole> roles) {
-        return ChannelDraftBuilder.of(this).roles(roles).build();
+    public ChannelDraft withRoles(@Nullable final Set<ChannelRole> roles) {
+        return newBuilder().roles(roles).build();
     }
 
-    public ChannelDraft withRoles(final ChannelRole... roles) {
-        return ChannelDraftBuilder.of(this).roles(asSet(roles)).build();
+    public ChannelDraft withRoles(final ChannelRole ... roles) {
+        return newBuilder().roles(asSet(roles)).build();
     }
     
-    public ChannelDraft withName(final Optional<LocalizedStrings> name) {
-        return ChannelDraftBuilder.of(this).name(name).build();
-    }  
-    
-    public ChannelDraft withName(final LocalizedStrings name) {
-        return withName(Optional.of(name));
-    }    
-    
-    public ChannelDraft withDescription(final Optional<LocalizedStrings> description) {
-        return ChannelDraftBuilder.of(this).description(description).build();
-    }  
-    
-    public ChannelDraft withDescription(final LocalizedStrings description) {
-        return withDescription(Optional.of(description));
+    public ChannelDraft withName(@Nullable final LocalizedStrings name) {
+        return newBuilder().name(name).build();
+    }
+
+    public ChannelDraftBuilder newBuilder() {
+        return ChannelDraftBuilder.of(this);
+    }
+
+    public ChannelDraft withDescription(@Nullable final LocalizedStrings description) {
+        return newBuilder().description(description).build();
     }
 }

@@ -14,6 +14,6 @@ public class ByEnglishNameProductQuerySupplier implements Supplier<Query<Product
     public Query<Product> get() {
         final QueryPredicate<Product> predicate = ProductQueryModel.of().
                 masterData().current().name().lang(Locale.ENGLISH).is("simple cotton t-shirt");
-        return ProductQuery.of().withPredicate(predicate);
+        return ProductQuery.of().withPredicates(predicate);
     }
 }

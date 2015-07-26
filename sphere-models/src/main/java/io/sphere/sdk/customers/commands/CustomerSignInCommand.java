@@ -1,12 +1,12 @@
 package io.sphere.sdk.customers.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.CustomerSignInResult;
-import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.json.SphereJsonUtils;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
@@ -27,23 +27,20 @@ import static io.sphere.sdk.http.HttpMethod.POST;
 public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
     private final String email;
     private final String password;
-    private final Optional<String> anonymousCartId;
+    @Nullable
+    private final String anonymousCartId;
 
-    private CustomerSignInCommand(final String email, final String password, final Optional<String> anonymousCartId) {
+    private CustomerSignInCommand(final String email, final String password, final String anonymousCartId) {
         this.email = email;
         this.password = password;
         this.anonymousCartId = anonymousCartId;
     }
 
     public static CustomerSignInCommand of(final String email, final String password) {
-        return of(email, password, Optional.<String>empty());
+        return of(email, password, null);
     }
 
-    public static CustomerSignInCommand of(final String email, final String password, final String anonymousCartId) {
-        return of(email, password, Optional.of(anonymousCartId));
-    }
-
-    public static CustomerSignInCommand of(final String email, final String password, final Optional<String> anonymousCartId) {
+    public static CustomerSignInCommand of(final String email, final String password, @Nullable final String anonymousCartId) {
         return new CustomerSignInCommand(email, password, anonymousCartId);
     }
 
@@ -65,7 +62,8 @@ public class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
         return password;
     }
 
-    public Optional<String> getAnonymousCartId() {
+    @Nullable
+    public String getAnonymousCartId() {
         return anonymousCartId;
     }
 }

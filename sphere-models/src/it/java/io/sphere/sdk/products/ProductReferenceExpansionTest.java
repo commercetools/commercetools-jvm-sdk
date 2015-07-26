@@ -41,13 +41,13 @@ public class ProductReferenceExpansionTest extends IntegrationTest {
         TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory ->
             withProduct(client(), product -> {
                 final Product productWithTaxCategory = execute(ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory)));
-                assertThat(productWithTaxCategory.getTaxCategory()).isPresent();
+                assertThat(productWithTaxCategory.getTaxCategory()).isNotNull();
                 final Query<Product> query = ProductQuery.of().
                         bySlug(ProductProjectionType.CURRENT, Locale.ENGLISH, englishSlugOf(product.getMasterData().getStaged())).
                         withExpansionPaths(ProductExpansionModel.of().taxCategory()).
                         toQuery();
                 final PagedQueryResult<Product> queryResult = execute(query);
-                final Reference<TaxCategory> productTypeReference = firstOf(queryResult).getTaxCategory().get();
+                final Reference<TaxCategory> productTypeReference = firstOf(queryResult).getTaxCategory();
                 assertThat(productTypeReference).isExpanded();
             })
         );

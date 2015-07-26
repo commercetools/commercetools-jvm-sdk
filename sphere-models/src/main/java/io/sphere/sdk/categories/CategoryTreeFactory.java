@@ -19,21 +19,21 @@ final class CategoryTreeFactory {
     }
 
     public CategoryTree create(final List<Category> allCategoriesAsFlatList) {
-        final Predicate<Category> isRootCategory = c -> !c.getParent().isPresent();
+        final Predicate<Category> isRootCategory = c -> c.getParent() == null;
         final List<Category> roots = allCategoriesAsFlatList.parallelStream().filter(isRootCategory).collect(toList());
         final List<Category> allAsFlatList = allCategoriesAsFlatList;
         final Map<LocalizedStringsEntry, Category> categoriesByLocaleAndSlug = new HashMap<>();
         allCategoriesAsFlatList.forEach(category -> {
             final Set<Locale> localesForTheCategory = category.getSlug().getLocales();
             localesForTheCategory.forEach(locale -> {
-                final LocalizedStringsEntry stringsEntry = LocalizedStringsEntry.of(locale, category.getSlug().get(locale).get());
+                final LocalizedStringsEntry stringsEntry = LocalizedStringsEntry.of(locale, category.getSlug().get(locale));
                 categoriesByLocaleAndSlug.put(stringsEntry, category);
             });
         });
         final Map<String, Category> categoriesById = allCategoriesAsFlatList.stream().collect(toMap(Category::getId, Function.<Category>identity()));
         final Map<String, List<Category>> childrenByParentId = new HashMap<>();
         allCategoriesAsFlatList.forEach(category ->
-            category.getParent().ifPresent(parentReference -> {
+            Optional.ofNullable(category.getParent()).ifPresent(parentReference -> {
                 final String parentId = parentReference.getId();
                 final List<Category> entries = childrenByParentId.getOrDefault(parentId, new LinkedList<>());
                 entries.add(category);

@@ -5,7 +5,7 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.*;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  * EXPERIMENTAL model to easily build product projection search requests.
@@ -13,12 +13,12 @@ import java.util.Optional;
  */
 public class ExperimentalProductProjectionSearchModel extends ProductDataSearchModelBase {
 
-    private ExperimentalProductProjectionSearchModel(final Optional<? extends SearchModel<ProductProjection>> parent, final Optional<String> pathSegment) {
+    private ExperimentalProductProjectionSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
     static ExperimentalProductProjectionSearchModel get() {
-        return new ExperimentalProductProjectionSearchModel(Optional.empty(), Optional.empty());
+        return new ExperimentalProductProjectionSearchModel(null, null);
     }
 
     @Override

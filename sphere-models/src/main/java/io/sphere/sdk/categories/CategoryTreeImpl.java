@@ -35,19 +35,19 @@ class CategoryTreeImpl extends Base implements CategoryTree {
 
     @Override
     public Optional<Category> findById(final String id) {
-        return getOptional(categoriesById, id);
+        return Optional.ofNullable(categoriesById.get(id));
     }
 
     @Override
     public Optional<Category> findByExternalId(final String externalId) {
         return getAllAsFlatList().parallelStream()
-                .filter(cat -> cat.getExternalId().map(extIdElement -> extIdElement.equals(externalId)).orElse(false))
+                .filter(cat -> Optional.ofNullable(cat.getExternalId()).map(extIdElement -> extIdElement.equals(externalId)).orElse(false))
                 .findAny();//should be okay, since the externalId should be unique
     }
 
     @Override
     public Optional<Category> findBySlug(final Locale locale, final String slug) {
-        return getOptional(categoriesByLocaleAndSlug, LocalizedStringsEntry.of(locale, slug));
+        return Optional.ofNullable(categoriesByLocaleAndSlug.get(LocalizedStringsEntry.of(locale, slug)));
     }
 
     @Override

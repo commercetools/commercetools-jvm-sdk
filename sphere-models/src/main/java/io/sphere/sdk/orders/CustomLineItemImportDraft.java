@@ -7,8 +7,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -26,8 +26,10 @@ public interface CustomLineItemImportDraft {
 
     Reference<TaxCategory> getTaxCategory();
 
-    Optional<TaxRate> getTaxRate();
+    @Nullable
+    TaxRate getTaxRate();
 
     @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
-    Optional<Set<ItemState>> getState();
+    @Nullable
+    Set<ItemState> getState();
 }

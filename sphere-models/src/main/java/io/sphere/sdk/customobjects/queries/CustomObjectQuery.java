@@ -26,6 +26,6 @@ public interface CustomObjectQuery<T> extends MetaModelQueryDsl<CustomObject<T>,
     }
 
     default CustomObjectQuery<T> byContainer(final String container) {
-        return withPredicate(CustomObjectQueryModel.<T>of().container().is(container));
+        return withPredicates(CustomObjectQueryModel.<T>of().container().is(container));
     }
 }

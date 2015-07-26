@@ -1,5 +1,6 @@
 package io.sphere.sdk.http;
 
+import javax.annotation.Nullable;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 
@@ -10,9 +11,11 @@ public interface HttpResponse {
 
     HttpHeaders getHeaders();
 
-    Optional<byte[]> getResponseBody();
+    @Nullable
+    byte[] getResponseBody();
 
-    Optional<HttpRequest> getAssociatedRequest();
+    @Nullable
+    HttpRequest getAssociatedRequest();
 
     default boolean hasInformationalResponseCode() {
         return responseCodeStartsWith(this, 1);
@@ -34,51 +37,39 @@ public interface HttpResponse {
         return responseCodeStartsWith(this, 5);
     }
 
-    public static HttpResponse of(final int status, final String responseBody) {
-        return of(status, responseBody, Optional.empty(), HttpHeaders.of());
+    static HttpResponse of(final int status, final String responseBody) {
+        return of(status, responseBody, null, HttpHeaders.of());
     }
 
-    public static HttpResponse of(final int status, final String responseBody, final HttpHeaders headers) {
-        return of(status, responseBody, Optional.empty(), headers);
+    static HttpResponse of(final int status, final String responseBody, final HttpHeaders headers) {
+        return of(status, responseBody, null, headers);
     }
 
-    public static HttpResponse of(final int status) {
-        return of(status, Optional.empty(), Optional.empty(), Optional.empty() );
+    static HttpResponse of(final int status) {
+        return of(status, (byte[]) null, null, null);
     }
 
-    public static HttpResponse of(final int status, final HttpHeaders headers) {
-        return of(status, Optional.empty(), Optional.empty(), Optional.of(headers));
+    static HttpResponse of(final int status, final HttpHeaders headers) {
+        return of(status, (byte[]) null, null, headers);
     }
 
-    public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest) {
-        return of(status, responseBody, Optional.of(associatedRequest), HttpHeaders.of());
+    static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest) {
+        return of(status, responseBody, associatedRequest, HttpHeaders.of());
     }
 
-    public static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest, final HttpHeaders headers) {
-        return of(status, responseBody, Optional.of(associatedRequest), headers);
+    static HttpResponse of(final int status, final String responseBody, final HttpRequest associatedRequest, final HttpHeaders headers) {
+        return of(status, responseBody.getBytes(StandardCharsets.UTF_8), associatedRequest, headers);
     }
 
-    public static HttpResponse of(final int status, final String responseBody, final Optional<HttpRequest> associatedRequest) {
-        return of(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest, Optional.empty());
+    static HttpResponse of(final int status, final byte[] body, final HttpRequest associatedRequest) {
+        return of(status, body, associatedRequest, HttpHeaders.empty());
     }
 
-    public static HttpResponse of(final int status, final String responseBody, final Optional<HttpRequest> associatedRequest, final HttpHeaders headers) {
-        return of(status, Optional.of(responseBody.getBytes(StandardCharsets.UTF_8)), associatedRequest, Optional.of(headers));
-    }
-
-    public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest) {
-        return of(status, body, associatedRequest, Optional.<HttpHeaders>empty());
-    }
-
-    public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest, final HttpHeaders headers) {
-        return of(status, body, associatedRequest, Optional.of(headers));
-    }
-
-    public static HttpResponse of(final int status, final Optional<byte[]> body, final Optional<HttpRequest> associatedRequest, final Optional<HttpHeaders> headers) {
-        return new HttpResponseImpl(status, body, associatedRequest, headers.orElseGet(() -> HttpHeaders.of()));
+    static HttpResponse of(final int status, final byte[] body, @Nullable final HttpRequest associatedRequest, @Nullable final HttpHeaders headers) {
+        return new HttpResponseImpl(status, body, associatedRequest, Optional.ofNullable(headers).orElseGet(() -> HttpHeaders.of()));
     }
 
     default HttpResponse withoutRequest() {
-        return HttpResponse.of(getStatusCode(), getResponseBody(), Optional.<HttpRequest>empty(), Optional.of(getHeaders()));
+        return HttpResponse.of(getStatusCode(), getResponseBody(), null, getHeaders());
     }
 }

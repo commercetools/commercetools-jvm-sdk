@@ -6,15 +6,16 @@ import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @JsonDeserialize(as=CartDiscountImpl.class)
 public interface CartDiscount extends DefaultModel<CartDiscount> {
     String getCartPredicate();
 
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     boolean isActive();
 
@@ -28,9 +29,11 @@ public interface CartDiscount extends DefaultModel<CartDiscount> {
 
     CartDiscountTarget getTarget();
 
-    Optional<ZonedDateTime> getValidFrom();
+    @Nullable
+    ZonedDateTime getValidFrom();
 
-    Optional<ZonedDateTime> getValidUntil();
+    @Nullable
+    ZonedDateTime getValidUntil();
 
     CartDiscountValue getValue();
 
@@ -42,7 +45,6 @@ public interface CartDiscount extends DefaultModel<CartDiscount> {
     default Reference<CartDiscount> toReference() {
         return Reference.of(typeId(), getId(), this);
     }
-
 
     static TypeReference<CartDiscount> typeReference() {
         return new TypeReference<CartDiscount>() {

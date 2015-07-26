@@ -9,6 +9,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.client.HttpResponseBodyUtils.bytesToString;
@@ -42,8 +43,8 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         logger.debug(() -> sphereRequest);
         logger.trace(() -> {
             final String output;
-            if (httpRequest.getBody().isPresent() && httpRequest.getBody().get() instanceof StringHttpRequestBody) {
-                final StringHttpRequestBody body = (StringHttpRequestBody) httpRequest.getBody().get();
+            if (httpRequest.getBody() != null && httpRequest.getBody() instanceof StringHttpRequestBody) {
+                final StringHttpRequestBody body = (StringHttpRequestBody) httpRequest.getBody();
                 final String unformattedJson = body.getString();
                 output = "send: " + unformattedJson + "\nformatted: " + SphereJsonUtils.prettyPrint(unformattedJson);
             } else {
@@ -73,7 +74,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
     private static <T> T processHttpResponse(final SphereRequest<T> sphereRequest, final ObjectMapper objectMapper, final SphereApiConfig config, final HttpResponse httpResponse) {
         final SphereInternalLogger logger = getLogger(httpResponse);
         logger.debug(() -> httpResponse);
-        logger.trace(() -> httpResponse.getStatusCode() + "\n" + httpResponse.getResponseBody().map(body -> SphereJsonUtils.prettyPrint(bytesToString(body))).orElse("No body present.") + "\n");
+        logger.trace(() -> httpResponse.getStatusCode() + "\n" + Optional.ofNullable(httpResponse.getResponseBody()).map(body -> SphereJsonUtils.prettyPrint(bytesToString(body))).orElse("No body present.") + "\n");
         final List<String> notices = httpResponse.getHeaders().getHeadersAsMap().get(SphereHttpHeaders.X_DEPRECATION_NOTICE);
         if (notices != null) {
             notices.stream().forEach(message -> logger.warn(() -> "Deprecation notice : " + message));
@@ -90,7 +91,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
             try {
                 result = sphereRequest.deserialize(httpResponse);
             } catch (final JsonException e) {
-                final byte[] bytes = httpResponse.getResponseBody().get();
+                final byte[] bytes = httpResponse.getResponseBody();
                 e.addNote("Cannot parse " + bytesToString(bytes));
                 throw e;
             }
@@ -110,7 +111,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
         exception.setProjectKey(config.getProjectKey());
 
         final List<String> errorMessagesDueToMappingError = asList("SearchPhaseExecutionException", "query_fetch", "RemoteTransportException", "SearchParseException", "search/phase/query+fetch");
-        httpResponse.getResponseBody()
+        Optional.ofNullable(httpResponse.getResponseBody())
                 .map(bytes -> bytesToString(bytes))
                 .map(body -> errorMessagesDueToMappingError.stream().anyMatch(errorWord -> body.contains(errorWord)) && body.toLowerCase().contains("product"))
                 .ifPresent(containsTerm -> {

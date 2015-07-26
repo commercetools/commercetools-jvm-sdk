@@ -1,13 +1,12 @@
 package io.sphere.sdk.search;
 
-import io.sphere.sdk.http.HttpQueryParameter;
-
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 public interface EntitySearch<T> extends Search<T> {
 
-    Optional<SearchText> text();
+    @Nullable
+    SearchText text();
 
     List<FacetExpression<T>> facets();
 
@@ -19,7 +18,9 @@ public interface EntitySearch<T> extends Search<T> {
 
     List<SearchSort<T>> sort();
 
-    Optional<Long> limit();
+    @Nullable
+    Long limit();
 
-    Optional<Long> offset();
+    @Nullable
+    Long offset();
 }

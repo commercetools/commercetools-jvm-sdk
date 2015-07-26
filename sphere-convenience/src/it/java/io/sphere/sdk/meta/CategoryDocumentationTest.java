@@ -52,11 +52,12 @@ import static java.util.Locale.GERMAN;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
+import static org.apache.commons.lang3.StringUtils.defaultString;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryDocumentationTest extends IntegrationTest {
 
-    private static final Comparator<Category> EXTERNALID_COMPARATOR = Comparator.comparing(c -> Integer.parseInt(c.getExternalId().get()));
+    private static final Comparator<Category> EXTERNALID_COMPARATOR = Comparator.comparing(c -> Integer.parseInt(c.getExternalId()));
     private static List<Category> categories;
     private static CategoryTree tree;
 
@@ -76,18 +77,18 @@ public class CategoryDocumentationTest extends IntegrationTest {
         final List<Category> categories = categoriesStage.toCompletableFuture().join();
         assertThat(categories)
                 .hasSize(15)
-                .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).get().equals("boots-women")));
+                .matches(cats -> cats.parallelStream().anyMatch(cat -> cat.getSlug().get(ENGLISH).equals("boots-women")));
     }
 
     @Test
     public void fetchRoots() throws Exception {
-        final CategoryQuery seedQuery = CategoryQuery.of().withPredicate(m -> m.parent().isNotPresent());
+        final CategoryQuery seedQuery = CategoryQuery.of().withPredicates(m -> m.parent().isNotPresent());
         final Publisher<Category> categoryPublisher =
                 ExperimentalReactiveStreamUtils.publisherOf(seedQuery, sphereClient());
         final CompletionStage<List<Category>> categoriesStage =
                 ExperimentalReactiveStreamUtils.collectAll(categoryPublisher);
         final List<Category> rootCategories = categoriesStage.toCompletableFuture().join();
-        assertThat(rootCategories.stream().allMatch(cat -> !cat.getParent().isPresent()))
+        assertThat(rootCategories.stream().allMatch(cat -> cat.getParent() == null))
                 .overridingErrorMessage("fetched only root categories")
                 .isTrue();
     }
@@ -102,7 +103,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
         assertThat(categoryTree.findBySlug(ENGLISH, "not-existing-slug")).isEmpty();
 
         //find by ID
-        final Reference<Category> clothingWomenReference = jeansWomenOptional.get().getParent().get();
+        final Reference<Category> clothingWomenReference = jeansWomenOptional.get().getParent();
         final Optional<Category> clothingWomenOptional = categoryTree.findById(clothingWomenReference.getId());
         assertThat(clothingWomenOptional).isPresent();
         assertThat(clothingWomenOptional.get().getSlug().get(ENGLISH)).contains("womens-clothing");
@@ -111,7 +112,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
         final Category clothingWomen = clothingWomenOptional.get();
         final List<Category> clothingWomenSubcategories = categoryTree.findChildren(clothingWomen);
         final List<String> names = clothingWomenSubcategories.stream()
-                .map(cat -> cat.getName().get(ENGLISH).get())
+                .map(cat -> cat.getName().get(ENGLISH))
                 .sorted()
                 .collect(toList());
         assertThat(names).contains("jeans", "t-shirts");
@@ -135,8 +136,8 @@ public class CategoryDocumentationTest extends IntegrationTest {
                 .skip(1)//remove top level category
                 .collect(toList());
 
-        final Function<Category, String> formatCategory = cat -> cat.getExternalId().orElse("")
-                + " " + cat.getName().get(ENGLISH).orElse("");
+        final Function<Category, String> formatCategory = cat -> defaultString(cat.getExternalId())
+                + " " + cat.getName().find(ENGLISH).orElse("");
         final String ancestorCategoriesString = ancestorReferences.stream()
                 .map(ref -> categoryTree.findById(ref.getId()).get())
                 .map(formatCategory)
@@ -259,7 +260,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
             withProductInCategory(client(), tshirtCategory, tshirtProduct -> {
                 final PagedQueryResult<ProductProjection> resultForParentCategory =
                         //query for the parent category
-                        execute(ProductProjectionQuery.ofStaged().withPredicate(m -> m.categories().isIn(mensClothingCategory)));
+                        execute(ProductProjectionQuery.ofStaged().withPredicates(m -> m.categories().isIn(mensClothingCategory)));
                 assertThat(resultForParentCategory.getResults())
                         .overridingErrorMessage(
                                 "if a product is in a category," +
@@ -267,9 +268,9 @@ public class CategoryDocumentationTest extends IntegrationTest {
                                         "the query will not find the product")
                         .isEmpty();
 
-                final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicate(m -> m.categories().isIn(tshirtCategory, jeansCategory));
-                assertThat(query.predicate())
-                        .contains(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
+                final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicates(m -> m.categories().isIn(tshirtCategory, jeansCategory));
+                assertThat(query.predicates().get(0))
+                        .isEqualTo(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
                 final PagedQueryResult<ProductProjection> resultForDirectCategories =
                         execute(query);
                 assertThat(resultForDirectCategories.getResults())

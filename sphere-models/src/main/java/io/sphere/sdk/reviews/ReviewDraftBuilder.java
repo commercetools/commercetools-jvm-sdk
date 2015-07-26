@@ -6,15 +6,19 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.ProductIdentifiable;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class ReviewDraftBuilder extends Base implements Builder<ReviewDraft> {
     private final String productId;
     private final String customerId;
-    private Optional<String> authorName = Optional.empty();
-    private Optional<String> title = Optional.empty();
-    private Optional<String> text = Optional.empty();
-    private Optional<Double> score = Optional.empty();
+    @Nullable
+    private String authorName;
+    @Nullable
+    private String title;
+    @Nullable
+    private String text;
+    @Nullable
+    private Double score;
 
     private ReviewDraftBuilder(final String productId, final String customerId) {
         this.productId = productId;
@@ -35,40 +39,24 @@ public class ReviewDraftBuilder extends Base implements Builder<ReviewDraft> {
                 .text(template.getText()).score(template.getScore());
     }
 
-    public ReviewDraftBuilder authorName(final Optional<String> authorName) {
+    public ReviewDraftBuilder authorName(@Nullable final String authorName) {
         this.authorName = authorName;
         return this;
     }
 
-    public ReviewDraftBuilder authorName(final String authorName) {
-        return authorName(Optional.ofNullable(authorName));
-    }
-
-    public ReviewDraftBuilder title(final Optional<String> title) {
+    public ReviewDraftBuilder title(@Nullable final String title) {
         this.title = title;
         return this;
     }
 
-    public ReviewDraftBuilder title(final String title) {
-        return title(Optional.ofNullable(title));
-    }
-
-    public ReviewDraftBuilder text(final Optional<String> text) {
+    public ReviewDraftBuilder text(@Nullable final String text) {
         this.text = text;
         return this;
     }
 
-    public ReviewDraftBuilder text(final String text) {
-        return text(Optional.ofNullable(text));
-    }
-
-    public ReviewDraftBuilder score(final Optional<Double> score) {
+    public ReviewDraftBuilder score(@Nullable final Double score) {
         this.score = score;
         return this;
-    }
-
-    public ReviewDraftBuilder score(final Double score) {
-        return score(Optional.ofNullable(score));
     }
 
     @Override

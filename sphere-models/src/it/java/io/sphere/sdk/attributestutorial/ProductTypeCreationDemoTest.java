@@ -85,7 +85,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final List<ProductType> productTypes = execute(ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME)).getResults();
         if (!productTypes.isEmpty()) {
             final ProductQuery productQuery = ProductQuery.of()
-                    .withPredicate(m -> m.productType().isIn(productTypes))
+                    .withPredicates(m -> m.productType().isIn(productTypes))
                     .withLimit(500);
             execute(productQuery).getResults().forEach(p -> execute(ProductDeleteCommand.of(p)));
             productTypes.forEach(p -> execute(ProductTypeDeleteCommand.of(p)));
@@ -177,22 +177,22 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Product product = client().execute(ProductCreateCommand.of(draft));
 
         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
-        assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
+        assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
                 .overridingErrorMessage("on the get side, the while enum is delivered")
                 .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
-        assertThat(masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
+        assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
                 .contains(PlainEnumValue.of("S", "S"));
         final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
                 LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
         final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
                 LocalizedStrings.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
-        assertThat(masterVariant.getAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
+        assertThat(masterVariant.findAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
                 .contains(asSet(cold, tumbleDrying));
-        assertThat(masterVariant.getAttribute(MATCHING_PRODUCTS_ATTR_NAME, AttributeAccess.ofProductReferenceSet()))
+        assertThat(masterVariant.findAttribute(MATCHING_PRODUCTS_ATTR_NAME, AttributeAccess.ofProductReferenceSet()))
                 .contains(asSet(similarProductReference));
-        assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
+        assertThat(masterVariant.findAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
                 .contains(MoneyImpl.of(300, EUR));
-        assertThat(masterVariant.getAttribute(AVAILABLE_SINCE_ATTR_NAME, AttributeAccess.ofDate()))
+        assertThat(masterVariant.findAttribute(AVAILABLE_SINCE_ATTR_NAME, AttributeAccess.ofDate()))
                 .contains(LocalDate.of(2015, 2, 2));
 
         return product;
@@ -210,7 +210,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Product product = client().execute(ProductCreateCommand.of(draft));
 
         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
-        assertThat(masterVariant.getAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
+        assertThat(masterVariant.findAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
                 .contains("978-3-86680-192-9");
         return product;
     }
@@ -255,13 +255,13 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Product product = client().execute(ProductCreateCommand.of(draft));
 
         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
-        assertThat(masterVariant.getAttribute(color))
+        assertThat(masterVariant.findAttribute(color))
                 .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
-        assertThat(masterVariant.getAttribute(size)).contains(PlainEnumValue.of("S", "S"));
-        assertThat(masterVariant.getAttribute(laundrySymbols)).contains(asSet(cold, tumbleDrying));
-        assertThat(masterVariant.getAttribute(matchingProducts)).contains(asSet(productReference));
-        assertThat(masterVariant.getAttribute(rrp)).contains(MoneyImpl.of(300, EUR));
-        assertThat(masterVariant.getAttribute(availableSince)).contains(LocalDate.of(2015, 2, 2));
+        assertThat(masterVariant.findAttribute(size)).contains(PlainEnumValue.of("S", "S"));
+        assertThat(masterVariant.findAttribute(laundrySymbols)).contains(asSet(cold, tumbleDrying));
+        assertThat(masterVariant.findAttribute(matchingProducts)).contains(asSet(productReference));
+        assertThat(masterVariant.findAttribute(rrp)).contains(MoneyImpl.of(300, EUR));
+        assertThat(masterVariant.findAttribute(availableSince)).contains(LocalDate.of(2015, 2, 2));
     }
 
     @Test
@@ -283,7 +283,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
         final Optional<PlainEnumValue> attributeOption =
-                masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue());
+                masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue());
         assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
     }
 
@@ -293,7 +293,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-        final Optional<PlainEnumValue> attributeOption = masterVariant.getAttribute(size);
+        final Optional<PlainEnumValue> attributeOption = masterVariant.findAttribute(size);
         assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
     }
 
@@ -301,7 +301,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     public void readAttributeWithoutProductTypeWithNamedAccessWithWrongType() throws Exception {
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-        assertThatThrownBy(() -> masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofBoolean()))
+        assertThatThrownBy(() -> masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofBoolean()))
                 .isInstanceOf(JsonException.class);
     }
 
@@ -309,7 +309,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     public void notPresentAttributeRead() throws Exception {
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-        final Optional<Boolean> attributeOption = masterVariant.getAttribute("notpresent", AttributeAccess.ofBoolean());
+        final Optional<Boolean> attributeOption = masterVariant.findAttribute("notpresent", AttributeAccess.ofBoolean());
         assertThat(attributeOption).isEmpty();
     }
 
@@ -317,9 +317,9 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     public void readAttributeWithoutProductTypeWithJson() throws Exception {
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-        final Optional<Attribute> attributeOption = masterVariant.getAttribute(SIZE_ATTR_NAME);
+        final Attribute attr = masterVariant.getAttribute(SIZE_ATTR_NAME);
         final JsonNode expectedJsonNode = SphereJsonUtils.toJsonNode(PlainEnumValue.of("S", "S"));
-        assertThat(attributeOption.get().getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
+        assertThat(attr.getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
     }
 
     @Test
@@ -331,37 +331,36 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
         final Product product = createProduct();
         final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
-                .withPredicate(m -> m.id().is(product.getId()))
+                .withPredicates(m -> m.id().is(product.getId()))
                 .plusExpansionPaths(m -> m.masterVariant().attributes().valueSet())
                 .plusExpansionPaths(m -> m.productType());
 
         final ProductProjection productProjection = execute(query).head().get();
 
-        final ProductType productType = productProjection.getProductType().getObj().get();
+        final ProductType productType = productProjection.getProductType().getObj();
         final ProductVariant masterVariant = productProjection.getMasterVariant();
         final List<Attribute> attributes = masterVariant.getAttributes();
         final MonetaryAmountFormat moneyFormat = MonetaryFormats.getAmountFormat(US);
 
         final Function<Attribute, Optional<Pair<String, String>>> attributeValueExtractor = attribute -> {
             final Optional<String> extractedResult = AttributeExtraction.<String>of(productType, attribute)
-                    .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -> v.getLabel().get(ENGLISH).orElse(""))
+                    .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -> v.getLabel().find(ENGLISH).orElse(""))
                     .ifIs(AttributeAccess.ofPlainEnumValue(), v -> v.getLabel())
                     .ifIs(AttributeAccess.ofLocalizedEnumValueSet(), v ->
                             v.stream()
                                     .map(x -> x.getLabel().get(ENGLISH))
-                                    .filter(x -> x.isPresent())
-                                    .map(x -> x.get())
+                                    .filter(x -> x != null)
                                     .collect(joining(", ")))
                     .ifIs(AttributeAccess.ofProductReferenceSet(), set -> set.stream()
-                            .map(productReference -> productReference.getObj()
-                                    .map(prod -> prod.getMasterData().getStaged().getName().get(ENGLISH).orElse(""))
+                            .map(productReference -> Optional.ofNullable(productReference.getObj())
+                                    .map(prod -> prod.getMasterData().getStaged().getName().find(ENGLISH).orElse(""))
                                     .orElse(productReference.getId()))
                             .collect(joining(", ")))
                     .ifIs(AttributeAccess.ofMoney(), money -> moneyFormat.format(money))
                     .ifIs(AttributeAccess.ofDate(), date -> date.toString())
-                    .getValue();
+                    .findValue();
             final Optional<Pair<String, String>> tableRowData = extractedResult.map(value -> {
-                final String label = productType.getAttribute(attribute.getName()).get().getLabel().get(ENGLISH).get();
+                final String label = productType.getAttribute(attribute.getName()).getLabel().get(ENGLISH);
                 return ImmutablePair.of(label, value);
             });
             return tableRowData;
@@ -416,11 +415,11 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Reference<Product> productReference = referencedProduct.toReference();
         assertThat(productReference.getObj())
                 .overridingErrorMessage("product reference is expanded")
-                .isPresent();
+                .isNotNull();
         final AttributeAccess<Reference<Product>> access = AttributeAccess.ofProductReference();
         final Attribute attribute = Attribute.of("attrname", access, productReference);
         assertThat(attribute.getValue(access)).isEqualTo(productReference);
-        assertThat(attribute.getValue(access).getObj()).isPresent();
+        assertThat(attribute.getValue(access).getObj()).isNotNull();
     }
 
     @Test
@@ -434,7 +433,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateAction));
 
         final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
-        assertThat(masterVariant.getAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
+        assertThat(masterVariant.findAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
                 .contains("978-3-86680-192-8");
     }
 
@@ -454,15 +453,15 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateActions));
 
         final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
-        assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
+        assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
                 .contains(LocalizedEnumValue.of("red", LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot")));
-        assertThat(masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
+        assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
                 .contains(PlainEnumValue.of("M", "M"));
         final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
                 LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
-        assertThat(masterVariant.getAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
+        assertThat(masterVariant.findAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
                 .contains(asSet(cold));
-        assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
+        assertThat(masterVariant.findAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
                 .contains(MoneyImpl.of(20, EUR));
     }
 
@@ -497,10 +496,10 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
         final ProductVariant productVariant = order.getLineItems().get(0).getVariant();
         final Optional<LocalizedEnumValue> colorAttribute =
-                productVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue());
+                productVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue());
         assertThat(colorAttribute).contains(yellow);
         final Optional<MonetaryAmount> rrpAttribute =
-                productVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney());
+                productVariant.findAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney());
         assertThat(rrpAttribute).contains(EURO_30);
         final Set<String> presentAttributes = productVariant.getAttributes().stream()
                 .map(attr -> attr.getName())

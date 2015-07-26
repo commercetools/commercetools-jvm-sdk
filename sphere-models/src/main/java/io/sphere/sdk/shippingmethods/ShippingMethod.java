@@ -8,9 +8,9 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.zones.Zone;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -19,17 +19,17 @@ import static java.util.stream.Collectors.toList;
 public interface ShippingMethod extends DefaultModel<ShippingMethod> {
     String getName();
 
-    Optional<String> getDescription();
+    @Nullable
+    String getDescription();
 
     Reference<TaxCategory> getTaxCategory();
 
     List<ZoneRate> getZoneRates();
 
     default List<ShippingRate> getShippingRatesForZone(final Referenceable<Zone> zone) {
-        final Optional<ZoneRate> zoneRateOptional = getZoneRates().stream()
+        return getZoneRates().stream()
                 .filter(rate -> rate.getZone().hasSameIdAs(zone.toReference()))
-                .findFirst();
-        return zoneRateOptional
+                .findFirst()
                 .map(rate -> rate.getShippingRates())
                 .orElse(Collections.emptyList());
     }
@@ -45,11 +45,11 @@ public interface ShippingMethod extends DefaultModel<ShippingMethod> {
         return Reference.of(typeId(), getId(), this);
     }
 
-    public static String typeId(){
+    static String typeId() {
         return "shipping-method";
     }
 
-    public static TypeReference<ShippingMethod> typeReference(){
+    static TypeReference<ShippingMethod> typeReference() {
         return new TypeReference<ShippingMethod>() {
             @Override
             public String toString() {

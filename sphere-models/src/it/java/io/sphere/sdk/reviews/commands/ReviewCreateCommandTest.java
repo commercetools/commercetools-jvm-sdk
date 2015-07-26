@@ -26,7 +26,7 @@ public class ReviewCreateCommandTest extends IntegrationTest {
                 assertThat(review.getAuthorName()).contains("John Smith");
                 assertThat(review.getTitle()).contains("It is ok");
                 assertThat(review.getText()).contains("This product is ok.");
-                assertThat(review.getScore().get()).isEqualTo(0.36, within(0.1));
+                assertThat(review.getScore()).isEqualTo(0.36, within(0.1));
             })
         );
     }

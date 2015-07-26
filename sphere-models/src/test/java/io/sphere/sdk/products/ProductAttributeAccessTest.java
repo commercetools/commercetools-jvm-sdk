@@ -27,8 +27,8 @@ public class ProductAttributeAccessTest {
     public static final String BOOLEAN_ATTRIBUTE = "boolean-attribute";
     private final Product product = SphereJsonUtils.readObjectFromResource("product1.json", Product.typeReference());
     private final ProductProjection productProjection = SphereJsonUtils.readObjectFromResource("product-projection1.json", ProductProjection.typeReference());
-    private final ProductVariant variant = product.getMasterData().getCurrent().get().getMasterVariant();
-    private final ProductType productType = productProjection.getProductType().getObj().get();
+    private final ProductVariant variant = product.getMasterData().getCurrent().getMasterVariant();
+    private final ProductType productType = productProjection.getProductType().getObj();
 
     private final NamedAttributeAccess<LocalizedStrings> localizedStringsNamedAttributeAccess = ofLocalizedStrings().ofName(LOC_STRING_ATTRIBUTE);
     private final NamedAttributeAccess<LocalizedStrings> wrongTypeNamedAttributeAccess = ofLocalizedStrings().ofName("boolean-attribute");
@@ -41,36 +41,36 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void getterWithJsonAttributeAccess() throws Exception {
-        final JsonNode actual = variant.getAttribute(LOC_STRING_ATTRIBUTE, ofJsonNode()).get();
+        final JsonNode actual = variant.findAttribute(LOC_STRING_ATTRIBUTE, ofJsonNode()).get();
         final JsonNode expected = SphereJsonUtils.parse("{\"de\":\"val-loc-string-de\",\"en\":\"val-loc-string-en\"}");
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void getterWithAttributeAccess() throws Exception {
-        assertThat(variant.getAttribute(LOC_STRING_ATTRIBUTE, ofLocalizedStrings()).get()).
+        assertThat(variant.findAttribute(LOC_STRING_ATTRIBUTE, ofLocalizedStrings()).get()).
                 isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
     }
 
     @Test
     public void localizedStrings() throws Exception {
-        assertThat(variant.getAttribute(localizedStringsNamedAttributeAccess).get()).
+        assertThat(variant.findAttribute(localizedStringsNamedAttributeAccess).get()).
                 isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
     }
 
     @Test
     public void attributeNotFound() throws Exception {
-        assertThat(variant.getAttribute(notPresentNamedAttributeAccess)).isEmpty();
+        assertThat(variant.findAttribute(notPresentNamedAttributeAccess)).isEmpty();
     }
 
     @Test(expected = JsonException.class)
     public void wrongAttributeType() throws Exception {
-        variant.getAttribute(wrongTypeNamedAttributeAccess);
+        variant.findAttribute(wrongTypeNamedAttributeAccess);
     }
 
     @Test
     public void productProjection() throws Exception {
-        assertThat(productProjection.getMasterVariant().getAttribute(localizedStringsNamedAttributeAccess).get()).
+        assertThat(productProjection.getMasterVariant().findAttribute(localizedStringsNamedAttributeAccess).get()).
                 isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
 
     }
@@ -83,19 +83,19 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void mapMatchingAttributeWithIfIs() throws Exception {
-        final Attribute attr = variant.getAttribute(LOC_STRING_ATTRIBUTE).get();
+        final Attribute attr = variant.getAttribute(LOC_STRING_ATTRIBUTE);
         assertThat(map(attr)).isEqualTo("val-loc-string-de");
     }
 
     @Test
     public void mapMatchingAttributeWithIfGuarded() throws Exception {
-        final Attribute attr = variant.getAttribute(STRING_ATTRIBUTE).get();
+        final Attribute attr = variant.getAttribute(STRING_ATTRIBUTE);
         assertThat(map(attr)).isEqualTo("val-string-en");
     }
 
     @Test
     public void mapMatchingAttributeAbsent() throws Exception {
-        final Attribute attr = variant.getAttribute(BOOLEAN_ATTRIBUTE).get();
+        final Attribute attr = variant.getAttribute(BOOLEAN_ATTRIBUTE);
         assertThat(map(attr)).isEqualTo("<no mapping found>");
     }
 
@@ -103,10 +103,10 @@ public class ProductAttributeAccessTest {
     private String map(final Attribute attr) {
         final MetaProductType metaProductType = MetaProductType.of(asList(productType));
         final Locale locale = Locale.GERMAN;
-        final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName()).get();
+        final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName());
         return AttributeExtraction.<String>of(attrDefinition, attr)
-                .ifIs(ofLocalizedStrings(), lString -> lString.get(locale).orElse("<no translation found>"))
+                .ifIs(ofLocalizedStrings(), lString -> lString.find(locale).orElse("<no translation found>"))
                 .ifGuarded(ofString(), s -> s.length() > 2000 ? Optional.empty() : Optional.of(s))
-                .getValue().orElse("<no mapping found>");
+                .findValue().orElse("<no mapping found>");
     }
 }

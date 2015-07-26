@@ -8,7 +8,6 @@ import io.sphere.sdk.models.Reference;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements CartDiscount {
     private final LocalizedStrings name;
@@ -48,8 +47,9 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     }
 
     @Override
-    public Optional<LocalizedStrings> getDescription() {
-        return Optional.ofNullable(description);
+    @Nullable
+    public LocalizedStrings getDescription() {
+        return description;
     }
 
     @Override
@@ -83,13 +83,15 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     }
 
     @Override
-    public Optional<ZonedDateTime> getValidFrom() {
-        return Optional.ofNullable(validFrom);
+    @Nullable
+    public ZonedDateTime getValidFrom() {
+        return validFrom;
     }
 
     @Override
-    public Optional<ZonedDateTime> getValidUntil() {
-        return Optional.ofNullable(validUntil);
+    @Nullable
+    public ZonedDateTime getValidUntil() {
+        return validUntil;
     }
 
     @Override

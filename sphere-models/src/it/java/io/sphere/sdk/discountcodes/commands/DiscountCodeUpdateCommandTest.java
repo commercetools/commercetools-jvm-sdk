@@ -10,6 +10,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Optional;
 
 import static io.sphere.sdk.cartdiscounts.CartDiscountFixtures.*;
 import static io.sphere.sdk.discountcodes.DiscountCodeFixtures.*;
@@ -24,7 +25,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
             final LocalizedStrings newName = randomSlug();
             final DiscountCode updatedDiscountCode =
                     execute(DiscountCodeUpdateCommand.of(discountCode, SetName.of(newName)));
-            assertThat(updatedDiscountCode.getName()).contains(newName);
+            assertThat(updatedDiscountCode.getName()).isEqualTo(newName);
         });
     }
     
@@ -34,7 +35,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
             final LocalizedStrings newDescription = randomSlug();
             final DiscountCode updatedDiscountCode =
                     execute(DiscountCodeUpdateCommand.of(discountCode, SetDescription.of(newDescription)));
-            assertThat(updatedDiscountCode.getDescription()).contains(newDescription);
+            assertThat(updatedDiscountCode.getDescription()).isEqualTo(newDescription);
         });
     }
 
@@ -43,7 +44,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
         withPersistentDiscountCode(client(), discountCode -> {
             final String predicateAsString =
                     //you need to change the predicate
-                    discountCode.getCartPredicate().map(p -> "1 = 1".equals(p)).orElse(false) ? "true = true" : "1 = 1";
+                    Optional.ofNullable(discountCode.getCartPredicate()).map(p -> "1 = 1".equals(p)).orElse(false) ? "true = true" : "1 = 1";
 
             final CartPredicate cartPredicate = CartPredicate.of(predicateAsString);
             final DiscountCode updatedDiscountCode =
@@ -58,7 +59,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
             final long maxApplications = randomLong();
             final DiscountCode updatedDiscountCode =
                     execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplications.of(maxApplications)));
-            assertThat(updatedDiscountCode.getMaxApplications()).contains(maxApplications);
+            assertThat(updatedDiscountCode.getMaxApplications()).isEqualTo(maxApplications);
         });
     }
     
@@ -68,7 +69,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
             final long maxApplications = randomLong();
             final DiscountCode updatedDiscountCode =
                     execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplicationsPerCustomer.of(maxApplications)));
-            assertThat(updatedDiscountCode.getMaxApplicationsPerCustomer()).contains(maxApplications);
+            assertThat(updatedDiscountCode.getMaxApplicationsPerCustomer()).isEqualTo(maxApplications);
         });
     }
 

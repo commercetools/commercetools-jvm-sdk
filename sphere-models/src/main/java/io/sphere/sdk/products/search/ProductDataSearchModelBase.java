@@ -5,35 +5,33 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.*;
 
-import java.util.Optional;
-
 class ProductDataSearchModelBase extends SearchModelImpl<ProductProjection> {
 
-    ProductDataSearchModelBase(Optional<? extends SearchModel<ProductProjection>> parent, Optional<String> pathSegment) {
+    ProductDataSearchModelBase(final SearchModel<ProductProjection> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 
     public ProductVariantSearchModel allVariants() {
-        return new ProductVariantSearchModel(Optional.of(this), "variants");
+        return new ProductVariantSearchModel(this, "variants");
     }
 
     public LocalizedStringsSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
-        return new LocalizedStringsSearchModel<>(Optional.of(this), "name");
+        return new LocalizedStringsSearchModel<>(this, "name");
     }
 
     public ReferenceSearchModel<ProductProjection, Category> categories() {
-        return new ReferenceSearchModel<>(Optional.of(this), "categories");
+        return new ReferenceSearchModel<>(this, "categories");
     }
 
     public ReferenceSearchModel<ProductProjection, ProductType> productType() {
-        return new ReferenceSearchModel<>(Optional.of(this), "productType");
+        return new ReferenceSearchModel<>(this, "productType");
     }
 
     public DateTimeSearchModel<ProductProjection, SimpleSearchSortDirection> createdAt() {
-        return new DateTimeSearchModel<>(Optional.of(this), "createdAt");
+        return new DateTimeSearchModel<>(this, "createdAt");
     }
 
     public DateTimeSearchModel<ProductProjection, SimpleSearchSortDirection> lastModifiedAt() {
-        return new DateTimeSearchModel<>(Optional.of(this), "lastModifiedAt");
+        return new DateTimeSearchModel<>(this, "lastModifiedAt");
     }
 }

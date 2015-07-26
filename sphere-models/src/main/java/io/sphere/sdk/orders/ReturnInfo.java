@@ -3,23 +3,25 @@ package io.sphere.sdk.orders;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public class ReturnInfo extends Base {
     private final List<ReturnItem> items;
-    private final Optional<String> returnTrackingId;
-    private final Optional<ZonedDateTime> returnDate;
+    @Nullable
+    private final String returnTrackingId;
+    @Nullable
+    private final ZonedDateTime returnDate;
 
     @JsonCreator
-    private ReturnInfo(final List<ReturnItem> items, final Optional<String> returnTrackingId, final Optional<ZonedDateTime> returnDate) {
+    private ReturnInfo(final List<ReturnItem> items, @Nullable final String returnTrackingId, @Nullable final ZonedDateTime returnDate) {
         this.items = items;
         this.returnTrackingId = returnTrackingId;
         this.returnDate = returnDate;
     }
 
-    public static ReturnInfo of(final List<ReturnItem> items, final Optional<String> returnTrackingId, final Optional<ZonedDateTime> returnDate) {
+    public static ReturnInfo of(final List<ReturnItem> items, @Nullable final String returnTrackingId, @Nullable final ZonedDateTime returnDate) {
         return new ReturnInfo(items, returnTrackingId, returnDate);
     }
 
@@ -27,11 +29,13 @@ public class ReturnInfo extends Base {
         return items;
     }
 
-    public Optional<String> getReturnTrackingId() {
+    @Nullable
+    public String getReturnTrackingId() {
         return returnTrackingId;
     }
 
-    public Optional<ZonedDateTime> getReturnDate() {
+    @Nullable
+    public ZonedDateTime getReturnDate() {
         return returnDate;
     }
 }

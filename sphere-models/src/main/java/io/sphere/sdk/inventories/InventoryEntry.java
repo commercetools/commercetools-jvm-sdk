@@ -6,22 +6,25 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 @JsonDeserialize(as = InventoryEntryImpl.class)
 public interface InventoryEntry extends DefaultModel<InventoryEntry> {
     long getAvailableQuantity();
 
-    Optional<ZonedDateTime> getExpectedDelivery();
+    @Nullable
+    ZonedDateTime getExpectedDelivery();
 
     long getQuantityOnStock();
 
-    Optional<Integer> getRestockableInDays();
+    @Nullable
+    Integer getRestockableInDays();
 
     String getSku();
 
-    Optional<Reference<Channel>> getSupplyChannel();
+    @Nullable
+    Reference<Channel> getSupplyChannel();
 
     //reservations are internal
 

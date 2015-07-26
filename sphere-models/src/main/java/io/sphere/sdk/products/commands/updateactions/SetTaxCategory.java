@@ -6,6 +6,7 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -15,27 +16,25 @@ import java.util.Optional;
  *
  */
 public class SetTaxCategory extends UpdateAction<Product> {
-    private final Optional<Reference<TaxCategory>> taxCategory;
+    @Nullable
+    private final Reference<TaxCategory> taxCategory;
 
-    private SetTaxCategory(final Optional<Reference<TaxCategory>> taxCategory) {
+    private SetTaxCategory(final Reference<TaxCategory> taxCategory) {
         super("setTaxCategory");
         this.taxCategory = taxCategory;
     }
 
 
-    public static SetTaxCategory of(final Optional<Reference<TaxCategory>> taxCategory) {
-        return new SetTaxCategory(taxCategory);
-    }
-
-    public static SetTaxCategory of(final Referenceable<TaxCategory> taxCategory) {
-        return of(Optional.of(taxCategory.toReference()));
+    public static SetTaxCategory of(@Nullable final Referenceable<TaxCategory> taxCategory) {
+        return new SetTaxCategory(Optional.ofNullable(taxCategory).map(t -> t.toReference()).orElse(null));
     }
 
     public static SetTaxCategory unset() {
-        return of(Optional.<Reference<TaxCategory>>empty());
+        return of(null);
     }
 
-    public Optional<Reference<TaxCategory>> getTaxCategory() {
+    @Nullable
+    public Reference<TaxCategory> getTaxCategory() {
         return taxCategory;
     }
 

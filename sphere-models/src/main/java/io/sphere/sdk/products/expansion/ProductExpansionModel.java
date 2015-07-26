@@ -1,10 +1,8 @@
 package io.sphere.sdk.products.expansion;
 
-import io.sphere.sdk.products.Product;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
-
-import java.util.Optional;
+import io.sphere.sdk.products.Product;
 
 public class ProductExpansionModel<T> extends ExpansionModel<T> {
     ProductExpansionModel() {
@@ -19,7 +17,7 @@ public class ProductExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public ProductCatalogExpansionModel<T> masterData() {
-        return new ProductCatalogExpansionModel<>(Optional.empty(), Optional.of("masterData"));
+        return new ProductCatalogExpansionModel<>(null, "masterData");
     }
 
     public static ProductExpansionModel<Product> of() {

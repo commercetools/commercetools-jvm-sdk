@@ -4,15 +4,13 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.inventories.InventoryEntry;
 import io.sphere.sdk.queries.*;
 
-import java.util.Optional;
-
 public class InventoryEntryQueryModel extends DefaultModelQueryModelImpl<InventoryEntry> {
-    public InventoryEntryQueryModel(final Optional<? extends QueryModel<InventoryEntry>> parent, final Optional<String> pathSegment) {
+    public InventoryEntryQueryModel(final QueryModel<InventoryEntry> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public static InventoryEntryQueryModel of() {
-        return new InventoryEntryQueryModel(Optional.empty(), Optional.empty());
+        return new InventoryEntryQueryModel(null, null);
     }
 
     public StringQuerySortingModel<InventoryEntry> sku() {

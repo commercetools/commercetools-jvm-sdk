@@ -1,11 +1,11 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.meta.BuildInfo;
 
+import javax.annotation.Nullable;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,12 +18,15 @@ import java.util.regex.Pattern;
  */
 public class SphereException extends RuntimeException {
     static final long serialVersionUID = 0L;
-
-    private Optional<SphereRequest<?>> sphereRequest = Optional.empty();
+    @Nullable
+    private SphereRequest<?> sphereRequest;
     @JsonIgnore
-    protected Optional<HttpResponse> httpResponse = Optional.empty();
-    private Optional<String> projectKey = Optional.empty();
-    private Optional<String> httpRequest = Optional.empty();
+    @Nullable
+    protected HttpResponse httpResponse;
+    @Nullable
+    private String projectKey;
+    @Nullable
+    private String httpRequest;
     private List<String> additionalNotes = new LinkedList<>();
 
     public SphereException(final String message, final Throwable cause) {
@@ -41,33 +44,32 @@ public class SphereException extends RuntimeException {
         super(cause);
     }
 
-    public final Optional<String> getProjectKey() {
+    @Nullable
+    public final String getProjectKey() {
         return projectKey;
     }
 
-    public final Optional<SphereRequest<?>> getSphereRequest() {
+    @Nullable
+    public final SphereRequest<?> getSphereRequest() {
         return sphereRequest;
     }
 
-    public final Optional<HttpResponse> getHttpResponse() {
+    @Nullable
+    public final HttpResponse getHttpResponse() {
         return httpResponse;
     }
 
-    public void setProjectKey(final Optional<String> projectKey) {
+    public void setProjectKey(final String projectKey) {
         this.projectKey = projectKey;
     }
 
-    public void setProjectKey(final String projectKey) {
-        this.projectKey = Optional.of(projectKey);
-    }
-
     public void setSphereRequest(final SphereRequest<?> sphereRequest) {
-        this.sphereRequest = Optional.of(sphereRequest);
+        this.sphereRequest = sphereRequest;
         setHttpRequest(sphereRequest.httpRequestIntent().toString());
     }
 
     public void setHttpRequest(final String httpRequest) {
-        this.httpRequest = Optional.of(httpRequest);
+        this.httpRequest = httpRequest;
     }
 
     public void addNote(final String note) {
@@ -79,18 +81,18 @@ public class SphereException extends RuntimeException {
         StringBuilder builder = new StringBuilder();
         return builder
                 .append("SDK: ").append(BuildInfo.version()).append("\n")
-                .append("project: ").append(getProjectKey().orElse("<unknown>")).append("\n")
-                .append(getSphereRequest().map(x -> x.httpRequestIntent()).map(x -> "" + x.getHttpMethod() + " " + x.getPath()).map(x -> "endpoint: " + x + "\n").orElse(""))
-                .append("Java: ").append(System.getProperty("java.version")).append("\n")
-                .append("cwd: ").append(System.getProperty("user.dir")).append("\n")
-                .append("date: ").append(new Date()).append("\n")
-                .append("sphere request: ").append(getSphereRequest().map(Object::toString).orElse("<unknown>")).append("\n")
-                //duplicated in case SphereRequest does not implement a proper to String
-                .append("http request: ").append(httpRequest.orElse("<unknown>")).append("\n")
-                .append("http response: ").append(getHttpResponse().map(Object::toString).orElse("<unknown>")).append("\n")
-                .append(Optional.ofNullable(super.getMessage()).map(s -> "detailMessage: " + s + "\n").orElse(""))
-                .append("additional notes: ").append(additionalNotes).append("\n")
-                .append("Javadoc: ").append("http://sphereio.github.io/sphere-jvm-sdk/javadoc/").append(getVersionForJavadoc()).append("/").append(this.getClass().getCanonicalName().replace('.', '/')).append(".html").append("\n")
+                .append("project: ").append(Optional.ofNullable(getProjectKey()).orElse("<unknown>")).append("\n")
+                        .append(Optional.ofNullable(getSphereRequest()).map(x -> x.httpRequestIntent()).map(x -> "" + x.getHttpMethod() + " " + x.getPath()).map(x -> "endpoint: " + x + "\n").orElse(""))
+                        .append("Java: ").append(System.getProperty("java.version")).append("\n")
+                        .append("cwd: ").append(System.getProperty("user.dir")).append("\n")
+                        .append("date: ").append(new Date()).append("\n")
+                        .append("sphere request: ").append(Optional.ofNullable(getSphereRequest()).map(Object::toString).orElse("<unknown>")).append("\n")
+                                //duplicated in case SphereRequest does not implement a proper to String
+                        .append("http request: ").append(Optional.ofNullable(httpRequest).orElse("<unknown>")).append("\n")
+                        .append("http response: ").append(Optional.ofNullable(getHttpResponse()).map(Object::toString).orElse("<unknown>")).append("\n")
+                        .append(Optional.ofNullable(super.getMessage()).map(s -> "detailMessage: " + s + "\n").orElse(""))
+                        .append("additional notes: ").append(additionalNotes).append("\n")
+                        .append("Javadoc: ").append("http://sphereio.github.io/sphere-jvm-sdk/javadoc/").append(getVersionForJavadoc()).append("/").append(this.getClass().getCanonicalName().replace('.', '/')).append(".html").append("\n")
                 .toString();
     }
 
@@ -106,7 +108,7 @@ public class SphereException extends RuntimeException {
     }
 
     public void setUnderlyingHttpResponse(final HttpResponse httpResponse) {
-        this.httpResponse = Optional.of(httpResponse.withoutRequest());
+        this.httpResponse = httpResponse.withoutRequest();
     }
 
     public List<String> getAdditionalNotes() {

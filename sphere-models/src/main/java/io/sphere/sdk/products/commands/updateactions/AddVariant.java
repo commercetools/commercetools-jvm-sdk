@@ -4,8 +4,8 @@ import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductUpdateScope;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Adds a variant to a product.
@@ -15,11 +15,12 @@ import java.util.Optional;
  * @see io.sphere.sdk.products.commands.updateactions.RemoveVariant
  */
 public class AddVariant extends StageableProductUpdateAction {
-    private final Optional<String> sku;
+    @Nullable
+    private final String sku;
     private final List<Price> prices;
     private final List<AttributeDraft> attributes;
 
-    private AddVariant(final List<AttributeDraft> attributes, final List<Price> prices, final Optional<String> sku, final ProductUpdateScope productUpdateScope) {
+    private AddVariant(final List<AttributeDraft> attributes, final List<Price> prices, @Nullable final String sku, final ProductUpdateScope productUpdateScope) {
         super("addVariant", productUpdateScope);
         this.attributes = attributes;
         this.prices = prices;
@@ -34,11 +35,16 @@ public class AddVariant extends StageableProductUpdateAction {
         return prices;
     }
 
-    public Optional<String> getSku() {
+    @Nullable
+    public String getSku() {
         return sku;
     }
 
-    public static AddVariant of(final List<AttributeDraft> attributes, final List<Price> prices, final Optional<String> sku, final ProductUpdateScope productUpdateScope) {
+    public static AddVariant of(final List<AttributeDraft> attributes, final List<Price> prices, @Nullable final String sku, final ProductUpdateScope productUpdateScope) {
         return new AddVariant(attributes, prices, sku, productUpdateScope);
+    }
+
+    public static AddVariant of(final List<AttributeDraft> attributes, final List<Price> prices, final ProductUpdateScope productUpdateScope) {
+        return new AddVariant(attributes, prices, null, productUpdateScope);
     }
 }

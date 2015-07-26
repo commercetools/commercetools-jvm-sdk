@@ -6,8 +6,6 @@ import io.sphere.sdk.models.DefaultModelView;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
-import java.util.Optional;
-
 /**
  * Custom objects are a way to store arbitrary JSON-formatted data on the SPHERE.IO platform. It allows you to persist data that does not fit our standard data model.
  *

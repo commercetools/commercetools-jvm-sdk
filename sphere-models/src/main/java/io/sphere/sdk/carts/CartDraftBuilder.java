@@ -4,16 +4,19 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
+import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
-import java.util.Optional;
 
 public class CartDraftBuilder extends Base implements Builder<CartDraft> {
     private final CurrencyUnit currency;
-    private Optional<String> customerId;
-    private Optional<CountryCode> country;
-    private Optional<InventoryMode> inventoryMode;
+    @Nullable
+    private String customerId;
+    @Nullable
+    private CountryCode country;
+    @Nullable
+    private InventoryMode inventoryMode;
 
-    CartDraftBuilder(final CurrencyUnit currency, final Optional<String> customerId, final Optional<CountryCode> country, final Optional<InventoryMode> inventoryMode) {
+    CartDraftBuilder(final CurrencyUnit currency, @Nullable final String customerId, @Nullable final CountryCode country, @Nullable final InventoryMode inventoryMode) {
         this.currency = currency;
         this.customerId = customerId;
         this.country = country;
@@ -28,31 +31,19 @@ public class CartDraftBuilder extends Base implements Builder<CartDraft> {
         return new CartDraftBuilder(CartDraft.of(currency));
     }
 
-    public CartDraftBuilder customerId(final Optional<String> customerId) {
+    public CartDraftBuilder customerId(@Nullable final String customerId) {
         this.customerId = customerId;
         return this;
     }
 
-    public CartDraftBuilder customerId(final String customerId) {
-        return customerId(Optional.of(customerId));
-    }
-
-    public CartDraftBuilder country(final Optional<CountryCode> country) {
+    public CartDraftBuilder country(@Nullable final CountryCode country) {
         this.country = country;
         return this;
     }
 
-    public CartDraftBuilder country(final CountryCode country) {
-        return country(Optional.of(country));
-    }
-
-    public CartDraftBuilder inventoryMode(final Optional<InventoryMode> inventoryMode) {
+    public CartDraftBuilder inventoryMode(@Nullable final InventoryMode inventoryMode) {
         this.inventoryMode = inventoryMode;
         return this;
-    }
-
-    public CartDraftBuilder inventoryMode(final InventoryMode inventoryMode) {
-        return inventoryMode(Optional.of(inventoryMode));
     }
 
     @Override

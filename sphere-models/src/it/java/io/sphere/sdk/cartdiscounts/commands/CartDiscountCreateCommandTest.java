@@ -47,9 +47,9 @@ public class CartDiscountCreateCommandTest extends IntegrationTest {
         assertThat(cartDiscount.getTarget()).isEqualTo(target);
         assertThat(cartDiscount.getSortOrder()).isEqualTo(sortOrder);
         assertThat(cartDiscount.isRequiringDiscountCode()).isEqualTo(requiresDiscountCode);
-        assertThat(cartDiscount.getValidFrom()).contains(validFrom);
-        assertThat(cartDiscount.getValidUntil()).contains(validUntil);
-        assertThat(cartDiscount.getDescription()).contains(description);
+        assertThat(cartDiscount.getValidFrom()).isEqualTo(validFrom);
+        assertThat(cartDiscount.getValidUntil()).isEqualTo(validUntil);
+        assertThat(cartDiscount.getDescription()).isEqualTo(description);
         assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
     }
 

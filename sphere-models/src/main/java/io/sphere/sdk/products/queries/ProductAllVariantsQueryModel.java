@@ -1,18 +1,21 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.QueryModelImpl;
+import io.sphere.sdk.queries.QueryPredicate;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.Function;
 
 public final class ProductAllVariantsQueryModel<T> extends QueryModelImpl<T> {
 
-    ProductAllVariantsQueryModel(final Optional<? extends QueryModel<T>> parent) {
-        super(parent, Optional.<String>empty());
+    ProductAllVariantsQueryModel(@Nullable final QueryModel<T> parent) {
+        super(parent, null);
     }
 
     private QueryPredicate<T> where(final QueryPredicate<PartialProductVariantQueryModel> embeddedPredicate) {
-        final ProductDataQueryModelBase<T> parent = (ProductDataQueryModelBase<T>) getParent()
+        final ProductDataQueryModelBase<T> parent = Optional.ofNullable((ProductDataQueryModelBase<T>) getParent())
                 .orElseThrow(() -> new UnsupportedOperationException("A proper parent model is required."));
         return parent.where(m -> m.masterVariant().where(embeddedPredicate).or(m.variants().where(embeddedPredicate)));
     }

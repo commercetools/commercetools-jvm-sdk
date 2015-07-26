@@ -5,13 +5,13 @@ import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 
 class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements ProductDiscount {
     private final LocalizedStrings name;
-    private final Optional<LocalizedStrings> description;
+    private final LocalizedStrings description;
     private final ProductDiscountValue value;
     private final String predicate;
     private final String sortOrder;
@@ -20,7 +20,7 @@ class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements P
 
     @JsonCreator
     ProductDiscountImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                        final LocalizedStrings name, final Optional<LocalizedStrings> description,
+                        final LocalizedStrings name, final LocalizedStrings description,
                         final ProductDiscountValue value, final String predicate, final String sortOrder,
                         final boolean isActive, final List<Reference<Object>> references) {
         super(id, version, createdAt, lastModifiedAt);
@@ -37,7 +37,8 @@ class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements P
         return name;
     }
 
-    public Optional<LocalizedStrings> getDescription() {
+    @Nullable
+    public LocalizedStrings getDescription() {
         return description;
     }
 

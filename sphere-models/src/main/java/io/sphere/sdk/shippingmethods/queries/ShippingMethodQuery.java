@@ -23,14 +23,14 @@ public interface ShippingMethodQuery extends MetaModelQueryDsl<ShippingMethod, S
     }
 
     default ShippingMethodQuery byName(final String name) {
-        return withPredicate(ShippingMethodQueryModel.of().name().is(name));
+        return withPredicates(ShippingMethodQueryModel.of().name().is(name));
     }
 
     default ShippingMethodQuery byTaxCategory(final Referenceable<TaxCategory> taxCategory) {
-        return withPredicate(m -> m.taxCategory().is(taxCategory));
+        return withPredicates(m -> m.taxCategory().is(taxCategory));
     }
 
     default ShippingMethodQuery byIsDefault() {
-        return withPredicate(m -> m.isDefault().is(true));
+        return withPredicates(m -> m.isDefault().is(true));
     }
 }

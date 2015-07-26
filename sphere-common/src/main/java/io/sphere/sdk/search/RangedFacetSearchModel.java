@@ -1,27 +1,22 @@
 package io.sphere.sdk.search;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 import static java.util.Arrays.asList;
 
 public class RangedFacetSearchModel<T, V extends Comparable<? super V>> extends FacetSearchModel<T, V> {
 
-    RangedFacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer, final Optional<String> alias) {
+    RangedFacetSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment, final TypeSerializer<V> typeSerializer, final String alias) {
         super(parent, pathSegment, typeSerializer, alias);
     }
 
-    RangedFacetSearchModel(final Optional<? extends SearchModel<T>> parent, final Optional<String> pathSegment, final TypeSerializer<V> typeSerializer) {
-        super(parent, pathSegment, typeSerializer, Optional.empty());
-    }
-
-    @Override
-    public RangedFacetSearchModel<T, V> withAlias(final Optional<String> alias) {
-        return new RangedFacetSearchModel<>(Optional.of(this), Optional.empty(), typeSerializer, alias);
+    RangedFacetSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment, final TypeSerializer<V> typeSerializer) {
+        super(parent, pathSegment, typeSerializer, null);
     }
 
     @Override
     public RangedFacetSearchModel<T, V> withAlias(final String alias) {
-        return withAlias(Optional.of(alias));
+        return new RangedFacetSearchModel<>(this, null, typeSerializer, alias);
     }
 
     @Override

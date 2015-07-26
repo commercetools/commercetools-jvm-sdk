@@ -9,6 +9,7 @@ import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.search.SearchKeywords;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -37,9 +38,9 @@ import java.util.Set;
 @JsonDeserialize(as=ProductProjectionImpl.class)
 public interface ProductProjection extends ProductLike<ProductProjection>, ProductDataLike, Referenceable<Product> {
 
-    public boolean hasStagedChanges();
+    boolean hasStagedChanges();
 
-    public boolean isPublished();
+    boolean isPublished();
 
     @Override
     default Reference<Product> toReference() {
@@ -63,19 +64,23 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
     Set<Reference<Category>> getCategories();
 
     @Override
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     @Override
     ProductVariant getMasterVariant();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaDescription();
+    LocalizedStrings getMetaDescription();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaKeywords();
+    LocalizedStrings getMetaKeywords();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaTitle();
+    LocalizedStrings getMetaTitle();
 
     @Override
     LocalizedStrings getName();
@@ -91,13 +96,14 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
         return ProductsPackage.getAllVariants(this);
     }
 
-    default Optional<ProductVariant> getVariant(final VariantIdentifier identifier){
-        return getId().equals(identifier.getProductId()) ? getVariant(identifier.getVariantId()) : Optional.empty();
+    default Optional<ProductVariant> findVariant(final VariantIdentifier identifier){
+        return getId().equals(identifier.getProductId()) ? Optional.ofNullable(getVariant(identifier.getVariantId())) : Optional.empty();
     }
 
     @Override
-    default Optional<ProductVariant> getVariant(final int variantId){
-        return ProductsPackage.getVariant(variantId, this);
+    @Nullable
+    default ProductVariant getVariant(final int variantId){
+        return ProductsPackage.getVariant(variantId, this).orElse(null);
     }
 
     @Override

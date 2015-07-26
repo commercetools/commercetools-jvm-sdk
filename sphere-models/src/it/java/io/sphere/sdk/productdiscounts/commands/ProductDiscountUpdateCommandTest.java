@@ -70,7 +70,7 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
 
             final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, SetDescription.of(newDescription)));
 
-            assertThat(updatedDiscount.getDescription()).contains(newDescription);
+            assertThat(updatedDiscount.getDescription()).isEqualTo(newDescription);
             return updatedDiscount;
         });
     }

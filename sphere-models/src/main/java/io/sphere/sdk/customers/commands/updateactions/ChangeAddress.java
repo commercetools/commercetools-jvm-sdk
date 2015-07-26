@@ -26,10 +26,10 @@ public class ChangeAddress extends UpdateAction<Customer> {
     }
 
     public static ChangeAddress ofOldAddressToNewAddress(final Address oldAddress, final Address newAddress) {
-        if (!oldAddress.getId().isPresent()) {
+        if (oldAddress.getId() == null) {
             throw new IllegalArgumentException(format("The address %s should have an id.", oldAddress));
         }
-        return of(oldAddress.getId().get(), newAddress);
+        return of(oldAddress.getId(), newAddress);
     }
 
     public Address getAddress() {

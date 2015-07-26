@@ -1,6 +1,6 @@
 package io.sphere.sdk.search;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.stream.Collectors.joining;
@@ -8,7 +8,7 @@ import static java.util.stream.Collectors.joining;
 abstract class RangeExpression<T, V extends Comparable<? super V>> extends SearchModelExpression<T, V> {
     private final Iterable<? extends Range<V>> ranges;
 
-    RangeExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, final Iterable<? extends Range<V>> ranges, final Optional<String> alias) {
+    RangeExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, final Iterable<? extends Range<V>> ranges, @Nullable final String alias) {
         super(searchModel, typeSerializer, alias);
         this.ranges = ranges;
     }

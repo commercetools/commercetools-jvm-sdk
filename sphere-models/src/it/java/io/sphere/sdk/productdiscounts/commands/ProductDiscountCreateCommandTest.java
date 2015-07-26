@@ -1,7 +1,5 @@
 package io.sphere.sdk.productdiscounts.commands;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.client.JsonNodeSphereRequest;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.productdiscounts.AbsoluteProductDiscountValue;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
@@ -14,7 +12,6 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 import static io.sphere.sdk.products.ProductFixtures.referenceableProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -28,7 +25,7 @@ public class ProductDiscountCreateCommandTest extends IntegrationTest {
                 ProductDiscountPredicate.of("product.id = \"" + product.getId() + "\"");
         final AbsoluteProductDiscountValue discountValue = AbsoluteProductDiscountValue.of(EURO_1);
         final LocalizedStrings name = en("demo product discount");
-        final Optional<LocalizedStrings> description = Optional.of(en("description"));
+        final LocalizedStrings description = en("description");
         final boolean active = true;
         final String sortOrder = randomSortOrder();
         final ProductDiscountDraft discountDraft =
@@ -52,7 +49,7 @@ public class ProductDiscountCreateCommandTest extends IntegrationTest {
 
         assertThat(productPrices)
                 .overridingErrorMessage("discount object in price is expanded")
-                .matches(prices -> prices.stream().anyMatch(price -> price.getDiscounted().get().getDiscount().getObj().isPresent()));
+                .matches(prices -> prices.stream().anyMatch(price -> price.getDiscounted().getDiscount().getObj() != null));
 //        clean up test
         execute(ProductDiscountDeleteCommand.of(productDiscount));
     }

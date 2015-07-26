@@ -28,7 +28,7 @@ public class TaxCategoryIntegrationTest extends IntegrationTest {
 
     private TaxCategory createTaxCategory() {
         final TaxRate taxRate = TaxRate.of("GERMAN default tax", 0.19, false, DE);
-        final TaxCategoryDraft taxCategoryDraft = TaxCategoryDraft.of("German tax", "Normal-Steuersatz", asList(taxRate));
+        final TaxCategoryDraft taxCategoryDraft = TaxCategoryDraft.of("German tax", asList(taxRate), "Normal-Steuersatz");
         final TaxCategory taxCategory = execute(TaxCategoryCreateCommand.of(taxCategoryDraft));
         return taxCategory;
     }

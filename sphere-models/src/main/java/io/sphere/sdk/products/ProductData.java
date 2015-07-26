@@ -6,8 +6,8 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.search.SearchKeywords;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -22,19 +22,23 @@ public interface ProductData extends ProductDataLike {
     Set<Reference<Category>> getCategories();
 
     @Override
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     @Override
     LocalizedStrings getSlug();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaTitle();
+    LocalizedStrings getMetaTitle();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaDescription();
+    LocalizedStrings getMetaDescription();
 
+    @Nullable
     @Override
-    Optional<LocalizedStrings> getMetaKeywords();
+    LocalizedStrings getMetaKeywords();
 
     @Override
     ProductVariant getMasterVariant();
@@ -48,8 +52,9 @@ public interface ProductData extends ProductDataLike {
     }
 
     @Override
-    default Optional<ProductVariant> getVariant(final int variantId){
-        return ProductsPackage.getVariant(variantId, this);
+    @Nullable
+    default ProductVariant getVariant(final int variantId){
+        return ProductsPackage.getVariant(variantId, this).orElse(null);
     }
 
     @Override

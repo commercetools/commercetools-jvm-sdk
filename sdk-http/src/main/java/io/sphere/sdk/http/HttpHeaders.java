@@ -47,7 +47,7 @@ public class HttpHeaders extends Base {
      * @param key the key of the header to find
      * @return the header value as optional
      */
-    public Optional<String> getFlatHeader(final String key) {
+    public Optional<String> findFlatHeader(final String key) {
         return getHeader(key).stream().findFirst();
     }
 

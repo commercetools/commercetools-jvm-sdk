@@ -21,43 +21,39 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         return facets;
     }
 
-    public Optional<FacetResult> getFacetResult(final String spherePath) {
-        if (facets.containsKey(spherePath)) {
-            return Optional.of(facets.get(spherePath));
-        } else {
-            return Optional.empty();
-        }
+    public FacetResult getFacetResult(final String spherePath) {
+        return facets.get(spherePath);
     }
 
     @SuppressWarnings("unchecked")
-    public <V> Optional<TermFacetResult<V>> getTermFacetResult(final TermFacetExpression<T, V> facetExpression) {
-        return getFacetResult(facetExpression.resultPath()).map(facetResult -> {
+    public <V> TermFacetResult<V> getTermFacetResult(final TermFacetExpression<T, V> facetExpression) {
+        return Optional.ofNullable(getFacetResult(facetExpression.resultPath())).map(facetResult -> {
             if (facetResult instanceof TermFacetResult) {
                 return (TermFacetResult) facetResult;
             } else {
                 throw new ClassCastException("Facet result is not of type TermFacetResult: " + facetResult);
             }
-        });
+        }).orElse(null);
     }
 
     @SuppressWarnings("unchecked")
-    public <V extends Comparable<? super V>> Optional<RangeFacetResult<V>> getRangeFacetResult(final RangeFacetExpression<T, V> facetExpression) {
-        return getFacetResult(facetExpression.buildResultPath()).map(facetResult -> {
+    public <V extends Comparable<? super V>> RangeFacetResult<V> getRangeFacetResult(final RangeFacetExpression<T, V> facetExpression) {
+        return Optional.ofNullable(getFacetResult(facetExpression.buildResultPath())).map(facetResult -> {
             if (facetResult instanceof RangeFacetResult) {
                 return (RangeFacetResult) facetResult;
             } else {
                 throw new ClassCastException("Facet result is not of type RangeFacetResult: " + facetResult);
             }
-        });
+        }).orElse(null);
     }
 
-    public Optional<FilteredFacetResult> getFilteredFacetResult(final FilteredFacetExpression<T, ?> facetExpression) {
-        return getFacetResult(facetExpression.resultPath()).map(facetResult -> {
+    public FilteredFacetResult getFilteredFacetResult(final FilteredFacetExpression<T, ?> facetExpression) {
+        return Optional.ofNullable(getFacetResult(facetExpression.resultPath())).map(facetResult -> {
             if (facetResult instanceof FilteredFacetResult) {
                 return (FilteredFacetResult) facetResult;
             } else {
                 throw new ClassCastException("Facet result is not of type FilterFacetResult: " + facetResult);
             }
-        });
+        }).orElse(null);
     }
 }

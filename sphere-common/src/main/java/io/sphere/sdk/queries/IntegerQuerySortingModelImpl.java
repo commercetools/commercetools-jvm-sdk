@@ -1,9 +1,9 @@
 package io.sphere.sdk.queries;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class IntegerQuerySortingModelImpl<T> extends IntegerLikeQuerySortingModel<T, Integer> implements IntegerQuerySortingModel<T> {
-    public IntegerQuerySortingModelImpl(final Optional<? extends QueryModel<T>> parent, final String pathSegment) {
+    public IntegerQuerySortingModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 }

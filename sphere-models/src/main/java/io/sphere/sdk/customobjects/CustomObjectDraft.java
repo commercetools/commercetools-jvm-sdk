@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.models.Base;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  * A draft for creating or updating custom objects.
@@ -20,13 +20,13 @@ public class CustomObjectDraft<T> extends Base {
     };
 
     private final T value;
-    @JsonInclude(value = JsonInclude.Include.NON_EMPTY)
-    private final Optional<Long> version;
+    @Nullable
+    private final Long version;
     private final TypeReference<CustomObject<T>> typeReference;
     private final String container;
     private final String key;
 
-    private CustomObjectDraft(final String container, final String key, final T value, final Optional<Long> version, final TypeReference<CustomObject<T>> typeReference) {
+    private CustomObjectDraft(final String container, final String key, final T value, @Nullable final Long version, final TypeReference<CustomObject<T>> typeReference) {
         this.container = CustomObject.validatedContainer(container);
         this.key = CustomObject.validatedKey(key);
         this.value = value;
@@ -51,7 +51,7 @@ public class CustomObjectDraft<T> extends Base {
      * @return the draft
      */
     public static <T> CustomObjectDraft<T> ofVersionedUpdate(final CustomObject<T> customObject, final T newValue, final TypeReference<CustomObject<T>> typeReference) {
-        return new CustomObjectDraft<>(customObject.getContainer(), customObject.getKey(), newValue, Optional.of(customObject.getVersion()), typeReference);
+        return new CustomObjectDraft<>(customObject.getContainer(), customObject.getKey(), newValue, customObject.getVersion(), typeReference);
     }
 
     /**
@@ -63,7 +63,7 @@ public class CustomObjectDraft<T> extends Base {
      * @return the draft
      */
     public static <T> CustomObjectDraft<T> ofUnversionedUpdate(final CustomObject<T> customObject, final T newValue, final TypeReference<CustomObject<T>> typeReference) {
-        return new CustomObjectDraft<>(customObject.getContainer(), customObject.getKey(), newValue, Optional.empty(), typeReference);
+        return new CustomObjectDraft<>(customObject.getContainer(), customObject.getKey(), newValue, null, typeReference);
     }
 
 
@@ -77,7 +77,7 @@ public class CustomObjectDraft<T> extends Base {
      * @return the draft
      */
     public static <T> CustomObjectDraft<T> ofUnversionedUpsert(final String container, final String key, final T value, final TypeReference<CustomObject<T>> typeReference) {
-        return new CustomObjectDraft<>(container, key, value, Optional.empty(), typeReference);
+        return new CustomObjectDraft<>(container, key, value, null, typeReference);
     }
 
     /**
@@ -91,14 +91,14 @@ public class CustomObjectDraft<T> extends Base {
      * @return the draft
      */
     public static <T> CustomObjectDraft<T> ofVersionedUpsert(final String container, final String key, final T value, final long version, final TypeReference<CustomObject<T>> typeReference) {
-        return new CustomObjectDraft<>(container, key, value, Optional.of(version), typeReference);
+        return new CustomObjectDraft<>(container, key, value, version, typeReference);
     }
 
     /**
      * Creates a draft for creating or updating a custom object. Does not use optimistic concurrency control so the last update wins.
      *
      * It is an alias of
-     * {@link CustomObjectDraft#CustomObjectDraft(String, String, Object, java.util.Optional, com.fasterxml.jackson.core.type.TypeReference)}
+     * {@link CustomObjectDraft#CustomObjectDraft(String, String, Object, Long, com.fasterxml.jackson.core.type.TypeReference)}
      * with pure JSON as value for the custom object.
      *
      * @param container the container
@@ -110,7 +110,8 @@ public class CustomObjectDraft<T> extends Base {
         return ofUnversionedUpsert(container, key, value, JSON_NODE_TYPE_REFERENCE);
     }
 
-    public Optional<Long> getVersion() {
+    @Nullable
+    public Long getVersion() {
         return version;
     }
 
@@ -121,7 +122,7 @@ public class CustomObjectDraft<T> extends Base {
      * @return a draft which provides optimistic locking
      */
     public CustomObjectDraft<T> withVersion(final long version) {
-        return new CustomObjectDraft<>(getContainer(), getKey(), getValue(), Optional.of(version), typeReference());
+        return new CustomObjectDraft<>(getContainer(), getKey(), getValue(), version, typeReference());
     }
 
     public String getContainer() {

@@ -12,8 +12,6 @@ import io.sphere.sdk.zones.commands.updateactions.SetDescription;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -38,7 +36,7 @@ public class ZoneUpdateCommandTest extends IntegrationTest {
     @Test
     public void setDescription() throws Exception {
         ZoneFixtures.withUpdateableZone(client(), zone -> {
-            final Optional<String> newDescription = Optional.of(randomString());
+            final String newDescription = randomString();
             assertThat(zone.getDescription()).isNotEqualTo(newDescription);
             final ZoneUpdateCommand command = ZoneUpdateCommand.of(zone, SetDescription.of(newDescription));
             final Zone updatedZone = execute(command);

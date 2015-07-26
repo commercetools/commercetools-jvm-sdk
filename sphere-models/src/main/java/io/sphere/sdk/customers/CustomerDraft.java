@@ -6,8 +6,10 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+import javax.annotation.Nullable;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -17,32 +19,42 @@ import java.util.Optional;
  * @see io.sphere.sdk.customers.commands.CustomerCreateCommand
  */
 public class CustomerDraft extends Base {
-    private final Optional<String> customerNumber;
+    @Nullable
+    private final String customerNumber;
     private final String email;
     private final String firstName;
     private final String lastName;
-    private final Optional<String> middleName;
+    private final String middleName;
     private final String password;
-    private final Optional<String> title;
-    private final Optional<String> externalId;
-    private final Optional<String> anonymousCartId;
-    private final Optional<LocalDate> dateOfBirth;
-    private final Optional<String> companyName;
-    private final Optional<String> vatId;
-    private final Optional<Boolean> emailVerified;
-    private final Optional<Reference<CustomerGroup>> customerGroup;
-    private final Optional<Integer> defaultBillingAddress;
-    private final Optional<Integer> defaultShippingAddress;
+    private final String title;
+    @Nullable
+    private final String externalId;
+    @Nullable
+    private final String anonymousCartId;
+    @Nullable
+    private final LocalDate dateOfBirth;
+    @Nullable
+    private final String companyName;
+    @Nullable
+    private final String vatId;
+    @Nullable
+    private final Boolean emailVerified;
+    @Nullable
+    private final Reference<CustomerGroup> customerGroup;
+    @Nullable
+    private final Integer defaultBillingAddress;
+    @Nullable
+    private final Integer defaultShippingAddress;
     private final List<Address> addresses;
 
-    CustomerDraft(final Optional<String> customerNumber, final String email,
-                  final String firstName, final String lastName, final Optional<String> middleName,
-                  final String password, final Optional<String> title,
-                  final Optional<String> externalId,
-                  final Optional<String> anonymousCartId, final Optional<LocalDate> dateOfBirth,
-                  final Optional<String> companyName, final Optional<String> vatId,
-                  final Optional<Boolean> emailVerified, final Optional<Reference<CustomerGroup>> customerGroup,
-                  final Optional<Integer> defaultBillingAddress, final Optional<Integer> defaultShippingAddress, final List<Address> addresses) {
+    CustomerDraft(final String customerNumber, final String email,
+                  final String firstName, final String lastName, final String middleName,
+                  final String password, final String title,
+                  final String externalId,
+                  final String anonymousCartId, final LocalDate dateOfBirth,
+                  final String companyName, final String vatId,
+                  final Boolean emailVerified, final Reference<CustomerGroup> customerGroup,
+                  final Integer defaultBillingAddress, final Integer defaultShippingAddress, final List<Address> addresses) {
         this.customerNumber = customerNumber;
         this.email = email;
         this.firstName = firstName;
@@ -66,15 +78,16 @@ public class CustomerDraft extends Base {
         this.defaultShippingAddress = defaultShippingAddress;
     }
 
-    private static boolean isValidAddressIndex(final List<Address> addresses, final Optional<Integer> addressIndex) {
-        return addressIndex.map(i -> i < addresses.size() && i >= 0).orElse(true);
+    private static boolean isValidAddressIndex(final List<Address> addresses, final Integer addressIndex) {
+        return Optional.ofNullable(addressIndex).map(i -> i < addresses.size() && i >= 0).orElse(true);
     }
 
     public static CustomerDraft of(final CustomerName customerName, final String email, final String password) {
         return CustomerDraftBuilder.of(customerName, email, password).build();
     }
 
-    public Optional<String> getCustomerNumber() {
+    @Nullable
+    public String getCustomerNumber() {
         return customerNumber;
     }
 
@@ -90,7 +103,7 @@ public class CustomerDraft extends Base {
         return lastName;
     }
 
-    public Optional<String> getMiddleName() {
+    public String getMiddleName() {
         return middleName;
     }
 
@@ -98,15 +111,17 @@ public class CustomerDraft extends Base {
         return password;
     }
 
-    public Optional<String> getTitle() {
+    public String getTitle() {
         return title;
     }
 
-    public Optional<String> getExternalId() {
+    @Nullable
+    public String getExternalId() {
         return externalId;
     }
 
-    public Optional<String> getAnonymousCartId() {
+    @Nullable
+    public String getAnonymousCartId() {
         return anonymousCartId;
     }
 
@@ -114,32 +129,38 @@ public class CustomerDraft extends Base {
         return CustomerName.of(getTitle(), getFirstName(), getMiddleName(), getLastName());
     }
 
-    public Optional<String> getCompanyName() {
+    @Nullable
+    public String getCompanyName() {
         return companyName;
     }
 
-    public Optional<Reference<CustomerGroup>> getCustomerGroup() {
+    @Nullable
+    public Reference<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 
-    public Optional<LocalDate> getDateOfBirth() {
+    @Nullable
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public Optional<Integer> getDefaultBillingAddress() {
+    @Nullable
+    public Integer getDefaultBillingAddress() {
         return defaultBillingAddress;
     }
 
-    public Optional<Integer> getDefaultShippingAddress() {
+    @Nullable
+    public Integer getDefaultShippingAddress() {
         return defaultShippingAddress;
     }
 
     @JsonProperty("isEmailVerified")
-    public Optional<Boolean> IsEmailVerified() {
+    public Boolean IsEmailVerified() {
         return emailVerified;
     }
 
-    public Optional<String> getVatId() {
+    @Nullable
+    public String getVatId() {
         return vatId;
     }
 
@@ -147,23 +168,15 @@ public class CustomerDraft extends Base {
         return addresses;
     }
 
-    public CustomerDraft withCustomerNumber(final Optional<String> customerNumber) {
+    public CustomerDraft withCustomerNumber(@Nullable final String customerNumber) {
         return newBuilder().customerNumber(customerNumber).build();
     }
 
-    public CustomerDraft withCustomerNumber(final String customerNumber) {
-        return withCustomerNumber(Optional.of(customerNumber));
-    }
-    
-    public CustomerDraft withExternalId(final Optional<String> externalId) {
+    public CustomerDraft withExternalId(@Nullable final String externalId) {
         return newBuilder().externalId(externalId).build();
     }
-
-    public CustomerDraft withExternalId(final String externalId) {
-        return withExternalId(Optional.of(externalId));
-    }    
     
-    public CustomerDraft withAnonymousCartId(final Optional<String> anonymousCartId) {
+    public CustomerDraft withAnonymousCartId(@Nullable final String anonymousCartId) {
         return newBuilder().anonymousCartId(anonymousCartId).build();
     }
 
@@ -172,47 +185,28 @@ public class CustomerDraft extends Base {
     }
 
     public CustomerDraft withCart(final Cart cart) {
-        return withAnonymousCartId(Optional.of(cart.getId()));
+        Objects.requireNonNull(cart);
+        return withAnonymousCartId(cart.getId());
     }
     
-    public CustomerDraft withDateOfBirth(final LocalDate dateOfBirth) {
+    public CustomerDraft withDateOfBirth(@Nullable final LocalDate dateOfBirth) {
         return newBuilder().dateOfBirth(dateOfBirth).build();
-    }   
+    }
     
-    public CustomerDraft withDateOfBirth(final Optional<LocalDate> dateOfBirth) {
-        return newBuilder().dateOfBirth(dateOfBirth).build();
-    }    
-    
-    public CustomerDraft withCompanyName(final String companyName) {
-        return newBuilder().companyName(companyName).build();
-    }   
-    
-    public CustomerDraft withCompanyName(final Optional<String> companyName) {
+    public CustomerDraft withCompanyName(@Nullable final String companyName) {
         return newBuilder().companyName(companyName).build();
     }
 
-    public CustomerDraft withVatId(final String vatId) {
+    public CustomerDraft withVatId(@Nullable final String vatId) {
         return newBuilder().vatId(vatId).build();
     }
 
-    public CustomerDraft withVatId(final Optional<String> vatId) {
-        return newBuilder().vatId(vatId).build();
-    }
-
-    public CustomerDraft withEmailVerified(final boolean emailVerified) {
+    public CustomerDraft withEmailVerified(@Nullable final Boolean emailVerified) {
         return newBuilder().emailVerified(emailVerified).build();
     }
 
-    public CustomerDraft withEmailVerified(final Optional<Boolean> emailVerified) {
-        return newBuilder().emailVerified(emailVerified).build();
-    }
-
-    public CustomerDraft withCustomerGroup(final Referenceable<CustomerGroup> customerGroup) {
-        return newBuilder().customerGroup(customerGroup).build();
-    }
-
-    public CustomerDraft withCustomerGroup(final Optional<Reference<CustomerGroup>> customerGroup) {
-        return newBuilder().customerGroup(customerGroup).build();
+    public CustomerDraft withCustomerGroup(@Nullable final Referenceable<CustomerGroup> customerGroup) {
+        return newBuilder().customerGroup(Optional.ofNullable(customerGroup).map(Referenceable::toReference).orElse(null)).build();
     }
 
     /**
@@ -220,16 +214,7 @@ public class CustomerDraft extends Base {
      * @param defaultBillingAddress the index of the list
      * @return copy
      */
-    public CustomerDraft withDefaultBillingAddress(final int defaultBillingAddress) {
-        return newBuilder().defaultBillingAddress(defaultBillingAddress).build();
-    }
-
-    /**
-     * Sets the default billing address by using address in {@link CustomerDraft#getAddresses()} which has the index of {@code defaultBillingAddress}.
-     * @param defaultBillingAddress the index of the list
-     * @return copy
-     */
-    public CustomerDraft withDefaultBillingAddress(final Optional<Integer> defaultBillingAddress) {
+    public CustomerDraft withDefaultBillingAddress(@Nullable final Integer defaultBillingAddress) {
         return newBuilder().defaultBillingAddress(defaultBillingAddress).build();
     }
 
@@ -238,16 +223,7 @@ public class CustomerDraft extends Base {
      * @param defaultShippingAddress the index of the list
      * @return copy
      */
-    public CustomerDraft withDefaultShippingAddress(final int defaultShippingAddress) {
-        return newBuilder().defaultShippingAddress(defaultShippingAddress).build();
-    }
-
-    /**
-     * Sets the default shipping address by using address in {@link CustomerDraft#getAddresses()} which has the index of {@code defaultShippingAddress}.
-     * @param defaultShippingAddress the index of the list
-     * @return copy
-     */
-    public CustomerDraft withDefaultShippingAddress(final Optional<Integer> defaultShippingAddress) {
+    public CustomerDraft withDefaultShippingAddress(@Nullable final Integer defaultShippingAddress) {
         return newBuilder().defaultShippingAddress(defaultShippingAddress).build();
     }
 

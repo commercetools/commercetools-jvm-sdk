@@ -1,19 +1,15 @@
 package io.sphere.sdk.expansion;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPath<T> {
 
-    protected ExpandedModel(final Optional<String> parentPath, final Optional<String> path) {
+    protected ExpandedModel(@Nullable final String parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
 
-    protected ExpandedModel(final String parentPath, final String path) {
-        this(Optional.of(parentPath), Optional.of(path));
-    }
-
     public ExpandedModel() {
-        this(Optional.empty(), Optional.empty());
+        this(null, null);
     }
 
     protected static String collection(final String segmentName, final int index) {

@@ -10,6 +10,7 @@ import io.sphere.sdk.states.commands.updateactions.SetTransitions;
 import io.sphere.sdk.states.queries.StateQuery;
 import io.sphere.sdk.utils.SetUtils;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -56,8 +57,9 @@ public class StateFixtures {
         final State stateB = client.execute(StateQuery.of().byKey(keyB)).head().orElseGet(() -> createStateByKey(client, keyB));
         final State stateA = client.execute(StateQuery.of().byKey(keyA)).head()
                 .map(initialState -> {
-                    final Boolean initialCanTransistToStateB = initialState.getTransitions().map(transitions -> transitions.contains(stateB.toReference())).orElse(false);
-                    final Set<Reference<State>> transitions = initialState.getTransitions().map(trans -> SetUtils.setOf(stateB.toReference(), trans)).orElse(asSet(stateB.toReference()));
+                    final Optional<Set<Reference<State>>> transitionOptional = Optional.ofNullable(initialState.getTransitions());
+                    final Boolean initialCanTransistToStateB = transitionOptional.map(transitions -> transitions.contains(stateB.toReference())).orElse(false);
+                    final Set<Reference<State>> transitions = transitionOptional.map(trans -> SetUtils.setOf(stateB.toReference(), trans)).orElse(asSet(stateB.toReference()));
                     final SetTransitions action = SetTransitions.of(transitions);
                     final StateUpdateCommand updateCommand = StateUpdateCommand.of(initialState, action);
                     return initialCanTransistToStateB ? initialState : client.execute(updateCommand);

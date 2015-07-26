@@ -4,19 +4,17 @@ import io.sphere.sdk.queries.*;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
-import java.util.Optional;
-
 public class ShippingMethodQueryModel extends DefaultModelQueryModelImpl<ShippingMethod> {
     public static ShippingMethodQueryModel of() {
-        return new ShippingMethodQueryModel(Optional.<QueryModel<ShippingMethod>>empty(), Optional.<String>empty());
+        return new ShippingMethodQueryModel(null, null);
     }
 
-    private ShippingMethodQueryModel(final Optional<? extends QueryModel<ShippingMethod>> parent, final Optional<String> pathSegment) {
+    private ShippingMethodQueryModel(final QueryModel<ShippingMethod> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
     public StringQuerySortingModel<ShippingMethod> name() {
-        return new StringQuerySortingModel<>(Optional.of(this), "name");
+        return stringModel("name");
     }
 
     public ReferenceQueryModel<ShippingMethod, TaxCategory> taxCategory() {
@@ -24,10 +22,10 @@ public class ShippingMethodQueryModel extends DefaultModelQueryModelImpl<Shippin
     }
 
     public ZoneRateCollectionQueryModel<ShippingMethod> zoneRates() {
-        return new ZoneRateCollectionQueryModel<>(Optional.of(this), "zoneRates");
+        return new ZoneRateCollectionQueryModel<>(this, "zoneRates");
     }
 
     public BooleanQueryModel<ShippingMethod> isDefault() {
-        return new BooleanQueryModel<>(Optional.of(this), "isDefault");
+        return booleanModel("isDefault");
     }
 }

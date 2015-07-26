@@ -6,14 +6,13 @@ object Libs extends json with http with other with test {
 }
 
 trait json {
-  private val jacksonVersion = "2.5.3"
+  private val jacksonVersion = "2.6.0"
 
   val `jackson-annotations` = "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonVersion
   val `jackson-core` = "com.fasterxml.jackson.core" % "jackson-core" % jacksonVersion
   val `jackson-databind` =  "com.fasterxml.jackson.core" % "jackson-databind" % jacksonVersion
   val `jackson-module-parameter-names` = "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % jacksonVersion
   val `jackson-datatype-jsr310` =  "com.fasterxml.jackson.datatype" % "jackson-datatype-jsr310" % jacksonVersion
-  val `jackson-databind-java-optional` =  "org.zapodot" % "jackson-databind-java-optional" % "2.5.1"
 
   val `jackson` =
     `jackson-annotations` ::
@@ -21,7 +20,6 @@ trait json {
       `jackson-databind` ::
       `jackson-module-parameter-names` ::
       `jackson-datatype-jsr310` ::
-      `jackson-databind-java-optional` ::
       Nil
 
   val `gson` = "com.google.code.gson" % "gson" % "2.3.1"

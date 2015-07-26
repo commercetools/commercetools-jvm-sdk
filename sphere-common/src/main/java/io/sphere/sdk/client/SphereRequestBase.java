@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.json.SphereJsonUtils;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Optional;
 import java.util.function.Function;
 
 /**
@@ -19,10 +20,10 @@ public abstract class SphereRequestBase extends Base {
     }
 
     protected static <T> Function<HttpResponse, T> resultMapperOf(TypeReference<T> typeReference) {
-        return httpResponse -> SphereJsonUtils.readObject(httpResponse.getResponseBody().orElseThrow(() -> new JsonException(httpResponse)), typeReference);
+        return httpResponse -> SphereJsonUtils.readObject(Optional.ofNullable(httpResponse.getResponseBody()).orElseThrow(() -> new JsonException(httpResponse)), typeReference);
     }
 
     protected static String getBodyAsString(final HttpResponse httpResponse) {
-        return new String(httpResponse.getResponseBody().get(), StandardCharsets.UTF_8);
+        return new String(httpResponse.getResponseBody(), StandardCharsets.UTF_8);
     }
 }

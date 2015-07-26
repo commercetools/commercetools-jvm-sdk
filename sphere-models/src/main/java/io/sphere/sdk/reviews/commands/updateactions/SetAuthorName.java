@@ -3,7 +3,7 @@ package io.sphere.sdk.reviews.commands.updateactions;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.reviews.Review;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  * Updates the author name of a review.
@@ -11,22 +11,20 @@ import java.util.Optional;
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setAuthorName()}
  */
 public class SetAuthorName extends UpdateAction<Review> {
+    @Nullable
     private final String authorName;
 
-    private SetAuthorName(final Optional<String> authorName) {
+    private SetAuthorName(@Nullable final String authorName) {
         super("setAuthorName");
-        this.authorName = authorName.orElse(null);
+        this.authorName = authorName;
     }
 
-    public static SetAuthorName of(final String authorName) {
-        return of(Optional.of(authorName));
-    }
-
-    public static SetAuthorName of(final Optional<String> authorName) {
+    public static SetAuthorName of(@Nullable final String authorName) {
         return new SetAuthorName(authorName);
     }
 
-    public Optional<String> getAuthorName() {
-        return Optional.ofNullable(authorName);
+    @Nullable
+    public String getAuthorName() {
+        return authorName;
     }
 }

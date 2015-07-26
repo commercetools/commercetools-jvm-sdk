@@ -4,8 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.models.Image;
 
-import java.util.Optional;
-
+import javax.annotation.Nullable;
 import java.util.List;
 
 /**
@@ -13,7 +12,8 @@ import java.util.List;
  */
 @JsonDeserialize(as = ProductVariantDraftImpl.class)
 public interface ProductVariantDraft {
-    Optional<String> getSku();
+    @Nullable
+    String getSku();
 
     List<Price> getPrices();
 

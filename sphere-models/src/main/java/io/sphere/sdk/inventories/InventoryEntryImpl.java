@@ -5,19 +5,22 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implements InventoryEntry {
     private final String sku;
-    private final Optional<Reference<Channel>> supplyChannel;
+    @Nullable
+    private final Reference<Channel> supplyChannel;
     private final long quantityOnStock;
     private final long availableQuantity;
-    private final Optional<Integer> restockableInDays;
-    private final Optional<ZonedDateTime> expectedDelivery;
+    @Nullable
+    private final Integer restockableInDays;
+    @Nullable
+    private final ZonedDateTime expectedDelivery;
 
     @JsonCreator
-    public InventoryEntryImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final long availableQuantity, final String sku, final Optional<Reference<Channel>> supplyChannel, final long quantityOnStock, final Optional<Integer> restockableInDays, final Optional<ZonedDateTime> expectedDelivery) {
+    public InventoryEntryImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final long availableQuantity, final String sku, final Reference<Channel> supplyChannel, final long quantityOnStock, final Integer restockableInDays, final ZonedDateTime expectedDelivery) {
         super(id, version, createdAt, lastModifiedAt);
         this.availableQuantity = availableQuantity;
         this.sku = sku;
@@ -33,7 +36,8 @@ final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implemen
     }
 
     @Override
-    public Optional<ZonedDateTime> getExpectedDelivery() {
+    @Nullable
+    public ZonedDateTime getExpectedDelivery() {
         return expectedDelivery;
     }
 
@@ -43,7 +47,8 @@ final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implemen
     }
 
     @Override
-    public Optional<Integer> getRestockableInDays() {
+    @Nullable
+    public Integer getRestockableInDays() {
         return restockableInDays;
     }
 
@@ -53,7 +58,8 @@ final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implemen
     }
 
     @Override
-    public Optional<Reference<Channel>> getSupplyChannel() {
+    @Nullable
+    public Reference<Channel> getSupplyChannel() {
         return supplyChannel;
     }
 }

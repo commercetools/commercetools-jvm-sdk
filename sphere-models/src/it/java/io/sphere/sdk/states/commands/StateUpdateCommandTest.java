@@ -12,11 +12,11 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.LinkedList;
-import java.util.Optional;
 import java.util.Set;
 
 import static io.sphere.sdk.states.StateFixtures.withUpdateableState;
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -53,7 +53,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
 
             final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
             final State updatedState = execute(command);
-            assertThat(updatedState.getName()).contains(newName);
+            assertThat(updatedState.getName()).isEqualTo(newName);
             return updatedState;
         });
     }
@@ -65,15 +65,15 @@ public class StateUpdateCommandTest extends IntegrationTest {
                 final Set<Reference<State>> transitions = asSet(stateA.toReference());
                 final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(transitions));
                 final State updatedStateB = execute(command);
-                assertThat(updatedStateB.getTransitions()).contains(transitions);
+                assertThat(updatedStateB.getTransitions()).isEqualTo(transitions);
 
                 //check reference expansion
                 final State loadedStateB = execute(StateByIdFetch.of(stateB).withExpansionPaths(m -> m.transitions()));
-                final Reference<State> stateReference = new LinkedList<>(loadedStateB.getTransitions().get()).getFirst();
-                assertThat(stateReference.getObj()).isPresent();
+                final Reference<State> stateReference = new LinkedList<>(loadedStateB.getTransitions()).getFirst();
+                assertThat(stateReference.getObj()).isNotNull();
 
-                final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));
-                assertThat(updatedStateBWithoutTransitions.getTransitions()).isEmpty();
+                final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of()));
+                assertThat(updatedStateBWithoutTransitions.getTransitions()).isNull();
 
                 return updatedStateBWithoutTransitions;
             });

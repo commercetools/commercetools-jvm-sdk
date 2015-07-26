@@ -2,20 +2,11 @@ package io.sphere.sdk.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.StringJoiner;
 import java.util.stream.Stream;
 
 public final class IterableUtils {
     private IterableUtils() {
-    }
-
-    public static <T> Optional<T> headOption(final Iterable<T> iterable) {
-        Optional<T> result = Optional.empty();
-        if (!isEmpty(iterable)) {
-            result = Optional.of(iterable.iterator().next());
-        }
-        return result;
     }
 
     public static boolean isEmpty(final Iterable<?> iterable) {

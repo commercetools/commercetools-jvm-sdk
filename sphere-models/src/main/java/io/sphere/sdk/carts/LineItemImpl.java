@@ -9,26 +9,30 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 import java.util.Set;
 
 final class LineItemImpl extends LineItemLikeImpl implements LineItem {
 
     private final String productId;
     private final LocalizedStrings name;
-    private final Optional<LocalizedStrings> productSlug;
+    @Nullable
+    private final LocalizedStrings productSlug;
     private final ProductVariant variant;
     private final Price price;
-    private final Optional<TaxRate> taxRate;
-    private final Optional<Reference<Channel>> supplyChannel;
-    private final Optional<Reference<Channel>> distributionChannel;
+    @Nullable
+    private final TaxRate taxRate;
+    @Nullable
+    private final Reference<Channel> supplyChannel;
+    @Nullable
+    private final Reference<Channel> distributionChannel;
 
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedStrings name,
                  final ProductVariant variant, final Price price, final long quantity,
-                 final Set<ItemState> state, final Optional<TaxRate> taxRate,
-                 final Optional<Reference<Channel>> supplyChannel, final Optional<DiscountedLineItemPrice> discountedPrice,
-                 final Optional<LocalizedStrings> productSlug, final Optional<Reference<Channel>> distributionChannel) {
+                 final Set<ItemState> state, final TaxRate taxRate,
+                 final Reference<Channel> supplyChannel, final DiscountedLineItemPrice discountedPrice,
+                 final LocalizedStrings productSlug, final Reference<Channel> distributionChannel) {
         super(id, state, quantity, discountedPrice);
         this.productId = productId;
         this.name = name;
@@ -61,22 +65,26 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     }
 
     @Override
-    public Optional<TaxRate> getTaxRate() {
+    @Nullable
+    public TaxRate getTaxRate() {
         return taxRate;
     }
 
+    @Nullable
     @Override
-    public Optional<Reference<Channel>> getSupplyChannel() {
+    public Reference<Channel> getSupplyChannel() {
         return supplyChannel;
     }
 
+    @Nullable
     @Override
-    public Optional<Reference<Channel>> getDistributionChannel() {
+    public Reference<Channel> getDistributionChannel() {
         return distributionChannel;
     }
 
     @Override
-    public Optional<LocalizedStrings> getProductSlug() {
+    @Nullable
+    public LocalizedStrings getProductSlug() {
         return productSlug;
     }
 }

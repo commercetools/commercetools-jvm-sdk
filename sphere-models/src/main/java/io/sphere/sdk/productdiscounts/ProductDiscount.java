@@ -6,15 +6,16 @@ import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
+import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 
 @JsonDeserialize(as=ProductDiscountImpl.class)
 public interface ProductDiscount extends DefaultModel<ProductDiscount> {
 
     LocalizedStrings getName();
 
-    Optional<LocalizedStrings> getDescription();
+    @Nullable
+    LocalizedStrings getDescription();
 
     ProductDiscountValue getValue();
 

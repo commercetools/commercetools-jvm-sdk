@@ -1,7 +1,5 @@
 package io.sphere.sdk.categories.queries;
 
-import java.util.Optional;
-
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.*;
 
@@ -11,10 +9,10 @@ import io.sphere.sdk.queries.*;
 public final class CategoryQueryModel extends DefaultModelQueryModelImpl<Category> {
 
     public static CategoryQueryModel of() {
-        return new CategoryQueryModel(Optional.empty(), Optional.<String>empty());
+        return new CategoryQueryModel(null, null);
     }
 
-    private CategoryQueryModel(Optional<? extends QueryModel<Category>> parent, Optional<String> pathSegment) {
+    private CategoryQueryModel(QueryModel<Category> parent, String pathSegment) {
         super(parent, pathSegment);
     }
 
@@ -27,10 +25,10 @@ public final class CategoryQueryModel extends DefaultModelQueryModelImpl<Categor
     }
 
     public StringQuerySortingModel<Category> externalId() {
-        return new StringQuerySortingModel<>(Optional.of(this), "externalId");
+        return stringModel("externalId");
     }
 
     public ReferenceOptionalQueryModel<Category, Category> parent() {
-        return new ReferenceOptionalQueryModel<>(Optional.of(this), "parent");
+        return referenceOptionalModel("parent");
     }
 }

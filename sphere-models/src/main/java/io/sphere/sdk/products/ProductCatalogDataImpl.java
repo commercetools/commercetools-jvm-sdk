@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.utils.ListUtils;
 
+import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -16,11 +17,12 @@ class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     private final boolean isPublished;
     @JsonProperty("hasStagedChanges")
     private final boolean hasStagedChanges;
-    private final Optional<ProductData> current;
+    @Nullable
+    private final ProductData current;
     private final ProductData staged;
 
     @JsonCreator
-    ProductCatalogDataImpl(final boolean isPublished, final Optional<ProductData> current, final ProductData staged,
+    ProductCatalogDataImpl(final boolean isPublished, final ProductData current, final ProductData staged,
                            final boolean hasStagedChanges) {
         this.isPublished = isPublished;
         this.current = current;
@@ -32,8 +34,9 @@ class ProductCatalogDataImpl extends Base implements ProductCatalogData {
         return isPublished;
     }
 
-    public Optional<ProductData> getCurrent() {
-        return isPublished ? current : Optional.<ProductData>empty();
+    @Nullable
+    public ProductData getCurrent() {
+        return isPublished ? current : null;
     }
 
     public ProductData getStaged() {
@@ -45,7 +48,7 @@ class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     }
 
     public void setProductId(final String id) {
-        final List<ProductData> currentAsList = current.map(c -> asList(c)).orElse(Collections.emptyList());
+        final List<ProductData> currentAsList = Optional.ofNullable(current).map(c -> asList(c)).orElse(Collections.emptyList());
         ListUtils.listOf(currentAsList, staged).stream()
                 .filter(x -> x instanceof ProductDataImpl)
                 .forEach(x -> ((ProductDataImpl)x).setProductId(id));
