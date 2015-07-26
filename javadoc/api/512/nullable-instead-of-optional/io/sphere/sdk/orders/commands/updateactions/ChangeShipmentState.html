@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     final ShipmentState newState = ShipmentState.SHIPPED;
-    assertThat(order.getShipmentState()).isNotEqualTo(Optional.of(newState));
+    assertThat(order.getShipmentState()).isNotEqualTo(newState);
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
     assertThat(updatedOrder.getShipmentState()).isEqualTo(newState);
 });

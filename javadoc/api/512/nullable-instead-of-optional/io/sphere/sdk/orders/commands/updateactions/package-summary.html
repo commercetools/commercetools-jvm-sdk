@@ -161,7 +161,7 @@
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changePaymentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     final PaymentState newState = PaymentState.PAID;
-    assertThat(order.getPaymentState()).isNotEqualTo(Optional.of(newState));
+    assertThat(order.getPaymentState()).isNotEqualTo(newState);
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(newState)));
     assertThat(updatedOrder.getPaymentState()).isEqualTo(newState);
 });
@@ -173,7 +173,7 @@
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     final ShipmentState newState = ShipmentState.SHIPPED;
-    assertThat(order.getShipmentState()).isNotEqualTo(Optional.of(newState));
+    assertThat(order.getShipmentState()).isNotEqualTo(newState);
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
     assertThat(updatedOrder.getShipmentState()).isEqualTo(newState);
 });

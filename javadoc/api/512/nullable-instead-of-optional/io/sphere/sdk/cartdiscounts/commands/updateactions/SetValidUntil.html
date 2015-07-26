@@ -124,7 +124,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     //until must be after valid from
     final ZonedDateTime dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
 
-    assertThat(cartDiscount.getValidUntil()).isNotEqualTo(Optional.of(dateTime));
+    assertThat(cartDiscount.getValidUntil()).isNotEqualTo(dateTime);
 
     final CartDiscount updatedDiscount =
             execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));

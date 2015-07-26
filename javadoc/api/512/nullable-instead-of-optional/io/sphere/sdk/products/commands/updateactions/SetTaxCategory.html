@@ -124,7 +124,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setTaxCategory--%s" class=code-example><pre><code class='java'>TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory -&gt;
     withUpdateableProduct(client(), product -&gt; {
-        assertThat(product.getTaxCategory()).isNotEqualTo(Optional.of(taxCategory));
+        assertThat(product.getTaxCategory()).isNotEqualTo(taxCategory);
         final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetTaxCategory.of(taxCategory));
         final Product updatedProduct = execute(command);
         assertThat(updatedProduct.getTaxCategory()).isEqualTo(taxCategory.toReference());

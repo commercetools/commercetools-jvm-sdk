@@ -324,7 +324,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     final String newDescription = randomString();
-    assertThat(shippingMethod.getDescription()).isNotEqualTo(Optional.of(newDescription));
+    assertThat(shippingMethod.getDescription()).isNotEqualTo(newDescription);
     final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
     final ShippingMethod updatedShippingMethod = execute(cmd);
     assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);

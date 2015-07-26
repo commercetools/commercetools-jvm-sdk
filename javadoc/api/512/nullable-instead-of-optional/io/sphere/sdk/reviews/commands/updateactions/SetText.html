@@ -124,7 +124,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 
  <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setText--%s" class=code-example><pre><code class='java'>ReviewFixtures.withUpdateableReview(client(), review -&gt; {
     final String newText = randomString();
-    assertThat(review.getTitle()).isNotEqualTo(Optional.of(newText));
+    assertThat(review.getTitle()).isNotEqualTo(newText);
 
     final Review updatedReview = execute(ReviewUpdateCommand.of(review, SetText.of(newText)));
     assertThat(updatedReview.getText()).contains(newText);

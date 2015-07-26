@@ -1215,7 +1215,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changePaymentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     final PaymentState newState = PaymentState.PAID;
-    assertThat(order.getPaymentState()).isNotEqualTo(Optional.of(newState));
+    assertThat(order.getPaymentState()).isNotEqualTo(newState);
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(newState)));
     assertThat(updatedOrder.getPaymentState()).isEqualTo(newState);
 });
@@ -1288,7 +1288,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
     final ShipmentState newState = ShipmentState.SHIPPED;
-    assertThat(order.getShipmentState()).isNotEqualTo(Optional.of(newState));
+    assertThat(order.getShipmentState()).isNotEqualTo(newState);
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
     assertThat(updatedOrder.getShipmentState()).isEqualTo(newState);
 });
@@ -8578,7 +8578,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
     final LocalizedStrings newDescription = randomSlug();
 
-    assertThat(cartDiscount.getDescription()).isNotEqualTo(Optional.of(newDescription));
+    assertThat(cartDiscount.getDescription()).isNotEqualTo(newDescription);
 
     final CartDiscount updatedDiscount =
             execute(CartDiscountUpdateCommand.of(cartDiscount, SetDescription.of(newDescription)));
@@ -8617,7 +8617,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>
 <div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     final String newDescription = randomString();
-    assertThat(shippingMethod.getDescription()).isNotEqualTo(Optional.of(newDescription));
+    assertThat(shippingMethod.getDescription()).isNotEqualTo(newDescription);
     final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
     final ShippingMethod updatedShippingMethod = execute(cmd);
     assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);
@@ -8871,7 +8871,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
     //until must be after valid from
     final ZonedDateTime dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
 
-    assertThat(cartDiscount.getValidUntil()).isNotEqualTo(Optional.of(dateTime));
+    assertThat(cartDiscount.getValidUntil()).isNotEqualTo(dateTime);
 
     final CartDiscount updatedDiscount =
             execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));

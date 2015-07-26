@@ -123,7 +123,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
     final LocalizedStrings newDescription = randomSlug();
 
-    assertThat(cartDiscount.getDescription()).isNotEqualTo(Optional.of(newDescription));
+    assertThat(cartDiscount.getDescription()).isNotEqualTo(newDescription);
 
     final CartDiscount updatedDiscount =
             execute(CartDiscountUpdateCommand.of(cartDiscount, SetDescription.of(newDescription)));
