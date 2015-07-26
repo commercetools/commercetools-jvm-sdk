@@ -100,10 +100,10 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     @Test
     public void setOrderNumber() throws Exception {
         withOrder(client(), order -> {
-            assertThat(order.getOrderNumber()).isEmpty();
+            assertThat(order.getOrderNumber()).isNull();
             final String orderNumber = randomString();
             final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
-            assertThat(updatedOrder.getOrderNumber()).contains(orderNumber);
+            assertThat(updatedOrder.getOrderNumber()).isEqualTo(orderNumber);
         });
     }
 
