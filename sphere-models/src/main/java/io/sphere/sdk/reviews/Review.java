@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.DefaultModel;
 import io.sphere.sdk.models.Reference;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
 /**
  Review of a product by a customer. A customer can create only one review per product.
@@ -17,23 +17,27 @@ public interface Review extends DefaultModel<Review> {
 
     String getCustomerId();
 
-    Optional<String> getAuthorName();
+    @Nullable
+    String getAuthorName();
 
-    Optional<String> getTitle();
+    @Nullable
+    String getTitle();
 
-    Optional<String> getText();
+    @Nullable
+    String getText();
 
-    Optional<Double> getScore();
+    @Nullable
+    Double getScore();
 
     default Reference<Review> toReference() {
         return Reference.of(typeId(), getId());
     }
 
-    static String typeId(){
+    static String typeId() {
         return "review";
     }
 
-    static TypeReference<Review> typeReference(){
+    static TypeReference<Review> typeReference() {
         return new TypeReference<Review>() {
             @Override
             public String toString() {

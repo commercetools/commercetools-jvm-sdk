@@ -5,6 +5,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.ProductIdentifiable;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
@@ -15,23 +16,27 @@ import java.util.Optional;
 public class ReviewDraft extends Base {
     private final String productId;
     private final String customerId;
+    @Nullable
     private final String authorName;
+    @Nullable
     private final String title;
+    @Nullable
     private final String text;
+    @Nullable
     private final Double score;
 
-    ReviewDraft(final String productId, final String customerId, final Optional<String> authorName, final Optional<String> title,
-                final Optional<String> text, final Optional<Double> score) {
-        final boolean scoreIsInValidRange = score.map(scoreValue -> scoreValue >= 0.0 && scoreValue <= 1.0).orElse(true);
+    ReviewDraft(final String productId, final String customerId, @Nullable final String authorName, @Nullable final String title,
+                @Nullable final String text, @Nullable final Double score) {
+        final boolean scoreIsInValidRange = Optional.ofNullable(score).map(scoreValue -> scoreValue >= 0.0 && scoreValue <= 1.0).orElse(true);
         if (!scoreIsInValidRange) {
             throw new IllegalArgumentException("Valid scores are in [0..1].");
         }
         this.productId = productId;
         this.customerId = customerId;
-        this.authorName = authorName.orElse(null);
-        this.title = title.orElse(null);
-        this.text = text.orElse(null);
-        this.score = score.orElse(null);
+        this.authorName = authorName;
+        this.title = title;
+        this.text = text;
+        this.score = score;
     }
 
     public static ReviewDraft of(final ProductIdentifiable product, final Identifiable<Customer> customer) {
@@ -39,7 +44,7 @@ public class ReviewDraft extends Base {
     }
 
     public static ReviewDraft of(final String productId, final String customerId) {
-        return new ReviewDraft(productId, customerId, Optional.empty(), Optional.empty(), Optional.empty(), Optional.empty());
+        return new ReviewDraft(productId, customerId, null, null, null, null);
     }
 
     public String getProductId() {
@@ -50,52 +55,40 @@ public class ReviewDraft extends Base {
         return customerId;
     }
 
-    public Optional<String> getAuthorName() {
-        return Optional.ofNullable(authorName);
+    @Nullable
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public Optional<String> getTitle() {
-        return Optional.ofNullable(title);
+    @Nullable
+    public String getTitle() {
+        return title;
     }
 
-    public Optional<String> getText() {
-        return Optional.ofNullable(text);
+    @Nullable
+    public String getText() {
+        return text;
     }
 
-    public Optional<Double> getScore() {
-        return Optional.ofNullable(score);
+    @Nullable
+    public Double getScore() {
+        return score;
     }
 
-    public ReviewDraft withAuthorName(final Optional<String> authorName) {
+    public ReviewDraft withAuthorName(@Nullable final String authorName) {
         return createBuilder().authorName(authorName).build();
     }
 
-    public ReviewDraft withAuthorName(final String authorName) {
-        return withAuthorName(Optional.of(authorName));
-    }
-
-    public ReviewDraft withTitle(final Optional<String> title) {
+    public ReviewDraft withTitle(@Nullable final String title) {
         return createBuilder().title(title).build();
-    }  
+    }   
     
-    public ReviewDraft withTitle(final String title) {
-        return withTitle(Optional.of(title));
-    }    
-    
-    public ReviewDraft withText(final Optional<String> text) {
+    public ReviewDraft withText(@Nullable final String text) {
         return createBuilder().text(text).build();
     }  
-    
-    public ReviewDraft withText(final String text) {
-        return withText(Optional.of(text));
-    }
 
-    public ReviewDraft withScore(final Optional<Double> score) {
+    public ReviewDraft withScore(@Nullable final Double score) {
         return createBuilder().score(score).build();
-    }
-
-    public ReviewDraft withScore(final double score) {
-        return withScore(Optional.of(score));
     }
 
     private ReviewDraftBuilder createBuilder() {

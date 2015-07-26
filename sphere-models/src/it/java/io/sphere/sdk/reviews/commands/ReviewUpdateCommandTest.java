@@ -32,10 +32,10 @@ public class ReviewUpdateCommandTest extends IntegrationTest {
     public void setScore() throws Exception {
         ReviewFixtures.withUpdateableReview(client(), review -> {
             final double newScore = 0.5;
-            assertThat(review.getScore().orElse(1.0)).isNotEqualTo(0.5);
+            assertThat(Optional.ofNullable(review.getScore()).orElse(1.0)).isNotEqualTo(0.5);
 
             final Review updatedReview = execute(ReviewUpdateCommand.of(review, SetScore.of(newScore)));
-            assertThat(updatedReview.getScore()).contains(newScore);
+            assertThat(updatedReview.getScore()).isEqualTo(newScore);
 
             return updatedReview;
         });

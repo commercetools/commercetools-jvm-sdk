@@ -3,28 +3,32 @@ package io.sphere.sdk.reviews;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.DefaultModelImpl;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
-import java.util.Optional;
 
 final class ReviewImpl extends DefaultModelImpl<Review> implements Review {
     private final String productId;
     private final String customerId;
+    @Nullable
     private final String authorName;
+    @Nullable
     private final String title;
+    @Nullable
     private final String text;
+    @Nullable
     private final Double score;
 
     @JsonCreator
     ReviewImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-               final String productId, final String customerId, final Optional<String> authorName, final Optional<String> title,
-               final Optional<String> text, final Optional<Double> score) {
+               final String productId, final String customerId, @Nullable final String authorName, @Nullable final String title,
+               @Nullable final String text, @Nullable final Double score) {
         super(id, version, createdAt, lastModifiedAt);
         this.productId = productId;
         this.customerId = customerId;
-        this.authorName = authorName.orElse(null);
-        this.title = title.orElse(null);
-        this.text = text.orElse(null);
-        this.score = score.orElse(null);
+        this.authorName = authorName;
+        this.title = title;
+        this.text = text;
+        this.score = score;
     }
 
     public String getProductId() {
@@ -36,19 +40,19 @@ final class ReviewImpl extends DefaultModelImpl<Review> implements Review {
     }
 
     @Override
-    public Optional<String> getAuthorName() {
-        return Optional.ofNullable(authorName);
+    public String getAuthorName() {
+        return authorName;
     }
 
-    public Optional<String> getTitle() {
-        return Optional.ofNullable(title);
+    public String getTitle() {
+        return title;
     }
 
-    public Optional<String> getText() {
-        return Optional.ofNullable(text);
+    public String getText() {
+        return text;
     }
 
-    public Optional<Double> getScore() {
-        return Optional.ofNullable(score);
+    public Double getScore() {
+        return score;
     }
 }
