@@ -30,6 +30,6 @@ public interface ProductCatalogData {
 
     @Nullable
     default ProductData get(final ProductProjectionType productProjectionType) {
-        return productProjectionType == CURRENT ? getCurrent() : null;
+        return productProjectionType == CURRENT ? getCurrent() : getStaged();
     }
 }

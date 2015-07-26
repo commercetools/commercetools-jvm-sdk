@@ -24,7 +24,7 @@ public interface RangeStats<T> {
      * Number of results that fall into this range.
      * @return the amount of results in the range.
      */
-    long getCount();
+    Long getCount();
 
     /**
      * Sum of the values contained within the range.
@@ -48,5 +48,5 @@ public interface RangeStats<T> {
      * Arithmetic mean of the values contained within the range.
      * @return the mean of the values.
      */
-    double getMean();
+    Double getMean();
 }

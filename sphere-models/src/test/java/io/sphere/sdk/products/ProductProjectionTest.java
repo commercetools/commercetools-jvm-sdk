@@ -15,6 +15,10 @@ public class ProductProjectionTest {
         final Product product = getProduct();
 
         final ProductProjection staged = product.toProjection(ProductProjectionType.STAGED);
+
+        System.err.println("stged");
+        System.err.println(staged);
+
         assertThat(staged).overridingErrorMessage("staged is always present").isNotNull();
         assertThat(staged.getName()).isEqualTo(product.getMasterData().getStaged().getName());
 
