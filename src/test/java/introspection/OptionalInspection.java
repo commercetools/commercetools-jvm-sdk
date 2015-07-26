@@ -1,6 +1,8 @@
 package introspection;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -26,7 +28,7 @@ public class OptionalInspection {
             }
         })
         .filter(i -> {
-            final Predicate<MethodInfo> containsIllegalOptional = m -> !m.getMethod().getName().startsWith("find") && (m.containsOptionalParameter() || m.containsOptionalReturnType());
+            final Predicate<MethodInfo> containsIllegalOptional = m -> !m.getMethod().getName().startsWith("find") && !isPrivate(m.getMethod()) && (m.containsOptionalParameter() || m.containsOptionalReturnType());
             return i.getMethods().stream().anyMatch(containsIllegalOptional) || i.containsOptionalField();
         })
         .collect(toList());
@@ -64,6 +66,10 @@ public class OptionalInspection {
             final long count = c.getMethodInfoStream().filter(METHOD_CONTAINS_OPTIONAL_STUFF).count();
             return count;
         }).sum());
+    }
+
+    private static boolean isPrivate(final Method method) {
+        return Modifier.isPrivate(method.getModifiers());
     }
 
 
