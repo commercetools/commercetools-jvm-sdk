@@ -14,7 +14,7 @@ public class SetExpectedDelivery extends UpdateAction<InventoryEntry> {
     @Nullable
     private final ZonedDateTime expectedDelivery;
 
-    private SetExpectedDelivery(final ZonedDateTime expectedDelivery) {
+    private SetExpectedDelivery(@Nullable final ZonedDateTime expectedDelivery) {
         super("setExpectedDelivery");
         this.expectedDelivery = expectedDelivery;
     }

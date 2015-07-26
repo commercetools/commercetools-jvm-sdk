@@ -65,8 +65,7 @@ public class InventoryEntryUpdateCommandTest extends IntegrationTest {
             final UpdateAction<InventoryEntry> action = SetExpectedDelivery.of(expectedDelivery);
             final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
             assertThat(updatedEntry.getExpectedDelivery())
-                    .isEqualTo(expectedDelivery)
-                    .isNotEqualTo(entry.getExpectedDelivery());
+                    .isEqualTo(expectedDelivery);
             return updatedEntry;
         });
     }
