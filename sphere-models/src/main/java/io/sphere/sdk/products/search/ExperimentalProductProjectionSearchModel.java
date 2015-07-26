@@ -5,13 +5,15 @@ import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.*;
 
+import javax.annotation.Nullable;
+
 /**
  * EXPERIMENTAL model to easily build product projection search requests.
  * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
  */
 public class ExperimentalProductProjectionSearchModel extends ProductDataSearchModelBase {
 
-    private ExperimentalProductProjectionSearchModel(final SearchModel<ProductProjection> parent, final String pathSegment) {
+    private ExperimentalProductProjectionSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

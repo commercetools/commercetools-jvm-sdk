@@ -66,17 +66,17 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
         return this;
     }
 
-    public MetaModelQueryDslBuilder<T, C, Q, E> limit(final Long limit) {
+    public MetaModelQueryDslBuilder<T, C, Q, E> limit(@Nullable final Long limit) {
         this.limit = limit;
         return this;
     }
 
-    public MetaModelQueryDslBuilder<T, C, Q, E> fetchTotal(final Boolean fetchTotal) {
+    public MetaModelQueryDslBuilder<T, C, Q, E> fetchTotal(@Nullable final Boolean fetchTotal) {
         this.withTotal = fetchTotal;
         return this;
     }
 
-    public MetaModelQueryDslBuilder<T, C, Q, E> offset(final Long offset) {
+    public MetaModelQueryDslBuilder<T, C, Q, E> offset(@Nullable final Long offset) {
         this.offset = offset;
         return this;
     }

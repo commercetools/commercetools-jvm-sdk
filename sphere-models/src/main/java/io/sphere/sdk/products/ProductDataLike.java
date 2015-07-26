@@ -9,7 +9,6 @@ import io.sphere.sdk.search.SearchKeywords;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {

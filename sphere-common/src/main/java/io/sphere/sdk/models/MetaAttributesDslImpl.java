@@ -17,16 +17,19 @@ class MetaAttributesDslImpl implements MetaAttributesDsl {
         this.metaKeywords = metaKeywords;
     }
 
+    @Nullable
     @Override
     public LocalizedStrings getMetaTitle() {
         return metaTitle;
     }
 
+    @Nullable
     @Override
     public LocalizedStrings getMetaDescription() {
         return metaDescription;
     }
 
+    @Nullable
     @Override
     public LocalizedStrings getMetaKeywords() {
         return metaKeywords;

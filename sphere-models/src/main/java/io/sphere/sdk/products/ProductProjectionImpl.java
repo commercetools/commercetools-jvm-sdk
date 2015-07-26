@@ -94,16 +94,19 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     }
 
     @Override
+    @Nullable
     public LocalizedStrings getMetaTitle() {
         return metaTitle;
     }
 
     @Override
+    @Nullable
     public LocalizedStrings getMetaDescription() {
         return metaDescription;
     }
 
     @Override
+    @Nullable
     public LocalizedStrings getMetaKeywords() {
         return metaKeywords;
     }

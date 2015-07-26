@@ -1,5 +1,7 @@
 package io.sphere.sdk.queries;
 
+import javax.annotation.Nullable;
+
 import static io.sphere.sdk.utils.ListUtils.listOf;
 
 /**
@@ -10,7 +12,7 @@ import static io.sphere.sdk.utils.ListUtils.listOf;
 abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<T>
         implements QuerySortingModel<T>, OptionalQueryModel<T>, EqualityQueryModel<T, V>,
         NotEqualQueryModel<T, V>, IsInQueryModel<T, V>, IsNotInQueryModel<T, V>, InequalityQueryModel<T, V> {
-    protected IntegerLikeQuerySortingModel(final QueryModel<T> parent, final String pathSegment) {
+    protected IntegerLikeQuerySortingModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

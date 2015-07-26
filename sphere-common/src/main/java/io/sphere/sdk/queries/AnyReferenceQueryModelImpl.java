@@ -2,12 +2,13 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Referenceable;
 
+import javax.annotation.Nullable;
 import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
 public class AnyReferenceQueryModelImpl<T> extends QueryModelImpl<T> implements AnyReferenceQueryModel<T> {
-    public AnyReferenceQueryModelImpl(QueryModel<T> parent, String pathSegment) {
+    public AnyReferenceQueryModelImpl(@Nullable final QueryModel<T> parent, final @Nullable String pathSegment) {
         super(parent, pathSegment);
     }
 

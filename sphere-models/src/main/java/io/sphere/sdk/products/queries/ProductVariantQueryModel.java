@@ -2,11 +2,12 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.queries.*;
 
+import javax.annotation.Nullable;
 import java.util.function.Function;
 
 public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
 
-    ProductVariantQueryModel(final QueryModel<T> parent, final String pathSegment) {
+    ProductVariantQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

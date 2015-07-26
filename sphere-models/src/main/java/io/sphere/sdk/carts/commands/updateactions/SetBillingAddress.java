@@ -22,7 +22,7 @@ public class SetBillingAddress extends UpdateAction<Cart> {
         this.address = address;
     }
 
-    public static SetBillingAddress of(final Address address) {
+    public static SetBillingAddress of(@Nullable final Address address) {
         return new SetBillingAddress(address);
     }
 

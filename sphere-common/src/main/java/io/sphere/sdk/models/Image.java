@@ -15,11 +15,11 @@ public interface Image {
     @Nullable
     String getLabel();
 
-    static Image of(final String url, final ImageDimensions dimensions, final String label) {
+    static Image of(final String url, final ImageDimensions dimensions, @Nullable final String label) {
         return ImageImpl.of(url, dimensions, label);
     }
 
-    static Image ofWidthAndHeight(final String url, final int width, final int height, final String label) {
+    static Image ofWidthAndHeight(final String url, final int width, final int height, @Nullable final String label) {
         return of(url, ImageDimensions.of(width, height), label);
     }
 

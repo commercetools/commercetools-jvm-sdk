@@ -34,18 +34,22 @@ public class TrackingData extends Base {
         return new TrackingData(trackingId, carrier, provider, providerTransaction, isReturn);
     }
 
+    @Nullable
     public String getTrackingId() {
         return trackingId;
     }
 
+    @Nullable
     public String getCarrier() {
         return carrier;
     }
 
+    @Nullable
     public String getProvider() {
         return provider;
     }
 
+    @Nullable
     public String getProviderTransaction() {
         return providerTransaction;
     }

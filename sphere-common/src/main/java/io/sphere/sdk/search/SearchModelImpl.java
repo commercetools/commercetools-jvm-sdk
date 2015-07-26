@@ -25,6 +25,7 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         return pathSegment;
     }
 
+    @Nullable
     @Override
     public SearchModel<T> getParent() {
         return parent;

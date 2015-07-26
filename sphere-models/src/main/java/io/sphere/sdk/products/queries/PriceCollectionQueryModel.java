@@ -5,9 +5,11 @@ import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.QueryPredicate;
 
+import javax.annotation.Nullable;
+
 public final class PriceCollectionQueryModel<T> extends QueryModelImpl<T> implements CollectionQueryModel<T> {
 
-    PriceCollectionQueryModel(QueryModel<T> parent, String pathSegment) {
+    PriceCollectionQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

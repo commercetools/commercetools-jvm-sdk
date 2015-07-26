@@ -3,6 +3,7 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.queries.*;
 
+import javax.annotation.Nullable;
 import java.util.function.Function;
 
 class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
@@ -15,7 +16,7 @@ class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
         return where(embeddedPredicate.apply(PartialProductDataQueryModel.of()));
     }
 
-    ProductDataQueryModelBase(QueryModel<T> parent, String pathSegment) {
+    ProductDataQueryModelBase(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

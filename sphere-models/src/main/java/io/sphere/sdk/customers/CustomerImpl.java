@@ -14,23 +14,31 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
-
+    @Nullable
     private final String customerNumber;
     private final String email;
     private final String firstName;
     private final String lastName;
     private final String password;
+    @Nullable
     private final String middleName;
+    @Nullable
     private final String title;
     private final List<Address> addresses;
     @Nullable
     private final String defaultShippingAddressId;
+    @Nullable
     private final String defaultBillingAddressId;
     private final boolean isEmailVerified;
+    @Nullable
     private final String externalId;
+    @Nullable
     private final Reference<CustomerGroup> customerGroup;
+    @Nullable
     private final String companyName;
+    @Nullable
     private final String vatId;
+    @Nullable
     private final LocalDate dateOfBirth;
 
     @JsonCreator
@@ -80,11 +88,13 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     }
 
     @Override
+    @Nullable
     public String getMiddleName() {
         return middleName;
     }
 
     @Override
+    @Nullable
     public String getTitle() {
         return title;
     }
@@ -95,11 +105,13 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     }
 
     @Override
+    @Nullable
     public String getDefaultShippingAddressId() {
         return defaultShippingAddressId;
     }
 
     @Override
+    @Nullable
     public String getDefaultBillingAddressId() {
         return defaultBillingAddressId;
     }
@@ -110,26 +122,31 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     }
 
     @Override
+    @Nullable
     public String getExternalId() {
         return externalId;
     }
 
     @Override
+    @Nullable
     public Reference<CustomerGroup> getCustomerGroup() {
         return customerGroup;
     }
 
     @Override
+    @Nullable
     public String getCompanyName() {
         return companyName;
     }
 
     @Override
+    @Nullable
     public String getVatId() {
         return vatId;
     }
 
     @Override
+    @Nullable
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }

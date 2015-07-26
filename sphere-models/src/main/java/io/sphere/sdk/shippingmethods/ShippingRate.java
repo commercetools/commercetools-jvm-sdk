@@ -15,7 +15,7 @@ public class ShippingRate extends Base {
     private final MonetaryAmount freeAbove;
 
     @JsonCreator
-    private ShippingRate(final MonetaryAmount price, final MonetaryAmount freeAbove) {
+    private ShippingRate(final MonetaryAmount price, @Nullable final MonetaryAmount freeAbove) {
         this.price = price;
         this.freeAbove = freeAbove;
     }

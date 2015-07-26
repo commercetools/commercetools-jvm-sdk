@@ -53,16 +53,19 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     }
 
     @Override
+    @Nullable
     public LocalizedStrings getMetaTitle() {
         return productData.getMetaTitle();
     }
 
     @Override
+    @Nullable
     public LocalizedStrings getMetaDescription() {
         return productData.getMetaDescription();
     }
 
     @Override
+    @Nullable
     public LocalizedStrings getMetaKeywords() {
         return productData.getMetaKeywords();
     }

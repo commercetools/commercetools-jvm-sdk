@@ -15,7 +15,7 @@ public class SetMetaTitle extends UpdateAction<Category> {
     @Nullable
     private final LocalizedStrings metaTitle;
 
-    private SetMetaTitle(final LocalizedStrings metaTitle) {
+    private SetMetaTitle(@Nullable final LocalizedStrings metaTitle) {
         super("setMetaTitle");
         this.metaTitle = metaTitle;
     }

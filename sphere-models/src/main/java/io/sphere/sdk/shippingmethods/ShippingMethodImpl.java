@@ -5,11 +5,13 @@ import io.sphere.sdk.models.DefaultModelImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
+import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
 final class ShippingMethodImpl extends DefaultModelImpl<ShippingMethod> implements ShippingMethod {
     private final String name;
+    @Nullable
     private final String description;
     private final Reference<io.sphere.sdk.taxcategories.TaxCategory> taxCategory;
     private final List<ZoneRate> zoneRates;
@@ -31,6 +33,7 @@ final class ShippingMethodImpl extends DefaultModelImpl<ShippingMethod> implemen
     }
 
     @Override
+    @Nullable
     public String getDescription() {
         return description;
     }

@@ -26,10 +26,12 @@ class Range<T extends Comparable<? super T>> extends Base {
         }
     }
 
+    @Nullable
     public Bound<T> lowerBound() {
         return lowerBound;
     }
 
+    @Nullable
     public Bound<T> upperBound() {
         return upperBound;
     }

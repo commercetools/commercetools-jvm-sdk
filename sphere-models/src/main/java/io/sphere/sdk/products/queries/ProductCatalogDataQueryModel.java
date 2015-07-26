@@ -6,13 +6,14 @@ import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.QueryPredicate;
 
+import javax.annotation.Nullable;
 import java.util.function.Function;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 
 public class ProductCatalogDataQueryModel<M> extends QueryModelImpl<M> {
 
-    ProductCatalogDataQueryModel(QueryModel<M> parent, String pathSegment) {
+    ProductCatalogDataQueryModel(@Nullable final QueryModel<M> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
@@ -28,7 +29,7 @@ public class ProductCatalogDataQueryModel<M> extends QueryModelImpl<M> {
         return newProductDataQueryModel("staged");
     }
 
-    private ProductDataQueryModel<M> newProductDataQueryModel(String pathSegment) {
+    private ProductDataQueryModel<M> newProductDataQueryModel(final String pathSegment) {
         return new ProductDataQueryModel<>(this, pathSegment);
     }
 

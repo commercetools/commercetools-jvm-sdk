@@ -13,7 +13,7 @@ public class SetDescription extends UpdateAction<ShippingMethod> {
     @Nullable
     private final String description;
 
-    private SetDescription(final String description) {
+    private SetDescription(@Nullable final String description) {
         super("setDescription");
         this.description = description;
     }

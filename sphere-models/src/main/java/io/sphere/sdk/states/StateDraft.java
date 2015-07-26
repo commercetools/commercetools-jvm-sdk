@@ -46,18 +46,22 @@ public class StateDraft extends Base {
         return type;
     }
 
+    @Nullable
     public LocalizedStrings getName() {
         return name;
     }
 
+    @Nullable
     public LocalizedStrings getDescription() {
         return description;
     }
 
+    @Nullable
     public Boolean isInitial() {
         return initial;
     }
 
+    @Nullable
     public Set<Reference<State>> getTransitions() {
         return transitions;
     }

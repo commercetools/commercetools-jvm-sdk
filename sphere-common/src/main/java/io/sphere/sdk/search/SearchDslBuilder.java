@@ -5,19 +5,23 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.http.HttpQueryParameter;
 
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.function.Function;
 
 import static java.util.Arrays.asList;
 
 final class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
+    @Nullable
     private SearchText text;
     private List<FacetExpression<T>> facets;
     private List<FilterExpression<T>> filterResults;
     private List<FilterExpression<T>> filterQueries;
     private List<FilterExpression<T>> filterFacets;
     private List<SearchSort<T>> sort;
+    @Nullable
     private Long limit;
+    @Nullable
     private Long offset;
     private List<HttpQueryParameter> additionalQueryParameters;
     private final Function<HttpResponse, PagedSearchResult<T>> resultMapper;

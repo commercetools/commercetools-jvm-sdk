@@ -12,7 +12,7 @@ public class SetMaxApplicationsPerCustomer extends UpdateAction<DiscountCode> {
     @Nullable
     private final Long maxApplicationsPerCustomer;
 
-    private SetMaxApplicationsPerCustomer(final Long maxApplicationsPerCustomer) {
+    private SetMaxApplicationsPerCustomer(@Nullable final Long maxApplicationsPerCustomer) {
         super("setMaxApplicationsPerCustomer");
         this.maxApplicationsPerCustomer = maxApplicationsPerCustomer;
     }

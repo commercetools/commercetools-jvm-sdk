@@ -98,14 +98,17 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
         return Category.toString(this);
     }
 
+    @Nullable
     public LocalizedStrings getMetaDescription() {
         return metaDescription;
     }
 
+    @Nullable
     public LocalizedStrings getMetaKeywords() {
         return metaKeywords;
     }
 
+    @Nullable
     public LocalizedStrings getMetaTitle() {
         return metaTitle;
     }

@@ -107,6 +107,7 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     @Override
+    @Nullable
     public SearchText text() {
         return text;
     }
@@ -137,11 +138,13 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
     }
 
     @Override
+    @Nullable
     public Long limit() {
         return limit;
     }
 
     @Override
+    @Nullable
     public Long offset() {
         return offset;
     }

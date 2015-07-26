@@ -25,6 +25,7 @@ public class SetMetaKeywords extends StageableProductUpdateAction {
         return new SetMetaKeywords(metaKeywords, productUpdateScope);
     }
 
+    @Nullable
     public LocalizedStrings getMetaKeywords() {
         return metaKeywords;
     }

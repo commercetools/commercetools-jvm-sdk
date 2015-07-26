@@ -119,86 +119,107 @@ public class Address extends Base {
         return country;
     }
 
+    @Nullable
     public String getId() {
         return id;
     }
 
+    @Nullable
     public String getTitle() {
         return title;
     }
 
+    @Nullable
     public String getSalutation() {
         return salutation;
     }
 
+    @Nullable
     public String getFirstName() {
         return firstName;
     }
 
+    @Nullable
     public String getLastName() {
         return lastName;
     }
 
+    @Nullable
     public String getStreetName() {
         return streetName;
     }
 
+    @Nullable
     public String getStreetNumber() {
         return streetNumber;
     }
 
+    @Nullable
     public String getAdditionalStreetInfo() {
         return additionalStreetInfo;
     }
 
+    @Nullable
     public String getPostalCode() {
         return postalCode;
     }
 
+    @Nullable
     public String getCity() {
         return city;
     }
 
+    @Nullable
     public String getRegion() {
         return region;
     }
 
+    @Nullable
     public String getState() {
         return state;
     }
 
+    @Nullable
     public String getCompany() {
         return company;
     }
 
+    @Nullable
     public String getDepartment() {
         return department;
     }
 
+    @Nullable
     public String getBuilding() {
         return building;
     }
 
+    @Nullable
     public String getApartment() {
         return apartment;
     }
 
+    @Nullable
     public String getPoBox() {
         return poBox;
     }
 
+    @Nullable
     public String getPhone() {
         return phone;
     }
 
+    @Nullable
     public String getMobile() {
         return mobile;
     }
 
+    @Nullable
     public String getEmail() {
         return email;
     }
 
+    @Nullable
     public String getAdditionalAddressInfo() {
         return additionalAddressInfo;
     }
@@ -207,87 +228,87 @@ public class Address extends Base {
         return AddressBuilder.of(this).country(country).build();
     }
 
-    public Address withId(final String id) {
+    public Address withId(@Nullable final String id) {
         return AddressBuilder.of(this).id(id).build();
     }
 
-    public Address withTitle(final String title) {
+    public Address withTitle(@Nullable final String title) {
         return AddressBuilder.of(this).title(title).build();
     }
 
-    public Address withSalutation(final String salutation) {
+    public Address withSalutation(@Nullable final String salutation) {
         return AddressBuilder.of(this).salutation(salutation).build();
     }
 
-    public Address withFirstName(final String firstName) {
+    public Address withFirstName(@Nullable final String firstName) {
         return AddressBuilder.of(this).firstName(firstName).build();
     }
 
-    public Address withLastName(final String lastName) {
+    public Address withLastName(@Nullable final String lastName) {
         return AddressBuilder.of(this).lastName(lastName).build();
     }
 
-    public Address withStreetName(final String streetName) {
+    public Address withStreetName(@Nullable final String streetName) {
         return AddressBuilder.of(this).streetName(streetName).build();
     }
 
-    public Address withStreetNumber(final String streetNumber) {
+    public Address withStreetNumber(@Nullable final String streetNumber) {
         return AddressBuilder.of(this).streetNumber(streetNumber).build();
     }
 
-    public Address withAdditionalStreetInfo(final String additionalStreetInfo) {
+    public Address withAdditionalStreetInfo(@Nullable final String additionalStreetInfo) {
         return AddressBuilder.of(this).additionalStreetInfo(additionalStreetInfo).build();
     }
 
-    public Address withPostalCode(final String postalCode) {
+    public Address withPostalCode(@Nullable final String postalCode) {
         return AddressBuilder.of(this).postalCode(postalCode).build();
     }
 
-    public Address withCity(final String city) {
+    public Address withCity(@Nullable final String city) {
         return AddressBuilder.of(this).city(city).build();
     }
 
-    public Address withRegion(final String region) {
+    public Address withRegion(@Nullable final String region) {
         return AddressBuilder.of(this).region(region).build();
     }
 
-    public Address withState(final String state) {
+    public Address withState(@Nullable final String state) {
         return AddressBuilder.of(this).state(state).build();
     }
 
-    public Address withCompany(final String company) {
+    public Address withCompany(@Nullable final String company) {
         return AddressBuilder.of(this).company(company).build();
     }
 
-    public Address withDepartment(final String department) {
+    public Address withDepartment(@Nullable final String department) {
         return AddressBuilder.of(this).department(department).build();
     }
 
-    public Address withBuilding(final String building) {
+    public Address withBuilding(@Nullable final String building) {
         return AddressBuilder.of(this).building(building).build();
     }
 
-    public Address withApartment(final String apartment) {
+    public Address withApartment(@Nullable final String apartment) {
         return AddressBuilder.of(this).apartment(apartment).build();
     }
 
-    public Address withPoBox(final String poBox) {
+    public Address withPoBox(@Nullable final String poBox) {
         return AddressBuilder.of(this).poBox(poBox).build();
     }
 
-    public Address withPhone(final String phone) {
+    public Address withPhone(@Nullable final String phone) {
         return AddressBuilder.of(this).phone(phone).build();
     }
 
-    public Address withMobile(final String mobile) {
+    public Address withMobile(@Nullable final String mobile) {
         return AddressBuilder.of(this).mobile(mobile).build();
     }
 
-    public Address withEmail(final String email) {
+    public Address withEmail(@Nullable final String email) {
         return AddressBuilder.of(this).email(email).build();
     }
 
-    public Address withAdditionalAddressInfo(final String additionalAddressInfo) {
+    public Address withAdditionalAddressInfo(@Nullable final String additionalAddressInfo) {
         return AddressBuilder.of(this).additionalAddressInfo(additionalAddressInfo).build();
     }
 

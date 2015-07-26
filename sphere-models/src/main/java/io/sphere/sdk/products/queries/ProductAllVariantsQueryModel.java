@@ -4,12 +4,13 @@ import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.QueryPredicate;
 
+import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.Function;
 
 public final class ProductAllVariantsQueryModel<T> extends QueryModelImpl<T> {
 
-    ProductAllVariantsQueryModel(final QueryModel<T> parent) {
+    ProductAllVariantsQueryModel(@Nullable final QueryModel<T> parent) {
         super(parent, null);
     }
 

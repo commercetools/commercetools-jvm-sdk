@@ -22,6 +22,7 @@ public class SetValidUntil extends UpdateAction<CartDiscount> {
         return new SetValidUntil(validUntil);
     }
 
+    @Nullable
     public ZonedDateTime getValidUntil() {
         return validUntil;
     }

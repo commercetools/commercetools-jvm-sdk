@@ -6,9 +6,11 @@ import io.sphere.sdk.queries.LocalizedStringsQuerySortingModel;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.ReferenceCollectionQueryModel;
 
+import javax.annotation.Nullable;
+
 public class ProductDataQueryModel<T> extends ProductDataQueryModelBase<T> {
 
-    ProductDataQueryModel(QueryModel<T> parent, String pathSegment) {
+    ProductDataQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

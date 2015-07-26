@@ -6,6 +6,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.util.Set;
 
@@ -15,8 +16,10 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     private final MonetaryAmount money;
     private final String slug;
     private final long quantity;
+    @Nullable
     private final Set<ItemState> state;
     private final Reference<TaxCategory> taxCategory;
+    @Nullable
     private final TaxRate taxRate;
 
     public CustomLineItemImportDraftImpl(final String id, final LocalizedStrings name, final MonetaryAmount money, final String slug, final long quantity, final Set<ItemState> state, final Reference<TaxCategory> taxCategory, final TaxRate taxRate) {
@@ -55,6 +58,7 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     }
 
     @Override
+    @Nullable
     public Set<ItemState> getState() {
         return state;
     }
@@ -65,6 +69,7 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     }
 
     @Override
+    @Nullable
     public TaxRate getTaxRate() {
         return taxRate;
     }

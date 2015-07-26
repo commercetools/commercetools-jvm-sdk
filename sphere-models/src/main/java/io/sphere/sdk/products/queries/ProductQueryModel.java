@@ -6,13 +6,15 @@ import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.ReferenceQueryModel;
 
+import javax.annotation.Nullable;
+
 public class ProductQueryModel extends DefaultModelQueryModelImpl<Product> {
 
     public static ProductQueryModel of() {
         return new ProductQueryModel(null, null);
     }
 
-    private ProductQueryModel(final QueryModel<Product> parent, final String pathSegment) {
+    private ProductQueryModel(@Nullable final QueryModel<Product> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

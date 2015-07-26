@@ -4,12 +4,15 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.models.Base;
 
+import javax.annotation.Nullable;
+
 class CustomerSignInResultImpl extends Base implements CustomerSignInResult {
     private final Customer customer;
+    @Nullable
     private final Cart cart;
 
     @JsonCreator
-    CustomerSignInResultImpl(final Customer customer, final Cart cart) {
+    CustomerSignInResultImpl(final Customer customer, @Nullable final Cart cart) {
         this.customer = customer;
         this.cart = cart;
     }
@@ -20,6 +23,7 @@ class CustomerSignInResultImpl extends Base implements CustomerSignInResult {
     }
 
     @Override
+    @Nullable
     public Cart getCart() {
         return cart;
     }

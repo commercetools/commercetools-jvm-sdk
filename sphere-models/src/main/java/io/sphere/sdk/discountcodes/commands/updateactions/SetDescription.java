@@ -22,6 +22,7 @@ public class SetDescription extends UpdateAction<DiscountCode> {
         return new SetDescription(description);
     }
 
+    @Nullable
     public LocalizedStrings getDescription() {
         return description;
     }

@@ -26,6 +26,7 @@ public class ExpansionModel<T> extends Base {
         return Optional.ofNullable(parentPath).filter(p -> !isEmpty(p)).map(p -> p + ".").orElse("") + Optional.ofNullable(path).orElse("");
     }
 
+    @Nullable
     protected final String pathExpression() {
         return buildPathExpression();
     }

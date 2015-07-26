@@ -14,7 +14,7 @@ public class SetCartPredicate extends UpdateAction<DiscountCode> {
     @Nullable
     private final String cartPredicate;
 
-    private SetCartPredicate(final String cartPredicate) {
+    private SetCartPredicate(@Nullable final String cartPredicate) {
         super("setCartPredicate");
         this.cartPredicate = cartPredicate;
     }
@@ -23,6 +23,7 @@ public class SetCartPredicate extends UpdateAction<DiscountCode> {
         return new SetCartPredicate(Optional.ofNullable(cartPredicate).map(CartPredicate::toSphereCartPredicate).orElse(null));
     }
 
+    @Nullable
     public String getCartPredicate() {
         return cartPredicate;
     }

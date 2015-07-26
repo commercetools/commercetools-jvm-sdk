@@ -12,14 +12,14 @@ final class ImageImpl extends Base implements Image {
     private final String label;
 
     @JsonCreator
-    private ImageImpl(final String url, final ImageDimensions dimensions, final String label) {
+    private ImageImpl(final String url, final ImageDimensions dimensions, @Nullable final String label) {
         this.url = url;
         this.dimensions = dimensions;
         this.label = label;
     }
 
     @JsonIgnore
-    public static Image of(final String url, final ImageDimensions dimensions, final String label) {
+    public static Image of(final String url, final ImageDimensions dimensions, @Nullable final String label) {
         return new ImageImpl(url, dimensions, label);
     }
 

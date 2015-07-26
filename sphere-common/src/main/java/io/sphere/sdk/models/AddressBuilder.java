@@ -92,7 +92,7 @@ public class AddressBuilder extends Base implements Builder<Address> {
         return builder;
     }
 
-    public static AddressBuilder of(final CountryCode country) {
+    public static AddressBuilder of(@Nullable final CountryCode country) {
         Objects.requireNonNull(country);
         return new AddressBuilder(country);
     }
@@ -101,113 +101,113 @@ public class AddressBuilder extends Base implements Builder<Address> {
         return new Address(this);
     }
 
-    public AddressBuilder country(final CountryCode country) {
+    public AddressBuilder country(@Nullable final CountryCode country) {
         Objects.requireNonNull(country);
         this.country = country;
         return this;
     }
 
-    public AddressBuilder id(final String id) {
+    public AddressBuilder id(@Nullable final String id) {
         this.id = id;
         return this;
     }
 
-    public AddressBuilder title(final String title) {
+    public AddressBuilder title(@Nullable final String title) {
         this.title = title;
         return this;
     }
 
-    public AddressBuilder salutation(final String salutation) {
+    public AddressBuilder salutation(@Nullable final String salutation) {
         this.salutation = salutation;
         return this;
     }
 
-    public AddressBuilder firstName(final String firstName) {
+    public AddressBuilder firstName(@Nullable final String firstName) {
         this.firstName = firstName;
         return this;
     }
 
-    public AddressBuilder lastName(final String lastName) {
+    public AddressBuilder lastName(@Nullable final String lastName) {
         this.lastName = lastName;
         return this;
     }
 
-    public AddressBuilder streetName(final String streetName) {
+    public AddressBuilder streetName(@Nullable final String streetName) {
         this.streetName = streetName;
         return this;
     }
 
-    public AddressBuilder streetNumber(final String streetNumber) {
+    public AddressBuilder streetNumber(@Nullable final String streetNumber) {
         this.streetNumber = streetNumber;
         return this;
     }
 
-    public AddressBuilder additionalStreetInfo(final String additionalStreetInfo) {
+    public AddressBuilder additionalStreetInfo(@Nullable final String additionalStreetInfo) {
         this.additionalStreetInfo = additionalStreetInfo;
         return this;
     }
 
-    public AddressBuilder postalCode(final String postalCode) {
+    public AddressBuilder postalCode(@Nullable final String postalCode) {
         this.postalCode = postalCode;
         return this;
     }
 
-    public AddressBuilder city(final String city) {
+    public AddressBuilder city(@Nullable final String city) {
         this.city = city;
         return this;
     }
 
-    public AddressBuilder region(final String region) {
+    public AddressBuilder region(@Nullable final String region) {
         this.region = region;
         return this;
     }
 
-    public AddressBuilder state(final String state) {
+    public AddressBuilder state(@Nullable final String state) {
         this.state = state;
         return this;
     }
 
-    public AddressBuilder company(final String company) {
+    public AddressBuilder company(@Nullable final String company) {
         this.company = company;
         return this;
     }
 
-    public AddressBuilder department(final String department) {
+    public AddressBuilder department(@Nullable final String department) {
         this.department = department;
         return this;
     }
 
-    public AddressBuilder building(final String building) {
+    public AddressBuilder building(@Nullable final String building) {
         this.building = building;
         return this;
     }
 
-    public AddressBuilder apartment(final String apartment) {
+    public AddressBuilder apartment(@Nullable final String apartment) {
         this.apartment = apartment;
         return this;
     }
 
-    public AddressBuilder poBox(final String poBox) {
+    public AddressBuilder poBox(@Nullable final String poBox) {
         this.poBox = poBox;
         return this;
     }
 
-    public AddressBuilder phone(final String phone) {
+    public AddressBuilder phone(@Nullable final String phone) {
         this.phone = phone;
         return this;
     }
 
-    public AddressBuilder mobile(final String mobile) {
+    public AddressBuilder mobile(@Nullable final String mobile) {
         this.mobile = mobile;
         return this;
     }
 
-    public AddressBuilder email(final String email) {
+    public AddressBuilder email(@Nullable final String email) {
         this.email = email;
         return this;
     }
     
-    public AddressBuilder additionalAddressInfo(final String additionalAddressInfo) {
+    public AddressBuilder additionalAddressInfo(@Nullable final String additionalAddressInfo) {
         this.additionalAddressInfo = additionalAddressInfo;
         return this;
     }

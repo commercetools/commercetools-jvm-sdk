@@ -14,8 +14,8 @@ import javax.annotation.Nullable;
  * {@include.example io.sphere.sdk.products.queries.ProductProjectionQueryTest#queryBySku()}
  */
 public class SetSku extends UpdateAction<Product> {
-    private final int variantId;@Nullable
-
+    private final int variantId;
+    @Nullable
     private final String sku;
 
     private SetSku(final int variantId, final String sku) {
@@ -28,6 +28,7 @@ public class SetSku extends UpdateAction<Product> {
         return variantId;
     }
 
+    @Nullable
     public String getSku() {
         return sku;
     }

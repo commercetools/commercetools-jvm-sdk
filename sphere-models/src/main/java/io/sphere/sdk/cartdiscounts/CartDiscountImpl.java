@@ -47,6 +47,7 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     }
 
     @Override
+    @Nullable
     public LocalizedStrings getDescription() {
         return description;
     }
@@ -82,11 +83,13 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     }
 
     @Override
+    @Nullable
     public ZonedDateTime getValidFrom() {
         return validFrom;
     }
 
     @Override
+    @Nullable
     public ZonedDateTime getValidUntil() {
         return validUntil;
     }

@@ -27,6 +27,7 @@ public class SetMetaTitle extends StageableProductUpdateAction {
         return new SetMetaTitle(metaTitle, productUpdateScope);
     }
 
+    @Nullable
     public LocalizedStrings getMetaTitle() {
         return metaTitle;
     }

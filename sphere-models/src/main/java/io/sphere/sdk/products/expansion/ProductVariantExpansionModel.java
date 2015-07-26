@@ -2,8 +2,10 @@ package io.sphere.sdk.products.expansion;
 
 import io.sphere.sdk.expansion.ExpansionModel;
 
+import javax.annotation.Nullable;
+
 public class ProductVariantExpansionModel<T> extends ExpansionModel<T> {
-    ProductVariantExpansionModel(final String parentPath, final String path) {
+    ProductVariantExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
 

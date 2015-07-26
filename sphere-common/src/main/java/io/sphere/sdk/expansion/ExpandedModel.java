@@ -1,8 +1,10 @@
 package io.sphere.sdk.expansion;
 
+import javax.annotation.Nullable;
+
 public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPath<T> {
 
-    protected ExpandedModel(final String parentPath, final String path) {
+    protected ExpandedModel(@Nullable final String parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
 

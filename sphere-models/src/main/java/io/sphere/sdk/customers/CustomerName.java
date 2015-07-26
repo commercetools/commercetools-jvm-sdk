@@ -19,6 +19,7 @@ public class CustomerName extends Base {
         this.lastName = lastName;
     }
 
+    @Nullable
     public String getTitle() {
         return title;
     }
@@ -27,6 +28,7 @@ public class CustomerName extends Base {
         return firstName;
     }
 
+    @Nullable
     public String getMiddleName() {
         return middleName;
     }

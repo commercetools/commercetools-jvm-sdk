@@ -32,6 +32,7 @@ final class HttpRequestImpl extends Base implements HttpRequest {
     }
 
     @Override
+    @Nullable
     public HttpRequestBody getBody() {
         return body;
     }

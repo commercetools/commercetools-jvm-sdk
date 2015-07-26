@@ -18,10 +18,11 @@ import javax.annotation.Nullable;
 public final class Reference<T> implements Referenceable<T>, Identifiable<T> {
     private final String typeId;
     private final String id;
+    @Nullable
     private final T obj;
 
     @JsonCreator
-    private Reference(final String typeId, final String id, final T obj) {
+    private Reference(final String typeId, final String id, @Nullable final T obj) {
         this.id = id;
         this.typeId = typeId;
         this.obj = obj;

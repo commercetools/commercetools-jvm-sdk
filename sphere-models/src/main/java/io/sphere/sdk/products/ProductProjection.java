@@ -101,6 +101,7 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
     }
 
     @Override
+    @Nullable
     default ProductVariant getVariant(final int variantId){
         return ProductsPackage.getVariant(variantId, this).orElse(null);
     }

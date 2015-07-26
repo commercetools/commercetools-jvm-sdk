@@ -3,8 +3,10 @@ package io.sphere.sdk.products.expansion;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 
+import javax.annotation.Nullable;
+
 public final class ProductAttributeExpansionModel<T> extends ExpansionModel<T> {
-    ProductAttributeExpansionModel(final String parentPath, final String path) {
+    ProductAttributeExpansionModel(@Nullable final String parentPath, @Nullable final String path) {
         super(parentPath, path);
     }
 

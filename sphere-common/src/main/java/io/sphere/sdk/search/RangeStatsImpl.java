@@ -4,8 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.models.Base;
 import org.apache.commons.lang3.StringUtils;
 
+import javax.annotation.Nullable;
+
 class RangeStatsImpl<T> extends Base implements RangeStats<T> {
+    @Nullable
     private final T lowerEndpoint;
+    @Nullable
     private final T upperEndpoint;
     private final Long count;
     private final T min;
@@ -14,7 +18,7 @@ class RangeStatsImpl<T> extends Base implements RangeStats<T> {
     private final Double mean;
 
     @JsonIgnore
-    private RangeStatsImpl(final T lowerEndpoint, final T upperEndpoint, final Long count,
+    private RangeStatsImpl(@Nullable final T lowerEndpoint, @Nullable final T upperEndpoint, final Long count,
                            final T min, final T max, final T sum, final Double mean) {
         this.lowerEndpoint = lowerEndpoint;
         this.upperEndpoint = upperEndpoint;

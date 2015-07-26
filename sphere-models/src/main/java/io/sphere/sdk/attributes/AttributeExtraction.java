@@ -79,6 +79,7 @@ public final class AttributeExtraction<T> extends Base {
         return Optional.ofNullable(getValue());
     }
 
+    @Nullable
     public T getValue() {
         return value;
     }

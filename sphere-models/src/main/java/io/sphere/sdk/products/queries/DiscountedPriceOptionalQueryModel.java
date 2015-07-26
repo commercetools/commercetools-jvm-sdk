@@ -3,9 +3,11 @@ package io.sphere.sdk.products.queries;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.queries.*;
 
+import javax.annotation.Nullable;
+
 public final class DiscountedPriceOptionalQueryModel<T> extends QueryModelImpl<T> implements OptionalQueryModel<T> {
 
-    DiscountedPriceOptionalQueryModel(final QueryModel<T> parent, final String pathSegment) {
+    DiscountedPriceOptionalQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 

@@ -14,6 +14,7 @@ import java.util.List;
 import static java.util.Arrays.asList;
 
 public final class ProductVariantDraftBuilder extends Base implements Builder<ProductVariantDraft> {
+    @Nullable
     private String sku;
 
     private List<Price> prices = Collections.emptyList();

@@ -40,18 +40,22 @@ final class ReviewImpl extends DefaultModelImpl<Review> implements Review {
     }
 
     @Override
+    @Nullable
     public String getAuthorName() {
         return authorName;
     }
 
+    @Nullable
     public String getTitle() {
         return title;
     }
 
+    @Nullable
     public String getText() {
         return text;
     }
 
+    @Nullable
     public Double getScore() {
         return score;
     }

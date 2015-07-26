@@ -111,6 +111,7 @@ public class DiscountCodeDraft extends Base {
         return newBuilder().maxApplications(maxApplications).build();
     }
 
+    @Nullable
     public Long getMaxApplications() {
         return maxApplications;
     }
@@ -119,6 +120,7 @@ public class DiscountCodeDraft extends Base {
         return newBuilder().maxApplicationsPerCustomer(maxApplicationsPerCustomer).build();
     }
 
+    @Nullable
     public Long getMaxApplicationsPerCustomer() {
         return maxApplicationsPerCustomer;
     }
