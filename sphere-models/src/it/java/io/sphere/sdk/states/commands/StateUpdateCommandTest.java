@@ -12,11 +12,11 @@ import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.LinkedList;
-import java.util.Optional;
 import java.util.Set;
 
 import static io.sphere.sdk.states.StateFixtures.withUpdateableState;
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -73,7 +73,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
                 assertThat(stateReference.getObj()).isNotNull();
 
                 final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of()));
-                assertThat(updatedStateBWithoutTransitions.getTransitions()).isEmpty();
+                assertThat(updatedStateBWithoutTransitions.getTransitions()).isNull();
 
                 return updatedStateBWithoutTransitions;
             });
