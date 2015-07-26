@@ -24,18 +24,15 @@ import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
-import static io.sphere.sdk.carts.CartFixtures.withEmptyCartAndProduct;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
-import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.*;
+import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartUpdateCommandTest extends IntegrationTest {
@@ -172,7 +169,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     @Test
     public void setCustomerEmail() throws Exception {
         final Cart cart = createCartWithCountry(client());
-        assertThat(cart.getCustomerEmail()).isEmpty();
+        assertThat(cart.getCustomerEmail()).isNull();
         final String email = "info@commercetools.de";
         final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
         assertThat(cartWithEmail.getCustomerEmail()).contains(email);
@@ -246,11 +243,11 @@ public class CartUpdateCommandTest extends IntegrationTest {
     public void setCustomerId() throws Exception {
         withCustomer(client(), customer -> {
             final Cart cart = createCartWithCountry(client());
-            assertThat(cart.getCustomerId()).isEmpty();
+            assertThat(cart.getCustomerId()).isNull();
             final Cart cartWithCustomerId = execute(CartUpdateCommand.of(cart, SetCustomerId.of(customer)));
             assertThat(cartWithCustomerId.getCustomerId()).contains(customer.getId());
             final Cart cartWithoutCustomerId = execute(CartUpdateCommand.of(cartWithCustomerId, SetCustomerId.empty()));
-            assertThat(cartWithoutCustomerId.getCustomerId()).isEmpty();
+            assertThat(cartWithoutCustomerId.getCustomerId()).isNull();
         });
     }
 
