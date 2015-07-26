@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9,"i2":9};
+var methods = {"i0":10,"i1":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -125,7 +125,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     assertThat(shippingMethod.getDescription()).isNotEqualTo(Optional.of(newDescription));
     final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
     final ShippingMethod updatedShippingMethod = execute(cmd);
-    assertThat(updatedShippingMethod.getDescription().get()).isEqualTo(newDescription);
+    assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);
     return updatedShippingMethod;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -148,14 +148,10 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">SetDescription</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html#of-java.util.Optional-">of</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;description)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">SetDescription</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html#of-java.lang.String-">of</a></span>(java.lang.String&nbsp;description)</code>&nbsp;</td>
 </tr>
@@ -201,16 +197,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">SetDescription</a>&nbsp;of(java.lang.String&nbsp;description)</pre>
-</li>
-</ul>
-<a name="of-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">SetDescription</a>&nbsp;of(java.util.Optional&lt;java.lang.String&gt;&nbsp;description)</pre>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">SetDescription</a>&nbsp;of(@Nullable
+                                java.lang.String&nbsp;description)</pre>
 </li>
 </ul>
 <a name="getDescription--">
@@ -219,7 +207,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getDescription</h4>
-<pre>public&nbsp;java.util.Optional&lt;java.lang.String&gt;&nbsp;getDescription()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getDescription()</pre>
 </li>
 </ul>
 </li>
