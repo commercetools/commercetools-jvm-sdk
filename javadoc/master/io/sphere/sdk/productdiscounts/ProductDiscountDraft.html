@@ -134,7 +134,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountDraft.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -159,8 +159,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountDraft.html" title="class in io.sphere.sdk.productdiscounts">ProductDiscountDraft</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountDraft.html#of-io.sphere.sdk.models.LocalizedStrings-java.util.Optional-io.sphere.sdk.productdiscounts.ProductDiscountPredicate-io.sphere.sdk.productdiscounts.ProductDiscountValue-java.lang.String-boolean-">of</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;name,
-  java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;description,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountDraft.html#of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.productdiscounts.ProductDiscountPredicate-io.sphere.sdk.productdiscounts.ProductDiscountValue-java.lang.String-boolean-">of</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;name,
+  <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;description,
   <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountPredicate.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountPredicate</a>&nbsp;predicate,
   <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountValue</a>&nbsp;value,
   java.lang.String&nbsp;sortOrder,
@@ -210,7 +210,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>getDescription</h4>
-<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getDescription()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getDescription()</pre>
 </li>
 </ul>
 <a name="getName--">
@@ -249,14 +250,14 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountValue</a>&nbsp;getValue()</pre>
 </li>
 </ul>
-<a name="of-io.sphere.sdk.models.LocalizedStrings-java.util.Optional-io.sphere.sdk.productdiscounts.ProductDiscountPredicate-io.sphere.sdk.productdiscounts.ProductDiscountValue-java.lang.String-boolean-">
+<a name="of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.productdiscounts.ProductDiscountPredicate-io.sphere.sdk.productdiscounts.ProductDiscountValue-java.lang.String-boolean-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountDraft.html" title="class in io.sphere.sdk.productdiscounts">ProductDiscountDraft</a>&nbsp;of(<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;name,
-                                      java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;description,
+                                      <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;description,
                                       <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountPredicate.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountPredicate</a>&nbsp;predicate,
                                       <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscountValue</a>&nbsp;value,
                                       java.lang.String&nbsp;sortOrder,

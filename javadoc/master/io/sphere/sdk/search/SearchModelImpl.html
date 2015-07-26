@@ -144,12 +144,7 @@ implements <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="in
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchModelImpl.html#SearchModelImpl-java.util.Optional-java.util.Optional-">SearchModelImpl</a></span>(java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;&gt;&nbsp;parent,
-               java.util.Optional&lt;java.lang.String&gt;&nbsp;pathSegment)</code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchModelImpl.html#SearchModelImpl-java.util.Optional-java.lang.String-">SearchModelImpl</a></span>(java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;&gt;&nbsp;parent,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchModelImpl.html#SearchModelImpl-io.sphere.sdk.search.SearchModel-java.lang.String-">SearchModelImpl</a></span>(<a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;&nbsp;parent,
                java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
 </table>
@@ -168,11 +163,11 @@ implements <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="in
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchModelImpl.html#getParent--">getParent</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchModelImpl.html#getPathSegment--">getPathSegment</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -211,24 +206,16 @@ implements <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="in
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="SearchModelImpl-java.util.Optional-java.lang.String-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>SearchModelImpl</h4>
-<pre>protected&nbsp;SearchModelImpl(java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;&gt;&nbsp;parent,
-                          java.lang.String&nbsp;pathSegment)</pre>
-</li>
-</ul>
-<a name="SearchModelImpl-java.util.Optional-java.util.Optional-">
+<a name="SearchModelImpl-io.sphere.sdk.search.SearchModel-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>SearchModelImpl</h4>
-<pre>protected&nbsp;SearchModelImpl(java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;&gt;&nbsp;parent,
-                          java.util.Optional&lt;java.lang.String&gt;&nbsp;pathSegment)</pre>
+<pre>protected&nbsp;SearchModelImpl(@Nullable
+                          <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;&nbsp;parent,
+                          @Nullable
+                          java.lang.String&nbsp;pathSegment)</pre>
 </li>
 </ul>
 </li>
@@ -245,7 +232,7 @@ implements <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="in
 <ul class="blockList">
 <li class="blockList">
 <h4>getPathSegment</h4>
-<pre>public&nbsp;java.util.Optional&lt;java.lang.String&gt;&nbsp;getPathSegment()</pre>
+<pre>public&nbsp;java.lang.String&nbsp;getPathSegment()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/SearchModel.html#getPathSegment--">getPathSegment</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;</code></dd>
@@ -258,7 +245,8 @@ implements <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="in
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getParent</h4>
-<pre>public&nbsp;java.util.Optional&lt;? extends <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;&gt;&nbsp;getParent()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;&nbsp;getParent()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/SearchModel.html#getParent--">getParent</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="type parameter in SearchModelImpl">T</a>&gt;</code></dd>

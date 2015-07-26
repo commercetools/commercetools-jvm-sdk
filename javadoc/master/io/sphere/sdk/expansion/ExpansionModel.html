@@ -138,11 +138,11 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#parentPath">parentPath</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#path">path</a></span></code>&nbsp;</td>
 </tr>
 </table>
@@ -165,11 +165,6 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#ExpansionModel--">ExpansionModel</a></span>()</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#ExpansionModel-java.util.Optional-java.util.Optional-">ExpansionModel</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;parentPath,
-              java.util.Optional&lt;java.lang.String&gt;&nbsp;path)</code>&nbsp;</td>
-</tr>
-<tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#ExpansionModel-java.lang.String-java.lang.String-">ExpansionModel</a></span>(java.lang.String&nbsp;parentPath,
               java.lang.String&nbsp;path)</code>&nbsp;</td>
@@ -198,8 +193,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#expansionPath-java.lang.String-">expansionPath</a></span>(java.lang.String&nbsp;path)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>protected java.util.Optional&lt;java.lang.String&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#pathExpressionOption--">pathExpressionOption</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>protected java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/expansion/ExpansionModel.html#pathExpression--">pathExpression</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -236,7 +231,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>parentPath</h4>
-<pre>protected final&nbsp;java.util.Optional&lt;java.lang.String&gt; parentPath</pre>
+<pre>@Nullable
+protected final&nbsp;java.lang.String parentPath</pre>
 </li>
 </ul>
 <a name="path">
@@ -245,7 +241,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockListLast">
 <li class="blockList">
 <h4>path</h4>
-<pre>protected final&nbsp;java.util.Optional&lt;java.lang.String&gt; path</pre>
+<pre>@Nullable
+protected final&nbsp;java.lang.String path</pre>
 </li>
 </ul>
 </li>
@@ -256,23 +253,15 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="ExpansionModel-java.util.Optional-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>ExpansionModel</h4>
-<pre>protected&nbsp;ExpansionModel(java.util.Optional&lt;java.lang.String&gt;&nbsp;parentPath,
-                         java.util.Optional&lt;java.lang.String&gt;&nbsp;path)</pre>
-</li>
-</ul>
 <a name="ExpansionModel-java.lang.String-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>ExpansionModel</h4>
-<pre>protected&nbsp;ExpansionModel(java.lang.String&nbsp;parentPath,
+<pre>protected&nbsp;ExpansionModel(@Nullable
+                         java.lang.String&nbsp;parentPath,
+                         @Nullable
                          java.lang.String&nbsp;path)</pre>
 </li>
 </ul>
@@ -302,13 +291,14 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <pre>protected final&nbsp;java.lang.String&nbsp;buildPathExpression()</pre>
 </li>
 </ul>
-<a name="pathExpressionOption--">
+<a name="pathExpression--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>pathExpressionOption</h4>
-<pre>protected final&nbsp;java.util.Optional&lt;java.lang.String&gt;&nbsp;pathExpressionOption()</pre>
+<h4>pathExpression</h4>
+<pre>@Nullable
+protected final&nbsp;java.lang.String&nbsp;pathExpression()</pre>
 </li>
 </ul>
 <a name="expansionPath-java.lang.String-">

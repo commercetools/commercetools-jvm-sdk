@@ -115,7 +115,7 @@ extends <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html" titl
  <p>The usage:</p>
 
  <div id="io-sphere-sdk-products-attributeaccess-staticmethodstyle-Usage-demo--%s" class=code-example><pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
-Optional&lt;LocalizedStrings&gt; longDescription = variant.getAttribute(TShirt.longDescription());
+Optional&lt;LocalizedStrings&gt; longDescription = variant.findAttribute(TShirt.longDescription());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/staticmethodstyle/Usage.java" target="_blank">test code</a>.</pre></div>
  <p>The declaration:</p>
 
@@ -139,7 +139,7 @@ import io.sphere.sdk.models.LocalizedStrings;
  <p>The usage:</p>
 
  <div id="io-sphere-sdk-products-attributeaccess-staticattributestyle-Usage-demo--%s" class=code-example><pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
-Optional&lt;LocalizedStrings&gt; longDescription = variant.getAttribute(TShirt.LONG_DESCRIPTION);
+Optional&lt;LocalizedStrings&gt; longDescription = variant.findAttribute(TShirt.LONG_DESCRIPTION);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/staticattributestyle/Usage.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -163,7 +163,7 @@ import io.sphere.sdk.models.LocalizedStrings;
  <p>The usage:</p>
 
  <div id="io-sphere-sdk-products-attributeaccess-interfacesstaticmethodstyle-Usage-demo--%s" class=code-example><pre><code class='java'>ProductVariant variant = getProductVariantSomeHow();
-Optional&lt;LocalizedStrings&gt; longDescription = variant.getAttribute(TShirt.attributes().longDescription());
+Optional&lt;LocalizedStrings&gt; longDescription = variant.findAttribute(TShirt.attributes().longDescription());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/attributeaccess/interfacesstaticmethodstyle/Usage.java" target="_blank">test code</a>.</pre></div>
 
  <p>The declaration:</p>

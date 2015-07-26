@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":9,"i2":9};
+var methods = {"i0":10,"i1":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -124,7 +124,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
  <div id="io-sphere-sdk-categories-commands-CategoryUpdateCommandTest-setMetaKeywords--%s" class=code-example><pre><code class='java'>withPersistentCategory(client(), category -&gt; {
     final LocalizedStrings newValue = randomSlug();
     final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetMetaKeywords.of(newValue)));
-    assertThat(updatedCategory.getMetaKeywords()).contains(newValue);
+    assertThat(updatedCategory.getMetaKeywords()).isEqualTo(newValue);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/commands/CategoryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
@@ -146,16 +146,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/categories/commands/updateactions/SetMetaKeywords.html#getMetaKeywords--">getMetaKeywords</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/categories/commands/updateactions/SetMetaKeywords.html" title="class in io.sphere.sdk.categories.commands.updateactions">SetMetaKeywords</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/categories/commands/updateactions/SetMetaKeywords.html#of-io.sphere.sdk.models.LocalizedStrings-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;metaKeywords)</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/categories/commands/updateactions/SetMetaKeywords.html" title="class in io.sphere.sdk.categories.commands.updateactions">SetMetaKeywords</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/categories/commands/updateactions/SetMetaKeywords.html#of-java.util.Optional-">of</a></span>(java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;metaKeywords)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -199,16 +195,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/categories/commands/updateactions/SetMetaKeywords.html" title="class in io.sphere.sdk.categories.commands.updateactions">SetMetaKeywords</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;metaKeywords)</pre>
-</li>
-</ul>
-<a name="of-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/categories/commands/updateactions/SetMetaKeywords.html" title="class in io.sphere.sdk.categories.commands.updateactions">SetMetaKeywords</a>&nbsp;of(java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;metaKeywords)</pre>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/categories/commands/updateactions/SetMetaKeywords.html" title="class in io.sphere.sdk.categories.commands.updateactions">SetMetaKeywords</a>&nbsp;of(@Nullable
+                                 <a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;metaKeywords)</pre>
 </li>
 </ul>
 <a name="getMetaKeywords--">
@@ -217,7 +205,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getMetaKeywords</h4>
-<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getMetaKeywords()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getMetaKeywords()</pre>
 </li>
 </ul>
 </li>

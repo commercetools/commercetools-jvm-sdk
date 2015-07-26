@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":18,"i13":18,"i14":18,"i15":6,"i16":6,"i17":6,"i18":18,"i19":18,"i20":17};
+var methods = {"i0":18,"i1":18,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6,"i13":18,"i14":18,"i15":6,"i16":6,"i17":6,"i18":18,"i19":18,"i20":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -123,12 +123,16 @@ extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="int
 
  <div id="io-sphere-sdk-products-ProductProjectionTest-transformProductIntoProductProjection--%s" class=code-example><pre><code class='java'>final Product product = getProduct();
 
-final Optional&lt;ProductProjection&gt; staged = product.toProjection(ProductProjectionType.STAGED);
-assertThat(staged).overridingErrorMessage("staged is always present").isPresent();
-assertThat(staged.get().getName()).isEqualTo(product.getMasterData().getStaged().getName());
+final ProductProjection staged = product.toProjection(ProductProjectionType.STAGED);
 
-final Optional&lt;ProductProjection&gt; current = product.toProjection(ProductProjectionType.CURRENT);
-assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
+System.err.println("stged");
+System.err.println(staged);
+
+assertThat(staged).overridingErrorMessage("staged is always present").isNotNull();
+assertThat(staged.getName()).isEqualTo(product.getMasterData().getStaged().getName());
+
+final ProductProjection current = product.toProjection(ProductProjectionType.CURRENT);
+assertThat(current).overridingErrorMessage("current can be empty").isNull();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/ProductProjectionTest.java" target="_blank">test code</a>.</pre></div>
 
  <a href="../../../../io/sphere/sdk/products/ProductProjection.html#toReference--"><code>toReference()</code></a> returns not are reference to a <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> but to a <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a>.</div>
@@ -151,66 +155,66 @@ assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>default java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#findVariant-io.sphere.sdk.products.VariantIdentifier-">findVariant</a></span>(<a href="../../../../io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a>&nbsp;identifier)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>default java.util.List&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getAllVariants--">getAllVariants</a></span>()</code>
 <div class="block">Gets all variants in the product including the master variant as first element in the list.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getCategories--">getCategories</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getMasterVariant--">getMasterVariant</a></span>()</code>
 <div class="block">Returns the master variant.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getMetaDescription--">getMetaDescription</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getMetaKeywords--">getMetaKeywords</a></span>()</code>&nbsp;</td>
-</tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getMetaTitle--">getMetaTitle</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getMetaKeywords--">getMetaKeywords</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getName--">getName</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getMetaTitle--">getMetaTitle</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getName--">getName</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getProductType--">getProductType</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getSearchKeywords--">getSearchKeywords</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&gt;</code></td>
+<tr id="i12" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getTaxCategory--">getTaxCategory</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code>default java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;</code></td>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getVariant-int-">getVariant</a></span>(int&nbsp;variantId)</code>
 <div class="block">Finds a product variant by id.</div>
 </td>
-</tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code>default java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getVariant-io.sphere.sdk.products.VariantIdentifier-">getVariant</a></span>(<a href="../../../../io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a>&nbsp;identifier)</code>&nbsp;</td>
 </tr>
 <tr id="i14" class="altColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a></code></td>
@@ -273,7 +277,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">metaAttributesOf</a>, <a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Optional-java.util.Optional-java.util.Optional-">metaAttributesOf</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">metaAttributesOf</a>, <a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-">metaAttributesOf</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Referenceable">
@@ -364,7 +368,8 @@ assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
 <ul class="blockList">
 <li class="blockList">
 <h4>getDescription</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getDescription()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getDescription()</pre>
 </li>
 </ul>
 <a name="getMasterVariant--">
@@ -390,7 +395,8 @@ assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
 <ul class="blockList">
 <li class="blockList">
 <h4>getMetaDescription</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getMetaDescription()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getMetaDescription()</pre>
 </li>
 </ul>
 <a name="getMetaKeywords--">
@@ -399,7 +405,8 @@ assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
 <ul class="blockList">
 <li class="blockList">
 <h4>getMetaKeywords</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getMetaKeywords()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getMetaKeywords()</pre>
 </li>
 </ul>
 <a name="getMetaTitle--">
@@ -408,7 +415,8 @@ assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
 <ul class="blockList">
 <li class="blockList">
 <h4>getMetaTitle</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getMetaTitle()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getMetaTitle()</pre>
 </li>
 </ul>
 <a name="getName--">
@@ -463,13 +471,13 @@ assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
 </dl>
 </li>
 </ul>
-<a name="getVariant-io.sphere.sdk.products.VariantIdentifier-">
+<a name="findVariant-io.sphere.sdk.products.VariantIdentifier-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>getVariant</h4>
-<pre>default&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;&nbsp;getVariant(<a href="../../../../io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a>&nbsp;identifier)</pre>
+<h4>findVariant</h4>
+<pre>default&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;&nbsp;findVariant(<a href="../../../../io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a>&nbsp;identifier)</pre>
 </li>
 </ul>
 <a name="getVariant-int-">
@@ -478,7 +486,8 @@ assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
 <ul class="blockList">
 <li class="blockList">
 <h4>getVariant</h4>
-<pre>default&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&gt;&nbsp;getVariant(int&nbsp;variantId)</pre>
+<pre>@Nullable
+default&nbsp;<a href="../../../../io/sphere/sdk/products/ProductVariant.html" title="interface in io.sphere.sdk.products">ProductVariant</a>&nbsp;getVariant(int&nbsp;variantId)</pre>
 <div class="block">Finds a product variant by id.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -532,7 +541,8 @@ assertThat(current).overridingErrorMessage("current can be empty").isEmpty();
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getTaxCategory</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&gt;&nbsp;getTaxCategory()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;getTaxCategory()</pre>
 </li>
 </ul>
 </li>

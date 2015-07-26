@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -157,7 +157,7 @@ extends java.lang.RuntimeException</pre>
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&gt;</code></td>
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/SphereException.html#httpResponse">httpResponse</a></span></code>&nbsp;</td>
 </tr>
 </table>
@@ -211,7 +211,7 @@ extends java.lang.RuntimeException</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/SphereException.html#getAdditionalNotes--">getAdditionalNotes</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/SphereException.html#getHttpResponse--">getHttpResponse</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
@@ -219,11 +219,11 @@ extends java.lang.RuntimeException</pre>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/SphereException.html#getMessage--">getMessage</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/SphereException.html#getProjectKey--">getProjectKey</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;?&gt;&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;?&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/SphereException.html#getSphereRequest--">getSphereRequest</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
@@ -232,17 +232,13 @@ extends java.lang.RuntimeException</pre>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/SphereException.html#setProjectKey-java.util.Optional-">setProjectKey</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;projectKey)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/SphereException.html#setProjectKey-java.lang.String-">setProjectKey</a></span>(java.lang.String&nbsp;projectKey)</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code>void</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/SphereException.html#setProjectKey-java.lang.String-">setProjectKey</a></span>(java.lang.String&nbsp;projectKey)</code>&nbsp;</td>
-</tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/SphereException.html#setSphereRequest-io.sphere.sdk.client.SphereRequest-">setSphereRequest</a></span>(<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;?&gt;&nbsp;sphereRequest)</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>void</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/models/SphereException.html#setUnderlyingHttpResponse-io.sphere.sdk.http.HttpResponse-">setUnderlyingHttpResponse</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</code>&nbsp;</td>
 </tr>
@@ -281,7 +277,8 @@ extends java.lang.RuntimeException</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>httpResponse</h4>
-<pre>protected&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&gt; httpResponse</pre>
+<pre>@Nullable
+protected&nbsp;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a> httpResponse</pre>
 </li>
 </ul>
 </li>
@@ -343,7 +340,8 @@ extends java.lang.RuntimeException</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getProjectKey</h4>
-<pre>public final&nbsp;java.util.Optional&lt;java.lang.String&gt;&nbsp;getProjectKey()</pre>
+<pre>@Nullable
+public final&nbsp;java.lang.String&nbsp;getProjectKey()</pre>
 </li>
 </ul>
 <a name="getSphereRequest--">
@@ -352,7 +350,8 @@ extends java.lang.RuntimeException</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getSphereRequest</h4>
-<pre>public final&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;?&gt;&gt;&nbsp;getSphereRequest()</pre>
+<pre>@Nullable
+public final&nbsp;<a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;?&gt;&nbsp;getSphereRequest()</pre>
 </li>
 </ul>
 <a name="getHttpResponse--">
@@ -361,16 +360,8 @@ extends java.lang.RuntimeException</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>getHttpResponse</h4>
-<pre>public final&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&gt;&nbsp;getHttpResponse()</pre>
-</li>
-</ul>
-<a name="setProjectKey-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>setProjectKey</h4>
-<pre>public&nbsp;void&nbsp;setProjectKey(java.util.Optional&lt;java.lang.String&gt;&nbsp;projectKey)</pre>
+<pre>@Nullable
+public final&nbsp;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;getHttpResponse()</pre>
 </li>
 </ul>
 <a name="setProjectKey-java.lang.String-">

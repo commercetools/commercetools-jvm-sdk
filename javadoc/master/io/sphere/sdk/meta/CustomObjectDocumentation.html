@@ -486,13 +486,14 @@ import io.sphere.sdk.models.Base;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
-import java.util.Optional;
+import javax.annotation.Nullable;
 </code></pre><pre><code class='java'>public class Xyz extends Base {
     private final String foo;
-    private final Optional&lt;String&gt; bar;
+    @Nullable
+    private final String bar;
 
     @JsonCreator
-    public Xyz(final String foo, final Optional&lt;String&gt; bar) {
+    public Xyz(final String foo, @Nullable final String bar) {
         this.foo = foo;
         this.bar = bar;
     }
@@ -501,7 +502,8 @@ import java.util.Optional;
         return foo;
     }
 
-    public Optional&lt;String&gt; getBar() {
+    @Nullable
+    public String getBar() {
         return bar;
     }
 
@@ -516,8 +518,8 @@ import java.util.Optional;
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/version2/Xyz.java" target="_blank">test code</a>.</pre></div>
 
- <div id="io-sphere-sdk-customobjects-migrations-CustomObjectsMigrationsTest-optionalExample--%s" class=code-example><pre><code class='java'>final io.sphere.sdk.customobjects.migrations.version2.Xyz xyz = new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", Optional.of("bar"));
-final String bar = xyz.getBar().orElse("default value");
+ <div id="io-sphere-sdk-customobjects-migrations-CustomObjectsMigrationsTest-optionalExample--%s" class=code-example><pre><code class='java'>final io.sphere.sdk.customobjects.migrations.version2.Xyz xyz = new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", "bar");
+final String bar = Optional.ofNullable(xyz.getBar()).orElse("default value");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/CustomObjectsMigrationsTest.java" target="_blank">test code</a>.</pre></div>
 
  <h4 id=migrations-removing-fields>Removing fields</h4>
@@ -530,13 +532,14 @@ final String bar = xyz.getBar().orElse("default value");
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
-import java.util.Optional;
+import javax.annotation.Nullable;
 </code></pre><pre><code class='java'>public class Xyz extends Base {
     private final String foo;
-    private final Optional&lt;String&gt; bar;
+    @Nullable
+    private final String bar;
 
     @JsonCreator
-    public Xyz(final String foo, final Optional&lt;String&gt; bar) {
+    public Xyz(final String foo, @Nullable final String bar) {
         this.foo = foo;
         this.bar = bar;
     }
@@ -545,7 +548,8 @@ import java.util.Optional;
         return foo;
     }
 
-    public Optional&lt;String&gt; getBar() {
+    @Nullable
+    public String getBar() {
         return bar;
     }
 
@@ -566,16 +570,18 @@ import java.util.Optional;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
-import java.util.Optional;
+import javax.annotation.Nullable;
 </code></pre><pre><code class='java'>public class Xyz extends Base {
-    private final Optional&lt;String&gt; bar;
+    @Nullable
+    private final String bar;
 
     @JsonCreator
-    public Xyz(final Optional&lt;String&gt; bar) {
+    public Xyz(@Nullable final String bar) {
         this.bar = bar;
     }
 
-    public Optional&lt;String&gt; getBar() {
+    @Nullable
+    public String getBar() {
         return bar;
     }
 

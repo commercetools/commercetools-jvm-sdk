@@ -237,7 +237,7 @@ final ProductDraft draft = ProductDraftBuilder
 final Product product = client().execute(ProductCreateCommand.of(draft));
 
 final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
-assertThat(masterVariant.getAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
+assertThat(masterVariant.findAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
         .contains("978-3-86680-192-9");
 return product;
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
@@ -261,22 +261,22 @@ final ProductDraft draft = ProductDraftBuilder
 final Product product = client().execute(ProductCreateCommand.of(draft));
 
 final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
-assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
+assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
         .overridingErrorMessage("on the get side, the while enum is delivered")
         .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
-assertThat(masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
+assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
         .contains(PlainEnumValue.of("S", "S"));
 final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
         LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
 final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
         LocalizedStrings.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
-assertThat(masterVariant.getAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
+assertThat(masterVariant.findAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
         .contains(asSet(cold, tumbleDrying));
-assertThat(masterVariant.getAttribute(MATCHING_PRODUCTS_ATTR_NAME, AttributeAccess.ofProductReferenceSet()))
+assertThat(masterVariant.findAttribute(MATCHING_PRODUCTS_ATTR_NAME, AttributeAccess.ofProductReferenceSet()))
         .contains(asSet(similarProductReference));
-assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
+assertThat(masterVariant.findAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
         .contains(MoneyImpl.of(300, EUR));
-assertThat(masterVariant.getAttribute(AVAILABLE_SINCE_ATTR_NAME, AttributeAccess.ofDate()))
+assertThat(masterVariant.findAttribute(AVAILABLE_SINCE_ATTR_NAME, AttributeAccess.ofDate()))
         .contains(LocalDate.of(2015, 2, 2));
 
 return product;
@@ -338,13 +338,13 @@ final ProductDraft draft = ProductDraftBuilder
 final Product product = client().execute(ProductCreateCommand.of(draft));
 
 final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
-assertThat(masterVariant.getAttribute(color))
+assertThat(masterVariant.findAttribute(color))
         .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
-assertThat(masterVariant.getAttribute(size)).contains(PlainEnumValue.of("S", "S"));
-assertThat(masterVariant.getAttribute(laundrySymbols)).contains(asSet(cold, tumbleDrying));
-assertThat(masterVariant.getAttribute(matchingProducts)).contains(asSet(productReference));
-assertThat(masterVariant.getAttribute(rrp)).contains(MoneyImpl.of(300, EUR));
-assertThat(masterVariant.getAttribute(availableSince)).contains(LocalDate.of(2015, 2, 2));
+assertThat(masterVariant.findAttribute(size)).contains(PlainEnumValue.of("S", "S"));
+assertThat(masterVariant.findAttribute(laundrySymbols)).contains(asSet(cold, tumbleDrying));
+assertThat(masterVariant.findAttribute(matchingProducts)).contains(asSet(productReference));
+assertThat(masterVariant.findAttribute(rrp)).contains(MoneyImpl.of(300, EUR));
+assertThat(masterVariant.findAttribute(availableSince)).contains(LocalDate.of(2015, 2, 2));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -359,7 +359,7 @@ assertThat(masterVariant.getAttribute(availableSince)).contains(LocalDate.of(201
 
 final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-final Optional&lt;PlainEnumValue&gt; attributeOption = masterVariant.getAttribute(size);
+final Optional&lt;PlainEnumValue&gt; attributeOption = masterVariant.findAttribute(size);
 assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -368,7 +368,7 @@ assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-readAttributeWithoutProductTypeWithName--%s" class=code-example><pre><code class='java'>final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
 final Optional&lt;PlainEnumValue&gt; attributeOption =
-        masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue());
+        masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue());
 assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -376,9 +376,9 @@ assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-readAttributeWithoutProductTypeWithJson--%s" class=code-example><pre><code class='java'>final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-final Optional&lt;Attribute&gt; attributeOption = masterVariant.getAttribute(SIZE_ATTR_NAME);
+final Attribute attr = masterVariant.getAttribute(SIZE_ATTR_NAME);
 final JsonNode expectedJsonNode = SphereJsonUtils.toJsonNode(PlainEnumValue.of("S", "S"));
-assertThat(attributeOption.get().getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
+assertThat(attr.getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -386,7 +386,7 @@ assertThat(attributeOption.get().getValue(AttributeAccess.ofJsonNode())).isEqual
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-notPresentAttributeRead--%s" class=code-example><pre><code class='java'>final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-final Optional&lt;Boolean&gt; attributeOption = masterVariant.getAttribute("notpresent", AttributeAccess.ofBoolean());
+final Optional&lt;Boolean&gt; attributeOption = masterVariant.findAttribute("notpresent", AttributeAccess.ofBoolean());
 assertThat(attributeOption).isEmpty();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -394,7 +394,7 @@ assertThat(attributeOption).isEmpty();
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-readAttributeWithoutProductTypeWithNamedAccessWithWrongType--%s" class=code-example><pre><code class='java'>final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-assertThatThrownBy(() -&gt; masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofBoolean()))
+assertThatThrownBy(() -&gt; masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofBoolean()))
         .isInstanceOf(JsonException.class);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -428,37 +428,36 @@ final List&lt;String&gt; attrNamesToShow = asList(COLOR_ATTR_NAME, SIZE_ATTR_NAM
 
 final Product product = createProduct();
 final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
-        .withPredicate(m -&gt; m.id().is(product.getId()))
+        .withPredicates(m -&gt; m.id().is(product.getId()))
         .plusExpansionPaths(m -&gt; m.masterVariant().attributes().valueSet())
         .plusExpansionPaths(m -&gt; m.productType());
 
 final ProductProjection productProjection = execute(query).head().get();
 
-final ProductType productType = productProjection.getProductType().getObj().get();
+final ProductType productType = productProjection.getProductType().getObj();
 final ProductVariant masterVariant = productProjection.getMasterVariant();
 final List&lt;Attribute&gt; attributes = masterVariant.getAttributes();
 final MonetaryAmountFormat moneyFormat = MonetaryFormats.getAmountFormat(US);
 
 final Function&lt;Attribute, Optional&lt;Pair&lt;String, String&gt;&gt;&gt; attributeValueExtractor = attribute -&gt; {
     final Optional&lt;String&gt; extractedResult = AttributeExtraction.&lt;String&gt;of(productType, attribute)
-            .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -&gt; v.getLabel().get(ENGLISH).orElse(""))
+            .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -&gt; v.getLabel().find(ENGLISH).orElse(""))
             .ifIs(AttributeAccess.ofPlainEnumValue(), v -&gt; v.getLabel())
             .ifIs(AttributeAccess.ofLocalizedEnumValueSet(), v -&gt;
                     v.stream()
                             .map(x -&gt; x.getLabel().get(ENGLISH))
-                            .filter(x -&gt; x.isPresent())
-                            .map(x -&gt; x.get())
+                            .filter(x -&gt; x != null)
                             .collect(joining(", ")))
             .ifIs(AttributeAccess.ofProductReferenceSet(), set -&gt; set.stream()
-                    .map(productReference -&gt; productReference.getObj()
-                            .map(prod -&gt; prod.getMasterData().getStaged().getName().get(ENGLISH).orElse(""))
+                    .map(productReference -&gt; Optional.ofNullable(productReference.getObj())
+                            .map(prod -&gt; prod.getMasterData().getStaged().getName().find(ENGLISH).orElse(""))
                             .orElse(productReference.getId()))
                     .collect(joining(", ")))
             .ifIs(AttributeAccess.ofMoney(), money -&gt; moneyFormat.format(money))
             .ifIs(AttributeAccess.ofDate(), date -&gt; date.toString())
-            .getValue();
+            .findValue();
     final Optional&lt;Pair&lt;String, String&gt;&gt; tableRowData = extractedResult.map(value -&gt; {
-        final String label = productType.getAttribute(attribute.getName()).get().getLabel().get(ENGLISH).get();
+        final String label = productType.getAttribute(attribute.getName()).getLabel().get(ENGLISH);
         return ImmutablePair.of(label, value);
     });
     return tableRowData;
@@ -525,7 +524,7 @@ final SetAttribute updateAction = SetAttribute.of(masterVariantId, attributeDraf
 final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateAction));
 
 final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
-assertThat(masterVariant.getAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
+assertThat(masterVariant.findAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText()))
         .contains("978-3-86680-192-8");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -544,15 +543,15 @@ final List&lt;SetAttribute&gt; updateActions = asList(
 final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateActions));
 
 final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
-assertThat(masterVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
+assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
         .contains(LocalizedEnumValue.of("red", LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot")));
-assertThat(masterVariant.getAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
+assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
         .contains(PlainEnumValue.of("M", "M"));
 final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
         LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
-assertThat(masterVariant.getAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
+assertThat(masterVariant.findAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
         .contains(asSet(cold));
-assertThat(masterVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
+assertThat(masterVariant.findAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
         .contains(MoneyImpl.of(20, EUR));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -575,11 +574,11 @@ assertThatThrownBy(() -&gt; execute(ProductUpdateCommand.of(product,
 final Reference&lt;Product&gt; productReference = referencedProduct.toReference();
 assertThat(productReference.getObj())
         .overridingErrorMessage("product reference is expanded")
-        .isPresent();
+        .isNotNull();
 final AttributeAccess&lt;Reference&lt;Product&gt;&gt; access = AttributeAccess.ofProductReference();
 final Attribute attribute = Attribute.of("attrname", access, productReference);
 assertThat(attribute.getValue(access)).isEqualTo(productReference);
-assertThat(attribute.getValue(access).getObj()).isPresent();
+assertThat(attribute.getValue(access).getObj()).isNotNull();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="attributes-in-order-import">Create attributes for importing orders</h3>
@@ -610,10 +609,10 @@ final Order order = execute(OrderImportCommand.of(orderImportDraft));
 
 final ProductVariant productVariant = order.getLineItems().get(0).getVariant();
 final Optional&lt;LocalizedEnumValue&gt; colorAttribute =
-        productVariant.getAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue());
+        productVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue());
 assertThat(colorAttribute).contains(yellow);
 final Optional&lt;MonetaryAmount&gt; rrpAttribute =
-        productVariant.getAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney());
+        productVariant.findAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney());
 assertThat(rrpAttribute).contains(EURO_30);
 final Set&lt;String&gt; presentAttributes = productVariant.getAttributes().stream()
         .map(attr -&gt; attr.getName())
@@ -686,8 +685,8 @@ import static java.util.stream.Collectors.toList;
                     withProduct(client(), productDraftBuilder, product -&gt; {
                         final AttributeContainer attrs = product.getMasterData().getStaged().getMasterVariant();
 
-                        assertThat(attrs.getAttribute(Banana.bananaColor)).contains("blue");
-                        assertThat(attrs.getAttribute(Banana.nutrients).map(Set::size)).contains(2);
+                        assertThat(attrs.findAttribute(Banana.bananaColor)).contains("blue");
+                        assertThat(attrs.findAttribute(Banana.nutrients).map(Set::size)).contains(2);
 
                         final List&lt;AttributeContainer&gt; nutrients = getSortedNutrients(attrs);
 
@@ -704,31 +703,31 @@ import static java.util.stream.Collectors.toList;
     }
 
     private List&lt;AttributeContainer&gt; getSortedNutrients(final AttributeContainer banana) {
-        return banana.getAttribute(Banana.nutrients).get().stream()
-                .sorted((c1, c2) -&gt; c1.getAttribute(Nutrient.servingSize).get().compareTo(c2.getAttribute(Nutrient.servingSize).get()))
+        return banana.findAttribute(Banana.nutrients).get().stream()
+                .sorted((c1, c2) -&gt; c1.findAttribute(Nutrient.servingSize).get().compareTo(c2.findAttribute(Nutrient.servingSize).get()))
                 .collect(toList());
     }
 
     private List&lt;AttributeContainer&gt; getNutrientInfos(final AttributeContainer nutrient) {
-        return nutrient.getAttribute(Nutrient.nutrientInformation).get().stream()
-                .sorted((c1, c2) -&gt; c1.getAttribute(NutrientInfo.nutrientTypeCode).get().compareTo(c2.getAttribute(NutrientInfo.nutrientTypeCode).get()))
+        return nutrient.findAttribute(Nutrient.nutrientInformation).get().stream()
+                .sorted((c1, c2) -&gt; c1.findAttribute(NutrientInfo.nutrientTypeCode).get().compareTo(c2.findAttribute(NutrientInfo.nutrientTypeCode).get()))
                 .collect(toList());
     }
 
     private void assertNutrient(final AttributeContainer nutrient, final double servingSize,
                                 final String servingSizeUOM, final int nutrientInformationSize) {
-        assertThat(nutrient.getAttribute(Nutrient.servingSize)).contains(servingSize);
-        assertThat(nutrient.getAttribute(Nutrient.servingSizeUOM)).contains(servingSizeUOM);
-        assertThat(nutrient.getAttribute(Nutrient.nutrientInformation).map(Set::size)).contains(nutrientInformationSize);
+        assertThat(nutrient.findAttribute(Nutrient.servingSize)).contains(servingSize);
+        assertThat(nutrient.findAttribute(Nutrient.servingSizeUOM)).contains(servingSizeUOM);
+        assertThat(nutrient.findAttribute(Nutrient.nutrientInformation).map(Set::size)).contains(nutrientInformationSize);
     }
 
     private void assertNutrientInfo(final AttributeContainer nutrientInfo, final String nutrientTypeCode,
                                     final String measurementPrecision, final double quantityContained,
                                     final String quantityContainedUOM) {
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.nutrientTypeCode)).contains(nutrientTypeCode);
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.measurementPrecision)).contains(measurementPrecision);
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.quantityContained)).contains(quantityContained);
-        assertThat(nutrientInfo.getAttribute(NutrientInfo.quantityContainedUOM)).contains(quantityContainedUOM);
+        assertThat(nutrientInfo.findAttribute(NutrientInfo.nutrientTypeCode)).contains(nutrientTypeCode);
+        assertThat(nutrientInfo.findAttribute(NutrientInfo.measurementPrecision)).contains(measurementPrecision);
+        assertThat(nutrientInfo.findAttribute(NutrientInfo.quantityContained)).contains(quantityContained);
+        assertThat(nutrientInfo.findAttribute(NutrientInfo.quantityContainedUOM)).contains(quantityContainedUOM);
     }
 
     private ProductVariantDraft createBananaVariant() {

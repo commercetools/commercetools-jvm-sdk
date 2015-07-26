@@ -130,7 +130,7 @@
 
     final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
     final State updatedState = execute(command);
-    assertThat(updatedState.getName()).contains(newName);
+    assertThat(updatedState.getName()).isEqualTo(newName);
     return updatedState;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/states/commands/StateUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -144,15 +144,15 @@
         final Set&lt;Reference&lt;State&gt;&gt; transitions = asSet(stateA.toReference());
         final StateUpdateCommand command = StateUpdateCommand.of(stateB, SetTransitions.of(transitions));
         final State updatedStateB = execute(command);
-        assertThat(updatedStateB.getTransitions()).contains(transitions);
+        assertThat(updatedStateB.getTransitions()).isEqualTo(transitions);
 
         //check reference expansion
         final State loadedStateB = execute(StateByIdFetch.of(stateB).withExpansionPaths(m -&gt; m.transitions()));
-        final Reference&lt;State&gt; stateReference = new LinkedList&lt;&gt;(loadedStateB.getTransitions().get()).getFirst();
-        assertThat(stateReference.getObj()).isPresent();
+        final Reference&lt;State&gt; stateReference = new LinkedList&lt;&gt;(loadedStateB.getTransitions()).getFirst();
+        assertThat(stateReference.getObj()).isNotNull();
 
-        final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(Optional.empty())));
-        assertThat(updatedStateBWithoutTransitions.getTransitions()).isEmpty();
+        final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of()));
+        assertThat(updatedStateBWithoutTransitions.getTransitions()).isNull();
 
         return updatedStateBWithoutTransitions;
     });

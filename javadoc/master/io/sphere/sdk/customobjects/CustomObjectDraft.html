@@ -151,7 +151,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#getValue--">getValue</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.Long&gt;</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#getVersion--">getVersion</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
@@ -368,7 +368,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <div class="block">Creates a draft for creating or updating a custom object. Does not use optimistic concurrency control so the last update wins.
 
  It is an alias of
- <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#CustomObjectDraft-java.lang.String-java.lang.String-T-java.util.Optional-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft(String, String, Object, java.util.Optional, com.fasterxml.jackson.core.type.TypeReference)</code></a>
+ <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#CustomObjectDraft-java.lang.String-java.lang.String-T-java.lang.Long-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft(String, String, Object, Long, com.fasterxml.jackson.core.type.TypeReference)</code></a>
  with pure JSON as value for the custom object.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -386,7 +386,8 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <ul class="blockList">
 <li class="blockList">
 <h4>getVersion</h4>
-<pre>public&nbsp;java.util.Optional&lt;java.lang.Long&gt;&nbsp;getVersion()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.Long&nbsp;getVersion()</pre>
 </li>
 </ul>
 <a name="withVersion-long-">

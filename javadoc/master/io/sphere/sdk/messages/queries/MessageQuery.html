@@ -112,12 +112,12 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForAllMessages--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final MessageQuery query = MessageQuery.of()
             //example predicate to fetch for a specific message type
-            .withPredicate(m -&gt; m.type().is("ReturnInfoAdded"))
+            .withPredicates(m -&gt; m.type().is("ReturnInfoAdded"))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource())
             .withLimit(1);
     final Message message = execute(query).head().get();
-    assertThat(message.getResource().getObj()).isPresent();
+    assertThat(message.getResource().getObj()).isNotNull();
     assertThat(message.getResource()).isEqualTo(order.toReference());
     assertThat(message.getResource().getId()).isEqualTo(order.getId());
 }));
@@ -134,7 +134,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
     final PagedQueryResult&lt;ReturnInfoAddedMessage&gt; pagedQueryResult = execute(query);
     final ReturnInfoAddedMessage message = pagedQueryResult.head().get();
     assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
-    assertThat(message.getResource().getObj()).isPresent();
+    assertThat(message.getResource().getObj()).isNotNull();
     assertThat(message.getResource().getId()).isEqualTo(order.getId());
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
@@ -142,7 +142,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <p>Query for any message and then convert into specific messages:</p>
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-convertAfterQueryToSpecificMessageClasses--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final MessageQuery query = MessageQuery.of()
-            .withPredicate(m -&gt; m.resource().is(order))
+            .withPredicates(m -&gt; m.resource().is(order))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource());
     final List&lt;Message&gt; results = execute(query).getResults();
@@ -158,7 +158,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
             returnInfoAddedUntypedMessage.as(ReturnInfoAddedMessage.class);
 
     assertThat(order.getReturnInfo()).contains(returnInfoAddedMessage.getReturnInfo());
-    final Order expandedOrder = returnInfoAddedMessage.getResource().getObj().get();
+    final Order expandedOrder = returnInfoAddedMessage.getResource().getObj();
     assertThat(expandedOrder.getCreatedAt()).isEqualTo(order.getCreatedAt());
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
@@ -166,13 +166,13 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <p>Query for any message for a specific resource like orders:</p>
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForASpecificResource--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final Query&lt;SimpleOrderMessage&gt; query = MessageQuery.of()
-            .withPredicate(m -&gt; m.resource().id().is(order.getId()))
+            .withPredicates(m -&gt; m.resource().id().is(order.getId()))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource())
             .forMessageType(SimpleOrderMessage.MESSAGE_HINT);
     final List&lt;SimpleOrderMessage&gt; results = execute(query).getResults();
 
-    final Optional&lt;Order&gt; orderOptional = results.get(0).getResource().getObj();
+    final Optional&lt;Order&gt; orderOptional = Optional.ofNullable(results.get(0).getResource().getObj());
     assertThat(orderOptional.map(o -&gt; o.getCreatedAt())).contains(order.getCreatedAt());
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
@@ -180,7 +180,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <p>If you convert a message to the wrong class the behaviour is undefined, but then still null pointer exceptions can occur:</p>
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-convertAfterQueryToSpecificMessageClassesButToTheWrongOne--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final MessageQuery query = MessageQuery.of()
-            .withPredicate(m -&gt; m.resource().id().is(order.getId()))
+            .withPredicates(m -&gt; m.resource().id().is(order.getId()))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource());
     final List&lt;Message&gt; results = execute(query).getResults();
@@ -252,7 +252,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withLimit-long-">withLimit</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withOffset-long-">withOffset</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicate-java.util.function.Function-">withPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicate-io.sphere.sdk.queries.QueryPredicate-">withPredicate</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-java.util.function.Function-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-java.util.List-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSortMulti-java.util.function.Function-">withSortMulti</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-java.util.function.Function-">plusPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-">plusPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withLimit-long-">withLimit</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withOffset-long-">withOffset</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-java.util.function.Function-">withPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-java.util.List-">withPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-java.util.function.Function-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-java.util.List-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort</a>, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withSortMulti-java.util.function.Function-">withSortMulti</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.QueryDsl">
@@ -266,7 +266,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.queries.<a href="../../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a></h3>
-<code><a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#endpoint--">endpoint</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#expansionPaths--">expansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#fetchTotal--">fetchTotal</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#limit--">limit</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#offset--">offset</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#predicate--">predicate</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#sort--">sort</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#endpoint--">endpoint</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#expansionPaths--">expansionPaths</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#fetchTotal--">fetchTotal</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#limit--">limit</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#offset--">offset</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#predicates--">predicates</a>, <a href="../../../../../io/sphere/sdk/queries/EntityQuery.html#sort--">sort</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.queries.Query">

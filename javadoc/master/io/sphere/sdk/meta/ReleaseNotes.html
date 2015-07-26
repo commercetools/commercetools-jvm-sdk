@@ -158,7 +158,7 @@ extends java.lang.Object</pre>
  <p>Benefits of the new API:</p>
 
  <div id="example-QueryMetaDslDemo-demo1--%s" class=code-example><pre><code class='java'>final ProductProjectionQuery query = ProductProjectionQuery.ofCurrent()
-        .withPredicate(m -&gt; m.productType().id().is("product-type-id-1"))
+        .withPredicates(m -&gt; m.productType().id().is("product-type-id-1"))
         .withSort(m -&gt; m.name().lang(Locale.ENGLISH).sort().asc())
         .withExpansionPaths(m -&gt; m.productType());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryMetaDslDemo.java" target="_blank">test code</a>.</pre></div>
@@ -170,7 +170,7 @@ final ProductProjectionQueryModel queryModel = ProductProjectionQueryModel.of();
 final ProductProjectionExpansionModel&lt;ProductProjection&gt; expansionModel = ProductProjectionExpansionModel.of();
 
 final ProductProjectionQuery query = ProductProjectionQuery.ofCurrent()
-        .withPredicate(queryModel.productType().id().is("product-type-id-1"))
+        .withPredicates(queryModel.productType().id().is("product-type-id-1"))
         .withSort(queryModel.name().lang(Locale.ENGLISH).sort().asc())
         .withExpansionPaths(expansionModel.productType());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/example/QueryMetaDslDemo.java" target="_blank">test code</a>.</pre></div>
@@ -348,7 +348,7 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
  Example: List&lt;ChangeName&gt; can be assigned where ChangeName extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands"><code>UpdateAction</code></a>.</li>
 
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/models/Address.html#of-com.neovisionaries.i18n.CountryCode-"><code>Address.of(com.neovisionaries.i18n.CountryCode)</code></a>.</li>
- <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/carts/CartLike.html#getLineItem-java.lang.String-"><code>CartLike.getLineItem(String)</code></a> and <a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomLineItem-java.lang.String-"><code>CartLike.getCustomLineItem(String)</code></a> to find items in a cart.</li>
+ <li class=new-in-release>Added <code>io.sphere.sdk.carts.Cart#getLineItem(String)</code> and <code>io.sphere.sdk.carts.Cart#getCustomLineItem(String)</code> to find items in a cart.</li>
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/ProductProjection.html#getAllVariants--"><code>ProductProjection.getAllVariants()</code></a> to receive master variant and all other variants in one call. <a href="../../../../io/sphere/sdk/products/ProductProjection.html#getVariants--"><code>ProductProjection.getVariants()</code></a> just returns all variants except the master variant.</li>
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/ProductProjection.html#getVariant-int-"><code>ProductProjection.getVariant(int)</code></a> and <a href="../../../../io/sphere/sdk/products/ProductProjection.html#getVariantOrMaster-int-"><code>ProductProjection.getVariantOrMaster(int)</code></a> to find a product variant by id.</li>
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products"><code>VariantIdentifier</code></a> to have a container to address product variants which needs a product ID and a variant ID.</li>

@@ -109,7 +109,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" ti
 <div class="block"><div id="io-sphere-sdk-messages-queries-MessageByIdFetchTest-execution--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     //query one message since message creation is not directly possible
     final MessageQuery query = MessageQuery.of()
-            .withPredicate(m -&gt; m.type().is("ReturnInfoAdded"))
+            .withPredicates(m -&gt; m.type().is("ReturnInfoAdded"))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withLimit(1);
     final Message messageFromQueryEndpoint = execute(query).head().get();

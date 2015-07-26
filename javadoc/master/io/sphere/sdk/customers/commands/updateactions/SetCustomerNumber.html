@@ -123,7 +123,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <div class="block">Sets a string that uniquely identifies a customer. It can be used to create more human-readable (in contrast to ID) identifier for the customer.
 
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCustomerNumber--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    assertThat(customer.getCustomerNumber()).isEmpty();
+    assertThat(customer.getCustomerNumber()).isNull();
 
     final String customerNumber = randomString();
     final Customer updatedCustomer =

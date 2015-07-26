@@ -139,7 +139,7 @@ final ProductDiscountPredicate predicate =
         ProductDiscountPredicate.of("product.id = \"" + product.getId() + "\"");
 final AbsoluteProductDiscountValue discountValue = AbsoluteProductDiscountValue.of(EURO_1);
 final LocalizedStrings name = en("demo product discount");
-final Optional&lt;LocalizedStrings&gt; description = Optional.of(en("description"));
+final LocalizedStrings description = en("description");
 final boolean active = true;
 final String sortOrder = randomSortOrder();
 final ProductDiscountDraft discountDraft =
@@ -163,7 +163,7 @@ final List&lt;Price&gt; productPrices = discountedProduct.getMasterData().getSta
 
 assertThat(productPrices)
         .overridingErrorMessage("discount object in price is expanded")
-        .matches(prices -&gt; prices.stream().anyMatch(price -&gt; price.getDiscounted().get().getDiscount().getObj().isPresent()));
+        .matches(prices -&gt; prices.stream().anyMatch(price -&gt; price.getDiscounted().getDiscount().getObj() != null));
 //clean up test
 execute(ProductDiscountDeleteCommand.of(productDiscount));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

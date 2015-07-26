@@ -111,9 +111,9 @@
         final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
                         .plusExpansionPaths(m -&gt; m.zoneRates().zone())
         );
-        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
         assertThat(loadedShippingMethod.getZones().get(0).getObj())
-                .overridingErrorMessage("the convenience method also has expanded references").isPresent();
+                .overridingErrorMessage("the convenience method also has expanded references").isNotNull();
 
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
@@ -157,9 +157,9 @@
         final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
                         .plusExpansionPaths(m -&gt; m.zoneRates().zone())
         );
-        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
         assertThat(loadedShippingMethod.getZones().get(0).getObj())
-                .overridingErrorMessage("the convenience method also has expanded references").isPresent();
+                .overridingErrorMessage("the convenience method also has expanded references").isNotNull();
 
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
@@ -181,7 +181,7 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions">ChangeIsDefault</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeIsDefault--%s" class=code-example><pre><code class='java'>//only one can be default one, so clean up if there is any
-final Query&lt;ShippingMethod&gt; query = ShippingMethodQuery.of().withPredicate(QueryPredicate.of("isDefault = true"));
+final Query&lt;ShippingMethod&gt; query = ShippingMethodQuery.of().withPredicates(QueryPredicate.of("isDefault = true"));
 final Optional&lt;ShippingMethod&gt; defaultShippingMethodOption = execute(query).head();
 defaultShippingMethodOption.ifPresent(sm -&gt; execute(ShippingMethodUpdateCommand.of(sm, ChangeIsDefault.toFalse())));
 
@@ -253,9 +253,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
         final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
                         .plusExpansionPaths(m -&gt; m.zoneRates().zone())
         );
-        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
         assertThat(loadedShippingMethod.getZones().get(0).getObj())
-                .overridingErrorMessage("the convenience method also has expanded references").isPresent();
+                .overridingErrorMessage("the convenience method also has expanded references").isNotNull();
 
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
@@ -299,9 +299,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
         final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
                         .plusExpansionPaths(m -&gt; m.zoneRates().zone())
         );
-        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isPresent();
+        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
         assertThat(loadedShippingMethod.getZones().get(0).getObj())
-                .overridingErrorMessage("the convenience method also has expanded references").isPresent();
+                .overridingErrorMessage("the convenience method also has expanded references").isNotNull();
 
         //removeShippingRate
         final ShippingMethod shippingMethodWithoutShippingRate =
@@ -324,10 +324,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableShippingMethod(client(), shippingMethod -&gt; {
     final String newDescription = randomString();
-    assertThat(shippingMethod.getDescription()).isNotEqualTo(Optional.of(newDescription));
+    assertThat(shippingMethod.getDescription()).isNotEqualTo(newDescription);
     final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
     final ShippingMethod updatedShippingMethod = execute(cmd);
-    assertThat(updatedShippingMethod.getDescription().get()).isEqualTo(newDescription);
+    assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);
     return updatedShippingMethod;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

@@ -158,9 +158,9 @@ assertThat(cartDiscount.getValue()).isEqualTo(value);
 assertThat(cartDiscount.getTarget()).isEqualTo(target);
 assertThat(cartDiscount.getSortOrder()).isEqualTo(sortOrder);
 assertThat(cartDiscount.isRequiringDiscountCode()).isEqualTo(requiresDiscountCode);
-assertThat(cartDiscount.getValidFrom()).contains(validFrom);
-assertThat(cartDiscount.getValidUntil()).contains(validUntil);
-assertThat(cartDiscount.getDescription()).contains(description);
+assertThat(cartDiscount.getValidFrom()).isEqualTo(validFrom);
+assertThat(cartDiscount.getValidUntil()).isEqualTo(validUntil);
+assertThat(cartDiscount.getDescription()).isEqualTo(description);
 assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

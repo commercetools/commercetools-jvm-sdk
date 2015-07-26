@@ -125,7 +125,7 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getBillingAddress--">getBillingAddress</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -133,21 +133,21 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getCartState--">getCartState</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;com.neovisionaries.i18n.CountryCode&gt;</code></td>
+<td class="colFirst"><code>com.neovisionaries.i18n.CountryCode</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getCountry--">getCountry</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getCustomerEmail--">getCustomerEmail</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getCustomerGroup--">getCustomerGroup</a></span>()</code>
 <div class="block">In the order context the customer group can only be expanded if the customer was in a group before creating the order.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getCustomerId--">getCustomerId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
@@ -163,15 +163,15 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getLineItems--">getLineItems</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getShippingAddress--">getShippingAddress</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts">CartShippingInfo</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts">CartShippingInfo</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getShippingInfo--">getShippingInfo</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i11" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/Cart.html#getTaxedPrice--">getTaxedPrice</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i12" class="altColor">
@@ -198,7 +198,7 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.carts.<a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a></h3>
-<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomLineItem-java.lang.String-">getCustomLineItem</a>, <a href="../../../../io/sphere/sdk/carts/CartLike.html#getDiscountCodes--">getDiscountCodes</a>, <a href="../../../../io/sphere/sdk/carts/CartLike.html#getLineItem-java.lang.String-">getLineItem</a></code></li>
+<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#findCustomLineItem-java.lang.String-">findCustomLineItem</a>, <a href="../../../../io/sphere/sdk/carts/CartLike.html#findLineItem-java.lang.String-">findLineItem</a>, <a href="../../../../io/sphere/sdk/carts/CartLike.html#getDiscountCodes--">getDiscountCodes</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.DefaultModel">
@@ -296,7 +296,8 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <ul class="blockList">
 <li class="blockList">
 <h4>getShippingInfo</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts">CartShippingInfo</a>&gt;&nbsp;getShippingInfo()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts">CartShippingInfo</a>&nbsp;getShippingInfo()</pre>
 </li>
 </ul>
 <a name="getBillingAddress--">
@@ -305,7 +306,8 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <ul class="blockList">
 <li class="blockList">
 <h4>getBillingAddress</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&gt;&nbsp;getBillingAddress()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;getBillingAddress()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getBillingAddress--">getBillingAddress</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
@@ -318,7 +320,8 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <ul class="blockList">
 <li class="blockList">
 <h4>getCountry</h4>
-<pre>java.util.Optional&lt;com.neovisionaries.i18n.CountryCode&gt;&nbsp;getCountry()</pre>
+<pre>@Nullable
+com.neovisionaries.i18n.CountryCode&nbsp;getCountry()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCountry--">getCountry</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
@@ -331,7 +334,8 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <ul class="blockList">
 <li class="blockList">
 <h4>getCustomerEmail</h4>
-<pre>java.util.Optional&lt;java.lang.String&gt;&nbsp;getCustomerEmail()</pre>
+<pre>@Nullable
+java.lang.String&nbsp;getCustomerEmail()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerEmail--">getCustomerEmail</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
@@ -344,7 +348,8 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <ul class="blockList">
 <li class="blockList">
 <h4>getCustomerGroup</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&gt;&nbsp;getCustomerGroup()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&nbsp;getCustomerGroup()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerGroup--">CartLike</a></code></span></div>
 <div class="block">In the order context the customer group can only be expanded if the customer was in a group before creating the order.</div>
 <dl>
@@ -361,7 +366,8 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <ul class="blockList">
 <li class="blockList">
 <h4>getCustomerId</h4>
-<pre>java.util.Optional&lt;java.lang.String&gt;&nbsp;getCustomerId()</pre>
+<pre>@Nullable
+java.lang.String&nbsp;getCustomerId()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getCustomerId--">getCustomerId</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
@@ -400,7 +406,8 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <ul class="blockList">
 <li class="blockList">
 <h4>getShippingAddress</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&gt;&nbsp;getShippingAddress()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a>&nbsp;getShippingAddress()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getShippingAddress--">getShippingAddress</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>
@@ -413,7 +420,8 @@ extends <a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface
 <ul class="blockList">
 <li class="blockList">
 <h4>getTaxedPrice</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a>&gt;&nbsp;getTaxedPrice()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a>&nbsp;getTaxedPrice()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/CartLike.html#getTaxedPrice--">getTaxedPrice</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;<a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</code></dd>

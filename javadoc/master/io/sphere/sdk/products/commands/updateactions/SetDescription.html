@@ -127,7 +127,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription, STAGED_AND_CURRENT));
     final Product updatedProduct = execute(cmd);
 
-    assertThat(updatedProduct.getMasterData().getStaged().getDescription()).contains(newDescription);
+    assertThat(updatedProduct.getMasterData().getStaged().getDescription()).isEqualTo(newDescription);
     return updatedProduct;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>

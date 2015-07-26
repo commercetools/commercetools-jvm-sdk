@@ -129,7 +129,7 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/inventories/InventoryEntry.html#getAvailableQuantity--">getAvailableQuantity</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.time.ZonedDateTime&gt;</code></td>
+<td class="colFirst"><code>java.time.ZonedDateTime</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/inventories/InventoryEntry.html#getExpectedDelivery--">getExpectedDelivery</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
@@ -137,7 +137,7 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/inventories/InventoryEntry.html#getQuantityOnStock--">getQuantityOnStock</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.Integer&gt;</code></td>
+<td class="colFirst"><code>java.lang.Integer</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/inventories/InventoryEntry.html#getRestockableInDays--">getRestockableInDays</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
@@ -145,7 +145,7 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/inventories/InventoryEntry.html#getSku--">getSku</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/inventories/InventoryEntry.html#getSupplyChannel--">getSupplyChannel</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
@@ -213,7 +213,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>getExpectedDelivery</h4>
-<pre>java.util.Optional&lt;java.time.ZonedDateTime&gt;&nbsp;getExpectedDelivery()</pre>
+<pre>@Nullable
+java.time.ZonedDateTime&nbsp;getExpectedDelivery()</pre>
 </li>
 </ul>
 <a name="getQuantityOnStock--">
@@ -231,7 +232,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>getRestockableInDays</h4>
-<pre>java.util.Optional&lt;java.lang.Integer&gt;&nbsp;getRestockableInDays()</pre>
+<pre>@Nullable
+java.lang.Integer&nbsp;getRestockableInDays()</pre>
 </li>
 </ul>
 <a name="getSku--">
@@ -249,7 +251,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>getSupplyChannel</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;&nbsp;getSupplyChannel()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;getSupplyChannel()</pre>
 </li>
 </ul>
 <a name="toReference--">

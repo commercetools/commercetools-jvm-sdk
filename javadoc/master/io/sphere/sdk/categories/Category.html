@@ -137,23 +137,23 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getAncestors--">getAncestors</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getExternalId--">getExternalId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getMetaDescription--">getMetaDescription</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getMetaKeywords--">getMetaKeywords</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getMetaTitle--">getMetaTitle</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
@@ -161,11 +161,11 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getOrderHint--">getOrderHint</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getParent--">getParent</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
@@ -221,7 +221,7 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">metaAttributesOf</a>, <a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Optional-java.util.Optional-java.util.Optional-">metaAttributesOf</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">metaAttributesOf</a>, <a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-">metaAttributesOf</a></code></li>
 </ul>
 </li>
 </ul>
@@ -265,7 +265,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>getDescription</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getDescription()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getDescription()</pre>
 </li>
 </ul>
 <a name="getAncestors--">
@@ -283,7 +284,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>getParent</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;&nbsp;getParent()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&nbsp;getParent()</pre>
 </li>
 </ul>
 <a name="getOrderHint--">
@@ -292,7 +294,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>getOrderHint</h4>
-<pre>java.util.Optional&lt;java.lang.String&gt;&nbsp;getOrderHint()</pre>
+<pre>@Nullable
+java.lang.String&nbsp;getOrderHint()</pre>
 </li>
 </ul>
 <a name="getExternalId--">
@@ -301,7 +304,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>getExternalId</h4>
-<pre>java.util.Optional&lt;java.lang.String&gt;&nbsp;getExternalId()</pre>
+<pre>@Nullable
+java.lang.String&nbsp;getExternalId()</pre>
 </li>
 </ul>
 <a name="getMetaTitle--">
@@ -310,7 +314,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>getMetaTitle</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getMetaTitle()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getMetaTitle()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#getMetaTitle--">getMetaTitle</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></code></dd>
@@ -323,7 +328,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>getMetaDescription</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getMetaDescription()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getMetaDescription()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#getMetaDescription--">getMetaDescription</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></code></dd>
@@ -336,7 +342,8 @@ extends <a href="../../../../io/sphere/sdk/models/DefaultModel.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>getMetaKeywords</h4>
-<pre>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;getMetaKeywords()</pre>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getMetaKeywords()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#getMetaKeywords--">getMetaKeywords</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></code></dd>

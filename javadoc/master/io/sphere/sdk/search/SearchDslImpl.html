@@ -152,15 +152,15 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
              java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalQueryParameters)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-java.util.Optional-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.util.Optional-java.util.Optional-java.util.List-java.util.function.Function-">SearchDslImpl</a></span>(java.lang.String&nbsp;endpoint,
-             java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&gt;&nbsp;text,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#SearchDslImpl-java.lang.String-io.sphere.sdk.search.SearchText-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.lang.Long-java.lang.Long-java.util.List-java.util.function.Function-">SearchDslImpl</a></span>(java.lang.String&nbsp;endpoint,
+             <a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&nbsp;text,
              java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;facets,
              java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;filters,
              java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;filterQueries,
              java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;filterFacets,
              java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;sort,
-             java.util.Optional&lt;java.lang.Long&gt;&nbsp;limit,
-             java.util.Optional&lt;java.lang.Long&gt;&nbsp;offset,
+             java.lang.Long&nbsp;limit,
+             java.lang.Long&nbsp;offset,
              java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalQueryParameters,
              java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;resultMapper)</code>&nbsp;</td>
 </tr>
@@ -217,11 +217,11 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 </td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.Long&gt;</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#limit--">limit</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;java.lang.Long&gt;</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#offset--">offset</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
@@ -229,7 +229,7 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#sort--">sort</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
-<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#text--">text</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i11" class="rowColor">
@@ -262,11 +262,11 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 </tr>
 <tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#withLimit-java.lang.Long-">withLimit</a></span>(java.lang.Long&nbsp;limit)</code>&nbsp;</td>
 </tr>
 <tr id="i17" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#withOffset-java.lang.Long-">withOffset</a></span>(java.lang.Long&nbsp;offset)</code>&nbsp;</td>
 </tr>
 <tr id="i18" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
@@ -276,7 +276,7 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 </tr>
 <tr id="i19" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#withText-java.util.Optional-">withText</a></span>(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&gt;&nbsp;text)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDslImpl.html#withText-io.sphere.sdk.search.SearchText-">withText</a></span>(<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&nbsp;text)</code>
 <div class="block">Returns an EntitySearch with the new text as search text.</div>
 </td>
 </tr>
@@ -307,7 +307,7 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></h3>
-<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacet-io.sphere.sdk.search.FacetExpression-">plusFacet</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterFacets-io.sphere.sdk.search.FilterExpression-">plusFilterFacets</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterFacets-java.util.List-">plusFilterFacets</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterQuery-io.sphere.sdk.search.FilterExpression-">plusFilterQuery</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterQuery-java.util.List-">plusFilterQuery</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterResults-io.sphere.sdk.search.FilterExpression-">plusFilterResults</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterResults-java.util.List-">plusFilterResults</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.search.SearchText-">withText</a></code></li>
+<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacet-io.sphere.sdk.search.FacetExpression-">plusFacet</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacets-java.util.List-">plusFacets</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterFacets-io.sphere.sdk.search.FilterExpression-">plusFilterFacets</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterFacets-java.util.List-">plusFilterFacets</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterQuery-io.sphere.sdk.search.FilterExpression-">plusFilterQuery</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterQuery-java.util.List-">plusFilterQuery</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterResults-io.sphere.sdk.search.FilterExpression-">plusFilterResults</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFilterResults-java.util.List-">plusFilterResults</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequest">
@@ -330,21 +330,21 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="SearchDslImpl-java.lang.String-java.util.Optional-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.util.Optional-java.util.Optional-java.util.List-java.util.function.Function-">
+<a name="SearchDslImpl-java.lang.String-io.sphere.sdk.search.SearchText-java.util.List-java.util.List-java.util.List-java.util.List-java.util.List-java.lang.Long-java.lang.Long-java.util.List-java.util.function.Function-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>SearchDslImpl</h4>
 <pre>public&nbsp;SearchDslImpl(java.lang.String&nbsp;endpoint,
-                     java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&gt;&nbsp;text,
+                     <a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&nbsp;text,
                      java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;facets,
                      java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;filters,
                      java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;filterQueries,
                      java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;filterFacets,
                      java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;sort,
-                     java.util.Optional&lt;java.lang.Long&gt;&nbsp;limit,
-                     java.util.Optional&lt;java.lang.Long&gt;&nbsp;offset,
+                     java.lang.Long&nbsp;limit,
+                     java.lang.Long&nbsp;offset,
                      java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalQueryParameters,
                      java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&gt;&nbsp;resultMapper)</pre>
 </li>
@@ -379,18 +379,18 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="withText-java.util.Optional-">
+<a name="withText-io.sphere.sdk.search.SearchText-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>withText</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&nbsp;withText(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&gt;&nbsp;text)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Optional-">SearchDsl</a></code></span></div>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&nbsp;withText(<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&nbsp;text)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.search.SearchText-">SearchDsl</a></code></span></div>
 <div class="block">Returns an EntitySearch with the new text as search text.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Optional-">withText</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.search.SearchText-">withText</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>text</code> - the new search text</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -493,29 +493,29 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 </dl>
 </li>
 </ul>
-<a name="withLimit-long-">
+<a name="withLimit-java.lang.Long-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>withLimit</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&nbsp;withLimit(long&nbsp;limit)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&nbsp;withLimit(java.lang.Long&nbsp;limit)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-java.lang.Long-">withLimit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
-<a name="withOffset-long-">
+<a name="withOffset-java.lang.Long-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>withOffset</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&nbsp;withOffset(long&nbsp;offset)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;&nbsp;withOffset(java.lang.Long&nbsp;offset)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-java.lang.Long-">withOffset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -525,7 +525,8 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>text</h4>
-<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&gt;&nbsp;text()</pre>
+<pre>@Nullable
+public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&nbsp;text()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
@@ -603,7 +604,8 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>limit</h4>
-<pre>public&nbsp;java.util.Optional&lt;java.lang.Long&gt;&nbsp;limit()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.Long&nbsp;limit()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>
@@ -616,7 +618,8 @@ implements <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="inte
 <ul class="blockList">
 <li class="blockList">
 <h4>offset</h4>
-<pre>public&nbsp;java.util.Optional&lt;java.lang.Long&gt;&nbsp;offset()</pre>
+<pre>@Nullable
+public&nbsp;java.lang.Long&nbsp;offset()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="type parameter in SearchDslImpl">T</a>&gt;</code></dd>

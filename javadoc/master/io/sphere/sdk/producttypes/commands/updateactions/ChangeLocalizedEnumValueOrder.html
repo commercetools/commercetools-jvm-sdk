@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeLocalizedEnumValueOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
     final String attributeName = "color";
-    final LocalizedEnumType attributeType = (LocalizedEnumType) productType.getAttribute(attributeName).get()
+    final LocalizedEnumType attributeType = (LocalizedEnumType) productType.getAttribute(attributeName)
             .getAttributeType();
     final List&lt;LocalizedEnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
 
@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
             ChangeLocalizedEnumValueOrder.of(attributeName, values)));
 
     final LocalizedEnumType updatedType = (LocalizedEnumType) updatedProductType.getAttribute(attributeName)
-            .get().getAttributeType();
+            .getAttributeType();
     assertThat(updatedType.getValues()).isEqualTo(values);
 
     return updatedProductType;

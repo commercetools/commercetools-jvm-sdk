@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -147,7 +147,7 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected java.util.Optional&lt;java.lang.String&gt;</code></td>
+<td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#alias">alias</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -182,10 +182,6 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#only-V-">only</a></span>(<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#withAlias-java.util.Optional-">withAlias</a></span>(java.util.Optional&lt;java.lang.String&gt;&nbsp;alias)</code>&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#withAlias-java.lang.String-">withAlias</a></span>(java.lang.String&nbsp;alias)</code>&nbsp;</td>
 </tr>
@@ -238,7 +234,8 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <ul class="blockList">
 <li class="blockList">
 <h4>alias</h4>
-<pre>protected final&nbsp;java.util.Optional&lt;java.lang.String&gt; alias</pre>
+<pre>@Nullable
+protected final&nbsp;java.lang.String alias</pre>
 </li>
 </ul>
 <a name="typeSerializer">
@@ -258,15 +255,6 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="withAlias-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withAlias</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;withAlias(java.util.Optional&lt;java.lang.String&gt;&nbsp;alias)</pre>
-</li>
-</ul>
 <a name="withAlias-java.lang.String-">
 <!--   -->
 </a>

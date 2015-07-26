@@ -126,7 +126,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
     final Address oldAddress = customer.getAddresses().get(0);
     assertThat(oldAddress.getId())
             .overridingErrorMessage("only fetched address contains an ID")
-            .isPresent();
+            .isNotNull();
 
     final RemoveAddress action = RemoveAddress.of(oldAddress);
     final Customer customerWithoutAddresses =

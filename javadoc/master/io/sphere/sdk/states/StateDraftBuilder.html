@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9,"i8":9,"i9":10,"i10":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9,"i6":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -168,38 +168,22 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html#description-java.util.Optional-">description</a></span>(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;description)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html#initial-java.lang.Boolean-">initial</a></span>(java.lang.Boolean&nbsp;initial)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html#initial-boolean-">initial</a></span>(boolean&nbsp;initial)</code>&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html#initial-java.util.Optional-">initial</a></span>(java.util.Optional&lt;java.lang.Boolean&gt;&nbsp;initial)</code>&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html#name-io.sphere.sdk.models.LocalizedStrings-">name</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;name)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html#name-java.util.Optional-">name</a></span>(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;name)</code>&nbsp;</td>
-</tr>
-<tr id="i7" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html#of-io.sphere.sdk.states.StateDraft-">of</a></span>(<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;template)</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html#of-java.lang.String-io.sphere.sdk.states.StateType-">of</a></span>(java.lang.String&nbsp;key,
   <a href="../../../../io/sphere/sdk/states/StateType.html" title="enum in io.sphere.sdk.states">StateType</a>&nbsp;type)</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html#transitions-java.util.Optional-">transitions</a></span>(java.util.Optional&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&gt;&nbsp;transitions)</code>&nbsp;</td>
-</tr>
-<tr id="i10" class="altColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html#transitions-java.util.Set-">transitions</a></span>(java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;transitions)</code>&nbsp;</td>
 </tr>
@@ -276,31 +260,14 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;of(<a href="../../../../io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a>&nbsp;template)</pre>
 </li>
 </ul>
-<a name="name-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>name</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;name(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;name)</pre>
-</li>
-</ul>
 <a name="name-io.sphere.sdk.models.LocalizedStrings-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>name</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;name(<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;name)</pre>
-</li>
-</ul>
-<a name="description-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>description</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;description(java.util.Optional&lt;<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&gt;&nbsp;description)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;name(@Nullable
+                              <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;name)</pre>
 </li>
 </ul>
 <a name="description-io.sphere.sdk.models.LocalizedStrings-">
@@ -309,34 +276,18 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <ul class="blockList">
 <li class="blockList">
 <h4>description</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;description(<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;description)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;description(@Nullable
+                                     <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;description)</pre>
 </li>
 </ul>
-<a name="initial-java.util.Optional-">
+<a name="initial-java.lang.Boolean-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>initial</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;initial(java.util.Optional&lt;java.lang.Boolean&gt;&nbsp;initial)</pre>
-</li>
-</ul>
-<a name="initial-boolean-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>initial</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;initial(boolean&nbsp;initial)</pre>
-</li>
-</ul>
-<a name="transitions-java.util.Optional-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>transitions</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;transitions(java.util.Optional&lt;java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&gt;&nbsp;transitions)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;initial(@Nullable
+                                 java.lang.Boolean&nbsp;initial)</pre>
 </li>
 </ul>
 <a name="transitions-java.util.Set-">
@@ -345,7 +296,8 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <ul class="blockList">
 <li class="blockList">
 <h4>transitions</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;transitions(java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;transitions)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a>&nbsp;transitions(@Nullable
+                                     java.util.Set&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a>&gt;&gt;&nbsp;transitions)</pre>
 </li>
 </ul>
 <a name="build--">
