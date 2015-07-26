@@ -98,7 +98,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             assertThat(address.getId())
                     .overridingErrorMessage("only fetched address contains an ID")
                     .isNotNull();
-            assertThat(customer.getDefaultShippingAddressId()).isEmpty();
+            assertThat(customer.getDefaultShippingAddressId()).isNull();
             assertThat(customer.findDefaultShippingAddress()).isEmpty();
 
             final Customer updatedCustomer =
@@ -130,7 +130,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
     @Test
     public void setCustomerNumber() throws Exception {
         withCustomer(client(), customer -> {
-            assertThat(customer.getCustomerNumber()).isEmpty();
+            assertThat(customer.getCustomerNumber()).isNull();
 
             final String customerNumber = randomString();
             final Customer updatedCustomer =
@@ -143,39 +143,39 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
     @Test
     public void setExternalId() throws Exception {
         withCustomer(client(), customer -> {
-            assertThat(customer.getExternalId()).isEmpty();
+            assertThat(customer.getExternalId()).isNull();
 
             final String externalId = randomString();
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetExternalId.of(externalId)));
 
-            assertThat(updatedCustomer.getExternalId()).contains(externalId);
+            assertThat(updatedCustomer.getExternalId()).isEqualTo(externalId);
         });
     }
 
     @Test
     public void setCompanyName() throws Exception {
         withCustomer(client(), customer -> {
-            assertThat(customer.getCompanyName()).isEmpty();
+            assertThat(customer.getCompanyName()).isNull();
 
             final String companyName = "Big coorp";
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
 
-            assertThat(updatedCustomer.getCompanyName()).contains(companyName);
+            assertThat(updatedCustomer.getCompanyName()).isEqualTo(companyName);
         });
     }
 
     @Test
     public void setVatId() throws Exception {
         withCustomer(client(), customer -> {
-            assertThat(customer.getVatId()).isEmpty();
+            assertThat(customer.getVatId()).isNull();
 
             final String vatId = randomString();
             final Customer updatedCustomer =
                     execute(CustomerUpdateCommand.of(customer, SetVatId.of(vatId)));
 
-            assertThat(updatedCustomer.getVatId()).contains(vatId);
+            assertThat(updatedCustomer.getVatId()).isEqualTo(vatId);
         });
     }
 
