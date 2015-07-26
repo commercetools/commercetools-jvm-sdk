@@ -25,7 +25,10 @@ public class OptionalInspection {
                 return null;
             }
         })
-        .filter(i -> i.getMethods().stream().anyMatch(m -> m.containsOptionalParameter() || m.containsOptionalReturnType()) || i.containsOptionalField())
+        .filter(i -> {
+            final Predicate<MethodInfo> containsIllegalOptional = m -> !m.getMethod().getName().startsWith("find") && (m.containsOptionalParameter() || m.containsOptionalReturnType());
+            return i.getMethods().stream().anyMatch(containsIllegalOptional) || i.containsOptionalField();
+        })
         .collect(toList());
 
         classesWithAnyOptional

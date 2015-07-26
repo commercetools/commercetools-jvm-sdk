@@ -22,4 +22,8 @@ public class MethodInfo {
     public String toString() {
         return method.toString();
     }
+
+    public Method getMethod() {
+        return method;
+    }
 }
