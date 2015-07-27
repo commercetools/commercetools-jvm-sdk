@@ -1,5 +1,8 @@
 package io.sphere.sdk.orders.commands;
 
+import io.sphere.sdk.carts.Cart;
+import io.sphere.sdk.carts.CartState;
+import io.sphere.sdk.carts.queries.CartByIdFetch;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -14,6 +17,9 @@ public class OrderFromCartCreateCommandTest extends IntegrationTest {
             final Order order = execute(OrderFromCartCreateCommand.of(cart));
             assertThat(order.getLineItems()).isEqualTo(cart.getLineItems());
             assertThat(order.getCustomLineItems()).isEqualTo(cart.getCustomLineItems());
+
+            final Cart orderedCart = execute(CartByIdFetch.of(cart));
+            assertThat(orderedCart.getCartState()).isEqualTo(CartState.ORDERED);
         });
     }
 }

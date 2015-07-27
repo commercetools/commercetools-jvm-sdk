@@ -11,7 +11,11 @@ public enum CartState implements SphereEnumeration {
     /**
      Anonymous cart whose content was merged into a customers cart on signin. No further operations on the cart are allowed.
      */
-    MERGED;
+    MERGED,
+    /**
+     The cart was ordered. No further operations on the cart are allowed.
+     */
+    ORDERED;
 
     public static CartState defaultValue() {
         return CartState.ACTIVE;
