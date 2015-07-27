@@ -121,3 +121,23 @@ tr {
 .code-example p {
     padding-bottom: 1em;
 }
+
+div.feature img{
+    float: left;
+}
+
+.clearfix:after, div.feature:after {
+    clear: both;
+    content: ".";
+    display: block;
+    height: 0;
+    visibility: hidden;
+}
+.clearfix, div.feature {
+    display: inline-block;
+}
+.clearfix, div.feature {
+    display: block;
+}
+
+

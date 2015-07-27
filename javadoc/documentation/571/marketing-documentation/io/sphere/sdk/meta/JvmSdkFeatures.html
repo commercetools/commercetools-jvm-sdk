@@ -109,19 +109,71 @@
 <br>
 <pre>public final class <span class="typeNameLabel">JvmSdkFeatures</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
-<div class="block"><!--
- ## Why is it not called Java SDK?
-
- Android also uses Java programming language but we use Java 8 language features and JRE 8 features which are not available on Android.
- The SDK should also be great for other languages on the JVM like Scala (&lt;3), Groovy, Clojure, Kotlin, etc.
+<div class="block"><h3>Why is it not called Java SDK?</h3>
+ <p>Android also uses Java programming language but we use Java 8 language features and JRE 8 features which are not available on Android. The SDK should also be great for other languages on the JVM like Scala, Groovy, Clojure, Kotlin, etc.</p>
 
 
- ## Parallel execution
 
- Java 8 <code>CompletionStage</code>
- show example for two requests and then collect their results
- exception handling: show recover with completionstage
- ecosystem friendly, Scala 2.10, 2.11, 2.13; Play 2.2, Play 2.3, Play 2.4, Spring (planned), Rx (planned), Reactive Streams (WIP)
+<h3>Parallelity Features</h3>
+
+
+ <div class="feature">
+ <img src="../../../../documentation-resources/images/features/async-execution.png" alt="executes a sphere requests and registers a callback">
+
+
+ <div>
+ <h4>Non-blocking</h4>
+ <p>API calls can take time and to save CPU cycles threads are not blocked.</p>
+
+ </div>
+ </div>
+
+
+ <div class="feature">
+    <img src="../../../../documentation-resources/images/features/parallel-execution.png" alt="executes two SPHERE.IO requests in parallel">
+
+
+     <div>
+        <h4>Parallel execution</h4>
+        For high performance you should parallelize as much requests as possible.
+        By using <code>CompletionStage</code> from Java it is easy to start parallel asynchronous
+        calls and combine them into a single <code>CompletionStage</code>.
+
+     </div>
+ </div>
+
+
+ <div class="feature">
+    <img src="../../../../documentation-resources/images/features/recover-async-execution.png" alt="executes two SPHERE.IO requests in parallel">
+
+
+     <div>
+        <h4>Recover from Exceptions</h4>
+        <p>API requests can fail due to network errors and other sources. With the JVM SDK it is easy to code a plan B instead of crashing.</p>
+
+     </div>
+ </div>
+
+
+
+ <div class="feature">
+ <img src="../../../../documentation-resources/images/features/scala-futures.png" alt="">
+
+
+ <div>
+ <h4>Other future implementations</h4>
+ <p>There add-ons to support other Future implementations such as Scalas Future (2.10, 2.11, 2.12) and Play Frameworks F.Promise (2.2, 2.3, 2.4).
+ We also plan to support Spring, Rx and Reactive Streams.</p>
+
+ </div>
+ </div>
+
+
+
+
+
+
+ <!--
 
  ## Libs
 
@@ -161,24 +213,6 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
  hosted on maven central
 
  -->
- <h3></h3>
-<ul>
- <li></li>
- <li>show examle</li>
- <li></li>
- <li></li>
- <li></li>
- <li></li>
- <li></li>
- </ul>
-
-
-
-
-
-
-
-
 
 
 <!--
