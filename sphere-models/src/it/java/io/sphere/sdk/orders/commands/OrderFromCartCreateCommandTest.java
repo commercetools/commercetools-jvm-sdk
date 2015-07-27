@@ -17,6 +17,7 @@ public class OrderFromCartCreateCommandTest extends IntegrationTest {
             final Order order = execute(OrderFromCartCreateCommand.of(cart));
             assertThat(order.getLineItems()).isEqualTo(cart.getLineItems());
             assertThat(order.getCustomLineItems()).isEqualTo(cart.getCustomLineItems());
+            assertThat(order.getCart().getId()).isEqualTo(cart.getId());
 
             final Cart orderedCart = execute(CartByIdFetch.of(cart));
             assertThat(orderedCart.getCartState()).isEqualTo(CartState.ORDERED);

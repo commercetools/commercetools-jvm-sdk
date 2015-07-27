@@ -94,4 +94,8 @@ public interface Order extends CartLike<Order> {
     MonetaryAmount getTotalPrice();
 
     ZonedDateTime getCompletedAt();
+
+    /** Set when this order was created from a cart. The cart will have the state Ordered. */
+    @Nullable
+    Reference<Cart> getCart();
 }

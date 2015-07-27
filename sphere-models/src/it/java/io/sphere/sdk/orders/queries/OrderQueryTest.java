@@ -86,6 +86,11 @@ public class OrderQueryTest extends IntegrationTest {
     }
 
     @Test
+    public void cart() throws Exception {
+        assertOrderIsFoundWithPredicate(order -> MODEL.cart().is(order.getCart()));
+    }
+
+    @Test
     public void syncInfo() throws Exception {
         final Channel channel = persistentChannelOfRole(client(), ORDER_EXPORT);
         assertOrderIsFoundWithPredicate(order -> {

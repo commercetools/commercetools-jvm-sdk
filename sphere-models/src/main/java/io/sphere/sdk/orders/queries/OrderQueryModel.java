@@ -1,11 +1,13 @@
 package io.sphere.sdk.orders.queries;
 
+import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.queries.CartLikeQueryModel;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderState;
 import io.sphere.sdk.orders.PaymentState;
 import io.sphere.sdk.orders.ShipmentState;
 import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.ReferenceQueryModel;
 import io.sphere.sdk.queries.SphereEnumerationQueryModel;
 
 public class OrderQueryModel extends CartLikeQueryModel<Order> {
@@ -31,5 +33,9 @@ public class OrderQueryModel extends CartLikeQueryModel<Order> {
 
     public SyncInfoQueryModel<Order> syncInfo() {
         return new SyncInfoQueryModelImpl<>(this, "syncInfo");
+    }
+
+    public ReferenceQueryModel<Order, Cart> cart() {
+        return referenceModel("cart");
     }
 }

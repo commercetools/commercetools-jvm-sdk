@@ -2,10 +2,7 @@ package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.carts.CustomLineItem;
-import io.sphere.sdk.carts.InventoryMode;
-import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.carts.TaxedPrice;
+import io.sphere.sdk.carts.*;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
@@ -51,9 +48,11 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     @Nullable
     private final ZonedDateTime completedAt;
     private final List<DiscountCodeInfo> discountCodes;
+    @Nullable
+    private final Reference<Cart> cart;
 
     @JsonCreator
-    protected OrderImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final Address billingAddress, final CountryCode country, final String customerEmail, final Reference<CustomerGroup> customerGroup, final String customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final long lastMessageSequenceNumber, final List<LineItem> lineItems, @Nullable final String orderNumber, final OrderState orderState, final List<ReturnInfo> returnInfo, @Nullable final ShipmentState shipmentState, final Address shippingAddress, @Nullable final OrderShippingInfo shippingInfo, final Set<SyncInfo> syncInfo, final TaxedPrice taxedPrice, final MonetaryAmount totalPrice, @Nullable final PaymentState paymentState, @Nullable final ZonedDateTime completedAt, final List<DiscountCodeInfo> discountCodes) {
+    protected OrderImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final Address billingAddress, final CountryCode country, final String customerEmail, final Reference<CustomerGroup> customerGroup, final String customerId, final List<CustomLineItem> customLineItems, final InventoryMode inventoryMode, final long lastMessageSequenceNumber, final List<LineItem> lineItems, @Nullable final String orderNumber, final OrderState orderState, final List<ReturnInfo> returnInfo, @Nullable final ShipmentState shipmentState, final Address shippingAddress, @Nullable final OrderShippingInfo shippingInfo, final Set<SyncInfo> syncInfo, final TaxedPrice taxedPrice, final MonetaryAmount totalPrice, @Nullable final PaymentState paymentState, @Nullable final ZonedDateTime completedAt, final List<DiscountCodeInfo> discountCodes, @Nullable final Reference<Cart> cart) {
         super(id, version, createdAt, lastModifiedAt);
         this.billingAddress = billingAddress;
         this.country = country;
@@ -76,6 +75,7 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
         this.paymentState = paymentState;
         this.completedAt = completedAt;
         this.discountCodes = discountCodes;
+        this.cart = cart;
     }
 
     @Override
@@ -193,5 +193,11 @@ final class OrderImpl extends DefaultModelImpl<Order> implements Order {
     @Override
     public List<DiscountCodeInfo> getDiscountCodes() {
         return discountCodes;
+    }
+
+    @Nullable
+    @Override
+    public Reference<Cart> getCart() {
+        return cart;
     }
 }
