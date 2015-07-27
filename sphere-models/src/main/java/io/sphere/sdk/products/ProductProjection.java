@@ -11,6 +11,7 @@ import io.sphere.sdk.search.SearchKeywords;
 
 import javax.annotation.Nullable;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -47,7 +48,7 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
         return Product.reference(getId());
     }
 
-    public static TypeReference<ProductProjection> typeReference(){
+    static TypeReference<ProductProjection> typeReference(){
         return new TypeReference<ProductProjection>() {
             @Override
             public String toString() {
@@ -98,6 +99,11 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
 
     default Optional<ProductVariant> findVariant(final VariantIdentifier identifier){
         return getId().equals(identifier.getProductId()) ? Optional.ofNullable(getVariant(identifier.getVariantId())) : Optional.empty();
+    }
+
+    default Optional<ProductVariant> findVariantBySky(final String sku) {
+        Objects.requireNonNull(sku);
+        return getAllVariants().stream().filter(v -> sku.equals(v.getSku())).findFirst();
     }
 
     @Override
