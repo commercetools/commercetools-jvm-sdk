@@ -59,7 +59,7 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
 
     public SearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> typeReference,
                          final List<HttpQueryParameter> additionalQueryParameters) {
-        this(endpoint, resultMapperOf(typeReference), additionalQueryParameters);
+        this(endpoint, httpResponse -> deserialize(httpResponse, typeReference), additionalQueryParameters);
     }
 
     @Override

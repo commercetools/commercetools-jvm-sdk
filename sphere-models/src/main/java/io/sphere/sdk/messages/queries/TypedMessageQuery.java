@@ -7,6 +7,8 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 
+import java.util.function.Function;
+
 final class TypedMessageQuery<T> extends SphereRequestBase implements Query<T> {
     private final HttpRequestIntent httpRequestIntent;
     private final TypeReference<PagedQueryResult<T>> resultTypeReference;
@@ -18,7 +20,7 @@ final class TypedMessageQuery<T> extends SphereRequestBase implements Query<T> {
 
     @Override
     public PagedQueryResult<T> deserialize(final HttpResponse httpResponse) {
-        return resultMapperOf(resultTypeReference).apply(httpResponse);
+        return deserialize(httpResponse, resultTypeReference);
     }
 
     @Override

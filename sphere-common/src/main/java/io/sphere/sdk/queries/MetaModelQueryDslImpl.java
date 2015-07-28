@@ -8,7 +8,6 @@ import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
-import io.sphere.sdk.utils.ListUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -73,7 +72,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction, final List<HttpQueryParameter> additionalQueryParameters) {
-        this(Collections.emptyList(), Collections.emptyList(), null, null, null, endpoint, resultMapperOf(pagedQueryResultTypeReference),
+        this(Collections.emptyList(), Collections.emptyList(), null, null, null, endpoint, httpResponse -> deserialize(httpResponse, pagedQueryResultTypeReference),
                 Collections.emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
