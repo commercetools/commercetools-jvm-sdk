@@ -11,9 +11,9 @@ import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
  */
 @JsonDeserialize(as=ProductCatalogDataImpl.class)
 public interface ProductCatalogData {
-    boolean isPublished();
+    Boolean isPublished();
 
-    boolean hasStagedChanges();
+    Boolean hasStagedChanges();
 
     /**
      * The current data of the product.

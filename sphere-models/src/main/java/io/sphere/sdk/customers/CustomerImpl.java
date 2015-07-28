@@ -29,7 +29,7 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     private final String defaultShippingAddressId;
     @Nullable
     private final String defaultBillingAddressId;
-    private final boolean isEmailVerified;
+    private final Boolean isEmailVerified;
     @Nullable
     private final String externalId;
     @Nullable
@@ -42,7 +42,7 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     private final LocalDate dateOfBirth;
 
     @JsonCreator
-    public CustomerImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String customerNumber, final String email, final String firstName, final String lastName, final String password, final String middleName, final String title, final List<Address> addresses, final String defaultShippingAddressId, final String defaultBillingAddressId, final boolean isEmailVerified, final String externalId, final Reference<CustomerGroup> customerGroup, final String companyName,  final String vatId, final LocalDate dateOfBirth) {
+    public CustomerImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String customerNumber, final String email, final String firstName, final String lastName, final String password, final String middleName, final String title, final List<Address> addresses, final String defaultShippingAddressId, final String defaultBillingAddressId, final Boolean isEmailVerified, final String externalId, final Reference<CustomerGroup> customerGroup, final String companyName,  final String vatId, final LocalDate dateOfBirth) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerNumber = customerNumber;
         this.email = email;
@@ -117,7 +117,7 @@ class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
     }
 
     @Override
-    public boolean isEmailVerified() {
+    public Boolean isEmailVerified() {
         return isEmailVerified;
     }
 

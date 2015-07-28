@@ -34,9 +34,9 @@ public interface State extends DefaultModel<State> {
     @Nullable
     LocalizedStrings getDescription();
 
-    boolean isInitial();
+    Boolean isInitial();
 
-    boolean isBuiltIn();
+    Boolean isBuiltIn();
 
     @Nullable
     Set<Reference<State>> getTransitions();

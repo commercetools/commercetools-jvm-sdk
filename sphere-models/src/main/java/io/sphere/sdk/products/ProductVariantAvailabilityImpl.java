@@ -8,17 +8,17 @@ import javax.annotation.Nullable;
 
 class ProductVariantAvailabilityImpl extends Base implements ProductVariantAvailability {
     @JsonProperty("isOnStock")
-    private final boolean isOnStock;
+    private final Boolean isOnStock;
     @Nullable
     private final Integer restockableInDays;
 
     @JsonCreator
-    ProductVariantAvailabilityImpl(final boolean isOnStock, @Nullable final Integer restockableInDays) {
+    ProductVariantAvailabilityImpl(final Boolean isOnStock, @Nullable final Integer restockableInDays) {
         this.isOnStock = isOnStock;
         this.restockableInDays = restockableInDays;
     }
 
-    public boolean isOnStock() {
+    public Boolean isOnStock() {
         return isOnStock;
     }
 

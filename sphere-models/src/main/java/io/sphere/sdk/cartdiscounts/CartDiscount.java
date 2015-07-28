@@ -17,13 +17,13 @@ public interface CartDiscount extends DefaultModel<CartDiscount> {
     @Nullable
     LocalizedStrings getDescription();
 
-    boolean isActive();
+    Boolean isActive();
 
     LocalizedStrings getName();
 
     List<Reference<Object>> getReferences();
 
-    boolean isRequiringDiscountCode();
+    Boolean isRequiringDiscountCode();
 
     String getSortOrder();
 

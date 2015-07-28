@@ -19,7 +19,7 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
     private List<Reference<CartDiscount>> cartDiscounts;
     @Nullable
     private CartPredicate cartPredicate;
-    private boolean isActive = true;
+    private Boolean isActive = true;
     @Nullable
     private Long maxApplications;
     @Nullable

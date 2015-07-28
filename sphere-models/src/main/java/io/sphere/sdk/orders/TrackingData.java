@@ -15,10 +15,10 @@ public class TrackingData extends Base {
     @Nullable
     private final String providerTransaction;
     @Nullable
-    private final boolean isReturn;
+    private final Boolean isReturn;
 
     @JsonCreator
-    private TrackingData(@Nullable final String trackingId, @Nullable final String carrier, @Nullable final String provider, @Nullable final String providerTransaction, final boolean isReturn) {
+    private TrackingData(@Nullable final String trackingId, @Nullable final String carrier, @Nullable final String provider, @Nullable final String providerTransaction, final Boolean isReturn) {
         this.trackingId = trackingId;
         this.carrier = carrier;
         this.provider = provider;
@@ -54,7 +54,7 @@ public class TrackingData extends Base {
         return providerTransaction;
     }
 
-    public boolean isReturn() {
+    public Boolean isReturn() {
         return isReturn;
     }
 

@@ -13,9 +13,9 @@ public class ShippingMethodDraft {
     private final String description;
     private final Reference<TaxCategory> taxCategory;
     private final List<ZoneRate> zoneRates;
-    private final boolean isDefault;
+    private final Boolean isDefault;
 
-    private ShippingMethodDraft(final String name, final String description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
+    private ShippingMethodDraft(final String name, final String description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final Boolean isDefault) {
         this.name = name;
         this.description = description;
         this.taxCategory = taxCategory;
@@ -48,7 +48,7 @@ public class ShippingMethodDraft {
         return zoneRates;
     }
 
-    public boolean isDefault() {
+    public Boolean isDefault() {
         return isDefault;
     }
 }

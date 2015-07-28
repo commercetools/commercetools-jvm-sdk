@@ -6,14 +6,14 @@ import io.sphere.sdk.models.Builder;
 import javax.annotation.Nullable;
 
 public class ProductCatalogDataBuilder extends Base implements Builder<ProductCatalogData> {
-    private final boolean isPublished;
-    private boolean hasStagedChanges;
+    private final Boolean isPublished;
+    private Boolean hasStagedChanges;
     @Nullable
     private ProductData current;
     private ProductData staged;
 
-    private ProductCatalogDataBuilder(final boolean isPublished, @Nullable final ProductData current, final ProductData staged,
-                                      final boolean hasStagedChanges) {
+    private ProductCatalogDataBuilder(final Boolean isPublished, @Nullable final ProductData current, final ProductData staged,
+                                      final Boolean hasStagedChanges) {
         this.isPublished = isPublished;
         this.current = current;
         this.staged = staged;

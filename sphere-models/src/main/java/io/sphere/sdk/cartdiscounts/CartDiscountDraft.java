@@ -18,14 +18,14 @@ public class CartDiscountDraft extends Base {
     private final String cartPredicate;
     private final CartDiscountTarget target;
     private final String sortOrder;
-    private final boolean isActive;
+    private final Boolean isActive;
     @Nullable
     private final ZonedDateTime validFrom;
     @Nullable
     private final ZonedDateTime validUntil;
-    private final boolean requiresDiscountCode;
+    private final Boolean requiresDiscountCode;
 
-    CartDiscountDraft(final LocalizedStrings name, final CartPredicate cartPredicate, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final boolean requiresDiscountCode) {
+    CartDiscountDraft(final LocalizedStrings name, final CartPredicate cartPredicate, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode) {
         this.cartPredicate = cartPredicate.toSphereCartPredicate();
         this.name = name;
         this.description = description;
@@ -47,7 +47,7 @@ public class CartDiscountDraft extends Base {
         return description;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 
@@ -55,7 +55,7 @@ public class CartDiscountDraft extends Base {
         return name;
     }
 
-    public boolean isRequiresDiscountCode() {
+    public Boolean isRequiresDiscountCode() {
         return requiresDiscountCode;
     }
 

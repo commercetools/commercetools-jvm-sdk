@@ -18,7 +18,7 @@ public interface TaxRate {
 
     Double getAmount();
 
-    boolean isIncludedInPrice();
+    Boolean isIncludedInPrice();
 
     CountryCode getCountry();
 

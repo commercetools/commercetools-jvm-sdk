@@ -15,7 +15,7 @@ class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements P
     private final ProductDiscountValue value;
     private final String predicate;
     private final String sortOrder;
-    private final boolean isActive;
+    private final Boolean isActive;
     private final List<Reference<Object>> references;
 
     @JsonCreator
@@ -54,7 +54,7 @@ class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements P
         return sortOrder;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 

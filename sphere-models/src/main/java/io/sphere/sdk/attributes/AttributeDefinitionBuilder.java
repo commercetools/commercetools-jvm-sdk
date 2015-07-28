@@ -11,8 +11,8 @@ public class AttributeDefinitionBuilder extends Base implements Builder<Attribut
 
     private AttributeConstraint attributeConstraint = AttributeConstraint.NONE;
     private TextInputHint inputHint = TextInputHint.SINGLE_LINE;
-    boolean isRequired = false;
-    boolean isSearchable = true;
+    Boolean isRequired = false;
+    Boolean isSearchable = true;
 
     AttributeDefinitionBuilder(final String name, final LocalizedStrings label, final AttributeType attributeType) {
         this.name = name;

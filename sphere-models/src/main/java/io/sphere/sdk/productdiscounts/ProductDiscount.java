@@ -23,7 +23,7 @@ public interface ProductDiscount extends DefaultModel<ProductDiscount> {
 
     String getSortOrder();
 
-    boolean isActive();
+    Boolean isActive();
 
     List<Reference<Object>> getReferences();
 
