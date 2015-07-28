@@ -48,8 +48,8 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
     final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction;
 
-    public MetaModelQueryDslImpl(final List<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, final Boolean fetchTotal, final Long limit,
-                                 final Long offset, final String endpoint,
+    public MetaModelQueryDslImpl(final List<QueryPredicate<T>> predicate, final List<QuerySort<T>> sort, @Nullable final Boolean fetchTotal, @Nullable final Long limit,
+                                 @Nullable final Long offset, final String endpoint,
                                  final Function<HttpResponse, PagedQueryResult<T>> resultMapper,
                                  final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {

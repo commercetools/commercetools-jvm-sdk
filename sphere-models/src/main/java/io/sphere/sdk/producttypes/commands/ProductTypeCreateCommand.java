@@ -1,8 +1,8 @@
 package io.sphere.sdk.producttypes.commands;
 
-import io.sphere.sdk.producttypes.ProductTypeDraft;
+import io.sphere.sdk.commands.CreateCommand;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.commands.CreateCommandImpl;
+import io.sphere.sdk.producttypes.ProductTypeDraft;
 
 /**
  Command to create a {@link io.sphere.sdk.producttypes.ProductType} in the backend.
@@ -19,13 +19,9 @@ import io.sphere.sdk.commands.CreateCommandImpl;
   <p>To create attribute definitions refer to {@link io.sphere.sdk.attributes.AttributeDefinition}.</p>
 
  */
-public class ProductTypeCreateCommand extends CreateCommandImpl<ProductType, ProductTypeDraft> {
+public interface ProductTypeCreateCommand extends CreateCommand<ProductType> {
 
-    private ProductTypeCreateCommand(final ProductTypeDraft draft) {
-        super(draft, ProductTypeEndpoint.ENDPOINT);
-    }
-
-    public static ProductTypeCreateCommand of(final ProductTypeDraft draft) {
-        return new ProductTypeCreateCommand(draft);
+    static ProductTypeCreateCommand of(final ProductTypeDraft draft) {
+        return new ProductTypeCreateCommandImpl(draft);
     }
 }

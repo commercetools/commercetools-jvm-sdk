@@ -16,7 +16,7 @@ import static io.sphere.sdk.http.HttpMethod.POST;
 
  {@include.example io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommandTest#execution()}
  */
-public class CustomerVerifyEmailCommand extends CommandImpl<Customer> {
+public final class CustomerVerifyEmailCommand extends CommandImpl<Customer> {
 
     private final String id;
     private final long version;

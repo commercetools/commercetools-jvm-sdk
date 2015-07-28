@@ -2,8 +2,7 @@ package io.sphere.sdk.categories.commands;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
-import io.sphere.sdk.commands.Command;
-import io.sphere.sdk.commands.CreateCommandImpl;
+import io.sphere.sdk.commands.CreateCommand;
 
 /**
  * Command to create a category.
@@ -14,13 +13,9 @@ import io.sphere.sdk.commands.CreateCommandImpl;
  *
  * {@include.example io.sphere.sdk.categories.commands.CategoryCreateCommandTest#execution()}
  */
-public final class CategoryCreateCommand extends CreateCommandImpl<Category, CategoryDraft> implements Command<Category> {
+public interface CategoryCreateCommand extends CreateCommand<Category> {
 
-    private CategoryCreateCommand(final CategoryDraft categoryDraft) {
-        super(categoryDraft, CategoryEndpoint.ENDPOINT);
-    }
-
-    public static CategoryCreateCommand of(final CategoryDraft categoryDraft) {
-        return new CategoryCreateCommand(categoryDraft);
+    static CategoryCreateCommand of(final CategoryDraft categoryDraft) {
+        return new CategoryCreateCommandImpl(categoryDraft);
     }
 }

@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.commands;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CartDraft;
-import io.sphere.sdk.commands.CreateCommandImpl;
+import io.sphere.sdk.commands.CreateCommand;
 
 /**
 
@@ -12,12 +12,8 @@ import io.sphere.sdk.commands.CreateCommandImpl;
 
 
  */
-public class CartCreateCommand extends CreateCommandImpl<Cart, CartDraft> {
-    private CartCreateCommand(final CartDraft body) {
-        super(body, CartEndpoint.ENDPOINT);
-    }
-
-    public static CartCreateCommand of(final CartDraft draft) {
-        return new CartCreateCommand(draft);
+public interface CartCreateCommand extends CreateCommand<Cart> {
+    static CartCreateCommand of(final CartDraft draft) {
+        return new CartCreateCommandImpl(draft);
     }
 }

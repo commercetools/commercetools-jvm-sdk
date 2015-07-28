@@ -8,7 +8,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
-public class CustomerCreateTokenCommand extends CommandImpl<CustomerToken> {
+public final class CustomerCreateTokenCommand extends CommandImpl<CustomerToken> {
     private final String email;
 
     private CustomerCreateTokenCommand(final String customerEmail) {

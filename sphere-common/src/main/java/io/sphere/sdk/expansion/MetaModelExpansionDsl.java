@@ -1,7 +1,4 @@
-package io.sphere.sdk.queries;
-
-import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.expansion.ReferenceExpandeableDsl;
+package io.sphere.sdk.expansion;
 
 import java.util.function.Function;
 

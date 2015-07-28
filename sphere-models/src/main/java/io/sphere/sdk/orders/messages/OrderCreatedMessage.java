@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
+import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.messages.MessageDerivatHint;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -30,6 +31,11 @@ public class OrderCreatedMessage extends GenericMessageImpl<Order> {
         this.order = order;
     }
 
+    /**
+     * Gets the order object at creation time. This output can differ from an expanded {@link Message#getResource()}.
+     *
+     * @return
+     */
     public Order getOrder() {
         return order;
     }

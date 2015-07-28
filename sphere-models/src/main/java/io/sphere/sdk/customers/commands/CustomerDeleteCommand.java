@@ -1,6 +1,6 @@
 package io.sphere.sdk.customers.commands;
 
-import io.sphere.sdk.commands.ByIdDeleteCommandImpl;
+import io.sphere.sdk.commands.ByIdDeleteCommand;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Versioned;
@@ -10,12 +10,8 @@ import io.sphere.sdk.models.Versioned;
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerDeleteCommandTest#execution()}
  */
-public class CustomerDeleteCommand extends ByIdDeleteCommandImpl<Customer> {
-    private CustomerDeleteCommand(final Versioned<Customer> versioned) {
-        super(versioned, CustomerEndpoint.ENDPOINT);
-    }
-
-    public static DeleteCommand<Customer> of(final Versioned<Customer> versioned) {
-        return new CustomerDeleteCommand(versioned);
+public interface CustomerDeleteCommand extends ByIdDeleteCommand<Customer> {
+    static DeleteCommand<Customer> of(final Versioned<Customer> versioned) {
+        return new CustomerDeleteCommandImpl(versioned);
     }
 }

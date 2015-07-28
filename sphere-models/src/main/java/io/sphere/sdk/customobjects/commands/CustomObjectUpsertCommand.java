@@ -1,9 +1,8 @@
 package io.sphere.sdk.customobjects.commands;
 
-import io.sphere.sdk.commands.CreateCommandImpl;
+import io.sphere.sdk.commands.CreateCommand;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
-import io.sphere.sdk.client.JsonEndpoint;
 
 /**
  Command for creating or updating a custom object.
@@ -13,14 +12,10 @@ import io.sphere.sdk.client.JsonEndpoint;
 
  @param <T> the type of the value in the custom object
  */
-public class CustomObjectUpsertCommand<T> extends CreateCommandImpl<CustomObject<T>, CustomObjectDraft<T>> {
+public interface CustomObjectUpsertCommand<T> extends CreateCommand<CustomObject<T>> {
 
-    private CustomObjectUpsertCommand(final CustomObjectDraft<T> draft) {
-        super(draft, JsonEndpoint.of(draft.typeReference(), CustomObjectEndpoint.PATH));
-    }
-
-    public static <T> CustomObjectUpsertCommand<T> of(final CustomObjectDraft<T> draft) {
-        return new CustomObjectUpsertCommand<>(draft);
+    static <T> CustomObjectUpsertCommand<T> of(final CustomObjectDraft<T> draft) {
+        return new CustomObjectUpsertCommandImpl<>(draft);
     }
 
 
