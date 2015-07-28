@@ -9,12 +9,8 @@ import io.sphere.sdk.shippingmethods.ShippingMethodDraft;
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommandTest#execution()}
  */
-public class ShippingMethodCreateCommandImpl extends CreateCommandImpl<ShippingMethod, ShippingMethodDraft> {
-    private ShippingMethodCreateCommandImpl(final ShippingMethodDraft draft) {
+final class ShippingMethodCreateCommandImpl extends CreateCommandImpl<ShippingMethod, ShippingMethodDraft> implements ShippingMethodCreateCommand {
+    ShippingMethodCreateCommandImpl(final ShippingMethodDraft draft) {
         super(draft, ShippingMethodEndpoint.ENDPOINT);
-    }
-
-    public static ShippingMethodCreateCommandImpl of(final ShippingMethodDraft draft) {
-        return new ShippingMethodCreateCommandImpl(draft);
     }
 }

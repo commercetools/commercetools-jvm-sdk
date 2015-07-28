@@ -1,6 +1,6 @@
 package io.sphere.sdk.zones.commands;
 
-import io.sphere.sdk.commands.CreateCommandImpl;
+import io.sphere.sdk.commands.CreateCommand;
 import io.sphere.sdk.zones.Zone;
 import io.sphere.sdk.zones.ZoneDraft;
 
@@ -10,13 +10,9 @@ import io.sphere.sdk.zones.ZoneDraft;
  *
  * {@include.example io.sphere.sdk.zones.commands.ZoneCreateCommandTest#execution()}
  */
-public class ZoneCreateCommand extends CreateCommandImpl<Zone, ZoneDraft> {
+public interface ZoneCreateCommand extends CreateCommand<Zone> {
 
-    private ZoneCreateCommand(final ZoneDraft draft) {
-        super(draft, ZoneEndpoint.ENDPOINT);
-    }
-
-    public static ZoneCreateCommand of(final ZoneDraft draft) {
-        return new ZoneCreateCommand(draft);
+    static ZoneCreateCommand of(final ZoneDraft draft) {
+        return new ZoneCreateCommandImpl(draft);
     }
 }

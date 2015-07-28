@@ -11,7 +11,7 @@ import io.sphere.sdk.reviews.ReviewDraft;
 
 @see io.sphere.sdk.reviews.ReviewDraftBuilder
  */
-public class ReviewCreateCommandImpl extends CreateCommandImpl<Review, ReviewDraft> {
+final class ReviewCreateCommandImpl extends CreateCommandImpl<Review, ReviewDraft> implements ReviewCreateCommand {
     public ReviewCreateCommandImpl(final ReviewDraft body) {
         super(body, ReviewEndpoint.ENDPOINT);
     }

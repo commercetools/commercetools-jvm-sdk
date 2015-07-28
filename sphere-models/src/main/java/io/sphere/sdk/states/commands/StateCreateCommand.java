@@ -1,6 +1,6 @@
 package io.sphere.sdk.states.commands;
 
-import io.sphere.sdk.commands.CreateCommandImpl;
+import io.sphere.sdk.commands.CreateCommand;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraft;
 
@@ -11,12 +11,8 @@ import io.sphere.sdk.states.StateDraft;
 
  @see io.sphere.sdk.states.StateDraftBuilder
  */
-public class StateCreateCommand extends CreateCommandImpl<State, StateDraft> {
-    private StateCreateCommand(final StateDraft body) {
-        super(body, StateEndpoint.ENDPOINT);
-    }
-
-    public static StateCreateCommand of(final StateDraft draft) {
-        return new StateCreateCommand(draft);
+public interface StateCreateCommand extends CreateCommand<State> {
+    static StateCreateCommand of(final StateDraft draft) {
+        return new StateCreateCommandImpl(draft);
     }
 }

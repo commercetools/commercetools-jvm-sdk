@@ -6,8 +6,8 @@ import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFromCartDraft;
 
-public class OrderFromCartCreateCommandImpl extends CreateCommandImpl<Order, OrderFromCartDraft> {
-    private OrderFromCartCreateCommandImpl(final OrderFromCartDraft draft) {
+final class OrderFromCartCreateCommandImpl extends CreateCommandImpl<Order, OrderFromCartDraft> implements OrderFromCartCreateCommand {
+    OrderFromCartCreateCommandImpl(final OrderFromCartDraft draft) {
         super(draft, OrderEndpoint.ENDPOINT);
     }
 

@@ -1,8 +1,8 @@
 package io.sphere.sdk.taxcategories.commands;
 
-import io.sphere.sdk.commands.CreateCommandImpl;
-import io.sphere.sdk.taxcategories.TaxCategoryDraft;
+import io.sphere.sdk.commands.CreateCommand;
 import io.sphere.sdk.taxcategories.TaxCategory;
+import io.sphere.sdk.taxcategories.TaxCategoryDraft;
 
 /** Creates a tax category.
 
@@ -10,12 +10,8 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
  @see io.sphere.sdk.taxcategories.TaxCategoryDraft
  */
-public class TaxCategoryCreateCommand extends CreateCommandImpl<TaxCategory, TaxCategoryDraft> {
-    private TaxCategoryCreateCommand(final TaxCategoryDraft body) {
-        super(body, TaxCategoryEndpoint.ENDPOINT);
-    }
-
-    public static TaxCategoryCreateCommand of(final TaxCategoryDraft body) {
-        return new TaxCategoryCreateCommand(body);
+public interface TaxCategoryCreateCommand extends CreateCommand<TaxCategory> {
+    static TaxCategoryCreateCommand of(final TaxCategoryDraft body) {
+        return new TaxCategoryCreateCommandImpl(body);
     }
 }

@@ -6,8 +6,8 @@ import io.sphere.sdk.customergroups.CustomerGroupDraft;
 
 import static io.sphere.sdk.customergroups.commands.CustomerGroupEndpoint.ENDPOINT;
 
-public class CustomerGroupCreateCommandImpl extends CreateCommandImpl<CustomerGroup, CustomerGroupDraft> {
-    private CustomerGroupCreateCommandImpl(final CustomerGroupDraft draft) {
+final class CustomerGroupCreateCommandImpl extends CreateCommandImpl<CustomerGroup, CustomerGroupDraft> implements CustomerGroupCreateCommand {
+    CustomerGroupCreateCommandImpl(final CustomerGroupDraft draft) {
         super(draft, ENDPOINT);
     }
 

@@ -2,7 +2,7 @@ package io.sphere.sdk.channels.commands;
 
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
-import io.sphere.sdk.commands.CreateCommandImpl;
+import io.sphere.sdk.commands.CreateCommand;
 
 /** Creates a channel.
 
@@ -11,12 +11,8 @@ import io.sphere.sdk.commands.CreateCommandImpl;
 
 @see io.sphere.sdk.channels.ChannelDraftBuilder
  */
-public class ChannelCreateCommand extends CreateCommandImpl<Channel, ChannelDraft> {
-    private ChannelCreateCommand(final ChannelDraft body) {
-        super(body, ChannelEndpoint.ENDPOINT);
-    }
-
-    public static ChannelCreateCommand of(final ChannelDraft draft) {
-        return new ChannelCreateCommand(draft);
+public interface ChannelCreateCommand extends CreateCommand<Channel> {
+    static ChannelCreateCommand of(final ChannelDraft draft) {
+        return new ChannelCreateCommandImpl(draft);
     }
 }

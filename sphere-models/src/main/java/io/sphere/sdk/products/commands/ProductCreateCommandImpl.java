@@ -16,12 +16,8 @@ import io.sphere.sdk.products.ProductDraft;
  Create a {@link ProductDraft} instance:
  {@include.example io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier}
  */
-public class ProductCreateCommandImpl extends CreateCommandImpl<Product, ProductDraft> {
-    private ProductCreateCommandImpl(final ProductDraft body) {
+final class ProductCreateCommandImpl extends CreateCommandImpl<Product, ProductDraft> implements ProductCreateCommand {
+    ProductCreateCommandImpl(final ProductDraft body) {
         super(body, ProductEndpoint.ENDPOINT);
-    }
-
-    public static ProductCreateCommandImpl of(final ProductDraft draft) {
-        return new ProductCreateCommandImpl(draft);
     }
 }
