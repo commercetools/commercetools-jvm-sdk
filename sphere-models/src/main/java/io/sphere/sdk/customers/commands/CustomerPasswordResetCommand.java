@@ -10,7 +10,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
-public class CustomerPasswordResetCommand extends CommandImpl<Customer> {
+public final class CustomerPasswordResetCommand extends CommandImpl<Customer> {
     private final String id;
     private final long version;
     private final String tokenValue;

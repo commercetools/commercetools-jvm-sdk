@@ -13,7 +13,7 @@ import static io.sphere.sdk.http.HttpMethod.POST;
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerChangePasswordCommandTest#execution()}
  */
-public class CustomerChangePasswordCommand extends CommandImpl<Customer> {
+public final class CustomerChangePasswordCommand extends CommandImpl<Customer> {
     private final String id;
     private final long version;
     private final String currentPassword;
