@@ -4,36 +4,36 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 public class ParcelMeasurements extends Base {
-    private final int heightInMillimeter;
-    private final int lengthInMillimeter;
-    private final int widthInMillimeter;
-    private final int weightInGram;
+    private final Integer heightInMillimeter;
+    private final Integer lengthInMillimeter;
+    private final Integer widthInMillimeter;
+    private final Integer weightInGram;
 
     @JsonCreator
-    private ParcelMeasurements(final int lengthInMillimeter, final int widthInMillimeter, final int heightInMillimeter, final int weightInGram) {
+    private ParcelMeasurements(final Integer lengthInMillimeter, final Integer widthInMillimeter, final Integer heightInMillimeter, final Integer weightInGram) {
         this.heightInMillimeter = heightInMillimeter;
         this.lengthInMillimeter = lengthInMillimeter;
         this.widthInMillimeter = widthInMillimeter;
         this.weightInGram = weightInGram;
     }
 
-    public static ParcelMeasurements of(final int lengthInMillimeter, final int widthInMillimeter, final int heightInMillimeter, final int weightInGram) {
+    public static ParcelMeasurements of(final Integer lengthInMillimeter, final Integer widthInMillimeter, final Integer heightInMillimeter, final Integer weightInGram) {
         return new ParcelMeasurements(lengthInMillimeter, widthInMillimeter, heightInMillimeter, weightInGram);
     }
 
-    public int getHeightInMillimeter() {
+    public Integer getHeightInMillimeter() {
         return heightInMillimeter;
     }
 
-    public int getLengthInMillimeter() {
+    public Integer getLengthInMillimeter() {
         return lengthInMillimeter;
     }
 
-    public int getWidthInMillimeter() {
+    public Integer getWidthInMillimeter() {
         return widthInMillimeter;
     }
 
-    public int getWeightInGram() {
+    public Integer getWeightInGram() {
         return weightInGram;
     }
 }

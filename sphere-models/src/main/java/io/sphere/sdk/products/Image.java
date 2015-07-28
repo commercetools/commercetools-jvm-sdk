@@ -19,11 +19,11 @@ public interface Image {
         return ImageImpl.of(url, dimensions, label);
     }
 
-    static Image ofWidthAndHeight(final String url, final int width, final int height, @Nullable final String label) {
+    static Image ofWidthAndHeight(final String url, final Integer width, final Integer height, @Nullable final String label) {
         return of(url, ImageDimensions.of(width, height), label);
     }
 
-    static Image ofWidthAndHeight(final String url, final int width, final int height) {
+    static Image ofWidthAndHeight(final String url, final Integer width, final Integer height) {
         return of(url, ImageDimensions.of(width, height), null);
     }
 
@@ -32,12 +32,12 @@ public interface Image {
     }
 
     @JsonIgnore
-    default int getWidth() {
+    default Integer getWidth() {
         return getDimensions().getWidth();
     }
 
     @JsonIgnore
-    default int getHeight() {
+    default Integer getHeight() {
         return getDimensions().getHeight();
     }
 

@@ -28,7 +28,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
         return new PagedQueryResultDsl<>(0, 0, Collections.<T>emptyList());
     }
 
-    public static <T> PagedQueryResultDsl<T> of(final int offset, final int total, final List<T> results) {
+    public static <T> PagedQueryResultDsl<T> of(final Integer offset, final Integer total, final List<T> results) {
         return new PagedQueryResultDsl<>(offset, total, results);
     }
 
@@ -72,7 +72,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
     }
 
     @Override
-    public int size() {
+    public Integer size() {
         return super.size();
     }
 }

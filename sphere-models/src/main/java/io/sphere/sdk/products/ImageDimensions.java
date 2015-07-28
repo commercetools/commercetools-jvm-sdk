@@ -7,26 +7,26 @@ import io.sphere.sdk.models.Base;
 
 public class ImageDimensions extends Base {
     @JsonProperty("w")
-    private final int width;
+    private final Integer width;
     @JsonProperty("h")
-    private final int height;
+    private final Integer height;
 
     @JsonCreator
-    private ImageDimensions(final int width, final int height) {
+    private ImageDimensions(final Integer width, final Integer height) {
         this.width = width;
         this.height = height;
     }
 
-    public int getWidth() {
+    public Integer getWidth() {
         return width;
     }
 
-    public int getHeight() {
+    public Integer getHeight() {
         return height;
     }
 
     @JsonIgnore
-    public static ImageDimensions of(final int width, final int height) {
+    public static ImageDimensions of(final Integer width, final Integer height) {
         return new ImageDimensions(width, height);
     }
 }

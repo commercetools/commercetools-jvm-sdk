@@ -17,13 +17,13 @@ import javax.annotation.Nullable;
  */
 public class AddLineItem extends UpdateAction<Cart> {
     private final String productId;
-    private final int variantId;
+    private final Integer variantId;
     private final long quantity;
     @Nullable
     private final Reference<Channel> supplyChannel;
     @Nullable private final Reference<Channel> distributionChannel;
 
-    private AddLineItem(final String productId, final int variantId, final long quantity, final Reference<Channel> supplyChannel, final Reference<Channel> distributionChannel) {
+    private AddLineItem(final String productId, final Integer variantId, final long quantity, final Reference<Channel> supplyChannel, final Reference<Channel> distributionChannel) {
         super("addLineItem");
         this.productId = productId;
         this.variantId = variantId;
@@ -32,11 +32,11 @@ public class AddLineItem extends UpdateAction<Cart> {
         this.distributionChannel = distributionChannel;
     }
 
-    public static AddLineItem of(final ProductIdentifiable product, final int variantId, final long quantity) {
+    public static AddLineItem of(final ProductIdentifiable product, final Integer variantId, final long quantity) {
         return of(product.getId(), variantId, quantity);
     }
 
-    public static AddLineItem of(final String productId, final int variantId, final long quantity) {
+    public static AddLineItem of(final String productId, final Integer variantId, final long quantity) {
         return new AddLineItem(productId, variantId, quantity, null, null);
     }
 
@@ -44,7 +44,7 @@ public class AddLineItem extends UpdateAction<Cart> {
         return productId;
     }
 
-    public int getVariantId() {
+    public Integer getVariantId() {
         return variantId;
     }
 

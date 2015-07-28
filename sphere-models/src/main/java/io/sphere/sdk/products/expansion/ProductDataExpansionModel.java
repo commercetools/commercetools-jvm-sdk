@@ -10,7 +10,7 @@ public class ProductDataExpansionModel<T> extends ExpansionModel<T> {
         super(parentPath, path);
     }
 
-    public CategoryExpansionModel<T> categories(final int index) {
+    public CategoryExpansionModel<T> categories(final Integer index) {
         return new CategoryExpansionModel<>(pathExpression(), "categories[" + index + "]");
     }
 

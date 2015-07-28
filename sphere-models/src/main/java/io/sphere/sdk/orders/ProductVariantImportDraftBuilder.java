@@ -62,14 +62,14 @@ public class ProductVariantImportDraftBuilder extends Base implements Builder<Pr
         return new ProductVariantImportDraftBuilder(sku, null, null);
     }
 
-    public static ProductVariantImportDraftBuilder of(final String productId, final int variantId, final String sku) {
+    public static ProductVariantImportDraftBuilder of(final String productId, final Integer variantId, final String sku) {
         Objects.requireNonNull(productId);
         Objects.requireNonNull(variantId);
         Objects.requireNonNull(sku);
         return new ProductVariantImportDraftBuilder(sku, productId, variantId);
     }
 
-    public static ProductVariantImportDraftBuilder of(final String productId, final int variantId) {
+    public static ProductVariantImportDraftBuilder of(final String productId, final Integer variantId) {
         Objects.requireNonNull(productId);
         Objects.requireNonNull(variantId);
         return new ProductVariantImportDraftBuilder(null, productId, variantId);

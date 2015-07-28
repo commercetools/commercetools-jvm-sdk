@@ -8,10 +8,10 @@ import io.sphere.sdk.models.Base;
  * A relative product discount with the corresponding basis point value.
  */
 public class RelativeProductDiscountValue extends Base implements ProductDiscountValue {
-    private final int permyriad;
+    private final Integer permyriad;
 
     @JsonCreator
-    private RelativeProductDiscountValue(final int permyriad) {
+    private RelativeProductDiscountValue(final Integer permyriad) {
         this.permyriad = permyriad;
     }
 
@@ -19,7 +19,7 @@ public class RelativeProductDiscountValue extends Base implements ProductDiscoun
      * Per ten thousand. The fraction the price is reduced. 1000 will result in a 10% price reduction.
      * @return permyriad
      */
-    public int getPermyriad() {
+    public Integer getPermyriad() {
         return permyriad;
     }
 
@@ -27,11 +27,11 @@ public class RelativeProductDiscountValue extends Base implements ProductDiscoun
      * Alias for {@link RelativeProductDiscountValue#getPermyriad()}
      * @return permyriad
      */
-    public int getBasisPoint() {
+    public Integer getBasisPoint() {
         return getPermyriad();
     }
 
-    public static RelativeProductDiscountValue of(final int permyriad) {
+    public static RelativeProductDiscountValue of(final Integer permyriad) {
         return new RelativeProductDiscountValue(permyriad);
     }
 }

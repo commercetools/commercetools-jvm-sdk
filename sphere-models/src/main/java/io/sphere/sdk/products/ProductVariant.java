@@ -7,7 +7,7 @@ import java.util.List;
 
 @JsonDeserialize(as = ProductVariantImpl.class)
 public interface ProductVariant extends AttributeContainer {
-    int getId();
+    Integer getId();
 
     @Nullable
     String getSku();

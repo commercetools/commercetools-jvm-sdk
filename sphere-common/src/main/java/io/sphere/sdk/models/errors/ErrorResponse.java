@@ -8,7 +8,7 @@ import java.util.List;
 
 @JsonDeserialize(as = ErrorResponseImpl.class)
 public interface ErrorResponse {
-    int getStatusCode();
+    Integer getStatusCode();
 
     String getMessage();
 
@@ -28,7 +28,7 @@ public interface ErrorResponse {
     }
 
     @JsonIgnore
-    static ErrorResponse of(final int statusCode, final String message, final List<SphereError> errors) {
+    static ErrorResponse of(final Integer statusCode, final String message, final List<SphereError> errors) {
         return new ErrorResponseImpl(statusCode, message, errors);
     }
 }

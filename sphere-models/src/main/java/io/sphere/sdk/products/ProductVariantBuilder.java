@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 import java.util.*;
 
 public final class ProductVariantBuilder extends Base implements Builder<ProductVariant> {
-    private final int id;
+    private final Integer id;
     @Nullable
     private String productId;
     @Nullable
@@ -19,11 +19,11 @@ public final class ProductVariantBuilder extends Base implements Builder<Product
     @Nullable
     private ProductVariantAvailability availability;
 
-    private ProductVariantBuilder(final int id) {
+    private ProductVariantBuilder(final Integer id) {
         this.id = id;
     }
 
-    public static ProductVariantBuilder of(final int id) {
+    public static ProductVariantBuilder of(final Integer id) {
         return new ProductVariantBuilder(id);
     }
 

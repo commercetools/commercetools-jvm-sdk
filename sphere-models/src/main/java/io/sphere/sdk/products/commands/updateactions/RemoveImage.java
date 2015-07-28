@@ -11,10 +11,10 @@ import io.sphere.sdk.products.ProductUpdateScope;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removeImage()}
  */
 public class RemoveImage extends StageableProductUpdateAction {
-    private final int variantId;
+    private final Integer variantId;
     private final String imageUrl;
 
-    private RemoveImage(final String imageUrl, final int variantId, final ProductUpdateScope productUpdateScope) {
+    private RemoveImage(final String imageUrl, final Integer variantId, final ProductUpdateScope productUpdateScope) {
         super("removeImage", productUpdateScope);
         this.imageUrl = imageUrl;
         this.variantId = variantId;
@@ -24,15 +24,15 @@ public class RemoveImage extends StageableProductUpdateAction {
         return imageUrl;
     }
 
-    public int getVariantId() {
+    public Integer getVariantId() {
         return variantId;
     }
 
-    public static RemoveImage of(final Image image, final int variantId, final ProductUpdateScope productUpdateScope) {
+    public static RemoveImage of(final Image image, final Integer variantId, final ProductUpdateScope productUpdateScope) {
         return of(image.getUrl(), variantId, productUpdateScope);
     }
 
-    public static RemoveImage of(final String imageUrl, final int variantId, final ProductUpdateScope productUpdateScope) {
+    public static RemoveImage of(final String imageUrl, final Integer variantId, final ProductUpdateScope productUpdateScope) {
         return new RemoveImage(imageUrl, variantId, productUpdateScope);
     }
 }

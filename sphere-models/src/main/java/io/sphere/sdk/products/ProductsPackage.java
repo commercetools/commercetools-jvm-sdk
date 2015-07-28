@@ -12,7 +12,7 @@ final class ProductsPackage {
     private ProductsPackage() {
     }
 
-    static Optional<ProductVariant> getVariant(final int variantId, final ProductDataLike product) {
+    static Optional<ProductVariant> getVariant(final Integer variantId, final ProductDataLike product) {
         final Optional<ProductVariant> result;
         final ProductVariant masterVariant = product.getMasterVariant();
         if (variantId == masterVariant.getId()) {
@@ -23,7 +23,7 @@ final class ProductsPackage {
         return result;
     }
 
-    static ProductVariant getVariantOrMaster(final int variantId, final ProductDataLike product) {
+    static ProductVariant getVariantOrMaster(final Integer variantId, final ProductDataLike product) {
         return Optional.ofNullable(product.getVariant(variantId)).orElseGet(() -> product.getMasterVariant());
     }
 

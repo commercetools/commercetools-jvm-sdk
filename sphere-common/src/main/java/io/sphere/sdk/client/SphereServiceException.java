@@ -14,28 +14,28 @@ import java.util.Optional;
  */
 public abstract class SphereServiceException extends SphereException {
     static final long serialVersionUID = 0L;
-    private final int statusCode;
+    private final Integer statusCode;
 
-    public SphereServiceException(final int statusCode) {
+    public SphereServiceException(final Integer statusCode) {
         this.statusCode = statusCode;
     }
 
-    public SphereServiceException(final String message, final int statusCode) {
+    public SphereServiceException(final String message, final Integer statusCode) {
         super(message);
         this.statusCode = statusCode;
     }
 
-    public SphereServiceException(final Throwable cause, final int statusCode) {
+    public SphereServiceException(final Throwable cause, final Integer statusCode) {
         super(cause);
         this.statusCode = statusCode;
     }
 
-    public SphereServiceException(final String message, final Throwable cause, final int statusCode) {
+    public SphereServiceException(final String message, final Throwable cause, final Integer statusCode) {
         super(message, cause);
         this.statusCode = statusCode;
     }
 
-    public int getStatusCode() {
+    public Integer getStatusCode() {
         return statusCode;
     }
 

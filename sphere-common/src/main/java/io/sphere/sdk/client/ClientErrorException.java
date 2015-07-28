@@ -6,15 +6,15 @@ package io.sphere.sdk.client;
 public class ClientErrorException extends SphereServiceException {
     private static final long serialVersionUID = 0L;
 
-    public ClientErrorException(final int statusCode) {
+    public ClientErrorException(final Integer statusCode) {
         super(statusCode);
     }
 
-    public ClientErrorException(final String message, final int statusCode) {
+    public ClientErrorException(final String message, final Integer statusCode) {
         super(message, statusCode);
     }
 
-    public ClientErrorException(final String message, final Throwable cause, final int statusCode) {
+    public ClientErrorException(final String message, final Throwable cause, final Integer statusCode) {
         super(message, cause, statusCode);
     }
 }

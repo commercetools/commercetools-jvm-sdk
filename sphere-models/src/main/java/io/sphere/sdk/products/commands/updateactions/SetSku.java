@@ -14,17 +14,17 @@ import javax.annotation.Nullable;
  * {@include.example io.sphere.sdk.products.queries.ProductProjectionQueryTest#queryBySku()}
  */
 public class SetSku extends UpdateAction<Product> {
-    private final int variantId;
+    private final Integer variantId;
     @Nullable
     private final String sku;
 
-    private SetSku(final int variantId, final String sku) {
+    private SetSku(final Integer variantId, final String sku) {
         super("setSKU");
         this.variantId = variantId;
         this.sku = sku;
     }
 
-    public int getVariantId() {
+    public Integer getVariantId() {
         return variantId;
     }
 
@@ -33,7 +33,7 @@ public class SetSku extends UpdateAction<Product> {
         return sku;
     }
 
-    public static SetSku of(final int variantId, @Nullable final String sku) {
+    public static SetSku of(final Integer variantId, @Nullable final String sku) {
         return new SetSku(variantId, sku);
     }
 }

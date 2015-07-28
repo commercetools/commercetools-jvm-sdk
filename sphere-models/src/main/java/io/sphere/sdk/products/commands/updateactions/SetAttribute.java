@@ -15,19 +15,19 @@ import java.util.Optional;
  * @see SetAttributeInAllVariants
  */
 public class SetAttribute extends StageableProductUpdateAction {
-    private final int variantId;
+    private final Integer variantId;
     private final String name;
     @Nullable
     private final JsonNode value;
 
-    SetAttribute(final int variantId, final String name, final JsonNode value, final ProductUpdateScope productUpdateScope) {
+    SetAttribute(final Integer variantId, final String name, final JsonNode value, final ProductUpdateScope productUpdateScope) {
         super("setAttribute", productUpdateScope);
         this.variantId = variantId;
         this.name = name;
         this.value = value;
     }
 
-    public int getVariantId() {
+    public Integer getVariantId() {
         return variantId;
     }
 
@@ -49,7 +49,7 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @param productUpdateScope the scope where the attribute should be updated
      * @return update action
      */
-    public static SetAttribute of(final int variantId, final String name, @Nullable final JsonNode value, final ProductUpdateScope productUpdateScope) {
+    public static SetAttribute of(final Integer variantId, final String name, @Nullable final JsonNode value, final ProductUpdateScope productUpdateScope) {
         return new SetAttribute(variantId, name, value, productUpdateScope);
     }
 
@@ -61,7 +61,7 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @param productUpdateScope the scope where the attribute should be updated
      * @return update action
      */
-    public static SetAttribute ofUnsetAttribute(final int variantId, final String name, final ProductUpdateScope productUpdateScope) {
+    public static SetAttribute ofUnsetAttribute(final Integer variantId, final String name, final ProductUpdateScope productUpdateScope) {
         return of(variantId, name, null, productUpdateScope);
     }
 
@@ -75,7 +75,7 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @param <T> type of the attribute
      * @return update action
      */
-    public static <T> SetAttribute ofUnsetAttribute(final int variantId, final NamedAttributeAccess<T> NamedAttributeAccess, final ProductUpdateScope productUpdateScope) {
+    public static <T> SetAttribute ofUnsetAttribute(final Integer variantId, final NamedAttributeAccess<T> NamedAttributeAccess, final ProductUpdateScope productUpdateScope) {
         return of(variantId, NamedAttributeAccess.getName(), null, productUpdateScope);
     }
 
@@ -87,7 +87,7 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @param productUpdateScope the scope where the attribute should be updated
      * @return update action
      */
-    public static SetAttribute of(final int variantId, final AttributeDraft attribute, final ProductUpdateScope productUpdateScope) {
+    public static SetAttribute of(final Integer variantId, final AttributeDraft attribute, final ProductUpdateScope productUpdateScope) {
         return of(variantId, attribute.getName(), attribute.getValue(), productUpdateScope);
     }
 
@@ -101,7 +101,7 @@ public class SetAttribute extends StageableProductUpdateAction {
      * @param <T> type of the attribute
      * @return update action
      */
-    public static <T> SetAttribute of(final int variantId, final NamedAttributeAccess<T> setter, final T value, final ProductUpdateScope productUpdateScope) {
+    public static <T> SetAttribute of(final Integer variantId, final NamedAttributeAccess<T> setter, final T value, final ProductUpdateScope productUpdateScope) {
         return of(variantId, AttributeDraft.of(setter, value), productUpdateScope);
     }
 }

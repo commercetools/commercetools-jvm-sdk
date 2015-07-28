@@ -12,7 +12,7 @@ public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPath
         this(null, null);
     }
 
-    protected static String collection(final String segmentName, final int index) {
+    protected static String collection(final String segmentName, final Integer index) {
         return String.format("%s[%d]", segmentName, index);
     }
 
@@ -22,7 +22,7 @@ public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPath
     }
 
     @Override
-    public final int hashCode() {
+    public final Integer hashCode() {
         return toSphereExpand().hashCode();
     }
 

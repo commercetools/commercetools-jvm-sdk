@@ -11,14 +11,14 @@ import io.sphere.sdk.products.ProductVariant;
  * @see io.sphere.sdk.products.commands.updateactions.AddVariant
  */
 public class RemoveVariant extends StageableProductUpdateAction {
-    private final int id;
+    private final Integer id;
 
-    private RemoveVariant(final int id, final ProductUpdateScope productUpdateScope) {
+    private RemoveVariant(final Integer id, final ProductUpdateScope productUpdateScope) {
         super("removeVariant", productUpdateScope);
         this.id = id;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -26,7 +26,7 @@ public class RemoveVariant extends StageableProductUpdateAction {
         return of(variant.getId(), productUpdateScope);
     }
 
-    public static RemoveVariant of(final int id, final ProductUpdateScope productUpdateScope) {
+    public static RemoveVariant of(final Integer id, final ProductUpdateScope productUpdateScope) {
         return new RemoveVariant(id, productUpdateScope);
     }
 }
