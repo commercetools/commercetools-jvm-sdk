@@ -3,17 +3,18 @@ package io.sphere.sdk.commands;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
+import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.models.DefaultModelView;
 import io.sphere.sdk.models.Versioned;
-import io.sphere.sdk.http.HttpMethod;
 
 import java.util.List;
+import java.util.function.Function;
 
 import static io.sphere.sdk.json.SphereJsonUtils.toJsonString;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Base class to implement commands that change one entity in SPHERE.IO.
+ * Internal base class to implement commands that change one entity in SPHERE.IO.
  *
  * @param <T> the type of the result of the command, most likely the updated entity without expanded references
  */
@@ -22,9 +23,11 @@ public class UpdateCommandDslImpl<T extends DefaultModelView<T>, C extends Updat
     private final List<? extends UpdateAction<T>> updateActions;
     private final TypeReference<T> typeReference;
     private final String baseEndpointWithoutId;
+    private final Function<UpdateCommandDslBuilder<T, C>, C> creationFunction;
 
     private UpdateCommandDslImpl(final Versioned<T> versioned, final List<? extends UpdateAction<T>> updateActions,
-                                final TypeReference<T> typeReference, final String baseEndpointWithoutId) {
+                                final TypeReference<T> typeReference, final String baseEndpointWithoutId, final Function<UpdateCommandDslBuilder<T, C>, C> creationFunction) {
+        this.creationFunction = requireNonNull(creationFunction);
         this.versioned = requireNonNull(versioned);
         this.updateActions = requireNonNull(updateActions);
         this.typeReference = requireNonNull(typeReference);
@@ -32,8 +35,12 @@ public class UpdateCommandDslImpl<T extends DefaultModelView<T>, C extends Updat
     }
 
     protected UpdateCommandDslImpl(final Versioned<T> versioned, final List<? extends UpdateAction<T>> updateActions,
-                                final JsonEndpoint<T> endpoint) {
-        this(versioned, updateActions, endpoint.typeReference(), endpoint.endpoint());
+                                final JsonEndpoint<T> endpoint, final Function<UpdateCommandDslBuilder<T, C>, C> creationFunction) {
+        this(versioned, updateActions, endpoint.typeReference(), endpoint.endpoint(), creationFunction);
+    }
+
+    protected UpdateCommandDslImpl(final UpdateCommandDslBuilder<T, C> builder) {
+        this(builder.getVersioned(), builder.getUpdateActions(), builder.getTypeReference(), builder.getBaseEndpointWithoutId(), builder.getCreationFunction());
     }
 
     @Override
@@ -52,8 +59,7 @@ public class UpdateCommandDslImpl<T extends DefaultModelView<T>, C extends Updat
 
     @Override
     public C withVersion(final Versioned<T> newVersioned) {
-        //TODO
-        return null;
+        return copyBuilder().versioned(newVersioned).build();
     }
 
     public Versioned<T> getVersioned() {
@@ -62,5 +68,21 @@ public class UpdateCommandDslImpl<T extends DefaultModelView<T>, C extends Updat
 
     public List<? extends UpdateAction<T>> getUpdateActions() {
         return updateActions;
+    }
+
+    protected UpdateCommandDslBuilder<T, C> copyBuilder() {
+        return new UpdateCommandDslBuilder<>(this);
+    }
+
+    String getBaseEndpointWithoutId() {
+        return baseEndpointWithoutId;
+    }
+
+    Function<UpdateCommandDslBuilder<T, C>, C> getCreationFunction() {
+        return creationFunction;
+    }
+
+    TypeReference<T> getTypeReference() {
+        return typeReference;
     }
 }

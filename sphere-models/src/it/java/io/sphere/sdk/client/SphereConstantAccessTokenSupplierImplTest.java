@@ -13,7 +13,6 @@ public class SphereConstantAccessTokenSupplierImplTest extends IntegrationTest {
     public void requestsArePossible() throws Exception {
         withCategory(client(), category -> {
             final CategoryQuery categoryQuery = CategoryQuery.of();
-            final int expected = client().execute(categoryQuery).getTotal();
             final SphereApiConfig apiConfig = SphereApiConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getApiUrl());
 
             final SphereAuthConfig authConfig = SphereAuthConfig.of(getSphereClientConfig().getProjectKey(), getSphereClientConfig().getClientId(), getSphereClientConfig().getClientSecret(), getSphereClientConfig().getAuthUrl());
@@ -21,7 +20,7 @@ public class SphereConstantAccessTokenSupplierImplTest extends IntegrationTest {
             final SphereAccessTokenSupplier fixedTokenSupplier = SphereAccessTokenSupplier.ofOneTimeFetchingToken(authConfig, newHttpClient(), true);
             final SphereClient oneTokenClient = SphereClient.of(apiConfig, newHttpClient(), fixedTokenSupplier);
             final int actual = oneTokenClient.execute(categoryQuery).toCompletableFuture().join().getTotal();
-            assertThat(actual).isEqualTo(expected);
+            assertThat(actual).isGreaterThanOrEqualTo(1);
             oneTokenClient.close();
         });
     }
