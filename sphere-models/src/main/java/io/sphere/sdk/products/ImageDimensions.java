@@ -1,8 +1,9 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.sphere.sdk.models.Base;
 
 public class ImageDimensions extends Base {
     @JsonProperty("w")

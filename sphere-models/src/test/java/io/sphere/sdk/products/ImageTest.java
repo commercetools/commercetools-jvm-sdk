@@ -1,4 +1,4 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.products;
 
 import io.sphere.sdk.json.SphereJsonUtils;
 import org.junit.Test;

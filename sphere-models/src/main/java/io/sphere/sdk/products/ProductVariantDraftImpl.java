@@ -2,7 +2,6 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Image;
 
 import javax.annotation.Nullable;
 import java.util.List;

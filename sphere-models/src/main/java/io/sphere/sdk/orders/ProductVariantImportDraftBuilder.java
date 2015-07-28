@@ -3,7 +3,7 @@ package io.sphere.sdk.orders;
 import io.sphere.sdk.attributes.AttributeImportDraft;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.Image;
+import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.Price;
 
 import javax.annotation.Nullable;

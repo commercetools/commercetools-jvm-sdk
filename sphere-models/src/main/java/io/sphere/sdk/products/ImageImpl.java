@@ -1,7 +1,8 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
 

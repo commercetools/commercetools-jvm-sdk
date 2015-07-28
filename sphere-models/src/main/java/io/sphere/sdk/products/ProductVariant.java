@@ -1,7 +1,6 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.Image;
 
 import javax.annotation.Nullable;
 import java.util.List;

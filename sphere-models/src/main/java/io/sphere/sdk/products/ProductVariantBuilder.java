@@ -3,7 +3,6 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.models.Image;
 
 import javax.annotation.Nullable;
 import java.util.*;

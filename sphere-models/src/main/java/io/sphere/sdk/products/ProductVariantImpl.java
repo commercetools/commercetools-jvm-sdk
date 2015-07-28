@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeMapper;
-import io.sphere.sdk.models.Image;
 
 import javax.annotation.Nullable;
 import java.util.List;

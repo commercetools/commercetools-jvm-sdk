@@ -274,16 +274,16 @@ import java.util.function.BiFunction;
 
 
  <li class=fixed-in-release>Money portions in the taxed price is not null. The method name is now {@link io.sphere.sdk.carts.TaxPortion#getAmount()} instead of {@code getMoney()}.</li>
- <li class=fixed-in-release>Fixed JSON serialization and deserialization of {@link io.sphere.sdk.models.ImageDimensions} which caused adding external images to a product to fail.</li>
+ <li class=fixed-in-release>Fixed JSON serialization and deserialization of {@code ImageDimensions} which caused adding external images to a product to fail.</li>
  </ul>
 
  <h3>1.0.0-M9</h3>
  <ul>
  <li>Added {@link io.sphere.sdk.meta.KnownIssues Known Issues} page.</li>
  <li>Added experimental support for uploading product images in variants. See {@code io.sphere.sdk.products.commands.ExperimentalProductImageUploadCommand}.</li>
- <li>Added factory methods for {@link io.sphere.sdk.models.Image}.</li>
- <li>{@link io.sphere.sdk.models.Image} contains directly getters for width {@link io.sphere.sdk.models.Image#getWidth()}
- and height {@link io.sphere.sdk.models.Image#getHeight()}.</li>
+ <li>Added factory methods for {@code Image}.</li>
+ <li>{@code Image} contains directly getters for width {@code Image#getWidth()}
+ and height {@code Image#getHeight()}.</li>
  <li>{@link io.sphere.sdk.queries.PagedQueryResult} is constructable for empty results. Before this, the SDK throwed an Exception.</li>
  <li>Fields called {@code quantity} are now of type long instead of int.</li>
  <li>Added a documentation page {@link io.sphere.sdk.meta.ConstructionDocumentation how to construct objects}.</li>
