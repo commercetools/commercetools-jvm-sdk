@@ -9,13 +9,13 @@ public final class TaxRateBuilder implements Builder<TaxRate> {
     @Nullable
     private String id;
     private final String name;
-    private final double amount;
+    private final Double amount;
     private final boolean includedInPrice;
     private final CountryCode country;
     @Nullable
     private String state;
 
-    private TaxRateBuilder(final String name, final double amount, final boolean includedInPrice, final CountryCode country) {
+    private TaxRateBuilder(final String name, final Double amount, final boolean includedInPrice, final CountryCode country) {
         this.name = name;
         this.amount = amount;
         this.includedInPrice = includedInPrice;
