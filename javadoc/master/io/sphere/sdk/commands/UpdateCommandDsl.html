@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/commands/UpdateCommandDsl.html" target="_top">Frames</a></li>
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.commands</div>
-<h2 title="Interface UpdateCommandDsl" class="title">Interface UpdateCommandDsl&lt;T&gt;</h2>
+<h2 title="Interface UpdateCommandDsl" class="title">Interface UpdateCommandDsl&lt;T extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;T&gt;,C extends UpdateCommandDsl&lt;T,C&gt;&gt;</h2>
 </div>
 <div class="contentContainer">
 <div class="description">
@@ -103,12 +103,16 @@ var activeTableTab = "activeTableTab";
 <dd><a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a>&lt;T&gt;</dd>
 </dl>
 <dl>
+<dt>All Known Subinterfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html" title="interface in io.sphere.sdk.cartdiscounts.commands">CartDiscountUpdateCommand</a>, <a href="../../../../io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="interface in io.sphere.sdk.carts.commands">CartUpdateCommand</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="interface in io.sphere.sdk.categories.commands">CategoryUpdateCommand</a>, <a href="../../../../io/sphere/sdk/channels/commands/ChannelUpdateCommand.html" title="interface in io.sphere.sdk.channels.commands">ChannelUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html" title="interface in io.sphere.sdk.customergroups.commands">CustomerGroupUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="interface in io.sphere.sdk.customers.commands">CustomerUpdateCommand</a>, <a href="../../../../io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html" title="interface in io.sphere.sdk.discountcodes.commands">DiscountCodeUpdateCommand</a>, <a href="../../../../io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommand.html" title="interface in io.sphere.sdk.inventories.commands">InventoryEntryUpdateCommand</a>, <a href="../../../../io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="interface in io.sphere.sdk.orders.commands">OrderUpdateCommand</a>, <a href="../../../../io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommand.html" title="interface in io.sphere.sdk.productdiscounts.commands">ProductDiscountUpdateCommand</a>, <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="interface in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="interface in io.sphere.sdk.products.commands">ProductUpdateCommand</a>, <a href="../../../../io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="interface in io.sphere.sdk.reviews.commands">ReviewUpdateCommand</a>, <a href="../../../../io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="interface in io.sphere.sdk.shippingmethods.commands">ShippingMethodUpdateCommand</a>, <a href="../../../../io/sphere/sdk/states/commands/StateUpdateCommand.html" title="interface in io.sphere.sdk.states.commands">StateUpdateCommand</a>, <a href="../../../../io/sphere/sdk/zones/commands/ZoneUpdateCommand.html" title="interface in io.sphere.sdk.zones.commands">ZoneUpdateCommand</a></dd>
+</dl>
+<dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html" title="class in io.sphere.sdk.cartdiscounts.commands">CartDiscountUpdateCommand</a>, <a href="../../../../io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands">CartUpdateCommand</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryUpdateCommand</a>, <a href="../../../../io/sphere/sdk/channels/commands/ChannelUpdateCommand.html" title="class in io.sphere.sdk.channels.commands">ChannelUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html" title="class in io.sphere.sdk.customergroups.commands">CustomerGroupUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerUpdateCommand</a>, <a href="../../../../io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html" title="class in io.sphere.sdk.discountcodes.commands">DiscountCodeUpdateCommand</a>, <a href="../../../../io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommand.html" title="class in io.sphere.sdk.inventories.commands">InventoryEntryUpdateCommand</a>, <a href="../../../../io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="class in io.sphere.sdk.orders.commands">OrderUpdateCommand</a>, <a href="../../../../io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommand.html" title="class in io.sphere.sdk.productdiscounts.commands">ProductDiscountUpdateCommand</a>, <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a>, <a href="../../../../io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="class in io.sphere.sdk.reviews.commands">ReviewUpdateCommand</a>, <a href="../../../../io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands">ShippingMethodUpdateCommand</a>, <a href="../../../../io/sphere/sdk/states/commands/StateUpdateCommand.html" title="class in io.sphere.sdk.states.commands">StateUpdateCommand</a>, <a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a>, <a href="../../../../io/sphere/sdk/zones/commands/ZoneUpdateCommand.html" title="class in io.sphere.sdk.zones.commands">ZoneUpdateCommand</a></dd>
+<dd><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dd>
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">UpdateCommandDsl&lt;T&gt;</span>
+<pre>public interface <span class="typeNameLabel">UpdateCommandDsl&lt;T extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;T&gt;,C extends UpdateCommandDsl&lt;T,C&gt;&gt;</span>
 extends <a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a>&lt;T&gt;</pre>
 </li>
 </ul>
@@ -129,7 +133,7 @@ extends <a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="i
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>&gt;&nbsp;versioned)</code>&nbsp;</td>
 </tr>
 </table>
@@ -160,7 +164,7 @@ extends <a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="i
 <ul class="blockListLast">
 <li class="blockList">
 <h4>withVersion</h4>
-<pre><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>&gt;&nbsp;withVersion(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>&gt;&nbsp;versioned)</pre>
+<pre><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">C</a>&nbsp;withVersion(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>&gt;&nbsp;versioned)</pre>
 </li>
 </ul>
 </li>
@@ -191,7 +195,7 @@ extends <a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="i
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/commands/UpdateCommandDsl.html" target="_top">Frames</a></li>

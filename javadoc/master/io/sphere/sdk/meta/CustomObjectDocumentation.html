@@ -175,7 +175,7 @@ public class Foo extends Base {
 
  <h4 id=pojo-create-custom-objects>Create Custom Objects</h4>
 
- Create them with a <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><code>CustomObjectUpsertCommand</code></a>:
+ Create them with a <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="interface in io.sphere.sdk.customobjects.commands"><code>CustomObjectUpsertCommand</code></a>:
 
  <div id="io-sphere-sdk-customobjects-CustomObjectFixtures-createCustomObject--%s" class=code-example><pre><code class='java'>final String container = "CustomObjectFixtures";
 final String key = randomKey();
@@ -192,7 +192,7 @@ assertThat(loadedValue).isEqualTo(value);
 
  <h4 id=pojo-update-custom-objects>Update Custom Objects</h4>
 
-In this case you use also <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands"><code>CustomObjectUpsertCommand</code></a>.
+In this case you use also <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="interface in io.sphere.sdk.customobjects.commands"><code>CustomObjectUpsertCommand</code></a>.
 
  For update operations you can use <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft.ofVersionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)</code></a>
  to use optimistic concurrency control as in here:

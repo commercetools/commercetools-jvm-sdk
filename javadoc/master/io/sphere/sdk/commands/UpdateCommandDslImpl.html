@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.commands</div>
-<h2 title="Class UpdateCommandDslImpl" class="title">Class UpdateCommandDslImpl&lt;T&gt;</h2>
+<h2 title="Class UpdateCommandDslImpl" class="title">Class UpdateCommandDslImpl&lt;T extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;T&gt;,C extends <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;T,C&gt;&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -108,7 +108,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.CommandImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.commands.UpdateCommandDslImpl&lt;T&gt;</li>
+<li>io.sphere.sdk.commands.UpdateCommandDslImpl&lt;T,C&gt;</li>
 </ul>
 </li>
 </ul>
@@ -127,18 +127,14 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;T&gt;</dd>
-</dl>
-<dl>
-<dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html" title="class in io.sphere.sdk.cartdiscounts.commands">CartDiscountUpdateCommand</a>, <a href="../../../../io/sphere/sdk/carts/commands/CartUpdateCommand.html" title="class in io.sphere.sdk.carts.commands">CartUpdateCommand</a>, <a href="../../../../io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="class in io.sphere.sdk.categories.commands">CategoryUpdateCommand</a>, <a href="../../../../io/sphere/sdk/channels/commands/ChannelUpdateCommand.html" title="class in io.sphere.sdk.channels.commands">ChannelUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html" title="class in io.sphere.sdk.customergroups.commands">CustomerGroupUpdateCommand</a>, <a href="../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerUpdateCommand</a>, <a href="../../../../io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html" title="class in io.sphere.sdk.discountcodes.commands">DiscountCodeUpdateCommand</a>, <a href="../../../../io/sphere/sdk/inventories/commands/InventoryEntryUpdateCommand.html" title="class in io.sphere.sdk.inventories.commands">InventoryEntryUpdateCommand</a>, <a href="../../../../io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="class in io.sphere.sdk.orders.commands">OrderUpdateCommand</a>, <a href="../../../../io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommand.html" title="class in io.sphere.sdk.productdiscounts.commands">ProductDiscountUpdateCommand</a>, <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html" title="class in io.sphere.sdk.producttypes.commands">ProductTypeUpdateCommand</a>, <a href="../../../../io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="class in io.sphere.sdk.products.commands">ProductUpdateCommand</a>, <a href="../../../../io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html" title="class in io.sphere.sdk.reviews.commands">ReviewUpdateCommand</a>, <a href="../../../../io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html" title="class in io.sphere.sdk.shippingmethods.commands">ShippingMethodUpdateCommand</a>, <a href="../../../../io/sphere/sdk/states/commands/StateUpdateCommand.html" title="class in io.sphere.sdk.states.commands">StateUpdateCommand</a>, <a href="../../../../io/sphere/sdk/zones/commands/ZoneUpdateCommand.html" title="class in io.sphere.sdk.zones.commands">ZoneUpdateCommand</a></dd>
+<dd><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands">UpdateCommand</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;T,C&gt;</dd>
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">UpdateCommandDslImpl&lt;T&gt;</span>
+<pre>public class <span class="typeNameLabel">UpdateCommandDslImpl&lt;T extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;T&gt;,C extends <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;T,C&gt;&gt;</span>
 extends <a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;T&gt;
-implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;T&gt;</pre>
-<div class="block">Base class to implement commands that change one entity in SPHERE.IO.</div>
+implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;T,C&gt;</pre>
+<div class="block">Internal base class to implement commands that change one entity in SPHERE.IO.</div>
 </li>
 </ul>
 </div>
@@ -159,9 +155,14 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected </code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#UpdateCommandDslImpl-io.sphere.sdk.models.Versioned-java.util.List-io.sphere.sdk.client.JsonEndpoint-">UpdateCommandDslImpl</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;versioned,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#UpdateCommandDslImpl-io.sphere.sdk.commands.UpdateCommandDslBuilder-">UpdateCommandDslImpl</a></span>(<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">UpdateCommandDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;&nbsp;builder)</code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected </code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#UpdateCommandDslImpl-io.sphere.sdk.models.Versioned-java.util.List-io.sphere.sdk.client.JsonEndpoint-java.util.function.Function-">UpdateCommandDslImpl</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;versioned,
                     java.util.List&lt;? extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&gt;&nbsp;updateActions,
-                    <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;endpoint)</code>&nbsp;</td>
+                    <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;endpoint,
+                    java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">UpdateCommandDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;&nbsp;creationFunction)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -179,25 +180,29 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">UpdateCommandDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#copyBuilder--">copyBuilder</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;? extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#getUpdateActions--">getUpdateActions</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#getVersioned--">getVersioned</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#httpRequestIntent--">httpRequestIntent</a></span>()</code>
 <div class="block">Provides an http request intent, this does not include the execution of it.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;</code></td>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></span>(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;newVersioned)</code>&nbsp;</td>
 </tr>
 </table>
@@ -250,15 +255,25 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="UpdateCommandDslImpl-io.sphere.sdk.models.Versioned-java.util.List-io.sphere.sdk.client.JsonEndpoint-">
+<a name="UpdateCommandDslImpl-io.sphere.sdk.models.Versioned-java.util.List-io.sphere.sdk.client.JsonEndpoint-java.util.function.Function-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>UpdateCommandDslImpl</h4>
+<pre>protected&nbsp;UpdateCommandDslImpl(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;versioned,
+                               java.util.List&lt;? extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&gt;&nbsp;updateActions,
+                               <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;endpoint,
+                               java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">UpdateCommandDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;&nbsp;creationFunction)</pre>
+</li>
+</ul>
+<a name="UpdateCommandDslImpl-io.sphere.sdk.commands.UpdateCommandDslBuilder-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>UpdateCommandDslImpl</h4>
-<pre>protected&nbsp;UpdateCommandDslImpl(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;versioned,
-                               java.util.List&lt;? extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&gt;&nbsp;updateActions,
-                               <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;endpoint)</pre>
+<pre>protected&nbsp;UpdateCommandDslImpl(<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">UpdateCommandDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;&nbsp;builder)</pre>
 </li>
 </ul>
 </li>
@@ -278,7 +293,7 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <pre>protected&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;typeReference()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a> extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -293,7 +308,7 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <div class="block">Provides an http request intent, this does not include the execution of it.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a> extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>http request intent</dd>
 </dl>
@@ -305,10 +320,10 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>withVersion</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;withVersion(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;newVersioned)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&nbsp;withVersion(<a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;newVersioned)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a> extends <a href="../../../../io/sphere/sdk/models/DefaultModelView.html" title="interface in io.sphere.sdk.models">DefaultModelView</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -324,10 +339,19 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <a name="getUpdateActions--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getUpdateActions</h4>
 <pre>public&nbsp;java.util.List&lt;? extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&gt;&nbsp;getUpdateActions()</pre>
+</li>
+</ul>
+<a name="copyBuilder--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>copyBuilder</h4>
+<pre>protected&nbsp;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands">UpdateCommandDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;&nbsp;copyBuilder()</pre>
 </li>
 </ul>
 </li>
@@ -357,7 +381,7 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
