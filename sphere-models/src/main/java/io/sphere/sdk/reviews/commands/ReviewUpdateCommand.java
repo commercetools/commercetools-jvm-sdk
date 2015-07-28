@@ -1,7 +1,7 @@
 package io.sphere.sdk.reviews.commands;
 
 import io.sphere.sdk.commands.UpdateAction;
-import io.sphere.sdk.commands.UpdateCommandDslImpl;
+import io.sphere.sdk.commands.UpdateCommandDsl;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.reviews.Review;
 
@@ -12,16 +12,12 @@ import static java.util.Arrays.asList;
 /**
  {@doc.gen list actions}
  */
-public class ReviewUpdateCommand extends UpdateCommandDslImpl<Review, ReviewUpdateCommand> {
-    private ReviewUpdateCommand(final Versioned<Review> versioned, final List<? extends UpdateAction<Review>> updateActions) {
-        super(versioned, updateActions, ReviewEndpoint.ENDPOINT);
-    }
-
-    public static ReviewUpdateCommand of(final Versioned<Review> versioned, final UpdateAction<Review> updateAction) {
+public interface ReviewUpdateCommand extends UpdateCommandDsl<Review, ReviewUpdateCommand> {
+    static ReviewUpdateCommand of(final Versioned<Review> versioned, final UpdateAction<Review> updateAction) {
         return of(versioned, asList(updateAction));
     }
 
-    public static ReviewUpdateCommand of(final Versioned<Review> versioned, final List<? extends UpdateAction<Review>> updateActions) {
-        return new ReviewUpdateCommand(versioned, updateActions);
+    static ReviewUpdateCommand of(final Versioned<Review> versioned, final List<? extends UpdateAction<Review>> updateActions) {
+        return new ReviewUpdateCommandImpl(versioned, updateActions);
     }
 }
