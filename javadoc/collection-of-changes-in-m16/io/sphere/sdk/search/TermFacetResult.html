@@ -139,13 +139,13 @@ implements <a href="../../../../io/sphere/sdk/search/FacetResult.html" title="in
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>long</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetResult.html#getMissing--">getMissing</a></span>()</code>
 <div class="block">The number of resources which have no value for the corresponding field.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>long</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetResult.html#getOther--">getOther</a></span>()</code>
 <div class="block">The number of resources not included in the returned list of terms.</div>
 </td>
@@ -157,16 +157,16 @@ implements <a href="../../../../io/sphere/sdk/search/FacetResult.html" title="in
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>long</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetResult.html#getTotal--">getTotal</a></span>()</code>
 <div class="block">The number of resources matching some term in the facet.</div>
 </td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetResult.html#of-long-long-long-java.util.List-">of</a></span>(long&nbsp;missing,
-  long&nbsp;total,
-  long&nbsp;other,
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetResult.html#of-java.lang.Long-java.lang.Long-java.lang.Long-java.util.List-">of</a></span>(java.lang.Long&nbsp;missing,
+  java.lang.Long&nbsp;total,
+  java.lang.Long&nbsp;other,
   java.util.List&lt;<a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a>&lt;T&gt;&gt;&nbsp;terms)</code>&nbsp;</td>
 </tr>
 </table>
@@ -204,7 +204,7 @@ implements <a href="../../../../io/sphere/sdk/search/FacetResult.html" title="in
 <ul class="blockList">
 <li class="blockList">
 <h4>getMissing</h4>
-<pre>public&nbsp;long&nbsp;getMissing()</pre>
+<pre>public&nbsp;java.lang.Long&nbsp;getMissing()</pre>
 <div class="block">The number of resources which have no value for the corresponding field.
  Use case: in a product search where a term facet is requested for a color attribute,
  it would represent the amount of variants with no color associated.</div>
@@ -220,7 +220,7 @@ implements <a href="../../../../io/sphere/sdk/search/FacetResult.html" title="in
 <ul class="blockList">
 <li class="blockList">
 <h4>getTotal</h4>
-<pre>public&nbsp;long&nbsp;getTotal()</pre>
+<pre>public&nbsp;java.lang.Long&nbsp;getTotal()</pre>
 <div class="block">The number of resources matching some term in the facet.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -234,7 +234,7 @@ implements <a href="../../../../io/sphere/sdk/search/FacetResult.html" title="in
 <ul class="blockList">
 <li class="blockList">
 <h4>getOther</h4>
-<pre>public&nbsp;long&nbsp;getOther()</pre>
+<pre>public&nbsp;java.lang.Long&nbsp;getOther()</pre>
 <div class="block">The number of resources not included in the returned list of terms.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -252,19 +252,19 @@ implements <a href="../../../../io/sphere/sdk/search/FacetResult.html" title="in
 <div class="block">List of the different terms and amount of associated resources.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the list of distinct terms along with the number of matching resources.</dd>
+<dd>the list of distinct terms aLong with the number of matching resources.</dd>
 </dl>
 </li>
 </ul>
-<a name="of-long-long-long-java.util.List-">
+<a name="of-java.lang.Long-java.lang.Long-java.lang.Long-java.util.List-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a>&lt;T&gt;&nbsp;of(long&nbsp;missing,
-                                        long&nbsp;total,
-                                        long&nbsp;other,
+<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a>&lt;T&gt;&nbsp;of(java.lang.Long&nbsp;missing,
+                                        java.lang.Long&nbsp;total,
+                                        java.lang.Long&nbsp;other,
                                         java.util.List&lt;<a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a>&lt;T&gt;&gt;&nbsp;terms)</pre>
 </li>
 </ul>
