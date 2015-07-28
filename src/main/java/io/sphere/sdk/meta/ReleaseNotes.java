@@ -206,7 +206,7 @@ import java.util.function.BiFunction;
     <li class=change-in-release>{@link io.sphere.sdk.meta.ExceptionDocumentation Exception hierarchy}, relocated some exceptions and deleted some.
         <ul>
             <li>Removed SphereBackendException, SphereClientException, JavaConcurrentUtils, Requestable</li>
-            <li>Removed ReferenceExistsException, usage as {@link io.sphere.sdk.models.SphereError} from a {@link io.sphere.sdk.client.ErrorResponseException}</li>
+            <li>Removed ReferenceExistsException, usage as {@code SphereError} from a {@link io.sphere.sdk.client.ErrorResponseException}</li>
             <li>JsonParseException is now {@link io.sphere.sdk.json.JsonException}.</li>
             <li>InvalidQueryOffsetException is replaced with {@link java.lang.IllegalArgumentException}.</li>
         </ul>

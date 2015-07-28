@@ -1,7 +1,7 @@
-package io.sphere.sdk.customers;
+package io.sphere.sdk.customers.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.SphereError;
+import io.sphere.sdk.models.errors.SphereError;
 
 /**
  * A customer endpoint specific error, the account with the given credentials have not been found.

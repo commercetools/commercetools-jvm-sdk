@@ -1,7 +1,7 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.models.ErrorResponse;
-import io.sphere.sdk.models.SphereError;
+import io.sphere.sdk.models.errors.ErrorResponse;
+import io.sphere.sdk.models.errors.SphereError;
 
 import java.util.Collections;
 import java.util.List;

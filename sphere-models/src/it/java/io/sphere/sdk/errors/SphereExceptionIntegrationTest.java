@@ -16,6 +16,7 @@ import io.sphere.sdk.http.HttpStatusCode;
 import io.sphere.sdk.meta.BuildInfo;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.models.errors.InvalidJsonInputError;
+import io.sphere.sdk.models.errors.SphereError;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.hamcrest.CustomTypeSafeMatcher;
@@ -24,7 +25,6 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.Collections;
-import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 import java.util.concurrent.CompletionException;
 import java.util.function.Supplier;

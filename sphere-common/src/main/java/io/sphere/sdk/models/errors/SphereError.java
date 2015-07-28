@@ -1,4 +1,4 @@
-package io.sphere.sdk.models;
+package io.sphere.sdk.models.errors;
 
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.Base;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

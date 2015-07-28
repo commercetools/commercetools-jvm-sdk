@@ -4,11 +4,10 @@ import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerSignInResult;
-import io.sphere.sdk.customers.CustomerInvalidCredentials;
+import io.sphere.sdk.customers.errors.CustomerInvalidCredentials;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.Optional;
 import java.util.concurrent.CompletionStage;
 
 import static io.sphere.sdk.customers.CustomerFixtures.PASSWORD;

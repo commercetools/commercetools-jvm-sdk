@@ -3,7 +3,7 @@ package io.sphere.sdk.client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.models.ErrorResponse;
+import io.sphere.sdk.models.errors.ErrorResponse;
 import io.sphere.sdk.models.SphereException;
 
 import java.util.ArrayList;
