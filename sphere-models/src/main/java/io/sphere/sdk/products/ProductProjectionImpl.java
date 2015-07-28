@@ -40,7 +40,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     private final SearchKeywords searchKeywords;
 
     @JsonCreator
-    ProductProjectionImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
+    ProductProjectionImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                           final Reference<ProductType> productType, @Nullable final Reference<TaxCategory> taxCategory,
                           final boolean hasStagedChanges, final LocalizedStrings name,
                           final Set<Reference<Category>> categories, final LocalizedStrings description,

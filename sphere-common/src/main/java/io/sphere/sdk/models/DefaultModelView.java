@@ -13,7 +13,7 @@ public interface DefaultModelView<T> extends Timestamped, Versioned<T> {
     String getId();
 
     @Override
-    long getVersion();
+    Long getVersion();
 
     @Override
     ZonedDateTime getCreatedAt();

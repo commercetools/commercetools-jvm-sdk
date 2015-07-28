@@ -9,7 +9,7 @@ final class CustomerGroupImpl extends DefaultModelImpl<CustomerGroup> implements
     private final String name;
 
     @JsonCreator
-    CustomerGroupImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String name) {
+    CustomerGroupImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String name) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
     }

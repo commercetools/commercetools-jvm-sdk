@@ -17,10 +17,10 @@ import static io.sphere.sdk.http.HttpMethod.POST;
  */
 public final class CustomerCreateEmailTokenCommand extends CommandImpl<CustomerToken> {
     private final String id;
-    private final long version;
+    private final Long version;
     private final Integer ttlMinutes;
 
-    private CustomerCreateEmailTokenCommand(final String id, final long version, final Integer ttlMinutes) {
+    private CustomerCreateEmailTokenCommand(final String id, final Long version, final Integer ttlMinutes) {
         this.id = id;
         this.version = version;
         this.ttlMinutes = ttlMinutes;
@@ -34,7 +34,7 @@ public final class CustomerCreateEmailTokenCommand extends CommandImpl<CustomerT
         return id;
     }
 
-    public long getVersion() {
+    public Long getVersion() {
         return version;
     }
 

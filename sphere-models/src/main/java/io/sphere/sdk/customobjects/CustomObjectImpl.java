@@ -16,7 +16,7 @@ class CustomObjectImpl<T> extends DefaultModelViewImpl<CustomObject<T>> implemen
 
 
     @JsonCreator
-    CustomObjectImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String container, final String key, final T value) {
+    CustomObjectImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String container, final String key, final T value) {
         super(id, version, createdAt, lastModifiedAt);
         this.container = container;
         this.key = key;

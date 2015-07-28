@@ -72,7 +72,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
     }
 
     @Override
-    public Integer size() {
+    public int size() {
         return super.size();
     }
 }

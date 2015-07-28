@@ -23,7 +23,7 @@ final class StateImpl extends DefaultModelImpl<State> implements State {
     private final Set<Reference<State>> transitions;
 
     @JsonCreator
-    public StateImpl(String id, long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, String key, StateType type,
+    public StateImpl(String id, Long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, String key, StateType type,
                      LocalizedStrings name, LocalizedStrings description, boolean initial,
                      boolean builtIn, Set<Reference<State>> transitions) {
         super(id, version, createdAt, lastModifiedAt);

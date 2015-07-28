@@ -18,7 +18,7 @@ final class ShippingMethodImpl extends DefaultModelImpl<ShippingMethod> implemen
     private final boolean isDefault;
 
     @JsonCreator
-    private ShippingMethodImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String name, final String description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
+    private ShippingMethodImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String name, final String description, final Reference<TaxCategory> taxCategory, final List<ZoneRate> zoneRates, final boolean isDefault) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.description = description;

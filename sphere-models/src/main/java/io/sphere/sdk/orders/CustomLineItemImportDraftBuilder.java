@@ -15,13 +15,13 @@ public class CustomLineItemImportDraftBuilder extends Base implements Builder<Cu
     private final LocalizedStrings name;
     private final MonetaryAmount money;
     private String slug = RandomStringUtils.randomAlphanumeric(20);
-    private final long quantity;
+    private final Long quantity;
     @Nullable
     private Set<ItemState> state;
     private final Reference<TaxCategory> taxCategory;
     private TaxRate taxRate;
 
-    private CustomLineItemImportDraftBuilder(final LocalizedStrings name, final MonetaryAmount money, final long quantity, final Reference<TaxCategory> taxCategory) {
+    private CustomLineItemImportDraftBuilder(final LocalizedStrings name, final MonetaryAmount money, final Long quantity, final Reference<TaxCategory> taxCategory) {
         this.name = name;
         this.money = money;
         this.quantity = quantity;

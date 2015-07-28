@@ -19,7 +19,7 @@ class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements P
     private final List<Reference<Object>> references;
 
     @JsonCreator
-    ProductDiscountImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
+    ProductDiscountImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                         final LocalizedStrings name, final LocalizedStrings description,
                         final ProductDiscountValue value, final String predicate, final String sortOrder,
                         final boolean isActive, final List<Reference<Object>> references) {

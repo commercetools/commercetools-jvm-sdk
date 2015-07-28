@@ -30,7 +30,7 @@ class RangeStatsImpl<T> extends Base implements RangeStats<T> {
     }
 
     RangeStatsImpl(final T from, final T to, final String fromStr, final String toStr, final Long count,
-                   final long totalCount, final T min, final T max, final T total, final Double mean) {
+                   final Long totalCount, final T min, final T max, final T total, final Double mean) {
         this(parseEndpoint(from, fromStr), parseEndpoint(to, toStr), count, min, max, total, mean);
     }
 

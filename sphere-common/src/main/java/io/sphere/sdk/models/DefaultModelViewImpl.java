@@ -4,11 +4,11 @@ import java.time.ZonedDateTime;
 
 public class DefaultModelViewImpl<T> extends Base implements DefaultModelView<T> {
     private final String id;
-    private final long version;
+    private final Long version;
     private final ZonedDateTime createdAt;
     private final ZonedDateTime lastModifiedAt;
 
-    public DefaultModelViewImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt) {
+    public DefaultModelViewImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt) {
         this.id = id;
         this.version = version;
         this.createdAt = createdAt;
@@ -21,7 +21,7 @@ public class DefaultModelViewImpl<T> extends Base implements DefaultModelView<T>
     }
 
     @Override
-    public long getVersion() {
+    public Long getVersion() {
         return version;
     }
 

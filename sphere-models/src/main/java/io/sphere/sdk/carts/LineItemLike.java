@@ -10,7 +10,7 @@ public interface LineItemLike {
 
     Set<ItemState> getState();
 
-    long getQuantity();
+    Long getQuantity();
 
     @Nullable
     DiscountedLineItemPrice getDiscountedPrice();

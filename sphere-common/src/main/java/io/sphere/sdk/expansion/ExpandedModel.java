@@ -22,7 +22,7 @@ public class ExpandedModel<T> extends ExpansionModel<T> implements ExpansionPath
     }
 
     @Override
-    public final Integer hashCode() {
+    public final int hashCode() {
         return toSphereExpand().hashCode();
     }
 

@@ -15,11 +15,11 @@ import static io.sphere.sdk.http.HttpMethod.POST;
  */
 public final class CustomerChangePasswordCommand extends CommandImpl<Customer> {
     private final String id;
-    private final long version;
+    private final Long version;
     private final String currentPassword;
     private final String newPassword;
 
-    private CustomerChangePasswordCommand(final String id, final long version, final String currentPassword, final String newPassword) {
+    private CustomerChangePasswordCommand(final String id, final Long version, final String currentPassword, final String newPassword) {
         this.id = id;
         this.version = version;
         this.currentPassword = currentPassword;
@@ -44,7 +44,7 @@ public final class CustomerChangePasswordCommand extends CommandImpl<Customer> {
         return id;
     }
 
-    public long getVersion() {
+    public Long getVersion() {
         return version;
     }
 

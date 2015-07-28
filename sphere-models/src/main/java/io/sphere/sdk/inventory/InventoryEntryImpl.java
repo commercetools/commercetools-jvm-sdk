@@ -12,15 +12,15 @@ final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implemen
     private final String sku;
     @Nullable
     private final Reference<Channel> supplyChannel;
-    private final long quantityOnStock;
-    private final long availableQuantity;
+    private final Long quantityOnStock;
+    private final Long availableQuantity;
     @Nullable
     private final Integer restockableInDays;
     @Nullable
     private final ZonedDateTime expectedDelivery;
 
     @JsonCreator
-    public InventoryEntryImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final long availableQuantity, final String sku, final Reference<Channel> supplyChannel, final long quantityOnStock, final Integer restockableInDays, final ZonedDateTime expectedDelivery) {
+    public InventoryEntryImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final Long availableQuantity, final String sku, final Reference<Channel> supplyChannel, final Long quantityOnStock, final Integer restockableInDays, final ZonedDateTime expectedDelivery) {
         super(id, version, createdAt, lastModifiedAt);
         this.availableQuantity = availableQuantity;
         this.sku = sku;
@@ -31,7 +31,7 @@ final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implemen
     }
 
     @Override
-    public long getAvailableQuantity() {
+    public Long getAvailableQuantity() {
         return availableQuantity;
     }
 
@@ -42,7 +42,7 @@ final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implemen
     }
 
     @Override
-    public long getQuantityOnStock() {
+    public Long getQuantityOnStock() {
         return quantityOnStock;
     }
 

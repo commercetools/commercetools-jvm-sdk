@@ -22,7 +22,7 @@ public class SimpleOrderMessage extends GenericMessageImpl<Order> {
         );
 
     @JsonCreator
-    public SimpleOrderMessage(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final long sequenceNumber, final long resourceVersion, final String type) {
+    public SimpleOrderMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type);
     }
 }

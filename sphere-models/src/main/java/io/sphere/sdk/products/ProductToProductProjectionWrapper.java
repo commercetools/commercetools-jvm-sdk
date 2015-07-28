@@ -102,7 +102,7 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     }
 
     @Override
-    public long getVersion() {
+    public Long getVersion() {
         return product.getVersion();
     }
 

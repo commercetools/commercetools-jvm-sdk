@@ -16,7 +16,7 @@ public class LineItemImportDraftBuilder extends Base implements Builder<LineItem
     private final LocalizedStrings name;
     private final ProductVariantImportDraft variant;
     private Price price;
-    private long quantity;
+    private Long quantity;
     @Nullable
     private Set<ItemState> state;
     @Nullable
@@ -37,7 +37,7 @@ public class LineItemImportDraftBuilder extends Base implements Builder<LineItem
         return this;
     }
 
-    public LineItemImportDraftBuilder quantity(final long quantity) {
+    public LineItemImportDraftBuilder quantity(final Long quantity) {
         this.quantity = quantity;
         return this;
     }

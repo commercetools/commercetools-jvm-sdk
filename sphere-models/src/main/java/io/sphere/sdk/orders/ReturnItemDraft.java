@@ -5,13 +5,13 @@ import io.sphere.sdk.models.Base;
 import javax.annotation.Nullable;
 
 public class ReturnItemDraft extends Base {
-    private final long quantity;
+    private final Long quantity;
     private final String lineItemId;
     private final ReturnShipmentState shipmentState;
     @Nullable
     private final String comment;
 
-    private ReturnItemDraft(final long quantity, final String lineItemId, final ReturnShipmentState shipmentState, @Nullable final String comment) {
+    private ReturnItemDraft(final Long quantity, final String lineItemId, final ReturnShipmentState shipmentState, @Nullable final String comment) {
         this.quantity = quantity;
         this.lineItemId = lineItemId;
         this.shipmentState = shipmentState;
@@ -26,7 +26,7 @@ public class ReturnItemDraft extends Base {
         return of(quantity, lineItemId, shipmentState, null);
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 

@@ -27,7 +27,7 @@ final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements D
     private final List<Reference<Object>> references;
 
     @JsonCreator
-    public DiscountCodeImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final List<Reference<CartDiscount>> cartDiscounts, final String code, final LocalizedStrings name, final LocalizedStrings description, final boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer, final String cartPredicate, final List<Reference<Object>> references) {
+    public DiscountCodeImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final List<Reference<CartDiscount>> cartDiscounts, final String code, final LocalizedStrings name, final LocalizedStrings description, final boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer, final String cartPredicate, final List<Reference<Object>> references) {
         super(id, version, createdAt, lastModifiedAt);
         this.cartDiscounts = cartDiscounts;
         this.code = code;

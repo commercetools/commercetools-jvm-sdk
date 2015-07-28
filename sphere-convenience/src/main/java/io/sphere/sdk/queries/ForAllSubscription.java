@@ -16,7 +16,7 @@ import java.util.concurrent.ScheduledThreadPoolExecutor;
 import static java.lang.String.format;
 
 final class ForAllSubscription<T extends Identifiable<T>, C extends QueryDsl<T, C>> extends Base implements Subscription {
-    private static final int ELEMENTS_PER_QUERY = 20;
+    private static final long ELEMENTS_PER_QUERY = 20;
     private QueryDsl<T, C> seedQuery;
     private SphereClient sphereClient;
     private Subscriber<? super T> subscriber;

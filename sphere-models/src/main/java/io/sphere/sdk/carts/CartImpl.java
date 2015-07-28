@@ -38,7 +38,7 @@ class CartImpl extends DefaultModelImpl<Cart> implements Cart {
     private final List<DiscountCodeInfo> discountCodes;
 
     @JsonCreator
-    CartImpl(final String id, final long version, final ZonedDateTime createdAt,
+    CartImpl(final String id, final Long version, final ZonedDateTime createdAt,
              final ZonedDateTime lastModifiedAt, final String customerId,
              final String customerEmail, final List<LineItem> lineItems,
              final List<CustomLineItem> customLineItems, final MonetaryAmount totalPrice,

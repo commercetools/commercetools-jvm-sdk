@@ -26,7 +26,7 @@ public class OrderCreatedMessage extends GenericMessageImpl<Order> {
     private final Order order;
 
     @JsonCreator
-    private OrderCreatedMessage(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final long sequenceNumber, final long resourceVersion, final String type, final Order order) {
+    private OrderCreatedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Order order) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type);
         this.order = order;
     }

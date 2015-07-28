@@ -12,7 +12,7 @@ import static io.sphere.sdk.http.HttpMethod.POST;
 
 public final class CustomerPasswordResetCommand extends CommandImpl<Customer> {
     private final String id;
-    private final long version;
+    private final Long version;
     private final String tokenValue;
     private final String newPassword;
 
@@ -45,7 +45,7 @@ public final class CustomerPasswordResetCommand extends CommandImpl<Customer> {
         return id;
     }
 
-    public long getVersion() {
+    public Long getVersion() {
         return version;
     }
 

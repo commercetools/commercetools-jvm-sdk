@@ -54,7 +54,7 @@ public interface Order extends CartLike<Order> {
 
     List<ReturnInfo> getReturnInfo();
 
-    long getLastMessageSequenceNumber();
+    Long getLastMessageSequenceNumber();
 
     @Override
     @Nullable

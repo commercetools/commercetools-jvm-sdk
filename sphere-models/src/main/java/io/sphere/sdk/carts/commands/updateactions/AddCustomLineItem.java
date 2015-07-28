@@ -17,14 +17,14 @@ import javax.money.MonetaryAmount;
  */
 public class AddCustomLineItem extends UpdateAction<Cart> {
     private final LocalizedStrings name;
-    private final long quantity;
+    private final Long quantity;
     private final MonetaryAmount money;
     private final String slug;
     private final Reference<TaxCategory> taxCategory;
 
     private AddCustomLineItem(final LocalizedStrings name, final String slug,
                               final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
-                              final long quantity) {
+                              final Long quantity) {
         super("addCustomLineItem");
         this.name = name;
         this.quantity = quantity;
@@ -48,7 +48,7 @@ public class AddCustomLineItem extends UpdateAction<Cart> {
         return name;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 

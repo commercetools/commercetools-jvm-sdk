@@ -29,7 +29,7 @@ public class FacetResultTest {
         assertThat(termFacet.getTotal()).isEqualTo(6937);
         assertThat(termFacet.getOther()).isEqualTo(0);
         assertThat(termFacet.getTerms()).hasSize(21);
-        assertThat(termFacet.getTerms().get(2)).isEqualTo(TermStats.of("4B432E_1", 585));
+        assertThat(termFacet.getTerms().get(2)).isEqualTo(TermStats.of("4B432E_1", 585L));
     }
 
     @Test

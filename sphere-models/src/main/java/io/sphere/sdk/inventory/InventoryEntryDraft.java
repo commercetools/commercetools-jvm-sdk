@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public class InventoryEntryDraft extends Base {
     private final String sku;
-    private final long quantityOnStock;
+    private final Long quantityOnStock;
     @Nullable
     private final Integer restockableInDays;
     @Nullable
@@ -19,7 +19,7 @@ public class InventoryEntryDraft extends Base {
     @Nullable 
     private final Reference<Channel> supplyChannel;
 
-    private InventoryEntryDraft(final String sku, final long quantityOnStock, final ZonedDateTime expectedDelivery, final Integer restockableInDays, final Reference<Channel> supplyChannel) {
+    private InventoryEntryDraft(final String sku, final Long quantityOnStock, final ZonedDateTime expectedDelivery, final Integer restockableInDays, final Reference<Channel> supplyChannel) {
         this.expectedDelivery = expectedDelivery;
         this.sku = sku;
         this.quantityOnStock = quantityOnStock;
@@ -44,7 +44,7 @@ public class InventoryEntryDraft extends Base {
         return of(sku, quantityOnStock, null, null, null);
     }
 
-    public static InventoryEntryDraft of(final String sku, final long quantityOnStock, final ZonedDateTime expectedDelivery, final Integer restockableInDays, final Reference<Channel> supplyChannel) {
+    public static InventoryEntryDraft of(final String sku, final Long quantityOnStock, final ZonedDateTime expectedDelivery, final Integer restockableInDays, final Reference<Channel> supplyChannel) {
         return new InventoryEntryDraft(sku, quantityOnStock, expectedDelivery, restockableInDays, supplyChannel);
     }
 

@@ -22,7 +22,7 @@ public interface CustomLineItemImportDraft {
 
     String getSlug();
 
-    long getQuantity();
+    Long getQuantity();
 
     Reference<TaxCategory> getTaxCategory();
 

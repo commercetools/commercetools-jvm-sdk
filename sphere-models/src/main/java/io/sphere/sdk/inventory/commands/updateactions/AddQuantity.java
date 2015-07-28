@@ -8,14 +8,14 @@ import io.sphere.sdk.inventory.InventoryEntry;
  * {@include.example io.sphere.sdk.inventories.commands.InventoryEntryUpdateCommandTest#addQuantity()}
  */
 public class AddQuantity extends UpdateAction<InventoryEntry> {
-    private final long quantity;
+    private final Long quantity;
 
-    private AddQuantity(final long quantity) {
+    private AddQuantity(final Long quantity) {
         super("addQuantity");
         this.quantity = quantity;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 

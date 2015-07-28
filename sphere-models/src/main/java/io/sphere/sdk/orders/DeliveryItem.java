@@ -7,10 +7,10 @@ import io.sphere.sdk.models.Base;
 
 public class DeliveryItem extends Base {
     private final String id;
-    private final long quantity;
+    private final Long quantity;
 
     @JsonCreator
-    private DeliveryItem(final String id, final long quantity) {
+    private DeliveryItem(final String id, final Long quantity) {
         this.id = id;
         this.quantity = quantity;
     }
@@ -19,11 +19,15 @@ public class DeliveryItem extends Base {
         return id;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
-    public static DeliveryItem of(final String id, final long quantity) {
+    public static DeliveryItem of(final String id, final int quantity) {
+        return of(id, Long.valueOf(quantity));
+    }
+
+    public static DeliveryItem of(final String id, final Long quantity) {
         return new DeliveryItem(id, quantity);
     }
 

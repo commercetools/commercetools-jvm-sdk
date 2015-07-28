@@ -13,7 +13,7 @@ public interface DefaultModel<T> extends DefaultModelView<T>, Referenceable<T> {
     String getId();
 
     @Override
-    long getVersion();
+    Long getVersion();
 
     @Override
     ZonedDateTime getCreatedAt();

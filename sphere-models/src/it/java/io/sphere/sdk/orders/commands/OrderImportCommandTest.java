@@ -232,8 +232,8 @@ public class OrderImportCommandTest extends IntegrationTest {
                     }
 
                     @Override
-                    public long getQuantity() {
-                        return 2;
+                    public Long getQuantity() {
+                        return 2L;
                     }
 
                     @Override

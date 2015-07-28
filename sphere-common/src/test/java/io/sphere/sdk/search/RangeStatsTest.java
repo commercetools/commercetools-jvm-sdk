@@ -21,6 +21,6 @@ public class RangeStatsTest {
     }
 
     private RangeStats<Double> stats(final Double from, final Double to, final String fromStr, final String toStr) {
-        return new RangeStatsImpl<>(from, to, fromStr, toStr, 2L, 2, 4.0, 5.0, 3.0, 6.0);
+        return new RangeStatsImpl<>(from, to, fromStr, toStr, 2L, 2L, 4.0, 5.0, 3.0, 6.0);
     }
 }

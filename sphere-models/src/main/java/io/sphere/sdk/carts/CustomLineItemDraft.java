@@ -12,9 +12,9 @@ public class CustomLineItemDraft {
     private final MonetaryAmount money;
     private final String slug;
     private final Reference<TaxCategory> taxCategory;
-    private final long quantity;
+    private final Long quantity;
 
-    private CustomLineItemDraft(final LocalizedStrings name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final long quantity) {
+    private CustomLineItemDraft(final LocalizedStrings name, final String slug, final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory, final Long quantity) {
         this.name = name;
         this.money = money;
         this.slug = slug;
@@ -42,7 +42,7 @@ public class CustomLineItemDraft {
         return taxCategory;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 }

@@ -177,7 +177,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                         withOrder(client(), order -> {
                             final LineItem lineItem = order.getLineItems().get(0);
                             assertThat(lineItem).containsState(initialState).containsNotState(nextState);
-                            final int quantity = 1;
+                            final long quantity = 1;
                             final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
                             final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
                             assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
@@ -191,7 +191,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
             withOrderOfCustomLineItems(client(), order -> {
                 final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
                 assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
-                final int quantity = 1;
+                final long quantity = 1;
                 final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
                 final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
                 assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));

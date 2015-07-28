@@ -11,12 +11,12 @@ import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = InventoryEntryImpl.class)
 public interface InventoryEntry extends DefaultModel<InventoryEntry> {
-    long getAvailableQuantity();
+    Long getAvailableQuantity();
 
     @Nullable
     ZonedDateTime getExpectedDelivery();
 
-    long getQuantityOnStock();
+    Long getQuantityOnStock();
 
     @Nullable
     Integer getRestockableInDays();

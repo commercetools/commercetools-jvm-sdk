@@ -18,12 +18,12 @@ import javax.annotation.Nullable;
 public class AddLineItem extends UpdateAction<Cart> {
     private final String productId;
     private final Integer variantId;
-    private final long quantity;
+    private final Long quantity;
     @Nullable
     private final Reference<Channel> supplyChannel;
     @Nullable private final Reference<Channel> distributionChannel;
 
-    private AddLineItem(final String productId, final Integer variantId, final long quantity, final Reference<Channel> supplyChannel, final Reference<Channel> distributionChannel) {
+    private AddLineItem(final String productId, final Integer variantId, final Long quantity, final Reference<Channel> supplyChannel, final Reference<Channel> distributionChannel) {
         super("addLineItem");
         this.productId = productId;
         this.variantId = variantId;
@@ -48,7 +48,7 @@ public class AddLineItem extends UpdateAction<Cart> {
         return variantId;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 
