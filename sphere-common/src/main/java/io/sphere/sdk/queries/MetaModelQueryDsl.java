@@ -1,6 +1,7 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.MetaModelExpansionDsl;
 
 import java.util.List;
 import java.util.function.Function;
@@ -12,7 +13,7 @@ import java.util.function.Function;
  * @param <Q> type of the query model
  * @param <E> type of the expansion model
  */
-public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends EntityQuery<T>, QueryDsl<T, C>,  MetaModelExpansionDsl<T, C, E> {
+public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends EntityQuery<T>, QueryDsl<T, C>, MetaModelExpansionDsl<T, C, E> {
 
     @Override
     C withPredicates(final QueryPredicate<T> queryPredicates);

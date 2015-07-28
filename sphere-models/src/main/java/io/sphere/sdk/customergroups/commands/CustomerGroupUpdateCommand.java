@@ -13,7 +13,7 @@ import static java.util.Arrays.asList;
 /**
  {@doc.gen list actions}
  */
-public class CustomerGroupUpdateCommand extends UpdateCommandDslImpl<CustomerGroup> {
+public class CustomerGroupUpdateCommand extends UpdateCommandDslImpl<CustomerGroup, CustomerGroupUpdateCommand> {
     private CustomerGroupUpdateCommand(final Versioned<CustomerGroup> versioned, final List<? extends UpdateAction<CustomerGroup>> updateActions) {
         super(versioned, updateActions, ENDPOINT);
     }

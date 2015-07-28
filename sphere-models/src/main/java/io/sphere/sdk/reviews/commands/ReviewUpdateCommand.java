@@ -12,7 +12,7 @@ import static java.util.Arrays.asList;
 /**
  {@doc.gen list actions}
  */
-public class ReviewUpdateCommand extends UpdateCommandDslImpl<Review> {
+public class ReviewUpdateCommand extends UpdateCommandDslImpl<Review, ReviewUpdateCommand> {
     private ReviewUpdateCommand(final Versioned<Review> versioned, final List<? extends UpdateAction<Review>> updateActions) {
         super(versioned, updateActions, ReviewEndpoint.ENDPOINT);
     }

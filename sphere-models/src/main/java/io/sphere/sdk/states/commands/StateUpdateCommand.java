@@ -12,7 +12,7 @@ import static java.util.Arrays.asList;
 /**
  {@doc.gen list actions}
  */
-public class StateUpdateCommand extends UpdateCommandDslImpl<State> {
+public class StateUpdateCommand extends UpdateCommandDslImpl<State, StateUpdateCommand> {
     private StateUpdateCommand(final Versioned<State> versioned, final List<? extends UpdateAction<State>> updateActions) {
         super(versioned, updateActions, StateEndpoint.ENDPOINT);
     }

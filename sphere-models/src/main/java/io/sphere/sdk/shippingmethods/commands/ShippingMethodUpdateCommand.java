@@ -12,7 +12,7 @@ import static java.util.Arrays.asList;
 /**
  {@doc.gen list actions}
  */
-public class ShippingMethodUpdateCommand extends UpdateCommandDslImpl<ShippingMethod> {
+public class ShippingMethodUpdateCommand extends UpdateCommandDslImpl<ShippingMethod, ShippingMethodUpdateCommand> {
     private ShippingMethodUpdateCommand(final Versioned<ShippingMethod> versioned, final List<? extends UpdateAction<ShippingMethod>> updateActions) {
         super(versioned, updateActions, ShippingMethodEndpoint.ENDPOINT);
     }

@@ -12,7 +12,7 @@ import static java.util.Arrays.asList;
 /**
  {@doc.gen list actions}
  */
-public class ChannelUpdateCommand extends UpdateCommandDslImpl<Channel> {
+public class ChannelUpdateCommand extends UpdateCommandDslImpl<Channel, ChannelUpdateCommand> {
     public ChannelUpdateCommand(final Versioned<Channel> versioned, final List<? extends UpdateAction<Channel>> updateActions) {
         super(versioned, updateActions, ChannelEndpoint.ENDPOINT);
     }

@@ -14,7 +14,7 @@ import static java.util.Arrays.asList;
  {@doc.gen list actions}
 
  */
-public class ProductTypeUpdateCommand extends UpdateCommandDslImpl<ProductType> {
+public class ProductTypeUpdateCommand extends UpdateCommandDslImpl<ProductType, ProductTypeUpdateCommand> {
     private ProductTypeUpdateCommand(final Versioned<ProductType> versioned, final List<? extends UpdateAction<ProductType>> updateActions) {
         super(versioned, updateActions, ProductTypeEndpoint.ENDPOINT);
     }

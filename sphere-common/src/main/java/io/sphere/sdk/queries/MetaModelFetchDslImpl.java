@@ -4,7 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.client.SphereRequestBase;
+import io.sphere.sdk.expansion.ExpansionDslUtil;
 import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
@@ -18,8 +20,6 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
 import static io.sphere.sdk.queries.QueryParameterKeys.EXPAND;
-import static io.sphere.sdk.utils.ListUtils.listOf;
-import static java.util.Arrays.asList;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -28,7 +28,7 @@ import static java.util.Objects.requireNonNull;
  * @param <C> type of the class implementing this class
  * @param <E> type of the expansion model
  */
-public class MetaModelFetchDslImpl<R, T, C extends MetaModelFetchDsl<R, T, C, E>, E> extends SphereRequestBase implements MetaModelFetchDsl<R, T, C, E> {
+public class MetaModelFetchDslImpl<R, T, C extends MetaModelFetchDsl<R, T, C, E>, E> extends SphereRequestBase implements MetaModelFetchDsl<R, T, C, E>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
 
     final JsonEndpoint<R> endpoint;
     /**
@@ -108,33 +108,38 @@ public class MetaModelFetchDslImpl<R, T, C extends MetaModelFetchDsl<R, T, C, E>
     }
 
     @Override
-    public final C plusExpansionPaths(final ExpansionPath<T> expansionPath) {
-        return withExpansionPaths(listOf(expansionPaths(), expansionPath));
-    }
-
-    @Override
-    public final C plusExpansionPaths(final Function<E, ExpansionPath<T>> m) {
-        return plusExpansionPaths(m.apply(expansionModel));
-    }
-
-    @Override
     public final C withExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
         return copyBuilder().expansionPaths(expansionPaths).build();
     }
 
     @Override
-    public final C withExpansionPaths(final Function<E, ExpansionPath<T>> m) {
-        return withExpansionPaths(asList(m.apply(expansionModel)));
-    }
-
-    @Override
-    public final C withExpansionPaths(final ExpansionPath<T> expansionPath) {
-        return withExpansionPaths(asList(expansionPath));
-    }
-
-    @Override
     public Fetch<R> toFetch() {
         return this;
+    }
+
+    @Override
+    public C plusExpansionPaths(final Function<E, ExpansionPath<T>> m) {
+        return ExpansionDslUtil.plusExpansionPaths(this, m);
+    };
+
+    @Override
+    public C withExpansionPaths(final Function<E, ExpansionPath<T>> m) {
+        return ExpansionDslUtil.withExpansionPaths(this, m);
+    }
+
+    @Override
+    public C plusExpansionPaths(final ExpansionPath<T> expansionPath) {
+        return ExpansionDslUtil.plusExpansionPaths(this, expansionPath);
+    }
+
+    @Override
+    public C withExpansionPaths(final ExpansionPath<T> expansionPath) {
+        return ExpansionDslUtil.withExpansionPaths(this, expansionPath);
+    }
+
+    @Override
+    public E expansionModel() {
+        return expansionModel;
     }
 
     protected MetaModelFetchDslBuilder<R, T, C, E> copyBuilder() {

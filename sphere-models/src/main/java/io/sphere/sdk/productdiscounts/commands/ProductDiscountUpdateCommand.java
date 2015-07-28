@@ -12,7 +12,7 @@ import static java.util.Arrays.asList;
 /**
  {@doc.gen list actions}
  */
-public class ProductDiscountUpdateCommand extends UpdateCommandDslImpl<ProductDiscount> {
+public class ProductDiscountUpdateCommand extends UpdateCommandDslImpl<ProductDiscount, ProductDiscountUpdateCommand> {
     private ProductDiscountUpdateCommand(final Versioned<ProductDiscount> versioned, final List<? extends UpdateAction<ProductDiscount>> updateActions) {
         super(versioned, updateActions, ProductDiscountEndpoint.ENDPOINT);
     }
