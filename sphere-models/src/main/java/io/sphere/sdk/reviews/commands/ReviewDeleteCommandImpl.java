@@ -1,22 +1,12 @@
 package io.sphere.sdk.reviews.commands;
 
 import io.sphere.sdk.commands.ByIdDeleteCommandImpl;
-import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.reviews.Review;
 
-/**
- * Deletes a review in SPHERE.IO.
- *
- * {@include.example io.sphere.sdk.reviews.commands.ReviewDeleteCommandTest#execution()}
- */
-public class ReviewDeleteCommandImpl extends ByIdDeleteCommandImpl<Review> {
+final class ReviewDeleteCommandImpl extends ByIdDeleteCommandImpl<Review> {
 
-    private ReviewDeleteCommandImpl(final Versioned<Review> versioned) {
+    ReviewDeleteCommandImpl(final Versioned<Review> versioned) {
         super(versioned, ReviewEndpoint.ENDPOINT);
-    }
-
-    public static DeleteCommand<Review> of(final Versioned<Review> versioned) {
-        return new ReviewDeleteCommandImpl(versioned);
     }
 }

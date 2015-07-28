@@ -5,18 +5,9 @@ import io.sphere.sdk.commands.ByIdDeleteCommandImpl;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.models.Versioned;
 
-/**
- * Deletes a category in SPHERE.IO.
- *
- * {@include.example io.sphere.sdk.categories.commands.CategoryDeleteCommandTest#execution()}
- */
-public final class CategoryDeleteCommandImpl extends ByIdDeleteCommandImpl<Category> {
+final class CategoryDeleteCommandImpl extends ByIdDeleteCommandImpl<Category> implements CategoryDeleteCommand {
 
-    private CategoryDeleteCommandImpl(final Versioned<Category> versioned) {
+    CategoryDeleteCommandImpl(final Versioned<Category> versioned) {
         super(versioned, CategoryEndpoint.ENDPOINT);
-    }
-
-    public static DeleteCommand<Category> of(final Versioned<Category> versioned) {
-        return new CategoryDeleteCommandImpl(versioned);
     }
 }

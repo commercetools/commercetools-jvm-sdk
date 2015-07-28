@@ -15,7 +15,7 @@ import static java.lang.String.format;
  *
  *
  */
-public final class CustomObjectDeleteCommandImpl<T extends CustomObject<?>> extends CommandImpl<T> implements DeleteCommand<T> {
+final class CustomObjectDeleteCommandImpl<T extends CustomObject<?>> extends CommandImpl<T> implements CustomObjectDeleteCommand<T> {
     private final String container;
     private final String key;
     private final TypeReference<T> typeReference;
@@ -30,7 +30,7 @@ public final class CustomObjectDeleteCommandImpl<T extends CustomObject<?>> exte
         return HttpRequestIntent.of(HttpMethod.DELETE, CustomObjectEndpoint.PATH + format("/%s/%s", container, key));
     }
 
-    private CustomObjectDeleteCommandImpl(final String container, final String key, final TypeReference<T> typeReference) {
+    CustomObjectDeleteCommandImpl(final String container, final String key, final TypeReference<T> typeReference) {
         this.container = CustomObject.validatedContainer(container);
         this.key = CustomObject.validatedKey(key);
         this.typeReference = typeReference;

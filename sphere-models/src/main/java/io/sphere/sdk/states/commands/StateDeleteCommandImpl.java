@@ -1,22 +1,12 @@
 package io.sphere.sdk.states.commands;
 
 import io.sphere.sdk.commands.ByIdDeleteCommandImpl;
-import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.states.State;
 
-/** Deletes a state.
-
- <p>Example:</p>
- {@include.example io.sphere.sdk.states.commands.StateDeleteCommandTest#execution()}
- */
-public class StateDeleteCommandImpl extends ByIdDeleteCommandImpl<State> {
-    private StateDeleteCommandImpl(final Versioned<State> versioned) {
+final class StateDeleteCommandImpl extends ByIdDeleteCommandImpl<State> {
+    StateDeleteCommandImpl(final Versioned<State> versioned) {
         super(versioned, StateEndpoint.ENDPOINT);
-    }
-
-    public static DeleteCommand<State> of(final Versioned<State> versioned) {
-        return new StateDeleteCommandImpl(versioned);
     }
 }
 
