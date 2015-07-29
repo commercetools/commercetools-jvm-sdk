@@ -2,12 +2,9 @@ package io.sphere.sdk.inventory.queries;
 
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.inventory.InventoryEntry;
-import io.sphere.sdk.queries.IntegerQuerySortingModel;
-import io.sphere.sdk.queries.LongQuerySortingModel;
-import io.sphere.sdk.queries.ReferenceQueryModel;
-import io.sphere.sdk.queries.StringQuerySortingModel;
+import io.sphere.sdk.queries.*;
 
-public interface InventoryEntryQueryModel {
+public interface InventoryEntryQueryModel extends DefaultModelQueryModel<InventoryEntry> {
     StringQuerySortingModel<InventoryEntry> sku();
 
     ReferenceQueryModel<InventoryEntry, Channel> supplyChannel();
