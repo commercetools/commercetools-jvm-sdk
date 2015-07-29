@@ -1,6 +1,7 @@
 package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.products.ProductProjectionType;
+import io.sphere.sdk.queries.BooleanQueryModel;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.QueryPredicate;
@@ -26,6 +27,14 @@ public class ProductCatalogDataQueryModel<M> extends QueryModelImpl<M> {
 
     public ProductDataQueryModel<M> staged() {
         return newProductDataQueryModel("staged");
+    }
+
+    public BooleanQueryModel<M> isPublished() {
+        return published();
+    }
+
+    public BooleanQueryModel<M> published() {
+        return booleanModel("published");
     }
 
     private ProductDataQueryModel<M> newProductDataQueryModel(final String pathSegment) {
