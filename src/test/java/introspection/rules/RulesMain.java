@@ -16,7 +16,8 @@ public class RulesMain {
                 new UpdateActionsInCorrectPackageRule(),
                 new CommandsInCorrectPackageRule(),
                 new QueriesInCorrectPackageRule(),
-                new ImplClassesAreForPackageScopeRule()
+                new ImplClassesAreForPackageScopeRule(),
+                new NoOptionalParametersInMethodsRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {
