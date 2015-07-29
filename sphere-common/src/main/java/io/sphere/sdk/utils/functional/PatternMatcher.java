@@ -16,8 +16,8 @@ public class PatternMatcher<T> extends Base {
     }
 
     @SuppressWarnings("unchecked")
-    public <C> PatternMatcher<T> when(final Class<C> type, final Function<C, T> f) {
+    public <C> PatternMatcher<T> when(final Class<? super C> type, final Function<C, ? extends T> f) {
         final boolean noActionRequired = result != null || !type.isAssignableFrom(thing.getClass());
-        return noActionRequired ? this : new PatternMatcher<>(thing, f.apply((C) thing));
+        return noActionRequired ? this : new PatternMatcher<>(this.thing, f.apply((C) this.thing));
     }
 }

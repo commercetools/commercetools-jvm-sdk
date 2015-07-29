@@ -12,7 +12,7 @@ public interface ErrorResponse {
 
     String getMessage();
 
-    List<SphereError> getErrors();
+    List<? extends SphereError> getErrors();
 
     default boolean hasErrorCode(final String errorCode) {
         return getErrors().stream().anyMatch(sphereError -> sphereError.getCode().equals(errorCode));
@@ -28,7 +28,7 @@ public interface ErrorResponse {
     }
 
     @JsonIgnore
-    static ErrorResponse of(final Integer statusCode, final String message, final List<SphereError> errors) {
+    static ErrorResponse of(final Integer statusCode, final String message, final List<? extends SphereError> errors) {
         return new ErrorResponseImpl(statusCode, message, errors);
     }
 }

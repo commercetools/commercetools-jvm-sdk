@@ -34,7 +34,7 @@ abstract class Actor extends AutoCloseableService {
         }
 
         @SuppressWarnings("unchecked")
-        protected <T> ReceiveBuilder when(final Class<T> type, final Consumer<T> consumer) {
+        protected <T> ReceiveBuilder when(final Class<T> type, final Consumer<? super T> consumer) {
             if (!done && type.isAssignableFrom(message.getClass())) {
                 consumer.accept((T) message);
             }

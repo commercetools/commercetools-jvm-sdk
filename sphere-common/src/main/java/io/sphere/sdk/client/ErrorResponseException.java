@@ -20,13 +20,13 @@ public class ErrorResponseException extends BadRequestException implements Error
 
     private final Integer statusCode;
     private final String message;
-    private final List<SphereError> errors;
+    private final List<? extends SphereError> errors;
 
     public ErrorResponseException(final ErrorResponse errorResponse) {
         this(errorResponse.getStatusCode(), errorResponse.getMessage(), errorResponse.getErrors());
     }
 
-    ErrorResponseException(final Integer statusCode, final String message, final List<SphereError> errors) {
+    ErrorResponseException(final Integer statusCode, final String message, final List<? extends SphereError> errors) {
         this.statusCode = statusCode;
         this.message = message;
         this.errors = errors == null ? Collections.<SphereError>emptyList() : errors;
@@ -38,7 +38,7 @@ public class ErrorResponseException extends BadRequestException implements Error
     }
 
     @Override
-    public List<SphereError> getErrors() {
+    public List<? extends SphereError> getErrors() {
         return errors;
     }
 }

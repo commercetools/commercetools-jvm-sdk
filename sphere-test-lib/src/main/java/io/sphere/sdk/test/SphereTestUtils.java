@@ -130,7 +130,7 @@ public final class SphereTestUtils {
         return set.iterator().next();
     }
 
-    public static <T> Function<T, T> consumerToFunction(final Consumer<T> consumer) {
+    public static <T> Function<T, T> consumerToFunction(final Consumer<? super T> consumer) {
         return x -> {
             consumer.accept(x);
             return x;
