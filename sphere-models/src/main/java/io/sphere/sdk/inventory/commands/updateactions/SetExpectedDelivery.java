@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
 
 /**
  *
- * {@include.example io.sphere.sdk.inventories.commands.InventoryEntryUpdateCommandTest#setExpectedDelivery()}
+ * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#setExpectedDelivery()}
  */
 public class SetExpectedDelivery extends UpdateAction<InventoryEntry> {
     @Nullable

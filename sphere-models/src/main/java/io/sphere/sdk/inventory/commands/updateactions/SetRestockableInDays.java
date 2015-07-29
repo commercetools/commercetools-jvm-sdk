@@ -7,7 +7,7 @@ import javax.annotation.Nullable;
 
 /**
  *
- * {@include.example io.sphere.sdk.inventories.commands.InventoryEntryUpdateCommandTest#setRestockableInDays()}
+ * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#setRestockableInDays()}
  */
 public class SetRestockableInDays extends UpdateAction<InventoryEntry> {
     @Nullable

@@ -5,7 +5,7 @@ import io.sphere.sdk.inventory.InventoryEntry;
 
 /**
  *
- * {@include.example io.sphere.sdk.inventories.commands.InventoryEntryUpdateCommandTest#changeQuantity()}
+ * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#changeQuantity()}
  */
 public class ChangeQuantity extends UpdateAction<InventoryEntry> {
     private final long quantity;
