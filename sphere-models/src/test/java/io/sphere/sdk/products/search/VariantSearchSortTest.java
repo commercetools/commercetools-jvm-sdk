@@ -8,7 +8,6 @@ import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class VariantSearchSortTest {
-    private static final ExperimentalProductProjectionSearchModel MODEL = ProductProjectionSearch.model();
 
     @Test
     public void buildsAscendingSortExpression() throws Exception {
@@ -31,6 +30,10 @@ public class VariantSearchSortTest {
     }
 
     private StringSearchModel<ProductProjection, VariantSearchSortDirection> attributeModel() {
-        return MODEL.allVariants().attribute().ofText("size");
+        return searchModel().allVariants().attribute().ofText("size");
+    }
+
+    private ExperimentalProductProjectionSearchModel searchModel() {
+        return ExperimentalProductProjectionSearchModel.of();
     }
 }

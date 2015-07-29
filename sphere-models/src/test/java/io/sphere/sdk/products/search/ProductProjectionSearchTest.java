@@ -5,7 +5,6 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.*;
 import org.junit.Test;
@@ -25,7 +24,7 @@ import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchTest {
-    private static final ExperimentalProductProjectionSearchModel MODEL = ProductProjectionSearch.model();
+    private static final ExperimentalProductProjectionSearchModel MODEL = ExperimentalProductProjectionSearchModel.of();
 
     @Test
     public void canAccessProductName() throws Exception {
@@ -202,7 +201,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void unicode() throws Exception {
-        final String path = ProductProjectionSearch.of(ProductProjectionType.STAGED).withText(GERMAN, "öón").httpRequestIntent().getPath();
+        final String path = ProductProjectionSearch.ofStaged().withText(GERMAN, "öón").httpRequestIntent().getPath();
         final String expected = "/product-projections/search?text.de=%C3%B6%C3%B3n&staged=true";
         assertThat(path).isEqualTo(expected);
     }

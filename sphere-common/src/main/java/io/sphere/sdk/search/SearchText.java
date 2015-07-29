@@ -4,13 +4,15 @@ import io.sphere.sdk.models.Base;
 
 import java.util.Locale;
 
+import static java.util.Objects.requireNonNull;
+
 public class SearchText extends Base {
     private final Locale locale;
     private final String text;
 
     SearchText(final Locale locale, final String text) {
-        this.locale = locale;
-        this.text = text;
+        this.locale = requireNonNull(locale);
+        this.text = requireNonNull(text);
     }
 
     public Locale getLocale() {

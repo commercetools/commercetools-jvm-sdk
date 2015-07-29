@@ -17,7 +17,7 @@ public class ExperimentalProductProjectionSearchModel extends ProductDataSearchM
         super(parent, pathSegment);
     }
 
-    static ExperimentalProductProjectionSearchModel get() {
+    public static ExperimentalProductProjectionSearchModel of() {
         return new ExperimentalProductProjectionSearchModel(null, null);
     }
 

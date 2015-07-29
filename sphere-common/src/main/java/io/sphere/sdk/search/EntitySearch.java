@@ -10,11 +10,11 @@ public interface EntitySearch<T> extends Search<T> {
 
     List<FacetExpression<T>> facets();
 
-    List<FilterExpression<T>> filterResults();
+    List<FilterExpression<T>> resultFilters();
 
-    List<FilterExpression<T>> filterQueries();
+    List<FilterExpression<T>> queryFilters();
 
-    List<FilterExpression<T>> filterFacets();
+    List<FilterExpression<T>> facetFilters();
 
     List<SearchSort<T>> sort();
 
@@ -23,4 +23,6 @@ public interface EntitySearch<T> extends Search<T> {
 
     @Nullable
     Long offset();
+
+    String endpoint();
 }
