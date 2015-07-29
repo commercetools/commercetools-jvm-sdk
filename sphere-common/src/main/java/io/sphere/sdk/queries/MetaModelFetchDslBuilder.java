@@ -25,7 +25,7 @@ public class MetaModelFetchDslBuilder<R, T, C extends MetaModelFetchDsl<R, T, C,
     E expansionModel;
     Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction;
 
-    public MetaModelFetchDslBuilder(final MetaModelFetchDslImpl<R, T, C, E> template) {
+    MetaModelFetchDslBuilder(final MetaModelFetchDslImpl<R, T, C, E> template) {
         endpoint = template.endpoint;
         identifierToSearchFor = template.identifierToSearchFor;
         expansionPaths = template.expansionPaths;

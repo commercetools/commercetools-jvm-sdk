@@ -13,7 +13,7 @@ import io.sphere.sdk.commands.UpdateAction;
 public class RemoveCustomLineItem extends UpdateAction<Cart> {
     private final String customLineItemId;
 
-    public RemoveCustomLineItem(final String customLineItemId) {
+    private RemoveCustomLineItem(final String customLineItemId) {
         super("removeCustomLineItem");
         this.customLineItemId = customLineItemId;
     }

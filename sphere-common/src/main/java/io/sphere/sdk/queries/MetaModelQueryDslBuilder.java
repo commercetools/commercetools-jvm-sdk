@@ -37,7 +37,7 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
     protected final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction;
 
 
-    public MetaModelQueryDslBuilder(final String endpoint, final Function<HttpResponse, PagedQueryResult<T>> resultMapper, final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
+    MetaModelQueryDslBuilder(final String endpoint, final Function<HttpResponse, PagedQueryResult<T>> resultMapper, final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
         this.endpoint = endpoint;
         this.resultMapper = resultMapper;
         this.queryModel = queryModel;
@@ -45,7 +45,7 @@ public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>
         this.queryDslBuilderFunction = queryDslBuilderFunction;
     }
 
-    public MetaModelQueryDslBuilder(final MetaModelQueryDslImpl<T, C, Q, E> template) {
+    MetaModelQueryDslBuilder(final MetaModelQueryDslImpl<T, C, Q, E> template) {
         this(template.endpoint(), r -> template.deserialize(r), template.getQueryModel(), template.getExpansionModel(), template.queryDslBuilderFunction);
         predicate = template.predicates();
         sort = template.sort();
