@@ -1,7 +1,6 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.ListUtils;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,7 +10,7 @@ public abstract class PagedResult<T> extends Base {
     protected final Integer total;
     protected final List<T> results;
 
-    public PagedResult(final Integer offset, final Integer total, final List<T> results) {
+    protected PagedResult(final Integer offset, final Integer total, final List<T> results) {
         this.offset = offset;
         this.total = total;
         this.results = results;

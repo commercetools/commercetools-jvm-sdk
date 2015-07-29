@@ -1,6 +1,5 @@
 package io.sphere.sdk.zones.queries;
 
-import io.sphere.sdk.customers.queries.LocationsCollectionQueryModel;
 import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
@@ -20,6 +19,6 @@ public class ZoneQueryModel extends DefaultModelQueryModelImpl<Zone> {
     }
 
     public LocationsCollectionQueryModel<Zone> locations() {
-        return new LocationsCollectionQueryModel<>(this, "locations");
+        return new LocationsCollectionQueryModelImpl<>(this, "locations");
     }
 }

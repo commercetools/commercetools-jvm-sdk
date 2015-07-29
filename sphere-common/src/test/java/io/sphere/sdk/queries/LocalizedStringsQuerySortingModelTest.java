@@ -7,7 +7,7 @@ import java.util.Locale;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LocalizedStringsQuerySortingModelTest {
-    private final LocalizedStringsQuerySortingModel<String> model = new LocalizedStringsQuerySortingModel<>(null, "thepath");
+    private final LocalizedStringsQuerySortingModel<String> model = new LocalizedStringsQuerySortingModelImpl<>(null, "thepath");
 
     @Test
     public void lang() throws Exception {

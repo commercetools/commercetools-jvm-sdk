@@ -16,6 +16,9 @@ import static java.util.Arrays.asList;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setMetaAttributes()}
  */
 public class MetaAttributesUpdateActions extends Base {
+    private MetaAttributesUpdateActions() {
+    }
+
     public static List<UpdateAction<Product>> of(final MetaAttributes metaAttributes, final ProductUpdateScope productUpdateScope) {
         return asList(
                 SetMetaTitle.of(metaAttributes.getMetaTitle(), productUpdateScope),

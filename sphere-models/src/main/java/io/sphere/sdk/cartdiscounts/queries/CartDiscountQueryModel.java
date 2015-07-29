@@ -16,6 +16,6 @@ public class CartDiscountQueryModel extends DefaultModelQueryModelImpl<CartDisco
     }
 
     public LocalizedStringsQuerySortingModel<CartDiscount> name() {
-        return LocalizedStringsQuerySortingModel.of(this, "name");
+        return localizedStringsQuerySortingModel("name");
     }
 }

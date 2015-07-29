@@ -1,27 +1,31 @@
-package io.sphere.sdk.customers.queries;
+package io.sphere.sdk.zones.queries;
 
 import io.sphere.sdk.queries.*;
 
 import java.util.function.Function;
 
-public class LocationsCollectionQueryModel<T> extends QueryModelImpl<T> {
-    public LocationsCollectionQueryModel(final QueryModel<T> parent, final String pathSegment) {
+class LocationsCollectionQueryModelImpl<T> extends QueryModelImpl<T> implements LocationsCollectionQueryModel<T> {
+    public LocationsCollectionQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
+    @Override
     public CountryQueryModel<T> country() {
         return countryQueryModel("country");
     }
 
+    @Override
     public StringQueryModel<T> state() {
         return stringModel("state");
     }
 
+    @Override
     public QueryPredicate<T> where(final QueryPredicate<PartialLocationsCollectionQueryModel> embeddedPredicate) {
         return embedPredicate(embeddedPredicate);
     }
 
+    @Override
     public QueryPredicate<T> where(final Function<PartialLocationsCollectionQueryModel, QueryPredicate<PartialLocationsCollectionQueryModel>> embeddedPredicate) {
-        return where(embeddedPredicate.apply(PartialLocationsCollectionQueryModel.of()));
+        return where(embeddedPredicate.apply(PartialLocationsCollectionQueryModelImpl.of()));
     }
 }

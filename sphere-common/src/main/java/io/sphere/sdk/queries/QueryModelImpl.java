@@ -74,6 +74,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new IntegerQuerySortingModelImpl<>(this, pathSegment);
     }
 
+    protected LocalizedStringsQuerySortingModel<T> localizedStringsQuerySortingModel(final String pathSegment) {
+        return new LocalizedStringsQuerySortingModelImpl<>(this, pathSegment);
+    }
+
     protected <V> QueryPredicate<T> isPredicate(final V value) {
         return ComparisonQueryPredicate.ofIsEqualTo(this, value);
     }
