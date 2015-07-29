@@ -47,7 +47,7 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     }
 
     protected <R> ReferenceOptionalQueryModel<T, R> referenceOptionalModel(final String pathSegment) {
-        return new ReferenceOptionalQueryModel<>(this, pathSegment);
+        return new ReferenceOptionalQueryModelImpl<>(this, pathSegment);
     }
 
     protected <E extends SphereEnumeration> SphereEnumerationQueryModel<T, E> enumerationQueryModel(final String pathSegment) {

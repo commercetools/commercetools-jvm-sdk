@@ -8,7 +8,7 @@ public class CommandsInCorrectPackageRule extends ClassStrategyRule {
     }
 
     @Override
-    protected boolean ruleIsApplied(final Class<?> clazz) {
+    protected boolean isRuleConform(final Class<?> clazz) {
         return clazz.getPackage().getName().endsWith(".commands");
     }
 }

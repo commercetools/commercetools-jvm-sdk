@@ -2,6 +2,8 @@ package introspection.rules;
 
 import java.util.List;
 
+import static java.util.stream.Collectors.joining;
+
 public class RulesReport {
     private final List<RuleViolation> violations;
 
@@ -20,7 +22,7 @@ public class RulesReport {
     @Override
     public String toString() {
         return "RulesReport{" +
-                "violations=" + violations +
+                "violations=\n" + violations.stream().map(Object::toString).collect(joining("\n")) +
                 '}';
     }
 }

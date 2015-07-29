@@ -12,12 +12,12 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 import java.util.concurrent.ForkJoinPool;
 
-final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAdapter {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AsyncHttpClientAdapterImpl.class);
+final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter {
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultAsyncHttpClientAdapterImpl.class);
     private final AsyncHttpClient asyncHttpClient;
     private final ForkJoinPool threadPool = new ForkJoinPool();
 
-    private AsyncHttpClientAdapterImpl(final AsyncHttpClient asyncHttpClient) {
+    private DefaultAsyncHttpClientAdapterImpl(final AsyncHttpClient asyncHttpClient) {
         this.asyncHttpClient = asyncHttpClient;
     }
 
@@ -74,8 +74,8 @@ final class AsyncHttpClientAdapterImpl extends Base implements AsyncHttpClientAd
         threadPool.shutdown();
     }
 
-    public static AsyncHttpClientAdapterImpl of(final AsyncHttpClient asyncHttpClient) {
-        return new AsyncHttpClientAdapterImpl(asyncHttpClient);
+    public static DefaultAsyncHttpClientAdapterImpl of(final AsyncHttpClient asyncHttpClient) {
+        return new DefaultAsyncHttpClientAdapterImpl(asyncHttpClient);
     }
 
     /**

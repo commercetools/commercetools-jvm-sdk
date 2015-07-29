@@ -15,7 +15,8 @@ public class RulesMain {
                 //TODO scan package
                 new UpdateActionsInCorrectPackageRule(),
                 new CommandsInCorrectPackageRule(),
-                new QueriesInCorrectPackageRule()
+                new QueriesInCorrectPackageRule(),
+                new ImplClassesAreForPackageScopeRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {
