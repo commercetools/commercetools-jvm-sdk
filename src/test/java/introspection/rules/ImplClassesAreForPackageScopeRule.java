@@ -1,6 +1,6 @@
 package introspection.rules;
 
-import java.util.List;Add rule
+import java.util.List;
 
 import static java.util.Arrays.asList;
 
