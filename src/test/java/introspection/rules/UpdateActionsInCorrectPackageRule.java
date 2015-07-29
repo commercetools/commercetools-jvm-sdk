@@ -2,7 +2,7 @@ package introspection.rules;
 
 import io.sphere.sdk.commands.UpdateAction;
 
-public class UpdateActionsInCorrectPackageRule extends StrategyRule {
+public class UpdateActionsInCorrectPackageRule extends ClassStrategyRule {
 
     @Override
     protected boolean classIsIncludedInRule(final Class<?> clazz) {

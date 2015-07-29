@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
-public abstract class StrategyRule extends AbstractRule {
+public abstract class ClassStrategyRule extends AbstractRule {
     protected abstract boolean classIsIncludedInRule(final Class<?> clazz);
     protected abstract boolean ruleIsApplied(final Class<?> clazz);
 

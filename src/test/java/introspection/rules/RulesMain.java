@@ -11,7 +11,12 @@ import static java.util.Arrays.asList;
 public class RulesMain {
     public static void main(String[] args) throws IOException {
         final List<Class<?>> classes = IntrospectionUtils.publicClassesOfProject();
-        final List<Rule> rules = asList(new UpdateActionsInCorrectPackageRule());
+        final List<Rule> rules = asList(
+                //TODO scan package
+                new UpdateActionsInCorrectPackageRule(),
+                new CommandsInCorrectPackageRule(),
+                new QueriesInCorrectPackageRule()
+        );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {
                     final RulesReport report = rule.check(classes);
@@ -20,7 +25,7 @@ public class RulesMain {
                     }
                     return report.isOk();
                 })
-                .anyMatch(res -> res);
+                .noneMatch(res -> res != true);
         if (!allIsOk) {
             System.exit(1);
         }
