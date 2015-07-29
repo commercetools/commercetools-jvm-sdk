@@ -18,7 +18,8 @@ public class RulesMain {
                 new QueriesInCorrectPackageRule(),
                 new ImplClassesAreForPackageScopeRule(),
                 new NoOptionalParametersInMethodsRule(),
-                new NoOptionalReturnTypeForGettersRule()
+                new NoOptionalReturnTypeForGettersRule(),
+                new NoOptionalParametersInPublicConstructorRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {
