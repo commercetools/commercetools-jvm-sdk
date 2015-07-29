@@ -14,9 +14,6 @@ public interface StringQuerySortingModel<T> extends QuerySortingModel<T>, String
     QueryPredicate<T> isNot(String s);
 
     @Override
-    QueryPredicate<T> isIn(String arg0, String... args);
-
-    @Override
     QueryPredicate<T> isIn(Iterable<String> args);
 
     @Override
@@ -33,9 +30,6 @@ public interface StringQuerySortingModel<T> extends QuerySortingModel<T>, String
 
     @Override
     QueryPredicate<T> isNotIn(Iterable<String> args);
-
-    @Override
-    QueryPredicate<T> isNotIn(String arg0, String... args);
 
     @Override
     QueryPredicate<T> isPresent();

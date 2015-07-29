@@ -17,11 +17,4 @@ final class MessageTypeQueryModelImpl extends StringQuerySortingModelImpl<Messag
     public QueryPredicate<Message> is(final MessageDerivatHint<?> hint) {
         return hint.predicate();
     }
-
-    @Override
-    public QueryPredicate<Message> isIn(final MessageDerivatHint<?> hint, final MessageDerivatHint<?> ... moreHints) {
-        return Arrays.stream(moreHints)
-                .map(h -> h.predicate())
-                .reduce(hint.predicate(), (left, right) -> left.or(right));
-    }
 }

@@ -20,17 +20,10 @@ public interface LongQuerySortingModel<T> extends QueryModel<T>, QuerySortingMod
     QueryPredicate<T> isNot(Long i);
 
     @Override
-    QueryPredicate<T> isNotIn(Long arg0, Long... args);
-
-    @Override
     QueryPredicate<T> isNotIn(Iterable<Long> args);
 
     @Override
     QueryPredicate<T> isNotPresent();
-
-    @SuppressWarnings("unchecked")
-    @Override
-    QueryPredicate<T> isIn(Long arg0, Long... args);
 
     @Override
     QueryPredicate<T> isIn(Iterable<Long> args);

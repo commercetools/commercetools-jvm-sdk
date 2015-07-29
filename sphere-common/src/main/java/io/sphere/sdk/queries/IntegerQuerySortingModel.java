@@ -20,17 +20,10 @@ public interface IntegerQuerySortingModel<T> extends QueryModel<T>, QuerySorting
     QueryPredicate<T> isNot(Integer i);
 
     @Override
-    QueryPredicate<T> isNotIn(Integer arg0, Integer... args);
-
-    @Override
     QueryPredicate<T> isNotIn(Iterable<Integer> args);
 
     @Override
     QueryPredicate<T> isNotPresent();
-
-    @SuppressWarnings("unchecked")
-    @Override
-    QueryPredicate<T> isIn(Integer arg0, Integer... args);
 
     @Override
     QueryPredicate<T> isIn(Iterable<Integer> args);

@@ -46,11 +46,6 @@ public class StringQuerySortingModelImpl<T> extends QueryModelImpl<T> implements
     }
 
     @Override
-    public QueryPredicate<T> isIn(final String arg0, final String... args) {
-        return isIn(listOf(arg0, args));
-    }
-
-    @Override
     public QueryPredicate<T> isIn(final Iterable<String> args) {
         return new IsInQueryPredicate<>(this, normalize(args));
     }
@@ -78,11 +73,6 @@ public class StringQuerySortingModelImpl<T> extends QueryModelImpl<T> implements
     @Override
     public QueryPredicate<T> isNotIn(final Iterable<String> args) {
         return new IsNotInQueryPredicate<>(this, normalize(args));
-    }
-
-    @Override
-    public QueryPredicate<T> isNotIn(final String arg0, final String... args) {
-        return isNotIn(listOf(arg0, args));
     }
 
     @Override
