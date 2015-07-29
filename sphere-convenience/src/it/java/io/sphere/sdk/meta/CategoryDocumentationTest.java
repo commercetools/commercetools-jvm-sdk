@@ -260,7 +260,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
             withProductInCategory(client(), tshirtCategory, tshirtProduct -> {
                 final PagedQueryResult<ProductProjection> resultForParentCategory =
                         //query for the parent category
-                        execute(ProductProjectionQuery.ofStaged().withPredicates(m -> m.categories().isIn(mensClothingCategory)));
+                        execute(ProductProjectionQuery.ofStaged().withPredicates(m -> m.categories().isIn(asList(mensClothingCategory))));
                 assertThat(resultForParentCategory.getResults())
                         .overridingErrorMessage(
                                 "if a product is in a category," +
@@ -268,7 +268,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
                                         "the query will not find the product")
                         .isEmpty();
 
-                final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicates(m -> m.categories().isIn(tshirtCategory, jeansCategory));
+                final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicates(m -> m.categories().isIn(asList(tshirtCategory, jeansCategory)));
                 assertThat(query.predicates().get(0))
                         .isEqualTo(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
                 final PagedQueryResult<ProductProjection> resultForDirectCategories =

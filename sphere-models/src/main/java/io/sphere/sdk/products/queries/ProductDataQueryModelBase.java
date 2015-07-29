@@ -57,7 +57,7 @@ class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
     }
 
     public ReferenceCollectionQueryModel<T, Category> categories() {
-        return new ReferenceCollectionQueryModel<>(this, "categories");
+        return referenceCollectionModel("categories");
     }
 }
 

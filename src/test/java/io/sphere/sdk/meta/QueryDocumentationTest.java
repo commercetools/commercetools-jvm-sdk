@@ -66,14 +66,14 @@ public class QueryDocumentationTest {
                 .lang(ENGLISH).is("foo");
         final Reference<Category> cat1 = Category.reference("cat1");
         final QueryPredicate<Product> isInCat1 = ProductQueryModel.of().masterData().current()
-                .categories().isIn(cat1);
+                .categories().isIn(asList(cat1));
         final ProductQuery query = ProductQuery.of().withPredicates(nameIsFoo.and(isInCat1));
     }
 
     public void predicateAndWithWhereExample() {
         final Reference<Category> cat1 = Category.reference("cat1");
         final QueryPredicate<Product> nameIsFooAndIsInCat1 = ProductQueryModel.of().masterData().current()
-                .where(cur -> cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(cat1)));
+                .where(cur -> cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(asList(cat1))));
         final ProductQuery query = ProductQuery.of().withPredicates(nameIsFooAndIsInCat1);
     }
 
