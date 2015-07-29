@@ -102,11 +102,5 @@ public interface Order extends CartLike<Order> {
     Reference<Cart> getCart();
 
     @Override
-    Optional<CustomLineItem> findCustomLineItem(final String customLineItemId);
-
-    @Override
-    Optional<LineItem> findLineItem(final String lineItemId);
-
-    @Override
     List<DiscountCodeInfo> getDiscountCodes();
 }
