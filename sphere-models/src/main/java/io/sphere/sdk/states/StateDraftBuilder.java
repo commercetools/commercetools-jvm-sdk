@@ -8,7 +8,7 @@ import io.sphere.sdk.models.Reference;
 import javax.annotation.Nullable;
 import java.util.Set;
 
-public class StateDraftBuilder extends Base implements Builder<StateDraft> {
+public final class StateDraftBuilder extends Base implements Builder<StateDraft> {
     private final String key;
     private final StateType type;
     @Nullable
@@ -20,7 +20,7 @@ public class StateDraftBuilder extends Base implements Builder<StateDraft> {
     @Nullable
     private Set<Reference<State>> transitions;
 
-    public StateDraftBuilder(final String key, final StateType type) {
+    private StateDraftBuilder(final String key, final StateType type) {
         this.key = key;
         this.type = type;
     }
