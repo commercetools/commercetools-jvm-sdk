@@ -12,7 +12,9 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
-public class ExperimentalReactiveStreamUtils {
+public final class ExperimentalReactiveStreamUtils {
+    private ExperimentalReactiveStreamUtils() {
+    }
 
     public static <T extends Identifiable<T>, C extends QueryDsl<T, C>> Publisher<T> publisherOf(final QueryDsl<T, C> seedQuery, final SphereClient sphereClient) {
         return new QueryEndpointElementsPublisher<>(seedQuery, sphereClient);

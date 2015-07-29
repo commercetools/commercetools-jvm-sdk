@@ -2,34 +2,19 @@ package io.sphere.sdk.inventory.queries;
 
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.inventory.InventoryEntry;
-import io.sphere.sdk.queries.*;
+import io.sphere.sdk.queries.IntegerQuerySortingModel;
+import io.sphere.sdk.queries.LongQuerySortingModel;
+import io.sphere.sdk.queries.ReferenceQueryModel;
+import io.sphere.sdk.queries.StringQuerySortingModel;
 
-public class InventoryEntryQueryModel extends DefaultModelQueryModelImpl<InventoryEntry> {
-    public InventoryEntryQueryModel(final QueryModel<InventoryEntry> parent, final String pathSegment) {
-        super(parent, pathSegment);
-    }
+public interface InventoryEntryQueryModel {
+    StringQuerySortingModel<InventoryEntry> sku();
 
-    public static InventoryEntryQueryModel of() {
-        return new InventoryEntryQueryModel(null, null);
-    }
+    ReferenceQueryModel<InventoryEntry, Channel> supplyChannel();
 
-    public StringQuerySortingModel<InventoryEntry> sku() {
-        return stringModel("sku");
-    }
+    LongQuerySortingModel<InventoryEntry> quantityOnStock();
 
-    public ReferenceQueryModel<InventoryEntry, Channel> supplyChannel() {
-        return referenceModel("supplyChannel");
-    }
+    LongQuerySortingModel<InventoryEntry> availableQuantity();
 
-    public LongQuerySortingModel<InventoryEntry> quantityOnStock() {
-        return longModel("quantityOnStock");
-    }
-
-    public LongQuerySortingModel<InventoryEntry> availableQuantity() {
-        return longModel("availableQuantity");
-    }
-
-    public IntegerQuerySortingModel<InventoryEntry> restockableInDays() {
-        return integerModel("restockableInDays");
-    }
+    IntegerQuerySortingModel<InventoryEntry> restockableInDays();
 }

@@ -20,7 +20,7 @@ public final class ProductProjectionQueryModel extends ProductDataQueryModelBase
     }
 
     public BooleanQueryModel<ProductProjection> hasStagedChanges() {
-        return new BooleanQueryModel<>(this, "hasStagedChanges");
+        return booleanModel("hasStagedChanges");
     }
 
     @Override

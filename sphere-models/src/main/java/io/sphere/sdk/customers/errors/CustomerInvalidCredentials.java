@@ -12,7 +12,11 @@ public class CustomerInvalidCredentials extends SphereError {
     public static final String CODE = "InvalidCredentials";
 
     @JsonCreator
-    public CustomerInvalidCredentials(final String message) {
+    private CustomerInvalidCredentials(final String message) {
         super(CODE, message);
+    }
+
+    public static CustomerInvalidCredentials of(final String message) {
+        return new CustomerInvalidCredentials(message);
     }
 }

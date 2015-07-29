@@ -16,7 +16,7 @@ public class ChannelDraftBuilder extends Base implements Builder<ChannelDraft> {
     @Nullable
     private LocalizedStrings description;
 
-    public ChannelDraftBuilder(final String key) {
+    private ChannelDraftBuilder(final String key) {
         this.key = key;
     }
 

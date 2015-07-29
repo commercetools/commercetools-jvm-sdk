@@ -25,7 +25,7 @@ public abstract class CartLikeQueryModel<T> extends DefaultModelQueryModelImpl<T
     }
 
     public CountryQueryModel<T> country() {
-        return new CountryQueryModel<>(this, "country");
+        return countryQueryModel("country");
     }
 
     public ReferenceOptionalQueryModel<T, CustomerGroup> customerGroup() {

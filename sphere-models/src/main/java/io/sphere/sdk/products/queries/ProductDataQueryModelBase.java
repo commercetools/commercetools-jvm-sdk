@@ -9,7 +9,7 @@ import java.util.function.Function;
 class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
 
     public QueryPredicate<T> where(final QueryPredicate<PartialProductDataQueryModel> embeddedPredicate) {
-        return new EmbeddedQueryPredicate<>(this, embeddedPredicate);
+        return embedPredicate(embeddedPredicate);
     }
 
     public QueryPredicate<T> where(final Function<PartialProductDataQueryModel, QueryPredicate<PartialProductDataQueryModel>> embeddedPredicate) {

@@ -19,7 +19,8 @@ public class RulesMain {
                 new ImplClassesAreForPackageScopeRule(),
                 new NoOptionalParametersInMethodsRule(),
                 new NoOptionalReturnTypeForGettersRule(),
-                new NoOptionalParametersInPublicConstructorRule()
+                new NoOptionalParametersInPublicConstructorRule(),
+                new PublicConstructorsAreTheExceptionRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

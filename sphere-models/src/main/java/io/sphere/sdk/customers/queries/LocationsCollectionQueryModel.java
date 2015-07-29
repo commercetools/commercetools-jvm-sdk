@@ -10,7 +10,7 @@ public class LocationsCollectionQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public CountryQueryModel<T> country() {
-        return new CountryQueryModel<T>(this, "country");
+        return countryQueryModel("country");
     }
 
     public StringQueryModel<T> state() {
@@ -18,7 +18,7 @@ public class LocationsCollectionQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public QueryPredicate<T> where(final QueryPredicate<PartialLocationsCollectionQueryModel> embeddedPredicate) {
-        return new EmbeddedQueryPredicate<>(this, embeddedPredicate);
+        return embedPredicate(embeddedPredicate);
     }
 
     public QueryPredicate<T> where(final Function<PartialLocationsCollectionQueryModel, QueryPredicate<PartialLocationsCollectionQueryModel>> embeddedPredicate) {

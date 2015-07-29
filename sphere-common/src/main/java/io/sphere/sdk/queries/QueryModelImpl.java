@@ -59,7 +59,11 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     }
 
     protected BooleanQueryModel<T> booleanModel(final String pathSegment) {
-        return new BooleanQueryModel<>(this, pathSegment);
+        return new BooleanQueryModelImpl<>(this, pathSegment);
+    }
+
+    protected CountryQueryModel<T> countryQueryModel(final String pathSegment) {
+        return new CountryQueryModelImpl<>(this, pathSegment);
     }
 
     protected LongQuerySortingModel<T> longModel(final String pathSegment) {
@@ -116,6 +120,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
 
     protected QueryPredicate<T> isNotPresentPredicate() {
         return new OptionalQueryPredicate<>(this, false);
+    }
+
+    protected <X> QueryPredicate<T> embedPredicate(final QueryPredicate<X> embeddedPredicate) {
+        return new EmbeddedQueryPredicate<>(this, embeddedPredicate);
     }
 
     protected QueryPredicate<T> isEmptyCollectionQueryPredicate() {
