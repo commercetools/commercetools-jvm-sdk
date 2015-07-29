@@ -14,7 +14,7 @@ public class IsInQueryPredicateTest {
 
     private QueryPredicate<String> create(String ... values) {
         return new IsInQueryPredicate<String, String, String>(emptyQueryModel, Arrays.stream(values)
-                .map(StringQuerySortingModel::normalize)
+                .map(StringQuerySortingModelImpl::normalize)
                 .collect(toList()));
     }
 

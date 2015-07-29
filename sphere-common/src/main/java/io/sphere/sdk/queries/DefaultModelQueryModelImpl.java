@@ -10,11 +10,11 @@ public class DefaultModelQueryModelImpl<T> extends QueryModelImpl<T> {
     }
 
     public final TimestampSortingModel<T> createdAt() {
-        return new TimestampSortingModel<>(this, "createdAt");
+        return new TimestampSortingModelImpl<>(this, "createdAt");
     }
 
     public final TimestampSortingModel<T> lastModifiedAt() {
-        return new TimestampSortingModel<>(this, "lastModifiedAt");
+        return new TimestampSortingModelImpl<>(this, "lastModifiedAt");
     }
 
     public final QueryPredicate<T> not(final QueryPredicate<T> queryPredicateToNegate) {

@@ -6,7 +6,7 @@ import static io.sphere.sdk.queries.QuerySortDirection.ASC;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class StringQuerySortingModelTest {
-    private final StringQuerySortingModel<Fixtures.Product> model = new StringQuerySortingModel<>(null, "id");
+    private final StringQuerySortingModel<Fixtures.Product> model = new StringQuerySortingModelImpl<>(null, "id");
 
     @Test
     public void generateSimpleQueries() throws Exception {
@@ -36,7 +36,7 @@ public class StringQuerySortingModelTest {
     @Test
     public void generateHierarchicalQueries() throws Exception {
         final QueryModelImpl<Fixtures.Product> parent = new QueryModelImpl<>(new QueryModelImpl<>(new QueryModelImpl<>(new QueryModelImpl<>(null, "x1"), "x2"), "x3"), "x4");
-        assertThat(new StringQuerySortingModel<>(parent, "x5").is("foo").toSphereQuery()).isEqualTo("x1(x2(x3(x4(x5=\"foo\"))))");
+        assertThat(new StringQuerySortingModelImpl<>(parent, "x5").is("foo").toSphereQuery()).isEqualTo("x1(x2(x3(x4(x5=\"foo\"))))");
     }
 
     @Test

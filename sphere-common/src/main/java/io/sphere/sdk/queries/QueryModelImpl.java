@@ -59,7 +59,7 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     }
 
     protected StringQuerySortingModel<T> stringModel(final String pathSegment) {
-        return new StringQuerySortingModel<>(this, pathSegment);
+        return new StringQuerySortingModelImpl<>(this, pathSegment);
     }
 
     protected BooleanQueryModel<T> booleanModel(final String pathSegment) {
@@ -80,6 +80,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
 
     protected LocalizedStringsQuerySortingModel<T> localizedStringsQuerySortingModel(final String pathSegment) {
         return new LocalizedStringsQuerySortingModelImpl<>(this, pathSegment);
+    }
+
+    protected final TimestampSortingModel<T> timestampSortingModel(final String pathSegment) {
+        return new TimestampSortingModelImpl<>(this, pathSegment);
     }
 
     protected <V> QueryPredicate<T> isPredicate(final V value) {

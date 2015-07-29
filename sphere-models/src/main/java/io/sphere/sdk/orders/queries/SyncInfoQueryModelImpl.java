@@ -20,6 +20,6 @@ final class SyncInfoQueryModelImpl<T> extends QueryModelImpl<T> implements SyncI
 
     @Override
     public final TimestampSortingModel<T> syncedAt() {
-        return new TimestampSortingModel<>(this, "syncedAt");
+        return timestampSortingModel("syncedAt");
     }
 }
