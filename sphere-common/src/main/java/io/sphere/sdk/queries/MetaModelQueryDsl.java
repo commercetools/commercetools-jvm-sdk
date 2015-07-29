@@ -16,15 +16,18 @@ import java.util.function.Function;
 public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends EntityQuery<T>, QueryDsl<T, C>, MetaModelExpansionDsl<T, C, E> {
 
     @Override
-    C withPredicates(final QueryPredicate<T> queryPredicates);
-
-    @Override
-    C plusPredicates(final QueryPredicate<T> queryPredicates);
-
-    @Override
     C withPredicates(final List<QueryPredicate<T>> queryPredicates);
 
+    @Override
+    C withPredicates(final QueryPredicate<T> queryPredicate);
+
     C withPredicates(final Function<Q, QueryPredicate<T>> m);
+
+    @Override
+    C plusPredicates(final List<QueryPredicate<T>> queryPredicates);
+
+    @Override
+    C plusPredicates(final QueryPredicate<T> queryPredicate);
 
     C plusPredicates(final Function<Q, QueryPredicate<T>> m);
 

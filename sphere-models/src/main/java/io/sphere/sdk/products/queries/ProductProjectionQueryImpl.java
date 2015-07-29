@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 /**
  {@doc.gen summary product projections}
@@ -24,7 +24,7 @@ final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProj
     }
 
     private static List<HttpQueryParameter> additionalParametersOf(final ProductProjectionType productProjectionType) {
-        return asList(HttpQueryParameter.of("staged", "" + ProductProjectionType.STAGED.isStaged()));
+        return singletonList(HttpQueryParameter.of("staged", productProjectionType.isStaged().toString()));
     }
 
 }

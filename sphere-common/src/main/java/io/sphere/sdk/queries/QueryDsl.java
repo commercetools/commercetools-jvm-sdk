@@ -4,24 +4,31 @@ import io.sphere.sdk.expansion.ReferenceExpandeableDsl;
 
 import java.util.List;
 
-import static java.util.Arrays.asList;
-
 /**
  *
  * @param <T> type of the query result
  * @param <C> type of the class implementing this class
  */
 public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, ReferenceExpandeableDsl<T, C> {
+
     /**
-     * Returns an EntityQuery with the new predicate as predicate.
-     * @param predicate the new predicate
-     * @return an EntityQuery with predicate
+     * Returns an instance with the new predicate list as predicates.
+     * @param predicates the new predicate list
+     * @return instance with the predicate list
      */
+    C withPredicates(final List<QueryPredicate<T>> predicates);
+
     C withPredicates(final QueryPredicate<T> predicate);
 
-    C plusPredicates(final QueryPredicate<T> predicate);
 
-    C withPredicates(final List<QueryPredicate<T>> predicates);
+    /**
+     * Returns an instance with the new predicate list appended to the existing predicates.
+     * @param predicates the new predicate list
+     * @return instance with the existing predicate list plus the new predicate list
+     */
+    C plusPredicates(final List<QueryPredicate<T>> predicates);
+
+    C plusPredicates(final QueryPredicate<T> predicate);
 
     /**
      * Returns a query with the new sort as sort.
@@ -30,9 +37,7 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, R
      */
     C withSort(final List<QuerySort<T>> sort);
 
-    default C withSort(final QuerySort<T> sort) {
-        return withSort(asList(sort));
-    }
+    C withSort(final QuerySort<T> sort);
 
     C withFetchTotal(final boolean fetchTotal);
 

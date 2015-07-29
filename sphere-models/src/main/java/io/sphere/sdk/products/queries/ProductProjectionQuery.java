@@ -48,22 +48,28 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
     }
 
     @Override
-    ProductProjectionQuery plusExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
-
-    @Override
-    ProductProjectionQuery withExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
-
-    @Override
     ProductProjectionQuery withLimit(final long limit);
 
     @Override
     ProductProjectionQuery withOffset(final long offset);
 
     @Override
+    ProductProjectionQuery withPredicates(final List<QueryPredicate<ProductProjection>> queryPredicates);
+
+    @Override
+    ProductProjectionQuery withPredicates(final QueryPredicate<ProductProjection> queryPredicate);
+
+    @Override
     ProductProjectionQuery withPredicates(final Function<ProductProjectionQueryModel, QueryPredicate<ProductProjection>> m);
 
     @Override
-    ProductProjectionQuery withPredicates(final QueryPredicate<ProductProjection> queryPredicates);
+    ProductProjectionQuery plusPredicates(final List<QueryPredicate<ProductProjection>> queryPredicates);
+
+    @Override
+    ProductProjectionQuery plusPredicates(final QueryPredicate<ProductProjection> queryPredicate);
+
+    @Override
+    ProductProjectionQuery plusPredicates(final Function<ProductProjectionQueryModel, QueryPredicate<ProductProjection>> m);
 
     @Override
     ProductProjectionQuery withSort(final Function<ProductProjectionQueryModel, QuerySort<ProductProjection>> m);
@@ -76,4 +82,10 @@ public interface ProductProjectionQuery extends MetaModelQueryDsl<ProductProject
 
     @Override
     ProductProjectionQuery withSortMulti(final Function<ProductProjectionQueryModel, List<QuerySort<ProductProjection>>> m);
+
+    @Override
+    ProductProjectionQuery plusExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
+
+    @Override
+    ProductProjectionQuery withExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
 }

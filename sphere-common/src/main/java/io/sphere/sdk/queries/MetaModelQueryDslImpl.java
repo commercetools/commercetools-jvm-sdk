@@ -8,19 +8,17 @@ import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
-import io.sphere.sdk.utils.ListUtils;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
 import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.lang.String.format;
-import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -73,22 +71,16 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction, final List<HttpQueryParameter> additionalQueryParameters) {
-        this(Collections.emptyList(), Collections.emptyList(), null, null, null, endpoint, resultMapperOf(pagedQueryResultTypeReference),
-                Collections.emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
+        this(emptyList(), emptyList(), null, null, null, endpoint, resultMapperOf(pagedQueryResultTypeReference),
+                emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference, final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
-        this(endpoint, pagedQueryResultTypeReference, queryModel, expansionModel, queryDslBuilderFunction, Collections.emptyList());
+        this(endpoint, pagedQueryResultTypeReference, queryModel, expansionModel, queryDslBuilderFunction, emptyList());
     }
 
     public MetaModelQueryDslImpl(final MetaModelQueryDslBuilder<T, C, Q, E> builder) {
         this(builder.predicate, builder.sort, builder.withTotal, builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters, builder.queryModel, builder.expansionModel, builder.queryDslBuilderFunction);
-    }
-
-    @Override
-    public C withPredicates(final QueryPredicate<T> queryPredicates) {
-        Objects.requireNonNull(queryPredicates);
-        return withPredicates(asList(queryPredicates));
     }
 
     @Override
@@ -97,22 +89,28 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
+    public C withPredicates(final QueryPredicate<T> queryPredicate) {
+        return withPredicates(singletonList(requireNonNull(queryPredicate)));
+    }
+
+    @Override
     public C withPredicates(final Function<Q, QueryPredicate<T>> m) {
         return withPredicates(m.apply(queryModel));
     }
 
     @Override
-    public C plusPredicates(final Function<Q, QueryPredicate<T>> m) {
-        return plusPredicates(m.apply(queryModel));
+    public C plusPredicates(final List<QueryPredicate<T>> predicates) {
+        return withPredicates(listOf(predicates(), predicates));
     }
 
     @Override
-    public C plusPredicates(final QueryPredicate<T> queryPredicates) {
-        return withPredicates(listOf(predicates(), queryPredicates));
+    public C plusPredicates(final QueryPredicate<T> queryPredicate) {
+        return plusPredicates(singletonList(requireNonNull(queryPredicate)));
     }
 
-    protected MetaModelQueryDslBuilder<T, C, Q, E> copyBuilder() {
-        return new MetaModelQueryDslBuilder<>(this);
+    @Override
+    public C plusPredicates(final Function<Q, QueryPredicate<T>> m) {
+        return plusPredicates(m.apply(queryModel));
     }
 
     @Override
@@ -122,12 +120,12 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     @Override
     public C withSort(final QuerySort<T> sort) {
-        return withSort(asList(sort));
+        return withSort(singletonList(sort));
     }
 
     @Override
     public C withSort(final Function<Q, QuerySort<T>> m) {
-        return withSort(asList(m.apply(queryModel)));
+        return withSort(m.apply(queryModel));
     }
 
     @Override
@@ -162,7 +160,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     @Override
     public C withExpansionPaths(final Function<E, ExpansionPath<T>> m) {
-        return withExpansionPaths(asList(m.apply(expansionModel)));
+        return withExpansionPaths(singletonList(m.apply(expansionModel)));
     }
 
     @Override
@@ -176,16 +174,19 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     }
 
     @Override
+    @Nullable
     public Boolean fetchTotal() {
         return withTotal;
     }
 
     @Override
+    @Nullable
     public Long limit() {
         return limit;
     }
 
     @Override
+    @Nullable
     public Long offset() {
         return offset;
     }
@@ -200,8 +201,22 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         return expansionPaths;
     }
 
+    @Override
+    public C plusExpansionPaths(final ExpansionPath<T> expansionPath) {
+        return withExpansionPaths(listOf(expansionPaths(), expansionPath));
+    }
+
+    @Override
+    public C withExpansionPaths(final ExpansionPath<T> expansionPath) {
+        return withExpansionPaths(singletonList(requireNonNull(expansionPath)));
+    }
+
     protected List<HttpQueryParameter> additionalQueryParameters() {
         return additionalQueryParameters;
+    }
+
+    protected MetaModelQueryDslBuilder<T, C, Q, E> copyBuilder() {
+        return new MetaModelQueryDslBuilder<>(this);
     }
 
     @Override
@@ -268,14 +283,4 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         return resultMapper;
     }
 
-    @Override
-    public C plusExpansionPaths(final ExpansionPath<T> expansionPath) {
-        return withExpansionPaths(listOf(expansionPaths(), expansionPath));
-    }
-
-    @Override
-    public C withExpansionPaths(final ExpansionPath<T> expansionPath) {
-        Objects.requireNonNull(expansionPath);
-        return withExpansionPaths(asList(expansionPath));
-    }
 }

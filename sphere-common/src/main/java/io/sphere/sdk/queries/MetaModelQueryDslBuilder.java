@@ -7,9 +7,10 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
+
+import static java.util.Collections.emptyList;
 
 /**
  *
@@ -20,16 +21,16 @@ import java.util.function.Function;
  */
 public class MetaModelQueryDslBuilder<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q, E> extends Base implements Builder<C> {
 
-    protected List<QueryPredicate<T>> predicate = Collections.emptyList();
-    protected List<QuerySort<T>> sort = Collections.emptyList();
+    protected List<QueryPredicate<T>> predicate = emptyList();
+    protected List<QuerySort<T>> sort = emptyList();
     @Nullable
     protected Boolean withTotal;
     @Nullable
     protected Long limit;
     @Nullable
     protected Long offset;
-    protected List<ExpansionPath<T>> expansionPaths = Collections.emptyList();
-    protected List<HttpQueryParameter> additionalQueryParameters = Collections.emptyList();
+    protected List<ExpansionPath<T>> expansionPaths = emptyList();
+    protected List<HttpQueryParameter> additionalQueryParameters = emptyList();
     protected final String endpoint;
     protected final Function<HttpResponse, PagedQueryResult<T>> resultMapper;
     protected final Q queryModel;
