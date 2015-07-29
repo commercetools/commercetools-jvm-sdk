@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 
@@ -12,6 +13,7 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @JsonDeserialize(as=OrderImpl.class)
@@ -98,4 +100,13 @@ public interface Order extends CartLike<Order> {
     /** Set when this order was created from a cart. The cart will have the state Ordered. */
     @Nullable
     Reference<Cart> getCart();
+
+    @Override
+    Optional<CustomLineItem> findCustomLineItem(final String customLineItemId);
+
+    @Override
+    Optional<LineItem> findLineItem(final String lineItemId);
+
+    @Override
+    List<DiscountCodeInfo> getDiscountCodes();
 }

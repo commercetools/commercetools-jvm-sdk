@@ -4,12 +4,14 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.util.List;
+import java.util.Optional;
 
 @JsonDeserialize(as=CartImpl.class)
 public interface Cart extends CartLike<Cart> {
@@ -75,4 +77,13 @@ public interface Cart extends CartLike<Cart> {
 
     @Override
     MonetaryAmount getTotalPrice();
+
+    @Override
+    Optional<CustomLineItem> findCustomLineItem(final String customLineItemId);
+
+    @Override
+    Optional<LineItem> findLineItem(final String lineItemId);
+
+    @Override
+    List<DiscountCodeInfo> getDiscountCodes();
 }
