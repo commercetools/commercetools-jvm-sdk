@@ -1,17 +1,16 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.attributes.AttributeAccess;
+import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.VariantIdentifier;
+import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -30,6 +29,7 @@ import java.util.function.Consumer;
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
 import static io.sphere.sdk.products.ProductFixtures.*;
+import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
 import static io.sphere.sdk.products.ProductUpdateScope.ONLY_STAGED;
 import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
@@ -67,6 +67,21 @@ public class ProductProjectionQueryTest extends IntegrationTest {
             final ProductProjection productProjection = execute(query).head().get();
             final VariantIdentifier identifier = productProjection.getMasterVariant().getIdentifier();
             assertThat(identifier).isEqualTo(VariantIdentifier.of(product.getId(), 1));
+        });
+    }
+
+    @Test
+    public void differentiateBetweenCurrentAndStaged() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
+            final Product mixedDataProduct = execute(ProductUpdateCommand.of(publishedProduct, ChangeName.of(randomSlug(), ProductUpdateScope.ONLY_STAGED)));
+            final LocalizedStrings nameInCurrent = mixedDataProduct.getMasterData().getCurrent().getName();
+            final LocalizedStrings nameInStaged = mixedDataProduct.getMasterData().getStaged().getName();
+
+            assertThat(execute(ProductProjectionQuery.of(STAGED).withPredicates(m -> m.id().is(product.getId()))).head().get().getName()).isEqualTo(nameInStaged);
+            assertThat(execute(ProductProjectionQuery.of(CURRENT).withPredicates(m -> m.id().is(product.getId()))).head().get().getName()).isEqualTo(nameInCurrent);
+
+            return mixedDataProduct;
         });
     }
 
