@@ -64,7 +64,7 @@ import io.sphere.sdk.models.Base;
 
 <h3 id=pagination>Pagination</h3>
 
- <p>Use {@link io.sphere.sdk.search.SearchDsl#withOffset(Long)} and {@link io.sphere.sdk.search.SearchDsl#withLimit(Long)} for pagination. An extended explanation about how pagination works in SPHERE.IO can be found in {@link io.sphere.sdk.meta.QueryDocumentation}.</p>
+ <p>Use {@link io.sphere.sdk.search.SearchDsl#withOffset(long)} and {@link io.sphere.sdk.search.SearchDsl#withLimit(long)} for pagination. An extended explanation about how pagination works in SPHERE.IO can be found in {@link io.sphere.sdk.meta.QueryDocumentation}.</p>
 
  <p>The following request skips the first 50 products and limits the result set to only 25 products:</p>
 
@@ -104,13 +104,13 @@ import io.sphere.sdk.models.Base;
  <p class="image-caption">Filter types</p>
 
  <dl>
-    <dt>Filter Query: {@link io.sphere.sdk.search.SearchDsl#withFilterQuery(java.util.List)}.</dt>
+    <dt>Filter Query: {@link io.sphere.sdk.search.SearchDsl#withQueryFilters(java.util.List)}.</dt>
     <dd>This parameter allows to filter products BEFORE facets have been calculated, therefore this scope affects both results and facets.</dd>
 
-    <dt>Filter Results (in the HTTP API it is called just "filter"): {@link io.sphere.sdk.search.SearchDsl#withFilterResults(java.util.List)}</dt>
+    <dt>Filter Results (in the HTTP API it is called just "filter"): {@link io.sphere.sdk.search.SearchDsl#withResultFilters(java.util.List)}</dt>
     <dd>This parameter allows to filter products AFTER facets have been calculated, therefore this scope affects the results only. Using this filter only makes sense when used together with facets, otherwise Filter Query should be preferred.</dd>
 
-    <dt>Filter Facets: {@link io.sphere.sdk.search.SearchDsl#withFilterFacets(java.util.List)}</dt>
+    <dt>Filter Facets: {@link io.sphere.sdk.search.SearchDsl#withFacetFilters(java.util.List)}</dt>
     <dd>This parameter allows to filter those products used for facets calculation only, without affecting the results whatsoever. All facet calculations are affected except for those facets operating on the same field as the filter, enabling multi-select faceting when combined with Filter Results.</dd>
  </dl>
 
