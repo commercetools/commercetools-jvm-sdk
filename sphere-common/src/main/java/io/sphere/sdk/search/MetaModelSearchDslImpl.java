@@ -3,6 +3,7 @@ package io.sphere.sdk.search;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpQueryParameter;
@@ -22,7 +23,14 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static java.util.Objects.requireNonNull;
 
-public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, C, S>, S> extends SphereRequestBase implements MetaModelSearchDsl<T, C, S> {
+/**
+ *
+ * @param <T> type of the search result
+ * @param <C> type of the class implementing this class
+ * @param <S> type of the search model
+ * @param <E> type of the expansion model
+ */
+public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, C, S, E>, S, E> extends SphereRequestBase implements MetaModelSearchDsl<T, C, S, E> {
 
     @Nullable
     final LocalizedStringsEntry text;
@@ -35,18 +43,20 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     final Long limit;
     @Nullable
     final Long offset;
+    final List<ExpansionPath<T>> expansionPaths;
     final List<HttpQueryParameter> additionalQueryParameters;
     final String endpoint;
-    final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     final S searchModel;
-    final Function<MetaModelSearchDslBuilder<T, C, S>, C> searchDslBuilderFunction;
+    final E expansionModel;
+    final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
+    final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction;
 
     public MetaModelSearchDslImpl(@Nullable final LocalizedStringsEntry text, final List<FacetExpression<T>> facets, final List<FilterExpression<T>> resultFilters,
                                   final List<FilterExpression<T>> queryFilters, final List<FilterExpression<T>> facetFilters,
                                   final List<SearchSort<T>> sort, @Nullable final Long limit, @Nullable final Long offset,
                                   final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,
-                                  final List<HttpQueryParameter> additionalQueryParameters, final S searchModel,
-                                  final Function<MetaModelSearchDslBuilder<T, C, S>, C> searchDslBuilderFunction) {
+                                  final List<ExpansionPath<T>> expansionPaths, final List<HttpQueryParameter> additionalQueryParameters,
+                                  final S searchModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction) {
         Optional.ofNullable(offset).ifPresent(presentOffset -> {
             if (presentOffset < MIN_OFFSET || presentOffset > MAX_OFFSET) {
                 throw new IllegalArgumentException(format("The offset parameter must be in the range of [%d..%d], but was %d.", MIN_OFFSET, MAX_OFFSET, presentOffset));
@@ -63,26 +73,28 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         this.offset = offset;
         this.endpoint = requireNonNull(endpoint);
         this.resultMapper = requireNonNull(resultMapper);
+        this.expansionPaths = requireNonNull(expansionPaths);
         this.additionalQueryParameters = requireNonNull(additionalQueryParameters);
+        this.expansionModel = requireNonNull(expansionModel);
         this.searchModel = requireNonNull(searchModel);
     }
 
     public MetaModelSearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> pagedSearchResultTypeReference,
-                                  final S searchModel, final Function<MetaModelSearchDslBuilder<T, C, S>, C> searchDslBuilderFunction,
+                                  final S searchModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction,
                                   final List<HttpQueryParameter> additionalQueryParameters) {
         this(null, emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), null, null, endpoint, resultMapperOf(pagedSearchResultTypeReference),
-                additionalQueryParameters, searchModel, searchDslBuilderFunction);
+                emptyList(), additionalQueryParameters, searchModel, expansionModel, searchDslBuilderFunction);
     }
 
     public MetaModelSearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> pagedSearchResultTypeReference,
-                                  final S searchModel, final Function<MetaModelSearchDslBuilder<T, C, S>, C> searchDslBuilderFunction) {
-        this(endpoint, pagedSearchResultTypeReference, searchModel, searchDslBuilderFunction, emptyList());
+                                  final S searchModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction) {
+        this(endpoint, pagedSearchResultTypeReference, searchModel, expansionModel, searchDslBuilderFunction, emptyList());
     }
 
-    public MetaModelSearchDslImpl(final MetaModelSearchDslBuilder<T, C, S> builder) {
+    public MetaModelSearchDslImpl(final MetaModelSearchDslBuilder<T, C, S, E> builder) {
         this(builder.text, builder.facets, builder.resultFilters, builder.queryFilters, builder.facetFilters, builder.sort,
-                builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.additionalQueryParameters,
-                builder.searchModel, builder.searchDslBuilderFunction);
+                builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters,
+                builder.searchModel, builder.expansionModel, builder.searchDslBuilderFunction);
     }
 
     @Override
@@ -241,6 +253,36 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
+    public C withExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
+        return copyBuilder().expansionPaths(expansionPaths).build();
+    }
+
+    @Override
+    public C withExpansionPaths(final ExpansionPath<T> expansionPath) {
+        return withExpansionPaths(singletonList(requireNonNull(expansionPath)));
+    }
+
+    @Override
+    public C withExpansionPaths(final Function<E, ExpansionPath<T>> m) {
+        return withExpansionPaths(singletonList(m.apply(expansionModel)));
+    }
+
+    @Override
+    public C plusExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
+        return withExpansionPaths(listOf(expansionPaths(), expansionPaths));
+    }
+
+    @Override
+    public C plusExpansionPaths(final ExpansionPath<T> expansionPath) {
+        return plusExpansionPaths(singletonList(requireNonNull(expansionPath)));
+    }
+
+    @Override
+    public C plusExpansionPaths(final Function<E, ExpansionPath<T>> m) {
+        return plusExpansionPaths(m.apply(expansionModel));
+    }
+
+    @Override
     @Nullable
     public LocalizedStringsEntry text() {
         return text;
@@ -288,11 +330,16 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         return endpoint;
     }
 
+    @Override
+    public List<ExpansionPath<T>> expansionPaths() {
+        return expansionPaths;
+    }
+
     protected List<HttpQueryParameter> additionalQueryParameters() {
         return additionalQueryParameters;
     }
 
-    protected MetaModelSearchDslBuilder<T, C, S> copyBuilder() {
+    protected MetaModelSearchDslBuilder<T, C, S, E> copyBuilder() {
         return new MetaModelSearchDslBuilder<>(this);
     }
 
@@ -317,6 +364,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         sort().forEach(s -> builder.add(SORT, s.toSphereSort(), urlEncoded));
         Optional.ofNullable(limit()).ifPresent(l -> builder.add(LIMIT, l.toString(), urlEncoded));
         Optional.ofNullable(offset()).ifPresent(o -> builder.add(OFFSET, o.toString(), urlEncoded));
+        expansionPaths().forEach(path -> builder.add(EXPAND, path.toSphereExpand(), urlEncoded));
         additionalQueryParameters().forEach(p -> builder.add(p.getKey(), p.getValue(), urlEncoded));
         return builder.toStringWithOptionalQuestionMark();
     }
@@ -354,6 +402,10 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
 
     S getSearchModel() {
         return searchModel;
+    }
+
+    E getExpansionModel() {
+        return expansionModel;
     }
 
     Function<HttpResponse, PagedSearchResult<T>> getResultMapper() {

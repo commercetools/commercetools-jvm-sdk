@@ -1,5 +1,7 @@
 package io.sphere.sdk.search;
 
+import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.expansion.MetaModelExpansionDsl;
 import io.sphere.sdk.models.LocalizedStringsEntry;
 
 import java.util.List;
@@ -11,8 +13,9 @@ import java.util.function.Function;
  * @param <T> type of the search result
  * @param <C> type of the class implementing this class
  * @param <S> type of the search model
+ * @param <E> type of the expansion model
  */
-public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S>, S> extends EntitySearch<T>, SearchDsl<T, C> {
+public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S, E>, S, E> extends EntitySearch<T>, SearchDsl<T, C>, MetaModelExpansionDsl<T, C, E> {
 
     @Override
     C withText(final LocalizedStringsEntry text);
@@ -94,4 +97,10 @@ public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S>, S>
 
     @Override
     C withOffset(final long offset);
+
+    @Override
+    C withExpansionPaths(final Function<E, ExpansionPath<T>> m);
+
+    @Override
+    C plusExpansionPaths(final Function<E, ExpansionPath<T>> m);
 }

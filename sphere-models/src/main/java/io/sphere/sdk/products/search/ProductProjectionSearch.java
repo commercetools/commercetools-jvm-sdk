@@ -1,9 +1,11 @@
 package io.sphere.sdk.products.search;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.models.LocalizedStringsEntry;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
+import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.search.*;
 
 import java.util.List;
@@ -15,7 +17,7 @@ import java.util.function.Function;
  *
  * Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/ProductSearchDocumentation.html">Product Search API</a> for more information.
  */
-public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProjection, ProductProjectionSearch, ExperimentalProductProjectionSearchModel> {
+public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProjection, ProductProjectionSearch, ExperimentalProductProjectionSearchModel, ProductProjectionExpansionModel<ProductProjection>> {
 
     static TypeReference<PagedSearchResult<ProductProjection>> resultTypeReference() {
         return new TypeReference<PagedSearchResult<ProductProjection>>(){
@@ -127,4 +129,23 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
 
     @Override
     ProductProjectionSearch withOffset(final long offset);
+
+    @Override
+    ProductProjectionSearch withExpansionPaths(final List<ExpansionPath<ProductProjection>> expansionPaths);
+
+    @Override
+    ProductProjectionSearch withExpansionPaths(final ExpansionPath<ProductProjection> expansionPath);
+
+    @Override
+    ProductProjectionSearch withExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
+
+    @Override
+    ProductProjectionSearch plusExpansionPaths(final List<ExpansionPath<ProductProjection>> expansionPaths);
+
+    @Override
+    ProductProjectionSearch plusExpansionPaths(final ExpansionPath<ProductProjection> expansionPath);
+
+    @Override
+    ProductProjectionSearch plusExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
+
 }

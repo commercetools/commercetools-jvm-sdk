@@ -313,10 +313,19 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void filteredFacetsSupportsAlias() throws Exception {
         final String alias = "my-facet";
-        final FilteredFacetExpression<ProductProjection, String> facet = model().allVariants().attribute().ofText(ATTR_NAME_COLOR).facetOf().withAlias(alias).only("blue");
-        final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.ofStaged().plusFacets(facet));
-        assertThat(facet.resultPath()).isEqualTo(alias);
-        assertThat(result.getFilteredFacetResult(facet).getCount()).isEqualTo(2);
+        final FilteredFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_COLOR).facetOf().withAlias(alias).only("blue");
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
+        final PagedSearchResult<ProductProjection> result = executeSearch(search);
+        assertThat(facetExpr.resultPath()).isEqualTo(alias);
+        assertThat(result.getFilteredFacetResult(facetExpr).getCount()).isEqualTo(2);
+    }
+
+    @Test
+    public void allowsExpansion() throws Exception {
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withLimit(1);
+        assertThat(executeSearch(search).getResults().get(0).getProductType().getObj()).isNull();
+        final PagedSearchResult<ProductProjection> result = executeSearch(search.withExpansionPaths(model -> model.productType()));
+        assertThat(result.getResults().get(0).getProductType().getObj()).isNotNull();
     }
 
     @Test
