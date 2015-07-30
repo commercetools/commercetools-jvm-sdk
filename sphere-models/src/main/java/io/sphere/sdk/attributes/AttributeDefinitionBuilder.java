@@ -54,7 +54,6 @@ public class AttributeDefinitionBuilder extends Base implements Builder<Attribut
     }
 
     public static AttributeDefinitionBuilder of(final String name, final LocalizedStrings label, final AttributeType attributeType) {
-        final boolean searcheable = !(attributeType instanceof SetType);
-        return new AttributeDefinitionBuilder(name, label, attributeType).searchable(searcheable);
+        return new AttributeDefinitionBuilder(name, label, attributeType).searchable(true);
     }
 }
