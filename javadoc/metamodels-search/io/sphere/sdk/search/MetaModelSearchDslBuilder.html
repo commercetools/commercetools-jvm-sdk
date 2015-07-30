@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.search</div>
-<h2 title="Class MetaModelSearchDslBuilder" class="title">Class MetaModelSearchDslBuilder&lt;T,C extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;T,C,S&gt;,S&gt;</h2>
+<h2 title="Class MetaModelSearchDslBuilder" class="title">Class MetaModelSearchDslBuilder&lt;T,C extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;T,C,S,E&gt;,S,E&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -102,7 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.search.MetaModelSearchDslBuilder&lt;T,C,S&gt;</li>
+<li>io.sphere.sdk.search.MetaModelSearchDslBuilder&lt;T,C,S,E&gt;</li>
 </ul>
 </li>
 </ul>
@@ -116,6 +116,7 @@ var activeTableTab = "activeTableTab";
 <dd><code>T</code> - type of the search result</dd>
 <dd><code>C</code> - type of the class implementing this class</dd>
 <dd><code>S</code> - type of the search model</dd>
+<dd><code>E</code> - type of the expansion model</dd>
 </dl>
 <dl>
 <dt>All Implemented Interfaces:</dt>
@@ -123,7 +124,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">MetaModelSearchDslBuilder&lt;T,C extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;T,C,S&gt;,S&gt;</span>
+<pre>public class <span class="typeNameLabel">MetaModelSearchDslBuilder&lt;T,C extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;T,C,S,E&gt;,S,E&gt;</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
 implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;C&gt;</pre>
 </li>
@@ -151,6 +152,14 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <tr class="rowColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#endpoint">endpoint</a></span></code>&nbsp;</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#expansionModel">expansionModel</a></span></code>&nbsp;</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><code>protected java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#expansionPaths">expansionPaths</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><code>protected java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;</code></td>
@@ -181,7 +190,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#resultMapper">resultMapper</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>&gt;</code></td>
+<td class="colFirst"><code>protected java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#searchDslBuilderFunction">searchDslBuilderFunction</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
@@ -211,13 +220,14 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#MetaModelSearchDslBuilder-io.sphere.sdk.search.MetaModelSearchDslImpl-">MetaModelSearchDslBuilder</a></span>(<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&nbsp;template)</code>&nbsp;</td>
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#MetaModelSearchDslBuilder-io.sphere.sdk.search.MetaModelSearchDslImpl-">MetaModelSearchDslBuilder</a></span>(<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;template)</code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#MetaModelSearchDslBuilder-java.lang.String-java.util.function.Function-S-java.util.function.Function-">MetaModelSearchDslBuilder</a></span>(java.lang.String&nbsp;endpoint,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#MetaModelSearchDslBuilder-java.lang.String-java.util.function.Function-S-E-java.util.function.Function-">MetaModelSearchDslBuilder</a></span>(java.lang.String&nbsp;endpoint,
                          java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;resultMapper,
                          <a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&nbsp;searchModel,
-                         java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>&gt;&nbsp;searchDslBuilderFunction)</code>&nbsp;</td>
+                         <a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&nbsp;expansionModel,
+                         java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>&gt;&nbsp;searchDslBuilderFunction)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -235,7 +245,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#additionalQueryParameters-java.util.List-">additionalQueryParameters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalQueryParameters)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
@@ -245,35 +255,39 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#facetFilters-java.util.List-">facetFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;facetFilters)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#expansionPaths-java.util.List-">expansionPaths</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;expansionPaths)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#facets-java.util.List-">facets</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;facets)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#facetFilters-java.util.List-">facetFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;facetFilters)</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#limit-java.lang.Long-">limit</a></span>(java.lang.Long&nbsp;limit)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#facets-java.util.List-">facets</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;facets)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#offset-java.lang.Long-">offset</a></span>(java.lang.Long&nbsp;offset)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#limit-java.lang.Long-">limit</a></span>(java.lang.Long&nbsp;limit)</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#queryFilters-java.util.List-">queryFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;queryFilters)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#offset-java.lang.Long-">offset</a></span>(java.lang.Long&nbsp;offset)</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#resultFilters-java.util.List-">resultFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;resultFilters)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#queryFilters-java.util.List-">queryFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;queryFilters)</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#sort-java.util.List-">sort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;sort)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#resultFilters-java.util.List-">resultFilters</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;resultFilters)</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#sort-java.util.List-">sort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;sort)</code>&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html#text-io.sphere.sdk.models.LocalizedStringsEntry-">text</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models">LocalizedStringsEntry</a>&nbsp;text)</code>&nbsp;</td>
 </tr>
 </table>
@@ -387,6 +401,15 @@ protected&nbsp;java.lang.Long limit</pre>
 protected&nbsp;java.lang.Long offset</pre>
 </li>
 </ul>
+<a name="expansionPaths">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>expansionPaths</h4>
+<pre>protected&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt; expansionPaths</pre>
+</li>
+</ul>
 <a name="additionalQueryParameters">
 <!--   -->
 </a>
@@ -423,13 +446,22 @@ protected&nbsp;java.lang.Long offset</pre>
 <pre>protected final&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a> searchModel</pre>
 </li>
 </ul>
+<a name="expansionModel">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>expansionModel</h4>
+<pre>protected final&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a> expansionModel</pre>
+</li>
+</ul>
 <a name="searchDslBuilderFunction">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>searchDslBuilderFunction</h4>
-<pre>protected final&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&gt; searchDslBuilderFunction</pre>
+<pre>protected final&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&gt; searchDslBuilderFunction</pre>
 </li>
 </ul>
 </li>
@@ -440,9 +472,9 @@ protected&nbsp;java.lang.Long offset</pre>
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="MetaModelSearchDslBuilder-java.lang.String-java.util.function.Function-java.lang.Object-java.util.function.Function-">
+<a name="MetaModelSearchDslBuilder-java.lang.String-java.util.function.Function-java.lang.Object-java.lang.Object-java.util.function.Function-">
 <!--   -->
-</a><a name="MetaModelSearchDslBuilder-java.lang.String-java.util.function.Function-S-java.util.function.Function-">
+</a><a name="MetaModelSearchDslBuilder-java.lang.String-java.util.function.Function-S-E-java.util.function.Function-">
 <!--   -->
 </a>
 <ul class="blockList">
@@ -451,7 +483,8 @@ protected&nbsp;java.lang.Long offset</pre>
 <pre>public&nbsp;MetaModelSearchDslBuilder(java.lang.String&nbsp;endpoint,
                                  java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;resultMapper,
                                  <a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&nbsp;searchModel,
-                                 java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>&gt;&nbsp;searchDslBuilderFunction)</pre>
+                                 <a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&nbsp;expansionModel,
+                                 java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>&gt;&nbsp;searchDslBuilderFunction)</pre>
 </li>
 </ul>
 <a name="MetaModelSearchDslBuilder-io.sphere.sdk.search.MetaModelSearchDslImpl-">
@@ -460,7 +493,7 @@ protected&nbsp;java.lang.Long offset</pre>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>MetaModelSearchDslBuilder</h4>
-<pre>public&nbsp;MetaModelSearchDslBuilder(<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&nbsp;template)</pre>
+<pre>public&nbsp;MetaModelSearchDslBuilder(<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;template)</pre>
 </li>
 </ul>
 </li>
@@ -477,8 +510,8 @@ protected&nbsp;java.lang.Long offset</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>text</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&nbsp;text(@Nullable
-                                             <a href="../../../../io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models">LocalizedStringsEntry</a>&nbsp;text)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;text(@Nullable
+                                               <a href="../../../../io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models">LocalizedStringsEntry</a>&nbsp;text)</pre>
 </li>
 </ul>
 <a name="facets-java.util.List-">
@@ -487,7 +520,7 @@ protected&nbsp;java.lang.Long offset</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>facets</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&nbsp;facets(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;facets)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;facets(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;facets)</pre>
 </li>
 </ul>
 <a name="resultFilters-java.util.List-">
@@ -496,7 +529,7 @@ protected&nbsp;java.lang.Long offset</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>resultFilters</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&nbsp;resultFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;resultFilters)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;resultFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;resultFilters)</pre>
 </li>
 </ul>
 <a name="queryFilters-java.util.List-">
@@ -505,7 +538,7 @@ protected&nbsp;java.lang.Long offset</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>queryFilters</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&nbsp;queryFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;queryFilters)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;queryFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;queryFilters)</pre>
 </li>
 </ul>
 <a name="facetFilters-java.util.List-">
@@ -514,7 +547,7 @@ protected&nbsp;java.lang.Long offset</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>facetFilters</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&nbsp;facetFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;facetFilters)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;facetFilters(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;facetFilters)</pre>
 </li>
 </ul>
 <a name="sort-java.util.List-">
@@ -523,7 +556,7 @@ protected&nbsp;java.lang.Long offset</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>sort</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&nbsp;sort(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;sort)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;sort(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;sort)</pre>
 </li>
 </ul>
 <a name="limit-java.lang.Long-">
@@ -532,8 +565,8 @@ protected&nbsp;java.lang.Long offset</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>limit</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&nbsp;limit(@Nullable
-                                              java.lang.Long&nbsp;limit)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;limit(@Nullable
+                                                java.lang.Long&nbsp;limit)</pre>
 </li>
 </ul>
 <a name="offset-java.lang.Long-">
@@ -542,8 +575,17 @@ protected&nbsp;java.lang.Long offset</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>offset</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&nbsp;offset(@Nullable
-                                               java.lang.Long&nbsp;offset)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;offset(@Nullable
+                                                 java.lang.Long&nbsp;offset)</pre>
+</li>
+</ul>
+<a name="expansionPaths-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>expansionPaths</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;expansionPaths(java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>&gt;&gt;&nbsp;expansionPaths)</pre>
 </li>
 </ul>
 <a name="additionalQueryParameters-java.util.List-">
@@ -552,7 +594,7 @@ protected&nbsp;java.lang.Long offset</pre>
 <ul class="blockList">
 <li class="blockList">
 <h4>additionalQueryParameters</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&nbsp;additionalQueryParameters(java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalQueryParameters)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="class in io.sphere.sdk.search">MetaModelSearchDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&nbsp;additionalQueryParameters(java.util.List&lt;<a href="../../../../io/sphere/sdk/http/HttpQueryParameter.html" title="class in io.sphere.sdk.http">HttpQueryParameter</a>&gt;&nbsp;additionalQueryParameters)</pre>
 </li>
 </ul>
 <a name="build--">
@@ -566,7 +608,7 @@ protected&nbsp;java.lang.Long offset</pre>
 <div class="block">Creates a new instance of T with the values of this builder.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/Builder.html#build--">build</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/models/Builder.html#build--">build</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/models/Builder.html" title="interface in io.sphere.sdk.models">Builder</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a> extends <a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">S</a>,<a href="../../../../io/sphere/sdk/search/MetaModelSearchDslBuilder.html" title="type parameter in MetaModelSearchDslBuilder">E</a>&gt;&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>new instance of T.</dd>
 </dl>

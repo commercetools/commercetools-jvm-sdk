@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10,"i15":10,"i16":10,"i17":10,"i18":10,"i19":10,"i20":10,"i21":10,"i22":10,"i23":10,"i24":10,"i25":10,"i26":10,"i27":10,"i28":10,"i29":10,"i30":10,"i31":10,"i32":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -277,91 +277,97 @@ implements <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </tr>
 <tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#plusPredicates-java.util.function.Function-">plusPredicates</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;expansionPaths)</code>
+<div class="block">Creates a new object with the properties of the old object but adds <code>expansionPaths</code> to the expansion paths.</div>
+</td>
 </tr>
 <tr id="i14" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#plusPredicates-java.util.function.Function-">plusPredicates</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
+</tr>
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#plusPredicates-java.util.List-">plusPredicates</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;predicates)</code>
 <div class="block">Returns an instance with the new predicate list appended to the existing predicates.</div>
 </td>
 </tr>
-<tr id="i15" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#plusPredicates-io.sphere.sdk.queries.QueryPredicate-">plusPredicates</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&nbsp;queryPredicate)</code>&nbsp;</td>
 </tr>
-<tr id="i16" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#predicates--">predicates</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i17" class="rowColor">
+<tr id="i18" class="altColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#sort--">sort</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i18" class="altColor">
+<tr id="i19" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i19" class="rowColor">
+<tr id="i20" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></span>(<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&nbsp;expansionPath)</code>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.</div>
 </td>
 </tr>
-<tr id="i20" class="altColor">
+<tr id="i21" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;m)</code>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.</div>
 </td>
 </tr>
-<tr id="i21" class="rowColor">
+<tr id="i22" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;expansionPaths)</code>
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with <code>expansionPaths</code>.</div>
 </td>
 </tr>
-<tr id="i22" class="altColor">
+<tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withFetchTotal-boolean-">withFetchTotal</a></span>(boolean&nbsp;fetchTotal)</code>&nbsp;</td>
 </tr>
-<tr id="i23" class="rowColor">
+<tr id="i24" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
 </tr>
-<tr id="i24" class="altColor">
+<tr id="i25" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>
 <div class="block">Returns a new query with the new offset as offset.</div>
 </td>
 </tr>
-<tr id="i25" class="rowColor">
+<tr id="i26" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withPredicates-java.util.function.Function-">withPredicates</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
 </tr>
-<tr id="i26" class="altColor">
+<tr id="i27" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withPredicates-java.util.List-">withPredicates</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;queryPredicates)</code>
 <div class="block">Returns an instance with the new predicate list as predicates.</div>
 </td>
 </tr>
-<tr id="i27" class="rowColor">
+<tr id="i28" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withPredicates-io.sphere.sdk.queries.QueryPredicate-">withPredicates</a></span>(<a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&nbsp;queryPredicate)</code>&nbsp;</td>
 </tr>
-<tr id="i28" class="altColor">
+<tr id="i29" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withSort-java.util.function.Function-">withSort</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
 </tr>
-<tr id="i29" class="rowColor">
+<tr id="i30" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;sort)</code>
 <div class="block">Returns a query with the new sort as sort.</div>
 </td>
 </tr>
-<tr id="i30" class="altColor">
+<tr id="i31" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withSort-io.sphere.sdk.queries.QuerySort-">withSort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&nbsp;sort)</code>&nbsp;</td>
 </tr>
-<tr id="i31" class="rowColor">
+<tr id="i32" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withSortMulti-java.util.function.Function-">withSortMulti</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,java.util.List&lt;<a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&gt;&nbsp;m)</code>&nbsp;</td>
 </tr>
@@ -709,43 +715,36 @@ implements <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </dl>
 </li>
 </ul>
-<a name="plusExpansionPaths-java.util.function.Function-">
+<a name="withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>plusExpansionPaths</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&nbsp;plusExpansionPaths(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;m)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">MetaModelExpansionDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.
+<h4>withExpansionPaths</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&nbsp;withExpansionPaths(<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&nbsp;expansionPath)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">ReferenceExpandeableDsl</a></code></span></div>
+<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.
 
  <p>An example in the product projection context:</p>
- <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-expandCategoriesDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch1 = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
-        .plusExpansionPaths(m -&gt; m.categories());
-assertThat(fetch1.expansionPaths())
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
+                .withExpansionPaths(asList(ProductProjectionExpansionModel.of().categories()));
+
+assertThat(fetch.expansionPaths())
         .isEqualTo(asList(ExpansionPath.of("categories[*]")));
 
-final ProductProjectionByIdFetch fetch2 = fetch1.plusExpansionPaths(m -&gt; m.productType());
-assertThat(fetch2.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")))
-        .isEqualTo(listOf(fetch1.expansionPaths(), ExpansionPath.of("productType")));
+final ProductProjectionByIdFetch fetch2 =
+        fetch.withExpansionPaths(ProductProjectionExpansionModel.of().productType());
 
-//this is equivalent to
-
-final ExpansionPath&lt;ProductProjection&gt; categoryExpand = ProductProjectionExpansionModel.of().categories();
-final ExpansionPath&lt;ProductProjection&gt; productTypeExpand = ProductProjectionExpansionModel.of().productType();
-final ProductProjectionByIdFetch fetchB = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
-                .withExpansionPaths(asList(categoryExpand, productTypeExpand));
-assertThat(fetchB.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")));
+assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged")
+        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
+assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
+assertThat(fetch2).isNotSameAs(fetch);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;</code></dd>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>m</code> - function to use the meta model for expansions to create an expansion path</dd>
+<dd><code>expansionPath</code> - the new expansion paths</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>new object</dd>
 </dl>
@@ -781,6 +780,99 @@ assertThat(fetch2).isNotSameAs(fetch);
 <dd><code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>m</code> - function to use the meta model for expansions to create an expansion path</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>new object</dd>
+</dl>
+</li>
+</ul>
+<a name="plusExpansionPaths-java.util.List-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>plusExpansionPaths</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&nbsp;plusExpansionPaths(java.util.List&lt;<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;expansionPaths)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#plusExpansionPaths-java.util.List-">ReferenceExpandeableDsl</a></code></span></div>
+<div class="block">Creates a new object with the properties of the old object but adds <code>expansionPaths</code> to the expansion paths.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>expansionPaths</code> - the new expansion paths to add to the existing ones</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>new object</dd>
+</dl>
+</li>
+</ul>
+<a name="plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>plusExpansionPaths</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&nbsp;plusExpansionPaths(<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&nbsp;expansionPath)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">ReferenceExpandeableDsl</a></code></span></div>
+<div class="block">Creates a new object with the properties of the old object but adds <code>expansionPath</code> to the expansion paths.
+
+ <p>An example in the product projection context:</p>
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-plusExpansionPathDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT);
+
+assertThat(fetch.expansionPaths()).isEmpty();
+
+final ProductProjectionByIdFetch fetch2 =
+        fetch.plusExpansionPaths(ProductProjectionExpansionModel.of().categories());
+
+assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged").isEmpty();
+assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("categories[*]")));
+assertThat(fetch2).isNotSameAs(fetch);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>expansionPath</code> - the new expansion path to add to the existing ones</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>new object</dd>
+</dl>
+</li>
+</ul>
+<a name="plusExpansionPaths-java.util.function.Function-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>plusExpansionPaths</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&nbsp;plusExpansionPaths(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>,<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&gt;&nbsp;m)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">MetaModelExpansionDsl</a></code></span></div>
+<div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.
+
+ <p>An example in the product projection context:</p>
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-expandCategoriesDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch1 = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
+        .plusExpansionPaths(m -&gt; m.categories());
+assertThat(fetch1.expansionPaths())
+        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
+
+final ProductProjectionByIdFetch fetch2 = fetch1.plusExpansionPaths(m -&gt; m.productType());
+assertThat(fetch2.expansionPaths())
+        .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")))
+        .isEqualTo(listOf(fetch1.expansionPaths(), ExpansionPath.of("productType")));
+
+//this is equivalent to
+
+final ExpansionPath&lt;ProductProjection&gt; categoryExpand = ProductProjectionExpansionModel.of().categories();
+final ExpansionPath&lt;ProductProjection&gt; productTypeExpand = ProductProjectionExpansionModel.of().productType();
+final ProductProjectionByIdFetch fetchB = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
+                .withExpansionPaths(asList(categoryExpand, productTypeExpand));
+assertThat(fetchB.expansionPaths())
+        .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;</code></dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>m</code> - function to use the meta model for expansions to create an expansion path</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -885,73 +977,6 @@ public&nbsp;java.lang.Long&nbsp;offset()</pre>
 <dd><code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeable.html#expansionPaths--">expansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeable.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeable</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html#expansionPaths--">expansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusExpansionPaths</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&nbsp;plusExpansionPaths(<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&nbsp;expansionPath)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">ReferenceExpandeableDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but adds <code>expansionPath</code> to the expansion paths.
-
- <p>An example in the product projection context:</p>
- <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-plusExpansionPathDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT);
-
-assertThat(fetch.expansionPaths()).isEmpty();
-
-final ProductProjectionByIdFetch fetch2 =
-        fetch.plusExpansionPaths(ProductProjectionExpansionModel.of().categories());
-
-assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged").isEmpty();
-assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("categories[*]")));
-assertThat(fetch2).isNotSameAs(fetch);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>expansionPath</code> - the new expansion path to add to the existing ones</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>new object</dd>
-</dl>
-</li>
-</ul>
-<a name="withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withExpansionPaths</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>&nbsp;withExpansionPaths(<a href="../../../../io/sphere/sdk/expansion/ExpansionPath.html" title="interface in io.sphere.sdk.expansion">ExpansionPath</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>&gt;&nbsp;expansionPath)</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">ReferenceExpandeableDsl</a></code></span></div>
-<div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code>.
-
- <p>An example in the product projection context:</p>
- <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
-                .withExpansionPaths(asList(ProductProjectionExpansionModel.of().categories()));
-
-assertThat(fetch.expansionPaths())
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-
-final ProductProjectionByIdFetch fetch2 =
-        fetch.withExpansionPaths(ProductProjectionExpansionModel.of().productType());
-
-assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged")
-        .isEqualTo(asList(ExpansionPath.of("categories[*]")));
-assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
-assertThat(fetch2).isNotSameAs(fetch);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/test/java/io/sphere/sdk/products/expansion/ProductProjectionExpansionModelTest.java" target="_blank">test code</a>.</pre></div></div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a> extends <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="type parameter in MetaModelQueryDslImpl">E</a>&gt;&gt;</code></dd>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>expansionPath</code> - the new expansion paths</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>new object</dd>
 </dl>
 </li>
 </ul>
