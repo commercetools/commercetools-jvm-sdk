@@ -1,5 +1,7 @@
 package io.sphere.sdk.search;
 
+import io.sphere.sdk.models.LocalizedStringsEntry;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.function.Function;
@@ -13,7 +15,7 @@ import java.util.function.Function;
 public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S>, S> extends EntitySearch<T>, SearchDsl<T, C> {
 
     @Override
-    C withText(final SearchText text);
+    C withText(final LocalizedStringsEntry text);
 
     @Override
     C withText(final Locale locale, final String text);

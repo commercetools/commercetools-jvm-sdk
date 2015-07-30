@@ -7,6 +7,7 @@ import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.UrlQueryBuilder;
+import io.sphere.sdk.models.LocalizedStringsEntry;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -24,7 +25,7 @@ import static java.util.Objects.requireNonNull;
 public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, C, S>, S> extends SphereRequestBase implements MetaModelSearchDsl<T, C, S> {
 
     @Nullable
-    final SearchText text;
+    final LocalizedStringsEntry text;
     final List<FacetExpression<T>> facets;
     final List<FilterExpression<T>> resultFilters;
     final List<FilterExpression<T>> queryFilters;
@@ -40,7 +41,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     final S searchModel;
     final Function<MetaModelSearchDslBuilder<T, C, S>, C> searchDslBuilderFunction;
 
-    public MetaModelSearchDslImpl(@Nullable final SearchText text, final List<FacetExpression<T>> facets, final List<FilterExpression<T>> resultFilters,
+    public MetaModelSearchDslImpl(@Nullable final LocalizedStringsEntry text, final List<FacetExpression<T>> facets, final List<FilterExpression<T>> resultFilters,
                                   final List<FilterExpression<T>> queryFilters, final List<FilterExpression<T>> facetFilters,
                                   final List<SearchSort<T>> sort, @Nullable final Long limit, @Nullable final Long offset,
                                   final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,
@@ -85,13 +86,14 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C withText(@Nullable final SearchText text) {
+    public C withText(@Nullable final LocalizedStringsEntry text) {
         return copyBuilder().text(text).build();
     }
 
     @Override
     public C withText(final Locale locale, final String text) {
-        return withText(SearchText.of(locale, text));
+        final LocalizedStringsEntry locStringEntry = LocalizedStringsEntry.of(requireNonNull(locale), requireNonNull(text));
+        return withText(locStringEntry);
     }
 
     @Override
@@ -240,7 +242,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
 
     @Override
     @Nullable
-    public SearchText text() {
+    public LocalizedStringsEntry text() {
         return text;
     }
 
@@ -307,7 +309,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
 
     String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
-        Optional.ofNullable(text()).ifPresent(t -> builder.add(TEXT + "." + t.getLocale().getLanguage(), t.getText(), urlEncoded));
+        Optional.ofNullable(text()).ifPresent(t -> builder.add(TEXT + "." + t.getLocale().getLanguage(), t.getValue(), urlEncoded));
         facets().forEach(f -> builder.add(FACET, f.toSphereFacet(), urlEncoded));
         resultFilters().forEach(f -> builder.add(FILTER, f.toSphereFilter(), urlEncoded));
         queryFilters().forEach(f -> builder.add(FILTER_QUERY, f.toSphereFilter(), urlEncoded));

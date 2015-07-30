@@ -1,12 +1,14 @@
 package io.sphere.sdk.search;
 
+import io.sphere.sdk.models.LocalizedStringsEntry;
+
 import javax.annotation.Nullable;
 import java.util.List;
 
 public interface EntitySearch<T> extends Search<T> {
 
     @Nullable
-    SearchText text();
+    LocalizedStringsEntry text();
 
     List<FacetExpression<T>> facets();
 
