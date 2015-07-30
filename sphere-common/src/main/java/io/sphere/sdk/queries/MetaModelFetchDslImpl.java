@@ -20,6 +20,7 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.http.HttpStatusCode.NOT_FOUND_404;
 import static io.sphere.sdk.queries.QueryParameterKeys.EXPAND;
+import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -108,23 +109,28 @@ public class MetaModelFetchDslImpl<R, T, C extends MetaModelFetchDsl<R, T, C, E>
     }
 
     @Override
-    public final C withExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
-        return copyBuilder().expansionPaths(expansionPaths).build();
-    }
-
-    @Override
     public Fetch<R> toFetch() {
         return this;
     }
 
     @Override
-    public C plusExpansionPaths(final Function<E, ExpansionPath<T>> m) {
-        return ExpansionDslUtil.plusExpansionPaths(this, m);
-    };
+    public final C withExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
+        return copyBuilder().expansionPaths(expansionPaths).build();
+    }
+
+    @Override
+    public C withExpansionPaths(final ExpansionPath<T> expansionPath) {
+        return ExpansionDslUtil.withExpansionPaths(this, expansionPath);
+    }
 
     @Override
     public C withExpansionPaths(final Function<E, ExpansionPath<T>> m) {
         return ExpansionDslUtil.withExpansionPaths(this, m);
+    }
+
+    @Override
+    public C plusExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
+        return withExpansionPaths(listOf(expansionPaths(), expansionPaths));
     }
 
     @Override
@@ -133,8 +139,8 @@ public class MetaModelFetchDslImpl<R, T, C extends MetaModelFetchDsl<R, T, C, E>
     }
 
     @Override
-    public C withExpansionPaths(final ExpansionPath<T> expansionPath) {
-        return ExpansionDslUtil.withExpansionPaths(this, expansionPath);
+    public C plusExpansionPaths(final Function<E, ExpansionPath<T>> m) {
+        return ExpansionDslUtil.plusExpansionPaths(this, m);
     }
 
     @Override

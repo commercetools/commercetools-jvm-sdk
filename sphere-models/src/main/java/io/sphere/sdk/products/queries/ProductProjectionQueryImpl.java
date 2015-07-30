@@ -15,6 +15,7 @@ import static java.util.Collections.singletonList;
  {@doc.gen summary product projections}
  */
 final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionQuery {
+
     ProductProjectionQueryImpl(final ProductProjectionType productProjectionType){
         super(ProductProjectionEndpoint.ENDPOINT.endpoint(), ProductProjectionQuery.resultTypeReference(), ProductProjectionQueryModel.of(), ProductProjectionExpansionModel.of(), ProductProjectionQueryImpl::new, additionalParametersOf(productProjectionType));
     }

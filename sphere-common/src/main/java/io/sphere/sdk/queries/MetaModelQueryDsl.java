@@ -48,8 +48,8 @@ public interface MetaModelQueryDsl<T, C extends MetaModelQueryDsl<T, C, Q, E>, Q
     C withOffset(final long offset);
 
     @Override
-    C plusExpansionPaths(final Function<E, ExpansionPath<T>> m);
+    C withExpansionPaths(final Function<E, ExpansionPath<T>> m);
 
     @Override
-    C withExpansionPaths(final Function<E, ExpansionPath<T>> m);
+    C plusExpansionPaths(final Function<E, ExpansionPath<T>> m);
 }
