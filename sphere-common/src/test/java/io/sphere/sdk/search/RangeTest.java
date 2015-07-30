@@ -9,12 +9,10 @@ public class RangeTest {
     @Test
     public void createsBoundedRange() throws Exception {
         final Range<Integer> range = range(Bound.exclusive(4), Bound.inclusive(10));
-        final Bound<Integer> lowerBound = range.lowerBound();
-        final Bound<Integer> upperBound = range.upperBound();
-        assertThat(lowerBound.endpoint()).isEqualTo(4);
-        assertThat(lowerBound.isExclusive()).isTrue();
-        assertThat(upperBound.endpoint()).isEqualTo(10);
-        assertThat(upperBound.isInclusive()).isTrue();
+        assertThat(range.lowerEndpoint()).isEqualTo(4);
+        assertThat(range.isLowerBoundExclusive()).isTrue();
+        assertThat(range.upperEndpoint()).isEqualTo(10);
+        assertThat(range.isUpperBoundInclusive()).isTrue();
     }
 
     @Test
@@ -39,6 +37,15 @@ public class RangeTest {
         final Range<Integer> range = new Range<>(null, Bound.exclusive(4));
         assertThat(range.lowerEndpoint()).isNull();
         assertThat(range.upperEndpoint()).isEqualTo(4);
+    }
+
+    @Test
+    public void determinesBoundTypes() throws Exception {
+        final Range<Integer> range = range(Bound.exclusive(4), Bound.inclusive(10));
+        assertThat(range.isLowerBoundExclusive()).isTrue();
+        assertThat(range.isLowerBoundInclusive()).isFalse();
+        assertThat(range.isUpperBoundInclusive()).isTrue();
+        assertThat(range.isUpperBoundExclusive()).isFalse();
     }
 
     @Test

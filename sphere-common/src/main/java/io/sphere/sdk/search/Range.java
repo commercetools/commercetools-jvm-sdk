@@ -55,11 +55,44 @@ class Range<T extends Comparable<? super T>> extends Base {
     }
 
     /**
+     * Determines whether the upper bound is exclusive bounded
+     * @return true if the upper bound is exclusive, false if the upper bound is inclusive or does not exist
+     */
+    public boolean isUpperBoundExclusive() {
+        return Optional.ofNullable(upperBound).map(Bound::isExclusive).orElse(false);
+    }
+
+    /**
+     * Determines whether the upper bound is inclusive bounded
+     * @return true if the upper bound is inclusive, false if the upper bound is exclusive or does not exist
+     */
+    public boolean isUpperBoundInclusive() {
+        return Optional.ofNullable(upperBound).map(Bound::isInclusive).orElse(false);
+    }
+
+    /**
+     * Determines whether the lower bound is exclusive bounded
+     * @return true if the lower bound is exclusive, false if the lower bound is inclusive or does not exist
+     */
+    public boolean isLowerBoundExclusive() {
+        return Optional.ofNullable(lowerBound).map(Bound::isExclusive).orElse(false);
+    }
+
+    /**
+     * Determines whether the lower bound is inclusive bounded
+     * @return true if the lower bound is inclusive, false if the lower bound is exclusive or does not exist
+     */
+    public boolean isLowerBoundInclusive() {
+        return Optional.ofNullable(lowerBound).map(Bound::isInclusive).orElse(false);
+    }
+
+    /**
      * Determines whether the range contains no values. A range is empty when it has the form (a, a] or [a, a).
      * @return true if the range cannot contain any value.
      */
     public boolean isEmpty() {
-        return isBounded() && lowerEndpoint().equals(upperEndpoint())
+        final boolean isBounded = lowerBound != null && upperBound != null;
+        return isBounded && lowerBound.endpoint() == upperBound.endpoint()
                 && lowerBound.isExclusive() != upperBound.isExclusive();
     }
 
@@ -97,6 +130,7 @@ class Range<T extends Comparable<? super T>> extends Base {
      * @return true if the range is of the form (a, a), false otherwise.
      */
     private boolean hasSameExclusiveBounds() {
-        return isBounded() && lowerBound.equals(upperBound) && lowerBound.isExclusive();
+        final boolean isBounded = lowerBound != null && upperBound != null;
+        return isBounded && lowerBound.equals(upperBound) && lowerBound.isExclusive();
     }
 }
