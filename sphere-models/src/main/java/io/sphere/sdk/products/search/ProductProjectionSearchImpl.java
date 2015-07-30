@@ -10,11 +10,6 @@ import java.util.List;
 
 import static java.util.Collections.singletonList;
 
-/**
- * Searches for products.
- *
- * Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/ProductSearchDocumentation.html">Product Search API</a> for more information.
- */
 final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductProjection, ProductProjectionSearch, ExperimentalProductProjectionSearchModel> implements ProductProjectionSearch {
 
     ProductProjectionSearchImpl(final ProductProjectionType productProjectionType){
