@@ -4,10 +4,9 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
-import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.stream.Collectors.toList;
 
-public class StringQuerySortingModelImpl<T> extends QueryModelImpl<T> implements StringQuerySortingModel<T> {
+final class StringQuerySortingModelImpl<T> extends QueryModelImpl<T> implements StringQuerySortingModel<T> {
     public StringQuerySortingModelImpl(@Nullable final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }

@@ -20,7 +20,8 @@ public class RulesMain {
                 new NoOptionalParametersInMethodsRule(),
                 new NoOptionalReturnTypeForGettersRule(),
                 new NoOptionalParametersInPublicConstructorRule(),
-                new PublicConstructorsAreTheExceptionRule()
+                new PublicConstructorsAreTheExceptionRule(),
+                new BuildersNotForResources()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

@@ -13,7 +13,7 @@ public abstract class ClassStrategyRule extends AbstractRule {
     public final RulesReport check(final List<Class<?>> classes) {
         final List<RuleViolation> violations = classes.stream()
                 .filter(this::classIsIncludedInRule)
-                .map(clazz -> isRuleConform(clazz) ? Optional.<RuleViolation>empty() : Optional.<RuleViolation>of(new ClassRuleViolation(clazz)))
+                .map(clazz -> isRuleConform(clazz) ? Optional.<RuleViolation>empty() : Optional.<RuleViolation>of(new ClassRuleViolation(clazz, getClass().getSimpleName())))
                 .filter(violationOptional -> violationOptional.isPresent())
                 .map(violationOptional -> violationOptional.get())
                 .collect(toList());

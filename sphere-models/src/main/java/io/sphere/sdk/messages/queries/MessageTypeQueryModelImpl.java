@@ -3,12 +3,10 @@ package io.sphere.sdk.messages.queries;
 import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.messages.MessageDerivatHint;
 import io.sphere.sdk.queries.QueryModel;
+import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.QueryPredicate;
-import io.sphere.sdk.queries.StringQuerySortingModelImpl;
 
-import java.util.Arrays;
-
-final class MessageTypeQueryModelImpl extends StringQuerySortingModelImpl<Message> implements MessageTypeQueryModel {
+final class MessageTypeQueryModelImpl extends QueryModelImpl<Message> implements MessageTypeQueryModel {
     public MessageTypeQueryModelImpl(final QueryModel<Message> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
@@ -16,5 +14,55 @@ final class MessageTypeQueryModelImpl extends StringQuerySortingModelImpl<Messag
     @Override
     public QueryPredicate<Message> is(final MessageDerivatHint<?> hint) {
         return hint.predicate();
+    }
+
+    @Override
+    public QueryPredicate<Message> is(final String s) {
+        return isPredicate(s);
+    }
+
+    @Override
+    public QueryPredicate<Message> isNot(final String s) {
+        return isNotPredicate(s);
+    }
+
+    @Override
+    public QueryPredicate<Message> isIn(final Iterable<String> args) {
+        return isInPredicate(args);
+    }
+
+    @Override
+    public QueryPredicate<Message> isGreaterThan(final String value) {
+        return isGreaterThanPredicate(value);
+    }
+
+    @Override
+    public QueryPredicate<Message> isLessThan(final String value) {
+        return isLessThanPredicate(value);
+    }
+
+    @Override
+    public QueryPredicate<Message> isLessThanOrEqualTo(final String value) {
+        return isLessThanOrEqualToPredicate(value);
+    }
+
+    @Override
+    public QueryPredicate<Message> isGreaterThanOrEqualTo(final String value) {
+        return isGreaterThanOrEqualToPredicate(value);
+    }
+
+    @Override
+    public QueryPredicate<Message> isNotIn(final Iterable<String> args) {
+        return isNotIn(args);
+    }
+
+    @Override
+    public QueryPredicate<Message> isPresent() {
+        return isPresentPredicate();
+    }
+
+    @Override
+    public QueryPredicate<Message> isNotPresent() {
+        return isNotPresentPredicate();
     }
 }
