@@ -1,15 +1,14 @@
 package io.sphere.sdk.search;
 
+import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.http.HttpQueryParameter;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
-
-import static java.util.Arrays.asList;
 
 final class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
     @Nullable
@@ -77,7 +76,7 @@ final class SearchDslBuilder<T> extends Base implements Builder<SearchDsl<T>>{
     }
 
     public Builder<SearchDsl<T>> sort(final SearchSort<T> sort) {
-        return sort(asList(sort));
+        return sort(Collections.singletonList(sort));
     }
 
     Builder<SearchDsl<T>> sort(final List<SearchSort<T>> sort) {

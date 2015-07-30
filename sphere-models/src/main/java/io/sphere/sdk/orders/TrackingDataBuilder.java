@@ -1,11 +1,8 @@
 package io.sphere.sdk.orders;
 
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.queries.ProductProjectionQuery;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 public class TrackingDataBuilder implements Builder<TrackingData> {
     @Nullable

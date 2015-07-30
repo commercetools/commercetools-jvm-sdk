@@ -1,8 +1,7 @@
 package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
-
-import static java.util.Arrays.asList;
+import java.util.Collections;
 
 public class FacetSearchModel<T, V> extends SearchModelImpl<T> {
     @Nullable
@@ -30,7 +29,7 @@ public class FacetSearchModel<T, V> extends SearchModelImpl<T> {
     }
 
     public FilteredFacetExpression<T, V> only(final V value) {
-        return only(asList(value));
+        return only(Collections.singletonList(value));
     }
 
     public FilteredFacetExpression<T, V> only(final Iterable<V> values) {

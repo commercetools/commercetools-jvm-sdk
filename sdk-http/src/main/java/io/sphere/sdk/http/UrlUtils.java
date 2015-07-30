@@ -17,7 +17,7 @@ public final class UrlUtils {
         try {
             return URLEncoder.encode(s, encoding);
         } catch (final UnsupportedEncodingException e) {
-            throw new RuntimeException(String.format("Could not encode url %s with encoding ", s, encoding));
+            throw new RuntimeException(String.format("Could not encode url %s with encoding %s", s, encoding));
         }
     }
 }

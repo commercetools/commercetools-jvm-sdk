@@ -1,8 +1,7 @@
 package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
-
-import static java.util.Arrays.asList;
+import java.util.Collections;
 
 public class RangedFacetSearchModel<T, V extends Comparable<? super V>> extends FacetSearchModel<T, V> {
 
@@ -35,7 +34,7 @@ public class RangedFacetSearchModel<T, V extends Comparable<? super V>> extends 
     }
 
     public RangeFacetExpression<T, V> range(final FacetRange<V> range) {
-        return range(asList(range));
+        return range(Collections.singletonList(range));
     }
 
     public RangeFacetExpression<T, V> range(final Iterable<FacetRange<V>> ranges) {

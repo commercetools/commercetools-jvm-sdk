@@ -1,17 +1,17 @@
 package io.sphere.sdk.utils;
 
 import io.sphere.sdk.utils.functional.TriFunction;
+import org.apache.commons.lang3.tuple.Pair;
 
-import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.concurrent.*;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionException;
+import java.util.concurrent.CompletionStage;
+import java.util.concurrent.ExecutionException;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
-import org.apache.commons.lang3.tuple.Pair;
-
-import static java.util.Arrays.asList;
 
 public final class CompletableFutureUtils {
     private CompletableFutureUtils() {

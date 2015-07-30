@@ -41,7 +41,7 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
     }
 
     public ProductVariantDraftBuilder images(final Image image) {
-        return images(asList(image));
+        return images(Collections.singletonList(image));
     }
 
     public ProductVariantDraftBuilder prices(final List<Price> prices) {
@@ -54,7 +54,7 @@ public final class ProductVariantDraftBuilder extends Base implements Builder<Pr
     }
 
     public ProductVariantDraftBuilder price(final Price price) {
-        return prices(asList(price));
+        return prices(Collections.singletonList(price));
     }
 
     public ProductVariantDraftBuilder attributes(final List<AttributeDraft> attributes) {

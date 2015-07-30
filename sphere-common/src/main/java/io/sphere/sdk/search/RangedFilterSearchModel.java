@@ -1,8 +1,7 @@
 package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
-
-import static java.util.Arrays.asList;
+import java.util.Collections;
 
 public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends FilterSearchModel<T, V> {
 
@@ -21,7 +20,7 @@ public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends
     }
 
     public FilterExpression<T> range(final FilterRange<V> range) {
-        return range(asList(range));
+        return range(Collections.singletonList(range));
     }
 
     public FilterExpression<T> range(final Iterable<FilterRange<V>> ranges) {

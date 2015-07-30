@@ -1,17 +1,17 @@
 import java.io.ByteArrayOutputStream
-import Libs._
 
+import Libs._
 import de.johoop.jacoco4sbt.JacocoPlugin.{itJacoco, jacoco}
 import net.sourceforge.plantuml.{FileFormat, FileFormatOption, SourceStringReader}
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Element
-import sbt._
 import sbt.Keys._
+import sbt._
 import sbtunidoc.Plugin.UnidocKeys._
 import sbtunidoc.Plugin._
 
-import scala.language.postfixOps
 import scala.collection.JavaConversions._
+import scala.language.postfixOps
 
 object Build extends Build {
 
@@ -129,7 +129,7 @@ object Build extends Build {
     val reader = new SourceStringReader(source)
     val os = new ByteArrayOutputStream()
     val desc = reader.generateImage(os, new FileFormatOption(FileFormat.SVG))
-    os.close
+    os.close()
     val outFile = javaUnidocDir / "documentation-resources" / "images" / "uml" / "exception-hierarchy.svg"
     IO.write(outFile, os.toByteArray())
   }

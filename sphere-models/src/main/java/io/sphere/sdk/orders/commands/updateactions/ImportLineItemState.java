@@ -7,8 +7,6 @@ import io.sphere.sdk.orders.Order;
 
 import java.util.Set;
 
-import static io.sphere.sdk.utils.SetUtils.asSet;
-
 /**
  * These import of states does not follow any predefined rules and should be only used if no transitions are defined.
  *

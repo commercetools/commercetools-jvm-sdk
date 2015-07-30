@@ -5,9 +5,8 @@ import io.sphere.sdk.commands.UpdateCommandDsl;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Versioned;
 
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  {@doc.gen list actions}
@@ -18,6 +17,6 @@ public interface CustomerGroupUpdateCommand extends UpdateCommandDsl<CustomerGro
     }
 
     static CustomerGroupUpdateCommand of(final Versioned<CustomerGroup> versioned, final UpdateAction<CustomerGroup> updateAction) {
-        return new CustomerGroupUpdateCommandImpl(versioned, asList(updateAction));
+        return new CustomerGroupUpdateCommandImpl(versioned, Collections.singletonList(updateAction));
     }
 }

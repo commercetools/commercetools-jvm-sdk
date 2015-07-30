@@ -1,12 +1,14 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.models.Image;
 
 import javax.annotation.Nullable;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public final class ProductVariantBuilder extends Base implements Builder<ProductVariant> {
     private final int id;
@@ -47,7 +49,7 @@ public final class ProductVariantBuilder extends Base implements Builder<Product
     }
 
     public ProductVariantBuilder price(final Price price) {
-        return prices(Arrays.asList(price));
+        return prices(Collections.singletonList(price));
     }
 
     public ProductVariantBuilder productId(@Nullable final String productId) {

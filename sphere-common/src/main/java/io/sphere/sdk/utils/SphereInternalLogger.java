@@ -3,14 +3,11 @@ package io.sphere.sdk.utils;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Optional;
 import java.util.function.Supplier;
-
-import static org.apache.commons.lang3.StringUtils.substringBefore;
 
 /** Internal logging used by the sphere Java client itself.
  *

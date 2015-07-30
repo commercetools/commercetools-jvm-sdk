@@ -1,7 +1,6 @@
 package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.utils.ListUtils;
 
 import java.util.List;
 import java.util.Optional;

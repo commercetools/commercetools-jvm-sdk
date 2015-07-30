@@ -8,7 +8,6 @@ import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
-import io.sphere.sdk.utils.ListUtils;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -20,7 +19,6 @@ import java.util.function.Function;
 import static io.sphere.sdk.queries.QueryParameterKeys.*;
 import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.lang.String.format;
-import static java.util.Arrays.asList;
 import static java.util.Objects.requireNonNull;
 
 /**
@@ -88,7 +86,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     @Override
     public C withPredicates(final QueryPredicate<T> queryPredicates) {
         Objects.requireNonNull(queryPredicates);
-        return withPredicates(asList(queryPredicates));
+        return withPredicates(Collections.singletonList(queryPredicates));
     }
 
     @Override
@@ -122,12 +120,12 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     @Override
     public C withSort(final QuerySort<T> sort) {
-        return withSort(asList(sort));
+        return withSort(Collections.singletonList(sort));
     }
 
     @Override
     public C withSort(final Function<Q, QuerySort<T>> m) {
-        return withSort(asList(m.apply(queryModel)));
+        return withSort(Collections.singletonList(m.apply(queryModel)));
     }
 
     @Override
@@ -162,7 +160,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
 
     @Override
     public C withExpansionPaths(final Function<E, ExpansionPath<T>> m) {
-        return withExpansionPaths(asList(m.apply(expansionModel)));
+        return withExpansionPaths(Collections.singletonList(m.apply(expansionModel)));
     }
 
     @Override
@@ -276,6 +274,6 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     @Override
     public C withExpansionPaths(final ExpansionPath<T> expansionPath) {
         Objects.requireNonNull(expansionPath);
-        return withExpansionPaths(asList(expansionPath));
+        return withExpansionPaths(Collections.singletonList(expansionPath));
     }
 }

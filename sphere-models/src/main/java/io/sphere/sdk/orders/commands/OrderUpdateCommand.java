@@ -5,9 +5,8 @@ import io.sphere.sdk.commands.UpdateCommandDsl;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.orders.Order;
 
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  {@doc.gen list actions}
@@ -18,6 +17,6 @@ public interface OrderUpdateCommand extends UpdateCommandDsl<Order, OrderUpdateC
     }
 
     static OrderUpdateCommand of(final Versioned<Order> order, final UpdateAction<Order> updateAction) {
-        return of(order, asList(updateAction));
+        return of(order, Collections.singletonList(updateAction));
     }
 }

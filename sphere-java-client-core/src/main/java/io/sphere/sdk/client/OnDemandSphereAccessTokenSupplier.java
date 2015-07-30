@@ -4,8 +4,6 @@ import io.sphere.sdk.http.HttpClient;
 
 import java.util.concurrent.CompletionStage;
 
-import static io.sphere.sdk.client.SphereAuth.*;
-
 final class OnDemandSphereAccessTokenSupplier extends AutoCloseableService implements SphereAccessTokenSupplier {
     private final TokensSupplier tokensSupplier;
     private boolean isClosed = false;

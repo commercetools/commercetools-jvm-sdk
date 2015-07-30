@@ -1,6 +1,5 @@
 package io.sphere.sdk.meta;
 
-import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
 import io.sphere.sdk.customobjects.queries.CustomObjectQueryModel;
 
 /**

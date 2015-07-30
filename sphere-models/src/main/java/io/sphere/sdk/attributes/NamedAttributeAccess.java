@@ -1,7 +1,5 @@
 package io.sphere.sdk.attributes;
 
-import io.sphere.sdk.models.PlainEnumValue;
-
 /**
  * <h2>Type-safe attribute access</h2>
  *

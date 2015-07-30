@@ -4,7 +4,6 @@ import io.sphere.sdk.models.Base;
 import org.apache.commons.lang3.ObjectUtils;
 
 import javax.annotation.Nullable;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Function;
 

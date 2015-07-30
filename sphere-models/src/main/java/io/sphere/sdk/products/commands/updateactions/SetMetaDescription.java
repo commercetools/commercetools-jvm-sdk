@@ -4,7 +4,6 @@ import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.ProductUpdateScope;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 /**
  * Sets the SEO attribute description.

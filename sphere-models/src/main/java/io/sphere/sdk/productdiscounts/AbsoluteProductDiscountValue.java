@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 import javax.money.MonetaryAmount;
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  *
@@ -36,7 +35,7 @@ public class AbsoluteProductDiscountValue extends Base implements ProductDiscoun
     }
 
     public static AbsoluteProductDiscountValue of(final MonetaryAmount money) {
-        return new AbsoluteProductDiscountValue(asList(money));
+        return new AbsoluteProductDiscountValue(Collections.singletonList(money));
     }
 }
 

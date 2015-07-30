@@ -10,7 +10,7 @@ public class LocationsCollectionQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public CountryQueryModel<T> country() {
-        return new CountryQueryModel<T>(this, "country");
+        return new CountryQueryModel<>(this, "country");
     }
 
     public StringQueryModel<T> state() {

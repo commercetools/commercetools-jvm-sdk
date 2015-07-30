@@ -1,13 +1,13 @@
 package io.sphere.sdk.products.search;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.search.PagedSearchResult;
 import io.sphere.sdk.search.SearchDslImpl;
-import io.sphere.sdk.http.HttpQueryParameter;
 
-import static java.util.Arrays.asList;
+import java.util.Collections;
 
 /**
  * Searches for products.
@@ -25,7 +25,7 @@ public class ProductProjectionSearch extends SearchDslImpl<ProductProjection> {
     };
 
     private ProductProjectionSearch(final ProductProjectionType type) {
-        super("/product-projections/search", TYPE_REFERENCE, asList(HttpQueryParameter.of("staged", type.isStaged().toString())));
+        super("/product-projections/search", TYPE_REFERENCE, Collections.singletonList(HttpQueryParameter.of("staged", type.isStaged().toString())));
     }
 
     public static ProductProjectionSearch ofStaged() {

@@ -21,7 +21,7 @@ public interface Message extends DefaultModel<Message> {
         };
     }
 
-    Reference<? extends Object> getResource();
+    Reference<?> getResource();
 
     long getResourceVersion();
 

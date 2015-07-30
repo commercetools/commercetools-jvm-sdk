@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 import javax.money.MonetaryAmount;
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -21,7 +20,7 @@ public interface CartDiscountValue {
         }
 
         static AbsoluteCartDiscountValue ofAbsolute(final MonetaryAmount money) {
-                return AbsoluteCartDiscountValue.of(asList(money));
+                return AbsoluteCartDiscountValue.of(Collections.singletonList(money));
         }
 
         static RelativeCartDiscountValue ofRelative(final int permyriad) {

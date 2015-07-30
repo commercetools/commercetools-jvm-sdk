@@ -6,7 +6,6 @@ import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.ProductUpdateScope;
 
 import javax.annotation.Nullable;
-import java.util.Optional;
 
 /**
  * Adds / Removes / Changes a custom attribute in all variants at the same time (it can be helpful to set attribute values that are constrained with SameForAll).

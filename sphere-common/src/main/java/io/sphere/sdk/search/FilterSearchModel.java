@@ -1,8 +1,7 @@
 package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
-
-import static java.util.Arrays.asList;
+import java.util.Collections;
 
 public class FilterSearchModel<T, V> extends SearchModelImpl<T> {
     protected TypeSerializer<V> typeSerializer;
@@ -13,7 +12,7 @@ public class FilterSearchModel<T, V> extends SearchModelImpl<T> {
     }
 
     public FilterExpression<T> exactly(final V value) {
-        return exactly(asList(value));
+        return exactly(Collections.singletonList(value));
     }
 
     public FilterExpression<T> exactly(final Iterable<V> values) {

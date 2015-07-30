@@ -1,6 +1,5 @@
 package io.sphere.sdk.carts.commands.updateactions;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.commands.UpdateAction;

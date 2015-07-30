@@ -1,5 +1,5 @@
+import com.sun.javadoc.Tag;
 import com.sun.tools.doclets.Taglet;
-import com.sun.javadoc.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -57,10 +57,10 @@ public class CodeTaglet implements Taglet {
                     } else if (position == Position.START && trimmedLine.startsWith("package")) {
                         position = Position.IMPORTS;
                     } else if (position == Position.IMPORTS && trimmedLine.startsWith("import")) {
-                        importStatements.append(line + lineSeparator);
+                        importStatements.append(line).append(lineSeparator);
                     } else if (position == Position.IMPORTS || position == Position.CODE) {
                         position = Position.CODE;
-                        fileContents.append(line + lineSeparator);
+                        fileContents.append(line).append(lineSeparator);
                     } else {
                         throw new IllegalStateException("can't parse Java file");
                     }

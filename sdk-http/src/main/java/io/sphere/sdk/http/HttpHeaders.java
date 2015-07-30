@@ -2,7 +2,6 @@ package io.sphere.sdk.http;
 
 import java.util.*;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.unmodifiableMap;
 
 public class HttpHeaders extends Base {
@@ -21,7 +20,7 @@ public class HttpHeaders extends Base {
 
     public static HttpHeaders of(final String key, final String value) {
         final Map<String, List<String>> headers = new HashMap<>();
-        headers.put(key, asList(value));
+        headers.put(key, Collections.singletonList(value));
         return new HttpHeaders(headers);
     }
 
@@ -72,7 +71,7 @@ public class HttpHeaders extends Base {
         final Map<String, List<String>> newMap = new HashMap<>();
         newMap.putAll(headers);
         if (newMap.containsKey(AUTHORIZATION)) {
-            newMap.put(AUTHORIZATION, asList("**removed from output**"));
+            newMap.put(AUTHORIZATION, Collections.singletonList("**removed from output**"));
         }
         return newMap.toString();
     }

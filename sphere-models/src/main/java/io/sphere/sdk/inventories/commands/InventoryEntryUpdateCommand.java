@@ -5,16 +5,15 @@ import io.sphere.sdk.commands.UpdateCommandDsl;
 import io.sphere.sdk.inventories.InventoryEntry;
 import io.sphere.sdk.models.Versioned;
 
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  {@doc.gen list actions}
  */
 public interface InventoryEntryUpdateCommand extends UpdateCommandDsl<InventoryEntry, InventoryEntryUpdateCommand> {
     static InventoryEntryUpdateCommand of(final Versioned<InventoryEntry> versioned, final UpdateAction<InventoryEntry> updateAction) {
-        return of(versioned, asList(updateAction));
+        return of(versioned, Collections.singletonList(updateAction));
     }
 
     static InventoryEntryUpdateCommand of(final Versioned<InventoryEntry> versioned, final List<? extends UpdateAction<InventoryEntry>> updateActions) {

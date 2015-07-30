@@ -2,9 +2,8 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.expansion.ReferenceExpandeableDsl;
 
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  *
@@ -31,7 +30,7 @@ public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, R
     C withSort(final List<QuerySort<T>> sort);
 
     default C withSort(final QuerySort<T> sort) {
-        return withSort(asList(sort));
+        return withSort(Collections.singletonList(sort));
     }
 
     C withFetchTotal(final boolean fetchTotal);

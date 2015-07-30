@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 import javax.money.MonetaryAmount;
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 public class AbsoluteCartDiscountValue extends Base implements CartDiscountValue {
     private final List<MonetaryAmount> money;
@@ -21,7 +20,7 @@ public class AbsoluteCartDiscountValue extends Base implements CartDiscountValue
     }
 
     public static AbsoluteCartDiscountValue of(final MonetaryAmount money) {
-        return of(asList(money));
+        return of(Collections.singletonList(money));
     }
 
     public static AbsoluteCartDiscountValue of(final List<MonetaryAmount> money) {

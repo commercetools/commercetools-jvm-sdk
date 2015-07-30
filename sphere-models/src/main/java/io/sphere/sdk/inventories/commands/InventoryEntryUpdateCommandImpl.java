@@ -1,7 +1,6 @@
 package io.sphere.sdk.inventories.commands;
 
 import io.sphere.sdk.commands.UpdateAction;
-import io.sphere.sdk.commands.UpdateCommand;
 import io.sphere.sdk.commands.UpdateCommandDslBuilder;
 import io.sphere.sdk.commands.UpdateCommandDslImpl;
 import io.sphere.sdk.inventories.InventoryEntry;

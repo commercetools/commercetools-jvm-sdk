@@ -5,16 +5,15 @@ import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.commands.UpdateCommandDsl;
 import io.sphere.sdk.models.Versioned;
 
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  {@doc.gen list actions}
  */
 public interface CategoryUpdateCommand extends UpdateCommandDsl<Category, CategoryUpdateCommand> {
     static CategoryUpdateCommand of(final Versioned<Category> versioned, final UpdateAction<Category> updateAction) {
-        return of(versioned, asList(updateAction));
+        return of(versioned, Collections.singletonList(updateAction));
     }
 
     static CategoryUpdateCommand of(final Versioned<Category> versioned, final List<? extends UpdateAction<Category>> updateActions) {

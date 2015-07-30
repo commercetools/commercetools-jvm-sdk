@@ -9,9 +9,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  * @see DiscountCodeDraftBuilder
@@ -43,7 +42,7 @@ public class DiscountCodeDraft extends Base {
     }
 
     public static DiscountCodeDraft of(final String code, final Referenceable<CartDiscount> cartDiscount) {
-        return of(code, asList(cartDiscount.toReference()));
+        return of(code, Collections.singletonList(cartDiscount.toReference()));
     }
 
     public static DiscountCodeDraft of(final String code, final List<Reference<CartDiscount>> cartDiscounts) {
@@ -77,7 +76,7 @@ public class DiscountCodeDraft extends Base {
     }
 
     public DiscountCodeDraft withCartDiscounts(final Referenceable<CartDiscount> cartDiscount) {
-        return withCartDiscounts(asList(cartDiscount.toReference()));
+        return withCartDiscounts(Collections.singletonList(cartDiscount.toReference()));
     }
 
     public DiscountCodeDraft withCartDiscounts(final List<Reference<CartDiscount>> cartDiscounts) {
@@ -125,11 +124,7 @@ public class DiscountCodeDraft extends Base {
         return maxApplicationsPerCustomer;
     }
 
-    private DiscountCodeDraftBuilder builder(final DiscountCodeDraft draft) {
-        return DiscountCodeDraftBuilder.of(this);
-    }
-
     private DiscountCodeDraftBuilder newBuilder() {
-        return builder(this);
+        return DiscountCodeDraftBuilder.of(this);
     }
 }

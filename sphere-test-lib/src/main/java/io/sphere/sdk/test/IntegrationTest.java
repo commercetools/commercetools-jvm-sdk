@@ -10,8 +10,6 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.slf4j.LoggerFactory;
 
-import java.util.Optional;
-
 public abstract class IntegrationTest {
 
     private static volatile int threadCountAtStart;

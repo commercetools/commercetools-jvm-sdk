@@ -3,7 +3,6 @@ package io.sphere.sdk.queries;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +37,7 @@ public class PagedQueryResult<T> extends PagedResult<T> {
 
     @JsonIgnore
     public static <T> PagedQueryResultDsl<T> of(final T singleResult) {
-        return of(Arrays.asList(singleResult));
+        return of(Collections.singletonList(singleResult));
     }
 
     @Override

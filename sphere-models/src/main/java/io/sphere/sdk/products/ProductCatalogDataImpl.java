@@ -10,8 +10,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-import static java.util.Arrays.asList;
-
 class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     @JsonProperty("published")
     private final boolean isPublished;
@@ -48,7 +46,7 @@ class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     }
 
     public void setProductId(final String id) {
-        final List<ProductData> currentAsList = Optional.ofNullable(current).map(c -> asList(c)).orElse(Collections.emptyList());
+        final List<ProductData> currentAsList = Optional.ofNullable(current).map(c -> Collections.singletonList(c)).orElse(Collections.emptyList());
         ListUtils.listOf(currentAsList, staged).stream()
                 .filter(x -> x instanceof ProductDataImpl)
                 .forEach(x -> ((ProductDataImpl)x).setProductId(id));

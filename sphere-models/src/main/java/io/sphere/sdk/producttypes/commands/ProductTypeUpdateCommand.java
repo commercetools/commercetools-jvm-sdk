@@ -5,9 +5,8 @@ import io.sphere.sdk.commands.UpdateCommandDsl;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.producttypes.ProductType;
 
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
 
@@ -20,6 +19,6 @@ public interface ProductTypeUpdateCommand extends UpdateCommandDsl<ProductType, 
     }
 
     static ProductTypeUpdateCommand of(final Versioned<ProductType> versioned, final UpdateAction<ProductType> updateAction) {
-        return new ProductTypeUpdateCommandImpl(versioned, asList(updateAction));
+        return new ProductTypeUpdateCommandImpl(versioned, Collections.singletonList(updateAction));
     }
 }

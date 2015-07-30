@@ -5,9 +5,8 @@ import io.sphere.sdk.commands.UpdateCommandDsl;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  {@doc.gen list actions}
@@ -19,6 +18,6 @@ public interface ShippingMethodUpdateCommand extends UpdateCommandDsl<ShippingMe
     }
 
     static ShippingMethodUpdateCommand of(final Versioned<ShippingMethod> versioned, final UpdateAction<ShippingMethod> updateAction) {
-        return of(versioned, asList(updateAction));
+        return of(versioned, Collections.singletonList(updateAction));
     }
 }

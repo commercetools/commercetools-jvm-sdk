@@ -6,9 +6,8 @@ import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 /**
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#changeCartDiscounts()}
@@ -22,7 +21,7 @@ public class ChangeCartDiscounts extends UpdateAction<DiscountCode> {
     }
 
     public static ChangeCartDiscounts of(final Referenceable<CartDiscount> cartDiscount) {
-        return of(asList(cartDiscount.toReference()));
+        return of(Collections.singletonList(cartDiscount.toReference()));
     }
 
     public static ChangeCartDiscounts of(final List<Reference<CartDiscount>> cartDiscounts) {

@@ -131,9 +131,9 @@ public class DocumentationTaglet implements Taglet {
                 final List<String> accessors = entry.getValue().getAccessors().stream().map(mapper).collect(toList());
                 final List<String> mutators = entry.getValue().getMutators().stream().map(mapper).collect(toList());
                 final int neededLines = Math.max(accessors.size(), mutators.size());
-                builder.append("<tr><td rowspan=\"" + neededLines + "\">" + entry.getKey() + "</td><td>" + (accessors.isEmpty() ? "" : accessors.get(0)) + "</td><td>" + (mutators.isEmpty() ? "" : mutators.get(0)) + "</td></tr>" + "\n");
+                builder.append("<tr><td rowspan=\"").append(neededLines).append("\">").append(entry.getKey()).append("</td><td>").append(accessors.isEmpty() ? "" : accessors.get(0)).append("</td><td>").append(mutators.isEmpty() ? "" : mutators.get(0)).append("</td></tr>").append("\n");
                 for (int i = 1; i < neededLines; i++) {
-                    builder.append("<tr><td>" + (accessors.size() > i ? accessors.get(i) : "") + "</td><td>" + (mutators.size() > i ? mutators.get(i) : "") + "</td></tr>" + "\n");
+                    builder.append("<tr><td>").append(accessors.size() > i ? accessors.get(i) : "").append("</td><td>").append(mutators.size() > i ? mutators.get(i) : "").append("</td></tr>").append("\n");
                 }
             });
             builder.append("</table>");

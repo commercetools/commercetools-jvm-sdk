@@ -4,16 +4,16 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpQueryParameter;
+import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.UrlQueryBuilder;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static java.util.Objects.requireNonNull;
 
@@ -93,7 +93,7 @@ public class SearchDslImpl<T> extends SphereRequestBase implements SearchDsl<T> 
 
     @Override
     public SearchDsl<T> withSort(final SearchSort<T> sort) {
-        return withSort(asList(sort));
+        return withSort(Collections.singletonList(sort));
     }
 
     @Override

@@ -12,7 +12,6 @@ import io.sphere.sdk.utils.MoneyImpl;
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
-import java.util.Objects;
 import java.util.Optional;
 
 public class PriceBuilder implements Builder<Price> {

@@ -4,9 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.sphere.sdk.models.Base;
 
+import java.util.Collections;
 import java.util.List;
-
-import static java.util.Arrays.asList;
 
 public class CustomSuggestTokenizer extends Base implements SuggestTokenizer {
     private final List<String> inputs;
@@ -22,7 +21,7 @@ public class CustomSuggestTokenizer extends Base implements SuggestTokenizer {
 
     @JsonIgnore
     public static CustomSuggestTokenizer of(final String input) {
-        return of(asList(input));
+        return of(Collections.singletonList(input));
     }
 
     @JsonIgnore

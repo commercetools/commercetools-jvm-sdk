@@ -5,10 +5,9 @@ import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.models.*;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.Arrays.asList;
 
 public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCodeDraft> {
     @Nullable
@@ -41,7 +40,7 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
     }
 
     public static DiscountCodeDraftBuilder of(final String code, final Referenceable<CartDiscount> cartDiscount) {
-        return of(code, asList(cartDiscount.toReference()));
+        return of(code, Collections.singletonList(cartDiscount.toReference()));
     }
 
     public static DiscountCodeDraftBuilder of(final String code, final List<Reference<CartDiscount>> cartDiscounts) {
