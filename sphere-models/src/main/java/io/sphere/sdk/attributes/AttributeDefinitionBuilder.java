@@ -54,6 +54,6 @@ public class AttributeDefinitionBuilder extends Base implements Builder<Attribut
     }
 
     public static AttributeDefinitionBuilder of(final String name, final LocalizedStrings label, final AttributeType attributeType) {
-        return new AttributeDefinitionBuilder(name, label, attributeType).searchable(true);
+        return new AttributeDefinitionBuilder(name, label, attributeType);
     }
 }
