@@ -9,12 +9,12 @@ public class BooleanSearchModel<T, S extends SearchSortDirection> extends Search
     }
 
     @Override
-    public FilterSearchModel<T, Boolean> filterBy() {
+    public FilterSearchModel<T, Boolean> filtered() {
         return new FilterSearchModel<>(this, null, TypeSerializer.ofBoolean());
     }
 
     @Override
-    public FacetSearchModel<T, Boolean> facetOf() {
+    public FacetSearchModel<T, Boolean> faceted() {
         return new FacetSearchModel<>(this, null, TypeSerializer.ofBoolean());
     }
 
@@ -24,7 +24,7 @@ public class BooleanSearchModel<T, S extends SearchSortDirection> extends Search
      * DESC: True, False
      */
     @Override
-    public SearchSort<T> sort(final S sortDirection) {
+    public SearchSort<T> sorted(final S sortDirection) {
         return new SphereSearchSort<>(this, sortDirection);
     }
 }

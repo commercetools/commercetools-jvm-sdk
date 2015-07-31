@@ -2,7 +2,7 @@ package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
 
-import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 
 public class FacetSearchModel<T, V> extends SearchModelImpl<T> {
     @Nullable
@@ -25,15 +25,32 @@ public class FacetSearchModel<T, V> extends SearchModelImpl<T> {
         return new FacetSearchModel<>(this, null, typeSerializer, alias);
     }
 
-    public TermFacetExpression<T, V> all() {
+    /**
+     * Generates an expression to obtain the facets of the attribute for all values.
+     * For example: a possible faceted classification could be ["red": 4, "yellow": 2, "blue": 1].
+     * @return a facet expression for all values
+     */
+    public TermFacetExpression<T, V> byAllTerms() {
         return new TermFacetExpression<>(this, typeSerializer, alias);
     }
 
-    public FilteredFacetExpression<T, V> only(final V value) {
-        return only(asList(value));
+    /**
+     * Generates an expression to obtain the facet of the attribute for only the given value.
+     * For example: a possible faceted classification for "red" could be ["red": 4].
+     * @param value the value from which to obtain the facet
+     * @return a facet expression for only the given value
+     */
+    public FilteredFacetExpression<T, V> byTerm(final V value) {
+        return byTerm(singletonList(value));
     }
 
-    public FilteredFacetExpression<T, V> only(final Iterable<V> values) {
+    /**
+     * Generates an expression to obtain the facets of the attribute for only the given values.
+     * For example: a possible faceted classification for ["red", "blue"] could be ["red": 4, "blue": 1].
+     * @param values the values from which to obtain the facets
+     * @return a facet expression for only the given values
+     */
+    public FilteredFacetExpression<T, V> byTerm(final Iterable<V> values) {
         return new FilteredFacetExpression<>(this, typeSerializer, values, alias);
     }
 }

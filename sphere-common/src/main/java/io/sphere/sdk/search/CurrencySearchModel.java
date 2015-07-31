@@ -10,17 +10,17 @@ public class CurrencySearchModel<T, S extends SearchSortDirection> extends Searc
     }
 
     @Override
-    public FilterSearchModel<T, CurrencyUnit> filterBy() {
+    public FilterSearchModel<T, CurrencyUnit> filtered() {
         return new FilterSearchModel<>(this, null, TypeSerializer.ofCurrency());
     }
 
     @Override
-    public FacetSearchModel<T, CurrencyUnit> facetOf() {
+    public FacetSearchModel<T, CurrencyUnit> faceted() {
         return new FacetSearchModel<>(this, null, TypeSerializer.ofCurrency());
     }
 
     @Override
-    public SearchSort<T> sort(S sortDirection) {
+    public SearchSort<T> sorted(S sortDirection) {
         return new SphereSearchSort<>(this, sortDirection);
     }
 }
