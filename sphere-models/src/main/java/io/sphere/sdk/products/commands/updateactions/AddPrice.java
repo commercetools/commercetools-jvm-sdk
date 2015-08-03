@@ -1,20 +1,21 @@
 package io.sphere.sdk.products.commands.updateactions;
 
+import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.ProductUpdateScope;
+import io.sphere.sdk.products.Product;
 
 /**
  * Adds the given price to the product variant's prices set. It is rejected if the product already contains a price with the same price scope (same currency, country, customer group and channel).
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addPrice()}
  */
-public class AddPrice extends StageableProductUpdateAction {
+public class AddPrice extends UpdateAction<Product> {
     private final Integer variantId;
     private final Price price;
 
 
-    private AddPrice(final Integer variantId, final Price price, final ProductUpdateScope productUpdateScope) {
-        super("addPrice", productUpdateScope);
+    private AddPrice(final Integer variantId, final Price price) {
+        super("addPrice");
         this.variantId = variantId;
         this.price = price;
     }
@@ -27,7 +28,7 @@ public class AddPrice extends StageableProductUpdateAction {
         return price;
     }
 
-    public static AddPrice of(final Integer variantId, final Price price, final ProductUpdateScope productUpdateScope) {
-        return new AddPrice(variantId, price, productUpdateScope);
+    public static AddPrice of(final Integer variantId, final Price price) {
+        return new AddPrice(variantId, price);
     }
 }

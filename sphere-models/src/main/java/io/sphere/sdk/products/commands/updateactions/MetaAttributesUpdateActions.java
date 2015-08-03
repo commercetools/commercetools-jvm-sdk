@@ -4,7 +4,6 @@ import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductUpdateScope;
 
 import java.util.List;
 
@@ -19,11 +18,11 @@ public class MetaAttributesUpdateActions extends Base {
     private MetaAttributesUpdateActions() {
     }
 
-    public static List<UpdateAction<Product>> of(final MetaAttributes metaAttributes, final ProductUpdateScope productUpdateScope) {
+    public static List<UpdateAction<Product>> of(final MetaAttributes metaAttributes) {
         return asList(
-                SetMetaTitle.of(metaAttributes.getMetaTitle(), productUpdateScope),
-                SetMetaDescription.of(metaAttributes.getMetaDescription(), productUpdateScope),
-                SetMetaKeywords.of(metaAttributes.getMetaKeywords(), productUpdateScope)
+                SetMetaTitle.of(metaAttributes.getMetaTitle()),
+                SetMetaDescription.of(metaAttributes.getMetaDescription()),
+                SetMetaKeywords.of(metaAttributes.getMetaKeywords())
         );
     }
 }

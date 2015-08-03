@@ -68,7 +68,7 @@ public class ProductFixtures {
     }
 
     private static ProductUpdateCommand createSetTaxesCommand(final TaxCategory taxCategory, final Product product) {
-        return ProductUpdateCommand.of(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE, STAGED_AND_CURRENT), SetTaxCategory.of(taxCategory), Publish.of()));
+        return ProductUpdateCommand.of(product, asList(AddPrice.of(MASTER_VARIANT_ID, PRICE), SetTaxCategory.of(taxCategory), Publish.of()));
     }
 
     public static void withUpdateableProduct(final TestClient client, final String testName, final Function<Product, Product> f) {
@@ -123,7 +123,7 @@ public class ProductFixtures {
 
     public static void withUpdateablePricedProduct(final TestClient client, final Price expectedPrice, final Function<Product, Product> f) {
         withUpdateableProduct(client, product -> {
-            final ProductUpdateCommand command = ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice, STAGED_AND_CURRENT));
+            final ProductUpdateCommand command = ProductUpdateCommand.of(product, AddPrice.of(1, expectedPrice));
             return f.apply(client.execute(command));
         });
     }
@@ -152,7 +152,7 @@ public class ProductFixtures {
         withCategory(client, category -> {
             final Consumer<Product> user = product -> consumer.accept(product, category);
             withProduct(client, "withProductAndCategory", product -> {
-                final Product productWithCategory = client.execute(ProductUpdateCommand.of(product, AddToCategory.of(category, ONLY_STAGED)));
+                final Product productWithCategory = client.execute(ProductUpdateCommand.of(product, AddToCategory.of(category)));
                 consumer.accept(productWithCategory, category);
             });
         });

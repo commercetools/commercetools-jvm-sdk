@@ -1,7 +1,8 @@
 package io.sphere.sdk.products.commands.updateactions;
 
+import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.products.Image;
-import io.sphere.sdk.products.ProductUpdateScope;
+import io.sphere.sdk.products.Product;
 
 /**
  * Removes a product image.
@@ -10,12 +11,12 @@ import io.sphere.sdk.products.ProductUpdateScope;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removeImage()}
  */
-public class RemoveImage extends StageableProductUpdateAction {
+public class RemoveImage extends UpdateAction<Product> {
     private final Integer variantId;
     private final String imageUrl;
 
-    private RemoveImage(final String imageUrl, final Integer variantId, final ProductUpdateScope productUpdateScope) {
-        super("removeImage", productUpdateScope);
+    private RemoveImage(final String imageUrl, final Integer variantId) {
+        super("removeImage");
         this.imageUrl = imageUrl;
         this.variantId = variantId;
     }
@@ -28,11 +29,11 @@ public class RemoveImage extends StageableProductUpdateAction {
         return variantId;
     }
 
-    public static RemoveImage of(final Image image, final Integer variantId, final ProductUpdateScope productUpdateScope) {
-        return of(image.getUrl(), variantId, productUpdateScope);
+    public static RemoveImage of(final Image image, final Integer variantId) {
+        return of(image.getUrl(), variantId);
     }
 
-    public static RemoveImage of(final String imageUrl, final Integer variantId, final ProductUpdateScope productUpdateScope) {
-        return new RemoveImage(imageUrl, variantId, productUpdateScope);
+    public static RemoveImage of(final String imageUrl, final Integer variantId) {
+        return new RemoveImage(imageUrl, variantId);
     }
 }

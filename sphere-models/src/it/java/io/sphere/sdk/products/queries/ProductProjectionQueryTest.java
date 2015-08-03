@@ -151,7 +151,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
                                         withCategory(client(), cat2 ->
                                                         with2products("queryByCategory", (p1, p2) -> {
                                                             final Category cat1WithParent = execute(CategoryUpdateCommand.of(cat1, asList(ChangeParent.of(cat3))));
-                                                            final Product productWithCat1 = execute(ProductUpdateCommand.of(p1, AddToCategory.of(cat1WithParent, STAGED_AND_CURRENT)));
+                                                            final Product productWithCat1 = execute(ProductUpdateCommand.of(p1, AddToCategory.of(cat1WithParent)));
                                                             final Query<ProductProjection> query = ProductProjectionQuery.of(STAGED)
                                                                     .withPredicates(m -> m.categories().isIn(asList(cat1, cat2)))
                                                                     .withExpansionPaths(m -> m.categories().parent());
@@ -170,7 +170,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     @Test
     public void queryByHasStagedChanges() throws Exception {
         withProduct(client(), product -> {
-            final Product updated = execute(ProductUpdateCommand.of(product, ChangeName.of(randomSlug(), ONLY_STAGED)));
+            final Product updated = execute(ProductUpdateCommand.of(product, ChangeName.of(randomSlug())));
             final PagedQueryResult<ProductProjection> pagedQueryResult = execute(ProductProjectionQuery.of(STAGED)
                     .withPredicates(m -> m.hasStagedChanges().is(true))
                     .withSort(m -> m.createdAt().sort(DESC)));
@@ -196,7 +196,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     public void queryByMetaAttributes() throws Exception {
         withProduct(client(), product -> {
             final MetaAttributes metaAttributes = randomMetaAttributes();
-            final Product productWithMetaAttributes = execute(ProductUpdateCommand.of(product, MetaAttributesUpdateActions.of(metaAttributes, STAGED_AND_CURRENT)));
+            final Product productWithMetaAttributes = execute(ProductUpdateCommand.of(product, MetaAttributesUpdateActions.of(metaAttributes)));
             checkOneResult(productWithMetaAttributes, model().metaDescription().lang(ENGLISH).is(en(metaAttributes.getMetaDescription())));
             checkOneResult(productWithMetaAttributes, model().metaTitle().lang(ENGLISH).is(en(metaAttributes.getMetaTitle())));
             checkOneResult(productWithMetaAttributes, model().metaKeywords().lang(ENGLISH).is(en(metaAttributes.getMetaKeywords())));

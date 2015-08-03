@@ -428,7 +428,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final int masterVariantId = 1;
 
         final AttributeDraft attributeDraft = AttributeDraft.of(ISBN_ATTR_NAME, "978-3-86680-192-8");
-        final SetAttribute updateAction = SetAttribute.of(masterVariantId, attributeDraft, STAGED_AND_CURRENT);
+        final SetAttribute updateAction = SetAttribute.of(masterVariantId, attributeDraft);
 
         final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateAction));
 
@@ -442,7 +442,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Product product = createProduct();
         final int masterVariantId = 1;
         final Function<AttributeDraft, SetAttribute> draft = attrDraft ->
-                SetAttribute.of(masterVariantId, attrDraft, STAGED_AND_CURRENT);
+                SetAttribute.of(masterVariantId, attrDraft);
         final List<SetAttribute> updateActions = asList(
                 draft.apply(AttributeDraft.of(COLOR_ATTR_NAME, "red")),//don't forget: enum like => use only keys
                 draft.apply(AttributeDraft.of(SIZE_ATTR_NAME, "M")),
@@ -469,7 +469,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     public void updateWithWrongType() throws Exception {
         final Product product = createProduct();
         assertThatThrownBy(() -> execute(ProductUpdateCommand.of(product,
-                SetAttribute.of(1, AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, "cold"), STAGED_AND_CURRENT))))
+                SetAttribute.of(1, AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, "cold")))))
                 .isInstanceOf(ErrorResponseException.class)
                 .matches(e -> ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
     }
