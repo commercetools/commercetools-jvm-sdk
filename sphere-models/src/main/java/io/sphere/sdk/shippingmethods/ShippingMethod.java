@@ -38,7 +38,7 @@ public interface ShippingMethod extends DefaultModel<ShippingMethod> {
         return getZoneRates().stream().map(rate -> rate.getZone()).collect(toList());
     }
 
-    boolean isDefault();
+    Boolean isDefault();
 
     @Override
     default Reference<ShippingMethod> toReference() {

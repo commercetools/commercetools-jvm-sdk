@@ -39,9 +39,9 @@ import java.util.Set;
 @JsonDeserialize(as=ProductProjectionImpl.class)
 public interface ProductProjection extends ProductLike<ProductProjection>, ProductDataLike, Referenceable<Product> {
 
-    boolean hasStagedChanges();
+    Boolean hasStagedChanges();
 
-    boolean isPublished();
+    Boolean isPublished();
 
     @Override
     default Reference<Product> toReference() {

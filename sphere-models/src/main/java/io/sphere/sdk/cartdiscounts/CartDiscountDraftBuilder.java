@@ -15,14 +15,14 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
     private CartPredicate cartPredicate;
     private CartDiscountTarget target;
     private final String sortOrder;
-    private boolean isActive = true;
+    private Boolean isActive = true;
     @Nullable
     private ZonedDateTime validFrom;
     @Nullable
     private ZonedDateTime validUntil;
-    private final boolean requiresDiscountCode;
+    private final Boolean requiresDiscountCode;
 
-    private CartDiscountDraftBuilder(final LocalizedStrings name, final CartPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
+    private CartDiscountDraftBuilder(final LocalizedStrings name, final CartPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean requiresDiscountCode) {
         this.cartPredicate = cartPredicate;
         this.name = name;
         this.value = value;

@@ -7,7 +7,7 @@ import java.util.List;
 
 import static java.util.stream.Collectors.toList;
 
-public class ReferenceQueryModelImpl<T, R> extends QueryModelImpl<T> implements ReferenceQueryModel<T,R> {
+class ReferenceQueryModelImpl<T, R> extends QueryModelImpl<T> implements ReferenceQueryModel<T,R> {
     public ReferenceQueryModelImpl(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }

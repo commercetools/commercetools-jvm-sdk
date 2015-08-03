@@ -18,7 +18,7 @@ class ProductImpl extends DefaultModelImpl<Product> implements Product {
     private final Reference<TaxCategory> taxCategory;
 
     @JsonCreator
-    ProductImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
+    ProductImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                 @Nullable final Reference<ProductType> productType, final ProductCatalogData masterData, final Reference<TaxCategory> taxCategory) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;

@@ -1,6 +1,6 @@
 package io.sphere.sdk.zones.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.zones.Zone;
 
 /**
@@ -8,7 +8,7 @@ import io.sphere.sdk.zones.Zone;
  *
  * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#changeName()}
  */
-public class ChangeName extends UpdateAction<Zone> {
+public class ChangeName extends UpdateActionImpl<Zone> {
     private final String name;
 
     private ChangeName(final String name) {

@@ -8,10 +8,10 @@ import io.sphere.sdk.states.State;
 
 public class ItemState extends Base {
     private final Reference<State> state;
-    private final long quantity;
+    private final Long quantity;
 
     @JsonCreator
-    private ItemState(final Reference<State> state, final long quantity) {
+    private ItemState(final Reference<State> state, final Long quantity) {
         this.state = state;
         this.quantity = quantity;
     }
@@ -20,7 +20,7 @@ public class ItemState extends Base {
         return new ItemState(state.toReference(), quantity);
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 

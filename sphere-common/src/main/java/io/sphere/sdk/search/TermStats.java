@@ -5,10 +5,10 @@ import io.sphere.sdk.models.Base;
 
 public class TermStats<T> extends Base {
     private final T term;
-    private final long count;
+    private final Long count;
 
     @JsonCreator
-    private TermStats(final T term, final long count) {
+    private TermStats(final T term, final Long count) {
         this.term = term;
         this.count = count;
     }
@@ -17,7 +17,7 @@ public class TermStats<T> extends Base {
         return term;
     }
 
-    public long getCount() {
+    public Long getCount() {
         return count;
     }
 

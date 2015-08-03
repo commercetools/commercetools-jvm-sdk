@@ -2,9 +2,9 @@ package io.sphere.sdk.models;
 
 class SimpleVersioned<T> extends Base implements Versioned<T> {
     private final String id;
-    private final long version;
+    private final Long version;
 
-    SimpleVersioned(final String id, final long version) {
+    SimpleVersioned(final String id, final Long version) {
         this.id = id;
         this.version = version;
     }
@@ -15,7 +15,7 @@ class SimpleVersioned<T> extends Base implements Versioned<T> {
     }
 
     @Override
-    public long getVersion() {
+    public Long getVersion() {
         return version;
     }
 }

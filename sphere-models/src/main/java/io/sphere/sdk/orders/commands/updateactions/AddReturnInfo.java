@@ -1,6 +1,6 @@
 package io.sphere.sdk.orders.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.ReturnItemDraft;
 
@@ -12,7 +12,7 @@ import java.util.List;
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addReturnInfo()}
  */
-public class AddReturnInfo extends UpdateAction<Order> {
+public class AddReturnInfo extends UpdateActionImpl<Order> {
     @Nullable
     private final ZonedDateTime returnDate;
     @Nullable

@@ -16,16 +16,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class GenericMessageImpl<R> extends DefaultModelImpl<Message> implements GenericMessage<R> {
-    protected final long sequenceNumber;
+    protected final Long sequenceNumber;
     protected final JsonNode resource;
-    protected final long resourceVersion;
+    protected final Long resourceVersion;
     protected final String type;
     @JsonIgnore
     private final Map<String, JsonNode> furtherFields = new HashMap<>();
 
-    public GenericMessageImpl(final String id, final long version, final ZonedDateTime createdAt,
+    public GenericMessageImpl(final String id, final Long version, final ZonedDateTime createdAt,
                               final ZonedDateTime lastModifiedAt, final JsonNode resource,
-                              final long sequenceNumber, final long resourceVersion,
+                              final Long sequenceNumber, final Long resourceVersion,
                               final String type) {
         super(id, version, createdAt, lastModifiedAt);
         this.resource = resource;
@@ -35,12 +35,12 @@ public abstract class GenericMessageImpl<R> extends DefaultModelImpl<Message> im
     }
 
     @Override
-    public long getResourceVersion() {
+    public Long getResourceVersion() {
         return resourceVersion;
     }
 
     @Override
-    public long getSequenceNumber() {
+    public Long getSequenceNumber() {
         return sequenceNumber;
     }
 

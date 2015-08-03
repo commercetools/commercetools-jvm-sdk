@@ -47,19 +47,27 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
     }
 
     protected <R> ReferenceOptionalQueryModel<T, R> referenceOptionalModel(final String pathSegment) {
-        return new ReferenceOptionalQueryModel<>(this, pathSegment);
+        return new ReferenceOptionalQueryModelImpl<>(this, pathSegment);
+    }
+
+    protected <R> ReferenceCollectionQueryModel<T, R> referenceCollectionModel(final String pathSegment) {
+        return new ReferenceCollectionQueryModelImpl<>(this, pathSegment);
     }
 
     protected <E extends SphereEnumeration> SphereEnumerationQueryModel<T, E> enumerationQueryModel(final String pathSegment) {
-        return new SphereEnumerationQueryModel<>(this, pathSegment);
+        return new SphereEnumerationQueryModelImpl<>(this, pathSegment);
     }
 
     protected StringQuerySortingModel<T> stringModel(final String pathSegment) {
-        return new StringQuerySortingModel<>(this, pathSegment);
+        return new StringQuerySortingModelImpl<>(this, pathSegment);
     }
 
     protected BooleanQueryModel<T> booleanModel(final String pathSegment) {
-        return new BooleanQueryModel<>(this, pathSegment);
+        return new BooleanQueryModelImpl<>(this, pathSegment);
+    }
+
+    protected CountryQueryModel<T> countryQueryModel(final String pathSegment) {
+        return new CountryQueryModelImpl<>(this, pathSegment);
     }
 
     protected LongQuerySortingModel<T> longModel(final String pathSegment) {
@@ -68,6 +76,14 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
 
     protected IntegerQuerySortingModel<T> integerModel(final String pathSegment) {
         return new IntegerQuerySortingModelImpl<>(this, pathSegment);
+    }
+
+    protected LocalizedStringsQuerySortingModel<T> localizedStringsQuerySortingModel(final String pathSegment) {
+        return new LocalizedStringsQuerySortingModelImpl<>(this, pathSegment);
+    }
+
+    protected final TimestampSortingModel<T> timestampSortingModel(final String pathSegment) {
+        return new TimestampSortingModelImpl<>(this, pathSegment);
     }
 
     protected <V> QueryPredicate<T> isPredicate(final V value) {
@@ -116,6 +132,10 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
 
     protected QueryPredicate<T> isNotPresentPredicate() {
         return new OptionalQueryPredicate<>(this, false);
+    }
+
+    protected <X> QueryPredicate<T> embedPredicate(final QueryPredicate<X> embeddedPredicate) {
+        return new EmbeddedQueryPredicate<>(this, embeddedPredicate);
     }
 
     protected QueryPredicate<T> isEmptyCollectionQueryPredicate() {

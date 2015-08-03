@@ -22,7 +22,7 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     }
 
     @Override
-    public boolean hasStagedChanges() {
+    public Boolean hasStagedChanges() {
         return product.getMasterData().hasStagedChanges();
     }
 
@@ -102,12 +102,12 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     }
 
     @Override
-    public long getVersion() {
+    public Long getVersion() {
         return product.getVersion();
     }
 
     @Override
-    public boolean isPublished() {
+    public Boolean isPublished() {
         return product.getMasterData().isPublished();
     }
 

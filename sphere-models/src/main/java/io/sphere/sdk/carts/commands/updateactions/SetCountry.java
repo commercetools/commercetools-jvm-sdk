@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.commands.updateactions;
 
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 
 import javax.annotation.Nullable;
 
@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCountry()}
 
  */
-public class SetCountry extends UpdateAction<Cart> {
+public class SetCountry extends UpdateActionImpl<Cart> {
     @Nullable
     private final CountryCode country;
 

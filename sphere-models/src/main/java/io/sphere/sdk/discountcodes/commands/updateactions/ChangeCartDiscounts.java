@@ -1,7 +1,7 @@
 package io.sphere.sdk.discountcodes.commands.updateactions;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#changeCartDiscounts()}
  */
-public class ChangeCartDiscounts extends UpdateAction<DiscountCode> {
+public class ChangeCartDiscounts extends UpdateActionImpl<DiscountCode> {
     private final List<Reference<CartDiscount>> cartDiscounts;
 
     private ChangeCartDiscounts(final List<Reference<CartDiscount>> cartDiscounts) {

@@ -1,7 +1,8 @@
 package io.sphere.sdk.products.commands.updateactions;
 
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.ProductUpdateScope;
+import io.sphere.sdk.products.Product;
 
 import java.util.Optional;
 
@@ -10,12 +11,12 @@ import java.util.Optional;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changePrice()}
  */
-public class ChangePrice extends StageableProductUpdateAction {
+public class ChangePrice extends UpdateActionImpl<Product> {
     private final Price price;
     private final String priceId;
 
-    private ChangePrice(final String priceId, final Price price, final ProductUpdateScope productUpdateScope) {
-        super("changePrice", productUpdateScope);
+    private ChangePrice(final String priceId, final Price price) {
+        super("changePrice");
         this.priceId = priceId;
         this.price = price;
     }
@@ -28,13 +29,13 @@ public class ChangePrice extends StageableProductUpdateAction {
         return price;
     }
 
-    public static ChangePrice of(final Price oldPrice, final Price price, final ProductUpdateScope productUpdateScope) {
+    public static ChangePrice of(final Price oldPrice, final Price price) {
         final String priceId = Optional.ofNullable(oldPrice.getId())
                 .orElseThrow(() -> new IllegalArgumentException("The old price should have an ID: " + oldPrice));
-        return of(priceId, price, productUpdateScope);
+        return of(priceId, price);
     }
 
-    public static ChangePrice of(final String priceId, final Price price, final ProductUpdateScope productUpdateScope) {
-        return new ChangePrice(priceId, price, productUpdateScope);
+    public static ChangePrice of(final String priceId, final Price price) {
+        return new ChangePrice(priceId, price);
     }
 }

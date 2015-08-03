@@ -2,12 +2,12 @@ package io.sphere.sdk.cartdiscounts.commands.updateactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeRequiresDiscountCode()}
  */
-public class ChangeRequiresDiscountCode extends UpdateAction<CartDiscount> {
+public class ChangeRequiresDiscountCode extends UpdateActionImpl<CartDiscount> {
     private final boolean requiresDiscountCode;
 
     private ChangeRequiresDiscountCode(final boolean requiresDiscountCode) {

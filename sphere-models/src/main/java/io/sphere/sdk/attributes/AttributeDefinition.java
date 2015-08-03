@@ -12,14 +12,14 @@ public class AttributeDefinition extends Base {
     private final AttributeType attributeType;
     private final String name;
     private final LocalizedStrings label;
-    private final boolean isRequired;
+    private final Boolean isRequired;
     private final AttributeConstraint attributeConstraint;
-    private final boolean isSearchable;
+    private final Boolean isSearchable;
     private final TextInputHint inputHint;
 
     @JsonCreator
-    AttributeDefinition(AttributeType attributeType, String name, LocalizedStrings label, boolean isRequired,
-                        AttributeConstraint attributeConstraint, boolean isSearchable, TextInputHint inputHint) {
+    AttributeDefinition(AttributeType attributeType, String name, LocalizedStrings label, Boolean isRequired,
+                        AttributeConstraint attributeConstraint, Boolean isSearchable, TextInputHint inputHint) {
         this.attributeType = attributeType;
         this.name = name;
         this.label = label;
@@ -58,7 +58,7 @@ public class AttributeDefinition extends Base {
      * Whether the attribute is required to have a value.
      * @return true if required else false
      */
-    public boolean getIsRequired() {
+    public Boolean getIsRequired() {
         return isRequired;
     }
 
@@ -76,7 +76,7 @@ public class AttributeDefinition extends Base {
      *
      * @return true if searchable, false if not
      */
-    public boolean getIsSearchable() {
+    public Boolean getIsSearchable() {
         return isSearchable;
     }
 

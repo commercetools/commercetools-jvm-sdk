@@ -74,7 +74,7 @@ public abstract class IntegrationTest {
             /*
             The buffer needs to be high since SBT runs tests for multiple projects in parallel
              */
-            final long bufferForGcThreadAndSbt = 40;
+            final long bufferForGcThreadAndSbt = 100;
             final long allowedThreadCount = threadCountAtStart + bufferForGcThreadAndSbt;
             if (threadsNow > allowedThreadCount) {
                 throw new RuntimeException("Thread leak! After client shutdown created threads are still alive. Threads now: " + threadsNow + " Threads before: " + threadCountAtStart);

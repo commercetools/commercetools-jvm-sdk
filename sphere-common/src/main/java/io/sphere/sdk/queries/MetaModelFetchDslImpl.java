@@ -71,7 +71,7 @@ public class MetaModelFetchDslImpl<R, T, C extends MetaModelFetchDsl<R, T, C, E>
     public R deserialize(final HttpResponse httpResponse) {
         return Optional.of(httpResponse)
                 .filter(r -> r.getStatusCode() != NOT_FOUND_404)
-                .map(r -> resultMapperOf(typeReference()).apply(httpResponse))
+                .map(r -> deserialize(r, typeReference()))
                 .orElse(null);
     }
 

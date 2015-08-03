@@ -2,7 +2,7 @@ package io.sphere.sdk.orders.commands.updateactions;
 
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.CustomLineItem;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.orders.Order;
 
 import java.util.Set;
@@ -12,7 +12,7 @@ import java.util.Set;
  *
  * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#importCustomLineItemState()}
  */
-public class ImportCustomLineItemState extends UpdateAction<Order> {
+public class ImportCustomLineItemState extends UpdateActionImpl<Order> {
     private final String customLineItemId;
     private final Set<ItemState> state;
 

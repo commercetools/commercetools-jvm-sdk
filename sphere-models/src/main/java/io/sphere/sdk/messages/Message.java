@@ -23,9 +23,9 @@ public interface Message extends DefaultModel<Message> {
 
     Reference<?> getResource();
 
-    long getResourceVersion();
+    Long getResourceVersion();
 
-    long getSequenceNumber();
+    Long getSequenceNumber();
 
     String getType();
 

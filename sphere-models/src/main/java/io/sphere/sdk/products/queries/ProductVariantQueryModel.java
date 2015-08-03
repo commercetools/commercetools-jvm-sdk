@@ -16,7 +16,7 @@ public class ProductVariantQueryModel<T> extends QueryModelImpl<T> {
     }
 
     public QueryPredicate<T> where(final QueryPredicate<PartialProductVariantQueryModel> embeddedPredicate) {
-        return new EmbeddedQueryPredicate<>(this, embeddedPredicate);
+        return embedPredicate(embeddedPredicate);
     }
 
     public QueryPredicate<T> where(final Function<PartialProductVariantQueryModel, QueryPredicate<PartialProductVariantQueryModel>> embeddedPredicate) {

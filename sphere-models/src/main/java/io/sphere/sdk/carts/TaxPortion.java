@@ -6,11 +6,11 @@ import io.sphere.sdk.models.Base;
 import javax.money.MonetaryAmount;
 
 public class TaxPortion extends Base {
-    private final double rate;
+    private final Double rate;
     private final MonetaryAmount amount;
 
     @JsonCreator
-    private TaxPortion(final double rate, final MonetaryAmount amount) {
+    private TaxPortion(final Double rate, final MonetaryAmount amount) {
         this.rate = rate;
         this.amount = amount;
     }
@@ -19,7 +19,7 @@ public class TaxPortion extends Base {
         return new TaxPortion(rate, amount);
     }
 
-    public double getRate() {
+    public Double getRate() {
         return rate;
     }
 

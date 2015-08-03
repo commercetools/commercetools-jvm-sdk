@@ -1,9 +1,9 @@
 package io.sphere.sdk.products.commands.updateactions;
 
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
@@ -15,7 +15,7 @@ import java.util.Optional;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setTaxCategory()}
  *
  */
-public class SetTaxCategory extends UpdateAction<Product> {
+public class SetTaxCategory extends UpdateActionImpl<Product> {
     @Nullable
     private final Reference<TaxCategory> taxCategory;
 

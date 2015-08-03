@@ -1,13 +1,13 @@
 package io.sphere.sdk.orders.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.orders.Order;
 
 /**
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#setOrderNumber()}
  */
-public class SetOrderNumber extends UpdateAction<Order> {
+public class SetOrderNumber extends UpdateActionImpl<Order> {
     private final String orderNumber;
 
     private SetOrderNumber(final String orderNumber) {

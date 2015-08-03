@@ -6,14 +6,11 @@ import javax.annotation.Nullable;
 
 import static io.sphere.sdk.products.ProductProjectionType.CURRENT;
 
-/**
- * For construction you can use the {@link io.sphere.sdk.products.ProductCatalogDataBuilder}.
- */
 @JsonDeserialize(as=ProductCatalogDataImpl.class)
 public interface ProductCatalogData {
-    boolean isPublished();
+    Boolean isPublished();
 
-    boolean hasStagedChanges();
+    Boolean hasStagedChanges();
 
     /**
      * The current data of the product.

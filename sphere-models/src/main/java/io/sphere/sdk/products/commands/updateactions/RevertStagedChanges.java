@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 
 /**
@@ -8,7 +8,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#revertStagedChanges()}
  */
-public class RevertStagedChanges extends UpdateAction<Product> {
+public class RevertStagedChanges extends UpdateActionImpl<Product> {
     private RevertStagedChanges() {
         super("revertStagedChanges");
     }

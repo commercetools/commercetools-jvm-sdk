@@ -4,10 +4,11 @@ import org.junit.Test;
 
 import java.util.Locale;
 
+import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LocalizedStringsQuerySortingModelTest {
-    private final LocalizedStringsQuerySortingModel<String> model = new LocalizedStringsQuerySortingModel<>(null, "thepath");
+    private final LocalizedStringsQuerySortingModel<String> model = new LocalizedStringsQuerySortingModelImpl<>(null, "thepath");
 
     @Test
     public void lang() throws Exception {
@@ -17,7 +18,7 @@ public class LocalizedStringsQuerySortingModelTest {
 
     @Test
     public void isIn() throws Exception {
-        assertThat(model.lang(Locale.ENGLISH).isIn("foo", "bar").toSphereQuery())
+        assertThat(model.lang(Locale.ENGLISH).isIn(asList("foo", "bar")).toSphereQuery())
                 .isEqualTo("thepath(en in (\"foo\", \"bar\"))");
     }
 

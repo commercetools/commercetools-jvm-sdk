@@ -1,8 +1,9 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.attributes.AttributeDraft;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.ProductUpdateScope;
+import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -14,14 +15,14 @@ import java.util.List;
  *
  * @see io.sphere.sdk.products.commands.updateactions.RemoveVariant
  */
-public class AddVariant extends StageableProductUpdateAction {
+public class AddVariant extends UpdateActionImpl<Product> {
     @Nullable
     private final String sku;
     private final List<Price> prices;
     private final List<AttributeDraft> attributes;
 
-    private AddVariant(final List<AttributeDraft> attributes, final List<Price> prices, @Nullable final String sku, final ProductUpdateScope productUpdateScope) {
-        super("addVariant", productUpdateScope);
+    private AddVariant(final List<AttributeDraft> attributes, final List<Price> prices, @Nullable final String sku) {
+        super("addVariant");
         this.attributes = attributes;
         this.prices = prices;
         this.sku = sku;
@@ -40,11 +41,11 @@ public class AddVariant extends StageableProductUpdateAction {
         return sku;
     }
 
-    public static AddVariant of(final List<AttributeDraft> attributes, final List<Price> prices, @Nullable final String sku, final ProductUpdateScope productUpdateScope) {
-        return new AddVariant(attributes, prices, sku, productUpdateScope);
+    public static AddVariant of(final List<AttributeDraft> attributes, final List<Price> prices, @Nullable final String sku) {
+        return new AddVariant(attributes, prices, sku);
     }
 
-    public static AddVariant of(final List<AttributeDraft> attributes, final List<Price> prices, final ProductUpdateScope productUpdateScope) {
-        return new AddVariant(attributes, prices, null, productUpdateScope);
+    public static AddVariant of(final List<AttributeDraft> attributes, final List<Price> prices) {
+        return new AddVariant(attributes, prices, null);
     }
 }

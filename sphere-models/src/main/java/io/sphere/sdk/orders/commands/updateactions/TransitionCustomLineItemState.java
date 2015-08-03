@@ -15,7 +15,7 @@ public class TransitionCustomLineItemState extends TransitionLineItemLikeState {
 
     private final String customLineItemId;
 
-    private TransitionCustomLineItemState(final String customLineItemId, final long quantity, final Referenceable<State> fromState, final Referenceable<State> toState,
+    private TransitionCustomLineItemState(final String customLineItemId, final Long quantity, final Referenceable<State> fromState, final Referenceable<State> toState,
                                           final ZonedDateTime actualTransitionDate) {
         super("transitionCustomLineItemState", quantity, actualTransitionDate, toState.toReference(), fromState.toReference());
         this.customLineItemId = customLineItemId;

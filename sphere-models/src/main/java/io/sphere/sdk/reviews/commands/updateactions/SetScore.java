@@ -1,6 +1,6 @@
 package io.sphere.sdk.reviews.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.reviews.Review;
 
 import javax.annotation.Nullable;
@@ -11,7 +11,7 @@ import java.util.Optional;
  *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setScore()}
  */
-public class SetScore extends UpdateAction<Review> {
+public class SetScore extends UpdateActionImpl<Review> {
     @Nullable
     private final Double score;
 

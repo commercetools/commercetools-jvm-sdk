@@ -1,6 +1,6 @@
 package io.sphere.sdk.orders.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.ReturnItem;
 import io.sphere.sdk.orders.ReturnShipmentState;
@@ -9,7 +9,7 @@ import io.sphere.sdk.orders.ReturnShipmentState;
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#setReturnShipmentState()}
  */
-public class SetReturnShipmentState extends UpdateAction<Order> {
+public class SetReturnShipmentState extends UpdateActionImpl<Order> {
     private final String returnItemId;
     private final ReturnShipmentState shipmentState;
 

@@ -61,7 +61,7 @@ public interface Customer extends DefaultModel<Customer> {
                 .findFirst();
     }
 
-    boolean isEmailVerified();
+    Boolean isEmailVerified();
 
     @Nullable
     String getExternalId();

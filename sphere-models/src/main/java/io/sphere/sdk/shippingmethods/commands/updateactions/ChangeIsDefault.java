@@ -1,14 +1,14 @@
 package io.sphere.sdk.shippingmethods.commands.updateactions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
 /**
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#changeIsDefault()}
  */
-public class ChangeIsDefault extends UpdateAction<ShippingMethod> {
+public class ChangeIsDefault extends UpdateActionImpl<ShippingMethod> {
     private final boolean isDefault;
 
     private ChangeIsDefault(final boolean isDefault) {

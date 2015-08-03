@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CustomLineItemDraft;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -15,16 +15,16 @@ import javax.money.MonetaryAmount;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addCustomLineItem()}
  */
-public class AddCustomLineItem extends UpdateAction<Cart> {
+public class AddCustomLineItem extends UpdateActionImpl<Cart> {
     private final LocalizedStrings name;
-    private final long quantity;
+    private final Long quantity;
     private final MonetaryAmount money;
     private final String slug;
     private final Reference<TaxCategory> taxCategory;
 
     private AddCustomLineItem(final LocalizedStrings name, final String slug,
                               final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
-                              final long quantity) {
+                              final Long quantity) {
         super("addCustomLineItem");
         this.name = name;
         this.quantity = quantity;
@@ -48,7 +48,7 @@ public class AddCustomLineItem extends UpdateAction<Cart> {
         return name;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 

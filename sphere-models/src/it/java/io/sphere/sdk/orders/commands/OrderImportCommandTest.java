@@ -7,9 +7,7 @@ import io.sphere.sdk.carts.*;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.orders.*;
-import io.sphere.sdk.products.Price;
-import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.ProductVariant;
+import io.sphere.sdk.products.*;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
@@ -234,8 +232,8 @@ public class OrderImportCommandTest extends IntegrationTest {
                     }
 
                     @Override
-                    public long getQuantity() {
-                        return 2;
+                    public Long getQuantity() {
+                        return 2L;
                     }
 
                     @Override

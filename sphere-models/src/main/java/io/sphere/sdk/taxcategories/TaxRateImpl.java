@@ -10,14 +10,14 @@ class TaxRateImpl extends Base implements TaxRate {
     @Nullable
     private final String id;
     private final String name;
-    private final double amount;
-    private final boolean includedInPrice;
+    private final Double amount;
+    private final Boolean includedInPrice;
     private final CountryCode country;
     @Nullable
     private final String state;
 
     @JsonCreator
-    TaxRateImpl(@Nullable final String id, final String name, final double amount, final boolean includedInPrice,
+    TaxRateImpl(@Nullable final String id, final String name, final Double amount, final Boolean includedInPrice,
                 final CountryCode country, @Nullable final String state) {
         this.id = id;
         this.name = name;
@@ -39,12 +39,12 @@ class TaxRateImpl extends Base implements TaxRate {
     }
 
     @Override
-    public double getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
     @Override
-    public boolean isIncludedInPrice() {
+    public Boolean isIncludedInPrice() {
         return includedInPrice;
     }
 

@@ -35,20 +35,20 @@ public class QueryDocumentationTest {
 
     public void queryByNames() {
         final QueryPredicate<Product> predicate = ProductQueryModel.of().masterData().current().name()
-                .lang(ENGLISH).isIn("blue t-shirt", "blue jeans");
+                .lang(ENGLISH).isIn(asList("blue t-shirt", "blue jeans"));
         final ProductQuery query = ProductQuery.of().withPredicates(predicate);
     }
 
     public void queryByNamesDesugared() {
         final QueryPredicate<Product> predicate = ProductQueryModel.of().masterData().current().name()
-                .lang(ENGLISH).isIn("blue t-shirt", "blue jeans");
+                .lang(ENGLISH).isIn(asList("blue t-shirt", "blue jeans"));
         final ProductQuery query = ProductQuery.of().withPredicates(predicate);
     }
 
     @Test
     public void testX() throws Exception {
         final QueryPredicate<Product> safePredicate = ProductQueryModel.of().masterData().current().name()
-                .lang(ENGLISH).isIn("blue t-shirt", "blue jeans");
+                .lang(ENGLISH).isIn(asList("blue t-shirt", "blue jeans"));
         final QueryPredicate<Product> unsafePredicate =
                 QueryPredicate.of("masterData(current(name(en in (\"blue t-shirt\", \"blue jeans\"))))");
         assertThat(unsafePredicate).isEqualTo(safePredicate);
@@ -66,14 +66,14 @@ public class QueryDocumentationTest {
                 .lang(ENGLISH).is("foo");
         final Reference<Category> cat1 = Category.reference("cat1");
         final QueryPredicate<Product> isInCat1 = ProductQueryModel.of().masterData().current()
-                .categories().isIn(cat1);
+                .categories().isIn(asList(cat1));
         final ProductQuery query = ProductQuery.of().withPredicates(nameIsFoo.and(isInCat1));
     }
 
     public void predicateAndWithWhereExample() {
         final Reference<Category> cat1 = Category.reference("cat1");
         final QueryPredicate<Product> nameIsFooAndIsInCat1 = ProductQueryModel.of().masterData().current()
-                .where(cur -> cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(cat1)));
+                .where(cur -> cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(asList(cat1))));
         final ProductQuery query = ProductQuery.of().withPredicates(nameIsFooAndIsInCat1);
     }
 

@@ -6,7 +6,7 @@ import javax.annotation.Nullable;
 
 @JsonDeserialize(as = ProductVariantAvailabilityImpl.class)
 public interface ProductVariantAvailability {
-    boolean isOnStock();
+    Boolean isOnStock();
 
     @Nullable
     Integer getRestockableInDays();

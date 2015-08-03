@@ -8,9 +8,9 @@ import io.sphere.sdk.models.Referenceable;
  */
 public class VariantIdentifier extends Base {
     private final String productId;
-    private final int variantId;
+    private final Integer variantId;
 
-    private VariantIdentifier(final String productId, final int variantId) {
+    private VariantIdentifier(final String productId, final Integer variantId) {
         this.productId = productId;
         this.variantId = variantId;
     }
@@ -19,15 +19,15 @@ public class VariantIdentifier extends Base {
         return productId;
     }
 
-    public int getVariantId() {
+    public Integer getVariantId() {
         return variantId;
     }
 
-    public static VariantIdentifier of(final Referenceable<Product> product, final int variantId) {
+    public static VariantIdentifier of(final Referenceable<Product> product, final Integer variantId) {
         return of(product.toReference().getId(), variantId);
     }
 
-    public static VariantIdentifier of(final String productId, final int variantId) {
+    public static VariantIdentifier of(final String productId, final Integer variantId) {
         return new VariantIdentifier(productId, variantId);
     }
 }

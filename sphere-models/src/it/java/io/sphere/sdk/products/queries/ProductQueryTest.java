@@ -4,6 +4,9 @@ import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.commands.ProductUpdateCommand;
+import io.sphere.sdk.products.commands.updateactions.Publish;
+import io.sphere.sdk.products.commands.updateactions.Unpublish;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.queries.Query;
@@ -19,6 +22,33 @@ import static io.sphere.sdk.products.ProductFixtures.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class ProductQueryTest extends IntegrationTest {
+
+    @Test
+    public void isPublished() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            assertThat(product.getMasterData().isPublished()).isFalse();
+            checkIsFoundByPublishedFlag(product, false);
+
+            final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
+            assertThat(publishedProduct.getMasterData().isPublished()).isTrue();
+            checkIsFoundByPublishedFlag(product, true);
+
+
+            final Product unpublishedProduct = execute(ProductUpdateCommand.of(publishedProduct, Unpublish.of()));
+            assertThat(unpublishedProduct.getMasterData().isPublished()).isFalse();
+            return unpublishedProduct;
+        });
+    }
+
+    private void checkIsFoundByPublishedFlag(final Product product, final boolean value) {
+        final Optional<Product> productFromQuery = execute(ProductQuery.of()
+                .withPredicates(m -> {
+                    return m.masterData().isPublished().is(value);
+                })
+                .plusPredicates(m -> m.id().is(product.getId()))).head();
+        assertThat(productFromQuery.get().getId()).isEqualTo(product.getId());
+    }
+
     @Test
     public void variantIdentifierIsAvailable() throws Exception {
         withProduct(client(), product -> {

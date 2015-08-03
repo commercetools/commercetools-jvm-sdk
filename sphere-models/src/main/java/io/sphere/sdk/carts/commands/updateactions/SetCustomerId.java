@@ -1,7 +1,7 @@
 package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Referenceable;
 
@@ -14,7 +14,7 @@ import java.util.Optional;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCustomerId()}
  */
-public class SetCustomerId extends UpdateAction<Cart> {
+public class SetCustomerId extends UpdateActionImpl<Cart> {
     @Nullable
     private final String customerId;
 

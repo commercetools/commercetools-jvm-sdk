@@ -1,14 +1,13 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.Image;
 
 import javax.annotation.Nullable;
 import java.util.List;
 
 @JsonDeserialize(as = ProductVariantImpl.class)
 public interface ProductVariant extends AttributeContainer {
-    int getId();
+    Integer getId();
 
     @Nullable
     String getSku();

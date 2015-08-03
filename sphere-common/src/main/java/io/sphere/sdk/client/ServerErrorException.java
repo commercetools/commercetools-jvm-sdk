@@ -6,11 +6,11 @@ package io.sphere.sdk.client;
 public abstract class ServerErrorException extends SphereServiceException {
     static final long serialVersionUID = 0L;
 
-    protected ServerErrorException(final String message, final int statusCode) {
+    protected ServerErrorException(final String message, final Integer statusCode) {
         super(message, statusCode);
     }
 
-    protected ServerErrorException(final int statusCode) {
+    protected ServerErrorException(final Integer statusCode) {
         super(statusCode);
     }
 }

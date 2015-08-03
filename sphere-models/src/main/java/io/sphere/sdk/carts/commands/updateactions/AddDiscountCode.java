@@ -1,13 +1,13 @@
 package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.discountcodes.DiscountCode;
 
 /**
  * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeDiscountCode()}
  */
-public class AddDiscountCode extends UpdateAction<Cart> {
+public class AddDiscountCode extends UpdateActionImpl<Cart> {
     private final String code;
 
     private AddDiscountCode(final String code) {

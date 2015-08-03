@@ -13,7 +13,7 @@ public class TrackingDataBuilder implements Builder<TrackingData> {
     private String provider;
     @Nullable
     private String providerTransaction;
-    private boolean isReturn = false;
+    private Boolean isReturn = false;
 
     private TrackingDataBuilder() {
     }

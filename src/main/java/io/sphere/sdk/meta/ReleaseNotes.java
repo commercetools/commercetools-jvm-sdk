@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.ApacheHttpClientAdapter;
 import io.sphere.sdk.http.HttpResponse;
@@ -206,7 +207,7 @@ import java.util.function.BiFunction;
     <li class=change-in-release>{@link io.sphere.sdk.meta.ExceptionDocumentation Exception hierarchy}, relocated some exceptions and deleted some.
         <ul>
             <li>Removed SphereBackendException, SphereClientException, JavaConcurrentUtils, Requestable</li>
-            <li>Removed ReferenceExistsException, usage as {@link io.sphere.sdk.models.SphereError} from a {@link io.sphere.sdk.client.ErrorResponseException}</li>
+            <li>Removed ReferenceExistsException, usage as {@code SphereError} from a {@link io.sphere.sdk.client.ErrorResponseException}</li>
             <li>JsonParseException is now {@link io.sphere.sdk.json.JsonException}.</li>
             <li>InvalidQueryOffsetException is replaced with {@link java.lang.IllegalArgumentException}.</li>
         </ul>
@@ -246,8 +247,8 @@ import java.util.function.BiFunction;
  <li class=new-in-release>Added {@link io.sphere.sdk.models.Referenceable#hasSameIdAs(io.sphere.sdk.models.Referenceable)} to check if a similar object has the same ID.</li>
  <li class=new-in-release>Added {@link AttributeAccess#ofName(String)} as alias to {@code io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)}.</li>
 
- <li class=new-in-release>Update action list in update commands do not have the type {@literal List<UpdateAction<T>>} {@literal  List<? extends UpdateAction<T>>}, so you can pass a list of a subclass of {@link io.sphere.sdk.commands.UpdateAction}.
- Example: {@literal List<ChangeName>} can be assigned where {@literal ChangeName} extends {@link io.sphere.sdk.commands.UpdateAction}.</li>
+ <li class=new-in-release>Update action list in update commands do not have the type {@literal List<UpdateAction<T>>} {@literal  List<? extends UpdateAction<T>>}, so you can pass a list of a subclass of {@link UpdateActionImpl}.
+ Example: {@literal List<ChangeName>} can be assigned where {@literal ChangeName} extends {@link UpdateActionImpl}.</li>
 
  <li class=new-in-release>Added {@link io.sphere.sdk.models.Address#of(com.neovisionaries.i18n.CountryCode)}.</li>
  <li class=new-in-release>Added {@code io.sphere.sdk.carts.Cart#getLineItem(String)} and {@code io.sphere.sdk.carts.Cart#getCustomLineItem(String)} to find items in a cart.</li>
@@ -274,16 +275,16 @@ import java.util.function.BiFunction;
 
 
  <li class=fixed-in-release>Money portions in the taxed price is not null. The method name is now {@link io.sphere.sdk.carts.TaxPortion#getAmount()} instead of {@code getMoney()}.</li>
- <li class=fixed-in-release>Fixed JSON serialization and deserialization of {@link io.sphere.sdk.models.ImageDimensions} which caused adding external images to a product to fail.</li>
+ <li class=fixed-in-release>Fixed JSON serialization and deserialization of {@code ImageDimensions} which caused adding external images to a product to fail.</li>
  </ul>
 
  <h3>1.0.0-M9</h3>
  <ul>
  <li>Added {@link io.sphere.sdk.meta.KnownIssues Known Issues} page.</li>
  <li>Added experimental support for uploading product images in variants. See {@code io.sphere.sdk.products.commands.ExperimentalProductImageUploadCommand}.</li>
- <li>Added factory methods for {@link io.sphere.sdk.models.Image}.</li>
- <li>{@link io.sphere.sdk.models.Image} contains directly getters for width {@link io.sphere.sdk.models.Image#getWidth()}
- and height {@link io.sphere.sdk.models.Image#getHeight()}.</li>
+ <li>Added factory methods for {@code Image}.</li>
+ <li>{@code Image} contains directly getters for width {@code Image#getWidth()}
+ and height {@code Image#getHeight()}.</li>
  <li>{@link io.sphere.sdk.queries.PagedQueryResult} is constructable for empty results. Before this, the SDK throwed an Exception.</li>
  <li>Fields called {@code quantity} are now of type long instead of int.</li>
  <li>Added a documentation page {@link io.sphere.sdk.meta.ConstructionDocumentation how to construct objects}.</li>
@@ -312,7 +313,7 @@ import java.util.function.BiFunction;
  <li>Moved Scala and Play clients out of the Git repository to <a href="https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons">https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons</a>. The artifact ID changed.</li>
  <li>{@link io.sphere.sdk.meta.SphereResources} contains now also a listing of queries and commands for the resources.</li>
  <li>Added {@link io.sphere.sdk.products.search.ProductProjectionSearch} for full-text, filtered and faceted search.</li>
- <li>Incompatible change: {@link io.sphere.sdk.products.ProductUpdateScope} makes it more visible that product update operations can be for only staged or for current and staged. The product update actions will be affected by that.</li>
+ <li>Incompatible change: {@code io.sphere.sdk.products.ProductUpdateScope} makes it more visible that product update operations can be for only staged or for current and staged. The product update actions will be affected by that.</li>
  <li>Implemented anonymous carts.</li>
  </ul>
 
@@ -363,7 +364,7 @@ import java.util.function.BiFunction;
  <li>Moved commands and queries to own packages for easier discovery.</li>
  <li>Introduced new predicates for inequality like {@link io.sphere.sdk.queries.StringQueryModel#isGreaterThanOrEqualTo(String)},
  {@link io.sphere.sdk.queries.StringQueryModel#isNot(String)},
- {@link io.sphere.sdk.queries.StringQueryModel#isNotIn(String, String...)} or {@link io.sphere.sdk.queries.StringQueryModel#isNotPresent()}.</li>
+ {@code io.sphere.sdk.queries.StringQueryModel#isNotIn(String, String...)} or {@link io.sphere.sdk.queries.StringQueryModel#isNotPresent()}.</li>
  <li>Introduced an unsafe way to create predicates from strings with {@link QueryPredicate#of(String)}.</li>
  </ul>
 

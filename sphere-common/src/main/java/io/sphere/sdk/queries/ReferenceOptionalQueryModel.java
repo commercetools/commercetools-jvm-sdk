@@ -2,31 +2,18 @@ package io.sphere.sdk.queries;
 
 import io.sphere.sdk.models.Referenceable;
 
-import javax.annotation.Nullable;
 import java.util.List;
 
-public class ReferenceOptionalQueryModel<T, R> extends ReferenceQueryModelImpl<T, R> implements OptionalQueryModel<T> {
-    public ReferenceOptionalQueryModel(@Nullable final QueryModel<T> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment);
-    }
+public interface ReferenceOptionalQueryModel<T, R> extends ReferenceQueryModel<T,R>, OptionalQueryModel<T> {
+    @Override
+    QueryPredicate<T> is(Referenceable<R> reference);
 
     @Override
-    public QueryPredicate<T> is(final Referenceable<R> reference) {
-        return super.is(reference);
-    }
+    QueryPredicate<T> isIn(List<? extends Referenceable<R>> elements);
 
     @Override
-    public QueryPredicate<T> isIn(final List<? extends Referenceable<R>> elements) {
-        return super.isIn(elements);
-    }
+    QueryPredicate<T> isPresent();
 
     @Override
-    public QueryPredicate<T> isPresent() {
-        return new OptionalQueryPredicate<>(this, true);
-    }
-
-    @Override
-    public QueryPredicate<T> isNotPresent() {
-        return new OptionalQueryPredicate<>(this, false);
-    }
+    QueryPredicate<T> isNotPresent();
 }

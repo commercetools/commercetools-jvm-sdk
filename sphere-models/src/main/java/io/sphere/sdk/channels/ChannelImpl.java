@@ -17,7 +17,7 @@ class ChannelImpl extends DefaultModelImpl<Channel> implements Channel {
     private final LocalizedStrings description;
 
     @JsonCreator
-    ChannelImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String key, final Set<ChannelRole> roles, final LocalizedStrings name, final LocalizedStrings description) {
+    ChannelImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String key, final Set<ChannelRole> roles, final LocalizedStrings name, final LocalizedStrings description) {
         super(id, version, createdAt, lastModifiedAt);
         this.key = key;
         this.roles = roles;

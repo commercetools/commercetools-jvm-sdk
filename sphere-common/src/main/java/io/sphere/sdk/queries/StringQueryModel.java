@@ -10,9 +10,6 @@ public interface StringQueryModel<T> extends OptionalQueryModel<T>, EqualityQuer
     QueryPredicate<T> isNot(String s);
 
     @Override
-    QueryPredicate<T> isIn(String arg0, String... args);
-
-    @Override
     QueryPredicate<T> isIn(final Iterable<String> args);
 
     @Override
@@ -29,9 +26,6 @@ public interface StringQueryModel<T> extends OptionalQueryModel<T>, EqualityQuer
 
     @Override
     QueryPredicate<T> isNotIn(final Iterable<String> args);
-
-    @Override
-    QueryPredicate<T> isNotIn(final String arg0, final String... args);
 
     @Override
     QueryPredicate<T> isPresent();

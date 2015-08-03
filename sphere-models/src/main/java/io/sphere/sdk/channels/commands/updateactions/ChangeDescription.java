@@ -1,13 +1,13 @@
 package io.sphere.sdk.channels.commands.updateactions;
 
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 
 /**
  * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#changeDescription()}
  */
-public class ChangeDescription extends UpdateAction<Channel> {
+public class ChangeDescription extends UpdateActionImpl<Channel> {
     private final LocalizedStrings description;
 
     private ChangeDescription(final LocalizedStrings description) {

@@ -5,7 +5,7 @@ import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.QueryPredicate;
 
-public class TaxedPriceOptionalQueryModelImpl<T> extends QueryModelImpl<T> implements TaxedPriceOptionalQueryModel<T> {
+final class TaxedPriceOptionalQueryModelImpl<T> extends QueryModelImpl<T> implements TaxedPriceOptionalQueryModel<T> {
 
     public TaxedPriceOptionalQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);

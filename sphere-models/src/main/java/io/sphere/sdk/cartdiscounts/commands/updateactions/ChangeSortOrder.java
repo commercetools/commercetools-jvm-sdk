@@ -1,12 +1,12 @@
 package io.sphere.sdk.cartdiscounts.commands.updateactions;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeSortOrder()}
  */
-public class ChangeSortOrder extends UpdateAction<CartDiscount> {
+public class ChangeSortOrder extends UpdateActionImpl<CartDiscount> {
     private final String sortOrder;
 
     private ChangeSortOrder(final String sortOrder) {

@@ -14,7 +14,7 @@ final class ZoneImpl extends DefaultModelImpl<Zone> implements Zone {
     private final Set<Location> locations;
 
     @JsonCreator
-    ZoneImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, @Nullable final String description, final String name, final Set<Location> locations) {
+    ZoneImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, @Nullable final String description, final String name, final Set<Location> locations) {
         super(id, version, createdAt, lastModifiedAt);
         this.description = description;
         this.name = name;

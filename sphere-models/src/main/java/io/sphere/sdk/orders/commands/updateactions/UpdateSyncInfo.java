@@ -1,7 +1,7 @@
 package io.sphere.sdk.orders.commands.updateactions;
 
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.Order;
@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#updateSyncInfo()}
  */
-public class UpdateSyncInfo extends UpdateAction<Order> {
+public class UpdateSyncInfo extends UpdateActionImpl<Order> {
     private final Reference<Channel> channel;
     @Nullable
     private final String externalId;

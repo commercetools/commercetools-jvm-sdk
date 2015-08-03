@@ -9,7 +9,7 @@ public interface Versioned<T> extends Identifiable<T> {
     @Override
     String getId();
 
-    long getVersion();
+    Long getVersion();
 
     /**
      * Creates a versioned that only contains the id and the version.

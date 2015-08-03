@@ -17,15 +17,15 @@ final class StateImpl extends DefaultModelImpl<State> implements State {
     private final LocalizedStrings name;
     @Nullable
     private final LocalizedStrings description;
-    private final boolean initial;
-    private final boolean builtIn;
+    private final Boolean initial;
+    private final Boolean builtIn;
     @Nullable
     private final Set<Reference<State>> transitions;
 
     @JsonCreator
-    public StateImpl(String id, long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, String key, StateType type,
-                     LocalizedStrings name, LocalizedStrings description, boolean initial,
-                     boolean builtIn, Set<Reference<State>> transitions) {
+    public StateImpl(String id, Long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, String key, StateType type,
+                     LocalizedStrings name, LocalizedStrings description, Boolean initial,
+                     Boolean builtIn, Set<Reference<State>> transitions) {
         super(id, version, createdAt, lastModifiedAt);
         this.key = key;
         this.type = type;
@@ -54,11 +54,11 @@ final class StateImpl extends DefaultModelImpl<State> implements State {
         return description;
     }
 
-    public boolean isInitial() {
+    public Boolean isInitial() {
         return initial;
     }
 
-    public boolean isBuiltIn() {
+    public Boolean isBuiltIn() {
         return builtIn;
     }
 

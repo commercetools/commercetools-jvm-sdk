@@ -9,7 +9,7 @@ import java.util.function.Function;
 class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
 
     public QueryPredicate<T> where(final QueryPredicate<PartialProductDataQueryModel> embeddedPredicate) {
-        return new EmbeddedQueryPredicate<>(this, embeddedPredicate);
+        return embedPredicate(embeddedPredicate);
     }
 
     public QueryPredicate<T> where(final Function<PartialProductDataQueryModel, QueryPredicate<PartialProductDataQueryModel>> embeddedPredicate) {
@@ -21,15 +21,15 @@ class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
     }
 
     public LocalizedStringsQuerySortingModel<T> name() {
-        return LocalizedStringsQuerySortingModel.of(this, "name");
+        return localizedStringsQuerySortingModel("name");
     }
 
     public LocalizedStringsQueryModel<T> description() {
-        return LocalizedStringsQuerySortingModel.of(this, "description");
+        return localizedStringsQuerySortingModel("description");
     }
 
     public LocalizedStringsQuerySortingModel<T> slug() {
-        return LocalizedStringsQuerySortingModel.of(this, "slug");
+        return localizedStringsQuerySortingModel("slug");
     }
 
     public ProductAllVariantsQueryModel<T> allVariants() {
@@ -45,19 +45,19 @@ class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
     }
 
     public LocalizedStringsQuerySortingModel<T> metaTitle() {
-        return LocalizedStringsQuerySortingModel.of(this, "metaTitle");
+        return localizedStringsQuerySortingModel("metaTitle");
     }
 
     public LocalizedStringsQuerySortingModel<T> metaKeywords() {
-        return LocalizedStringsQuerySortingModel.of(this, "metaKeywords");
+        return localizedStringsQuerySortingModel("metaKeywords");
     }
 
     public LocalizedStringsQuerySortingModel<T> metaDescription() {
-        return LocalizedStringsQuerySortingModel.of(this, "metaDescription");
+        return localizedStringsQuerySortingModel("metaDescription");
     }
 
     public ReferenceCollectionQueryModel<T, Category> categories() {
-        return new ReferenceCollectionQueryModel<>(this, "categories");
+        return referenceCollectionModel("categories");
     }
 }
 

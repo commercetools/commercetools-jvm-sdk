@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.utils.ImmutableMapBuilder;
 import io.sphere.sdk.utils.StringUtils;
 
 import javax.annotation.Nullable;
@@ -15,7 +14,8 @@ import java.util.stream.Collector;
 import java.util.stream.Stream;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
-import static io.sphere.sdk.utils.MapUtils.*;
+import static io.sphere.sdk.utils.MapUtils.immutableCopyOf;
+import static io.sphere.sdk.utils.MapUtils.mapOf;
 import static java.lang.String.format;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
@@ -35,7 +35,7 @@ public class LocalizedStrings extends Base {
     @JsonCreator
     private LocalizedStrings(final Map<Locale, String> translations) {
         //the Jackson mapper passes null here and it is not possible to use an immutable map
-        this.translations = copyOf(Optional.ofNullable(translations).orElse(new HashMap<>()));
+        this.translations = immutableCopyOf(Optional.ofNullable(translations).orElse(new HashMap<>()));
     }
 
     /**
@@ -114,10 +114,9 @@ public class LocalizedStrings extends Base {
         if (translations.containsKey(locale)) {
             throw new IllegalArgumentException(format("Duplicate keys (%s) for map creation.", locale));
         }
-        final Map<Locale, String> newMap = ImmutableMapBuilder.<Locale, String>of().
-                putAll(translations).
-                put(locale, value).
-                build();
+        final Map<Locale, String> newMap = new HashMap<>();
+        newMap.putAll(translations);
+        newMap.put(locale, value);
         return new LocalizedStrings(newMap);
     }
 

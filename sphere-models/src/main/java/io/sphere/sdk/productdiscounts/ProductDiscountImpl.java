@@ -15,11 +15,11 @@ class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements P
     private final ProductDiscountValue value;
     private final String predicate;
     private final String sortOrder;
-    private final boolean isActive;
+    private final Boolean isActive;
     private final List<Reference<Object>> references;
 
     @JsonCreator
-    ProductDiscountImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
+    ProductDiscountImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                         final LocalizedStrings name, final LocalizedStrings description,
                         final ProductDiscountValue value, final String predicate, final String sortOrder,
                         final boolean isActive, final List<Reference<Object>> references) {
@@ -54,7 +54,7 @@ class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements P
         return sortOrder;
     }
 
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 

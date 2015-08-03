@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductIdentifiable;
@@ -15,15 +15,15 @@ import javax.annotation.Nullable;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addLineItem()}
  */
-public class AddLineItem extends UpdateAction<Cart> {
+public class AddLineItem extends UpdateActionImpl<Cart> {
     private final String productId;
-    private final int variantId;
-    private final long quantity;
+    private final Integer variantId;
+    private final Long quantity;
     @Nullable
     private final Reference<Channel> supplyChannel;
     @Nullable private final Reference<Channel> distributionChannel;
 
-    private AddLineItem(final String productId, final int variantId, final long quantity, final Reference<Channel> supplyChannel, final Reference<Channel> distributionChannel) {
+    private AddLineItem(final String productId, final Integer variantId, final Long quantity, final Reference<Channel> supplyChannel, final Reference<Channel> distributionChannel) {
         super("addLineItem");
         this.productId = productId;
         this.variantId = variantId;
@@ -32,11 +32,11 @@ public class AddLineItem extends UpdateAction<Cart> {
         this.distributionChannel = distributionChannel;
     }
 
-    public static AddLineItem of(final ProductIdentifiable product, final int variantId, final long quantity) {
+    public static AddLineItem of(final ProductIdentifiable product, final Integer variantId, final long quantity) {
         return of(product.getId(), variantId, quantity);
     }
 
-    public static AddLineItem of(final String productId, final int variantId, final long quantity) {
+    public static AddLineItem of(final String productId, final Integer variantId, final long quantity) {
         return new AddLineItem(productId, variantId, quantity, null, null);
     }
 
@@ -44,11 +44,11 @@ public class AddLineItem extends UpdateAction<Cart> {
         return productId;
     }
 
-    public int getVariantId() {
+    public Integer getVariantId() {
         return variantId;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 

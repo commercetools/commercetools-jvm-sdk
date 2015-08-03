@@ -3,7 +3,7 @@ package io.sphere.sdk.commands;
 import java.util.List;
 
 final class UpdateCommandBody<T> {
-    private final long version;
+    private final Long version;
     private final List<? extends UpdateAction<T>> actions;
 
     UpdateCommandBody(final long version, final List<? extends UpdateAction<T>> actions) {
@@ -11,7 +11,7 @@ final class UpdateCommandBody<T> {
         this.actions = actions;
     }
 
-    public long getVersion() {
+    public Long getVersion() {
         return version;
     }
 

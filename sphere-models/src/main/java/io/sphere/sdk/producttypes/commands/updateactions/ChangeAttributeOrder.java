@@ -1,7 +1,7 @@
 package io.sphere.sdk.producttypes.commands.updateactions;
 
 import io.sphere.sdk.attributes.AttributeDefinition;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.producttypes.ProductType;
 
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeAttributeOrder()}
  */
-public class ChangeAttributeOrder extends UpdateAction<ProductType> {
+public class ChangeAttributeOrder extends UpdateActionImpl<ProductType> {
     private final List<AttributeDefinition> attributes;
 
     private ChangeAttributeOrder(final List<AttributeDefinition> attributes) {

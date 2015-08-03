@@ -1,7 +1,7 @@
 package io.sphere.sdk.cartdiscounts.commands.updateactions;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 /**
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#setValidFrom()}
  */
-public class SetValidFrom extends UpdateAction<CartDiscount> {
+public class SetValidFrom extends UpdateActionImpl<CartDiscount> {
     @Nullable
     private final ZonedDateTime validFrom;
 

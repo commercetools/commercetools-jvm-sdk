@@ -48,7 +48,7 @@ public final class CompletableFutureUtils {
         });
     }
 
-    public static <T> CompletionStage<T> onFailure(final CompletionStage<T> future, final Consumer<Throwable> consumer) {
+    public static <T> CompletionStage<T> onFailure(final CompletionStage<T> future, final Consumer<? super Throwable> consumer) {
         return future.whenCompleteAsync((value, throwable) -> {
             if (throwable != null) {
                 consumer.accept(throwable);
@@ -56,7 +56,7 @@ public final class CompletableFutureUtils {
         });
     }
 
-    public static <T> CompletionStage<T> onSuccess(final CompletionStage<T> future, final Consumer<T> consumer) {
+    public static <T> CompletionStage<T> onSuccess(final CompletionStage<T> future, final Consumer<? super T> consumer) {
         return future.whenCompleteAsync((value, throwable) -> {
             if (throwable == null) {
                 consumer.accept(value);
@@ -64,11 +64,11 @@ public final class CompletableFutureUtils {
         });
     }
 
-    public static <T> CompletionStage<T> recover(final CompletionStage<T> future, final Function<Throwable, T> f) {
+    public static <T> CompletionStage<T> recover(final CompletionStage<T> future, final Function<Throwable, ? extends T> f) {
         return future.exceptionally(f);
     }
 
-    public static <T> CompletionStage<T> recoverWith(final CompletionStage<T> future, final Function<Throwable, CompletionStage<T>> f) {
+    public static <T> CompletionStage<T> recoverWith(final CompletionStage<T> future, final Function<? super Throwable, CompletionStage<T>> f) {
         final CompletableFuture<T> result = new CompletableFuture<>();
         final BiConsumer<T, Throwable> action = (value, error) -> {
             if (value != null) {
@@ -102,11 +102,11 @@ public final class CompletableFutureUtils {
         return future.isDone() ? future.get() : other.get();
     }
 
-    public static <T, U> CompletionStage<U> map(final CompletionStage<T> future, final Function<T, U> f) {
+    public static <T, U> CompletionStage<U> map(final CompletionStage<T> future, final Function<? super T,? extends U> f) {
         return future.thenApply(f);
     }
 
-    public static <T, U> CompletionStage<U> flatMap(final CompletionStage<T> future, final Function<T, CompletionStage<U>> f) {
+    public static <T, U> CompletionStage<U> flatMap(final CompletionStage<T> future, final Function<? super T, CompletionStage<U>> f) {
         return future.thenCompose(f);
     }
 

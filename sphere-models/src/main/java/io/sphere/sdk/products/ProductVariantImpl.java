@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.attributes.Attribute;
 import io.sphere.sdk.attributes.AttributeMapper;
-import io.sphere.sdk.models.Image;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -15,7 +14,7 @@ import static java.lang.String.format;
 class ProductVariantImpl extends AttributeContainerImpl implements ProductVariant {
     @Nullable
     private String productId;//hack for VariantIdentifier getter
-    private final int id;
+    private final Integer id;
     @Nullable
     private final String sku;
     private final List<Price> prices;
@@ -24,7 +23,7 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     private final ProductVariantAvailability availability;
 
     @JsonCreator
-    ProductVariantImpl(final int id, final String sku, final List<Price> prices,
+    ProductVariantImpl(final Integer id, final String sku, final List<Price> prices,
                        final List<Attribute> attributes, final List<Image> images,
                        final ProductVariantAvailability availability, final String productId) {
         super(attributes);
@@ -37,7 +36,7 @@ class ProductVariantImpl extends AttributeContainerImpl implements ProductVarian
     }
 
     @Override
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 

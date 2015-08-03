@@ -9,9 +9,9 @@ public class GsonFooCustomObject implements CustomObject<GsonFoo> {
     private final String key;
     private final GsonFoo value;
     private final String id;
-    private final long version;
+    private final Long version;
 
-    public GsonFooCustomObject(final String container, final String key, final GsonFoo value, final String id, final long version) {
+    public GsonFooCustomObject(final String container, final String key, final GsonFoo value, final String id, final Long version) {
         this.container = container;
         this.key = key;
         this.value = value;
@@ -50,7 +50,7 @@ public class GsonFooCustomObject implements CustomObject<GsonFoo> {
     }
 
     @Override
-    public long getVersion() {
+    public Long getVersion() {
         return version;
     }
 }

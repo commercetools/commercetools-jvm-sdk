@@ -29,5 +29,5 @@ public interface CustomLineItem extends LineItemLike {
     String getId();
 
     @Override
-    long getQuantity();
+    Long getQuantity();
 }

@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands;
 
-import io.sphere.sdk.models.Image;
+import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;

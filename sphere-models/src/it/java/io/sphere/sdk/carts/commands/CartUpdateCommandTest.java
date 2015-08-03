@@ -15,6 +15,7 @@ import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.ChangePrice;
+import io.sphere.sdk.products.commands.updateactions.Publish;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -29,7 +30,6 @@ import java.util.Set;
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
-import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -260,7 +260,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             final Price oldPrice = cartWithLineItem.getLineItems().get(0).getPrice();
             final Price newPrice = oldPrice.withValue(oldPrice.getValue().multiply(2));
             final Product productWithChangedPrice =
-                    execute(ProductUpdateCommand.of(product, asList(ChangePrice.of(oldPrice, newPrice, STAGED_AND_CURRENT))));
+                    execute(ProductUpdateCommand.of(product, asList(ChangePrice.of(oldPrice, newPrice), Publish.of())));
 
             final List<Price> prices = productWithChangedPrice.getMasterData().getCurrent().getMasterVariant().getPrices();
             assertThat(prices)

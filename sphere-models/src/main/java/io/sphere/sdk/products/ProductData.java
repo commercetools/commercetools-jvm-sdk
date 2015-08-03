@@ -10,9 +10,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 
-/**
- * For construction in unit tests use {@link io.sphere.sdk.products.ProductDataBuilder}.
- */
 @JsonDeserialize(as=ProductDataImpl.class)
 public interface ProductData extends ProductDataLike {
     @Override

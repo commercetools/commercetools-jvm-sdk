@@ -7,6 +7,4 @@ import io.sphere.sdk.queries.StringQueryModel;
 
 public interface MessageTypeQueryModel extends StringQueryModel<Message> {
     QueryPredicate<Message> is(MessageDerivatHint<?> hint);
-
-    QueryPredicate<Message> isIn(MessageDerivatHint<?> hint, MessageDerivatHint<?> ... moreHints);
 }

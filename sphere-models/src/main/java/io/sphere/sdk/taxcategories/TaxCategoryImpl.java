@@ -15,7 +15,7 @@ class TaxCategoryImpl extends DefaultModelImpl<TaxCategory> implements TaxCatego
     private final List<TaxRate> taxRates;
 
     @JsonCreator
-    TaxCategoryImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
+    TaxCategoryImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                     final String name, @Nullable final String description,
                     @JsonProperty("rates") final List<TaxRate> taxRates) {
         super(id, version, createdAt, lastModifiedAt);

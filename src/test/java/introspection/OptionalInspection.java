@@ -13,7 +13,7 @@ import static java.util.stream.Collectors.toList;
 
 //test:runMain introspection.OptionalInspection
 public class OptionalInspection {
-    static final Predicate<Class<?>> isOptionalClass = type -> type.getName().equals("java.util.Optional");
+    public static final Predicate<Class<?>> isOptionalClass = type -> type.getName().equals("java.util.Optional");
     public static final Predicate<MethodInfo> METHOD_CONTAINS_OPTIONAL_STUFF = m -> m.containsOptionalParameter() || m.containsOptionalReturnType();
 
 

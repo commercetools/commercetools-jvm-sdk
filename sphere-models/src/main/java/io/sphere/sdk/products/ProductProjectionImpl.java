@@ -21,9 +21,9 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     @Nullable
     private final Reference<TaxCategory> taxCategory;
     @JsonProperty("published")
-    private final boolean isPublished;
+    private final Boolean isPublished;
     @JsonProperty("hasStagedChanges")
-    private final boolean hasStagedChanges;
+    private final Boolean hasStagedChanges;
     private final LocalizedStrings name;
     private final Set<Reference<Category>> categories;
     @Nullable
@@ -40,14 +40,14 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     private final SearchKeywords searchKeywords;
 
     @JsonCreator
-    ProductProjectionImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
+    ProductProjectionImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                           final Reference<ProductType> productType, @Nullable final Reference<TaxCategory> taxCategory,
-                          final boolean hasStagedChanges, final LocalizedStrings name,
+                          final Boolean hasStagedChanges, final LocalizedStrings name,
                           final Set<Reference<Category>> categories, final LocalizedStrings description,
                           final LocalizedStrings slug, final LocalizedStrings metaTitle,
                           final LocalizedStrings metaDescription, final LocalizedStrings metaKeywords,
                           final ProductVariant masterVariant, final List<ProductVariant> variants,
-                          final boolean isPublished, final SearchKeywords searchKeywords) {
+                          final Boolean isPublished, final SearchKeywords searchKeywords) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;
         this.taxCategory = taxCategory;
@@ -68,7 +68,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
                 .forEach(variant -> ((ProductVariantImpl)variant).setProductId(getId()));
     }
 
-    public boolean hasStagedChanges() {
+    public Boolean hasStagedChanges() {
         return hasStagedChanges;
     }
 
@@ -133,7 +133,7 @@ class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> impl
     }
 
     @Override
-    public boolean isPublished() {
+    public Boolean isPublished() {
         return isPublished;
     }
 

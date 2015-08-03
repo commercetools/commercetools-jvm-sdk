@@ -1,7 +1,7 @@
 package io.sphere.sdk.client;
 
-import io.sphere.sdk.models.ErrorResponse;
-import io.sphere.sdk.models.SphereError;
+import io.sphere.sdk.models.errors.ErrorResponse;
+import io.sphere.sdk.models.errors.SphereError;
 
 import java.util.Collections;
 import java.util.List;
@@ -18,25 +18,27 @@ Example: <code>{"statusCode":400,"message":"The value '2' is not valid for field
 public class ErrorResponseException extends BadRequestException implements ErrorResponse {
     private static final long serialVersionUID = 0L;
 
-    private final int statusCode;
-    private final List<SphereError> errors;
+    private final Integer statusCode;
+    private final String message;
+    private final List<? extends SphereError> errors;
 
     public ErrorResponseException(final ErrorResponse errorResponse) {
         this(errorResponse.getStatusCode(), errorResponse.getMessage(), errorResponse.getErrors());
     }
 
-    ErrorResponseException(final int statusCode, final String message, final List<SphereError> errors) {
+    ErrorResponseException(final Integer statusCode, final String message, final List<? extends SphereError> errors) {
         this.statusCode = statusCode;
+        this.message = message;
         this.errors = errors == null ? Collections.<SphereError>emptyList() : errors;
     }
 
     @Override
-    public int getStatusCode() {
+    public Integer getStatusCode() {
         return statusCode;
     }
 
     @Override
-    public List<SphereError> getErrors() {
+    public List<? extends SphereError> getErrors() {
         return errors;
     }
 }

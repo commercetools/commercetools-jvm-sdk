@@ -43,7 +43,7 @@ public class ProductAttributeFlowTest extends IntegrationTest {
         final Product product = execute(ProductCreateCommand.of(productDraft));
         assertThat(extractAttribute(product, namesAccess)).contains(B);
 
-        final Product updatedProduct = execute(ProductUpdateCommand.of(product, SetAttribute.of(1, namesAccess, C, ProductUpdateScope.ONLY_STAGED)));
+        final Product updatedProduct = execute(ProductUpdateCommand.of(product, SetAttribute.of(1, namesAccess, C)));
         assertThat(extractAttribute(updatedProduct, namesAccess)).contains(C);
 
 

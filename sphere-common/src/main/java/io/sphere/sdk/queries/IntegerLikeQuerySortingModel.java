@@ -37,12 +37,6 @@ abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<T>
     }
 
     @Override
-    @SuppressWarnings("unchecked")
-    public QueryPredicate<T> isIn(final V arg0, final V ... args) {
-        return isInPredicate(listOf(arg0, args));
-    }
-
-    @Override
     public QueryPredicate<T> isIn(final Iterable<V> args) {
         return isInPredicate(args);
     }
@@ -70,12 +64,6 @@ abstract class IntegerLikeQuerySortingModel<T, V> extends QueryModelImpl<T>
     @Override
     public QueryPredicate<T> isNotIn(final Iterable<V> args) {
         return isNotInPredicate(args);
-    }
-
-    @Override
-    @SuppressWarnings("unchecked")
-    public QueryPredicate<T> isNotIn(final V arg0, final V ... args) {
-        return isNotIn(listOf(arg0, args));
     }
 
     @Override

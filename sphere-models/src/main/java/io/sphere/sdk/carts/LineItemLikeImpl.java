@@ -9,11 +9,11 @@ import java.util.Set;
 abstract class LineItemLikeImpl extends Base implements LineItemLike {
     private final String id;
     private final Set<ItemState> state;
-    private final long quantity;
+    private final Long quantity;
     @Nullable
     private final DiscountedLineItemPrice discountedPrice;
 
-    public LineItemLikeImpl(final String id, final Set<ItemState> state, final long quantity, final DiscountedLineItemPrice discountedPrice) {
+    public LineItemLikeImpl(final String id, final Set<ItemState> state, final Long quantity, final DiscountedLineItemPrice discountedPrice) {
         this.discountedPrice = discountedPrice;
         this.id = id;
         this.state = state;
@@ -29,7 +29,7 @@ abstract class LineItemLikeImpl extends Base implements LineItemLike {
         return id;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 

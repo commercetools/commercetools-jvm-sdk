@@ -1,13 +1,13 @@
 package io.sphere.sdk.customers.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 
 /**
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeEmail()}
  */
-public class ChangeEmail extends UpdateAction<Customer> {
+public class ChangeEmail extends UpdateActionImpl<Customer> {
     private final String email;
 
     private ChangeEmail(final String email) {

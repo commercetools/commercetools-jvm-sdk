@@ -14,7 +14,7 @@ class ProductTypeImpl extends DefaultModelImpl<ProductType> implements ProductTy
     private final List<AttributeDefinition> attributes;
 
     @JsonCreator
-    ProductTypeImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
+    ProductTypeImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                     final String name, final String description, final List<AttributeDefinition> attributes) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;

@@ -26,7 +26,7 @@ public class ReturnInfoAddedMessage extends GenericMessageImpl<Order> {
     private final ReturnInfo returnInfo;
 
     @JsonCreator
-    private ReturnInfoAddedMessage(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final long sequenceNumber, final long resourceVersion, final String type, final ReturnInfo returnInfo) {
+    private ReturnInfoAddedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final ReturnInfo returnInfo) {
         super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type);
         this.returnInfo = returnInfo;
     }

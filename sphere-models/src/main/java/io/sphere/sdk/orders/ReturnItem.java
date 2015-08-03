@@ -9,7 +9,7 @@ import java.time.ZonedDateTime;
 
 public class ReturnItem extends Base implements Timestamped {
     private final String id;
-    private final long quantity;
+    private final Long quantity;
     private final String lineItemId;
     @Nullable
     private final String comment;
@@ -19,7 +19,7 @@ public class ReturnItem extends Base implements Timestamped {
     private final ZonedDateTime lastModifiedAt;
 
     @JsonCreator
-    private ReturnItem(final String id, final long quantity, final String lineItemId, @Nullable final String comment, final ReturnShipmentState shipmentState, final ReturnPaymentState paymentState, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt) {
+    private ReturnItem(final String id, final Long quantity, final String lineItemId, @Nullable final String comment, final ReturnShipmentState shipmentState, final ReturnPaymentState paymentState, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt) {
         this.id = id;
         this.quantity = quantity;
         this.lineItemId = lineItemId;
@@ -30,7 +30,7 @@ public class ReturnItem extends Base implements Timestamped {
         this.lastModifiedAt = lastModifiedAt;
     }
 
-    public static ReturnItem of(final String id, final long quantity, final String lineItemId, final String comment, final ReturnShipmentState shipmentState, final ReturnPaymentState paymentState, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt) {
+    public static ReturnItem of(final String id, final Long quantity, final String lineItemId, final String comment, final ReturnShipmentState shipmentState, final ReturnPaymentState paymentState, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt) {
         return new ReturnItem(id, quantity, lineItemId, comment, shipmentState, paymentState, createdAt, lastModifiedAt);
 
     }
@@ -39,7 +39,7 @@ public class ReturnItem extends Base implements Timestamped {
         return id;
     }
 
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 

@@ -25,5 +25,7 @@ package io.sphere.sdk.meta;
 
  */
 
-public class KnownIssues {
+public final class KnownIssues {
+    private KnownIssues() {
+    }
 }

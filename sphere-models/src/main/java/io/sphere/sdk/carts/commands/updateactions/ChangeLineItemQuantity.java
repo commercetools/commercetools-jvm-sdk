@@ -3,13 +3,14 @@ package io.sphere.sdk.carts.commands.updateactions;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
  Sets the quantity of the given line item. If quantity is 0, line item is removed from the cart.
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#changeLineItemQuantity()}
  */
-public class ChangeLineItemQuantity extends UpdateAction<Cart> {
+public class ChangeLineItemQuantity extends UpdateActionImpl<Cart> {
     private final String lineItemId;
     private final long quantity;
 

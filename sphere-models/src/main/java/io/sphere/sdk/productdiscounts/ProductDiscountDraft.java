@@ -12,7 +12,7 @@ public class ProductDiscountDraft extends Base {
     private final String sortOrder;
     private final ProductDiscountValue value;
     private final LocalizedStrings description;
-    private final boolean active;
+    private final Boolean active;
 
     private ProductDiscountDraft(final LocalizedStrings name, final LocalizedStrings description, final ProductDiscountPredicate predicate, final ProductDiscountValue value, final String sortOrder, final boolean active) {
         this.active = active;
@@ -24,7 +24,7 @@ public class ProductDiscountDraft extends Base {
     }
 
     @JsonProperty("isActive")
-    public boolean isActive() {
+    public Boolean isActive() {
         return active;
     }
 

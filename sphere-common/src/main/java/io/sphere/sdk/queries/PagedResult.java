@@ -10,7 +10,7 @@ public abstract class PagedResult<T> extends Base {
     protected final Integer total;
     protected final List<T> results;
 
-    public PagedResult(final Integer offset, final Integer total, final List<T> results) {
+    protected PagedResult(final Integer offset, final Integer total, final List<T> results) {
         this.offset = offset;
         this.total = total;
         this.results = results;

@@ -1,6 +1,6 @@
 package io.sphere.sdk.productdiscounts.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 
@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 /**
  * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#setDescription()}
  */
-public class SetDescription extends UpdateAction<ProductDiscount> {
+public class SetDescription extends UpdateActionImpl<ProductDiscount> {
     @Nullable
     private final LocalizedStrings description;
 

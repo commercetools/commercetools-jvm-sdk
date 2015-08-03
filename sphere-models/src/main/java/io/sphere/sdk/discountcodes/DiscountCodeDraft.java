@@ -24,13 +24,13 @@ public class DiscountCodeDraft extends Base {
     private final List<Reference<CartDiscount>> cartDiscounts;
     @Nullable
     private final String cartPredicate;
-    private final boolean isActive;
+    private final Boolean isActive;
     @Nullable
     private final Long maxApplications;
     @Nullable
     private final Long maxApplicationsPerCustomer;
 
-    DiscountCodeDraft(final List<Reference<CartDiscount>> cartDiscounts, final LocalizedStrings name, final LocalizedStrings description, final String code, final String cartPredicate, final boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer) {
+    DiscountCodeDraft(final List<Reference<CartDiscount>> cartDiscounts, final LocalizedStrings name, final LocalizedStrings description, final String code, final String cartPredicate, final Boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer) {
         this.cartDiscounts = cartDiscounts;
         this.name = name;
         this.description = description;
@@ -97,12 +97,12 @@ public class DiscountCodeDraft extends Base {
         return cartPredicate;
     }
 
-    public DiscountCodeDraft withIsActive(final boolean isActive) {
+    public DiscountCodeDraft withIsActive(final Boolean isActive) {
         return newBuilder().isActive(isActive).build();
     }
 
     @JsonProperty("isActive")
-    public boolean isActive() {
+    public Boolean isActive() {
         return isActive;
     }
 

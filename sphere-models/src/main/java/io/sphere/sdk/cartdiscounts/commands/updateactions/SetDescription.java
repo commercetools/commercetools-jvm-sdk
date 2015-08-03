@@ -1,7 +1,7 @@
 package io.sphere.sdk.cartdiscounts.commands.updateactions;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 
 import javax.annotation.Nullable;
@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 /**
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#setDescription()}
  */
-public class SetDescription extends UpdateAction<CartDiscount> {
+public class SetDescription extends UpdateActionImpl<CartDiscount> {
     @Nullable
     private final LocalizedStrings description;
 

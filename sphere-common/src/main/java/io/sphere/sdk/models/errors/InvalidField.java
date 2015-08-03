@@ -1,7 +1,6 @@
 package io.sphere.sdk.models.errors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.SphereError;
 
 /**
  * @see io.sphere.sdk.client.ErrorResponseException

@@ -28,7 +28,6 @@ import java.util.stream.IntStream;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductProjectionType.*;
-import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -88,10 +87,10 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
         final Product product = createInBackendByName("assignPricesToMasterVariantAccordingToAChannel");
         final Channel channel = execute(ChannelCreateCommand.of(ChannelDraft.of(channelKey)));
         final Price price = Price.of(MoneyImpl.of(523, EUR)).withChannel(channel);
-        final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddPrice.of(MASTER_VARIANT_ID, price, STAGED_AND_CURRENT)));
+        final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddPrice.of(MASTER_VARIANT_ID, price)));
         final Price readPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
         assertThat(readPrice.getChannel()).isEqualTo(channel.toReference());
-        execute(ProductUpdateCommand.of(updatedProduct, RemovePrice.of(readPrice, STAGED_AND_CURRENT)));
+        execute(ProductUpdateCommand.of(updatedProduct, RemovePrice.of(readPrice)));
         cleanUpChannelByKey(client(), channelKey);
     }
 

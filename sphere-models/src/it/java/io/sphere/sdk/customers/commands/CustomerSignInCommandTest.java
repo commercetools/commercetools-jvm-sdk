@@ -1,7 +1,7 @@
 package io.sphere.sdk.customers.commands;
 
 import io.sphere.sdk.client.ErrorResponseException;
-import io.sphere.sdk.customers.CustomerInvalidCredentials;
+import io.sphere.sdk.customers.errors.CustomerInvalidCredentials;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;

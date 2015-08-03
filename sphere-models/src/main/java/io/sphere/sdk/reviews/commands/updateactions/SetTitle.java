@@ -1,6 +1,6 @@
 package io.sphere.sdk.reviews.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.reviews.Review;
 
 import javax.annotation.Nullable;
@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setTitle()}
  */
-public class SetTitle extends UpdateAction<Review> {
+public class SetTitle extends UpdateActionImpl<Review> {
     @Nullable
     private final String title;
 

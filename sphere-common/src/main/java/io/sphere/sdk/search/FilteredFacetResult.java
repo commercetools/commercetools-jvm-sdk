@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
 public class FilteredFacetResult extends Base implements FacetResult {
-    private final long count;
+    private final Long count;
 
     @JsonCreator
-    private FilteredFacetResult(final long count) {
+    private FilteredFacetResult(final Long count) {
         this.count = count;
     }
 
@@ -15,7 +15,7 @@ public class FilteredFacetResult extends Base implements FacetResult {
      * The number of resources matching the filter value.
      * @return amount of resources matching the filter value.
      */
-    public long getCount() {
+    public Long getCount() {
         return count;
     }
 

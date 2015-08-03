@@ -22,7 +22,7 @@ abstract class CategoryWrapper extends Base implements Category {
     }
 
     @Override
-    public long getVersion() {
+    public Long getVersion() {
         return delegate.getVersion();
     }
 

@@ -15,14 +15,14 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     private final LocalizedStrings name;
     private final MonetaryAmount money;
     private final String slug;
-    private final long quantity;
+    private final Long quantity;
     @Nullable
     private final Set<ItemState> state;
     private final Reference<TaxCategory> taxCategory;
     @Nullable
     private final TaxRate taxRate;
 
-    public CustomLineItemImportDraftImpl(final String id, final LocalizedStrings name, final MonetaryAmount money, final String slug, final long quantity, final Set<ItemState> state, final Reference<TaxCategory> taxCategory, final TaxRate taxRate) {
+    public CustomLineItemImportDraftImpl(final String id, final LocalizedStrings name, final MonetaryAmount money, final String slug, final Long quantity, final Set<ItemState> state, final Reference<TaxCategory> taxCategory, final TaxRate taxRate) {
         this.id = id;
         this.name = name;
         this.money = money;
@@ -48,7 +48,7 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     }
 
     @Override
-    public long getQuantity() {
+    public Long getQuantity() {
         return quantity;
     }
 

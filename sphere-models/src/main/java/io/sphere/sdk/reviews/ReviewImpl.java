@@ -19,7 +19,7 @@ final class ReviewImpl extends DefaultModelImpl<Review> implements Review {
     private final Double score;
 
     @JsonCreator
-    ReviewImpl(final String id, final long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
+    ReviewImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                final String productId, final String customerId, @Nullable final String authorName, @Nullable final String title,
                @Nullable final String text, @Nullable final Double score) {
         super(id, version, createdAt, lastModifiedAt);

@@ -22,7 +22,7 @@ public interface DiscountCode extends DefaultModel<DiscountCode> {
     @Nullable
     LocalizedStrings getDescription();
 
-    boolean isActive();
+    Boolean isActive();
 
     @Nullable
     Long getMaxApplications();

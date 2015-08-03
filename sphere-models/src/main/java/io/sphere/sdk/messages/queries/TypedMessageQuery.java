@@ -18,7 +18,7 @@ final class TypedMessageQuery<T> extends SphereRequestBase implements Query<T> {
 
     @Override
     public PagedQueryResult<T> deserialize(final HttpResponse httpResponse) {
-        return resultMapperOf(resultTypeReference).apply(httpResponse);
+        return deserialize(httpResponse, resultTypeReference);
     }
 
     @Override

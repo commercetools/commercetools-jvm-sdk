@@ -30,7 +30,7 @@ class CategoryImpl extends DefaultModelImpl<Category> implements Category {
 
     @JsonCreator
     CategoryImpl(final String id,
-                 final long version,
+                 final Long version,
                  final ZonedDateTime createdAt,
                  final ZonedDateTime lastModifiedAt,
                  final LocalizedStrings name,

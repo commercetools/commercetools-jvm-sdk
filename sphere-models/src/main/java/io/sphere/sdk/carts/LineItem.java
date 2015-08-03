@@ -40,5 +40,5 @@ public interface LineItem extends LineItemLike {
     String getId();
 
     @Override
-    long getQuantity();
+    Long getQuantity();
 }

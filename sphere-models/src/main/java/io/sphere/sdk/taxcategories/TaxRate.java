@@ -16,9 +16,9 @@ public interface TaxRate {
 
     String getName();
 
-    double getAmount();
+    Double getAmount();
 
-    boolean isIncludedInPrice();
+    Boolean isIncludedInPrice();
 
     CountryCode getCountry();
 

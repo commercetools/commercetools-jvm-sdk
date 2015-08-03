@@ -1,8 +1,10 @@
 package introspection;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Objects;
 import java.util.Spliterator;
 import java.util.function.Consumer;
@@ -11,10 +13,28 @@ import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
+import static java.util.stream.Collectors.toList;
+
 public class IntrospectionUtils {
     public static Stream<String> readClassNames() throws IOException {
         final String javadocAllClassesFrameHtmlContent = new String(Files.readAllBytes(Paths.get("target/javaunidoc/allclasses-frame.html")));
         return streamClassNames(Pattern.compile("title=\"[^ ]+ in ([^\"]+)\" target=\"classFrame\">(?:<span class=\"interfaceName\">)?([^<]+)(?:</span>)?</a>").matcher(javadocAllClassesFrameHtmlContent));
+    }
+
+    public static List<Class<?>> publicClassesOfProject() throws IOException {
+        try {
+            return readClassNames()
+                    .map(name -> {
+                        try {
+                            return Class.forName(name);
+                        } catch (ClassNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                    .collect(toList());
+        } catch (final FileNotFoundException e) {
+            throw new IOException("Generate Javadoc first.", e);
+        }
     }
 
     private static Stream<String> streamClassNames(final Matcher matcher) {

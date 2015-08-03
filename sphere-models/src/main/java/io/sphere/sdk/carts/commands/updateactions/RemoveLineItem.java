@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 
 import javax.annotation.Nullable;
 
@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeLineItem()}
  */
-public class RemoveLineItem extends UpdateAction<Cart> {
+public class RemoveLineItem extends UpdateActionImpl<Cart> {
     private final String lineItemId;
     @Nullable
     private final Integer quantity;

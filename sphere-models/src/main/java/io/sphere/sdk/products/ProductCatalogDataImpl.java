@@ -12,23 +12,23 @@ import java.util.Optional;
 
 class ProductCatalogDataImpl extends Base implements ProductCatalogData {
     @JsonProperty("published")
-    private final boolean isPublished;
+    private final Boolean isPublished;
     @JsonProperty("hasStagedChanges")
-    private final boolean hasStagedChanges;
+    private final Boolean hasStagedChanges;
     @Nullable
     private final ProductData current;
     private final ProductData staged;
 
     @JsonCreator
-    ProductCatalogDataImpl(final boolean isPublished, final ProductData current, final ProductData staged,
-                           final boolean hasStagedChanges) {
+    ProductCatalogDataImpl(final Boolean isPublished, final ProductData current, final ProductData staged,
+                           final Boolean hasStagedChanges) {
         this.isPublished = isPublished;
         this.current = current;
         this.staged = staged;
         this.hasStagedChanges = hasStagedChanges;
     }
 
-    public boolean isPublished() {
+    public Boolean isPublished() {
         return isPublished;
     }
 
@@ -41,7 +41,7 @@ class ProductCatalogDataImpl extends Base implements ProductCatalogData {
         return staged;
     }
 
-    public boolean hasStagedChanges() {
+    public Boolean hasStagedChanges() {
         return hasStagedChanges;
     }
 

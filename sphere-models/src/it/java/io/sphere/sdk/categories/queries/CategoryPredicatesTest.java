@@ -9,11 +9,11 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.SphereTestUtils.en;
+import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -53,7 +53,7 @@ public class CategoryPredicatesTest extends IntegrationTest {
 
     @Test
     public void isNotInPredicates() throws Exception {
-        final QueryPredicate<Category> predicate = CategoryQueryModel.of().name().lang(Locale.ENGLISH).isNotIn("10", "2");
+        final QueryPredicate<Category> predicate = CategoryQueryModel.of().name().lang(Locale.ENGLISH).isNotIn(asList("10", "2"));
         final Consumer<List<Category>> assertions = categories -> {
             final List<String> names = categories.stream().map(c -> c.getName().get(Locale.ENGLISH)).collect(toList());
             assertThat(names).contains("1");

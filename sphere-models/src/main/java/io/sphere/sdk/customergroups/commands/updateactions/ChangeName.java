@@ -1,6 +1,6 @@
 package io.sphere.sdk.customergroups.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customergroups.CustomerGroup;
 
 
@@ -10,7 +10,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
  {@include.example io.sphere.sdk.customergroups.commands.CustomerGroupUpdateCommandTest#changeName()}
 
  */
-public class ChangeName extends UpdateAction<CustomerGroup> {
+public class ChangeName extends UpdateActionImpl<CustomerGroup> {
     private final String name;
 
     private ChangeName(final String name) {

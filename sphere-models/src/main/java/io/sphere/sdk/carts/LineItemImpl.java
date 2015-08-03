@@ -29,7 +29,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
 
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedStrings name,
-                 final ProductVariant variant, final Price price, final long quantity,
+                 final ProductVariant variant, final Price price, final Long quantity,
                  final Set<ItemState> state, final TaxRate taxRate,
                  final Reference<Channel> supplyChannel, final DiscountedLineItemPrice discountedPrice,
                  final LocalizedStrings productSlug, final Reference<Channel> distributionChannel) {
