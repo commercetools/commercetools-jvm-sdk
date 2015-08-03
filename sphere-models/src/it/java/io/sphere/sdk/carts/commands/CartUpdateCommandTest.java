@@ -29,7 +29,6 @@ import java.util.Set;
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
-import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;

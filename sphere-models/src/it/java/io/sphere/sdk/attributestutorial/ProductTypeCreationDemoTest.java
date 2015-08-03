@@ -42,7 +42,6 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.function.Function;
 
-import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.util.Arrays.asList;

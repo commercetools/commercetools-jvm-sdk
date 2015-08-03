@@ -31,8 +31,6 @@ import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
 import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.products.ProductProjectionType.STAGED;
-import static io.sphere.sdk.products.ProductUpdateScope.ONLY_STAGED;
-import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.test.ReferenceAssert.assertThat;
 import static io.sphere.sdk.test.SphereTestUtils.*;

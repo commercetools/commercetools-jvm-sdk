@@ -31,8 +31,6 @@ import java.util.function.Supplier;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.products.ProductUpdateScope.ONLY_STAGED;
-import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
 import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;

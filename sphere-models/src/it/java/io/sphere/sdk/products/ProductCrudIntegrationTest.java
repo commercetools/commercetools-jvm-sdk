@@ -28,7 +28,6 @@ import java.util.stream.IntStream;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.products.ProductProjectionType.*;
-import static io.sphere.sdk.products.ProductUpdateScope.STAGED_AND_CURRENT;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.*;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import static io.sphere.sdk.test.SphereTestUtils.*;
