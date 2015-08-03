@@ -39,7 +39,7 @@ import static java.math.BigDecimal.valueOf;
 import static java.util.Locale.FRENCH;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ProductSearchTypesIntegrationTest extends IntegrationTest {
+public class ProductProjectionSearchFilterTypesIntegrationTest extends IntegrationTest {
     private static Product product1;
     private static Product product2;
     private static Product productSomeId;
@@ -234,7 +234,6 @@ public class ProductSearchTypesIntegrationTest extends IntegrationTest {
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersBooleanSetAttributes() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -243,7 +242,6 @@ public class ProductSearchTypesIntegrationTest extends IntegrationTest {
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersTextSetAttributes() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -252,7 +250,6 @@ public class ProductSearchTypesIntegrationTest extends IntegrationTest {
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersLocTextSetAttributes() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
@@ -261,122 +258,111 @@ public class ProductSearchTypesIntegrationTest extends IntegrationTest {
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersEnumKeySetAttributes() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofEnum(ATTR_NAME_ENUM_SET).key()
-                        .filtered().by("two-key"));
+                        .filtered().by("three-key"));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersEnumLabelSetAttributes() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofEnum(ATTR_NAME_ENUM_SET).label()
-                        .filtered().by("two"));
+                        .filtered().by("three"));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersLocEnumKeySetAttributes() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM_SET).key()
-                        .filtered().by("two-key"));
+                        .filtered().by("three-key"));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersLocEnumLabelSetAttributes() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN)
-                        .filtered().by("zwei"));
+                        .filtered().by("drei"));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersNumberSetAttributes() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER_SET)
-                        .filtered().by(valueOf(5D)));
+                        .filtered().by(valueOf(10D)));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER_SET)
-                        .filtered().byLessThanOrEqualTo(valueOf(5D)));
+                        .filtered().byGreaterThanOrEqualTo(valueOf(10D)));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersMoneyAmountSetAttributes() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).amount()
-                        .filtered().by(valueOf(500)));
+                        .filtered().by(valueOf(1000)));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).amount()
-                        .filtered().byLessThanOrEqualTo(valueOf(500)));
+                        .filtered().byGreaterThanOrEqualTo(valueOf(1000)));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersMoneyCurrencySetAttributes() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).currency()
-                        .filtered().by(Monetary.getCurrency("EUR")));
+                        .filtered().by(Monetary.getCurrency("USD")));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersDateSetAttributes() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDate(ATTR_NAME_DATE_SET)
-                        .filtered().by(LocalDate.parse("2001-09-11")));
+                        .filtered().by(LocalDate.parse("2002-10-12")));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDate(ATTR_NAME_DATE_SET)
-                        .filtered().byLessThanOrEqualTo(LocalDate.parse("2001-09-11")));
+                        .filtered().byGreaterThanOrEqualTo(LocalDate.parse("2002-10-12")));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersTimeSetAttributes() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofTime(ATTR_NAME_TIME_SET)
-                        .filtered().by(LocalTime.parse("22:05:09.203")));
+                        .filtered().by(LocalTime.parse("23:06:10.204")));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofTime(ATTR_NAME_TIME_SET)
-                        .filtered().byLessThanOrEqualTo(LocalTime.parse("22:05:09.203")));
+                        .filtered().byGreaterThanOrEqualTo(LocalTime.parse("23:06:10.204")));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersDateTimeSetAttributes() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME_SET)
-                        .filtered().by(ZonedDateTime.parse("2001-09-11T22:05:09.203+00:00")));
+                        .filtered().by(ZonedDateTime.parse("2002-10-12T23:06:10.204+00:00")));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME_SET)
-                        .filtered().byLessThanOrEqualTo(ZonedDateTime.parse("2001-09-11T22:05:09.203+00:00")));
+                        .filtered().byGreaterThanOrEqualTo(ZonedDateTime.parse("2002-10-12T23:06:10.204+00:00")));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void filtersReferenceSetAttributes() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofProductReference(ATTR_NAME_REF_SET)
-                        .filtered().by(productSomeId));
+                        .filtered().by(productOtherId));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
