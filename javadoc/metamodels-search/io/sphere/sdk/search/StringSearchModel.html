@@ -163,15 +163,19 @@ implements <a href="../../../../io/sphere/sdk/search/TermModel.html" title="inte
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,java.lang.String&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#facetOf--">facetOf</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#faceted--">faceted</a></span>()</code>
+<div class="block">Eventually generates an expression to obtain the facets of the attribute for certain values.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="class in io.sphere.sdk.search">FilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,java.lang.String&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#filterBy--">filterBy</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#filtered--">filtered</a></span>()</code>
+<div class="block">Eventually generates an expression to filter elements by certain values.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#sort-S-">sort</a></span>(<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">S</a>&nbsp;sortDirection)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#sorted-S-">sorted</a></span>(<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">S</a>&nbsp;sortDirection)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -235,44 +239,52 @@ implements <a href="../../../../io/sphere/sdk/search/TermModel.html" title="inte
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="filterBy--">
+<a name="filtered--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>filterBy</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="class in io.sphere.sdk.search">FilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,java.lang.String&gt;&nbsp;filterBy()</pre>
+<h4>filtered</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="class in io.sphere.sdk.search">FilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,java.lang.String&gt;&nbsp;filtered()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html#filtered--">TermModel</a></code></span></div>
+<div class="block">Eventually generates an expression to filter elements by certain values.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#filterBy--">filterBy</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,java.lang.String&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#filtered--">filtered</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,java.lang.String&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the model to specify the values to filter by</dd>
 </dl>
 </li>
 </ul>
-<a name="facetOf--">
+<a name="faceted--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>facetOf</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,java.lang.String&gt;&nbsp;facetOf()</pre>
+<h4>faceted</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,java.lang.String&gt;&nbsp;faceted()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html#faceted--">TermModel</a></code></span></div>
+<div class="block">Eventually generates an expression to obtain the facets of the attribute for certain values.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#facetOf--">facetOf</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,java.lang.String&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#faceted--">faceted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,java.lang.String&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the model to specify the values from which to obtain the facets</dd>
 </dl>
 </li>
 </ul>
-<a name="sort-io.sphere.sdk.search.SearchSortDirection-">
+<a name="sorted-io.sphere.sdk.search.SearchSortDirection-">
 <!--   -->
-</a><a name="sort-S-">
+</a><a name="sorted-S-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>sort</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;sort(<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">S</a>&nbsp;sortDirection)</pre>
+<h4>sorted</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;sorted(<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">S</a>&nbsp;sortDirection)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html#sort-S-">sort</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">S</a> extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html#sorted-S-">sorted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">S</a> extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

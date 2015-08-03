@@ -167,11 +167,15 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html#exactly-java.lang.Iterable-">exactly</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html#by-java.lang.Iterable-">by</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with the given attribute values.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html#exactly-V-">exactly</a></span>(<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html#by-V-">by</a></span>(<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</code>
+<div class="block">Generates an expression to select all elements with the given attribute value.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -233,24 +237,40 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="exactly-java.lang.Object-">
+<a name="by-java.lang.Object-">
 <!--   -->
-</a><a name="exactly-V-">
+</a><a name="by-V-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>exactly</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&nbsp;exactly(<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</pre>
+<h4>by</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&nbsp;by(<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</pre>
+<div class="block">Generates an expression to select all elements with the given attribute value.
+ For example: filtering by "red" would select only those elements with "red" value.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the value to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a filter expression for the given value</dd>
+</dl>
 </li>
 </ul>
-<a name="exactly-java.lang.Iterable-">
+<a name="by-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>exactly</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&nbsp;exactly(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<h4>by</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&nbsp;by(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block">Generates an expression to select all elements with the given attribute values.
+ For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - the values to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a filter expression for the given values</dd>
+</dl>
 </li>
 </ul>
 </li>

@@ -164,36 +164,52 @@ extends <a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="class in io.sphere.sdk.search">TermFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#all--">all</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#byAllTerms--">byAllTerms</a></span>()</code>
+<div class="block">Generates an expression to obtain the facets of the attribute for all values.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#greaterThanOrEqualTo-V-">greaterThanOrEqualTo</a></span>(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#byGreaterThanOrEqualTo-V-">byGreaterThanOrEqualTo</a></span>(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</code>
+<div class="block">Generates an expression to obtain the facet of the attribute for only values greater than or equal to the given value.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#lessThan-V-">lessThan</a></span>(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#byLessThan-V-">byLessThan</a></span>(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</code>
+<div class="block">Generates an expression to obtain the facet of the attribute for only values less than the given value.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#only-java.lang.Iterable-">only</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;values)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#byRange-io.sphere.sdk.search.FacetRange-">byRange</a></span>(<a href="../../../../io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;range)</code>
+<div class="block">Generates an expression to obtain the facet of the attribute for only the given range.</div>
+</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#only-V-">only</a></span>(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#byRange-java.lang.Iterable-">byRange</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&gt;&nbsp;ranges)</code>
+<div class="block">Generates an expression to obtain the facet of the attribute for only the given ranges.</div>
+</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#range-io.sphere.sdk.search.FacetRange-">range</a></span>(<a href="../../../../io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;range)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#byRange-V-V-">byRange</a></span>(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;lowerEndpoint,
+       <a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;upperEndpoint)</code>
+<div class="block">Generates an expression to obtain the facet of the attribute for only the given range.</div>
+</td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#range-java.lang.Iterable-">range</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&gt;&nbsp;ranges)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#byTerm-java.lang.Iterable-">byTerm</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to obtain the facets of the attribute for only the given values.</div>
+</td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#range-V-V-">range</a></span>(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;lowerEndpoint,
-     <a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;upperEndpoint)</code>&nbsp;</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html#byTerm-V-">byTerm</a></span>(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</code>
+<div class="block">Generates an expression to obtain the facet of the attribute for only the given value.</div>
+</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="class in io.sphere.sdk.search">RangedFacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;</code></td>
@@ -255,97 +271,157 @@ extends <a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="
 </dl>
 </li>
 </ul>
-<a name="all--">
+<a name="byAllTerms--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>all</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="class in io.sphere.sdk.search">TermFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;all()</pre>
+<h4>byAllTerms</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="class in io.sphere.sdk.search">TermFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;byAllTerms()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#byAllTerms--">FacetSearchModel</a></code></span></div>
+<div class="block">Generates an expression to obtain the facets of the attribute for all values.
+ For example: a possible faceted classification could be ["red": 4, "yellow": 2, "blue": 1].</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#all--">all</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#byAllTerms--">byAllTerms</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a facet expression for all values</dd>
 </dl>
 </li>
 </ul>
-<a name="only-java.lang.Comparable-">
+<a name="byTerm-java.lang.Comparable-">
 <!--   -->
-</a><a name="only-V-">
+</a><a name="byTerm-V-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>only</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;only(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</pre>
+<h4>byTerm</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;byTerm(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#byTerm-V-">FacetSearchModel</a></code></span></div>
+<div class="block">Generates an expression to obtain the facet of the attribute for only the given value.
+ For example: a possible faceted classification for "red" could be ["red": 4].</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#only-V-">only</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#byTerm-V-">byTerm</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the value from which to obtain the facet</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a facet expression for only the given value</dd>
 </dl>
 </li>
 </ul>
-<a name="only-java.lang.Iterable-">
+<a name="byTerm-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>only</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;only(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;values)</pre>
+<h4>byTerm</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;byTerm(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#byTerm-java.lang.Iterable-">FacetSearchModel</a></code></span></div>
+<div class="block">Generates an expression to obtain the facets of the attribute for only the given values.
+ For example: a possible faceted classification for ["red", "blue"] could be ["red": 4, "blue": 1].</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#only-java.lang.Iterable-">only</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#byTerm-java.lang.Iterable-">byTerm</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&gt;</code></dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - the values from which to obtain the facets</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a facet expression for only the given values</dd>
 </dl>
 </li>
 </ul>
-<a name="range-io.sphere.sdk.search.FacetRange-">
+<a name="byRange-io.sphere.sdk.search.FacetRange-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>range</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;range(<a href="../../../../io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;range)</pre>
+<h4>byRange</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;byRange(<a href="../../../../io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;range)</pre>
+<div class="block">Generates an expression to obtain the facet of the attribute for only the given range.
+ For example: a possible faceted classification for [3, 5] could be ["3": 4, "5": 2, "4": 1].</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>range</code> - the range of values to be present in the facet</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a facet expression for only the given range</dd>
+</dl>
 </li>
 </ul>
-<a name="range-java.lang.Iterable-">
+<a name="byRange-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>range</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;range(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&gt;&nbsp;ranges)</pre>
+<h4>byRange</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;byRange(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&gt;&nbsp;ranges)</pre>
+<div class="block">Generates an expression to obtain the facet of the attribute for only the given ranges.
+ For example: a possible faceted classification for [[3, 5], [8, 9]] could be ["3": 4, "9": 3, "5": 2, "4": 1].</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>ranges</code> - the ranges of values to be present in the facet</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a facet expression for only the given ranges</dd>
+</dl>
 </li>
 </ul>
-<a name="range-java.lang.Comparable-java.lang.Comparable-">
+<a name="byRange-java.lang.Comparable-java.lang.Comparable-">
 <!--   -->
-</a><a name="range-V-V-">
+</a><a name="byRange-V-V-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>range</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;range(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;lowerEndpoint,
-                                       <a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;upperEndpoint)</pre>
+<h4>byRange</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;byRange(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;lowerEndpoint,
+                                         <a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;upperEndpoint)</pre>
+<div class="block">Generates an expression to obtain the facet of the attribute for only the given range.
+ For example: a possible faceted classification for [3, 5] could be ["3": 4, "5": 2, "4": 1].</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>lowerEndpoint</code> - the lower endpoint of the range of values to be present in the facet, inclusive</dd>
+<dd><code>upperEndpoint</code> - the upper endpoint of the range of values to be present in the facet, inclusive</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a facet expression for only the given range</dd>
+</dl>
 </li>
 </ul>
-<a name="greaterThanOrEqualTo-java.lang.Comparable-">
+<a name="byGreaterThanOrEqualTo-java.lang.Comparable-">
 <!--   -->
-</a><a name="greaterThanOrEqualTo-V-">
+</a><a name="byGreaterThanOrEqualTo-V-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>greaterThanOrEqualTo</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;greaterThanOrEqualTo(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</pre>
+<h4>byGreaterThanOrEqualTo</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;byGreaterThanOrEqualTo(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</pre>
+<div class="block">Generates an expression to obtain the facet of the attribute for only values greater than or equal to the given value.
+ For example: a possible faceted classification for [3, +∞) could be ["15": 6, "3": 4, "9": 3, "5": 2, "4": 1].</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the lower endpoint of the range [v, +∞)</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a facet expression for only the given range</dd>
+</dl>
 </li>
 </ul>
-<a name="lessThan-java.lang.Comparable-">
+<a name="byLessThan-java.lang.Comparable-">
 <!--   -->
-</a><a name="lessThan-V-">
+</a><a name="byLessThan-V-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>lessThan</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;lessThan(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</pre>
+<h4>byLessThan</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&gt;&nbsp;byLessThan(<a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="type parameter in RangedFacetSearchModel">V</a>&nbsp;value)</pre>
+<div class="block">Generates an expression to obtain the facet of the attribute for only values less than the given value.
+ For example: a possible faceted classification for (-∞, 5] could be ["3": 4, "1": 3, "5": 2, "4": 1].</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the upper endpoint of the range (-∞, v]</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a facet expression for only the given range</dd>
+</dl>
 </li>
 </ul>
 </li>
