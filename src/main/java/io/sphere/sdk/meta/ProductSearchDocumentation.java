@@ -208,7 +208,7 @@ import io.sphere.sdk.models.Base;
 
  <p>The {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} class offers a domain-specific language (DSL) to build expressions accepted by the search endpoint, which can be otherwise a bit complex to write. In particular, this DSL allows you to build expressions for <a href="#sorting">sorting</a>, <a href="#filtering">filtering</a> and <a href="#faceting">faceting</a>, as it is demonstrated in the corresponding sections.</p>
 
- <p>In order to build an expression, first you will be required to select the field you want to search for (e.g. price or a custom attribute). In the case of custom attribtues, you also need to provide the attribute name and select the primary type of the attribute. Notice that {@link io.sphere.sdk.products.search.ProductAttributeSearchModel#ofBoolean(java.lang.String)} method enables search on both boolean and boolean set attributes.</p>
+ <p>In order to build an expression, first you will be required to select the field you want to search for (e.g. price or a custom attribute). In the case of custom attributes, you also need to provide the attribute name and select the primary type of the attribute. Notice that {@link io.sphere.sdk.products.search.ProductAttributeSearchModel#ofBoolean(java.lang.String)} method enables search on both boolean and boolean set attributes.</p>
 
  <p>The next step is selecting the type of expression you want to obtain: sort, filter or facet. Finally, you need to indicate the criteria used for the desired operation.</p>
 
