@@ -164,11 +164,11 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html#getId--">getId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>int</code></td>
+<td class="colFirst"><code>java.lang.Integer</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html#getTtlMinutes--">getTtlMinutes</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>long</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html#getVersion--">getVersion</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
@@ -179,8 +179,8 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html#of-io.sphere.sdk.models.Versioned-int-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer,
-  int&nbsp;timeToLiveInMinutes)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html#of-io.sphere.sdk.models.Versioned-java.lang.Integer-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer,
+  java.lang.Integer&nbsp;timeToLiveInMinutes)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerToken.html" title="interface in io.sphere.sdk.customers">CustomerToken</a>&gt;</code></td>
@@ -199,7 +199,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></h3>
-<code><a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -236,14 +236,14 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-io.sphere.sdk.models.Versioned-int-">
+<a name="of-io.sphere.sdk.models.Versioned-java.lang.Integer-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a>&nbsp;of(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer,
-                                                 int&nbsp;timeToLiveInMinutes)</pre>
+                                                 java.lang.Integer&nbsp;timeToLiveInMinutes)</pre>
 </li>
 </ul>
 <a name="getId--">
@@ -261,7 +261,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <ul class="blockList">
 <li class="blockList">
 <h4>getVersion</h4>
-<pre>public&nbsp;long&nbsp;getVersion()</pre>
+<pre>public&nbsp;java.lang.Long&nbsp;getVersion()</pre>
 </li>
 </ul>
 <a name="getTtlMinutes--">
@@ -270,7 +270,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <ul class="blockList">
 <li class="blockList">
 <h4>getTtlMinutes</h4>
-<pre>public&nbsp;int&nbsp;getTtlMinutes()</pre>
+<pre>public&nbsp;java.lang.Integer&nbsp;getTtlMinutes()</pre>
 </li>
 </ul>
 <a name="typeReference--">

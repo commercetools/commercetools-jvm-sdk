@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":9};
+var methods = {"i0":10,"i1":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -102,7 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</li>
+<li><a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.products.commands.updateactions.SetMetaKeywords</li>
@@ -116,16 +116,20 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">SetMetaKeywords</span>
-extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
+extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Sets the SEO attribute keywords.
 
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setMetaKeywords--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
     final LocalizedStrings metaKeywords = LocalizedStrings
             .of(ENGLISH, "Platform-as-a-Service, e-commerce, http, api, tool");
-    final SetMetaKeywords action = SetMetaKeywords.of(metaKeywords, STAGED_AND_CURRENT);
+    final SetMetaKeywords action = SetMetaKeywords.of(metaKeywords);
 
     final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, action));
 
@@ -141,7 +145,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
             "SPHERE.IO&amp;#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
             "Platform-as-a-Service, e-commerce, http, api, tool");
     final List&lt;UpdateAction&lt;Product&gt;&gt; updateActions =
-            MetaAttributesUpdateActions.of(metaAttributes, STAGED_AND_CURRENT);
+            MetaAttributesUpdateActions.of(metaAttributes);
     final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, updateActions));
 
     final ProductData productData = updatedProduct.getMasterData().getStaged();
@@ -174,21 +178,16 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaKeywords.html#getMetaKeywords--">getMetaKeywords</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaKeywords.html#isStaged--">isStaged</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i2" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaKeywords</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaKeywords.html#of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;metaKeywords,
-  <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaKeywords.html#of-io.sphere.sdk.models.LocalizedStrings-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;metaKeywords)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.UpdateAction">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.UpdateActionImpl">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a></h3>
-<code><a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html#getAction--">getAction</a></code></li>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a></h3>
+<code><a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html#getAction--">getAction</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -218,34 +217,24 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.products.ProductUpdateScope-">
+<a name="of-io.sphere.sdk.models.LocalizedStrings-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
 <pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetMetaKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaKeywords</a>&nbsp;of(@Nullable
-                                 <a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;metaKeywords,
-                                 <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
+                                 <a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;metaKeywords)</pre>
 </li>
 </ul>
 <a name="getMetaKeywords--">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>getMetaKeywords</h4>
 <pre>@Nullable
 public&nbsp;<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getMetaKeywords()</pre>
-</li>
-</ul>
-<a name="isStaged--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>isStaged</h4>
-<pre>public&nbsp;boolean&nbsp;isStaged()</pre>
 </li>
 </ul>
 </li>

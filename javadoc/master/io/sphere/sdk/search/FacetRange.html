@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":10,"i2":10,"i3":9,"i4":10,"i5":10,"i6":9,"i7":10,"i8":10,"i9":10,"i10":10};
+var methods = {"i0":9,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":9,"i8":10,"i9":10,"i10":9,"i11":10,"i12":10,"i13":10,"i14":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -180,41 +180,65 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#isLowerBoundExclusive--">isLowerBoundExclusive</a></span>()</code>
+<div class="block">Determines whether the lower bound is exclusive bounded</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#isLowerBoundInclusive--">isLowerBoundInclusive</a></span>()</code>
+<div class="block">Determines whether the lower bound is inclusive bounded</div>
+</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#isUpperBoundExclusive--">isUpperBoundExclusive</a></span>()</code>
+<div class="block">Determines whether the upper bound is exclusive bounded</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#isUpperBoundInclusive--">isUpperBoundInclusive</a></span>()</code>
+<div class="block">Determines whether the upper bound is inclusive bounded</div>
+</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static &lt;T extends java.lang.Comparable&lt;? super T&gt;&gt;<br><a href="../../../../io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#lessThan-T-">lessThan</a></span>(T&nbsp;upperEndpoint)</code>
 <div class="block">Creates an interval with all values that are strictly less than the given endpoint.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/Bound.html" title="class in io.sphere.sdk.search">Bound</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#lowerBound--">lowerBound</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#lowerEndpoint--">lowerEndpoint</a></span>()</code>
 <div class="block">Gets the endpoint of the lower bound, if defined.</div>
 </td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>static &lt;T extends java.lang.Comparable&lt;? super T&gt;&gt;<br><a href="../../../../io/sphere/sdk/search/FacetRange.html" title="class in io.sphere.sdk.search">FacetRange</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#of-T-T-">of</a></span>(T&nbsp;lowerEndpoint,
   T&nbsp;upperEndpoint)</code>
 <div class="block">Creates an interval with the given lower and upper endpoints.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#serialize-java.util.function.Function-">serialize</a></span>(java.util.function.Function&lt;T,java.lang.String&gt;&nbsp;serializer)</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/Bound.html" title="class in io.sphere.sdk.search">Bound</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#upperBound--">upperBound</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetRange.html#upperEndpoint--">upperEndpoint</a></span>()</code>
 <div class="block">Gets the endpoint of the upper bound, if defined.</div>
@@ -388,6 +412,62 @@ public&nbsp;T&nbsp;upperEndpoint()</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the upper endpoint, or absent if the range has no upper bound.</dd>
+</dl>
+</li>
+</ul>
+<a name="isUpperBoundExclusive--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isUpperBoundExclusive</h4>
+<pre>public&nbsp;boolean&nbsp;isUpperBoundExclusive()</pre>
+<div class="block">Determines whether the upper bound is exclusive bounded</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the upper bound is exclusive, false if the upper bound is inclusive or does not exist</dd>
+</dl>
+</li>
+</ul>
+<a name="isUpperBoundInclusive--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isUpperBoundInclusive</h4>
+<pre>public&nbsp;boolean&nbsp;isUpperBoundInclusive()</pre>
+<div class="block">Determines whether the upper bound is inclusive bounded</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the upper bound is inclusive, false if the upper bound is exclusive or does not exist</dd>
+</dl>
+</li>
+</ul>
+<a name="isLowerBoundExclusive--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isLowerBoundExclusive</h4>
+<pre>public&nbsp;boolean&nbsp;isLowerBoundExclusive()</pre>
+<div class="block">Determines whether the lower bound is exclusive bounded</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the lower bound is exclusive, false if the lower bound is inclusive or does not exist</dd>
+</dl>
+</li>
+</ul>
+<a name="isLowerBoundInclusive--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>isLowerBoundInclusive</h4>
+<pre>public&nbsp;boolean&nbsp;isLowerBoundInclusive()</pre>
+<div class="block">Determines whether the lower bound is inclusive bounded</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>true if the lower bound is inclusive, false if the lower bound is exclusive or does not exist</dd>
 </dl>
 </li>
 </ul>

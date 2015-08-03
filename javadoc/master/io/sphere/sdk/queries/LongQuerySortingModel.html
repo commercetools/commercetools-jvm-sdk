@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6,"i12":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModelImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/LongQuerySortingModel.html" target="_top">Frames</a></li>
@@ -102,10 +102,6 @@ var activeTableTab = "activeTableTab";
 <dt>All Superinterfaces:</dt>
 <dd><a href="../../../../io/sphere/sdk/queries/EqualityQueryModel.html" title="interface in io.sphere.sdk.queries">EqualityQueryModel</a>&lt;T,java.lang.Long&gt;, <a href="../../../../io/sphere/sdk/queries/InequalityQueryModel.html" title="interface in io.sphere.sdk.queries">InequalityQueryModel</a>&lt;T,java.lang.Long&gt;, <a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;T,java.lang.Long&gt;, <a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;T,java.lang.Long&gt;, <a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;T,java.lang.Long&gt;, <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="interface in io.sphere.sdk.queries">QueryModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/queries/QuerySortingModel.html" title="interface in io.sphere.sdk.queries">QuerySortingModel</a>&lt;T&gt;</dd>
 </dl>
-<dl>
-<dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModelImpl.html" title="class in io.sphere.sdk.queries">LongQuerySortingModelImpl</a></dd>
-</dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">LongQuerySortingModel&lt;T&gt;</span>
@@ -146,39 +142,29 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="inter
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isIn-java.lang.Long-java.lang.Long...-">isIn</a></span>(java.lang.Long&nbsp;arg0,
-    java.lang.Long...&nbsp;args)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isLessThan-java.lang.Long-">isLessThan</a></span>(java.lang.Long&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isLessThan-java.lang.Long-">isLessThan</a></span>(java.lang.Long&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isLessThanOrEqualTo-java.lang.Long-">isLessThanOrEqualTo</a></span>(java.lang.Long&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isLessThanOrEqualTo-java.lang.Long-">isLessThanOrEqualTo</a></span>(java.lang.Long&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isNot-java.lang.Long-">isNot</a></span>(java.lang.Long&nbsp;i)</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isNot-java.lang.Long-">isNot</a></span>(java.lang.Long&nbsp;i)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isNotIn-java.lang.Iterable-">isNotIn</a></span>(java.lang.Iterable&lt;java.lang.Long&gt;&nbsp;args)</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isNotIn-java.lang.Iterable-">isNotIn</a></span>(java.lang.Iterable&lt;java.lang.Long&gt;&nbsp;args)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isNotPresent--">isNotPresent</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isNotIn-java.lang.Long-java.lang.Long...-">isNotIn</a></span>(java.lang.Long&nbsp;arg0,
-       java.lang.Long...&nbsp;args)</code>&nbsp;</td>
-</tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isNotPresent--">isNotPresent</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#isPresent--">isPresent</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries">QuerySort</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html#sort-io.sphere.sdk.queries.QuerySortDirection-">sort</a></span>(<a href="../../../../io/sphere/sdk/queries/QuerySortDirection.html" title="enum in io.sphere.sdk.queries">QuerySortDirection</a>&nbsp;sortDirection)</code>&nbsp;</td>
 </tr>
@@ -289,20 +275,6 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="inter
 </dl>
 </li>
 </ul>
-<a name="isNotIn-java.lang.Long-java.lang.Long...-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isNotIn</h4>
-<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;&nbsp;isNotIn(java.lang.Long&nbsp;arg0,
-                          java.lang.Long...&nbsp;args)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html#isNotIn-V-V...-">isNotIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>,java.lang.Long&gt;</code></dd>
-</dl>
-</li>
-</ul>
 <a name="isNotIn-java.lang.Iterable-">
 <!--   -->
 </a>
@@ -326,20 +298,6 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="inter
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html#isNotPresent--">isNotPresent</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" title="interface in io.sphere.sdk.queries">OptionalQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="isIn-java.lang.Long-java.lang.Long...-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isIn</h4>
-<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>&gt;&nbsp;isIn(java.lang.Long&nbsp;arg0,
-                       java.lang.Long...&nbsp;args)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html#isIn-V-V...-">isIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/LongQuerySortingModel.html" title="type parameter in LongQuerySortingModel">T</a>,java.lang.Long&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -409,8 +367,8 @@ extends <a href="../../../../io/sphere/sdk/queries/QueryModel.html" title="inter
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/queries/LongQuerySortingModelImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/LocalizedStringsQuerySortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/MetaModelFetchDsl.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/LongQuerySortingModel.html" target="_top">Frames</a></li>

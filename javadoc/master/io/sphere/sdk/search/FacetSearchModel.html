@@ -171,15 +171,21 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="class in io.sphere.sdk.search">TermFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#all--">all</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#byAllTerms--">byAllTerms</a></span>()</code>
+<div class="block">Generates an expression to obtain the facets of the attribute for all values.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#only-java.lang.Iterable-">only</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;values)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#byTerm-java.lang.Iterable-">byTerm</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to obtain the facets of the attribute for only the given values.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#only-V-">only</a></span>(<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html#byTerm-V-">byTerm</a></span>(<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&nbsp;value)</code>
+<div class="block">Generates an expression to obtain the facet of the attribute for only the given value.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;</code></td>
@@ -264,33 +270,55 @@ protected final&nbsp;java.lang.String alias</pre>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;withAlias(java.lang.String&nbsp;alias)</pre>
 </li>
 </ul>
-<a name="all--">
+<a name="byAllTerms--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>all</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="class in io.sphere.sdk.search">TermFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;all()</pre>
+<h4>byAllTerms</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="class in io.sphere.sdk.search">TermFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;byAllTerms()</pre>
+<div class="block">Generates an expression to obtain the facets of the attribute for all values.
+ For example: a possible faceted classification could be ["red": 4, "yellow": 2, "blue": 1].</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a facet expression for all values</dd>
+</dl>
 </li>
 </ul>
-<a name="only-java.lang.Object-">
+<a name="byTerm-java.lang.Object-">
 <!--   -->
-</a><a name="only-V-">
+</a><a name="byTerm-V-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>only</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;only(<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&nbsp;value)</pre>
+<h4>byTerm</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;byTerm(<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&nbsp;value)</pre>
+<div class="block">Generates an expression to obtain the facet of the attribute for only the given value.
+ For example: a possible faceted classification for "red" could be ["red": 4].</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>value</code> - the value from which to obtain the facet</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a facet expression for only the given value</dd>
+</dl>
 </li>
 </ul>
-<a name="only-java.lang.Iterable-">
+<a name="byTerm-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>only</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;only(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;values)</pre>
+<h4>byTerm</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;byTerm(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="type parameter in FacetSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block">Generates an expression to obtain the facets of the attribute for only the given values.
+ For example: a possible faceted classification for ["red", "blue"] could be ["red": 4, "blue": 1].</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - the values from which to obtain the facets</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a facet expression for only the given values</dd>
+</dl>
 </li>
 </ul>
 </li>

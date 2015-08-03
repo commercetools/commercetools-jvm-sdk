@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -104,11 +104,11 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="interface in io.sphere.sdk.search">MetaModelSearchDsl</a>&lt;T,C,S,E&gt;, <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T,C&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearch</a>, <a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dd>
 </dl>
 <hr>
 <br>
@@ -120,6 +120,21 @@ extends <a href="../../../../io/sphere/sdk/search/Search.html" title="interface 
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field.summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<ul class="blockList">
+<li class="blockList"><a name="fields.inherited.from.class.io.sphere.sdk.search.Search">
+<!--   -->
+</a>
+<h3>Fields inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/Search.html#MAX_OFFSET">MAX_OFFSET</a>, <a href="../../../../io/sphere/sdk/search/Search.html#MIN_OFFSET">MIN_OFFSET</a></code></li>
+</ul>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -133,35 +148,39 @@ extends <a href="../../../../io/sphere/sdk/search/Search.html" title="interface 
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#facets--">facets</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#filterFacets--">filterFacets</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#facetFilters--">facetFilters</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#filterQueries--">filterQueries</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#facets--">facets</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#filterResults--">filterResults</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a></span>()</code>&nbsp;</td>
 </tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#queryFilters--">queryFilters</a></span>()</code>&nbsp;</td>
+</tr>
 <tr id="i6" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#resultFilters--">resultFilters</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#sort--">sort</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a></code></td>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models">LocalizedStringsEntry</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
@@ -170,7 +189,7 @@ extends <a href="../../../../io/sphere/sdk/search/Search.html" title="interface 
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a></h3>
-<code><a href="../../../../io/sphere/sdk/search/Search.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a></code></li>
+<code><a href="../../../../io/sphere/sdk/search/Search.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a>, <a href="../../../../io/sphere/sdk/search/Search.html#toSearch--">toSearch</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.client.SphereRequest">
@@ -200,7 +219,7 @@ extends <a href="../../../../io/sphere/sdk/search/Search.html" title="interface 
 <li class="blockList">
 <h4>text</h4>
 <pre>@Nullable
-<a href="../../../../io/sphere/sdk/search/SearchText.html" title="class in io.sphere.sdk.search">SearchText</a>&nbsp;text()</pre>
+<a href="../../../../io/sphere/sdk/models/LocalizedStringsEntry.html" title="class in io.sphere.sdk.models">LocalizedStringsEntry</a>&nbsp;text()</pre>
 </li>
 </ul>
 <a name="facets--">
@@ -212,31 +231,31 @@ extends <a href="../../../../io/sphere/sdk/search/Search.html" title="interface 
 <pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;&nbsp;facets()</pre>
 </li>
 </ul>
-<a name="filterResults--">
+<a name="resultFilters--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>filterResults</h4>
-<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;&nbsp;filterResults()</pre>
+<h4>resultFilters</h4>
+<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;&nbsp;resultFilters()</pre>
 </li>
 </ul>
-<a name="filterQueries--">
+<a name="queryFilters--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>filterQueries</h4>
-<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;&nbsp;filterQueries()</pre>
+<h4>queryFilters</h4>
+<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;&nbsp;queryFilters()</pre>
 </li>
 </ul>
-<a name="filterFacets--">
+<a name="facetFilters--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>filterFacets</h4>
-<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;&nbsp;filterFacets()</pre>
+<h4>facetFilters</h4>
+<pre>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="type parameter in EntitySearch">T</a>&gt;&gt;&nbsp;facetFilters()</pre>
 </li>
 </ul>
 <a name="sort--">
@@ -261,11 +280,20 @@ java.lang.Long&nbsp;limit()</pre>
 <a name="offset--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>offset</h4>
 <pre>@Nullable
 java.lang.Long&nbsp;offset()</pre>
+</li>
+</ul>
+<a name="endpoint--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>endpoint</h4>
+<pre>java.lang.String&nbsp;endpoint()</pre>
 </li>
 </ul>
 </li>

@@ -519,7 +519,7 @@ assertThat(table).isEqualTo(expected);
 final int masterVariantId = 1;
 
 final AttributeDraft attributeDraft = AttributeDraft.of(ISBN_ATTR_NAME, "978-3-86680-192-8");
-final SetAttribute updateAction = SetAttribute.of(masterVariantId, attributeDraft, STAGED_AND_CURRENT);
+final SetAttribute updateAction = SetAttribute.of(masterVariantId, attributeDraft);
 
 final Product updatedProduct = execute(ProductUpdateCommand.of(product, updateAction));
 
@@ -532,7 +532,7 @@ assertThat(masterVariant.findAttribute(ISBN_ATTR_NAME, AttributeAccess.ofText())
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-updateAttributes--%s" class=code-example><pre><code class='java'>final Product product = createProduct();
 final int masterVariantId = 1;
 final Function&lt;AttributeDraft, SetAttribute&gt; draft = attrDraft -&gt;
-        SetAttribute.of(masterVariantId, attrDraft, STAGED_AND_CURRENT);
+        SetAttribute.of(masterVariantId, attrDraft);
 final List&lt;SetAttribute&gt; updateActions = asList(
         draft.apply(AttributeDraft.of(COLOR_ATTR_NAME, "red")),//don't forget: enum like =&gt; use only keys
         draft.apply(AttributeDraft.of(SIZE_ATTR_NAME, "M")),
@@ -560,7 +560,7 @@ assertThat(masterVariant.findAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney())
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-updateWithWrongType--%s" class=code-example><pre><code class='java'>final Product product = createProduct();
 assertThatThrownBy(() -&gt; execute(ProductUpdateCommand.of(product,
-        SetAttribute.of(1, AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, "cold"), STAGED_AND_CURRENT))))
+        SetAttribute.of(1, AttributeDraft.of(LAUNDRY_SYMBOLS_ATTR_NAME, "cold")))))
         .isInstanceOf(ErrorResponseException.class)
         .matches(e -&gt; ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>

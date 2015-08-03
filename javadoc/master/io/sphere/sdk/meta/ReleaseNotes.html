@@ -275,7 +275,7 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
  <li class=new-in-release>Added the nested attributes: <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofNested--"><code>AttributeAccess.ofNested()</code></a> + <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofNestedSet--"><code>AttributeAccess.ofNestedSet()</code></a>.</li>
  <li class=new-in-release>The error JSON body from SPHERE.IO responses can be directly extracted as JSON with <a href="../../../../io/sphere/sdk/client/SphereServiceException.html#getJsonBody--"><code>SphereServiceException.getJsonBody()</code></a>.</li>
  <li class=new-in-release><a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http"><code>HttpResponse</code></a> also contains <a href="../../../../io/sphere/sdk/http/HttpHeaders.html" title="class in io.sphere.sdk.http"><code>HttpHeaders</code></a>.</li>
- <li class=new-in-release>Experimental search predicate model <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#model--"><code>ProductProjectionSearch.model()</code></a>. See also <a href="../../../../io/sphere/sdk/meta/ProductSearchDocumentation.html" title="class in io.sphere.sdk.meta"><code>ProductSearchDocumentation</code></a>.</li>
+ <li class=new-in-release>Experimental search filter/facet/sort expression model <a href="../../../../io/sphere/sdk/products/search/ExperimentalProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search"><code>ExperimentalProductProjectionSearchModel</code></a>. See also <a href="../../../../io/sphere/sdk/meta/ProductSearchDocumentation.html" title="class in io.sphere.sdk.meta"><code>ProductSearchDocumentation</code></a>.</li>
  <li class=change-in-release>The <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> creation has been simplified (TextAttributeDefinition, LocalizedStringsAttributeDefinition, ... are just AttributeDefinition), see <a href="../../../../io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="interface in io.sphere.sdk.producttypes.commands"><code>ProductTypeCreateCommand</code></a> how to create them.</li>
  <li class=change-in-release><a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><code>TermFacetResult</code></a> and
  <a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><code>RangeFacetResult</code></a> are using generics.
@@ -304,7 +304,7 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
     <li class=change-in-release><a href="../../../../io/sphere/sdk/meta/ExceptionDocumentation.html" title="class in io.sphere.sdk.meta"><code>Exception hierarchy</code></a>, relocated some exceptions and deleted some.
         <ul>
             <li>Removed SphereBackendException, SphereClientException, JavaConcurrentUtils, Requestable</li>
-            <li>Removed ReferenceExistsException, usage as <a href="../../../../io/sphere/sdk/models/SphereError.html" title="class in io.sphere.sdk.models"><code>SphereError</code></a> from a <a href="../../../../io/sphere/sdk/client/ErrorResponseException.html" title="class in io.sphere.sdk.client"><code>ErrorResponseException</code></a></li>
+            <li>Removed ReferenceExistsException, usage as <code>SphereError</code> from a <a href="../../../../io/sphere/sdk/client/ErrorResponseException.html" title="class in io.sphere.sdk.client"><code>ErrorResponseException</code></a></li>
             <li>JsonParseException is now <a href="../../../../io/sphere/sdk/json/JsonException.html" title="class in io.sphere.sdk.json"><code>JsonException</code></a>.</li>
             <li>InvalidQueryOffsetException is replaced with <code>IllegalArgumentException</code>.</li>
         </ul>
@@ -344,8 +344,8 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/models/Referenceable.html#hasSameIdAs-io.sphere.sdk.models.Referenceable-"><code>Referenceable.hasSameIdAs(io.sphere.sdk.models.Referenceable)</code></a> to check if a similar object has the same ID.</li>
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/attributes/AttributeAccess.html#ofName-java.lang.String-"><code>AttributeAccess.ofName(String)</code></a> as alias to <code>io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)</code>.</li>
 
- <li class=new-in-release>Update action list in update commands do not have the type List&lt;UpdateAction&lt;T&gt;&gt; List&lt;? extends UpdateAction&lt;T&gt;&gt;, so you can pass a list of a subclass of <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands"><code>UpdateAction</code></a>.
- Example: List&lt;ChangeName&gt; can be assigned where ChangeName extends <a href="../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands"><code>UpdateAction</code></a>.</li>
+ <li class=new-in-release>Update action list in update commands do not have the type List&lt;UpdateAction&lt;T&gt;&gt; List&lt;? extends UpdateAction&lt;T&gt;&gt;, so you can pass a list of a subclass of <a href="../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands"><code>UpdateActionImpl</code></a>.
+ Example: List&lt;ChangeName&gt; can be assigned where ChangeName extends <a href="../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands"><code>UpdateActionImpl</code></a>.</li>
 
  <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/models/Address.html#of-com.neovisionaries.i18n.CountryCode-"><code>Address.of(com.neovisionaries.i18n.CountryCode)</code></a>.</li>
  <li class=new-in-release>Added <code>io.sphere.sdk.carts.Cart#getLineItem(String)</code> and <code>io.sphere.sdk.carts.Cart#getCustomLineItem(String)</code> to find items in a cart.</li>
@@ -372,16 +372,16 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
 
 
  <li class=fixed-in-release>Money portions in the taxed price is not null. The method name is now <a href="../../../../io/sphere/sdk/carts/TaxPortion.html#getAmount--"><code>TaxPortion.getAmount()</code></a> instead of <code>getMoney()</code>.</li>
- <li class=fixed-in-release>Fixed JSON serialization and deserialization of <a href="../../../../io/sphere/sdk/models/ImageDimensions.html" title="class in io.sphere.sdk.models"><code>ImageDimensions</code></a> which caused adding external images to a product to fail.</li>
+ <li class=fixed-in-release>Fixed JSON serialization and deserialization of <code>ImageDimensions</code> which caused adding external images to a product to fail.</li>
  </ul>
 
  <h3>1.0.0-M9</h3>
  <ul>
  <li>Added <a href="../../../../io/sphere/sdk/meta/KnownIssues.html" title="class in io.sphere.sdk.meta"><code>Known Issues</code></a> page.</li>
  <li>Added experimental support for uploading product images in variants. See <code>io.sphere.sdk.products.commands.ExperimentalProductImageUploadCommand</code>.</li>
- <li>Added factory methods for <a href="../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models"><code>Image</code></a>.</li>
- <li><a href="../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models"><code>Image</code></a> contains directly getters for width <a href="../../../../io/sphere/sdk/models/Image.html#getWidth--"><code>Image.getWidth()</code></a>
- and height <a href="../../../../io/sphere/sdk/models/Image.html#getHeight--"><code>Image.getHeight()</code></a>.</li>
+ <li>Added factory methods for <code>Image</code>.</li>
+ <li><code>Image</code> contains directly getters for width <code>Image#getWidth()</code>
+ and height <code>Image#getHeight()</code>.</li>
  <li><a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries"><code>PagedQueryResult</code></a> is constructable for empty results. Before this, the SDK throwed an Exception.</li>
  <li>Fields called <code>quantity</code> are now of type long instead of int.</li>
  <li>Added a documentation page <a href="../../../../io/sphere/sdk/meta/ConstructionDocumentation.html" title="class in io.sphere.sdk.meta"><code>how to construct objects</code></a>.</li>
@@ -409,8 +409,8 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
  <li>Incompatible change: The <a href="../../../../io/sphere/sdk/queries/Fetch.html" title="interface in io.sphere.sdk.queries"><code>Fetch</code></a> classes have been renamed. From FetchRESOURCEByWhatever to RESOURCEFetchByWhatever</li>
  <li>Moved Scala and Play clients out of the Git repository to <a href="https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons">https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons</a>. The artifact ID changed.</li>
  <li><a href="../../../../io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><code>SphereResources</code></a> contains now also a listing of queries and commands for the resources.</li>
- <li>Added <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="class in io.sphere.sdk.products.search"><code>ProductProjectionSearch</code></a> for full-text, filtered and faceted search.</li>
- <li>Incompatible change: <a href="../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products"><code>ProductUpdateScope</code></a> makes it more visible that product update operations can be for only staged or for current and staged. The product update actions will be affected by that.</li>
+ <li>Added <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search"><code>ProductProjectionSearch</code></a> for full-text, filtered and faceted search.</li>
+ <li>Incompatible change: <code>io.sphere.sdk.products.ProductUpdateScope</code> makes it more visible that product update operations can be for only staged or for current and staged. The product update actions will be affected by that.</li>
  <li>Implemented anonymous carts.</li>
  </ul>
 
@@ -461,7 +461,7 @@ assertThat(query.expansionPaths().get(0).toSphereExpand())
  <li>Moved commands and queries to own packages for easier discovery.</li>
  <li>Introduced new predicates for inequality like <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isGreaterThanOrEqualTo-java.lang.String-"><code>StringQueryModel.isGreaterThanOrEqualTo(String)</code></a>,
  <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNot-java.lang.String-"><code>StringQueryModel.isNot(String)</code></a>,
- <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotIn-java.lang.String-java.lang.String...-"><code>StringQueryModel.isNotIn(String, String...)</code></a> or <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotPresent--"><code>StringQueryModel.isNotPresent()</code></a>.</li>
+ <code>io.sphere.sdk.queries.StringQueryModel#isNotIn(String, String...)</code> or <a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotPresent--"><code>StringQueryModel.isNotPresent()</code></a>.</li>
  <li>Introduced an unsafe way to create predicates from strings with <a href="../../../../io/sphere/sdk/queries/QueryPredicate.html#of-java.lang.String-"><code>QueryPredicate.of(String)</code></a>.</li>
  </ul>
 

@@ -127,7 +127,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/orders/messages/DeliveryAddedMessage.html" title="class in io.sphere.sdk.orders.messages">DeliveryAddedMessage</a>, <a href="../../../../io/sphere/sdk/messages/MessageImpl.html" title="class in io.sphere.sdk.messages">MessageImpl</a>, <a href="../../../../io/sphere/sdk/orders/messages/OrderCreatedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderCreatedMessage</a>, <a href="../../../../io/sphere/sdk/orders/messages/OrderStateChangedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderStateChangedMessage</a>, <a href="../../../../io/sphere/sdk/orders/messages/ReturnInfoAddedMessage.html" title="class in io.sphere.sdk.orders.messages">ReturnInfoAddedMessage</a>, <a href="../../../../io/sphere/sdk/orders/messages/SimpleOrderMessage.html" title="class in io.sphere.sdk.orders.messages">SimpleOrderMessage</a></dd>
+<dd><a href="../../../../io/sphere/sdk/orders/messages/DeliveryAddedMessage.html" title="class in io.sphere.sdk.orders.messages">DeliveryAddedMessage</a>, <a href="../../../../io/sphere/sdk/messages/MessageImpl.html" title="class in io.sphere.sdk.messages">MessageImpl</a>, <a href="../../../../io/sphere/sdk/orders/messages/OrderCreatedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderCreatedMessage</a>, <a href="../../../../io/sphere/sdk/orders/messages/OrderStateChangedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderStateChangedMessage</a>, <a href="../../../../io/sphere/sdk/orders/messages/ReturnInfoAddedMessage.html" title="class in io.sphere.sdk.orders.messages">ReturnInfoAddedMessage</a></dd>
 </dl>
 <hr>
 <br>
@@ -157,11 +157,11 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#resource">resource</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><code>protected long</code></td>
+<td class="colFirst"><code>protected java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#resourceVersion">resourceVersion</a></span></code>&nbsp;</td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected long</code></td>
+<td class="colFirst"><code>protected java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#sequenceNumber">sequenceNumber</a></span></code>&nbsp;</td>
 </tr>
 <tr class="rowColor">
@@ -183,13 +183,13 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#GenericMessageImpl-java.lang.String-long-java.time.ZonedDateTime-java.time.ZonedDateTime-com.fasterxml.jackson.databind.JsonNode-long-long-java.lang.String-">GenericMessageImpl</a></span>(java.lang.String&nbsp;id,
-                  long&nbsp;version,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#GenericMessageImpl-java.lang.String-java.lang.Long-java.time.ZonedDateTime-java.time.ZonedDateTime-com.fasterxml.jackson.databind.JsonNode-java.lang.Long-java.lang.Long-java.lang.String-">GenericMessageImpl</a></span>(java.lang.String&nbsp;id,
+                  java.lang.Long&nbsp;version,
                   java.time.ZonedDateTime&nbsp;createdAt,
                   java.time.ZonedDateTime&nbsp;lastModifiedAt,
                   com.fasterxml.jackson.databind.JsonNode&nbsp;resource,
-                  long&nbsp;sequenceNumber,
-                  long&nbsp;resourceVersion,
+                  java.lang.Long&nbsp;sequenceNumber,
+                  java.lang.Long&nbsp;resourceVersion,
                   java.lang.String&nbsp;type)</code>&nbsp;</td>
 </tr>
 </table>
@@ -222,11 +222,11 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getResource--">getResource</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>long</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getResourceVersion--">getResourceVersion</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>long</code></td>
+<td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getSequenceNumber--">getSequenceNumber</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
@@ -309,7 +309,7 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <ul class="blockList">
 <li class="blockList">
 <h4>sequenceNumber</h4>
-<pre>protected final&nbsp;long sequenceNumber</pre>
+<pre>protected final&nbsp;java.lang.Long sequenceNumber</pre>
 </li>
 </ul>
 <a name="resource">
@@ -327,7 +327,7 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <ul class="blockList">
 <li class="blockList">
 <h4>resourceVersion</h4>
-<pre>protected final&nbsp;long resourceVersion</pre>
+<pre>protected final&nbsp;java.lang.Long resourceVersion</pre>
 </li>
 </ul>
 <a name="type">
@@ -347,19 +347,19 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="GenericMessageImpl-java.lang.String-long-java.time.ZonedDateTime-java.time.ZonedDateTime-com.fasterxml.jackson.databind.JsonNode-long-long-java.lang.String-">
+<a name="GenericMessageImpl-java.lang.String-java.lang.Long-java.time.ZonedDateTime-java.time.ZonedDateTime-com.fasterxml.jackson.databind.JsonNode-java.lang.Long-java.lang.Long-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>GenericMessageImpl</h4>
 <pre>public&nbsp;GenericMessageImpl(java.lang.String&nbsp;id,
-                          long&nbsp;version,
+                          java.lang.Long&nbsp;version,
                           java.time.ZonedDateTime&nbsp;createdAt,
                           java.time.ZonedDateTime&nbsp;lastModifiedAt,
                           com.fasterxml.jackson.databind.JsonNode&nbsp;resource,
-                          long&nbsp;sequenceNumber,
-                          long&nbsp;resourceVersion,
+                          java.lang.Long&nbsp;sequenceNumber,
+                          java.lang.Long&nbsp;resourceVersion,
                           java.lang.String&nbsp;type)</pre>
 </li>
 </ul>
@@ -377,7 +377,7 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <ul class="blockList">
 <li class="blockList">
 <h4>getResourceVersion</h4>
-<pre>public&nbsp;long&nbsp;getResourceVersion()</pre>
+<pre>public&nbsp;java.lang.Long&nbsp;getResourceVersion()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/messages/Message.html#getResourceVersion--">getResourceVersion</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a></code></dd>
@@ -390,7 +390,7 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <ul class="blockList">
 <li class="blockList">
 <h4>getSequenceNumber</h4>
-<pre>public&nbsp;long&nbsp;getSequenceNumber()</pre>
+<pre>public&nbsp;java.lang.Long&nbsp;getSequenceNumber()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/messages/Message.html#getSequenceNumber--">getSequenceNumber</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a></code></dd>

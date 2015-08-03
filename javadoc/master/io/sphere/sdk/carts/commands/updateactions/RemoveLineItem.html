@@ -102,7 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</li>
+<li><a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.carts.commands.updateactions.RemoveLineItem</li>
@@ -116,10 +116,14 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">RemoveLineItem</span>
-extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
+extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block">Decreases the quantity of the given line item. If after the update the quantity of the line item is not greater than 0 or the quantity is not specified, the line item is removed from the cart.
 
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-removeLineItem--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct(client(), (cart, product) -&gt; {
@@ -183,11 +187,11 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.UpdateAction">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.UpdateActionImpl">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a></h3>
-<code><a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html#getAction--">getAction</a></code></li>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a></h3>
+<code><a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html#getAction--">getAction</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">

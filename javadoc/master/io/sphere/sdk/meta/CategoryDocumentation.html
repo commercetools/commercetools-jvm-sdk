@@ -510,7 +510,7 @@ withProductInCategory(client(), jeansCategory, jeansProduct -&gt; {
     withProductInCategory(client(), tshirtCategory, tshirtProduct -&gt; {
         final PagedQueryResult&lt;ProductProjection&gt; resultForParentCategory =
                 //query for the parent category
-                execute(ProductProjectionQuery.ofStaged().withPredicates(m -&gt; m.categories().isIn(mensClothingCategory)));
+                execute(ProductProjectionQuery.ofStaged().withPredicates(m -&gt; m.categories().isIn(asList(mensClothingCategory))));
         assertThat(resultForParentCategory.getResults())
                 .overridingErrorMessage(
                         "if a product is in a category," +
@@ -518,7 +518,7 @@ withProductInCategory(client(), jeansCategory, jeansProduct -&gt; {
                                 "the query will not find the product")
                 .isEmpty();
 
-        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicates(m -&gt; m.categories().isIn(tshirtCategory, jeansCategory));
+        final ProductProjectionQuery query = ProductProjectionQuery.ofStaged().withPredicates(m -&gt; m.categories().isIn(asList(tshirtCategory, jeansCategory)));
         assertThat(query.predicates().get(0))
                 .isEqualTo(QueryPredicate.of(format("categories(id in (\"%s\", \"%s\"))", tshirtCategory.getId(), jeansCategory.getId())));
         final PagedQueryResult&lt;ProductProjection&gt; resultForDirectCategories =

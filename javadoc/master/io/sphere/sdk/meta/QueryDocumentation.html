@@ -253,7 +253,7 @@ public class CategoryByNameQuery extends Base implements Query&lt;Category&gt; {
 <p>For more advanced queries you have to use the <code>Predicate API</code>. For example, for querying for names you can use:</p>
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-queryByNames--%s" class=code-example><pre><code class='java'>final QueryPredicate&lt;Product&gt; predicate = ProductQueryModel.of().masterData().current().name()
-        .lang(ENGLISH).isIn("blue t-shirt", "blue jeans");
+        .lang(ENGLISH).isIn(asList("blue t-shirt", "blue jeans"));
 final ProductQuery query = ProductQuery.of().withPredicates(predicate);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -262,7 +262,7 @@ final ProductQuery query = ProductQuery.of().withPredicates(predicate);
  You can still create predicates from strings, but you need to escape characters.
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-testX--%s" class=code-example><pre><code class='java'>final QueryPredicate&lt;Product&gt; safePredicate = ProductQueryModel.of().masterData().current().name()
-        .lang(ENGLISH).isIn("blue t-shirt", "blue jeans");
+        .lang(ENGLISH).isIn(asList("blue t-shirt", "blue jeans"));
 final QueryPredicate&lt;Product&gt; unsafePredicate =
         QueryPredicate.of("masterData(current(name(en in (\"blue t-shirt\", \"blue jeans\"))))");
 assertThat(unsafePredicate).isEqualTo(safePredicate);
@@ -289,7 +289,7 @@ final ProductQuery query = ProductQuery.of().withPredicates(nameIsFoo.or(idIsBar
         .lang(ENGLISH).is("foo");
 final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
 final QueryPredicate&lt;Product&gt; isInCat1 = ProductQueryModel.of().masterData().current()
-        .categories().isIn(cat1);
+        .categories().isIn(asList(cat1));
 final ProductQuery query = ProductQuery.of().withPredicates(nameIsFoo.and(isInCat1));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -297,7 +297,7 @@ final ProductQuery query = ProductQuery.of().withPredicates(nameIsFoo.and(isInCa
 
  <div id="io-sphere-sdk-meta-QueryDocumentationTest-predicateAndWithWhereExample--%s" class=code-example><pre><code class='java'>final Reference&lt;Category&gt; cat1 = Category.reference("cat1");
 final QueryPredicate&lt;Product&gt; nameIsFooAndIsInCat1 = ProductQueryModel.of().masterData().current()
-        .where(cur -&gt; cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(cat1)));
+        .where(cur -&gt; cur.name().lang(ENGLISH).is("foo").and(cur.categories().isIn(asList(cat1))));
 final ProductQuery query = ProductQuery.of().withPredicates(nameIsFooAndIsInCat1);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/QueryDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 

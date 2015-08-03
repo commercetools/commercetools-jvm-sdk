@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/queries/SphereQuerySort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/StringQueryModel.html" target="_top">Frames</a></li>
@@ -104,11 +104,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/messages/queries/MessageTypeQueryModel.html" title="interface in io.sphere.sdk.messages.queries">MessageTypeQueryModel</a></dd>
-</dl>
-<dl>
-<dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries">StringQuerySortingModel</a></dd>
+<dd><a href="../../../../io/sphere/sdk/messages/queries/MessageTypeQueryModel.html" title="interface in io.sphere.sdk.messages.queries">MessageTypeQueryModel</a>, <a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">StringQuerySortingModel</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -150,35 +146,25 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isIn-java.lang.String-java.lang.String...-">isIn</a></span>(java.lang.String&nbsp;arg0,
-    java.lang.String...&nbsp;args)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isLessThan-java.lang.String-">isLessThan</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isLessThan-java.lang.String-">isLessThan</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isLessThanOrEqualTo-java.lang.String-">isLessThanOrEqualTo</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isLessThanOrEqualTo-java.lang.String-">isLessThanOrEqualTo</a></span>(java.lang.String&nbsp;value)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNot-java.lang.String-">isNot</a></span>(java.lang.String&nbsp;s)</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNot-java.lang.String-">isNot</a></span>(java.lang.String&nbsp;s)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotIn-java.lang.Iterable-">isNotIn</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotIn-java.lang.Iterable-">isNotIn</a></span>(java.lang.Iterable&lt;java.lang.String&gt;&nbsp;args)</code>&nbsp;</td>
-</tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotIn-java.lang.String-java.lang.String...-">isNotIn</a></span>(java.lang.String&nbsp;arg0,
-       java.lang.String...&nbsp;args)</code>&nbsp;</td>
-</tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isNotPresent--">isNotPresent</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/StringQueryModel.html#isPresent--">isPresent</a></span>()</code>&nbsp;</td>
 </tr>
@@ -220,20 +206,6 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html#isNot-E-">isNot</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/NotEqualQueryModel.html" title="interface in io.sphere.sdk.queries">NotEqualQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="isIn-java.lang.String-java.lang.String...-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isIn</h4>
-<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isIn(java.lang.String&nbsp;arg0,
-                       java.lang.String...&nbsp;args)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html#isIn-V-V...-">isIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsInQueryModel.html" title="interface in io.sphere.sdk.queries">IsInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -315,20 +287,6 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 </dl>
 </li>
 </ul>
-<a name="isNotIn-java.lang.String-java.lang.String...-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>isNotIn</h4>
-<pre><a href="../../../../io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries">QueryPredicate</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>&gt;&nbsp;isNotIn(java.lang.String&nbsp;arg0,
-                          java.lang.String...&nbsp;args)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html#isNotIn-V-V...-">isNotIn</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/queries/IsNotInQueryModel.html" title="interface in io.sphere.sdk.queries">IsNotInQueryModel</a>&lt;<a href="../../../../io/sphere/sdk/queries/StringQueryModel.html" title="type parameter in StringQueryModel">T</a>,java.lang.String&gt;</code></dd>
-</dl>
-</li>
-</ul>
 <a name="isPresent--">
 <!--   -->
 </a>
@@ -383,7 +341,7 @@ extends <a href="../../../../io/sphere/sdk/queries/OptionalQueryModel.html" titl
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/queries/SphereQuerySort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/queries/StringQuerySortingModel.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/queries/StringQueryModel.html" target="_top">Frames</a></li>

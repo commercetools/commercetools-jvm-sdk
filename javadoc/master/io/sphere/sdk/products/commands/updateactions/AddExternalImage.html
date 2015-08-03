@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":9};
+var methods = {"i0":10,"i1":10,"i2":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -102,7 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</li>
+<li><a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">io.sphere.sdk.commands.UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.products.commands.updateactions.AddExternalImage</li>
@@ -116,17 +116,21 @@ var activeTableTab = "activeTableTab";
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
+<dl>
+<dt>All Implemented Interfaces:</dt>
+<dd><a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="interface in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</dd>
+</dl>
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">AddExternalImage</span>
-extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
+extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Adds external image url with meta-information to the product variant.
 
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-addExternalImage--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
     assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
 
     final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
-    final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID, STAGED_AND_CURRENT)));
+    final Product updatedProduct = execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));
 
     assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant().getImages()).isEqualTo(asList(image));
     return updatedProduct;
@@ -151,30 +155,25 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a></code></td>
+<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/products/Image.html" title="interface in io.sphere.sdk.products">Image</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html#getImage--">getImage</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>int</code></td>
+<td class="colFirst"><code>java.lang.Integer</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html#getVariantId--">getVariantId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>boolean</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html#isStaged--">isStaged</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions">AddExternalImage</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html#of-io.sphere.sdk.models.Image-int-io.sphere.sdk.products.ProductUpdateScope-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a>&nbsp;image,
-  int&nbsp;variantId,
-  <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html#of-io.sphere.sdk.products.Image-java.lang.Integer-">of</a></span>(<a href="../../../../../../io/sphere/sdk/products/Image.html" title="interface in io.sphere.sdk.products">Image</a>&nbsp;image,
+  java.lang.Integer&nbsp;variantId)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.UpdateAction">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.commands.UpdateActionImpl">
 <!--   -->
 </a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" title="class in io.sphere.sdk.commands">UpdateAction</a></h3>
-<code><a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html#getAction--">getAction</a></code></li>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.commands.<a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a></h3>
+<code><a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html#getAction--">getAction</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -204,15 +203,14 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-io.sphere.sdk.models.Image-int-io.sphere.sdk.products.ProductUpdateScope-">
+<a name="of-io.sphere.sdk.products.Image-java.lang.Integer-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions">AddExternalImage</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a>&nbsp;image,
-                                  int&nbsp;variantId,
-                                  <a href="../../../../../../io/sphere/sdk/products/ProductUpdateScope.html" title="enum in io.sphere.sdk.products">ProductUpdateScope</a>&nbsp;productUpdateScope)</pre>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions">AddExternalImage</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/products/Image.html" title="interface in io.sphere.sdk.products">Image</a>&nbsp;image,
+                                  java.lang.Integer&nbsp;variantId)</pre>
 </li>
 </ul>
 <a name="getImage--">
@@ -221,25 +219,16 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateAction.html" tit
 <ul class="blockList">
 <li class="blockList">
 <h4>getImage</h4>
-<pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/models/Image.html" title="interface in io.sphere.sdk.models">Image</a>&nbsp;getImage()</pre>
+<pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/products/Image.html" title="interface in io.sphere.sdk.products">Image</a>&nbsp;getImage()</pre>
 </li>
 </ul>
 <a name="getVariantId--">
 <!--   -->
 </a>
-<ul class="blockList">
-<li class="blockList">
-<h4>getVariantId</h4>
-<pre>public&nbsp;int&nbsp;getVariantId()</pre>
-</li>
-</ul>
-<a name="isStaged--">
-<!--   -->
-</a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>isStaged</h4>
-<pre>public&nbsp;boolean&nbsp;isStaged()</pre>
+<h4>getVariantId</h4>
+<pre>public&nbsp;java.lang.Integer&nbsp;getVariantId()</pre>
 </li>
 </ul>
 </li>

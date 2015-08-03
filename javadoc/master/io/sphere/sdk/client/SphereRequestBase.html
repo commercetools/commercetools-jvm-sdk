@@ -113,7 +113,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingByKeyFetch</a>, <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands">CustomObjectCustomJsonMappingUpsertCommand</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a>, <a href="../../../../io/sphere/sdk/projects/queries/ProjectGet.html" title="class in io.sphere.sdk.projects.queries">ProjectGet</a>, <a href="../../../../io/sphere/sdk/search/SearchDslImpl.html" title="class in io.sphere.sdk.search">SearchDslImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>, <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyFetch.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingByKeyFetch</a>, <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands">CustomObjectCustomJsonMappingUpsertCommand</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelFetchDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelFetchDslImpl</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a>, <a href="../../../../io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a>, <a href="../../../../io/sphere/sdk/projects/queries/ProjectGet.html" title="class in io.sphere.sdk.projects.queries">ProjectGet</a></dd>
 </dl>
 <hr>
 <br>
@@ -158,12 +158,13 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>protected static java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</code>&nbsp;</td>
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse,
+           com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>protected static &lt;T&gt;&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">resultMapperOf</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>&nbsp;</td>
+<td class="colFirst"><code>protected static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></span>(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -211,13 +212,14 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="resultMapperOf-com.fasterxml.jackson.core.type.TypeReference-">
+<a name="deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>resultMapperOf</h4>
-<pre>protected static&nbsp;&lt;T&gt;&nbsp;java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,T&gt;&nbsp;resultMapperOf(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
+<h4>deserialize</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;T&nbsp;deserialize(<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse,
+                                com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
 </li>
 </ul>
 <a name="getBodyAsString-io.sphere.sdk.http.HttpResponse-">

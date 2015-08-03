@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -192,30 +192,6 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <tr class="rowColor">
 <td class="colFirst"><code>protected java.lang.Boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#withTotal">withTotal</a></span></code>&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#MetaModelQueryDslBuilder-io.sphere.sdk.queries.MetaModelQueryDslImpl-">MetaModelQueryDslBuilder</a></span>(<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;&nbsp;template)</code>&nbsp;</td>
-</tr>
-<tr class="rowColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#MetaModelQueryDslBuilder-java.lang.String-java.util.function.Function-Q-E-java.util.function.Function-">MetaModelQueryDslBuilder</a></span>(java.lang.String&nbsp;endpoint,
-                        java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>&gt;&gt;&nbsp;resultMapper,
-                        <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>&nbsp;queryModel,
-                        <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&nbsp;expansionModel,
-                        java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>&gt;&nbsp;queryDslBuilderFunction)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -415,38 +391,6 @@ protected&nbsp;java.lang.Long offset</pre>
 </ul>
 </li>
 </ul>
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a name="MetaModelQueryDslBuilder-java.lang.String-java.util.function.Function-java.lang.Object-java.lang.Object-java.util.function.Function-">
-<!--   -->
-</a><a name="MetaModelQueryDslBuilder-java.lang.String-java.util.function.Function-Q-E-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>MetaModelQueryDslBuilder</h4>
-<pre>public&nbsp;MetaModelQueryDslBuilder(java.lang.String&nbsp;endpoint,
-                                java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>&gt;&gt;&nbsp;resultMapper,
-                                <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>&nbsp;queryModel,
-                                <a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&nbsp;expansionModel,
-                                java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>&gt;&nbsp;queryDslBuilderFunction)</pre>
-</li>
-</ul>
-<a name="MetaModelQueryDslBuilder-io.sphere.sdk.queries.MetaModelQueryDslImpl-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>MetaModelQueryDslBuilder</h4>
-<pre>public&nbsp;MetaModelQueryDslBuilder(<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a>&lt;<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">T</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">C</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">Q</a>,<a href="../../../../io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="type parameter in MetaModelQueryDslBuilder">E</a>&gt;&nbsp;template)</pre>
-</li>
-</ul>
-</li>
-</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
@@ -590,13 +534,13 @@ protected&nbsp;java.lang.Long offset</pre>
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li><a href="#field.summary">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li><a href="#field.detail">Field</a>&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

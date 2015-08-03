@@ -158,7 +158,7 @@
     final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
 
     final Product updatedProduct = client()
-            .execute(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice, STAGED_AND_CURRENT)));
+            .execute(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice)));
 
     assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
             .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
@@ -221,7 +221,7 @@
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setSearchKeywords--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
     final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("foo bar baz", CustomSuggestTokenizer.of(asList("foo, baz")))));
-    final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords, STAGED_AND_CURRENT));
+    final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords));
     final Product updatedProduct = execute(command);
 
     final SearchKeywords actualKeywords = updatedProduct.getMasterData().getStaged().getSearchKeywords();
