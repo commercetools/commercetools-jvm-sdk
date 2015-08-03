@@ -1,5 +1,6 @@
 package io.sphere.sdk.products.search;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customobjects.CustomObject;
@@ -90,7 +91,7 @@ public class ProductAttributeSearchModel extends SearchModelImpl<ProductProjecti
         return new ReferenceSearchModel<>(this, attributeName);
     }
 
-    public <C> ReferenceSearchModel<ProductProjection, CustomObject<C>> ofCustomObjectReference(final String attributeName) {
+    public ReferenceSearchModel<ProductProjection, CustomObject<JsonNode>> ofCustomObjectReference(final String attributeName) {
         return new ReferenceSearchModel<>(this, attributeName);
     }
 }
