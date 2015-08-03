@@ -1,5 +1,6 @@
 package introspection;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -21,15 +22,19 @@ public class IntrospectionUtils {
     }
 
     public static List<Class<?>> publicClassesOfProject() throws IOException {
-        return readClassNames()
-                .map(name -> {
-                    try {
-                        return Class.forName(name);
-                    } catch (ClassNotFoundException e) {
-                        throw new RuntimeException(e);
-                    }
-                })
-                .collect(toList());
+        try {
+            return readClassNames()
+                    .map(name -> {
+                        try {
+                            return Class.forName(name);
+                        } catch (ClassNotFoundException e) {
+                            throw new RuntimeException(e);
+                        }
+                    })
+                    .collect(toList());
+        } catch (final FileNotFoundException e) {
+            throw new IOException("Generate Javadoc first.", e);
+        }
     }
 
     private static Stream<String> streamClassNames(final Matcher matcher) {

@@ -6,7 +6,7 @@ import java.util.List;
 public class BuildersNotForResources extends ClassStrategyRule {
     private final List<String> simpleNamesWhitelist = Arrays.asList(("AttributeDefinitionBuilder," +
             "AddressBuilder, MetaModelFetchDslBuilder, MetaModelQueryDslBuilder, Builder," +
-            "UpdateCommandDslBuilder, TrackingDataBuilder, TaxRateBuilder").split(",( )?"));
+            "UpdateCommandDslBuilder, TrackingDataBuilder, TaxRateBuilder, PriceBuilder").split(",( )?"));
 
     @Override
     protected boolean classIsIncludedInRule(final Class<?> clazz) {
