@@ -11,7 +11,7 @@ public class ImplClassesAreForPackageScopeRule extends ClassStrategyRule {
                     "DefaultModelViewImpl,GenericMessageImpl,MessageImpl," +
                     "MetaModelFetchDslImpl,MetaModelQueryDslImpl,MoneyImpl," +
                     "QueryModelImpl,SearchDslImpl,UpdateCommandDslImpl,SearchModelImpl," +
-                    "UpdateActionImpl").split(","));
+                    "UpdateActionImpl,MetaModelSearchDslImpl").split(","));
 
 
     @Override

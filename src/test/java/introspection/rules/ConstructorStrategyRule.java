@@ -21,7 +21,7 @@ public abstract class ConstructorStrategyRule extends AbstractRule {
                 .filter(this::classIsIncludedInRule)
                 .map(clazz -> Arrays.stream(clazz.getConstructors())
                                 .filter(this::constructorIsIncludedInRule)
-                                .map(constructor -> isRuleConform(constructor) ? Optional.<RuleViolation>empty() : Optional.<RuleViolation>of(new ConstructorRuleViolation(clazz, constructor)))
+                                .map(constructor -> isRuleConform(constructor) ? Optional.<RuleViolation>empty() : Optional.<RuleViolation>of(new ConstructorRuleViolation(clazz, constructor, getClass().getSimpleName())))
                                 .filter(Optional::isPresent)
                                 .map(Optional::get)
                 )

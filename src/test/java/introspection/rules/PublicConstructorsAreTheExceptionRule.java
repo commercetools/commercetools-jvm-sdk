@@ -1,9 +1,6 @@
 package introspection.rules;
 
-import introspection.OptionalInspection;
-
 import java.lang.reflect.Constructor;
-import java.util.Arrays;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -13,7 +10,8 @@ public class PublicConstructorsAreTheExceptionRule extends ConstructorStrategyRu
             asList(("io.sphere.sdk.models.Base," +
                     "io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyFetch," +
                     "io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommand," +
-                    "io.sphere.sdk.expansion.ExpandedModel").split(",( )?"));
+                    "io.sphere.sdk.expansion.ExpandedModel," +
+                    "io.sphere.sdk.search.MetaModelSearchDslBuilder").split(",( )?"));
 
     @Override
     protected boolean classIsIncludedInRule(final Class<?> clazz) {
