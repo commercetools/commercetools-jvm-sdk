@@ -72,9 +72,9 @@ import io.sphere.sdk.models.Base;
 
 
 
-<h3 id=sort>Sorting</h3>
+<h3 id=sorting>Sorting</h3>
 
- <p>Any attribute you can sort by, allows both sort directions, ascending and descending. On the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting">Sorting</a> documentation page you can explore for which fields you can sort for.</p>
+ <p>Any attribute you can sort by, allows both sort directions, ascending and descending. On the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting">Sorting</a> documentation page you can explore for which fields you can sort for. Use {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} class to build sort expressions easily.</p>
 
  <p>The code sample below shows a request for all products which will be sorted by size in an ascending direction:</p>
 
@@ -94,7 +94,7 @@ import io.sphere.sdk.models.Base;
 
 
 
-<h3 id=filters>Filters</h3>
+<h3 id=filtering>Filtering</h3>
 
  <h4 id=filter-types>Types</h4>
 
@@ -166,7 +166,7 @@ import io.sphere.sdk.models.Base;
 
 
 
- <h3 id=facets>Facets</h3>
+ <h3 id=faceting>Faceting</h3>
 
  <h4 id=facet-expressions>Expressions</h4>
 
@@ -199,6 +199,18 @@ import io.sphere.sdk.models.Base;
  <p>In order to use it, there is a method that allows to define the desired alias:</p>
 
  {@include.example io.sphere.sdk.products.ProductProjectionSearchIntegrationTest#filteredFacetsSupportsAlias()}
+
+
+
+ <h3 id=facets>Product Projection Search Model</h3>
+
+ <p>The Search Model for products is currently in an experimental status, so please be aware it will probably suffer breaking changes in the future.</p>
+
+ <p>The {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} class offers a domain-specific language (DSL) to build expressions accepted by the search endpoint, which can be otherwise a bit complex to write. In particular, this DSL allows you to build expressions for <a href="#sorting">sorting</a>, <a href="#filtering">filtering</a> and <a href="#faceting">faceting</a>, as it is demonstrated in the corresponding sections.</p>
+
+ <p>In order to build an expression, first you will be required to select the field you want to search for (e.g. price or a custom attribute). In the case of custom attribtues, you also need to provide the attribute name and select the primary type of the attribute. Notice that {@link io.sphere.sdk.products.search.ProductAttributeSearchModel#ofBoolean(java.lang.String)} method enables search on both boolean and boolean set attributes.</p>
+
+ <p>The next step is selecting the type of expression you want to obtain: sort, filter or facet. Finally, you need to indicate the criteria used for the desired operation.</p>
 
  */
 public final class ProductSearchDocumentation extends Base {
