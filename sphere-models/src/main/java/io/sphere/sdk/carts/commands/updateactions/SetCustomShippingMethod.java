@@ -1,7 +1,7 @@
 package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.shippingmethods.ShippingRate;
@@ -12,7 +12,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCustomShippingMethod()}
  */
-public class SetCustomShippingMethod extends UpdateAction<Cart> {
+public class SetCustomShippingMethod extends UpdateActionImpl<Cart> {
 
     private final String shippingMethodName;
     private final ShippingRate shippingRate;

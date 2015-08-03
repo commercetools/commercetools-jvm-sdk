@@ -1,13 +1,13 @@
 package io.sphere.sdk.inventory.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.inventory.InventoryEntry;
 
 /**
  *
  * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#changeQuantity()}
  */
-public class ChangeQuantity extends UpdateAction<InventoryEntry> {
+public class ChangeQuantity extends UpdateActionImpl<InventoryEntry> {
     private final long quantity;
 
     private ChangeQuantity(final long quantity) {

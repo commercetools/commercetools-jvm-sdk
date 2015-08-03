@@ -1,6 +1,6 @@
 package io.sphere.sdk.customers.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 
 import javax.annotation.Nullable;
@@ -11,7 +11,7 @@ import java.time.LocalDate;
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDateOfBirth()}
  */
-public class SetDateOfBirth extends UpdateAction<Customer> {
+public class SetDateOfBirth extends UpdateActionImpl<Customer> {
     @Nullable
     private final LocalDate dateOfBirth;
 

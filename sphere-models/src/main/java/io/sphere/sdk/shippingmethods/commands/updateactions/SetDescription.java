@@ -1,6 +1,6 @@
 package io.sphere.sdk.shippingmethods.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
 import javax.annotation.Nullable;
@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#setDescription()}
  */
-public class SetDescription extends UpdateAction<ShippingMethod> {
+public class SetDescription extends UpdateActionImpl<ShippingMethod> {
     @Nullable
     private final String description;
 

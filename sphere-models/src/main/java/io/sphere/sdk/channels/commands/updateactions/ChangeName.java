@@ -1,13 +1,13 @@
 package io.sphere.sdk.channels.commands.updateactions;
 
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 
 /**
  * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#changeName()}
  */
-public class ChangeName extends UpdateAction<Channel> {
+public class ChangeName extends UpdateActionImpl<Channel> {
     private final LocalizedStrings name;
 
     private ChangeName(final LocalizedStrings name) {

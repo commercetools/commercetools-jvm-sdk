@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Product;
 
@@ -9,7 +9,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setDescription()}
  */
-public class SetDescription extends UpdateAction<Product> {
+public class SetDescription extends UpdateActionImpl<Product> {
     private final LocalizedStrings description;
 
     private SetDescription(final LocalizedStrings description) {

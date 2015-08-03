@@ -19,7 +19,7 @@ public class UpdateCommandDslImplTest {
         final List<? extends UpdateAction<String>> g = e;
     }
 
-    static class Foo extends UpdateAction<String> {
+    static class Foo extends UpdateActionImpl<String> {
         @JsonCreator
         public Foo() {
             super("foo");

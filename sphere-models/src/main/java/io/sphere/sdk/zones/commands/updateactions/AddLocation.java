@@ -1,6 +1,6 @@
 package io.sphere.sdk.zones.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.zones.Location;
 import io.sphere.sdk.zones.Zone;
 
@@ -9,7 +9,7 @@ import io.sphere.sdk.zones.Zone;
  *
  * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#addLocationAndRemoveLocation()}
  */
-public class AddLocation extends UpdateAction<Zone> {
+public class AddLocation extends UpdateActionImpl<Zone> {
     private final Location location;
 
     private AddLocation(final Location location) {

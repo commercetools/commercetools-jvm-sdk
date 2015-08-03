@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.Product;
 
@@ -9,7 +9,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addExternalImage()}
  */
-public class AddExternalImage extends UpdateAction<Product> {
+public class AddExternalImage extends UpdateActionImpl<Product> {
     private final Integer variantId;
     private final Image image;
 

@@ -1,14 +1,14 @@
 package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
  Updates tax rates and prices.
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#recalculate()}
  */
-public class Recalculate extends UpdateAction<Cart> {
+public class Recalculate extends UpdateActionImpl<Cart> {
     private Recalculate() {
         super("recalculate");
     }

@@ -1,6 +1,6 @@
 package io.sphere.sdk.customers.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Address;
 
@@ -11,7 +11,7 @@ import static java.lang.String.format;
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeAddress()}
  */
-public class ChangeAddress extends UpdateAction<Customer> {
+public class ChangeAddress extends UpdateActionImpl<Customer> {
     private final Address address;
     private final String addressId;
 

@@ -1,6 +1,6 @@
 package io.sphere.sdk.orders.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.orders.DeliveryItem;
 import io.sphere.sdk.orders.Order;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addDelivery()}
  */
-public class AddDelivery extends UpdateAction<Order> {
+public class AddDelivery extends UpdateActionImpl<Order> {
     private final List<DeliveryItem> items;
     private final List<ParcelDraft> parcels;
 

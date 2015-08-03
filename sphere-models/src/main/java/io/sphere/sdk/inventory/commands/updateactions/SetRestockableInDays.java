@@ -1,6 +1,6 @@
 package io.sphere.sdk.inventory.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.inventory.InventoryEntry;
 
 import javax.annotation.Nullable;
@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#setRestockableInDays()}
  */
-public class SetRestockableInDays extends UpdateAction<InventoryEntry> {
+public class SetRestockableInDays extends UpdateActionImpl<InventoryEntry> {
     @Nullable
     private final Integer restockableInDays;
 

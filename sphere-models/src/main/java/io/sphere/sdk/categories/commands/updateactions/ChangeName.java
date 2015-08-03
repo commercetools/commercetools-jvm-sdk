@@ -1,10 +1,10 @@
 package io.sphere.sdk.categories.commands.updateactions;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 
-public class ChangeName extends UpdateAction<Category> {
+public class ChangeName extends UpdateActionImpl<Category> {
     private final LocalizedStrings name;
 
     private ChangeName(final LocalizedStrings name) {

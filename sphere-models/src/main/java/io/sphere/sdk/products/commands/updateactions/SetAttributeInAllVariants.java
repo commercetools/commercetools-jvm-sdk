@@ -3,7 +3,7 @@ package io.sphere.sdk.products.commands.updateactions;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.attributes.AttributeDraft;
 import io.sphere.sdk.attributes.NamedAttributeAccess;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
  *
  * @see io.sphere.sdk.products.commands.updateactions.SetAttribute
  */
-public class SetAttributeInAllVariants extends UpdateAction<Product> {
+public class SetAttributeInAllVariants extends UpdateActionImpl<Product> {
     private final String name;
     @Nullable
     private final JsonNode value;

@@ -1,6 +1,6 @@
 package io.sphere.sdk.zones.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.zones.Zone;
 
 import javax.annotation.Nullable;
@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#setDescription()}
  */
-public class SetDescription extends UpdateAction<Zone> {
+public class SetDescription extends UpdateActionImpl<Zone> {
     @Nullable
     private final String description;
 

@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductIdentifiable;
@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addLineItem()}
  */
-public class AddLineItem extends UpdateAction<Cart> {
+public class AddLineItem extends UpdateActionImpl<Cart> {
     private final String productId;
     private final Integer variantId;
     private final Long quantity;

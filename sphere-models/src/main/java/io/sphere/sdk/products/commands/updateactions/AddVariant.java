@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.attributes.AttributeDraft;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 
@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @see io.sphere.sdk.products.commands.updateactions.RemoveVariant
  */
-public class AddVariant extends UpdateAction<Product> {
+public class AddVariant extends UpdateActionImpl<Product> {
     @Nullable
     private final String sku;
     private final List<Price> prices;

@@ -1,11 +1,16 @@
 package io.sphere.sdk.products.commands;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.updateactions.*;
+import io.sphere.sdk.products.queries.ProductByIdFetch;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
@@ -404,5 +409,42 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             return productWithoutVariant;
         });
+    }
+
+    private static class StagedWrapper extends Base implements UpdateAction<Product> {
+        private final UpdateAction<Product> delegate;
+        @JsonProperty("staged")
+        private final boolean staged;
+
+        private StagedWrapper(final UpdateAction<Product> action, final boolean staged) {
+            this.delegate = action;
+            this.staged = staged;
+        }
+
+        @Override
+        public String getAction() {
+            return delegate.getAction();
+        }
+
+        @JsonUnwrapped
+        public UpdateAction<Product> getDelegate() {
+            return delegate;
+        }
+    }
+
+    @Test
+    public void possibleToHackUpdateForStagedAndCurrent() throws Exception {
+         withUpdateableProduct(client(), product -> {
+             final LocalizedStrings newName = randomSlug();
+             final UpdateAction<Product> stagedWrapper = new StagedWrapper(ChangeName.of(newName), false);
+             final Product updatedProduct = execute(ProductUpdateCommand.of(product, asList(Publish.of(), stagedWrapper)));
+
+             final Product fetchedProduct = execute(ProductByIdFetch.of(product));
+             assertThat(fetchedProduct.getMasterData().getCurrent().getName())
+                     .isEqualTo(fetchedProduct.getMasterData().getStaged().getName())
+                     .isEqualTo(newName);
+
+             return updatedProduct;
+         });
     }
 }

@@ -2,14 +2,14 @@ package io.sphere.sdk.channels.commands.updateactions;
 
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelRole;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 
 import java.util.Set;
 
 /**
  * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#setRoles()}
  */
-public class SetRoles extends UpdateAction<Channel> {
+public class SetRoles extends UpdateActionImpl<Channel> {
     private final Set<ChannelRole> roles;
 
     private SetRoles(final Set<ChannelRole> roles) {

@@ -1,6 +1,6 @@
 package io.sphere.sdk.customers.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Address;
 
@@ -11,7 +11,7 @@ import static java.lang.String.format;
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#removeAddress()}
  */
-public class RemoveAddress extends UpdateAction<Customer> {
+public class RemoveAddress extends UpdateActionImpl<Customer> {
     private final String addressId;
 
     private RemoveAddress(final String addressId) {

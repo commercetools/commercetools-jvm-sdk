@@ -1,6 +1,6 @@
 package io.sphere.sdk.productdiscounts.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 
@@ -9,7 +9,7 @@ import io.sphere.sdk.productdiscounts.ProductDiscount;
  {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changeName()}
 
  */
-public class ChangeName extends UpdateAction<ProductDiscount> {
+public class ChangeName extends UpdateActionImpl<ProductDiscount> {
     private final LocalizedStrings name;
 
     private ChangeName(final LocalizedStrings name) {

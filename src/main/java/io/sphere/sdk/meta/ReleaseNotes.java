@@ -4,6 +4,7 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.ApacheHttpClientAdapter;
 import io.sphere.sdk.http.HttpResponse;
@@ -246,8 +247,8 @@ import java.util.function.BiFunction;
  <li class=new-in-release>Added {@link io.sphere.sdk.models.Referenceable#hasSameIdAs(io.sphere.sdk.models.Referenceable)} to check if a similar object has the same ID.</li>
  <li class=new-in-release>Added {@link AttributeAccess#ofName(String)} as alias to {@code io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)}.</li>
 
- <li class=new-in-release>Update action list in update commands do not have the type {@literal List<UpdateAction<T>>} {@literal  List<? extends UpdateAction<T>>}, so you can pass a list of a subclass of {@link io.sphere.sdk.commands.UpdateAction}.
- Example: {@literal List<ChangeName>} can be assigned where {@literal ChangeName} extends {@link io.sphere.sdk.commands.UpdateAction}.</li>
+ <li class=new-in-release>Update action list in update commands do not have the type {@literal List<UpdateAction<T>>} {@literal  List<? extends UpdateAction<T>>}, so you can pass a list of a subclass of {@link UpdateActionImpl}.
+ Example: {@literal List<ChangeName>} can be assigned where {@literal ChangeName} extends {@link UpdateActionImpl}.</li>
 
  <li class=new-in-release>Added {@link io.sphere.sdk.models.Address#of(com.neovisionaries.i18n.CountryCode)}.</li>
  <li class=new-in-release>Added {@code io.sphere.sdk.carts.Cart#getLineItem(String)} and {@code io.sphere.sdk.carts.Cart#getCustomLineItem(String)} to find items in a cart.</li>

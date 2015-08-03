@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.products.Product;
 
@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
  *  <p>Create update actions to set the SEO attributes title, description and keywords altogether:</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setMetaAttributes()}
  */
-public class SetMetaKeywords extends UpdateAction<Product> {
+public class SetMetaKeywords extends UpdateActionImpl<Product> {
     @Nullable
     private final LocalizedStrings metaKeywords;
 

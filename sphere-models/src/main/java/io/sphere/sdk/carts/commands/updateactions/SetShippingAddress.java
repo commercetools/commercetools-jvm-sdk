@@ -1,7 +1,7 @@
 package io.sphere.sdk.carts.commands.updateactions;
 
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Address;
 
 import javax.annotation.Nullable;
@@ -13,7 +13,7 @@ import javax.annotation.Nullable;
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setShippingAddress()}
  */
-public class SetShippingAddress extends UpdateAction<Cart> {
+public class SetShippingAddress extends UpdateActionImpl<Cart> {
     @Nullable
     private final Address address;
 

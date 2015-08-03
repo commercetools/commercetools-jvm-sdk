@@ -1,6 +1,6 @@
 package io.sphere.sdk.customers.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
@@ -13,7 +13,7 @@ import java.util.Optional;
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setCustomerGroup()}
  */
-public class SetCustomerGroup extends UpdateAction<Customer> {
+public class SetCustomerGroup extends UpdateActionImpl<Customer> {
     @Nullable
     private final Reference<CustomerGroup> customerGroup;
 

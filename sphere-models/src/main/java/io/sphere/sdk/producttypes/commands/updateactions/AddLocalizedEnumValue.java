@@ -1,13 +1,13 @@
 package io.sphere.sdk.producttypes.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.producttypes.ProductType;
 
 /**
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addLocalizedEnumValue()}
  */
-public class AddLocalizedEnumValue extends UpdateAction<ProductType> {
+public class AddLocalizedEnumValue extends UpdateActionImpl<ProductType> {
     private final String attributeName;
     private final LocalizedEnumValue value;
 

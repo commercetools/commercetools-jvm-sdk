@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.Product;
 
@@ -11,7 +11,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removeImage()}
  */
-public class RemoveImage extends UpdateAction<Product> {
+public class RemoveImage extends UpdateActionImpl<Product> {
     private final Integer variantId;
     private final String imageUrl;
 

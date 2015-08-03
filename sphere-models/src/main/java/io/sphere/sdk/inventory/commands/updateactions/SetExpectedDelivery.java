@@ -1,6 +1,6 @@
 package io.sphere.sdk.inventory.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.inventory.InventoryEntry;
 
 import javax.annotation.Nullable;
@@ -10,7 +10,7 @@ import java.time.ZonedDateTime;
  *
  * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#setExpectedDelivery()}
  */
-public class SetExpectedDelivery extends UpdateAction<InventoryEntry> {
+public class SetExpectedDelivery extends UpdateActionImpl<InventoryEntry> {
     @Nullable
     private final ZonedDateTime expectedDelivery;
 

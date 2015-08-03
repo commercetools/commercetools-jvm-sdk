@@ -1,6 +1,6 @@
 package io.sphere.sdk.discountcodes.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.discountcodes.DiscountCode;
 
 import javax.annotation.Nullable;
@@ -8,7 +8,7 @@ import javax.annotation.Nullable;
 /**
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setMaxApplications()}
  */
-public class SetMaxApplications extends UpdateAction<DiscountCode> {
+public class SetMaxApplications extends UpdateActionImpl<DiscountCode> {
     @Nullable
     private final Long maxApplications;
 

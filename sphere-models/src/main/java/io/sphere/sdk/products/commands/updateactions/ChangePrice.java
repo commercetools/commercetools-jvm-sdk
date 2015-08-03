@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 
@@ -11,7 +11,7 @@ import java.util.Optional;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changePrice()}
  */
-public class ChangePrice extends UpdateAction<Product> {
+public class ChangePrice extends UpdateActionImpl<Product> {
     private final Price price;
     private final String priceId;
 

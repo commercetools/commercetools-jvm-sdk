@@ -1,10 +1,10 @@
 package io.sphere.sdk.customers.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Address;
 
-public class AddAddress extends UpdateAction<Customer> {
+public class AddAddress extends UpdateActionImpl<Customer> {
     private final Address address;
 
     private AddAddress(final Address address) {

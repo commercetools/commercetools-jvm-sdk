@@ -10,7 +10,7 @@ import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeName;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.*;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpStatusCode;
 import io.sphere.sdk.meta.BuildInfo;
@@ -70,12 +70,12 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     @Test
     public void notFoundExceptionOnUpdateWithMissingObject() throws Exception {
         final CategoryUpdateCommand updateCommand =
-                CategoryUpdateCommand.of(Versioned.of("not-existing-id", 1), Collections.<UpdateAction<Category>>emptyList());
+                CategoryUpdateCommand.of(Versioned.of("not-existing-id", 1), Collections.<UpdateActionImpl<Category>>emptyList());
         executing(() -> updateCommand)
                 .resultsInA(NotFoundException.class);
 
         try {
-            execute(CategoryUpdateCommand.of(Versioned.of("foo", 1), Collections.<UpdateAction<Category>>emptyList()));
+            execute(CategoryUpdateCommand.of(Versioned.of("foo", 1), Collections.<UpdateActionImpl<Category>>emptyList()));
             fail("should throw exception");
         } catch (final SphereServiceException e) {
             assertThat(e.getProjectKey()).contains(getSphereClientConfig().getProjectKey());
@@ -86,7 +86,7 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     public void exceptionsGatherContext() throws Exception {
         CategoryFixtures.withCategory(client(), category -> {
             final long wrongVersion = category.getVersion() - 1;
-            final CategoryUpdateCommand command = CategoryUpdateCommand.of(Versioned.of(category.getId(), wrongVersion), Collections.<UpdateAction<Category>>emptyList());
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(Versioned.of(category.getId(), wrongVersion), Collections.<UpdateActionImpl<Category>>emptyList());
             try {
                 execute(command);
                 fail("should throw exception");

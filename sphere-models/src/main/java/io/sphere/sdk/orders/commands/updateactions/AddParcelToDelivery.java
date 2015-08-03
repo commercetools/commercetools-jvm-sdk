@@ -1,6 +1,6 @@
 package io.sphere.sdk.orders.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.orders.Delivery;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.ParcelMeasurements;
@@ -12,7 +12,7 @@ import javax.annotation.Nullable;
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addParcelToDelivery()}
  */
-public class AddParcelToDelivery extends UpdateAction<Order> {
+public class AddParcelToDelivery extends UpdateActionImpl<Order> {
     private final String deliveryId;
     @Nullable
     private final ParcelMeasurements measurements;

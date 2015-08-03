@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductVariant;
 
@@ -11,7 +11,7 @@ import io.sphere.sdk.products.ProductVariant;
  *
  * @see io.sphere.sdk.products.commands.updateactions.AddVariant
  */
-public class RemoveVariant extends UpdateAction<Product> {
+public class RemoveVariant extends UpdateActionImpl<Product> {
     private final Integer id;
 
     private RemoveVariant(final Integer id) {

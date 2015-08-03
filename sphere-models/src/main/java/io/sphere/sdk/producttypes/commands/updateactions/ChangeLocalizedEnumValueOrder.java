@@ -1,6 +1,6 @@
 package io.sphere.sdk.producttypes.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.producttypes.ProductType;
 
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeLocalizedEnumValueOrder()}
  */
-public class ChangeLocalizedEnumValueOrder extends UpdateAction<ProductType> {
+public class ChangeLocalizedEnumValueOrder extends UpdateActionImpl<ProductType> {
     private final String attributeName;
     private final List<LocalizedEnumValue> values;
 

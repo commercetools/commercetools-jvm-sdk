@@ -2,19 +2,17 @@ package io.sphere.sdk.orders.commands.updateactions;
 
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.orders.Order;
 
 import java.util.Set;
-
-import static io.sphere.sdk.utils.SetUtils.asSet;
 
 /**
  * These import of states does not follow any predefined rules and should be only used if no transitions are defined.
  *
  * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#importLineItemState()}
  */
-public class ImportLineItemState extends UpdateAction<Order> {
+public class ImportLineItemState extends UpdateActionImpl<Order> {
     private final String lineItemId;
     private final Set<ItemState> state;
 

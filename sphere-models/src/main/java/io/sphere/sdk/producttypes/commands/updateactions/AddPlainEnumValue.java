@@ -1,13 +1,13 @@
 package io.sphere.sdk.producttypes.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.producttypes.ProductType;
 
 /**
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addPlainEnumValue()}
  */
-public class AddPlainEnumValue extends UpdateAction<ProductType> {
+public class AddPlainEnumValue extends UpdateActionImpl<ProductType> {
     private final String attributeName;
     private final PlainEnumValue value;
 

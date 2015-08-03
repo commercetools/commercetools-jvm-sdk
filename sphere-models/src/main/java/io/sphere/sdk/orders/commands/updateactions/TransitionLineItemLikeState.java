@@ -1,6 +1,6 @@
 package io.sphere.sdk.orders.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.states.State;
@@ -8,7 +8,7 @@ import io.sphere.sdk.states.State;
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
-abstract class TransitionLineItemLikeState extends UpdateAction<Order> {
+abstract class TransitionLineItemLikeState extends UpdateActionImpl<Order> {
     protected final Long quantity;
     protected final Reference<State> fromState;
     protected final Reference<State> toState;

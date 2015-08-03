@@ -2,12 +2,12 @@ package io.sphere.sdk.cartdiscounts.commands.updateactions;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.CartDiscountTarget;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeTarget()}
  */
-public class ChangeTarget extends UpdateAction<CartDiscount> {
+public class ChangeTarget extends UpdateActionImpl<CartDiscount> {
     private final CartDiscountTarget target;
 
     private ChangeTarget(final CartDiscountTarget target) {

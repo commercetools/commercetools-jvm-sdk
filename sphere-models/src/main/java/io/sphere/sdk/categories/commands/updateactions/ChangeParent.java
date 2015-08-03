@@ -1,11 +1,11 @@
 package io.sphere.sdk.categories.commands.updateactions;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
-public class ChangeParent extends UpdateAction<Category> {
+public class ChangeParent extends UpdateActionImpl<Category> {
     private final Reference<Category> parent;
 
     private ChangeParent(final Referenceable<Category> parent) {

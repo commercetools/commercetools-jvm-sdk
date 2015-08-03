@@ -1,10 +1,10 @@
 package io.sphere.sdk.states.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.states.State;
 
-public class SetDescription extends UpdateAction<State> {
+public class SetDescription extends UpdateActionImpl<State> {
     private final LocalizedStrings description;
 
     private SetDescription(final LocalizedStrings description) {

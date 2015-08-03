@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.Product;
@@ -13,7 +13,7 @@ import io.sphere.sdk.products.Product;
  *
  * @see io.sphere.sdk.products.commands.updateactions.AddToCategory
  */
-public class RemoveFromCategory extends UpdateAction<Product> {
+public class RemoveFromCategory extends UpdateActionImpl<Product> {
     private final Reference<Category> category;
 
     private RemoveFromCategory(final Reference<Category> category) {

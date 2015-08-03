@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 
@@ -9,7 +9,7 @@ import io.sphere.sdk.products.Product;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addPrice()}
  */
-public class AddPrice extends UpdateAction<Product> {
+public class AddPrice extends UpdateActionImpl<Product> {
     private final Integer variantId;
     private final Price price;
 

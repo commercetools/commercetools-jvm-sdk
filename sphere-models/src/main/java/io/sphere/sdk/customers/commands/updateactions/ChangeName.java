@@ -1,6 +1,6 @@
 package io.sphere.sdk.customers.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerName;
 
@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeName()}
  */
-public class ChangeName extends UpdateAction<Customer> {
+public class ChangeName extends UpdateActionImpl<Customer> {
     private final String firstName;
     private final String lastName;
     @Nullable

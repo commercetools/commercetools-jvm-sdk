@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 
@@ -10,7 +10,7 @@ import java.util.Optional;
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removePrice()}
  */
-public class RemovePrice extends UpdateAction<Product> {
+public class RemovePrice extends UpdateActionImpl<Product> {
     private final String priceId;
 
     private RemovePrice(final String priceId) {

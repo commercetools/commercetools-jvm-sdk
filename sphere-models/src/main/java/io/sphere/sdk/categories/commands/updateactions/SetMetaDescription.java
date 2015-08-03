@@ -1,7 +1,7 @@
 package io.sphere.sdk.categories.commands.updateactions;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 
 import javax.annotation.Nullable;
@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
  *
  * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#setMetaDescription()}
  */
-public class SetMetaDescription extends UpdateAction<Category> {
+public class SetMetaDescription extends UpdateActionImpl<Category> {
     @Nullable
     private final LocalizedStrings metaDescription;
 
