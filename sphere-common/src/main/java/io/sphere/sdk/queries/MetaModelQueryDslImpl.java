@@ -73,7 +73,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction,
                                  final List<HttpQueryParameter> additionalQueryParameters) {
-        this(emptyList(), emptyList(), null, null, null, endpoint, resultMapperOf(pagedQueryResultTypeReference),
+        this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> deserialize(httpResponse, pagedQueryResultTypeReference),
                 emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 

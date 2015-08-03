@@ -14,7 +14,7 @@ script:
 - echo $TRAVIS_BRANCH
 - bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null
 - ./sbt "sphere-models/it:test::runMain io.sphere.sdk.client.MainMethodThreadLeakTest"
-- ./sbt "test:runMain introspection.rules.RulesMain"
+- ./sbt -J-Xmx512m"test:runMain introspection.rules.RulesMain"
 after_success:
 - bash scripts/publish-javadoc-version-folder.sh > /dev/null 2> /dev/null
 notifications:

@@ -72,7 +72,7 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     public void differentiateBetweenCurrentAndStaged() throws Exception {
         withUpdateableProduct(client(), product -> {
             final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
-            final Product mixedDataProduct = execute(ProductUpdateCommand.of(publishedProduct, ChangeName.of(randomSlug(), ProductUpdateScope.ONLY_STAGED)));
+            final Product mixedDataProduct = execute(ProductUpdateCommand.of(publishedProduct, ChangeName.of(randomSlug())));
             final LocalizedStrings nameInCurrent = mixedDataProduct.getMasterData().getCurrent().getName();
             final LocalizedStrings nameInStaged = mixedDataProduct.getMasterData().getStaged().getName();
 

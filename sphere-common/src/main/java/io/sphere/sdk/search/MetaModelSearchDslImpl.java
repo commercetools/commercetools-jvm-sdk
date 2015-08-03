@@ -82,7 +82,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     public MetaModelSearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> pagedSearchResultTypeReference,
                                   final S searchModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction,
                                   final List<HttpQueryParameter> additionalQueryParameters) {
-        this(null, emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), null, null, endpoint, resultMapperOf(pagedSearchResultTypeReference),
+        this(null, emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), null, null, endpoint, httpResponse -> deserialize(httpResponse, pagedSearchResultTypeReference),
                 emptyList(), additionalQueryParameters, searchModel, expansionModel, searchDslBuilderFunction);
     }
 

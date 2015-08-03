@@ -90,7 +90,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
                 .orElseGet(() -> createProductType());
 
         final Query<Product> query = ProductQuery.of()
-                .withPredicates(m -> m.masterData().staged().masterVariant().sku().isIn(SKU1, SKU2, SKU_SOME_ID, SKU_OTHER_ID));
+                .withPredicates(m -> m.masterData().staged().masterVariant().sku().isIn(asList(SKU1, SKU2, SKU_SOME_ID, SKU_OTHER_ID)));
         final List<Product> products = execute(query).getResults();
 
         final Function<String, Optional<Product>> findBySku =
