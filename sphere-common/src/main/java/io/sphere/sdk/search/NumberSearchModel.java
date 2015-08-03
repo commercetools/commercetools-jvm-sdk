@@ -10,17 +10,17 @@ public class NumberSearchModel<T, S extends SearchSortDirection> extends SearchM
     }
 
     @Override
-    public RangedFilterSearchModel<T, BigDecimal> filterBy() {
+    public RangedFilterSearchModel<T, BigDecimal> filtered() {
         return new RangedFilterSearchModel<>(this, null, TypeSerializer.ofNumber());
     }
 
     @Override
-    public RangedFacetSearchModel<T, BigDecimal> facetOf() {
+    public RangedFacetSearchModel<T, BigDecimal> faceted() {
         return new RangedFacetSearchModel<>(this, null, TypeSerializer.ofNumber());
     }
 
     @Override
-    public SearchSort<T> sort(S sortDirection) {
+    public SearchSort<T> sorted(S sortDirection) {
         return new SphereSearchSort<>(this, sortDirection);
     }
 }

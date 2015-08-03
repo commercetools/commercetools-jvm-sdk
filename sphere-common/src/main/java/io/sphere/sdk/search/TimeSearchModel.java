@@ -10,17 +10,17 @@ public class TimeSearchModel<T, S extends SearchSortDirection> extends SearchMod
     }
 
     @Override
-    public RangedFilterSearchModel<T, LocalTime> filterBy() {
+    public RangedFilterSearchModel<T, LocalTime> filtered() {
         return new RangedFilterSearchModel<>(this, null, TypeSerializer.ofTime());
     }
 
     @Override
-    public RangedFacetSearchModel<T, LocalTime> facetOf() {
+    public RangedFacetSearchModel<T, LocalTime> faceted() {
         return new RangedFacetSearchModel<>(this, null, TypeSerializer.ofTime());
     }
 
     @Override
-    public SearchSort<T> sort(S sortDirection) {
+    public SearchSort<T> sorted(S sortDirection) {
         return new SphereSearchSort<>(this, sortDirection);
     }
 }

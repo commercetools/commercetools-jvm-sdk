@@ -10,17 +10,17 @@ public class DateTimeSearchModel<T, S extends SearchSortDirection> extends Searc
     }
 
     @Override
-    public RangedFilterSearchModel<T, ZonedDateTime> filterBy() {
+    public RangedFilterSearchModel<T, ZonedDateTime> filtered() {
         return new RangedFilterSearchModel<>(this, null, TypeSerializer.ofDateTime());
     }
 
     @Override
-    public RangedFacetSearchModel<T, ZonedDateTime> facetOf() {
+    public RangedFacetSearchModel<T, ZonedDateTime> faceted() {
         return new RangedFacetSearchModel<>(this, null, TypeSerializer.ofDateTime());
     }
 
     @Override
-    public SearchSort<T> sort(S sortDirection) {
+    public SearchSort<T> sorted(S sortDirection) {
         return new SphereSearchSort<>(this, sortDirection);
     }
 }

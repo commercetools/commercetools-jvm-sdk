@@ -1,142 +1,111 @@
 package io.sphere.sdk.search;
 
+import io.sphere.sdk.models.LocalizedStringsEntry;
+
 import java.util.List;
 import java.util.Locale;
 
-import static io.sphere.sdk.utils.ListUtils.listOf;
-
-public interface SearchDsl<T> extends EntitySearch<T> {
+public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T> {
 
     /**
      * Returns an EntitySearch with the new text as search text.
      * @param text the new search text
      * @return an EntitySearch with text
      */
-    SearchDsl<T> withText(final SearchText text);
+    C withText(final LocalizedStringsEntry text);
+
+    C withText(final Locale locale, final String text);
 
     /**
      * Returns an EntitySearch with the new facet list as facets.
      * @param facets the new facet list
      * @return an EntitySearch with facets
      */
-    SearchDsl<T> withFacets(final List<FacetExpression<T>> facets);
+    C withFacets(final List<FacetExpression<T>> facets);
 
-    /**
-     * Returns an EntitySearch with the new filter result list as filter results.
-     * @param filterResults the new filter result list
-     * @return an EntitySearch with filterResults
-     */
-    SearchDsl<T> withFilterResults(final List<FilterExpression<T>> filterResults);
-
-    /**
-     * Returns an EntitySearch with the new filter query list as filter queries.
-     * @param filterQueries the new filter query list
-     * @return an EntitySearch with filterQueries
-     */
-    SearchDsl<T> withFilterQuery(final List<FilterExpression<T>> filterQueries);
-
-    /**
-     * Returns an EntitySearch with the new filter facet list as filter facets.
-     * @param filterFacets the new filter facet list
-     * @return an EntitySearch with filterFacets
-     */
-    SearchDsl<T> withFilterFacets(final List<FilterExpression<T>> filterFacets);
-
-//not yet implemented in the SPHERE.IO backend
-//
-//    /**
-//     * Returns an EntityQuery with the new sort as sort.
-//     * @param sort list of sorts how the results of the search should be sorted
-//     * @return EntityQuery with sort
-//     */
-//    SearchDsl<T> withSort(final List<SearchSort<T>> sort);
-
-    SearchDsl<T> withLimit(final Long limit);
-
-    SearchDsl<T> withOffset(final Long offset);
-
-    default SearchDsl<T> withText(final Locale locale, final String text) {
-        return withText(SearchText.of(locale, text));
-    }
+    C withFacets(final FacetExpression<T> facet);
 
     /**
      * Returns an EntitySearch with the new facet list appended to the existing facets.
      * @param facets the new facet list
      * @return an EntitySearch with the existing facets plus the new facet list.
      */
-    default SearchDsl<T> plusFacets(final List<FacetExpression<T>> facets) {
-        return withFacets(listOf(facets(), facets));
-    }
+    C plusFacets(final List<FacetExpression<T>> facets);
+
+    C plusFacets(final FacetExpression<T> facet);
 
     /**
-     * Returns an EntitySearch with the new facet appended to the existing facets.
-     * @param facet the new facet
-     * @return an EntitySearch with the existing facets plus the new facet.
+     * Returns an EntitySearch with the new result filter list as result filter.
+     * @param resultFilters the new result filter list
+     * @return an EntitySearch with resultFilters
      */
-    default SearchDsl<T> plusFacet(final FacetExpression<T> facet) {
-        return withFacets(listOf(facets(), facet));
-    }
+    C withResultFilters(final List<FilterExpression<T>> resultFilters);
+
+    C withResultFilters(final FilterExpression<T> resultFilter);
 
     /**
-     * Returns an EntitySearch with the new filter result list appended to the existing filter results.
-     * @param filterResults the new filter result list
-     * @return an EntitySearch with the existing filter results plus the new filter result list.
+     * Returns an EntitySearch with the new result filter list appended to the existing result filters.
+     * @param resultFilters the new result filter list
+     * @return an EntitySearch with the existing result filter plus the new result filter list.
      */
-    default SearchDsl<T> plusFilterResults(final List<FilterExpression<T>> filterResults) {
-        return withFilterResults(listOf(filterResults(), filterResults));
-    }
+    C plusResultFilters(final List<FilterExpression<T>> resultFilters);
+
+    C plusResultFilters(final FilterExpression<T> resultFilter);
 
     /**
-     * Returns an EntitySearch with the new filter result appended to the existing filter results.
-     * @param filterResult the new filter result
-     * @return an EntitySearch with the existing filter results plus the new filter result.
+     * Returns an EntitySearch with the new query filter list as query filters.
+     * @param queryFilters the new query filter list
+     * @return an EntitySearch with queryFilters
      */
-    default SearchDsl<T> plusFilterResults(final FilterExpression<T> filterResult) {
-        return withFilterResults(listOf(filterResults(), filterResult));
-    }
+    C withQueryFilters(final List<FilterExpression<T>> queryFilters);
+
+    C withQueryFilters(final FilterExpression<T> queryFilter);
 
     /**
-     * Returns an EntitySearch with the new filter query list appended to the existing filter queries.
-     * @param filterQueries the new filter query list
-     * @return an EntitySearch with the existing filter queries plus the new filter query list.
+     * Returns an EntitySearch with the new query filter list appended to the existing query filters.
+     * @param queryFilters the new query filter list
+     * @return an EntitySearch with the existing query filters plus the new query filter list.
      */
-    default SearchDsl<T> plusFilterQuery(final List<FilterExpression<T>> filterQueries) {
-        return withFilterQuery(listOf(filterQueries(), filterQueries));
-    }
+    C plusQueryFilters(final List<FilterExpression<T>> queryFilters);
+
+    C plusQueryFilters(final FilterExpression<T> queryFilter);
 
     /**
-     * Returns an EntitySearch with the new filter query appended to the existing filter queries.
-     * @param filterQuery the new filter query
-     * @return an EntitySearch with the existing filter queries plus the new filter query.
+     * Returns an EntitySearch with the new facet filter list as facet filter.
+     * @param facetFilters the new facet filter list
+     * @return an EntitySearch with facetFilters
      */
-    default SearchDsl<T> plusFilterQuery(final FilterExpression<T> filterQuery) {
-        return withFilterQuery(listOf(filterQueries(), filterQuery));
-    }
+    C withFacetFilters(final List<FilterExpression<T>> facetFilters);
+
+    C withFacetFilters(final FilterExpression<T> facetFilter);
 
     /**
-     * Returns an EntitySearch with the new filter facet list appended to the existing filter facets.
-     * @param filterFacets the new filter facet list
-     * @return an EntitySearch with the existing filter facets plus the new filter facet list.
+     * Returns an EntitySearch with the new facet filter list appended to the existing facet filters.
+     * @param facetFilters the new facet filter list
+     * @return an EntitySearch with the existing facet filters plus the new facet filter list.
      */
-    default SearchDsl<T> plusFilterFacets(final List<FilterExpression<T>> filterFacets) {
-        return withFilterFacets(listOf(filterFacets(), filterFacets));
-    }
+    C plusFacetFilters(final List<FilterExpression<T>> facetFilters);
 
-    /**
-     * Returns an EntitySearch with the new filter facet appended to the existing filter facets.
-     * @param filterFacet the new filter facet
-     * @return an EntitySearch with the existing filter facets plus the new filter facet.
-     */
-    default SearchDsl<T> plusFilterFacets(final FilterExpression<T> filterFacet) {
-        return withFilterFacets(listOf(filterFacets(), filterFacet));
-    }
+    C plusFacetFilters(final FilterExpression<T> facetFilter);
 
     /**
      * Returns an EntityQuery with the new sort as sort.
      * @param sort how the results of the search should be sorted
      * @return EntityQuery with sort
      */
-    SearchDsl<T> withSort(final SearchSort<T> sort);
+    C withSort(final SearchSort<T> sort);
 
-    String endpoint();
+    //not yet implemented in the SPHERE.IO backend
+    //
+    //    /**
+    //     * Returns an EntityQuery with the new sort as sort.
+    //     * @param sort list of sorts how the results of the search should be sorted
+    //     * @return EntityQuery with sort
+    //     */
+    //    C withSort(final List<SearchSort<T>> sort);
+
+    C withLimit(final long limit);
+
+    C withOffset(final long offset);
+
 }

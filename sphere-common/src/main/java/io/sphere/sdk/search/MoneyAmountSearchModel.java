@@ -12,17 +12,17 @@ public class MoneyAmountSearchModel<T, S extends SearchSortDirection> extends Se
     }
 
     @Override
-    public RangedFilterSearchModel<T, BigDecimal> filterBy() {
+    public RangedFilterSearchModel<T, BigDecimal> filtered() {
         return new RangedFilterSearchModel<>(this, null, TypeSerializer.ofMoneyAmount());
     }
 
     @Override
-    public RangedFacetSearchModel<T, BigDecimal> facetOf() {
+    public RangedFacetSearchModel<T, BigDecimal> faceted() {
         return new RangedFacetSearchModel<>(this, null, TypeSerializer.ofMoneyAmount());
     }
 
     @Override
-    public SearchSort<T> sort(S sortDirection) {
+    public SearchSort<T> sorted(S sortDirection) {
         if (hasPath(asList("variants", "price", "centAmount"))) {
             return new SphereSearchSort<>(new MoneyAmountSearchModel<>(null, "price"), sortDirection);
         } else {

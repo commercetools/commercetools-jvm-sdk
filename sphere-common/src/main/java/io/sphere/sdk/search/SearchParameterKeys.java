@@ -1,13 +1,14 @@
 package io.sphere.sdk.search;
 
 final class SearchParameterKeys {
-    public static final String TEXT = "text";
-    public static final String FACET = "facet";
-    public static final String FILTER = "filter";
-    public static final String FILTER_QUERY = "filter.query";
-    public static final String FILTER_FACETS = "filter.facets";
-    public static final String SORT = "sort";
-    public static final String LIMIT = "limit";
-    public static final String OFFSET = "offset";
-    public static final String LANG = "lang";
+    static final String TEXT = "text";
+    static final String FACET = "facet";
+    static final String FILTER = "filter";
+    static final String FILTER_QUERY = "filter.query";
+    static final String FILTER_FACETS = "filter.facets";
+    static final String SORT = "sort";
+    static final String LIMIT = "limit";
+    static final String OFFSET = "offset";
+    static final String EXPAND = "expand";
+    static final String LANG = "lang";
  }

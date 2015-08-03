@@ -7,13 +7,15 @@ import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
 import io.sphere.sdk.queries.MetaModelQueryDslBuilder;
 import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
-import java.util.Collections;
 import java.util.List;
+
+import static java.util.Collections.singletonList;
 
 /**
  {@doc.gen summary product projections}
  */
 final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProjection, ProductProjectionQuery, ProductProjectionQueryModel, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionQuery {
+
     ProductProjectionQueryImpl(final ProductProjectionType productProjectionType){
         super(ProductProjectionEndpoint.ENDPOINT.endpoint(), ProductProjectionQuery.resultTypeReference(), ProductProjectionQueryModel.of(), ProductProjectionExpansionModel.of(), ProductProjectionQueryImpl::new, additionalParametersOf(productProjectionType));
     }
@@ -23,7 +25,7 @@ final class ProductProjectionQueryImpl extends MetaModelQueryDslImpl<ProductProj
     }
 
     private static List<HttpQueryParameter> additionalParametersOf(final ProductProjectionType productProjectionType) {
-        return Collections.singletonList(HttpQueryParameter.of("staged", "" + productProjectionType.isStaged()));
+        return singletonList(HttpQueryParameter.of("staged", productProjectionType.isStaged().toString()));
     }
 
 }
