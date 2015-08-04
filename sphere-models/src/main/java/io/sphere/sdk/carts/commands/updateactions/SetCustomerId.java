@@ -32,7 +32,7 @@ public class SetCustomerId extends UpdateActionImpl<Cart> {
     }
 
 
-    public static SetCustomerId of(@Nullable final Referenceable<Customer> customer) {
+    public static SetCustomerId ofCustomer(@Nullable final Referenceable<Customer> customer) {
         return of(Optional.ofNullable(customer).map(c -> c.toReference().getId()).orElse(null));
     }
 

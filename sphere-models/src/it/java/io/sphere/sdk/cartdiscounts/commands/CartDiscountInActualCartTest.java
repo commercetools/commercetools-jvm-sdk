@@ -22,7 +22,7 @@ public class CartDiscountInActualCartTest extends IntegrationTest {
     public void createACartDiscountAndGetTheDiscountedValueFromACart() throws Exception {
         withCustomer(client(), customer ->
             withFilledCart(client(), cart -> {
-                final Cart cartWithCustomer = execute(CartUpdateCommand.of(cart, SetCustomerId.of(customer)));
+                final Cart cartWithCustomer = execute(CartUpdateCommand.of(cart, SetCustomerId.ofCustomer(customer)));
 
                 final LocalizedStrings name = en("di");
                 final CartPredicate cartPredicate = CartPredicate.of(format("customer.id = \"%s\"", customer.getId()));

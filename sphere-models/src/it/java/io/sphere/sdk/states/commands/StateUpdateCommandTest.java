@@ -72,7 +72,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
                 final Reference<State> stateReference = new LinkedList<>(loadedStateB.getTransitions()).getFirst();
                 assertThat(stateReference.getObj()).isNotNull();
 
-                final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of()));
+                final State updatedStateBWithoutTransitions = execute(StateUpdateCommand.of(updatedStateB, SetTransitions.of(null)));
                 assertThat(updatedStateBWithoutTransitions.getTransitions()).isNull();
 
                 return updatedStateBWithoutTransitions;

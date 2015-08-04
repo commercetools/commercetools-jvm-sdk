@@ -22,7 +22,8 @@ public class RulesMain {
                 new NoOptionalParametersInPublicConstructorRule(),
                 new PublicConstructorsAreTheExceptionRule(),
                 new BuildersNotForResources(),
-                new NeverMixStaticAndInstanceMethodOfSameNameRule()
+                new NeverMixStaticAndInstanceMethodOfSameNameRule(),
+                new OnlyOneNullableOfMethodRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

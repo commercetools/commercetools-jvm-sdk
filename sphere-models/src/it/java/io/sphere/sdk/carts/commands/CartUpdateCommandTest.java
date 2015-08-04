@@ -244,7 +244,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
         withCustomer(client(), customer -> {
             final Cart cart = createCartWithCountry(client());
             assertThat(cart.getCustomerId()).isNull();
-            final Cart cartWithCustomerId = execute(CartUpdateCommand.of(cart, SetCustomerId.of(customer)));
+            final Cart cartWithCustomerId = execute(CartUpdateCommand.of(cart, SetCustomerId.ofCustomer(customer)));
             assertThat(cartWithCustomerId.getCustomerId()).contains(customer.getId());
             final Cart cartWithoutCustomerId = execute(CartUpdateCommand.of(cartWithCustomerId, SetCustomerId.empty()));
             assertThat(cartWithoutCustomerId.getCustomerId()).isNull();
