@@ -219,7 +219,7 @@ public class DocumentationTaglet implements Taglet {
             if(name.endsWith("Command.java")) {
                 final String resourceName = asFile.getParentFile().getParentFile().getName();
                 get(resourceName).addMutator(asFile.getCanonicalPath());
-            } else if(name.endsWith("Query.java") || name.endsWith("Search.java") || name.endsWith("Fetch.java")) {
+            } else if(name.endsWith("Query.java") || name.endsWith("Search.java") || name.endsWith("Get.java")) {
                 final String resourceName = asFile.getParentFile().getParentFile().getName();
                 get(resourceName).addAccessor(asFile.getCanonicalPath());
             }

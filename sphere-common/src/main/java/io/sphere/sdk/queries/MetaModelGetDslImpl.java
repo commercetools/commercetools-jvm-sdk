@@ -39,25 +39,25 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
     final List<ExpansionPath<T>> expansionPaths;
     final List<HttpQueryParameter> additionalParameters;
     final E expansionModel;
-    final Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction;
+    final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction;
 
-    protected MetaModelGetDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
+    protected MetaModelGetDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
         this(endpoint, identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, additionalParameters);
     }
 
-    protected MetaModelGetDslImpl(final String identifierToSearchFor, final JsonEndpoint<R> endpoint, final E expansionModel, final Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction) {
+    protected MetaModelGetDslImpl(final String identifierToSearchFor, final JsonEndpoint<R> endpoint, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction) {
         this(endpoint, identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, Collections.emptyList());
     }
 
-    protected MetaModelGetDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction) {
+    protected MetaModelGetDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction) {
         this(endpoint, identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, Collections.emptyList());
     }
 
-    public MetaModelGetDslImpl(final MetaModelFetchDslBuilder<R, T, C, E> builder) {
+    public MetaModelGetDslImpl(final MetaModelGetDslBuilder<R, T, C, E> builder) {
         this(builder.endpoint, builder.identifierToSearchFor, builder.expansionPaths, builder.expansionModel, builder.builderFunction, builder.additionalParameters);
     }
 
-    protected MetaModelGetDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
+    protected MetaModelGetDslImpl(final JsonEndpoint<R> endpoint, final String identifierToSearchFor, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelGetDslBuilder<R, T, C, E>, C> builderFunction, final List<HttpQueryParameter> additionalParameters) {
         this.endpoint = requireNonNull(endpoint);
         this.identifierToSearchFor = requireNonNull(identifierToSearchFor);
         this.expansionPaths = requireNonNull(expansionPaths);
@@ -109,11 +109,6 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
     }
 
     @Override
-    public Get<R> toFetch() {
-        return this;
-    }
-
-    @Override
     public final C withExpansionPaths(final List<ExpansionPath<T>> expansionPaths) {
         return copyBuilder().expansionPaths(expansionPaths).build();
     }
@@ -148,7 +143,7 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
         return expansionModel;
     }
 
-    protected MetaModelFetchDslBuilder<R, T, C, E> copyBuilder() {
-        return new MetaModelFetchDslBuilder<>(this);
+    protected MetaModelGetDslBuilder<R, T, C, E> copyBuilder() {
+        return new MetaModelGetDslBuilder<>(this);
     }
 }

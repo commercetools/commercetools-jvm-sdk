@@ -2,7 +2,7 @@ package io.sphere.sdk.orders.queries;
 
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
-import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
+import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
 /**
@@ -15,7 +15,7 @@ final class OrderByIdGetImpl extends MetaModelGetDslImpl<Order, Order, OrderById
         super(id, OrderEndpoint.ENDPOINT, OrderExpansionModel.of(), OrderByIdGetImpl::new);
     }
 
-    public OrderByIdGetImpl(MetaModelFetchDslBuilder<Order, Order, OrderByIdGet, OrderExpansionModel<Order>> builder) {
+    public OrderByIdGetImpl(MetaModelGetDslBuilder<Order, Order, OrderByIdGet, OrderExpansionModel<Order>> builder) {
         super(builder);
     }
 }

@@ -2,7 +2,7 @@ package io.sphere.sdk.cartdiscounts.queries;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.expansion.CartDiscountExpansionModel;
-import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
+import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
 /**
@@ -13,7 +13,7 @@ final class CartDiscountByIdGetImpl extends MetaModelGetDslImpl<CartDiscount, Ca
         super(id, CartDiscountEndpoint.ENDPOINT, CartDiscountExpansionModel.of(), CartDiscountByIdGetImpl::new);
     }
 
-    public CartDiscountByIdGetImpl(MetaModelFetchDslBuilder<CartDiscount, CartDiscount, CartDiscountByIdGet, CartDiscountExpansionModel<CartDiscount>> builder) {
+    public CartDiscountByIdGetImpl(MetaModelGetDslBuilder<CartDiscount, CartDiscount, CartDiscountByIdGet, CartDiscountExpansionModel<CartDiscount>> builder) {
         super(builder);
     }
 }

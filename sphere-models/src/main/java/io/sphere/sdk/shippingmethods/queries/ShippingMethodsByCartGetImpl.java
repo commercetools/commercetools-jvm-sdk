@@ -1,7 +1,7 @@
 package io.sphere.sdk.shippingmethods.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
+import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
@@ -18,7 +18,7 @@ final class ShippingMethodsByCartGetImpl extends MetaModelGetDslImpl<List<Shippi
         }), ShippingMethodExpansionModel.of(), ShippingMethodsByCartGetImpl::new);
     }
 
-    public ShippingMethodsByCartGetImpl(MetaModelFetchDslBuilder<List<ShippingMethod>, ShippingMethod, ShippingMethodsByCartGetImpl, ShippingMethodExpansionModel<ShippingMethod>> builder) {
+    public ShippingMethodsByCartGetImpl(MetaModelGetDslBuilder<List<ShippingMethod>, ShippingMethod, ShippingMethodsByCartGetImpl, ShippingMethodExpansionModel<ShippingMethod>> builder) {
         super(builder);
     }
 }

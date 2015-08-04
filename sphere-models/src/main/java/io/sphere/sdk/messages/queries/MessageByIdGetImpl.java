@@ -2,7 +2,7 @@ package io.sphere.sdk.messages.queries;
 
 import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.messages.expansion.MessageExpansionModel;
-import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
+import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
 final class MessageByIdGetImpl extends MetaModelGetDslImpl<Message, Message, MessageByIdGet, MessageExpansionModel<Message>> implements MessageByIdGet {
@@ -10,7 +10,7 @@ final class MessageByIdGetImpl extends MetaModelGetDslImpl<Message, Message, Mes
         super(id, MessageEndpoint.ENDPOINT, MessageExpansionModel.of(), MessageByIdGetImpl::new);
     }
 
-    public MessageByIdGetImpl(MetaModelFetchDslBuilder<Message, Message, MessageByIdGet, MessageExpansionModel<Message>> builder) {
+    public MessageByIdGetImpl(MetaModelGetDslBuilder<Message, Message, MessageByIdGet, MessageExpansionModel<Message>> builder) {
         super(builder);
     }
 }

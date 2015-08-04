@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.expansion.CustomObjectExpansionModel;
-import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
+import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 
 /**
@@ -17,7 +17,7 @@ final class CustomObjectByKeyGetImpl<T> extends MetaModelGetDslImpl<CustomObject
         super("" + container + "/" + key, JsonEndpoint.of(typeReference, CustomObjectEndpoint.PATH), CustomObjectExpansionModel.<T>of(), builder -> new CustomObjectByKeyGetImpl<>(builder));
     }
 
-    public CustomObjectByKeyGetImpl(final MetaModelFetchDslBuilder<CustomObject<T>, CustomObject<T>, CustomObjectByKeyGet<T>, CustomObjectExpansionModel<CustomObject<T>>> builder) {
+    public CustomObjectByKeyGetImpl(final MetaModelGetDslBuilder<CustomObject<T>, CustomObject<T>, CustomObjectByKeyGet<T>, CustomObjectExpansionModel<CustomObject<T>>> builder) {
         super(builder);
     }
 }

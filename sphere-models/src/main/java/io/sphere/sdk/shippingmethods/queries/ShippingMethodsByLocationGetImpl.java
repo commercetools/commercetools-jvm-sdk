@@ -3,7 +3,7 @@ package io.sphere.sdk.shippingmethods.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.http.UrlQueryBuilder;
-import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
+import io.sphere.sdk.queries.MetaModelGetDslBuilder;
 import io.sphere.sdk.queries.MetaModelGetDslImpl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
@@ -31,7 +31,7 @@ final class ShippingMethodsByLocationGetImpl extends MetaModelGetDslImpl<List<Sh
         }), ShippingMethodExpansionModel.of(), ShippingMethodsByLocationGetImpl::new);
     }
 
-    public ShippingMethodsByLocationGetImpl(final MetaModelFetchDslBuilder<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGetImpl, ShippingMethodExpansionModel<ShippingMethod>> builder) {
+    public ShippingMethodsByLocationGetImpl(final MetaModelGetDslBuilder<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGetImpl, ShippingMethodExpansionModel<ShippingMethod>> builder) {
         super(builder);
     }
 
