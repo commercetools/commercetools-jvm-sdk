@@ -99,7 +99,7 @@ public class LocalizedStringTest {
     @Test
     public void stream() throws Exception {
         final LocalizedString upperCased = dogFood.stream()
-                .map(e -> LocalizedStringsEntry.of(e.getLocale(), e.getValue().toUpperCase()))
+                .map(e -> LocalizedStringEntry.of(e.getLocale(), e.getValue().toUpperCase()))
                 .collect(LocalizedString.streamCollector());
         assertThat(upperCased).isEqualTo(upperCasedDogFood);
     }

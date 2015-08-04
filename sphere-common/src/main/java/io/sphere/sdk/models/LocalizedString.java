@@ -147,17 +147,17 @@ public class LocalizedString extends Base {
     public LocalizedString mapValue(final BiFunction<Locale, String, String> function) {
         return stream().map(entry -> {
             final String newValue = function.apply(entry.getLocale(), entry.getValue());
-            return LocalizedStringsEntry.of(entry.getLocale(), newValue);
+            return LocalizedStringEntry.of(entry.getLocale(), newValue);
         }).collect(streamCollector());
     }
 
-    public Stream<LocalizedStringsEntry> stream() {
-        return translations.entrySet().stream().map(entry -> LocalizedStringsEntry.of(entry.getKey(), entry.getValue()));
+    public Stream<LocalizedStringEntry> stream() {
+        return translations.entrySet().stream().map(entry -> LocalizedStringEntry.of(entry.getKey(), entry.getValue()));
     }
 
-    public static Collector<LocalizedStringsEntry, ?, LocalizedString> streamCollector() {
-        final Collector<LocalizedStringsEntry, Map<Locale, String>, LocalizedString> result =
-                Collector.of(HashMap::new, (Map<Locale, String> tmpMap, LocalizedStringsEntry entry) -> tmpMap.put(entry.getLocale(), entry.getValue()), (Map<Locale, String> left, Map<Locale, String> right) -> {
+    public static Collector<LocalizedStringEntry, ?, LocalizedString> streamCollector() {
+        final Collector<LocalizedStringEntry, Map<Locale, String>, LocalizedString> result =
+                Collector.of(HashMap::new, (Map<Locale, String> tmpMap, LocalizedStringEntry entry) -> tmpMap.put(entry.getLocale(), entry.getValue()), (Map<Locale, String> left, Map<Locale, String> right) -> {
                     left.putAll(right);
                     return left;
                 }, (Map<Locale, String> entryMap) -> LocalizedString.of(entryMap));
