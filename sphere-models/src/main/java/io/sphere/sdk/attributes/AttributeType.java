@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.*;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "name", visible = true)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = TextType.class, name = "text"),
-    @JsonSubTypes.Type(value = LocalizedStringsType.class, name = "ltext"),
+    @JsonSubTypes.Type(value = LocalizedStringType.class, name = "ltext"),
     @JsonSubTypes.Type(value = EnumType.class, name = "enum"),
     @JsonSubTypes.Type(value = LocalizedEnumType.class, name = "lenum"),
     @JsonSubTypes.Type(value = NumberType.class, name = "number"),

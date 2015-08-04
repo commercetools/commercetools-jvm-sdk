@@ -27,8 +27,8 @@ public class ProductAttributeSearchModel extends SearchModelImpl<ProductProjecti
         return new StringSearchModel<>(this, attributeName);
     }
 
-    public LocalizedStringsSearchModel<ProductProjection, VariantSearchSortDirection> ofLocalizableText(final String attributeName) {
-        return new LocalizedStringsSearchModel<>(this, attributeName);
+    public LocalizedStringSearchModel<ProductProjection, VariantSearchSortDirection> ofLocalizableText(final String attributeName) {
+        return new LocalizedStringSearchModel<>(this, attributeName);
     }
 
     public EnumSearchModel<ProductProjection, VariantSearchSortDirection> ofEnum(final String attributeName) {

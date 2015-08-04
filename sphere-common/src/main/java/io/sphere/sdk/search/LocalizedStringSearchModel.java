@@ -3,9 +3,9 @@ package io.sphere.sdk.search;
 import javax.annotation.Nullable;
 import java.util.Locale;
 
-public class LocalizedStringsSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> {
+public class LocalizedStringSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> {
 
-    public LocalizedStringsSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
+    public LocalizedStringSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 

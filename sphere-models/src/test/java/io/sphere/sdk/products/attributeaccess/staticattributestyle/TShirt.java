@@ -5,5 +5,5 @@ import io.sphere.sdk.attributes.NamedAttributeAccess;
 import io.sphere.sdk.models.LocalizedString;
 
 public class TShirt {
-    public static final NamedAttributeAccess<LocalizedString> LONG_DESCRIPTION = AttributeAccess.ofLocalizedStrings().ofName("longDescription");
+    public static final NamedAttributeAccess<LocalizedString> LONG_DESCRIPTION = AttributeAccess.ofLocalizedString().ofName("longDescription");
 }

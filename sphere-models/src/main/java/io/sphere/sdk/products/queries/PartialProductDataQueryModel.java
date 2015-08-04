@@ -21,7 +21,7 @@ public final class PartialProductDataQueryModel extends ProductDataQueryModel<Pa
     }
 
     @Override
-    public LocalizedStringsQueryModel<PartialProductDataQueryModel> description() {
+    public LocalizedStringQueryModel<PartialProductDataQueryModel> description() {
         return super.description();
     }
 
@@ -31,27 +31,27 @@ public final class PartialProductDataQueryModel extends ProductDataQueryModel<Pa
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<PartialProductDataQueryModel> metaDescription() {
+    public LocalizedStringQuerySortingModel<PartialProductDataQueryModel> metaDescription() {
         return super.metaDescription();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<PartialProductDataQueryModel> metaKeywords() {
+    public LocalizedStringQuerySortingModel<PartialProductDataQueryModel> metaKeywords() {
         return super.metaKeywords();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<PartialProductDataQueryModel> metaTitle() {
+    public LocalizedStringQuerySortingModel<PartialProductDataQueryModel> metaTitle() {
         return super.metaTitle();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<PartialProductDataQueryModel> name() {
+    public LocalizedStringQuerySortingModel<PartialProductDataQueryModel> name() {
         return super.name();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<PartialProductDataQueryModel> slug() {
+    public LocalizedStringQuerySortingModel<PartialProductDataQueryModel> slug() {
         return super.slug();
     }
 

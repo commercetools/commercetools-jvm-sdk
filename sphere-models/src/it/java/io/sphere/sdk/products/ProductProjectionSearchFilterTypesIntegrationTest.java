@@ -385,7 +385,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         final LocalizedEnumType enumLocType = LocalizedEnumType.of(LOC_ENUM_ONE, LOC_ENUM_TWO, LOC_ENUM_THREE);
         final AttributeDefinition booleanAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_BOOLEAN, ofEnglishLocale(ATTR_NAME_BOOLEAN), BooleanType.of()).build();
         final AttributeDefinition textAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT, ofEnglishLocale(ATTR_NAME_TEXT), TextType.of()).build();
-        final AttributeDefinition locTextAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT, ofEnglishLocale(ATTR_NAME_LOC_TEXT), LocalizedStringsType.of()).build();
+        final AttributeDefinition locTextAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT, ofEnglishLocale(ATTR_NAME_LOC_TEXT), LocalizedStringType.of()).build();
         final AttributeDefinition enumAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_ENUM, ofEnglishLocale(ATTR_NAME_ENUM), enumType).build();
         final AttributeDefinition locEnumAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_ENUM, ofEnglishLocale(ATTR_NAME_LOC_ENUM), enumLocType).build();
         final AttributeDefinition numberAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_NUMBER, ofEnglishLocale(ATTR_NAME_NUMBER), NumberType.of()).build();
@@ -396,7 +396,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         final AttributeDefinition refAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_REF, ofEnglishLocale(ATTR_NAME_REF), ReferenceType.of(Product.typeId())).build();
         final AttributeDefinition booleanSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_BOOLEAN_SET, ofEnglishLocale(ATTR_NAME_BOOLEAN_SET), SetType.of(BooleanType.of())).build();
         final AttributeDefinition textSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT_SET, ofEnglishLocale(ATTR_NAME_TEXT_SET), SetType.of(TextType.of())).build();
-        final AttributeDefinition locTextSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT_SET, ofEnglishLocale(ATTR_NAME_LOC_TEXT_SET), SetType.of(LocalizedStringsType.of())).build();
+        final AttributeDefinition locTextSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT_SET, ofEnglishLocale(ATTR_NAME_LOC_TEXT_SET), SetType.of(LocalizedStringType.of())).build();
         final AttributeDefinition enumSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_ENUM_SET, ofEnglishLocale(ATTR_NAME_ENUM_SET), SetType.of(enumType)).build();
         final AttributeDefinition locEnumSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_ENUM_SET, ofEnglishLocale(ATTR_NAME_LOC_ENUM_SET), SetType.of(enumLocType)).build();
         final AttributeDefinition numberSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_NUMBER_SET, ofEnglishLocale(ATTR_NAME_NUMBER_SET), SetType.of(NumberType.of())).build();
@@ -418,7 +418,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
                 .attributes(
                         AttributeAccess.ofBoolean().ofName(ATTR_NAME_BOOLEAN).draftOf(true),
                         AttributeAccess.ofText().ofName(ATTR_NAME_TEXT).draftOf("foo"),
-                        AttributeAccess.ofLocalizedStrings().ofName(ATTR_NAME_LOC_TEXT).draftOf(ofEnglishLocale("localized foo")),
+                        AttributeAccess.ofLocalizedString().ofName(ATTR_NAME_LOC_TEXT).draftOf(ofEnglishLocale("localized foo")),
                         AttributeAccess.ofPlainEnumValue().ofName(ATTR_NAME_ENUM).draftOf(ENUM_TWO),
                         AttributeAccess.ofLocalizedEnumValue().ofName(ATTR_NAME_LOC_ENUM).draftOf(LOC_ENUM_TWO),
                         AttributeAccess.ofDouble().ofName(ATTR_NAME_NUMBER).draftOf(5D),
@@ -429,7 +429,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
                         AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(productSomeId.toReference()),
                         AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true, false)),
                         AttributeAccess.ofTextSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet("foo", "bar")),
-                        AttributeAccess.ofLocalizedStringsSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(ofEnglishLocale("localized foo"), ofEnglishLocale("localized bar"))),
+                        AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(ofEnglishLocale("localized foo"), ofEnglishLocale("localized bar"))),
                         AttributeAccess.ofPlainEnumValueSet().ofName(ATTR_NAME_ENUM_SET).draftOf(asSet(ENUM_TWO, ENUM_THREE)),
                         AttributeAccess.ofLocalizedEnumValueSet().ofName(ATTR_NAME_LOC_ENUM_SET).draftOf(asSet(LOC_ENUM_TWO, LOC_ENUM_THREE)),
                         AttributeAccess.ofDoubleSet().ofName(ATTR_NAME_NUMBER_SET).draftOf(asSet(5D, 10D)),
@@ -449,7 +449,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
                 .attributes(
                         AttributeAccess.ofBoolean().ofName(ATTR_NAME_BOOLEAN).draftOf(false),
                         AttributeAccess.ofText().ofName(ATTR_NAME_TEXT).draftOf("bar"),
-                        AttributeAccess.ofLocalizedStrings().ofName(ATTR_NAME_LOC_TEXT).draftOf(ofEnglishLocale("localized bar")),
+                        AttributeAccess.ofLocalizedString().ofName(ATTR_NAME_LOC_TEXT).draftOf(ofEnglishLocale("localized bar")),
                         AttributeAccess.ofPlainEnumValue().ofName(ATTR_NAME_ENUM).draftOf(ENUM_THREE),
                         AttributeAccess.ofLocalizedEnumValue().ofName(ATTR_NAME_LOC_ENUM).draftOf(LOC_ENUM_THREE),
                         AttributeAccess.ofDouble().ofName(ATTR_NAME_NUMBER).draftOf(10D),
@@ -460,7 +460,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
                         AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(productOtherId.toReference()),
                         AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true)),
                         AttributeAccess.ofTextSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet("foo")),
-                        AttributeAccess.ofLocalizedStringsSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(ofEnglishLocale("localized foo"))),
+                        AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(ofEnglishLocale("localized foo"))),
                         AttributeAccess.ofPlainEnumValueSet().ofName(ATTR_NAME_ENUM_SET).draftOf(asSet(ENUM_TWO)),
                         AttributeAccess.ofLocalizedEnumValueSet().ofName(ATTR_NAME_LOC_ENUM_SET).draftOf(asSet(LOC_ENUM_TWO)),
                         AttributeAccess.ofDoubleSet().ofName(ATTR_NAME_NUMBER_SET).draftOf(asSet(5D)),

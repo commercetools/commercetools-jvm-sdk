@@ -35,7 +35,7 @@ public class LocalizedStringTest {
     }
 
     @Test
-    public void createANewLocalizedStringsByAddingALocale() throws Exception {
+    public void createANewLocalizedStringByAddingALocale() throws Exception {
         final LocalizedString ls = LocalizedString.of(germanLocale, defaultString1).plus(englishLocale, defaultString2);
         assertThat(ls.get(germanLocale)).isEqualTo(defaultString1);
         assertThat(ls.get(englishLocale)).isEqualTo(defaultString2);

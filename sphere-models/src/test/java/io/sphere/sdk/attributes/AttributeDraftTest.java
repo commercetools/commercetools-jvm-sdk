@@ -56,7 +56,7 @@ public class AttributeDraftTest {
     }
 
     @Test
-    public void doesNotTouchOtherValueLikeEnumsForLocalizedStrings() throws Exception {
+    public void doesNotTouchOtherValueLikeEnumsForLocalizedString() throws Exception {
         final AttributeDraft draft = AttributeDraft.of("foo", LocalizedString.of(ENGLISH, "hello"));
         assertThat(draft.getValue().toString()).isEqualTo("{\"en\":\"hello\"}");
     }

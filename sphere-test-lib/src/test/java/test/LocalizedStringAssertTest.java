@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import java.util.Locale;
 
-import static io.sphere.sdk.test.LocalizedStringsAssert.assertThat;
+import static io.sphere.sdk.test.LocalizedStringAssert.assertThat;
 
 public class LocalizedStringAssertTest {
     final LocalizedString foo = LocalizedString.of(Locale.ENGLISH, "foo");

@@ -8,7 +8,7 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LocalizedStringQuerySortingModelTest {
-    private final LocalizedStringsQuerySortingModel<String> model = new LocalizedStringsQuerySortingModelImpl<>(null, "thepath");
+    private final LocalizedStringQuerySortingModel<String> model = new LocalizedStringQuerySortingModelImpl<>(null, "thepath");
 
     @Test
     public void lang() throws Exception {

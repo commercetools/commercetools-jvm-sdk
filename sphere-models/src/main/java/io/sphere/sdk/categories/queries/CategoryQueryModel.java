@@ -16,12 +16,12 @@ public final class CategoryQueryModel extends ResourceQueryModelImpl<Category> {
         super(parent, pathSegment);
     }
 
-    public LocalizedStringsQuerySortingModel<Category> slug() {
-        return localizedStringsQuerySortingModel("slug");
+    public LocalizedStringQuerySortingModel<Category> slug() {
+        return localizedStringQuerySortingModel("slug");
     }
 
-    public LocalizedStringsQuerySortingModel<Category> name() {
-        return localizedStringsQuerySortingModel("name");
+    public LocalizedStringQuerySortingModel<Category> name() {
+        return localizedStringQuerySortingModel("name");
     }
 
     public StringQuerySortingModel<Category> externalId() {

@@ -1,8 +1,8 @@
 package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.queries.LocalizedStringsQueryModel;
-import io.sphere.sdk.queries.LocalizedStringsQuerySortingModel;
+import io.sphere.sdk.queries.LocalizedStringQueryModel;
+import io.sphere.sdk.queries.LocalizedStringQuerySortingModel;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.ReferenceCollectionQueryModel;
 
@@ -20,7 +20,7 @@ public class ProductDataQueryModel<T> extends ProductDataQueryModelBase<T> {
     }
 
     @Override
-    public LocalizedStringsQueryModel<T> description() {
+    public LocalizedStringQueryModel<T> description() {
         return super.description();
     }
 
@@ -35,27 +35,27 @@ public class ProductDataQueryModel<T> extends ProductDataQueryModelBase<T> {
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<T> metaDescription() {
+    public LocalizedStringQuerySortingModel<T> metaDescription() {
         return super.metaDescription();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<T> metaKeywords() {
+    public LocalizedStringQuerySortingModel<T> metaKeywords() {
         return super.metaKeywords();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<T> metaTitle() {
+    public LocalizedStringQuerySortingModel<T> metaTitle() {
         return super.metaTitle();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<T> name() {
+    public LocalizedStringQuerySortingModel<T> name() {
         return super.name();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<T> slug() {
+    public LocalizedStringQuerySortingModel<T> slug() {
         return super.slug();
     }
 

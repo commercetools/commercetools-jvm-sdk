@@ -6,6 +6,6 @@ import io.sphere.sdk.models.LocalizedString;
 
 public interface WithLongDescription {
     default NamedAttributeAccess<LocalizedString> longDescription() {
-        return AttributeAccess.ofLocalizedStrings().ofName("longDescription");
+        return AttributeAccess.ofLocalizedString().ofName("longDescription");
     }
 }

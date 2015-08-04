@@ -15,8 +15,8 @@ class ProductDataSearchModelBase extends SearchModelImpl<ProductProjection> {
         return new ProductVariantSearchModel(this, "variants");
     }
 
-    public LocalizedStringsSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
-        return new LocalizedStringsSearchModel<>(this, "name");
+    public LocalizedStringSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
+        return new LocalizedStringSearchModel<>(this, "name");
     }
 
     public ReferenceSearchModel<ProductProjection, Category> categories() {

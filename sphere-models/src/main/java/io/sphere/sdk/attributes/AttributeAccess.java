@@ -59,12 +59,12 @@ public interface AttributeAccess<T> {
         return ofStringSet();
     }
 
-    static AttributeAccess<LocalizedString> ofLocalizedStrings() {
-        return AttributeAccessImpl.ofPrimitive(LocalizedString.typeReference(), LocalizedStringsType.class);
+    static AttributeAccess<LocalizedString> ofLocalizedString() {
+        return AttributeAccessImpl.ofPrimitive(LocalizedString.typeReference(), LocalizedStringType.class);
     }
 
-    static AttributeAccess<Set<LocalizedString>> ofLocalizedStringsSet() {
-        return AttributeAccessImpl.ofSet(LocalizedStringsType.class, new TypeReference<Set<LocalizedString>>() {
+    static AttributeAccess<Set<LocalizedString>> ofLocalizedStringSet() {
+        return AttributeAccessImpl.ofSet(LocalizedStringType.class, new TypeReference<Set<LocalizedString>>() {
         });
     }
 

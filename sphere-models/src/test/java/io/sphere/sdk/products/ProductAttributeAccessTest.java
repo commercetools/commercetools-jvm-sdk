@@ -30,9 +30,9 @@ public class ProductAttributeAccessTest {
     private final ProductVariant variant = product.getMasterData().getCurrent().getMasterVariant();
     private final ProductType productType = productProjection.getProductType().getObj();
 
-    private final NamedAttributeAccess<LocalizedString> localizedStringsNamedAttributeAccess = ofLocalizedStrings().ofName(LOC_STRING_ATTRIBUTE);
-    private final NamedAttributeAccess<LocalizedString> wrongTypeNamedAttributeAccess = ofLocalizedStrings().ofName("boolean-attribute");
-    private final NamedAttributeAccess<LocalizedString> notPresentNamedAttributeAccess = ofLocalizedStrings().ofName(NOT_PRESENT);
+    private final NamedAttributeAccess<LocalizedString> localizedStringNamedAttributeAccess = ofLocalizedString().ofName(LOC_STRING_ATTRIBUTE);
+    private final NamedAttributeAccess<LocalizedString> wrongTypeNamedAttributeAccess = ofLocalizedString().ofName("boolean-attribute");
+    private final NamedAttributeAccess<LocalizedString> notPresentNamedAttributeAccess = ofLocalizedString().ofName(NOT_PRESENT);
 
     @Test
     public void size() throws Exception {
@@ -48,13 +48,13 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void getterWithAttributeAccess() throws Exception {
-        assertThat(variant.findAttribute(LOC_STRING_ATTRIBUTE, ofLocalizedStrings()).get()).
+        assertThat(variant.findAttribute(LOC_STRING_ATTRIBUTE, ofLocalizedString()).get()).
                 isEqualTo(LocalizedString.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
     }
 
     @Test
-    public void localizedStrings() throws Exception {
-        assertThat(variant.findAttribute(localizedStringsNamedAttributeAccess).get()).
+    public void localizedString() throws Exception {
+        assertThat(variant.findAttribute(localizedStringNamedAttributeAccess).get()).
                 isEqualTo(LocalizedString.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
     }
 
@@ -70,7 +70,7 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void productProjection() throws Exception {
-        assertThat(productProjection.getMasterVariant().findAttribute(localizedStringsNamedAttributeAccess).get()).
+        assertThat(productProjection.getMasterVariant().findAttribute(localizedStringNamedAttributeAccess).get()).
                 isEqualTo(LocalizedString.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
 
     }
@@ -105,7 +105,7 @@ public class ProductAttributeAccessTest {
         final Locale locale = Locale.GERMAN;
         final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName());
         return AttributeExtraction.<String>of(attrDefinition, attr)
-                .ifIs(ofLocalizedStrings(), lString -> lString.find(locale).orElse("<no translation found>"))
+                .ifIs(ofLocalizedString(), lString -> lString.find(locale).orElse("<no translation found>"))
                 .ifGuarded(ofString(), s -> s.length() > 2000 ? Optional.empty() : Optional.of(s))
                 .findValue().orElse("<no mapping found>");
     }

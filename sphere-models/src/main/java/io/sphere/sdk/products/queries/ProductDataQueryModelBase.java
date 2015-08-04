@@ -20,16 +20,16 @@ class ProductDataQueryModelBase<T> extends ResourceQueryModelImpl<T> {
         super(parent, pathSegment);
     }
 
-    public LocalizedStringsQuerySortingModel<T> name() {
-        return localizedStringsQuerySortingModel("name");
+    public LocalizedStringQuerySortingModel<T> name() {
+        return localizedStringQuerySortingModel("name");
     }
 
-    public LocalizedStringsQueryModel<T> description() {
-        return localizedStringsQuerySortingModel("description");
+    public LocalizedStringQueryModel<T> description() {
+        return localizedStringQuerySortingModel("description");
     }
 
-    public LocalizedStringsQuerySortingModel<T> slug() {
-        return localizedStringsQuerySortingModel("slug");
+    public LocalizedStringQuerySortingModel<T> slug() {
+        return localizedStringQuerySortingModel("slug");
     }
 
     public ProductAllVariantsQueryModel<T> allVariants() {
@@ -44,16 +44,16 @@ class ProductDataQueryModelBase<T> extends ResourceQueryModelImpl<T> {
         return new ProductVariantQueryModel<>(this, "variants");
     }
 
-    public LocalizedStringsQuerySortingModel<T> metaTitle() {
-        return localizedStringsQuerySortingModel("metaTitle");
+    public LocalizedStringQuerySortingModel<T> metaTitle() {
+        return localizedStringQuerySortingModel("metaTitle");
     }
 
-    public LocalizedStringsQuerySortingModel<T> metaKeywords() {
-        return localizedStringsQuerySortingModel("metaKeywords");
+    public LocalizedStringQuerySortingModel<T> metaKeywords() {
+        return localizedStringQuerySortingModel("metaKeywords");
     }
 
-    public LocalizedStringsQuerySortingModel<T> metaDescription() {
-        return localizedStringsQuerySortingModel("metaDescription");
+    public LocalizedStringQuerySortingModel<T> metaDescription() {
+        return localizedStringQuerySortingModel("metaDescription");
     }
 
     public ReferenceCollectionQueryModel<T, Category> categories() {

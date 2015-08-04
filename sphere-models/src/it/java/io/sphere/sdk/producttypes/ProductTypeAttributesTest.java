@@ -78,11 +78,11 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     @Test
-    public void localizedStringsAttribute() throws Exception {
-        testSingleAndSet(AttributeAccess.ofLocalizedStrings(), AttributeAccess.ofLocalizedStringsSet(),
+    public void localizedStringAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofLocalizedString(), AttributeAccess.ofLocalizedStringSet(),
                 asSet(LocalizedString.of(ENGLISH, "hello"), LocalizedString.of(ENGLISH, "world")),
-                LocalizedStringsType.of(),
-                AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringsType.of()).inputHint(TEXT_INPUT_HINT).build());
+                LocalizedStringType.of(),
+                AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringType.of()).inputHint(TEXT_INPUT_HINT).build());
     }
 
     @Test
@@ -227,8 +227,8 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     @Test
-    public void createLocalizedStringsAttribute() throws Exception {
-        executeTest(LocalizedStringsType.class, AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringsType.of()).
+    public void createLocalizedStringAttribute() throws Exception {
+        executeTest(LocalizedStringType.class, AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringType.of()).
                 inputHint(TEXT_INPUT_HINT).
                 attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).

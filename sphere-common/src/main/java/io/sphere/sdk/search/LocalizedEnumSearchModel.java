@@ -12,7 +12,7 @@ public class LocalizedEnumSearchModel<T, S extends SearchSortDirection> extends 
         return new StringSearchModel<>(this, "key");
     }
 
-    public LocalizedStringsSearchModel<T, S> label() {
-        return new LocalizedStringsSearchModel<>(this, "label");
+    public LocalizedStringSearchModel<T, S> label() {
+        return new LocalizedStringSearchModel<>(this, "label");
     }
 }
