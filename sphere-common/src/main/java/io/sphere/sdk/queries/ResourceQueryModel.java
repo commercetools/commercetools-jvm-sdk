@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-public interface DefaultModelQueryModel<T> {
+public interface ResourceQueryModel<T> {
     StringQuerySortingModel<T> id();
 
     TimestampSortingModel<T> createdAt();

@@ -7,7 +7,7 @@ import static java.util.Arrays.asList;
 public class ImplClassesAreForPackageScopeRule extends ClassStrategyRule {
     private final List<String> simpleClassNamesWhitelist =
             asList(("ByIdDeleteCommandImpl,CommandImpl,CreateCommandImpl," +
-                    "CustomObjectQueryImpl,ResourceImpl,DefaultModelQueryModelImpl," +
+                    "CustomObjectQueryImpl,ResourceImpl,ResourceQueryModelImpl," +
                     "ResourceViewImpl,GenericMessageImpl,MessageImpl," +
                     "MetaModelFetchDslImpl,MetaModelQueryDslImpl,MoneyImpl," +
                     "QueryModelImpl,SearchDslImpl,UpdateCommandDslImpl,SearchModelImpl," +

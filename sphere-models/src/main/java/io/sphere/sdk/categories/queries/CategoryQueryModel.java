@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.*;
 /**
  * {@doc.gen summary categories}
  */
-public final class CategoryQueryModel extends DefaultModelQueryModelImpl<Category> {
+public final class CategoryQueryModel extends ResourceQueryModelImpl<Category> {
 
     public static CategoryQueryModel of() {
         return new CategoryQueryModel(null, null);

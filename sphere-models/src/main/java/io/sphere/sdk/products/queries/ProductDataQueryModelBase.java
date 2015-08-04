@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.*;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-class ProductDataQueryModelBase<T> extends DefaultModelQueryModelImpl<T> {
+class ProductDataQueryModelBase<T> extends ResourceQueryModelImpl<T> {
 
     public QueryPredicate<T> where(final QueryPredicate<PartialProductDataQueryModel> embeddedPredicate) {
         return embedPredicate(embeddedPredicate);

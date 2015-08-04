@@ -1,7 +1,7 @@
 package io.sphere.sdk.queries;
 
-public class DefaultModelQueryModelImpl<T> extends QueryModelImpl<T> implements DefaultModelQueryModel<T> {
-    protected DefaultModelQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
+public class ResourceQueryModelImpl<T> extends QueryModelImpl<T> implements ResourceQueryModel<T> {
+    protected ResourceQueryModelImpl(final QueryModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
     }
 
