@@ -1,9 +1,9 @@
 package io.sphere.sdk.suppliers;
 
 import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 
 import java.util.List;
@@ -31,13 +31,13 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
     }
 
     public static class Sizes {
-        public static final PlainEnumValue S = PlainEnumValue.of("S", "S");
-        public static final PlainEnumValue M = PlainEnumValue.of("M", "M");
-        public static final PlainEnumValue X = PlainEnumValue.of("X", "X");
+        public static final EnumValue S = EnumValue.of("S", "S");
+        public static final EnumValue M = EnumValue.of("M", "M");
+        public static final EnumValue X = EnumValue.of("X", "X");
 
-        public static final List<PlainEnumValue> VALUES = asImmutableList(S, M, X);
+        public static final List<EnumValue> VALUES = asImmutableList(S, M, X);
 
-        public static final NamedAttributeAccess<PlainEnumValue> ATTRIBUTE =
+        public static final NamedAttributeAccess<EnumValue> ATTRIBUTE =
                 AttributeAccess.ofPlainEnumValue().ofName("size");
     }
 

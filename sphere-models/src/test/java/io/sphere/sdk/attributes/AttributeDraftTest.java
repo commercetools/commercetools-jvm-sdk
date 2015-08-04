@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.Reference;
 import org.junit.Test;
 
@@ -20,8 +20,8 @@ public class AttributeDraftTest {
             LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
     private final LocalizedEnumValue red = LocalizedEnumValue.of("red",
             LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
-    private final PlainEnumValue s = PlainEnumValue.of("S", "S");
-    private final PlainEnumValue m = PlainEnumValue.of("M", "M");
+    private final EnumValue s = EnumValue.of("S", "S");
+    private final EnumValue m = EnumValue.of("M", "M");
     private final ObjectMapper objectMapper = new ObjectMapper();
 
 

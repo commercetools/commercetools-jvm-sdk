@@ -6,7 +6,7 @@ import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
 import io.sphere.sdk.attributes.EnumType;
-import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
 
 import java.util.List;
@@ -17,11 +17,11 @@ public class QueryByProductTypeNameExample {
 
     public void queryByNameExample() {
         CompletionStage<PagedQueryResult<ProductType>> queryResultFuture = client.execute(ProductTypeQuery.of().byName("t-shirt"));
-        CompletionStage<List<PlainEnumValue>> possibleValuesFuture = queryResultFuture.thenApply(
+        CompletionStage<List<EnumValue>> possibleValuesFuture = queryResultFuture.thenApply(
                 queryResult -> extractPossibleEnumValuesForSize(queryResult));
     }
 
-    private static List<PlainEnumValue> extractPossibleEnumValuesForSize(PagedQueryResult<ProductType> pagedQueryResult) {
+    private static List<EnumValue> extractPossibleEnumValuesForSize(PagedQueryResult<ProductType> pagedQueryResult) {
         ProductType productType = pagedQueryResult.
                 head().
                 orElseThrow(MissingProductTypeException::new);

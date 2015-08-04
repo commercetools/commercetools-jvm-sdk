@@ -1,7 +1,7 @@
 package io.sphere.sdk.producttypes.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.producttypes.ProductType;
 
 import java.util.List;
@@ -11,15 +11,15 @@ import java.util.List;
  */
 public class ChangePlainEnumValueOrder extends UpdateActionImpl<ProductType> {
     private final String attributeName;
-    private final List<PlainEnumValue> values;
+    private final List<EnumValue> values;
 
-    private ChangePlainEnumValueOrder(final String attributeName, final List<PlainEnumValue> values) {
+    private ChangePlainEnumValueOrder(final String attributeName, final List<EnumValue> values) {
         super("changePlainEnumValueOrder");
         this.attributeName = attributeName;
         this.values = values;
     }
 
-    public static ChangePlainEnumValueOrder of(final String attributeName, final List<PlainEnumValue> values) {
+    public static ChangePlainEnumValueOrder of(final String attributeName, final List<EnumValue> values) {
         return new ChangePlainEnumValueOrder(attributeName, values);
     }
 
@@ -27,7 +27,7 @@ public class ChangePlainEnumValueOrder extends UpdateActionImpl<ProductType> {
         return attributeName;
     }
 
-    public List<PlainEnumValue> getValues() {
+    public List<EnumValue> getValues() {
         return values;
     }
 }

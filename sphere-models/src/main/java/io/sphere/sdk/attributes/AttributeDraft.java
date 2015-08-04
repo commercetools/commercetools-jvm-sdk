@@ -4,8 +4,8 @@ package io.sphere.sdk.attributes;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.models.WithKey;
 
 import java.util.Set;
@@ -25,13 +25,13 @@ public class AttributeDraft extends Base {
         final AttributeDraft result;
         if (value instanceof LocalizedEnumValue) {
             result = of(name, ((LocalizedEnumValue) value).getKey());
-        } else if (value instanceof PlainEnumValue) {
-            result = of(name, ((PlainEnumValue) value).getKey());
+        } else if (value instanceof EnumValue) {
+            result = of(name, ((EnumValue) value).getKey());
         } else if (value instanceof Set) {
             final Set<?> set = (Set<?>) value;
             if (!set.isEmpty()) {
                 final Object setValue = set.stream().findAny().get();
-                if (setValue instanceof LocalizedEnumValue || setValue instanceof PlainEnumValue) {
+                if (setValue instanceof LocalizedEnumValue || setValue instanceof EnumValue) {
                     //WithKey is a interface the enum like implement
                     final Set<String> newValues = set.stream().map(x -> ((WithKey) x).getKey()).collect(toSet());
                     result = of(name, newValues);

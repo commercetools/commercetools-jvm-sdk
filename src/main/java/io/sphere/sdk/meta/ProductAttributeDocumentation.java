@@ -26,7 +26,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
  <ul>
     <li>color as {@link io.sphere.sdk.models.LocalizedEnumValue} with the colors green and red and their translations in German and English</li>
-    <li>size as {@link io.sphere.sdk.models.PlainEnumValue} with S, M and X</li>
+    <li>size as {@code io.sphere.sdk.models.PlainEnumValue} with S, M and X</li>
     <li>laundrySymbols as set of {@link io.sphere.sdk.models.LocalizedEnumValue} with temperature and tumble drying</li>
     <li>matchingProducts as set of product {@link io.sphere.sdk.models.Reference}s, which can point to products which are similar to the current product</li>
     <li>rrp as {@link javax.money.MonetaryAmount} containing the recommended retail price</li>

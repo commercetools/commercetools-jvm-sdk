@@ -7,7 +7,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.AttributeContainer;
 import io.sphere.sdk.products.Product;
@@ -68,12 +68,12 @@ public interface AttributeAccess<T> {
         });
     }
 
-    static AttributeAccess<PlainEnumValue> ofPlainEnumValue() {
-        return AttributeAccessImpl.ofEnumLike(PlainEnumValue.typeReference(), EnumType.class);
+    static AttributeAccess<EnumValue> ofPlainEnumValue() {
+        return AttributeAccessImpl.ofEnumLike(EnumValue.typeReference(), EnumType.class);
     }
 
-    static AttributeAccess<Set<PlainEnumValue>> ofPlainEnumValueSet() {
-        return AttributeAccessImpl.ofEnumLikeSet(EnumType.class, new TypeReference<Set<PlainEnumValue>>() {
+    static AttributeAccess<Set<EnumValue>> ofPlainEnumValueSet() {
+        return AttributeAccessImpl.ofEnumLikeSet(EnumType.class, new TypeReference<Set<EnumValue>>() {
         });
     }
 

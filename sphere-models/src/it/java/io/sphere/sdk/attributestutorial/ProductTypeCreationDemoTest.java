@@ -5,9 +5,9 @@ import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.errors.InvalidField;
 import io.sphere.sdk.orders.*;
@@ -112,9 +112,9 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 .required(true)
                 .build();
 
-        final PlainEnumValue s = PlainEnumValue.of("S", "S");
-        final PlainEnumValue m = PlainEnumValue.of("M", "M");
-        final PlainEnumValue x = PlainEnumValue.of("X", "X");
+        final EnumValue s = EnumValue.of("S", "S");
+        final EnumValue m = EnumValue.of("M", "M");
+        final EnumValue x = EnumValue.of("X", "X");
         final AttributeDefinition size = AttributeDefinitionBuilder
                 .of(SIZE_ATTR_NAME, en("size"), EnumType.of(s, m, x))
                 .required(true)
@@ -180,7 +180,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 .overridingErrorMessage("on the get side, the while enum is delivered")
                 .contains(LocalizedEnumValue.of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün")));
         assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
-                .contains(PlainEnumValue.of("S", "S"));
+                .contains(EnumValue.of("S", "S"));
         final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
                 LocalizedString.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
         final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
@@ -218,7 +218,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     public void productCreationWithGetterSetter() throws Exception {
         /* the declarations you could put into a separate class */
         final NamedAttributeAccess<LocalizedEnumValue> color = AttributeAccess.ofLocalizedEnumValue().ofName(COLOR_ATTR_NAME);
-        final NamedAttributeAccess<PlainEnumValue> size = AttributeAccess.ofPlainEnumValue().ofName(SIZE_ATTR_NAME);
+        final NamedAttributeAccess<EnumValue> size = AttributeAccess.ofPlainEnumValue().ofName(SIZE_ATTR_NAME);
         final NamedAttributeAccess<Set<LocalizedEnumValue>> laundrySymbols =
                 AttributeAccess.ofLocalizedEnumValueSet().ofName(LAUNDRY_SYMBOLS_ATTR_NAME);
         final NamedAttributeAccess<Set<Reference<Product>>> matchingProducts =
@@ -239,7 +239,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                 */
                 .plusAttribute(color, LocalizedEnumValue.of("green",
                         LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün")))//will extract the key
-                .plusAttribute(size, PlainEnumValue.of("S", "S"))
+                .plusAttribute(size, EnumValue.of("S", "S"))
                 .plusAttribute(laundrySymbols, asSet(cold, tumbleDrying))//will extract the keys, so you do not need to
                         //remember the special cases, there is also no problem mixing the styles
                 .plusAttribute(matchingProducts, asSet(productReference))
@@ -256,7 +256,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
         assertThat(masterVariant.findAttribute(color))
                 .contains(LocalizedEnumValue.of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün")));
-        assertThat(masterVariant.findAttribute(size)).contains(PlainEnumValue.of("S", "S"));
+        assertThat(masterVariant.findAttribute(size)).contains(EnumValue.of("S", "S"));
         assertThat(masterVariant.findAttribute(laundrySymbols)).contains(asSet(cold, tumbleDrying));
         assertThat(masterVariant.findAttribute(matchingProducts)).contains(asSet(productReference));
         assertThat(masterVariant.findAttribute(rrp)).contains(MoneyImpl.of(300, EUR));
@@ -281,19 +281,19 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     public void readAttributeWithoutProductTypeWithName() throws Exception {
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-        final Optional<PlainEnumValue> attributeOption =
+        final Optional<EnumValue> attributeOption =
                 masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue());
-        assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
+        assertThat(attributeOption).contains(EnumValue.of("S", "S"));
     }
 
     @Test
     public void readAttributeWithoutProductTypeWithNamedAccess() throws Exception {
-        final NamedAttributeAccess<PlainEnumValue> size = AttributeAccess.ofPlainEnumValue().ofName(SIZE_ATTR_NAME);
+        final NamedAttributeAccess<EnumValue> size = AttributeAccess.ofPlainEnumValue().ofName(SIZE_ATTR_NAME);
 
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-        final Optional<PlainEnumValue> attributeOption = masterVariant.findAttribute(size);
-        assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
+        final Optional<EnumValue> attributeOption = masterVariant.findAttribute(size);
+        assertThat(attributeOption).contains(EnumValue.of("S", "S"));
     }
 
     @Test
@@ -317,7 +317,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
         final Attribute attr = masterVariant.getAttribute(SIZE_ATTR_NAME);
-        final JsonNode expectedJsonNode = SphereJsonUtils.toJsonNode(PlainEnumValue.of("S", "S"));
+        final JsonNode expectedJsonNode = SphereJsonUtils.toJsonNode(EnumValue.of("S", "S"));
         assertThat(attr.getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
     }
 
@@ -455,7 +455,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
                 .contains(LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot")));
         assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
-                .contains(PlainEnumValue.of("M", "M"));
+                .contains(EnumValue.of("M", "M"));
         final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
                 LocalizedString.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
         assertThat(masterVariant.findAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))

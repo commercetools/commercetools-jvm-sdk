@@ -380,7 +380,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         final LocalizedEnumValue color = Colors.RED;
         final AttributeDraft colorAttributeValue = AttributeDraft.of(colorAttribute, color);
 
-        final NamedAttributeAccess<PlainEnumValue> sizeAttribute = Sizes.ATTRIBUTE;
+        final NamedAttributeAccess<EnumValue> sizeAttribute = Sizes.ATTRIBUTE;
         final AttributeDraft sizeValue = AttributeDraft.of(sizeAttribute, Sizes.M);
 
 

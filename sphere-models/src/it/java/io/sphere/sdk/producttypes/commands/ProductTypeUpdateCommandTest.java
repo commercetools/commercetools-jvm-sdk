@@ -1,9 +1,9 @@
 package io.sphere.sdk.producttypes.commands;
 
 import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
@@ -80,7 +80,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
         withUpdateableProductType(client(), productType -> {
             final String attributeName = "size";
             assertThat(productType.findAttribute(attributeName)).isPresent();
-            final PlainEnumValue value = PlainEnumValue.of("XXXL", "XXXL");
+            final EnumValue value = EnumValue.of("XXXL", "XXXL");
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
                     AddPlainEnumValue.of(attributeName, value)));
@@ -132,7 +132,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             final String attributeName = "size";
             final EnumType attributeType = (EnumType) productType.getAttribute(attributeName)
                     .getAttributeType();
-            final List<PlainEnumValue> values = ListUtils.reverse(attributeType.getValues());
+            final List<EnumValue> values = ListUtils.reverse(attributeType.getValues());
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
                     ChangePlainEnumValueOrder.of(attributeName, values)));

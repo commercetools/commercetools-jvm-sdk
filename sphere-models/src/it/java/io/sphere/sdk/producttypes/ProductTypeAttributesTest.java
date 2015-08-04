@@ -1,9 +1,9 @@
 package io.sphere.sdk.producttypes;
 
 import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
@@ -38,7 +38,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MULTI_LINE;
     public static final LocalizedString LABEL = en("label");
-    public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
+    public static final List<EnumValue> PLAIN_ENUM_VALUES = asList(EnumValue.of("key1", "value1"), EnumValue.of("key2", "value2"));
     public static final ProductTypeDraft tshirt = new TShirtProductTypeDraftSupplier("t-shirt").get();
     public static final String distractorName = "distractor";
 
@@ -189,11 +189,11 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         withTShirtProductType(type -> {
             final ProductType productType = execute(ProductTypeQuery.of().byName("t-shirt")).head().get();
             final Optional<AttributeDefinition> sizeAttribute = productType.findAttribute("size");
-            final List<PlainEnumValue> possibleSizeValues = sizeAttribute.
+            final List<EnumValue> possibleSizeValues = sizeAttribute.
                     map(attrib -> ((EnumType) attrib.getAttributeType()).getValues()).
-                    orElse(Collections.<PlainEnumValue>emptyList());
-            final List<PlainEnumValue> expected =
-                    asList(PlainEnumValue.of("S", "S"), PlainEnumValue.of("M", "M"), PlainEnumValue.of("X", "X"));
+                    orElse(Collections.<EnumValue>emptyList());
+            final List<EnumValue> expected =
+                    asList(EnumValue.of("S", "S"), EnumValue.of("M", "M"), EnumValue.of("X", "X"));
             assertThat(possibleSizeValues).isEqualTo(expected);
         });
     }

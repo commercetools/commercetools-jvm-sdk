@@ -1,9 +1,9 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
@@ -73,9 +73,9 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     public static final String ATTR_NAME_DATE_TIME_SET = ("DateTimeSet" + PRODUCT_TYPE_NAME);
     public static final String ATTR_NAME_REF_SET = ("RefSet" + PRODUCT_TYPE_NAME);
 
-    public static final PlainEnumValue ENUM_ONE = PlainEnumValue.of("one-key", "one");
-    public static final PlainEnumValue ENUM_TWO = PlainEnumValue.of("two-key", "two");
-    public static final PlainEnumValue ENUM_THREE = PlainEnumValue.of("three-key", "three");
+    public static final EnumValue ENUM_ONE = EnumValue.of("one-key", "one");
+    public static final EnumValue ENUM_TWO = EnumValue.of("two-key", "two");
+    public static final EnumValue ENUM_THREE = EnumValue.of("three-key", "three");
     public static final LocalizedEnumValue LOC_ENUM_ONE = LocalizedEnumValue.of("one-key", LocalizedString.of(GERMAN, "eins", FRENCH, "un"));
     public static final LocalizedEnumValue LOC_ENUM_TWO = LocalizedEnumValue.of("two-key", LocalizedString.of(GERMAN, "zwei", FRENCH, "deux"));
     public static final LocalizedEnumValue LOC_ENUM_THREE = LocalizedEnumValue.of("three-key", LocalizedString.of(GERMAN, "drei", FRENCH, "trois"));

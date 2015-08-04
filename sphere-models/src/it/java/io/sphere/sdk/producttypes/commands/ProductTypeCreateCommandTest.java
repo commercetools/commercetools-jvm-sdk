@@ -4,8 +4,8 @@ import io.sphere.sdk.attributes.AttributeConstraint;
 import io.sphere.sdk.attributes.AttributeDefinition;
 import io.sphere.sdk.attributes.AttributeDefinitionBuilder;
 import io.sphere.sdk.attributes.EnumType;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
@@ -31,10 +31,10 @@ public class ProductTypeCreateCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         //size attribute stuff
-        final PlainEnumValue S = PlainEnumValue.of("S", "S");
-        final PlainEnumValue M = PlainEnumValue.of("M", "M");
-        final PlainEnumValue X = PlainEnumValue.of("X", "X");
-        final List<PlainEnumValue> values = asList(S, M, X);
+        final EnumValue S = EnumValue.of("S", "S");
+        final EnumValue M = EnumValue.of("M", "M");
+        final EnumValue X = EnumValue.of("X", "X");
+        final List<EnumValue> values = asList(S, M, X);
         final LocalizedString sizeAttributeLabel = LocalizedString.of(ENGLISH, "size").plus(GERMAN, "Größe");
         final AttributeDefinition sizeAttributeDefinition =
                 AttributeDefinitionBuilder.of("size", sizeAttributeLabel, EnumType.of(values))
