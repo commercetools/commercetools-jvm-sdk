@@ -1,20 +1,20 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.attributes.AttributeExtraction;
+import io.sphere.sdk.products.attributes.AttributeExtraction;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.MetaProductType;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeDefinition;
-import io.sphere.sdk.attributes.NamedAttributeAccess;
+import io.sphere.sdk.products.attributes.Attribute;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.json.SphereJsonUtils;
 import org.junit.Test;
 
 import java.util.*;
 
-import static io.sphere.sdk.attributes.AttributeAccess.*;
+import static io.sphere.sdk.products.attributes.AttributeAccess.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.*;
 import static org.assertj.core.api.Assertions.assertThat;

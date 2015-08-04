@@ -1,11 +1,11 @@
 package example;
 
-import io.sphere.sdk.attributes.AttributeDefinition;
-import io.sphere.sdk.attributes.AttributeType;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.AttributeType;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
-import io.sphere.sdk.attributes.EnumType;
+import io.sphere.sdk.products.attributes.EnumType;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
 

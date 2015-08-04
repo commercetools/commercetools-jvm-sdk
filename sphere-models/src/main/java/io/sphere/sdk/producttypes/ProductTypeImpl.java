@@ -2,7 +2,7 @@ package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.ResourceImpl;
-import io.sphere.sdk.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
 
 import java.time.ZonedDateTime;
 import java.util.List;

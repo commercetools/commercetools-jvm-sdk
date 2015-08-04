@@ -1,7 +1,7 @@
 package io.sphere.sdk.attributestutorial;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;

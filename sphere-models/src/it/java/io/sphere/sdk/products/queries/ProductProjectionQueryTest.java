@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.queries;
 
-import io.sphere.sdk.attributes.AttributeAccess;
-import io.sphere.sdk.attributes.NamedAttributeAccess;
+import io.sphere.sdk.products.attributes.AttributeAccess;
+import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;

@@ -1,7 +1,7 @@
 package io.sphere.sdk.orders.commands;
 
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeImportDraft;
+import io.sphere.sdk.products.attributes.Attribute;
+import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.channels.ChannelRole;

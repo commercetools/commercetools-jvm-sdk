@@ -2,8 +2,8 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.json.JsonException;
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeMapper;
+import io.sphere.sdk.products.attributes.Attribute;
+import io.sphere.sdk.products.attributes.AttributeMapper;
 
 import javax.annotation.Nullable;
 import java.util.List;

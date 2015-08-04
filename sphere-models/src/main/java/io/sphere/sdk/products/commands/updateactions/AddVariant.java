@@ -1,6 +1,6 @@
 package io.sphere.sdk.products.commands.updateactions;
 
-import io.sphere.sdk.attributes.AttributeDraft;
+import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;

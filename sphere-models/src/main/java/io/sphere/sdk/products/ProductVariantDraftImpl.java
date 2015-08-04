@@ -1,6 +1,6 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.attributes.AttributeDraft;
+import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;

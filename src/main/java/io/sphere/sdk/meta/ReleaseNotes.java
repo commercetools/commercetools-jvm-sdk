@@ -1,7 +1,6 @@
 package io.sphere.sdk.meta;
 
 import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.attributes.AttributeAccess;
 import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
@@ -181,7 +180,7 @@ import java.util.function.BiFunction;
  <h3 class=released-version id=v1_0_0_M12>1.0.0-M12</h3>
  <ul>
  <li class=new-in-release>Added the {@link io.sphere.sdk.orders.commands.OrderImportCommand}.</li>
- <li class=new-in-release>Added the nested attributes: {@link io.sphere.sdk.attributes.AttributeAccess#ofNested()} + {@link io.sphere.sdk.attributes.AttributeAccess#ofNestedSet()}.</li>
+ <li class=new-in-release>Added the nested attributes: {@code io.sphere.sdk.attributes.AttributeAccess#ofNested()} + {@code io.sphere.sdk.attributes.AttributeAccess#ofNestedSet()}.</li>
  <li class=new-in-release>The error JSON body from SPHERE.IO responses can be directly extracted as JSON with {@link io.sphere.sdk.client.SphereServiceException#getJsonBody()}.</li>
  <li class=new-in-release>{@link io.sphere.sdk.http.HttpResponse} also contains {@link io.sphere.sdk.http.HttpHeaders}.</li>
  <li class=new-in-release>Experimental search filter/facet/sort expression model {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel}. See also {@link io.sphere.sdk.meta.ProductSearchDocumentation}.</li>
@@ -251,7 +250,7 @@ import java.util.function.BiFunction;
  <li class=new-in-release>Added update actions for cart: {@link io.sphere.sdk.carts.commands.updateactions.SetShippingMethod} and {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerId}.</li>
  <li class=new-in-release>Added update actions for customer: {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerId}.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.models.Referenceable#hasSameIdAs(io.sphere.sdk.models.Referenceable)} to check if a similar object has the same ID.</li>
- <li class=new-in-release>Added {@link AttributeAccess#ofName(String)} as alias to {@code io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)}.</li>
+ <li class=new-in-release>Added {@code AttributeAccess#ofName(String)} as alias to {@code io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)}.</li>
 
  <li class=new-in-release>Update action list in update commands do not have the type {@literal List<UpdateAction<T>>} {@literal  List<? extends UpdateAction<T>>}, so you can pass a list of a subclass of {@link UpdateActionImpl}.
  Example: {@literal List<ChangeName>} can be assigned where {@literal ChangeName} extends {@link UpdateActionImpl}.</li>

@@ -1,8 +1,8 @@
 package io.sphere.sdk.producttypes;
 
-import io.sphere.sdk.attributes.AttributeDefinition;
-import io.sphere.sdk.attributes.AttributeDefinitionBuilder;
-import io.sphere.sdk.attributes.ReferenceType;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
+import io.sphere.sdk.products.attributes.ReferenceType;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.queries.ProductQuery;

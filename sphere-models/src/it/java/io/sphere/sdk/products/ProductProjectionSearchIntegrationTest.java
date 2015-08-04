@@ -1,6 +1,6 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductQuery;

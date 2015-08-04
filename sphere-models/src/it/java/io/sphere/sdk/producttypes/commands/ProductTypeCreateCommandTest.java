@@ -1,9 +1,9 @@
 package io.sphere.sdk.producttypes.commands;
 
-import io.sphere.sdk.attributes.AttributeConstraint;
-import io.sphere.sdk.attributes.AttributeDefinition;
-import io.sphere.sdk.attributes.AttributeDefinitionBuilder;
-import io.sphere.sdk.attributes.EnumType;
+import io.sphere.sdk.products.attributes.AttributeConstraint;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.AttributeDefinitionBuilder;
+import io.sphere.sdk.products.attributes.EnumType;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.ProductType;

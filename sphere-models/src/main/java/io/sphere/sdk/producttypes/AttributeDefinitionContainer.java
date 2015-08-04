@@ -1,6 +1,6 @@
 package io.sphere.sdk.producttypes;
 
-import io.sphere.sdk.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.annotation.Nullable;

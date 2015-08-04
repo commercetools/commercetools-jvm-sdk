@@ -1,6 +1,6 @@
 package io.sphere.sdk.producttypes;
 
-import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.test.IntegrationTest;
