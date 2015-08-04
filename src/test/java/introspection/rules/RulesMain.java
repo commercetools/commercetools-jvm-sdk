@@ -21,7 +21,9 @@ public class RulesMain {
                 new NoOptionalReturnTypeForGettersRule(),
                 new NoOptionalParametersInPublicConstructorRule(),
                 new PublicConstructorsAreTheExceptionRule(),
-                new BuildersNotForResources()
+                new BuildersNotForResources(),
+                new NeverMixStaticAndInstanceMethodOfSameNameRule(),
+                new OnlyOneNullableOfMethodRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

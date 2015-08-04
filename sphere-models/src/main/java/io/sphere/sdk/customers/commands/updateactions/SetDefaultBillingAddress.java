@@ -25,7 +25,7 @@ public class SetDefaultBillingAddress extends UpdateActionImpl<Customer> {
         return new SetDefaultBillingAddress(addressId);
     }
 
-    public static SetDefaultBillingAddress of(final Address address) {
+    public static SetDefaultBillingAddress ofAddress(final Address address) {
         if (address.getId() == null) {
             throw new IllegalArgumentException(format("The address %s should have an id.", address));
         }

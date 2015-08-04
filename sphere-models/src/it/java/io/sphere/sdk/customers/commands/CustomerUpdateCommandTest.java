@@ -102,7 +102,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             assertThat(customer.findDefaultShippingAddress()).isEmpty();
 
             final Customer updatedCustomer =
-                    execute(CustomerUpdateCommand.of(customer, SetDefaultShippingAddress.of(address)));
+                    execute(CustomerUpdateCommand.of(customer, SetDefaultShippingAddress.ofAddress(address)));
 
             assertThat(updatedCustomer.getDefaultShippingAddressId()).contains(address.getId());
             assertThat(updatedCustomer.findDefaultShippingAddress()).contains(address);
@@ -120,7 +120,7 @@ public class CustomerUpdateCommandTest extends IntegrationTest {
             assertThat(customer.getDefaultBillingAddress()).isNull();
 
             final Customer updatedCustomer =
-                    execute(CustomerUpdateCommand.of(customer, SetDefaultBillingAddress.of(address)));
+                    execute(CustomerUpdateCommand.of(customer, SetDefaultBillingAddress.ofAddress(address)));
 
             assertThat(updatedCustomer.getDefaultBillingAddressId()).contains(address.getId());
             assertThat(updatedCustomer.getDefaultBillingAddress()).isEqualTo(address);

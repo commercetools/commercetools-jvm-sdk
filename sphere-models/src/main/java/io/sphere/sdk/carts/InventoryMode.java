@@ -12,6 +12,6 @@ public enum InventoryMode implements SphereEnumeration {
 
     @JsonCreator
     public static InventoryMode ofSphereValue(final String value) {
-        return SphereEnumeration.find(values(), value);
+        return SphereEnumeration.findBySphereName(values(), value).get();
     }
 }

@@ -92,7 +92,7 @@ public class AddressBuilder extends Base implements Builder<Address> {
         return builder;
     }
 
-    public static AddressBuilder of(@Nullable final CountryCode country) {
+    public static AddressBuilder of(final CountryCode country) {
         Objects.requireNonNull(country);
         return new AddressBuilder(country);
     }
@@ -101,7 +101,7 @@ public class AddressBuilder extends Base implements Builder<Address> {
         return new Address(this);
     }
 
-    public AddressBuilder country(@Nullable final CountryCode country) {
+    public AddressBuilder country(final CountryCode country) {
         Objects.requireNonNull(country);
         this.country = country;
         return this;

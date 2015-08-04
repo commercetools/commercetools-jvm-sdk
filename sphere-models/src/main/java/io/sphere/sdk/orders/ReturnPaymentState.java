@@ -8,6 +8,6 @@ public enum ReturnPaymentState implements SphereEnumeration {
 
     @JsonCreator
     public static ReturnPaymentState ofSphereValue(final String value) {
-        return SphereEnumeration.find(values(), value);
+        return SphereEnumeration.findBySphereName(values(), value).get();
     }
 }

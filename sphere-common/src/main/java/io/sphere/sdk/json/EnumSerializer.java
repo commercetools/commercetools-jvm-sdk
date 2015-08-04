@@ -16,7 +16,7 @@ class EnumSerializer extends StdScalarSerializer<SphereEnumeration> {
 
     @Override
     public void serialize(final SphereEnumeration sphereEnumeration, final JsonGenerator jsonGenerator, final SerializerProvider serializerProvider) throws IOException {
-        final String sphereName = SphereEnumeration.toSphereName(sphereEnumeration.name());
+        final String sphereName = sphereEnumeration.toSphereName();
         jsonGenerator.writeString(sphereName);
     }
 }

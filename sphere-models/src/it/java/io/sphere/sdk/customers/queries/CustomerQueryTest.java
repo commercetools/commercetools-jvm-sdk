@@ -121,8 +121,8 @@ public class CustomerQueryTest extends IntegrationTest {
 
         final Customer updatedCustomer = execute(CustomerUpdateCommand.of(initialCustomer, asList(AddAddress.of(randomAddress()), SetCustomerGroup.of(b2cCustomerGroup(client())))));
 
-        final SetDefaultShippingAddress shippingAddressAction = SetDefaultShippingAddress.of(updatedCustomer.getAddresses().get(0));
-        final SetDefaultBillingAddress billingAddressAction = SetDefaultBillingAddress.of(updatedCustomer.getAddresses().get(0));
+        final SetDefaultShippingAddress shippingAddressAction = SetDefaultShippingAddress.ofAddress(updatedCustomer.getAddresses().get(0));
+        final SetDefaultBillingAddress billingAddressAction = SetDefaultBillingAddress.ofAddress(updatedCustomer.getAddresses().get(0));
         return execute(CustomerUpdateCommand.of(updatedCustomer, asList(shippingAddressAction, billingAddressAction)));
     }
 }

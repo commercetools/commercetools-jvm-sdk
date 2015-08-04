@@ -17,16 +17,16 @@ public class SetDefaultShippingAddress extends UpdateActionImpl<Customer> {
     @Nullable
     private final String addressId;
 
-    private SetDefaultShippingAddress(final String addressId) {
+    private SetDefaultShippingAddress(@Nullable final String addressId) {
         super("setDefaultShippingAddress");
         this.addressId = addressId;
     }
 
-    public static SetDefaultShippingAddress of(final String addressId) {
+    public static SetDefaultShippingAddress of(@Nullable final String addressId) {
         return new SetDefaultShippingAddress(addressId);
     }
 
-    public static SetDefaultShippingAddress of(@Nullable final Address address) {
+    public static SetDefaultShippingAddress ofAddress(final Address address) {
         if (address.getId() == null) {
             throw new IllegalArgumentException(format("The address %s should have an id.", address));
         }

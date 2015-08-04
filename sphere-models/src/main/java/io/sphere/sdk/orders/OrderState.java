@@ -8,6 +8,6 @@ public enum OrderState implements SphereEnumeration {
 
     @JsonCreator
     public static OrderState ofSphereValue(final String value) {
-        return SphereEnumeration.find(values(), value);
+        return SphereEnumeration.findBySphereName(values(), value).get();
     }
 }

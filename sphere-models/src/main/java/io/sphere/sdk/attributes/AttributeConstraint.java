@@ -23,6 +23,6 @@ public enum AttributeConstraint implements SphereEnumeration {
 
     @JsonCreator
     public static AttributeConstraint ofSphereValue(final String value) {
-        return SphereEnumeration.find(values(), value);
+        return SphereEnumeration.findBySphereName(values(), value).get();
     }
 }
