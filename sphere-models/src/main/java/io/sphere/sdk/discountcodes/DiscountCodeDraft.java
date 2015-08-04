@@ -2,7 +2,7 @@ package io.sphere.sdk.discountcodes;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartPredicate;
+import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -88,7 +88,7 @@ public class DiscountCodeDraft extends Base {
     }
 
 
-    public DiscountCodeDraft withCartPredicate(@Nullable final CartPredicate cartPredicate) {
+    public DiscountCodeDraft withCartPredicate(@Nullable final CartDiscountPredicate cartPredicate) {
         return newBuilder().cartPredicate(cartPredicate).build();
     }
 

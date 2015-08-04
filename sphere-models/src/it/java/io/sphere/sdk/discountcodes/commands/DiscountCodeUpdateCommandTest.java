@@ -1,7 +1,7 @@
 package io.sphere.sdk.discountcodes.commands;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartPredicate;
+import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.commands.updateactions.*;
 import io.sphere.sdk.models.LocalizedString;
@@ -46,7 +46,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
                     //you need to change the predicate
                     Optional.ofNullable(discountCode.getCartPredicate()).map(p -> "1 = 1".equals(p)).orElse(false) ? "true = true" : "1 = 1";
 
-            final CartPredicate cartPredicate = CartPredicate.of(predicateAsString);
+            final CartDiscountPredicate cartPredicate = CartDiscountPredicate.of(predicateAsString);
             final DiscountCode updatedDiscountCode =
                     execute(DiscountCodeUpdateCommand.of(discountCode, SetCartPredicate.of(cartPredicate)));
             assertThat(updatedDiscountCode.getCartPredicate()).contains(cartPredicate.toSphereCartPredicate());

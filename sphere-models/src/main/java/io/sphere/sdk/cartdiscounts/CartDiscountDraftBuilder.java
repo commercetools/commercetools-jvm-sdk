@@ -12,7 +12,7 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
     @Nullable
     private LocalizedString description;
     private CartDiscountValue value;
-    private CartPredicate cartPredicate;
+    private CartDiscountPredicate cartPredicate;
     private CartDiscountTarget target;
     private final String sortOrder;
     private Boolean isActive = true;
@@ -22,7 +22,7 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
     private ZonedDateTime validUntil;
     private final Boolean requiresDiscountCode;
 
-    private CartDiscountDraftBuilder(final LocalizedString name, final CartPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean requiresDiscountCode) {
+    private CartDiscountDraftBuilder(final LocalizedString name, final CartDiscountPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean requiresDiscountCode) {
         this.cartPredicate = cartPredicate;
         this.name = name;
         this.value = value;
@@ -31,7 +31,7 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
         this.requiresDiscountCode = requiresDiscountCode;
     }
 
-    public static CartDiscountDraftBuilder of(final LocalizedString name, final CartPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
+    public static CartDiscountDraftBuilder of(final LocalizedString name, final CartDiscountPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
         return new CartDiscountDraftBuilder(name, cartPredicate, value, target, sortOrder, requiresDiscountCode);
     }
 
@@ -60,7 +60,7 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
         return this;
     }
 
-    public CartDiscountDraftBuilder cartPredicate(final CartPredicate cartPredicate) {
+    public CartDiscountDraftBuilder cartPredicate(final CartDiscountPredicate cartPredicate) {
         this.cartPredicate = cartPredicate;
         return this;
     }

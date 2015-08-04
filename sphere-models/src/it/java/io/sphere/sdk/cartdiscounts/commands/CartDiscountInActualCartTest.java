@@ -25,7 +25,7 @@ public class CartDiscountInActualCartTest extends IntegrationTest {
                 final Cart cartWithCustomer = execute(CartUpdateCommand.of(cart, SetCustomerId.ofCustomer(customer)));
 
                 final LocalizedString name = en("di");
-                final CartPredicate cartPredicate = CartPredicate.of(format("customer.id = \"%s\"", customer.getId()));
+                final CartDiscountPredicate cartPredicate = CartDiscountPredicate.of(format("customer.id = \"%s\"", customer.getId()));
                 final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(EURO_1);
                 final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, cartPredicate, value, LineItemsTarget.ofAll(), randomSortOrder(), false)
                         .build();

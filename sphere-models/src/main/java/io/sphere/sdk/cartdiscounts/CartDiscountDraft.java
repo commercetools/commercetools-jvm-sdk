@@ -25,8 +25,8 @@ public class CartDiscountDraft extends Base {
     private final ZonedDateTime validUntil;
     private final Boolean requiresDiscountCode;
 
-    CartDiscountDraft(final LocalizedString name, final CartPredicate cartPredicate, final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode) {
-        this.cartPredicate = cartPredicate.toSphereCartPredicate();
+    CartDiscountDraft(final LocalizedString name, final CartDiscountPredicate cartDiscountPredicate, final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode) {
+        this.cartPredicate = cartDiscountPredicate.toSphereCartPredicate();
         this.name = name;
         this.description = description;
         this.value = value;

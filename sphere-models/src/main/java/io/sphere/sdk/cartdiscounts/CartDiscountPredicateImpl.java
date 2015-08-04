@@ -4,11 +4,11 @@ package io.sphere.sdk.cartdiscounts;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
 
-final class CartPredicateImpl extends Base implements CartPredicate {
+final class CartDiscountPredicateImpl extends Base implements CartDiscountPredicate {
     private final String predicate;
 
     @JsonCreator
-    public CartPredicateImpl(final String predicate) {
+    public CartDiscountPredicateImpl(final String predicate) {
         this.predicate = predicate;
     }
 
@@ -19,7 +19,7 @@ final class CartPredicateImpl extends Base implements CartPredicate {
 
     @Override
     public final boolean equals(Object o) {
-        return o != null && o instanceof CartPredicate && toSphereCartPredicate().equals(((CartPredicate) o).toSphereCartPredicate());
+        return o != null && o instanceof CartDiscountPredicate && toSphereCartPredicate().equals(((CartDiscountPredicate) o).toSphereCartPredicate());
     }
 
     @Override
