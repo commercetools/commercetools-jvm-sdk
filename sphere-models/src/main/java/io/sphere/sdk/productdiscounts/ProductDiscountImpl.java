@@ -1,8 +1,8 @@
 package io.sphere.sdk.productdiscounts;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceImpl;
-import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -10,8 +10,8 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 class ProductDiscountImpl extends ResourceImpl<ProductDiscount> implements ProductDiscount {
-    private final LocalizedStrings name;
-    private final LocalizedStrings description;
+    private final LocalizedString name;
+    private final LocalizedString description;
     private final ProductDiscountValue value;
     private final String predicate;
     private final String sortOrder;
@@ -20,7 +20,7 @@ class ProductDiscountImpl extends ResourceImpl<ProductDiscount> implements Produ
 
     @JsonCreator
     ProductDiscountImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                        final LocalizedStrings name, final LocalizedStrings description,
+                        final LocalizedString name, final LocalizedString description,
                         final ProductDiscountValue value, final String predicate, final String sortOrder,
                         final boolean isActive, final List<Reference<Object>> references) {
         super(id, version, createdAt, lastModifiedAt);
@@ -33,12 +33,12 @@ class ProductDiscountImpl extends ResourceImpl<ProductDiscount> implements Produ
         this.references = references;
     }
 
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 

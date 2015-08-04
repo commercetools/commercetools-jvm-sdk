@@ -2,15 +2,15 @@ package io.sphere.sdk.cartdiscounts;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscountDraft> {
-    private LocalizedStrings name;
+    private LocalizedString name;
     @Nullable
-    private LocalizedStrings description;
+    private LocalizedString description;
     private CartDiscountValue value;
     private CartPredicate cartPredicate;
     private CartDiscountTarget target;
@@ -22,7 +22,7 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
     private ZonedDateTime validUntil;
     private final Boolean requiresDiscountCode;
 
-    private CartDiscountDraftBuilder(final LocalizedStrings name, final CartPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean requiresDiscountCode) {
+    private CartDiscountDraftBuilder(final LocalizedString name, final CartPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean requiresDiscountCode) {
         this.cartPredicate = cartPredicate;
         this.name = name;
         this.value = value;
@@ -31,11 +31,11 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
         this.requiresDiscountCode = requiresDiscountCode;
     }
 
-    public static CartDiscountDraftBuilder of(final LocalizedStrings name, final CartPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
+    public static CartDiscountDraftBuilder of(final LocalizedString name, final CartPredicate cartPredicate, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final boolean requiresDiscountCode) {
         return new CartDiscountDraftBuilder(name, cartPredicate, value, target, sortOrder, requiresDiscountCode);
     }
 
-    public CartDiscountDraftBuilder description(@Nullable final LocalizedStrings description) {
+    public CartDiscountDraftBuilder description(@Nullable final LocalizedString description) {
         this.description = description;
         return this;
     }
@@ -50,7 +50,7 @@ public class CartDiscountDraftBuilder extends Base implements Builder<CartDiscou
         return this;
     }
 
-    public CartDiscountDraftBuilder name(final LocalizedStrings name) {
+    public CartDiscountDraftBuilder name(final LocalizedString name) {
         this.name = name;
         return this;
     }

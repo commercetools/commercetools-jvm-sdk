@@ -2,7 +2,7 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductQuery;
@@ -17,7 +17,6 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.RetryIntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
@@ -32,7 +31,7 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
+import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static java.math.BigDecimal.valueOf;
@@ -77,9 +76,9 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     public static final PlainEnumValue ENUM_ONE = PlainEnumValue.of("one-key", "one");
     public static final PlainEnumValue ENUM_TWO = PlainEnumValue.of("two-key", "two");
     public static final PlainEnumValue ENUM_THREE = PlainEnumValue.of("three-key", "three");
-    public static final LocalizedEnumValue LOC_ENUM_ONE = LocalizedEnumValue.of("one-key", LocalizedStrings.of(GERMAN, "eins", FRENCH, "un"));
-    public static final LocalizedEnumValue LOC_ENUM_TWO = LocalizedEnumValue.of("two-key", LocalizedStrings.of(GERMAN, "zwei", FRENCH, "deux"));
-    public static final LocalizedEnumValue LOC_ENUM_THREE = LocalizedEnumValue.of("three-key", LocalizedStrings.of(GERMAN, "drei", FRENCH, "trois"));
+    public static final LocalizedEnumValue LOC_ENUM_ONE = LocalizedEnumValue.of("one-key", LocalizedString.of(GERMAN, "eins", FRENCH, "un"));
+    public static final LocalizedEnumValue LOC_ENUM_TWO = LocalizedEnumValue.of("two-key", LocalizedString.of(GERMAN, "zwei", FRENCH, "deux"));
+    public static final LocalizedEnumValue LOC_ENUM_THREE = LocalizedEnumValue.of("three-key", LocalizedString.of(GERMAN, "drei", FRENCH, "trois"));
 
     @Rule
     public RetryIntegrationTest retry = new RetryIntegrationTest(10, 0, LoggerFactory.getLogger(this.getClass()));
@@ -477,7 +476,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     }
 
     private static Product createTestProduct(final String name, final ProductVariantDraft masterVariant) {
-        final LocalizedStrings locName = ofEnglishLocale(name);
+        final LocalizedString locName = ofEnglishLocale(name);
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, locName, locName.slugifiedUnique(), masterVariant).build();
         return execute(ProductCreateCommand.of(productDraft));
     }

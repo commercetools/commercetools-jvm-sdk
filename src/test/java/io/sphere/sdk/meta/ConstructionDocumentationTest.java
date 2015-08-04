@@ -3,7 +3,7 @@ package io.sphere.sdk.meta;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.PriceBuilder;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -17,7 +17,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class ConstructionDocumentationTest {
     public void ofMethodExample() {
-        final LocalizedStrings dogFood = LocalizedStrings.
+        final LocalizedString dogFood = LocalizedString.
                 of(Locale.ENGLISH, "dog food", Locale.GERMAN, "Hundefutter");
     }
 

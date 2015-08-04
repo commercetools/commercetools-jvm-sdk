@@ -1,15 +1,15 @@
 package test;
 
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import org.junit.Test;
 
 import java.util.Locale;
 
 import static io.sphere.sdk.test.LocalizedStringsAssert.assertThat;
 
-public class LocalizedStringsAssertTest {
-    final LocalizedStrings foo = LocalizedStrings.of(Locale.ENGLISH, "foo");
-    final LocalizedStrings leFoo = LocalizedStrings.of(Locale.FRENCH, "le foo");
+public class LocalizedStringAssertTest {
+    final LocalizedString foo = LocalizedString.of(Locale.ENGLISH, "foo");
+    final LocalizedString leFoo = LocalizedString.of(Locale.FRENCH, "le foo");
 
     @Test
     public void contains() throws Exception {

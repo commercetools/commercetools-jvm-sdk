@@ -12,13 +12,13 @@ public final class ProductDraftBuilder extends ProductDataProductDraftBuilderBas
     private final ProductVariantDraft masterVariant;
     private List<ProductVariantDraft> variants = Collections.emptyList();
 
-    private ProductDraftBuilder(final Reference<ProductType> productType, final LocalizedStrings name, final LocalizedStrings slug, final ProductVariantDraft masterVariant) {
+    private ProductDraftBuilder(final Reference<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
         super(name, slug);
         this.productType = productType;
         this.masterVariant = masterVariant;
     }
 
-    public static ProductDraftBuilder of(final Referenceable<ProductType> productType, final LocalizedStrings name, final LocalizedStrings slug, final ProductVariantDraft masterVariant) {
+    public static ProductDraftBuilder of(final Referenceable<ProductType> productType, final LocalizedString name, final LocalizedString slug, final ProductVariantDraft masterVariant) {
         return new ProductDraftBuilder(productType.toReference(), name, slug, masterVariant);
     }
 

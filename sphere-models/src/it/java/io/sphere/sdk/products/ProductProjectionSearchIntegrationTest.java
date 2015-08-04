@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.attributes.*;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel;
@@ -26,7 +26,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
+import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
 import static io.sphere.sdk.search.FilterRange.atLeast;
 import static io.sphere.sdk.search.FilterRange.atMost;
@@ -402,7 +402,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     private static Product createTestProduct(final ProductType productType, final String germanName, final String englishName,
                                              final String color, final int size1, final int size2, final String sku) {
-        final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName, ENGLISH, englishName);
+        final LocalizedString name = LocalizedString.of(GERMAN, germanName, ENGLISH, englishName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .attributes(AttributeDraft.of(ATTR_NAME_SIZE, size1), AttributeDraft.of(ATTR_NAME_COLOR, color))
                 .price(Price.of(new BigDecimal("23.45"), EUR))
@@ -418,7 +418,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     private static Product createEvilTestProduct(final ProductType productType, final String germanName, final String evilValue, final String sku) {
-        final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName);
+        final LocalizedString name = LocalizedString.of(GERMAN, germanName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .attributes(AttributeDraft.of(ATTR_NAME_EVIL, evilValue))
                 .sku(sku)

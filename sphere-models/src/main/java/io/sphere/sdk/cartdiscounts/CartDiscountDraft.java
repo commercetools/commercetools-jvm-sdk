@@ -1,7 +1,7 @@
 package io.sphere.sdk.cartdiscounts;
 
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -11,9 +11,9 @@ import java.time.ZonedDateTime;
  * @see CartDiscountDraftBuilder
  */
 public class CartDiscountDraft extends Base {
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     @Nullable
-    private final LocalizedStrings description;
+    private final LocalizedString description;
     private final CartDiscountValue value;
     private final String cartPredicate;
     private final CartDiscountTarget target;
@@ -25,7 +25,7 @@ public class CartDiscountDraft extends Base {
     private final ZonedDateTime validUntil;
     private final Boolean requiresDiscountCode;
 
-    CartDiscountDraft(final LocalizedStrings name, final CartPredicate cartPredicate, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode) {
+    CartDiscountDraft(final LocalizedString name, final CartPredicate cartPredicate, final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode) {
         this.cartPredicate = cartPredicate.toSphereCartPredicate();
         this.name = name;
         this.description = description;
@@ -43,7 +43,7 @@ public class CartDiscountDraft extends Base {
     }
 
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 
@@ -51,7 +51,7 @@ public class CartDiscountDraft extends Base {
         return isActive;
     }
 
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 

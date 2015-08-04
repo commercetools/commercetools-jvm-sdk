@@ -5,13 +5,13 @@ import javax.annotation.Nullable;
 class MetaAttributesDslImpl implements MetaAttributesDsl {
 
     @Nullable
-    private final LocalizedStrings metaTitle;
+    private final LocalizedString metaTitle;
     @Nullable
-    private final LocalizedStrings metaDescription;
+    private final LocalizedString metaDescription;
     @Nullable
-    private final LocalizedStrings metaKeywords;
+    private final LocalizedString metaKeywords;
 
-    MetaAttributesDslImpl(@Nullable final LocalizedStrings metaTitle, @Nullable final LocalizedStrings metaDescription, @Nullable final LocalizedStrings metaKeywords) {
+    MetaAttributesDslImpl(@Nullable final LocalizedString metaTitle, @Nullable final LocalizedString metaDescription, @Nullable final LocalizedString metaKeywords) {
         this.metaTitle = metaTitle;
         this.metaDescription = metaDescription;
         this.metaKeywords = metaKeywords;
@@ -19,34 +19,34 @@ class MetaAttributesDslImpl implements MetaAttributesDsl {
 
     @Nullable
     @Override
-    public LocalizedStrings getMetaTitle() {
+    public LocalizedString getMetaTitle() {
         return metaTitle;
     }
 
     @Nullable
     @Override
-    public LocalizedStrings getMetaDescription() {
+    public LocalizedString getMetaDescription() {
         return metaDescription;
     }
 
     @Nullable
     @Override
-    public LocalizedStrings getMetaKeywords() {
+    public LocalizedString getMetaKeywords() {
         return metaKeywords;
     }
 
     @Override
-    public MetaAttributesDsl withTitle(@Nullable final LocalizedStrings title) {
+    public MetaAttributesDsl withTitle(@Nullable final LocalizedString title) {
         return new MetaAttributesDslImpl(title, metaDescription, metaKeywords);
     }
 
     @Override
-    public MetaAttributesDsl withDescription(@Nullable final LocalizedStrings description) {
+    public MetaAttributesDsl withDescription(@Nullable final LocalizedString description) {
         return new MetaAttributesDslImpl(metaTitle, description, metaKeywords);
     }
 
     @Override
-    public MetaAttributesDsl withKeywords(@Nullable final LocalizedStrings keywords) {
+    public MetaAttributesDsl withKeywords(@Nullable final LocalizedString keywords) {
         return new MetaAttributesDslImpl(metaTitle, metaDescription, keywords);
     }
 }

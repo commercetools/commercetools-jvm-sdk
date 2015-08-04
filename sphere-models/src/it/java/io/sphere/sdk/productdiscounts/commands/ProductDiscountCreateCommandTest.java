@@ -1,6 +1,6 @@
 package io.sphere.sdk.productdiscounts.commands;
 
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.productdiscounts.AbsoluteProductDiscountValue;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.productdiscounts.ProductDiscountDraft;
@@ -24,8 +24,8 @@ public class ProductDiscountCreateCommandTest extends IntegrationTest {
         final ProductDiscountPredicate predicate =
                 ProductDiscountPredicate.of("product.id = \"" + product.getId() + "\"");
         final AbsoluteProductDiscountValue discountValue = AbsoluteProductDiscountValue.of(EURO_1);
-        final LocalizedStrings name = en("demo product discount");
-        final LocalizedStrings description = en("description");
+        final LocalizedString name = en("demo product discount");
+        final LocalizedString description = en("description");
         final boolean active = true;
         final String sortOrder = randomSortOrder();
         final ProductDiscountDraft discountDraft =

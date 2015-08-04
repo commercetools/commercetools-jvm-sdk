@@ -4,7 +4,7 @@ import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.commands.updateactions.*;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
@@ -22,7 +22,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
     @Test
     public void setName() throws Exception {
         withPersistentDiscountCode(client(), discountCode -> {
-            final LocalizedStrings newName = randomSlug();
+            final LocalizedString newName = randomSlug();
             final DiscountCode updatedDiscountCode =
                     execute(DiscountCodeUpdateCommand.of(discountCode, SetName.of(newName)));
             assertThat(updatedDiscountCode.getName()).isEqualTo(newName);
@@ -32,7 +32,7 @@ public class DiscountCodeUpdateCommandTest extends IntegrationTest {
     @Test
     public void setDescription() throws Exception {
         withPersistentDiscountCode(client(), discountCode -> {
-            final LocalizedStrings newDescription = randomSlug();
+            final LocalizedString newDescription = randomSlug();
             final DiscountCode updatedDiscountCode =
                     execute(DiscountCodeUpdateCommand.of(discountCode, SetDescription.of(newDescription)));
             assertThat(updatedDiscountCode.getDescription()).isEqualTo(newDescription);

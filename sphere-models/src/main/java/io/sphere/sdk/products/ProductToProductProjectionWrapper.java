@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
@@ -32,7 +32,7 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     }
 
     @Override
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return productData.getName();
     }
 
@@ -43,30 +43,30 @@ class ProductToProductProjectionWrapper implements ProductProjection {
 
     @Override
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return productData.getDescription();
     }
 
     @Override
-    public LocalizedStrings getSlug() {
+    public LocalizedString getSlug() {
         return productData.getSlug();
     }
 
     @Override
     @Nullable
-    public LocalizedStrings getMetaTitle() {
+    public LocalizedString getMetaTitle() {
         return productData.getMetaTitle();
     }
 
     @Override
     @Nullable
-    public LocalizedStrings getMetaDescription() {
+    public LocalizedString getMetaDescription() {
         return productData.getMetaDescription();
     }
 
     @Override
     @Nullable
-    public LocalizedStrings getMetaKeywords() {
+    public LocalizedString getMetaKeywords() {
         return productData.getMetaKeywords();
     }
 

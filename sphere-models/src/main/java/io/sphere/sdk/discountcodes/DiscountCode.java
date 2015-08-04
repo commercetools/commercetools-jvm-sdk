@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.models.Resource;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -20,7 +20,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
     String getCode();
 
     @Nullable
-    LocalizedStrings getDescription();
+    LocalizedString getDescription();
 
     Boolean isActive();
 
@@ -31,7 +31,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
     Long getMaxApplicationsPerCustomer();
 
     @Nullable
-    LocalizedStrings getName();
+    LocalizedString getName();
 
     List<Reference<Object>> getReferences();
 

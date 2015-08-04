@@ -4,7 +4,7 @@ import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.cartdiscounts.queries.CartDiscountQuery;
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.utils.MoneyImpl;
 
@@ -22,8 +22,8 @@ public class CartDiscountFixtures {
     private static CartDiscountDraftBuilder newCartDiscountDraftBuilder(final String predicate) {
         final ZonedDateTime validFrom = ZonedDateTime.now();
         final ZonedDateTime validUntil = validFrom.plusSeconds(8000);
-        final LocalizedStrings name = en("discount name");
-        final LocalizedStrings description = en("discount descriptions");
+        final LocalizedString name = en("discount name");
+        final LocalizedString description = en("discount descriptions");
         final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(MoneyImpl.of(10, EUR));
         final LineItemsTarget target = LineItemsTarget.of("1 = 1");
         final String sortOrder = randomSortOrder();
@@ -43,7 +43,7 @@ public class CartDiscountFixtures {
         final Query<CartDiscount> query = CartDiscountQuery.of().withPredicates(m -> m.name().lang(ENGLISH).is(name));
         return client.execute(query).head().orElseGet(() -> {
             final CartDiscountDraft draft = newCartDiscountDraftBuilder()
-                    .name(LocalizedStrings.ofEnglishLocale(name))
+                    .name(LocalizedString.ofEnglishLocale(name))
                     .build();
             return client.execute(CartDiscountCreateCommand.of(draft));
         });

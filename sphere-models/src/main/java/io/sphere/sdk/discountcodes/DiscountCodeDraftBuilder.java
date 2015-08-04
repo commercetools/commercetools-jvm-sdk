@@ -11,9 +11,9 @@ import java.util.Optional;
 
 public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCodeDraft> {
     @Nullable
-    private LocalizedStrings name;
+    private LocalizedString name;
     @Nullable
-    private LocalizedStrings description;
+    private LocalizedString description;
     private String code;
     private List<Reference<CartDiscount>> cartDiscounts;
     @Nullable
@@ -47,12 +47,12 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
         return new DiscountCodeDraftBuilder(code, cartDiscounts);
     }
 
-    public DiscountCodeDraftBuilder name(@Nullable final LocalizedStrings name) {
+    public DiscountCodeDraftBuilder name(@Nullable final LocalizedString name) {
         this.name = name;
         return this;
     }
 
-    public DiscountCodeDraftBuilder description(@Nullable final LocalizedStrings description) {
+    public DiscountCodeDraftBuilder description(@Nullable final LocalizedString description) {
         this.description = description;
         return this;
     }

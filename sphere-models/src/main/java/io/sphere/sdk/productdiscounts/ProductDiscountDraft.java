@@ -2,19 +2,19 @@ package io.sphere.sdk.productdiscounts;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
 
 public class ProductDiscountDraft extends Base {
     private final ProductDiscountPredicate predicate;
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     private final String sortOrder;
     private final ProductDiscountValue value;
-    private final LocalizedStrings description;
+    private final LocalizedString description;
     private final Boolean active;
 
-    private ProductDiscountDraft(final LocalizedStrings name, final LocalizedStrings description, final ProductDiscountPredicate predicate, final ProductDiscountValue value, final String sortOrder, final boolean active) {
+    private ProductDiscountDraft(final LocalizedString name, final LocalizedString description, final ProductDiscountPredicate predicate, final ProductDiscountValue value, final String sortOrder, final boolean active) {
         this.active = active;
         this.predicate = predicate;
         this.name = name;
@@ -29,11 +29,11 @@ public class ProductDiscountDraft extends Base {
     }
 
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
@@ -49,7 +49,7 @@ public class ProductDiscountDraft extends Base {
         return value;
     }
 
-    public static ProductDiscountDraft of(final LocalizedStrings name, final LocalizedStrings description, final ProductDiscountPredicate predicate, final ProductDiscountValue value, final String sortOrder, final boolean active) {
+    public static ProductDiscountDraft of(final LocalizedString name, final LocalizedString description, final ProductDiscountPredicate predicate, final ProductDiscountValue value, final String sortOrder, final boolean active) {
         return new ProductDiscountDraft(name, description, predicate, value, sortOrder, active);
     }
 }

@@ -3,8 +3,8 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceViewImpl;
-import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
@@ -24,17 +24,17 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection> implemen
     private final Boolean isPublished;
     @JsonProperty("hasStagedChanges")
     private final Boolean hasStagedChanges;
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     private final Set<Reference<Category>> categories;
     @Nullable
-    private final LocalizedStrings description;
-    private final LocalizedStrings slug;
+    private final LocalizedString description;
+    private final LocalizedString slug;
     @Nullable
-    private final LocalizedStrings metaTitle;
+    private final LocalizedString metaTitle;
     @Nullable
-    private final LocalizedStrings metaDescription;
+    private final LocalizedString metaDescription;
     @Nullable
-    private final LocalizedStrings metaKeywords;
+    private final LocalizedString metaKeywords;
     private final ProductVariant masterVariant;
     private final List<ProductVariant> variants;
     private final SearchKeywords searchKeywords;
@@ -42,10 +42,10 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection> implemen
     @JsonCreator
     ProductProjectionImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                           final Reference<ProductType> productType, @Nullable final Reference<TaxCategory> taxCategory,
-                          final Boolean hasStagedChanges, final LocalizedStrings name,
-                          final Set<Reference<Category>> categories, final LocalizedStrings description,
-                          final LocalizedStrings slug, final LocalizedStrings metaTitle,
-                          final LocalizedStrings metaDescription, final LocalizedStrings metaKeywords,
+                          final Boolean hasStagedChanges, final LocalizedString name,
+                          final Set<Reference<Category>> categories, final LocalizedString description,
+                          final LocalizedString slug, final LocalizedString metaTitle,
+                          final LocalizedString metaDescription, final LocalizedString metaKeywords,
                           final ProductVariant masterVariant, final List<ProductVariant> variants,
                           final Boolean isPublished, final SearchKeywords searchKeywords) {
         super(id, version, createdAt, lastModifiedAt);
@@ -73,7 +73,7 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection> implemen
     }
 
     @Override
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
@@ -84,30 +84,30 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection> implemen
 
     @Override
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 
     @Override
-    public LocalizedStrings getSlug() {
+    public LocalizedString getSlug() {
         return slug;
     }
 
     @Override
     @Nullable
-    public LocalizedStrings getMetaTitle() {
+    public LocalizedString getMetaTitle() {
         return metaTitle;
     }
 
     @Override
     @Nullable
-    public LocalizedStrings getMetaDescription() {
+    public LocalizedString getMetaDescription() {
         return metaDescription;
     }
 
     @Override
     @Nullable
-    public LocalizedStrings getMetaKeywords() {
+    public LocalizedString getMetaKeywords() {
         return metaKeywords;
     }
 

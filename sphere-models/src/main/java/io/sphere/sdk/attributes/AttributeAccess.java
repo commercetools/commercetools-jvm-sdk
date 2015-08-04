@@ -6,7 +6,7 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.AttributeContainer;
@@ -59,12 +59,12 @@ public interface AttributeAccess<T> {
         return ofStringSet();
     }
 
-    static AttributeAccess<LocalizedStrings> ofLocalizedStrings() {
-        return AttributeAccessImpl.ofPrimitive(LocalizedStrings.typeReference(), LocalizedStringsType.class);
+    static AttributeAccess<LocalizedString> ofLocalizedStrings() {
+        return AttributeAccessImpl.ofPrimitive(LocalizedString.typeReference(), LocalizedStringsType.class);
     }
 
-    static AttributeAccess<Set<LocalizedStrings>> ofLocalizedStringsSet() {
-        return AttributeAccessImpl.ofSet(LocalizedStringsType.class, new TypeReference<Set<LocalizedStrings>>() {
+    static AttributeAccess<Set<LocalizedString>> ofLocalizedStringsSet() {
+        return AttributeAccessImpl.ofSet(LocalizedStringsType.class, new TypeReference<Set<LocalizedString>>() {
         });
     }
 

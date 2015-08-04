@@ -1,8 +1,8 @@
 package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceImpl;
-import io.sphere.sdk.models.LocalizedStrings;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -12,12 +12,12 @@ class ChannelImpl extends ResourceImpl<Channel> implements Channel {
     private final String key;
     private final Set<ChannelRole> roles;
     @Nullable
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     @Nullable
-    private final LocalizedStrings description;
+    private final LocalizedString description;
 
     @JsonCreator
-    ChannelImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String key, final Set<ChannelRole> roles, final LocalizedStrings name, final LocalizedStrings description) {
+    ChannelImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String key, final Set<ChannelRole> roles, final LocalizedString name, final LocalizedString description) {
         super(id, version, createdAt, lastModifiedAt);
         this.key = key;
         this.roles = roles;
@@ -34,12 +34,12 @@ class ChannelImpl extends ResourceImpl<Channel> implements Channel {
     }
 
     @Nullable
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 }

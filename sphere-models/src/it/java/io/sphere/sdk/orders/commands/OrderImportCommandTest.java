@@ -42,7 +42,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         withProduct(client(), product -> {
             final String productId = product.getId();
             final int variantId = 1;
-            final LocalizedStrings name = en("a name");
+            final LocalizedString name = en("a name");
             final int quantity = 1;
             final Price price = Price.of(EURO_10);
             final OrderState orderState = OrderState.OPEN;
@@ -80,7 +80,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                         final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), variantId, sku)
                                 .build();
                         final Price price = PRICE;
-                        final LocalizedStrings name = randomSlug();
+                        final LocalizedString name = randomSlug();
                         final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2, price, name).supplyChannel(channel).build();
                         testOrderAspect(
                                 builder -> builder.lineItems(asList(lineItemImportDraft)),
@@ -124,7 +124,7 @@ public class OrderImportCommandTest extends IntegrationTest {
             final ProductVariantImportDraft productVariantImportDraft = f.apply(product)
                     .build();
             final Price price = PRICE;
-            final LocalizedStrings name = randomSlug();
+            final LocalizedString name = randomSlug();
             final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2, price, name).build();
             testOrderAspect(
                     builder -> builder.lineItems(asList(lineItemImportDraft)),
@@ -141,7 +141,7 @@ public class OrderImportCommandTest extends IntegrationTest {
     @Test
     public void customLineItems() throws Exception {
         withTransientTaxCategory(client(), taxCategory -> withProduct(client(), product -> {
-            final LocalizedStrings name = randomSlug();
+            final LocalizedString name = randomSlug();
             final int quantity = 16;
             final MonetaryAmount money = EURO_20;
             final Reference<TaxCategory> taxCategoryReference = defaultTaxCategory(client()).toReference();
@@ -189,7 +189,7 @@ public class OrderImportCommandTest extends IntegrationTest {
                     .prices(prices)
                     .build();
             final Price price = PRICE;
-            final LocalizedStrings name = randomSlug();
+            final LocalizedString name = randomSlug();
             final LineItemImportDraft lineItemImportDraft = LineItemImportDraftBuilder.of(productVariantImportDraft, 2, price, name).build();
             testOrderAspect(
                     builder -> builder.lineItems(asList(lineItemImportDraft)),
@@ -350,7 +350,7 @@ public class OrderImportCommandTest extends IntegrationTest {
         withProduct(client(), product -> {
             final String productId = product.getId();
             final int variantId = 1;
-            final LocalizedStrings name = en("a name");
+            final LocalizedString name = en("a name");
             final int quantity = 1;
             final Price price = Price.of(EURO_10);
             final OrderState orderState = OrderState.OPEN;

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.CartPredicate;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
@@ -17,9 +17,9 @@ import java.util.List;
  */
 public class DiscountCodeDraft extends Base {
     @Nullable
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     @Nullable
-    private final LocalizedStrings description;
+    private final LocalizedString description;
     private final String code;
     private final List<Reference<CartDiscount>> cartDiscounts;
     @Nullable
@@ -30,7 +30,7 @@ public class DiscountCodeDraft extends Base {
     @Nullable
     private final Long maxApplicationsPerCustomer;
 
-    DiscountCodeDraft(final List<Reference<CartDiscount>> cartDiscounts, final LocalizedStrings name, final LocalizedStrings description, final String code, final String cartPredicate, final Boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer) {
+    DiscountCodeDraft(final List<Reference<CartDiscount>> cartDiscounts, final LocalizedString name, final LocalizedString description, final String code, final String cartPredicate, final Boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer) {
         this.cartDiscounts = cartDiscounts;
         this.name = name;
         this.description = description;
@@ -49,21 +49,21 @@ public class DiscountCodeDraft extends Base {
         return DiscountCodeDraftBuilder.of(code, cartDiscounts).build();
     }
 
-    public DiscountCodeDraft withName(@Nullable final LocalizedStrings name) {
+    public DiscountCodeDraft withName(@Nullable final LocalizedString name) {
         return newBuilder().name(name).build();
     }
 
     @Nullable
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
-    public DiscountCodeDraft withDescription(@Nullable final LocalizedStrings description) {
+    public DiscountCodeDraft withDescription(@Nullable final LocalizedString description) {
         return newBuilder().description(description).build();
     }
 
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 

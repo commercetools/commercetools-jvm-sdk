@@ -3,7 +3,7 @@ package io.sphere.sdk.carts;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
@@ -15,9 +15,9 @@ import java.util.Set;
 final class LineItemImpl extends LineItemLikeImpl implements LineItem {
 
     private final String productId;
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     @Nullable
-    private final LocalizedStrings productSlug;
+    private final LocalizedString productSlug;
     private final ProductVariant variant;
     private final Price price;
     @Nullable
@@ -28,11 +28,11 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     private final Reference<Channel> distributionChannel;
 
     @JsonCreator
-    LineItemImpl(final String id, final String productId, final LocalizedStrings name,
+    LineItemImpl(final String id, final String productId, final LocalizedString name,
                  final ProductVariant variant, final Price price, final Long quantity,
                  final Set<ItemState> state, final TaxRate taxRate,
                  final Reference<Channel> supplyChannel, final DiscountedLineItemPrice discountedPrice,
-                 final LocalizedStrings productSlug, final Reference<Channel> distributionChannel) {
+                 final LocalizedString productSlug, final Reference<Channel> distributionChannel) {
         super(id, state, quantity, discountedPrice);
         this.productId = productId;
         this.name = name;
@@ -50,7 +50,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     }
 
     @Override
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
@@ -84,7 +84,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
 
     @Override
     @Nullable
-    public LocalizedStrings getProductSlug() {
+    public LocalizedString getProductSlug() {
         return productSlug;
     }
 }

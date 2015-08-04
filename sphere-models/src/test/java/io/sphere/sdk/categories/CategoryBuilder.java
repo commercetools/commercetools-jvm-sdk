@@ -20,10 +20,10 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
     protected long version = 1;
     protected ZonedDateTime createdAt = ZonedDateTime.now();
     protected ZonedDateTime lastModifiedAt = ZonedDateTime.now();
-    private LocalizedStrings name;
-    private LocalizedStrings slug;
+    private LocalizedString name;
+    private LocalizedString slug;
     @Nullable
-    private LocalizedStrings description;
+    private LocalizedString description;
     private List<Reference<Category>> ancestors = Collections.emptyList();
     @Nullable
     private Reference<Category> parent;
@@ -32,13 +32,13 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
     @Nullable
     private String externalId;
     @Nullable
-    private LocalizedStrings metaTitle;
+    private LocalizedString metaTitle;
     @Nullable
-    private LocalizedStrings metaDescription;
+    private LocalizedString metaDescription;
     @Nullable
-    private LocalizedStrings metaKeywords;
+    private LocalizedString metaKeywords;
 
-    public static CategoryBuilder of(final String id, final LocalizedStrings name, final LocalizedStrings slug) {
+    public static CategoryBuilder of(final String id, final LocalizedString name, final LocalizedString slug) {
         return new CategoryBuilder(id, name, slug);
     }
 
@@ -51,23 +51,23 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
                 orderHint(category.getOrderHint()).externalId(category.getExternalId());
     }
 
-    private CategoryBuilder(final String id, final LocalizedStrings name, final LocalizedStrings slug) {
+    private CategoryBuilder(final String id, final LocalizedString name, final LocalizedString slug) {
         this.id = id;
         this.name = name;
         this.slug = slug;
     }
 
-    public CategoryBuilder name(final LocalizedStrings name) {
+    public CategoryBuilder name(final LocalizedString name) {
         this.name = name;
         return this;
     }
 
-    public CategoryBuilder slug(final LocalizedStrings slug) {
+    public CategoryBuilder slug(final LocalizedString slug) {
         this.slug = slug;
         return this;
     }
 
-    public CategoryBuilder description(@Nullable final LocalizedStrings description) {
+    public CategoryBuilder description(@Nullable final LocalizedString description) {
         this.description = description;
         return this;
     }
@@ -94,18 +94,18 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
 
 
 
-    public CategoryBuilder metaTitle(@Nullable final LocalizedStrings metaTitle) {
+    public CategoryBuilder metaTitle(@Nullable final LocalizedString metaTitle) {
         this.metaTitle = metaTitle;
         return getThis();
     }
 
-    public CategoryBuilder metaDescription(@Nullable final LocalizedStrings metaDescription) {
+    public CategoryBuilder metaDescription(@Nullable final LocalizedString metaDescription) {
         this.metaDescription = metaDescription;
         return getThis();
     }
 
 
-    public CategoryBuilder metaKeywords(@Nullable final LocalizedStrings metaKeywords) {
+    public CategoryBuilder metaKeywords(@Nullable final LocalizedString metaKeywords) {
         this.metaKeywords = metaKeywords;
         return getThis();
     }

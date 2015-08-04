@@ -3,7 +3,7 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.Versioned;
@@ -66,28 +66,28 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
 
     @Override
     @Nullable
-    LocalizedStrings getDescription();
+    LocalizedString getDescription();
 
     @Override
     ProductVariant getMasterVariant();
 
     @Nullable
     @Override
-    LocalizedStrings getMetaDescription();
+    LocalizedString getMetaDescription();
 
     @Nullable
     @Override
-    LocalizedStrings getMetaKeywords();
+    LocalizedString getMetaKeywords();
 
     @Nullable
     @Override
-    LocalizedStrings getMetaTitle();
+    LocalizedString getMetaTitle();
 
     @Override
-    LocalizedStrings getName();
+    LocalizedString getName();
 
     @Override
-    LocalizedStrings getSlug();
+    LocalizedString getSlug();
 
     @Override
     List<ProductVariant> getVariants();

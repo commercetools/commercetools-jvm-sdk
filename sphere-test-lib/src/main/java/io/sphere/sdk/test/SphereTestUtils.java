@@ -53,16 +53,16 @@ public final class SphereTestUtils {
     }
 
     /**
-     * Creates a LocalizedStrings for the {@code Locale.ENGLISH}.
+     * Creates a LocalizedString for the {@code Locale.ENGLISH}.
      * @param value the value of the english translation
      * @return localized string with value
      */
-    public static LocalizedStrings en(final String value) {
-        return LocalizedStrings.of(Locale.ENGLISH, value);
+    public static LocalizedString en(final String value) {
+        return LocalizedString.of(Locale.ENGLISH, value);
     }
 
-    public static String en(final LocalizedStrings localizedStrings) {
-        return localizedStrings.get(ENGLISH);
+    public static String en(final LocalizedString localizedString) {
+        return localizedString.get(ENGLISH);
     }
 
     public static String englishSlugOf(final WithLocalizedSlug model) {
@@ -73,8 +73,8 @@ public final class SphereTestUtils {
         return result.head().get();
     }
 
-    public static LocalizedStrings randomSlug() {
-        return LocalizedStrings.of(Locale.ENGLISH, randomKey());
+    public static LocalizedString randomSlug() {
+        return LocalizedString.of(Locale.ENGLISH, randomKey());
     }
 
     public static Address randomAddress() {

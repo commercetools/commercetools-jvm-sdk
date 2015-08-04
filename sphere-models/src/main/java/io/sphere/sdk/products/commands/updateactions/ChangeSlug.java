@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
 
 /**
@@ -10,18 +10,18 @@ import io.sphere.sdk.products.Product;
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changeSlug()}
  */
 public class ChangeSlug extends UpdateActionImpl<Product> {
-    private final LocalizedStrings slug;
+    private final LocalizedString slug;
 
-    private ChangeSlug(final LocalizedStrings slug) {
+    private ChangeSlug(final LocalizedString slug) {
         super("changeSlug");
         this.slug = slug;
     }
 
-    public static ChangeSlug of(final LocalizedStrings slug) {
+    public static ChangeSlug of(final LocalizedString slug) {
         return new ChangeSlug(slug);
     }
 
-    public LocalizedStrings getSlug() {
+    public LocalizedString getSlug() {
         return slug;
     }
 }

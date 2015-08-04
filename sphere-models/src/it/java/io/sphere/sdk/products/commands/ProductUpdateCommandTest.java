@@ -1,12 +1,10 @@
 package io.sphere.sdk.products.commands;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateAction;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.updateactions.*;
@@ -29,7 +27,7 @@ import java.time.ZoneOffset;
 import java.util.*;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
+import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -103,7 +101,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeName() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedStrings newName = ofEnglishLocale("newName " + RANDOM.nextInt());
+            final LocalizedString newName = ofEnglishLocale("newName " + RANDOM.nextInt());
             final Product updatedProduct = execute(ProductUpdateCommand.of(product, ChangeName.of(newName)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getName()).isEqualTo(newName);
@@ -132,7 +130,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeSlug() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedStrings newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
+            final LocalizedString newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
             final Product updatedProduct = execute(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug)));
 
             assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
@@ -185,7 +183,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void setDescription() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedStrings newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
+            final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription));
             final Product updatedProduct = execute(cmd);
 
@@ -197,7 +195,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void setMetaKeywords() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedStrings metaKeywords = LocalizedStrings
+            final LocalizedString metaKeywords = LocalizedString
                     .of(ENGLISH, "Platform-as-a-Service, e-commerce, http, api, tool");
             final SetMetaKeywords action = SetMetaKeywords.of(metaKeywords);
 
@@ -212,7 +210,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void setMetaDescription() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedStrings metaDescription = LocalizedStrings
+            final LocalizedString metaDescription = LocalizedString
                     .of(ENGLISH, "SPHERE.IO&#8482; is the first Platform-as-a-Service solution for eCommerce.");
             final SetMetaDescription action = SetMetaDescription.of(metaDescription);
 
@@ -227,7 +225,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void setMetaTitle() throws Exception {
         withUpdateableProduct(client(), product -> {
-            final LocalizedStrings metaTitle = LocalizedStrings
+            final LocalizedString metaTitle = LocalizedString
                     .of(ENGLISH, "commercetools SPHERE.IO&#8482; - Next generation eCommerce");
             final SetMetaTitle action = SetMetaTitle.of(metaTitle);
 
@@ -330,8 +328,8 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     public void revertStagedChanges() throws Exception {
         withUpdateableProduct(client(), product -> {
             //changing only staged and not current
-            final LocalizedStrings oldDescriptionOption = product.getMasterData().getStaged().getDescription();
-            final LocalizedStrings newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
+            final LocalizedString oldDescriptionOption = product.getMasterData().getStaged().getDescription();
+            final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
             final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, asList(Publish.of(), SetDescription.of(newDescription)));
             final Product updatedProduct = execute(cmd);
             assertThat(oldDescriptionOption).isNotEqualTo(newDescription);
@@ -433,7 +431,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
     @Test
     public void possibleToHackUpdateForStagedAndCurrent() throws Exception {
          withUpdateableProduct(client(), product -> {
-             final LocalizedStrings newName = randomSlug();
+             final LocalizedString newName = randomSlug();
              final UpdateAction<Product> stagedWrapper = new StagedWrapper(ChangeName.of(newName), false);
              final Product updatedProduct = execute(ProductUpdateCommand.of(product, asList(Publish.of(), stagedWrapper)));
 

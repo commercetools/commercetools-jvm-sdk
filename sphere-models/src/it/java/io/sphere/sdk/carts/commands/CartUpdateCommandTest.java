@@ -10,7 +10,7 @@ import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -132,7 +132,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(cart.getCustomLineItems()).hasSize(0);
             final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
             final String slug = "thing-slug";
-            final LocalizedStrings name = en("thing");
+            final LocalizedString name = en("thing");
             final long quantity = 5;
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
 

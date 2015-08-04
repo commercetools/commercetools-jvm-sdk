@@ -2,10 +2,11 @@ package io.sphere.sdk.attributes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.models.LocalizedString;
 
 /**
  *
- * @param <T> the result type of the attribute, e.g., {@link io.sphere.sdk.models.LocalizedStrings}
+ * @param <T> the result type of the attribute, e.g., {@link LocalizedString}
  *
  */
 public interface AttributeMapper<T> {

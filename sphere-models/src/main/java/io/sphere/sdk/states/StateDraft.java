@@ -1,7 +1,7 @@
 package io.sphere.sdk.states;
 
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -16,15 +16,15 @@ public class StateDraft extends Base {
     private final String key;
     private final StateType type;
     @Nullable
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     @Nullable
-    private final LocalizedStrings description;
+    private final LocalizedString description;
     @Nullable
     private final Boolean initial;
     @Nullable
     private final Set<Reference<State>> transitions;
 
-    StateDraft(String key, StateType type, LocalizedStrings name, LocalizedStrings description,
+    StateDraft(String key, StateType type, LocalizedString name, LocalizedString description,
                Boolean initial, Set<Reference<State>> transitions) {
         this.key = key;
         this.type = type;
@@ -47,12 +47,12 @@ public class StateDraft extends Base {
     }
 
     @Nullable
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 
@@ -66,11 +66,11 @@ public class StateDraft extends Base {
         return transitions;
     }
 
-    public StateDraft withName(final LocalizedStrings name) {
+    public StateDraft withName(final LocalizedString name) {
         return StateDraftBuilder.of(this).name(name).build();
     }
 
-    public StateDraft withDescription(final LocalizedStrings description) {
+    public StateDraft withDescription(final LocalizedString description) {
         return StateDraftBuilder.of(this).description(description).build();
     }
 

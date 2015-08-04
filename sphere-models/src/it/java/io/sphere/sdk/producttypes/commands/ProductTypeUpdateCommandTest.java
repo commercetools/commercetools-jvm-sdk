@@ -2,7 +2,7 @@ package io.sphere.sdk.producttypes.commands;
 
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.updateactions.*;
@@ -48,7 +48,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             //add
             final String attributeName = "foostring";
             final AttributeDefinition foostring =
-                    AttributeDefinitionBuilder.of(attributeName, LocalizedStrings.of(ENGLISH, "foo string"), TextType.of()).build();
+                    AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), TextType.of()).build();
             final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
             final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
             assertThat(loadedDefinition.getAttributeType()).isEqualTo(TextType.of());
@@ -65,7 +65,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
         withUpdateableProductType(client(), productType -> {
             final String attributeName = "color";
             assertThat(productType.findAttribute(attributeName)).isPresent();
-            final LocalizedStrings label = LocalizedStrings.of(ENGLISH, "the color label");
+            final LocalizedString label = LocalizedString.of(ENGLISH, "the color label");
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeDefinitionLabel.of(attributeName, label)));
 
@@ -99,7 +99,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             final String attributeName = "color";
             assertThat(productType.getAttribute(attributeName)).isNotNull();
             final LocalizedEnumValue value =
-                    LocalizedEnumValue.of("brown", LocalizedStrings.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
+                    LocalizedEnumValue.of("brown", LocalizedString.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
 
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,

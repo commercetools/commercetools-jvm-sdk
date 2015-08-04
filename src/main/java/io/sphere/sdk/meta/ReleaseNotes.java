@@ -10,8 +10,7 @@ import io.sphere.sdk.http.ApacheHttpClientAdapter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
@@ -139,8 +138,8 @@ import java.util.function.BiFunction;
 
  <h3 class=released-version id=v1_0_0_M13>1.0.0-M13</h3>
  <ul>
-     <li class=new-in-release>{@link io.sphere.sdk.models.LocalizedStrings#mapValue(BiFunction)} and {@link LocalizedStrings#stream()}
-     can be used transform {@link LocalizedStrings}, for example for creating slugs or formatting.</li>
+     <li class=new-in-release>{@link LocalizedString#mapValue(BiFunction)} and {@link LocalizedString#stream()}
+     can be used transform {@link LocalizedString}, for example for creating slugs or formatting.</li>
      <li class=new-in-release>Experimental {@link io.sphere.sdk.utils.CompletableFutureUtils} to work with Java 8 Futures.</li>
      <li class=new-in-release>{@link AsyncDocumentation} documents how to work with {@link java.util.concurrent.CompletableFuture} and {@link java.util.concurrent.CompletionStage}.</li>
 
@@ -217,7 +216,7 @@ import java.util.function.BiFunction;
     <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.client.JsonEndpoint} moved to the client package</li>
     <li class=change-in-release>{@link io.sphere.sdk.queries.Fetch} class names end now with Fetch for consistency, so for example {@code CartFetchById} is now {@link io.sphere.sdk.carts.queries.CartByIdFetch}.</li>
     <li class=change-in-release>{@link io.sphere.sdk.commands.DeleteCommand} implementations don't have {@code ById} or {@code ByKey} in the class name and the {@code of} factory method returns the interface, not the implementation, example {@link io.sphere.sdk.categories.commands.CategoryDeleteCommand#of(io.sphere.sdk.models.Versioned)}.</li>
-    <li class=change-in-release>LocalizedText* classes have been renamed to LocalizedStrings.</li>
+    <li class=change-in-release>LocalizedText* classes have been renamed to LocalizedString.</li>
     <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/264">#264</a>.</li>
  </ul>
 
@@ -309,7 +308,7 @@ import java.util.function.BiFunction;
  <li>Incompatible change: {@link io.sphere.sdk.producttypes.ProductTypeDraft} has now only
  factory methods with an explicit parameter for the attribute declarations to prevent to use
  the getter {@link io.sphere.sdk.producttypes.ProductTypeDraft#getAttributes()} and list add operations. </li>
- <li>Incompatible change: {@code LocalizedString} has been renamed to {@link io.sphere.sdk.models.LocalizedStrings}, since it is not a container for one string and a locale, but for multiple strings of different locals. It is like a map.</li>
+ <li>Incompatible change: {@code LocalizedString} has been renamed to {@link LocalizedString}, since it is not a container for one string and a locale, but for multiple strings of different locals. It is like a map.</li>
  <li>Incompatible change: The {@link io.sphere.sdk.queries.Fetch} classes have been renamed. From FetchRESOURCEByWhatever to RESOURCEFetchByWhatever</li>
  <li>Moved Scala and Play clients out of the Git repository to <a href="https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons">https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons</a>. The artifact ID changed.</li>
  <li>{@link io.sphere.sdk.meta.SphereResources} contains now also a listing of queries and commands for the resources.</li>

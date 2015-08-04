@@ -3,7 +3,7 @@ package io.sphere.sdk.cartdiscounts.commands;
 import io.sphere.sdk.cartdiscounts.*;
 import io.sphere.sdk.cartdiscounts.commands.updateactions.*;
 import io.sphere.sdk.commands.UpdateAction;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -80,7 +80,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeName() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
-            final LocalizedStrings newName = randomSlug();
+            final LocalizedString newName = randomSlug();
 
             assertThat(cartDiscount.getName()).isNotEqualTo(newName);
 
@@ -97,7 +97,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
     @Test
     public void setDescription() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
-            final LocalizedStrings newDescription = randomSlug();
+            final LocalizedString newDescription = randomSlug();
 
             assertThat(cartDiscount.getDescription()).isNotEqualTo(newDescription);
 

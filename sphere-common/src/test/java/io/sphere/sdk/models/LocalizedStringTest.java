@@ -10,67 +10,67 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LocalizedStringsTest {
+public class LocalizedStringTest {
     private final Locale germanLocale = Locale.GERMAN;
     private final Locale englishLocale = Locale.ENGLISH;
     private final Locale frenchLocale = Locale.FRANCE;
     private final String defaultString1 = "foo";
     private final String defaultString2 = "bar";
-    private final LocalizedStrings localizedStrings = LocalizedStrings.of(germanLocale, defaultString1, englishLocale, defaultString2);
+    private final LocalizedString localizedString = LocalizedString.of(germanLocale, defaultString1, englishLocale, defaultString2);
     private final String dogFoodJson = "{\"de\":\"Hundefutter\",\"en\":\"dog food\"}";
-    private final LocalizedStrings dogFood = LocalizedStrings.of(germanLocale, "Hundefutter", englishLocale, "dog food");
-    private final LocalizedStrings upperCasedDogFood = LocalizedStrings.of(germanLocale, "HUNDEFUTTER", englishLocale, "DOG FOOD");
+    private final LocalizedString dogFood = LocalizedString.of(germanLocale, "Hundefutter", englishLocale, "dog food");
+    private final LocalizedString upperCasedDogFood = LocalizedString.of(germanLocale, "HUNDEFUTTER", englishLocale, "DOG FOOD");
 
     @Test
     public void createFromOneValue() throws Exception {
-        final LocalizedStrings ls = LocalizedStrings.of(germanLocale, defaultString1);
+        final LocalizedString ls = LocalizedString.of(germanLocale, defaultString1);
         assertThat(ls.get(germanLocale)).isEqualTo(defaultString1);
         assertThat(ls.get(englishLocale)).isNull();
     }
 
     @Test
     public void createFromTwoValues() throws Exception {
-        assertThat(localizedStrings.get(germanLocale)).isEqualTo(defaultString1);
-        assertThat(localizedStrings.get(englishLocale)).isEqualTo(defaultString2);
+        assertThat(localizedString.get(germanLocale)).isEqualTo(defaultString1);
+        assertThat(localizedString.get(englishLocale)).isEqualTo(defaultString2);
     }
 
     @Test
     public void createANewLocalizedStringsByAddingALocale() throws Exception {
-        final LocalizedStrings ls = LocalizedStrings.of(germanLocale, defaultString1).plus(englishLocale, defaultString2);
+        final LocalizedString ls = LocalizedString.of(germanLocale, defaultString1).plus(englishLocale, defaultString2);
         assertThat(ls.get(germanLocale)).isEqualTo(defaultString1);
         assertThat(ls.get(englishLocale)).isEqualTo(defaultString2);
     }
 
     @Test
     public void findTheFirstBestTranslation() throws Exception {
-        final String actual = localizedStrings.get(asList(frenchLocale, englishLocale, germanLocale));
+        final String actual = localizedString.get(asList(frenchLocale, englishLocale, germanLocale));
         assertThat(actual).isEqualTo(defaultString2);
     }
 
     @Test
     public void returnPresentLocales() throws Exception {
-        assertThat(localizedStrings.getLocales()).isEqualTo(new HashSet<>(asList(germanLocale, englishLocale)));
+        assertThat(localizedString.getLocales()).isEqualTo(new HashSet<>(asList(germanLocale, englishLocale)));
     }
 
     @Test
     public void implementToString() throws Exception {
-        assertThat(localizedStrings.toString()).isEqualTo(format("LocalizedStrings(de -> %s, en -> %s)", defaultString1, defaultString2));
+        assertThat(localizedString.toString()).isEqualTo(format("LocalizedString(de -> %s, en -> %s)", defaultString1, defaultString2));
     }
 
     @Test
     public void implementEquals() throws Exception {
-        assertThat(LocalizedStrings.of(germanLocale, defaultString1).plus(englishLocale, defaultString2).equals(localizedStrings)).isTrue();
-        assertThat(LocalizedStrings.of(germanLocale, defaultString1).equals(localizedStrings)).isFalse();
+        assertThat(LocalizedString.of(germanLocale, defaultString1).plus(englishLocale, defaultString2).equals(localizedString)).isTrue();
+        assertThat(LocalizedString.of(germanLocale, defaultString1).equals(localizedString)).isFalse();
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void throwIllegalArgumentExceptionOnDuplicateKeysWithCreator() throws Exception {
-        LocalizedStrings.of(germanLocale, defaultString1, germanLocale, defaultString2);
+        LocalizedString.of(germanLocale, defaultString1, germanLocale, defaultString2);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void throwIllegalArgumentExceptionOnDuplicateKeysWithPlus() throws Exception {
-        LocalizedStrings.of(germanLocale, defaultString1).plus(germanLocale, defaultString2);
+        LocalizedString.of(germanLocale, defaultString1).plus(germanLocale, defaultString2);
     }
 
     @Test
@@ -80,33 +80,33 @@ public class LocalizedStringsTest {
 
     @Test
     public void jsonDeserialize() throws Exception {
-        assertThat(SphereJsonUtils.newObjectMapper().readValue(dogFoodJson, LocalizedStrings.class)).isEqualTo(dogFood);
+        assertThat(SphereJsonUtils.newObjectMapper().readValue(dogFoodJson, LocalizedString.class)).isEqualTo(dogFood);
     }
 
     @Test
     public void slugify() throws Exception {
-        final LocalizedStrings actual = LocalizedStrings.of(germanLocale, "Aa -A_", englishLocale, "dog food").slugified();
-        final LocalizedStrings expected = LocalizedStrings.of(germanLocale, "aa-a_", englishLocale, "dog-food");
+        final LocalizedString actual = LocalizedString.of(germanLocale, "Aa -A_", englishLocale, "dog food").slugified();
+        final LocalizedString expected = LocalizedString.of(germanLocale, "aa-a_", englishLocale, "dog-food");
         assertThat(actual).isEqualTo(expected);
     }
 
     @Test
     public void slugifyUnique() throws Exception {
-        final LocalizedStrings actual = LocalizedStrings.of(germanLocale, "Aa -A_", englishLocale, "dog food").slugifiedUnique();
+        final LocalizedString actual = LocalizedString.of(germanLocale, "Aa -A_", englishLocale, "dog food").slugifiedUnique();
         assertThat(actual.stream().allMatch(entry -> entry.getValue().matches("[\\w-]+-\\d{6,14}"))).isTrue();
     }
 
     @Test
     public void stream() throws Exception {
-        final LocalizedStrings upperCased = dogFood.stream()
+        final LocalizedString upperCased = dogFood.stream()
                 .map(e -> LocalizedStringsEntry.of(e.getLocale(), e.getValue().toUpperCase()))
-                .collect(LocalizedStrings.streamCollector());
+                .collect(LocalizedString.streamCollector());
         assertThat(upperCased).isEqualTo(upperCasedDogFood);
     }
 
     @Test
     public void mapValue() throws Exception {
-        final LocalizedStrings upperCased = dogFood.mapValue((locale, value) -> value.toUpperCase());
+        final LocalizedString upperCased = dogFood.mapValue((locale, value) -> value.toUpperCase());
         assertThat(upperCased).isEqualTo(upperCasedDogFood);
     }
 }

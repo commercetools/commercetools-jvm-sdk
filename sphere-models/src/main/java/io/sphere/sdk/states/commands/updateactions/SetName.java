@@ -1,7 +1,7 @@
 package io.sphere.sdk.states.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
@@ -11,19 +11,19 @@ import javax.annotation.Nullable;
  */
 public class SetName extends UpdateActionImpl<State> {
     @Nullable
-    private final LocalizedStrings name;
+    private final LocalizedString name;
 
-    private SetName(@Nullable final LocalizedStrings name) {
+    private SetName(@Nullable final LocalizedString name) {
         super("setName");
         this.name = name;
     }
 
-    public static SetName of(@Nullable final LocalizedStrings name) {
+    public static SetName of(@Nullable final LocalizedString name) {
         return new SetName(name);
     }
 
     @Nullable
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 }

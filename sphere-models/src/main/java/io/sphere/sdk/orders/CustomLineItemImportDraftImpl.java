@@ -1,7 +1,7 @@
 package io.sphere.sdk.orders;
 
 import io.sphere.sdk.carts.ItemState;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -12,7 +12,7 @@ import java.util.Set;
 
 final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     private final String id;
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     private final MonetaryAmount money;
     private final String slug;
     private final Long quantity;
@@ -22,7 +22,7 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     @Nullable
     private final TaxRate taxRate;
 
-    public CustomLineItemImportDraftImpl(final String id, final LocalizedStrings name, final MonetaryAmount money, final String slug, final Long quantity, final Set<ItemState> state, final Reference<TaxCategory> taxCategory, final TaxRate taxRate) {
+    public CustomLineItemImportDraftImpl(final String id, final LocalizedString name, final MonetaryAmount money, final String slug, final Long quantity, final Set<ItemState> state, final Reference<TaxCategory> taxCategory, final TaxRate taxRate) {
         this.id = id;
         this.name = name;
         this.money = money;
@@ -43,7 +43,7 @@ final class CustomLineItemImportDraftImpl implements CustomLineItemImportDraft {
     }
 
     @Override
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 

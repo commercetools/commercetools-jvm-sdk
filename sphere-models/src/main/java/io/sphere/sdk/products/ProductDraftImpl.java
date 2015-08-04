@@ -2,7 +2,7 @@ package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
@@ -13,22 +13,22 @@ import java.util.Set;
 
 class ProductDraftImpl extends Base implements ProductDraft {
     private final Reference<ProductType> productType;
-    private final LocalizedStrings name;
-    private final LocalizedStrings slug;
+    private final LocalizedString name;
+    private final LocalizedString slug;
     @Nullable
-    private final LocalizedStrings description;
+    private final LocalizedString description;
     private final Set<Reference<Category>> categories;
     @Nullable
-    private final LocalizedStrings metaTitle;
+    private final LocalizedString metaTitle;
     @Nullable
-    private final LocalizedStrings metaDescription;
+    private final LocalizedString metaDescription;
     @Nullable
-    private final LocalizedStrings metaKeywords;
+    private final LocalizedString metaKeywords;
     private final ProductVariantDraft masterVariant;
     private final List<ProductVariantDraft> variants;
 
-    public ProductDraftImpl(final Reference<ProductType> productType, final LocalizedStrings name, final LocalizedStrings slug,
-                            final LocalizedStrings description, final Set<Reference<Category>> categories,
+    public ProductDraftImpl(final Reference<ProductType> productType, final LocalizedString name, final LocalizedString slug,
+                            final LocalizedString description, final Set<Reference<Category>> categories,
                             final MetaAttributes metaAttributes, final ProductVariantDraft masterVariant,
                             final List<ProductVariantDraft> variants) {
         this.name = name;
@@ -49,18 +49,18 @@ class ProductDraftImpl extends Base implements ProductDraft {
     }
 
     @Override
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
     @Override
-    public LocalizedStrings getSlug() {
+    public LocalizedString getSlug() {
         return slug;
     }
 
     @Override
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 
@@ -71,19 +71,19 @@ class ProductDraftImpl extends Base implements ProductDraft {
 
     @Nullable
     @Override
-    public LocalizedStrings getMetaTitle() {
+    public LocalizedString getMetaTitle() {
         return metaTitle;
     }
 
     @Nullable
     @Override
-    public LocalizedStrings getMetaDescription() {
+    public LocalizedString getMetaDescription() {
         return metaDescription;
     }
 
     @Nullable
     @Override
-    public LocalizedStrings getMetaKeywords() {
+    public LocalizedString getMetaKeywords() {
         return metaKeywords;
     }
 

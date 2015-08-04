@@ -4,7 +4,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.channels.queries.ChannelQuery;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.After;
@@ -28,13 +28,13 @@ public class ChannelCreateCommandTest extends IntegrationTest {
     public void execution() throws Exception {
         final String key = channelKey();
         final ChannelDraft channelDraft = ChannelDraft.of(key)
-                .withName(LocalizedStrings.of(ENGLISH, "name"))
-                .withDescription(LocalizedStrings.of(ENGLISH, "description"))
+                .withName(LocalizedString.of(ENGLISH, "name"))
+                .withDescription(LocalizedString.of(ENGLISH, "description"))
                 .withRoles(ChannelRole.INVENTORY_SUPPLY);
         final Channel channel = execute(ChannelCreateCommand.of(channelDraft));
         assertThat(channel.getKey()).isEqualTo(key);
-        assertThat(channel.getName()).isEqualTo(LocalizedStrings.of(ENGLISH, "name"));
-        assertThat(channel.getDescription()).isEqualTo(LocalizedStrings.of(ENGLISH, "description"));
+        assertThat(channel.getName()).isEqualTo(LocalizedString.of(ENGLISH, "name"));
+        assertThat(channel.getDescription()).isEqualTo(LocalizedString.of(ENGLISH, "description"));
         assertThat(channel.getRoles()).isEqualTo(asSet(ChannelRole.INVENTORY_SUPPLY));
     }
 

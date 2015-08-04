@@ -1,5 +1,7 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.models.LocalizedString;
+
 /**
  * This documentation is about creating objects.
  *
@@ -14,7 +16,7 @@ package io.sphere.sdk.meta;
  *
  *  Simple objects with few optional parameters typically have a static method called {@code of} to create an object.
  *
- *  <p> For example use {@link io.sphere.sdk.models.LocalizedStrings#of(java.util.Locale, String, java.util.Locale, String)}
+ *  <p> For example use {@link LocalizedString#of(java.util.Locale, String, java.util.Locale, String)}
  *   to create a translation for different locales:</p>
  *
  *   {@include.example io.sphere.sdk.meta.ConstructionDocumentationTest#ofMethodExample()}

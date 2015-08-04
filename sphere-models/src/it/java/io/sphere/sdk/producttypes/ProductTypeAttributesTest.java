@@ -2,7 +2,7 @@ package io.sphere.sdk.producttypes;
 
 import io.sphere.sdk.attributes.*;
 import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
@@ -37,7 +37,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public final class ProductTypeAttributesTest extends IntegrationTest {
     public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MULTI_LINE;
-    public static final LocalizedStrings LABEL = en("label");
+    public static final LocalizedString LABEL = en("label");
     public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
     public static final ProductTypeDraft tshirt = new TShirtProductTypeDraftSupplier("t-shirt").get();
     public static final String distractorName = "distractor";
@@ -55,8 +55,8 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of("test-sub-attribute", "nested attribute test",
                 asList(
-                        AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
-                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Brand"), TextType.of()).build()));
+                        AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
+                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Brand"), TextType.of()).build()));
 
         withProductType(client(), () -> productTypeDraft, nestedProductType -> {
             final AttributeContainer adidas = AttributeContainer.of(
@@ -80,7 +80,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     @Test
     public void localizedStringsAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofLocalizedStrings(), AttributeAccess.ofLocalizedStringsSet(),
-                asSet(LocalizedStrings.of(ENGLISH, "hello"), LocalizedStrings.of(ENGLISH, "world")),
+                asSet(LocalizedString.of(ENGLISH, "hello"), LocalizedString.of(ENGLISH, "world")),
                 LocalizedStringsType.of(),
                 AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringsType.of()).inputHint(TEXT_INPUT_HINT).build());
     }
@@ -308,7 +308,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
         final NamedAttributeAccess<X> namedAttributeAccess = access.ofName(attributeName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(namedAttributeAccess.draftOf(exampleValue)).build();
-        final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedString.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = execute(ProductCreateCommand.of(productDraft));
         final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().findAttribute(namedAttributeAccess).get();
 

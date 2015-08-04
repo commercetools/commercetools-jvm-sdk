@@ -1,18 +1,18 @@
 package io.sphere.sdk.test;
 
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import org.assertj.core.api.AbstractAssert;
 
 import java.util.Locale;
 
-public class LocalizedStringsAssert extends AbstractAssert<LocalizedStringsAssert, LocalizedStrings> {
+public class LocalizedStringsAssert extends AbstractAssert<LocalizedStringsAssert, LocalizedString> {
 
-    public LocalizedStringsAssert(final LocalizedStrings localizedStrings) {
-        super(localizedStrings, LocalizedStringsAssert.class);
+    public LocalizedStringsAssert(final LocalizedString localizedString) {
+        super(localizedString, LocalizedStringsAssert.class);
     }
 
-    public static LocalizedStringsAssert assertThat(final LocalizedStrings localizedStrings) {
-        return new LocalizedStringsAssert(localizedStrings);
+    public static LocalizedStringsAssert assertThat(final LocalizedString localizedString) {
+        return new LocalizedStringsAssert(localizedString);
     }
 
     public LocalizedStringsAssert contains(final Locale locale, final String value) {

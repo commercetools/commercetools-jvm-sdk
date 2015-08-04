@@ -1,8 +1,8 @@
 package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceImpl;
-import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -10,10 +10,10 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 class CategoryImpl extends ResourceImpl<Category> implements Category {
-    private final LocalizedStrings name;
-    private final LocalizedStrings slug;
+    private final LocalizedString name;
+    private final LocalizedString slug;
     @Nullable
-    private final LocalizedStrings description;
+    private final LocalizedString description;
     private final List<Reference<Category>> ancestors;
     @Nullable
     private final Reference<Category> parent;
@@ -22,24 +22,24 @@ class CategoryImpl extends ResourceImpl<Category> implements Category {
     @Nullable
     private final String externalId;
     @Nullable
-    private final LocalizedStrings metaTitle;
+    private final LocalizedString metaTitle;
     @Nullable
-    private final LocalizedStrings metaDescription;
+    private final LocalizedString metaDescription;
     @Nullable
-    private final LocalizedStrings metaKeywords;
+    private final LocalizedString metaKeywords;
 
     @JsonCreator
     CategoryImpl(final String id,
                  final Long version,
                  final ZonedDateTime createdAt,
                  final ZonedDateTime lastModifiedAt,
-                 final LocalizedStrings name,
-                 final LocalizedStrings slug,
-                 @Nullable final LocalizedStrings description,
+                 final LocalizedString name,
+                 final LocalizedString slug,
+                 @Nullable final LocalizedString description,
                  final List<Reference<Category>> ancestors,
                  @Nullable final Reference<Category> parent,
                  @Nullable final String orderHint, @Nullable final String externalId,
-                 final LocalizedStrings metaTitle, final LocalizedStrings metaDescription, final LocalizedStrings metaKeywords) {
+                 final LocalizedString metaTitle, final LocalizedString metaDescription, final LocalizedString metaKeywords) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.slug = slug;
@@ -54,18 +54,18 @@ class CategoryImpl extends ResourceImpl<Category> implements Category {
     }
 
     @Override
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
     @Override
-    public LocalizedStrings getSlug() {
+    public LocalizedString getSlug() {
         return slug;
     }
 
     @Nullable
     @Override
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 
@@ -99,17 +99,17 @@ class CategoryImpl extends ResourceImpl<Category> implements Category {
     }
 
     @Nullable
-    public LocalizedStrings getMetaDescription() {
+    public LocalizedString getMetaDescription() {
         return metaDescription;
     }
 
     @Nullable
-    public LocalizedStrings getMetaKeywords() {
+    public LocalizedString getMetaKeywords() {
         return metaKeywords;
     }
 
     @Nullable
-    public LocalizedStrings getMetaTitle() {
+    public LocalizedString getMetaTitle() {
         return metaTitle;
     }
 }

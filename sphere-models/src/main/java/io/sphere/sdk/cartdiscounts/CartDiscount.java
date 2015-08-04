@@ -3,7 +3,7 @@ package io.sphere.sdk.cartdiscounts;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Resource;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -15,11 +15,11 @@ public interface CartDiscount extends Resource<CartDiscount> {
     String getCartPredicate();
 
     @Nullable
-    LocalizedStrings getDescription();
+    LocalizedString getDescription();
 
     Boolean isActive();
 
-    LocalizedStrings getName();
+    LocalizedString getName();
 
     List<Reference<Object>> getReferences();
 

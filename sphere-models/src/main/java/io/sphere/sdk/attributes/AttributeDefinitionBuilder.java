@@ -2,11 +2,11 @@ package io.sphere.sdk.attributes;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 
 public class AttributeDefinitionBuilder extends Base implements Builder<AttributeDefinition> {
     private final String name;
-    private final LocalizedStrings label;
+    private final LocalizedString label;
     private final AttributeType attributeType;
 
     private AttributeConstraint attributeConstraint = AttributeConstraint.NONE;
@@ -14,7 +14,7 @@ public class AttributeDefinitionBuilder extends Base implements Builder<Attribut
     Boolean isRequired = false;
     Boolean isSearchable = true;
 
-    AttributeDefinitionBuilder(final String name, final LocalizedStrings label, final AttributeType attributeType) {
+    AttributeDefinitionBuilder(final String name, final LocalizedString label, final AttributeType attributeType) {
         this.name = name;
         this.label = label;
         this.attributeType = attributeType;
@@ -53,7 +53,7 @@ public class AttributeDefinitionBuilder extends Base implements Builder<Attribut
         return new AttributeDefinition(attributeType, name, label, isRequired, attributeConstraint, isSearchable, inputHint);
     }
 
-    public static AttributeDefinitionBuilder of(final String name, final LocalizedStrings label, final AttributeType attributeType) {
+    public static AttributeDefinitionBuilder of(final String name, final LocalizedString label, final AttributeType attributeType) {
         return new AttributeDefinitionBuilder(name, label, attributeType);
     }
 }

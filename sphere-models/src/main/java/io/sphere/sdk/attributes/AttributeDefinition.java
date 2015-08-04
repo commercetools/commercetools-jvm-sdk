@@ -3,7 +3,7 @@ package io.sphere.sdk.attributes;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 
 /**
  * @see AttributeDefinitionBuilder
@@ -11,14 +11,14 @@ import io.sphere.sdk.models.LocalizedStrings;
 public class AttributeDefinition extends Base {
     private final AttributeType attributeType;
     private final String name;
-    private final LocalizedStrings label;
+    private final LocalizedString label;
     private final Boolean isRequired;
     private final AttributeConstraint attributeConstraint;
     private final Boolean isSearchable;
     private final TextInputHint inputHint;
 
     @JsonCreator
-    AttributeDefinition(AttributeType attributeType, String name, LocalizedStrings label, Boolean isRequired,
+    AttributeDefinition(AttributeType attributeType, String name, LocalizedString label, Boolean isRequired,
                         AttributeConstraint attributeConstraint, Boolean isSearchable, TextInputHint inputHint) {
         this.attributeType = attributeType;
         this.name = name;
@@ -50,7 +50,7 @@ public class AttributeDefinition extends Base {
      * A human-readable label for the attribute.
      * @return label for the attribute
      */
-    public LocalizedStrings getLabel() {
+    public LocalizedString getLabel() {
         return label;
     }
 

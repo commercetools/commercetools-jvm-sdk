@@ -13,7 +13,7 @@ import java.util.Set;
 public class LineItemImportDraftBuilder extends Base implements Builder<LineItemImportDraft> {
     @Nullable
     private final String productId;
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     private final ProductVariantImportDraft variant;
     private Price price;
     private Long quantity;
@@ -24,7 +24,7 @@ public class LineItemImportDraftBuilder extends Base implements Builder<LineItem
     @Nullable
     private TaxRate taxRate;
 
-    private LineItemImportDraftBuilder(final ProductVariantImportDraft variant, final long quantity, final Price price, final String productId, final LocalizedStrings name) {
+    private LineItemImportDraftBuilder(final ProductVariantImportDraft variant, final long quantity, final Price price, final String productId, final LocalizedString name) {
         this.price = price;
         this.variant = variant;
         this.quantity = quantity;
@@ -57,7 +57,7 @@ public class LineItemImportDraftBuilder extends Base implements Builder<LineItem
         return this;
     }
 
-    public static LineItemImportDraftBuilder of(final ProductVariantImportDraft variant, final long quantity, final Price price, final LocalizedStrings name) {
+    public static LineItemImportDraftBuilder of(final ProductVariantImportDraft variant, final long quantity, final Price price, final LocalizedString name) {
         return new LineItemImportDraftBuilder(variant, quantity, price, variant.getProductId(), name);
     }
 

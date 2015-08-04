@@ -1,6 +1,6 @@
 package io.sphere.sdk.states.commands;
 
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.commands.updateactions.ChangeInitial;
@@ -49,7 +49,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
     @Test
     public void setName() throws Exception {
         withUpdateableState(client(), state -> {
-            final LocalizedStrings newName = randomSlug();
+            final LocalizedString newName = randomSlug();
 
             final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
             final State updatedState = execute(command);

@@ -1,6 +1,6 @@
 package io.sphere.sdk.states.commands;
 
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.StateDraft;
 import io.sphere.sdk.states.StateType;
@@ -25,8 +25,8 @@ public class StateCreateCommandTest extends IntegrationTest {
 
     @Test
     public void execution() throws Exception {
-        final LocalizedStrings description = LocalizedStrings.of(ENGLISH, "description");
-        final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "name");
+        final LocalizedString description = LocalizedString.of(ENGLISH, "description");
+        final LocalizedString name = LocalizedString.of(ENGLISH, "name");
         final StateDraft stateDraft = StateDraft.of(KEY, StateType.LINE_ITEM_STATE)
                 .withDescription(description)
                 .withName(name)

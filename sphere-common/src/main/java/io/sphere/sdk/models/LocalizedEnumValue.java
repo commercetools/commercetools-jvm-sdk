@@ -5,15 +5,15 @@ import com.fasterxml.jackson.core.type.TypeReference;
 
 public class LocalizedEnumValue extends Base implements WithKey {
     private final String key;
-    private final LocalizedStrings label;
+    private final LocalizedString label;
 
     @JsonCreator
-    private LocalizedEnumValue(final String key, final LocalizedStrings label) {
+    private LocalizedEnumValue(final String key, final LocalizedString label) {
         this.key = key;
         this.label = label;
     }
 
-    public static LocalizedEnumValue of(final String key, final LocalizedStrings label) {
+    public static LocalizedEnumValue of(final String key, final LocalizedString label) {
         return new LocalizedEnumValue(key, label);
     }
 
@@ -22,7 +22,7 @@ public class LocalizedEnumValue extends Base implements WithKey {
         return key;
     }
 
-    public LocalizedStrings getLabel() {
+    public LocalizedString getLabel() {
         return label;
     }
 

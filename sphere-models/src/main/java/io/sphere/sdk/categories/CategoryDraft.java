@@ -1,7 +1,7 @@
 package io.sphere.sdk.categories;
 
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
 
@@ -13,10 +13,10 @@ import javax.annotation.Nullable;
  * <p>For construction see {@link CategoryDraftBuilder}.</p>
  */
 public class CategoryDraft extends Base implements WithLocalizedSlug {
-    private final LocalizedStrings name;
-    private final LocalizedStrings slug;
+    private final LocalizedString name;
+    private final LocalizedString slug;
     @Nullable
-    private final LocalizedStrings description;
+    private final LocalizedString description;
     @Nullable
     private final Reference<Category> parent;
     @Nullable
@@ -24,8 +24,8 @@ public class CategoryDraft extends Base implements WithLocalizedSlug {
     @Nullable
     private final String externalId;
 
-    CategoryDraft(final LocalizedStrings name, final LocalizedStrings slug,
-                  @Nullable final LocalizedStrings description, @Nullable final Reference<Category> parent,
+    CategoryDraft(final LocalizedString name, final LocalizedString slug,
+                  @Nullable final LocalizedString description, @Nullable final Reference<Category> parent,
                   @Nullable final String orderHint, @Nullable final String externalId) {
         this.name = name;
         this.slug = slug;
@@ -35,17 +35,17 @@ public class CategoryDraft extends Base implements WithLocalizedSlug {
         this.externalId = externalId;
     }
 
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
     @Override
-    public LocalizedStrings getSlug() {
+    public LocalizedString getSlug() {
         return slug;
     }
 
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 

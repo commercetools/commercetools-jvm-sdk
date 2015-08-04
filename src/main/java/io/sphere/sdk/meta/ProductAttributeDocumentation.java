@@ -1,6 +1,7 @@
 package io.sphere.sdk.meta;
 
 import io.sphere.sdk.attributes.AttributeAccess;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 /**
@@ -9,7 +10,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  <p>A {@link io.sphere.sdk.producttypes.ProductType} is like a schema that defines how the product attributes are structured.</p>
  <p>{@link io.sphere.sdk.producttypes.ProductType}s contain a list of {@link io.sphere.sdk.attributes.AttributeDefinition}s which corresponds to the name and type of each attribute, along with some additional information".
  In one SPHERE.IO project the name/type pair is global, so if you create an attribute "foo" of type String, you cannot create
- another {@link io.sphere.sdk.producttypes.ProductType} where "foo" has another type (e.g. {@link io.sphere.sdk.models.LocalizedStrings}). If you do it anyway you get an error message like:</p>
+ another {@link io.sphere.sdk.producttypes.ProductType} where "foo" has another type (e.g. {@link LocalizedString}). If you do it anyway you get an error message like:</p>
 
 <pre>"The attribute with name 'foo' has a different type on product type 'exampleproducttype'."</pre>
 

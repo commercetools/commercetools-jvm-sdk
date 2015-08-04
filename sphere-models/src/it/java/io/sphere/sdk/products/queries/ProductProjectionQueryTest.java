@@ -7,7 +7,7 @@ import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.*;
@@ -73,8 +73,8 @@ public class ProductProjectionQueryTest extends IntegrationTest {
         withUpdateableProduct(client(), product -> {
             final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
             final Product mixedDataProduct = execute(ProductUpdateCommand.of(publishedProduct, ChangeName.of(randomSlug())));
-            final LocalizedStrings nameInCurrent = mixedDataProduct.getMasterData().getCurrent().getName();
-            final LocalizedStrings nameInStaged = mixedDataProduct.getMasterData().getStaged().getName();
+            final LocalizedString nameInCurrent = mixedDataProduct.getMasterData().getCurrent().getName();
+            final LocalizedString nameInStaged = mixedDataProduct.getMasterData().getStaged().getName();
 
             assertThat(execute(ProductProjectionQuery.of(STAGED).withPredicates(m -> m.id().is(product.getId()))).head().get().getName()).isEqualTo(nameInStaged);
             assertThat(execute(ProductProjectionQuery.of(CURRENT).withPredicates(m -> m.id().is(product.getId()))).head().get().getName()).isEqualTo(nameInCurrent);

@@ -23,9 +23,9 @@ import static java.util.stream.Collectors.joining;
 /**
  * A wrapper around an attribute which can be translated into a number of locales.
  * Note that even if your project only uses one language some attributes (name and description for example) will be
- * always be LocalizedStrings.
+ * always be LocalizedString.
  */
-public class LocalizedStrings extends Base {
+public class LocalizedString extends Base {
 
     private static final Comparator<Map.Entry<Locale, String>> BY_LOCALE_COMPARATOR = (left, right) -> left.getKey().toString().compareTo(right.getKey().toString());
 
@@ -33,23 +33,23 @@ public class LocalizedStrings extends Base {
     private final Map<Locale, String> translations;
 
     @JsonCreator
-    private LocalizedStrings(final Map<Locale, String> translations) {
+    private LocalizedString(final Map<Locale, String> translations) {
         //the Jackson mapper passes null here and it is not possible to use an immutable map
         this.translations = immutableCopyOf(Optional.ofNullable(translations).orElse(new HashMap<>()));
     }
 
     /**
-     * LocalizedStrings containing the given entry.
+     * LocalizedString containing the given entry.
      * @param locale the locale of the new entry
      * @param value the value for the <code>locale</code>
      */
     @JsonIgnore
-    private LocalizedStrings(final Locale locale, final String value) {
+    private LocalizedString(final Locale locale, final String value) {
         this(mapOf(locale, value));
     }
 
     /**
-     * LocalizedStrings containing the 2 entries.
+     * LocalizedString containing the 2 entries.
      * @param locale1 the locale for the first entry
      * @param value1 the value for the first entry
      * @param locale2 the locale for the second entry
@@ -57,7 +57,7 @@ public class LocalizedStrings extends Base {
      * @throws IllegalArgumentException if duplicate locales are provided
      */
     @JsonIgnore
-    private LocalizedStrings(final Locale locale1, final String value1, final Locale locale2, final String value2) {
+    private LocalizedString(final Locale locale1, final String value1, final Locale locale2, final String value2) {
         this(mapOf(locale1, value1, locale2, value2));
     }
 
@@ -67,7 +67,7 @@ public class LocalizedStrings extends Base {
      * @return instance without any value
      */
     @JsonIgnore
-    public static LocalizedStrings of() {
+    public static LocalizedString of() {
         return of(new HashMap<>());
     }
 
@@ -76,48 +76,48 @@ public class LocalizedStrings extends Base {
      *
      * @return instance without any value
      */
-    public static LocalizedStrings empty() {
+    public static LocalizedString empty() {
         return of();
     }
 
     @JsonIgnore
-    public static LocalizedStrings of(final Locale locale, final String value) {
+    public static LocalizedString of(final Locale locale, final String value) {
         requireNonNull(locale);
         requireNonNull(value);
-        return new LocalizedStrings(locale, value);
+        return new LocalizedString(locale, value);
     }
 
     @JsonIgnore
-    public static LocalizedStrings of(final Locale locale1, final String value1, final Locale locale2, final String value2) {
-        return new LocalizedStrings(mapOf(locale1, value1, locale2, value2));
+    public static LocalizedString of(final Locale locale1, final String value1, final Locale locale2, final String value2) {
+        return new LocalizedString(mapOf(locale1, value1, locale2, value2));
     }
 
     @JsonIgnore
-    public static LocalizedStrings of(final Map<Locale, String> translations) {
+    public static LocalizedString of(final Map<Locale, String> translations) {
         requireNonNull(translations);
-        return new LocalizedStrings(translations);
+        return new LocalizedString(translations);
     }
 
     @JsonIgnore
-    public static LocalizedStrings ofEnglishLocale(final String value) {
+    public static LocalizedString ofEnglishLocale(final String value) {
         return of(Locale.ENGLISH, value);
     }
 
     /**
-     * LocalizedStrings containing the given entries.
+     * LocalizedString containing the given entries.
      * @param locale the additional locale of the new entry
      * @param value the value for the <code>locale</code>
-     * @return a LocalizedStrings containing this data and the from the parameters.
+     * @return a LocalizedString containing this data and the from the parameters.
      * @throws IllegalArgumentException if duplicate locales are provided
      */
-    public LocalizedStrings plus(final Locale locale, final String value) {
+    public LocalizedString plus(final Locale locale, final String value) {
         if (translations.containsKey(locale)) {
             throw new IllegalArgumentException(format("Duplicate keys (%s) for map creation.", locale));
         }
         final Map<Locale, String> newMap = new HashMap<>();
         newMap.putAll(translations);
         newMap.put(locale, value);
-        return new LocalizedStrings(newMap);
+        return new LocalizedString(newMap);
     }
 
     public Optional<String> find(final Locale locale) {
@@ -142,9 +142,9 @@ public class LocalizedStrings extends Base {
     /**
      * Creates a new instance where each translation value is transformed with {@code function}.
      * @param function transforms a value for a locale into a new value
-     * @return a new {@link LocalizedStrings} which consist all elements for this transformed with {@code function}
+     * @return a new {@link LocalizedString} which consist all elements for this transformed with {@code function}
      */
-    public LocalizedStrings mapValue(final BiFunction<Locale, String, String> function) {
+    public LocalizedString mapValue(final BiFunction<Locale, String, String> function) {
         return stream().map(entry -> {
             final String newValue = function.apply(entry.getLocale(), entry.getValue());
             return LocalizedStringsEntry.of(entry.getLocale(), newValue);
@@ -155,29 +155,29 @@ public class LocalizedStrings extends Base {
         return translations.entrySet().stream().map(entry -> LocalizedStringsEntry.of(entry.getKey(), entry.getValue()));
     }
 
-    public static Collector<LocalizedStringsEntry, ?, LocalizedStrings> streamCollector() {
-        final Collector<LocalizedStringsEntry, Map<Locale, String>, LocalizedStrings> result =
+    public static Collector<LocalizedStringsEntry, ?, LocalizedString> streamCollector() {
+        final Collector<LocalizedStringsEntry, Map<Locale, String>, LocalizedString> result =
                 Collector.of(HashMap::new, (Map<Locale, String> tmpMap, LocalizedStringsEntry entry) -> tmpMap.put(entry.getLocale(), entry.getValue()), (Map<Locale, String> left, Map<Locale, String> right) -> {
                     left.putAll(right);
                     return left;
-                }, (Map<Locale, String> entryMap) -> LocalizedStrings.of(entryMap));
+                }, (Map<Locale, String> entryMap) -> LocalizedString.of(entryMap));
         return result;
     }
 
     /**
-     * Creates a new {@link LocalizedStrings} where all translations are slugified (remove whitespace, etc.).
+     * Creates a new {@link LocalizedString} where all translations are slugified (remove whitespace, etc.).
      * @return new instance
      */
-    public LocalizedStrings slugified() {
+    public LocalizedString slugified() {
         return mapValue((locale, value) -> StringUtils.slugify(value));
     }
 
     /**
-     * Creates a new {@link LocalizedStrings} where all translations are slugified (remove whitespace, etc.).
+     * Creates a new {@link LocalizedString} where all translations are slugified (remove whitespace, etc.).
      * This slugify methods appends a random string for a little uniqueness.
      * @return new instance
      */
-    public LocalizedStrings slugifiedUnique() {
+    public LocalizedString slugifiedUnique() {
         return mapValue((locale, value) -> StringUtils.slugifyUnique(value));
     }
 
@@ -198,7 +198,7 @@ public class LocalizedStrings extends Base {
 
     @Override
     public String toString() {
-        return "LocalizedStrings(" +
+        return "LocalizedString(" +
                 translations
                         .entrySet()
                         .stream()
@@ -214,11 +214,11 @@ public class LocalizedStrings extends Base {
         translations.put(Locale.forLanguageTag(languageTag), value);
     }
 
-    public static TypeReference<LocalizedStrings> typeReference() {
-        return new TypeReference<LocalizedStrings>() {
+    public static TypeReference<LocalizedString> typeReference() {
+        return new TypeReference<LocalizedString>() {
             @Override
             public String toString() {
-                return "TypeReference<LocalizedStrings>";
+                return "TypeReference<LocalizedString>";
             }
         };
     }

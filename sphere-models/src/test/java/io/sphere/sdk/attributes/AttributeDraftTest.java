@@ -3,7 +3,7 @@ package io.sphere.sdk.attributes;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.PlainEnumValue;
 import io.sphere.sdk.models.Reference;
 import org.junit.Test;
@@ -17,9 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AttributeDraftTest {
     private final LocalizedEnumValue green = LocalizedEnumValue.of("green",
-            LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün"));
+            LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
     private final LocalizedEnumValue red = LocalizedEnumValue.of("red",
-            LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot"));
+            LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
     private final PlainEnumValue s = PlainEnumValue.of("S", "S");
     private final PlainEnumValue m = PlainEnumValue.of("M", "M");
     private final ObjectMapper objectMapper = new ObjectMapper();
@@ -57,7 +57,7 @@ public class AttributeDraftTest {
 
     @Test
     public void doesNotTouchOtherValueLikeEnumsForLocalizedStrings() throws Exception {
-        final AttributeDraft draft = AttributeDraft.of("foo", LocalizedStrings.of(ENGLISH, "hello"));
+        final AttributeDraft draft = AttributeDraft.of("foo", LocalizedString.of(ENGLISH, "hello"));
         assertThat(draft.getValue().toString()).isEqualTo("{\"en\":\"hello\"}");
     }
 

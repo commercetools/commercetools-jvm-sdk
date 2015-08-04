@@ -2,7 +2,7 @@ package io.sphere.sdk.orders;
 
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -15,7 +15,7 @@ import java.util.Set;
  * @see LineItemImportDraftBuilder
  */
 public interface LineItemImportDraft {
-    LocalizedStrings getName();
+    LocalizedString getName();
 
     Price getPrice();
 
