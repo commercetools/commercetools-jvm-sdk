@@ -86,16 +86,14 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new TimestampSortingModelImpl<>(this, pathSegment);
     }
 
+    @SuppressWarnings("unchecked")
     protected <V> QueryPredicate<T> isPredicate(final V value) {
-        return ComparisonQueryPredicate.ofIsEqualTo(this, value);
+        final V normalizedValue = value instanceof String ? (V) normalize((String) value) : value;
+        return ComparisonQueryPredicate.ofIsEqualTo(this, normalizedValue);
     }
 
     protected <V> QueryPredicate<T> isNotPredicate(final V value) {
         return ComparisonQueryPredicate.ofIsNotEqualTo(this, value);
-    }
-
-    protected QueryPredicate<T> isPredicate(final String value) {
-        return ComparisonQueryPredicate.ofIsEqualTo(this, normalize(value));
     }
 
     protected QueryPredicate<T> isNotPredicate(final String value) {
