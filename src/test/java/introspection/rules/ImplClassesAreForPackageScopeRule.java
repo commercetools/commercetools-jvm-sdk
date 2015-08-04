@@ -8,7 +8,7 @@ public class ImplClassesAreForPackageScopeRule extends ClassStrategyRule {
     private final List<String> simpleClassNamesWhitelist =
             asList(("ByIdDeleteCommandImpl,CommandImpl,CreateCommandImpl," +
                     "CustomObjectQueryImpl,ResourceImpl,DefaultModelQueryModelImpl," +
-                    "DefaultModelViewImpl,GenericMessageImpl,MessageImpl," +
+                    "ResourceViewImpl,GenericMessageImpl,MessageImpl," +
                     "MetaModelFetchDslImpl,MetaModelQueryDslImpl,MoneyImpl," +
                     "QueryModelImpl,SearchDslImpl,UpdateCommandDslImpl,SearchModelImpl," +
                     "UpdateActionImpl,MetaModelSearchDslImpl").split(","));

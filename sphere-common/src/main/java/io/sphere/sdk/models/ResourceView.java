@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
  * @param <T> the interface which inherits from this interface
  *
  */
-public interface DefaultModelView<T> extends Timestamped, Versioned<T> {
+public interface ResourceView<T> extends Timestamped, Versioned<T> {
     @Override
     String getId();
 

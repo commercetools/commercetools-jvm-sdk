@@ -2,7 +2,7 @@ package io.sphere.sdk.customobjects;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.DefaultModelView;
+import io.sphere.sdk.models.ResourceView;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
@@ -14,7 +14,7 @@ import io.sphere.sdk.models.Referenceable;
  * @param <T> The type of the value of this custom object.
  */
 @JsonDeserialize(as = CustomObjectImpl.class)
-public interface CustomObject<T> extends DefaultModelView<CustomObject<T>>, Referenceable<CustomObject<JsonNode>> {
+public interface CustomObject<T> extends ResourceView<CustomObject<T>>, Referenceable<CustomObject<JsonNode>> {
 
     /**
      * The container is part of the custom object namespace to find it

@@ -3,7 +3,7 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.DefaultModelViewImpl;
+import io.sphere.sdk.models.ResourceViewImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 
-class ProductProjectionImpl extends DefaultModelViewImpl<ProductProjection> implements ProductProjection {
+class ProductProjectionImpl extends ResourceViewImpl<ProductProjection> implements ProductProjection {
     private final Reference<ProductType> productType;
     @Nullable
     private final Reference<TaxCategory> taxCategory;

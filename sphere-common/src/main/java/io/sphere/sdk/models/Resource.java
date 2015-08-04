@@ -8,7 +8,7 @@ import java.time.ZonedDateTime;
  * @param <T> the interface which inherits from this interface, example: {@code interface Category extends Resource<Category>}
  *
  */
-public interface Resource<T> extends DefaultModelView<T>, Referenceable<T> {
+public interface Resource<T> extends ResourceView<T>, Referenceable<T> {
     @Override
     String getId();
 
