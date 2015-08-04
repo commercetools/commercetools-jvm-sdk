@@ -127,7 +127,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <div class="block">Updates the slug of a product.
 
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-changeSlug--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
-    final LocalizedStrings newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
+    final LocalizedString newSlug = ofEnglishLocale("new-slug-" + RANDOM.nextInt());
     final Product updatedProduct = execute(ProductUpdateCommand.of(product, ChangeSlug.of(newSlug)));
 
     assertThat(updatedProduct.getMasterData().getStaged().getSlug()).isEqualTo(newSlug);
@@ -153,12 +153,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
+<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangeSlug.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeSlug</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangeSlug.html#of-io.sphere.sdk.models.LocalizedStrings-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;slug)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangeSlug.html#of-io.sphere.sdk.models.LocalizedString-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;slug)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -196,13 +196,13 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-io.sphere.sdk.models.LocalizedStrings-">
+<a name="of-io.sphere.sdk.models.LocalizedString-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeSlug</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;slug)</pre>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions">ChangeSlug</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;slug)</pre>
 </li>
 </ul>
 <a name="getSlug--">
@@ -211,7 +211,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getSlug</h4>
-<pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getSlug()</pre>
+<pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getSlug()</pre>
 </li>
 </ul>
 </li>

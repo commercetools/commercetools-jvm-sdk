@@ -117,10 +117,10 @@ extends java.lang.Object</pre>
 
   Simple objects with few optional parameters typically have a static method called <code>of</code> to create an object.
 
-  <p> For example use <a href="../../../../io/sphere/sdk/models/LocalizedStrings.html#of-java.util.Locale-java.lang.String-java.util.Locale-java.lang.String-"><code>LocalizedStrings.of(java.util.Locale, String, java.util.Locale, String)</code></a>
+  <p> For example use <a href="../../../../io/sphere/sdk/models/LocalizedString.html#of-java.util.Locale-java.lang.String-java.util.Locale-java.lang.String-"><code>LocalizedString.of(java.util.Locale, String, java.util.Locale, String)</code></a>
    to create a translation for different locales:</p>
 
-   <div id="io-sphere-sdk-meta-ConstructionDocumentationTest-ofMethodExample--%s" class=code-example><pre><code class='java'>final LocalizedStrings dogFood = LocalizedStrings.
+   <div id="io-sphere-sdk-meta-ConstructionDocumentationTest-ofMethodExample--%s" class=code-example><pre><code class='java'>final LocalizedString dogFood = LocalizedString.
         of(Locale.ENGLISH, "dog food", Locale.GERMAN, "Hundefutter");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/meta/ConstructionDocumentationTest.java" target="_blank">test code</a>.</pre></div>
 

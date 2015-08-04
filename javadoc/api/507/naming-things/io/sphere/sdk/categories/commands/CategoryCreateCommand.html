@@ -112,8 +112,8 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
  For construction of a <a href="../../../../../io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories"><code>CategoryDraft</code></a> (a draft for a new category) use a <a href="../../../../../io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories"><code>CategoryDraftBuilder</code></a>:
 
 
- <div id="io-sphere-sdk-categories-commands-CategoryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final LocalizedStrings name = LocalizedStrings.of(Locale.ENGLISH, "winter clothing");
-final LocalizedStrings slug = name.slugifiedUnique();
+ <div id="io-sphere-sdk-categories-commands-CategoryCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "winter clothing");
+final LocalizedString slug = name.slugifiedUnique();
 final String externalId = randomKey();
 final CategoryDraft categoryDraft = CategoryDraftBuilder.of(name, slug).externalId(externalId).build();
 final Category category = execute(CategoryCreateCommand.of(categoryDraft));

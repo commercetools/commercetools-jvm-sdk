@@ -211,7 +211,7 @@ public Xyz(final String id)</pre>
  <li>in <em>RESOURCE</em> create a static method which returns a <code>TypeReference</code> as in <a href="../../../../io/sphere/sdk/categories/Category.html#typeReference--"><code>Category.typeReference()</code></a></li>
  <li>in <em>RESOURCE</em> implement <a href="../../../../io/sphere/sdk/models/Referenceable.html#toReference--"><code>Referenceable.toReference()</code></a> as in io.sphere.sdk.categories.Category#toReference()</li>
 
-<li>create a class <em>RESOURCEBuilder</em> which extends <code>DefaultModelFluentBuilder&lt;RESOURCEBuilder, RESOURCE&gt;</code></li>
+
 <li>in <em>RESOURCEBuilder</em> copy the attributes of  <em>RESOURCEImpl</em> and make them non final</li>
 <li>in <em>RESOURCEBuilder</em> make a private constructor with all really necessary values</li>
  <li>in <em>RESOURCEBuilder</em> set default values where you can, for <code>Optional</code> empty and for list or set their empty versions.</li>

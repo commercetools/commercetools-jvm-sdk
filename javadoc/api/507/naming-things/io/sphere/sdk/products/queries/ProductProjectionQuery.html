@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionByIdGet.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -545,12 +545,12 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <div class="block">Creates a new object with the properties of the old object but adds a new expansion path to it by using meta models.
 
  <p>An example in the product projection context:</p>
- <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-expandCategoriesDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch1 = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-expandCategoriesDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdGet fetch1 = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
         .plusExpansionPaths(m -&gt; m.categories());
 assertThat(fetch1.expansionPaths())
         .isEqualTo(asList(ExpansionPath.of("categories[*]")));
 
-final ProductProjectionByIdFetch fetch2 = fetch1.plusExpansionPaths(m -&gt; m.productType());
+final ProductProjectionByIdGet fetch2 = fetch1.plusExpansionPaths(m -&gt; m.productType());
 assertThat(fetch2.expansionPaths())
         .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")))
         .isEqualTo(listOf(fetch1.expansionPaths(), ExpansionPath.of("productType")));
@@ -559,7 +559,7 @@ assertThat(fetch2.expansionPaths())
 
 final ExpansionPath&lt;ProductProjection&gt; categoryExpand = ProductProjectionExpansionModel.of().categories();
 final ExpansionPath&lt;ProductProjection&gt; productTypeExpand = ProductProjectionExpansionModel.of().productType();
-final ProductProjectionByIdFetch fetchB = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
+final ProductProjectionByIdGet fetchB = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
                 .withExpansionPaths(asList(categoryExpand, productTypeExpand));
 assertThat(fetchB.expansionPaths())
         .isEqualTo(asList(ExpansionPath.of("categories[*]"), ExpansionPath.of("productType")));
@@ -587,13 +587,13 @@ assertThat(fetchB.expansionPaths())
 <div class="block">Creates a new object with the properties of the old object but replaces all expansion paths with a single <code>expansionPath</code> by using meta models.
 
  <p>An example in the product projection context:</p>
- <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDslDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdFetch fetch = ProductProjectionByIdFetch.of("id", ProductProjectionType.CURRENT)
+ <div id="io-sphere-sdk-products-expansion-ProductProjectionExpansionModelTest-withExpansionPathDslDemo--%s" class=code-example><pre><code class='java'>final ProductProjectionByIdGet fetch = ProductProjectionByIdGet.of("id", ProductProjectionType.CURRENT)
                 .plusExpansionPaths(ProductProjectionExpansionModel.of().categories());
 
 assertThat(fetch.expansionPaths())
         .isEqualTo(asList(ExpansionPath.of("categories[*]")));
 
-final ProductProjectionByIdFetch fetch2 =
+final ProductProjectionByIdGet fetch2 =
         fetch.withExpansionPaths(m -&gt; m.productType());
 
 assertThat(fetch.expansionPaths()).overridingErrorMessage("old object is unchanged")
@@ -640,7 +640,7 @@ assertThat(fetch2).isNotSameAs(fetch);
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionByIdGet.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
