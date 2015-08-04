@@ -19,6 +19,6 @@ public enum DiscountCodeState implements SphereEnumeration {
 
     @JsonCreator
     public static DiscountCodeState ofSphereValue(final String value) {
-        return SphereEnumeration.find(values(), value);
+        return SphereEnumeration.findBySphereName(values(), value).get();
     }
 }

@@ -32,9 +32,4 @@ public final class IterableUtils {
         return toList(iterable).stream();
     }
 
-    public static <T> String toString(final Iterable<T> iterable) {
-        final StringJoiner joiner = new StringJoiner(", ");
-        toList(iterable).forEach(item -> joiner.add(item.toString()));
-        return "[" + joiner.toString() + "]";
-    }
 }

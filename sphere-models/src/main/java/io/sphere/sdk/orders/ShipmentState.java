@@ -9,6 +9,6 @@ public enum ShipmentState implements SphereEnumeration {
 
     @JsonCreator
     public static ShipmentState ofSphereValue(final String value) {
-        return SphereEnumeration.find(values(), value);
+        return SphereEnumeration.findBySphereName(values(), value).get();
     }
 }

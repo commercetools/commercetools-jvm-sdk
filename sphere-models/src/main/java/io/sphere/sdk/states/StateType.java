@@ -9,7 +9,7 @@ public enum StateType implements SphereEnumeration {
 
     @JsonCreator
     public static StateType ofSphereValue(final String value) {
-        return SphereEnumeration.find(values(), value);
+        return SphereEnumeration.findBySphereName(values(), value).get();
     }
 
 }

@@ -24,6 +24,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.StringJoiner;
 import java.util.stream.IntStream;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
@@ -117,8 +118,10 @@ public class ProductCrudIntegrationTest extends IntegrationTest {
         final List<Product> instances = createInBackendByName(modelNames());
         final List<String> actualNames = instances.stream().map(o -> extractName(o)).
                 filter(name -> modelNames().contains(name)).sorted().collect(toList());
+        final StringJoiner joiner = new StringJoiner(", ");
+        modelNames().forEach(item -> joiner.add(item.toString()));
         assertThat(actualNames).
-                overridingErrorMessage(String.format("The test requires instances with the names %s.", IterableUtils.toString(modelNames()))).
+                overridingErrorMessage(String.format("The test requires instances with the names %s.", "[" + joiner.toString() + "]")).
                 isEqualTo(modelNames());
         final String nameToFind = modelNames().get(1);
         final List<Product> results = execute(queryObjectForName(nameToFind)).getResults();

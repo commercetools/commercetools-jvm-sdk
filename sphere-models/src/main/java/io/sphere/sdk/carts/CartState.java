@@ -23,6 +23,6 @@ public enum CartState implements SphereEnumeration {
 
     @JsonCreator
     public static CartState ofSphereValue(final String value) {
-        return SphereEnumeration.find(values(), value);
+        return SphereEnumeration.findBySphereName(values(), value).get();
     }
 }
