@@ -7,18 +7,18 @@ import io.sphere.sdk.producttypes.ProductType;
 /**
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addPlainEnumValue()}
  */
-public class AddPlainEnumValue extends UpdateActionImpl<ProductType> {
+public class AddEnumValue extends UpdateActionImpl<ProductType> {
     private final String attributeName;
     private final EnumValue value;
 
-    private AddPlainEnumValue(final String attributeName, final EnumValue value) {
+    private AddEnumValue(final String attributeName, final EnumValue value) {
         super("addPlainEnumValue");
         this.attributeName = attributeName;
         this.value = value;
     }
 
-    public static AddPlainEnumValue of(final String attributeName, final EnumValue value) {
-        return new AddPlainEnumValue(attributeName, value);
+    public static AddEnumValue of(final String attributeName, final EnumValue value) {
+        return new AddEnumValue(attributeName, value);
     }
 
     public String getAttributeName() {

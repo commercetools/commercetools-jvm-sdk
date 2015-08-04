@@ -68,11 +68,11 @@ public interface AttributeAccess<T> {
         });
     }
 
-    static AttributeAccess<EnumValue> ofPlainEnumValue() {
+    static AttributeAccess<EnumValue> ofEnumValue() {
         return AttributeAccessImpl.ofEnumLike(EnumValue.typeReference(), EnumType.class);
     }
 
-    static AttributeAccess<Set<EnumValue>> ofPlainEnumValueSet() {
+    static AttributeAccess<Set<EnumValue>> ofEnumValueSet() {
         return AttributeAccessImpl.ofEnumLikeSet(EnumType.class, new TypeReference<Set<EnumValue>>() {
         });
     }

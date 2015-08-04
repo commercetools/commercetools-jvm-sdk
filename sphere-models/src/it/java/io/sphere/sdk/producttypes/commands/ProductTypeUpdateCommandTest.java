@@ -76,14 +76,14 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void addPlainEnumValue() throws Exception {
+    public void addEnumValue() throws Exception {
         withUpdateableProductType(client(), productType -> {
             final String attributeName = "size";
             assertThat(productType.findAttribute(attributeName)).isPresent();
             final EnumValue value = EnumValue.of("XXXL", "XXXL");
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
-                    AddPlainEnumValue.of(attributeName, value)));
+                    AddEnumValue.of(attributeName, value)));
 
             assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
                     .isInstanceOf(EnumType.class)
@@ -127,7 +127,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void changePlainEnumValueOrder() throws Exception {
+    public void changeEnumValueOrder() throws Exception {
         withUpdateableProductType(client(), productType -> {
             final String attributeName = "size";
             final EnumType attributeType = (EnumType) productType.getAttribute(attributeName)
@@ -135,7 +135,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             final List<EnumValue> values = ListUtils.reverse(attributeType.getValues());
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
-                    ChangePlainEnumValueOrder.of(attributeName, values)));
+                    ChangeEnumValueOrder.of(attributeName, values)));
 
             final EnumType updatedType = (EnumType) updatedProductType
                     .getAttribute(attributeName).getAttributeType();

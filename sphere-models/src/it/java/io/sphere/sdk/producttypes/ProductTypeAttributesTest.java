@@ -87,7 +87,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void enumAttribute() throws Exception {
-        testSingleAndSet(AttributeAccess.ofPlainEnumValue(), AttributeAccess.ofPlainEnumValueSet(),
+        testSingleAndSet(AttributeAccess.ofEnumValue(), AttributeAccess.ofEnumValueSet(),
                 new HashSet<>(PLAIN_ENUM_VALUES),
                 EnumType.of(PLAIN_ENUM_VALUES),
                 AttributeDefinitionBuilder.of("enum-attribute", LABEL, EnumType.of(PLAIN_ENUM_VALUES)).build());

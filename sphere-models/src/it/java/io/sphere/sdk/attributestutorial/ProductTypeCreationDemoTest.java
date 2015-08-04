@@ -179,7 +179,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
                 .overridingErrorMessage("on the get side, the while enum is delivered")
                 .contains(LocalizedEnumValue.of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün")));
-        assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
+        assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofEnumValue()))
                 .contains(EnumValue.of("S", "S"));
         final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
                 LocalizedString.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
@@ -218,7 +218,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     public void productCreationWithGetterSetter() throws Exception {
         /* the declarations you could put into a separate class */
         final NamedAttributeAccess<LocalizedEnumValue> color = AttributeAccess.ofLocalizedEnumValue().ofName(COLOR_ATTR_NAME);
-        final NamedAttributeAccess<EnumValue> size = AttributeAccess.ofPlainEnumValue().ofName(SIZE_ATTR_NAME);
+        final NamedAttributeAccess<EnumValue> size = AttributeAccess.ofEnumValue().ofName(SIZE_ATTR_NAME);
         final NamedAttributeAccess<Set<LocalizedEnumValue>> laundrySymbols =
                 AttributeAccess.ofLocalizedEnumValueSet().ofName(LAUNDRY_SYMBOLS_ATTR_NAME);
         final NamedAttributeAccess<Set<Reference<Product>>> matchingProducts =
@@ -282,13 +282,13 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
         final Optional<EnumValue> attributeOption =
-                masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue());
+                masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofEnumValue());
         assertThat(attributeOption).contains(EnumValue.of("S", "S"));
     }
 
     @Test
     public void readAttributeWithoutProductTypeWithNamedAccess() throws Exception {
-        final NamedAttributeAccess<EnumValue> size = AttributeAccess.ofPlainEnumValue().ofName(SIZE_ATTR_NAME);
+        final NamedAttributeAccess<EnumValue> size = AttributeAccess.ofEnumValue().ofName(SIZE_ATTR_NAME);
 
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
@@ -344,7 +344,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Function<Attribute, Optional<Pair<String, String>>> attributeValueExtractor = attribute -> {
             final Optional<String> extractedResult = AttributeExtraction.<String>of(productType, attribute)
                     .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -> v.getLabel().find(ENGLISH).orElse(""))
-                    .ifIs(AttributeAccess.ofPlainEnumValue(), v -> v.getLabel())
+                    .ifIs(AttributeAccess.ofEnumValue(), v -> v.getLabel())
                     .ifIs(AttributeAccess.ofLocalizedEnumValueSet(), v ->
                             v.stream()
                                     .map(x -> x.getLabel().get(ENGLISH))
@@ -454,7 +454,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
         assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
                 .contains(LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot")));
-        assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
+        assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofEnumValue()))
                 .contains(EnumValue.of("M", "M"));
         final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
                 LocalizedString.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));

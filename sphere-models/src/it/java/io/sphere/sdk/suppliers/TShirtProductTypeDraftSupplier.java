@@ -38,7 +38,7 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
         public static final List<EnumValue> VALUES = asImmutableList(S, M, X);
 
         public static final NamedAttributeAccess<EnumValue> ATTRIBUTE =
-                AttributeAccess.ofPlainEnumValue().ofName("size");
+                AttributeAccess.ofEnumValue().ofName("size");
     }
 
     private final String name;

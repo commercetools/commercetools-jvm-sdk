@@ -9,18 +9,18 @@ import java.util.List;
 /**
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changePlainEnumValueOrder()}
  */
-public class ChangePlainEnumValueOrder extends UpdateActionImpl<ProductType> {
+public class ChangeEnumValueOrder extends UpdateActionImpl<ProductType> {
     private final String attributeName;
     private final List<EnumValue> values;
 
-    private ChangePlainEnumValueOrder(final String attributeName, final List<EnumValue> values) {
+    private ChangeEnumValueOrder(final String attributeName, final List<EnumValue> values) {
         super("changePlainEnumValueOrder");
         this.attributeName = attributeName;
         this.values = values;
     }
 
-    public static ChangePlainEnumValueOrder of(final String attributeName, final List<EnumValue> values) {
-        return new ChangePlainEnumValueOrder(attributeName, values);
+    public static ChangeEnumValueOrder of(final String attributeName, final List<EnumValue> values) {
+        return new ChangeEnumValueOrder(attributeName, values);
     }
 
     public String getAttributeName() {
