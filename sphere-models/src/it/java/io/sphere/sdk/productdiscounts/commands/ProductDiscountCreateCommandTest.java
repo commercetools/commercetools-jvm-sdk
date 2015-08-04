@@ -7,7 +7,7 @@ import io.sphere.sdk.productdiscounts.ProductDiscountDraft;
 import io.sphere.sdk.productdiscounts.ProductDiscountPredicate;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
-import io.sphere.sdk.products.queries.ProductByIdFetch;
+import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -40,8 +40,8 @@ public class ProductDiscountCreateCommandTest extends IntegrationTest {
         assertThat(productDiscount.getSortOrder()).isEqualTo(sortOrder);
         assertThat(productDiscount.isActive()).isEqualTo(active);
 
-        final ProductByIdFetch sphereRequest =
-                ProductByIdFetch.of(product)
+        final ProductByIdGet sphereRequest =
+                ProductByIdGet.of(product)
                         .plusExpansionPaths(m -> m.masterData().staged().masterVariant().prices().discounted().discount());
 
         final Product discountedProduct = execute(sphereRequest);

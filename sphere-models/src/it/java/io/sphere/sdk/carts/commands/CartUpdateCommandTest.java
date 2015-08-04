@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.commands;
 
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
-import io.sphere.sdk.carts.queries.CartByIdFetch;
+import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelFixtures;
@@ -268,7 +268,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
                     .isEqualTo(asList(newPrice));
 
             final LineItem lineItemOfTheChangedProduct =
-                    execute(CartByIdFetch.of(cartWithLineItem)).getLineItems().get(0);
+                    execute(CartByIdGet.of(cartWithLineItem)).getLineItems().get(0);
             assertThat(lineItemOfTheChangedProduct.getPrice())
                     .overridingErrorMessage("the new product price is not automatically propagated to the line item in the cart")
                     .isEqualTo(oldPrice).isNotEqualTo(newPrice);

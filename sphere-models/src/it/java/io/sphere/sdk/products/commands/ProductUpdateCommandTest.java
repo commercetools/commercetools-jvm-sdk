@@ -8,7 +8,7 @@ import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.updateactions.*;
-import io.sphere.sdk.products.queries.ProductByIdFetch;
+import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
@@ -435,7 +435,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
              final UpdateAction<Product> stagedWrapper = new StagedWrapper(ChangeName.of(newName), false);
              final Product updatedProduct = execute(ProductUpdateCommand.of(product, asList(Publish.of(), stagedWrapper)));
 
-             final Product fetchedProduct = execute(ProductByIdFetch.of(product));
+             final Product fetchedProduct = execute(ProductByIdGet.of(product));
              assertThat(fetchedProduct.getMasterData().getCurrent().getName())
                      .isEqualTo(fetchedProduct.getMasterData().getStaged().getName())
                      .isEqualTo(newName);

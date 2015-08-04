@@ -2,20 +2,19 @@ package io.sphere.sdk.meta;
 
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.carts.queries.CartByCustomerIdFetch;
-import io.sphere.sdk.carts.queries.CartByIdFetch;
+import io.sphere.sdk.carts.queries.CartByCustomerIdGet;
+import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.customers.queries.CustomerByIdFetch;
+import io.sphere.sdk.customers.queries.CustomerByIdGet;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.products.queries.ProductProjectionByIdFetch;
+import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.concurrent.*;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -75,8 +74,8 @@ public class AsyncDocumentationTest {
 
     public void serialWayToFetchCustomerAndCart() throws Exception {
         final String customerId = "customer-id";//time t=0
-        final Customer customer = executeSerial(CustomerByIdFetch.of(customerId));//t=100ms
-        final Cart cart = executeSerial(CartByCustomerIdFetch.of(customerId));//t=200ms
+        final Customer customer = executeSerial(CustomerByIdGet.of(customerId));//t=100ms
+        final Cart cart = executeSerial(CartByCustomerIdGet.of(customerId));//t=200ms
         println("cart: " + cart + " customer: " + customer);
     }
 
@@ -86,9 +85,9 @@ public class AsyncDocumentationTest {
 
     public void parallelWayToFetchCustomerAndCart() throws Exception {
         final String customerId = "customer-id";//time t=0
-        final CompletionStage<Customer> customerStage = execute(CustomerByIdFetch.of(customerId));//t=1ms
+        final CompletionStage<Customer> customerStage = execute(CustomerByIdGet.of(customerId));//t=1ms
         //after creating the CompletionStage the Thread is freed to start further requests
-        final CompletionStage<Cart> cartStage = execute(CartByCustomerIdFetch.of(customerId));//t=2ms
+        final CompletionStage<Cart> cartStage = execute(CartByCustomerIdGet.of(customerId));//t=2ms
         //collect the results
         customerStage.thenAcceptBoth(cartStage, (customerOption, cartOption) -> {
             //t=102ms
@@ -106,14 +105,14 @@ public class AsyncDocumentationTest {
 
     public void thenApplyFirstDemo() throws Exception {
         final String customerId = "customer-id";
-        final CompletionStage<Customer> customerStage = execute(CustomerByIdFetch.of(customerId));
+        final CompletionStage<Customer> customerStage = execute(CustomerByIdGet.of(customerId));
         final CompletionStage<String> pageStage = customerStage.thenApply(customerOption ->
                 "customer page " + customerOption);
     }
 
     public void thenApplyFirstDemoVerbose() throws Exception {
         final String customerId = "customer-id";
-        final CompletionStage<Customer> customerStage = execute(CustomerByIdFetch.of(customerId));
+        final CompletionStage<Customer> customerStage = execute(CustomerByIdGet.of(customerId));
         //stored in a value
         final Function<Customer, String> f = customer -> "customer page " + customer;
         final CompletionStage<String> pageStage = customerStage.thenApply(f);
@@ -121,18 +120,18 @@ public class AsyncDocumentationTest {
 
     public void thenApplyUtil() throws Exception {
         final String customerId = "customer-id";
-        final CompletionStage<Customer> customerStage = execute(CustomerByIdFetch.of(customerId));
+        final CompletionStage<Customer> customerStage = execute(CustomerByIdGet.of(customerId));
         final CompletionStage<String> pageStage = CompletableFutureUtils.map(customerStage, customer -> "customer page " + customer);
     }
 
     public void shouldUseFlatMap() throws Exception {
         final String cartIt = "cart-id";
-        final CompletionStage<Cart> cartStage = execute(CartByIdFetch.of(cartIt));
+        final CompletionStage<Cart> cartStage = execute(CartByIdGet.of(cartIt));
         final Function<Cart, CompletionStage<ProductProjection>> f = cart -> {
             final LineItem lineItem = cart.getLineItems().get(0);
             final String productId = lineItem.getProductId();
             final CompletionStage<ProductProjection> product =
-                    execute(ProductProjectionByIdFetch.of(productId, CURRENT));
+                    execute(ProductProjectionByIdGet.of(productId, CURRENT));
             return product;
         };
         // CompletionStage of CompletionStage, urgs!
@@ -142,12 +141,12 @@ public class AsyncDocumentationTest {
 
     public void flatMapFirstDemo() throws Exception {
         final String cartIt = "cart-id";
-        final CompletionStage<Cart> cartStage = execute(CartByIdFetch.of(cartIt));
+        final CompletionStage<Cart> cartStage = execute(CartByIdGet.of(cartIt));
         final Function<Cart, CompletionStage<ProductProjection>> f = cart -> {
             final LineItem lineItem = cart.getLineItems().get(0);
             final String productId = lineItem.getProductId();
             final CompletionStage<ProductProjection> product =
-                    execute(ProductProjectionByIdFetch.of(productId, CURRENT));
+                    execute(ProductProjectionByIdGet.of(productId, CURRENT));
             return product;
         };
         //no nested CompletionStage, by using thenCompose instead of thenApply

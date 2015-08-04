@@ -2,13 +2,13 @@ package io.sphere.sdk.shippingmethods.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
-import io.sphere.sdk.queries.MetaModelFetchDslImpl;
+import io.sphere.sdk.queries.MetaModelGetDslImpl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 
 import java.util.List;
 
-final class ShippingMethodsByCartGetImpl extends MetaModelFetchDslImpl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByCartGetImpl, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodsByCartGet {
+final class ShippingMethodsByCartGetImpl extends MetaModelGetDslImpl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByCartGetImpl, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodsByCartGet {
     ShippingMethodsByCartGetImpl(final String cartId) {
         super("?cartId=" + cartId, ShippingMethodEndpoint.ENDPOINT.withTypeReference(new TypeReference<List<ShippingMethod>>() {
             @Override

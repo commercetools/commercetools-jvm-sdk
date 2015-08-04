@@ -9,7 +9,7 @@ public class ImplClassesAreForPackageScopeRule extends ClassStrategyRule {
             asList(("ByIdDeleteCommandImpl,CommandImpl,CreateCommandImpl," +
                     "CustomObjectQueryImpl,ResourceImpl,ResourceQueryModelImpl," +
                     "ResourceViewImpl,GenericMessageImpl,MessageImpl," +
-                    "MetaModelFetchDslImpl,MetaModelQueryDslImpl,MoneyImpl," +
+                    "MetaModelGetDslImpl,MetaModelQueryDslImpl,MoneyImpl," +
                     "QueryModelImpl,SearchDslImpl,UpdateCommandDslImpl,SearchModelImpl," +
                     "UpdateActionImpl,MetaModelSearchDslImpl").split(","));
 

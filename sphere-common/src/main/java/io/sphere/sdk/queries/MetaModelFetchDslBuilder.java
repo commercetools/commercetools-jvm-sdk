@@ -16,7 +16,7 @@ import java.util.function.Function;
  * @param <C> type of the class implementing this class
  * @param <E> type of the expansion model
  */
-public class MetaModelFetchDslBuilder<R, T, C extends MetaModelFetchDsl<R, T, C, E>, E> extends Base implements Builder<C> {
+public class MetaModelFetchDslBuilder<R, T, C extends MetaModelGetDsl<R, T, C, E>, E> extends Base implements Builder<C> {
 
     JsonEndpoint<R> endpoint;
     String identifierToSearchFor;
@@ -25,7 +25,7 @@ public class MetaModelFetchDslBuilder<R, T, C extends MetaModelFetchDsl<R, T, C,
     E expansionModel;
     Function<MetaModelFetchDslBuilder<R, T, C, E>, C> builderFunction;
 
-    MetaModelFetchDslBuilder(final MetaModelFetchDslImpl<R, T, C, E> template) {
+    MetaModelFetchDslBuilder(final MetaModelGetDslImpl<R, T, C, E> template) {
         endpoint = template.endpoint;
         identifierToSearchFor = template.identifierToSearchFor;
         expansionPaths = template.expansionPaths;

@@ -6,7 +6,7 @@ import io.sphere.sdk.carts.LineItem;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
-import io.sphere.sdk.orders.queries.OrderByIdFetch;
+import io.sphere.sdk.orders.queries.OrderByIdGet;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
@@ -119,7 +119,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, externalId));
 
                 //check channel expansion
-                final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.syncInfo().channel()));
+                final Order loadedOrder = execute(OrderByIdGet.of(order).withExpansionPaths(m -> m.syncInfo().channel()));
                 assertThat(new ArrayList<>(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isNotNull();
             })
         );
@@ -210,7 +210,7 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(itemStates);
 
                 //reference expansion
-                final Order loadedOrder = execute(OrderByIdFetch.of(order).withExpansionPaths(m -> m.lineItems().state().state()));
+                final Order loadedOrder = execute(OrderByIdGet.of(order).withExpansionPaths(m -> m.lineItems().state().state()));
                 final Reference<State> state = new LinkedList<>(loadedOrder.getLineItems().get(0).getState()).getFirst().getState();
                 assertThat(state.getObj()).isNotNull();
             })
