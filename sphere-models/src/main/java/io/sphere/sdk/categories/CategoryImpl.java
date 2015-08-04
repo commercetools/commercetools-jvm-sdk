@@ -1,7 +1,7 @@
 package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-class CategoryImpl extends DefaultModelImpl<Category> implements Category {
+class CategoryImpl extends ResourceImpl<Category> implements Category {
     private final LocalizedStrings name;
     private final LocalizedStrings slug;
     @Nullable

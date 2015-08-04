@@ -3,7 +3,7 @@ package io.sphere.sdk.states;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
@@ -22,7 +22,7 @@ import java.util.Set;
  </ul>
  */
 @JsonDeserialize(as = StateImpl.class)
-public interface State extends DefaultModel<State> {
+public interface State extends Resource<State> {
 
     String getKey();
 

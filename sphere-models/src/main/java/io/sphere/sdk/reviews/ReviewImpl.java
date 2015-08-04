@@ -1,12 +1,12 @@
 package io.sphere.sdk.reviews;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
-final class ReviewImpl extends DefaultModelImpl<Review> implements Review {
+final class ReviewImpl extends ResourceImpl<Review> implements Review {
     private final String productId;
     private final String customerId;
     @Nullable

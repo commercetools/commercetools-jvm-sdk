@@ -2,7 +2,7 @@ package io.sphere.sdk.discountcodes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements DiscountCode {
+final class DiscountCodeImpl extends ResourceImpl<DiscountCode> implements DiscountCode {
     private final String code;
     @Nullable
     private final LocalizedStrings name;

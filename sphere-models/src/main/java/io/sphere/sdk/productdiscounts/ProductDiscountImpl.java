@@ -1,7 +1,7 @@
 package io.sphere.sdk.productdiscounts;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-class ProductDiscountImpl extends DefaultModelImpl<ProductDiscount> implements ProductDiscount {
+class ProductDiscountImpl extends ResourceImpl<ProductDiscount> implements ProductDiscount {
     private final LocalizedStrings name;
     private final LocalizedStrings description;
     private final ProductDiscountValue value;

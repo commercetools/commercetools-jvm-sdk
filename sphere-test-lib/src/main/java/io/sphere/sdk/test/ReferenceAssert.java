@@ -1,6 +1,6 @@
 package io.sphere.sdk.test;
 
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import org.assertj.core.api.AbstractAssert;
@@ -23,7 +23,7 @@ public class ReferenceAssert extends AbstractAssert<ReferenceAssert, Reference<?
         return this;
     }
 
-    public ReferenceAssert hasAnExpanded(final DefaultModel<?> model) {
+    public ReferenceAssert hasAnExpanded(final Resource<?> model) {
         checkIsExpanded();
         if (!actual.getObj().equals(model)) {
             failWithMessage(format("%s does not contain an expanded %s.", actual, model));

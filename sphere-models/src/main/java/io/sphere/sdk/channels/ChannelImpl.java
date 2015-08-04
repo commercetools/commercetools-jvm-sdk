@@ -1,14 +1,14 @@
 package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
-class ChannelImpl extends DefaultModelImpl<Channel> implements Channel {
+class ChannelImpl extends ResourceImpl<Channel> implements Channel {
     private final String key;
     private final Set<ChannelRole> roles;
     @Nullable

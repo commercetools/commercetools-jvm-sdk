@@ -3,7 +3,7 @@ package io.sphere.sdk.customers;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.SdkDefaults;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,7 +13,7 @@ import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-class CustomerImpl extends DefaultModelImpl<Customer> implements Customer {
+class CustomerImpl extends ResourceImpl<Customer> implements Customer {
     @Nullable
     private final String customerNumber;
     private final String email;

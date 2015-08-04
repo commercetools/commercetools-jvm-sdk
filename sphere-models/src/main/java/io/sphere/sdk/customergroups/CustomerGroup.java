@@ -2,11 +2,11 @@ package io.sphere.sdk.customergroups;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
 @JsonDeserialize(as = CustomerGroupImpl.class)
-public interface CustomerGroup extends DefaultModel<CustomerGroup> {
+public interface CustomerGroup extends Resource<CustomerGroup> {
 
     String getName();
 

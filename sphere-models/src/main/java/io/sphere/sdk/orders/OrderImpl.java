@@ -6,7 +6,7 @@ import io.sphere.sdk.carts.*;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -15,7 +15,7 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Set;
 
-final class OrderImpl extends DefaultModelImpl<Order> implements Order {
+final class OrderImpl extends ResourceImpl<Order> implements Order {
     @Nullable
     private final Address billingAddress;
     @Nullable

@@ -2,7 +2,7 @@ package io.sphere.sdk.reviews;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
  Review of a product by a customer. A customer can create only one review per product.
  */
 @JsonDeserialize(as = ReviewImpl.class)
-public interface Review extends DefaultModel<Review> {
+public interface Review extends Resource<Review> {
 
     String getProductId();
 

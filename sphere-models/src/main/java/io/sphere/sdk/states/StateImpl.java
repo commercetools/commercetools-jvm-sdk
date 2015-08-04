@@ -2,7 +2,7 @@ package io.sphere.sdk.states;
 
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
@@ -10,7 +10,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
-final class StateImpl extends DefaultModelImpl<State> implements State {
+final class StateImpl extends ResourceImpl<State> implements State {
     private final String key;
     private final StateType type;
     @Nullable

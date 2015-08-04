@@ -1,13 +1,13 @@
 package io.sphere.sdk.zones;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
-final class ZoneImpl extends DefaultModelImpl<Zone> implements Zone {
+final class ZoneImpl extends ResourceImpl<Zone> implements Zone {
     private final String name;
     @Nullable
     private final String description;

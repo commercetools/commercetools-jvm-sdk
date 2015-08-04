@@ -11,6 +11,7 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
@@ -375,7 +376,7 @@ import java.util.function.BiFunction;
  <li>Migration from Google Guavas com.google.common.util.concurrent.ListenableFuture to Java 8 java.util.concurrent.CompletableFuture.</li>
  <li>Removed all Google Guava classes from the public API (internally still used).</li>
  <li>The logger is more fine granular controllable, for example the logger {@code sphere.products.responses.queries} logs only the responses of the queries for products. The trace level logs the JSON of responses and requests as pretty printed JSON.</li>
- <li>Introduced the class {@link io.sphere.sdk.models.Referenceable} which enables to use a model or a reference to a model as parameter, so no direct call of {@link io.sphere.sdk.models.DefaultModel#toReference()} is needed anymore for model classes.</li>
+ <li>Introduced the class {@code io.sphere.sdk.models.Referenceable} which enables to use a model or a reference to a model as parameter, so no direct call of {@code io.sphere.sdk.models.DefaultModel#toReference()} is needed anymore for model classes.</li>
  <li>It is possible to overwrite the error messages of {@code io.sphere.sdk.test.DefaultModelAssert}, {@code io.sphere.sdk.test.LocalizedStringsAssert} and {@code io.sphere.sdk.test.ReferenceAssert}.</li>
  <li>{@link io.sphere.sdk.models.Versioned} contains a type parameter to prevent copy and paste errors.</li>
  <li>Sorting query model methods have better support in the IDE, important methods are bold.</li>

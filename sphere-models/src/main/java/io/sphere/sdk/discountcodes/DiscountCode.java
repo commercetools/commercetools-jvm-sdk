@@ -3,7 +3,7 @@ package io.sphere.sdk.discountcodes;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.LocalizedStrings;
 import io.sphere.sdk.models.Reference;
 
@@ -11,7 +11,7 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @JsonDeserialize(as = DiscountCodeImpl.class)
-public interface DiscountCode extends DefaultModel<DiscountCode> {
+public interface DiscountCode extends Resource<DiscountCode> {
     List<Reference<CartDiscount>> getCartDiscounts();
 
     @Nullable

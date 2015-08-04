@@ -5,10 +5,10 @@ import java.time.ZonedDateTime;
 /**
  * A default model is a real resource in SPHERE.IO which can be referenced and always consists of the fields
  * id, version, createdAt, lastModifiedAt.
- * @param <T> the interface which inherits from this interface, example: {@code interface Category extends DefaultModel<Category>}
+ * @param <T> the interface which inherits from this interface, example: {@code interface Category extends Resource<Category>}
  *
  */
-public interface DefaultModel<T> extends DefaultModelView<T>, Referenceable<T> {
+public interface Resource<T> extends DefaultModelView<T>, Referenceable<T> {
     @Override
     String getId();
 

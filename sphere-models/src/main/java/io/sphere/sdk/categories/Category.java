@@ -22,7 +22,7 @@ import static io.sphere.sdk.utils.ListUtils.join;
  * </ul>
  */
 @JsonDeserialize(as=CategoryImpl.class)
-public interface Category extends DefaultModel<Category>, WithLocalizedSlug, MetaAttributes {
+public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes {
 
     LocalizedStrings getName();
 
