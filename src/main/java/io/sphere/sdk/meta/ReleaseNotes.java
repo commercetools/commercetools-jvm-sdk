@@ -67,7 +67,7 @@ import java.util.function.BiFunction;
  <br>
 
  <ul>
- <li class=new-in-release>{@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel#productType()} enables you to build search expressions with the Product Type reference of products</li>
+ <li class=new-in-release>{@code io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel#productType()} enables you to build search expressions with the Product Type reference of products</li>
  <li class=new-in-release>{@link ProductVariant#getIdentifier()} enables to get the product id and the variant id from the variant. This is nice, since this data is often needed and on the product variant level the product ID is not available.</li>
  <li class=new-in-release>Error reporting has been improved. Especially if JSON mappings do not fit.</li>
  <li class=new-in-release>{@link LineItem#getProductSlug()}</li>
@@ -124,8 +124,8 @@ import java.util.function.BiFunction;
  <li class=new-in-release>Cart discounts: {@link io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand}.</li>
  <li class=new-in-release>Discount codes: {@link io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand}.</li>
  <li class=change-in-release>{@link io.sphere.sdk.client.SphereApiConfig}, {@link io.sphere.sdk.client.SphereAuthConfig}, {@link io.sphere.sdk.client.SphereClientConfig} validates the input, so for example you cannot enter null or whitespace for the project key.</li>
- <li class=change-in-release>Date time attributes in {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} are using <a href="https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html">ZonedDateTime</a> instead of <a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html">LocalDateTime</a>.</li>
- <li class=change-in-release>The {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} has been improved with better naming and better documentation.</li>
+ <li class=change-in-release>Date time attributes in {@code ProductProjectionSearchModel} are using <a href="https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html">ZonedDateTime</a> instead of <a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html">LocalDateTime</a>.</li>
+ <li class=change-in-release>The {@code ProductProjectionSearchModel} has been improved with better naming and better documentation.</li>
  <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
  <li class=change-in-release>{@code io.sphere.sdk.queries.Predicate} has been renamed to {@link io.sphere.sdk.queries.QueryPredicate}.</li>
  <li class=change-in-release>The JVM SDK itself uses for tests the <a href="http://joel-costigliola.github.io/assertj/">assertj</a> assertion methods instead of fest assertions.</li>
@@ -183,7 +183,7 @@ import java.util.function.BiFunction;
  <li class=new-in-release>Added the nested attributes: {@code io.sphere.sdk.attributes.AttributeAccess#ofNested()} + {@code io.sphere.sdk.attributes.AttributeAccess#ofNestedSet()}.</li>
  <li class=new-in-release>The error JSON body from SPHERE.IO responses can be directly extracted as JSON with {@link io.sphere.sdk.client.SphereServiceException#getJsonBody()}.</li>
  <li class=new-in-release>{@link io.sphere.sdk.http.HttpResponse} also contains {@link io.sphere.sdk.http.HttpHeaders}.</li>
- <li class=new-in-release>Experimental search filter/facet/sort expression model {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel}. See also {@link io.sphere.sdk.meta.ProductSearchDocumentation}.</li>
+ <li class=new-in-release>Experimental search filter/facet/sort expression model {@code ProductProjectionSearchModel}. See also {@link io.sphere.sdk.meta.ProductSearchDocumentation}.</li>
  <li class=change-in-release>The {@link io.sphere.sdk.producttypes.ProductType} creation has been simplified (TextAttributeDefinition, LocalizedStringsAttributeDefinition, ... are just AttributeDefinition), see {@link io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand} how to create them.</li>
  <li class=change-in-release>{@link io.sphere.sdk.search.TermFacetResult} and
  {@link io.sphere.sdk.search.RangeFacetResult} are using generics.

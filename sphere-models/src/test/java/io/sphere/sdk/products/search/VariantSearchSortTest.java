@@ -33,7 +33,7 @@ public class VariantSearchSortTest {
         return searchModel().allVariants().attribute().ofText("size");
     }
 
-    private ExperimentalProductProjectionSearchModel searchModel() {
-        return ExperimentalProductProjectionSearchModel.of();
+    private ProductProjectionSearchModel searchModel() {
+        return ProductProjectionSearchModel.of();
     }
 }

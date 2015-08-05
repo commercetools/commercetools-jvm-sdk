@@ -11,14 +11,14 @@ import javax.annotation.Nullable;
  * EXPERIMENTAL model to easily build product projection search requests.
  * Being it experimental, it can be modified in future releases therefore introducing breaking changes.
  */
-public class ExperimentalProductProjectionSearchModel extends ProductDataSearchModelBase {
+public class ProductProjectionSearchModel extends ProductDataSearchModelBase {
 
-    private ExperimentalProductProjectionSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
+    private ProductProjectionSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
-    public static ExperimentalProductProjectionSearchModel of() {
-        return new ExperimentalProductProjectionSearchModel(null, null);
+    public static ProductProjectionSearchModel of() {
+        return new ProductProjectionSearchModel(null, null);
     }
 
     @Override

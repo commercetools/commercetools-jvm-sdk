@@ -1,6 +1,7 @@
 package io.sphere.sdk.meta;
 
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.products.search.ProductProjectionSearchModel;
 
 /** Products can be retrieved using full-text search, filtering, faceting and sorting functionality combined.
 
@@ -74,7 +75,7 @@ import io.sphere.sdk.models.Base;
 
 <h3 id=sorting>Sorting</h3>
 
- <p>Any attribute you can sort by, allows both sort directions, ascending and descending. On the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting">Sorting</a> documentation page you can explore for which fields you can sort for. Use {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} class to build sort expressions easily.</p>
+ <p>Any attribute you can sort by, allows both sort directions, ascending and descending. On the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-sorting">Sorting</a> documentation page you can explore for which fields you can sort for. Use {@link ProductProjectionSearchModel} class to build sort expressions easily.</p>
 
  <p>The code sample below shows a request for all products which will be sorted by size in an ascending direction:</p>
 
@@ -146,7 +147,7 @@ import io.sphere.sdk.models.Base;
 
  <h4 id=filter-expressions>Expressions</h4>
 
- <p>You can easily build filter expressions with the {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} class. For more details, check the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">Filters</a>.</p>
+ <p>You can easily build filter expressions with the {@link ProductProjectionSearchModel} class. For more details, check the HTTP API documentation for <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-filters">Filters</a>.</p>
 
  <p>In the following example only the products with red color are returned:</p>
 
@@ -170,7 +171,7 @@ import io.sphere.sdk.models.Base;
 
  <h4 id=facet-expressions>Expressions</h4>
 
- <p>Facets calculate statistical counts based on the values associated with a product attribute. Building facet expressions is very easy thanks to the {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} class. You can consult the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">Facets</a> HTTP API documentation for more information.</p>
+ <p>Facets calculate statistical counts based on the values associated with a product attribute. Building facet expressions is very easy thanks to the {@link ProductProjectionSearchModel} class. You can consult the <a href="http://dev.sphere.io/http-api-projects-products-search.html#search-facets">Facets</a> HTTP API documentation for more information.</p>
 
  <p>There are three types of faceted search: {@link io.sphere.sdk.search.TermFacetResult}, {@link io.sphere.sdk.search.RangeFacetResult} and {@link io.sphere.sdk.search.FilteredFacetResult}. Next are presented example codes of each type to better illustrate how these facet types work.</p>
 
@@ -206,7 +207,7 @@ import io.sphere.sdk.models.Base;
 
  <p>The Search Model for products is currently in an experimental status, so please be aware it will probably suffer breaking changes in the future.</p>
 
- <p>The {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} class offers a domain-specific language (DSL) to build expressions accepted by the search endpoint, which can be otherwise a bit complex to write. In particular, this DSL allows you to build expressions for <a href="#sorting">sorting</a>, <a href="#filtering">filtering</a> and <a href="#faceting">faceting</a>, as it is demonstrated in the corresponding sections.</p>
+ <p>The {@link ProductProjectionSearchModel} class offers a domain-specific language (DSL) to build expressions accepted by the search endpoint, which can be otherwise a bit complex to write. In particular, this DSL allows you to build expressions for <a href="#sorting">sorting</a>, <a href="#filtering">filtering</a> and <a href="#faceting">faceting</a>, as it is demonstrated in the corresponding sections.</p>
 
  <p>In order to build an expression, first you will be required to select the field you want to search for (e.g. price or a custom attribute). In the case of custom attributes, you also need to provide the attribute name and select the primary type of the attribute. Notice that {@link io.sphere.sdk.products.search.ProductAttributeSearchModel#ofBoolean(java.lang.String)} method enables search on both boolean and boolean set attributes.</p>
 
