@@ -7,7 +7,7 @@ import io.sphere.sdk.producttypes.ProductType;
 import java.util.List;
 
 /**
- * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changePlainEnumValueOrder()}
+ * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeEnumValueOrder()}
  */
 public class ChangeEnumValueOrder extends UpdateActionImpl<ProductType> {
     private final String attributeName;

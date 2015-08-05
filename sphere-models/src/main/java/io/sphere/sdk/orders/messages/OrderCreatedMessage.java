@@ -34,7 +34,7 @@ public class OrderCreatedMessage extends GenericMessageImpl<Order> {
     /**
      * Gets the order object at creation time. This output can differ from an expanded {@link Message#getResource()}.
      *
-     * @return
+     * @return the order at creation time
      */
     public Order getOrder() {
         return order;
