@@ -4,7 +4,7 @@ import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel;
+import io.sphere.sdk.products.search.ProductProjectionSearchModel;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
@@ -86,8 +86,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         evilProduct2 = findBySku.apply(SKU_B).orElseGet(() -> createEvilTestProduct(evilProductType, EVIL_PRODUCT_TYPE_NAME + "bar", EVIL_CHARACTER_WORD, SKU_B));
     }
 
-    private ExperimentalProductProjectionSearchModel model() {
-        return ExperimentalProductProjectionSearchModel.of();
+    private ProductProjectionSearchModel model() {
+        return ProductProjectionSearchModel.of();
     }
 
     @Test

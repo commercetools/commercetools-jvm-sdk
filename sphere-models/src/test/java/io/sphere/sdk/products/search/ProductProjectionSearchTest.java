@@ -24,7 +24,7 @@ import static java.util.Locale.GERMAN;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchTest {
-    private static final ExperimentalProductProjectionSearchModel MODEL = ExperimentalProductProjectionSearchModel.of();
+    private static final ProductProjectionSearchModel MODEL = ProductProjectionSearchModel.of();
 
     @Test
     public void canAccessProductName() throws Exception {
