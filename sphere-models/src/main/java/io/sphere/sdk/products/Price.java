@@ -1,9 +1,5 @@
 package io.sphere.sdk.products;
 
-import java.math.BigDecimal;
-import java.time.ZonedDateTime;
-import java.util.Optional;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.neovisionaries.i18n.CountryCode;
@@ -14,11 +10,13 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.productdiscounts.DiscountedPrice;
 import io.sphere.sdk.utils.MoneyImpl;
-import org.apache.commons.lang3.builder.EqualsBuilder;
 
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
+import java.math.BigDecimal;
+import java.time.ZonedDateTime;
+import java.util.Optional;
 
 /**
  * Amount that must be paid when buying goods.
@@ -141,20 +139,6 @@ public class Price extends Base {
     @JsonIgnore
     public static Price of(final MonetaryAmount money) {
         return PriceBuilder.of(money).build();
-    }
-
-    /**
-     * Compares two objects with each other. Ignores the price id.
-     * @param o other
-     * @return true if they have the same value
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Price price = (Price) o;
-        return EqualsBuilder.reflectionEquals(this, o, "value", "id") && value.isEqualTo(price.value);
     }
 
     @JsonIgnore
