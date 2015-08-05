@@ -2,7 +2,7 @@ package io.sphere.sdk.orders;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.carts.ItemState;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -16,7 +16,7 @@ import java.util.Set;
  */
 public interface CustomLineItemImportDraft {
 
-    LocalizedStrings getName();
+    LocalizedString getName();
 
     MonetaryAmount getMoney();
 

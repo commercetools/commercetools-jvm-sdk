@@ -1,15 +1,16 @@
 package io.sphere.sdk.meta;
 
-import io.sphere.sdk.attributes.AttributeAccess;
+import io.sphere.sdk.products.attributes.AttributeAccess;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 /**
  <h3 id="intro">Introduction</h3>
  <h3 id="product-type-creation">ProductType Creation</h3>
  <p>A {@link io.sphere.sdk.producttypes.ProductType} is like a schema that defines how the product attributes are structured.</p>
- <p>{@link io.sphere.sdk.producttypes.ProductType}s contain a list of {@link io.sphere.sdk.attributes.AttributeDefinition}s which corresponds to the name and type of each attribute, along with some additional information".
+ <p>{@link io.sphere.sdk.producttypes.ProductType}s contain a list of {@link io.sphere.sdk.products.attributes.AttributeDefinition}s which corresponds to the name and type of each attribute, along with some additional information".
  In one SPHERE.IO project the name/type pair is global, so if you create an attribute "foo" of type String, you cannot create
- another {@link io.sphere.sdk.producttypes.ProductType} where "foo" has another type (e.g. {@link io.sphere.sdk.models.LocalizedStrings}). If you do it anyway you get an error message like:</p>
+ another {@link io.sphere.sdk.producttypes.ProductType} where "foo" has another type (e.g. {@link LocalizedString}). If you do it anyway you get an error message like:</p>
 
 <pre>"The attribute with name 'foo' has a different type on product type 'exampleproducttype'."</pre>
 
@@ -25,7 +26,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
  <ul>
     <li>color as {@link io.sphere.sdk.models.LocalizedEnumValue} with the colors green and red and their translations in German and English</li>
-    <li>size as {@link io.sphere.sdk.models.PlainEnumValue} with S, M and X</li>
+    <li>size as {@link io.sphere.sdk.models.EnumValue} with S, M and X</li>
     <li>laundrySymbols as set of {@link io.sphere.sdk.models.LocalizedEnumValue} with temperature and tumble drying</li>
     <li>matchingProducts as set of product {@link io.sphere.sdk.models.Reference}s, which can point to products which are similar to the current product</li>
     <li>rrp as {@link javax.money.MonetaryAmount} containing the recommended retail price</li>
@@ -34,7 +35,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
 
 
- <p>The possible attribute types you can find here: {@link io.sphere.sdk.attributes.AttributeType} in "All Known Implementing Classes".</p>
+ <p>The possible attribute types you can find here: {@link io.sphere.sdk.products.attributes.AttributeType} in "All Known Implementing Classes".</p>
 
 <p>The code for the creation of the book {@link io.sphere.sdk.producttypes.ProductType}:</p>
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createBookProductType()}
@@ -88,7 +89,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  <p>To get a value out of an attribute you need an instance of {@link AttributeAccess}
  which keeps the type info to deserialize the attribute.</p>
 
- <p>You can reuse the {@link io.sphere.sdk.attributes.NamedAttributeAccess} declaration if you want to:</p>
+ <p>You can reuse the {@link io.sphere.sdk.products.attributes.NamedAttributeAccess} declaration if you want to:</p>
 
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#readAttributeWithoutProductTypeWithNamedAccess()}
 
@@ -155,8 +156,8 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
  <h3 id="attribute-stubs-for-tests">Create attribute stubs for unit tests</h3>
 
- <p>For unit tests you can create an {@link io.sphere.sdk.attributes.Attribute} with a
- static factory method such as {@link io.sphere.sdk.attributes.Attribute#of(String, AttributeAccess, Object)}:</p>
+ <p>For unit tests you can create an {@link io.sphere.sdk.products.attributes.Attribute} with a
+ static factory method such as {@link io.sphere.sdk.products.attributes.Attribute#of(String, AttributeAccess, Object)}:</p>
 
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#attributesForUnitTests()}
 
@@ -177,7 +178,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  <table>
     <caption>attribute properties</caption>
     <tr>
-        <th></th><th>{@link io.sphere.sdk.attributes.Attribute}</th><th>{@link io.sphere.sdk.attributes.AttributeDraft}</th><th>{@link io.sphere.sdk.attributes.AttributeImportDraft}</th>
+        <th></th><th>{@link io.sphere.sdk.products.attributes.Attribute}</th><th>{@link io.sphere.sdk.products.attributes.AttributeDraft}</th><th>{@link io.sphere.sdk.products.attributes.AttributeImportDraft}</th>
     </tr>
  <tr> <td>purpose</td>    <td>read access</td>    <td>write product, create product</td>    <td>order import</td></tr>
  <tr> <td>reference expansion</td>    <td>keeps expanded references</td>    <td>no expansion</td>    <td>no expansion</td></tr>

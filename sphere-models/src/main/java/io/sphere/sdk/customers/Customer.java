@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @JsonDeserialize(as = CustomerImpl.class)
-public interface Customer extends DefaultModel<Customer> {
+public interface Customer extends Resource<Customer> {
     @Nullable
     String getCustomerNumber();
 

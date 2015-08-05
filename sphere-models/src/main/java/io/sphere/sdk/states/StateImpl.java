@@ -2,21 +2,21 @@ package io.sphere.sdk.states;
 
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.Set;
 
-final class StateImpl extends DefaultModelImpl<State> implements State {
+final class StateImpl extends ResourceImpl<State> implements State {
     private final String key;
     private final StateType type;
     @Nullable
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     @Nullable
-    private final LocalizedStrings description;
+    private final LocalizedString description;
     private final Boolean initial;
     private final Boolean builtIn;
     @Nullable
@@ -24,7 +24,7 @@ final class StateImpl extends DefaultModelImpl<State> implements State {
 
     @JsonCreator
     public StateImpl(String id, Long version, ZonedDateTime createdAt, ZonedDateTime lastModifiedAt, String key, StateType type,
-                     LocalizedStrings name, LocalizedStrings description, Boolean initial,
+                     LocalizedString name, LocalizedString description, Boolean initial,
                      Boolean builtIn, Set<Reference<State>> transitions) {
         super(id, version, createdAt, lastModifiedAt);
         this.key = key;
@@ -45,12 +45,12 @@ final class StateImpl extends DefaultModelImpl<State> implements State {
     }
 
     @Nullable
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 

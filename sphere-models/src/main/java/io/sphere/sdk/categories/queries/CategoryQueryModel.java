@@ -6,7 +6,7 @@ import io.sphere.sdk.queries.*;
 /**
  * {@doc.gen summary categories}
  */
-public final class CategoryQueryModel extends DefaultModelQueryModelImpl<Category> {
+public final class CategoryQueryModel extends ResourceQueryModelImpl<Category> {
 
     public static CategoryQueryModel of() {
         return new CategoryQueryModel(null, null);
@@ -16,12 +16,12 @@ public final class CategoryQueryModel extends DefaultModelQueryModelImpl<Categor
         super(parent, pathSegment);
     }
 
-    public LocalizedStringsQuerySortingModel<Category> slug() {
-        return localizedStringsQuerySortingModel("slug");
+    public LocalizedStringQuerySortingModel<Category> slug() {
+        return localizedStringQuerySortingModel("slug");
     }
 
-    public LocalizedStringsQuerySortingModel<Category> name() {
-        return localizedStringsQuerySortingModel("name");
+    public LocalizedStringQuerySortingModel<Category> name() {
+        return localizedStringQuerySortingModel("name");
     }
 
     public StringQuerySortingModel<Category> externalId() {

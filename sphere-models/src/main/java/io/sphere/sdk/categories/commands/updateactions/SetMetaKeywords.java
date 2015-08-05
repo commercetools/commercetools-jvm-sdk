@@ -2,7 +2,7 @@ package io.sphere.sdk.categories.commands.updateactions;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
 
@@ -12,19 +12,19 @@ import javax.annotation.Nullable;
  */
 public class SetMetaKeywords extends UpdateActionImpl<Category> {
     @Nullable
-    private final LocalizedStrings metaKeywords;
+    private final LocalizedString metaKeywords;
 
-    private SetMetaKeywords(@Nullable final LocalizedStrings metaKeywords) {
+    private SetMetaKeywords(@Nullable final LocalizedString metaKeywords) {
         super("setMetaKeywords");
         this.metaKeywords = metaKeywords;
     }
 
-    public static SetMetaKeywords of(@Nullable final LocalizedStrings metaKeywords) {
+    public static SetMetaKeywords of(@Nullable final LocalizedString metaKeywords) {
         return new SetMetaKeywords(metaKeywords);
     }
 
     @Nullable
-    public LocalizedStrings getMetaKeywords() {
+    public LocalizedString getMetaKeywords() {
         return metaKeywords;
     }
 }

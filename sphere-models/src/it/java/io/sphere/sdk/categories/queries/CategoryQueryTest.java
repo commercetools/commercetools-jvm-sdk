@@ -1,7 +1,7 @@
 package io.sphere.sdk.categories.queries;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.LocalizedStringsEntry;
+import io.sphere.sdk.models.LocalizedStringEntry;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
 import io.sphere.sdk.test.IntegrationTest;
@@ -19,7 +19,7 @@ public class CategoryQueryTest extends IntegrationTest {
     @Test
     public void queryByName() throws Exception {
         withCategory(client(), category -> {
-            final LocalizedStringsEntry name = category.getName().stream().findAny().get();
+            final LocalizedStringEntry name = category.getName().stream().findAny().get();
 
             final Query<Category> query = CategoryQuery.of().byName(name.getLocale(), name.getValue());
             assertThat(execute(query).head().get().getId()).isEqualTo(category.getId());

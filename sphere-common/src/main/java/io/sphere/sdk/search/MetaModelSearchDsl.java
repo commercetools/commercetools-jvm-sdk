@@ -2,7 +2,7 @@ package io.sphere.sdk.search;
 
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.MetaModelExpansionDsl;
-import io.sphere.sdk.models.LocalizedStringsEntry;
+import io.sphere.sdk.models.LocalizedStringEntry;
 
 import java.util.List;
 import java.util.Locale;
@@ -18,7 +18,7 @@ import java.util.function.Function;
 public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S, E>, S, E> extends EntitySearch<T>, SearchDsl<T, C>, MetaModelExpansionDsl<T, C, E> {
 
     @Override
-    C withText(final LocalizedStringsEntry text);
+    C withText(final LocalizedStringEntry text);
 
     @Override
     C withText(final Locale locale, final String text);

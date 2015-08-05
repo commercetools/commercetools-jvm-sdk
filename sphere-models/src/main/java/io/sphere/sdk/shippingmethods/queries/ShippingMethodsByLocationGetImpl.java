@@ -3,8 +3,8 @@ package io.sphere.sdk.shippingmethods.queries;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.http.UrlQueryBuilder;
-import io.sphere.sdk.queries.MetaModelFetchDslBuilder;
-import io.sphere.sdk.queries.MetaModelFetchDslImpl;
+import io.sphere.sdk.queries.MetaModelGetDslBuilder;
+import io.sphere.sdk.queries.MetaModelGetDslImpl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 
@@ -21,7 +21,7 @@ import static java.util.Objects.requireNonNull;
  *
  * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodsByLocationGetTest#execution()}
  */
-final class ShippingMethodsByLocationGetImpl extends MetaModelFetchDslImpl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGetImpl, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodsByLocationGet {
+final class ShippingMethodsByLocationGetImpl extends MetaModelGetDslImpl<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGetImpl, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodsByLocationGet {
     ShippingMethodsByLocationGetImpl(final CountryCode country, @Nullable final String state, @Nullable final CurrencyUnit currency) {
         super(identifierToSearchFor(requireNonNull(country), state, currency), ShippingMethodEndpoint.ENDPOINT.withTypeReference(new TypeReference<List<ShippingMethod>>() {
             @Override
@@ -31,7 +31,7 @@ final class ShippingMethodsByLocationGetImpl extends MetaModelFetchDslImpl<List<
         }), ShippingMethodExpansionModel.of(), ShippingMethodsByLocationGetImpl::new);
     }
 
-    public ShippingMethodsByLocationGetImpl(final MetaModelFetchDslBuilder<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGetImpl, ShippingMethodExpansionModel<ShippingMethod>> builder) {
+    public ShippingMethodsByLocationGetImpl(final MetaModelGetDslBuilder<List<ShippingMethod>, ShippingMethod, ShippingMethodsByLocationGetImpl, ShippingMethodExpansionModel<ShippingMethod>> builder) {
         super(builder);
     }
 

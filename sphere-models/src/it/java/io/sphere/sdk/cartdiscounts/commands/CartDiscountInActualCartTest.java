@@ -5,7 +5,7 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.Recalculate;
 import io.sphere.sdk.carts.commands.updateactions.SetCustomerId;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.data.Offset;
@@ -24,8 +24,8 @@ public class CartDiscountInActualCartTest extends IntegrationTest {
             withFilledCart(client(), cart -> {
                 final Cart cartWithCustomer = execute(CartUpdateCommand.of(cart, SetCustomerId.ofCustomer(customer)));
 
-                final LocalizedStrings name = en("di");
-                final CartPredicate cartPredicate = CartPredicate.of(format("customer.id = \"%s\"", customer.getId()));
+                final LocalizedString name = en("di");
+                final CartDiscountPredicate cartPredicate = CartDiscountPredicate.of(format("customer.id = \"%s\"", customer.getId()));
                 final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(EURO_1);
                 final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, cartPredicate, value, LineItemsTarget.ofAll(), randomSortOrder(), false)
                         .build();

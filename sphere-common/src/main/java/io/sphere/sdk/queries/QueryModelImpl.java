@@ -78,8 +78,8 @@ public class QueryModelImpl<T> extends Base implements QueryModel<T> {
         return new IntegerQuerySortingModelImpl<>(this, pathSegment);
     }
 
-    protected LocalizedStringsQuerySortingModel<T> localizedStringsQuerySortingModel(final String pathSegment) {
-        return new LocalizedStringsQuerySortingModelImpl<>(this, pathSegment);
+    protected LocalizedStringQuerySortingModel<T> localizedStringQuerySortingModel(final String pathSegment) {
+        return new LocalizedStringQuerySortingModelImpl<>(this, pathSegment);
     }
 
     protected final TimestampSortingModel<T> timestampSortingModel(final String pathSegment) {

@@ -3,7 +3,7 @@ package io.sphere.sdk.customergroups;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.customergroups.commands.CustomerGroupCreateCommand;
 import io.sphere.sdk.customergroups.commands.CustomerGroupDeleteCommand;
-import io.sphere.sdk.customergroups.queries.CustomerGroupByIdFetch;
+import io.sphere.sdk.customergroups.queries.CustomerGroupByIdGet;
 import io.sphere.sdk.customergroups.queries.CustomerGroupQuery;
 
 import java.util.Optional;
@@ -15,7 +15,7 @@ public class CustomerGroupFixtures {
         final String name = randomString();
         final CustomerGroup customerGroup = client.execute(CustomerGroupCreateCommand.of(name));
         consumer.accept(customerGroup);
-        final Optional<CustomerGroup> customerGroupOptional = Optional.ofNullable(client.execute(CustomerGroupByIdFetch.of(customerGroup.getId())));
+        final Optional<CustomerGroup> customerGroupOptional = Optional.ofNullable(client.execute(CustomerGroupByIdGet.of(customerGroup.getId())));
         customerGroupOptional.ifPresent(group -> client.execute(CustomerGroupDeleteCommand.of(group)));
     }
 

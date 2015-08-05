@@ -2,13 +2,13 @@ package io.sphere.sdk.inventory;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
-final class InventoryEntryImpl extends DefaultModelImpl<InventoryEntry> implements InventoryEntry {
+final class InventoryEntryImpl extends ResourceImpl<InventoryEntry> implements InventoryEntry {
     private final String sku;
     @Nullable
     private final Reference<Channel> supplyChannel;

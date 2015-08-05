@@ -4,7 +4,7 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.inventory.InventoryEntry;
 import io.sphere.sdk.queries.*;
 
-final class InventoryEntryQueryModelImpl extends DefaultModelQueryModelImpl<InventoryEntry> implements InventoryEntryQueryModel {
+final class InventoryEntryQueryModelImpl extends ResourceQueryModelImpl<InventoryEntry> implements InventoryEntryQueryModel {
     private InventoryEntryQueryModelImpl(final QueryModel<InventoryEntry> parent, final String pathSegment) {
         super(parent, pathSegment);
     }

@@ -2,7 +2,7 @@ package io.sphere.sdk.discountcodes.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.discountcodes.DiscountCode;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
 
@@ -11,19 +11,19 @@ import javax.annotation.Nullable;
  */
 public class SetName extends UpdateActionImpl<DiscountCode> {
     @Nullable
-    private final LocalizedStrings name;
+    private final LocalizedString name;
 
-    private SetName(@Nullable final LocalizedStrings name) {
+    private SetName(@Nullable final LocalizedString name) {
         super("setName");
         this.name = name;
     }
 
-    public static SetName of(@Nullable final LocalizedStrings name) {
+    public static SetName of(@Nullable final LocalizedString name) {
         return new SetName(name);
     }
 
     @Nullable
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 }

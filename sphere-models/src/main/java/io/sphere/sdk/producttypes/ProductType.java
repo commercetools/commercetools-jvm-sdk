@@ -2,7 +2,7 @@ package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
 /** Describes common characteristics, most importantly common custom attributes, of many concrete products.
@@ -16,7 +16,7 @@ import io.sphere.sdk.models.Reference;
 
  */
 @JsonDeserialize(as=ProductTypeImpl.class)
-public interface ProductType extends DefaultModel<ProductType>, AttributeDefinitionContainer {
+public interface ProductType extends Resource<ProductType>, AttributeDefinitionContainer {
 
     String getName();
 

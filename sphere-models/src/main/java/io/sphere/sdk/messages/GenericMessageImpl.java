@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.Order;
 
@@ -15,7 +15,7 @@ import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class GenericMessageImpl<R> extends DefaultModelImpl<Message> implements GenericMessage<R> {
+public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implements GenericMessage<R> {
     protected final Long sequenceNumber;
     protected final JsonNode resource;
     protected final Long resourceVersion;

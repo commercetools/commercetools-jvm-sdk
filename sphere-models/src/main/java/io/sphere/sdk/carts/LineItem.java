@@ -2,7 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
@@ -16,7 +16,7 @@ public interface LineItem extends LineItemLike {
 
     String getProductId();
 
-    LocalizedStrings getName();
+    LocalizedString getName();
 
     ProductVariant getVariant();
 
@@ -34,7 +34,7 @@ public interface LineItem extends LineItemLike {
     Reference<Channel> getDistributionChannel();
 
     @Nullable
-    LocalizedStrings getProductSlug();
+    LocalizedString getProductSlug();
 
     @Override
     String getId();

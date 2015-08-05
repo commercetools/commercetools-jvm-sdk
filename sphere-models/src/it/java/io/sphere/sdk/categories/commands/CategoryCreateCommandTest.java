@@ -3,7 +3,7 @@ package io.sphere.sdk.categories.commands;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
 import io.sphere.sdk.categories.CategoryDraftBuilder;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -15,8 +15,8 @@ import static org.assertj.core.api.Assertions.*;
 public class CategoryCreateCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
-        final LocalizedStrings name = LocalizedStrings.of(Locale.ENGLISH, "winter clothing");
-        final LocalizedStrings slug = name.slugifiedUnique();
+        final LocalizedString name = LocalizedString.of(Locale.ENGLISH, "winter clothing");
+        final LocalizedString slug = name.slugifiedUnique();
         final String externalId = randomKey();
         final CategoryDraft categoryDraft = CategoryDraftBuilder.of(name, slug).externalId(externalId).build();
         final Category category = execute(CategoryCreateCommand.of(categoryDraft));

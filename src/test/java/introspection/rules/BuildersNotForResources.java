@@ -5,7 +5,7 @@ import java.util.List;
 
 public class BuildersNotForResources extends ClassStrategyRule {
     private final List<String> simpleNamesWhitelist = Arrays.asList(("AttributeDefinitionBuilder," +
-            "AddressBuilder, MetaModelFetchDslBuilder, MetaModelQueryDslBuilder, Builder," +
+            "AddressBuilder, MetaModelGetDslBuilder, MetaModelQueryDslBuilder, Builder," +
             "UpdateCommandDslBuilder, TrackingDataBuilder, TaxRateBuilder, PriceBuilder, MetaModelSearchDslBuilder").split(",( )?"));
 
     @Override

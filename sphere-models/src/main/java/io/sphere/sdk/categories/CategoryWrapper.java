@@ -3,7 +3,7 @@ package io.sphere.sdk.categories;
 import java.time.ZonedDateTime;
 
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -37,18 +37,18 @@ abstract class CategoryWrapper extends Base implements Category {
     }
 
     @Override
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return delegate.getName();
     }
 
     @Override
-    public LocalizedStrings getSlug() {
+    public LocalizedString getSlug() {
         return delegate.getSlug();
     }
 
     @Nullable
     @Override
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return delegate.getDescription();
     }
 
@@ -82,19 +82,19 @@ abstract class CategoryWrapper extends Base implements Category {
 
     @Nullable
     @Override
-    public LocalizedStrings getMetaDescription() {
+    public LocalizedString getMetaDescription() {
         return delegate.getMetaDescription();
     }
 
     @Nullable
     @Override
-    public LocalizedStrings getMetaKeywords() {
+    public LocalizedString getMetaKeywords() {
         return delegate.getMetaKeywords();
     }
 
     @Nullable
     @Override
-    public LocalizedStrings getMetaTitle() {
+    public LocalizedString getMetaTitle() {
         return delegate.getMetaTitle();
     }
 }

@@ -8,7 +8,7 @@ import static java.util.Arrays.asList;
 public class PublicConstructorsAreTheExceptionRule extends ConstructorStrategyRule {
     private final List<String> fullClassNamesWhiteList =
             asList(("io.sphere.sdk.models.Base," +
-                    "io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyFetch," +
+                    "io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyGet," +
                     "io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommand," +
                     "io.sphere.sdk.expansion.ExpandedModel," +
                     "io.sphere.sdk.search.MetaModelSearchDslBuilder").split(",( )?"));

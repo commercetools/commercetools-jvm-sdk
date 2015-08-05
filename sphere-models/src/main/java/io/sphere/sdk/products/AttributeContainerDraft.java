@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeDraft;
+import io.sphere.sdk.products.attributes.Attribute;
+import io.sphere.sdk.products.attributes.AttributeDraft;
 
 import java.util.List;
 

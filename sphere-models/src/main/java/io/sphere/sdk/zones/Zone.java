@@ -3,7 +3,7 @@ package io.sphere.sdk.zones;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.neovisionaries.i18n.CountryCode;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -13,7 +13,7 @@ import java.util.Set;
  * Zones define Shipping Rates for a set of Locations.
  */
 @JsonDeserialize(as = ZoneImpl.class)
-public interface Zone extends DefaultModel<Zone> {
+public interface Zone extends Resource<Zone> {
 
     String getName();
 

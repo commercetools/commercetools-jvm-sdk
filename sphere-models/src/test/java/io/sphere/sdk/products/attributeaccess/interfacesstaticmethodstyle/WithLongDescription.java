@@ -1,11 +1,11 @@
 package io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle;
 
-import io.sphere.sdk.attributes.AttributeAccess;
-import io.sphere.sdk.attributes.NamedAttributeAccess;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.products.attributes.AttributeAccess;
+import io.sphere.sdk.products.attributes.NamedAttributeAccess;
+import io.sphere.sdk.models.LocalizedString;
 
 public interface WithLongDescription {
-    default NamedAttributeAccess<LocalizedStrings> longDescription() {
-        return AttributeAccess.ofLocalizedStrings().ofName("longDescription");
+    default NamedAttributeAccess<LocalizedString> longDescription() {
+        return AttributeAccess.ofLocalizedString().ofName("longDescription");
     }
 }

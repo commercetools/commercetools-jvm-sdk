@@ -1,7 +1,7 @@
 package io.sphere.sdk.cartdiscounts.commands;
 
 import io.sphere.sdk.cartdiscounts.*;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -25,14 +25,14 @@ public class CartDiscountCreateCommandTest extends IntegrationTest {
     public void execution() throws Exception {
         final ZonedDateTime validFrom = SphereTestUtils.now();
         final ZonedDateTime validUntil = validFrom.plusSeconds(8000);
-        final LocalizedStrings name = en("discount name");
-        final LocalizedStrings description = en("discount descriptions");
+        final LocalizedString name = en("discount name");
+        final LocalizedString description = en("discount descriptions");
         final String predicate = "totalPrice > \"800.00 EUR\"";
         final AbsoluteCartDiscountValue value = CartDiscountValue.ofAbsolute(MoneyImpl.of(10, EUR));
         final LineItemsTarget target = LineItemsTarget.of("1 = 1");
         final String sortOrder = "0.54";
         final boolean requiresDiscountCode = false;
-        final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, CartPredicate.of(predicate),
+        final CartDiscountDraft discountDraft = CartDiscountDraftBuilder.of(name, CartDiscountPredicate.of(predicate),
                 value, target, sortOrder, requiresDiscountCode)
                 .validFrom(validFrom)
                 .validUntil(validUntil)

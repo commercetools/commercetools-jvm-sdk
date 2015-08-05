@@ -3,10 +3,11 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.search.SearchKeywords;
 
 import javax.annotation.Nullable;
@@ -25,7 +26,7 @@ import java.util.Set;
 
  <p id=operations>Operations:</p>
  <ul>
-    <li>Fetch by ID with {@link io.sphere.sdk.products.queries.ProductProjectionByIdFetch}</li>
+    <li>Fetch by ID with {@link ProductProjectionByIdGet}</li>
  </ul>
 
  If you need {@link io.sphere.sdk.products.ProductProjection} for a method but you have a product,
@@ -66,28 +67,28 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
 
     @Override
     @Nullable
-    LocalizedStrings getDescription();
+    LocalizedString getDescription();
 
     @Override
     ProductVariant getMasterVariant();
 
     @Nullable
     @Override
-    LocalizedStrings getMetaDescription();
+    LocalizedString getMetaDescription();
 
     @Nullable
     @Override
-    LocalizedStrings getMetaKeywords();
+    LocalizedString getMetaKeywords();
 
     @Nullable
     @Override
-    LocalizedStrings getMetaTitle();
+    LocalizedString getMetaTitle();
 
     @Override
-    LocalizedStrings getName();
+    LocalizedString getName();
 
     @Override
-    LocalizedStrings getSlug();
+    LocalizedString getSlug();
 
     @Override
     List<ProductVariant> getVariants();

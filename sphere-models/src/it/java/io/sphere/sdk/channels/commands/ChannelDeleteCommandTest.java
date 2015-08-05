@@ -2,7 +2,7 @@ package io.sphere.sdk.channels.commands;
 
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
-import io.sphere.sdk.channels.queries.ChannelByIdFetch;
+import io.sphere.sdk.channels.queries.ChannelByIdGet;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -16,6 +16,6 @@ public class ChannelDeleteCommandTest extends IntegrationTest {
 
         execute(ChannelDeleteCommand.of(channel));
 
-        assertThat(execute(ChannelByIdFetch.of(channel.getId()))).isNull();
+        assertThat(execute(ChannelByIdGet.of(channel.getId()))).isNull();
     }
 }

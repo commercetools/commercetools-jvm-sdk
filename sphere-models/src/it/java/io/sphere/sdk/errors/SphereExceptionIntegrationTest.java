@@ -131,14 +131,14 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     @Test(expected = ConcurrentModificationException.class)
     public void concurrentModification() throws Exception {
         withCategory(client(), cat -> {
-            final CategoryUpdateCommand cmd = CategoryUpdateCommand.of(cat, asList(ChangeName.of(LocalizedStrings.ofEnglishLocale("new name"))));
+            final CategoryUpdateCommand cmd = CategoryUpdateCommand.of(cat, asList(ChangeName.of(LocalizedString.ofEnglishLocale("new name"))));
             execute(cmd);
             execute(cmd);
         });
     }
 
-    private CategoryDraftBuilder categoryDraftOf(final LocalizedStrings slug) {
-        return CategoryDraftBuilder.of(LocalizedStrings.ofEnglishLocale("name"), slug);
+    private CategoryDraftBuilder categoryDraftOf(final LocalizedString slug) {
+        return CategoryDraftBuilder.of(LocalizedString.ofEnglishLocale("name"), slug);
     }
 
     private void expectExceptionAndClose(final SphereClient client, final Class<InvalidTokenException> exceptionClass, final CompletionStage<PagedQueryResult<Category>> stage) throws Throwable {

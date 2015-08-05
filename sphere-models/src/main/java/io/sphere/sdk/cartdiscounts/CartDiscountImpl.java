@@ -1,18 +1,18 @@
 package io.sphere.sdk.cartdiscounts;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements CartDiscount {
-    private final LocalizedStrings name;
+final class CartDiscountImpl extends ResourceImpl<CartDiscount> implements CartDiscount {
+    private final LocalizedString name;
     @Nullable
-    private final LocalizedStrings description;
+    private final LocalizedString description;
     private final CartDiscountValue value;
     private final String cartPredicate;
     private final CartDiscountTarget target;
@@ -26,7 +26,7 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     private final List<Reference<Object>> references;
 
     @JsonCreator
-    public CartDiscountImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String cartPredicate, final LocalizedStrings name, final LocalizedStrings description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode, final List<Reference<Object>> references) {
+    public CartDiscountImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String cartPredicate, final LocalizedString name, final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode, final List<Reference<Object>> references) {
         super(id, version, createdAt, lastModifiedAt);
         this.cartPredicate = cartPredicate;
         this.name = name;
@@ -48,7 +48,7 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
 
     @Override
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 
@@ -58,7 +58,7 @@ final class CartDiscountImpl extends DefaultModelImpl<CartDiscount> implements C
     }
 
     @Override
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 

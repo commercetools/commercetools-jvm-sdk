@@ -1,13 +1,13 @@
 package io.sphere.sdk.attributestutorial;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.errors.InvalidField;
 import io.sphere.sdk.orders.*;
@@ -104,30 +104,30 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     @BeforeClass
     public static void createProductType() throws Exception {
         final LocalizedEnumValue green = LocalizedEnumValue.of("green",
-                LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün"));
+                LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
         final LocalizedEnumValue red = LocalizedEnumValue.of("red",
-                LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot"));
+                LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
         final AttributeDefinition color = AttributeDefinitionBuilder
                 .of(COLOR_ATTR_NAME, en("color"), LocalizedEnumType.of(red, green))
                 .required(true)
                 .build();
 
-        final PlainEnumValue s = PlainEnumValue.of("S", "S");
-        final PlainEnumValue m = PlainEnumValue.of("M", "M");
-        final PlainEnumValue x = PlainEnumValue.of("X", "X");
+        final EnumValue s = EnumValue.of("S", "S");
+        final EnumValue m = EnumValue.of("M", "M");
+        final EnumValue x = EnumValue.of("X", "X");
         final AttributeDefinition size = AttributeDefinitionBuilder
                 .of(SIZE_ATTR_NAME, en("size"), EnumType.of(s, m, x))
                 .required(true)
                 .build();
 
         final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
-                LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
+                LocalizedString.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
         final LocalizedEnumValue hot = LocalizedEnumValue.of("hot",
-                LocalizedStrings.of(ENGLISH, "Wash at or below 60°C ").plus(GERMAN, "60°C"));
+                LocalizedString.of(ENGLISH, "Wash at or below 60°C ").plus(GERMAN, "60°C"));
         final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
-                LocalizedStrings.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
+                LocalizedString.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
         final LocalizedEnumValue noTumbleDrying = LocalizedEnumValue.of("noTumbleDrying",
-                LocalizedStrings.of(ENGLISH, "no tumble drying").plus(GERMAN, "Nicht im Trommeltrockner trocknen"));
+                LocalizedString.of(ENGLISH, "no tumble drying").plus(GERMAN, "Nicht im Trommeltrockner trocknen"));
         final SetType laundryLabelType = SetType.of(LocalizedEnumType.of(cold, hot, tumbleDrying, noTumbleDrying));
         final AttributeDefinition laundrySymbols = AttributeDefinitionBuilder
                 .of(LAUNDRY_SYMBOLS_ATTR_NAME, en("washing labels"), laundryLabelType)
@@ -178,13 +178,13 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
         assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
                 .overridingErrorMessage("on the get side, the while enum is delivered")
-                .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
-        assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
-                .contains(PlainEnumValue.of("S", "S"));
+                .contains(LocalizedEnumValue.of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün")));
+        assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofEnumValue()))
+                .contains(EnumValue.of("S", "S"));
         final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
-                LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
+                LocalizedString.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
         final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
-                LocalizedStrings.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
+                LocalizedString.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
         assertThat(masterVariant.findAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
                 .contains(asSet(cold, tumbleDrying));
         assertThat(masterVariant.findAttribute(MATCHING_PRODUCTS_ATTR_NAME, AttributeAccess.ofProductReferenceSet()))
@@ -218,7 +218,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     public void productCreationWithGetterSetter() throws Exception {
         /* the declarations you could put into a separate class */
         final NamedAttributeAccess<LocalizedEnumValue> color = AttributeAccess.ofLocalizedEnumValue().ofName(COLOR_ATTR_NAME);
-        final NamedAttributeAccess<PlainEnumValue> size = AttributeAccess.ofPlainEnumValue().ofName(SIZE_ATTR_NAME);
+        final NamedAttributeAccess<EnumValue> size = AttributeAccess.ofEnumValue().ofName(SIZE_ATTR_NAME);
         final NamedAttributeAccess<Set<LocalizedEnumValue>> laundrySymbols =
                 AttributeAccess.ofLocalizedEnumValueSet().ofName(LAUNDRY_SYMBOLS_ATTR_NAME);
         final NamedAttributeAccess<Set<Reference<Product>>> matchingProducts =
@@ -227,9 +227,9 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final NamedAttributeAccess<LocalDate> availableSince = AttributeAccess.ofDate().ofName(AVAILABLE_SINCE_ATTR_NAME);
 
         final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
-                LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
+                LocalizedString.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
         final LocalizedEnumValue tumbleDrying = LocalizedEnumValue.of("tumbleDrying",
-                LocalizedStrings.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
+                LocalizedString.of(ENGLISH, "tumble drying").plus(GERMAN, "Trommeltrocknen"));
         final Reference<Product> productReference = ProductFixtures.referenceableProduct(client()).toReference();
         final ProductType productType = fetchProductTypeByName();
         final ProductVariantDraft masterVariantDraft = ProductVariantDraftBuilder.of()
@@ -238,8 +238,8 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
                    type-safe
                 */
                 .plusAttribute(color, LocalizedEnumValue.of("green",
-                        LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")))//will extract the key
-                .plusAttribute(size, PlainEnumValue.of("S", "S"))
+                        LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün")))//will extract the key
+                .plusAttribute(size, EnumValue.of("S", "S"))
                 .plusAttribute(laundrySymbols, asSet(cold, tumbleDrying))//will extract the keys, so you do not need to
                         //remember the special cases, there is also no problem mixing the styles
                 .plusAttribute(matchingProducts, asSet(productReference))
@@ -255,8 +255,8 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
         final ProductVariant masterVariant = product.getMasterData().getStaged().getMasterVariant();
         assertThat(masterVariant.findAttribute(color))
-                .contains(LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün")));
-        assertThat(masterVariant.findAttribute(size)).contains(PlainEnumValue.of("S", "S"));
+                .contains(LocalizedEnumValue.of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün")));
+        assertThat(masterVariant.findAttribute(size)).contains(EnumValue.of("S", "S"));
         assertThat(masterVariant.findAttribute(laundrySymbols)).contains(asSet(cold, tumbleDrying));
         assertThat(masterVariant.findAttribute(matchingProducts)).contains(asSet(productReference));
         assertThat(masterVariant.findAttribute(rrp)).contains(MoneyImpl.of(300, EUR));
@@ -281,19 +281,19 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     public void readAttributeWithoutProductTypeWithName() throws Exception {
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-        final Optional<PlainEnumValue> attributeOption =
-                masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue());
-        assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
+        final Optional<EnumValue> attributeOption =
+                masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofEnumValue());
+        assertThat(attributeOption).contains(EnumValue.of("S", "S"));
     }
 
     @Test
     public void readAttributeWithoutProductTypeWithNamedAccess() throws Exception {
-        final NamedAttributeAccess<PlainEnumValue> size = AttributeAccess.ofPlainEnumValue().ofName(SIZE_ATTR_NAME);
+        final NamedAttributeAccess<EnumValue> size = AttributeAccess.ofEnumValue().ofName(SIZE_ATTR_NAME);
 
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
-        final Optional<PlainEnumValue> attributeOption = masterVariant.findAttribute(size);
-        assertThat(attributeOption).contains(PlainEnumValue.of("S", "S"));
+        final Optional<EnumValue> attributeOption = masterVariant.findAttribute(size);
+        assertThat(attributeOption).contains(EnumValue.of("S", "S"));
     }
 
     @Test
@@ -317,7 +317,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final ProductVariant masterVariant = createProduct().getMasterData().getStaged().getMasterVariant();
 
         final Attribute attr = masterVariant.getAttribute(SIZE_ATTR_NAME);
-        final JsonNode expectedJsonNode = SphereJsonUtils.toJsonNode(PlainEnumValue.of("S", "S"));
+        final JsonNode expectedJsonNode = SphereJsonUtils.toJsonNode(EnumValue.of("S", "S"));
         assertThat(attr.getValue(AttributeAccess.ofJsonNode())).isEqualTo(expectedJsonNode);
     }
 
@@ -344,7 +344,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Function<Attribute, Optional<Pair<String, String>>> attributeValueExtractor = attribute -> {
             final Optional<String> extractedResult = AttributeExtraction.<String>of(productType, attribute)
                     .ifIs(AttributeAccess.ofLocalizedEnumValue(), v -> v.getLabel().find(ENGLISH).orElse(""))
-                    .ifIs(AttributeAccess.ofPlainEnumValue(), v -> v.getLabel())
+                    .ifIs(AttributeAccess.ofEnumValue(), v -> v.getLabel())
                     .ifIs(AttributeAccess.ofLocalizedEnumValueSet(), v ->
                             v.stream()
                                     .map(x -> x.getLabel().get(ENGLISH))
@@ -453,11 +453,11 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
 
         final ProductVariant masterVariant = updatedProduct.getMasterData().getStaged().getMasterVariant();
         assertThat(masterVariant.findAttribute(COLOR_ATTR_NAME, AttributeAccess.ofLocalizedEnumValue()))
-                .contains(LocalizedEnumValue.of("red", LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot")));
-        assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofPlainEnumValue()))
-                .contains(PlainEnumValue.of("M", "M"));
+                .contains(LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot")));
+        assertThat(masterVariant.findAttribute(SIZE_ATTR_NAME, AttributeAccess.ofEnumValue()))
+                .contains(EnumValue.of("M", "M"));
         final LocalizedEnumValue cold = LocalizedEnumValue.of("cold",
-                LocalizedStrings.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
+                LocalizedString.of(ENGLISH, "Wash at or below 30°C ").plus(GERMAN, "30°C"));
         assertThat(masterVariant.findAttribute(LAUNDRY_SYMBOLS_ATTR_NAME, AttributeAccess.ofLocalizedEnumValueSet()))
                 .contains(asSet(cold));
         assertThat(masterVariant.findAttribute(RRP_ATTR_NAME, AttributeAccess.ofMoney()))
@@ -478,7 +478,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
         final Product product = createProduct();
         //yellow is not defined in the product type, but for order imports this works to add use it on the fly
         final LocalizedEnumValue yellow =
-                LocalizedEnumValue.of("yellow", LocalizedStrings.of(ENGLISH, "yellow").plus(GERMAN, "gelb"));
+                LocalizedEnumValue.of("yellow", LocalizedString.of(ENGLISH, "yellow").plus(GERMAN, "gelb"));
         final ProductVariantImportDraft productVariantImportDraft = ProductVariantImportDraftBuilder.of(product.getId(), 1)
                 .attributes(
                         AttributeImportDraft.of(COLOR_ATTR_NAME, yellow),

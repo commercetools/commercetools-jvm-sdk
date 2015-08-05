@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.attributeaccess.interfacesstaticmethodstyle;
 
-import io.sphere.sdk.attributes.AttributeAccess;
-import io.sphere.sdk.attributes.NamedAttributeAccess;
+import io.sphere.sdk.products.attributes.AttributeAccess;
+import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 
 public interface WithColor {
     default NamedAttributeAccess<String> hexColor() {

@@ -2,20 +2,20 @@ package io.sphere.sdk.discountcodes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.models.DefaultModelImpl;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements DiscountCode {
+final class DiscountCodeImpl extends ResourceImpl<DiscountCode> implements DiscountCode {
     private final String code;
     @Nullable
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     @Nullable
-    private final LocalizedStrings description;
+    private final LocalizedString description;
     private final List<Reference<CartDiscount>> cartDiscounts;
     private final Boolean isActive;
     @Nullable
@@ -27,7 +27,7 @@ final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements D
     private final List<Reference<Object>> references;
 
     @JsonCreator
-    public DiscountCodeImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final List<Reference<CartDiscount>> cartDiscounts, final String code, final LocalizedStrings name, final LocalizedStrings description, final Boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer, final String cartPredicate, final List<Reference<Object>> references) {
+    public DiscountCodeImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final List<Reference<CartDiscount>> cartDiscounts, final String code, final LocalizedString name, final LocalizedString description, final Boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer, final String cartPredicate, final List<Reference<Object>> references) {
         super(id, version, createdAt, lastModifiedAt);
         this.cartDiscounts = cartDiscounts;
         this.code = code;
@@ -58,7 +58,7 @@ final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements D
 
     @Override
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 
@@ -81,7 +81,7 @@ final class DiscountCodeImpl extends DefaultModelImpl<DiscountCode> implements D
 
     @Override
     @Nullable
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 

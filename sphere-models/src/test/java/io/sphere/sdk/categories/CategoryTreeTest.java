@@ -1,6 +1,6 @@
 package io.sphere.sdk.categories;
 
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import org.junit.Test;
 
@@ -113,8 +113,8 @@ public class CategoryTreeTest {
         return CategoryBuilder.of(id, en("name " + id), en("slug-" + id)).build();
     }
 
-    private static LocalizedStrings en(final String value) {
-        return LocalizedStrings.of(Locale.ENGLISH, value);
+    private static LocalizedString en(final String value) {
+        return LocalizedString.of(Locale.ENGLISH, value);
     }
 
     private List<Category> byNameSorted(final CategoryTree tree1) {

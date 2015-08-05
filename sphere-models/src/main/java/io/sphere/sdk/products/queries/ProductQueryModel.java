@@ -2,13 +2,13 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
+import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.ReferenceQueryModel;
 
 import javax.annotation.Nullable;
 
-public class ProductQueryModel extends DefaultModelQueryModelImpl<Product> {
+public class ProductQueryModel extends ResourceQueryModelImpl<Product> {
 
     public static ProductQueryModel of() {
         return new ProductQueryModel(null, null);

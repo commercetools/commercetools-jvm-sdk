@@ -16,7 +16,7 @@ import io.sphere.sdk.producttypes.ProductTypeDraft;
 
   {@include.example io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier}
 
-  <p>To create attribute definitions refer to {@link io.sphere.sdk.attributes.AttributeDefinition}.</p>
+  <p>To create attribute definitions refer to {@link io.sphere.sdk.products.attributes.AttributeDefinition}.</p>
 
  */
 public interface ProductTypeCreateCommand extends CreateCommand<ProductType> {

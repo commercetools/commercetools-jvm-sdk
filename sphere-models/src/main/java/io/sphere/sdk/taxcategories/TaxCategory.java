@@ -2,7 +2,7 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -20,7 +20,7 @@ import java.util.List;
 
  */
 @JsonDeserialize(as=TaxCategoryImpl.class)
-public interface TaxCategory extends DefaultModel<TaxCategory> {
+public interface TaxCategory extends Resource<TaxCategory> {
     String getName();
 
     @Nullable

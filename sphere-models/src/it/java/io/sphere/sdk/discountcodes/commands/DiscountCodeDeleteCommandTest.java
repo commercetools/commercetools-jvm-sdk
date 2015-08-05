@@ -1,7 +1,7 @@
 package io.sphere.sdk.discountcodes.commands;
 
 import io.sphere.sdk.discountcodes.DiscountCode;
-import io.sphere.sdk.discountcodes.queries.DiscountCodeByIdFetch;
+import io.sphere.sdk.discountcodes.queries.DiscountCodeByIdGet;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -14,6 +14,6 @@ public class DiscountCodeDeleteCommandTest extends IntegrationTest {
         final String code = DiscountCodeDeleteCommandTest.class.getSimpleName();
         final DiscountCode discountCode = createDiscountCode(client(), code);
         execute(DiscountCodeDeleteCommand.of(discountCode));
-        assertThat(execute(DiscountCodeByIdFetch.of(discountCode))).isNull();
+        assertThat(execute(DiscountCodeByIdGet.of(discountCode))).isNull();
     }
 }

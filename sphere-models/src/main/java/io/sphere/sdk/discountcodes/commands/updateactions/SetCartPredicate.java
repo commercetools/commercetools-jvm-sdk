@@ -1,6 +1,6 @@
 package io.sphere.sdk.discountcodes.commands.updateactions;
 
-import io.sphere.sdk.cartdiscounts.CartPredicate;
+import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.discountcodes.DiscountCode;
 
@@ -19,8 +19,8 @@ public class SetCartPredicate extends UpdateActionImpl<DiscountCode> {
         this.cartPredicate = cartPredicate;
     }
 
-    public static SetCartPredicate of(@Nullable final CartPredicate cartPredicate) {
-        return new SetCartPredicate(Optional.ofNullable(cartPredicate).map(CartPredicate::toSphereCartPredicate).orElse(null));
+    public static SetCartPredicate of(@Nullable final CartDiscountPredicate cartPredicate) {
+        return new SetCartPredicate(Optional.ofNullable(cartPredicate).map(CartDiscountPredicate::toSphereCartPredicate).orElse(null));
     }
 
     @Nullable

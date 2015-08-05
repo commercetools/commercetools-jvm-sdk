@@ -1,20 +1,20 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.attributes.AttributeExtraction;
+import io.sphere.sdk.products.attributes.AttributeExtraction;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.producttypes.MetaProductType;
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeDefinition;
-import io.sphere.sdk.attributes.NamedAttributeAccess;
+import io.sphere.sdk.products.attributes.Attribute;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.json.SphereJsonUtils;
 import org.junit.Test;
 
 import java.util.*;
 
-import static io.sphere.sdk.attributes.AttributeAccess.*;
+import static io.sphere.sdk.products.attributes.AttributeAccess.*;
 import static java.util.Arrays.asList;
 import static java.util.Locale.*;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -30,9 +30,9 @@ public class ProductAttributeAccessTest {
     private final ProductVariant variant = product.getMasterData().getCurrent().getMasterVariant();
     private final ProductType productType = productProjection.getProductType().getObj();
 
-    private final NamedAttributeAccess<LocalizedStrings> localizedStringsNamedAttributeAccess = ofLocalizedStrings().ofName(LOC_STRING_ATTRIBUTE);
-    private final NamedAttributeAccess<LocalizedStrings> wrongTypeNamedAttributeAccess = ofLocalizedStrings().ofName("boolean-attribute");
-    private final NamedAttributeAccess<LocalizedStrings> notPresentNamedAttributeAccess = ofLocalizedStrings().ofName(NOT_PRESENT);
+    private final NamedAttributeAccess<LocalizedString> localizedStringNamedAttributeAccess = ofLocalizedString().ofName(LOC_STRING_ATTRIBUTE);
+    private final NamedAttributeAccess<LocalizedString> wrongTypeNamedAttributeAccess = ofLocalizedString().ofName("boolean-attribute");
+    private final NamedAttributeAccess<LocalizedString> notPresentNamedAttributeAccess = ofLocalizedString().ofName(NOT_PRESENT);
 
     @Test
     public void size() throws Exception {
@@ -48,14 +48,14 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void getterWithAttributeAccess() throws Exception {
-        assertThat(variant.findAttribute(LOC_STRING_ATTRIBUTE, ofLocalizedStrings()).get()).
-                isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
+        assertThat(variant.findAttribute(LOC_STRING_ATTRIBUTE, ofLocalizedString()).get()).
+                isEqualTo(LocalizedString.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
     }
 
     @Test
-    public void localizedStrings() throws Exception {
-        assertThat(variant.findAttribute(localizedStringsNamedAttributeAccess).get()).
-                isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
+    public void localizedString() throws Exception {
+        assertThat(variant.findAttribute(localizedStringNamedAttributeAccess).get()).
+                isEqualTo(LocalizedString.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
     }
 
     @Test
@@ -70,8 +70,8 @@ public class ProductAttributeAccessTest {
 
     @Test
     public void productProjection() throws Exception {
-        assertThat(productProjection.getMasterVariant().findAttribute(localizedStringsNamedAttributeAccess).get()).
-                isEqualTo(LocalizedStrings.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
+        assertThat(productProjection.getMasterVariant().findAttribute(localizedStringNamedAttributeAccess).get()).
+                isEqualTo(LocalizedString.of(GERMAN, "val-loc-string-de", ENGLISH, "val-loc-string-en"));
 
     }
 
@@ -105,7 +105,7 @@ public class ProductAttributeAccessTest {
         final Locale locale = Locale.GERMAN;
         final AttributeDefinition attrDefinition = metaProductType.getAttribute(attr.getName());
         return AttributeExtraction.<String>of(attrDefinition, attr)
-                .ifIs(ofLocalizedStrings(), lString -> lString.find(locale).orElse("<no translation found>"))
+                .ifIs(ofLocalizedString(), lString -> lString.find(locale).orElse("<no translation found>"))
                 .ifGuarded(ofString(), s -> s.length() > 2000 ? Optional.empty() : Optional.of(s))
                 .findValue().orElse("<no mapping found>");
     }

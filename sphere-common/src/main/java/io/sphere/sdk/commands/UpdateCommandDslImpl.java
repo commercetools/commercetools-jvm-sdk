@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.http.HttpMethod;
-import io.sphere.sdk.models.DefaultModelView;
+import io.sphere.sdk.models.ResourceView;
 import io.sphere.sdk.models.Versioned;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @param <T> the type of the result of the command, most likely the updated entity without expanded references
  */
-public class UpdateCommandDslImpl<T extends DefaultModelView<T>, C extends UpdateCommandDsl<T, C>> extends CommandImpl<T> implements UpdateCommandDsl<T, C> {
+public class UpdateCommandDslImpl<T extends ResourceView<T>, C extends UpdateCommandDsl<T, C>> extends CommandImpl<T> implements UpdateCommandDsl<T, C> {
     private final Versioned<T> versioned;
     private final List<? extends UpdateAction<T>> updateActions;
     private final TypeReference<T> typeReference;

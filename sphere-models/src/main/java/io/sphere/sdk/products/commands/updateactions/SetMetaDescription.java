@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
 
 import javax.annotation.Nullable;
@@ -15,19 +15,19 @@ import javax.annotation.Nullable;
  */
 public class SetMetaDescription extends UpdateActionImpl<Product> {
     @Nullable
-    private final LocalizedStrings metaDescription;
+    private final LocalizedString metaDescription;
 
-    private SetMetaDescription(final LocalizedStrings metaDescription) {
+    private SetMetaDescription(final LocalizedString metaDescription) {
         super("setMetaDescription");
         this.metaDescription = metaDescription;
     }
 
-    public static SetMetaDescription of(@Nullable final LocalizedStrings metaDescription) {
+    public static SetMetaDescription of(@Nullable final LocalizedString metaDescription) {
         return new SetMetaDescription(metaDescription);
     }
 
     @Nullable
-    public LocalizedStrings getMetaDescription() {
+    public LocalizedString getMetaDescription() {
         return metaDescription;
     }
 }

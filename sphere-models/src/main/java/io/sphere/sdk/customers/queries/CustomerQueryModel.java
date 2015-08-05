@@ -4,7 +4,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.queries.*;
 
-public final class CustomerQueryModel extends DefaultModelQueryModelImpl<Customer> {
+public final class CustomerQueryModel extends ResourceQueryModelImpl<Customer> {
 
     public static CustomerQueryModel of() {
         return new CustomerQueryModel(null, null);

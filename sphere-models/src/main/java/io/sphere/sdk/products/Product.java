@@ -3,7 +3,7 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Optional;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
  @see io.sphere.sdk.productdiscounts.ProductDiscount
  */
 @JsonDeserialize(as=ProductImpl.class)
-public interface Product extends ProductLike<Product>, DefaultModel<Product> {
+public interface Product extends ProductLike<Product>, Resource<Product> {
 
     ProductCatalogData getMasterData();
 

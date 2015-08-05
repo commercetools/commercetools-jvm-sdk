@@ -1,6 +1,6 @@
 package io.sphere.sdk.categories;
 
-import io.sphere.sdk.models.LocalizedStringsEntry;
+import io.sphere.sdk.models.LocalizedStringEntry;
 
 import java.util.*;
 import java.util.function.Function;
@@ -22,11 +22,11 @@ final class CategoryTreeFactory {
         final Predicate<Category> isRootCategory = c -> c.getParent() == null;
         final List<Category> roots = allCategoriesAsFlatList.parallelStream().filter(isRootCategory).collect(toList());
         final List<Category> allAsFlatList = allCategoriesAsFlatList;
-        final Map<LocalizedStringsEntry, Category> categoriesByLocaleAndSlug = new HashMap<>();
+        final Map<LocalizedStringEntry, Category> categoriesByLocaleAndSlug = new HashMap<>();
         allCategoriesAsFlatList.forEach(category -> {
             final Set<Locale> localesForTheCategory = category.getSlug().getLocales();
             localesForTheCategory.forEach(locale -> {
-                final LocalizedStringsEntry stringsEntry = LocalizedStringsEntry.of(locale, category.getSlug().get(locale));
+                final LocalizedStringEntry stringsEntry = LocalizedStringEntry.of(locale, category.getSlug().get(locale));
                 categoriesByLocaleAndSlug.put(stringsEntry, category);
             });
         });

@@ -8,7 +8,7 @@ import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.UrlQueryBuilder;
-import io.sphere.sdk.models.LocalizedStringsEntry;
+import io.sphere.sdk.models.LocalizedStringEntry;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -33,7 +33,7 @@ import static java.util.Objects.requireNonNull;
 public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, C, S, E>, S, E> extends SphereRequestBase implements MetaModelSearchDsl<T, C, S, E> {
 
     @Nullable
-    final LocalizedStringsEntry text;
+    final LocalizedStringEntry text;
     final List<FacetExpression<T>> facets;
     final List<FilterExpression<T>> resultFilters;
     final List<FilterExpression<T>> queryFilters;
@@ -51,7 +51,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction;
 
-    public MetaModelSearchDslImpl(@Nullable final LocalizedStringsEntry text, final List<FacetExpression<T>> facets, final List<FilterExpression<T>> resultFilters,
+    public MetaModelSearchDslImpl(@Nullable final LocalizedStringEntry text, final List<FacetExpression<T>> facets, final List<FilterExpression<T>> resultFilters,
                                   final List<FilterExpression<T>> queryFilters, final List<FilterExpression<T>> facetFilters,
                                   final List<SearchSort<T>> sort, @Nullable final Long limit, @Nullable final Long offset,
                                   final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,
@@ -98,13 +98,13 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C withText(@Nullable final LocalizedStringsEntry text) {
+    public C withText(@Nullable final LocalizedStringEntry text) {
         return copyBuilder().text(text).build();
     }
 
     @Override
     public C withText(final Locale locale, final String text) {
-        final LocalizedStringsEntry locStringEntry = LocalizedStringsEntry.of(requireNonNull(locale), requireNonNull(text));
+        final LocalizedStringEntry locStringEntry = LocalizedStringEntry.of(requireNonNull(locale), requireNonNull(text));
         return withText(locStringEntry);
     }
 
@@ -284,7 +284,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
 
     @Override
     @Nullable
-    public LocalizedStringsEntry text() {
+    public LocalizedStringEntry text() {
         return text;
     }
 

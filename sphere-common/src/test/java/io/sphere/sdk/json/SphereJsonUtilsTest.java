@@ -2,7 +2,7 @@ package io.sphere.sdk.json;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import org.junit.Test;
 
 import java.time.ZonedDateTime;
@@ -40,7 +40,7 @@ public class SphereJsonUtilsTest {
 
     @Test
     public void toJsonString() throws Exception {
-        final LocalizedStrings value = LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
+        final LocalizedString value = LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
         final String actual = SphereJsonUtils.toJsonString(value);
         assertThat(actual).isEqualTo("{\"de\":\"Hundefutter\",\"en\":\"dog food\"}");
     }
@@ -48,9 +48,9 @@ public class SphereJsonUtilsTest {
     @Test
     public void readObjectFromJsonString() throws Exception {
         final String jsonString = "{\"de\":\"Hundefutter\",\"en\":\"dog food\"}";
-        final LocalizedStrings actual =
-                SphereJsonUtils.readObject(jsonString, LocalizedStrings.typeReference());
-        assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
+        final LocalizedString actual =
+                SphereJsonUtils.readObject(jsonString, LocalizedString.typeReference());
+        assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
     }
 
     @Test
@@ -58,9 +58,9 @@ public class SphereJsonUtilsTest {
         final ObjectNode jsonNode = SphereJsonUtils.newObjectNode();
         jsonNode.put("de", "Hundefutter");
         jsonNode.put("en", "dog food");
-        final LocalizedStrings actual =
-                SphereJsonUtils.readObject(jsonNode, LocalizedStrings.typeReference());
-        assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
+        final LocalizedString actual =
+                SphereJsonUtils.readObject(jsonNode, LocalizedString.typeReference());
+        assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
     }
 
     @Test
@@ -78,14 +78,14 @@ public class SphereJsonUtilsTest {
         final ObjectNode jsonNode = SphereJsonUtils.newObjectNode();
         jsonNode.put("de", "Hundefutter");
         jsonNode.put("en", "dog food");
-        final LocalizedStrings actual =
-                SphereJsonUtils.readObject(jsonNode, LocalizedStrings.class);
-        assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
+        final LocalizedString actual =
+                SphereJsonUtils.readObject(jsonNode, LocalizedString.class);
+        assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
     }
 
     @Test
     public void toJsonNode() throws Exception {
-        final LocalizedStrings value = LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
+        final LocalizedString value = LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
         final JsonNode actual = SphereJsonUtils.toJsonNode(value);
         assertThat(actual.get("de").asText()).isEqualTo("Hundefutter");
         assertThat(actual.get("en").asText()).isEqualTo("dog food");
@@ -94,7 +94,7 @@ public class SphereJsonUtilsTest {
     @Test
     public void exceptionHandling() throws Exception {
         final String brokenJsonString = "{\"de\":\",]]]]";
-        assertThatThrownBy(() -> SphereJsonUtils.readObject(brokenJsonString, LocalizedStrings.typeReference()))
+        assertThatThrownBy(() -> SphereJsonUtils.readObject(brokenJsonString, LocalizedString.typeReference()))
         .isInstanceOf(JsonException.class);
     }
 }

@@ -2,7 +2,7 @@ package io.sphere.sdk.carts.commands;
 
 import io.sphere.sdk.carts.*;
 import io.sphere.sdk.carts.commands.updateactions.*;
-import io.sphere.sdk.carts.queries.CartByIdFetch;
+import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.carts.queries.CartQuery;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelFixtures;
@@ -10,7 +10,7 @@ import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -132,7 +132,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(cart.getCustomLineItems()).hasSize(0);
             final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
             final String slug = "thing-slug";
-            final LocalizedStrings name = en("thing");
+            final LocalizedString name = en("thing");
             final long quantity = 5;
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
 
@@ -268,7 +268,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
                     .isEqualTo(asList(newPrice));
 
             final LineItem lineItemOfTheChangedProduct =
-                    execute(CartByIdFetch.of(cartWithLineItem)).getLineItems().get(0);
+                    execute(CartByIdGet.of(cartWithLineItem)).getLineItems().get(0);
             assertThat(lineItemOfTheChangedProduct.getPrice())
                     .overridingErrorMessage("the new product price is not automatically propagated to the line item in the cart")
                     .isEqualTo(oldPrice).isNotEqualTo(newPrice);

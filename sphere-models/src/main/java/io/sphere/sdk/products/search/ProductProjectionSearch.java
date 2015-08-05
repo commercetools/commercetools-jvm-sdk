@@ -2,7 +2,7 @@ package io.sphere.sdk.products.search;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.models.LocalizedStringsEntry;
+import io.sphere.sdk.models.LocalizedStringEntry;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
@@ -41,7 +41,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     }
 
     @Override
-    ProductProjectionSearch withText(final LocalizedStringsEntry text);
+    ProductProjectionSearch withText(final LocalizedStringEntry text);
 
     @Override
     ProductProjectionSearch withText(final Locale locale, final String text);

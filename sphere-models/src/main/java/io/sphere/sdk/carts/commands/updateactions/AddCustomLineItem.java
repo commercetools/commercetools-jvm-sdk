@@ -3,7 +3,7 @@ package io.sphere.sdk.carts.commands.updateactions;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CustomLineItemDraft;
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -16,13 +16,13 @@ import javax.money.MonetaryAmount;
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addCustomLineItem()}
  */
 public class AddCustomLineItem extends UpdateActionImpl<Cart> {
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     private final Long quantity;
     private final MonetaryAmount money;
     private final String slug;
     private final Reference<TaxCategory> taxCategory;
 
-    private AddCustomLineItem(final LocalizedStrings name, final String slug,
+    private AddCustomLineItem(final LocalizedString name, final String slug,
                               final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
                               final Long quantity) {
         super("addCustomLineItem");
@@ -33,7 +33,7 @@ public class AddCustomLineItem extends UpdateActionImpl<Cart> {
         this.taxCategory = taxCategory.toReference();
     }
 
-    public static AddCustomLineItem of(final LocalizedStrings name, final String slug,
+    public static AddCustomLineItem of(final LocalizedString name, final String slug,
                                        final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
                                        final long quantity) {
         return new AddCustomLineItem(name, slug, money, taxCategory, quantity);
@@ -44,7 +44,7 @@ public class AddCustomLineItem extends UpdateActionImpl<Cart> {
                 draft.getTaxCategory(), draft.getQuantity());
     }
 
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 

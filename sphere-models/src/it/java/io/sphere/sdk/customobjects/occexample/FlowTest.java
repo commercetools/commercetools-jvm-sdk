@@ -6,7 +6,7 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
-import io.sphere.sdk.customobjects.queries.CustomObjectByKeyFetch;
+import io.sphere.sdk.customobjects.queries.CustomObjectByKeyGet;
 import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Before;
@@ -23,7 +23,7 @@ public class FlowTest extends IntegrationTest {
 
     @Before
     public void setUp() throws Exception {
-        final CustomObjectByKeyFetch<JsonNode> fetchByKey = CustomObjectByKeyFetch.of(CONTAINER, KEY);
+        final CustomObjectByKeyGet<JsonNode> fetchByKey = CustomObjectByKeyGet.of(CONTAINER, KEY);
         Optional.ofNullable(execute(fetchByKey)).ifPresent(o -> execute(CustomObjectDeleteCommand.of(o)));
     }
 
@@ -34,8 +34,8 @@ public class FlowTest extends IntegrationTest {
     }
 
     private void doAnUpdate() {
-        final CustomObjectByKeyFetch<CustomerNumberCounter> fetch =
-                CustomObjectByKeyFetch.of(CONTAINER, KEY, CustomerNumberCounter.customObjectTypeReference());
+        final CustomObjectByKeyGet<CustomerNumberCounter> fetch =
+                CustomObjectByKeyGet.of(CONTAINER, KEY, CustomerNumberCounter.customObjectTypeReference());
 
         final CustomObject<CustomerNumberCounter> loadedCustomObject = execute(fetch);
         final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;

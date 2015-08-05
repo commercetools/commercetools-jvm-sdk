@@ -27,7 +27,7 @@ public class ExperimentalProductProjectionSearchModel extends ProductDataSearchM
     }
 
     @Override
-    public LocalizedStringsSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
+    public LocalizedStringSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
         return super.name();
     }
 

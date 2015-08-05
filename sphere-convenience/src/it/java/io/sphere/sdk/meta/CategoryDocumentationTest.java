@@ -10,7 +10,7 @@ import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.ChangeParent;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.Product;
@@ -285,7 +285,7 @@ public class CategoryDocumentationTest extends IntegrationTest {
 
     private static void withProductInCategory(final TestClient client, final Referenceable<Category> category, final Consumer<Product> user) {
         final ProductType productType = client.execute(ProductTypeCreateCommand.of(ProductTypeDraft.of(CategoryDocumentationTest.class.getSimpleName(), "", asList())));
-        final LocalizedStrings name = LocalizedStrings.of(ENGLISH, "foo");
+        final LocalizedString name = LocalizedString.of(ENGLISH, "foo");
         final Product product = client.execute(ProductCreateCommand.of(ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), ProductVariantDraftBuilder.of().build()).categories(SetUtils.asSet(category.toReference())).build()));
         user.accept(product);
         client.execute(ProductDeleteCommand.of(product));
@@ -332,8 +332,8 @@ public class CategoryDocumentationTest extends IntegrationTest {
                             .filter(line -> !"".equals(line))//remove empty lines
                             .map(line -> line.split(","))
                             .map(columns -> {
-                                final LocalizedStrings name = LocalizedStrings.of(GERMAN, columns[2]).plus(ENGLISH, columns[4]);
-                                final LocalizedStrings slug = LocalizedStrings.of(GERMAN, columns[3]).plus(ENGLISH, columns[5]);
+                                final LocalizedString name = LocalizedString.of(GERMAN, columns[2]).plus(ENGLISH, columns[4]);
+                                final LocalizedString slug = LocalizedString.of(GERMAN, columns[3]).plus(ENGLISH, columns[5]);
                                 final String externalId = columns[0];
                                 final CategoryDraftBuilder categoryDraftBuilder = CategoryDraftBuilder.of(name, slug).externalId(externalId);
                                 final String externalIdParent = columns[1];
