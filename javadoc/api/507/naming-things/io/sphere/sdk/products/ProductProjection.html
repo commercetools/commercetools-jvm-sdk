@@ -115,7 +115,7 @@ extends <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="int
 
  <p id=operations>Operations:</p>
  <ul>
-    <li>Fetch by ID with <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionByIdFetch.html" title="interface in io.sphere.sdk.products.queries"><code>ProductProjectionByIdFetch</code></a></li>
+    <li>Fetch by ID with <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionByIdGet.html" title="interface in io.sphere.sdk.products.queries"><code>ProductProjectionByIdGet</code></a></li>
  </ul>
 
  If you need <a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> for a method but you have a product,
@@ -170,7 +170,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isNull();
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getCategories--">getCategories</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
@@ -180,19 +180,19 @@ assertThat(current).overridingErrorMessage("current can be empty").isNull();
 </td>
 </tr>
 <tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getMetaDescription--">getMetaDescription</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getMetaKeywords--">getMetaKeywords</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getMetaTitle--">getMetaTitle</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i9" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
@@ -204,7 +204,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isNull();
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getSearchKeywords--">getSearchKeywords</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i12" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/products/ProductProjection.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i13" class="rowColor">
@@ -278,7 +278,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isNull();
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">metaAttributesOf</a>, <a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-io.sphere.sdk.models.LocalizedStrings-">metaAttributesOf</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-java.util.Locale-java.lang.String-java.lang.String-java.lang.String-">metaAttributesOf</a>, <a href="../../../../io/sphere/sdk/models/MetaAttributes.html#metaAttributesOf-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-io.sphere.sdk.models.LocalizedString-">metaAttributesOf</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Referenceable">
@@ -370,7 +370,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isNull();
 <li class="blockList">
 <h4>getDescription</h4>
 <pre>@Nullable
-<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getDescription()</pre>
+<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getDescription()</pre>
 </li>
 </ul>
 <a name="getMasterVariant--">
@@ -397,7 +397,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isNull();
 <li class="blockList">
 <h4>getMetaDescription</h4>
 <pre>@Nullable
-<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getMetaDescription()</pre>
+<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getMetaDescription()</pre>
 </li>
 </ul>
 <a name="getMetaKeywords--">
@@ -407,7 +407,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isNull();
 <li class="blockList">
 <h4>getMetaKeywords</h4>
 <pre>@Nullable
-<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getMetaKeywords()</pre>
+<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getMetaKeywords()</pre>
 </li>
 </ul>
 <a name="getMetaTitle--">
@@ -417,7 +417,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isNull();
 <li class="blockList">
 <h4>getMetaTitle</h4>
 <pre>@Nullable
-<a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getMetaTitle()</pre>
+<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getMetaTitle()</pre>
 </li>
 </ul>
 <a name="getName--">
@@ -426,7 +426,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isNull();
 <ul class="blockList">
 <li class="blockList">
 <h4>getName</h4>
-<pre><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getName()</pre>
+<pre><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getName()</pre>
 </li>
 </ul>
 <a name="getSlug--">
@@ -435,7 +435,7 @@ assertThat(current).overridingErrorMessage("current can be empty").isNull();
 <ul class="blockList">
 <li class="blockList">
 <h4>getSlug</h4>
-<pre><a href="../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getSlug()</pre>
+<pre><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getSlug()</pre>
 </li>
 </ul>
 <a name="getVariants--">

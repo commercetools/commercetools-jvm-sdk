@@ -111,7 +111,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
     final DiscountCodeDraft draft = DiscountCodeDraft.of(code, cartDiscount)
             .withName(en(DiscountCodeCreateCommandTest.class.getName()))
             .withDescription(en("sample discount code descr."))
-            .withCartPredicate(CartPredicate.of("1 = 1"))
+            .withCartPredicate(CartDiscountPredicate.of("1 = 1"))
             .withIsActive(false)
             .withMaxApplications(5L)
             .withMaxApplicationsPerCustomer(1L);

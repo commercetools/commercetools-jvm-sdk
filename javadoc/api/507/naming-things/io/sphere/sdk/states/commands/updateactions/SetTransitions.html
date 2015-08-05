@@ -132,7 +132,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         assertThat(updatedStateB.getTransitions()).isEqualTo(transitions);
 
         //check reference expansion
-        final State loadedStateB = execute(StateByIdFetch.of(stateB).withExpansionPaths(m -&gt; m.transitions()));
+        final State loadedStateB = execute(StateByIdGet.of(stateB).withExpansionPaths(m -&gt; m.transitions()));
         final Reference&lt;State&gt; stateReference = new LinkedList&lt;&gt;(loadedStateB.getTransitions()).getFirst();
         assertThat(stateReference.getObj()).isNotNull();
 

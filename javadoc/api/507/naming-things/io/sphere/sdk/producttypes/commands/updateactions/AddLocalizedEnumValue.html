@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/AddAttributeDefinition.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/AddPlainEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/AddEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeAttributeDefinitionLabel.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/producttypes/commands/updateactions/AddLocalizedEnumValue.html" target="_top">Frames</a></li>
@@ -128,7 +128,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final String attributeName = "color";
     assertThat(productType.getAttribute(attributeName)).isNotNull();
     final LocalizedEnumValue value =
-            LocalizedEnumValue.of("brown", LocalizedStrings.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
+            LocalizedEnumValue.of("brown", LocalizedString.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
 
 
     final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
@@ -263,8 +263,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/AddAttributeDefinition.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/AddPlainEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/AddEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeAttributeDefinitionLabel.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../../index.html?io/sphere/sdk/producttypes/commands/updateactions/AddLocalizedEnumValue.html" target="_top">Frames</a></li>

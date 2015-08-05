@@ -115,7 +115,7 @@ extends java.lang.Object</pre>
  <p>If an error occurs, the <a href="../../../../io/sphere/sdk/json/JsonException.html" title="class in io.sphere.sdk.json"><code>JsonException</code></a> (a <code>RuntimeException</code>) will be thrown:</p>
 
  <div id="io-sphere-sdk-json-SphereJsonUtilsTest-exceptionHandling--%s" class=code-example><pre><code class='java'>final String brokenJsonString = "{\"de\":\",]]]]";
-assertThatThrownBy(() -&gt; SphereJsonUtils.readObject(brokenJsonString, LocalizedStrings.typeReference()))
+assertThatThrownBy(() -&gt; SphereJsonUtils.readObject(brokenJsonString, LocalizedString.typeReference()))
 .isInstanceOf(JsonException.class);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
@@ -258,7 +258,7 @@ assertThatThrownBy(() -&gt; SphereJsonUtils.readObject(brokenJsonString, Localiz
 <pre>public static&nbsp;java.lang.String&nbsp;toJsonString(java.lang.Object&nbsp;value)</pre>
 <div class="block">Converts a SPHERE.IO Java object to JSON as String.
 
- <div id="io-sphere-sdk-json-SphereJsonUtilsTest-toJsonString--%s" class=code-example><pre><code class='java'>final LocalizedStrings value = LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
+ <div id="io-sphere-sdk-json-SphereJsonUtilsTest-toJsonString--%s" class=code-example><pre><code class='java'>final LocalizedString value = LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
 final String actual = SphereJsonUtils.toJsonString(value);
 assertThat(actual).isEqualTo("{\"de\":\"Hundefutter\",\"en\":\"dog food\"}");
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -281,7 +281,7 @@ assertThat(actual).isEqualTo("{\"de\":\"Hundefutter\",\"en\":\"dog food\"}");
  <p>If <code>value</code> is of type String and contains JSON data, that will be ignored, <code>value</code> will be treated as just any String.
  If you want to parse a JSON String to a JsonNode use <a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#parse-java.lang.String-"><code>parse(java.lang.String)</code></a> instead.</p>
 
- <div id="io-sphere-sdk-json-SphereJsonUtilsTest-toJsonNode--%s" class=code-example><pre><code class='java'>final LocalizedStrings value = LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
+ <div id="io-sphere-sdk-json-SphereJsonUtilsTest-toJsonNode--%s" class=code-example><pre><code class='java'>final LocalizedString value = LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
 final JsonNode actual = SphereJsonUtils.toJsonNode(value);
 assertThat(actual.get("de").asText()).isEqualTo("Hundefutter");
 assertThat(actual.get("en").asText()).isEqualTo("dog food");
@@ -390,9 +390,9 @@ assertThat(actual).isEqualTo("{\n" +
 <div class="block">Reads a Java object from JSON data (String).
 
  <div id="io-sphere-sdk-json-SphereJsonUtilsTest-readObjectFromJsonString--%s" class=code-example><pre><code class='java'>final String jsonString = "{\"de\":\"Hundefutter\",\"en\":\"dog food\"}";
-final LocalizedStrings actual =
-        SphereJsonUtils.readObject(jsonString, LocalizedStrings.typeReference());
-assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
+final LocalizedString actual =
+        SphereJsonUtils.readObject(jsonString, LocalizedString.typeReference());
+assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -418,9 +418,9 @@ assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "H
  <div id="io-sphere-sdk-json-SphereJsonUtilsTest-readObjectFromJsonNode--%s" class=code-example><pre><code class='java'>final ObjectNode jsonNode = SphereJsonUtils.newObjectNode();
 jsonNode.put("de", "Hundefutter");
 jsonNode.put("en", "dog food");
-final LocalizedStrings actual =
-        SphereJsonUtils.readObject(jsonNode, LocalizedStrings.typeReference());
-assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
+final LocalizedString actual =
+        SphereJsonUtils.readObject(jsonNode, LocalizedString.typeReference());
+assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -446,9 +446,9 @@ assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "H
  <div id="io-sphere-sdk-json-SphereJsonUtilsTest-readObjectFromJsonNodeWithClass--%s" class=code-example><pre><code class='java'>final ObjectNode jsonNode = SphereJsonUtils.newObjectNode();
 jsonNode.put("de", "Hundefutter");
 jsonNode.put("en", "dog food");
-final LocalizedStrings actual =
-        SphereJsonUtils.readObject(jsonNode, LocalizedStrings.class);
-assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
+final LocalizedString actual =
+        SphereJsonUtils.readObject(jsonNode, LocalizedString.class);
+assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -474,9 +474,9 @@ assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "H
  <div id="io-sphere-sdk-json-SphereJsonUtilsTest-readObjectFromJsonNodeWithClass--%s" class=code-example><pre><code class='java'>final ObjectNode jsonNode = SphereJsonUtils.newObjectNode();
 jsonNode.put("de", "Hundefutter");
 jsonNode.put("en", "dog food");
-final LocalizedStrings actual =
-        SphereJsonUtils.readObject(jsonNode, LocalizedStrings.class);
-assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
+final LocalizedString actual =
+        SphereJsonUtils.readObject(jsonNode, LocalizedString.class);
+assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -501,9 +501,9 @@ assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "H
  <div id="io-sphere-sdk-json-SphereJsonUtilsTest-readObjectFromJsonNodeWithClass--%s" class=code-example><pre><code class='java'>final ObjectNode jsonNode = SphereJsonUtils.newObjectNode();
 jsonNode.put("de", "Hundefutter");
 jsonNode.put("en", "dog food");
-final LocalizedStrings actual =
-        SphereJsonUtils.readObject(jsonNode, LocalizedStrings.class);
-assertThat(actual).isEqualTo(LocalizedStrings.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
+final LocalizedString actual =
+        SphereJsonUtils.readObject(jsonNode, LocalizedString.class);
+assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>

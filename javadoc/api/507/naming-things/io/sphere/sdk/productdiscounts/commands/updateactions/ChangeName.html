@@ -125,7 +125,7 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">ChangeName</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscount</a>&gt;</pre>
 <div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final LocalizedStrings newName = randomSlug();
+    final LocalizedString newName = randomSlug();
 
     final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeName.of(newName)));
 
@@ -152,12 +152,12 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a></code></td>
+<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangeName.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions">ChangeName</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangeName.html#of-io.sphere.sdk.models.LocalizedStrings-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;name)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangeName.html#of-io.sphere.sdk.models.LocalizedString-">of</a></span>(<a href="../../../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;name)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -195,13 +195,13 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="of-io.sphere.sdk.models.LocalizedStrings-">
+<a name="of-io.sphere.sdk.models.LocalizedString-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions">ChangeName</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;name)</pre>
+<pre>public static&nbsp;<a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions">ChangeName</a>&nbsp;of(<a href="../../../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;name)</pre>
 </li>
 </ul>
 <a name="getName--">
@@ -210,7 +210,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <ul class="blockListLast">
 <li class="blockList">
 <h4>getName</h4>
-<pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/models/LocalizedStrings.html" title="class in io.sphere.sdk.models">LocalizedStrings</a>&nbsp;getName()</pre>
+<pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getName()</pre>
 </li>
 </ul>
 </li>

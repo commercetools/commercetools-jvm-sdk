@@ -144,7 +144,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
         //check reference expansion
-        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdGet.of(shippingMethod)
                         .plusExpansionPaths(m -&gt; m.zoneRates().zone())
         );
         assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();

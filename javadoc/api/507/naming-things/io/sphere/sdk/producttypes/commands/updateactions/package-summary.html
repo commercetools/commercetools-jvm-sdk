@@ -88,7 +88,7 @@
     //add
     final String attributeName = "foostring";
     final AttributeDefinition foostring =
-            AttributeDefinitionBuilder.of(attributeName, LocalizedStrings.of(ENGLISH, "foo string"), TextType.of()).build();
+            AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), TextType.of()).build();
     final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
     final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
     assertThat(loadedDefinition.getAttributeType()).isEqualTo(TextType.of());
@@ -102,13 +102,33 @@
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/AddEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">AddEnumValue</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addEnumValue--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
+    final String attributeName = "size";
+    assertThat(productType.findAttribute(attributeName)).isPresent();
+    final EnumValue value = EnumValue.of("XXXL", "XXXL");
+
+    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+            AddEnumValue.of(attributeName, value)));
+
+    assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
+            .isInstanceOf(EnumType.class)
+            .matches(type -&gt; ((EnumType)type).getValues().contains(value));
+
+    return updatedProductType;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/AddLocalizedEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">AddLocalizedEnumValue</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addLocalizedEnumValue--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
     final String attributeName = "color";
     assertThat(productType.getAttribute(attributeName)).isNotNull();
     final LocalizedEnumValue value =
-            LocalizedEnumValue.of("brown", LocalizedStrings.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
+            LocalizedEnumValue.of("brown", LocalizedString.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
 
 
     final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
@@ -123,33 +143,13 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/AddPlainEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">AddPlainEnumValue</a></td>
-<td class="colLast">
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addPlainEnumValue--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-    final String attributeName = "size";
-    assertThat(productType.findAttribute(attributeName)).isPresent();
-    final PlainEnumValue value = PlainEnumValue.of("XXXL", "XXXL");
-
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
-            AddPlainEnumValue.of(attributeName, value)));
-
-    assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
-            .isInstanceOf(EnumType.class)
-            .matches(type -&gt; ((EnumType)type).getValues().contains(value));
-
-    return updatedProductType;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
-</td>
-</tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeAttributeDefinitionLabel.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeAttributeDefinitionLabel</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeLabel--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
     final String attributeName = "color";
     assertThat(productType.findAttribute(attributeName)).isPresent();
-    final LocalizedStrings label = LocalizedStrings.of(ENGLISH, "the color label");
+    final LocalizedString label = LocalizedString.of(ENGLISH, "the color label");
 
     final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeDefinitionLabel.of(attributeName, label)));
 
@@ -189,6 +189,27 @@
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeEnumValueOrder.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeEnumValueOrder</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeEnumValueOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
+    final String attributeName = "size";
+    final EnumType attributeType = (EnumType) productType.getAttribute(attributeName)
+            .getAttributeType();
+    final List&lt;EnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
+
+    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
+            ChangeEnumValueOrder.of(attributeName, values)));
+
+    final EnumType updatedType = (EnumType) updatedProductType
+            .getAttribute(attributeName).getAttributeType();
+    assertThat(updatedType.getValues()).isEqualTo(values);
+
+    return updatedProductType;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeLocalizedEnumValueOrder.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeLocalizedEnumValueOrder</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeLocalizedEnumValueOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
@@ -209,7 +230,7 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangeName</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
@@ -222,27 +243,6 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
-<td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangePlainEnumValueOrder.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">ChangePlainEnumValueOrder</a></td>
-<td class="colLast">
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changePlainEnumValueOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-    final String attributeName = "size";
-    final EnumType attributeType = (EnumType) productType.getAttribute(attributeName)
-            .getAttributeType();
-    final List&lt;PlainEnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
-
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
-            ChangePlainEnumValueOrder.of(attributeName, values)));
-
-    final EnumType updatedType = (EnumType) updatedProductType
-            .getAttribute(attributeName).getAttributeType();
-    assertThat(updatedType.getValues()).isEqualTo(values);
-
-    return updatedProductType;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
-</td>
-</tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/RemoveAttributeDefinition.html" title="class in io.sphere.sdk.producttypes.commands.updateactions">RemoveAttributeDefinition</a></td>
 <td class="colLast">
@@ -250,7 +250,7 @@
     //add
     final String attributeName = "foostring";
     final AttributeDefinition foostring =
-            AttributeDefinitionBuilder.of(attributeName, LocalizedStrings.of(ENGLISH, "foo string"), TextType.of()).build();
+            AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), TextType.of()).build();
     final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
     final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
     assertThat(loadedDefinition.getAttributeType()).isEqualTo(TextType.of());

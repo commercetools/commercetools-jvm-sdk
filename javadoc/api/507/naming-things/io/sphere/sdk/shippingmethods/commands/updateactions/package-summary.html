@@ -108,7 +108,7 @@
         assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
         //check reference expansion
-        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdGet.of(shippingMethod)
                         .plusExpansionPaths(m -&gt; m.zoneRates().zone())
         );
         assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
@@ -154,7 +154,7 @@
         assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
         //check reference expansion
-        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdGet.of(shippingMethod)
                         .plusExpansionPaths(m -&gt; m.zoneRates().zone())
         );
         assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
@@ -250,7 +250,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
         assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
         //check reference expansion
-        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdGet.of(shippingMethod)
                         .plusExpansionPaths(m -&gt; m.zoneRates().zone())
         );
         assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
@@ -296,7 +296,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
         assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
         //check reference expansion
-        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdGet.of(shippingMethod)
                         .plusExpansionPaths(m -&gt; m.zoneRates().zone())
         );
         assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();

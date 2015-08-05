@@ -136,7 +136,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
             .execute(ProductUpdateCommand.of(product, ChangePrice.of(prices.get(0), newPrice)));
 
     final Price actualPrice = updatedProduct.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-    assertThat(actualPrice).isEqualTo(newPrice);
+    assertThat(actualPrice.withId(null)).isEqualTo(newPrice);
 
     return updatedProduct;
 });

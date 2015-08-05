@@ -97,13 +97,13 @@
 
   Scenario to load a specific product type:
 
-  <div id="example-QueryByProductTypeNameExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.attributes.AttributeDefinition;
-import io.sphere.sdk.attributes.AttributeType;
+  <div id="example-QueryByProductTypeNameExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.products.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.AttributeType;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.queries.ProductTypeQuery;
-import io.sphere.sdk.attributes.EnumType;
-import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.products.attributes.EnumType;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.queries.PagedQueryResult;
 import java.util.List;
 import java.util.concurrent.CompletionStage;
@@ -112,11 +112,11 @@ import java.util.concurrent.CompletionStage;
 
     public void queryByNameExample() {
         CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; queryResultFuture = client.execute(ProductTypeQuery.of().byName("t-shirt"));
-        CompletionStage&lt;List&lt;PlainEnumValue&gt;&gt; possibleValuesFuture = queryResultFuture.thenApply(
+        CompletionStage&lt;List&lt;EnumValue&gt;&gt; possibleValuesFuture = queryResultFuture.thenApply(
                 queryResult -&gt; extractPossibleEnumValuesForSize(queryResult));
     }
 
-    private static List&lt;PlainEnumValue&gt; extractPossibleEnumValuesForSize(PagedQueryResult&lt;ProductType&gt; pagedQueryResult) {
+    private static List&lt;EnumValue&gt; extractPossibleEnumValuesForSize(PagedQueryResult&lt;ProductType&gt; pagedQueryResult) {
         ProductType productType = pagedQueryResult.
                 head().
                 orElseThrow(MissingProductTypeException::new);

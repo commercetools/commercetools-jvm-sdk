@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangePlainEnumValueOrder.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">
@@ -128,7 +128,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     //add
     final String attributeName = "foostring";
     final AttributeDefinition foostring =
-            AttributeDefinitionBuilder.of(attributeName, LocalizedStrings.of(ENGLISH, "foo string"), TextType.of()).build();
+            AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), TextType.of()).build();
     final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
     final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
     assertThat(loadedDefinition.getAttributeType()).isEqualTo(TextType.of());
@@ -246,7 +246,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangePlainEnumValueOrder.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../../io/sphere/sdk/producttypes/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li>Next&nbsp;Class</li>
 </ul>
 <ul class="navList">

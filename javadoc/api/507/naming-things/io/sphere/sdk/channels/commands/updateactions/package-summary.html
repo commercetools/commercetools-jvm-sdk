@@ -101,7 +101,7 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/channels/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.channels.commands.updateactions">ChangeDescription</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
-    final LocalizedStrings newDescription = randomSlug();
+    final LocalizedString newDescription = randomSlug();
     final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
     assertThat(updatedChannel.getDescription()).isEqualTo(newDescription);
     return updatedChannel;
@@ -125,7 +125,7 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/channels/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.channels.commands.updateactions">ChangeName</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
-    final LocalizedStrings newName = randomSlug();
+    final LocalizedString newName = randomSlug();
     final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeName.of(newName)));
     assertThat(updatedChannel.getName()).isEqualTo(newName);
     return updatedChannel;

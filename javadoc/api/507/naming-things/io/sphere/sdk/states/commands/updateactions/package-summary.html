@@ -126,7 +126,7 @@
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/states/commands/updateactions/SetName.html" title="class in io.sphere.sdk.states.commands.updateactions">SetName</a></td>
 <td class="colLast">
 <div class="block"><div id="io-sphere-sdk-states-commands-StateUpdateCommandTest-setName--%s" class=code-example><pre><code class='java'>withUpdateableState(client(), state -&gt; {
-    final LocalizedStrings newName = randomSlug();
+    final LocalizedString newName = randomSlug();
 
     final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
     final State updatedState = execute(command);
@@ -147,7 +147,7 @@
         assertThat(updatedStateB.getTransitions()).isEqualTo(transitions);
 
         //check reference expansion
-        final State loadedStateB = execute(StateByIdFetch.of(stateB).withExpansionPaths(m -&gt; m.transitions()));
+        final State loadedStateB = execute(StateByIdGet.of(stateB).withExpansionPaths(m -&gt; m.transitions()));
         final Reference&lt;State&gt; stateReference = new LinkedList&lt;&gt;(loadedStateB.getTransitions()).getFirst();
         assertThat(stateReference.getObj()).isNotNull();
 
