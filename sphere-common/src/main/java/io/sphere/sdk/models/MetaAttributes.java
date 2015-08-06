@@ -5,22 +5,22 @@ import java.util.Locale;
 
 public interface MetaAttributes {
     @Nullable
-    LocalizedStrings getMetaTitle();
+    LocalizedString getMetaTitle();
 
     @Nullable
-    LocalizedStrings getMetaDescription();
+    LocalizedString getMetaDescription();
 
     @Nullable
-    LocalizedStrings getMetaKeywords();
+    LocalizedString getMetaKeywords();
 
-    static MetaAttributes metaAttributesOf(@Nullable final LocalizedStrings metaTitle, @Nullable final LocalizedStrings metaDescription, @Nullable final LocalizedStrings metaKeywords) {
+    static MetaAttributes metaAttributesOf(@Nullable final LocalizedString metaTitle, @Nullable final LocalizedString metaDescription, @Nullable final LocalizedString metaKeywords) {
         return new MetaAttributesDslImpl(metaTitle, metaDescription, metaKeywords);
     }
 
     static MetaAttributes metaAttributesOf(final Locale locale, final String metaTitle, final String metaDescription, final String metaKeywords) {
         return MetaAttributesDsl.of()
-                .withTitle(LocalizedStrings.of(locale, metaTitle))
-                .withDescription(LocalizedStrings.of(locale, metaDescription))
-                .withKeywords(LocalizedStrings.of(locale, metaKeywords));
+                .withTitle(LocalizedString.of(locale, metaTitle))
+                .withDescription(LocalizedString.of(locale, metaDescription))
+                .withKeywords(LocalizedString.of(locale, metaKeywords));
     }
 }

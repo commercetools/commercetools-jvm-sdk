@@ -1,7 +1,7 @@
 package io.sphere.sdk.customobjects.queries;
 
 import io.sphere.sdk.customobjects.CustomObject;
-import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
+import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 
@@ -9,7 +9,7 @@ import io.sphere.sdk.queries.StringQuerySortingModel;
  * Metamodel to explore for which fields can be queried in a {@link io.sphere.sdk.customobjects.CustomObject}.
  * @param <T> The type of the value of the custom object.
  */
-public class CustomObjectQueryModel<T> extends DefaultModelQueryModelImpl<CustomObject<T>> {
+public class CustomObjectQueryModel<T> extends ResourceQueryModelImpl<CustomObject<T>> {
 
     public static <T> CustomObjectQueryModel<T> of() {
         return new CustomObjectQueryModel<>(null, null);

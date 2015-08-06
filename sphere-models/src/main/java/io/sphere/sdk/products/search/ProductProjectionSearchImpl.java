@@ -11,13 +11,13 @@ import java.util.List;
 
 import static java.util.Collections.singletonList;
 
-final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductProjection, ProductProjectionSearch, ExperimentalProductProjectionSearchModel, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionSearch {
+final class ProductProjectionSearchImpl extends MetaModelSearchDslImpl<ProductProjection, ProductProjectionSearch, ProductProjectionSearchModel, ProductProjectionExpansionModel<ProductProjection>> implements ProductProjectionSearch {
 
     ProductProjectionSearchImpl(final ProductProjectionType productProjectionType){
-        super("/product-projections/search", ProductProjectionSearch.resultTypeReference(), ExperimentalProductProjectionSearchModel.of(), ProductProjectionExpansionModel.of(), ProductProjectionSearchImpl::new, additionalParametersOf(productProjectionType));
+        super("/product-projections/search", ProductProjectionSearch.resultTypeReference(), ProductProjectionSearchModel.of(), ProductProjectionExpansionModel.of(), ProductProjectionSearchImpl::new, additionalParametersOf(productProjectionType));
     }
 
-    private ProductProjectionSearchImpl(final MetaModelSearchDslBuilder<ProductProjection, ProductProjectionSearch, ExperimentalProductProjectionSearchModel, ProductProjectionExpansionModel<ProductProjection>> builder) {
+    private ProductProjectionSearchImpl(final MetaModelSearchDslBuilder<ProductProjection, ProductProjectionSearch, ProductProjectionSearchModel, ProductProjectionExpansionModel<ProductProjection>> builder) {
         super(builder);
     }
 

@@ -2,13 +2,13 @@ package io.sphere.sdk.taxcategories;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-class TaxCategoryImpl extends DefaultModelImpl<TaxCategory> implements TaxCategory {
+class TaxCategoryImpl extends ResourceImpl<TaxCategory> implements TaxCategory {
     private final String name;
     @Nullable
     private final String description;

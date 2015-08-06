@@ -11,7 +11,7 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.commands.CustomerSignInCommand;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.orders.commands.OrderFromCartCreateCommand;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
 import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
@@ -26,7 +26,6 @@ import org.assertj.core.api.Assertions;
 
 import javax.money.MonetaryAmount;
 import java.util.List;
-import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -70,7 +69,7 @@ public class OrderFixtures {
             final Cart cart = createCartWithShippingAddress(client);
             final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
             final String slug = "thing-slug";
-            final LocalizedStrings name = en("thing");
+            final LocalizedString name = en("thing");
             final long quantity = 5;
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
             final Cart cartWith5 = client.execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));

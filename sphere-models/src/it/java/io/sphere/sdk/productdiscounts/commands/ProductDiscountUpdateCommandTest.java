@@ -1,6 +1,6 @@
 package io.sphere.sdk.productdiscounts.commands;
 
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.productdiscounts.*;
 import io.sphere.sdk.productdiscounts.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
@@ -54,7 +54,7 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeName() throws Exception {
         withUpdateableProductDiscount(client(), discount -> {
-            final LocalizedStrings newName = randomSlug();
+            final LocalizedString newName = randomSlug();
 
             final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeName.of(newName)));
 
@@ -66,7 +66,7 @@ public class ProductDiscountUpdateCommandTest extends IntegrationTest {
     @Test
     public void setDescription() throws Exception {
         withUpdateableProductDiscount(client(), discount -> {
-            final LocalizedStrings newDescription = randomSlug();
+            final LocalizedString newDescription = randomSlug();
 
             final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, SetDescription.of(newDescription)));
 

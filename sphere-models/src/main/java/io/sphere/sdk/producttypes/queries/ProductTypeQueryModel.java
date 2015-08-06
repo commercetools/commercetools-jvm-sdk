@@ -1,11 +1,11 @@
 package io.sphere.sdk.producttypes.queries;
 
 import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
+import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 
-public final class ProductTypeQueryModel extends DefaultModelQueryModelImpl<ProductType> {
+public final class ProductTypeQueryModel extends ResourceQueryModelImpl<ProductType> {
 
     public static ProductTypeQueryModel of() {
         return new ProductTypeQueryModel(null, null);

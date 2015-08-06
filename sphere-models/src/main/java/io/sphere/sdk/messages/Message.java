@@ -3,11 +3,11 @@ package io.sphere.sdk.messages;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
 @JsonDeserialize(as = MessageImpl.class)
-public interface Message extends DefaultModel<Message> {
+public interface Message extends Resource<Message> {
     static String typeId(){
         return "message";
     }

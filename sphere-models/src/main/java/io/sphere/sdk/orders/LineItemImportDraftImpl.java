@@ -3,7 +3,7 @@ package io.sphere.sdk.orders;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -14,7 +14,7 @@ import java.util.Set;
 final class LineItemImportDraftImpl extends Base implements LineItemImportDraft {
     @Nullable
     private final String productId;
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     private final ProductVariantImportDraft variant;
     private final Price price;
     private final Long quantity;
@@ -25,7 +25,7 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
     @Nullable
     private final TaxRate taxRate;
 
-    public LineItemImportDraftImpl(final LocalizedStrings name, final String productId, final ProductVariantImportDraft variant, final Price price, final Long quantity, final Set<ItemState> state, final Reference<Channel> supplyChannel, final TaxRate taxRate) {
+    public LineItemImportDraftImpl(final LocalizedString name, final String productId, final ProductVariantImportDraft variant, final Price price, final Long quantity, final Set<ItemState> state, final Reference<Channel> supplyChannel, final TaxRate taxRate) {
         this.name = name;
         this.productId = productId;
         this.variant = variant;
@@ -37,7 +37,7 @@ final class LineItemImportDraftImpl extends Base implements LineItemImportDraft 
     }
 
     @Override
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 

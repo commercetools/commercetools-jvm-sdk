@@ -1,11 +1,11 @@
 package io.sphere.sdk.zones.queries;
 
-import io.sphere.sdk.queries.DefaultModelQueryModelImpl;
+import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 import io.sphere.sdk.zones.Zone;
 
-public class ZoneQueryModel extends DefaultModelQueryModelImpl<Zone> {
+public class ZoneQueryModel extends ResourceQueryModelImpl<Zone> {
     public static ZoneQueryModel of() {
         return new ZoneQueryModel(null, null);
     }

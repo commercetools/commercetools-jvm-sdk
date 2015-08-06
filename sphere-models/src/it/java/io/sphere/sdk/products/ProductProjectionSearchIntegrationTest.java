@@ -1,10 +1,10 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.attributes.*;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.products.attributes.*;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductQuery;
-import io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel;
+import io.sphere.sdk.products.search.ProductProjectionSearchModel;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.ProductType;
@@ -26,7 +26,7 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
-import static io.sphere.sdk.models.LocalizedStrings.ofEnglishLocale;
+import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
 import static io.sphere.sdk.search.FilterRange.atLeast;
 import static io.sphere.sdk.search.FilterRange.atMost;
@@ -86,8 +86,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         evilProduct2 = findBySku.apply(SKU_B).orElseGet(() -> createEvilTestProduct(evilProductType, EVIL_PRODUCT_TYPE_NAME + "bar", EVIL_CHARACTER_WORD, SKU_B));
     }
 
-    private ExperimentalProductProjectionSearchModel model() {
-        return ExperimentalProductProjectionSearchModel.of();
+    private ProductProjectionSearchModel model() {
+        return ProductProjectionSearchModel.of();
     }
 
     @Test
@@ -147,7 +147,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void responseContainsTermFacetsForAttributes() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_COLOR).faceted().byAllTerms();
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         final Predicate<TermStats<String>> isTermBlue = termStat -> termStat.getTerm().equals("blue") && termStat.getCount() > 0;
@@ -156,7 +156,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void resultsAndFacetsAreFiltered() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_COLOR).faceted().byAllTerms();
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
         final FilterExpression<ProductProjection> filterExpr = model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).filtered().by(valueOf(36));
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusFacets(facetExpr)
@@ -169,7 +169,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void onlyResultsAreFiltered() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_COLOR).faceted().byAllTerms();
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusFacets(facetExpr)
                 .plusResultFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).filtered().by(valueOf(36)));
@@ -181,7 +181,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void onlyFacetsAreFiltered() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_COLOR).faceted().byAllTerms();
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusFacets(facetExpr)
                 .plusFacetFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).filtered().by(valueOf(36)));
@@ -193,7 +193,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void filtersByTerm() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofText(ATTR_NAME_COLOR)
+                .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR)
                         .filtered().by("red"));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product2.getId());
@@ -237,7 +237,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void resultsArePaginated() throws Exception {
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofText(ATTR_NAME_COLOR).filtered().by(asList("blue", "red")))
+                .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().by(asList("blue", "red")))
                 .withSort(model -> model().name().locale(ENGLISH).sorted(SimpleSearchSortDirection.DESC))
                 .withOffset(1L)
                 .withLimit(1L));
@@ -246,7 +246,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void filterQueryFiltersBeforeFacetsAreCalculated() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_COLOR).faceted().byAllTerms();
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusFacets(facetExpr)
                 .plusQueryFilters(model -> model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).filtered().by(valueOf(36)));
@@ -272,7 +272,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void termFacetsAreParsed() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_COLOR).faceted().byAllTerms();
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         final TermFacetResult<String> termFacetResult = result.getTermFacetResult(facetExpr);
@@ -299,7 +299,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void filteredFacetsAreParsed() throws Exception {
-        final FilteredFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_COLOR).faceted().byTerm("blue");
+        final FilteredFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byTerm("blue");
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(result.getFilteredFacetResult(facetExpr).getCount()).isEqualTo(2);
@@ -308,7 +308,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void termFacetsSupportsAlias() throws Exception {
         final String alias = "my-facet";
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_COLOR).faceted().withAlias(alias).byAllTerms();
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().withAlias(alias).byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         final TermFacetResult<String> termFacetResult = result.getTermFacetResult(facetExpr);
@@ -336,7 +336,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void filteredFacetsSupportsAlias() throws Exception {
         final String alias = "my-facet";
-        final FilteredFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_COLOR).faceted().withAlias(alias).byTerm("blue");
+        final FilteredFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().withAlias(alias).byTerm("blue");
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(facetExpr.resultPath()).isEqualTo(alias);
@@ -364,7 +364,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void unicodeExampleForFilter() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofText(ATTR_NAME_EVIL).filtered().by(EVIL_CHARACTER_WORD));
+                .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_EVIL).filtered().by(EVIL_CHARACTER_WORD));
         final PagedSearchResult<ProductProjection> result = executeEvilSearch(search);
         assertThat(result.getTotal()).isEqualTo(1);
     }
@@ -386,7 +386,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     private static ProductType createProductType() {
-        final AttributeDefinition colorAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_COLOR, ofEnglishLocale(ATTR_NAME_COLOR), TextType.of()).build();
+        final AttributeDefinition colorAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_COLOR, ofEnglishLocale(ATTR_NAME_COLOR), StringType.of()).build();
         final AttributeDefinition sizeAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_SIZE, ofEnglishLocale(ATTR_NAME_SIZE), NumberType.of()).build();
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(PRODUCT_TYPE_NAME, "", asList(colorAttrDef, sizeAttrDef));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
@@ -394,7 +394,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     private static ProductType createEvilProductType() {
-        final AttributeDefinition evilAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_EVIL, ofEnglishLocale(ATTR_NAME_EVIL), TextType.of()).build();
+        final AttributeDefinition evilAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_EVIL, ofEnglishLocale(ATTR_NAME_EVIL), StringType.of()).build();
         final ProductTypeDraft evilProductTypeDraft = ProductTypeDraft.of(EVIL_PRODUCT_TYPE_NAME, "", asList(evilAttrDef));
         final ProductTypeCreateCommand evilProductTypeCreateCommand = ProductTypeCreateCommand.of(evilProductTypeDraft);
         return execute(evilProductTypeCreateCommand);
@@ -402,7 +402,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     private static Product createTestProduct(final ProductType productType, final String germanName, final String englishName,
                                              final String color, final int size1, final int size2, final String sku) {
-        final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName, ENGLISH, englishName);
+        final LocalizedString name = LocalizedString.of(GERMAN, germanName, ENGLISH, englishName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .attributes(AttributeDraft.of(ATTR_NAME_SIZE, size1), AttributeDraft.of(ATTR_NAME_COLOR, color))
                 .price(Price.of(new BigDecimal("23.45"), EUR))
@@ -418,7 +418,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     private static Product createEvilTestProduct(final ProductType productType, final String germanName, final String evilValue, final String sku) {
-        final LocalizedStrings name = LocalizedStrings.of(GERMAN, germanName);
+        final LocalizedString name = LocalizedString.of(GERMAN, germanName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
                 .attributes(AttributeDraft.of(ATTR_NAME_EVIL, evilValue))
                 .sku(sku)

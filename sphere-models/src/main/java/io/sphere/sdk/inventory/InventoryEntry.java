@@ -3,14 +3,14 @@ package io.sphere.sdk.inventory;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 @JsonDeserialize(as = InventoryEntryImpl.class)
-public interface InventoryEntry extends DefaultModel<InventoryEntry> {
+public interface InventoryEntry extends Resource<InventoryEntry> {
     Long getAvailableQuantity();
 
     @Nullable

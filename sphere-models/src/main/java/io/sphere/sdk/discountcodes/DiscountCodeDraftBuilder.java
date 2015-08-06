@@ -1,7 +1,7 @@
 package io.sphere.sdk.discountcodes;
 
 import io.sphere.sdk.cartdiscounts.CartDiscount;
-import io.sphere.sdk.cartdiscounts.CartPredicate;
+import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
 import io.sphere.sdk.models.*;
 
 import javax.annotation.Nullable;
@@ -11,13 +11,13 @@ import java.util.Optional;
 
 public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCodeDraft> {
     @Nullable
-    private LocalizedStrings name;
+    private LocalizedString name;
     @Nullable
-    private LocalizedStrings description;
+    private LocalizedString description;
     private String code;
     private List<Reference<CartDiscount>> cartDiscounts;
     @Nullable
-    private CartPredicate cartPredicate;
+    private CartDiscountPredicate cartPredicate;
     private Boolean isActive = true;
     @Nullable
     private Long maxApplications;
@@ -33,7 +33,7 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
         return of(template.getCode(), template.getCartDiscounts())
                 .name(template.getName())
                 .description(template.getDescription())
-                .cartPredicate(Optional.ofNullable(template.getCartPredicate()).map(CartPredicate::of).orElse(null))
+                .cartPredicate(Optional.ofNullable(template.getCartPredicate()).map(CartDiscountPredicate::of).orElse(null))
                 .isActive(template.isActive())
                 .maxApplications(template.getMaxApplications())
                 .maxApplicationsPerCustomer(template.getMaxApplicationsPerCustomer());
@@ -47,12 +47,12 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
         return new DiscountCodeDraftBuilder(code, cartDiscounts);
     }
 
-    public DiscountCodeDraftBuilder name(@Nullable final LocalizedStrings name) {
+    public DiscountCodeDraftBuilder name(@Nullable final LocalizedString name) {
         this.name = name;
         return this;
     }
 
-    public DiscountCodeDraftBuilder description(@Nullable final LocalizedStrings description) {
+    public DiscountCodeDraftBuilder description(@Nullable final LocalizedString description) {
         this.description = description;
         return this;
     }
@@ -67,7 +67,7 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
         return this;
     }
 
-    public DiscountCodeDraftBuilder cartPredicate(@Nullable final CartPredicate cartPredicate) {
+    public DiscountCodeDraftBuilder cartPredicate(@Nullable final CartDiscountPredicate cartPredicate) {
         this.cartPredicate = cartPredicate;
         return this;
     }
@@ -89,6 +89,6 @@ public class DiscountCodeDraftBuilder extends Base implements Builder<DiscountCo
 
     @Override
     public DiscountCodeDraft build() {
-        return new DiscountCodeDraft(cartDiscounts, name, description, code, Optional.ofNullable(cartPredicate).map(CartPredicate::toSphereCartPredicate).orElse(null), isActive, maxApplications, maxApplicationsPerCustomer);
+        return new DiscountCodeDraft(cartDiscounts, name, description, code, Optional.ofNullable(cartPredicate).map(CartDiscountPredicate::toSphereCartPredicate).orElse(null), isActive, maxApplications, maxApplicationsPerCustomer);
     }
 }

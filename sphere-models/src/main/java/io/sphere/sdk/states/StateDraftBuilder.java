@@ -2,7 +2,7 @@ package io.sphere.sdk.states;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -12,9 +12,9 @@ public final class StateDraftBuilder extends Base implements Builder<StateDraft>
     private final String key;
     private final StateType type;
     @Nullable
-    private LocalizedStrings name;
+    private LocalizedString name;
     @Nullable
-    private LocalizedStrings description;
+    private LocalizedString description;
     @Nullable
     private Boolean initial;
     @Nullable
@@ -37,12 +37,12 @@ public final class StateDraftBuilder extends Base implements Builder<StateDraft>
                 .initial(template.isInitial());
     }
 
-    public StateDraftBuilder name(@Nullable final LocalizedStrings name) {
+    public StateDraftBuilder name(@Nullable final LocalizedString name) {
         this.name = name;
         return this;
     }
 
-    public StateDraftBuilder description(@Nullable final LocalizedStrings description) {
+    public StateDraftBuilder description(@Nullable final LocalizedString description) {
         this.description = description;
         return this;
     }

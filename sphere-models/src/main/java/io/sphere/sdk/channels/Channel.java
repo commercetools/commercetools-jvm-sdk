@@ -2,8 +2,8 @@ package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.DefaultModel;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -19,16 +19,16 @@ import java.util.Set;
     </ul>
  */
 @JsonDeserialize(as = ChannelImpl.class)
-public interface Channel extends DefaultModel<Channel> {
+public interface Channel extends Resource<Channel> {
     String getKey();
 
     Set<ChannelRole> getRoles();
 
     @Nullable
-    LocalizedStrings getName();
+    LocalizedString getName();
 
     @Nullable
-    LocalizedStrings getDescription();
+    LocalizedString getDescription();
 
 
     default Reference<Channel> toReference() {

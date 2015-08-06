@@ -1,6 +1,6 @@
 package io.sphere.sdk.orders;
 
-import io.sphere.sdk.attributes.AttributeImportDraft;
+import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.products.Image;
 import io.sphere.sdk.products.Price;
 

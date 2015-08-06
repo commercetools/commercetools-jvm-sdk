@@ -7,7 +7,7 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.shippingmethods.ZoneRate;
 import io.sphere.sdk.shippingmethods.commands.updateactions.*;
-import io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdFetch;
+import io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdGet;
 import io.sphere.sdk.shippingmethods.queries.ShippingMethodQuery;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -108,7 +108,7 @@ public class ShippingMethodUpdateCommandTest extends IntegrationTest {
                 assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
 
                 //check reference expansion
-                final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdFetch.of(shippingMethod)
+                final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdGet.of(shippingMethod)
                                 .plusExpansionPaths(m -> m.zoneRates().zone())
                 );
                 assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();

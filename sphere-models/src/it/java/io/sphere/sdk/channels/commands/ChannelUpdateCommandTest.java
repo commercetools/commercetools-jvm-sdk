@@ -3,7 +3,7 @@ package io.sphere.sdk.channels.commands;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelRole;
 import io.sphere.sdk.channels.commands.updateactions.*;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -29,7 +29,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeName() throws Exception {
         withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
-            final LocalizedStrings newName = randomSlug();
+            final LocalizedString newName = randomSlug();
             final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeName.of(newName)));
             assertThat(updatedChannel.getName()).isEqualTo(newName);
             return updatedChannel;
@@ -39,7 +39,7 @@ public class ChannelUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeDescription() throws Exception {
         withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
-            final LocalizedStrings newDescription = randomSlug();
+            final LocalizedString newDescription = randomSlug();
             final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
             assertThat(updatedChannel.getDescription()).isEqualTo(newDescription);
             return updatedChannel;

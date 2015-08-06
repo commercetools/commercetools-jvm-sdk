@@ -2,7 +2,7 @@ package io.sphere.sdk.channels;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -12,9 +12,9 @@ public class ChannelDraftBuilder extends Base implements Builder<ChannelDraft> {
     private final String key;
     private Set<ChannelRole> roles = Collections.emptySet();
     @Nullable
-    private LocalizedStrings name;
+    private LocalizedString name;
     @Nullable
-    private LocalizedStrings description;
+    private LocalizedString description;
 
     private ChannelDraftBuilder(final String key) {
         this.key = key;
@@ -31,12 +31,12 @@ public class ChannelDraftBuilder extends Base implements Builder<ChannelDraft> {
                 .description(template.getDescription());
     }
 
-    public ChannelDraftBuilder description(@Nullable final LocalizedStrings description) {
+    public ChannelDraftBuilder description(@Nullable final LocalizedString description) {
         this.description = description;
         return this;
     }
     
-    public ChannelDraftBuilder name(@Nullable final LocalizedStrings name) {
+    public ChannelDraftBuilder name(@Nullable final LocalizedString name) {
         this.name = name;
         return this;
     }

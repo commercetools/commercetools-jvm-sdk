@@ -2,7 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -12,7 +12,7 @@ import javax.money.MonetaryAmount;
 import java.util.Set;
 
 final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineItem {
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     private final MonetaryAmount money;
     private final String slug;
     private final Reference<TaxCategory> taxCategory;
@@ -20,7 +20,7 @@ final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineIte
     private final TaxRate taxRate;
 
     @JsonCreator
-    CustomLineItemImpl(final String id, final LocalizedStrings name, final MonetaryAmount money,
+    CustomLineItemImpl(final String id, final LocalizedString name, final MonetaryAmount money,
                        final String slug, final Long quantity, final Set<ItemState> state,
                        final Reference<TaxCategory> taxCategory, final TaxRate taxRate,
                        @Nullable final DiscountedLineItemPrice discountedPrice) {
@@ -33,7 +33,7 @@ final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineIte
     }
 
     @Override
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 

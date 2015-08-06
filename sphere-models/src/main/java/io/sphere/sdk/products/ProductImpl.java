@@ -4,14 +4,14 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 
 import java.time.ZonedDateTime;
 import java.util.Optional;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
 
-class ProductImpl extends DefaultModelImpl<Product> implements Product {
+class ProductImpl extends ResourceImpl<Product> implements Product {
     private final Reference<ProductType> productType;
     private final ProductCatalogData masterData;
     @Nullable

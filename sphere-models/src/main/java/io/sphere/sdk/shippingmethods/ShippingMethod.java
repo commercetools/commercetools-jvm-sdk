@@ -2,7 +2,7 @@ package io.sphere.sdk.shippingmethods;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.sphere.sdk.models.DefaultModel;
+import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -16,7 +16,7 @@ import static java.util.stream.Collectors.toList;
 
 
 @JsonDeserialize(as = ShippingMethodImpl.class)
-public interface ShippingMethod extends DefaultModel<ShippingMethod> {
+public interface ShippingMethod extends Resource<ShippingMethod> {
     String getName();
 
     @Nullable

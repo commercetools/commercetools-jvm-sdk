@@ -1,9 +1,9 @@
 package io.sphere.sdk.producttypes;
 
-import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.products.attributes.*;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
@@ -37,8 +37,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public final class ProductTypeAttributesTest extends IntegrationTest {
     public static final List<LocalizedEnumValue> LOCALIZED_ENUM_VALUES = asList(LocalizedEnumValue.of("key1", en("value1")), LocalizedEnumValue.of("key2", en("value2")));
     public static final TextInputHint TEXT_INPUT_HINT = TextInputHint.MULTI_LINE;
-    public static final LocalizedStrings LABEL = en("label");
-    public static final List<PlainEnumValue> PLAIN_ENUM_VALUES = asList(PlainEnumValue.of("key1", "value1"), PlainEnumValue.of("key2", "value2"));
+    public static final LocalizedString LABEL = en("label");
+    public static final List<EnumValue> PLAIN_ENUM_VALUES = asList(EnumValue.of("key1", "value1"), EnumValue.of("key2", "value2"));
     public static final ProductTypeDraft tshirt = new TShirtProductTypeDraftSupplier("t-shirt").get();
     public static final String distractorName = "distractor";
 
@@ -51,12 +51,12 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     @Test
     public void nestedAttribute() throws Exception {
         final NamedAttributeAccess<Double> sizeAttr = AttributeAccess.ofDouble().ofName("size-nested");
-        final NamedAttributeAccess<String> brandAttr = AttributeAccess.ofText().ofName("brand-nested");
+        final NamedAttributeAccess<String> brandAttr = AttributeAccess.ofString().ofName("brand-nested");
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of("test-sub-attribute", "nested attribute test",
                 asList(
-                        AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
-                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedStrings.of(Locale.ENGLISH, "Brand"), TextType.of()).build()));
+                        AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
+                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Brand"), StringType.of()).build()));
 
         withProductType(client(), () -> productTypeDraft, nestedProductType -> {
             final AttributeContainer adidas = AttributeContainer.of(
@@ -73,21 +73,21 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void textAttribute() throws Exception {
-        testSingleAndSet(AttributeAccess.ofText(), AttributeAccess.ofTextSet(), asSet("hello", "world"),
-                TextType.of(), AttributeDefinitionBuilder.of("text-attribute", LABEL, TextType.of()).inputHint(TEXT_INPUT_HINT).build());
+        testSingleAndSet(AttributeAccess.ofString(), AttributeAccess.ofStringSet(), asSet("hello", "world"),
+                StringType.of(), AttributeDefinitionBuilder.of("text-attribute", LABEL, StringType.of()).inputHint(TEXT_INPUT_HINT).build());
     }
 
     @Test
-    public void localizedStringsAttribute() throws Exception {
-        testSingleAndSet(AttributeAccess.ofLocalizedStrings(), AttributeAccess.ofLocalizedStringsSet(),
-                asSet(LocalizedStrings.of(ENGLISH, "hello"), LocalizedStrings.of(ENGLISH, "world")),
-                LocalizedStringsType.of(),
-                AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringsType.of()).inputHint(TEXT_INPUT_HINT).build());
+    public void localizedStringAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofLocalizedString(), AttributeAccess.ofLocalizedStringSet(),
+                asSet(LocalizedString.of(ENGLISH, "hello"), LocalizedString.of(ENGLISH, "world")),
+                LocalizedStringType.of(),
+                AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringType.of()).inputHint(TEXT_INPUT_HINT).build());
     }
 
     @Test
     public void enumAttribute() throws Exception {
-        testSingleAndSet(AttributeAccess.ofPlainEnumValue(), AttributeAccess.ofPlainEnumValueSet(),
+        testSingleAndSet(AttributeAccess.ofEnumValue(), AttributeAccess.ofEnumValueSet(),
                 new HashSet<>(PLAIN_ENUM_VALUES),
                 EnumType.of(PLAIN_ENUM_VALUES),
                 AttributeDefinitionBuilder.of("enum-attribute", LABEL, EnumType.of(PLAIN_ENUM_VALUES)).build());
@@ -189,11 +189,11 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
         withTShirtProductType(type -> {
             final ProductType productType = execute(ProductTypeQuery.of().byName("t-shirt")).head().get();
             final Optional<AttributeDefinition> sizeAttribute = productType.findAttribute("size");
-            final List<PlainEnumValue> possibleSizeValues = sizeAttribute.
+            final List<EnumValue> possibleSizeValues = sizeAttribute.
                     map(attrib -> ((EnumType) attrib.getAttributeType()).getValues()).
-                    orElse(Collections.<PlainEnumValue>emptyList());
-            final List<PlainEnumValue> expected =
-                    asList(PlainEnumValue.of("S", "S"), PlainEnumValue.of("M", "M"), PlainEnumValue.of("X", "X"));
+                    orElse(Collections.<EnumValue>emptyList());
+            final List<EnumValue> expected =
+                    asList(EnumValue.of("S", "S"), EnumValue.of("M", "M"), EnumValue.of("X", "X"));
             assertThat(possibleSizeValues).isEqualTo(expected);
         });
     }
@@ -213,7 +213,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void createTextAttribute() throws Exception {
-        executeTest(TextType.class, AttributeDefinitionBuilder.of("text-attribute", LABEL, TextType.of()).
+        executeTest(StringType.class, AttributeDefinitionBuilder.of("text-attribute", LABEL, StringType.of()).
                 inputHint(TEXT_INPUT_HINT).
                 attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).
@@ -227,8 +227,8 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     @Test
-    public void createLocalizedStringsAttribute() throws Exception {
-        executeTest(LocalizedStringsType.class, AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringsType.of()).
+    public void createLocalizedStringAttribute() throws Exception {
+        executeTest(LocalizedStringType.class, AttributeDefinitionBuilder.of("localized-text-attribute", LABEL, LocalizedStringType.of()).
                 inputHint(TEXT_INPUT_HINT).
                 attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).
@@ -308,7 +308,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
         final NamedAttributeAccess<X> namedAttributeAccess = access.ofName(attributeName);
         final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of().attributes(namedAttributeAccess.draftOf(exampleValue)).build();
-        final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedStrings.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
+        final ProductDraft productDraft = ProductDraftBuilder.of(productType, LocalizedString.of(ENGLISH, "product to test attributes"), SphereTestUtils.randomSlug(), masterVariant).build();
         final Product product = execute(ProductCreateCommand.of(productDraft));
         final X actualAttributeValue = product.getMasterData().getStaged().getMasterVariant().findAttribute(namedAttributeAccess).get();
 

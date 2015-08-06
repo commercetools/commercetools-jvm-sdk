@@ -4,7 +4,7 @@ import io.sphere.sdk.queries.*;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
-public class ShippingMethodQueryModel extends DefaultModelQueryModelImpl<ShippingMethod> {
+public class ShippingMethodQueryModel extends ResourceQueryModelImpl<ShippingMethod> {
     public static ShippingMethodQueryModel of() {
         return new ShippingMethodQueryModel(null, null);
     }

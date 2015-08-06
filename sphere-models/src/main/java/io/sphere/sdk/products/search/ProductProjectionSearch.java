@@ -2,7 +2,7 @@ package io.sphere.sdk.products.search;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.models.LocalizedStringsEntry;
+import io.sphere.sdk.models.LocalizedStringEntry;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.expansion.ProductProjectionExpansionModel;
@@ -17,7 +17,7 @@ import java.util.function.Function;
  *
  * Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/ProductSearchDocumentation.html">Product Search API</a> for more information.
  */
-public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProjection, ProductProjectionSearch, ExperimentalProductProjectionSearchModel, ProductProjectionExpansionModel<ProductProjection>> {
+public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProjection, ProductProjectionSearch, ProductProjectionSearchModel, ProductProjectionExpansionModel<ProductProjection>> {
 
     static TypeReference<PagedSearchResult<ProductProjection>> resultTypeReference() {
         return new TypeReference<PagedSearchResult<ProductProjection>>(){
@@ -28,20 +28,34 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
         };
     }
 
+    /**
+     * Creates a search request object for the staged data of a product.
+     * @return search request for staged data
+     */
     static ProductProjectionSearch ofStaged() {
         return of(ProductProjectionType.STAGED);
     }
 
+    /**
+     * Creates a search request object for the current data of a product.
+     * @return search request for current data
+     */
     static ProductProjectionSearch ofCurrent() {
         return of(ProductProjectionType.CURRENT);
     }
 
+    /**
+     * Creates a search request object with the product projection type specified by {@code productProjectionType}.
+     * @see #ofStaged()
+     * @see #ofCurrent()
+     * @return search request for current data
+     */
     static ProductProjectionSearch of(final ProductProjectionType productProjectionType) {
         return new ProductProjectionSearchImpl(productProjectionType);
     }
 
     @Override
-    ProductProjectionSearch withText(final LocalizedStringsEntry text);
+    ProductProjectionSearch withText(final LocalizedStringEntry text);
 
     @Override
     ProductProjectionSearch withText(final Locale locale, final String text);
@@ -53,7 +67,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withFacets(final FacetExpression<ProductProjection> facet);
 
     @Override
-    ProductProjectionSearch withFacets(final Function<ExperimentalProductProjectionSearchModel, FacetExpression<ProductProjection>> m);
+    ProductProjectionSearch withFacets(final Function<ProductProjectionSearchModel, FacetExpression<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch plusFacets(final List<FacetExpression<ProductProjection>> facets);
@@ -62,7 +76,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch plusFacets(final FacetExpression<ProductProjection> facet);
 
     @Override
-    ProductProjectionSearch plusFacets(final Function<ExperimentalProductProjectionSearchModel, FacetExpression<ProductProjection>> m);
+    ProductProjectionSearch plusFacets(final Function<ProductProjectionSearchModel, FacetExpression<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch withResultFilters(final List<FilterExpression<ProductProjection>> resultFilters);
@@ -71,7 +85,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withResultFilters(final FilterExpression<ProductProjection> resultFilter);
 
     @Override
-    ProductProjectionSearch withResultFilters(final Function<ExperimentalProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch withResultFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch plusResultFilters(final List<FilterExpression<ProductProjection>> resultFilters);
@@ -80,7 +94,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch plusResultFilters(final FilterExpression<ProductProjection> resultFilter);
 
     @Override
-    ProductProjectionSearch plusResultFilters(final Function<ExperimentalProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch plusResultFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch withQueryFilters(final List<FilterExpression<ProductProjection>> queryFilters);
@@ -89,7 +103,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withQueryFilters(final FilterExpression<ProductProjection> queryFilter);
 
     @Override
-    ProductProjectionSearch withQueryFilters(final Function<ExperimentalProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch withQueryFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch plusQueryFilters(final List<FilterExpression<ProductProjection>> queryFilters);
@@ -98,7 +112,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch plusQueryFilters(final FilterExpression<ProductProjection> queryFilter);
 
     @Override
-    ProductProjectionSearch plusQueryFilters(final Function<ExperimentalProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch plusQueryFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch withFacetFilters(final List<FilterExpression<ProductProjection>> facetFilters);
@@ -107,7 +121,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withFacetFilters(final FilterExpression<ProductProjection> facetFilter);
 
     @Override
-    ProductProjectionSearch withFacetFilters(final Function<ExperimentalProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch withFacetFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch plusFacetFilters(final List<FilterExpression<ProductProjection>> facetFilters);
@@ -116,13 +130,13 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch plusFacetFilters(final FilterExpression<ProductProjection> facetFilter);
 
     @Override
-    ProductProjectionSearch plusFacetFilters(final Function<ExperimentalProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch plusFacetFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch withSort(final SearchSort<ProductProjection> sort);
 
     @Override
-    ProductProjectionSearch withSort(final Function<ExperimentalProductProjectionSearchModel, SearchSort<ProductProjection>> m);
+    ProductProjectionSearch withSort(final Function<ProductProjectionSearchModel, SearchSort<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch withLimit(final long limit);

@@ -1,7 +1,7 @@
 package io.sphere.sdk.states;
 
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.states.commands.StateCreateCommand;
 import io.sphere.sdk.states.commands.StateDeleteCommand;
@@ -32,8 +32,8 @@ public class StateFixtures {
 
     private static StateDraft createStateDraft(final String key) {
         return StateDraft.of(key, StateType.LINE_ITEM_STATE)
-                .withDescription(LocalizedStrings.of(ENGLISH, "description"))
-                .withName(LocalizedStrings.of(ENGLISH, "name"))
+                .withDescription(LocalizedString.of(ENGLISH, "description"))
+                .withName(LocalizedString.of(ENGLISH, "name"))
                 .withInitial(Boolean.TRUE);
     }
 

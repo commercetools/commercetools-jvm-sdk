@@ -1,11 +1,11 @@
 package io.sphere.sdk.customergroups;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 
 import java.time.ZonedDateTime;
 
-final class CustomerGroupImpl extends DefaultModelImpl<CustomerGroup> implements CustomerGroup {
+final class CustomerGroupImpl extends ResourceImpl<CustomerGroup> implements CustomerGroup {
     private final String name;
 
     @JsonCreator

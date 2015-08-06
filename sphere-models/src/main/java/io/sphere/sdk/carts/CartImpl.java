@@ -5,7 +5,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
@@ -13,7 +13,7 @@ import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-class CartImpl extends DefaultModelImpl<Cart> implements Cart {
+class CartImpl extends ResourceImpl<Cart> implements Cart {
     @Nullable
     private final String customerId;
     @Nullable

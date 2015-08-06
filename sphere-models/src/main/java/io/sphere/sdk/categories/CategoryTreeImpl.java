@@ -2,7 +2,7 @@ package io.sphere.sdk.categories;
 
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.models.LocalizedStringsEntry;
+import io.sphere.sdk.models.LocalizedStringEntry;
 
 import java.util.*;
 
@@ -12,13 +12,13 @@ import static io.sphere.sdk.utils.ListUtils.*;
 class CategoryTreeImpl extends Base implements CategoryTree {
     private final List<Category> roots;
     private final List<Category> allAsFlatList;
-    final Map<LocalizedStringsEntry, Category> categoriesByLocaleAndSlug;
+    final Map<LocalizedStringEntry, Category> categoriesByLocaleAndSlug;
     final Map<String, Category> categoriesById;
     private final Map<String, List<Category>> childrenByParentId;
 
     CategoryTreeImpl(final List<Category> roots,
                      final List<Category> allAsFlatList,
-                     final Map<LocalizedStringsEntry, Category> categoriesByLocaleAndSlug,
+                     final Map<LocalizedStringEntry, Category> categoriesByLocaleAndSlug,
                      final Map<String, Category> categoriesById,
                      final Map<String, List<Category>> childrenByParentId) {
         this.childrenByParentId = childrenByParentId;
@@ -47,7 +47,7 @@ class CategoryTreeImpl extends Base implements CategoryTree {
 
     @Override
     public Optional<Category> findBySlug(final Locale locale, final String slug) {
-        return Optional.ofNullable(categoriesByLocaleAndSlug.get(LocalizedStringsEntry.of(locale, slug)));
+        return Optional.ofNullable(categoriesByLocaleAndSlug.get(LocalizedStringEntry.of(locale, slug)));
     }
 
     @Override

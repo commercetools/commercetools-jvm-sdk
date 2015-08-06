@@ -5,7 +5,7 @@ import io.sphere.sdk.http.HttpQueryParameter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedStringsEntry;
+import io.sphere.sdk.models.LocalizedStringEntry;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -23,7 +23,7 @@ import static java.util.Collections.emptyList;
 public class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, E>, S, E> extends Base implements Builder<C> {
 
     @Nullable
-    protected LocalizedStringsEntry text;
+    protected LocalizedStringEntry text;
     protected List<FacetExpression<T>> facets = emptyList();
     protected List<FilterExpression<T>> resultFilters = emptyList();
     protected List<FilterExpression<T>> queryFilters = emptyList();
@@ -64,7 +64,7 @@ public class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, 
         additionalQueryParameters = template.additionalQueryParameters();
     }
 
-    public MetaModelSearchDslBuilder<T, C, S, E> text(@Nullable final LocalizedStringsEntry text) {
+    public MetaModelSearchDslBuilder<T, C, S, E> text(@Nullable final LocalizedStringEntry text) {
         this.text = text;
         return this;
     }

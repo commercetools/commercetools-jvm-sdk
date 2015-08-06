@@ -9,36 +9,36 @@ import java.util.Collections;
 import java.util.Set;
 
 abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDraftBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
-    private final LocalizedStrings name;
-    private final LocalizedStrings slug;
-    private LocalizedStrings description;
-    private LocalizedStrings metaTitle;
-    private LocalizedStrings metaDescription;
-    private LocalizedStrings metaKeywords;
+    private final LocalizedString name;
+    private final LocalizedString slug;
+    private LocalizedString description;
+    private LocalizedString metaTitle;
+    private LocalizedString metaDescription;
+    private LocalizedString metaKeywords;
     private Set<Reference<Category>> categories = Collections.emptySet();
     private SearchKeywords searchKeywords = SearchKeywords.of();
 
-    protected ProductDataProductDraftBuilderBase(final LocalizedStrings name, final LocalizedStrings slug) {
+    protected ProductDataProductDraftBuilderBase(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
         this.slug = slug;
     }
 
-    public T description(@Nullable final LocalizedStrings description) {
+    public T description(@Nullable final LocalizedString description) {
         this.description = description;
         return getThis();
     }
 
-    public T metaTitle(@Nullable final LocalizedStrings metaTitle) {
+    public T metaTitle(@Nullable final LocalizedString metaTitle) {
         this.metaTitle = metaTitle;
         return getThis();
     }
 
-    public T metaDescription(@Nullable final LocalizedStrings metaDescription) {
+    public T metaDescription(@Nullable final LocalizedString metaDescription) {
         this.metaDescription = metaDescription;
         return getThis();
     }
 
-    public T metaKeywords(@Nullable final LocalizedStrings metaKeywords) {
+    public T metaKeywords(@Nullable final LocalizedString metaKeywords) {
         this.metaKeywords = metaKeywords;
         return getThis();
     }
@@ -55,31 +55,31 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
         return getThis();
     }
 
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
-    public LocalizedStrings getSlug() {
+    public LocalizedString getSlug() {
         return slug;
     }
 
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
 
     @Nullable
-    public LocalizedStrings getMetaTitle() {
+    public LocalizedString getMetaTitle() {
         return metaTitle;
     }
 
     @Nullable
-    public LocalizedStrings getMetaDescription() {
+    public LocalizedString getMetaDescription() {
         return metaDescription;
     }
 
     @Nullable
-    public LocalizedStrings getMetaKeywords() {
+    public LocalizedString getMetaKeywords() {
         return metaKeywords;
     }
 

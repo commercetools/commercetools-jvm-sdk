@@ -1,6 +1,6 @@
 package io.sphere.sdk.producttypes.commands.updateactions;
 
-import io.sphere.sdk.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.producttypes.ProductType;
 

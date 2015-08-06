@@ -2,7 +2,7 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.search.SearchKeywords;
 
@@ -13,29 +13,29 @@ import java.util.Set;
 @JsonDeserialize(as=ProductDataImpl.class)
 public interface ProductData extends ProductDataLike {
     @Override
-    LocalizedStrings getName();
+    LocalizedString getName();
 
     @Override
     Set<Reference<Category>> getCategories();
 
     @Override
     @Nullable
-    LocalizedStrings getDescription();
+    LocalizedString getDescription();
 
     @Override
-    LocalizedStrings getSlug();
-
-    @Nullable
-    @Override
-    LocalizedStrings getMetaTitle();
+    LocalizedString getSlug();
 
     @Nullable
     @Override
-    LocalizedStrings getMetaDescription();
+    LocalizedString getMetaTitle();
 
     @Nullable
     @Override
-    LocalizedStrings getMetaKeywords();
+    LocalizedString getMetaDescription();
+
+    @Nullable
+    @Override
+    LocalizedString getMetaKeywords();
 
     @Override
     ProductVariant getMasterVariant();

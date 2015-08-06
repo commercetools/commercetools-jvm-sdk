@@ -1,6 +1,6 @@
 package io.sphere.sdk.search;
 
-import io.sphere.sdk.models.LocalizedStringsEntry;
+import io.sphere.sdk.models.LocalizedStringEntry;
 
 import java.util.List;
 import java.util.Locale;
@@ -12,7 +12,7 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T>
      * @param text the new search text
      * @return an EntitySearch with text
      */
-    C withText(final LocalizedStringsEntry text);
+    C withText(final LocalizedStringEntry text);
 
     C withText(final Locale locale, final String text);
 

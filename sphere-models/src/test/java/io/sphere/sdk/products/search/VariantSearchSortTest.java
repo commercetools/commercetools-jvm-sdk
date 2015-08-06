@@ -30,10 +30,10 @@ public class VariantSearchSortTest {
     }
 
     private StringSearchModel<ProductProjection, VariantSearchSortDirection> attributeModel() {
-        return searchModel().allVariants().attribute().ofText("size");
+        return searchModel().allVariants().attribute().ofString("size");
     }
 
-    private ExperimentalProductProjectionSearchModel searchModel() {
-        return ExperimentalProductProjectionSearchModel.of();
+    private ProductProjectionSearchModel searchModel() {
+        return ProductProjectionSearchModel.of();
     }
 }

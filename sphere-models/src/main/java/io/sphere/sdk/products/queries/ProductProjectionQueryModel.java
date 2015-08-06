@@ -29,7 +29,7 @@ public final class ProductProjectionQueryModel extends ProductDataQueryModelBase
     }
 
     @Override
-    public LocalizedStringsQueryModel<ProductProjection> description() {
+    public LocalizedStringQueryModel<ProductProjection> description() {
         return super.description();
     }
 
@@ -44,27 +44,27 @@ public final class ProductProjectionQueryModel extends ProductDataQueryModelBase
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<ProductProjection> metaDescription() {
+    public LocalizedStringQuerySortingModel<ProductProjection> metaDescription() {
         return super.metaDescription();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<ProductProjection> metaKeywords() {
+    public LocalizedStringQuerySortingModel<ProductProjection> metaKeywords() {
         return super.metaKeywords();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<ProductProjection> metaTitle() {
+    public LocalizedStringQuerySortingModel<ProductProjection> metaTitle() {
         return super.metaTitle();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<ProductProjection> name() {
+    public LocalizedStringQuerySortingModel<ProductProjection> name() {
         return super.name();
     }
 
     @Override
-    public LocalizedStringsQuerySortingModel<ProductProjection> slug() {
+    public LocalizedStringQuerySortingModel<ProductProjection> slug() {
         return super.slug();
     }
 

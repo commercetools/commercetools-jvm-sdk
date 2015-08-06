@@ -2,9 +2,9 @@ package io.sphere.sdk.messages.queries;
 
 import io.sphere.sdk.messages.Message;
 import io.sphere.sdk.queries.AnyReferenceQueryModel;
-import io.sphere.sdk.queries.DefaultModelQueryModel;
+import io.sphere.sdk.queries.ResourceQueryModel;
 
-public interface MessageQueryModel extends DefaultModelQueryModel<Message> {
+public interface MessageQueryModel extends ResourceQueryModel<Message> {
     MessageTypeQueryModel type();
 
     AnyReferenceQueryModel<Message> resource();

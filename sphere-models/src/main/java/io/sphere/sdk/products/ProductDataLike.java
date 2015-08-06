@@ -1,7 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
@@ -12,23 +12,23 @@ import java.util.List;
 import java.util.Set;
 
 interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
-    LocalizedStrings getName();
+    LocalizedString getName();
 
     Set<Reference<Category>> getCategories();
 
     @Nullable
-    LocalizedStrings getDescription();
+    LocalizedString getDescription();
 
-    LocalizedStrings getSlug();
-
-    @Nullable
-    LocalizedStrings getMetaTitle();
+    LocalizedString getSlug();
 
     @Nullable
-    LocalizedStrings getMetaDescription();
+    LocalizedString getMetaTitle();
 
     @Nullable
-    LocalizedStrings getMetaKeywords();
+    LocalizedString getMetaDescription();
+
+    @Nullable
+    LocalizedString getMetaKeywords();
 
     /**
      * Returns the master variant. Every product as 1 to n variants, so this is always present.

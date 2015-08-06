@@ -1,9 +1,9 @@
 package io.sphere.sdk.producttypes.commands;
 
-import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.products.attributes.*;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.commands.updateactions.*;
 import io.sphere.sdk.test.IntegrationTest;
@@ -48,10 +48,10 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             //add
             final String attributeName = "foostring";
             final AttributeDefinition foostring =
-                    AttributeDefinitionBuilder.of(attributeName, LocalizedStrings.of(ENGLISH, "foo string"), TextType.of()).build();
+                    AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), StringType.of()).build();
             final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
             final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
-            assertThat(loadedDefinition.getAttributeType()).isEqualTo(TextType.of());
+            assertThat(loadedDefinition.getAttributeType()).isEqualTo(StringType.of());
 
             //remove
             final ProductType withoutFoostring = execute(ProductTypeUpdateCommand.of(withFoostring, RemoveAttributeDefinition.of(attributeName)));
@@ -65,7 +65,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
         withUpdateableProductType(client(), productType -> {
             final String attributeName = "color";
             assertThat(productType.findAttribute(attributeName)).isPresent();
-            final LocalizedStrings label = LocalizedStrings.of(ENGLISH, "the color label");
+            final LocalizedString label = LocalizedString.of(ENGLISH, "the color label");
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeDefinitionLabel.of(attributeName, label)));
 
@@ -76,14 +76,14 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void addPlainEnumValue() throws Exception {
+    public void addEnumValue() throws Exception {
         withUpdateableProductType(client(), productType -> {
             final String attributeName = "size";
             assertThat(productType.findAttribute(attributeName)).isPresent();
-            final PlainEnumValue value = PlainEnumValue.of("XXXL", "XXXL");
+            final EnumValue value = EnumValue.of("XXXL", "XXXL");
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
-                    AddPlainEnumValue.of(attributeName, value)));
+                    AddEnumValue.of(attributeName, value)));
 
             assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
                     .isInstanceOf(EnumType.class)
@@ -99,7 +99,7 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             final String attributeName = "color";
             assertThat(productType.getAttribute(attributeName)).isNotNull();
             final LocalizedEnumValue value =
-                    LocalizedEnumValue.of("brown", LocalizedStrings.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
+                    LocalizedEnumValue.of("brown", LocalizedString.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
 
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
@@ -127,15 +127,15 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void changePlainEnumValueOrder() throws Exception {
+    public void changeEnumValueOrder() throws Exception {
         withUpdateableProductType(client(), productType -> {
             final String attributeName = "size";
             final EnumType attributeType = (EnumType) productType.getAttribute(attributeName)
                     .getAttributeType();
-            final List<PlainEnumValue> values = ListUtils.reverse(attributeType.getValues());
+            final List<EnumValue> values = ListUtils.reverse(attributeType.getValues());
 
             final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
-                    ChangePlainEnumValueOrder.of(attributeName, values)));
+                    ChangeEnumValueOrder.of(attributeName, values)));
 
             final EnumType updatedType = (EnumType) updatedProductType
                     .getAttribute(attributeName).getAttributeType();

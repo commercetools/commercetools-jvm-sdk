@@ -1,6 +1,6 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.Reference;

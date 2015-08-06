@@ -1,7 +1,7 @@
 package io.sphere.sdk.shippingmethods;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
+import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
@@ -9,7 +9,7 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 import java.util.List;
 
-final class ShippingMethodImpl extends DefaultModelImpl<ShippingMethod> implements ShippingMethod {
+final class ShippingMethodImpl extends ResourceImpl<ShippingMethod> implements ShippingMethod {
     private final String name;
     @Nullable
     private final String description;

@@ -1,6 +1,6 @@
 package io.sphere.sdk.producttypes;
 
-import io.sphere.sdk.attributes.AttributeDefinition;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
 
 import java.util.*;
 

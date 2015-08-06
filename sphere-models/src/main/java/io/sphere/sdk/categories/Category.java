@@ -22,14 +22,14 @@ import static io.sphere.sdk.utils.ListUtils.join;
  * </ul>
  */
 @JsonDeserialize(as=CategoryImpl.class)
-public interface Category extends DefaultModel<Category>, WithLocalizedSlug, MetaAttributes {
+public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes {
 
-    LocalizedStrings getName();
+    LocalizedString getName();
 
-    LocalizedStrings getSlug();
+    LocalizedString getSlug();
 
     @Nullable
-    LocalizedStrings getDescription();
+    LocalizedString getDescription();
 
     List<Reference<Category>> getAncestors();
 
@@ -44,15 +44,15 @@ public interface Category extends DefaultModel<Category>, WithLocalizedSlug, Met
 
     @Nullable
     @Override
-    LocalizedStrings getMetaTitle();
+    LocalizedString getMetaTitle();
 
     @Nullable
     @Override
-    LocalizedStrings getMetaDescription();
+    LocalizedString getMetaDescription();
 
     @Nullable
     @Override
-    LocalizedStrings getMetaKeywords();
+    LocalizedString getMetaKeywords();
 
     @Override
     default Reference<Category> toReference() {

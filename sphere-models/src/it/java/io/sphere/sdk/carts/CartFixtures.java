@@ -4,7 +4,7 @@ import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.CartDiscountDraft;
 import io.sphere.sdk.cartdiscounts.CartDiscountFixtures;
-import io.sphere.sdk.cartdiscounts.CartPredicate;
+import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand;
 import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
@@ -21,8 +21,6 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.products.Product;
 
-import java.time.ZonedDateTime;
-import java.util.Optional;
 import java.util.function.BiConsumer;
 import java.util.function.BiFunction;
 import java.util.function.Consumer;
@@ -90,7 +88,7 @@ public class CartFixtures {
     public static void withCartAndDiscountCode(final TestClient client, final BiFunction<Cart, DiscountCode, Cart> user) {
         withCustomerAndCart(client, (customer, cart) -> {
             final CartDiscountDraft draft = CartDiscountFixtures.newCartDiscountDraftBuilder()
-                    .cartPredicate(CartPredicate.of(format("customer.id = \"%s\"", customer.getId())))
+                    .cartPredicate(CartDiscountPredicate.of(format("customer.id = \"%s\"", customer.getId())))
                     .isActive(true)
                     .validFrom(null)
                     .validUntil(null)

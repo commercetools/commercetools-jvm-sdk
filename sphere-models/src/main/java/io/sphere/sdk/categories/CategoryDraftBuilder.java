@@ -1,7 +1,7 @@
 package io.sphere.sdk.categories;
 
 import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
@@ -13,10 +13,10 @@ import java.util.Optional;
  *
  */
 public class CategoryDraftBuilder implements Builder<CategoryDraft> {
-    private final LocalizedStrings name;
-    private final LocalizedStrings slug;
+    private final LocalizedString name;
+    private final LocalizedString slug;
     @Nullable
-    private LocalizedStrings description;
+    private LocalizedString description;
     @Nullable
     private Reference<Category> parent;
     @Nullable
@@ -24,16 +24,16 @@ public class CategoryDraftBuilder implements Builder<CategoryDraft> {
     @Nullable
     private String externalId;
 
-    private CategoryDraftBuilder(final LocalizedStrings name, final LocalizedStrings slug) {
+    private CategoryDraftBuilder(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
         this.slug = slug;
     }
 
-    public static CategoryDraftBuilder of(final LocalizedStrings name, final LocalizedStrings slug) {
+    public static CategoryDraftBuilder of(final LocalizedString name, final LocalizedString slug) {
         return new CategoryDraftBuilder(name, slug);
     }
 
-    public CategoryDraftBuilder description(@Nullable final LocalizedStrings description) {
+    public CategoryDraftBuilder description(@Nullable final LocalizedString description) {
         this.description = description;
         return this;
     }

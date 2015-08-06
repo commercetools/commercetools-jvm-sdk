@@ -4,7 +4,7 @@ import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.utils.SphereInternalLogger;
 
@@ -24,7 +24,7 @@ public class CategoryFixtures {
         final String externalId = "persistent-category-id";
         final Optional<Category> fetchedCategory = client.execute(CategoryQuery.of().byExternalId(externalId)).head();
         final Category category = fetchedCategory.orElseGet(() -> {
-            final LocalizedStrings name = en("name persistent-category-id");
+            final LocalizedString name = en("name persistent-category-id");
             final CategoryDraftBuilder catSupplier = CategoryDraftBuilder.of(name, name.slugified()).externalId(externalId);
             return client.execute(CategoryCreateCommand.of(catSupplier.build()));
         });
@@ -57,7 +57,7 @@ public class CategoryFixtures {
     }
 
     public static void withCategory(final TestClient client, final Consumer<Category> consumer) {
-        final LocalizedStrings slug = randomSlug();
+        final LocalizedString slug = randomSlug();
         final CategoryDraftBuilder catSupplier = CategoryDraftBuilder.of(en(slug.get(ENGLISH) + " name"), slug).externalId(randomKey());
         CategoryFixtures.withCategory(client, catSupplier, consumer);
     }

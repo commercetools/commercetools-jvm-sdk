@@ -1,13 +1,13 @@
 package io.sphere.sdk.producttypes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.DefaultModelImpl;
-import io.sphere.sdk.attributes.AttributeDefinition;
+import io.sphere.sdk.models.ResourceImpl;
+import io.sphere.sdk.products.attributes.AttributeDefinition;
 
 import java.time.ZonedDateTime;
 import java.util.List;
 
-class ProductTypeImpl extends DefaultModelImpl<ProductType> implements ProductType {
+class ProductTypeImpl extends ResourceImpl<ProductType> implements ProductType {
 
     private final String name;
     private final String description;

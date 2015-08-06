@@ -1,9 +1,9 @@
 package io.sphere.sdk.suppliers;
 
-import io.sphere.sdk.attributes.*;
+import io.sphere.sdk.products.attributes.*;
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;
-import io.sphere.sdk.models.LocalizedStrings;
-import io.sphere.sdk.models.PlainEnumValue;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 
 import java.util.List;
@@ -20,9 +20,9 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
 
     public static class Colors {
         public static final LocalizedEnumValue GREEN =
-                LocalizedEnumValue.of("green", LocalizedStrings.of(ENGLISH, "green").plus(GERMAN, "grün"));
+                LocalizedEnumValue.of("green", LocalizedString.of(ENGLISH, "green").plus(GERMAN, "grün"));
         public static final LocalizedEnumValue RED =
-                LocalizedEnumValue.of("red", LocalizedStrings.of(ENGLISH, "red").plus(GERMAN, "rot"));
+                LocalizedEnumValue.of("red", LocalizedString.of(ENGLISH, "red").plus(GERMAN, "rot"));
 
         public static final List<LocalizedEnumValue> VALUES = asImmutableList(GREEN, RED);
 
@@ -31,14 +31,14 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
     }
 
     public static class Sizes {
-        public static final PlainEnumValue S = PlainEnumValue.of("S", "S");
-        public static final PlainEnumValue M = PlainEnumValue.of("M", "M");
-        public static final PlainEnumValue X = PlainEnumValue.of("X", "X");
+        public static final EnumValue S = EnumValue.of("S", "S");
+        public static final EnumValue M = EnumValue.of("M", "M");
+        public static final EnumValue X = EnumValue.of("X", "X");
 
-        public static final List<PlainEnumValue> VALUES = asImmutableList(S, M, X);
+        public static final List<EnumValue> VALUES = asImmutableList(S, M, X);
 
-        public static final NamedAttributeAccess<PlainEnumValue> ATTRIBUTE =
-                AttributeAccess.ofPlainEnumValue().ofName("size");
+        public static final NamedAttributeAccess<EnumValue> ATTRIBUTE =
+                AttributeAccess.ofEnumValue().ofName("size");
     }
 
     private final String name;
@@ -57,19 +57,19 @@ public class TShirtProductTypeDraftSupplier implements Supplier<ProductTypeDraft
     }
 
     private static AttributeDefinition sizeAttribute() {
-        LocalizedStrings sizeAttributeLabel = LocalizedStrings.of(ENGLISH, "size").plus(GERMAN, "Größe");
+        LocalizedString sizeAttributeLabel = LocalizedString.of(ENGLISH, "size").plus(GERMAN, "Größe");
         return AttributeDefinitionBuilder.of("size", sizeAttributeLabel, EnumType.of(Sizes.VALUES)).
                 required(true).attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).build();
     }
 
     private static AttributeDefinition colorAttribute() {
-        LocalizedStrings colorAttributeLabel = LocalizedStrings.of(ENGLISH, "color").plus(GERMAN, "Farbe");
+        LocalizedString colorAttributeLabel = LocalizedString.of(ENGLISH, "color").plus(GERMAN, "Farbe");
         return AttributeDefinitionBuilder.of("color", colorAttributeLabel, LocalizedEnumType.of(Colors.VALUES)).
                 required(true).attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).build();
     }
 
     private static AttributeDefinition srpAttribute() {
-        LocalizedStrings srpLabel = LocalizedStrings.of(ENGLISH, "recommended retailer price (rrp)").
+        LocalizedString srpLabel = LocalizedString.of(ENGLISH, "recommended retailer price (rrp)").
                 plus(GERMAN, "unverbindliche Preisempfehlung (UVP)");
         return AttributeDefinitionBuilder.of(MONEY_ATTRIBUTE_NAME, srpLabel, MoneyType.of()).isSearchable(false).build();
     }

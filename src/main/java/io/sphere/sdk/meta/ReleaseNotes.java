@@ -1,8 +1,9 @@
 package io.sphere.sdk.meta;
 
 import io.sphere.sdk.carts.LineItem;
-import io.sphere.sdk.attributes.AttributeAccess;
+import io.sphere.sdk.carts.queries.CartByIdGet;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.channels.queries.ChannelByIdGet;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.expansion.ExpansionPath;
@@ -10,13 +11,17 @@ import io.sphere.sdk.http.ApacheHttpClientAdapter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.models.Identifiable;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
+import io.sphere.sdk.products.queries.ProductByIdGet;
+import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
+import io.sphere.sdk.queries.Get;
 import io.sphere.sdk.queries.QueryPredicate;
 
 import java.util.concurrent.CompletionStage;
@@ -48,7 +53,7 @@ import java.util.function.BiFunction;
     <li class=new-in-release>{@link io.sphere.sdk.productdiscounts.commands.ProductDiscountCreateCommand},
  {@link io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommand},
  {@link io.sphere.sdk.productdiscounts.commands.ProductDiscountDeleteCommand},
- {@link io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdFetch},
+ {@link ProductDiscountByIdGet},
  {@link io.sphere.sdk.productdiscounts.queries.ProductDiscountQuery}
  </li>
  </ul>
@@ -62,14 +67,14 @@ import java.util.function.BiFunction;
  <br>
 
  <ul>
- <li class=new-in-release>{@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel#productType()} enables you to build search expressions with the Product Type reference of products</li>
+ <li class=new-in-release>{@code io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel#productType()} enables you to build search expressions with the Product Type reference of products</li>
  <li class=new-in-release>{@link ProductVariant#getIdentifier()} enables to get the product id and the variant id from the variant. This is nice, since this data is often needed and on the product variant level the product ID is not available.</li>
  <li class=new-in-release>Error reporting has been improved. Especially if JSON mappings do not fit.</li>
  <li class=new-in-release>{@link LineItem#getProductSlug()}</li>
  <li class=new-in-release>Send User-Agent head for oauth requests.</li>
  <li class=new-in-release>A lot of more reference expansions.</li>
  <li class=new-in-release>Reference expansion for single elements of a list, example: {@link io.sphere.sdk.categories.expansion.CategoryExpansionModel#ancestors(int)}.</li>
- <li class=new-in-release>Reference expansion for fetch endpoints, e.g., {@link io.sphere.sdk.products.queries.ProductProjectionByIdFetch#withExpansionPaths(ExpansionPath)}.</li>
+ <li class=new-in-release>Reference expansion for fetch endpoints, e.g., {@link ProductProjectionByIdGet#withExpansionPaths(ExpansionPath)}.</li>
  <li class=new-in-release>Set the reference expansion, query predicate and sort expression more convenient (less imports, less class search) with lambdas.
  <div class="rn-hidden">
  Migration pains: {@code QueryDsl<Category>} will be {@code CategoryQuery}
@@ -119,8 +124,8 @@ import java.util.function.BiFunction;
  <li class=new-in-release>Cart discounts: {@link io.sphere.sdk.cartdiscounts.commands.CartDiscountCreateCommand}.</li>
  <li class=new-in-release>Discount codes: {@link io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand}.</li>
  <li class=change-in-release>{@link io.sphere.sdk.client.SphereApiConfig}, {@link io.sphere.sdk.client.SphereAuthConfig}, {@link io.sphere.sdk.client.SphereClientConfig} validates the input, so for example you cannot enter null or whitespace for the project key.</li>
- <li class=change-in-release>Date time attributes in {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} are using <a href="https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html">ZonedDateTime</a> instead of <a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html">LocalDateTime</a>.</li>
- <li class=change-in-release>The {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel} has been improved with better naming and better documentation.</li>
+ <li class=change-in-release>Date time attributes in {@code ProductProjectionSearchModel} are using <a href="https://docs.oracle.com/javase/8/docs/api/java/time/ZonedDateTime.html">ZonedDateTime</a> instead of <a href="https://docs.oracle.com/javase/8/docs/api/java/time/LocalDateTime.html">LocalDateTime</a>.</li>
+ <li class=change-in-release>The {@code ProductProjectionSearchModel} has been improved with better naming and better documentation.</li>
  <li class=change-in-release>Sort related classes for the Query API have been renamed with a "Query" prefix, to distinguish them from the Search API sort classes.</li>
  <li class=change-in-release>{@code io.sphere.sdk.queries.Predicate} has been renamed to {@link io.sphere.sdk.queries.QueryPredicate}.</li>
  <li class=change-in-release>The JVM SDK itself uses for tests the <a href="http://joel-costigliola.github.io/assertj/">assertj</a> assertion methods instead of fest assertions.</li>
@@ -138,8 +143,8 @@ import java.util.function.BiFunction;
 
  <h3 class=released-version id=v1_0_0_M13>1.0.0-M13</h3>
  <ul>
-     <li class=new-in-release>{@link io.sphere.sdk.models.LocalizedStrings#mapValue(BiFunction)} and {@link LocalizedStrings#stream()}
-     can be used transform {@link LocalizedStrings}, for example for creating slugs or formatting.</li>
+     <li class=new-in-release>{@link LocalizedString#mapValue(BiFunction)} and {@link LocalizedString#stream()}
+     can be used transform {@link LocalizedString}, for example for creating slugs or formatting.</li>
      <li class=new-in-release>Experimental {@link io.sphere.sdk.utils.CompletableFutureUtils} to work with Java 8 Futures.</li>
      <li class=new-in-release>{@link AsyncDocumentation} documents how to work with {@link java.util.concurrent.CompletableFuture} and {@link java.util.concurrent.CompletionStage}.</li>
 
@@ -149,7 +154,7 @@ import java.util.function.BiFunction;
      <li class=new-in-release>Embedded predicates (as used in 'where'-clauses) now support lambda syntax: {@link io.sphere.sdk.products.queries.ProductVariantQueryModel#where(java.util.function.Function)}.</li>
      <li class=new-in-release>{@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerId(java.lang.String)} and {@link io.sphere.sdk.orders.queries.OrderQuery#byCustomerEmail(java.lang.String)}</li>
      <li class=new-in-release>{@link io.sphere.sdk.channels.commands.ChannelUpdateCommand}</li>
-     <li class=new-in-release>{@link io.sphere.sdk.channels.queries.ChannelByIdFetch}</li>
+     <li class=new-in-release>{@link ChannelByIdGet}</li>
      <li class=new-in-release>{@link io.sphere.sdk.customers.queries.CustomerQuery#byEmail(java.lang.String)}</li>
      <li class=change-in-release>{@link io.sphere.sdk.client.SphereRequest} has been refactored:<ul>
          <li>{@code Function<HttpResponse, T> resultMapper()} is now {@link io.sphere.sdk.client.SphereRequest#deserialize(HttpResponse)}</li>
@@ -175,10 +180,10 @@ import java.util.function.BiFunction;
  <h3 class=released-version id=v1_0_0_M12>1.0.0-M12</h3>
  <ul>
  <li class=new-in-release>Added the {@link io.sphere.sdk.orders.commands.OrderImportCommand}.</li>
- <li class=new-in-release>Added the nested attributes: {@link io.sphere.sdk.attributes.AttributeAccess#ofNested()} + {@link io.sphere.sdk.attributes.AttributeAccess#ofNestedSet()}.</li>
+ <li class=new-in-release>Added the nested attributes: {@code io.sphere.sdk.attributes.AttributeAccess#ofNested()} + {@code io.sphere.sdk.attributes.AttributeAccess#ofNestedSet()}.</li>
  <li class=new-in-release>The error JSON body from SPHERE.IO responses can be directly extracted as JSON with {@link io.sphere.sdk.client.SphereServiceException#getJsonBody()}.</li>
  <li class=new-in-release>{@link io.sphere.sdk.http.HttpResponse} also contains {@link io.sphere.sdk.http.HttpHeaders}.</li>
- <li class=new-in-release>Experimental search filter/facet/sort expression model {@link io.sphere.sdk.products.search.ExperimentalProductProjectionSearchModel}. See also {@link io.sphere.sdk.meta.ProductSearchDocumentation}.</li>
+ <li class=new-in-release>Experimental search filter/facet/sort expression model {@code ProductProjectionSearchModel}. See also {@link io.sphere.sdk.meta.ProductSearchDocumentation}.</li>
  <li class=change-in-release>The {@link io.sphere.sdk.producttypes.ProductType} creation has been simplified (TextAttributeDefinition, LocalizedStringsAttributeDefinition, ... are just AttributeDefinition), see {@link io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand} how to create them.</li>
  <li class=change-in-release>{@link io.sphere.sdk.search.TermFacetResult} and
  {@link io.sphere.sdk.search.RangeFacetResult} are using generics.
@@ -214,9 +219,9 @@ import java.util.function.BiFunction;
     </li>
     <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.http.HttpRequest} has changed tasks and structure, now it contains the full information for a HTTP request whereas now {@link io.sphere.sdk.client.HttpRequestIntent} is an element to describe an endpoint of sphere project independent.</li>
     <li class=change-in-release>For SDK devs: {@link io.sphere.sdk.client.JsonEndpoint} moved to the client package</li>
-    <li class=change-in-release>{@link io.sphere.sdk.queries.Fetch} class names end now with Fetch for consistency, so for example {@code CartFetchById} is now {@link io.sphere.sdk.carts.queries.CartByIdFetch}.</li>
+    <li class=change-in-release>{@link Get} class names end now with Fetch for consistency, so for example {@code CartFetchById} is now {@link CartByIdGet}.</li>
     <li class=change-in-release>{@link io.sphere.sdk.commands.DeleteCommand} implementations don't have {@code ById} or {@code ByKey} in the class name and the {@code of} factory method returns the interface, not the implementation, example {@link io.sphere.sdk.categories.commands.CategoryDeleteCommand#of(io.sphere.sdk.models.Versioned)}.</li>
-    <li class=change-in-release>LocalizedText* classes have been renamed to LocalizedStrings.</li>
+    <li class=change-in-release>LocalizedText* classes have been renamed to LocalizedString.</li>
     <li class=fixed-in-release>Fixed: UnknownCurrencyException <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/264">#264</a>.</li>
  </ul>
 
@@ -245,7 +250,7 @@ import java.util.function.BiFunction;
  <li class=new-in-release>Added update actions for cart: {@link io.sphere.sdk.carts.commands.updateactions.SetShippingMethod} and {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerId}.</li>
  <li class=new-in-release>Added update actions for customer: {@link io.sphere.sdk.carts.commands.updateactions.SetCustomerId}.</li>
  <li class=new-in-release>Added {@link io.sphere.sdk.models.Referenceable#hasSameIdAs(io.sphere.sdk.models.Referenceable)} to check if a similar object has the same ID.</li>
- <li class=new-in-release>Added {@link AttributeAccess#ofName(String)} as alias to {@code io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)}.</li>
+ <li class=new-in-release>Added {@code AttributeAccess#ofName(String)} as alias to {@code io.sphere.sdk.attributes.AttributeAccess#getterSetter(String)}.</li>
 
  <li class=new-in-release>Update action list in update commands do not have the type {@literal List<UpdateAction<T>>} {@literal  List<? extends UpdateAction<T>>}, so you can pass a list of a subclass of {@link UpdateActionImpl}.
  Example: {@literal List<ChangeName>} can be assigned where {@literal ChangeName} extends {@link UpdateActionImpl}.</li>
@@ -296,7 +301,7 @@ import java.util.function.BiFunction;
  <li>Query models contain id, createdAt and lastModifiedAt for predicates and sorting.</li>
  <li>Introduced endpoints and models for {@link io.sphere.sdk.carts.Cart}s, {@link io.sphere.sdk.customers.Customer}s, {@link io.sphere.sdk.customergroups.CustomerGroup}s and {@link io.sphere.sdk.orders.Order}s.</li>
  <li>Quantity fields are now of type long.</li>
- <li>Classes like {@link io.sphere.sdk.products.queries.ProductByIdFetch} take now a string parameter for the ID and not an {@link io.sphere.sdk.models.Identifiable}.</li>
+ <li>Classes like {@link ProductByIdGet} take now a string parameter for the ID and not an {@link io.sphere.sdk.models.Identifiable}.</li>
  <li>Queries, Fetches, Commands and Searches are only instantiable with an static of method like {@link io.sphere.sdk.categories.commands.CategoryCreateCommand#of(io.sphere.sdk.categories.CategoryDraft)}. The instantiation by constructor is not supported anymore.</li>
  <li>Enum constant names are only in upper case.</li>
  </ul>
@@ -308,8 +313,8 @@ import java.util.function.BiFunction;
  <li>Incompatible change: {@link io.sphere.sdk.producttypes.ProductTypeDraft} has now only
  factory methods with an explicit parameter for the attribute declarations to prevent to use
  the getter {@link io.sphere.sdk.producttypes.ProductTypeDraft#getAttributes()} and list add operations. </li>
- <li>Incompatible change: {@code LocalizedString} has been renamed to {@link io.sphere.sdk.models.LocalizedStrings}, since it is not a container for one string and a locale, but for multiple strings of different locals. It is like a map.</li>
- <li>Incompatible change: The {@link io.sphere.sdk.queries.Fetch} classes have been renamed. From FetchRESOURCEByWhatever to RESOURCEFetchByWhatever</li>
+ <li>Incompatible change: {@code LocalizedString} has been renamed to {@link LocalizedString}, since it is not a container for one string and a locale, but for multiple strings of different locals. It is like a map.</li>
+ <li>Incompatible change: The {@link Get} classes have been renamed. From FetchRESOURCEByWhatever to RESOURCEFetchByWhatever</li>
  <li>Moved Scala and Play clients out of the Git repository to <a href="https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons">https://github.com/sphereio/sphere-jvm-sdk-scala-add-ons</a>. The artifact ID changed.</li>
  <li>{@link io.sphere.sdk.meta.SphereResources} contains now also a listing of queries and commands for the resources.</li>
  <li>Added {@link io.sphere.sdk.products.search.ProductProjectionSearch} for full-text, filtered and faceted search.</li>
@@ -375,8 +380,8 @@ import java.util.function.BiFunction;
  <li>Migration from Google Guavas com.google.common.util.concurrent.ListenableFuture to Java 8 java.util.concurrent.CompletableFuture.</li>
  <li>Removed all Google Guava classes from the public API (internally still used).</li>
  <li>The logger is more fine granular controllable, for example the logger {@code sphere.products.responses.queries} logs only the responses of the queries for products. The trace level logs the JSON of responses and requests as pretty printed JSON.</li>
- <li>Introduced the class {@link io.sphere.sdk.models.Referenceable} which enables to use a model or a reference to a model as parameter, so no direct call of {@link io.sphere.sdk.models.DefaultModel#toReference()} is needed anymore for model classes.</li>
- <li>It is possible to overwrite the error messages of {@code io.sphere.sdk.test.DefaultModelAssert}, {@code io.sphere.sdk.test.LocalizedStringsAssert} and {@code io.sphere.sdk.test.ReferenceAssert}.</li>
+ <li>Introduced the class {@code io.sphere.sdk.models.Referenceable} which enables to use a model or a reference to a model as parameter, so no direct call of {@code io.sphere.sdk.models.DefaultModel#toReference()} is needed anymore for model classes.</li>
+ <li>It is possible to overwrite the error messages of {@code io.sphere.sdk.test.DefaultModelAssert}, {@code io.sphere.sdk.test.LocalizedStringAssert} and {@code io.sphere.sdk.test.ReferenceAssert}.</li>
  <li>{@link io.sphere.sdk.models.Versioned} contains a type parameter to prevent copy and paste errors.</li>
  <li>Sorting query model methods have better support in the IDE, important methods are bold.</li>
  <li>Queries and commands for models are in there own package now and less coupled to the model.</li>

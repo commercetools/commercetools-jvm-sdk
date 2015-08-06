@@ -2,7 +2,7 @@ package io.sphere.sdk.channels;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -21,11 +21,11 @@ public class ChannelDraft extends Base {
     @Nullable
     private final Set<ChannelRole> roles;
     @Nullable
-    private final LocalizedStrings name;
+    private final LocalizedString name;
     @Nullable
-    private final LocalizedStrings description;
+    private final LocalizedString description;
 
-    ChannelDraft(final String key, final Set<ChannelRole> roles, @Nullable final LocalizedStrings name, @Nullable final LocalizedStrings description) {
+    ChannelDraft(final String key, final Set<ChannelRole> roles, @Nullable final LocalizedString name, @Nullable final LocalizedString description) {
         this.key = key;
         this.roles = roles;
         this.name = name;
@@ -45,12 +45,12 @@ public class ChannelDraft extends Base {
     }
 
     @Nullable
-    public LocalizedStrings getName() {
+    public LocalizedString getName() {
         return name;
     }
 
     @Nullable
-    public LocalizedStrings getDescription() {
+    public LocalizedString getDescription() {
         return description;
     }
     
@@ -62,7 +62,7 @@ public class ChannelDraft extends Base {
         return newBuilder().roles(asSet(roles)).build();
     }
     
-    public ChannelDraft withName(@Nullable final LocalizedStrings name) {
+    public ChannelDraft withName(@Nullable final LocalizedString name) {
         return newBuilder().name(name).build();
     }
 
@@ -70,7 +70,7 @@ public class ChannelDraft extends Base {
         return ChannelDraftBuilder.of(this);
     }
 
-    public ChannelDraft withDescription(@Nullable final LocalizedStrings description) {
+    public ChannelDraft withDescription(@Nullable final LocalizedString description) {
         return newBuilder().description(description).build();
     }
 }

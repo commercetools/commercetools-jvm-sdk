@@ -97,7 +97,11 @@ public interface Order extends CartLike<Order> {
 
     ZonedDateTime getCompletedAt();
 
-    /** Set when this order was created from a cart. The cart will have the state Ordered. */
+    /**
+     * Set when this order was created from a cart. The cart will have the state Ordered.
+     *
+     * @return cart reference or null
+     */
     @Nullable
     Reference<Cart> getCart();
 

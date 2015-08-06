@@ -1,7 +1,7 @@
 package io.sphere.sdk.producttypes.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.ProductType;
 
 /**
@@ -9,15 +9,15 @@ import io.sphere.sdk.producttypes.ProductType;
  */
 public class ChangeAttributeDefinitionLabel extends UpdateActionImpl<ProductType> {
     private final String attributeName;
-    private final LocalizedStrings label;
+    private final LocalizedString label;
 
-    private ChangeAttributeDefinitionLabel(final String attributeName, final LocalizedStrings label) {
+    private ChangeAttributeDefinitionLabel(final String attributeName, final LocalizedString label) {
         super("changeLabel");
         this.attributeName = attributeName;
         this.label = label;
     }
 
-    public static ChangeAttributeDefinitionLabel of(final String attributeName, final LocalizedStrings label) {
+    public static ChangeAttributeDefinitionLabel of(final String attributeName, final LocalizedString label) {
         return new ChangeAttributeDefinitionLabel(attributeName, label);
     }
 
@@ -25,7 +25,7 @@ public class ChangeAttributeDefinitionLabel extends UpdateActionImpl<ProductType
         return attributeName;
     }
 
-    public LocalizedStrings getLabel() {
+    public LocalizedString getLabel() {
         return label;
     }
 }

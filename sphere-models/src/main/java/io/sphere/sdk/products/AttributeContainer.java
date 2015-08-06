@@ -1,8 +1,8 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.attributes.Attribute;
-import io.sphere.sdk.attributes.AttributeAccess;
-import io.sphere.sdk.attributes.NamedAttributeAccess;
+import io.sphere.sdk.products.attributes.Attribute;
+import io.sphere.sdk.products.attributes.AttributeAccess;
+import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 
 import javax.annotation.Nullable;
 import java.util.List;

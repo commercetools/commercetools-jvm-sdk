@@ -1,13 +1,13 @@
 package io.sphere.sdk.states.commands;
 
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.states.commands.updateactions.ChangeInitial;
 import io.sphere.sdk.states.commands.updateactions.ChangeKey;
 import io.sphere.sdk.states.commands.updateactions.SetName;
 import io.sphere.sdk.states.commands.updateactions.SetTransitions;
-import io.sphere.sdk.states.queries.StateByIdFetch;
+import io.sphere.sdk.states.queries.StateByIdGet;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
@@ -49,7 +49,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
     @Test
     public void setName() throws Exception {
         withUpdateableState(client(), state -> {
-            final LocalizedStrings newName = randomSlug();
+            final LocalizedString newName = randomSlug();
 
             final StateUpdateCommand command = StateUpdateCommand.of(state, SetName.of(newName));
             final State updatedState = execute(command);
@@ -68,7 +68,7 @@ public class StateUpdateCommandTest extends IntegrationTest {
                 assertThat(updatedStateB.getTransitions()).isEqualTo(transitions);
 
                 //check reference expansion
-                final State loadedStateB = execute(StateByIdFetch.of(stateB).withExpansionPaths(m -> m.transitions()));
+                final State loadedStateB = execute(StateByIdGet.of(stateB).withExpansionPaths(m -> m.transitions()));
                 final Reference<State> stateReference = new LinkedList<>(loadedStateB.getTransitions()).getFirst();
                 assertThat(stateReference.getObj()).isNotNull();
 

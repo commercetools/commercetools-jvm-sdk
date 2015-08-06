@@ -1,5 +1,8 @@
 package io.sphere.sdk.meta;
 
+import io.sphere.sdk.models.Resource;
+import io.sphere.sdk.models.ResourceImpl;
+
 /**
  <h3 id=start>Developing the SDK</h3>
 
@@ -91,14 +94,14 @@ public Xyz(final String id)</pre>
 
  <h4 id=model-package>Package {@code io.sphere.sdk.<RESOURCE_AS_LOWERCASE_IN_PLURAL>}</h4>
 <ul>
- <li>create an interface <em>RESOURCE</em> which extends {@link io.sphere.sdk.models.DefaultModel} with <em>RESOURCE</em> as type parameter</li>
- <li>create a class <em>RESOURCEImpl</em> which extends {@link io.sphere.sdk.models.DefaultModelImpl} with <em>RESOURCE</em> as type argument and it should implement <em>RESOURCE</em></li>
+ <li>create an interface <em>RESOURCE</em> which extends {@link Resource} with <em>RESOURCE</em> as type parameter</li>
+ <li>create a class <em>RESOURCEImpl</em> which extends {@link ResourceImpl} with <em>RESOURCE</em> as type argument and it should implement <em>RESOURCE</em></li>
 
  <li>in <em>RESOURCEImpl</em> replace "public class" with "class" to set the visibility
  of this class to package scope</li>
 
- <li>in <em>RESOURCEImpl</em> add private final fields for all members of the resource (except the members defined in {@link io.sphere.sdk.models.DefaultModelImpl}
- like {@link io.sphere.sdk.models.DefaultModelImpl#id}, {@link io.sphere.sdk.models.DefaultModelImpl#version}, {@link io.sphere.sdk.models.DefaultModelImpl#createdAt} and {@link io.sphere.sdk.models.DefaultModelImpl#lastModifiedAt}</li>
+ <li>in <em>RESOURCEImpl</em> add private final fields for all members of the resource (except the members defined in {@link ResourceImpl}
+ like {@link ResourceImpl#id}, {@link ResourceImpl#version}, {@link ResourceImpl#createdAt} and {@link ResourceImpl#lastModifiedAt}</li>
  <li>in <em>RESOURCEImpl</em> create a constructor with your IDE, this will be called the primary constructor</li>
  <li>in <em>RESOURCEImpl</em> create getters for all the fields you have created with your IDE</li>
  <li>in <em>RESOURCEImpl</em> use 'extract interface' of your IDE to get the signatures of the getters,
@@ -108,7 +111,7 @@ public Xyz(final String id)</pre>
  <li>in <em>RESOURCE</em> create a static method which returns a {@link com.fasterxml.jackson.core.type.TypeReference} as in {@link io.sphere.sdk.categories.Category#typeReference()}</li>
  <li>in <em>RESOURCE</em> implement {@link io.sphere.sdk.models.Referenceable#toReference()} as in io.sphere.sdk.categories.Category#toReference()</li>
 
-<li>create a class <em>RESOURCEBuilder</em> which extends {@code DefaultModelFluentBuilder<RESOURCEBuilder, RESOURCE>}</li>
+
 <li>in <em>RESOURCEBuilder</em> copy the attributes of  <em>RESOURCEImpl</em> and make them non final</li>
 <li>in <em>RESOURCEBuilder</em> make a private constructor with all really necessary values</li>
  <li>in <em>RESOURCEBuilder</em> set default values where you can, for {@link java.util.Optional} empty and for list or set their empty versions.</li>
