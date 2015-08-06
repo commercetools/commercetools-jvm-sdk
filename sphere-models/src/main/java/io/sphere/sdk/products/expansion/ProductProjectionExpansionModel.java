@@ -31,7 +31,7 @@ public final class ProductProjectionExpansionModel<T> extends ExpansionModel<T> 
     }
 
     public ProductVariantExpansionModel<T> variants() {
-        return new ProductVariantExpansionModel<>(pathExpression(), "variants");
+        return new ProductVariantExpansionModel<>(pathExpression(), "variants[*]");
     }
 
     public static ProductProjectionExpansionModel<ProductProjection> of() {

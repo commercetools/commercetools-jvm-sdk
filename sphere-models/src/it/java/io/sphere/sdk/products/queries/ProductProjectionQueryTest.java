@@ -152,7 +152,10 @@ public class ProductProjectionQueryTest extends IntegrationTest {
     @Test
     public void queryByName() throws Exception {
         with2products("queryByName", (p1, p2) ->{
-            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED).withPredicates(m -> m.name().lang(ENGLISH).is(en(p1.getMasterData().getStaged().getDescription())));
+            final Query<ProductProjection> query1 = ProductProjectionQuery.of(STAGED)
+                    .withPredicates(m -> m.name().lang(ENGLISH).is(en(p1.getMasterData().getStaged().getName())))
+                    .withSort(m -> m.createdAt().sort().desc())
+                    .withLimit(1);
             assertThat(ids(execute(query1))).containsOnly(p1.getId());
         });
     }

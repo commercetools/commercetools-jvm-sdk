@@ -23,7 +23,7 @@ public class ProductDataExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public ProductVariantExpansionModel<T> variants() {
-        return new ProductVariantExpansionModel<>(pathExpression(), "variants");
+        return new ProductVariantExpansionModel<>(pathExpression(), "variants[*]");
     }
 }
 
