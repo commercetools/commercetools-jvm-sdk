@@ -80,4 +80,11 @@ public class ProductProjectionExpansionModelTest {
         assertThat(fetch2.expansionPaths()).isEqualTo(asList(ExpansionPath.of("productType")));
         assertThat(fetch2).isNotSameAs(fetch);
     }
+
+    @Test
+    public void variants() {
+        final ExpansionPath<ProductProjection> expansionPath =
+                ProductProjectionExpansionModel.of().variants().prices().customerGroup();
+        assertThat(expansionPath.toSphereExpand()).isEqualTo("variants[*].prices[*].customerGroup");
+    }
 }
