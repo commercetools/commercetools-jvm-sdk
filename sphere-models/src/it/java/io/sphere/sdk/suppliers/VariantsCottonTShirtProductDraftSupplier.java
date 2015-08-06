@@ -1,7 +1,7 @@
 package io.sphere.sdk.suppliers;
 
 import io.sphere.sdk.customergroups.CustomerGroup;
-import io.sphere.sdk.models.LocalizedStrings;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.*;
@@ -42,7 +42,7 @@ public class VariantsCottonTShirtProductDraftSupplier implements Supplier<Produc
                 .sku(UUID.randomUUID().toString())
                 .prices(Price.of(MoneyImpl.ofCents(1234, EUR)), Price.of(MoneyImpl.ofCents(600, EUR)).withCustomerGroup(customerGroup))
                 .build();
-        final LocalizedStrings slug = en(name).slugifiedUnique();
+        final LocalizedString slug = en(name).slugifiedUnique();
         return ProductDraftBuilder.of(productType, en(name), slug, masterVariant)
                 .variants(asList(secondVariant))
                 .description(en(name))
@@ -52,7 +52,7 @@ public class VariantsCottonTShirtProductDraftSupplier implements Supplier<Produc
                 .build();
     }
 
-    private LocalizedStrings en(final String value) {
-        return LocalizedStrings.of(Locale.ENGLISH, value);
+    private LocalizedString en(final String value) {
+        return LocalizedString.of(Locale.ENGLISH, value);
     }
 }
