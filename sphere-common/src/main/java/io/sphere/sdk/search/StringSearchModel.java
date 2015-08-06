@@ -10,12 +10,12 @@ public class StringSearchModel<T, S extends SearchSortDirection> extends SearchM
 
     @Override
     public FilterSearchModel<T, String> filtered() {
-        return new FilterSearchModel<>(this, null, TypeSerializer.ofText());
+        return new FilterSearchModel<>(this, null, TypeSerializer.ofString());
     }
 
     @Override
     public FacetSearchModel<T, String> faceted() {
-        return new FacetSearchModel<>(this, null, TypeSerializer.ofText());
+        return new FacetSearchModel<>(this, null, TypeSerializer.ofString());
     }
 
     @Override

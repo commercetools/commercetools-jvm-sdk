@@ -43,11 +43,11 @@ public interface AttributeAccess<T> {
     }
 
     static AttributeAccess<String> ofString() {
-        return AttributeAccessImpl.ofPrimitive(stringTypeReference(), TextType.class);
+        return AttributeAccessImpl.ofPrimitive(stringTypeReference(), StringType.class);
     }
 
     static AttributeAccess<Set<String>> ofStringSet() {
-        return AttributeAccessImpl.ofSet(TextType.class, new TypeReference<Set<String>>() {
+        return AttributeAccessImpl.ofSet(StringType.class, new TypeReference<Set<String>>() {
         });
     }
 

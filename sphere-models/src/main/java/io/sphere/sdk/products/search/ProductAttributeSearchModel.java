@@ -23,11 +23,11 @@ public class ProductAttributeSearchModel extends SearchModelImpl<ProductProjecti
         return new BooleanSearchModel<>(this, attributeName);
     }
 
-    public StringSearchModel<ProductProjection, VariantSearchSortDirection> ofText(final String attributeName) {
+    public StringSearchModel<ProductProjection, VariantSearchSortDirection> ofString(final String attributeName) {
         return new StringSearchModel<>(this, attributeName);
     }
 
-    public LocalizedStringSearchModel<ProductProjection, VariantSearchSortDirection> ofLocalizableText(final String attributeName) {
+    public LocalizedStringSearchModel<ProductProjection, VariantSearchSortDirection> ofLocalizedString(final String attributeName) {
         return new LocalizedStringSearchModel<>(this, attributeName);
     }
 

@@ -4,10 +4,9 @@ import org.junit.Test;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 import static io.sphere.sdk.search.TypeSerializer.ofNumber;
-import static io.sphere.sdk.search.TypeSerializer.ofText;
+import static io.sphere.sdk.search.TypeSerializer.ofString;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.*;
@@ -17,7 +16,7 @@ public class SearchExpressionTest {
     @Test
     public void buildsTermFilterExpression() throws Exception {
         List<String> terms = asList("foo", "bar");
-        final TermFilterExpression<Object, String> expression = new TermFilterExpression<>(model(), ofText(), terms);
+        final TermFilterExpression<Object, String> expression = new TermFilterExpression<>(model(), ofString(), terms);
         assertThat(expression.toSphereFilter()).isEqualTo("variants.attributes.size:\"foo\",\"bar\"");
     }
 
@@ -30,14 +29,14 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsTermFacetExpression() throws Exception {
-        final TermFacetExpression<Object, String> expression = new TermFacetExpression<>(model(), ofText(), null);
+        final TermFacetExpression<Object, String> expression = new TermFacetExpression<>(model(), ofString(), null);
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size");
         assertThat(expression.resultPath()).isEqualTo("variants.attributes.size");
     }
 
     @Test
     public void buildsTermFacetExpressionWithAlias() throws Exception {
-        final TermFacetExpression<Object, String> expression = new TermFacetExpression<>(model(), ofText(), "my-facet");
+        final TermFacetExpression<Object, String> expression = new TermFacetExpression<>(model(), ofString(), "my-facet");
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size as my-facet");
         assertThat(expression.resultPath()).isEqualTo("my-facet");
     }
@@ -45,7 +44,7 @@ public class SearchExpressionTest {
     @Test
     public void buildsFilteredFacetExpression() throws Exception {
         List<String> terms = asList("foo", "bar");
-        final FilteredFacetExpression<Object, String> expression = new FilteredFacetExpression<>(model(), ofText(), terms, null);
+        final FilteredFacetExpression<Object, String> expression = new FilteredFacetExpression<>(model(), ofString(), terms, null);
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size:\"foo\",\"bar\"");
         assertThat(expression.resultPath()).isEqualTo("variants.attributes.size");
     }
@@ -53,7 +52,7 @@ public class SearchExpressionTest {
     @Test
     public void buildsFilteredFacetExpressionWithAlias() throws Exception {
         List<String> terms = asList("foo", "bar");
-        final FilteredFacetExpression<Object, String> expression = new FilteredFacetExpression<>(model(), ofText(), terms, "my-facet");
+        final FilteredFacetExpression<Object, String> expression = new FilteredFacetExpression<>(model(), ofString(), terms, "my-facet");
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size:\"foo\",\"bar\" as my-facet");
         assertThat(expression.resultPath()).isEqualTo("my-facet");
     }

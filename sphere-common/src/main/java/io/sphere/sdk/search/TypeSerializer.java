@@ -33,7 +33,7 @@ public class TypeSerializer<T> {
      * Serializer to convert the given text to a formatted string with escaped characters.
      * @return the serializer for text data.
      */
-    public static TypeSerializer<String> ofText() {
+    public static TypeSerializer<String> ofString() {
         return new TypeSerializer<>(v -> withQuotes(v.replace("\"", "\\\"")));
     }
 
