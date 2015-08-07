@@ -12,6 +12,7 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.ProductVariant;
@@ -24,8 +25,10 @@ import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.Get;
 import io.sphere.sdk.queries.QueryPredicate;
 
+import javax.money.CurrencyUnit;
 import java.util.concurrent.CompletionStage;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  <div class=release-notes>
@@ -56,6 +59,51 @@ import java.util.function.BiFunction;
  {@link ProductDiscountByIdGet},
  {@link io.sphere.sdk.productdiscounts.queries.ProductDiscountQuery}
  </li>
+ <li class=new-in-release>More reference expansion for product fields.</li>
+ <li class=new-in-release>Added a {@link ProductAttributeDocumentation product attribute tutorial}.</li>
+ <li class=new-in-release>Added a  {@link CategoryDocumentation category tutorial}.</li>
+ <li class=new-in-release>Added the {@link io.sphere.sdk.messages.queries.MessageQuery message endpoint}.</li>
+ <li class=new-in-release>Added query and expansion meta models for carts.</li>
+ <li class=new-in-release>{@link io.sphere.sdk.utils.MoneyImpl#ofCents(long, CurrencyUnit)} can be used to create monetary values</li>
+ <li class=new-in-release>Customer can be created with attributes dateOfBirth, companyName, vatId, isEmailVerified, customerGroup and addresses.</li>
+ <li class=new-in-release>External images can be included in the product creation.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.inventory.commands.updateactions.ChangeQuantity} to update {@link io.sphere.sdk.inventory.InventoryEntry}s.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.channels.ChannelRole#PRODUCT_DISTRIBUTION}.</li>
+ <li class=new-in-release>Added {@link LineItem#getDistributionChannel()}.</li>
+ <li class=new-in-release>Meta models can be used in the product search, too. See {@link io.sphere.sdk.products.search.ProductProjectionSearch#plusFacetFilters(Function)}.</li>
+ <li class=new-in-release>Added documentation how to query for large offsets in {@link QueryDocumentation}.</li>
+ <li class=new-in-release>Added hints how to format date and monetary data in {@link FormattingDocumentation}.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommand}.</li>
+ <li class=new-in-release>To imrove the query speed the calculation of the total amount of items in commercetools platform can be deactivated with {@link io.sphere.sdk.products.queries.ProductQuery#withFetchTotal(boolean)}.</li>
+ <li class=new-in-release>{@link QueryPredicate}s can be negated with {@link QueryPredicate#negate()}</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.carts.CartState#ORDERED} and {@link Order#getCart()}.</li>
+ <li class=new-in-release>Added {@link io.sphere.sdk.products.ProductProjection#findVariantBySky(String)}.</li>
+ <li class=new-in-release>Reference expansion for the product projection search.</li>
+ <li class=change-in-release>The default behaviour of queries changed, things are not sorted by ID by default for performance reasons. The impact is that performing the exact query again may yields different results.</li>
+ <li class=change-in-release>{@link java.util.Optional} as return type for optional values has been removed, now the annotation {@link javax.annotation.Nullable} is used to mark objects as not mandatory. This change was necessary to provide a stable API, to provide later serializable Objects and sparse representations for objects.</li>
+ <li class=change-in-release>For API read objects primitives have been replaced by wrapper classed to implement later sparse representations. This may affect type conversions which won't work anymore.</li>
+ <li class=change-in-release>The instantiation of the {@link io.sphere.sdk.client.SphereClient} has been changed, see {@link GettingStarted} and {@link io.sphere.sdk.client.SphereClientFactory}.</li>
+ <li class=change-in-release>Product type creation has been refactored. Have a look at {@link ProductAttributeDocumentation product attribute tutorial}.</li>
+ <li class=change-in-release>Product prices have an ID and price updates need to be performed via the price ID: {@link io.sphere.sdk.products.commands.updateactions.ChangePrice}, {@link io.sphere.sdk.products.commands.updateactions.RemovePrice}. Keep in mind that {@link io.sphere.sdk.products.Price#equals(Object)} includes the ID.</li>
+ <li class=change-in-release>The naming conventions in the commercetools platform have been changed:
+   <ul>
+   <li>PlainEnumValue is now EnumValue</li>
+   <li>LocalizedStrings is now LocalizedString</li>
+   <li>LocalizedStringsEntry is now LocalizedStringEntry</li>
+   <li>Fetch is now Get (e.g. {@code ProductProjectionByIdFetch} is now {@link ProductProjectionByIdGet}</li>
+   </ul>
+ </li>
+
+ <li class=change-in-release>{@code JsonUtils} have been renamed to {@link io.sphere.sdk.json.SphereJsonUtils}, this is an internal utility class working for the commercetools platform context, it is not intended to build apps or libs on it.</li>
+ <li class=change-in-release>{@code ChannelRoles} have been renamed to {@link io.sphere.sdk.channels.ChannelRole}.</li>
+ <li class=change-in-release>{@code SearchText} is now {@link io.sphere.sdk.models.LocalizedStringEntry}</li>
+ <li class=removed-in-release>Removed {@code ProductUpdateScope}, so all product update actions update only staged.</li>
+ <li class=removed-in-release>Builders for resources (read objects) have been removed. See {@link TestingDocumentation} to build the objects anyway.</li>
+ <li class=removed-in-release>QueryToFetch adapter has been removed.</li>
+
+ <li class=fixed-in-release>{@link io.sphere.sdk.queries.StringQueryModel#isGreaterThan(Object)} and other methods do not quote strings correctly. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/558">558</a>.</li>
+ <li class=fixed-in-release>Product variant expansion does not work. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/631">631</a>.</li>
+
  </ul>
 
 
