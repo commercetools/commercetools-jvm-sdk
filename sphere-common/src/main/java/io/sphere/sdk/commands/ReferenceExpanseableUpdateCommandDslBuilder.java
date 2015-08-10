@@ -64,7 +64,7 @@ public class ReferenceExpanseableUpdateCommandDslBuilder<T extends ResourceView<
         return versioned;
     }
 
-    public ReferenceExpanseableUpdateCommandDslBuilder<T, C, E> expansionPaths(final List<ExpansionPath<T>> expansionPaths) {
+    ReferenceExpanseableUpdateCommandDslBuilder<T, C, E> expansionPaths(final List<ExpansionPath<T>> expansionPaths) {
         this.expansionPaths = expansionPaths;
         return this;
     }

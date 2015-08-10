@@ -20,12 +20,10 @@ import static io.sphere.sdk.utils.ListUtils.listOf;
 import static java.util.Objects.requireNonNull;
 
 /**
- * Internal base class to implement commands that change one entity in SPHERE.IO.
- *
- * @param <T> the type of the result of the command
- * @param <C> class which will serialized as JSON command body, most likely a template
- * @param <E> type of the expansion model
- */
+ Internal base class to implement commands that change one entity in SPHERE.IO.
+ @param <T> the type of the result of the command
+ @param <C> class which will serialized as JSON command body, most likely a template
+ @param <E> type of the expansion model */
 public class ReferenceExpandeableUpdateCommandDslImpl<T extends ResourceView<T>, C extends UpdateCommandDsl<T, C>, E> extends CommandImpl<T> implements UpdateCommandDsl<T, C>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
     final Versioned<T> versioned;
     final List<? extends UpdateAction<T>> updateActions;
@@ -113,7 +111,6 @@ public class ReferenceExpandeableUpdateCommandDslImpl<T extends ResourceView<T>,
     TypeReference<T> getTypeReference() {
         return typeReference;
     }
-
 
     @Override
     public List<ExpansionPath<T>> expansionPaths() {
