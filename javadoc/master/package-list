@@ -1,4 +1,3 @@
-io.sphere.sdk.attributes
 io.sphere.sdk.cartdiscounts
 io.sphere.sdk.cartdiscounts.commands
 io.sphere.sdk.cartdiscounts.commands.updateactions
@@ -67,6 +66,7 @@ io.sphere.sdk.productdiscounts.commands.updateactions
 io.sphere.sdk.productdiscounts.expansion
 io.sphere.sdk.productdiscounts.queries
 io.sphere.sdk.products
+io.sphere.sdk.products.attributes
 io.sphere.sdk.products.commands
 io.sphere.sdk.products.commands.updateactions
 io.sphere.sdk.products.expansion
