@@ -20,8 +20,9 @@ import static java.util.Objects.requireNonNull;
 /**
  * Internal base class to implement commands which create an entity in SPHERE.IO.
  *
- * @param <T> the type of the result of the command, most likely the updated entity without expanded references
+ * @param <T> the type of the result of the command
  * @param <C> class which will serialized as JSON command body, most likely a template
+ * @param <D> type of the draft object
  * @param <E> type of the expansion model
  */
 public abstract class ReferenceExpandeableCreateCommandImpl<T, C, D, E> extends CommandImpl<T> implements CreateCommand<T>, MetaModelExpansionDslExpansionModelRead<T, C, E> {

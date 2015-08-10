@@ -1,20 +1,16 @@
 package io.sphere.sdk.categories.commands;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.commands.updateactions.ChangeName;
-import io.sphere.sdk.categories.commands.updateactions.SetMetaDescription;
-import io.sphere.sdk.categories.commands.updateactions.SetMetaKeywords;
-import io.sphere.sdk.categories.commands.updateactions.SetMetaTitle;
+import io.sphere.sdk.categories.commands.updateactions.*;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
-import static io.sphere.sdk.categories.CategoryFixtures.withPersistentCategory;
+import static io.sphere.sdk.categories.CategoryFixtures.*;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
+import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.sphere.sdk.test.SphereTestUtils.*;
 
 public class CategoryUpdateCommandTest extends IntegrationTest {
     @Test
@@ -58,5 +54,23 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
             final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetMetaKeywords.of(newValue)));
             assertThat(updatedCategory.getMetaKeywords()).isEqualTo(newValue);
         });
+    }
+
+    @Test
+    public void changeParent() throws Exception {
+        withCategory(client(), categoryA ->
+            withCategory(client(), categoryB -> {
+                assertThat(categoryA.getParent()).isNull();
+                assertThat(categoryB.getParent()).isNull();
+
+                final CategoryUpdateCommand updateCommand =
+                        CategoryUpdateCommand.of(categoryB, ChangeParent.of(categoryA))
+                        .plusExpansionPaths(m -> m.parent());
+                final Category updatedB = execute(updateCommand);
+
+                assertThat(updatedB.getParent().getId()).isEqualTo(categoryA.getId());
+                assertThat(updatedB.getParent().getObj()).isNotNull().isEqualTo(categoryA);
+            })
+        );
     }
 }
