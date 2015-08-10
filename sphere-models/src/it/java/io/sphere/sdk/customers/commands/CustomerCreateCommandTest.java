@@ -45,7 +45,9 @@ public class CustomerCreateCommandTest extends IntegrationTest {
                 .withAddresses(addresses)
                 .withDefaultBillingAddress(0)
                 .withDefaultShippingAddress(1);
-        final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
+        final CustomerCreateCommand sphereRequest = CustomerCreateCommand.of(draft)
+                .withExpansionPaths(m -> m.customer().customerGroup());
+        final CustomerSignInResult result = execute(sphereRequest);
         final Customer customer = result.getCustomer();
         final Cart cart = result.getCart();
         assertThat(customer.getName()).isEqualTo(name);
@@ -63,6 +65,9 @@ public class CustomerCreateCommandTest extends IntegrationTest {
         assertThat(customer.getAddresses().stream().map(a -> a.withId(null)).collect(toList())).isEqualTo(addresses);
         assertThat(customer.getDefaultBillingAddress().withId(null)).isEqualTo(addresses.get(0));
         assertThat(customer.findDefaultShippingAddress().get().withId(null)).isEqualTo(addresses.get(1));
+        assertThat(customer.getCustomerGroup().getObj())
+                .overridingErrorMessage("customer group can be expanded")
+                .isNotNull();
     }
 
     @Test

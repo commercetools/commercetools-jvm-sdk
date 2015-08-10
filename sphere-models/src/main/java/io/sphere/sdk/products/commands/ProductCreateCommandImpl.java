@@ -1,8 +1,10 @@
 package io.sphere.sdk.products.commands;
 
-import io.sphere.sdk.commands.CreateCommandImpl;
+import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandBuilder;
+import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandImpl;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductDraft;
+import io.sphere.sdk.products.expansion.ProductExpansionModel;
 
 /**
  Creates a product.
@@ -16,8 +18,12 @@ import io.sphere.sdk.products.ProductDraft;
  Create a {@link ProductDraft} instance:
  {@include.example io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier}
  */
-final class ProductCreateCommandImpl extends CreateCommandImpl<Product, ProductDraft> implements ProductCreateCommand {
+final class ProductCreateCommandImpl extends ReferenceExpandeableCreateCommandImpl<Product, ProductCreateCommand, ProductDraft, ProductExpansionModel<Product>> implements ProductCreateCommand {
+    ProductCreateCommandImpl(final ReferenceExpandeableCreateCommandBuilder<Product, ProductCreateCommand, ProductDraft, ProductExpansionModel<Product>> builder) {
+        super(builder);
+    }
+
     ProductCreateCommandImpl(final ProductDraft body) {
-        super(body, ProductEndpoint.ENDPOINT);
+        super(body, ProductEndpoint.ENDPOINT, ProductExpansionModel.of(), ProductCreateCommandImpl::new);
     }
 }

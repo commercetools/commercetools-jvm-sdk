@@ -10,7 +10,7 @@ public class InventoryEntryExpansionModel<T> extends ExpansionModel<T> {
     }
 
     public ExpansionPath<T> supplyChannel() {
-        return ExpansionPath.of("supplyChannel");
+        return expansionPath("supplyChannel");
     }
 
     public static InventoryEntryExpansionModel<InventoryEntry> of() {

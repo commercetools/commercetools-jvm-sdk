@@ -1,14 +1,20 @@
 package io.sphere.sdk.customergroups.commands;
 
-import io.sphere.sdk.commands.CreateCommandImpl;
+import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandBuilder;
+import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandImpl;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customergroups.CustomerGroupDraft;
+import io.sphere.sdk.customergroups.expansion.CustomerGroupExpansionModel;
 
 import static io.sphere.sdk.customergroups.commands.CustomerGroupEndpoint.ENDPOINT;
 
-final class CustomerGroupCreateCommandImpl extends CreateCommandImpl<CustomerGroup, CustomerGroupDraft> implements CustomerGroupCreateCommand {
+final class CustomerGroupCreateCommandImpl extends ReferenceExpandeableCreateCommandImpl<CustomerGroup, CustomerGroupCreateCommand, CustomerGroupDraft, CustomerGroupExpansionModel<CustomerGroup>> implements CustomerGroupCreateCommand {
+    CustomerGroupCreateCommandImpl(final ReferenceExpandeableCreateCommandBuilder<CustomerGroup, CustomerGroupCreateCommand, CustomerGroupDraft, CustomerGroupExpansionModel<CustomerGroup>> builder) {
+        super(builder);
+    }
+
     CustomerGroupCreateCommandImpl(final CustomerGroupDraft draft) {
-        super(draft, ENDPOINT);
+        super(draft, ENDPOINT, CustomerGroupExpansionModel.of(), CustomerGroupCreateCommandImpl::new);
     }
 
     public static CustomerGroupCreateCommandImpl of(final CustomerGroupDraft draft) {

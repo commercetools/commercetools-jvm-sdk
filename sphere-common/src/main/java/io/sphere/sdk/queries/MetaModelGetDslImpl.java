@@ -53,7 +53,7 @@ public class MetaModelGetDslImpl<R, T, C extends MetaModelGetDsl<R, T, C, E>, E>
         this(endpoint, identifierToSearchFor, Collections.emptyList(), expansionModel, builderFunction, Collections.emptyList());
     }
 
-    public MetaModelGetDslImpl(final MetaModelGetDslBuilder<R, T, C, E> builder) {
+    protected MetaModelGetDslImpl(final MetaModelGetDslBuilder<R, T, C, E> builder) {
         this(builder.endpoint, builder.identifierToSearchFor, builder.expansionPaths, builder.expansionModel, builder.builderFunction, builder.additionalParameters);
     }
 

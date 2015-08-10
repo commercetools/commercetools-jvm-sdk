@@ -25,5 +25,13 @@ public class CategoryCreateCommandTest extends IntegrationTest {
         assertThat(category.getExternalId()).contains(externalId);
     }
 
-
+    @Test
+    public void referenceExpansion() throws Exception {
+        final CategoryDraft parentDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).build();
+        final Category parent = execute(CategoryCreateCommand.of(parentDraft));
+        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).parent(parent).build();
+        final Category category = execute(CategoryCreateCommand.of(categoryDraft).withExpansionPaths(m -> m.parent()));
+        assertThat(category.getParent().getObj()).isNotNull();
+        execute(CategoryDeleteCommand.of(parent));
+    }
 }

@@ -10,7 +10,7 @@ final class CategoryByIdGetImpl extends MetaModelGetDslImpl<Category, Category, 
         super(id, CategoryEndpoint.ENDPOINT, CategoryExpansionModel.of(), CategoryByIdGetImpl::new);
     }
 
-    public CategoryByIdGetImpl(MetaModelGetDslBuilder<Category, Category, CategoryByIdGet, CategoryExpansionModel<Category>> builder) {
+    public CategoryByIdGetImpl(final MetaModelGetDslBuilder<Category, Category, CategoryByIdGet, CategoryExpansionModel<Category>> builder) {
         super(builder);
     }
 }
