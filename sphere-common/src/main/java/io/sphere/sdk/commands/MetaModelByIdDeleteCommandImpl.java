@@ -7,6 +7,7 @@ import io.sphere.sdk.expansion.ExpansionDslUtil;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.expansion.MetaModelExpansionDslExpansionModelRead;
 import io.sphere.sdk.http.HttpMethod;
+import io.sphere.sdk.http.UrlQueryBuilder;
 import io.sphere.sdk.models.ResourceView;
 import io.sphere.sdk.models.Versioned;
 
@@ -52,7 +53,10 @@ public abstract class MetaModelByIdDeleteCommandImpl<T extends ResourceView<T>, 
         if (!baseEndpointWithoutId.startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash");
         }
-        return HttpRequestIntent.of(HttpMethod.DELETE, baseEndpointWithoutId + "/" + versioned.getId() + "?version=" + versioned.getVersion());
+        final UrlQueryBuilder builder = UrlQueryBuilder.of();
+        expansionPaths().forEach(path -> builder.add("expand", path.toSphereExpand(), true));
+        final String expansionPathParameters = builder.build();
+        return HttpRequestIntent.of(HttpMethod.DELETE, baseEndpointWithoutId + "/" + versioned.getId() + "?version=" + versioned.getVersion() + (expansionPathParameters.isEmpty() ? "" : "&" + expansionPathParameters));
     }
 
     @Override

@@ -76,7 +76,6 @@ public class ReferenceExpandeableUpdateCommandDslImpl<T extends ResourceView<T>,
         return HttpRequestIntent.of(HttpMethod.POST, path, toJsonString(new UpdateCommandBody<>(getVersioned().getVersion(), getUpdateActions())));
     }
 
-
     private String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
         expansionPaths().forEach(path -> builder.add("expand", path.toSphereExpand(), urlEncoded));
