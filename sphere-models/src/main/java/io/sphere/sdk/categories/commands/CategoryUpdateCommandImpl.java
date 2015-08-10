@@ -2,16 +2,16 @@ package io.sphere.sdk.categories.commands;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
-import io.sphere.sdk.commands.ReferenceExpandeableUpdateCommandDslImpl;
-import io.sphere.sdk.commands.ReferenceExpanseableUpdateCommandDslBuilder;
+import io.sphere.sdk.commands.MetaModelUpdateCommandDslImpl;
+import io.sphere.sdk.commands.MetaModelUpdateCommandDslBuilder;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.Versioned;
 
 import java.util.List;
 
-final class CategoryUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<Category, CategoryUpdateCommand, CategoryExpansionModel<Category>> implements CategoryUpdateCommand {
+final class CategoryUpdateCommandImpl extends MetaModelUpdateCommandDslImpl<Category, CategoryUpdateCommand, CategoryExpansionModel<Category>> implements CategoryUpdateCommand {
 
-    CategoryUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<Category, CategoryUpdateCommand, CategoryExpansionModel<Category>> builder) {
+    CategoryUpdateCommandImpl(final MetaModelUpdateCommandDslBuilder<Category, CategoryUpdateCommand, CategoryExpansionModel<Category>> builder) {
         super(builder);
     }
 

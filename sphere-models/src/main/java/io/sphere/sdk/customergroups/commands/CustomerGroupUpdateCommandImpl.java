@@ -10,12 +10,12 @@ import java.util.List;
 import static io.sphere.sdk.customergroups.commands.CustomerGroupEndpoint.ENDPOINT;
 
 
-final class CustomerGroupUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<CustomerGroup, CustomerGroupUpdateCommand, CustomerGroupExpansionModel<CustomerGroup>> implements CustomerGroupUpdateCommand {
+final class CustomerGroupUpdateCommandImpl extends MetaModelUpdateCommandDslImpl<CustomerGroup, CustomerGroupUpdateCommand, CustomerGroupExpansionModel<CustomerGroup>> implements CustomerGroupUpdateCommand {
     CustomerGroupUpdateCommandImpl(final Versioned<CustomerGroup> versioned, final List<? extends UpdateAction<CustomerGroup>> updateActions) {
         super(versioned, updateActions, ENDPOINT, CustomerGroupUpdateCommandImpl::new, CustomerGroupExpansionModel.of());
     }
 
-    CustomerGroupUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<CustomerGroup, CustomerGroupUpdateCommand, CustomerGroupExpansionModel<CustomerGroup>> builder) {
+    CustomerGroupUpdateCommandImpl(final MetaModelUpdateCommandDslBuilder<CustomerGroup, CustomerGroupUpdateCommand, CustomerGroupExpansionModel<CustomerGroup>> builder) {
         super(builder);
     }
 }

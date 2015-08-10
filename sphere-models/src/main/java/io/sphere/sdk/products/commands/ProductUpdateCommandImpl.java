@@ -7,12 +7,12 @@ import io.sphere.sdk.products.expansion.ProductExpansionModel;
 
 import java.util.List;
 
-final class ProductUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<Product, ProductUpdateCommand, ProductExpansionModel<Product>> implements ProductUpdateCommand {
+final class ProductUpdateCommandImpl extends MetaModelUpdateCommandDslImpl<Product, ProductUpdateCommand, ProductExpansionModel<Product>> implements ProductUpdateCommand {
     ProductUpdateCommandImpl(final Versioned<Product> versioned, final List<? extends UpdateAction<Product>> updateActions) {
         super(versioned, updateActions, ProductEndpoint.ENDPOINT, ProductUpdateCommandImpl::new, ProductExpansionModel.of());
     }
 
-    ProductUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<Product, ProductUpdateCommand, ProductExpansionModel<Product>> builder) {
+    ProductUpdateCommandImpl(final MetaModelUpdateCommandDslBuilder<Product, ProductUpdateCommand, ProductExpansionModel<Product>> builder) {
         super(builder);
     }
 }

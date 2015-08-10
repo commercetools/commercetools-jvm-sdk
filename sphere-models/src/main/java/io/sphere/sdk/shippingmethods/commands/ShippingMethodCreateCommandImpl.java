@@ -1,7 +1,7 @@
 package io.sphere.sdk.shippingmethods.commands;
 
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandBuilder;
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandImpl;
+import io.sphere.sdk.commands.MetaModelCreateCommandBuilder;
+import io.sphere.sdk.commands.MetaModelCreateCommandImpl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.shippingmethods.ShippingMethodDraft;
 import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
@@ -11,8 +11,8 @@ import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodCreateCommandTest#execution()}
  */
-final class ShippingMethodCreateCommandImpl extends ReferenceExpandeableCreateCommandImpl<ShippingMethod, ShippingMethodCreateCommand, ShippingMethodDraft, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodCreateCommand {
-    ShippingMethodCreateCommandImpl(final ReferenceExpandeableCreateCommandBuilder<ShippingMethod, ShippingMethodCreateCommand, ShippingMethodDraft, ShippingMethodExpansionModel<ShippingMethod>> builder) {
+final class ShippingMethodCreateCommandImpl extends MetaModelCreateCommandImpl<ShippingMethod, ShippingMethodCreateCommand, ShippingMethodDraft, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodCreateCommand {
+    ShippingMethodCreateCommandImpl(final MetaModelCreateCommandBuilder<ShippingMethod, ShippingMethodCreateCommand, ShippingMethodDraft, ShippingMethodExpansionModel<ShippingMethod>> builder) {
         super(builder);
     }
 

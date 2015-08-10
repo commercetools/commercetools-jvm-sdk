@@ -3,11 +3,11 @@ package io.sphere.sdk.cartdiscounts.commands;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.cartdiscounts.CartDiscountDraft;
 import io.sphere.sdk.cartdiscounts.expansion.CartDiscountExpansionModel;
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandBuilder;
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandImpl;
+import io.sphere.sdk.commands.MetaModelCreateCommandBuilder;
+import io.sphere.sdk.commands.MetaModelCreateCommandImpl;
 
-final class CartDiscountCreateCommandImpl extends ReferenceExpandeableCreateCommandImpl<CartDiscount, CartDiscountCreateCommand, CartDiscountDraft, CartDiscountExpansionModel<CartDiscount>> implements CartDiscountCreateCommand {
-    CartDiscountCreateCommandImpl(final ReferenceExpandeableCreateCommandBuilder<CartDiscount, CartDiscountCreateCommand, CartDiscountDraft, CartDiscountExpansionModel<CartDiscount>> builder) {
+final class CartDiscountCreateCommandImpl extends MetaModelCreateCommandImpl<CartDiscount, CartDiscountCreateCommand, CartDiscountDraft, CartDiscountExpansionModel<CartDiscount>> implements CartDiscountCreateCommand {
+    CartDiscountCreateCommandImpl(final MetaModelCreateCommandBuilder<CartDiscount, CartDiscountCreateCommand, CartDiscountDraft, CartDiscountExpansionModel<CartDiscount>> builder) {
         super(builder);
     }
 

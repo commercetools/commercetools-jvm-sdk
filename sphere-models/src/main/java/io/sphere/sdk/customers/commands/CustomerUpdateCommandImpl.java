@@ -8,12 +8,12 @@ import io.sphere.sdk.models.Versioned;
 import java.util.List;
 
 
-final class CustomerUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<Customer, CustomerUpdateCommand, CustomerExpansionModel<Customer>> implements CustomerUpdateCommand {
+final class CustomerUpdateCommandImpl extends MetaModelUpdateCommandDslImpl<Customer, CustomerUpdateCommand, CustomerExpansionModel<Customer>> implements CustomerUpdateCommand {
     CustomerUpdateCommandImpl(final Versioned<Customer> versioned, final List<? extends UpdateAction<Customer>> updateActions) {
         super(versioned, updateActions, CustomerEndpoint.ENDPOINT, CustomerUpdateCommandImpl::new, CustomerExpansionModel.of());
     }
 
-    CustomerUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<Customer, CustomerUpdateCommand, CustomerExpansionModel<Customer>> builder) {
+    CustomerUpdateCommandImpl(final MetaModelUpdateCommandDslBuilder<Customer, CustomerUpdateCommand, CustomerExpansionModel<Customer>> builder) {
         super(builder);
     }
 }

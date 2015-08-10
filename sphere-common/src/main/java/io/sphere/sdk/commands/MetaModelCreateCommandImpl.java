@@ -25,15 +25,15 @@ import static java.util.Objects.requireNonNull;
  * @param <D> type of the draft object
  * @param <E> type of the expansion model
  */
-public abstract class ReferenceExpandeableCreateCommandImpl<T, C, D, E> extends CommandImpl<T> implements CreateCommand<T>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
+public abstract class MetaModelCreateCommandImpl<T, C, D, E> extends CommandImpl<T> implements CreateCommand<T>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
 
     final D body;
     final E expansionModel;
     final JsonEndpoint<T> endpoint;
     final List<ExpansionPath<T>> expansionPaths;
-    final Function<ReferenceExpandeableCreateCommandBuilder<T, C, D, E>, C> creationFunction;
+    final Function<MetaModelCreateCommandBuilder<T, C, D, E>, C> creationFunction;
 
-    protected ReferenceExpandeableCreateCommandImpl(final D draft, final JsonEndpoint<T> endpoint, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<ReferenceExpandeableCreateCommandBuilder<T, C, D, E>, C> creationFunction) {
+    protected MetaModelCreateCommandImpl(final D draft, final JsonEndpoint<T> endpoint, final List<ExpansionPath<T>> expansionPaths, final E expansionModel, final Function<MetaModelCreateCommandBuilder<T, C, D, E>, C> creationFunction) {
         this.creationFunction = requireNonNull(creationFunction);
         this.expansionPaths = requireNonNull(expansionPaths);
         this.expansionModel = requireNonNull(expansionModel);
@@ -41,11 +41,11 @@ public abstract class ReferenceExpandeableCreateCommandImpl<T, C, D, E> extends 
         this.endpoint = requireNonNull(endpoint);
     }
 
-    protected ReferenceExpandeableCreateCommandImpl(final ReferenceExpandeableCreateCommandBuilder<T, C, D, E> builder) {
+    protected MetaModelCreateCommandImpl(final MetaModelCreateCommandBuilder<T, C, D, E> builder) {
         this(builder.body, builder.endpoint, builder.expansionPaths, builder.expansionModel, builder.creationFunction);
     }
 
-    protected ReferenceExpandeableCreateCommandImpl(final D draft, final JsonEndpoint<T> endpoint, final E expansionModel, final Function<ReferenceExpandeableCreateCommandBuilder<T, C, D, E>, C> creationFunction) {
+    protected MetaModelCreateCommandImpl(final D draft, final JsonEndpoint<T> endpoint, final E expansionModel, final Function<MetaModelCreateCommandBuilder<T, C, D, E>, C> creationFunction) {
         this(draft, endpoint, Collections.emptyList(), expansionModel, creationFunction);
     }
 
@@ -114,7 +114,7 @@ public abstract class ReferenceExpandeableCreateCommandImpl<T, C, D, E> extends 
         return expansionModel;
     }
 
-    protected ReferenceExpandeableCreateCommandBuilder<T, C, D, E> copyBuilder() {
-        return new ReferenceExpandeableCreateCommandBuilder<>(this);
+    protected MetaModelCreateCommandBuilder<T, C, D, E> copyBuilder() {
+        return new MetaModelCreateCommandBuilder<>(this);
     }
 }

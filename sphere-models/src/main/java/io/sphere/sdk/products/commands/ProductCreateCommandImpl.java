@@ -1,7 +1,7 @@
 package io.sphere.sdk.products.commands;
 
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandBuilder;
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandImpl;
+import io.sphere.sdk.commands.MetaModelCreateCommandBuilder;
+import io.sphere.sdk.commands.MetaModelCreateCommandImpl;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductDraft;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
@@ -18,8 +18,8 @@ import io.sphere.sdk.products.expansion.ProductExpansionModel;
  Create a {@link ProductDraft} instance:
  {@include.example io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier}
  */
-final class ProductCreateCommandImpl extends ReferenceExpandeableCreateCommandImpl<Product, ProductCreateCommand, ProductDraft, ProductExpansionModel<Product>> implements ProductCreateCommand {
-    ProductCreateCommandImpl(final ReferenceExpandeableCreateCommandBuilder<Product, ProductCreateCommand, ProductDraft, ProductExpansionModel<Product>> builder) {
+final class ProductCreateCommandImpl extends MetaModelCreateCommandImpl<Product, ProductCreateCommand, ProductDraft, ProductExpansionModel<Product>> implements ProductCreateCommand {
+    ProductCreateCommandImpl(final MetaModelCreateCommandBuilder<Product, ProductCreateCommand, ProductDraft, ProductExpansionModel<Product>> builder) {
         super(builder);
     }
 

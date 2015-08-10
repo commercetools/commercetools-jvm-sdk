@@ -1,15 +1,15 @@
 package io.sphere.sdk.orders.commands;
 
 import io.sphere.sdk.carts.Cart;
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandBuilder;
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandImpl;
+import io.sphere.sdk.commands.MetaModelCreateCommandBuilder;
+import io.sphere.sdk.commands.MetaModelCreateCommandImpl;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderFromCartDraft;
 import io.sphere.sdk.orders.expansion.OrderExpansionModel;
 
-final class OrderFromCartCreateCommandImpl extends ReferenceExpandeableCreateCommandImpl<Order, OrderFromCartCreateCommand, OrderFromCartDraft, OrderExpansionModel<Order>> implements OrderFromCartCreateCommand {
-    OrderFromCartCreateCommandImpl(final ReferenceExpandeableCreateCommandBuilder<Order, OrderFromCartCreateCommand, OrderFromCartDraft, OrderExpansionModel<Order>> builder) {
+final class OrderFromCartCreateCommandImpl extends MetaModelCreateCommandImpl<Order, OrderFromCartCreateCommand, OrderFromCartDraft, OrderExpansionModel<Order>> implements OrderFromCartCreateCommand {
+    OrderFromCartCreateCommandImpl(final MetaModelCreateCommandBuilder<Order, OrderFromCartCreateCommand, OrderFromCartDraft, OrderExpansionModel<Order>> builder) {
         super(builder);
     }
 

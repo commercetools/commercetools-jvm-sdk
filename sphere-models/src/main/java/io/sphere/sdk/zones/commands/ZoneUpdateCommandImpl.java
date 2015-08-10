@@ -7,12 +7,12 @@ import io.sphere.sdk.zones.expansion.ZoneExpansionModel;
 
 import java.util.List;
 
-final class ZoneUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<Zone, ZoneUpdateCommand, ZoneExpansionModel<Zone>> implements ZoneUpdateCommand {
+final class ZoneUpdateCommandImpl extends MetaModelUpdateCommandDslImpl<Zone, ZoneUpdateCommand, ZoneExpansionModel<Zone>> implements ZoneUpdateCommand {
     ZoneUpdateCommandImpl(final Versioned<Zone> versioned, final List<? extends UpdateAction<Zone>> updateActions) {
         super(versioned, updateActions, ZoneEndpoint.ENDPOINT, ZoneUpdateCommandImpl::new, ZoneExpansionModel.of());
     }
 
-    ZoneUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<Zone, ZoneUpdateCommand, ZoneExpansionModel<Zone>> builder) {
+    ZoneUpdateCommandImpl(final MetaModelUpdateCommandDslBuilder<Zone, ZoneUpdateCommand, ZoneExpansionModel<Zone>> builder) {
         super(builder);
     }
 }

@@ -8,12 +8,12 @@ import io.sphere.sdk.productdiscounts.expansion.ProductDiscountExpansionModel;
 import java.util.List;
 
 
-final class ProductDiscountUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<ProductDiscount, ProductDiscountUpdateCommand, ProductDiscountExpansionModel<ProductDiscount>> implements ProductDiscountUpdateCommand {
+final class ProductDiscountUpdateCommandImpl extends MetaModelUpdateCommandDslImpl<ProductDiscount, ProductDiscountUpdateCommand, ProductDiscountExpansionModel<ProductDiscount>> implements ProductDiscountUpdateCommand {
     ProductDiscountUpdateCommandImpl(final Versioned<ProductDiscount> versioned, final List<? extends UpdateAction<ProductDiscount>> updateActions) {
         super(versioned, updateActions, ProductDiscountEndpoint.ENDPOINT, ProductDiscountUpdateCommandImpl::new, ProductDiscountExpansionModel.of());
     }
 
-    ProductDiscountUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<ProductDiscount, ProductDiscountUpdateCommand, ProductDiscountExpansionModel<ProductDiscount>> builder) {
+    ProductDiscountUpdateCommandImpl(final MetaModelUpdateCommandDslBuilder<ProductDiscount, ProductDiscountUpdateCommand, ProductDiscountExpansionModel<ProductDiscount>> builder) {
         super(builder);
     }
 }

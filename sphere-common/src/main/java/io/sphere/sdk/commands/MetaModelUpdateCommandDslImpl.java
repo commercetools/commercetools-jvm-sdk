@@ -24,22 +24,22 @@ import static java.util.Objects.requireNonNull;
  @param <T> the type of the result of the command
  @param <C> class which will serialized as JSON command body, most likely a template
  @param <E> type of the expansion model */
-public class ReferenceExpandeableUpdateCommandDslImpl<T extends ResourceView<T>, C extends UpdateCommandDsl<T, C>, E> extends CommandImpl<T> implements UpdateCommandDsl<T, C>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
+public class MetaModelUpdateCommandDslImpl<T extends ResourceView<T>, C extends UpdateCommandDsl<T, C>, E> extends CommandImpl<T> implements UpdateCommandDsl<T, C>, MetaModelExpansionDslExpansionModelRead<T, C, E> {
     final Versioned<T> versioned;
     final List<? extends UpdateAction<T>> updateActions;
     final TypeReference<T> typeReference;
     final String baseEndpointWithoutId;
-    final Function<ReferenceExpanseableUpdateCommandDslBuilder<T, C, E>, C> creationFunction;
+    final Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction;
     final E expansionModel;
     final List<ExpansionPath<T>> expansionPaths;
 
-    private ReferenceExpandeableUpdateCommandDslImpl(final Versioned<T> versioned,
-                                                     final List<? extends UpdateAction<T>> updateActions,
-                                                     final TypeReference<T> typeReference,
-                                                     final String baseEndpointWithoutId,
-                                                     final Function<ReferenceExpanseableUpdateCommandDslBuilder<T, C, E>, C> creationFunction,
-                                                     final E expansionModel,
-                                                     final List<ExpansionPath<T>> expansionPaths) {
+    private MetaModelUpdateCommandDslImpl(final Versioned<T> versioned,
+                                          final List<? extends UpdateAction<T>> updateActions,
+                                          final TypeReference<T> typeReference,
+                                          final String baseEndpointWithoutId,
+                                          final Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction,
+                                          final E expansionModel,
+                                          final List<ExpansionPath<T>> expansionPaths) {
         this.expansionModel = requireNonNull(expansionModel);
         this.expansionPaths = requireNonNull(expansionPaths);
         this.creationFunction = requireNonNull(creationFunction);
@@ -49,15 +49,15 @@ public class ReferenceExpandeableUpdateCommandDslImpl<T extends ResourceView<T>,
         this.baseEndpointWithoutId = requireNonNull(baseEndpointWithoutId);
     }
 
-    protected ReferenceExpandeableUpdateCommandDslImpl(final Versioned<T> versioned,
-                                                       final List<? extends UpdateAction<T>> updateActions,
-                                                       final JsonEndpoint<T> endpoint,
-                                                       final Function<ReferenceExpanseableUpdateCommandDslBuilder<T, C, E>, C> creationFunction,
-                                                       final E expansionModel) {
+    protected MetaModelUpdateCommandDslImpl(final Versioned<T> versioned,
+                                            final List<? extends UpdateAction<T>> updateActions,
+                                            final JsonEndpoint<T> endpoint,
+                                            final Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction,
+                                            final E expansionModel) {
         this(versioned, updateActions, endpoint.typeReference(), endpoint.endpoint(), creationFunction, expansionModel, Collections.<ExpansionPath<T>>emptyList());
     }
 
-    protected ReferenceExpandeableUpdateCommandDslImpl(final ReferenceExpanseableUpdateCommandDslBuilder<T, C, E> builder) {
+    protected MetaModelUpdateCommandDslImpl(final MetaModelUpdateCommandDslBuilder<T, C, E> builder) {
         this(builder.getVersioned(), builder.getUpdateActions(), builder.getTypeReference(), builder.getBaseEndpointWithoutId(), builder.getCreationFunction(), builder.expansionModel, builder.expansionPaths);
     }
 
@@ -95,15 +95,15 @@ public class ReferenceExpandeableUpdateCommandDslImpl<T extends ResourceView<T>,
         return updateActions;
     }
 
-    protected ReferenceExpanseableUpdateCommandDslBuilder<T, C, E> copyBuilder() {
-        return new ReferenceExpanseableUpdateCommandDslBuilder<>(this);
+    protected MetaModelUpdateCommandDslBuilder<T, C, E> copyBuilder() {
+        return new MetaModelUpdateCommandDslBuilder<>(this);
     }
 
     String getBaseEndpointWithoutId() {
         return baseEndpointWithoutId;
     }
 
-    Function<ReferenceExpanseableUpdateCommandDslBuilder<T, C, E>, C> getCreationFunction() {
+    Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> getCreationFunction() {
         return creationFunction;
     }
 

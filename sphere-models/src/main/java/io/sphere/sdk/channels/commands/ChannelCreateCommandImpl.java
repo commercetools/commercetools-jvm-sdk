@@ -3,11 +3,11 @@ package io.sphere.sdk.channels.commands;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.channels.ChannelDraft;
 import io.sphere.sdk.channels.expansion.ChannelExpansionModel;
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandBuilder;
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandImpl;
+import io.sphere.sdk.commands.MetaModelCreateCommandBuilder;
+import io.sphere.sdk.commands.MetaModelCreateCommandImpl;
 
-final class ChannelCreateCommandImpl extends ReferenceExpandeableCreateCommandImpl<Channel, ChannelCreateCommand, ChannelDraft, ChannelExpansionModel<Channel>> implements ChannelCreateCommand {
-    ChannelCreateCommandImpl(final ReferenceExpandeableCreateCommandBuilder<Channel, ChannelCreateCommand, ChannelDraft, ChannelExpansionModel<Channel>> builder) {
+final class ChannelCreateCommandImpl extends MetaModelCreateCommandImpl<Channel, ChannelCreateCommand, ChannelDraft, ChannelExpansionModel<Channel>> implements ChannelCreateCommand {
+    ChannelCreateCommandImpl(final MetaModelCreateCommandBuilder<Channel, ChannelCreateCommand, ChannelDraft, ChannelExpansionModel<Channel>> builder) {
         super(builder);
     }
 

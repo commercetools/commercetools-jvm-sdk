@@ -15,16 +15,16 @@ import static java.util.Objects.requireNonNull;
 /**
  * Internal class.
  */
-public class ReferenceExpanseableUpdateCommandDslBuilder<T extends ResourceView<T>, C extends UpdateCommandDsl<T, C>, E> extends Base implements Builder<C>{
+public class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T>, C extends UpdateCommandDsl<T, C>, E> extends Base implements Builder<C>{
     Versioned<T> versioned;
     List<? extends UpdateAction<T>> updateActions;
     TypeReference<T> typeReference;
     String baseEndpointWithoutId;
-    Function<ReferenceExpanseableUpdateCommandDslBuilder<T, C, E>, C> creationFunction;
+    Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> creationFunction;
     final E expansionModel;
     List<ExpansionPath<T>> expansionPaths;
 
-    ReferenceExpanseableUpdateCommandDslBuilder(final ReferenceExpandeableUpdateCommandDslImpl<T, C, E> template) {
+    MetaModelUpdateCommandDslBuilder(final MetaModelUpdateCommandDslImpl<T, C, E> template) {
         this.expansionModel = requireNonNull(template.expansionModel);
         this.expansionPaths = requireNonNull(template.expansionPaths);
         this.creationFunction = requireNonNull(template.creationFunction);
@@ -34,7 +34,7 @@ public class ReferenceExpanseableUpdateCommandDslBuilder<T extends ResourceView<
         this.baseEndpointWithoutId = requireNonNull(template.baseEndpointWithoutId);
     }
 
-    public ReferenceExpanseableUpdateCommandDslBuilder<T, C, E> versioned(final Versioned<T> versioned) {
+    public MetaModelUpdateCommandDslBuilder<T, C, E> versioned(final Versioned<T> versioned) {
         this.versioned = versioned;
         return this;
     }
@@ -48,7 +48,7 @@ public class ReferenceExpanseableUpdateCommandDslBuilder<T extends ResourceView<
         return baseEndpointWithoutId;
     }
 
-    Function<ReferenceExpanseableUpdateCommandDslBuilder<T, C, E>, C> getCreationFunction() {
+    Function<MetaModelUpdateCommandDslBuilder<T, C, E>, C> getCreationFunction() {
         return creationFunction;
     }
 
@@ -64,7 +64,7 @@ public class ReferenceExpanseableUpdateCommandDslBuilder<T extends ResourceView<
         return versioned;
     }
 
-    ReferenceExpanseableUpdateCommandDslBuilder<T, C, E> expansionPaths(final List<ExpansionPath<T>> expansionPaths) {
+    MetaModelUpdateCommandDslBuilder<T, C, E> expansionPaths(final List<ExpansionPath<T>> expansionPaths) {
         this.expansionPaths = expansionPaths;
         return this;
     }

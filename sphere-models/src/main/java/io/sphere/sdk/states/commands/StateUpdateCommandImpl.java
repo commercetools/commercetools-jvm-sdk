@@ -8,12 +8,12 @@ import io.sphere.sdk.states.expansion.StateExpansionModel;
 import java.util.List;
 
 
-final class StateUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<State, StateUpdateCommand, StateExpansionModel<State>> implements StateUpdateCommand {
+final class StateUpdateCommandImpl extends MetaModelUpdateCommandDslImpl<State, StateUpdateCommand, StateExpansionModel<State>> implements StateUpdateCommand {
     StateUpdateCommandImpl(final Versioned<State> versioned, final List<? extends UpdateAction<State>> updateActions) {
         super(versioned, updateActions, StateEndpoint.ENDPOINT, StateUpdateCommandImpl::new, StateExpansionModel.of());
     }
 
-    StateUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<State, StateUpdateCommand, StateExpansionModel<State>> builder) {
+    StateUpdateCommandImpl(final MetaModelUpdateCommandDslBuilder<State, StateUpdateCommand, StateExpansionModel<State>> builder) {
         super(builder);
     }
 }

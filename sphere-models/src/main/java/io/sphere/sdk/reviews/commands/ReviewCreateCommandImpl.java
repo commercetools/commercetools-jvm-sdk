@@ -1,7 +1,7 @@
 package io.sphere.sdk.reviews.commands;
 
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandBuilder;
-import io.sphere.sdk.commands.ReferenceExpandeableCreateCommandImpl;
+import io.sphere.sdk.commands.MetaModelCreateCommandBuilder;
+import io.sphere.sdk.commands.MetaModelCreateCommandImpl;
 import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.reviews.ReviewDraft;
 import io.sphere.sdk.reviews.expansion.ReviewExpansionModel;
@@ -13,8 +13,8 @@ import io.sphere.sdk.reviews.expansion.ReviewExpansionModel;
 
 @see io.sphere.sdk.reviews.ReviewDraftBuilder
  */
-final class ReviewCreateCommandImpl extends ReferenceExpandeableCreateCommandImpl<Review, ReviewCreateCommand, ReviewDraft, ReviewExpansionModel<Review>> implements ReviewCreateCommand {
-    ReviewCreateCommandImpl(final ReferenceExpandeableCreateCommandBuilder<Review, ReviewCreateCommand, ReviewDraft, ReviewExpansionModel<Review>> builder) {
+final class ReviewCreateCommandImpl extends MetaModelCreateCommandImpl<Review, ReviewCreateCommand, ReviewDraft, ReviewExpansionModel<Review>> implements ReviewCreateCommand {
+    ReviewCreateCommandImpl(final MetaModelCreateCommandBuilder<Review, ReviewCreateCommand, ReviewDraft, ReviewExpansionModel<Review>> builder) {
         super(builder);
     }
 

@@ -8,15 +8,19 @@ import io.sphere.sdk.models.Builder;
 import java.util.List;
 import java.util.function.Function;
 
-public class ReferenceExpandeableCreateCommandBuilder<T, C, D, E> extends Base implements Builder<C> {
+/**
+
+Internal builder.
+ */
+public class MetaModelCreateCommandBuilder<T, C, D, E> extends Base implements Builder<C> {
     final D body;
     final E expansionModel;
     final JsonEndpoint<T> endpoint;
-    final Function<ReferenceExpandeableCreateCommandBuilder<T, C, D, E>, C> creationFunction;
+    final Function<MetaModelCreateCommandBuilder<T, C, D, E>, C> creationFunction;
     List<ExpansionPath<T>> expansionPaths;
 
 
-    public ReferenceExpandeableCreateCommandBuilder(final ReferenceExpandeableCreateCommandImpl<T, C, D, E> template) {
+    public MetaModelCreateCommandBuilder(final MetaModelCreateCommandImpl<T, C, D, E> template) {
         body = template.body;
         expansionModel = template.expansionModel;
         endpoint = template.endpoint;
@@ -29,7 +33,7 @@ public class ReferenceExpandeableCreateCommandBuilder<T, C, D, E> extends Base i
         return creationFunction.apply(this);
     }
 
-    public ReferenceExpandeableCreateCommandBuilder<T, C, D, E> expansionPaths(final List<ExpansionPath<T>> expansionPaths) {
+    public MetaModelCreateCommandBuilder<T, C, D, E> expansionPaths(final List<ExpansionPath<T>> expansionPaths) {
         this.expansionPaths = expansionPaths;
         return this;
     }

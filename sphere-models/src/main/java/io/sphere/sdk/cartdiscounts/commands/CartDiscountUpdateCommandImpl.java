@@ -7,12 +7,12 @@ import io.sphere.sdk.models.Versioned;
 
 import java.util.List;
 
-final class CartDiscountUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<CartDiscount, CartDiscountUpdateCommand, CartDiscountExpansionModel<CartDiscount>> implements CartDiscountUpdateCommand {
+final class CartDiscountUpdateCommandImpl extends MetaModelUpdateCommandDslImpl<CartDiscount, CartDiscountUpdateCommand, CartDiscountExpansionModel<CartDiscount>> implements CartDiscountUpdateCommand {
     CartDiscountUpdateCommandImpl(final Versioned<CartDiscount> versioned, final List<? extends UpdateAction<CartDiscount>> updateActions) {
         super(versioned, updateActions, CartDiscountEndpoint.ENDPOINT, CartDiscountUpdateCommandImpl::new, CartDiscountExpansionModel.of());
     }
 
-    CartDiscountUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<CartDiscount, CartDiscountUpdateCommand, CartDiscountExpansionModel<CartDiscount>> builder) {
+    CartDiscountUpdateCommandImpl(final MetaModelUpdateCommandDslBuilder<CartDiscount, CartDiscountUpdateCommand, CartDiscountExpansionModel<CartDiscount>> builder) {
         super(builder);
     }
 }

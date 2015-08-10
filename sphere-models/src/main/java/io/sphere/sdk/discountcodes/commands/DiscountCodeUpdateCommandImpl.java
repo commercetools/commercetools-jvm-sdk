@@ -8,12 +8,12 @@ import io.sphere.sdk.models.Versioned;
 import java.util.List;
 
 
-final class DiscountCodeUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<DiscountCode, DiscountCodeUpdateCommand, DiscountCodeExpansionModel<DiscountCode>> implements DiscountCodeUpdateCommand {
+final class DiscountCodeUpdateCommandImpl extends MetaModelUpdateCommandDslImpl<DiscountCode, DiscountCodeUpdateCommand, DiscountCodeExpansionModel<DiscountCode>> implements DiscountCodeUpdateCommand {
     DiscountCodeUpdateCommandImpl(final Versioned<DiscountCode> versioned, final List<? extends UpdateAction<DiscountCode>> updateActions) {
         super(versioned, updateActions, DiscountCodeEndpoint.ENDPOINT, DiscountCodeUpdateCommandImpl::new, DiscountCodeExpansionModel.of());
     }
 
-    DiscountCodeUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<DiscountCode, DiscountCodeUpdateCommand, DiscountCodeExpansionModel<DiscountCode>> builder) {
+    DiscountCodeUpdateCommandImpl(final MetaModelUpdateCommandDslBuilder<DiscountCode, DiscountCodeUpdateCommand, DiscountCodeExpansionModel<DiscountCode>> builder) {
         super(builder);
     }
 }
