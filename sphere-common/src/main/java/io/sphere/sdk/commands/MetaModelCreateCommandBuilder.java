@@ -20,7 +20,7 @@ public class MetaModelCreateCommandBuilder<T, C, D, E> extends Base implements B
     List<ExpansionPath<T>> expansionPaths;
 
 
-    public MetaModelCreateCommandBuilder(final MetaModelCreateCommandImpl<T, C, D, E> template) {
+    MetaModelCreateCommandBuilder(final MetaModelCreateCommandImpl<T, C, D, E> template) {
         body = template.body;
         expansionModel = template.expansionModel;
         endpoint = template.endpoint;
