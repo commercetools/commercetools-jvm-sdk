@@ -1,20 +1,19 @@
 package io.sphere.sdk.reviews.commands;
 
-import io.sphere.sdk.commands.UpdateAction;
-import io.sphere.sdk.commands.UpdateCommandDslBuilder;
-import io.sphere.sdk.commands.UpdateCommandDslImpl;
+import io.sphere.sdk.commands.*;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.reviews.Review;
+import io.sphere.sdk.reviews.expansion.ReviewExpansionModel;
 
 import java.util.List;
 
 
-final class ReviewUpdateCommandImpl extends UpdateCommandDslImpl<Review, ReviewUpdateCommand> implements ReviewUpdateCommand {
+final class ReviewUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<Review, ReviewUpdateCommand, ReviewExpansionModel<Review>> implements ReviewUpdateCommand {
     ReviewUpdateCommandImpl(final Versioned<Review> versioned, final List<? extends UpdateAction<Review>> updateActions) {
-        super(versioned, updateActions, ReviewEndpoint.ENDPOINT, ReviewUpdateCommandImpl::new);
+        super(versioned, updateActions, ReviewEndpoint.ENDPOINT, ReviewUpdateCommandImpl::new, ReviewExpansionModel.of());
     }
 
-    ReviewUpdateCommandImpl(final UpdateCommandDslBuilder<Review, ReviewUpdateCommand> builder) {
+    ReviewUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<Review, ReviewUpdateCommand, ReviewExpansionModel<Review>> builder) {
         super(builder);
     }
 }

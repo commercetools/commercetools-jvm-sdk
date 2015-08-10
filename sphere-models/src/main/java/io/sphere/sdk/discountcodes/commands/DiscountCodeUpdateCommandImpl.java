@@ -1,20 +1,19 @@
 package io.sphere.sdk.discountcodes.commands;
 
-import io.sphere.sdk.commands.UpdateAction;
-import io.sphere.sdk.commands.UpdateCommandDslBuilder;
-import io.sphere.sdk.commands.UpdateCommandDslImpl;
+import io.sphere.sdk.commands.*;
 import io.sphere.sdk.discountcodes.DiscountCode;
+import io.sphere.sdk.discountcodes.expansion.DiscountCodeExpansionModel;
 import io.sphere.sdk.models.Versioned;
 
 import java.util.List;
 
 
-final class DiscountCodeUpdateCommandImpl extends UpdateCommandDslImpl<DiscountCode, DiscountCodeUpdateCommand> implements DiscountCodeUpdateCommand {
+final class DiscountCodeUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<DiscountCode, DiscountCodeUpdateCommand, DiscountCodeExpansionModel<DiscountCode>> implements DiscountCodeUpdateCommand {
     DiscountCodeUpdateCommandImpl(final Versioned<DiscountCode> versioned, final List<? extends UpdateAction<DiscountCode>> updateActions) {
-        super(versioned, updateActions, DiscountCodeEndpoint.ENDPOINT, DiscountCodeUpdateCommandImpl::new);
+        super(versioned, updateActions, DiscountCodeEndpoint.ENDPOINT, DiscountCodeUpdateCommandImpl::new, DiscountCodeExpansionModel.of());
     }
 
-    DiscountCodeUpdateCommandImpl(final UpdateCommandDslBuilder<DiscountCode, DiscountCodeUpdateCommand> builder) {
+    DiscountCodeUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<DiscountCode, DiscountCodeUpdateCommand, DiscountCodeExpansionModel<DiscountCode>> builder) {
         super(builder);
     }
 }

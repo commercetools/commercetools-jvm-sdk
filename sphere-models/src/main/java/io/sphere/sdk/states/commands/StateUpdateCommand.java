@@ -2,8 +2,10 @@ package io.sphere.sdk.states.commands;
 
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.commands.UpdateCommandDsl;
+import io.sphere.sdk.expansion.MetaModelExpansionDsl;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.states.State;
+import io.sphere.sdk.states.expansion.StateExpansionModel;
 
 import java.util.Collections;
 import java.util.List;
@@ -11,7 +13,7 @@ import java.util.List;
 /**
  {@doc.gen list actions}
  */
-public interface StateUpdateCommand extends UpdateCommandDsl<State, StateUpdateCommand> {
+public interface StateUpdateCommand extends UpdateCommandDsl<State, StateUpdateCommand>, MetaModelExpansionDsl<State, StateUpdateCommand, StateExpansionModel<State>> {
     static StateUpdateCommand of(final Versioned<State> versioned, final UpdateAction<State> updateAction) {
         return of(versioned, Collections.singletonList(updateAction));
     }

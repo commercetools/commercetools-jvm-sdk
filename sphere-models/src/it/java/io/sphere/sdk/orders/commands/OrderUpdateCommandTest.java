@@ -108,6 +108,16 @@ public class OrderUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void referenceExpansion() throws Exception {
+        withOrder(client(), order -> {
+            assertThat(order.getOrderNumber()).isNull();
+            final String orderNumber = randomString();
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)).plusExpansionPaths(m -> m.cart()));
+            assertThat(updatedOrder.getCart().getObj()).isNotNull();
+        });
+    }
+
+    @Test
     public void updateSyncInfo() throws Exception {
         withOrderExportChannel(client(), channel ->
             withOrder(client(), order -> {

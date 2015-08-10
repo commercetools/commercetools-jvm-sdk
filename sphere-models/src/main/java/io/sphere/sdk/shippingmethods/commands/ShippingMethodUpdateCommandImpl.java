@@ -1,20 +1,19 @@
 package io.sphere.sdk.shippingmethods.commands;
 
-import io.sphere.sdk.commands.UpdateAction;
-import io.sphere.sdk.commands.UpdateCommandDslBuilder;
-import io.sphere.sdk.commands.UpdateCommandDslImpl;
+import io.sphere.sdk.commands.*;
 import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
+import io.sphere.sdk.shippingmethods.expansion.ShippingMethodExpansionModel;
 
 import java.util.List;
 
 
-final class ShippingMethodUpdateCommandImpl extends UpdateCommandDslImpl<ShippingMethod, ShippingMethodUpdateCommand> implements ShippingMethodUpdateCommand {
+final class ShippingMethodUpdateCommandImpl extends ReferenceExpandeableUpdateCommandDslImpl<ShippingMethod, ShippingMethodUpdateCommand, ShippingMethodExpansionModel<ShippingMethod>> implements ShippingMethodUpdateCommand {
     ShippingMethodUpdateCommandImpl(final Versioned<ShippingMethod> versioned, final List<? extends UpdateAction<ShippingMethod>> updateActions) {
-        super(versioned, updateActions, ShippingMethodEndpoint.ENDPOINT, ShippingMethodUpdateCommandImpl::new);
+        super(versioned, updateActions, ShippingMethodEndpoint.ENDPOINT, ShippingMethodUpdateCommandImpl::new, ShippingMethodExpansionModel.of());
     }
 
-    ShippingMethodUpdateCommandImpl(final UpdateCommandDslBuilder<ShippingMethod, ShippingMethodUpdateCommand> builder) {
+    ShippingMethodUpdateCommandImpl(final ReferenceExpanseableUpdateCommandDslBuilder<ShippingMethod, ShippingMethodUpdateCommand, ShippingMethodExpansionModel<ShippingMethod>> builder) {
         super(builder);
     }
 }
