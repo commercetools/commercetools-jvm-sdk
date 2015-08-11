@@ -12,7 +12,7 @@ package io.sphere.sdk.meta;
 
  <h3>Detailed example for creating test doubles</h3>
 
- <h4>Go to impex playground and get some product data as String</h4>
+ <h4 id="object-test-doubles">Go to impex playground and get some product data as String</h4>
 
  <img src="{@docRoot}/documentation-resources/images/testing/playground-query-product-projections.png" alt="API playground loading current product projections">
 
