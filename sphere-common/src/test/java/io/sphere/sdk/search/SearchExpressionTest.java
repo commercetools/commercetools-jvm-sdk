@@ -33,6 +33,7 @@ public class SearchExpressionTest {
         final TermFacetExpression<Object, String> expression = new TermFacetExpression<>(model(), ofText(), null);
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size");
         assertThat(expression.resultPath()).isEqualTo("variants.attributes.size");
+        assertThat(expression.path()).isEqualTo("variants.attributes.size");
     }
 
     @Test
@@ -40,6 +41,7 @@ public class SearchExpressionTest {
         final TermFacetExpression<Object, String> expression = new TermFacetExpression<>(model(), ofText(), "my-facet");
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size as my-facet");
         assertThat(expression.resultPath()).isEqualTo("my-facet");
+        assertThat(expression.path()).isEqualTo("variants.attributes.size");
     }
 
     @Test
@@ -48,6 +50,7 @@ public class SearchExpressionTest {
         final FilteredFacetExpression<Object, String> expression = new FilteredFacetExpression<>(model(), ofText(), terms, null);
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size:\"foo\",\"bar\"");
         assertThat(expression.resultPath()).isEqualTo("variants.attributes.size");
+        assertThat(expression.path()).isEqualTo("variants.attributes.size");
     }
 
     @Test
@@ -56,6 +59,7 @@ public class SearchExpressionTest {
         final FilteredFacetExpression<Object, String> expression = new FilteredFacetExpression<>(model(), ofText(), terms, "my-facet");
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size:\"foo\",\"bar\" as my-facet");
         assertThat(expression.resultPath()).isEqualTo("my-facet");
+        assertThat(expression.resultPath()).isEqualTo("variants.attributes.size");
     }
 
     @Test
@@ -64,6 +68,7 @@ public class SearchExpressionTest {
         final RangeFacetExpression<Object, BigDecimal> expression = new RangeFacetExpression<>(model(), ofNumber(), ranges, null);
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size:range(* to 5),(3 to *),(5 to 10)");
         assertThat(expression.resultPath()).isEqualTo("variants.attributes.size");
+        assertThat(expression.path()).isEqualTo("variants.attributes.size");
     }
 
     @Test
@@ -72,6 +77,7 @@ public class SearchExpressionTest {
         final RangeFacetExpression<Object, BigDecimal> expression = new RangeFacetExpression<>(model(), ofNumber(), ranges, "my-facet");
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size:range(* to 5),(3 to *),(5 to 10) as my-facet");
         assertThat(expression.resultPath()).isEqualTo("my-facet");
+        assertThat(expression.path()).isEqualTo("variants.attributes.size");
     }
 
 
