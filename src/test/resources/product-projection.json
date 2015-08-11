@@ -1,0 +1,56 @@
+{
+  "id": "8665d91a-eab0-45a8-a378-e6603d66d084",
+  "version": 4,
+  "productType": {
+    "typeId": "product-type",
+    "id": "c6af7304-4e35-48d6-8687-66ca2dab5dbb"
+  },
+  "name": {
+    "en": "GIRLS HARTBREAK CREW"
+  },
+  "description": {
+    "en": "Sample description"
+  },
+  "categories": [
+    {
+      "typeId": "category",
+      "id": "eab84062-f4d7-4dd6-a576-ce5c10923e68"
+    }
+  ],
+  "slug": {
+    "en": "girls-hartbreak-crew1417714797195"
+  },
+  "masterVariant": {
+    "id": 1,
+    "sku": "sku_GIRLS_HARTBREAK_CREW_variant1_1417714797195",
+    "prices": [
+      {
+        "value": {
+          "currencyCode": "EUR",
+          "centAmount": 3400
+        },
+        "id": "1513154a-5cc9-4b2f-88a3-4e096ae92f0e"
+      }
+    ],
+    "images": [
+      {
+        "url": "https://www.commercetools.com/cli/data/253234387_1.jpg",
+        "dimensions": {
+          "w": 1400,
+          "h": 1400
+        }
+      }
+    ],
+    "attributes": []
+  },
+  "variants": [],
+  "searchKeywords": {},
+  "hasStagedChanges": true,
+  "published": true,
+  "taxCategory": {
+    "typeId": "tax-category",
+    "id": "0b423f46-124e-4db5-b16a-1d68afabe640"
+  },
+  "createdAt": "2014-12-04T17:39:57.214Z",
+  "lastModifiedAt": "2015-05-23T09:28:02.086Z"
+}
