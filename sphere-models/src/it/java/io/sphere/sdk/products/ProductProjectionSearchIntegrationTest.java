@@ -35,6 +35,7 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 import static java.math.BigDecimal.*;
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
@@ -164,7 +165,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .plusFacetFilters(filterExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product2.getId());
-        assertThat(result.getTermFacetResult(facetExpr).getTerms()).isEqualTo(asList(TermStats.of("red", 1)));
+        assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnlyElementsOf(singletonList(TermStats.of("red", 1)));
     }
 
     @Test
@@ -175,7 +176,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .plusResultFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).filtered().by(valueOf(36)));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product2.getId());
-        assertThat(result.getTermFacetResult(facetExpr).getTerms()).isEqualTo(asList(TermStats.of("blue", 2), TermStats.of("red", 1)));
+        assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnlyElementsOf(asList(TermStats.of("blue", 2), TermStats.of("red", 1)));
     }
 
 
@@ -186,7 +187,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .plusFacets(facetExpr)
                 .plusFacetFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).filtered().by(valueOf(36)));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(result.getTermFacetResult(facetExpr).getTerms()).isEqualTo(asList(TermStats.of("red", 1)));
+        assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnlyElementsOf(singletonList(TermStats.of("red", 1)));
         assertThat(resultsToIds(result)).contains(product1.getId(), product2.getId(), product3.getId());
     }
 
@@ -253,7 +254,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.getResults().get(0).getId()).isEqualTo(product2.getId());
-        assertThat(result.getTermFacetResult(facetExpr).getTerms()).isEqualTo(asList(TermStats.of("red", 1)));
+        assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnlyElementsOf(singletonList(TermStats.of("red", 1)));
     }
 
     @Test
@@ -395,7 +396,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     private static ProductType createEvilProductType() {
         final AttributeDefinition evilAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_EVIL, ofEnglishLocale(ATTR_NAME_EVIL), TextType.of()).build();
-        final ProductTypeDraft evilProductTypeDraft = ProductTypeDraft.of(EVIL_PRODUCT_TYPE_NAME, "", asList(evilAttrDef));
+        final ProductTypeDraft evilProductTypeDraft = ProductTypeDraft.of(EVIL_PRODUCT_TYPE_NAME, "", singletonList(evilAttrDef));
         final ProductTypeCreateCommand evilProductTypeCreateCommand = ProductTypeCreateCommand.of(evilProductTypeDraft);
         return execute(evilProductTypeCreateCommand);
     }
@@ -413,7 +414,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .price(Price.of(new BigDecimal("27.45"), EUR))
                 .build();
         final ProductDraft productDraft = ProductDraftBuilder.of(productType, name, name.slugifiedUnique(), masterVariant)
-                .variants(asList(variant)).build();
+                .variants(singletonList(variant)).build();
         return execute(ProductCreateCommand.of(productDraft));
     }
 
