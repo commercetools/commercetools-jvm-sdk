@@ -59,7 +59,7 @@ public class SearchExpressionTest {
         final FilteredFacetExpression<Object, String> expression = new FilteredFacetExpression<>(model(), ofText(), terms, "my-facet");
         assertThat(expression.toSphereFacet()).isEqualTo("variants.attributes.size:\"foo\",\"bar\" as my-facet");
         assertThat(expression.resultPath()).isEqualTo("my-facet");
-        assertThat(expression.resultPath()).isEqualTo("variants.attributes.size");
+        assertThat(expression.path()).isEqualTo("variants.attributes.size");
     }
 
     @Test
