@@ -12,6 +12,13 @@ public interface FacetExpression<T> {
      */
     String toSphereFacet();
 
+    /**
+     * Generates the path for the facet.
+     * Example: variants.attributes.color
+     * @return the path for the attribute to be faceted
+     */
+    String path();
+
     static <T> FacetExpression<T> of(final String sphereFacetExpression) {
         return new SimpleFacetExpression<>(sphereFacetExpression);
     }

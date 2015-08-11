@@ -8,7 +8,12 @@ class RangeFilterExpression<T, V extends Comparable<? super V>> extends RangeExp
 
     @Override
     public String toSphereFilter() {
-        return toSphereSearchExpression();
+        return super.toSphereSearchExpression();
+    }
+
+    @Override
+    public String path() {
+        return super.serializedPath();
     }
 
     @Override
