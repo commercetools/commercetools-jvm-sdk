@@ -7,14 +7,14 @@ import io.sphere.sdk.queries.QueryPredicate;
 
 import java.util.function.Supplier;
 
-public class MessageDerivatHint<T> {
+public class MessageDerivateHint<T> {
     private final TypeReference<PagedQueryResult<T>> queryResultTypeReference;
     private final TypeReference<T> elementTypeReference;
     private final Supplier<QueryPredicate<Message>> predicateSupplier;
 
-    private MessageDerivatHint(final TypeReference<PagedQueryResult<T>> resultTypeReference,
-                               final TypeReference<T> elementTypeReference,
-                               final Supplier<QueryPredicate<Message>> predicateSupplier) {
+    private MessageDerivateHint(final TypeReference<PagedQueryResult<T>> resultTypeReference,
+                                final TypeReference<T> elementTypeReference,
+                                final Supplier<QueryPredicate<Message>> predicateSupplier) {
         this.queryResultTypeReference = resultTypeReference;
         this.predicateSupplier = predicateSupplier;
         this.elementTypeReference = elementTypeReference;
@@ -32,11 +32,11 @@ public class MessageDerivatHint<T> {
         return predicateSupplier.get();
     }
 
-    public static <T> MessageDerivatHint<T> ofSingleMessageType(final String type, final TypeReference<PagedQueryResult<T>> queryResultTypeReference, final TypeReference<T> elementTypeReference) {
-        return new MessageDerivatHint<>(queryResultTypeReference, elementTypeReference, () -> MessageQueryModel.of().type().is(type));
+    public static <T> MessageDerivateHint<T> ofSingleMessageType(final String type, final TypeReference<PagedQueryResult<T>> queryResultTypeReference, final TypeReference<T> elementTypeReference) {
+        return new MessageDerivateHint<>(queryResultTypeReference, elementTypeReference, () -> MessageQueryModel.of().type().is(type));
     }
 
-    public static <T> MessageDerivatHint<T> ofResourceType(final String resourceId, final TypeReference<PagedQueryResult<T>> queryResultTypeReference, final TypeReference<T> elementTypeReference) {
-        return new MessageDerivatHint<>(queryResultTypeReference, elementTypeReference, () -> MessageQueryModel.of().resource().typeId().is(resourceId));
+    public static <T> MessageDerivateHint<T> ofResourceType(final String resourceId, final TypeReference<PagedQueryResult<T>> queryResultTypeReference, final TypeReference<T> elementTypeReference) {
+        return new MessageDerivateHint<>(queryResultTypeReference, elementTypeReference, () -> MessageQueryModel.of().resource().typeId().is(resourceId));
     }
 }

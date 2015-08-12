@@ -1,7 +1,7 @@
 package io.sphere.sdk.messages.queries;
 
 import io.sphere.sdk.messages.Message;
-import io.sphere.sdk.messages.MessageDerivatHint;
+import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.QueryModelImpl;
 import io.sphere.sdk.queries.QueryPredicate;
@@ -12,7 +12,7 @@ final class MessageTypeQueryModelImpl extends QueryModelImpl<Message> implements
     }
 
     @Override
-    public QueryPredicate<Message> is(final MessageDerivatHint<?> hint) {
+    public QueryPredicate<Message> is(final MessageDerivateHint<?> hint) {
         return hint.predicate();
     }
 

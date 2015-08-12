@@ -2,7 +2,7 @@ package io.sphere.sdk.messages.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.messages.Message;
-import io.sphere.sdk.messages.MessageDerivatHint;
+import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.messages.expansion.MessageExpansionModel;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -42,7 +42,7 @@ public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, M
         return new MessageQueryImpl();
     }
 
-    default <T> Query<T> forMessageType(final MessageDerivatHint<T> hint) {
+    default <T> Query<T> forMessageType(final MessageDerivateHint<T> hint) {
         final MessageQuery queryWithPredicateForType =
                 plusPredicates(hint.predicate());
         return new TypedMessageQuery<>(queryWithPredicateForType.httpRequestIntent(), hint.queryResultTypeReference());

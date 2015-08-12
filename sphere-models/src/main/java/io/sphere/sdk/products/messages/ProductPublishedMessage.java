@@ -5,7 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.messages.GenericMessageImpl;
-import io.sphere.sdk.messages.MessageDerivatHint;
+import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -17,8 +17,8 @@ import static io.sphere.sdk.products.messages.MessagesPackage.*;
 @JsonDeserialize(as = ProductPublishedMessage.class)//important to override annotation in Message class
 public class ProductPublishedMessage extends GenericMessageImpl<Product> {
     public static final String MESSAGE_TYPE = "ProductPublished";
-    public static final MessageDerivatHint<ProductPublishedMessage> MESSAGE_HINT =
-            MessageDerivatHint.ofSingleMessageType(MESSAGE_TYPE,
+    public static final MessageDerivateHint<ProductPublishedMessage> MESSAGE_HINT =
+            MessageDerivateHint.ofSingleMessageType(MESSAGE_TYPE,
                     new TypeReference<PagedQueryResult<ProductPublishedMessage>>() {
                     },
                     new TypeReference<ProductPublishedMessage>() {
