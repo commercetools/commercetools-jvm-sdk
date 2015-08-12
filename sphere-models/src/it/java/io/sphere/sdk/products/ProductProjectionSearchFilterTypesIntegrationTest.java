@@ -124,7 +124,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     @Test
     public void textAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofText(ATTR_NAME_TEXT)
+                .withQueryFilters(model -> model.allVariants().attribute().ofString(ATTR_NAME_TEXT)
                         .filtered().by("foo"));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
@@ -140,7 +140,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     @Test
     public void locTextAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofLocalizableText(ATTR_NAME_LOC_TEXT).locale(ENGLISH)
+                .withQueryFilters(model -> model.allVariants().attribute().ofLocalizedString(ATTR_NAME_LOC_TEXT).locale(ENGLISH)
                         .filtered().by("localized foo"));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
@@ -405,7 +405,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     @Test
     public void textSetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofText(ATTR_NAME_TEXT_SET)
+                .withQueryFilters(model -> model.allVariants().attribute().ofString(ATTR_NAME_TEXT_SET)
                         .filtered().by("bar"));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
@@ -421,7 +421,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     @Test
     public void locTextSetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofLocalizableText(ATTR_NAME_LOC_TEXT_SET).locale(ENGLISH)
+                .withQueryFilters(model -> model.allVariants().attribute().ofLocalizedString(ATTR_NAME_LOC_TEXT_SET).locale(ENGLISH)
                         .filtered().by("localized bar"));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
@@ -611,7 +611,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         final EnumType enumType = EnumType.of(ENUM_ONE, ENUM_TWO, ENUM_THREE);
         final LocalizedEnumType enumLocType = LocalizedEnumType.of(LOC_ENUM_ONE, LOC_ENUM_TWO, LOC_ENUM_THREE);
         final AttributeDefinition booleanAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_BOOLEAN, ofEnglishLocale(ATTR_NAME_BOOLEAN), BooleanType.of()).build();
-        final AttributeDefinition textAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT, ofEnglishLocale(ATTR_NAME_TEXT), TextType.of()).build();
+        final AttributeDefinition textAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT, ofEnglishLocale(ATTR_NAME_TEXT), StringType.of()).build();
         final AttributeDefinition locTextAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT, ofEnglishLocale(ATTR_NAME_LOC_TEXT), LocalizedStringType.of()).build();
         final AttributeDefinition enumAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_ENUM, ofEnglishLocale(ATTR_NAME_ENUM), enumType).build();
         final AttributeDefinition locEnumAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_ENUM, ofEnglishLocale(ATTR_NAME_LOC_ENUM), enumLocType).build();
@@ -622,7 +622,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         final AttributeDefinition dateTimeAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_DATE_TIME, ofEnglishLocale(ATTR_NAME_DATE_TIME), DateTimeType.of()).build();
         final AttributeDefinition refAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_REF, ofEnglishLocale(ATTR_NAME_REF), ReferenceType.of(Product.typeId())).build();
         final AttributeDefinition booleanSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_BOOLEAN_SET, ofEnglishLocale(ATTR_NAME_BOOLEAN_SET), SetType.of(BooleanType.of())).build();
-        final AttributeDefinition textSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT_SET, ofEnglishLocale(ATTR_NAME_TEXT_SET), SetType.of(TextType.of())).build();
+        final AttributeDefinition textSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_TEXT_SET, ofEnglishLocale(ATTR_NAME_TEXT_SET), SetType.of(StringType.of())).build();
         final AttributeDefinition locTextSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_TEXT_SET, ofEnglishLocale(ATTR_NAME_LOC_TEXT_SET), SetType.of(LocalizedStringType.of())).build();
         final AttributeDefinition enumSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_ENUM_SET, ofEnglishLocale(ATTR_NAME_ENUM_SET), SetType.of(enumType)).build();
         final AttributeDefinition locEnumSetAttrDef = AttributeDefinitionBuilder.of(ATTR_NAME_LOC_ENUM_SET, ofEnglishLocale(ATTR_NAME_LOC_ENUM_SET), SetType.of(enumLocType)).build();
@@ -655,7 +655,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
                         AttributeAccess.ofDateTime().ofName(ATTR_NAME_DATE_TIME).draftOf(ZonedDateTime.parse("2001-09-11T22:05:09.203+00:00")),
                         AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(productSomeId.toReference()),
                         AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true, false)),
-                        AttributeAccess.ofTextSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet("foo", "bar")),
+                        AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet("foo", "bar")),
                         AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(ofEnglishLocale("localized foo"), ofEnglishLocale("localized bar"))),
                         AttributeAccess.ofEnumValueSet().ofName(ATTR_NAME_ENUM_SET).draftOf(asSet(ENUM_TWO, ENUM_THREE)),
                         AttributeAccess.ofLocalizedEnumValueSet().ofName(ATTR_NAME_LOC_ENUM_SET).draftOf(asSet(LOC_ENUM_TWO, LOC_ENUM_THREE)),
@@ -686,7 +686,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
                         AttributeAccess.ofDateTime().ofName(ATTR_NAME_DATE_TIME).draftOf(ZonedDateTime.parse("2002-10-12T23:06:10.204+00:00")),
                         AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(productOtherId.toReference()),
                         AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true)),
-                        AttributeAccess.ofTextSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet("foo")),
+                        AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet("foo")),
                         AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(ofEnglishLocale("localized foo"))),
                         AttributeAccess.ofEnumValueSet().ofName(ATTR_NAME_ENUM_SET).draftOf(asSet(ENUM_TWO)),
                         AttributeAccess.ofLocalizedEnumValueSet().ofName(ATTR_NAME_LOC_ENUM_SET).draftOf(asSet(LOC_ENUM_TWO)),

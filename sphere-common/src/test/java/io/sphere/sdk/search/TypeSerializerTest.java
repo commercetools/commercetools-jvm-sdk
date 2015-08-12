@@ -19,7 +19,7 @@ public class TypeSerializerTest {
 
     @Test
     public void serializesText() throws Exception {
-        Function<String, String> serializer = ofText().serializer();
+        Function<String, String> serializer = ofString().serializer();
         assertThat(serializer.apply("some\"text")).isEqualTo("\"some\\\"text\"");
     }
 

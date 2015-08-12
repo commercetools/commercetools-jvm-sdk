@@ -82,7 +82,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canAccessTextCustomAttributes() throws Exception {
-        final StringSearchModel<ProductProjection, VariantSearchSortDirection> path = attributeModel().ofText("brand");
+        final StringSearchModel<ProductProjection, VariantSearchSortDirection> path = attributeModel().ofString("brand");
         assertThat(path.faceted().byAllTerms().toSphereFacet()).isEqualTo("variants.attributes.brand");
         assertThat(path.filtered().by("Apple").toSphereFilter()).isEqualTo("variants.attributes.brand:\"Apple\"");
         assertThat(path.sorted(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.brand asc.max");
@@ -90,7 +90,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canAccessLocTextCustomAttributes() throws Exception {
-        final StringSearchModel<ProductProjection, VariantSearchSortDirection> path = attributeModel().ofLocalizableText("material").locale(ENGLISH);
+        final StringSearchModel<ProductProjection, VariantSearchSortDirection> path = attributeModel().ofLocalizedString("material").locale(ENGLISH);
         assertThat(path.faceted().byAllTerms().toSphereFacet()).isEqualTo("variants.attributes.material.en");
         assertThat(path.filtered().by("steel").toSphereFilter()).isEqualTo("variants.attributes.material.en:\"steel\"");
         assertThat(path.sorted(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.material.en asc.max");

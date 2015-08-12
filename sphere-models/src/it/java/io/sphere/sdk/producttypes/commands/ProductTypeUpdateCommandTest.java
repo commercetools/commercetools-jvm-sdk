@@ -48,10 +48,10 @@ public class ProductTypeUpdateCommandTest extends IntegrationTest {
             //add
             final String attributeName = "foostring";
             final AttributeDefinition foostring =
-                    AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), TextType.of()).build();
+                    AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), StringType.of()).build();
             final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
             final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
-            assertThat(loadedDefinition.getAttributeType()).isEqualTo(TextType.of());
+            assertThat(loadedDefinition.getAttributeType()).isEqualTo(StringType.of());
 
             //remove
             final ProductType withoutFoostring = execute(ProductTypeUpdateCommand.of(withFoostring, RemoveAttributeDefinition.of(attributeName)));

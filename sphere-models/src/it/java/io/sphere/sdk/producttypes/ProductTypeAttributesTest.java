@@ -51,12 +51,12 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     @Test
     public void nestedAttribute() throws Exception {
         final NamedAttributeAccess<Double> sizeAttr = AttributeAccess.ofDouble().ofName("size-nested");
-        final NamedAttributeAccess<String> brandAttr = AttributeAccess.ofText().ofName("brand-nested");
+        final NamedAttributeAccess<String> brandAttr = AttributeAccess.ofString().ofName("brand-nested");
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of("test-sub-attribute", "nested attribute test",
                 asList(
                         AttributeDefinitionBuilder.of(sizeAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Size"), NumberType.of()).build(),
-                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Brand"), TextType.of()).build()));
+                        AttributeDefinitionBuilder.of(brandAttr.getName(), LocalizedString.of(Locale.ENGLISH, "Brand"), StringType.of()).build()));
 
         withProductType(client(), () -> productTypeDraft, nestedProductType -> {
             final AttributeContainer adidas = AttributeContainer.of(
@@ -73,8 +73,8 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void textAttribute() throws Exception {
-        testSingleAndSet(AttributeAccess.ofText(), AttributeAccess.ofTextSet(), asSet("hello", "world"),
-                TextType.of(), AttributeDefinitionBuilder.of("text-attribute", LABEL, TextType.of()).inputHint(TEXT_INPUT_HINT).build());
+        testSingleAndSet(AttributeAccess.ofString(), AttributeAccess.ofStringSet(), asSet("hello", "world"),
+                StringType.of(), AttributeDefinitionBuilder.of("text-attribute", LABEL, StringType.of()).inputHint(TEXT_INPUT_HINT).build());
     }
 
     @Test
@@ -213,7 +213,7 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
 
     @Test
     public void createTextAttribute() throws Exception {
-        executeTest(TextType.class, AttributeDefinitionBuilder.of("text-attribute", LABEL, TextType.of()).
+        executeTest(StringType.class, AttributeDefinitionBuilder.of("text-attribute", LABEL, StringType.of()).
                 inputHint(TEXT_INPUT_HINT).
                 attributeConstraint(AttributeConstraint.COMBINATION_UNIQUE).
                 searchable(false).

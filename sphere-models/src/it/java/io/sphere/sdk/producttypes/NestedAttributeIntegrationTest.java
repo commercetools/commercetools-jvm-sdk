@@ -20,20 +20,20 @@ import static java.util.stream.Collectors.toList;
 public final class NestedAttributeIntegrationTest extends IntegrationTest {
 
     static class NutrientInfo {
-        static NamedAttributeAccess<String> quantityContainedUOM = AttributeAccess.ofText().ofName("quantityContainedUOM");
+        static NamedAttributeAccess<String> quantityContainedUOM = AttributeAccess.ofString().ofName("quantityContainedUOM");
         static NamedAttributeAccess<Double> quantityContained = AttributeAccess.ofDouble().ofName("quantityContained");
-        static NamedAttributeAccess<String> measurementPrecision = AttributeAccess.ofText().ofName("measurementPrecision");
-        static NamedAttributeAccess<String> nutrientTypeCode = AttributeAccess.ofText().ofName("nutrientTypeCode");
+        static NamedAttributeAccess<String> measurementPrecision = AttributeAccess.ofString().ofName("measurementPrecision");
+        static NamedAttributeAccess<String> nutrientTypeCode = AttributeAccess.ofString().ofName("nutrientTypeCode");
     }
 
     static class Nutrient {
-        static NamedAttributeAccess<String> servingSizeUOM = AttributeAccess.ofText().ofName("servingSizeUOM");
+        static NamedAttributeAccess<String> servingSizeUOM = AttributeAccess.ofString().ofName("servingSizeUOM");
         static NamedAttributeAccess<Double> servingSize = AttributeAccess.ofDouble().ofName("servingSize");
         static NamedAttributeAccess<Set<AttributeContainer>> nutrientInformation = AttributeAccess.ofNestedSet().ofName("nutrientInformation");
     }
 
     static class Banana {
-        static NamedAttributeAccess<String> bananaColor = AttributeAccess.ofText().ofName("bananaColor");
+        static NamedAttributeAccess<String> bananaColor = AttributeAccess.ofString().ofName("bananaColor");
         static NamedAttributeAccess<Set<AttributeContainer>> nutrients = AttributeAccess.ofNestedSet().ofName("nutrients");
     }
 
@@ -137,20 +137,20 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
         return ProductTypeDraft.of("NutrientInformation", "NutrientInformation",
                 asList(
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContainedUOM.getName(),
-                                en(NutrientInfo.quantityContainedUOM.getName()), TextType.of()).build(),
+                                en(NutrientInfo.quantityContainedUOM.getName()), StringType.of()).build(),
                         AttributeDefinitionBuilder.of(NutrientInfo.quantityContained.getName(),
                                 en(NutrientInfo.quantityContained.getName()), NumberType.of()).build(),
                         AttributeDefinitionBuilder.of(NutrientInfo.measurementPrecision.getName(),
-                                en(NutrientInfo.measurementPrecision.getName()), TextType.of()).build(),
+                                en(NutrientInfo.measurementPrecision.getName()), StringType.of()).build(),
                         AttributeDefinitionBuilder.of(NutrientInfo.nutrientTypeCode.getName(),
-                                en(NutrientInfo.nutrientTypeCode.getName()), TextType.of()).build()));
+                                en(NutrientInfo.nutrientTypeCode.getName()), StringType.of()).build()));
     }
 
     private ProductTypeDraft createNutrient(final Referenceable<ProductType> nutrientInformationType) {
         return ProductTypeDraft.of("Nutrient", "Nutrient",
                 asList(
                         AttributeDefinitionBuilder.of(Nutrient.servingSizeUOM.getName(),
-                                en(Nutrient.servingSizeUOM.getName()), TextType.of()).build(),
+                                en(Nutrient.servingSizeUOM.getName()), StringType.of()).build(),
                         AttributeDefinitionBuilder.of(Nutrient.servingSize.getName(),
                                 en(Nutrient.servingSize.getName()), NumberType.of()).build(),
                         AttributeDefinitionBuilder.of(Nutrient.nutrientInformation.getName(),
@@ -161,7 +161,7 @@ public final class NestedAttributeIntegrationTest extends IntegrationTest {
         return ProductTypeDraft.of("Banana", "Banana",
                 asList(
                         AttributeDefinitionBuilder.of(Banana.bananaColor.getName(),
-                                en(Banana.bananaColor.getName()), TextType.of()).build(),
+                                en(Banana.bananaColor.getName()), StringType.of()).build(),
                         AttributeDefinitionBuilder.of(Banana.nutrients.getName(),
                                 en(Banana.nutrients.getName()), SetType.of(NestedType.of(nutrientType))).searchable(false).build()));
     }

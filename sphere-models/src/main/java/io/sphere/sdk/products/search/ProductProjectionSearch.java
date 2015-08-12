@@ -28,14 +28,28 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
         };
     }
 
+    /**
+     * Creates a search request object for the staged data of a product.
+     * @return search request for staged data
+     */
     static ProductProjectionSearch ofStaged() {
         return of(ProductProjectionType.STAGED);
     }
 
+    /**
+     * Creates a search request object for the current data of a product.
+     * @return search request for current data
+     */
     static ProductProjectionSearch ofCurrent() {
         return of(ProductProjectionType.CURRENT);
     }
 
+    /**
+     * Creates a search request object with the product projection type specified by {@code productProjectionType}.
+     * @see #ofStaged()
+     * @see #ofCurrent()
+     * @return search request for current data
+     */
     static ProductProjectionSearch of(final ProductProjectionType productProjectionType) {
         return new ProductProjectionSearchImpl(productProjectionType);
     }

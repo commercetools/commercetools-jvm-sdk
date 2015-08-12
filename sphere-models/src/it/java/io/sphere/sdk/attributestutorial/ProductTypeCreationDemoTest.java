@@ -94,7 +94,7 @@ public class ProductTypeCreationDemoTest extends IntegrationTest {
     @BeforeClass
     public static void createBookProductType() throws Exception {
         final AttributeDefinition isbn = AttributeDefinitionBuilder
-                .of(ISBN_ATTR_NAME, en("ISBN"), TextType.of())
+                .of(ISBN_ATTR_NAME, en("ISBN"), StringType.of())
                 .build();
 
         final ProductTypeDraft productTypeDraft = ProductTypeDraft.of(BOOK_PRODUCT_TYPE_NAME, "books", asList(isbn));

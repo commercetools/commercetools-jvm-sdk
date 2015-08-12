@@ -2,24 +2,32 @@ package io.sphere.sdk.products.queries;
 
 import io.sphere.sdk.channels.ChannelFixtures;
 import io.sphere.sdk.channels.ChannelRole;
+import io.sphere.sdk.customergroups.CustomerGroupFixtures;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
-import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.Price;
+import io.sphere.sdk.products.Product;
+import io.sphere.sdk.products.ProductFixtures;
+import io.sphere.sdk.products.VariantIdentifier;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
 import io.sphere.sdk.products.commands.updateactions.Publish;
 import io.sphere.sdk.products.commands.updateactions.Unpublish;
 import io.sphere.sdk.products.expansion.ProductExpansionModel;
-import io.sphere.sdk.expansion.ExpansionPath;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
+import io.sphere.sdk.suppliers.VariantsCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withUpdateableProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
-import static org.assertj.core.api.Assertions.*;
+import static io.sphere.sdk.test.SphereTestUtils.randomString;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductQueryTest extends IntegrationTest {
 
@@ -111,6 +119,24 @@ public class ProductQueryTest extends IntegrationTest {
             assertThat(loadedProduct.getId()).isEqualTo(product.getId());
             return productDiscount;
         });
+    }
+
+    @Test
+    public void expandVariants() {
+        CustomerGroupFixtures.withB2cCustomerGroup(client(), customerGroup ->
+            ProductFixtures.withProductType(client(), randomString(), productType ->
+                withProduct(client(), new VariantsCottonTShirtProductDraftSupplier(productType, randomString(), customerGroup), product -> {
+                    final PagedQueryResult<Product> result = execute(ProductQuery.of()
+                            .withPredicates(m -> m.id().is(product.getId()))
+                            .withExpansionPaths(m -> m.masterData().staged().variants().prices().customerGroup())
+                            .withLimit(1));
+                    final Price priceWithCustomerGroup = result.head().get().getMasterData().getStaged().getVariants().get(0).getPrices().stream()
+                            .filter(price -> Objects.equals(price.getCustomerGroup(), customerGroup.toReference()))
+                            .findFirst().get();
+                    assertThat(priceWithCustomerGroup.getCustomerGroup().getObj()).isNotNull().isEqualTo(customerGroup);
+                })
+            )
+        );
     }
 
     private ProductQuery query(final Product product) {

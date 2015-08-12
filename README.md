@@ -24,16 +24,24 @@ Users gain type-safety, encapsulation, IDE auto completion and an internal domai
 <dependency>
   <groupId>io.sphere.sdk.jvm</groupId>
   <artifactId>sphere-models</artifactId>
-  <version>1.0.0-M15</version>
+  <version>1.0.0-M16</version>
 </dependency>
 <dependency>
   <groupId>io.sphere.sdk.jvm</groupId>
   <artifactId>sphere-java-client</artifactId>
-  <version>1.0.0-M15</version>
+  <version>1.0.0-M16</version>
+</dependency>
+
+<!-- experimental, includes for example reactive streams support -->
+<dependency>
+  <groupId>io.sphere.sdk.jvm</groupId>
+  <artifactId>sphere-convenience</artifactId>
+  <version>1.0.0-M16</version>
 </dependency>
 ````
-* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-models%7C1.0.0-M15%7Cjar
-* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-java-client%7C1.0.0-M15%7Cjar
+* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-models%7C1.0.0-M16%7Cjar
+* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-java-client%7C1.0.0-M16%7Cjar
+* http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7Csphere-convenience%7C1.0.0-M16%7Cjar
 
 ### Modules
 * `sphere-java-client`: alias for sphere-java-client-ahc-1_9
