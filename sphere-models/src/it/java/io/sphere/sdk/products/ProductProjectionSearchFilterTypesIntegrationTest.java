@@ -456,9 +456,17 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     @Test
     public void referenceAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofProductReference(ATTR_NAME_REF)
-                        .filtered().by(productSomeId));
+                .withQueryFilters(model -> model.allVariants().attribute().ofReference(ATTR_NAME_REF).id()
+                        .filtered().by(productSomeId.getId()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
+    }
+
+    @Test
+    public void referenceAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofReference(ATTR_NAME_REF).id()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(productSomeId.getId(), 1), TermStats.of(productOtherId.getId(), 1)));
     }
 
     @Test
@@ -650,9 +658,18 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     @Test
     public void referenceSetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofProductReference(ATTR_NAME_REF_SET)
-                        .filtered().by(productOtherId));
+                .withQueryFilters(model -> model.allVariants().attribute().ofReference(ATTR_NAME_REF_SET).id()
+                        .filtered().by(productOtherId.getId()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
+    }
+
+    @Test
+    public void referenceSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofReference(ATTR_NAME_REF_SET).id()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                .withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(productSomeId.getId(), 2), TermStats.of(productOtherId.getId(), 1)));
     }
 
     private ProductProjectionSearchModel model() {

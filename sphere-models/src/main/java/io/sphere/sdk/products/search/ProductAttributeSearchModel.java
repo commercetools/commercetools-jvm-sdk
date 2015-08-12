@@ -1,17 +1,7 @@
 package io.sphere.sdk.products.search;
 
-import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.channels.Channel;
-import io.sphere.sdk.customobjects.CustomObject;
-import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.producttypes.ProductType;
-import io.sphere.sdk.reviews.Review;
 import io.sphere.sdk.search.*;
-import io.sphere.sdk.shippingmethods.ShippingMethod;
-import io.sphere.sdk.states.State;
-import io.sphere.sdk.zones.Zone;
 
 public class ProductAttributeSearchModel extends SearchModelImpl<ProductProjection> {
 
@@ -59,39 +49,7 @@ public class ProductAttributeSearchModel extends SearchModelImpl<ProductProjecti
         return new DateTimeSearchModel<>(this, attributeName);
     }
 
-    public ReferenceSearchModel<ProductProjection, Product> ofProductReference(final String attributeName) {
-        return new ReferenceSearchModel<>(this, attributeName);
-    }
-
-    public ReferenceSearchModel<ProductProjection, ProductType> ofProductTypeReference(final String attributeName) {
-        return new ReferenceSearchModel<>(this, attributeName);
-    }
-
-    public ReferenceSearchModel<ProductProjection, Channel> ofChannelReference(final String attributeName) {
-        return new ReferenceSearchModel<>(this, attributeName);
-    }
-
-    public ReferenceSearchModel<ProductProjection, State> ofStateReference(final String attributeName) {
-        return new ReferenceSearchModel<>(this, attributeName);
-    }
-
-    public ReferenceSearchModel<ProductProjection, Zone> ofZoneReference(final String attributeName) {
-        return new ReferenceSearchModel<>(this, attributeName);
-    }
-
-    public ReferenceSearchModel<ProductProjection, ShippingMethod> ofShippingMethodReference(final String attributeName) {
-        return new ReferenceSearchModel<>(this, attributeName);
-    }
-
-    public ReferenceSearchModel<ProductProjection, Category> ofCategoryReference(final String attributeName) {
-        return new ReferenceSearchModel<>(this, attributeName);
-    }
-
-    public ReferenceSearchModel<ProductProjection, Review> ofReviewReference(final String attributeName) {
-        return new ReferenceSearchModel<>(this, attributeName);
-    }
-
-    public ReferenceSearchModel<ProductProjection, CustomObject<JsonNode>> ofCustomObjectReference(final String attributeName) {
+    public ReferenceSearchModel<ProductProjection, VariantSearchSortDirection> ofReference(final String attributeName) {
         return new ReferenceSearchModel<>(this, attributeName);
     }
 }
