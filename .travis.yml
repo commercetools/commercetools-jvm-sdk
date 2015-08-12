@@ -14,10 +14,11 @@ script:
 - echo $TRAVIS_PULL_REQUEST
 - echo $TRAVIS_REPO_SLUG
 - echo $TRAVIS_BRANCH
-- bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null
 - free
 - ./sbt -J-Xmx512m "sphere-models/it:test::runMain io.sphere.sdk.client.MainMethodThreadLeakTest"
 - ./sbt -J-Xmx512m "test:runMain introspection.rules.RulesMain"
+- free
+- bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null
 after_success:
 - bash scripts/publish-javadoc-version-folder.sh > /dev/null 2> /dev/null
 notifications:
