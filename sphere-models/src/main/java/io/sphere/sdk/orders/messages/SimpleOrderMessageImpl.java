@@ -11,6 +11,6 @@ final class SimpleOrderMessageImpl extends GenericMessageImpl<Order> implements 
 
     @JsonCreator
     public SimpleOrderMessageImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type);
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, MessagesPackage.ORDER_REFERENCE_TYPE_REFERENCE);
     }
 }

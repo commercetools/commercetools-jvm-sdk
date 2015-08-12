@@ -7,9 +7,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.models.ResourceImpl;
 
 import java.time.ZonedDateTime;
 import java.util.HashMap;
@@ -22,16 +21,19 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     protected final String type;
     @JsonIgnore
     private final Map<String, JsonNode> furtherFields = new HashMap<>();
+    @JsonIgnore
+    private final TypeReference<Reference<R>> typeReference;
 
     public GenericMessageImpl(final String id, final Long version, final ZonedDateTime createdAt,
                               final ZonedDateTime lastModifiedAt, final JsonNode resource,
                               final Long sequenceNumber, final Long resourceVersion,
-                              final String type) {
+                              final String type, final TypeReference<Reference<R>> typeReference) {
         super(id, version, createdAt, lastModifiedAt);
         this.resource = resource;
         this.sequenceNumber = sequenceNumber;
         this.resourceVersion = resourceVersion;
         this.type = type;
+        this.typeReference = typeReference;
     }
 
     @Override
@@ -57,8 +59,7 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     @SuppressWarnings("unchecked")
     @Override
     public Reference<R> getResource() {
-        return (Reference<R>) SphereJsonUtils.readObject(resource, new TypeReference<Reference<Order>>() {
-        });
+        return SphereJsonUtils.readObject(resource, typeReference);
     }
 
     @Override

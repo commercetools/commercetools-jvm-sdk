@@ -27,7 +27,7 @@ public class OrderStateChangedMessage extends GenericMessageImpl<Order> {
 
     @JsonCreator
     private OrderStateChangedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final OrderState orderState) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type);
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, MessagesPackage.ORDER_REFERENCE_TYPE_REFERENCE);
         this.orderState = orderState;
     }
 
