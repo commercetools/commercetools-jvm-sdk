@@ -131,7 +131,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
 
     @Test
     public void textAttributesFacets() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_TEXT)
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_TEXT)
                 .faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
         assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of("foo", 1), TermStats.of("bar", 1)));
@@ -147,7 +147,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
 
     @Test
     public void locTextAttributesFacets() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofLocalizableText(ATTR_NAME_LOC_TEXT).locale(ENGLISH)
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofLocalizedString(ATTR_NAME_LOC_TEXT).locale(ENGLISH)
                 .faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
         assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of("localized foo", 1), TermStats.of("localized bar", 1)));
@@ -396,7 +396,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     @Ignore
     @Test
     public void booleanSetAttributesFacets() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_BOOLEAN_SET)
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_BOOLEAN_SET)
                 .faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
         //assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(true, 2), TermStats.of(false, 1)));
@@ -412,7 +412,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
 
     @Test
     public void textSetAttributesFacets() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofText(ATTR_NAME_TEXT_SET)
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_TEXT_SET)
                 .faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
         assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of("foo", 2), TermStats.of("bar", 1)));
@@ -428,7 +428,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
 
     @Test
     public void locTextSetAttributesFacets() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofLocalizableText(ATTR_NAME_LOC_TEXT_SET).locale(ENGLISH)
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofLocalizedString(ATTR_NAME_LOC_TEXT_SET).locale(ENGLISH)
                 .faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
         assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of("localized foo", 2), TermStats.of("localized bar", 1)));
