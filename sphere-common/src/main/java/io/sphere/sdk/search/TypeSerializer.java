@@ -78,11 +78,11 @@ public class TypeSerializer<T> {
     }
 
     /**
-     * Serializer to convert the given money amount into cent amount (e.g. from "20,00" to "2000").
-     * @return the serializer for money amount data.
+     * Serializer to convert the given money cent amount into a plain string.
+     * @return the serializer for money cent amount data.
      */
-    public static TypeSerializer<BigDecimal> ofMoneyAmount() {
-        return new TypeSerializer<>(v -> v.movePointRight(2).setScale(0, HALF_EVEN).toPlainString());
+    public static TypeSerializer<BigDecimal> ofMoneyCentAmount() {
+        return new TypeSerializer<>(v -> v.toPlainString());
     }
 
     /**

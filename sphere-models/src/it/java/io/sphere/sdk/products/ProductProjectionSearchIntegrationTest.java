@@ -140,7 +140,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
-        final RangeFacetExpression<ProductProjection, BigDecimal> facetExpr = model().allVariants().price().amount().faceted().byGreaterThanOrEqualTo(ZERO);
+        final RangeFacetExpression<ProductProjection, BigDecimal> facetExpr = model().allVariants().price().centAmount().faceted().byGreaterThanOrEqualTo(ZERO);
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(result.getRangeFacetResult(facetExpr).getRanges().get(0).getCount()).isGreaterThan(0);

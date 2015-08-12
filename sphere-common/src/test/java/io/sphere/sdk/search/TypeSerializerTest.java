@@ -13,6 +13,7 @@ import java.time.ZonedDateTime;
 import java.util.function.Function;
 
 import static io.sphere.sdk.search.TypeSerializer.*;
+import static java.math.BigDecimal.valueOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class TypeSerializerTest {
@@ -33,8 +34,8 @@ public class TypeSerializerTest {
     @Test
     public void serializesNumber() throws Exception {
         Function<BigDecimal, String> serializer = ofNumber().serializer();
-        assertThat(serializer.apply(number(100))).isEqualTo("100");
-        assertThat(serializer.apply(number(10.5))).isEqualTo("10.5");
+        assertThat(serializer.apply(valueOf(100))).isEqualTo("100");
+        assertThat(serializer.apply(valueOf(10.5))).isEqualTo("10.5");
     }
 
     @Test
@@ -59,9 +60,9 @@ public class TypeSerializerTest {
 
     @Test
     public void serializesMoneyAmount() throws Exception {
-        Function<BigDecimal, String> serializer = ofMoneyAmount().serializer();
-        assertThat(serializer.apply(money(30))).isEqualTo("3000");
-        assertThat(serializer.apply(money(30.5))).isEqualTo("3050");
+        Function<BigDecimal, String> serializer = ofMoneyCentAmount().serializer();
+        assertThat(serializer.apply(valueOf(3000))).isEqualTo("3000");
+        assertThat(serializer.apply(valueOf(3050))).isEqualTo("3050");
     }
 
     @Test
@@ -77,10 +78,6 @@ public class TypeSerializerTest {
         assertThat(serializer.apply(reference("some-id"))).isEqualTo("\"some-id\"");
     }
 
-    private BigDecimal number(final double number) {
-        return new BigDecimal(number);
-    }
-
     private LocalDate date(final String date) {
         return LocalDate.parse(date);
     }
@@ -91,10 +88,6 @@ public class TypeSerializerTest {
 
     private ZonedDateTime dateTime(final String dateTime) {
         return ZonedDateTime.parse(dateTime);
-    }
-
-    private BigDecimal money(final double amount) {
-        return new BigDecimal(amount);
     }
 
     private CurrencyUnit currency(final String currencyCode) {

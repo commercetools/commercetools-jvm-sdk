@@ -8,7 +8,7 @@ public class MoneySearchModel<T, S extends SearchSortDirection> extends SearchMo
         super(parent, pathSegment);
     }
 
-    public MoneyAmountSearchModel<T, S> amount() {
+    public MoneyAmountSearchModel<T, S> centAmount() {
         return new MoneyAmountSearchModel<>(this, "centAmount");
     }
 
