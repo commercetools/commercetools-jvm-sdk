@@ -5,7 +5,10 @@ import io.sphere.sdk.models.Base;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public abstract class SimpleBaseExpression extends Base {
+abstract class SimpleBaseExpression extends Base {
+
+    protected SimpleBaseExpression() {
+    }
 
     abstract protected String expression();
 
