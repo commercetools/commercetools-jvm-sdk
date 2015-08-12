@@ -46,6 +46,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
 
     /**
      * Creates a search request object with the product projection type specified by {@code productProjectionType}.
+     * @param productProjectionType the desired projection type for the search results
      * @see #ofStaged()
      * @see #ofCurrent()
      * @return search request for current data
