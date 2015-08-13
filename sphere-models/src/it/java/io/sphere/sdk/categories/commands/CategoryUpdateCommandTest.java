@@ -2,14 +2,22 @@ package io.sphere.sdk.categories.commands;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.commands.updateactions.*;
+import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.commands.UpdateActionImpl;
+import io.sphere.sdk.commands.UpdateCommand;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import static io.sphere.sdk.categories.CategoryFixtures.*;
+import java.util.List;
+
+import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
+import static io.sphere.sdk.categories.CategoryFixtures.withPersistentCategory;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
+import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
-import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryUpdateCommandTest extends IntegrationTest {
@@ -17,12 +25,12 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
     public void updateCommandDsl() throws Exception {
         withCategory(client(), category -> {
             final LocalizedString newName = ofEnglishLocale("new name");
-            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, asList(ChangeName.of(newName)));
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, singletonList(ChangeName.of(newName)));
             final Category updatedCategory = execute(command);
             assertThat(updatedCategory.getName()).isEqualTo(newName);
 
             final LocalizedString newName2 = ofEnglishLocale("new name2");
-            final CategoryUpdateCommand command2 = CategoryUpdateCommand.of(category /** with old version */, asList(ChangeName.of(newName2)));
+            final CategoryUpdateCommand command2 = CategoryUpdateCommand.of(category /** with old version */, singletonList(ChangeName.of(newName2)));
             final Category againUpdatedCategory = execute(command2.withVersion(updatedCategory));
             assertThat(againUpdatedCategory.getName()).isEqualTo(newName2);
             assertThat(againUpdatedCategory.getVersion()).isGreaterThan(updatedCategory.getVersion());
@@ -72,5 +80,12 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
                 assertThat(updatedB.getParent().getObj()).isNotNull().isEqualTo(categoryA);
             })
         );
+    }
+
+    @Test
+    public void readAccessForUpdateActions() {
+        final List<UpdateAction<Category>> updateActions = asList(SetMetaTitle.of(randomSlug()), SetMetaDescription.of(randomSlug()));
+        final UpdateCommand<Category> updateCommand = CategoryUpdateCommand.of(Versioned.of("id", 4), updateActions);
+        assertThat(updateCommand.getUpdateActions()).isEqualTo(updateActions);
     }
 }
