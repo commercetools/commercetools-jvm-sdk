@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -166,37 +166,43 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#path--">path</a></span>()</code>
+<div class="block">Generates the path for the facet.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#resultPath--">resultPath</a></span>()</code>
 <div class="block">Gets the path of the facet result, which is either the alias or the search path if no alias defined.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#serializedAlias--">serializedAlias</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#serializedPath--">serializedPath</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#serializedValue--">serializedValue</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>protected java.util.function.Function&lt;V,java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#serializer--">serializer</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#toSphereFacet--">toSphereFacet</a></span>()</code>
 <div class="block">returns a facet expression.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#toSphereSearchExpression--">toSphereSearchExpression</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#toString--">toString</a></span>()</code>&nbsp;</td>
 </tr>
@@ -275,6 +281,22 @@ protected final&nbsp;java.lang.String alias</pre>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the path to access the facet result.</dd>
+</dl>
+</li>
+</ul>
+<a name="path--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>path</h4>
+<pre>public&nbsp;java.lang.String&nbsp;path()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetExpression.html#path--">FacetExpression</a></code></span></div>
+<div class="block">Generates the path for the facet.
+ Example: variants.attributes.color</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the path for the attribute to be faceted</dd>
 </dl>
 </li>
 </ul>

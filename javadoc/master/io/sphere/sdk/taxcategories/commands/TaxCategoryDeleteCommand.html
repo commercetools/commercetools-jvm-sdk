@@ -100,12 +100,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/commands/ByIdDeleteCommand.html" title="interface in io.sphere.sdk.commands">ByIdDeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</dd>
+<dd><a href="../../../../../io/sphere/sdk/commands/ByIdDeleteCommand.html" title="interface in io.sphere.sdk.commands">ByIdDeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/Command.html" title="interface in io.sphere.sdk.commands">Command</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;, <a href="../../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>,<a href="../../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html" title="interface in io.sphere.sdk.taxcategories.commands">TaxCategoryDeleteCommand</a>,<a href="../../../../../io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html" title="class in io.sphere.sdk.taxcategories.expansion">TaxCategoryExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>,<a href="../../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html" title="interface in io.sphere.sdk.taxcategories.commands">TaxCategoryDeleteCommand</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">TaxCategoryDeleteCommand</span>
-extends <a href="../../../../../io/sphere/sdk/commands/ByIdDeleteCommand.html" title="interface in io.sphere.sdk.commands">ByIdDeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/commands/ByIdDeleteCommand.html" title="interface in io.sphere.sdk.commands">ByIdDeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>,<a href="../../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html" title="interface in io.sphere.sdk.taxcategories.commands">TaxCategoryDeleteCommand</a>,<a href="../../../../../io/sphere/sdk/taxcategories/expansion/TaxCategoryExpansionModel.html" title="class in io.sphere.sdk.taxcategories.expansion">TaxCategoryExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&gt;</pre>
 <div class="block">Deletes a tax category.
 
  <p>Example:</p>
@@ -131,7 +131,7 @@ final TaxCategory deletedTaxCategory = execute(TaxCategoryDeleteCommand.of(taxCa
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</code></td>
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html" title="interface in io.sphere.sdk.taxcategories.commands">TaxCategoryDeleteCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html#of-io.sphere.sdk.models.Versioned-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;versioned)</code>&nbsp;</td>
 </tr>
 </table>
@@ -141,6 +141,27 @@ final TaxCategory deletedTaxCategory = execute(TaxCategoryDeleteCommand.of(taxCa
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.client.<a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a></h3>
 <code><a href="../../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.MetaModelExpansionDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionSupport">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a></h3>
+<code><a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html#expansionPaths--">expansionPaths</a></code></li>
 </ul>
 </li>
 </ul>
@@ -162,7 +183,7 @@ final TaxCategory deletedTaxCategory = execute(TaxCategoryDeleteCommand.of(taxCa
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
-<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;of(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;versioned)</pre>
+<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html" title="interface in io.sphere.sdk.taxcategories.commands">TaxCategoryDeleteCommand</a>&nbsp;of(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;&nbsp;versioned)</pre>
 </li>
 </ul>
 </li>

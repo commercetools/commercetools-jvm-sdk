@@ -158,9 +158,9 @@ extends java.lang.Object</pre>
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.math.BigDecimal&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html#ofMoneyAmount--">ofMoneyAmount</a></span>()</code>
-<div class="block">Serializer to convert the given money amount into cent amount (e.g.</div>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.lang.Long&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TypeSerializer.html#ofMoneyCentAmount--">ofMoneyCentAmount</a></span>()</code>
+<div class="block">Serializer to convert the given money cent amount into a plain string.</div>
 </td>
 </tr>
 <tr id="i5" class="rowColor">
@@ -306,17 +306,17 @@ extends java.lang.Object</pre>
 </dl>
 </li>
 </ul>
-<a name="ofMoneyAmount--">
+<a name="ofMoneyCentAmount--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>ofMoneyAmount</h4>
-<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.math.BigDecimal&gt;&nbsp;ofMoneyAmount()</pre>
-<div class="block">Serializer to convert the given money amount into cent amount (e.g. from "20,00" to "2000").</div>
+<h4>ofMoneyCentAmount</h4>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/TypeSerializer.html" title="class in io.sphere.sdk.search">TypeSerializer</a>&lt;java.lang.Long&gt;&nbsp;ofMoneyCentAmount()</pre>
+<div class="block">Serializer to convert the given money cent amount into a plain string.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the serializer for money amount data.</dd>
+<dd>the serializer for money cent amount data.</dd>
 </dl>
 </li>
 </ul>

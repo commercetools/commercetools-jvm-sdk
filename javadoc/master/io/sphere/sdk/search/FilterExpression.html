@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":17,"i1":6};
+var methods = {"i0":17,"i1":6,"i2":6};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -130,6 +130,12 @@ var activeTableTab = "activeTableTab";
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterExpression.html#path--">path</a></span>()</code>
+<div class="block">Generates the path to be filtered.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterExpression.html#toSphereFilter--">toSphereFilter</a></span>()</code>
 <div class="block">returns a filter expression.</div>
 </td>
@@ -161,6 +167,21 @@ var activeTableTab = "activeTableTab";
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>String with unescaped sphere filter expression</dd>
+</dl>
+</li>
+</ul>
+<a name="path--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>path</h4>
+<pre>java.lang.String&nbsp;path()</pre>
+<div class="block">Generates the path to be filtered.
+ Example: variants.attributes.color</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the path for the attribute to be filtered by</dd>
 </dl>
 </li>
 </ul>

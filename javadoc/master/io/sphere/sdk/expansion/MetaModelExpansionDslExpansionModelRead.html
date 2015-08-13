@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeable.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/expansion/MetaModelExpansionDslExpansionModelRead.html" target="_top">Frames</a></li>
@@ -99,12 +99,18 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - unit of the command result</dd>
+<dd><code>C</code> - type of the class implementing this class</dd>
+<dd><code>E</code> - type of the expansion model</dd>
+</dl>
+<dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeable.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeable</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a>&lt;T,C&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;T&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dd>
+<dd><a href="../../../../io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandImpl</a>, <a href="../../../../io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a>, <a href="../../../../io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a>, <a href="../../../../io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dd>
 </dl>
 <hr>
 <br>
@@ -141,18 +147,18 @@ extends <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html"
 <code><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpandeableDsl">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionDsl">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeableDsl</a></h3>
-<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeableDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a></h3>
+<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#plusExpansionPaths-java.util.List-">plusExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths</a>, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html#withExpansionPaths-java.util.List-">withExpansionPaths</a></code></li>
 </ul>
 <ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpandeable">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.expansion.ReferenceExpansionSupport">
 <!--   -->
 </a>
-<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeable.html" title="interface in io.sphere.sdk.expansion">ReferenceExpandeable</a></h3>
-<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeable.html#expansionPaths--">expansionPaths</a></code></li>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a></h3>
+<code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html#expansionPaths--">expansionPaths</a></code></li>
 </ul>
 </li>
 </ul>
@@ -205,7 +211,7 @@ extends <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html"
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/expansion/ReferenceExpandeable.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/expansion/MetaModelExpansionDslExpansionModelRead.html" target="_top">Frames</a></li>

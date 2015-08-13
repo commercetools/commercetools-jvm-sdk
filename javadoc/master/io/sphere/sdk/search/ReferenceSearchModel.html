@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.search</div>
-<h2 title="Class ReferenceSearchModel" class="title">Class ReferenceSearchModel&lt;T,R&gt;</h2>
+<h2 title="Class ReferenceSearchModel" class="title">Class ReferenceSearchModel&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -105,7 +105,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">io.sphere.sdk.search.SearchModelImpl</a>&lt;T&gt;</li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.search.ReferenceSearchModel&lt;T,R&gt;</li>
+<li>io.sphere.sdk.search.ReferenceSearchModel&lt;T,S&gt;</li>
 </ul>
 </li>
 </ul>
@@ -118,13 +118,12 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;T,<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;R&gt;&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">ReferenceSearchModel&lt;T,R&gt;</span>
-extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a>&lt;T&gt;
-implements <a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;T,<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;R&gt;&gt;</pre>
+<pre>public class <span class="typeNameLabel">ReferenceSearchModel&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</span>
+extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a>&lt;T&gt;</pre>
 </li>
 </ul>
 </div>
@@ -162,16 +161,8 @@ implements <a href="../../../../io/sphere/sdk/search/TermModel.html" title="inte
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">T</a>,<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">R</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html#faceted--">faceted</a></span>()</code>
-<div class="block">Eventually generates an expression to obtain the facets of the attribute for certain values.</div>
-</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="class in io.sphere.sdk.search">FilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">T</a>,<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">R</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html#filtered--">filtered</a></span>()</code>
-<div class="block">Eventually generates an expression to filter elements by certain values.</div>
-</td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">S</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html#id--">id</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -235,38 +226,13 @@ implements <a href="../../../../io/sphere/sdk/search/TermModel.html" title="inte
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="filtered--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>filtered</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="class in io.sphere.sdk.search">FilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">T</a>,<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">R</a>&gt;&gt;&nbsp;filtered()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html#filtered--">TermModel</a></code></span></div>
-<div class="block">Eventually generates an expression to filter elements by certain values.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#filtered--">filtered</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">T</a>,<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">R</a>&gt;&gt;</code></dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the model to specify the values to filter by</dd>
-</dl>
-</li>
-</ul>
-<a name="faceted--">
+<a name="id--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>faceted</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">T</a>,<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">R</a>&gt;&gt;&nbsp;faceted()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html#faceted--">TermModel</a></code></span></div>
-<div class="block">Eventually generates an expression to obtain the facets of the attribute for certain values.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#faceted--">faceted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">T</a>,<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">R</a>&gt;&gt;</code></dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the model to specify the values from which to obtain the facets</dd>
-</dl>
+<h4>id</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/ReferenceSearchModel.html" title="type parameter in ReferenceSearchModel">S</a>&gt;&nbsp;id()</pre>
 </li>
 </ul>
 </li>
