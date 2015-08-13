@@ -19,6 +19,11 @@ public class FilteredFacetExpression<T, V> extends TermExpression<T, V> implemen
     }
 
     @Override
+    public String path() {
+        return super.serializedPath();
+    }
+
+    @Override
     public boolean equals(Object o) {
         return o != null && o instanceof FacetExpression && toSphereFacet().equals(((FacetExpression) o).toSphereFacet());
     }

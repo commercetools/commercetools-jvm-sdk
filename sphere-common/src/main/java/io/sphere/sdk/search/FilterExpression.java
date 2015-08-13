@@ -13,6 +13,13 @@ public interface FilterExpression<T> {
      */
     String toSphereFilter();
 
+    /**
+     * Generates the path to be filtered.
+     * Example: variants.attributes.color
+     * @return the path for the attribute to be filtered by
+     */
+    String path();
+
     static <T> FilterExpression<T> of(final String sphereFilterExpression) {
         return new SimpleFilterExpression<>(sphereFilterExpression);
     }

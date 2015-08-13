@@ -1,8 +1,6 @@
 package io.sphere.sdk.products.search;
 
-import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.*;
 
 import javax.annotation.Nullable;
@@ -32,12 +30,12 @@ public class ProductProjectionSearchModel extends ProductDataSearchModelBase {
     }
 
     @Override
-    public ReferenceSearchModel<ProductProjection, Category> categories() {
+    public ReferenceSearchModel<ProductProjection, SimpleSearchSortDirection> categories() {
         return super.categories();
     }
 
     @Override
-    public ReferenceSearchModel<ProductProjection, ProductType> productType() {
+    public ReferenceSearchModel<ProductProjection, SimpleSearchSortDirection> productType() {
         return super.productType();
     }
 

@@ -1,11 +1,6 @@
 package io.sphere.sdk.products.search;
 
-import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.*;
 import org.junit.Test;
 
@@ -17,7 +12,6 @@ import java.time.ZonedDateTime;
 
 import static io.sphere.sdk.products.search.VariantSearchSortDirection.ASC;
 import static io.sphere.sdk.products.search.VariantSearchSortDirection.ASC_MAX;
-import static io.sphere.sdk.test.SphereTestUtils.stringFromResource;
 import static java.math.BigDecimal.valueOf;
 import static java.util.Locale.ENGLISH;
 import static java.util.Locale.GERMAN;
@@ -52,23 +46,23 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canAccessCategories() throws Exception {
-        final ReferenceSearchModel<ProductProjection, Category> path = MODEL.categories();
+        final StringSearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.categories().id();
         assertThat(path.faceted().byAllTerms().toSphereFacet()).isEqualTo("categories.id");
-        assertThat(path.filtered().by(category("some-id")).toSphereFilter()).isEqualTo("categories.id:\"some-id\"");
+        assertThat(path.filtered().by("some-id").toSphereFilter()).isEqualTo("categories.id:\"some-id\"");
     }
 
     @Test
     public void canAccessProductType() throws Exception {
-        final ReferenceSearchModel<ProductProjection, ProductType> path = MODEL.productType();
+        final StringSearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.productType().id();
         assertThat(path.faceted().byAllTerms().toSphereFacet()).isEqualTo("productType.id");
-        assertThat(path.filtered().by(productType("some-id")).toSphereFilter()).isEqualTo("productType.id:\"some-id\"");
+        assertThat(path.filtered().by("some-id").toSphereFilter()).isEqualTo("productType.id:\"some-id\"");
     }
 
     @Test
     public void canAccessPriceAmount() throws Exception {
-        final MoneyAmountSearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.allVariants().price().amount();
+        final MoneyCentAmountSearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.allVariants().price().centAmount();
         assertThat(path.faceted().byAllTerms().toSphereFacet()).isEqualTo("variants.price.centAmount");
-        assertThat(path.filtered().by(valueOf(10)).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
+        assertThat(path.filtered().by(1000L).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
         assertThat(path.sorted(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("price asc");
     }
 
@@ -145,10 +139,10 @@ public class ProductProjectionSearchTest {
     }
 
     @Test
-    public void canAccessMoneyAmountCustomAttributes() throws Exception {
-        final MoneyAmountSearchModel<ProductProjection, VariantSearchSortDirection> path = attributeModel().ofMoney("originalPrice").amount();
+    public void canAccessMoneyCentAmountCustomAttributes() throws Exception {
+        final MoneyCentAmountSearchModel<ProductProjection, VariantSearchSortDirection> path = attributeModel().ofMoney("originalPrice").centAmount();
         assertThat(path.faceted().byAllTerms().toSphereFacet()).isEqualTo("variants.attributes.originalPrice.centAmount");
-        assertThat(path.filtered().by(valueOf(10)).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:1000");
+        assertThat(path.filtered().by(1000L).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:1000");
         assertThat(path.sorted(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.originalPrice.centAmount asc.max");
     }
 
@@ -162,9 +156,9 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canAccessReferenceCustomAttributes() throws Exception {
-        final ReferenceSearchModel<ProductProjection, Product> path = attributeModel().ofProductReference("recommendedProduct");
+        final StringSearchModel<ProductProjection, VariantSearchSortDirection> path = attributeModel().ofReference("recommendedProduct").id();
         assertThat(path.faceted().byAllTerms().toSphereFacet()).isEqualTo("variants.attributes.recommendedProduct.id");
-        assertThat(path.filtered().by(product("some-id")).toSphereFilter()).isEqualTo("variants.attributes.recommendedProduct.id:\"some-id\"");
+        assertThat(path.filtered().by("some-id").toSphereFilter()).isEqualTo("variants.attributes.recommendedProduct.id:\"some-id\"");
     }
 
     @Test
@@ -210,12 +204,6 @@ public class ProductProjectionSearchTest {
         return MODEL.allVariants().attribute();
     }
 
-    private Product product(final String id) throws Exception {
-        final String productJson = stringFromResource("ProductProjectionSearchTest/product.json")
-                .replace("eb85ee2d-a5e5-4e15-a8ba-91281e599d68", id);
-        return SphereJsonUtils.readObject(productJson, Product.typeReference());
-    }
-
     private ZonedDateTime dateTime(final String dateTime) {
         return ZonedDateTime.parse(dateTime);
     }
@@ -230,13 +218,5 @@ public class ProductProjectionSearchTest {
 
     private CurrencyUnit currency(final String currencyCode) {
         return Monetary.getCurrency(currencyCode);
-    }
-
-    private Reference<Category> category(String id) {
-        return Reference.of("category", id);
-    }
-
-    private Reference<ProductType> productType(String id) {
-        return Reference.of("productType", id);
     }
 }

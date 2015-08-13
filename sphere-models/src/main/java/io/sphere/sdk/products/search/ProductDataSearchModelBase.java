@@ -1,8 +1,6 @@
 package io.sphere.sdk.products.search;
 
-import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.*;
 
 class ProductDataSearchModelBase extends SearchModelImpl<ProductProjection> {
@@ -19,11 +17,11 @@ class ProductDataSearchModelBase extends SearchModelImpl<ProductProjection> {
         return new LocalizedStringSearchModel<>(this, "name");
     }
 
-    public ReferenceSearchModel<ProductProjection, Category> categories() {
+    public ReferenceSearchModel<ProductProjection, SimpleSearchSortDirection> categories() {
         return new ReferenceSearchModel<>(this, "categories");
     }
 
-    public ReferenceSearchModel<ProductProjection, ProductType> productType() {
+    public ReferenceSearchModel<ProductProjection, SimpleSearchSortDirection> productType() {
         return new ReferenceSearchModel<>(this, "productType");
     }
 

@@ -7,6 +7,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
+import io.sphere.sdk.products.search.ProductProjectionSearchModel;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeDraft;
 import io.sphere.sdk.producttypes.commands.ProductTypeCreateCommand;
@@ -17,11 +18,13 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.RetryIntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.BeforeClass;
+import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
-import javax.money.Monetary;
+import javax.money.CurrencyUnit;
+import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -44,10 +47,10 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     private static Product productSomeId;
     private static Product productOtherId;
     private static ProductType productType;
-
     private static final String PRODUCT_TYPE_NAME = "ProductSearchTypeIT";
     private static final String SKU1 = PRODUCT_TYPE_NAME + "-sku1";
     private static final String SKU2 = PRODUCT_TYPE_NAME + "-sku2";
+
     private static final String SKU_SOME_ID = PRODUCT_TYPE_NAME + "-sku-some-id";
     private static final String SKU_OTHER_ID = PRODUCT_TYPE_NAME + "-sku-other-id";
     public static final String ATTR_NAME_BOOLEAN = ("Boolean" + PRODUCT_TYPE_NAME);
@@ -73,12 +76,26 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     public static final String ATTR_NAME_DATE_TIME_SET = ("DateTimeSet" + PRODUCT_TYPE_NAME);
     public static final String ATTR_NAME_REF_SET = ("RefSet" + PRODUCT_TYPE_NAME);
 
+    public static final String TEXT_FOO = "foo";
+    public static final String TEXT_BAR = "bar";
+    public static final LocalizedString LOC_TEXT_FOO = ofEnglishLocale("localized foo");
+    public static final LocalizedString LOC_TEXT_BAR = ofEnglishLocale("localized bar");
     public static final EnumValue ENUM_ONE = EnumValue.of("one-key", "one");
     public static final EnumValue ENUM_TWO = EnumValue.of("two-key", "two");
     public static final EnumValue ENUM_THREE = EnumValue.of("three-key", "three");
     public static final LocalizedEnumValue LOC_ENUM_ONE = LocalizedEnumValue.of("one-key", LocalizedString.of(GERMAN, "eins", FRENCH, "un"));
     public static final LocalizedEnumValue LOC_ENUM_TWO = LocalizedEnumValue.of("two-key", LocalizedString.of(GERMAN, "zwei", FRENCH, "deux"));
     public static final LocalizedEnumValue LOC_ENUM_THREE = LocalizedEnumValue.of("three-key", LocalizedString.of(GERMAN, "drei", FRENCH, "trois"));
+    public static final BigDecimal NUMBER_5 = valueOf(5D);
+    public static final BigDecimal NUMBER_10 = valueOf(10D);
+    public static final MonetaryAmount MONEY_500_EUR = MoneyImpl.of(valueOf(500), "EUR");
+    public static final MonetaryAmount MONEY_1000_USD = MoneyImpl.of(valueOf(1000), "USD");
+    public static final LocalDate DATE_2001 = LocalDate.parse("2001-09-11");
+    public static final LocalDate DATE_2002 = LocalDate.parse("2002-10-12");
+    public static final LocalTime TIME_22H = LocalTime.parse("22:05:09.203");
+    public static final LocalTime TIME_23H = LocalTime.parse("23:06:10.204");
+    public static final ZonedDateTime DATE_TIME_2001_22H = ZonedDateTime.parse("2001-09-11T22:05:09.203+00:00");
+    public static final ZonedDateTime DATE_TIME_2002_23H = ZonedDateTime.parse("2002-10-12T23:06:10.204+00:00");
 
     @Rule
     public RetryIntegrationTest retry = new RetryIntegrationTest(10, 0, LoggerFactory.getLogger(this.getClass()));
@@ -101,40 +118,135 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         product2 = findBySku.apply(SKU2).orElseGet(() -> createProduct2());
     }
 
+    private static Product createProduct1() {
+        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
+                .attributes(
+                        AttributeAccess.ofBoolean().ofName(ATTR_NAME_BOOLEAN).draftOf(true),
+                        AttributeAccess.ofText().ofName(ATTR_NAME_TEXT).draftOf(TEXT_FOO),
+                        AttributeAccess.ofLocalizedString().ofName(ATTR_NAME_LOC_TEXT).draftOf(LOC_TEXT_FOO),
+                        AttributeAccess.ofEnumValue().ofName(ATTR_NAME_ENUM).draftOf(ENUM_TWO),
+                        AttributeAccess.ofLocalizedEnumValue().ofName(ATTR_NAME_LOC_ENUM).draftOf(LOC_ENUM_TWO),
+                        AttributeAccess.ofDouble().ofName(ATTR_NAME_NUMBER).draftOf(NUMBER_5.doubleValue()),
+                        AttributeAccess.ofMoney().ofName(ATTR_NAME_MONEY).draftOf(MONEY_500_EUR),
+                        AttributeAccess.ofDate().ofName(ATTR_NAME_DATE).draftOf(DATE_2001),
+                        AttributeAccess.ofTime().ofName(ATTR_NAME_TIME).draftOf(TIME_22H),
+                        AttributeAccess.ofDateTime().ofName(ATTR_NAME_DATE_TIME).draftOf(DATE_TIME_2001_22H),
+                        AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(productSomeId.toReference()),
+                        AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true, false)),
+                        AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet(TEXT_FOO, TEXT_BAR)),
+                        AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(LOC_TEXT_FOO, LOC_TEXT_BAR)),
+                        AttributeAccess.ofEnumValueSet().ofName(ATTR_NAME_ENUM_SET).draftOf(asSet(ENUM_TWO, ENUM_THREE)),
+                        AttributeAccess.ofLocalizedEnumValueSet().ofName(ATTR_NAME_LOC_ENUM_SET).draftOf(asSet(LOC_ENUM_TWO, LOC_ENUM_THREE)),
+                        AttributeAccess.ofDoubleSet().ofName(ATTR_NAME_NUMBER_SET).draftOf(asSet(NUMBER_5.doubleValue(), NUMBER_10.doubleValue())),
+                        AttributeAccess.ofMoneySet().ofName(ATTR_NAME_MONEY_SET).draftOf(asSet(MONEY_500_EUR, MONEY_1000_USD)),
+                        AttributeAccess.ofDateSet().ofName(ATTR_NAME_DATE_SET).draftOf(asSet(DATE_2001, DATE_2002)),
+                        AttributeAccess.ofTimeSet().ofName(ATTR_NAME_TIME_SET).draftOf(asSet(TIME_22H, TIME_23H)),
+                        AttributeAccess.ofDateTimeSet().ofName(ATTR_NAME_DATE_TIME_SET).draftOf(asSet(DATE_TIME_2001_22H, DATE_TIME_2002_23H)),
+                        AttributeAccess.ofProductReferenceSet().ofName(ATTR_NAME_REF_SET).draftOf(asSet(productSomeId.toReference(), productOtherId.toReference())))
+                .price(Price.of(new BigDecimal("23.45"), EUR))
+                .sku(SKU1)
+                .build();
+        return createTestProduct("Product one", masterVariant);
+    }
+
+    private static Product createProduct2() {
+        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
+                .attributes(
+                        AttributeAccess.ofBoolean().ofName(ATTR_NAME_BOOLEAN).draftOf(false),
+                        AttributeAccess.ofText().ofName(ATTR_NAME_TEXT).draftOf(TEXT_BAR),
+                        AttributeAccess.ofLocalizedString().ofName(ATTR_NAME_LOC_TEXT).draftOf(LOC_TEXT_BAR),
+                        AttributeAccess.ofEnumValue().ofName(ATTR_NAME_ENUM).draftOf(ENUM_THREE),
+                        AttributeAccess.ofLocalizedEnumValue().ofName(ATTR_NAME_LOC_ENUM).draftOf(LOC_ENUM_THREE),
+                        AttributeAccess.ofDouble().ofName(ATTR_NAME_NUMBER).draftOf(NUMBER_10.doubleValue()),
+                        AttributeAccess.ofMoney().ofName(ATTR_NAME_MONEY).draftOf(MONEY_1000_USD),
+                        AttributeAccess.ofDate().ofName(ATTR_NAME_DATE).draftOf(DATE_2002),
+                        AttributeAccess.ofTime().ofName(ATTR_NAME_TIME).draftOf(TIME_23H),
+                        AttributeAccess.ofDateTime().ofName(ATTR_NAME_DATE_TIME).draftOf(DATE_TIME_2002_23H),
+                        AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(productOtherId.toReference()),
+                        AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true)),
+                        AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet(TEXT_FOO)),
+                        AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(LOC_TEXT_FOO)),
+                        AttributeAccess.ofEnumValueSet().ofName(ATTR_NAME_ENUM_SET).draftOf(asSet(ENUM_TWO)),
+                        AttributeAccess.ofLocalizedEnumValueSet().ofName(ATTR_NAME_LOC_ENUM_SET).draftOf(asSet(LOC_ENUM_TWO)),
+                        AttributeAccess.ofDoubleSet().ofName(ATTR_NAME_NUMBER_SET).draftOf(asSet(NUMBER_5.doubleValue())),
+                        AttributeAccess.ofMoneySet().ofName(ATTR_NAME_MONEY_SET).draftOf(asSet(MONEY_500_EUR)),
+                        AttributeAccess.ofDateSet().ofName(ATTR_NAME_DATE_SET).draftOf(asSet(DATE_2001)),
+                        AttributeAccess.ofTimeSet().ofName(ATTR_NAME_TIME_SET).draftOf(asSet(TIME_22H)),
+                        AttributeAccess.ofDateTimeSet().ofName(ATTR_NAME_DATE_TIME_SET).draftOf(asSet(DATE_TIME_2001_22H)),
+                        AttributeAccess.ofProductReferenceSet().ofName(ATTR_NAME_REF_SET).draftOf(asSet(productSomeId.toReference())))
+                .price(Price.of(new BigDecimal("46.80"), USD))
+                .sku(SKU2)
+                .build();
+        return createTestProduct("Product two", masterVariant);
+    }
+
     @Test
-    public void filtersBooleanAttributes() throws Exception {
+    public void booleanAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofBoolean(ATTR_NAME_BOOLEAN)
                         .filtered().by(true));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
+    @Ignore
     @Test
-    public void filtersTextAttributes() throws Exception {
+    public void booleanAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, Boolean> facetExpr = model().allVariants().attribute().ofBoolean(ATTR_NAME_BOOLEAN)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        //assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(true, 1), TermStats.of(false, 1))); // still returning F, T. to be fixed by API
+    }
+
+    @Test
+    public void textAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofString(ATTR_NAME_TEXT)
-                        .filtered().by("foo"));
+                        .filtered().by(TEXT_FOO));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersLocTextAttributes() throws Exception {
+    public void textAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_TEXT)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(TEXT_FOO, 1), TermStats.of(TEXT_BAR, 1)));
+    }
+
+    @Test
+    public void locTextAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofLocalizedString(ATTR_NAME_LOC_TEXT).locale(ENGLISH)
-                        .filtered().by("localized foo"));
+                        .filtered().by(LOC_TEXT_FOO.get(ENGLISH)));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersEnumKeyAttributes() throws Exception {
+    public void locTextAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofLocalizedString(ATTR_NAME_LOC_TEXT).locale(ENGLISH)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(LOC_TEXT_FOO.get(ENGLISH), 1), TermStats.of(LOC_TEXT_BAR.get(ENGLISH), 1)));
+    }
+
+    @Test
+    public void enumKeyAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofEnum(ATTR_NAME_ENUM).key()
-                        .filtered().by("two-key"));
+                        .filtered().by(ENUM_TWO.getKey()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersEnumLabelAttributes() throws Exception {
+    public void enumKeyAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofEnum(ATTR_NAME_ENUM).key()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(ENUM_TWO.getKey(), 1), TermStats.of(ENUM_THREE.getKey(), 1)));
+    }
+
+    @Test
+    public void enumLabelAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofEnum(ATTR_NAME_ENUM).label()
                         .filtered().by("two"));
@@ -142,232 +254,444 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     }
 
     @Test
-    public void filtersLocEnumKeyAttributes() throws Exception {
+    public void enumLabelAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofEnum(ATTR_NAME_ENUM).label()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(ENUM_TWO.getLabel(), 1), TermStats.of(ENUM_THREE.getLabel(), 1)));
+    }
+
+    @Test
+    public void locEnumKeyAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).key()
-                        .filtered().by("two-key"));
+                        .filtered().by(LOC_ENUM_TWO.getKey()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersLocEnumLabelAttributes() throws Exception {
+    public void locEnumKeyAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).key()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(LOC_ENUM_TWO.getKey(), 1), TermStats.of(LOC_ENUM_THREE.getKey(), 1)));
+    }
+
+    @Test
+    public void locEnumLabelAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN)
-                        .filtered().by("zwei"));
+                        .filtered().by(LOC_ENUM_TWO.getLabel().get(GERMAN)));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersNumberAttributes() throws Exception {
-        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER)
-                        .filtered().by(valueOf(5D)));
-        assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
-        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER)
-                        .filtered().byLessThanOrEqualTo(valueOf(5D)));
-        assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
+    public void locEnumLabelAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(LOC_ENUM_TWO.getLabel().get(GERMAN), 1), TermStats.of(LOC_ENUM_THREE.getLabel().get(GERMAN), 1)));
     }
 
     @Test
-    public void filtersMoneyAmountAttributes() throws Exception {
+    public void numberAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).amount()
-                        .filtered().by(valueOf(500)));
+                .withQueryFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER)
+                        .filtered().by(NUMBER_5));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
+
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).amount()
-                        .filtered().byLessThanOrEqualTo(valueOf(500)));
+                .withQueryFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER)
+                        .filtered().byLessThanOrEqualTo(NUMBER_5));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
+    @Ignore
     @Test
-    public void filtersMoneyCurrencyAttributes() throws Exception {
+    public void numberAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, BigDecimal> termExpr = model().allVariants().attribute().ofNumber(ATTR_NAME_NUMBER)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
+        //assertThat(executeAndReturnTerms(termSearch, termExpr)).containsOnlyElementsOf(asList(TermStats.ofNumber(valueOf(5D), 1), TermStats.ofNumber(valueOf(10D), 1)));
+
+        final RangeFacetExpression<ProductProjection, BigDecimal> rangeExpr = model().allVariants().attribute().ofNumber(ATTR_NAME_NUMBER)
+                .faceted().byGreaterThanOrEqualTo(valueOf(0));
+        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
+        final List<RangeStats<BigDecimal>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        //assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of(valueOf(0D), null, 2L, valueOf(5D), valueOf(10D), valueOf(15D), 7.5D)));
+    }
+
+    @Test
+    public void moneyAmountAttributesFilters() throws Exception {
+        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
+                .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount()
+                        .filtered().by(toCents(MONEY_500_EUR)));
+        assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
+
+        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
+                .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount()
+                        .filtered().byLessThanOrEqualTo(toCents(MONEY_500_EUR)));
+        assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
+    }
+
+    @Ignore
+    @Test
+    public void moneyAmountAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, Long> termExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
+        //assertThat(executeAndReturnTerms(termSearch, termExpr)).containsOnlyElementsOf(asList(TermStats.of(valueOf(50000), 1), TermStats.of(valueOf(100000), 1)));
+
+        final RangeFacetExpression<ProductProjection, Long> rangeExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount()
+                .faceted().byGreaterThanOrEqualTo(0L);
+        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
+        final List<RangeStats<Long>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        //assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of(valueOf(0D), null, 2L, valueOf(50000D), valueOf(100000D), valueOf(150000D), 75000D))); // it is actually cent amount!
+    }
+
+    @Test
+    public void moneyCurrencyAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).currency()
-                        .filtered().by(Monetary.getCurrency("EUR")));
+                        .filtered().by(MONEY_500_EUR.getCurrency()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
+    @Ignore
     @Test
-    public void filtersDateAttributes() throws Exception {
+    public void moneyCurrencyAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, CurrencyUnit> facetExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY).currency()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        //assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(Monetary.getCurrency("EUR"), 1), TermStats.of(Monetary.getCurrency("USD"), 1)));
+    }
+
+    @Test
+    public void dateAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDate(ATTR_NAME_DATE)
-                        .filtered().by(LocalDate.parse("2001-09-11")));
+                        .filtered().by(DATE_2001));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
+
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDate(ATTR_NAME_DATE)
-                        .filtered().byLessThanOrEqualTo(LocalDate.parse("2001-09-11")));
+                        .filtered().byLessThanOrEqualTo(DATE_2001));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
+    @Ignore
     @Test
-    public void filtersTimeAttributes() throws Exception {
+    public void dateAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, LocalDate> termExpr = model().allVariants().attribute().ofDate(ATTR_NAME_DATE)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
+        final List<TermStats<LocalDate>> terms = executeAndReturnTerms(termSearch, termExpr);
+        //assertThat(terms).containsOnlyElementsOf(asList(TermStats.of(LocalDate.parse("2001-09-11"), 1), TermStats.of(LocalDate.parse("2002-10-12"), 1)));
+
+        final RangeFacetExpression<ProductProjection, LocalDate> rangeExpr = model().allVariants().attribute().ofDate(ATTR_NAME_DATE)
+                .faceted().byGreaterThanOrEqualTo(DATE_2001);
+        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
+        final List<RangeStats<LocalDate>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        //assertThat(actual).containsOnlyElementsOf(asList());
+    }
+
+    @Test
+    public void timeAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofTime(ATTR_NAME_TIME)
-                        .filtered().by(LocalTime.parse("22:05:09.203")));
+                        .filtered().by(TIME_22H));
+
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofTime(ATTR_NAME_TIME)
-                        .filtered().byLessThanOrEqualTo(LocalTime.parse("22:05:09.203")));
+                        .filtered().byLessThanOrEqualTo(TIME_22H));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
+    @Ignore
     @Test
-    public void filtersDateTimeAttributes() throws Exception {
+    public void timeAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, LocalTime> termExpr = model().allVariants().attribute().ofTime(ATTR_NAME_TIME)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
+        final List<TermStats<LocalTime>> terms = executeAndReturnTerms(termSearch, termExpr);
+        //assertThat(terms).containsOnlyElementsOf(asList(TermStats.of(LocalTime.parse("22:05:09.203"), 1), TermStats.of(LocalTime.parse("23:06:10.204"), 1)));
+
+        final RangeFacetExpression<ProductProjection, LocalTime> rangeExpr = model().allVariants().attribute().ofTime(ATTR_NAME_TIME)
+                .faceted().byGreaterThanOrEqualTo(TIME_22H);
+        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
+        final List<RangeStats<LocalTime>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        //assertThat(actual).containsOnlyElementsOf(asList());
+    }
+
+    @Test
+    public void dateTimeAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME)
-                        .filtered().by(ZonedDateTime.parse("2001-09-11T22:05:09.203+00:00")));
+                        .filtered().by(DATE_TIME_2001_22H));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
+
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME)
-                        .filtered().byLessThanOrEqualTo(ZonedDateTime.parse("2001-09-11T22:05:09.203+00:00")));
+                        .filtered().byLessThanOrEqualTo(DATE_TIME_2001_22H));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
+    @Ignore
     @Test
-    public void filtersReferenceAttributes() throws Exception {
+    public void datetimeAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, ZonedDateTime> termExpr = model().allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
+        final List<TermStats<ZonedDateTime>> terms = executeAndReturnTerms(termSearch, termExpr);
+        //assertThat(terms).containsOnlyElementsOf(asList(TermStats.of(DATE_TIME_2001_22H, 1), TermStats.of(DATE_TIME_2002_23H, 1)));
+
+        final RangeFacetExpression<ProductProjection, ZonedDateTime> rangeExpr = model().allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME)
+                .faceted().byGreaterThanOrEqualTo(DATE_TIME_2001_22H);
+        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
+        final List<RangeStats<ZonedDateTime>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        //assertThat(actual).containsOnlyElementsOf(asList());
+    }
+
+    @Test
+    public void referenceAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofProductReference(ATTR_NAME_REF)
-                        .filtered().by(productSomeId));
+                .withQueryFilters(model -> model.allVariants().attribute().ofReference(ATTR_NAME_REF).id()
+                        .filtered().by(productSomeId.getId()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersBooleanSetAttributes() throws Exception {
+    public void referenceAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofReference(ATTR_NAME_REF).id()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(productSomeId.getId(), 1), TermStats.of(productOtherId.getId(), 1)));
+    }
+
+    @Test
+    public void booleanSetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofBoolean(ATTR_NAME_BOOLEAN_SET)
                         .filtered().by(false));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
+    @Ignore
     @Test
-    public void filtersTextSetAttributes() throws Exception {
+    public void booleanSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_BOOLEAN_SET)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        //assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(true, 2), TermStats.of(false, 1)));
+    }
+
+    @Test
+    public void textSetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofString(ATTR_NAME_TEXT_SET)
-                        .filtered().by("bar"));
+                        .filtered().by(TEXT_BAR));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersLocTextSetAttributes() throws Exception {
+    public void textSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_TEXT_SET)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(TEXT_FOO, 2), TermStats.of(TEXT_BAR, 1)));
+    }
+
+    @Test
+    public void locTextSetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofLocalizedString(ATTR_NAME_LOC_TEXT_SET).locale(ENGLISH)
-                        .filtered().by("localized bar"));
+                        .filtered().by(LOC_TEXT_BAR.get(ENGLISH)));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersEnumKeySetAttributes() throws Exception {
+    public void locTextSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofLocalizedString(ATTR_NAME_LOC_TEXT_SET).locale(ENGLISH)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(LOC_TEXT_FOO.get(ENGLISH), 2), TermStats.of(LOC_TEXT_BAR.get(ENGLISH), 1)));
+    }
+
+    @Test
+    public void enumKeySetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofEnum(ATTR_NAME_ENUM_SET).key()
-                        .filtered().by("three-key"));
+                        .filtered().by(ENUM_THREE.getKey()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersEnumLabelSetAttributes() throws Exception {
+    public void enumKeySetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofEnum(ATTR_NAME_ENUM_SET).key()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(ENUM_TWO.getKey(), 2), TermStats.of(ENUM_THREE.getKey(), 1)));
+    }
+
+    @Test
+    public void enumLabelSetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofEnum(ATTR_NAME_ENUM_SET).label()
-                        .filtered().by("three"));
+                        .filtered().by(ENUM_THREE.getLabel()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersLocEnumKeySetAttributes() throws Exception {
+    public void enumLabelSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofEnum(ATTR_NAME_ENUM_SET).label()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(ENUM_TWO.getLabel(), 2), TermStats.of(ENUM_THREE.getLabel(), 1)));
+    }
+
+    @Test
+    public void locEnumKeySetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM_SET).key()
-                        .filtered().by("three-key"));
+                        .filtered().by(LOC_ENUM_THREE.getKey()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersLocEnumLabelSetAttributes() throws Exception {
+    public void locEnumKeySetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM_SET).key()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(LOC_ENUM_TWO.getKey(), 2), TermStats.of(LOC_ENUM_THREE.getKey(), 1)));
+    }
+
+    @Test
+    public void locEnumLabelSetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN)
-                        .filtered().by("drei"));
+                        .filtered().by(LOC_ENUM_THREE.getLabel().get(GERMAN)));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersNumberSetAttributes() throws Exception {
+    public void locEnumLabelSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(LOC_ENUM_TWO.getLabel().get(GERMAN), 2), TermStats.of(LOC_ENUM_THREE.getLabel().get(GERMAN), 1)));
+    }
+
+    @Test
+    public void numberSetAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER_SET)
-                        .filtered().by(valueOf(10D)));
+                        .filtered().by(NUMBER_10));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
+
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER_SET)
-                        .filtered().byGreaterThanOrEqualTo(valueOf(10D)));
+                        .filtered().byGreaterThanOrEqualTo(NUMBER_10));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersMoneyAmountSetAttributes() throws Exception {
+    public void moneyAmountSetAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).amount()
-                        .filtered().by(valueOf(1000)));
+                .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).centAmount()
+                        .filtered().by(toCents(MONEY_1000_USD)));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
+
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).amount()
-                        .filtered().byGreaterThanOrEqualTo(valueOf(1000)));
+                .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).centAmount()
+                        .filtered().byGreaterThanOrEqualTo(toCents(MONEY_1000_USD)));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersMoneyCurrencySetAttributes() throws Exception {
+    public void moneyCurrencySetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).currency()
-                        .filtered().by(Monetary.getCurrency("USD")));
+                        .filtered().by(MONEY_1000_USD.getCurrency()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersDateSetAttributes() throws Exception {
+    public void dateSetAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDate(ATTR_NAME_DATE_SET)
-                        .filtered().by(LocalDate.parse("2002-10-12")));
+                        .filtered().by(DATE_2002));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
+
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDate(ATTR_NAME_DATE_SET)
-                        .filtered().byGreaterThanOrEqualTo(LocalDate.parse("2002-10-12")));
+                        .filtered().byGreaterThanOrEqualTo(DATE_2002));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersTimeSetAttributes() throws Exception {
+    public void timeSetAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofTime(ATTR_NAME_TIME_SET)
-                        .filtered().by(LocalTime.parse("23:06:10.204")));
+                        .filtered().by(TIME_23H));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
+
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofTime(ATTR_NAME_TIME_SET)
-                        .filtered().byGreaterThanOrEqualTo(LocalTime.parse("23:06:10.204")));
+                        .filtered().byGreaterThanOrEqualTo(TIME_23H));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersDateTimeSetAttributes() throws Exception {
+    public void dateTimeSetAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME_SET)
-                        .filtered().by(ZonedDateTime.parse("2002-10-12T23:06:10.204+00:00")));
+                        .filtered().by(DATE_TIME_2002_23H));
         assertThat(executeAndReturnIds(termSearch)).containsOnly(product1.getId());
+
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME_SET)
-                        .filtered().byGreaterThanOrEqualTo(ZonedDateTime.parse("2002-10-12T23:06:10.204+00:00")));
+                        .filtered().byGreaterThanOrEqualTo(DATE_TIME_2002_23H));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
     @Test
-    public void filtersReferenceSetAttributes() throws Exception {
+    public void referenceSetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withQueryFilters(model -> model.allVariants().attribute().ofProductReference(ATTR_NAME_REF_SET)
-                        .filtered().by(productOtherId));
+                .withQueryFilters(model -> model.allVariants().attribute().ofReference(ATTR_NAME_REF_SET).id()
+                        .filtered().by(productOtherId.getId()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
+    }
+
+    @Test
+    public void referenceSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofReference(ATTR_NAME_REF_SET).id()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                .withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(productSomeId.getId(), 2), TermStats.of(productOtherId.getId(), 1)));
+    }
+
+    private ProductProjectionSearchModel model() {
+        return ProductProjectionSearchModel.of();
+    }
+
+    private Long toCents(final MonetaryAmount money) {
+        return money.getNumber().numberValueExact(BigDecimal.class).movePointRight(2).longValue();
     }
 
     private static List<String> executeAndReturnIds(final ProductProjectionSearch search) {
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         return resultsToIds(result);
+    }
+
+    private static <V> List<TermStats<V>> executeAndReturnTerms(final ProductProjectionSearch search, TermFacetExpression<ProductProjection, V> facetExpr) {
+        final TermFacetResult<V> termFacetResult = executeSearch(search).getTermFacetResult(facetExpr);
+        return termFacetResult.getTerms();
+    }
+
+    private static <V extends Comparable<? super V>> List<RangeStats<V>> executeAndReturnRange(final ProductProjectionSearch search, RangeFacetExpression<ProductProjection, V> facetExpr) {
+        return executeSearch(search).getRangeFacetResult(facetExpr).getRanges();
     }
 
     private static List<String> resultsToIds(final PagedSearchResult<ProductProjection> result) {
@@ -411,68 +735,6 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
                 moneySetAttrDef, dateSetAttrDef, timeSetAttrDef, dateTimeSetAttrDef, refSetAttrDef));
         final ProductTypeCreateCommand productTypeCreateCommand = ProductTypeCreateCommand.of(productTypeDraft);
         return execute(productTypeCreateCommand);
-    }
-
-    private static Product createProduct1() {
-        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
-                .attributes(
-                        AttributeAccess.ofBoolean().ofName(ATTR_NAME_BOOLEAN).draftOf(true),
-                        AttributeAccess.ofText().ofName(ATTR_NAME_TEXT).draftOf("foo"),
-                        AttributeAccess.ofLocalizedString().ofName(ATTR_NAME_LOC_TEXT).draftOf(ofEnglishLocale("localized foo")),
-                        AttributeAccess.ofEnumValue().ofName(ATTR_NAME_ENUM).draftOf(ENUM_TWO),
-                        AttributeAccess.ofLocalizedEnumValue().ofName(ATTR_NAME_LOC_ENUM).draftOf(LOC_ENUM_TWO),
-                        AttributeAccess.ofDouble().ofName(ATTR_NAME_NUMBER).draftOf(5D),
-                        AttributeAccess.ofMoney().ofName(ATTR_NAME_MONEY).draftOf(MoneyImpl.of(valueOf(500), "EUR")),
-                        AttributeAccess.ofDate().ofName(ATTR_NAME_DATE).draftOf(LocalDate.parse("2001-09-11")),
-                        AttributeAccess.ofTime().ofName(ATTR_NAME_TIME).draftOf(LocalTime.parse("22:05:09.203")),
-                        AttributeAccess.ofDateTime().ofName(ATTR_NAME_DATE_TIME).draftOf(ZonedDateTime.parse("2001-09-11T22:05:09.203+00:00")),
-                        AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(productSomeId.toReference()),
-                        AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true, false)),
-                        AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet("foo", "bar")),
-                        AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(ofEnglishLocale("localized foo"), ofEnglishLocale("localized bar"))),
-                        AttributeAccess.ofEnumValueSet().ofName(ATTR_NAME_ENUM_SET).draftOf(asSet(ENUM_TWO, ENUM_THREE)),
-                        AttributeAccess.ofLocalizedEnumValueSet().ofName(ATTR_NAME_LOC_ENUM_SET).draftOf(asSet(LOC_ENUM_TWO, LOC_ENUM_THREE)),
-                        AttributeAccess.ofDoubleSet().ofName(ATTR_NAME_NUMBER_SET).draftOf(asSet(5D, 10D)),
-                        AttributeAccess.ofMoneySet().ofName(ATTR_NAME_MONEY_SET).draftOf(asSet(MoneyImpl.of(valueOf(500), "EUR"), MoneyImpl.of(valueOf(1000), "USD"))),
-                        AttributeAccess.ofDateSet().ofName(ATTR_NAME_DATE_SET).draftOf(asSet(LocalDate.parse("2001-09-11"), LocalDate.parse("2002-10-12"))),
-                        AttributeAccess.ofTimeSet().ofName(ATTR_NAME_TIME_SET).draftOf(asSet(LocalTime.parse("22:05:09.203"), LocalTime.parse("23:06:10.204"))),
-                        AttributeAccess.ofDateTimeSet().ofName(ATTR_NAME_DATE_TIME_SET).draftOf(asSet(ZonedDateTime.parse("2001-09-11T22:05:09.203+00:00"), ZonedDateTime.parse("2002-10-12T23:06:10.204+00:00"))),
-                        AttributeAccess.ofProductReferenceSet().ofName(ATTR_NAME_REF_SET).draftOf(asSet(productSomeId.toReference(), productOtherId.toReference())))
-                .price(Price.of(new BigDecimal("23.45"), EUR))
-                .sku(SKU1)
-                .build();
-        return createTestProduct("Product one", masterVariant);
-    }
-
-    private static Product createProduct2() {
-        final ProductVariantDraft masterVariant = ProductVariantDraftBuilder.of()
-                .attributes(
-                        AttributeAccess.ofBoolean().ofName(ATTR_NAME_BOOLEAN).draftOf(false),
-                        AttributeAccess.ofText().ofName(ATTR_NAME_TEXT).draftOf("bar"),
-                        AttributeAccess.ofLocalizedString().ofName(ATTR_NAME_LOC_TEXT).draftOf(ofEnglishLocale("localized bar")),
-                        AttributeAccess.ofEnumValue().ofName(ATTR_NAME_ENUM).draftOf(ENUM_THREE),
-                        AttributeAccess.ofLocalizedEnumValue().ofName(ATTR_NAME_LOC_ENUM).draftOf(LOC_ENUM_THREE),
-                        AttributeAccess.ofDouble().ofName(ATTR_NAME_NUMBER).draftOf(10D),
-                        AttributeAccess.ofMoney().ofName(ATTR_NAME_MONEY).draftOf(MoneyImpl.of(valueOf(1000), "USD")),
-                        AttributeAccess.ofDate().ofName(ATTR_NAME_DATE).draftOf(LocalDate.parse("2002-10-12")),
-                        AttributeAccess.ofTime().ofName(ATTR_NAME_TIME).draftOf(LocalTime.parse("23:06:10.204")),
-                        AttributeAccess.ofDateTime().ofName(ATTR_NAME_DATE_TIME).draftOf(ZonedDateTime.parse("2002-10-12T23:06:10.204+00:00")),
-                        AttributeAccess.ofProductReference().ofName(ATTR_NAME_REF).draftOf(productOtherId.toReference()),
-                        AttributeAccess.ofBooleanSet().ofName(ATTR_NAME_BOOLEAN_SET).draftOf(asSet(true)),
-                        AttributeAccess.ofStringSet().ofName(ATTR_NAME_TEXT_SET).draftOf(asSet("foo")),
-                        AttributeAccess.ofLocalizedStringSet().ofName(ATTR_NAME_LOC_TEXT_SET).draftOf(asSet(ofEnglishLocale("localized foo"))),
-                        AttributeAccess.ofEnumValueSet().ofName(ATTR_NAME_ENUM_SET).draftOf(asSet(ENUM_TWO)),
-                        AttributeAccess.ofLocalizedEnumValueSet().ofName(ATTR_NAME_LOC_ENUM_SET).draftOf(asSet(LOC_ENUM_TWO)),
-                        AttributeAccess.ofDoubleSet().ofName(ATTR_NAME_NUMBER_SET).draftOf(asSet(5D)),
-                        AttributeAccess.ofMoneySet().ofName(ATTR_NAME_MONEY_SET).draftOf(asSet(MoneyImpl.of(valueOf(500), "EUR"))),
-                        AttributeAccess.ofDateSet().ofName(ATTR_NAME_DATE_SET).draftOf(asSet(LocalDate.parse("2001-09-11"))),
-                        AttributeAccess.ofTimeSet().ofName(ATTR_NAME_TIME_SET).draftOf(asSet(LocalTime.parse("22:05:09.203"))),
-                        AttributeAccess.ofDateTimeSet().ofName(ATTR_NAME_DATE_TIME_SET).draftOf(asSet(ZonedDateTime.parse("2001-09-11T22:05:09.203+00:00"))),
-                        AttributeAccess.ofProductReferenceSet().ofName(ATTR_NAME_REF_SET).draftOf(asSet(productSomeId.toReference())))
-                .price(Price.of(new BigDecimal("46.80"), USD))
-                .sku(SKU2)
-                .build();
-        return createTestProduct("Product two", masterVariant);
     }
 
     private static Product createTestProduct(final String name, final ProductVariantDraft masterVariant) {

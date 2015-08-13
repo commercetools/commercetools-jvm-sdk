@@ -8,7 +8,12 @@ class TermFilterExpression<T, V> extends TermExpression<T, V> implements FilterE
 
     @Override
     public String toSphereFilter() {
-        return toSphereSearchExpression();
+        return super.toSphereSearchExpression();
+    }
+
+    @Override
+    public String path() {
+        return super.serializedPath();
     }
 
     @Override

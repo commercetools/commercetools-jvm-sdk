@@ -21,6 +21,11 @@ public class TermFacetExpression<T, V> extends TermExpression<T, V> implements F
     }
 
     @Override
+    public String path() {
+        return super.serializedPath();
+    }
+
+    @Override
     public boolean equals(Object o) {
         return o != null && o instanceof FacetExpression && toSphereFacet().equals(((FacetExpression) o).toSphereFacet());
     }
