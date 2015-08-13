@@ -1,6 +1,7 @@
 package io.sphere.sdk.cartdiscounts;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.LocalizedString;
@@ -21,7 +22,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
 
     LocalizedString getName();
 
-    List<Reference<Object>> getReferences();
+    List<Reference<JsonNode>> getReferences();
 
     Boolean isRequiringDiscountCode();
 

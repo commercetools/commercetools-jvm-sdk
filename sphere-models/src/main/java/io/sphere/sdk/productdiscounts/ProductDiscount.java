@@ -1,6 +1,7 @@
 package io.sphere.sdk.productdiscounts;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Resource;
@@ -25,7 +26,7 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
 
     Boolean isActive();
 
-    List<Reference<Object>> getReferences();
+    List<Reference<JsonNode>> getReferences();
 
     static String typeId(){
         return "product-discount";

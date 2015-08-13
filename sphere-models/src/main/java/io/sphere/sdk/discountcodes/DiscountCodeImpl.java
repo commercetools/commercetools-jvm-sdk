@@ -1,6 +1,7 @@
 package io.sphere.sdk.discountcodes;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceImpl;
@@ -24,10 +25,10 @@ final class DiscountCodeImpl extends ResourceImpl<DiscountCode> implements Disco
     private final Long maxApplicationsPerCustomer;
     @Nullable
     private final String cartPredicate;
-    private final List<Reference<Object>> references;
+    private final List<Reference<JsonNode>> references;
 
     @JsonCreator
-    public DiscountCodeImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final List<Reference<CartDiscount>> cartDiscounts, final String code, final LocalizedString name, final LocalizedString description, final Boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer, final String cartPredicate, final List<Reference<Object>> references) {
+    public DiscountCodeImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final List<Reference<CartDiscount>> cartDiscounts, final String code, final LocalizedString name, final LocalizedString description, final Boolean isActive, final Long maxApplications, final Long maxApplicationsPerCustomer, final String cartPredicate, final List<Reference<JsonNode>> references) {
         super(id, version, createdAt, lastModifiedAt);
         this.cartDiscounts = cartDiscounts;
         this.code = code;
@@ -86,7 +87,7 @@ final class DiscountCodeImpl extends ResourceImpl<DiscountCode> implements Disco
     }
 
     @Override
-    public List<Reference<Object>> getReferences() {
+    public List<Reference<JsonNode>> getReferences() {
         return references;
     }
 }
