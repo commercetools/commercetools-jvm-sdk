@@ -36,7 +36,7 @@ public class InventoryEntryCreateCommandTest extends IntegrationTest {
             assertThat(inventoryEntry.getSupplyChannel()).isEqualTo(channel.toReference());
 
             //delete
-            final DeleteCommand<InventoryEntry> deleteCommand = InventoryDeleteCommand.of(inventoryEntry);
+            final DeleteCommand<InventoryEntry> deleteCommand = InventoryEntryDeleteCommand.of(inventoryEntry);
             final InventoryEntry deletedEntry = execute(deleteCommand);
         });
     }

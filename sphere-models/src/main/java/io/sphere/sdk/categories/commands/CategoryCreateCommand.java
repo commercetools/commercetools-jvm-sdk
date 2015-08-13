@@ -2,7 +2,9 @@ package io.sphere.sdk.categories.commands;
 
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.CategoryDraft;
+import io.sphere.sdk.categories.expansion.CategoryExpansionModel;
 import io.sphere.sdk.commands.CreateCommand;
+import io.sphere.sdk.expansion.MetaModelExpansionDsl;
 
 /**
  * Command to create a category.
@@ -13,7 +15,7 @@ import io.sphere.sdk.commands.CreateCommand;
  *
  * {@include.example io.sphere.sdk.categories.commands.CategoryCreateCommandTest#execution()}
  */
-public interface CategoryCreateCommand extends CreateCommand<Category> {
+public interface CategoryCreateCommand extends CreateCommand<Category>, MetaModelExpansionDsl<Category, CategoryCreateCommand, CategoryExpansionModel<Category>> {
 
     static CategoryCreateCommand of(final CategoryDraft categoryDraft) {
         return new CategoryCreateCommandImpl(categoryDraft);

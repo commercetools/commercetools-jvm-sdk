@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders.expansion;
 
 import io.sphere.sdk.carts.expansion.CartLikeExpansionModel;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.orders.Order;
 
 /**
@@ -20,6 +21,10 @@ public class OrderExpansionModel<T> extends CartLikeExpansionModel<T> {
     public SyncInfoExpansionModel<T> syncInfo() {
         //since it is a set, there is no method with index access
         return new SyncInfoExpansionModel<>(pathExpression(), "syncInfo[*]");
+    }
+
+    public ExpansionPath<T> cart() {
+        return expansionPath("cart");
     }
 
     public static OrderExpansionModel<Order> of() {

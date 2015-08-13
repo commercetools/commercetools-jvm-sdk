@@ -10,7 +10,7 @@ public class BuildersNotForResources extends ClassStrategyRule {
 
     @Override
     protected boolean classIsIncludedInRule(final Class<?> clazz) {
-        return clazz.getSimpleName().endsWith("Builder") && !clazz.getCanonicalName().contains(".http.");
+        return clazz.getSimpleName().endsWith("Builder") && !clazz.getSimpleName().startsWith("MetaModel") && !clazz.getCanonicalName().contains(".http.");
     }
 
     @Override

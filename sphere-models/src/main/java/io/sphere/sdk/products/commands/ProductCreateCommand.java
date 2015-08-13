@@ -1,8 +1,10 @@
 package io.sphere.sdk.products.commands;
 
 import io.sphere.sdk.commands.CreateCommand;
+import io.sphere.sdk.expansion.MetaModelExpansionDsl;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.ProductDraft;
+import io.sphere.sdk.products.expansion.ProductExpansionModel;
 
 /**
  Creates a product.
@@ -16,7 +18,7 @@ import io.sphere.sdk.products.ProductDraft;
  Create a {@link io.sphere.sdk.products.ProductDraft} instance:
  {@include.example io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier}
  */
-public interface ProductCreateCommand extends CreateCommand<Product> {
+public interface ProductCreateCommand extends CreateCommand<Product>, MetaModelExpansionDsl<Product, ProductCreateCommand, ProductExpansionModel<Product>> {
     static ProductCreateCommand of(final ProductDraft draft) {
         return new ProductCreateCommandImpl(draft);
     }
