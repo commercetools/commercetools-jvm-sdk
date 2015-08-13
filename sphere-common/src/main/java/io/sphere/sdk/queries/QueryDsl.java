@@ -1,6 +1,6 @@
 package io.sphere.sdk.queries;
 
-import io.sphere.sdk.expansion.ReferenceExpandeableDsl;
+import io.sphere.sdk.expansion.ReferenceExpansionDsl;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * @param <T> type of the query result
  * @param <C> type of the class implementing this class
  */
-public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, ReferenceExpandeableDsl<T, C> {
+public interface QueryDsl<T, C extends QueryDsl<T, C>> extends EntityQuery<T>, ReferenceExpansionDsl<T, C> {
 
     /**
      * Returns an instance with the new predicate list as predicates.

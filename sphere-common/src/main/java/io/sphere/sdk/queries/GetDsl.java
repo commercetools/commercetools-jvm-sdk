@@ -1,7 +1,7 @@
 package io.sphere.sdk.queries;
 
-import io.sphere.sdk.expansion.ReferenceExpandeableDsl;
+import io.sphere.sdk.expansion.ReferenceExpansionDsl;
 
-public interface GetDsl<R, T, C> extends Get<R>, ReferenceExpandeableDsl<T, C> {
+public interface GetDsl<R, T, C> extends Get<R>, ReferenceExpansionDsl<T, C> {
 
 }
