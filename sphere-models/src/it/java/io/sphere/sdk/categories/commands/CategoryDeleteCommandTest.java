@@ -27,9 +27,6 @@ public class CategoryDeleteCommandTest extends IntegrationTest {
         final CategoryDeleteCommand deleteCommand = CategoryDeleteCommand.of(category).plusExpansionPaths(m -> m.parent());
         final Category deletedCategory = execute(deleteCommand);
 
-
-        System.err.println(deleteCommand.httpRequestIntent().getPath());
-
         assertThat(deletedCategory.getParent().getObj()).isNotNull().isEqualTo(parent);
         execute(CategoryDeleteCommand.of(parent));
     }
