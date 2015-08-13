@@ -60,9 +60,9 @@ public class TypeSerializerTest {
 
     @Test
     public void serializesMoneyAmount() throws Exception {
-        Function<BigDecimal, String> serializer = ofMoneyCentAmount().serializer();
-        assertThat(serializer.apply(valueOf(3000))).isEqualTo("3000");
-        assertThat(serializer.apply(valueOf(3050))).isEqualTo("3050");
+        Function<Long, String> serializer = ofMoneyCentAmount().serializer();
+        assertThat(serializer.apply(3000L)).isEqualTo("3000");
+        assertThat(serializer.apply(3050L)).isEqualTo("3050");
     }
 
     @Test

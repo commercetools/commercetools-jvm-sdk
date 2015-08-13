@@ -337,15 +337,15 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     @Ignore
     @Test
     public void moneyAmountAttributesFacets() throws Exception {
-        final TermFacetExpression<ProductProjection, BigDecimal> termExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount()
+        final TermFacetExpression<ProductProjection, Long> termExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount()
                 .faceted().byAllTerms();
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
         //assertThat(executeAndReturnTerms(termSearch, termExpr)).containsOnlyElementsOf(asList(TermStats.of(valueOf(50000), 1), TermStats.of(valueOf(100000), 1)));
 
-        final RangeFacetExpression<ProductProjection, BigDecimal> rangeExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount()
-                .faceted().byGreaterThanOrEqualTo(valueOf(0));
+        final RangeFacetExpression<ProductProjection, Long> rangeExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount()
+                .faceted().byGreaterThanOrEqualTo(0L);
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
-        final List<RangeStats<BigDecimal>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        final List<RangeStats<Long>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
         //assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of(valueOf(0D), null, 2L, valueOf(50000D), valueOf(100000D), valueOf(150000D), 75000D))); // it is actually cent amount!
     }
 
@@ -676,8 +676,8 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         return ProductProjectionSearchModel.of();
     }
 
-    private BigDecimal toCents(final MonetaryAmount money) {
-        return money.getNumber().numberValueExact(BigDecimal.class).movePointRight(2);
+    private Long toCents(final MonetaryAmount money) {
+        return money.getNumber().numberValueExact(BigDecimal.class).movePointRight(2).longValue();
     }
 
     private static List<String> executeAndReturnIds(final ProductProjectionSearch search) {

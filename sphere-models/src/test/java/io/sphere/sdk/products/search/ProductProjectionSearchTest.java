@@ -60,9 +60,9 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canAccessPriceAmount() throws Exception {
-        final MoneyAmountSearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.allVariants().price().centAmount();
+        final MoneyCentAmountSearchModel<ProductProjection, SimpleSearchSortDirection> path = MODEL.allVariants().price().centAmount();
         assertThat(path.faceted().byAllTerms().toSphereFacet()).isEqualTo("variants.price.centAmount");
-        assertThat(path.filtered().by(valueOf(1000)).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
+        assertThat(path.filtered().by(1000L).toSphereFilter()).isEqualTo("variants.price.centAmount:1000");
         assertThat(path.sorted(SimpleSearchSortDirection.ASC).toSphereSort()).isEqualTo("price asc");
     }
 
@@ -140,9 +140,9 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canAccessMoneyCentAmountCustomAttributes() throws Exception {
-        final MoneyAmountSearchModel<ProductProjection, VariantSearchSortDirection> path = attributeModel().ofMoney("originalPrice").centAmount();
+        final MoneyCentAmountSearchModel<ProductProjection, VariantSearchSortDirection> path = attributeModel().ofMoney("originalPrice").centAmount();
         assertThat(path.faceted().byAllTerms().toSphereFacet()).isEqualTo("variants.attributes.originalPrice.centAmount");
-        assertThat(path.filtered().by(valueOf(1000)).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:1000");
+        assertThat(path.filtered().by(1000L).toSphereFilter()).isEqualTo("variants.attributes.originalPrice.centAmount:1000");
         assertThat(path.sorted(ASC_MAX).toSphereSort()).isEqualTo("variants.attributes.originalPrice.centAmount asc.max");
     }
 
