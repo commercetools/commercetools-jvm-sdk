@@ -122,7 +122,7 @@ extends java.lang.Object</pre>
             13 sandals
             14 boots</code></pre>
 
- We define the category data as CSV, we start with the top level so a parent category appears before its child categories:
+ To define the category tree in a CSV format we start with the top level categories so that each parent category appears before its child categories:
 
  <pre><code>externalId,externalParentId,name.de,slug.de,name.en,slug.en
 0,,top,top,top,top
@@ -392,7 +392,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
  <h3 id="category-deletion">Delete categories and trees</h3>
 
- Removing a category also means to delete the whole tree of the children:
+ Removing a category also means to delete all child categories of this category:
 
  <div id="io-sphere-sdk-meta-CategoryDocumentationTest-categoryDeletionIsRecursive--%s" class=code-example><pre><code class='java'>final CategoryTree categoryTree = fetchCurrentTree();
 final String startingSituation = CategoryTreeTextRepresentation.visualizeTree(categoryTree);

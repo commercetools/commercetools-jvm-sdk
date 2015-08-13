@@ -108,33 +108,33 @@ extends java.lang.Object</pre>
  <h3 id="product-type-creation">ProductType Creation</h3>
  <p>A <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> is like a schema that defines how the product attributes are structured.</p>
  <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s contain a list of <a href="../../../../io/sphere/sdk/products/attributes/AttributeDefinition.html" title="class in io.sphere.sdk.products.attributes"><code>AttributeDefinition</code></a>s which corresponds to the name and type of each attribute, along with some additional information".
- In one SPHERE.IO project the name/type pair is global, so if you create an attribute "foo" of type String, you cannot create
+ Each name/type pair must be unique across a SPHERE.IO project, so if you create an attribute "foo" of type String, you cannot create
  another <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a> where "foo" has another type (e.g. <a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a>). If you do it anyway you get an error message like:</p>
 
 <pre>"The attribute with name 'foo' has a different type on product type 'exampleproducttype'."</pre>
 
- <p>In this scenario we provide two <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s book and tshirt.</p>
+ <p>In this scenario we provide two <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s <strong>book</strong> and <strong>tshirt</strong>.</p>
 
 
  <p>The book product type contains the following attributes:</p>
  <ul>
-    <li>isbn as <code>String</code>, International Standard Book Number</li>
+    <li><code>isbn</code> as <code>String</code>, International Standard Book Number</li>
  </ul>
 
  <p>The tshirt product type contains the following attributes:</p>
 
  <ul>
-    <li>color as <a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a> with the colors green and red and their translations in German and English</li>
-    <li>size as <a href="../../../../io/sphere/sdk/models/EnumValue.html" title="class in io.sphere.sdk.models"><code>EnumValue</code></a> with S, M and X</li>
-    <li>laundrySymbols as set of <a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a> with temperature and tumble drying</li>
-    <li>matchingProducts as set of product <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><code>Reference</code></a>s, which can point to products which are similar to the current product</li>
-    <li>rrp as <code>MonetaryAmount</code> containing the recommended retail price</li>
-    <li>availableSince as <code>LocalDateTime</code> which contains the date since when the product is available for the customer in the shop</li>
+    <li><code>color</code> as <a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a> with the colors green and red and their translations in German and English</li>
+    <li><code>size</code> as <a href="../../../../io/sphere/sdk/models/EnumValue.html" title="class in io.sphere.sdk.models"><code>EnumValue</code></a> with S, M and X</li>
+    <li><code>laundrySymbols</code> as set of <a href="../../../../io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models"><code>LocalizedEnumValue</code></a> with temperature and tumble drying</li>
+    <li><code>matchingProducts</code> as set of product <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models"><code>Reference</code></a>s, which can point to products that are similar to the current product</li>
+    <li><code>rrp</code> as <code>MonetaryAmount</code> containing the recommended retail price</li>
+    <li><code>availableSince</code> as <code>LocalDateTime</code> which contains the date since when the product is available for the customer in the shop</li>
  </ul>
 
 
 
- <p>The possible attribute types you can find here: <a href="../../../../io/sphere/sdk/products/attributes/AttributeType.html" title="interface in io.sphere.sdk.products.attributes"><code>AttributeType</code></a> in "All Known Implementing Classes".</p>
+ <p>All available attribute types you can find here: <a href="../../../../io/sphere/sdk/products/attributes/AttributeType.html" title="interface in io.sphere.sdk.products.attributes"><code>AttributeType</code></a> in "All Known Implementing Classes".</p>
 
 <p>The code for the creation of the book <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>:</p>
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-createBookProductType--%s" class=code-example><pre><code class='java'>final AttributeDefinition isbn = AttributeDefinitionBuilder
@@ -200,7 +200,7 @@ final ProductType productType = client().execute(ProductTypeCreateCommand.of(pro
  <p><a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s have a name (String)
  which can be used as key to logically identify <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s. Beware that the name has no unique constraint,
  so it is possible to create multiple <a href="../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><code>ProductType</code></a>s with the same name which will cause confusion.
- Before creating a product type it's better to check if it already exists:</p>
+ </p><p>Check if product type with the same name exists:</p>
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-demoCheckingIfProductTypeExist--%s" class=code-example><pre><code class='java'>final ProductTypeQuery query = ProductTypeQuery.of().byName(PRODUCT_TYPE_NAME);
 final boolean productTypeAlreadyExists = client().execute(query).head().isPresent();
@@ -297,7 +297,7 @@ assertThatThrownBy(() -&gt; execute(ProductCreateCommand.of(draft)))
         .matches(e -&gt; ((ErrorResponseException)e).hasErrorCode(InvalidField.CODE));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/attributestutorial/ProductTypeCreationDemoTest.java" target="_blank">test code</a>.</pre></div>
 
- As Alternative you could declare the types of your attributes at one place and use these to read and write
+ As alternative you could declare your attributes at the same place and use these to read and write
  attribute values:
 
  <div id="io-sphere-sdk-attributestutorial-ProductTypeCreationDemoTest-productCreationWithGetterSetter--%s" class=code-example><pre><code class='java'>/* the declarations you could put into a separate class */
@@ -509,7 +509,7 @@ assertThat(table).isEqualTo(expected);
  <!-- it is easy to mix uo product and product type with autocomplete and using the non set variant where set is expected -->
 
 
- <h3 id="attribute-update">Update attributes in a product</h3>
+ <h3 id="attribute-update">Update attribute values of a product</h3>
 
 <p>Setting attribute values is like a a product creation:</p>
 
@@ -584,7 +584,7 @@ assertThat(attribute.getValue(access).getObj()).isNotNull();
  <h3 id="attributes-in-order-import">Create attributes for importing orders</h3>
 
  <p>Importing attribute values for orders works different from updating products.
- In orders you provide for enum like types the full value instead of just the key.
+ In orders you provide the full value for enum-like types instead of just the key as done for all other types.
  This makes it possible to create a new enum value on the fly. The other attributes behave as expected.</p>
 
  <p>Example:</p>
@@ -802,7 +802,9 @@ import static java.util.stream.Collectors.toList;
                                 en(Banana.nutrients.getName()), SetType.of(NestedType.of(nutrientType))).searchable(false).build()));
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/NestedAttributeIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/NestedAttributeIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>A general explanation can be found in the  <a href="http://dev.sphere.io/tutorials-nested-types.html">HTTP API tutorial</a>.</p></div>
 </li>
 </ul>
 </div>
