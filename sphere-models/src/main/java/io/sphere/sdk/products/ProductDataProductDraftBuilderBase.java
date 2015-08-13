@@ -3,6 +3,7 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
@@ -17,6 +18,7 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     private LocalizedString metaKeywords;
     private Set<Reference<Category>> categories = Collections.emptySet();
     private SearchKeywords searchKeywords = SearchKeywords.of();
+    private Reference<TaxCategory> taxCategory;
 
     protected ProductDataProductDraftBuilderBase(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
@@ -42,8 +44,6 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
         this.metaKeywords = metaKeywords;
         return getThis();
     }
-
-
 
     public T categories(final Set<Reference<Category>> categories) {
         this.categories = categories;
@@ -89,6 +89,15 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
 
     public SearchKeywords getSearchKeywords() {
         return searchKeywords;
+    }
+
+    public Reference<TaxCategory> getTaxCategory() {
+        return taxCategory;
+    }
+
+    public T taxCategory(final Referenceable<TaxCategory> taxCategory) {
+        this.taxCategory = taxCategory.toReference();
+        return getThis();
     }
 
     protected abstract T getThis();

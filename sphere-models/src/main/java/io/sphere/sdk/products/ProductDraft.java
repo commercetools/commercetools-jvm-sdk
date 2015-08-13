@@ -6,6 +6,8 @@ import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -18,9 +20,11 @@ import java.util.Set;
   @see io.sphere.sdk.products.commands.ProductCreateCommand
  */
 public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
-    Reference<ProductType> getProductType();
+
 
     LocalizedString getName();
+
+    Reference<ProductType> getProductType();
 
     LocalizedString getSlug();
 
@@ -44,4 +48,9 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     ProductVariantDraft getMasterVariant();
 
     List<ProductVariantDraft> getVariants();
+
+    @Nullable
+    Reference<TaxCategory> getTaxCategory();
+
+    SearchKeywords getSearchKeywords();
 }
