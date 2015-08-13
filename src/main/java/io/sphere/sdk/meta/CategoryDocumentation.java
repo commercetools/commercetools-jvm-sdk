@@ -6,7 +6,7 @@ package io.sphere.sdk.meta;
  Lets suppose we want to create this category tree (the number before the name is the externalId):
  <pre><code>{@doc.gen include file sphere-convenience/src/it/resources/category-tree-1.txt}</code></pre>
 
- We define the category data as CSV, we start with the top level so a parent category appears before its child categories:
+ To define the category tree in a CSV format we start with the top level categories so that each parent category appears before its child categories:
 
  <pre><code>{@doc.gen include file sphere-convenience/src/it/resources/category-import-1.csv}</code></pre>
 
@@ -50,7 +50,7 @@ Then we can write some script to parse the csv and create them in sphere:
 
  <h3 id="category-deletion">Delete categories and trees</h3>
 
- Removing a category also means to delete the whole tree of the children:
+ Removing a category also means to delete all child categories of this category:
 
  {@include.example io.sphere.sdk.meta.CategoryDocumentationTest#categoryDeletionIsRecursive()}
 

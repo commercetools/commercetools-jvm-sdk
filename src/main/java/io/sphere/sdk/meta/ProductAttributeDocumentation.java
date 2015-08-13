@@ -9,33 +9,33 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  <h3 id="product-type-creation">ProductType Creation</h3>
  <p>A {@link io.sphere.sdk.producttypes.ProductType} is like a schema that defines how the product attributes are structured.</p>
  <p>{@link io.sphere.sdk.producttypes.ProductType}s contain a list of {@link io.sphere.sdk.products.attributes.AttributeDefinition}s which corresponds to the name and type of each attribute, along with some additional information".
- In one SPHERE.IO project the name/type pair is global, so if you create an attribute "foo" of type String, you cannot create
+ Each name/type pair must be unique across a SPHERE.IO project, so if you create an attribute "foo" of type String, you cannot create
  another {@link io.sphere.sdk.producttypes.ProductType} where "foo" has another type (e.g. {@link LocalizedString}). If you do it anyway you get an error message like:</p>
 
 <pre>"The attribute with name 'foo' has a different type on product type 'exampleproducttype'."</pre>
 
- <p>In this scenario we provide two {@link io.sphere.sdk.producttypes.ProductType}s book and tshirt.</p>
+ <p>In this scenario we provide two {@link io.sphere.sdk.producttypes.ProductType}s <strong>book</strong> and <strong>tshirt</strong>.</p>
 
 
  <p>The book product type contains the following attributes:</p>
  <ul>
-    <li>isbn as {@link String}, International Standard Book Number</li>
+    <li>{@code isbn} as {@link String}, International Standard Book Number</li>
  </ul>
 
  <p>The tshirt product type contains the following attributes:</p>
 
  <ul>
-    <li>color as {@link io.sphere.sdk.models.LocalizedEnumValue} with the colors green and red and their translations in German and English</li>
-    <li>size as {@link io.sphere.sdk.models.EnumValue} with S, M and X</li>
-    <li>laundrySymbols as set of {@link io.sphere.sdk.models.LocalizedEnumValue} with temperature and tumble drying</li>
-    <li>matchingProducts as set of product {@link io.sphere.sdk.models.Reference}s, which can point to products which are similar to the current product</li>
-    <li>rrp as {@link javax.money.MonetaryAmount} containing the recommended retail price</li>
-    <li>availableSince as {@link java.time.LocalDateTime} which contains the date since when the product is available for the customer in the shop</li>
+    <li>{@code color} as {@link io.sphere.sdk.models.LocalizedEnumValue} with the colors green and red and their translations in German and English</li>
+    <li>{@code size} as {@link io.sphere.sdk.models.EnumValue} with S, M and X</li>
+    <li>{@code laundrySymbols} as set of {@link io.sphere.sdk.models.LocalizedEnumValue} with temperature and tumble drying</li>
+    <li>{@code matchingProducts} as set of product {@link io.sphere.sdk.models.Reference}s, which can point to products that are similar to the current product</li>
+    <li>{@code rrp} as {@link javax.money.MonetaryAmount} containing the recommended retail price</li>
+    <li>{@code availableSince} as {@link java.time.LocalDateTime} which contains the date since when the product is available for the customer in the shop</li>
  </ul>
 
 
 
- <p>The possible attribute types you can find here: {@link io.sphere.sdk.products.attributes.AttributeType} in "All Known Implementing Classes".</p>
+ <p>All available attribute types you can find here: {@link io.sphere.sdk.products.attributes.AttributeType} in "All Known Implementing Classes".</p>
 
 <p>The code for the creation of the book {@link io.sphere.sdk.producttypes.ProductType}:</p>
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#createBookProductType()}
@@ -48,7 +48,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  <p>{@link io.sphere.sdk.producttypes.ProductType}s have a name (String)
  which can be used as key to logically identify {@link io.sphere.sdk.producttypes.ProductType}s. Beware that the name has no unique constraint,
  so it is possible to create multiple {@link io.sphere.sdk.producttypes.ProductType}s with the same name which will cause confusion.
- Before creating a product type it's better to check if it already exists:</p>
+ </p><p>Check if product type with the same name exists:</p>
 
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#demoCheckingIfProductTypeExist()}
 
@@ -78,7 +78,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
 
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#invalidTypeCausesException()}
 
- As Alternative you could declare the types of your attributes at one place and use these to read and write
+ As alternative you could declare your attributes at the same place and use these to read and write
  attribute values:
 
  {@include.example io.sphere.sdk.attributestutorial.ProductTypeCreationDemoTest#productCreationWithGetterSetter()}
@@ -138,7 +138,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  <!-- it is easy to mix uo product and product type with autocomplete and using the non set variant where set is expected -->
 
 
- <h3 id="attribute-update">Update attributes in a product</h3>
+ <h3 id="attribute-update">Update attribute values of a product</h3>
 
 <p>Setting attribute values is like a a product creation:</p>
 
@@ -164,7 +164,7 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  <h3 id="attributes-in-order-import">Create attributes for importing orders</h3>
 
  <p>Importing attribute values for orders works different from updating products.
- In orders you provide for enum like types the full value instead of just the key.
+ In orders you provide the full value for enum-like types instead of just the key as done for all other types.
  This makes it possible to create a new enum value on the fly. The other attributes behave as expected.</p>
 
  <p>Example:</p>
@@ -192,6 +192,8 @@ import io.sphere.sdk.products.ProductVariantDraftBuilder;
  <p>An example:</p>
 
  {@include.example io.sphere.sdk.producttypes.NestedAttributeIntegrationTest}
+
+ <p>A general explanation can be found in the  <a href="http://dev.sphere.io/tutorials-nested-types.html">HTTP API tutorial</a>.</p>
  */
 public class ProductAttributeDocumentation {
     private ProductAttributeDocumentation() {
