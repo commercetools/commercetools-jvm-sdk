@@ -24,7 +24,7 @@ public final class ProductDraftBuilder extends ProductDataProductDraftBuilderBas
 
     @Override
     public ProductDraft build() {
-        return new ProductDraftImpl(productType, getName(), getSlug(), getDescription(), getCategories(), MetaAttributes.metaAttributesOf(getMetaTitle(), getMetaDescription(), getMetaKeywords()), masterVariant, variants);
+        return new ProductDraftImpl(productType, getName(), getSlug(), getDescription(), getCategories(), MetaAttributes.metaAttributesOf(getMetaTitle(), getMetaDescription(), getMetaKeywords()), masterVariant, variants, getTaxCategory(), getSearchKeywords());
     }
 
     @Override
