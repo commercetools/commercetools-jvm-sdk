@@ -125,6 +125,9 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">SetMetaKeywords</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</pre>
 <div class="block">Sets the SEO attribute keywords.
+
+  <p>See also <a href="../CategoryUpdateCommand.html">CategoryUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-categories-commands-CategoryUpdateCommandTest-setMetaKeywords--%s" class=code-example><pre><code class='java'>withPersistentCategory(client(), category -&gt; {
     final LocalizedString newValue = randomSlug();
     final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetMetaKeywords.of(newValue)));

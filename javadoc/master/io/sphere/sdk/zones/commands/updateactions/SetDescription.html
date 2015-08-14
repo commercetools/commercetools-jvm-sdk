@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a>&gt;</pre>
 <div class="block">Updates the description of a zone.
 
+ <p>See also <a href="../ZoneUpdateCommand.html">ZoneUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-zones-commands-ZoneUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>ZoneFixtures.withUpdateableZone(client(), zone -&gt; {
     final String newDescription = randomString();
     assertThat(zone.getDescription()).isNotEqualTo(newDescription);

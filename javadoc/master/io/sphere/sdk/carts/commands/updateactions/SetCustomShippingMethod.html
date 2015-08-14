@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block">Sets a custom shipping method (independent of the shipping methods defined in the project). The custom shipping method can be unset with the setShippingMethod action without the shippingMethod.
 
+ <p>See also <a href="../CartUpdateCommand.html">CartUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomShippingMethod--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
     final Cart cart = createCartWithShippingAddress(client());
     assertThat(cart.getShippingInfo()).isNull();

@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Revert all changes, which were made to the staged version of a product and reset to the current version.
 
+ <p>See also <a href="../ProductUpdateCommand.html">ProductUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-revertStagedChanges--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
     //changing only staged and not current
     final LocalizedString oldDescriptionOption = product.getMasterData().getStaged().getDescription();

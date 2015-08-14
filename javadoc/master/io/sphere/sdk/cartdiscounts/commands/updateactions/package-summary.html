@@ -84,167 +84,61 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeCartPredicate.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeCartPredicate</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeCartPredicate--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final String newPredicate = format("totalPrice &gt; \"%d.00 EUR\"", randomInt());
-
-    assertThat(cartDiscount.getCartPredicate()).isNotEqualTo(newPredicate);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeCartPredicate.of(newPredicate)));
-
-    assertThat(updatedDiscount.getCartPredicate()).isEqualTo(newPredicate);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the cart predicate.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeIsActive.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeIsActive</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeIsActive--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final boolean newIsActice = !cartDiscount.isActive();
-
-    assertThat(cartDiscount.isActive()).isNotEqualTo(newIsActice);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeIsActive.of(newIsActice)));
-
-    assertThat(updatedDiscount.isActive()).isEqualTo(newIsActice);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Switches the state if the discount is active.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeName</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final LocalizedString newName = randomSlug();
-
-    assertThat(cartDiscount.getName()).isNotEqualTo(newName);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeName.of(newName)));
-
-    assertThat(updatedDiscount.getName()).isEqualTo(newName);
-
-    //clean up test, cart discount is reused by name
-    execute(CartDiscountUpdateCommand.of(updatedDiscount, ChangeName.of(cartDiscount.getName())));
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the name of the discount.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeRequiresDiscountCode.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeRequiresDiscountCode</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeRequiresDiscountCode--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final boolean newRequiresDiscountCode = !cartDiscount.isRequiringDiscountCode();
-
-    assertThat(cartDiscount.isRequiringDiscountCode()).isNotEqualTo(newRequiresDiscountCode);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
-
-    assertThat(updatedDiscount.isRequiringDiscountCode()).isEqualTo(newRequiresDiscountCode);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the property if the discount requires a discount code.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeSortOrder.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeSortOrder</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeSortOrder--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final String newSortOrder = format("0.%d", randomInt());
-
-    assertThat(cartDiscount.getSortOrder()).isNotEqualTo(newSortOrder);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeSortOrder.of(newSortOrder)));
-
-    assertThat(updatedDiscount.getSortOrder()).isEqualTo(newSortOrder);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the sort order.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeTarget.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeTarget</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeTarget--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final CartDiscountTarget newTarget = cartDiscount.getTarget() instanceof LineItemsTarget ?
-            CustomLineItemsTarget.of("1 = 1") : LineItemsTarget.of("1 = 1");
-
-    assertThat(cartDiscount.getTarget()).isNotEqualTo(newTarget);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeTarget.of(newTarget)));
-
-    assertThat(updatedDiscount.getTarget()).isEqualTo(newTarget);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the target.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeValue.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">ChangeValue</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeValue--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final CartDiscountValue newValue = CartDiscountValue.ofAbsolute(MoneyImpl.of(randomInt(), EUR));
-
-    assertThat(cartDiscount.getValue()).isNotEqualTo(newValue);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeValue.of(newValue)));
-
-    assertThat(updatedDiscount.getValue()).isEqualTo(newValue);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the value of the discount.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetDescription</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final LocalizedString newDescription = randomSlug();
-
-    assertThat(cartDiscount.getDescription()).isNotEqualTo(newDescription);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, SetDescription.of(newDescription)));
-
-    assertThat(updatedDiscount.getDescription()).isEqualTo(newDescription);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the description of the discount.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetValidFrom</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setValidFrom--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final ZonedDateTime dateTime = SphereTestUtils.now();
-
-    assertThat(cartDiscount.getValidFrom()).isNotEqualTo(dateTime);
-
-    final List&lt;UpdateAction&lt;CartDiscount&gt;&gt; updateActions =
-            asList(SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)), SetValidFrom.of(dateTime));
-    final CartDiscount updatedDiscount = execute(CartDiscountUpdateCommand.of(cartDiscount, updateActions));
-
-    assertThat(updatedDiscount.getValidFrom()).isEqualTo(dateTime);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets valid from property.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidUntil.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions">SetValidUntil</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setValidUntil--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    //until must be after valid from
-    final ZonedDateTime dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
-
-    assertThat(cartDiscount.getValidUntil()).isNotEqualTo(dateTime);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));
-
-    assertThat(updatedDiscount.getValidUntil()).isEqualTo(dateTime);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the valid until property.</div>
 </td>
 </tr>
 </tbody>

@@ -126,7 +126,9 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Adds external image url with meta-information to the product variant.
 
- <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-addExternalImage--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
+  <p>See also <a href="../ProductUpdateCommand.html">ProductUpdateCommand</a>.<p>
+
+  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-addExternalImage--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
     assertThat(product.getMasterData().getStaged().getMasterVariant().getImages()).hasSize(0);
 
     final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");

@@ -124,7 +124,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">ChangeCartDiscounts</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes">DiscountCode</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-changeCartDiscounts--%s" class=code-example><pre><code class='java'>withCartDiscount(client(), randomKey(), cartDiscount -&gt;
+<div class="block">Changes the cart discounts.
+
+ <p>See also <a href="../DiscountCodeUpdateCommand.html">DiscountCodeUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-changeCartDiscounts--%s" class=code-example><pre><code class='java'>withCartDiscount(client(), randomKey(), cartDiscount -&gt;
     withPersistentDiscountCode(client(), discountCode -&gt; {
         final List&lt;Reference&lt;CartDiscount&gt;&gt; oldCartDiscounts = discountCode.getCartDiscounts();
         assertThat(oldCartDiscounts).doesNotContain(cartDiscount.toReference());

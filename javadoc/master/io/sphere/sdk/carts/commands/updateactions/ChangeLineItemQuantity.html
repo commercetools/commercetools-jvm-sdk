@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block">Sets the quantity of the given line item. If quantity is 0, line item is removed from the cart.
 
+ <p>See also <a href="../CartUpdateCommand.html">CartUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-changeLineItemQuantity--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct(client(), (cart, product) -&gt; {
     assertThat(cart.getLineItems()).hasSize(0);
     final AddLineItem action = AddLineItem.of(product.getId(), MASTER_VARIANT_ID, 3);

@@ -129,6 +129,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  if there is no inventory entry associated with that SKU.
  This change can never be staged and is thus immediately visible in published products.
 
+ <p>See also <a href="../ProductUpdateCommand.html">ProductUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-products-queries-ProductProjectionQueryTest-queryBySku--%s" class=code-example><pre><code class='java'>withProduct(client(), product -&gt; {
     final String sku = "sku-" + randomString();
     final Product productWithSku = execute(ProductUpdateCommand.of(product, SetSku.of(MASTER_VARIANT_ID, sku)));

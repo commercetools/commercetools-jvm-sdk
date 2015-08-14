@@ -124,7 +124,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">ChangeIsDefault</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeIsDefault--%s" class=code-example><pre><code class='java'>//only one can be default one, so clean up if there is any
+<div class="block">Sets a shipping method as default or not.
+
+ <p>See also <a href="../ShippingMethodUpdateCommand.html">ShippingMethodUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeIsDefault--%s" class=code-example><pre><code class='java'>//only one can be default one, so clean up if there is any
 final Query&lt;ShippingMethod&gt; query = ShippingMethodQuery.of().withPredicates(QueryPredicate.of("isDefault = true"));
 final Optional&lt;ShippingMethod&gt; defaultShippingMethodOption = execute(query).head();
 defaultShippingMethodOption.ifPresent(sm -&gt; execute(ShippingMethodUpdateCommand.of(sm, ChangeIsDefault.toFalse())));

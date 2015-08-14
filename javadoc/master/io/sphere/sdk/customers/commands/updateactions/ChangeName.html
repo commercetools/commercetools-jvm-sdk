@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</pre>
 <div class="block">Changes customer's firstName, lastName, middleName and title fields.
 
+  <p>See also <a href="../CustomerUpdateCommand.html">CustomerUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
     final CustomerName newName = CustomerName.ofTitleFirstAndLastName("Mister", "John", "Smith");
     assertThat(customer.getName()).isNotEqualTo(newName);

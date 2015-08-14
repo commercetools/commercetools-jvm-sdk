@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</pre>
 <div class="block">Replaces the address with the given ID, with the new address in the customer's addresses array. The new address will have the same ID.
 
+  <p>See also <a href="../CustomerUpdateCommand.html">CustomerUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-changeAddress--%s" class=code-example><pre><code class='java'>withCustomerWithOneAddress(client(), customer -&gt; {
     final String city = "new city";
     assertThat(customer.getAddresses()).hasSize(1);

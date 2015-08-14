@@ -84,87 +84,37 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/ChangeCartDiscounts.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">ChangeCartDiscounts</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-changeCartDiscounts--%s" class=code-example><pre><code class='java'>withCartDiscount(client(), randomKey(), cartDiscount -&gt;
-    withPersistentDiscountCode(client(), discountCode -&gt; {
-        final List&lt;Reference&lt;CartDiscount&gt;&gt; oldCartDiscounts = discountCode.getCartDiscounts();
-        assertThat(oldCartDiscounts).doesNotContain(cartDiscount.toReference());
-
-        final List&lt;Reference&lt;CartDiscount&gt;&gt; newDiscountsList =
-                listOf(oldCartDiscounts, cartDiscount.toReference());
-
-        final DiscountCode updatedDiscountCode =
-                execute(DiscountCodeUpdateCommand.of(discountCode, ChangeCartDiscounts.of(newDiscountsList)));
-        assertThat(updatedDiscountCode.getCartDiscounts()).isEqualTo(newDiscountsList);
-
-        //clean up test
-        execute(DiscountCodeUpdateCommand.of(updatedDiscountCode, ChangeCartDiscounts.of(oldCartDiscounts)));
-    })
-);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the cart discounts.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetCartPredicate.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetCartPredicate</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setCartPredicate--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
-    final String predicateAsString =
-            //you need to change the predicate
-            Optional.ofNullable(discountCode.getCartPredicate()).map(p -&gt; "1 = 1".equals(p)).orElse(false) ? "true = true" : "1 = 1";
-
-    final CartDiscountPredicate cartPredicate = CartDiscountPredicate.of(predicateAsString);
-    final DiscountCode updatedDiscountCode =
-            execute(DiscountCodeUpdateCommand.of(discountCode, SetCartPredicate.of(cartPredicate)));
-    assertThat(updatedDiscountCode.getCartPredicate()).contains(cartPredicate.toSphereCartPredicate());
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the cart predicate.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetDescription</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
-    final LocalizedString newDescription = randomSlug();
-    final DiscountCode updatedDiscountCode =
-            execute(DiscountCodeUpdateCommand.of(discountCode, SetDescription.of(newDescription)));
-    assertThat(updatedDiscountCode.getDescription()).isEqualTo(newDescription);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the description.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplications.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetMaxApplications</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setMaxApplications--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
-    final long maxApplications = randomLong();
-    final DiscountCode updatedDiscountCode =
-            execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplications.of(maxApplications)));
-    assertThat(updatedDiscountCode.getMaxApplications()).isEqualTo(maxApplications);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the maximum applicable number of a discount code.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetMaxApplicationsPerCustomer</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setMaxApplicationsPerCustomer--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
-    final long maxApplications = randomLong();
-    final DiscountCode updatedDiscountCode =
-            execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplicationsPerCustomer.of(maxApplications)));
-    assertThat(updatedDiscountCode.getMaxApplicationsPerCustomer()).isEqualTo(maxApplications);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the maximum number of applicable discount codes per customer.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/discountcodes/commands/updateactions/SetName.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetName</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setName--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
-    final LocalizedString newName = randomSlug();
-    final DiscountCode updatedDiscountCode =
-            execute(DiscountCodeUpdateCommand.of(discountCode, SetName.of(newName)));
-    assertThat(updatedDiscountCode.getName()).isEqualTo(newName);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the name of the discount code.</div>
 </td>
 </tr>
 </tbody>

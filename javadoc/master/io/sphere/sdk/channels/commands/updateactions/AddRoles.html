@@ -124,7 +124,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">AddRoles</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-addRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -&gt; {
+<div class="block">Adds roles to a channel.
+
+  <p>See also <a href="../ChannelUpdateCommand.html">ChannelUpdateCommand</a>.<p>
+
+  <div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-addRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -&gt; {
     final Set&lt;ChannelRole&gt; roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
     final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, AddRoles.of(roles)));
     assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY, ORDER_IMPORT);

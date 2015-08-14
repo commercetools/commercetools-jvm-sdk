@@ -124,7 +124,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">TransitionCustomLineItemState</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionCustomLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
+<div class="block">Change the state of a Custom Line Item according to allowed transitions.
+
+ <p>See also <a href="../OrderUpdateCommand.html">OrderUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionCustomLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
     withOrderOfCustomLineItems(client(), order -&gt; {
         final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
         assertThat(customLineItem).containsState(initialState).containsNotState(nextState);

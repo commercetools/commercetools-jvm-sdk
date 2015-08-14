@@ -88,73 +88,37 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/channels/commands/updateactions/AddRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">AddRoles</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-addRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -&gt; {
-    final Set&lt;ChannelRole&gt; roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, AddRoles.of(roles)));
-    assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY, ORDER_IMPORT);
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds roles to a channel.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/channels/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.channels.commands.updateactions">ChangeDescription</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
-    final LocalizedString newDescription = randomSlug();
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
-    assertThat(updatedChannel.getDescription()).isEqualTo(newDescription);
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the description of a channel.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/channels/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.channels.commands.updateactions">ChangeKey</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeKey--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
-    final String newKey = randomKey();
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeKey.of(newKey)));
-    assertThat(updatedChannel.getKey()).isEqualTo(newKey).isNotEqualTo(channel.getKey());
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the key of a channel.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/channels/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.channels.commands.updateactions">ChangeName</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
-    final LocalizedString newName = randomSlug();
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeName.of(newName)));
-    assertThat(updatedChannel.getName()).isEqualTo(newName);
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the name of a channel.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/channels/commands/updateactions/RemoveRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">RemoveRoles</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-removeRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), asSet(ORDER_IMPORT, PRIMARY), channel -&gt; {
-    final Set&lt;ChannelRole&gt; roles = asSet(ORDER_IMPORT);
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, RemoveRoles.of(roles)));
-    assertThat(updatedChannel.getRoles()).containsOnly(PRIMARY);
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Removes a role from a channel.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/channels/commands/updateactions/SetRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions">SetRoles</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-setRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -&gt; {
-    final Set&lt;ChannelRole&gt; roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, SetRoles.of(roles)));
-    assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY);
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the roles of a channel.</div>
 </td>
 </tr>
 </tbody>

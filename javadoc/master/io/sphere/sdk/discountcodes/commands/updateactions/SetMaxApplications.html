@@ -124,7 +124,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">SetMaxApplications</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes">DiscountCode</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setMaxApplications--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
+<div class="block">Sets the maximum applicable number of a discount code.
+
+ <p>See also <a href="../DiscountCodeUpdateCommand.html">DiscountCodeUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setMaxApplications--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
     final long maxApplications = randomLong();
     final DiscountCode updatedDiscountCode =
             execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplications.of(maxApplications)));

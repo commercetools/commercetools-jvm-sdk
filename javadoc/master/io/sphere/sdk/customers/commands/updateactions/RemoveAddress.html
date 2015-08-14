@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</pre>
 <div class="block">Removes the address with the given ID from the customer's addresses.
 
+  <p>See also <a href="../CustomerUpdateCommand.html">CustomerUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-removeAddress--%s" class=code-example><pre><code class='java'>withCustomerWithOneAddress(client(), customer -&gt; {
     final Address oldAddress = customer.getAddresses().get(0);
     assertThat(oldAddress.getId())

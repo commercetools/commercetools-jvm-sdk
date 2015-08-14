@@ -154,18 +154,7 @@
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions">RemovePrice</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-removePrice--%s" class=code-example><pre><code class='java'>withUpdateablePricedProduct(client(), product -&gt; {
-    final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-
-    final Product updatedProduct = client()
-            .execute(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice)));
-
-    assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
-            .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
-
-    return updatedProduct;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Removes a price from the product.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -219,16 +208,7 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSearchKeywords</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setSearchKeywords--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
-    final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("foo bar baz", CustomSuggestTokenizer.of(asList("foo, baz")))));
-    final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords));
-    final Product updatedProduct = execute(command);
-
-    final SearchKeywords actualKeywords = updatedProduct.getMasterData().getStaged().getSearchKeywords();
-    assertThat(actualKeywords).isEqualTo(searchKeywords);
-    return updatedProduct;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the search keywords for a product.</div>
 </td>
 </tr>
 <tr class="rowColor">

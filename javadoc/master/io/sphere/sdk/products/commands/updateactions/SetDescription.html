@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Updates the description of a product.
 
+ <p>See also <a href="../ProductUpdateCommand.html">ProductUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
     final LocalizedString newDescription = ofEnglishLocale("new description " + RANDOM.nextInt());
     final ProductUpdateCommand cmd = ProductUpdateCommand.of(product, SetDescription.of(newDescription));

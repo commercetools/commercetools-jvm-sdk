@@ -87,7 +87,9 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/customers/commands/updateactions/AddAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions">AddAddress</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Adds an address to a customer.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/customers/commands/updateactions/ChangeAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions">ChangeAddress</a></td>
@@ -98,13 +100,7 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/customers/commands/updateactions/ChangeEmail.html" title="class in io.sphere.sdk.customers.commands.updateactions">ChangeEmail</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-changeEmail--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    final String newEmail = randomEmail(CustomerUpdateCommandTest.class);
-    assertThat(customer.getEmail()).isNotEqualTo(newEmail);
-    final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, ChangeEmail.of(newEmail)));
-    assertThat(updatedCustomer.getEmail()).isEqualTo(newEmail);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the customer email address.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -122,31 +118,13 @@
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/customers/commands/updateactions/SetCompanyName.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetCompanyName</a></td>
 <td class="colLast">
-<div class="block">Sets a new company name for the customer
-
- <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCompanyName--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    assertThat(customer.getCompanyName()).isNull();
-
-    final String companyName = "Big coorp";
-    final Customer updatedCustomer =
-            execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
-
-    assertThat(updatedCustomer.getCompanyName()).isEqualTo(companyName);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets a new company name for the customer.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/customers/commands/updateactions/SetCustomerGroup.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetCustomerGroup</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCustomerGroup--%s" class=code-example><pre><code class='java'>withB2cCustomerGroup(client(), customerGroup -&gt; {
-    withCustomer(client(), customer -&gt; {
-        assertThat(customer.getCustomerGroup()).isNull();
-        final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
-        assertThat(updateCustomer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
-    });
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the customer group for a customer.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -184,7 +162,9 @@
 <td class="colLast">
 <div class="block">Sets a new vat ID for the customer
 
- <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setVatId--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
+  <p>See also <a href="../CustomerUpdateCommand.html">CustomerUpdateCommand</a>.<p>
+
+  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setVatId--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
     assertThat(customer.getVatId()).isNull();
 
     final String vatId = randomString();

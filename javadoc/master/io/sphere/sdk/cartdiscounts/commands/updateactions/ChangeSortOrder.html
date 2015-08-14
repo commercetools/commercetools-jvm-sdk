@@ -124,7 +124,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">ChangeSortOrder</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeSortOrder--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
+<div class="block">Changes the sort order.
+
+  <p>See also <a href="../CartDiscountUpdateCommand.html">CartDiscountUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeSortOrder--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
     final String newSortOrder = format("0.%d", randomInt());
 
     assertThat(cartDiscount.getSortOrder()).isNotEqualTo(newSortOrder);

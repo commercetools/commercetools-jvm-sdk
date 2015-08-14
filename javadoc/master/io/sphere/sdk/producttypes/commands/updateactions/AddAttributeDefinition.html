@@ -124,7 +124,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">AddAttributeDefinition</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addAttributeDefinition--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
+<div class="block">Adds an attribute definition to a product type.
+
+ <p>See also <a href="../ProductTypeUpdateCommand.html">ProductTypeUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addAttributeDefinition--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
     //add
     final String attributeName = "foostring";
     final AttributeDefinition foostring =

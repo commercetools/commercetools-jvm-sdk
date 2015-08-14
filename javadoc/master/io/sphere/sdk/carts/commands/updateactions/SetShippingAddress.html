@@ -128,6 +128,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  Setting the shipping address also sets the tax rates of the line items and calculates the taxed price.
  If the address is not provided, the shipping address is unset, the taxedPrice is unset and the taxRates are unset in all line items.
 
+ <p>See also <a href="../CartUpdateCommand.html">CartUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setShippingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
 assertThat(cart.getShippingAddress()).isNull();
 final Address address = AddressBuilder.of(DE).build();

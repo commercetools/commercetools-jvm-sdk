@@ -124,7 +124,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">ChangeValue</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscount</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeValue--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
+<div class="block">Changes the value of the discount.
+
+ <p>See also <a href="../ProductDiscountUpdateCommand.html">ProductDiscountUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeValue--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
     final ProductDiscountValue productDiscountValue = AbsoluteProductDiscountValue.of(EURO_30);
 
     final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeValue.of(productDiscountValue)));

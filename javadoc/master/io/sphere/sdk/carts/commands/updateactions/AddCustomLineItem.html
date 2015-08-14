@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block">Adds a CustomLineItem to the cart.
 
+ <p>See also <a href="../CartUpdateCommand.html">CartUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addCustomLineItem--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
     final Cart cart = createCartWithCountry(client());
     assertThat(cart.getCustomLineItems()).hasSize(0);

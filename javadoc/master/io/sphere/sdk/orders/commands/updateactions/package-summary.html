@@ -88,96 +88,37 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addDelivery--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getShippingInfo().getDeliveries()).isEmpty();
-    final List&lt;ParcelDraft&gt; parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
-    final LineItem lineItem = order.getLineItems().get(0);
-    final int availableItemsToShip = 1;
-    final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
-    final Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
-    assertThat(delivery.getItems()).isEqualTo(items);
-    final Parcel parcel = delivery.getParcels().get(0);
-    assertThat(parcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
-    assertThat(parcel.getTrackingData()).isEqualTo(TRACKING_DATA);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds a delivery.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddParcelToDelivery</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addParcelToDelivery--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    final LineItem lineItem = order.getLineItems().get(0);
-    final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem));
-    final Order orderWithDelivery = execute(OrderUpdateCommand.of(order, AddDelivery.of(items)));
-    final Delivery delivery = orderWithDelivery.getShippingInfo().getDeliveries().get(0);
-    assertThat(delivery.getParcels()).isEmpty();
-    final ParcelDraft parcelDraft = ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA);
-    final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(orderWithDelivery, action));
-    final Parcel actual = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
-    assertThat(actual.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
-    assertThat(actual.getTrackingData()).isEqualTo(TRACKING_DATA);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds a parcel to a delivery.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddReturnInfo</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addReturnInfo--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    Assertions.assertThat(order.getReturnInfo()).isEmpty();
-    final String lineItemId = order.getLineItems().get(0).getId();
-    final List&lt;ReturnItemDraft&gt; items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
-    final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(ZonedDateTime_IN_PAST).withReturnTrackingId("trackingId");
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-
-    final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
-    final ReturnItem returnItem = returnInfo.getItems().get(0);
-    assertThat(returnItem.getQuantity()).isEqualTo(1);
-    assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
-    assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
-    assertThat(returnItem.getComment()).contains("foo bar");
-    assertThat(returnInfo.getReturnDate()).isEqualTo(ZonedDateTime_IN_PAST);
-    assertThat(returnInfo.getReturnTrackingId()).contains("trackingId");
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds return data to an order.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeOrderState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeOrderState</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeOrderState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getOrderState()).isEqualTo(OrderState.OPEN);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.COMPLETE)));
-    assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.COMPLETE);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the order state.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangePaymentState</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changePaymentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    final PaymentState newState = PaymentState.PAID;
-    assertThat(order.getPaymentState()).isNotEqualTo(newState);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(newState)));
-    assertThat(updatedOrder.getPaymentState()).isEqualTo(newState);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the payment state.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeShipmentState</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    final ShipmentState newState = ShipmentState.SHIPPED;
-    assertThat(order.getShipmentState()).isNotEqualTo(newState);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
-    assertThat(updatedOrder.getShipmentState()).isEqualTo(newState);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the shipment state.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -193,71 +134,37 @@
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></td>
-<td class="colLast">&nbsp;</td>
-</tr>
-<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetOrderNumber</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setOrderNumber--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getOrderNumber()).isNull();
-    final String orderNumber = randomString();
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
-    assertThat(updatedOrder.getOrderNumber()).isEqualTo(orderNumber);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the order number.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetReturnPaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnPaymentState</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnPaymentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {
-    final ReturnItem returnItem = returnInfo.getItems().get(0);
-    final ReturnPaymentState newPaymentState = ReturnPaymentState.REFUNDED;
-    assertThat(returnItem.getPaymentState()).isNotEqualTo(newPaymentState);
-    final SetReturnPaymentState action = SetReturnPaymentState.of(returnItem, newPaymentState);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-    final ReturnPaymentState updatedPaymentState = updatedOrder.getReturnInfo().get(0).getItems().get(0).getPaymentState();
-    assertThat(updatedPaymentState).isEqualTo(newPaymentState);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
-</td>
-</tr>
-<tr class="rowColor">
-<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></td>
-<td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnShipmentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {
-    final ReturnItem returnItem = returnInfo.getItems().get(0);
-    final ReturnShipmentState newShipmentState = ReturnShipmentState.BACK_IN_STOCK;
-    assertThat(returnItem.getShipmentState()).isNotEqualTo(newShipmentState);
-    final SetReturnShipmentState action = SetReturnShipmentState.of(returnItem, newShipmentState);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-    final ReturnShipmentState updatedReturnItem = updatedOrder.getReturnInfo().get(0).getItems().get(0).getShipmentState();
-    assertThat(updatedReturnItem).isEqualTo(newShipmentState);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the return payment state.</div>
 </td>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></td>
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetReturnShipmentState</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionCustomLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
-    withOrderOfCustomLineItems(client(), order -&gt; {
-        final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
-        assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
-        final long quantity = 1;
-        final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
-        assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
-    })
-);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the return shipment state.</div>
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></td>
+<td class="colLast">
+<div class="block">Change the state of a Custom Line Item according to allowed transitions.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
+<div class="block">Change the state of a Line Item according to allowed transitions
+
+ <p>See also <a href="../OrderUpdateCommand.html">OrderUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
                 withOrder(client(), order -&gt; {
                     final LineItem lineItem = order.getLineItems().get(0);
                     assertThat(lineItem).containsState(initialState).containsNotState(nextState);
@@ -270,24 +177,10 @@
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-updateSyncInfo--%s" class=code-example><pre><code class='java'>withOrderExportChannel(client(), channel -&gt;
-    withOrder(client(), order -&gt; {
-        assertThat(order.getSyncInfo()).isEmpty();
-        final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
-        final String externalId = "foo";
-        final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-        assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, externalId));
-
-        //check channel expansion
-        final Order loadedOrder = execute(OrderByIdGet.of(order).withExpansionPaths(m -&gt; m.syncInfo().channel()));
-        assertThat(new ArrayList&lt;&gt;(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isNotNull();
-    })
-);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Updates the synchronization info.</div>
 </td>
 </tr>
 </tbody>

@@ -92,24 +92,12 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#add-javax.money.MonetaryAmount-">add(MonetaryAmount)</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/AddAddress.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">AddAddress</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Adds an address to a customer.</div>
+</dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/updateactions/AddAttributeDefinition.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">AddAttributeDefinition</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addAttributeDefinition--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-    //add
-    final String attributeName = "foostring";
-    final AttributeDefinition foostring =
-            AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), StringType.of()).build();
-    final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
-    final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
-    assertThat(loadedDefinition.getAttributeType()).isEqualTo(StringType.of());
-
-    //remove
-    final ProductType withoutFoostring = execute(ProductTypeUpdateCommand.of(withFoostring, RemoveAttributeDefinition.of(attributeName)));
-    assertThat(withoutFoostring.findAttribute(attributeName)).isEmpty();
-    return withoutFoostring;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds an attribute definition to a product type.</div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">AddCustomLineItem</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -117,56 +105,17 @@
 </dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">AddDelivery</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addDelivery--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getShippingInfo().getDeliveries()).isEmpty();
-    final List&lt;ParcelDraft&gt; parcels = asList(ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA));
-    final LineItem lineItem = order.getLineItems().get(0);
-    final int availableItemsToShip = 1;
-    final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem, availableItemsToShip));
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, AddDelivery.of(items, parcels)));
-    final Delivery delivery = updatedOrder.getShippingInfo().getDeliveries().get(0);
-    assertThat(delivery.getItems()).isEqualTo(items);
-    final Parcel parcel = delivery.getParcels().get(0);
-    assertThat(parcel.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
-    assertThat(parcel.getTrackingData()).isEqualTo(TRACKING_DATA);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds a delivery.</div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">AddDiscountCode</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-removeDiscountCode--%s" class=code-example><pre><code class='java'>withCartAndDiscountCode(client(), (cart, discountCode) -&gt; {
-    //addDiscountCode
-    final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
-    final DiscountCodeInfo discountCodeInfo = cartWithCode.getDiscountCodes().get(0);
-    assertThat(discountCodeInfo.getDiscountCode()).isEqualTo(discountCode.toReference());
-
-    //removeDiscountCode
-    final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
-    assertThat(updatedCart.getDiscountCodes()).isEmpty();
-
-    return updatedCart;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds a discount code to the cart.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/UrlQueryBuilder.html#addEncoded-java.lang.String-java.lang.String-">addEncoded(String, String)</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/UrlQueryBuilder.html" title="class in io.sphere.sdk.http">UrlQueryBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/updateactions/AddEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">AddEnumValue</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addEnumValue--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-    final String attributeName = "size";
-    assertThat(productType.findAttribute(attributeName)).isPresent();
-    final EnumValue value = EnumValue.of("XXXL", "XXXL");
-
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
-            AddEnumValue.of(attributeName, value)));
-
-    assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
-            .isInstanceOf(EnumType.class)
-            .matches(type -&gt; ((EnumType)type).getValues().contains(value));
-
-    return updatedProductType;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds an enum value to an enum attribute definition.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/AddExternalImage.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">AddExternalImage</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -196,23 +145,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/updateactions/AddLocalizedEnumValue.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">AddLocalizedEnumValue</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addLocalizedEnumValue--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-    final String attributeName = "color";
-    assertThat(productType.getAttribute(attributeName)).isNotNull();
-    final LocalizedEnumValue value =
-            LocalizedEnumValue.of("brown", LocalizedString.of(Locale.ENGLISH, "brown").plus(GERMAN, "braun"));
-
-
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
-            AddLocalizedEnumValue.of(attributeName, value)));
-
-    assertThat(updatedProductType.getAttribute(attributeName).getAttributeType())
-            .isInstanceOf(LocalizedEnumType.class)
-            .matches(type -&gt; ((LocalizedEnumType)type).getValues().contains(value));
-
-    return updatedProductType;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds a localized enum value to the attribute definition.</div>
 </dd>
 <dt><a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions"><span class="typeNameLink">AddLocation</span></a> - Class in <a href="io/sphere/sdk/zones/commands/updateactions/package-summary.html">io.sphere.sdk.zones.commands.updateactions</a></dt>
 <dd>
@@ -222,20 +155,7 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">AddParcelToDelivery</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addParcelToDelivery--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    final LineItem lineItem = order.getLineItems().get(0);
-    final List&lt;DeliveryItem&gt; items = asList(DeliveryItem.of(lineItem));
-    final Order orderWithDelivery = execute(OrderUpdateCommand.of(order, AddDelivery.of(items)));
-    final Delivery delivery = orderWithDelivery.getShippingInfo().getDeliveries().get(0);
-    assertThat(delivery.getParcels()).isEmpty();
-    final ParcelDraft parcelDraft = ParcelDraft.of(PARCEL_MEASUREMENTS, TRACKING_DATA);
-    final AddParcelToDelivery action = AddParcelToDelivery.of(delivery, parcelDraft);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(orderWithDelivery, action));
-    final Parcel actual = updatedOrder.getShippingInfo().getDeliveries().get(0).getParcels().get(0);
-    assertThat(actual.getMeasurements()).isEqualTo(PARCEL_MEASUREMENTS);
-    assertThat(actual.getTrackingData()).isEqualTo(TRACKING_DATA);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds a parcel to a delivery.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/AddPrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">AddPrice</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -243,14 +163,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/inventory/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions"><span class="typeNameLink">AddQuantity</span></a> - Class in <a href="io/sphere/sdk/inventory/commands/updateactions/package-summary.html">io.sphere.sdk.inventory.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryUpdateCommandTest-addQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final long additionalQuantity = 4;
-    final UpdateAction&lt;InventoryEntry&gt; action = AddQuantity.of(additionalQuantity);
-    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() + additionalQuantity);
-    return updatedEntry;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds items to the stock.</div>
 </dd>
 <dt><a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">Address</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>
@@ -264,77 +177,15 @@
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">AddReturnInfo</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-addReturnInfo--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    Assertions.assertThat(order.getReturnInfo()).isEmpty();
-    final String lineItemId = order.getLineItems().get(0).getId();
-    final List&lt;ReturnItemDraft&gt; items = asList(ReturnItemDraft.of(1, lineItemId, ReturnShipmentState.RETURNED, "foo bar"));
-    final AddReturnInfo action = AddReturnInfo.of(items).withReturnDate(ZonedDateTime_IN_PAST).withReturnTrackingId("trackingId");
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-
-    final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
-    final ReturnItem returnItem = returnInfo.getItems().get(0);
-    assertThat(returnItem.getQuantity()).isEqualTo(1);
-    assertThat(returnItem.getLineItemId()).isEqualTo(lineItemId);
-    assertThat(returnItem.getShipmentState()).isEqualTo(ReturnShipmentState.RETURNED);
-    assertThat(returnItem.getComment()).contains("foo bar");
-    assertThat(returnInfo.getReturnDate()).isEqualTo(ZonedDateTime_IN_PAST);
-    assertThat(returnInfo.getReturnTrackingId()).contains("trackingId");
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds return data to an order.</div>
 </dd>
 <dt><a href="io/sphere/sdk/channels/commands/updateactions/AddRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">AddRoles</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-addRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -&gt; {
-    final Set&lt;ChannelRole&gt; roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, AddRoles.of(roles)));
-    assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY, ORDER_IMPORT);
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds roles to a channel.</div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">AddShippingRate</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-workingWithZones--%s" class=code-example><pre><code class='java'>withZone(client(), zone -&gt; {
-    withUpdateableShippingMethod(client(), shippingMethod -&gt; {
-        final long count = shippingMethod.getZones().stream().filter(z -&gt; z.hasSameIdAs(zone)).count();
-        assertThat(count).overridingErrorMessage("zone is not used yet").isEqualTo(0);
-
-        //addZone
-        final ShippingMethod shippingMethodWithZone = execute(ShippingMethodUpdateCommand.of(shippingMethod, AddZone.of(zone)));
-        final ZoneRate zoneRate = shippingMethodWithZone.getZoneRates().stream()
-                .filter(rate -&gt; rate.getZone().hasSameIdAs(zone))
-                .findFirst()
-                .get();
-        assertThat(zoneRate.getShippingRates()).isEmpty();
-
-        //addShippingRate
-        final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
-        final ShippingMethod shippingMethodWithShippingRate =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
-
-        //check reference expansion
-        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdGet.of(shippingMethod)
-                        .plusExpansionPaths(m -&gt; m.zoneRates().zone())
-        );
-        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
-        assertThat(loadedShippingMethod.getZones().get(0).getObj())
-                .overridingErrorMessage("the convenience method also has expanded references").isNotNull();
-
-        //removeShippingRate
-        final ShippingMethod shippingMethodWithoutShippingRate =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithoutShippingRate.getShippingRatesForZone(zone)).isEmpty();
-
-        //removeZone
-        final ShippingMethod shippingMethodWithoutZone =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone)));
-        assertThat(shippingMethodWithoutZone.getZoneRates()).isEqualTo(shippingMethod.getZoneRates());
-
-        return shippingMethodWithoutZone;
-    });
-}, CountryCode.EA);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds a shipping rate.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/AddToCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">AddToCategory</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -346,47 +197,7 @@
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/AddZone.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">AddZone</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-workingWithZones--%s" class=code-example><pre><code class='java'>withZone(client(), zone -&gt; {
-    withUpdateableShippingMethod(client(), shippingMethod -&gt; {
-        final long count = shippingMethod.getZones().stream().filter(z -&gt; z.hasSameIdAs(zone)).count();
-        assertThat(count).overridingErrorMessage("zone is not used yet").isEqualTo(0);
-
-        //addZone
-        final ShippingMethod shippingMethodWithZone = execute(ShippingMethodUpdateCommand.of(shippingMethod, AddZone.of(zone)));
-        final ZoneRate zoneRate = shippingMethodWithZone.getZoneRates().stream()
-                .filter(rate -&gt; rate.getZone().hasSameIdAs(zone))
-                .findFirst()
-                .get();
-        assertThat(zoneRate.getShippingRates()).isEmpty();
-
-        //addShippingRate
-        final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
-        final ShippingMethod shippingMethodWithShippingRate =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
-
-        //check reference expansion
-        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdGet.of(shippingMethod)
-                        .plusExpansionPaths(m -&gt; m.zoneRates().zone())
-        );
-        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
-        assertThat(loadedShippingMethod.getZones().get(0).getObj())
-                .overridingErrorMessage("the convenience method also has expanded references").isNotNull();
-
-        //removeShippingRate
-        final ShippingMethod shippingMethodWithoutShippingRate =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithoutShippingRate.getShippingRatesForZone(zone)).isEmpty();
-
-        //removeZone
-        final ShippingMethod shippingMethodWithoutZone =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone)));
-        assertThat(shippingMethodWithoutZone.getZoneRates()).isEqualTo(shippingMethod.getZoneRates());
-
-        return shippingMethodWithoutZone;
-    });
-}, CountryCode.EA);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds a zone.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/FacetSearchModel.html#alias">alias</a></span> - Variable in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/FacetSearchModel.html" title="class in io.sphere.sdk.search">FacetSearchModel</a></dt>
 <dd>&nbsp;</dd>
@@ -987,115 +798,35 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeAttributeDefinitionLabel.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">ChangeAttributeDefinitionLabel</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeLabel--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-    final String attributeName = "color";
-    assertThat(productType.findAttribute(attributeName)).isPresent();
-    final LocalizedString label = LocalizedString.of(ENGLISH, "the color label");
-
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeDefinitionLabel.of(attributeName, label)));
-
-    assertThat(updatedProductType.getAttribute(attributeName).getLabel()).isEqualTo(label);
-
-    return updatedProductType;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the attribute definition label.</div>
 </dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeAttributeOrder.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">ChangeAttributeOrder</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeAttributeOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-
-    final List&lt;AttributeDefinition&gt; attributeDefinitions = ListUtils.reverse(productType.getAttributes());
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType, ChangeAttributeOrder.of(attributeDefinitions)));
-
-    assertThat(updatedProductType.getAttributes()).isEqualTo(attributeDefinitions);
-
-    return updatedProductType;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the attribute order.</div>
 </dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/updateactions/ChangeCartDiscounts.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><span class="typeNameLink">ChangeCartDiscounts</span></a> - Class in <a href="io/sphere/sdk/discountcodes/commands/updateactions/package-summary.html">io.sphere.sdk.discountcodes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-changeCartDiscounts--%s" class=code-example><pre><code class='java'>withCartDiscount(client(), randomKey(), cartDiscount -&gt;
-    withPersistentDiscountCode(client(), discountCode -&gt; {
-        final List&lt;Reference&lt;CartDiscount&gt;&gt; oldCartDiscounts = discountCode.getCartDiscounts();
-        assertThat(oldCartDiscounts).doesNotContain(cartDiscount.toReference());
-
-        final List&lt;Reference&lt;CartDiscount&gt;&gt; newDiscountsList =
-                listOf(oldCartDiscounts, cartDiscount.toReference());
-
-        final DiscountCode updatedDiscountCode =
-                execute(DiscountCodeUpdateCommand.of(discountCode, ChangeCartDiscounts.of(newDiscountsList)));
-        assertThat(updatedDiscountCode.getCartDiscounts()).isEqualTo(newDiscountsList);
-
-        //clean up test
-        execute(DiscountCodeUpdateCommand.of(updatedDiscountCode, ChangeCartDiscounts.of(oldCartDiscounts)));
-    })
-);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the cart discounts.</div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeCartPredicate.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeCartPredicate</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeCartPredicate--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final String newPredicate = format("totalPrice &gt; \"%d.00 EUR\"", randomInt());
-
-    assertThat(cartDiscount.getCartPredicate()).isNotEqualTo(newPredicate);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeCartPredicate.of(newPredicate)));
-
-    assertThat(updatedDiscount.getCartPredicate()).isEqualTo(newPredicate);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the cart predicate.</div>
 </dd>
 <dt><a href="io/sphere/sdk/channels/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">ChangeDescription</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
-    final LocalizedString newDescription = randomSlug();
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeDescription.of(newDescription)));
-    assertThat(updatedChannel.getDescription()).isEqualTo(newDescription);
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the description of a channel.</div>
 </dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeDescription.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">ChangeDescription</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeDescription--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-    final String description = randomKey();
-    final ProductType updatedProductType =
-            execute(ProductTypeUpdateCommand.of(productType, ChangeDescription.of(description)));
-    assertThat(updatedProductType.getDescription()).isEqualTo(description);
-    return updatedProductType;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the description.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/ChangeEmail.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">ChangeEmail</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-changeEmail--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    final String newEmail = randomEmail(CustomerUpdateCommandTest.class);
-    assertThat(customer.getEmail()).isNotEqualTo(newEmail);
-    final Customer updatedCustomer = execute(CustomerUpdateCommand.of(customer, ChangeEmail.of(newEmail)));
-    assertThat(updatedCustomer.getEmail()).isEqualTo(newEmail);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the customer email address.</div>
 </dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeEnumValueOrder.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">ChangeEnumValueOrder</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeEnumValueOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-    final String attributeName = "size";
-    final EnumType attributeType = (EnumType) productType.getAttribute(attributeName)
-            .getAttributeType();
-    final List&lt;EnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
-
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
-            ChangeEnumValueOrder.of(attributeName, values)));
-
-    final EnumType updatedType = (EnumType) updatedProductType
-            .getAttribute(attributeName).getAttributeType();
-    assertThat(updatedType.getValues()).isEqualTo(values);
-
-    return updatedProductType;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the enum value order.</div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeInitial.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeInitial</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
@@ -1112,59 +843,19 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeIsActive.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeIsActive</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeIsActive--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final boolean newIsActice = !cartDiscount.isActive();
-
-    assertThat(cartDiscount.isActive()).isNotEqualTo(newIsActice);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeIsActive.of(newIsActice)));
-
-    assertThat(updatedDiscount.isActive()).isEqualTo(newIsActice);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Switches the state if the discount is active.</div>
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/commands/updateactions/ChangeIsActive.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions"><span class="typeNameLink">ChangeIsActive</span></a> - Class in <a href="io/sphere/sdk/productdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.productdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeIsActive--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final boolean newIsActive = !discount.isActive();
-
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeIsActive.of(newIsActive)));
-
-    assertThat(updatedDiscount.isActive()).isEqualTo(newIsActive);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Enables or disables the discount.</div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeIsDefault.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">ChangeIsDefault</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeIsDefault--%s" class=code-example><pre><code class='java'>//only one can be default one, so clean up if there is any
-final Query&lt;ShippingMethod&gt; query = ShippingMethodQuery.of().withPredicates(QueryPredicate.of("isDefault = true"));
-final Optional&lt;ShippingMethod&gt; defaultShippingMethodOption = execute(query).head();
-defaultShippingMethodOption.ifPresent(sm -&gt; execute(ShippingMethodUpdateCommand.of(sm, ChangeIsDefault.toFalse())));
-
-withUpdateableShippingMethod(client(), shippingMethod -&gt; {
-    assertThat(shippingMethod.isDefault()).isFalse();
-    final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, ChangeIsDefault.toTrue());
-    final ShippingMethod updatedShippingMethod = execute(cmd);
-    assertThat(updatedShippingMethod.isDefault()).isTrue();
-
-    final int defaultShippingMethods = execute(ShippingMethodQuery.of().byIsDefault()).size();
-    assertThat(defaultShippingMethods).isEqualTo(1);
-
-    return execute(ShippingMethodUpdateCommand.of(updatedShippingMethod, ChangeIsDefault.toFalse()));
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets a shipping method as default or not.</div>
 </dd>
 <dt><a href="io/sphere/sdk/channels/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">ChangeKey</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeKey--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
-    final String newKey = randomKey();
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeKey.of(newKey)));
-    assertThat(updatedChannel.getKey()).isEqualTo(newKey).isNotEqualTo(channel.getKey());
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the key of a channel.</div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeKey.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeKey</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
@@ -1184,51 +875,19 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeLocalizedEnumValueOrder.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">ChangeLocalizedEnumValueOrder</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeLocalizedEnumValueOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-    final String attributeName = "color";
-    final LocalizedEnumType attributeType = (LocalizedEnumType) productType.getAttribute(attributeName)
-            .getAttributeType();
-    final List&lt;LocalizedEnumValue&gt; values = ListUtils.reverse(attributeType.getValues());
-
-    final ProductType updatedProductType = execute(ProductTypeUpdateCommand.of(productType,
-            ChangeLocalizedEnumValueOrder.of(attributeName, values)));
-
-    final LocalizedEnumType updatedType = (LocalizedEnumType) updatedProductType.getAttribute(attributeName)
-            .getAttributeType();
-    assertThat(updatedType.getValues()).isEqualTo(values);
-
-    return updatedProductType;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the localized enum value order.</div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final LocalizedString newName = randomSlug();
-
-    assertThat(cartDiscount.getName()).isNotEqualTo(newName);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeName.of(newName)));
-
-    assertThat(updatedDiscount.getName()).isEqualTo(newName);
-
-    //clean up test, cart discount is reused by name
-    execute(CartDiscountUpdateCommand.of(updatedDiscount, ChangeName.of(cartDiscount.getName())));
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the name of the discount.</div>
 </dd>
 <dt><a href="io/sphere/sdk/categories/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.categories.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/categories/commands/updateactions/package-summary.html">io.sphere.sdk.categories.commands.updateactions</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Changes the name of a category.</div>
+</dd>
 <dt><a href="io/sphere/sdk/channels/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
-    final LocalizedString newName = randomSlug();
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, ChangeName.of(newName)));
-    assertThat(updatedChannel.getName()).isEqualTo(newName);
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the name of a channel.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customergroups/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.customergroups.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/customergroups/commands/updateactions/package-summary.html">io.sphere.sdk.customergroups.commands.updateactions</a></dt>
 <dd>
@@ -1240,15 +899,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/productdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.productdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final LocalizedString newName = randomSlug();
-
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeName.of(newName)));
-
-    assertThat(updatedDiscount.getName()).isEqualTo(newName);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the  name.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -1256,26 +907,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-    final String name = randomKey();
-    final ProductType updatedProductType =
-            execute(ProductTypeUpdateCommand.of(productType, ChangeName.of(name)));
-    assertThat(updatedProductType.getName()).isEqualTo(name);
-    return updatedProductType;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the  name of a product type.</div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableShippingMethod(client(), shippingMethod -&gt; {
-    final String newName = randomString();
-    assertThat(shippingMethod.getName()).isNotEqualTo(newName);
-    final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, ChangeName.of(newName));
-    final ShippingMethod updatedShippingMethod = execute(cmd);
-    assertThat(updatedShippingMethod.getName()).isEqualTo(newName);
-    return updatedShippingMethod;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the name.</div>
 </dd>
 <dt><a href="io/sphere/sdk/zones/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.zones.commands.updateactions"><span class="typeNameLink">ChangeName</span></a> - Class in <a href="io/sphere/sdk/zones/commands/updateactions/package-summary.html">io.sphere.sdk.zones.commands.updateactions</a></dt>
 <dd>
@@ -1283,12 +919,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/ChangeOrderState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">ChangeOrderState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeOrderState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getOrderState()).isEqualTo(OrderState.OPEN);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.COMPLETE)));
-    assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.COMPLETE);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the order state.</div>
 </dd>
 <dt><a href="io/sphere/sdk/categories/commands/updateactions/ChangeParent.html" title="class in io.sphere.sdk.categories.commands.updateactions"><span class="typeNameLink">ChangeParent</span></a> - Class in <a href="io/sphere/sdk/categories/commands/updateactions/package-summary.html">io.sphere.sdk.categories.commands.updateactions</a></dt>
 <dd>
@@ -1296,29 +927,11 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">ChangePaymentState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changePaymentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    final PaymentState newState = PaymentState.PAID;
-    assertThat(order.getPaymentState()).isNotEqualTo(newState);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangePaymentState.of(newState)));
-    assertThat(updatedOrder.getPaymentState()).isEqualTo(newState);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the payment state.</div>
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/commands/updateactions/ChangePredicate.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions"><span class="typeNameLink">ChangePredicate</span></a> - Class in <a href="io/sphere/sdk/productdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.productdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changePredicate--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final String predicateAsString = "sku = \"AB-12\"";
-    final ProductDiscountPredicate predicate = ProductDiscountPredicate
-            .of(predicateAsString);
-
-    final ProductDiscount updatedDiscount = execute(
-            ProductDiscountUpdateCommand.of(discount, ChangePredicate.of(predicate)));
-
-    final String updatedPredicate = updatedDiscount.getPredicate();
-    assertThat(updatedPredicate).isEqualTo(predicateAsString);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the predicate of a discount.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/ChangePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">ChangePrice</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -1326,37 +939,15 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/inventory/commands/updateactions/ChangeQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions"><span class="typeNameLink">ChangeQuantity</span></a> - Class in <a href="io/sphere/sdk/inventory/commands/updateactions/package-summary.html">io.sphere.sdk.inventory.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryUpdateCommandTest-changeQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final UpdateAction&lt;InventoryEntry&gt; action = ChangeQuantity.of(5000);
-    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(5000);
-    return updatedEntry;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the absolute quantity.</div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeRequiresDiscountCode.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeRequiresDiscountCode</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeRequiresDiscountCode--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final boolean newRequiresDiscountCode = !cartDiscount.isRequiringDiscountCode();
-
-    assertThat(cartDiscount.isRequiringDiscountCode()).isNotEqualTo(newRequiresDiscountCode);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeRequiresDiscountCode.of(newRequiresDiscountCode)));
-
-    assertThat(updatedDiscount.isRequiringDiscountCode()).isEqualTo(newRequiresDiscountCode);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the property if the discount requires a discount code.</div>
 </dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">ChangeShipmentState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-changeShipmentState--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    final ShipmentState newState = ShipmentState.SHIPPED;
-    assertThat(order.getShipmentState()).isNotEqualTo(newState);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeShipmentState.of(newState)));
-    assertThat(updatedOrder.getShipmentState()).isEqualTo(newState);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the shipment state.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/ChangeSlug.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">ChangeSlug</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -1364,84 +955,29 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeSortOrder.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeSortOrder</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeSortOrder--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final String newSortOrder = format("0.%d", randomInt());
-
-    assertThat(cartDiscount.getSortOrder()).isNotEqualTo(newSortOrder);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeSortOrder.of(newSortOrder)));
-
-    assertThat(updatedDiscount.getSortOrder()).isEqualTo(newSortOrder);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the sort order.</div>
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/commands/updateactions/ChangeSortOrder.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions"><span class="typeNameLink">ChangeSortOrder</span></a> - Class in <a href="io/sphere/sdk/productdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.productdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeSortOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final String newSortOrder = randomSortOrder();
-
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeSortOrder.of(newSortOrder)));
-
-    assertThat(updatedDiscount.getSortOrder()).isEqualTo(newSortOrder);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the sort order of a discount.</div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeTarget.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeTarget</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeTarget--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final CartDiscountTarget newTarget = cartDiscount.getTarget() instanceof LineItemsTarget ?
-            CustomLineItemsTarget.of("1 = 1") : LineItemsTarget.of("1 = 1");
-
-    assertThat(cartDiscount.getTarget()).isNotEqualTo(newTarget);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeTarget.of(newTarget)));
-
-    assertThat(updatedDiscount.getTarget()).isEqualTo(newTarget);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the target.</div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/ChangeTaxCategory.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">ChangeTaxCategory</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-changeTaxCategory--%s" class=code-example><pre><code class='java'>final TaxCategory newTaxCategory = TaxCategoryFixtures.defaultTaxCategory(client());
-withUpdateableShippingMethod(client(), shippingMethod -&gt; {
-    assertThat(shippingMethod.getTaxCategory().getId()).isNotEqualTo(newTaxCategory.getId());
-    final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, ChangeTaxCategory.of(newTaxCategory));
-    final ShippingMethod updatedShippingMethod = execute(cmd);
-    assertThat(updatedShippingMethod.getTaxCategory().getId()).isEqualTo(newTaxCategory.getId());
-    return updatedShippingMethod;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the tax category.</div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/ChangeType.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">ChangeType</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/ChangeValue.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">ChangeValue</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeValue--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final CartDiscountValue newValue = CartDiscountValue.ofAbsolute(MoneyImpl.of(randomInt(), EUR));
-
-    assertThat(cartDiscount.getValue()).isNotEqualTo(newValue);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, ChangeValue.of(newValue)));
-
-    assertThat(updatedDiscount.getValue()).isEqualTo(newValue);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the value of the discount.</div>
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/commands/updateactions/ChangeValue.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions"><span class="typeNameLink">ChangeValue</span></a> - Class in <a href="io/sphere/sdk/productdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.productdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeValue--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final ProductDiscountValue productDiscountValue = AbsoluteProductDiscountValue.of(EURO_30);
-
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeValue.of(productDiscountValue)));
-
-    assertThat(updatedDiscount.getValue()).isEqualTo(productDiscountValue);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the value of the discount.</div>
 </dd>
 <dt><a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels"><span class="typeNameLink">Channel</span></a> - Interface in <a href="io/sphere/sdk/channels/package-summary.html">io.sphere.sdk.channels</a></dt>
 <dd>
@@ -3352,9 +2888,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html#getMeasurements--">getMeasurements()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddParcelToDelivery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#getMeasurements--">getMeasurements()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Parcel.html#getMeasurements--">getMeasurements()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Parcel.html" title="class in io.sphere.sdk.orders">Parcel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ParcelDraft.html#getMeasurements--">getMeasurements()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ParcelDraft.html" title="class in io.sphere.sdk.orders">ParcelDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/errors/ErrorResponse.html#getMessage--">getMessage()</a></span> - Method in interface io.sphere.sdk.models.errors.<a href="io/sphere/sdk/models/errors/ErrorResponse.html" title="interface in io.sphere.sdk.models.errors">ErrorResponse</a></dt>
 <dd>&nbsp;</dd>
@@ -4126,9 +3662,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html#getTrackingData--">getTrackingData()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddParcelToDelivery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#getTrackingData--">getTrackingData()</a></span> - Method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Parcel.html#getTrackingData--">getTrackingData()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Parcel.html" title="class in io.sphere.sdk.orders">Parcel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ParcelDraft.html#getTrackingData--">getTrackingData()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ParcelDraft.html" title="class in io.sphere.sdk.orders">ParcelDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingData.html#getTrackingId--">getTrackingId()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingData.html" title="class in io.sphere.sdk.orders">TrackingData</a></dt>
 <dd>&nbsp;</dd>
@@ -6375,9 +5911,9 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html#of-java.util.List-">of(List&lt;DeliveryItem&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddDelivery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html#of-java.lang.String-io.sphere.sdk.orders.commands.updateactions.ParcelDraft-">of(String, ParcelDraft)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddParcelToDelivery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html#of-java.lang.String-io.sphere.sdk.orders.ParcelDraft-">of(String, ParcelDraft)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddParcelToDelivery</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html#of-io.sphere.sdk.orders.Delivery-io.sphere.sdk.orders.commands.updateactions.ParcelDraft-">of(Delivery, ParcelDraft)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddParcelToDelivery</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html#of-io.sphere.sdk.orders.Delivery-io.sphere.sdk.orders.ParcelDraft-">of(Delivery, ParcelDraft)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddParcelToDelivery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html#of-java.util.List-java.time.ZonedDateTime-java.lang.String-">of(List&lt;ReturnItemDraft&gt;, ZonedDateTime, String)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddReturnInfo</a></dt>
 <dd>&nbsp;</dd>
@@ -6396,12 +5932,6 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html#of-io.sphere.sdk.carts.LineItem-java.util.Set-">of(LineItem, Set&lt;ItemState&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportLineItemState</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html#of-java.lang.String-java.util.Set-">of(String, Set&lt;ItemState&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportLineItemState</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#of-io.sphere.sdk.orders.ParcelMeasurements-io.sphere.sdk.orders.TrackingData-">of(ParcelMeasurements, TrackingData)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#of-io.sphere.sdk.orders.ParcelMeasurements-">of(ParcelMeasurements)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html#of-io.sphere.sdk.orders.TrackingData-">of(TrackingData)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions">ParcelDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetOrderNumber</a></dt>
 <dd>&nbsp;</dd>
@@ -6454,6 +5984,12 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderShippingInfo.html#of-java.lang.String-javax.money.MonetaryAmount-io.sphere.sdk.shippingmethods.ShippingRate-io.sphere.sdk.taxcategories.TaxRate-io.sphere.sdk.models.Reference-io.sphere.sdk.models.Reference-java.util.List-">of(String, MonetaryAmount, ShippingRate, TaxRate, Reference&lt;TaxCategory&gt;, Reference&lt;ShippingMethod&gt;, List&lt;Delivery&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderShippingInfo.html" title="class in io.sphere.sdk.orders">OrderShippingInfo</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Parcel.html#of-java.lang.String-java.time.ZonedDateTime-io.sphere.sdk.orders.ParcelMeasurements-io.sphere.sdk.orders.TrackingData-">of(String, ZonedDateTime, ParcelMeasurements, TrackingData)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Parcel.html" title="class in io.sphere.sdk.orders">Parcel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ParcelDraft.html#of-io.sphere.sdk.orders.ParcelMeasurements-io.sphere.sdk.orders.TrackingData-">of(ParcelMeasurements, TrackingData)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ParcelDraft.html" title="class in io.sphere.sdk.orders">ParcelDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ParcelDraft.html#of-io.sphere.sdk.orders.ParcelMeasurements-">of(ParcelMeasurements)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ParcelDraft.html" title="class in io.sphere.sdk.orders">ParcelDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ParcelDraft.html#of-io.sphere.sdk.orders.TrackingData-">of(TrackingData)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ParcelDraft.html" title="class in io.sphere.sdk.orders">ParcelDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ParcelMeasurements.html#of-java.lang.Integer-java.lang.Integer-java.lang.Integer-java.lang.Integer-">of(Integer, Integer, Integer, Integer)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ParcelMeasurements.html" title="class in io.sphere.sdk.orders">ParcelMeasurements</a></dt>
 <dd>&nbsp;</dd>
@@ -7372,7 +6908,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="interface in io.sphere.sdk.orders.commands"><span class="typeNameLink">OrderUpdateCommand</span></a> - Interface in <a href="io/sphere/sdk/orders/commands/package-summary.html">io.sphere.sdk.orders.commands</a></dt>
 <dd>
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddDelivery.html">AddDelivery</a></li><li><a href="updateactions/AddParcelToDelivery.html">AddParcelToDelivery</a></li><li><a href="updateactions/AddReturnInfo.html">AddReturnInfo</a></li><li><a href="updateactions/ChangeOrderState.html">ChangeOrderState</a></li><li><a href="updateactions/ChangePaymentState.html">ChangePaymentState</a></li><li><a href="updateactions/ChangeShipmentState.html">ChangeShipmentState</a></li><li><a href="updateactions/ImportCustomLineItemState.html">ImportCustomLineItemState</a></li><li><a href="updateactions/ImportLineItemState.html">ImportLineItemState</a></li><li><a href="updateactions/ParcelDraft.html">ParcelDraft</a></li><li><a href="updateactions/SetOrderNumber.html">SetOrderNumber</a></li><li><a href="updateactions/SetReturnPaymentState.html">SetReturnPaymentState</a></li><li><a href="updateactions/SetReturnShipmentState.html">SetReturnShipmentState</a></li><li><a href="updateactions/TransitionCustomLineItemState.html">TransitionCustomLineItemState</a></li><li><a href="updateactions/TransitionLineItemState.html">TransitionLineItemState</a></li><li><a href="updateactions/UpdateSyncInfo.html">UpdateSyncInfo</a></li></ul></div>
+<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddDelivery.html">AddDelivery</a></li><li><a href="updateactions/AddParcelToDelivery.html">AddParcelToDelivery</a></li><li><a href="updateactions/AddReturnInfo.html">AddReturnInfo</a></li><li><a href="updateactions/ChangeOrderState.html">ChangeOrderState</a></li><li><a href="updateactions/ChangePaymentState.html">ChangePaymentState</a></li><li><a href="updateactions/ChangeShipmentState.html">ChangeShipmentState</a></li><li><a href="updateactions/ImportCustomLineItemState.html">ImportCustomLineItemState</a></li><li><a href="updateactions/ImportLineItemState.html">ImportLineItemState</a></li><li><a href="updateactions/SetOrderNumber.html">SetOrderNumber</a></li><li><a href="updateactions/SetReturnPaymentState.html">SetReturnPaymentState</a></li><li><a href="updateactions/SetReturnShipmentState.html">SetReturnShipmentState</a></li><li><a href="updateactions/TransitionCustomLineItemState.html">TransitionCustomLineItemState</a></li><li><a href="updateactions/TransitionLineItemState.html">TransitionLineItemState</a></li><li><a href="updateactions/UpdateSyncInfo.html">UpdateSyncInfo</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/CompletableFutureUtils.html#orElseGet-java.util.concurrent.CompletionStage-java.util.function.Supplier-">orElseGet(CompletionStage&lt;T&gt;, Supplier&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/CompletableFutureUtils.html" title="class in io.sphere.sdk.utils">CompletableFutureUtils</a></dt>
 <dd>&nbsp;</dd>
@@ -7398,7 +6934,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/Parcel.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">Parcel</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/orders/commands/updateactions/ParcelDraft.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">ParcelDraft</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
+<dt><a href="io/sphere/sdk/orders/ParcelDraft.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">ParcelDraft</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/ParcelMeasurements.html" title="class in io.sphere.sdk.orders"><span class="typeNameLink">ParcelMeasurements</span></a> - Class in <a href="io/sphere/sdk/orders/package-summary.html">io.sphere.sdk.orders</a></dt>
 <dd>&nbsp;</dd>
@@ -8281,21 +7817,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><a href="io/sphere/sdk/producttypes/commands/updateactions/RemoveAttributeDefinition.html" title="class in io.sphere.sdk.producttypes.commands.updateactions"><span class="typeNameLink">RemoveAttributeDefinition</span></a> - Class in <a href="io/sphere/sdk/producttypes/commands/updateactions/package-summary.html">io.sphere.sdk.producttypes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-producttypes-commands-ProductTypeUpdateCommandTest-addAttributeDefinition--%s" class=code-example><pre><code class='java'>withUpdateableProductType(client(), productType -&gt; {
-    //add
-    final String attributeName = "foostring";
-    final AttributeDefinition foostring =
-            AttributeDefinitionBuilder.of(attributeName, LocalizedString.of(ENGLISH, "foo string"), StringType.of()).build();
-    final ProductType withFoostring = execute(ProductTypeUpdateCommand.of(productType, AddAttributeDefinition.of(foostring)));
-    final AttributeDefinition loadedDefinition = withFoostring.getAttribute(attributeName);
-    assertThat(loadedDefinition.getAttributeType()).isEqualTo(StringType.of());
-
-    //remove
-    final ProductType withoutFoostring = execute(ProductTypeUpdateCommand.of(withFoostring, RemoveAttributeDefinition.of(attributeName)));
-    assertThat(withoutFoostring.findAttribute(attributeName)).isEmpty();
-    return withoutFoostring;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Remove an attribute definition.</div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">RemoveCustomLineItem</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -8303,19 +7825,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/RemoveDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">RemoveDiscountCode</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-removeDiscountCode--%s" class=code-example><pre><code class='java'>withCartAndDiscountCode(client(), (cart, discountCode) -&gt; {
-    //addDiscountCode
-    final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
-    final DiscountCodeInfo discountCodeInfo = cartWithCode.getDiscountCodes().get(0);
-    assertThat(discountCodeInfo.getDiscountCode()).isEqualTo(discountCode.toReference());
-
-    //removeDiscountCode
-    final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
-    assertThat(updatedCart.getDiscountCodes()).isEmpty();
-
-    return updatedCart;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Removes a discount code.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/RemoveFromCategory.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">RemoveFromCategory</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -8335,83 +7845,19 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/RemovePrice.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">RemovePrice</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-removePrice--%s" class=code-example><pre><code class='java'>withUpdateablePricedProduct(client(), product -&gt; {
-    final Price oldPrice = product.getMasterData().getStaged().getMasterVariant().getPrices().get(0);
-
-    final Product updatedProduct = client()
-            .execute(ProductUpdateCommand.of(product, RemovePrice.of(oldPrice)));
-
-    assertThat(updatedProduct.getMasterData().getStaged().getMasterVariant()
-            .getPrices().stream().anyMatch(p -&gt; p.equals(oldPrice))).isFalse();
-
-    return updatedProduct;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Removes a price from the product.</div>
 </dd>
 <dt><a href="io/sphere/sdk/inventory/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions"><span class="typeNameLink">RemoveQuantity</span></a> - Class in <a href="io/sphere/sdk/inventory/commands/updateactions/package-summary.html">io.sphere.sdk.inventory.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryUpdateCommandTest-removeQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final long removingQuantity = 4;
-    final UpdateAction&lt;InventoryEntry&gt; action = RemoveQuantity.of(removingQuantity);
-    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() - removingQuantity);
-    return updatedEntry;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Subtracts quantity from the stock.</div>
 </dd>
 <dt><a href="io/sphere/sdk/channels/commands/updateactions/RemoveRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">RemoveRoles</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-removeRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), asSet(ORDER_IMPORT, PRIMARY), channel -&gt; {
-    final Set&lt;ChannelRole&gt; roles = asSet(ORDER_IMPORT);
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, RemoveRoles.of(roles)));
-    assertThat(updatedChannel.getRoles()).containsOnly(PRIMARY);
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Removes a role from a channel.</div>
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveShippingRate.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">RemoveShippingRate</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-workingWithZones--%s" class=code-example><pre><code class='java'>withZone(client(), zone -&gt; {
-    withUpdateableShippingMethod(client(), shippingMethod -&gt; {
-        final long count = shippingMethod.getZones().stream().filter(z -&gt; z.hasSameIdAs(zone)).count();
-        assertThat(count).overridingErrorMessage("zone is not used yet").isEqualTo(0);
-
-        //addZone
-        final ShippingMethod shippingMethodWithZone = execute(ShippingMethodUpdateCommand.of(shippingMethod, AddZone.of(zone)));
-        final ZoneRate zoneRate = shippingMethodWithZone.getZoneRates().stream()
-                .filter(rate -&gt; rate.getZone().hasSameIdAs(zone))
-                .findFirst()
-                .get();
-        assertThat(zoneRate.getShippingRates()).isEmpty();
-
-        //addShippingRate
-        final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
-        final ShippingMethod shippingMethodWithShippingRate =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
-
-        //check reference expansion
-        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdGet.of(shippingMethod)
-                        .plusExpansionPaths(m -&gt; m.zoneRates().zone())
-        );
-        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
-        assertThat(loadedShippingMethod.getZones().get(0).getObj())
-                .overridingErrorMessage("the convenience method also has expanded references").isNotNull();
-
-        //removeShippingRate
-        final ShippingMethod shippingMethodWithoutShippingRate =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithoutShippingRate.getShippingRatesForZone(zone)).isEmpty();
-
-        //removeZone
-        final ShippingMethod shippingMethodWithoutZone =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone)));
-        assertThat(shippingMethodWithoutZone.getZoneRates()).isEqualTo(shippingMethod.getZoneRates());
-
-        return shippingMethodWithoutZone;
-    });
-}, CountryCode.EA);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Removes a shipping rate.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/RemoveVariant.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">RemoveVariant</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -8419,47 +7865,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/RemoveZone.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">RemoveZone</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-workingWithZones--%s" class=code-example><pre><code class='java'>withZone(client(), zone -&gt; {
-    withUpdateableShippingMethod(client(), shippingMethod -&gt; {
-        final long count = shippingMethod.getZones().stream().filter(z -&gt; z.hasSameIdAs(zone)).count();
-        assertThat(count).overridingErrorMessage("zone is not used yet").isEqualTo(0);
-
-        //addZone
-        final ShippingMethod shippingMethodWithZone = execute(ShippingMethodUpdateCommand.of(shippingMethod, AddZone.of(zone)));
-        final ZoneRate zoneRate = shippingMethodWithZone.getZoneRates().stream()
-                .filter(rate -&gt; rate.getZone().hasSameIdAs(zone))
-                .findFirst()
-                .get();
-        assertThat(zoneRate.getShippingRates()).isEmpty();
-
-        //addShippingRate
-        final ShippingRate shippingRate = ShippingRate.of(MoneyImpl.of(30, USD));
-        final ShippingMethod shippingMethodWithShippingRate =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithZone, AddShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithShippingRate.getShippingRatesForZone(zone)).isEqualTo(asList(shippingRate));
-
-        //check reference expansion
-        final ShippingMethod loadedShippingMethod = execute(ShippingMethodByIdGet.of(shippingMethod)
-                        .plusExpansionPaths(m -&gt; m.zoneRates().zone())
-        );
-        assertThat(loadedShippingMethod.getZoneRates().get(0).getZone().getObj()).isNotNull();
-        assertThat(loadedShippingMethod.getZones().get(0).getObj())
-                .overridingErrorMessage("the convenience method also has expanded references").isNotNull();
-
-        //removeShippingRate
-        final ShippingMethod shippingMethodWithoutShippingRate =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithShippingRate, RemoveShippingRate.of(shippingRate, zone)));
-        assertThat(shippingMethodWithoutShippingRate.getShippingRatesForZone(zone)).isEmpty();
-
-        //removeZone
-        final ShippingMethod shippingMethodWithoutZone =
-                execute(ShippingMethodUpdateCommand.of(shippingMethodWithoutShippingRate, RemoveZone.of(zone)));
-        assertThat(shippingMethodWithoutZone.getZoneRates()).isEqualTo(shippingMethod.getZoneRates());
-
-        return shippingMethodWithoutZone;
-    });
-}, CountryCode.EA);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Removes a zone.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html#render--">render()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/QueryModelQueryPredicate.html" title="class in io.sphere.sdk.queries">QueryModelQueryPredicate</a></dt>
 <dd>&nbsp;</dd>
@@ -8701,43 +8107,15 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetBillingAddress</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setBillingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-assertThat(cart.getBillingAddress()).isNull();
-final Address address = AddressBuilder.of(DE).build();
-final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddress.of(address)));
-assertThat(cartWithAddress.getBillingAddress()).isEqualTo(address);
-final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(null)));
-assertThat(cartWithoutAddress.getBillingAddress()).isNull();
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the billing address.</div>
 </dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetCartPredicate.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><span class="typeNameLink">SetCartPredicate</span></a> - Class in <a href="io/sphere/sdk/discountcodes/commands/updateactions/package-summary.html">io.sphere.sdk.discountcodes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setCartPredicate--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
-    final String predicateAsString =
-            //you need to change the predicate
-            Optional.ofNullable(discountCode.getCartPredicate()).map(p -&gt; "1 = 1".equals(p)).orElse(false) ? "true = true" : "1 = 1";
-
-    final CartDiscountPredicate cartPredicate = CartDiscountPredicate.of(predicateAsString);
-    final DiscountCode updatedDiscountCode =
-            execute(DiscountCodeUpdateCommand.of(discountCode, SetCartPredicate.of(cartPredicate)));
-    assertThat(updatedDiscountCode.getCartPredicate()).contains(cartPredicate.toSphereCartPredicate());
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the cart predicate.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetCompanyName.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetCompanyName</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
-<div class="block">Sets a new company name for the customer
-
- <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCompanyName--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    assertThat(customer.getCompanyName()).isNull();
-
-    final String companyName = "Big coorp";
-    final Customer updatedCustomer =
-            execute(CustomerUpdateCommand.of(customer, SetCompanyName.of(companyName)));
-
-    assertThat(updatedCustomer.getCompanyName()).isEqualTo(companyName);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets a new company name for the customer.</div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetCountry.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetCountry</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -8745,23 +8123,11 @@ assertThat(cartWithoutAddress.getBillingAddress()).isNull();
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetCustomerEmail</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomerEmail--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-assertThat(cart.getCustomerEmail()).isNull();
-final String email = "info@commercetools.de";
-final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
-assertThat(cartWithEmail.getCustomerEmail()).contains(email);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the customer email.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetCustomerGroup.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetCustomerGroup</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setCustomerGroup--%s" class=code-example><pre><code class='java'>withB2cCustomerGroup(client(), customerGroup -&gt; {
-    withCustomer(client(), customer -&gt; {
-        assertThat(customer.getCustomerGroup()).isNull();
-        final Customer updateCustomer = execute(CustomerUpdateCommand.of(customer, SetCustomerGroup.of(customerGroup)));
-        assertThat(updateCustomer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
-    });
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the customer group for a customer.</div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomerId.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetCustomerId</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -8789,39 +8155,15 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">SetDescription</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final LocalizedString newDescription = randomSlug();
-
-    assertThat(cartDiscount.getDescription()).isNotEqualTo(newDescription);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, SetDescription.of(newDescription)));
-
-    assertThat(updatedDiscount.getDescription()).isEqualTo(newDescription);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the description of the discount.</div>
 </dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><span class="typeNameLink">SetDescription</span></a> - Class in <a href="io/sphere/sdk/discountcodes/commands/updateactions/package-summary.html">io.sphere.sdk.discountcodes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
-    final LocalizedString newDescription = randomSlug();
-    final DiscountCode updatedDiscountCode =
-            execute(DiscountCodeUpdateCommand.of(discountCode, SetDescription.of(newDescription)));
-    assertThat(updatedDiscountCode.getDescription()).isEqualTo(newDescription);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the description.</div>
 </dd>
 <dt><a href="io/sphere/sdk/productdiscounts/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions"><span class="typeNameLink">SetDescription</span></a> - Class in <a href="io/sphere/sdk/productdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.productdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final LocalizedString newDescription = randomSlug();
-
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, SetDescription.of(newDescription)));
-
-    assertThat(updatedDiscount.getDescription()).isEqualTo(newDescription);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the description.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetDescription</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
@@ -8829,15 +8171,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 </dd>
 <dt><a href="io/sphere/sdk/shippingmethods/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.shippingmethods.commands.updateactions"><span class="typeNameLink">SetDescription</span></a> - Class in <a href="io/sphere/sdk/shippingmethods/commands/updateactions/package-summary.html">io.sphere.sdk.shippingmethods.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-shippingmethods-commands-ShippingMethodUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableShippingMethod(client(), shippingMethod -&gt; {
-    final String newDescription = randomString();
-    assertThat(shippingMethod.getDescription()).isNotEqualTo(newDescription);
-    final ShippingMethodUpdateCommand cmd = ShippingMethodUpdateCommand.of(shippingMethod, SetDescription.of(newDescription));
-    final ShippingMethod updatedShippingMethod = execute(cmd);
-    assertThat(updatedShippingMethod.getDescription()).isEqualTo(newDescription);
-    return updatedShippingMethod;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the description.</div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">SetDescription</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>&nbsp;</dd>
@@ -8847,15 +8181,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 </dd>
 <dt><a href="io/sphere/sdk/inventory/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventory.commands.updateactions"><span class="typeNameLink">SetExpectedDelivery</span></a> - Class in <a href="io/sphere/sdk/inventory/commands/updateactions/package-summary.html">io.sphere.sdk.inventory.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryUpdateCommandTest-setExpectedDelivery--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final ZonedDateTime expectedDelivery = SphereTestUtils.now().plus(7, ChronoUnit.DAYS);
-    final UpdateAction&lt;InventoryEntry&gt; action = SetExpectedDelivery.of(expectedDelivery);
-    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getExpectedDelivery())
-            .isEqualTo(expectedDelivery);
-    return updatedEntry;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the expected delivery.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetExternalId.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetExternalId</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
@@ -8865,23 +8191,11 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplications.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><span class="typeNameLink">SetMaxApplications</span></a> - Class in <a href="io/sphere/sdk/discountcodes/commands/updateactions/package-summary.html">io.sphere.sdk.discountcodes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setMaxApplications--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
-    final long maxApplications = randomLong();
-    final DiscountCode updatedDiscountCode =
-            execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplications.of(maxApplications)));
-    assertThat(updatedDiscountCode.getMaxApplications()).isEqualTo(maxApplications);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the maximum applicable number of a discount code.</div>
 </dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetMaxApplicationsPerCustomer.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><span class="typeNameLink">SetMaxApplicationsPerCustomer</span></a> - Class in <a href="io/sphere/sdk/discountcodes/commands/updateactions/package-summary.html">io.sphere.sdk.discountcodes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setMaxApplicationsPerCustomer--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
-    final long maxApplications = randomLong();
-    final DiscountCode updatedDiscountCode =
-            execute(DiscountCodeUpdateCommand.of(discountCode, SetMaxApplicationsPerCustomer.of(maxApplications)));
-    assertThat(updatedDiscountCode.getMaxApplicationsPerCustomer()).isEqualTo(maxApplications);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the maximum number of applicable discount codes per customer.</div>
 </dd>
 <dt><a href="io/sphere/sdk/categories/commands/updateactions/SetMetaDescription.html" title="class in io.sphere.sdk.categories.commands.updateactions"><span class="typeNameLink">SetMetaDescription</span></a> - Class in <a href="io/sphere/sdk/categories/commands/updateactions/package-summary.html">io.sphere.sdk.categories.commands.updateactions</a></dt>
 <dd>
@@ -8909,13 +8223,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 </dd>
 <dt><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetName.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions"><span class="typeNameLink">SetName</span></a> - Class in <a href="io/sphere/sdk/discountcodes/commands/updateactions/package-summary.html">io.sphere.sdk.discountcodes.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-discountcodes-commands-DiscountCodeUpdateCommandTest-setName--%s" class=code-example><pre><code class='java'>withPersistentDiscountCode(client(), discountCode -&gt; {
-    final LocalizedString newName = randomSlug();
-    final DiscountCode updatedDiscountCode =
-            execute(DiscountCodeUpdateCommand.of(discountCode, SetName.of(newName)));
-    assertThat(updatedDiscountCode.getName()).isEqualTo(newName);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the name of the discount code.</div>
 </dd>
 <dt><a href="io/sphere/sdk/states/commands/updateactions/SetName.html" title="class in io.sphere.sdk.states.commands.updateactions"><span class="typeNameLink">SetName</span></a> - Class in <a href="io/sphere/sdk/states/commands/updateactions/package-summary.html">io.sphere.sdk.states.commands.updateactions</a></dt>
 <dd>
@@ -8935,62 +8243,25 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">SetOrderNumber</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setOrderNumber--%s" class=code-example><pre><code class='java'>withOrder(client(), order -&gt; {
-    assertThat(order.getOrderNumber()).isNull();
-    final String orderNumber = randomString();
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, SetOrderNumber.of(orderNumber)));
-    assertThat(updatedOrder.getOrderNumber()).isEqualTo(orderNumber);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the order number.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereException.html#setProjectKey-java.lang.String-">setProjectKey(String)</a></span> - Method in exception io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/inventory/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventory.commands.updateactions"><span class="typeNameLink">SetRestockableInDays</span></a> - Class in <a href="io/sphere/sdk/inventory/commands/updateactions/package-summary.html">io.sphere.sdk.inventory.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryUpdateCommandTest-setRestockableInDays--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final int restockableInDays = Optional.ofNullable(entry.getRestockableInDays()).map(i -&gt; i + 4).orElse(4);
-    final UpdateAction&lt;InventoryEntry&gt; action = SetRestockableInDays.of(restockableInDays);
-    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getRestockableInDays()).isEqualTo(restockableInDays);
-    return updatedEntry;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the restackable in days value.</div>
 </dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnPaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">SetReturnPaymentState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnPaymentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {
-    final ReturnItem returnItem = returnInfo.getItems().get(0);
-    final ReturnPaymentState newPaymentState = ReturnPaymentState.REFUNDED;
-    assertThat(returnItem.getPaymentState()).isNotEqualTo(newPaymentState);
-    final SetReturnPaymentState action = SetReturnPaymentState.of(returnItem, newPaymentState);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-    final ReturnPaymentState updatedPaymentState = updatedOrder.getReturnInfo().get(0).getItems().get(0).getPaymentState();
-    assertThat(updatedPaymentState).isEqualTo(newPaymentState);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the return payment state.</div>
 </dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/SetReturnShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">SetReturnShipmentState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-setReturnShipmentState--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), (order, returnInfo) -&gt; {
-    final ReturnItem returnItem = returnInfo.getItems().get(0);
-    final ReturnShipmentState newShipmentState = ReturnShipmentState.BACK_IN_STOCK;
-    assertThat(returnItem.getShipmentState()).isNotEqualTo(newShipmentState);
-    final SetReturnShipmentState action = SetReturnShipmentState.of(returnItem, newShipmentState);
-    final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-    final ReturnShipmentState updatedReturnItem = updatedOrder.getReturnInfo().get(0).getItems().get(0).getShipmentState();
-    assertThat(updatedReturnItem).isEqualTo(newShipmentState);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the return shipment state.</div>
 </dd>
 <dt><a href="io/sphere/sdk/channels/commands/updateactions/SetRoles.html" title="class in io.sphere.sdk.channels.commands.updateactions"><span class="typeNameLink">SetRoles</span></a> - Class in <a href="io/sphere/sdk/channels/commands/updateactions/package-summary.html">io.sphere.sdk.channels.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-channels-commands-ChannelUpdateCommandTest-setRoles--%s" class=code-example><pre><code class='java'>withUpdatableChannelOfRole(client(), ORDER_IMPORT, channel -&gt; {
-    final Set&lt;ChannelRole&gt; roles = asSet(ORDER_EXPORT, INVENTORY_SUPPLY);
-    final Channel updatedChannel = execute(ChannelUpdateCommand.of(channel, SetRoles.of(roles)));
-    assertThat(updatedChannel.getRoles()).containsOnly(ORDER_EXPORT, INVENTORY_SUPPLY);
-    return updatedChannel;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the roles of a channel.</div>
 </dd>
 <dt><a href="io/sphere/sdk/reviews/commands/updateactions/SetScore.html" title="class in io.sphere.sdk.reviews.commands.updateactions"><span class="typeNameLink">SetScore</span></a> - Class in <a href="io/sphere/sdk/reviews/commands/updateactions/package-summary.html">io.sphere.sdk.reviews.commands.updateactions</a></dt>
 <dd>
@@ -8998,16 +8269,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 </dd>
 <dt><a href="io/sphere/sdk/products/commands/updateactions/SetSearchKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions"><span class="typeNameLink">SetSearchKeywords</span></a> - Class in <a href="io/sphere/sdk/products/commands/updateactions/package-summary.html">io.sphere.sdk.products.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setSearchKeywords--%s" class=code-example><pre><code class='java'>withUpdateableProduct(client(), product -&gt; {
-    final SearchKeywords searchKeywords = SearchKeywords.of(Locale.ENGLISH, asList(SearchKeyword.of("foo bar baz", CustomSuggestTokenizer.of(asList("foo, baz")))));
-    final ProductUpdateCommand command = ProductUpdateCommand.of(product, SetSearchKeywords.of(searchKeywords));
-    final Product updatedProduct = execute(command);
-
-    final SearchKeywords actualKeywords = updatedProduct.getMasterData().getStaged().getSearchKeywords();
-    assertThat(actualKeywords).isEqualTo(searchKeywords);
-    return updatedProduct;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/commands/ProductUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the search keywords for a product.</div>
 </dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetShippingAddress</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
@@ -9066,39 +8328,19 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidFrom.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">SetValidFrom</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setValidFrom--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final ZonedDateTime dateTime = SphereTestUtils.now();
-
-    assertThat(cartDiscount.getValidFrom()).isNotEqualTo(dateTime);
-
-    final List&lt;UpdateAction&lt;CartDiscount&gt;&gt; updateActions =
-            asList(SetValidUntil.of(dateTime.plus(7, ChronoUnit.DAYS)), SetValidFrom.of(dateTime));
-    final CartDiscount updatedDiscount = execute(CartDiscountUpdateCommand.of(cartDiscount, updateActions));
-
-    assertThat(updatedDiscount.getValidFrom()).isEqualTo(dateTime);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets valid from property.</div>
 </dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/commands/updateactions/SetValidUntil.html" title="class in io.sphere.sdk.cartdiscounts.commands.updateactions"><span class="typeNameLink">SetValidUntil</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/commands/updateactions/package-summary.html">io.sphere.sdk.cartdiscounts.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-setValidUntil--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    //until must be after valid from
-    final ZonedDateTime dateTime = dateTimeAfterValidFromAndOldValidUntil(cartDiscount);
-
-    assertThat(cartDiscount.getValidUntil()).isNotEqualTo(dateTime);
-
-    final CartDiscount updatedDiscount =
-            execute(CartDiscountUpdateCommand.of(cartDiscount, SetValidUntil.of(dateTime)));
-
-    assertThat(updatedDiscount.getValidUntil()).isEqualTo(dateTime);
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the valid until property.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customers/commands/updateactions/SetVatId.html" title="class in io.sphere.sdk.customers.commands.updateactions"><span class="typeNameLink">SetVatId</span></a> - Class in <a href="io/sphere/sdk/customers/commands/updateactions/package-summary.html">io.sphere.sdk.customers.commands.updateactions</a></dt>
 <dd>
 <div class="block">Sets a new vat ID for the customer
 
- <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setVatId--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
+  <p>See also <a href="../CustomerUpdateCommand.html">CustomerUpdateCommand</a>.<p>
+
+  <div id="io-sphere-sdk-customers-commands-CustomerUpdateCommandTest-setVatId--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
     assertThat(customer.getVatId()).isNull();
 
     final String vatId = randomString();
@@ -9341,72 +8583,72 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">SphereResources</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
-<div class="block"><table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="3">cartdiscounts</td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html'>CartDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommand.html'>CartDiscountCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html'>CartDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountDeleteCommand.html'>CartDiscountDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html'>CartDiscountUpdateCommand</a></td></tr>
-<tr><td rowspan="3">carts</td><td><a href='../../../..//io/sphere/sdk/carts/queries/CartByIdGet.html'>CartByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartDeleteCommand.html'>CartDeleteCommand</a></td></tr>
+<div class="block"><table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="3">cartdiscounts</td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html'>CartDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html'>CartDiscountUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html'>CartDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommand.html'>CartDiscountCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountDeleteCommand.html'>CartDiscountDeleteCommand</a></td></tr>
+<tr><td rowspan="3">carts</td><td><a href='../../../..//io/sphere/sdk/carts/queries/CartQuery.html'>CartQuery</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartDeleteCommand.html'>CartDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartByIdGet.html'>CartByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartUpdateCommand.html'>CartUpdateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartByCustomerIdGet.html'>CartByCustomerIdGet</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartCreateCommand.html'>CartCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartQuery.html'>CartQuery</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartUpdateCommand.html'>CartUpdateCommand</a></td></tr>
-<tr><td rowspan="3">categories</td><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryQuery.html'>CategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryCreateCommand.html'>CategoryCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryByIdGet.html'>CategoryByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryDeleteCommand.html'>CategoryDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryUpdateCommand.html'>CategoryUpdateCommand</a></td></tr>
+<tr><td rowspan="3">categories</td><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryQuery.html'>CategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryUpdateCommand.html'>CategoryUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryByIdGet.html'>CategoryByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryCreateCommand.html'>CategoryCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryDeleteCommand.html'>CategoryDeleteCommand</a></td></tr>
 <tr><td rowspan="3">channels</td><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelByIdGet.html'>ChannelByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelDeleteCommand.html'>ChannelDeleteCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelQuery.html'>ChannelQuery</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelCreateCommand.html'>ChannelCreateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelUpdateCommand.html'>ChannelUpdateCommand</a></td></tr>
-<tr><td rowspan="3">customergroups</td><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html'>CustomerGroupQuery</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html'>CustomerGroupUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupByIdGet.html'>CustomerGroupByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html'>CustomerGroupCreateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupDeleteCommand.html'>CustomerGroupDeleteCommand</a></td></tr>
-<tr><td rowspan="9">customers</td><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByTokenGet.html'>CustomerByTokenGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerDeleteCommand.html'>CustomerDeleteCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByIdGet.html'>CustomerByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html'>CustomerCreateEmailTokenCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerQuery.html'>CustomerQuery</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateCommand.html'>CustomerCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelQuery.html'>ChannelQuery</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelUpdateCommand.html'>ChannelUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelCreateCommand.html'>ChannelCreateCommand</a></td></tr>
+<tr><td rowspan="3">customergroups</td><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupByIdGet.html'>CustomerGroupByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html'>CustomerGroupUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html'>CustomerGroupQuery</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupDeleteCommand.html'>CustomerGroupDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html'>CustomerGroupCreateCommand</a></td></tr>
+<tr><td rowspan="9">customers</td><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByTokenGet.html'>CustomerByTokenGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html'>CustomerVerifyEmailCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerQuery.html'>CustomerQuery</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html'>CustomerCreateTokenCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByIdGet.html'>CustomerByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerDeleteCommand.html'>CustomerDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html'>CustomerCreateEmailTokenCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html'>CustomerChangePasswordCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html'>CustomerVerifyEmailCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerSignInCommand.html'>CustomerSignInCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html'>CustomerCreateTokenCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html'>CustomerPasswordResetCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerUpdateCommand.html'>CustomerUpdateCommand</a></td></tr>
-<tr><td rowspan="3">customobjects</td><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html'>CustomObjectCustomJsonMappingByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html'>CustomObjectCustomJsonMappingUpsertCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectQuery.html'>CustomObjectQuery</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html'>CustomObjectUpsertCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html'>CustomObjectByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html'>CustomObjectDeleteCommand</a></td></tr>
-<tr><td rowspan="3">discountcodes</td><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html'>DiscountCodeByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html'>DiscountCodeCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html'>DiscountCodeQuery</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html'>DiscountCodeUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerSignInCommand.html'>CustomerSignInCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html'>CustomerPasswordResetCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateCommand.html'>CustomerCreateCommand</a></td></tr>
+<tr><td rowspan="3">customobjects</td><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectQuery.html'>CustomObjectQuery</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html'>CustomObjectUpsertCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html'>CustomObjectCustomJsonMappingByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html'>CustomObjectDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html'>CustomObjectByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html'>CustomObjectCustomJsonMappingUpsertCommand</a></td></tr>
+<tr><td rowspan="3">discountcodes</td><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html'>DiscountCodeQuery</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html'>DiscountCodeUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html'>DiscountCodeByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html'>DiscountCodeCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeDeleteCommand.html'>DiscountCodeDeleteCommand</a></td></tr>
-<tr><td rowspan="3">inventory</td><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryByIdGet.html'>InventoryEntryByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommand.html'>InventoryEntryUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryQuery.html'>InventoryEntryQuery</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryCreateCommand.html'>InventoryEntryCreateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryDeleteCommand.html'>InventoryEntryDeleteCommand</a></td></tr>
-<tr><td rowspan="3">messages</td><td><a href='../../../..//io/sphere/sdk/messages/queries/TypedMessageQuery.html'>TypedMessageQuery</a></td><td></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageQuery.html'>MessageQuery</a></td><td></td></tr>
+<tr><td rowspan="3">inventory</td><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryByIdGet.html'>InventoryEntryByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryCreateCommand.html'>InventoryEntryCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryQuery.html'>InventoryEntryQuery</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryDeleteCommand.html'>InventoryEntryDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommand.html'>InventoryEntryUpdateCommand</a></td></tr>
+<tr><td rowspan="3">messages</td><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageQuery.html'>MessageQuery</a></td><td></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/messages/queries/TypedMessageQuery.html'>TypedMessageQuery</a></td><td></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageByIdGet.html'>MessageByIdGet</a></td><td></td></tr>
 <tr><td rowspan="3">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderQuery.html'>OrderQuery</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderImportCommand.html'>OrderImportCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderByIdGet.html'>OrderByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderUpdateCommand.html'>OrderUpdateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html'>OrderFromCartCreateCommand</a></td></tr>
-<tr><td rowspan="3">productdiscounts</td><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountByIdGet.html'>ProductDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommand.html'>ProductDiscountUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountQuery.html'>ProductDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommand.html'>ProductDiscountCreateCommand</a></td></tr>
+<tr><td rowspan="3">productdiscounts</td><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountQuery.html'>ProductDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommand.html'>ProductDiscountUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountByIdGet.html'>ProductDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommand.html'>ProductDiscountCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountDeleteCommand.html'>ProductDiscountDeleteCommand</a></td></tr>
-<tr><td rowspan="5">products</td><td><a href='../../../..//io/sphere/sdk/products/queries/ProductByIdGet.html'>ProductByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
+<tr><td rowspan="5">products</td><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteCommand.html'>ProductDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionByIdGet.html'>ProductProjectionByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteCommand.html'>ProductDeleteCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductByIdGet.html'>ProductByIdGet</a></td><td></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/products/search/ProductProjectionSearch.html'>ProductProjectionSearch</a></td><td></td></tr>
-<tr><td rowspan="3">producttypes</td><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeQuery.html'>ProductTypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html'>ProductTypeDeleteCommand</a></td></tr>
+<tr><td rowspan="3">producttypes</td><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeQuery.html'>ProductTypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html'>ProductTypeDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html'>ProductTypeUpdateCommand</a></td></tr>
 <tr><td rowspan="1">projects</td><td><a href='../../../..//io/sphere/sdk/projects/queries/ProjectGet.html'>ProjectGet</a></td><td></td></tr>
-<tr><td rowspan="3">reviews</td><td><a href='../../../..//io/sphere/sdk/reviews/queries/ReviewQuery.html'>ReviewQuery</a></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html'>ReviewDeleteCommand</a></td></tr>
+<tr><td rowspan="3">reviews</td><td><a href='../../../..//io/sphere/sdk/reviews/queries/ReviewQuery.html'>ReviewQuery</a></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewCreateCommand.html'>ReviewCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html'>ReviewUpdateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewCreateCommand.html'>ReviewCreateCommand</a></td></tr>
-<tr><td rowspan="4">shippingmethods</td><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdGet.html'>ShippingMethodByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html'>ShippingMethodUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html'>ShippingMethodsByLocationGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html'>ShippingMethodCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html'>ShippingMethodQuery</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodDeleteCommand.html'>ShippingMethodDeleteCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByCartGet.html'>ShippingMethodsByCartGet</a></td><td></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html'>ReviewDeleteCommand</a></td></tr>
+<tr><td rowspan="4">shippingmethods</td><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdGet.html'>ShippingMethodByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodDeleteCommand.html'>ShippingMethodDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByCartGet.html'>ShippingMethodsByCartGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html'>ShippingMethodCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html'>ShippingMethodQuery</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html'>ShippingMethodUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html'>ShippingMethodsByLocationGet</a></td><td></td></tr>
 <tr><td rowspan="3">states</td><td><a href='../../../..//io/sphere/sdk/states/queries/StateByIdGet.html'>StateByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateCreateCommand.html'>StateCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/states/queries/StateQuery.html'>StateQuery</a></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateDeleteCommand.html'>StateDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateUpdateCommand.html'>StateUpdateCommand</a></td></tr>
-<tr><td rowspan="2">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html'>TaxCategoryDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
-<tr><td rowspan="3">zones</td><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneByIdGet.html'>ZoneByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneCreateCommand.html'>ZoneCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneQuery.html'>ZoneQuery</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneDeleteCommand.html'>ZoneDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneUpdateCommand.html'>ZoneUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/states/queries/StateQuery.html'>StateQuery</a></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateUpdateCommand.html'>StateUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateDeleteCommand.html'>StateDeleteCommand</a></td></tr>
+<tr><td rowspan="2">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html'>TaxCategoryDeleteCommand</a></td></tr>
+<tr><td rowspan="3">zones</td><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneQuery.html'>ZoneQuery</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneDeleteCommand.html'>ZoneDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneByIdGet.html'>ZoneByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneUpdateCommand.html'>ZoneUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneCreateCommand.html'>ZoneCreateCommand</a></td></tr>
 </table></div>
 </dd>
 <dt><a href="io/sphere/sdk/search/SphereSearchSort.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">SphereSearchSort</span></a>&lt;<a href="io/sphere/sdk/search/SphereSearchSort.html" title="type parameter in SphereSearchSort">T</a>&gt; - Class in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
@@ -9819,21 +9061,15 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">TransitionCustomLineItemState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionCustomLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
-    withOrderOfCustomLineItems(client(), order -&gt; {
-        final CustomLineItem customLineItem = order.getCustomLineItems().get(0);
-        assertThat(customLineItem).containsState(initialState).containsNotState(nextState);
-        final long quantity = 1;
-        final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionCustomLineItemState.of(customLineItem, quantity, initialState, nextState, actualTransitionDate)));
-        assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
-    })
-);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Change the state of a Custom Line Item according to allowed transitions.</div>
 </dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">TransitionLineItemState</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
+<div class="block">Change the state of a Line Item according to allowed transitions
+
+ <p>See also <a href="../OrderUpdateCommand.html">OrderUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
                 withOrder(client(), order -&gt; {
                     final LineItem lineItem = order.getLineItems().get(0);
                     assertThat(lineItem).containsState(initialState).containsNotState(nextState);
@@ -10055,21 +9291,7 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">UpdateSyncInfo</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
-<div class="block"><div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-updateSyncInfo--%s" class=code-example><pre><code class='java'>withOrderExportChannel(client(), channel -&gt;
-    withOrder(client(), order -&gt; {
-        assertThat(order.getSyncInfo()).isEmpty();
-        final ZonedDateTime aDateInThePast = ZonedDateTime_IN_PAST;
-        final String externalId = "foo";
-        final UpdateSyncInfo action = UpdateSyncInfo.of(channel).withExternalId(externalId).withSyncedAt(aDateInThePast);
-        final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
-        assertThat(updatedOrder.getSyncInfo()).containsOnly(SyncInfo.of(channel, aDateInThePast, externalId));
-
-        //check channel expansion
-        final Order loadedOrder = execute(OrderByIdGet.of(order).withExpansionPaths(m -&gt; m.syncInfo().channel()));
-        assertThat(new ArrayList&lt;&gt;(loadedOrder.getSyncInfo()).get(0).getChannel().getObj()).isNotNull();
-    })
-);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Updates the synchronization info.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/UrlUtils.html#urlEncode-java.lang.String-">urlEncode(String)</a></span> - Static method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/UrlUtils.html" title="class in io.sphere.sdk.http">UrlUtils</a></dt>
 <dd>

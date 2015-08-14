@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</pre>
 <div class="block">Sets a concrete parent for the category.
 
+ <p>See also <a href="../CategoryUpdateCommand.html">CategoryUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-categories-commands-CategoryUpdateCommandTest-changeParent--%s" class=code-example><pre><code class='java'>withCategory(client(), categoryA -&gt;
     withCategory(client(), categoryB -&gt; {
         assertThat(categoryA.getParent()).isNull();

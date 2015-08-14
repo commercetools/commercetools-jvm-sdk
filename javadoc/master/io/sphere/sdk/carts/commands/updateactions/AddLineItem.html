@@ -125,9 +125,11 @@ var activeTableTab = "activeTableTab";
 <pre>public class <span class="typeNameLabel">AddLineItem</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;</pre>
 <div class="block">Adds a product variant in the given quantity to the cart.
- If the cart already contains the product variant then only the line item quantity is increased.
+    If the cart already contains the product variant then only the line item quantity is increased.
 
- <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addLineItem--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct(client(), (cart, product) -&gt; {
+    <p>See also <a href="../CartUpdateCommand.html">CartUpdateCommand</a>.<p>
+
+    <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addLineItem--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct(client(), (cart, product) -&gt; {
     assertThat(cart.getLineItems()).hasSize(0);
     final long quantity = 3;
     final String productId = product.getId();

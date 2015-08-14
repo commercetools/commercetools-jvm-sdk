@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;</pre>
 <div class="block">Changes the name of the customer group.
 
+ <p>See also <a href="../CustomerGroupUpdateCommand.html">CustomerGroupUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-customergroups-commands-CustomerGroupUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withCustomerGroup(client(), customerGroup -&gt; {
     final String newName = randomString();
     assertThat(customerGroup.getName()).isNotEqualTo(newName);

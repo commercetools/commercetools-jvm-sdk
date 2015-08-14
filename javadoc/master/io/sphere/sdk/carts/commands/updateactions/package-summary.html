@@ -94,19 +94,7 @@
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddDiscountCode</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-removeDiscountCode--%s" class=code-example><pre><code class='java'>withCartAndDiscountCode(client(), (cart, discountCode) -&gt; {
-    //addDiscountCode
-    final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
-    final DiscountCodeInfo discountCodeInfo = cartWithCode.getDiscountCodes().get(0);
-    assertThat(discountCodeInfo.getDiscountCode()).isEqualTo(discountCode.toReference());
-
-    //removeDiscountCode
-    final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
-    assertThat(updatedCart.getDiscountCodes()).isEmpty();
-
-    return updatedCart;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds a discount code to the cart.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -136,19 +124,7 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/RemoveDiscountCode.html" title="class in io.sphere.sdk.carts.commands.updateactions">RemoveDiscountCode</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-removeDiscountCode--%s" class=code-example><pre><code class='java'>withCartAndDiscountCode(client(), (cart, discountCode) -&gt; {
-    //addDiscountCode
-    final Cart cartWithCode = execute(CartUpdateCommand.of(cart, AddDiscountCode.of(discountCode)));
-    final DiscountCodeInfo discountCodeInfo = cartWithCode.getDiscountCodes().get(0);
-    assertThat(discountCodeInfo.getDiscountCode()).isEqualTo(discountCode.toReference());
-
-    //removeDiscountCode
-    final Cart updatedCart = execute(CartUpdateCommand.of(cartWithCode, RemoveDiscountCode.of(discountCode)));
-    assertThat(updatedCart.getDiscountCodes()).isEmpty();
-
-    return updatedCart;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Removes a discount code.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -160,14 +136,7 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetBillingAddress</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setBillingAddress--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-assertThat(cart.getBillingAddress()).isNull();
-final Address address = AddressBuilder.of(DE).build();
-final Cart cartWithAddress = execute(CartUpdateCommand.of(cart, SetBillingAddress.of(address)));
-assertThat(cartWithAddress.getBillingAddress()).isEqualTo(address);
-final Cart cartWithoutAddress = execute(CartUpdateCommand.of(cartWithAddress, SetBillingAddress.of(null)));
-assertThat(cartWithoutAddress.getBillingAddress()).isNull();
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the billing address.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -179,12 +148,7 @@ assertThat(cartWithoutAddress.getBillingAddress()).isNull();
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/SetCustomerEmail.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomerEmail</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-setCustomerEmail--%s" class=code-example><pre><code class='java'>final Cart cart = createCartWithCountry(client());
-assertThat(cart.getCustomerEmail()).isNull();
-final String email = "info@commercetools.de";
-final Cart cartWithEmail = execute(CartUpdateCommand.of(cart, SetCustomerEmail.of(email)));
-assertThat(cartWithEmail.getCustomerEmail()).contains(email);
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the customer email.</div>
 </td>
 </tr>
 <tr class="rowColor">

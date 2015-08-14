@@ -128,6 +128,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
  Also deletes it from the Content Delivery Network (it would not be deleted from the CDN in case of external image).
  Deletion from the CDN is not instant, which means the image file itself will stay available for some time after the deletion.
 
+ <p>See also <a href="../ProductUpdateCommand.html">ProductUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-removeImage--%s" class=code-example><pre><code class='java'>final Image image = Image.ofWidthAndHeight("http://www.commercetools.com/assets/img/ct_logo_farbe.gif", 460, 102, "commercetools logo");
 withUpdateableProduct(client(), product -&gt; {
     final Product productWithImage = client().execute(ProductUpdateCommand.of(product, AddExternalImage.of(image, MASTER_VARIANT_ID)));

@@ -84,89 +84,37 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangeIsActive.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions">ChangeIsActive</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeIsActive--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final boolean newIsActive = !discount.isActive();
-
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeIsActive.of(newIsActive)));
-
-    assertThat(updatedDiscount.isActive()).isEqualTo(newIsActive);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Enables or disables the discount.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions">ChangeName</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final LocalizedString newName = randomSlug();
-
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeName.of(newName)));
-
-    assertThat(updatedDiscount.getName()).isEqualTo(newName);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the  name.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangePredicate.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions">ChangePredicate</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changePredicate--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final String predicateAsString = "sku = \"AB-12\"";
-    final ProductDiscountPredicate predicate = ProductDiscountPredicate
-            .of(predicateAsString);
-
-    final ProductDiscount updatedDiscount = execute(
-            ProductDiscountUpdateCommand.of(discount, ChangePredicate.of(predicate)));
-
-    final String updatedPredicate = updatedDiscount.getPredicate();
-    assertThat(updatedPredicate).isEqualTo(predicateAsString);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the predicate of a discount.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangeSortOrder.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions">ChangeSortOrder</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeSortOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final String newSortOrder = randomSortOrder();
-
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeSortOrder.of(newSortOrder)));
-
-    assertThat(updatedDiscount.getSortOrder()).isEqualTo(newSortOrder);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the sort order of a discount.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/ChangeValue.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions">ChangeValue</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeValue--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final ProductDiscountValue productDiscountValue = AbsoluteProductDiscountValue.of(EURO_30);
-
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeValue.of(productDiscountValue)));
-
-    assertThat(updatedDiscount.getValue()).isEqualTo(productDiscountValue);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the value of the discount.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/productdiscounts/commands/updateactions/SetDescription.html" title="class in io.sphere.sdk.productdiscounts.commands.updateactions">SetDescription</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
-    final LocalizedString newDescription = randomSlug();
-
-    final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, SetDescription.of(newDescription)));
-
-    assertThat(updatedDiscount.getDescription()).isEqualTo(newDescription);
-    return updatedDiscount;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the description.</div>
 </td>
 </tr>
 </tbody>

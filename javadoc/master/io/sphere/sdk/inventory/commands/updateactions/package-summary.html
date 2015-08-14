@@ -88,66 +88,31 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/inventory/commands/updateactions/AddQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions">AddQuantity</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryUpdateCommandTest-addQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final long additionalQuantity = 4;
-    final UpdateAction&lt;InventoryEntry&gt; action = AddQuantity.of(additionalQuantity);
-    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() + additionalQuantity);
-    return updatedEntry;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Adds items to the stock.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/inventory/commands/updateactions/ChangeQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions">ChangeQuantity</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryUpdateCommandTest-changeQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final UpdateAction&lt;InventoryEntry&gt; action = ChangeQuantity.of(5000);
-    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(5000);
-    return updatedEntry;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Changes the absolute quantity.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/inventory/commands/updateactions/RemoveQuantity.html" title="class in io.sphere.sdk.inventory.commands.updateactions">RemoveQuantity</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryUpdateCommandTest-removeQuantity--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final long removingQuantity = 4;
-    final UpdateAction&lt;InventoryEntry&gt; action = RemoveQuantity.of(removingQuantity);
-    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getQuantityOnStock()).isEqualTo(entry.getQuantityOnStock() - removingQuantity);
-    return updatedEntry;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Subtracts quantity from the stock.</div>
 </td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/inventory/commands/updateactions/SetExpectedDelivery.html" title="class in io.sphere.sdk.inventory.commands.updateactions">SetExpectedDelivery</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryUpdateCommandTest-setExpectedDelivery--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final ZonedDateTime expectedDelivery = SphereTestUtils.now().plus(7, ChronoUnit.DAYS);
-    final UpdateAction&lt;InventoryEntry&gt; action = SetExpectedDelivery.of(expectedDelivery);
-    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getExpectedDelivery())
-            .isEqualTo(expectedDelivery);
-    return updatedEntry;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the expected delivery.</div>
 </td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/inventory/commands/updateactions/SetRestockableInDays.html" title="class in io.sphere.sdk.inventory.commands.updateactions">SetRestockableInDays</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-inventory-commands-InventoryEntryUpdateCommandTest-setRestockableInDays--%s" class=code-example><pre><code class='java'>withUpdateableInventoryEntry(client(), entry -&gt; {
-    final int restockableInDays = Optional.ofNullable(entry.getRestockableInDays()).map(i -&gt; i + 4).orElse(4);
-    final UpdateAction&lt;InventoryEntry&gt; action = SetRestockableInDays.of(restockableInDays);
-    final InventoryEntry updatedEntry = execute(InventoryEntryUpdateCommand.of(entry, action));
-    assertThat(updatedEntry.getRestockableInDays()).isEqualTo(restockableInDays);
-    return updatedEntry;
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Sets the restackable in days value.</div>
 </td>
 </tr>
 </tbody>

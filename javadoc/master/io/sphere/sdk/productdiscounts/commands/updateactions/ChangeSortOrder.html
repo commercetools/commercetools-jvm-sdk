@@ -124,7 +124,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">ChangeSortOrder</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscount</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeSortOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
+<div class="block">Changes the sort order of a discount.
+
+ <p>See also <a href="../ProductDiscountUpdateCommand.html">ProductDiscountUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-productdiscounts-commands-ProductDiscountUpdateCommandTest-changeSortOrder--%s" class=code-example><pre><code class='java'>withUpdateableProductDiscount(client(), discount -&gt; {
     final String newSortOrder = randomSortOrder();
 
     final ProductDiscount updatedDiscount = execute(ProductDiscountUpdateCommand.of(discount, ChangeSortOrder.of(newSortOrder)));

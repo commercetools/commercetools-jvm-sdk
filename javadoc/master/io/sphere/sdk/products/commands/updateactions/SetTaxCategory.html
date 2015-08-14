@@ -126,6 +126,8 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a>&gt;</pre>
 <div class="block">Adds, changes or removes a product's tax category. This change can never be staged and is thus immediately visible in published products.
 
+ <p>See also <a href="../ProductUpdateCommand.html">ProductUpdateCommand</a>.<p>
+
  <div id="io-sphere-sdk-products-commands-ProductUpdateCommandTest-setTaxCategory--%s" class=code-example><pre><code class='java'>TaxCategoryFixtures.withTransientTaxCategory(client(), taxCategory -&gt;
     withUpdateableProduct(client(), product -&gt; {
         assertThat(product.getTaxCategory()).isNotEqualTo(taxCategory);
