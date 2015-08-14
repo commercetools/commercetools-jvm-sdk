@@ -9,7 +9,7 @@ public final class TaxRateBuilder implements Builder<TaxRate> {
     @Nullable
     private String id;
     private final String name;
-    private final Double amount;
+    private Double amount;
     private final boolean includedInPrice;
     private final CountryCode country;
     @Nullable
@@ -36,8 +36,18 @@ public final class TaxRateBuilder implements Builder<TaxRate> {
         return this;
     }
 
+    public TaxRateBuilder amount(final double amount) {
+        this.amount = amount;
+        return this;
+    }
+
     @Override
     public TaxRate build() {
         return new TaxRateImpl(id, name, amount, includedInPrice, country, state);
+    }
+
+    public static TaxRateBuilder of(final TaxRate template) {
+        return of(template.getName(), template.getAmount(), template.isIncludedInPrice(), template.getCountry()).id(template.getId()).state(template.getState());
+
     }
 }

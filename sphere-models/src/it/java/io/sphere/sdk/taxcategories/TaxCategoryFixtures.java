@@ -11,6 +11,7 @@ import io.sphere.sdk.taxcategories.queries.TaxCategoryQueryModel;
 
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 import static java.util.Arrays.asList;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -56,5 +57,14 @@ public final class TaxCategoryFixtures {
         final TaxCategory taxCategory = client.execute(TaxCategoryCreateCommand.of(draft));
         user.accept(taxCategory);
         client.execute(TaxCategoryDeleteCommand.of(taxCategory));
+    }
+
+    public static void withUpdateableTaxCategory(final TestClient client, final UnaryOperator<TaxCategory> user) {
+        final TaxCategoryDraft draft = TaxCategoryDraft.of(randomKey(), asList(TaxRateBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
+        final PagedQueryResult<TaxCategory> results = client.execute(TaxCategoryQuery.of().byName(draft.getName()));
+        results.getResults().forEach(tc -> client.execute(TaxCategoryDeleteCommand.of(tc)));
+        final TaxCategory taxCategory = client.execute(TaxCategoryCreateCommand.of(draft));
+        final TaxCategory updated = user.apply(taxCategory);
+        client.execute(TaxCategoryDeleteCommand.of(updated));
     }
 }
