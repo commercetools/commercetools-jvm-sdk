@@ -4,6 +4,9 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
+  Sets the customer email.
+
+ {@doc.gen intro}
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCustomerEmail()}
  */

@@ -5,6 +5,10 @@ import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
+ * Changes the property if the discount requires a discount code.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeRequiresDiscountCode()}
  */
 public class ChangeRequiresDiscountCode extends UpdateActionImpl<CartDiscount> {

@@ -8,6 +8,10 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
 /**
  *
+ * Changes the tax category.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#changeTaxCategory()}
  */
 public class ChangeTaxCategory extends UpdateActionImpl<ShippingMethod> {

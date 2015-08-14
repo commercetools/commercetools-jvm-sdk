@@ -5,6 +5,10 @@ import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.productdiscounts.ProductDiscountValue;
 
 /**
+ * Changes the value of the discount.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changeValue()}
  */
 public class ChangeValue extends UpdateActionImpl<ProductDiscount> {

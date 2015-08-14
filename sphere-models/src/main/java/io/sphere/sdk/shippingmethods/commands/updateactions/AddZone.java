@@ -7,6 +7,9 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
 import io.sphere.sdk.zones.Zone;
 
 /**
+ * Adds a zone.
+ *
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#workingWithZones()}
  */

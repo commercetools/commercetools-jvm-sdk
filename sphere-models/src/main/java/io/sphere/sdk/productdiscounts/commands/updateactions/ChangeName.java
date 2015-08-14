@@ -6,6 +6,10 @@ import io.sphere.sdk.productdiscounts.ProductDiscount;
 
 
 /**
+ Changes the  name.
+
+ {@doc.gen intro}
+
  {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changeName()}
 
  */

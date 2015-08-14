@@ -9,6 +9,8 @@ import javax.annotation.Nullable;
 /**
  * Sets the SEO attribute title.
  *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#setMetaTitle()}
  */
 public class SetMetaTitle extends UpdateActionImpl<Category> {

@@ -8,6 +8,9 @@ import javax.annotation.Nullable;
 
 /**
  * Sets the SEO attribute keywords.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#setMetaKeywords()}
  */
 public class SetMetaKeywords extends UpdateActionImpl<Category> {

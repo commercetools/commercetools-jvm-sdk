@@ -6,6 +6,8 @@ import io.sphere.sdk.customers.Customer;
 /**
  * Sets a string that uniquely identifies a customer. It can be used to create more human-readable (in contrast to ID) identifier for the customer.
  *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setCustomerNumber()}
  */
 public class SetCustomerNumber extends UpdateActionImpl<Customer> {

@@ -10,6 +10,8 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 /**
  Sets a custom shipping method (independent of the shipping methods defined in the project). The custom shipping method can be unset with the setShippingMethod action without the shippingMethod.
 
+ {@doc.gen intro}
+
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCustomShippingMethod()}
  */
 public class SetCustomShippingMethod extends UpdateActionImpl<Cart> {

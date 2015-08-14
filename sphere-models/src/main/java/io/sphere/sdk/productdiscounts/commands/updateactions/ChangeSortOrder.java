@@ -4,6 +4,10 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 
 /**
+ * Changes the sort order of a discount.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changeSortOrder()}
  */
 public class ChangeSortOrder extends UpdateActionImpl<ProductDiscount> {

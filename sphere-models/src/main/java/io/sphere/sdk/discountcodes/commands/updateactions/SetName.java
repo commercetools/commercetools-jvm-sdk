@@ -7,6 +7,10 @@ import io.sphere.sdk.models.LocalizedString;
 import javax.annotation.Nullable;
 
 /**
+ * Sets the name of the discount code.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setName()}
  */
 public class SetName extends UpdateActionImpl<DiscountCode> {

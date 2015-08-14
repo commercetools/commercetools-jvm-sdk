@@ -3,11 +3,15 @@ package io.sphere.sdk.orders.commands.updateactions;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.orders.DeliveryItem;
 import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.orders.ParcelDraft;
 
 import java.util.Collections;
 import java.util.List;
 
 /**
+ Adds a delivery.
+
+ {@doc.gen intro}
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addDelivery()}
  */

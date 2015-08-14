@@ -7,6 +7,8 @@ import io.sphere.sdk.products.Product;
 /**
  * Updates the slug of a product.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changeSlug()}
  */
 public class ChangeSlug extends UpdateActionImpl<Product> {

@@ -143,6 +143,8 @@ public class DocumentationTaglet implements Taglet {
             final String relativePathFile = columns[2];
             final String content = new String(Files.readAllBytes(Paths.get(relativePathFile)));
             result = content;
+        } else if (isIntro(tag)) {
+            result = renderIntro(tag);
         }
 
         //final String s = String.format("firstSentenceTags() %s\n<br>holder() %s\n<br>inlineTags() %s\n<br>kind() %s\n<br>position() %s\n<br>text()\n<br> %s\n<br>toS %s", Arrays.toString(tag.firstSentenceTags()), tag.holder(), Arrays.toString(tag.inlineTags()), tag.kind(), tag.position(), tag.text(), tag.toString());
@@ -150,6 +152,26 @@ public class DocumentationTaglet implements Taglet {
             throw new RuntimeException(tag.name() + " is not prepared to be used here: " + tag.position());
         }
         return result;
+    }
+
+    private String renderIntro(final Tag tag) {
+        final File updateActionFile = tag.position().file();
+        if (isUpdateActionIntro(tag)) {
+            final File updateCommand = updateActionFile.getParentFile().getParentFile().listFiles((dir, fileName) -> fileName.endsWith("UpdateCommand.java"))[0];
+            final String updateCommandClassName = updateCommand.getName().replace(".java", "");
+            final String entityName = updateCommandClassName.replace("UpdateCommand", "");
+            return format("<p>See also <a href=\"../%s.html\">%s</a>.<p>", updateCommandClassName, updateCommandClassName);
+        } else {
+            return null;
+        }
+    }
+
+    private boolean isUpdateActionIntro(final Tag tag) {
+        return "updateactions".equals(getLastPackageName(tag));
+    }
+
+    private boolean isIntro(final Tag tag) {
+        return tag.text().startsWith("intro");
     }
 
     private boolean isFileInclude(final Tag tag) {

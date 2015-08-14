@@ -5,7 +5,11 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.discountcodes.DiscountCode;
 
 /**
- * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeDiscountCode()}
+ * Adds a discount code to the cart.
+ *
+ *  {@doc.gen intro}
+ *
+ *  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeDiscountCode()}
  */
 public class AddDiscountCode extends UpdateActionImpl<Cart> {
     private final String code;

@@ -10,6 +10,8 @@ import java.util.Set;
 /**
  * These import of states does not follow any predefined rules and should be only used if no transitions are defined.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#importCustomLineItemState()}
  */
 public class ImportCustomLineItemState extends UpdateActionImpl<Order> {

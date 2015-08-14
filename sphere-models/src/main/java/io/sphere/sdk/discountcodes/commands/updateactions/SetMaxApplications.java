@@ -6,6 +6,10 @@ import io.sphere.sdk.discountcodes.DiscountCode;
 import javax.annotation.Nullable;
 
 /**
+ * Sets the maximum applicable number of a discount code.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setMaxApplications()}
  */
 public class SetMaxApplications extends UpdateActionImpl<DiscountCode> {

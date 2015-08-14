@@ -5,6 +5,11 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 
 /**
+ *
+ * Changes the name of a channel.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#changeName()}
  */
 public class ChangeName extends UpdateActionImpl<Channel> {

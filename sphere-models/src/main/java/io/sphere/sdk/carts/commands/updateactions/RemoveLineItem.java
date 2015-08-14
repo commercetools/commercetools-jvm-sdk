@@ -9,6 +9,8 @@ import javax.annotation.Nullable;
 /**
  Decreases the quantity of the given line item. If after the update the quantity of the line item is not greater than 0 or the quantity is not specified, the line item is removed from the cart.
 
+ {@doc.gen intro}
+
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeLineItem()}
  */
 public class RemoveLineItem extends UpdateActionImpl<Cart> {

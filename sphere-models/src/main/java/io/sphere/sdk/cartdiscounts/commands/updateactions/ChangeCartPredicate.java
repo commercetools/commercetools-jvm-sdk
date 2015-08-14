@@ -5,6 +5,10 @@ import io.sphere.sdk.cartdiscounts.CartDiscountPredicate;
 import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
+ * Changes the cart predicate.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeCartPredicate()}
  */
 public class ChangeCartPredicate extends UpdateActionImpl<CartDiscount> {

@@ -10,7 +10,9 @@ import java.util.Optional;
 
 /**
  <p>Sets an existing customer ID for a cart.</p>
- The customer ID can be unset by calling {@link SetCustomerId#of(String)} with {@link java.util.Optional#empty()}.
+ The customer ID can be unset by calling {@link SetCustomerId#of(String)} with {@code null}.
+
+ {@doc.gen intro}
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCustomerId()}
  */

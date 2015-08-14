@@ -9,6 +9,10 @@ import io.sphere.sdk.states.State;
 import java.time.ZonedDateTime;
 
 /**
+ * Change the state of a Line Item according to allowed transitions
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#transitionLineItemState()}
  */
 public class TransitionLineItemState extends TransitionLineItemLikeState {

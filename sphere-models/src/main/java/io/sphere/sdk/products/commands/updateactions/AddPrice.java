@@ -7,6 +7,8 @@ import io.sphere.sdk.products.Product;
 /**
  * Adds the given price to the product variant's prices set. It is rejected if the product already contains a price with the same price scope (same currency, country, customer group and channel).
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addPrice()}
  */
 public class AddPrice extends UpdateActionImpl<Product> {

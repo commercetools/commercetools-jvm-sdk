@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 /**
  * Updates the text of a review.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setText()}
  */
 public class SetText extends UpdateActionImpl<Review> {

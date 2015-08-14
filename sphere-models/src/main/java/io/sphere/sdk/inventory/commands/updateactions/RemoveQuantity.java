@@ -4,6 +4,9 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.inventory.InventoryEntry;
 
 /**
+ * Subtracts quantity from the stock.
+ *
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#removeQuantity()}
  */

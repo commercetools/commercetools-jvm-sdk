@@ -5,6 +5,10 @@ import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.producttypes.ProductType;
 
 /**
+ * Adds an enum value to an enum attribute definition.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addEnumValue()}
  */
 public class AddEnumValue extends UpdateActionImpl<ProductType> {

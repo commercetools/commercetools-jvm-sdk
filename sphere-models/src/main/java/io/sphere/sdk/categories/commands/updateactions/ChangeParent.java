@@ -8,6 +8,8 @@ import io.sphere.sdk.models.Referenceable;
 /**
  Sets a concrete parent for the category.
 
+ {@doc.gen intro}
+
  {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#changeParent()}
  */
 public class ChangeParent extends UpdateActionImpl<Category> {

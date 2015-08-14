@@ -7,6 +7,10 @@ import io.sphere.sdk.producttypes.ProductType;
 import java.util.List;
 
 /**
+ * Changes the localized enum value order.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeLocalizedEnumValueOrder()}
  */
 public class ChangeLocalizedEnumValueOrder extends UpdateActionImpl<ProductType> {

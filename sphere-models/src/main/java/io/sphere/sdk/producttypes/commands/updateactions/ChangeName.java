@@ -4,6 +4,9 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.producttypes.ProductType;
 
 /**
+ * Changes the  name of a product type.
+ *
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeName()}
  */

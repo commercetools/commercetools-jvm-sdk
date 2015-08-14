@@ -7,6 +7,10 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 /**
+ * Sets valid from property.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#setValidFrom()}
  */
 public class SetValidFrom extends UpdateActionImpl<CartDiscount> {

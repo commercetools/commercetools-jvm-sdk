@@ -9,6 +9,8 @@ import java.util.Optional;
 /**
  * Updates the score of a review.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.reviews.commands.ReviewUpdateCommandTest#setScore()}
  */
 public class SetScore extends UpdateActionImpl<Review> {

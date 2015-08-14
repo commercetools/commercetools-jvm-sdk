@@ -7,6 +7,9 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 /**
+ * Sets the expected delivery.
+ *
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#setExpectedDelivery()}
  */

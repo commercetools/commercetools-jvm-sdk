@@ -6,6 +6,9 @@ import io.sphere.sdk.inventory.InventoryEntry;
 import javax.annotation.Nullable;
 
 /**
+ * Sets the restackable in days value.
+ * 
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.inventory.commands.InventoryEntryUpdateCommandTest#setRestockableInDays()}
  */

@@ -4,6 +4,9 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
 /**
+ * Changes the name.
+ *
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#changeName()}
  */

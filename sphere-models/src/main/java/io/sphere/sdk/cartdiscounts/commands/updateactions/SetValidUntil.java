@@ -7,6 +7,10 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 /**
+ * Sets the valid until property.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#setValidUntil()}
  */
 public class SetValidUntil extends UpdateActionImpl<CartDiscount> {

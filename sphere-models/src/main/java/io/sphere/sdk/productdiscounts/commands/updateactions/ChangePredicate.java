@@ -5,6 +5,10 @@ import io.sphere.sdk.productdiscounts.ProductDiscount;
 import io.sphere.sdk.productdiscounts.ProductDiscountPredicate;
 
 /**
+ * Changes the predicate of a discount.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changePredicate()}
  */
 public class ChangePredicate extends UpdateActionImpl<ProductDiscount> {

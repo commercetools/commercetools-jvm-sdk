@@ -11,6 +11,8 @@ import static java.lang.String.format;
 /**
  * Sets the default billing address from the customer's addresses.
  *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDefaultBillingAddress()}
  */
 public class SetDefaultBillingAddress extends UpdateActionImpl<Customer> {

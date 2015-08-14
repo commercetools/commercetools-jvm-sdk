@@ -5,6 +5,10 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 
 /**
+ * Changes the description of a channel.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#changeDescription()}
  */
 public class ChangeDescription extends UpdateActionImpl<Channel> {

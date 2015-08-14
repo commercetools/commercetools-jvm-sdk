@@ -6,6 +6,9 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
 import javax.annotation.Nullable;
 
 /**
+ * Sets the description.
+ *
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#setDescription()}
  */

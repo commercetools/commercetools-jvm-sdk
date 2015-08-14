@@ -10,6 +10,9 @@ import javax.annotation.Nullable;
 
 /**
  * Adds/Removes/Changes a custom attribute.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setAttribute()}
  *
  * @see SetAttributeInAllVariants

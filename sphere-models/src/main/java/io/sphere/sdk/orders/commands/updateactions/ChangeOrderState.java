@@ -5,6 +5,9 @@ import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderState;
 
 /**
+ Changes the order state.
+
+ {@doc.gen intro}
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#changeOrderState()}
  */

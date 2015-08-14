@@ -10,6 +10,9 @@ import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
 
 /**
+ Updates the synchronization info.
+
+ {@doc.gen intro}
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#updateSyncInfo()}
  */

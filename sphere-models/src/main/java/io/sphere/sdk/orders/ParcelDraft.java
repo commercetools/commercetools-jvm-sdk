@@ -1,8 +1,6 @@
-package io.sphere.sdk.orders.commands.updateactions;
+package io.sphere.sdk.orders;
 
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.orders.ParcelMeasurements;
-import io.sphere.sdk.orders.TrackingData;
 
 import javax.annotation.Nullable;
 

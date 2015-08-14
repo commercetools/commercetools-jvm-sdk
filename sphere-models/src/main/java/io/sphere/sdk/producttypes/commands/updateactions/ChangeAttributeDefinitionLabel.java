@@ -5,6 +5,10 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.producttypes.ProductType;
 
 /**
+ * Changes the attribute definition label.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeLabel()}
  */
 public class ChangeAttributeDefinitionLabel extends UpdateActionImpl<ProductType> {

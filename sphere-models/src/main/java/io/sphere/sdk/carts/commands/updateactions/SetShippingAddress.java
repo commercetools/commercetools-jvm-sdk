@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
  Setting the shipping address also sets the tax rates of the line items and calculates the taxed price.
  If the address is not provided, the shipping address is unset, the taxedPrice is unset and the taxRates are unset in all line items.
 
+ {@doc.gen intro}
+
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setShippingAddress()}
  */
 public class SetShippingAddress extends UpdateActionImpl<Cart> {

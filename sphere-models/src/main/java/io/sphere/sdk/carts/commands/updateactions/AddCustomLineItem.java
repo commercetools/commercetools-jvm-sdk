@@ -13,6 +13,8 @@ import javax.money.MonetaryAmount;
 /**
  Adds a CustomLineItem to the cart.
 
+ {@doc.gen intro}
+
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addCustomLineItem()}
  */
 public class AddCustomLineItem extends UpdateActionImpl<Cart> {

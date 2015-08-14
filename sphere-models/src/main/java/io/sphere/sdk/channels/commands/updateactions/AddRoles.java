@@ -7,7 +7,11 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import java.util.Set;
 
 /**
- * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#addRoles()}
+ *  Adds roles to a channel.
+ *
+ *  {@doc.gen intro}
+ *
+ *  {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#addRoles()}
  */
 public class AddRoles extends UpdateActionImpl<Channel> {
     private final Set<ChannelRole> roles;

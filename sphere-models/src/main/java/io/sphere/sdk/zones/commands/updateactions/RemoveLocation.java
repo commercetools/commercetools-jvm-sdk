@@ -7,6 +7,8 @@ import io.sphere.sdk.zones.Zone;
 /**
  * Removes a location from a zone.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#addLocationAndRemoveLocation()}
  */
 public class RemoveLocation extends UpdateActionImpl<Zone> {

@@ -7,6 +7,10 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import java.util.Set;
 
 /**
+ * Removes a role from a channel.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#removeRoles()}
  */
 public class RemoveRoles extends UpdateActionImpl<Channel> {

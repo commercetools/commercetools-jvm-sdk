@@ -4,6 +4,9 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.producttypes.ProductType;
 
 /**
+ * Remove an attribute definition.
+ *
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addAttributeDefinition()}
  */

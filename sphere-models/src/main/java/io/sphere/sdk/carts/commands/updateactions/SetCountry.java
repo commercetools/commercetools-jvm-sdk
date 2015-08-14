@@ -9,6 +9,8 @@ import javax.annotation.Nullable;
 /**
  Sets the country of the cart. When the country is set, the line item prices are updated.
 
+ {@doc.gen intro}
+
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setCountry()}
 
  */

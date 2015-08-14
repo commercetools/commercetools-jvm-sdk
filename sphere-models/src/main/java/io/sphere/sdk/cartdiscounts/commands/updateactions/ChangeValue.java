@@ -5,6 +5,10 @@ import io.sphere.sdk.cartdiscounts.CartDiscountValue;
 import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
+ * Changes the value of the discount.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeValue()}
  */
 public class ChangeValue extends UpdateActionImpl<CartDiscount> {

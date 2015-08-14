@@ -5,6 +5,10 @@ import io.sphere.sdk.cartdiscounts.CartDiscountTarget;
 import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
+ * Changes the target.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeTarget()}
  */
 public class ChangeTarget extends UpdateActionImpl<CartDiscount> {
