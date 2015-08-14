@@ -10,7 +10,11 @@ import java.util.List;
 
 /**
 
- {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addReturnInfo()}
+    Adds return data to an order.
+
+    {@doc.gen intro}
+
+    {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addReturnInfo()}
  */
 public class AddReturnInfo extends UpdateActionImpl<Order> {
     @Nullable

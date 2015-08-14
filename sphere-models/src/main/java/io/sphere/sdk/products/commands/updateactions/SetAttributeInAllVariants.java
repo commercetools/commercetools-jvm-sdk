@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
 /**
  * Adds / Removes / Changes a custom attribute in all variants at the same time (it can be helpful to set attribute values that are constrained with SameForAll).
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setAttributeInAllVariants()}
  *
  * @see io.sphere.sdk.products.commands.updateactions.SetAttribute

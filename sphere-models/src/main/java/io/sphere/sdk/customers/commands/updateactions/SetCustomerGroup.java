@@ -10,6 +10,9 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
+ * Sets the customer group for a customer.
+ *
+ *  {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setCustomerGroup()}
  */

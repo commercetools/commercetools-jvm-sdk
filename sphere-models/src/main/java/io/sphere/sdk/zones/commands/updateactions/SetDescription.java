@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 /**
  * Updates the description of a zone.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#setDescription()}
  */
 public class SetDescription extends UpdateActionImpl<Zone> {

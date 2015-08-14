@@ -8,6 +8,9 @@ import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.zones.Zone;
 
 /**
+ * Adds a shipping rate.
+ *
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#workingWithZones()}
  */

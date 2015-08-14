@@ -9,6 +9,8 @@ import static java.lang.String.format;
 /**
  * Removes the address with the given ID from the customer's addresses.
  *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#removeAddress()}
  */
 public class RemoveAddress extends UpdateActionImpl<Customer> {

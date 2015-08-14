@@ -7,6 +7,8 @@ import io.sphere.sdk.zones.Zone;
 /**
  * Adds a location to a zone.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.zones.commands.ZoneUpdateCommandTest#addLocationAndRemoveLocation()}
  */
 public class AddLocation extends UpdateActionImpl<Zone> {

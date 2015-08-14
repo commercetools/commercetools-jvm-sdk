@@ -7,7 +7,9 @@ import io.sphere.sdk.models.Address;
 import javax.annotation.Nullable;
 
 /**
+  Sets the billing address.
 
+ {@doc.gen intro}
 
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setBillingAddress()}
 

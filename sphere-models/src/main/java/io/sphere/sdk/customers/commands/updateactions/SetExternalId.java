@@ -8,6 +8,8 @@ import javax.annotation.Nullable;
 /**
  * Sets a new ID which can be used as additional identifier for external Systems like CRM or ERP.
  *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setExternalId()}
  */
 public class SetExternalId extends UpdateActionImpl<Customer> {

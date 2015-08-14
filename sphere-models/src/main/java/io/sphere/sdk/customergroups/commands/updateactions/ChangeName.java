@@ -7,6 +7,8 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 /**
  Changes the name of the customer group.
 
+ {@doc.gen intro}
+
  {@include.example io.sphere.sdk.customergroups.commands.CustomerGroupUpdateCommandTest#changeName()}
 
  */

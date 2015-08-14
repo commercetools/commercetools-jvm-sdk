@@ -4,6 +4,12 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Address;
 
+/**
+ * Adds an address to a customer.
+ *
+ *  {@doc.gen intro}
+ *
+ */
 public class AddAddress extends UpdateActionImpl<Customer> {
     private final Address address;
 

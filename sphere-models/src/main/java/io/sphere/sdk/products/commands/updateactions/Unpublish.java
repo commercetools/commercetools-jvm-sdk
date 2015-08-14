@@ -6,6 +6,8 @@ import io.sphere.sdk.products.Product;
 /**
  * Unpublishes a product, effectively deleting the current projection of the product, leaving only the staged projection. Consequently, when a product is unpublished, it will no longer be included in query or search results issued with staged=false, since such results only include current projections.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#publish()}
  */
 public class Unpublish extends UpdateActionImpl<Product> {

@@ -5,6 +5,9 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.shippingmethods.ShippingMethod;
 
 /**
+ * Sets a shipping method as default or not.
+ *
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.shippingmethods.commands.ShippingMethodUpdateCommandTest#changeIsDefault()}
  */

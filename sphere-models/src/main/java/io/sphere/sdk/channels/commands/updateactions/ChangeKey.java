@@ -4,6 +4,10 @@ import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
+ * Changes the key of a channel.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.channels.commands.ChannelUpdateCommandTest#changeKey()}
  */
 public class ChangeKey extends UpdateActionImpl<Channel> {

@@ -10,6 +10,10 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Changes the cart discounts.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#changeCartDiscounts()}
  */
 public class ChangeCartDiscounts extends UpdateActionImpl<DiscountCode> {

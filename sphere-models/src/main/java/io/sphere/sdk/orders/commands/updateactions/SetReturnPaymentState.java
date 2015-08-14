@@ -6,6 +6,7 @@ import io.sphere.sdk.orders.ReturnItem;
 import io.sphere.sdk.orders.ReturnPaymentState;
 
 /**
+ Sets the return payment state.
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#setReturnPaymentState()}
  */

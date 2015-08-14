@@ -7,6 +7,10 @@ import io.sphere.sdk.producttypes.ProductType;
 import java.util.List;
 
 /**
+ * Changes the attribute order.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeAttributeOrder()}
  */
 public class ChangeAttributeOrder extends UpdateActionImpl<ProductType> {

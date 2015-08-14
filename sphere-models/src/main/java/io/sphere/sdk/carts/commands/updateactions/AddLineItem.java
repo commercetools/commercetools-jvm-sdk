@@ -10,10 +10,12 @@ import io.sphere.sdk.products.ProductIdentifiable;
 import javax.annotation.Nullable;
 
 /**
- Adds a product variant in the given quantity to the cart.
- If the cart already contains the product variant then only the line item quantity is increased.
+    Adds a product variant in the given quantity to the cart.
+    If the cart already contains the product variant then only the line item quantity is increased.
 
- {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addLineItem()}
+    {@doc.gen intro}
+
+    {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addLineItem()}
  */
 public class AddLineItem extends UpdateActionImpl<Cart> {
     private final String productId;

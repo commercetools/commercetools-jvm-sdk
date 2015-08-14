@@ -9,6 +9,8 @@ import io.sphere.sdk.shippingmethods.ShippingMethod;
 /**
  * Sets the shipping method.
  *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#setShippingMethod()}
  */
 public class SetShippingMethod extends UpdateActionImpl<Cart> {

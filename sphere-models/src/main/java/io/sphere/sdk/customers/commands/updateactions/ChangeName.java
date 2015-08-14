@@ -9,6 +9,8 @@ import javax.annotation.Nullable;
 /**
  * Changes customer's firstName, lastName, middleName and title fields.
  *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeName()}
  */
 public class ChangeName extends UpdateActionImpl<Customer> {

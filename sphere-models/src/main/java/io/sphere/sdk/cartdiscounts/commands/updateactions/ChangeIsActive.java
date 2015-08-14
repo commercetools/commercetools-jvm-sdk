@@ -5,6 +5,10 @@ import io.sphere.sdk.cartdiscounts.CartDiscount;
 import io.sphere.sdk.commands.UpdateActionImpl;
 
 /**
+ * Switches the state if the discount is active.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeIsActive()}
  */
 public class ChangeIsActive extends UpdateActionImpl<CartDiscount> {

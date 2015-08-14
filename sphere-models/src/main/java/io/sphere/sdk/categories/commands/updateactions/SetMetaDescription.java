@@ -9,6 +9,8 @@ import javax.annotation.Nullable;
 /**
  * Sets the SEO attribute description.
  *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#setMetaDescription()}
  */
 public class SetMetaDescription extends UpdateActionImpl<Category> {

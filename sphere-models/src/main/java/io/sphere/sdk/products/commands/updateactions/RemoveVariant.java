@@ -7,6 +7,8 @@ import io.sphere.sdk.products.ProductVariant;
 /**
  * Removes a variant from a product.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addVariant()}
  *
  * @see io.sphere.sdk.products.commands.updateactions.AddVariant

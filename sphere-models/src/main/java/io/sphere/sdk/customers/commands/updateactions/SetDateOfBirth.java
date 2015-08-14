@@ -9,6 +9,8 @@ import java.time.LocalDate;
 /**
  * Sets a date of birth for the customer.
  *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDateOfBirth()}
  */
 public class SetDateOfBirth extends UpdateActionImpl<Customer> {

@@ -7,6 +7,11 @@ import io.sphere.sdk.models.LocalizedString;
 import javax.annotation.Nullable;
 
 /**
+ *
+ * Sets the description.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setDescription()}
  */
 public class SetDescription extends UpdateActionImpl<DiscountCode> {

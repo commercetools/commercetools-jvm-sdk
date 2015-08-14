@@ -8,7 +8,9 @@ import javax.annotation.Nullable;
 /**
  * Sets a new vat ID for the customer
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setVatId()}
+ *  {@doc.gen intro}
+ *
+ *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setVatId()}
  */
 public class SetVatId extends UpdateActionImpl<Customer> {
     @Nullable

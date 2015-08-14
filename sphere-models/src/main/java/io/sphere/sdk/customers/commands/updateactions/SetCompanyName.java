@@ -6,7 +6,9 @@ import io.sphere.sdk.customers.Customer;
 import javax.annotation.Nullable;
 
 /**
- * Sets a new company name for the customer
+ * Sets a new company name for the customer.
+ *
+ *  {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setCompanyName()}
  */

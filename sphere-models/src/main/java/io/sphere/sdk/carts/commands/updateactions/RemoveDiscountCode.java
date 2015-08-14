@@ -7,6 +7,10 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
 /**
+ * Removes a discount code.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#removeDiscountCode()}
  */
 public class RemoveDiscountCode extends UpdateActionImpl<Cart> {

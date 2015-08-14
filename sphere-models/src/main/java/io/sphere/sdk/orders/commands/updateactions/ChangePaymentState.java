@@ -5,6 +5,9 @@ import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.PaymentState;
 
 /**
+ Changes the payment state.
+
+ {@doc.gen intro}
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#changePaymentState()}
  */

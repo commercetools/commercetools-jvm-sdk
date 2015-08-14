@@ -9,6 +9,8 @@ import static java.lang.String.format;
 /**
  * Replaces the address with the given ID, with the new address in the customer's addresses array. The new address will have the same ID.
  *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeAddress()}
  */
 public class ChangeAddress extends UpdateActionImpl<Customer> {

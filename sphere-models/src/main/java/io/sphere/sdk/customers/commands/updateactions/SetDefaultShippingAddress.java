@@ -11,7 +11,9 @@ import static java.lang.String.format;
 /**
  * Sets the default shipping address from the customer's addresses.
  *
- * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDefaultShippingAddress()}
+ *  {@doc.gen intro}
+ *
+ *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDefaultShippingAddress()}
  */
 public class SetDefaultShippingAddress extends UpdateActionImpl<Customer> {
     @Nullable

@@ -5,6 +5,10 @@ import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.producttypes.ProductType;
 
 /**
+ * Adds a localized enum value to the attribute definition.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#addLocalizedEnumValue()}
  */
 public class AddLocalizedEnumValue extends UpdateActionImpl<ProductType> {

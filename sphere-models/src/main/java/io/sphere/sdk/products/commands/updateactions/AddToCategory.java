@@ -9,6 +9,8 @@ import io.sphere.sdk.products.Product;
 /**
  * Adds a product to a category.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addToCategory()}
  *
  * @see io.sphere.sdk.products.commands.updateactions.RemoveFromCategory

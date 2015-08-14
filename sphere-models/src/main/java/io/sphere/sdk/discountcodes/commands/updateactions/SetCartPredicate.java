@@ -8,6 +8,10 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
+ * Sets the cart predicate.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setCartPredicate()}
  */
 public class SetCartPredicate extends UpdateActionImpl<DiscountCode> {

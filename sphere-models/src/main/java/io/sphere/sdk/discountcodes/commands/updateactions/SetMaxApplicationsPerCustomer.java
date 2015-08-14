@@ -6,6 +6,10 @@ import io.sphere.sdk.discountcodes.DiscountCode;
 import javax.annotation.Nullable;
 
 /**
+ * Sets the maximum number of applicable discount codes per customer.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.discountcodes.commands.DiscountCodeUpdateCommandTest#setMaxApplicationsPerCustomer()}
  */
 public class SetMaxApplicationsPerCustomer extends UpdateActionImpl<DiscountCode> {

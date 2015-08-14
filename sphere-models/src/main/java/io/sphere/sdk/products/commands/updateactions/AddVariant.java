@@ -11,6 +11,8 @@ import java.util.List;
 /**
  * Adds a variant to a product.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addVariant()}
  *
  * @see io.sphere.sdk.products.commands.updateactions.RemoveVariant

@@ -13,6 +13,8 @@ import static java.util.Arrays.asList;
  *  <p>Create update actions to set the SEO attributes title, description and keywords altogether:</p>
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setMetaAttributes()}
+ *
+ * {@doc.gen intro}
  */
 public class MetaAttributesUpdateActions extends Base {
     private MetaAttributesUpdateActions() {

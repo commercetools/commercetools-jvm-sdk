@@ -7,6 +7,9 @@ import io.sphere.sdk.products.Product;
 import java.util.Optional;
 
 /**
+ * Removes a price from the product.
+ *
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#removePrice()}
  */

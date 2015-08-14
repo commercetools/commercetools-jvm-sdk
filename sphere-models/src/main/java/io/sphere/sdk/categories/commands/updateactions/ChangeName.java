@@ -4,6 +4,11 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 
+/**
+ * Changes the name of a category.
+ *
+ *  {@doc.gen intro}
+ */
 public class ChangeName extends UpdateActionImpl<Category> {
     private final LocalizedString name;
 

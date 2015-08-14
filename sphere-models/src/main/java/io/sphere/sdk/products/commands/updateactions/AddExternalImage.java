@@ -7,7 +7,9 @@ import io.sphere.sdk.products.Product;
 /**
  *  Adds external image url with meta-information to the product variant.
  *
- * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addExternalImage()}
+ *  {@doc.gen intro}
+ *
+ *  {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#addExternalImage()}
  */
 public class AddExternalImage extends UpdateActionImpl<Product> {
     private final Integer variantId;

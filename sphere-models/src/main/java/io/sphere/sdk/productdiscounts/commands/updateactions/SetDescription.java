@@ -7,6 +7,10 @@ import io.sphere.sdk.productdiscounts.ProductDiscount;
 import javax.annotation.Nullable;
 
 /**
+ * Sets the description.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#setDescription()}
  */
 public class SetDescription extends UpdateActionImpl<ProductDiscount> {

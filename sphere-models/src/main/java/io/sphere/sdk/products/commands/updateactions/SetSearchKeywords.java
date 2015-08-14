@@ -5,6 +5,10 @@ import io.sphere.sdk.products.Product;
 import io.sphere.sdk.search.SearchKeywords;
 
 /**
+ * Sets the search keywords for a product.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setSearchKeywords()}
  */
 public class SetSearchKeywords extends UpdateActionImpl<Product> {

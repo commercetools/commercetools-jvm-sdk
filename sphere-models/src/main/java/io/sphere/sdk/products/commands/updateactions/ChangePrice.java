@@ -9,6 +9,8 @@ import java.util.Optional;
 /**
  * Replaces a price in the product variant's prices set. The price with the same price scope (same currency, country, customer group and channel) as the given price is replaced.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changePrice()}
  */
 public class ChangePrice extends UpdateActionImpl<Product> {

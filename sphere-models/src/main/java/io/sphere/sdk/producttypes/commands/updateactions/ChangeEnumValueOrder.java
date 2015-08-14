@@ -7,6 +7,10 @@ import io.sphere.sdk.producttypes.ProductType;
 import java.util.List;
 
 /**
+ * Changes the enum value order.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.producttypes.commands.ProductTypeUpdateCommandTest#changeEnumValueOrder()}
  */
 public class ChangeEnumValueOrder extends UpdateActionImpl<ProductType> {

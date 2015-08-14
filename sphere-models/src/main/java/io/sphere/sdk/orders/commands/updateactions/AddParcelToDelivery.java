@@ -1,16 +1,16 @@
 package io.sphere.sdk.orders.commands.updateactions;
 
 import io.sphere.sdk.commands.UpdateActionImpl;
-import io.sphere.sdk.orders.Delivery;
-import io.sphere.sdk.orders.Order;
-import io.sphere.sdk.orders.ParcelMeasurements;
-import io.sphere.sdk.orders.TrackingData;
+import io.sphere.sdk.orders.*;
 
 import javax.annotation.Nullable;
 
 /**
+    Adds a parcel to a delivery.
 
- {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addParcelToDelivery()}
+    {@doc.gen intro}
+
+    {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#addParcelToDelivery()}
  */
 public class AddParcelToDelivery extends UpdateActionImpl<Order> {
     private final String deliveryId;

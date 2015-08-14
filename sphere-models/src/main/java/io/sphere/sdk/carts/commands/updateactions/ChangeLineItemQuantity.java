@@ -8,6 +8,8 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 /**
  Sets the quantity of the given line item. If quantity is 0, line item is removed from the cart.
 
+ {@doc.gen intro}
+
  {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#changeLineItemQuantity()}
  */
 public class ChangeLineItemQuantity extends UpdateActionImpl<Cart> {

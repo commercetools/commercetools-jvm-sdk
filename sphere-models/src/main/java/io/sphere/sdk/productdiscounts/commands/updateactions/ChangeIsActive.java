@@ -5,6 +5,10 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.productdiscounts.ProductDiscount;
 
 /**
+ * Enables or disables the discount.
+ *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.productdiscounts.commands.ProductDiscountUpdateCommandTest#changeIsActive()}
  */
 public class ChangeIsActive extends UpdateActionImpl<ProductDiscount> {

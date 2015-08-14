@@ -9,6 +9,8 @@ import javax.annotation.Nullable;
 /**
  * Sets the SEO attribute description.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setMetaDescription()}
  *  <p>Create update actions to set the SEO attributes title, description and keywords altogether:</p>
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#setMetaAttributes()}

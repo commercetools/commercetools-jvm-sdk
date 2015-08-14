@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
  * if there is no inventory entry associated with that SKU.
  * This change can never be staged and is thus immediately visible in published products.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.queries.ProductProjectionQueryTest#queryBySku()}
  */
 public class SetSku extends UpdateActionImpl<Product> {

@@ -5,6 +5,10 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 
 /**
+ * Changes the name of the discount.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#changeName()}
  */
 public class ChangeName extends UpdateActionImpl<CartDiscount> {

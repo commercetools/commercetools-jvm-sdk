@@ -7,6 +7,10 @@ import io.sphere.sdk.models.LocalizedString;
 import javax.annotation.Nullable;
 
 /**
+ * Sets the description of the discount.
+ *
+ *  {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.cartdiscounts.commands.CartDiscountUpdateCommandTest#setDescription()}
  */
 public class SetDescription extends UpdateActionImpl<CartDiscount> {

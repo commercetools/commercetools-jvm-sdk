@@ -6,6 +6,9 @@ import io.sphere.sdk.orders.ReturnItem;
 import io.sphere.sdk.orders.ReturnShipmentState;
 
 /**
+ Sets the return shipment state.
+
+ {@doc.gen intro}
 
  {@include.example io.sphere.sdk.orders.commands.OrderUpdateCommandTest#setReturnShipmentState()}
  */

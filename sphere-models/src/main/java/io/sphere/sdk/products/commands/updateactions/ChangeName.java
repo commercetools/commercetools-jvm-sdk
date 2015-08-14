@@ -7,6 +7,8 @@ import io.sphere.sdk.products.Product;
 /**
  * Updates the name of a product.
  *
+ * {@doc.gen intro}
+ *
  * {@include.example io.sphere.sdk.products.commands.ProductUpdateCommandTest#changeName()}
  */
 public class ChangeName extends UpdateActionImpl<Product> {
