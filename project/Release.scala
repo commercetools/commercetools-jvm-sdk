@@ -35,6 +35,7 @@ object Release {
     var newReadMeContent = replace(readmeContent, """play-sdk" % """", """[^"]+""", """" withSources""")
     newReadMeContent = replace(newReadMeContent, """<version>""", """[^<]+""", """</version>""")
     newReadMeContent = ("(http://search.maven.org/#artifactdetails%7Cio.sphere.sdk.jvm%7C[^ ]+%7C)[^ ]+(%7Cjar)").r.replaceAllIn(newReadMeContent, "$1" + v + "$2")
+    newReadMeContent = ("(\\(http://[^ ]+-jvm-sdk/javadoc/v)[^/]+([^ ]+\\))").r.replaceAllIn(newReadMeContent, "$1" + v + "$2")
     IO.write(readmeFile, newReadMeContent)
 
     import sbtrelease.Git
