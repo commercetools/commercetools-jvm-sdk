@@ -1,12 +1,18 @@
 package io.sphere.sdk.messages;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.messages.queries.MessageQueryModel;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
 
 import java.util.function.Supplier;
 
+/**
+ * TypeReference container used by query to get only messages of a certain type.
+ * @param <T> the type of the message the type hint is about
+ * @see MessageQuery#forMessageType(io.sphere.sdk.messages.MessageDerivateHint)
+ */
 public class MessageDerivateHint<T> {
     private final TypeReference<PagedQueryResult<T>> queryResultTypeReference;
     private final TypeReference<T> elementTypeReference;
