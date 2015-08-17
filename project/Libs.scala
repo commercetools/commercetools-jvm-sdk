@@ -6,7 +6,7 @@ object Libs extends json with http with other with test {
 }
 
 trait json {
-  private val jacksonVersion = "2.6.0"
+  private val jacksonVersion = "2.6.1"
 
   val `jackson-annotations` = "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonVersion
   val `jackson-core` = "com.fasterxml.jackson.core" % "jackson-core" % jacksonVersion
@@ -26,13 +26,13 @@ trait json {
 }
 
 trait http {
-  val `async-http-client-1.8` = "com.ning" % "async-http-client" % "1.8.7"
-  val `async-http-client-1.9` = "com.ning" % "async-http-client" % "1.9.18"
-  val `apache-httpasyncclient` = "org.apache.httpcomponents" % "httpasyncclient" % "4.0.2"
+  val `async-http-client-1.8` = "com.ning" % "async-http-client" % "1.8.16"
+  val `async-http-client-1.9` = "com.ning" % "async-http-client" % "1.9.30"
+  val `apache-httpasyncclient` = "org.apache.httpcomponents" % "httpasyncclient" % "4.1"
 }
 
 trait other {
-  val `nv-i18n` = "com.neovisionaries" % "nv-i18n" % "1.15"
+  val `nv-i18n` = "com.neovisionaries" % "nv-i18n" % "1.17"
   val `commons-lang3` = "org.apache.commons" % "commons-lang3" % "3.4"
   val `commons-io` = "org.apache.commons" % "commons-io" % "1.3.2"
   val `moneta` = "org.javamoney" % "moneta" % "1.0"
@@ -45,7 +45,7 @@ trait other {
 
 trait test {
   val `junit-dep` = "junit" % "junit-dep" % "4.11"
-  val assertj =  "org.assertj" % "assertj-core" % "3.0.0"
+  val assertj =  "org.assertj" % "assertj-core" % "3.1.0"
   val `junit-interface` = "com.novocode" % "junit-interface" % "0.11"
 
   val allTestLibs =
