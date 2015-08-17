@@ -59,12 +59,12 @@ public final class TaxCategoryFixtures {
         client.execute(TaxCategoryDeleteCommand.of(taxCategory));
     }
 
-    public static void withUpdateableTaxCategory(final TestClient client, final UnaryOperator<TaxCategory> user) {
+    public static void withUpdateableTaxCategory(final TestClient client, final UnaryOperator<TaxCategory> testApplicationFunction) {
         final TaxCategoryDraft draft = TaxCategoryDraft.of(randomKey(), asList(TaxRateBuilder.of("de19", 0.19, true, CountryCode.DE).build()));
         final PagedQueryResult<TaxCategory> results = client.execute(TaxCategoryQuery.of().byName(draft.getName()));
         results.getResults().forEach(tc -> client.execute(TaxCategoryDeleteCommand.of(tc)));
         final TaxCategory taxCategory = client.execute(TaxCategoryCreateCommand.of(draft));
-        final TaxCategory updated = user.apply(taxCategory);
+        final TaxCategory updated = testApplicationFunction.apply(taxCategory);
         client.execute(TaxCategoryDeleteCommand.of(updated));
     }
 }
