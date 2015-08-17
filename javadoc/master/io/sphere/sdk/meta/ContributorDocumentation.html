@@ -162,63 +162,6 @@ public Xyz(final String id)</pre>
  <ul>
  <li>If you have to deserialize abstract classes or interfaces you need to specify the way how Jackson does the deserialization. Have a look into the source code of <a href="../../../../io/sphere/sdk/productdiscounts/ProductDiscountValue.html" title="interface in io.sphere.sdk.productdiscounts"><code>ProductDiscountValue</code></a> to find out how this can be done.</li>
  <li>If you use <code>JsonTypeInfo</code> with a property and you have already declared a property with the same name, it will may be written twice with different values, see also <a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">Stackoverflow</a>.</li>
- </ul>
- <h3 id=optional-values>Optional values</h3>
-
- <ul>
-    <li>In contrast to classic Jackson projects you can use <code>Optional&lt;MyType&gt;</code> directly as member/getter/constructor parameter and it will be mapped.</li>
-    <li>Sometimes lists/sets are optional in the API, so if you may send an empty JSON array like in
-<pre>{
-  "key" : "assignPricesToMasterVariantAccordingToAChannel",
-  "roles" : [ ],
-  "name" : null,
-  "description" : null
-}
-</pre> it returns the following error message: <pre>{
-  "statusCode" : 400,
-  "message" : "'roles' should not be empty.",
-  "errors" : [ {
-    "code" : "InvalidOperation",
-    "message" : "'roles' should not be empty."
-  } ]
-}
- </pre><p>To solve this problem you have to prevent the field from serialization like in</p> <pre>{
-  "key" : "assignPricesToMasterVariantAccordingToAChannel",
-  "name" : null,
-  "description" : null
-} </pre><p>This can be achieved by adding the annotation <code>JsonInclude</code> like this: <code>@JsonInclude(JsonInclude.Include.NON_EMPTY) </code></p></li>
- </ul>
-
-
-<h3 id=aggregates>Creating aggregates</h3>
-
- <h4 id=model-package>Package <code>io.sphere.sdk.&lt;RESOURCE_AS_LOWERCASE_IN_PLURAL&gt;</code></h4>
-<ul>
- <li>create an interface <em>RESOURCE</em> which extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models"><code>Resource</code></a> with <em>RESOURCE</em> as type parameter</li>
- <li>create a class <em>RESOURCEImpl</em> which extends <a href="../../../../io/sphere/sdk/models/ResourceImpl.html" title="class in io.sphere.sdk.models"><code>ResourceImpl</code></a> with <em>RESOURCE</em> as type argument and it should implement <em>RESOURCE</em></li>
-
- <li>in <em>RESOURCEImpl</em> replace "public class" with "class" to set the visibility
- of this class to package scope</li>
-
- <li>in <em>RESOURCEImpl</em> add private final fields for all members of the resource (except the members defined in <a href="../../../../io/sphere/sdk/models/ResourceImpl.html" title="class in io.sphere.sdk.models"><code>ResourceImpl</code></a>
- like <a href="../../../../io/sphere/sdk/models/ResourceViewImpl.html#id"><code>ResourceViewImpl.id</code></a>, <a href="../../../../io/sphere/sdk/models/ResourceViewImpl.html#version"><code>ResourceViewImpl.version</code></a>, <a href="../../../../io/sphere/sdk/models/ResourceViewImpl.html#createdAt"><code>ResourceViewImpl.createdAt</code></a> and <a href="../../../../io/sphere/sdk/models/ResourceViewImpl.html#lastModifiedAt"><code>ResourceViewImpl.lastModifiedAt</code></a></li>
- <li>in <em>RESOURCEImpl</em> create a constructor with your IDE, this will be called the primary constructor</li>
- <li>in <em>RESOURCEImpl</em> create getters for all the fields you have created with your IDE</li>
- <li>in <em>RESOURCEImpl</em> use 'extract interface' of your IDE to get the signatures of the getters,
- cut and paste them into <em>RESOURCE</em> and remove the extracted interface, as a result the getter will also have the <code>Override</code> annotation</li>
- <li>in <em>RESOURCE</em> annotate the interface <em>RESOURCE</em> with <code>@JsonDeserialize(as=RESOURCEImpl.class)</code></li>
- <li>in <em>RESOURCE</em> create a static method which returns the type id as in <a href="../../../../io/sphere/sdk/categories/Category.html#typeId--"><code>Category.typeId()</code></a></li>
- <li>in <em>RESOURCE</em> create a static method which returns a <code>TypeReference</code> as in <a href="../../../../io/sphere/sdk/categories/Category.html#typeReference--"><code>Category.typeReference()</code></a></li>
- <li>in <em>RESOURCE</em> implement <a href="../../../../io/sphere/sdk/models/Referenceable.html#toReference--"><code>Referenceable.toReference()</code></a> as in io.sphere.sdk.categories.Category#toReference()</li>
-
-
-<li>in <em>RESOURCEBuilder</em> copy the attributes of  <em>RESOURCEImpl</em> and make them non final</li>
-<li>in <em>RESOURCEBuilder</em> make a private constructor with all really necessary values</li>
- <li>in <em>RESOURCEBuilder</em> set default values where you can, for <code>Optional</code> empty and for list or set their empty versions.</li>
- <li>in <em>RESOURCEBuilder</em> create public static "of" methods which constructs the builder in a consistent way</li>
-<li>create a <em>RESOURCEImplTest</em> which extends <code>DefaultModelSubclassTest&lt;RESOURCE&gt;</code>, you need to implement some methods.</li>
-
-
  </ul></div>
 </li>
 </ul>
