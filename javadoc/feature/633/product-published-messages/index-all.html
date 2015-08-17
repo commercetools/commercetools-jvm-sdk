@@ -2079,7 +2079,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </a>
 <h2 class="title">E</h2>
 <dl>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivatHint.html#elementTypeReference--">elementTypeReference()</a></span> - Method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivatHint.html" title="class in io.sphere.sdk.messages">MessageDerivatHint</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#elementTypeReference--">elementTypeReference()</a></span> - Method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#email-java.lang.String-">email(String)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -2471,8 +2471,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block"><h3 id="temporal-data">Temporal Data</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/queries/MessageQuery.html#forMessageType-io.sphere.sdk.messages.MessageDerivatHint-">forMessageType(MessageDerivatHint&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.messages.queries.<a href="io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries">MessageQuery</a></dt>
-<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/queries/MessageQuery.html#forMessageType-io.sphere.sdk.messages.MessageDerivateHint-">forMessageType(MessageDerivateHint&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.messages.queries.<a href="io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries">MessageQuery</a></dt>
+<dd>
+<div class="block">Creates a new query that queries only for messages that can be mapped to a certain Java type.</div>
+</dd>
 <dt><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http"><span class="typeNameLink">FormUrlEncodedHttpRequestBody</span></a> - Class in <a href="io/sphere/sdk/http/package-summary.html">io.sphere.sdk.http</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html#forProjection-io.sphere.sdk.products.ProductProjectionType-">forProjection(ProductProjectionType)</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a></dt>
@@ -4933,7 +4935,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>
 <div class="block">Provides types to retrieve the state of  zones.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/queries/MessageTypeQueryModel.html#is-io.sphere.sdk.messages.MessageDerivatHint-">is(MessageDerivatHint&lt;?&gt;)</a></span> - Method in interface io.sphere.sdk.messages.queries.<a href="io/sphere/sdk/messages/queries/MessageTypeQueryModel.html" title="interface in io.sphere.sdk.messages.queries">MessageTypeQueryModel</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/queries/MessageTypeQueryModel.html#is-io.sphere.sdk.messages.MessageDerivateHint-">is(MessageDerivateHint&lt;?&gt;)</a></span> - Method in interface io.sphere.sdk.messages.queries.<a href="io/sphere/sdk/messages/queries/MessageTypeQueryModel.html" title="interface in io.sphere.sdk.messages.queries">MessageTypeQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/AnyReferenceQueryModel.html#is-io.sphere.sdk.models.Referenceable-">is(Referenceable&lt;R&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/AnyReferenceQueryModel.html" title="interface in io.sphere.sdk.queries">AnyReferenceQueryModel</a></dt>
 <dd>&nbsp;</dd>
@@ -5465,6 +5467,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html#MESSAGE_HINT">MESSAGE_HINT</a></span> - Static variable in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductPublishedMessage</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductUnpublishedMessage.html#MESSAGE_HINT">MESSAGE_HINT</a></span> - Static variable in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductUnpublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductUnpublishedMessage</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/messages/DeliveryAddedMessage.html#MESSAGE_TYPE">MESSAGE_TYPE</a></span> - Static variable in class io.sphere.sdk.orders.messages.<a href="io/sphere/sdk/orders/messages/DeliveryAddedMessage.html" title="class in io.sphere.sdk.orders.messages">DeliveryAddedMessage</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/messages/OrderCreatedMessage.html#MESSAGE_TYPE">MESSAGE_TYPE</a></span> - Static variable in class io.sphere.sdk.orders.messages.<a href="io/sphere/sdk/orders/messages/OrderCreatedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderCreatedMessage</a></dt>
@@ -5474,6 +5478,8 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/messages/ReturnInfoAddedMessage.html#MESSAGE_TYPE">MESSAGE_TYPE</a></span> - Static variable in class io.sphere.sdk.orders.messages.<a href="io/sphere/sdk/orders/messages/ReturnInfoAddedMessage.html" title="class in io.sphere.sdk.orders.messages">ReturnInfoAddedMessage</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html#MESSAGE_TYPE">MESSAGE_TYPE</a></span> - Static variable in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductPublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductPublishedMessage</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/messages/ProductUnpublishedMessage.html#MESSAGE_TYPE">MESSAGE_TYPE</a></span> - Static variable in class io.sphere.sdk.products.messages.<a href="io/sphere/sdk/products/messages/ProductUnpublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductUnpublishedMessage</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/messages/queries/MessageByIdGet.html" title="interface in io.sphere.sdk.messages.queries"><span class="typeNameLink">MessageByIdGet</span></a> - Interface in <a href="io/sphere/sdk/messages/queries/package-summary.html">io.sphere.sdk.messages.queries</a></dt>
 <dd>
@@ -5493,8 +5499,10 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
  If you need to receive one specific message class, like <a href="io/sphere/sdk/orders/messages/DeliveryAddedMessage.html" title="class in io.sphere.sdk.orders.messages"><code>DeliveryAddedMessage</code></a>,
  use <a href="io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries"><code>MessageQuery</code></a> with a predicate by id.</div>
 </dd>
-<dt><a href="io/sphere/sdk/messages/MessageDerivatHint.html" title="class in io.sphere.sdk.messages"><span class="typeNameLink">MessageDerivatHint</span></a>&lt;<a href="io/sphere/sdk/messages/MessageDerivatHint.html" title="type parameter in MessageDerivatHint">T</a>&gt; - Class in <a href="io/sphere/sdk/messages/package-summary.html">io.sphere.sdk.messages</a></dt>
-<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages"><span class="typeNameLink">MessageDerivateHint</span></a>&lt;<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="type parameter in MessageDerivateHint">T</a>&gt; - Class in <a href="io/sphere/sdk/messages/package-summary.html">io.sphere.sdk.messages</a></dt>
+<dd>
+<div class="block">TypeReference container used by query to get only messages of a certain type.</div>
+</dd>
 <dt><a href="io/sphere/sdk/messages/expansion/MessageExpansionModel.html" title="class in io.sphere.sdk.messages.expansion"><span class="typeNameLink">MessageExpansionModel</span></a>&lt;<a href="io/sphere/sdk/messages/expansion/MessageExpansionModel.html" title="type parameter in MessageExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/messages/expansion/package-summary.html">io.sphere.sdk.messages.expansion</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/expansion/MessageExpansionModel.html#MessageExpansionModel--">MessageExpansionModel()</a></span> - Constructor for class io.sphere.sdk.messages.expansion.<a href="io/sphere/sdk/messages/expansion/MessageExpansionModel.html" title="class in io.sphere.sdk.messages.expansion">MessageExpansionModel</a></dt>
@@ -7134,13 +7142,13 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscountValue.html#ofRelative-int-">ofRelative(int)</a></span> - Static method in interface io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscountValue.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscountValue</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivatHint.html#ofResourceType-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-com.fasterxml.jackson.core.type.TypeReference-">ofResourceType(String, TypeReference&lt;PagedQueryResult&lt;T&gt;&gt;, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivatHint.html" title="class in io.sphere.sdk.messages">MessageDerivatHint</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#ofResourceType-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-com.fasterxml.jackson.core.type.TypeReference-">ofResourceType(String, TypeReference&lt;PagedQueryResult&lt;T&gt;&gt;, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductAttributeSearchModel.html#ofReviewReference-java.lang.String-">ofReviewReference(String)</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductAttributeSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeSearchModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductAttributeSearchModel.html#ofShippingMethodReference-java.lang.String-">ofShippingMethodReference(String)</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductAttributeSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeSearchModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivatHint.html#ofSingleMessageType-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-com.fasterxml.jackson.core.type.TypeReference-">ofSingleMessageType(String, TypeReference&lt;PagedQueryResult&lt;T&gt;&gt;, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivatHint.html" title="class in io.sphere.sdk.messages">MessageDerivatHint</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#ofSingleMessageType-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-com.fasterxml.jackson.core.type.TypeReference-">ofSingleMessageType(String, TypeReference&lt;PagedQueryResult&lt;T&gt;&gt;, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ProductVariantImportDraftBuilder.html#ofSku-java.lang.String-">ofSku(String)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ProductVariantImportDraftBuilder.html" title="class in io.sphere.sdk.orders">ProductVariantImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -7652,7 +7660,7 @@ withUpdateableShippingMethod(client(), shippingMethod -&gt; {
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#postalCode-java.lang.String-">postalCode(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivatHint.html#predicate--">predicate()</a></span> - Method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivatHint.html" title="class in io.sphere.sdk.messages">MessageDerivatHint</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#predicate--">predicate()</a></span> - Method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html#predicate">predicate</a></span> - Variable in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslBuilder.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -7973,6 +7981,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddAttributeDefinition.html">AddAttributeDefinition</a></li><li><a href="updateactions/AddEnumValue.html">AddEnumValue</a></li><li><a href="updateactions/AddLocalizedEnumValue.html">AddLocalizedEnumValue</a></li><li><a href="updateactions/ChangeAttributeDefinitionLabel.html">ChangeAttributeDefinitionLabel</a></li><li><a href="updateactions/ChangeAttributeOrder.html">ChangeAttributeOrder</a></li><li><a href="updateactions/ChangeDescription.html">ChangeDescription</a></li><li><a href="updateactions/ChangeEnumValueOrder.html">ChangeEnumValueOrder</a></li><li><a href="updateactions/ChangeLocalizedEnumValueOrder.html">ChangeLocalizedEnumValueOrder</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/RemoveAttributeDefinition.html">RemoveAttributeDefinition</a></li></ul></div>
 </dd>
+<dt><a href="io/sphere/sdk/products/messages/ProductUnpublishedMessage.html" title="class in io.sphere.sdk.products.messages"><span class="typeNameLink">ProductUnpublishedMessage</span></a> - Class in <a href="io/sphere/sdk/products/messages/package-summary.html">io.sphere.sdk.products.messages</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/commands/ProductUpdateCommand.html" title="interface in io.sphere.sdk.products.commands"><span class="typeNameLink">ProductUpdateCommand</span></a> - Interface in <a href="io/sphere/sdk/products/commands/package-summary.html">io.sphere.sdk.products.commands</a></dt>
 <dd>
 <div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddExternalImage.html">AddExternalImage</a></li><li><a href="updateactions/AddPrice.html">AddPrice</a></li><li><a href="updateactions/AddToCategory.html">AddToCategory</a></li><li><a href="updateactions/AddVariant.html">AddVariant</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/ChangePrice.html">ChangePrice</a></li><li><a href="updateactions/ChangeSlug.html">ChangeSlug</a></li><li><a href="updateactions/MetaAttributesUpdateActions.html">MetaAttributesUpdateActions</a></li><li><a href="updateactions/Publish.html">Publish</a></li><li><a href="updateactions/RemoveFromCategory.html">RemoveFromCategory</a></li><li><a href="updateactions/RemoveImage.html">RemoveImage</a></li><li><a href="updateactions/RemovePrice.html">RemovePrice</a></li><li><a href="updateactions/RemoveVariant.html">RemoveVariant</a></li><li><a href="updateactions/RevertStagedChanges.html">RevertStagedChanges</a></li><li><a href="updateactions/SetAttribute.html">SetAttribute</a></li><li><a href="updateactions/SetAttributeInAllVariants.html">SetAttributeInAllVariants</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/SetMetaDescription.html">SetMetaDescription</a></li><li><a href="updateactions/SetMetaKeywords.html">SetMetaKeywords</a></li><li><a href="updateactions/SetMetaTitle.html">SetMetaTitle</a></li><li><a href="updateactions/SetSearchKeywords.html">SetSearchKeywords</a></li><li><a href="updateactions/SetSku.html">SetSku</a></li><li><a href="updateactions/SetTaxCategory.html">SetTaxCategory</a></li><li><a href="updateactions/Unpublish.html">Unpublish</a></li></ul></div>
@@ -8055,7 +8065,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/QueryPredicate.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QueryPredicate</span></a>&lt;<a href="io/sphere/sdk/queries/QueryPredicate.html" title="type parameter in QueryPredicate">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivatHint.html#queryResultTypeReference--">queryResultTypeReference()</a></span> - Method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivatHint.html" title="class in io.sphere.sdk.messages">MessageDerivatHint</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/MessageDerivateHint.html#queryResultTypeReference--">queryResultTypeReference()</a></span> - Method in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/QuerySort.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">QuerySort</span></a>&lt;<a href="io/sphere/sdk/queries/QuerySort.html" title="type parameter in QuerySort">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -9241,72 +9251,72 @@ assertThat(cartWithEmail.getCustomerEmail()).contains(email);
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">SphereResources</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
-<div class="block"><table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="3">cartdiscounts</td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html'>CartDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html'>CartDiscountUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html'>CartDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommand.html'>CartDiscountCreateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountDeleteCommand.html'>CartDiscountDeleteCommand</a></td></tr>
+<div class="block"><table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="3">cartdiscounts</td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html'>CartDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html'>CartDiscountUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html'>CartDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountDeleteCommand.html'>CartDiscountDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommand.html'>CartDiscountCreateCommand</a></td></tr>
 <tr><td rowspan="3">carts</td><td><a href='../../../..//io/sphere/sdk/carts/queries/CartQuery.html'>CartQuery</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartDeleteCommand.html'>CartDeleteCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartByIdGet.html'>CartByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartUpdateCommand.html'>CartUpdateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartByCustomerIdGet.html'>CartByCustomerIdGet</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartCreateCommand.html'>CartCreateCommand</a></td></tr>
-<tr><td rowspan="3">categories</td><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryQuery.html'>CategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryUpdateCommand.html'>CategoryUpdateCommand</a></td></tr>
+<tr><td rowspan="3">categories</td><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryQuery.html'>CategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryDeleteCommand.html'>CategoryDeleteCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryByIdGet.html'>CategoryByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryCreateCommand.html'>CategoryCreateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryDeleteCommand.html'>CategoryDeleteCommand</a></td></tr>
-<tr><td rowspan="3">channels</td><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelByIdGet.html'>ChannelByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelDeleteCommand.html'>ChannelDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryUpdateCommand.html'>CategoryUpdateCommand</a></td></tr>
+<tr><td rowspan="3">channels</td><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelByIdGet.html'>ChannelByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelCreateCommand.html'>ChannelCreateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelQuery.html'>ChannelQuery</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelUpdateCommand.html'>ChannelUpdateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelCreateCommand.html'>ChannelCreateCommand</a></td></tr>
-<tr><td rowspan="3">customergroups</td><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupByIdGet.html'>CustomerGroupByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html'>CustomerGroupUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelDeleteCommand.html'>ChannelDeleteCommand</a></td></tr>
+<tr><td rowspan="3">customergroups</td><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupByIdGet.html'>CustomerGroupByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html'>CustomerGroupCreateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html'>CustomerGroupQuery</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupDeleteCommand.html'>CustomerGroupDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html'>CustomerGroupCreateCommand</a></td></tr>
-<tr><td rowspan="9">customers</td><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByTokenGet.html'>CustomerByTokenGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html'>CustomerVerifyEmailCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerQuery.html'>CustomerQuery</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html'>CustomerCreateTokenCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByIdGet.html'>CustomerByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerDeleteCommand.html'>CustomerDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html'>CustomerCreateEmailTokenCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html'>CustomerGroupUpdateCommand</a></td></tr>
+<tr><td rowspan="9">customers</td><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByIdGet.html'>CustomerByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerUpdateCommand.html'>CustomerUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerQuery.html'>CustomerQuery</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerSignInCommand.html'>CustomerSignInCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByTokenGet.html'>CustomerByTokenGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html'>CustomerVerifyEmailCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html'>CustomerChangePasswordCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerUpdateCommand.html'>CustomerUpdateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerSignInCommand.html'>CustomerSignInCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html'>CustomerCreateEmailTokenCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerDeleteCommand.html'>CustomerDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html'>CustomerCreateTokenCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html'>CustomerPasswordResetCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateCommand.html'>CustomerCreateCommand</a></td></tr>
-<tr><td rowspan="3">customobjects</td><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectQuery.html'>CustomObjectQuery</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html'>CustomObjectUpsertCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html'>CustomObjectCustomJsonMappingByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html'>CustomObjectDeleteCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html'>CustomObjectByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html'>CustomObjectCustomJsonMappingUpsertCommand</a></td></tr>
-<tr><td rowspan="3">discountcodes</td><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html'>DiscountCodeQuery</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html'>DiscountCodeUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html'>DiscountCodeByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html'>DiscountCodeCreateCommand</a></td></tr>
+<tr><td rowspan="3">customobjects</td><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html'>CustomObjectByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html'>CustomObjectUpsertCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html'>CustomObjectCustomJsonMappingByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html'>CustomObjectCustomJsonMappingUpsertCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectQuery.html'>CustomObjectQuery</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html'>CustomObjectDeleteCommand</a></td></tr>
+<tr><td rowspan="3">discountcodes</td><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html'>DiscountCodeByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html'>DiscountCodeCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html'>DiscountCodeQuery</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html'>DiscountCodeUpdateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeDeleteCommand.html'>DiscountCodeDeleteCommand</a></td></tr>
-<tr><td rowspan="3">inventory</td><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryByIdGet.html'>InventoryEntryByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryCreateCommand.html'>InventoryEntryCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryQuery.html'>InventoryEntryQuery</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryDeleteCommand.html'>InventoryDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommand.html'>InventoryEntryUpdateCommand</a></td></tr>
+<tr><td rowspan="3">inventory</td><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryQuery.html'>InventoryEntryQuery</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryDeleteCommand.html'>InventoryDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryByIdGet.html'>InventoryEntryByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommand.html'>InventoryEntryUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryCreateCommand.html'>InventoryEntryCreateCommand</a></td></tr>
 <tr><td rowspan="3">messages</td><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageQuery.html'>MessageQuery</a></td><td></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/messages/queries/TypedMessageQuery.html'>TypedMessageQuery</a></td><td></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageByIdGet.html'>MessageByIdGet</a></td><td></td></tr>
-<tr><td rowspan="3">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderQuery.html'>OrderQuery</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderImportCommand.html'>OrderImportCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderByIdGet.html'>OrderByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderUpdateCommand.html'>OrderUpdateCommand</a></td></tr>
+<tr><td rowspan="3">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderQuery.html'>OrderQuery</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderUpdateCommand.html'>OrderUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderByIdGet.html'>OrderByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderImportCommand.html'>OrderImportCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html'>OrderFromCartCreateCommand</a></td></tr>
-<tr><td rowspan="3">productdiscounts</td><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountQuery.html'>ProductDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommand.html'>ProductDiscountUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountByIdGet.html'>ProductDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommand.html'>ProductDiscountCreateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountDeleteCommand.html'>ProductDiscountDeleteCommand</a></td></tr>
-<tr><td rowspan="5">products</td><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteCommand.html'>ProductDeleteCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionByIdGet.html'>ProductProjectionByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductByIdGet.html'>ProductByIdGet</a></td><td></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/search/ProductProjectionSearch.html'>ProductProjectionSearch</a></td><td></td></tr>
-<tr><td rowspan="3">producttypes</td><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeQuery.html'>ProductTypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html'>ProductTypeDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
+<tr><td rowspan="3">productdiscounts</td><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountByIdGet.html'>ProductDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountDeleteCommand.html'>ProductDiscountDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountQuery.html'>ProductDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommand.html'>ProductDiscountUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommand.html'>ProductDiscountCreateCommand</a></td></tr>
+<tr><td rowspan="5">products</td><td><a href='../../../..//io/sphere/sdk/products/search/ProductProjectionSearch.html'>ProductProjectionSearch</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductByIdGet.html'>ProductByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteCommand.html'>ProductDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionByIdGet.html'>ProductProjectionByIdGet</a></td><td></td></tr>
+<tr><td rowspan="3">producttypes</td><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeQuery.html'>ProductTypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html'>ProductTypeUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html'>ProductTypeDeleteCommand</a></td></tr>
 <tr><td rowspan="1">projects</td><td><a href='../../../..//io/sphere/sdk/projects/queries/ProjectGet.html'>ProjectGet</a></td><td></td></tr>
-<tr><td rowspan="3">reviews</td><td><a href='../../../..//io/sphere/sdk/reviews/queries/ReviewQuery.html'>ReviewQuery</a></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewCreateCommand.html'>ReviewCreateCommand</a></td></tr>
+<tr><td rowspan="3">reviews</td><td><a href='../../../..//io/sphere/sdk/reviews/queries/ReviewQuery.html'>ReviewQuery</a></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html'>ReviewDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewCreateCommand.html'>ReviewCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html'>ReviewUpdateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html'>ReviewDeleteCommand</a></td></tr>
-<tr><td rowspan="4">shippingmethods</td><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdGet.html'>ShippingMethodByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodDeleteCommand.html'>ShippingMethodDeleteCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByCartGet.html'>ShippingMethodsByCartGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html'>ShippingMethodCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html'>ShippingMethodQuery</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html'>ShippingMethodUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html'>ShippingMethodsByLocationGet</a></td><td></td></tr>
-<tr><td rowspan="3">states</td><td><a href='../../../..//io/sphere/sdk/states/queries/StateByIdGet.html'>StateByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateCreateCommand.html'>StateCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/states/queries/StateQuery.html'>StateQuery</a></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateUpdateCommand.html'>StateUpdateCommand</a></td></tr>
+<tr><td rowspan="4">shippingmethods</td><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html'>ShippingMethodQuery</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html'>ShippingMethodUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByCartGet.html'>ShippingMethodsByCartGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodDeleteCommand.html'>ShippingMethodDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html'>ShippingMethodsByLocationGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html'>ShippingMethodCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdGet.html'>ShippingMethodByIdGet</a></td><td></td></tr>
+<tr><td rowspan="3">states</td><td><a href='../../../..//io/sphere/sdk/states/queries/StateByIdGet.html'>StateByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateUpdateCommand.html'>StateUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/states/queries/StateQuery.html'>StateQuery</a></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateCreateCommand.html'>StateCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateDeleteCommand.html'>StateDeleteCommand</a></td></tr>
 <tr><td rowspan="2">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html'>TaxCategoryDeleteCommand</a></td></tr>
-<tr><td rowspan="3">zones</td><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneQuery.html'>ZoneQuery</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneDeleteCommand.html'>ZoneDeleteCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneByIdGet.html'>ZoneByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneUpdateCommand.html'>ZoneUpdateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneCreateCommand.html'>ZoneCreateCommand</a></td></tr>
+<tr><td rowspan="3">zones</td><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneByIdGet.html'>ZoneByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneCreateCommand.html'>ZoneCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneQuery.html'>ZoneQuery</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneDeleteCommand.html'>ZoneDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneUpdateCommand.html'>ZoneUpdateCommand</a></td></tr>
 </table></div>
 </dd>
 <dt><a href="io/sphere/sdk/search/SphereSearchSort.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">SphereSearchSort</span></a>&lt;<a href="io/sphere/sdk/search/SphereSearchSort.html" title="type parameter in SphereSearchSort">T</a>&gt; - Class in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
