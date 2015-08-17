@@ -1,8 +1,5 @@
 package io.sphere.sdk.meta;
 
-import io.sphere.sdk.models.Resource;
-import io.sphere.sdk.models.ResourceImpl;
-
 /**
  <h3 id=start>Developing the SDK</h3>
 
@@ -63,63 +60,7 @@ public Xyz(final String id)</pre>
  <li>If you have to deserialize abstract classes or interfaces you need to specify the way how Jackson does the deserialization. Have a look into the source code of {@link io.sphere.sdk.productdiscounts.ProductDiscountValue} to find out how this can be done.</li>
  <li>If you use {@link com.fasterxml.jackson.annotation.JsonTypeInfo} with a property and you have already declared a property with the same name, it will may be written twice with different values, see also <a href="http://stackoverflow.com/questions/18237222/duplicate-json-field-with-jackson">Stackoverflow</a>.</li>
  </ul>
- <h3 id=optional-values>Optional values</h3>
 
- <ul>
-    <li>In contrast to classic Jackson projects you can use {@code Optional<MyType>} directly as member/getter/constructor parameter and it will be mapped.</li>
-    <li>Sometimes lists/sets are optional in the API, so if you may send an empty JSON array like in
-<pre>{
-  "key" : "assignPricesToMasterVariantAccordingToAChannel",
-  "roles" : [ ],
-  "name" : null,
-  "description" : null
-}
-</pre> it returns the following error message: <pre>{
-  "statusCode" : 400,
-  "message" : "'roles' should not be empty.",
-  "errors" : [ {
-    "code" : "InvalidOperation",
-    "message" : "'roles' should not be empty."
-  } ]
-}
- </pre><p>To solve this problem you have to prevent the field from serialization like in</p> <pre>{
-  "key" : "assignPricesToMasterVariantAccordingToAChannel",
-  "name" : null,
-  "description" : null
-} </pre><p>This can be achieved by adding the annotation {@link com.fasterxml.jackson.annotation.JsonInclude} like this: {@code @JsonInclude(JsonInclude.Include.NON_EMPTY) }</p></li>
- </ul>
-
-
-<h3 id=aggregates>Creating aggregates</h3>
-
- <h4 id=model-package>Package {@code io.sphere.sdk.<RESOURCE_AS_LOWERCASE_IN_PLURAL>}</h4>
-<ul>
- <li>create an interface <em>RESOURCE</em> which extends {@link Resource} with <em>RESOURCE</em> as type parameter</li>
- <li>create a class <em>RESOURCEImpl</em> which extends {@link ResourceImpl} with <em>RESOURCE</em> as type argument and it should implement <em>RESOURCE</em></li>
-
- <li>in <em>RESOURCEImpl</em> replace "public class" with "class" to set the visibility
- of this class to package scope</li>
-
- <li>in <em>RESOURCEImpl</em> add private final fields for all members of the resource (except the members defined in {@link ResourceImpl}
- like {@link ResourceImpl#id}, {@link ResourceImpl#version}, {@link ResourceImpl#createdAt} and {@link ResourceImpl#lastModifiedAt}</li>
- <li>in <em>RESOURCEImpl</em> create a constructor with your IDE, this will be called the primary constructor</li>
- <li>in <em>RESOURCEImpl</em> create getters for all the fields you have created with your IDE</li>
- <li>in <em>RESOURCEImpl</em> use 'extract interface' of your IDE to get the signatures of the getters,
- cut and paste them into <em>RESOURCE</em> and remove the extracted interface, as a result the getter will also have the {@link java.lang.Override} annotation</li>
- <li>in <em>RESOURCE</em> annotate the interface <em>RESOURCE</em> with {@code @JsonDeserialize(as=RESOURCEImpl.class)}</li>
- <li>in <em>RESOURCE</em> create a static method which returns the type id as in {@link io.sphere.sdk.categories.Category#typeId()}</li>
- <li>in <em>RESOURCE</em> create a static method which returns a {@link com.fasterxml.jackson.core.type.TypeReference} as in {@link io.sphere.sdk.categories.Category#typeReference()}</li>
- <li>in <em>RESOURCE</em> implement {@link io.sphere.sdk.models.Referenceable#toReference()} as in io.sphere.sdk.categories.Category#toReference()</li>
-
-
-<li>in <em>RESOURCEBuilder</em> copy the attributes of  <em>RESOURCEImpl</em> and make them non final</li>
-<li>in <em>RESOURCEBuilder</em> make a private constructor with all really necessary values</li>
- <li>in <em>RESOURCEBuilder</em> set default values where you can, for {@link java.util.Optional} empty and for list or set their empty versions.</li>
- <li>in <em>RESOURCEBuilder</em> create public static "of" methods which constructs the builder in a consistent way</li>
-<li>create a <em>RESOURCEImplTest</em> which extends {@code DefaultModelSubclassTest<RESOURCE>}, you need to implement some methods.</li>
-
-
- </ul>
 
 
  */
