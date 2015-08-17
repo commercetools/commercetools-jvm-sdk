@@ -1,6 +1,7 @@
 package io.sphere.sdk.productdiscounts;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
@@ -16,13 +17,13 @@ class ProductDiscountImpl extends ResourceImpl<ProductDiscount> implements Produ
     private final String predicate;
     private final String sortOrder;
     private final Boolean isActive;
-    private final List<Reference<Object>> references;
+    private final List<Reference<JsonNode>> references;
 
     @JsonCreator
     ProductDiscountImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
                         final LocalizedString name, final LocalizedString description,
                         final ProductDiscountValue value, final String predicate, final String sortOrder,
-                        final boolean isActive, final List<Reference<Object>> references) {
+                        final boolean isActive, final List<Reference<JsonNode>> references) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.description = description;
@@ -58,7 +59,7 @@ class ProductDiscountImpl extends ResourceImpl<ProductDiscount> implements Produ
         return isActive;
     }
 
-    public List<Reference<Object>> getReferences() {
+    public List<Reference<JsonNode>> getReferences() {
         return references;
     }
 

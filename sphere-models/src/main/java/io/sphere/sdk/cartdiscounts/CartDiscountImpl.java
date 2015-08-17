@@ -1,6 +1,7 @@
 package io.sphere.sdk.cartdiscounts;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
@@ -23,10 +24,10 @@ final class CartDiscountImpl extends ResourceImpl<CartDiscount> implements CartD
     @Nullable
     private final ZonedDateTime validUntil;
     private final Boolean requiresDiscountCode;
-    private final List<Reference<Object>> references;
+    private final List<Reference<JsonNode>> references;
 
     @JsonCreator
-    public CartDiscountImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String cartPredicate, final LocalizedString name, final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode, final List<Reference<Object>> references) {
+    public CartDiscountImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String cartPredicate, final LocalizedString name, final LocalizedString description, final CartDiscountValue value, final CartDiscountTarget target, final String sortOrder, final Boolean isActive, final ZonedDateTime validFrom, final ZonedDateTime validUntil, final Boolean requiresDiscountCode, final List<Reference<JsonNode>> references) {
         super(id, version, createdAt, lastModifiedAt);
         this.cartPredicate = cartPredicate;
         this.name = name;
@@ -63,7 +64,7 @@ final class CartDiscountImpl extends ResourceImpl<CartDiscount> implements CartD
     }
 
     @Override
-    public List<Reference<Object>> getReferences() {
+    public List<Reference<JsonNode>> getReferences() {
         return references;
     }
 
