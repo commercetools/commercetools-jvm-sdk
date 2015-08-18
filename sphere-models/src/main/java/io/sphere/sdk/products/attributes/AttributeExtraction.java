@@ -44,7 +44,7 @@ public final class AttributeExtraction<T> extends Base {
         });
     }
 
-    public <I> AttributeExtraction<T> ifIs(final AttributeAccess<I> extraction, final Function<I, T> function) {
+    public <I> AttributeExtraction<T> ifIs(final AttributeAccess<I> extraction, final Function<? super I, ? extends T> function) {
         return ifIs(extraction, function, x -> true);
     }
 
@@ -62,7 +62,7 @@ public final class AttributeExtraction<T> extends Base {
         }
     }
 
-    public <A> AttributeExtraction<T> ifIs(final AttributeAccess<A> extraction, final Function<A, T> function, final java.util.function.Predicate<A> guard) {
+    public <A> AttributeExtraction<T> ifIs(final AttributeAccess<A> extraction, final Function<? super A, ? extends T> function, final java.util.function.Predicate<? super A> guard) {
         return Optional.ofNullable(value).map(x -> this).orElseGet(() -> {
             final T newValue = calculateValue(extraction).flatMap(attributeValue -> {
                 Optional<T> mappedValue = Optional.empty();
