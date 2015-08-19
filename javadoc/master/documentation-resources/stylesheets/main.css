@@ -105,8 +105,7 @@ th {
     color: #FFF;
 }
 
-th.colFirst,
-th.colLast {
+th.colFirst, th.colLast, th.colOne {
     background: #4D7A97;
 }
 

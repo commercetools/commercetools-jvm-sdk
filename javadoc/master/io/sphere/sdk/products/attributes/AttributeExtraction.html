@@ -149,13 +149,13 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>&lt;A&gt;&nbsp;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.products.attributes">AttributeExtraction</a>&lt;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html#ifIs-io.sphere.sdk.products.attributes.AttributeAccess-java.util.function.Function-java.util.function.Predicate-">ifIs</a></span>(<a href="../../../../../io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a>&lt;A&gt;&nbsp;extraction,
-    java.util.function.Function&lt;A,<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function,
-    java.util.function.Predicate&lt;A&gt;&nbsp;guard)</code>&nbsp;</td>
+    java.util.function.Function&lt;? super A,? extends <a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function,
+    java.util.function.Predicate&lt;? super A&gt;&nbsp;guard)</code>&nbsp;</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>&lt;I&gt;&nbsp;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.products.attributes">AttributeExtraction</a>&lt;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html#ifIs-io.sphere.sdk.products.attributes.AttributeAccess-java.util.function.Function-">ifIs</a></span>(<a href="../../../../../io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a>&lt;I&gt;&nbsp;extraction,
-    java.util.function.Function&lt;I,<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function)</code>&nbsp;</td>
+    java.util.function.Function&lt;? super I,? extends <a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.products.attributes">AttributeExtraction</a>&lt;T&gt;</code></td>
@@ -233,7 +233,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <li class="blockList">
 <h4>ifIs</h4>
 <pre>public&nbsp;&lt;I&gt;&nbsp;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.products.attributes">AttributeExtraction</a>&lt;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;ifIs(<a href="../../../../../io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a>&lt;I&gt;&nbsp;extraction,
-                                       java.util.function.Function&lt;I,<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function)</pre>
+                                       java.util.function.Function&lt;? super I,? extends <a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function)</pre>
 </li>
 </ul>
 <a name="ifIs-io.sphere.sdk.products.attributes.AttributeAccess-java.util.function.Function-java.util.function.Predicate-">
@@ -243,8 +243,8 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <li class="blockList">
 <h4>ifIs</h4>
 <pre>public&nbsp;&lt;A&gt;&nbsp;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="class in io.sphere.sdk.products.attributes">AttributeExtraction</a>&lt;<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;ifIs(<a href="../../../../../io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a>&lt;A&gt;&nbsp;extraction,
-                                       java.util.function.Function&lt;A,<a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function,
-                                       java.util.function.Predicate&lt;A&gt;&nbsp;guard)</pre>
+                                       java.util.function.Function&lt;? super A,? extends <a href="../../../../../io/sphere/sdk/products/attributes/AttributeExtraction.html" title="type parameter in AttributeExtraction">T</a>&gt;&nbsp;function,
+                                       java.util.function.Predicate&lt;? super A&gt;&nbsp;guard)</pre>
 </li>
 </ul>
 <a name="findValue--">
