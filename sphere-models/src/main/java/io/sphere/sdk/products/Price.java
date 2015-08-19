@@ -145,4 +145,8 @@ public class Price extends Base {
     public static Price of(final BigDecimal amount, final CurrencyUnit currencyUnit) {
         return of(MoneyImpl.of(amount, currencyUnit));
     }
+
+    public boolean equalsIgnoreId(final Price price) {
+        return price != null && withId(null).equals(price.withId(null));
+    }
 }

@@ -44,4 +44,13 @@ public class PriceTest {
         assertThat(productDiscount.getName().get(Locale.ENGLISH)).isEqualTo("demo product discount");
         assertThat(productDiscount.getValue()).isInstanceOf(AbsoluteProductDiscountValue.class);
     }
+
+    @Test
+    public void equalsIgnoreId() {
+        final Price priceWithoutId = Price.of(new BigDecimal("28.00"), EUR);
+        final Price priceWithId = priceWithoutId.withId("foo");
+        assertThat(priceWithoutId)
+                .isNotEqualTo(priceWithId)
+                .matches(price -> price.equalsIgnoreId(priceWithId));
+    }
 }

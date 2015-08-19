@@ -6,7 +6,7 @@ import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
 
-class TaxRateImpl extends Base implements TaxRate {
+final class TaxRateImpl extends Base implements TaxRate {
     @Nullable
     private final String id;
     private final String name;
@@ -57,5 +57,11 @@ class TaxRateImpl extends Base implements TaxRate {
     @Nullable
     public String getState() {
         return state;
+    }
+
+    @Override
+    public boolean equalsIgnoreId(final TaxRate other) {
+        return other != null
+                && TaxRateBuilder.of(other).id(null).build().equals(TaxRateBuilder.of(this).id(null).build());
     }
 }

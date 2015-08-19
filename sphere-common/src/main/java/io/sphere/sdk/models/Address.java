@@ -344,4 +344,8 @@ public class Address extends Base {
                 ", additionalAddressInfo=" + additionalAddressInfo +
                 '}';
     }
+
+    public boolean equalsIgnoreId(final Address address) {
+        return address != null && address.withId(null).equals(withId(null));
+    }
 }

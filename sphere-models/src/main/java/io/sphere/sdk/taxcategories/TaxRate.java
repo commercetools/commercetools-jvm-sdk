@@ -5,6 +5,9 @@ import com.neovisionaries.i18n.CountryCode;
 
 import javax.annotation.Nullable;
 
+/**
+ * @see TaxRateBuilder
+ */
 @JsonDeserialize(as=TaxRateImpl.class)
 public interface TaxRate {
     /**
@@ -28,4 +31,6 @@ public interface TaxRate {
     static TaxRate of(final String name, final double amount, final boolean includedInPrice, final CountryCode country) {
         return TaxRateBuilder.of(name, amount, includedInPrice, country).build();
     }
+
+    boolean equalsIgnoreId(TaxRate other);
 }
