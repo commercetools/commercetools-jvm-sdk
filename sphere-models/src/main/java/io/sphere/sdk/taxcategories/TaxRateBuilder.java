@@ -22,6 +22,12 @@ public final class TaxRateBuilder implements Builder<TaxRate> {
         this.country = country;
     }
 
+    public static TaxRateBuilder of(final TaxRate taxRate) {
+        return of(taxRate.getName(), taxRate.getAmount(), taxRate.isIncludedInPrice(), taxRate.getCountry())
+                .id(taxRate.getId())
+                .state(taxRate.getState());
+    }
+
     public static TaxRateBuilder of(final String name, final double amount, final boolean includedInPrice, final CountryCode country) {
         return new TaxRateBuilder(name, amount, includedInPrice, country);
     }
