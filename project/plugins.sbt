@@ -8,7 +8,7 @@ addSbtPlugin("com.github.gseitz" % "sbt-release" % "0.7.1")
 addSbtPlugin("com.jsuereth" % "sbt-pgp" % "1.0.0")
 
 //https://github.com/sbt/sbt-unidoc/
-addSbtPlugin("com.eed3si9n" % "sbt-unidoc" % "0.3.1")
+addSbtPlugin("com.eed3si9n" % "sbt-unidoc" % "0.3.3")
 
 addSbtPlugin("de.johoop" % "jacoco4sbt" % "2.1.6")
 
