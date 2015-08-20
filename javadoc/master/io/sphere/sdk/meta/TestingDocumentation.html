@@ -153,6 +153,50 @@ final SphereClient client = SphereClientFactory.createObjectTestDouble(httpReque
     }
     return result;
 });
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/TestsDemo.java" target="_blank">test code</a>.</pre></div>
+
+ <h3 id="object-test-doubles">Detailed example for creating test doubles</h3>
+
+ <h4>Go to impex playground and get some product data as String</h4>
+
+ <img src="../../../../documentation-resources/images/testing/playground-query-product-projections.png" alt="API playground loading current product projections">
+
+ So you have this:
+
+ <script src="https://gist.github.com/schleichardt/5c54993cc13750543fb2.js"></script>
+
+ And you can extract the data of one product:
+
+ <script src="https://gist.github.com/schleichardt/f5008aff1a2b7ad661d0.js"></script>
+
+ With a function like
+
+ <div id="io-sphere-sdk-client-ResourceUtil%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import org.apache.commons.io.IOUtils;
+</code></pre><pre><code class='java'>public final class ResourceUtil {
+    private ResourceUtil() {
+    }
+
+    public static String stringFromResource(final String resourcePath) throws Exception {
+        return IOUtils.toString(Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath), "UTF-8");
+    }
+
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/ResourceUtil.java" target="_blank">test code</a>.</pre></div>
+
+ you can obtain a String from a resource file in the classpath of the test and replace values optionally:
+
+ <div id="io-sphere-sdk-client-TestsDemo-replaceValuesInJsonStringDemo--%s" class=code-example><pre><code class='java'>final String originalProductProjectionJsonString = ResourceUtil.stringFromResource("product-projection.json");
+final String newProductId = "8b2f45fa-fb1e-48dc-a601-ab0ea9f493df";
+final String newSlug = "whatever-slug";
+final String productProjectionJson = originalProductProjectionJsonString
+        .replace("8665d91a-eab0-45a8-a378-e6603d66d084", newProductId)
+        .replace("girls-hartbreak-crew1417714797195", newSlug)
+        //example for key and value replace
+        .replace("\"hasStagedChanges\": true", "\"hasStagedChanges\": false");
+final ProductProjection productProjection = SphereJsonUtils.readObject(productProjectionJson, ProductProjection.typeReference());
+assertThat(productProjection.getId()).isEqualTo(newProductId);
+assertThat(productProjection.getSlug().get(Locale.ENGLISH)).isEqualTo(newSlug);
+assertThat(productProjection.hasStagedChanges()).isFalse();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/src/test/java/io/sphere/sdk/client/TestsDemo.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
