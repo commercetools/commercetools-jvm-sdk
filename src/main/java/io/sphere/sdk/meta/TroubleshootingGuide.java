@@ -125,8 +125,8 @@ package io.sphere.sdk.meta;
  [error]     at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:157)
  }</pre>
 
- <p>If you get not an exception, it may be of importance to know you JVM SDK version, Java version, date of occurrence and operating system.</p>
- Describe the behavior which you observed and which you would like to observe.
+ <p>If you get do not get an exception, it may be of importance to know your JVM SDK version, Java version, date of occurrence and operating system.</p>
+ Describe the behavior you observed and the one you would like to obtain.
 
  */
 public final class TroubleshootingGuide {
