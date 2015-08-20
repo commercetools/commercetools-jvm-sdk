@@ -4,7 +4,13 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.queries.PagedQueryResult;
+import org.junit.Test;
+
+import java.util.Locale;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class TestsDemo {
 
@@ -54,5 +60,21 @@ public class TestsDemo {
             }
             return response;
         });
+    }
+
+    @Test
+    public void replaceValuesInJsonStringDemo() throws Exception {
+        final String originalProductProjectionJsonString = ResourceUtil.stringFromResource("product-projection.json");
+        final String newProductId = "8b2f45fa-fb1e-48dc-a601-ab0ea9f493df";
+        final String newSlug = "whatever-slug";
+        final String productProjectionJson = originalProductProjectionJsonString
+                .replace("8665d91a-eab0-45a8-a378-e6603d66d084", newProductId)
+                .replace("girls-hartbreak-crew1417714797195", newSlug)
+                //example for key and value replace
+                .replace("\"hasStagedChanges\": true", "\"hasStagedChanges\": false");
+        final ProductProjection productProjection = SphereJsonUtils.readObject(productProjectionJson, ProductProjection.typeReference());
+        assertThat(productProjection.getId()).isEqualTo(newProductId);
+        assertThat(productProjection.getSlug().get(Locale.ENGLISH)).isEqualTo(newSlug);
+        assertThat(productProjection.hasStagedChanges()).isFalse();
     }
 }
