@@ -13,6 +13,7 @@ import io.sphere.sdk.models.ResourceImpl;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implements GenericMessage<R> {
     protected final Long sequenceNumber;
@@ -89,5 +90,27 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     @JsonAnySetter
     private void set(final String key, final JsonNode value) {
         furtherFields.put(key, value);
+    }
+
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GenericMessageImpl)) return false;
+        //
+        //important, do not use this:
+        //
+        //if (!super.equals(o)) return false;
+        final GenericMessageImpl<?> that = (GenericMessageImpl<?>) o;
+        return Objects.equals(getSequenceNumber(), that.getSequenceNumber()) &&
+                Objects.equals(getResource(), that.getResource()) &&
+                Objects.equals(getResourceVersion(), that.getResourceVersion()) &&
+                Objects.equals(getType(), that.getType()) &&
+                Objects.equals(furtherFields, that.furtherFields);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getSequenceNumber(), getResource(), getResourceVersion(), getType(), furtherFields);
     }
 }
