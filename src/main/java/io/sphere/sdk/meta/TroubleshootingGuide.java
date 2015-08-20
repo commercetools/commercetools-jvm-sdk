@@ -87,7 +87,7 @@ package io.sphere.sdk.meta;
  See {@link io.sphere.sdk.utils.SphereInternalLogger}.
 
  <h3 id=reuqired-data-to-reproduce>How to provide a reproduceable support question</h3>
- If you get an exception, give use the stacktrace with data you want to share.
+ If you get an exception, give us the stacktrace with data you want to share.
 
  <p>A typical exception stack trace looks like this:</p>
  <pre>{@code
