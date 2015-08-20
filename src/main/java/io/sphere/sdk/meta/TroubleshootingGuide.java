@@ -42,7 +42,7 @@ package io.sphere.sdk.meta;
  <h4>Possible solutions</h4>
  It could be the case that you use a build tool like Maven which has other code in it depending on an older Jackson version.
  The <a href="http://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Transitive_Dependencies">Maven way of getting transitive dependencies</a> may cause that you
- an outdated Jackson version and you need to explicitly pull it up like with:
+ use an outdated Jackson version and you need to explicitly pull it up like with:
 
  <pre>{@code <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
