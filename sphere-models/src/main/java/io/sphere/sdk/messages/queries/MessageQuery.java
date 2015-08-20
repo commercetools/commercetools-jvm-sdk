@@ -2,7 +2,7 @@ package io.sphere.sdk.messages.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.messages.Message;
-import io.sphere.sdk.messages.MessageDerivatHint;
+import io.sphere.sdk.messages.MessageDerivateHint;
 import io.sphere.sdk.messages.expansion.MessageExpansionModel;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 import io.sphere.sdk.queries.PagedQueryResult;
@@ -42,7 +42,16 @@ public interface MessageQuery extends MetaModelQueryDsl<Message, MessageQuery, M
         return new MessageQueryImpl();
     }
 
-    default <T> Query<T> forMessageType(final MessageDerivatHint<T> hint) {
+    /**
+     * Creates a new query that queries only for messages that can be mapped to a certain Java type. This is a terminal operation so no changes can be done on the query.
+     *
+     * {@include.example io.sphere.sdk.messages.queries.MessageQueryTest#queryForASpecificMessage()}
+     *
+     * @param hint a container containing the message type and type references. You can find it as static field on the message you want, e.g., {@link io.sphere.sdk.orders.messages.DeliveryAddedMessage#MESSAGE_HINT}.
+     * @param <T> the type of a single message that should be the outcome of a query.
+     * @return a new query for a certain Java type of messages
+     */
+    default <T> Query<T> forMessageType(final MessageDerivateHint<T> hint) {
         final MessageQuery queryWithPredicateForType =
                 plusPredicates(hint.predicate());
         return new TypedMessageQuery<>(queryWithPredicateForType.httpRequestIntent(), hint.queryResultTypeReference());

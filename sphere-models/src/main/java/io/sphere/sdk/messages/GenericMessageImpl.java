@@ -7,13 +7,13 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.sphere.sdk.json.SphereJsonUtils;
-import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.orders.Order;
+import io.sphere.sdk.models.ResourceImpl;
 
 import java.time.ZonedDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implements GenericMessage<R> {
     protected final Long sequenceNumber;
@@ -22,16 +22,19 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     protected final String type;
     @JsonIgnore
     private final Map<String, JsonNode> furtherFields = new HashMap<>();
+    @JsonIgnore
+    private final TypeReference<Reference<R>> typeReference;
 
     public GenericMessageImpl(final String id, final Long version, final ZonedDateTime createdAt,
                               final ZonedDateTime lastModifiedAt, final JsonNode resource,
                               final Long sequenceNumber, final Long resourceVersion,
-                              final String type) {
+                              final String type, final TypeReference<Reference<R>> typeReference) {
         super(id, version, createdAt, lastModifiedAt);
         this.resource = resource;
         this.sequenceNumber = sequenceNumber;
         this.resourceVersion = resourceVersion;
         this.type = type;
+        this.typeReference = typeReference;
     }
 
     @Override
@@ -57,8 +60,7 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     @SuppressWarnings("unchecked")
     @Override
     public Reference<R> getResource() {
-        return (Reference<R>) SphereJsonUtils.readObject(resource, new TypeReference<Reference<Order>>() {
-        });
+        return SphereJsonUtils.readObject(resource, typeReference);
     }
 
     @Override
@@ -88,5 +90,27 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
     @JsonAnySetter
     private void set(final String key, final JsonNode value) {
         furtherFields.put(key, value);
+    }
+
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (!(o instanceof GenericMessageImpl)) return false;
+        //
+        //important, do not use this:
+        //
+        //if (!super.equals(o)) return false;
+        final GenericMessageImpl<?> that = (GenericMessageImpl<?>) o;
+        return Objects.equals(getSequenceNumber(), that.getSequenceNumber()) &&
+                Objects.equals(getResource(), that.getResource()) &&
+                Objects.equals(getResourceVersion(), that.getResourceVersion()) &&
+                Objects.equals(getType(), that.getType()) &&
+                Objects.equals(furtherFields, that.furtherFields);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getSequenceNumber(), getResource(), getResourceVersion(), getType(), furtherFields);
     }
 }
