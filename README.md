@@ -76,7 +76,7 @@ see https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons
         * custom fields
         * discount codes
         * types endpoint/custom fields
-    * the stable and instable features can be mixed
+    * the stable and unstable features can be mixed
         * a cart contains the reference to its discounts
 1. The dependencies will only be updated in the next major version to improve stability. Of course, if bugs in libraries *occur*, we may need to update.
 1. JVM SDK test dependencies and build tools can be updated because they don't affect the production code.
