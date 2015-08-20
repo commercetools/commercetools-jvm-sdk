@@ -236,7 +236,9 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>default &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/messages/queries/MessageQuery.html#forMessageType-io.sphere.sdk.messages.MessageDerivatHint-">forMessageType</a></span>(<a href="../../../../../io/sphere/sdk/messages/MessageDerivatHint.html" title="class in io.sphere.sdk.messages">MessageDerivatHint</a>&lt;T&gt;&nbsp;hint)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/messages/queries/MessageQuery.html#forMessageType-io.sphere.sdk.messages.MessageDerivateHint-">forMessageType</a></span>(<a href="../../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;T&gt;&nbsp;hint)</code>
+<div class="block">Creates a new query that queries only for messages that can be mapped to a certain Java type.</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries">MessageQuery</a></code></td>
@@ -321,13 +323,37 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <pre>static&nbsp;<a href="../../../../../io/sphere/sdk/messages/queries/MessageQuery.html" title="interface in io.sphere.sdk.messages.queries">MessageQuery</a>&nbsp;of()</pre>
 </li>
 </ul>
-<a name="forMessageType-io.sphere.sdk.messages.MessageDerivatHint-">
+<a name="forMessageType-io.sphere.sdk.messages.MessageDerivateHint-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>forMessageType</h4>
-<pre>default&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;&nbsp;forMessageType(<a href="../../../../../io/sphere/sdk/messages/MessageDerivatHint.html" title="class in io.sphere.sdk.messages">MessageDerivatHint</a>&lt;T&gt;&nbsp;hint)</pre>
+<pre>default&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;T&gt;&nbsp;forMessageType(<a href="../../../../../io/sphere/sdk/messages/MessageDerivateHint.html" title="class in io.sphere.sdk.messages">MessageDerivateHint</a>&lt;T&gt;&nbsp;hint)</pre>
+<div class="block">Creates a new query that queries only for messages that can be mapped to a certain Java type. This is a terminal operation so no changes can be done on the query.
+
+ <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForASpecificMessage--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
+    final Query&lt;ReturnInfoAddedMessage&gt; query =
+            MessageQuery.of()
+                    .withSort(m -&gt; m.createdAt().sort().desc())
+                    .withExpansionPaths(m -&gt; m.resource())
+                    .withLimit(1)
+                    .forMessageType(ReturnInfoAddedMessage.MESSAGE_HINT);
+    final PagedQueryResult&lt;ReturnInfoAddedMessage&gt; pagedQueryResult = execute(query);
+    final ReturnInfoAddedMessage message = pagedQueryResult.head().get();
+    assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
+    assertThat(message.getResource().getObj()).isNotNull();
+    assertThat(message.getResource().getId()).isEqualTo(order.getId());
+}));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the type of a single message that should be the outcome of a query.</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>hint</code> - a container containing the message type and type references. You can find it as static field on the message you want, e.g., <a href="../../../../../io/sphere/sdk/orders/messages/DeliveryAddedMessage.html#MESSAGE_HINT"><code>DeliveryAddedMessage.MESSAGE_HINT</code></a>.</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new query for a certain Java type of messages</dd>
+</dl>
 </li>
 </ul>
 </li>

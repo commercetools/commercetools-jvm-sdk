@@ -70,6 +70,7 @@ io.sphere.sdk.products.attributes
 io.sphere.sdk.products.commands
 io.sphere.sdk.products.commands.updateactions
 io.sphere.sdk.products.expansion
+io.sphere.sdk.products.messages
 io.sphere.sdk.products.queries
 io.sphere.sdk.products.search
 io.sphere.sdk.producttypes
@@ -99,6 +100,7 @@ io.sphere.sdk.states.expansion
 io.sphere.sdk.states.queries
 io.sphere.sdk.taxcategories
 io.sphere.sdk.taxcategories.commands
+io.sphere.sdk.taxcategories.commands.updateactions
 io.sphere.sdk.taxcategories.expansion
 io.sphere.sdk.taxcategories.queries
 io.sphere.sdk.utils

@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -127,7 +127,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../io/sphere/sdk/orders/messages/DeliveryAddedMessage.html" title="class in io.sphere.sdk.orders.messages">DeliveryAddedMessage</a>, <a href="../../../../io/sphere/sdk/messages/MessageImpl.html" title="class in io.sphere.sdk.messages">MessageImpl</a>, <a href="../../../../io/sphere/sdk/orders/messages/OrderCreatedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderCreatedMessage</a>, <a href="../../../../io/sphere/sdk/orders/messages/OrderStateChangedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderStateChangedMessage</a>, <a href="../../../../io/sphere/sdk/orders/messages/ReturnInfoAddedMessage.html" title="class in io.sphere.sdk.orders.messages">ReturnInfoAddedMessage</a></dd>
+<dd><a href="../../../../io/sphere/sdk/orders/messages/DeliveryAddedMessage.html" title="class in io.sphere.sdk.orders.messages">DeliveryAddedMessage</a>, <a href="../../../../io/sphere/sdk/messages/MessageImpl.html" title="class in io.sphere.sdk.messages">MessageImpl</a>, <a href="../../../../io/sphere/sdk/orders/messages/OrderCreatedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderCreatedMessage</a>, <a href="../../../../io/sphere/sdk/orders/messages/OrderStateChangedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderStateChangedMessage</a>, <a href="../../../../io/sphere/sdk/products/messages/ProductPublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductPublishedMessage</a>, <a href="../../../../io/sphere/sdk/products/messages/ProductUnpublishedMessage.html" title="class in io.sphere.sdk.products.messages">ProductUnpublishedMessage</a>, <a href="../../../../io/sphere/sdk/orders/messages/ReturnInfoAddedMessage.html" title="class in io.sphere.sdk.orders.messages">ReturnInfoAddedMessage</a></dd>
 </dl>
 <hr>
 <br>
@@ -183,14 +183,15 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <th class="colOne" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#GenericMessageImpl-java.lang.String-java.lang.Long-java.time.ZonedDateTime-java.time.ZonedDateTime-com.fasterxml.jackson.databind.JsonNode-java.lang.Long-java.lang.Long-java.lang.String-">GenericMessageImpl</a></span>(java.lang.String&nbsp;id,
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#GenericMessageImpl-java.lang.String-java.lang.Long-java.time.ZonedDateTime-java.time.ZonedDateTime-com.fasterxml.jackson.databind.JsonNode-java.lang.Long-java.lang.Long-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">GenericMessageImpl</a></span>(java.lang.String&nbsp;id,
                   java.lang.Long&nbsp;version,
                   java.time.ZonedDateTime&nbsp;createdAt,
                   java.time.ZonedDateTime&nbsp;lastModifiedAt,
                   com.fasterxml.jackson.databind.JsonNode&nbsp;resource,
                   java.lang.Long&nbsp;sequenceNumber,
                   java.lang.Long&nbsp;resourceVersion,
-                  java.lang.String&nbsp;type)</code>&nbsp;</td>
+                  java.lang.String&nbsp;type,
+                  com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html" title="type parameter in GenericMessageImpl">R</a>&gt;&gt;&nbsp;typeReference)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -212,28 +213,36 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#as-java.lang.Class-">as</a></span>(java.lang.Class&lt;T&gt;&nbsp;messageClass)</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#equals-java.lang.Object-">equals</a></span>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>com.fasterxml.jackson.databind.JsonNode</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getPayload--">getPayload</a></span>()</code>
 <div class="block">Gets the top level fields not mapped by the current message class.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html" title="type parameter in GenericMessageImpl">R</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getResource--">getResource</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getResourceVersion--">getResourceVersion</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getSequenceNumber--">getSequenceNumber</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#getType--">getType</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html#toReference--">toReference</a></span>()</code>
 <div class="block">Creates a reference which is not necessarily filled.</div>
@@ -252,7 +261,7 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
+<code><a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
@@ -347,7 +356,7 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="GenericMessageImpl-java.lang.String-java.lang.Long-java.time.ZonedDateTime-java.time.ZonedDateTime-com.fasterxml.jackson.databind.JsonNode-java.lang.Long-java.lang.Long-java.lang.String-">
+<a name="GenericMessageImpl-java.lang.String-java.lang.Long-java.time.ZonedDateTime-java.time.ZonedDateTime-com.fasterxml.jackson.databind.JsonNode-java.lang.Long-java.lang.Long-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
 </a>
 <ul class="blockListLast">
@@ -360,7 +369,8 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
                           com.fasterxml.jackson.databind.JsonNode&nbsp;resource,
                           java.lang.Long&nbsp;sequenceNumber,
                           java.lang.Long&nbsp;resourceVersion,
-                          java.lang.String&nbsp;type)</pre>
+                          java.lang.String&nbsp;type,
+                          com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/messages/GenericMessageImpl.html" title="type parameter in GenericMessageImpl">R</a>&gt;&gt;&nbsp;typeReference)</pre>
 </li>
 </ul>
 </li>
@@ -466,13 +476,39 @@ implements <a href="../../../../io/sphere/sdk/messages/GenericMessage.html" titl
 <a name="as-java.lang.Class-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>as</h4>
 <pre>public&nbsp;&lt;T extends <a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a>&gt;&nbsp;T&nbsp;as(java.lang.Class&lt;T&gt;&nbsp;messageClass)</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/messages/Message.html#as-java.lang.Class-">as</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="equals-java.lang.Object-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>equals</h4>
+<pre>public&nbsp;boolean&nbsp;equals(java.lang.Object&nbsp;o)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="hashCode--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>hashCode</h4>
+<pre>public&nbsp;int&nbsp;hashCode()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></code></dd>
 </dl>
 </li>
 </ul>
