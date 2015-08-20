@@ -18,7 +18,7 @@ public class CustomClientConfigDemoTest {
     public static HttpClient createCustomHttpClient() {
         final AsyncHttpClientConfig httpClientConfig = new AsyncHttpClientConfig.Builder()
                 .setEnabledProtocols(new String[]{"TLSv1.2"})//required
-                //some examples what can be configured
+                //examples for configuration
                 .setMaxConnections(500)
                 .setConnectTimeout(10)
 //                .setProxyServer(proxy)
