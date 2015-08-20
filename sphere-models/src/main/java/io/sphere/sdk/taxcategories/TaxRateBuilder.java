@@ -51,9 +51,4 @@ public final class TaxRateBuilder implements Builder<TaxRate> {
     public TaxRate build() {
         return new TaxRateImpl(id, name, amount, includedInPrice, country, state);
     }
-
-    public static TaxRateBuilder of(final TaxRate template) {
-        return of(template.getName(), template.getAmount(), template.isIncludedInPrice(), template.getCountry()).id(template.getId()).state(template.getState());
-
-    }
 }
