@@ -6,9 +6,6 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.math.BigDecimal;
-
-import static java.math.BigDecimal.valueOf;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FacetResultTest {
@@ -24,7 +21,7 @@ public class FacetResultTest {
 
     @Test
     public void parsesTermFacetResults() throws Exception {
-        final TermFacetResult<String> termFacet = termFacet();
+        final TermFacetResult termFacet = termFacet();
         assertThat(termFacet.getMissing()).isEqualTo(44);
         assertThat(termFacet.getTotal()).isEqualTo(6937);
         assertThat(termFacet.getOther()).isEqualTo(0);
@@ -34,25 +31,25 @@ public class FacetResultTest {
 
     @Test
     public void parsesRangeFacetResults() throws Exception {
-        final RangeFacetResult<BigDecimal> rangeFacet = rangeFacet();
+        final RangeFacetResult rangeFacet = rangeFacet();
         assertThat(rangeFacet.getRanges()).hasSize(2);
-        final RangeStats<BigDecimal> rangeStats = rangeFacet.getRanges().get(1);
-        assertThat(rangeStats.getLowerEndpoint()).isEqualByComparingTo(valueOf(5001));
+        final RangeStats rangeStats = rangeFacet.getRanges().get(1);
+        assertThat(rangeStats.getLowerEndpoint()).isEqualTo("5001");
         assertThat(rangeStats.getUpperEndpoint()).isNull();
         assertThat(rangeStats.getCount()).isEqualTo(1799L);
-        assertThat(rangeStats.getMin()).isEqualByComparingTo(valueOf(5100));
-        assertThat(rangeStats.getMax()).isEqualByComparingTo(valueOf(590000));
-        assertThat(rangeStats.getSum()).isEqualByComparingTo(valueOf(92868378));
+        assertThat(rangeStats.getMin()).isEqualTo("5100");
+        assertThat(rangeStats.getMax()).isEqualTo("590000");
+        assertThat(rangeStats.getSum()).isEqualTo("92868378");
         assertThat(rangeStats.getMean()).isEqualTo(51622.222345747636);
     }
 
     @SuppressWarnings("unchecked")
-    private TermFacetResult<String> termFacet() {
+    private TermFacetResult termFacet() {
         return (TermFacetResult) pagedSearchResult.getFacetsResults().get(TERM_FACET_KEY);
     }
 
     @SuppressWarnings("unchecked")
-    private RangeFacetResult<BigDecimal> rangeFacet() {
+    private RangeFacetResult rangeFacet() {
         return (RangeFacetResult) pagedSearchResult.getFacetsResults().get(RANGE_FACET_KEY);
     }
 }
