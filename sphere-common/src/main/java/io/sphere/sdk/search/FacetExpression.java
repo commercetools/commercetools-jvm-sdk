@@ -10,14 +10,14 @@ public interface FacetExpression<T> {
      * Example: variants.attributes.color as myColor
      * @return String with unescaped sphere facet expression
      */
-    String toSphereFacet();
+    String toSearchExpression();
 
     /**
-     * Generates the path for the facet.
+     * Generates the attribute path for the facet.
      * Example: variants.attributes.color
      * @return the path for the attribute to be faceted
      */
-    String path();
+    String attributePath();
 
     static <T> FacetExpression<T> of(final String sphereFacetExpression) {
         return new SimpleFacetExpression<>(sphereFacetExpression);

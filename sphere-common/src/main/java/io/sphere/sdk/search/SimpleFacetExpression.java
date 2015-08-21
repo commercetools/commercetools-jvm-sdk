@@ -13,7 +13,7 @@ final class SimpleFacetExpression<T> extends SimpleBaseExpression implements Fac
     }
 
     @Override
-    public String toSphereFacet() {
+    public String toSearchExpression() {
         return sphereFacetExpression;
     }
 }

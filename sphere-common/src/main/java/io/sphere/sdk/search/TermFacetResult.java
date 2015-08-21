@@ -5,14 +5,14 @@ import io.sphere.sdk.models.Base;
 
 import java.util.List;
 
-public class TermFacetResult<T> extends Base implements FacetResult {
+public class TermFacetResult extends Base implements FacetResult {
     private final Long missing;
     private final Long total;
     private final Long other;
-    private final List<TermStats<T>> terms;
+    private final List<TermStats> terms;
 
     @JsonCreator
-    private TermFacetResult(final Long missing, final Long total, final Long other, final List<TermStats<T>> terms) {
+    private TermFacetResult(final Long missing, final Long total, final Long other, final List<TermStats> terms) {
         this.missing = missing;
         this.total = total;
         this.other = other;
@@ -49,11 +49,11 @@ public class TermFacetResult<T> extends Base implements FacetResult {
      * List of the different terms and amount of associated resources.
      * @return the list of distinct terms aLong with the number of matching resources.
      */
-    public List<TermStats<T>> getTerms() {
+    public List<TermStats> getTerms() {
         return terms;
     }
 
-    public static <T> TermFacetResult<T> of(final Long missing, final Long total, final Long other, final List<TermStats<T>> terms) {
-        return new TermFacetResult<>(missing, total, other, terms);
+    public static TermFacetResult of(final Long missing, final Long total, final Long other, final List<TermStats> terms) {
+        return new TermFacetResult(missing, total, other, terms);
     }
 }
