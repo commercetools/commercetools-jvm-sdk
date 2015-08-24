@@ -19,13 +19,6 @@ public interface TermModel<T, V> {
      * This untyped search model allows you to build filters and facets, both range and term models.
      * @return the untyped search model for this instance
      */
-    default UntypedSearchModel<T> untyped() {
-        return new UntypedSearchModel<>(getSearchModel(), null);
-    }
+    UntypedSearchModel<T> untyped();
 
-    /**
-     * Gets the underlying search model.
-     * @return the search model for this instance
-     */
-    SearchModel<T> getSearchModel();
 }

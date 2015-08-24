@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import static java.util.Arrays.asList;
 
-public class MoneyCentAmountSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements RangeTermModel<T, Long>, SearchSortingModel<T, S> {
+public class MoneyCentAmountSearchModel<T, S extends SearchSortDirection> extends RangeTermModelImpl<T, Long> implements SearchSortingModel<T, S> {
 
     public MoneyCentAmountSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);

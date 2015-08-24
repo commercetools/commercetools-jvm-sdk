@@ -2,7 +2,7 @@ package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
 
-public class UntypedSearchModel<T> extends SearchModelImpl<T> implements RangeTermModel<T, String> {
+public class UntypedSearchModel<T> extends RangeTermModelImpl<T, String> {
 
     public UntypedSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
