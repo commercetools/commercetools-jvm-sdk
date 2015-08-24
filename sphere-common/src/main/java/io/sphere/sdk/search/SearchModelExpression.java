@@ -21,11 +21,11 @@ abstract class SearchModelExpression<T, V> extends Base {
         this.alias = alias;
     }
 
-    public final String valueSerializer(final V value) {
+    public final String serializeValue(final V value) {
         return typeSerializer.getSerializer().apply(value);
     }
 
-    public final V valueDeserializer(final String valueAsString) {
+    public final V deserializeValue(final String valueAsString) {
         return typeSerializer.getDeserializer().apply(valueAsString);
     }
 
