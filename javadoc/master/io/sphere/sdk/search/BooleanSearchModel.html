@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -124,7 +124,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">BooleanSearchModel&lt;T,S extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</span>
 extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="class in io.sphere.sdk.search">SearchModelImpl</a>&lt;T&gt;
-implements <a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;T,java.lang.Boolean&gt;, <a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;T,S&gt;</pre>
+implements <a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;T,S&gt;</pre>
 </li>
 </ul>
 </div>
@@ -177,6 +177,12 @@ implements <a href="../../../../io/sphere/sdk/search/TermModel.html" title="inte
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html" title="type parameter in BooleanSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html#sorted-S-">sorted</a></span>(<a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html" title="type parameter in BooleanSearchModel">S</a>&nbsp;sortDirection)</code>
 <div class="block">Sorts boolean values in alphabetical order.</div>
+</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/UntypedSearchModel.html" title="class in io.sphere.sdk.search">UntypedSearchModel</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html#untyped--">untyped</a></span>()</code>
+<div class="block">Gets an untyped search model (expecting simple Strings) while keeping the same search model path as this.</div>
 </td>
 </tr>
 </table>
@@ -280,7 +286,7 @@ implements <a href="../../../../io/sphere/sdk/search/TermModel.html" title="inte
 </a><a name="sorted-S-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>sorted</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html" title="type parameter in BooleanSearchModel">T</a>&gt;&nbsp;sorted(<a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html" title="type parameter in BooleanSearchModel">S</a>&nbsp;sortDirection)</pre>
@@ -290,6 +296,24 @@ implements <a href="../../../../io/sphere/sdk/search/TermModel.html" title="inte
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html#sorted-S-">sorted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search">SearchSortingModel</a>&lt;<a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html" title="type parameter in BooleanSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html" title="type parameter in BooleanSearchModel">S</a> extends <a href="../../../../io/sphere/sdk/search/SearchSortDirection.html" title="interface in io.sphere.sdk.search">SearchSortDirection</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="untyped--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>untyped</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/UntypedSearchModel.html" title="class in io.sphere.sdk.search">UntypedSearchModel</a>&lt;T&gt;&nbsp;untyped()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html#untyped--">TermModel</a></code></span></div>
+<div class="block">Gets an untyped search model (expecting simple Strings) while keeping the same search model path as this.
+ This untyped search model allows you to build filters and facets, both range and term models.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#untyped--">untyped</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;T,V&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the untyped search model for this instance</dd>
 </dl>
 </li>
 </ul>

@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6};
+var methods = {"i0":6,"i1":6,"i2":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -100,7 +100,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/DateSearchModel.html" title="class in io.sphere.sdk.search">DateSearchModel</a>, <a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a>, <a href="../../../../io/sphere/sdk/search/MoneyCentAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyCentAmountSearchModel</a>, <a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="class in io.sphere.sdk.search">NumberSearchModel</a>, <a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="class in io.sphere.sdk.search">TimeSearchModel</a></dd>
+<dd><a href="../../../../io/sphere/sdk/search/DateSearchModel.html" title="class in io.sphere.sdk.search">DateSearchModel</a>, <a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a>, <a href="../../../../io/sphere/sdk/search/MoneyCentAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyCentAmountSearchModel</a>, <a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="class in io.sphere.sdk.search">NumberSearchModel</a>, <a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="class in io.sphere.sdk.search">TimeSearchModel</a>, <a href="../../../../io/sphere/sdk/search/UntypedSearchModel.html" title="class in io.sphere.sdk.search">UntypedSearchModel</a></dd>
 </dl>
 <hr>
 <br>
@@ -135,6 +135,12 @@ var activeTableTab = "activeTableTab";
 <div class="block">Eventually generates an expression to filter elements by certain range of values.</div>
 </td>
 </tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/UntypedSearchModel.html" title="class in io.sphere.sdk.search">UntypedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#untyped--">untyped</a></span>()</code>
+<div class="block">Gets an untyped search model (expecting simple Strings) while keeping the same search model path as this.</div>
+</td>
+</tr>
 </table>
 </li>
 </ul>
@@ -167,7 +173,7 @@ var activeTableTab = "activeTableTab";
 <a name="faceted--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>faceted</h4>
 <pre><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="class in io.sphere.sdk.search">RangedFacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">V</a>&gt;&nbsp;faceted()</pre>
@@ -175,6 +181,21 @@ var activeTableTab = "activeTableTab";
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the model to specify the range of values from which to obtain the facets</dd>
+</dl>
+</li>
+</ul>
+<a name="untyped--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>untyped</h4>
+<pre><a href="../../../../io/sphere/sdk/search/UntypedSearchModel.html" title="class in io.sphere.sdk.search">UntypedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">T</a>&gt;&nbsp;untyped()</pre>
+<div class="block">Gets an untyped search model (expecting simple Strings) while keeping the same search model path as this.
+ This untyped search model allows you to build filters and facets, both range and term models.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the untyped search model for this instance</dd>
 </dl>
 </li>
 </ul>
