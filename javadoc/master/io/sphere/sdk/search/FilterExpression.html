@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":17,"i1":6,"i2":6};
+var methods = {"i0":6,"i1":17,"i2":6};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -125,18 +125,18 @@ var activeTableTab = "activeTableTab";
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterExpression.html#of-java.lang.String-">of</a></span>(java.lang.String&nbsp;sphereFilterExpression)</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterExpression.html#path--">path</a></span>()</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterExpression.html#attributePath--">attributePath</a></span>()</code>
 <div class="block">Generates the path to be filtered.</div>
 </td>
 </tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterExpression.html#of-java.lang.String-">of</a></span>(java.lang.String&nbsp;sphereFilterExpression)</code>&nbsp;</td>
+</tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterExpression.html#toSphereFilter--">toSphereFilter</a></span>()</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterExpression.html#toSearchExpression--">toSearchExpression</a></span>()</code>
 <div class="block">returns a filter expression.</div>
 </td>
 </tr>
@@ -155,13 +155,13 @@ var activeTableTab = "activeTableTab";
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="toSphereFilter--">
+<a name="toSearchExpression--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>toSphereFilter</h4>
-<pre>java.lang.String&nbsp;toSphereFilter()</pre>
+<h4>toSearchExpression</h4>
+<pre>java.lang.String&nbsp;toSearchExpression()</pre>
 <div class="block">returns a filter expression.
  Example: variants.attributes.color:"green","yellow"</div>
 <dl>
@@ -170,13 +170,13 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="path--">
+<a name="attributePath--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>path</h4>
-<pre>java.lang.String&nbsp;path()</pre>
+<h4>attributePath</h4>
+<pre>java.lang.String&nbsp;attributePath()</pre>
 <div class="block">Generates the path to be filtered.
  Example: variants.attributes.color</div>
 <dl>

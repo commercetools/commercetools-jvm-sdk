@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.search</div>
-<h2 title="Class TermFacetResult" class="title">Class TermFacetResult&lt;T&gt;</h2>
+<h2 title="Class TermFacetResult" class="title">Class TermFacetResult</h2>
 </div>
 <div class="contentContainer">
 <ul class="inheritance">
@@ -102,7 +102,7 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li>io.sphere.sdk.search.TermFacetResult&lt;T&gt;</li>
+<li>io.sphere.sdk.search.TermFacetResult</li>
 </ul>
 </li>
 </ul>
@@ -117,7 +117,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">TermFacetResult&lt;T&gt;</span>
+<pre>public class <span class="typeNameLabel">TermFacetResult</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a>
 implements <a href="../../../../io/sphere/sdk/search/FacetResult.html" title="interface in io.sphere.sdk.search">FacetResult</a></pre>
 </li>
@@ -151,7 +151,7 @@ implements <a href="../../../../io/sphere/sdk/search/FacetResult.html" title="in
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a>&lt;<a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="type parameter in TermFacetResult">T</a>&gt;&gt;</code></td>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetResult.html#getTerms--">getTerms</a></span>()</code>
 <div class="block">List of the different terms and amount of associated resources.</div>
 </td>
@@ -163,11 +163,11 @@ implements <a href="../../../../io/sphere/sdk/search/FacetResult.html" title="in
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a>&lt;T&gt;</code></td>
+<td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetResult.html#of-java.lang.Long-java.lang.Long-java.lang.Long-java.util.List-">of</a></span>(java.lang.Long&nbsp;missing,
   java.lang.Long&nbsp;total,
   java.lang.Long&nbsp;other,
-  java.util.List&lt;<a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a>&lt;T&gt;&gt;&nbsp;terms)</code>&nbsp;</td>
+  java.util.List&lt;<a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a>&gt;&nbsp;terms)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -248,7 +248,7 @@ implements <a href="../../../../io/sphere/sdk/search/FacetResult.html" title="in
 <ul class="blockList">
 <li class="blockList">
 <h4>getTerms</h4>
-<pre>public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a>&lt;<a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="type parameter in TermFacetResult">T</a>&gt;&gt;&nbsp;getTerms()</pre>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a>&gt;&nbsp;getTerms()</pre>
 <div class="block">List of the different terms and amount of associated resources.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -262,10 +262,10 @@ implements <a href="../../../../io/sphere/sdk/search/FacetResult.html" title="in
 <ul class="blockListLast">
 <li class="blockList">
 <h4>of</h4>
-<pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a>&lt;T&gt;&nbsp;of(java.lang.Long&nbsp;missing,
-                                        java.lang.Long&nbsp;total,
-                                        java.lang.Long&nbsp;other,
-                                        java.util.List&lt;<a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a>&lt;T&gt;&gt;&nbsp;terms)</pre>
+<pre>public static&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a>&nbsp;of(java.lang.Long&nbsp;missing,
+                                 java.lang.Long&nbsp;total,
+                                 java.lang.Long&nbsp;other,
+                                 java.util.List&lt;<a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search">TermStats</a>&gt;&nbsp;terms)</pre>
 </li>
 </ul>
 </li>

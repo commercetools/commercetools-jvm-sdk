@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":6,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -147,28 +147,26 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code>protected java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#buildResultPath--">buildResultPath</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#attributePath--">attributePath</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code>V</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#deserializeValue-java.lang.String-">deserializeValue</a></span>(java.lang.String&nbsp;valueAsString)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>boolean</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#equals-java.lang.Object-">equals</a></span>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#path--">path</a></span>()</code>
-<div class="block">Generates the path for the facet.</div>
-</td>
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -177,12 +175,12 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </td>
 </tr>
 <tr id="i5" class="rowColor">
-<td class="colFirst"><code>protected java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#serializedAlias--">serializedAlias</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#resultPath--">resultPath</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#serializedPath--">serializedPath</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#serializedAlias--">serializedAlias</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
@@ -194,13 +192,11 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 </tr>
 <tr id="i9" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#toSphereFacet--">toSphereFacet</a></span>()</code>
-<div class="block">returns a facet expression.</div>
-</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#serializeValue-V-">serializeValue</a></span>(V&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#toSphereSearchExpression--">toSphereSearchExpression</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html#toSearchExpression--">toSearchExpression</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -219,7 +215,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a></h3>
-<code><a href="../../../../io/sphere/sdk/search/FacetExpression.html#of-java.lang.String-">of</a></code></li>
+<code><a href="../../../../io/sphere/sdk/search/FacetExpression.html#attributePath--">attributePath</a>, <a href="../../../../io/sphere/sdk/search/FacetExpression.html#of-java.lang.String-">of</a>, <a href="../../../../io/sphere/sdk/search/FacetExpression.html#toSearchExpression--">toSearchExpression</a></code></li>
 </ul>
 </li>
 </ul>
@@ -253,19 +249,16 @@ protected final&nbsp;java.lang.String alias</pre>
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="toSphereFacet--">
+<a name="equals-java.lang.Object-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>toSphereFacet</h4>
-<pre>public&nbsp;java.lang.String&nbsp;toSphereFacet()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetExpression.html#toSphereFacet--">FacetExpression</a></code></span></div>
-<div class="block">returns a facet expression.
- Example: variants.attributes.color as myColor</div>
+<h4>equals</h4>
+<pre>public&nbsp;boolean&nbsp;equals(java.lang.Object&nbsp;o)</pre>
 <dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>String with unescaped sphere facet expression</dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></code></dd>
 </dl>
 </li>
 </ul>
@@ -284,35 +277,6 @@ protected final&nbsp;java.lang.String alias</pre>
 </dl>
 </li>
 </ul>
-<a name="path--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>path</h4>
-<pre>public&nbsp;java.lang.String&nbsp;path()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/FacetExpression.html#path--">FacetExpression</a></code></span></div>
-<div class="block">Generates the path for the facet.
- Example: variants.attributes.color</div>
-<dl>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the path for the attribute to be faceted</dd>
-</dl>
-</li>
-</ul>
-<a name="equals-java.lang.Object-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>equals</h4>
-<pre>public&nbsp;boolean&nbsp;equals(java.lang.Object&nbsp;o)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></code></dd>
-</dl>
-</li>
-</ul>
 <a name="serializedValue--">
 <!--   -->
 </a>
@@ -322,22 +286,51 @@ protected final&nbsp;java.lang.String alias</pre>
 <pre>protected&nbsp;java.lang.String&nbsp;serializedValue()</pre>
 </li>
 </ul>
-<a name="buildResultPath--">
+<a name="serializeValue-java.lang.Object-">
+<!--   -->
+</a><a name="serializeValue-V-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>buildResultPath</h4>
-<pre>protected final&nbsp;java.lang.String&nbsp;buildResultPath()</pre>
+<h4>serializeValue</h4>
+<pre>public final&nbsp;java.lang.String&nbsp;serializeValue(V&nbsp;value)</pre>
 </li>
 </ul>
-<a name="serializedPath--">
+<a name="deserializeValue-java.lang.String-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>serializedPath</h4>
-<pre>protected final&nbsp;java.lang.String&nbsp;serializedPath()</pre>
+<h4>deserializeValue</h4>
+<pre>public final&nbsp;V&nbsp;deserializeValue(java.lang.String&nbsp;valueAsString)</pre>
+</li>
+</ul>
+<a name="toSearchExpression--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>toSearchExpression</h4>
+<pre>public final&nbsp;java.lang.String&nbsp;toSearchExpression()</pre>
+</li>
+</ul>
+<a name="attributePath--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>attributePath</h4>
+<pre>public final&nbsp;java.lang.String&nbsp;attributePath()</pre>
+</li>
+</ul>
+<a name="resultPath--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>resultPath</h4>
+<pre>public final&nbsp;java.lang.String&nbsp;resultPath()</pre>
 </li>
 </ul>
 <a name="serializedAlias--">
@@ -347,15 +340,6 @@ protected final&nbsp;java.lang.String alias</pre>
 <li class="blockList">
 <h4>serializedAlias</h4>
 <pre>protected final&nbsp;java.lang.String&nbsp;serializedAlias()</pre>
-</li>
-</ul>
-<a name="toSphereSearchExpression--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>toSphereSearchExpression</h4>
-<pre>public final&nbsp;java.lang.String&nbsp;toSphereSearchExpression()</pre>
 </li>
 </ul>
 <a name="serializer--">
