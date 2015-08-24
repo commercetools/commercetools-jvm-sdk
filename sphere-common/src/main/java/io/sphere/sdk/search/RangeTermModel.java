@@ -13,4 +13,19 @@ public interface RangeTermModel<T, V extends Comparable<? super V>> {
      * @return the model to specify the range of values from which to obtain the facets
      */
     RangedFacetSearchModel<T, V> faceted();
+
+    /**
+     * Gets an untyped search model (expecting simple Strings) while keeping the same search model path as this.
+     * This untyped search model allows you to build filters and facets, both range and term models.
+     * @return the untyped search model for this instance
+     */
+    default UntypedSearchModel<T> untyped() {
+        return new UntypedSearchModel<>(getSearchModel(), null);
+    }
+
+    /**
+     * Gets the underlying search model.
+     * @return the search model for this instance
+     */
+    SearchModel<T> getSearchModel();
 }

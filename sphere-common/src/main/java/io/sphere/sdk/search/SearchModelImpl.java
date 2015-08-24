@@ -30,4 +30,8 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
     public SearchModel<T> getParent() {
         return parent;
     }
+
+    public SearchModel<T> getSearchModel() {
+        return this;
+    }
 }

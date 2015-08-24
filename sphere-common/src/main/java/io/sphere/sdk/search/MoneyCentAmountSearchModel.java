@@ -1,7 +1,6 @@
 package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
-import java.math.BigDecimal;
 
 import static java.util.Arrays.asList;
 
@@ -29,6 +28,5 @@ public class MoneyCentAmountSearchModel<T, S extends SearchSortDirection> extend
             return new SphereSearchSort<>(this, sortDirection);
         }
     }
-
 
 }

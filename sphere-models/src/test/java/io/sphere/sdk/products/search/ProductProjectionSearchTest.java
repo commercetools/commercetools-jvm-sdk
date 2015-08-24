@@ -200,6 +200,25 @@ public class ProductProjectionSearchTest {
         assertThat(path).isEqualTo(expected);
     }
 
+    @Test
+    public void canCreateUntypedExpressions() throws Exception {
+        final UntypedSearchModel<ProductProjection> expirationDate = attributeModel().ofDate("expirationDate").untyped();
+        assertThat(expirationDate.faceted().byAllTerms().toSearchExpression()).isEqualTo("variants.attributes.expirationDate");
+        assertThat(expirationDate.filtered().by("2001-09-11").toSearchExpression()).isEqualTo("variants.attributes.expirationDate:\"2001-09-11\"");
+    }
+
+    @Test
+    public void generatesUntypedModelFromTermModel() throws Exception {
+        final CurrencySearchModel<ProductProjection, VariantSearchSortDirection> attributePath = attributeModel().ofMoney("money").currency();
+        assertThat(attributePath.untyped().buildPath()).isEqualTo(attributePath.buildPath());
+    }
+
+    @Test
+    public void generatesUntypedModelFromRangeModel() throws Exception {
+        final MoneyCentAmountSearchModel<ProductProjection, VariantSearchSortDirection> attributePath = attributeModel().ofMoney("money").centAmount();
+        assertThat(attributePath.untyped().buildPath()).isEqualTo(attributePath.buildPath());
+    }
+
     private ProductAttributeSearchModel attributeModel() {
         return MODEL.allVariants().attribute();
     }
