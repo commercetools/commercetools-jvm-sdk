@@ -97,7 +97,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     public static final ZonedDateTime DATE_TIME_2002_23H = ZonedDateTime.parse("2002-10-12T23:06:10.204+00:00");
 
     @Rule
-    public RetryIntegrationTest retry = new RetryIntegrationTest(10, 0, LoggerFactory.getLogger(this.getClass()));
+    public RetryIntegrationTest retry = new RetryIntegrationTest(10, 10000, LoggerFactory.getLogger(this.getClass()));
 
     @BeforeClass
     public static void setupProducts() {

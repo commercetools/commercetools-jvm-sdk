@@ -63,7 +63,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public static final String ATTR_NAME_EVIL = ("Evil" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
 
     @Rule
-    public RetryIntegrationTest retry = new RetryIntegrationTest(10, 0, LoggerFactory.getLogger(this.getClass()));
+    public RetryIntegrationTest retry = new RetryIntegrationTest(10, 10000, LoggerFactory.getLogger(this.getClass()));
 
     @BeforeClass
     public static void setupProducts() {
