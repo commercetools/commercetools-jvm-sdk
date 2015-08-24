@@ -13,4 +13,12 @@ public interface TermModel<T, V> {
      * @return the model to specify the values from which to obtain the facets
      */
     FacetSearchModel<T, V> faceted();
+
+    /**
+     * Gets an untyped search model (expecting simple Strings) while keeping the same search model path as this.
+     * This untyped search model allows you to build filters and facets, both range and term models.
+     * @return the untyped search model for this instance
+     */
+    UntypedSearchModel<T> untyped();
+
 }

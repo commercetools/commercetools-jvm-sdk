@@ -2,7 +2,7 @@ package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
 
-public class BooleanSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements TermModel<T, Boolean>, SearchSortingModel<T, S> {
+public class BooleanSearchModel<T, S extends SearchSortDirection> extends TermModelImpl<T, Boolean> implements SearchSortingModel<T, S> {
 
     public BooleanSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);

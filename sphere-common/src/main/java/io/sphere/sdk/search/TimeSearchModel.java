@@ -3,7 +3,7 @@ package io.sphere.sdk.search;
 import javax.annotation.Nullable;
 import java.time.LocalTime;
 
-public class TimeSearchModel<T, S extends SearchSortDirection> extends SearchModelImpl<T> implements RangeTermModel<T, LocalTime>, SearchSortingModel<T, S> {
+public class TimeSearchModel<T, S extends SearchSortDirection> extends RangeTermModelImpl<T, LocalTime> implements SearchSortingModel<T, S> {
 
     public TimeSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
         super(parent, pathSegment);
