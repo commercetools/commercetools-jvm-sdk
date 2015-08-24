@@ -5,19 +5,19 @@ import io.sphere.sdk.models.Base;
 
 import java.util.List;
 
-public class RangeFacetResult<T> extends Base implements FacetResult {
-    private final List<RangeStats<T>> ranges;
+public class RangeFacetResult extends Base implements FacetResult {
+    private final List<RangeStats> ranges;
 
     @JsonCreator
-    private RangeFacetResult(final List<RangeStats<T>> ranges) {
+    private RangeFacetResult(final List<RangeStats> ranges) {
         this.ranges = ranges;
     }
 
-    public List<RangeStats<T>> getRanges() {
+    public List<RangeStats> getRanges() {
         return ranges;
     }
 
-    public static <T> RangeFacetResult<T> of(final List<RangeStats<T>> ranges) {
-        return new RangeFacetResult<>(ranges);
+    public static RangeFacetResult of(final List<RangeStats> ranges) {
+        return new RangeFacetResult(ranges);
     }
 }

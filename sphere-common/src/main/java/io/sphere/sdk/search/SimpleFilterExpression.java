@@ -13,7 +13,7 @@ final class SimpleFilterExpression<T> extends SimpleBaseExpression implements Fi
     }
 
     @Override
-    public String toSphereFilter() {
+    public String toSearchExpression() {
         return sphereFilterExpression;
     }
 }

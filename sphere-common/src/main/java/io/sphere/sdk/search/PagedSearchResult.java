@@ -25,8 +25,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         return facets.get(spherePath);
     }
 
-    @SuppressWarnings("unchecked")
-    public <V> TermFacetResult<V> getTermFacetResult(final TermFacetExpression<T, V> facetExpression) {
+    public TermFacetResult getTermFacetResult(final TermFacetExpression<T, ?> facetExpression) {
         return Optional.ofNullable(getFacetResult(facetExpression.resultPath())).map(facetResult -> {
             if (facetResult instanceof TermFacetResult) {
                 return (TermFacetResult) facetResult;
@@ -36,9 +35,8 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         }).orElse(null);
     }
 
-    @SuppressWarnings("unchecked")
-    public <V extends Comparable<? super V>> RangeFacetResult<V> getRangeFacetResult(final RangeFacetExpression<T, V> facetExpression) {
-        return Optional.ofNullable(getFacetResult(facetExpression.buildResultPath())).map(facetResult -> {
+    public RangeFacetResult getRangeFacetResult(final RangeFacetExpression<T, ?> facetExpression) {
+        return Optional.ofNullable(getFacetResult(facetExpression.resultPath())).map(facetResult -> {
             if (facetResult instanceof RangeFacetResult) {
                 return (RangeFacetResult) facetResult;
             } else {

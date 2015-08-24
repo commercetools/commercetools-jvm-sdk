@@ -21,12 +21,24 @@ abstract class SearchModelExpression<T, V> extends Base {
         this.alias = alias;
     }
 
-    protected final String buildResultPath() {
-        return Optional.ofNullable(alias).orElse(serializedPath());
+    public final String serializeValue(final V value) {
+        return typeSerializer.getSerializer().apply(value);
     }
 
-    protected final String serializedPath() {
+    public final V deserializeValue(final String valueAsString) {
+        return typeSerializer.getDeserializer().apply(valueAsString);
+    }
+
+    public final String toSearchExpression() {
+        return attributePath() + serializedValue() + serializedAlias();
+    }
+
+    public final String attributePath() {
         return toStream(searchModel.buildPath()).collect(joining("."));
+    }
+
+    public final String resultPath() {
+        return Optional.ofNullable(alias).orElse(attributePath());
     }
 
     protected final String serializedAlias() {
@@ -35,21 +47,17 @@ abstract class SearchModelExpression<T, V> extends Base {
 
     protected abstract String serializedValue();
 
-    public final String toSphereSearchExpression() {
-        return serializedPath() + serializedValue() + serializedAlias();
-    }
-
     protected Function<V, String> serializer() {
-        return typeSerializer.serializer();
+        return typeSerializer.getSerializer();
     }
 
     @Override
     public String toString() {
-        return toSphereSearchExpression();
+        return toSearchExpression();
     }
 
     @Override
     public final int hashCode() {
-        return toSphereSearchExpression().hashCode();
+        return toSearchExpression().hashCode();
     }
 }

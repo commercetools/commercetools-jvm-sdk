@@ -357,10 +357,10 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     String queryParametersToString(final boolean urlEncoded) {
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
         Optional.ofNullable(text()).ifPresent(t -> builder.add(TEXT + "." + t.getLocale().getLanguage(), t.getValue(), urlEncoded));
-        facets().forEach(f -> builder.add(FACET, f.toSphereFacet(), urlEncoded));
-        resultFilters().forEach(f -> builder.add(FILTER, f.toSphereFilter(), urlEncoded));
-        queryFilters().forEach(f -> builder.add(FILTER_QUERY, f.toSphereFilter(), urlEncoded));
-        facetFilters().forEach(f -> builder.add(FILTER_FACETS, f.toSphereFilter(), urlEncoded));
+        facets().forEach(f -> builder.add(FACET, f.toSearchExpression(), urlEncoded));
+        resultFilters().forEach(f -> builder.add(FILTER, f.toSearchExpression(), urlEncoded));
+        queryFilters().forEach(f -> builder.add(FILTER_QUERY, f.toSearchExpression(), urlEncoded));
+        facetFilters().forEach(f -> builder.add(FILTER_FACETS, f.toSearchExpression(), urlEncoded));
         sort().forEach(s -> builder.add(SORT, s.toSphereSort(), urlEncoded));
         Optional.ofNullable(limit()).ifPresent(l -> builder.add(LIMIT, l.toString(), urlEncoded));
         Optional.ofNullable(offset()).ifPresent(o -> builder.add(OFFSET, o.toString(), urlEncoded));

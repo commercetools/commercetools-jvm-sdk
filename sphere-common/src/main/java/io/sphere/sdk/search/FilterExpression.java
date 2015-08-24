@@ -11,14 +11,14 @@ public interface FilterExpression<T> {
      * Example: variants.attributes.color:"green","yellow"
      * @return String with unescaped sphere filter expression
      */
-    String toSphereFilter();
+    String toSearchExpression();
 
     /**
      * Generates the path to be filtered.
      * Example: variants.attributes.color
      * @return the path for the attribute to be filtered by
      */
-    String path();
+    String attributePath();
 
     static <T> FilterExpression<T> of(final String sphereFilterExpression) {
         return new SimpleFilterExpression<>(sphereFilterExpression);

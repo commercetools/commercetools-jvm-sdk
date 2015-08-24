@@ -12,7 +12,7 @@ abstract class SimpleBaseExpression extends Base {
 
     abstract protected String expression();
 
-    public String path() {
+    public String attributePath() {
         final Pattern pattern = Pattern.compile("^([^:\\s]*)");
         final Matcher matcher = pattern.matcher(expression());
         return matcher.find() ? matcher.group(1) : expression();

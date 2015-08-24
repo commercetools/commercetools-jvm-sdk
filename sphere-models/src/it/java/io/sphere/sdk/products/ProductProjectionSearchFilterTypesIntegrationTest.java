@@ -18,7 +18,6 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.RetryIntegrationTest;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.BeforeClass;
-import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.slf4j.LoggerFactory;
@@ -188,13 +187,12 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void booleanAttributesFacets() throws Exception {
         final TermFacetExpression<ProductProjection, Boolean> facetExpr = model().allVariants().attribute().ofBoolean(ATTR_NAME_BOOLEAN)
                 .faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
-        //assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(true, 1), TermStats.of(false, 1))); // still returning F, T. to be fixed by API
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of("T", 1), TermStats.of("F", 1)));
     }
 
     @Test
@@ -306,19 +304,18 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void numberAttributesFacets() throws Exception {
         final TermFacetExpression<ProductProjection, BigDecimal> termExpr = model().allVariants().attribute().ofNumber(ATTR_NAME_NUMBER)
                 .faceted().byAllTerms();
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
-        //assertThat(executeAndReturnTerms(termSearch, termExpr)).containsOnlyElementsOf(asList(TermStats.ofNumber(valueOf(5D), 1), TermStats.ofNumber(valueOf(10D), 1)));
+        assertThat(executeAndReturnTerms(termSearch, termExpr)).containsOnlyElementsOf(asList(TermStats.of("5.0", 1), TermStats.of("10.0", 1)));
 
         final RangeFacetExpression<ProductProjection, BigDecimal> rangeExpr = model().allVariants().attribute().ofNumber(ATTR_NAME_NUMBER)
                 .faceted().byGreaterThanOrEqualTo(valueOf(0));
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
-        final List<RangeStats<BigDecimal>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
-        //assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of(valueOf(0D), null, 2L, valueOf(5D), valueOf(10D), valueOf(15D), 7.5D)));
+        final List<RangeStats> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of("0.0", null, 2L, "5.0", "10.0", "15.0", 7.50D)));
     }
 
     @Test
@@ -334,19 +331,18 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void moneyAmountAttributesFacets() throws Exception {
         final TermFacetExpression<ProductProjection, Long> termExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount()
                 .faceted().byAllTerms();
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
-        //assertThat(executeAndReturnTerms(termSearch, termExpr)).containsOnlyElementsOf(asList(TermStats.of(valueOf(50000), 1), TermStats.of(valueOf(100000), 1)));
+        assertThat(executeAndReturnTerms(termSearch, termExpr)).containsOnlyElementsOf(asList(TermStats.of("50000", 1), TermStats.of("100000", 1)));
 
         final RangeFacetExpression<ProductProjection, Long> rangeExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount()
                 .faceted().byGreaterThanOrEqualTo(0L);
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
-        final List<RangeStats<Long>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
-        //assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of(valueOf(0D), null, 2L, valueOf(50000D), valueOf(100000D), valueOf(150000D), 75000D))); // it is actually cent amount!
+        final List<RangeStats> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of("0.0", null, 2L, "50000.0", "100000.0", "150000.0", 75000D)));
     }
 
     @Test
@@ -357,13 +353,12 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void moneyCurrencyAttributesFacets() throws Exception {
         final TermFacetExpression<ProductProjection, CurrencyUnit> facetExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY).currency()
                 .faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
-        //assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(Monetary.getCurrency("EUR"), 1), TermStats.of(Monetary.getCurrency("USD"), 1)));
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of("EUR", 1), TermStats.of("USD", 1)));
     }
 
     @Test
@@ -379,20 +374,19 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void dateAttributesFacets() throws Exception {
         final TermFacetExpression<ProductProjection, LocalDate> termExpr = model().allVariants().attribute().ofDate(ATTR_NAME_DATE)
                 .faceted().byAllTerms();
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
-        final List<TermStats<LocalDate>> terms = executeAndReturnTerms(termSearch, termExpr);
-        //assertThat(terms).containsOnlyElementsOf(asList(TermStats.of(LocalDate.parse("2001-09-11"), 1), TermStats.of(LocalDate.parse("2002-10-12"), 1)));
+        final List<TermStats> terms = executeAndReturnTerms(termSearch, termExpr);
+        assertThat(terms).containsOnlyElementsOf(asList(TermStats.of("2001-09-11", 1), TermStats.of("2002-10-12", 1)));
 
         final RangeFacetExpression<ProductProjection, LocalDate> rangeExpr = model().allVariants().attribute().ofDate(ATTR_NAME_DATE)
                 .faceted().byGreaterThanOrEqualTo(DATE_2001);
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
-        final List<RangeStats<LocalDate>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
-        //assertThat(actual).containsOnlyElementsOf(asList());
+        final List<RangeStats> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of("1.0001664E12", null, 2L, "1.0001664E12", "1.0343808E12", "2.0345472E12", 1.0172736E12D)));
     }
 
     @Test
@@ -408,20 +402,19 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void timeAttributesFacets() throws Exception {
         final TermFacetExpression<ProductProjection, LocalTime> termExpr = model().allVariants().attribute().ofTime(ATTR_NAME_TIME)
                 .faceted().byAllTerms();
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
-        final List<TermStats<LocalTime>> terms = executeAndReturnTerms(termSearch, termExpr);
-        //assertThat(terms).containsOnlyElementsOf(asList(TermStats.of(LocalTime.parse("22:05:09.203"), 1), TermStats.of(LocalTime.parse("23:06:10.204"), 1)));
+        final List<TermStats> terms = executeAndReturnTerms(termSearch, termExpr);
+        assertThat(terms).containsOnlyElementsOf(asList(TermStats.of("22:05:09.203", 1), TermStats.of("23:06:10.204", 1)));
 
         final RangeFacetExpression<ProductProjection, LocalTime> rangeExpr = model().allVariants().attribute().ofTime(ATTR_NAME_TIME)
                 .faceted().byGreaterThanOrEqualTo(TIME_22H);
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
-        final List<RangeStats<LocalTime>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
-        //assertThat(actual).containsOnlyElementsOf(asList());
+        final List<RangeStats> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of("7.9509203E7", null, 2L, "7.9509203E7", "8.3170204E7", "1.62679407E8", 8.13397035E7D)));
     }
 
     @Test
@@ -437,20 +430,19 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void datetimeAttributesFacets() throws Exception {
         final TermFacetExpression<ProductProjection, ZonedDateTime> termExpr = model().allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME)
                 .faceted().byAllTerms();
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
-        final List<TermStats<ZonedDateTime>> terms = executeAndReturnTerms(termSearch, termExpr);
-        //assertThat(terms).containsOnlyElementsOf(asList(TermStats.of(DATE_TIME_2001_22H, 1), TermStats.of(DATE_TIME_2002_23H, 1)));
+        final List<TermStats> terms = executeAndReturnTerms(termSearch, termExpr);
+        assertThat(terms).containsOnlyElementsOf(asList(TermStats.of("2002-10-12T23:06:10.204+0000", 1), TermStats.of("2001-09-11T22:05:09.203+0000", 1)));
 
         final RangeFacetExpression<ProductProjection, ZonedDateTime> rangeExpr = model().allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME)
                 .faceted().byGreaterThanOrEqualTo(DATE_TIME_2001_22H);
         final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
-        final List<RangeStats<ZonedDateTime>> actual = executeAndReturnRange(rangeSearch, rangeExpr);
-        //assertThat(actual).containsOnlyElementsOf(asList());
+        final List<RangeStats> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of("1.000245909203E12", null, 2L, "1.000245909203E12", "1.034463970204E12", "2.034709879407E12", 1.0173549397035E12D)));
     }
 
     @Test
@@ -477,13 +469,12 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
     }
 
-    @Ignore
     @Test
     public void booleanSetAttributesFacets() throws Exception {
         final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_BOOLEAN_SET)
                 .faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
-        //assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(true, 2), TermStats.of(false, 1)));
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of("T", 2), TermStats.of("F", 1)));
     }
 
     @Test
@@ -596,6 +587,20 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     }
 
     @Test
+    public void numberSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, BigDecimal> termExpr = model().allVariants().attribute().ofNumber(ATTR_NAME_NUMBER_SET)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
+        assertThat(executeAndReturnTerms(termSearch, termExpr)).containsOnlyElementsOf(asList(TermStats.of("5.0", 2), TermStats.of("10.0", 1)));
+
+        final RangeFacetExpression<ProductProjection, BigDecimal> rangeExpr = model().allVariants().attribute().ofNumber(ATTR_NAME_NUMBER_SET)
+                .faceted().byGreaterThanOrEqualTo(valueOf(0));
+        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
+        final List<RangeStats> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of("0.0", null, 2L, "5.0", "5.0", "10.0", 5.0D)));
+    }
+
+    @Test
     public void moneyAmountSetAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).centAmount()
@@ -609,11 +614,33 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     }
 
     @Test
+    public void moneyAmountSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, Long> termExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).centAmount()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
+        assertThat(executeAndReturnTerms(termSearch, termExpr)).containsOnlyElementsOf(asList(TermStats.of("50000", 2), TermStats.of("100000", 1)));
+
+        final RangeFacetExpression<ProductProjection, Long> rangeExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).centAmount()
+                .faceted().byGreaterThanOrEqualTo(0L);
+        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
+        final List<RangeStats> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of("0.0", null, 2L, "50000.0", "50000.0", "100000.0", 50000D)));
+    }
+
+    @Test
     public void moneyCurrencySetAttributesFilters() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).currency()
                         .filtered().by(MONEY_1000_USD.getCurrency()));
         assertThat(executeAndReturnIds(search)).containsOnly(product1.getId());
+    }
+
+    @Test
+    public void moneyCurrencySetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, CurrencyUnit> facetExpr = model().allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).currency()
+                .faceted().byAllTerms();
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of("EUR", 2), TermStats.of("USD", 1)));
     }
 
     @Test
@@ -630,6 +657,21 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     }
 
     @Test
+    public void dateSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, LocalDate> termExpr = model().allVariants().attribute().ofDate(ATTR_NAME_DATE_SET)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
+        final List<TermStats> terms = executeAndReturnTerms(termSearch, termExpr);
+        assertThat(terms).containsOnlyElementsOf(asList(TermStats.of("2001-09-11", 2), TermStats.of("2002-10-12", 1)));
+
+        final RangeFacetExpression<ProductProjection, LocalDate> rangeExpr = model().allVariants().attribute().ofDate(ATTR_NAME_DATE_SET)
+                .faceted().byGreaterThanOrEqualTo(DATE_2001);
+        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
+        final List<RangeStats> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of("1.0001664E12", null, 2L, "1.0001664E12", "1.0001664E12", "2.0003328E12", 1.0001664E12D)));
+    }
+
+    @Test
     public void timeSetAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofTime(ATTR_NAME_TIME_SET)
@@ -643,6 +685,21 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
     }
 
     @Test
+    public void timeSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, LocalTime> termExpr = model().allVariants().attribute().ofTime(ATTR_NAME_TIME_SET)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
+        final List<TermStats> terms = executeAndReturnTerms(termSearch, termExpr);
+        assertThat(terms).containsOnlyElementsOf(asList(TermStats.of("22:05:09.203", 2), TermStats.of("23:06:10.204", 1)));
+
+        final RangeFacetExpression<ProductProjection, LocalTime> rangeExpr = model().allVariants().attribute().ofTime(ATTR_NAME_TIME_SET)
+                .faceted().byGreaterThanOrEqualTo(TIME_22H);
+        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
+        final List<RangeStats> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of("7.9509203E7", null, 2L, "7.9509203E7", "7.9509203E7", "1.59018406E8", 7.9509203E7D)));
+    }
+
+    @Test
     public void dateTimeSetAttributesFilters() throws Exception {
         final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged()
                 .withQueryFilters(model -> model.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME_SET)
@@ -653,6 +710,21 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
                 .withQueryFilters(model -> model.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME_SET)
                         .filtered().byGreaterThanOrEqualTo(DATE_TIME_2002_23H));
         assertThat(executeAndReturnIds(rangeSearch)).containsOnly(product1.getId());
+    }
+
+    @Test
+    public void datetimeSetAttributesFacets() throws Exception {
+        final TermFacetExpression<ProductProjection, ZonedDateTime> termExpr = model().allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME_SET)
+                .faceted().byAllTerms();
+        final ProductProjectionSearch termSearch = ProductProjectionSearch.ofStaged().withFacets(termExpr);
+        final List<TermStats> terms = executeAndReturnTerms(termSearch, termExpr);
+        assertThat(terms).containsOnlyElementsOf(asList(TermStats.of("2001-09-11T22:05:09.203+0000", 2), TermStats.of("2002-10-12T23:06:10.204+0000", 1)));
+
+        final RangeFacetExpression<ProductProjection, ZonedDateTime> rangeExpr = model().allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME_SET)
+                .faceted().byGreaterThanOrEqualTo(DATE_TIME_2001_22H);
+        final ProductProjectionSearch rangeSearch = ProductProjectionSearch.ofStaged().withFacets(rangeExpr);
+        final List<RangeStats> actual = executeAndReturnRange(rangeSearch, rangeExpr);
+        assertThat(actual).containsOnlyElementsOf(asList(RangeStats.of("1.000245909203E12", null, 2L, "1.000245909203E12", "1.000245909203E12", "2.000491818406E12", 1.000245909203E12D)));
     }
 
     @Test
@@ -685,12 +757,12 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         return resultsToIds(result);
     }
 
-    private static <V> List<TermStats<V>> executeAndReturnTerms(final ProductProjectionSearch search, TermFacetExpression<ProductProjection, V> facetExpr) {
-        final TermFacetResult<V> termFacetResult = executeSearch(search).getTermFacetResult(facetExpr);
+    private static List<TermStats> executeAndReturnTerms(final ProductProjectionSearch search, TermFacetExpression<ProductProjection, ?> facetExpr) {
+        final TermFacetResult termFacetResult = executeSearch(search).getTermFacetResult(facetExpr);
         return termFacetResult.getTerms();
     }
 
-    private static <V extends Comparable<? super V>> List<RangeStats<V>> executeAndReturnRange(final ProductProjectionSearch search, RangeFacetExpression<ProductProjection, V> facetExpr) {
+    private static List<RangeStats> executeAndReturnRange(final ProductProjectionSearch search, RangeFacetExpression<ProductProjection, ?> facetExpr) {
         return executeSearch(search).getRangeFacetResult(facetExpr).getRanges();
     }
 

@@ -7,17 +7,7 @@ class TermFilterExpression<T, V> extends TermExpression<T, V> implements FilterE
     }
 
     @Override
-    public String toSphereFilter() {
-        return super.toSphereSearchExpression();
-    }
-
-    @Override
-    public String path() {
-        return super.serializedPath();
-    }
-
-    @Override
     public boolean equals(Object o) {
-        return o != null && o instanceof FilterExpression && toSphereFilter().equals(((FilterExpression) o).toSphereFilter());
+        return o != null && o instanceof FilterExpression && toSearchExpression().equals(((FilterExpression) o).toSearchExpression());
     }
 }
