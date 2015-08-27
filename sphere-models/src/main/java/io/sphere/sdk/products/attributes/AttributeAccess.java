@@ -95,6 +95,24 @@ public interface AttributeAccess<T> {
         });
     }
 
+    static AttributeAccess<Integer> ofInteger() {
+        return AttributeAccessImpl.ofPrimitive(integerTypeReference(), NumberType.class);
+    }
+
+    static AttributeAccess<Set<Integer>> ofIntegerSet() {
+        return AttributeAccessImpl.ofSet(NumberType.class, new TypeReference<Set<Integer>>() {
+        });
+    }
+
+    static AttributeAccess<Long> ofLong() {
+        return AttributeAccessImpl.ofPrimitive(longTypeReference(), NumberType.class);
+    }
+
+    static AttributeAccess<Set<Long>> ofLongSet() {
+        return AttributeAccessImpl.ofSet(NumberType.class, new TypeReference<Set<Long>>() {
+        });
+    }
+
     static AttributeAccess<MonetaryAmount> ofMoney() {
         return AttributeAccessImpl.ofPrimitive(monetaryAmountTypeReference(), MoneyType.class);
     }

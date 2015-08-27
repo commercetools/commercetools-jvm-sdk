@@ -110,6 +110,22 @@ public final class ProductTypeAttributesTest extends IntegrationTest {
     }
 
     @Test
+    public void integerAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofInteger(), AttributeAccess.ofIntegerSet(),
+                asSet(1, 2),
+                NumberType.of(),
+                AttributeDefinitionBuilder.of("number-attribute", LABEL, NumberType.of()).build());
+    }
+
+    @Test
+    public void longAttribute() throws Exception {
+        testSingleAndSet(AttributeAccess.ofLong(), AttributeAccess.ofLongSet(),
+                asSet(1L, 2L),
+                NumberType.of(),
+                AttributeDefinitionBuilder.of("number-attribute", LABEL, NumberType.of()).build());
+    }
+
+    @Test
     public void moneyAttribute() throws Exception {
         testSingleAndSet(AttributeAccess.ofMoney(), AttributeAccess.ofMoneySet(),
                 asSet(MoneyImpl.of(355, EUR), MoneyImpl.of(98774, EUR)),
