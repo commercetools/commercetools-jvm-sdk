@@ -1,8 +1,8 @@
 package io.sphere.sdk.products;
 
-import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.commands.ProductDeleteCommand;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -14,6 +14,10 @@ import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.search.SearchKeyword;
+import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
+import io.sphere.sdk.search.tokenizer.WhiteSpaceSuggestTokenizer;
 import io.sphere.sdk.suppliers.SimpleCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier;
 import io.sphere.sdk.taxcategories.TaxCategory;
@@ -31,9 +35,10 @@ import java.util.function.Supplier;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
+import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.Arrays.asList;
-import static io.sphere.sdk.producttypes.ProductTypeFixtures.*;
+import static java.util.Collections.singletonList;
 
 public class ProductFixtures {
     public static final Price PRICE = Price.of(MoneyImpl.of(new BigDecimal("12.34"), EUR)).withCountry(DE);
@@ -165,6 +170,19 @@ public class ProductFixtures {
             final Product product = client.execute(ProductCreateCommand.of(productDraft));
             consumer.accept(product, referencedProduct);
             client.execute(ProductDeleteCommand.of(product));
+        });
+    }
+
+    public static void withSuggestProduct(final TestClient client, final Consumer<Product> consumer) {
+        withEmptyProductType(client, randomKey(), productType -> {
+            final SearchKeywords searchKeywords = SearchKeywords.of(
+                    Locale.ENGLISH, asList(SearchKeyword.of("Multi tool"), SearchKeyword.of("Swiss Army Knife", WhiteSpaceSuggestTokenizer.of())),
+                    Locale.GERMAN, singletonList(SearchKeyword.of("Schweizer Messer", CustomSuggestTokenizer.of(asList("schweizer messer", "offiziersmesser", "sackmesser"))))
+            );
+
+            final ProductDraftBuilder productDraftBuilder = ProductDraftBuilder.of(productType, randomSlug(), randomSlug(), ProductVariantDraftBuilder.of().build())
+                    .searchKeywords(searchKeywords);
+            withProduct(client, productDraftBuilder, consumer);
         });
     }
 }

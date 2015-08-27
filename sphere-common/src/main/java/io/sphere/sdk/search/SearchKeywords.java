@@ -40,6 +40,14 @@ public class SearchKeywords extends Base {
     }
 
     @JsonIgnore
+    public static SearchKeywords of(final Locale locale1, final List<SearchKeyword> keywords1, final Locale locale2, final List<SearchKeyword> keywords2) {
+        final Map<Locale, List<SearchKeyword>> map = new HashMap<>();
+        map.put(locale1, keywords1);
+        map.put(locale2, keywords2);
+        return of(map);
+    }
+
+    @JsonIgnore
     public static SearchKeywords of(final Map<Locale, List<SearchKeyword>> content) {
         return new SearchKeywords(content);
     }
