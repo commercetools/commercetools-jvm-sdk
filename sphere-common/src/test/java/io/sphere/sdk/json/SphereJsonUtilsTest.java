@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 import static java.util.Locale.*;
 import static org.assertj.core.api.Assertions.*;
@@ -96,5 +97,31 @@ public class SphereJsonUtilsTest {
         final String brokenJsonString = "{\"de\":\",]]]]";
         assertThatThrownBy(() -> SphereJsonUtils.readObject(brokenJsonString, LocalizedString.typeReference()))
         .isInstanceOf(JsonException.class);
+    }
+
+    @Test
+    public void serializeLocale() {
+        final String jsonString = SphereJsonUtils.toJsonString(Locale.ENGLISH);
+        assertThat(jsonString).isEqualTo("\"en\"");
+    }
+
+    @Test
+    public void deserializelLocale() {
+        final String jsonString = "\"en\"";
+        final Locale locale = SphereJsonUtils.readObject(jsonString, TypeReferences.localeTypeReference());
+        assertThat(locale).isEqualTo(Locale.ENGLISH);
+    }
+
+    @Test
+    public void serializeFullLocale() {
+        final String jsonString = SphereJsonUtils.toJsonString(Locale.US);
+        assertThat(jsonString).isEqualTo("\"en-US\"");
+    }
+
+    @Test
+    public void deserializeFullLocale() {
+        final String jsonString = "\"en-US\"";
+        final Locale locale = SphereJsonUtils.readObject(jsonString, TypeReferences.localeTypeReference());
+        assertThat(locale).isEqualTo(Locale.US);
     }
 }

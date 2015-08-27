@@ -10,6 +10,11 @@ final class LocalizedStringQuerySortingModelImpl<T> extends QueryModelImpl<T> im
 
     @Override
     public StringQuerySortingModel<T> lang(final Locale locale) {
+        return locale(locale);
+    }
+
+    @Override
+    public StringQuerySortingModel<T> locale(final Locale locale) {
         return stringModel(locale.toLanguageTag());
     }
 

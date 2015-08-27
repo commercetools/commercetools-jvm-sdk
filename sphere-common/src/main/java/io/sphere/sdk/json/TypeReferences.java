@@ -7,6 +7,7 @@ import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.Locale;
 
 public final class TypeReferences {
     private TypeReferences() {
@@ -89,6 +90,15 @@ public final class TypeReferences {
             @Override
             public String toString() {
                 return "TypeReference<JsonNode>";
+            }
+        };
+    }
+
+    public static TypeReference<Locale> localeTypeReference() {
+        return new TypeReference<Locale>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Locale>";
             }
         };
     }

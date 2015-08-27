@@ -11,15 +11,16 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LocalizedStringTest {
-    private final Locale germanLocale = Locale.GERMAN;
-    private final Locale englishLocale = Locale.ENGLISH;
-    private final Locale frenchLocale = Locale.FRANCE;
-    private final String defaultString1 = "foo";
-    private final String defaultString2 = "bar";
-    private final LocalizedString localizedString = LocalizedString.of(germanLocale, defaultString1, englishLocale, defaultString2);
-    private final String dogFoodJson = "{\"de\":\"Hundefutter\",\"en\":\"dog food\"}";
-    private final LocalizedString dogFood = LocalizedString.of(germanLocale, "Hundefutter", englishLocale, "dog food");
-    private final LocalizedString upperCasedDogFood = LocalizedString.of(germanLocale, "HUNDEFUTTER", englishLocale, "DOG FOOD");
+    private static final String FULL_LOCALE_JSON_STRING = "{\"en-GB\":\"children\",\"en-US\":\"kids\"}";
+    private static final Locale germanLocale = Locale.GERMAN;
+    private static final Locale englishLocale = Locale.ENGLISH;
+    private static final Locale frenchLocale = Locale.FRANCE;
+    private static final String defaultString1 = "foo";
+    private static final String defaultString2 = "bar";
+    private static final LocalizedString localizedString = LocalizedString.of(germanLocale, defaultString1, englishLocale, defaultString2);
+    private static final String dogFoodJson = "{\"de\":\"Hundefutter\",\"en\":\"dog food\"}";
+    private static final LocalizedString dogFood = LocalizedString.of(germanLocale, "Hundefutter", englishLocale, "dog food");
+    private static final LocalizedString upperCasedDogFood = LocalizedString.of(germanLocale, "HUNDEFUTTER", englishLocale, "DOG FOOD");
 
     @Test
     public void createFromOneValue() throws Exception {
@@ -108,5 +109,18 @@ public class LocalizedStringTest {
     public void mapValue() throws Exception {
         final LocalizedString upperCased = dogFood.mapValue((locale, value) -> value.toUpperCase());
         assertThat(upperCased).isEqualTo(upperCasedDogFood);
+    }
+
+    @Test
+    public void serializeWithFullLocale() {
+        final LocalizedString localizedString = SphereJsonUtils.readObject(FULL_LOCALE_JSON_STRING, LocalizedString.typeReference());
+        assertThat(localizedString.get(Locale.US)).isEqualTo("kids");
+        assertThat(localizedString.get(Locale.UK)).isEqualTo("children");
+    }
+
+    @Test
+    public void deserializeWithFullLocale() {
+        final LocalizedString localizedString = LocalizedString.of(Locale.US, "kids", Locale.UK, "children");
+        assertThat(SphereJsonUtils.toJsonString(localizedString)).isEqualTo(FULL_LOCALE_JSON_STRING);
     }
 }
