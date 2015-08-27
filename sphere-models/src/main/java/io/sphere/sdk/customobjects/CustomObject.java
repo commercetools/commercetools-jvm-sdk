@@ -14,7 +14,7 @@ import io.sphere.sdk.models.Referenceable;
  * @param <T> The type of the value of this custom object.
  */
 @JsonDeserialize(as = CustomObjectImpl.class)
-public interface CustomObject<T> extends ResourceView<CustomObject<T>>, Referenceable<CustomObject<JsonNode>> {
+public interface CustomObject<T> extends ResourceView<CustomObject<T>, CustomObject<JsonNode>>, Referenceable<CustomObject<JsonNode>> {
 
     /**
      * The container is part of the custom object namespace to find it

@@ -6,9 +6,10 @@ import java.time.ZonedDateTime;
  * A default model view is a view for a resource in SPHERE.IO always consists of the fields
  * id, version, createdAt, lastModifiedAt.
  * @param <T> the interface which inherits from this interface
+ * @param <O> the interface which belongs to {@link Versioned}
  *
  */
-public interface ResourceView<T> extends Timestamped, Versioned<T> {
+public interface ResourceView<T, O> extends Timestamped, Versioned<O> {
     @Override
     String getId();
 

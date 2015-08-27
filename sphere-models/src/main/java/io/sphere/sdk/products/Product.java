@@ -28,7 +28,7 @@ import javax.annotation.Nullable;
  @see io.sphere.sdk.productdiscounts.ProductDiscount
  */
 @JsonDeserialize(as=ProductImpl.class)
-public interface Product extends ProductLike<Product>, Resource<Product> {
+public interface Product extends ProductLike<Product, Product>, Resource<Product> {
 
     ProductCatalogData getMasterData();
 

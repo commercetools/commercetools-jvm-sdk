@@ -38,7 +38,7 @@ import java.util.Set;
 
  */
 @JsonDeserialize(as=ProductProjectionImpl.class)
-public interface ProductProjection extends ProductLike<ProductProjection>, ProductDataLike, Referenceable<Product> {
+public interface ProductProjection extends ProductLike<ProductProjection, Product>, ProductDataLike, Referenceable<Product> {
 
     Boolean hasStagedChanges();
 
@@ -56,10 +56,6 @@ public interface ProductProjection extends ProductLike<ProductProjection>, Produ
                 return "TypeReference<ProductProjection>";
             }
         };
-    }
-
-    default Versioned<Product> toProductVersioned() {
-        return Versioned.of(getId(), getVersion());
     }
 
     @Override
