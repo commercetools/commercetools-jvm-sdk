@@ -2008,9 +2008,13 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><a href="io/sphere/sdk/search/FilterSearchModel.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">FilterSearchModel</span></a>&lt;<a href="io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>,<a href="io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt; - Class in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#find-java.util.Locale-">find(Locale)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Searches the translation for an exact locale and returning the result in an <code>Optional</code>.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#find-java.lang.Iterable-">find(Iterable&lt;Locale&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Searches the translation for some exact locales in the order they appear and returning the result in an <code>Optional</code>.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/AttributeContainer.html#findAttribute-io.sphere.sdk.products.attributes.NamedAttributeAccess-">findAttribute(NamedAttributeAccess&lt;T&gt;)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/AttributeContainer.html" title="interface in io.sphere.sdk.products">AttributeContainer</a></dt>
 <dd>
 <div class="block">Access one attribute of a specific name and type which is known in the first place, consult <a href="io/sphere/sdk/products/attributes/NamedAttributeAccess.html" title="interface in io.sphere.sdk.products.attributes"><code>NamedAttributeAccess</code></a> how to implement these.</div>
@@ -2111,9 +2115,13 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <div class="block">Alias for <a href="io/sphere/sdk/models/Builder.html#build--"><code>Builder.build()</code></a>.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#get-java.util.Locale-">get(Locale)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Searches the translation for an exact locale by using <code>null</code> in the case the locale ist not present.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#get-java.lang.Iterable-">get(Iterable&lt;Locale&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Searches the translation for some exact locales in the order they appear and using null as result if no match could be found.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductCatalogData.html#get-io.sphere.sdk.products.ProductProjectionType-">get(ProductProjectionType)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductCatalogData.html" title="interface in io.sphere.sdk.products">ProductCatalogData</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/Get.html" title="interface in io.sphere.sdk.queries"><span class="typeNameLink">Get</span></a>&lt;<a href="io/sphere/sdk/queries/Get.html" title="type parameter in Get">T</a>&gt; - Interface in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
@@ -2871,7 +2879,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringEntry.html#getLocale--">getLocale()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#getLocales--">getLocales()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Returns all locales included in this instance.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html#getLocation--">getLocation()</a></span> - Method in class io.sphere.sdk.zones.commands.updateactions.<a href="io/sphere/sdk/zones/commands/updateactions/AddLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions">AddLocation</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/commands/updateactions/RemoveLocation.html#getLocation--">getLocation()</a></span> - Method in class io.sphere.sdk.zones.commands.updateactions.<a href="io/sphere/sdk/zones/commands/updateactions/RemoveLocation.html" title="class in io.sphere.sdk.zones.commands.updateactions">RemoveLocation</a></dt>
@@ -3564,6 +3574,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/StringHttpRequestBody.html#getString--">getString()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/StringHttpRequestBody.html" title="class in io.sphere.sdk.http">StringHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/SuggestionResult.html#getSuggestionsForLocale-java.util.Locale-">getSuggestionsForLocale(Locale)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/SuggestionResult.html" title="interface in io.sphere.sdk.products">SuggestionResult</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/SuggestionResult.html#getSuggestionsMap--">getSuggestionsMap()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/SuggestionResult.html" title="interface in io.sphere.sdk.products">SuggestionResult</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchKeyword.html#getSuggestTokenizer--">getSuggestTokenizer()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchKeyword.html" title="class in io.sphere.sdk.search">SearchKeyword</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/RangeStats.html#getSum--">getSum()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/RangeStats.html" title="class in io.sphere.sdk.search">RangeStats</a></dt>
@@ -3654,6 +3668,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">List of the different terms and amount of associated resources.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Suggestion.html#getText--">getText()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Suggestion.html" title="interface in io.sphere.sdk.products">Suggestion</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html#getText--">getText()</a></span> - Method in class io.sphere.sdk.reviews.commands.updateactions.<a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetText</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#getText--">getText()</a></span> - Method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
@@ -3724,6 +3740,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#getTransitions--">getTransitions()</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#getTranslation-java.lang.Iterable-">getTranslation(Iterable&lt;Locale&gt;)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
+<dd>
+<div class="block">Searches a translation which matches a locale in <code>locales</code> and uses language fallbackes.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/Project.html#getTrialUntil--">getTrialUntil()</a></span> - Method in class io.sphere.sdk.projects.<a href="io/sphere/sdk/projects/Project.html" title="class in io.sphere.sdk.projects">Project</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html#getTtlMinutes--">getTtlMinutes()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a></dt>
@@ -4921,10 +4941,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/queries/StateQueryModel.html#key--">key()</a></span> - Method in class io.sphere.sdk.states.queries.<a href="io/sphere/sdk/states/queries/StateQueryModel.html" title="class in io.sphere.sdk.states.queries">StateQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/meta/KnownIssues.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">KnownIssues</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
-<dd>
-<div class="block"><a href=https://github.com/sphereio/sphere-jvm-sdk/issues/183>#183</a> <a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a> currently supports only the language in the <code>Locale</code></div>
-</dd>
 </dl>
 <a name="I:L">
 <!--   -->
@@ -4936,7 +4952,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/LocalizedEnumSearchModel.html#label--">label()</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/LocalizedEnumSearchModel.html" title="class in io.sphere.sdk.search">LocalizedEnumSearchModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html#lang-java.util.Locale-">lang(Locale)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringQueryModel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Alias for <a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html#locale-java.util.Locale-"><code>LocalizedStringQueryModel.locale(Locale)</code></a>.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html#lang-java.util.Locale-">lang(Locale)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearchModel.html#lastModifiedAt--">lastModifiedAt()</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a></dt>
@@ -5003,7 +5021,13 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#localDateTypeReference--">localDateTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html#locale-java.util.Locale-">locale(Locale)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQueryModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html#locale-java.util.Locale-">locale(Locale)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/LocalizedStringQuerySortingModel.html" title="interface in io.sphere.sdk.queries">LocalizedStringQuerySortingModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/LocalizedStringSearchModel.html#locale-java.util.Locale-">locale(Locale)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/LocalizedStringSearchModel.html" title="class in io.sphere.sdk.search">LocalizedStringSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/TypeReferences.html#localeTypeReference--">localeTypeReference()</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/TypeReferences.html" title="class in io.sphere.sdk.json">TypeReferences</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/utils/LocaleUtils.html" title="class in io.sphere.sdk.utils"><span class="typeNameLink">LocaleUtils</span></a> - Class in <a href="io/sphere/sdk/utils/package-summary.html">io.sphere.sdk.utils</a></dt>
 <dd>&nbsp;</dd>
@@ -5017,7 +5041,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedString</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>
-<div class="block">A wrapper around an attribute which can be translated into a number of locales.</div>
+<div class="block">A localized string is a object where the keys are <code>Locale</code>s (HTTP API: ISO language tags),
+ and the values are the corresponding strings used for that language.</div>
 </dd>
 <dt><a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">LocalizedStringEntry</span></a> - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
@@ -5179,11 +5204,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#metaKeywords--">metaKeywords()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">MetaModelByIdDeleteCommandBuilder</span></a>&lt;<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="type parameter in MetaModelByIdDeleteCommandBuilder">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="type parameter in MetaModelByIdDeleteCommandBuilder">T</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="type parameter in MetaModelByIdDeleteCommandBuilder">C</a>,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="type parameter in MetaModelByIdDeleteCommandBuilder">E</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
+<dt><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">MetaModelByIdDeleteCommandBuilder</span></a>&lt;<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="type parameter in MetaModelByIdDeleteCommandBuilder">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="type parameter in MetaModelByIdDeleteCommandBuilder">T</a>,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="type parameter in MetaModelByIdDeleteCommandBuilder">T</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="type parameter in MetaModelByIdDeleteCommandBuilder">C</a>,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandBuilder.html" title="type parameter in MetaModelByIdDeleteCommandBuilder">E</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
 <div class="block">Internal builder.</div>
 </dd>
-<dt><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">MetaModelByIdDeleteCommandImpl</span></a>&lt;<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">C</a>,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">E</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
+<dt><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">MetaModelByIdDeleteCommandImpl</span></a>&lt;<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">T</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">C</a>,<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="type parameter in MetaModelByIdDeleteCommandImpl">E</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
 <div class="block">Internal base class to implement commands which deletes an entity by ID in SPHERE.IO.</div>
 </dd>
@@ -5259,11 +5284,11 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#MetaModelSearchDslImpl-io.sphere.sdk.search.MetaModelSearchDslBuilder-">MetaModelSearchDslImpl(MetaModelSearchDslBuilder&lt;T, C, S, E&gt;)</a></span> - Constructor for class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">MetaModelUpdateCommandDslBuilder</span></a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">T</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">T</a>,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">C</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">E</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
+<dt><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">MetaModelUpdateCommandDslBuilder</span></a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">T</a>,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">T</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">T</a>,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">C</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslBuilder.html" title="type parameter in MetaModelUpdateCommandDslBuilder">E</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
 <div class="block">Internal class.</div>
 </dd>
-<dt><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">MetaModelUpdateCommandDslImpl</span></a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">C</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">E</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
+<dt><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">MetaModelUpdateCommandDslImpl</span></a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">C</a>&gt;,<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="type parameter in MetaModelUpdateCommandDslImpl">E</a>&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
 <div class="block">Internal base class to implement commands that change one entity in SPHERE.IO.</div>
 </dd>
@@ -5946,11 +5971,17 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <div class="block">Creates an instance without any value.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#of-java.util.Locale-java.lang.String-">of(Locale, String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates an instance with one locale translation pair.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#of-java.util.Locale-java.lang.String-java.util.Locale-java.lang.String-">of(Locale, String, Locale, String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates an instance for two different locales.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#of-java.util.Map-">of(Map&lt;Locale, String&gt;)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates an instance by supplying a map.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedStringEntry.html#of-java.util.Locale-java.lang.String-">of(Locale, String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/MetaAttributesDsl.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.models.<a href="io/sphere/sdk/models/MetaAttributesDsl.html" title="interface in io.sphere.sdk.models">MetaAttributesDsl</a></dt>
@@ -6317,7 +6348,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductByIdGet.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductByIdGet.html" title="interface in io.sphere.sdk.products.queries">ProductByIdGet</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionByIdGet.html#of-io.sphere.sdk.models.Identifiable-io.sphere.sdk.products.ProductProjectionType-">of(Identifiable&lt;ProductProjection&gt;, ProductProjectionType)</a></span> - Static method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdGet.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionByIdGet</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionByIdGet.html#of-io.sphere.sdk.products.ProductIdentifiable-io.sphere.sdk.products.ProductProjectionType-">of(ProductIdentifiable, ProductProjectionType)</a></span> - Static method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdGet.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionByIdGet</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionByIdGet.html#of-java.lang.String-io.sphere.sdk.products.ProductProjectionType-">of(String, ProductProjectionType)</a></span> - Static method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionByIdGet.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionByIdGet</a></dt>
 <dd>&nbsp;</dd>
@@ -6329,11 +6360,19 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/SuggestQuery.html#of-java.util.List-">of(List&lt;LocalizedStringEntry&gt;)</a></span> - Static method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/SuggestQuery.html" title="interface in io.sphere.sdk.products.queries">SuggestQuery</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/SuggestQuery.html#of-io.sphere.sdk.models.LocalizedStringEntry-">of(LocalizedStringEntry)</a></span> - Static method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/SuggestQuery.html" title="interface in io.sphere.sdk.products.queries">SuggestQuery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html#of-io.sphere.sdk.products.ProductProjectionType-">of(ProductProjectionType)</a></span> - Static method in interface io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></dt>
 <dd>
 <div class="block">Creates a search request object with the product projection type specified by <code>productProjectionType</code>.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearchModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearchModel.html" title="class in io.sphere.sdk.products.search">ProductProjectionSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Suggestion.html#of-java.lang.String-">of(String)</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Suggestion.html" title="interface in io.sphere.sdk.products">Suggestion</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/SuggestionResult.html#of-java.util.Map-">of(Map&lt;Locale, List&lt;Suggestion&gt;&gt;)</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/SuggestionResult.html" title="interface in io.sphere.sdk.products">SuggestionResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/VariantIdentifier.html#of-io.sphere.sdk.models.Referenceable-java.lang.Integer-">of(Referenceable&lt;Product&gt;, Integer)</a></span> - Static method in class io.sphere.sdk.products.<a href="io/sphere/sdk/products/VariantIdentifier.html" title="class in io.sphere.sdk.products">VariantIdentifier</a></dt>
 <dd>&nbsp;</dd>
@@ -6448,6 +6487,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchKeyword.html#of-java.lang.String-io.sphere.sdk.search.tokenizer.SuggestTokenizer-">of(String, SuggestTokenizer)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchKeyword.html" title="class in io.sphere.sdk.search">SearchKeyword</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchKeywords.html#of-java.util.Locale-java.util.List-">of(Locale, List&lt;SearchKeyword&gt;)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchKeywords.html#of-java.util.Locale-java.util.List-java.util.Locale-java.util.List-">of(Locale, List&lt;SearchKeyword&gt;, Locale, List&lt;SearchKeyword&gt;)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/SearchKeywords.html#of-java.util.Map-">of(Map&lt;Locale, List&lt;SearchKeyword&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/SearchKeywords.html" title="class in io.sphere.sdk.search">SearchKeywords</a></dt>
 <dd>&nbsp;</dd>
@@ -6709,7 +6750,9 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/AttributeAccess.html#ofDoubleSet--">ofDoubleSet()</a></span> - Static method in interface io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#ofEnglishLocale-java.lang.String-">ofEnglishLocale(String)</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates an instance with one translation for English (<code>Locale.ENGLISH</code>).</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductAttributeSearchModel.html#ofEnum-java.lang.String-">ofEnum(String)</a></span> - Method in class io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductAttributeSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeSearchModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/AttributeAccess.html#ofEnumValue--">ofEnumValue()</a></span> - Static method in interface io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a></dt>
@@ -7046,7 +7089,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#plus-java.util.Locale-java.lang.String-">plus(Locale, String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
 <dd>
-<div class="block">LocalizedString containing the given entries.</div>
+<div class="block">Creates a new <a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a> containing the given entries and the new one.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#plus--">plus()</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -7490,7 +7533,7 @@ execute(ProductDiscountDeleteCommand.of(productDiscount));
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/ProductIdentifiable.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">ProductIdentifiable</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>
-<div class="block">Special role to pass the id of a <a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> or <a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> since <a href="io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models"><code>Identifiable</code></a> can only be implemented for one of them.</div>
+<div class="block">Special role to pass the id of a <a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a> or <a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a>.</div>
 </dd>
 <dt><a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">ProductProjection</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
 <dd>
@@ -7950,12 +7993,12 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/GenericMessageImpl.html#resourceVersion">resourceVersion</a></span> - Variable in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/GenericMessageImpl.html" title="class in io.sphere.sdk.messages">GenericMessageImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">ResourceView</span></a>&lt;<a href="io/sphere/sdk/models/ResourceView.html" title="type parameter in ResourceView">T</a>&gt; - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
+<dt><a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models"><span class="typeNameLink">ResourceView</span></a>&lt;<a href="io/sphere/sdk/models/ResourceView.html" title="type parameter in ResourceView">T</a>,<a href="io/sphere/sdk/models/ResourceView.html" title="type parameter in ResourceView">O</a>&gt; - Interface in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>
 <div class="block">A default model view is a view for a resource in SPHERE.IO always consists of the fields
  id, version, createdAt, lastModifiedAt.</div>
 </dd>
-<dt><a href="io/sphere/sdk/models/ResourceViewImpl.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">ResourceViewImpl</span></a>&lt;<a href="io/sphere/sdk/models/ResourceViewImpl.html" title="type parameter in ResourceViewImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
+<dt><a href="io/sphere/sdk/models/ResourceViewImpl.html" title="class in io.sphere.sdk.models"><span class="typeNameLink">ResourceViewImpl</span></a>&lt;<a href="io/sphere/sdk/models/ResourceViewImpl.html" title="type parameter in ResourceViewImpl">T</a>,<a href="io/sphere/sdk/models/ResourceViewImpl.html" title="type parameter in ResourceViewImpl">O</a>&gt; - Class in <a href="io/sphere/sdk/models/package-summary.html">io.sphere.sdk.models</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/ResourceViewImpl.html#ResourceViewImpl-java.lang.String-java.lang.Long-java.time.ZonedDateTime-java.time.ZonedDateTime-">ResourceViewImpl(String, Long, ZonedDateTime, ZonedDateTime)</a></span> - Constructor for class io.sphere.sdk.models.<a href="io/sphere/sdk/models/ResourceViewImpl.html" title="class in io.sphere.sdk.models">ResourceViewImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -8485,7 +8528,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#slugifiedUnique--">slugifiedUnique()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
 <dd>
-<div class="block">Creates a new <a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a> where all translations are slugified (remove whitespace, etc.).</div>
+<div class="block">Creates a new <a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a> where all translations are slugified (remove whitespace, etc.) and a random supplement is added.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/StringUtils.html#slugify-java.lang.String-">slugify(String)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/StringUtils.html" title="class in io.sphere.sdk.utils">StringUtils</a></dt>
 <dd>&nbsp;</dd>
@@ -8633,72 +8676,73 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/meta/SphereResources.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">SphereResources</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
-<div class="block"><table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="3">cartdiscounts</td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html'>CartDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html'>CartDiscountUpdateCommand</a></td></tr>
+<div class="block"><table border=1><tr><th>resource</th><th>accesors</th><th>mutators</th></tr><tr><td rowspan="3">cartdiscounts</td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountByIdGet.html'>CartDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommand.html'>CartDiscountCreateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/cartdiscounts/queries/CartDiscountQuery.html'>CartDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountDeleteCommand.html'>CartDiscountDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountCreateCommand.html'>CartDiscountCreateCommand</a></td></tr>
-<tr><td rowspan="3">carts</td><td><a href='../../../..//io/sphere/sdk/carts/queries/CartQuery.html'>CartQuery</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartUpdateCommand.html'>CartUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartByCustomerIdGet.html'>CartByCustomerIdGet</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartDeleteCommand.html'>CartDeleteCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartByIdGet.html'>CartByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartCreateCommand.html'>CartCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/cartdiscounts/commands/CartDiscountUpdateCommand.html'>CartDiscountUpdateCommand</a></td></tr>
+<tr><td rowspan="3">carts</td><td><a href='../../../..//io/sphere/sdk/carts/queries/CartByCustomerIdGet.html'>CartByCustomerIdGet</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartDeleteCommand.html'>CartDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartQuery.html'>CartQuery</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartCreateCommand.html'>CartCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/carts/queries/CartByIdGet.html'>CartByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/carts/commands/CartUpdateCommand.html'>CartUpdateCommand</a></td></tr>
 <tr><td rowspan="3">categories</td><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryByIdGet.html'>CategoryByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryCreateCommand.html'>CategoryCreateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/categories/queries/CategoryQuery.html'>CategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryDeleteCommand.html'>CategoryDeleteCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/categories/commands/CategoryUpdateCommand.html'>CategoryUpdateCommand</a></td></tr>
-<tr><td rowspan="3">channels</td><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelQuery.html'>ChannelQuery</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelCreateCommand.html'>ChannelCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelByIdGet.html'>ChannelByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelUpdateCommand.html'>ChannelUpdateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelDeleteCommand.html'>ChannelDeleteCommand</a></td></tr>
-<tr><td rowspan="3">customergroups</td><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupByIdGet.html'>CustomerGroupByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html'>CustomerGroupUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html'>CustomerGroupQuery</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html'>CustomerGroupCreateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupDeleteCommand.html'>CustomerGroupDeleteCommand</a></td></tr>
-<tr><td rowspan="9">customers</td><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerQuery.html'>CustomerQuery</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html'>CustomerVerifyEmailCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByTokenGet.html'>CustomerByTokenGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html'>CustomerCreateTokenCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByIdGet.html'>CustomerByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerDeleteCommand.html'>CustomerDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html'>CustomerChangePasswordCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html'>CustomerCreateEmailTokenCommand</a></td></tr>
+<tr><td rowspan="3">channels</td><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelByIdGet.html'>ChannelByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelCreateCommand.html'>ChannelCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/channels/queries/ChannelQuery.html'>ChannelQuery</a></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelDeleteCommand.html'>ChannelDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/channels/commands/ChannelUpdateCommand.html'>ChannelUpdateCommand</a></td></tr>
+<tr><td rowspan="3">customergroups</td><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html'>CustomerGroupQuery</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html'>CustomerGroupCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupByIdGet.html'>CustomerGroupByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupDeleteCommand.html'>CustomerGroupDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html'>CustomerGroupUpdateCommand</a></td></tr>
+<tr><td rowspan="9">customers</td><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByIdGet.html'>CustomerByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html'>CustomerVerifyEmailCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByTokenGet.html'>CustomerByTokenGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html'>CustomerCreateEmailTokenCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerQuery.html'>CustomerQuery</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html'>CustomerChangePasswordCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerUpdateCommand.html'>CustomerUpdateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerSignInCommand.html'>CustomerSignInCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html'>CustomerPasswordResetCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html'>CustomerCreateTokenCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerDeleteCommand.html'>CustomerDeleteCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateCommand.html'>CustomerCreateCommand</a></td></tr>
-<tr><td rowspan="3">customobjects</td><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html'>CustomObjectByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html'>CustomObjectUpsertCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectQuery.html'>CustomObjectQuery</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html'>CustomObjectCustomJsonMappingUpsertCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html'>CustomObjectCustomJsonMappingByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html'>CustomObjectDeleteCommand</a></td></tr>
-<tr><td rowspan="3">discountcodes</td><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html'>DiscountCodeByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeDeleteCommand.html'>DiscountCodeDeleteCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html'>DiscountCodeQuery</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html'>DiscountCodeCreateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html'>DiscountCodeUpdateCommand</a></td></tr>
-<tr><td rowspan="3">inventory</td><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryByIdGet.html'>InventoryEntryByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryCreateCommand.html'>InventoryEntryCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryQuery.html'>InventoryEntryQuery</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommand.html'>InventoryEntryUpdateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryDeleteCommand.html'>InventoryEntryDeleteCommand</a></td></tr>
-<tr><td rowspan="3">messages</td><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageQuery.html'>MessageQuery</a></td><td></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageByIdGet.html'>MessageByIdGet</a></td><td></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html'>CustomerPasswordResetCommand</a></td></tr>
+<tr><td rowspan="3">customobjects</td><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectQuery.html'>CustomObjectQuery</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html'>CustomObjectDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html'>CustomObjectByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html'>CustomObjectCustomJsonMappingUpsertCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html'>CustomObjectCustomJsonMappingByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html'>CustomObjectUpsertCommand</a></td></tr>
+<tr><td rowspan="3">discountcodes</td><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html'>DiscountCodeQuery</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html'>DiscountCodeUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html'>DiscountCodeByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html'>DiscountCodeCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeDeleteCommand.html'>DiscountCodeDeleteCommand</a></td></tr>
+<tr><td rowspan="3">inventory</td><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryQuery.html'>InventoryEntryQuery</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryUpdateCommand.html'>InventoryEntryUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/inventory/queries/InventoryEntryByIdGet.html'>InventoryEntryByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryDeleteCommand.html'>InventoryEntryDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/inventory/commands/InventoryEntryCreateCommand.html'>InventoryEntryCreateCommand</a></td></tr>
+<tr><td rowspan="3">messages</td><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageByIdGet.html'>MessageByIdGet</a></td><td></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/messages/queries/TypedMessageQuery.html'>TypedMessageQuery</a></td><td></td></tr>
-<tr><td rowspan="3">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderQuery.html'>OrderQuery</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html'>OrderFromCartCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderByIdGet.html'>OrderByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderImportCommand.html'>OrderImportCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageQuery.html'>MessageQuery</a></td><td></td></tr>
+<tr><td rowspan="3">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderByIdGet.html'>OrderByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html'>OrderFromCartCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderQuery.html'>OrderQuery</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderImportCommand.html'>OrderImportCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderUpdateCommand.html'>OrderUpdateCommand</a></td></tr>
-<tr><td rowspan="3">productdiscounts</td><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountByIdGet.html'>ProductDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommand.html'>ProductDiscountCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountQuery.html'>ProductDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountDeleteCommand.html'>ProductDiscountDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommand.html'>ProductDiscountUpdateCommand</a></td></tr>
-<tr><td rowspan="5">products</td><td><a href='../../../..//io/sphere/sdk/products/queries/ProductByIdGet.html'>ProductByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteCommand.html'>ProductDeleteCommand</a></td></tr>
+<tr><td rowspan="3">productdiscounts</td><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountByIdGet.html'>ProductDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommand.html'>ProductDiscountUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountQuery.html'>ProductDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommand.html'>ProductDiscountCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountDeleteCommand.html'>ProductDiscountDeleteCommand</a></td></tr>
+<tr><td rowspan="6">products</td><td><a href='../../../..//io/sphere/sdk/products/search/ProductProjectionSearch.html'>ProductProjectionSearch</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductCreateCommand.html'>ProductCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductByIdGet.html'>ProductByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductDeleteCommand.html'>ProductDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/SuggestQuery.html'>SuggestQuery</a></td><td><a href='../../../..//io/sphere/sdk/products/commands/ProductUpdateCommand.html'>ProductUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductQuery.html'>ProductQuery</a></td><td></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionQuery.html'>ProductProjectionQuery</a></td><td></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/products/queries/ProductProjectionByIdGet.html'>ProductProjectionByIdGet</a></td><td></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/products/search/ProductProjectionSearch.html'>ProductProjectionSearch</a></td><td></td></tr>
-<tr><td rowspan="3">producttypes</td><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeQuery.html'>ProductTypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html'>ProductTypeUpdateCommand</a></td></tr>
+<tr><td rowspan="3">producttypes</td><td><a href='../../../..//io/sphere/sdk/producttypes/queries/ProductTypeQuery.html'>ProductTypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeUpdateCommand.html'>ProductTypeUpdateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html'>ProductTypeDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html'>ProductTypeCreateCommand</a></td></tr>
 <tr><td rowspan="1">projects</td><td><a href='../../../..//io/sphere/sdk/projects/queries/ProjectGet.html'>ProjectGet</a></td><td></td></tr>
 <tr><td rowspan="3">reviews</td><td><a href='../../../..//io/sphere/sdk/reviews/queries/ReviewQuery.html'>ReviewQuery</a></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewDeleteCommand.html'>ReviewDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html'>ReviewUpdateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewCreateCommand.html'>ReviewCreateCommand</a></td></tr>
-<tr><td rowspan="4">shippingmethods</td><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdGet.html'>ShippingMethodByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html'>ShippingMethodCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html'>ShippingMethodsByLocationGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html'>ShippingMethodUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/reviews/commands/ReviewUpdateCommand.html'>ReviewUpdateCommand</a></td></tr>
+<tr><td rowspan="4">shippingmethods</td><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodByIdGet.html'>ShippingMethodByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodUpdateCommand.html'>ShippingMethodUpdateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByCartGet.html'>ShippingMethodsByCartGet</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodDeleteCommand.html'>ShippingMethodDeleteCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html'>ShippingMethodQuery</a></td><td></td></tr>
-<tr><td rowspan="3">states</td><td><a href='../../../..//io/sphere/sdk/states/queries/StateByIdGet.html'>StateByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateCreateCommand.html'>StateCreateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/states/queries/StateQuery.html'>StateQuery</a></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateDeleteCommand.html'>StateDeleteCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateUpdateCommand.html'>StateUpdateCommand</a></td></tr>
-<tr><td rowspan="3">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryUpdateCommand.html'>TaxCategoryUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodQuery.html'>ShippingMethodQuery</a></td><td><a href='../../../..//io/sphere/sdk/shippingmethods/commands/ShippingMethodCreateCommand.html'>ShippingMethodCreateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/shippingmethods/queries/ShippingMethodsByLocationGet.html'>ShippingMethodsByLocationGet</a></td><td></td></tr>
+<tr><td rowspan="3">states</td><td><a href='../../../..//io/sphere/sdk/states/queries/StateQuery.html'>StateQuery</a></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateDeleteCommand.html'>StateDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/states/queries/StateByIdGet.html'>StateByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateUpdateCommand.html'>StateUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/states/commands/StateCreateCommand.html'>StateCreateCommand</a></td></tr>
+<tr><td rowspan="3">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html'>TaxCategoryDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryUpdateCommand.html'>TaxCategoryUpdateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html'>TaxCategoryDeleteCommand</a></td></tr>
-<tr><td rowspan="3">zones</td><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneByIdGet.html'>ZoneByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneUpdateCommand.html'>ZoneUpdateCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneQuery.html'>ZoneQuery</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneDeleteCommand.html'>ZoneDeleteCommand</a></td></tr>
+<tr><td rowspan="3">zones</td><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneQuery.html'>ZoneQuery</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneDeleteCommand.html'>ZoneDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneByIdGet.html'>ZoneByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneUpdateCommand.html'>ZoneUpdateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneCreateCommand.html'>ZoneCreateCommand</a></td></tr>
 </table></div>
 </dd>
@@ -8775,9 +8819,13 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/ChangeInitial.html">ChangeInitial</a></li><li><a href="updateactions/ChangeKey.html">ChangeKey</a></li><li><a href="updateactions/ChangeType.html">ChangeType</a></li><li><a href="updateactions/SetDescription.html">SetDescription</a></li><li><a href="updateactions/SetName.html">SetName</a></li><li><a href="updateactions/SetTransitions.html">SetTransitions</a></li></ul></div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#stream--">stream()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Creates a new Stream of entries.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#streamCollector--">streamCollector()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Collector to collect a stream of <a href="io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models"><code>LocalizedStringEntry</code></a>s to one <a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models"><code>LocalizedString</code></a>.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#streetName-java.lang.String-">streetName(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#streetNumber-java.lang.String-">streetNumber(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
@@ -8806,6 +8854,14 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/CompletableFutureUtils.html#successful-T-">successful(T)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/CompletableFutureUtils.html" title="class in io.sphere.sdk.utils">CompletableFutureUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/Suggestion.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">Suggestion</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/SuggestionResult.html" title="interface in io.sphere.sdk.products"><span class="typeNameLink">SuggestionResult</span></a> - Interface in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/products/queries/SuggestQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="typeNameLink">SuggestQuery</span></a> - Interface in <a href="io/sphere/sdk/products/queries/package-summary.html">io.sphere.sdk.products.queries</a></dt>
+<dd>
+<div class="block">Query search keywords to implement a basic auto-complete functionality.</div>
+</dd>
 <dt><a href="io/sphere/sdk/search/tokenizer/SuggestTokenizer.html" title="interface in io.sphere.sdk.search.tokenizer"><span class="typeNameLink">SuggestTokenizer</span></a> - Interface in <a href="io/sphere/sdk/search/tokenizer/package-summary.html">io.sphere.sdk.search.tokenizer</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/expansion/LineItemExpansionModel.html#supplyChannel--">supplyChannel()</a></span> - Method in class io.sphere.sdk.carts.expansion.<a href="io/sphere/sdk/carts/expansion/LineItemExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">LineItemExpansionModel</a></dt>
@@ -8965,8 +9021,6 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/IterableUtils.html#toList-java.lang.Iterable-">toList(Iterable&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/IterableUtils.html" title="class in io.sphere.sdk.utils">IterableUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpStatusCode.html#TOO_MANY_REQUESTS_429">TOO_MANY_REQUESTS_429</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpStatusCode.html" title="class in io.sphere.sdk.http">HttpStatusCode</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/ProductProjection.html#toProductVersioned--">toProductVersioned()</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Product.html#toProjection-io.sphere.sdk.products.ProductProjectionType-">toProjection(ProductProjectionType)</a></span> - Method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dt>
 <dd>&nbsp;</dd>
@@ -9336,13 +9390,13 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/commands/UpdateCommand.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommand</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommand.html" title="type parameter in UpdateCommand">T</a>&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>&gt;,<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">C</a>&gt;&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
+<dt><a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDsl</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>&gt;,<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="type parameter in UpdateCommandDsl">C</a>&gt;&gt; - Interface in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDslBuilder</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">T</a>&gt;,<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">C</a>&gt;&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
+<dt><a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDslBuilder</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">T</a>&gt;,<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslBuilder.html" title="type parameter in UpdateCommandDslBuilder">C</a>&gt;&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
 <div class="block">Internal class.</div>
 </dd>
-<dt><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDslImpl</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;,<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
+<dt><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands"><span class="typeNameLink">UpdateCommandDslImpl</span></a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a> extends <a href="io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;,<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a> extends <a href="io/sphere/sdk/commands/UpdateCommandDsl.html" title="interface in io.sphere.sdk.commands">UpdateCommandDsl</a>&lt;<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a>&gt;&gt; - Class in <a href="io/sphere/sdk/commands/package-summary.html">io.sphere.sdk.commands</a></dt>
 <dd>
 <div class="block">Internal base class to implement commands that change one entity in SPHERE.IO.</div>
 </dd>
@@ -9975,6 +10029,8 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html#withLimit-long-">withLimit(long)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries">ProductProjectionQuery</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/SuggestQuery.html#withLimit-java.lang.Integer-">withLimit(Integer)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/SuggestQuery.html" title="interface in io.sphere.sdk.products.queries">SuggestQuery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/search/ProductProjectionSearch.html#withLimit-long-">withLimit(long)</a></span> - Method in interface io.sphere.sdk.products.search.<a href="io/sphere/sdk/products/search/ProductProjectionSearch.html" title="interface in io.sphere.sdk.products.search">ProductProjectionSearch</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#withLimit-long-">withLimit(long)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
@@ -10172,6 +10228,8 @@ the order they are declared.</div>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDsl.html#withSortMulti-java.util.function.Function-">withSortMulti(Function&lt;Q, List&lt;QuerySort&lt;T&gt;&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#withSortMulti-java.util.function.Function-">withSortMulti(Function&lt;Q, List&lt;QuerySort&lt;T&gt;&gt;&gt;)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/SuggestQuery.html#withStaged-boolean-">withStaged(boolean)</a></span> - Method in interface io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/SuggestQuery.html" title="interface in io.sphere.sdk.products.queries">SuggestQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Address.html#withState-java.lang.String-">withState(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Address.html" title="class in io.sphere.sdk.models">Address</a></dt>
 <dd>&nbsp;</dd>
