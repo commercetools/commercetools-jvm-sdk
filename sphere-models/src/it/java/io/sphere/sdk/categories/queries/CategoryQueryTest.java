@@ -1,6 +1,8 @@
 package io.sphere.sdk.categories.queries;
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.LocalizedStringEntry;
 import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.queries.QueryPredicate;
@@ -9,11 +11,14 @@ import org.assertj.core.api.AbstractIntegerAssert;
 import org.junit.Test;
 
 import java.util.Locale;
+import java.util.Optional;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.queries.QuerySortDirection.DESC;
-import static org.assertj.core.api.Assertions.*;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CategoryQueryTest extends IntegrationTest {
     @Test
@@ -98,6 +103,24 @@ public class CategoryQueryTest extends IntegrationTest {
     @Test
     public void thereIsNoDefaultSortInQueries() throws Exception {
         assertThat(CategoryQuery.of().sort()).isEmpty();
+    }
+
+    @Test
+    public void queryByFullLocale() {
+        final String englishSlug = randomKey();
+        final String usSlug = randomKey();
+        final LocalizedString slug = LocalizedString.of(Locale.ENGLISH, englishSlug, Locale.US, usSlug);
+        final CategoryQueryModel m = CategoryQueryModel.of();
+        withCategory(client(), CategoryDraftBuilder.of(randomSlug(), slug), category -> {
+            assertThat(query(m.slug().lang(Locale.ENGLISH).is(englishSlug))).isPresent();
+            assertThat(query(m.slug().lang(Locale.US).is(englishSlug))).isEmpty();
+            assertThat(query(m.slug().lang(Locale.ENGLISH).is(usSlug))).isEmpty();
+            assertThat(query(m.slug().lang(Locale.US).is(usSlug))).isPresent();
+        });
+    }
+
+    private static Optional<Category> query(final QueryPredicate<Category> predicate) {
+        return client().execute(CategoryQuery.of().withPredicates(predicate)).head();
     }
 
     private static void checkTotalInQueryResultOf(final Query<Category> query, final Consumer<AbstractIntegerAssert<?>> check) {

@@ -333,7 +333,7 @@ import java.util.function.Function;
 
  <h3>1.0.0-M9</h3>
  <ul>
- <li>Added {@link io.sphere.sdk.meta.KnownIssues Known Issues} page.</li>
+ <li>Added Known Issues page.</li>
  <li>Added experimental support for uploading product images in variants. See {@code io.sphere.sdk.products.commands.ExperimentalProductImageUploadCommand}.</li>
  <li>Added factory methods for {@code Image}.</li>
  <li>{@code Image} contains directly getters for width {@code Image#getWidth()}

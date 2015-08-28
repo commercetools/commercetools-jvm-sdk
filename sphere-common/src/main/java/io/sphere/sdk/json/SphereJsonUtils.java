@@ -37,6 +37,7 @@ final public class SphereJsonUtils {
      */
     public static ObjectMapper newObjectMapper() {
         return new ObjectMapper()
+                .registerModule(new LocaleModule())
                 .registerModule(new ParameterNamesModule())
                 .registerModule(new JavaTimeModule())
                 .registerModule(new DateTimeDeserializationModule())
