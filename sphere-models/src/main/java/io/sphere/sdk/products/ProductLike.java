@@ -7,7 +7,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
 
-interface ProductLike<T> extends ResourceView<T>, ProductIdentifiable {
+interface ProductLike<T, O> extends ResourceView<T, O>, ProductIdentifiable {
     Reference<ProductType> getProductType();
 
     @Nullable

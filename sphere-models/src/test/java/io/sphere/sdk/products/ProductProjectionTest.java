@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.search.PagedSearchResult;
 import org.junit.Test;
 
@@ -41,5 +42,11 @@ public class ProductProjectionTest {
         final ProductProjection staged = product.toProjection(ProductProjectionType.STAGED);
         assertThat(staged.findVariantBySky("sku-5000")).isPresent();
         assertThat(staged.findVariantBySky("not existing")).isEmpty();
+    }
+
+    @Test
+    public void productProjectionIsAVersionedProduct() throws IOException {
+        final ProductProjection productProjection = getProduct().toProjection(ProductProjectionType.STAGED);
+        final Versioned<Product> versioned = productProjection;
     }
 }

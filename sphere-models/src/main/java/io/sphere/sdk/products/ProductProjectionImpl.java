@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Set;
 
 
-class ProductProjectionImpl extends ResourceViewImpl<ProductProjection> implements ProductProjection {
+class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product> implements ProductProjection {
     private final Reference<ProductType> productType;
     @Nullable
     private final Reference<TaxCategory> taxCategory;

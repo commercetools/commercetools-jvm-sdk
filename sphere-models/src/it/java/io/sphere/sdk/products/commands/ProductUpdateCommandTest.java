@@ -2,13 +2,16 @@ package io.sphere.sdk.products.commands;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.*;
+import io.sphere.sdk.products.attributes.AttributeAccess;
+import io.sphere.sdk.products.attributes.AttributeDraft;
+import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.updateactions.*;
 import io.sphere.sdk.products.queries.ProductByIdGet;
+import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
@@ -16,7 +19,6 @@ import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
 import io.sphere.sdk.test.IntegrationTest;
-
 import io.sphere.sdk.test.ReferenceAssert;
 import io.sphere.sdk.test.SphereTestUtils;
 import io.sphere.sdk.utils.MoneyImpl;
@@ -24,15 +26,18 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.time.ZoneOffset;
-import java.util.*;
+import java.util.List;
+import java.util.Locale;
+import java.util.Random;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
+import static io.sphere.sdk.products.ProductFixtures.*;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
+import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
 import static java.util.Locale.ENGLISH;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.products.ProductFixtures.*;
 
 public class ProductUpdateCommandTest extends IntegrationTest {
     public static final Random RANDOM = new Random();
@@ -247,6 +252,28 @@ public class ProductUpdateCommandTest extends IntegrationTest {
             final List<UpdateAction<Product>> updateActions =
                     MetaAttributesUpdateActions.of(metaAttributes);
             final Product updatedProduct = client().execute(ProductUpdateCommand.of(product, updateActions));
+
+            final ProductData productData = updatedProduct.getMasterData().getStaged();
+            assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());
+            assertThat(productData.getMetaDescription()).isEqualTo(metaAttributes.getMetaDescription());
+            assertThat(productData.getMetaKeywords()).isEqualTo(metaAttributes.getMetaKeywords());
+            return updatedProduct;
+        });
+    }
+
+    @Test
+    public void productProjectionCanBeUsedToUpdateAProduct() throws Exception {
+        withUpdateableProduct(client(), product -> {
+            final MetaAttributes metaAttributes = MetaAttributes.metaAttributesOf(ENGLISH,
+                    "commercetools SPHERE.IO&#8482; - Next generation eCommerce",
+                    "SPHERE.IO&#8482; is the first and leading Platform-as-a-Service solution for eCommerce.",
+                    "Platform-as-a-Service, e-commerce, http, api, tool");
+            final List<UpdateAction<Product>> updateActions =
+                    MetaAttributesUpdateActions.of(metaAttributes);
+
+            final ProductProjection productProjection = execute(ProductProjectionByIdGet.of(product, ProductProjectionType.STAGED));
+
+            final Product updatedProduct = client().execute(ProductUpdateCommand.of(productProjection, updateActions));
 
             final ProductData productData = updatedProduct.getMasterData().getStaged();
             assertThat(productData.getMetaTitle()).isEqualTo(metaAttributes.getMetaTitle());

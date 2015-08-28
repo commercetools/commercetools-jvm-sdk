@@ -2,10 +2,7 @@ package io.sphere.sdk.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.expansion.ExpansionPath;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.ResourceView;
-import io.sphere.sdk.models.Versioned;
+import io.sphere.sdk.models.*;
 
 import java.util.List;
 import java.util.function.Function;
@@ -15,7 +12,7 @@ import static java.util.Objects.requireNonNull;
 /**
  * Internal class.
  */
-public class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T>, C extends UpdateCommandDsl<T, C>, E> extends Base implements Builder<C>{
+public class MetaModelUpdateCommandDslBuilder<T extends ResourceView<T, T>, C extends UpdateCommandDsl<T, C>, E> extends Base implements Builder<C>{
     Versioned<T> versioned;
     List<? extends UpdateAction<T>> updateActions;
     TypeReference<T> typeReference;

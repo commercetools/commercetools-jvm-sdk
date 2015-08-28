@@ -2,13 +2,14 @@ package io.sphere.sdk.customobjects;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.models.ResourceViewImpl;
 
 import java.time.ZonedDateTime;
 
 import static java.lang.String.format;
 
-class CustomObjectImpl<T> extends ResourceViewImpl<CustomObject<T>> implements CustomObject<T> {
+class CustomObjectImpl<T> extends ResourceViewImpl<CustomObject<T>, CustomObject<JsonNode>> implements CustomObject<T> {
     private static final String keyContainerRegex = "[-_~.a-zA-Z0-9]+";
     private final String container;
     private final String key;
