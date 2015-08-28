@@ -39,6 +39,15 @@ public final class TypeReferences {
         };
     }
 
+    public static TypeReference<Integer> integerTypeReference() {
+        return new TypeReference<Integer>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Integer>";
+            }
+        };
+    }
+
     public static TypeReference<String> stringTypeReference() {
         return new TypeReference<String>() {
             @Override
