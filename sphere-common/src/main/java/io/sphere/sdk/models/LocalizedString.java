@@ -13,17 +13,21 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static io.sphere.sdk.utils.MapUtils.immutableCopyOf;
 import static io.sphere.sdk.utils.MapUtils.mapOf;
 import static java.lang.String.format;
+import static java.util.Collections.*;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
 
 /**
  * A localized string is a object where the keys are {@link Locale}s (HTTP API: ISO language tags),
  * and the values are the corresponding strings used for that language.
+ *
+ * {@include.example io.sphere.sdk.models.LocalizedStringTest#defaultUseCases()}
  */
 public class LocalizedString extends Base {
 
@@ -45,7 +49,7 @@ public class LocalizedString extends Base {
      */
     @JsonIgnore
     public static LocalizedString of() {
-        return of(new HashMap<>());
+        return of(emptyMap());
     }
 
     /**
@@ -192,7 +196,8 @@ public class LocalizedString extends Base {
     }
 
     /**
-     * Searches a translation which matches a locale in {@code locales}. If locales which countries are used then the algorithm searches also for the pure language locale.
+     * Searches a translation which matches a locale in {@code locales} and uses language fallbackes.
+     * If locales which countries are used then the algorithm searches also for the pure language locale.
      * So if "en_US" could not be found then "en" will be tried.
      *
      * {@include.example io.sphere.sdk.models.LocalizedStringTest#getTranslation()}
@@ -201,8 +206,8 @@ public class LocalizedString extends Base {
      * @return a translation matching one of the locales or null
      */
     @Nullable
-    public String getTranslation(final List<Locale> locales) {
-        return locales.stream()
+    public String getTranslation(final Iterable<Locale> locales) {
+        return StreamSupport.stream(locales.spliterator(), false)
                 .map(localeToFind -> {
                     String match = get(localeToFind);
                     if (match == null) {
@@ -218,6 +223,9 @@ public class LocalizedString extends Base {
 
     /**
      * Creates a new instance where each translation value is transformed with {@code function}.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#mapValue()}
+     *
      * @param function transforms a value for a locale into a new value
      * @return a new {@link LocalizedString} which consist all elements for this transformed with {@code function}
      */
@@ -228,10 +236,24 @@ public class LocalizedString extends Base {
         }).collect(streamCollector());
     }
 
+    /**
+     * Creates a new Stream of entries.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#streamAndCollector()}
+     *
+     * @return stream of all entries
+     */
     public Stream<LocalizedStringEntry> stream() {
         return translations.entrySet().stream().map(entry -> LocalizedStringEntry.of(entry.getKey(), entry.getValue()));
     }
 
+    /**
+     * Collector to collect a stream of {@link LocalizedStringEntry}s to one {@link LocalizedString}.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#streamAndCollector()}
+     *
+     * @return collector
+     */
     public static Collector<LocalizedStringEntry, ?, LocalizedString> streamCollector() {
         final Collector<LocalizedStringEntry, Map<Locale, String>, LocalizedString> result =
                 Collector.of(HashMap::new, (Map<Locale, String> tmpMap, LocalizedStringEntry entry) -> tmpMap.put(entry.getLocale(), entry.getValue()), (Map<Locale, String> left, Map<Locale, String> right) -> {
@@ -243,6 +265,9 @@ public class LocalizedString extends Base {
 
     /**
      * Creates a new {@link LocalizedString} where all translations are slugified (remove whitespace, etc.).
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#slugified()}
+     *
      * @return new instance
      */
     public LocalizedString slugified() {
@@ -250,8 +275,11 @@ public class LocalizedString extends Base {
     }
 
     /**
-     * Creates a new {@link LocalizedString} where all translations are slugified (remove whitespace, etc.).
+     * Creates a new {@link LocalizedString} where all translations are slugified (remove whitespace, etc.) and a random supplement is added.
      * This slugify methods appends a random string for a little uniqueness.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#slugifyUniqueDemo()}
+     *
      * @return new instance
      */
     public LocalizedString slugifiedUnique() {
@@ -260,6 +288,8 @@ public class LocalizedString extends Base {
 
     /**
      * Returns all locales included in this instance.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#getLocales()}
      * @return locales
      */
     @JsonIgnore
