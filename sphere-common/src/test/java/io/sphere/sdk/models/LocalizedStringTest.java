@@ -13,10 +13,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.StrictAssertions.assertThatThrownBy;
 
 public class LocalizedStringTest {
-    private final String defaultString1 = "foo";
-    private final String defaultString2 = "bar";
-    private final LocalizedString localizedString = LocalizedString.of(Locale.GERMAN, defaultString1, Locale.ENGLISH, defaultString2);
-    private final String dogFoodJson = "{\"de\":\"Hundefutter\",\"en\":\"dog food\"}";
+    private static final String DEFAULT_STRING_1 = "foo";
+    private static final String DEFAULT_STRING_2 = "bar";
+    private static final LocalizedString LOCALIZED_STRING = LocalizedString.of(Locale.GERMAN, DEFAULT_STRING_1, Locale.ENGLISH, DEFAULT_STRING_2);
+    private static final String DOG_FOOD_JSON = "{\"de\":\"Hundefutter\",\"en\":\"dog food\"}";
 
     @Test
     public void createFromOneValue() throws Exception {
@@ -78,8 +78,8 @@ public class LocalizedStringTest {
 
     @Test
     public void findTheFirstBestTranslation() throws Exception {
-        final String actual = localizedString.get(asList(Locale.FRANCE, Locale.ENGLISH, Locale.GERMAN));
-        assertThat(actual).isEqualTo(defaultString2);
+        final String actual = LOCALIZED_STRING.get(asList(Locale.FRANCE, Locale.ENGLISH, Locale.GERMAN));
+        assertThat(actual).isEqualTo(DEFAULT_STRING_2);
     }
 
     @Test
@@ -164,38 +164,38 @@ public class LocalizedStringTest {
 
     @Test
     public void returnPresentLocales() throws Exception {
-        assertThat(localizedString.getLocales()).isEqualTo(new HashSet<>(asList(Locale.GERMAN, Locale.ENGLISH)));
+        assertThat(LOCALIZED_STRING.getLocales()).isEqualTo(new HashSet<>(asList(Locale.GERMAN, Locale.ENGLISH)));
     }
 
     @Test
     public void implementToString() throws Exception {
-        assertThat(localizedString.toString()).isEqualTo(format("LocalizedString(de -> %s, en -> %s)", defaultString1, defaultString2));
+        assertThat(LOCALIZED_STRING.toString()).isEqualTo(format("LocalizedString(de -> %s, en -> %s)", DEFAULT_STRING_1, DEFAULT_STRING_2));
     }
 
     @Test
     public void implementEquals() throws Exception {
-        assertThat(LocalizedString.of(Locale.GERMAN, defaultString1).plus(Locale.ENGLISH, defaultString2).equals(localizedString)).isTrue();
-        assertThat(LocalizedString.of(Locale.GERMAN, defaultString1).equals(localizedString)).isFalse();
+        assertThat(LocalizedString.of(Locale.GERMAN, DEFAULT_STRING_1).plus(Locale.ENGLISH, DEFAULT_STRING_2).equals(LOCALIZED_STRING)).isTrue();
+        assertThat(LocalizedString.of(Locale.GERMAN, DEFAULT_STRING_1).equals(LOCALIZED_STRING)).isFalse();
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void throwIllegalArgumentExceptionOnDuplicateKeysWithCreator() throws Exception {
-        LocalizedString.of(Locale.GERMAN, defaultString1, Locale.GERMAN, defaultString2);
+        LocalizedString.of(Locale.GERMAN, DEFAULT_STRING_1, Locale.GERMAN, DEFAULT_STRING_2);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void throwIllegalArgumentExceptionOnDuplicateKeysWithPlus() throws Exception {
-        LocalizedString.of(Locale.GERMAN, defaultString1).plus(Locale.GERMAN, defaultString2);
+        LocalizedString.of(Locale.GERMAN, DEFAULT_STRING_1).plus(Locale.GERMAN, DEFAULT_STRING_2);
     }
 
     @Test
     public void jsonSerialize() throws Exception {
-        assertThat(SphereJsonUtils.newObjectMapper().writeValueAsString(LocalizedString.of(Locale.GERMAN, "Hundefutter", Locale.ENGLISH, "dog food"))).isEqualTo(dogFoodJson);
+        assertThat(SphereJsonUtils.newObjectMapper().writeValueAsString(LocalizedString.of(Locale.GERMAN, "Hundefutter", Locale.ENGLISH, "dog food"))).isEqualTo(DOG_FOOD_JSON);
     }
 
     @Test
     public void jsonDeserialize() throws Exception {
-        assertThat(SphereJsonUtils.newObjectMapper().readValue(dogFoodJson, LocalizedString.class)).isEqualTo(LocalizedString.of(Locale.GERMAN, "Hundefutter", Locale.ENGLISH, "dog food"));
+        assertThat(SphereJsonUtils.newObjectMapper().readValue(DOG_FOOD_JSON, LocalizedString.class)).isEqualTo(LocalizedString.of(Locale.GERMAN, "Hundefutter", Locale.ENGLISH, "dog food"));
     }
 
     @Test
