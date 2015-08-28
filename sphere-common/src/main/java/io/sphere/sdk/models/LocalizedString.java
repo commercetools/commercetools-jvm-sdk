@@ -7,23 +7,27 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.utils.StringUtils;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.stream.Collector;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static io.sphere.sdk.utils.MapUtils.immutableCopyOf;
 import static io.sphere.sdk.utils.MapUtils.mapOf;
 import static java.lang.String.format;
+import static java.util.Collections.*;
 import static java.util.Objects.requireNonNull;
 import static java.util.stream.Collectors.joining;
 
 /**
- * A wrapper around an attribute which can be translated into a number of locales.
- * Note that even if your project only uses one language some attributes (name and description for example) will be
- * always be LocalizedString.
+ * A localized string is a object where the keys are {@link Locale}s (HTTP API: ISO language tags),
+ * and the values are the corresponding strings used for that language.
+ *
+ * {@include.example io.sphere.sdk.models.LocalizedStringTest#defaultUseCases()}
  */
 public class LocalizedString extends Base {
 
@@ -34,31 +38,8 @@ public class LocalizedString extends Base {
 
     @JsonCreator
     private LocalizedString(final Map<Locale, String> translations) {
-        //the Jackson mapper passes null here and it is not possible to use an immutable map
+        //the Jackson mapper may passes null here and it is not possible to use an immutable map
         this.translations = immutableCopyOf(Optional.ofNullable(translations).orElse(new HashMap<>()));
-    }
-
-    /**
-     * LocalizedString containing the given entry.
-     * @param locale the locale of the new entry
-     * @param value the value for the <code>locale</code>
-     */
-    @JsonIgnore
-    private LocalizedString(final Locale locale, final String value) {
-        this(mapOf(locale, value));
-    }
-
-    /**
-     * LocalizedString containing the 2 entries.
-     * @param locale1 the locale for the first entry
-     * @param value1 the value for the first entry
-     * @param locale2 the locale for the second entry
-     * @param value2 the value for the second entry
-     * @throws IllegalArgumentException if duplicate locales are provided
-     */
-    @JsonIgnore
-    private LocalizedString(final Locale locale1, final String value1, final Locale locale2, final String value2) {
-        this(mapOf(locale1, value1, locale2, value2));
     }
 
     /**
@@ -68,7 +49,7 @@ public class LocalizedString extends Base {
      */
     @JsonIgnore
     public static LocalizedString of() {
-        return of(new HashMap<>());
+        return of(emptyMap());
     }
 
     /**
@@ -80,31 +61,72 @@ public class LocalizedString extends Base {
         return of();
     }
 
+    /**
+     * Creates an instance with one locale translation pair.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#createFromOneValue()}
+     *
+     * @param locale the locale for the one translation
+     * @param value the translation for the specified locale
+     * @return translation for one language
+     */
     @JsonIgnore
     public static LocalizedString of(final Locale locale, final String value) {
         requireNonNull(locale);
         requireNonNull(value);
-        return new LocalizedString(locale, value);
+        return of(mapOf(locale, value));
     }
 
+    /**
+     * Creates an instance for two different locales.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#createFromTwoValues()}
+     *
+     * @param locale1 the first locale
+     * @param value1 the translation corresponding to {@code locale1}
+     * @param locale2 the second locale which differs from {@code locale1}
+     * @param value2 the translation corresponding to {@code locale2}
+     * @return new instance for two key value pairs
+     */
     @JsonIgnore
     public static LocalizedString of(final Locale locale1, final String value1, final Locale locale2, final String value2) {
-        return new LocalizedString(mapOf(locale1, value1, locale2, value2));
+        return of(mapOf(locale1, value1, locale2, value2));
     }
 
+    /**
+     * Creates an instance by supplying a map. Changes to the map won't affect the instance.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#createByMap()}
+     *
+     * @param translations the key value pairs for the translation
+     * @return a new instance which has the same key value pairs as {@code translation} at creation time
+     */
     @JsonIgnore
     public static LocalizedString of(final Map<Locale, String> translations) {
         requireNonNull(translations);
         return new LocalizedString(translations);
     }
 
+    /**
+     * Creates an instance with one translation for English ({@link Locale#ENGLISH}).
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#ofEnglishLocale()}
+     *
+     * @param value the translation in English
+     * @return new instance with one key value pair
+     */
     @JsonIgnore
     public static LocalizedString ofEnglishLocale(final String value) {
+        requireNonNull(value);
         return of(Locale.ENGLISH, value);
     }
 
     /**
-     * LocalizedString containing the given entries.
+     * Creates a new {@link LocalizedString} containing the given entries and the new one.
+     * It is not allowed to override existing entries.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#createANewLocalizedStringByAddingALocale()}
+     *
      * @param locale the additional locale of the new entry
      * @param value the value for the <code>locale</code>
      * @return a LocalizedString containing this data and the from the parameters.
@@ -120,27 +142,90 @@ public class LocalizedString extends Base {
         return new LocalizedString(newMap);
     }
 
+    /**
+     * Searches the translation for an exact locale and returning the result in an {@link Optional}.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#find()}
+     *
+     * @param locale the locale which should be searched
+     * @return A filled optional with the translation belonging to {@code locale} or an empty optional if the locale is not present.
+     */
+    @Nonnull
     public Optional<String> find(final Locale locale) {
         return Optional.ofNullable(get(locale));
     }
 
+    /**
+     * Searches the translation for an exact locale by using {@code null} in the case the locale ist not present.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#getByOneLocale()}
+     *
+     * @param locale the locale which should be searched
+     * @return the translation belonging to {@code locale} or null if the locale is not present.
+     */
     @Nullable
     public String get(final Locale locale) {
         return translations.get(locale);
     }
 
+    /**
+     * Searches the translation for some exact locales in the order they appear and returning the result in an {@link Optional}.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#findByMultipleLocales()}
+     *
+     * @param locales the locale which should be searched, the first exact match wins
+     * @return A filled optional with the translation belonging to one of the {@code locales} or an empty optional if none of the locales is not present.
+     */
+    @Nonnull
     public Optional<String> find(final Iterable<Locale> locales) {
         final Optional<Locale> firstFoundLocale = toStream(locales).filter(locale -> translations.containsKey(locale)).findFirst();
         return firstFoundLocale.map(foundLocale -> get(foundLocale));
     }
 
+    /**
+     * Searches the translation for some exact locales in the order they appear and using null as result if no match could be found.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#getByMultipleLocales()}
+     *
+     * @param locales the locale which should be searched, the first exact match wins
+     * @return the translation belonging to one of the {@code locales} or null if none of the locales is not present.
+     */
     @Nullable
     public String get(final Iterable<Locale> locales) {
         return find(locales).orElse(null);
     }
 
     /**
+     * Searches a translation which matches a locale in {@code locales} and uses language fallbackes.
+     * If locales which countries are used then the algorithm searches also for the pure language locale.
+     * So if "en_US" could not be found then "en" will be tried.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#getTranslation()}
+     *
+     * @param locales the locales to try out
+     * @return a translation matching one of the locales or null
+     */
+    @Nullable
+    public String getTranslation(final Iterable<Locale> locales) {
+        return StreamSupport.stream(locales.spliterator(), false)
+                .map(localeToFind -> {
+                    String match = get(localeToFind);
+                    if (match == null) {
+                        final Locale pureLanguageLocale = new Locale(localeToFind.getLanguage());
+                        match = get(pureLanguageLocale);
+                    }
+                    return match;
+                })
+                .filter(x -> x != null)
+                .findFirst()
+                .orElse(null);
+    }
+
+    /**
      * Creates a new instance where each translation value is transformed with {@code function}.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#mapValue()}
+     *
      * @param function transforms a value for a locale into a new value
      * @return a new {@link LocalizedString} which consist all elements for this transformed with {@code function}
      */
@@ -151,10 +236,24 @@ public class LocalizedString extends Base {
         }).collect(streamCollector());
     }
 
+    /**
+     * Creates a new Stream of entries.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#streamAndCollector()}
+     *
+     * @return stream of all entries
+     */
     public Stream<LocalizedStringEntry> stream() {
         return translations.entrySet().stream().map(entry -> LocalizedStringEntry.of(entry.getKey(), entry.getValue()));
     }
 
+    /**
+     * Collector to collect a stream of {@link LocalizedStringEntry}s to one {@link LocalizedString}.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#streamAndCollector()}
+     *
+     * @return collector
+     */
     public static Collector<LocalizedStringEntry, ?, LocalizedString> streamCollector() {
         final Collector<LocalizedStringEntry, Map<Locale, String>, LocalizedString> result =
                 Collector.of(HashMap::new, (Map<Locale, String> tmpMap, LocalizedStringEntry entry) -> tmpMap.put(entry.getLocale(), entry.getValue()), (Map<Locale, String> left, Map<Locale, String> right) -> {
@@ -166,6 +265,9 @@ public class LocalizedString extends Base {
 
     /**
      * Creates a new {@link LocalizedString} where all translations are slugified (remove whitespace, etc.).
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#slugified()}
+     *
      * @return new instance
      */
     public LocalizedString slugified() {
@@ -173,15 +275,25 @@ public class LocalizedString extends Base {
     }
 
     /**
-     * Creates a new {@link LocalizedString} where all translations are slugified (remove whitespace, etc.).
+     * Creates a new {@link LocalizedString} where all translations are slugified (remove whitespace, etc.) and a random supplement is added.
      * This slugify methods appends a random string for a little uniqueness.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#slugifyUniqueDemo()}
+     *
      * @return new instance
      */
     public LocalizedString slugifiedUnique() {
         return mapValue((locale, value) -> StringUtils.slugifyUnique(value));
     }
 
+    /**
+     * Returns all locales included in this instance.
+     *
+     * {@include.example io.sphere.sdk.models.LocalizedStringTest#getLocales()}
+     * @return locales
+     */
     @JsonIgnore
+    @Nonnull
     public Set<Locale> getLocales() {
         return translations.keySet();
     }
