@@ -18,7 +18,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @param <T> the type of the result of the command, most likely the updated entity without expanded references
  */
-public abstract class UpdateCommandDslImpl<T extends ResourceView<T>, C extends UpdateCommandDsl<T, C>> extends CommandImpl<T> implements UpdateCommandDsl<T, C> {
+public abstract class UpdateCommandDslImpl<T extends ResourceView<T, T>, C extends UpdateCommandDsl<T, C>> extends CommandImpl<T> implements UpdateCommandDsl<T, C> {
     private final Versioned<T> versioned;
     private final List<? extends UpdateAction<T>> updateActions;
     private final TypeReference<T> typeReference;
