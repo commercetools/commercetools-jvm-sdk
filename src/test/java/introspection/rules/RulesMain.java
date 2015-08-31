@@ -24,7 +24,8 @@ public class RulesMain {
                 new BuildersNotForResources(),
                 new NeverMixStaticAndInstanceMethodOfSameNameRule(),
                 new OnlyOneNullableOfMethodRule(),
-                new InUpdateActionsPackageOnlyUpdateActions()
+                new InUpdateActionsPackageOnlyUpdateActionsRule(),
+                new QueryAndCommandsAreCompleteRule()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {

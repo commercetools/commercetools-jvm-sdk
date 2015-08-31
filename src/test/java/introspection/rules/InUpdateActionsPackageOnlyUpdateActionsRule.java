@@ -3,7 +3,7 @@ package introspection.rules;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.products.commands.updateactions.MetaAttributesUpdateActions;
 
-public class InUpdateActionsPackageOnlyUpdateActions extends ClassStrategyRule {
+public class InUpdateActionsPackageOnlyUpdateActionsRule extends ClassStrategyRule {
 
     @Override
     protected boolean classIsIncludedInRule(final Class<?> clazz) {
