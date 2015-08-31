@@ -49,12 +49,12 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
 
     @Test
     public void internalServerError() throws Throwable {
-        aHttpResponseWithCode(500).resultsInA(InternalServerErrorException .class);
+        aHttpResponseWithCode(500).resultsInA(InternalServerErrorException.class);
     }
 
     @Test
     public void badGateway() throws Throwable {
-        aHttpResponseWithCode(502).resultsInA(BadGatewayException .class);
+        aHttpResponseWithCode(502).resultsInA(BadGatewayException.class);
     }
 
     @Test
@@ -65,6 +65,11 @@ public class SphereExceptionIntegrationTest extends IntegrationTest {
     @Test
     public void gatewayTimeout() throws Throwable {
         aHttpResponseWithCode(504).resultsInA(GatewayTimeoutException.class);
+    }
+
+    @Test
+    public void requestEntityTooLarge() throws Throwable {
+        aHttpResponseWithCode(413).resultsInA(RequestEntityTooLargeException.class);
     }
 
     @Test

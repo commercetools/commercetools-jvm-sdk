@@ -47,6 +47,7 @@ final class ExceptionFactory {
                 .whenStatus(503, r -> new ServiceUnavailableException(extractBody(r)))
                 .whenStatus(504, r -> new GatewayTimeoutException(extractBody(r)))
                 .whenStatus(409, r -> new ConcurrentModificationException())
+                .whenStatus(413, r -> new RequestEntityTooLargeException())
                 .whenStatus(400, r -> {
                     final ErrorResponse errorResponse = SphereJsonUtils.readObject(r.getResponseBody(), ErrorResponse.typeReference());
                     return new ErrorResponseException(errorResponse);

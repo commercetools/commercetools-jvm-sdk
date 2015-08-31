@@ -8,8 +8,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executor;
 import java.util.concurrent.ForkJoinPool;
 
 final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter {
@@ -27,15 +25,36 @@ final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter 
             LOGGER.debug("executing " + httpRequest);
         }
         final Request request = asAhcRequest(httpRequest);
-        final CompletableFuture<Response> future = wrap(asyncHttpClient.executeRequest(request));
-        return future.thenApply((Response response) -> {
-            final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
-            final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), responseBodyAsBytes, httpRequest, HttpHeaders.of(response.getHeaders()));
-            if (LOGGER.isDebugEnabled()) {
-                LOGGER.debug("response " + httpResponse);
+        final CompletableFuture<HttpResponse> future = new CompletableFuture<>();
+        asyncHttpClient.executeRequest(request, new AsyncCompletionHandler<Response>() {
+            @Override
+            public Response onCompleted(final Response response) throws Exception {
+                try {
+                    final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
+                    final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), responseBodyAsBytes, httpRequest, HttpHeaders.of(response.getHeaders()));
+                    if (LOGGER.isDebugEnabled()) {
+                        LOGGER.debug("response " + httpResponse);
+                    }
+                    future.complete(httpResponse);
+                } catch (final Exception e) {
+                    future.completeExceptionally(new HttpException(e));
+                }
+                return response;
             }
-            return httpResponse;
+
+            @Override
+            public void onThrowable(final Throwable t) {
+                //nginx does not send status code so this http client explodes
+                final boolean maybeUriTooLongErrorFromNgingx = t.getMessage().contains("invalid version format: <HTML>");
+                final String message = maybeUriTooLongErrorFromNgingx
+                        ? "There is a problem, maybe the request URI was too long due to an inefficient query."
+                        : "The underlying HTTP client detected a problem.";
+                future.completeExceptionally(new HttpException(message, t));
+                super.onThrowable(t);
+
+            }
         });
+        return future;
     }
 
     private byte[] getResponseBodyAsBytes(final Response response) {
@@ -78,28 +97,4 @@ final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter 
         return new DefaultAsyncHttpClientAdapterImpl(asyncHttpClient);
     }
 
-    /**
-     * Creates a {@link CompletableFuture} from a {@link ListenableFuture}.
-     * @param listenableFuture the future of the ning library
-     * @param executor the executor to run the future in
-     * @param <T> Type of the value that will be returned.
-     * @return the Java 8 future implementation
-     */
-    private static <T> CompletableFuture<T> wrap(final ListenableFuture<T> listenableFuture, final Executor executor) {
-        final CompletableFuture<T> result = new CompletableFuture<>();
-        final Runnable listener = () -> {
-            try {
-                final T value = listenableFuture.get();
-                result.complete(value);
-            } catch (final InterruptedException | ExecutionException e) {
-                result.completeExceptionally(e.getCause());
-            }
-        };
-        listenableFuture.addListener(listener, executor);
-        return result;
-    }
-
-    private CompletableFuture<Response> wrap(final ListenableFuture<Response> listenableFuture) {
-        return wrap(listenableFuture, threadPool);
-    }
 }
