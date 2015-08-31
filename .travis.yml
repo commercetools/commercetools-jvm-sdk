@@ -7,7 +7,6 @@ before_install:
 - sudo add-apt-repository -y ppa:webupd8team/java
 - free
 - sudo apt-get update
-- free
 - sudo apt-get install -y oracle-java8-installer oracle-java8-set-default
 - free
 script:
