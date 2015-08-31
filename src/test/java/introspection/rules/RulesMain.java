@@ -23,7 +23,8 @@ public class RulesMain {
                 new PublicConstructorsAreTheExceptionRule(),
                 new BuildersNotForResources(),
                 new NeverMixStaticAndInstanceMethodOfSameNameRule(),
-                new OnlyOneNullableOfMethodRule()
+                new OnlyOneNullableOfMethodRule(),
+                new InUpdateActionsPackageOnlyUpdateActions()
         );
         final boolean allIsOk = rules.stream()
                 .map(rule -> {
