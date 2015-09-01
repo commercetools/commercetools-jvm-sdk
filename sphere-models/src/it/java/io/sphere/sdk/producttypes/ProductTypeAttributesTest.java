@@ -1,5 +1,6 @@
 package io.sphere.sdk.producttypes;
 
+import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedEnumValue;

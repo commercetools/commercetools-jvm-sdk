@@ -1,7 +1,6 @@
-package io.sphere.sdk.products.attributes;
+package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import io.sphere.sdk.models.SphereEnumeration;
 
 public enum TextInputHint implements SphereEnumeration {
     SINGLE_LINE, MULTI_LINE;
