@@ -82,7 +82,8 @@ public final class SphereTestUtils {
     }
 
     public static String randomSortOrder() {
-        return  "0." + randomInt();
+        final int append = 5;//hack to not have a trailing 0 which is not accepted in sphere
+        return  "0." + randomInt() + append;
     }
 
     public static String randomKey() {
