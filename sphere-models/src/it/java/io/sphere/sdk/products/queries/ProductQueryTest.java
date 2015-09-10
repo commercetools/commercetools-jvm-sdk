@@ -19,6 +19,7 @@ import io.sphere.sdk.suppliers.VariantsCottonTShirtProductDraftSupplier;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -26,6 +27,7 @@ import java.util.Optional;
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.withCustomerGroup;
 import static io.sphere.sdk.productdiscounts.ProductDiscountFixtures.withUpdateableProductDiscount;
 import static io.sphere.sdk.products.ProductFixtures.*;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomString;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -115,8 +117,13 @@ public class ProductQueryTest extends IntegrationTest {
             final ProductQuery query = ProductQuery.of()
                     .withPredicates(m -> m.id().is(product.getId())
                             .and(m.masterData().staged().masterVariant().prices().discounted().isPresent()));
-            final Product loadedProduct = execute(query).head().get();
-            assertThat(loadedProduct.getId()).isEqualTo(product.getId());
+            final Duration maxWaitTime = Duration.ofMinutes(2);
+            final Duration waitBeforeRetry = Duration.ofMillis(500);
+            assertEventually(maxWaitTime, waitBeforeRetry, () -> {
+                final Optional<Product> loadedProduct = execute(query).head();
+                assertThat(loadedProduct.isPresent()).isTrue();
+                assertThat(loadedProduct.get().getId()).isEqualTo(product.getId());
+            });
             return productDiscount;
         });
     }

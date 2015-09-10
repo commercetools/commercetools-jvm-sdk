@@ -10,6 +10,7 @@ import org.apache.commons.io.IOUtils;
 import javax.money.CurrencyUnit;
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
+import java.time.Duration;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
@@ -144,5 +145,33 @@ public final class SphereTestUtils {
 
     public static String stringFromResource(final String resourcePath) throws Exception {
         return IOUtils.toString(Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath), "UTF-8");
+    }
+
+    public static void assertEventually(final Duration maxWaitTime, final Duration waitBeforeRetry, final Runnable block) {
+        final long timeOutAt = System.currentTimeMillis() + maxWaitTime.toMillis();
+        while (true) {
+            try {
+                block.run();
+
+                // the block executed without throwing an exception, return
+                return;
+            } catch (AssertionError e) {
+                if (System.currentTimeMillis() > timeOutAt) {
+                    throw e;
+                }
+            }
+
+            try {
+                Thread.sleep(waitBeforeRetry.toMillis());
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public static void assertEventually(final Runnable block) {
+        final Duration maxWaitTime = Duration.ofSeconds(30);
+        final Duration waitBeforeRetry = Duration.ofMillis(100);
+        assertEventually(maxWaitTime, waitBeforeRetry, block);
     }
 }

@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Locale;
 
 import static io.sphere.sdk.products.ProductFixtures.withSuggestProduct;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.*;
@@ -32,11 +33,13 @@ public class SuggestQueryTest extends IntegrationTest {
             final SuggestQuery suggestQuery = SuggestQuery.of(LocalizedStringEntry.of(Locale.ENGLISH, "knife"))
                     .withStaged(true);
 
-            final SuggestionResult suggestionResult = execute(suggestQuery);
+            assertEventually(() -> {
+                final SuggestionResult suggestionResult = execute(suggestQuery);
 
-            assertThat(suggestionResult.getSuggestionsForLocale(Locale.ENGLISH))
-                    .matches(suggestionsList -> suggestionsList.stream()
-                            .anyMatch(suggestion -> suggestion.getText().equals("Swiss Army Knife")));
+                assertThat(suggestionResult.getSuggestionsForLocale(Locale.ENGLISH))
+                        .matches(suggestionsList -> suggestionsList.stream()
+                                .anyMatch(suggestion -> suggestion.getText().equals("Swiss Army Knife")));
+            });
         });
     }
 
@@ -54,11 +57,13 @@ public class SuggestQueryTest extends IntegrationTest {
             final SuggestQuery suggestQuery = SuggestQuery.of(LocalizedStringEntry.of(Locale.GERMAN, "offiz"))
                     .withStaged(true);
 
-            final SuggestionResult suggestionResult = execute(suggestQuery);
+            assertEventually(() -> {
+                final SuggestionResult suggestionResult = execute(suggestQuery);
 
-            assertThat(suggestionResult.getSuggestionsForLocale(Locale.GERMAN))
-                    .matches(suggestionsList -> suggestionsList.stream()
-                            .anyMatch(suggestion -> suggestion.getText().equals("Schweizer Messer")));
+                assertThat(suggestionResult.getSuggestionsForLocale(Locale.GERMAN))
+                        .matches(suggestionsList -> suggestionsList.stream()
+                                .anyMatch(suggestion -> suggestion.getText().equals("Schweizer Messer")));
+            });
         });
     }
 
@@ -80,14 +85,16 @@ public class SuggestQueryTest extends IntegrationTest {
             final SuggestQuery suggestQuery = SuggestQuery.of(keywords)
                     .withStaged(true);
 
-            final SuggestionResult suggestionResult = execute(suggestQuery);
+            assertEventually(() -> {
+                final SuggestionResult suggestionResult = execute(suggestQuery);
 
-            assertThat(suggestionResult.getSuggestionsForLocale(Locale.GERMAN))
-                    .matches(suggestionsList -> suggestionsList.stream()
-                            .anyMatch(suggestion -> suggestion.getText().equals("Schweizer Messer")));
-            assertThat(suggestionResult.getSuggestionsForLocale(Locale.ENGLISH))
-                    .matches(suggestionsList -> suggestionsList.stream()
-                            .anyMatch(suggestion -> suggestion.getText().equals("Multi tool")));
+                assertThat(suggestionResult.getSuggestionsForLocale(Locale.GERMAN))
+                        .matches(suggestionsList -> suggestionsList.stream()
+                                .anyMatch(suggestion -> suggestion.getText().equals("Schweizer Messer")));
+                assertThat(suggestionResult.getSuggestionsForLocale(Locale.ENGLISH))
+                        .matches(suggestionsList -> suggestionsList.stream()
+                                .anyMatch(suggestion -> suggestion.getText().equals("Multi tool")));
+            });
         });
     }
 }
