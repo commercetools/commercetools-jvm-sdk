@@ -24,7 +24,7 @@ public class ProductDiscountFixtures {
         final AbsoluteProductDiscountValue discountValue = AbsoluteProductDiscountValue.of(EURO_1);
         final LocalizedString name = en("demo product discount");
         final LocalizedString description = en("description");
-        final boolean active = false;
+        final boolean active = true;
         final String sortOrder = randomSortOrder();
         final ProductDiscountDraft discountDraft =
                 ProductDiscountDraft.of(name, description, predicate, discountValue, sortOrder, active);
