@@ -15,6 +15,5 @@ public class ProjectGetTest extends IntegrationTest {
         assertThat(project.getCountries()).overridingErrorMessage("countries").isNotEmpty();
         assertThat(project.getLanguages()).overridingErrorMessage("languages").isNotEmpty();
         assertThat(project.getCreatedAt()).overridingErrorMessage("createdAt").isNotNull();
-        assertThat(project.getTrialUntil()).overridingErrorMessage("trialUntil").isNotNull();
     }
 }

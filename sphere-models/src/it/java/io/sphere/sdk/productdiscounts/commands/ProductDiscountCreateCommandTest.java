@@ -44,13 +44,15 @@ public class ProductDiscountCreateCommandTest extends IntegrationTest {
                 ProductByIdGet.of(product)
                         .plusExpansionPaths(m -> m.masterData().staged().masterVariant().prices().discounted().discount());
 
-        final Product discountedProduct = execute(sphereRequest);
-        final List<Price> productPrices = discountedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+        assertEventually(() -> {
+            final Product discountedProduct = execute(sphereRequest);
+            final List<Price> productPrices = discountedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
 
-        assertThat(productPrices)
-                .overridingErrorMessage("discount object in price is expanded")
-                .matches(prices -> prices.stream().anyMatch(price -> price.getDiscounted().getDiscount().getObj() != null));
-//        clean up test
-        execute(ProductDiscountDeleteCommand.of(productDiscount));
+            assertThat(productPrices)
+                    .overridingErrorMessage("discount object in price is expanded")
+                    .matches(prices -> prices.stream().anyMatch(price -> price.getDiscounted() != null && price.getDiscounted().getDiscount().getObj() != null));
+            // clean up test
+            execute(ProductDiscountDeleteCommand.of(productDiscount));
+        });
     }
 }
