@@ -129,7 +129,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
   <p>See also <a href="../CartDiscountUpdateCommand.html">CartDiscountUpdateCommand</a>.<p>
 
  <div id="io-sphere-sdk-cartdiscounts-commands-CartDiscountUpdateCommandTest-changeSortOrder--%s" class=code-example><pre><code class='java'>withPersistentCartDiscount(client(), cartDiscount -&gt; {
-    final String newSortOrder = format("0.%d", randomInt());
+    final String newSortOrder = randomSortOrder();
 
     assertThat(cartDiscount.getSortOrder()).isNotEqualTo(newSortOrder);
 
