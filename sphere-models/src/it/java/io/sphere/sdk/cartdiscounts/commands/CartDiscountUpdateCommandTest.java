@@ -111,7 +111,7 @@ public class CartDiscountUpdateCommandTest extends IntegrationTest {
     @Test
     public void changeSortOrder() throws Exception {
         withPersistentCartDiscount(client(), cartDiscount -> {
-            final String newSortOrder = format("0.%d", randomInt());
+            final String newSortOrder = randomSortOrder();
 
             assertThat(cartDiscount.getSortOrder()).isNotEqualTo(newSortOrder);
 
