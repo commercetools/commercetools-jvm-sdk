@@ -130,14 +130,16 @@ final ProductByIdGet sphereRequest =
         ProductByIdGet.of(product)
                 .plusExpansionPaths(m -&gt; m.masterData().staged().masterVariant().prices().discounted().discount());
 
-final Product discountedProduct = execute(sphereRequest);
-final List&lt;Price&gt; productPrices = discountedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
+assertEventually(() -&gt; {
+    final Product discountedProduct = execute(sphereRequest);
+    final List&lt;Price&gt; productPrices = discountedProduct.getMasterData().getStaged().getMasterVariant().getPrices();
 
-assertThat(productPrices)
-        .overridingErrorMessage("discount object in price is expanded")
-        .matches(prices -&gt; prices.stream().anyMatch(price -&gt; price.getDiscounted().getDiscount().getObj() != null));
-//clean up test
-execute(ProductDiscountDeleteCommand.of(productDiscount));
+    assertThat(productPrices)
+            .overridingErrorMessage("discount object in price is expanded")
+            .matches(prices -&gt; prices.stream().anyMatch(price -&gt; price.getDiscounted() != null &amp;&amp; price.getDiscounted().getDiscount().getObj() != null));
+    // clean up test
+    execute(ProductDiscountDeleteCommand.of(productDiscount));
+});
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
