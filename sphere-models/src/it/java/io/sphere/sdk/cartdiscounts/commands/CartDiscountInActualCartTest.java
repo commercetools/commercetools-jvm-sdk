@@ -34,8 +34,10 @@ public class CartDiscountInActualCartTest extends IntegrationTest {
 
                 assertThat(cartIncludingDiscount.getTotalPrice().getNumber().doubleValueExact()).
                         isEqualTo(cart.getTotalPrice().subtract(EURO_1).getNumber().doubleValueExact(), Offset.offset(0.05));
-                final Reference<CartDiscount> discount = cartIncludingDiscount.getLineItems().get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount();
+                final DiscountedLineItemPrice discountedPrice = cartIncludingDiscount.getLineItems().get(0).getDiscountedPrice();
+                final Reference<CartDiscount> discount = discountedPrice.getIncludedDiscounts().get(0).getDiscount();
                 assertThat(discount.referencesSameResource(cartDiscount)).isTrue();
+                assertThat(discountedPrice.getValue()).isNotNull();
 
                 //clean up
                 execute(CartDiscountDeleteCommand.of(cartDiscount));

@@ -7,13 +7,13 @@ import javax.money.MonetaryAmount;
 import java.util.List;
 
 public class DiscountedLineItemPrice extends Base {
-    private final MonetaryAmount money;
+    private final MonetaryAmount value;
     private final List<DiscountedLineItemPortion> includedDiscounts;
 
     @JsonCreator
-    private DiscountedLineItemPrice(final MonetaryAmount money, final List<DiscountedLineItemPortion> includedDiscounts) {
+    private DiscountedLineItemPrice(final MonetaryAmount value, final List<DiscountedLineItemPortion> includedDiscounts) {
         this.includedDiscounts = includedDiscounts;
-        this.money = money;
+        this.value = value;
     }
 
     public static DiscountedLineItemPrice of(final MonetaryAmount money, final List<DiscountedLineItemPortion> includedDiscounts) {
@@ -24,7 +24,7 @@ public class DiscountedLineItemPrice extends Base {
         return includedDiscounts;
     }
 
-    public MonetaryAmount getMoney() {
-        return money;
+    public MonetaryAmount getValue() {
+        return value;
     }
 }
