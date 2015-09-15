@@ -358,6 +358,9 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         final UrlQueryBuilder builder = UrlQueryBuilder.of();
         Optional.ofNullable(text()).ifPresent(t -> builder.add(TEXT + "." + t.getLocale().getLanguage(), t.getValue(), urlEncoded));
         facets().forEach(f -> builder.add(FACET, f.toSearchExpression(), urlEncoded));
+        if (!facets().isEmpty()) {
+            builder.add("formatBooleanFacet", Boolean.TRUE.toString(), urlEncoded);
+        }
         resultFilters().forEach(f -> builder.add(FILTER, f.toSearchExpression(), urlEncoded));
         queryFilters().forEach(f -> builder.add(FILTER_QUERY, f.toSearchExpression(), urlEncoded));
         facetFilters().forEach(f -> builder.add(FILTER_FACETS, f.toSearchExpression(), urlEncoded));

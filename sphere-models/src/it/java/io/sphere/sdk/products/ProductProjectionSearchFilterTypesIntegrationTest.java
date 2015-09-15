@@ -41,6 +41,8 @@ import static java.util.Locale.FRENCH;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchFilterTypesIntegrationTest extends IntegrationTest {
+    public static final String TRUE_TERMSTATS_KEY = "true";
+    public static final String FALSE_TERMSTATS_KEY = "false";
     private static Product product1;
     private static Product product2;
     private static Product productSomeId;
@@ -192,7 +194,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         final TermFacetExpression<ProductProjection, Boolean> facetExpr = model().allVariants().attribute().ofBoolean(ATTR_NAME_BOOLEAN)
                 .faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
-        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of("T", 1), TermStats.of("F", 1)));
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(TRUE_TERMSTATS_KEY, 1), TermStats.of(FALSE_TERMSTATS_KEY, 1)));
     }
 
     @Test
@@ -474,7 +476,7 @@ public class ProductProjectionSearchFilterTypesIntegrationTest extends Integrati
         final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_BOOLEAN_SET)
                 .faceted().byAllTerms();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withFacets(facetExpr);
-        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of("T", 2), TermStats.of("F", 1)));
+        assertThat(executeAndReturnTerms(search, facetExpr)).containsOnlyElementsOf(asList(TermStats.of(TRUE_TERMSTATS_KEY, 2), TermStats.of(FALSE_TERMSTATS_KEY, 1)));
     }
 
     @Test
