@@ -5,11 +5,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
 
-public class JsonNodeSphereRequest implements SphereRequest<JsonNode> {
+public class JsonNodeSphereRequest extends Base implements SphereRequest<JsonNode> {
     private final HttpRequestIntent httpRequestIntent;
 
     protected JsonNodeSphereRequest(final HttpRequestIntent httpRequestIntent) {
