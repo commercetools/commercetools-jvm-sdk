@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.function.Function;
 
 public interface StateByIdGet extends MetaModelGetDsl<State, State, StateByIdGet, StateExpansionModel<State>> {
-    static StateByIdGet of(final Identifiable<State> cartDiscount) {
-        return of(cartDiscount.getId());
+    static StateByIdGet of(final Identifiable<State> state) {
+        return of(state.getId());
     }
 
     static StateByIdGet of(final String id) {

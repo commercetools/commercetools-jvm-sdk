@@ -15,8 +15,8 @@ import java.util.function.Function;
  {@include.example io.sphere.sdk.orders.commands.OrderFromCartCreateCommandTest#execution()}
  */
 public interface OrderByIdGet extends MetaModelGetDsl<Order, Order, OrderByIdGet, OrderExpansionModel<Order>> {
-    static OrderByIdGet of(final Identifiable<Order> cartDiscount) {
-        return of(cartDiscount.getId());
+    static OrderByIdGet of(final Identifiable<Order> order) {
+        return of(order.getId());
     }
 
     static OrderByIdGet of(final String id) {

@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.function.Function;
 
 public interface InventoryEntryByIdGet extends MetaModelGetDsl<InventoryEntry, InventoryEntry, InventoryEntryByIdGet, InventoryEntryExpansionModel<InventoryEntry>> {
-    static InventoryEntryByIdGet of(final Identifiable<InventoryEntry> cartDiscount) {
-        return of(cartDiscount.getId());
+    static InventoryEntryByIdGet of(final Identifiable<InventoryEntry> inventoryEntry) {
+        return of(inventoryEntry.getId());
     }
 
     static InventoryEntryByIdGet of(final String id) {

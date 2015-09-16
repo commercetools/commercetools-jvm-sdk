@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.function.Function;
 
 public interface CustomerGroupByIdGet extends MetaModelGetDsl<CustomerGroup, CustomerGroup, CustomerGroupByIdGet, CustomerGroupExpansionModel<CustomerGroup>> {
-    static CustomerGroupByIdGet of(final Identifiable<CustomerGroup> cartDiscount) {
-        return of(cartDiscount.getId());
+    static CustomerGroupByIdGet of(final Identifiable<CustomerGroup> customerGroup) {
+        return of(customerGroup.getId());
     }
 
     static CustomerGroupByIdGet of(final String id) {

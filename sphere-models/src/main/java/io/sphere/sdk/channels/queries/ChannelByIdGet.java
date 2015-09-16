@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.function.Function;
 
 public interface ChannelByIdGet extends MetaModelGetDsl<Channel, Channel, ChannelByIdGet, ChannelExpansionModel<Channel>> {
-    static ChannelByIdGet of(final Identifiable<Channel> cartDiscount) {
-        return of(cartDiscount.getId());
+    static ChannelByIdGet of(final Identifiable<Channel> channel) {
+        return of(channel.getId());
     }
 
     static ChannelByIdGet of(final String id) {

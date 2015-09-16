@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.function.Function;
 
 public interface CategoryByIdGet extends MetaModelGetDsl<Category, Category, CategoryByIdGet, CategoryExpansionModel<Category>> {
-    static CategoryByIdGet of(final Identifiable<Category> cartDiscount) {
-        return of(cartDiscount.getId());
+    static CategoryByIdGet of(final Identifiable<Category> category) {
+        return of(category.getId());
     }
 
     static CategoryByIdGet of(final String id) {

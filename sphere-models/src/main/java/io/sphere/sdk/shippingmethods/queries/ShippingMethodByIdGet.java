@@ -15,8 +15,8 @@ import java.util.function.Function;
  * {@include.example io.sphere.sdk.shippingmethods.queries.ShippingMethodByIdGetTest#execution()}
  */
 public interface ShippingMethodByIdGet extends MetaModelGetDsl<ShippingMethod, ShippingMethod, ShippingMethodByIdGet, ShippingMethodExpansionModel<ShippingMethod>> {
-    static ShippingMethodByIdGet of(final Identifiable<ShippingMethod> cartDiscount) {
-        return of(cartDiscount.getId());
+    static ShippingMethodByIdGet of(final Identifiable<ShippingMethod> shippingMethod) {
+        return of(shippingMethod.getId());
     }
 
     static ShippingMethodByIdGet of(final String id) {

@@ -15,8 +15,8 @@ import java.util.function.Function;
  {@include.example io.sphere.sdk.carts.queries.CartByIdGetTest#fetchById()}
  */
 public interface CartByIdGet extends MetaModelGetDsl<Cart, Cart, CartByIdGet, CartExpansionModel<Cart>> {
-    static CartByIdGet of(final Identifiable<Cart> cartDiscount) {
-        return of(cartDiscount.getId());
+    static CartByIdGet of(final Identifiable<Cart> cart) {
+        return of(cart.getId());
     }
 
     static CartByIdGet of(final String id) {
