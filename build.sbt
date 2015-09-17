@@ -18,7 +18,7 @@ javacOptions in (Compile, doc) in ThisBuild := Seq("-overview", "documentation-r
     """\n<span id='custom-javascripts'></span>\n<script>var pathPrefix = $(\".navList a[href$='index-all.html']\").attr(\"href\").replace(\"index-all.html\", \"\"); var closingScriptTag = \"</\" + \"script>\"; \n$('#custom-javascripts').append(\"<script src='\" + pathPrefix + \"documentation-resources/javascripts/main.js'>\" + closingScriptTag + \"<link rel='stylesheet' href='\" + pathPrefix + \"documentation-resources/stylesheets/main.css'>\");</script>""",
   "-encoding", "UTF-8", "-charset", "UTF-8", "-docencoding", "UTF-8", "-Xdoclint:missing,syntax,accessibility,reference")
 
-javacOptions in ThisBuild ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.8", "-target", "1.8", "-Xlint:all", "-Xlint:-options", "-Xlint:-path", "-Werror", "-parameters")
+javacOptions in ThisBuild ++= Seq("-deprecation", "-Xlint:unchecked", "-source", "1.8", "-target", "1.8", "-encoding", "UTF-8", "-Xlint:all", "-Xlint:-options", "-Xlint:-path", "-Werror", "-parameters")
 
 genjavadocSettings
 
