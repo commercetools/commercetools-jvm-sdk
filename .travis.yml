@@ -1,27 +1,16 @@
-before_install:
-- free
-- sudo apt-get install graphviz
-#Java 8 stuff
-- free
-- sudo bash -c 'echo oracle-java8-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections'
-- sudo add-apt-repository -y ppa:webupd8team/java
-- free
-- sudo apt-get update
-- free
-- sudo apt-get install -y oracle-java8-installer oracle-java8-set-default
-- free
+sudo: required
+
+services:
+  - docker
 script:
-- export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-- echo $JAVA_HOME
-- free
-- ./sbt genDoc test it:test
+- docker run -v $PWD:/wd msct/jvmsdk /bin/sh -c "cd /wd && ./sbt genDoc test it:test"
 - free
 - echo $TRAVIS_PULL_REQUEST
 - echo $TRAVIS_REPO_SLUG
 - echo $TRAVIS_BRANCH
 - free
-- ./sbt -J-Xmx512m "sphere-models/it:test::runMain io.sphere.sdk.client.MainMethodThreadLeakTest"
-- ./sbt -J-Xmx512m "test:runMain introspection.rules.RulesMain"
+- docker run -v $PWD:/wd msct/jvmsdk /bin/sh -c "cd /wd && ./sbt \"sphere-models/it:test::runMain io.sphere.sdk.client.MainMethodThreadLeakTest\""
+- docker run -v $PWD:/wd msct/jvmsdk /bin/sh -c "cd /wd && ./sbt \"test:runMain introspection.rules.RulesMain\""
 - free
 - bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null
 after_success:
