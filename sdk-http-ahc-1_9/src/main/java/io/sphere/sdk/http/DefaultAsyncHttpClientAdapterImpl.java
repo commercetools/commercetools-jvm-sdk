@@ -25,20 +25,11 @@ final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter 
             LOGGER.debug("executing " + httpRequest);
         }
         final Request request = asAhcRequest(httpRequest);
-        final CompletableFuture<HttpResponse> future = new CompletableFuture<>();
+        final CompletableFuture<Response> future = new CompletableFuture<>();
         asyncHttpClient.executeRequest(request, new AsyncCompletionHandler<Response>() {
             @Override
             public Response onCompleted(final Response response) throws Exception {
-                try {
-                    final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
-                    final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), responseBodyAsBytes, httpRequest, HttpHeaders.of(response.getHeaders()));
-                    if (LOGGER.isDebugEnabled()) {
-                        LOGGER.debug("response " + httpResponse);
-                    }
-                    future.complete(httpResponse);
-                } catch (final Exception e) {
-                    future.completeExceptionally(new HttpException(e));
-                }
+                    future.complete(response);
                 return response;
             }
 
@@ -54,7 +45,14 @@ final class DefaultAsyncHttpClientAdapterImpl implements AsyncHttpClientAdapter 
 
             }
         });
-        return future;
+        return future.thenApplyAsync(response -> {
+            final byte[] responseBodyAsBytes = getResponseBodyAsBytes(response);
+            final HttpResponse httpResponse = HttpResponse.of(response.getStatusCode(), responseBodyAsBytes, httpRequest, HttpHeaders.of(response.getHeaders()));
+            if (LOGGER.isDebugEnabled()) {
+                LOGGER.debug("response " + httpResponse);
+            }
+            return httpResponse;
+        }, threadPool);
     }
 
     private byte[] getResponseBodyAsBytes(final Response response) {
