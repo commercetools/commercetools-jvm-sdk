@@ -28,91 +28,100 @@ public class CodeTaglet implements Taglet {
     }
 
     private String getString(final Tag tag) throws IOException {
-        int pos = tag.text().indexOf("#");
-        final boolean fullFileRequested = pos == -1;
-        if (fullFileRequested) {
-            pos = tag.text().length();
-        }
-        final String fullyQualifiedClassName = tag.text().substring(0, pos);
-        final String partialFilePath = fullyQualifiedClassName.replace('.', '/').concat(".java");
+        try {
+            int pos = tag.text().indexOf("#");
+            final boolean fullFileRequested = pos == -1;
+            if (fullFileRequested) {
+                pos = tag.text().length();
+            }
+            final String fullyQualifiedClassName = tag.text().substring(0, pos);
+            final String partialFilePath = fullyQualifiedClassName.replace('.', '/').concat(".java");
 
 
-        final File testFile = findFile(fullyQualifiedClassName, partialFilePath, tag);
+            final File testFile = findFile(fullyQualifiedClassName, partialFilePath, tag);
 
-        String imports = "";
-        String res = "";
-        if (fullFileRequested) {
-            //partially from http://stackoverflow.com/a/326448
-            final int fileLength = (int) testFile.length();
-            final StringBuilder fileContents = new StringBuilder(fileLength);
-            final StringBuilder importStatements = new StringBuilder(fileLength);
-            String lineSeparator = System.getProperty("line.separator");
-            try (Scanner scanner = new Scanner(testFile)) {
-                Position position = Position.START;
-                while (scanner.hasNextLine()) {
-                    final String line = scanner.nextLine();
-                    final String trimmedLine = line.trim();
-                    if (position != Position.CODE && "".equals(trimmedLine)) {
-                        //ignore
-                    } else if (position == Position.START && trimmedLine.startsWith("package")) {
-                        position = Position.IMPORTS;
-                    } else if (position == Position.IMPORTS && trimmedLine.startsWith("import")) {
-                        importStatements.append(line).append(lineSeparator);
-                    } else if (position == Position.IMPORTS || position == Position.CODE) {
-                        position = Position.CODE;
-                        fileContents.append(line).append(lineSeparator);
+            String imports = "";
+            String res = "";
+            if (fullFileRequested) {
+                //partially from http://stackoverflow.com/a/326448
+                final int fileLength = (int) testFile.length();
+                final StringBuilder fileContents = new StringBuilder(fileLength);
+                final StringBuilder importStatements = new StringBuilder(fileLength);
+                String lineSeparator = System.getProperty("line.separator");
+                try (Scanner scanner = new Scanner(testFile)) {
+                    Position position = Position.START;
+                    while (scanner.hasNextLine()) {
+                        final String line = scanner.nextLine();
+                        final String trimmedLine = line.trim();
+                        if (position != Position.CODE && "".equals(trimmedLine)) {
+                            //ignore
+                        } else if (position == Position.START && trimmedLine.startsWith("package")) {
+                            position = Position.IMPORTS;
+                        } else if (position == Position.IMPORTS && trimmedLine.startsWith("import")) {
+                            importStatements.append(line).append(lineSeparator);
+                        } else if (position == Position.IMPORTS || position == Position.CODE) {
+                            position = Position.CODE;
+                            fileContents.append(line).append(lineSeparator);
+                        } else {
+                            throw new IllegalStateException("can't parse Java file");
+                        }
+                    }
+                    res = fileContents.toString();
+                    imports = importStatements.toString();
+                }
+            } else {
+                final String testName = tag.text().substring(pos + 1);
+                final Scanner scanner = new Scanner(testFile);
+                List<String> lines = new ArrayList<>();
+                boolean endFound = false;
+            while(scanner.hasNext() && !endFound) {
+                    String current = scanner.findInLine("(public|private|protected) .* " + testName + "\\(.*");
+                    final boolean methodStartFound = current != null;
+                    if (methodStartFound) {
+                        scanner.nextLine();
+                        do {
+                            current = scanner.nextLine();
+                            endFound = current.equals("    }") || current.contains("//end example parsing here");
+                            if (!endFound) {
+                                final String currentWithoutLeadingWhitespace = current.replaceFirst("        ", "");
+                                lines.add(currentWithoutLeadingWhitespace);
+                            }
+                        } while (!endFound);
                     } else {
-                        throw new IllegalStateException("can't parse Java file");
+                        scanner.nextLine();
                     }
                 }
-                res = fileContents.toString();
-                imports = importStatements.toString();
-            }
-        } else {
-            final String testName = tag.text().substring(pos + 1);
-            final Scanner scanner = new Scanner(testFile);
-            List<String> lines = new ArrayList<>();
-            boolean endFound = false;
-            while(scanner.hasNext() && !endFound) {
-                String current = scanner.findInLine("(public|private|protected) .* " + testName + "\\(.*");
-                final boolean methodStartFound = current != null;
-                if (methodStartFound) {
-                    scanner.nextLine();
-                    do {
-                        current = scanner.nextLine();
-                        endFound = current.equals("    }") || current.contains("//end example parsing here");
-                        if (!endFound) {
-                            final String currentWithoutLeadingWhitespace = current.replaceFirst("        ", "");
-                            lines.add(currentWithoutLeadingWhitespace);
-                        }
-                    } while (!endFound);
-                } else {
-                    scanner.nextLine();
+
+                for (String s : lines) {
+                    res += s + "\n";
                 }
             }
-
-            for (String s : lines) {
-                res += s + "\n";
+            final String htmlEscapedBody = htmlEscape(res);
+            if ("".equals(htmlEscapedBody)) {
+                throw new RuntimeException("Empty example for " + tag.text());
             }
-        }
-        final String htmlEscapedBody = htmlEscape(res);
-        if ("".equals(htmlEscapedBody)) {
-            throw new RuntimeException("Empty example for " + tag.text());
-        }
-        final String htmlEscapedImports = htmlEscape(imports);
+            final String htmlEscapedImports = htmlEscape(imports);
         final String tagId = tag.text().replaceAll("[^a-zA-Z0-9]","-");
 
 
-        final String pathToGitHubTestFile = testFile.getAbsolutePath().replace(new File(".").getAbsoluteFile().getCanonicalPath(), "https://github.com/sphereio/sphere-jvm-sdk/blob/master");
+            final String pathToGitHubTestFile = testFile.getAbsolutePath().replace(new File(".").getAbsoluteFile().getCanonicalPath(), "https://github.com/sphereio/sphere-jvm-sdk/blob/master");
 
 
-        return "<div id=\"" + tagId + "%s\" class=code-example>"
-                + (fullFileRequested ?
+            return "<div id=\"" + tagId + "%s\" class=code-example>"
+                    + (fullFileRequested ?
                     "<button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button>"
-                    + "<pre class='hide code-example-imports'><code class='java'>" + htmlEscapedImports + "</code></pre>"
-                : "")
-                + "<pre><code class='java'>" + htmlEscapedBody + "</code><p>See the <a href=\"" + pathToGitHubTestFile + "\" target=\"_blank\">test code</a>.</pre>"
-                + "</div>";
+                            + "<pre class='hide code-example-imports'><code class='java'>" + htmlEscapedImports + "</code></pre>"
+                    : "")
+                    + "<pre><code class='java'>" + htmlEscapedBody + "</code><p>See the <a href=\"" + pathToGitHubTestFile + "\" target=\"_blank\">test code</a>.</pre>"
+                    + "</div>";
+        } catch (final Exception e) {
+            System.err.println(e);
+            System.err.println("in");
+            System.err.println(tag);
+            System.err.println(tag.position());
+            throw e;
+        }
+
     }
 
     private String htmlEscape(final String res) {
