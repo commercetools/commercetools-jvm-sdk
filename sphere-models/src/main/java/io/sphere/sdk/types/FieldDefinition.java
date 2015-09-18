@@ -10,12 +10,12 @@ public class FieldDefinition extends Base {
     private final FieldType type;
     private final String name;
     private final LocalizedString label;
-    @JsonProperty("isRequired")
+    @JsonProperty("required")
     private final Boolean required;
     private final TextInputHint inputHint;
 
     @JsonCreator
-    private FieldDefinition(final FieldType type, final String name, final LocalizedString label, @JsonProperty("isRequired") final Boolean required, final TextInputHint inputHint) {
+    private FieldDefinition(final FieldType type, final String name, final LocalizedString label, final Boolean required, final TextInputHint inputHint) {
         this.type = type;
         this.name = name;
         this.label = label;
@@ -39,7 +39,7 @@ public class FieldDefinition extends Base {
         return label;
     }
 
-    @JsonProperty("isRequired")
+    @JsonProperty("required")
     public Boolean isRequired() {
         return required;
     }
