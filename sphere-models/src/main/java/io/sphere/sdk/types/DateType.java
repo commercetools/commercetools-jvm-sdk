@@ -3,14 +3,14 @@ package io.sphere.sdk.types;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class DateTimeFieldType extends FieldTypeBase {
+public class DateType extends FieldTypeBase {
 
     @JsonCreator
-    private DateTimeFieldType() {
+    private DateType() {
     }
 
     @JsonIgnore
-    public static DateTimeFieldType of() {
-        return new DateTimeFieldType();
+    public static DateType of() {
+        return new DateType();
     }
 }

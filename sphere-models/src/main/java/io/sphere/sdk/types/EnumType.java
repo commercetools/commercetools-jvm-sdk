@@ -6,17 +6,17 @@ import io.sphere.sdk.models.EnumValue;
 
 import java.util.List;
 
-public class EnumFieldType extends FieldTypeBase {
+public class EnumType extends FieldTypeBase {
     private final List<EnumValue> values;
 
     @JsonCreator
-    private EnumFieldType(final List<EnumValue> values) {
+    private EnumType(final List<EnumValue> values) {
         this.values = values;
     }
 
     @JsonIgnore
-    public static EnumFieldType of(final List<EnumValue> values) {
-        return new EnumFieldType(values);
+    public static EnumType of(final List<EnumValue> values) {
+        return new EnumType(values);
     }
 
     public List<EnumValue> getValues() {

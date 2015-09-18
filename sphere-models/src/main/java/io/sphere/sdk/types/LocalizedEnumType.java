@@ -6,17 +6,17 @@ import io.sphere.sdk.models.LocalizedEnumValue;
 
 import java.util.List;
 
-public class LocalizedEnumFieldType extends FieldTypeBase {
+public class LocalizedEnumType extends FieldTypeBase {
     private final List<LocalizedEnumValue> values;
 
     @JsonCreator
-    private LocalizedEnumFieldType(final List<LocalizedEnumValue> values) {
+    private LocalizedEnumType(final List<LocalizedEnumValue> values) {
         this.values = values;
     }
 
     @JsonIgnore
-    public static LocalizedEnumFieldType of(final List<LocalizedEnumValue> values) {
-        return new LocalizedEnumFieldType(values);
+    public static LocalizedEnumType of(final List<LocalizedEnumValue> values) {
+        return new LocalizedEnumType(values);
     }
 
     public List<LocalizedEnumValue> getValues() {

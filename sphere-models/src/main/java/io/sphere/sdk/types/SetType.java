@@ -3,17 +3,17 @@ package io.sphere.sdk.types;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class SetFieldType extends FieldTypeBase {
+public class SetType extends FieldTypeBase {
     private final FieldType elementType;
 
     @JsonCreator
-    private SetFieldType(final FieldType elementType) {
+    private SetType(final FieldType elementType) {
         this.elementType = elementType;
     }
 
     @JsonIgnore
-    public static SetFieldType of(final FieldType elementType) {
-        return new SetFieldType(elementType);
+    public static SetType of(final FieldType elementType) {
+        return new SetType(elementType);
     }
 
     public FieldType getElementType() {

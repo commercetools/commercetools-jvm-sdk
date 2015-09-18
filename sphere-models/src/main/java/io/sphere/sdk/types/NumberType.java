@@ -3,14 +3,14 @@ package io.sphere.sdk.types;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class BooleanFieldType extends FieldTypeBase {
+public class NumberType extends FieldTypeBase {
 
     @JsonCreator
-    private BooleanFieldType() {
+    private NumberType() {
     }
 
     @JsonIgnore
-    public static BooleanFieldType of() {
-        return new BooleanFieldType();
+    public static NumberType of() {
+        return new NumberType();
     }
 }

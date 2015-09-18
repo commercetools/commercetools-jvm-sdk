@@ -3,14 +3,14 @@ package io.sphere.sdk.types;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class MoneyFieldType extends FieldTypeBase {
+public class StringType extends FieldTypeBase {
 
     @JsonCreator
-    private MoneyFieldType() {
+    private StringType() {
     }
 
     @JsonIgnore
-    public static MoneyFieldType of() {
-        return new MoneyFieldType();
+    public static StringType of() {
+        return new StringType();
     }
 }
