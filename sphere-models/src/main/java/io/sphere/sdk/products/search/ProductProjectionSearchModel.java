@@ -25,27 +25,27 @@ public class ProductProjectionSearchModel extends ProductDataSearchModelBase {
     }
 
     @Override
-    public LocalizedStringSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
+    public LocalizedStringSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> name() {
         return super.name();
     }
 
     @Override
-    public ReferenceSearchModel<ProductProjection, SimpleSearchSortDirection> categories() {
+    public ReferenceSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> categories() {
         return super.categories();
     }
 
     @Override
-    public ReferenceSearchModel<ProductProjection, SimpleSearchSortDirection> productType() {
+    public ReferenceSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> productType() {
         return super.productType();
     }
 
     @Override
-    public DateTimeSearchModel<ProductProjection, SimpleSearchSortDirection> createdAt() {
+    public DateTimeSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> createdAt() {
         return super.createdAt();
     }
 
     @Override
-    public DateTimeSearchModel<ProductProjection, SimpleSearchSortDirection> lastModifiedAt() {
+    public DateTimeSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> lastModifiedAt() {
         return super.lastModifiedAt();
     }
 }

@@ -27,7 +27,6 @@ import java.util.function.Predicate;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
-import static io.sphere.sdk.products.search.VariantSearchSortDirection.*;
 import static io.sphere.sdk.search.FilterRange.atLeast;
 import static io.sphere.sdk.search.FilterRange.atMost;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -101,7 +100,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void sortByAttributeAscending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted(ASC));
+                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byAsc());
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).isEqualTo(asList(product2.getId(), product1.getId(), product3.getId()));
     }
@@ -109,7 +108,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void sortByAttributeDescending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted(DESC));
+                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byDesc());
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).isEqualTo(asList(product1.getId(), product2.getId(), product3.getId()));
     }
@@ -117,7 +116,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void sortWithAdditionalParameterByAttributeAscending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted(ASC_MAX));
+                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byAscWithMax());
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).isEqualTo(asList(product3.getId(), product2.getId(), product1.getId()));
     }
@@ -125,7 +124,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void sortWithAdditionalParameterByAttributeDescending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted(DESC_MIN));
+                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byDescWithMin());
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).isEqualTo(asList(product3.getId(), product1.getId(), product2.getId()));
     }
@@ -239,7 +238,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public void resultsArePaginated() throws Exception {
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.ofStaged()
                 .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().by(asList("blue", "red")))
-                .withSort(model -> model().name().locale(ENGLISH).sorted(SimpleSearchSortDirection.DESC))
+                .withSort(model -> model().name().locale(ENGLISH).sorted().byDesc())
                 .withOffset(1L)
                 .withLimit(1L));
         assertThat(resultsToIds(result)).containsOnly(product2.getId());

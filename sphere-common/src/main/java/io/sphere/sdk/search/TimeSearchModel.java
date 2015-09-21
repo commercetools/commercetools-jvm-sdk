@@ -3,10 +3,10 @@ package io.sphere.sdk.search;
 import javax.annotation.Nullable;
 import java.time.LocalTime;
 
-public class TimeSearchModel<T, S extends SearchSortDirection> extends RangeTermModelImpl<T, LocalTime> implements SearchSortingModel<T, S> {
+public class TimeSearchModel<T, S extends DirectionlessSearchSortModel<T>> extends RangeTermModelImpl<T, S, LocalTime> implements SearchSortModel<T, S> {
 
-    public TimeSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
-        super(parent, pathSegment);
+    public TimeSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SortBuilder<T, S> sortBuilder) {
+        super(parent, pathSegment, sortBuilder);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class TimeSearchModel<T, S extends SearchSortDirection> extends RangeTerm
     }
 
     @Override
-    public SearchSort<T> sorted(S sortDirection) {
-        return new SphereSearchSort<>(this, sortDirection);
+    public S sorted() {
+        return sortBuilder.apply(this);
     }
 }

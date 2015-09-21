@@ -1,6 +1,6 @@
 package io.sphere.sdk.search;
 
-public interface TermModel<T, V> {
+public interface TermModel<T, S extends DirectionlessSearchSortModel<T>, V> {
 
     /**
      * Eventually generates an expression to filter elements by certain values.
@@ -19,6 +19,6 @@ public interface TermModel<T, V> {
      * This untyped search model allows you to build filters and facets, both range and term models.
      * @return the untyped search model for this instance
      */
-    UntypedSearchModel<T> untyped();
+    UntypedSearchModel<T, S> untyped();
 
 }

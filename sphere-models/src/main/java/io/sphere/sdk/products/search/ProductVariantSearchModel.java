@@ -1,14 +1,13 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.search.MoneySearchModel;
-import io.sphere.sdk.search.SearchModel;
-import io.sphere.sdk.search.SearchModelImpl;
-import io.sphere.sdk.search.SimpleSearchSortDirection;
+import io.sphere.sdk.search.*;
+
+import javax.annotation.Nullable;
 
 public class ProductVariantSearchModel extends SearchModelImpl<ProductProjection> {
 
-    ProductVariantSearchModel(final SearchModel<ProductProjection> parent, final String pathSegment) {
+    ProductVariantSearchModel(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
@@ -16,7 +15,7 @@ public class ProductVariantSearchModel extends SearchModelImpl<ProductProjection
         return new ProductAttributeSearchModel(this, "attributes");
     }
 
-    public MoneySearchModel<ProductProjection, SimpleSearchSortDirection> price() {
-        return new MoneySearchModel<>(this, "price");
+    public MoneySearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> price() {
+        return new MoneySearchModel<>(this, "price", new DirectionlessSearchSortBuilder<>());
     }
 }

@@ -1,6 +1,6 @@
 package io.sphere.sdk.search;
 
-public interface RangeTermModel<T, V extends Comparable<? super V>> {
+public interface RangeTermModel<T, S extends DirectionlessSearchSortModel<T>, V extends Comparable<? super V>> {
 
     /**
      * Eventually generates an expression to filter elements by certain range of values.
@@ -19,6 +19,6 @@ public interface RangeTermModel<T, V extends Comparable<? super V>> {
      * This untyped search model allows you to build filters and facets, both range and term models.
      * @return the untyped search model for this instance
      */
-    UntypedSearchModel<T> untyped();
+    UntypedSearchModel<T, S> untyped();
 
 }

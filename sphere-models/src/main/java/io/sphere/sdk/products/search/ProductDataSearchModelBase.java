@@ -3,9 +3,11 @@ package io.sphere.sdk.products.search;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.*;
 
+import javax.annotation.Nullable;
+
 class ProductDataSearchModelBase extends SearchModelImpl<ProductProjection> {
 
-    ProductDataSearchModelBase(final SearchModel<ProductProjection> parent, String pathSegment) {
+    public ProductDataSearchModelBase(@Nullable final SearchModel<ProductProjection> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
     }
 
@@ -13,23 +15,23 @@ class ProductDataSearchModelBase extends SearchModelImpl<ProductProjection> {
         return new ProductVariantSearchModel(this, "variants");
     }
 
-    public LocalizedStringSearchModel<ProductProjection, SimpleSearchSortDirection> name() {
-        return new LocalizedStringSearchModel<>(this, "name");
+    public LocalizedStringSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> name() {
+        return new LocalizedStringSearchModel<>(this, "name", new DirectionlessSearchSortBuilder<>());
     }
 
-    public ReferenceSearchModel<ProductProjection, SimpleSearchSortDirection> categories() {
-        return new ReferenceSearchModel<>(this, "categories");
+    public ReferenceSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> categories() {
+        return new ReferenceSearchModel<>(this, "categories", new DirectionlessSearchSortBuilder<>());
     }
 
-    public ReferenceSearchModel<ProductProjection, SimpleSearchSortDirection> productType() {
-        return new ReferenceSearchModel<>(this, "productType");
+    public ReferenceSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> productType() {
+        return new ReferenceSearchModel<>(this, "productType", new DirectionlessSearchSortBuilder<>());
     }
 
-    public DateTimeSearchModel<ProductProjection, SimpleSearchSortDirection> createdAt() {
-        return new DateTimeSearchModel<>(this, "createdAt");
+    public DateTimeSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> createdAt() {
+        return new DateTimeSearchModel<>(this, "createdAt", new DirectionlessSearchSortBuilder<>());
     }
 
-    public DateTimeSearchModel<ProductProjection, SimpleSearchSortDirection> lastModifiedAt() {
-        return new DateTimeSearchModel<>(this, "lastModifiedAt");
+    public DateTimeSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> lastModifiedAt() {
+        return new DateTimeSearchModel<>(this, "lastModifiedAt", new DirectionlessSearchSortBuilder<>());
     }
 }

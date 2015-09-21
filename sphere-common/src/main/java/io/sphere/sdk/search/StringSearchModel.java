@@ -2,10 +2,10 @@ package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
 
-public class StringSearchModel<T, S extends SearchSortDirection> extends TermModelImpl<T, String> implements SearchSortingModel<T, S> {
+public class StringSearchModel<T, S extends DirectionlessSearchSortModel<T>> extends TermModelImpl<T, S, String> implements SearchSortModel<T, S> {
 
-    public StringSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
-        super(parent, pathSegment);
+    public StringSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SortBuilder<T, S> sortBuilder) {
+        super(parent, pathSegment, sortBuilder);
     }
 
     @Override
@@ -19,7 +19,7 @@ public class StringSearchModel<T, S extends SearchSortDirection> extends TermMod
     }
 
     @Override
-    public SearchSort<T> sorted(S sortDirection) {
-        return new SphereSearchSort<>(this, sortDirection);
+    public S sorted() {
+        return sortBuilder.apply(this);
     }
 }

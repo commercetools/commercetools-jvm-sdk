@@ -2,10 +2,10 @@ package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
 
-public class BooleanSearchModel<T, S extends SearchSortDirection> extends TermModelImpl<T, Boolean> implements SearchSortingModel<T, S> {
+public class BooleanSearchModel<T, S extends DirectionlessSearchSortModel<T>> extends TermModelImpl<T, S, Boolean> implements SearchSortModel<T, S> {
 
-    public BooleanSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
-        super(parent, pathSegment);
+    public BooleanSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SortBuilder<T, S> sortBuilder) {
+        super(parent, pathSegment, sortBuilder);
     }
 
     @Override
@@ -24,7 +24,7 @@ public class BooleanSearchModel<T, S extends SearchSortDirection> extends TermMo
      * DESC: True, False
      */
     @Override
-    public SearchSort<T> sorted(final S sortDirection) {
-        return new SphereSearchSort<>(this, sortDirection);
+    public S sorted() {
+        return sortBuilder.apply(this);
     }
 }

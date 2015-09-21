@@ -3,10 +3,10 @@ package io.sphere.sdk.search;
 import javax.annotation.Nullable;
 import java.math.BigDecimal;
 
-public class NumberSearchModel<T, S extends SearchSortDirection> extends RangeTermModelImpl<T, BigDecimal> implements SearchSortingModel<T, S> {
+public class NumberSearchModel<T, S extends DirectionlessSearchSortModel<T>> extends RangeTermModelImpl<T, S, BigDecimal> implements SearchSortModel<T, S> {
 
-    public NumberSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
-        super(parent, pathSegment);
+    public NumberSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SortBuilder<T, S> sortBuilder) {
+        super(parent, pathSegment, sortBuilder);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class NumberSearchModel<T, S extends SearchSortDirection> extends RangeTe
     }
 
     @Override
-    public SearchSort<T> sorted(S sortDirection) {
-        return new SphereSearchSort<>(this, sortDirection);
+    public S sorted() {
+        return sortBuilder.apply(this);
     }
 }

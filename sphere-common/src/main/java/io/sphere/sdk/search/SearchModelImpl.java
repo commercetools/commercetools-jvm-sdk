@@ -20,6 +20,7 @@ public class SearchModelImpl<T> extends Base implements SearchModel<T> {
         return new SearchModelImpl<>(this, pathSegment) ;
     }
 
+    @Nullable
     @Override
     public String getPathSegment() {
         return pathSegment;

@@ -4,10 +4,10 @@ import javax.annotation.Nullable;
 
 import static java.util.Arrays.asList;
 
-public class MoneyCentAmountSearchModel<T, S extends SearchSortDirection> extends RangeTermModelImpl<T, Long> implements SearchSortingModel<T, S> {
+public class MoneyCentAmountSearchModel<T, S extends DirectionlessSearchSortModel<T>> extends RangeTermModelImpl<T, S, Long> implements SearchSortModel<T, S> {
 
-    public MoneyCentAmountSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
-        super(parent, pathSegment);
+    public MoneyCentAmountSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SortBuilder<T, S> sortBuilder) {
+        super(parent, pathSegment, sortBuilder);
     }
 
     @Override
@@ -21,12 +21,14 @@ public class MoneyCentAmountSearchModel<T, S extends SearchSortDirection> extend
     }
 
     @Override
-    public SearchSort<T> sorted(S sortDirection) {
+    public S sorted() {
+        final MoneyCentAmountSearchModel<T, S> searchModel;
         if (hasPath(asList("variants", "price", "centAmount"))) {
-            return new SphereSearchSort<>(new MoneyCentAmountSearchModel<>(null, "price"), sortDirection);
+            searchModel = new MoneyCentAmountSearchModel<>(null, "price", sortBuilder);
         } else {
-            return new SphereSearchSort<>(this, sortDirection);
+            searchModel = this;
         }
+        return sortBuilder.apply(searchModel);
     }
 
 }

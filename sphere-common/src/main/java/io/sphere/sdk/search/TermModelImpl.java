@@ -2,14 +2,14 @@ package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
 
-abstract class TermModelImpl<T, V> extends SearchModelImpl<T> implements TermModel<T, V> {
+abstract class TermModelImpl<T, S extends DirectionlessSearchSortModel<T>, V> extends SortableSearchModel<T, S> implements TermModel<T, S, V> {
 
-    TermModelImpl(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment);
+    TermModelImpl(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SortBuilder<T, S> sortBuilder) {
+        super(parent, pathSegment, sortBuilder);
     }
 
     @Override
-    public UntypedSearchModel<T> untyped() {
-        return new UntypedSearchModel<>(this, null);
+    public UntypedSearchModel<T, S> untyped() {
+        return new UntypedSearchModel<>(this, null, sortBuilder);
     }
 }

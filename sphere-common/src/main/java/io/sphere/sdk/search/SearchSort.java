@@ -8,7 +8,7 @@ public interface SearchSort<T> {
      */
     String toSphereSort();
 
-    public static <T> SearchSort<T> of(final String sphereSortExpression) {
+    static <T> SearchSort<T> of(final String sphereSortExpression) {
         return new SimpleSearchSort<>(sphereSortExpression);
     }
 }

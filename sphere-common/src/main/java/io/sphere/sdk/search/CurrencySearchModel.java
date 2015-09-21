@@ -3,10 +3,10 @@ package io.sphere.sdk.search;
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 
-public class CurrencySearchModel<T, S extends SearchSortDirection> extends TermModelImpl<T, CurrencyUnit> implements SearchSortingModel<T, S> {
+public class CurrencySearchModel<T, S extends DirectionlessSearchSortModel<T>> extends TermModelImpl<T, S, CurrencyUnit> implements SearchSortModel<T, S> {
 
-    public CurrencySearchModel(@Nullable final SearchModel<T> parent, final String pathSegment) {
-        super(parent, pathSegment);
+    public CurrencySearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SortBuilder<T, S> sortBuilder) {
+        super(parent, pathSegment, sortBuilder);
     }
 
     @Override
@@ -20,7 +20,7 @@ public class CurrencySearchModel<T, S extends SearchSortDirection> extends TermM
     }
 
     @Override
-    public SearchSort<T> sorted(S sortDirection) {
-        return new SphereSearchSort<>(this, sortDirection);
+    public S sorted() {
+        return sortBuilder.apply(this);
     }
 }
