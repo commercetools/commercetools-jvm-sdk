@@ -18,6 +18,12 @@
     catch(err) {
     }
 //-->
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var altColor = "altColor";
+var rowColor = "rowColor";
+var tableTab = "tableTab";
+var activeTableTab = "activeTableTab";
 </script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -43,7 +49,7 @@
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../io/sphere/sdk/types/TypeDraftBuilder.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/types/TypeDraft.html" target="_top">Frames</a></li>
@@ -69,14 +75,14 @@
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.io.sphere.sdk.models.Base">Method</a></li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.top">
@@ -86,72 +92,54 @@
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.types</div>
-<h2 title="Class TypeDraft" class="title">Class TypeDraft</h2>
+<h2 title="Interface TypeDraft" class="title">Interface TypeDraft</h2>
 </div>
 <div class="contentContainer">
-<ul class="inheritance">
-<li>java.lang.Object</li>
-<li>
-<ul class="inheritance">
-<li><a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
-<li>
-<ul class="inheritance">
-<li>io.sphere.sdk.types.TypeDraft</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <div class="description">
 <ul class="blockList">
 <li class="blockList">
 <hr>
 <br>
-<pre>public class <span class="typeNameLabel">TypeDraft</span>
-extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<pre>public interface <span class="typeNameLabel">TypeDraft</span></pre>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/TypeDraft.html#TypeDraft--">TypeDraft</a></span>()</code>&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
 <!--   -->
 </a>
 <h3>Method Summary</h3>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;io.sphere.sdk.models.<a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></h3>
-<code><a href="../../../../io/sphere/sdk/models/Base.html#equals-java.lang.Object-">equals</a>, <a href="../../../../io/sphere/sdk/models/Base.html#hashCode--">hashCode</a>, <a href="../../../../io/sphere/sdk/models/Base.html#toString--">toString</a></code></li>
-</ul>
-<ul class="blockList">
-<li class="blockList"><a name="methods.inherited.from.class.java.lang.Object">
-<!--   -->
-</a>
-<h3>Methods inherited from class&nbsp;java.lang.Object</h3>
-<code>clone, finalize, getClass, notify, notifyAll, wait, wait, wait</code></li>
-</ul>
+<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<tr>
+<th class="colFirst" scope="col">Modifier and Type</th>
+<th class="colLast" scope="col">Method and Description</th>
+</tr>
+<tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/TypeDraft.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/types/FieldDefinition.html" title="class in io.sphere.sdk.types">FieldDefinition</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/TypeDraft.html#getFieldDefinitions--">getFieldDefinitions</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/TypeDraft.html#getKey--">getKey</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/TypeDraft.html#getName--">getName</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>java.util.Set&lt;java.lang.String&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/TypeDraft.html#getResourceTypeIds--">getResourceTypeIds</a></span>()</code>&nbsp;</td>
+</tr>
+</table>
 </li>
 </ul>
 </li>
@@ -160,19 +148,57 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
+<!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
+<li class="blockList"><a name="method.detail">
 <!--   -->
 </a>
-<h3>Constructor Detail</h3>
-<a name="TypeDraft--">
+<h3>Method Detail</h3>
+<a name="getKey--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getKey</h4>
+<pre>java.lang.String&nbsp;getKey()</pre>
+</li>
+</ul>
+<a name="getName--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getName</h4>
+<pre><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getName()</pre>
+</li>
+</ul>
+<a name="getDescription--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getDescription</h4>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getDescription()</pre>
+</li>
+</ul>
+<a name="getResourceTypeIds--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getResourceTypeIds</h4>
+<pre>java.util.Set&lt;java.lang.String&gt;&nbsp;getResourceTypeIds()</pre>
+</li>
+</ul>
+<a name="getFieldDefinitions--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>TypeDraft</h4>
-<pre>public&nbsp;TypeDraft()</pre>
+<h4>getFieldDefinitions</h4>
+<pre>@Nullable
+java.util.List&lt;<a href="../../../../io/sphere/sdk/types/FieldDefinition.html" title="class in io.sphere.sdk.types">FieldDefinition</a>&gt;&nbsp;getFieldDefinitions()</pre>
 </li>
 </ul>
 </li>
@@ -203,7 +229,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li>Next&nbsp;Class</li>
+<li><a href="../../../../io/sphere/sdk/types/TypeDraftBuilder.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/types/TypeDraft.html" target="_top">Frames</a></li>
@@ -229,14 +255,14 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
-<li><a href="#methods.inherited.from.class.io.sphere.sdk.models.Base">Method</a></li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
-<li>Method</li>
+<li>Constr&nbsp;|&nbsp;</li>
+<li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
 <a name="skip.navbar.bottom">

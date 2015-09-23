@@ -105,7 +105,9 @@ io.sphere.sdk.taxcategories.expansion
 io.sphere.sdk.taxcategories.queries
 io.sphere.sdk.types
 io.sphere.sdk.types.commands
+io.sphere.sdk.types.commands.updateactions
 io.sphere.sdk.types.expansion
+io.sphere.sdk.types.query
 io.sphere.sdk.utils
 io.sphere.sdk.utils.functional
 io.sphere.sdk.zones
