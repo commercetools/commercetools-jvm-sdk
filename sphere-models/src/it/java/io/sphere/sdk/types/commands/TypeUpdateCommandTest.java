@@ -41,7 +41,10 @@ public class TypeUpdateCommandTest extends IntegrationTest {
             final FieldDefinition fieldDefinition = FieldDefinition.of(StringType.of(), name, en("label"), false, TextInputHint.SINGLE_LINE);
             final Type updatedType = execute(TypeUpdateCommand.of(type, AddFieldDefinition.of(fieldDefinition)));
             assertThat(updatedType.getFieldDefinitions().get(1)).isEqualTo(fieldDefinition);
-            return updatedType;
+
+            final Type updated2 = execute(TypeUpdateCommand.of(updatedType, RemoveFieldDefinition.of(name)));
+
+            return updated2;
         });
     }
 }
