@@ -1,4 +1,4 @@
-package io.sphere.sdk.types.query;
+package io.sphere.sdk.types.queries;
 
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.models.Identifiable;

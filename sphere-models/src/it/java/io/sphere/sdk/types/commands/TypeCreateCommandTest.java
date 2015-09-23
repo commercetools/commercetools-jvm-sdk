@@ -6,7 +6,7 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.FieldDefinition;
 //important
 import io.sphere.sdk.types.*;
-import io.sphere.sdk.types.query.TypeQuery;
+import io.sphere.sdk.types.queries.TypeQuery;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

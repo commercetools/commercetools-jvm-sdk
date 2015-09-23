@@ -1,4 +1,4 @@
 /**
  * {@doc.gen summary types}
  */
-package io.sphere.sdk.types.query;
+package io.sphere.sdk.types.queries;

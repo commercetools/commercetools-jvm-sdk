@@ -2,5 +2,7 @@ package io.sphere.sdk.types;
 
 import io.sphere.sdk.models.Base;
 
-public class FieldTypeBase extends Base implements FieldType {
+public abstract class FieldTypeBase extends Base implements FieldType {
+    protected FieldTypeBase() {
+    }
 }

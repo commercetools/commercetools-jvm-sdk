@@ -12,6 +12,7 @@ public class UpdateActionsInCorrectPackageRule extends ClassStrategyRule {
 
     @Override
     protected boolean isRuleConform(final Class<?> clazz) {
-        return clazz.getPackage().getName().endsWith(".updateactions");
+        final String packageName = clazz.getPackage().getName();
+        return packageName.endsWith(".updateactions") || packageName.endsWith(".customupdateactions");
     }
 }

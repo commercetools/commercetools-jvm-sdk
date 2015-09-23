@@ -3,6 +3,7 @@ package io.sphere.sdk.categories;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
+import io.sphere.sdk.categories.commands.updateactions.SetCustomField;
 import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.test.IntegrationTest;
@@ -26,8 +27,11 @@ public class CategoriesCustomFieldTest extends IntegrationTest {
             final Category category = execute(CategoryCreateCommand.of(categoryDraft));
             assertThat(category.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a value");
 
+            final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetCustomField.ofObject(STRING_FIELD_NAME, "a new value")));
+            assertThat(updatedCategory.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a new value");
+
             //clean up
-            execute(CategoryDeleteCommand.of(category));
+            execute(CategoryDeleteCommand.of(updatedCategory));
             return type;
         });
     }

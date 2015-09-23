@@ -1,4 +1,4 @@
-package io.sphere.sdk.types.query;
+package io.sphere.sdk.types.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.queries.PagedQueryResult;
