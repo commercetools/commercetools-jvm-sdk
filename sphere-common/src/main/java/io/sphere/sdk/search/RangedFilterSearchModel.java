@@ -2,7 +2,11 @@ package io.sphere.sdk.search;
 
 import javax.annotation.Nullable;
 
+import java.util.List;
+import java.util.stream.StreamSupport;
+
 import static java.util.Collections.singletonList;
+import static java.util.stream.Collectors.toList;
 
 public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends FilterSearchModel<T, V> {
 
@@ -16,28 +20,45 @@ public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends
     }
 
     @Override
-    public FilterExpression<T> by(final Iterable<V> values) {
-        return super.by(values);
+    public FilterExpression<T> byAny(final Iterable<V> values) {
+        return super.byAny(values);
+    }
+
+    @Override
+    public List<FilterExpression<T>> byAll(final Iterable<V> values) {
+        return super.byAll(values);
     }
 
     /**
      * Generates an expression to select all elements with an attribute value within the given range.
-     * For example: filtering by [3, 5] would select only those elements with values between 3 and 5, inclusive.
+     * For example: filtering by [3, 7] would select only those elements with values between 3 and 7, inclusive.
      * @param range the range of values to filter by
      * @return a filter expression for the given range
      */
     public FilterExpression<T> byRange(final FilterRange<V> range) {
-        return byRange(singletonList(range));
+        return byAnyRange(singletonList(range));
     }
 
     /**
-     * Generates an expression to select all elements with an attribute value within the given ranges.
-     * For example: filtering by [[3, 5], [8, 9]] would select only those elements with values within 3 and 5, or within 8 and 9, both inclusive.
+     * Generates an expression to select all elements with an attribute value within any of the given ranges.
+     * For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within 3 and 7, or within 5 and 9, both inclusive.
      * @param ranges the ranges of values to filter by
      * @return a filter expression for the given ranges
      */
-    public FilterExpression<T> byRange(final Iterable<FilterRange<V>> ranges) {
+    public FilterExpression<T> byAnyRange(final Iterable<FilterRange<V>> ranges) {
         return new RangeFilterExpression<>(this, typeSerializer, ranges);
+    }
+
+    /**
+     * Generates an expression to select all elements with an attribute value within all the given ranges.
+     * For example: filtering by [[3, 7], [5, 9]] would select only those elements with values within the range intersection [5, 7], inclusive.
+     * @param ranges the ranges of values to filter by
+     * @return a filter expression for the given ranges
+     */
+    public List<FilterExpression<T>> byAllRanges(final Iterable<FilterRange<V>> ranges) {
+        return StreamSupport.stream(ranges.spliterator(), false)
+                .map(range -> byRange(range))
+                .collect(toList());
     }
 
     /**
