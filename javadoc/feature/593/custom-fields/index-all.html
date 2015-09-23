@@ -159,6 +159,8 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereException.html#addNote-java.lang.String-">addNote(String)</a></span> - Method in exception io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html#addObject-java.lang.String-java.lang.Object-">addObject(String, Object)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html" title="class in io.sphere.sdk.types">CustomFieldsDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/orders/commands/updateactions/AddParcelToDelivery.html" title="class in io.sphere.sdk.orders.commands.updateactions"><span class="typeNameLink">AddParcelToDelivery</span></a> - Class in <a href="io/sphere/sdk/orders/commands/updateactions/package-summary.html">io.sphere.sdk.orders.commands.updateactions</a></dt>
 <dd>
 <div class="block">Adds a parcel to a delivery.</div>
@@ -446,6 +448,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraftBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraftBuilder.html" title="class in io.sphere.sdk.states">StateDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxRateBuilder.html" title="class in io.sphere.sdk.taxcategories">TaxRateBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html" title="class in io.sphere.sdk.types">CustomFieldsDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/TypeDraftBuilder.html#build--">build()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/TypeDraftBuilder.html" title="class in io.sphere.sdk.types">TypeDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -1244,6 +1248,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html#current--">current()</a></span> - Method in class io.sphere.sdk.products.queries.<a href="io/sphere/sdk/products/queries/ProductCatalogDataQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductCatalogDataQueryModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryDraftBuilder.html#custom-io.sphere.sdk.types.CustomFieldsDraft-">custom(CustomFieldsDraft)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories">CategoryDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><span class="typeNameLink">Custom</span></a> - Interface in <a href="io/sphere/sdk/types/package-summary.html">io.sphere.sdk.types</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><span class="typeNameLink">Customer</span></a> - Interface in <a href="io/sphere/sdk/customers/package-summary.html">io.sphere.sdk.customers</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/expansion/CustomerSignInResultExpansionModel.html#customer--">customer()</a></span> - Method in class io.sphere.sdk.customers.expansion.<a href="io/sphere/sdk/customers/expansion/CustomerSignInResultExpansionModel.html" title="class in io.sphere.sdk.customers.expansion">CustomerSignInResultExpansionModel</a></dt>
@@ -1381,6 +1389,12 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Verifies customer's email using a token.</div>
 </dd>
+<dt><a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">CustomFields</span></a> - Class in <a href="io/sphere/sdk/types/package-summary.html">io.sphere.sdk.types</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">CustomFieldsDraft</span></a> - Class in <a href="io/sphere/sdk/types/package-summary.html">io.sphere.sdk.types</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">CustomFieldsDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/types/package-summary.html">io.sphere.sdk.types</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts"><span class="typeNameLink">CustomLineItem</span></a> - Interface in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts"><span class="typeNameLink">CustomLineItemDraft</span></a> - Class in <a href="io/sphere/sdk/carts/package-summary.html">io.sphere.sdk.carts</a></dt>
@@ -2440,6 +2454,12 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html#getCurrentPassword--">getCurrentPassword()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#getCustom--">getCustom()</a></span> - Method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryDraft.html#getCustom--">getCustom()</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories">CategoryDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/Custom.html#getCustom--">getCustom()</a></span> - Method in interface io.sphere.sdk.types.<a href="io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerSignInResult.html#getCustomer--">getCustomer()</a></span> - Method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#getCustomerEmail--">getCustomerEmail()</a></span> - Method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
@@ -2688,6 +2708,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/MoneyImpl.html#getFactory--">getFactory()</a></span> - Method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/MoneyImpl.html" title="class in io.sphere.sdk.utils">MoneyImpl</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getField-java.lang.String-">getField(String)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getField-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">getField(String, TypeReference&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/commands/updateactions/AddFieldDefinition.html#getFieldDefinition--">getFieldDefinition()</a></span> - Method in class io.sphere.sdk.types.commands.updateactions.<a href="io/sphere/sdk/types/commands/updateactions/AddFieldDefinition.html" title="class in io.sphere.sdk.types.commands.updateactions">AddFieldDefinition</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/Type.html#getFieldDefinitionByName-java.lang.String-">getFieldDefinitionByName(String)</a></span> - Method in interface io.sphere.sdk.types.<a href="io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a></dt>
@@ -2705,6 +2729,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/commands/updateactions/ChangeFieldDefinitionLabel.html#getFieldName--">getFieldName()</a></span> - Method in class io.sphere.sdk.types.commands.updateactions.<a href="io/sphere/sdk/types/commands/updateactions/ChangeFieldDefinitionLabel.html" title="class in io.sphere.sdk.types.commands.updateactions">ChangeFieldDefinitionLabel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/commands/updateactions/RemoveFieldDefinition.html#getFieldName--">getFieldName()</a></span> - Method in class io.sphere.sdk.types.commands.updateactions.<a href="io/sphere/sdk/types/commands/updateactions/RemoveFieldDefinition.html" title="class in io.sphere.sdk.types.commands.updateactions">RemoveFieldDefinition</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#getFields--">getFields()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FileHttpRequestBody.html#getFile--">getFile()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FileHttpRequestBody.html" title="class in io.sphere.sdk.http">FileHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
@@ -3850,12 +3876,18 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/StateDraft.html#getType--">getType()</a></span> - Method in class io.sphere.sdk.states.<a href="io/sphere/sdk/states/StateDraft.html" title="class in io.sphere.sdk.states">StateDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getType--">getType()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/FieldDefinition.html#getType--">getType()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/FieldDefinition.html" title="class in io.sphere.sdk.types">FieldDefinition</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/Reference.html#getTypeId--">getTypeId()</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a></dt>
 <dd>
 <div class="block">Type id of the object this reference represents, e.g.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#getTypeId--">getTypeId()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#getTypeKey--">getTypeKey()</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/NestedType.html#getTypeReference--">getTypeReference()</a></span> - Method in class io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/NestedType.html" title="class in io.sphere.sdk.products.attributes">NestedType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#getUpdateActions--">getUpdateActions()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dt>
@@ -7095,6 +7127,16 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerName.html#ofTitleFirstAndLastName-java.lang.String-java.lang.String-java.lang.String-">ofTitleFirstAndLastName(String, String, String)</a></span> - Static method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html#ofType-io.sphere.sdk.types.Type-">ofType(Type)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html" title="class in io.sphere.sdk.types">CustomFieldsDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeId-java.lang.String-java.util.Map-">ofTypeId(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html#ofTypeId-java.lang.String-">ofTypeId(String)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html" title="class in io.sphere.sdk.types">CustomFieldsDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeKey-java.lang.String-java.util.Map-">ofTypeKey(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html#ofTypeKey-java.lang.String-">ofTypeKey(String)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html" title="class in io.sphere.sdk.types">CustomFieldsDraftBuilder</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html#ofUnsetAttribute-java.lang.Integer-java.lang.String-">ofUnsetAttribute(Integer, String)</a></span> - Static method in class io.sphere.sdk.products.commands.updateactions.<a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttribute</a></dt>
 <dd>
 <div class="block">Action to remove a custom attribute.</div>
@@ -8082,6 +8124,46 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/types/ReferenceType.html" title="class in io.sphere.sdk.types"><span class="typeNameLink">ReferenceType</span></a> - Class in <a href="io/sphere/sdk/types/package-summary.html">io.sphere.sdk.types</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscount.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/Channel.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/CustomerGroup.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.customergroups.<a href="io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/Customer.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObject.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCode.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes">DiscountCode</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/InventoryEntry.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.inventory.<a href="io/sphere/sdk/inventory/InventoryEntry.html" title="interface in io.sphere.sdk.inventory">InventoryEntry</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/Message.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/ProductDiscount.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscount</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Product.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductType.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/states/State.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.states.<a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxCategory.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/Type.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.types.<a href="io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Zone.html#referenceTypeId--">referenceTypeId()</a></span> - Static method in interface io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/AddressBuilder.html#region-java.lang.String-">region(String)</a></span> - Method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/AddressBuilder.html" title="class in io.sphere.sdk.models">AddressBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/cartdiscounts/RelativeCartDiscountValue.html" title="class in io.sphere.sdk.cartdiscounts"><span class="typeNameLink">RelativeCartDiscountValue</span></a> - Class in <a href="io/sphere/sdk/cartdiscounts/package-summary.html">io.sphere.sdk.cartdiscounts</a></dt>
@@ -8198,6 +8280,18 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">ResourceQueryModelImpl</span></a>&lt;<a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="type parameter in ResourceQueryModelImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html#ResourceQueryModelImpl-io.sphere.sdk.queries.QueryModel-java.lang.String-">ResourceQueryModelImpl(QueryModel&lt;T&gt;, String)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ResourceQueryModelImpl.html" title="class in io.sphere.sdk.queries">ResourceQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/CustomLineItem.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/LineItem.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/Customer.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#resourceTypeId--">resourceTypeId()</a></span> - Static method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/GenericMessageImpl.html#resourceVersion">resourceVersion</a></span> - Variable in class io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/GenericMessageImpl.html" title="class in io.sphere.sdk.messages">GenericMessageImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -9434,14 +9528,14 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <div class="block"><div id="io-sphere-sdk-types-commands-TypeCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final FieldDefinition stringFieldDefinition =
         FieldDefinition.of(StringType.of(), "string-field-name", en("label"), false, TextInputHint.SINGLE_LINE);
 final String typeKey = "type-key";
-final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom type"), singleton(Category.typeId()))
+final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom type"), singleton(Category.referenceTypeId()))
         .description(en("description"))
         .fieldDefinitions(singletonList(stringFieldDefinition))
         .build();
 final Type type = execute(TypeCreateCommand.of(typeDraft));
 assertThat(type.getKey()).isEqualTo(typeKey);
 assertThat(type.getName()).isEqualTo(en("name of the custom type"));
-assertThat(type.getResourceTypeIds()).containsExactly(Category.typeId());
+assertThat(type.getResourceTypeIds()).containsExactly(Category.referenceTypeId());
 assertThat(type.getDescription()).isEqualTo(en("description"));
 assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/commands/TypeCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -9459,49 +9553,123 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/expansion/TypeExpansionModel.html#TypeExpansionModel-java.lang.String-java.lang.String-">TypeExpansionModel(String, String)</a></span> - Constructor for class io.sphere.sdk.types.expansion.<a href="io/sphere/sdk/types/expansion/TypeExpansionModel.html" title="class in io.sphere.sdk.types.expansion">TypeExpansionModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/cartdiscounts/CartDiscount.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.cartdiscounts.<a href="io/sphere/sdk/cartdiscounts/CartDiscount.html" title="interface in io.sphere.sdk.cartdiscounts">CartDiscount</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/cartdiscounts/CartDiscount.html#referenceTypeId--"><code>CartDiscount.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/Cart.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.carts.<a href="io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/carts/Cart.html#referenceTypeId--"><code>Cart.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/Category.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/categories/Category.html#referenceTypeId--"><code>Category.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/channels/Channel.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.channels.<a href="io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/channels/Channel.html#referenceTypeId--"><code>Channel.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/CustomerGroup.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.customergroups.<a href="io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/customergroups/CustomerGroup.html#referenceTypeId--"><code>CustomerGroup.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/Customer.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/customers/Customer.html#referenceTypeId--"><code>Customer.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObject.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/customobjects/CustomObject.html#referenceTypeId--"><code>CustomObject.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCode.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes">DiscountCode</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/discountcodes/DiscountCode.html#referenceTypeId--"><code>DiscountCode.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/InventoryEntry.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.inventory.<a href="io/sphere/sdk/inventory/InventoryEntry.html" title="interface in io.sphere.sdk.inventory">InventoryEntry</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/inventory/InventoryEntry.html#referenceTypeId--"><code>InventoryEntry.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/messages/Message.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.messages.<a href="io/sphere/sdk/messages/Message.html" title="interface in io.sphere.sdk.messages">Message</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/messages/Message.html#referenceTypeId--"><code>Message.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/orders/Order.html#referenceTypeId--"><code>Order.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/ProductDiscount.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscount</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/productdiscounts/ProductDiscount.html#referenceTypeId--"><code>ProductDiscount.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/Product.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.products.<a href="io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products">Product</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/products/Product.html#referenceTypeId--"><code>Product.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/ProductType.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.producttypes.<a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes">ProductType</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/producttypes/ProductType.html#referenceTypeId--"><code>ProductType.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/AnyReferenceQueryModel.html#typeId--">typeId()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/AnyReferenceQueryModel.html" title="interface in io.sphere.sdk.queries">AnyReferenceQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/ReferenceQueryModel.html#typeId--">typeId()</a></span> - Method in interface io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/ReferenceQueryModel.html" title="interface in io.sphere.sdk.queries">ReferenceQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/reviews/Review.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.reviews.<a href="io/sphere/sdk/reviews/Review.html" title="interface in io.sphere.sdk.reviews">Review</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/reviews/Review.html#referenceTypeId--"><code>Review.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.shippingmethods.<a href="io/sphere/sdk/shippingmethods/ShippingMethod.html" title="interface in io.sphere.sdk.shippingmethods">ShippingMethod</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/shippingmethods/ShippingMethod.html#referenceTypeId--"><code>ShippingMethod.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/states/State.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.states.<a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states">State</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/states/State.html#referenceTypeId--"><code>State.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/taxcategories/TaxCategory.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.taxcategories.<a href="io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/Type.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.types.<a href="io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/taxcategories/TaxCategory.html#referenceTypeId--"><code>TaxCategory.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/zones/Zone.html#typeId--">typeId()</a></span> - Static method in interface io.sphere.sdk.zones.<a href="io/sphere/sdk/zones/Zone.html" title="interface in io.sphere.sdk.zones">Zone</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/zones/Zone.html#referenceTypeId--"><code>Zone.referenceTypeId()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><a href="io/sphere/sdk/types/query/TypeQuery.html" title="interface in io.sphere.sdk.types.query"><span class="typeNameLink">TypeQuery</span></a> - Interface in <a href="io/sphere/sdk/types/query/package-summary.html">io.sphere.sdk.types.query</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/types/query/TypeQueryModel.html" title="class in io.sphere.sdk.types.query"><span class="typeNameLink">TypeQueryModel</span></a> - Class in <a href="io/sphere/sdk/types/query/package-summary.html">io.sphere.sdk.types.query</a></dt>
