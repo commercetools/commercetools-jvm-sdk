@@ -1,12 +1,15 @@
 package io.sphere.sdk.types.commands;
 
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.types.FieldDefinition;
+import io.sphere.sdk.types.StringType;
 import io.sphere.sdk.types.Type;
 import io.sphere.sdk.types.commands.updateactions.*;
 import org.junit.Test;
 
-import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -27,6 +30,17 @@ public class TypeUpdateCommandTest extends IntegrationTest {
             final LocalizedString newDescription = randomSlug();
             final Type updatedType = execute(TypeUpdateCommand.of(type, SetDescription.of(newDescription)));
             assertThat(updatedType.getDescription()).isEqualTo(newDescription);
+            return updatedType;
+        });
+    }
+
+    @Test
+    public void addFieldDefinition() {
+        withUpdateableType(client(), type -> {
+            final String name = randomKey();
+            final FieldDefinition fieldDefinition = FieldDefinition.of(StringType.of(), name, en("label"), false, TextInputHint.SINGLE_LINE);
+            final Type updatedType = execute(TypeUpdateCommand.of(type, AddFieldDefinition.of(fieldDefinition)));
+            assertThat(updatedType.getFieldDefinitions().get(1)).isEqualTo(fieldDefinition);
             return updatedType;
         });
     }
