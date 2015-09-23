@@ -6,6 +6,7 @@ import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -59,4 +60,7 @@ public interface CartLike<T> extends Resource<T> {
     CountryCode getCountry();
 
     List<DiscountCodeInfo> getDiscountCodes();
+
+    @Nullable
+    CustomFields getCustom();
 }

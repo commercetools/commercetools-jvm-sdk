@@ -2,6 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
@@ -17,17 +18,22 @@ public class CartDraft {
     @Nullable
     private final InventoryMode inventoryMode;
 
+    @Nullable
+    private final CustomFieldsDraft custom;
+
     CartDraft(final CurrencyUnit currency, final String customerId,
               @Nullable final CountryCode country,
-              @Nullable final InventoryMode inventoryMode) {
+              @Nullable final InventoryMode inventoryMode,
+              @Nullable final CustomFieldsDraft custom) {
         this.currency = currency;
         this.customerId = customerId;
         this.country = country;
         this.inventoryMode = inventoryMode;
+        this.custom = custom;
     }
 
     public static CartDraft of(final CurrencyUnit currency) {
-        return new CartDraft(currency, null, null, null);
+        return new CartDraft(currency, null, null, null, null);
     }
 
     public CurrencyUnit getCurrency() {
@@ -58,5 +64,14 @@ public class CartDraft {
 
     public CartDraft withInventoryMode(@Nullable final InventoryMode inventoryMode) {
         return new CartDraftBuilder(this).inventoryMode(inventoryMode).build();
+    }
+
+    public CartDraft witCustom(@Nullable final CustomFieldsDraft custom) {
+        return new CartDraftBuilder(this).custom(custom).build();
+    }
+
+    @Nullable
+    public CustomFieldsDraft getCustom() {
+        return custom;
     }
 }

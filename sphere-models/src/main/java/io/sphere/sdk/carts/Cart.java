@@ -7,6 +7,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -92,4 +93,8 @@ public interface Cart extends CartLike<Cart> {
 
     @Override
     List<DiscountCodeInfo> getDiscountCodes();
+
+    @Nullable
+    @Override
+    CustomFields getCustom();
 }
