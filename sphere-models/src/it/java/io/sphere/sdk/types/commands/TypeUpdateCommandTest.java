@@ -1,6 +1,7 @@
 package io.sphere.sdk.types.commands;
 
 import io.sphere.sdk.models.EnumValue;
+import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.test.IntegrationTest;
@@ -69,6 +70,19 @@ public class TypeUpdateCommandTest extends IntegrationTest {
             assertThat(updatedType.getFieldDefinitionByName(name).getType())
                     .isInstanceOf(EnumType.class)
                     .matches(fieldType -> ((EnumType) fieldType).getValues().contains(newEnumValue), "contains the new enum value");
+            return updatedType;
+        });
+    }
+
+    @Test
+    public void addLocalizedEnumValue() {
+        withUpdateableType(client(), type -> {
+            final String name = TypeFixtures.LOCALIZED_ENUM_FIELD_NAME;
+            final LocalizedEnumValue newLocalizedEnumValue = LocalizedEnumValue.of("key-new", en("label new"));
+            final Type updatedType = execute(TypeUpdateCommand.of(type, AddLocalizedEnumValue.of(name, newLocalizedEnumValue)));
+            assertThat(updatedType.getFieldDefinitionByName(name).getType())
+                    .isInstanceOf(LocalizedEnumType.class)
+                    .matches(fieldType -> ((LocalizedEnumType) fieldType).getValues().contains(newLocalizedEnumValue), "contains the new enum value");
             return updatedType;
         });
     }
