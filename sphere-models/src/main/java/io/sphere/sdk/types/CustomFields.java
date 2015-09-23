@@ -25,7 +25,9 @@ public class CustomFields {
 
     @Nullable
     public <T> T getField(final String name, final TypeReference<T> typeReference) {
-        return Optional.ofNullable(fields.get(name)).map(jsonNode -> SphereJsonUtils.readObject(jsonNode, typeReference)).orElse(null);
+        return Optional.ofNullable(fields.get(name))
+                .map(jsonNode -> SphereJsonUtils.readObject(jsonNode, typeReference))
+                .orElse(null);
     }
 
     public Reference<Type> getType() {
