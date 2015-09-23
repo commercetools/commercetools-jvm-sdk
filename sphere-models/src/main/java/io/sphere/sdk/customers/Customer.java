@@ -6,6 +6,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.Custom;
 
 import javax.annotation.Nullable;
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Optional;
 
 @JsonDeserialize(as = CustomerImpl.class)
-public interface Customer extends Resource<Customer> {
+public interface Customer extends Resource<Customer>, Custom {
     @Nullable
     String getCustomerNumber();
 

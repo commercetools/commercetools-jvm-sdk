@@ -1,11 +1,11 @@
-package io.sphere.sdk.categories.commands.updateactions;
+package io.sphere.sdk.customers.commands.updateactions;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
 
-public class SetCustomField extends SetCustomFieldBase<Category> {
+public class SetCustomField extends SetCustomFieldBase<Customer> {
     private SetCustomField(final String name, final JsonNode value) {
         super(name, value);
     }

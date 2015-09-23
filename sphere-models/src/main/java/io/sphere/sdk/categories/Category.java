@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
@@ -23,7 +24,7 @@ import static io.sphere.sdk.utils.ListUtils.join;
  * </ul>
  */
 @JsonDeserialize(as=CategoryImpl.class)
-public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes {
+public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
     LocalizedString getName();
 

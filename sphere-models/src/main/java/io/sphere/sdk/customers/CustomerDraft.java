@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.types.CustomFieldsDraft;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nullable;
@@ -46,6 +47,9 @@ public class CustomerDraft extends Base {
     @Nullable
     private final Integer defaultShippingAddress;
     private final List<Address> addresses;
+    @Nullable
+    private final CustomFieldsDraft custom;
+
 
     CustomerDraft(final String customerNumber, final String email,
                   final String firstName, final String lastName, final String middleName,
@@ -54,7 +58,8 @@ public class CustomerDraft extends Base {
                   final String anonymousCartId, final LocalDate dateOfBirth,
                   final String companyName, final String vatId,
                   final Boolean emailVerified, final Reference<CustomerGroup> customerGroup,
-                  final Integer defaultBillingAddress, final Integer defaultShippingAddress, final List<Address> addresses) {
+                  final Integer defaultBillingAddress, final Integer defaultShippingAddress,
+                  final List<Address> addresses, final CustomFieldsDraft custom) {
         this.customerNumber = customerNumber;
         this.email = email;
         this.firstName = firstName;
@@ -70,6 +75,7 @@ public class CustomerDraft extends Base {
         this.emailVerified = emailVerified;
         this.customerGroup = customerGroup;
         this.addresses = addresses;
+        this.custom = custom;
         if (!isValidAddressIndex(addresses, defaultBillingAddress)
                 || !isValidAddressIndex(addresses, defaultShippingAddress)) {
             throw new IllegalArgumentException("The defaultBillingAddress and defaultShippingAddress cannot contain an index which");
@@ -168,6 +174,11 @@ public class CustomerDraft extends Base {
         return addresses;
     }
 
+    @Nullable
+    public CustomFieldsDraft getCustom() {
+        return custom;
+    }
+
     public CustomerDraft withCustomerNumber(@Nullable final String customerNumber) {
         return newBuilder().customerNumber(customerNumber).build();
     }
@@ -229,6 +240,10 @@ public class CustomerDraft extends Base {
 
     public CustomerDraft withAddresses(final List<Address> addresses) {
         return newBuilder().addresses(addresses).build();
+    }
+
+    public CustomerDraft withCustom(@Nullable final CustomFieldsDraft custom) {
+        return newBuilder().custom(custom).build();
     }
 
     private CustomerDraftBuilder newBuilder() {
