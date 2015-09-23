@@ -3,13 +3,14 @@ package io.sphere.sdk.types;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
 
 import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.Optional;
 
-public class CustomFields {
+public class CustomFields extends Base {
     private final Reference<Type> type;
     private final Map<String, JsonNode> fields;
 
