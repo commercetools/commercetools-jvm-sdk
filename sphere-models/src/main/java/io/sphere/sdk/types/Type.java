@@ -23,6 +23,9 @@ public interface Type extends Resource<Type> {
 
     List<FieldDefinition> getFieldDefinitions();
 
+    @Nullable
+    FieldDefinition getFieldDefinitionByName(final String name);
+
     @Override
     default Reference<Type> toReference() {
         return Reference.of(typeId(), getId(), this);

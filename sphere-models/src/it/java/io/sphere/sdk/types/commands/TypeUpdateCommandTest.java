@@ -1,11 +1,10 @@
 package io.sphere.sdk.types.commands;
 
+import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.types.FieldDefinition;
-import io.sphere.sdk.types.StringType;
-import io.sphere.sdk.types.Type;
+import io.sphere.sdk.types.*;
 import io.sphere.sdk.types.commands.updateactions.*;
 import org.junit.Test;
 
@@ -40,7 +39,7 @@ public class TypeUpdateCommandTest extends IntegrationTest {
             final String name = randomKey();
             final FieldDefinition fieldDefinition = FieldDefinition.of(StringType.of(), name, en("label"), false, TextInputHint.SINGLE_LINE);
             final Type updatedType = execute(TypeUpdateCommand.of(type, AddFieldDefinition.of(fieldDefinition)));
-            assertThat(updatedType.getFieldDefinitions().get(1)).isEqualTo(fieldDefinition);
+            assertThat(updatedType.getFieldDefinitionByName(name)).isEqualTo(fieldDefinition);
             assertThat(updatedType.getFieldDefinitions()).hasSize(type.getFieldDefinitions().size() + 1);
 
             final Type updated2 = execute(TypeUpdateCommand.of(updatedType, RemoveFieldDefinition.of(name)));
@@ -56,7 +55,20 @@ public class TypeUpdateCommandTest extends IntegrationTest {
             final LocalizedString newLabel = randomSlug();
             final String name = type.getFieldDefinitions().get(0).getName();
             final Type updatedType = execute(TypeUpdateCommand.of(type, ChangeFieldDefinitionLabel.of(name, newLabel)));
-            assertThat(updatedType.getFieldDefinitions().get(0).getLabel()).isEqualTo(newLabel);
+            assertThat(updatedType.getFieldDefinitionByName(name).getLabel()).isEqualTo(newLabel);
+            return updatedType;
+        });
+    }
+
+    @Test
+    public void addEnumValue() {
+        withUpdateableType(client(), type -> {
+            final String name = TypeFixtures.ENUM_FIELD_NAME;
+            final EnumValue newEnumValue = EnumValue.of("key-new", "label new");
+            final Type updatedType = execute(TypeUpdateCommand.of(type, AddEnumValue.of(name, newEnumValue)));
+            assertThat(updatedType.getFieldDefinitionByName(name).getType())
+                    .isInstanceOf(EnumType.class)
+                    .matches(fieldType -> ((EnumType) fieldType).getValues().contains(newEnumValue), "contains the new enum value");
             return updatedType;
         });
     }

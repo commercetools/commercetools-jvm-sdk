@@ -52,4 +52,10 @@ final class TypeImpl extends ResourceImpl<Type> implements Type {
     public List<FieldDefinition> getFieldDefinitions() {
         return fieldDefinitions;
     }
+
+    @Nullable
+    @Override
+    public FieldDefinition getFieldDefinitionByName(final String name) {
+        return getFieldDefinitions().stream().filter(def -> def.getName().equals(name)).findFirst().orElse(null);
+    }
 }
