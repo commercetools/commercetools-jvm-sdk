@@ -20,7 +20,7 @@ public class ProductDiscountQueryTest extends IntegrationTest {
             assertThat(loadedDiscount.getId()).isEqualTo(productDiscount.getId());
             assertThat(loadedDiscount.getReferences().size()).isGreaterThanOrEqualTo(1);
             assertThat(loadedDiscount.getReferences().stream()
-                            .filter(ref -> ref.getTypeId().equals(Product.typeId()))
+                            .filter(ref -> ref.getTypeId().equals(Product.referenceTypeId()))
                             .findFirst()
                             .get()
             )

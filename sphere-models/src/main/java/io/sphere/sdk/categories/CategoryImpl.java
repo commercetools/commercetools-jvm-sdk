@@ -2,8 +2,9 @@ package io.sphere.sdk.categories;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.ResourceImpl;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.time.ZonedDateTime;
@@ -27,6 +28,8 @@ class CategoryImpl extends ResourceImpl<Category> implements Category {
     private final LocalizedString metaDescription;
     @Nullable
     private final LocalizedString metaKeywords;
+    @Nullable
+    private final CustomFields custom;
 
     @JsonCreator
     CategoryImpl(final String id,
@@ -39,7 +42,7 @@ class CategoryImpl extends ResourceImpl<Category> implements Category {
                  final List<Reference<Category>> ancestors,
                  @Nullable final Reference<Category> parent,
                  @Nullable final String orderHint, @Nullable final String externalId,
-                 final LocalizedString metaTitle, final LocalizedString metaDescription, final LocalizedString metaKeywords) {
+                 final LocalizedString metaTitle, final LocalizedString metaDescription, final LocalizedString metaKeywords, @Nullable final CustomFields custom) {
         super(id, version, createdAt, lastModifiedAt);
         this.name = name;
         this.slug = slug;
@@ -51,6 +54,7 @@ class CategoryImpl extends ResourceImpl<Category> implements Category {
         this.metaTitle = metaTitle;
         this.metaDescription = metaDescription;
         this.metaKeywords = metaKeywords;
+        this.custom = custom;
     }
 
     @Override
@@ -111,5 +115,11 @@ class CategoryImpl extends ResourceImpl<Category> implements Category {
     @Nullable
     public LocalizedString getMetaTitle() {
         return metaTitle;
+    }
+
+    @Override
+    @Nullable
+    public CustomFields getCustom() {
+        return custom;
     }
 }

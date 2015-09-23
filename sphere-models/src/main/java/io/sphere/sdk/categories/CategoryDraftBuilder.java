@@ -4,6 +4,7 @@ import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -23,6 +24,8 @@ public class CategoryDraftBuilder implements Builder<CategoryDraft> {
     private String orderHint;
     @Nullable
     private String externalId;
+    @Nullable
+    private CustomFieldsDraft custom;
 
     private CategoryDraftBuilder(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
@@ -53,7 +56,12 @@ public class CategoryDraftBuilder implements Builder<CategoryDraft> {
         return this;
     }
 
+    public CategoryDraftBuilder custom(@Nullable final CustomFieldsDraft custom) {
+        this.custom = custom;
+        return this;
+    }
+
     public CategoryDraft build() {
-        return new CategoryDraft(name, slug, description, parent, orderHint, externalId);
+        return new CategoryDraft(name, slug, description, parent, orderHint, externalId, custom);
     }
 }

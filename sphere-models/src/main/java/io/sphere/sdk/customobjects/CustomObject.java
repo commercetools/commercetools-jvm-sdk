@@ -36,10 +36,19 @@ public interface CustomObject<T> extends ResourceView<CustomObject<T>, CustomObj
 
     @Override
     default Reference<CustomObject<JsonNode>> toReference() {
-        return Reference.of(typeId(), getId());//not possible to provide filled reference since type can be different
+        return Reference.of(referenceTypeId(), getId());//not possible to provide filled reference since type can be different
     }
 
-    static String typeId(){
+    static String referenceTypeId() {
+        return "key-value-document";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
+    static String typeId() {
         return "key-value-document";
     }
 

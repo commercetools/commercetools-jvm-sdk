@@ -15,7 +15,20 @@ import java.util.List;
 @JsonDeserialize(as=CartImpl.class)
 public interface Cart extends CartLike<Cart> {
 
-    static String typeId(){
+    static String resourceTypeId() {
+        return "order";//sic http://dev.sphere.io/http-api-projects-custom-fields.html#customizable-resource
+    }
+
+    static String referenceTypeId() {
+        return "cart";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
+    static String typeId() {
         return "cart";
     }
 
@@ -30,7 +43,7 @@ public interface Cart extends CartLike<Cart> {
 
     @Override
     default Reference<Cart> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
     CartState getCartState();

@@ -22,14 +22,14 @@ public class TypeCreateCommandTest extends IntegrationTest {
         final FieldDefinition stringFieldDefinition =
                 FieldDefinition.of(StringType.of(), "string-field-name", en("label"), false, TextInputHint.SINGLE_LINE);
         final String typeKey = "type-key";
-        final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom type"), singleton(Category.typeId()))
+        final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom type"), singleton(Category.referenceTypeId()))
                 .description(en("description"))
                 .fieldDefinitions(singletonList(stringFieldDefinition))
                 .build();
         final Type type = execute(TypeCreateCommand.of(typeDraft));
         assertThat(type.getKey()).isEqualTo(typeKey);
         assertThat(type.getName()).isEqualTo(en("name of the custom type"));
-        assertThat(type.getResourceTypeIds()).containsExactly(Category.typeId());
+        assertThat(type.getResourceTypeIds()).containsExactly(Category.referenceTypeId());
         assertThat(type.getDescription()).isEqualTo(en("description"));
         assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
     }

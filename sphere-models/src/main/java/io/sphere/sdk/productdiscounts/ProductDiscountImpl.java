@@ -65,6 +65,6 @@ class ProductDiscountImpl extends ResourceImpl<ProductDiscount> implements Produ
 
     @Override
     public Reference<ProductDiscount> toReference() {
-        return Reference.of(ProductDiscount.typeId(), this);
+        return Reference.of(ProductDiscount.referenceTypeId(), this);
     }
 }

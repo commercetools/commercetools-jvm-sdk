@@ -30,4 +30,8 @@ public interface CustomLineItem extends LineItemLike {
 
     @Override
     Long getQuantity();
+
+    static String resourceTypeId() {
+        return "custom-line-item";
+    }
 }

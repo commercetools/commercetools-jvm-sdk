@@ -84,9 +84,22 @@ public interface Customer extends Resource<Customer> {
 
     @Override
     default Reference<Customer> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    static String resourceTypeId(){
+        return "customer";
+    }
+
+    static String referenceTypeId(){
+        return "customer";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "customer";
     }

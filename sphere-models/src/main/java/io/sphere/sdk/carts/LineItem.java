@@ -41,4 +41,8 @@ public interface LineItem extends LineItemLike {
 
     @Override
     Long getQuantity();
+
+    static String resourceTypeId() {
+        return "line-item";
+    }
 }

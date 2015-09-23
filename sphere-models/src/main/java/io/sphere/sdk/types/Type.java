@@ -28,10 +28,10 @@ public interface Type extends Resource<Type> {
 
     @Override
     default Reference<Type> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
-    static String typeId(){
+    static String referenceTypeId(){
         return "type";
     }
 

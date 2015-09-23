@@ -18,6 +18,19 @@ import java.util.Set;
 
 @JsonDeserialize(as=OrderImpl.class)
 public interface Order extends CartLike<Order> {
+    static String resourceTypeId() {
+        return "order";
+    }
+
+    static String referenceTypeId(){
+        return "order";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "order";
     }
@@ -33,7 +46,7 @@ public interface Order extends CartLike<Order> {
 
     @Override
     default Reference<Order> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
     @Nullable
