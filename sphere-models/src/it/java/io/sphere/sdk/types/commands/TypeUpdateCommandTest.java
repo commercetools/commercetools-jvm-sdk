@@ -49,4 +49,15 @@ public class TypeUpdateCommandTest extends IntegrationTest {
             return updated2;
         });
     }
+
+    @Test
+    public void changeLabel() {
+        withUpdateableType(client(), type -> {
+            final LocalizedString newLabel = randomSlug();
+            final String name = type.getFieldDefinitions().get(0).getName();
+            final Type updatedType = execute(TypeUpdateCommand.of(type, ChangeFieldDefinitionLabel.of(name, newLabel)));
+            assertThat(updatedType.getFieldDefinitions().get(0).getLabel()).isEqualTo(newLabel);
+            return updatedType;
+        });
+    }
 }
