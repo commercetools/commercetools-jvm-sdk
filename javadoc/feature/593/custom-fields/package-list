@@ -108,7 +108,7 @@ io.sphere.sdk.types.commands
 io.sphere.sdk.types.commands.updateactions
 io.sphere.sdk.types.customupdateactions
 io.sphere.sdk.types.expansion
-io.sphere.sdk.types.query
+io.sphere.sdk.types.queries
 io.sphere.sdk.utils
 io.sphere.sdk.utils.functional
 io.sphere.sdk.zones
