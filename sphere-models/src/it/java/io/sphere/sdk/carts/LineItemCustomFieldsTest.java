@@ -2,15 +2,16 @@ package io.sphere.sdk.carts;
 
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
+import io.sphere.sdk.carts.commands.updateactions.SetLineItemCustomField;
 import io.sphere.sdk.carts.commands.updateactions.SetLineItemCustomType;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.CustomFieldsDraftBuilder;
-import io.sphere.sdk.types.TypeFixtures;
 import org.junit.Test;
 
-import static io.sphere.sdk.carts.CartFixtures.*;
+import static io.sphere.sdk.carts.CartFixtures.withCartAndTaxedProduct;
+import static io.sphere.sdk.carts.CartFixtures.withLineItemAndCustomLineItemFilledCart;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static org.assertj.core.api.StrictAssertions.assertThat;
@@ -43,7 +44,10 @@ public class LineItemCustomFieldsTest extends IntegrationTest {
                 assertThat(lineItem.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
                         .isEqualTo("a value");
 
-                return updatedCart;
+                final Cart updated2 = execute(CartUpdateCommand.of(updatedCart, SetLineItemCustomField.ofObject(STRING_FIELD_NAME, "a new value", lineItem.getId())));
+                assertThat(updated2.getLineItems().get(0).getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference()))
+                        .isEqualTo("a new value");
+                return updated2;
             });
             return type;
         });
