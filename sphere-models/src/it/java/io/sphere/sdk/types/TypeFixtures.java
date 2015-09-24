@@ -24,6 +24,7 @@ import static java.util.stream.Collectors.toList;
 public class TypeFixtures {
 
     public static final String ENUM_FIELD_NAME = "enum-field-name";
+    public static final String CAT_REFERENCE_FIELD_NAME = "catref";
     public static final String LOCALIZED_ENUM_FIELD_NAME = "localized-enum-field-name";
     public static final Set<String> TYPE_IDS = new HashSet<>(asList(Category.resourceTypeId(), Customer.resourceTypeId(), Cart.resourceTypeId(), Order.resourceTypeId(), LineItem.resourceTypeId(), CustomLineItem.resourceTypeId()));
     public static final String STRING_FIELD_NAME = "string-field-name";
@@ -39,10 +40,12 @@ public class TypeFixtures {
                 .collect(toList());
         final FieldDefinition localizedEnumFieldDefinition =
                 FieldDefinition.of(LocalizedEnumType.of(localizedEnumValues), LOCALIZED_ENUM_FIELD_NAME, en("localized enum label"), false, TextInputHint.SINGLE_LINE);
+        final FieldDefinition catReferenceFieldDefinition = FieldDefinition
+                .of(ReferenceType.of(Category.referenceTypeId()), CAT_REFERENCE_FIELD_NAME, en("category reference"), false, TextInputHint.SINGLE_LINE);
         final String typeKey = randomKey();
         final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom type"), TYPE_IDS)
                 .description(en("description"))
-                .fieldDefinitions(asList(stringFieldDefinition, enumFieldDefinition, localizedEnumFieldDefinition))
+                .fieldDefinitions(asList(stringFieldDefinition, enumFieldDefinition, localizedEnumFieldDefinition, catReferenceFieldDefinition))
                 .build();
         final Type type = client.execute(TypeCreateCommand.of(typeDraft));
         final Type updatedType = operator.apply(type);

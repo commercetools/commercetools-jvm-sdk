@@ -1,12 +1,16 @@
 package io.sphere.sdk.categories;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.SetCustomField;
 import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
+import io.sphere.sdk.categories.queries.CategoryByIdGet;
 import io.sphere.sdk.client.ErrorResponseException;
+import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.json.TypeReferences;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.TextInputHint;
 import io.sphere.sdk.models.errors.RequiredField;
 import io.sphere.sdk.test.IntegrationTest;
@@ -26,6 +30,8 @@ import static org.assertj.core.api.StrictAssertions.assertThatThrownBy;
 
 public class CategoriesCustomFieldsTest extends IntegrationTest {
     public static final Map<String, Object> CUSTOM_FIELDS_MAP = Collections.singletonMap(STRING_FIELD_NAME, "hello");
+    public static final TypeReference<Reference<Category>> TYPE_REFERENCE = new TypeReference<Reference<Category>>() {
+    };
 
     @Test
     public void createCategoryWithCustomType() {
@@ -54,6 +60,36 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
 
                final Category updated2 = execute(CategoryUpdateCommand.of(updatedCategory, SetCustomType.ofRemoveType()));
                assertThat(updated2.getCustom()).isNull();
+           });
+            return type;
+        });
+    }
+
+    @Test
+    public void referenceExpansion() {
+        withUpdateableType(client(), type -> {
+           withCategory(client(), referencedCategory -> {
+               withCategory(client(), category -> {
+                   final Map<String, Object> fields = Collections.singletonMap(CAT_REFERENCE_FIELD_NAME, referencedCategory.toReference());
+                   final CategoryUpdateCommand categoryUpdateCommand = CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), fields));
+                   final ExpansionPath<Category> expansionPath = ExpansionPath.of("custom.fields." + CAT_REFERENCE_FIELD_NAME);
+                   final Category updatedCategory = execute(categoryUpdateCommand.withExpansionPaths(expansionPath));
+
+                   final Reference<Category> createdReference = updatedCategory.getCustom().getField(CAT_REFERENCE_FIELD_NAME, TYPE_REFERENCE);
+                   assertThat(createdReference).isEqualTo(referencedCategory.toReference());
+                   assertThat(createdReference.getObj()).isNotNull();
+
+                   final Category loadedCat = execute(CategoryByIdGet.of(updatedCategory)
+                           .withExpansionPaths(expansionPath));
+
+                   assertThat(loadedCat.getCustom().getField(CAT_REFERENCE_FIELD_NAME, TYPE_REFERENCE).getObj())
+                           .overridingErrorMessage("is expanded")
+                           .isNotNull();
+
+
+                   final Category updated2 = execute(CategoryUpdateCommand.of(updatedCategory, SetCustomType.ofRemoveType()));
+                   assertThat(updated2.getCustom()).isNull();
+               });
            });
             return type;
         });
