@@ -6,6 +6,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.types.customupdateactions.SetCustomTypeBase;
 
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -25,6 +26,11 @@ public class SetLineItemCustomType extends SetCustomTypeBase<Cart> {
     public static SetLineItemCustomType ofTypeIdAndObjects(final String typeId, final Map<String, Object> fields, final String lineItemId) {
         final Map<String, JsonNode> fieldsJson = mapObjectToJsonMap(fields);
         return ofTypeIdAndJson(typeId, fieldsJson, lineItemId);
+    }
+
+    public static SetLineItemCustomType ofTypeIdAndObjects(final String typeId, final String fieldName, final Object value, final String lineItemId) {
+        final Map<String, Object> fields = Collections.singletonMap(fieldName, value);
+        return ofTypeIdAndObjects(typeId, fields, lineItemId);
     }
 
     public static SetLineItemCustomType ofTypeIdAndJson(final String typeId, final Map<String, JsonNode> fields, final String lineItemId) {
