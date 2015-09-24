@@ -6,6 +6,7 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductIdentifiable;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 
@@ -23,15 +24,19 @@ public class AddLineItem extends UpdateActionImpl<Cart> {
     private final Long quantity;
     @Nullable
     private final Reference<Channel> supplyChannel;
-    @Nullable private final Reference<Channel> distributionChannel;
+    @Nullable
+    private final Reference<Channel> distributionChannel;
+    @Nullable
+    private final CustomFieldsDraft custom;
 
-    private AddLineItem(final String productId, final Integer variantId, final Long quantity, final Reference<Channel> supplyChannel, final Reference<Channel> distributionChannel) {
+    private AddLineItem(final String productId, final Integer variantId, final Long quantity, @Nullable final Reference<Channel> supplyChannel, @Nullable final Reference<Channel> distributionChannel, @Nullable final CustomFieldsDraft custom) {
         super("addLineItem");
         this.productId = productId;
         this.variantId = variantId;
         this.quantity = quantity;
         this.supplyChannel = supplyChannel;
         this.distributionChannel = distributionChannel;
+        this.custom = custom;
     }
 
     public static AddLineItem of(final ProductIdentifiable product, final Integer variantId, final long quantity) {
@@ -39,7 +44,7 @@ public class AddLineItem extends UpdateActionImpl<Cart> {
     }
 
     public static AddLineItem of(final String productId, final Integer variantId, final long quantity) {
-        return new AddLineItem(productId, variantId, quantity, null, null);
+        return new AddLineItem(productId, variantId, quantity, null, null, null);
     }
 
     public String getProductId() {
@@ -64,11 +69,20 @@ public class AddLineItem extends UpdateActionImpl<Cart> {
         return supplyChannel;
     }
 
+    @Nullable
+    public CustomFieldsDraft getCustom() {
+        return custom;
+    }
+
     public AddLineItem withSupplyChannel(final Referenceable<Channel> supplyChannel) {
-        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), supplyChannel.toReference(), getDistributionChannel());
+        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), supplyChannel.toReference(), getDistributionChannel(), getCustom());
     }
 
     public AddLineItem withDistributionChannel(final Referenceable<Channel> distributionChannel) {
-        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), distributionChannel.toReference());
+        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), distributionChannel.toReference(), getCustom());
+    }
+
+    public AddLineItem withCustom(final CustomFieldsDraft custom) {
+        return new AddLineItem(getProductId(), getVariantId(), getQuantity(), getSupplyChannel(), getDistributionChannel(), custom);
     }
 }

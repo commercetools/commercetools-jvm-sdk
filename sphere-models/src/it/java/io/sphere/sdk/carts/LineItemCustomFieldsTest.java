@@ -1,0 +1,30 @@
+package io.sphere.sdk.carts;
+
+import io.sphere.sdk.carts.commands.CartUpdateCommand;
+import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
+import io.sphere.sdk.json.TypeReferences;
+import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.types.CustomFieldsDraft;
+import io.sphere.sdk.types.CustomFieldsDraftBuilder;
+import io.sphere.sdk.types.TypeFixtures;
+import org.junit.Test;
+
+import static io.sphere.sdk.carts.CartFixtures.*;
+import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
+import static org.assertj.core.api.StrictAssertions.assertThat;
+
+public class LineItemCustomFieldsTest extends IntegrationTest {
+    @Test
+    public void creation() {
+        TypeFixtures.withUpdateableType(client(), type -> {
+            withCartAndTaxedProduct(client(), (cart, product) -> {
+                final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).addObject(STRING_FIELD_NAME, "a value").build();
+                final Cart updatedCart = execute(CartUpdateCommand.of(cart, AddLineItem.of(product, 1, 1).withCustom(customFieldsDraft)));
+                assertThat(updatedCart.getLineItems().get(0).getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a value");
+                return updatedCart;
+            });
+            return type;
+            }
+        );
+    }
+}

@@ -18,7 +18,7 @@ import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CategoriesCustomFieldTest extends IntegrationTest {
+public class CategoriesCustomFieldsTest extends IntegrationTest {
     @Test
     public void createCategoryWithCustomType() {
         withUpdateableType(client(), type -> {

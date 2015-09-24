@@ -19,7 +19,7 @@ import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CartsCustomFieldTest extends IntegrationTest {
+public class CartsCustomFieldsTest extends IntegrationTest {
     @Test
     public void createCartWithCustomType() {
         withUpdateableType(client(), type -> {

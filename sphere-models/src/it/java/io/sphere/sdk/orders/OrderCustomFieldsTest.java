@@ -13,7 +13,7 @@ import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static org.assertj.core.api.StrictAssertions.assertThat;
 
-public class OrderCustomFieldTest extends IntegrationTest {
+public class OrderCustomFieldsTest extends IntegrationTest {
     @Test
     public void setCustomType() {
         withUpdateableType(client(), type -> {

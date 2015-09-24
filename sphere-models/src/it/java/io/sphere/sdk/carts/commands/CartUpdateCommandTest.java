@@ -126,7 +126,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
-    public void  addCustomLineItem() throws Exception {
+    public void addCustomLineItem() throws Exception {
         withTaxCategory(client(), taxCategory -> {
             final Cart cart = createCartWithCountry(client());
             assertThat(cart.getCustomLineItems()).hasSize(0);

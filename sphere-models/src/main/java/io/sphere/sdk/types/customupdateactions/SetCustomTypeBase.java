@@ -19,7 +19,11 @@ public abstract class SetCustomTypeBase<T> extends UpdateActionImpl<T> {
     private final Map<String, JsonNode> fields;
 
     protected SetCustomTypeBase(@Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
-        super("setCustomType");
+        this("setCustomType", typeId, typeKey, fields);
+    }
+
+    protected SetCustomTypeBase(final String action, @Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
+        super(action);
         this.typeId = typeId;
         this.typeKey = typeKey;
         this.fields = fields;

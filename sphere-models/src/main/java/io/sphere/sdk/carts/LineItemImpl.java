@@ -8,6 +8,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -26,13 +27,16 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     private final Reference<Channel> supplyChannel;
     @Nullable
     private final Reference<Channel> distributionChannel;
+    @Nullable
+    private final CustomFields custom;
 
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedString name,
                  final ProductVariant variant, final Price price, final Long quantity,
                  final Set<ItemState> state, final TaxRate taxRate,
                  final Reference<Channel> supplyChannel, final DiscountedLineItemPrice discountedPrice,
-                 final LocalizedString productSlug, final Reference<Channel> distributionChannel) {
+                 final LocalizedString productSlug, final Reference<Channel> distributionChannel,
+                 @Nullable final CustomFields custom) {
         super(id, state, quantity, discountedPrice);
         this.productId = productId;
         this.name = name;
@@ -42,6 +46,7 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
         this.supplyChannel = supplyChannel;
         this.productSlug = productSlug;
         this.distributionChannel = distributionChannel;
+        this.custom = custom;
     }
 
     @Override
@@ -86,5 +91,11 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     @Nullable
     public LocalizedString getProductSlug() {
         return productSlug;
+    }
+
+    @Override
+    @Nullable
+    public CustomFields getCustom() {
+        return custom;
     }
 }
