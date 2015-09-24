@@ -24,12 +24,6 @@ public class SetCustomType extends SetCustomTypeBase<Customer> {
         return ofTypeIdAndJson(typeId, fieldsJson);
     }
 
-    private static Map<String, JsonNode> mapObjectToJsonMap(final Map<String, Object> fields) {
-        return fields.entrySet().stream()
-                .collect(Collectors.toMap(entry -> entry.getKey(),
-                        entry -> SphereJsonUtils.toJsonNode(entry.getValue())));
-    }
-
     public static SetCustomType ofTypeIdAndJson(final String typeId, final Map<String, JsonNode> fields) {
         return new SetCustomType(typeId, null, fields);
     }
