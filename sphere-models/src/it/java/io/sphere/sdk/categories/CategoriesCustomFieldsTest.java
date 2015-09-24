@@ -5,20 +5,28 @@ import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
 import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
 import io.sphere.sdk.categories.commands.updateactions.SetCustomField;
 import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
+import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.json.TypeReferences;
+import io.sphere.sdk.models.TextInputHint;
+import io.sphere.sdk.models.errors.RequiredField;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.types.CustomFieldsDraft;
-import io.sphere.sdk.types.CustomFieldsDraftBuilder;
+import io.sphere.sdk.types.*;
+import io.sphere.sdk.types.commands.TypeCreateCommand;
+import io.sphere.sdk.types.commands.TypeDeleteCommand;
 import org.junit.Test;
 
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Map;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.StrictAssertions.assertThatThrownBy;
 
 public class CategoriesCustomFieldsTest extends IntegrationTest {
+    public static final Map<String, Object> CUSTOM_FIELDS_MAP = Collections.singletonMap(STRING_FIELD_NAME, "hello");
+
     @Test
     public void createCategoryWithCustomType() {
         withUpdateableType(client(), type -> {
@@ -40,9 +48,7 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
     public void setCustomType() {
         withUpdateableType(client(), type -> {
            withCategory(client(), category -> {
-               final HashMap<String, Object> fields = new HashMap<>();
-               fields.put(STRING_FIELD_NAME, "hello");
-               final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), fields)));
+               final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), CUSTOM_FIELDS_MAP)));
                assertThat(updatedCategory.getCustom().getType()).isEqualTo(type.toReference());
                assertThat(updatedCategory.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("hello");
 
@@ -51,5 +57,32 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
            });
             return type;
         });
+    }
+
+    @Test
+    public void requiredValidation() {
+        final FieldDefinition stringFieldDefinition =
+                FieldDefinition.of(StringType.of(), STRING_FIELD_NAME, en("label"), true, TextInputHint.SINGLE_LINE);
+        final String typeKey = randomKey();
+        final TypeDraft typeDraft = TypeDraftBuilder.of(typeKey, en("name of the custom type"), TYPE_IDS)
+                .description(en("description"))
+                .fieldDefinitions(asList(stringFieldDefinition))
+                .build();
+        final Type type = execute(TypeCreateCommand.of(typeDraft));
+
+        withCategory(client(), category -> {
+            assertThatThrownBy(() -> execute(CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), Collections.emptyMap()))))
+            .isInstanceOf(ErrorResponseException.class)
+                    .matches(e -> {
+                        final ErrorResponseException errorResponseException = (ErrorResponseException) e;
+                        final String errorCode = RequiredField.CODE;
+                        return errorResponseException.hasErrorCode(errorCode)
+                                && errorResponseException.getErrors().stream()
+                                .filter(err -> err.getCode().equals(errorCode))
+                                .anyMatch(err -> STRING_FIELD_NAME.equals(err.as(RequiredField.class).getField()));
+                    });
+        });
+
+        execute(TypeDeleteCommand.of(type));
     }
 }
