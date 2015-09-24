@@ -1,8 +1,8 @@
-package io.sphere.sdk.carts.commands.updateactions;
+package io.sphere.sdk.orders.commands.updateactions;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.types.customupdateactions.SetCustomTypeBase;
 
 import javax.annotation.Nullable;
@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class SetLineItemCustomType extends SetCustomTypeBase<Cart> {
+public class SetLineItemCustomType extends SetCustomTypeBase<Order> {
     private final String lineItemId;
 
     private SetLineItemCustomType(@Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields, final String lineItemId) {
