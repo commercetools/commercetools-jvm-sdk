@@ -200,7 +200,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateUntypedExpressionsFromVariantAttributes() throws Exception {
-        final UntypedSearchModel<ProductProjection, DirectionlessMultiValueSearchSortModel<ProductProjection>> path = attributeModel().ofDate("expirationDate").untyped();
+        final FacetedSearchModel<ProductProjection, DirectionlessMultiValueSearchSortModel<ProductProjection>> path = attributeModel().ofDate("expirationDate").multifaceted();
         assertThat(path.faceted().byAllTerms().toSearchExpression()).isEqualTo("variants.attributes.expirationDate");
         assertThat(path.filtered().by("2001-09-11").toSearchExpression()).isEqualTo("variants.attributes.expirationDate:\"2001-09-11\"");
         assertThat(path.sorted().byAscWithMax().toSphereSort()).isEqualTo("variants.attributes.expirationDate asc.max");
@@ -208,7 +208,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateUntypedExpressionsFromProductAttributes() throws Exception {
-        final UntypedSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> path = MODEL.lastModifiedAt().untyped();
+        final FacetedSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> path = MODEL.lastModifiedAt().multifaceted();
         assertThat(path.faceted().byAllTerms().toSearchExpression()).isEqualTo("lastModifiedAt");
         assertThat(path.filtered().by("2001-09-11").toSearchExpression()).isEqualTo("lastModifiedAt:\"2001-09-11\"");
         assertThat(path.sorted().byAsc().toSphereSort()).isEqualTo("lastModifiedAt asc");

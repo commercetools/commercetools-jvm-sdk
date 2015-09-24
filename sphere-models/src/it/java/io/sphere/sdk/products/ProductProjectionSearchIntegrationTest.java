@@ -131,7 +131,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void sortWithSimpleExpression() {
-        final SearchSort<ProductProjection> sort = SearchSort.of("variants.attributes." + ATTR_NAME_SIZE + " asc.max");
+        final SearchSortExpression<ProductProjection> sort = SearchSortExpression.of("variants.attributes." + ATTR_NAME_SIZE + " asc.max");
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withSort(sort);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).isEqualTo(asList(product3.getId(), product2.getId(), product1.getId()));
@@ -203,7 +203,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public void filtersByMultipleTerms() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusQueryFilters(model -> model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE)
-                        .filtered().by(asList(valueOf(36), valueOf(38))));
+                        .filtered().byAny(asList(valueOf(36), valueOf(38))));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
     }
@@ -221,7 +221,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     public void filtersByMultipleRanges() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusQueryFilters(model -> model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE)
-                        .filtered().byRange(asList(atLeast(valueOf(46)), atMost(valueOf(36)))));
+                        .filtered().byAnyRange(asList(atLeast(valueOf(46)), atMost(valueOf(36)))));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
     }
@@ -237,7 +237,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void resultsArePaginated() throws Exception {
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().by(asList("blue", "red")))
+                .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().byAny(asList("blue", "red")))
                 .withSort(model -> model().name().locale(ENGLISH).sorted().byDesc())
                 .withOffset(1L)
                 .withLimit(1L));

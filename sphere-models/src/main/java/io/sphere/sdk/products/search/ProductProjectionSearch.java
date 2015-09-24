@@ -86,7 +86,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withResultFilters(final FilterExpression<ProductProjection> resultFilter);
 
     @Override
-    ProductProjectionSearch withResultFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch withResultFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
     ProductProjectionSearch plusResultFilters(final List<FilterExpression<ProductProjection>> resultFilters);
@@ -95,7 +95,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch plusResultFilters(final FilterExpression<ProductProjection> resultFilter);
 
     @Override
-    ProductProjectionSearch plusResultFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch plusResultFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
     ProductProjectionSearch withQueryFilters(final List<FilterExpression<ProductProjection>> queryFilters);
@@ -104,7 +104,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withQueryFilters(final FilterExpression<ProductProjection> queryFilter);
 
     @Override
-    ProductProjectionSearch withQueryFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch withQueryFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
     ProductProjectionSearch plusQueryFilters(final List<FilterExpression<ProductProjection>> queryFilters);
@@ -113,7 +113,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch plusQueryFilters(final FilterExpression<ProductProjection> queryFilter);
 
     @Override
-    ProductProjectionSearch plusQueryFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch plusQueryFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
     ProductProjectionSearch withFacetFilters(final List<FilterExpression<ProductProjection>> facetFilters);
@@ -122,7 +122,7 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withFacetFilters(final FilterExpression<ProductProjection> facetFilter);
 
     @Override
-    ProductProjectionSearch withFacetFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch withFacetFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
     ProductProjectionSearch plusFacetFilters(final List<FilterExpression<ProductProjection>> facetFilters);
@@ -131,13 +131,13 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch plusFacetFilters(final FilterExpression<ProductProjection> facetFilter);
 
     @Override
-    ProductProjectionSearch plusFacetFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch plusFacetFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
-    ProductProjectionSearch withSort(final SearchSort<ProductProjection> sort);
+    ProductProjectionSearch withSort(final SearchSortExpression<ProductProjection> sort);
 
     @Override
-    ProductProjectionSearch withSort(final Function<ProductProjectionSearchModel, SearchSort<ProductProjection>> m);
+    ProductProjectionSearch withSort(final Function<ProductProjectionSearchModel, SearchSortExpression<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch withLimit(final long limit);
