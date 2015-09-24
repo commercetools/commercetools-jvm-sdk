@@ -10,11 +10,11 @@ abstract class SimpleBaseExpression extends Base {
     protected SimpleBaseExpression() {
     }
 
-    abstract protected String expression();
+    abstract protected String toSearchExpression();
 
     public String attributePath() {
         final Pattern pattern = Pattern.compile("^([^:\\s]*)");
-        final Matcher matcher = pattern.matcher(expression());
-        return matcher.find() ? matcher.group(1) : expression();
+        final Matcher matcher = pattern.matcher(toSearchExpression());
+        return matcher.find() ? matcher.group(1) : toSearchExpression();
     }
 }

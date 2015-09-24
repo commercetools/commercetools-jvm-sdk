@@ -10,17 +10,17 @@ import static java.util.stream.Collectors.toList;
 
 public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends FilterSearchModel<T, V> {
 
-    RangedFilterSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment, final TypeSerializer<V> typeSerializer) {
+    RangedFilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final TypeSerializer<V> typeSerializer) {
         super(parent, pathSegment, typeSerializer);
     }
 
     @Override
-    public FilterExpression<T> by(final V value) {
+    public List<FilterExpression<T>> by(final V value) {
         return super.by(value);
     }
 
     @Override
-    public FilterExpression<T> byAny(final Iterable<V> values) {
+    public List<FilterExpression<T>> byAny(final Iterable<V> values) {
         return super.byAny(values);
     }
 
@@ -35,8 +35,8 @@ public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends
      * @param range the range of values to filter by
      * @return a filter expression for the given range
      */
-    public FilterExpression<T> byRange(final FilterRange<V> range) {
-        return byAnyRange(singletonList(range));
+    public List<FilterExpression<T>> byRange(final FilterRange<V> range) {
+        return singletonList(filterBy(range));
     }
 
     /**
@@ -45,8 +45,8 @@ public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends
      * @param ranges the ranges of values to filter by
      * @return a filter expression for the given ranges
      */
-    public FilterExpression<T> byAnyRange(final Iterable<FilterRange<V>> ranges) {
-        return new RangeFilterExpression<>(this, typeSerializer, ranges);
+    public List<FilterExpression<T>> byAnyRange(final Iterable<FilterRange<V>> ranges) {
+        return singletonList(filterBy(ranges));
     }
 
     /**
@@ -57,7 +57,7 @@ public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends
      */
     public List<FilterExpression<T>> byAllRanges(final Iterable<FilterRange<V>> ranges) {
         return StreamSupport.stream(ranges.spliterator(), false)
-                .map(range -> byRange(range))
+                .map(range -> filterBy(range))
                 .collect(toList());
     }
 
@@ -68,8 +68,8 @@ public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends
      * @param upperEndpoint the upper endpoint of the range of values to filter by, inclusive
      * @return a filter expression for the given range
      */
-    public FilterExpression<T> byRange(final V lowerEndpoint, final V upperEndpoint) {
-        return byRange(FilterRange.of(lowerEndpoint, upperEndpoint));
+    public List<FilterExpression<T>> byRange(final V lowerEndpoint, final V upperEndpoint) {
+        return singletonList(filterBy(FilterRange.of(lowerEndpoint, upperEndpoint)));
     }
 
     /**
@@ -78,8 +78,8 @@ public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends
      * @param value the lower endpoint of the range [v, +∞)
      * @return a filter expression for the given range
      */
-    public FilterExpression<T> byGreaterThanOrEqualTo(final V value) {
-        return byRange(FilterRange.atLeast(value));
+    public List<FilterExpression<T>> byGreaterThanOrEqualTo(final V value) {
+        return singletonList(filterBy(FilterRange.atLeast(value)));
     }
 
     /**
@@ -88,18 +88,27 @@ public class RangedFilterSearchModel<T, V extends Comparable<? super V>> extends
      * @param value the upper endpoint of the range (-∞, v]
      * @return a filter expression for the given range
      */
-    public FilterExpression<T> byLessThanOrEqualTo(final V value) {
-        return byRange(FilterRange.atMost(value));
+    public List<FilterExpression<T>> byLessThanOrEqualTo(final V value) {
+        return singletonList(filterBy(FilterRange.atMost(value)));
     }
 
     // NOT SUPPORTED YET
-/*
-    public FilterExpression<T> byGreaterThan(final V value) {
-        return range(Range.byGreaterThan(value));
+
+
+//    public List<FilterExpression<T>> byGreaterThan(final V value) {
+//        return singletonList(filterBy(Range.byGreaterThan(value)));
+//    }
+//
+//    public List<FilterExpression<T>> byLessThan(final V value) {
+//        return singletonList(filterBy(Range.byLessThan(value)));
+//    }
+
+
+    private RangeFilterExpression<T, V> filterBy(final FilterRange<V> range) {
+        return filterBy(singletonList(range));
     }
 
-    public FilterExpression<T> byLessThan(final V value) {
-        return range(Range.byLessThan(value));
+    private RangeFilterExpression<T, V> filterBy(final Iterable<FilterRange<V>> ranges) {
+        return new RangeFilterExpression<>(this, typeSerializer, ranges);
     }
-*/
 }

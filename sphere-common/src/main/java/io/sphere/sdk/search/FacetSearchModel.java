@@ -21,6 +21,11 @@ public class FacetSearchModel<T, V> extends SearchModelImpl<T> {
         this.typeSerializer = typeSerializer;
     }
 
+    /**
+     * Allows to set an alias to identify the facet.
+     * @param alias the identifier to use for the facet
+     * @return a new facet search model identical to the current one, but with the given alias
+     */
     public FacetSearchModel<T, V> withAlias(final String alias) {
         return new FacetSearchModel<>(this, null, typeSerializer, alias);
     }

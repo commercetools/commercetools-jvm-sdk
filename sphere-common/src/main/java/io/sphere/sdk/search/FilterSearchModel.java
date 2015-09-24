@@ -11,7 +11,7 @@ import static java.util.stream.Collectors.toList;
 public class FilterSearchModel<T, V> extends SearchModelImpl<T> {
     protected TypeSerializer<V> typeSerializer;
 
-    FilterSearchModel(@Nullable final SearchModel<T> parent, final String pathSegment, final TypeSerializer<V> typeSerializer) {
+    FilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final TypeSerializer<V> typeSerializer) {
         super(parent, pathSegment);
         this.typeSerializer = typeSerializer;
     }
@@ -22,29 +22,37 @@ public class FilterSearchModel<T, V> extends SearchModelImpl<T> {
      * @param value the value to filter by
      * @return a filter expression for the given value
      */
-    public FilterExpression<T> by(final V value) {
-        return new TermFilterExpression<>(this, typeSerializer, singletonList(value));
+    public List<FilterExpression<T>> by(final V value) {
+        return singletonList(filterBy(value));
     }
 
     /**
-     * Generates an expression to select all elements with any of the given attribute values.
+     * Generates an expression to select all elements with attributes matching any of the given values.
      * For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.
      * @param values the values to filter by
      * @return a filter expression for the given values
      */
-    public FilterExpression<T> byAny(final Iterable<V> values) {
-        return new TermFilterExpression<>(this, typeSerializer, values);
+    public List<FilterExpression<T>> byAny(final Iterable<V> values) {
+        return singletonList(filterBy(values));
     }
 
     /**
-     * Generates an expression to select all elements with all the given attribute values.
+     * Generates an expression to select all elements with attributes matching all the given values.
      * For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.
      * @param values the values to filter by
      * @return a filter expression for the given values
      */
     public List<FilterExpression<T>> byAll(final Iterable<V> values) {
         return StreamSupport.stream(values.spliterator(), false)
-                .map(value -> by(value))
+                .map(value -> filterBy(value))
                 .collect(toList());
+    }
+
+    private TermFilterExpression<T, V> filterBy(final V value) {
+        return filterBy(singletonList(value));
+    }
+
+    private TermFilterExpression<T, V> filterBy(final Iterable<V> values) {
+        return new TermFilterExpression<>(this, typeSerializer, values);
     }
 }

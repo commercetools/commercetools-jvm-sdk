@@ -3,6 +3,7 @@ package io.sphere.sdk.search;
 import org.junit.Test;
 
 import java.math.BigDecimal;
+import java.util.function.Consumer;
 
 import static java.math.BigDecimal.valueOf;
 import static java.util.Arrays.asList;
@@ -15,50 +16,50 @@ public class FacetExpressionTest {
 
     @Test
     public void facetsByAllTerms() throws Exception {
-        final FacetExpression<Object> facet = stringModel().faceted().byAllTerms();
-        assertThat(facet.toSearchExpression()).isEqualTo("path.to.attribute");
+        testExpression(stringModel().faceted().byAllTerms(), (expr) ->
+                assertThat(expr).isEqualTo("path.to.attribute"));
     }
 
     @Test
     public void facetsByTerm() throws Exception {
-        final FacetExpression<Object> filter = stringModel().faceted().byTerm("foo");
-        assertThat(filter.toSearchExpression()).isEqualTo("path.to.attribute:\"foo\"");
+        testExpression(stringModel().faceted().byTerm("foo"), (expr) ->
+                assertThat(expr).isEqualTo("path.to.attribute:\"foo\""));
     }
 
     @Test
     public void facetsByTerms() throws Exception {
-        final FacetExpression<Object> facet = stringModel().faceted().byTerm(asList("foo", "bar"));
-        assertThat(facet.toSearchExpression()).isEqualTo("path.to.attribute:\"foo\",\"bar\"");
+        testExpression(stringModel().faceted().byTerm(asList("foo", "bar")), (expr) ->
+                assertThat(expr).isEqualTo("path.to.attribute:\"foo\",\"bar\""));
     }
 
     @Test
     public void facetsByRange() throws Exception {
-        final FacetExpression<Object> facet = numberModel().faceted().byRange(RANGE_3_TO_7);
-        assertThat(facet.toSearchExpression()).isEqualTo("path.to.attribute:range(3 to 7)");
+        testExpression(numberModel().faceted().byRange(RANGE_3_TO_7), (expr) ->
+                assertThat(expr).isEqualTo("path.to.attribute:range(3 to 7)"));
     }
 
     @Test
-    public void filtersByAnyRange() throws Exception {
-        final FacetExpression<Object> facet = numberModel().faceted().byRange(asList(RANGE_3_TO_7, RANGE_5_TO_9));
-        assertThat(facet.toSearchExpression()).isEqualTo("path.to.attribute:range(3 to 7),(5 to 9)");
+    public void facetsByRanges() throws Exception {
+        testExpression(numberModel().faceted().byRange(asList(RANGE_3_TO_7, RANGE_5_TO_9)), (expr) ->
+                assertThat(expr).isEqualTo("path.to.attribute:range(3 to 7),(5 to 9)"));
     }
 
     @Test
     public void facetsByRangeBounds() throws Exception {
-        final FacetExpression<Object> facet = numberModel().faceted().byRange(valueOf(3), valueOf(7));
-        assertThat(facet.toSearchExpression()).isEqualTo("path.to.attribute:range(3 to 7)");
+        testExpression(numberModel().faceted().byRange(valueOf(3), valueOf(7)), (expr) ->
+                assertThat(expr).isEqualTo("path.to.attribute:range(3 to 7)"));
     }
 
     @Test
     public void facetsByGreaterThanOrEqualToRange() throws Exception {
-        final FacetExpression<Object> facet = numberModel().faceted().byGreaterThanOrEqualTo(valueOf(3));
-        assertThat(facet.toSearchExpression()).isEqualTo("path.to.attribute:range(3 to *)");
+        testExpression(numberModel().faceted().byGreaterThanOrEqualTo(valueOf(3)), (expr) ->
+                assertThat(expr).isEqualTo("path.to.attribute:range(3 to *)"));
     }
 
     @Test
     public void facetsByLessThanRange() throws Exception {
-        final FacetExpression<Object> facet = numberModel().faceted().byLessThan(valueOf(3));
-        assertThat(facet.toSearchExpression()).isEqualTo("path.to.attribute:range(* to 3)");
+        testExpression(numberModel().faceted().byLessThan(valueOf(3)), (expr) ->
+                assertThat(expr).isEqualTo("path.to.attribute:range(* to 3)"));
     }
 
     private StringSearchModel<Object, DirectionlessSearchSortModel<Object>> stringModel() {
@@ -67,5 +68,9 @@ public class FacetExpressionTest {
 
     private NumberSearchModel<Object, DirectionlessSearchSortModel<Object>> numberModel() {
         return new NumberSearchModel<>(null, "path.to.attribute", new DirectionlessSearchSortBuilder<>());
+    }
+
+    private <T> void testExpression(FacetExpression<T> facetExpr, Consumer<String> test) {
+        test.accept(facetExpr.toSearchExpression());
     }
 }
