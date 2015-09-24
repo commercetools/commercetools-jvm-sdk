@@ -21,6 +21,7 @@ import org.junit.Test;
 
 import java.util.Collections;
 import java.util.Map;
+import java.util.function.Function;
 
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -34,9 +35,19 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
     };
 
     @Test
-    public void createCategoryWithCustomType() {
+    public void createCategoryWithCustomTypeById() {
+        createCategoryWithCustomType(type -> CustomFieldsDraftBuilder.ofTypeId(type.getId()));
+    }
+
+    @Test
+    public void createCategoryWithCustomTypeByKey() {
+        createCategoryWithCustomType(type -> CustomFieldsDraftBuilder.ofTypeKey(type.getKey()));
+    }
+
+    private void createCategoryWithCustomType(final Function<Type, CustomFieldsDraftBuilder> draftCreator) {
         withUpdateableType(client(), type -> {
-            final CustomFieldsDraft customFieldsDraft = CustomFieldsDraftBuilder.ofType(type).addObject(STRING_FIELD_NAME, "a value").build();
+            final CustomFieldsDraftBuilder customFieldsDraftBuilder = draftCreator.apply(type);
+            final CustomFieldsDraft customFieldsDraft = customFieldsDraftBuilder.addObject(STRING_FIELD_NAME, "a value").build();
             final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).custom(customFieldsDraft).build();
             final Category category = execute(CategoryCreateCommand.of(categoryDraft));
             assertThat(category.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("a value");
@@ -51,10 +62,20 @@ public class CategoriesCustomFieldsTest extends IntegrationTest {
     }
 
     @Test
-    public void setCustomType() {
+    public void setCustomTypeById() {
+        setCustomType(type -> SetCustomType.ofTypeIdAndObjects(type.getId(), CUSTOM_FIELDS_MAP));
+    }
+
+    @Test
+    public void setCustomTypeByKey() {
+        setCustomType(type -> SetCustomType.ofTypeKeyAndObjects(type.getKey(), CUSTOM_FIELDS_MAP));
+    }
+
+    private void setCustomType(final Function<Type, SetCustomType> updateActionCreator) {
         withUpdateableType(client(), type -> {
            withCategory(client(), category -> {
-               final Category updatedCategory = execute(CategoryUpdateCommand.of(category, SetCustomType.ofTypeIdAndObjects(type.getId(), CUSTOM_FIELDS_MAP)));
+               final SetCustomType updateAction = updateActionCreator.apply(type);
+               final Category updatedCategory = execute(CategoryUpdateCommand.of(category, updateAction));
                assertThat(updatedCategory.getCustom().getType()).isEqualTo(type.toReference());
                assertThat(updatedCategory.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("hello");
 
