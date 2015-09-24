@@ -6,6 +6,7 @@ import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.Custom;
 import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
@@ -17,7 +18,7 @@ import java.util.Optional;
  * Interface to collect the common stuff between carts and orders.
  * @param <T> the type of this {@link CartLike}, order or cart
  */
-public interface CartLike<T> extends Resource<T> {
+public interface CartLike<T> extends Resource<T>, Custom {
 
     @Nullable
     String getCustomerId();
