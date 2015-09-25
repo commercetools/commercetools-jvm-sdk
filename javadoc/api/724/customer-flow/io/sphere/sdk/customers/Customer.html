@@ -106,6 +106,150 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">Customer</span>
 extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</pre>
+<div class="block"><h3 id="create-customer">Create a customer/sign-up</h3>
+
+ The customer who signs up can have an anonymous cart which can be assigned to the customer.
+ For convenience the <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="interface in io.sphere.sdk.customers.commands"><code>CustomerCreateCommand</code></a>
+ does not directly return a customer but an object (<a href="../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers"><code>CustomerSignInResult</code></a>) which has a field "customer" for the <a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a>
+ and another field "cart" which can optionally have a cart if in the customer creation the cart id has been used.
+
+ <p>An example for creating a customer without a cart:</p>
+ <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomer--%s" class=code-example><pre><code class='java'>final CustomerGroup customerGroup = CustomerGroupFixtures.b2cCustomerGroup(client());
+final CustomerName name = CustomerName.ofFirstAndLastName("John", "Smith");
+final String email = randomEmail(CustomerCreateCommandTest.class);
+final String externalId = randomString();
+final String password = "secret";
+final LocalDate dateOfBirth = LocalDate.of(1985, 5, 7);
+final String companyName = "ct";
+final String vatId = "123456";
+final boolean emailVerified = true;
+final List&lt;Address&gt; addresses = asList(Address.of(DE), Address.of(GB));
+final CustomerDraft draft = CustomerDraft.of(name, email, password)
+        .withExternalId(externalId)
+        .withDateOfBirth(dateOfBirth)
+        .withCompanyName(companyName)
+        .withVatId(vatId)
+        .withEmailVerified(emailVerified)
+        .withCustomerGroup(customerGroup)
+        .withAddresses(addresses)
+        .withDefaultBillingAddress(0)
+        .withDefaultShippingAddress(1);
+final CustomerCreateCommand sphereRequest = CustomerCreateCommand.of(draft)
+        .withExpansionPaths(m -&gt; m.customer().customerGroup());
+final CustomerSignInResult result = execute(sphereRequest);
+assertThat(result.getCart())
+        .overridingErrorMessage("no cart id given in creation, so this field is empty")
+        .isNull();
+final Customer customer = result.getCustomer();
+final Cart cart = result.getCart();
+assertThat(customer.getName()).isEqualTo(name);
+assertThat(customer.getEmail()).isEqualTo(email);
+assertThat(customer.getPassword())
+        .overridingErrorMessage("password is not stored in clear text")
+        .isNotEqualTo(password);
+assertThat(customer.getExternalId()).contains(externalId);
+assertThat(cart).isNull();
+assertThat(customer.getDateOfBirth()).isEqualTo(dateOfBirth);
+assertThat(customer.getCompanyName()).contains(companyName);
+assertThat(customer.getVatId()).contains(vatId);
+assertThat(customer.isEmailVerified()).isEqualTo(emailVerified);
+assertThat(customer.getCustomerGroup()).isEqualTo(customerGroup.toReference());
+assertThat(customer.getAddresses().stream().map(a -&gt; a.withId(null)).collect(toList())).isEqualTo(addresses);
+assertThat(customer.getDefaultBillingAddress().withId(null)).isEqualTo(addresses.get(0));
+assertThat(customer.findDefaultShippingAddress().get().withId(null)).isEqualTo(addresses.get(1));
+assertThat(customer.getCustomerGroup().getObj())
+        .overridingErrorMessage("customer group can be expanded")
+        .isNotNull();
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>Example for creating a customer with a cart:</p>
+ <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomerWithCart--%s" class=code-example><pre><code class='java'>final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));//could of course be filled with products
+final String email = randomEmail(CustomerCreateCommandTest.class);
+final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
+final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
+assertThat(result.getCart()).isNotNull();
+assertThat(result.getCart().getId()).isEqualTo(cart.getId());
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
+ <h3 id="verify-email">Verify the customers email address</h3>
+
+ The customer contains the property <a href="../../../../io/sphere/sdk/customers/Customer.html#isEmailVerified--"><code>isEmailVerified()</code></a>, which is by default false.
+ If the shop is not supposed to use the commercetools platform email authentication and proved the customer email somehow else
+ then a customer can be created with this field set to true: <a href="../../../../io/sphere/sdk/customers/CustomerDraftBuilder.html#emailVerified-java.lang.Boolean-"><code>CustomerDraftBuilder.emailVerified(Boolean)</code></a>.
+
+ To verify the customers email address with commercetools platform first an email token needs to be created with <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreateEmailTokenCommand</code></a>.
+ You can specify a certain time frame so that the token gets invalidated at some point.
+ The response contains a token <a href="../../../../io/sphere/sdk/customers/CustomerToken.html#getValue--"><code>CustomerToken.getValue()</code></a> which needs to be sent to the customer.
+ Commercetools platform won't send an email to the customer. The shop must implement this feature.
+ When the customer received the token send he/she needs to submit to the shop and then the shop to the platform with <a href="../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerVerifyEmailCommand</code></a>.
+
+ <p>Example</p>
+
+ <div id="io-sphere-sdk-customers-commands-CustomerCreateEmailTokenCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
+    assertThat(customer.isEmailVerified()).isFalse();
+    final int ttlMinutes = 15;
+    final Command&lt;CustomerToken&gt; createTokenCommand = CustomerCreateEmailTokenCommand.of(customer, ttlMinutes);
+    final CustomerToken customerToken = execute(createTokenCommand);
+    final String tokenValue = customerToken.getValue();//this token needs to be sent via email to the customer
+    final Command&lt;Customer&gt; verifyEmailCommand = CustomerVerifyEmailCommand.of(customer, tokenValue);
+    final Customer loadedCustomer = execute(verifyEmailCommand);
+    assertThat(loadedCustomer.isEmailVerified()).isTrue();
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommandTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h3 id="sign-in">Sign-in a customer</h3>
+
+ Before signing in, a customer might have created an anonymous cart.
+ After signing in with <a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerSignInCommand</code></a>, the content of the anonymous cart should be in the customer's cart.
+ If the customer did not have a cart associated to him, then the anonymous cart becomes the customer's cart.
+ If a customer already had a cart associated to him, then the content of the anonymous cart will be copied to the customer's cart.
+ If a line item in the anonymous cart matches an existing line item in the customer's cart (same product ID and variant ID),
+ then the maximum quantity of both line items is used as the new quantity.
+
+ <p>For convenience the <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="interface in io.sphere.sdk.customers.commands"><code>CustomerCreateCommand</code></a> which contains the customer
+ and the optional cart.</p>
+
+ <p>Example for a successful sign in:</p>
+ <div id="io-sphere-sdk-customers-commands-CustomerSignInCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
+    final CustomerSignInResult result = execute(CustomerSignInCommand.of(customer.getEmail(), PASSWORD));
+    assertThat(result.getCustomer()).isEqualTo(customer);
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div>
+
+  <p>Example for invalid credentials:</p>
+ <div id="io-sphere-sdk-customers-commands-CustomerSignInCommandTest-executionWithInvalidEmail--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
+    assertThatThrownBy(() -&gt; execute(CustomerSignInCommand.of("notpresent@null.sphere.io", PASSWORD)))
+            .isInstanceOf(ErrorResponseException.class)
+            .matches(e -&gt; ((ErrorResponseException) e).hasErrorCode(CustomerInvalidCredentials.CODE));
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h3 id="password-change">Changing the password of a customer</h3>
+ This covers the case that the customer forgot the password or just want to change it.
+
+ First a password reset token needs to be created with <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreatePasswordTokenCommand</code></a> by using the customers email.
+ This token (<a href="../../../../io/sphere/sdk/customers/CustomerToken.html#getValue--"><code>CustomerToken.getValue()</code></a> from the result of <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreatePasswordTokenCommand</code></a>) needs to be sent to the customers email address by the shop. Commercetools platform won't send the email.
+ The customer receives the token and can submit it to the shop including the new password. To change then the password in the commercetools platform use <a href="../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerPasswordResetCommand</code></a>.
+ The result of the command is the updated customer, so if the customer needs to sign in after the password change the command <a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerSignInCommand</code></a> is required.
+
+ <div id="io-sphere-sdk-customers-commands-CustomerPasswordResetCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
+    final CustomerToken token = execute(CustomerCreatePasswordTokenCommand.of(customer.getEmail()));
+    final String newPassword = "newPassword";
+    final Customer updatedCustomer = execute(CustomerPasswordResetCommand.of(customer, token, newPassword));
+
+    final CustomerSignInResult signInResult = execute(CustomerSignInCommand.of(updatedCustomer.getEmail(), newPassword, null));
+    assertThat(signInResult.getCustomer().getId())
+            .overridingErrorMessage("customer can sign in with the new password")
+            .isEqualTo(customer.getId());
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerPasswordResetCommandTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h3 id="update-customer">Update customer data</h3>
+
+ See <a href="../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="interface in io.sphere.sdk.customers.commands"><code>CustomerUpdateCommand</code></a>.
+
+ <h3 id="delete-customer">Delete a customer entry</h3>
+
+ See <a href="../../../../io/sphere/sdk/customers/commands/CustomerDeleteCommand.html" title="interface in io.sphere.sdk.customers.commands"><code>CustomerDeleteCommand</code></a>.</div>
 </li>
 </ul>
 </div>
@@ -562,7 +706,7 @@ java.time.LocalDate&nbsp;getDateOfBirth()</pre>
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
