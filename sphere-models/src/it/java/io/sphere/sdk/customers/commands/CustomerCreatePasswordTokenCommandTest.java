@@ -7,7 +7,7 @@ import org.junit.Test;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CustomerCreateTokenCommandTest extends IntegrationTest {
+public class CustomerCreatePasswordTokenCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
