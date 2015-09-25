@@ -1,6 +1,7 @@
 package io.sphere.sdk.customobjects.queries;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.client.JsonNodeSphereRequest;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.Foo;
@@ -13,6 +14,7 @@ import org.junit.Test;
 import java.util.List;
 
 import static io.sphere.sdk.customobjects.CustomObjectFixtures.withCustomObject;
+import static io.sphere.sdk.json.SphereJsonUtils.prettyPrint;
 import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.test.SphereTestUtils.toIds;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -57,6 +59,13 @@ public class CustomObjectQueryTest extends IntegrationTest {
             final String expected = existingCustomObject.getValue().getBar();
             final CustomObject<JsonNode> loadedCustomObject = result.head().get();
             final JsonNode jsonNode = loadedCustomObject.getValue();
+
+
+            final JsonNode loaded = execute(JsonNodeSphereRequest.of(CustomObjectQuery.of()));
+
+            System.err.println(prettyPrint(loaded));
+
+
             final String actual = jsonNode.get("bar").asText("it is not present");
             assertThat(actual).isEqualTo(expected);
         });

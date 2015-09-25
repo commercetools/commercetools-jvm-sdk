@@ -1,10 +1,7 @@
 package io.sphere.sdk.json;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -112,6 +109,10 @@ final public class SphereJsonUtils {
         });
     }
 
+    public static String prettyPrint(final JsonNode jsonNode) {
+        return prettyPrint(toJsonString(jsonNode));
+    }
+
     /**
      *
      * Reads a UTF-8 JSON text file from the classpath of the current thread and transforms it into a Java object.
@@ -125,6 +126,13 @@ final public class SphereJsonUtils {
         return executing(() -> {
             final InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
             return objectMapper.readValue(new InputStreamReader(resourceAsStream, StandardCharsets.UTF_8.name()), typeReference);
+        });
+    }
+
+    public static <T> T readObjectFromResource(final String resourcePath, final JavaType javaType) {
+        return executing(() -> {
+            final InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
+            return objectMapper.readValue(new InputStreamReader(resourceAsStream, StandardCharsets.UTF_8.name()), javaType);
         });
     }
 
