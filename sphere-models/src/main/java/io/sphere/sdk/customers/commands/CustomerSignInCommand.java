@@ -23,6 +23,8 @@ import static io.sphere.sdk.http.HttpMethod.POST;
  *
  *  <p>Example for invalid credentials:</p>
  * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandTest#executionWithInvalidEmail()}
+ *
+ * @see io.sphere.sdk.customers.Customer
  */
 public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
     private final String email;

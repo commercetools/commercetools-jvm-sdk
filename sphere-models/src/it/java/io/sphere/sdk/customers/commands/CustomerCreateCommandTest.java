@@ -48,6 +48,9 @@ public class CustomerCreateCommandTest extends IntegrationTest {
         final CustomerCreateCommand sphereRequest = CustomerCreateCommand.of(draft)
                 .withExpansionPaths(m -> m.customer().customerGroup());
         final CustomerSignInResult result = execute(sphereRequest);
+        assertThat(result.getCart())
+                .overridingErrorMessage("no cart id given in creation, so this field is empty")
+                .isNull();
         final Customer customer = result.getCustomer();
         final Cart cart = result.getCart();
         assertThat(customer.getName()).isEqualTo(name);
@@ -72,10 +75,11 @@ public class CustomerCreateCommandTest extends IntegrationTest {
 
     @Test
     public void createCustomerWithCart() throws Exception {
-        final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));
+        final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));//could of course be filled with products
         final String email = randomEmail(CustomerCreateCommandTest.class);
         final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
         final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
         assertThat(result.getCart()).isNotNull();
+        assertThat(result.getCart().getId()).isEqualTo(cart.getId());
     }
 }
