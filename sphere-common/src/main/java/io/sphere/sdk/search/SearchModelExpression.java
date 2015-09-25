@@ -29,7 +29,7 @@ abstract class SearchModelExpression<T, V> extends Base {
         return typeSerializer.getDeserializer().apply(valueAsString);
     }
 
-    public final String toSearchExpression() {
+    public final String expression() {
         return attributePath() + serializedValue() + serializedAlias();
     }
 
@@ -53,11 +53,11 @@ abstract class SearchModelExpression<T, V> extends Base {
 
     @Override
     public String toString() {
-        return toSearchExpression();
+        return expression();
     }
 
     @Override
     public final int hashCode() {
-        return toSearchExpression().hashCode();
+        return expression().hashCode();
     }
 }

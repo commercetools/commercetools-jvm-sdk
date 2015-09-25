@@ -14,21 +14,21 @@ public class DirectionlessSearchSortModelImpl<T> extends Base implements Directi
         this.searchModel = searchModel;
     }
 
-    public SearchSort<T> by(final SearchSortDirection direction) {
-        return new SphereSearchSort<>(searchModel, direction);
+    public SortExpression<T> by(final SearchSortDirection direction) {
+        return new SortExpressionImpl<>(searchModel, direction);
     }
 
     /**
      * @return the ascending sort direction
      */
-    public SearchSort<T> byAsc() {
+    public SortExpression<T> byAsc() {
         return by(ASC);
     }
 
     /**
      * @return the descending sort direction
      */
-    public SearchSort<T> byDesc() {
+    public SortExpression<T> byDesc() {
         return by(DESC);
     }
 }

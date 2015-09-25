@@ -1,14 +1,14 @@
 package io.sphere.sdk.search;
 
-final class SimpleSearchSort<T> extends SearchSortBase<T> {
+final class SimpleSortExpression<T> extends SimpleBaseExpression implements SortExpression<T> {
     private final String sphereSortExpression;
 
-    SimpleSearchSort(final String sphereSortExpression) {
+    SimpleSortExpression(final String sphereSortExpression) {
         this.sphereSortExpression = sphereSortExpression;
     }
 
     @Override
-    public String toSphereSort() {
+    public String expression() {
         return sphereSortExpression;
     }
 }

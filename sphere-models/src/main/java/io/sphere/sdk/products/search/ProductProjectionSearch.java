@@ -83,16 +83,10 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withResultFilters(final List<FilterExpression<ProductProjection>> resultFilters);
 
     @Override
-    ProductProjectionSearch withResultFilters(final FilterExpression<ProductProjection> resultFilter);
-
-    @Override
     ProductProjectionSearch withResultFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
     ProductProjectionSearch plusResultFilters(final List<FilterExpression<ProductProjection>> resultFilters);
-
-    @Override
-    ProductProjectionSearch plusResultFilters(final FilterExpression<ProductProjection> resultFilter);
 
     @Override
     ProductProjectionSearch plusResultFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
@@ -101,16 +95,10 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withQueryFilters(final List<FilterExpression<ProductProjection>> queryFilters);
 
     @Override
-    ProductProjectionSearch withQueryFilters(final FilterExpression<ProductProjection> queryFilter);
-
-    @Override
     ProductProjectionSearch withQueryFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
     ProductProjectionSearch plusQueryFilters(final List<FilterExpression<ProductProjection>> queryFilters);
-
-    @Override
-    ProductProjectionSearch plusQueryFilters(final FilterExpression<ProductProjection> queryFilter);
 
     @Override
     ProductProjectionSearch plusQueryFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
@@ -119,25 +107,25 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withFacetFilters(final List<FilterExpression<ProductProjection>> facetFilters);
 
     @Override
-    ProductProjectionSearch withFacetFilters(final FilterExpression<ProductProjection> facetFilter);
-
-    @Override
     ProductProjectionSearch withFacetFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
     ProductProjectionSearch plusFacetFilters(final List<FilterExpression<ProductProjection>> facetFilters);
 
     @Override
-    ProductProjectionSearch plusFacetFilters(final FilterExpression<ProductProjection> facetFilter);
-
-    @Override
     ProductProjectionSearch plusFacetFilters(final Function<ProductProjectionSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
-    ProductProjectionSearch withSort(final SearchSortExpression<ProductProjection> sort);
+    ProductProjectionSearch plusFacetedSearch(final FacetedSearchExpression<ProductProjection> facetedSearchExpression);
 
     @Override
-    ProductProjectionSearch withSort(final Function<ProductProjectionSearchModel, SearchSortExpression<ProductProjection>> m);
+    ProductProjectionSearch plusFacetedSearch(final Function<ProductProjectionSearchModel, FacetedSearchExpression<ProductProjection>> m);
+
+    @Override
+    ProductProjectionSearch withSort(final SortExpression<ProductProjection> sort);
+
+    @Override
+    ProductProjectionSearch withSort(final Function<ProductProjectionSearchModel, SortExpression<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch withLimit(final long limit);

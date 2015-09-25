@@ -8,6 +8,6 @@ class RangeFilterExpression<T, V extends Comparable<? super V>> extends RangeExp
 
     @Override
     public boolean equals(Object o) {
-        return o != null && o instanceof FilterExpression && toSearchExpression().equals(((FilterExpression) o).toSearchExpression());
+        return o != null && o instanceof FilterExpression && expression().equals(((FilterExpression) o).expression());
     }
 }

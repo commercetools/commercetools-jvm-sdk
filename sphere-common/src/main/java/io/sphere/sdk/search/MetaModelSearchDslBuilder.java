@@ -28,7 +28,7 @@ public class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, 
     protected List<FilterExpression<T>> resultFilters = emptyList();
     protected List<FilterExpression<T>> queryFilters = emptyList();
     protected List<FilterExpression<T>> facetFilters = emptyList();
-    protected List<SearchSort<T>> sort = emptyList();
+    protected List<SortExpression<T>> sort = emptyList();
     @Nullable
     protected Long limit;
     @Nullable
@@ -89,7 +89,7 @@ public class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, 
         return this;
     }
     
-    public MetaModelSearchDslBuilder<T, C, S, E> sort(final List<SearchSort<T>> sort) {
+    public MetaModelSearchDslBuilder<T, C, S, E> sort(final List<SortExpression<T>> sort) {
         this.sort = sort;
         return this;
     }

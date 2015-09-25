@@ -10,7 +10,7 @@ public interface SearchExpression<T> {
      * Returns a search expression.
      * @return String with unescaped sphere search expression
      */
-    String toSearchExpression();
+    String expression();
 
     /**
      * Generates the path for the attribute to apply the search expression.

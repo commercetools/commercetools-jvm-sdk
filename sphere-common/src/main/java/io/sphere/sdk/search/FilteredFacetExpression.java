@@ -8,10 +8,8 @@ public class FilteredFacetExpression<T, V> extends TermExpression<T, V> implemen
         super(searchModel, typeSerializer, terms, alias);
     }
 
-
-
     @Override
     public boolean equals(Object o) {
-        return o != null && o instanceof FacetExpression && toSearchExpression().equals(((FacetExpression) o).toSearchExpression());
+        return o != null && o instanceof FacetExpression && expression().equals(((FacetExpression) o).expression());
     }
 }

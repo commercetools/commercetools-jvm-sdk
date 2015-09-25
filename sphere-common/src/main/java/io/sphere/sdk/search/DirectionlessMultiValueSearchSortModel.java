@@ -16,7 +16,7 @@ public class DirectionlessMultiValueSearchSortModel<T> extends DirectionlessSear
      * @return the ascending sort direction
      */
     @Override
-    public SearchSort<T> byAsc() {
+    public SortExpression<T> byAsc() {
         return super.byAsc();
     }
 
@@ -25,7 +25,7 @@ public class DirectionlessMultiValueSearchSortModel<T> extends DirectionlessSear
      * @return the descending sort direction
      */
     @Override
-    public SearchSort<T> byDesc() {
+    public SortExpression<T> byDesc() {
         return super.byDesc();
     }
 
@@ -33,7 +33,7 @@ public class DirectionlessMultiValueSearchSortModel<T> extends DirectionlessSear
      * Changes the default behaviour of the ascending sort by using the maximum value instead.
      * @return the ascending sort direction using the maximum value
      */
-    public SearchSort<T> byAscWithMax() {
+    public SortExpression<T> byAscWithMax() {
         return by(ASC_MAX);
     }
 
@@ -41,7 +41,7 @@ public class DirectionlessMultiValueSearchSortModel<T> extends DirectionlessSear
      * Changes the default behaviour of the descending sort by using the minimum value instead.
      * @return the descending sort direction using the minimum value
      */
-    public SearchSort<T> byDescWithMin() {
+    public SortExpression<T> byDescWithMin() {
         return by(DESC_MIN);
     }
 }

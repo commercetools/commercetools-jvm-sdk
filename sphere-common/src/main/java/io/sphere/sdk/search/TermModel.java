@@ -1,6 +1,6 @@
 package io.sphere.sdk.search;
 
-public interface TermModel<T, S extends DirectionlessSearchSortModel<T>, V> {
+public interface TermModel<T, V> {
 
     /**
      * Eventually generates an expression to filter elements by certain values.
@@ -15,10 +15,10 @@ public interface TermModel<T, S extends DirectionlessSearchSortModel<T>, V> {
     FacetSearchModel<T, V> faceted();
 
     /**
-     * Gets an untyped search model (expecting simple Strings) while keeping the same search model path as this.
+     * Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.
      * This untyped search model allows you to build filters and facets, both range and term models.
-     * @return the untyped search model for this instance
+     * @return the faceted search model for this instance
      */
-    UntypedSearchModel<T, S> untyped();
+    FacetedSearchModel<T> facetedSearch();
 
 }

@@ -18,7 +18,7 @@ public interface EntitySearch<T> extends Search<T> {
 
     List<FilterExpression<T>> facetFilters();
 
-    List<SearchSort<T>> sort();
+    List<SortExpression<T>> sort();
 
     @Nullable
     Long limit();

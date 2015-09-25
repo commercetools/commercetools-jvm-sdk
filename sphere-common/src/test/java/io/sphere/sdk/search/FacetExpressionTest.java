@@ -71,6 +71,6 @@ public class FacetExpressionTest {
     }
 
     private <T> void testExpression(FacetExpression<T> facetExpr, Consumer<String> test) {
-        test.accept(facetExpr.toSearchExpression());
+        test.accept(facetExpr.expression());
     }
 }

@@ -4,7 +4,7 @@ import javax.annotation.Nullable;
 
 import static java.util.Arrays.asList;
 
-public class MoneyCentAmountSearchModel<T, S extends DirectionlessSearchSortModel<T>> extends RangeTermModelImpl<T, S, Long> implements SearchSortModel<T, S> {
+public class MoneyCentAmountSearchModel<T, S extends DirectionlessSearchSortModel<T>> extends SortableRangeTermModel<T, S, Long> implements SearchSortModel<T, S> {
 
     public MoneyCentAmountSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SortBuilder<T, S> sortBuilder) {
         super(parent, pathSegment, sortBuilder);
@@ -18,6 +18,11 @@ public class MoneyCentAmountSearchModel<T, S extends DirectionlessSearchSortMode
     @Override
     public RangedFacetSearchModel<T, Long> faceted() {
         return new RangedFacetSearchModel<>(this, null, TypeSerializer.ofMoneyCentAmount());
+    }
+
+    @Override
+    public FacetedSearchModel<T> facetedSearch() {
+        return super.facetedSearch();
     }
 
     @Override

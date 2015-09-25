@@ -8,7 +8,7 @@ final class SimpleFacetExpression<T> extends SimpleBaseExpression implements Fac
     }
 
     @Override
-    public String toSearchExpression() {
+    public String expression() {
         return sphereFacetExpression;
     }
 }

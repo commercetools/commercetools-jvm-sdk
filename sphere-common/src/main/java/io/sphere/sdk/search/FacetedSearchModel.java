@@ -3,6 +3,7 @@ package io.sphere.sdk.search;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.StreamSupport.stream;
@@ -29,6 +30,10 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      */
     public FacetedSearchModel<T> withAlias(final String alias) {
         return new FacetedSearchModel<>(this, null, alias);
+    }
+
+    public FacetedSearchExpression<T> all() {
+        return facetedSearchOf(emptyList());
     }
 
     /**

@@ -131,7 +131,7 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void sortWithSimpleExpression() {
-        final SearchSortExpression<ProductProjection> sort = SearchSortExpression.of("variants.attributes." + ATTR_NAME_SIZE + " asc.max");
+        final SortExpression<ProductProjection> sort = SortExpression.of("variants.attributes." + ATTR_NAME_SIZE + " asc.max");
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withSort(sort);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).isEqualTo(asList(product3.getId(), product2.getId(), product1.getId()));
@@ -156,12 +156,10 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
 
     @Test
     public void resultsAndFacetsAreFiltered() throws Exception {
-        final TermFacetExpression<ProductProjection, String> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
-        final FilterExpression<ProductProjection> filterExpr = model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).filtered().by(valueOf(36));
+        final FacetedSearchExpression<ProductProjection> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).facetedSearch().all();
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusFacets(facetExpr)
-                .plusResultFilters(filterExpr)
-                .plusFacetFilters(filterExpr);
+                .plusFacetedSearch(model().allVariants().attribute().ofString(ATTR_NAME_COLOR).facetedSearch().all())
+                .plusFacetedSearch(model().allVariants().attribute().ofString(ATTR_NAME_SIZE).facetedSearch().by("36"));
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsOnly(product2.getId());
         assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnlyElementsOf(singletonList(TermStats.of("red", 1)));

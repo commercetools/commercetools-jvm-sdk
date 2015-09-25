@@ -4,26 +4,22 @@ import io.sphere.sdk.models.Base;
 
 import java.util.List;
 
-import static java.util.stream.Collectors.toList;
-
 class FacetedSearchExpressionImpl<T> extends Base implements FacetedSearchExpression<T> {
     private final FacetExpression<T> facetExpression;
-    private final List<FilterExpression<T>> filterExpression;
+    private final List<FilterExpression<T>> filterExpressions;
 
-    FacetedSearchExpressionImpl(final FacetExpression<T> facetExpression, final List<FilterExpression<T>> filterExpression) {
+    FacetedSearchExpressionImpl(final FacetExpression<T> facetExpression, final List<FilterExpression<T>> filterExpressions) {
         this.facetExpression =  facetExpression;
-        this.filterExpression = filterExpression;
+        this.filterExpressions = filterExpressions;
     }
 
     @Override
-    public String toFacetExpression() {
-        return facetExpression.toSearchExpression();
+    public FacetExpression<T> facetExpression() {
+        return facetExpression;
     }
 
     @Override
-    public List<String> toFilterExpression() {
-        return filterExpression.stream()
-                .map(expr -> expr.toSearchExpression())
-                .collect(toList());
+    public List<FilterExpression<T>> filterExpressions() {
+        return filterExpressions;
     }
 }

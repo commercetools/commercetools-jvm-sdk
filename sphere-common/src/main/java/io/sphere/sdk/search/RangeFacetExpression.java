@@ -10,6 +10,6 @@ public class RangeFacetExpression<T, V extends Comparable<? super V>> extends Ra
 
     @Override
     public boolean equals(Object o) {
-        return o != null && o instanceof FacetExpression && toSearchExpression().equals(((FacetExpression) o).toSearchExpression());
+        return o != null && o instanceof FacetExpression && expression().equals(((FacetExpression) o).expression());
     }
 }

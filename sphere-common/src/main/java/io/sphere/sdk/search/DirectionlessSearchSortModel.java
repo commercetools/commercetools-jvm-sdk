@@ -5,15 +5,15 @@ package io.sphere.sdk.search;
  */
 public interface DirectionlessSearchSortModel<T> {
 
-    SearchSort<T> by(final SearchSortDirection direction);
+    SortExpression<T> by(final SearchSortDirection direction);
 
     /**
      * @return the ascending sort direction
      */
-    SearchSort<T> byAsc();
+    SortExpression<T> byAsc();
 
     /**
      * @return the descending sort direction
      */
-    SearchSort<T> byDesc();
+    SortExpression<T> byDesc();
 }

@@ -81,7 +81,7 @@ public class FilterExpressionTest {
 
     private <T> void testExpression(List<FilterExpression<T>> filterExpr, Consumer<List<String>> test) {
         final List<String> expressions = filterExpr.stream()
-                .map(expr -> expr.toSearchExpression())
+                .map(expr -> expr.expression())
                 .collect(toList());
         test.accept(expressions);
     }

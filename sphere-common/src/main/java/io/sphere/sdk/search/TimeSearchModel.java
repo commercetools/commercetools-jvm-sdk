@@ -3,7 +3,7 @@ package io.sphere.sdk.search;
 import javax.annotation.Nullable;
 import java.time.LocalTime;
 
-public class TimeSearchModel<T, S extends DirectionlessSearchSortModel<T>> extends RangeTermModelImpl<T, S, LocalTime> implements SearchSortModel<T, S> {
+public class TimeSearchModel<T, S extends DirectionlessSearchSortModel<T>> extends SortableRangeTermModel<T, S, LocalTime> implements SearchSortModel<T, S> {
 
     public TimeSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SortBuilder<T, S> sortBuilder) {
         super(parent, pathSegment, sortBuilder);
@@ -17,6 +17,11 @@ public class TimeSearchModel<T, S extends DirectionlessSearchSortModel<T>> exten
     @Override
     public RangedFacetSearchModel<T, LocalTime> faceted() {
         return new RangedFacetSearchModel<>(this, null, TypeSerializer.ofTime());
+    }
+
+    @Override
+    public FacetedSearchModel<T> facetedSearch() {
+        return super.facetedSearch();
     }
 
     @Override
