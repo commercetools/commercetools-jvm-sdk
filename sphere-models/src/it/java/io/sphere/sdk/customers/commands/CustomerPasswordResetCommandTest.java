@@ -6,8 +6,6 @@ import io.sphere.sdk.customers.CustomerToken;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -15,7 +13,7 @@ public class CustomerPasswordResetCommandTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
-            final CustomerToken token = execute(CustomerCreateTokenCommand.of(customer.getEmail()));
+            final CustomerToken token = execute(CustomerCreatePasswordTokenCommand.of(customer.getEmail()));
             final String newPassword = "newPassword";
             final Customer updatedCustomer = execute(CustomerPasswordResetCommand.of(customer, token, newPassword));
 

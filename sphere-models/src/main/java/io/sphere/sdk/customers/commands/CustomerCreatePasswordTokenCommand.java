@@ -8,23 +8,15 @@ import io.sphere.sdk.json.SphereJsonUtils;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
-/**
- * @deprecated use {@link CustomerCreatePasswordTokenCommand} instead
- */
-@Deprecated
-public final class CustomerCreateTokenCommand extends CommandImpl<CustomerToken> {
+public final class CustomerCreatePasswordTokenCommand extends CommandImpl<CustomerToken> {
     private final String email;
 
-    private CustomerCreateTokenCommand(final String customerEmail) {
+    private CustomerCreatePasswordTokenCommand(final String customerEmail) {
         this.email = customerEmail;
     }
 
-    /**
-     * @deprecated use {@link CustomerCreatePasswordTokenCommand} instead
-     */
-    @Deprecated
-    public static CustomerCreateTokenCommand of(final String customerEmail) {
-        return new CustomerCreateTokenCommand(customerEmail);
+    public static CustomerCreatePasswordTokenCommand of(final String customerEmail) {
+        return new CustomerCreatePasswordTokenCommand(customerEmail);
     }
 
     @Override
