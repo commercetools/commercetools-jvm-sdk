@@ -92,7 +92,7 @@ var activeTableTab = "activeTableTab";
 <!-- ======== START OF CLASS DATA ======== -->
 <div class="header">
 <div class="subTitle">io.sphere.sdk.search</div>
-<h2 title="Interface TermModel" class="title">Interface TermModel&lt;T,S extends <a href="../../../../io/sphere/sdk/search/DirectionlessSearchSortModel.html" title="interface in io.sphere.sdk.search">DirectionlessSearchSortModel</a>&lt;T&gt;,V&gt;</h2>
+<h2 title="Interface TermModel" class="title">Interface TermModel&lt;T,V&gt;</h2>
 </div>
 <div class="contentContainer">
 <div class="description">
@@ -104,7 +104,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">TermModel&lt;T,S extends <a href="../../../../io/sphere/sdk/search/DirectionlessSearchSortModel.html" title="interface in io.sphere.sdk.search">DirectionlessSearchSortModel</a>&lt;T&gt;,V&gt;</span></pre>
+<pre>public interface <span class="typeNameLabel">TermModel&lt;T,V&gt;</span></pre>
 </li>
 </ul>
 </div>
@@ -130,15 +130,15 @@ var activeTableTab = "activeTableTab";
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="class in io.sphere.sdk.search">FilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">T</a>,<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">V</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermModel.html#filtered--">filtered</a></span>()</code>
-<div class="block">Eventually generates an expression to filter elements by certain values.</div>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermModel.html#facetedSearch--">facetedSearch</a></span>()</code>
+<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/UntypedSearchModel.html" title="class in io.sphere.sdk.search">UntypedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">T</a>,<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">S</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermModel.html#untyped--">untyped</a></span>()</code>
-<div class="block">Gets an untyped search model (expecting simple Strings) while keeping the same search model path as this.</div>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="class in io.sphere.sdk.search">FilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">T</a>,<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">V</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermModel.html#filtered--">filtered</a></span>()</code>
+<div class="block">Eventually generates an expression to filter elements by certain values.</div>
 </td>
 </tr>
 </table>
@@ -184,18 +184,18 @@ var activeTableTab = "activeTableTab";
 </dl>
 </li>
 </ul>
-<a name="untyped--">
+<a name="facetedSearch--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>untyped</h4>
-<pre><a href="../../../../io/sphere/sdk/search/UntypedSearchModel.html" title="class in io.sphere.sdk.search">UntypedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">T</a>,<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">S</a>&gt;&nbsp;untyped()</pre>
-<div class="block">Gets an untyped search model (expecting simple Strings) while keeping the same search model path as this.
+<h4>facetedSearch</h4>
+<pre><a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">T</a>&gt;&nbsp;facetedSearch()</pre>
+<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.
  This untyped search model allows you to build filters and facets, both range and term models.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>the untyped search model for this instance</dd>
+<dd>the faceted search model for this instance</dd>
 </dl>
 </li>
 </ul>

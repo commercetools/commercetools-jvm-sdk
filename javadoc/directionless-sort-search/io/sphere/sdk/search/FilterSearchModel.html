@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10};
+var methods = {"i0":10,"i1":10,"i2":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -166,15 +166,21 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html#by-java.lang.Iterable-">by</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</code>
-<div class="block">Generates an expression to select all elements with the given attribute values.</div>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html#by-V-">by</a></span>(<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</code>
+<div class="block">Generates an expression to select all elements with the given attribute value.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html#by-V-">by</a></span>(<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</code>
-<div class="block">Generates an expression to select all elements with the given attribute value.</div>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html#byAll-java.lang.Iterable-">byAll</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching all the given values.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/FilterSearchModel.html#byAny-java.lang.Iterable-">byAny</a></span>(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</code>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.</div>
 </td>
 </tr>
 </table>
@@ -245,7 +251,7 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 <ul class="blockList">
 <li class="blockList">
 <h4>by</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&nbsp;by(<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</pre>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;by(<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&nbsp;value)</pre>
 <div class="block">Generates an expression to select all elements with the given attribute value.
  For example: filtering by "red" would select only those elements with "red" value.</div>
 <dl>
@@ -256,15 +262,32 @@ extends <a href="../../../../io/sphere/sdk/search/SearchModelImpl.html" title="c
 </dl>
 </li>
 </ul>
-<a name="by-java.lang.Iterable-">
+<a name="byAny-java.lang.Iterable-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>byAny</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;byAny(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block">Generates an expression to select all elements with attributes matching any of the given values.
+ For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>values</code> - the values to filter by</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a filter expression for the given values</dd>
+</dl>
+</li>
+</ul>
+<a name="byAll-java.lang.Iterable-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>by</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&nbsp;by(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
-<div class="block">Generates an expression to select all elements with the given attribute values.
- For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.</div>
+<h4>byAll</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">T</a>&gt;&gt;&nbsp;byAll(java.lang.Iterable&lt;<a href="../../../../io/sphere/sdk/search/FilterSearchModel.html" title="type parameter in FilterSearchModel">V</a>&gt;&nbsp;values)</pre>
+<div class="block">Generates an expression to select all elements with attributes matching all the given values.
+ For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>values</code> - the values to filter by</dd>

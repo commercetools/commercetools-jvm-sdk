@@ -214,7 +214,7 @@ assertThat(resultsToIds(result)).isEqualTo(asList(product3.getId(), product2.get
 
  <p>Here is the alternative code equivalent to the previous sorting by size:</p>
 
- <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-sortWithSimpleExpression--%s" class=code-example><pre><code class='java'>final SearchSort&lt;ProductProjection&gt; sort = SearchSort.of("variants.attributes." + ATTR_NAME_SIZE + " asc.max");
+ <div id="io-sphere-sdk-products-ProductProjectionSearchIntegrationTest-sortWithSimpleExpression--%s" class=code-example><pre><code class='java'>final SortExpression&lt;ProductProjection&gt; sort = SortExpression.of("variants.attributes." + ATTR_NAME_SIZE + " asc.max");
 final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withSort(sort);
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(search);
 assertThat(resultsToIds(result)).isEqualTo(asList(product3.getId(), product2.getId(), product1.getId()));

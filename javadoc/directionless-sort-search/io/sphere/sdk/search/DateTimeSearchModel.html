@@ -123,7 +123,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,S,java.time.ZonedDateTime&gt;, <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title="interface in io.sphere.sdk.search">SearchSortModel</a>&lt;T,S&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,java.time.ZonedDateTime&gt;, <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title="interface in io.sphere.sdk.search">SearchSortModel</a>&lt;T,S&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -189,20 +189,20 @@ implements <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title
 </td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html#facetedSearch--">facetedSearch</a></span>()</code>
+<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.</div>
+</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangedFilterSearchModel.html" title="class in io.sphere.sdk.search">RangedFilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>,java.time.ZonedDateTime&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html#filtered--">filtered</a></span>()</code>
 <div class="block">Eventually generates an expression to filter elements by certain range of values.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">S</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html#sorted--">sorted</a></span>()</code>&nbsp;</td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/UntypedSearchModel.html" title="class in io.sphere.sdk.search">UntypedSearchModel</a>&lt;T,S&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html#untyped--">untyped</a></span>()</code>
-<div class="block">Gets an untyped search model (expecting simple Strings) while keeping the same search model path as this.</div>
-</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -279,7 +279,7 @@ implements <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title
 <div class="block">Eventually generates an expression to filter elements by certain range of values.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#filtered--">filtered</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">S</a> extends <a href="../../../../io/sphere/sdk/search/DirectionlessSearchSortModel.html" title="interface in io.sphere.sdk.search">DirectionlessSearchSortModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>&gt;,java.time.ZonedDateTime&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#filtered--">filtered</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>,java.time.ZonedDateTime&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the model to specify the range of values to filter by</dd>
 </dl>
@@ -296,40 +296,40 @@ implements <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title
 <div class="block">Eventually generates an expression to obtain the facets of the attribute for certain range of values.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#faceted--">faceted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">S</a> extends <a href="../../../../io/sphere/sdk/search/DirectionlessSearchSortModel.html" title="interface in io.sphere.sdk.search">DirectionlessSearchSortModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>&gt;,java.time.ZonedDateTime&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#faceted--">faceted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>,java.time.ZonedDateTime&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the model to specify the range of values from which to obtain the facets</dd>
+</dl>
+</li>
+</ul>
+<a name="facetedSearch--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>facetedSearch</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>&gt;&nbsp;facetedSearch()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#facetedSearch--">RangeTermModel</a></code></span></div>
+<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.
+ This untyped search model allows you to build filters and facets, both range and term models.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#facetedSearch--">facetedSearch</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>,java.time.ZonedDateTime&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the faceted search model for this instance</dd>
 </dl>
 </li>
 </ul>
 <a name="sorted--">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>sorted</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">S</a>&nbsp;sorted()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/SearchSortModel.html#sorted--">sorted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title="interface in io.sphere.sdk.search">SearchSortModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>,<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">S</a> extends <a href="../../../../io/sphere/sdk/search/DirectionlessSearchSortModel.html" title="interface in io.sphere.sdk.search">DirectionlessSearchSortModel</a>&lt;<a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="type parameter in DateTimeSearchModel">T</a>&gt;&gt;</code></dd>
-</dl>
-</li>
-</ul>
-<a name="untyped--">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>untyped</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/UntypedSearchModel.html" title="class in io.sphere.sdk.search">UntypedSearchModel</a>&lt;T,S&gt;&nbsp;untyped()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#untyped--">RangeTermModel</a></code></span></div>
-<div class="block">Gets an untyped search model (expecting simple Strings) while keeping the same search model path as this.
- This untyped search model allows you to build filters and facets, both range and term models.</div>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#untyped--">untyped</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,S extends <a href="../../../../io/sphere/sdk/search/DirectionlessSearchSortModel.html" title="interface in io.sphere.sdk.search">DirectionlessSearchSortModel</a>&lt;T&gt;,V extends java.lang.Comparable&lt;? super V&gt;&gt;</code></dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>the untyped search model for this instance</dd>
 </dl>
 </li>
 </ul>

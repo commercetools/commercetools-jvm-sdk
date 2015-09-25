@@ -161,25 +161,25 @@ extends <a href="../../../../io/sphere/sdk/search/DirectionlessSearchSortModelIm
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html#byAsc--">byAsc</a></span>()</code>
 <div class="block">When the sort direction is ascending, the minimum value is used.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html#byAscWithMax--">byAscWithMax</a></span>()</code>
 <div class="block">Changes the default behaviour of the ascending sort by using the maximum value instead.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html#byDesc--">byDesc</a></span>()</code>
 <div class="block">When the direction is descending, the maximum value is used.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;</code></td>
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html#byDescWithMin--">byDescWithMin</a></span>()</code>
 <div class="block">Changes the default behaviour of the descending sort by using the minimum value instead.</div>
 </td>
@@ -243,7 +243,7 @@ extends <a href="../../../../io/sphere/sdk/search/DirectionlessSearchSortModelIm
 <ul class="blockList">
 <li class="blockList">
 <h4>byAsc</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;&nbsp;byAsc()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;&nbsp;byAsc()</pre>
 <div class="block">When the sort direction is ascending, the minimum value is used.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -261,7 +261,7 @@ extends <a href="../../../../io/sphere/sdk/search/DirectionlessSearchSortModelIm
 <ul class="blockList">
 <li class="blockList">
 <h4>byDesc</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;&nbsp;byDesc()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;&nbsp;byDesc()</pre>
 <div class="block">When the direction is descending, the maximum value is used.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
@@ -279,7 +279,7 @@ extends <a href="../../../../io/sphere/sdk/search/DirectionlessSearchSortModelIm
 <ul class="blockList">
 <li class="blockList">
 <h4>byAscWithMax</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;&nbsp;byAscWithMax()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;&nbsp;byAscWithMax()</pre>
 <div class="block">Changes the default behaviour of the ascending sort by using the maximum value instead.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
@@ -293,7 +293,7 @@ extends <a href="../../../../io/sphere/sdk/search/DirectionlessSearchSortModelIm
 <ul class="blockListLast">
 <li class="blockList">
 <h4>byDescWithMin</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SearchSort.html" title="interface in io.sphere.sdk.search">SearchSort</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;&nbsp;byDescWithMin()</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/DirectionlessMultiValueSearchSortModel.html" title="type parameter in DirectionlessMultiValueSearchSortModel">T</a>&gt;&nbsp;byDescWithMin()</pre>
 <div class="block">Changes the default behaviour of the descending sort by using the minimum value instead.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>

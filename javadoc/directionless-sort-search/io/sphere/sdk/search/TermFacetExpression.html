@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":6,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":6,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -165,38 +165,38 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html#equals-java.lang.Object-">equals</a></span>(java.lang.Object&nbsp;o)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html#expression--">expression</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>int</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html#hashCode--">hashCode</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html#resultPath--">resultPath</a></span>()</code>
 <div class="block">Gets the path of the facet result, which is either the alias or the search path if no alias defined.</div>
 </td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html#resultPath--">resultPath</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html#serializedAlias--">serializedAlias</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>protected java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html#serializedValue--">serializedValue</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>protected java.util.function.Function&lt;V,java.lang.String&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html#serializer--">serializer</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html#serializeValue-V-">serializeValue</a></span>(V&nbsp;value)</code>&nbsp;</td>
-</tr>
 <tr id="i10" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html#toSearchExpression--">toSearchExpression</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html#serializeValue-V-">serializeValue</a></span>(V&nbsp;value)</code>&nbsp;</td>
 </tr>
 <tr id="i11" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
@@ -215,7 +215,14 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a></h3>
-<code><a href="../../../../io/sphere/sdk/search/FacetExpression.html#attributePath--">attributePath</a>, <a href="../../../../io/sphere/sdk/search/FacetExpression.html#of-java.lang.String-">of</a>, <a href="../../../../io/sphere/sdk/search/FacetExpression.html#toSearchExpression--">toSearchExpression</a></code></li>
+<code><a href="../../../../io/sphere/sdk/search/FacetExpression.html#of-java.lang.String-">of</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SearchExpression">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="interface in io.sphere.sdk.search">SearchExpression</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/SearchExpression.html#attributePath--">attributePath</a>, <a href="../../../../io/sphere/sdk/search/SearchExpression.html#expression--">expression</a></code></li>
 </ul>
 </li>
 </ul>
@@ -306,13 +313,13 @@ protected final&nbsp;java.lang.String alias</pre>
 <pre>public final&nbsp;V&nbsp;deserializeValue(java.lang.String&nbsp;valueAsString)</pre>
 </li>
 </ul>
-<a name="toSearchExpression--">
+<a name="expression--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>toSearchExpression</h4>
-<pre>public final&nbsp;java.lang.String&nbsp;toSearchExpression()</pre>
+<h4>expression</h4>
+<pre>public final&nbsp;java.lang.String&nbsp;expression()</pre>
 </li>
 </ul>
 <a name="attributePath--">
