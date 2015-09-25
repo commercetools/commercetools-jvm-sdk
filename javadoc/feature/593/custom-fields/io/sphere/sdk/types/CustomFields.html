@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10,"i10":10,"i11":10,"i12":10,"i13":10,"i14":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -143,6 +143,54 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
         com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>&nbsp;</td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>java.lang.Boolean</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsBoolean-java.lang.String-">getFieldAsBoolean</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.time.LocalDate</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsDate-java.lang.String-">getFieldAsDate</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>java.time.ZonedDateTime</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsDateTime-java.lang.String-">getFieldAsDateTime</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>java.lang.Double</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsDouble-java.lang.String-">getFieldAsDouble</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsEnumKey-java.lang.String-">getFieldAsEnumKey</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>java.lang.Integer</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsInteger-java.lang.String-">getFieldAsInteger</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsLocalizedEnumKey-java.lang.String-">getFieldAsLocalizedEnumKey</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsLocalizedString-java.lang.String-">getFieldAsLocalizedString</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i10" class="altColor">
+<td class="colFirst"><code>java.lang.Long</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsLong-java.lang.String-">getFieldAsLong</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i11" class="rowColor">
+<td class="colFirst"><code>javax.money.MonetaryAmount</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsMoney-java.lang.String-">getFieldAsMoney</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsString-java.lang.String-">getFieldAsString</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>java.time.LocalTime</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getFieldAsTime-java.lang.String-">getFieldAsTime</a></span>(java.lang.String&nbsp;name)</code>&nbsp;</td>
+</tr>
+<tr id="i14" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/types/CustomFields.html#getType--">getType</a></span>()</code>&nbsp;</td>
 </tr>
@@ -194,6 +242,126 @@ public&nbsp;com.fasterxml.jackson.databind.JsonNode&nbsp;getField(java.lang.Stri
 <pre>@Nullable
 public&nbsp;&lt;T&gt;&nbsp;T&nbsp;getField(java.lang.String&nbsp;name,
                                 com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
+</li>
+</ul>
+<a name="getFieldAsString-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsString</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getFieldAsString(java.lang.String&nbsp;name)</pre>
+</li>
+</ul>
+<a name="getFieldAsBoolean-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsBoolean</h4>
+<pre>@Nullable
+public&nbsp;java.lang.Boolean&nbsp;getFieldAsBoolean(java.lang.String&nbsp;name)</pre>
+</li>
+</ul>
+<a name="getFieldAsLocalizedString-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsLocalizedString</h4>
+<pre>@Nullable
+public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a>&nbsp;getFieldAsLocalizedString(java.lang.String&nbsp;name)</pre>
+</li>
+</ul>
+<a name="getFieldAsEnumKey-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsEnumKey</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getFieldAsEnumKey(java.lang.String&nbsp;name)</pre>
+</li>
+</ul>
+<a name="getFieldAsLocalizedEnumKey-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsLocalizedEnumKey</h4>
+<pre>@Nullable
+public&nbsp;java.lang.String&nbsp;getFieldAsLocalizedEnumKey(java.lang.String&nbsp;name)</pre>
+</li>
+</ul>
+<a name="getFieldAsInteger-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsInteger</h4>
+<pre>@Nullable
+public&nbsp;java.lang.Integer&nbsp;getFieldAsInteger(java.lang.String&nbsp;name)</pre>
+</li>
+</ul>
+<a name="getFieldAsLong-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsLong</h4>
+<pre>@Nullable
+public&nbsp;java.lang.Long&nbsp;getFieldAsLong(java.lang.String&nbsp;name)</pre>
+</li>
+</ul>
+<a name="getFieldAsDouble-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsDouble</h4>
+<pre>@Nullable
+public&nbsp;java.lang.Double&nbsp;getFieldAsDouble(java.lang.String&nbsp;name)</pre>
+</li>
+</ul>
+<a name="getFieldAsMoney-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsMoney</h4>
+<pre>@Nullable
+public&nbsp;javax.money.MonetaryAmount&nbsp;getFieldAsMoney(java.lang.String&nbsp;name)</pre>
+</li>
+</ul>
+<a name="getFieldAsDate-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsDate</h4>
+<pre>@Nullable
+public&nbsp;java.time.LocalDate&nbsp;getFieldAsDate(java.lang.String&nbsp;name)</pre>
+</li>
+</ul>
+<a name="getFieldAsDateTime-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsDateTime</h4>
+<pre>@Nullable
+public&nbsp;java.time.ZonedDateTime&nbsp;getFieldAsDateTime(java.lang.String&nbsp;name)</pre>
+</li>
+</ul>
+<a name="getFieldAsTime-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getFieldAsTime</h4>
+<pre>@Nullable
+public&nbsp;java.time.LocalTime&nbsp;getFieldAsTime(java.lang.String&nbsp;name)</pre>
 </li>
 </ul>
 <a name="getType--">
