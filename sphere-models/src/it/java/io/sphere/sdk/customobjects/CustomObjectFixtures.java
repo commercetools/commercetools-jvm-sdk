@@ -1,17 +1,17 @@
 package io.sphere.sdk.customobjects;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.commands.DeleteCommand;
-import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
 import io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommand;
+import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
 import io.sphere.sdk.customobjects.demo.Foo;
 import io.sphere.sdk.customobjects.queries.CustomObjectQuery;
-import io.sphere.sdk.queries.PagedQueryResult;
 
 import java.util.function.Consumer;
 
-import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomObjectFixtures {
@@ -59,14 +59,14 @@ public class CustomObjectFixtures {
     }
 
     public static void dropAll(final TestClient client) {
-        final CustomObjectQuery<Object> query = CustomObjectQuery.of(new TypeReference<PagedQueryResult<CustomObject<Object>>>() {});
+        final CustomObjectQuery<JsonNode> query = CustomObjectQuery.ofJsonNode();
         client.execute(query).getResults()
                 .forEach(item -> {
                     //there is a bug that you can create custom objects with spaces in the container
                     if (!item.getContainer().contains(" ") && !item.getKey().contains(" ")) {
-                        final TypeReference<CustomObject<Object>> typeReference = new TypeReference<CustomObject<Object>>() {
+                        final TypeReference<CustomObject<JsonNode>> typeReference = new TypeReference<CustomObject<JsonNode>>() {
                         };
-                        final DeleteCommand<CustomObject<Object>> command = CustomObjectDeleteCommand.of(item, typeReference);
+                        final DeleteCommand<CustomObject<JsonNode>> command = CustomObjectDeleteCommand.of(item, typeReference);
                         client.execute(command);
                     }
                 });

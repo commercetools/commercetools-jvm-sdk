@@ -2,8 +2,8 @@ package io.sphere.sdk.customobjects.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
-import com.fasterxml.jackson.databind.type.TypeFactory;
 import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.customobjects.CustomObjectUtils;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.SphereJsonUtils;
 
@@ -27,9 +27,7 @@ final class CustomObjectByKeyGetImpl<T> extends CustomObjectCustomJsonMappingByK
                 .filter(response -> response.getResponseBody() != null && response.getResponseBody().length > 0)
                 .map(response -> response.getResponseBody())
                 .map(responseBody -> {
-                    final TypeFactory typeFactory = TypeFactory.defaultInstance();
-                    final JavaType typeParameterJavaType = typeFactory.constructType(typeReference);
-                    final JavaType resultJavaType = typeFactory.constructParametrizedType(CustomObject.class, CustomObject.class, typeParameterJavaType);
+                    final JavaType resultJavaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(typeReference);
                     return SphereJsonUtils.<CustomObject<T>>readObject(httpResponse.getResponseBody(), resultJavaType);
                 })
                 .orElse(null);

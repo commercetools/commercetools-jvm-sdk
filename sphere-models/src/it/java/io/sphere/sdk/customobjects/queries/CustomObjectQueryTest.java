@@ -1,7 +1,6 @@
 package io.sphere.sdk.customobjects.queries;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.client.JsonNodeSphereRequest;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectFixtures;
 import io.sphere.sdk.customobjects.demo.Foo;
@@ -14,14 +13,13 @@ import org.junit.Test;
 import java.util.List;
 
 import static io.sphere.sdk.customobjects.CustomObjectFixtures.withCustomObject;
-import static io.sphere.sdk.json.SphereJsonUtils.prettyPrint;
 import static io.sphere.sdk.queries.QuerySortDirection.DESC;
 import static io.sphere.sdk.test.SphereTestUtils.toIds;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomObjectQueryTest extends IntegrationTest {
 
-    private static final CustomObjectQuery<Foo> CUSTOM_OBJECT_QUERY = CustomObjectQuery.of(Foo.pagedQueryResultTypeReference());
+    private static final CustomObjectQuery<Foo> CUSTOM_OBJECT_QUERY = CustomObjectQuery.of(Foo.typeReference());
 
     @BeforeClass
     public static void cleanCustomObjects() throws Exception {
@@ -51,8 +49,8 @@ public class CustomObjectQueryTest extends IntegrationTest {
     @Test
     public void queryPureJson() throws Exception {
         withCustomObject(client(), existingCustomObject -> {
-            final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQueryModel.<JsonNode>of().createdAt().sort(DESC);
-            final CustomObjectQuery<JsonNode> clientRequest = CustomObjectQuery.of().withSort(sort);
+            final CustomObjectQuery<JsonNode> clientRequest = CustomObjectQuery.ofJsonNode()
+                    .withSort(m -> m.createdAt().sort().desc());
             final PagedQueryResult<CustomObject<JsonNode>> result = execute(clientRequest);
             assertThat(result.getResults().stream().filter(item -> item.hasSameIdAs(existingCustomObject)).count())
                     .isGreaterThanOrEqualTo(1);
@@ -65,7 +63,7 @@ public class CustomObjectQueryTest extends IntegrationTest {
     }
 
     public void demoModelTypeParameter() {
-        final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQueryModel.<JsonNode>of().createdAt().sort(DESC);
-        final QuerySort<CustomObject<Foo>> fooSort = CustomObjectQueryModel.<Foo>of().createdAt().sort(DESC);
+        final QuerySort<CustomObject<JsonNode>> sort = CustomObjectQueryModel.<CustomObject<JsonNode>>of().createdAt().sort(DESC);
+        final QuerySort<CustomObject<Foo>> fooSort = CustomObjectQueryModel.<CustomObject<Foo>>of().createdAt().sort(DESC);
     }
 }
