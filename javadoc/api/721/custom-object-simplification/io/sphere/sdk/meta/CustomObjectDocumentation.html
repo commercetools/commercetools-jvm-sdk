@@ -346,7 +346,6 @@ import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyGet;
 import io.sphere.sdk.http.HttpResponse;
-import java.util.function.Function;
 </code></pre><pre><code class='java'>public class GsonFooCustomObjectByKeyGet extends CustomObjectCustomJsonMappingByKeyGet&lt;GsonFoo&gt; {
 
     public GsonFooCustomObjectByKeyGet(final String container, final String key) {
@@ -354,11 +353,9 @@ import java.util.function.Function;
     }
 
     @Override
-    protected Function&lt;HttpResponse, CustomObject&lt;GsonFoo&gt;&gt; deserializeCustomObject() {
-        return httpResponse -&gt; {
-            final String jsonAsString = getBodyAsString(httpResponse);
-            return new Gson().fromJson(jsonAsString, GsonFooCustomObject.class);
-        };
+    protected CustomObject&lt;GsonFoo&gt; deserializeCustomObject(final HttpResponse httpResponse) {
+        final String jsonAsString = getBodyAsString(httpResponse);
+        return new Gson().fromJson(jsonAsString, GsonFooCustomObject.class);
     }
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectByKeyGet.java" target="_blank">test code</a>.</pre></div>

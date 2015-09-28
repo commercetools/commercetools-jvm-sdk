@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":6,"i3":10};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"]};
+var methods = {"i0":10,"i1":10,"i2":42,"i3":6,"i4":10};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -161,7 +161,7 @@ implements <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interf
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t4" class="tableTab"><span><a href="javascript:show(8);">Concrete Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -179,10 +179,18 @@ implements <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interf
 </td>
 </tr>
 <tr id="i2" class="altColor">
-<td class="colFirst"><code>protected abstract java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="type parameter in CustomObjectCustomJsonMappingByKeyGet">T</a>&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html#deserializeCustomObject--">deserializeCustomObject</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>protected java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="type parameter in CustomObjectCustomJsonMappingByKeyGet">T</a>&gt;&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html#deserializeCustomObject--">deserializeCustomObject</a></span>()</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">override <a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html#deserializeCustomObject-io.sphere.sdk.http.HttpResponse-"><code>deserializeCustomObject(HttpResponse)</code></a> instead.</span></div>
+</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>protected abstract <a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="type parameter in CustomObjectCustomJsonMappingByKeyGet">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html#deserializeCustomObject-io.sphere.sdk.http.HttpResponse-">deserializeCustomObject</a></span>(<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/client/HttpRequestIntent.html" title="class in io.sphere.sdk.client">HttpRequestIntent</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html#httpRequestIntent--">httpRequestIntent</a></span>()</code>
 <div class="block">Provides an http request intent, this does not include the execution of it.</div>
@@ -288,7 +296,18 @@ public final&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/CustomObje
 <ul class="blockList">
 <li class="blockList">
 <h4>deserializeCustomObject</h4>
-<pre>protected abstract&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="type parameter in CustomObjectCustomJsonMappingByKeyGet">T</a>&gt;&gt;&nbsp;deserializeCustomObject()</pre>
+<pre>@Deprecated
+protected final&nbsp;java.util.function.Function&lt;<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>,<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="type parameter in CustomObjectCustomJsonMappingByKeyGet">T</a>&gt;&gt;&nbsp;deserializeCustomObject()</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">override <a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html#deserializeCustomObject-io.sphere.sdk.http.HttpResponse-"><code>deserializeCustomObject(HttpResponse)</code></a> instead.</span></div>
+</li>
+</ul>
+<a name="deserializeCustomObject-io.sphere.sdk.http.HttpResponse-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>deserializeCustomObject</h4>
+<pre>protected abstract&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="type parameter in CustomObjectCustomJsonMappingByKeyGet">T</a>&gt;&nbsp;deserializeCustomObject(<a href="../../../../../io/sphere/sdk/http/HttpResponse.html" title="interface in io.sphere.sdk.http">HttpResponse</a>&nbsp;httpResponse)</pre>
 </li>
 </ul>
 <a name="canDeserialize-io.sphere.sdk.http.HttpResponse-">
