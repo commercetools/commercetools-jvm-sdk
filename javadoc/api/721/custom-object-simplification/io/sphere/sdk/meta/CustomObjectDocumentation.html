@@ -153,6 +153,15 @@ public class Foo extends Base {
         return baz;
     }
 
+    public static TypeReference&lt;Foo&gt; typeReference() {
+        return new TypeReference&lt;Foo&gt;(){
+            @Override
+            public String toString() {
+                return "TypeReference&lt;" + Foo.class.getSimpleName() + "&gt;";
+            }
+        };
+    }
+
     public static TypeReference&lt;CustomObject&lt;Foo&gt;&gt; customObjectTypeReference() {
         return new TypeReference&lt;CustomObject&lt;Foo&gt;&gt;(){
             @Override
@@ -241,10 +250,10 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
  <div id="io-sphere-sdk-customobjects-queries-CustomObjectByKeyGetTest-executionForPureJson--%s" class=code-example><pre><code class='java'>withCustomObject(client(), existingCustomObject -&gt; {
     final String container = existingCustomObject.getContainer();
     final String key = existingCustomObject.getKey();
-    final CustomObjectByKeyGet&lt;JsonNode&gt; fetch = CustomObjectByKeyGet.of(container, key);
-    final Optional&lt;CustomObject&lt;JsonNode&gt;&gt; customObjectOptional = Optional.ofNullable(execute(fetch));
-    assertThat(customObjectOptional).isPresent();
-    final JsonNode value = customObjectOptional.get().getValue();
+    final CustomObjectByKeyGet&lt;JsonNode&gt; fetch = CustomObjectByKeyGet.ofJsonNode(container, key);
+    final CustomObject&lt;JsonNode&gt; customObject = execute(fetch);
+    assertThat(customObject).isNotNull();
+    final JsonNode value = customObject.getValue();
     final String expected = existingCustomObject.getValue().getBar();
     final String actual = value.get("bar").asText("it is not present");
     assertThat(actual).isEqualTo(expected);
@@ -262,13 +271,6 @@ assertThat(customObject.getValue().get("baz").asLong(0)).isEqualTo(5);
     final String expected = existingCustomObject.getValue().getBar();
     final CustomObject&lt;JsonNode&gt; loadedCustomObject = result.head().get();
     final JsonNode jsonNode = loadedCustomObject.getValue();
-
-
-    final JsonNode loaded = execute(JsonNodeSphereRequest.of(CustomObjectQuery.of()));
-
-    System.err.println(prettyPrint(loaded));
-
-
     final String actual = jsonNode.get("bar").asText("it is not present");
     assertThat(actual).isEqualTo(expected);
 });
@@ -401,6 +403,10 @@ import io.sphere.sdk.models.Base;
         return new TypeReference&lt;CustomObject&lt;CustomerNumberCounter&gt;&gt;() {
         };
     }
+
+    public static TypeReference&lt;CustomerNumberCounter&gt; typeReference() {
+        return new TypeReference&lt;CustomerNumberCounter&gt;() { };
+    }
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/occexample/CustomerNumberCounter.java" target="_blank">test code</a>.</pre></div>
 
@@ -432,7 +438,7 @@ try {
 
  <p>An update works this way then:</p>
  <div id="io-sphere-sdk-customobjects-occexample-FlowTest-doAnUpdate--%s" class=code-example><pre><code class='java'>final CustomObjectByKeyGet&lt;CustomerNumberCounter&gt; fetch =
-        CustomObjectByKeyGet.of(CONTAINER, KEY, CustomerNumberCounter.customObjectTypeReference());
+        CustomObjectByKeyGet.of(CONTAINER, KEY, CustomerNumberCounter.typeReference());
 
 final CustomObject&lt;CustomerNumberCounter&gt; loadedCustomObject = execute(fetch);
 final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;
@@ -514,6 +520,15 @@ import javax.annotation.Nullable;
         return bar;
     }
 
+    public static TypeReference&lt;Xyz&gt; typeReference() {
+        return new TypeReference&lt;Xyz&gt;() {
+            @Override
+            public String toString() {
+                return "TypeReference&lt;Xyz&gt;";
+            }
+        };
+    }
+
     public static TypeReference&lt;CustomObject&lt;Xyz&gt;&gt; customObjectTypeReference() {
         return new TypeReference&lt;CustomObject&lt;Xyz&gt;&gt;() {
             @Override
@@ -560,6 +575,15 @@ import javax.annotation.Nullable;
         return bar;
     }
 
+    public static TypeReference&lt;Xyz&gt; typeReference() {
+        return new TypeReference&lt;Xyz&gt;() {
+            @Override
+            public String toString() {
+                return "TypeReference&lt;Xyz&gt;";
+            }
+        };
+    }
+
     public static TypeReference&lt;CustomObject&lt;Xyz&gt;&gt; customObjectTypeReference() {
         return new TypeReference&lt;CustomObject&lt;Xyz&gt;&gt;() {
             @Override
@@ -590,6 +614,15 @@ import javax.annotation.Nullable;
     @Nullable
     public String getBar() {
         return bar;
+    }
+
+    public static TypeReference&lt;Xyz&gt; typeReference() {
+        return new TypeReference&lt;Xyz&gt;() {
+            @Override
+            public String toString() {
+                return "TypeReference&lt;Xyz&gt;";
+            }
+        };
     }
 
     public static TypeReference&lt;CustomObject&lt;Xyz&gt;&gt; customObjectTypeReference() {
@@ -714,6 +747,15 @@ public interface Uvw {
 
     String getAnotherField();
 
+    static TypeReference&lt;Uvw&gt; typeReference(){
+        return new TypeReference&lt;Uvw&gt;(){
+            @Override
+            public String toString() {
+                return "TypeReference&lt;Uvw&gt;";
+            }
+        };
+    }
+
     static TypeReference&lt;CustomObject&lt;Uvw&gt;&gt; customObjectTypeReference(){
         return new TypeReference&lt;CustomObject&lt;Uvw&gt;&gt;(){
             @Override
@@ -782,7 +824,7 @@ public interface Uvw {
 
  As a result you only work with the interface making it transparent if it is an old or new version:
 
- <div id="io-sphere-sdk-customobjects-migrations-CustomObjectsMigrationsTest-exampleForMigrationCall--%s" class=code-example><pre><code class='java'>final CustomObjectByKeyGet&lt;Uvw&gt; fetch = CustomObjectByKeyGet.of("container", "key", Uvw.customObjectTypeReference());
+ <div id="io-sphere-sdk-customobjects-migrations-CustomObjectsMigrationsTest-exampleForMigrationCall--%s" class=code-example><pre><code class='java'>final CustomObjectByKeyGet&lt;Uvw&gt; fetch = CustomObjectByKeyGet.of("container", "key", Uvw.typeReference());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/CustomObjectsMigrationsTest.java" target="_blank">test code</a>.</pre></div>
 
 

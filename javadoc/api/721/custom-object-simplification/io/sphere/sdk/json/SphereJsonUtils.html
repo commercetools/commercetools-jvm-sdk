@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9};
+var methods = {"i0":9,"i1":9,"i2":9,"i3":9,"i4":9,"i5":9,"i6":9,"i7":9,"i8":9,"i9":9,"i10":9,"i11":9,"i12":9,"i13":9,"i14":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -172,51 +172,56 @@ assertThatThrownBy(() -&gt; SphereJsonUtils.readObject(brokenJsonString, Localiz
 </tr>
 <tr id="i6" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#readObject-byte:A-com.fasterxml.jackson.databind.JavaType-">readObject</a></span>(byte[]&nbsp;jsonAsBytes,
+          com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#readObject-byte:A-com.fasterxml.jackson.core.type.TypeReference-">readObject</a></span>(byte[]&nbsp;jsonAsBytes,
           com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>
 <div class="block">Reads a Java object from JSON string data encoded as UTF-8.</div>
 </td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#readObject-com.fasterxml.jackson.databind.JsonNode-java.lang.Class-">readObject</a></span>(com.fasterxml.jackson.databind.JsonNode&nbsp;jsonNode,
           java.lang.Class&lt;T&gt;&nbsp;clazz)</code>
 <div class="block">Reads a Java object from JsonNode data.</div>
 </td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#readObject-com.fasterxml.jackson.databind.JsonNode-com.fasterxml.jackson.core.type.TypeReference-">readObject</a></span>(com.fasterxml.jackson.databind.JsonNode&nbsp;jsonNode,
           com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>
 <div class="block">Reads a Java object from JsonNode data.</div>
 </td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#readObject-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">readObject</a></span>(java.lang.String&nbsp;jsonAsString,
           com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>
 <div class="block">Reads a Java object from JSON data (String).</div>
 </td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#readObjectFromResource-java.lang.String-com.fasterxml.jackson.databind.JavaType-">readObjectFromResource</a></span>(java.lang.String&nbsp;resourcePath,
                       com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;T</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#readObjectFromResource-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">readObjectFromResource</a></span>(java.lang.String&nbsp;resourcePath,
                       com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>
 <div class="block">Reads a UTF-8 JSON text file from the classpath of the current thread and transforms it into a Java object.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i13" class="rowColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.databind.JsonNode</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#toJsonNode-java.lang.Object-">toJsonNode</a></span>(java.lang.Object&nbsp;value)</code>
 <div class="block">Converts a SPHERE.IO Java object to JSON as <code>JsonNode</code>.</div>
 </td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/json/SphereJsonUtils.html#toJsonString-java.lang.Object-">toJsonString</a></span>(java.lang.Object&nbsp;value)</code>
 <div class="block">Converts a SPHERE.IO Java object to JSON as String.</div>
@@ -515,6 +520,16 @@ assertThat(actual).isEqualTo(LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hu
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the created objected</dd>
 </dl>
+</li>
+</ul>
+<a name="readObject-byte:A-com.fasterxml.jackson.databind.JavaType-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>readObject</h4>
+<pre>public static&nbsp;&lt;T&gt;&nbsp;T&nbsp;readObject(byte[]&nbsp;jsonAsBytes,
+                               com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</pre>
 </li>
 </ul>
 <a name="newObjectNode--">
