@@ -134,13 +134,18 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
  <div id="io-sphere-sdk-customers-commands-CustomerCreateEmailTokenCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
     assertThat(customer.isEmailVerified()).isFalse();
     final int ttlMinutes = 15;
-    final Command&lt;CustomerToken&gt; command1 = CustomerCreateEmailTokenCommand.of(customer, ttlMinutes);
-    final CustomerToken customerToken = execute(command1);
-    final Command&lt;Customer&gt; command2 = CustomerVerifyEmailCommand.of(customer, customerToken);
-    final Customer loadedCustomer = execute(command2);
+    final Command&lt;CustomerToken&gt; createTokenCommand = CustomerCreateEmailTokenCommand.of(customer, ttlMinutes);
+    final CustomerToken customerToken = execute(createTokenCommand);
+    final String tokenValue = customerToken.getValue();//this token needs to be sent via email to the customer
+    final Command&lt;Customer&gt; verifyEmailCommand = CustomerVerifyEmailCommand.of(customer, tokenValue);
+    final Customer loadedCustomer = execute(verifyEmailCommand);
     assertThat(loadedCustomer.isEmailVerified()).isTrue();
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -384,7 +389,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
