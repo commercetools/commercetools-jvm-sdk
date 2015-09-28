@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":17,"i2":17,"i3":17};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],16:["t5","Default Methods"]};
+var methods = {"i0":18,"i1":49,"i2":17,"i3":17};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],16:["t5","Default Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -138,7 +138,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -149,15 +149,21 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of--">of</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of--">of</a></span>()</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--"><code>ofJsonNode()</code></a> instead</span></div>
+</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of-com.fasterxml.jackson.core.type.TypeReference-">of</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;&nbsp;resultTypeReference)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of-com.fasterxml.jackson.core.type.TypeReference-">of</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>
+<div class="block">Query object for custom objects where the result value is a POJO.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#resultTypeReference--">resultTypeReference</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--">ofJsonNode</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -216,22 +222,22 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="resultTypeReference--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>resultTypeReference</h4>
-<pre>static&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;&gt;&nbsp;resultTypeReference()</pre>
-</li>
-</ul>
 <a name="of-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&nbsp;of(com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;&nbsp;resultTypeReference)</pre>
+<pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&nbsp;of(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
+<div class="block">Query object for custom objects where the result value is a POJO.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the Java type of the value of the custom object</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>typeReference</code> - the type reference of the value of the custom object</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>query object</dd>
+</dl>
 </li>
 </ul>
 <a name="of--">
@@ -240,7 +246,18 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;of()</pre>
+<pre>@Deprecated
+static&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;of()</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--"><code>ofJsonNode()</code></a> instead</span></div>
+</li>
+</ul>
+<a name="ofJsonNode--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ofJsonNode</h4>
+<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;ofJsonNode()</pre>
 </li>
 </ul>
 <a name="byContainer-java.lang.String-">
