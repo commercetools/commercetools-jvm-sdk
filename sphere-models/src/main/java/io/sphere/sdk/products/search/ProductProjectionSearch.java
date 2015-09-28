@@ -62,6 +62,9 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch withText(final Locale locale, final String text);
 
     @Override
+    ProductProjectionSearch withFuzzy(final Boolean fuzzy);
+
+    @Override
     ProductProjectionSearch withFacets(final List<FacetExpression<ProductProjection>> facets);
 
     @Override

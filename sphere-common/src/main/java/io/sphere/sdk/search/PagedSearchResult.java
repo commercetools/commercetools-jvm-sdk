@@ -54,4 +54,29 @@ public class PagedSearchResult<T> extends PagedResult<T> {
             }
         }).orElse(null);
     }
+
+    @Override
+    public List<T> getResults() {
+        return super.getResults();
+    }
+
+    @Override
+    public Integer getOffset() {
+        return super.getOffset();
+    }
+
+    @Override
+    public int size() {
+        return super.size();
+    }
+
+    @Override
+    public Integer getTotal() {
+        return super.getTotal();
+    }
+
+    @Override
+    public Optional<T> head() {
+        return super.head();
+    }
 }
