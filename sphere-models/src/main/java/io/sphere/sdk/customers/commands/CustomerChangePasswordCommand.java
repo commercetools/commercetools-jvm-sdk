@@ -12,6 +12,8 @@ import static io.sphere.sdk.http.HttpMethod.POST;
 /**
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerChangePasswordCommandTest#execution()}
+ *
+ * @see Customer
  */
 public final class CustomerChangePasswordCommand extends CommandImpl<Customer> {
     private final String id;
