@@ -34,16 +34,19 @@ public abstract class CustomObjectCustomJsonMappingByKeyGet<T> extends SphereReq
     @Nullable
     @Override
     public final CustomObject<T> deserialize(final HttpResponse httpResponse) {
-        final CustomObject<T> result;
-        if (httpResponse.getStatusCode() == NOT_FOUND_404) {
-            result = null;
-        } else {
-            result = deserializeCustomObject().apply(httpResponse);
-        }
-        return result;
+        return (httpResponse.getStatusCode() == NOT_FOUND_404) ? null : deserializeCustomObject(httpResponse);
     }
 
-    protected abstract Function<HttpResponse, CustomObject<T>> deserializeCustomObject();
+    /**
+     *
+     * @deprecated override {@link #deserializeCustomObject(HttpResponse)} instead.
+     */
+    @Deprecated
+    protected final Function<HttpResponse, CustomObject<T>> deserializeCustomObject() {
+        return httpResponse -> deserializeCustomObject(httpResponse);
+    }
+
+    protected abstract CustomObject<T> deserializeCustomObject(final HttpResponse httpResponse);
 
     @Override
     public boolean canDeserialize(final HttpResponse httpResponse) {
