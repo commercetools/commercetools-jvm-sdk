@@ -192,6 +192,10 @@ final public class SphereJsonUtils {
         return executing(() -> objectMapper.readValue(jsonAsBytes, typeReference));
     }
 
+    public static <T> T readObject(final byte[] jsonAsBytes, final JavaType javaType) {
+        return executing(() -> objectMapper.readValue(jsonAsBytes, javaType));
+    }
+
     /**
      * Creates a new {@link ObjectNode} created by the SPHERE.IO object mapper.
      *

@@ -27,6 +27,15 @@ public class Xyz extends Base {
         return bar;
     }
 
+    public static TypeReference<Xyz> typeReference() {
+        return new TypeReference<Xyz>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Xyz>";
+            }
+        };
+    }
+
     public static TypeReference<CustomObject<Xyz>> customObjectTypeReference() {
         return new TypeReference<CustomObject<Xyz>>() {
             @Override

@@ -23,7 +23,7 @@ public class CustomObjectsMigrationsTest extends IntegrationTest {
         final CustomObjectDraft<io.sphere.sdk.customobjects.migrations.version1.Xyz> draft = CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, new io.sphere.sdk.customobjects.migrations.version1.Xyz("foo"), io.sphere.sdk.customobjects.migrations.version1.Xyz.customObjectTypeReference());
         final CustomObject<io.sphere.sdk.customobjects.migrations.version1.Xyz> customObject = execute(CustomObjectUpsertCommand.of(draft));
 
-        final CustomObject<io.sphere.sdk.customobjects.migrations.version2.Xyz> xyz2CustomObject = execute(CustomObjectByKeyGet.of(CONTAINER, key, io.sphere.sdk.customobjects.migrations.version2.Xyz.customObjectTypeReference()));
+        final CustomObject<io.sphere.sdk.customobjects.migrations.version2.Xyz> xyz2CustomObject = execute(CustomObjectByKeyGet.of(CONTAINER, key, io.sphere.sdk.customobjects.migrations.version2.Xyz.typeReference()));
         assertThat(xyz2CustomObject.getValue().getBar()).isNull();
 
         final CustomObjectUpsertCommand<io.sphere.sdk.customobjects.migrations.version2.Xyz> upsertCommand =
@@ -38,7 +38,7 @@ public class CustomObjectsMigrationsTest extends IntegrationTest {
         final CustomObjectUpsertCommand<io.sphere.sdk.customobjects.migrations.version2.Xyz> upsertCommand =
                 CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", "bar"), io.sphere.sdk.customobjects.migrations.version2.Xyz.customObjectTypeReference()));
         execute(upsertCommand);
-        final CustomObject<Xyz> xyz3CustomObject = execute(CustomObjectByKeyGet.of(CONTAINER, key, Xyz.customObjectTypeReference()));
+        final CustomObject<Xyz> xyz3CustomObject = execute(CustomObjectByKeyGet.of(CONTAINER, key, Xyz.typeReference()));
         assertThat(xyz3CustomObject.getValue().getBar()).isEqualTo("bar");
     }
 
@@ -55,7 +55,7 @@ public class CustomObjectsMigrationsTest extends IntegrationTest {
         final CustomObject<io.sphere.sdk.customobjects.migrations.version1.Uvw> objectSchema1 = execute(CustomObjectUpsertCommand.of(draft));
         assertThat(objectSchema1.getValue().getFoo()).isEqualTo("a&b");
 
-        final CustomObject<Uvw> uvwCustomObjectSchema1 = execute(CustomObjectByKeyGet.of(CONTAINER, key, Uvw.customObjectTypeReference()));
+        final CustomObject<Uvw> uvwCustomObjectSchema1 = execute(CustomObjectByKeyGet.of(CONTAINER, key, Uvw.typeReference()));
         assertThat(uvwCustomObjectSchema1.getValue()).isInstanceOf(UvwSchemaVersion1.class);
         assertThat(uvwCustomObjectSchema1.getValue().getFoo()).isEqualTo(new Foo("a", "b"));
 
@@ -67,6 +67,6 @@ public class CustomObjectsMigrationsTest extends IntegrationTest {
 
     @Test
     public void exampleForMigrationCall() throws Exception {
-        final CustomObjectByKeyGet<Uvw> fetch = CustomObjectByKeyGet.of("container", "key", Uvw.customObjectTypeReference());
+        final CustomObjectByKeyGet<Uvw> fetch = CustomObjectByKeyGet.of("container", "key", Uvw.typeReference());
     }
 }

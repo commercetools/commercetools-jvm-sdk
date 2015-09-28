@@ -30,6 +30,15 @@ public class Foo extends Base {
         return baz;
     }
 
+    public static TypeReference<Foo> typeReference() {
+        return new TypeReference<Foo>(){
+            @Override
+            public String toString() {
+                return "TypeReference<" + Foo.class.getSimpleName() + ">";
+            }
+        };
+    }
+
     public static TypeReference<CustomObject<Foo>> customObjectTypeReference() {
         return new TypeReference<CustomObject<Foo>>(){
             @Override

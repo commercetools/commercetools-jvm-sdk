@@ -18,6 +18,15 @@ public interface Uvw {
 
     String getAnotherField();
 
+    static TypeReference<Uvw> typeReference(){
+        return new TypeReference<Uvw>(){
+            @Override
+            public String toString() {
+                return "TypeReference<Uvw>";
+            }
+        };
+    }
+
     static TypeReference<CustomObject<Uvw>> customObjectTypeReference(){
         return new TypeReference<CustomObject<Uvw>>(){
             @Override

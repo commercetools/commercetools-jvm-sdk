@@ -7,8 +7,6 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
-import java.util.Optional;
-
 import static io.sphere.sdk.customobjects.CustomObjectFixtures.withCustomObject;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -20,10 +18,10 @@ public class CustomObjectByKeyGetTest extends IntegrationTest {
             final String container = existingCustomObject.getContainer();
             final String key = existingCustomObject.getKey();
             final CustomObjectByKeyGet<Foo> fetch =
-                    CustomObjectByKeyGet.of(container, key, Foo.customObjectTypeReference());
-            final Optional<CustomObject<Foo>> customObjectOptional = Optional.ofNullable(execute(fetch));
-            assertThat(customObjectOptional).isPresent();
-            final Reference<CustomObject<JsonNode>> actual = customObjectOptional.get().toReference();
+                    CustomObjectByKeyGet.of(container, key, Foo.typeReference());
+            final CustomObject<Foo> customObject = execute(fetch);
+            assertThat(customObject).isNotNull();
+            final Reference<CustomObject<JsonNode>> actual = customObject.toReference();
             assertThat(actual).isEqualTo(existingCustomObject.toReference());
         });
     }
@@ -33,10 +31,10 @@ public class CustomObjectByKeyGetTest extends IntegrationTest {
         withCustomObject(client(), existingCustomObject -> {
             final String container = existingCustomObject.getContainer();
             final String key = existingCustomObject.getKey();
-            final CustomObjectByKeyGet<JsonNode> fetch = CustomObjectByKeyGet.of(container, key);
-            final Optional<CustomObject<JsonNode>> customObjectOptional = Optional.ofNullable(execute(fetch));
-            assertThat(customObjectOptional).isPresent();
-            final JsonNode value = customObjectOptional.get().getValue();
+            final CustomObjectByKeyGet<JsonNode> fetch = CustomObjectByKeyGet.ofJsonNode(container, key);
+            final CustomObject<JsonNode> customObject = execute(fetch);
+            assertThat(customObject).isNotNull();
+            final JsonNode value = customObject.getValue();
             final String expected = existingCustomObject.getValue().getBar();
             final String actual = value.get("bar").asText("it is not present");
             assertThat(actual).isEqualTo(expected);

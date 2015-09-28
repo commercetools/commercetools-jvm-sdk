@@ -59,13 +59,6 @@ public class CustomObjectQueryTest extends IntegrationTest {
             final String expected = existingCustomObject.getValue().getBar();
             final CustomObject<JsonNode> loadedCustomObject = result.head().get();
             final JsonNode jsonNode = loadedCustomObject.getValue();
-
-
-            final JsonNode loaded = execute(JsonNodeSphereRequest.of(CustomObjectQuery.of()));
-
-            System.err.println(prettyPrint(loaded));
-
-
             final String actual = jsonNode.get("bar").asText("it is not present");
             assertThat(actual).isEqualTo(expected);
         });

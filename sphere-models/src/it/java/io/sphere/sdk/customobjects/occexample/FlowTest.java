@@ -23,7 +23,7 @@ public class FlowTest extends IntegrationTest {
 
     @Before
     public void setUp() throws Exception {
-        final CustomObjectByKeyGet<JsonNode> fetchByKey = CustomObjectByKeyGet.of(CONTAINER, KEY);
+        final CustomObjectByKeyGet<JsonNode> fetchByKey = CustomObjectByKeyGet.ofJsonNode(CONTAINER, KEY);
         Optional.ofNullable(execute(fetchByKey)).ifPresent(o -> execute(CustomObjectDeleteCommand.of(o)));
     }
 
@@ -35,7 +35,7 @@ public class FlowTest extends IntegrationTest {
 
     private void doAnUpdate() {
         final CustomObjectByKeyGet<CustomerNumberCounter> fetch =
-                CustomObjectByKeyGet.of(CONTAINER, KEY, CustomerNumberCounter.customObjectTypeReference());
+                CustomObjectByKeyGet.of(CONTAINER, KEY, CustomerNumberCounter.typeReference());
 
         final CustomObject<CustomerNumberCounter> loadedCustomObject = execute(fetch);
         final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;
