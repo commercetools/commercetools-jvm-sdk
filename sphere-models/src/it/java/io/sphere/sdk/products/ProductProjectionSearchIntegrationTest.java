@@ -373,8 +373,8 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     @Test
     public void fuzzySearch() {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withText(ENGLISH, "short").withQueryFilters(product -> product.productType().id().filtered().by(productType.getId()));
-        assertThat(execute(search).getResults()).matches(containsIdentifiable(product2).negate(), "not included");
-        assertThat(execute(search.withFuzzy(true)).getResults()).matches(containsIdentifiable(product2), "included");
+        assertThat(resultsToIds(execute(search))).doesNotContain(product2.getId());
+        assertThat(resultsToIds(execute(search.withFuzzy(true)))).contains(product2.getId());
     }
 
     private <T> Predicate<List<? extends Identifiable<T>>> containsIdentifiable(final Identifiable<T> identifiable) {
