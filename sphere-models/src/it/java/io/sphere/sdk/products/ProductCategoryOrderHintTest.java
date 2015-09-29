@@ -4,7 +4,9 @@ import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
+import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
+import io.sphere.sdk.search.SearchSort;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -27,6 +29,8 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
 
     private static List<Product> products;
     private static List<ProductProjection> productProjections;
+    private static List<String> sortedIdsFromBackendForCategory1;
+    private static List<String> sortedIdsFromBackendForCategory2;
     private static String category1Id;
     private static String category2Id;
     private static String id1;
@@ -51,6 +55,7 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
     public void sortProductProjectionsByCategory1() {
         final Comparator<ProductProjection> comparator = comparingCategoryOrderHints(category1Id);
         assertThat(productProjectionsSortedBy(comparator)).isEqualTo(asList(id1, id3, id2, id5, id4));
+        assertThat(sortedIdsFromBackendForCategory1).isEqualTo(asList(id1, id3, id2, id5, id4));
 
     }
 
@@ -58,6 +63,7 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
     public void sortProductProjectionsByCategory2() {
         final Comparator<ProductProjection> comparator = comparingCategoryOrderHints(category2Id);
         assertThat(productProjectionsSortedBy(comparator)).startsWith(id5, id2, id1);
+        assertThat(sortedIdsFromBackendForCategory2).startsWith(id5, id2, id1);
 
     }
 
@@ -115,6 +121,14 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
 
                     final List<String> ids = products.stream().map(p -> p.getId()).collect(toList());
 
+                    //eventual consistency
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                    sortedIdsFromBackendForCategory1 = searchAndSortByCategoryId(category1Id);
+                    sortedIdsFromBackendForCategory2 = searchAndSortByCategoryId(category2Id);
 
 
                     productProjections = execute(ProductProjectionQuery.ofStaged()
@@ -128,6 +142,15 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
                 })
             )
         );
+    }
+
+    private static List<String> searchAndSortByCategoryId(final String categoryId) {
+        final ProductProjectionSearch searchRequest = ProductProjectionSearch.ofStaged()
+                .withQueryFilters(product -> product.categories().id().filtered().by(categoryId))
+                .withSort(product -> SearchSort.of("categoryOrderHints." + categoryId + " asc"));
+        return execute(searchRequest).getResults().stream()
+                .map(x -> x.getId())
+                .collect(toList());
     }
 
     @AfterClass

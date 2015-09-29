@@ -27,6 +27,7 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.time.ZoneOffset;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -113,6 +114,7 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
             final CategoryOrderHints actual = updatedProduct.getMasterData().getStaged().getCategoryOrderHints();
             assertThat(actual).isEqualTo(CategoryOrderHints.of(category.getId(), "0.1234"));
+            assertThat(actual.getAsMap()).isEqualTo(Collections.singletonMap(category.getId(), "0.1234"));
         });
     }
 
