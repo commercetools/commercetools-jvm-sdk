@@ -3,6 +3,7 @@ package io.sphere.sdk.products.commands;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.*;
@@ -102,6 +103,16 @@ public class ProductUpdateCommandTest extends IntegrationTest {
                     .execute(ProductUpdateCommand.of(productWithCategory, RemoveFromCategory.of(category)));
 
             assertThat(productWithoutCategory.getMasterData().getStaged().getCategories()).isEmpty();
+        });
+    }
+
+    @Test
+    public void setCategoryOrderHint() throws Exception {
+        withProductInCategory(client(), (product, category) -> {
+            final Product updatedProduct = execute(ProductUpdateCommand.of(product, SetCategoryOrderHint.of(category.getId(), "0.1234")));
+
+            final CategoryOrderHints actual = updatedProduct.getMasterData().getStaged().getCategoryOrderHints();
+            assertThat(actual).isEqualTo(CategoryOrderHints.of(category.getId(), "0.1234"));
         });
     }
 

@@ -22,6 +22,12 @@ public class CategoryOrderHints extends Base {
     }
 
     @JsonIgnore
+    public static CategoryOrderHints of(final String categoryId, final String orderHint) {
+        final Map<String, String> entry = Collections.singletonMap(categoryId, orderHint);
+        return of(entry);
+    }
+
+    @JsonIgnore
     public static CategoryOrderHints of(final Map<String, String> orderHints) {
         return new CategoryOrderHints(orderHints);
     }
@@ -38,7 +44,7 @@ public class CategoryOrderHints extends Base {
     }
 
     @JsonAnyGetter//@JsonUnwrap supports not maps, but this construct puts map content on top level
-    private Map<String, String> getInternalValues() {
+    public Map<String, String> getAsMap() {
         return Collections.unmodifiableMap(orderHints);
     }
 }
