@@ -11,10 +11,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class SphereClientFactoryTest extends IntegrationTest {
     @Test
     public void autoLoadHttpClientWithoutExplicitSpecification() {
-        final SphereClientFactory sphereClientFactory = SphereClientFactory.of();
-        final SphereClient client = sphereClientFactory.createClient(getSphereClientConfig());
-        final PagedQueryResult<Category> queryResult = client.execute(CategoryQuery.of()).toCompletableFuture().join();
-        assertThat(queryResult).isNotNull();
-        client.close();
+        if (!"false".equals(System.getenv("JVM_SDK_IT_SSL_VALIDATION"))) {
+            final SphereClientFactory sphereClientFactory = SphereClientFactory.of();
+            final SphereClient client = sphereClientFactory.createClient(getSphereClientConfig());
+            final PagedQueryResult<Category> queryResult = client.execute(CategoryQuery.of()).toCompletableFuture().join();
+            assertThat(queryResult).isNotNull();
+            client.close();
+        }
     }
 }
