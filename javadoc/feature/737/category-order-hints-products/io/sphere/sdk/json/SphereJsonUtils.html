@@ -259,8 +259,8 @@ assertThatThrownBy(() -&gt; SphereJsonUtils.readObject(brokenJsonString, Localiz
 <div class="block">Converts a SPHERE.IO Java object to JSON as String.
 
  <div id="io-sphere-sdk-json-SphereJsonUtilsTest-toJsonString--%s" class=code-example><pre><code class='java'>final LocalizedString value = LocalizedString.of(ENGLISH, "dog food", GERMAN, "Hundefutter");
-final String actual = SphereJsonUtils.toJsonString(value);
-assertThat(actual).isEqualTo("{\"de\":\"Hundefutter\",\"en\":\"dog food\"}");
+final JsonNode actual = SphereJsonUtils.toJsonNode(value);
+assertThat(actual).isEqualTo(SphereJsonUtils.parse("{\"de\":\"Hundefutter\",\"en\":\"dog food\"}"));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-common/src/test/java/io/sphere/sdk/json/SphereJsonUtilsTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
