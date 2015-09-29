@@ -6,6 +6,8 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.Product;
 
+import javax.annotation.Nullable;
+
 /**
  * Adds a product to a category.
  *
@@ -17,10 +19,13 @@ import io.sphere.sdk.products.Product;
  */
 public class AddToCategory extends UpdateActionImpl<Product> {
     private final Reference<Category> category;
+    @Nullable
+    private final String orderHint;
 
-    private AddToCategory(final Reference<Category> category) {
+    private AddToCategory(final Reference<Category> category, @Nullable final String orderHint) {
         super("addToCategory");
         this.category = category;
+        this.orderHint = orderHint;
     }
 
     public Reference<Category> getCategory() {
@@ -28,6 +33,15 @@ public class AddToCategory extends UpdateActionImpl<Product> {
     }
 
     public static AddToCategory of(final Referenceable<Category> category) {
-        return new AddToCategory(category.toReference());
+        return new AddToCategory(category.toReference(), null);
+    }
+
+    public static AddToCategory of(final Referenceable<Category> category, final String orderHint) {
+        return new AddToCategory(category.toReference(), orderHint);
+    }
+
+    @Nullable
+    public String getOrderHint() {
+        return orderHint;
     }
 }

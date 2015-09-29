@@ -91,10 +91,12 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withProductAndUnconnectedCategory(client(), (final Product product, final Category category) -> {
             assertThat(product.getMasterData().getStaged().getCategories()).isEmpty();
 
+            final String orderHint = "0.123";
             final Product productWithCategory = client()
-                    .execute(ProductUpdateCommand.of(product, AddToCategory.of(category)));
+                    .execute(ProductUpdateCommand.of(product, AddToCategory.of(category, orderHint)));
 
             ReferenceAssert.assertThat(productWithCategory.getMasterData().getStaged().getCategories().stream().findAny().get()).references(category);
+            assertThat(productWithCategory.getMasterData().getStaged().getCategoryOrderHints().get(category.getId())).isEqualTo(orderHint);
 
             final Product productWithoutCategory = client()
                     .execute(ProductUpdateCommand.of(productWithCategory, RemoveFromCategory.of(category)));
