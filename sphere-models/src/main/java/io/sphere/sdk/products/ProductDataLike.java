@@ -1,6 +1,7 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
@@ -90,4 +91,7 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
     }
 
     SearchKeywords getSearchKeywords();
+
+    @Nullable
+    CategoryOrderHints getCategoryOrderHints();
 }

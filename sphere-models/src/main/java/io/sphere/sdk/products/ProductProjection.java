@@ -3,10 +3,10 @@ package io.sphere.sdk.products;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
-import io.sphere.sdk.models.Versioned;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.search.SearchKeywords;
 
@@ -116,4 +116,8 @@ public interface ProductProjection extends ProductLike<ProductProjection, Produc
 
     @Override
     SearchKeywords getSearchKeywords();
+
+    @Override
+    @Nullable
+    CategoryOrderHints getCategoryOrderHints();
 }

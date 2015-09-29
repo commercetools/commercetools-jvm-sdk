@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.search.SearchKeywords;
@@ -61,4 +62,7 @@ public interface ProductData extends ProductDataLike {
 
     @Override
     SearchKeywords getSearchKeywords();
+
+    @Nullable
+    CategoryOrderHints getCategoryOrderHints();
 }

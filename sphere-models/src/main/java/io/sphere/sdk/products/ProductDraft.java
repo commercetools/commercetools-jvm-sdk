@@ -1,6 +1,8 @@
 package io.sphere.sdk.products;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
@@ -53,4 +55,8 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     Reference<TaxCategory> getTaxCategory();
 
     SearchKeywords getSearchKeywords();
+
+    @Nullable
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    CategoryOrderHints getCategoryOrderHints();
 }

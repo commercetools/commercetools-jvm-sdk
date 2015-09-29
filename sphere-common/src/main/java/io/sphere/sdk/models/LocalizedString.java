@@ -39,7 +39,7 @@ public class LocalizedString extends Base {
     @JsonCreator
     private LocalizedString(final Map<Locale, String> translations) {
         //the Jackson mapper may passes null here and it is not possible to use an immutable map
-        this.translations = immutableCopyOf(Optional.ofNullable(translations).orElse(new HashMap<>()));
+        this.translations = immutableCopyOf(Optional.ofNullable(translations).orElse(Collections.emptyMap()));
     }
 
     /**

@@ -2,6 +2,7 @@ package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -33,12 +34,16 @@ class ProductDataImpl extends Base implements ProductData {
 
     private final SearchKeywords searchKeywords;
 
+    @Nullable
+    private final CategoryOrderHints categoryOrderHints;
+
     @JsonCreator
     ProductDataImpl(final LocalizedString name, final Set<Reference<Category>> categories,
                     final LocalizedString description, final LocalizedString slug,
                     final LocalizedString metaTitle, final LocalizedString metaDescription,
                     final LocalizedString metaKeywords, final ProductVariant masterVariant,
-                    final List<ProductVariant> variants, final SearchKeywords searchKeywords) {
+                    final List<ProductVariant> variants, final SearchKeywords searchKeywords,
+                    @Nullable final CategoryOrderHints categoryOrderHints) {
         this.name = name;
         this.categories = categories;
         this.description = description;
@@ -49,6 +54,7 @@ class ProductDataImpl extends Base implements ProductData {
         this.masterVariant = masterVariant;
         this.variants = variants;
         this.searchKeywords = searchKeywords;
+        this.categoryOrderHints = categoryOrderHints;
     }
 
     public LocalizedString getName() {
@@ -94,6 +100,12 @@ class ProductDataImpl extends Base implements ProductData {
     @Override
     public SearchKeywords getSearchKeywords() {
         return searchKeywords;
+    }
+
+    @Override
+    @Nullable
+    public CategoryOrderHints getCategoryOrderHints() {
+        return categoryOrderHints;
     }
 
     void setProductId(final String id) {

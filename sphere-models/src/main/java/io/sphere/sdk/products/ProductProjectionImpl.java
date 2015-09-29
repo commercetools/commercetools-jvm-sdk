@@ -1,8 +1,10 @@
 package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceViewImpl;
 import io.sphere.sdk.models.Reference;
@@ -38,6 +40,9 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
     private final ProductVariant masterVariant;
     private final List<ProductVariant> variants;
     private final SearchKeywords searchKeywords;
+    @Nullable
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private final CategoryOrderHints categoryOrderHints;
 
     @JsonCreator
     ProductProjectionImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
@@ -47,7 +52,8 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
                           final LocalizedString slug, final LocalizedString metaTitle,
                           final LocalizedString metaDescription, final LocalizedString metaKeywords,
                           final ProductVariant masterVariant, final List<ProductVariant> variants,
-                          final Boolean isPublished, final SearchKeywords searchKeywords) {
+                          final Boolean isPublished, final SearchKeywords searchKeywords,
+                          @JsonInclude(JsonInclude.Include.NON_EMPTY) final CategoryOrderHints categoryOrderHints) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;
         this.taxCategory = taxCategory;
@@ -63,6 +69,7 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
         this.variants = variants;
         this.isPublished = isPublished;
         this.searchKeywords = searchKeywords;
+        this.categoryOrderHints = categoryOrderHints;
         getAllVariants().stream()
                 .filter(v -> v instanceof ProductVariantImpl)
                 .forEach(variant -> ((ProductVariantImpl)variant).setProductId(getId()));
@@ -140,5 +147,11 @@ class ProductProjectionImpl extends ResourceViewImpl<ProductProjection, Product>
     @Override
     public SearchKeywords getSearchKeywords() {
         return searchKeywords;
+    }
+
+    @Override
+    @Nullable
+    public CategoryOrderHints getCategoryOrderHints() {
+        return categoryOrderHints;
     }
 }
