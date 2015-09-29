@@ -21,6 +21,9 @@ public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S, E>,
     C withText(final LocalizedStringEntry text);
 
     @Override
+    C withFuzzy(final Boolean fuzzy);
+
+    @Override
     C withText(final Locale locale, final String text);
 
     @Override
