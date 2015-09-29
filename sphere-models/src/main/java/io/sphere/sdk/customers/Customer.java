@@ -8,6 +8,7 @@ import io.sphere.sdk.customers.commands.CustomerPasswordResetCommand;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.Custom;
 
 import javax.annotation.Nullable;
 import java.time.LocalDate;
@@ -80,7 +81,7 @@ import java.util.Optional;
  * See {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand}.
  */
 @JsonDeserialize(as = CustomerImpl.class)
-public interface Customer extends Resource<Customer> {
+public interface Customer extends Resource<Customer>, Custom {
     @Nullable
     String getCustomerNumber();
 
@@ -151,9 +152,22 @@ public interface Customer extends Resource<Customer> {
 
     @Override
     default Reference<Customer> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    static String resourceTypeId(){
+        return "customer";
+    }
+
+    static String referenceTypeId(){
+        return "customer";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "customer";
     }

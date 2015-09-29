@@ -54,7 +54,7 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
 
     @Override
     public Reference<Message> toReference() {
-        return Reference.of(Message.typeId(), getId(), this);
+        return Reference.of(Message.referenceTypeId(), getId(), this);
     }
 
     @SuppressWarnings("unchecked")

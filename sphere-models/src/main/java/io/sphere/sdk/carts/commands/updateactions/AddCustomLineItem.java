@@ -7,7 +7,9 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.taxcategories.TaxCategory;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
+import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 
 /**
@@ -23,22 +25,25 @@ public class AddCustomLineItem extends UpdateActionImpl<Cart> {
     private final MonetaryAmount money;
     private final String slug;
     private final Reference<TaxCategory> taxCategory;
+    @Nullable
+    private final CustomFieldsDraft custom;
 
     private AddCustomLineItem(final LocalizedString name, final String slug,
                               final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
-                              final Long quantity) {
+                              final Long quantity, @Nullable final CustomFieldsDraft custom) {
         super("addCustomLineItem");
         this.name = name;
         this.quantity = quantity;
         this.money = money;
         this.slug = slug;
+        this.custom = custom;
         this.taxCategory = taxCategory.toReference();
     }
 
     public static AddCustomLineItem of(final LocalizedString name, final String slug,
                                        final MonetaryAmount money, final Referenceable<TaxCategory> taxCategory,
                                        final long quantity) {
-        return new AddCustomLineItem(name, slug, money, taxCategory, quantity);
+        return new AddCustomLineItem(name, slug, money, taxCategory, quantity, null);
     }
 
     public static AddCustomLineItem of(final CustomLineItemDraft draft) {
@@ -64,5 +69,14 @@ public class AddCustomLineItem extends UpdateActionImpl<Cart> {
 
     public Reference<TaxCategory> getTaxCategory() {
         return taxCategory;
+    }
+
+    @Nullable
+    public CustomFieldsDraft getCustom() {
+        return custom;
+    }
+
+    public AddCustomLineItem withCustom(final CustomFieldsDraft custom) {
+        return new AddCustomLineItem(getName(), getSlug(), getMoney(), getTaxCategory(), getQuantity(), custom);
     }
 }

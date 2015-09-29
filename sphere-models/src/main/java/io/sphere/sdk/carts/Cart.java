@@ -7,6 +7,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -15,7 +16,20 @@ import java.util.List;
 @JsonDeserialize(as=CartImpl.class)
 public interface Cart extends CartLike<Cart> {
 
-    static String typeId(){
+    static String resourceTypeId() {
+        return "order";//sic http://dev.sphere.io/http-api-projects-custom-fields.html#customizable-resource
+    }
+
+    static String referenceTypeId() {
+        return "cart";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
+    static String typeId() {
         return "cart";
     }
 
@@ -30,7 +44,7 @@ public interface Cart extends CartLike<Cart> {
 
     @Override
     default Reference<Cart> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
     CartState getCartState();
@@ -79,4 +93,8 @@ public interface Cart extends CartLike<Cart> {
 
     @Override
     List<DiscountCodeInfo> getDiscountCodes();
+
+    @Nullable
+    @Override
+    CustomFields getCustom();
 }

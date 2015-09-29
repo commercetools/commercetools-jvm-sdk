@@ -6,6 +6,7 @@ import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.SdkDefaults;
+import io.sphere.sdk.types.CustomFields;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nullable;
@@ -40,9 +41,11 @@ class CustomerImpl extends ResourceImpl<Customer> implements Customer {
     private final String vatId;
     @Nullable
     private final LocalDate dateOfBirth;
+    @Nullable
+    private final CustomFields custom;
 
     @JsonCreator
-    public CustomerImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String customerNumber, final String email, final String firstName, final String lastName, final String password, final String middleName, final String title, final List<Address> addresses, final String defaultShippingAddressId, final String defaultBillingAddressId, final Boolean isEmailVerified, final String externalId, final Reference<CustomerGroup> customerGroup, final String companyName,  final String vatId, final LocalDate dateOfBirth) {
+    public CustomerImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final String customerNumber, final String email, final String firstName, final String lastName, final String password, final String middleName, final String title, final List<Address> addresses, final String defaultShippingAddressId, final String defaultBillingAddressId, final Boolean isEmailVerified, final String externalId, final Reference<CustomerGroup> customerGroup, final String companyName, final String vatId, final LocalDate dateOfBirth, final CustomFields custom) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerNumber = customerNumber;
         this.email = email;
@@ -60,6 +63,7 @@ class CustomerImpl extends ResourceImpl<Customer> implements Customer {
         this.companyName = companyName;
         this.vatId = vatId;
         this.dateOfBirth = dateOfBirth;
+        this.custom = custom;
     }
 
     @Override
@@ -151,13 +155,19 @@ class CustomerImpl extends ResourceImpl<Customer> implements Customer {
         return dateOfBirth;
     }
 
+    @Override
+    @Nullable
+    public CustomFields getCustom() {
+        return custom;
+    }
+
     //it is final to prevent subclasses to log the password
     @Override
     public final String toString() {
         final Customer out = new CustomerImpl(getId(), getVersion(), getCreatedAt(), getLastModifiedAt(),
                 customerNumber, email, firstName, lastName, "**removed from output**", middleName,
                 title, addresses, defaultShippingAddressId, defaultBillingAddressId,
-                isEmailVerified, externalId, customerGroup, companyName, vatId, dateOfBirth);
+                isEmailVerified, externalId, customerGroup, companyName, vatId, dateOfBirth, custom);
         return ToStringBuilder.reflectionToString(out, SdkDefaults.TO_STRING_STYLE);
     }
 }

@@ -8,16 +8,29 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @JsonDeserialize(as=OrderImpl.class)
 public interface Order extends CartLike<Order> {
+    static String resourceTypeId() {
+        return "order";
+    }
+
+    static String referenceTypeId(){
+        return "order";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "order";
     }
@@ -33,7 +46,7 @@ public interface Order extends CartLike<Order> {
 
     @Override
     default Reference<Order> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
     @Nullable
@@ -107,4 +120,8 @@ public interface Order extends CartLike<Order> {
 
     @Override
     List<DiscountCodeInfo> getDiscountCodes();
+
+    @Nullable
+    @Override
+    CustomFields getCustom();
 }

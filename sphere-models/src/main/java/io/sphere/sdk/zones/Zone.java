@@ -24,9 +24,18 @@ public interface Zone extends Resource<Zone> {
 
     @Override
     default Reference<Zone> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    static String referenceTypeId(){
+        return "zone";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "zone";
     }

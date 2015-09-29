@@ -4,6 +4,7 @@ import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
+import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 
@@ -23,16 +24,20 @@ public class CategoryDraft extends Base implements WithLocalizedSlug {
     private final String orderHint;
     @Nullable
     private final String externalId;
+    @Nullable
+    private final CustomFieldsDraft custom;
 
     CategoryDraft(final LocalizedString name, final LocalizedString slug,
                   @Nullable final LocalizedString description, @Nullable final Reference<Category> parent,
-                  @Nullable final String orderHint, @Nullable final String externalId) {
+                  @Nullable final String orderHint, @Nullable final String externalId,
+                  @Nullable final CustomFieldsDraft custom) {
         this.name = name;
         this.slug = slug;
         this.description = description;
         this.parent = parent;
         this.orderHint = orderHint;
         this.externalId = externalId;
+        this.custom = custom;
     }
 
     public LocalizedString getName() {
@@ -62,5 +67,10 @@ public class CategoryDraft extends Base implements WithLocalizedSlug {
     @Nullable
     public String getExternalId() {
         return externalId;
+    }
+
+    @Nullable
+    public CustomFieldsDraft getCustom() {
+        return custom;
     }
 }

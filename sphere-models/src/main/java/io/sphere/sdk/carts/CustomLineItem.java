@@ -5,6 +5,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -30,4 +31,11 @@ public interface CustomLineItem extends LineItemLike {
 
     @Override
     Long getQuantity();
+
+    @Override
+    CustomFields getCustom();
+
+    static String resourceTypeId() {
+        return "custom-line-item";
+    }
 }

@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.util.Set;
@@ -41,4 +42,11 @@ public interface LineItem extends LineItemLike {
 
     @Override
     Long getQuantity();
+
+    @Override
+    CustomFields getCustom();
+
+    static String resourceTypeId() {
+        return "line-item";
+    }
 }

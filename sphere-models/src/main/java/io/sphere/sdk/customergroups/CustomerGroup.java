@@ -12,9 +12,18 @@ public interface CustomerGroup extends Resource<CustomerGroup> {
 
     @Override
     default Reference<CustomerGroup> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    static String referenceTypeId() {
+        return "customer-group";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "customer-group";
     }

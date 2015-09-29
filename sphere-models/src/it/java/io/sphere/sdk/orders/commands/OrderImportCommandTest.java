@@ -15,6 +15,7 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
+import io.sphere.sdk.types.CustomFields;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -238,6 +239,11 @@ public class OrderImportCommandTest extends IntegrationTest {
 
                     @Override
                     public DiscountedLineItemPrice getDiscountedPrice() {
+                        return null;
+                    }
+
+                    @Override
+                    public CustomFields getCustom() {
                         return null;
                     }
                 }, 5);

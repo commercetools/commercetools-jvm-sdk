@@ -4,6 +4,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.types.Custom;
+import io.sphere.sdk.types.CustomFields;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nullable;
@@ -22,7 +24,7 @@ import static io.sphere.sdk.utils.ListUtils.join;
  * </ul>
  */
 @JsonDeserialize(as=CategoryImpl.class)
-public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes {
+public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {
 
     LocalizedString getName();
 
@@ -54,17 +56,33 @@ public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAtt
     @Override
     LocalizedString getMetaKeywords();
 
+    @Nullable
+    CustomFields getCustom();
+
     @Override
     default Reference<Category> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    static String resourceTypeId() {
+        return "category";
+    }
+
+    static String referenceTypeId() {
+        return "category";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "category";
     }
 
     static Reference<Category> reference(final String id) {
-        return Reference.of(typeId(), id);
+        return Reference.of(referenceTypeId(), id);
     }
 
 

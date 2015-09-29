@@ -6,6 +6,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -18,18 +19,21 @@ final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineIte
     private final Reference<TaxCategory> taxCategory;
     @Nullable
     private final TaxRate taxRate;
+    @Nullable
+    private final CustomFields custom;
 
     @JsonCreator
     CustomLineItemImpl(final String id, final LocalizedString name, final MonetaryAmount money,
                        final String slug, final Long quantity, final Set<ItemState> state,
                        final Reference<TaxCategory> taxCategory, final TaxRate taxRate,
-                       @Nullable final DiscountedLineItemPrice discountedPrice) {
+                       @Nullable final DiscountedLineItemPrice discountedPrice, @Nullable final CustomFields custom) {
         super(id, state, quantity, discountedPrice);
         this.name = name;
         this.money = money;
         this.slug = slug;
         this.taxCategory = taxCategory;
         this.taxRate = taxRate;
+        this.custom = custom;
     }
 
     @Override
@@ -56,5 +60,11 @@ final class CustomLineItemImpl extends LineItemLikeImpl implements CustomLineIte
     @Nullable
     public TaxRate getTaxRate() {
         return taxRate;
+    }
+
+    @Override
+    @Nullable
+    public CustomFields getCustom() {
+        return custom;
     }
 }

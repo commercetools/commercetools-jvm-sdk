@@ -92,8 +92,6 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
         return this;
     }
 
-
-
     public CategoryBuilder metaTitle(@Nullable final LocalizedString metaTitle) {
         this.metaTitle = metaTitle;
         return getThis();
@@ -104,7 +102,6 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
         return getThis();
     }
 
-
     public CategoryBuilder metaKeywords(@Nullable final LocalizedString metaKeywords) {
         this.metaKeywords = metaKeywords;
         return getThis();
@@ -112,7 +109,7 @@ public final class CategoryBuilder extends Base implements Builder<Category> {
 
     @Override
     public Category build() {
-        return new CategoryImpl(id, version, createdAt, lastModifiedAt, name, slug, description, ancestors, parent, orderHint, externalId, metaTitle, metaDescription, metaKeywords);
+        return new CategoryImpl(id, version, createdAt, lastModifiedAt, name, slug, description, ancestors, parent, orderHint, externalId, metaTitle, metaDescription, metaKeywords, null);
     }
 
     protected CategoryBuilder getThis() {
