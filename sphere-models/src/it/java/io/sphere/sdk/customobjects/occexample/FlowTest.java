@@ -24,7 +24,7 @@ public class FlowTest extends IntegrationTest {
     @Before
     public void setUp() throws Exception {
         final CustomObjectByKeyGet<JsonNode> fetchByKey = CustomObjectByKeyGet.ofJsonNode(CONTAINER, KEY);
-        Optional.ofNullable(execute(fetchByKey)).ifPresent(o -> execute(CustomObjectDeleteCommand.of(o)));
+        Optional.ofNullable(execute(fetchByKey)).ifPresent(o -> execute(CustomObjectDeleteCommand.ofJsonNode(o)));
     }
 
     @Test

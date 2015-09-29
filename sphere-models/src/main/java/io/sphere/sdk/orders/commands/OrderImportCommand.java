@@ -1,6 +1,6 @@
 package io.sphere.sdk.orders.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.json.SphereJsonUtils;
@@ -20,8 +20,8 @@ public final class OrderImportCommand extends CommandImpl<Order> {
     }
 
     @Override
-    protected TypeReference<Order> typeReference() {
-        return Order.typeReference();
+    protected JavaType jacksonJavaType() {
+        return SphereJsonUtils.convertToJavaType(Order.typeReference());
     }
 
     @Override

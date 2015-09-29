@@ -1,9 +1,10 @@
 package io.sphere.sdk.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.http.HttpMethod;
 import io.sphere.sdk.client.JsonEndpoint;
+import io.sphere.sdk.json.SphereJsonUtils;
 
 import static io.sphere.sdk.json.SphereJsonUtils.toJsonString;
 import static java.util.Objects.requireNonNull;
@@ -38,7 +39,7 @@ public abstract class CreateCommandImpl<T, C> extends CommandImpl<T> implements 
     }
 
     @Override
-    protected TypeReference<T> typeReference() {
-        return endpoint.typeReference();
+    protected JavaType jacksonJavaType() {
+        return SphereJsonUtils.convertToJavaType(endpoint.typeReference());
     }
 }

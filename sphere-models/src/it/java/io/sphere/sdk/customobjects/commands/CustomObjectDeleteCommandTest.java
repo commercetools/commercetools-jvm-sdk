@@ -18,12 +18,12 @@ public class CustomObjectDeleteCommandTest extends IntegrationTest {
 
     @Test
     public void deletionWithoutTypeReference() throws Exception {
-        testOmitResult(customObject -> CustomObjectDeleteCommand.of(customObject.getContainer(), customObject.getKey()));
+        testOmitResult(customObject -> CustomObjectDeleteCommand.ofJsonNode(customObject.getContainer(), customObject.getKey()));
     }
 
     @Test
     public void deletionWithoutTypeReferenceAsObject() throws Exception {
-        testOmitResult(customObject -> CustomObjectDeleteCommand.of(customObject));
+        testOmitResult(customObject -> CustomObjectDeleteCommand.ofJsonNode(customObject));
     }
 
     private void testOmitResult(final Function<CustomObject<String>, DeleteCommand<CustomObject<JsonNode>>> f) {

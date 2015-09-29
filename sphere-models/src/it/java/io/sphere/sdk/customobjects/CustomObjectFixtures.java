@@ -21,7 +21,7 @@ public class CustomObjectFixtures {
     public static void withCustomObject(final TestClient client, final Consumer<CustomObject<Foo>> consumer) {
         final CustomObject<Foo> customObject = createCustomObject(client);
         consumer.accept(customObject);
-        final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.customObjectTypeReference());
+        final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.typeReference());
         client.execute(deleteCommand);
     }
 
@@ -45,7 +45,7 @@ public class CustomObjectFixtures {
     public static void withCustomObject(final TestClient client, final String container, final String key, final Consumer<CustomObject<Foo>> consumer) {
         final CustomObject<Foo> customObject = createCustomObjectOfContainerAndKey(client, container, key);
         consumer.accept(customObject);
-        final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.customObjectTypeReference());
+        final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.typeReference());
         client.execute(deleteCommand);
     }
 
@@ -64,9 +64,7 @@ public class CustomObjectFixtures {
                 .forEach(item -> {
                     //there is a bug that you can create custom objects with spaces in the container
                     if (!item.getContainer().contains(" ") && !item.getKey().contains(" ")) {
-                        final TypeReference<CustomObject<JsonNode>> typeReference = new TypeReference<CustomObject<JsonNode>>() {
-                        };
-                        final DeleteCommand<CustomObject<JsonNode>> command = CustomObjectDeleteCommand.of(item, typeReference);
+                        final DeleteCommand<CustomObject<JsonNode>> command = CustomObjectDeleteCommand.ofJsonNode(item);
                         client.execute(command);
                     }
                 });

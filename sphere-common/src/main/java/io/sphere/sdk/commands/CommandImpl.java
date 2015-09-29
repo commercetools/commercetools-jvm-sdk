@@ -1,6 +1,6 @@
 package io.sphere.sdk.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.http.HttpResponse;
 
@@ -13,8 +13,8 @@ import io.sphere.sdk.http.HttpResponse;
 public abstract class CommandImpl<T> extends SphereRequestBase implements Command<T> {
     @Override
     public T deserialize(final HttpResponse httpResponse) {
-        return deserialize(httpResponse, typeReference());
+        return deserialize(httpResponse, jacksonJavaType());
     }
 
-    protected abstract TypeReference<T> typeReference();
+    protected abstract JavaType jacksonJavaType();
 }

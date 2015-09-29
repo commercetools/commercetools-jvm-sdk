@@ -4,34 +4,68 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.json.TypeReferences;
 
 /**
  * Deletes a custom object in SPHERE.IO.
- *
- *
+ * @param <T> type of the value of the custom object
  */
-public interface CustomObjectDeleteCommand<T extends CustomObject<?>> extends DeleteCommand<T> {
-    static <T extends CustomObject<?>> DeleteCommand<T> of(final T customObject, final TypeReference<T> typeReference) {
+public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject<T>> {
+    /**
+     * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code typeReference}specified value type.
+     * @param customObject the custom object to delete
+     * @return custom object with a JsonNode value
+     */
+    static <T> DeleteCommand<CustomObject<T>> of(final CustomObject<T> customObject, final TypeReference<T> typeReference) {
         return of(customObject.getContainer(), customObject.getKey(), typeReference);
     }
 
-    static <T extends CustomObject<?>> DeleteCommand<T> of(final String container, final String key, final TypeReference<T> typeReference) {
+    /**
+     * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code typeReference}specified value type.
+     * @param container the container name of the custom object to delete
+     * @param key the key name of the custom object to delete
+     * @return custom object with a JsonNode value
+     */
+    static <T> DeleteCommand<CustomObject<T>> of(final String container, final String key, final TypeReference<T> typeReference) {
         return new CustomObjectDeleteCommandImpl<>(container, key, typeReference);
     }
 
     /**
-     * Deletes a custom object. Convenience method to not specify the {@link com.fasterxml.jackson.core.type.TypeReference} but lacking the accessible value in the result.
+     * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with a JsonNode value type.
+     * Convenience method to not specify the {@link com.fasterxml.jackson.core.type.TypeReference} but lacking the accessible value in the result.
      * @param customObject the custom object to delete
-     * @param <T> the type of the whole custom object
-     * @return custom object only with meta data
+     * @return custom object with a JsonNode value
      */
-    static <T extends CustomObject<?>> DeleteCommand<CustomObject<JsonNode>> of(final T customObject) {
-        return of(customObject.getContainer(), customObject.getKey());
+    static DeleteCommand<CustomObject<JsonNode>> ofJsonNode(final CustomObject<?> customObject) {
+        return ofJsonNode(customObject.getContainer(), customObject.getKey());
     }
 
-    static DeleteCommand<CustomObject<JsonNode>> of(final String container, final String key) {
-        return new CustomObjectDeleteCommandImpl<>(container, key, new TypeReference<CustomObject<JsonNode>>() {
+    /**
+     *
+     * @deprecated use {@link #ofJsonNode(CustomObject)} instead
+     */
+    @Deprecated
+    static DeleteCommand<CustomObject<JsonNode>> of(final CustomObject<?> customObject) {
+        return ofJsonNode(customObject);
+    }
 
-        });
+    /**
+     * Deletes a custom object without optimistic concurrency control and returns the old custom object with a JsonNode value type.
+     * Convenience method to not specify the {@link com.fasterxml.jackson.core.type.TypeReference} but lacking the accessible value in the result.
+     * @param container the container name of the custom object to delete
+     * @param key the key name of the custom object to delete
+     * @return custom object with a JsonNode value
+     */
+    static DeleteCommand<CustomObject<JsonNode>> ofJsonNode(final String container, final String key) {
+        return new CustomObjectDeleteCommandImpl<>(container, key, TypeReferences.jsonNodeTypeReference());
+    }
+
+    /**
+     *
+     * @deprecated use {@link #ofJsonNode(String, String)} instead
+     */
+    @Deprecated
+    static DeleteCommand<CustomObject<JsonNode>> of(final String container, final String key) {
+        return ofJsonNode(container, key);
     }
 }

@@ -1,6 +1,6 @@
 package io.sphere.sdk.customers.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.CustomerSignInResult;
@@ -45,8 +45,8 @@ public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResul
     }
 
     @Override
-    protected TypeReference<CustomerSignInResult> typeReference() {
-        return CustomerSignInResult.typeReference();
+    protected JavaType jacksonJavaType() {
+        return SphereJsonUtils.convertToJavaType(CustomerSignInResult.typeReference());
     }
 
     @Override

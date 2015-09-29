@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
@@ -205,6 +206,11 @@ final public class SphereJsonUtils {
      */
     public static ObjectNode newObjectNode() {
         return objectMapper.createObjectNode();
+    }
+
+    public static <T> JavaType convertToJavaType(final TypeReference<T> typeReference) {
+        final TypeFactory typeFactory = TypeFactory.defaultInstance();
+        return typeFactory.constructType(typeReference);
     }
 
     /** Very simple way to "erase" passwords -
