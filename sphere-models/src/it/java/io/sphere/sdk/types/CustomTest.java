@@ -7,6 +7,8 @@ import io.sphere.sdk.categories.CategoryDraftBuilder;
 import io.sphere.sdk.categories.CategoryFixtures;
 import io.sphere.sdk.categories.commands.CategoryCreateCommand;
 import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
+import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
+import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
 import io.sphere.sdk.categories.queries.CategoryQuery;
 import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.models.Reference;
@@ -23,8 +25,8 @@ import java.util.Map;
 import java.util.Set;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.assertj.core.api.StrictAssertions.assertThat;
-import static org.assertj.core.api.StrictAssertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CustomTest extends IntegrationTest {
     private static Type type;
@@ -38,35 +40,15 @@ public class CustomTest extends IntegrationTest {
 
     @Test
     public void createCategoryWithType() throws Exception {
-        final Map<String, Object> fieldValues = new HashMap<>();
-        fieldValues.put("state", "published");//in the type it was enum, but for enums only keys are set
-        fieldValues.put("imageUrl", "http://www.commercetools.com/assets/img/CT-logo.svg");
-        final Set<Reference<Category>> relatedCategories =
-                new HashSet<>(asList(category1.toReference(), category2.toReference()));
-        fieldValues.put("relatedCategories", relatedCategories);
+        final Category category =
+                CreateCategoryWithTypeDemo.createCategoryWithType(client(), category1, category2);
+        execute(CategoryDeleteCommand.of(category));
+    }
 
-        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug())
-                .custom(CustomFieldsDraft.ofTypeKeyAndObjects("category-customtype-key", fieldValues))
-                .build();
-        final Category category = execute(CategoryCreateCommand.of(categoryDraft));
-
-        final CustomFields custom = category.getCustom();
-        assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");
-        assertThat(custom.getFieldAsString("imageUrl"))
-                .isEqualTo("http://www.commercetools.com/assets/img/CT-logo.svg");
-        final TypeReference<Set<Reference<Category>>> typeReference =
-                new TypeReference<Set<Reference<Category>>>() { };
-        assertThat(custom.getField("relatedCategories", typeReference))
-                .isEqualTo(relatedCategories);
-        //error cases
-        assertThat(custom.getFieldAsString("notpresent"))
-                .overridingErrorMessage("missing fields are null")
-                .isNull();
-        assertThatThrownBy(() -> custom.getFieldAsString("relatedCategories"))
-                .overridingErrorMessage("present field with wrong type causes exception")
-                .isInstanceOf(JsonException.class);
-
-        //end example parsing here
+    @Test
+    public void assignTypeInUpdateAction() throws Exception {
+        final Category category = TypeAssigningInUpdateActionDemo
+                .updateCategoryWithType(client(), category1, category2);
         execute(CategoryDeleteCommand.of(category));
     }
 

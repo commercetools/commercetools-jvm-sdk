@@ -27,7 +27,7 @@ import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.*;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.StrictAssertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class CategoriesCustomFieldsTest extends IntegrationTest {
     public static final Map<String, Object> CUSTOM_FIELDS_MAP = Collections.singletonMap(STRING_FIELD_NAME, "hello");
