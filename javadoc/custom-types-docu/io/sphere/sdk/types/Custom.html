@@ -111,10 +111,10 @@ var activeTableTab = "activeTableTab";
 
  <p>In the example scenario we create a type for categories.</p>
 
- The type will contain:
+ The example type will contain:
  <ul>
-    <li>an enum field <code>state</code> to indicate the state of of the category like "published" and "draft"</li>
-    <li>a String field <code>imageUrl</code> to show an icon for the category</li>
+    <li>an enum field <em><code>state</code></em> to indicate the state of of the category like "published" and "draft"</li>
+    <li>a String field <strong><code>imageUrl</code></strong> to show an icon for the category</li>
     <li>a set field with category references <code>relatedCategories</code> to suggest other categories with accessoires for example</li>
  </ul>
 
@@ -326,9 +326,45 @@ import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/UpdateFieldValueDemo.java" target="_blank">test code</a>.</pre></div>
 
- <h3 id="unassign-existing-object-with-type">Unassign a type to an object in an update action</h3>
+ <h3 id="unassign-existing-object-with-type">Unassign a type</h3>
+
+ <div id="io-sphere-sdk-types-RemoveTypeFromObjectDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
+import io.sphere.sdk.client.TestClient;
+import static org.assertj.core.api.Assertions.assertThat;
+</code></pre><pre><code class='java'>public class RemoveTypeFromObjectDemo {
+    public static Category removeTypeFromCategory(final TestClient client, final Category category) {
+        assertThat(category.getCustom()).isNotNull();
+
+        final CategoryUpdateCommand command = CategoryUpdateCommand
+                .of(category, SetCustomType.ofRemoveType());
+        final Category updatedCategory = client.execute(command);
+
+        assertThat(updatedCategory.getCustom()).isNull();
+
+        return updatedCategory;
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/RemoveTypeFromObjectDemo.java" target="_blank">test code</a>.</pre></div>
+
  <h3 id="update-type">Update a type</h3>
- <h3 id="delete-type">Delete a type</h3></div>
+
+ <p>Have a look at <a href="../../../../io/sphere/sdk/types/commands/TypeUpdateCommand.html" title="interface in io.sphere.sdk.types.commands"><code>TypeUpdateCommand</code></a>.</p>
+
+ Example for updating the description:
+
+ <div id="io-sphere-sdk-types-commands-TypeUpdateCommandTest-setDescription--%s" class=code-example><pre><code class='java'>withUpdateableType(client(), type -&gt; {
+    final LocalizedString newDescription = randomSlug();
+    final Type updatedType = execute(TypeUpdateCommand.of(type, SetDescription.of(newDescription)));
+    assertThat(updatedType.getDescription()).isEqualTo(newDescription);
+    return updatedType;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/commands/TypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h3 id="delete-type">Delete a type</h3>
+
+ See <a href="../../../../io/sphere/sdk/types/commands/TypeDeleteCommand.html" title="interface in io.sphere.sdk.types.commands"><code>TypeDeleteCommand</code></a>.</div>
 </li>
 </ul>
 </div>
