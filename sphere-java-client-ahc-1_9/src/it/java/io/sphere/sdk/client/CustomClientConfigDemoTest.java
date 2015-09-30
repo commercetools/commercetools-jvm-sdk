@@ -20,7 +20,7 @@ public class CustomClientConfigDemoTest {
                 .setEnabledProtocols(new String[]{"TLSv1.2"})//required
                 //examples for configuration
                 .setMaxConnections(500)
-                .setConnectTimeout(10)
+                .setConnectTimeout(100)
 //                .setProxyServer(proxy)
                 .build();
         final AsyncHttpClient asyncHttpClient = new AsyncHttpClient(httpClientConfig);
