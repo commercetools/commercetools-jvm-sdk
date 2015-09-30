@@ -4,6 +4,13 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.EnumValue;
 import io.sphere.sdk.types.Type;
 
+/**
+ Adds an a new {@link EnumValue} value to an {@link io.sphere.sdk.types.EnumType} field.
+
+ {@doc.gen intro}
+
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addEnumValue()}
+ */
 public class AddEnumValue extends UpdateActionImpl<Type> {
     private final String fieldName;
     private final EnumValue value;

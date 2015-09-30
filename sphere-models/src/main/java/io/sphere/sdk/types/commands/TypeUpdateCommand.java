@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ {@doc.gen list actions}
+ */
 public interface TypeUpdateCommand extends UpdateCommandDsl<Type, TypeUpdateCommand>, MetaModelExpansionDsl<Type, TypeUpdateCommand, TypeExpansionModel<Type>> {
     static TypeUpdateCommand of(final Versioned<Type> versioned, final UpdateAction<Type> updateAction) {
         return of(versioned, Collections.singletonList(updateAction));

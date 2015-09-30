@@ -4,6 +4,13 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.types.Type;
 
+/**
+Changes the label.
+
+ {@doc.gen intro}
+
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#changeLabel()}
+ */
 public class ChangeFieldDefinitionLabel extends UpdateActionImpl<Type> {
     private final String fieldName;
     private final LocalizedString label;

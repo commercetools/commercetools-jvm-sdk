@@ -4,6 +4,13 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedEnumValue;
 import io.sphere.sdk.types.Type;
 
+/**
+ Adds an a new {@link LocalizedEnumValue} value to an {@link io.sphere.sdk.types.LocalizedEnumType} field.
+
+ {@doc.gen intro}
+
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addLocalizedEnumValue()}
+ */
 public class AddLocalizedEnumValue extends UpdateActionImpl<Type> {
     private final String fieldName;
     private final LocalizedEnumValue value;

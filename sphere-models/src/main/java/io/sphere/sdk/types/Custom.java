@@ -12,10 +12,10 @@ import javax.annotation.Nullable;
 
  <p>In the example scenario we create a type for categories.</p>
 
- The type will contain:
+ The example type will contain:
  <ul>
-    <li>an enum field {@code state} to indicate the state of of the category like "published" and "draft"</li>
-    <li>a String field {@code imageUrl} to show an icon for the category</li>
+    <li>an enum field <em>{@code state}</em> to indicate the state of of the category like "published" and "draft"</li>
+    <li>a String field <strong>{@code imageUrl}</strong> to show an icon for the category</li>
     <li>a set field with category references {@code relatedCategories} to suggest other categories with accessoires for example</li>
  </ul>
 
@@ -49,10 +49,21 @@ import javax.annotation.Nullable;
 
  {@include.example io.sphere.sdk.types.UpdateFieldValueDemo}
 
- <h3 id="unassign-existing-object-with-type">Unassign a type to an object in an update action</h3>
+ <h3 id="unassign-existing-object-with-type">Unassign a type</h3>
+
+ {@include.example io.sphere.sdk.types.RemoveTypeFromObjectDemo}
+
  <h3 id="update-type">Update a type</h3>
+
+ <p>Have a look at {@link io.sphere.sdk.types.commands.TypeUpdateCommand}.</p>
+
+ Example for updating the description:
+
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#setDescription()}
+
  <h3 id="delete-type">Delete a type</h3>
 
+ See {@link io.sphere.sdk.types.commands.TypeDeleteCommand}.
 
 
 

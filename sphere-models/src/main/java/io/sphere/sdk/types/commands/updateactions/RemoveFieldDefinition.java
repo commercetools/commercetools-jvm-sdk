@@ -3,6 +3,13 @@ package io.sphere.sdk.types.commands.updateactions;
 import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.types.Type;
 
+/**
+ Removes a field definition from a type.
+
+ {@doc.gen intro}
+
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addFieldDefinition()}
+ */
 public class RemoveFieldDefinition extends UpdateActionImpl<Type> {
     private final String fieldName;
 
