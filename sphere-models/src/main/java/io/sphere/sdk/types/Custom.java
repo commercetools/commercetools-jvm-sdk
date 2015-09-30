@@ -39,12 +39,15 @@ import javax.annotation.Nullable;
 
  <h3 id="assign-existing-object-with-type">Assign a type to an object in an update action</h3>
 
- <p>Use update actions like {@link SetCustomType SetCustomType for categories}.</p>
+ <p>It is not necessary to assign a type to the object at it's creation. You can retrofit objects without a type by using update actions like {@link SetCustomType SetCustomType for categories}.</p>
 
  {@include.example io.sphere.sdk.types.TypeAssigningInUpdateActionDemo}
 
-
  <h3 id="update-field">Update a field</h3>
+
+ <p>By using update actions you can overwrite or erase the value of custom field.</p>
+
+ {@include.example io.sphere.sdk.types.UpdateFieldValueDemo}
 
  <h3 id="unassign-existing-object-with-type">Unassign a type to an object in an update action</h3>
  <h3 id="update-type">Update a type</h3>

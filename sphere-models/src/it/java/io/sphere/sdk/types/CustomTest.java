@@ -52,6 +52,14 @@ public class CustomTest extends IntegrationTest {
         execute(CategoryDeleteCommand.of(category));
     }
 
+    @Test
+    public void updateFieldValues() throws Exception {
+        final Category category =
+                CreateCategoryWithTypeDemo.createCategoryWithType(client(), category1, category2);
+        final Category updatedCategory = UpdateFieldValueDemo.updateFieldValues(client(), category);
+        execute(CategoryDeleteCommand.of(updatedCategory));
+    }
+
     @BeforeClass
     public static void setup() {
         execute(TypeQuery.of().withPredicates(type -> type.key().is("category-customtype-key")))

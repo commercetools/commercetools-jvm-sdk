@@ -19,7 +19,8 @@ import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static org.assertj.core.api.Assertions.*;
 
 public class CreateCategoryWithTypeDemo {
-    public static Category createCategoryWithType(final TestClient client, final Category category1, final Category category2) throws Exception {
+    public static Category createCategoryWithType(final TestClient client, final Category category1,
+                                                  final Category category2) throws Exception {
         final Map<String, Object> fieldValues = new HashMap<>();
         fieldValues.put("state", "published");//in the type it was enum, but for enums only keys are set
         fieldValues.put("imageUrl", "http://www.commercetools.com/assets/img/CT-logo.svg");
