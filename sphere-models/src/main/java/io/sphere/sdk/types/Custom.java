@@ -32,6 +32,14 @@ import javax.annotation.Nullable;
  <p>Execution example:</p>
  {@include.example io.sphere.sdk.types.CreateTypeDemo}
 
+ <h3 id="create-object-with-type">Assign a type to an object at the creation of the object</h3>
+
+ {@include.example io.sphere.sdk.types.CustomTest#createCategoryWithType()}
+
+ <h3 id="assign-existing-object-with-type">Assign a type to an object in an update action</h3>
+ <h3 id="update-type">Update a type</h3>
+ <h3 id="delete-type">Delete a type</h3>
+
 
 
 

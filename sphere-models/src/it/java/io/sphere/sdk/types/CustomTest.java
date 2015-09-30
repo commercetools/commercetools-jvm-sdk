@@ -1,40 +1,100 @@
 package io.sphere.sdk.types;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.client.TestClient;
-import io.sphere.sdk.models.EnumValue;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.TextInputHint;
+import io.sphere.sdk.categories.CategoryDraft;
+import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.categories.CategoryFixtures;
+import io.sphere.sdk.categories.commands.CategoryCreateCommand;
+import io.sphere.sdk.categories.commands.CategoryDeleteCommand;
+import io.sphere.sdk.categories.queries.CategoryQuery;
+import io.sphere.sdk.json.JsonException;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.types.commands.TypeCreateCommand;
 import io.sphere.sdk.types.commands.TypeDeleteCommand;
+import io.sphere.sdk.types.queries.TypeQuery;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.junit.Test;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.StrictAssertions.assertThat;
+import static org.assertj.core.api.StrictAssertions.assertThatThrownBy;
 
 public class CustomTest extends IntegrationTest {
     private static Type type;
+    private static Category category1;
+    private static Category category2;
 
     public static void deleteType() {
         execute(TypeDeleteCommand.of(type));
         //TODO only if no refs exist
     }
 
+    @Test
+    public void createCategoryWithType() throws Exception {
+        final Map<String, Object> fieldValues = new HashMap<>();
+        fieldValues.put("state", "published");//in the type it was enum, but for enums only keys are set
+        fieldValues.put("imageUrl", "http://www.commercetools.com/assets/img/CT-logo.svg");
+        final Set<Reference<Category>> relatedCategories =
+                new HashSet<>(asList(category1.toReference(), category2.toReference()));
+        fieldValues.put("relatedCategories", relatedCategories);
+
+        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug())
+                .custom(CustomFieldsDraft.ofTypeKeyAndObjects("category-customtype-key", fieldValues))
+                .build();
+        final Category category = execute(CategoryCreateCommand.of(categoryDraft));
+
+        final CustomFields custom = category.getCustom();
+        assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");
+        assertThat(custom.getFieldAsString("imageUrl"))
+                .isEqualTo("http://www.commercetools.com/assets/img/CT-logo.svg");
+        final TypeReference<Set<Reference<Category>>> typeReference =
+                new TypeReference<Set<Reference<Category>>>() { };
+        assertThat(custom.getField("relatedCategories", typeReference))
+                .isEqualTo(relatedCategories);
+        //error cases
+        assertThat(custom.getFieldAsString("notpresent"))
+                .overridingErrorMessage("missing fields are null")
+                .isNull();
+        assertThatThrownBy(() -> custom.getFieldAsString("relatedCategories"))
+                .overridingErrorMessage("present field with wrong type causes exception")
+                .isInstanceOf(JsonException.class);
+
+        //end example parsing here
+        execute(CategoryDeleteCommand.of(category));
+    }
 
     @BeforeClass
     public static void setup() {
+        execute(TypeQuery.of().withPredicates(type -> type.key().is("category-customtype-key")))
+                .getResults().forEach(type -> {
+            execute(CategoryQuery.of().withPredicates(category -> category.custom().type().is(type))).getResults().forEach(cat -> execute(CategoryDeleteCommand.of(cat)));
+            execute(TypeDeleteCommand.of(type));
+        });
         type = CreateTypeDemo.createType(client());
+        category1 = CategoryFixtures.createCategory(client());
+        category2 = CategoryFixtures.createCategory(client());
     }
 
     @AfterClass
-    public static void cleanUp() {
-        type = CreateTypeDemo.createType(client());
+    public static void cleanUpType() {
+        deleteType();
+        type = null;
+    }
+
+    @AfterClass
+    public static void cleanUpCategory1() {
+        execute(CategoryDeleteCommand.of(category1));
+    }
+
+    @AfterClass
+    public static void cleanUpCategory2() {
+        execute(CategoryDeleteCommand.of(category2));
     }
 }

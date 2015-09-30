@@ -54,8 +54,11 @@ public final class CreateTypeDemo {
     private static FieldDefinition relatedCategoriesFieldDefinition() {
         final LocalizedString relatedCategoriesLabel =
                 en("categories to suggest products similar to the current category");
+        //referenceTypeId is required to refere to categories
+        final String referenceTypeId = Category.referenceTypeId();
+        final SetType setType = SetType.of(ReferenceType.of(referenceTypeId));
         return FieldDefinition
-                .of(SetType.of(StringType.of()), "relatedCategories", relatedCategoriesLabel,
+                .of(setType, "relatedCategories", relatedCategoriesLabel,
                         false, TextInputHint.SINGLE_LINE);
     }
 }
