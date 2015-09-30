@@ -6,16 +6,14 @@ import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.queries.Query;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.slf4j.LoggerFactory;
 
 public abstract class IntegrationTest {
 
-    private static volatile int threadCountAtStart;
     private static TestClient client;
 
-    protected synchronized static TestClient client() {
+    public static void setupClient() {
         if (client == null) {
             final SphereClientConfig config = getSphereClientConfig();
             final HttpClient httpClient = newHttpClient();
@@ -23,6 +21,9 @@ public abstract class IntegrationTest {
             final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
             client = new TestClient(withMaybeDeprecationWarnTool(underlying));
         }
+    }
+
+    protected static TestClient client() {
         return client;
     }
 
@@ -60,33 +61,14 @@ public abstract class IntegrationTest {
         }
     }
 
-    @BeforeClass
-    public synchronized static void setup() {
-        threadCountAtStart = countThreads();
-    }
-
-    @AfterClass
     public synchronized static void shutdownClient() {
         if (client != null) {
             client.close();
             client = null;
-            final int threadsNow = countThreads();
-            /*
-            The buffer needs to be high since SBT runs tests for multiple projects in parallel
-             */
-            final long bufferForGcThreadAndSbt = 100;
-            final long allowedThreadCount = threadCountAtStart + bufferForGcThreadAndSbt;
-            if (threadsNow > allowedThreadCount) {
-                throw new RuntimeException("Thread leak! After client shutdown created threads are still alive. Threads now: " + threadsNow + " Threads before: " + threadCountAtStart);
-            }
         }
     }
 
     protected static <T> T getOrCreate(final SphereRequest<T> createCommand, final Query<T> query) {
         return execute(query).head().orElseGet(() -> execute(createCommand));
-    }
-
-    protected static int countThreads() {
-        return Thread.activeCount();
     }
 }
