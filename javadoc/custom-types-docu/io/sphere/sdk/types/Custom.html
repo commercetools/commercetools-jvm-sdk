@@ -181,12 +181,51 @@ import static io.sphere.sdk.test.SphereTestUtils.en;
     private static FieldDefinition relatedCategoriesFieldDefinition() {
         final LocalizedString relatedCategoriesLabel =
                 en("categories to suggest products similar to the current category");
+        //referenceTypeId is required to refere to categories
+        final String referenceTypeId = Category.referenceTypeId();
+        final SetType setType = SetType.of(ReferenceType.of(referenceTypeId));
         return FieldDefinition
-                .of(SetType.of(StringType.of()), "relatedCategories", relatedCategoriesLabel,
+                .of(setType, "relatedCategories", relatedCategoriesLabel,
                         false, TextInputHint.SINGLE_LINE);
     }
 }
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/CreateTypeDemo.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/CreateTypeDemo.java" target="_blank">test code</a>.</pre></div>
+
+ <h3 id="create-object-with-type">Assign a type to an object at the creation of the object</h3>
+
+ <div id="io-sphere-sdk-types-CustomTest-createCategoryWithType--%s" class=code-example><pre><code class='java'>final Map&lt;String, Object&gt; fieldValues = new HashMap&lt;&gt;();
+fieldValues.put("state", "published");//in the type it was enum, but for enums only keys are set
+fieldValues.put("imageUrl", "http://www.commercetools.com/assets/img/CT-logo.svg");
+final Set&lt;Reference&lt;Category&gt;&gt; relatedCategories =
+        new HashSet&lt;&gt;(asList(category1.toReference(), category2.toReference()));
+fieldValues.put("relatedCategories", relatedCategories);
+
+final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug())
+        .custom(CustomFieldsDraft.ofTypeKeyAndObjects("category-customtype-key", fieldValues))
+        .build();
+final Category category = execute(CategoryCreateCommand.of(categoryDraft));
+
+final CustomFields custom = category.getCustom();
+assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");
+assertThat(custom.getFieldAsString("imageUrl"))
+        .isEqualTo("http://www.commercetools.com/assets/img/CT-logo.svg");
+final TypeReference&lt;Set&lt;Reference&lt;Category&gt;&gt;&gt; typeReference =
+        new TypeReference&lt;Set&lt;Reference&lt;Category&gt;&gt;&gt;() { };
+assertThat(custom.getField("relatedCategories", typeReference))
+        .isEqualTo(relatedCategories);
+//error cases
+assertThat(custom.getFieldAsString("notpresent"))
+        .overridingErrorMessage("missing fields are null")
+        .isNull();
+assertThatThrownBy(() -&gt; custom.getFieldAsString("relatedCategories"))
+        .overridingErrorMessage("present field with wrong type causes exception")
+        .isInstanceOf(JsonException.class);
+
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/CustomTest.java" target="_blank">test code</a>.</pre></div>
+
+ <h3 id="assign-existing-object-with-type">Assign a type to an object in an update action</h3>
+ <h3 id="update-type">Update a type</h3>
+ <h3 id="delete-type">Delete a type</h3></div>
 </li>
 </ul>
 </div>

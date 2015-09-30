@@ -1254,6 +1254,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/CategoryDraftBuilder.html#custom-io.sphere.sdk.types.CustomFieldsDraft-">custom(CustomFieldsDraft)</a></span> - Method in class io.sphere.sdk.categories.<a href="io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories">CategoryDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html#custom--">custom()</a></span> - Method in class io.sphere.sdk.categories.queries.<a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerDraftBuilder.html#custom-io.sphere.sdk.types.CustomFieldsDraft-">custom(CustomFieldsDraft)</a></span> - Method in class io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers">CustomerDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><span class="typeNameLink">Custom</span></a> - Interface in <a href="io/sphere/sdk/types/package-summary.html">io.sphere.sdk.types</a></dt>
@@ -1473,6 +1475,12 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Command for creating or updating a custom object.</div>
 </dd>
+<dt><a href="io/sphere/sdk/types/queries/CustomQueryModel.html" title="interface in io.sphere.sdk.types.queries"><span class="typeNameLink">CustomQueryModel</span></a>&lt;<a href="io/sphere/sdk/types/queries/CustomQueryModel.html" title="type parameter in CustomQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/types/queries/package-summary.html">io.sphere.sdk.types.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/types/queries/CustomQueryModelImpl.html" title="class in io.sphere.sdk.types.queries"><span class="typeNameLink">CustomQueryModelImpl</span></a>&lt;<a href="io/sphere/sdk/types/queries/CustomQueryModelImpl.html" title="type parameter in CustomQueryModelImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/types/queries/package-summary.html">io.sphere.sdk.types.queries</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/queries/CustomQueryModelImpl.html#CustomQueryModelImpl-io.sphere.sdk.queries.QueryModel-java.lang.String-">CustomQueryModelImpl(QueryModel&lt;T&gt;, String)</a></span> - Constructor for class io.sphere.sdk.types.queries.<a href="io/sphere/sdk/types/queries/CustomQueryModelImpl.html" title="class in io.sphere.sdk.types.queries">CustomQueryModelImpl</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/tokenizer/CustomSuggestTokenizer.html" title="class in io.sphere.sdk.search.tokenizer"><span class="typeNameLink">CustomSuggestTokenizer</span></a> - Class in <a href="io/sphere/sdk/search/tokenizer/package-summary.html">io.sphere.sdk.search.tokenizer</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -2764,8 +2772,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/errors/RequiredField.html#getField--">getField()</a></span> - Method in class io.sphere.sdk.models.errors.<a href="io/sphere/sdk/models/errors/RequiredField.html" title="class in io.sphere.sdk.models.errors">RequiredField</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getField-java.lang.String-">getField(String)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getField-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">getField(String, TypeReference&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getFieldAsBoolean-java.lang.String-">getFieldAsBoolean(String)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
@@ -2779,6 +2785,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getFieldAsEnumKey-java.lang.String-">getFieldAsEnumKey(String)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getFieldAsInteger-java.lang.String-">getFieldAsInteger(String)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getFieldAsJsonNode-java.lang.String-">getFieldAsJsonNode(String)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFields.html#getFieldAsLocalizedEnumKey-java.lang.String-">getFieldAsLocalizedEnumKey(String)</a></span> - Method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></dt>
 <dd>&nbsp;</dd>
@@ -7307,8 +7315,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html#ofType-io.sphere.sdk.types.Type-">ofType(Type)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html" title="class in io.sphere.sdk.types">CustomFieldsDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeId-java.lang.String-java.util.Map-">ofTypeId(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html#ofTypeId-java.lang.String-">ofTypeId(String)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html" title="class in io.sphere.sdk.types">CustomFieldsDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomLineItemCustomType.html#ofTypeIdAndJson-java.lang.String-java.util.Map-java.lang.String-">ofTypeIdAndJson(String, Map&lt;String, JsonNode&gt;, String)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetCustomLineItemCustomType.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomLineItemCustomType</a></dt>
@@ -7326,6 +7332,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetCustomType.html#ofTypeIdAndJson-java.lang.String-java.util.Map-">ofTypeIdAndJson(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetCustomType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomType.html#ofTypeIdAndJson-java.lang.String-java.util.Map-java.lang.String-">ofTypeIdAndJson(String, Map&lt;String, JsonNode&gt;, String)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomType.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetLineItemCustomType</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeIdAndJson-java.lang.String-java.util.Map-">ofTypeIdAndJson(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomLineItemCustomType.html#ofTypeIdAndObjects-java.lang.String-java.util.Map-java.lang.String-">ofTypeIdAndObjects(String, Map&lt;String, Object&gt;, String)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetCustomLineItemCustomType.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomLineItemCustomType</a></dt>
 <dd>&nbsp;</dd>
@@ -7351,7 +7359,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomType.html#ofTypeIdAndObjects-java.lang.String-java.lang.String-java.lang.Object-java.lang.String-">ofTypeIdAndObjects(String, String, Object, String)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomType.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetLineItemCustomType</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeKey-java.lang.String-java.util.Map-">ofTypeKey(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeIdAndObjects-java.lang.String-java.util.Map-">ofTypeIdAndObjects(String, Map&lt;String, Object&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html#ofTypeKey-java.lang.String-">ofTypeKey(String)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraftBuilder.html" title="class in io.sphere.sdk.types">CustomFieldsDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -7371,6 +7379,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomType.html#ofTypeKeyAndJson-java.lang.String-java.util.Map-java.lang.String-">ofTypeKeyAndJson(String, Map&lt;String, JsonNode&gt;, String)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomType.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetLineItemCustomType</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeKeyAndJson-java.lang.String-java.util.Map-">ofTypeKeyAndJson(String, Map&lt;String, JsonNode&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomLineItemCustomType.html#ofTypeKeyAndObjects-java.lang.String-java.util.Map-java.lang.String-">ofTypeKeyAndObjects(String, Map&lt;String, Object&gt;, String)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetCustomLineItemCustomType.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomLineItemCustomType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomType.html#ofTypeKeyAndObjects-java.lang.String-java.util.Map-">ofTypeKeyAndObjects(String, Map&lt;String, Object&gt;)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomType</a></dt>
@@ -7386,6 +7396,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetCustomType.html#ofTypeKeyAndObjects-java.lang.String-java.util.Map-">ofTypeKeyAndObjects(String, Map&lt;String, Object&gt;)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetCustomType</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomType.html#ofTypeKeyAndObjects-java.lang.String-java.util.Map-java.lang.String-">ofTypeKeyAndObjects(String, Map&lt;String, Object&gt;, String)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomType.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetLineItemCustomType</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/CustomFieldsDraft.html#ofTypeKeyAndObjects-java.lang.String-java.util.Map-">ofTypeKeyAndObjects(String, Map&lt;String, Object&gt;)</a></span> - Static method in class io.sphere.sdk.types.<a href="io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/carts/commands/updateactions/SetCustomField.html#ofUnset-java.lang.String-">ofUnset(String)</a></span> - Static method in class io.sphere.sdk.carts.commands.updateactions.<a href="io/sphere/sdk/carts/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCustomField</a></dt>
 <dd>&nbsp;</dd>
@@ -9837,6 +9849,10 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html#type--">type()</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/AttributeDefinitionQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeDefinitionQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html#type--">type()</a></span> - Method in class io.sphere.sdk.producttypes.queries.<a href="io/sphere/sdk/producttypes/queries/AttributeTypeQueryModel.html" title="class in io.sphere.sdk.producttypes.queries">AttributeTypeQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/queries/CustomQueryModel.html#type--">type()</a></span> - Method in interface io.sphere.sdk.types.queries.<a href="io/sphere/sdk/types/queries/CustomQueryModel.html" title="interface in io.sphere.sdk.types.queries">CustomQueryModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/types/queries/CustomQueryModelImpl.html#type--">type()</a></span> - Method in class io.sphere.sdk.types.queries.<a href="io/sphere/sdk/types/queries/CustomQueryModelImpl.html" title="class in io.sphere.sdk.types.queries">CustomQueryModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><span class="typeNameLink">Type</span></a> - Interface in <a href="io/sphere/sdk/types/package-summary.html">io.sphere.sdk.types</a></dt>
 <dd>&nbsp;</dd>
