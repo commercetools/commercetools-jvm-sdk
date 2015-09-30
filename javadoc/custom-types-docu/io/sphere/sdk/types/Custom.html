@@ -209,7 +209,8 @@ import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static org.assertj.core.api.Assertions.*;
 </code></pre><pre><code class='java'>public class CreateCategoryWithTypeDemo {
-    public static Category createCategoryWithType(final TestClient client, final Category category1, final Category category2) throws Exception {
+    public static Category createCategoryWithType(final TestClient client, final Category category1,
+                                                  final Category category2) throws Exception {
         final Map&lt;String, Object&gt; fieldValues = new HashMap&lt;&gt;();
         fieldValues.put("state", "published");//in the type it was enum, but for enums only keys are set
         fieldValues.put("imageUrl", "http://www.commercetools.com/assets/img/CT-logo.svg");
@@ -245,7 +246,7 @@ import static org.assertj.core.api.Assertions.*;
 
  <h3 id="assign-existing-object-with-type">Assign a type to an object in an update action</h3>
 
- <p>Use update actions like <a href="../../../../io/sphere/sdk/categories/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.categories.commands.updateactions"><code>SetCustomType for categories</code></a>.</p>
+ <p>It is not necessary to assign a type to the object at it's creation. You can retrofit objects without a type by using update actions like <a href="../../../../io/sphere/sdk/categories/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.categories.commands.updateactions"><code>SetCustomType for categories</code></a>.</p>
 
  <div id="io-sphere-sdk-types-TypeAssigningInUpdateActionDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.categories.Category;
@@ -261,7 +262,8 @@ import java.util.Set;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 </code></pre><pre><code class='java'>public class TypeAssigningInUpdateActionDemo {
-    public static Category updateCategoryWithType(final TestClient client, final Category category1, final Category category2) {
+    public static Category updateCategoryWithType(final TestClient client, final Category category1,
+                                                  final Category category2) {
         final Category category =
                 CategoryFixtures.createCategory(client);
 
@@ -274,7 +276,9 @@ import static org.assertj.core.api.Assertions.assertThat;
                 new HashSet&lt;&gt;(asList(category1.toReference(), category2.toReference()));
         fieldValues.put("relatedCategories", relatedCategories);
 
-        final Category updatedCategory = client.execute(CategoryUpdateCommand.of(category, SetCustomType.ofTypeKeyAndObjects("category-customtype-key", fieldValues)));
+        final SetCustomType action = SetCustomType
+                .ofTypeKeyAndObjects("category-customtype-key", fieldValues);
+        final Category updatedCategory = client.execute(CategoryUpdateCommand.of(category, action));
 
         final CustomFields custom = updatedCategory.getCustom();
         assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");
@@ -290,8 +294,37 @@ import static org.assertj.core.api.Assertions.assertThat;
 }
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/TypeAssigningInUpdateActionDemo.java" target="_blank">test code</a>.</pre></div>
 
-
  <h3 id="update-field">Update a field</h3>
+
+ <p>By using update actions you can overwrite or erase the value of custom field.</p>
+
+ <div id="io-sphere-sdk-types-UpdateFieldValueDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.categories.commands.updateactions.SetCustomField;
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
+import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.commands.UpdateAction;
+import java.util.List;
+import static java.util.Arrays.asList;
+import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+</code></pre><pre><code class='java'>public class UpdateFieldValueDemo {
+    public static Category updateFieldValues(final TestClient client, final Category category) {
+        assertThat(category.getCustom().getFieldAsEnumKey("state")).isEqualTo("published");
+
+        final List&lt;? extends UpdateAction&lt;Category&gt;&gt; updateActions = asList(
+                SetCustomField.ofObject("state", "draft"),//set new value
+                SetCustomField.ofObject("imageUrl", null)//remove value
+        );
+
+        final Category updatedCategory = client.execute(CategoryUpdateCommand.of(category, updateActions));
+
+        final CustomFields custom = updatedCategory.getCustom();
+        assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("draft");
+        assertThat(custom.getFieldAsString("imageUrl")).isNull();
+
+        return updatedCategory;
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/UpdateFieldValueDemo.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="unassign-existing-object-with-type">Unassign a type to an object in an update action</h3>
  <h3 id="update-type">Update a type</h3>
