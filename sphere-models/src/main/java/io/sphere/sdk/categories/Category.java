@@ -16,6 +16,8 @@ import static io.sphere.sdk.utils.ListUtils.join;
 /**
  * Categories are used to organize products in a hierarchical structure.
  *
+ *  <p>A category can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
+ *
  * <p id="operations">Operations:</p>
  * <ul>
  *     <li>Create a category with {@link io.sphere.sdk.categories.commands.CategoryCreateCommand}.</li>

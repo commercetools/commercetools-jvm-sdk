@@ -10,6 +10,9 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.Set;
 
+/**
+@see Custom
+ */
 @JsonDeserialize(as = TypeImpl.class)
 public interface Type extends Resource<Type> {
     String getKey();

@@ -16,6 +16,10 @@ import java.util.List;
 import java.util.Optional;
 
 /**
+ * A customer is a person purchasing products. Carts, Orders and Reviews can be associated to a customer.
+ *
+ * <p>A Customer can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
+ *
  * <h3 id="create-customer">Create a customer/sign-up</h3>
  *
  * The customer who signs up can have an anonymous cart which can be assigned to the customer.

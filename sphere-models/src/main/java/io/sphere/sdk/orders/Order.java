@@ -16,6 +16,13 @@ import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Set;
 
+/**
+ An order can be created from a cart, usually after a checkout process has been completed. Orders can also be imported.
+
+ <p>An order can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
+
+
+ */
 @JsonDeserialize(as=OrderImpl.class)
 public interface Order extends CartLike<Order> {
     static String resourceTypeId() {
