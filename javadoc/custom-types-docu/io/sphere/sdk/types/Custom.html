@@ -193,37 +193,107 @@ import static io.sphere.sdk.test.SphereTestUtils.en;
 
  <h3 id="create-object-with-type">Assign a type to an object at the creation of the object</h3>
 
- <div id="io-sphere-sdk-types-CustomTest-createCategoryWithType--%s" class=code-example><pre><code class='java'>final Map&lt;String, Object&gt; fieldValues = new HashMap&lt;&gt;();
-fieldValues.put("state", "published");//in the type it was enum, but for enums only keys are set
-fieldValues.put("imageUrl", "http://www.commercetools.com/assets/img/CT-logo.svg");
-final Set&lt;Reference&lt;Category&gt;&gt; relatedCategories =
-        new HashSet&lt;&gt;(asList(category1.toReference(), category2.toReference()));
-fieldValues.put("relatedCategories", relatedCategories);
+ <div id="io-sphere-sdk-types-CreateCategoryWithTypeDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryDraft;
+import io.sphere.sdk.categories.CategoryDraftBuilder;
+import io.sphere.sdk.categories.commands.CategoryCreateCommand;
+import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.json.JsonException;
+import io.sphere.sdk.models.Reference;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import static io.sphere.sdk.test.SphereTestUtils.asList;
+import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
+import static org.assertj.core.api.Assertions.*;
+</code></pre><pre><code class='java'>public class CreateCategoryWithTypeDemo {
+    public static Category createCategoryWithType(final TestClient client, final Category category1, final Category category2) throws Exception {
+        final Map&lt;String, Object&gt; fieldValues = new HashMap&lt;&gt;();
+        fieldValues.put("state", "published");//in the type it was enum, but for enums only keys are set
+        fieldValues.put("imageUrl", "http://www.commercetools.com/assets/img/CT-logo.svg");
+        final Set&lt;Reference&lt;Category&gt;&gt; relatedCategories =
+                new HashSet&lt;&gt;(asList(category1.toReference(), category2.toReference()));
+        fieldValues.put("relatedCategories", relatedCategories);
 
-final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug())
-        .custom(CustomFieldsDraft.ofTypeKeyAndObjects("category-customtype-key", fieldValues))
-        .build();
-final Category category = execute(CategoryCreateCommand.of(categoryDraft));
+        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug())
+                .custom(CustomFieldsDraft.ofTypeKeyAndObjects("category-customtype-key", fieldValues))
+                .build();
+        final Category category = client.execute(CategoryCreateCommand.of(categoryDraft));
 
-final CustomFields custom = category.getCustom();
-assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");
-assertThat(custom.getFieldAsString("imageUrl"))
-        .isEqualTo("http://www.commercetools.com/assets/img/CT-logo.svg");
-final TypeReference&lt;Set&lt;Reference&lt;Category&gt;&gt;&gt; typeReference =
-        new TypeReference&lt;Set&lt;Reference&lt;Category&gt;&gt;&gt;() { };
-assertThat(custom.getField("relatedCategories", typeReference))
-        .isEqualTo(relatedCategories);
-//error cases
-assertThat(custom.getFieldAsString("notpresent"))
-        .overridingErrorMessage("missing fields are null")
-        .isNull();
-assertThatThrownBy(() -&gt; custom.getFieldAsString("relatedCategories"))
-        .overridingErrorMessage("present field with wrong type causes exception")
-        .isInstanceOf(JsonException.class);
+        final CustomFields custom = category.getCustom();
+        assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");
+        assertThat(custom.getFieldAsString("imageUrl"))
+                .isEqualTo("http://www.commercetools.com/assets/img/CT-logo.svg");
+        final TypeReference&lt;Set&lt;Reference&lt;Category&gt;&gt;&gt; typeReference =
+                new TypeReference&lt;Set&lt;Reference&lt;Category&gt;&gt;&gt;() { };
+        assertThat(custom.getField("relatedCategories", typeReference))
+                .isEqualTo(relatedCategories);
+        //error cases
+        assertThat(custom.getFieldAsString("notpresent"))
+                .overridingErrorMessage("missing fields are null")
+                .isNull();
+        assertThatThrownBy(() -&gt; custom.getFieldAsString("relatedCategories"))
+                .overridingErrorMessage("present field with wrong type causes exception")
+                .isInstanceOf(JsonException.class);
 
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/CustomTest.java" target="_blank">test code</a>.</pre></div>
+        return category;
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/CreateCategoryWithTypeDemo.java" target="_blank">test code</a>.</pre></div>
 
  <h3 id="assign-existing-object-with-type">Assign a type to an object in an update action</h3>
+
+ <p>Use update actions like <a href="../../../../io/sphere/sdk/categories/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.categories.commands.updateactions"><code>SetCustomType for categories</code></a>.</p>
+
+ <div id="io-sphere-sdk-types-TypeAssigningInUpdateActionDemo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.fasterxml.jackson.core.type.TypeReference;
+import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.categories.CategoryFixtures;
+import io.sphere.sdk.categories.commands.CategoryUpdateCommand;
+import io.sphere.sdk.categories.commands.updateactions.SetCustomType;
+import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.models.Reference;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+import static io.sphere.sdk.test.SphereTestUtils.asList;
+import static org.assertj.core.api.Assertions.assertThat;
+</code></pre><pre><code class='java'>public class TypeAssigningInUpdateActionDemo {
+    public static Category updateCategoryWithType(final TestClient client, final Category category1, final Category category2) {
+        final Category category =
+                CategoryFixtures.createCategory(client);
+
+        assertThat(category.getCustom()).isNull();
+
+        final Map&lt;String, Object&gt; fieldValues = new HashMap&lt;&gt;();
+        fieldValues.put("state", "published");//in the type it was enum, but for enums only keys are set
+        fieldValues.put("imageUrl", "http://www.commercetools.com/assets/img/CT-logo.svg");
+        final Set&lt;Reference&lt;Category&gt;&gt; relatedCategories =
+                new HashSet&lt;&gt;(asList(category1.toReference(), category2.toReference()));
+        fieldValues.put("relatedCategories", relatedCategories);
+
+        final Category updatedCategory = client.execute(CategoryUpdateCommand.of(category, SetCustomType.ofTypeKeyAndObjects("category-customtype-key", fieldValues)));
+
+        final CustomFields custom = updatedCategory.getCustom();
+        assertThat(custom.getFieldAsEnumKey("state")).isEqualTo("published");
+        assertThat(custom.getFieldAsString("imageUrl"))
+                .isEqualTo("http://www.commercetools.com/assets/img/CT-logo.svg");
+        final TypeReference&lt;Set&lt;Reference&lt;Category&gt;&gt;&gt; typeReference =
+                new TypeReference&lt;Set&lt;Reference&lt;Category&gt;&gt;&gt;() { };
+        assertThat(custom.getField("relatedCategories", typeReference))
+                .isEqualTo(relatedCategories);
+
+        return updatedCategory;
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/TypeAssigningInUpdateActionDemo.java" target="_blank">test code</a>.</pre></div>
+
+
+ <h3 id="update-field">Update a field</h3>
+
+ <h3 id="unassign-existing-object-with-type">Unassign a type to an object in an update action</h3>
  <h3 id="update-type">Update a type</h3>
  <h3 id="delete-type">Delete a type</h3></div>
 </li>
