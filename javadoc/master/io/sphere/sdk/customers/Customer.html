@@ -106,7 +106,11 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">Customer</span>
 extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;, <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a></pre>
-<div class="block"><h3 id="create-customer">Create a customer/sign-up</h3>
+<div class="block">A customer is a person purchasing products. Carts, Orders and Reviews can be associated to a customer.
+
+ <p>A Customer can have <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><code>custom fields</code></a>.</p>
+
+ <h3 id="create-customer">Create a customer/sign-up</h3>
 
  The customer who signs up can have an anonymous cart which can be assigned to the customer.
  For convenience the <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="interface in io.sphere.sdk.customers.commands"><code>CustomerCreateCommand</code></a>

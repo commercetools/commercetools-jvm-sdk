@@ -124,6 +124,23 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">RemoveFieldDefinition</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types">Type</a>&gt;</pre>
+<div class="block">Removes a field definition from a type.
+
+ <p>See also <a href="../TypeUpdateCommand.html">TypeUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-types-commands-TypeUpdateCommandTest-addFieldDefinition--%s" class=code-example><pre><code class='java'>withUpdateableType(client(), type -&gt; {
+    final String name = randomKey();
+    final FieldDefinition fieldDefinition = FieldDefinition.of(StringType.of(), name, en("label"), false, TextInputHint.SINGLE_LINE);
+    final Type updatedType = execute(TypeUpdateCommand.of(type, AddFieldDefinition.of(fieldDefinition)));
+    assertThat(updatedType.getFieldDefinitionByName(name)).isEqualTo(fieldDefinition);
+    assertThat(updatedType.getFieldDefinitions()).hasSize(type.getFieldDefinitions().size() + 1);
+
+    final Type updated2 = execute(TypeUpdateCommand.of(updatedType, RemoveFieldDefinition.of(name)));
+    assertThat(updated2.getFieldDefinitions()).hasSize(type.getFieldDefinitions().size());
+
+    return updated2;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/types/commands/TypeUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
