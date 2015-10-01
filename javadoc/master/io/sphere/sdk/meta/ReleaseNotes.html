@@ -122,6 +122,34 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
+ <h3 class=released-version id="v1_0_0_M18">1.0.0-M18</h3>
+
+ <ul>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearch.html#withFuzzy-java.lang.Boolean-"><code>ProductProjectionSearch.withFuzzy(Boolean)</code></a></li>
+ <li class=new-in-release>documentation of the customer flow in <a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a></li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><code>custom fields</code></a></li>
+ <li class=new-in-release>Improved error reporting for status code 413 and 414.</li>
+
+ <li class=change-in-release><a href="../../../../io/sphere/sdk/search/TermStats.html" title="class in io.sphere.sdk.search"><code>TermStats</code></a> contains not anymore "T" and "F" but "true" and "false".</li>
+ <li class=change-in-release>deprecate <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreateTokenCommand</code></a>, use <a href="../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreatePasswordTokenCommand</code></a> instead</li>
+ <li class=fixed-in-release>DiscountedLineItemPrice money field is called value not money. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/711">711</a>.</li>
+ </ul>
+
+
+ <h3 class=released-version id="v1_0_0_M17">1.0.0-M17</h3>
+
+ <ul>
+ <li class=new-in-release>Support of full locales like "de_DE"</li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><code>ProductProjection</code></a> is also a <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><code>Versioned</code></a> for <a href="../../../../io/sphere/sdk/products/Product.html" title="interface in io.sphere.sdk.products"><code>Product</code></a></li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/products/attributes/AttributeAccess.html#ofInteger--"><code>AttributeAccess.ofInteger()</code></a>, <a href="../../../../io/sphere/sdk/products/attributes/AttributeAccess.html#ofIntegerSet--"><code>AttributeAccess.ofIntegerSet()</code></a>, <a href="../../../../io/sphere/sdk/products/attributes/AttributeAccess.html#ofLong--"><code>AttributeAccess.ofLong()</code></a>, <a href="../../../../io/sphere/sdk/products/attributes/AttributeAccess.html#ofLongSet--"><code>AttributeAccess.ofLongSet()</code></a></li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/taxcategories/commands/TaxCategoryUpdateCommand.html" title="interface in io.sphere.sdk.taxcategories.commands"><code>TaxCategoryUpdateCommand</code></a></li>
+ <li class=new-in-release><code>ProductDataProductDraftBuilderBase.taxCategory(Referenceable)</code>, <code>ProductDataProductDraftBuilderBase.searchKeywords(SearchKeywords)</code></li>
+ <li class=new-in-release><code>Reference&lt;Void&gt;</code> and <code>Reference&lt;Object&gt;</code> is now <code>Reference&lt;JsonNode&gt;</code></li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/commands/UpdateCommand.html#getUpdateActions--"><code>UpdateCommand.getUpdateActions()</code></a></li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/products/messages/ProductPublishedMessage.html" title="class in io.sphere.sdk.products.messages"><code>ProductPublishedMessage</code></a>, <a href="../../../../io/sphere/sdk/products/messages/ProductUnpublishedMessage.html" title="class in io.sphere.sdk.products.messages"><code>ProductUnpublishedMessage</code></a></li>
+ <li class=new-in-release><a href="../../../../io/sphere/sdk/models/Address.html#equalsIgnoreId-io.sphere.sdk.models.Address-"><code>Address.equalsIgnoreId(Address)</code></a>, <a href="../../../../io/sphere/sdk/products/Price.html#equalsIgnoreId-io.sphere.sdk.products.Price-"><code>Price.equalsIgnoreId(Price)</code></a>, <a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html#equalsIgnoreId-io.sphere.sdk.taxcategories.TaxRate-"><code>TaxRate.equalsIgnoreId(TaxRate)</code></a></li>
+ </ul>
+
  <h3 class=released-version id="v1_0_0_M16">1.0.0-M16</h3>
  <p>This release is intended to be the last release before 1.0.0-RC1.</p>
 
