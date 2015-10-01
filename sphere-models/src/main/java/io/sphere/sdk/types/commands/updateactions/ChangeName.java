@@ -4,6 +4,13 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.types.Type;
 
+/**
+Changes the name of the type.
+
+ {@doc.gen intro}
+
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#changeName()}
+ */
 public class ChangeName extends UpdateActionImpl<Type> {
     private final LocalizedString name;
 

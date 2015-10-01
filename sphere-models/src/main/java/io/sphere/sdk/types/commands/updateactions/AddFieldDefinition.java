@@ -4,6 +4,13 @@ import io.sphere.sdk.commands.UpdateActionImpl;
 import io.sphere.sdk.types.FieldDefinition;
 import io.sphere.sdk.types.Type;
 
+/**
+    Adds another field definition.
+
+ {@doc.gen intro}
+
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#addFieldDefinition()}
+ */
 public class AddFieldDefinition extends UpdateActionImpl<Type> {
     private final FieldDefinition fieldDefinition;
 

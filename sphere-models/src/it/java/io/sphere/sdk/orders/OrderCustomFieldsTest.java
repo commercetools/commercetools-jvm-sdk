@@ -15,7 +15,7 @@ import java.util.Map;
 import static io.sphere.sdk.orders.OrderFixtures.*;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
-import static org.assertj.core.api.StrictAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderCustomFieldsTest extends IntegrationTest {
 

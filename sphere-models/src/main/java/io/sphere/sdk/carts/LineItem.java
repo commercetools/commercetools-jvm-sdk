@@ -12,6 +12,11 @@ import io.sphere.sdk.types.CustomFields;
 import javax.annotation.Nullable;
 import java.util.Set;
 
+/**
+ A line item is a snapshot of a product variant at the time it was added to the cart.
+
+ <p>A LineItem can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
+ */
 @JsonDeserialize(as=LineItemImpl.class)
 public interface LineItem extends LineItemLike {
 

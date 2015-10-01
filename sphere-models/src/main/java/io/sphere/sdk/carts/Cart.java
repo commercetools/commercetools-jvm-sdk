@@ -13,6 +13,11 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.util.List;
 
+/**
+ A shopping cart holds product variants and can be ordered. Each cart either belongs to a registered customer or is an anonymous cart.
+
+ <p>A cart can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
+ */
 @JsonDeserialize(as=CartImpl.class)
 public interface Cart extends CartLike<Cart> {
 

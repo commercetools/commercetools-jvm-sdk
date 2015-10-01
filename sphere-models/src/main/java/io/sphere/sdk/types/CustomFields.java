@@ -2,6 +2,7 @@ package io.sphere.sdk.types;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
+import io.sphere.sdk.json.JsonException;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.models.*;
@@ -24,15 +25,19 @@ public class CustomFields extends Base {
     }
 
     @Nullable
-    public JsonNode getField(final String name) {
+    public JsonNode getFieldAsJsonNode(final String name) {
         return fields.get(name);
     }
 
     @Nullable
     public <T> T getField(final String name, final TypeReference<T> typeReference) {
-        return Optional.ofNullable(getField(name))
-                .map(jsonNode -> SphereJsonUtils.readObject(jsonNode, typeReference))
-                .orElse(null);
+        try {
+            return Optional.ofNullable(getFieldAsJsonNode(name))
+                    .map(jsonNode -> SphereJsonUtils.readObject(jsonNode, typeReference))
+                    .orElse(null);
+        } catch (final RuntimeException e) {
+            throw new JsonException(e);
+        }
     }
 
     @Nullable

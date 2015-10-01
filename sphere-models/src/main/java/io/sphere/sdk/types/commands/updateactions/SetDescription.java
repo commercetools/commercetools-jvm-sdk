@@ -6,6 +6,13 @@ import io.sphere.sdk.types.Type;
 
 import javax.annotation.Nullable;
 
+/**
+  Changes the description of the type.
+
+ {@doc.gen intro}
+
+ {@include.example io.sphere.sdk.types.commands.TypeUpdateCommandTest#setDescription()}
+ */
 public class SetDescription extends UpdateActionImpl<Type> {
     @Nullable
     private final LocalizedString description;

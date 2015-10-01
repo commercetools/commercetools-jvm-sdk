@@ -13,7 +13,7 @@ import static io.sphere.sdk.carts.CartFixtures.withLineItemAndCustomLineItemFill
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
 import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
-import static org.assertj.core.api.StrictAssertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomLineItemCustomFieldsTest extends IntegrationTest {
     @Test
