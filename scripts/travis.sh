@@ -1,5 +1,5 @@
 cmd="docker run --rm \
--v $PWD:/wd -v $HOME/.ivy2:/root/.ivy2 -v $HOME/.sbt:/root/.sbt \
+-v $PWD:/wd \
 -w /wd \
 -e JVM_SDK_IT_SERVICE_URL=$JVM_SDK_IT_SERVICE_URL \
 -e JVM_SDK_IT_AUTH_URL=$JVM_SDK_IT_AUTH_URL \
