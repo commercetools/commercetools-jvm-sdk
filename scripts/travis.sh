@@ -10,7 +10,7 @@ cmd="docker run --rm \
 -e TRAVIS_BRANCH=$TRAVIS_BRANCH \
 -e GH_TOKEN=$GH_TOKEN \
 -e TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG \
-msct/jvmsdk"
+msct/jvmsdktest"
 
 eval "$cmd sh -c './sbt genDoc test it:test'"
 test_result=$?
