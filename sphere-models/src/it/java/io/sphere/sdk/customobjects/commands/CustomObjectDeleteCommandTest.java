@@ -1,6 +1,5 @@
 package io.sphere.sdk.customobjects.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.customobjects.CustomObject;
@@ -29,8 +28,7 @@ public class CustomObjectDeleteCommandTest extends IntegrationTest {
     private void testOmitResult(final Function<CustomObject<String>, DeleteCommand<CustomObject<JsonNode>>> f) {
         final String value = "hello";
         final String key = "storeFlatString";
-        final CustomObjectUpsertCommand<String> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, new TypeReference<CustomObject<String>>() {
-        }));
+        final CustomObjectUpsertCommand<String> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, String.class));
         final CustomObject<String> customObject = execute(command);
         final CustomObject<JsonNode> result = execute(f.apply(customObject));
         assertThat(result.getId()).isEqualTo(customObject.getId());

@@ -1,19 +1,18 @@
 package io.sphere.sdk.customobjects.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.sphere.sdk.client.ConcurrentModificationException;
 import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.customobjects.CustomObjectDraft;
 import io.sphere.sdk.customobjects.CustomObjectFixtures;
-import io.sphere.sdk.customobjects.demo.*;
-import io.sphere.sdk.client.ConcurrentModificationException;
-import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.customobjects.demo.BinaryData;
+import io.sphere.sdk.customobjects.demo.Foo;
 import io.sphere.sdk.json.SphereJsonUtils;
+import io.sphere.sdk.test.IntegrationTest;
 import org.apache.commons.io.FileUtils;
 import org.junit.Test;
-
 
 import java.io.File;
 
@@ -51,9 +50,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
         final byte[] bytes = FileUtils.readFileToByteArray(file);
         final BinaryData value = new BinaryData(name, bytes);
         final String key = "storyBinaryData";
-        final TypeReference<CustomObject<BinaryData>> typeReference = new TypeReference<CustomObject<BinaryData>>() {
-        };
-        final CustomObjectUpsertCommand<BinaryData> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, typeReference));
+        final CustomObjectUpsertCommand<BinaryData> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, BinaryData.class));
         final BinaryData loadedValue = execute(command).getValue();
         assertThat(loadedValue).isEqualTo(value);
     }
@@ -62,8 +59,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
     public void storeFlatString() throws Exception {
         final String value = "hello";
         final String key = "storeFlatString";
-        final CustomObjectUpsertCommand<String> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, new TypeReference<CustomObject<String>>() {
-        }));
+        final CustomObjectUpsertCommand<String> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, String.class));
         final String loadedValue = execute(command).getValue();
         assertThat(loadedValue).isEqualTo(value);
     }
@@ -72,8 +68,7 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
     public void storeLong() throws Exception {
         final long value = 23;
         final String key = "storeLong";
-        final CustomObjectUpsertCommand<Long> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, new TypeReference<CustomObject<Long>>() {
-        }));
+        final CustomObjectUpsertCommand<Long> command = CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, value, Long.class));
         final long loadedValue = execute(command).getValue();
         assertThat(loadedValue).isEqualTo(value);
     }
@@ -81,9 +76,8 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
     @Test
     public void updateWithoutVersion() throws Exception {
         CustomObjectFixtures.withCustomObject(client(), customObject -> {
-            final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
             final Foo newValue = new Foo("new value", 72);
-            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedUpdate(customObject, newValue, typeReference);
+            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofUnversionedUpdate(customObject, newValue, Foo.class);
             final CustomObjectUpsertCommand<Foo> createCommand = CustomObjectUpsertCommand.of(draft);
             final CustomObject<Foo> updatedCustomObject = execute(createCommand);
             final Foo loadedValue = updatedCustomObject.getValue();
@@ -94,9 +88,8 @@ public class CustomObjectUpsertCommandTest extends IntegrationTest {
     @Test(expected = ConcurrentModificationException.class)
     public void updateWithVersion() throws Exception {
         CustomObjectFixtures.withCustomObject(client(), customObject -> {
-            final TypeReference<CustomObject<Foo>> typeReference = Foo.customObjectTypeReference();
             final Foo newValue = new Foo("new value", 72);
-            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofVersionedUpdate(customObject, newValue, typeReference);
+            final CustomObjectDraft<Foo> draft = CustomObjectDraft.ofVersionedUpdate(customObject, newValue, Foo.class);
             final CustomObjectUpsertCommand<Foo> command = CustomObjectUpsertCommand.of(draft);
             final CustomObject<Foo> updatedCustomObject = execute(command);
             final Foo loadedValue = updatedCustomObject.getValue();

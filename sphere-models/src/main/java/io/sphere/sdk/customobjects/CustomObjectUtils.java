@@ -13,4 +13,9 @@ public final class CustomObjectUtils {
         final JavaType typeParameterJavaType = typeFactory.constructType(typeReference);
         return typeFactory.constructParametrizedType(CustomObject.class, CustomObject.class, typeParameterJavaType);
     }
+
+    public static<T> JavaType getCustomObjectJavaTypeForValue(final JavaType javaType) {
+        final TypeFactory typeFactory = TypeFactory.defaultInstance();
+        return typeFactory.constructParametrizedType(CustomObject.class, CustomObject.class, javaType);
+    }
 }

@@ -18,16 +18,22 @@ import static java.util.Objects.requireNonNull;
 public abstract class CreateCommandImpl<T, C> extends CommandImpl<T> implements CreateCommand<T>{
 
     private final C body;
-    private final JsonEndpoint<T> endpoint;
+    private final String path;
+    private final JavaType javaType;
+
+    public CreateCommandImpl(final C draft, final String path, final JavaType javaType) {
+        this.body = requireNonNull(draft);
+        this.path = requireNonNull(path);
+        this.javaType = requireNonNull(javaType);
+    }
 
     public CreateCommandImpl(final C draft, final JsonEndpoint<T> endpoint) {
-        this.body = requireNonNull(draft);
-        this.endpoint = requireNonNull(endpoint);
+        this(draft, endpoint.endpoint(), SphereJsonUtils.convertToJavaType(endpoint.typeReference()));
     }
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(httpMethod(), endpoint.endpoint(), httpBody());
+        return HttpRequestIntent.of(httpMethod(), path, httpBody());
     }
 
     protected HttpMethod httpMethod() {
@@ -40,6 +46,6 @@ public abstract class CreateCommandImpl<T, C> extends CommandImpl<T> implements 
 
     @Override
     protected JavaType jacksonJavaType() {
-        return SphereJsonUtils.convertToJavaType(endpoint.typeReference());
+        return javaType;
     }
 }

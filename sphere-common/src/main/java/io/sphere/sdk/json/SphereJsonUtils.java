@@ -240,6 +240,11 @@ final public class SphereJsonUtils {
         }
     }
 
+    public static JavaType convertToJavaType(final Class<?> clazz) {
+        final TypeFactory typeFactory = TypeFactory.defaultInstance();
+        return typeFactory.uncheckedSimpleType(clazz);
+    }
+
     @FunctionalInterface
     private interface SupplierThrowingIOException<T> {
         T get() throws IOException;
