@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":49,"i2":17,"i3":17};
+var methods = {"i0":18,"i1":49,"i2":17,"i3":17,"i4":17};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],16:["t5","Default Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -157,11 +157,17 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of-com.fasterxml.jackson.core.type.TypeReference-">of</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of-java.lang.Class-">of</a></span>(java.lang.Class&lt;T&gt;&nbsp;valueClass)</code>
 <div class="block">Query object for custom objects where the result value is a POJO.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of-com.fasterxml.jackson.core.type.TypeReference-">of</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</code>
+<div class="block">Query object for custom objects where the result value is a POJO.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--">ofJsonNode</a></span>()</code>&nbsp;</td>
 </tr>
@@ -228,13 +234,31 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&nbsp;of(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
+<pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&nbsp;of(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</pre>
 <div class="block">Query object for custom objects where the result value is a POJO.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
 <dd><code>T</code> - the Java type of the value of the custom object</dd>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>typeReference</code> - the type reference of the value of the custom object</dd>
+<dd><code>valueTypeReference</code> - the type reference of the value of the custom object</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>query object</dd>
+</dl>
+</li>
+</ul>
+<a name="of-java.lang.Class-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&nbsp;of(java.lang.Class&lt;T&gt;&nbsp;valueClass)</pre>
+<div class="block">Query object for custom objects where the result value is a POJO.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the Java type of the value of the custom object</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>valueClass</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>query object</dd>
 </dl>

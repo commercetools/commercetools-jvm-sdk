@@ -162,7 +162,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-java.lang.Class-">ofUnversionedUpdate</a></span>(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
                    T&nbsp;newValue,
-                   java.lang.Class&lt;?&gt;&nbsp;clazz)</code>
+                   java.lang.Class&lt;T&gt;&nbsp;valueClass)</code>
 <div class="block">Creates a draft for updating a custom object.</div>
 </td>
 </tr>
@@ -170,7 +170,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpdate</a></span>(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
                    T&nbsp;newValue,
-                   com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>
+                   com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</code>
 <div class="block">Creates a draft for updating a custom object.</div>
 </td>
 </tr>
@@ -187,7 +187,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-T-java.lang.Class-">ofUnversionedUpsert</a></span>(java.lang.String&nbsp;container,
                    java.lang.String&nbsp;key,
                    T&nbsp;value,
-                   java.lang.Class&lt;?&gt;&nbsp;clazz)</code>
+                   java.lang.Class&lt;T&gt;&nbsp;valueClass)</code>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </td>
 </tr>
@@ -196,7 +196,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpsert</a></span>(java.lang.String&nbsp;container,
                    java.lang.String&nbsp;key,
                    T&nbsp;value,
-                   com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>
+                   com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</code>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </td>
 </tr>
@@ -204,7 +204,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-java.lang.Class-">ofVersionedUpdate</a></span>(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
                  T&nbsp;newValue,
-                 java.lang.Class&lt;?&gt;&nbsp;clazz)</code>
+                 java.lang.Class&lt;T&gt;&nbsp;valueClass)</code>
 <div class="block">Creates a draft for updating a custom object.</div>
 </td>
 </tr>
@@ -212,7 +212,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpdate</a></span>(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
                  T&nbsp;newValue,
-                 com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>
+                 com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</code>
 <div class="block">Creates a draft for updating a custom object.</div>
 </td>
 </tr>
@@ -222,7 +222,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
                  java.lang.String&nbsp;key,
                  T&nbsp;value,
                  long&nbsp;version,
-                 java.lang.Class&lt;?&gt;&nbsp;clazz)</code>
+                 java.lang.Class&lt;T&gt;&nbsp;valueClass)</code>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </td>
 </tr>
@@ -232,7 +232,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
                  java.lang.String&nbsp;key,
                  T&nbsp;value,
                  long&nbsp;version,
-                 com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>
+                 com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</code>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </td>
 </tr>
@@ -290,7 +290,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <h4>ofVersionedUpdate</h4>
 <pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofVersionedUpdate(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
                                                          T&nbsp;newValue,
-                                                         com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
+                                                         com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</pre>
 <div class="block">Creates a draft for updating a custom object. Optimistic concurrency control is used.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -298,7 +298,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>customObject</code> - the custom object to override (provides key, container and version)</dd>
 <dd><code>newValue</code> - the value which should be assigned to the custom object</dd>
-<dd><code>typeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
+<dd><code>valueTypeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the draft</dd>
 </dl>
@@ -314,7 +314,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <h4>ofVersionedUpdate</h4>
 <pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofVersionedUpdate(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
                                                          T&nbsp;newValue,
-                                                         java.lang.Class&lt;?&gt;&nbsp;clazz)</pre>
+                                                         java.lang.Class&lt;T&gt;&nbsp;valueClass)</pre>
 <div class="block">Creates a draft for updating a custom object. Optimistic concurrency control is used.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -322,7 +322,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>customObject</code> - the custom object to override (provides key, container and version)</dd>
 <dd><code>newValue</code> - the value which should be assigned to the custom object</dd>
-<dd><code>clazz</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
+<dd><code>valueClass</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the draft</dd>
 </dl>
@@ -338,7 +338,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <h4>ofUnversionedUpdate</h4>
 <pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofUnversionedUpdate(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
                                                            T&nbsp;newValue,
-                                                           com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
+                                                           com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</pre>
 <div class="block">Creates a draft for updating a custom object. Does not use optimistic concurrency control so the last update wins.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -346,7 +346,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>customObject</code> - the custom object to override (provides key, container and version)</dd>
 <dd><code>newValue</code> - the value which should be assigned to the custom object</dd>
-<dd><code>typeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
+<dd><code>valueTypeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the draft</dd>
 </dl>
@@ -362,7 +362,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <h4>ofUnversionedUpdate</h4>
 <pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofUnversionedUpdate(<a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&nbsp;customObject,
                                                            T&nbsp;newValue,
-                                                           java.lang.Class&lt;?&gt;&nbsp;clazz)</pre>
+                                                           java.lang.Class&lt;T&gt;&nbsp;valueClass)</pre>
 <div class="block">Creates a draft for updating a custom object. Does not use optimistic concurrency control so the last update wins.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -370,7 +370,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>customObject</code> - the custom object to override (provides key, container and version)</dd>
 <dd><code>newValue</code> - the value which should be assigned to the custom object</dd>
-<dd><code>clazz</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
+<dd><code>valueClass</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the draft</dd>
 </dl>
@@ -387,7 +387,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofUnversionedUpsert(java.lang.String&nbsp;container,
                                                            java.lang.String&nbsp;key,
                                                            T&nbsp;value,
-                                                           com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
+                                                           com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</pre>
 <div class="block">Creates a draft for creating or updating a custom object. Does not use optimistic concurrency control so the last update wins.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -396,7 +396,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <dd><code>container</code> - the container</dd>
 <dd><code>key</code> - the key</dd>
 <dd><code>value</code> - the value which should be assigned to the custom object</dd>
-<dd><code>typeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
+<dd><code>valueTypeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the draft</dd>
 </dl>
@@ -413,7 +413,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <pre>public static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a>&lt;T&gt;&nbsp;ofUnversionedUpsert(java.lang.String&nbsp;container,
                                                            java.lang.String&nbsp;key,
                                                            T&nbsp;value,
-                                                           java.lang.Class&lt;?&gt;&nbsp;clazz)</pre>
+                                                           java.lang.Class&lt;T&gt;&nbsp;valueClass)</pre>
 <div class="block">Creates a draft for creating or updating a custom object. Does not use optimistic concurrency control so the last update wins.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -422,7 +422,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <dd><code>container</code> - the container</dd>
 <dd><code>key</code> - the key</dd>
 <dd><code>value</code> - the value which should be assigned to the custom object</dd>
-<dd><code>clazz</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
+<dd><code>valueClass</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the draft</dd>
 </dl>
@@ -440,7 +440,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
                                                          java.lang.String&nbsp;key,
                                                          T&nbsp;value,
                                                          long&nbsp;version,
-                                                         com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
+                                                         com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</pre>
 <div class="block">Creates a draft for creating or updating a custom object. Optimistic concurrency control is used.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -450,7 +450,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <dd><code>key</code> - the key</dd>
 <dd><code>value</code> - the value which should be assigned to the custom object</dd>
 <dd><code>version</code> - the version for optimistic locking</dd>
-<dd><code>typeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
+<dd><code>valueTypeReference</code> - the type reference to deserialize the updated custom object from the SPHERE.IO response</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the draft</dd>
 </dl>
@@ -468,7 +468,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
                                                          java.lang.String&nbsp;key,
                                                          T&nbsp;value,
                                                          long&nbsp;version,
-                                                         java.lang.Class&lt;?&gt;&nbsp;clazz)</pre>
+                                                         java.lang.Class&lt;T&gt;&nbsp;valueClass)</pre>
 <div class="block">Creates a draft for creating or updating a custom object. Optimistic concurrency control is used.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -478,7 +478,7 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <dd><code>key</code> - the key</dd>
 <dd><code>value</code> - the value which should be assigned to the custom object</dd>
 <dd><code>version</code> - the version for optimistic locking</dd>
-<dd><code>clazz</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
+<dd><code>valueClass</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the draft</dd>
 </dl>

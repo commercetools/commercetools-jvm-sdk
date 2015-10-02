@@ -142,7 +142,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interface
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#of-java.lang.String-java.lang.String-java.lang.Class-">of</a></span>(java.lang.String&nbsp;container,
   java.lang.String&nbsp;key,
-  java.lang.Class&lt;?&gt;&nbsp;clazz)</code>
+  java.lang.Class&lt;T&gt;&nbsp;valueClass)</code>
 <div class="block">Creates an object to fetch a custom object by the container and key with POJO mapping.</div>
 </td>
 </tr>
@@ -150,7 +150,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interface
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a>&lt;T&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#of-java.lang.String-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">of</a></span>(java.lang.String&nbsp;container,
   java.lang.String&nbsp;key,
-  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</code>
+  com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</code>
 <div class="block">Creates an object to fetch a custom object by the container and key with POJO mapping.</div>
 </td>
 </tr>
@@ -198,7 +198,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interface
 <h4>of</h4>
 <pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a>&lt;T&gt;&nbsp;of(java.lang.String&nbsp;container,
                                       java.lang.String&nbsp;key,
-                                      java.lang.Class&lt;?&gt;&nbsp;clazz)</pre>
+                                      java.lang.Class&lt;T&gt;&nbsp;valueClass)</pre>
 <div class="block">Creates an object to fetch a custom object by the container and key with POJO mapping.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -206,7 +206,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interface
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>container</code> - container of the custom object to fetch</dd>
 <dd><code>key</code> - key of the custom object to fetch</dd>
-<dd><code>clazz</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
+<dd><code>valueClass</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>query object</dd>
 </dl>
@@ -220,7 +220,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interface
 <h4>of</h4>
 <pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a>&lt;T&gt;&nbsp;of(java.lang.String&nbsp;container,
                                       java.lang.String&nbsp;key,
-                                      com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;typeReference)</pre>
+                                      com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</pre>
 <div class="block">Creates an object to fetch a custom object by the container and key with POJO mapping.</div>
 <dl>
 <dt><span class="paramLabel">Type Parameters:</span></dt>
@@ -228,7 +228,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interface
 <dt><span class="paramLabel">Parameters:</span></dt>
 <dd><code>container</code> - container of the custom object to fetch</dd>
 <dd><code>key</code> - key of the custom object to fetch</dd>
-<dd><code>typeReference</code> - the type reference of the value of the custom object</dd>
+<dd><code>valueTypeReference</code> - the type reference of the value of the custom object</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>query object</dd>
 </dl>
