@@ -99,8 +99,12 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt>All Known Subinterfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,V&gt;</dd>
+</dl>
+<dl>
 <dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html" title="class in io.sphere.sdk.search">BooleanSearchModel</a>, <a href="../../../../io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a>, <a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a></dd>
+<dd><a href="../../../../io/sphere/sdk/search/BooleanSearchModel.html" title="class in io.sphere.sdk.search">BooleanSearchModel</a>, <a href="../../../../io/sphere/sdk/search/CurrencySearchModel.html" title="class in io.sphere.sdk.search">CurrencySearchModel</a>, <a href="../../../../io/sphere/sdk/search/DateSearchModel.html" title="class in io.sphere.sdk.search">DateSearchModel</a>, <a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a>, <a href="../../../../io/sphere/sdk/search/MoneyCentAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyCentAmountSearchModel</a>, <a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="class in io.sphere.sdk.search">NumberSearchModel</a>, <a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="class in io.sphere.sdk.search">StringSearchModel</a>, <a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="class in io.sphere.sdk.search">TimeSearchModel</a></dd>
 </dl>
 <hr>
 <br>
@@ -132,7 +136,8 @@ var activeTableTab = "activeTableTab";
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/TermModel.html#facetedSearch--">facetedSearch</a></span>()</code>
-<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.</div>
+<div class="block">Eventually generates an expression to obtain term facets, as well as expressions to filter elements by certain values,
+ in both cases using the same attribute path.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -191,8 +196,8 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>facetedSearch</h4>
 <pre><a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/TermModel.html" title="type parameter in TermModel">T</a>&gt;&nbsp;facetedSearch()</pre>
-<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.
- This untyped search model allows you to build filters and facets, both range and term models.</div>
+<div class="block">Eventually generates an expression to obtain term facets, as well as expressions to filter elements by certain values,
+ in both cases using the same attribute path. The model requires simple Strings, to allow maximal flexibility.</div>
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the faceted search model for this instance</dd>

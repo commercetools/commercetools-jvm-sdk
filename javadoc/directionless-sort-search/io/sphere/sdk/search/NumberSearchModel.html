@@ -123,7 +123,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,java.math.BigDecimal&gt;, <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title="interface in io.sphere.sdk.search">SearchSortModel</a>&lt;T,S&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;T,java.math.BigDecimal&gt;, <a href="../../../../io/sphere/sdk/search/SearchModel.html" title="interface in io.sphere.sdk.search">SearchModel</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title="interface in io.sphere.sdk.search">SearchSortModel</a>&lt;T,S&gt;, <a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;T,java.math.BigDecimal&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -191,7 +191,8 @@ implements <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="type parameter in NumberSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/NumberSearchModel.html#facetedSearch--">facetedSearch</a></span>()</code>
-<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.</div>
+<div class="block">Eventually generates an expression to obtain range facets, as well as expressions to filter elements by certain ranges,
+ in both cases using the same attribute path.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -280,6 +281,8 @@ implements <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#filtered--">filtered</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="type parameter in NumberSearchModel">T</a>,java.math.BigDecimal&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#filtered--">filtered</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="type parameter in NumberSearchModel">T</a>,java.math.BigDecimal&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the model to specify the range of values to filter by</dd>
 </dl>
@@ -297,6 +300,8 @@ implements <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#faceted--">faceted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="type parameter in NumberSearchModel">T</a>,java.math.BigDecimal&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#faceted--">faceted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="type parameter in NumberSearchModel">T</a>,java.math.BigDecimal&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the model to specify the range of values from which to obtain the facets</dd>
 </dl>
@@ -310,11 +315,13 @@ implements <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title
 <h4>facetedSearch</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="type parameter in NumberSearchModel">T</a>&gt;&nbsp;facetedSearch()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#facetedSearch--">RangeTermModel</a></code></span></div>
-<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.
- This untyped search model allows you to build filters and facets, both range and term models.</div>
+<div class="block">Eventually generates an expression to obtain range facets, as well as expressions to filter elements by certain ranges,
+ in both cases using the same attribute path. The model requires simple Strings, to allow maximal flexibility.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#facetedSearch--">facetedSearch</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="interface in io.sphere.sdk.search">RangeTermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="type parameter in NumberSearchModel">T</a>,java.math.BigDecimal&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#facetedSearch--">facetedSearch</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="type parameter in NumberSearchModel">T</a>,java.math.BigDecimal&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the faceted search model for this instance</dd>
 </dl>

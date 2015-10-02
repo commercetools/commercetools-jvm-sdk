@@ -99,12 +99,17 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
+<dt>All Superinterfaces:</dt>
+<dd><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;T,V&gt;</dd>
+</dl>
+<dl>
 <dt>All Known Implementing Classes:</dt>
 <dd><a href="../../../../io/sphere/sdk/search/DateSearchModel.html" title="class in io.sphere.sdk.search">DateSearchModel</a>, <a href="../../../../io/sphere/sdk/search/DateTimeSearchModel.html" title="class in io.sphere.sdk.search">DateTimeSearchModel</a>, <a href="../../../../io/sphere/sdk/search/MoneyCentAmountSearchModel.html" title="class in io.sphere.sdk.search">MoneyCentAmountSearchModel</a>, <a href="../../../../io/sphere/sdk/search/NumberSearchModel.html" title="class in io.sphere.sdk.search">NumberSearchModel</a>, <a href="../../../../io/sphere/sdk/search/TimeSearchModel.html" title="class in io.sphere.sdk.search">TimeSearchModel</a></dd>
 </dl>
 <hr>
 <br>
-<pre>public interface <span class="typeNameLabel">RangeTermModel&lt;T,V extends java.lang.Comparable&lt;? super V&gt;&gt;</span></pre>
+<pre>public interface <span class="typeNameLabel">RangeTermModel&lt;T,V extends java.lang.Comparable&lt;? super V&gt;&gt;</span>
+extends <a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;T,V&gt;</pre>
 </li>
 </ul>
 </div>
@@ -132,7 +137,8 @@ var activeTableTab = "activeTableTab";
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/RangeTermModel.html#facetedSearch--">facetedSearch</a></span>()</code>
-<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.</div>
+<div class="block">Eventually generates an expression to obtain range facets, as well as expressions to filter elements by certain ranges,
+ in both cases using the same attribute path.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -165,6 +171,8 @@ var activeTableTab = "activeTableTab";
 <pre><a href="../../../../io/sphere/sdk/search/RangedFilterSearchModel.html" title="class in io.sphere.sdk.search">RangedFilterSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">V</a>&gt;&nbsp;filtered()</pre>
 <div class="block">Eventually generates an expression to filter elements by certain range of values.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#filtered--">filtered</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">V</a>&gt;&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the model to specify the range of values to filter by</dd>
 </dl>
@@ -179,6 +187,8 @@ var activeTableTab = "activeTableTab";
 <pre><a href="../../../../io/sphere/sdk/search/RangedFacetSearchModel.html" title="class in io.sphere.sdk.search">RangedFacetSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">V</a>&gt;&nbsp;faceted()</pre>
 <div class="block">Eventually generates an expression to obtain the facets of the attribute for certain range of values.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#faceted--">faceted</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">V</a>&gt;&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the model to specify the range of values from which to obtain the facets</dd>
 </dl>
@@ -191,9 +201,11 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <h4>facetedSearch</h4>
 <pre><a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">T</a>&gt;&nbsp;facetedSearch()</pre>
-<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.
- This untyped search model allows you to build filters and facets, both range and term models.</div>
+<div class="block">Eventually generates an expression to obtain range facets, as well as expressions to filter elements by certain ranges,
+ in both cases using the same attribute path. The model requires simple Strings, to allow maximal flexibility.</div>
 <dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#facetedSearch--">facetedSearch</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">T</a>,<a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">V</a> extends java.lang.Comparable&lt;? super <a href="../../../../io/sphere/sdk/search/RangeTermModel.html" title="type parameter in RangeTermModel">V</a>&gt;&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the faceted search model for this instance</dd>
 </dl>

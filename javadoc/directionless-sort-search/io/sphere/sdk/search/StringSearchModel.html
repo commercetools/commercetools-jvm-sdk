@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/SortExpressionImpl.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/StringSearchModel.html" target="_top">Frames</a></li>
@@ -191,7 +191,8 @@ implements <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/StringSearchModel.html#facetedSearch--">facetedSearch</a></span>()</code>
-<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.</div>
+<div class="block">Eventually generates an expression to obtain term facets, as well as expressions to filter elements by certain values,
+ in both cases using the same attribute path.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
@@ -310,8 +311,8 @@ implements <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title
 <h4>facetedSearch</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetedSearchModel.html" title="class in io.sphere.sdk.search">FacetedSearchModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>&gt;&nbsp;facetedSearch()</pre>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html#facetedSearch--">TermModel</a></code></span></div>
-<div class="block">Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.
- This untyped search model allows you to build filters and facets, both range and term models.</div>
+<div class="block">Eventually generates an expression to obtain term facets, as well as expressions to filter elements by certain values,
+ in both cases using the same attribute path. The model requires simple Strings, to allow maximal flexibility.</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/search/TermModel.html#facetedSearch--">facetedSearch</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/TermModel.html" title="interface in io.sphere.sdk.search">TermModel</a>&lt;<a href="../../../../io/sphere/sdk/search/StringSearchModel.html" title="type parameter in StringSearchModel">T</a>,java.lang.String&gt;</code></dd>
@@ -361,7 +362,7 @@ implements <a href="../../../../io/sphere/sdk/search/SearchSortModel.html" title
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../io/sphere/sdk/search/SortExpressionImpl.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../index.html?io/sphere/sdk/search/StringSearchModel.html" target="_top">Frames</a></li>
