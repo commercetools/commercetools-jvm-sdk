@@ -25,6 +25,11 @@ public class ProductProjectionSearchModel extends ProductDataSearchModelBase {
     }
 
     @Override
+    public StringSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> id() {
+        return super.id();
+    }
+
+    @Override
     public LocalizedStringSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> name() {
         return super.name();
     }

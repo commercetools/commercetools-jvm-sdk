@@ -17,6 +17,11 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         this.facets = facets;
     }
 
+    @Override
+    public List<T> getResults() {
+        return super.getResults();
+    }
+
     public Map<String, FacetResult> getFacetsResults() {
         return facets;
     }
@@ -25,7 +30,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         return facets.get(spherePath);
     }
 
-    public TermFacetResult getTermFacetResult(final TermFacetExpression<T, ?> facetExpression) {
+    public TermFacetResult getTermFacetResult(final FacetExpression<T> facetExpression) {
         return Optional.ofNullable(getFacetResult(facetExpression.resultPath())).map(facetResult -> {
             if (facetResult instanceof TermFacetResult) {
                 return (TermFacetResult) facetResult;
@@ -35,7 +40,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         }).orElse(null);
     }
 
-    public RangeFacetResult getRangeFacetResult(final RangeFacetExpression<T, ?> facetExpression) {
+    public RangeFacetResult getRangeFacetResult(final FacetExpression<T> facetExpression) {
         return Optional.ofNullable(getFacetResult(facetExpression.resultPath())).map(facetResult -> {
             if (facetResult instanceof RangeFacetResult) {
                 return (RangeFacetResult) facetResult;
@@ -45,12 +50,12 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         }).orElse(null);
     }
 
-    public FilteredFacetResult getFilteredFacetResult(final FilteredFacetExpression<T, ?> facetExpression) {
+    public FilteredFacetResult getFilteredFacetResult(final FacetExpression<T> facetExpression) {
         return Optional.ofNullable(getFacetResult(facetExpression.resultPath())).map(facetResult -> {
             if (facetResult instanceof FilteredFacetResult) {
                 return (FilteredFacetResult) facetResult;
             } else {
-                throw new ClassCastException("Facet result is not of type FilterFacetResult: " + facetResult);
+                throw new ClassCastException("Facet result is not of type FilteredFacetResult: " + facetResult);
             }
         }).orElse(null);
     }

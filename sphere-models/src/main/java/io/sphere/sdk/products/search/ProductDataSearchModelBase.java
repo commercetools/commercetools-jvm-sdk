@@ -15,6 +15,10 @@ class ProductDataSearchModelBase extends SearchModelImpl<ProductProjection> {
         return new ProductVariantSearchModel(this, "variants");
     }
 
+    public StringSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> id() {
+        return new StringSearchModel<>(this, "id", new DirectionlessSearchSortBuilder<>());
+    }
+
     public LocalizedStringSearchModel<ProductProjection, DirectionlessSearchSortModel<ProductProjection>> name() {
         return new LocalizedStringSearchModel<>(this, "name", new DirectionlessSearchSortBuilder<>());
     }

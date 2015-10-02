@@ -20,17 +20,17 @@ public class RangedFacetSearchModel<T, V extends Comparable<? super V>> extends 
     }
 
     @Override
-    public TermFacetExpression<T, V> byAllTerms() {
+    public FacetExpression<T> byAllTerms() {
         return super.byAllTerms();
     }
 
     @Override
-    public FilteredFacetExpression<T, V> byTerm(final V value) {
+    public FacetExpression<T> byTerm(final V value) {
         return super.byTerm(value);
     }
 
     @Override
-    public FilteredFacetExpression<T, V> byTerm(final Iterable<V> values) {
+    public FacetExpression<T> byTerm(final Iterable<V> values) {
         return super.byTerm(values);
     }
 
@@ -40,7 +40,7 @@ public class RangedFacetSearchModel<T, V extends Comparable<? super V>> extends 
      * @param range the range of values to be present in the facet
      * @return a facet expression for only the given range
      */
-    public RangeFacetExpression<T, V> byRange(final FacetRange<V> range) {
+    public FacetExpression<T> byRange(final FacetRange<V> range) {
         return byRange(singletonList(range));
     }
 
@@ -50,7 +50,7 @@ public class RangedFacetSearchModel<T, V extends Comparable<? super V>> extends 
      * @param ranges the ranges of values to be present in the facet
      * @return a facet expression for only the given ranges
      */
-    public RangeFacetExpression<T, V> byRange(final Iterable<FacetRange<V>> ranges) {
+    public FacetExpression<T> byRange(final Iterable<FacetRange<V>> ranges) {
         return new RangeFacetExpression<>(this, typeSerializer, ranges, alias);
     }
 
@@ -61,7 +61,7 @@ public class RangedFacetSearchModel<T, V extends Comparable<? super V>> extends 
      * @param upperEndpoint the upper endpoint of the range of values to be present in the facet, inclusive
      * @return a facet expression for only the given range
      */
-    public RangeFacetExpression<T, V> byRange(final V lowerEndpoint, final V upperEndpoint) {
+    public FacetExpression<T> byRange(final V lowerEndpoint, final V upperEndpoint) {
         return byRange(FacetRange.of(lowerEndpoint, upperEndpoint));
     }
 
@@ -71,7 +71,7 @@ public class RangedFacetSearchModel<T, V extends Comparable<? super V>> extends 
      * @param value the lower endpoint of the range [v, +∞)
      * @return a facet expression for only the given range
      */
-    public RangeFacetExpression<T, V> byGreaterThanOrEqualTo(final V value) {
+    public FacetExpression<T> byGreaterThanOrEqualTo(final V value) {
         return byRange(FacetRange.atLeast(value));
     }
 
@@ -81,21 +81,21 @@ public class RangedFacetSearchModel<T, V extends Comparable<? super V>> extends 
      * @param value the upper endpoint of the range (-∞, v]
      * @return a facet expression for only the given range
      */
-    public RangeFacetExpression<T, V> byLessThan(final V value) {
+    public FacetExpression<T> byLessThan(final V value) {
         return byRange(FacetRange.lessThan(value));
     }
 
     // NOT SUPPORTED YET
 /*
-    public RangeFacetExpression<T, V> byGreaterThan(final V value) {
+    public FacetExpression<T> byGreaterThan(final V value) {
         return range(Range.greaterThan(value));
     }
 
-    public RangeFacetExpression<T, V> byLessThanOrEqualTo(final V value) {
+    public FacetExpression<T> byLessThanOrEqualTo(final V value) {
         return range(Range.atMost(value));
     }
 
-    public RangeFacetExpression<T, V> byAllRanges() {
+    public FacetExpression<T> byAllRanges() {
         return range(Range.all());
     }
 */
