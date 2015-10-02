@@ -12,44 +12,44 @@ import io.sphere.sdk.json.TypeReferences;
  */
 public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject<T>> {
     /**
-     * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code typeReference}specified value type.
+     * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code valueTypeReference}specified value type.
      * @param customObject the custom object to delete
-     * @param typeReference the type reference to deserialize the updated custom object from the SPHERE.IO response
+     * @param valueTypeReference the type reference to deserialize the updated custom object from the SPHERE.IO response
      * @return custom object
      */
-    static <T> DeleteCommand<CustomObject<T>> of(final CustomObject<T> customObject, final TypeReference<T> typeReference) {
-        return of(customObject.getContainer(), customObject.getKey(), typeReference);
+    static <T> DeleteCommand<CustomObject<T>> of(final CustomObject<T> customObject, final TypeReference<T> valueTypeReference) {
+        return of(customObject.getContainer(), customObject.getKey(), valueTypeReference);
     }
 
     /**
-     * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code typeReference}specified value type.
+     * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code valueTypeReference}specified value type.
      * @param customObject the custom object to delete
-     * @param clazz the class of the value, if it not uses generics like lists, typically for POJOs
+     * @param valueClass the class of the value, if it not uses generics like lists, typically for POJOs
      * @return custom object
      */
-    static <T> DeleteCommand<CustomObject<T>> of(final CustomObject<T> customObject, final Class<?> clazz) {
-        return of(customObject.getContainer(), customObject.getKey(), clazz);
+    static <T> DeleteCommand<CustomObject<T>> of(final CustomObject<T> customObject, final Class<T> valueClass) {
+        return of(customObject.getContainer(), customObject.getKey(), valueClass);
     }
 
     /**
-     * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code typeReference}specified value type.
+     * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code valueTypeReference}specified value type.
      * @param container the container name of the custom object to delete
      * @param key the key name of the custom object to delete
      * @return custom object with a JsonNode value
      */
-    static <T> DeleteCommand<CustomObject<T>> of(final String container, final String key, final TypeReference<T> typeReference) {
-        return new CustomObjectDeleteCommandImpl<>(container, key, typeReference);
+    static <T> DeleteCommand<CustomObject<T>> of(final String container, final String key, final TypeReference<T> valueTypeReference) {
+        return new CustomObjectDeleteCommandImpl<>(container, key, valueTypeReference);
     }
 
     /**
-     * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code typeReference}specified value type.
+     * Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in {@code valueTypeReference}specified value type.
      * @param container the container name of the custom object to delete
      * @param key the key name of the custom object to delete
-     * @param clazz the class of the value, if it not uses generics like lists, typically for POJOs
+     * @param valueClass the class of the value, if it not uses generics like lists, typically for POJOs
      * @return custom object with a JsonNode value
      */
-    static <T> DeleteCommand<CustomObject<T>> of(final String container, final String key, final Class<?> clazz) {
-        return new CustomObjectDeleteCommandImpl<>(container, key, clazz);
+    static <T> DeleteCommand<CustomObject<T>> of(final String container, final String key, final Class<T> valueClass) {
+        return new CustomObjectDeleteCommandImpl<>(container, key, valueClass);
     }
 
     /**

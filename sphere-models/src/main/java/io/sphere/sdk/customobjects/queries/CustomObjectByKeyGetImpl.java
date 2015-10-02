@@ -21,7 +21,7 @@ final class CustomObjectByKeyGetImpl<T> extends CustomObjectCustomJsonMappingByK
         this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(javaType);
     }
 
-    public CustomObjectByKeyGetImpl(final String container, final String key, final Class<?> clazz) {
+    public CustomObjectByKeyGetImpl(final String container, final String key, final Class<T> clazz) {
         this(container, key, SphereJsonUtils.convertToJavaType(clazz));
     }
 

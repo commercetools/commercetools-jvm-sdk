@@ -31,7 +31,7 @@ final class CustomObjectDeleteCommandImpl<T> extends CommandImpl<CustomObject<T>
         return HttpRequestIntent.of(HttpMethod.DELETE, CustomObjectEndpoint.PATH + format("/%s/%s", container, key));
     }
 
-    CustomObjectDeleteCommandImpl(final String container, final String key, final Class<?> valueClass) {
+    CustomObjectDeleteCommandImpl(final String container, final String key, final Class<T> valueClass) {
         this(container, key, SphereJsonUtils.convertToJavaType(valueClass));
     }
 

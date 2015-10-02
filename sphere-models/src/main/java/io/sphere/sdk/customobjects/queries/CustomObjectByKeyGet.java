@@ -16,24 +16,24 @@ public interface CustomObjectByKeyGet<T> extends Get<CustomObject<T>> {
      * Creates an object to fetch a custom object by the container and key with POJO mapping.
      * @param container container of the custom object to fetch
      * @param key key of the custom object to fetch
-     * @param clazz the class of the value, if it not uses generics like lists, typically for POJOs
+     * @param valueClass the class of the value, if it not uses generics like lists, typically for POJOs
      * @param <T> the type of the value in the custom object
      * @return query object
      */
-    static <T> CustomObjectByKeyGet<T> of(final String container, final String key, final Class<?> clazz) {
-        return new CustomObjectByKeyGetImpl<>(container, key, clazz);
+    static <T> CustomObjectByKeyGet<T> of(final String container, final String key, final Class<T> valueClass) {
+        return new CustomObjectByKeyGetImpl<>(container, key, valueClass);
     }
 
     /**
      * Creates an object to fetch a custom object by the container and key with POJO mapping.
      * @param container container of the custom object to fetch
      * @param key key of the custom object to fetch
-     * @param typeReference the type reference of the value of the custom object
+     * @param valueTypeReference the type reference of the value of the custom object
      * @param <T> the type of the value in the custom object
      * @return query object
      */
-    static <T> CustomObjectByKeyGet<T> of(final String container, final String key, final TypeReference<T> typeReference) {
-        return new CustomObjectByKeyGetImpl<>(container, key, typeReference);
+    static <T> CustomObjectByKeyGet<T> of(final String container, final String key, final TypeReference<T> valueTypeReference) {
+        return new CustomObjectByKeyGetImpl<>(container, key, valueTypeReference);
     }
 
     /**

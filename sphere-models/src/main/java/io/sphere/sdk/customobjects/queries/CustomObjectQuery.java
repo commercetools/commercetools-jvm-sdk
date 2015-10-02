@@ -11,12 +11,22 @@ public interface CustomObjectQuery<T> extends MetaModelQueryDsl<CustomObject<T>,
 
     /**
      * Query object for custom objects where the result value is a POJO.
-     * @param typeReference the type reference of the value of the custom object
+     * @param valueTypeReference the type reference of the value of the custom object
      * @param <T> the Java type of the value of the custom object
      * @return query object
      */
-    static <T> CustomObjectQuery<T> of(final TypeReference<T> typeReference) {
-        return new CustomObjectQueryImpl<>(typeReference);
+    static <T> CustomObjectQuery<T> of(final TypeReference<T> valueTypeReference) {
+        return new CustomObjectQueryImpl<>(valueTypeReference);
+    }
+
+    /**
+     * Query object for custom objects where the result value is a POJO.
+     * @param valueClass the class of the value, if it not uses generics like lists, typically for POJOs
+     * @param <T> the Java type of the value of the custom object
+     * @return query object
+     */
+    static <T> CustomObjectQuery<T> of(final Class<T> valueClass) {
+        return new CustomObjectQueryImpl<>(valueClass);
     }
 
     /**
