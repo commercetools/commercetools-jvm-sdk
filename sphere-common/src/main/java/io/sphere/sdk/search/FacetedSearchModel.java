@@ -3,6 +3,7 @@ package io.sphere.sdk.search;
 import javax.annotation.Nullable;
 import java.util.List;
 
+import static io.sphere.sdk.search.FacetRange.atLeast;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
@@ -32,32 +33,45 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
         return new FacetedSearchModel<>(this, null, alias);
     }
 
-    public FacetedSearchExpression<T> all() {
-        return facetedSearchOf(emptyList());
+    /**
+     * Generates a term facet expression for the attribute, with no filter expression associated.
+     * @return a faceted search expression
+     */
+
+    public FacetedSearchExpression<T> allTerms() {
+        return termFacetedSearchOf(emptyList());
     }
 
     /**
-     * Generates a facet expression for the attribute and a filter expression to select all elements with the given attribute value.
+     * Generates a range facet expression for the attribute, with no filter expression associated.
+     * @return a faceted search expression
+     */
+    public FacetedSearchExpression<T> allRanges() {
+        return rangeFacetedSearchOf(emptyList());
+    }
+
+    /**
+     * Generates a term facet expression for the attribute and a filter expression to select all elements with the given attribute value.
      * @param value the value to filter by
      * @return a faceted search expression for the given value
      * @see FilterSearchModel#by(Object)
      */
     public FacetedSearchExpression<T> by(final String value) {
-        return facetedSearchOf(filterByTerm(value));
+        return termFacetedSearchOf(filterByTerm(value));
     }
 
     /**
-     * Generates a facet expression for the attribute and a filter expression to select all elements with attributes matching any of the given values.
+     * Generates a term facet expression for the attribute and a filter expression to select all elements with attributes matching any of the given values.
      * @param values the values to filter by
      * @return a faceted search expression for the given values
      * @see FilterSearchModel#byAny(Iterable)
      */
     public FacetedSearchExpression<T> byAny(final Iterable<String> values) {
-        return facetedSearchOf(filterByTerm(values));
+        return termFacetedSearchOf(filterByTerm(values));
     }
 
     /**
-     * Generates a facet expression for the attribute and a filter expression to select all elements with attributes matching all the given values.
+     * Generates a term facet expression for the attribute and a filter expression to select all elements with attributes matching all the given values.
      * @param values the values to filter by
      * @return a faceted search expression for the given values
      * @see FilterSearchModel#byAll(Iterable)
@@ -66,31 +80,31 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
         final List<FilterExpression<T>> filterExpressions = stream(values.spliterator(), false)
                 .map(value -> filterByTerm(value))
                 .collect(toList());
-        return facetedSearchOf(filterExpressions);
+        return termFacetedSearchOf(filterExpressions);
     }
 
     /**
-     * Generates a facet expression for the attribute and a filter expression to select all elements with an attribute value within the given range.
+     * Generates a range facet expression for the attribute and a filter expression to select all elements with an attribute value within the given range.
      * @param range the range of values to filter by
      * @return a faceted search expression for the given range
      * @see RangedFilterSearchModel#byRange(FilterRange)
      */
     public FacetedSearchExpression<T> byRange(final FilterRange<String> range) {
-        return facetedSearchOf(filterByRange(range));
+        return rangeFacetedSearchOf(filterByRange(range));
     }
 
     /**
-     * Generates a facet expression for the attribute and a filter expression to select all elements with an attribute value within any of the given ranges.
+     * Generates a range facet expression for the attribute and a filter expression to select all elements with an attribute value within any of the given ranges.
      * @param ranges the ranges of values to filter by
      * @return a faceted search expression for the given ranges
      * @see RangedFilterSearchModel#byAllRanges(Iterable)
      */
     public FacetedSearchExpression<T> byAnyRange(final Iterable<FilterRange<String>> ranges) {
-        return facetedSearchOf(filterByRange(ranges));
+        return rangeFacetedSearchOf(filterByRange(ranges));
     }
 
     /**
-     * Generates a facet expression for the attribute and a filter expression to select all elements with an attribute value within all the given ranges.
+     * Generates a range facet expression for the attribute and a filter expression to select all elements with an attribute value within all the given ranges.
      * @param ranges the ranges of values to filter by
      * @return a faceted search expression for the given ranges
      * @see RangedFilterSearchModel#byAllRanges(Iterable)
@@ -99,11 +113,11 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
         final List<FilterExpression<T>> filterExpressions = stream(ranges.spliterator(), false)
                 .map(range -> filterByRange(range))
                 .collect(toList());
-        return facetedSearchOf(filterExpressions);
+        return rangeFacetedSearchOf(filterExpressions);
     }
 
     /**
-     * Generates a facet expression for the attribute and a filter expression to select all elements with an attribute value within the range defined by the given endpoints.
+     * Generates a range facet expression for the attribute and a filter expression to select all elements with an attribute value within the range defined by the given endpoints.
      * @param lowerEndpoint the lower endpoint of the range of values to filter by, inclusive
      * @param upperEndpoint the upper endpoint of the range of values to filter by, inclusive
      * @return a faceted search expression for the given range
@@ -111,7 +125,7 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      */
     public FacetedSearchExpression<T> byRange(final String lowerEndpoint, final String upperEndpoint) {
         final FilterRange<String> range = FilterRange.of(lowerEndpoint, upperEndpoint);
-        return facetedSearchOf(filterByRange(range));
+        return rangeFacetedSearchOf(filterByRange(range));
     }
 
     private FilterExpression<T> filterByTerm(final String value) {
@@ -130,12 +144,24 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
         return new RangeFilterExpression<>(this, typeSerializer, ranges);
     }
 
-    private FacetedSearchExpression<T> facetedSearchOf(final FilterExpression<T> filterExpression) {
-        return facetedSearchOf(singletonList(filterExpression));
+    private FacetedSearchExpression<T> termFacetedSearchOf(final FilterExpression<T> filterExpression) {
+        return termFacetedSearchOf(singletonList(filterExpression));
     }
 
-    private FacetedSearchExpression<T> facetedSearchOf(final List<FilterExpression<T>> filterExpressions) {
+    private FacetedSearchExpression<T> termFacetedSearchOf(final List<FilterExpression<T>> filterExpressions) {
         final FacetExpression<T> facetExpression = new TermFacetExpression<>(this, typeSerializer, alias);
+        return new FacetedSearchExpressionImpl<>(facetExpression, filterExpressions);
+    }
+
+    private FacetedSearchExpression<T> rangeFacetedSearchOf(final FilterExpression<T> filterExpression) {
+        return rangeFacetedSearchOf(singletonList(filterExpression));
+    }
+
+    private FacetedSearchExpression<T> rangeFacetedSearchOf(final List<FilterExpression<T>> filterExpressions) {
+        // Unable to request (* to *), from 0 to * will at least cover all positive numbers - typical usage.
+        // If negative values are in the scope, then please use facet/filter expressions instead.
+        final List<FacetRange<String>> ranges = singletonList(atLeast("0"));
+        final FacetExpression<T> facetExpression = new RangeFacetExpression<>(this, typeSerializer, ranges, alias);
         return new FacetedSearchExpressionImpl<>(facetExpression, filterExpressions);
     }
 }
