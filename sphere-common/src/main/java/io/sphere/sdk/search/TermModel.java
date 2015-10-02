@@ -15,8 +15,8 @@ public interface TermModel<T, V> {
     FacetSearchModel<T, V> faceted();
 
     /**
-     * Gets an faceted search model (expecting simple Strings) while keeping the same search model path as this.
-     * This untyped search model allows you to build filters and facets, both range and term models.
+     * Eventually generates an expression to obtain term facets, as well as expressions to filter elements by certain values,
+     * in both cases using the same attribute path. The model requires simple Strings, to allow maximal flexibility.
      * @return the faceted search model for this instance
      */
     FacetedSearchModel<T> facetedSearch();
