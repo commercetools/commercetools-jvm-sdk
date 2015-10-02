@@ -116,8 +116,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
  <div id="io-sphere-sdk-customobjects-CustomObjectFixtures-createCustomObject--%s" class=code-example><pre><code class='java'>final String container = "CustomObjectFixtures";
 final String key = randomKey();
 final Foo value = FOO_DEFAULT_VALUE;
-final TypeReference&lt;CustomObject&lt;Foo&gt;&gt; typeReference = Foo.customObjectTypeReference();
-final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, typeReference);
+final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, Foo.class);
 final CustomObjectUpsertCommand&lt;Foo&gt; createCommand = CustomObjectUpsertCommand.of(draft);
 final CustomObject&lt;Foo&gt; customObject = client.execute(createCommand);
 assertThat(customObject.getContainer()).isEqualTo(container);

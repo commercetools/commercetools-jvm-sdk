@@ -1131,6 +1131,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#convertToJavaType-com.fasterxml.jackson.core.type.TypeReference-">convertToJavaType(TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#convertToJavaType-java.lang.Class-">convertToJavaType(Class&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#copyBuilder--">copyBuilder()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html#copyBuilder--">copyBuilder()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></dt>
@@ -1185,6 +1187,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Base class to implement commands which create an entity in SPHERE.IO.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-C-java.lang.String-com.fasterxml.jackson.databind.JavaType-">CreateCommandImpl(C, String, JavaType)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-C-io.sphere.sdk.client.JsonEndpoint-">CreateCommandImpl(C, JsonEndpoint&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpStatusCode.html#CREATED_201">CREATED_201</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpStatusCode.html" title="class in io.sphere.sdk.http">HttpStatusCode</a></dt>
@@ -2486,6 +2490,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectUtils.html#getCustomObjectJavaTypeForValue-com.fasterxml.jackson.core.type.TypeReference-">getCustomObjectJavaTypeForValue(TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectUtils.html" title="class in io.sphere.sdk.customobjects">CustomObjectUtils</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectUtils.html#getCustomObjectJavaTypeForValue-com.fasterxml.jackson.databind.JavaType-">getCustomObjectJavaTypeForValue(JavaType)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectUtils.html" title="class in io.sphere.sdk.customobjects">CustomObjectUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#getData--">getData()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http">FormUrlEncodedHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/updateactions/SetDateOfBirth.html#getDateOfBirth--">getDateOfBirth()</a></span> - Method in class io.sphere.sdk.customers.commands.updateactions.<a href="io/sphere/sdk/customers/commands/updateactions/SetDateOfBirth.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetDateOfBirth</a></dt>
@@ -2801,6 +2807,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Delivery.html#getItems--">getItems()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnInfo.html#getItems--">getItems()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnInfo.html" title="class in io.sphere.sdk.orders">ReturnInfo</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#getJavaType--">getJavaType()</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereServiceException.html#getJsonBody--">getJsonBody()</a></span> - Method in exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereServiceException.html" title="class in io.sphere.sdk.client">SphereServiceException</a></dt>
 <dd>&nbsp;</dd>
@@ -5848,7 +5856,15 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in <code>typeReference</code>specified value type.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-io.sphere.sdk.customobjects.CustomObject-java.lang.Class-">of(CustomObject&lt;T&gt;, Class&lt;?&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in <code>typeReference</code>specified value type.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">of(String, String, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in <code>typeReference</code>specified value type.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-java.lang.String-java.lang.Class-">of(String, String, Class&lt;?&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
 <dd>
 <div class="block">Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in <code>typeReference</code>specified value type.</div>
 </dd>
@@ -5868,6 +5884,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customobjects.expansion.<a href="io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html" title="class in io.sphere.sdk.customobjects.expansion">CustomObjectExpansionModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#of-java.lang.String-java.lang.String-java.lang.Class-">of(String, String, Class&lt;?&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
+<dd>
+<div class="block">Creates an object to fetch a custom object by the container and key with POJO mapping.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#of-java.lang.String-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">of(String, String, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
 <dd>
 <div class="block">Creates an object to fetch a custom object by the container and key with POJO mapping.</div>
@@ -7005,11 +7025,19 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Action to remove a custom attribute.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpdate(CustomObject&lt;T&gt;, T, TypeReference&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpdate(CustomObject&lt;T&gt;, T, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Creates a draft for updating a custom object.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpsert(String, String, T, TypeReference&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-java.lang.Class-">ofUnversionedUpdate(CustomObject&lt;T&gt;, T, Class&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dd>
+<div class="block">Creates a draft for updating a custom object.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpsert(String, String, T, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dd>
+<div class="block">Creates a draft for creating or updating a custom object.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-T-java.lang.Class-">ofUnversionedUpsert(String, String, T, Class&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </dd>
@@ -7017,11 +7045,19 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpdate(CustomObject&lt;T&gt;, T, TypeReference&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpdate(CustomObject&lt;T&gt;, T, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Creates a draft for updating a custom object.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-long-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpsert(String, String, T, long, TypeReference&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-java.lang.Class-">ofVersionedUpdate(CustomObject&lt;T&gt;, T, Class&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dd>
+<div class="block">Creates a draft for updating a custom object.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-long-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpsert(String, String, T, long, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dd>
+<div class="block">Creates a draft for creating or updating a custom object.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-long-java.lang.Class-">ofVersionedUpsert(String, String, T, long, Class&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </dd>
@@ -9352,8 +9388,6 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerToken.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerToken.html" title="interface in io.sphere.sdk.customers">CustomerToken</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCode.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes">DiscountCode</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/inventory/InventoryEntry.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.inventory.<a href="io/sphere/sdk/inventory/InventoryEntry.html" title="interface in io.sphere.sdk.inventory">InventoryEntry</a></dt>
@@ -10353,7 +10387,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion(Versioned&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#withVersion-long-">withVersion(long)</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#withVersion-java.lang.Long-">withVersion(Long)</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Copies this <a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects"><code>CustomObjectDraft</code></a> and sets the version to <code>version</code> to use optimistic locking.</div>
 </dd>

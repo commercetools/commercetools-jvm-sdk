@@ -189,8 +189,7 @@ public class Foo extends Base {
  <div id="io-sphere-sdk-customobjects-CustomObjectFixtures-createCustomObject--%s" class=code-example><pre><code class='java'>final String container = "CustomObjectFixtures";
 final String key = randomKey();
 final Foo value = FOO_DEFAULT_VALUE;
-final TypeReference&lt;CustomObject&lt;Foo&gt;&gt; typeReference = Foo.customObjectTypeReference();
-final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, typeReference);
+final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, Foo.class);
 final CustomObjectUpsertCommand&lt;Foo&gt; createCommand = CustomObjectUpsertCommand.of(draft);
 final CustomObject&lt;Foo&gt; customObject = client.execute(createCommand);
 assertThat(customObject.getContainer()).isEqualTo(container);
@@ -207,9 +206,8 @@ In this case you use also <a href="../../../../io/sphere/sdk/customobjects/comma
  to use optimistic concurrency control as in here:
 
  <div id="io-sphere-sdk-customobjects-commands-CustomObjectUpsertCommandTest-updateWithVersion--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), customObject -&gt; {
-    final TypeReference&lt;CustomObject&lt;Foo&gt;&gt; typeReference = Foo.customObjectTypeReference();
     final Foo newValue = new Foo("new value", 72);
-    final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofVersionedUpdate(customObject, newValue, typeReference);
+    final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofVersionedUpdate(customObject, newValue, Foo.class);
     final CustomObjectUpsertCommand&lt;Foo&gt; command = CustomObjectUpsertCommand.of(draft);
     final CustomObject&lt;Foo&gt; updatedCustomObject = execute(command);
     final Foo loadedValue = updatedCustomObject.getValue();
@@ -219,9 +217,8 @@ In this case you use also <a href="../../../../io/sphere/sdk/customobjects/comma
  Or you can just override the value using <a href="../../../../io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-"><code>CustomObjectDraft.ofUnversionedUpdate(io.sphere.sdk.customobjects.CustomObject, Object, com.fasterxml.jackson.core.type.TypeReference)</code></a>
 
  <div id="io-sphere-sdk-customobjects-commands-CustomObjectUpsertCommandTest-updateWithoutVersion--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), customObject -&gt; {
-    final TypeReference&lt;CustomObject&lt;Foo&gt;&gt; typeReference = Foo.customObjectTypeReference();
     final Foo newValue = new Foo("new value", 72);
-    final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpdate(customObject, newValue, typeReference);
+    final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpdate(customObject, newValue, Foo.class);
     final CustomObjectUpsertCommand&lt;Foo&gt; createCommand = CustomObjectUpsertCommand.of(draft);
     final CustomObject&lt;Foo&gt; updatedCustomObject = execute(createCommand);
     final Foo loadedValue = updatedCustomObject.getValue();
@@ -413,7 +410,7 @@ import io.sphere.sdk.models.Base;
 final CustomerNumberCounter value = new CustomerNumberCounter(lastUsedNumber, "&lt;no name&gt;");
 final int initialVersionNumber = 0;
 final CustomObjectDraft&lt;CustomerNumberCounter&gt; draft = //important: it takes version as parameter
-        CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, initialVersionNumber, CustomerNumberCounter.customObjectTypeReference());
+        CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, initialVersionNumber, CustomerNumberCounter.class);
 
 final Command&lt;CustomObject&lt;CustomerNumberCounter&gt;&gt; initialSettingCommand = CustomObjectUpsertCommand.of(draft);
 
@@ -441,7 +438,7 @@ final CustomObject&lt;CustomerNumberCounter&gt; loadedCustomObject = execute(fet
 final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;
 final CustomerNumberCounter value = new CustomerNumberCounter(newCustomerNumber, "whateverid");
 final long version = loadedCustomObject.getVersion();
-final CustomObjectDraft&lt;CustomerNumberCounter&gt; draft = CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, version, CustomerNumberCounter.customObjectTypeReference());
+final CustomObjectDraft&lt;CustomerNumberCounter&gt; draft = CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, version, CustomerNumberCounter.class);
 final CustomObjectUpsertCommand&lt;CustomerNumberCounter&gt; updateCommand = CustomObjectUpsertCommand.of(draft);
 final CustomObject&lt;CustomerNumberCounter&gt; updatedCustomObject = execute(updateCommand);
 assertThat(updatedCustomObject.getValue().getLastUsedNumber()).isEqualTo(newCustomerNumber);
@@ -821,7 +818,7 @@ public interface Uvw {
 
  As a result you only work with the interface making it transparent if it is an old or new version:
 
- <div id="io-sphere-sdk-customobjects-migrations-CustomObjectsMigrationsTest-exampleForMigrationCall--%s" class=code-example><pre><code class='java'>final CustomObjectByKeyGet&lt;Uvw&gt; fetch = CustomObjectByKeyGet.of("container", "key", Uvw.typeReference());
+ <div id="io-sphere-sdk-customobjects-migrations-CustomObjectsMigrationsTest-exampleForMigrationCall--%s" class=code-example><pre><code class='java'>final CustomObjectByKeyGet&lt;Uvw&gt; fetch = CustomObjectByKeyGet.of("container", "key", Uvw.class);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/migrations/CustomObjectsMigrationsTest.java" target="_blank">test code</a>.</pre></div>
 
 
