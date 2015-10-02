@@ -19,7 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomObjectQueryTest extends IntegrationTest {
 
-    private static final CustomObjectQuery<Foo> CUSTOM_OBJECT_QUERY = CustomObjectQuery.of(Foo.typeReference());
+    private static final CustomObjectQuery<Foo> CUSTOM_OBJECT_QUERY = CustomObjectQuery.of(Foo.class);
 
     @BeforeClass
     public static void cleanCustomObjects() throws Exception {

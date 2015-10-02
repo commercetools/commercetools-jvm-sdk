@@ -1,8 +1,6 @@
 package io.sphere.sdk.customobjects.occexample;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
 
 public class CustomerNumberCounter extends Base {
@@ -21,14 +19,5 @@ public class CustomerNumberCounter extends Base {
 
     public String getCustomerId() {
         return customerId;
-    }
-
-    public static TypeReference<CustomObject<CustomerNumberCounter>> customObjectTypeReference() {
-        return new TypeReference<CustomObject<CustomerNumberCounter>>() {
-        };
-    }
-
-    public static TypeReference<CustomerNumberCounter> typeReference() {
-        return new TypeReference<CustomerNumberCounter>() { };
     }
 }

@@ -20,7 +20,7 @@ public class CustomObjectFixtures {
     public static void withCustomObject(final TestClient client, final Consumer<CustomObject<Foo>> consumer) {
         final CustomObject<Foo> customObject = createCustomObject(client);
         consumer.accept(customObject);
-        final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.typeReference());
+        final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.class);
         client.execute(deleteCommand);
     }
 
@@ -43,7 +43,7 @@ public class CustomObjectFixtures {
     public static void withCustomObject(final TestClient client, final String container, final String key, final Consumer<CustomObject<Foo>> consumer) {
         final CustomObject<Foo> customObject = createCustomObjectOfContainerAndKey(client, container, key);
         consumer.accept(customObject);
-        final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.typeReference());
+        final DeleteCommand<CustomObject<Foo>> deleteCommand = CustomObjectDeleteCommand.of(customObject, Foo.class);
         client.execute(deleteCommand);
     }
 

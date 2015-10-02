@@ -1,10 +1,7 @@
 package io.sphere.sdk.customobjects.demo;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.queries.PagedQueryResult;
 
 /**
  A demo class for a value of a custom object
@@ -28,32 +25,5 @@ public class Foo extends Base {
 
     public long getBaz() {
         return baz;
-    }
-
-    public static TypeReference<Foo> typeReference() {
-        return new TypeReference<Foo>(){
-            @Override
-            public String toString() {
-                return "TypeReference<" + Foo.class.getSimpleName() + ">";
-            }
-        };
-    }
-
-    public static TypeReference<CustomObject<Foo>> customObjectTypeReference() {
-        return new TypeReference<CustomObject<Foo>>(){
-            @Override
-            public String toString() {
-                return "TypeReference<CustomObject<" + Foo.class.getSimpleName() + ">>";
-            }
-        };
-    }
-
-    public static TypeReference<PagedQueryResult<CustomObject<Foo>>> pagedQueryResultTypeReference() {
-        return new TypeReference<PagedQueryResult<CustomObject<Foo>>>(){
-            @Override
-            public String toString() {
-                return "TypeReference<PagedQueryResult<CustomObject<" + Foo.class.getSimpleName() + ">>>";
-            }
-        };
     }
 }

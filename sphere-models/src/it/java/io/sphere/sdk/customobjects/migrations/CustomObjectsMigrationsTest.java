@@ -23,7 +23,7 @@ public class CustomObjectsMigrationsTest extends IntegrationTest {
         final CustomObjectDraft<io.sphere.sdk.customobjects.migrations.version1.Xyz> draft = CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, new io.sphere.sdk.customobjects.migrations.version1.Xyz("foo"), io.sphere.sdk.customobjects.migrations.version1.Xyz.class);
         final CustomObject<io.sphere.sdk.customobjects.migrations.version1.Xyz> customObject = execute(CustomObjectUpsertCommand.of(draft));
 
-        final CustomObject<io.sphere.sdk.customobjects.migrations.version2.Xyz> xyz2CustomObject = execute(CustomObjectByKeyGet.of(CONTAINER, key, io.sphere.sdk.customobjects.migrations.version2.Xyz.typeReference()));
+        final CustomObject<io.sphere.sdk.customobjects.migrations.version2.Xyz> xyz2CustomObject = execute(CustomObjectByKeyGet.of(CONTAINER, key, io.sphere.sdk.customobjects.migrations.version2.Xyz.class));
         assertThat(xyz2CustomObject.getValue().getBar()).isNull();
 
         final CustomObjectUpsertCommand<io.sphere.sdk.customobjects.migrations.version2.Xyz> upsertCommand =
@@ -38,7 +38,7 @@ public class CustomObjectsMigrationsTest extends IntegrationTest {
         final CustomObjectUpsertCommand<io.sphere.sdk.customobjects.migrations.version2.Xyz> upsertCommand =
                 CustomObjectUpsertCommand.of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, new io.sphere.sdk.customobjects.migrations.version2.Xyz("foo", "bar"), io.sphere.sdk.customobjects.migrations.version2.Xyz.class));
         execute(upsertCommand);
-        final CustomObject<Xyz> xyz3CustomObject = execute(CustomObjectByKeyGet.of(CONTAINER, key, Xyz.typeReference()));
+        final CustomObject<Xyz> xyz3CustomObject = execute(CustomObjectByKeyGet.of(CONTAINER, key, Xyz.class));
         assertThat(xyz3CustomObject.getValue().getBar()).isEqualTo("bar");
     }
 
@@ -55,7 +55,7 @@ public class CustomObjectsMigrationsTest extends IntegrationTest {
         final CustomObject<io.sphere.sdk.customobjects.migrations.version1.Uvw> objectSchema1 = execute(CustomObjectUpsertCommand.of(draft));
         assertThat(objectSchema1.getValue().getFoo()).isEqualTo("a&b");
 
-        final CustomObject<Uvw> uvwCustomObjectSchema1 = execute(CustomObjectByKeyGet.of(CONTAINER, key, Uvw.typeReference()));
+        final CustomObject<Uvw> uvwCustomObjectSchema1 = execute(CustomObjectByKeyGet.of(CONTAINER, key, Uvw.class));
         assertThat(uvwCustomObjectSchema1.getValue()).isInstanceOf(UvwSchemaVersion1.class);
         assertThat(uvwCustomObjectSchema1.getValue().getFoo()).isEqualTo(new Foo("a", "b"));
 

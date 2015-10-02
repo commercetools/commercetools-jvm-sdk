@@ -35,7 +35,7 @@ public class FlowTest extends IntegrationTest {
 
     private void doAnUpdate() {
         final CustomObjectByKeyGet<CustomerNumberCounter> fetch =
-                CustomObjectByKeyGet.of(CONTAINER, KEY, CustomerNumberCounter.typeReference());
+                CustomObjectByKeyGet.of(CONTAINER, KEY, CustomerNumberCounter.class);
 
         final CustomObject<CustomerNumberCounter> loadedCustomObject = execute(fetch);
         final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;
