@@ -3,8 +3,8 @@ package io.sphere.sdk.customobjects;
 import io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand;
 import org.junit.Test;
 
-import static org.assertj.core.api.StrictAssertions.assertThat;
-import static org.assertj.core.api.StrictAssertions.catchThrowable;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 
 public class CustomObjectKeyTest {
     @Test
