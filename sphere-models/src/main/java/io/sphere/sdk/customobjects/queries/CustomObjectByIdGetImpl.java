@@ -9,20 +9,20 @@ import io.sphere.sdk.json.SphereJsonUtils;
 
 import java.util.Optional;
 
-final class CustomObjectByKeyGetImpl<T> extends CustomObjectCustomJsonMappingByKeyGet<T> implements CustomObjectByKeyGet<T> {
+final class CustomObjectByIdGetImpl<T> extends CustomObjectCustomJsonMappingByXGet<T> implements CustomObjectByIdGet<T> {
     private final JavaType javaType;
 
-    public CustomObjectByKeyGetImpl(final String container, final String key, final JavaType javaType) {
-        super(container, key);
-        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(javaType);
+    public CustomObjectByIdGetImpl(final String id, final JavaType valueJavaType) {
+        super("/" + id);
+        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType);
     }
 
-    public CustomObjectByKeyGetImpl(final String container, final String key, final Class<T> clazz) {
-        this(container, key, SphereJsonUtils.convertToJavaType(clazz));
+    public CustomObjectByIdGetImpl(final String id, final Class<T> valueClass) {
+        this(id, SphereJsonUtils.convertToJavaType(valueClass));
     }
 
-    public CustomObjectByKeyGetImpl(final String container, final String key, final TypeReference<T> typeReference) {
-        this(container, key, SphereJsonUtils.convertToJavaType(typeReference));
+    public CustomObjectByIdGetImpl(final String id, final TypeReference<T> valueTypeReference) {
+        this(id, SphereJsonUtils.convertToJavaType(valueTypeReference));
     }
 
     @Override
