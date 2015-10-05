@@ -6,8 +6,14 @@ import io.sphere.sdk.queries.ResourceQueryModelImpl;
 import io.sphere.sdk.queries.StringQuerySortingModel;
 
 /**
- * Metamodel to explore for which fields can be queried in a {@link io.sphere.sdk.customobjects.CustomObject}.
+ * <p>Metamodel to explore for which fields can be queried in a CustomObject.</p>
+ *
+ *
+ * <p>Example:</p>
+ * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryTest#queryWithClass()}
+ *
  * @param <T> The type of the value of the custom object.
+ * @see CustomObject
  */
 public class CustomObjectQueryModel<T extends CustomObject<?>> extends ResourceQueryModelImpl<T> {
 

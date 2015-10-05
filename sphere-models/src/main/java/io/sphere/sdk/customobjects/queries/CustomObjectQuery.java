@@ -7,6 +7,17 @@ import io.sphere.sdk.customobjects.expansion.CustomObjectExpansionModel;
 import io.sphere.sdk.json.TypeReferences;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 
+/**
+ * <p>Queries custom objects.</p>
+ *
+ *
+ *
+ *
+ * {@include.example io.sphere.sdk.customobjects.queries.CustomObjectQueryTest#queryByContainer()}
+ *
+ * @param <T> The type of the value of this custom object.
+ * @see CustomObject
+ */
 public interface CustomObjectQuery<T> extends MetaModelQueryDsl<CustomObject<T>, CustomObjectQuery<T>, CustomObjectQueryModel<CustomObject<T>>, CustomObjectExpansionModel<CustomObject<T>>> {
 
     /**

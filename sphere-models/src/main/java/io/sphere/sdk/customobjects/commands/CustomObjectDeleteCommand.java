@@ -7,8 +7,12 @@ import io.sphere.sdk.customobjects.CustomObject;
 import io.sphere.sdk.json.TypeReferences;
 
 /**
- * Deletes a custom object in SPHERE.IO.
+ * <p>Deletes a custom object in SPHERE.IO.</p>
+ *
+ * {@include.example io.sphere.sdk.customobjects.commands.CustomObjectDeleteCommandTest#demo()}
+ *
  * @param <T> type of the value of the custom object
+ * @see CustomObject
  */
 public interface CustomObjectDeleteCommand<T> extends DeleteCommand<CustomObject<T>> {
     /**

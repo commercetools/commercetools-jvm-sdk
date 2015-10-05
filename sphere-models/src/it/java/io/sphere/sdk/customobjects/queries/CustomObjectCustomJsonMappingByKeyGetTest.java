@@ -15,10 +15,14 @@ public class CustomObjectCustomJsonMappingByKeyGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         CustomObjectFixtures.withCustomObject(client(), co -> {
-            final Get<CustomObject<GsonFoo>> fetch = new GsonFooCustomObjectByKeyGet(co.getContainer(), co.getKey());
+            final String container = co.getContainer();
+            final String key = co.getKey();
+            final Get<CustomObject<GsonFoo>> fetch = new GsonFooCustomObjectByKeyGet(container, key);
             final CustomObject<GsonFoo> customObject = execute(fetch);
             assertThat(customObject).isNotNull();
             assertThat(customObject.toReference()).isEqualTo(co.toReference());
+            final GsonFoo value = customObject.getValue();
+            assertThat(value).isEqualTo(new GsonFoo("aString", 5));
         });
     }
 

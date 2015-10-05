@@ -4,6 +4,9 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
 
+/**
+ * Internal utility class.
+ */
 public final class CustomObjectUtils {
     private CustomObjectUtils() {
     }

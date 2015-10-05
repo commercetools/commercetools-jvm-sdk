@@ -9,7 +9,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.queries.MetaModelQueryDslBuilder;
 import io.sphere.sdk.queries.MetaModelQueryDslImpl;
 
-public class CustomObjectQueryImpl<T> extends MetaModelQueryDslImpl<CustomObject<T>, CustomObjectQuery<T>, CustomObjectQueryModel<CustomObject<T>>, CustomObjectExpansionModel<CustomObject<T>>> implements CustomObjectQuery<T> {
+final class CustomObjectQueryImpl<T> extends MetaModelQueryDslImpl<CustomObject<T>, CustomObjectQuery<T>, CustomObjectQueryModel<CustomObject<T>>, CustomObjectExpansionModel<CustomObject<T>>> implements CustomObjectQuery<T> {
     CustomObjectQueryImpl(final TypeReference<T> valueTypeReference) {
         this(SphereJsonUtils.convertToJavaType(valueTypeReference));
     }

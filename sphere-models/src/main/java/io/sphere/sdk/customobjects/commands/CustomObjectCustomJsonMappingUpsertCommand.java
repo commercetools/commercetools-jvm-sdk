@@ -9,6 +9,27 @@ import io.sphere.sdk.http.HttpResponse;
 
 /**
  Command for creating or updating a custom object using a custom JSON mapper.
+
+ <p>Example using Google GSON (multiple code snippets):</p>
+
+ <p>The execution of the command:</p>
+ {@include.example io.sphere.sdk.customobjects.commands.CustomObjectCustomJsonMappingUpsertCommandTest#execution()}
+
+ <p>The command class:</p>
+ {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObjectUpsertCommand}
+
+ <p>The draft containing container, key and value:</p>
+ {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObjectDraft}
+
+ <p>The resulting custom object class:</p>
+ {@include.example io.sphere.sdk.customobjects.demo.GsonFooCustomObject}
+
+ <p>The class of the value:</p>
+ {@include.example io.sphere.sdk.customobjects.demo.GsonFoo}
+
+
+ @param <T> The type of the value of this custom object.
+ @see CustomObject
  */
 public abstract class CustomObjectCustomJsonMappingUpsertCommand<T> extends SphereRequestBase implements CreateCommand<CustomObject<T>> {
 

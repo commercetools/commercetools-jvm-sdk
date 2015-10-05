@@ -45,7 +45,7 @@ trait other {
 
 trait test {
   val `junit-dep` = "junit" % "junit-dep" % "4.11"
-  val assertj =  "org.assertj" % "assertj-core" % "3.1.0"
+  val assertj =  "org.assertj" % "assertj-core" % "3.2.0"
   val `junit-interface` = "com.novocode" % "junit-interface" % "0.11"
 
   val allTestLibs =
