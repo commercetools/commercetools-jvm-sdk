@@ -129,7 +129,122 @@ var activeTableTab = "activeTableTab";
 <pre>public abstract class <span class="typeNameLabel">CustomObjectCustomJsonMappingByKeyGet&lt;T&gt;</span>
 extends <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a>
 implements <a href="../../../../../io/sphere/sdk/queries/Get.html" title="interface in io.sphere.sdk.queries">Get</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;</pre>
-<div class="block"><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> to fetch one <a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> by container and key but using a custom JSON mapper instead of the SDK default one.</div>
+<div class="block"><a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> to fetch one <a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> by container and key but using a custom JSON mapper instead of the SDK default one.
+
+ <p>Example for an implementation with Google GSON (multiple code snippets):</p>
+
+ <p>The class of the custom object value:</p>
+ <div id="io-sphere-sdk-customobjects-demo-GsonFoo%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.models.Base;
+</code></pre><pre><code class='java'>public class GsonFoo extends Base {
+
+    private final long baz;
+    private final String bar;
+
+    public GsonFoo(final String bar, final long baz) {
+        this.bar = bar;
+        this.baz = baz;
+    }
+
+    public String getBar() {
+        return bar;
+    }
+
+    public long getBaz() {
+        return baz;
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFoo.java" target="_blank">test code</a>.</pre></div>
+
+ <p>The class including the wrapper custom object:</p>
+ <div id="io-sphere-sdk-customobjects-demo-GsonFooCustomObject%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.customobjects.CustomObject;
+import java.time.ZonedDateTime;
+</code></pre><pre><code class='java'>public class GsonFooCustomObject implements CustomObject&lt;GsonFoo&gt; {
+    private final String container;
+    private final String key;
+    private final GsonFoo value;
+    private final String id;
+    private final Long version;
+
+    public GsonFooCustomObject(final String container, final String key, final GsonFoo value, final String id, final Long version) {
+        this.container = container;
+        this.key = key;
+        this.value = value;
+        this.id = id;
+        this.version = version;
+    }
+
+    @Override
+    public String getContainer() {
+        return container;
+    }
+
+    @Override
+    public ZonedDateTime getCreatedAt() {
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public String getId() {
+        return id;
+    }
+
+    @Override
+    public String getKey() {
+        return key;
+    }
+
+    @Override
+    public ZonedDateTime getLastModifiedAt() {
+        throw new UnsupportedOperationException("TODO");
+    }
+
+    @Override
+    public GsonFoo getValue() {
+        return value;
+    }
+
+    @Override
+    public Long getVersion() {
+        return version;
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObject.java" target="_blank">test code</a>.</pre></div>
+
+ <p>The implementation of the getter:</p>
+ <div id="io-sphere-sdk-customobjects-demo-GsonFooCustomObjectByKeyGet%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import com.google.gson.Gson;
+import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.customobjects.queries.CustomObjectCustomJsonMappingByKeyGet;
+import io.sphere.sdk.http.HttpResponse;
+</code></pre><pre><code class='java'>public class GsonFooCustomObjectByKeyGet extends CustomObjectCustomJsonMappingByKeyGet&lt;GsonFoo&gt; {
+
+    public GsonFooCustomObjectByKeyGet(final String container, final String key) {
+        super(container, key);
+    }
+
+    @Override
+    protected CustomObject&lt;GsonFoo&gt; deserializeCustomObject(final HttpResponse httpResponse) {
+        final String jsonAsString = getBodyAsString(httpResponse);
+        return new Gson().fromJson(jsonAsString, GsonFooCustomObject.class);
+    }
+}
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/demo/GsonFooCustomObjectByKeyGet.java" target="_blank">test code</a>.</pre></div>
+
+ <p>An execution example:</p>
+ <div id="io-sphere-sdk-customobjects-queries-CustomObjectCustomJsonMappingByKeyGetTest-execution--%s" class=code-example><pre><code class='java'>CustomObjectFixtures.withCustomObject(client(), co -&gt; {
+    final String container = co.getContainer();
+    final String key = co.getKey();
+    final Get&lt;CustomObject&lt;GsonFoo&gt;&gt; fetch = new GsonFooCustomObjectByKeyGet(container, key);
+    final CustomObject&lt;GsonFoo&gt; customObject = execute(fetch);
+    assertThat(customObject).isNotNull();
+    assertThat(customObject.toReference()).isEqualTo(co.toReference());
+    final GsonFoo value = customObject.getValue();
+    assertThat(value).isEqualTo(new GsonFoo("aString", 5));
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGetTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>

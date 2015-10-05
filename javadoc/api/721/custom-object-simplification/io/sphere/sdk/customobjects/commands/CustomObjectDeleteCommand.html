@@ -110,7 +110,24 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">CustomObjectDeleteCommand&lt;T&gt;</span>
 extends <a href="../../../../../io/sphere/sdk/commands/DeleteCommand.html" title="interface in io.sphere.sdk.commands">DeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;</pre>
-<div class="block">Deletes a custom object in SPHERE.IO.</div>
+<div class="block"><p>Deletes a custom object in SPHERE.IO.</p>
+
+ <div id="io-sphere-sdk-customobjects-commands-CustomObjectDeleteCommandTest-demo--%s" class=code-example><pre><code class='java'>final String key = randomKey();
+final Foo foo = new Foo("bar", 7);
+final CustomObject&lt;Foo&gt; customObject = execute(CustomObjectUpsertCommand
+        .of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, foo, Foo.class)));
+
+final CustomObject&lt;Foo&gt; deletedObject = execute(CustomObjectDeleteCommand.of(CONTAINER, key, Foo.class));
+
+assertThat(deletedObject.getValue()).isEqualTo(foo);
+assertThat(execute(CustomObjectByKeyGet.of(CONTAINER, key, Foo.class)))
+        .as("get request")
+        .isNull();
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
