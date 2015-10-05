@@ -7,6 +7,12 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 
+/**
+ * <p>Draft for {@link Cart} creation.</p>
+ *
+ * @see io.sphere.sdk.carts.commands.CartCreateCommand
+ * @see CartDraftBuilder
+ */
 public class CartDraft {
     private final CurrencyUnit currency;
     @Nullable

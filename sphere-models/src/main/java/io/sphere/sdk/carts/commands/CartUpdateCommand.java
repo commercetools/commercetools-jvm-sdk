@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Updates a cart.
+ *
  {@doc.gen list actions}
  */
 public interface CartUpdateCommand extends UpdateCommandDsl<Cart, CartUpdateCommand>, MetaModelExpansionDsl<Cart, CartUpdateCommand, CartExpansionModel<Cart>> {

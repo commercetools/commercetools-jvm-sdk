@@ -3,6 +3,10 @@ package io.sphere.sdk.carts.queries;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.queries.*;
 
+/**
+ * Base class to create predicates for {@link io.sphere.sdk.carts.CartLike} resources.
+ * @param <T> query context
+ */
 public abstract class CartLikeQueryModel<T> extends ResourceQueryModelImpl<T> {
     protected CartLikeQueryModel(QueryModel<T> parent, String pathSegment) {
         super(parent, pathSegment);

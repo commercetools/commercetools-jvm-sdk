@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductVariant;
 import io.sphere.sdk.taxcategories.TaxRate;
@@ -13,9 +14,15 @@ import javax.annotation.Nullable;
 import java.util.Set;
 
 /**
- A line item is a snapshot of a product variant at the time it was added to the cart.
+ <p>A line item is a snapshot of a product variant at the time it was added to the cart.</p>
 
  <p>A LineItem can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
+
+ @see io.sphere.sdk.carts.commands.updateactions.AddLineItem
+ @see io.sphere.sdk.carts.commands.updateactions.RemoveLineItem
+ @see io.sphere.sdk.carts.commands.updateactions.ChangeLineItemQuantity
+ @see Order#getLineItems()
+ @see Cart#getLineItems()
  */
 @JsonDeserialize(as=LineItemImpl.class)
 public interface LineItem extends LineItemLike {

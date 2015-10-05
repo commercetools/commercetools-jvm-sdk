@@ -3,6 +3,7 @@ package io.sphere.sdk.carts;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
@@ -12,9 +13,19 @@ import javax.money.MonetaryAmount;
 import java.util.Set;
 
 /**
- A custom line item is a generic item that can be added to the cart but is not bound to a product. You can use it for discounts (negative money), vouchers, complex cart rules, additional services or fees. You control the lifecycle of this item.
+ <p>A custom line item is a generic item that can be added to the cart but is not bound to a product. You can use it for discounts (negative money), vouchers, complex cart rules, additional services or fees. You control the lifecycle of this item.</p>
 
  <p>A CustomLineItem can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
+
+
+ <p>Example for adding a {@link CustomLineItem} to a {@link Cart}:</p>
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addCustomLineItem()}
+
+ @see CustomLineItemDraft
+ @see io.sphere.sdk.carts.commands.updateactions.AddCustomLineItem
+ @see io.sphere.sdk.carts.commands.updateactions.RemoveCustomLineItem
+ @see Order#getCustomLineItems()
+ @see Cart#getCustomLineItems()
  */
 @JsonDeserialize(as=CustomLineItemImpl.class)
 public interface CustomLineItem extends LineItemLike {

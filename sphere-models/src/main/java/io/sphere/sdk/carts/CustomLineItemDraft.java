@@ -7,6 +7,14 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.money.MonetaryAmount;
 
+/**
+ * <p>Draft for adding a custom line item to the cart.</p>
+ *
+ *  <p>Example for adding a {@link CustomLineItem} to a {@link Cart}:</p>
+ {@include.example io.sphere.sdk.carts.commands.CartUpdateCommandTest#addCustomLineItem()}
+
+ @see CustomLineItem
+ */
 public class CustomLineItemDraft {
     private final LocalizedString name;
     private final MonetaryAmount money;
