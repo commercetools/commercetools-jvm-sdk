@@ -12,6 +12,8 @@ import javax.annotation.Nullable;
 /**
  * A draft for creating or updating custom objects.
  * @param <T> The type of the value of the custom object.
+ * @see io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommand
+ * @see CustomObject
  */
 public class CustomObjectDraft<T> extends Base {
 

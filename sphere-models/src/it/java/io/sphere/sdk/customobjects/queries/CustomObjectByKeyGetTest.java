@@ -21,8 +21,7 @@ public class CustomObjectByKeyGetTest extends IntegrationTest {
                     CustomObjectByKeyGet.of(container, key, Foo.class);
             final CustomObject<Foo> customObject = execute(fetch);
             assertThat(customObject).isNotNull();
-            final Reference<CustomObject<JsonNode>> actual = customObject.toReference();
-            assertThat(actual).isEqualTo(existingCustomObject.toReference());
+            assertThat(customObject).isEqualTo(existingCustomObject);
         });
     }
 

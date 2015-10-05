@@ -54,7 +54,7 @@ Or you can just override the value using {@link io.sphere.sdk.customobjects.Cust
 
 {@include.example io.sphere.sdk.customobjects.commands.CustomObjectUpsertCommandTest#updateWithoutVersion()}
 
-<h3 id=pure-json-mapping>Custom objects with direct Jackson JSON</h3>
+<h3 id=pure-json-mapping>Custom objects with direct Jackson JsonNode</h3>
 
 <h4 id=direct-json-creation>Create and update custom objects</h4>
 
