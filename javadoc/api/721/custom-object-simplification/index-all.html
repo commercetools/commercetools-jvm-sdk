@@ -5874,6 +5874,14 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-java.lang.String-java.lang.String-"><code>CustomObjectDeleteCommand.ofJsonNode(String, String)</code></a> instead</span></div>
 </div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-long-com.fasterxml.jackson.core.type.TypeReference-">of(String, long, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object by id with optimistic concurrency control and returns the old custom object with the in <code>valueTypeReference</code> specified value type.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-long-java.lang.Class-">of(String, long, Class&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object by id with optimistic concurrency control and returns the old custom object with the in <code>valueClass</code> specified value type.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html#of-io.sphere.sdk.customobjects.CustomObjectDraft-">of(CustomObjectDraft&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectUpsertCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customobjects.expansion.<a href="io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html" title="class in io.sphere.sdk.customobjects.expansion">CustomObjectExpansionModel</a></dt>
@@ -6888,6 +6896,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-java.lang.String-java.lang.String-">ofJsonNode(String, String)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
 <dd>
 <div class="block">Deletes a custom object without optimistic concurrency control and returns the old custom object with a JsonNode value type.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-java.lang.String-long-">ofJsonNode(String, long)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object by id with optimistic concurrency control and returns the old custom object with a JsonNode value type.</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html#ofJsonNode-java.lang.String-">ofJsonNode(String)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByIdGet</a></dt>
 <dd>
