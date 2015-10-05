@@ -13,6 +13,8 @@ import static io.sphere.sdk.utils.SetUtils.asSet;
 /**
  * Template to create a new Channel.
  *
+ * {@include.example io.sphere.sdk.channels.commands.ChannelCreateCommandTest#execution()}
+ *
  * @see ChannelDraftBuilder
  */
 public class ChannelDraft extends Base {

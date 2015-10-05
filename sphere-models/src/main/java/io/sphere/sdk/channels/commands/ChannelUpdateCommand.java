@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Updates a channel.
+ *
  {@doc.gen list actions}
  */
 public interface ChannelUpdateCommand extends UpdateCommandDsl<Channel, ChannelUpdateCommand>, MetaModelExpansionDsl<Channel, ChannelUpdateCommand, ChannelExpansionModel<Channel>> {

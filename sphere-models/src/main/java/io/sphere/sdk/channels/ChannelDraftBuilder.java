@@ -8,6 +8,9 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Set;
 
+/**
+ * Builder for {@link ChannelDraft}.
+ */
 public class ChannelDraftBuilder extends Base implements Builder<ChannelDraft> {
     private final String key;
     private Set<ChannelRole> roles = Collections.emptySet();
