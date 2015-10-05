@@ -17,8 +17,7 @@ import static java.lang.String.format;
  *
  */
 final class CustomObjectDeleteCommandImpl<T> extends CommandImpl<CustomObject<T>> implements CustomObjectDeleteCommand<T> {
-    private final String container;
-    private final String key;
+    private final String path;
     private final JavaType javaType;
 
     @Override
@@ -28,7 +27,7 @@ final class CustomObjectDeleteCommandImpl<T> extends CommandImpl<CustomObject<T>
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(HttpMethod.DELETE, CustomObjectEndpoint.PATH + format("/%s/%s", container, key));
+        return HttpRequestIntent.of(HttpMethod.DELETE, CustomObjectEndpoint.PATH + path);
     }
 
     CustomObjectDeleteCommandImpl(final String container, final String key, final Class<T> valueClass) {
@@ -40,8 +39,20 @@ final class CustomObjectDeleteCommandImpl<T> extends CommandImpl<CustomObject<T>
     }
 
     CustomObjectDeleteCommandImpl(final String container, final String key, final JavaType valueJavaType) {
-        this.container = CustomObject.validatedContainer(container);
-        this.key = CustomObject.validatedKey(key);
+        this.path = format("/%s/%s", container, key);
+        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType);
+    }
+
+    CustomObjectDeleteCommandImpl(final String id, final long version, final Class<T> valueClass) {
+        this(id, version, SphereJsonUtils.convertToJavaType(valueClass));
+    }
+
+    CustomObjectDeleteCommandImpl(final String id, final long version, final TypeReference<T> typeReference) {
+        this(id, version, SphereJsonUtils.convertToJavaType(typeReference));
+    }
+
+    CustomObjectDeleteCommandImpl(final String id, final long version, final JavaType valueJavaType) {
+        this.path = format("/%s?version=%d", id, version);
         this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType);
     }
 }

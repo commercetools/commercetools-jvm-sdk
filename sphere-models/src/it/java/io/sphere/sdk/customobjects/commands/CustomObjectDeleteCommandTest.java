@@ -43,6 +43,23 @@ public class CustomObjectDeleteCommandTest extends IntegrationTest {
                 .isNull();
     }
 
+    @Test
+    public void demoById() {
+        final String key = randomKey();
+        final Foo foo = new Foo("bar", 7);
+        final CustomObject<Foo> customObject = execute(CustomObjectUpsertCommand
+                .of(CustomObjectDraft.ofUnversionedUpsert(CONTAINER, key, foo, Foo.class)));
+        final String id = customObject.getId();
+        final long version = customObject.getVersion();
+
+        final CustomObject<Foo> deletedObject = execute(CustomObjectDeleteCommand.of(id, version, Foo.class));
+
+        assertThat(deletedObject.getValue()).isEqualTo(foo);
+        assertThat(execute(CustomObjectByKeyGet.of(CONTAINER, key, Foo.class)))
+                .as("get request")
+                .isNull();
+    }
+
     private void testOmitResult(final Function<CustomObject<String>, DeleteCommand<CustomObject<JsonNode>>> f) {
         final String value = "hello";
         final String key = "storeFlatString";
