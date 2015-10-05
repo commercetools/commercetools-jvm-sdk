@@ -9,6 +9,11 @@ import io.sphere.sdk.queries.MetaModelGetDsl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Retrieves a categories by a known ID.
+ *
+ * {@include.example io.sphere.sdk.categories.queries.CategoryByIdGetTest#execution()}
+ */
 public interface CategoryByIdGet extends MetaModelGetDsl<Category, Category, CategoryByIdGet, CategoryExpansionModel<Category>> {
     static CategoryByIdGet of(final Identifiable<Category> category) {
         return of(category.getId());

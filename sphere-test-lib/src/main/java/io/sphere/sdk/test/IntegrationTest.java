@@ -5,9 +5,12 @@ import com.ning.http.client.AsyncHttpClientConfig;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.Query;
+import org.assertj.core.api.Condition;
 import org.junit.BeforeClass;
 import org.slf4j.LoggerFactory;
+
 
 public abstract class IntegrationTest {
 
@@ -70,5 +73,23 @@ public abstract class IntegrationTest {
 
     protected static <T> T getOrCreate(final SphereRequest<T> createCommand, final Query<T> query) {
         return execute(query).head().orElseGet(() -> execute(createCommand));
+    }
+
+    protected static <T extends Reference<?>> Condition<T> expanded() {
+        return new Condition<T>("is expanded") {
+            @Override
+            public boolean matches(final T value) {
+                return value.getObj() != null;
+            }
+        };
+    }
+
+    protected static <A, T extends Reference<A>> Condition<T> expanded(final A expected) {
+        return new Condition<T>("is expanded as " + expected) {
+            @Override
+            public boolean matches(final T value) {
+                return value.getObj() != null && value.getObj().equals(expected);
+            }
+        };
     }
 }

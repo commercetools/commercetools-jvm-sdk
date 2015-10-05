@@ -9,6 +9,11 @@ import javax.annotation.Nullable;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Sets or removes a custom type.
+ *
+ * @see io.sphere.sdk.types.Custom
+ */
 public class SetCustomType extends SetCustomTypeBase<Order> {
     private SetCustomType(@Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
         super(typeId, typeKey, fields);
