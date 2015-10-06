@@ -12,6 +12,8 @@ import static java.lang.String.format;
  *  {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeAddress()}
+ *
+ * @see Customer
  */
 public class ChangeAddress extends UpdateActionImpl<Customer> {
     private final Address address;

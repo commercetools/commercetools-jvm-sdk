@@ -14,6 +14,8 @@ import static java.lang.String.format;
  *  {@doc.gen intro}
  *
  *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setDefaultShippingAddress()}
+ *
+ *  @see Customer
  */
 public class SetDefaultShippingAddress extends UpdateActionImpl<Customer> {
     @Nullable
