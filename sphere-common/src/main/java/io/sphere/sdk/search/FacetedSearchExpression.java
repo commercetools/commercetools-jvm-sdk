@@ -21,7 +21,7 @@ public interface FacetedSearchExpression<T> {
      */
     List<FilterExpression<T>> filterExpressions();
 
-    static <T> FacetedSearchExpression<T> of(final String sphereFacetExpression, final List<String> sphereFilterExpression) {
-        return new SimpleFacetedSearchExpression<>(sphereFacetExpression, sphereFilterExpression);
+    static <T> FacetedSearchExpression<T> of(final FacetExpression<T> facetExpression, final List<FilterExpression<T>> filterExpressions) {
+        return new SimpleFacetedSearchExpression<>(facetExpression, filterExpressions);
     }
 }
