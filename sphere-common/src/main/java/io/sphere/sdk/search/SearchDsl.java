@@ -17,7 +17,7 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T>
     C withText(final Locale locale, final String text);
 
     /**
-     * Returns an EntitySearch with the new facet list as facets.
+     * Returns an EntitySearch with the new facet expression list as facets (query parameter {@code facet}).
      * @param facetExpressions the new facet expression list
      * @return an EntitySearch with facets
      */
@@ -26,7 +26,7 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T>
     C withFacets(final FacetExpression<T> facetExpression);
 
     /**
-     * Returns an EntitySearch with the new facet list appended to the existing facets.
+     * Returns an EntitySearch with the new facet expression list appended to the existing facets (query parameter {@code facet}).
      * @param facetExpressions the new facet expression list
      * @return an EntitySearch with the existing facets plus the new facet list.
      */
@@ -35,70 +35,72 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T>
     C plusFacets(final FacetExpression<T> facetExpression);
 
     /**
-     * Returns an EntitySearch with the new result filter list as result filter.
-     * @param resultFilterExpressions the new result filter expression list
+     * Returns an EntitySearch with the new result filter expression list as result filter (query parameter {@code filter}).
+     * @param filterExpressions the new result filter expression list
      * @return an EntitySearch with resultFilters
      */
-    C withResultFilters(final List<FilterExpression<T>> resultFilterExpressions);
+    C withResultFilters(final List<FilterExpression<T>> filterExpressions);
 
     /**
-     * Returns an EntitySearch with the new result filter list appended to the existing result filters.
-     * @param resultFilterExpressions the new result filter expression list
+     * Returns an EntitySearch with the new result filter expression list appended to the existing result filters (query parameter {@code filter}).
+     * @param filterExpressions the new result filter expression list
      * @return an EntitySearch with the existing result filter plus the new result filter list.
      */
-    C plusResultFilters(final List<FilterExpression<T>> resultFilterExpressions);
+    C plusResultFilters(final List<FilterExpression<T>> filterExpressions);
 
     /**
-     * Returns an EntitySearch with the new query filter list as query filters.
-     * @param queryFilterExpressions the new query filter expression list
+     * Returns an EntitySearch with the new query filter expression list as query filters (query parameter {@code filter.query}).
+     * @param filterExpressions the new query filter expression list
      * @return an EntitySearch with queryFilters
      */
-    C withQueryFilters(final List<FilterExpression<T>> queryFilterExpressions);
+    C withQueryFilters(final List<FilterExpression<T>> filterExpressions);
 
     /**
-     * Returns an EntitySearch with the new query filter list appended to the existing query filters.
-     * @param queryFilterExpressions the new query filter expression list
+     * Returns an EntitySearch with the new query filter expression list appended to the existing query filters (query parameter {@code filter.query}).
+     * @param filterExpressions the new query filter expression list
      * @return an EntitySearch with the existing query filters plus the new query filter list.
      */
-    C plusQueryFilters(final List<FilterExpression<T>> queryFilterExpressions);
+    C plusQueryFilters(final List<FilterExpression<T>> filterExpressions);
 
     /**
-     * Returns an EntitySearch with the new facet filter list as facet filter.
-     * @param facetFilterExpressions the new facet filter expression list
+     * Returns an EntitySearch with the new facet filter list as facet filter (query parameter {@code filter.facet}).
+     * @param filterExpressions the new facet filter expression list
      * @return an EntitySearch with facetFilters
      */
-    C withFacetFilters(final List<FilterExpression<T>> facetFilterExpressions);
+    C withFacetFilters(final List<FilterExpression<T>> filterExpressions);
 
     /**
-     * Returns an EntitySearch with the new facet filter list appended to the existing facet filters.
-     * @param facetFilterExpressions the new facet filter expression list
+     * Returns an EntitySearch with the new facet filter list appended to the existing facet filters (query parameter {@code filter.facet}).
+     * @param filterExpressions the new facet filter expression list
      * @return an EntitySearch with the existing facet filters plus the new facet filter list.
      */
-    C plusFacetFilters(final List<FilterExpression<T>> facetFilterExpressions);
+    C plusFacetFilters(final List<FilterExpression<T>> filterExpressions);
 
     /**
-     * Returns an EntitySearch with the new faceted search expressions (i.e. facet, facetFilters and resultFilters expressions)
-     * appended to the existing faceted search expressions.
+     * Returns an EntitySearch with the new faceted search expressions appended to the existing faceted search expressions.
+     * A faceted expression is equivalent to use facet, facetFilters and resultFilters with the given facet and filters expressions.
      * @param facetedSearchExpression the new faceted search expression
      * @return an EntitySearch with the existing faceted search expressions plus the new faceted search expression.
      */
     C plusFacetedSearch(final FacetedSearchExpression<T> facetedSearchExpression);
 
     /**
-     * Returns an EntityQuery with the new sort as sort.
-     * @param sort how the results of the search should be sorted
-     * @return EntityQuery with sort
+     * Returns an EntityQuery with the new sort expressions.
+     * @param sortExpressions the new sort expression list
+     * @return EntityQuery with sort sortExpressions
      */
-    C withSort(final SortExpression<T> sort);
+    C withSort(final List<SortExpression<T>> sortExpressions);
 
-    //not yet implemented in the SPHERE.IO backend
-    //
-    //    /**
-    //     * Returns an EntityQuery with the new sort as sort.
-    //     * @param sort list of sorts how the results of the search should be sorted
-    //     * @return EntityQuery with sort
-    //     */
-    //    C withSort(final List<SearchSort<T>> sort);
+    C withSort(final SortExpression<T> sortExpression);
+
+    /**
+     * Returns an EntityQuery with the new sort expression list appended to the existing sort expressions.
+     * @param sortExpressions the new sort expression list
+     * @return an EntitySearch with the existing sort expressions plus the new sort expression list.
+     */
+    C plusSort(final List<SortExpression<T>> sortExpressions);
+
+    C plusSort(final SortExpression<T> sortExpression);
 
     C withLimit(final long limit);
 

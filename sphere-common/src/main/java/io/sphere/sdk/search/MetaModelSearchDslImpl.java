@@ -109,13 +109,13 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C withFacets(final List<FacetExpression<T>> facets) {
-        return copyBuilder().facets(facets).build();
+    public C withFacets(final List<FacetExpression<T>> facetExpressions) {
+        return copyBuilder().facets(facetExpressions).build();
     }
 
     @Override
-    public C withFacets(final FacetExpression<T> facet) {
-        return withFacets(singletonList(requireNonNull(facet)));
+    public C withFacets(final FacetExpression<T> facetExpression) {
+        return withFacets(singletonList(requireNonNull(facetExpression)));
     }
 
     @Override
@@ -124,13 +124,13 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C plusFacets(final List<FacetExpression<T>> facets) {
-        return withFacets(listOf(facets(), facets));
+    public C plusFacets(final List<FacetExpression<T>> facetExpressions) {
+        return withFacets(listOf(facets(), facetExpressions));
     }
 
     @Override
-    public C plusFacets(final FacetExpression<T> facet) {
-        return plusFacets(singletonList(requireNonNull(facet)));
+    public C plusFacets(final FacetExpression<T> facetExpression) {
+        return plusFacets(singletonList(requireNonNull(facetExpression)));
     }
 
     @Override
@@ -139,8 +139,8 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C withResultFilters(final List<FilterExpression<T>> resultFilters) {
-        return copyBuilder().resultFilters(resultFilters).build();
+    public C withResultFilters(final List<FilterExpression<T>> filterExpressions) {
+        return copyBuilder().resultFilters(filterExpressions).build();
     }
 
     @Override
@@ -149,8 +149,8 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C plusResultFilters(final List<FilterExpression<T>> resultFilters) {
-        return withResultFilters(listOf(resultFilters(), resultFilters));
+    public C plusResultFilters(final List<FilterExpression<T>> filterExpressions) {
+        return withResultFilters(listOf(resultFilters(), filterExpressions));
     }
 
     @Override
@@ -159,8 +159,8 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C withQueryFilters(final List<FilterExpression<T>> queryFilters) {
-        return copyBuilder().queryFilters(queryFilters).build();
+    public C withQueryFilters(final List<FilterExpression<T>> filterExpressions) {
+        return copyBuilder().queryFilters(filterExpressions).build();
     }
 
     @Override
@@ -169,8 +169,8 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C plusQueryFilters(final List<FilterExpression<T>> queryFilters) {
-        return withQueryFilters(listOf(queryFilters(), queryFilters));
+    public C plusQueryFilters(final List<FilterExpression<T>> filterExpressions) {
+        return withQueryFilters(listOf(queryFilters(), filterExpressions));
     }
 
     @Override
@@ -179,8 +179,8 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C withFacetFilters(final List<FilterExpression<T>> facetFilters) {
-        return copyBuilder().facetFilters(facetFilters).build();
+    public C withFacetFilters(final List<FilterExpression<T>> filterExpressions) {
+        return copyBuilder().facetFilters(filterExpressions).build();
     }
 
     @Override
@@ -189,8 +189,8 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C plusFacetFilters(final List<FilterExpression<T>> facetFilters) {
-        return withFacetFilters(listOf(facetFilters(), facetFilters));
+    public C plusFacetFilters(final List<FilterExpression<T>> filterExpressions) {
+        return withFacetFilters(listOf(facetFilters(), filterExpressions));
     }
 
     @Override
@@ -210,8 +210,14 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         return plusFacetedSearch(m.apply(searchModel));
     }
 
-    private C withSort(final List<SortExpression<T>> sort) {
-        return copyBuilder().sort(sort).build();
+    @Override
+    public C withSort(final List<SortExpression<T>> sortExpressions) {
+        return copyBuilder().sort(sortExpressions).build();
+    }
+
+    @Override
+    public C withSort(final SortExpression<T> sortExpression) {
+        return withSort(singletonList(sortExpression));
     }
 
     @Override
@@ -220,8 +226,18 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C withSort(final SortExpression<T> sort) {
-        return withSort(singletonList(sort));
+    public C plusSort(final List<SortExpression<T>> sortExpressions) {
+        return withSort(listOf(sort(), sortExpressions));
+    }
+
+    @Override
+    public C plusSort(final SortExpression<T> sortExpression) {
+        return plusSort(singletonList(requireNonNull(sortExpression)));
+    }
+
+    @Override
+    public C plusSort(final Function<S, SortExpression<T>> m) {
+        return plusSort(m.apply(searchModel));
     }
 
     @Override

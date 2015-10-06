@@ -146,6 +146,18 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     }
 
     @Test
+    public void sortByMultipleAttributes() throws Exception {
+        final ProductProjectionSearch singleSortedRequest = ProductProjectionSearch.ofStaged()
+                .plusSort(model -> model.allVariants().attribute().ofString(ATTR_NAME_COLOR).sorted().byAsc());
+        final PagedSearchResult<ProductProjection> resultNameAsc = executeSearch(singleSortedRequest
+                .plusSort(model -> model.name().locale(ENGLISH).sorted().byAsc()));
+        final PagedSearchResult<ProductProjection> resultNameDesc = executeSearch(singleSortedRequest
+                .plusSort(model -> model.name().locale(ENGLISH).sorted().byDesc()));
+        assertThat(resultsToIds(resultNameAsc)).containsExactly(product3.getId(), product1.getId(), product2.getId());
+        assertThat(resultsToIds(resultNameDesc)).containsExactly(product1.getId(), product3.getId(), product2.getId());
+    }
+
+    @Test
     public void responseContainsRangeFacetsForAttributes() throws Exception {
         final FacetExpression<ProductProjection> facetExpr = model().allVariants().price().centAmount().faceted().byGreaterThanOrEqualTo(0L);
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
