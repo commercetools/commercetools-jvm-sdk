@@ -24,15 +24,6 @@ public class CustomObjectQueryTest extends IntegrationTest {
     }
 
     @Test
-    public void queryAll() throws Exception {
-        withCustomObject(client(), co -> {
-            final PagedQueryResult<CustomObject<Foo>> result = execute(CustomObjectQuery.of(Foo.class));
-            assertThat(result.getResults().stream().filter(item -> item.hasSameIdAs(co)).count())
-                    .isGreaterThanOrEqualTo(1);
-        });
-    }
-
-    @Test
     public void queryWithClass() throws Exception {
         withCustomObject(client(), co -> {
             final CustomObjectQuery<Foo> customObjectQuery = CustomObjectQuery.of(Foo.class)

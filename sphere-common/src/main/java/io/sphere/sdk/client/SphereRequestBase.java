@@ -19,11 +19,11 @@ public abstract class SphereRequestBase extends Base {
     protected SphereRequestBase() {
     }
 
-    public static <T> T deserialize(final HttpResponse httpResponse, final TypeReference<T> typeReference) {
+    protected static <T> T deserialize(final HttpResponse httpResponse, final TypeReference<T> typeReference) {
         return SphereJsonUtils.readObject(Optional.ofNullable(httpResponse.getResponseBody()).orElseThrow(() -> new JsonException(httpResponse)), typeReference);
     }
 
-    public static <T> T deserialize(final HttpResponse httpResponse, final JavaType javaType) {
+    protected static <T> T deserialize(final HttpResponse httpResponse, final JavaType javaType) {
         return SphereJsonUtils.readObject(Optional.ofNullable(httpResponse.getResponseBody()).orElseThrow(() -> new JsonException(httpResponse)), javaType);
     }
 

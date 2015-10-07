@@ -12,11 +12,13 @@ import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.function.Function;
 
 import static io.sphere.sdk.channels.ChannelFixtures.persistentChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRole.ORDER_EXPORT;
 import static io.sphere.sdk.orders.OrderFixtures.withOrder;
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -106,13 +108,16 @@ public class OrderQueryTest extends IntegrationTest {
 
     private void assertOrderIsFound(final Function<Order, OrderQuery> p, final boolean shouldFind) {
         withOrder(client(), order -> {
-            final OrderQuery query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
-            final String id = client().execute(query).head().orElseThrow(() -> new RuntimeException("nothing found with predicate")).getId();
-            if (shouldFind) {
-                assertThat(id).isEqualTo(order.getId());
-            } else {
-                assertThat(id).isNotEqualTo(order.getId());
-            }
+            assertEventually(() -> {
+                final OrderQuery query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
+                final List<Order> results = client().execute(query).getResults();
+
+                if (shouldFind) {
+                    assertThat(results).extracting("id").contains(order.getId());
+                } else {
+                    assertThat(results).extracting("id").doesNotContain(order.getId());
+                }
+            });
         });
     }
 
