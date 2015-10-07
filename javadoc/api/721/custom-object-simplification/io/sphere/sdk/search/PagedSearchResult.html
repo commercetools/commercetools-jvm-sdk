@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10,"i9":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -166,12 +166,42 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getFilteredFacetResult-io.sphere.sdk.search.FilteredFacetExpression-">getFilteredFacetResult</a></span>(<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>,?&gt;&nbsp;facetExpression)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
+<td class="colFirst"><code>java.lang.Integer</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getOffset--">getOffset</a></span>()</code>
+<div class="block">The offset supplied by the client or the server default.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search">RangeFacetResult</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getRangeFacetResult-io.sphere.sdk.search.RangeFacetExpression-">getRangeFacetResult</a></span>(<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="class in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>,?&gt;&nbsp;facetExpression)</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getResults--">getResults</a></span>()</code>
+<div class="block">List of results.</div>
+</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getTermFacetResult-io.sphere.sdk.search.TermFacetExpression-">getTermFacetResult</a></span>(<a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="class in io.sphere.sdk.search">TermFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>,?&gt;&nbsp;facetExpression)</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code>java.lang.Integer</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getTotal--">getTotal</a></span>()</code>
+<div class="block">The total number of results matching the request.</div>
+</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code>java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#head--">head</a></span>()</code>
+<div class="block">Tries to access the first element of the result list.</div>
+</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>int</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#size--">size</a></span>()</code>
+<div class="block">The actual number of results returned.</div>
+</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -179,7 +209,7 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.queries.<a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a></h3>
-<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getOffset--">getOffset</a>, <a href="../../../../io/sphere/sdk/queries/PagedResult.html#getResults--">getResults</a>, <a href="../../../../io/sphere/sdk/queries/PagedResult.html#getTotal--">getTotal</a>, <a href="../../../../io/sphere/sdk/queries/PagedResult.html#head--">head</a>, <a href="../../../../io/sphere/sdk/queries/PagedResult.html#isFirst--">isFirst</a>, <a href="../../../../io/sphere/sdk/queries/PagedResult.html#isLast--">isLast</a>, <a href="../../../../io/sphere/sdk/queries/PagedResult.html#size--">size</a></code></li>
+<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#isFirst--">isFirst</a>, <a href="../../../../io/sphere/sdk/queries/PagedResult.html#isLast--">isLast</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -248,10 +278,99 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <a name="getFilteredFacetResult-io.sphere.sdk.search.FilteredFacetExpression-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getFilteredFacetResult</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search">FilteredFacetResult</a>&nbsp;getFilteredFacetResult(<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="class in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>,?&gt;&nbsp;facetExpression)</pre>
+</li>
+</ul>
+<a name="getResults--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getResults</h4>
+<pre>public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;getResults()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getResults--">PagedResult</a></code></span></div>
+<div class="block">List of results. If <a href="../../../../io/sphere/sdk/queries/PagedResult.html#size--"><code>PagedResult.size()</code></a> is not equal
+ to <a href="../../../../io/sphere/sdk/queries/PagedResult.html#getTotal--"><code>PagedResult.getTotal()</code></a> the container contains only a subset of all
+ elements that match the request.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getResults--">getResults</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/queries/PagedResult.html#size--"><code>PagedResult.size()</code></a> elements matching the request</dd>
+</dl>
+</li>
+</ul>
+<a name="getOffset--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getOffset</h4>
+<pre>public&nbsp;java.lang.Integer&nbsp;getOffset()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getOffset--">PagedResult</a></code></span></div>
+<div class="block">The offset supplied by the client or the server default.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getOffset--">getOffset</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the amount of items (not pages) skipped</dd>
+</dl>
+</li>
+</ul>
+<a name="size--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>size</h4>
+<pre>public&nbsp;int&nbsp;size()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#size--">PagedResult</a></code></span></div>
+<div class="block">The actual number of results returned.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#size--">size</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the number of elements in this container</dd>
+</dl>
+</li>
+</ul>
+<a name="getTotal--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getTotal</h4>
+<pre>public&nbsp;java.lang.Integer&nbsp;getTotal()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getTotal--">PagedResult</a></code></span></div>
+<div class="block">The total number of results matching the request.
+ Total is greater or equal to count.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#getTotal--">getTotal</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the number of elements that can be fetched matching the criteria</dd>
+</dl>
+</li>
+</ul>
+<a name="head--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>head</h4>
+<pre>public&nbsp;java.util.Optional&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;head()</pre>
+<div class="block"><span class="descfrmTypeLabel">Description copied from class:&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#head--">PagedResult</a></code></span></div>
+<div class="block">Tries to access the first element of the result list.
+ Use case: query by slug which should contain zero or one element in the result list.</div>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/queries/PagedResult.html#head--">head</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="class in io.sphere.sdk.queries">PagedResult</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;</code></dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the first value or absent</dd>
+</dl>
 </li>
 </ul>
 </li>
@@ -322,7 +441,7 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>

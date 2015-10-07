@@ -115,7 +115,19 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">ChannelDraft</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
-<div class="block">Template to create a new Channel.</div>
+<div class="block">Template to create a new Channel.
+
+ <div id="io-sphere-sdk-channels-commands-ChannelCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final String key = channelKey();
+final ChannelDraft channelDraft = ChannelDraft.of(key)
+        .withName(LocalizedString.of(ENGLISH, "name"))
+        .withDescription(LocalizedString.of(ENGLISH, "description"))
+        .withRoles(ChannelRole.INVENTORY_SUPPLY);
+final Channel channel = execute(ChannelCreateCommand.of(channelDraft));
+assertThat(channel.getKey()).isEqualTo(key);
+assertThat(channel.getName()).isEqualTo(LocalizedString.of(ENGLISH, "name"));
+assertThat(channel.getDescription()).isEqualTo(LocalizedString.of(ENGLISH, "description"));
+assertThat(channel.getRoles()).isEqualTo(asSet(ChannelRole.INVENTORY_SUPPLY));
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/commands/ChannelCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
 <dd><a href="../../../../io/sphere/sdk/channels/ChannelDraftBuilder.html" title="class in io.sphere.sdk.channels"><code>ChannelDraftBuilder</code></a></dd>
@@ -370,7 +382,7 @@ public&nbsp;<a href="../../../../io/sphere/sdk/models/LocalizedString.html" titl
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
