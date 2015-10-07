@@ -30,6 +30,6 @@ public class BooleanSearchModel<T, S extends DirectionlessSearchSortModel<T>> ex
      */
     @Override
     public S sorted() {
-        return sortBuilder.apply(this);
+        return super.sortModel();
     }
 }

@@ -26,6 +26,6 @@ public class NumberSearchModel<T, S extends DirectionlessSearchSortModel<T>> ext
 
     @Override
     public S sorted() {
-        return sortBuilder.apply(this);
+        return super.sortModel();
     }
 }

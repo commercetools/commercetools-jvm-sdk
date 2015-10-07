@@ -10,4 +10,12 @@ public class SortableSearchModel<T, S extends DirectionlessSearchSortModel<T>> e
         super(parent, pathSegment);
         this.sortBuilder = sortBuilder;
     }
+
+    protected S sortModel() {
+        return sortModel(this);
+    }
+
+    protected S sortModel(final SortableSearchModel<T, S> searchModel) {
+        return sortBuilder.apply(searchModel);
+    }
 }

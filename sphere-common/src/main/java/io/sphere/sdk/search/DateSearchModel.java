@@ -26,6 +26,6 @@ public class DateSearchModel<T, S extends DirectionlessSearchSortModel<T>> exten
 
     @Override
     public S sorted() {
-        return sortBuilder.apply(this);
+        return super.sortModel();
     }
 }

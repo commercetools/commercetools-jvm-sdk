@@ -33,7 +33,7 @@ public class MoneyCentAmountSearchModel<T, S extends DirectionlessSearchSortMode
         } else {
             searchModel = this;
         }
-        return sortBuilder.apply(searchModel);
+        return super.sortModel(searchModel);
     }
 
 }

@@ -26,6 +26,6 @@ public class CurrencySearchModel<T, S extends DirectionlessSearchSortModel<T>> e
 
     @Override
     public S sorted() {
-        return sortBuilder.apply(this);
+        return super.sortModel();
     }
 }
