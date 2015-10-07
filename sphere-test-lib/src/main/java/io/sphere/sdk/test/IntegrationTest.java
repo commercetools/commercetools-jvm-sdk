@@ -6,11 +6,11 @@ import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import org.assertj.core.api.Condition;
 import org.junit.BeforeClass;
 import org.slf4j.LoggerFactory;
-
 
 public abstract class IntegrationTest {
 
@@ -73,6 +73,15 @@ public abstract class IntegrationTest {
 
     protected static <T> T getOrCreate(final SphereRequest<T> createCommand, final Query<T> query) {
         return execute(query).head().orElseGet(() -> execute(createCommand));
+    }
+
+    protected static <T> Condition<PagedQueryResult<T>> onlyTheResult(final T expected) {
+        return new Condition<PagedQueryResult<T>>("contains only the result " + expected) {
+            @Override
+            public boolean matches(final PagedQueryResult<T> value) {
+                return value.getResults().size() == 1 && value.getResults().get(0).equals(expected);
+            }
+        };
     }
 
     protected static <T extends Reference<?>> Condition<T> expanded() {
