@@ -6,6 +6,10 @@ import io.sphere.sdk.queries.ReferenceOptionalQueryModel;
 import io.sphere.sdk.queries.QueryModel;
 import io.sphere.sdk.queries.QueryPredicate;
 
+/**
+ * Query predicate build for line items.
+ * @param <T> query context
+ */
 public interface LineItemCollectionQueryModel<T> extends QueryModel<T>, CollectionQueryModel<T> {
     ReferenceOptionalQueryModel<T, Channel> supplyChannel();
 

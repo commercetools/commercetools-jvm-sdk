@@ -6,6 +6,9 @@ import io.sphere.sdk.types.Custom;
 import javax.annotation.Nullable;
 import java.util.Set;
 
+/**
+ * <p>Interface for common stuff of {@link LineItem}s and {@link CustomLineItem}s.</p>
+ */
 public interface LineItemLike extends Custom {
     String getId();
 

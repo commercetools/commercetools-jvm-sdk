@@ -8,6 +8,12 @@ import io.sphere.sdk.types.CustomFieldsDraft;
 import javax.annotation.Nullable;
 import javax.money.CurrencyUnit;
 
+/**
+ * <p>Builder to create {@link CartDraft}s.</p>
+ *
+ *  <p>Example of creating a cart with custom fields:</p>
+ * {@include.example io.sphere.sdk.carts.CartsCustomFieldsTest#createCartWithCustomType()}
+ */
 public class CartDraftBuilder extends Base implements Builder<CartDraft> {
     private final CurrencyUnit currency;
     @Nullable

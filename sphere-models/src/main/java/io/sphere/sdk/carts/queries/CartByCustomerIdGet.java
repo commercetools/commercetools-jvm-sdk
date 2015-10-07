@@ -10,6 +10,11 @@ import io.sphere.sdk.queries.MetaModelGetDsl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Gets a cart by the customer id.
+ *
+ * {@include.example io.sphere.sdk.carts.queries.CartByCustomerIdGetTest#execution()}
+ */
 public interface CartByCustomerIdGet extends MetaModelGetDsl<Cart, Cart, CartByCustomerIdGet, CartExpansionModel<Cart>> {
     static CartByCustomerIdGet of(final Identifiable<Customer> customer) {
         return of(customer.getId());

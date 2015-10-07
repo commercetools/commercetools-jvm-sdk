@@ -76,7 +76,7 @@ public class AddCustomLineItem extends UpdateActionImpl<Cart> {
         return custom;
     }
 
-    public AddCustomLineItem withCustom(final CustomFieldsDraft custom) {
+    public AddCustomLineItem withCustom(@Nullable final CustomFieldsDraft custom) {
         return new AddCustomLineItem(getName(), getSlug(), getMoney(), getTaxCategory(), getQuantity(), custom);
     }
 }

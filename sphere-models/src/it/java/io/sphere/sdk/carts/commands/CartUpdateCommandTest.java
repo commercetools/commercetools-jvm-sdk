@@ -23,7 +23,6 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.math.BigDecimal;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -41,7 +40,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
     @Test
     public void addLineItem() throws Exception {
         withEmptyCartAndProduct(client(), (cart, product) -> {
-            assertThat(cart.getLineItems()).hasSize(0);
+            assertThat(cart.getLineItems()).isEmpty();
             final long quantity = 3;
             final String productId = product.getId();
             final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity);
@@ -129,9 +128,9 @@ public class CartUpdateCommandTest extends IntegrationTest {
     public void addCustomLineItem() throws Exception {
         withTaxCategory(client(), taxCategory -> {
             final Cart cart = createCartWithCountry(client());
-            assertThat(cart.getCustomLineItems()).hasSize(0);
+            assertThat(cart.getCustomLineItems()).isEmpty();
             final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
-            final String slug = "thing-slug";
+            final String slug = "thing-slug";//you handle to identify the custom line item
             final LocalizedString name = en("thing");
             final long quantity = 5;
             final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
@@ -145,7 +144,7 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(customLineItem.getSlug()).isEqualTo(slug);
             final Set<ItemState> state = customLineItem.getState();
             assertThat(state).hasSize(1);
-            assertThat(new LinkedList<>(state).get(0).getQuantity()).isEqualTo(quantity);
+            assertThat(state).extracting("quantity").containsOnly(quantity);
             assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
         });
     }
