@@ -110,14 +110,13 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">CustomObjectUpsertCommand&lt;T&gt;</span>
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;</pre>
-<div class="block">Command for creating or updating a custom object.
+<div class="block"><p>Command for creating or updating a custom object.</p>
  Upsert is a synthetic word which has its origins from "update" and "insert".
 
  <div id="io-sphere-sdk-customobjects-CustomObjectFixtures-createCustomObject--%s" class=code-example><pre><code class='java'>final String container = "CustomObjectFixtures";
 final String key = randomKey();
 final Foo value = FOO_DEFAULT_VALUE;
-final TypeReference&lt;CustomObject&lt;Foo&gt;&gt; typeReference = Foo.customObjectTypeReference();
-final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, typeReference);
+final CustomObjectDraft&lt;Foo&gt; draft = CustomObjectDraft.ofUnversionedUpsert(container, key, value, Foo.class);
 final CustomObjectUpsertCommand&lt;Foo&gt; createCommand = CustomObjectUpsertCommand.of(draft);
 final CustomObject&lt;Foo&gt; customObject = client.execute(createCommand);
 assertThat(customObject.getContainer()).isEqualTo(container);
@@ -125,6 +124,10 @@ assertThat(customObject.getKey()).isEqualTo(key);
 final Foo loadedValue = customObject.getValue();
 assertThat(loadedValue).isEqualTo(value);
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/CustomObjectFixtures.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>

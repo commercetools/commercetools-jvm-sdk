@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":18,"i1":17,"i2":17,"i3":17};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],16:["t5","Default Methods"]};
+var methods = {"i0":18,"i1":49,"i2":17,"i3":17,"i4":17};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],16:["t5","Default Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -49,7 +49,7 @@ var activeTableTab = "activeTableTab";
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQueryImpl.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" target="_top">Frames</a></li>
@@ -99,17 +99,38 @@ var activeTableTab = "activeTableTab";
 <ul class="blockList">
 <li class="blockList">
 <dl>
-<dt>All Superinterfaces:</dt>
-<dd><a href="../../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html" title="class in io.sphere.sdk.customobjects.expansion">CustomObjectExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;,<a href="../../../../../io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html" title="class in io.sphere.sdk.customobjects.expansion">CustomObjectExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;</dd>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - The type of the value of this custom object.</dd>
 </dl>
 <dl>
-<dt>All Known Implementing Classes:</dt>
-<dd><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQueryImpl.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQueryImpl</a></dd>
+<dt>All Superinterfaces:</dt>
+<dd><a href="../../../../../io/sphere/sdk/queries/EntityQuery.html" title="interface in io.sphere.sdk.queries">EntityQuery</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html" title="class in io.sphere.sdk.customobjects.expansion">CustomObjectExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;,<a href="../../../../../io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html" title="class in io.sphere.sdk.customobjects.expansion">CustomObjectExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/Query.html" title="interface in io.sphere.sdk.queries">Query</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/queries/QueryDsl.html" title="interface in io.sphere.sdk.queries">QueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;, <a href="../../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;</dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">CustomObjectQuery&lt;T&gt;</span>
 extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;,<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQueryModel</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;,<a href="../../../../../io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html" title="class in io.sphere.sdk.customobjects.expansion">CustomObjectExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;</pre>
+<div class="block"><p>Queries custom objects.</p>
+
+
+
+
+ <div id="io-sphere-sdk-customobjects-queries-CustomObjectQueryTest-queryByContainer--%s" class=code-example><pre><code class='java'>withCustomObject(client(), "containerA", "key", customObjectA -&gt;
+    withCustomObject(client(), "containerB", "key", customObjectB -&gt; {
+        final Class&lt;Foo&gt; classForTheValue = Foo.class;
+        final PagedQueryResult&lt;CustomObject&lt;Foo&gt;&gt; result =
+                execute(CustomObjectQuery.of(classForTheValue).byContainer("containerA"));
+        final List&lt;CustomObject&lt;Foo&gt;&gt; results = result.getResults();
+        assertThat(results)
+                .contains(customObjectA)
+                .doesNotContain(customObjectB);
+    })
+);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customobjects/queries/CustomObjectQueryTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -138,7 +159,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -149,15 +170,27 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of--">of</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of--">of</a></span>()</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--"><code>ofJsonNode()</code></a> instead</span></div>
+</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of-com.fasterxml.jackson.core.type.TypeReference-">of</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;&nbsp;resultTypeReference)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of-java.lang.Class-">of</a></span>(java.lang.Class&lt;T&gt;&nbsp;valueClass)</code>
+<div class="block">Query object for custom objects where the result value is a POJO.</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#resultTypeReference--">resultTypeReference</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>static &lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of-com.fasterxml.jackson.core.type.TypeReference-">of</a></span>(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</code>
+<div class="block">Query object for custom objects where the result value is a POJO.</div>
+</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--">ofJsonNode</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -216,22 +249,40 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="resultTypeReference--">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>resultTypeReference</h4>
-<pre>static&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&gt;&gt;&nbsp;resultTypeReference()</pre>
-</li>
-</ul>
 <a name="of-com.fasterxml.jackson.core.type.TypeReference-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&nbsp;of(com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a>&lt;<a href="../../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;T&gt;&gt;&gt;&nbsp;resultTypeReference)</pre>
+<pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&nbsp;of(com.fasterxml.jackson.core.type.TypeReference&lt;T&gt;&nbsp;valueTypeReference)</pre>
+<div class="block">Query object for custom objects where the result value is a POJO.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the Java type of the value of the custom object</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>valueTypeReference</code> - the type reference of the value of the custom object</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>query object</dd>
+</dl>
+</li>
+</ul>
+<a name="of-java.lang.Class-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>of</h4>
+<pre>static&nbsp;&lt;T&gt;&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;T&gt;&nbsp;of(java.lang.Class&lt;T&gt;&nbsp;valueClass)</pre>
+<div class="block">Query object for custom objects where the result value is a POJO.</div>
+<dl>
+<dt><span class="paramLabel">Type Parameters:</span></dt>
+<dd><code>T</code> - the Java type of the value of the custom object</dd>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>valueClass</code> - the class of the value, if it not uses generics like lists, typically for POJOs</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>query object</dd>
+</dl>
 </li>
 </ul>
 <a name="of--">
@@ -240,7 +291,18 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <ul class="blockList">
 <li class="blockList">
 <h4>of</h4>
-<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;of()</pre>
+<pre>@Deprecated
+static&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;of()</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--"><code>ofJsonNode()</code></a> instead</span></div>
+</li>
+</ul>
+<a name="ofJsonNode--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>ofJsonNode</h4>
+<pre>static&nbsp;<a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a>&lt;com.fasterxml.jackson.databind.JsonNode&gt;&nbsp;ofJsonNode()</pre>
 </li>
 </ul>
 <a name="byContainer-java.lang.String-">
@@ -280,7 +342,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <div class="subNav">
 <ul class="navList">
 <li><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQueryImpl.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" target="_top">Frames</a></li>

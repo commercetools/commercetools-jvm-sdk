@@ -176,8 +176,8 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>protected abstract com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>protected abstract com.fasterxml.jackson.databind.JavaType</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#jacksonJavaType--">jacksonJavaType</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -185,7 +185,7 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></h3>
-<code><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
+<code><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -259,13 +259,13 @@ implements <a href="../../../../io/sphere/sdk/commands/Command.html" title="inte
 </dl>
 </li>
 </ul>
-<a name="typeReference--">
+<a name="jacksonJavaType--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>typeReference</h4>
-<pre>protected abstract&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="type parameter in CommandImpl">T</a>&gt;&nbsp;typeReference()</pre>
+<h4>jacksonJavaType</h4>
+<pre>protected abstract&nbsp;com.fasterxml.jackson.databind.JavaType&nbsp;jacksonJavaType()</pre>
 </li>
 </ul>
 </li>

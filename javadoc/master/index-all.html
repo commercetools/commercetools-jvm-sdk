@@ -618,8 +618,6 @@
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestDecorator.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client">SphereRequestDecorator</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingByKeyGet</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelGetDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelGetDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/AttributeAccess.html#canHandle-io.sphere.sdk.products.attributes.AttributeDefinition-">canHandle(AttributeDefinition)</a></span> - Method in interface io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a></dt>
@@ -1193,6 +1191,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block"><h3 id=start>Developing the SDK</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#convertToJavaType-com.fasterxml.jackson.core.type.TypeReference-">convertToJavaType(TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#convertToJavaType-java.lang.Class-">convertToJavaType(Class&lt;?&gt;)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#copyBuilder--">copyBuilder()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html#copyBuilder--">copyBuilder()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></dt>
@@ -1251,6 +1253,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Base class to implement commands which create an entity in SPHERE.IO.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-C-java.lang.String-com.fasterxml.jackson.databind.JavaType-">CreateCommandImpl(C, String, JavaType)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-C-io.sphere.sdk.client.JsonEndpoint-">CreateCommandImpl(C, JsonEndpoint&lt;T&gt;)</a></span> - Constructor for class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/HttpStatusCode.html#CREATED_201">CREATED_201</a></span> - Static variable in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/HttpStatusCode.html" title="class in io.sphere.sdk.http">HttpStatusCode</a></dt>
@@ -1510,6 +1514,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Custom objects are a way to store arbitrary JSON-formatted data on the SPHERE.IO platform.</div>
 </dd>
+<dt><a href="io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html" title="interface in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectByIdGet</span></a>&lt;<a href="io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html" title="type parameter in CustomObjectByIdGet">T</a>&gt; - Interface in <a href="io/sphere/sdk/customobjects/queries/package-summary.html">io.sphere.sdk.customobjects.queries</a></dt>
+<dd>
+<div class="block"><a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> to fetch one <a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> by id.</div>
+</dd>
 <dt><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectByKeyGet</span></a>&lt;<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="type parameter in CustomObjectByKeyGet">T</a>&gt; - Interface in <a href="io/sphere/sdk/customobjects/queries/package-summary.html">io.sphere.sdk.customobjects.queries</a></dt>
 <dd>
 <div class="block"><a href="io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client"><code>SphereRequest</code></a> to fetch one <a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> by container and key.</div>
@@ -1526,31 +1534,37 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html#CustomObjectCustomJsonMappingUpsertCommand--">CustomObjectCustomJsonMappingUpsertCommand()</a></span> - Constructor for class io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands">CustomObjectCustomJsonMappingUpsertCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectDeleteCommand</span></a>&lt;<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="type parameter in CustomObjectDeleteCommand">T</a> extends <a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;?&gt;&gt; - Interface in <a href="io/sphere/sdk/customobjects/commands/package-summary.html">io.sphere.sdk.customobjects.commands</a></dt>
+<dt><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectDeleteCommand</span></a>&lt;<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="type parameter in CustomObjectDeleteCommand">T</a>&gt; - Interface in <a href="io/sphere/sdk/customobjects/commands/package-summary.html">io.sphere.sdk.customobjects.commands</a></dt>
 <dd>
 <div class="block">Deletes a custom object in SPHERE.IO.</div>
 </dd>
 <dt><a href="io/sphere/sdk/meta/CustomObjectDocumentation.html" title="class in io.sphere.sdk.meta"><span class="typeNameLink">CustomObjectDocumentation</span></a> - Class in <a href="io/sphere/sdk/meta/package-summary.html">io.sphere.sdk.meta</a></dt>
 <dd>
-<div class="block">Custom objects are a way to store arbitrary JSON-formatted data on the SPHERE.IO platform.</div>
+<div class="block"><a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>See CustomObject.</code></a></div>
 </dd>
 <dt><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects"><span class="typeNameLink">CustomObjectDraft</span></a>&lt;<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="type parameter in CustomObjectDraft">T</a>&gt; - Class in <a href="io/sphere/sdk/customobjects/package-summary.html">io.sphere.sdk.customobjects</a></dt>
 <dd>
 <div class="block">A draft for creating or updating custom objects.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html" title="class in io.sphere.sdk.customobjects.expansion"><span class="typeNameLink">CustomObjectExpansionModel</span></a>&lt;<a href="io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html" title="type parameter in CustomObjectExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/customobjects/expansion/package-summary.html">io.sphere.sdk.customobjects.expansion</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectQuery</span></a>&lt;<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="type parameter in CustomObjectQuery">T</a>&gt; - Interface in <a href="io/sphere/sdk/customobjects/queries/package-summary.html">io.sphere.sdk.customobjects.queries</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryImpl.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectQueryImpl</span></a>&lt;<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryImpl.html" title="type parameter in CustomObjectQueryImpl">T</a>&gt; - Class in <a href="io/sphere/sdk/customobjects/queries/package-summary.html">io.sphere.sdk.customobjects.queries</a></dt>
-<dd>&nbsp;</dd>
-<dt><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectQueryModel</span></a>&lt;<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="type parameter in CustomObjectQueryModel">T</a>&gt; - Class in <a href="io/sphere/sdk/customobjects/queries/package-summary.html">io.sphere.sdk.customobjects.queries</a></dt>
 <dd>
-<div class="block">Metamodel to explore for which fields can be queried in a <a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a>.</div>
+<div class="block">Placeholder for custom object reference expansion.</div>
+</dd>
+<dt><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectQuery</span></a>&lt;<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="type parameter in CustomObjectQuery">T</a>&gt; - Interface in <a href="io/sphere/sdk/customobjects/queries/package-summary.html">io.sphere.sdk.customobjects.queries</a></dt>
+<dd>
+<div class="block">Queries custom objects.</div>
+</dd>
+<dt><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries"><span class="typeNameLink">CustomObjectQueryModel</span></a>&lt;<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="type parameter in CustomObjectQueryModel">T</a> extends <a href="io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects">CustomObject</a>&lt;?&gt;&gt; - Class in <a href="io/sphere/sdk/customobjects/queries/package-summary.html">io.sphere.sdk.customobjects.queries</a></dt>
+<dd>
+<div class="block">Metamodel to explore for which fields can be queried in a CustomObject.</div>
 </dd>
 <dt><a href="io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="interface in io.sphere.sdk.customobjects.commands"><span class="typeNameLink">CustomObjectUpsertCommand</span></a>&lt;<a href="io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="type parameter in CustomObjectUpsertCommand">T</a>&gt; - Interface in <a href="io/sphere/sdk/customobjects/commands/package-summary.html">io.sphere.sdk.customobjects.commands</a></dt>
 <dd>
 <div class="block">Command for creating or updating a custom object.</div>
+</dd>
+<dt><a href="io/sphere/sdk/customobjects/CustomObjectUtils.html" title="class in io.sphere.sdk.customobjects"><span class="typeNameLink">CustomObjectUtils</span></a> - Class in <a href="io/sphere/sdk/customobjects/package-summary.html">io.sphere.sdk.customobjects</a></dt>
+<dd>
+<div class="block">Internal utility class.</div>
 </dd>
 <dt><a href="io/sphere/sdk/types/queries/CustomQueryModel.html" title="interface in io.sphere.sdk.types.queries"><span class="typeNameLink">CustomQueryModel</span></a>&lt;<a href="io/sphere/sdk/types/queries/CustomQueryModel.html" title="type parameter in CustomQueryModel">T</a>&gt; - Interface in <a href="io/sphere/sdk/types/queries/package-summary.html">io.sphere.sdk.types.queries</a></dt>
 <dd>&nbsp;</dd>
@@ -1645,13 +1659,13 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize(HttpResponse, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize(HttpResponse, JavaType)</a></span> - Static method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereRequestDecorator.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereRequestDecorator.html" title="class in io.sphere.sdk.client">SphereRequestDecorator</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CommandImpl.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands">CustomObjectCustomJsonMappingUpsertCommand</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingByKeyGet</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/AttributeMapper.html#deserialize-com.fasterxml.jackson.databind.JsonNode-">deserialize(JsonNode)</a></span> - Method in interface io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeMapper.html" title="interface in io.sphere.sdk.products.attributes">AttributeMapper</a></dt>
 <dd>&nbsp;</dd>
@@ -1668,8 +1682,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in class io.sphere.sdk.search.<a href="io/sphere/sdk/search/MetaModelSearchDslImpl.html" title="class in io.sphere.sdk.search">MetaModelSearchDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/Search.html#deserialize-io.sphere.sdk.http.HttpResponse-">deserialize(HttpResponse)</a></span> - Method in interface io.sphere.sdk.search.<a href="io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html#deserializeCustomObject--">deserializeCustomObject()</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingByKeyGet</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/queries/DirectionlessQuerySort.html" title="class in io.sphere.sdk.queries"><span class="typeNameLink">DirectionlessQuerySort</span></a>&lt;<a href="io/sphere/sdk/queries/DirectionlessQuerySort.html" title="type parameter in DirectionlessQuerySort">T</a>&gt; - Class in <a href="io/sphere/sdk/queries/package-summary.html">io.sphere.sdk.queries</a></dt>
 <dd>
@@ -2673,6 +2685,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraft.html#getCustomLineItems--">getCustomLineItems()</a></span> - Method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraft.html" title="interface in io.sphere.sdk.orders">OrderImportDraft</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectUtils.html#getCustomObjectJavaTypeForValue-com.fasterxml.jackson.core.type.TypeReference-">getCustomObjectJavaTypeForValue(TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectUtils.html" title="class in io.sphere.sdk.customobjects">CustomObjectUtils</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectUtils.html#getCustomObjectJavaTypeForValue-com.fasterxml.jackson.databind.JavaType-">getCustomObjectJavaTypeForValue(JavaType)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectUtils.html" title="class in io.sphere.sdk.customobjects">CustomObjectUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html#getData--">getData()</a></span> - Method in class io.sphere.sdk.http.<a href="io/sphere/sdk/http/FormUrlEncodedHttpRequestBody.html" title="class in io.sphere.sdk.http">FormUrlEncodedHttpRequestBody</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/updateactions/SetDateOfBirth.html#getDateOfBirth--">getDateOfBirth()</a></span> - Method in class io.sphere.sdk.customers.commands.updateactions.<a href="io/sphere/sdk/customers/commands/updateactions/SetDateOfBirth.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetDateOfBirth</a></dt>
@@ -3058,6 +3074,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Delivery.html#getItems--">getItems()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Delivery.html" title="class in io.sphere.sdk.orders">Delivery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/ReturnInfo.html#getItems--">getItems()</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/ReturnInfo.html" title="class in io.sphere.sdk.orders">ReturnInfo</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#getJavaType--">getJavaType()</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/SphereServiceException.html#getJsonBody--">getJsonBody()</a></span> - Method in exception io.sphere.sdk.client.<a href="io/sphere/sdk/client/SphereServiceException.html" title="class in io.sphere.sdk.client">SphereServiceException</a></dt>
 <dd>&nbsp;</dd>
@@ -4395,8 +4413,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html#httpRequestIntent--">httpRequestIntent()</a></span> - Method in class io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html" title="class in io.sphere.sdk.customobjects.commands">CustomObjectCustomJsonMappingUpsertCommand</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html#httpRequestIntent--">httpRequestIntent()</a></span> - Method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectCustomJsonMappingByKeyGet</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/OrderImportCommand.html#httpRequestIntent--">httpRequestIntent()</a></span> - Method in class io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderImportCommand.html" title="class in io.sphere.sdk.orders.commands">OrderImportCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/projects/queries/ProjectGet.html#httpRequestIntent--">httpRequestIntent()</a></span> - Method in class io.sphere.sdk.projects.queries.<a href="io/sphere/sdk/projects/queries/ProjectGet.html" title="class in io.sphere.sdk.projects.queries">ProjectGet</a></dt>
@@ -5272,6 +5288,38 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </a>
 <h2 class="title">J</h2>
 <dl>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">ByIdDeleteCommandImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CommandImpl.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreatePasswordTokenCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateTokenCommand</a></dt>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
+&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/OrderImportCommand.html#jacksonJavaType--">jacksonJavaType()</a></span> - Method in class io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderImportCommand.html" title="class in io.sphere.sdk.orders.commands">OrderImportCommand</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/utils/ListUtils.html#join-java.util.List-">join(List&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.utils.<a href="io/sphere/sdk/utils/ListUtils.html" title="class in io.sphere.sdk.utils">ListUtils</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client"><span class="typeNameLink">JsonEndpoint</span></a>&lt;<a href="io/sphere/sdk/client/JsonEndpoint.html" title="type parameter in JsonEndpoint">T</a>&gt; - Class in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
@@ -5652,6 +5700,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.util.List-java.util.List-java.lang.Boolean-java.lang.Long-java.lang.Long-java.lang.String-java.util.function.Function-java.util.List-java.util.List-Q-E-java.util.function.Function-">MetaModelQueryDslImpl(List&lt;QueryPredicate&lt;T&gt;&gt;, List&lt;QuerySort&lt;T&gt;&gt;, Boolean, Long, Long, String, Function&lt;HttpResponse, PagedQueryResult&lt;T&gt;&gt;, List&lt;ExpansionPath&lt;T&gt;&gt;, List&lt;HttpQueryParameter&gt;, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-Q-E-java.util.function.Function-java.util.List-">MetaModelQueryDslImpl(String, TypeReference&lt;PagedQueryResult&lt;T&gt;&gt;, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;, List&lt;HttpQueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.databind.JavaType-Q-E-java.util.function.Function-java.util.List-">MetaModelQueryDslImpl(String, JavaType, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;, List&lt;HttpQueryParameter&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.databind.JavaType-Q-E-java.util.function.Function-">MetaModelQueryDslImpl(String, JavaType, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html#MetaModelQueryDslImpl-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-Q-E-java.util.function.Function-">MetaModelQueryDslImpl(String, TypeReference&lt;PagedQueryResult&lt;T&gt;&gt;, Q, E, Function&lt;MetaModelQueryDslBuilder&lt;T, C, Q, E&gt;, C&gt;)</a></span> - Constructor for class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/MetaModelQueryDslImpl.html" title="class in io.sphere.sdk.queries">MetaModelQueryDslImpl</a></dt>
 <dd>&nbsp;</dd>
@@ -6213,28 +6265,82 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-T-com.fasterxml.jackson.core.type.TypeReference-">of(T, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">of(String, String, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-T-">of(T)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-io.sphere.sdk.customobjects.CustomObject-com.fasterxml.jackson.core.type.TypeReference-">of(CustomObject&lt;T&gt;, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
 <dd>
-<div class="block">Deletes a custom object.</div>
+<div class="block">Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in <code>valueTypeReference</code>specified value type.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-io.sphere.sdk.customobjects.CustomObject-java.lang.Class-">of(CustomObject&lt;T&gt;, Class&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in <code>valueTypeReference</code>specified value type.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">of(String, String, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in <code>valueTypeReference</code>specified value type.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-java.lang.String-java.lang.Class-">of(String, String, Class&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with the in <code>valueTypeReference</code>specified value type.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-io.sphere.sdk.customobjects.CustomObject-">of(CustomObject&lt;?&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-io.sphere.sdk.customobjects.CustomObject-"><code>CustomObjectDeleteCommand.ofJsonNode(CustomObject)</code></a> instead</span></div>
+</div>
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-java.lang.String-java.lang.String-"><code>CustomObjectDeleteCommand.ofJsonNode(String, String)</code></a> instead</span></div>
+</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-long-com.fasterxml.jackson.core.type.TypeReference-">of(String, long, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object by id with optimistic concurrency control and returns the old custom object with the in <code>valueTypeReference</code> specified value type.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-long-java.lang.Class-">of(String, long, Class&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object by id with optimistic concurrency control and returns the old custom object with the in <code>valueClass</code> specified value type.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html#of-io.sphere.sdk.customobjects.CustomObjectDraft-">of(CustomObjectDraft&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectUpsertCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customobjects.expansion.<a href="io/sphere/sdk/customobjects/expansion/CustomObjectExpansionModel.html" title="class in io.sphere.sdk.customobjects.expansion">CustomObjectExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#of-java.lang.String-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">of(String, String, TypeReference&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
-<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html#of-java.lang.String-java.lang.Class-">of(String, Class&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByIdGet</a></dt>
+<dd>
+<div class="block">Creates an object to fetch a custom object by id with POJO mapping.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html#of-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">of(String, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByIdGet</a></dt>
+<dd>
+<div class="block">Creates an object to fetch a custom object by the container and key with POJO mapping.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#of-java.lang.String-java.lang.String-java.lang.Class-">of(String, String, Class&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
+<dd>
+<div class="block">Creates an object to fetch a custom object by the container and key with POJO mapping.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#of-java.lang.String-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">of(String, String, TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
+<dd>
+<div class="block">Creates an object to fetch a custom object by the container and key with POJO mapping.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#of-java.lang.String-java.lang.String-">of(String, String)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of-com.fasterxml.jackson.core.type.TypeReference-">of(TypeReference&lt;PagedQueryResult&lt;CustomObject&lt;T&gt;&gt;&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#ofJsonNode-java.lang.String-java.lang.String-"><code>CustomObjectByKeyGet.ofJsonNode(String, String)</code></a> instead</span></div>
+</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of-com.fasterxml.jackson.core.type.TypeReference-">of(TypeReference&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
+<dd>
+<div class="block">Query object for custom objects where the result value is a POJO.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of-java.lang.Class-">of(Class&lt;T&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
+<dd>
+<div class="block">Query object for custom objects where the result value is a POJO.</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of--">of()</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>
+<div class="block"><span class="deprecationComment">use <a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--"><code>CustomObjectQuery.ofJsonNode()</code></a> instead</span></div>
+</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQueryModel.html" title="class in io.sphere.sdk.customobjects.queries">CustomObjectQueryModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html#of-io.sphere.sdk.discountcodes.DiscountCodeDraft-">of(DiscountCodeDraft)</a></span> - Static method in interface io.sphere.sdk.discountcodes.commands.<a href="io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html" title="interface in io.sphere.sdk.discountcodes.commands">DiscountCodeCreateCommand</a></dt>
@@ -7280,6 +7386,28 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomField.html#ofJson-java.lang.String-com.fasterxml.jackson.databind.JsonNode-java.lang.String-">ofJson(String, JsonNode, String)</a></span> - Static method in class io.sphere.sdk.orders.commands.updateactions.<a href="io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomField.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetLineItemCustomField</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-io.sphere.sdk.customobjects.CustomObject-">ofJsonNode(CustomObject&lt;?&gt;)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object without optimistic concurrency control and uses the delete endpoint via container and key and returns the old custom object with a JsonNode value type.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-java.lang.String-java.lang.String-">ofJsonNode(String, String)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object without optimistic concurrency control and returns the old custom object with a JsonNode value type.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-java.lang.String-long-">ofJsonNode(String, long)</a></span> - Static method in interface io.sphere.sdk.customobjects.commands.<a href="io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html" title="interface in io.sphere.sdk.customobjects.commands">CustomObjectDeleteCommand</a></dt>
+<dd>
+<div class="block">Deletes a custom object by id with optimistic concurrency control and returns the old custom object with a JsonNode value type.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html#ofJsonNode-java.lang.String-">ofJsonNode(String)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByIdGet</a></dt>
+<dd>
+<div class="block">Creates an object to fetch a custom object by the container and get the result as <code>JsonNode</code>.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#ofJsonNode-java.lang.String-java.lang.String-">ofJsonNode(String, String)</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
+<dd>
+<div class="block">Creates an object to fetch a custom object by the container and get the result as <code>JsonNode</code>.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--">ofJsonNode()</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/products/attributes/AttributeAccess.html#ofJsonNode--">ofJsonNode()</a></span> - Static method in interface io.sphere.sdk.products.attributes.<a href="io/sphere/sdk/products/attributes/AttributeAccess.html" title="interface in io.sphere.sdk.products.attributes">AttributeAccess</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html#ofLineItems-javax.money.MonetaryAmount-io.sphere.sdk.orders.OrderState-java.util.List-">ofLineItems(MonetaryAmount, OrderState, List&lt;LineItemImportDraft&gt;)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/OrderImportDraftBuilder.html" title="class in io.sphere.sdk.orders">OrderImportDraftBuilder</a></dt>
@@ -7550,11 +7678,19 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Action to remove a custom attribute.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpdate(CustomObject&lt;T&gt;, T, TypeReference&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpdate(CustomObject&lt;T&gt;, T, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Creates a draft for updating a custom object.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpsert(String, String, T, TypeReference&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-java.lang.Class-">ofUnversionedUpdate(CustomObject&lt;T&gt;, T, Class&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dd>
+<div class="block">Creates a draft for updating a custom object.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-T-com.fasterxml.jackson.core.type.TypeReference-">ofUnversionedUpsert(String, String, T, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dd>
+<div class="block">Creates a draft for creating or updating a custom object.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofUnversionedUpsert-java.lang.String-java.lang.String-T-java.lang.Class-">ofUnversionedUpsert(String, String, T, Class&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </dd>
@@ -7562,11 +7698,19 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpdate(CustomObject&lt;T&gt;, T, TypeReference&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpdate(CustomObject&lt;T&gt;, T, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Creates a draft for updating a custom object.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-long-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpsert(String, String, T, long, TypeReference&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpdate-io.sphere.sdk.customobjects.CustomObject-T-java.lang.Class-">ofVersionedUpdate(CustomObject&lt;T&gt;, T, Class&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dd>
+<div class="block">Creates a draft for updating a custom object.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-long-com.fasterxml.jackson.core.type.TypeReference-">ofVersionedUpsert(String, String, T, long, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dd>
+<div class="block">Creates a draft for creating or updating a custom object.</div>
+</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#ofVersionedUpsert-java.lang.String-java.lang.String-T-long-java.lang.Class-">ofVersionedUpsert(String, String, T, long, Class&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Creates a draft for creating or updating a custom object.</div>
 </dd>
@@ -7787,10 +7931,6 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerByTokenGet.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths(Function&lt;CustomerExpansionModel&lt;Customer&gt;, ExpansionPath&lt;Customer&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerByTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByTokenGet</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerByTokenGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths(ExpansionPath&lt;Customer&gt;)</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerByTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByTokenGet</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths(Function&lt;CustomObjectExpansionModel&lt;CustomObject&lt;T&gt;&gt;, ExpansionPath&lt;CustomObject&lt;T&gt;&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#plusExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">plusExpansionPaths(ExpansionPath&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html#plusExpansionPaths-java.util.function.Function-">plusExpansionPaths(Function&lt;DiscountCodeExpansionModel&lt;DiscountCode&gt;, ExpansionPath&lt;DiscountCode&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html" title="interface in io.sphere.sdk.discountcodes.queries">DiscountCodeByIdGet</a></dt>
 <dd>&nbsp;</dd>
@@ -8034,6 +8174,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">Pretty prints a given JSON string.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#prettyPrint-com.fasterxml.jackson.databind.JsonNode-">prettyPrint(JsonNode)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html#price-io.sphere.sdk.products.Price-">price(Price)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">LineItemImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products"><span class="typeNameLink">Price</span></a> - Class in <a href="io/sphere/sdk/products/package-summary.html">io.sphere.sdk.products</a></dt>
@@ -8469,10 +8611,14 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">Reads a Java object from JSON string data encoded as UTF-8.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#readObject-byte:A-com.fasterxml.jackson.databind.JavaType-">readObject(byte[], JavaType)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#readObjectFromResource-java.lang.String-com.fasterxml.jackson.core.type.TypeReference-">readObjectFromResource(String, TypeReference&lt;T&gt;)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
 <dd>
 <div class="block">Reads a UTF-8 JSON text file from the classpath of the current thread and transforms it into a Java object.</div>
 </dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/json/SphereJsonUtils.html#readObjectFromResource-java.lang.String-com.fasterxml.jackson.databind.JavaType-">readObjectFromResource(String, JavaType)</a></span> - Static method in class io.sphere.sdk.json.<a href="io/sphere/sdk/json/SphereJsonUtils.html" title="class in io.sphere.sdk.json">SphereJsonUtils</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/Recalculate.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">Recalculate</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
 <div class="block">Updates tax rates and prices.</div>
@@ -8740,8 +8886,6 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.customergroups.queries.<a href="io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html" title="interface in io.sphere.sdk.customergroups.queries">CustomerGroupQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerQuery.html" title="interface in io.sphere.sdk.customers.queries">CustomerQuery</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectQuery.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectQuery</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html#resultTypeReference--">resultTypeReference()</a></span> - Static method in interface io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html" title="interface in io.sphere.sdk.discountcodes.queries">DiscountCodeQuery</a></dt>
 <dd>&nbsp;</dd>
@@ -9496,9 +9640,11 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html'>CustomerPasswordResetCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html'>CustomerChangePasswordCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html'>CustomerCreatePasswordTokenCommand</a></td></tr>
-<tr><td rowspan="3">customobjects</td><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectQuery.html'>CustomObjectQuery</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html'>CustomObjectCustomJsonMappingUpsertCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html'>CustomObjectCustomJsonMappingByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html'>CustomObjectUpsertCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html'>CustomObjectByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html'>CustomObjectDeleteCommand</a></td></tr>
+<tr><td rowspan="5">customobjects</td><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByXGet.html'>CustomObjectCustomJsonMappingByXGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html'>CustomObjectCustomJsonMappingUpsertCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectQuery.html'>CustomObjectQuery</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html'>CustomObjectUpsertCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html'>CustomObjectCustomJsonMappingByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html'>CustomObjectDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html'>CustomObjectByKeyGet</a></td><td></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html'>CustomObjectByIdGet</a></td><td></td></tr>
 <tr><td rowspan="3">discountcodes</td><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html'>DiscountCodeQuery</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html'>DiscountCodeCreateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html'>DiscountCodeByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeDeleteCommand.html'>DiscountCodeDeleteCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html'>DiscountCodeUpdateCommand</a></td></tr>
@@ -10184,45 +10330,13 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/client/JsonEndpoint.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.client.<a href="io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/ByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">ByIdDeleteCommandImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/CreateCommandImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/CreateCommandImpl.html" title="class in io.sphere.sdk.commands">CreateCommandImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelByIdDeleteCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelByIdDeleteCommandImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelCreateCommandImpl.html" title="class in io.sphere.sdk.commands">MetaModelCreateCommandImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/MetaModelUpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">MetaModelUpdateCommandDslImpl</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customergroups/CustomerGroup.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.customergroups.<a href="io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateEmailTokenCommand</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreatePasswordTokenCommand</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateTokenCommand</a></dt>
-<dd>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span></div>
-&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.customers.commands.<a href="io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/Customer.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerSignInResult.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/CustomerToken.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.customers.<a href="io/sphere/sdk/customers/CustomerToken.html" title="interface in io.sphere.sdk.customers">CustomerToken</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/DiscountCode.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.discountcodes.<a href="io/sphere/sdk/discountcodes/DiscountCode.html" title="interface in io.sphere.sdk.discountcodes">DiscountCode</a></dt>
 <dd>&nbsp;</dd>
@@ -10237,8 +10351,6 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedEnumValue.html#typeReference--">typeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedEnumValue.html" title="class in io.sphere.sdk.models">LocalizedEnumValue</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#typeReference--">typeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/commands/OrderImportCommand.html#typeReference--">typeReference()</a></span> - Method in class io.sphere.sdk.orders.commands.<a href="io/sphere/sdk/orders/commands/OrderImportCommand.html" title="class in io.sphere.sdk.orders.commands">OrderImportCommand</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
 <dd>&nbsp;</dd>
@@ -10791,12 +10903,6 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/queries/CustomerByTokenGet.html#withExpansionPaths-java.util.List-">withExpansionPaths(List&lt;ExpansionPath&lt;Customer&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.customers.queries.<a href="io/sphere/sdk/customers/queries/CustomerByTokenGet.html" title="interface in io.sphere.sdk.customers.queries">CustomerByTokenGet</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths(Function&lt;CustomObjectExpansionModel&lt;CustomObject&lt;T&gt;&gt;, ExpansionPath&lt;CustomObject&lt;T&gt;&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths(ExpansionPath&lt;CustomObject&lt;T&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#withExpansionPaths-java.util.List-">withExpansionPaths(List&lt;ExpansionPath&lt;CustomObject&lt;T&gt;&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.customobjects.queries.<a href="io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html" title="interface in io.sphere.sdk.customobjects.queries">CustomObjectByKeyGet</a></dt>
-<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html#withExpansionPaths-java.util.function.Function-">withExpansionPaths(Function&lt;DiscountCodeExpansionModel&lt;DiscountCode&gt;, ExpansionPath&lt;DiscountCode&gt;&gt;)</a></span> - Method in interface io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html" title="interface in io.sphere.sdk.discountcodes.queries">DiscountCodeByIdGet</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html#withExpansionPaths-io.sphere.sdk.expansion.ExpansionPath-">withExpansionPaths(ExpansionPath&lt;DiscountCode&gt;)</a></span> - Method in interface io.sphere.sdk.discountcodes.queries.<a href="io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html" title="interface in io.sphere.sdk.discountcodes.queries">DiscountCodeByIdGet</a></dt>
@@ -11283,7 +11389,7 @@ the order they are declared.</div>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html#withVersion-io.sphere.sdk.models.Versioned-">withVersion(Versioned&lt;T&gt;)</a></span> - Method in class io.sphere.sdk.commands.<a href="io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="class in io.sphere.sdk.commands">UpdateCommandDslImpl</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#withVersion-long-">withVersion(long)</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/customobjects/CustomObjectDraft.html#withVersion-java.lang.Long-">withVersion(Long)</a></span> - Method in class io.sphere.sdk.customobjects.<a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects">CustomObjectDraft</a></dt>
 <dd>
 <div class="block">Copies this <a href="io/sphere/sdk/customobjects/CustomObjectDraft.html" title="class in io.sphere.sdk.customobjects"><code>CustomObjectDraft</code></a> and sets the version to <code>version</code> to use optimistic locking.</div>
 </dd>
