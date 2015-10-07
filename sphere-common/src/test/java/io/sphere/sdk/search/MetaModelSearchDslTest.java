@@ -1,5 +1,6 @@
 package io.sphere.sdk.search;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.models.LocalizedStringEntry;
 import org.junit.Test;
@@ -96,6 +97,17 @@ public class MetaModelSearchDslTest {
                 .containsExactlyElementsOf(singletonList(EXPANSION_PATH_ONE));
         assertThat(dsl.plusExpansionPaths(singletonList(EXPANSION_PATH_TWO)).expansionPaths())
                 .containsExactlyElementsOf(asList(EXPANSION_PATH_ONE, EXPANSION_PATH_TWO));
+    }
+
+    static final class TestableSearchDsl extends MetaModelSearchDslImpl<Object, TestableSearchDsl, Object, Object> {
+
+        TestableSearchDsl(){
+            super("", new TypeReference<PagedSearchResult<Object>>() {}, new Object(), new Object(), TestableSearchDsl::new);
+        }
+
+        private TestableSearchDsl(final MetaModelSearchDslBuilder<Object, TestableSearchDsl, Object, Object> builder) {
+            super(builder);
+        }
     }
 
 }
