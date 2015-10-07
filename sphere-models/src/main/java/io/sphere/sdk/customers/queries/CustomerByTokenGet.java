@@ -9,13 +9,25 @@ import io.sphere.sdk.queries.MetaModelGetDsl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * DEPRECATED class.
+ *
+ */
 public interface CustomerByTokenGet extends MetaModelGetDsl<Customer, Customer, CustomerByTokenGet, CustomerExpansionModel<Customer>> {
+    /**
+     * @deprecated use {@link CustomerByPasswordTokenGet#of(String)}
+     */
+    @Deprecated
     static CustomerByTokenGet of(final String token) {
         return new CustomerByTokenGetImpl(token);
     }
 
+    /**
+     * @deprecated use {@link CustomerByPasswordTokenGet#of(CustomerToken)}
+     */
+    @Deprecated
     static CustomerByTokenGet of(final CustomerToken token) {
-        return of(token.getValue());
+        return new CustomerByTokenGetImpl(token.getValue());
     }
 
     @Override

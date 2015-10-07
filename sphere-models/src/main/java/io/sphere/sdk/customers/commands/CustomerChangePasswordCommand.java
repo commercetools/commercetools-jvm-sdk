@@ -10,6 +10,7 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import static io.sphere.sdk.http.HttpMethod.POST;
 
 /**
+ * Updates the password of a customer. No tokens required.
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerChangePasswordCommandTest#execution()}
  *

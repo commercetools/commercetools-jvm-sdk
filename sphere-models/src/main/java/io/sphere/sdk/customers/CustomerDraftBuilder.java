@@ -11,6 +11,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Builder for creating a customer.
+ *
+ * @see Customer
+ * @see CustomerDraft
+ * @see io.sphere.sdk.customers.commands.CustomerCreateCommand
+ */
 public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft> {
     @Nullable
     private String customerNumber;

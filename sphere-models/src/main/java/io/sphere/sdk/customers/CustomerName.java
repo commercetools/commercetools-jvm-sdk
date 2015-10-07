@@ -4,6 +4,14 @@ import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
 
+/**
+ * Parameter object for customer title, firstName, middleName and lastName.
+ *
+ * @see Customer
+ * @see Customer#getName()
+ * @see io.sphere.sdk.customers.commands.updateactions.ChangeName
+ * @see CustomerDraftBuilder
+ */
 public class CustomerName extends Base {
     @Nullable
     private final String title;
@@ -35,6 +43,14 @@ public class CustomerName extends Base {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public CustomerName withTitle(@Nullable final String title) {
+        return new CustomerName(title, firstName, middleName, lastName);
+    }
+
+    public CustomerName withMiddleName(@Nullable final String middleName) {
+        return new CustomerName(title, firstName, middleName, lastName);
     }
 
     public static CustomerName ofFirstAndLastName(final String firstName, final String lastName) {

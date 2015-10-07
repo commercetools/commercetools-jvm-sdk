@@ -83,6 +83,19 @@ import java.util.Optional;
  * <h3 id="delete-customer">Delete a customer entry</h3>
  *
  * See {@link io.sphere.sdk.customers.commands.CustomerDeleteCommand}.
+ *
+ *
+ * @see io.sphere.sdk.customers.commands.CustomerChangePasswordCommand
+ * @see io.sphere.sdk.customers.commands.CustomerCreateCommand
+ * @see io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand
+ * @see io.sphere.sdk.customers.commands.CustomerDeleteCommand
+ * @see io.sphere.sdk.customers.commands.CustomerPasswordResetCommand
+ * @see io.sphere.sdk.customers.commands.CustomerSignInCommand
+ * @see io.sphere.sdk.customers.commands.CustomerUpdateCommand
+ * @see io.sphere.sdk.customers.commands.CustomerVerifyEmailCommand
+ * @see io.sphere.sdk.customers.queries.CustomerByIdGet
+ * @see io.sphere.sdk.customers.queries.CustomerByTokenGet
+ * @see io.sphere.sdk.customers.queries.CustomerQuery
  */
 @JsonDeserialize(as = CustomerImpl.class)
 public interface Customer extends Resource<Customer>, Custom {
