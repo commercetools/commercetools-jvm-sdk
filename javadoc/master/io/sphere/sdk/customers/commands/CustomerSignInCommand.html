@@ -137,9 +137,47 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
  If a line item in the anonymous cart matches an existing line item in the customer's cart (same product ID and variant ID),
  then the maximum quantity of both line items is used as the new quantity.
 
+ If the customer forgot the password reset it with <a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreatePasswordTokenCommand</code></a>.
+
+ <p>Example for a simple sign in without any carts involved:</p>
  <div id="io-sphere-sdk-customers-commands-CustomerSignInCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
     final CustomerSignInResult result = execute(CustomerSignInCommand.of(customer.getEmail(), PASSWORD));
     assertThat(result.getCustomer()).isEqualTo(customer);
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>Example for a signin where the customer has a cart and signs in with an anonymous cart</p>
+ <div id="io-sphere-sdk-customers-commands-CustomerSignInCommandTest-signInWithAnonymousCart--%s" class=code-example><pre><code class='java'>withCustomerCustomerCartAndAnonymousCart(client(), customer -&gt; customersCart -&gt; anonymousCart -&gt; {
+    assertThat(customersCart.getCustomerId())
+            .as("customersCart belongs to customer")
+            .isEqualTo(customer.getId());
+    assertThat(anonymousCart.getCustomerId()).as("anonymous cart has no customer").isNull();
+    assertThat(customersCart.getLineItems().get(0).getProductId())
+            .as("both carts have the same product variant")
+            .isEqualTo(anonymousCart.getLineItems().get(0).getProductId());
+    assertThat(customersCart.getLineItems().get(0).getQuantity())
+            .describedAs("both carts have the same variant in different quantities")
+            .isNotEqualTo(anonymousCart.getLineItems().get(0).getQuantity());
+    assertThat(customersCart.getLineItems().get(0).getQuantity()).isEqualTo(3);
+    assertThat(anonymousCart.getLineItems().get(0).getQuantity()).isEqualTo(7);
+    final long maxOfBothQuantities = Math.max(customersCart.getLineItems().get(0).getQuantity(),
+            anonymousCart.getLineItems().get(0).getQuantity());
+    assertThat(maxOfBothQuantities).isEqualTo(7);
+
+    final CustomerSignInResult result = execute(CustomerSignInCommand
+            .of(customer.getEmail(), PASSWORD, anonymousCart.getId()));
+
+    final Cart mergeResultCart = result.getCart();
+    final LineItem mergeResultLineItem = mergeResultCart.getLineItems().get(0);
+    assertThat(mergeResultLineItem.getQuantity()).isEqualTo(maxOfBothQuantities).isEqualTo(7);
+    assertThat(mergeResultLineItem.getProductId())
+            .describedAs("same product variant as before")
+            .isEqualTo(customersCart.getLineItems().get(0).getProductId());
+    assertThat(mergeResultCart.getId()).isEqualTo(customersCart.getId());
+    assertThat(mergeResultCart.getId()).isEqualTo(customersCart.getId());
+    assertThat(mergeResultCart.getCartState()).isEqualTo(CartState.ACTIVE);
+    final Cart abandonedCart = execute(CartByIdGet.of(anonymousCart.getId()));
+    assertThat(abandonedCart.getCartState()).isEqualTo(CartState.MERGED);
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -152,7 +190,8 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerSignInCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a></dd>
+<dd><a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a>, 
+<a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreatePasswordTokenCommand</code></a></dd>
 </dl>
 </li>
 </ul>

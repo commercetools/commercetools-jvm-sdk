@@ -100,9 +100,7 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="interface in io.sphere.sdk.customers.commands">CustomerUpdateCommand</a></td>
 <td class="colLast">
-<div class="block"><p id=update-actions>Known UpdateActions</p><ul><li><a href="updateactions/AddAddress.html">AddAddress</a></li><li><a href="updateactions/ChangeAddress.html">ChangeAddress</a></li><li><a href="updateactions/ChangeEmail.html">ChangeEmail</a></li><li><a href="updateactions/ChangeName.html">ChangeName</a></li><li><a href="updateactions/RemoveAddress.html">RemoveAddress</a></li><li><a href="updateactions/SetCompanyName.html">SetCompanyName</a></li><li><a href="updateactions/SetCustomField.html">SetCustomField</a></li><li><a href="updateactions/SetCustomType.html">SetCustomType</a></li><li><a href="updateactions/SetCustomerGroup.html">SetCustomerGroup</a></li><li><a href="updateactions/SetCustomerNumber.html">SetCustomerNumber</a></li><li><a href="updateactions/SetDateOfBirth.html">SetDateOfBirth</a></li><li><a href="updateactions/SetDefaultBillingAddress.html">SetDefaultBillingAddress</a></li><li><a href="updateactions/SetDefaultShippingAddress.html">SetDefaultShippingAddress</a></li><li><a href="updateactions/SetExternalId.html">SetExternalId</a></li><li><a href="updateactions/SetVatId.html">SetVatId</a></li></ul>
-
- To update the properties <a href="../../../../../io/sphere/sdk/customers/Customer.html#isEmailVerified--"><code>Customer.isEmailVerified()</code></a> or <a href="../../../../../io/sphere/sdk/customers/Customer.html#getPassword--"><code>Customer.getPassword()</code></a> special commands are required which are documented in the <a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>customer Javadoc</code></a>.</div>
+<div class="block">Updates a customer.</div>
 </td>
 </tr>
 </tbody>
@@ -119,24 +117,7 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerChangePasswordCommand</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-customers-commands-CustomerChangePasswordCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    final String oldPassword = PASSWORD;
-    final String newPassword = "newSecret";
-    final Customer updatedCustomer = execute(CustomerChangePasswordCommand.of(customer, oldPassword, newPassword));
-    assertThat(customer.getPassword()).isNotEqualTo(updatedCustomer.getPassword());
-    final CustomerSignInResult signInResult =
-            execute(CustomerSignInCommand.of(customer.getEmail(), newPassword));
-    assertThat(signInResult.getCustomer().hasSameIdAs(updatedCustomer))
-            .overridingErrorMessage("sign in works with new password")
-            .isTrue();
-    try {
-        execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword));
-        fail();
-    } catch (final ErrorResponseException e) {
-        assertThat(e.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();
-    }
-});
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerChangePasswordCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<div class="block">Updates the password of a customer.</div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -147,7 +128,9 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreatePasswordTokenCommand</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Creates a token to reset the customer password with <a href="../../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerPasswordResetCommand</code></a>.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateTokenCommand</a></td>
@@ -157,7 +140,9 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerPasswordResetCommand</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Sets a new password for the customer.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerSignInCommand</a></td>

@@ -108,6 +108,7 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>,<a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="interface in io.sphere.sdk.customers.commands">CustomerCreateCommand</a>,<a href="../../../../../io/sphere/sdk/customers/expansion/CustomerSignInResultExpansionModel.html" title="class in io.sphere.sdk.customers.expansion">CustomerSignInResultExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerSignInResult.html" title="interface in io.sphere.sdk.customers">CustomerSignInResult</a>&gt;&gt;</pre>
 <div class="block">Creates/signs up a customer.
 
+ <h3 id="create-customer-without-cart">Example for creating a customer without a cart</h3>
  <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomer--%s" class=code-example><pre><code class='java'>final CustomerGroup customerGroup = CustomerGroupFixtures.b2cCustomerGroup(client());
 final CustomerName name = CustomerName.ofFirstAndLastName("John", "Smith");
 final String email = randomEmail(CustomerCreateCommandTest.class);
@@ -132,14 +133,14 @@ final CustomerCreateCommand sphereRequest = CustomerCreateCommand.of(draft)
         .withExpansionPaths(m -&gt; m.customer().customerGroup());
 final CustomerSignInResult result = execute(sphereRequest);
 assertThat(result.getCart())
-        .overridingErrorMessage("no cart id given in creation, so this field is empty")
+        .as("no cart id given in creation, so this field is empty")
         .isNull();
 final Customer customer = result.getCustomer();
 final Cart cart = result.getCart();
 assertThat(customer.getName()).isEqualTo(name);
 assertThat(customer.getEmail()).isEqualTo(email);
 assertThat(customer.getPassword())
-        .overridingErrorMessage("password is not stored in clear text")
+        .as("password is not stored in clear text")
         .isNotEqualTo(password);
 assertThat(customer.getExternalId()).contains(externalId);
 assertThat(cart).isNull();
@@ -152,10 +153,11 @@ assertThat(customer.getAddresses().stream().map(a -&gt; a.withId(null)).collect(
 assertThat(customer.getDefaultBillingAddress().withId(null)).isEqualTo(addresses.get(0));
 assertThat(customer.findDefaultShippingAddress().get().withId(null)).isEqualTo(addresses.get(1));
 assertThat(customer.getCustomerGroup().getObj())
-        .overridingErrorMessage("customer group can be expanded")
+        .as("customer group can be expanded")
         .isNotNull();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
 
+ <h3 id="create-customer-with-cart">Example for creating a customer with a cart</h3>
  <div id="io-sphere-sdk-customers-commands-CustomerCreateCommandTest-createCustomerWithCart--%s" class=code-example><pre><code class='java'>final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));//could of course be filled with products
 final String email = randomEmail(CustomerCreateCommandTest.class);
 final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);

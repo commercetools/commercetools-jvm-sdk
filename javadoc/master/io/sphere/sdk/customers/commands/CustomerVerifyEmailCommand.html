@@ -135,8 +135,10 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
     assertThat(customer.isEmailVerified()).isFalse();
     final int ttlMinutes = 15;
     final Command&lt;CustomerToken&gt; createTokenCommand = CustomerCreateEmailTokenCommand.of(customer, ttlMinutes);
+
     final CustomerToken customerToken = execute(createTokenCommand);
     final String tokenValue = customerToken.getValue();//this token needs to be sent via email to the customer
+
     final Command&lt;Customer&gt; verifyEmailCommand = CustomerVerifyEmailCommand.of(customer, tokenValue);
     final Customer loadedCustomer = execute(verifyEmailCommand);
     assertThat(loadedCustomer.isEmailVerified()).isTrue();
@@ -144,7 +146,9 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
 <dt><span class="seeLabel">See Also:</span></dt>
-<dd><a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a></dd>
+<dd><a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a>, 
+<a href="../../../../../io/sphere/sdk/customers/Customer.html#isEmailVerified--"><code>Customer.isEmailVerified()</code></a>, 
+<a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreateEmailTokenCommand</code></a></dd>
 </dl>
 </li>
 </ul>

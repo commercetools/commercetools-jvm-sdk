@@ -130,9 +130,9 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addCustomLineItem--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
     final Cart cart = createCartWithCountry(client());
-    assertThat(cart.getCustomLineItems()).hasSize(0);
+    assertThat(cart.getCustomLineItems()).isEmpty();
     final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
-    final String slug = "thing-slug";
+    final String slug = "thing-slug";//you handle to identify the custom line item
     final LocalizedString name = en("thing");
     final long quantity = 5;
     final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
@@ -146,7 +146,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(customLineItem.getSlug()).isEqualTo(slug);
     final Set&lt;ItemState&gt; state = customLineItem.getState();
     assertThat(state).hasSize(1);
-    assertThat(new LinkedList&lt;&gt;(state).get(0).getQuantity()).isEqualTo(quantity);
+    assertThat(state).extracting("quantity").containsOnly(quantity);
     assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
@@ -327,7 +327,8 @@ public&nbsp;<a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.htm
 <ul class="blockListLast">
 <li class="blockList">
 <h4>withCustom</h4>
-<pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a>&nbsp;withCustom(<a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</pre>
+<pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddCustomLineItem</a>&nbsp;withCustom(@Nullable
+                                    <a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</pre>
 </li>
 </ul>
 </li>

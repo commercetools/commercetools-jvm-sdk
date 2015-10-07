@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     <p>See also <a href="../CartUpdateCommand.html">CartUpdateCommand</a>.<p>
 
     <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addLineItem--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct(client(), (cart, product) -&gt; {
-    assertThat(cart.getLineItems()).hasSize(0);
+    assertThat(cart.getLineItems()).isEmpty();
     final long quantity = 3;
     final String productId = product.getId();
     final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity);

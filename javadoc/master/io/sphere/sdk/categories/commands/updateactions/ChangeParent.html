@@ -124,7 +124,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">ChangeParent</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</pre>
-<div class="block">Sets a concrete parent for the category.
+<div class="block">Sets a concrete parent for the category. Currently it is not possible int the API to remove the parent.
 
  <p>See also <a href="../CategoryUpdateCommand.html">CategoryUpdateCommand</a>.<p>
 
@@ -142,7 +142,9 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         assertThat(updatedB.getParent().getObj()).isNotNull().isEqualTo(categoryA);
     })
 );
-</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/commands/CategoryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/commands/CategoryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>Consult the documentation for <a href="../../../../../../io/sphere/sdk/meta/CategoryDocumentation.html#category-tree-changes">categories</a> for more information.</p></div>
 </li>
 </ul>
 </div>

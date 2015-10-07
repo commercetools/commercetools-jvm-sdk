@@ -126,7 +126,17 @@ var activeTableTab = "activeTableTab";
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</pre>
 <div class="block">Changes the name of a category.
 
-  <p>See also <a href="../CategoryUpdateCommand.html">CategoryUpdateCommand</a>.<p></div>
+  <p>See also <a href="../CategoryUpdateCommand.html">CategoryUpdateCommand</a>.<p>
+
+  <div id="io-sphere-sdk-categories-commands-CategoryUpdateCommandTest-changeName--%s" class=code-example><pre><code class='java'>withCategory(client(), category -&gt; {
+    final LocalizedString newName = LocalizedString.of(ENGLISH, "new name");
+    final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, ChangeName.of(newName));
+
+    final Category updatedCategory = execute(command);
+
+    assertThat(updatedCategory.getName()).isEqualTo(newName);
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/commands/CategoryUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

@@ -106,6 +106,20 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">CustomerQuery</span>
 extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>,<a href="../../../../../io/sphere/sdk/customers/queries/CustomerQuery.html" title="interface in io.sphere.sdk.customers.queries">CustomerQuery</a>,<a href="../../../../../io/sphere/sdk/customers/queries/CustomerQueryModel.html" title="class in io.sphere.sdk.customers.queries">CustomerQueryModel</a>,<a href="../../../../../io/sphere/sdk/customers/expansion/CustomerExpansionModel.html" title="class in io.sphere.sdk.customers.expansion">CustomerExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&gt;</pre>
+<div class="block">Fetches multiple customers.
+
+ Provides a QueryDsl for  customers to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p>
+
+ <p>Example for fetching a customer by id and expand the customer group:</p>
+ <div id="io-sphere-sdk-customers-queries-CustomerQueryTest-customerGroupReferenceExpansion--%s" class=code-example><pre><code class='java'>withCustomerInGroup(client(), (customer, customerGroup) -&gt; {
+    final Query&lt;Customer&gt; query = CustomerQuery.of()
+            .byEmail(customer.getEmail())
+            .withExpansionPaths(m -&gt; m.customerGroup());
+    final String actualCustomerGroupId = execute(query).head().get().getCustomerGroup().getObj().getId();
+    assertThat(actualCustomerGroupId).isEqualTo(customerGroup.getId());
+});
+
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/queries/CustomerQueryTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

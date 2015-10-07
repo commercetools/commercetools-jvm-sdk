@@ -142,14 +142,14 @@ final CustomerCreateCommand sphereRequest = CustomerCreateCommand.of(draft)
         .withExpansionPaths(m -&gt; m.customer().customerGroup());
 final CustomerSignInResult result = execute(sphereRequest);
 assertThat(result.getCart())
-        .overridingErrorMessage("no cart id given in creation, so this field is empty")
+        .as("no cart id given in creation, so this field is empty")
         .isNull();
 final Customer customer = result.getCustomer();
 final Cart cart = result.getCart();
 assertThat(customer.getName()).isEqualTo(name);
 assertThat(customer.getEmail()).isEqualTo(email);
 assertThat(customer.getPassword())
-        .overridingErrorMessage("password is not stored in clear text")
+        .as("password is not stored in clear text")
         .isNotEqualTo(password);
 assertThat(customer.getExternalId()).contains(externalId);
 assertThat(cart).isNull();
@@ -162,7 +162,7 @@ assertThat(customer.getAddresses().stream().map(a -&gt; a.withId(null)).collect(
 assertThat(customer.getDefaultBillingAddress().withId(null)).isEqualTo(addresses.get(0));
 assertThat(customer.findDefaultShippingAddress().get().withId(null)).isEqualTo(addresses.get(1));
 assertThat(customer.getCustomerGroup().getObj())
-        .overridingErrorMessage("customer group can be expanded")
+        .as("customer group can be expanded")
         .isNotNull();
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateCommandTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -192,8 +192,10 @@ assertThat(result.getCart().getId()).isEqualTo(cart.getId());
     assertThat(customer.isEmailVerified()).isFalse();
     final int ttlMinutes = 15;
     final Command&lt;CustomerToken&gt; createTokenCommand = CustomerCreateEmailTokenCommand.of(customer, ttlMinutes);
+
     final CustomerToken customerToken = execute(createTokenCommand);
     final String tokenValue = customerToken.getValue();//this token needs to be sent via email to the customer
+
     final Command&lt;Customer&gt; verifyEmailCommand = CustomerVerifyEmailCommand.of(customer, tokenValue);
     final Customer loadedCustomer = execute(verifyEmailCommand);
     assertThat(loadedCustomer.isEmailVerified()).isTrue();
@@ -236,13 +238,18 @@ assertThat(result.getCart().getId()).isEqualTo(cart.getId());
  The result of the command is the updated customer, so if the customer needs to sign in after the password change the command <a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerSignInCommand</code></a> is required.
 
  <div id="io-sphere-sdk-customers-commands-CustomerPasswordResetCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
-    final CustomerToken token = execute(CustomerCreatePasswordTokenCommand.of(customer.getEmail()));
-    final String newPassword = "newPassword";
-    final Customer updatedCustomer = execute(CustomerPasswordResetCommand.of(customer, token, newPassword));
+    final String email = customer.getEmail();
+    final CustomerToken token = execute(CustomerCreatePasswordTokenCommand.of(email));
+    final String tokenValue = token.getValue();//this may need to be sent by email to the customer
 
-    final CustomerSignInResult signInResult = execute(CustomerSignInCommand.of(updatedCustomer.getEmail(), newPassword, null));
+    final Customer customerByToken = execute(CustomerByPasswordTokenGet.of(tokenValue));
+    final String newPassword = "newPassword";
+    final Customer updatedCustomer =
+            execute(CustomerPasswordResetCommand.of(customerByToken, tokenValue, newPassword));
+
+    final CustomerSignInResult signInResult = execute(CustomerSignInCommand.of(email, newPassword));
     assertThat(signInResult.getCustomer().getId())
-            .overridingErrorMessage("customer can sign in with the new password")
+            .describedAs("customer can sign in with the new password")
             .isEqualTo(customer.getId());
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerPasswordResetCommandTest.java" target="_blank">test code</a>.</pre></div>
@@ -254,6 +261,20 @@ assertThat(result.getCart().getId()).isEqualTo(cart.getId());
  <h3 id="delete-customer">Delete a customer entry</h3>
 
  See <a href="../../../../io/sphere/sdk/customers/commands/CustomerDeleteCommand.html" title="interface in io.sphere.sdk.customers.commands"><code>CustomerDeleteCommand</code></a>.</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerChangePasswordCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateCommand.html" title="interface in io.sphere.sdk.customers.commands"><code>CustomerCreateCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreatePasswordTokenCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/CustomerDeleteCommand.html" title="interface in io.sphere.sdk.customers.commands"><code>CustomerDeleteCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerPasswordResetCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/CustomerSignInCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerSignInCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/CustomerUpdateCommand.html" title="interface in io.sphere.sdk.customers.commands"><code>CustomerUpdateCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerVerifyEmailCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/queries/CustomerByIdGet.html" title="interface in io.sphere.sdk.customers.queries"><code>CustomerByIdGet</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/queries/CustomerByTokenGet.html" title="interface in io.sphere.sdk.customers.queries"><code>CustomerByTokenGet</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/queries/CustomerQuery.html" title="interface in io.sphere.sdk.customers.queries"><code>CustomerQuery</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
