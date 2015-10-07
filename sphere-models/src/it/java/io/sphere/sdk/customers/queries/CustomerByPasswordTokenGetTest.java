@@ -10,12 +10,12 @@ import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class CustomerByTokenGetTest extends IntegrationTest {
+public class CustomerByPasswordTokenGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
             final CustomerToken token = execute(CustomerCreatePasswordTokenCommand.of(customer.getEmail()));
-            final Customer fetchedCustomer = execute(CustomerByTokenGet.of(token));
+            final Customer fetchedCustomer = execute(CustomerByPasswordTokenGet.of(token));
             assertThat(fetchedCustomer.getId()).isEqualTo(customer.getId());
         });
     }
