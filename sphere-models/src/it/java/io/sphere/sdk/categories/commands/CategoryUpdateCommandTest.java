@@ -15,6 +15,7 @@ import java.util.List;
 import static io.sphere.sdk.categories.CategoryFixtures.withCategory;
 import static io.sphere.sdk.categories.CategoryFixtures.withPersistentCategory;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
+import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
 import static io.sphere.sdk.test.SphereTestUtils.asList;
 import static io.sphere.sdk.test.SphereTestUtils.randomSlug;
 import static java.util.Collections.singletonList;
@@ -34,6 +35,18 @@ public class CategoryUpdateCommandTest extends IntegrationTest {
             final Category againUpdatedCategory = execute(command2.withVersion(updatedCategory));
             assertThat(againUpdatedCategory.getName()).isEqualTo(newName2);
             assertThat(againUpdatedCategory.getVersion()).isGreaterThan(updatedCategory.getVersion());
+        });
+    }
+
+    @Test
+    public void changeName() throws Exception {
+        withCategory(client(), category -> {
+            final LocalizedString newName = LocalizedString.of(ENGLISH, "new name");
+            final CategoryUpdateCommand command = CategoryUpdateCommand.of(category, ChangeName.of(newName));
+
+            final Category updatedCategory = execute(command);
+
+            assertThat(updatedCategory.getName()).isEqualTo(newName);
         });
     }
 

@@ -5,6 +5,11 @@ import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
 
+/**
+ * Updates a custom field.
+ *
+ * @see io.sphere.sdk.types.Custom
+ */
 public class SetCustomField extends SetCustomFieldBase<Order> {
     private SetCustomField(final String name, final JsonNode value) {
         super(name, value);

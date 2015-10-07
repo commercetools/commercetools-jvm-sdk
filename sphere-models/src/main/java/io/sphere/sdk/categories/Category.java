@@ -24,6 +24,8 @@ import static io.sphere.sdk.utils.ListUtils.join;
  *     <li>Update a category with {@link io.sphere.sdk.categories.commands.CategoryUpdateCommand}.</li>
  *     <li>Delete a category with {@link io.sphere.sdk.categories.commands.CategoryDeleteCommand}.</li>
  * </ul>
+ *
+ * <p>Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/CategoryDocumentation.html">categories</a> for more information.</p>
  */
 @JsonDeserialize(as=CategoryImpl.class)
 public interface Category extends Resource<Category>, WithLocalizedSlug, MetaAttributes, Custom {

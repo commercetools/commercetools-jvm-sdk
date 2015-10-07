@@ -1,15 +1,18 @@
 package io.sphere.sdk.orders.commands.updateactions;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.types.customupdateactions.SetCustomTypeBase;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+/**
+ * Sets or removes a custom type in a line item.
+ *
+ * @see io.sphere.sdk.types.Custom
+ */
 public class SetLineItemCustomType extends SetCustomTypeBase<Order> {
     private final String lineItemId;
 

@@ -6,11 +6,13 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
 
 /**
- Sets a concrete parent for the category.
+ Sets a concrete parent for the category. Currently it is not possible int the API to remove the parent.
 
  {@doc.gen intro}
 
  {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#changeParent()}
+
+ <p>Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/CategoryDocumentation.html#category-tree-changes">categories</a> for more information.</p>
  */
 public class ChangeParent extends UpdateActionImpl<Category> {
     private final Reference<Category> parent;

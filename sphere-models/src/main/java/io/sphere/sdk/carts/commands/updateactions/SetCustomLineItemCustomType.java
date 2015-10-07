@@ -8,6 +8,11 @@ import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Map;
 
+/**
+ * Sets or removes a custom type in a custom line item.
+ *
+ * @see io.sphere.sdk.types.Custom
+ */
 public class SetCustomLineItemCustomType extends SetCustomTypeBase<Cart> {
     private final String customLineItemId;
 

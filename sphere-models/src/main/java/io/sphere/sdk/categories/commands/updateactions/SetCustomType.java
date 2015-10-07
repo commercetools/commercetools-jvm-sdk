@@ -2,13 +2,16 @@ package io.sphere.sdk.categories.commands.updateactions;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.types.customupdateactions.SetCustomTypeBase;
 
 import javax.annotation.Nullable;
 import java.util.Map;
-import java.util.stream.Collectors;
 
+/**
+ * Sets or removes a custom type.
+ *
+ * @see io.sphere.sdk.types.Custom
+ */
 public class SetCustomType extends SetCustomTypeBase<Category> {
     private SetCustomType(@Nullable final String typeId, @Nullable final String typeKey, @Nullable final Map<String, JsonNode> fields) {
         super(typeId, typeKey, fields);

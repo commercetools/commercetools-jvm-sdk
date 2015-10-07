@@ -10,8 +10,9 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 
 /**
- * Creates templates for new categories.
+ * <p>Creates templates for new categories.</p>
  *
+ *  {@include.example io.sphere.sdk.categories.commands.CategoryCreateCommandTest#execution()}
  */
 public class CategoryDraftBuilder implements Builder<CategoryDraft> {
     private final LocalizedString name;

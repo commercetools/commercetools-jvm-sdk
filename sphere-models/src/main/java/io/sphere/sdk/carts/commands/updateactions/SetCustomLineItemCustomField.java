@@ -5,6 +5,11 @@ import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.types.customupdateactions.SetCustomFieldBase;
 
+/**
+ * Updates a custom field in a custom line item.
+ *
+ * @see io.sphere.sdk.types.Custom
+ */
 public class SetCustomLineItemCustomField extends SetCustomFieldBase<Cart> {
     private final String customLineItemId;
 
