@@ -11,7 +11,11 @@ import java.util.Collections;
 import java.util.List;
 
 /**
+ * Updates a customer group.
+ *
  {@doc.gen list actions}
+
+ @see CustomerGroup
  */
 public interface CustomerGroupUpdateCommand extends UpdateCommandDsl<CustomerGroup, CustomerGroupUpdateCommand>, MetaModelExpansionDsl<CustomerGroup, CustomerGroupUpdateCommand, CustomerGroupExpansionModel<CustomerGroup>> {
     static CustomerGroupUpdateCommand of(final Versioned<CustomerGroup> versioned, final List<? extends UpdateAction<CustomerGroup>> updateActions) {

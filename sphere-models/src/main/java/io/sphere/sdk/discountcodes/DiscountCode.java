@@ -38,9 +38,18 @@ public interface DiscountCode extends Resource<DiscountCode> {
 
     @Override
     default Reference<DiscountCode> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    static String referenceTypeId(){
+        return "discount-code";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "discount-code";
     }

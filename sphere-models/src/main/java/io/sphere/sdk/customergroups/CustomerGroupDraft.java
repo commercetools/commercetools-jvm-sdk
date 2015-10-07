@@ -2,6 +2,12 @@ package io.sphere.sdk.customergroups;
 
 import io.sphere.sdk.models.Base;
 
+/**
+ * <p>Draft for a customer group.</p>
+ *
+ * @see io.sphere.sdk.customergroups.commands.CustomerGroupCreateCommand
+ * @see CustomerGroup
+ */
 public class CustomerGroupDraft extends Base {
     private final String groupName;
 

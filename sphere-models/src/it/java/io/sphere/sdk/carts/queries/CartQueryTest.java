@@ -56,6 +56,16 @@ public class CartQueryTest extends IntegrationTest {
     }
 
     @Test
+    public void byCustomerEmail() throws Exception {
+        withCustomerAndCart(client(), (customer, cart) -> {
+            final CartQuery cartQuery = CartQuery.of()
+                    .withPredicates(m -> m.customerEmail().is(customer.getEmail()));
+            final Cart loadedCart = execute(cartQuery).head().get();
+            assertThat(loadedCart.getCustomerId()).contains(customer.getId());
+        });
+    }
+
+    @Test
     public void queryTotalPrice() throws Exception {
         withFilledCart(client(), cart -> {
             final long centAmount = centAmountOf(cart.getTotalPrice());

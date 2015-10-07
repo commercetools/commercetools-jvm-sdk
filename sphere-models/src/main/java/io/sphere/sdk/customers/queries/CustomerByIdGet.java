@@ -9,6 +9,11 @@ import io.sphere.sdk.queries.MetaModelGetDsl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Fetches a customer by a known ID.
+ *
+ * {@include.example io.sphere.sdk.customers.queries.CustomerByIdGetTest#execution()}
+ */
 public interface CustomerByIdGet extends MetaModelGetDsl<Customer, Customer, CustomerByIdGet, CustomerExpansionModel<Customer>> {
     static CustomerByIdGet of(final Identifiable<Customer> customer) {
         return of(customer.getId());

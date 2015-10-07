@@ -11,6 +11,11 @@ import io.sphere.sdk.taxcategories.TaxRate;
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 
+/**
+ * Information concerning shipping in a cart.
+ *
+ * @see io.sphere.sdk.carts.commands.updateactions.SetShippingAddress
+ */
 public class CartShippingInfo extends Base {
     private final String shippingMethodName;
     private final MonetaryAmount price;

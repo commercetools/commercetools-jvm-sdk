@@ -3,6 +3,10 @@ package io.sphere.sdk.carts.expansion;
 import io.sphere.sdk.expansion.ExpansionModel;
 import io.sphere.sdk.expansion.ExpansionPath;
 
+/**
+ * Internal base class
+ * @param <T> context of the reference expansion
+ */
 public abstract class CartLikeExpansionModel<T> extends ExpansionModel<T> {
     protected CartLikeExpansionModel(final String parentPath, final String path) {
         super(parentPath, path);

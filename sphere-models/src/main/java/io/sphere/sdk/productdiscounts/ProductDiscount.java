@@ -28,6 +28,15 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
 
     List<Reference<JsonNode>> getReferences();
 
+    static String referenceTypeId(){
+        return "product-discount";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "product-discount";
     }

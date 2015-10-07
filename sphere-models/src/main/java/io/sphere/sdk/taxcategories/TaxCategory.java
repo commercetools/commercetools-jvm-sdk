@@ -39,9 +39,18 @@ public interface TaxCategory extends Resource<TaxCategory> {
 
     @Override
     default Reference<TaxCategory> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    static String referenceTypeId(){
+        return "tax-category";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "tax-category";
     }

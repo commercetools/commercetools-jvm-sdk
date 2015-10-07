@@ -10,6 +10,18 @@ import io.sphere.sdk.json.SphereJsonUtils;
 
 import static io.sphere.sdk.http.HttpMethod.POST;
 
+/**
+ * Sets a new password for the customer. Requires a token from {@link CustomerCreatePasswordTokenCommand}.
+ *
+ * {@include.example io.sphere.sdk.customers.commands.CustomerPasswordResetCommandTest#execution()}
+ *
+ * <p>Example for a failed request:</p>
+ * {@include.example io.sphere.sdk.customers.commands.CustomerPasswordResetCommandTest#outdatedOrWrongToken()}
+ *
+ * @see Customer
+ * @see CustomerCreatePasswordTokenCommand
+ * @see io.sphere.sdk.customers.queries.CustomerByTokenGet
+ */
 public final class CustomerPasswordResetCommand extends CommandImpl<Customer> {
     private final String id;
     private final Long version;

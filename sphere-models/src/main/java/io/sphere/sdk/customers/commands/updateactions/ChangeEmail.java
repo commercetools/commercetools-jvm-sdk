@@ -9,6 +9,7 @@ import io.sphere.sdk.customers.Customer;
  *  {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeEmail()}
+ *  @see Customer
  */
 public class ChangeEmail extends UpdateActionImpl<Customer> {
     private final String email;

@@ -15,6 +15,8 @@ import java.util.Optional;
  *  {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setCustomerGroup()}
+ *
+ * @see Customer
  */
 public class SetCustomerGroup extends UpdateActionImpl<Customer> {
     @Nullable

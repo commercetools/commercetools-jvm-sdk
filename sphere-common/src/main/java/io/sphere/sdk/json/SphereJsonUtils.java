@@ -1,5 +1,6 @@
 package io.sphere.sdk.json;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -42,7 +43,9 @@ final public class SphereJsonUtils {
                 .registerModule(new DateTimeSerializationModule())
                 .registerModule(new JavaMoneyModule())
                 .registerModule(new SphereEnumModule())
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .configure(MapperFeature.USE_GETTERS_AS_SETTERS, false)
+                .setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
     /**

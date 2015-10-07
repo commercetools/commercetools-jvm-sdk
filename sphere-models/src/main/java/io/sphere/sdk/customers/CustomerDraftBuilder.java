@@ -2,6 +2,7 @@ package io.sphere.sdk.customers;
 
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.types.CustomFieldsDraft;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import javax.annotation.Nullable;
@@ -10,6 +11,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Builder for creating a customer.
+ *
+ * @see Customer
+ * @see CustomerDraft
+ * @see io.sphere.sdk.customers.commands.CustomerCreateCommand
+ */
 public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft> {
     @Nullable
     private String customerNumber;
@@ -40,6 +48,9 @@ public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft>
     @Nullable
     private Integer defaultShippingAddress;
     private List<Address> addresses = Collections.emptyList();
+    @Nullable
+    private CustomFieldsDraft custom;
+
 
     public static CustomerDraftBuilder of(final CustomerName customerName, final String email, final String password) {
         final CustomerDraftBuilder customerDraftBuilder = new CustomerDraftBuilder();
@@ -66,6 +77,7 @@ public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft>
                 .addresses(template.getAddresses())
                 .defaultBillingAddress(template.getDefaultBillingAddress())
                 .defaultShippingAddress(template.getDefaultShippingAddress())
+                .custom(template.getCustom())
         ;
         return builder;
     }
@@ -163,9 +175,14 @@ public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft>
         return this;
     }
 
+    public CustomerDraftBuilder custom(@Nullable final CustomFieldsDraft custom) {
+        this.custom = custom;
+        return this;
+    }
+
     @Override
     public CustomerDraft build() {
-        return new CustomerDraft(customerNumber, email, firstName, lastName, middleName, password, title, externalId, anonymousCartId, dateOfBirth, companyName, vatId, emailVerified, customerGroup, defaultBillingAddress, defaultShippingAddress, addresses);
+        return new CustomerDraft(customerNumber, email, firstName, lastName, middleName, password, title, externalId, anonymousCartId, dateOfBirth, companyName, vatId, emailVerified, customerGroup, defaultBillingAddress, defaultShippingAddress, addresses, custom);
     }
 
     //it is final to prevent subclasses to log the password

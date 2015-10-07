@@ -61,4 +61,9 @@ public class CategoryFixtures {
         final CategoryDraftBuilder catSupplier = CategoryDraftBuilder.of(en(slug.get(ENGLISH) + " name"), slug).externalId(randomKey());
         CategoryFixtures.withCategory(client, catSupplier, consumer);
     }
+
+    public static Category createCategory(final TestClient client) {
+        final CategoryDraft categoryDraft = CategoryDraftBuilder.of(randomSlug(), randomSlug()).build();
+        return client.execute(CategoryCreateCommand.of(categoryDraft));
+    }
 }

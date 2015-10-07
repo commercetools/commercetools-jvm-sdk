@@ -38,13 +38,22 @@ public interface CartDiscount extends Resource<CartDiscount> {
 
     CartDiscountValue getValue();
 
-    static String typeId(){
+    static String referenceTypeId() {
+        return "cart-discount";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
+    static String typeId() {
         return "cart-discount";
     }
 
     @Override
     default Reference<CartDiscount> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
     static TypeReference<CartDiscount> typeReference() {

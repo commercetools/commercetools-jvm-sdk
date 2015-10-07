@@ -11,6 +11,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 
  {@include.example io.sphere.sdk.customergroups.commands.CustomerGroupUpdateCommandTest#changeName()}
 
+ @see CustomerGroup
  */
 public class ChangeName extends UpdateActionImpl<CustomerGroup> {
     private final String name;

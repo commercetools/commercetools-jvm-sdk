@@ -13,6 +13,7 @@ import java.util.concurrent.CompletionStage;
 import static io.sphere.sdk.customers.CustomerFixtures.PASSWORD;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.junit.Assert.fail;
 
 public class CustomerChangePasswordCommandTest extends IntegrationTest {
@@ -29,12 +30,11 @@ public class CustomerChangePasswordCommandTest extends IntegrationTest {
             assertThat(signInResult.getCustomer().hasSameIdAs(updatedCustomer))
                     .overridingErrorMessage("sign in works with new password")
                     .isTrue();
-            try {
-                execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword));
-                fail();
-            } catch (final ErrorResponseException e) {
-                assertThat(e.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();
-            }
+            final Throwable throwable = catchThrowable(() -> execute(CustomerSignInCommand.of(customer.getEmail(), oldPassword)));
+
+            assertThat(throwable).isInstanceOf(ErrorResponseException.class);
+            final ErrorResponseException errorResponseException = (ErrorResponseException) throwable;
+            assertThat(errorResponseException.hasErrorCode(CustomerInvalidCredentials.CODE)).isTrue();
         });
     }
 

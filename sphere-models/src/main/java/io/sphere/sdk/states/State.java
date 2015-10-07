@@ -42,9 +42,18 @@ public interface State extends Resource<State> {
     Set<Reference<State>> getTransitions();
 
     default Reference<State> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    static String referenceTypeId(){
+        return "state";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "state";
     }

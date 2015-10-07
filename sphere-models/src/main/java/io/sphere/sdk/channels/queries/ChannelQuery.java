@@ -7,7 +7,11 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 
 /**
+ * Queries channels.
+ *
  {@doc.gen summary channels}
+
+ {@include.example io.sphere.sdk.channels.queries.ChannelQueryTest#execution()}
  */
 public interface ChannelQuery extends MetaModelQueryDsl<Channel, ChannelQuery, ChannelQueryModel, ChannelExpansionModel<Channel>> {
     static TypeReference<PagedQueryResult<Channel>> resultTypeReference() {

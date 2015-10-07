@@ -12,6 +12,8 @@ import javax.annotation.Nullable;
  *  {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#changeName()}
+ *
+ * @see Customer
  */
 public class ChangeName extends UpdateActionImpl<Customer> {
     private final String firstName;
