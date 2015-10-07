@@ -106,6 +106,14 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">ChannelByIdGet</span>
 extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" title="interface in io.sphere.sdk.queries">MetaModelGetDsl</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>,<a href="../../../../../io/sphere/sdk/channels/queries/ChannelByIdGet.html" title="interface in io.sphere.sdk.channels.queries">ChannelByIdGet</a>,<a href="../../../../../io/sphere/sdk/channels/expansion/ChannelExpansionModel.html" title="class in io.sphere.sdk.channels.expansion">ChannelExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&gt;</pre>
+<div class="block">Fetches a channel by a known ID.
+
+ <div id="io-sphere-sdk-channels-queries-ChannelByIdGetTest-execution--%s" class=code-example><pre><code class='java'>withChannelOfRole(client(), INVENTORY_SUPPLY, channel -&gt; {
+    final String id = channel.getId();
+    final Channel fetchedChannel = execute(ChannelByIdGet.of(id));
+    assertThat(fetchedChannel).isEqualTo(channel);
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/channels/queries/ChannelByIdGetTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
