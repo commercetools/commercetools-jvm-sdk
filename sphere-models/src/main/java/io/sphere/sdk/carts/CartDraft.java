@@ -72,8 +72,17 @@ public class CartDraft {
         return new CartDraftBuilder(this).inventoryMode(inventoryMode).build();
     }
 
-    public CartDraft witCustom(@Nullable final CustomFieldsDraft custom) {
+    public CartDraft withCustom(@Nullable final CustomFieldsDraft custom) {
         return new CartDraftBuilder(this).custom(custom).build();
+    }
+
+    /**
+     *
+     * @deprecated use {@link #withCustom(CustomFieldsDraft)} instead
+     */
+    @Deprecated
+    public CartDraft witCustom(@Nullable final CustomFieldsDraft custom) {
+        return withCustom(custom);
     }
 
     @Nullable
