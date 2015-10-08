@@ -19,7 +19,7 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
     public void facetedSearch() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
                 .plusFacetedSearch(model -> model.allVariants().attribute().ofString(ATTR_NAME_SIZE).facetedSearch().allTerms())
-                .plusFacetedSearch(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR).facetedSearch().by("red"));
+                .plusFacetedSearch(model -> model.allVariants().attribute().ofString(ATTR_NAME_COLOR).facetedSearch().by("red"));
         testResult(search,
                 ids -> assertThat(ids).containsOnly(product2.getId()),
                 colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
@@ -29,8 +29,8 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
     @Test
     public void resultsAndFacetsAreFiltered() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusResultFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().by("red"))
-                .plusFacetFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().by("red"));
+                .plusResultFilters(model -> model.allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().by("red"))
+                .plusFacetFilters(model -> model.allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().by("red"));
         testResultWithFacets(search,
                 ids -> assertThat(ids).containsOnly(product2.getId()),
                 colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
@@ -60,7 +60,7 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
     @Test
     public void filterQueryFiltersBeforeFacetsAreCalculated() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().by("red"));
+                .plusQueryFilters(model -> model.allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().by("red"));
         testResultWithFacets(search,
                 ids -> assertThat(ids).containsOnly(product2.getId()),
                 colors -> assertThat(colors).containsOnly(TermStats.of("red", 1)),
