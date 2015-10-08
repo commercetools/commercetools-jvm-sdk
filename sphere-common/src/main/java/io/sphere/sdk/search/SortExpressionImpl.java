@@ -16,7 +16,7 @@ public class SortExpressionImpl<T> extends Base implements SortExpression<T> {
 
     @Override
     public String expression() {
-        return renderPath() + " " + directionToString();
+        return renderPath() + " " + direction;
     }
 
     @Override
@@ -32,10 +32,6 @@ public class SortExpressionImpl<T> extends Base implements SortExpression<T> {
     @Override
     public final int hashCode() {
         return expression().hashCode();
-    }
-
-    private String directionToString() {
-        return direction.toString().toLowerCase().replace("_", ".");
     }
 
     private String renderPath() {

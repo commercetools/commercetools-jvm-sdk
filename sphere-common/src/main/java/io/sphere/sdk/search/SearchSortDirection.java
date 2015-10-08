@@ -21,5 +21,10 @@ public enum SearchSortDirection {
      * Changes the default behaviour of the descending sort by using the minimum value instead.
      * USE ONLY ON MULTI-VALUED ATTRIBUTES, such as those at product variant level!
      */
-    DESC_MIN
+    DESC_MIN;
+
+    @Override
+    public String toString() {
+        return this.name().toLowerCase().replace("_", ".");
+    }
 }
