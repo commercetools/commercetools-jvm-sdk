@@ -26,12 +26,16 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         return facets;
     }
 
-    public FacetResult getFacetResult(final String spherePath) {
-        return facets.get(spherePath);
+    public FacetResult getFacetResult(final String facetResultPath) {
+        return facets.get(facetResultPath);
     }
 
     public TermFacetResult getTermFacetResult(final FacetExpression<T> facetExpression) {
-        return Optional.ofNullable(getFacetResult(facetExpression.resultPath())).map(facetResult -> {
+        return getTermFacetResult(facetExpression.resultPath());
+    }
+
+    public TermFacetResult getTermFacetResult(final String facetResultPath) {
+        return Optional.ofNullable(getFacetResult(facetResultPath)).map(facetResult -> {
             if (facetResult instanceof TermFacetResult) {
                 return (TermFacetResult) facetResult;
             } else {
@@ -41,7 +45,11 @@ public class PagedSearchResult<T> extends PagedResult<T> {
     }
 
     public RangeFacetResult getRangeFacetResult(final FacetExpression<T> facetExpression) {
-        return Optional.ofNullable(getFacetResult(facetExpression.resultPath())).map(facetResult -> {
+        return getRangeFacetResult(facetExpression.resultPath());
+    }
+
+    public RangeFacetResult getRangeFacetResult(final String facetResultPath) {
+        return Optional.ofNullable(getFacetResult(facetResultPath)).map(facetResult -> {
             if (facetResult instanceof RangeFacetResult) {
                 return (RangeFacetResult) facetResult;
             } else {
@@ -51,7 +59,11 @@ public class PagedSearchResult<T> extends PagedResult<T> {
     }
 
     public FilteredFacetResult getFilteredFacetResult(final FacetExpression<T> facetExpression) {
-        return Optional.ofNullable(getFacetResult(facetExpression.resultPath())).map(facetResult -> {
+        return getFilteredFacetResult(facetExpression.resultPath());
+    }
+
+    public FilteredFacetResult getFilteredFacetResult(final String facetResultPath) {
+        return Optional.ofNullable(getFacetResult(facetResultPath)).map(facetResult -> {
             if (facetResult instanceof FilteredFacetResult) {
                 return (FilteredFacetResult) facetResult;
             } else {
