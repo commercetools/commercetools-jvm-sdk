@@ -1,8 +1,8 @@
 package io.sphere.sdk.payments.commands;
 
+import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.payments.Payment;
-import io.sphere.sdk.payments.PaymentFixtures;
+import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.commands.updateactions.*;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.test.IntegrationTest;
@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
+import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -106,8 +107,8 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             final String interfaceCode = "20000";
             final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment,
                     asList(
-                            SetMethodInfoMethod.of(interfaceText),
-                            SetMethodInfoMethod.of(interfaceCode)
+                            SetStatusInterfaceText.of(interfaceText),
+                            SetStatusInterfaceCode.of(interfaceCode)
                     )));
 
             assertThat(updatedPayment.getPaymentStatus().getInterfaceText()).isEqualTo(interfaceText);
@@ -151,5 +152,44 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
             return updatedPayment;
         });
+    }
+
+    @Test
+    public void transActions() {
+        //TODO delete
+        //TODO cart with line item
+        CustomerFixtures.withCustomerAndCart(client(), ((customer, cart) -> {
+            final MonetaryAmount totalAmount = cart.getTotalPrice();
+            final PaymentMethodInfo paymentMethodInfo = PaymentMethodInfoBuilder.of()
+                    .paymentInterface("STRIPE")
+                    .method("CREDIT_CARD")
+                    .build();
+            final Transaction chargeTransaction = TransactionBuilder.of(TransactionType.CHARGE, totalAmount).build();
+            final PaymentDraftBuilder paymentDraftBuilder = PaymentDraftBuilder.of(totalAmount)
+                    .customer(customer)
+                    .paymentMethodInfo(paymentMethodInfo)
+                    .amountPaid(totalAmount)
+                    .transactions(Collections.singletonList(chargeTransaction));
+            final Payment payment = execute(PaymentCreateCommand.of(paymentDraftBuilder.build()));
+
+            assertThat(payment.getCustomer()).isEqualTo(payment.getCustomer());
+            assertThat(payment.getPaymentMethodInfo()).isEqualTo(paymentMethodInfo);
+            assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
+
+            final MonetaryAmount firstRefundAmount = EURO_10;
+            final Transaction firstRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, firstRefundAmount).build();
+            final Payment paymentWithFirstRefund = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundAmount), AddTransaction.of(firstRefundTransaction))));
+
+            assertThat(paymentWithFirstRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction);
+
+
+            final MonetaryAmount secondRefundAmount = EURO_5;
+            final Transaction secondRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, secondRefundAmount).build();
+            final MonetaryAmount totalRefundAmount = secondRefundAmount.add(payment.getAmountRefunded());
+            final Payment paymentWithSecondRefund = execute(PaymentUpdateCommand.of(paymentWithFirstRefund, asList(SetAmountRefunded.of(totalRefundAmount), AddTransaction.of(secondRefundTransaction))));
+
+            assertThat(paymentWithSecondRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction, secondRefundTransaction);
+            assertThat(paymentWithSecondRefund.getAmountRefunded()).isEqualTo(totalRefundAmount);
+        }));
     }
 }

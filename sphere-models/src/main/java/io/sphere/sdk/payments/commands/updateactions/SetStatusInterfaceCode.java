@@ -5,6 +5,10 @@ import io.sphere.sdk.payments.Payment;
 
 import javax.annotation.Nullable;
 
+/**
+ *
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#setStatusInterfaceText()}
+ */
 public class SetStatusInterfaceCode extends UpdateActionImpl<Payment> {
 
     @Nullable
