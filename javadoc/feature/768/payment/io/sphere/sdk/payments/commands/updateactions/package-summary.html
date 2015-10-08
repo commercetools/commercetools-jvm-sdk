@@ -82,32 +82,72 @@
 </tr>
 <tbody>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/AddTransaction.html" title="class in io.sphere.sdk.payments.commands.updateactions">AddTransaction</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetAmountPaid.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetAmountPaid</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetAmountRefunded.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetAmountRefunded</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetAuthorization.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetAuthorization</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetMethodInfoInterface.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetMethodInfoInterface</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetMethodInfoMethod.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetMethodInfoMethod</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetMethodInfoName.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetMethodInfoName</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetStatusInterfaceCode.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetStatusInterfaceCode</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setStatusInterfaceText--%s" class=code-example><pre><code class='java'>PaymentFixtures.withPayment(payment -&gt; {
+    final String interfaceText = "Operation successful";
+    final String interfaceCode = "20000";
+    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment,
+            asList(
+                    SetStatusInterfaceText.of(interfaceText),
+                    SetStatusInterfaceCode.of(interfaceCode)
+            )));
+
+    assertThat(updatedPayment.getPaymentStatus().getInterfaceText()).isEqualTo(interfaceText);
+    assertThat(updatedPayment.getPaymentStatus().getInterfaceCode()).isEqualTo(interfaceCode);
+
+    return updatedPayment;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/payments/commands/PaymentUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetStatusInterfaceText.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetStatusInterfaceText</a></td>
+<td class="colLast">
+<div class="block"><div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setStatusInterfaceText--%s" class=code-example><pre><code class='java'>PaymentFixtures.withPayment(payment -&gt; {
+    final String interfaceText = "Operation successful";
+    final String interfaceCode = "20000";
+    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment,
+            asList(
+                    SetStatusInterfaceText.of(interfaceText),
+                    SetStatusInterfaceCode.of(interfaceCode)
+            )));
+
+    assertThat(updatedPayment.getPaymentStatus().getInterfaceText()).isEqualTo(interfaceText);
+    assertThat(updatedPayment.getPaymentStatus().getInterfaceCode()).isEqualTo(interfaceCode);
+
+    return updatedPayment;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/payments/commands/PaymentUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.payments.commands.updateactions">TransitionState</a></td>
