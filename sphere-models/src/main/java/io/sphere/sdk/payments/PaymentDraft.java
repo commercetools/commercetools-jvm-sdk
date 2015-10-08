@@ -43,5 +43,5 @@ public interface PaymentDraft {
 
     List<Transaction> getTransactions();
 
-    List<CustomFields> getInterfaceInteractions();
+    List<CustomFieldsDraft> getInterfaceInteractions();
 }

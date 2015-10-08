@@ -1,5 +1,6 @@
 package io.sphere.sdk.payments;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Reference;
@@ -56,5 +57,14 @@ public interface Payment extends Resource<Payment>, Custom {
 
     static String referenceTypeId() {
         return "payment";
+    }
+
+    static TypeReference<Payment> typeReference() {
+        return new TypeReference<Payment>() {
+            @Override
+            public String toString() {
+                return "TypeReference<Payment>";
+            }
+        };
     }
 }

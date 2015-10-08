@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.types.CustomFields;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -35,10 +34,10 @@ final class PaymentDraftImpl extends Base implements PaymentDraft {
     @Nullable
     private final PaymentStatus paymentStatus;
     private final List<Transaction> transactions;
-    private final List<CustomFields> interfaceInteractions;
+    private final List<CustomFieldsDraft> interfaceInteractions;
 
     @JsonCreator
-    PaymentDraftImpl(final MonetaryAmount amountAuthorized, final Reference<Customer> customer, final String externalId, final String interfaceId, final MonetaryAmount amountPlanned, final ZonedDateTime authorizedUntil, final MonetaryAmount amountPaid, final MonetaryAmount amountRefunded, final PaymentMethodInfo paymentMethodInfo, final CustomFieldsDraft custom, final PaymentStatus paymentStatus, final List<Transaction> transactions, final List<CustomFields> interfaceInteractions) {
+    PaymentDraftImpl(final MonetaryAmount amountAuthorized, final Reference<Customer> customer, final String externalId, final String interfaceId, final MonetaryAmount amountPlanned, final ZonedDateTime authorizedUntil, final MonetaryAmount amountPaid, final MonetaryAmount amountRefunded, final PaymentMethodInfo paymentMethodInfo, final CustomFieldsDraft custom, final PaymentStatus paymentStatus, final List<Transaction> transactions, final List<CustomFieldsDraft> interfaceInteractions) {
         this.amountAuthorized = amountAuthorized;
         this.customer = customer;
         this.externalId = externalId;
@@ -108,7 +107,7 @@ final class PaymentDraftImpl extends Base implements PaymentDraft {
     }
 
     @Override
-    public List<CustomFields> getInterfaceInteractions() {
+    public List<CustomFieldsDraft> getInterfaceInteractions() {
         return interfaceInteractions;
     }
 

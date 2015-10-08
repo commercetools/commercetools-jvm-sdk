@@ -3,9 +3,11 @@ package io.sphere.sdk.payments;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class PaymentStatusBuilder extends Base implements Builder<PaymentStatus> {
     @Nullable
@@ -32,8 +34,8 @@ public class PaymentStatusBuilder extends Base implements Builder<PaymentStatus>
         return this;
     }
 
-    public PaymentStatusBuilder state(@Nullable final Reference<State> state) {
-        this.state = state;
+    public PaymentStatusBuilder state(@Nullable final Referenceable<State> state) {
+        this.state = Optional.ofNullable(state).map(s -> s.toReference()).orElse(null);
         return this;
     }
 

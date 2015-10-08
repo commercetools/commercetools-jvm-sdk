@@ -5,13 +5,14 @@ import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.types.CustomFields;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
+import java.util.Optional;
 
 public final class PaymentDraftBuilder extends Base implements Builder<PaymentDraft> {
     @Nullable
@@ -38,7 +39,7 @@ public final class PaymentDraftBuilder extends Base implements Builder<PaymentDr
     @Nullable
     private List<Transaction> transactions;
     @Nullable
-    private List<CustomFields> interfaceInteractions;
+    private List<CustomFieldsDraft> interfaceInteractions;
 
     @JsonCreator
     PaymentDraftBuilder(final MonetaryAmount amountPlanned) {
@@ -49,8 +50,8 @@ public final class PaymentDraftBuilder extends Base implements Builder<PaymentDr
         return new PaymentDraftBuilder(amountPlanned);
     }
 
-    public PaymentDraftBuilder customer(@Nullable final Reference<Customer> customer) {
-        this.customer = customer;
+    public PaymentDraftBuilder customer(@Nullable final Referenceable<Customer> customer) {
+        this.customer = Optional.ofNullable(customer).map(x -> x.toReference()).orElse(null);
         return this;
     }
 
@@ -109,7 +110,7 @@ public final class PaymentDraftBuilder extends Base implements Builder<PaymentDr
         return this;
     }
 
-    public PaymentDraftBuilder interfaceInteractions(@Nullable final List<CustomFields> interfaceInteractions) {
+    public PaymentDraftBuilder interfaceInteractions(@Nullable final List<CustomFieldsDraft> interfaceInteractions) {
         this.interfaceInteractions = interfaceInteractions;
         return this;
     }
@@ -159,7 +160,7 @@ public final class PaymentDraftBuilder extends Base implements Builder<PaymentDr
     }
 
     @Nullable
-    public List<CustomFields> getInterfaceInteractions() {
+    public List<CustomFieldsDraft> getInterfaceInteractions() {
         return interfaceInteractions;
     }
 
