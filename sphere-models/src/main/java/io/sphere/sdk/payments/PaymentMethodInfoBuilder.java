@@ -40,4 +40,19 @@ public class PaymentMethodInfoBuilder extends Base implements Builder<PaymentMet
     public PaymentMethodInfo build() {
         return new PaymentMethodInfo(paymentInterface, method, name);
     }
+
+    @Nullable
+    public String getPaymentInterface() {
+        return paymentInterface;
+    }
+
+    @Nullable
+    public String getMethod() {
+        return method;
+    }
+
+    @Nullable
+    public LocalizedString getName() {
+        return name;
+    }
 }

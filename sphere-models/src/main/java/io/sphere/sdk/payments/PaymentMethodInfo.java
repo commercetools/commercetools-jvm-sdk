@@ -1,6 +1,7 @@
 package io.sphere.sdk.payments;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 
 import javax.annotation.Nullable;
@@ -8,7 +9,7 @@ import javax.annotation.Nullable;
 /**
  @see PaymentMethodInfoBuilder
  */
-public class PaymentMethodInfo {
+public final class PaymentMethodInfo extends Base {
     @Nullable
     private final String paymentInterface;
     @Nullable
