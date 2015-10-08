@@ -1,0 +1,27 @@
+package io.sphere.sdk.payments.commands.updateactions;
+
+import io.sphere.sdk.commands.UpdateActionImpl;
+import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.payments.Payment;
+
+import javax.annotation.Nullable;
+
+public class SetMethodInfoName extends UpdateActionImpl<Payment> {
+
+    @Nullable
+    private final LocalizedString name;
+
+    private SetMethodInfoName(final LocalizedString name) {
+        super("setMethodInfoName");
+        this.name = name;
+    }
+
+    public static SetMethodInfoName of(final LocalizedString name) {
+        return new SetMethodInfoName(name);
+    }
+
+    @Nullable
+    public LocalizedString getName() {
+        return name;
+    }
+}

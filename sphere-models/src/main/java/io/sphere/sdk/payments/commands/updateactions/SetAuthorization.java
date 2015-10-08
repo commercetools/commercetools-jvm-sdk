@@ -1,0 +1,43 @@
+package io.sphere.sdk.payments.commands.updateactions;
+
+import io.sphere.sdk.commands.UpdateActionImpl;
+import io.sphere.sdk.payments.Payment;
+
+import javax.annotation.Nullable;
+import javax.money.MonetaryAmount;
+import java.time.ZonedDateTime;
+
+public final class SetAuthorization extends UpdateActionImpl<Payment> {
+    @Nullable
+    private final MonetaryAmount amount;
+    @Nullable
+    private final ZonedDateTime until;
+
+    private SetAuthorization(@Nullable final MonetaryAmount amount, @Nullable final ZonedDateTime until) {
+        super("setAuthorization");
+        this.amount = amount;
+        this.until = until;
+    }
+
+    public static SetAuthorization of(final MonetaryAmount amount) {
+        return of(amount, null);
+    }
+
+    public static SetAuthorization of(final MonetaryAmount amount, final ZonedDateTime until) {
+        return new SetAuthorization(amount, until);
+    }
+
+    @Nullable
+    public MonetaryAmount getAmount() {
+        return amount;
+    }
+
+    @Nullable
+    public ZonedDateTime getUntil() {
+        return until;
+    }
+
+    public static SetAuthorization ofRemove() {
+        return of(null, null);
+    }
+}
