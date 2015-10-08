@@ -15,7 +15,6 @@ import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.RetryIntegrationTest;
 import org.junit.BeforeClass;
 import org.junit.Rule;
-import org.junit.Test;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
@@ -25,15 +24,10 @@ import java.util.function.Function;
 
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
-import static io.sphere.sdk.search.FilterRange.atLeast;
-import static io.sphere.sdk.search.FilterRange.atMost;
 import static io.sphere.sdk.test.SphereTestUtils.*;
-import static java.lang.Math.max;
 import static java.lang.Math.min;
-import static java.math.BigDecimal.*;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.assertThat;
 
 /**
  *            |  Product 1 "shoe"   |  Product 2 "shirt"  |  Product 3 "dress"
@@ -46,18 +40,18 @@ import static org.assertj.core.api.Assertions.assertThat;
  */
 
 public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
-    private static final String EVIL_CHARACTER_WORD = "öóßàç";
+    protected static final String EVIL_CHARACTER_WORD = "öóßàç";
 
-    private static Product product1;
-    private static Product product2;
-    private static Product product3;
-    private static ProductType productType;
+    protected static Product product1;
+    protected static Product product2;
+    protected static Product product3;
+    protected static ProductType productType;
 
-    private static Product evilProduct1;
-    private static Product evilProduct2;
+    protected static Product evilProduct1;
+    protected static Product evilProduct2;
     private static ProductType evilProductType;
 
-    public static final String TEST_CLASS_NAME = ProductProjectionSearchIntegrationTest.class.getSimpleName();
+    private static final String TEST_CLASS_NAME = ProductProjectionSearchIntegrationTest.class.getSimpleName();
     private static final String EVIL_PRODUCT_TYPE_NAME = "Evil" + TEST_CLASS_NAME;
     private static final String SKU_A = EVIL_PRODUCT_TYPE_NAME + "-skuA";
     private static final String SKU_B = EVIL_PRODUCT_TYPE_NAME + "-skuB";
@@ -65,9 +59,9 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
     private static final String SKU1 = PRODUCT_TYPE_NAME + "-sku1";
     private static final String SKU2 = PRODUCT_TYPE_NAME + "-sku2";
     private static final String SKU3 = PRODUCT_TYPE_NAME + "-sku3";
-    public static final String ATTR_NAME_COLOR = ("Color" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
-    public static final String ATTR_NAME_SIZE = ("Size" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
-    public static final String ATTR_NAME_EVIL = ("Evil" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
+    protected static final String ATTR_NAME_COLOR = ("Color" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
+    protected static final String ATTR_NAME_SIZE = ("Size" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
+    protected static final String ATTR_NAME_EVIL = ("Evil" + TEST_CLASS_NAME).substring(0, min(20, TEST_CLASS_NAME.length()));
 
     @Rule
     public RetryIntegrationTest retry = new RetryIntegrationTest(10, 10000, LoggerFactory.getLogger(this.getClass()));
@@ -94,316 +88,20 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         evilProduct2 = findBySku.apply(SKU_B).orElseGet(() -> createEvilTestProduct(evilProductType, EVIL_PRODUCT_TYPE_NAME + "bar", EVIL_CHARACTER_WORD, SKU_B));
     }
 
-    private ProductProjectionSearchModel model() {
+    protected static ProductProjectionSearchModel model() {
         return ProductProjectionSearchModel.of();
     }
 
-    @Test
-    public void searchByTextInACertainLanguage() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withText(ENGLISH, "shoe");
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsOnly(product1.getId());
-    }
-
-    @Test
-    public void sortByAttributeAscending() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byAsc());
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsExactly(product2.getId(), product1.getId(), product3.getId());
-    }
-
-    @Test
-    public void sortByAttributeDescending() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byDesc());
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsExactly(product1.getId(), product2.getId(), product3.getId());
-    }
-
-    @Test
-    public void sortWithAdditionalParameterByAttributeAscending() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byAscWithMax());
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsExactly(product3.getId(), product2.getId(), product1.getId());
-    }
-
-    @Test
-    public void sortWithAdditionalParameterByAttributeDescending() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byDescWithMin());
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsExactly(product3.getId(), product1.getId(), product2.getId());
-    }
-
-    @Test
-    public void sortWithSimpleExpression() {
-        final SortExpression<ProductProjection> sort = SortExpression.of("variants.attributes." + ATTR_NAME_SIZE + " asc.max");
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withSort(sort);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsExactly(product3.getId(), product2.getId(), product1.getId());
-    }
-
-    @Test
-    public void sortByMultipleAttributes() throws Exception {
-        final ProductProjectionSearch singleSortedRequest = ProductProjectionSearch.ofStaged()
-                .plusSort(model -> model.allVariants().attribute().ofString(ATTR_NAME_COLOR).sorted().byAsc());
-        final PagedSearchResult<ProductProjection> resultNameAsc = executeSearch(singleSortedRequest
-                .plusSort(model -> model.name().locale(ENGLISH).sorted().byAsc()));
-        final PagedSearchResult<ProductProjection> resultNameDesc = executeSearch(singleSortedRequest
-                .plusSort(model -> model.name().locale(ENGLISH).sorted().byDesc()));
-        assertThat(resultsToIds(resultNameAsc)).containsExactly(product3.getId(), product1.getId(), product2.getId());
-        assertThat(resultsToIds(resultNameDesc)).containsExactly(product1.getId(), product3.getId(), product2.getId());
-    }
-
-    @Test
-    public void responseContainsRangeFacetsForAttributes() throws Exception {
-        final FacetExpression<ProductProjection> facetExpr = model().allVariants().price().centAmount().faceted().byGreaterThanOrEqualTo(0L);
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(result.getRangeFacetResult(facetExpr).getRanges().get(0).getCount()).isGreaterThan(0);
-    }
-
-    @Test
-    public void responseContainsTermFacetsForAttributes() throws Exception {
-        final FacetExpression<ProductProjection> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1));
-    }
-
-    @Test
-    public void resultsAndFacetsAreFiltered() throws Exception {
-        final FacetedSearchExpression<ProductProjection> searchExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).facetedSearch().allTerms();
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusFacetedSearch(model -> model.allVariants().attribute().ofString(ATTR_NAME_SIZE).facetedSearch().by("36"))
-                .plusFacetedSearch(searchExpr);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsOnly(product2.getId());
-        assertThat(result.getTermFacetResult(searchExpr.facetExpression()).getTerms()).containsOnly(TermStats.of("red", 1));
-    }
-
-    @Test
-    public void onlyResultsAreFiltered() throws Exception {
-        final FacetExpression<ProductProjection> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusFacets(facetExpr)
-                .plusResultFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).filtered().by(valueOf(36)));
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsOnly(product2.getId());
-        assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1));
-    }
-
-
-    @Test
-    public void onlyFacetsAreFiltered() throws Exception {
-        final FacetExpression<ProductProjection> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusFacets(facetExpr)
-                .plusFacetFilters(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).filtered().by(valueOf(36)));
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnlyElementsOf(singletonList(TermStats.of("red", 1)));
-        assertThat(resultsToIds(result)).contains(product1.getId(), product2.getId(), product3.getId());
-    }
-
-    @Test
-    public void filtersByTerm() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR)
-                        .filtered().by("red"));
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsOnly(product2.getId());
-    }
-
-    @Test
-    public void filtersByAnyTerm() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE)
-                        .filtered().byAny(asList(valueOf(36), valueOf(38))));
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
-    }
-
-    @Test
-    public void filtersByRange() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE)
-                        .filtered().byGreaterThanOrEqualTo(valueOf(44)));
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
-    }
-
-    @Test
-    public void filtersByAnyRange() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE)
-                        .filtered().byAnyRange(asList(atLeast(valueOf(46)), atMost(valueOf(36)))));
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
-    }
-
-    @Test
-    public void filtersByAllRanges() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE)
-                        .filtered().byAllRanges(asList(atLeast(valueOf(39)), atMost(valueOf(43)))));
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsOnly(product3.getId());
-    }
-
-    @Test
-    public void simpleFilterByRange() throws Exception {
-        final FilterExpression<ProductProjection> filterExpr = FilterExpression.of("variants.attributes." + ATTR_NAME_SIZE + ":range(44 to *)");
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusQueryFilters(singletonList(filterExpr));
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
-    }
-
-    @Test
-    public void resultsArePaginated() throws Exception {
-        final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().byAny(asList("blue", "red")))
-                .withSort(model -> model().name().locale(ENGLISH).sorted().byDesc())
-                .withOffset(1L)
-                .withLimit(1L));
-        assertThat(resultsToIds(result)).containsOnly(product2.getId());
-    }
-
-    @Test
-    public void filterQueryFiltersBeforeFacetsAreCalculated() throws Exception {
-        final FacetExpression<ProductProjection> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusFacets(facetExpr)
-                .plusQueryFilters(model -> model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).filtered().by(valueOf(36)));
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(result.size()).isEqualTo(1);
-        assertThat(resultsToIds(result)).containsOnly(product2.getId());
-        assertThat(result.getTermFacetResult(facetExpr).getTerms()).containsOnly(TermStats.of("red", 1));
-    }
-
-    @Test
-    public void simpleFacetsAreParsed() throws Exception {
-        final String facetPath = "variants.attributes." + ATTR_NAME_COLOR;
-        final FacetExpression<ProductProjection> facetExpr = FacetExpression.of(facetPath);
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        final TermFacetResult termFacetResult = (TermFacetResult) result.getFacetResult(facetPath);
-        assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
-        assertThat(termFacetResult.getTotal()).isEqualTo(3);
-        assertThat(termFacetResult.getOther()).isEqualTo(0);
-        assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2), TermStats.of("red", 1)));
-    }
-
-    @Test
-    public void termFacetsAreParsed() throws Exception {
-        final FacetExpression<ProductProjection> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        final TermFacetResult termFacetResult = result.getTermFacetResult(facetExpr);
-        assertThat(termFacetResult.getMissing()).isGreaterThanOrEqualTo(3);
-        assertThat(termFacetResult.getTotal()).isEqualTo(3);
-        assertThat(termFacetResult.getOther()).isEqualTo(0);
-        assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2), TermStats.of("red", 1)));
-    }
-
-    @Test
-    public void rangeFacetsAreParsed() throws Exception {
-        final FacetExpression<ProductProjection> facetExpr = model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).faceted().byGreaterThanOrEqualTo(ZERO);
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        final RangeStats rangeStats = result.getRangeFacetResult(facetExpr).getRanges().get(0);
-        assertThat(rangeStats.getLowerEndpoint()).isEqualTo("0.0");
-        assertThat(rangeStats.getUpperEndpoint()).isNull();
-        assertThat(rangeStats.getCount()).isEqualTo(6L);
-        assertThat(rangeStats.getMin()).isEqualTo("36.0");
-        assertThat(rangeStats.getMax()).isEqualTo("46.0");
-        assertThat(rangeStats.getSum()).isEqualTo("246.0");
-        assertThat(rangeStats.getMean()).isEqualTo(41.0);
-    }
-
-    @Test
-    public void filteredFacetsAreParsed() throws Exception {
-        final FacetExpression<ProductProjection> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byTerm("blue");
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(result.getFilteredFacetResult(facetExpr).getCount()).isEqualTo(2);
-    }
-
-    @Test
-    public void termFacetsSupportsAlias() throws Exception {
-        final String alias = "my-facet";
-        final FacetExpression<ProductProjection> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().withAlias(alias).byAllTerms();
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        final TermFacetResult termFacetResult = result.getTermFacetResult(facetExpr);
-        assertThat(facetExpr.resultPath()).isEqualTo(alias);
-        assertThat(termFacetResult.getTerms()).isEqualTo(asList(TermStats.of("blue", 2), TermStats.of("red", 1)));
-    }
-
-    @Test
-    public void rangeFacetsSupportsAlias() throws Exception {
-        final String alias = "my-facet";
-        final FacetExpression<ProductProjection> facetExpr = model().allVariants().attribute().ofNumber(ATTR_NAME_SIZE).faceted().withAlias(alias).byGreaterThanOrEqualTo(ZERO);
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(facetExpr.resultPath()).isEqualTo(alias);
-        final RangeStats rangeStats = result.getRangeFacetResult(facetExpr).getRanges().get(0);
-        assertThat(rangeStats.getLowerEndpoint()).isEqualTo("0.0");
-        assertThat(rangeStats.getUpperEndpoint()).isNull();
-        assertThat(rangeStats.getCount()).isEqualTo(6L);
-        assertThat(rangeStats.getMin()).isEqualTo("36.0");
-        assertThat(rangeStats.getMax()).isEqualTo("46.0");
-        assertThat(rangeStats.getSum()).isEqualTo("246.0");
-        assertThat(rangeStats.getMean()).isEqualTo(41.0);
-    }
-
-    @Test
-    public void filteredFacetsSupportsAlias() throws Exception {
-        final String alias = "my-facet";
-        final FacetExpression<ProductProjection> facetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().withAlias(alias).byTerm("blue");
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().plusFacets(facetExpr);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(facetExpr.resultPath()).isEqualTo(alias);
-        assertThat(result.getFilteredFacetResult(facetExpr).getCount()).isEqualTo(2);
-    }
-
-    @Test
-    public void allowsExpansion() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withLimit(1);
-        assertThat(executeSearch(search).getResults().get(0).getProductType().getObj()).isNull();
-        final PagedSearchResult<ProductProjection> result = executeSearch(search.withExpansionPaths(model -> model.productType()));
-        assertThat(result.getResults().get(0).getProductType().getObj()).isEqualTo(productType);
-    }
-
-    @Test
-    public void paginationExample() {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withOffset(50L)
-                .withLimit(25L);
-        final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(result.getOffset()).isEqualTo(50);
-        assertThat(result.getResults().size()).isEqualTo(min(25, max(result.getTotal() - 50, 0)));
-    }
-
-    @Test
-    public void unicodeExampleForFilter() throws Exception {
-        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_EVIL).filtered().by(EVIL_CHARACTER_WORD));
-        final PagedSearchResult<ProductProjection> result = executeEvilSearch(search);
-        assertThat(result.getTotal()).isEqualTo(1);
-    }
-
-    private static List<String> resultsToIds(final PagedSearchResult<ProductProjection> result) {
+    protected static List<String> resultsToIds(final PagedSearchResult<ProductProjection> result) {
         return toIds(result.getResults());
     }
 
-    private static PagedSearchResult<ProductProjection> executeSearch(final ProductProjectionSearch search) {
+    protected static PagedSearchResult<ProductProjection> executeSearch(final ProductProjectionSearch search) {
         final List<String> ids = asList(product1.getId(), product2.getId(), product3.getId());
         return execute(search.plusQueryFilters(model -> model.id().filtered().byAny(ids)));
     }
 
-    private static PagedSearchResult<ProductProjection> executeEvilSearch(final ProductProjectionSearch search) {
+    protected static PagedSearchResult<ProductProjection> executeEvilSearch(final ProductProjectionSearch search) {
         final List<String> ids = asList(evilProduct1.getId(), evilProduct2.getId());
         return execute(search.plusQueryFilters(model -> model.id().filtered().byAny(ids)));
     }
