@@ -62,6 +62,7 @@ io.sphere.sdk.orders.messages
 io.sphere.sdk.orders.queries
 io.sphere.sdk.payments
 io.sphere.sdk.payments.commands
+io.sphere.sdk.payments.commands.updateactions
 io.sphere.sdk.payments.expansion
 io.sphere.sdk.productdiscounts
 io.sphere.sdk.productdiscounts.commands

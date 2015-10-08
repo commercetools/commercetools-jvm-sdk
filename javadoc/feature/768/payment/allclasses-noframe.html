@@ -460,6 +460,7 @@
 <li><a href="io/sphere/sdk/orders/PaymentState.html" title="enum in io.sphere.sdk.orders">PaymentState</a></li>
 <li><a href="io/sphere/sdk/payments/PaymentStatus.html" title="class in io.sphere.sdk.payments">PaymentStatus</a></li>
 <li><a href="io/sphere/sdk/payments/PaymentStatusBuilder.html" title="class in io.sphere.sdk.payments">PaymentStatusBuilder</a></li>
+<li><a href="io/sphere/sdk/payments/commands/PaymentUpdateCommand.html" title="interface in io.sphere.sdk.payments.commands"><span class="interfaceName">PaymentUpdateCommand</span></a></li>
 <li><a href="io/sphere/sdk/products/Price.html" title="class in io.sphere.sdk.products">Price</a></li>
 <li><a href="io/sphere/sdk/products/PriceBuilder.html" title="class in io.sphere.sdk.products">PriceBuilder</a></li>
 <li><a href="io/sphere/sdk/products/queries/PriceCollectionQueryModel.html" title="class in io.sphere.sdk.products.queries">PriceCollectionQueryModel</a></li>
@@ -613,8 +614,11 @@
 <li><a href="io/sphere/sdk/search/SearchSortingModel.html" title="interface in io.sphere.sdk.search"><span class="interfaceName">SearchSortingModel</span></a></li>
 <li><a href="io/sphere/sdk/client/ServerErrorException.html" title="class in io.sphere.sdk.client">ServerErrorException</a></li>
 <li><a href="io/sphere/sdk/client/ServiceUnavailableException.html" title="class in io.sphere.sdk.client">ServiceUnavailableException</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetAmountPaid.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetAmountPaid</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetAmountRefunded.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetAmountRefunded</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetAttribute.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttribute</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetAttributeInAllVariants.html" title="class in io.sphere.sdk.products.commands.updateactions">SetAttributeInAllVariants</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetAuthorization.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetAuthorization</a></li>
 <li><a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetAuthorName</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetBillingAddress</a></li>
 <li><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetCartPredicate.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetCartPredicate</a></li>
@@ -665,6 +669,9 @@
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetMetaKeywords.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaKeywords</a></li>
 <li><a href="io/sphere/sdk/categories/commands/updateactions/SetMetaTitle.html" title="class in io.sphere.sdk.categories.commands.updateactions">SetMetaTitle</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetMetaTitle.html" title="class in io.sphere.sdk.products.commands.updateactions">SetMetaTitle</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetMethodInfoInterface.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetMethodInfoInterface</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetMethodInfoMethod.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetMethodInfoMethod</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetMethodInfoName.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetMethodInfoName</a></li>
 <li><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetName.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetName</a></li>
 <li><a href="io/sphere/sdk/states/commands/updateactions/SetName.html" title="class in io.sphere.sdk.states.commands.updateactions">SetName</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/SetOrderNumber.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetOrderNumber</a></li>
@@ -677,6 +684,7 @@
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetShippingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetShippingAddress</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetShippingMethod.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetShippingMethod</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetSku.html" title="class in io.sphere.sdk.products.commands.updateactions">SetSku</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/SetStatusInterfaceCode.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetStatusInterfaceCode</a></li>
 <li><a href="io/sphere/sdk/products/commands/updateactions/SetTaxCategory.html" title="class in io.sphere.sdk.products.commands.updateactions">SetTaxCategory</a></li>
 <li><a href="io/sphere/sdk/reviews/commands/updateactions/SetText.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetText</a></li>
 <li><a href="io/sphere/sdk/reviews/commands/updateactions/SetTitle.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetTitle</a></li>
@@ -786,6 +794,7 @@
 <li><a href="io/sphere/sdk/payments/TransactionType.html" title="enum in io.sphere.sdk.payments">TransactionType</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></li>
+<li><a href="io/sphere/sdk/payments/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.payments.commands.updateactions">TransitionState</a></li>
 <li><a href="io/sphere/sdk/utils/functional/TriFunction.html" title="interface in io.sphere.sdk.utils.functional"><span class="interfaceName">TriFunction</span></a></li>
 <li><a href="io/sphere/sdk/meta/TroubleshootingGuide.html" title="class in io.sphere.sdk.meta">TroubleshootingGuide</a></li>
 <li><a href="io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><span class="interfaceName">Type</span></a></li>
