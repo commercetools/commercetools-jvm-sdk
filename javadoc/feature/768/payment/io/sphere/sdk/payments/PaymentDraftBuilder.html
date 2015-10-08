@@ -170,7 +170,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html#customer-io.sphere.sdk.models.Reference-">customer</a></span>(<a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html#customer-io.sphere.sdk.models.Referenceable-">customer</a></span>(<a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer)</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></code></td>
@@ -213,7 +213,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html#getInterfaceId--">getInterfaceId</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i18" class="altColor">
-<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&gt;</code></td>
+<td class="colFirst"><code>java.util.List&lt;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html#getInterfaceInteractions--">getInterfaceInteractions</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i19" class="rowColor">
@@ -234,7 +234,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 </tr>
 <tr id="i23" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html#interfaceInteractions-java.util.List-">interfaceInteractions</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&gt;&nbsp;interfaceInteractions)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html#interfaceInteractions-java.util.List-">interfaceInteractions</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&gt;&nbsp;interfaceInteractions)</code>&nbsp;</td>
 </tr>
 <tr id="i24" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></code></td>
@@ -297,14 +297,14 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <pre>public static&nbsp;<a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a>&nbsp;of(javax.money.MonetaryAmount&nbsp;amountPlanned)</pre>
 </li>
 </ul>
-<a name="customer-io.sphere.sdk.models.Reference-">
+<a name="customer-io.sphere.sdk.models.Referenceable-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>customer</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a>&nbsp;customer(@Nullable
-                                    <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer)</pre>
+                                    <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer)</pre>
 </li>
 </ul>
 <a name="externalId-java.lang.String-">
@@ -423,7 +423,7 @@ implements <a href="../../../../io/sphere/sdk/models/Builder.html" title="interf
 <li class="blockList">
 <h4>interfaceInteractions</h4>
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a>&nbsp;interfaceInteractions(@Nullable
-                                                 java.util.List&lt;<a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&gt;&nbsp;interfaceInteractions)</pre>
+                                                 java.util.List&lt;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&gt;&nbsp;interfaceInteractions)</pre>
 </li>
 </ul>
 <a name="getAmountAuthorized--">
@@ -522,7 +522,7 @@ public&nbsp;java.lang.String&nbsp;getInterfaceId()</pre>
 <li class="blockList">
 <h4>getInterfaceInteractions</h4>
 <pre>@Nullable
-public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&gt;&nbsp;getInterfaceInteractions()</pre>
+public&nbsp;java.util.List&lt;<a href="../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&gt;&nbsp;getInterfaceInteractions()</pre>
 </li>
 </ul>
 <a name="getPaymentMethodInfo--">

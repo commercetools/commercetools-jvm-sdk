@@ -1340,7 +1340,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/customers/expansion/CustomerSignInResultExpansionModel.html#customer--">customer()</a></span> - Method in class io.sphere.sdk.customers.expansion.<a href="io/sphere/sdk/customers/expansion/CustomerSignInResultExpansionModel.html" title="class in io.sphere.sdk.customers.expansion">CustomerSignInResultExpansionModel</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentDraftBuilder.html#customer-io.sphere.sdk.models.Reference-">customer(Reference&lt;Customer&gt;)</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentDraftBuilder.html#customer-io.sphere.sdk.models.Referenceable-">customer(Referenceable&lt;Customer&gt;)</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/customers/queries/CustomerByIdGet.html" title="interface in io.sphere.sdk.customers.queries"><span class="typeNameLink">CustomerByIdGet</span></a> - Interface in <a href="io/sphere/sdk/customers/queries/package-summary.html">io.sphere.sdk.customers.queries</a></dt>
 <dd>
@@ -4647,7 +4647,7 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentDraftBuilder.html#interfaceId-java.lang.String-">interfaceId(String)</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentDraftBuilder.html#interfaceInteractions-java.util.List-">interfaceInteractions(List&lt;CustomFields&gt;)</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentDraftBuilder.html#interfaceInteractions-java.util.List-">interfaceInteractions(List&lt;CustomFieldsDraft&gt;)</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentStatusBuilder.html#interfaceText-java.lang.String-">interfaceText(String)</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentStatusBuilder.html" title="class in io.sphere.sdk.payments">PaymentStatusBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -4941,6 +4941,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <div class="block">Provides types to retrieve the state of  orders.</div>
 </dd>
 <dt><a href="io/sphere/sdk/payments/package-summary.html">io.sphere.sdk.payments</a> - package io.sphere.sdk.payments</dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/payments/commands/package-summary.html">io.sphere.sdk.payments.commands</a> - package io.sphere.sdk.payments.commands</dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/payments/expansion/package-summary.html">io.sphere.sdk.payments.expansion</a> - package io.sphere.sdk.payments.expansion</dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/productdiscounts/package-summary.html">io.sphere.sdk.productdiscounts</a> - package io.sphere.sdk.productdiscounts</dt>
 <dd>
@@ -6803,6 +6807,12 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/TrackingDataBuilder.html#of-io.sphere.sdk.orders.TrackingData-">of(TrackingData)</a></span> - Static method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/TrackingDataBuilder.html" title="class in io.sphere.sdk.orders">TrackingDataBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/commands/PaymentCreateCommand.html#of-io.sphere.sdk.payments.PaymentDraft-">of(PaymentDraft)</a></span> - Static method in interface io.sphere.sdk.payments.commands.<a href="io/sphere/sdk/payments/commands/PaymentCreateCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentCreateCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/commands/PaymentDeleteCommand.html#of-io.sphere.sdk.models.Versioned-">of(Versioned&lt;Payment&gt;)</a></span> - Static method in interface io.sphere.sdk.payments.commands.<a href="io/sphere/sdk/payments/commands/PaymentDeleteCommand.html" title="interface in io.sphere.sdk.payments.commands">PaymentDeleteCommand</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/expansion/PaymentExpansionModel.html#of--">of()</a></span> - Static method in class io.sphere.sdk.payments.expansion.<a href="io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion">PaymentExpansionModel</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentDraftBuilder.html#of-javax.money.MonetaryAmount-">of(MonetaryAmount)</a></span> - Static method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments">PaymentDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentMethodInfoBuilder.html#of--">of()</a></span> - Static method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentMethodInfoBuilder.html" title="class in io.sphere.sdk.payments">PaymentMethodInfoBuilder</a></dt>
@@ -8016,9 +8026,15 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments"><span class="typeNameLink">Payment</span></a> - Interface in <a href="io/sphere/sdk/payments/package-summary.html">io.sphere.sdk.payments</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/payments/commands/PaymentCreateCommand.html" title="interface in io.sphere.sdk.payments.commands"><span class="typeNameLink">PaymentCreateCommand</span></a> - Interface in <a href="io/sphere/sdk/payments/commands/package-summary.html">io.sphere.sdk.payments.commands</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/payments/commands/PaymentDeleteCommand.html" title="interface in io.sphere.sdk.payments.commands"><span class="typeNameLink">PaymentDeleteCommand</span></a> - Interface in <a href="io/sphere/sdk/payments/commands/package-summary.html">io.sphere.sdk.payments.commands</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/payments/PaymentDraft.html" title="interface in io.sphere.sdk.payments"><span class="typeNameLink">PaymentDraft</span></a> - Interface in <a href="io/sphere/sdk/payments/package-summary.html">io.sphere.sdk.payments</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/payments/PaymentDraftBuilder.html" title="class in io.sphere.sdk.payments"><span class="typeNameLink">PaymentDraftBuilder</span></a> - Class in <a href="io/sphere/sdk/payments/package-summary.html">io.sphere.sdk.payments</a></dt>
+<dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="class in io.sphere.sdk.payments.expansion"><span class="typeNameLink">PaymentExpansionModel</span></a>&lt;<a href="io/sphere/sdk/payments/expansion/PaymentExpansionModel.html" title="type parameter in PaymentExpansionModel">T</a>&gt; - Class in <a href="io/sphere/sdk/payments/expansion/package-summary.html">io.sphere.sdk.payments.expansion</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentMethodInfoBuilder.html#paymentInterface-java.lang.String-">paymentInterface(String)</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentMethodInfoBuilder.html" title="class in io.sphere.sdk.payments">PaymentMethodInfoBuilder</a></dt>
 <dd>&nbsp;</dd>
@@ -9843,6 +9859,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <tr><td rowspan="3">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderByIdGet.html'>OrderByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderImportCommand.html'>OrderImportCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderQuery.html'>OrderQuery</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html'>OrderFromCartCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderUpdateCommand.html'>OrderUpdateCommand</a></td></tr>
+<tr><td rowspan="2">payments</td><td></td><td><a href='../../../..//io/sphere/sdk/payments/commands/PaymentCreateCommand.html'>PaymentCreateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/payments/commands/PaymentDeleteCommand.html'>PaymentDeleteCommand</a></td></tr>
 <tr><td rowspan="3">productdiscounts</td><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountQuery.html'>ProductDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommand.html'>ProductDiscountUpdateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountByIdGet.html'>ProductDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountDeleteCommand.html'>ProductDiscountDeleteCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommand.html'>ProductDiscountCreateCommand</a></td></tr>
@@ -9909,7 +9927,7 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html#state-java.util.Set-">state(Set&lt;ItemState&gt;)</a></span> - Method in class io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/LineItemImportDraftBuilder.html" title="class in io.sphere.sdk.orders">LineItemImportDraftBuilder</a></dt>
 <dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentStatusBuilder.html#state-io.sphere.sdk.models.Reference-">state(Reference&lt;State&gt;)</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentStatusBuilder.html" title="class in io.sphere.sdk.payments">PaymentStatusBuilder</a></dt>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentStatusBuilder.html#state-io.sphere.sdk.models.Referenceable-">state(Referenceable&lt;State&gt;)</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentStatusBuilder.html" title="class in io.sphere.sdk.payments">PaymentStatusBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/states/State.html" title="interface in io.sphere.sdk.states"><span class="typeNameLink">State</span></a> - Interface in <a href="io/sphere/sdk/states/package-summary.html">io.sphere.sdk.states</a></dt>
 <dd>
@@ -10553,6 +10571,8 @@ assertThat(type.getFieldDefinitions()).containsExactly(stringFieldDefinition);
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/LocalizedString.html#typeReference--">typeReference()</a></span> - Static method in class io.sphere.sdk.models.<a href="io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/orders/Order.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.orders.<a href="io/sphere/sdk/orders/Order.html" title="interface in io.sphere.sdk.orders">Order</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/Payment.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/productdiscounts/ProductDiscount.html#typeReference--">typeReference()</a></span> - Static method in interface io.sphere.sdk.productdiscounts.<a href="io/sphere/sdk/productdiscounts/ProductDiscount.html" title="interface in io.sphere.sdk.productdiscounts">ProductDiscount</a></dt>
 <dd>&nbsp;</dd>
