@@ -27,11 +27,9 @@ final class PaymentImpl extends ResourceImpl<Payment> implements Payment {
     private final MonetaryAmount amountPaid;
     @Nullable
     private final MonetaryAmount amountRefunded;
-    @Nullable
     private final PaymentMethodInfo paymentMethodInfo;
     @Nullable
     private final CustomFields custom;
-    @Nullable
     private final PaymentStatus paymentStatus;
     private final List<Transaction> transactions;
     private final List<CustomFields> interfaceInteractions;
@@ -102,7 +100,6 @@ final class PaymentImpl extends ResourceImpl<Payment> implements Payment {
     }
 
     @Override
-    @Nullable
     public PaymentMethodInfo getPaymentMethodInfo() {
         return paymentMethodInfo;
     }
@@ -114,7 +111,6 @@ final class PaymentImpl extends ResourceImpl<Payment> implements Payment {
     }
 
     @Override
-    @Nullable
     public PaymentStatus getPaymentStatus() {
         return paymentStatus;
     }

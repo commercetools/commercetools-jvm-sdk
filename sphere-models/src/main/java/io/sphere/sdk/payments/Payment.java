@@ -37,14 +37,12 @@ public interface Payment extends Resource<Payment>, Custom {
     @Nullable
     MonetaryAmount getAmountRefunded();
 
-    @Nullable
     PaymentMethodInfo getPaymentMethodInfo();
 
     @Override
     @Nullable
     CustomFields getCustom();
 
-    @Nullable
     PaymentStatus getPaymentStatus();
 
     List<Transaction> getTransactions();
