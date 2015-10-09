@@ -67,4 +67,8 @@ public interface Payment extends Resource<Payment>, Custom {
             }
         };
     }
+
+    static String resourceTypeId() {
+        return "payment";
+    }
 }

@@ -10,10 +10,12 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
 import org.assertj.core.api.Condition;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.BeforeClass;
 import org.slf4j.LoggerFactory;
 
 import javax.money.CurrencyUnit;
+import java.util.function.Consumer;
 
 public abstract class IntegrationTest {
 
@@ -108,5 +110,11 @@ public abstract class IntegrationTest {
                 return value.getObj() != null && value.getObj().equals(expected);
             }
         };
+    }
+
+    protected static void softAssert(final Consumer<SoftAssertions> assertionsConsumer) {
+        final SoftAssertions softly = new SoftAssertions();
+        assertionsConsumer.accept(softly);
+        softly.assertAll();
     }
 }
