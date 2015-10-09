@@ -12,11 +12,11 @@ cmd="docker run --rm \
 -e TRAVIS_REPO_SLUG=$TRAVIS_REPO_SLUG \
 msct/jvmsdktest"
 
-eval "$cmd sh -c './sbt genDoc test it:test'"
+eval "$cmd sh -c './sbt genDoc test it:test'"  || { echo 'command failed' ; exit 1; }
 test_result=$?
-eval "$cmd sh -c './sbt \"sphere-models/it:test::runMain io.sphere.sdk.client.MainMethodThreadLeakTest\"'"
-eval "$cmd sh -c './sbt \"test:runMain introspection.rules.RulesMain\"'"
-eval "$cmd sh -c 'bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null'"
+eval "$cmd sh -c './sbt \"sphere-models/it:test::runMain io.sphere.sdk.client.MainMethodThreadLeakTest\"'"   || { echo 'command failed' ; exit 1; }
+eval "$cmd sh -c './sbt \"test:runMain introspection.rules.RulesMain\"'"   || { echo 'command failed' ; exit 1; }
+eval "$cmd sh -c 'bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null'"   || { echo 'command failed' ; exit 1; }
 if [ test_result -eq 0 ]; then
-  eval "$cmd sh -c 'bash scripts/publish-javadoc-version-folder.sh > /dev/null 2> /dev/null'"
+  eval "$cmd sh -c 'bash scripts/publish-javadoc-version-folder.sh > /dev/null 2> /dev/null'"   || { echo 'command failed' ; exit 1; }
 fi
