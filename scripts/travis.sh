@@ -1,3 +1,5 @@
+set -e
+
 cmd="docker run --rm \
 -v $PWD:/wd \
 -w /wd \
