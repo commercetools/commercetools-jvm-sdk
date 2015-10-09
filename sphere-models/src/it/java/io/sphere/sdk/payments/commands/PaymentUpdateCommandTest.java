@@ -1,6 +1,5 @@
 package io.sphere.sdk.payments.commands;
 
-import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.commands.updateactions.*;
@@ -12,8 +11,9 @@ import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.Collections;
 
-import static org.assertj.core.api.Assertions.*;
+import static io.sphere.sdk.carts.CartFixtures.withCustomerAndFilledCart;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class PaymentUpdateCommandTest extends IntegrationTest {
     @Test
@@ -156,15 +156,15 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void transActions() {
-        //TODO delete
-        //TODO cart with line item
-        CustomerFixtures.withCustomerAndCart(client(), ((customer, cart) -> {
+        withCustomerAndFilledCart(client(), (customer, cart) -> {
             final MonetaryAmount totalAmount = cart.getTotalPrice();
             final PaymentMethodInfo paymentMethodInfo = PaymentMethodInfoBuilder.of()
                     .paymentInterface("STRIPE")
                     .method("CREDIT_CARD")
                     .build();
-            final Transaction chargeTransaction = TransactionBuilder.of(TransactionType.CHARGE, totalAmount).build();
+            final Transaction chargeTransaction = TransactionBuilder
+                    .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
+                    .build();
             final PaymentDraftBuilder paymentDraftBuilder = PaymentDraftBuilder.of(totalAmount)
                     .customer(customer)
                     .paymentMethodInfo(paymentMethodInfo)
@@ -177,19 +177,19 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
 
             final MonetaryAmount firstRefundAmount = EURO_10;
-            final Transaction firstRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, firstRefundAmount).build();
+            final Transaction firstRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, firstRefundAmount, ZonedDateTime.now()).build();
             final Payment paymentWithFirstRefund = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundAmount), AddTransaction.of(firstRefundTransaction))));
 
             assertThat(paymentWithFirstRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction);
 
 
             final MonetaryAmount secondRefundAmount = EURO_5;
-            final Transaction secondRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, secondRefundAmount).build();
-            final MonetaryAmount totalRefundAmount = secondRefundAmount.add(payment.getAmountRefunded());
+            final Transaction secondRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, secondRefundAmount, ZonedDateTime.now()).build();
+            final MonetaryAmount totalRefundAmount = secondRefundAmount.add(paymentWithFirstRefund.getAmountRefunded());
             final Payment paymentWithSecondRefund = execute(PaymentUpdateCommand.of(paymentWithFirstRefund, asList(SetAmountRefunded.of(totalRefundAmount), AddTransaction.of(secondRefundTransaction))));
 
             assertThat(paymentWithSecondRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction, secondRefundTransaction);
             assertThat(paymentWithSecondRefund.getAmountRefunded()).isEqualTo(totalRefundAmount);
-        }));
+        });
     }
 }

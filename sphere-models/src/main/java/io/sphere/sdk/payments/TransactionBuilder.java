@@ -8,23 +8,23 @@ import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 
 public final class TransactionBuilder extends Base implements Builder<Transaction> {
-    @Nullable
     private ZonedDateTime timestamp;
     private TransactionType type;
     private MonetaryAmount amount;
     @Nullable
     private String interactionId;
 
-    private TransactionBuilder(final TransactionType type, final MonetaryAmount amount) {
+    private TransactionBuilder(final TransactionType type, final MonetaryAmount amount, final ZonedDateTime timestamp) {
         this.type = type;
         this.amount = amount;
+        this.timestamp = timestamp;
     }
 
-    public static TransactionBuilder of(final TransactionType type, final MonetaryAmount amount) {
-        return new TransactionBuilder(type, amount);
+    public static TransactionBuilder of(final TransactionType type, final MonetaryAmount amount, final ZonedDateTime timestamp) {
+        return new TransactionBuilder(type, amount, timestamp);
     }
 
-    public TransactionBuilder timestamp(@Nullable final ZonedDateTime timestamp) {
+    public TransactionBuilder timestamp(final ZonedDateTime timestamp) {
         this.timestamp = timestamp;
         return this;
     }

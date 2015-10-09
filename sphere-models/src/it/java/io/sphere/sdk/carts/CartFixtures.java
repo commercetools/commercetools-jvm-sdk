@@ -10,10 +10,9 @@ import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
-import io.sphere.sdk.carts.commands.updateactions.AddCustomLineItem;
-import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
-import io.sphere.sdk.carts.commands.updateactions.SetShippingAddress;
+import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.client.TestClient;
+import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.discountcodes.DiscountCode;
 import io.sphere.sdk.discountcodes.DiscountCodeDraft;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand;
@@ -27,6 +26,7 @@ import io.sphere.sdk.utils.MoneyImpl;
 import javax.money.MonetaryAmount;
 import java.util.function.*;
 
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerAndCart;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -83,6 +83,17 @@ public class CartFixtures {
             f.accept(updatedCart);
         });
     }
+
+
+    public static void withCustomerAndFilledCart(final TestClient client, final BiConsumer<Customer, Cart> consumer) {
+        withCustomer(client, customer -> {
+            withFilledCart(client, cart -> {
+                final Cart cartForCustomer = client.execute(CartUpdateCommand.of(cart, SetCustomerId.of(customer.getId())));
+                consumer.accept(customer, cartForCustomer);
+            });
+        });
+    }
+
 
     public static void withCartAndTaxedProduct(final TestClient client, final BiFunction<Cart, Product, Cart> f) {
         withTaxedProduct(client, product -> {

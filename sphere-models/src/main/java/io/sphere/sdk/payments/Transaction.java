@@ -5,10 +5,11 @@ import io.sphere.sdk.models.Base;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
+import java.util.Optional;
 
 public final class Transaction extends Base {
-    @Nullable
     private final ZonedDateTime timestamp;
     private final TransactionType type;
     private final MonetaryAmount amount;
@@ -17,13 +18,14 @@ public final class Transaction extends Base {
 
     @JsonCreator
     Transaction(final ZonedDateTime timestamp, final TransactionType type, final MonetaryAmount amount, final String interactionId) {
-        this.timestamp = timestamp;
+        this.timestamp = Optional.ofNullable(timestamp)
+                .map(value -> value.withZoneSameInstant(ZoneOffset.UTC))
+                .orElse(null);
         this.type = type;
         this.amount = amount;
         this.interactionId = interactionId;
     }
 
-    @Nullable
     public ZonedDateTime getTimestamp() {
         return timestamp;
     }
