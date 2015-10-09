@@ -106,4 +106,40 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T>
 
     C withOffset(final long offset);
 
+    /**
+     * @deprecated use {@link SearchDsl#withResultFilters(List)} instead
+     */
+    @Deprecated
+    C withResultFilters(final FilterExpression<T> filterExpression);
+
+    /**
+     * @deprecated use {@link SearchDsl#plusResultFilters(List)} instead
+     */
+    @Deprecated
+    C plusResultFilters(final FilterExpression<T> filterExpression);
+
+    /**
+     * @deprecated use {@link SearchDsl#withQueryFilters(List)} instead
+     */
+    @Deprecated
+    C withQueryFilters(final FilterExpression<T> filterExpression);
+
+    /**
+     * @deprecated use {@link SearchDsl#plusQueryFilters(List)} instead
+     */
+    @Deprecated
+    C plusQueryFilters(final FilterExpression<T> filterExpression);
+
+    /**
+     * @deprecated use {@link SearchDsl#withFacetFilters(List)} instead
+     */
+    @Deprecated
+    C withFacetFilters(final FilterExpression<T> filterExpression);
+
+    /**
+     * @deprecated use {@link SearchDsl#plusFacetFilters(List)} instead
+     */
+    @Deprecated
+    C plusFacetFilters(final FilterExpression<T> filterExpression);
+
 }
