@@ -113,7 +113,7 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="interface in io.sphere.sdk.search">SearchExpression</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;T&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;T&gt;</dd>
 </dl>
 <hr>
 <br>
@@ -239,11 +239,8 @@ implements <a href="../../../../io/sphere/sdk/search/SortExpression.html" title=
 <li class="blockList">
 <h4>expression</h4>
 <pre>public&nbsp;java.lang.String&nbsp;expression()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchExpression.html#expression--">SearchExpression</a></code></span></div>
 <div class="block">Returns a search expression.</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchExpression.html#expression--">expression</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="interface in io.sphere.sdk.search">SearchExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SortExpressionImpl.html" title="type parameter in SortExpressionImpl">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>String with unescaped sphere search expression</dd>
 </dl>
@@ -256,12 +253,9 @@ implements <a href="../../../../io/sphere/sdk/search/SortExpression.html" title=
 <li class="blockList">
 <h4>attributePath</h4>
 <pre>public final&nbsp;java.lang.String&nbsp;attributePath()</pre>
-<div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchExpression.html#attributePath--">SearchExpression</a></code></span></div>
 <div class="block">Generates the path for the attribute to apply the search expression.
  Example: variants.attributes.color</div>
 <dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/search/SearchExpression.html#attributePath--">attributePath</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="interface in io.sphere.sdk.search">SearchExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SortExpressionImpl.html" title="type parameter in SortExpressionImpl">T</a>&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the path for the attribute</dd>
 </dl>
