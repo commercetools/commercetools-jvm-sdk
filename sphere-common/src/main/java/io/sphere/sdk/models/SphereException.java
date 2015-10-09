@@ -1,15 +1,21 @@
 package io.sphere.sdk.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequest;
+import io.sphere.sdk.http.HttpRequest;
 import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.http.StringHttpRequestBody;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.meta.BuildInfo;
 
 import javax.annotation.Nullable;
+import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.regex.Pattern;
 
 /**
@@ -26,7 +32,9 @@ public class SphereException extends RuntimeException {
     @Nullable
     private String projectKey;
     @Nullable
-    private String httpRequest;
+    private HttpRequest httpRequest;
+    @Nullable
+    private HttpRequestIntent httpRequestIntent;
     private List<String> additionalNotes = new LinkedList<>();
 
     public SphereException(final String message, final Throwable cause) {
@@ -65,10 +73,14 @@ public class SphereException extends RuntimeException {
 
     public void setSphereRequest(final SphereRequest<?> sphereRequest) {
         this.sphereRequest = sphereRequest;
-        setHttpRequest(sphereRequest.httpRequestIntent().toString());
+        setHttpRequestIntent(sphereRequest.httpRequestIntent());
     }
 
-    public void setHttpRequest(final String httpRequest) {
+    private void setHttpRequestIntent(final HttpRequestIntent httpRequestIntent) {
+        this.httpRequestIntent = httpRequestIntent;
+    }
+
+    public void setHttpRequest(final HttpRequest httpRequest) {
         this.httpRequest = httpRequest;
     }
 
@@ -80,20 +92,65 @@ public class SphereException extends RuntimeException {
     public final String getMessage() {
         StringBuilder builder = new StringBuilder();
         return builder
+                .append(Optional.ofNullable(super.getMessage()).map(s -> "detailMessage: " + s + "\n").orElse(""))
                 .append("SDK: ").append(BuildInfo.version()).append("\n")
                 .append("project: ").append(Optional.ofNullable(getProjectKey()).orElse("<unknown>")).append("\n")
-                        .append(Optional.ofNullable(getSphereRequest()).map(x -> x.httpRequestIntent()).map(x -> "" + x.getHttpMethod() + " " + x.getPath()).map(x -> "endpoint: " + x + "\n").orElse(""))
-                        .append("Java: ").append(System.getProperty("java.version")).append("\n")
-                        .append("cwd: ").append(System.getProperty("user.dir")).append("\n")
-                        .append("date: ").append(new Date()).append("\n")
-                        .append("sphere request: ").append(Optional.ofNullable(getSphereRequest()).map(Object::toString).orElse("<unknown>")).append("\n")
-                                //duplicated in case SphereRequest does not implement a proper to String
-                        .append("http request: ").append(Optional.ofNullable(httpRequest).orElse("<unknown>")).append("\n")
-                        .append("http response: ").append(Optional.ofNullable(getHttpResponse()).map(Object::toString).orElse("<unknown>")).append("\n")
-                        .append(Optional.ofNullable(super.getMessage()).map(s -> "detailMessage: " + s + "\n").orElse(""))
-                        .append("additional notes: ").append(additionalNotes).append("\n")
-                        .append("Javadoc: ").append("http://sphereio.github.io/sphere-jvm-sdk/javadoc/").append(getVersionForJavadoc()).append("/").append(this.getClass().getCanonicalName().replace('.', '/')).append(".html").append("\n")
+                .append(Optional.ofNullable(getSphereRequest()).map(x -> x.httpRequestIntent()).map(x -> "" + x.getHttpMethod() + " " + x.getPath()).map(x -> "endpoint: " + x + "\n").orElse(""))
+                .append("Java: ").append(System.getProperty("java.version")).append("\n")
+                .append("cwd: ").append(System.getProperty("user.dir")).append("\n")
+                .append("date: ").append(new Date()).append("\n")
+                .append("sphere request: ").append(Optional.ofNullable(getSphereRequest()).map(Object::toString).orElse("<unknown>")).append("\n")
+                        //duplicated in case SphereRequest does not implement a proper to String
+                .append(httpRequestLine())
+                .append(requestBodyFormatted())
+                .append("http response: ").append(Optional.ofNullable(getHttpResponse()).map(Object::toString).orElse("<unknown>")).append("\n")
+                .append(responseBodyFormatted())
+                .append("additional notes: ").append(additionalNotes).append("\n")
+                .append("Javadoc: ").append("http://sphereio.github.io/sphere-jvm-sdk/javadoc/").append(getVersionForJavadoc()).append("/").append(this.getClass().getCanonicalName().replace('.', '/')).append(".html").append("\n")
                 .toString();
+    }
+
+    private String httpRequestLine() {
+        if (httpRequest == null) {
+            return "";
+        } else {
+            return "http request:" + httpRequest.toString() + "\n";
+        }
+    }
+
+    private String responseBodyFormatted() {
+        try {
+            return Optional.ofNullable(getHttpResponse())
+                    .map(r -> r.getResponseBody())
+                    .map(b -> SphereJsonUtils.prettyPrint(new String(b, StandardCharsets.UTF_8)))
+                    .map(s -> "http response formatted body: " + s + "\n")
+                    .orElse("");
+        } catch (final Exception e) {
+            return "";
+        }
+    }
+
+    private String requestBodyFormatted() {
+        try {
+            final Optional<String> stringBodyOfHttpRequest = stringBodyOfHttpRequest();
+            final Optional<String> stringBodyOfHttpRequestIntentSupplier = Optional.ofNullable(httpRequestIntent)
+                    .map(r -> r.getBody())
+                    .filter(r -> r instanceof StringHttpRequestBody)
+                    .map(r -> ((StringHttpRequestBody) r).getString());
+            return Optional.ofNullable(stringBodyOfHttpRequest.orElse(stringBodyOfHttpRequestIntentSupplier.orElse(null)))
+                    .map(SphereJsonUtils::prettyPrint)
+                    .map(s -> "http request formatted body: " + s + "\n")
+                    .orElse("");
+        } catch (final Exception e) {
+            return "";
+        }
+    }
+
+    private Optional<String> stringBodyOfHttpRequest() {
+        return Optional.ofNullable(httpRequest)
+                .map(r -> r.getBody())
+                .filter(x -> x instanceof StringHttpRequestBody)
+                .map(b -> ((StringHttpRequestBody) b).getString());
     }
 
 
