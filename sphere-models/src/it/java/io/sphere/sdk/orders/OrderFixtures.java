@@ -12,6 +12,7 @@ import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.commands.CustomerSignInCommand;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.orders.commands.OrderDeleteCommand;
 import io.sphere.sdk.orders.commands.OrderFromCartCreateCommand;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
 import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
@@ -28,6 +29,7 @@ import javax.money.MonetaryAmount;
 import java.util.List;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.customers.CustomerFixtures.*;
@@ -61,6 +63,24 @@ public class OrderFixtures {
                     ChangePaymentState.of(PaymentState.PENDING)
             )));
             f.accept(updatedOrder);
+        });
+    }
+
+    public static void withOrder(final TestClient client, final UnaryOperator<Order> f) {
+        withFilledCart(client, cart -> {
+            final TaxCategory taxCategory = TaxCategoryFixtures.defaultTaxCategory(client);
+            final SetCustomShippingMethod shippingMethodAction = SetCustomShippingMethod.of("custom shipping method", ShippingRate.of(EURO_10), taxCategory);
+            final SetCustomerEmail emailAction = SetCustomerEmail.of(CUSTOMER_EMAIL);
+            final Cart updatedCart = client.execute(CartUpdateCommand.of(cart, asList(shippingMethodAction, emailAction)));
+
+            final Order order = client.execute(OrderFromCartCreateCommand.of(updatedCart));
+
+            final Order updatedOrder = client.execute(OrderUpdateCommand.of(order, asList(
+                    ChangeShipmentState.of(ShipmentState.READY),
+                    ChangePaymentState.of(PaymentState.PENDING)
+            )));
+            final Order orderToDelete = f.apply(updatedOrder);
+            client.execute(OrderDeleteCommand.of(orderToDelete));
         });
     }
 
