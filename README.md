@@ -67,6 +67,7 @@ see https://github.com/sphereio/sphere-jvm-sdk-experimental-java-add-ons
 
 ## Short-term roadmap
 * https://github.com/sphereio/sphere-jvm-sdk/milestones
+* https://waffle.io/sphereio/sphere-jvm-sdk
 
 ## Stability
 

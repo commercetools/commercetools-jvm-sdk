@@ -5,6 +5,7 @@ import com.ning.http.client.AsyncHttpClientConfig;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.models.DefaultCurrencyUnits;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
@@ -12,9 +13,16 @@ import org.assertj.core.api.Condition;
 import org.junit.BeforeClass;
 import org.slf4j.LoggerFactory;
 
+import javax.money.CurrencyUnit;
+
 public abstract class IntegrationTest {
 
     private static TestClient client;
+
+    @BeforeClass
+    public static void warmUpJavaMoney() throws Exception {
+        final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/sphereio/sphere-jvm-sdk/issues/779
+    }
 
     public static void setupClient() {
         if (client == null) {
