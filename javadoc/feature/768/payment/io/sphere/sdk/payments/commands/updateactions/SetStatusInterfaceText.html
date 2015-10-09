@@ -124,7 +124,7 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">SetStatusInterfaceText</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;</pre>
-<div class="block"><div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setStatusInterfaceText--%s" class=code-example><pre><code class='java'>PaymentFixtures.withPayment(payment -&gt; {
+<div class="block"><div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setStatusInterfaceText--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
     final String interfaceText = "Operation successful";
     final String interfaceCode = "20000";
     final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment,

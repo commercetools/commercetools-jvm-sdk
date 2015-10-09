@@ -98,6 +98,18 @@
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetCustomer.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetCustomer</a></td>
+<td class="colLast">
+<div class="block">Sets the reference to the customer.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetExternalId.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetExternalId</a></td>
+<td class="colLast">
+<div class="block">Sets a new ID which can be used as additional identifier for external systems like CRM or ERP.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetMethodInfoInterface.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetMethodInfoInterface</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -112,7 +124,7 @@
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetStatusInterfaceCode.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetStatusInterfaceCode</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setStatusInterfaceText--%s" class=code-example><pre><code class='java'>PaymentFixtures.withPayment(payment -&gt; {
+<div class="block"><div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setStatusInterfaceText--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
     final String interfaceText = "Operation successful";
     final String interfaceCode = "20000";
     final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment,
@@ -132,7 +144,7 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetStatusInterfaceText.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetStatusInterfaceText</a></td>
 <td class="colLast">
-<div class="block"><div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setStatusInterfaceText--%s" class=code-example><pre><code class='java'>PaymentFixtures.withPayment(payment -&gt; {
+<div class="block"><div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setStatusInterfaceText--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
     final String interfaceText = "Operation successful";
     final String interfaceCode = "20000";
     final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment,
