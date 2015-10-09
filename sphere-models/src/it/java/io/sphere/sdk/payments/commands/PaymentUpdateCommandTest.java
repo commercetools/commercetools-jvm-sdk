@@ -1,10 +1,12 @@
 package io.sphere.sdk.payments.commands;
 
+import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.commands.updateactions.*;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
@@ -12,13 +14,16 @@ import java.time.ZonedDateTime;
 import java.util.Collections;
 
 import static io.sphere.sdk.carts.CartFixtures.withCustomerAndFilledCart;
+import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
+import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
+import static io.sphere.sdk.states.StateType.PAYMENT_STATE;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PaymentUpdateCommandTest extends IntegrationTest {
     @Test
     public void setAuthorization() {
-        PaymentFixtures.withPayment(payment -> {
+        withPayment(client(), payment -> {
             //set authorization
             final MonetaryAmount totalAmount = EURO_30;
             final ZonedDateTime until = ZonedDateTime.now().plusDays(7);
@@ -41,18 +46,40 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
     }
 
     @Test
+    public void setExternalId() {
+            withPayment(client(), payment -> {
+                final String externalId = randomKey();
+
+                final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, asList(SetExternalId.of(externalId))));
+
+                assertThat(updatedPayment.getExternalId()).isEqualTo(externalId);
+
+                return updatedPayment;
+            });
+    }
+
+    @Test
+    public void setCustomer() {
+        CustomerFixtures.withCustomer(client(), customer -> {
+            withPayment(client(), payment -> {
+                assertThat(payment.getCustomer()).isNotEqualTo(customer.toReference());
+
+                final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetCustomer.of(customer)));
+
+                assertThat(updatedPayment.getCustomer()).isEqualTo(customer.toReference());
+
+                return updatedPayment;
+            });
+        });
+    }
+
+    @Test
     public void refunded() {
-        PaymentFixtures.withPayment(payment -> {
-            final MonetaryAmount totalAmount = EURO_30;
-            //TODO
-            assertThat(payment.getAmountPaid())
-                    .isEqualTo(totalAmount)
-                    .isEqualTo(payment.getAmountPlanned());
+        withPayment(client(), payment -> {
 
-            final MonetaryAmount refundedAmount = EURO_10;
-            final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(refundedAmount))));
+            final MonetaryAmount refundedAmount = payment.getAmountPlanned().divide(2);
+            final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetAmountRefunded.of(refundedAmount)));
 
-            assertThat(updatedPayment.getAmountPaid()).isEqualTo(totalAmount);
             assertThat(updatedPayment.getAmountRefunded()).isEqualTo(refundedAmount);
 
             return updatedPayment;
@@ -61,27 +88,22 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void multiRefund() {
-        PaymentFixtures.withPayment(payment -> {
-            final MonetaryAmount totalAmount = EURO_30;
-            //TODO
-            assertThat(payment.getAmountPaid())
-                    .isEqualTo(totalAmount)
-                    .isEqualTo(payment.getAmountPlanned());
+        withPayment(client(), payBuilder -> payBuilder.amountPaid(payBuilder.getAmountPlanned()), payment -> {
+            final MonetaryAmount totalAmount = payment.getAmountPlanned();
+            assertThat(payment.getAmountPaid()).as("amount paid").isEqualTo(totalAmount);
 
-            final MonetaryAmount firstRefoundedAmount = EURO_10;
+            final MonetaryAmount firstRefoundedAmount = totalAmount.scaleByPowerOfTen(-1);
             final Payment firstRefoundPayment = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefoundedAmount))));
 
-            assertThat(firstRefoundPayment.getAmountPaid()).isEqualTo(totalAmount);
-            assertThat(firstRefoundPayment.getAmountRefunded()).isEqualTo(firstRefoundedAmount);
+            assertThat(firstRefoundPayment.getAmountRefunded()).as("first refunded").isEqualTo(firstRefoundedAmount);
 
-            final MonetaryAmount secondRefundedAmount = EURO_20;
+            final MonetaryAmount secondRefundedAmount = firstRefoundedAmount.multiply(2);
             //important, because SetAmountRefunded sets the total value
             final MonetaryAmount totalRefundedAmount = firstRefoundPayment.getAmountRefunded().add(secondRefundedAmount);
 
-            final Payment secondRefundPayment = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(totalRefundedAmount))));
+            final Payment secondRefundPayment = execute(PaymentUpdateCommand.of(firstRefoundPayment, asList(SetAmountRefunded.of(totalRefundedAmount))));
 
-            assertThat(secondRefundPayment.getAmountPaid()).isEqualTo(totalAmount);
-            assertThat(secondRefundPayment.getAmountRefunded()).isEqualTo(firstRefoundedAmount);
+            assertThat(secondRefundPayment.getAmountRefunded()).as("total refunded").isEqualTo(totalRefundedAmount);
 
             return secondRefundPayment;
         });
@@ -89,20 +111,21 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void transitionState() {
-        final State validNextStateForPaymentStatus = null;
-        PaymentFixtures.withPayment(payment -> {
-            final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, TransitionState.of(validNextStateForPaymentStatus)));
+        withStateByBuilder(client(), stateBuilder -> stateBuilder.initial(true).type(PAYMENT_STATE), validNextStateForPaymentStatus -> {
+            withPayment(client(), payment -> {
+                final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, TransitionState.of(validNextStateForPaymentStatus)));
 
-            assertThat(updatedPayment.getPaymentStatus().getState()).isEqualTo(validNextStateForPaymentStatus.toReference());
+                assertThat(updatedPayment.getPaymentStatus().getState()).isEqualTo(validNextStateForPaymentStatus.toReference());
 
-            return updatedPayment;
+                return updatedPayment;
+            });
         });
     }
 
 
     @Test
     public void setStatusInterfaceText() {
-        PaymentFixtures.withPayment(payment -> {
+        withPayment(client(), payment -> {
             final String interfaceText = "Operation successful";
             final String interfaceCode = "20000";
             final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment,
@@ -120,7 +143,7 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void setMethodInfoName() {
-        PaymentFixtures.withPayment(payment -> {
+        withPayment(client(), payment -> {
             final LocalizedString name = randomSlug();
             final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetMethodInfoName.of(name)));
 
@@ -132,7 +155,7 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void setMethodInfoMethod() {
-        PaymentFixtures.withPayment(payment -> {
+        withPayment(client(), payment -> {
             final String method = "method";
             final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetMethodInfoMethod.of(method)));
 
@@ -144,7 +167,7 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void setMethodInfoInterface() {
-        PaymentFixtures.withPayment(payment -> {
+        withPayment(client(), payment -> {
             final String stripe = "STRIPE";
             final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetMethodInfoInterface.of(stripe)));
 

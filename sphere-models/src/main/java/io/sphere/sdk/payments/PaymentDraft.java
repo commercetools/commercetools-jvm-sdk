@@ -10,6 +10,11 @@ import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.List;
 
+/**
+ * Draft for a new Payment resource.
+ *
+ * @see PaymentDraftBuilder
+ */
 public interface PaymentDraft {
     @Nullable
     Reference<Customer> getCustomer();
