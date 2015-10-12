@@ -12,16 +12,16 @@ final class PaymentStatusQueryModelImpl<T> extends QueryModelImpl<T> implements 
 
 
     }
-//
-//    @Override
-//    public StringQuerySortingModel<T> interfaceCode() {
-//        return stringModel("interfaceCode");
-//    }
-//
-//    @Override
-//    public StringQuerySortingModel<T> interfaceText() {
-//        return stringModel("interfaceText");
-//    }
+
+    @Override
+    public StringQuerySortingModel<T> interfaceCode() {
+        return stringModel("interfaceCode");
+    }
+
+    @Override
+    public StringQuerySortingModel<T> interfaceText() {
+        return stringModel("interfaceText");
+    }
 
     @Override
     public ReferenceOptionalQueryModel<T, State> state() {
