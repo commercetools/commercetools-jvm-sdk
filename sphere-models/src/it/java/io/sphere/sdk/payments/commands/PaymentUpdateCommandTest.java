@@ -1,14 +1,10 @@
 package io.sphere.sdk.payments.commands;
 
-import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.commands.updateactions.*;
-import io.sphere.sdk.states.State;
 import io.sphere.sdk.test.IntegrationTest;
-import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.TypeFixtures;
-import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
 import javax.money.MonetaryAmount;
