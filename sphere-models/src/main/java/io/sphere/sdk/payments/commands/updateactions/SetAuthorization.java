@@ -7,6 +7,17 @@ import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 
+/**
+ * Sets the amount of money that has been authorized and optionally until when the authorization is valid. If no amount is provided, the authorization is unset.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#setAuthorization()}
+ *
+ * @see Payment
+ *
+ *
+ */
 public final class SetAuthorization extends UpdateActionImpl<Payment> {
     @Nullable
     private final MonetaryAmount amount;
