@@ -14,6 +14,7 @@ import java.time.ZonedDateTime;
 import java.util.Collections;
 
 import static io.sphere.sdk.carts.CartFixtures.withCustomerAndFilledCart;
+import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PAYMENT_STATE;
@@ -60,7 +61,7 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void setCustomer() {
-        CustomerFixtures.withCustomer(client(), customer -> {
+        withCustomer(client(), customer -> {
             withPayment(client(), payment -> {
                 assertThat(payment.getCustomer()).isNotEqualTo(customer.toReference());
 
@@ -136,6 +137,18 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
             assertThat(updatedPayment.getPaymentStatus().getInterfaceText()).isEqualTo(interfaceText);
             assertThat(updatedPayment.getPaymentStatus().getInterfaceCode()).isEqualTo(interfaceCode);
+
+            return updatedPayment;
+        });
+    }
+
+    @Test
+    public void setInterfaceId() {
+        withPayment(client(), payment -> {
+            final String interfaceId =randomKey();
+            final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetInterfaceId.of(interfaceId)));
+
+            assertThat(updatedPayment.getInterfaceId()).isEqualTo(interfaceId);
 
             return updatedPayment;
         });
