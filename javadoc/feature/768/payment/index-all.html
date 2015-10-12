@@ -3151,6 +3151,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentStatusBuilder.html#getInterfaceCode--">getInterfaceCode()</a></span> - Method in class io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentStatusBuilder.html" title="class in io.sphere.sdk.payments">PaymentStatusBuilder</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/commands/updateactions/SetInterfaceId.html#getInterfaceId--">getInterfaceId()</a></span> - Method in class io.sphere.sdk.payments.commands.updateactions.<a href="io/sphere/sdk/payments/commands/updateactions/SetInterfaceId.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetInterfaceId</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/Payment.html#getInterfaceId--">getInterfaceId()</a></span> - Method in interface io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/PaymentDraft.html#getInterfaceId--">getInterfaceId()</a></span> - Method in interface io.sphere.sdk.payments.<a href="io/sphere/sdk/payments/PaymentDraft.html" title="interface in io.sphere.sdk.payments">PaymentDraft</a></dt>
@@ -6861,6 +6863,8 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/commands/updateactions/SetExternalId.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.payments.commands.updateactions.<a href="io/sphere/sdk/payments/commands/updateactions/SetExternalId.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetExternalId</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/commands/updateactions/SetInterfaceId.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.payments.commands.updateactions.<a href="io/sphere/sdk/payments/commands/updateactions/SetInterfaceId.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetInterfaceId</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/commands/updateactions/SetMethodInfoInterface.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.payments.commands.updateactions.<a href="io/sphere/sdk/payments/commands/updateactions/SetMethodInfoInterface.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetMethodInfoInterface</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/payments/commands/updateactions/SetMethodInfoMethod.html#of-java.lang.String-">of(String)</a></span> - Static method in class io.sphere.sdk.payments.commands.updateactions.<a href="io/sphere/sdk/payments/commands/updateactions/SetMethodInfoMethod.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetMethodInfoMethod</a></dt>
@@ -9497,6 +9501,18 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 </dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/models/SphereException.html#setHttpRequest-io.sphere.sdk.http.HttpRequest-">setHttpRequest(HttpRequest)</a></span> - Method in exception io.sphere.sdk.models.<a href="io/sphere/sdk/models/SphereException.html" title="class in io.sphere.sdk.models">SphereException</a></dt>
 <dd>&nbsp;</dd>
+<dt><a href="io/sphere/sdk/payments/commands/updateactions/SetInterfaceId.html" title="class in io.sphere.sdk.payments.commands.updateactions"><span class="typeNameLink">SetInterfaceId</span></a> - Class in <a href="io/sphere/sdk/payments/commands/updateactions/package-summary.html">io.sphere.sdk.payments.commands.updateactions</a></dt>
+<dd>
+<div class="block"><div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setInterfaceId--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
+    final String interfaceId =randomKey();
+    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetInterfaceId.of(interfaceId)));
+
+    assertThat(updatedPayment.getInterfaceId()).isEqualTo(interfaceId);
+
+    return updatedPayment;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/payments/commands/PaymentUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+</dd>
 <dt><a href="io/sphere/sdk/carts/commands/updateactions/SetLineItemCustomField.html" title="class in io.sphere.sdk.carts.commands.updateactions"><span class="typeNameLink">SetLineItemCustomField</span></a> - Class in <a href="io/sphere/sdk/carts/commands/updateactions/package-summary.html">io.sphere.sdk.carts.commands.updateactions</a></dt>
 <dd>
 <div class="block">Updates a custom field in a line item.</div>

@@ -128,7 +128,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <p>See also <a href="../PaymentUpdateCommand.html">PaymentUpdateCommand</a>.<p>
 
- <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setCustomer--%s" class=code-example><pre><code class='java'>CustomerFixtures.withCustomer(client(), customer -&gt; {
+ <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setCustomer--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
     withPayment(client(), payment -&gt; {
         assertThat(payment.getCustomer()).isNotEqualTo(customer.toReference());
 
