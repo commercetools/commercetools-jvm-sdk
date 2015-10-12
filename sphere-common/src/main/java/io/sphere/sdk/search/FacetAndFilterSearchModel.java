@@ -9,17 +9,17 @@ import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.StreamSupport.stream;
 
-public class FacetedSearchModel<T> extends SearchModelImpl<T> {
+public class FacetAndFilterSearchModel<T> extends SearchModelImpl<T> {
     @Nullable
     protected final String alias;
     protected final TypeSerializer<String> typeSerializer = TypeSerializer.ofString();
 
-    public FacetedSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final String alias) {
+    public FacetAndFilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final String alias) {
         super(parent, pathSegment);
         this.alias = alias;
     }
 
-    public FacetedSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
+    public FacetAndFilterSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
         super(parent, pathSegment);
         this.alias = null;
     }
@@ -29,8 +29,8 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      * @param alias the identifier to use for the facet
      * @return a new faceted search model identical to the current one, but with the given alias
      */
-    public FacetedSearchModel<T> withAlias(final String alias) {
-        return new FacetedSearchModel<>(this, null, alias);
+    public FacetAndFilterSearchModel<T> withAlias(final String alias) {
+        return new FacetAndFilterSearchModel<>(this, null, alias);
     }
 
     /**
@@ -38,7 +38,7 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      * @return a faceted search expression
      */
 
-    public TermFacetedSearchExpression<T> allTerms() {
+    public TermFacetAndFilterSearchExpression<T> allTerms() {
         return termFacetedSearchOf(emptyList());
     }
 
@@ -46,7 +46,7 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      * Generates a range facet expression for the attribute, with no filter expression associated.
      * @return a faceted search expression
      */
-    public RangeFacetedSearchExpression<T> allRanges() {
+    public RangeFacetAndFilterSearchExpression<T> allRanges() {
         return rangeFacetedSearchOf(emptyList());
     }
 
@@ -56,7 +56,7 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      * @return a faceted search expression for the given value
      * @see FilterSearchModel#by(Object)
      */
-    public TermFacetedSearchExpression<T> by(final String value) {
+    public TermFacetAndFilterSearchExpression<T> by(final String value) {
         return termFacetedSearchOf(filterByTerm(value));
     }
 
@@ -66,7 +66,7 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      * @return a faceted search expression for the given values
      * @see FilterSearchModel#byAny(Iterable)
      */
-    public TermFacetedSearchExpression<T> byAny(final Iterable<String> values) {
+    public TermFacetAndFilterSearchExpression<T> byAny(final Iterable<String> values) {
         return termFacetedSearchOf(filterByTerm(values));
     }
 
@@ -76,7 +76,7 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      * @return a faceted search expression for the given values
      * @see FilterSearchModel#byAll(Iterable)
      */
-    public TermFacetedSearchExpression<T> byAll(final Iterable<String> values) {
+    public TermFacetAndFilterSearchExpression<T> byAll(final Iterable<String> values) {
         final List<FilterExpression<T>> filterExpressions = stream(values.spliterator(), false)
                 .map(value -> filterByTerm(value))
                 .collect(toList());
@@ -89,7 +89,7 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      * @return a faceted search expression for the given range
      * @see RangedFilterSearchModel#byRange(FilterRange)
      */
-    public RangeFacetedSearchExpression<T> byRange(final FilterRange<String> range) {
+    public RangeFacetAndFilterSearchExpression<T> byRange(final FilterRange<String> range) {
         return rangeFacetedSearchOf(filterByRange(range));
     }
 
@@ -99,7 +99,7 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      * @return a faceted search expression for the given ranges
      * @see RangedFilterSearchModel#byAllRanges(Iterable)
      */
-    public RangeFacetedSearchExpression<T> byAnyRange(final Iterable<FilterRange<String>> ranges) {
+    public RangeFacetAndFilterSearchExpression<T> byAnyRange(final Iterable<FilterRange<String>> ranges) {
         return rangeFacetedSearchOf(filterByRange(ranges));
     }
 
@@ -109,7 +109,7 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      * @return a faceted search expression for the given ranges
      * @see RangedFilterSearchModel#byAllRanges(Iterable)
      */
-    public RangeFacetedSearchExpression<T> byAllRanges(final Iterable<FilterRange<String>> ranges) {
+    public RangeFacetAndFilterSearchExpression<T> byAllRanges(final Iterable<FilterRange<String>> ranges) {
         final List<FilterExpression<T>> filterExpressions = stream(ranges.spliterator(), false)
                 .map(range -> filterByRange(range))
                 .collect(toList());
@@ -123,7 +123,7 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
      * @return a faceted search expression for the given range
      * @see RangedFilterSearchModel#byRange(Comparable, Comparable)
      */
-    public RangeFacetedSearchExpression<T> byRange(final String lowerEndpoint, final String upperEndpoint) {
+    public RangeFacetAndFilterSearchExpression<T> byRange(final String lowerEndpoint, final String upperEndpoint) {
         final FilterRange<String> range = FilterRange.of(lowerEndpoint, upperEndpoint);
         return rangeFacetedSearchOf(filterByRange(range));
     }
@@ -144,24 +144,24 @@ public class FacetedSearchModel<T> extends SearchModelImpl<T> {
         return new RangeFilterExpression<>(this, typeSerializer, ranges);
     }
 
-    private TermFacetedSearchExpression<T> termFacetedSearchOf(final FilterExpression<T> filterExpression) {
+    private TermFacetAndFilterSearchExpression<T> termFacetedSearchOf(final FilterExpression<T> filterExpression) {
         return termFacetedSearchOf(singletonList(filterExpression));
     }
 
-    private TermFacetedSearchExpression<T> termFacetedSearchOf(final List<FilterExpression<T>> filterExpressions) {
+    private TermFacetAndFilterSearchExpression<T> termFacetedSearchOf(final List<FilterExpression<T>> filterExpressions) {
         final TermFacetExpression<T> facetExpression = new TermFacetExpressionImpl<>(this, typeSerializer, alias);
-        return new TermFacetedSearchExpressionImpl<>(facetExpression, filterExpressions);
+        return new TermFacetAndFilterSearchExpressionImpl<>(facetExpression, filterExpressions);
     }
 
-    private RangeFacetedSearchExpression<T> rangeFacetedSearchOf(final FilterExpression<T> filterExpression) {
+    private RangeFacetAndFilterSearchExpression<T> rangeFacetedSearchOf(final FilterExpression<T> filterExpression) {
         return rangeFacetedSearchOf(singletonList(filterExpression));
     }
 
-    private RangeFacetedSearchExpression<T> rangeFacetedSearchOf(final List<FilterExpression<T>> filterExpressions) {
+    private RangeFacetAndFilterSearchExpression<T> rangeFacetedSearchOf(final List<FilterExpression<T>> filterExpressions) {
         // Unable to request (* to *), from 0 to * will at least cover all positive numbers - typical usage.
         // If negative values are in the scope, then please use facet/filter expressions instead.
         final List<FacetRange<String>> ranges = singletonList(atLeast("0"));
         final RangeFacetExpression<T> facetExpression = new RangeFacetExpressionImpl<>(this, typeSerializer, ranges, alias);
-        return new RangeFacetedSearchExpressionImpl<>(facetExpression, filterExpressions);
+        return new RangeFacetAndFilterSearchExpressionImpl<>(facetExpression, filterExpressions);
     }
 }

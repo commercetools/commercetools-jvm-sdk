@@ -21,8 +21,8 @@ public class MoneyCentAmountSearchModel<T, S extends DirectionlessSearchSortMode
     }
 
     @Override
-    public FacetedSearchModel<T> facetedSearch() {
-        return super.facetedSearch();
+    public FacetAndFilterSearchModel<T> facetedAndFiltered() {
+        return super.facetedAndFiltered();
     }
 
     @Override

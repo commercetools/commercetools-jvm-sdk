@@ -79,10 +79,11 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T>
     /**
      * Returns an EntitySearch with the new faceted search expressions appended to the existing faceted search expressions.
      * A faceted expression is equivalent to use facet, facetFilters and resultFilters with the given facet and filters expressions.
-     * @param facetedSearchExpression the new faceted search expression
+     * Therefore calling afterwards {@link this#withFacets}, {@link this#withFacetFilters} or {@link this#withResultFilters} will break this feature!
+     * @param facetAndFilterSearchExpression the new faceted search expression
      * @return an EntitySearch with the existing faceted search expressions plus the new faceted search expression.
      */
-    C plusFacetedSearch(final FacetedSearchExpression<T> facetedSearchExpression);
+    C plusFacetedSearch(final FacetAndFilterSearchExpression<T> facetAndFilterSearchExpression);
 
     /**
      * Returns an EntityQuery with the new sort expressions.

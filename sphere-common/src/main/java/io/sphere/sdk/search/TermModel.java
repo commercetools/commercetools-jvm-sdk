@@ -19,6 +19,6 @@ public interface TermModel<T, V> {
      * in both cases using the same attribute path. The model requires simple Strings, to allow maximal flexibility.
      * @return the faceted search model for this instance
      */
-    FacetedSearchModel<T> facetedSearch();
+    FacetAndFilterSearchModel<T> facetedAndFiltered();
 
 }

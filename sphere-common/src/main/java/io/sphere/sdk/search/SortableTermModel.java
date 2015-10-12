@@ -9,7 +9,7 @@ abstract class SortableTermModel<T, S extends DirectionlessSearchSortModel<T>, V
     }
 
     @Override
-    public FacetedSearchModel<T> facetedSearch() {
-        return new FacetedSearchModel<>(this, null);
+    public FacetAndFilterSearchModel<T> facetedAndFiltered() {
+        return new FacetAndFilterSearchModel<>(this, null);
     }
 }

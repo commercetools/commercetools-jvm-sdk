@@ -19,8 +19,8 @@ public class BooleanSearchModel<T, S extends DirectionlessSearchSortModel<T>> ex
     }
 
     @Override
-    public FacetedSearchModel<T> facetedSearch() {
-        return super.facetedSearch();
+    public FacetAndFilterSearchModel<T> facetedAndFiltered() {
+        return super.facetedAndFiltered();
     }
 
     /**

@@ -201,7 +201,7 @@ public class ProductProjectionSearchTest {
 
     @Test
     public void canCreateFacetedSearchExpressions() throws Exception {
-        final FacetedSearchExpression<ProductProjection> facetedSearch = attributeModel().ofDate("expirationDate").facetedSearch().by("2001-09-11");
+        final FacetAndFilterSearchExpression<ProductProjection> facetedSearch = attributeModel().ofDate("expirationDate").facetedAndFiltered().by("2001-09-11");
         assertThat(facetedSearch.facetExpression().expression()).isEqualTo("variants.attributes.expirationDate");
         assertThat(facetedSearch.filterExpressions()).extracting(expression()).containsExactly("variants.attributes.expirationDate:\"2001-09-11\"");
     }

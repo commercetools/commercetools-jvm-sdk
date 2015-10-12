@@ -20,8 +20,8 @@ public class DateSearchModel<T, S extends DirectionlessSearchSortModel<T>> exten
     }
 
     @Override
-    public FacetedSearchModel<T> facetedSearch() {
-        return super.facetedSearch();
+    public FacetAndFilterSearchModel<T> facetedAndFiltered() {
+        return super.facetedAndFiltered();
     }
 
     @Override

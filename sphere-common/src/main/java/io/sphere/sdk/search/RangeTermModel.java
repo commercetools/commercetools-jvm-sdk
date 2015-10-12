@@ -22,5 +22,5 @@ public interface RangeTermModel<T, V extends Comparable<? super V>> extends Term
      * @return the faceted search model for this instance
      */
     @Override
-    FacetedSearchModel<T> facetedSearch();
+    FacetAndFilterSearchModel<T> facetedAndFiltered();
 }

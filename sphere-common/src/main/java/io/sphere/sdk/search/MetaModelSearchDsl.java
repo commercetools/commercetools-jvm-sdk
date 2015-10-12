@@ -30,7 +30,7 @@ public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S, E>,
 
     C plusFacetFilters(final Function<S, List<FilterExpression<T>>> m);
 
-    C plusFacetedSearch(final Function<S, FacetedSearchExpression<T>> m);
+    C plusFacetedSearch(final Function<S, FacetAndFilterSearchExpression<T>> m);
 
     C withSort(final Function<S, SortExpression<T>> m);
 

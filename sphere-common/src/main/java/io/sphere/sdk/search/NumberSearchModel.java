@@ -20,8 +20,8 @@ public class NumberSearchModel<T, S extends DirectionlessSearchSortModel<T>> ext
     }
 
     @Override
-    public FacetedSearchModel<T> facetedSearch() {
-        return super.facetedSearch();
+    public FacetAndFilterSearchModel<T> facetedAndFiltered() {
+        return super.facetedAndFiltered();
     }
 
     @Override

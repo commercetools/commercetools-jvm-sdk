@@ -7,7 +7,7 @@ import java.util.List;
  * Example: facet of variants.attributes.height:range(0 to *) and filtering variants.attributes.height:range(4 to 50)
  * @param <T> Type of the resource for the faceted search
  */
-public interface RangeFacetedSearchExpression<T> extends FacetedSearchExpression<T> {
+public interface RangeFacetAndFilterSearchExpression<T> extends FacetAndFilterSearchExpression<T> {
 
     /**
      * Returns a facet expression.
@@ -15,7 +15,7 @@ public interface RangeFacetedSearchExpression<T> extends FacetedSearchExpression
      */
     RangeFacetExpression<T> facetExpression();
 
-    static <T> RangeFacetedSearchExpression<T> of(final RangeFacetExpression<T> facetExpression, final List<FilterExpression<T>> filterExpressions) {
-        return new RangeFacetedSearchExpressionImpl<>(facetExpression, filterExpressions);
+    static <T> RangeFacetAndFilterSearchExpression<T> of(final RangeFacetExpression<T> facetExpression, final List<FilterExpression<T>> filterExpressions) {
+        return new RangeFacetAndFilterSearchExpressionImpl<>(facetExpression, filterExpressions);
     }
 }

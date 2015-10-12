@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static java.util.Collections.emptyList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductProjectionSearchFacetedSearchIntegrationTest extends ProductProjectionSearchIntegrationTest {
@@ -18,8 +19,8 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
     @Test
     public void facetedSearch() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .plusFacetedSearch(model -> model.allVariants().attribute().ofString(ATTR_NAME_SIZE).facetedSearch().allTerms())
-                .plusFacetedSearch(model -> model.allVariants().attribute().ofString(ATTR_NAME_COLOR).facetedSearch().by("red"));
+                .plusFacetedSearch(model -> model.allVariants().attribute().ofString(ATTR_NAME_SIZE).facetedAndFiltered().allTerms())
+                .plusFacetedSearch(model -> model.allVariants().attribute().ofString(ATTR_NAME_COLOR).facetedAndFiltered().by("red"));
         testResult(search,
                 ids -> assertThat(ids).containsOnly(product2.getId()),
                 colors -> assertThat(colors).containsOnly(TermStats.of("blue", 2), TermStats.of("red", 1)),
