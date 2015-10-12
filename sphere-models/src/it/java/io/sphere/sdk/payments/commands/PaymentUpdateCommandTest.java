@@ -6,6 +6,8 @@ import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.commands.updateactions.*;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.types.CustomFieldsDraft;
+import io.sphere.sdk.types.TypeFixtures;
 import io.sphere.sdk.utils.MoneyImpl;
 import org.junit.Test;
 
@@ -19,6 +21,8 @@ import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PAYMENT_STATE;
 import static io.sphere.sdk.test.SphereTestUtils.*;
+import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
+import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class PaymentUpdateCommandTest extends IntegrationTest {
@@ -187,6 +191,28 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             assertThat(updatedPayment.getPaymentMethodInfo().getPaymentInterface()).isEqualTo(methodInfoInterface);
 
             return updatedPayment;
+        });
+    }
+
+    @Test
+    public void setCustomType() {
+        TypeFixtures.withUpdateableType(client(), type -> {
+            withPayment(client(), payment -> {
+                final String value = randomKey();
+                final SetCustomType updateAction = SetCustomType
+                        .ofTypeIdAndObjects(type.getId(), singletonMap(STRING_FIELD_NAME, "foo"));
+                final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, updateAction));
+
+                assertThat(updatedPayment.getCustom().getFieldAsString(STRING_FIELD_NAME)).isEqualTo("foo");
+
+                final Payment updatedPayment2 = execute(PaymentUpdateCommand.of(updatedPayment,
+                        SetCustomField.ofObject(STRING_FIELD_NAME, "bar")));
+
+                assertThat(updatedPayment2.getCustom().getFieldAsString(STRING_FIELD_NAME)).isEqualTo("bar");
+
+                return updatedPayment2;
+            });
+            return type;
         });
     }
 
