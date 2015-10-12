@@ -6,8 +6,13 @@ import io.sphere.sdk.payments.Payment;
 import javax.annotation.Nullable;
 
 /**
+ * Sets a text, given by the PSP, that describes the current status.
+ *
+ * {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#setStatusInterfaceText()}
+ *
+ *  @see Payment
  */
 public class SetStatusInterfaceText extends UpdateActionImpl<Payment> {
 
