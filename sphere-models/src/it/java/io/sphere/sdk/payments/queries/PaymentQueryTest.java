@@ -4,6 +4,7 @@ import io.sphere.sdk.customers.CustomerFixtures;
 import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.commands.PaymentCreateCommand;
 import io.sphere.sdk.payments.commands.PaymentDeleteCommand;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.TypeFixtures;
@@ -79,11 +80,15 @@ public class PaymentQueryTest extends IntegrationTest {
                                             .and(m.paymentStatus().state().is(paidState))
                                     .and(m.transactions().amount().currencyCode().is(totalAmount.getCurrency()))
                                     .and(m.transactions().interactionId().is(transactions.get(0).getInteractionId()))
+                            )
+                            .withExpansionPaths(m -> m.customer())
+                            .plusExpansionPaths(m -> m.paymentStatus().state());
 
-
-                            );
-
-                    assertThat(execute(paymentQuery)).has(onlyTheResult(payment));
+                    final PagedQueryResult<Payment> pagedQueryResult = execute(paymentQuery);
+                    assertThat(pagedQueryResult).has(onlyTheResult(payment));
+                    final Payment loadedPayment = pagedQueryResult.head().get();
+                    assertThat(loadedPayment.getCustomer()).is(expanded(customer));
+                    assertThat(loadedPayment.getPaymentStatus().getState()).is(expanded(paidState));
 
                     execute(PaymentDeleteCommand.of(payment));
                 }));
