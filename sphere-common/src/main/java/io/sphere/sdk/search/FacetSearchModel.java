@@ -35,8 +35,8 @@ public class FacetSearchModel<T, V> extends SearchModelImpl<T> {
      * For example: a possible faceted classification could be ["red": 4, "yellow": 2, "blue": 1].
      * @return a facet expression for all values
      */
-    public FacetExpression<T> byAllTerms() {
-        return new TermFacetExpression<>(this, typeSerializer, alias);
+    public TermFacetExpression<T> byAllTerms() {
+        return new TermFacetExpressionImpl<>(this, typeSerializer, alias);
     }
 
     /**
@@ -45,7 +45,7 @@ public class FacetSearchModel<T, V> extends SearchModelImpl<T> {
      * @param value the value from which to obtain the facet
      * @return a facet expression for only the given value
      */
-    public FacetExpression<T> byTerm(final V value) {
+    public FilteredFacetExpression<T> byTerm(final V value) {
         return byTerm(singletonList(value));
     }
 
@@ -55,7 +55,7 @@ public class FacetSearchModel<T, V> extends SearchModelImpl<T> {
      * @param values the values from which to obtain the facets
      * @return a facet expression for only the given values
      */
-    public FacetExpression<T> byTerm(final Iterable<V> values) {
-        return new FilteredFacetExpression<>(this, typeSerializer, values, alias);
+    public FilteredFacetExpression<T> byTerm(final Iterable<V> values) {
+        return new FilteredFacetExpressionImpl<>(this, typeSerializer, values, alias);
     }
 }

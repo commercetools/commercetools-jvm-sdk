@@ -30,7 +30,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         return facets.get(facetResultPath);
     }
 
-    public TermFacetResult getTermFacetResult(final FacetExpression<T> facetExpression) {
+    public TermFacetResult getTermFacetResult(final TermFacetExpression<T> facetExpression) {
         return getTermFacetResult(facetExpression.resultPath());
     }
 
@@ -44,7 +44,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         }).orElse(null);
     }
 
-    public RangeFacetResult getRangeFacetResult(final FacetExpression<T> facetExpression) {
+    public RangeFacetResult getRangeFacetResult(final RangeFacetExpression<T> facetExpression) {
         return getRangeFacetResult(facetExpression.resultPath());
     }
 
@@ -58,7 +58,7 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         }).orElse(null);
     }
 
-    public FilteredFacetResult getFilteredFacetResult(final FacetExpression<T> facetExpression) {
+    public FilteredFacetResult getFilteredFacetResult(final FilteredFacetExpression<T> facetExpression) {
         return getFilteredFacetResult(facetExpression.resultPath());
     }
 

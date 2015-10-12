@@ -31,7 +31,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsTermFacetExpression() throws Exception {
-        final TermFacetExpression<Object, String> facet = new TermFacetExpression<>(model(), ofString(), null);
+        final TermFacetExpression<Object> facet = new TermFacetExpressionImpl<>(model(), ofString(), null);
         assertThat(facet.expression()).isEqualTo("variants.attributes.size");
         assertThat(facet.resultPath()).isEqualTo("variants.attributes.size");
         assertThat(facet.attributePath()).isEqualTo("variants.attributes.size");
@@ -39,7 +39,7 @@ public class SearchExpressionTest {
 
     @Test
     public void buildsTermFacetExpressionWithAlias() throws Exception {
-        final TermFacetExpression<Object, String> facet = new TermFacetExpression<>(model(), ofString(), "my-facet");
+        final TermFacetExpression<Object> facet = new TermFacetExpressionImpl<>(model(), ofString(), "my-facet");
         assertThat(facet.expression()).isEqualTo("variants.attributes.size as my-facet");
         assertThat(facet.resultPath()).isEqualTo("my-facet");
         assertThat(facet.attributePath()).isEqualTo("variants.attributes.size");
@@ -48,7 +48,7 @@ public class SearchExpressionTest {
     @Test
     public void buildsFilteredFacetExpression() throws Exception {
         List<String> terms = asList("foo", "bar");
-        final FilteredFacetExpression<Object, String> facet = new FilteredFacetExpression<>(model(), ofString(), terms, null);
+        final FilteredFacetExpression<Object> facet = new FilteredFacetExpressionImpl<>(model(), ofString(), terms, null);
         assertThat(facet.expression()).isEqualTo("variants.attributes.size:\"foo\",\"bar\"");
         assertThat(facet.resultPath()).isEqualTo("variants.attributes.size");
         assertThat(facet.attributePath()).isEqualTo("variants.attributes.size");
@@ -57,7 +57,7 @@ public class SearchExpressionTest {
     @Test
     public void buildsFilteredFacetExpressionWithAlias() throws Exception {
         List<String> terms = asList("foo", "bar");
-        final FilteredFacetExpression<Object, String> facet = new FilteredFacetExpression<>(model(), ofString(), terms, "my-facet");
+        final FilteredFacetExpression<Object> facet = new FilteredFacetExpressionImpl<>(model(), ofString(), terms, "my-facet");
         assertThat(facet.expression()).isEqualTo("variants.attributes.size:\"foo\",\"bar\" as my-facet");
         assertThat(facet.resultPath()).isEqualTo("my-facet");
         assertThat(facet.attributePath()).isEqualTo("variants.attributes.size");
@@ -66,7 +66,7 @@ public class SearchExpressionTest {
     @Test
     public void buildsRangeFacetExpression() throws Exception {
         List<FacetRange<BigDecimal>> ranges = asList(FacetRange.lessThan(valueOf(5)), FacetRange.atLeast(valueOf(3)), FacetRange.of(valueOf(5), valueOf(10)));
-        final RangeFacetExpression<Object, BigDecimal> facet = new RangeFacetExpression<>(model(), ofNumber(), ranges, null);
+        final RangeFacetExpression<Object> facet = new RangeFacetExpressionImpl<>(model(), ofNumber(), ranges, null);
         assertThat(facet.expression()).isEqualTo("variants.attributes.size:range(* to 5),(3 to *),(5 to 10)");
         assertThat(facet.resultPath()).isEqualTo("variants.attributes.size");
         assertThat(facet.attributePath()).isEqualTo("variants.attributes.size");
@@ -75,7 +75,7 @@ public class SearchExpressionTest {
     @Test
     public void buildsRangeFacetExpressionWithAlias() throws Exception {
         List<FacetRange<BigDecimal>> ranges = asList(FacetRange.lessThan(valueOf(5)), FacetRange.atLeast(valueOf(3)), FacetRange.of(valueOf(5), valueOf(10)));
-        final RangeFacetExpression<Object, BigDecimal> facet = new RangeFacetExpression<>(model(), ofNumber(), ranges, "my-facet");
+        final RangeFacetExpression<Object> facet = new RangeFacetExpressionImpl<>(model(), ofNumber(), ranges, "my-facet");
         assertThat(facet.expression()).isEqualTo("variants.attributes.size:range(* to 5),(3 to *),(5 to 10) as my-facet");
         assertThat(facet.resultPath()).isEqualTo("my-facet");
         assertThat(facet.attributePath()).isEqualTo("variants.attributes.size");

@@ -13,11 +13,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class MetaModelSearchDslTest {
     private static final SortExpression<Object> SORT_EXPR_ONE = SortExpression.of("sort-one");
     private static final SortExpression<Object> SORT_EXPR_TWO = SortExpression.of("sort-two");
-    private static final FacetExpression<Object> FACET_EXPR_ONE = FacetExpression.of("facet-one");
-    private static final FacetExpression<Object> FACET_EXPR_TWO = FacetExpression.of("facet-two");
+    private static final TermFacetExpression<Object> FACET_EXPR_ONE = TermFacetExpression.of("facet-one");
+    private static final TermFacetExpression<Object> FACET_EXPR_TWO = TermFacetExpression.of("facet-two");
     private static final FilterExpression<Object> FILTER_EXPR_ONE = FilterExpression.of("filter-one");
     private static final FilterExpression<Object> FILTER_EXPR_TWO = FilterExpression.of("filter-two");
-    private static final FacetedSearchExpression<Object> FACETED_SEARCH_EXPR = FacetedSearchExpression.of(FACET_EXPR_ONE, singletonList(FILTER_EXPR_ONE));
+    private static final FacetedSearchExpression<Object> FACETED_SEARCH_EXPR = TermFacetedSearchExpression.of(FACET_EXPR_ONE, singletonList(FILTER_EXPR_ONE));
     private static final ExpansionPath<Object> EXPANSION_PATH_ONE = ExpansionPath.of("expansion-one");
     private static final ExpansionPath<Object> EXPANSION_PATH_TWO = ExpansionPath.of("expansion-two");
 

@@ -1,10 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.search.FacetedSearchExpression;
-import io.sphere.sdk.search.PagedSearchResult;
-import io.sphere.sdk.search.RangeStats;
-import io.sphere.sdk.search.TermStats;
+import io.sphere.sdk.search.*;
 import org.junit.Test;
 
 import java.util.List;
@@ -419,14 +416,14 @@ public class ProductProjectionSearchModelFacetedSearchIntegrationTest extends Pr
                         TermStats.of(productOtherId.getId(), 1)));
     }
 
-    private static void testResultWithTerms(final FacetedSearchExpression<ProductProjection> facetedSearchExpr,
-                                       final Consumer<List<String>> testFilter, final Consumer<List<TermStats>> testTerms) {
+    private static void testResultWithTerms(final TermFacetedSearchExpression<ProductProjection> facetedSearchExpr,
+                                            final Consumer<List<String>> testFilter, final Consumer<List<TermStats>> testTerms) {
         final PagedSearchResult<ProductProjection> result = executeFacetedSearch(facetedSearchExpr, testFilter);
         testTerms.accept(result.getTermFacetResult(facetedSearchExpr.facetExpression()).getTerms());
     }
 
-    private static void testResultWithRange(final FacetedSearchExpression<ProductProjection> facetedSearchExpr,
-                                       final Consumer<List<String>> testFilter, final Consumer<RangeStats> rangeStats) {
+    private static void testResultWithRange(final RangeFacetedSearchExpression<ProductProjection> facetedSearchExpr,
+                                            final Consumer<List<String>> testFilter, final Consumer<RangeStats> rangeStats) {
         final PagedSearchResult<ProductProjection> result = executeFacetedSearch(facetedSearchExpr, testFilter);
         rangeStats.accept(result.getRangeFacetResult(facetedSearchExpr.facetExpression()).getRanges().get(0));
     }

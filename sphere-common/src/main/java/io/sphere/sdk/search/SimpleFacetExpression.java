@@ -3,7 +3,7 @@ package io.sphere.sdk.search;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-final class SimpleFacetExpression<T> extends SimpleBaseExpression implements FacetExpression<T> {
+abstract class SimpleFacetExpression<T> extends SimpleBaseExpression implements FacetExpression<T> {
     private final String sphereFacetExpression;
 
     SimpleFacetExpression(final String sphereFacetExpression) {

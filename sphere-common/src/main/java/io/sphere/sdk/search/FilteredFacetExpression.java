@@ -1,15 +1,13 @@
 package io.sphere.sdk.search;
 
-import javax.annotation.Nullable;
+/**
+ * Filtered facets calculate statistical count for all given values.
+ * Example: variants.attributes.color:"red","green"
+ * @param <T> Type of the resource for the facet
+ */
+public interface FilteredFacetExpression<T> extends FacetExpression<T> {
 
-class FilteredFacetExpression<T, V> extends TermExpression<T, V> implements FacetExpression<T> {
-
-    FilteredFacetExpression(final SearchModel<T> searchModel, final TypeSerializer<V> typeSerializer, final Iterable<V> terms, @Nullable final String alias) {
-        super(searchModel, typeSerializer, terms, alias);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        return o != null && o instanceof FacetExpression && expression().equals(((FacetExpression) o).expression());
+    static <T> FilteredFacetExpression<T> of(final String sphereFacetExpression) {
+        return new SimpleFilteredFacetExpression<>(sphereFacetExpression);
     }
 }

@@ -1,10 +1,7 @@
 package io.sphere.sdk.products.search;
 
 import io.sphere.sdk.products.ProductProjection;
-import io.sphere.sdk.search.FacetExpression;
-import io.sphere.sdk.search.PagedSearchResult;
-import io.sphere.sdk.search.RangeStats;
-import io.sphere.sdk.search.TermStats;
+import io.sphere.sdk.search.*;
 import org.junit.Test;
 
 import java.util.List;
@@ -380,13 +377,13 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
                         TermStats.of(productOtherId.getId(), 1)));
     }
 
-    private static void testTermStats(final FacetExpression<ProductProjection> facetExpr,
+    private static void testTermStats(final TermFacetExpression<ProductProjection> facetExpr,
                                       final Consumer<List<TermStats>> test) {
         final List<TermStats> termStats = executeSearchWithFacets(facetExpr).getTermFacetResult(facetExpr).getTerms();
         test.accept(termStats);
     }
 
-    private static void testRangeStats(final FacetExpression<ProductProjection> facetExpr,
+    private static void testRangeStats(final RangeFacetExpression<ProductProjection> facetExpr,
                                        final Consumer<RangeStats> test) {
         final List<RangeStats> ranges = executeSearchWithFacets(facetExpr).getRangeFacetResult(facetExpr).getRanges();
         assertThat(ranges).hasSize(1);

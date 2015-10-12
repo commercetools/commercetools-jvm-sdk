@@ -3,7 +3,7 @@ package io.sphere.sdk.search;
 /**
  * Facets calculate statistical counts to aid in faceted navigation.
  * Example: variants.attributes.color:"green","yellow"
- * @param <T> Type of the resource for the faceted search
+ * @param <T> Type of the resource for the facet
  */
 public interface FacetExpression<T> extends SearchExpression<T> {
 
@@ -13,8 +13,4 @@ public interface FacetExpression<T> extends SearchExpression<T> {
      * @return the path to access the facet result.
      */
     String resultPath();
-
-    static <T> FacetExpression<T> of(final String sphereFacetExpression) {
-        return new SimpleFacetExpression<>(sphereFacetExpression);
-    }
 }

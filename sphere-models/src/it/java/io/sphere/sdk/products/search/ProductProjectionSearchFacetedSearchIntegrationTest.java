@@ -81,8 +81,8 @@ public class ProductProjectionSearchFacetedSearchIntegrationTest extends Product
                                    final Consumer<List<TermStats>> testSizes) {
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         testFilter.accept(toIds(result.getResults()));
-        final FacetExpression<ProductProjection> colorFacetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
-        final FacetExpression<ProductProjection> sizeFacetExpr = model().allVariants().attribute().ofString(ATTR_NAME_SIZE).faceted().byAllTerms();
+        final TermFacetExpression<ProductProjection> colorFacetExpr = model().allVariants().attribute().ofString(ATTR_NAME_COLOR).faceted().byAllTerms();
+        final TermFacetExpression<ProductProjection> sizeFacetExpr = model().allVariants().attribute().ofString(ATTR_NAME_SIZE).faceted().byAllTerms();
         testColors.accept(result.getTermFacetResult(colorFacetExpr).getTerms());
         testSizes.accept(result.getTermFacetResult(sizeFacetExpr).getTerms());
     }

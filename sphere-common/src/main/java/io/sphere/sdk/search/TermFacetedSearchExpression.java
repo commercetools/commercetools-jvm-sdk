@@ -7,17 +7,15 @@ import java.util.List;
  * Example: facet of variants.attributes.color and filtering variants.attributes.color:"green","yellow"
  * @param <T> Type of the resource for the faceted search
  */
-public interface FacetedSearchExpression<T> {
+public interface TermFacetedSearchExpression<T> extends FacetedSearchExpression<T> {
 
     /**
      * Returns a facet expression.
      * @return facet expression
      */
-    FacetExpression<T> facetExpression();
+    TermFacetExpression<T> facetExpression();
 
-    /**
-     * Returns a list of filter expressions.
-     * @return List of filter expressions
-     */
-    List<FilterExpression<T>> filterExpressions();
+    static <T> TermFacetedSearchExpression<T> of(final TermFacetExpression<T> facetExpression, final List<FilterExpression<T>> filterExpressions) {
+        return new TermFacetedSearchExpressionImpl<>(facetExpression, filterExpressions);
+    }
 }
