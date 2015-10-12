@@ -6,6 +6,17 @@ import io.sphere.sdk.payments.Payment;
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 
+/**
+ * Sets the amount of money that has been paid by the customer. If no amount is provided, the amount is unset.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#setAuthorization()} <!-- sic! -->
+ *
+ * @see Payment
+ *
+ *
+ */
 public class SetAmountPaid extends UpdateActionImpl<Payment> {
     @Nullable
     private final MonetaryAmount amount;

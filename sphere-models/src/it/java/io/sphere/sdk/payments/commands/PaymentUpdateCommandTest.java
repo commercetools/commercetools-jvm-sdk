@@ -34,7 +34,7 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             assertThat(updatedPayment.getAuthorizedUntil()).isEqualTo(until);
             assertThat(updatedPayment.getAmountPaid()).isNull();
 
-            //remove authorization
+            //remove authorization, set amount paid
             final Payment updatedPayment2 = execute(PaymentUpdateCommand.of(updatedPayment, asList(SetAuthorization.ofRemove(), SetAmountPaid.of(totalAmount))));
 
             assertThat(updatedPayment2.getAmountAuthorized()).isNull();
