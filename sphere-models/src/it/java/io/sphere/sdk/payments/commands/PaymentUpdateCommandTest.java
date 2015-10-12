@@ -181,10 +181,10 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
     @Test
     public void setMethodInfoInterface() {
         withPayment(client(), payment -> {
-            final String stripe = "STRIPE";
-            final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetMethodInfoInterface.of(stripe)));
+            final String methodInfoInterface = randomKey();
+            final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetMethodInfoInterface.of(methodInfoInterface)));
 
-            assertThat(updatedPayment.getPaymentMethodInfo().getPaymentInterface()).isEqualTo(stripe);
+            assertThat(updatedPayment.getPaymentMethodInfo().getPaymentInterface()).isEqualTo(methodInfoInterface);
 
             return updatedPayment;
         });
@@ -195,7 +195,7 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
         withCustomerAndFilledCart(client(), (customer, cart) -> {
             final MonetaryAmount totalAmount = cart.getTotalPrice();
             final PaymentMethodInfo paymentMethodInfo = PaymentMethodInfoBuilder.of()
-                    .paymentInterface("STRIPE")
+                    .paymentInterface(randomKey())
                     .method("CREDIT_CARD")
                     .build();
             final Transaction chargeTransaction = TransactionBuilder
