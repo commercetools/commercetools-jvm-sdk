@@ -124,6 +124,46 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">SetAmountRefunded</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;</pre>
+<div class="block">Sets the amount of money that has been refunded to the customer. If no amount is provided, the amount is unset.
+
+ <p>See also <a href="../PaymentUpdateCommand.html">PaymentUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-refunded--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
+
+    final MonetaryAmount refundedAmount = payment.getAmountPlanned().divide(2);
+    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetAmountRefunded.of(refundedAmount)));
+
+    assertThat(updatedPayment.getAmountRefunded()).isEqualTo(refundedAmount);
+
+    return updatedPayment;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/payments/commands/PaymentUpdateCommandTest.java" target="_blank">test code</a>.</pre></div>
+
+ <p>Example with multiple refunds:</p>
+ <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-multiRefund--%s" class=code-example><pre><code class='java'>withPayment(client(), payBuilder -&gt; payBuilder.amountPaid(payBuilder.getAmountPlanned()), payment -&gt; {
+    final MonetaryAmount totalAmount = payment.getAmountPlanned();
+    assertThat(payment.getAmountPaid()).as("amount paid").isEqualTo(totalAmount);
+
+    final MonetaryAmount firstRefoundedAmount = totalAmount.scaleByPowerOfTen(-1);
+    final Payment firstRefoundPayment = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefoundedAmount))));
+
+    assertThat(firstRefoundPayment.getAmountRefunded()).as("first refunded").isEqualTo(firstRefoundedAmount);
+
+    final MonetaryAmount secondRefundedAmount = firstRefoundedAmount.multiply(2);
+    //important, because SetAmountRefunded sets the total value
+    final MonetaryAmount totalRefundedAmount = firstRefoundPayment.getAmountRefunded().add(secondRefundedAmount);
+
+    final Payment secondRefundPayment = execute(PaymentUpdateCommand.of(firstRefoundPayment, asList(SetAmountRefunded.of(totalRefundedAmount))));
+
+    assertThat(secondRefundPayment.getAmountRefunded()).as("total refunded").isEqualTo(totalRefundedAmount);
+
+    return secondRefundPayment;
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/payments/commands/PaymentUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments"><code>Payment</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>

@@ -124,6 +124,35 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public final class <span class="typeNameLabel">SetAuthorization</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;</pre>
+<div class="block">Sets the amount of money that has been authorized and optionally until when the authorization is valid. If no amount is provided, the authorization is unset.
+
+ <p>See also <a href="../PaymentUpdateCommand.html">PaymentUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-setAuthorization--%s" class=code-example><pre><code class='java'>withPayment(client(), payment -&gt; {
+    //set authorization
+    final MonetaryAmount totalAmount = EURO_30;
+    final ZonedDateTime until = ZonedDateTime.now().plusDays(7);
+    final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, SetAuthorization.of(totalAmount, until)));
+
+    assertThat(updatedPayment.getAmountAuthorized()).isEqualTo(totalAmount);
+    assertThat(updatedPayment.getAuthorizedUntil()).isEqualTo(until);
+    assertThat(updatedPayment.getAmountPaid()).isNull();
+
+    //remove authorization, set amount paid
+    final Payment updatedPayment2 = execute(PaymentUpdateCommand.of(updatedPayment, asList(SetAuthorization.ofRemove(), SetAmountPaid.of(totalAmount))));
+
+    assertThat(updatedPayment2.getAmountAuthorized()).isNull();
+    assertThat(updatedPayment2.getAuthorizedUntil()).isNull();
+    assertThat(updatedPayment2.getAmountPaid()).isEqualTo(totalAmount);
+
+    return updatedPayment2;
+});
+
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/payments/commands/PaymentUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments"><code>Payment</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
