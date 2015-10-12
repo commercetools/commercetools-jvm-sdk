@@ -163,7 +163,7 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search">FilteredFacetResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getFilteredFacetResult-io.sphere.sdk.search.FacetExpression-">getFilteredFacetResult</a></span>(<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getFilteredFacetResult-io.sphere.sdk.search.FilteredFacetExpression-">getFilteredFacetResult</a></span>(<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</code>&nbsp;</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search">FilteredFacetResult</a></code></td>
@@ -171,7 +171,7 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 </tr>
 <tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search">RangeFacetResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getRangeFacetResult-io.sphere.sdk.search.FacetExpression-">getRangeFacetResult</a></span>(<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getRangeFacetResult-io.sphere.sdk.search.RangeFacetExpression-">getRangeFacetResult</a></span>(<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="interface in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search">RangeFacetResult</a></code></td>
@@ -185,11 +185,11 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 </tr>
 <tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getTermFacetResult-io.sphere.sdk.search.FacetExpression-">getTermFacetResult</a></span>(<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getTermFacetResult-java.lang.String-">getTermFacetResult</a></span>(java.lang.String&nbsp;facetResultPath)</code>&nbsp;</td>
 </tr>
 <tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getTermFacetResult-java.lang.String-">getTermFacetResult</a></span>(java.lang.String&nbsp;facetResultPath)</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getTermFacetResult-io.sphere.sdk.search.TermFacetExpression-">getTermFacetResult</a></span>(<a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="interface in io.sphere.sdk.search">TermFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -264,13 +264,13 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FacetResult.html" title="interface in io.sphere.sdk.search">FacetResult</a>&nbsp;getFacetResult(java.lang.String&nbsp;facetResultPath)</pre>
 </li>
 </ul>
-<a name="getTermFacetResult-io.sphere.sdk.search.FacetExpression-">
+<a name="getTermFacetResult-io.sphere.sdk.search.TermFacetExpression-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getTermFacetResult</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a>&nbsp;getTermFacetResult(<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a>&nbsp;getTermFacetResult(<a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="interface in io.sphere.sdk.search">TermFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</pre>
 </li>
 </ul>
 <a name="getTermFacetResult-java.lang.String-">
@@ -282,13 +282,13 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search">TermFacetResult</a>&nbsp;getTermFacetResult(java.lang.String&nbsp;facetResultPath)</pre>
 </li>
 </ul>
-<a name="getRangeFacetResult-io.sphere.sdk.search.FacetExpression-">
+<a name="getRangeFacetResult-io.sphere.sdk.search.RangeFacetExpression-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getRangeFacetResult</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search">RangeFacetResult</a>&nbsp;getRangeFacetResult(<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search">RangeFacetResult</a>&nbsp;getRangeFacetResult(<a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="interface in io.sphere.sdk.search">RangeFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</pre>
 </li>
 </ul>
 <a name="getRangeFacetResult-java.lang.String-">
@@ -300,13 +300,13 @@ extends <a href="../../../../io/sphere/sdk/queries/PagedResult.html" title="clas
 <pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search">RangeFacetResult</a>&nbsp;getRangeFacetResult(java.lang.String&nbsp;facetResultPath)</pre>
 </li>
 </ul>
-<a name="getFilteredFacetResult-io.sphere.sdk.search.FacetExpression-">
+<a name="getFilteredFacetResult-io.sphere.sdk.search.FilteredFacetExpression-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>getFilteredFacetResult</h4>
-<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search">FilteredFacetResult</a>&nbsp;getFilteredFacetResult(<a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search">FacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</pre>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search">FilteredFacetResult</a>&nbsp;getFilteredFacetResult(<a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search">FilteredFacetExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="type parameter in PagedSearchResult">T</a>&gt;&nbsp;facetExpression)</pre>
 </li>
 </ul>
 <a name="getFilteredFacetResult-java.lang.String-">
