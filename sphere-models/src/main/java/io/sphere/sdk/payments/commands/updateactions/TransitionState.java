@@ -9,6 +9,15 @@ import io.sphere.sdk.states.State;
 import javax.annotation.Nullable;
 import java.util.Optional;
 
+/**
+ * Transition to a new state. If there is no state yet, the new state must be an initial state. If there is an existing state, there must be a direct transition from the existing state to the new state.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#transitionState()}
+ *
+ *  @see Payment
+ */
 public class TransitionState extends UpdateActionImpl<Payment> {
     @Nullable
     private final Reference<State> state;
