@@ -149,7 +149,7 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacetedSearch-io.sphere.sdk.search.FacetedSearchExpression-">plusFacetedSearch</a></span>(<a href="../../../../io/sphere/sdk/search/FacetedSearchExpression.html" title="interface in io.sphere.sdk.search">FacetedSearchExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;facetedSearchExpression)</code>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacetedSearch-io.sphere.sdk.search.FacetAndFilterSearchExpression-">plusFacetedSearch</a></span>(<a href="../../../../io/sphere/sdk/search/FacetAndFilterSearchExpression.html" title="interface in io.sphere.sdk.search">FacetAndFilterSearchExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;facetAndFilterSearchExpression)</code>
 <div class="block">Returns an EntitySearch with the new faceted search expressions appended to the existing faceted search expressions.</div>
 </td>
 </tr>
@@ -504,18 +504,19 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 </dl>
 </li>
 </ul>
-<a name="plusFacetedSearch-io.sphere.sdk.search.FacetedSearchExpression-">
+<a name="plusFacetedSearch-io.sphere.sdk.search.FacetAndFilterSearchExpression-">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>plusFacetedSearch</h4>
-<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;plusFacetedSearch(<a href="../../../../io/sphere/sdk/search/FacetedSearchExpression.html" title="interface in io.sphere.sdk.search">FacetedSearchExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;facetedSearchExpression)</pre>
+<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;plusFacetedSearch(<a href="../../../../io/sphere/sdk/search/FacetAndFilterSearchExpression.html" title="interface in io.sphere.sdk.search">FacetAndFilterSearchExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;facetAndFilterSearchExpression)</pre>
 <div class="block">Returns an EntitySearch with the new faceted search expressions appended to the existing faceted search expressions.
- A faceted expression is equivalent to use facet, facetFilters and resultFilters with the given facet and filters expressions.</div>
+ A faceted expression is equivalent to use facet, facetFilters and resultFilters with the given facet and filters expressions.
+ Therefore calling afterwards <code>this#withFacets</code>, <code>this#withFacetFilters</code> or <code>this#withResultFilters</code> will break this feature!</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>facetedSearchExpression</code> - the new faceted search expression</dd>
+<dd><code>facetAndFilterSearchExpression</code> - the new faceted search expression</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>an EntitySearch with the existing faceted search expressions plus the new faceted search expression.</dd>
 </dl>
