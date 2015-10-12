@@ -5,6 +5,18 @@ import io.sphere.sdk.payments.Payment;
 
 import javax.annotation.Nullable;
 
+/**
+ * Sets the method used, e.g. 'CreditCard' or 'Cash'. If no method is provided, the method is unset.
+ *
+ * {@doc.gen intro}
+ *
+ * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#setMethodInfoMethod()}
+ *
+ *
+ * @see Payment
+ *
+ *
+ */
 public class SetMethodInfoMethod extends UpdateActionImpl<Payment> {
 
     @Nullable
