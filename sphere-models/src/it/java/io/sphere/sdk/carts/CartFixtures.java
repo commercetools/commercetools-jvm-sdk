@@ -62,6 +62,12 @@ public class CartFixtures {
         });
     }
 
+    public static void withCart(final TestClient client, final UnaryOperator<Cart> operator) {
+        final Cart cart = createCartWithCountry(client);
+        final Cart cartToDelete = operator.apply(cart);
+        client.execute(CartDeleteCommand.of(cartToDelete));
+    }
+
     public static void withCart(final TestClient client, final Cart cart, final UnaryOperator<Cart> operator) {
         final Cart updatedCart = operator.apply(cart);
         client.execute(CartDeleteCommand.of(updatedCart));

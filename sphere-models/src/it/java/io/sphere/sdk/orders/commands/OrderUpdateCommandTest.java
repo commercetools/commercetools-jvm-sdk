@@ -1,12 +1,18 @@
 package io.sphere.sdk.orders.commands;
 
+import io.sphere.sdk.carts.Cart;
 import io.sphere.sdk.carts.CustomLineItem;
 import io.sphere.sdk.carts.ItemState;
 import io.sphere.sdk.carts.LineItem;
+import io.sphere.sdk.carts.commands.CartUpdateCommand;
+import io.sphere.sdk.carts.commands.updateactions.*;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.orders.*;
 import io.sphere.sdk.orders.commands.updateactions.*;
+import io.sphere.sdk.orders.commands.updateactions.AddPayment;
+import io.sphere.sdk.orders.commands.updateactions.RemovePayment;
 import io.sphere.sdk.orders.queries.OrderByIdGet;
+import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.states.State;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
@@ -16,8 +22,10 @@ import org.junit.Test;
 import java.time.ZonedDateTime;
 import java.util.*;
 
+import static io.sphere.sdk.carts.CartFixtures.withCart;
 import static io.sphere.sdk.channels.ChannelFixtures.*;
 import static io.sphere.sdk.orders.OrderFixtures.*;
+import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.states.StateFixtures.withStandardStates;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -238,5 +246,26 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 assertThat(updatedOrder.getCustomLineItems().get(0)).containsItemStates(itemStates);
             })
         );
+    }
+
+    @Test
+    public void addPayment() {
+        withPayment(client(), payment -> {
+            withOrder(client(), order -> {
+                //add payment
+                final Order orderWithPayment = execute(OrderUpdateCommand.of(order, AddPayment.of(payment))
+                        .withExpansionPaths(m -> m.paymentInfo().payments()));
+
+                final Reference<Payment> paymentReference = orderWithPayment.getPaymentInfo().getPayments().get(0);
+                assertThat(paymentReference).isEqualTo(payment.toReference());
+                assertThat(paymentReference).is(expanded(payment));
+
+                //remove payment
+                final Order orderWithoutPayment = execute(OrderUpdateCommand.of(orderWithPayment, RemovePayment.of(payment)));
+
+                assertThat(orderWithoutPayment.getPaymentInfo()).isNull();
+            });
+            return payment;
+        });
     }
 }

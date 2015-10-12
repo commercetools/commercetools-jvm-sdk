@@ -131,4 +131,15 @@ public interface Order extends CartLike<Order> {
     @Nullable
     @Override
     CustomFields getCustom();
+
+    /**
+     * Get associated payments.
+     *
+     * @return payments
+     * @see io.sphere.sdk.orders.commands.updateactions.AddPayment
+     * @see io.sphere.sdk.orders.commands.updateactions.RemovePayment
+     */
+    @Nullable
+    @Override
+    PaymentInfo getPaymentInfo();
 }
