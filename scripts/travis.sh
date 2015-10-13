@@ -19,6 +19,6 @@ test_result=$?
 eval "$cmd sh -c './sbt \"sphere-models/it:test::runMain io.sphere.sdk.client.MainMethodThreadLeakTest\"'"
 eval "$cmd sh -c './sbt \"test:runMain introspection.rules.RulesMain\"'"
 eval "$cmd sh -c 'bash scripts/publish-javadoc-branch-folder.sh > /dev/null 2> /dev/null'"
-if [ test_result -eq 0 ]; then
+if [ $test_result -eq 0 ]; then
   eval "$cmd sh -c 'bash scripts/publish-javadoc-version-folder.sh > /dev/null 2> /dev/null'"
 fi
