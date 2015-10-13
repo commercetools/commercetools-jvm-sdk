@@ -6,6 +6,7 @@ script:
 - echo $TRAVIS_PULL_REQUEST
 - echo $TRAVIS_REPO_SLUG
 - echo $TRAVIS_BRANCH
+- docker info
 - bash scripts/travis.sh
 notifications:
   email:
