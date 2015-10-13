@@ -5,6 +5,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.commands.updateactions.*;
 import io.sphere.sdk.payments.messages.PaymentInteractionAddedMessage;
+import io.sphere.sdk.payments.messages.PaymentTransactionAddedMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.TypeFixtures;
@@ -242,6 +243,10 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             final Payment paymentWithFirstRefund = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundAmount), AddTransaction.of(firstRefundTransaction))));
 
             assertThat(paymentWithFirstRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction);
+
+            final PagedQueryResult<PaymentTransactionAddedMessage> messageQueryResult = execute(MessageQuery.of().withPredicates(m -> m.resource().is(payment))
+                    .forMessageType(PaymentTransactionAddedMessage.MESSAGE_HINT));
+            assertThat(messageQueryResult.head().get().getTransaction()).isEqualTo(firstRefundTransaction);
 
 
             final MonetaryAmount secondRefundAmount = EURO_5;
