@@ -1,8 +1,11 @@
 package io.sphere.sdk.payments.commands;
 
+import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.commands.updateactions.*;
+import io.sphere.sdk.payments.messages.PaymentInteractionAddedMessage;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.TypeFixtures;
 import org.junit.Test;
@@ -18,6 +21,7 @@ import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
 import static io.sphere.sdk.states.StateType.PAYMENT_STATE;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.types.TypeFixtures.STRING_FIELD_NAME;
+import static io.sphere.sdk.types.TypeFixtures.withUpdateableType;
 import static java.util.Collections.singletonMap;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -192,9 +196,8 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
     @Test
     public void setCustomType() {
-        TypeFixtures.withUpdateableType(client(), type -> {
+        withUpdateableType(client(), type -> {
             withPayment(client(), payment -> {
-                final String value = randomKey();
                 final SetCustomType updateAction = SetCustomType
                         .ofTypeIdAndObjects(type.getId(), singletonMap(STRING_FIELD_NAME, "foo"));
                 final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, updateAction));
@@ -248,6 +251,26 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
 
             assertThat(paymentWithSecondRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction, secondRefundTransaction);
             assertThat(paymentWithSecondRefund.getAmountRefunded()).isEqualTo(totalRefundAmount);
+        });
+    }
+
+    @Test
+    public void addInterfaceInteraction() {
+        withUpdateableType(client(), type -> {
+            withPayment(client(), payment -> {
+                final AddInterfaceInteraction addInterfaceInteraction = AddInterfaceInteraction.ofTypeIdAndObjects(type.getId(), singletonMap(STRING_FIELD_NAME, "some id"));
+                final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, addInterfaceInteraction));
+
+                assertThat(updatedPayment.getInterfaceInteractions().get(0).getFieldAsString(STRING_FIELD_NAME)).isEqualTo("some id");
+
+                final PagedQueryResult<PaymentInteractionAddedMessage> pagedQueryResult = execute(MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(payment))
+                        .forMessageType(PaymentInteractionAddedMessage.MESSAGE_HINT));
+                assertThat(pagedQueryResult.head().get().getInteraction().getFieldAsString(STRING_FIELD_NAME)).isEqualTo("some id");
+
+                return updatedPayment;
+            });
+            return type;
         });
     }
 }

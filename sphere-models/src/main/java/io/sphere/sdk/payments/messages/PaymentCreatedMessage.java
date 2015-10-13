@@ -12,6 +12,15 @@ import io.sphere.sdk.queries.PagedQueryResult;
 
 import java.time.ZonedDateTime;
 
+/**
+ * his message is the result of a {@link io.sphere.sdk.payments.commands.PaymentCreateCommand}.
+ *
+ * {@include.example io.sphere.sdk.payments.commands.PaymentCreateCommandTest#payingPerCreditCart()}
+ *
+ * @see Payment
+ * @see io.sphere.sdk.payments.commands.PaymentCreateCommand
+ *
+ */
 @JsonDeserialize(as = PaymentCreatedMessage.class)//important to override annotation in Message class
 public class PaymentCreatedMessage extends GenericMessageImpl<Payment> {
     public static final String MESSAGE_TYPE = "PaymentCreated";
