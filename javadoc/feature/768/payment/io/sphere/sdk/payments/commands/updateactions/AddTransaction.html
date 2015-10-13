@@ -48,7 +48,7 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/AddInterfaceInteraction.html" title="class in io.sphere.sdk.payments.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetAmountPaid.html" title="class in io.sphere.sdk.payments.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
@@ -124,6 +124,55 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">AddTransaction</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;</pre>
+<div class="block">Adds a new financial transaction. Transactions should only be set if a notification from the PSP was received that a transaction was completed successfully. E.g. in the case of a refund, the transaction is not added when the refund-request is being sent to the PSP or the PSP acknowledges the request (the interfaceInteractions may be used for these), but when the PSP sends a notification that the refund has been executed.
+
+ <p>See also <a href="../PaymentUpdateCommand.html">PaymentUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-transActions--%s" class=code-example><pre><code class='java'>withCustomerAndFilledCart(client(), (customer, cart) -&gt; {
+    final MonetaryAmount totalAmount = cart.getTotalPrice();
+    final PaymentMethodInfo paymentMethodInfo = PaymentMethodInfoBuilder.of()
+            .paymentInterface(randomKey())
+            .method("CREDIT_CARD")
+            .build();
+    final Transaction chargeTransaction = TransactionBuilder
+            .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
+            .build();
+    final PaymentDraftBuilder paymentDraftBuilder = PaymentDraftBuilder.of(totalAmount)
+            .customer(customer)
+            .paymentMethodInfo(paymentMethodInfo)
+            .amountPaid(totalAmount)
+            .transactions(Collections.singletonList(chargeTransaction));
+    final Payment payment = execute(PaymentCreateCommand.of(paymentDraftBuilder.build()));
+
+    assertThat(payment.getCustomer()).isEqualTo(payment.getCustomer());
+    assertThat(payment.getPaymentMethodInfo()).isEqualTo(paymentMethodInfo);
+    assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
+
+    final MonetaryAmount firstRefundAmount = EURO_10;
+    final Transaction firstRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, firstRefundAmount, ZonedDateTime.now()).build();
+    final Payment paymentWithFirstRefund = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundAmount), AddTransaction.of(firstRefundTransaction))));
+
+    assertThat(paymentWithFirstRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction);
+
+    final PagedQueryResult&lt;PaymentTransactionAddedMessage&gt; messageQueryResult = execute(MessageQuery.of().withPredicates(m -&gt; m.resource().is(payment))
+            .forMessageType(PaymentTransactionAddedMessage.MESSAGE_HINT));
+    assertThat(messageQueryResult.head().get().getTransaction()).isEqualTo(firstRefundTransaction);
+
+
+    final MonetaryAmount secondRefundAmount = EURO_5;
+    final Transaction secondRefundTransaction = TransactionBuilder.of(TransactionType.REFUND, secondRefundAmount, ZonedDateTime.now()).build();
+    final MonetaryAmount totalRefundAmount = secondRefundAmount.add(paymentWithFirstRefund.getAmountRefunded());
+    final Payment paymentWithSecondRefund = execute(PaymentUpdateCommand.of(paymentWithFirstRefund, asList(SetAmountRefunded.of(totalRefundAmount), AddTransaction.of(secondRefundTransaction))));
+
+    assertThat(paymentWithSecondRefund.getTransactions()).contains(chargeTransaction, firstRefundTransaction, secondRefundTransaction);
+    assertThat(paymentWithSecondRefund.getAmountRefunded()).isEqualTo(totalRefundAmount);
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/payments/commands/PaymentUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments"><code>Payment</code></a>, 
+<a href="../../../../../../io/sphere/sdk/payments/messages/PaymentTransactionAddedMessage.html" title="class in io.sphere.sdk.payments.messages"><code>PaymentTransactionAddedMessage</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -231,7 +280,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 </div>
 <div class="subNav">
 <ul class="navList">
-<li>Prev&nbsp;Class</li>
+<li><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/AddInterfaceInteraction.html" title="class in io.sphere.sdk.payments.commands.updateactions"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
 <li><a href="../../../../../../io/sphere/sdk/payments/commands/updateactions/SetAmountPaid.html" title="class in io.sphere.sdk.payments.commands.updateactions"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">

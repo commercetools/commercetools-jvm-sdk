@@ -124,6 +124,30 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">TransitionState</span>
 extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html" title="class in io.sphere.sdk.commands">UpdateActionImpl</a>&lt;<a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments">Payment</a>&gt;</pre>
+<div class="block">Transition to a new state. If there is no state yet, the new state must be an initial state. If there is an existing state, there must be a direct transition from the existing state to the new state.
+
+ <p>See also <a href="../PaymentUpdateCommand.html">PaymentUpdateCommand</a>.<p>
+
+ <div id="io-sphere-sdk-payments-commands-PaymentUpdateCommandTest-transitionState--%s" class=code-example><pre><code class='java'>withStateByBuilder(client(), stateBuilder -&gt; stateBuilder.initial(true).type(PAYMENT_STATE), validNextStateForPaymentStatus -&gt; {
+    withPayment(client(), payment -&gt; {
+        final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, TransitionState.of(validNextStateForPaymentStatus)));
+
+        assertThat(updatedPayment.getPaymentStatus().getState()).isEqualTo(validNextStateForPaymentStatus.toReference());
+
+        final PagedQueryResult&lt;PaymentStatusStateTransitionMessage&gt; messageQueryResult = execute(MessageQuery.of()
+                .withPredicates(m -&gt; m.resource().is(payment))
+                .forMessageType(PaymentStatusStateTransitionMessage.MESSAGE_HINT));
+        assertThat(messageQueryResult.head().get().getState()).isEqualTo(validNextStateForPaymentStatus.toReference());
+
+        return updatedPayment;
+    });
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/payments/commands/PaymentUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments"><code>Payment</code></a>, 
+<a href="../../../../../../io/sphere/sdk/payments/messages/PaymentStatusStateTransitionMessage.html" title="class in io.sphere.sdk.payments.messages"><code>PaymentStatusStateTransitionMessage</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
