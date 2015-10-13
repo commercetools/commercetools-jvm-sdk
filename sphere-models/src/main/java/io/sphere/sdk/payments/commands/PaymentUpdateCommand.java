@@ -12,6 +12,13 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ <p>Updates a payment.</p>
+
+ {@doc.gen list actions}
+
+ @see Payment
+ */
 public interface PaymentUpdateCommand extends UpdateCommandDsl<Payment, PaymentUpdateCommand>, MetaModelExpansionDsl<Payment, PaymentUpdateCommand, PaymentExpansionModel<Payment>> {
     static PaymentUpdateCommand of(final Versioned<Payment> versioned, final UpdateAction<Payment> updateAction) {
         return of(versioned, Collections.singletonList(updateAction));
