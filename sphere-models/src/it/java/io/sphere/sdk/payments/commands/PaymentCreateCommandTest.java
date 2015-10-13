@@ -1,7 +1,10 @@
 package io.sphere.sdk.payments.commands;
 
 import io.sphere.sdk.customers.CustomerFixtures;
+import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.payments.*;
+import io.sphere.sdk.payments.messages.PaymentCreatedMessage;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.TypeFixtures;
@@ -23,11 +26,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class PaymentCreateCommandTest extends IntegrationTest {
     @Test
     public void payingPerCreditCart() {
-        //TODO cart with line item
         CustomerFixtures.withCustomerAndCart(client(), ((customer, cart) -> {
             final MonetaryAmount totalAmount = cart.getTotalPrice();
             final PaymentMethodInfo paymentMethodInfo = PaymentMethodInfoBuilder.of()
-                    .paymentInterface("STRIPE")
+                    .paymentInterface("payment interface X")
                     .method("CREDIT_CARD")
                     .build();
             final PaymentDraftBuilder paymentDraftBuilder = PaymentDraftBuilder.of(totalAmount)
@@ -39,6 +41,13 @@ public class PaymentCreateCommandTest extends IntegrationTest {
             assertThat(payment.getCustomer()).isEqualTo(payment.getCustomer());
             assertThat(payment.getPaymentMethodInfo()).isEqualTo(paymentMethodInfo);
             assertThat(payment.getAmountPlanned()).isEqualTo(totalAmount);
+
+            final PagedQueryResult<PaymentCreatedMessage> pagedQueryResult = execute(MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(payment))
+                    .forMessageType(PaymentCreatedMessage.MESSAGE_HINT));
+
+            final PaymentCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
+            assertThat(paymentCreatedMessage.getPayment().getId()).isEqualTo(payment.getId());
 
             execute(PaymentDeleteCommand.of(payment));
         }));
@@ -95,7 +104,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
                     final MonetaryAmount totalAmount = cart.getTotalPrice();
                     final PaymentStatus paymentStatus = PaymentStatusBuilder.of().interfaceCode(randomKey()).interfaceText(randomString()).state(paidState).build();
                     final PaymentMethodInfo paymentMethodInfo = PaymentMethodInfoBuilder.of()
-                            .paymentInterface("STRIPE")
+                            .paymentInterface("payment interface X")
                             .method("CREDIT_CARD")
                             .name(randomSlug())
                             .build();

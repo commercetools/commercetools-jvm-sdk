@@ -6,7 +6,14 @@ import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.payments.PaymentDraft;
 import io.sphere.sdk.payments.expansion.PaymentExpansionModel;
 
-
+/**
+ * Creates a payment.
+ *
+ * {@include.example io.sphere.sdk.payments.commands.PaymentCreateCommandTest#payingPerCreditCart()}
+ *
+ * @see io.sphere.sdk.payments.messages.PaymentCreatedMessage
+ * @see Payment
+ */
 public interface PaymentCreateCommand extends CreateCommand<Payment>, MetaModelExpansionDsl<Payment, PaymentCreateCommand, PaymentExpansionModel<Payment>> {
 
     static PaymentCreateCommand of(final PaymentDraft PaymentDraft) {

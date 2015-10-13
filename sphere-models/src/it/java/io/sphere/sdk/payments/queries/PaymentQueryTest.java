@@ -33,7 +33,7 @@ public class PaymentQueryTest extends IntegrationTest {
                     final MonetaryAmount totalAmount = cart.getTotalPrice();
                     final PaymentStatus paymentStatus = PaymentStatusBuilder.of().interfaceCode(randomKey()).interfaceText(randomString()).state(paidState).build();
                     final PaymentMethodInfo paymentMethodInfo = PaymentMethodInfoBuilder.of()
-                            .paymentInterface("STRIPE")
+                            .paymentInterface("payment interface X")
                             .method("CREDIT_CARD")
                             .name(randomSlug())
                             .build();
