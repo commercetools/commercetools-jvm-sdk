@@ -114,7 +114,7 @@ public class SphereException extends RuntimeException {
         if (httpRequest == null) {
             return "";
         } else {
-            return "http request:" + httpRequest.toString() + "\n";
+            return "http request: " + httpRequest.toString() + "\n";
         }
     }
 
