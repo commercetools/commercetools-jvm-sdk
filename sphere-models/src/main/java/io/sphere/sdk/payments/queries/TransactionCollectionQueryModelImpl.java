@@ -1,5 +1,6 @@
 package io.sphere.sdk.payments.queries;
 
+import io.sphere.sdk.payments.TransactionType;
 import io.sphere.sdk.queries.*;
 
 final class TransactionCollectionQueryModelImpl<T> extends QueryModelImpl<T> implements TransactionCollectionQueryModel<T> {
@@ -30,5 +31,10 @@ final class TransactionCollectionQueryModelImpl<T> extends QueryModelImpl<T> imp
     @Override
     public QueryPredicate<T> isNotEmpty() {
         return isNotEmpty();
+    }
+
+    @Override
+    public SphereEnumerationQueryModel<T, TransactionType> type() {
+        return enumerationQueryModel("type");
     }
 }

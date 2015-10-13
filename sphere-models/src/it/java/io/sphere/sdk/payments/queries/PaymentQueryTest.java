@@ -37,8 +37,9 @@ public class PaymentQueryTest extends IntegrationTest {
                             .method("CREDIT_CARD")
                             .name(randomSlug())
                             .build();
+                    final TransactionType transactionType = TransactionType.CHARGE;
                     final List<Transaction> transactions = Collections.singletonList(TransactionBuilder
-                            .of(TransactionType.CHARGE, totalAmount, ZonedDateTime.now())
+                            .of(transactionType, totalAmount, ZonedDateTime.now())
                             .timestamp(ZonedDateTime.now())
                             .interactionId(randomKey())
                             .build());
@@ -78,6 +79,7 @@ public class PaymentQueryTest extends IntegrationTest {
                                             .and(m.paymentStatus().interfaceCode().is(paymentStatus.getInterfaceCode()))
                                             .and(m.paymentStatus().interfaceText().is(paymentStatus.getInterfaceText()))
                                             .and(m.paymentStatus().state().is(paidState))
+                                            .and(m.transactions().type().is(transactionType))
                                     .and(m.transactions().amount().currencyCode().is(totalAmount.getCurrency()))
                                     .and(m.transactions().interactionId().is(transactions.get(0).getInteractionId()))
                             )
