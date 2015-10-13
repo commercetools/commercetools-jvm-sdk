@@ -5,7 +5,7 @@ import io.sphere.sdk.models.SphereEnumeration;
 
 public enum StateType implements SphereEnumeration {
 
-    LINE_ITEM_STATE;
+    LINE_ITEM_STATE, ORDER_STATE, PRODUCT_STATE, REVIEW_STATE, PAYMENT_STATE;
 
     @JsonCreator
     public static StateType ofSphereValue(final String value) {

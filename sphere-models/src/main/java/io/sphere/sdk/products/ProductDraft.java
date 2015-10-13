@@ -7,6 +7,7 @@ import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.WithLocalizedSlug;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
@@ -53,4 +54,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     Reference<TaxCategory> getTaxCategory();
 
     SearchKeywords getSearchKeywords();
+
+    @Nullable
+    Reference<State> getState();
 }

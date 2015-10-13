@@ -3,10 +3,12 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
+import java.util.Optional;
 import java.util.Set;
 
 abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDraftBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
@@ -19,6 +21,8 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     private Set<Reference<Category>> categories = Collections.emptySet();
     private SearchKeywords searchKeywords = SearchKeywords.of();
     private Reference<TaxCategory> taxCategory;
+    @Nullable
+    private Reference<State> state;
 
     protected ProductDataProductDraftBuilderBase(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
@@ -98,6 +102,16 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     public T taxCategory(final Referenceable<TaxCategory> taxCategory) {
         this.taxCategory = taxCategory.toReference();
         return getThis();
+    }
+
+    public T state(@Nullable final Referenceable<State> state) {
+        this.state = Optional.ofNullable(state).map(Referenceable::toReference).orElse(null);
+        return getThis();
+    }
+
+    @Nullable
+    public Reference<State> getState() {
+        return state;
     }
 
     protected abstract T getThis();
