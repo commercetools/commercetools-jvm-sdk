@@ -5,6 +5,7 @@ import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.commands.updateactions.*;
 import io.sphere.sdk.payments.messages.PaymentInteractionAddedMessage;
+import io.sphere.sdk.payments.messages.PaymentStatusStateTransitionMessage;
 import io.sphere.sdk.payments.messages.PaymentTransactionAddedMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
@@ -122,6 +123,11 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
                 final Payment updatedPayment = execute(PaymentUpdateCommand.of(payment, TransitionState.of(validNextStateForPaymentStatus)));
 
                 assertThat(updatedPayment.getPaymentStatus().getState()).isEqualTo(validNextStateForPaymentStatus.toReference());
+
+                final PagedQueryResult<PaymentStatusStateTransitionMessage> messageQueryResult = execute(MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(payment))
+                        .forMessageType(PaymentStatusStateTransitionMessage.MESSAGE_HINT));
+                assertThat(messageQueryResult.head().get().getState()).isEqualTo(validNextStateForPaymentStatus.toReference());
 
                 return updatedPayment;
             });

@@ -11,8 +11,8 @@ import io.sphere.sdk.payments.expansion.PaymentExpansionModel;
  *
  * {@include.example io.sphere.sdk.payments.commands.PaymentCreateCommandTest#payingPerCreditCart()}
  *
- * @see io.sphere.sdk.payments.messages.PaymentCreatedMessage
  * @see Payment
+ * @see io.sphere.sdk.payments.messages.PaymentCreatedMessage
  */
 public interface PaymentCreateCommand extends CreateCommand<Payment>, MetaModelExpansionDsl<Payment, PaymentCreateCommand, PaymentExpansionModel<Payment>> {
 

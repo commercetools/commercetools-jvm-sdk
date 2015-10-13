@@ -17,6 +17,7 @@ import java.util.Optional;
  * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#transitionState()}
  *
  *  @see Payment
+ *  @see io.sphere.sdk.payments.messages.PaymentStatusStateTransitionMessage
  */
 public class TransitionState extends UpdateActionImpl<Payment> {
     @Nullable

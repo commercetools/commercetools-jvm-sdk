@@ -12,6 +12,7 @@ import io.sphere.sdk.payments.Transaction;
  * {@include.example io.sphere.sdk.payments.commands.PaymentUpdateCommandTest#transActions()}
  *
  *  @see Payment
+ *  @see io.sphere.sdk.payments.messages.PaymentTransactionAddedMessage
  */
 public class AddTransaction extends UpdateActionImpl<Payment> {
     private final Transaction transaction;
