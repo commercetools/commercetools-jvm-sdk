@@ -1,12 +1,12 @@
 package io.sphere.sdk.reviews;
 
 import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.models.Base;
-import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.Identifiable;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.ProductIdentifiable;
+import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
+import java.util.Optional;
 
 public class ReviewDraftBuilder extends Base implements Builder<ReviewDraft> {
     private final String productId;
@@ -19,6 +19,8 @@ public class ReviewDraftBuilder extends Base implements Builder<ReviewDraft> {
     private String text;
     @Nullable
     private Double score;
+    @Nullable
+    private Reference<State> state;
 
     private ReviewDraftBuilder(final String productId, final String customerId) {
         this.productId = productId;
@@ -59,8 +61,14 @@ public class ReviewDraftBuilder extends Base implements Builder<ReviewDraft> {
         return this;
     }
 
+    public ReviewDraftBuilder state(@Nullable final Referenceable<State> state) {
+        final Reference<State> stateReference = Optional.ofNullable(state).map(Referenceable::toReference).orElse(null);
+        this.state = stateReference;
+        return this;
+    }
+
     @Override
     public ReviewDraft build() {
-        return new ReviewDraft(productId, customerId, authorName, title, text, score);
+        return new ReviewDraft(productId, customerId, authorName, title, text, score, state);
     }
 }
