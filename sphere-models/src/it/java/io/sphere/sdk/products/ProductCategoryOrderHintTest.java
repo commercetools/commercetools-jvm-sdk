@@ -54,8 +54,9 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
     @Test
     public void sortProductProjectionsByCategory1() {
         final Comparator<ProductProjection> comparator = comparingCategoryOrderHints(category1Id);
-        assertThat(productProjectionsSortedBy(comparator)).isEqualTo(asList(id1, id3, id2, id5, id4));
-        assertThat(sortedIdsFromBackendForCategory1).isEqualTo(asList(id1, id3, id2, id5, id4));
+        final List<String> expectedOrder = asList(id1, id3, id2, id5, id4);
+        assertThat(productProjectionsSortedBy(comparator)).isEqualTo(expectedOrder);
+        assertThat(sortedIdsFromBackendForCategory1).isEqualTo(expectedOrder);
 
     }
 
