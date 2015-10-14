@@ -13,7 +13,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import java.time.ZonedDateTime;
 
 /**
- * his message is the result of a {@link io.sphere.sdk.payments.commands.PaymentCreateCommand}.
+ * This message is the result of a {@link io.sphere.sdk.payments.commands.PaymentCreateCommand}.
  *
  * {@include.example io.sphere.sdk.payments.commands.PaymentCreateCommandTest#payingPerCreditCart()}
  *
