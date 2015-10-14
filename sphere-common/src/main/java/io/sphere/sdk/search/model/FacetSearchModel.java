@@ -65,4 +65,14 @@ abstract class FacetSearchModel<T, V> extends SearchModelImpl<T> {
     public FilteredFacetExpression<T> onlyTerm(final Iterable<V> values) {
         return new FilteredFacetExpressionImpl<>(this, typeSerializer, values, alias);
     }
+
+    /**
+     * Generates an expression to obtain the facets of the attribute for only the given values.
+     * For example: a possible faceted classification for ["red", "blue"] could be ["red": 4, "blue": 1].
+     * @param values the values from which to obtain the facets
+     * @return a facet expression for only the given values
+     */
+    public FilteredFacetExpression<T> onlyTermAsString(final Iterable<String> values) {
+        return new FilteredFacetExpressionImpl<>(this, TypeSerializer.ofString().getSerializer(), values, alias);
+    }
 }

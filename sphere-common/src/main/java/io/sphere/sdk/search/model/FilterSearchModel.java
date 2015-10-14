@@ -6,8 +6,8 @@ import javax.annotation.Nullable;
 
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.StreamSupport;
 
+import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.Collections.singletonList;
 import static java.util.stream.Collectors.toList;
 
@@ -46,8 +46,30 @@ abstract class FilterSearchModel<T, V> extends SearchModelImpl<T> {
      * @return a filter expression for the given values
      */
     public List<FilterExpression<T>> byAll(final Iterable<V> values) {
-        return StreamSupport.stream(values.spliterator(), false)
+        return toStream(values)
                 .map(value -> filterBy(value))
+                .collect(toList());
+    }
+
+    /**
+     * Generates an expression to select all elements with attributes matching any of the given values.
+     * For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.
+     * @param values the values to filter by
+     * @return a filter expression for the given values
+     */
+    public List<FilterExpression<T>> byAnyAsString(final Iterable<String> values) {
+        return singletonList(filterByAsString(values));
+    }
+
+    /**
+     * Generates an expression to select all elements with attributes matching all the given values.
+     * For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.
+     * @param values the values to filter by
+     * @return a filter expression for the given values
+     */
+    public List<FilterExpression<T>> byAllAsString(final Iterable<String> values) {
+        return toStream(values)
+                .map(value -> filterByAsString(value))
                 .collect(toList());
     }
 
@@ -57,5 +79,13 @@ abstract class FilterSearchModel<T, V> extends SearchModelImpl<T> {
 
     private TermFilterExpression<T, V> filterBy(final Iterable<V> values) {
         return new TermFilterExpression<>(this, typeSerializer, values);
+    }
+
+    private TermFilterExpression<T, String> filterByAsString(final String value) {
+        return filterByAsString(singletonList(value));
+    }
+
+    private TermFilterExpression<T, String> filterByAsString(final Iterable<String> values) {
+        return new TermFilterExpression<>(this, TypeSerializer.ofString().getSerializer(), values);
     }
 }

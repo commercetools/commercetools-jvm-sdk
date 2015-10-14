@@ -28,7 +28,9 @@ abstract class TermExpression<T, V> extends SearchModelExpression<T, V> {
      */
     @Nullable
     private String toTermExpression() {
-        return StringUtils.trimToNull(toStream(terms).map(t -> serializer().apply(t))
-                .filter(t -> !t.isEmpty()).collect(joining(",")));
+        return StringUtils.trimToNull(toStream(terms)
+                .map(t -> serializer().apply(t))
+                .filter(t -> !t.isEmpty())
+                .collect(joining(",")));
     }
 }
