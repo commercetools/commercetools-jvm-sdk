@@ -1,5 +1,6 @@
 package io.sphere.sdk.products;
 
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.attributes.*;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
@@ -367,6 +368,17 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
                 .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_EVIL).filtered().by(EVIL_CHARACTER_WORD));
         final PagedSearchResult<ProductProjection> result = executeEvilSearch(search);
         assertThat(result.getTotal()).isEqualTo(1);
+    }
+
+    @Test
+    public void fuzzySearch() {
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged().withText(ENGLISH, "short").withQueryFilters(product -> product.productType().id().filtered().by(productType.getId()));
+        assertThat(resultsToIds(execute(search))).doesNotContain(product2.getId());
+        assertThat(resultsToIds(execute(search.withFuzzy(true)))).contains(product2.getId());
+    }
+
+    private <T> Predicate<List<? extends Identifiable<T>>> containsIdentifiable(final Identifiable<T> identifiable) {
+        return list -> list.stream().anyMatch(element -> element.getId().equals(identifiable.getId()));
     }
 
     private static List<String> resultsToIds(final PagedSearchResult<ProductProjection> result) {

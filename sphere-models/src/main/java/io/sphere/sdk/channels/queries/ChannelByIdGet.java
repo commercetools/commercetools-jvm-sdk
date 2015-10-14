@@ -9,6 +9,11 @@ import io.sphere.sdk.queries.MetaModelGetDsl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Fetches a channel by a known ID.
+ *
+ * {@include.example io.sphere.sdk.channels.queries.ChannelByIdGetTest#execution()}
+ */
 public interface ChannelByIdGet extends MetaModelGetDsl<Channel, Channel, ChannelByIdGet, ChannelExpansionModel<Channel>> {
     static ChannelByIdGet of(final Identifiable<Channel> channel) {
         return of(channel.getId());

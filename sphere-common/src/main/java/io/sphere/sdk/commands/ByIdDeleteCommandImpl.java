@@ -1,9 +1,10 @@
 package io.sphere.sdk.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.http.HttpMethod;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Versioned;
 
 import static java.util.Objects.requireNonNull;
@@ -13,16 +14,19 @@ import static java.util.Objects.requireNonNull;
  @param <T> the type of the result of the command, most likely the updated entity without expanded references */
 public abstract class ByIdDeleteCommandImpl<T> extends CommandImpl<T> implements ByIdDeleteCommand<T> {
     private final Versioned<T> versioned;
-    private final JsonEndpoint<T> endpoint;
+    private final JavaType javaType;
+    private final String path;
 
     protected ByIdDeleteCommandImpl(final Versioned<T> versioned, final JsonEndpoint<T> endpoint) {
+        requireNonNull(endpoint);
         this.versioned = requireNonNull(versioned);
-        this.endpoint = requireNonNull(endpoint);
+        this.javaType = SphereJsonUtils.convertToJavaType(endpoint.typeReference());
+        this.path = endpoint.endpoint();
     }
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        final String baseEndpointWithoutId = endpoint.endpoint();
+        final String baseEndpointWithoutId = path;
         if (!baseEndpointWithoutId.startsWith("/")) {
             throw new RuntimeException("By convention the paths start with a slash, see baseEndpointWithoutId()");
         }
@@ -30,7 +34,7 @@ public abstract class ByIdDeleteCommandImpl<T> extends CommandImpl<T> implements
     }
 
     @Override
-    protected TypeReference<T> typeReference() {
-        return endpoint.typeReference();
+    protected JavaType jacksonJavaType() {
+        return javaType;
     }
 }

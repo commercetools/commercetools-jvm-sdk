@@ -1,6 +1,6 @@
 package io.sphere.sdk.customers.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.Customer;
@@ -17,6 +17,8 @@ import static io.sphere.sdk.http.HttpMethod.POST;
  {@include.example io.sphere.sdk.customers.commands.CustomerCreateEmailTokenCommandTest#execution()}
 
  @see Customer
+ @see Customer#isEmailVerified()
+ @see CustomerCreateEmailTokenCommand
  */
 public final class CustomerVerifyEmailCommand extends CommandImpl<Customer> {
 
@@ -31,8 +33,8 @@ public final class CustomerVerifyEmailCommand extends CommandImpl<Customer> {
     }
 
     @Override
-    protected TypeReference<Customer> typeReference() {
-        return Customer.typeReference();
+    protected JavaType jacksonJavaType() {
+        return SphereJsonUtils.convertToJavaType(Customer.typeReference());
     }
 
     @Override

@@ -5,6 +5,7 @@ import java.time.ZonedDateTime;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import java.util.List;
@@ -96,5 +97,11 @@ abstract class CategoryWrapper extends Base implements Category {
     @Override
     public LocalizedString getMetaTitle() {
         return delegate.getMetaTitle();
+    }
+
+    @Nullable
+    @Override
+    public CustomFields getCustom() {
+        return delegate.getCustom();
     }
 }

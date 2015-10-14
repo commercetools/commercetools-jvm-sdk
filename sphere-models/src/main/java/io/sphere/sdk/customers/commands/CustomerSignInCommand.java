@@ -1,6 +1,6 @@
 package io.sphere.sdk.customers.commands;
 
-import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
 import io.sphere.sdk.customers.CustomerSignInResult;
@@ -19,12 +19,19 @@ import static io.sphere.sdk.http.HttpMethod.POST;
  * If a line item in the anonymous cart matches an existing line item in the customer's cart (same product ID and variant ID),
  * then the maximum quantity of both line items is used as the new quantity.
  *
+ * If the customer forgot the password reset it with {@link CustomerCreatePasswordTokenCommand}.
+ *
+ * <p>Example for a simple sign in without any carts involved:</p>
  * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandTest#execution()}
+ *
+ * <p>Example for a signin where the customer has a cart and signs in with an anonymous cart</p>
+ * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandTest#signInWithAnonymousCart()}
  *
  *  <p>Example for invalid credentials:</p>
  * {@include.example io.sphere.sdk.customers.commands.CustomerSignInCommandTest#executionWithInvalidEmail()}
  *
  * @see io.sphere.sdk.customers.Customer
+ * @see CustomerCreatePasswordTokenCommand
  */
 public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResult> {
     private final String email;
@@ -47,8 +54,8 @@ public final class CustomerSignInCommand extends CommandImpl<CustomerSignInResul
     }
 
     @Override
-    protected TypeReference<CustomerSignInResult> typeReference() {
-        return CustomerSignInResult.typeReference();
+    protected JavaType jacksonJavaType() {
+        return SphereJsonUtils.convertToJavaType(CustomerSignInResult.typeReference());
     }
 
     @Override

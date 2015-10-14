@@ -18,6 +18,7 @@ public class ProductPublishedMessageTest extends IntegrationTest {
             assertThat(product.getMasterData().isPublished()).isFalse();
             final Product publishedProduct = execute(ProductUpdateCommand.of(product, Publish.of()));
             final PagedQueryResult<ProductPublishedMessage> queryResult = execute(MessageQuery.of()
+                    .withPredicates(m -> m.resource().is(product))
                     .withSort(m -> m.createdAt().sort().desc())
                     .withExpansionPaths(m -> m.resource())
                     .withLimit(1)

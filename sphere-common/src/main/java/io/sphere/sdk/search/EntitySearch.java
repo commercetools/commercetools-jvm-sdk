@@ -10,6 +10,9 @@ public interface EntitySearch<T> extends Search<T> {
     @Nullable
     LocalizedStringEntry text();
 
+    @Nullable
+    Boolean isFuzzy();
+
     List<FacetExpression<T>> facets();
 
     List<FilterExpression<T>> resultFilters();

@@ -7,9 +7,11 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 
 /**
+  {@doc.gen summary carts}
 
- {@doc.gen summary carts}
+  <p>Example for query a cart by customer email:</p>
 
+ {@include.example io.sphere.sdk.carts.queries.CartQueryTest#byCustomerEmail()}
  */
 public interface CartQuery extends MetaModelQueryDsl<Cart, CartQuery, CartQueryModel, CartExpansionModel<Cart>> {
     static TypeReference<PagedQueryResult<Cart>> resultTypeReference() {

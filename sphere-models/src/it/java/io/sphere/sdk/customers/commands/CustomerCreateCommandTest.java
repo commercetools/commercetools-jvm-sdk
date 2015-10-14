@@ -49,14 +49,14 @@ public class CustomerCreateCommandTest extends IntegrationTest {
                 .withExpansionPaths(m -> m.customer().customerGroup());
         final CustomerSignInResult result = execute(sphereRequest);
         assertThat(result.getCart())
-                .overridingErrorMessage("no cart id given in creation, so this field is empty")
+                .as("no cart id given in creation, so this field is empty")
                 .isNull();
         final Customer customer = result.getCustomer();
         final Cart cart = result.getCart();
         assertThat(customer.getName()).isEqualTo(name);
         assertThat(customer.getEmail()).isEqualTo(email);
         assertThat(customer.getPassword())
-                .overridingErrorMessage("password is not stored in clear text")
+                .as("password is not stored in clear text")
                 .isNotEqualTo(password);
         assertThat(customer.getExternalId()).contains(externalId);
         assertThat(cart).isNull();
@@ -69,7 +69,7 @@ public class CustomerCreateCommandTest extends IntegrationTest {
         assertThat(customer.getDefaultBillingAddress().withId(null)).isEqualTo(addresses.get(0));
         assertThat(customer.findDefaultShippingAddress().get().withId(null)).isEqualTo(addresses.get(1));
         assertThat(customer.getCustomerGroup().getObj())
-                .overridingErrorMessage("customer group can be expanded")
+                .as("customer group can be expanded")
                 .isNotNull();
     }
 

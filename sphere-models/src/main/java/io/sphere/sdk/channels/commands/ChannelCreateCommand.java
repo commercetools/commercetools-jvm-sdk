@@ -13,6 +13,7 @@ import io.sphere.sdk.expansion.MetaModelExpansionDsl;
  * {@include.example io.sphere.sdk.channels.commands.ChannelCreateCommandTest#execution()}
  *
  * @see io.sphere.sdk.channels.ChannelDraftBuilder
+ * @see io.sphere.sdk.channels.ChannelDraft
  */
 public interface ChannelCreateCommand extends CreateCommand<Channel>, MetaModelExpansionDsl<Channel, ChannelCreateCommand, ChannelExpansionModel<Channel>> {
     static ChannelCreateCommand of(final ChannelDraft draft) {

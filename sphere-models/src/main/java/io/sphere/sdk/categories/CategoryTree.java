@@ -8,6 +8,8 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * All categories in the project, represented as an in-memory tree.
+ *
+ * <p>Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/CategoryDocumentation.html#category-tree">categories</a> for more information.</p>
  */
 public interface CategoryTree {
     /**

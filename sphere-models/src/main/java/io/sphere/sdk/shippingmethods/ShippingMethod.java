@@ -42,9 +42,18 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
 
     @Override
     default Reference<ShippingMethod> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    static String referenceTypeId() {
+        return "shipping-method";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId() {
         return "shipping-method";
     }

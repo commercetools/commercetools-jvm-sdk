@@ -10,7 +10,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 @JsonDeserialize(as = SimpleOrderMessageImpl.class)
 public interface SimpleOrderMessage extends GenericMessage<Order> {
         MessageDerivateHint<SimpleOrderMessage> MESSAGE_HINT =
-            MessageDerivateHint.ofResourceType(Order.typeId(),
+            MessageDerivateHint.ofResourceType(Order.referenceTypeId(),
                     new TypeReference<PagedQueryResult<SimpleOrderMessage>>() {
                     },
                     new TypeReference<SimpleOrderMessage>() {

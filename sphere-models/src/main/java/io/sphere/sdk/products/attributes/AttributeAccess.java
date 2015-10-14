@@ -157,7 +157,7 @@ public interface AttributeAccess<T> {
     }
 
     static AttributeAccess<ZonedDateTime> ofDateTime() {
-        return AttributeAccessImpl.ofPrimitive(ZonedDateTimeTypeReference(), DateTimeType.class);
+        return AttributeAccessImpl.ofPrimitive(zonedDateTimeTypeReference(), DateTimeType.class);
     }
 
     static AttributeAccess<Set<ZonedDateTime>> ofDateTimeSet() {

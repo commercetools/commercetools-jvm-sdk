@@ -12,8 +12,9 @@ public class ChannelByIdGetTest extends IntegrationTest {
     @Test
     public void execution() throws Exception {
         withChannelOfRole(client(), INVENTORY_SUPPLY, channel -> {
-            final Channel fetchedChannel = execute(ChannelByIdGet.of(channel.getId()));
-            assertThat(fetchedChannel.getId()).contains(channel.getId());
+            final String id = channel.getId();
+            final Channel fetchedChannel = execute(ChannelByIdGet.of(id));
+            assertThat(fetchedChannel).isEqualTo(channel);
         });
     }
 }

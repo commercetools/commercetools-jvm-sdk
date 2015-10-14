@@ -6,6 +6,14 @@ import io.sphere.sdk.customers.expansion.CustomerExpansionModel;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 
+/**
+ * Fetches multiple customers.
+ *
+ * {@doc.gen summary customers}
+ *
+ * <p>Example for fetching a customer by id and expand the customer group:</p>
+ * {@include.example io.sphere.sdk.customers.queries.CustomerQueryTest#customerGroupReferenceExpansion()}
+ */
 public interface CustomerQuery extends MetaModelQueryDsl<Customer, CustomerQuery, CustomerQueryModel, CustomerExpansionModel<Customer>> {
    static TypeReference<PagedQueryResult<Customer>> resultTypeReference() {
         return new TypeReference<PagedQueryResult<Customer>>(){

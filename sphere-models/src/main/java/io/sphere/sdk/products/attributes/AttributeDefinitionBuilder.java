@@ -3,6 +3,7 @@ package io.sphere.sdk.products.attributes;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.TextInputHint;
 
 public class AttributeDefinitionBuilder extends Base implements Builder<AttributeDefinition> {
     private final String name;

@@ -14,7 +14,7 @@ final class CustomerByTokenGetImpl extends MetaModelGetDslImpl<Customer, Custome
         super(CustomerEndpoint.ENDPOINT, "", CustomerExpansionModel.of(), CustomerByTokenGetImpl::new, Collections.singletonList(HttpQueryParameter.of("token", token)));
     }
 
-    public CustomerByTokenGetImpl(MetaModelGetDslBuilder<Customer, Customer, CustomerByTokenGet, CustomerExpansionModel<Customer>> builder) {
+    public CustomerByTokenGetImpl(final MetaModelGetDslBuilder<Customer, Customer, CustomerByTokenGet, CustomerExpansionModel<Customer>> builder) {
         super(builder);
     }
 }

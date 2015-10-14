@@ -9,6 +9,8 @@ import io.sphere.sdk.customers.Customer;
  *  {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setCustomerNumber()}
+ *
+ * @see Customer
  */
 public class SetCustomerNumber extends UpdateActionImpl<Customer> {
     private final String customerNumber;

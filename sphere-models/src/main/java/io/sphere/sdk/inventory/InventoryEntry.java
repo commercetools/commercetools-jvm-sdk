@@ -29,9 +29,18 @@ public interface InventoryEntry extends Resource<InventoryEntry> {
     //reservations are internal
 
     default Reference<InventoryEntry> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
+    static String referenceTypeId(){
+        return "inventory-entry";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId(){
         return "inventory-entry";
     }

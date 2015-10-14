@@ -1,23 +1,36 @@
 package io.sphere.sdk.customobjects.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.client.JsonEndpoint;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.customobjects.CustomObject;
-import io.sphere.sdk.customobjects.expansion.CustomObjectExpansionModel;
-import io.sphere.sdk.queries.MetaModelGetDslBuilder;
-import io.sphere.sdk.queries.MetaModelGetDslImpl;
+import io.sphere.sdk.customobjects.CustomObjectUtils;
+import io.sphere.sdk.http.HttpResponse;
+import io.sphere.sdk.json.SphereJsonUtils;
 
-/**
- * {@link io.sphere.sdk.client.SphereRequest} to fetch one {@link CustomObject} by container and key.
- * @param <T> The type of the value of the custom object.
- */
-final class CustomObjectByKeyGetImpl<T> extends MetaModelGetDslImpl<CustomObject<T>, CustomObject<T>, CustomObjectByKeyGet<T>, CustomObjectExpansionModel<CustomObject<T>>> implements CustomObjectByKeyGet<T> {
+import java.util.Optional;
 
-    CustomObjectByKeyGetImpl(final TypeReference<CustomObject<T>> typeReference, final String container, final String key) {
-        super("" + container + "/" + key, JsonEndpoint.of(typeReference, CustomObjectEndpoint.PATH), CustomObjectExpansionModel.<T>of(), builder -> new CustomObjectByKeyGetImpl<>(builder));
+final class CustomObjectByKeyGetImpl<T> extends CustomObjectCustomJsonMappingByKeyGet<T> implements CustomObjectByKeyGet<T> {
+    private final JavaType javaType;
+
+    public CustomObjectByKeyGetImpl(final String container, final String key, final JavaType javaType) {
+        super(container, key);
+        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(javaType);
     }
 
-    public CustomObjectByKeyGetImpl(final MetaModelGetDslBuilder<CustomObject<T>, CustomObject<T>, CustomObjectByKeyGet<T>, CustomObjectExpansionModel<CustomObject<T>>> builder) {
-        super(builder);
+    public CustomObjectByKeyGetImpl(final String container, final String key, final Class<T> clazz) {
+        this(container, key, SphereJsonUtils.convertToJavaType(clazz));
+    }
+
+    public CustomObjectByKeyGetImpl(final String container, final String key, final TypeReference<T> typeReference) {
+        this(container, key, SphereJsonUtils.convertToJavaType(typeReference));
+    }
+
+    @Override
+    protected CustomObject<T> deserializeCustomObject(final HttpResponse httpResponse) {
+        return Optional.ofNullable(httpResponse)
+                .filter(response -> response.getResponseBody() != null && response.getResponseBody().length > 0)
+                .map(response -> response.getResponseBody())
+                .map(responseBody -> SphereJsonUtils.<CustomObject<T>>readObject(httpResponse.getResponseBody(), javaType))
+                .orElse(null);
     }
 }

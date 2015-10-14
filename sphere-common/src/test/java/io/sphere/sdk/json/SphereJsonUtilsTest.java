@@ -24,7 +24,7 @@ public class SphereJsonUtilsTest {
     @Test
     public void deserializeZonedDateTime() throws Exception {
         final String timeAsString = "2001-09-11T14:00:00.000Z";
-        final ZonedDateTime actual = SphereJsonUtils.readObject(("\"" + timeAsString + "\"").getBytes(), TypeReferences.ZonedDateTimeTypeReference());
+        final ZonedDateTime actual = SphereJsonUtils.readObject(("\"" + timeAsString + "\"").getBytes(), TypeReferences.zonedDateTimeTypeReference());
         assertThat(DateTimeFormatter.ISO_INSTANT.format(actual)).isEqualTo("2001-09-11T14:00:00Z");
     }
 

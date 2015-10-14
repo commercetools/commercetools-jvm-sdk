@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
  *  {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setExternalId()}
+ *
+ * @see Customer
  */
 public class SetExternalId extends UpdateActionImpl<Customer> {
     @Nullable

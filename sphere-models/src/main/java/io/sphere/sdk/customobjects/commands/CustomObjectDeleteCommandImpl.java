@@ -1,12 +1,13 @@
 package io.sphere.sdk.customobjects.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.commands.CommandImpl;
-import io.sphere.sdk.commands.DeleteCommand;
 import io.sphere.sdk.customobjects.CustomObject;
+import io.sphere.sdk.customobjects.CustomObjectUtils;
 import io.sphere.sdk.http.HttpMethod;
+import io.sphere.sdk.json.SphereJsonUtils;
 
 import static java.lang.String.format;
 
@@ -15,48 +16,43 @@ import static java.lang.String.format;
  *
  *
  */
-final class CustomObjectDeleteCommandImpl<T extends CustomObject<?>> extends CommandImpl<T> implements CustomObjectDeleteCommand<T> {
-    private final String container;
-    private final String key;
-    private final TypeReference<T> typeReference;
+final class CustomObjectDeleteCommandImpl<T> extends CommandImpl<CustomObject<T>> implements CustomObjectDeleteCommand<T> {
+    private final String path;
+    private final JavaType javaType;
 
     @Override
-    protected TypeReference<T> typeReference() {
-        return typeReference;
+    protected JavaType jacksonJavaType() {
+        return javaType;
     }
 
     @Override
     public HttpRequestIntent httpRequestIntent() {
-        return HttpRequestIntent.of(HttpMethod.DELETE, CustomObjectEndpoint.PATH + format("/%s/%s", container, key));
+        return HttpRequestIntent.of(HttpMethod.DELETE, CustomObjectEndpoint.PATH + path);
+    }
+
+    CustomObjectDeleteCommandImpl(final String container, final String key, final Class<T> valueClass) {
+        this(container, key, SphereJsonUtils.convertToJavaType(valueClass));
     }
 
     CustomObjectDeleteCommandImpl(final String container, final String key, final TypeReference<T> typeReference) {
-        this.container = CustomObject.validatedContainer(container);
-        this.key = CustomObject.validatedKey(key);
-        this.typeReference = typeReference;
+        this(container, key, SphereJsonUtils.convertToJavaType(typeReference));
     }
 
-    public static <T extends CustomObject<?>> DeleteCommand<T> of(final T customObject, final TypeReference<T> typeReference) {
-        return of(customObject.getContainer(), customObject.getKey(), typeReference);
+    CustomObjectDeleteCommandImpl(final String container, final String key, final JavaType valueJavaType) {
+        this.path = format("/%s/%s", container, key);
+        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType);
     }
 
-    public static <T extends CustomObject<?>> DeleteCommand<T> of(final String container, final String key, final TypeReference<T> typeReference) {
-        return new CustomObjectDeleteCommandImpl<>(container, key, typeReference);
+    CustomObjectDeleteCommandImpl(final String id, final long version, final Class<T> valueClass) {
+        this(id, version, SphereJsonUtils.convertToJavaType(valueClass));
     }
 
-    /**
-     * Deletes a custom object. Convenience method to not specify the {@link TypeReference} but lacking the accessible value in the result.
-     * @param customObject the custom object to delete
-     * @param <T> the type of the whole custom object
-     * @return custom object only with meta data
-     */
-    public static <T extends CustomObject<?>> DeleteCommand<CustomObject<JsonNode>> of(final T customObject) {
-        return of(customObject.getContainer(), customObject.getKey());
+    CustomObjectDeleteCommandImpl(final String id, final long version, final TypeReference<T> typeReference) {
+        this(id, version, SphereJsonUtils.convertToJavaType(typeReference));
     }
 
-    public static DeleteCommand<CustomObject<JsonNode>> of(final String container, final String key) {
-        return new CustomObjectDeleteCommandImpl<>(container, key, new TypeReference<CustomObject<JsonNode>>() {
-
-        });
+    CustomObjectDeleteCommandImpl(final String id, final long version, final JavaType valueJavaType) {
+        this.path = format("/%s?version=%d", id, version);
+        this.javaType = CustomObjectUtils.getCustomObjectJavaTypeForValue(valueJavaType);
     }
 }

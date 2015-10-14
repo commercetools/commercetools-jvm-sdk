@@ -10,6 +10,7 @@ import io.sphere.sdk.cartdiscounts.commands.CartDiscountDeleteCommand;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.carts.commands.CartDeleteCommand;
 import io.sphere.sdk.carts.commands.CartUpdateCommand;
+import io.sphere.sdk.carts.commands.updateactions.AddCustomLineItem;
 import io.sphere.sdk.carts.commands.updateactions.AddLineItem;
 import io.sphere.sdk.carts.commands.updateactions.SetShippingAddress;
 import io.sphere.sdk.client.TestClient;
@@ -19,18 +20,16 @@ import io.sphere.sdk.discountcodes.commands.DiscountCodeCreateCommand;
 import io.sphere.sdk.discountcodes.commands.DiscountCodeDeleteCommand;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
+import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.products.Product;
+import io.sphere.sdk.utils.MoneyImpl;
 
-import java.util.function.BiConsumer;
-import java.util.function.BiFunction;
-import java.util.function.Consumer;
-import java.util.function.Function;
+import javax.money.MonetaryAmount;
+import java.util.function.*;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomerAndCart;
 import static io.sphere.sdk.products.ProductFixtures.withTaxedProduct;
-import static io.sphere.sdk.test.SphereTestUtils.DE;
-import static io.sphere.sdk.test.SphereTestUtils.EUR;
-import static io.sphere.sdk.test.SphereTestUtils.randomKey;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -63,8 +62,8 @@ public class CartFixtures {
         });
     }
 
-    public static void withCart(final TestClient client, final Cart cart, final Function<Cart, Cart> f) {
-        final Cart updatedCart = f.apply(cart);
+    public static void withCart(final TestClient client, final Cart cart, final UnaryOperator<Cart> operator) {
+        final Cart updatedCart = operator.apply(cart);
         client.execute(CartDeleteCommand.of(updatedCart));
     }
 
@@ -82,6 +81,42 @@ public class CartFixtures {
             assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
             assertThat(lineItem.getQuantity()).isEqualTo(quantity);
             f.accept(updatedCart);
+        });
+    }
+
+    public static void withCartAndTaxedProduct(final TestClient client, final BiFunction<Cart, Product, Cart> f) {
+        withTaxedProduct(client, product -> {
+            final Cart cart = createCartWithShippingAddress(client);
+
+            final Cart cartToDelete = f.apply(cart, product);
+
+            client.execute(CartDeleteCommand.of(cartToDelete));
+        });
+    }
+
+    public static void withLineItemAndCustomLineItemFilledCart(final TestClient client, final UnaryOperator<Cart> op) {
+        withTaxedProduct(client, product -> {
+            final Cart cart = createCartWithShippingAddress(client);
+            assertThat(cart.getLineItems()).hasSize(0);
+
+            final long quantity = 3;
+            final String productId = product.getId();
+            final AddLineItem addLineItemAction = AddLineItem.of(productId, 1, quantity);
+
+            assertThat(cart.getCustomLineItems()).hasSize(0);
+            final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
+            final String slug = "thing-slug";
+            final LocalizedString name = en("thing");
+            final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, product.getTaxCategory(), 5);
+            final AddCustomLineItem addCustomLineItemAction = AddCustomLineItem.of(item);
+
+            final Cart updatedCart = client.execute(CartUpdateCommand.of(cart, asList(addLineItemAction, addCustomLineItemAction)));
+            assertThat(updatedCart.getLineItems()).hasSize(1);
+            final LineItem lineItem = updatedCart.getLineItems().get(0);
+            assertThat(lineItem.getName()).isEqualTo(product.getMasterData().getStaged().getName());
+            assertThat(lineItem.getQuantity()).isEqualTo(quantity);
+            final Cart cartToDelete = op.apply(updatedCart);
+            client.execute(CartDeleteCommand.of(cartToDelete));
         });
     }
 

@@ -3,8 +3,6 @@ package io.sphere.sdk.customobjects.migrations.version3;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.customobjects.CustomObject;
 
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
@@ -17,15 +15,6 @@ public interface Uvw {
     Foo getFoo();
 
     String getAnotherField();
-
-    static TypeReference<CustomObject<Uvw>> customObjectTypeReference(){
-        return new TypeReference<CustomObject<Uvw>>(){
-            @Override
-            public String toString() {
-                return "TypeReference<CustomObject<Uvw>>";
-            }
-        };
-    }
 
     @JsonIgnore
     static Uvw of(final Foo foo, final String anotherField) {

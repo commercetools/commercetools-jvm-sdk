@@ -9,6 +9,13 @@ import io.sphere.sdk.queries.MetaModelGetDsl;
 import java.util.List;
 import java.util.function.Function;
 
+/**
+ * Fetches a customer group based on a known ID.
+ *
+ * {@include.example io.sphere.sdk.customergroups.queries.CustomerGroupByIdGetTest#execution()}
+ *
+ * @see CustomerGroup
+ */
 public interface CustomerGroupByIdGet extends MetaModelGetDsl<CustomerGroup, CustomerGroup, CustomerGroupByIdGet, CustomerGroupExpansionModel<CustomerGroup>> {
     static CustomerGroupByIdGet of(final Identifiable<CustomerGroup> customerGroup) {
         return of(customerGroup.getId());

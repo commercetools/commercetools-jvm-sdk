@@ -8,6 +8,8 @@ import io.sphere.sdk.models.LocalizedString;
  * Changes the name of a category.
  *
  *  {@doc.gen intro}
+ *
+ *  {@include.example io.sphere.sdk.categories.commands.CategoryUpdateCommandTest#changeName()}
  */
 public class ChangeName extends UpdateActionImpl<Category> {
     private final LocalizedString name;

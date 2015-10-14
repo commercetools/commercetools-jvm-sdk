@@ -1,6 +1,8 @@
 package io.sphere.sdk.queries;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.SphereRequestBase;
 import io.sphere.sdk.expansion.ExpansionPath;
@@ -70,6 +72,7 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         this.queryModel = requireNonNull(queryModel);
     }
 
+    //uses typeReference of whole result
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction,
                                  final List<HttpQueryParameter> additionalQueryParameters) {
@@ -77,6 +80,21 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
                 emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
     }
 
+    //uses typeReference of the fetched objects
+    public MetaModelQueryDslImpl(final String endpoint, final JavaType singleElementJavatype,
+                                 final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction,
+                                 final List<HttpQueryParameter> additionalQueryParameters) {
+        this(emptyList(), emptyList(), null, null, null, endpoint, httpResponse -> deserialize(httpResponse, resolveJavaType(singleElementJavatype)),
+                emptyList(), additionalQueryParameters, queryModel, expansionModel, queryDslBuilderFunction);
+    }
+
+    //uses typeReference of the fetched objects
+    public MetaModelQueryDslImpl(final String endpoint, final JavaType singleElementJavatype,
+                                 final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
+        this(endpoint, singleElementJavatype, queryModel, expansionModel, queryDslBuilderFunction, emptyList());
+    }
+
+    //uses typeReference of whole result
     public MetaModelQueryDslImpl(final String endpoint, final TypeReference<PagedQueryResult<T>> pagedQueryResultTypeReference,
                                  final Q queryModel, final E expansionModel, final Function<MetaModelQueryDslBuilder<T, C, Q, E>, C> queryDslBuilderFunction) {
         this(endpoint, pagedQueryResultTypeReference, queryModel, expansionModel, queryDslBuilderFunction, emptyList());
@@ -293,4 +311,15 @@ public abstract class MetaModelQueryDslImpl<T, C extends MetaModelQueryDsl<T, C,
         return resultMapper;
     }
 
+    private static <T> JavaType resolveJavaType(final TypeReference<T> typeReference) {
+        final TypeFactory typeFactory = TypeFactory.defaultInstance();
+        final JavaType typeParameterJavaType = typeFactory.constructType(typeReference);
+        return resolveJavaType(typeParameterJavaType);
+    }
+
+    private static <T> JavaType resolveJavaType(final JavaType javaType) {
+        final TypeFactory typeFactory = TypeFactory.defaultInstance();
+        final JavaType resultJavaType = typeFactory.constructParametrizedType(PagedQueryResult.class, PagedQueryResult.class, javaType);
+        return resultJavaType;
+    }
 }

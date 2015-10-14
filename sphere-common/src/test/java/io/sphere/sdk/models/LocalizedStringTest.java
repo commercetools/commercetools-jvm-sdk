@@ -10,7 +10,7 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.StrictAssertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LocalizedStringTest {
     private static final String FULL_LOCALE_JSON_STRING = "{\"en-GB\":\"children\",\"en-US\":\"kids\"}";

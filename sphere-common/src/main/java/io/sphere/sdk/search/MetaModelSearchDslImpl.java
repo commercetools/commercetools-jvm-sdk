@@ -34,6 +34,8 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
 
     @Nullable
     final LocalizedStringEntry text;
+    @Nullable
+    final Boolean fuzzy;
     final List<FacetExpression<T>> facets;
     final List<FilterExpression<T>> resultFilters;
     final List<FilterExpression<T>> queryFilters;
@@ -51,7 +53,8 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     final Function<HttpResponse, PagedSearchResult<T>> resultMapper;
     final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction;
 
-    public MetaModelSearchDslImpl(@Nullable final LocalizedStringEntry text, final List<FacetExpression<T>> facets, final List<FilterExpression<T>> resultFilters,
+    public MetaModelSearchDslImpl(@Nullable final LocalizedStringEntry text, @Nullable final Boolean fuzzy,
+                                  final List<FacetExpression<T>> facets, final List<FilterExpression<T>> resultFilters,
                                   final List<FilterExpression<T>> queryFilters, final List<FilterExpression<T>> facetFilters,
                                   final List<SearchSort<T>> sort, @Nullable final Long limit, @Nullable final Long offset,
                                   final String endpoint, final Function<HttpResponse, PagedSearchResult<T>> resultMapper,
@@ -64,6 +67,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         });
         this.searchDslBuilderFunction = requireNonNull(searchDslBuilderFunction);
         this.text = text;
+        this.fuzzy = fuzzy;
         this.facets = requireNonNull(facets);
         this.resultFilters = requireNonNull(resultFilters);
         this.queryFilters = requireNonNull(queryFilters);
@@ -82,7 +86,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     public MetaModelSearchDslImpl(final String endpoint, final TypeReference<PagedSearchResult<T>> pagedSearchResultTypeReference,
                                   final S searchModel, final E expansionModel, final Function<MetaModelSearchDslBuilder<T, C, S, E>, C> searchDslBuilderFunction,
                                   final List<HttpQueryParameter> additionalQueryParameters) {
-        this(null, emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), null, null, endpoint, httpResponse -> deserialize(httpResponse, pagedSearchResultTypeReference),
+        this(null, null, emptyList(), emptyList(), emptyList(), emptyList(), emptyList(), null, null, endpoint, httpResponse -> deserialize(httpResponse, pagedSearchResultTypeReference),
                 emptyList(), additionalQueryParameters, searchModel, expansionModel, searchDslBuilderFunction);
     }
 
@@ -92,7 +96,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     public MetaModelSearchDslImpl(final MetaModelSearchDslBuilder<T, C, S, E> builder) {
-        this(builder.text, builder.facets, builder.resultFilters, builder.queryFilters, builder.facetFilters, builder.sort,
+        this(builder.text, builder.fuzzy, builder.facets, builder.resultFilters, builder.queryFilters, builder.facetFilters, builder.sort,
                 builder.limit, builder.offset, builder.endpoint, builder.resultMapper, builder.expansionPaths, builder.additionalQueryParameters,
                 builder.searchModel, builder.expansionModel, builder.searchDslBuilderFunction);
     }
@@ -106,6 +110,11 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     public C withText(final Locale locale, final String text) {
         final LocalizedStringEntry locStringEntry = LocalizedStringEntry.of(requireNonNull(locale), requireNonNull(text));
         return withText(locStringEntry);
+    }
+
+    @Override
+    public C withFuzzy(final Boolean fuzzy) {
+        return copyBuilder().fuzzy(fuzzy).build();
     }
 
     @Override
@@ -335,6 +344,12 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         return expansionPaths;
     }
 
+    @Nullable
+    @Override
+    public Boolean isFuzzy() {
+        return fuzzy;
+    }
+
     protected List<HttpQueryParameter> additionalQueryParameters() {
         return additionalQueryParameters;
     }
@@ -361,6 +376,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         if (!facets().isEmpty()) {
             builder.add("formatBooleanFacet", Boolean.TRUE.toString(), urlEncoded);
         }
+        Optional.ofNullable(isFuzzy()).ifPresent(b -> builder.add(FUZZY, b.toString(), urlEncoded));
         resultFilters().forEach(f -> builder.add(FILTER, f.toSearchExpression(), urlEncoded));
         queryFilters().forEach(f -> builder.add(FILTER_QUERY, f.toSearchExpression(), urlEncoded));
         facetFilters().forEach(f -> builder.add(FILTER_FACETS, f.toSearchExpression(), urlEncoded));
@@ -388,6 +404,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
 
         return "SearchDslImpl{" +
                 ", text=" + text +
+                ", fuzzy=" + fuzzy +
                 ", facets=" + facets +
                 ", resultFilters=" + resultFilters +
                 ", queryFilters=" + queryFilters +
