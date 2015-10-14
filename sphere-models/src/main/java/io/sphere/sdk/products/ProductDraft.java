@@ -57,6 +57,5 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     SearchKeywords getSearchKeywords();
 
     @Nullable
-    @JsonInclude(JsonInclude.Include.NON_EMPTY)
     CategoryOrderHints getCategoryOrderHints();
 }
