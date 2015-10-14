@@ -9,26 +9,12 @@ import java.util.function.Function;
  *
  * @param <T> type of the search result
  * @param <C> type of the class implementing this class
- * @param <S> type of the search model
+ * @param <S> type of the sort model
+ * @param <L> type of the filter model
+ * @param <F> type of the facet model
  * @param <E> type of the expansion model
  */
-public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S, E>, S, E> extends EntitySearch<T>, SearchDsl<T, C>, MetaModelExpansionDsl<T, C, E> {
-
-    C withFacets(final Function<S, FacetExpression<T>> m);
-
-    C plusFacets(final Function<S, FacetExpression<T>> m);
-
-    C withResultFilters(final Function<S, List<FilterExpression<T>>> m);
-
-    C plusResultFilters(final Function<S, List<FilterExpression<T>>> m);
-
-    C withQueryFilters(final Function<S, List<FilterExpression<T>>> m);
-
-    C plusQueryFilters(final Function<S, List<FilterExpression<T>>> m);
-
-    C withFacetFilters(final Function<S, List<FilterExpression<T>>> m);
-
-    C plusFacetFilters(final Function<S, List<FilterExpression<T>>> m);
+public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S, L, F, E>, S, L, F, E> extends EntitySearch<T>, SearchDsl<T, C>, MetaModelFilterDsl<T, C, L>, MetaModelFacetDsl<T, C, F>, MetaModelExpansionDsl<T, C, E> {
 
     C plusFacetedSearch(final Function<S, FacetAndFilterSearchExpression<T>> m);
 

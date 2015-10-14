@@ -22,8 +22,8 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
     @Test
     public void resultsArePaginated() throws Exception {
         final PagedSearchResult<ProductProjection> result = executeSearch(ProductProjectionSearch.ofStaged()
-                .plusQueryFilters(model -> model().allVariants().attribute().ofString(ATTR_NAME_COLOR).filtered().byAny(asList("blue", "red")))
-                .withSort(model -> model().name().locale(ENGLISH).sorted().byDesc())
+                .plusQueryFilters(filter -> filter.allVariants().attribute().ofString(ATTR_NAME_COLOR).byAny(asList("blue", "red")))
+                .withSort(sort -> sort.name().locale(ENGLISH).byDesc())
                 .withOffset(1L)
                 .withLimit(1L));
         assertThat(resultsToIds(result)).containsOnly(product2.getId());

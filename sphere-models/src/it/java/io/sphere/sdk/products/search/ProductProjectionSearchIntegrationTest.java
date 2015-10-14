@@ -88,22 +88,18 @@ public class ProductProjectionSearchIntegrationTest extends IntegrationTest {
         evilProduct2 = findBySku.apply(SKU_B).orElseGet(() -> createEvilTestProduct(evilProductType, EVIL_PRODUCT_TYPE_NAME + "bar", EVIL_CHARACTER_WORD, SKU_B));
     }
 
-    protected static ProductProjectionSearchModel model() {
-        return ProductProjectionSearchModel.of();
-    }
-
     protected static List<String> resultsToIds(final PagedSearchResult<ProductProjection> result) {
         return toIds(result.getResults());
     }
 
     protected static PagedSearchResult<ProductProjection> executeSearch(final ProductProjectionSearch search) {
         final List<String> ids = asList(product1.getId(), product2.getId(), product3.getId());
-        return execute(search.plusQueryFilters(model -> model.id().filtered().byAny(ids)));
+        return execute(search.plusQueryFilters(filter -> filter.id().byAny(ids)));
     }
 
     protected static PagedSearchResult<ProductProjection> executeEvilSearch(final ProductProjectionSearch search) {
         final List<String> ids = asList(evilProduct1.getId(), evilProduct2.getId());
-        return execute(search.plusQueryFilters(model -> model.id().filtered().byAny(ids)));
+        return execute(search.plusQueryFilters(filter -> filter.id().byAny(ids)));
     }
 
     private static ProductType createProductType() {

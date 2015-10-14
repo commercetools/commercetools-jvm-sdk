@@ -146,17 +146,13 @@ public class ProductProjectionSearchModelIntegrationTest extends IntegrationTest
         product2 = findBySku.apply(SKU2).orElseGet(() -> createProduct2());
     }
 
-    protected static ProductProjectionSearchModel model() {
-        return ProductProjectionSearchModel.of();
-    }
-
     protected static Long toCents(final MonetaryAmount money) {
         return money.getNumber().numberValueExact(BigDecimal.class).movePointRight(2).longValue();
     }
 
     protected static PagedSearchResult<ProductProjection> executeSearch(final ProductProjectionSearch search) {
         final List<String> ids = asList(product1.getId(), product2.getId());
-        return execute(search.plusQueryFilters(model -> model.id().filtered().byAny(ids)));
+        return execute(search.plusQueryFilters(filter -> filter.id().byAny(ids)));
     }
 
     private static Product createProduct1() {

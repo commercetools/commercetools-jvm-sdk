@@ -4,6 +4,10 @@
  "total": 4162,
  "results": [],
  "facets": {
+    "variants.attributes.size": {
+      "type": "filter",
+      "count": 2
+    },
     "variants.attributes.filterColor.key": {
       "type": "terms",
       "missing": 44,

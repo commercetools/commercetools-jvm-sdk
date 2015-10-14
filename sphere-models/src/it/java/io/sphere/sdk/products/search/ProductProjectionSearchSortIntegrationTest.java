@@ -12,7 +12,7 @@ public class ProductProjectionSearchSortIntegrationTest extends ProductProjectio
     @Test
     public void sortByAttributeAscending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byAsc());
+                .withSort(sort -> sort.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAsc());
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsExactly(product2.getId(), product1.getId(), product3.getId());
     }
@@ -20,7 +20,7 @@ public class ProductProjectionSearchSortIntegrationTest extends ProductProjectio
     @Test
     public void sortByAttributeDescending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byDesc());
+                .withSort(sort -> sort.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byDesc());
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsExactly(product1.getId(), product2.getId(), product3.getId());
     }
@@ -28,7 +28,7 @@ public class ProductProjectionSearchSortIntegrationTest extends ProductProjectio
     @Test
     public void sortWithAdditionalParameterByAttributeAscending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byAscWithMax());
+                .withSort(sort -> sort.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAscWithMax());
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsExactly(product3.getId(), product2.getId(), product1.getId());
     }
@@ -36,7 +36,7 @@ public class ProductProjectionSearchSortIntegrationTest extends ProductProjectio
     @Test
     public void sortWithAdditionalParameterByAttributeDescending() throws Exception {
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withSort(model -> model.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).sorted().byDescWithMin());
+                .withSort(sort -> sort.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byDescWithMin());
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
         assertThat(resultsToIds(result)).containsExactly(product3.getId(), product1.getId(), product2.getId());
     }
@@ -52,11 +52,11 @@ public class ProductProjectionSearchSortIntegrationTest extends ProductProjectio
     @Test
     public void sortByMultipleAttributes() throws Exception {
         final ProductProjectionSearch singleSortedRequest = ProductProjectionSearch.ofStaged()
-                .plusSort(model -> model.allVariants().attribute().ofString(ATTR_NAME_COLOR).sorted().byAsc());
+                .plusSort(sort -> sort.allVariants().attribute().ofString(ATTR_NAME_COLOR).byAsc());
         final PagedSearchResult<ProductProjection> resultNameAsc = executeSearch(singleSortedRequest
-                .plusSort(model -> model.name().locale(ENGLISH).sorted().byAsc()));
+                .plusSort(sort -> sort.name().locale(ENGLISH).byAsc()));
         final PagedSearchResult<ProductProjection> resultNameDesc = executeSearch(singleSortedRequest
-                .plusSort(model -> model.name().locale(ENGLISH).sorted().byDesc()));
+                .plusSort(sort -> sort.name().locale(ENGLISH).byDesc()));
         assertThat(resultsToIds(resultNameAsc)).containsExactly(product3.getId(), product1.getId(), product2.getId());
         assertThat(resultsToIds(resultNameDesc)).containsExactly(product1.getId(), product3.getId(), product2.getId());
     }

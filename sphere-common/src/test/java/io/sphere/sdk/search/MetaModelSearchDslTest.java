@@ -99,13 +99,13 @@ public class MetaModelSearchDslTest {
                 .isEqualTo(asList(EXPANSION_PATH_ONE, EXPANSION_PATH_TWO));
     }
 
-    static final class TestableSearchDsl extends MetaModelSearchDslImpl<Object, TestableSearchDsl, Object, Object> {
+    static final class TestableSearchDsl extends MetaModelSearchDslImpl<Object, TestableSearchDsl, Object, Object, Object, Object> {
 
         TestableSearchDsl(){
-            super("", new TypeReference<PagedSearchResult<Object>>() {}, new Object(), new Object(), TestableSearchDsl::new);
+            super("", new TypeReference<PagedSearchResult<Object>>() {}, new Object(), new Object(), new Object(), new Object(), TestableSearchDsl::new);
         }
 
-        private TestableSearchDsl(final MetaModelSearchDslBuilder<Object, TestableSearchDsl, Object, Object> builder) {
+        private TestableSearchDsl(final MetaModelSearchDslBuilder<Object, TestableSearchDsl, Object, Object, Object, Object> builder) {
             super(builder);
         }
     }

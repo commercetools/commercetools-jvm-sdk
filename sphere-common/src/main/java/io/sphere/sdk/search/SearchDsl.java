@@ -17,66 +17,6 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T>
     C withText(final Locale locale, final String text);
 
     /**
-     * Returns an EntitySearch with the new facet expression list as facets (query parameter {@code facet}).
-     * @param facetExpressions the new facet expression list
-     * @return an EntitySearch with facets
-     */
-    C withFacets(final List<FacetExpression<T>> facetExpressions);
-
-    C withFacets(final FacetExpression<T> facetExpression);
-
-    /**
-     * Returns an EntitySearch with the new facet expression list appended to the existing facets (query parameter {@code facet}).
-     * @param facetExpressions the new facet expression list
-     * @return an EntitySearch with the existing facets plus the new facet list.
-     */
-    C plusFacets(final List<FacetExpression<T>> facetExpressions);
-
-    C plusFacets(final FacetExpression<T> facetExpression);
-
-    /**
-     * Returns an EntitySearch with the new result filter expression list as result filter (query parameter {@code filter}).
-     * @param filterExpressions the new result filter expression list
-     * @return an EntitySearch with resultFilters
-     */
-    C withResultFilters(final List<FilterExpression<T>> filterExpressions);
-
-    /**
-     * Returns an EntitySearch with the new result filter expression list appended to the existing result filters (query parameter {@code filter}).
-     * @param filterExpressions the new result filter expression list
-     * @return an EntitySearch with the existing result filter plus the new result filter list.
-     */
-    C plusResultFilters(final List<FilterExpression<T>> filterExpressions);
-
-    /**
-     * Returns an EntitySearch with the new query filter expression list as query filters (query parameter {@code filter.query}).
-     * @param filterExpressions the new query filter expression list
-     * @return an EntitySearch with queryFilters
-     */
-    C withQueryFilters(final List<FilterExpression<T>> filterExpressions);
-
-    /**
-     * Returns an EntitySearch with the new query filter expression list appended to the existing query filters (query parameter {@code filter.query}).
-     * @param filterExpressions the new query filter expression list
-     * @return an EntitySearch with the existing query filters plus the new query filter list.
-     */
-    C plusQueryFilters(final List<FilterExpression<T>> filterExpressions);
-
-    /**
-     * Returns an EntitySearch with the new facet filter list as facet filter (query parameter {@code filter.facet}).
-     * @param filterExpressions the new facet filter expression list
-     * @return an EntitySearch with facetFilters
-     */
-    C withFacetFilters(final List<FilterExpression<T>> filterExpressions);
-
-    /**
-     * Returns an EntitySearch with the new facet filter list appended to the existing facet filters (query parameter {@code filter.facet}).
-     * @param filterExpressions the new facet filter expression list
-     * @return an EntitySearch with the existing facet filters plus the new facet filter list.
-     */
-    C plusFacetFilters(final List<FilterExpression<T>> filterExpressions);
-
-    /**
      * Returns an EntitySearch with the new faceted search expressions appended to the existing faceted search expressions.
      * A faceted expression is equivalent to use facet, facetFilters and resultFilters with the given facet and filters expressions.
      * Therefore calling afterwards {@link this#withFacets}, {@link this#withFacetFilters} or {@link this#withResultFilters} will break this feature!

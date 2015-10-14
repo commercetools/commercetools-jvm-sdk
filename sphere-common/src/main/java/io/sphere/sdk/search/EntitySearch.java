@@ -10,14 +10,6 @@ public interface EntitySearch<T> extends Search<T> {
     @Nullable
     LocalizedStringEntry text();
 
-    List<FacetExpression<T>> facets();
-
-    List<FilterExpression<T>> resultFilters();
-
-    List<FilterExpression<T>> queryFilters();
-
-    List<FilterExpression<T>> facetFilters();
-
     List<SortExpression<T>> sort();
 
     @Nullable
