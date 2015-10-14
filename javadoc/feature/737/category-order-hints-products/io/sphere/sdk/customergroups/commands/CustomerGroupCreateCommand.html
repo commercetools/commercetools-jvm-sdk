@@ -106,6 +106,18 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">CustomerGroupCreateCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title="interface in io.sphere.sdk.commands">CreateCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>,<a href="../../../../../io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html" title="interface in io.sphere.sdk.customergroups.commands">CustomerGroupCreateCommand</a>,<a href="../../../../../io/sphere/sdk/customergroups/expansion/CustomerGroupExpansionModel.html" title="class in io.sphere.sdk.customergroups.expansion">CustomerGroupExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&gt;</pre>
+<div class="block"><p>Creates a new customer group</p>
+
+ <div id="io-sphere-sdk-customergroups-commands-CustomerGroupCreateCommandTest-execution--%s" class=code-example><pre><code class='java'>final String name = "creation demo customer group name";
+
+final CustomerGroup customerGroup = execute(CustomerGroupCreateCommand.of(name));
+
+assertThat(customerGroup.getName()).isEqualTo(name);
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups"><code>CustomerGroup</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>

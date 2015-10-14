@@ -143,12 +143,11 @@ client secret: 222222222222222222222222222222226</code></pre>
 
  <h3 id=instantiation>Instantiation</h3>
 
- <div id="example-JavaClientInstantiationExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.SphereAsyncHttpClientFactory;
-import io.sphere.sdk.client.SphereClient;
+ <div id="example-JavaClientInstantiationExample%s" class=code-example><button type='button' style='display: none;' class='reveal-imports'>show/hide imports</button><pre class='hide code-example-imports'><code class='java'>import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.client.SphereClientFactory;
 </code></pre><pre><code class='java'>public class JavaClientInstantiationExample {
     public void instantiate() {
-        final SphereClientFactory factory = SphereClientFactory.of(SphereAsyncHttpClientFactory::create);
+        final SphereClientFactory factory = SphereClientFactory.of();
         final SphereClient client = factory.createClient(
                 "jvm-sdk-dev-1", //replace with your project key
                 "ELqF0rykXD2fyS8s-IhIPKfQ", //replace with your client id

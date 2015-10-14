@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":9,"i7":10,"i8":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":9,"i7":9,"i8":10,"i9":10,"i10":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -130,7 +130,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     <p>See also <a href="../CartUpdateCommand.html">CartUpdateCommand</a>.<p>
 
     <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addLineItem--%s" class=code-example><pre><code class='java'>withEmptyCartAndProduct(client(), (cart, product) -&gt; {
-    assertThat(cart.getLineItems()).hasSize(0);
+    assertThat(cart.getLineItems()).isEmpty();
     final long quantity = 3;
     final String productId = product.getId();
     final AddLineItem action = AddLineItem.of(productId, MASTER_VARIANT_ID, quantity);
@@ -162,42 +162,50 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#getCustom--">getCustom</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#getDistributionChannel--">getDistributionChannel</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#getProductId--">getProductId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#getQuantity--">getQuantity</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#getSupplyChannel--">getSupplyChannel</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.Integer</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#getVariantId--">getVariantId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#of-io.sphere.sdk.products.ProductIdentifiable-java.lang.Integer-long-">of</a></span>(<a href="../../../../../../io/sphere/sdk/products/ProductIdentifiable.html" title="interface in io.sphere.sdk.products">ProductIdentifiable</a>&nbsp;product,
   java.lang.Integer&nbsp;variantId,
   long&nbsp;quantity)</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#of-java.lang.String-java.lang.Integer-long-">of</a></span>(java.lang.String&nbsp;productId,
   java.lang.Integer&nbsp;variantId,
   long&nbsp;quantity)</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#withCustom-io.sphere.sdk.types.CustomFieldsDraft-">withCustom</a></span>(<a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#withDistributionChannel-io.sphere.sdk.models.Referenceable-">withDistributionChannel</a></span>(<a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;distributionChannel)</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html#withSupplyChannel-io.sphere.sdk.models.Referenceable-">withSupplyChannel</a></span>(<a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;supplyChannel)</code>&nbsp;</td>
 </tr>
@@ -306,6 +314,16 @@ public&nbsp;<a href="../../../../../../io/sphere/sdk/models/Reference.html" titl
 public&nbsp;<a href="../../../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;getSupplyChannel()</pre>
 </li>
 </ul>
+<a name="getCustom--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCustom</h4>
+<pre>@Nullable
+public&nbsp;<a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;getCustom()</pre>
+</li>
+</ul>
 <a name="withSupplyChannel-io.sphere.sdk.models.Referenceable-">
 <!--   -->
 </a>
@@ -318,10 +336,19 @@ public&nbsp;<a href="../../../../../../io/sphere/sdk/models/Reference.html" titl
 <a name="withDistributionChannel-io.sphere.sdk.models.Referenceable-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>withDistributionChannel</h4>
 <pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a>&nbsp;withDistributionChannel(<a href="../../../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../../../io/sphere/sdk/channels/Channel.html" title="interface in io.sphere.sdk.channels">Channel</a>&gt;&nbsp;distributionChannel)</pre>
+</li>
+</ul>
+<a name="withCustom-io.sphere.sdk.types.CustomFieldsDraft-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>withCustom</h4>
+<pre>public&nbsp;<a href="../../../../../../io/sphere/sdk/carts/commands/updateactions/AddLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions">AddLineItem</a>&nbsp;withCustom(<a href="../../../../../../io/sphere/sdk/types/CustomFieldsDraft.html" title="class in io.sphere.sdk.types">CustomFieldsDraft</a>&nbsp;custom)</pre>
 </li>
 </ul>
 </li>

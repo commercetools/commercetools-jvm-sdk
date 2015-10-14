@@ -106,7 +106,17 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">CartQuery</span>
 extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" title="interface in io.sphere.sdk.queries">MetaModelQueryDsl</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>,<a href="../../../../../io/sphere/sdk/carts/queries/CartQuery.html" title="interface in io.sphere.sdk.carts.queries">CartQuery</a>,<a href="../../../../../io/sphere/sdk/carts/queries/CartQueryModel.html" title="class in io.sphere.sdk.carts.queries">CartQueryModel</a>,<a href="../../../../../io/sphere/sdk/carts/expansion/CartExpansionModel.html" title="class in io.sphere.sdk.carts.expansion">CartExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a>&gt;&gt;</pre>
-<div class="block">Provides a QueryDsl for  carts to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p></div>
+<div class="block">Provides a QueryDsl for  carts to formulate predicates, search expressions and reference expansion path expressions. <p>For further information how to use the query API to consult the <a href='../../../../../io/sphere/sdk/meta/QueryDocumentation.html'>Query API documentation</a>.</p>
+
+  <p>Example for query a cart by customer email:</p>
+
+ <div id="io-sphere-sdk-carts-queries-CartQueryTest-byCustomerEmail--%s" class=code-example><pre><code class='java'>withCustomerAndCart(client(), (customer, cart) -&gt; {
+    final CartQuery cartQuery = CartQuery.of()
+            .withPredicates(m -&gt; m.customerEmail().is(customer.getEmail()));
+    final Cart loadedCart = execute(cartQuery).head().get();
+    assertThat(loadedCart.getCustomerId()).contains(customer.getId());
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/queries/CartQueryTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>

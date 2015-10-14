@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9,"i6":9};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9,"i6":9,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -115,6 +115,14 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public class <span class="typeNameLabel">CustomerName</span>
 extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+<div class="block">Parameter object for customer title, firstName, middleName and lastName.</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/Customer.html#getName--"><code>Customer.getName()</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/updateactions/ChangeName.html" title="class in io.sphere.sdk.customers.commands.updateactions"><code>ChangeName</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/CustomerDraftBuilder.html" title="class in io.sphere.sdk.customers"><code>CustomerDraftBuilder</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -166,6 +174,14 @@ extends <a href="../../../../io/sphere/sdk/models/Base.html" title="class in io.
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customers/CustomerName.html#ofTitleFirstAndLastName-java.lang.String-java.lang.String-java.lang.String-">ofTitleFirstAndLastName</a></span>(java.lang.String&nbsp;title,
                        java.lang.String&nbsp;firstName,
                        java.lang.String&nbsp;lastName)</code>&nbsp;</td>
+</tr>
+<tr id="i7" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customers/CustomerName.html#withMiddleName-java.lang.String-">withMiddleName</a></span>(java.lang.String&nbsp;middleName)</code>&nbsp;</td>
+</tr>
+<tr id="i8" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customers/CustomerName.html#withTitle-java.lang.String-">withTitle</a></span>(java.lang.String&nbsp;title)</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -232,6 +248,26 @@ public&nbsp;java.lang.String&nbsp;getMiddleName()</pre>
 <li class="blockList">
 <h4>getLastName</h4>
 <pre>public&nbsp;java.lang.String&nbsp;getLastName()</pre>
+</li>
+</ul>
+<a name="withTitle-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withTitle</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a>&nbsp;withTitle(@Nullable
+                              java.lang.String&nbsp;title)</pre>
+</li>
+</ul>
+<a name="withMiddleName-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withMiddleName</h4>
+<pre>public&nbsp;<a href="../../../../io/sphere/sdk/customers/CustomerName.html" title="class in io.sphere.sdk.customers">CustomerName</a>&nbsp;withMiddleName(@Nullable
+                                   java.lang.String&nbsp;middleName)</pre>
 </li>
 </ul>
 <a name="ofFirstAndLastName-java.lang.String-java.lang.String-">

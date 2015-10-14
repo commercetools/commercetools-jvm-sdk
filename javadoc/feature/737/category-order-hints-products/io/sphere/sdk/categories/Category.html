@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":17,"i11":18,"i12":17,"i13":17,"i14":17};
-var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":6,"i10":6,"i11":17,"i12":17,"i13":17,"i14":18,"i15":17,"i16":49,"i17":17};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -100,20 +100,24 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a>, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>,<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a></dd>
+<dd><a href="../../../../io/sphere/sdk/models/CreationTimestamped.html" title="interface in io.sphere.sdk.models">CreationTimestamped</a>, <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a>, <a href="../../../../io/sphere/sdk/models/Identifiable.html" title="interface in io.sphere.sdk.models">Identifiable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a>, <a href="../../../../io/sphere/sdk/models/Referenceable.html" title="interface in io.sphere.sdk.models">Referenceable</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>,<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a>, <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">Category</span>
-extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>, <a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a></pre>
+extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interface in io.sphere.sdk.models">Resource</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;, <a href="../../../../io/sphere/sdk/models/WithLocalizedSlug.html" title="interface in io.sphere.sdk.models">WithLocalizedSlug</a>, <a href="../../../../io/sphere/sdk/models/MetaAttributes.html" title="interface in io.sphere.sdk.models">MetaAttributes</a>, <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a></pre>
 <div class="block">Categories are used to organize products in a hierarchical structure.
+
+  <p>A category can have <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><code>custom fields</code></a>.</p>
 
  <p id="operations">Operations:</p>
  <ul>
      <li>Create a category with <a href="../../../../io/sphere/sdk/categories/commands/CategoryCreateCommand.html" title="interface in io.sphere.sdk.categories.commands"><code>CategoryCreateCommand</code></a>.</li>
      <li>Update a category with <a href="../../../../io/sphere/sdk/categories/commands/CategoryUpdateCommand.html" title="interface in io.sphere.sdk.categories.commands"><code>CategoryUpdateCommand</code></a>.</li>
      <li>Delete a category with <a href="../../../../io/sphere/sdk/categories/commands/CategoryDeleteCommand.html" title="interface in io.sphere.sdk.categories.commands"><code>CategoryDeleteCommand</code></a>.</li>
- </ul></div>
+ </ul>
+
+ <p>Consult the documentation for <a href="../../../../io/sphere/sdk/meta/CategoryDocumentation.html">categories</a> for more information.</p></div>
 </li>
 </ul>
 </div>
@@ -127,7 +131,7 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
@@ -137,60 +141,76 @@ extends <a href="../../../../io/sphere/sdk/models/Resource.html" title="interfac
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getAncestors--">getAncestors</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getCustom--">getCustom</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getDescription--">getDescription</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getExternalId--">getExternalId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getMetaDescription--">getMetaDescription</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getMetaKeywords--">getMetaKeywords</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getMetaTitle--">getMetaTitle</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getOrderHint--">getOrderHint</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i8" class="altColor">
+<tr id="i9" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getParent--">getParent</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i9" class="rowColor">
+<tr id="i10" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i10" class="altColor">
+<tr id="i11" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#reference-java.lang.String-">reference</a></span>(java.lang.String&nbsp;id)</code>&nbsp;</td>
 </tr>
-<tr id="i11" class="rowColor">
+<tr id="i12" class="altColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#referenceTypeId--">referenceTypeId</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i13" class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#resourceTypeId--">resourceTypeId</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i14" class="altColor">
 <td class="colFirst"><code>default <a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#toReference--">toReference</a></span>()</code>
 <div class="block">Creates a reference which is not necessarily filled.</div>
 </td>
 </tr>
-<tr id="i12" class="altColor">
+<tr id="i15" class="rowColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#toString-io.sphere.sdk.categories.Category-">toString</a></span>(<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&nbsp;category)</code>&nbsp;</td>
 </tr>
-<tr id="i13" class="rowColor">
+<tr id="i16" class="altColor">
 <td class="colFirst"><code>static java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#typeId--">typeId</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#typeId--">typeId</a></span>()</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
+<div class="block"><span class="deprecationComment">use <a href="../../../../io/sphere/sdk/categories/Category.html#referenceTypeId--"><code>referenceTypeId()</code></a> instead</span></div>
+</div>
+</td>
 </tr>
-<tr id="i14" class="altColor">
+<tr id="i17" class="rowColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/categories/Category.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
@@ -350,6 +370,20 @@ java.lang.String&nbsp;getExternalId()</pre>
 </dl>
 </li>
 </ul>
+<a name="getCustom--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCustom</h4>
+<pre>@Nullable
+<a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&nbsp;getCustom()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/types/Custom.html#getCustom--">getCustom</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a></code></dd>
+</dl>
+</li>
+</ul>
 <a name="toReference--">
 <!--   -->
 </a>
@@ -369,13 +403,33 @@ java.lang.String&nbsp;getExternalId()</pre>
 </dl>
 </li>
 </ul>
+<a name="resourceTypeId--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>resourceTypeId</h4>
+<pre>static&nbsp;java.lang.String&nbsp;resourceTypeId()</pre>
+</li>
+</ul>
+<a name="referenceTypeId--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>referenceTypeId</h4>
+<pre>static&nbsp;java.lang.String&nbsp;referenceTypeId()</pre>
+</li>
+</ul>
 <a name="typeId--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
 <h4>typeId</h4>
-<pre>static&nbsp;java.lang.String&nbsp;typeId()</pre>
+<pre>@Deprecated
+static&nbsp;java.lang.String&nbsp;typeId()</pre>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../io/sphere/sdk/categories/Category.html#referenceTypeId--"><code>referenceTypeId()</code></a> instead</span></div>
 </li>
 </ul>
 <a name="reference-java.lang.String-">

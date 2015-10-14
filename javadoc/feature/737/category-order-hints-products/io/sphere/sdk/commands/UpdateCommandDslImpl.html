@@ -198,8 +198,8 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 </td>
 </tr>
 <tr id="i4" class="altColor">
-<td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>protected com.fasterxml.jackson.databind.JavaType</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html#jacksonJavaType--">jacksonJavaType</a></span>()</code>&nbsp;</td>
 </tr>
 <tr id="i5" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">C</a></code></td>
@@ -218,7 +218,7 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></h3>
-<code><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
+<code><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -284,16 +284,16 @@ implements <a href="../../../../io/sphere/sdk/commands/UpdateCommandDsl.html" ti
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="typeReference--">
+<a name="jacksonJavaType--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>typeReference</h4>
-<pre>protected&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&nbsp;typeReference()</pre>
+<h4>jacksonJavaType</h4>
+<pre>protected&nbsp;com.fasterxml.jackson.databind.JavaType&nbsp;jacksonJavaType()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a> extends <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#jacksonJavaType--">jacksonJavaType</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a> extends <a href="../../../../io/sphere/sdk/models/ResourceView.html" title="interface in io.sphere.sdk.models">ResourceView</a>&lt;<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>,<a href="../../../../io/sphere/sdk/commands/UpdateCommandDslImpl.html" title="type parameter in UpdateCommandDslImpl">T</a>&gt;&gt;</code></dd>
 </dl>
 </li>
 </ul>

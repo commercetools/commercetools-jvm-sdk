@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6,"i5":6,"i6":6,"i7":6,"i8":6,"i9":17};
+var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],16:["t5","Default Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -100,12 +100,48 @@ var activeTableTab = "activeTableTab";
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></dd>
+<dd><a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a>, <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></dd>
 </dl>
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">CustomLineItem</span>
 extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></pre>
+<div class="block"><p>A custom line item is a generic item that can be added to the cart but is not bound to a product. You can use it for discounts (negative money), vouchers, complex cart rules, additional services or fees. You control the lifecycle of this item.</p>
+
+ <p>A CustomLineItem can have <a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types"><code>custom fields</code></a>.</p>
+
+
+ <p>Example for adding a <a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts"><code>CustomLineItem</code></a> to a <a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><code>Cart</code></a>:</p>
+ <div id="io-sphere-sdk-carts-commands-CartUpdateCommandTest-addCustomLineItem--%s" class=code-example><pre><code class='java'>withTaxCategory(client(), taxCategory -&gt; {
+    final Cart cart = createCartWithCountry(client());
+    assertThat(cart.getCustomLineItems()).isEmpty();
+    final MonetaryAmount money = MoneyImpl.of("23.50", EUR);
+    final String slug = "thing-slug";//you handle to identify the custom line item
+    final LocalizedString name = en("thing");
+    final long quantity = 5;
+    final CustomLineItemDraft item = CustomLineItemDraft.of(name, slug, money, taxCategory, quantity);
+
+    final Cart cartWith5 = execute(CartUpdateCommand.of(cart, AddCustomLineItem.of(item)));
+    assertThat(cartWith5.getCustomLineItems()).hasSize(1);
+    final CustomLineItem customLineItem = cartWith5.getCustomLineItems().get(0);
+    assertThat(customLineItem.getMoney()).isEqualTo(money);
+    assertThat(customLineItem.getName()).isEqualTo(name);
+    assertThat(customLineItem.getQuantity()).isEqualTo(quantity);
+    assertThat(customLineItem.getSlug()).isEqualTo(slug);
+    final Set&lt;ItemState&gt; state = customLineItem.getState();
+    assertThat(state).hasSize(1);
+    assertThat(state).extracting("quantity").containsOnly(quantity);
+    assertThat(customLineItem.getTaxCategory()).isEqualTo(taxCategory.toReference());
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/carts/commands/CartUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts"><code>CustomLineItemDraft</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/AddCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>AddCustomLineItem</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/commands/updateactions/RemoveCustomLineItem.html" title="class in io.sphere.sdk.carts.commands.updateactions"><code>RemoveCustomLineItem</code></a>, 
+<a href="../../../../io/sphere/sdk/orders/Order.html#getCustomLineItems--"><code>Order.getCustomLineItems()</code></a>, 
+<a href="../../../../io/sphere/sdk/carts/Cart.html#getCustomLineItems--"><code>Cart.getCustomLineItems()</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -119,42 +155,50 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t1" class="tableTab"><span><a href="javascript:show(1);">Static Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t5" class="tableTab"><span><a href="javascript:show(16);">Default Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getCustom--">getCustom</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getId--">getId</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code>javax.money.MonetaryAmount</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getMoney--">getMoney</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/LocalizedString.html" title="class in io.sphere.sdk.models">LocalizedString</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getName--">getName</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code>java.lang.Long</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getQuantity--">getQuantity</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getSlug--">getSlug</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>java.util.Set&lt;<a href="../../../../io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getState--">getState</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i6" class="altColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/models/Reference.html" title="class in io.sphere.sdk.models">Reference</a>&lt;<a href="../../../../io/sphere/sdk/taxcategories/TaxCategory.html" title="interface in io.sphere.sdk.taxcategories">TaxCategory</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getTaxCategory--">getTaxCategory</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i7" class="rowColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/taxcategories/TaxRate.html" title="interface in io.sphere.sdk.taxcategories">TaxRate</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getTaxRate--">getTaxRate</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i9" class="rowColor">
+<td class="colFirst"><code>static java.lang.String</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#resourceTypeId--">resourceTypeId</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -253,7 +297,7 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <a name="getQuantity--">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>getQuantity</h4>
 <pre>java.lang.Long&nbsp;getQuantity()</pre>
@@ -261,6 +305,28 @@ extends <a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="inter
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../io/sphere/sdk/carts/LineItemLike.html#getQuantity--">getQuantity</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></code></dd>
 </dl>
+</li>
+</ul>
+<a name="getCustom--">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>getCustom</h4>
+<pre><a href="../../../../io/sphere/sdk/types/CustomFields.html" title="class in io.sphere.sdk.types">CustomFields</a>&nbsp;getCustom()</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
+<dd><code><a href="../../../../io/sphere/sdk/types/Custom.html#getCustom--">getCustom</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../io/sphere/sdk/types/Custom.html" title="interface in io.sphere.sdk.types">Custom</a></code></dd>
+</dl>
+</li>
+</ul>
+<a name="resourceTypeId--">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>resourceTypeId</h4>
+<pre>static&nbsp;java.lang.String&nbsp;resourceTypeId()</pre>
 </li>
 </ul>
 </li>

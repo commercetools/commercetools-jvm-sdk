@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":42,"i1":42,"i2":41,"i3":42};
+var methods = {"i0":42,"i1":42,"i2":42,"i3":41};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"],32:["t6","Deprecated Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -165,18 +165,18 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 </td>
 </tr>
 <tr id="i2" class="altColor">
+<td class="colFirst"><code>protected com.fasterxml.jackson.databind.JavaType</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html#jacksonJavaType--">jacksonJavaType</a></span>()</code>
+<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
+&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerCreateTokenCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html#of-java.lang.String-">of</a></span>(java.lang.String&nbsp;customerEmail)</code>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
 <div class="block"><span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreatePasswordTokenCommand</code></a> instead</span></div>
 </div>
 </td>
-</tr>
-<tr id="i3" class="rowColor">
-<td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerToken.html" title="interface in io.sphere.sdk.customers">CustomerToken</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html#typeReference--">typeReference</a></span>()</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
-&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -191,7 +191,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></h3>
-<code><a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -239,17 +239,17 @@ public static&nbsp;<a href="../../../../../io/sphere/sdk/customers/commands/Cust
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreatePasswordTokenCommand</code></a> instead</span></div>
 </li>
 </ul>
-<a name="typeReference--">
+<a name="jacksonJavaType--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>typeReference</h4>
-<pre>protected&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerToken.html" title="interface in io.sphere.sdk.customers">CustomerToken</a>&gt;&nbsp;typeReference()</pre>
+<h4>jacksonJavaType</h4>
+<pre>protected&nbsp;com.fasterxml.jackson.databind.JavaType&nbsp;jacksonJavaType()</pre>
 <div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;</div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerToken.html" title="interface in io.sphere.sdk.customers">CustomerToken</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html#jacksonJavaType--">jacksonJavaType</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/customers/CustomerToken.html" title="interface in io.sphere.sdk.customers">CustomerToken</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>

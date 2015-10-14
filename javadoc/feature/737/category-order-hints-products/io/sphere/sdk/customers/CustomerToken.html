@@ -106,6 +106,16 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">CustomerToken</span>
 extends <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="interface in io.sphere.sdk.models">Timestamped</a></pre>
+<div class="block">A token belonging to a customer to verify an email address or resetting the password.</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/queries/CustomerByTokenGet.html" title="interface in io.sphere.sdk.customers.queries"><code>CustomerByTokenGet</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreateEmailTokenCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreatePasswordTokenCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerPasswordResetCommand</code></a>, 
+<a href="../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerVerifyEmailCommand</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -126,15 +136,21 @@ extends <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="inter
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customers/CustomerToken.html#getCustomerId--">getCustomerId</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customers/CustomerToken.html#getCustomerId--">getCustomerId</a></span>()</code>
+<div class="block">The ID of the customer belonging to the token</div>
+</td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customers/CustomerToken.html#getId--">getId</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customers/CustomerToken.html#getId--">getId</a></span>()</code>
+<div class="block">The ID of the token.</div>
+</td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code>java.lang.String</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customers/CustomerToken.html#getValue--">getValue</a></span>()</code>&nbsp;</td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/customers/CustomerToken.html#getValue--">getValue</a></span>()</code>
+<div class="block">the token value</div>
+</td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code>static com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/customers/CustomerToken.html" title="interface in io.sphere.sdk.customers">CustomerToken</a>&gt;</code></td>
@@ -169,6 +185,11 @@ extends <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="inter
 <li class="blockList">
 <h4>getId</h4>
 <pre>java.lang.String&nbsp;getId()</pre>
+<div class="block">The ID of the token.</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>the id of the token</dd>
+</dl>
 </li>
 </ul>
 <a name="getCustomerId--">
@@ -178,6 +199,11 @@ extends <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="inter
 <li class="blockList">
 <h4>getCustomerId</h4>
 <pre>java.lang.String&nbsp;getCustomerId()</pre>
+<div class="block">The ID of the customer belonging to the token</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>customer id</dd>
+</dl>
 </li>
 </ul>
 <a name="getValue--">
@@ -187,6 +213,11 @@ extends <a href="../../../../io/sphere/sdk/models/Timestamped.html" title="inter
 <li class="blockList">
 <h4>getValue</h4>
 <pre>java.lang.String&nbsp;getValue()</pre>
+<div class="block">the token value</div>
+<dl>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>secret token</dd>
+</dl>
 </li>
 </ul>
 <a name="typeReference--">

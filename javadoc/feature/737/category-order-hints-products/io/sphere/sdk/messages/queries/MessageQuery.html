@@ -112,7 +112,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForAllMessages--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final MessageQuery query = MessageQuery.of()
             //example predicate to fetch for a specific message type
-            .withPredicates(m -&gt; m.type().is("ReturnInfoAdded"))
+            .withPredicates(m -&gt; m.type().is("ReturnInfoAdded").and(m.resource().is(order)))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource())
             .withLimit(1);
@@ -127,6 +127,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForASpecificMessage--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final Query&lt;ReturnInfoAddedMessage&gt; query =
             MessageQuery.of()
+                    .withPredicates(m -&gt; m.resource().is(order))
                     .withSort(m -&gt; m.createdAt().sort().desc())
                     .withExpansionPaths(m -&gt; m.resource())
                     .withLimit(1)
@@ -335,6 +336,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForASpecificMessage--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final Query&lt;ReturnInfoAddedMessage&gt; query =
             MessageQuery.of()
+                    .withPredicates(m -&gt; m.resource().is(order))
                     .withSort(m -&gt; m.createdAt().sort().desc())
                     .withExpansionPaths(m -&gt; m.resource())
                     .withLimit(1)

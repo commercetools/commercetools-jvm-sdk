@@ -157,6 +157,11 @@ implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-C-io.sphere.sdk.client.JsonEndpoint-">CreateCommandImpl</a></span>(<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">C</a>&nbsp;draft,
                  <a href="../../../../io/sphere/sdk/client/JsonEndpoint.html" title="class in io.sphere.sdk.client">JsonEndpoint</a>&lt;<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>&gt;&nbsp;endpoint)</code>&nbsp;</td>
 </tr>
+<tr class="rowColor">
+<td class="colOne"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#CreateCommandImpl-C-java.lang.String-com.fasterxml.jackson.databind.JavaType-">CreateCommandImpl</a></span>(<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">C</a>&nbsp;draft,
+                 java.lang.String&nbsp;path,
+                 com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</code>&nbsp;</td>
+</tr>
 </table>
 </li>
 </ul>
@@ -187,8 +192,8 @@ implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title
 </td>
 </tr>
 <tr id="i3" class="rowColor">
-<td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
+<td class="colFirst"><code>protected com.fasterxml.jackson.databind.JavaType</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html#jacksonJavaType--">jacksonJavaType</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -203,7 +208,7 @@ implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></h3>
-<code><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
+<code><a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -240,6 +245,19 @@ implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
+<a name="CreateCommandImpl-java.lang.Object-java.lang.String-com.fasterxml.jackson.databind.JavaType-">
+<!--   -->
+</a><a name="CreateCommandImpl-C-java.lang.String-com.fasterxml.jackson.databind.JavaType-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>CreateCommandImpl</h4>
+<pre>public&nbsp;CreateCommandImpl(<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">C</a>&nbsp;draft,
+                         java.lang.String&nbsp;path,
+                         com.fasterxml.jackson.databind.JavaType&nbsp;javaType)</pre>
+</li>
+</ul>
 <a name="CreateCommandImpl-java.lang.Object-io.sphere.sdk.client.JsonEndpoint-">
 <!--   -->
 </a><a name="CreateCommandImpl-C-io.sphere.sdk.client.JsonEndpoint-">
@@ -295,16 +313,16 @@ implements <a href="../../../../io/sphere/sdk/commands/CreateCommand.html" title
 <pre>protected&nbsp;java.lang.String&nbsp;httpBody()</pre>
 </li>
 </ul>
-<a name="typeReference--">
+<a name="jacksonJavaType--">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>typeReference</h4>
-<pre>protected&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>&gt;&nbsp;typeReference()</pre>
+<h4>jacksonJavaType</h4>
+<pre>protected&nbsp;com.fasterxml.jackson.databind.JavaType&nbsp;jacksonJavaType()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>&gt;</code></dd>
+<dd><code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html#jacksonJavaType--">jacksonJavaType</a></code>&nbsp;in class&nbsp;<code><a href="../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../io/sphere/sdk/commands/CreateCommandImpl.html" title="type parameter in CreateCommandImpl">T</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
