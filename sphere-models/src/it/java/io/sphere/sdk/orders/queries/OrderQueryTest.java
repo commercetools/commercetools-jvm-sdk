@@ -37,6 +37,7 @@ public class OrderQueryTest extends IntegrationTest {
                 assertThat(queriedOrder.getCustomerGroup().getObj().getName())
                         .overridingErrorMessage("customerGroupIsExpandeable")
                         .isEqualTo(customerGroup.getName());
+                return order;
             });
         });
     }
@@ -118,6 +119,7 @@ public class OrderQueryTest extends IntegrationTest {
                     assertThat(results).extracting("id").doesNotContain(order.getId());
                 }
             });
+            return order;
         });
     }
 

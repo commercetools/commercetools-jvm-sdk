@@ -28,6 +28,8 @@ public class OrderMessagesTest extends IntegrationTest {
             assertThat(message.getOrderState()).isEqualTo(OrderState.CANCELLED);
             assertThat(message.getResource().getObj()).isNotNull();
             assertThat(message.getResource().getId()).isEqualTo(order.getId());
+
+            return order;
         }));
     }
 
@@ -46,6 +48,8 @@ public class OrderMessagesTest extends IntegrationTest {
             assertThat(message.getOrder().getId()).isEqualTo(order.getId());
             assertThat(message.getResource().getObj()).isNotNull();
             assertThat(message.getResource().getId()).isEqualTo(order.getId());
+
+            return order;
         }));
     }
 }

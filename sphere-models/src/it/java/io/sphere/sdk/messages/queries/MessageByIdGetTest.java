@@ -20,6 +20,8 @@ public class MessageByIdGetTest extends IntegrationTest {
 
             final Message message = execute(MessageByIdGet.of(messageFromQueryEndpoint));
             assertThat(message).isEqualTo(messageFromQueryEndpoint);
+
+            return order;
         }));
     }
 }

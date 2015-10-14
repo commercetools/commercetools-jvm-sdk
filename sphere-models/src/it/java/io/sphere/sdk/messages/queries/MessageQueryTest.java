@@ -39,6 +39,8 @@ public class MessageQueryTest extends IntegrationTest {
             assertThat(order.getReturnInfo()).contains(returnInfoAddedMessage.getReturnInfo());
             final Order expandedOrder = returnInfoAddedMessage.getResource().getObj();
             assertThat(expandedOrder.getCreatedAt()).isEqualTo(order.getCreatedAt());
+
+            return order;
         }));
     }
 
@@ -65,6 +67,8 @@ public class MessageQueryTest extends IntegrationTest {
             assertThat(deliveryAddedMessage.getDelivery())
                     .overridingErrorMessage("with wrong cast, fields can be null")
                     .isNull();
+
+            return order;
         }));
     }
 
@@ -80,6 +84,8 @@ public class MessageQueryTest extends IntegrationTest {
 
             final Optional<Order> orderOptional = Optional.ofNullable(results.get(0).getResource().getObj());
             assertThat(orderOptional.map(o -> o.getCreatedAt())).contains(order.getCreatedAt());
+
+            return order;
         }));
     }
 
@@ -98,6 +104,8 @@ public class MessageQueryTest extends IntegrationTest {
             assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
             assertThat(message.getResource().getObj()).isNotNull();
             assertThat(message.getResource().getId()).isEqualTo(order.getId());
+
+            return order;
         }));
     }
 
@@ -116,6 +124,8 @@ public class MessageQueryTest extends IntegrationTest {
             final String fetchedItemId = message.getPayload().get("returnInfo").get("items").get(0).get("id").asText();
             final String actualItemId = returnInfo.getItems().get(0).getId();
             assertThat(fetchedItemId).isEqualTo(actualItemId).isNotNull();
+
+            return order;
         }));
     }
 
@@ -132,6 +142,8 @@ public class MessageQueryTest extends IntegrationTest {
             assertThat(message.getResource().getObj()).isNotNull();
             assertThat(message.getResource()).isEqualTo(order.toReference());
             assertThat(message.getResource().getId()).isEqualTo(order.getId());
+
+            return order;
         }));
     }
 }

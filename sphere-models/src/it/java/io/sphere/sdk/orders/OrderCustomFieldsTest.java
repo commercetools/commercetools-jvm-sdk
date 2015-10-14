@@ -35,6 +35,8 @@ public class OrderCustomFieldsTest extends IntegrationTest {
 
                 //test clean up
                 execute(OrderUpdateCommand.of(updatedOrder, SetCustomType.ofRemoveType()));
+
+                return updatedOrder;
             });
             return type;
         });
