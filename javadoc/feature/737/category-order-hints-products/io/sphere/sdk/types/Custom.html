@@ -305,7 +305,7 @@ import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.commands.UpdateAction;
 import java.util.List;
 import static java.util.Arrays.asList;
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 </code></pre><pre><code class='java'>public class UpdateFieldValueDemo {
     public static Category updateFieldValues(final TestClient client, final Category category) {
         assertThat(category.getCustom().getFieldAsEnumKey("state")).isEqualTo("published");
