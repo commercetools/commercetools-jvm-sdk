@@ -48,12 +48,15 @@ public class CustomerCreateCommandTest extends IntegrationTest {
         final CustomerCreateCommand sphereRequest = CustomerCreateCommand.of(draft)
                 .withExpansionPaths(m -> m.customer().customerGroup());
         final CustomerSignInResult result = execute(sphereRequest);
+        assertThat(result.getCart())
+                .as("no cart id given in creation, so this field is empty")
+                .isNull();
         final Customer customer = result.getCustomer();
         final Cart cart = result.getCart();
         assertThat(customer.getName()).isEqualTo(name);
         assertThat(customer.getEmail()).isEqualTo(email);
         assertThat(customer.getPassword())
-                .overridingErrorMessage("password is not stored in clear text")
+                .as("password is not stored in clear text")
                 .isNotEqualTo(password);
         assertThat(customer.getExternalId()).contains(externalId);
         assertThat(cart).isNull();
@@ -66,16 +69,17 @@ public class CustomerCreateCommandTest extends IntegrationTest {
         assertThat(customer.getDefaultBillingAddress().withId(null)).isEqualTo(addresses.get(0));
         assertThat(customer.findDefaultShippingAddress().get().withId(null)).isEqualTo(addresses.get(1));
         assertThat(customer.getCustomerGroup().getObj())
-                .overridingErrorMessage("customer group can be expanded")
+                .as("customer group can be expanded")
                 .isNotNull();
     }
 
     @Test
     public void createCustomerWithCart() throws Exception {
-        final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));
+        final Cart cart = execute(CartCreateCommand.of(CartDraft.of(EUR)));//could of course be filled with products
         final String email = randomEmail(CustomerCreateCommandTest.class);
         final CustomerDraft draft = CustomerDraft.of(CUSTOMER_NAME, email, PASSWORD).withCart(cart);
         final CustomerSignInResult result = execute(CustomerCreateCommand.of(draft));
         assertThat(result.getCart()).isNotNull();
+        assertThat(result.getCart().getId()).isEqualTo(cart.getId());
     }
 }

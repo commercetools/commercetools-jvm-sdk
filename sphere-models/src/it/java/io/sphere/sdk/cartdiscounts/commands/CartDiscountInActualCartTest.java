@@ -8,6 +8,7 @@ import io.sphere.sdk.carts.commands.updateactions.SetCustomerId;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.test.IntegrationTest;
+import io.sphere.sdk.utils.MoneyImpl;
 import org.assertj.core.data.Offset;
 import org.junit.Test;
 
@@ -37,7 +38,8 @@ public class CartDiscountInActualCartTest extends IntegrationTest {
                 final DiscountedLineItemPrice discountedPrice = cartIncludingDiscount.getLineItems().get(0).getDiscountedPrice();
                 final Reference<CartDiscount> discount = discountedPrice.getIncludedDiscounts().get(0).getDiscount();
                 assertThat(discount.referencesSameResource(cartDiscount)).isTrue();
-                assertThat(discountedPrice.getValue()).isNotNull();
+
+                assertThat(discountedPrice.getValue()).isEqualTo(MoneyImpl.ofCents(1201, EUR));
 
                 //clean up
                 execute(CartDiscountDeleteCommand.of(cartDiscount));

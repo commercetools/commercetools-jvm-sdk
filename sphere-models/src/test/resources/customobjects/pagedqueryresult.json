@@ -1,0 +1,17 @@
+{
+  "offset" : 0,
+  "count" : 1,
+  "total" : 1,
+  "results" : [ {
+    "id" : "352907a2-5fbb-4d08-a931-791ea6f44db8",
+    "version" : 1,
+    "container" : "CustomObjectFixtures",
+    "key" : "random-slug--1614586172",
+    "value" : {
+      "baz" : 5,
+      "bar" : "aString"
+    },
+    "createdAt" : "2015-09-25T16:24:50.515Z",
+    "lastModifiedAt" : "2015-09-25T16:24:50.515Z"
+  } ]
+}

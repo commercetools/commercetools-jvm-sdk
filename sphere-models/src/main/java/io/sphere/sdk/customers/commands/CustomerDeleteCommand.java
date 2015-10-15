@@ -10,6 +10,8 @@ import io.sphere.sdk.models.Versioned;
  * Deletes a customer.
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerDeleteCommandTest#execution()}
+ *
+ * @see Customer
  */
 public interface CustomerDeleteCommand extends ByIdDeleteCommand<Customer>, MetaModelExpansionDsl<Customer, CustomerDeleteCommand, CustomerExpansionModel<Customer>> {
     static CustomerDeleteCommand of(final Versioned<Customer> versioned) {

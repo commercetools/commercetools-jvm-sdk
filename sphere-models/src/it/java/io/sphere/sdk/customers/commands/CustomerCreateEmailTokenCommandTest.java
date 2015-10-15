@@ -15,10 +15,13 @@ public class CustomerCreateEmailTokenCommandTest extends IntegrationTest {
         withCustomer(client(), customer -> {
             assertThat(customer.isEmailVerified()).isFalse();
             final int ttlMinutes = 15;
-            final Command<CustomerToken> command1 = CustomerCreateEmailTokenCommand.of(customer, ttlMinutes);
-            final CustomerToken customerToken = execute(command1);
-            final Command<Customer> command2 = CustomerVerifyEmailCommand.of(customer, customerToken);
-            final Customer loadedCustomer = execute(command2);
+            final Command<CustomerToken> createTokenCommand = CustomerCreateEmailTokenCommand.of(customer, ttlMinutes);
+
+            final CustomerToken customerToken = execute(createTokenCommand);
+            final String tokenValue = customerToken.getValue();//this token needs to be sent via email to the customer
+
+            final Command<Customer> verifyEmailCommand = CustomerVerifyEmailCommand.of(customer, tokenValue);
+            final Customer loadedCustomer = execute(verifyEmailCommand);
             assertThat(loadedCustomer.isEmailVerified()).isTrue();
         });
     }

@@ -1,8 +1,6 @@
 package io.sphere.sdk.customobjects.migrations.version2;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.core.type.TypeReference;
-import io.sphere.sdk.customobjects.CustomObject;
 
 public class Uvw {
     private final Foo foo;
@@ -19,15 +17,6 @@ public class Uvw {
 
     public String getAnotherField() {
         return anotherField;
-    }
-
-    public static TypeReference<CustomObject<Uvw>> customObjectTypeReference(){
-        return new TypeReference<CustomObject<Uvw>>(){
-            @Override
-            public String toString() {
-                return "TypeReference<CustomObject<Uvw>>";
-            }
-        };
     }
 
     public static class Foo {

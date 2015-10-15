@@ -30,11 +30,14 @@ class ProductDraftImpl extends Base implements ProductDraft {
     private final List<ProductVariantDraft> variants;
     private final Reference<TaxCategory> taxCategory;
     private final SearchKeywords searchKeywords;
+    @Nullable
+    private final CategoryOrderHints categoryOrderHints;
 
     public ProductDraftImpl(final Reference<ProductType> productType, final LocalizedString name, final LocalizedString slug,
                             final LocalizedString description, final Set<Reference<Category>> categories,
                             final MetaAttributes metaAttributes, final ProductVariantDraft masterVariant,
-                            final List<ProductVariantDraft> variants, final Reference<TaxCategory> taxCategory, final SearchKeywords searchKeywords) {
+                            final List<ProductVariantDraft> variants, final Reference<TaxCategory> taxCategory,
+                            final SearchKeywords searchKeywords, final CategoryOrderHints categoryOrderHints) {
         this.name = name;
         this.productType = productType;
         this.slug = slug;
@@ -47,6 +50,7 @@ class ProductDraftImpl extends Base implements ProductDraft {
         this.metaKeywords = metaAttributes.getMetaKeywords();
         this.masterVariant = masterVariant;
         this.variants = variants;
+        this.categoryOrderHints = categoryOrderHints;
     }
 
     @Override
@@ -112,5 +116,11 @@ class ProductDraftImpl extends Base implements ProductDraft {
     @Override
     public SearchKeywords getSearchKeywords() {
         return searchKeywords;
+    }
+
+    @Override
+    @Nullable
+    public CategoryOrderHints getCategoryOrderHints() {
+        return categoryOrderHints;
     }
 }

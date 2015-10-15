@@ -7,7 +7,13 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.MetaModelQueryDsl;
 
 /**
+  Fetches multiple customer groups.
+
  {@doc.gen summary customer groups}
+
+ {@include.example io.sphere.sdk.customergroups.queries.CustomerGroupQueryTest#byNames()}
+
+ @see CustomerGroup
  */
 public interface CustomerGroupQuery extends MetaModelQueryDsl<CustomerGroup, CustomerGroupQuery, CustomerGroupQueryModel, CustomerGroupExpansionModel<CustomerGroup>> {
     static TypeReference<PagedQueryResult<CustomerGroup>> resultTypeReference() {

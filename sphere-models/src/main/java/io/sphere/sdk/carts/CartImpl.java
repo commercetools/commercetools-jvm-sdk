@@ -7,6 +7,7 @@ import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
@@ -36,6 +37,8 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
     @Nullable
     private final CartShippingInfo shippingInfo;
     private final List<DiscountCodeInfo> discountCodes;
+    @Nullable
+    private final CustomFields custom;
 
     @JsonCreator
     CartImpl(final String id, final Long version, final ZonedDateTime createdAt,
@@ -45,7 +48,8 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
              final TaxedPrice taxedPrice, final CartState cartState,
              final Address shippingAddress, final Address billingAddress,
              final InventoryMode inventoryMode, final Reference<CustomerGroup> customerGroup,
-             final CountryCode country, final CartShippingInfo shippingInfo, final List<DiscountCodeInfo> discountCodes) {
+             final CountryCode country, final CartShippingInfo shippingInfo,
+             final List<DiscountCodeInfo> discountCodes, final CustomFields custom) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerId = customerId;
         this.customerEmail = customerEmail;
@@ -61,6 +65,7 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
         this.country = country;
         this.shippingInfo = shippingInfo;
         this.discountCodes = discountCodes;
+        this.custom = custom;
     }
 
     @Override
@@ -139,5 +144,11 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
     @Override
     public List<DiscountCodeInfo> getDiscountCodes() {
         return discountCodes;
+    }
+
+    @Override
+    @Nullable
+    public CustomFields getCustom() {
+        return custom;
     }
 }

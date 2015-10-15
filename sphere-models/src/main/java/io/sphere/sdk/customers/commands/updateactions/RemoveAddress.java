@@ -12,6 +12,8 @@ import static java.lang.String.format;
  *  {@doc.gen intro}
  *
  * {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#removeAddress()}
+ *
+ * @see Customer
  */
 public class RemoveAddress extends UpdateActionImpl<Customer> {
     private final String addressId;

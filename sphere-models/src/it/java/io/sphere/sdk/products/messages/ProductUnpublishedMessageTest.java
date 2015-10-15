@@ -10,6 +10,7 @@ import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
+import static io.sphere.sdk.test.SphereTestUtils.assertEventually;
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -19,14 +20,18 @@ public class ProductUnpublishedMessageTest extends IntegrationTest {
         ProductFixtures.withUpdateableProduct(client(), product -> {
             assertThat(product.getMasterData().isPublished()).isFalse();
             final Product unpublishedProduct = execute(ProductUpdateCommand.of(product, asList(Publish.of(), Unpublish.of())));
-            final PagedQueryResult<ProductUnpublishedMessage> queryResult = execute(MessageQuery.of()
-                    .withSort(m -> m.createdAt().sort().desc())
-                    .withExpansionPaths(m -> m.resource())
-                    .withLimit(1)
-                    .forMessageType(ProductUnpublishedMessage.MESSAGE_HINT));
-            final ProductUnpublishedMessage message = queryResult.head().get();
-            assertThat(message.getResource().getId()).isEqualTo(product.getId());
-            assertThat(message.getResource().getObj().getMasterData().isPublished()).isFalse();
+            assertEventually(() -> {
+                final PagedQueryResult<ProductUnpublishedMessage> queryResult =
+                        execute(MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(unpublishedProduct))
+                        .withSort(m -> m.createdAt().sort().desc())
+                        .withExpansionPaths(m -> m.resource())
+                        .withLimit(1)
+                        .forMessageType(ProductUnpublishedMessage.MESSAGE_HINT));
+                final ProductUnpublishedMessage message = queryResult.head().get();
+                assertThat(message.getResource().getId()).as("productId").isEqualTo(product.getId());
+                assertThat(message.getResource().getObj().getMasterData().isPublished()).isFalse();
+            });
             return unpublishedProduct;
         });
     }

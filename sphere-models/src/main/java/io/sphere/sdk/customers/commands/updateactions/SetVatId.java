@@ -11,6 +11,8 @@ import javax.annotation.Nullable;
  *  {@doc.gen intro}
  *
  *  {@include.example io.sphere.sdk.customers.commands.CustomerUpdateCommandTest#setVatId()}
+ *
+ *  @see Customer
  */
 public class SetVatId extends UpdateActionImpl<Customer> {
     @Nullable

@@ -5,8 +5,11 @@ import io.sphere.sdk.http.HttpClient;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.models.SphereException;
 import io.sphere.sdk.utils.CompletableFutureUtils;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.concurrent.CompletionStage;
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -25,6 +28,27 @@ public class SphereClientFactory extends Base {
         this.httpClientSupplier = httpClientSupplier;
     }
 
+    public static SphereClientFactory of(final Supplier<HttpClient> httpClientSupplier) {
+        return new SphereClientFactory(httpClientSupplier);
+    }
+
+    public static SphereClientFactory of() {
+        try {
+            final Class<?> clazz = Class.forName("io.sphere.sdk.client.SphereAsyncHttpClientFactory");
+            final Method create = clazz.getMethod("create");
+            final Supplier<HttpClient> supplier = () -> {
+                try {
+                    return  (HttpClient) create.invoke(null);
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    throw new SphereException(e);
+                }
+            };
+            return of(supplier);
+        } catch (ClassNotFoundException | NoSuchMethodException e) {
+            throw new SphereException(e);
+        }
+    }
+
     private HttpClient defaultHttpClient() {
         return httpClientSupplier.get();
     }
@@ -40,10 +64,6 @@ public class SphereClientFactory extends Base {
         final HttpClient httpClient = defaultHttpClient();
         final SphereAccessTokenSupplier tokenSupplier = SphereAccessTokenSupplier.ofAutoRefresh(config, httpClient, false);
         return SphereClient.of(config, httpClient, tokenSupplier);
-    }
-
-    public static SphereClientFactory of(final Supplier<HttpClient> httpClientSupplier) {
-        return new SphereClientFactory(httpClientSupplier);
     }
 
     /**

@@ -1,5 +1,7 @@
 package io.sphere.sdk.http;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+
 import javax.annotation.Nullable;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
@@ -16,21 +18,12 @@ class HttpResponseImpl extends Base implements HttpResponse {
     private final byte[] responseBody;
     @Nullable
     private final HttpRequest associatedRequest;
-    @Nullable
-    private final String bodyAsStringForDebugging;
 
     HttpResponseImpl(final int statusCode, @Nullable final byte[] responseBody, @Nullable final HttpRequest associatedRequest, final HttpHeaders headers) {
         this.statusCode = statusCode;
         this.responseBody = responseBody;
         this.associatedRequest = associatedRequest;
         this.headers = headers;
-        Optional<String> bodyAsString = Optional.empty();
-        try {
-            bodyAsString = statusCode >= 400 ? Optional.ofNullable(responseBody).map(b -> new String(b, StandardCharsets.UTF_8)) : Optional.<String>empty();
-        } catch (final Exception e) {
-            bodyAsString = Optional.empty();
-        }
-        this.bodyAsStringForDebugging = bodyAsString.orElse(null);
     }
 
     @Override
@@ -64,5 +57,22 @@ class HttpResponseImpl extends Base implements HttpResponse {
         final String actualResponseCodeAsString = Objects.toString(httpResponse.getStatusCode());
         final String firstNumberAsString = Objects.toString(firstNumberOfStatusCode);
         return actualResponseCodeAsString.startsWith(firstNumberAsString);
+    }
+
+    @Override
+    public String toString() {
+        String textInterpretedBody = "";
+        try {
+            textInterpretedBody = Optional.ofNullable(responseBody).map(b -> new String(b, StandardCharsets.UTF_8)).orElse("empty body");
+        } catch (final Exception e) {
+            textInterpretedBody = "not parseable: " + e;
+        }
+
+        return new ToStringBuilder(this)
+                .append("statusCode", statusCode)
+                .append("headers", headers)
+                .append("associatedRequest", associatedRequest)
+                .append("textInterpretedBody", textInterpretedBody)
+                .toString();
     }
 }

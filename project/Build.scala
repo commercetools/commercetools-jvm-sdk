@@ -1,4 +1,5 @@
 import java.io.ByteArrayOutputStream
+import java.lang.reflect.Method
 
 import Libs._
 import de.johoop.jacoco4sbt.JacocoPlugin.{itJacoco, jacoco}
@@ -12,6 +13,7 @@ import sbtunidoc.Plugin._
 
 import scala.collection.JavaConversions._
 import scala.language.postfixOps
+import scala.util.Try
 
 object Build extends Build {
 
@@ -20,7 +22,17 @@ object Build extends Build {
       parallelExecution in IntegrationTest := false,
       parallelExecution in itJacoco.Config:= false,
       testOptions += Tests.Argument(TestFrameworks.JUnit, "-v"),
-      libraryDependencies += `logback-classic` % "test,it"
+      libraryDependencies += `logback-classic` % "test,it",
+      testOptions in IntegrationTest += Tests.Setup(loader => Try {
+        val clazz = loader.loadClass("io.sphere.sdk.test.IntegrationTest")
+        val setupClient = clazz.getDeclaredMethod("setupClient")
+        setupClient.invoke(null)
+      } ),
+      testOptions in IntegrationTest += Tests.Cleanup(loader => Try {
+        val clazz = loader.loadClass("io.sphere.sdk.test.IntegrationTest")
+        val close = clazz.getDeclaredMethod("shutdownClient")
+        close.invoke(null)
+      } )
     )
 
   //the project definition have to be in .scala files for the module dependency graph

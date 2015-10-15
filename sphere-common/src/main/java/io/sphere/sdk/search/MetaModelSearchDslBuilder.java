@@ -25,6 +25,8 @@ public class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, 
 
     @Nullable
     protected LocalizedStringEntry text;
+    @Nullable
+    protected Boolean fuzzy;
     protected List<FacetExpression<T>> facets = emptyList();
     protected List<FilterExpression<T>> resultFilters = emptyList();
     protected List<FilterExpression<T>> queryFilters = emptyList();
@@ -69,6 +71,7 @@ public class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, 
         offset = template.offset();
         expansionPaths = template.expansionPaths();
         additionalQueryParameters = template.additionalQueryParameters();
+        fuzzy = template.isFuzzy();
     }
 
     public MetaModelSearchDslBuilder<T, C, S, L, F, E> text(@Nullable final LocalizedStringEntry text) {
@@ -119,6 +122,11 @@ public class MetaModelSearchDslBuilder<T, C extends MetaModelSearchDsl<T, C, S, 
 
     public MetaModelSearchDslBuilder<T, C, S, L, F, E> additionalQueryParameters(final List<HttpQueryParameter> additionalQueryParameters) {
         this.additionalQueryParameters = additionalQueryParameters;
+        return this;
+    }
+
+    public MetaModelSearchDslBuilder<T, C, S, L, F, E> fuzzy(final Boolean fuzzy) {
+        this.fuzzy = fuzzy;
         return this;
     }
 

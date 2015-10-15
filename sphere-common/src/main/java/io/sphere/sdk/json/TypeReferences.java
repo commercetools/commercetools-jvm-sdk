@@ -76,7 +76,7 @@ public final class TypeReferences {
         };
     }
 
-    public static TypeReference<ZonedDateTime> ZonedDateTimeTypeReference() {
+    public static TypeReference<ZonedDateTime> zonedDateTimeTypeReference() {
         return new TypeReference<ZonedDateTime>() {
             @Override
             public String toString() {

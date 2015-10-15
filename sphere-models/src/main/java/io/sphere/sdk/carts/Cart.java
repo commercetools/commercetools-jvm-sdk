@@ -7,15 +7,34 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
 import javax.money.MonetaryAmount;
 import java.util.List;
 
+/**
+ <p>A shopping cart holds product variants and can be ordered.</p> Each cart either belongs to a registered customer or is an anonymous cart ({@link #getCustomerId()} yields null).
+
+ <p>A cart can have {@link io.sphere.sdk.types.Custom custom fields}.</p>
+ */
 @JsonDeserialize(as=CartImpl.class)
 public interface Cart extends CartLike<Cart> {
 
-    static String typeId(){
+    static String resourceTypeId() {
+        return "order";//sic http://dev.sphere.io/http-api-projects-custom-fields.html#customizable-resource
+    }
+
+    static String referenceTypeId() {
+        return "cart";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
+    static String typeId() {
         return "cart";
     }
 
@@ -30,7 +49,7 @@ public interface Cart extends CartLike<Cart> {
 
     @Override
     default Reference<Cart> toReference() {
-        return Reference.of(typeId(), getId(), this);
+        return Reference.of(referenceTypeId(), getId(), this);
     }
 
     CartState getCartState();
@@ -56,6 +75,10 @@ public interface Cart extends CartLike<Cart> {
     @Nullable
     Reference<CustomerGroup> getCustomerGroup();
 
+    /**
+     * The id of the customer possessing the cart. Can be null so it is then an anonymous cart.
+     * @return the id of the corresponding customer or null
+     */
     @Override
     @Nullable
     String getCustomerId();
@@ -79,4 +102,8 @@ public interface Cart extends CartLike<Cart> {
 
     @Override
     List<DiscountCodeInfo> getDiscountCodes();
+
+    @Nullable
+    @Override
+    CustomFields getCustom();
 }

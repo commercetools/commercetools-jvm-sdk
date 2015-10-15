@@ -6,16 +6,21 @@ import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.channels.queries.ChannelByIdGet;
 import io.sphere.sdk.client.SphereRequest;
 import io.sphere.sdk.commands.UpdateActionImpl;
+import io.sphere.sdk.commands.UpdateCommand;
 import io.sphere.sdk.expansion.ExpansionPath;
 import io.sphere.sdk.http.ApacheHttpClientAdapter;
 import io.sphere.sdk.http.HttpResponse;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
+import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.productdiscounts.queries.ProductDiscountByIdGet;
+import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.ProductProjectionType;
 import io.sphere.sdk.products.ProductVariant;
+import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.commands.updateactions.SetMetaDescription;
 import io.sphere.sdk.products.commands.updateactions.SetMetaKeywords;
 import io.sphere.sdk.products.commands.updateactions.SetMetaTitle;
@@ -24,6 +29,8 @@ import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.queries.Get;
 import io.sphere.sdk.queries.QueryPredicate;
+import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.taxcategories.TaxRate;
 
 import javax.money.CurrencyUnit;
 import java.util.concurrent.CompletionStage;
@@ -48,6 +55,34 @@ import java.util.function.Function;
  <li class=fixed-in-release></li>
  </ul>
  -->
+
+ <h3 class=released-version id="v1_0_0_M18">1.0.0-M18</h3>
+
+ <ul>
+ <li class=new-in-release>{@link io.sphere.sdk.products.search.ProductProjectionSearch#withFuzzy(Boolean)}</li>
+ <li class=new-in-release>documentation of the customer flow in {@link io.sphere.sdk.customers.Customer}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.types.Custom custom fields}</li>
+ <li class=new-in-release>Improved error reporting for status code 413 and 414.</li>
+
+ <li class=change-in-release>{@link io.sphere.sdk.search.TermStats} contains not anymore "T" and "F" but "true" and "false".</li>
+ <li class=change-in-release>deprecate {@link io.sphere.sdk.customers.commands.CustomerCreateTokenCommand}, use {@link io.sphere.sdk.customers.commands.CustomerCreatePasswordTokenCommand} instead</li>
+ <li class=fixed-in-release>DiscountedLineItemPrice money field is called value not money. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/711">711</a>.</li>
+ </ul>
+
+
+ <h3 class=released-version id="v1_0_0_M17">1.0.0-M17</h3>
+
+ <ul>
+ <li class=new-in-release>Support of full locales like "de_DE"</li>
+ <li class=new-in-release>{@link io.sphere.sdk.products.ProductProjection} is also a {@link io.sphere.sdk.models.Versioned} for {@link io.sphere.sdk.products.Product}</li>
+ <li class=new-in-release>{@link AttributeAccess#ofInteger()}, {@link AttributeAccess#ofIntegerSet()}, {@link AttributeAccess#ofLong()}, {@link AttributeAccess#ofLongSet()}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.taxcategories.commands.TaxCategoryUpdateCommand}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.products.ProductDraftBuilder#taxCategory(Referenceable)}, {@link io.sphere.sdk.products.ProductDraftBuilder#searchKeywords(SearchKeywords)}</li>
+ <li class=new-in-release>{@code Reference<Void>} and {@code Reference<Object>} is now {@code Reference<JsonNode>}</li>
+ <li class=new-in-release>{@link UpdateCommand#getUpdateActions()}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.products.messages.ProductPublishedMessage}, {@link io.sphere.sdk.products.messages.ProductUnpublishedMessage}</li>
+ <li class=new-in-release>{@link io.sphere.sdk.models.Address#equalsIgnoreId(Address)}, {@link io.sphere.sdk.products.Price#equalsIgnoreId(Price)}, {@link io.sphere.sdk.taxcategories.TaxRate#equalsIgnoreId(TaxRate)}</li>
+ </ul>
 
  <h3 class=released-version id="v1_0_0_M16">1.0.0-M16</h3>
  <p>This release is intended to be the last release before 1.0.0-RC1.</p>

@@ -30,9 +30,18 @@ public interface Review extends Resource<Review> {
     Double getScore();
 
     default Reference<Review> toReference() {
-        return Reference.of(typeId(), getId());
+        return Reference.of(referenceTypeId(), getId());
     }
 
+    static String referenceTypeId() {
+        return "review";
+    }
+
+    /**
+     *
+     * @deprecated use {@link #referenceTypeId()} instead
+     */
+    @Deprecated
     static String typeId() {
         return "review";
     }

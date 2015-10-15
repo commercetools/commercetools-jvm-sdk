@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
+ * <p>Updates a category.</p>
+ *
  {@doc.gen list actions}
  */
 public interface CategoryUpdateCommand extends UpdateCommandDsl<Category, CategoryUpdateCommand>, MetaModelExpansionDsl<Category, CategoryUpdateCommand, CategoryExpansionModel<Category>> {

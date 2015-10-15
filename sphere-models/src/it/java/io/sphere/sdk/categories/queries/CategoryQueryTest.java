@@ -37,7 +37,9 @@ public class CategoryQueryTest extends IntegrationTest {
             final String externalId = category.getExternalId();
 
             final Query<Category> query = CategoryQuery.of().byExternalId(externalId);
-            assertThat(execute(query).head().get().getId()).isEqualTo(category.getId());
+
+            final Category actual = execute(query).head().get();
+            assertThat(actual).isEqualTo(category);
         });
     }
 

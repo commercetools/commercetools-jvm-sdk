@@ -1,7 +1,7 @@
 package io.sphere.sdk.utils;
 
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -24,13 +24,13 @@ public final class MapUtils {
     }
 
     public static <K, V> Map<K, V> copyOf(final Map<K, V> map) {
-        final Map<K, V> copy = new HashMap<>();
+        final Map<K, V> copy = new LinkedHashMap<>();
         copy.putAll(map);
         return copy;
     }
 
     public static <K, V> Map<K, V> mapOf(final K key, final V value) {
-        final Map<K, V> result = new HashMap<>();
+        final Map<K, V> result = new LinkedHashMap<>();
         result.put(key, value);
         return result;
     }
@@ -39,7 +39,7 @@ public final class MapUtils {
         if (key1.equals(key2)) {
             throw new IllegalArgumentException(format("Duplicate keys (%s) for map creation.", key1));
         }
-        final Map<K, V> result = new HashMap<>();
+        final Map<K, V> result = new LinkedHashMap<>();
         result.put(key1, value1);
         result.put(key2, value2);
         return result;

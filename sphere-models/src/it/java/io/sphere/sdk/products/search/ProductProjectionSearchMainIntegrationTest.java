@@ -1,8 +1,12 @@
 package io.sphere.sdk.products.search;
 
+import io.sphere.sdk.models.Identifiable;
 import io.sphere.sdk.products.ProductProjection;
 import io.sphere.sdk.search.PagedSearchResult;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.function.Predicate;
 
 import static io.sphere.sdk.test.SphereTestUtils.ENGLISH;
 import static java.lang.Math.max;
@@ -49,6 +53,19 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
         assertThat(executeSearch(search).getResults().get(0).getProductType().getObj()).isNull();
         final PagedSearchResult<ProductProjection> result = executeSearch(search.withExpansionPaths(model -> model.productType()));
         assertThat(result.getResults().get(0).getProductType().getObj()).isEqualTo(productType);
+    }
+
+    @Test
+    public void fuzzySearch() {
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                .withText(ENGLISH, "short")
+                .withQueryFilters(filter -> filter.productType().id().by(productType.getId()));
+        assertThat(execute(search).getResults()).matches(containsIdentifiable(product2).negate(), "not included");
+        assertThat(execute(search.withFuzzy(true)).getResults()).matches(containsIdentifiable(product2), "included");
+    }
+
+    private <T> Predicate<List<? extends Identifiable<T>>> containsIdentifiable(final Identifiable<T> identifiable) {
+        return list -> list.stream().anyMatch(element -> element.getId().equals(identifiable.getId()));
     }
 
 }

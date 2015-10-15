@@ -10,7 +10,7 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.StrictAssertions.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LocalizedStringTest {
     private static final String FULL_LOCALE_JSON_STRING = "{\"en-GB\":\"children\",\"en-US\":\"kids\"}";
@@ -294,6 +294,6 @@ public class LocalizedStringTest {
     @Test
     public void deserializeWithFullLocale() {
         final LocalizedString localizedString = LocalizedString.of(Locale.US, "kids", Locale.UK, "children");
-        assertThat(SphereJsonUtils.toJsonString(localizedString)).isEqualTo(FULL_LOCALE_JSON_STRING);
+        assertThat(SphereJsonUtils.toJsonNode(localizedString)).isEqualTo(SphereJsonUtils.parse(FULL_LOCALE_JSON_STRING));
     }
 }

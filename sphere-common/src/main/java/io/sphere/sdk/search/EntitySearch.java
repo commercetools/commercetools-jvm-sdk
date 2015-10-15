@@ -11,6 +11,9 @@ public interface EntitySearch<T> extends Search<T> {
     LocalizedStringEntry text();
 
     @Nullable
+    Boolean isFuzzy();
+
+    @Nullable
     Long limit();
 
     @Nullable

@@ -11,6 +11,8 @@ import java.util.Locale;
 /**
  * {@doc.gen summary categories}
  *
+ * {@include.example io.sphere.sdk.categories.queries.CategoryQueryTest#queryByExternalId()}
+ *
  */
 public interface CategoryQuery extends MetaModelQueryDsl<Category, CategoryQuery, CategoryQueryModel, CategoryExpansionModel<Category>> {
 

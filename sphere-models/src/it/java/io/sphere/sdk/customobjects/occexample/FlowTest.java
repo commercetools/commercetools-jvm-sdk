@@ -23,8 +23,8 @@ public class FlowTest extends IntegrationTest {
 
     @Before
     public void setUp() throws Exception {
-        final CustomObjectByKeyGet<JsonNode> fetchByKey = CustomObjectByKeyGet.of(CONTAINER, KEY);
-        Optional.ofNullable(execute(fetchByKey)).ifPresent(o -> execute(CustomObjectDeleteCommand.of(o)));
+        final CustomObjectByKeyGet<JsonNode> fetchByKey = CustomObjectByKeyGet.ofJsonNode(CONTAINER, KEY);
+        Optional.ofNullable(execute(fetchByKey)).ifPresent(o -> execute(CustomObjectDeleteCommand.ofJsonNode(o)));
     }
 
     @Test
@@ -35,13 +35,13 @@ public class FlowTest extends IntegrationTest {
 
     private void doAnUpdate() {
         final CustomObjectByKeyGet<CustomerNumberCounter> fetch =
-                CustomObjectByKeyGet.of(CONTAINER, KEY, CustomerNumberCounter.customObjectTypeReference());
+                CustomObjectByKeyGet.of(CONTAINER, KEY, CustomerNumberCounter.class);
 
         final CustomObject<CustomerNumberCounter> loadedCustomObject = execute(fetch);
         final long newCustomerNumber = loadedCustomObject.getValue().getLastUsedNumber() + 1;
         final CustomerNumberCounter value = new CustomerNumberCounter(newCustomerNumber, "whateverid");
         final long version = loadedCustomObject.getVersion();
-        final CustomObjectDraft<CustomerNumberCounter> draft = CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, version, CustomerNumberCounter.customObjectTypeReference());
+        final CustomObjectDraft<CustomerNumberCounter> draft = CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, version, CustomerNumberCounter.class);
         final CustomObjectUpsertCommand<CustomerNumberCounter> updateCommand = CustomObjectUpsertCommand.of(draft);
         final CustomObject<CustomerNumberCounter> updatedCustomObject = execute(updateCommand);
         assertThat(updatedCustomObject.getValue().getLastUsedNumber()).isEqualTo(newCustomerNumber);
@@ -60,7 +60,7 @@ public class FlowTest extends IntegrationTest {
         final CustomerNumberCounter value = new CustomerNumberCounter(lastUsedNumber, "<no name>");
         final int initialVersionNumber = 0;
         final CustomObjectDraft<CustomerNumberCounter> draft = //important: it takes version as parameter
-                CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, initialVersionNumber, CustomerNumberCounter.customObjectTypeReference());
+                CustomObjectDraft.ofVersionedUpsert(CONTAINER, KEY, value, initialVersionNumber, CustomerNumberCounter.class);
 
         final Command<CustomObject<CustomerNumberCounter>> initialSettingCommand = CustomObjectUpsertCommand.of(draft);
 

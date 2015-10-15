@@ -90,4 +90,7 @@ interface ProductDataLike extends WithLocalizedSlug, MetaAttributes {
     }
 
     SearchKeywords getSearchKeywords();
+
+    @Nullable
+    CategoryOrderHints getCategoryOrderHints();
 }

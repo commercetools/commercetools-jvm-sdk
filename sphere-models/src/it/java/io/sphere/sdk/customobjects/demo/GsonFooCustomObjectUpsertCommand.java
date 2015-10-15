@@ -12,11 +12,13 @@ public class GsonFooCustomObjectUpsertCommand extends CustomObjectCustomJsonMapp
         this.draft = draft;
     }
 
+    //used to send the value of the object
     @Override
     protected String bodyAsJsonString() {
         return gson.toJson(draft);
     }
 
+    //used to deserialize the response
     @Override
     public GsonFooCustomObject deserialize(final HttpResponse httpResponse) {
         final String jsonAsString = getBodyAsString(httpResponse);

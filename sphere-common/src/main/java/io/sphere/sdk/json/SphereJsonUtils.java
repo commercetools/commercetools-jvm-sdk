@@ -1,12 +1,11 @@
 package io.sphere.sdk.json;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.databind.*;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 
@@ -44,7 +43,9 @@ final public class SphereJsonUtils {
                 .registerModule(new DateTimeSerializationModule())
                 .registerModule(new JavaMoneyModule())
                 .registerModule(new SphereEnumModule())
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .configure(MapperFeature.USE_GETTERS_AS_SETTERS, false)
+                .setSerializationInclusion(JsonInclude.Include.NON_NULL);
     }
 
     /**
@@ -112,6 +113,10 @@ final public class SphereJsonUtils {
         });
     }
 
+    public static String prettyPrint(final JsonNode jsonNode) {
+        return prettyPrint(toJsonString(jsonNode));
+    }
+
     /**
      *
      * Reads a UTF-8 JSON text file from the classpath of the current thread and transforms it into a Java object.
@@ -125,6 +130,13 @@ final public class SphereJsonUtils {
         return executing(() -> {
             final InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
             return objectMapper.readValue(new InputStreamReader(resourceAsStream, StandardCharsets.UTF_8.name()), typeReference);
+        });
+    }
+
+    public static <T> T readObjectFromResource(final String resourcePath, final JavaType javaType) {
+        return executing(() -> {
+            final InputStream resourceAsStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(resourcePath);
+            return objectMapper.readValue(new InputStreamReader(resourceAsStream, StandardCharsets.UTF_8.name()), javaType);
         });
     }
 
@@ -184,6 +196,10 @@ final public class SphereJsonUtils {
         return executing(() -> objectMapper.readValue(jsonAsBytes, typeReference));
     }
 
+    public static <T> T readObject(final byte[] jsonAsBytes, final JavaType javaType) {
+        return executing(() -> objectMapper.readValue(jsonAsBytes, javaType));
+    }
+
     /**
      * Creates a new {@link ObjectNode} created by the SPHERE.IO object mapper.
      *
@@ -193,6 +209,11 @@ final public class SphereJsonUtils {
      */
     public static ObjectNode newObjectNode() {
         return objectMapper.createObjectNode();
+    }
+
+    public static <T> JavaType convertToJavaType(final TypeReference<T> typeReference) {
+        final TypeFactory typeFactory = TypeFactory.defaultInstance();
+        return typeFactory.constructType(typeReference);
     }
 
     /** Very simple way to "erase" passwords -
@@ -220,6 +241,11 @@ final public class SphereJsonUtils {
         } else {
             return node;
         }
+    }
+
+    public static JavaType convertToJavaType(final Class<?> clazz) {
+        final TypeFactory typeFactory = TypeFactory.defaultInstance();
+        return typeFactory.uncheckedSimpleType(clazz);
     }
 
     @FunctionalInterface

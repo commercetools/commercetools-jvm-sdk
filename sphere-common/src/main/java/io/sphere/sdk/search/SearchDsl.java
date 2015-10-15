@@ -22,6 +22,13 @@ public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T>
     C withText(final Locale locale, final String text);
 
     /**
+     * Returns an EntitySearch with mofified fuzzyParameter.
+     * @param fuzzy a flag to indicate if fuzzy search is enabled (true) or not (false)
+     * @return an EntitySearch with the new fuzzy flag setting
+     */
+    C withFuzzy(final Boolean fuzzy);
+
+    /**
      * Returns a new object with the new limit.
      * @param limit the new limit
      * @return a new object with {@code limit}

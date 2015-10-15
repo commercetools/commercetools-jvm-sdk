@@ -1,9 +1,11 @@
 package io.sphere.sdk.commands;
 
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.JavaType;
 import io.sphere.sdk.client.HttpRequestIntent;
 import io.sphere.sdk.client.JsonEndpoint;
 import io.sphere.sdk.http.HttpMethod;
+import io.sphere.sdk.json.SphereJsonUtils;
 import io.sphere.sdk.models.ResourceView;
 import io.sphere.sdk.models.Versioned;
 
@@ -44,8 +46,8 @@ public abstract class UpdateCommandDslImpl<T extends ResourceView<T, T>, C exten
     }
 
     @Override
-    protected TypeReference<T> typeReference() {
-        return typeReference;
+    protected JavaType jacksonJavaType() {
+        return SphereJsonUtils.convertToJavaType(typeReference);
     }
 
     @Override

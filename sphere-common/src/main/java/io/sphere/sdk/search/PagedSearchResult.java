@@ -17,11 +17,6 @@ public class PagedSearchResult<T> extends PagedResult<T> {
         this.facets = facets;
     }
 
-    @Override
-    public List<T> getResults() {
-        return super.getResults();
-    }
-
     public Map<String, FacetResult> getFacetsResults() {
         return facets;
     }
@@ -70,5 +65,30 @@ public class PagedSearchResult<T> extends PagedResult<T> {
                 throw new ClassCastException("Facet result is not of type FilteredFacetResult: " + facetResult);
             }
         }).orElse(null);
+    }
+
+    @Override
+    public List<T> getResults() {
+        return super.getResults();
+    }
+
+    @Override
+    public Integer getOffset() {
+        return super.getOffset();
+    }
+
+    @Override
+    public int size() {
+        return super.size();
+    }
+
+    @Override
+    public Integer getTotal() {
+        return super.getTotal();
+    }
+
+    @Override
+    public Optional<T> head() {
+        return super.head();
     }
 }

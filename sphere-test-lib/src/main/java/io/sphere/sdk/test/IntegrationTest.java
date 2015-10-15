@@ -5,17 +5,26 @@ import com.ning.http.client.AsyncHttpClientConfig;
 import io.sphere.sdk.client.*;
 import io.sphere.sdk.http.AsyncHttpClientAdapter;
 import io.sphere.sdk.http.HttpClient;
+import io.sphere.sdk.models.DefaultCurrencyUnits;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.queries.Query;
-import org.junit.AfterClass;
+import org.assertj.core.api.Condition;
 import org.junit.BeforeClass;
 import org.slf4j.LoggerFactory;
 
+import javax.money.CurrencyUnit;
+
 public abstract class IntegrationTest {
 
-    private static volatile int threadCountAtStart;
     private static TestClient client;
 
-    protected synchronized static TestClient client() {
+    @BeforeClass
+    public static void warmUpJavaMoney() throws Exception {
+        final CurrencyUnit eur = DefaultCurrencyUnits.EUR;//workaround for https://github.com/sphereio/sphere-jvm-sdk/issues/779
+    }
+
+    public static void setupClient() {
         if (client == null) {
             final SphereClientConfig config = getSphereClientConfig();
             final HttpClient httpClient = newHttpClient();
@@ -23,6 +32,9 @@ public abstract class IntegrationTest {
             final SphereClient underlying = SphereClient.of(config, httpClient, tokenSupplier);
             client = new TestClient(withMaybeDeprecationWarnTool(underlying));
         }
+    }
+
+    protected static TestClient client() {
         return client;
     }
 
@@ -60,25 +72,10 @@ public abstract class IntegrationTest {
         }
     }
 
-    @BeforeClass
-    public synchronized static void setup() {
-        threadCountAtStart = countThreads();
-    }
-
-    @AfterClass
     public synchronized static void shutdownClient() {
         if (client != null) {
             client.close();
             client = null;
-            final int threadsNow = countThreads();
-            /*
-            The buffer needs to be high since SBT runs tests for multiple projects in parallel
-             */
-            final long bufferForGcThreadAndSbt = 100;
-            final long allowedThreadCount = threadCountAtStart + bufferForGcThreadAndSbt;
-            if (threadsNow > allowedThreadCount) {
-                throw new RuntimeException("Thread leak! After client shutdown created threads are still alive. Threads now: " + threadsNow + " Threads before: " + threadCountAtStart);
-            }
         }
     }
 
@@ -86,7 +83,30 @@ public abstract class IntegrationTest {
         return execute(query).head().orElseGet(() -> execute(createCommand));
     }
 
-    protected static int countThreads() {
-        return Thread.activeCount();
+    protected static <T> Condition<PagedQueryResult<T>> onlyTheResult(final T expected) {
+        return new Condition<PagedQueryResult<T>>("contains only the result " + expected) {
+            @Override
+            public boolean matches(final PagedQueryResult<T> value) {
+                return value.getResults().size() == 1 && value.getResults().get(0).equals(expected);
+            }
+        };
+    }
+
+    protected static <T extends Reference<?>> Condition<T> expanded() {
+        return new Condition<T>("is expanded") {
+            @Override
+            public boolean matches(final T value) {
+                return value.getObj() != null;
+            }
+        };
+    }
+
+    protected static <A, T extends Reference<A>> Condition<T> expanded(final A expected) {
+        return new Condition<T>("is expanded as " + expected) {
+            @Override
+            public boolean matches(final T value) {
+                return value.getObj() != null && value.getObj().equals(expected);
+            }
+        };
     }
 }
