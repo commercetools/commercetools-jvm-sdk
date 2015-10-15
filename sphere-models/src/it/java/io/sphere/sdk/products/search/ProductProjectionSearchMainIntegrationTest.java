@@ -31,12 +31,15 @@ public class ProductProjectionSearchMainIntegrationTest extends ProductProjectio
 
     @Test
     public void paginationExample() {
+        final Long offset = 50L;
+        final Long limit = 25L;
         final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
-                .withOffset(50L)
-                .withLimit(25L);
+                .withOffset(offset)
+                .withLimit(limit);
         final PagedSearchResult<ProductProjection> result = executeSearch(search);
-        assertThat(result.getOffset()).isEqualTo(50);
-        assertThat(result.getResults().size()).isEqualTo(min(25, max(result.getTotal() - 50, 0)));
+        assertThat(result.getOffset()).isEqualTo(offset);
+        final int remainingProducts = max(result.getTotal() - offset.intValue(), 0);
+        assertThat(result.size()).isEqualTo(min(limit, remainingProducts));
     }
 
     @Test
