@@ -5,6 +5,7 @@ import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.payments.*;
 import io.sphere.sdk.payments.messages.PaymentCreatedMessage;
 import io.sphere.sdk.queries.PagedQueryResult;
+import io.sphere.sdk.queries.Query;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.types.CustomFieldsDraft;
 import io.sphere.sdk.types.TypeFixtures;
@@ -48,6 +49,7 @@ public class PaymentCreateCommandTest extends IntegrationTest {
 
             final PaymentCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
             assertThat(paymentCreatedMessage.getPayment().getId()).isEqualTo(payment.getId());
+            assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(payment.getId());
 
             execute(PaymentDeleteCommand.of(payment));
         }));

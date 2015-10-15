@@ -35,8 +35,8 @@ public class PaymentTransactionAddedMessage extends GenericMessageImpl<Payment> 
     private final Transaction transaction;
 
     @JsonCreator
-    private PaymentTransactionAddedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final TypeReference<Reference<Payment>> typeReference, final Transaction transaction) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, typeReference);
+    private PaymentTransactionAddedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Transaction transaction) {
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, new TypeReference<Reference<Payment>>(){});
         this.transaction = transaction;
     }
 

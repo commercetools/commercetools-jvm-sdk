@@ -35,8 +35,8 @@ public class PaymentStatusStateTransitionMessage extends GenericMessageImpl<Paym
     private final Reference<State> state;
 
     @JsonCreator
-    private PaymentStatusStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final TypeReference<Reference<Payment>> typeReference, final Reference<State> state) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, typeReference);
+    private PaymentStatusStateTransitionMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Reference<State> state) {
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, new TypeReference<Reference<Payment>>(){});
         this.state = state;
     }
 

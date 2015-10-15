@@ -35,8 +35,8 @@ public class PaymentCreatedMessage extends GenericMessageImpl<Payment> {
     private final Payment payment;
 
     @JsonCreator
-    private PaymentCreatedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final TypeReference<Reference<Payment>> typeReference, final Payment payment) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, typeReference);
+    private PaymentCreatedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final Payment payment) {
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, new TypeReference<Reference<Payment>>(){});
         this.payment = payment;
     }
 

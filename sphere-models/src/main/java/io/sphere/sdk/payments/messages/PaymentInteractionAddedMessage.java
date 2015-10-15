@@ -35,8 +35,8 @@ public class PaymentInteractionAddedMessage extends GenericMessageImpl<Payment> 
     private final CustomFields interaction;
 
     @JsonCreator
-    private PaymentInteractionAddedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final TypeReference<Reference<Payment>> typeReference, final CustomFields interaction) {
-        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, typeReference);
+    private PaymentInteractionAddedMessage(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt, final JsonNode resource, final Long sequenceNumber, final Long resourceVersion, final String type, final CustomFields interaction) {
+        super(id, version, createdAt, lastModifiedAt, resource, sequenceNumber, resourceVersion, type, new TypeReference<Reference<Payment>>(){});
         this.interaction = interaction;
     }
 

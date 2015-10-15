@@ -15,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static java.util.Objects.requireNonNull;
+
 public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implements GenericMessage<R> {
     protected final Long sequenceNumber;
     protected final JsonNode resource;
@@ -34,7 +36,7 @@ public abstract class GenericMessageImpl<R> extends ResourceImpl<Message> implem
         this.sequenceNumber = sequenceNumber;
         this.resourceVersion = resourceVersion;
         this.type = type;
-        this.typeReference = typeReference;
+        this.typeReference = requireNonNull(typeReference, "typeReference must be explicitly given, it cannot be part of a JsonCreator.");
     }
 
     @Override
