@@ -160,14 +160,4 @@ class CustomerImpl extends ResourceImpl<Customer> implements Customer {
     public CustomFields getCustom() {
         return custom;
     }
-
-    //it is final to prevent subclasses to log the password
-    @Override
-    public final String toString() {
-        final Customer out = new CustomerImpl(getId(), getVersion(), getCreatedAt(), getLastModifiedAt(),
-                customerNumber, email, firstName, lastName, "**removed from output**", middleName,
-                title, addresses, defaultShippingAddressId, defaultBillingAddressId,
-                isEmailVerified, externalId, customerGroup, companyName, vatId, dateOfBirth, custom);
-        return ToStringBuilder.reflectionToString(out, SdkDefaults.TO_STRING_STYLE);
-    }
 }
