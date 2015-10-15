@@ -68,4 +68,12 @@ public class ProductProjectionSearchFiltersIntegrationTest extends ProductProjec
         final PagedSearchResult<ProductProjection> result = executeEvilSearch(search);
         assertThat(result.getTotal()).isEqualTo(1);
     }
+
+    @Test
+    public void filterByValueAsString() throws Exception {
+        final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+                .plusQueryFilters(filter -> filter.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAnyAsString(asList("36", "38")));
+        final PagedSearchResult<ProductProjection> result = executeSearch(search);
+        assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
+    }
 }

@@ -219,6 +219,9 @@ import io.sphere.sdk.models.Base;
 
  <p>Finally, you need to indicate the criteria used for the desired operation. For example you would use {@link io.sphere.sdk.search.model.TermFilterSearchModel#byAny} if you want to filter by any of the given values.</p>
 
+ <p>Notice that even though the Search Model expects values of a certain type based on the attribute, you can force it to accept simple strings as shown in the following example:</p>
+
+ {@include.example io.sphere.sdk.products.search.ProductProjectionSearchFiltersIntegrationTest#filterByValueAsString}
 
  */
 public final class SearchDocumentation extends Base {
