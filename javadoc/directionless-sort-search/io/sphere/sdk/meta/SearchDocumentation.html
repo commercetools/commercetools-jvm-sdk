@@ -178,15 +178,16 @@ assertThat(resultsToIds(result)).containsOnly(product1.getId());
 
  <p>The following request skips the first 50 products and limits the result set to only 25 products:</p>
 
- <div id="io-sphere-sdk-products-search-ProductProjectionSearchMainIntegrationTest-paginationExample--%s" class=code-example><pre><code class='java'>final Long offset = 50L;
-final Long limit = 25L;
+ <div id="io-sphere-sdk-products-search-ProductProjectionSearchMainIntegrationTest-paginationExample--%s" class=code-example><pre><code class='java'>final int offset = 10;
+final int limit = 25;
 final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
         .withOffset(offset)
         .withLimit(limit);
 final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(search);
+final int remainingProducts = max(result.getTotal() - offset, 0);
+final int expectedProducts = min(limit, remainingProducts);
+assertThat(result.size()).isEqualTo(expectedProducts);
 assertThat(result.getOffset()).isEqualTo(offset);
-final int remainingProducts = max(result.getTotal() - offset.intValue(), 0);
-assertThat(result.size()).isEqualTo(min(limit, remainingProducts));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchMainIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
 
@@ -399,11 +400,9 @@ assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId()
 
  <p>In order to build an expression, first you will be required to select the action to apply (i.e. <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#filter--"><code>ProductProjectionSearchModel.filter()</code></a>, <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#facet--"><code>ProductProjectionSearchModel.facet()</code></a> and <a href="../../../../io/sphere/sdk/products/search/ProductProjectionSearchModel.html#sort--"><code>ProductProjectionSearchModel.sort()</code></a>).</p>
 
- <p>Then you need to build the path of the attribute you want to apply that action to (e.g. price or a custom attribute). In the case of custom attributes, you also need to provide the attribute name and select the primary type of the attribute.</p>
+ <p>Then you need to build the path of the attribute you want to apply that action to, for example <a href="../../../../io/sphere/sdk/products/search/ProductDataFilterSearchModel.html#lastModifiedAt--"><code>ProductDataFilterSearchModel.lastModifiedAt()</code></a> represents the <code>lastModifiedAt</code> attribute on a product. In the case of custom attributes, you also need to provide the attribute name and select the primary type of the attribute.</p>
 
- <p>Finally, you need to indicate the criteria used for the desired operation. For example you would use <a href="../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html#byAny-java.lang.Iterable-"><code>TermFilterSearchModel.byAny(java.lang.Iterable&lt;V&gt;)</code></a> if you want to filter by any of the given values.</p>
-
- <p>Notice that when building search expressions, there is no distinction between simple and set types. For example, <a href="../../../../io/sphere/sdk/products/search/ProductAttributeFilterSearchModel.html#ofBoolean-java.lang.String-"><code>ProductAttributeFilterSearchModel.ofBoolean(java.lang.String)</code></a> method enables filtering on both boolean and boolean set attributes.</p></div>
+ <p>Finally, you need to indicate the criteria used for the desired operation. For example you would use <a href="../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html#byAny-java.lang.Iterable-"><code>TermFilterSearchModel.byAny(java.lang.Iterable&lt;V&gt;)</code></a> if you want to filter by any of the given values.</p></div>
 </li>
 </ul>
 </div>
