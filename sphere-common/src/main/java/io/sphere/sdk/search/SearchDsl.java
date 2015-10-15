@@ -2,76 +2,37 @@ package io.sphere.sdk.search;
 
 import io.sphere.sdk.models.LocalizedStringEntry;
 
-import java.util.List;
 import java.util.Locale;
 
 public interface SearchDsl<T, C extends SearchDsl<T, C>> extends EntitySearch<T> {
 
     /**
-     * Returns an EntitySearch with the new text as search text.
-     * @param text the new search text
-     * @return an EntitySearch with text
+     * Returns a new object with the new text as search text.
+     * @param text the new search text with locale
+     * @return a new object with {@code text}
      */
     C withText(final LocalizedStringEntry text);
 
+    /**
+     * Returns a new object with the new text as search text.
+     * @param locale the new locale
+     * @param text the new search text
+     * @return a new object with {@code text}
+     */
     C withText(final Locale locale, final String text);
 
     /**
-     * Returns an EntityQuery with the new sort expressions.
-     * @param sortExpressions the new sort expression list
-     * @return EntityQuery with sort sortExpressions
+     * Returns a new object with the new limit.
+     * @param limit the new limit
+     * @return a new object with {@code limit}
      */
-    C withSort(final List<SortExpression<T>> sortExpressions);
-
-    C withSort(final SortExpression<T> sortExpression);
-
-    /**
-     * Returns an EntityQuery with the new sort expression list appended to the existing sort expressions.
-     * @param sortExpressions the new sort expression list
-     * @return an EntitySearch with the existing sort expressions plus the new sort expression list.
-     */
-    C plusSort(final List<SortExpression<T>> sortExpressions);
-
-    C plusSort(final SortExpression<T> sortExpression);
-
     C withLimit(final long limit);
 
+    /**
+     * Returns a new object with the new offset.
+     * @param offset the new offset
+     * @return a new object with {@code offset}
+     */
     C withOffset(final long offset);
-
-    /**
-     * @deprecated use {@link SearchDsl#withResultFilters(List)} instead
-     */
-    @Deprecated
-    C withResultFilters(final FilterExpression<T> filterExpression);
-
-    /**
-     * @deprecated use {@link SearchDsl#plusResultFilters(List)} instead
-     */
-    @Deprecated
-    C plusResultFilters(final FilterExpression<T> filterExpression);
-
-    /**
-     * @deprecated use {@link SearchDsl#withQueryFilters(List)} instead
-     */
-    @Deprecated
-    C withQueryFilters(final FilterExpression<T> filterExpression);
-
-    /**
-     * @deprecated use {@link SearchDsl#plusQueryFilters(List)} instead
-     */
-    @Deprecated
-    C plusQueryFilters(final FilterExpression<T> filterExpression);
-
-    /**
-     * @deprecated use {@link SearchDsl#withFacetFilters(List)} instead
-     */
-    @Deprecated
-    C withFacetFilters(final FilterExpression<T> filterExpression);
-
-    /**
-     * @deprecated use {@link SearchDsl#plusFacetFilters(List)} instead
-     */
-    @Deprecated
-    C plusFacetFilters(final FilterExpression<T> filterExpression);
 
 }

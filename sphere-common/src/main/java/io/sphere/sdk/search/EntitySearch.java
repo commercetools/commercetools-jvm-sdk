@@ -10,8 +10,6 @@ public interface EntitySearch<T> extends Search<T> {
     @Nullable
     LocalizedStringEntry text();
 
-    List<SortExpression<T>> sort();
-
     @Nullable
     Long limit();
 

@@ -2,9 +2,6 @@ package io.sphere.sdk.search;
 
 import io.sphere.sdk.expansion.MetaModelExpansionDsl;
 
-import java.util.List;
-import java.util.function.Function;
-
 /**
  *
  * @param <T> type of the search result
@@ -14,9 +11,7 @@ import java.util.function.Function;
  * @param <F> type of the facet model
  * @param <E> type of the expansion model
  */
-public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S, L, F, E>, S, L, F, E> extends EntitySearch<T>, SearchDsl<T, C>, MetaModelFilterDsl<T, C, L>, MetaModelFacetDsl<T, C, F>, MetaModelExpansionDsl<T, C, E> {
+public interface MetaModelSearchDsl<T, C extends MetaModelSearchDsl<T, C, S, L, F, E>, S, L, F, E> extends EntitySearch<T>, SearchDsl<T, C>,
+        MetaModelSortDsl<T, C, S>, MetaModelFilterDsl<T, C, L>, MetaModelFacetDsl<T, C, F>, MetaModelExpansionDsl<T, C, E> {
 
-    C withSort(final Function<S, SortExpression<T>> m);
-
-    C plusSort(final Function<S, SortExpression<T>> m);
 }

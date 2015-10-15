@@ -27,7 +27,7 @@ import static java.util.Objects.requireNonNull;
  *
  * @param <T> type of the search result
  * @param <C> type of the class implementing this class
- * @param <S> type of the search model
+ * @param <S> type of the sort model
  * @param <F> type of the facet model
  * @param <E> type of the expansion model
  */
