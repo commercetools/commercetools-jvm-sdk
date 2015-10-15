@@ -92,6 +92,10 @@ import io.sphere.sdk.models.Base;
 
  {@include.example io.sphere.sdk.products.search.ProductProjectionSearchSortIntegrationTest#sortWithSimpleExpression()}
 
+ <p>Providing a list of sort expressions has the effect of multi-sorting, as it is demonstrated in the following example:</p>
+
+ {@include.example io.sphere.sdk.products.search.ProductProjectionSearchSortIntegrationTest#sortByMultipleAttributes()}
+
 
 
 
