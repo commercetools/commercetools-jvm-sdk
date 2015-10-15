@@ -1,6 +1,7 @@
 package io.sphere.sdk.orders.messages;
 
 import io.sphere.sdk.messages.queries.MessageQuery;
+import io.sphere.sdk.orders.Order;
 import io.sphere.sdk.orders.OrderState;
 import io.sphere.sdk.orders.commands.OrderUpdateCommand;
 import io.sphere.sdk.orders.commands.updateactions.ChangeOrderState;
@@ -16,7 +17,7 @@ public class OrderMessagesTest extends IntegrationTest {
     @Test
     public void orderStateChangedMessage() throws Exception {
         withOrderAndReturnInfo(client(), ((order, returnInfo) -> {
-            execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.CANCELLED)));
+            final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.CANCELLED)));
             final Query<OrderStateChangedMessage> query =
                     MessageQuery.of()
                             .withSort(m -> m.createdAt().sort().desc())
@@ -29,7 +30,7 @@ public class OrderMessagesTest extends IntegrationTest {
             assertThat(message.getResource().getObj()).isNotNull();
             assertThat(message.getResource().getId()).isEqualTo(order.getId());
 
-            return order;
+            return updatedOrder;
         }));
     }
 

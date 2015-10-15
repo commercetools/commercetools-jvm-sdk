@@ -14,6 +14,7 @@ import org.junit.Test;
 
 import java.util.List;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.channels.ChannelFixtures.persistentChannelOfRole;
 import static io.sphere.sdk.channels.ChannelRole.ORDER_EXPORT;
@@ -96,20 +97,25 @@ public class OrderQueryTest extends IntegrationTest {
     @Test
     public void syncInfo() throws Exception {
         final Channel channel = persistentChannelOfRole(client(), ORDER_EXPORT);
-        assertOrderIsFoundWithPredicate(order -> {
-            final String externalId = randomKey();
-            execute(OrderUpdateCommand.of(order, UpdateSyncInfo.of(channel).withExternalId(externalId)));
-            return MODEL.syncInfo().channel().is(channel).and(MODEL.syncInfo().externalId().is(externalId));
-        });
+        final String externalId = randomKey();
+        assertOrderIsFoundWithPredicate(
+                order -> execute(OrderUpdateCommand.of(order, UpdateSyncInfo.of(channel).withExternalId(externalId))),
+                order -> MODEL.syncInfo().channel().is(channel).and(MODEL.syncInfo().externalId().is(externalId)));
     }
 
     private void assertOrderIsFound(final Function<Order, OrderQuery> p) {
         assertOrderIsFound(p, true);
     }
 
-    private void assertOrderIsFound(final Function<Order, OrderQuery> p, final boolean shouldFind) {
+    private void assertOrderIsFound(final Function<Order, OrderQuery> predicateCreator, final boolean shouldFind) {
+        assertOrderIsFound(x -> x, predicateCreator, shouldFind);
+    }
+
+    private void assertOrderIsFound(final UnaryOperator<Order> orderMutator, final Function<Order, OrderQuery> p, final boolean shouldFind) {
         withOrder(client(), order -> {
+            final Order updatedOrder = orderMutator.apply(order);
             assertEventually(() -> {
+
                 final OrderQuery query = p.apply(order).withSort(QuerySort.of("createdAt desc"));
                 final List<Order> results = client().execute(query).getResults();
 
@@ -119,8 +125,12 @@ public class OrderQueryTest extends IntegrationTest {
                     assertThat(results).extracting("id").doesNotContain(order.getId());
                 }
             });
-            return order;
+            return updatedOrder;
         });
+    }
+
+    private void assertOrderIsFoundWithPredicate(final UnaryOperator<Order> orderMutator, final Function<Order, QueryPredicate<Order>> p) {
+        assertOrderIsFound(orderMutator, order -> OrderQuery.of().withPredicates(p.apply(order)), true);
     }
 
     private void assertOrderIsFoundWithPredicate(final Function<Order, QueryPredicate<Order>> p) {
