@@ -34,6 +34,11 @@ public class AddInterfaceInteraction extends SetCustomTypeBase<Payment> {
         return ofTypeIdAndJson(typeId, fieldsJson);
     }
 
+    public static AddInterfaceInteraction ofTypeKeyAndObjects(final String typeKey, final String fieldName, final Object value) {
+        final Map<String, Object> fields = Collections.singletonMap(fieldName, value);
+        return ofTypeKeyAndObjects(typeKey, fields);
+    }
+
     public static AddInterfaceInteraction ofTypeIdAndObjects(final String typeId, final String fieldName, final Object value) {
         final Map<String, Object> fields = Collections.singletonMap(fieldName, value);
         return ofTypeIdAndObjects(typeId, fields);
