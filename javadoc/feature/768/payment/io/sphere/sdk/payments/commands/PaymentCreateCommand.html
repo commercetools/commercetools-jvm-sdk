@@ -130,6 +130,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CreateCommand.html" title
 
     final PaymentCreatedMessage paymentCreatedMessage = pagedQueryResult.head().get();
     assertThat(paymentCreatedMessage.getPayment().getId()).isEqualTo(payment.getId());
+    assertThat(paymentCreatedMessage.getResource().getId()).isEqualTo(payment.getId());
 
     execute(PaymentDeleteCommand.of(payment));
 }));
