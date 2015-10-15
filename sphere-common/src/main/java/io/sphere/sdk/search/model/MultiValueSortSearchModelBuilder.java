@@ -1,5 +1,9 @@
 package io.sphere.sdk.search.model;
 
+/**
+ * Instantiates {@link MultiValueSortSearchModel} class
+ * @param <T> type of the entity to sort by
+ */
 public class MultiValueSortSearchModelBuilder<T> implements SearchSortBuilder<T, MultiValueSortSearchModel<T>> {
 
     @Override

@@ -6,15 +6,13 @@ import io.sphere.sdk.search.TermFacetExpression;
 import javax.annotation.Nullable;
 import java.util.function.Function;
 
-import static java.util.Collections.singletonList;
-
 public class TermFacetSearchModel<T, V> extends FacetSearchModel<T, V> {
 
-    public TermFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {
+    TermFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer, final String alias) {
         super(parent, typeSerializer, alias);
     }
 
-    public TermFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
+    TermFacetSearchModel(@Nullable final SearchModel<T> parent, final Function<V, String> typeSerializer) {
         super(parent, typeSerializer);
     }
 

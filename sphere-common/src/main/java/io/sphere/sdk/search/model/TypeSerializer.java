@@ -1,7 +1,6 @@
 package io.sphere.sdk.search.model;
 
 import javax.money.CurrencyUnit;
-import javax.money.Monetary;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -13,24 +12,19 @@ import java.util.function.Function;
 import static java.time.format.DateTimeFormatter.*;
 
 /**
- * Serializer and deserializer to transform certain types from and to Commercetools Platform format on search endpoint.
- * @param <T> type of the data to transform.
+ * Serializer to transform certain types to Commercetools Platform format on search endpoint.
+ * @param <V> type of the data to transform.
  */
-class TypeSerializer<T> {
-    private final Function<T, String> serializer;
-    private final Function<String, T> deserializer;
+class TypeSerializer<V> implements Function<V, String> {
+    private final Function<V, String> serializer;
 
-    private TypeSerializer(final Function<T, String> serializer, final Function<String, T> deserializer) {
+    @Override
+    public String apply(final V value) {
+        return serializer.apply(value);
+    }
+
+    private TypeSerializer(final Function<V, String> serializer) {
         this.serializer = serializer;
-        this.deserializer = deserializer;
-    }
-
-    public Function<T, String> getSerializer() {
-        return serializer;
-    }
-
-    public Function<String, T> getDeserializer() {
-        return deserializer;
     }
 
     /**
@@ -38,9 +32,7 @@ class TypeSerializer<T> {
      * @return the serializer for text data.
      */
     public static TypeSerializer<String> ofString() {
-        return new TypeSerializer<>(
-                v -> withQuotes(v.replace("\"", "\\\"")),
-                s -> s);
+        return new TypeSerializer<>(v -> withQuotes(v.replace("\"", "\\\"")));
     }
 
     /**
@@ -48,9 +40,7 @@ class TypeSerializer<T> {
      * @return the serializer for boolean data.
      */
     public static TypeSerializer<Boolean> ofBoolean() {
-        return new TypeSerializer<>(
-                v -> v ? "true" : "false",
-                s -> Boolean.valueOf(s));
+        return new TypeSerializer<>(v -> v ? "true" : "false");
     }
 
     /**
@@ -58,9 +48,7 @@ class TypeSerializer<T> {
      * @return the serializer for numerical data.
      */
     public static TypeSerializer<BigDecimal> ofNumber() {
-        return new TypeSerializer<>(
-                v -> v.toPlainString(),
-                s -> new BigDecimal(s));
+        return new TypeSerializer<>(v -> v.toPlainString());
     }
 
     /**
@@ -68,9 +56,7 @@ class TypeSerializer<T> {
      * @return the serializer for date data.
      */
     public static TypeSerializer<LocalDate> ofDate() {
-        return new TypeSerializer<>(
-                v -> withQuotes(v.format(ISO_DATE)),
-                s -> LocalDate.parse(s));
+        return new TypeSerializer<>(v -> withQuotes(v.format(ISO_DATE)));
     }
 
     /**
@@ -78,9 +64,7 @@ class TypeSerializer<T> {
      * @return the serializer for time data.
      */
     public static TypeSerializer<LocalTime> ofTime() {
-        return new TypeSerializer<>(
-                v -> withQuotes(v.format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))),
-                s -> LocalTime.parse(s));
+        return new TypeSerializer<>(v -> withQuotes(v.format(DateTimeFormatter.ofPattern("HH:mm:ss.SSS"))));
     }
 
     /**
@@ -88,9 +72,7 @@ class TypeSerializer<T> {
      * @return the serializer for datetime data.
      */
     public static TypeSerializer<ZonedDateTime> ofDateTime() {
-        return new TypeSerializer<>(
-                v -> withQuotes(v.withZoneSameInstant(ZoneOffset.UTC).format(ISO_DATE_TIME)),
-                s -> ZonedDateTime.parse(s));
+        return new TypeSerializer<>(v -> withQuotes(v.withZoneSameInstant(ZoneOffset.UTC).format(ISO_DATE_TIME)));
     }
 
     /**
@@ -98,9 +80,7 @@ class TypeSerializer<T> {
      * @return the serializer for money cent amount data.
      */
     public static TypeSerializer<Long> ofMoneyCentAmount() {
-        return new TypeSerializer<>(
-                v -> v.toString(),
-                s -> Long.valueOf(s));
+        return new TypeSerializer<>(v -> v.toString());
     }
 
     /**
@@ -108,9 +88,7 @@ class TypeSerializer<T> {
      * @return the serializer for currency data.
      */
     public static TypeSerializer<CurrencyUnit> ofCurrency() {
-        return new TypeSerializer<>(
-                v -> withQuotes(v.getCurrencyCode().toUpperCase()),
-                s -> Monetary.getCurrency(s));
+        return new TypeSerializer<>(v -> withQuotes(v.getCurrencyCode().toUpperCase()));
     }
 
     private static String withQuotes(final String text) {

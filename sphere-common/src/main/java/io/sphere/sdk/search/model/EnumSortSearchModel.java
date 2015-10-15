@@ -4,8 +4,7 @@ import javax.annotation.Nullable;
 
 public class EnumSortSearchModel<T, S extends SortSearchModel<T>> extends SortableSearchModel<T, S> {
 
-    public EnumSortSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment,
-                               final SearchSortBuilder<T, S> searchSortBuilder) {
+    public EnumSortSearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment, final SearchSortBuilder<T, S> searchSortBuilder) {
         super(parent, pathSegment, searchSortBuilder);
     }
 

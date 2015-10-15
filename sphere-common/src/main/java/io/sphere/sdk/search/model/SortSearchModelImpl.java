@@ -7,10 +7,10 @@ import io.sphere.sdk.search.SortExpression;
 import static io.sphere.sdk.search.SearchSortDirection.ASC;
 import static io.sphere.sdk.search.SearchSortDirection.DESC;
 
-class SortSearchModelImpl<T, S extends SortSearchModel<T>> extends Base implements SortSearchModel<T> {
+public class SortSearchModelImpl<T, S extends SortSearchModel<T>> extends Base implements SortSearchModel<T> {
     private final SearchModel<T> searchModel;
 
-    public SortSearchModelImpl(final SortableSearchModel<T, S> searchModel) {
+    SortSearchModelImpl(final SortableSearchModel<T, S> searchModel) {
         this.searchModel = searchModel;
     }
 

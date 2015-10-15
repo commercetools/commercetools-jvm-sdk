@@ -93,7 +93,6 @@ abstract class RangeFacetBaseSearchModel<T, V extends Comparable<? super V>> ext
      */
     public RangeFacetExpression<T> onlyRangeAsString(final String lowerEndpoint, final String upperEndpoint) {
         final List<FacetRange<String>> ranges = singletonList(FacetRange.of(lowerEndpoint, upperEndpoint));
-        final Function<String, String> serializer = TypeSerializer.ofString().getSerializer();
-        return new RangeFacetExpressionImpl<>(this, serializer, ranges, alias);
+        return new RangeFacetExpressionImpl<>(this, TypeSerializer.ofString(), ranges, alias);
     }
 }

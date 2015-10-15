@@ -1,7 +1,6 @@
 package io.sphere.sdk.search.model;
 
 import io.sphere.sdk.models.Base;
-import io.sphere.sdk.search.model.SearchModel;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -20,10 +19,6 @@ abstract class SearchModelExpression<T, V> extends Base {
         this.searchModel = searchModel;
         this.typeSerializer = typeSerializer;
         this.alias = alias;
-    }
-
-    public final String serializeValue(final V value) {
-        return typeSerializer.apply(value);
     }
 
     public final String expression() {

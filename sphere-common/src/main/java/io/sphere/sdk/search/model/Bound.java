@@ -12,10 +12,10 @@ public class Bound<T extends Comparable<? super T>> extends Base {
 
     /**
      * Allows to define the bound type of a range.
-     * A bound identified with INCLUSIVE type indicates the endpoint is included in the range.
-     * A bound identified with EXCLUSIVE type indicates the endpoint is excluded in the range.
+     * A bound identified with {@code INCLUSIVE} type indicates the endpoint is included in the range.
+     * A bound identified with {@code EXCLUSIVE} type indicates the endpoint is excluded in the range.
      */
-    private static enum BoundType {
+    private enum BoundType {
         INCLUSIVE,
         EXCLUSIVE
     }

@@ -6,6 +6,6 @@ import javax.money.CurrencyUnit;
 public class CurrencySearchModel<T> extends TermModelImpl<T, CurrencyUnit> {
 
     public CurrencySearchModel(@Nullable final SearchModel<T> parent, @Nullable final String pathSegment) {
-        super(parent, pathSegment, TypeSerializer.ofCurrency().getSerializer());
+        super(parent, pathSegment, TypeSerializer.ofCurrency());
     }
 }

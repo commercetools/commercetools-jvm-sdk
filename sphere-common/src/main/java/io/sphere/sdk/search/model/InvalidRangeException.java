@@ -1,7 +1,5 @@
 package io.sphere.sdk.search.model;
 
-import io.sphere.sdk.search.model.Range;
-
 public class InvalidRangeException extends RuntimeException {
     private static final long serialVersionUID = 1098946885116985560L;
 

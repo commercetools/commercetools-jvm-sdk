@@ -388,7 +388,7 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
         if (!facets().isEmpty()) {
             builder.add("formatBooleanFacet", Boolean.TRUE.toString(), urlEncoded);
         }
-        resultFilters().forEach(f -> builder.add(FILTER, f.expression(), urlEncoded));
+        resultFilters().forEach(f -> builder.add(FILTER_RESULTS, f.expression(), urlEncoded));
         queryFilters().forEach(f -> builder.add(FILTER_QUERY, f.expression(), urlEncoded));
         facetFilters().forEach(f -> builder.add(FILTER_FACETS, f.expression(), urlEncoded));
         sort().forEach(s -> builder.add(SORT, s.expression(), urlEncoded));

@@ -73,6 +73,6 @@ abstract class FacetSearchModel<T, V> extends SearchModelImpl<T> {
      * @return a facet expression for only the given values
      */
     public FilteredFacetExpression<T> onlyTermAsString(final Iterable<String> values) {
-        return new FilteredFacetExpressionImpl<>(this, TypeSerializer.ofString().getSerializer(), values, alias);
+        return new FilteredFacetExpressionImpl<>(this, TypeSerializer.ofString(), values, alias);
     }
 }

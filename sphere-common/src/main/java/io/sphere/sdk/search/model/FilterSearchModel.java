@@ -86,6 +86,6 @@ abstract class FilterSearchModel<T, V> extends SearchModelImpl<T> {
     }
 
     private TermFilterExpression<T, String> filterByAsString(final Iterable<String> values) {
-        return new TermFilterExpression<>(this, TypeSerializer.ofString().getSerializer(), values);
+        return new TermFilterExpression<>(this, TypeSerializer.ofString(), values);
     }
 }

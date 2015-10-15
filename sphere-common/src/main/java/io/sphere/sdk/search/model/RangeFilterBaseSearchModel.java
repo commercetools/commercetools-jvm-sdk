@@ -125,6 +125,6 @@ abstract class RangeFilterBaseSearchModel<T, V extends Comparable<? super V>> ex
     }
 
     private RangeFilterExpression<T, String> filterByAsString(final Iterable<FilterRange<String>> ranges) {
-        return new RangeFilterExpression<>(this, TypeSerializer.ofString().getSerializer(), ranges);
+        return new RangeFilterExpression<>(this, TypeSerializer.ofString(), ranges);
     }
 }
