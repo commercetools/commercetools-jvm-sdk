@@ -1,12 +1,10 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.CategoryFixtures;
-import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.products.commands.ProductCreateCommand;
 import io.sphere.sdk.products.queries.ProductProjectionQuery;
 import io.sphere.sdk.products.search.ProductProjectionSearch;
 import io.sphere.sdk.producttypes.ProductTypeFixtures;
-import io.sphere.sdk.queries.QuerySort;
 import io.sphere.sdk.search.SearchSort;
 import io.sphere.sdk.test.IntegrationTest;
 import org.assertj.core.api.Condition;
@@ -186,7 +184,7 @@ public class ProductCategoryOrderHintTest extends IntegrationTest {
     private static List<ProductProjection> queryForCategoryAndSort(final String categoryId) {
         final ProductProjectionQuery query = ProductProjectionQuery.ofStaged()
                 .withPredicates(m -> m.categories().id().is(categoryId))
-                .withSort(QuerySort.of("categoryOrderHints." + categoryId + " asc"));
+                .withSort(m -> m.categoryOrderHints().category(categoryId).asc());
         return execute(query).getResults();
     }
 

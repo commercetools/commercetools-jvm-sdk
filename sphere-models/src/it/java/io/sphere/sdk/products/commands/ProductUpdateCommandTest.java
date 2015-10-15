@@ -3,7 +3,7 @@ package io.sphere.sdk.products.commands;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryOrderHints;
+import io.sphere.sdk.products.CategoryOrderHints;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.products.*;

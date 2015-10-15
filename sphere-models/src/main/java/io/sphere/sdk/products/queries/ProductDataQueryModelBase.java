@@ -59,5 +59,9 @@ class ProductDataQueryModelBase<T> extends ResourceQueryModelImpl<T> {
     public ReferenceCollectionQueryModel<T, Category> categories() {
         return referenceCollectionModel("categories");
     }
+
+    public CategoryOrderHintsQueryModel<T> categoryOrderHints() {
+        return new CategoryOrderHintsQueryModelImpl<>(this, "categoryOrderHints");
+    }
 }
 

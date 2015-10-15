@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.ResourceViewImpl;
 import io.sphere.sdk.models.Reference;

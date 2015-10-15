@@ -1,4 +1,4 @@
-package io.sphere.sdk.categories;
+package io.sphere.sdk.products;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;

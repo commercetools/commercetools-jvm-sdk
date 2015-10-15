@@ -63,5 +63,10 @@ public class ProductDataQueryModel<T> extends ProductDataQueryModelBase<T> {
     public ProductVariantQueryModel<T> variants() {
         return super.variants();
     }
+
+    @Override
+    public CategoryOrderHintsQueryModel<T> categoryOrderHints() {
+        return super.categoryOrderHints();
+    }
 }
 

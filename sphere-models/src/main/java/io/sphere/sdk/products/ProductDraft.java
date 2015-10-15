@@ -1,8 +1,6 @@
 package io.sphere.sdk.products;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;

@@ -1,7 +1,6 @@
 package io.sphere.sdk.products;
 
 import io.sphere.sdk.categories.Category;
-import io.sphere.sdk.categories.CategoryOrderHints;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.taxcategories.TaxCategory;
