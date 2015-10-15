@@ -4,8 +4,8 @@ import java.util.function.Function;
 
 /**
  * A builder to instantiate any implementation of DirectionlessSearchSort.
- * @param <T> the type of the class to apply the sort.
- * @param <S> the type of the class, implementation of DirectionlessSearchSort, where the element should be built.
+ * @param <T> the resource to sort by
+ * @param <S> the type of the class, implementation of DirectionlessSearchSort, where the element should be built
  */
 @FunctionalInterface
 interface SearchSortBuilder<T, S extends SortSearchModel<T>> extends Function<SortableSearchModel<T, S>, S> {

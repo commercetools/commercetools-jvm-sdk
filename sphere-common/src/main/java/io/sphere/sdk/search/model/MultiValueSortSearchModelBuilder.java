@@ -2,7 +2,7 @@ package io.sphere.sdk.search.model;
 
 /**
  * Instantiates {@link MultiValueSortSearchModel} class
- * @param <T> type of the entity to sort by
+ * @param <T> type of the resource to sort by
  */
 public class MultiValueSortSearchModelBuilder<T> implements SearchSortBuilder<T, MultiValueSortSearchModel<T>> {
 
