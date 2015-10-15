@@ -87,12 +87,6 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
     ProductProjectionSearch plusFacetFilters(final Function<ProductProjectionFilterSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
-    ProductProjectionSearch plusFacetedSearch(final FacetAndFilterSearchExpression<ProductProjection> facetAndFilterSearchExpression);
-
-    @Override
-    ProductProjectionSearch plusFacetedSearch(final Function<ProductProjectionSortSearchModel, FacetAndFilterSearchExpression<ProductProjection>> m);
-
-    @Override
     ProductProjectionSearch plusSort(final List<SortExpression<ProductProjection>> sortExpressions);
 
     @Override

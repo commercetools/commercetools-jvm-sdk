@@ -17,7 +17,6 @@ public class MetaModelSearchDslTest {
     private static final TermFacetExpression<Object> FACET_EXPR_TWO = TermFacetExpression.of("facet-two");
     private static final FilterExpression<Object> FILTER_EXPR_ONE = FilterExpression.of("filter-one");
     private static final FilterExpression<Object> FILTER_EXPR_TWO = FilterExpression.of("filter-two");
-    private static final FacetAndFilterSearchExpression<Object> FACETED_SEARCH_EXPR = TermFacetAndFilterSearchExpression.of(FACET_EXPR_ONE, singletonList(FILTER_EXPR_ONE));
     private static final ExpansionPath<Object> EXPANSION_PATH_ONE = ExpansionPath.of("expansion-one");
     private static final ExpansionPath<Object> EXPANSION_PATH_TWO = ExpansionPath.of("expansion-two");
 
@@ -68,17 +67,6 @@ public class MetaModelSearchDslTest {
                 .isEqualTo(singletonList(FILTER_EXPR_ONE));
         assertThat(dsl.plusFacetFilters(singletonList(FILTER_EXPR_TWO)).facetFilters())
                 .isEqualTo(asList(FILTER_EXPR_ONE, FILTER_EXPR_TWO));
-    }
-
-    @Test
-    public void buildsFacetedSearch() throws Exception {
-        final TestableSearchDsl dsl = new TestableSearchDsl().plusFacetedSearch(FACETED_SEARCH_EXPR);
-        assertThat(dsl.facets())
-                .isEqualTo(singletonList(FACETED_SEARCH_EXPR.facetExpression()));
-        assertThat(dsl.queryFilters()).isEmpty();
-        assertThat(dsl.resultFilters())
-                .isEqualTo(dsl.facetFilters())
-                .isEqualTo(FACETED_SEARCH_EXPR.filterExpressions());
     }
 
     @Test

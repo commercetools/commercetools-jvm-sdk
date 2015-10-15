@@ -204,18 +204,6 @@ public abstract class MetaModelSearchDslImpl<T, C extends MetaModelSearchDsl<T, 
     }
 
     @Override
-    public C plusFacetedSearch(final FacetAndFilterSearchExpression<T> facetAndFilterSearchExpression) {
-        return plusFacets(facetAndFilterSearchExpression.facetExpression())
-                .plusFacetFilters(facetAndFilterSearchExpression.filterExpressions())
-                .plusResultFilters(facetAndFilterSearchExpression.filterExpressions());
-    }
-
-    @Override
-    public C plusFacetedSearch(final Function<S, FacetAndFilterSearchExpression<T>> m) {
-        return plusFacetedSearch(m.apply(sortModel));
-    }
-
-    @Override
     public C withSort(final List<SortExpression<T>> sortExpressions) {
         return copyBuilder().sort(sortExpressions).build();
     }
