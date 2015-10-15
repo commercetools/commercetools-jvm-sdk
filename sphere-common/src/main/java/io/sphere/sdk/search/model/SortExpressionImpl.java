@@ -8,7 +8,7 @@ import io.sphere.sdk.search.model.SearchModel;
 import static io.sphere.sdk.utils.IterableUtils.toStream;
 import static java.util.stream.Collectors.joining;
 
-public class SortExpressionImpl<T> extends Base implements SortExpression<T> {
+class SortExpressionImpl<T> extends Base implements SortExpression<T> {
     private final SearchModel<T> searchModel;
     private final SearchSortDirection direction;
 
