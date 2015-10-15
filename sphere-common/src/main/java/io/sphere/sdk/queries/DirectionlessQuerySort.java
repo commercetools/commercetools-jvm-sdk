@@ -8,7 +8,7 @@ import static io.sphere.sdk.queries.QuerySortDirection.*;
 public class DirectionlessQuerySort<T> extends Base {
     private final QueryModel<T> path;
 
-    public DirectionlessQuerySort(final QueryModel<T> path) {
+    DirectionlessQuerySort(final QueryModel<T> path) {
         this.path = path;
     }
 
@@ -18,6 +18,10 @@ public class DirectionlessQuerySort<T> extends Base {
 
     public QuerySort<T> desc() {
         return getQuerySort(DESC);
+    }
+
+    public static <T> DirectionlessQuerySort<T> of(final QueryModel<T> path) {
+        return new DirectionlessQuerySort<>(path);
     }
 
     private QuerySort<T> getQuerySort(final QuerySortDirection direction) {

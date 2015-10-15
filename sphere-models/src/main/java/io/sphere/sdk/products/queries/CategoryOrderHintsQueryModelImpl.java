@@ -11,6 +11,6 @@ final class CategoryOrderHintsQueryModelImpl<T> extends QueryModelImpl<T> implem
 
     @Override
     public DirectionlessQuerySort<T> category(final String categoryId) {
-        return new DirectionlessQuerySort<>(new QueryModelImpl<T>(this, categoryId){});
+        return DirectionlessQuerySort.of(new QueryModelImpl<T>(this, categoryId){});
     }
 }
