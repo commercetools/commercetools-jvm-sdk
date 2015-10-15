@@ -18,12 +18,6 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
-var altColor = "altColor";
-var rowColor = "rowColor";
-var tableTab = "tableTab";
-var activeTableTab = "activeTableTab";
 </script>
 <noscript>
 <div>JavaScript is disabled on your browser.</div>
@@ -76,13 +70,13 @@ var activeTableTab = "activeTableTab";
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.summary">Method</a></li>
+<li>Method</li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.detail">Method</a></li>
+<li>Method</li>
 </ul>
 </div>
 <a name="skip.navbar.top">
@@ -109,7 +103,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search">FacetDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/FacetSupport.html" title="interface in io.sphere.sdk.search">FacetSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/FilterDsl.html" title="interface in io.sphere.sdk.search">FilterDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/FilterSupport.html" title="interface in io.sphere.sdk.search">FilterSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search">MetaModelFacetDsl</a>&lt;T,C,F&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a>&lt;T,C,L&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;T&gt;&gt;</dd>
+<dd><a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/FacetDsl.html" title="interface in io.sphere.sdk.search">FacetDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/FacetSupport.html" title="interface in io.sphere.sdk.search">FacetSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/FilterDsl.html" title="interface in io.sphere.sdk.search">FilterDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/FilterSupport.html" title="interface in io.sphere.sdk.search">FilterSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search">MetaModelFacetDsl</a>&lt;T,C,F&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a>&lt;T,C,L&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelSortDsl.html" title="interface in io.sphere.sdk.search">MetaModelSortDsl</a>&lt;T,C,S&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionDsl.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/Search.html" title="interface in io.sphere.sdk.search">Search</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/SortDsl.html" title="interface in io.sphere.sdk.search">SortDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/SortSupport.html" title="interface in io.sphere.sdk.search">SortSupport</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/client/SphereRequest.html" title="interface in io.sphere.sdk.client">SphereRequest</a>&lt;<a href="../../../../io/sphere/sdk/search/PagedSearchResult.html" title="class in io.sphere.sdk.search">PagedSearchResult</a>&lt;T&gt;&gt;</dd>
 </dl>
 <dl>
 <dt>All Known Subinterfaces:</dt>
@@ -122,7 +116,7 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public interface <span class="typeNameLabel">MetaModelSearchDsl&lt;T,C extends MetaModelSearchDsl&lt;T,C,S,L,F,E&gt;,S,L,F,E&gt;</span>
-extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a>&lt;T,C,L&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search">MetaModelFacetDsl</a>&lt;T,C,F&gt;, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;</pre>
+extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a>&lt;T&gt;, <a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a>&lt;T,C&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelSortDsl.html" title="interface in io.sphere.sdk.search">MetaModelSortDsl</a>&lt;T,C,S&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFilterDsl.html" title="interface in io.sphere.sdk.search">MetaModelFilterDsl</a>&lt;T,C,L&gt;, <a href="../../../../io/sphere/sdk/search/MetaModelFacetDsl.html" title="interface in io.sphere.sdk.search">MetaModelFacetDsl</a>&lt;T,C,F&gt;, <a href="../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;T,C,E&gt;</pre>
 </li>
 </ul>
 </div>
@@ -150,34 +144,19 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <!--   -->
 </a>
 <h3>Method Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
-<tr>
-<th class="colFirst" scope="col">Modifier and Type</th>
-<th class="colLast" scope="col">Method and Description</th>
-</tr>
-<tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#plusSort-java.util.function.Function-">plusSort</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html#withSort-java.util.function.Function-">withSort</a></span>(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</code>&nbsp;</td>
-</tr>
-</table>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SearchDsl">
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="interface in io.sphere.sdk.search">SearchDsl</a></h3>
-<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacetFilters-io.sphere.sdk.search.FilterExpression-">plusFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusQueryFilters-io.sphere.sdk.search.FilterExpression-">plusQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusResultFilters-io.sphere.sdk.search.FilterExpression-">plusResultFilters</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusSort-java.util.List-">plusSort</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusSort-io.sphere.sdk.search.SortExpression-">plusSort</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFacetFilters-io.sphere.sdk.search.FilterExpression-">withFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withQueryFilters-io.sphere.sdk.search.FilterExpression-">withQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withResultFilters-io.sphere.sdk.search.FilterExpression-">withResultFilters</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withSort-java.util.List-">withSort</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withSort-io.sphere.sdk.search.SortExpression-">withSort</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">withText</a></code></li>
+<code><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a>, <a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">withText</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.EntitySearch">
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></h3>
-<code><a href="../../../../io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#sort--">sort</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></code></li>
+<code><a href="../../../../io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.Search">
@@ -194,6 +173,27 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <code><a href="../../../../io/sphere/sdk/client/SphereRequest.html#canDeserialize-io.sphere.sdk.http.HttpResponse-">canDeserialize</a>, <a href="../../../../io/sphere/sdk/client/SphereRequest.html#httpRequestIntent--">httpRequestIntent</a></code></li>
 </ul>
 <ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.MetaModelSortDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/MetaModelSortDsl.html" title="interface in io.sphere.sdk.search">MetaModelSortDsl</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/MetaModelSortDsl.html#plusSort-java.util.function.Function-">plusSort</a>, <a href="../../../../io/sphere/sdk/search/MetaModelSortDsl.html#withSort-java.util.function.Function-">withSort</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SortDsl">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SortDsl.html" title="interface in io.sphere.sdk.search">SortDsl</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/SortDsl.html#plusSort-java.util.List-">plusSort</a>, <a href="../../../../io/sphere/sdk/search/SortDsl.html#plusSort-io.sphere.sdk.search.SortExpression-">plusSort</a>, <a href="../../../../io/sphere/sdk/search/SortDsl.html#withSort-java.util.List-">withSort</a>, <a href="../../../../io/sphere/sdk/search/SortDsl.html#withSort-io.sphere.sdk.search.SortExpression-">withSort</a></code></li>
+</ul>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.SortSupport">
+<!--   -->
+</a>
+<h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/SortSupport.html" title="interface in io.sphere.sdk.search">SortSupport</a></h3>
+<code><a href="../../../../io/sphere/sdk/search/SortSupport.html#sort--">sort</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.MetaModelFilterDsl">
 <!--   -->
 </a>
@@ -205,7 +205,7 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/FilterDsl.html" title="interface in io.sphere.sdk.search">FilterDsl</a></h3>
-<code><a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusFacetFilters-java.util.List-">plusFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusQueryFilters-java.util.List-">plusQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusResultFilters-java.util.List-">plusResultFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withFacetFilters-java.util.List-">withFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withQueryFilters-java.util.List-">withQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withResultFilters-java.util.List-">withResultFilters</a></code></li>
+<code><a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusFacetFilters-io.sphere.sdk.search.FilterExpression-">plusFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusFacetFilters-java.util.List-">plusFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusQueryFilters-io.sphere.sdk.search.FilterExpression-">plusQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusQueryFilters-java.util.List-">plusQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusResultFilters-io.sphere.sdk.search.FilterExpression-">plusResultFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#plusResultFilters-java.util.List-">plusResultFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withFacetFilters-io.sphere.sdk.search.FilterExpression-">withFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withFacetFilters-java.util.List-">withFacetFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withQueryFilters-io.sphere.sdk.search.FilterExpression-">withQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withQueryFilters-java.util.List-">withQueryFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withResultFilters-io.sphere.sdk.search.FilterExpression-">withResultFilters</a>, <a href="../../../../io/sphere/sdk/search/FilterDsl.html#withResultFilters-java.util.List-">withResultFilters</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.FilterSupport">
@@ -255,38 +255,6 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.expansion.<a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html" title="interface in io.sphere.sdk.expansion">ReferenceExpansionSupport</a></h3>
 <code><a href="../../../../io/sphere/sdk/expansion/ReferenceExpansionSupport.html#expansionPaths--">expansionPaths</a></code></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="details">
-<ul class="blockList">
-<li class="blockList">
-<!-- ============ METHOD DETAIL ========== -->
-<ul class="blockList">
-<li class="blockList"><a name="method.detail">
-<!--   -->
-</a>
-<h3>Method Detail</h3>
-<a name="withSort-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withSort</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;withSort(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-</li>
-</ul>
-<a name="plusSort-java.util.function.Function-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>plusSort</h4>
-<pre><a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">C</a>&nbsp;plusSort(java.util.function.Function&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">S</a>,<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/MetaModelSearchDsl.html" title="type parameter in MetaModelSearchDsl">T</a>&gt;&gt;&nbsp;m)</pre>
-</li>
 </ul>
 </li>
 </ul>
@@ -343,13 +311,13 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.summary">Method</a></li>
+<li>Method</li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
-<li><a href="#method.detail">Method</a></li>
+<li>Method</li>
 </ul>
 </div>
 <a name="skip.navbar.bottom">

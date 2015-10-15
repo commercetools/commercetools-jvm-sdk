@@ -18,8 +18,8 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":38,"i1":38,"i2":38,"i3":6,"i4":6,"i5":38,"i6":6,"i7":6,"i8":38,"i9":38,"i10":6,"i11":6,"i12":6,"i13":6};
-var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"],32:["t6","Deprecated Methods"]};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6};
+var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
 var tableTab = "tableTab";
@@ -142,96 +142,34 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 </a>
 <h3>Method Summary</h3>
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Method Summary table, listing methods, and an explanation">
-<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t6" class="tableTab"><span><a href="javascript:show(32);">Deprecated Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
+<caption><span id="t0" class="activeTableTab"><span>All Methods</span><span class="tabEnd">&nbsp;</span></span><span id="t2" class="tableTab"><span><a href="javascript:show(2);">Instance Methods</a></span><span class="tabEnd">&nbsp;</span></span><span id="t3" class="tableTab"><span><a href="javascript:show(4);">Abstract Methods</a></span><span class="tabEnd">&nbsp;</span></span></caption>
 <tr>
 <th class="colFirst" scope="col">Modifier and Type</th>
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusFacetFilters-io.sphere.sdk.search.FilterExpression-">plusFacetFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">use <code>SearchDsl#plusFacetFilters(List)</code> instead</span></div>
-</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>
+<div class="block">Returns a new object with the new limit.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusQueryFilters-io.sphere.sdk.search.FilterExpression-">plusQueryFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">use <code>SearchDsl#plusQueryFilters(List)</code> instead</span></div>
-</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>
+<div class="block">Returns a new object with the new offset.</div>
 </td>
 </tr>
 <tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusResultFilters-io.sphere.sdk.search.FilterExpression-">plusResultFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">use <code>SearchDsl#plusResultFilters(List)</code> instead</span></div>
-</div>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a></span>(java.util.Locale&nbsp;locale,
+        java.lang.String&nbsp;text)</code>
+<div class="block">Returns a new object with the new text as search text.</div>
 </td>
 </tr>
 <tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusSort-java.util.List-">plusSort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;sortExpressions)</code>
-<div class="block">Returns an EntityQuery with the new sort expression list appended to the existing sort expressions.</div>
-</td>
-</tr>
-<tr id="i4" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#plusSort-io.sphere.sdk.search.SortExpression-">plusSort</a></span>(<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;sortExpression)</code>&nbsp;</td>
-</tr>
-<tr id="i5" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFacetFilters-io.sphere.sdk.search.FilterExpression-">withFacetFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">use <code>SearchDsl#withFacetFilters(List)</code> instead</span></div>
-</div>
-</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>&nbsp;</td>
-</tr>
-<tr id="i7" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>&nbsp;</td>
-</tr>
-<tr id="i8" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withQueryFilters-io.sphere.sdk.search.FilterExpression-">withQueryFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">use <code>SearchDsl#withQueryFilters(List)</code> instead</span></div>
-</div>
-</td>
-</tr>
-<tr id="i9" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withResultFilters-io.sphere.sdk.search.FilterExpression-">withResultFilters</a></span>(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</code>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;
-<div class="block"><span class="deprecationComment">use <code>SearchDsl#withResultFilters(List)</code> instead</span></div>
-</div>
-</td>
-</tr>
-<tr id="i10" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withSort-java.util.List-">withSort</a></span>(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;sortExpressions)</code>
-<div class="block">Returns an EntityQuery with the new sort expressions.</div>
-</td>
-</tr>
-<tr id="i11" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withSort-io.sphere.sdk.search.SortExpression-">withSort</a></span>(<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;sortExpression)</code>&nbsp;</td>
-</tr>
-<tr id="i12" class="altColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a></span>(java.util.Locale&nbsp;locale,
-        java.lang.String&nbsp;text)</code>&nbsp;</td>
-</tr>
-<tr id="i13" class="rowColor">
-<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">withText</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a>&nbsp;text)</code>
-<div class="block">Returns an EntitySearch with the new text as search text.</div>
+<div class="block">Returns a new object with the new text as search text.</div>
 </td>
 </tr>
 </table>
@@ -240,7 +178,7 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></h3>
-<code><a href="../../../../io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#sort--">sort</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></code></li>
+<code><a href="../../../../io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.Search">
@@ -277,12 +215,12 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <li class="blockList">
 <h4>withText</h4>
 <pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withText(<a href="../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a>&nbsp;text)</pre>
-<div class="block">Returns an EntitySearch with the new text as search text.</div>
+<div class="block">Returns a new object with the new text as search text.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>text</code> - the new search text</dd>
+<dd><code>text</code> - the new search text with locale</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with text</dd>
+<dd>a new object with <code>text</code></dd>
 </dl>
 </li>
 </ul>
@@ -294,56 +232,14 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <h4>withText</h4>
 <pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withText(java.util.Locale&nbsp;locale,
            java.lang.String&nbsp;text)</pre>
-</li>
-</ul>
-<a name="withSort-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withSort</h4>
-<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withSort(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;sortExpressions)</pre>
-<div class="block">Returns an EntityQuery with the new sort expressions.</div>
+<div class="block">Returns a new object with the new text as search text.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>sortExpressions</code> - the new sort expression list</dd>
+<dd><code>locale</code> - the new locale</dd>
+<dd><code>text</code> - the new search text</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
-<dd>EntityQuery with sort sortExpressions</dd>
+<dd>a new object with <code>text</code></dd>
 </dl>
-</li>
-</ul>
-<a name="withSort-io.sphere.sdk.search.SortExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withSort</h4>
-<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withSort(<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;sortExpression)</pre>
-</li>
-</ul>
-<a name="plusSort-java.util.List-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusSort</h4>
-<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;plusSort(java.util.List&lt;<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&gt;&nbsp;sortExpressions)</pre>
-<div class="block">Returns an EntityQuery with the new sort expression list appended to the existing sort expressions.</div>
-<dl>
-<dt><span class="paramLabel">Parameters:</span></dt>
-<dd><code>sortExpressions</code> - the new sort expression list</dd>
-<dt><span class="returnLabel">Returns:</span></dt>
-<dd>an EntitySearch with the existing sort expressions plus the new sort expression list.</dd>
-</dl>
-</li>
-</ul>
-<a name="plusSort-io.sphere.sdk.search.SortExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusSort</h4>
-<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;plusSort(<a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;sortExpression)</pre>
 </li>
 </ul>
 <a name="withLimit-long-">
@@ -353,81 +249,29 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <li class="blockList">
 <h4>withLimit</h4>
 <pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withLimit(long&nbsp;limit)</pre>
+<div class="block">Returns a new object with the new limit.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>limit</code> - the new limit</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new object with <code>limit</code></dd>
+</dl>
 </li>
 </ul>
 <a name="withOffset-long-">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>withOffset</h4>
 <pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withOffset(long&nbsp;offset)</pre>
-</li>
-</ul>
-<a name="withResultFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withResultFilters</h4>
-<pre>@Deprecated
-<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withResultFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <code>SearchDsl#withResultFilters(List)</code> instead</span></div>
-</li>
-</ul>
-<a name="plusResultFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusResultFilters</h4>
-<pre>@Deprecated
-<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;plusResultFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <code>SearchDsl#plusResultFilters(List)</code> instead</span></div>
-</li>
-</ul>
-<a name="withQueryFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withQueryFilters</h4>
-<pre>@Deprecated
-<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withQueryFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <code>SearchDsl#withQueryFilters(List)</code> instead</span></div>
-</li>
-</ul>
-<a name="plusQueryFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>plusQueryFilters</h4>
-<pre>@Deprecated
-<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;plusQueryFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <code>SearchDsl#plusQueryFilters(List)</code> instead</span></div>
-</li>
-</ul>
-<a name="withFacetFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockList">
-<li class="blockList">
-<h4>withFacetFilters</h4>
-<pre>@Deprecated
-<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withFacetFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <code>SearchDsl#withFacetFilters(List)</code> instead</span></div>
-</li>
-</ul>
-<a name="plusFacetFilters-io.sphere.sdk.search.FilterExpression-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>plusFacetFilters</h4>
-<pre>@Deprecated
-<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;plusFacetFilters(<a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search">FilterExpression</a>&lt;<a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">T</a>&gt;&nbsp;filterExpression)</pre>
-<div class="block"><span class="deprecatedLabel">Deprecated.</span>&nbsp;<span class="deprecationComment">use <code>SearchDsl#plusFacetFilters(List)</code> instead</span></div>
+<div class="block">Returns a new object with the new offset.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>offset</code> - the new offset</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>a new object with <code>offset</code></dd>
+</dl>
 </li>
 </ul>
 </li>
