@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -75,13 +75,13 @@ var activeTableTab = "activeTableTab";
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>
@@ -102,7 +102,12 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
+<li><a href="../../../../../io/sphere/sdk/search/model/SortSearchModelImpl.html" title="class in io.sphere.sdk.search.model">io.sphere.sdk.search.model.SortSearchModelImpl</a>&lt;T,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;T&gt;&gt;</li>
+<li>
+<ul class="inheritance">
 <li>io.sphere.sdk.search.model.MultiValueSortSearchModel&lt;T&gt;</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -118,31 +123,18 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">MultiValueSortSearchModel&lt;T&gt;</span>
-extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">Base</a></pre>
+extends <a href="../../../../../io/sphere/sdk/search/model/SortSearchModelImpl.html" title="class in io.sphere.sdk.search.model">SortSearchModelImpl</a>&lt;T,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;T&gt;&gt;</pre>
 <div class="block">A sort model to decide the direction of a model with multiple values per entity.</div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModelBuilder.html" title="class in io.sphere.sdk.search.model"><code>to instantiate this class</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
-<!-- ======== CONSTRUCTOR SUMMARY ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.summary">
-<!--   -->
-</a>
-<h3>Constructor Summary</h3>
-<table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
-<caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
-<tr>
-<th class="colOne" scope="col">Constructor and Description</th>
-</tr>
-<tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html#MultiValueSortSearchModel-io.sphere.sdk.search.model.SortableSearchModel-">MultiValueSortSearchModel</a></span>(<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt;&gt;&nbsp;searchModel)</code>&nbsp;</td>
-</tr>
-</table>
-</li>
-</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -156,34 +148,37 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;T&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html#by-io.sphere.sdk.search.SearchSortDirection-">by</a></span>(<a href="../../../../../io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search">SearchSortDirection</a>&nbsp;direction)</code>&nbsp;</td>
-</tr>
-<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html#byAsc--">byAsc</a></span>()</code>
 <div class="block">When the sort direction is ascending, the minimum value is used.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i1" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html#byAscWithMax--">byAscWithMax</a></span>()</code>
 <div class="block">Changes the default behaviour of the ascending sort by using the maximum value instead.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html#byDesc--">byDesc</a></span>()</code>
 <div class="block">When the direction is descending, the maximum value is used.</div>
 </td>
 </tr>
-<tr id="i4" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt;</code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html#byDescWithMin--">byDescWithMin</a></span>()</code>
 <div class="block">Changes the default behaviour of the descending sort by using the minimum value instead.</div>
 </td>
 </tr>
 </table>
+<ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.model.SortSearchModelImpl">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.search.model.<a href="../../../../../io/sphere/sdk/search/model/SortSearchModelImpl.html" title="class in io.sphere.sdk.search.model">SortSearchModelImpl</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModelImpl.html#by-io.sphere.sdk.search.SearchSortDirection-">by</a></code></li>
+</ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
 <!--   -->
@@ -206,23 +201,6 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <div class="details">
 <ul class="blockList">
 <li class="blockList">
-<!-- ========= CONSTRUCTOR DETAIL ======== -->
-<ul class="blockList">
-<li class="blockList"><a name="constructor.detail">
-<!--   -->
-</a>
-<h3>Constructor Detail</h3>
-<a name="MultiValueSortSearchModel-io.sphere.sdk.search.model.SortableSearchModel-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>MultiValueSortSearchModel</h4>
-<pre>public&nbsp;MultiValueSortSearchModel(<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt;&gt;&nbsp;searchModel)</pre>
-</li>
-</ul>
-</li>
-</ul>
 <!-- ============ METHOD DETAIL ========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.detail">
@@ -240,6 +218,8 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html#byAsc--">byAsc</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModelImpl.html#byAsc--">byAsc</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModelImpl.html" title="class in io.sphere.sdk.search.model">SortSearchModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt;&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the ascending sort direction</dd>
 </dl>
@@ -256,6 +236,8 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html#byDesc--">byDesc</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt;</code></dd>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModelImpl.html#byDesc--">byDesc</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModelImpl.html" title="class in io.sphere.sdk.search.model">SortSearchModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt;&gt;</code></dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the descending sort direction</dd>
 </dl>
@@ -278,7 +260,7 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <a name="byDescWithMin--">
 <!--   -->
 </a>
-<ul class="blockList">
+<ul class="blockListLast">
 <li class="blockList">
 <h4>byDescWithMin</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="type parameter in MultiValueSortSearchModel">T</a>&gt;&nbsp;byDescWithMin()</pre>
@@ -286,19 +268,6 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <dl>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>the descending sort direction using the minimum value</dd>
-</dl>
-</li>
-</ul>
-<a name="by-io.sphere.sdk.search.SearchSortDirection-">
-<!--   -->
-</a>
-<ul class="blockListLast">
-<li class="blockList">
-<h4>by</h4>
-<pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search">SortExpression</a>&lt;T&gt;&nbsp;by(<a href="../../../../../io/sphere/sdk/search/SearchSortDirection.html" title="enum in io.sphere.sdk.search">SearchSortDirection</a>&nbsp;direction)</pre>
-<dl>
-<dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html#by-io.sphere.sdk.search.SearchSortDirection-">by</a></code>&nbsp;in interface&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a>&lt;T&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -356,13 +325,13 @@ extends <a href="../../../../../io/sphere/sdk/models/Base.html" title="class in 
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.summary">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
 <ul class="subNavList">
 <li>Detail:&nbsp;</li>
 <li>Field&nbsp;|&nbsp;</li>
-<li><a href="#constructor.detail">Constr</a>&nbsp;|&nbsp;</li>
+<li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.detail">Method</a></li>
 </ul>
 </div>

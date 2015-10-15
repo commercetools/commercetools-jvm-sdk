@@ -474,6 +474,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/SortSearchModel.html#by-io.sphere.sdk.search.SearchSortDirection-">by(SearchSortDirection)</a></span> - Method in interface io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/SortSearchModelImpl.html#by-io.sphere.sdk.search.SearchSortDirection-">by(SearchSortDirection)</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/SortSearchModelImpl.html" title="class in io.sphere.sdk.search.model">SortSearchModelImpl</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/TermFilterSearchModel.html#by-V-">by(V)</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/TermFilterSearchModel.html" title="class in io.sphere.sdk.search.model">TermFilterSearchModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/RangeFilterSearchModel.html#byAll-java.lang.Iterable-">byAll(Iterable&lt;V&gt;)</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/RangeFilterSearchModel.html" title="class in io.sphere.sdk.search.model">RangeFilterSearchModel</a></dt>
@@ -496,6 +498,8 @@
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/SortSearchModel.html#byAsc--">byAsc()</a></span> - Method in interface io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a></dt>
 <dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/SortSearchModelImpl.html#byAsc--">byAsc()</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/SortSearchModelImpl.html" title="class in io.sphere.sdk.search.model">SortSearchModelImpl</a></dt>
+<dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/MultiValueSortSearchModel.html#byAscWithMax--">byAscWithMax()</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a></dt>
 <dd>
 <div class="block">Changes the default behaviour of the ascending sort by using the maximum value instead.</div>
@@ -517,6 +521,8 @@
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/SingleValueSortSearchModel.html#byDesc--">byDesc()</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">SingleValueSortSearchModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/SortSearchModel.html#byDesc--">byDesc()</a></span> - Method in interface io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a></dt>
+<dd>&nbsp;</dd>
+<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/SortSearchModelImpl.html#byDesc--">byDesc()</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/SortSearchModelImpl.html" title="class in io.sphere.sdk.search.model">SortSearchModelImpl</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/MultiValueSortSearchModel.html#byDescWithMin--">byDescWithMin()</a></span> - Method in class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a></dt>
 <dd>
@@ -5418,10 +5424,10 @@ assertThat(cartDiscount.getReferences()).isEqualTo(Collections.emptyList());
 <dd>
 <div class="block">A sort model to decide the direction of a model with multiple values per entity.</div>
 </dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/MultiValueSortSearchModel.html#MultiValueSortSearchModel-io.sphere.sdk.search.model.SortableSearchModel-">MultiValueSortSearchModel(SortableSearchModel&lt;T, MultiValueSortSearchModel&lt;T&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a></dt>
-<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/model/MultiValueSortSearchModelBuilder.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">MultiValueSortSearchModelBuilder</span></a>&lt;<a href="io/sphere/sdk/search/model/MultiValueSortSearchModelBuilder.html" title="type parameter in MultiValueSortSearchModelBuilder">T</a>&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Instantiates <a href="io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model"><code>MultiValueSortSearchModel</code></a> class</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/MultiValueSortSearchModelBuilder.html#MultiValueSortSearchModelBuilder--">MultiValueSortSearchModelBuilder()</a></span> - Constructor for class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/MultiValueSortSearchModelBuilder.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModelBuilder</a></dt>
 <dd>&nbsp;</dd>
 </dl>
@@ -8745,7 +8751,9 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/SingleValueSortSearchModel.html#SingleValueSortSearchModel-io.sphere.sdk.search.model.SortableSearchModel-">SingleValueSortSearchModel(SortableSearchModel&lt;T, SingleValueSortSearchModel&lt;T&gt;&gt;)</a></span> - Constructor for class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">SingleValueSortSearchModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/model/SingleValueSortSearchModelBuilder.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">SingleValueSortSearchModelBuilder</span></a>&lt;<a href="io/sphere/sdk/search/model/SingleValueSortSearchModelBuilder.html" title="type parameter in SingleValueSortSearchModelBuilder">T</a>&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
-<dd>&nbsp;</dd>
+<dd>
+<div class="block">Instantiates <a href="io/sphere/sdk/search/model/SingleValueSortSearchModel.html" title="class in io.sphere.sdk.search.model"><code>SingleValueSortSearchModel</code></a> class</div>
+</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/SingleValueSortSearchModelBuilder.html#SingleValueSortSearchModelBuilder--">SingleValueSortSearchModelBuilder()</a></span> - Constructor for class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/SingleValueSortSearchModelBuilder.html" title="class in io.sphere.sdk.search.model">SingleValueSortSearchModelBuilder</a></dt>
 <dd>&nbsp;</dd>
 <dt><span class="memberNameLink"><a href="io/sphere/sdk/queries/PagedQueryResult.html#size--">size()</a></span> - Method in class io.sphere.sdk.queries.<a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></dt>
@@ -8840,6 +8848,8 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dd>
 <div class="block">A sort model to decide the direction.</div>
 </dd>
+<dt><a href="io/sphere/sdk/search/model/SortSearchModelImpl.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">SortSearchModelImpl</span></a>&lt;<a href="io/sphere/sdk/search/model/SortSearchModelImpl.html" title="type parameter in SortSearchModelImpl">T</a>,<a href="io/sphere/sdk/search/model/SortSearchModelImpl.html" title="type parameter in SortSearchModelImpl">S</a> extends <a href="io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a>&lt;<a href="io/sphere/sdk/search/model/SortSearchModelImpl.html" title="type parameter in SortSearchModelImpl">T</a>&gt;&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
+<dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/SortSupport.html" title="interface in io.sphere.sdk.search"><span class="typeNameLink">SortSupport</span></a>&lt;<a href="io/sphere/sdk/search/SortSupport.html" title="type parameter in SortSupport">T</a>&gt; - Interface in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/client/SphereAccessTokenSupplier.html" title="interface in io.sphere.sdk.client"><span class="typeNameLink">SphereAccessTokenSupplier</span></a> - Interface in <a href="io/sphere/sdk/client/package-summary.html">io.sphere.sdk.client</a></dt>
@@ -9211,10 +9221,6 @@ CompletionStage&lt;PagedQueryResult&lt;ProductType&gt;&gt; result = client.execu
 <dt><a href="io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><span class="typeNameLink">TermFacetResult</span></a> - Class in <a href="io/sphere/sdk/search/package-summary.html">io.sphere.sdk.search</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/model/TermFacetSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">TermFacetSearchModel</span></a>&lt;<a href="io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">T</a>,<a href="io/sphere/sdk/search/model/TermFacetSearchModel.html" title="type parameter in TermFacetSearchModel">V</a>&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/TermFacetSearchModel.html#TermFacetSearchModel-io.sphere.sdk.search.model.SearchModel-java.util.function.Function-java.lang.String-">TermFacetSearchModel(SearchModel&lt;T&gt;, Function&lt;V, String&gt;, String)</a></span> - Constructor for class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/TermFacetSearchModel.html" title="class in io.sphere.sdk.search.model">TermFacetSearchModel</a></dt>
-<dd>&nbsp;</dd>
-<dt><span class="memberNameLink"><a href="io/sphere/sdk/search/model/TermFacetSearchModel.html#TermFacetSearchModel-io.sphere.sdk.search.model.SearchModel-java.util.function.Function-">TermFacetSearchModel(SearchModel&lt;T&gt;, Function&lt;V, String&gt;)</a></span> - Constructor for class io.sphere.sdk.search.model.<a href="io/sphere/sdk/search/model/TermFacetSearchModel.html" title="class in io.sphere.sdk.search.model">TermFacetSearchModel</a></dt>
 <dd>&nbsp;</dd>
 <dt><a href="io/sphere/sdk/search/model/TermFilterSearchModel.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">TermFilterSearchModel</span></a>&lt;<a href="io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">T</a>,<a href="io/sphere/sdk/search/model/TermFilterSearchModel.html" title="type parameter in TermFilterSearchModel">V</a>&gt; - Class in <a href="io/sphere/sdk/search/model/package-summary.html">io.sphere.sdk.search.model</a></dt>
 <dd>&nbsp;</dd>
