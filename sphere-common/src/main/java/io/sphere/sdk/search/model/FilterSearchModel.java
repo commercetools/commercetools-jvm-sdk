@@ -40,6 +40,18 @@ abstract class FilterSearchModel<T, V> extends SearchModelImpl<T> {
     }
 
     /**
+     * Generates an expression to select all elements with attributes matching any of the given values.
+     * For example: filtering by ["red", "blue"] would select only those elements with either "red" or "blue" value.
+     * @param values the values to filter by
+     * @return a filter expression for the given values
+     * @deprecated use {@link FilterSearchModel#byAny} instead
+     */
+    @Deprecated
+    public List<FilterExpression<T>> by(final Iterable<V> values) {
+        return byAny(values);
+    }
+
+    /**
      * Generates an expression to select all elements with attributes matching all the given values.
      * For example: filtering by ["red", "blue"] would select only those elements with both "red" and "blue" values.
      * @param values the values to filter by
