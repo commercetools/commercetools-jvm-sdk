@@ -1,11 +1,11 @@
 package io.sphere.sdk.customers.commands;
 
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.CustomerIntegrationTest;
 import io.sphere.sdk.customers.CustomerName;
 import io.sphere.sdk.customers.commands.updateactions.*;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
-import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.time.LocalDate;
@@ -17,7 +17,7 @@ import static io.sphere.sdk.customers.CustomerFixtures.withCustomerWithOneAddres
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CustomerUpdateCommandTest extends IntegrationTest {
+public class CustomerUpdateCommandTest extends CustomerIntegrationTest {
     @Test
     public void changeName() throws Exception {
         withCustomer(client(), customer -> {

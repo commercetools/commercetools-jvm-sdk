@@ -2,17 +2,17 @@ package io.sphere.sdk.customers.commands;
 
 import io.sphere.sdk.client.ClientErrorException;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.CustomerIntegrationTest;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.CustomerToken;
 import io.sphere.sdk.customers.queries.CustomerByPasswordTokenGet;
-import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
-public class CustomerPasswordResetCommandTest extends IntegrationTest {
+public class CustomerPasswordResetCommandTest extends CustomerIntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {
