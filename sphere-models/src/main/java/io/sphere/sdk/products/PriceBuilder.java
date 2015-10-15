@@ -3,6 +3,7 @@ package io.sphere.sdk.products;
 import com.neovisionaries.i18n.CountryCode;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.customergroups.CustomerGroup;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.models.Referenceable;
@@ -14,7 +15,7 @@ import javax.money.MonetaryAmount;
 import java.time.ZonedDateTime;
 import java.util.Optional;
 
-public class PriceBuilder implements Builder<Price> {
+public class PriceBuilder extends Base implements Builder<Price> {
     private MonetaryAmount value;
     @Nullable
     private CountryCode country;

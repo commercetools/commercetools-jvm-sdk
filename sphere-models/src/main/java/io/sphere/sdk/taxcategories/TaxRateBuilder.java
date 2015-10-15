@@ -1,11 +1,12 @@
 package io.sphere.sdk.taxcategories;
 
 import com.neovisionaries.i18n.CountryCode;
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
 import javax.annotation.Nullable;
 
-public final class TaxRateBuilder implements Builder<TaxRate> {
+public final class TaxRateBuilder extends Base implements Builder<TaxRate> {
     @Nullable
     private String id;
     private final String name;

@@ -1,10 +1,11 @@
 package io.sphere.sdk.orders;
 
+import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Builder;
 
 import javax.annotation.Nullable;
 
-public class TrackingDataBuilder implements Builder<TrackingData> {
+public class TrackingDataBuilder extends Base implements Builder<TrackingData> {
     @Nullable
     private String trackingId;
     @Nullable

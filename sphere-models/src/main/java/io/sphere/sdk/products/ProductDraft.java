@@ -53,4 +53,7 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     Reference<TaxCategory> getTaxCategory();
 
     SearchKeywords getSearchKeywords();
+
+    @Nullable
+    CategoryOrderHints getCategoryOrderHints();
 }

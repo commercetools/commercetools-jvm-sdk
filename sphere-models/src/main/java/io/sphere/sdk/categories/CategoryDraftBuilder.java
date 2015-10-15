@@ -1,9 +1,6 @@
 package io.sphere.sdk.categories;
 
-import io.sphere.sdk.models.Builder;
-import io.sphere.sdk.models.LocalizedString;
-import io.sphere.sdk.models.Reference;
-import io.sphere.sdk.models.Referenceable;
+import io.sphere.sdk.models.*;
 import io.sphere.sdk.types.CustomFieldsDraft;
 
 import javax.annotation.Nullable;
@@ -14,7 +11,7 @@ import java.util.Optional;
  *
  *  {@include.example io.sphere.sdk.categories.commands.CategoryCreateCommandTest#execution()}
  */
-public class CategoryDraftBuilder implements Builder<CategoryDraft> {
+public class CategoryDraftBuilder extends Base implements Builder<CategoryDraft> {
     private final LocalizedString name;
     private final LocalizedString slug;
     @Nullable

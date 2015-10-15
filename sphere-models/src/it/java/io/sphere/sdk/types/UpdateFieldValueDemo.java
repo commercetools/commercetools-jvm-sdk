@@ -9,7 +9,7 @@ import io.sphere.sdk.commands.UpdateAction;
 import java.util.List;
 
 import static java.util.Arrays.asList;
-import static org.assertj.core.api.AssertionsForInterfaceTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class UpdateFieldValueDemo {
     public static Category updateFieldValues(final TestClient client, final Category category) {

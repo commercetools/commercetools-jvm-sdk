@@ -16,7 +16,12 @@ final class ReferenceCollectionQueryModelImpl<T, R> extends QueryModelImpl<T> im
     @Override
     public final QueryPredicate<T> isIn(final Iterable<? extends Referenceable<R>> references) {
         final List<String> ids = toStream(references).map(r -> r.toReference().getId()).collect(toList());
-        return stringModel("id").isIn(ids);
+        return id().isIn(ids);
+    }
+
+    @Override
+    public StringQueryModel<T> id() {
+        return stringModel("id");
     }
 
     @Override

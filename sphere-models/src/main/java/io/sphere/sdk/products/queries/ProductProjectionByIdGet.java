@@ -16,8 +16,24 @@ public interface ProductProjectionByIdGet extends MetaModelGetDsl<ProductProject
         return of(product.getId(), projectionType);
     }
 
+    static ProductProjectionByIdGet ofCurrent(final ProductIdentifiable product) {
+        return of(product.getId(), ProductProjectionType.CURRENT);
+    }
+
+    static ProductProjectionByIdGet ofStaged(final ProductIdentifiable product) {
+        return of(product.getId(), ProductProjectionType.STAGED);
+    }
+
     static ProductProjectionByIdGet of(final String id, final ProductProjectionType projectionType) {
         return new ProductProjectionByIdGetImpl(id, projectionType);
+    }
+
+    static ProductProjectionByIdGet ofStaged(final String id) {
+        return of(id, ProductProjectionType.STAGED);
+    }
+
+    static ProductProjectionByIdGet ofCurrent(final String id) {
+        return of(id, ProductProjectionType.CURRENT);
     }
 
     @Override
