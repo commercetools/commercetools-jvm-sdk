@@ -17,7 +17,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     public static final ProductProjectionFacetSearchModel FACET = ProductProjectionSearchModel.of().facet();
 
     @Test
-    public void facetedOnBooleanAttributes() throws Exception {
+    public void onBooleanAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofBoolean(ATTR_NAME_BOOLEAN).allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(BOOL_TRUE, 1),
@@ -25,7 +25,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnTextAttributes() throws Exception {
+    public void onTextAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofString(ATTR_NAME_TEXT).allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(TEXT_FOO, 1),
@@ -33,7 +33,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnLocTextAttributes() throws Exception {
+    public void onLocTextAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofLocalizedString(ATTR_NAME_LOC_TEXT).locale(ENGLISH).allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(LOC_TEXT_FOO.get(ENGLISH), 1),
@@ -41,7 +41,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnEnumKeyAttributes() throws Exception {
+    public void onEnumKeyAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofEnum(ATTR_NAME_ENUM).key().allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(ENUM_TWO.getKey(), 1),
@@ -49,7 +49,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnEnumLabelAttributes() throws Exception {
+    public void onEnumLabelAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofEnum(ATTR_NAME_ENUM).label().allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(ENUM_TWO.getLabel(), 1),
@@ -57,7 +57,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnLocEnumKeyAttributes() throws Exception {
+    public void onLocEnumKeyAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).key().allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(LOC_ENUM_TWO.getKey(), 1),
@@ -65,7 +65,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnLocEnumLabelAttributes() throws Exception {
+    public void onLocEnumLabelAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM).label().locale(GERMAN).allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(LOC_ENUM_TWO.getLabel().get(GERMAN), 1),
@@ -73,7 +73,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnNumberAttributes() throws Exception {
+    public void onNumberAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER).allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("5.0", 1),
@@ -81,7 +81,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnNumberRangedAttributes() throws Exception {
+    public void onNumberRangedAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER).onlyGreaterThanOrEqualTo(valueOf(0)),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo("0.0");
@@ -95,7 +95,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnMoneyAmountAttributes() throws Exception {
+    public void onMoneyAmountAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount().allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("50000", 1),
@@ -103,7 +103,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnMoneyAmountRangedAttributes() throws Exception {
+    public void onMoneyAmountRangedAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).centAmount().onlyGreaterThanOrEqualTo(0L),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo("0.0");
@@ -117,7 +117,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnMoneyCurrencyAttributes() throws Exception {
+    public void onMoneyCurrencyAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofMoney(ATTR_NAME_MONEY).currency().allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("EUR", 1),
@@ -125,7 +125,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnDateAttributes() throws Exception {
+    public void onDateAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofDate(ATTR_NAME_DATE).allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("2001-09-11", 1),
@@ -133,7 +133,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnDateRangedAttributes() throws Exception {
+    public void onDateRangedAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofDate(ATTR_NAME_DATE).onlyGreaterThanOrEqualTo(DATE_2001),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo("1.0001664E12");
@@ -147,7 +147,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnTimeAttributes() throws Exception {
+    public void onTimeAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofTime(ATTR_NAME_TIME).allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("22:05:09.203", 1),
@@ -155,7 +155,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnTimeRangedAttributes() throws Exception {
+    public void onTimeRangedAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofTime(ATTR_NAME_TIME).onlyGreaterThanOrEqualTo(TIME_22H),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo("7.9509203E7");
@@ -169,7 +169,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnDatetimeAttributes() throws Exception {
+    public void onDatetimeAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME).allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of("2002-10-12T23:06:10.204+0000", 1),
@@ -177,7 +177,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnDatetimeRangedAttributes() throws Exception {
+    public void onDatetimeRangedAttributes() throws Exception {
         testRangeStats(FACET.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME).onlyGreaterThanOrEqualTo(DATE_TIME_2001_22H),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo("1.000245909203E12");
@@ -191,7 +191,7 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnReferenceAttributes() throws Exception {
+    public void onReferenceAttributes() throws Exception {
         testTermStats(FACET.allVariants().attribute().ofReference(ATTR_NAME_REF).id().allTerms(),
                 termStats -> assertThat(termStats).containsOnly(
                         TermStats.of(productSomeId.getId(), 1),
@@ -199,72 +199,72 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnBooleanSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofString(ATTR_NAME_BOOLEAN_SET).allTerms(),
+    public void onBooleanSetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofBooleanSet(ATTR_NAME_BOOLEAN_SET).allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(BOOL_TRUE, 2),
                         TermStats.of(BOOL_FALSE, 1)));
     }
 
     @Test
-    public void facetedOnTextSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofString(ATTR_NAME_TEXT_SET).allTerms(),
+    public void onTextSetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofStringSet(ATTR_NAME_TEXT_SET).allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(TEXT_FOO, 2),
                         TermStats.of(TEXT_BAR, 1)));
     }
 
     @Test
-    public void facetedOnLocTextSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofLocalizedString(ATTR_NAME_LOC_TEXT_SET).locale(ENGLISH).allTerms(),
+    public void onLocTextSetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofLocalizedStringSet(ATTR_NAME_LOC_TEXT_SET).locale(ENGLISH).allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(LOC_TEXT_FOO.get(ENGLISH), 2),
                         TermStats.of(LOC_TEXT_BAR.get(ENGLISH), 1)));
     }
 
     @Test
-    public void facetedOnEnumKeySetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofEnum(ATTR_NAME_ENUM_SET).key().allTerms(),
+    public void onEnumKeySetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofEnumSet(ATTR_NAME_ENUM_SET).key().allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(ENUM_TWO.getKey(), 2),
                         TermStats.of(ENUM_THREE.getKey(), 1)));
     }
 
     @Test
-    public void facetedOnEnumLabelSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofEnum(ATTR_NAME_ENUM_SET).label().allTerms(),
+    public void onEnumLabelSetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofEnumSet(ATTR_NAME_ENUM_SET).label().allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(ENUM_TWO.getLabel(), 2),
                         TermStats.of(ENUM_THREE.getLabel(), 1)));
     }
 
     @Test
-    public void facetedOnLocEnumKeySetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM_SET).key().allTerms(),
+    public void onLocEnumKeySetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofLocalizableEnumSet(ATTR_NAME_LOC_ENUM_SET).key().allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(LOC_ENUM_TWO.getKey(), 2),
                         TermStats.of(LOC_ENUM_THREE.getKey(), 1)));
     }
 
     @Test
-    public void facetedOnLocEnumLabelSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofLocalizableEnum(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN).allTerms(),
+    public void onLocEnumLabelSetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofLocalizableEnumSet(ATTR_NAME_LOC_ENUM_SET).label().locale(GERMAN).allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(LOC_ENUM_TWO.getLabel().get(GERMAN), 2),
                         TermStats.of(LOC_ENUM_THREE.getLabel().get(GERMAN), 1)));
     }
 
     @Test
-    public void facetedOnNumberSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER_SET).allTerms(),
+    public void onNumberSetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofNumberSet(ATTR_NAME_NUMBER_SET).allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("5.0", 2),
                         TermStats.of("10.0", 1)));
     }
 
     @Test
-    public void facetedOnNumberRangedSetAttributes() throws Exception {
-        testRangeStats(FACET.allVariants().attribute().ofNumber(ATTR_NAME_NUMBER_SET).onlyGreaterThanOrEqualTo(valueOf(0)),
+    public void onNumberRangedSetAttributes() throws Exception {
+        testRangeStats(FACET.allVariants().attribute().ofNumberSet(ATTR_NAME_NUMBER_SET).onlyGreaterThanOrEqualTo(valueOf(0)),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo("0.0");
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
@@ -277,16 +277,16 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnMoneyAmountSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).centAmount().allTerms(),
+    public void onMoneyAmountSetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).centAmount().allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("50000", 2),
                         TermStats.of("100000", 1)));
     }
 
     @Test
-    public void facetedOnMoneyAmountRangedSetAttributes() throws Exception {
-        testRangeStats(FACET.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).centAmount().onlyGreaterThanOrEqualTo(0L),
+    public void onMoneyAmountRangedSetAttributes() throws Exception {
+        testRangeStats(FACET.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).centAmount().onlyGreaterThanOrEqualTo(0L),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo("0.0");
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
@@ -299,24 +299,24 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnMoneyCurrencySetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofMoney(ATTR_NAME_MONEY_SET).currency().allTerms(),
+    public void onMoneyCurrencySetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofMoneySet(ATTR_NAME_MONEY_SET).currency().allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("EUR", 2),
                         TermStats.of("USD", 1)));
     }
 
     @Test
-    public void facetedOnDateSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofDate(ATTR_NAME_DATE_SET).allTerms(),
+    public void onDateSetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofDateSet(ATTR_NAME_DATE_SET).allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("2001-09-11", 2),
                         TermStats.of("2002-10-12", 1)));
     }
 
     @Test
-    public void facetedOnDateRangedSetAttributes() throws Exception {
-        testRangeStats(FACET.allVariants().attribute().ofDate(ATTR_NAME_DATE_SET).onlyGreaterThanOrEqualTo(DATE_2001),
+    public void onDateRangedSetAttributes() throws Exception {
+        testRangeStats(FACET.allVariants().attribute().ofDateSet(ATTR_NAME_DATE_SET).onlyGreaterThanOrEqualTo(DATE_2001),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo("1.0001664E12");
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
@@ -329,16 +329,16 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnTimeSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofTime(ATTR_NAME_TIME_SET).allTerms(),
+    public void onTimeSetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofTimeSet(ATTR_NAME_TIME_SET).allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("22:05:09.203", 2),
                         TermStats.of("23:06:10.204", 1)));
     }
 
     @Test
-    public void facetedOnTimeRangedSetAttributes() throws Exception {
-        testRangeStats(FACET.allVariants().attribute().ofTime(ATTR_NAME_TIME_SET).onlyGreaterThanOrEqualTo(TIME_22H),
+    public void onTimeRangedSetAttributes() throws Exception {
+        testRangeStats(FACET.allVariants().attribute().ofTimeSet(ATTR_NAME_TIME_SET).onlyGreaterThanOrEqualTo(TIME_22H),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo("7.9509203E7");
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
@@ -351,16 +351,16 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnDatetimeSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME_SET).allTerms(),
+    public void onDatetimeSetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofDateTimeSet(ATTR_NAME_DATE_TIME_SET).allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of("2001-09-11T22:05:09.203+0000", 2),
                         TermStats.of("2002-10-12T23:06:10.204+0000", 1)));
     }
 
     @Test
-    public void facetedOnDatetimeRangedSetAttributes() throws Exception {
-        testRangeStats(FACET.allVariants().attribute().ofDateTime(ATTR_NAME_DATE_TIME_SET).onlyGreaterThanOrEqualTo(DATE_TIME_2001_22H),
+    public void onDatetimeRangedSetAttributes() throws Exception {
+        testRangeStats(FACET.allVariants().attribute().ofDateTimeSet(ATTR_NAME_DATE_TIME_SET).onlyGreaterThanOrEqualTo(DATE_TIME_2001_22H),
                 rangeStats -> {
                     assertThat(rangeStats.getLowerEndpoint()).isEqualTo("1.000245909203E12");
                     assertThat(rangeStats.getUpperEndpoint()).isEqualTo(null);
@@ -373,8 +373,8 @@ public class ProductProjectionSearchModelFacetsIntegrationTest extends ProductPr
     }
 
     @Test
-    public void facetedOnReferenceSetAttributes() throws Exception {
-        testTermStats(FACET.allVariants().attribute().ofReference(ATTR_NAME_REF_SET).id().allTerms(),
+    public void onReferenceSetAttributes() throws Exception {
+        testTermStats(FACET.allVariants().attribute().ofReferenceSet(ATTR_NAME_REF_SET).id().allTerms(),
                 termStats -> assertThat(termStats).containsExactly(
                         TermStats.of(productSomeId.getId(), 2),
                         TermStats.of(productOtherId.getId(), 1)));

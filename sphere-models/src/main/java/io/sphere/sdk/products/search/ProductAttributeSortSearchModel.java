@@ -51,6 +51,46 @@ public class ProductAttributeSortSearchModel extends SearchModelImpl<ProductProj
         return sortModel(attributeName);
     }
 
+    public MultiValueSortSearchModel<ProductProjection> ofBooleanSet(final String attributeName) {
+        return ofBoolean(attributeName);
+    }
+
+    public MultiValueSortSearchModel<ProductProjection> ofStringSet(final String attributeName) {
+        return ofString(attributeName);
+    }
+
+    public LocalizedStringSortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofLocalizedStringSet(final String attributeName) {
+        return ofLocalizedString(attributeName);
+    }
+
+    public EnumSortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofEnumSet(final String attributeName) {
+        return ofEnum(attributeName);
+    }
+
+    public LocalizedEnumSortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofLocalizableEnumSet(final String attributeName) {
+        return ofLocalizableEnum(attributeName);
+    }
+
+    public MultiValueSortSearchModel<ProductProjection> ofNumberSet(final String attributeName) {
+        return ofNumber(attributeName);
+    }
+
+    public MoneySortSearchModel<ProductProjection, MultiValueSortSearchModel<ProductProjection>> ofMoneySet(final String attributeName) {
+        return ofMoney(attributeName);
+    }
+
+    public MultiValueSortSearchModel<ProductProjection> ofDateSet(final String attributeName) {
+        return ofDate(attributeName);
+    }
+
+    public MultiValueSortSearchModel<ProductProjection> ofTimeSet(final String attributeName) {
+        return ofTime(attributeName);
+    }
+
+    public MultiValueSortSearchModel<ProductProjection> ofDateTimeSet(final String attributeName) {
+        return ofDateTime(attributeName);
+    }
+
     private MultiValueSortSearchModel<ProductProjection> sortModel(final String attributeName) {
         return new SortableSearchModel<>(this, attributeName, sortModelBuilder()).sorted();
     }

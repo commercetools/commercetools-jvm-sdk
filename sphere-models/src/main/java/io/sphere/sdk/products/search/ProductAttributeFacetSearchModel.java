@@ -58,4 +58,48 @@ public class ProductAttributeFacetSearchModel extends SearchModelImpl<ProductPro
     public ReferenceFacetSearchModel<ProductProjection> ofReference(final String attributeName) {
         return new ReferenceFacetSearchModel<>(this, attributeName);
     }
+
+    public TermFacetSearchModel<ProductProjection, Boolean> ofBooleanSet(final String attributeName) {
+        return ofBoolean(attributeName);
+    }
+
+    public TermFacetSearchModel<ProductProjection, String> ofStringSet(final String attributeName) {
+        return ofString(attributeName);
+    }
+
+    public LocalizedStringFacetSearchModel<ProductProjection> ofLocalizedStringSet(final String attributeName) {
+        return ofLocalizedString(attributeName);
+    }
+
+    public EnumFacetSearchModel<ProductProjection> ofEnumSet(final String attributeName) {
+        return ofEnum(attributeName);
+    }
+
+    public LocalizedEnumFacetSearchModel<ProductProjection> ofLocalizableEnumSet(final String attributeName) {
+        return ofLocalizableEnum(attributeName);
+    }
+
+    public RangeFacetSearchModel<ProductProjection, BigDecimal> ofNumberSet(final String attributeName) {
+        return ofNumber(attributeName);
+    }
+
+    public MoneyFacetSearchModel<ProductProjection> ofMoneySet(final String attributeName) {
+        return ofMoney(attributeName);
+    }
+
+    public RangeFacetSearchModel<ProductProjection, LocalDate> ofDateSet(final String attributeName) {
+        return ofDate(attributeName);
+    }
+
+    public RangeFacetSearchModel<ProductProjection, LocalTime> ofTimeSet(final String attributeName) {
+        return ofTime(attributeName);
+    }
+
+    public RangeFacetSearchModel<ProductProjection, ZonedDateTime> ofDateTimeSet(final String attributeName) {
+        return ofDateTime(attributeName);
+    }
+
+    public ReferenceFacetSearchModel<ProductProjection> ofReferenceSet(final String attributeName) {
+        return ofReference(attributeName);
+    }
 }
