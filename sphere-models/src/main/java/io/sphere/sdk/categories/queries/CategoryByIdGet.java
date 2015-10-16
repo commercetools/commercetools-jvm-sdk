@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.function.Function;
 
 /**
- * Retrieves a categories by a known ID.
+ * Retrieves a category by a known ID.
  *
  * {@include.example io.sphere.sdk.categories.queries.CategoryByIdGetTest#execution()}
  */

@@ -1,6 +1,7 @@
 package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -11,6 +12,8 @@ import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
+import javax.money.MonetaryAmount;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -57,6 +60,12 @@ public interface LineItem extends LineItemLike {
 
     @Override
     CustomFields getCustom();
+
+    @Override
+    MonetaryAmount getTotalPrice();
+
+    @Override
+    List<DiscountedLineItemPriceForQuantity> getDiscountedPricePerQuantity();
 
     static String resourceTypeId() {
         return "line-item";

@@ -21,7 +21,7 @@ public class RulesMain {
                 new NoOptionalReturnTypeForGettersRule(),
                 new NoOptionalParametersInPublicConstructorRule(),
                 new PublicConstructorsAreTheExceptionRule(),
-                new BuildersNotForResources(),
+                new BuildersNotForResourcesRule(),
                 new NeverMixStaticAndInstanceMethodOfSameNameRule(),
                 new OnlyOneNullableOfMethodRule(),
                 new InUpdateActionsPackageOnlyUpdateActionsRule(),

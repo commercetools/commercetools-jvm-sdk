@@ -19,6 +19,7 @@ import io.sphere.sdk.orders.commands.updateactions.AddDelivery;
 import io.sphere.sdk.orders.commands.updateactions.AddReturnInfo;
 import io.sphere.sdk.orders.commands.updateactions.ChangePaymentState;
 import io.sphere.sdk.orders.commands.updateactions.ChangeShipmentState;
+import io.sphere.sdk.orders.queries.OrderByIdGet;
 import io.sphere.sdk.shippingmethods.ShippingRate;
 import io.sphere.sdk.taxcategories.TaxCategory;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -28,6 +29,7 @@ import org.assertj.core.api.Assertions;
 import javax.money.MonetaryAmount;
 import java.util.List;
 import java.util.function.BiConsumer;
+import java.util.function.BiFunction;
 import java.util.function.Consumer;
 import java.util.function.UnaryOperator;
 
@@ -41,12 +43,12 @@ public class OrderFixtures {
 
     public static final String CUSTOMER_EMAIL = "foo@bar.tld";
 
-    public static void withOrder(final TestClient client, final Consumer<Order> f) {
-        withCustomer(client, customer -> withOrder(client, customer, f)
+    public static void withOrder(final TestClient client, final UnaryOperator<Order> op) {
+        withCustomer(client, customer -> withOrder(client, customer, op)
         );
     }
 
-    public static void withOrder(final TestClient client, final Customer customer, final Consumer<Order> f) {
+    public static void withOrder(final TestClient client, final Customer customer, final UnaryOperator<Order> op) {
         withFilledCart(client, cart -> {
             final TaxCategory taxCategory = TaxCategoryFixtures.defaultTaxCategory(client);
             final SetCustomShippingMethod shippingMethodAction = SetCustomShippingMethod.of("custom shipping method", ShippingRate.of(EURO_10), taxCategory);
@@ -62,7 +64,8 @@ public class OrderFixtures {
                     ChangeShipmentState.of(ShipmentState.READY),
                     ChangePaymentState.of(PaymentState.PENDING)
             )));
-            f.accept(updatedOrder);
+            final Order orderToDelete = op.apply(updatedOrder);
+            client.execute(OrderDeleteCommand.of(orderToDelete));
         });
     }
 
@@ -80,7 +83,7 @@ public class OrderFixtures {
         });
     }
 
-    public static void withOrderAndReturnInfo(final TestClient client, final BiConsumer<Order, ReturnInfo> f) {
+    public static void withOrderAndReturnInfo(final TestClient client, final BiFunction<Order, ReturnInfo, Order> f) {
         withOrder(client, order -> {
             Assertions.assertThat(order.getReturnInfo()).isEmpty();
             final String lineItemId = order.getLineItems().get(0).getId();
@@ -90,7 +93,7 @@ public class OrderFixtures {
             final Order updatedOrder = client.execute(OrderUpdateCommand.of(order, asList(action, addDelivery)));
 
             final ReturnInfo returnInfo = updatedOrder.getReturnInfo().get(0);
-            f.accept(updatedOrder, returnInfo);
+            return f.apply(updatedOrder, returnInfo);
         });
     }
 }

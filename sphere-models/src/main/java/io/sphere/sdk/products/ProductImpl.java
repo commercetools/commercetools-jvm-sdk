@@ -7,6 +7,7 @@ import java.util.Optional;
 import io.sphere.sdk.models.ResourceImpl;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
@@ -16,14 +17,18 @@ class ProductImpl extends ResourceImpl<Product> implements Product {
     private final ProductCatalogData masterData;
     @Nullable
     private final Reference<TaxCategory> taxCategory;
+    @Nullable
+    private final Reference<State> state;
 
     @JsonCreator
     ProductImpl(final String id, final Long version, final ZonedDateTime createdAt, final ZonedDateTime lastModifiedAt,
-                @Nullable final Reference<ProductType> productType, final ProductCatalogData masterData, final Reference<TaxCategory> taxCategory) {
+                @Nullable final Reference<ProductType> productType, final ProductCatalogData masterData,
+                final Reference<TaxCategory> taxCategory, final Reference<State> state) {
         super(id, version, createdAt, lastModifiedAt);
         this.productType = productType;
         this.masterData = masterData;
         this.taxCategory = taxCategory;
+        this.state = state;
         Optional.of(masterData)
                 .filter(d -> d instanceof ProductCatalogDataImpl)
                 .ifPresent(d -> ((ProductCatalogDataImpl)d).setProductId(id));
@@ -43,5 +48,11 @@ class ProductImpl extends ResourceImpl<Product> implements Product {
     @Override
     public Reference<TaxCategory> getTaxCategory() {
         return taxCategory;
+    }
+
+    @Override
+    @Nullable
+    public Reference<State> getState() {
+        return state;
     }
 }

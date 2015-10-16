@@ -15,6 +15,7 @@ import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.test.SphereTestUtils.consumerToFunction;
 import static io.sphere.sdk.test.SphereTestUtils.randomKey;
@@ -39,6 +40,14 @@ public class StateFixtures {
 
     public static void cleanUpByKey(final TestClient client, final String key) {
         client.execute(StateQuery.of().byKey(key)).head().ifPresent(state -> client.execute(StateDeleteCommand.of(state)));
+    }
+
+    public static void withStateByBuilder(final TestClient client, final UnaryOperator<StateDraftBuilder> drafting, final Consumer<State> consumer) {
+        final StateDraftBuilder stateDraftBuilder = StateDraftBuilder.of(createStateDraft(randomKey()));
+        final StateDraft stateDraft = drafting.apply(stateDraftBuilder).build();
+        final State state = client.execute(StateCreateCommand.of(stateDraft));
+        consumer.accept(state);
+        client.execute(StateDeleteCommand.of(state));
     }
 
     public static void withState(final TestClient client, final Consumer<State> consumer) {

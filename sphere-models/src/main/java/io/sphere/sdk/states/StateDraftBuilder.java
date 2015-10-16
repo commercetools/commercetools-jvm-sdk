@@ -10,7 +10,7 @@ import java.util.Set;
 
 public final class StateDraftBuilder extends Base implements Builder<StateDraft> {
     private final String key;
-    private final StateType type;
+    private StateType type;
     @Nullable
     private LocalizedString name;
     @Nullable
@@ -54,6 +54,11 @@ public final class StateDraftBuilder extends Base implements Builder<StateDraft>
 
     public StateDraftBuilder transitions(@Nullable final Set<Reference<State>> transitions) {
         this.transitions = transitions;
+        return this;
+    }
+
+    public StateDraftBuilder type(final StateType type) {
+        this.type = type;
         return this;
     }
 

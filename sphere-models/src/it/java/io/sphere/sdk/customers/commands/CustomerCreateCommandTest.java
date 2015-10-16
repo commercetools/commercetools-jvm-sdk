@@ -5,23 +5,20 @@ import io.sphere.sdk.carts.CartDraft;
 import io.sphere.sdk.carts.commands.CartCreateCommand;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customergroups.CustomerGroupFixtures;
-import io.sphere.sdk.customers.Customer;
-import io.sphere.sdk.customers.CustomerDraft;
-import io.sphere.sdk.customers.CustomerName;
-import io.sphere.sdk.customers.CustomerSignInResult;
+import io.sphere.sdk.customers.*;
 import io.sphere.sdk.models.Address;
-import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.time.LocalDate;
 import java.util.List;
 
+import static io.sphere.sdk.customers.CustomerFixtures.CUSTOMER_NAME;
+import static io.sphere.sdk.customers.CustomerFixtures.PASSWORD;
+import static io.sphere.sdk.test.SphereTestUtils.*;
 import static java.util.stream.Collectors.toList;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.customers.CustomerFixtures.*;
 
-public class CustomerCreateCommandTest extends IntegrationTest {
+public class CustomerCreateCommandTest extends CustomerIntegrationTest {
 
     @Test
     public void createCustomer() throws Exception {

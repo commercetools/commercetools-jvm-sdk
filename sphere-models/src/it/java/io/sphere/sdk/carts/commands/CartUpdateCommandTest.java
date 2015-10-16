@@ -11,6 +11,9 @@ import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.AddressBuilder;
 import io.sphere.sdk.models.LocalizedString;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.payments.Payment;
+import io.sphere.sdk.payments.PaymentFixtures;
 import io.sphere.sdk.products.Price;
 import io.sphere.sdk.products.Product;
 import io.sphere.sdk.products.commands.ProductUpdateCommand;
@@ -29,6 +32,7 @@ import java.util.Set;
 import static io.sphere.sdk.carts.CartFixtures.*;
 import static io.sphere.sdk.carts.CustomLineItemFixtures.createCustomLineItemDraft;
 import static io.sphere.sdk.customers.CustomerFixtures.withCustomer;
+import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.shippingmethods.ShippingMethodFixtures.withShippingMethodForGermany;
 import static io.sphere.sdk.taxcategories.TaxCategoryFixtures.withTaxCategory;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -304,6 +308,29 @@ public class CartUpdateCommandTest extends IntegrationTest {
             assertThat(updatedCart.getDiscountCodes()).isEmpty();
 
             return updatedCart;
+        });
+    }
+
+    @Test
+    public void addPayment() {
+        withPayment(client(), payment -> {
+            withCart(client(), cart -> {
+                //add payment
+                final Cart cartWithPayment = execute(CartUpdateCommand.of(cart, AddPayment.of(payment))
+                        .withExpansionPaths(m -> m.paymentInfo().payments()));
+
+                final Reference<Payment> paymentReference = cartWithPayment.getPaymentInfo().getPayments().get(0);
+                assertThat(paymentReference).isEqualTo(payment.toReference());
+                assertThat(paymentReference).is(expanded(payment));
+
+                //remove payment
+                final Cart cartWithoutPayment = execute(CartUpdateCommand.of(cartWithPayment, RemovePayment.of(payment)));
+
+                assertThat(cartWithoutPayment.getPaymentInfo()).isNull();
+
+                return cartWithoutPayment;
+            });
+            return payment;
         });
     }
 }

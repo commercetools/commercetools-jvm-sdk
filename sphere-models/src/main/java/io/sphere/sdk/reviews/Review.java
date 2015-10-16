@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
 
@@ -28,6 +29,9 @@ public interface Review extends Resource<Review> {
 
     @Nullable
     Double getScore();
+
+    @Nullable
+    Reference<State> getState();
 
     default Reference<Review> toReference() {
         return Reference.of(referenceTypeId(), getId());

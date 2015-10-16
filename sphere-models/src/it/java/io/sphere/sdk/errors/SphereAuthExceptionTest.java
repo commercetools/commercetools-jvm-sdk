@@ -18,6 +18,7 @@ import java.util.concurrent.CompletionStage;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Function;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class SphereAuthExceptionTest extends IntegrationTest {
@@ -49,9 +50,10 @@ public class SphereAuthExceptionTest extends IntegrationTest {
 
             }
         }, true);
-        assertThatThrownBy(() -> tokenSupplier.get().toCompletableFuture().join())
-                .isInstanceOf(CompletionException.class)
-                .hasCauseInstanceOf(JsonException.class)
+        assertThat(tokenSupplier.get().toCompletableFuture())
+                .hasFailed()
+                .hasFailedWithThrowableThat()
+                .isInstanceOf(JsonException.class)
                 .hasMessageContaining("{invalid}")
                 .hasMessageContaining("http request: HttpRequestImpl[httpMethod=POST,url=https://auth.sphere.io/oauth/token");
     }

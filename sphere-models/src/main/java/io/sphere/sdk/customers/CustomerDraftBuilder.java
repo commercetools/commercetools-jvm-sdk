@@ -184,11 +184,4 @@ public class CustomerDraftBuilder extends Base implements Builder<CustomerDraft>
     public CustomerDraft build() {
         return new CustomerDraft(customerNumber, email, firstName, lastName, middleName, password, title, externalId, anonymousCartId, dateOfBirth, companyName, vatId, emailVerified, customerGroup, defaultBillingAddress, defaultShippingAddress, addresses, custom);
     }
-
-    //it is final to prevent subclasses to log the password
-    @Override
-    public final String toString() {
-        final CustomerDraftBuilder out = CustomerDraftBuilder.of(build()).password("**removed from output**");
-        return ToStringBuilder.reflectionToString(out, SdkDefaults.TO_STRING_STYLE);
-    }
 }

@@ -68,4 +68,7 @@ public interface CartLike<T> extends Resource<T>, Custom {
 
     @Nullable
     CartShippingInfo getShippingInfo();
+
+    @Nullable
+    PaymentInfo getPaymentInfo();
 }
