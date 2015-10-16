@@ -17,10 +17,10 @@ public class BuildersNotForResourcesRule extends ClassStrategyRule {
 
     @Override
     protected boolean isRuleConform(final Class<?> clazz) {
-        return clazz.getSimpleName().endsWith("DraftBuilder") || simpleNamesWhitelist.contains(clazz.getSimpleName()) || buildedClassDoesNotExtendResource(clazz);
+        return clazz.getSimpleName().endsWith("DraftBuilder") || simpleNamesWhitelist.contains(clazz.getSimpleName()) || builtClassDoesNotExtendResource(clazz);
     }
 
-    private boolean buildedClassDoesNotExtendResource(final Class<?> clazz) {
+    private boolean builtClassDoesNotExtendResource(final Class<?> clazz) {
         try {
             final String buildedClassName = StringUtils.removeEnd(clazz.getCanonicalName(), "Builder");
             final Class<?> buildedClass = Class.forName(buildedClassName);

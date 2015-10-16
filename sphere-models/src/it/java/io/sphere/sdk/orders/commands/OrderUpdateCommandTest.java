@@ -12,30 +12,28 @@ import io.sphere.sdk.orders.queries.OrderByIdGet;
 import io.sphere.sdk.payments.Payment;
 import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.states.State;
-import io.sphere.sdk.states.StateFixtures;
 import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.test.IntegrationTest;
 import io.sphere.sdk.test.SphereTestUtils;
-import io.sphere.sdk.utils.MoneyImpl;
 import org.assertj.core.api.Assertions;
-import org.javamoney.moneta.function.MonetaryUtil;
 import org.junit.Test;
 
-import javax.money.MonetaryAmount;
-import java.math.BigDecimal;
 import java.time.ZonedDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
 
-import static io.sphere.sdk.carts.CartFixtures.withCart;
-import static io.sphere.sdk.channels.ChannelFixtures.*;
+import static io.sphere.sdk.carts.LineItemLikeAssert.assertThat;
+import static io.sphere.sdk.channels.ChannelFixtures.withOrderExportChannel;
 import static io.sphere.sdk.orders.OrderFixtures.*;
 import static io.sphere.sdk.payments.PaymentFixtures.withPayment;
 import static io.sphere.sdk.states.StateFixtures.withStandardStates;
 import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
+import static io.sphere.sdk.test.SphereTestUtils.asList;
+import static io.sphere.sdk.test.SphereTestUtils.randomString;
 import static io.sphere.sdk.utils.SetUtils.asSet;
 import static org.assertj.core.api.Assertions.assertThat;
-import static io.sphere.sdk.test.SphereTestUtils.*;
-import static io.sphere.sdk.carts.LineItemLikeAssert.assertThat;
 
 public class OrderUpdateCommandTest extends IntegrationTest {
 
@@ -315,6 +313,8 @@ public class OrderUpdateCommandTest extends IntegrationTest {
                 final Order orderWithoutPayment = execute(OrderUpdateCommand.of(orderWithPayment, RemovePayment.of(payment)));
 
                 assertThat(orderWithoutPayment.getPaymentInfo()).isNull();
+
+                return orderWithoutPayment;
             });
             return payment;
         });
