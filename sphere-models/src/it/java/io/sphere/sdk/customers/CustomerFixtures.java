@@ -8,6 +8,7 @@ import io.sphere.sdk.carts.commands.updateactions.SetCustomerEmail;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.customers.commands.CustomerCreateCommand;
+import io.sphere.sdk.customers.commands.CustomerDeleteCommand;
 import io.sphere.sdk.customers.commands.CustomerUpdateCommand;
 import io.sphere.sdk.customers.commands.updateactions.AddAddress;
 import io.sphere.sdk.customers.commands.updateactions.SetCustomerGroup;
@@ -16,6 +17,7 @@ import io.sphere.sdk.models.AddressBuilder;
 
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.UnaryOperator;
 
 import static io.sphere.sdk.customergroups.CustomerGroupFixtures.*;
 import static io.sphere.sdk.test.SphereTestUtils.*;
@@ -42,6 +44,12 @@ public class CustomerFixtures {
                 consumer.accept(customerInGroup, group);
             });
         });
+    }
+
+    public static void withUpdateableCustomer(final TestClient client, final UnaryOperator<Customer> operator) {
+        final CustomerSignInResult signInResult = client.execute(CustomerCreateCommand.of(newCustomerDraft()));
+        final Customer customerToDelete = operator.apply(signInResult.getCustomer());
+        client.execute(CustomerDeleteCommand.of(customerToDelete));
     }
 
     public static void withCustomer(final TestClient client, final Consumer<Customer> customerConsumer) {

@@ -39,6 +39,8 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
     private final List<DiscountCodeInfo> discountCodes;
     @Nullable
     private final CustomFields custom;
+    @Nullable
+    private final PaymentInfo paymentInfo;
 
     @JsonCreator
     CartImpl(final String id, final Long version, final ZonedDateTime createdAt,
@@ -49,7 +51,7 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
              final Address shippingAddress, final Address billingAddress,
              final InventoryMode inventoryMode, final Reference<CustomerGroup> customerGroup,
              final CountryCode country, final CartShippingInfo shippingInfo,
-             final List<DiscountCodeInfo> discountCodes, final CustomFields custom) {
+             final List<DiscountCodeInfo> discountCodes, final CustomFields custom, final PaymentInfo paymentInfo) {
         super(id, version, createdAt, lastModifiedAt);
         this.customerId = customerId;
         this.customerEmail = customerEmail;
@@ -66,6 +68,7 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
         this.shippingInfo = shippingInfo;
         this.discountCodes = discountCodes;
         this.custom = custom;
+        this.paymentInfo = paymentInfo;
     }
 
     @Override
@@ -150,5 +153,11 @@ class CartImpl extends ResourceImpl<Cart> implements Cart {
     @Nullable
     public CustomFields getCustom() {
         return custom;
+    }
+
+    @Override
+    @Nullable
+    public PaymentInfo getPaymentInfo() {
+        return paymentInfo;
     }
 }

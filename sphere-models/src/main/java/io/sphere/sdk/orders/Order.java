@@ -135,4 +135,15 @@ public interface Order extends CartLike<Order> {
 
     @Nullable
     Reference<State> getState();
+
+    /**
+     * Get associated payments.
+     *
+     * @return payments
+     * @see io.sphere.sdk.orders.commands.updateactions.AddPayment
+     * @see io.sphere.sdk.orders.commands.updateactions.RemovePayment
+     */
+    @Nullable
+    @Override
+    PaymentInfo getPaymentInfo();
 }
