@@ -83,25 +83,27 @@ import java.util.function.Function;
  <li class=change-in-release>While before the Search Model was built using the structure {@code attribute + action + parameters}, now it changed to {@code action + attribute + parameters}, in order to split the model into 3 independent models: Search Filter Model, Search Facet Model and Search Sort Model.
  <div class="rn-hidden">
  Before it looked like:
- <pre><code>
+ <pre>{@code
  ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
- .plusQueryFilters(product -&#60; product.name().locale(ENGLISH).filtered().by("shoes"));
+ .plusQueryFilters(product -> product.name().locale(ENGLISH).filtered().by("shoes"));
  PagedSearchResult<ProductProjection> result = client.execute(search);
- </code></pre>
+ }</pre>
 
  Now it is built as follows:
- <pre><code>
+ <pre>{@code
  ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
- .plusQueryFilters(filter -&#60; filter.name().locale(ENGLISH).by("shoes"));
+ .plusQueryFilters(filter -> filter.name().locale(ENGLISH).by("shoes"));
  PagedSearchResult<ProductProjection> result = client.execute(search);
- </code></pre>
+ }</pre>
  </div>
  </li>
  <li class=change-in-release>Renamed {@code SearchSort} to {@link io.sphere.sdk.search.SortExpression}, which now shares the same properties as {@link io.sphere.sdk.search.FacetExpression} and {@link io.sphere.sdk.search.FilterExpression} under the {@link io.sphere.sdk.search.SearchExpression} interface.</li>
  <li class=change-in-release>The static factory method to directly build unsafe {@link io.sphere.sdk.search.FacetExpression} is now located in {@link io.sphere.sdk.search.TermFacetExpression}, {@link io.sphere.sdk.search.RangeFacetExpression} and {@link io.sphere.sdk.search.FilteredFacetExpression}, so that a facet expression for the corresponding type is obtained.</li>
  <li class=change-in-release>Moved related Search Model classes from {@code io.sphere.sdk.search} to {@code io.sphere.sdk.search.model} package, to clearly separate the Search Model from the Search API classes.</li>
  <li class=removed-in-release>Removed type parameters from {@link io.sphere.sdk.search.TermFacetResult}, {@link io.sphere.sdk.search.RangeFacetResult} and {@link io.sphere.sdk.search.FilteredFacetResult}, which now return simple strings as they are received from the platform.</li>
- <li class=new-in-release>Added {@link ProductProjection#getCategoryOrderHints()} and {@link ProductProjectionQueryModel#categoryOrderHints()}. It can be used for search, but the meta model comes in a later release.</li>
+ <li class=new-in-release>Added {@link ProductProjection#getCategoryOrderHints()} and {@link ProductProjectionQueryModel#categoryOrderHints()}. It can be used for search as shown in the following example, but the meta model comes in a later release.
+  <div class="rn-hidden">{@include.example io.sphere.sdk.products.ProductCategoryOrderHintTest#searchForCategoryAndSort()}</div>
+ </li>
  <li class=new-in-release>Added states and update actions for Orders, Reviews and Products: {@link Order#getState()}, {@link io.sphere.sdk.products.Product#getState()}, {@link io.sphere.sdk.reviews.Review#getState()}</li>
  <li class=new-in-release>Added {@link LineItem#getTotalPrice()}, {@link LineItem#getDiscountedPricePerQuantity()}, {@link CustomLineItem#getTotalPrice()} and {@link CustomLineItem#getDiscountedPricePerQuantity()}</li>
  <li class=change-in-release>Deprecated {@link LineItem#getDiscountedPrice()} and {@link CustomLineItem#getDiscountedPrice()} since they are deprecated in the HTTP API</li>
