@@ -99,16 +99,16 @@ public class PaymentUpdateCommandTest extends IntegrationTest {
             final MonetaryAmount totalAmount = payment.getAmountPlanned();
             assertThat(payment.getAmountPaid()).as("amount paid").isEqualTo(totalAmount);
 
-            final MonetaryAmount firstRefoundedAmount = totalAmount.scaleByPowerOfTen(-1);
-            final Payment firstRefoundPayment = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefoundedAmount))));
+            final MonetaryAmount firstRefundedAmount = totalAmount.scaleByPowerOfTen(-1);
+            final Payment firstRefundPayment = execute(PaymentUpdateCommand.of(payment, asList(SetAmountRefunded.of(firstRefundedAmount))));
 
-            assertThat(firstRefoundPayment.getAmountRefunded()).as("first refunded").isEqualTo(firstRefoundedAmount);
+            assertThat(firstRefundPayment.getAmountRefunded()).as("first refunded").isEqualTo(firstRefundedAmount);
 
-            final MonetaryAmount secondRefundedAmount = firstRefoundedAmount.multiply(2);
+            final MonetaryAmount secondRefundedAmount = firstRefundedAmount.multiply(2);
             //important, because SetAmountRefunded sets the total value
-            final MonetaryAmount totalRefundedAmount = firstRefoundPayment.getAmountRefunded().add(secondRefundedAmount);
+            final MonetaryAmount totalRefundedAmount = firstRefundPayment.getAmountRefunded().add(secondRefundedAmount);
 
-            final Payment secondRefundPayment = execute(PaymentUpdateCommand.of(firstRefoundPayment, asList(SetAmountRefunded.of(totalRefundedAmount))));
+            final Payment secondRefundPayment = execute(PaymentUpdateCommand.of(firstRefundPayment, asList(SetAmountRefunded.of(totalRefundedAmount))));
 
             assertThat(secondRefundPayment.getAmountRefunded()).as("total refunded").isEqualTo(totalRefundedAmount);
 
