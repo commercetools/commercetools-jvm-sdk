@@ -15,7 +15,8 @@ import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
- * Payments hold information about the current state of receiving and/or refunding money, but the process itself is handled by a PSP. They should always reference a Customer. They are usually referenced by an {@link Order#getPaymentInfo() Order} or a {@link io.sphere.sdk.carts.Cart#getPaymentInfo() Cart}.
+ * Payments hold information about the current state of receiving and/or refunding money, but the process itself is handled by a PSP. 
+ * They are usually referenced by an {@link Order#getPaymentInfo() Order} or a {@link io.sphere.sdk.carts.Cart#getPaymentInfo() Cart}.
  *
  * @see io.sphere.sdk.payments.commands.PaymentCreateCommand
  * @see io.sphere.sdk.payments.commands.PaymentUpdateCommand
