@@ -113,6 +113,8 @@
 <li><a href="io/sphere/sdk/categories/CategoryDraft.html" title="class in io.sphere.sdk.categories">CategoryDraft</a></li>
 <li><a href="io/sphere/sdk/categories/CategoryDraftBuilder.html" title="class in io.sphere.sdk.categories">CategoryDraftBuilder</a></li>
 <li><a href="io/sphere/sdk/categories/expansion/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.expansion">CategoryExpansionModel</a></li>
+<li><a href="io/sphere/sdk/products/CategoryOrderHints.html" title="class in io.sphere.sdk.products">CategoryOrderHints</a></li>
+<li><a href="io/sphere/sdk/products/queries/CategoryOrderHintsQueryModel.html" title="interface in io.sphere.sdk.products.queries"><span class="interfaceName">CategoryOrderHintsQueryModel</span></a></li>
 <li><a href="io/sphere/sdk/categories/queries/CategoryQuery.html" title="interface in io.sphere.sdk.categories.queries"><span class="interfaceName">CategoryQuery</span></a></li>
 <li><a href="io/sphere/sdk/categories/queries/CategoryQueryModel.html" title="class in io.sphere.sdk.categories.queries">CategoryQueryModel</a></li>
 <li><a href="io/sphere/sdk/categories/CategoryTree.html" title="interface in io.sphere.sdk.categories"><span class="interfaceName">CategoryTree</span></a></li>
@@ -274,6 +276,7 @@
 <li><a href="io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html" title="interface in io.sphere.sdk.discountcodes.commands"><span class="interfaceName">DiscountCodeUpdateCommand</span></a></li>
 <li><a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPortion.html" title="class in io.sphere.sdk.cartdiscounts">DiscountedLineItemPortion</a></li>
 <li><a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPrice.html" title="class in io.sphere.sdk.cartdiscounts">DiscountedLineItemPrice</a></li>
+<li><a href="io/sphere/sdk/cartdiscounts/DiscountedLineItemPriceForQuantity.html" title="class in io.sphere.sdk.cartdiscounts">DiscountedLineItemPriceForQuantity</a></li>
 <li><a href="io/sphere/sdk/productdiscounts/DiscountedPrice.html" title="class in io.sphere.sdk.productdiscounts">DiscountedPrice</a></li>
 <li><a href="io/sphere/sdk/products/expansion/DiscountedPriceExpansionModel.html" title="class in io.sphere.sdk.products.expansion">DiscountedPriceExpansionModel</a></li>
 <li><a href="io/sphere/sdk/products/queries/DiscountedPriceOptionalQueryModel.html" title="class in io.sphere.sdk.products.queries">DiscountedPriceOptionalQueryModel</a></li>
@@ -441,6 +444,7 @@
 <li><a href="io/sphere/sdk/orders/OrderShippingInfo.html" title="class in io.sphere.sdk.orders">OrderShippingInfo</a></li>
 <li><a href="io/sphere/sdk/orders/OrderState.html" title="enum in io.sphere.sdk.orders">OrderState</a></li>
 <li><a href="io/sphere/sdk/orders/messages/OrderStateChangedMessage.html" title="class in io.sphere.sdk.orders.messages">OrderStateChangedMessage</a></li>
+<li><a href="io/sphere/sdk/orders/messages/OrderStateTransitionMessage.html" title="class in io.sphere.sdk.orders.messages">OrderStateTransitionMessage</a></li>
 <li><a href="io/sphere/sdk/orders/commands/OrderUpdateCommand.html" title="interface in io.sphere.sdk.orders.commands"><span class="interfaceName">OrderUpdateCommand</span></a></li>
 <li><a href="io/sphere/sdk/queries/PagedQueryResult.html" title="class in io.sphere.sdk.queries">PagedQueryResult</a></li>
 <li><a href="io/sphere/sdk/queries/PagedQueryResultDsl.html" title="class in io.sphere.sdk.queries">PagedQueryResultDsl</a></li>
@@ -513,6 +517,7 @@
 <li><a href="io/sphere/sdk/products/ProductIdentifiable.html" title="interface in io.sphere.sdk.products"><span class="interfaceName">ProductIdentifiable</span></a></li>
 <li><a href="io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products"><span class="interfaceName">ProductProjection</span></a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductProjectionByIdGet.html" title="interface in io.sphere.sdk.products.queries"><span class="interfaceName">ProductProjectionByIdGet</span></a></li>
+<li><a href="io/sphere/sdk/products/ProductProjectionComparators.html" title="class in io.sphere.sdk.products">ProductProjectionComparators</a></li>
 <li><a href="io/sphere/sdk/products/expansion/ProductProjectionExpansionModel.html" title="class in io.sphere.sdk.products.expansion">ProductProjectionExpansionModel</a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductProjectionQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="interfaceName">ProductProjectionQuery</span></a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductProjectionQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductProjectionQueryModel</a></li>
@@ -523,6 +528,7 @@
 <li><a href="io/sphere/sdk/products/queries/ProductQuery.html" title="interface in io.sphere.sdk.products.queries"><span class="interfaceName">ProductQuery</span></a></li>
 <li><a href="io/sphere/sdk/products/queries/ProductQueryModel.html" title="class in io.sphere.sdk.products.queries">ProductQueryModel</a></li>
 <li><a href="io/sphere/sdk/meta/ProductSearchDocumentation.html" title="class in io.sphere.sdk.meta">ProductSearchDocumentation</a></li>
+<li><a href="io/sphere/sdk/products/messages/ProductStateTransitionMessage.html" title="class in io.sphere.sdk.products.messages">ProductStateTransitionMessage</a></li>
 <li><a href="io/sphere/sdk/producttypes/ProductType.html" title="interface in io.sphere.sdk.producttypes"><span class="interfaceName">ProductType</span></a></li>
 <li><a href="io/sphere/sdk/producttypes/commands/ProductTypeCreateCommand.html" title="interface in io.sphere.sdk.producttypes.commands"><span class="interfaceName">ProductTypeCreateCommand</span></a></li>
 <li><a href="io/sphere/sdk/producttypes/commands/ProductTypeDeleteCommand.html" title="interface in io.sphere.sdk.producttypes.commands"><span class="interfaceName">ProductTypeDeleteCommand</span></a></li>
@@ -641,6 +647,7 @@
 <li><a href="io/sphere/sdk/reviews/commands/updateactions/SetAuthorName.html" title="class in io.sphere.sdk.reviews.commands.updateactions">SetAuthorName</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetBillingAddress.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetBillingAddress</a></li>
 <li><a href="io/sphere/sdk/discountcodes/commands/updateactions/SetCartPredicate.html" title="class in io.sphere.sdk.discountcodes.commands.updateactions">SetCartPredicate</a></li>
+<li><a href="io/sphere/sdk/products/commands/updateactions/SetCategoryOrderHint.html" title="class in io.sphere.sdk.products.commands.updateactions">SetCategoryOrderHint</a></li>
 <li><a href="io/sphere/sdk/customers/commands/updateactions/SetCompanyName.html" title="class in io.sphere.sdk.customers.commands.updateactions">SetCompanyName</a></li>
 <li><a href="io/sphere/sdk/carts/commands/updateactions/SetCountry.html" title="class in io.sphere.sdk.carts.commands.updateactions">SetCountry</a></li>
 <li><a href="io/sphere/sdk/payments/commands/updateactions/SetCustomer.html" title="class in io.sphere.sdk.payments.commands.updateactions">SetCustomer</a></li>
@@ -820,7 +827,11 @@
 <li><a href="io/sphere/sdk/payments/TransactionType.html" title="enum in io.sphere.sdk.payments">TransactionType</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/TransitionCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionCustomLineItemState</a></li>
 <li><a href="io/sphere/sdk/orders/commands/updateactions/TransitionLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionLineItemState</a></li>
+<li><a href="io/sphere/sdk/orders/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionState</a></li>
 <li><a href="io/sphere/sdk/payments/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.payments.commands.updateactions">TransitionState</a></li>
+<li><a href="io/sphere/sdk/products/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.products.commands.updateactions">TransitionState</a></li>
+<li><a href="io/sphere/sdk/reviews/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.reviews.commands.updateactions">TransitionState</a></li>
+<li><a href="io/sphere/sdk/states/relatedupdateactions/TransitionStateBase.html" title="class in io.sphere.sdk.states.relatedupdateactions">TransitionStateBase</a></li>
 <li><a href="io/sphere/sdk/utils/functional/TriFunction.html" title="interface in io.sphere.sdk.utils.functional"><span class="interfaceName">TriFunction</span></a></li>
 <li><a href="io/sphere/sdk/meta/TroubleshootingGuide.html" title="class in io.sphere.sdk.meta">TroubleshootingGuide</a></li>
 <li><a href="io/sphere/sdk/types/Type.html" title="interface in io.sphere.sdk.types"><span class="interfaceName">Type</span></a></li>

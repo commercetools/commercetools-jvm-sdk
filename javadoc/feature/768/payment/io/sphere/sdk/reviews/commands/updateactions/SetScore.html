@@ -128,7 +128,7 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
 
  <p>See also <a href="../ReviewUpdateCommand.html">ReviewUpdateCommand</a>.<p>
 
- <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setScore--%s" class=code-example><pre><code class='java'>ReviewFixtures.withUpdateableReview(client(), review -&gt; {
+ <div id="io-sphere-sdk-reviews-commands-ReviewUpdateCommandTest-setScore--%s" class=code-example><pre><code class='java'>withUpdateableReview(client(), review -&gt; {
     final double newScore = 0.5;
     assertThat(Optional.ofNullable(review.getScore()).orElse(1.0)).isNotEqualTo(0.5);
 

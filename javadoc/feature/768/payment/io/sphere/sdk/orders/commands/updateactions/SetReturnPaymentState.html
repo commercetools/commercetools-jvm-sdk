@@ -134,6 +134,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, action));
     final ReturnPaymentState updatedPaymentState = updatedOrder.getReturnInfo().get(0).getItems().get(0).getPaymentState();
     assertThat(updatedPaymentState).isEqualTo(newPaymentState);
+
+    return updatedOrder;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

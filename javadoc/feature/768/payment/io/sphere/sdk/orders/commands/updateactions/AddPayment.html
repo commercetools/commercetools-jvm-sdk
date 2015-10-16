@@ -142,6 +142,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
         final Order orderWithoutPayment = execute(OrderUpdateCommand.of(orderWithPayment, RemovePayment.of(payment)));
 
         assertThat(orderWithoutPayment.getPaymentInfo()).isNull();
+
+        return orderWithoutPayment;
     });
     return payment;
 });
