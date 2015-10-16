@@ -3,9 +3,9 @@ package io.sphere.sdk.search.model;
 import java.util.function.Function;
 
 /**
- * A builder to instantiate any implementation of DirectionlessSearchSort.
+ * A builder to instantiate any implementation of {@link SortSearchModel}.
  * @param <T> the resource to sort by
- * @param <S> the type of the class, implementation of DirectionlessSearchSort, where the element should be built
+ * @param <S> the type of the class, implementation of {@link SortSearchModel}, where the element should be built
  */
 @FunctionalInterface
 interface SearchSortBuilder<T, S extends SortSearchModel<T>> extends Function<SortableSearchModel<T, S>, S> {
