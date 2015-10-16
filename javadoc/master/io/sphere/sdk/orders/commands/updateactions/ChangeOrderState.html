@@ -132,6 +132,8 @@ extends <a href="../../../../../../io/sphere/sdk/commands/UpdateActionImpl.html"
     assertThat(order.getOrderState()).isEqualTo(OrderState.OPEN);
     final Order updatedOrder = execute(OrderUpdateCommand.of(order, ChangeOrderState.of(OrderState.COMPLETE)));
     assertThat(updatedOrder.getOrderState()).isEqualTo(OrderState.COMPLETE);
+
+    return updatedOrder;
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>

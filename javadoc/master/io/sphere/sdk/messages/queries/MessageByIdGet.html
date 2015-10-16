@@ -116,6 +116,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" titl
 
     final Message message = execute(MessageByIdGet.of(messageFromQueryEndpoint));
     assertThat(message).isEqualTo(messageFromQueryEndpoint);
+
+    return order;
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageByIdGetTest.java" target="_blank">test code</a>.</pre></div>
 
