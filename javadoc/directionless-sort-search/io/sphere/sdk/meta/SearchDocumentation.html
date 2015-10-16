@@ -224,6 +224,18 @@ final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(search);
 assertThat(resultsToIds(result)).containsExactly(product3.getId(), product2.getId(), product1.getId());
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchSortIntegrationTest.java" target="_blank">test code</a>.</pre></div>
 
+ <p>Providing a list of sort expressions has the effect of multi-sorting, as it is demonstrated in the following example:</p>
+
+ <div id="io-sphere-sdk-products-search-ProductProjectionSearchSortIntegrationTest-sortByMultipleAttributes--%s" class=code-example><pre><code class='java'>final ProductProjectionSearch singleSortedRequest = ProductProjectionSearch.ofStaged()
+        .plusSort(sort -&gt; sort.allVariants().attribute().ofString(ATTR_NAME_COLOR).byAsc());
+final PagedSearchResult&lt;ProductProjection&gt; resultNameAsc = executeSearch(singleSortedRequest
+        .plusSort(sort -&gt; sort.name().locale(ENGLISH).byAsc()));
+final PagedSearchResult&lt;ProductProjection&gt; resultNameDesc = executeSearch(singleSortedRequest
+        .plusSort(sort -&gt; sort.name().locale(ENGLISH).byDesc()));
+assertThat(resultsToIds(resultNameAsc)).containsExactly(product3.getId(), product1.getId(), product2.getId());
+assertThat(resultsToIds(resultNameDesc)).containsExactly(product1.getId(), product3.getId(), product2.getId());
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchSortIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+
 
 
 
@@ -402,7 +414,15 @@ assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId()
 
  <p>Then you need to build the path of the attribute you want to apply that action to, for example <a href="../../../../io/sphere/sdk/products/search/ProductDataFilterSearchModel.html#lastModifiedAt--"><code>ProductDataFilterSearchModel.lastModifiedAt()</code></a> represents the <code>lastModifiedAt</code> attribute on a product. In the case of custom attributes, you also need to provide the attribute name and select the primary type of the attribute.</p>
 
- <p>Finally, you need to indicate the criteria used for the desired operation. For example you would use <a href="../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html#byAny-java.lang.Iterable-"><code>TermFilterSearchModel.byAny(java.lang.Iterable&lt;V&gt;)</code></a> if you want to filter by any of the given values.</p></div>
+ <p>Finally, you need to indicate the criteria used for the desired operation. For example you would use <a href="../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html#byAny-java.lang.Iterable-"><code>TermFilterSearchModel.byAny(java.lang.Iterable&lt;V&gt;)</code></a> if you want to filter by any of the given values.</p>
+
+ <p>Notice that even though the Search Model expects values of a certain type based on the attribute, you can force it to accept simple strings as shown in the following example:</p>
+
+ <div id="io-sphere-sdk-products-search-ProductProjectionSearchFiltersIntegrationTest-filterByValueAsString%s" class=code-example><pre><code class='java'>final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+        .plusQueryFilters(filter -&gt; filter.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAnyAsString(asList("36", "38")));
+final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(search);
+assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFiltersIntegrationTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -497,7 +517,7 @@ assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId()
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>

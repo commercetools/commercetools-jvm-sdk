@@ -122,7 +122,7 @@
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/meta/CustomObjectDocumentation.html" title="class in io.sphere.sdk.meta">CustomObjectDocumentation</a></td>
 <td class="colLast">
-<div class="block">Custom objects are a way to store arbitrary JSON-formatted data on the SPHERE.IO platform.</div>
+<div class="block"><a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>See CustomObject.</code></a></div>
 </td>
 </tr>
 <tr class="rowColor">
@@ -203,18 +203,21 @@
 <tr><td rowspan="3">customergroups</td><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupByIdGet.html'>CustomerGroupByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupDeleteCommand.html'>CustomerGroupDeleteCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/customergroups/queries/CustomerGroupQuery.html'>CustomerGroupQuery</a></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupUpdateCommand.html'>CustomerGroupUpdateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customergroups/commands/CustomerGroupCreateCommand.html'>CustomerGroupCreateCommand</a></td></tr>
-<tr><td rowspan="9">customers</td><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByIdGet.html'>CustomerByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html'>CustomerVerifyEmailCommand</a></td></tr>
+<tr><td rowspan="10">customers</td><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByIdGet.html'>CustomerByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html'>CustomerVerifyEmailCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByTokenGet.html'>CustomerByTokenGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerPasswordResetCommand.html'>CustomerPasswordResetCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerQuery.html'>CustomerQuery</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html'>CustomerCreateEmailTokenCommand</a></td></tr>
-<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html'>CustomerChangePasswordCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html'>CustomerByPasswordTokenGet</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html'>CustomerCreateEmailTokenCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customers/queries/CustomerQuery.html'>CustomerQuery</a></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerChangePasswordCommand.html'>CustomerChangePasswordCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateCommand.html'>CustomerCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerDeleteCommand.html'>CustomerDeleteCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerUpdateCommand.html'>CustomerUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreatePasswordTokenCommand.html'>CustomerCreatePasswordTokenCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerCreateTokenCommand.html'>CustomerCreateTokenCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/customers/commands/CustomerSignInCommand.html'>CustomerSignInCommand</a></td></tr>
-<tr><td rowspan="3">customobjects</td><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html'>CustomObjectCustomJsonMappingByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html'>CustomObjectDeleteCommand</a></td></tr>
+<tr><td rowspan="5">customobjects</td><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByKeyGet.html'>CustomObjectCustomJsonMappingByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html'>CustomObjectDeleteCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html'>CustomObjectByKeyGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectCustomJsonMappingUpsertCommand.html'>CustomObjectCustomJsonMappingUpsertCommand</a></td></tr>
-<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectQuery.html'>CustomObjectQuery</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html'>CustomObjectUpsertCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html'>CustomObjectByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/customobjects/commands/CustomObjectUpsertCommand.html'>CustomObjectUpsertCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectQuery.html'>CustomObjectQuery</a></td><td></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/customobjects/queries/CustomObjectCustomJsonMappingByXGet.html'>CustomObjectCustomJsonMappingByXGet</a></td><td></td></tr>
 <tr><td rowspan="3">discountcodes</td><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeQuery.html'>DiscountCodeQuery</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeDeleteCommand.html'>DiscountCodeDeleteCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/discountcodes/queries/DiscountCodeByIdGet.html'>DiscountCodeByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeUpdateCommand.html'>DiscountCodeUpdateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/discountcodes/commands/DiscountCodeCreateCommand.html'>DiscountCodeCreateCommand</a></td></tr>
@@ -224,9 +227,13 @@
 <tr><td rowspan="3">messages</td><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageByIdGet.html'>MessageByIdGet</a></td><td></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/messages/queries/MessageQuery.html'>MessageQuery</a></td><td></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/messages/queries/TypedMessageQuery.html'>TypedMessageQuery</a></td><td></td></tr>
-<tr><td rowspan="3">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderQuery.html'>OrderQuery</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderUpdateCommand.html'>OrderUpdateCommand</a></td></tr>
+<tr><td rowspan="4">orders</td><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderQuery.html'>OrderQuery</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderUpdateCommand.html'>OrderUpdateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/orders/queries/OrderByIdGet.html'>OrderByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderImportCommand.html'>OrderImportCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderDeleteCommand.html'>OrderDeleteCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/orders/commands/OrderFromCartCreateCommand.html'>OrderFromCartCreateCommand</a></td></tr>
+<tr><td rowspan="3">payments</td><td><a href='../../../..//io/sphere/sdk/payments/queries/PaymentByIdGet.html'>PaymentByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/payments/commands/PaymentDeleteCommand.html'>PaymentDeleteCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/payments/queries/PaymentQuery.html'>PaymentQuery</a></td><td><a href='../../../..//io/sphere/sdk/payments/commands/PaymentUpdateCommand.html'>PaymentUpdateCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/payments/commands/PaymentCreateCommand.html'>PaymentCreateCommand</a></td></tr>
 <tr><td rowspan="3">productdiscounts</td><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountByIdGet.html'>ProductDiscountByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountDeleteCommand.html'>ProductDiscountDeleteCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/productdiscounts/queries/ProductDiscountQuery.html'>ProductDiscountQuery</a></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountCreateCommand.html'>ProductDiscountCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/productdiscounts/commands/ProductDiscountUpdateCommand.html'>ProductDiscountUpdateCommand</a></td></tr>
@@ -253,6 +260,9 @@
 <tr><td rowspan="3">taxcategories</td><td><a href='../../../..//io/sphere/sdk/taxcategories/queries/TaxCategoryQuery.html'>TaxCategoryQuery</a></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryCreateCommand.html'>TaxCategoryCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryUpdateCommand.html'>TaxCategoryUpdateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/taxcategories/commands/TaxCategoryDeleteCommand.html'>TaxCategoryDeleteCommand</a></td></tr>
+<tr><td rowspan="3">types</td><td><a href='../../../..//io/sphere/sdk/types/queries/TypeByIdGet.html'>TypeByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/types/commands/TypeUpdateCommand.html'>TypeUpdateCommand</a></td></tr>
+<tr><td><a href='../../../..//io/sphere/sdk/types/queries/TypeQuery.html'>TypeQuery</a></td><td><a href='../../../..//io/sphere/sdk/types/commands/TypeDeleteCommand.html'>TypeDeleteCommand</a></td></tr>
+<tr><td></td><td><a href='../../../..//io/sphere/sdk/types/commands/TypeCreateCommand.html'>TypeCreateCommand</a></td></tr>
 <tr><td rowspan="3">zones</td><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneByIdGet.html'>ZoneByIdGet</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneUpdateCommand.html'>ZoneUpdateCommand</a></td></tr>
 <tr><td><a href='../../../..//io/sphere/sdk/zones/queries/ZoneQuery.html'>ZoneQuery</a></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneCreateCommand.html'>ZoneCreateCommand</a></td></tr>
 <tr><td></td><td><a href='../../../..//io/sphere/sdk/zones/commands/ZoneDeleteCommand.html'>ZoneDeleteCommand</a></td></tr>
@@ -335,7 +345,7 @@
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>

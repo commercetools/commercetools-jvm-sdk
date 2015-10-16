@@ -74,7 +74,7 @@ var activeTableTab = "activeTableTab";
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#fields.inherited.from.class.io.sphere.sdk.search.model.SortableSearchModel">Field</a>&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
@@ -102,10 +102,15 @@ var activeTableTab = "activeTableTab";
 <li><a href="../../../../../io/sphere/sdk/models/Base.html" title="class in io.sphere.sdk.models">io.sphere.sdk.models.Base</a></li>
 <li>
 <ul class="inheritance">
-<li><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">io.sphere.sdk.search.model.SearchModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</li>
+<li><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">io.sphere.sdk.search.model.SearchModelImpl</a>&lt;T&gt;</li>
+<li>
+<ul class="inheritance">
+<li><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">io.sphere.sdk.search.model.SortableSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</li>
 <li>
 <ul class="inheritance">
 <li>io.sphere.sdk.products.search.ProductVariantSortSearchModel</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -123,13 +128,28 @@ var activeTableTab = "activeTableTab";
 <hr>
 <br>
 <pre>public class <span class="typeNameLabel">ProductVariantSortSearchModel</span>
-extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">SearchModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;</pre>
+extends <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>,<a href="../../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html" title="class in io.sphere.sdk.search.model">MultiValueSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/products/ProductProjection.html" title="interface in io.sphere.sdk.products">ProductProjection</a>&gt;&gt;</pre>
 </li>
 </ul>
 </div>
 <div class="summary">
 <ul class="blockList">
 <li class="blockList">
+<!-- =========== FIELD SUMMARY =========== -->
+<ul class="blockList">
+<li class="blockList"><a name="field.summary">
+<!--   -->
+</a>
+<h3>Field Summary</h3>
+<ul class="blockList">
+<li class="blockList"><a name="fields.inherited.from.class.io.sphere.sdk.search.model.SortableSearchModel">
+<!--   -->
+</a>
+<h3>Fields inherited from class&nbsp;io.sphere.sdk.search.model.<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#searchSortFactory">searchSortFactory</a></code></li>
+</ul>
+</li>
+</ul>
 <!-- ========== METHOD SUMMARY =========== -->
 <ul class="blockList">
 <li class="blockList"><a name="method.summary">
@@ -152,11 +172,18 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 </tr>
 </table>
 <ul class="blockList">
+<li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.model.SortableSearchModel">
+<!--   -->
+</a>
+<h3>Methods inherited from class&nbsp;io.sphere.sdk.search.model.<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a></h3>
+<code><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#enumSortSearchModel-java.lang.String-">enumSortSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#localizedEnumSortSearchModel-java.lang.String-">localizedEnumSortSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#localizedStringSortSearchModel-java.lang.String-">localizedStringSortSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#moneySortSearchModel-java.lang.String-">moneySortSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#searchModel-io.sphere.sdk.search.model.SearchModel-java.lang.String-">searchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#searchModel-java.lang.String-">searchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#sorted--">sorted</a>, <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#sorted-io.sphere.sdk.search.model.SortableSearchModel-">sorted</a>, <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#sorted-java.lang.String-">sorted</a></code></li>
+</ul>
+<ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.model.SearchModelImpl">
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.search.model.<a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">SearchModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getPathSegment--">getPathSegment</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#booleanSearchModel-java.lang.String-">booleanSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#dateSearchModel-java.lang.String-">dateSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#datetimeSearchModel-java.lang.String-">datetimeSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#enumFacetSearchModel-java.lang.String-">enumFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#enumFilterSearchModel-java.lang.String-">enumFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedEnumFacetSearchModel-java.lang.String-">localizedEnumFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedEnumFilterSearchModel-java.lang.String-">localizedEnumFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedStringFacetSearchModel-java.lang.String-">localizedStringFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedStringFilterSearchModel-java.lang.String-">localizedStringFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#moneyFacetSearchModel-java.lang.String-">moneyFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#moneyFilterSearchModel-java.lang.String-">moneyFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#numberSearchModel-java.lang.String-">numberSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#referenceFacetSearchModel-java.lang.String-">referenceFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#referenceFilterSearchModel-java.lang.String-">referenceFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#stringSearchModel-java.lang.String-">stringSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#timeSearchModel-java.lang.String-">timeSearchModel</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -264,7 +291,7 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <ul class="subNavList">
 <li>Summary:&nbsp;</li>
 <li>Nested&nbsp;|&nbsp;</li>
-<li>Field&nbsp;|&nbsp;</li>
+<li><a href="#fields.inherited.from.class.io.sphere.sdk.search.model.SortableSearchModel">Field</a>&nbsp;|&nbsp;</li>
 <li>Constr&nbsp;|&nbsp;</li>
 <li><a href="#method.summary">Method</a></li>
 </ul>
@@ -279,7 +306,7 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>

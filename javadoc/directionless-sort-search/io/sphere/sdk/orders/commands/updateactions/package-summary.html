@@ -98,39 +98,87 @@
 </td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddPayment.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddPayment</a></td>
+<td class="colLast">
+<div class="block">This action adds a payment to the PaymentInfo.</div>
+</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/AddReturnInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">AddReturnInfo</a></td>
 <td class="colLast">
 <div class="block">Adds return data to an order.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeOrderState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeOrderState</a></td>
 <td class="colLast">
 <div class="block">Changes the order state.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangePaymentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangePaymentState</a></td>
 <td class="colLast">
 <div class="block">Changes the payment state.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ChangeShipmentState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ChangeShipmentState</a></td>
 <td class="colLast">
 <div class="block">Changes the shipment state.</div>
 </td>
 </tr>
-<tr class="altColor">
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ImportCustomLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportCustomLineItemState</a></td>
 <td class="colLast">
 <div class="block">These import of states does not follow any predefined rules and should be only used if no transitions are defined.</div>
 </td>
 </tr>
-<tr class="rowColor">
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/ImportLineItemState.html" title="class in io.sphere.sdk.orders.commands.updateactions">ImportLineItemState</a></td>
 <td class="colLast">
 <div class="block">These import of states does not follow any predefined rules and should be only used if no transitions are defined.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/RemovePayment.html" title="class in io.sphere.sdk.orders.commands.updateactions">RemovePayment</a></td>
+<td class="colLast">
+<div class="block">This action removes a payment from the PaymentInfo.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetCustomField.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetCustomField</a></td>
+<td class="colLast">
+<div class="block">Updates a custom field.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetCustomLineItemCustomField.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetCustomLineItemCustomField</a></td>
+<td class="colLast">
+<div class="block">Updates a custom field in a custom line item.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetCustomLineItemCustomType.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetCustomLineItemCustomType</a></td>
+<td class="colLast">
+<div class="block">Sets or removes a custom type in a custom line item.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetCustomType.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetCustomType</a></td>
+<td class="colLast">
+<div class="block">Sets or removes a custom type.</div>
+</td>
+</tr>
+<tr class="altColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomField.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetLineItemCustomField</a></td>
+<td class="colLast">
+<div class="block">Updates a custom field in a line item.</div>
+</td>
+</tr>
+<tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/SetLineItemCustomType.html" title="class in io.sphere.sdk.orders.commands.updateactions">SetLineItemCustomType</a></td>
+<td class="colLast">
+<div class="block">Sets or removes a custom type in a line item.</div>
 </td>
 </tr>
 <tr class="altColor">
@@ -165,19 +213,27 @@
  <p>See also <a href="../OrderUpdateCommand.html">OrderUpdateCommand</a>.<p>
 
  <div id="io-sphere-sdk-orders-commands-OrderUpdateCommandTest-transitionLineItemState--%s" class=code-example><pre><code class='java'>withStandardStates(client(), (State initialState, State nextState) -&gt;
-                withOrder(client(), order -&gt; {
-                    final LineItem lineItem = order.getLineItems().get(0);
-                    assertThat(lineItem).containsState(initialState).containsNotState(nextState);
-                    final long quantity = 1;
-                    final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
-                    final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
-                    assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
-                })
+    withOrder(client(), order -&gt; {
+        final LineItem lineItem = order.getLineItems().get(0);
+        assertThat(lineItem).containsState(initialState).containsNotState(nextState);
+        final long quantity = 1;
+        final ZonedDateTime actualTransitionDate = ZonedDateTime_IN_PAST;
+        final Order updatedOrder = execute(OrderUpdateCommand.of(order, TransitionLineItemState.of(lineItem, quantity, initialState, nextState, actualTransitionDate)));
+        assertThat(updatedOrder.getLineItems().get(0)).containsItemStates(ItemState.of(nextState, quantity));
+
+        return updatedOrder;
+    })
 );
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/orders/commands/OrderUpdateCommandTest.java" target="_blank">test code</a>.</pre></div></div>
 </td>
 </tr>
 <tr class="rowColor">
+<td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/TransitionState.html" title="class in io.sphere.sdk.orders.commands.updateactions">TransitionState</a></td>
+<td class="colLast">
+<div class="block">Transition to a new state.</div>
+</td>
+</tr>
+<tr class="altColor">
 <td class="colFirst"><a href="../../../../../../io/sphere/sdk/orders/commands/updateactions/UpdateSyncInfo.html" title="class in io.sphere.sdk.orders.commands.updateactions">UpdateSyncInfo</a></td>
 <td class="colLast">
 <div class="block">Updates the synchronization info.</div>
@@ -239,7 +295,7 @@
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>

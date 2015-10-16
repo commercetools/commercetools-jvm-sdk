@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":9,"i5":9,"i6":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":9,"i6":9};
 var tabs = {65535:["t0","All Methods"],1:["t1","Static Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -134,13 +134,22 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
  <div id="io-sphere-sdk-customers-commands-CustomerCreateEmailTokenCommandTest-execution--%s" class=code-example><pre><code class='java'>withCustomer(client(), customer -&gt; {
     assertThat(customer.isEmailVerified()).isFalse();
     final int ttlMinutes = 15;
-    final Command&lt;CustomerToken&gt; command1 = CustomerCreateEmailTokenCommand.of(customer, ttlMinutes);
-    final CustomerToken customerToken = execute(command1);
-    final Command&lt;Customer&gt; command2 = CustomerVerifyEmailCommand.of(customer, customerToken);
-    final Customer loadedCustomer = execute(command2);
+    final Command&lt;CustomerToken&gt; createTokenCommand = CustomerCreateEmailTokenCommand.of(customer, ttlMinutes);
+
+    final CustomerToken customerToken = execute(createTokenCommand);
+    final String tokenValue = customerToken.getValue();//this token needs to be sent via email to the customer
+
+    final Command&lt;Customer&gt; verifyEmailCommand = CustomerVerifyEmailCommand.of(customer, tokenValue);
+    final Customer loadedCustomer = execute(verifyEmailCommand);
     assertThat(loadedCustomer.isEmailVerified()).isTrue();
 });
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers"><code>Customer</code></a>, 
+<a href="../../../../../io/sphere/sdk/customers/Customer.html#isEmailVerified--"><code>Customer.isEmailVerified()</code></a>, 
+<a href="../../../../../io/sphere/sdk/customers/commands/CustomerCreateEmailTokenCommand.html" title="class in io.sphere.sdk.customers.commands"><code>CustomerCreateEmailTokenCommand</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -178,18 +187,18 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 </td>
 </tr>
 <tr id="i4" class="altColor">
+<td class="colFirst"><code>protected com.fasterxml.jackson.databind.JavaType</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#jacksonJavaType--">jacksonJavaType</a></span>()</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#of-io.sphere.sdk.models.Versioned-io.sphere.sdk.customers.CustomerToken-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer,
   <a href="../../../../../io/sphere/sdk/customers/CustomerToken.html" title="interface in io.sphere.sdk.customers">CustomerToken</a>&nbsp;customerToken)</code>&nbsp;</td>
 </tr>
-<tr id="i5" class="rowColor">
+<tr id="i6" class="altColor">
 <td class="colFirst"><code>static <a href="../../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html" title="class in io.sphere.sdk.customers.commands">CustomerVerifyEmailCommand</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#of-io.sphere.sdk.models.Versioned-java.lang.String-">of</a></span>(<a href="../../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models">Versioned</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;customer,
   java.lang.String&nbsp;tokenValue)</code>&nbsp;</td>
-</tr>
-<tr id="i6" class="altColor">
-<td class="colFirst"><code>protected com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/customers/commands/CustomerVerifyEmailCommand.html#typeReference--">typeReference</a></span>()</code>&nbsp;</td>
 </tr>
 </table>
 <ul class="blockList">
@@ -204,7 +213,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.client.<a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html" title="class in io.sphere.sdk.client">SphereRequestBase</a></h3>
-<code><a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.databind.JavaType-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#deserialize-io.sphere.sdk.http.HttpResponse-com.fasterxml.jackson.core.type.TypeReference-">deserialize</a>, <a href="../../../../../io/sphere/sdk/client/SphereRequestBase.html#getBodyAsString-io.sphere.sdk.http.HttpResponse-">getBodyAsString</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -241,16 +250,16 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <!--   -->
 </a>
 <h3>Method Detail</h3>
-<a name="typeReference--">
+<a name="jacksonJavaType--">
 <!--   -->
 </a>
 <ul class="blockList">
 <li class="blockList">
-<h4>typeReference</h4>
-<pre>protected&nbsp;com.fasterxml.jackson.core.type.TypeReference&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;&nbsp;typeReference()</pre>
+<h4>jacksonJavaType</h4>
+<pre>protected&nbsp;com.fasterxml.jackson.databind.JavaType&nbsp;jacksonJavaType()</pre>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html#typeReference--">typeReference</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></dd>
+<dd><code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html#jacksonJavaType--">jacksonJavaType</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="class in io.sphere.sdk.commands">CommandImpl</a>&lt;<a href="../../../../../io/sphere/sdk/customers/Customer.html" title="interface in io.sphere.sdk.customers">Customer</a>&gt;</code></dd>
 </dl>
 </li>
 </ul>
@@ -384,7 +393,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/CommandImpl.html" title="
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>

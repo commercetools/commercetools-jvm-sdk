@@ -106,6 +106,20 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">CustomerGroupDeleteCommand</span>
 extends <a href="../../../../../io/sphere/sdk/commands/ByIdDeleteCommand.html" title="interface in io.sphere.sdk.commands">ByIdDeleteCommand</a>&lt;<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;, <a href="../../../../../io/sphere/sdk/expansion/MetaModelExpansionDsl.html" title="interface in io.sphere.sdk.expansion">MetaModelExpansionDsl</a>&lt;<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>,<a href="../../../../../io/sphere/sdk/customergroups/commands/CustomerGroupDeleteCommand.html" title="interface in io.sphere.sdk.customergroups.commands">CustomerGroupDeleteCommand</a>,<a href="../../../../../io/sphere/sdk/customergroups/expansion/CustomerGroupExpansionModel.html" title="class in io.sphere.sdk.customergroups.expansion">CustomerGroupExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups">CustomerGroup</a>&gt;&gt;</pre>
+<div class="block">Deletes a customer group.
+
+ <div id="io-sphere-sdk-customergroups-commands-CustomerGroupDeleteCommandTest-execution--%s" class=code-example><pre><code class='java'>final String name = randomKey();
+final CustomerGroup customerGroup = execute(CustomerGroupCreateCommand.of(name));
+
+execute(CustomerGroupDeleteCommand.of(customerGroup));
+
+final PagedQueryResult&lt;CustomerGroup&gt; queryResult = execute(CustomerGroupQuery.of().byName(name));
+assertThat(queryResult.getResults()).isEmpty();
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/customergroups/commands/CustomerGroupDeleteCommandTest.java" target="_blank">test code</a>.</pre></div></div>
+<dl>
+<dt><span class="seeLabel">See Also:</span></dt>
+<dd><a href="../../../../../io/sphere/sdk/customergroups/CustomerGroup.html" title="interface in io.sphere.sdk.customergroups"><code>CustomerGroup</code></a></dd>
+</dl>
 </li>
 </ul>
 </div>
@@ -248,7 +262,7 @@ extends <a href="../../../../../io/sphere/sdk/commands/ByIdDeleteCommand.html" t
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>

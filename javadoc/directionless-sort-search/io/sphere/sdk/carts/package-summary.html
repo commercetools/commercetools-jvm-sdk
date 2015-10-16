@@ -87,7 +87,9 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts">Cart</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">A shopping cart holds product variants and can be ordered.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/carts/CartLike.html" title="interface in io.sphere.sdk.carts">CartLike</a>&lt;T&gt;</td>
@@ -97,15 +99,21 @@
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts">CustomLineItem</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">A custom line item is a generic item that can be added to the cart but is not bound to a product.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts">LineItem</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">A line item is a snapshot of a product variant at the time it was added to the cart.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/carts/LineItemLike.html" title="interface in io.sphere.sdk.carts">LineItemLike</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Interface for common stuff of <a href="../../../../io/sphere/sdk/carts/LineItem.html" title="interface in io.sphere.sdk.carts"><code>LineItem</code></a>s and <a href="../../../../io/sphere/sdk/carts/CustomLineItem.html" title="interface in io.sphere.sdk.carts"><code>CustomLineItem</code></a>s.</div>
+</td>
 </tr>
 </tbody>
 </table>
@@ -120,29 +128,41 @@
 <tbody>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts">CartDraft</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Draft for <a href="../../../../io/sphere/sdk/carts/Cart.html" title="interface in io.sphere.sdk.carts"><code>Cart</code></a> creation.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/carts/CartDraftBuilder.html" title="class in io.sphere.sdk.carts">CartDraftBuilder</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Builder to create <a href="../../../../io/sphere/sdk/carts/CartDraft.html" title="class in io.sphere.sdk.carts"><code>CartDraft</code></a>s.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/carts/CartShippingInfo.html" title="class in io.sphere.sdk.carts">CartShippingInfo</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Information concerning shipping in a cart.</div>
+</td>
 </tr>
 <tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/carts/CustomLineItemDraft.html" title="class in io.sphere.sdk.carts">CustomLineItemDraft</a></td>
-<td class="colLast">&nbsp;</td>
+<td class="colLast">
+<div class="block">Draft for adding a custom line item to the cart.</div>
+</td>
 </tr>
 <tr class="altColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/carts/ItemState.html" title="class in io.sphere.sdk.carts">ItemState</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor">
-<td class="colFirst"><a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a></td>
+<td class="colFirst"><a href="../../../../io/sphere/sdk/carts/PaymentInfo.html" title="class in io.sphere.sdk.carts">PaymentInfo</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor">
+<td class="colFirst"><a href="../../../../io/sphere/sdk/carts/TaxedPrice.html" title="class in io.sphere.sdk.carts">TaxedPrice</a></td>
+<td class="colLast">&nbsp;</td>
+</tr>
+<tr class="rowColor">
 <td class="colFirst"><a href="../../../../io/sphere/sdk/carts/TaxPortion.html" title="class in io.sphere.sdk.carts">TaxPortion</a></td>
 <td class="colLast">&nbsp;</td>
 </tr>
@@ -221,7 +241,7 @@
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>

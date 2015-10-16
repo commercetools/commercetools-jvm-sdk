@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":6,"i1":6,"i2":6,"i3":6};
+var methods = {"i0":6,"i1":6,"i2":6,"i3":6,"i4":6};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],4:["t3","Abstract Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -149,24 +149,30 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 </tr>
 <tr id="i0" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withFuzzy-java.lang.Boolean-">withFuzzy</a></span>(java.lang.Boolean&nbsp;fuzzy)</code>
+<div class="block">Returns an EntitySearch with mofified fuzzyParameter.</div>
+</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withLimit-long-">withLimit</a></span>(long&nbsp;limit)</code>
 <div class="block">Returns a new object with the new limit.</div>
 </td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i2" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withOffset-long-">withOffset</a></span>(long&nbsp;offset)</code>
 <div class="block">Returns a new object with the new offset.</div>
 </td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i3" class="rowColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-java.util.Locale-java.lang.String-">withText</a></span>(java.util.Locale&nbsp;locale,
         java.lang.String&nbsp;text)</code>
 <div class="block">Returns a new object with the new text as search text.</div>
 </td>
 </tr>
-<tr id="i3" class="rowColor">
+<tr id="i4" class="altColor">
 <td class="colFirst"><code><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../io/sphere/sdk/search/SearchDsl.html#withText-io.sphere.sdk.models.LocalizedStringEntry-">withText</a></span>(<a href="../../../../io/sphere/sdk/models/LocalizedStringEntry.html" title="class in io.sphere.sdk.models">LocalizedStringEntry</a>&nbsp;text)</code>
 <div class="block">Returns a new object with the new text as search text.</div>
@@ -178,7 +184,7 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <!--   -->
 </a>
 <h3>Methods inherited from interface&nbsp;io.sphere.sdk.search.<a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="interface in io.sphere.sdk.search">EntitySearch</a></h3>
-<code><a href="../../../../io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></code></li>
+<code><a href="../../../../io/sphere/sdk/search/EntitySearch.html#endpoint--">endpoint</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#isFuzzy--">isFuzzy</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#limit--">limit</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#offset--">offset</a>, <a href="../../../../io/sphere/sdk/search/EntitySearch.html#text--">text</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.search.Search">
@@ -239,6 +245,22 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <dd><code>text</code> - the new search text</dd>
 <dt><span class="returnLabel">Returns:</span></dt>
 <dd>a new object with <code>text</code></dd>
+</dl>
+</li>
+</ul>
+<a name="withFuzzy-java.lang.Boolean-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>withFuzzy</h4>
+<pre><a href="../../../../io/sphere/sdk/search/SearchDsl.html" title="type parameter in SearchDsl">C</a>&nbsp;withFuzzy(java.lang.Boolean&nbsp;fuzzy)</pre>
+<div class="block">Returns an EntitySearch with mofified fuzzyParameter.</div>
+<dl>
+<dt><span class="paramLabel">Parameters:</span></dt>
+<dd><code>fuzzy</code> - a flag to indicate if fuzzy search is enabled (true) or not (false)</dd>
+<dt><span class="returnLabel">Returns:</span></dt>
+<dd>an EntitySearch with the new fuzzy flag setting</dd>
 </dl>
 </li>
 </ul>
@@ -342,7 +364,7 @@ extends <a href="../../../../io/sphere/sdk/search/EntitySearch.html" title="inte
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>

@@ -106,6 +106,17 @@ var activeTableTab = "activeTableTab";
 <br>
 <pre>public interface <span class="typeNameLabel">CategoryByIdGet</span>
 extends <a href="../../../../../io/sphere/sdk/queries/MetaModelGetDsl.html" title="interface in io.sphere.sdk.queries">MetaModelGetDsl</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>,<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>,<a href="../../../../../io/sphere/sdk/categories/queries/CategoryByIdGet.html" title="interface in io.sphere.sdk.categories.queries">CategoryByIdGet</a>,<a href="../../../../../io/sphere/sdk/categories/expansion/CategoryExpansionModel.html" title="class in io.sphere.sdk.categories.expansion">CategoryExpansionModel</a>&lt;<a href="../../../../../io/sphere/sdk/categories/Category.html" title="interface in io.sphere.sdk.categories">Category</a>&gt;&gt;</pre>
+<div class="block">Retrieves a category by a known ID.
+
+ <div id="io-sphere-sdk-categories-queries-CategoryByIdGetTest-execution--%s" class=code-example><pre><code class='java'>CategoryFixtures.withCategoryAndParentCategory(client(), (category, parent) -&gt; {
+    final String id = category.getId();
+    final Get&lt;Category&gt; fetch = CategoryByIdGet.of(id)
+            .withExpansionPaths(m -&gt; m.parent());
+    final Category loadedCategory = execute(fetch);
+    assertThat(loadedCategory.getId()).isEqualTo(id);
+    assertThat(loadedCategory.getParent()).is(expanded(parent));
+});
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/categories/queries/CategoryByIdGetTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
 </ul>
 </div>
@@ -474,7 +485,7 @@ assertThat(fetch2).isNotSameAs(fetch);
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>

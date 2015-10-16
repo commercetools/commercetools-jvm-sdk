@@ -112,7 +112,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForAllMessages--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final MessageQuery query = MessageQuery.of()
             //example predicate to fetch for a specific message type
-            .withPredicates(m -&gt; m.type().is("ReturnInfoAdded"))
+            .withPredicates(m -&gt; m.type().is("ReturnInfoAdded").and(m.resource().is(order)))
             .withSort(m -&gt; m.createdAt().sort().desc())
             .withExpansionPaths(m -&gt; m.resource())
             .withLimit(1);
@@ -120,6 +120,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
     assertThat(message.getResource().getObj()).isNotNull();
     assertThat(message.getResource()).isEqualTo(order.toReference());
     assertThat(message.getResource().getId()).isEqualTo(order.getId());
+
+    return order;
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -127,6 +129,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForASpecificMessage--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final Query&lt;ReturnInfoAddedMessage&gt; query =
             MessageQuery.of()
+                    .withPredicates(m -&gt; m.resource().is(order))
                     .withSort(m -&gt; m.createdAt().sort().desc())
                     .withExpansionPaths(m -&gt; m.resource())
                     .withLimit(1)
@@ -136,6 +139,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
     assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
     assertThat(message.getResource().getObj()).isNotNull();
     assertThat(message.getResource().getId()).isEqualTo(order.getId());
+
+    return order;
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -160,6 +165,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
     assertThat(order.getReturnInfo()).contains(returnInfoAddedMessage.getReturnInfo());
     final Order expandedOrder = returnInfoAddedMessage.getResource().getObj();
     assertThat(expandedOrder.getCreatedAt()).isEqualTo(order.getCreatedAt());
+
+    return order;
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -174,6 +181,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 
     final Optional&lt;Order&gt; orderOptional = Optional.ofNullable(results.get(0).getResource().getObj());
     assertThat(orderOptional.map(o -&gt; o.getCreatedAt())).contains(order.getCreatedAt());
+
+    return order;
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div>
 
@@ -199,6 +208,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
     assertThat(deliveryAddedMessage.getDelivery())
             .overridingErrorMessage("with wrong cast, fields can be null")
             .isNull();
+
+    return order;
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div></div>
 </li>
@@ -335,6 +346,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
  <div id="io-sphere-sdk-messages-queries-MessageQueryTest-queryForASpecificMessage--%s" class=code-example><pre><code class='java'>withOrderAndReturnInfo(client(), ((order, returnInfo) -&gt; {
     final Query&lt;ReturnInfoAddedMessage&gt; query =
             MessageQuery.of()
+                    .withPredicates(m -&gt; m.resource().is(order))
                     .withSort(m -&gt; m.createdAt().sort().desc())
                     .withExpansionPaths(m -&gt; m.resource())
                     .withLimit(1)
@@ -344,6 +356,8 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
     assertThat(message.getReturnInfo()).isEqualTo(returnInfo);
     assertThat(message.getResource().getObj()).isNotNull();
     assertThat(message.getResource().getId()).isEqualTo(order.getId());
+
+    return order;
 }));
 </code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/messages/queries/MessageQueryTest.java" target="_blank">test code</a>.</pre></div></div>
 <dl>
@@ -424,7 +438,7 @@ extends <a href="../../../../../io/sphere/sdk/queries/MetaModelQueryDsl.html" ti
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>

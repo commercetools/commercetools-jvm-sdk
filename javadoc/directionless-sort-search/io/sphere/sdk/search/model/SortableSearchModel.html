@@ -18,7 +18,7 @@
     catch(err) {
     }
 //-->
-var methods = {"i0":10,"i1":10,"i2":10};
+var methods = {"i0":10,"i1":10,"i2":10,"i3":10,"i4":10,"i5":10,"i6":10,"i7":10,"i8":10};
 var tabs = {65535:["t0","All Methods"],2:["t2","Instance Methods"],8:["t4","Concrete Methods"]};
 var altColor = "altColor";
 var rowColor = "rowColor";
@@ -48,8 +48,8 @@ var activeTableTab = "activeTableTab";
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModelBuilder.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/search/model/SortExpressionImpl.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModelFactory.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/search/model/SortableSearchModel.html" target="_top">Frames</a></li>
@@ -122,7 +122,7 @@ var activeTableTab = "activeTableTab";
 </dl>
 <dl>
 <dt>Direct Known Subclasses:</dt>
-<dd><a href="../../../../../io/sphere/sdk/search/model/EnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">EnumSortSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/LocalizedStringSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringSortSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/MoneySortSearchModel.html" title="class in io.sphere.sdk.search.model">MoneySortSearchModel</a></dd>
+<dd><a href="../../../../../io/sphere/sdk/search/model/EnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">EnumSortSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/LocalizedStringSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringSortSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/MoneySortSearchModel.html" title="class in io.sphere.sdk.search.model">MoneySortSearchModel</a>, <a href="../../../../../io/sphere/sdk/products/search/ProductAttributeSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductAttributeSortSearchModel</a>, <a href="../../../../../io/sphere/sdk/products/search/ProductDataSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductDataSortSearchModel</a>, <a href="../../../../../io/sphere/sdk/products/search/ProductVariantSortSearchModel.html" title="class in io.sphere.sdk.products.search">ProductVariantSortSearchModel</a></dd>
 </dl>
 <hr>
 <br>
@@ -147,8 +147,8 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <th class="colLast" scope="col">Field and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colFirst"><code>protected io.sphere.sdk.search.model.SearchSortBuilder&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;</code></td>
-<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#searchSortBuilder">searchSortBuilder</a></span></code>&nbsp;</td>
+<td class="colFirst"><code>protected io.sphere.sdk.search.model.SearchSortFactory&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#searchSortFactory">searchSortFactory</a></span></code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -162,12 +162,14 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <table class="memberSummary" border="0" cellpadding="3" cellspacing="0" summary="Constructor Summary table, listing constructors, and an explanation">
 <caption><span>Constructors</span><span class="tabEnd">&nbsp;</span></caption>
 <tr>
-<th class="colOne" scope="col">Constructor and Description</th>
+<th class="colFirst" scope="col">Modifier</th>
+<th class="colLast" scope="col">Constructor and Description</th>
 </tr>
 <tr class="altColor">
-<td class="colOne"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#SortableSearchModel-io.sphere.sdk.search.model.SearchModel-java.lang.String-io.sphere.sdk.search.model.SearchSortBuilder-">SortableSearchModel</a></span>(<a href="../../../../../io/sphere/sdk/search/model/SearchModel.html" title="interface in io.sphere.sdk.search.model">SearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>&gt;&nbsp;parent,
+<td class="colFirst"><code>protected </code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#SortableSearchModel-io.sphere.sdk.search.model.SearchModel-java.lang.String-io.sphere.sdk.search.model.SearchSortFactory-">SortableSearchModel</a></span>(<a href="../../../../../io/sphere/sdk/search/model/SearchModel.html" title="interface in io.sphere.sdk.search.model">SearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>&gt;&nbsp;parent,
                    java.lang.String&nbsp;pathSegment,
-                   io.sphere.sdk.search.model.SearchSortBuilder&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;searchSortBuilder)</code>&nbsp;</td>
+                   io.sphere.sdk.search.model.SearchSortFactory&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;searchSortFactory)</code>&nbsp;</td>
 </tr>
 </table>
 </li>
@@ -185,14 +187,39 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <th class="colLast" scope="col">Method and Description</th>
 </tr>
 <tr id="i0" class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../../io/sphere/sdk/search/model/EnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">EnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#enumSortSearchModel-java.lang.String-">enumSortSearchModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
+</tr>
+<tr id="i1" class="rowColor">
+<td class="colFirst"><code>protected <a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#localizedEnumSortSearchModel-java.lang.String-">localizedEnumSortSearchModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
+</tr>
+<tr id="i2" class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../../io/sphere/sdk/search/model/LocalizedStringSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#localizedStringSortSearchModel-java.lang.String-">localizedStringSortSearchModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
+</tr>
+<tr id="i3" class="rowColor">
+<td class="colFirst"><code>protected <a href="../../../../../io/sphere/sdk/search/model/MoneySortSearchModel.html" title="class in io.sphere.sdk.search.model">MoneySortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#moneySortSearchModel-java.lang.String-">moneySortSearchModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
+</tr>
+<tr id="i4" class="altColor">
+<td class="colFirst"><code>protected <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#searchModel-io.sphere.sdk.search.model.SearchModel-java.lang.String-">searchModel</a></span>(<a href="../../../../../io/sphere/sdk/search/model/SearchModel.html" title="interface in io.sphere.sdk.search.model">SearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>&gt;&nbsp;parent,
+           java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
+</tr>
+<tr id="i5" class="rowColor">
+<td class="colFirst"><code>protected <a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;</code></td>
+<td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#searchModel-java.lang.String-">searchModel</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
+</tr>
+<tr id="i6" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#sorted--">sorted</a></span>()</code>&nbsp;</td>
 </tr>
-<tr id="i1" class="rowColor">
+<tr id="i7" class="rowColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#sorted-io.sphere.sdk.search.model.SortableSearchModel-">sorted</a></span>(<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;searchModel)</code>&nbsp;</td>
 </tr>
-<tr id="i2" class="altColor">
+<tr id="i8" class="altColor">
 <td class="colFirst"><code><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a></code></td>
 <td class="colLast"><code><span class="memberNameLink"><a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html#sorted-java.lang.String-">sorted</a></span>(java.lang.String&nbsp;pathSegment)</code>&nbsp;</td>
 </tr>
@@ -202,7 +229,7 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <!--   -->
 </a>
 <h3>Methods inherited from class&nbsp;io.sphere.sdk.search.model.<a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">SearchModelImpl</a></h3>
-<code><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getPathSegment--">getPathSegment</a></code></li>
+<code><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#booleanSearchModel-java.lang.String-">booleanSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#dateSearchModel-java.lang.String-">dateSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#datetimeSearchModel-java.lang.String-">datetimeSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#enumFacetSearchModel-java.lang.String-">enumFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#enumFilterSearchModel-java.lang.String-">enumFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getParent--">getParent</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#getPathSegment--">getPathSegment</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedEnumFacetSearchModel-java.lang.String-">localizedEnumFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedEnumFilterSearchModel-java.lang.String-">localizedEnumFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedStringFacetSearchModel-java.lang.String-">localizedStringFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#localizedStringFilterSearchModel-java.lang.String-">localizedStringFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#moneyFacetSearchModel-java.lang.String-">moneyFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#moneyFilterSearchModel-java.lang.String-">moneyFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#numberSearchModel-java.lang.String-">numberSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#referenceFacetSearchModel-java.lang.String-">referenceFacetSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#referenceFilterSearchModel-java.lang.String-">referenceFilterSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#stringSearchModel-java.lang.String-">stringSearchModel</a>, <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#timeSearchModel-java.lang.String-">timeSearchModel</a></code></li>
 </ul>
 <ul class="blockList">
 <li class="blockList"><a name="methods.inherited.from.class.io.sphere.sdk.models.Base">
@@ -239,13 +266,13 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <!--   -->
 </a>
 <h3>Field Detail</h3>
-<a name="searchSortBuilder">
+<a name="searchSortFactory">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
-<h4>searchSortBuilder</h4>
-<pre>protected final&nbsp;io.sphere.sdk.search.model.SearchSortBuilder&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a> extends <a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>&gt;&gt; searchSortBuilder</pre>
+<h4>searchSortFactory</h4>
+<pre>protected final&nbsp;io.sphere.sdk.search.model.SearchSortFactory&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a> extends <a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model">SortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>&gt;&gt; searchSortFactory</pre>
 </li>
 </ul>
 </li>
@@ -256,17 +283,17 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <!--   -->
 </a>
 <h3>Constructor Detail</h3>
-<a name="SortableSearchModel-io.sphere.sdk.search.model.SearchModel-java.lang.String-io.sphere.sdk.search.model.SearchSortBuilder-">
+<a name="SortableSearchModel-io.sphere.sdk.search.model.SearchModel-java.lang.String-io.sphere.sdk.search.model.SearchSortFactory-">
 <!--   -->
 </a>
 <ul class="blockListLast">
 <li class="blockList">
 <h4>SortableSearchModel</h4>
-<pre>public&nbsp;SortableSearchModel(@Nullable
-                           <a href="../../../../../io/sphere/sdk/search/model/SearchModel.html" title="interface in io.sphere.sdk.search.model">SearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>&gt;&nbsp;parent,
-                           @Nullable
-                           java.lang.String&nbsp;pathSegment,
-                           io.sphere.sdk.search.model.SearchSortBuilder&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;searchSortBuilder)</pre>
+<pre>protected&nbsp;SortableSearchModel(@Nullable
+                              <a href="../../../../../io/sphere/sdk/search/model/SearchModel.html" title="interface in io.sphere.sdk.search.model">SearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>&gt;&nbsp;parent,
+                              @Nullable
+                              java.lang.String&nbsp;pathSegment,
+                              io.sphere.sdk.search.model.SearchSortFactory&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;searchSortFactory)</pre>
 </li>
 </ul>
 </li>
@@ -298,10 +325,69 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <a name="sorted-io.sphere.sdk.search.model.SortableSearchModel-">
 <!--   -->
 </a>
-<ul class="blockListLast">
+<ul class="blockList">
 <li class="blockList">
 <h4>sorted</h4>
 <pre>public&nbsp;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&nbsp;sorted(<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;searchModel)</pre>
+</li>
+</ul>
+<a name="searchModel-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>searchModel</h4>
+<pre>protected&nbsp;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;searchModel(java.lang.String&nbsp;pathSegment)</pre>
+<dl>
+<dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
+<dd><code><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html#searchModel-java.lang.String-">searchModel</a></code>&nbsp;in class&nbsp;<code><a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html" title="class in io.sphere.sdk.search.model">SearchModelImpl</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>&gt;</code></dd>
+</dl>
+</li>
+</ul>
+<a name="searchModel-io.sphere.sdk.search.model.SearchModel-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>searchModel</h4>
+<pre>protected&nbsp;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="class in io.sphere.sdk.search.model">SortableSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;searchModel(<a href="../../../../../io/sphere/sdk/search/model/SearchModel.html" title="interface in io.sphere.sdk.search.model">SearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>&gt;&nbsp;parent,
+                                               java.lang.String&nbsp;pathSegment)</pre>
+</li>
+</ul>
+<a name="localizedStringSortSearchModel-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>localizedStringSortSearchModel</h4>
+<pre>protected&nbsp;<a href="../../../../../io/sphere/sdk/search/model/LocalizedStringSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedStringSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;localizedStringSortSearchModel(java.lang.String&nbsp;pathSegment)</pre>
+</li>
+</ul>
+<a name="enumSortSearchModel-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>enumSortSearchModel</h4>
+<pre>protected&nbsp;<a href="../../../../../io/sphere/sdk/search/model/EnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">EnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;enumSortSearchModel(java.lang.String&nbsp;pathSegment)</pre>
+</li>
+</ul>
+<a name="localizedEnumSortSearchModel-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockList">
+<li class="blockList">
+<h4>localizedEnumSortSearchModel</h4>
+<pre>protected&nbsp;<a href="../../../../../io/sphere/sdk/search/model/LocalizedEnumSortSearchModel.html" title="class in io.sphere.sdk.search.model">LocalizedEnumSortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;localizedEnumSortSearchModel(java.lang.String&nbsp;pathSegment)</pre>
+</li>
+</ul>
+<a name="moneySortSearchModel-java.lang.String-">
+<!--   -->
+</a>
+<ul class="blockListLast">
+<li class="blockList">
+<h4>moneySortSearchModel</h4>
+<pre>protected&nbsp;<a href="../../../../../io/sphere/sdk/search/model/MoneySortSearchModel.html" title="class in io.sphere.sdk.search.model">MoneySortSearchModel</a>&lt;<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">T</a>,<a href="../../../../../io/sphere/sdk/search/model/SortableSearchModel.html" title="type parameter in SortableSearchModel">S</a>&gt;&nbsp;moneySortSearchModel(java.lang.String&nbsp;pathSegment)</pre>
 </li>
 </ul>
 </li>
@@ -331,8 +417,8 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 </div>
 <div class="subNav">
 <ul class="navList">
-<li><a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModelBuilder.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
-<li><a href="../../../../../io/sphere/sdk/search/model/SortExpressionImpl.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/SingleValueSortSearchModelFactory.html" title="class in io.sphere.sdk.search.model"><span class="typeNameLink">Prev&nbsp;Class</span></a></li>
+<li><a href="../../../../../io/sphere/sdk/search/model/SortSearchModel.html" title="interface in io.sphere.sdk.search.model"><span class="typeNameLink">Next&nbsp;Class</span></a></li>
 </ul>
 <ul class="navList">
 <li><a href="../../../../../index.html?io/sphere/sdk/search/model/SortableSearchModel.html" target="_top">Frames</a></li>
@@ -372,7 +458,7 @@ extends <a href="../../../../../io/sphere/sdk/search/model/SearchModelImpl.html"
 <!--   -->
 </a></div>
 <!-- ======== END OF BOTTOM NAVBAR ======= -->
-<p class="legalCopy"><small><link rel='stylesheet' href='http://yandex.st/highlightjs/7.4/styles/default.min.css'><script src='http://yandex.st/highlightjs/7.4/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
+<p class="legalCopy"><small><link rel='stylesheet' href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/default.min.css'><script src='//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js'></script><script>hljs.initHighlightingOnLoad();</script><style>code {font-size: 1.0em;font-family: monospace;}</style><script src='https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js'></script>
 <span id='custom-javascripts'></span>
 <script>var pathPrefix = $(".navList a[href$='index-all.html']").attr("href").replace("index-all.html", ""); var closingScriptTag = "</" + "script>"; 
 $('#custom-javascripts').append("<script src='" + pathPrefix + "documentation-resources/javascripts/main.js'>" + closingScriptTag + "<link rel='stylesheet' href='" + pathPrefix + "documentation-resources/stylesheets/main.css'>");</script></small></p>
