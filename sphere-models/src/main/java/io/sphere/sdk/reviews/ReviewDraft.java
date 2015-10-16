@@ -3,7 +3,10 @@ package io.sphere.sdk.reviews;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.models.Base;
 import io.sphere.sdk.models.Identifiable;
+import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.models.Referenceable;
 import io.sphere.sdk.products.ProductIdentifiable;
+import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
 import java.util.Optional;
@@ -24,9 +27,12 @@ public class ReviewDraft extends Base {
     private final String text;
     @Nullable
     private final Double score;
+    @Nullable
+    private final Reference<State> state;
 
     ReviewDraft(final String productId, final String customerId, @Nullable final String authorName, @Nullable final String title,
-                @Nullable final String text, @Nullable final Double score) {
+                @Nullable final String text, @Nullable final Double score, final Reference<State> state) {
+        this.state = state;
         final boolean scoreIsInValidRange = Optional.ofNullable(score).map(scoreValue -> scoreValue >= 0.0 && scoreValue <= 1.0).orElse(true);
         if (!scoreIsInValidRange) {
             throw new IllegalArgumentException("Valid scores are in [0..1].");
@@ -44,7 +50,7 @@ public class ReviewDraft extends Base {
     }
 
     public static ReviewDraft of(final String productId, final String customerId) {
-        return new ReviewDraft(productId, customerId, null, null, null, null);
+        return new ReviewDraft(productId, customerId, null, null, null, null, null);
     }
 
     public String getProductId() {
@@ -89,6 +95,11 @@ public class ReviewDraft extends Base {
 
     public ReviewDraft withScore(@Nullable final Double score) {
         return createBuilder().score(score).build();
+    }
+
+    public ReviewDraft withState(@Nullable final Referenceable<State> state) {
+        final Reference<State> stateReference = Optional.ofNullable(state).map(Referenceable::toReference).orElse(null);
+        return createBuilder().state(stateReference).build();
     }
 
     private ReviewDraftBuilder createBuilder() {

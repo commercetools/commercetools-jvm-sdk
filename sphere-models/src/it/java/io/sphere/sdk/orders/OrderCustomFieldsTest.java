@@ -34,7 +34,7 @@ public class OrderCustomFieldsTest extends IntegrationTest {
                 assertThat(updatedOrder.getCustom().getField(STRING_FIELD_NAME, TypeReferences.stringTypeReference())).isEqualTo("other");
 
                 //test clean up
-                execute(OrderUpdateCommand.of(updatedOrder, SetCustomType.ofRemoveType()));
+                return execute(OrderUpdateCommand.of(updatedOrder, SetCustomType.ofRemoveType()));
             });
             return type;
         });

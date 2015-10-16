@@ -7,6 +7,7 @@ import io.sphere.sdk.models.MetaAttributes;
 import io.sphere.sdk.models.Reference;
 import io.sphere.sdk.producttypes.ProductType;
 import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
@@ -31,13 +32,16 @@ class ProductDraftImpl extends Base implements ProductDraft {
     private final Reference<TaxCategory> taxCategory;
     private final SearchKeywords searchKeywords;
     @Nullable
+    private final Reference<State> state;
+    @Nullable
     private final CategoryOrderHints categoryOrderHints;
 
     public ProductDraftImpl(final Reference<ProductType> productType, final LocalizedString name, final LocalizedString slug,
                             final LocalizedString description, final Set<Reference<Category>> categories,
                             final MetaAttributes metaAttributes, final ProductVariantDraft masterVariant,
                             final List<ProductVariantDraft> variants, final Reference<TaxCategory> taxCategory,
-                            final SearchKeywords searchKeywords, final CategoryOrderHints categoryOrderHints) {
+                            final SearchKeywords searchKeywords, final Reference<State> state, 
+                            final CategoryOrderHints categoryOrderHints) {
         this.name = name;
         this.productType = productType;
         this.slug = slug;
@@ -45,6 +49,7 @@ class ProductDraftImpl extends Base implements ProductDraft {
         this.categories = categories;
         this.taxCategory = taxCategory;
         this.searchKeywords = searchKeywords;
+        this.state = state;
         this.metaTitle = metaAttributes.getMetaTitle();
         this.metaDescription = metaAttributes.getMetaTitle();
         this.metaKeywords = metaAttributes.getMetaKeywords();
@@ -116,6 +121,12 @@ class ProductDraftImpl extends Base implements ProductDraft {
     @Override
     public SearchKeywords getSearchKeywords() {
         return searchKeywords;
+    }
+
+    @Override
+    @Nullable
+    public Reference<State> getState() {
+        return state;
     }
 
     @Override

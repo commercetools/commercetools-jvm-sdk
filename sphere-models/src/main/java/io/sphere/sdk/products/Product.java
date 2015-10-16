@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Optional;
 import io.sphere.sdk.models.Resource;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.states.State;
 
 import javax.annotation.Nullable;
 
@@ -31,6 +32,9 @@ import javax.annotation.Nullable;
 public interface Product extends ProductLike<Product, Product>, Resource<Product> {
 
     ProductCatalogData getMasterData();
+
+    @Nullable
+    Reference<State> getState();
 
     static TypeReference<Product> typeReference(){
         return new TypeReference<Product>() {

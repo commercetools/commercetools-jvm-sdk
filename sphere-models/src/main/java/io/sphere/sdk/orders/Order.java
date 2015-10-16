@@ -8,6 +8,7 @@ import io.sphere.sdk.customergroups.CustomerGroup;
 import io.sphere.sdk.discountcodes.DiscountCodeInfo;
 import io.sphere.sdk.models.Address;
 import io.sphere.sdk.models.Reference;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
@@ -131,4 +132,7 @@ public interface Order extends CartLike<Order> {
     @Nullable
     @Override
     CustomFields getCustom();
+
+    @Nullable
+    Reference<State> getState();
 }
