@@ -13,10 +13,10 @@ import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.client.TestClient;
 import io.sphere.sdk.customers.Customer;
 import io.sphere.sdk.customers.CustomerFixtures;
-import io.sphere.sdk.customers.errors.CustomerInvalidCredentials;
+import io.sphere.sdk.customers.CustomerIntegrationTest;
 import io.sphere.sdk.customers.CustomerSignInResult;
+import io.sphere.sdk.customers.errors.CustomerInvalidCredentials;
 import io.sphere.sdk.products.ProductFixtures;
-import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.function.Consumer;
@@ -28,7 +28,7 @@ import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class CustomerSignInCommandTest extends IntegrationTest {
+public class CustomerSignInCommandTest extends CustomerIntegrationTest {
     @Test
     public void execution() throws Exception {
         withCustomer(client(), customer -> {

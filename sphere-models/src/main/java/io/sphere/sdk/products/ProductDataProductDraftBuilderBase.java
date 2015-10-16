@@ -9,6 +9,8 @@ import io.sphere.sdk.taxcategories.TaxCategory;
 import javax.annotation.Nullable;
 import java.util.Collections;
 import java.util.Optional;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDraftBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
@@ -23,6 +25,8 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     private Reference<TaxCategory> taxCategory;
     @Nullable
     private Reference<State> state;
+    @Nullable
+    private CategoryOrderHints categoryOrderHints;
 
     protected ProductDataProductDraftBuilderBase(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
@@ -54,8 +58,17 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
         return getThis();
     }
 
+    public T categories(final List<Reference<Category>> categories) {
+        return categories(new LinkedHashSet<>(categories));
+    }
+
     public T searchKeywords(final SearchKeywords searchKeywords) {
         this.searchKeywords = searchKeywords;
+        return getThis();
+    }
+
+    public T categoryOrderHints(@Nullable final CategoryOrderHints categoryOrderHints) {
+        this.categoryOrderHints = categoryOrderHints;
         return getThis();
     }
 
@@ -112,6 +125,11 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     @Nullable
     public Reference<State> getState() {
         return state;
+    }
+
+    @Nullable
+    public CategoryOrderHints getCategoryOrderHints() {
+        return categoryOrderHints;
     }
 
     protected abstract T getThis();

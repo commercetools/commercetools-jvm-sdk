@@ -3,6 +3,7 @@ package io.sphere.sdk.products.commands;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.products.CategoryOrderHints;
 import io.sphere.sdk.commands.UpdateAction;
 import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.*;
@@ -32,6 +33,7 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.time.ZoneOffset;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -100,15 +102,28 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withProductAndUnconnectedCategory(client(), (final Product product, final Category category) -> {
             assertThat(product.getMasterData().getStaged().getCategories()).isEmpty();
 
+            final String orderHint = "0.123";
             final Product productWithCategory = client()
-                    .execute(ProductUpdateCommand.of(product, AddToCategory.of(category)));
+                    .execute(ProductUpdateCommand.of(product, AddToCategory.of(category, orderHint)));
 
             ReferenceAssert.assertThat(productWithCategory.getMasterData().getStaged().getCategories().stream().findAny().get()).references(category);
+            assertThat(productWithCategory.getMasterData().getStaged().getCategoryOrderHints().get(category.getId())).isEqualTo(orderHint);
 
             final Product productWithoutCategory = client()
                     .execute(ProductUpdateCommand.of(productWithCategory, RemoveFromCategory.of(category)));
 
             assertThat(productWithoutCategory.getMasterData().getStaged().getCategories()).isEmpty();
+        });
+    }
+
+    @Test
+    public void setCategoryOrderHint() throws Exception {
+        withProductInCategory(client(), (product, category) -> {
+            final Product updatedProduct = execute(ProductUpdateCommand.of(product, SetCategoryOrderHint.of(category.getId(), "0.1234")));
+
+            final CategoryOrderHints actual = updatedProduct.getMasterData().getStaged().getCategoryOrderHints();
+            assertThat(actual).isEqualTo(CategoryOrderHints.of(category.getId(), "0.1234"));
+            assertThat(actual.getAsMap()).isEqualTo(Collections.singletonMap(category.getId(), "0.1234"));
         });
     }
 

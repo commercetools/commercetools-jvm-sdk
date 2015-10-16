@@ -56,5 +56,8 @@ public interface ProductDraft extends WithLocalizedSlug, MetaAttributes {
     SearchKeywords getSearchKeywords();
 
     @Nullable
+    CategoryOrderHints getCategoryOrderHints();
+
+    @Nullable
     Reference<State> getState();
 }

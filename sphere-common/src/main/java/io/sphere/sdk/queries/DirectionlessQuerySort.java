@@ -20,6 +20,10 @@ public class DirectionlessQuerySort<T> extends Base {
         return getQuerySort(DESC);
     }
 
+    public static <T> DirectionlessQuerySort<T> of(final QueryModel<T> path) {
+        return new DirectionlessQuerySort<>(path);
+    }
+
     private QuerySort<T> getQuerySort(final QuerySortDirection direction) {
         return new SphereQuerySort<>(path, direction);
     }
