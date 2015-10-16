@@ -217,7 +217,7 @@ final public class SphereJsonUtils {
     }
 
     /** Very simple way to "erase" passwords -
-     *  replaces all field values whose names contains {@code 'pass'} by {@code 'xxxxx'}. */
+     *  replaces all field values whose names contains {@code 'pass'} by {@code '**removed from output**'}. */
     private static JsonNode secure(JsonNode node) {
         if (node.isObject()) {
             ObjectNode objectNode = (ObjectNode)node;
@@ -225,7 +225,7 @@ final public class SphereJsonUtils {
             while (fields.hasNext()) {
                 Map.Entry<String, JsonNode> field = fields.next();
                 if (field.getValue().isTextual() && field.getKey().toLowerCase().contains("pass")) {
-                    objectNode.put(field.getKey(), "xxxxx");
+                    objectNode.put(field.getKey(), "**removed from output**");
                 } else {
                     secure(field.getValue());
                 }

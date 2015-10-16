@@ -249,11 +249,4 @@ public class CustomerDraft extends Base {
     private CustomerDraftBuilder newBuilder() {
         return CustomerDraftBuilder.of(this);
     }
-
-    //it is final to prevent subclasses to log the password
-    @Override
-    public final String toString() {
-        final CustomerDraft outObject = withPassword("**removed from output**");
-        return ToStringBuilder.reflectionToString(outObject, SdkDefaults.TO_STRING_STYLE);
-    }
 }

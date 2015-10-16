@@ -3,9 +3,9 @@ package io.sphere.sdk.customers.commands;
 import io.sphere.sdk.client.ErrorResponseException;
 import io.sphere.sdk.client.SphereClient;
 import io.sphere.sdk.customers.Customer;
+import io.sphere.sdk.customers.CustomerIntegrationTest;
 import io.sphere.sdk.customers.CustomerSignInResult;
 import io.sphere.sdk.customers.errors.CustomerInvalidCredentials;
-import io.sphere.sdk.test.IntegrationTest;
 import org.junit.Test;
 
 import java.util.concurrent.CompletionStage;
@@ -16,7 +16,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 import static org.junit.Assert.fail;
 
-public class CustomerChangePasswordCommandTest extends IntegrationTest {
+public class CustomerChangePasswordCommandTest extends CustomerIntegrationTest {
 
     @Test
     public void execution() throws Exception {

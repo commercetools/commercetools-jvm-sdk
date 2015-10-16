@@ -2,7 +2,7 @@ package io.sphere.sdk.models;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 /**
  * A base class which implements {@link Object#toString()}, {@link Object#hashCode()} and {@link Object#equals(Object)} by reflection.
@@ -21,6 +21,9 @@ public abstract class Base {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this, SdkDefaults.TO_STRING_STYLE);
+        return new ReflectionToStringBuilder(this, SdkDefaults.TO_STRING_STYLE)
+                //important to not log passwords
+                .setExcludeFieldNames("password", "newPassword", "currentPassword", "oldPassword")
+                .build();
     }
 }
