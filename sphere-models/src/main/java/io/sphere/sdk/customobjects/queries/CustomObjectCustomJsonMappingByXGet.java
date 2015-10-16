@@ -33,6 +33,7 @@ abstract class CustomObjectCustomJsonMappingByXGet<T> extends SphereRequestBase 
     /**
      *
      * @deprecated override {@link #deserializeCustomObject(HttpResponse)} instead.
+     * @return function to deserialize custom object
      */
     @Deprecated
     protected final Function<HttpResponse, CustomObject<T>> deserializeCustomObject() {

@@ -32,6 +32,7 @@ public interface Cart extends CartLike<Cart> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId() {

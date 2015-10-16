@@ -57,6 +57,7 @@ public interface Product extends ProductLike<Product, Product>, Resource<Product
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId(){

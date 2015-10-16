@@ -34,6 +34,7 @@ public interface ProductType extends Resource<ProductType>, AttributeDefinitionC
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId(){

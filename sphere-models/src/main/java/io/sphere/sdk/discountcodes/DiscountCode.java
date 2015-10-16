@@ -48,6 +48,7 @@ public interface DiscountCode extends Resource<DiscountCode> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId(){

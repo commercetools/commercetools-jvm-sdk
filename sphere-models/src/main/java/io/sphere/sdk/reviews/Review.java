@@ -44,6 +44,7 @@ public interface Review extends Resource<Review> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId() {

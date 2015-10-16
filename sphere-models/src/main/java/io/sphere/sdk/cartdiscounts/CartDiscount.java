@@ -45,6 +45,7 @@ public interface CartDiscount extends Resource<CartDiscount> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId() {

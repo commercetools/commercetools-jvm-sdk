@@ -79,6 +79,8 @@ public class CartDraft {
     /**
      *
      * @deprecated use {@link #withCustom(CustomFieldsDraft)} instead
+     * @param custom draft for custom fields
+     * @return CartDraft with custom fields
      */
     @Deprecated
     public CartDraft witCustom(@Nullable final CustomFieldsDraft custom) {

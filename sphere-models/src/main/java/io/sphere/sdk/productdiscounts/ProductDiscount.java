@@ -35,6 +35,7 @@ public interface ProductDiscount extends Resource<ProductDiscount> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId(){

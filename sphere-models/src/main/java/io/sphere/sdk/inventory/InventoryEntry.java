@@ -39,6 +39,7 @@ public interface InventoryEntry extends Resource<InventoryEntry> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId(){

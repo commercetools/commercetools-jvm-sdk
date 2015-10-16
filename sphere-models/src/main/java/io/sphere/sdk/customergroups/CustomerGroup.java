@@ -34,6 +34,7 @@ public interface CustomerGroup extends Resource<CustomerGroup> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId(){
