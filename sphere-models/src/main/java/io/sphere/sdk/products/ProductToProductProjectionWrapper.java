@@ -115,4 +115,10 @@ class ProductToProductProjectionWrapper implements ProductProjection {
     public SearchKeywords getSearchKeywords() {
         return productData.getSearchKeywords();
     }
+
+    @Nullable
+    @Override
+    public CategoryOrderHints getCategoryOrderHints() {
+        return productData.getCategoryOrderHints();
+    }
 }

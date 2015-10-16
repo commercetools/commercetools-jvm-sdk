@@ -14,6 +14,7 @@ public class OrderByIdGetTest extends IntegrationTest {
         withOrder(client(), order -> {
             final Order loadedOrder = execute(OrderByIdGet.of(order.getId()));
             assertThat(loadedOrder.getId()).isEqualTo(order.getId());
+            return order;
         });
     }
 }

@@ -1,5 +1,6 @@
 package io.sphere.sdk.orders.commands;
 
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.products.attributes.Attribute;
 import io.sphere.sdk.products.attributes.AttributeImportDraft;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
@@ -237,8 +238,19 @@ public class OrderImportCommandTest extends IntegrationTest {
                         return 2L;
                     }
 
+                    @Deprecated
                     @Override
                     public DiscountedLineItemPrice getDiscountedPrice() {
+                        return null;
+                    }
+
+                    @Override
+                    public MonetaryAmount getTotalPrice() {
+                        return null;
+                    }
+
+                    @Override
+                    public List<DiscountedLineItemPriceForQuantity> getDiscountedPricePerQuantity() {
                         return null;
                     }
 

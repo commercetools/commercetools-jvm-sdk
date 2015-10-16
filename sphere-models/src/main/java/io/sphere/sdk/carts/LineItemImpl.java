@@ -2,6 +2,7 @@ package io.sphere.sdk.carts;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.cartdiscounts.DiscountedLineItemPrice;
+import io.sphere.sdk.cartdiscounts.DiscountedLineItemPriceForQuantity;
 import io.sphere.sdk.channels.Channel;
 import io.sphere.sdk.models.LocalizedString;
 import io.sphere.sdk.models.Reference;
@@ -11,7 +12,11 @@ import io.sphere.sdk.taxcategories.TaxRate;
 import io.sphere.sdk.types.CustomFields;
 
 import javax.annotation.Nullable;
+import javax.money.MonetaryAmount;
+import java.util.List;
 import java.util.Set;
+
+import static java.util.Collections.emptyList;
 
 final class LineItemImpl extends LineItemLikeImpl implements LineItem {
 
@@ -29,6 +34,8 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     private final Reference<Channel> distributionChannel;
     @Nullable
     private final CustomFields custom;
+    private final MonetaryAmount totalPrice;
+    private final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity;
 
     @JsonCreator
     LineItemImpl(final String id, final String productId, final LocalizedString name,
@@ -36,7 +43,8 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
                  final Set<ItemState> state, final TaxRate taxRate,
                  final Reference<Channel> supplyChannel, final DiscountedLineItemPrice discountedPrice,
                  final LocalizedString productSlug, final Reference<Channel> distributionChannel,
-                 @Nullable final CustomFields custom) {
+                 @Nullable final CustomFields custom, final MonetaryAmount totalPrice,
+                 final List<DiscountedLineItemPriceForQuantity> discountedPricePerQuantity) {
         super(id, state, quantity, discountedPrice);
         this.productId = productId;
         this.name = name;
@@ -47,6 +55,8 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
         this.productSlug = productSlug;
         this.distributionChannel = distributionChannel;
         this.custom = custom;
+        this.totalPrice = totalPrice;
+        this.discountedPricePerQuantity = discountedPricePerQuantity != null ? discountedPricePerQuantity : emptyList();
     }
 
     @Override
@@ -97,5 +107,15 @@ final class LineItemImpl extends LineItemLikeImpl implements LineItem {
     @Nullable
     public CustomFields getCustom() {
         return custom;
+    }
+
+    @Override
+    public MonetaryAmount getTotalPrice() {
+        return totalPrice;
+    }
+
+    @Override
+    public List<DiscountedLineItemPriceForQuantity> getDiscountedPricePerQuantity() {
+        return discountedPricePerQuantity;
     }
 }

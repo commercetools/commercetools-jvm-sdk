@@ -45,7 +45,7 @@ final class SphereClientImpl extends AutoCloseableService implements SphereClien
             final String output;
             if (httpRequest.getBody() != null && httpRequest.getBody() instanceof StringHttpRequestBody) {
                 final StringHttpRequestBody body = (StringHttpRequestBody) httpRequest.getBody();
-                final String unformattedJson = body.getString();
+                final String unformattedJson = body.getSecuredBody();
                 output = "send: " + unformattedJson + "\nformatted: " + SphereJsonUtils.prettyPrint(unformattedJson);
             } else {
                 output = "no request body present";

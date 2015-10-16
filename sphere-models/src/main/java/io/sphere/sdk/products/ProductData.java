@@ -61,4 +61,7 @@ public interface ProductData extends ProductDataLike {
 
     @Override
     SearchKeywords getSearchKeywords();
+
+    @Nullable
+    CategoryOrderHints getCategoryOrderHints();
 }

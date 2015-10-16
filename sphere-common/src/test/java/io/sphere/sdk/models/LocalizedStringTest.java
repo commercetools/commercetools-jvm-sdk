@@ -294,6 +294,6 @@ public class LocalizedStringTest {
     @Test
     public void deserializeWithFullLocale() {
         final LocalizedString localizedString = LocalizedString.of(Locale.US, "kids", Locale.UK, "children");
-        assertThat(SphereJsonUtils.toJsonString(localizedString)).isEqualTo(FULL_LOCALE_JSON_STRING);
+        assertThat(SphereJsonUtils.toJsonNode(localizedString)).isEqualTo(SphereJsonUtils.parse(FULL_LOCALE_JSON_STRING));
     }
 }

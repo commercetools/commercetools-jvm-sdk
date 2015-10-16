@@ -72,4 +72,9 @@ public final class ProductProjectionQueryModel extends ProductDataQueryModelBase
     public ProductVariantQueryModel<ProductProjection> variants() {
         return super.variants();
     }
+
+    @Override
+    public CategoryOrderHintsQueryModel<ProductProjection> categoryOrderHints() {
+        return super.categoryOrderHints();
+    }
 }

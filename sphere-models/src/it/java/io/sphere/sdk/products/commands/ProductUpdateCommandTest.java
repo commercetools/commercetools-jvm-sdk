@@ -3,18 +3,25 @@ package io.sphere.sdk.products.commands;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import io.sphere.sdk.categories.Category;
+import io.sphere.sdk.products.CategoryOrderHints;
 import io.sphere.sdk.commands.UpdateAction;
+import io.sphere.sdk.messages.queries.MessageQuery;
 import io.sphere.sdk.models.*;
+import io.sphere.sdk.orders.messages.OrderStateChangedMessage;
 import io.sphere.sdk.products.*;
 import io.sphere.sdk.products.attributes.AttributeAccess;
 import io.sphere.sdk.products.attributes.AttributeDraft;
 import io.sphere.sdk.products.attributes.NamedAttributeAccess;
 import io.sphere.sdk.products.commands.updateactions.*;
+import io.sphere.sdk.products.messages.ProductStateTransitionMessage;
 import io.sphere.sdk.products.queries.ProductByIdGet;
 import io.sphere.sdk.products.queries.ProductProjectionByIdGet;
+import io.sphere.sdk.queries.PagedQueryResult;
 import io.sphere.sdk.search.SearchKeyword;
 import io.sphere.sdk.search.SearchKeywords;
 import io.sphere.sdk.search.tokenizer.CustomSuggestTokenizer;
+import io.sphere.sdk.states.StateFixtures;
+import io.sphere.sdk.states.StateType;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Colors;
 import io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.Sizes;
 import io.sphere.sdk.taxcategories.TaxCategoryFixtures;
@@ -26,6 +33,7 @@ import org.junit.Test;
 
 import javax.money.MonetaryAmount;
 import java.time.ZoneOffset;
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Random;
@@ -33,6 +41,9 @@ import java.util.Random;
 import static io.sphere.sdk.models.DefaultCurrencyUnits.EUR;
 import static io.sphere.sdk.models.LocalizedString.ofEnglishLocale;
 import static io.sphere.sdk.products.ProductFixtures.*;
+import static io.sphere.sdk.states.StateFixtures.withState;
+import static io.sphere.sdk.states.StateFixtures.withStateByBuilder;
+import static io.sphere.sdk.states.StateType.PRODUCT_STATE;
 import static io.sphere.sdk.suppliers.TShirtProductTypeDraftSupplier.MONEY_ATTRIBUTE_NAME;
 import static io.sphere.sdk.test.SphereTestUtils.*;
 import static io.sphere.sdk.test.SphereTestUtils.MASTER_VARIANT_ID;
@@ -91,15 +102,28 @@ public class ProductUpdateCommandTest extends IntegrationTest {
         withProductAndUnconnectedCategory(client(), (final Product product, final Category category) -> {
             assertThat(product.getMasterData().getStaged().getCategories()).isEmpty();
 
+            final String orderHint = "0.123";
             final Product productWithCategory = client()
-                    .execute(ProductUpdateCommand.of(product, AddToCategory.of(category)));
+                    .execute(ProductUpdateCommand.of(product, AddToCategory.of(category, orderHint)));
 
             ReferenceAssert.assertThat(productWithCategory.getMasterData().getStaged().getCategories().stream().findAny().get()).references(category);
+            assertThat(productWithCategory.getMasterData().getStaged().getCategoryOrderHints().get(category.getId())).isEqualTo(orderHint);
 
             final Product productWithoutCategory = client()
                     .execute(ProductUpdateCommand.of(productWithCategory, RemoveFromCategory.of(category)));
 
             assertThat(productWithoutCategory.getMasterData().getStaged().getCategories()).isEmpty();
+        });
+    }
+
+    @Test
+    public void setCategoryOrderHint() throws Exception {
+        withProductInCategory(client(), (product, category) -> {
+            final Product updatedProduct = execute(ProductUpdateCommand.of(product, SetCategoryOrderHint.of(category.getId(), "0.1234")));
+
+            final CategoryOrderHints actual = updatedProduct.getMasterData().getStaged().getCategoryOrderHints();
+            assertThat(actual).isEqualTo(CategoryOrderHints.of(category.getId(), "0.1234"));
+            assertThat(actual.getAsMap()).isEqualTo(Collections.singletonMap(category.getId(), "0.1234"));
         });
     }
 
@@ -469,5 +493,27 @@ public class ProductUpdateCommandTest extends IntegrationTest {
 
              return updatedProduct;
          });
+    }
+
+    @Test
+    public void transitionState() {
+        withStateByBuilder(client(), builder -> builder.type(PRODUCT_STATE),  state -> {
+            withUpdateableProduct(client(), product -> {
+                assertThat(product.getState()).isNull();
+
+                final Product updatedProduct = execute(ProductUpdateCommand.of(product, asList(TransitionState.of(state))));
+
+                assertThat(updatedProduct.getState()).isEqualTo(state.toReference());
+
+                final PagedQueryResult<ProductStateTransitionMessage> messageQueryResult = execute(MessageQuery.of()
+                        .withPredicates(m -> m.resource().is(product))
+                        .forMessageType(ProductStateTransitionMessage.MESSAGE_HINT));
+
+                final ProductStateTransitionMessage message = messageQueryResult.head().get();
+                assertThat(message.getState()).isEqualTo(state.toReference());
+
+                return updatedProduct;
+            });
+        });
     }
 }

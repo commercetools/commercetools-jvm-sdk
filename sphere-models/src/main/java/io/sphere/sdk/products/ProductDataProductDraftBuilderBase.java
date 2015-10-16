@@ -3,10 +3,14 @@ package io.sphere.sdk.products;
 import io.sphere.sdk.categories.Category;
 import io.sphere.sdk.models.*;
 import io.sphere.sdk.search.SearchKeywords;
+import io.sphere.sdk.states.State;
 import io.sphere.sdk.taxcategories.TaxCategory;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
+import java.util.Optional;
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDraftBuilderBase<T>> extends Base implements WithLocalizedSlug, MetaAttributes {
@@ -19,6 +23,10 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     private Set<Reference<Category>> categories = Collections.emptySet();
     private SearchKeywords searchKeywords = SearchKeywords.of();
     private Reference<TaxCategory> taxCategory;
+    @Nullable
+    private Reference<State> state;
+    @Nullable
+    private CategoryOrderHints categoryOrderHints;
 
     protected ProductDataProductDraftBuilderBase(final LocalizedString name, final LocalizedString slug) {
         this.name = name;
@@ -50,8 +58,17 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
         return getThis();
     }
 
+    public T categories(final List<Reference<Category>> categories) {
+        return categories(new LinkedHashSet<>(categories));
+    }
+
     public T searchKeywords(final SearchKeywords searchKeywords) {
         this.searchKeywords = searchKeywords;
+        return getThis();
+    }
+
+    public T categoryOrderHints(@Nullable final CategoryOrderHints categoryOrderHints) {
+        this.categoryOrderHints = categoryOrderHints;
         return getThis();
     }
 
@@ -98,6 +115,21 @@ abstract class ProductDataProductDraftBuilderBase<T extends ProductDataProductDr
     public T taxCategory(final Referenceable<TaxCategory> taxCategory) {
         this.taxCategory = taxCategory.toReference();
         return getThis();
+    }
+
+    public T state(@Nullable final Referenceable<State> state) {
+        this.state = Optional.ofNullable(state).map(Referenceable::toReference).orElse(null);
+        return getThis();
+    }
+
+    @Nullable
+    public Reference<State> getState() {
+        return state;
+    }
+
+    @Nullable
+    public CategoryOrderHints getCategoryOrderHints() {
+        return categoryOrderHints;
     }
 
     protected abstract T getThis();

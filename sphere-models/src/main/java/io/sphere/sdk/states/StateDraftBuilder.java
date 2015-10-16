@@ -57,7 +57,6 @@ public final class StateDraftBuilder extends Base implements Builder<StateDraft>
         return this;
     }
 
-
     public StateDraftBuilder type(final StateType type) {
         this.type = type;
         return this;
