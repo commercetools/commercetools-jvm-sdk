@@ -20,7 +20,12 @@ abstract class LineItemLikeImpl extends Base implements LineItemLike {
         this.quantity = quantity;
     }
 
+    /**
+     *
+     * @deprecated use {@link #getDiscountedPricePerQuantity()} instead
+     */
     @Nullable
+    @Deprecated
     public DiscountedLineItemPrice getDiscountedPrice() {
         return discountedPrice;
     }
