@@ -52,6 +52,7 @@ public interface ShippingMethod extends Resource<ShippingMethod> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId() {

@@ -21,6 +21,8 @@ public final class CustomerCreateTokenCommand extends CommandImpl<CustomerToken>
 
     /**
      * @deprecated use {@link CustomerCreatePasswordTokenCommand} instead
+     * @param customerEmail email of the customer to create the token
+     * @return CustomerCreateTokenCommand
      */
     @Deprecated
     public static CustomerCreateTokenCommand of(final String customerEmail) {

@@ -30,6 +30,13 @@ public interface Review extends Resource<Review> {
     @Nullable
     Double getScore();
 
+    /**
+     * Returns this state of this Review.
+     *
+     * @return state of this review or null
+     *
+     * @see io.sphere.sdk.reviews.commands.updateactions.TransitionState
+     */
     @Nullable
     Reference<State> getState();
 
@@ -44,6 +51,7 @@ public interface Review extends Resource<Review> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId() {

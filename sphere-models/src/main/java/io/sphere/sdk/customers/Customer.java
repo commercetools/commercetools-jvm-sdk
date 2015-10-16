@@ -183,6 +183,7 @@ public interface Customer extends Resource<Customer>, Custom {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId(){

@@ -42,6 +42,7 @@ public interface Channel extends Resource<Channel> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId(){

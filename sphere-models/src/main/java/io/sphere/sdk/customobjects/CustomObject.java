@@ -204,6 +204,7 @@ public interface CustomObject<T> extends ResourceView<CustomObject<T>, CustomObj
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId() {

@@ -136,7 +136,7 @@ public class SphereException extends RuntimeException {
             final Optional<String> stringBodyOfHttpRequestIntentSupplier = Optional.ofNullable(httpRequestIntent)
                     .map(r -> r.getBody())
                     .filter(r -> r instanceof StringHttpRequestBody)
-                    .map(r -> ((StringHttpRequestBody) r).getString());
+                    .map(r -> ((StringHttpRequestBody) r).getSecuredBody());
             return Optional.ofNullable(stringBodyOfHttpRequest.orElse(stringBodyOfHttpRequestIntentSupplier.orElse(null)))
                     .map(SphereJsonUtils::prettyPrint)
                     .map(s -> "http request formatted body: " + s + "\n")
@@ -150,7 +150,7 @@ public class SphereException extends RuntimeException {
         return Optional.ofNullable(httpRequest)
                 .map(r -> r.getBody())
                 .filter(x -> x instanceof StringHttpRequestBody)
-                .map(b -> ((StringHttpRequestBody) b).getString());
+                .map(b -> ((StringHttpRequestBody) b).getSecuredBody());
     }
 
 

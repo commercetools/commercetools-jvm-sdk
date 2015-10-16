@@ -22,6 +22,7 @@ public interface LineItemLike extends Custom {
     /**
      *
      * @deprecated use {@link #getDiscountedPricePerQuantity()} instead
+     * @return DiscountedLineItemPrice
      */
     @Nullable
     @Deprecated

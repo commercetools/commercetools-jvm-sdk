@@ -16,6 +16,8 @@ import java.util.function.Function;
 public interface CustomerByTokenGet extends MetaModelGetDsl<Customer, Customer, CustomerByTokenGet, CustomerExpansionModel<Customer>> {
     /**
      * @deprecated use {@link CustomerByPasswordTokenGet#of(String)}
+     * @param token token value belonging to the customer
+     * @return CustomerByTokenGet
      */
     @Deprecated
     static CustomerByTokenGet of(final String token) {
@@ -24,6 +26,8 @@ public interface CustomerByTokenGet extends MetaModelGetDsl<Customer, Customer, 
 
     /**
      * @deprecated use {@link CustomerByPasswordTokenGet#of(CustomerToken)}
+     * @param token the token belonging to the customer
+     * @return CustomerByTokenGet
      */
     @Deprecated
     static CustomerByTokenGet of(final CustomerToken token) {

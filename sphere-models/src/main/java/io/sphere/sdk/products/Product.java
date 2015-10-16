@@ -33,6 +33,13 @@ public interface Product extends ProductLike<Product, Product>, Resource<Product
 
     ProductCatalogData getMasterData();
 
+    /**
+     * Returns this state of this Product.
+     *
+     * @return state of this product or null
+     *
+     * @see io.sphere.sdk.products.commands.updateactions.TransitionState
+     */
     @Nullable
     Reference<State> getState();
 
@@ -57,6 +64,7 @@ public interface Product extends ProductLike<Product, Product>, Resource<Product
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId(){

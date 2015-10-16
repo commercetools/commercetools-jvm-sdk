@@ -15,6 +15,7 @@ public interface Message extends Resource<Message> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId(){

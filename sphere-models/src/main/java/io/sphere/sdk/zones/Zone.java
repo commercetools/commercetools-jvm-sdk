@@ -34,6 +34,7 @@ public interface Zone extends Resource<Zone> {
     /**
      *
      * @deprecated use {@link #referenceTypeId()} instead
+     * @return referenceTypeId
      */
     @Deprecated
     static String typeId(){
