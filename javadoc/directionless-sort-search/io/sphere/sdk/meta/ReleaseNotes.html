@@ -122,6 +122,51 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
+
+
+ <h3 class=released-version id="v1_0_0_M19">1.0.0-M19</h3>
+
+ <ul>
+ <li class=new-in-release>The Search API now allows multi-sort by accepting a list of <a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search"><code>SortExpression</code></a> instead of a single value.</li>
+ <li class=new-in-release>Introduced explicit Set product custom attribute models to build search expressions (i.e. facets, filters and sort expressions).</li>
+ <li class=new-in-release>Introduced methods <a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getTermFacetResult-io.sphere.sdk.search.TermFacetExpression-"><code>PagedSearchResult.getTermFacetResult(io.sphere.sdk.search.TermFacetExpression&lt;T&gt;)</code></a>, <a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getRangeFacetResult-io.sphere.sdk.search.RangeFacetExpression-"><code>PagedSearchResult.getRangeFacetResult(io.sphere.sdk.search.RangeFacetExpression&lt;T&gt;)</code></a> and <a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getFilteredFacetResult-io.sphere.sdk.search.FilteredFacetExpression-"><code>PagedSearchResult.getFilteredFacetResult(io.sphere.sdk.search.FilteredFacetExpression&lt;T&gt;)</code></a> that accept the facet path.</li>
+ <li class=change-in-release>Introduced search filter methods <a href="../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html#byAny-java.lang.Iterable-"><code>TermFilterSearchModel.byAny(java.lang.Iterable&lt;V&gt;)</code></a> and <a href="../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html#byAll-java.lang.Iterable-"><code>TermFilterSearchModel.byAll(java.lang.Iterable&lt;V&gt;)</code></a> (OR and AND semantics, respectively), along with the counterpart for range filters<a href="../../../../io/sphere/sdk/search/model/RangeFilterSearchModel.html#byAnyRange-java.lang.Iterable-"><code>RangeFilterSearchModel.byAnyRange(java.lang.Iterable&lt;io.sphere.sdk.search.model.FilterRange&lt;V&gt;&gt;)</code></a> and <a href="../../../../io/sphere/sdk/search/model/RangeFilterSearchModel.html#byAllRanges-java.lang.Iterable-"><code>RangeFilterSearchModel.byAllRanges(java.lang.Iterable&lt;io.sphere.sdk.search.model.FilterRange&lt;V&gt;&gt;)</code></a>), change that affected the signature of all filter methods which now return a list of <a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search"><code>FilterExpression</code></a> instead of a single value.</li>
+ <li class=change-in-release>The Search Sort Model offers now the methods <a href="../../../../io/sphere/sdk/search/model/SortSearchModel.html#byAsc--"><code>SortSearchModel.byAsc()</code></a> and <a href="../../../../io/sphere/sdk/search/model/SortSearchModel.html#byDesc--"><code>SortSearchModel.byDesc()</code></a>, as well as <a href="../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html#byAscWithMax--"><code>MultiValueSortSearchModel.byAscWithMax()</code></a> and <a href="../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html#byDescWithMin--"><code>MultiValueSortSearchModel.byDescWithMin()</code></a> for multi-valued attributes.</li>
+ <li class=change-in-release>Removed <code>io.sphere.sdk.search.UntypedSearchModel</code> class and instead provide methods to give filter and facet parameters as simple strings.
+ <div class="rn-hidden">
+ <div id="io-sphere-sdk-products-search-ProductProjectionSearchFiltersIntegrationTest-filterByValueAsString%s" class=code-example><pre><code class='java'>final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+        .plusQueryFilters(filter -&gt; filter.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAnyAsString(asList("36", "38")));
+final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(search);
+assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFiltersIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+ </div>
+ </li>
+ <li class=change-in-release>While before the Search Model was built using the structure <code>attribute + action + parameters</code>, now it changed to <code>action + attribute + parameters</code>, in order to split the model into 3 independent models: Search Filter Model, Search Facet Model and Search Sort Model.
+ <div class="rn-hidden">
+ Before it looked like:
+ <pre><code>
+ ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+ .plusQueryFilters(product -&#60; product.name().locale(ENGLISH).filtered().by("shoes"));
+ PagedSearchResult<ProductProjection> result = client.execute(search);
+ </code></pre>
+
+ Now it is built as follows:
+ <pre><code>
+ ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+ .plusQueryFilters(filter -&#60; filter.name().locale(ENGLISH).by("shoes"));
+ PagedSearchResult<ProductProjection> result = client.execute(search);
+ </code></pre>
+ </div>
+ </li>
+ <li class=change-in-release>Renamed <code>SearchSort</code> to <a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search"><code>SortExpression</code></a>, which now shares the same properties as <a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search"><code>FacetExpression</code></a> and <a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search"><code>FilterExpression</code></a> under the <a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="interface in io.sphere.sdk.search"><code>SearchExpression</code></a> interface.</li>
+ <li class=change-in-release>The static factory method to directly build unsafe <a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search"><code>FacetExpression</code></a> is now located in <a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="interface in io.sphere.sdk.search"><code>TermFacetExpression</code></a>, <a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="interface in io.sphere.sdk.search"><code>RangeFacetExpression</code></a> and <a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search"><code>FilteredFacetExpression</code></a>, so that a facet expression for the corresponding type is obtained.</li>
+ <li class=change-in-release>Moved related Search Model classes from <code>io.sphere.sdk.search</code> to <code>io.sphere.sdk.search.model</code> package, to clearly separate the Search Model from the Search API classes.</li>
+ <li class=removed-in-release>Removed type parameters from <a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><code>TermFacetResult</code></a>, <a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><code>RangeFacetResult</code></a> and <a href="../../../../io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search"><code>FilteredFacetResult</code></a>, which now return simple strings as they are received from the platform.</li>
+ </ul>
+
+
+
+
  <h3 class=released-version id="v1_0_0_M18">1.0.0-M18</h3>
 
  <ul>
