@@ -2,6 +2,7 @@ package io.sphere.sdk.search;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.sphere.sdk.models.Base;
+import io.sphere.sdk.search.model.RangeStats;
 
 import java.util.List;
 

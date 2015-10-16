@@ -2,24 +2,15 @@ package io.sphere.sdk.search;
 
 /**
  * Facets calculate statistical counts to aid in faceted navigation.
- * @param <T> Type of the resource for the faceted search
+ * Example: variants.attributes.color:"green","yellow"
+ * @param <T> Type of the resource for the facet
  */
-public interface FacetExpression<T> {
-    /**
-     * returns a facet expression.
-     * Example: variants.attributes.color as myColor
-     * @return String with unescaped sphere facet expression
-     */
-    String toSearchExpression();
+public interface FacetExpression<T> extends SearchExpression<T> {
 
     /**
-     * Generates the attribute path for the facet.
+     * Gets the path of the facet result, which is either the alias or the search path if no alias defined.
      * Example: variants.attributes.color
-     * @return the path for the attribute to be faceted
+     * @return the path to access the facet result.
      */
-    String attributePath();
-
-    static <T> FacetExpression<T> of(final String sphereFacetExpression) {
-        return new SimpleFacetExpression<>(sphereFacetExpression);
-    }
+    String resultPath();
 }

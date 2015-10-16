@@ -15,9 +15,10 @@ import java.util.function.Function;
 /**
  * Searches for products.
  *
- * Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/ProductSearchDocumentation.html">Product Search API</a> for more information.
+ * Consult the documentation for <a href="{@docRoot}/io/sphere/sdk/meta/SearchDocumentation.html">Product Search API</a> for more information.
  */
-public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProjection, ProductProjectionSearch, ProductProjectionSearchModel, ProductProjectionExpansionModel<ProductProjection>> {
+public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProjection, ProductProjectionSearch, ProductProjectionSortSearchModel,
+        ProductProjectionFilterSearchModel, ProductProjectionFacetSearchModel, ProductProjectionExpansionModel<ProductProjection>> {
 
     static TypeReference<PagedSearchResult<ProductProjection>> resultTypeReference() {
         return new TypeReference<PagedSearchResult<ProductProjection>>(){
@@ -63,99 +64,45 @@ public interface ProductProjectionSearch extends MetaModelSearchDsl<ProductProje
 
     @Override
     ProductProjectionSearch withFuzzy(final Boolean fuzzy);
-
+    
     @Override
     ProductProjectionSearch withFacets(final List<FacetExpression<ProductProjection>> facets);
 
     @Override
-    ProductProjectionSearch withFacets(final FacetExpression<ProductProjection> facet);
+    ProductProjectionSearch plusFacets(final Function<ProductProjectionFacetSearchModel, FacetExpression<ProductProjection>> m);
 
     @Override
-    ProductProjectionSearch withFacets(final Function<ProductProjectionSearchModel, FacetExpression<ProductProjection>> m);
+    ProductProjectionSearch plusResultFilters(final List<FilterExpression<ProductProjection>> filterExpressions);
 
     @Override
-    ProductProjectionSearch plusFacets(final List<FacetExpression<ProductProjection>> facets);
+    ProductProjectionSearch plusResultFilters(final Function<ProductProjectionFilterSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
-    ProductProjectionSearch plusFacets(final FacetExpression<ProductProjection> facet);
+    ProductProjectionSearch plusQueryFilters(final List<FilterExpression<ProductProjection>> filterExpressions);
 
     @Override
-    ProductProjectionSearch plusFacets(final Function<ProductProjectionSearchModel, FacetExpression<ProductProjection>> m);
+    ProductProjectionSearch plusQueryFilters(final Function<ProductProjectionFilterSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
-    ProductProjectionSearch withResultFilters(final List<FilterExpression<ProductProjection>> resultFilters);
+    ProductProjectionSearch plusFacetFilters(final List<FilterExpression<ProductProjection>> filterExpressions);
 
     @Override
-    ProductProjectionSearch withResultFilters(final FilterExpression<ProductProjection> resultFilter);
+    ProductProjectionSearch plusFacetFilters(final Function<ProductProjectionFilterSearchModel, List<FilterExpression<ProductProjection>>> m);
 
     @Override
-    ProductProjectionSearch withResultFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
+    ProductProjectionSearch plusSort(final List<SortExpression<ProductProjection>> sortExpressions);
 
     @Override
-    ProductProjectionSearch plusResultFilters(final List<FilterExpression<ProductProjection>> resultFilters);
+    ProductProjectionSearch plusSort(final SortExpression<ProductProjection> sortExpression);
 
     @Override
-    ProductProjectionSearch plusResultFilters(final FilterExpression<ProductProjection> resultFilter);
-
-    @Override
-    ProductProjectionSearch plusResultFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
-
-    @Override
-    ProductProjectionSearch withQueryFilters(final List<FilterExpression<ProductProjection>> queryFilters);
-
-    @Override
-    ProductProjectionSearch withQueryFilters(final FilterExpression<ProductProjection> queryFilter);
-
-    @Override
-    ProductProjectionSearch withQueryFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
-
-    @Override
-    ProductProjectionSearch plusQueryFilters(final List<FilterExpression<ProductProjection>> queryFilters);
-
-    @Override
-    ProductProjectionSearch plusQueryFilters(final FilterExpression<ProductProjection> queryFilter);
-
-    @Override
-    ProductProjectionSearch plusQueryFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
-
-    @Override
-    ProductProjectionSearch withFacetFilters(final List<FilterExpression<ProductProjection>> facetFilters);
-
-    @Override
-    ProductProjectionSearch withFacetFilters(final FilterExpression<ProductProjection> facetFilter);
-
-    @Override
-    ProductProjectionSearch withFacetFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
-
-    @Override
-    ProductProjectionSearch plusFacetFilters(final List<FilterExpression<ProductProjection>> facetFilters);
-
-    @Override
-    ProductProjectionSearch plusFacetFilters(final FilterExpression<ProductProjection> facetFilter);
-
-    @Override
-    ProductProjectionSearch plusFacetFilters(final Function<ProductProjectionSearchModel, FilterExpression<ProductProjection>> m);
-
-    @Override
-    ProductProjectionSearch withSort(final SearchSort<ProductProjection> sort);
-
-    @Override
-    ProductProjectionSearch withSort(final Function<ProductProjectionSearchModel, SearchSort<ProductProjection>> m);
+    ProductProjectionSearch plusSort(final Function<ProductProjectionSortSearchModel, SortExpression<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch withLimit(final long limit);
 
     @Override
     ProductProjectionSearch withOffset(final long offset);
-
-    @Override
-    ProductProjectionSearch withExpansionPaths(final List<ExpansionPath<ProductProjection>> expansionPaths);
-
-    @Override
-    ProductProjectionSearch withExpansionPaths(final ExpansionPath<ProductProjection> expansionPath);
-
-    @Override
-    ProductProjectionSearch withExpansionPaths(final Function<ProductProjectionExpansionModel<ProductProjection>, ExpansionPath<ProductProjection>> m);
 
     @Override
     ProductProjectionSearch plusExpansionPaths(final List<ExpansionPath<ProductProjection>> expansionPaths);
