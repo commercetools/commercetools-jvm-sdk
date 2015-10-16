@@ -60,16 +60,18 @@ public class CartDiscountInActualCartTest extends IntegrationTest {
                 assertThat(discountedPricePerQuantity).hasSize(2);
 
                 assertThat(discountedPricePerQuantity.get(0).getQuantity()).isEqualTo(1);
-                assertThat(discountedPricePerQuantity.get(0).getDiscountedPrice().getValue()).isEqualTo(MoneyImpl.ofCents(1200, EUR));
-                assertThat(discountedPricePerQuantity.get(0).getDiscountedPrice().getIncludedDiscounts()).hasSize(1);
-                assertThat(discountedPricePerQuantity.get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount()).isEqualTo(cartDiscount.toReference());
-                assertThat(discountedPricePerQuantity.get(0).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscountedAmount()).isEqualTo(MoneyImpl.ofCents(34, EUR));
+                final DiscountedLineItemPrice discountedLineItemPrice1 = discountedPricePerQuantity.get(0).getDiscountedPrice();
+                assertThat(discountedLineItemPrice1.getValue()).isEqualTo(MoneyImpl.ofCents(1200, EUR));
+                assertThat(discountedLineItemPrice1.getIncludedDiscounts()).hasSize(1);
+                assertThat(discountedLineItemPrice1.getIncludedDiscounts().get(0).getDiscount()).isEqualTo(cartDiscount.toReference());
+                assertThat(discountedLineItemPrice1.getIncludedDiscounts().get(0).getDiscountedAmount()).isEqualTo(MoneyImpl.ofCents(34, EUR));
 
                 assertThat(discountedPricePerQuantity.get(1).getQuantity()).isEqualTo(2);
-                assertThat(discountedPricePerQuantity.get(1).getDiscountedPrice().getValue()).isEqualTo(MoneyImpl.ofCents(1201, EUR));
-                assertThat(discountedPricePerQuantity.get(1).getDiscountedPrice().getIncludedDiscounts()).hasSize(1);
-                assertThat(discountedPricePerQuantity.get(1).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscount()).isEqualTo(cartDiscount.toReference());
-                assertThat(discountedPricePerQuantity.get(1).getDiscountedPrice().getIncludedDiscounts().get(0).getDiscountedAmount()).isEqualTo(MoneyImpl.ofCents(33, EUR));
+                final DiscountedLineItemPrice discountedLineItemPrice2 = discountedPricePerQuantity.get(1).getDiscountedPrice();
+                assertThat(discountedLineItemPrice2.getValue()).isEqualTo(MoneyImpl.ofCents(1201, EUR));
+                assertThat(discountedLineItemPrice2.getIncludedDiscounts()).hasSize(1);
+                assertThat(discountedLineItemPrice2.getIncludedDiscounts().get(0).getDiscount()).isEqualTo(cartDiscount.toReference());
+                assertThat(discountedLineItemPrice2.getIncludedDiscounts().get(0).getDiscountedAmount()).isEqualTo(MoneyImpl.ofCents(33, EUR));
                 assertThat(lineItemWithDiscount.getTotalPrice()).isEqualTo(oldLineItemTotalPrice.subtract(discountAmount));
                 assertThat(lineItemWithDiscount.getQuantity()).as("lineItem quantity").isEqualTo(3);
 
