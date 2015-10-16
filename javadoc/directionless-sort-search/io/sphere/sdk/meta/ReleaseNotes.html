@@ -122,9 +122,84 @@ extends java.lang.Object</pre>
  </ul>
  -->
 
-
-
  <h3 class=released-version id="v1_0_0_M19">1.0.0-M19</h3>
+
+ <a class="theme-btn expand-all">Expand all</a>
+ <br>
+ <br>
+ <ul>
+ <li class=new-in-release>The Search API now allows multi-sort by accepting a list of <a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search"><code>SortExpression</code></a> instead of a single value.</li>
+ <li class=new-in-release>Introduced explicit Set product custom attribute models to build search expressions (i.e. facets, filters and sort expressions).</li>
+ <li class=new-in-release>Introduced methods <a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getTermFacetResult-io.sphere.sdk.search.TermFacetExpression-"><code>PagedSearchResult.getTermFacetResult(io.sphere.sdk.search.TermFacetExpression&lt;T&gt;)</code></a>, <a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getRangeFacetResult-io.sphere.sdk.search.RangeFacetExpression-"><code>PagedSearchResult.getRangeFacetResult(io.sphere.sdk.search.RangeFacetExpression&lt;T&gt;)</code></a> and <a href="../../../../io/sphere/sdk/search/PagedSearchResult.html#getFilteredFacetResult-io.sphere.sdk.search.FilteredFacetExpression-"><code>PagedSearchResult.getFilteredFacetResult(io.sphere.sdk.search.FilteredFacetExpression&lt;T&gt;)</code></a> that accept the facet path.</li>
+ <li class=change-in-release>Introduced search filter methods <a href="../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html#byAny-java.lang.Iterable-"><code>TermFilterSearchModel.byAny(java.lang.Iterable&lt;V&gt;)</code></a> and <a href="../../../../io/sphere/sdk/search/model/TermFilterSearchModel.html#byAll-java.lang.Iterable-"><code>TermFilterSearchModel.byAll(java.lang.Iterable&lt;V&gt;)</code></a> (OR and AND semantics, respectively), along with the counterpart for range filters<a href="../../../../io/sphere/sdk/search/model/RangeFilterSearchModel.html#byAnyRange-java.lang.Iterable-"><code>RangeFilterSearchModel.byAnyRange(java.lang.Iterable&lt;io.sphere.sdk.search.model.FilterRange&lt;V&gt;&gt;)</code></a> and <a href="../../../../io/sphere/sdk/search/model/RangeFilterSearchModel.html#byAllRanges-java.lang.Iterable-"><code>RangeFilterSearchModel.byAllRanges(java.lang.Iterable&lt;io.sphere.sdk.search.model.FilterRange&lt;V&gt;&gt;)</code></a>), change that affected the signature of all filter methods which now return a list of <a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search"><code>FilterExpression</code></a> instead of a single value.</li>
+ <li class=change-in-release>The Search Sort Model offers now the methods <a href="../../../../io/sphere/sdk/search/model/SortSearchModel.html#byAsc--"><code>SortSearchModel.byAsc()</code></a> and <a href="../../../../io/sphere/sdk/search/model/SortSearchModel.html#byDesc--"><code>SortSearchModel.byDesc()</code></a>, as well as <a href="../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html#byAscWithMax--"><code>MultiValueSortSearchModel.byAscWithMax()</code></a> and <a href="../../../../io/sphere/sdk/search/model/MultiValueSortSearchModel.html#byDescWithMin--"><code>MultiValueSortSearchModel.byDescWithMin()</code></a> for multi-valued attributes.</li>
+ <li class=change-in-release>Removed <code>io.sphere.sdk.search.UntypedSearchModel</code> class and instead provide methods to give filter and facet parameters as simple strings.
+ <div class="rn-hidden">
+ <div id="io-sphere-sdk-products-search-ProductProjectionSearchFiltersIntegrationTest-filterByValueAsString%s" class=code-example><pre><code class='java'>final ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+        .plusQueryFilters(filter -&gt; filter.allVariants().attribute().ofNumber(ATTR_NAME_SIZE).byAnyAsString(asList("36", "38")));
+final PagedSearchResult&lt;ProductProjection&gt; result = executeSearch(search);
+assertThat(resultsToIds(result)).containsOnly(product1.getId(), product2.getId());
+</code><p>See the <a href="https://github.com/sphereio/sphere-jvm-sdk/blob/master/sphere-models/src/it/java/io/sphere/sdk/products/search/ProductProjectionSearchFiltersIntegrationTest.java" target="_blank">test code</a>.</pre></div>
+ </div>
+ </li>
+ <li class=change-in-release>While before the Search Model was built using the structure <code>attribute + action + parameters</code>, now it changed to <code>action + attribute + parameters</code>, in order to split the model into 3 independent models: Search Filter Model, Search Facet Model and Search Sort Model.
+ <div class="rn-hidden">
+ <p>Before:</p>
+ <pre><code>
+ ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+ .plusQueryFilters(product -&#60; product.name().locale(ENGLISH).filtered().by("shoes"));
+ PagedSearchResult<ProductProjection> result = client.execute(search);
+ </code></pre>
+
+ <p>After:</p>
+ <pre><code>
+ ProductProjectionSearch search = ProductProjectionSearch.ofStaged()
+ .plusQueryFilters(filter -&#60; filter.name().locale(ENGLISH).by("shoes"));
+ PagedSearchResult<ProductProjection> result = client.execute(search);
+ </code></pre>
+ </div>
+ </li>
+ <li class=change-in-release>Renamed <code>SearchSort</code> to <a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search"><code>SortExpression</code></a>, which now shares the same properties as <a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search"><code>FacetExpression</code></a> and <a href="../../../../io/sphere/sdk/search/FilterExpression.html" title="interface in io.sphere.sdk.search"><code>FilterExpression</code></a> under the <a href="../../../../io/sphere/sdk/search/SearchExpression.html" title="interface in io.sphere.sdk.search"><code>SearchExpression</code></a> interface.</li>
+ <li class=change-in-release>The static factory method to directly build unsafe <a href="../../../../io/sphere/sdk/search/FacetExpression.html" title="interface in io.sphere.sdk.search"><code>FacetExpression</code></a> is now located in <a href="../../../../io/sphere/sdk/search/TermFacetExpression.html" title="interface in io.sphere.sdk.search"><code>TermFacetExpression</code></a>, <a href="../../../../io/sphere/sdk/search/RangeFacetExpression.html" title="interface in io.sphere.sdk.search"><code>RangeFacetExpression</code></a> and <a href="../../../../io/sphere/sdk/search/FilteredFacetExpression.html" title="interface in io.sphere.sdk.search"><code>FilteredFacetExpression</code></a>, so that a facet expression for the corresponding type is obtained.</li>
+ <li class=change-in-release>Moved related Search Model classes from <code>io.sphere.sdk.search</code> to <code>io.sphere.sdk.search.model</code> package, to clearly separate the Search Model from the Search API classes.</li>
+ <li class=removed-in-release>Removed type parameters from <a href="../../../../io/sphere/sdk/search/TermFacetResult.html" title="class in io.sphere.sdk.search"><code>TermFacetResult</code></a>, <a href="../../../../io/sphere/sdk/search/RangeFacetResult.html" title="class in io.sphere.sdk.search"><code>RangeFacetResult</code></a> and <a href="../../../../io/sphere/sdk/search/FilteredFacetResult.html" title="class in io.sphere.sdk.search"><code>FilteredFacetResult</code></a>, which now return simple strings as they are received from the platform.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/products/ProductProjection.html#getCategoryOrderHints--"><code>ProductProjection.getCategoryOrderHints()</code></a> and <a href="../../../../io/sphere/sdk/products/queries/ProductProjectionQueryModel.html#categoryOrderHints--"><code>ProductProjectionQueryModel.categoryOrderHints()</code></a>. It can be used for search, but the meta model comes in a later release.</li>
+ <li class=new-in-release>Added states and update actions for Orders, Reviews and Products: <a href="../../../../io/sphere/sdk/orders/Order.html#getState--"><code>Order.getState()</code></a>, <a href="../../../../io/sphere/sdk/products/Product.html#getState--"><code>Product.getState()</code></a>, <a href="../../../../io/sphere/sdk/reviews/Review.html#getState--"><code>Review.getState()</code></a></li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/carts/LineItem.html#getTotalPrice--"><code>LineItem.getTotalPrice()</code></a>, <a href="../../../../io/sphere/sdk/carts/LineItem.html#getDiscountedPricePerQuantity--"><code>LineItem.getDiscountedPricePerQuantity()</code></a>, <a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getTotalPrice--"><code>CustomLineItem.getTotalPrice()</code></a> and <a href="../../../../io/sphere/sdk/carts/CustomLineItem.html#getDiscountedPricePerQuantity--"><code>CustomLineItem.getDiscountedPricePerQuantity()</code></a></li>
+ <li class=change-in-release>Deprecated <a href="../../../../io/sphere/sdk/carts/LineItemLike.html#getDiscountedPrice--"><code>LineItemLike.getDiscountedPrice()</code></a> and <a href="../../../../io/sphere/sdk/carts/LineItemLike.html#getDiscountedPrice--"><code>LineItemLike.getDiscountedPrice()</code></a> since they are deprecated in the HTTP API</li>
+ <li class=new-in-release>Improved documentation of <a href="../../../../io/sphere/sdk/models/Versioned.html" title="interface in io.sphere.sdk.models"><code>Versioned</code></a>.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/payments/Payment.html" title="interface in io.sphere.sdk.payments"><code>Payment</code></a>.</li>
+ <li class=change-in-release>Deprecated typo method <a href="../../../../io/sphere/sdk/carts/CartDraft.html#witCustom-io.sphere.sdk.types.CustomFieldsDraft-"><code>CartDraft.witCustom(CustomFieldsDraft)</code></a>, use <a href="../../../../io/sphere/sdk/carts/CartDraft.html#withCustom-io.sphere.sdk.types.CustomFieldsDraft-"><code>CartDraft.withCustom(CustomFieldsDraft)</code></a> instead.</li>
+ <li class=change-in-release>Deprecated <a href="../../../../io/sphere/sdk/customers/queries/CustomerByTokenGet.html" title="interface in io.sphere.sdk.customers.queries"><code>CustomerByTokenGet</code></a>, use <a href="../../../../io/sphere/sdk/customers/queries/CustomerByPasswordTokenGet.html" title="interface in io.sphere.sdk.customers.queries"><code>CustomerByPasswordTokenGet</code></a> instead.</li>
+ <li class=new-in-release>Added <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectByIdGet.html" title="interface in io.sphere.sdk.customobjects.queries"><code>CustomObjectByIdGet</code></a> and <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-long-java.lang.Class-"><code>CustomObjectDeleteCommand.of(String, long, Class)</code></a> which can delete a <a href="../../../../io/sphere/sdk/customobjects/CustomObject.html" title="interface in io.sphere.sdk.customobjects"><code>CustomObject</code></a> by ID.</li>
+ <li class=change-in-release>Simplified CustomObject endpoints. Instead of a <code>TypeReference</code> for the endpoint result only the class of the value of the custom object needs to be provided.
+ <div class="rn-hidden">
+ <p>Before:</p>
+ <pre><code> final CustomObjectQuery&lt;Pojo&gt; query = CustomObjectQuery.of(new TypeReference&lt;PagedQueryResult&lt;CustomObject&lt;Pojo&gt;&gt;&gt;(){});</code></pre>
+ <p>After:</p>
+ <pre><code> final CustomObjectQuery&lt;Pojo&gt; query = CustomObjectQuery.of(Pojo.class);</code></pre>
+
+ <p>This change applies for other endpoints, too.</p>
+ </div>
+ </li>
+ <li class=change-in-release>
+ Deprecations in custom object endpoints:
+ <dl>
+ <dt><a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-io.sphere.sdk.customobjects.CustomObject-"><code>CustomObjectDeleteCommand.of(io.sphere.sdk.customobjects.CustomObject)</code></a></dt>
+ <dd>use instead <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-io.sphere.sdk.customobjects.CustomObject-"><code>CustomObjectDeleteCommand.ofJsonNode(CustomObject)</code></a></dd>
+
+ <dt><a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#of-java.lang.String-java.lang.String-"><code>CustomObjectDeleteCommand.of(java.lang.String, java.lang.String)</code></a></dt>
+ <dd>use instead  <a href="../../../../io/sphere/sdk/customobjects/commands/CustomObjectDeleteCommand.html#ofJsonNode-java.lang.String-java.lang.String-"><code>CustomObjectDeleteCommand.ofJsonNode(java.lang.String, java.lang.String)</code></a></dd>
+ <dt><a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#of-java.lang.String-java.lang.String-"><code>CustomObjectByKeyGet.of(java.lang.String, java.lang.String)</code></a></dt>
+ <dd>use instead <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectByKeyGet.html#ofJsonNode-java.lang.String-java.lang.String-"><code>CustomObjectByKeyGet.ofJsonNode(java.lang.String, java.lang.String)</code></a></dd>
+ <dt><a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#of--"><code>CustomObjectQuery.of()</code></a></dt>
+ <dd>use instead <a href="../../../../io/sphere/sdk/customobjects/queries/CustomObjectQuery.html#ofJsonNode--"><code>CustomObjectQuery.ofJsonNode()</code></a></dd>
+
+ </dl>
+ </li>
+ <li class=fixed-in-release>Don't include customer password in logs. See <a href="https://github.com/sphereio/sphere-jvm-sdk/issues/767">767</a>.</li>
+ </ul>
+
 
  <ul>
  <li class=new-in-release>The Search API now allows multi-sort by accepting a list of <a href="../../../../io/sphere/sdk/search/SortExpression.html" title="interface in io.sphere.sdk.search"><code>SortExpression</code></a> instead of a single value.</li>
